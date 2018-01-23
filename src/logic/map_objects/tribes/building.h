@@ -164,6 +164,8 @@ public:
 	const BuildingHints& hints() const;
 	void set_hints_trainingsites_max_percent(int percent);
 
+	uint32_t get_unoccupied_animation() const;
+
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
@@ -173,10 +175,10 @@ private:
 	bool buildable_;     // the player can build this himself
 	bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;
-	Buildcost return_dismantle_;   // Returned wares on dismantle
-	Buildcost enhance_cost_;       // cost for enhancing
-	Buildcost return_enhanced_;    // Returned ware for dismantling an enhanced building
-	int32_t size_;                 // size of the building
+	Buildcost return_dismantle_;  // Returned wares on dismantle
+	Buildcost enhance_cost_;      // cost for enhancing
+	Buildcost return_enhanced_;   // Returned ware for dismantling an enhanced building
+	int32_t size_;                // size of the building
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
@@ -196,7 +198,7 @@ struct NoteBuilding {
 
 	Serial serial;
 
-	enum class Action { kChanged, kDeleted, kStartWarp, kFinishWarp, kWorkersChanged };
+	enum class Action { kChanged, kStartWarp, kFinishWarp, kWorkersChanged };
 	const Action action;
 
 	NoteBuilding(Serial init_serial, const Action& init_action)

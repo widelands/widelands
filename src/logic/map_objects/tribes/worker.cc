@@ -726,12 +726,14 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<double, DescriptionIndex, MapObjectDescr::OwnerType>> best_suited_immovables_index;
+	std::set<std::tuple<double, DescriptionIndex, MapObjectDescr::OwnerType>>
+	   best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	   const uint32_t attribute_id, const DescriptionIndex index, const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
+	   const uint32_t attribute_id, const DescriptionIndex index,
+	   const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
@@ -750,7 +752,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		throw GameDataError("plant needs at least one attrib:<attribute>.");
 	}
 
-	// Collect all world and tribe immovable types for all the attributes along with a suitability metric
+	// Collect all world and tribe immovable types for all the attributes along with a suitability
+	// metric
 	for (const std::string& attrib : action.sparamv) {
 		if (attrib.empty()) {
 			throw GameDataError("plant has an empty attrib:<attribute>");
@@ -760,12 +763,14 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		// Add world immovables
 		const DescriptionMaintainer<ImmovableDescr>& world_immovables = game.world().immovables();
 		for (uint32_t i = 0; i < world_immovables.size(); ++i) {
-			test_suitability(attribute_id, i, world_immovables.get(i), MapObjectDescr::OwnerType::kWorld);
+			test_suitability(
+			   attribute_id, i, world_immovables.get(i), MapObjectDescr::OwnerType::kWorld);
 		}
 
 		// Add tribe immovables
 		for (const DescriptionIndex i : owner().tribe().immovables()) {
-			test_suitability(attribute_id, i, *owner().tribe().get_immovable_descr(i), MapObjectDescr::OwnerType::kTribe);
+			test_suitability(attribute_id, i, *owner().tribe().get_immovable_descr(i),
+			                 MapObjectDescr::OwnerType::kTribe);
 		}
 	}
 
@@ -797,7 +802,8 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	}
 
 	Immovable& newimm = game.create_immovable(
-	   pos, state.ivar2, static_cast<Widelands::MapObjectDescr::OwnerType>(state.ivar3), get_owner());
+	   pos, state.ivar2, static_cast<Widelands::MapObjectDescr::OwnerType>(state.ivar3),
+	   get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject) {
 		state.objvar1 = &newimm;

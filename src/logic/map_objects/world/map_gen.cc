@@ -87,7 +87,7 @@ MapGenAreaInfo::MapGenAreaInfo(const LuaTable& table,
                                MapGenAreaType const area_type) {
 	weight_ = get_positive_int(table, "weight");
 
-	const auto read_terrains = [this, &table, &world](
+	const auto read_terrains = [&table, &world](
 	   const std::string& key, std::vector<DescriptionIndex>* list) {
 		const std::vector<std::string> terrains = table.get_table(key)->array_entries<std::string>();
 

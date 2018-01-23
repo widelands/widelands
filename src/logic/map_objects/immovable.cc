@@ -578,10 +578,10 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	char const* const animname = fr.c_string();
 	try {
 		imm.anim_ = imm.descr().get_animation(animname);
-	} catch (const MapObjectDescr::AnimationNonexistent&) {
+	} catch (const GameDataError& e) {
 		imm.anim_ = imm.descr().main_animation();
-		log("Warning: (%s) Animation \"%s\" not found, using animation %s).\n",
-		    imm.descr().name().c_str(), animname, imm.descr().get_animation_name(imm.anim_).c_str());
+		log("Warning: Immovable: %s, using animation %s instead.\n", e.what(),
+		    imm.descr().get_animation_name(imm.anim_).c_str());
 	}
 	imm.animstart_ = fr.signed_32();
 	if (packet_version >= 4) {

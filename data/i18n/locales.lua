@@ -130,7 +130,7 @@ return {
 
    fy = {
       name = "Frysk",
-      sort_name = "Frisian, Western",
+      sort_name = "Frysk",
       font = "default"
    },
 
@@ -185,6 +185,12 @@ return {
    id = {
       name = "Bahasa Indonesia",
       sort_name = "Indonesia",
+      font = "default"
+   },
+
+   ig = {
+      name = "Igbo",
+      sort_name = "Igbo",
       font = "default"
    },
 

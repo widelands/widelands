@@ -1,4 +1,4 @@
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 
 function get_general_tips()
    include "txts/tips/general_game.lua"
@@ -36,11 +36,10 @@ function get_multiplayer_tips()
 end
 
 function format_tips(tips)
-   local text = paragraphdivider()
+   local text = ""
    for index, contents in pairs(tips) do
-      text = text .. listitem_bullet(contents["text"])
+      text = text .. li(contents["text"])
    end
-   text = text .. "</p>"
    return text
 end
 
@@ -77,7 +76,7 @@ return {
       set_textdomain("tribes_encyclopedia")
       return {
         title = _"Tips",
-        text = rt(text)
+        text = text
       }
    end
 }

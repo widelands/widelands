@@ -695,7 +695,8 @@ plant
  */
 void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() < 2)
-		throw wexception("Usage: plant plant attrib:<attribute> [attrib:<attribute> ...] [unless object]");
+		throw wexception(
+		   "Usage: plant plant attrib:<attribute> [attrib:<attribute> ...] [unless object]");
 
 	act->function = &Worker::run_plant;
 	act->iparam1 = Worker::Action::plantAlways;
@@ -715,12 +716,13 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 		// Check if immovable type exists
 		std::vector<std::string> const list(split_string(cmd[i], ":"));
 		if (list.size() != 2 || list.at(0) != "attrib") {
-			throw GameDataError("plant takes a list of attrib:<attribute> that reference world and/or tribe immovables");
+			throw GameDataError("plant takes a list of attrib:<attribute> that reference world and/or "
+			                    "tribe immovables");
 		}
 
 		const std::string& attrib_name = list[1];
 		if (attrib_name.empty()) {
-		   throw GameDataError("plant has an empty attrib:<attribute> at position %d", i);
+			throw GameDataError("plant has an empty attrib:<attribute> at position %d", i);
 		}
 
 		// This will throw a GameDataError if the attribute doesn't exist.

@@ -24,8 +24,8 @@
 
 namespace Widelands {
 
-/*
- * stores data that are needed for AI
+/**
+ * Stores and loads data that are needed for AI.
  */
 struct GamePlayerAiPersistentPacket : public GameDataPacket {
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;

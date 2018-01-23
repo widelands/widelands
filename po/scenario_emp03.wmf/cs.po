@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:08+0000\n"
+"POT-Creation-Date: 2018-01-10 16:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -217,16 +217,16 @@ msgstr ""
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:151
 msgid "Recover the shrine"
-msgstr ""
+msgstr "Získej relikvii"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:153
 msgid "Find the Holy Shrine"
-msgstr ""
+msgstr "Najdi posvátnou relikvii"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:154
 msgid ""
 "We need to find and secure all six pieces of the holy shrine of Neptune."
-msgstr ""
+msgstr "Musíme najít a zajistit všech šest částí posvátné neptunovy relikvie."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
 msgid "Build a training infrastructure"
@@ -607,7 +607,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:356
 msgid "Amalea’s Wisdom"
-msgstr ""
+msgstr "Amaleina moudrost"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:359
@@ -681,6 +681,8 @@ msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr ""
+"Zatím to jde dobře. Máme dostatek pšenice. Teď rozeber obilné pole a postav "
+"další budovu ve výrobním řetězci."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:397
@@ -735,6 +737,9 @@ msgid ""
 " the north. If I’m not totally wrong, I have heard some Barbarian war drums."
 " So, we should better go and have a look at what is going on up there."
 msgstr ""
+"Myslím, že jsem zaslechl ve větru nějaký podivný, ale přesto dobře známý "
+"zvuk ze severu. Pokud se nepletu, zaslechl jsem barbarské válečné bubny. "
+"Proto bychom se měli raději jít podívat, co se to tam nahoře děje."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:428
 msgid "Amalea Advises"
@@ -870,6 +875,10 @@ msgid ""
 "want to be cautious, you can keep some sentries or blockhouses near the "
 "coastline."
 msgstr ""
+"Důrazně doporučuji většinu z nich rozebrat, abychom mohli postavit "
+"průmyslové budovy. Nemyslím, že by nás na tomto ostrově mohlo něco ohrozit, "
+"chceš-li být opatrný, můžeš si ponechat pár strážnic nebo malých pevností "
+"poblíž pobřeží."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:497
@@ -882,14 +891,14 @@ msgstr "Amalea je nadšená"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:504
 msgid "Amalea is looking forward to the exploration…"
-msgstr ""
+msgstr "Amalea se těší na průzkum..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:506
 msgid ""
 "Lutius. We have made so much progress so far. I am glad to hear that we have"
 " many ships now."
-msgstr ""
+msgstr "Lutie. Udělali jsme toho tolik. Jsem rád, že teď máme tolik lodí."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:509
@@ -897,6 +906,8 @@ msgid ""
 "Now that our fleet is growing and growing we should discover the complete "
 "region. Let’s try to find more land and eventually get more resources."
 msgstr ""
+"Nyní, když je naše flotila větší a větší, měli bychom prozkoumat celou "
+"oblast. Pokusme se najít další země a případně více surovin."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:512
@@ -923,6 +934,9 @@ msgid ""
 " in the complete region. Now we can strengthen our economy and we will "
 "manage to sail home soon."
 msgstr ""
+"Lutie. Výborně. Výborně. Našli jsem všechna možná místa pro stavbu přístavu "
+"v celé oblasti. Nyní můžeme posílit naše hospodářství a díky tomu budeme "
+"moci brzy odplout domů."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
 msgid "Amalea’s Counsel"
@@ -986,6 +1000,8 @@ msgid ""
 "Sire, we are making good progress towards getting home eventually. But there"
 " is one thing I need to talk about:"
 msgstr ""
+"Pane, jsme na dobré cestě abychom se dostali domů. Je zde ovšem jedna věc, o"
+" které bych s vámi rád mluvil:"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:558
 msgid ""
@@ -1118,21 +1134,21 @@ msgstr ""
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:628
 msgid "Finally, we have discovered a piece of our shrine. Praise Neptune!"
-msgstr ""
+msgstr "Konečně, našli jsme část naší relikvie. Chvála Neptunovi!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:631
 msgid "We have discovered another piece of our shrine. Praise Neptune!"
-msgstr ""
+msgstr "Našli jsme další část naší relikvie. Chvála Neptunovi!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:636
 #, lua-format
 msgid "We still need to discover %d piece of our shrine."
 msgid_plural "We still need to discover %d pieces of our shrine."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Stále musíme ještě najít %d část naší relikvie."
+msgstr[1] "Stále musíme ještě najít %d části naší relikvie."
+msgstr[2] "Stále musíme ještě najít %d částí naší relikvie."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:639
@@ -1140,6 +1156,8 @@ msgid ""
 "Finally, we have discovered the last piece of our shrine. Now we can "
 "reassemble it to worship our god. Praise Neptune!"
 msgstr ""
+"Konečně, našli jsme poslední část naší relikvie. Teď ji můžeme sestavit jako"
+" poctu našemu bohu. Chvála Neptunovi!"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:642
 msgid "Artifact Found"
