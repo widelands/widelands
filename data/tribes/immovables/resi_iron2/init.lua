@@ -4,7 +4,8 @@ tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "resi_iron2",
    -- TRANSLATORS: This is a resource name used in lists of resources
-   descname = pgettext("immovable", "Main Iron Vein"),
+   descname = pgettext("immovable", "Resources: Main Iron Vein"),
+   helptext_script = dirname .. "helptexts.lua",
    attributes = { "resi" },
    programs = {
       program = {

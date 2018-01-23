@@ -69,11 +69,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      enhanced_building_(false),
      hints_(table.get_table("aihints")),
      vision_range_(0) {
+	if (helptext_script().empty()) {
+		throw GameDataError("Building %s has no helptext script", name().c_str());
+	}
 	if (!is_animation_known("idle")) {
-		throw GameDataError("Building %s has no idle animation", table.get_string("name").c_str());
+		throw GameDataError("Building %s has no idle animation", name().c_str());
 	}
 	if (icon_filename().empty()) {
-		throw GameDataError("Building %s needs a menu icon", table.get_string("name").c_str());
+		throw GameDataError("Building %s needs a menu icon", name().c_str());
 	}
 
 	i18n::Textdomain td("tribes");
@@ -154,8 +157,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			                 e.what());
 		}
 	}
-
-	helptext_script_ = table.get_string("helptext_script");
 
 	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
 
