@@ -23,12 +23,12 @@ return {
 
       prefilled_buildings(player, { "frisians_headquarters", sf.x, sf.y,
          wares = {
-             log = 80,
-             granite = 100,
-             thatch_reed = 100,
-             brick = 150,
-             clay = 50,
-             water = 10,
+             log = 30,
+             granite = 45,
+             thatch_reed = 35,
+             brick = 70,
+             clay = 20,
+             water = 5,
              fish = 10,
              meat = 10,
              fruit = 10,
@@ -39,11 +39,9 @@ return {
              smoked_fish = 5,
              mead = 5,
              meal = 2,
-             coal = 20,
-             iron = 5,
-             gold = 2,
+             coal = 15,
+             gold = 4,
              iron_ore = 10,
-             gold_ore = 2,
              bread_frisians = 15,
              honey_bread = 5,
              beer = 5,
@@ -87,7 +85,7 @@ return {
          },
          -- Max health: 2, Max attack: 6, Max defense: 2, Max evade: 0
          soldiers = {
-            [{0,0,0,0}] = 35,
+            [{0,0,0,0}] = 34,
             [{1,0,1,0}] = 5,
             [{1,1,0,0}] = 5,
          }
