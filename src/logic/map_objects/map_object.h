@@ -101,7 +101,8 @@ struct MapObjectDescr {
 
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
-	               const std::string& init_descname);
+	               const std::string& init_descname,
+	               const std::string& init_helptext_script);
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
@@ -113,6 +114,10 @@ struct MapObjectDescr {
 	}
 	const std::string& descname() const {
 		return descname_;
+	}
+
+	const std::string& helptext_script() const {
+		return helptext_script_;
 	}
 
 	// Type of the MapObjectDescr.
@@ -165,6 +170,9 @@ private:
 	const MapObjectType type_;    /// Subclasses pick from the enum above
 	std::string const name_;      /// The name for internal reference
 	std::string const descname_;  /// A localized Descriptive name
+	/// The path and filename to the helptext script. Can be empty, but some subtypes like buildings,
+	/// wares and workers require it.
+	const std::string helptext_script_;
 	Attributes attributes_;
 	Anims anims_;
 	static uint32_t dyn_attribhigh_;  ///< highest attribute ID used
