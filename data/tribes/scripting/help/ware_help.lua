@@ -1,6 +1,5 @@
 include "tribes/scripting/help/format_help.lua"
 
-
 -- RST
 -- ware_help.lua
 -- ---------------
@@ -28,8 +27,7 @@ function ware_help_general_string(tribe, ware_description)
    if (purpose_text ~= "") then
       purpose_text = purpose_text .. " "
    end
-   -- TRANSLATORS: Put 2 sentences one after the other.
-   -- Languages using Chinese script probably want to lose the blank space here.
+   -- TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably want to lose the blank space here.
    purpose_text = pgettext("sentence_separator", "%s %s"):bformat(ware_helptext(), ware_helptext(tribe.name))
 
    -- TODO(GunChleoc): Split into purpose and note
