@@ -110,7 +110,8 @@ public:
 	/** Qualitity of terrain for tree planting normalized to int16.
 	 *
 	 *  Indexed by MapIndex. -1  is an ivalid entry. Shared between all tribes (on the same server)
-	 *  will be cleared when diffrences are detected (which happes only some times).
+	 *  will be cleared when diffrences are detected. Presently, that can only happen if terrain
+	 *  is changed (lua scripting). The map is sparse, lookups are fast.
 	 */
 	std::vector<int16_t> forester_cache_;
 
