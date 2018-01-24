@@ -471,6 +471,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 
 	// TODO(kxq): could the tree_sapling come from config? Currently, there is only one sparam..
     // TODO(k.halfmann): avoid fetching this vlaues every time, as it is const during runtime?.
+	// This code is only executed at cache miss.
 	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
 
 	const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
