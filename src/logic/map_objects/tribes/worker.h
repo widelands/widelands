@@ -259,7 +259,7 @@ private:
 	bool run_play_sound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
 
-	// helper function
+	// Forester considers multiple spaces in findspace, unlike others.
 	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
