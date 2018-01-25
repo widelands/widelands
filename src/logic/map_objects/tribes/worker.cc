@@ -429,7 +429,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
  * quantize the terrain goodness into int16_t. This lowers the footprint of the caching,
  * and also makes desyncs caused by different floats horribly unlikely.
  *
- * the forester_cache_ is sparse, but then, lookups are fast.
+ * The forester_cache_ is sparse, but then, lookups are fast.
  *
  * At the moment of writing, map changing is really infrequent (only in two scenarios)
  * and even those do not affect this. However, since map changes are possible, this
