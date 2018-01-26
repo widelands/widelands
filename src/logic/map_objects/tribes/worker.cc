@@ -640,8 +640,8 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 
 	// Special case: forester checks multiple locations instead of one.
 	if (1 < action.iparam6) {
-		// In the bug comments, somebody asked for unequal quality for the foresters of various tribes to find the best spot.
-		// Here stubborness is the number of slots to consider.
+		// In the bug comments, somebody asked for unequal quality for the foresters of various
+		// tribes to find the best spot. Here stubborness is the number of slots to consider.
 		int stubborness = action.iparam6;
 		int16_t best = findspace_helper_for_forester(state.coords, map, game);
 		while (1 < stubborness--) {
