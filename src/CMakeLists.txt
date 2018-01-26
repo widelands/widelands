@@ -114,6 +114,7 @@ wl_library(widelands_ball_of_mud
     helper
     io_filesystem
     logic
+    logic_exceptions
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
@@ -124,7 +125,12 @@ wl_library(widelands_ball_of_mud
     random
     sound
     ui_basic
-    ui_fsmenu
+    ui_fsmenu_gameloading
+    ui_fsmenu_loading_common
+    ui_fsmenu_main
+    ui_fsmenu_maploading
+    ui_fsmenu_misc
+    ui_fsmenu_network
     ui_fsmenu_options
     wui
 )

@@ -473,8 +473,9 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	//  plot the pixels
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 		if (plotdata_[plot].showplot) {
-			draw_plot_line(dst, (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data :
-			                                                         plotdata_[plot].absolute_data,
+			draw_plot_line(dst,
+			               (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data.get() :
+			                                                    plotdata_[plot].absolute_data,
 			               highest_scale, sub_, plotdata_[plot].plotcolor, yoffset);
 		}
 	}
@@ -537,8 +538,8 @@ void WuiPlotArea::register_plot_data(uint32_t const id,
 		plotdata_.resize(id + 1);
 
 	plotdata_[id].absolute_data = data;
-	plotdata_[id].relative_data =
-	   new std::vector<uint32_t>();  // Will be filled in the update() function.
+	plotdata_[id].relative_data.reset(
+	   new std::vector<uint32_t>());  // Will be filled in the update() function.
 	plotdata_[id].showplot = false;
 	plotdata_[id].plotcolor = color;
 

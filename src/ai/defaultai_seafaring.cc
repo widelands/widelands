@@ -104,8 +104,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // - build a ship
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions() {
-
-	if (!seafaring_economy) {
+	if (!map_allows_seafaring_) {
 		set_taskpool_task_time(kNever, SchedulerTaskId::KMarineDecisions);
 		return false;
 	}
@@ -226,9 +225,8 @@ bool DefaultAI::marine_main_decisions() {
 
 // This identifies ships that are waiting for command
 bool DefaultAI::check_ships(uint32_t const gametime) {
-
-	if (!seafaring_economy) {
-		set_taskpool_task_time(std::numeric_limits<int32_t>::max(), SchedulerTaskId::kCheckShips);
+	if (!map_allows_seafaring_) {
+		set_taskpool_task_time(kNever, SchedulerTaskId::kCheckShips);
 		return false;
 	}
 
@@ -402,7 +400,6 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 	if (type == NewShip::kBuilt) {
 		marine_task_queue.push_back(kStopShipyard);
 	} else {
-		seafaring_economy = true;
 		if (ship.state_is_expedition()) {
 			if (expedition_ship_ == kNoShip) {
 				// OK, this ship is in expedition

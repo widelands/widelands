@@ -82,6 +82,9 @@ DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
 DefaultAI::VeryWeakImpl DefaultAI::very_weak_impl;
 
+uint32_t DefaultAI::last_seafaring_check_ = 0;
+bool DefaultAI::map_allows_seafaring_ = false;
+
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType const t)
    : ComputerPlayer(ggame, pid),
@@ -109,7 +112,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
      enemysites_check_delay_(30),
      resource_necessity_water_needed_(false),
      highest_nonmil_prio_(0),
-     seafaring_economy(false),
      expedition_ship_(kNoShip) {
 
 	// Subscribe to NoteFieldPossession.
@@ -1951,11 +1953,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Map& map = game().map();
 
-	if (gametime % 5 == 0) {
-		// TODO(unknown): Counting port spaces is very primitive way for this
-		// there should be better alternative f.e. like map::allows_seafaring()
-		// function but simplier
-		seafaring_economy = map.get_port_spaces().size() >= 2;
+	if (gametime > last_seafaring_check_ + 20000U) {
+		map_allows_seafaring_ = map.allows_seafaring();
+		last_seafaring_check_ = gametime;
 	}
 
 	for (int32_t i = 0; i < 4; ++i)
@@ -2663,7 +2663,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						assert(!bo.is(BuildingAttribute::kShipyard));
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						assert(bo.new_building == BuildingNecessity::kAllowed);
-						if (!seafaring_economy) {
+						if (!map_allows_seafaring_) {
 							continue;
 						}
 					} else {
@@ -2702,12 +2702,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						    bf->unowned_mines_spots_nearby) {  // not close to mountains
 							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
 						}
-					}
-
-					else if (bo.is(BuildingAttribute::kShipyard)) {
+					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard
 						assert(bo.total_count() == 0);
-						if (bf->open_water_nearby > 3 && seafaring_economy) {
+						if (bf->open_water_nearby > 3 && map_allows_seafaring_) {
 							prio += productionsites.size() * 5 +
 							        bf->open_water_nearby *
 							           std::abs(management_data.get_military_number_at(109)) / 10;
@@ -4253,7 +4251,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 		return BuildingNecessity::kForbidden;
 	}
 
-	if (bo.is(BuildingAttribute::kPort) && !seafaring_economy) {
+	if (bo.is(BuildingAttribute::kPort) && !map_allows_seafaring_) {
 		bo.new_building_overdue = 0;
 		bo.primary_priority = 0;
 		return BuildingNecessity::kForbidden;
@@ -4331,7 +4329,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	}
 
 	// Perhaps buildings are not allowed because the map is no seafaring
-	if (purpose == PerfEvaluation::kForConstruction && !seafaring_economy &&
+	if (purpose == PerfEvaluation::kForConstruction && !map_allows_seafaring_ &&
 	    bo.is(BuildingAttribute::kNeedsSeafaring)) {
 		return BuildingNecessity::kForbidden;
 	}

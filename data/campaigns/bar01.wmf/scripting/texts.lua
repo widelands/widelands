@@ -172,9 +172,7 @@ briefing_msg_02 = {
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
       _[[The red lights flash in the darkness and dance to the rhythm of the war drums that haunt me even in my nightmares.]]),
-   field = al_thunran,
    position = "topleft",
-   scroll_back = true
 }
 
 
@@ -186,7 +184,6 @@ briefing_msg_03 = {
       .. paragraphdivider() ..
       -- TRANSLATORS: Thron
       _[[Boldreth, my loyal companion and friend is a source of peace and comfort to me in these dark times. He keeps my spirits high and those of my warriors awake, preventing greed or despair from destroying the bonds between us as well.]]),
-   field = grave,
    position = "topleft",
 }
 
