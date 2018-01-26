@@ -439,7 +439,7 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
  * If somebody in the future makes a scenario, where the land first is barren, and then
  * spots of eden show up, the foresters will not immediately notice (because of the cache).
  * They will eventually notice, and since the instance is shared between tribes,
- * all foresters notice this at the same moment. I hope this is okay.
+ * all foresters notice this at the same moment, also in network play. I hope this is okay.
  *
  */
 int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game) {
