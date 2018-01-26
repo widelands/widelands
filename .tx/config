@@ -49,6 +49,12 @@ source_file = po/scenario_emp03.wmf/scenario_emp03.wmf.pot
 source_lang = en
 type = PO
 
+[widelands.scenario_emp04]
+file_filter = po/scenario_emp04.wmf/<lang>.po
+source_file = po/scenario_emp04.wmf/scenario_emp04.wmf.pot
+source_lang = en
+type = PO
+
 [widelands.mp_scenario_island_hopping]
 file_filter = po/mp_scenario_island_hopping.wmf/<lang>.po
 source_file = po/mp_scenario_island_hopping.wmf/mp_scenario_island_hopping.wmf.pot

@@ -37,11 +37,11 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
      player_(plr),
      windows_(windows),
      box_(this, 0, 0, UI::Box::Horizontal, 0, 0, 5) {
-	add_button("wui/menus/menu_general_stats", "general_stats", _("General Statistics"),
+	add_button("wui/menus/menu_general_stats", "general_stats", _("General statistics"),
 	           &windows_.general_stats);
 	add_button(
-	   "wui/menus/menu_ware_stats", "ware_stats", _("Ware Statistics"), &windows_.ware_stats);
-	add_button("wui/menus/menu_building_stats", "building_stats", _("Building Statistics"),
+	   "wui/menus/menu_ware_stats", "ware_stats", _("Ware statistics"), &windows_.ware_stats);
+	add_button("wui/menus/menu_building_stats", "building_stats", _("Building statistics"),
 	           &windows_.building_stats);
 	add_button("wui/menus/menu_stock", "stock", _("Stock"), &windows_.stock);
 	box_.set_pos(Vector2i(10, 10));
