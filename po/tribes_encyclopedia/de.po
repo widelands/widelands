@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-10 16:38+0000\n"
-"PO-Revision-Date: 2018-01-10 20:46+0000\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
+"PO-Revision-Date: 2018-01-17 10:36+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1668,7 +1668,7 @@ msgstr "Lebenspunktetraining"
 
 #: ../../data/tribes/scripting/help/building_help.lua:393
 msgid "Trains ‘Health’ from %1% up to %2%"
-msgstr "Trainiert „Lebenspunkte“ von %1% bis auf %2%"
+msgstr "Trainiert „Lebenspunkte“ von %1% auf %2%"
 
 #: ../../data/tribes/scripting/help/building_help.lua:395
 #: ../../data/tribes/scripting/help/building_help.lua:409
@@ -1685,7 +1685,7 @@ msgstr "Angriffstraining"
 #. numbers.
 #: ../../data/tribes/scripting/help/building_help.lua:407
 msgid "Trains ‘Attack’ from %1% up to %2%"
-msgstr "Trainiert „Angriff“ von %1% bis auf %2%"
+msgstr "Trainiert „Angriff“ von %1% auf %2%"
 
 #: ../../data/tribes/scripting/help/building_help.lua:418
 msgid "Defense Training"
@@ -1693,7 +1693,7 @@ msgstr "Verteidigungstraining"
 
 #: ../../data/tribes/scripting/help/building_help.lua:419
 msgid "Trains ‘Defense’ from %1% up to %2%"
-msgstr "Trainiert „Verteidigung“ von %1% bis auf %2%"
+msgstr "Trainiert „Verteidigung“ von %1% auf %2%"
 
 #: ../../data/tribes/scripting/help/building_help.lua:431
 msgid "Evade Training"
@@ -1701,7 +1701,7 @@ msgstr "Ausweichtraining"
 
 #: ../../data/tribes/scripting/help/building_help.lua:432
 msgid "Trains ‘Evade’ from %1% up to %2%"
-msgstr "Trainiert „Ausweichen“ von %1% bis auf %2%"
+msgstr "Trainiert „Ausweichen“ von %1% auf %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.

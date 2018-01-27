@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# Juanjo, 2015-2017
+# Juanjo, 2015-2018
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-27 17:09+0000\n"
-"PO-Revision-Date: 2017-12-29 19:57+0000\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
+"PO-Revision-Date: 2018-01-22 22:24+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -20,12 +20,14 @@ msgstr ""
 "Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:34
 #, lua-format
 msgid "“%s”"
 msgstr "«%s»"
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:85
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Objectiu nou"
@@ -33,7 +35,7 @@ msgstr[1] "Objectius nous"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../data/scripting/richtext.lua:38
+#: ../../data/scripting/formatting.lua:12 ../../data/scripting/richtext.lua:38
 #: ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
@@ -41,7 +43,7 @@ msgstr "%1$s i %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:39 ../../data/scripting/richtext.lua:40
+#: ../../data/scripting/formatting.lua:14 ../../data/scripting/richtext.lua:40
 #: ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
@@ -51,8 +53,8 @@ msgstr "%1$s o %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:41
-#: ../../data/scripting/formatting.lua:46 ../../data/scripting/richtext.lua:42
+#: ../../data/scripting/formatting.lua:16
+#: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:42
 #: ../../data/scripting/richtext.lua:47 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
@@ -61,7 +63,7 @@ msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:43 ../../data/scripting/richtext.lua:44
+#: ../../data/scripting/formatting.lua:18 ../../data/scripting/richtext.lua:44
 #: ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
@@ -217,7 +219,7 @@ msgid "Loading tribes"
 msgstr "S'estan carregant les diferents cultures"
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/interactive_player.cc:165
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Main menu"
 msgstr "Menú principal"
@@ -237,7 +239,7 @@ msgid "Players"
 msgstr "Jugadors"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:224
+#: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show building spaces (on/off)"
 msgstr "Mostra els espais per construir (activat/desactivat)"
@@ -255,13 +257,13 @@ msgid "Show resources (on/off)"
 msgstr "Mostra recursos (sí/no)"
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:220
+#: ../../src/wui/interactive_player.cc:177
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr "Minimapa"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:226
+#: ../../src/wui/interactive_player.cc:183
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr "Restableix el zoom"
@@ -275,7 +277,7 @@ msgid "Redo"
 msgstr "Refés"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:334 ../../src/wui/interactive_player.cc:250
+#: ../../src/wui/buildingwindow.cc:334 ../../src/wui/interactive_player.cc:207
 msgid "Help"
 msgstr "Ajuda"
 
@@ -519,7 +521,7 @@ msgid "Current: %s"
 msgstr "Actual: %s"
 
 #: ../../src/editor/ui_menus/help.cc:42 ../../src/ui_fsmenu/multiplayer.cc:137
-#: ../../src/wui/encyclopedia_window.cc:145
+#: ../../src/wui/encyclopedia_window.cc:138
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "S'ha produït un error!"
@@ -1060,7 +1062,7 @@ msgid "No description defined"
 msgstr "Sense descripció"
 
 #: ../../src/logic/map_objects/immovable.cc:515
-#: ../../src/logic/map_objects/tribes/constructionsite.cc:72
+#: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
 msgstr "%i%% construït"
@@ -1525,7 +1527,7 @@ msgstr "Mapa del Settlers II de Bluebyte. Sense comentari definit!"
 #: ../../src/network/gameclient.cc:115
 #: ../../src/network/internet_gaming.cc:113
 msgid "Could not establish connection to host"
-msgstr "No s'ha pogut establir connexió amb el servidor"
+msgstr "No s'ha pogut establir connexió amb l'amfitrió"
 
 #: ../../src/network/gameclient.cc:116
 msgid ""
@@ -1557,11 +1559,11 @@ msgstr "%s Es guardarà l'arxiu de la partida automàticament."
 
 #: ../../src/network/gameclient.cc:943
 msgid "Disconnected from Host"
-msgstr "Desconnectat del servidor"
+msgstr "Desconnectat de l'amfitrió"
 
 #: ../../src/network/gamehost.cc:257
 msgid "Available host commands are:"
-msgstr "Les ordres disponibles per al servidor són:"
+msgstr "Les ordres disponibles per l'amfitrió són:"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/gamehost.cc:259
@@ -1655,13 +1657,13 @@ msgstr "Ordre no vàlida. Escriviu /help per obtenir la llista d'ordres vàlides
 
 #: ../../src/network/gamehost.cc:494
 msgid "Failed to host the server!"
-msgstr "No s'ha pogut establir com a servidor."
+msgstr "No s'ha pogut establir com a amfitrió."
 
 #: ../../src/network/gamehost.cc:495
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr "El Widelands no ha pogut establir aquest ordinador com a servidor.\nAixò no hauria de passar i probablement poc podeu fer per resoldre el problema. Informeu d'aquest error a l'equip de desenvolupament."
+msgstr "El Widelands no ha pogut establir aquest ordinador com a amfitrió.\nAixò no hauria de passar i probablement poc podeu fer per resoldre el problema. Informeu d'aquest error a l'equip de desenvolupament."
 
 #: ../../src/network/gamehost.cc:503
 msgid "Failed to start the server!"
@@ -1698,7 +1700,7 @@ msgstr "El Widelands no pot establir la connexió a l'adreça donada.\nO bé no 
 
 #: ../../src/network/internet_gaming.cc:173
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr "Per proveir una partida a la xarxa, doneu un cop d'ull a les notes en:"
+msgstr "Per fer d'amfitrió d'una partida a la xarxa, doneu un cop d'ull a les notes en:"
 
 #: ../../src/network/internet_gaming.cc:212
 msgid "Successfully reconnected to the metaserver!"
@@ -1863,7 +1865,7 @@ msgid ""
 "connected to from the internet! Please take a look at "
 "http://wl.widelands.org/wiki/InternetGaming to learn how to set up your "
 "internet connection for hosting a game online."
-msgstr "El metaservidor no s'ha pogut connectar a la vostra partida. Probablement, no es pot connectar a Internet. A la pàgina web «http://wl.widelands.org/wiki/InternetGaming» (en anglès) trobareu les instruccions per configurar la connexió d'Internet per proveir partides en línia."
+msgstr "El metaservidor no s'ha pogut connectar a la vostra partida. Probablement, no es pot connectar a Internet. A la pàgina web «http://wl.widelands.org/wiki/InternetGaming» (en anglès) trobareu les instruccions per configurar la connexió d'Internet per fer d'amfitrió en partides en línia."
 
 #: ../../src/network/internet_gaming_messages.cc:63
 msgid ""
@@ -1897,12 +1899,12 @@ msgstr "El servidor ha fallat i ha realitzat una desada de partida d'emergència
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "Client and host have become desynchronized."
-msgstr "El client i el servidor s'han desincronitzat."
+msgstr "El client i l'amfitrió s'han desincronitzat."
 
 #: ../../src/network/network_gaming_messages.cc:127
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr "Expulsat pel servidor: %s"
+msgstr "Expulsat per l'amfitrió: %s"
 
 #: ../../src/network/network_gaming_messages.cc:128
 #, c-format
@@ -1950,11 +1952,11 @@ msgstr "S'ha rebut una ordre %s, que no és vàlida en aquest estat."
 
 #: ../../src/network/network_gaming_messages.cc:144
 msgid "Client reports time to host that is running backwards."
-msgstr "El client informa el servidor que el temps va enrere."
+msgstr "El client informa l'amfitrió que el temps va enrere."
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "Client simulates beyond the game time allowed by the host."
-msgstr "El client està simulant més enllà del temps que permet el servidor."
+msgstr "El client està simulant més enllà del temps que permet l'amfitrió."
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client did not submit sync report in time."
@@ -1995,12 +1997,12 @@ msgstr "El client demana una part d'arxiu que no existeix."
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Host sent player %s to the lobby!"
-msgstr "El servidor ha enviat el jugador %s a la sala d'espera."
+msgstr "L'amfitrió ha enviat el jugador %s a la sala d'espera."
 
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
-msgstr "AVÍS: %1$s empra la versió «%2$s», mentre que el servidor usa la versió «%3$s»."
+msgstr "AVÍS: %1$s empra la versió «%2$s», mentre que l'amfitrió usa la versió «%3$s»."
 
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
@@ -2470,7 +2472,7 @@ msgstr "(cap mapa)*"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:182
 msgid "The host has not yet selected a map or saved game."
-msgstr "El servidor encara no ha escollit un mapa o partida desada."
+msgstr "L'amfitrió encara no ha escollit un mapa o partida desada."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:319
 msgid "Saved Game is Directory"
@@ -2493,13 +2495,13 @@ msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
-msgstr "El Widelands ha intentat iniciar la partida però l'arxiu no s'ha pogut trobar.\nL'arxiu és «%s».\nSi això passa en una partida en xarxa, l'amfitrió pot haver seleccionat un arxiu que no teniu al vostre ordinador. Normalment, el servidor us ha d'enviar l'arxiu, potser la transferència no s'ha completat?"
+msgstr "El Widelands ha intentat iniciar la partida però l'arxiu no s'ha pogut trobar.\nL'arxiu és «%s».\nSi això passa en una partida en xarxa, l'amfitrió pot haver seleccionat un arxiu que no teniu al vostre ordinador. Normalment, l'amfitrió us ha d'enviar l'arxiu. Potser la transferència no s'ha completat?"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:367
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
-msgstr "No es pot trobar l'arxiu seleccionat. Si no se t'envia automàticament, si us plau, informeu el servidor d'aquest problema."
+msgstr "No es pot trobar l'arxiu seleccionat. Si no se t'envia automàticament, si us plau, informeu l'amfitrió d'aquest problema."
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:398
 #, c-format
@@ -2679,19 +2681,19 @@ msgstr "El vostre àlies:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:44
 msgid "Host to connect:"
-msgstr "Servidor on connectar-se:"
+msgstr "Amfitrió on connectar-se:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:62
 msgid "Host a new game"
-msgstr "Inicia una nova partida"
+msgstr "Fes d'amfitrió en una partida nova"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:79
 msgid "Load previous host"
-msgstr "Carrega l'últim servidor"
+msgstr "Carrega l'últim amfitrió"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:116
 msgid "Host"
-msgstr "Servidor"
+msgstr "Amfitrió"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:118
 msgid "State"
@@ -3208,7 +3210,7 @@ msgstr "Cancel·la el camí"
 msgid "Build roads"
 msgstr "Construeix camí"
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:233
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:190
 #: ../../src/wui/interactive_spectator.cc:87
 msgid "Chat"
 msgstr "Xat"
@@ -3402,7 +3404,7 @@ msgid "Del: %s"
 msgstr "Supr: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:243
+#: ../../src/wui/interactive_player.cc:200
 msgid "Objectives"
 msgstr "Objectius"
 
@@ -3626,17 +3628,17 @@ msgstr "PAUSA"
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:212
+#: ../../src/wui/interactive_player.cc:169
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#: ../../src/wui/interactive_player.cc:247
-#: ../../src/wui/interactive_player.cc:299
+#: ../../src/wui/interactive_player.cc:204
+#: ../../src/wui/interactive_player.cc:256
 msgid "Messages"
 msgstr "Missatges"
 
-#: ../../src/wui/interactive_player.cc:304
+#: ../../src/wui/interactive_player.cc:261
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -3698,7 +3700,7 @@ msgstr "MJ = Multijugador"
 #. * TRANSLATORS: Make sure that you keep consistency in your translation.
 #: ../../src/wui/load_or_save_game.cc:112
 msgid "H = Multiplayer (Host)"
-msgstr "H = Multijugador (hoste)"
+msgstr "H = Multijugador (amfitrió)"
 
 #. * TRANSLATORS: Tooltip for the "Mode" column when choosing a game/replay to
 #. load.
