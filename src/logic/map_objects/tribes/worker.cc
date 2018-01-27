@@ -420,6 +420,85 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 }
 
 /**
+ * Care about the game.forester_cache_.
+ *
+ * Making the run_findspace routine shorter, by putting one special case into its own function.
+ * This gets called many times each time the forester searches for a place for a sapling.
+ * Since this already contains three nested for-loops, I dedided to cache the values for a
+ * cpu/memory tradeoff (hint: Widelands is pretty heavy on my oldish PC).
+ * Since the implementation details of double could vary between platforms, I decided to
+ * quantize the terrain goodness into int16_t. This lowers the footprint of the caching,
+ * and also makes desyncs caused by different floats horribly unlikely.
+ *
+ * The forester_cache_ is sparse, but then, lookups are fast.
+ *
+ * At the moment of writing, map changing is really infrequent (only in two scenarios)
+ * and even those do not affect this. However, since map changes are possible, this
+ * checks the reliability of the cached value with a small probability (~1%), If a
+ * disparency is found, the entire cache is nuked.
+ *
+ * If somebody in the future makes a scenario, where the land first is barren, and then
+ * spots of eden show up, the foresters will not immediately notice (because of the cache).
+ * They will eventually notice, and since the instance is shared between tribes,
+ * all foresters notice this at the same moment, also in network play. I hope this is okay.
+ *
+ */
+int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game) {
+
+	std::vector<int16_t>& forester_cache = game.forester_cache_;
+	const unsigned vecsize = 1 + unsigned(map.max_index());
+	const MapIndex mi = map.get_index(pos, map.get_width());
+	const FCoords fpos = map.get_fcoords(pos);
+	// This if-statement should be true only once per game.
+	if (vecsize != forester_cache.size()) {
+		forester_cache.resize(vecsize, kInvalidForesterEntry);
+	}
+	int16_t cache_entry = forester_cache[mi];
+	bool x_check = false;
+	assert(cache_entry >= kInvalidForesterEntry);
+	if (cache_entry != kInvalidForesterEntry) {
+		if (0 == ((game.logic_rand()) & 0xfe)) {
+			// Cached value found, but exceptionally not trusted.
+			x_check = true;
+		} else {
+			// Found the terrain forestability, no more work to do
+			return cache_entry;
+		}
+	}
+
+	// Okay, I do not know whether this terrain suits. Let's obtain the value (and then cache it)
+
+	const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
+
+	// TODO(kxq): could the tree_sapling come from config? Currently, there is only one sparam..
+	// TODO(k.halfmann): avoid fetching this vlaues every time, as it is const during runtime?.
+	// This code is only executed at cache miss.
+	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
+
+	const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
+	double best = 0.0;
+	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
+		const ImmovableDescr& immovable_descr = immovables.get(i);
+		if (immovable_descr.has_attribute(attribute_id) && immovable_descr.has_terrain_affinity()) {
+			double probability =
+			   probability_to_grow(immovable_descr.terrain_affinity(), fpos, map, terrains);
+			if (probability > best) {
+				best = probability;
+			}
+		}
+	}
+	// normalize value to int16 range
+	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) * best;
+
+	if (x_check && (correct_val != cache_entry)) {
+		forester_cache.clear();
+		forester_cache.resize(vecsize, kInvalidForesterEntry);
+	}
+	forester_cache[mi] = correct_val;
+	return correct_val;
+}
+
+/**
  * findspace key:value key:value ...
  *
  * Find a node based on a number of predicates.
@@ -557,6 +636,22 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 
 	// Pick a location at random
 	state.coords = list[game.logic_rand() % list.size()];
+
+	// Special case: forester checks multiple locations instead of one.
+	if (1 < action.iparam6) {
+		// In the bug comments, somebody asked for unequal quality for the foresters of various
+		// tribes to find the best spot. Here stubborness is the number of slots to consider.
+		int stubborness = action.iparam6;
+		int16_t best = findspace_helper_for_forester(state.coords, map, game);
+		while (1 < stubborness--) {
+			const Coords altpos = list[game.logic_rand() % list.size()];
+			const int16_t alt_pos_goodness = findspace_helper_for_forester(altpos, map, game);
+			if (alt_pos_goodness > best) {
+				best = alt_pos_goodness;
+				state.coords = altpos;
+			}
+		}
+	}
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -727,54 +822,51 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<double, DescriptionIndex>> best_suited_immovables_index;
+	std::set<std::tuple<double, DescriptionIndex, MapObjectDescr::OwnerType>>
+	   best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
-	// it
-	// to be 1. (perfect fit). Adds it to the best_suited_immovables_index.
+	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	   const DescriptionIndex index, const ImmovableDescr& immovable_description) {
+	   const uint32_t attribute_id, const DescriptionIndex index,
+	   const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
+		if (!immovable_description.has_attribute(attribute_id)) {
+			return;
+		}
 		double p = 1.;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
 			   immovable_description.terrain_affinity(), fpos, map, game.world().terrains());
 		}
-		best_suited_immovables_index.insert(std::make_tuple(p, index));
+		best_suited_immovables_index.insert(std::make_tuple(p, index, owner_type));
 		if (best_suited_immovables_index.size() > 6) {
 			best_suited_immovables_index.erase(best_suited_immovables_index.begin());
 		}
 	};
 
-	if (action.sparamv.size() != 1) {
-		throw GameDataError("plant takes only one argument.");
+	if (action.sparamv.empty()) {
+		throw GameDataError("plant needs at least one attrib:<attribute>.");
 	}
 
-	std::vector<std::string> const list(split_string(action.sparamv[0], ":"));
-
-	if (list.size() != 2) {
-		throw GameDataError("plant takes either tribe:<immovable> or attrib:<attribute>");
-	}
-
-	if (list[0] == "attrib") {
-		state.svar1 = "world";
-
-		const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
-
-		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(list[1]);
-		for (uint32_t i = 0; i < immovables.size(); ++i) {
-			const ImmovableDescr& immovable_descr = immovables.get(i);
-			if (!immovable_descr.has_attribute(attribute_id)) {
-				continue;
-			}
-			test_suitability(i, immovable_descr);
+	// Collect all world and tribe immovable types for all the attributes along with a suitability
+	// metric
+	for (const std::string& attrib : action.sparamv) {
+		if (attrib.empty()) {
+			throw GameDataError("plant has an empty attrib:<attribute>");
 		}
-	} else {
-		state.svar1 = "tribe";
-		DescriptionIndex immovable_index = game.tribes().immovable_index(list[1]);
+		const uint32_t attribute_id = ImmovableDescr::get_attribute_id(attrib);
 
-		if (game.tribes().immovable_exists(immovable_index)) {
-			const ImmovableDescr* imm = game.tribes().get_immovable_descr(immovable_index);
-			test_suitability(immovable_index, *imm);
+		// Add world immovables
+		const DescriptionMaintainer<ImmovableDescr>& world_immovables = game.world().immovables();
+		for (uint32_t i = 0; i < world_immovables.size(); ++i) {
+			test_suitability(
+			   attribute_id, i, world_immovables.get(i), MapObjectDescr::OwnerType::kWorld);
+		}
+
+		// Add tribe immovables
+		for (const DescriptionIndex i : owner().tribe().immovables()) {
+			test_suitability(attribute_id, i, *owner().tribe().get_immovable_descr(i),
+			                 MapObjectDescr::OwnerType::kTribe);
 		}
 	}
 
@@ -795,10 +887,10 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	}
 
 	double choice = logic_rand_as_double(&game) * total_weight;
-
 	for (const auto& bsii : best_suited_immovables_index) {
 		double weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
+		state.ivar3 = static_cast<int>(std::get<2>(bsii));
 		choice -= weight * weight;
 		if (0 > choice) {
 			break;
@@ -806,12 +898,12 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	}
 
 	Immovable& newimm = game.create_immovable(
-	   pos, state.ivar2, state.svar1 == "tribe" ? MapObjectDescr::OwnerType::kTribe :
-	                                              MapObjectDescr::OwnerType::kWorld,
+	   pos, state.ivar2, static_cast<Widelands::MapObjectDescr::OwnerType>(state.ivar3),
 	   get_owner());
 
-	if (action.iparam1 == Action::plantUnlessObject)
+	if (action.iparam1 == Action::plantUnlessObject) {
 		state.objvar1 = &newimm;
+	}
 
 	++state.ivar1;
 	schedule_act(game, 10);

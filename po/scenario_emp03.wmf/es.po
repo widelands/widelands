@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-10 16:38+0000\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Madkat Here <madcat182@gmail.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
@@ -1287,12 +1287,12 @@ msgstr ""
 msgid "Artifact Found"
 msgstr "Artefacto Encontrado"
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuevo Objetivo"

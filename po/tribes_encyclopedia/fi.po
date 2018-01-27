@@ -5,7 +5,7 @@
 # GunChleoc, 2016
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-10 16:38+0000\n"
-"PO-Revision-Date: 2018-01-10 16:41+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
+"PO-Revision-Date: 2018-01-21 17:22+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -515,7 +515,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
 "material that feeds their furnaces."
-msgstr ""
+msgstr "Kauan sitten, Barbaarit oppivat kaivamaan vuorenrinteistä tuota mustaa materiaalia, joka lämmittää heidän uunit."
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:6
@@ -525,7 +525,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
-msgstr ""
+msgstr "Metsä toki tarjoaa puuta kotitalouksiin ja pitää heidät lämpimänä, mutta mitä tulee raudan tai kullan työstämiseen, hiiltä ei voi välttää. "
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:22
@@ -712,7 +712,7 @@ msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
 "loner – gave, when he was asked to remain seated on an emergency meeting at "
 "Stonford in the year of the great flood."
-msgstr ""
+msgstr "Tämä sanonta oli kaivosmies Rimbertin vastaus – myöhemmin tunnettu nimellä erakko Rimbert – jonka hän antoi, kun häntä pyydettiin pysymään aloillaan Stonfordin hätäkokouksessa, suurena tulvavuonna."
 
 #. TRANSLATORS: Lore author helptext for a granite mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:12
