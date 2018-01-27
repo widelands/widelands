@@ -26,6 +26,7 @@
 #include "economy/ware_instance.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/worker_descr.h"
+#include "logic/widelands_geometry.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 
 namespace Widelands {
@@ -261,6 +262,30 @@ private:
 
 	// Forester considers multiple spaces in findspace, unlike others.
 	int16_t findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game);
+
+	// List of places to visit (only if scout), plus a reminder to
+	// occasionally go just somewhere.
+	struct PlaceToScout {
+		PlaceToScout(const Coords pt) : randomwalk(false), scoutme(pt) {
+		}
+		// The variable scoutme should not be accessed when randomwalk is true.
+		// Initializing the scoutme variable with an obviously-wrong value.
+		PlaceToScout() : randomwalk(true), scoutme(-32100, -32100) {
+		}
+		const bool randomwalk;
+		const Coords scoutme;
+	};
+	std::vector<PlaceToScout> scouts_worklist;
+
+	// scout
+	void prepare_scouts_worklist(const Map& map, const Coords& hutpos);
+	void check_visible_sites(const Map& map, const Player& player);
+	void add_sites(Game& game,
+	               const Map& map,
+	               const Player& player,
+	               std::vector<ImmovableFound>& found_sites);
+	bool scout_random_walk(Game& game, const Map& map, State& state);
+	bool scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat);
 
 	OPtr<PlayerImmovable> location_;   ///< meta location of the worker
 	Economy* economy_;                 ///< economy this worker is registered in
