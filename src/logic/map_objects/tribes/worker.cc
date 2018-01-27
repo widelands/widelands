@@ -3033,8 +3033,7 @@ void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		// TODO(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) once B20 is
-		// out.
+		// TODO(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) after B20
 		// TODO(kxq): Also remove the code fragment from Worker::scout_update with compatibility_2017
 		// in comment.
 		bool compatibility_2017 = 2 == packet_version;
@@ -3050,7 +3049,8 @@ void Worker::Loader::load(FileRead& fr) {
 				worker.transfer_->read(fr, transfer_);
 			}
 			unsigned veclen;
-			// TODO(kxq): Remove compatibility_2017 associated code from here and above.
+			// TODO(kxq): Remove compatibility_2017 associated code from here and above,
+			// after build 20 has been released.
 			if (compatibility_2017) {
 				veclen = 0;
 			} else {
