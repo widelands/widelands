@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-27 17:14+0000\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2017\n"
 "Language-Team: English (United Kingdom) (https://www.transifex.com/widelands/teams/35159/en_GB/)\n"
@@ -322,11 +322,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:222
 msgid "Chaos"
-msgstr ""
+msgstr "Chaos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:223
 msgid "Lutius is disappointed"
-msgstr ""
+msgstr "Lutius is disappointed"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:225
@@ -335,27 +335,30 @@ msgid ""
 "the road network seems to be completely in shambles as well. Who might be "
 "responsible for this chaos?"
 msgstr ""
+"Oh no! Amalea is right. In fact, I can’t see any productivity at all. And "
+"the road network seems to be completely in shambles as well. Who might be "
+"responsible for this chaos?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
 msgid "Explanation Needed"
-msgstr ""
+msgstr "Explanation Needed"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid "Lutius greets the official"
-msgstr ""
+msgstr "Lutius greets the official"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:233
 msgid "Ave! Who are you and what happened to our beautiful land?"
-msgstr ""
+msgstr "Ave! Who are you and what happened to our beautiful land?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:238
 msgid "Difficult Times"
-msgstr ""
+msgstr "Difficult Times"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:239
 msgid "Lutius accepts the challenge"
-msgstr ""
+msgstr "Lutius accepts the challenge"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:241
@@ -364,6 +367,9 @@ msgid ""
 "will do our very best to recover from the chaos. But unfortunately, this "
 "seems to be very difficult."
 msgstr ""
+"Mayor, we have to thank you for your efforts to safeguard our city. And we "
+"will do our very best to recover from the chaos. But unfortunately, this "
+"seems to be very difficult."
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:244
@@ -371,14 +377,16 @@ msgid ""
 "I am really afraid, because we are completely unprepared should the "
 "Barbarians decide to attack us."
 msgstr ""
+"I am really afraid, because we are completely unprepared should the "
+"Barbarians decide to attack us."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:252
 msgid "Welcome Back"
-msgstr ""
+msgstr "Welcome Back"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:253
 msgid "A high Fremil official is welcoming you…"
-msgstr ""
+msgstr "A high Fremil official is welcoming you…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -387,20 +395,24 @@ msgid ""
 "Ave Sire! The people and me are so glad to see you returning back home. We "
 "really need some good leadership around here."
 msgstr ""
+"Ave Sire! The people and me are so glad to see you returning back home. We "
+"really need some good leadership around here."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:257
 msgid ""
 "As you have already noticed, things have gone terribly wrong around here "
 "since you left."
 msgstr ""
+"As you have already noticed, things have gone terribly wrong around here "
+"since you left."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:262
 msgid "A Long Story"
-msgstr ""
+msgstr "A Long Story"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:263
 msgid "The official sighs deeply…"
-msgstr ""
+msgstr "The official sighs deeply…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -411,6 +423,10 @@ msgid ""
 "delegated the authority of running the city to his former secretary and "
 "instated him as his surrogate around here."
 msgstr ""
+"Sire, let me start from the beginning. The king left Fremil a long time ago "
+"to fight the Barbarians. As this duty was demanding his full commitment, he "
+"delegated the authority of running the city to his former secretary and "
+"instated him as his surrogate around here."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:267
 msgid ""
@@ -418,6 +434,9 @@ msgid ""
 "his new power. His selfish instincts were as awful as his complete stupidity"
 " and inability to govern the city."
 msgstr ""
+"But this was one of his worst decisions ever. The secretary got blinded by "
+"his new power. His selfish instincts were as awful as his complete stupidity"
+" and inability to govern the city."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:269
 msgid ""
@@ -425,6 +444,9 @@ msgid ""
 "Afterwards, they elected me as mayor of this city. However, recovering from "
 "the chaos seems to be a task too big for my abilities."
 msgstr ""
+"After a while, the people discovered the truth and expelled the utter fool. "
+"Afterwards, they elected me as mayor of this city. However, recovering from "
+"the chaos seems to be a task too big for my abilities."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:277
 msgid "Amalea Looks Puzzled"
@@ -1308,12 +1330,12 @@ msgid ""
 "family from the face of the earth!"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -156,13 +156,13 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:112
 msgid "Build 2 ports on distant islands"
-msgstr "Errichte zwei Häfen auf entfernten Inseln"
+msgstr "Errichte 2 Häfen auf entfernten Inseln"
 
 #. TRANSLATORS: Objective - create 2 expeditions and found new colonies with
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:115
 msgid "Build 2 Expedition Ports"
-msgstr "Baue zwei Expeditionshäfen"
+msgstr "Baue 2 Expeditionshäfen"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:116
 msgid ""
@@ -192,8 +192,7 @@ msgstr "Goldproduktion"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:126
 msgid ""
 "We need to produce at least 6 gold to be able to colonize our vicinity."
-msgstr ""
-"Wir brauchen mindesten sechs Goldbarren, um unsere Umgebung zu besiedeln."
+msgstr "Wir brauchen mindesten 6 Goldbarren, um unsere Umgebung zu besiedeln."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:132
 msgid "Defeat the Barbarians"
@@ -1290,12 +1289,12 @@ msgstr ""
 msgid "Artifact Found"
 msgstr "Artefakt gefunden"
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

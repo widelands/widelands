@@ -1,11 +1,11 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
+"PO-Revision-Date: 2018-01-21 17:22+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -141,9 +141,9 @@ msgstr "Polttaa kaadettuja puita puuhiiliksi."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:14
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:14
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:14
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:17
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:17
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:17
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/helptexts.lua:16
 msgctxt "building"
@@ -415,7 +415,7 @@ msgstr "Barbaarien kirvespaja on keskitason tuotantopaikka kolmen rakennuksen sa
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:31
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/helptexts.lua:23
@@ -507,18 +507,29 @@ msgid ""
 "in %s on average."
 msgstr "Jos kaikki tarvittavat tavarat toimitetaan ajallaa, tämä rakennus voi tuottaa  härän keskimäärin %s."
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:3
+#. TRANSLATORS: Lore helptext for a coal mine building, part 1
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:4
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:4
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:4
 msgctxt "barbarians_building"
 msgid ""
-"Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>\n"
-"Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal."
-msgstr "Aikoja sitten Barbaarit oppivat kaivamaan vuorenrinteistä tuota mustaa materiaalia, joka lämmittää heidän uunit.<br>\nMetsä toki tarjoaa puuta kotitalouksiin ja pitää heidät lämpimänä, mutta mitä tulee raudan tai kullan työstämiseen, hiiltä ei voi välttää."
+"Ages ago, the Barbarians learned to delve into mountainsides for that black "
+"material that feeds their furnaces."
+msgstr "Kauan sitten, Barbaarit oppivat kaivamaan vuorenrinteistä tuota mustaa materiaalia, joka lämmittää heidän uunit."
+
+#. TRANSLATORS: Lore helptext for a coal mine building, part 2
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:6
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:6
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:6
+msgctxt "barbarians_building"
+msgid ""
+"Wood may serve for a household fire and to keep you warm, but when it comes "
+"to working with iron or gold, there is no way around coal."
+msgstr "Metsä toki tarjoaa puuta kotitalouksiin ja pitää heidät lämpimänä, mutta mitä tulee raudan tai kullan työstämiseen, hiiltä ei voi välttää. "
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:19
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:19
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:22
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:22
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -527,7 +538,7 @@ msgid ""
 msgstr "Tämä kaivos voi hyödyntää resursseistaa vain %s. Tämän rajapyykin jälkeen hiilen löytämisen onnistumistodennäköisyys on vain 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:24
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:27
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 32.5 seconds on "
@@ -535,7 +546,7 @@ msgid ""
 msgstr "Jos ruuan toimitus toimii tasaisesti, tämä kaivos voi tuottaa hiiltä keskimäärin 32.5 sekunnissa."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:24
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/helptexts.lua:27
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 19.5 seconds on "
@@ -543,7 +554,7 @@ msgid ""
 msgstr "Jos ruuan toimitus toimii tasaisesti, tämä kaivos voi tuottaa hiiltä keskimäärin 19.5 sekunnissa."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:19
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:22
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -553,7 +564,7 @@ msgid ""
 msgstr "Tämä kaivos hyödyntää kaikki resurssit syvimmälle tasolle asti. Jopa syvimmän tason resurssit hydynnettyään, se voi silti onnistua löytämään hiiltä %s todennäköisyydellä."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:24
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:27
 msgctxt "barbarians_building"
 msgid ""
 "If the food supply is steady, this mine can produce coal in 14.4 seconds on "
@@ -694,25 +705,31 @@ msgctxt "barbarians_building"
 msgid "‘I can handle tons of granite, man, but no more of your vain prattle.’"
 msgstr "”Voin käsitellä tonnikaupalla graniittia, ukko, mutta lopeta turhat höpinäsi.”"
 
-#. TRANSLATORS: Lore author helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:8
+#. TRANSLATORS: Lore author helptext for a granite mine building, part 1
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:10
 msgctxt "barbarians_building"
 msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
 "loner – gave, when he was asked to remain seated on an emergency meeting at "
-"Stonford in the year of the great flood. <br> The same man had all the 244 "
-"granite blocks ready only a week later, and they still fortify the city’s "
-"levee."
-msgstr "Tämä sanonta oli kaivosmies Rimbertin vastaus – myöhemmin tunnettu nimellä erakko Rimbert – jonka hän antoi, kun häntä pyydettiin pysymään aloillaan Stonfordin hätäkokouksessa, suurena tulvavuonna <br> Samalla miehellä oli kaikki 244 graniitin kappaletta valmiina vain viikkoa myöhemmin ja he vahvistivat kaupungin pengerryksiä entisestään."
+"Stonford in the year of the great flood."
+msgstr "Tämä sanonta oli kaivosmies Rimbertin vastaus – myöhemmin tunnettu nimellä erakko Rimbert – jonka hän antoi, kun häntä pyydettiin pysymään aloillaan Stonfordin hätäkokouksessa, suurena tulvavuonna."
+
+#. TRANSLATORS: Lore author helptext for a granite mine building, part 2
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:12
+msgctxt "barbarians_building"
+msgid ""
+"The same man had all the 244 granite blocks ready only a week later, and "
+"they still fortify the city’s levee."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:18
 msgctxt "barbarians_building"
 msgid "Carves granite out of the rock in mountain terrain."
 msgstr "Leikkaa graniittia kalliosta vuoristoisessa maastossa."
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:19
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:24
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -722,13 +739,13 @@ msgid ""
 msgstr "Tämä kaivos hyödyntää kaikki resurssit syvimmälle tasolle asti. Jopa syvimmän tason resurssit hydynnettyään, se voi silti onnistua löytämään graniittia %s todennäköisyydellä."
 
 #. TRANSLATORS: 'It' is a mine
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:21
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
 msgctxt "barbarians_building"
 msgid "It cannot be enhanced."
 msgstr "Sitä ei voi laajentaa."
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:31
 #, lua-format
 msgctxt "barbarians_building"
 msgid ""
@@ -1102,9 +1119,9 @@ msgstr "”Elämän eliksiiri,<br> taivaasta luoksemme saapunut,<br> nousee jäl
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:8
 msgctxt "barbarians_building"
 msgid ""
-"Song written by Sigurd the Bard<br>when the first rain fell after the Great "
+"Song written by Sigurd the Bard when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr "Bardi Sigurdin kirjoittama laulu<br> kun ensimmäiset pisarat tippuivat Suuren kuivuuden jälkeen Chat’Karuthin aikakaudella vuonna 21."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
@@ -1539,273 +1556,260 @@ msgid ""
 "soldiers, wares and tools."
 msgstr "Toimii tukikohtana merentakaiselle siirtokunnalle ja kaupalle. Myös varastoi sinun sotilaita, tavaroita ja työkaluja."
 
-#: ../../data/tribes/scripting/help/building_help.lua:87
-#: ../../data/tribes/scripting/help/format_help.lua:153
+#: ../../data/tribes/scripting/help/building_help.lua:104
+#: ../../data/tribes/scripting/help/format_help.lua:188
 #, lua-format
 msgid "%s and"
 msgstr "%s ja"
 
-#: ../../data/tribes/scripting/help/building_help.lua:96
+#: ../../data/tribes/scripting/help/building_help.lua:118
 msgid "Food:"
 msgstr "Ruoka:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:144
+#: ../../data/tribes/scripting/help/building_help.lua:168
 msgid "Equipment:"
 msgstr "Varusteet:"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../data/tribes/scripting/help/building_help.lua:167
+#: ../../data/tribes/scripting/help/building_help.lua:191
 msgid "Lore"
 msgstr "Taustatarina"
 
-#: ../../data/tribes/scripting/help/building_help.lua:175
+#: ../../data/tribes/scripting/help/building_help.lua:212
 #: ../../data/tribes/scripting/help/init.lua:53
-#: ../../data/tribes/scripting/help/tips.lua:45
+#: ../../data/tribes/scripting/help/tips.lua:44
 msgid "General"
 msgstr "Yleistä"
 
-#: ../../data/tribes/scripting/help/building_help.lua:176
+#: ../../data/tribes/scripting/help/building_help.lua:213
 msgid "Purpose:"
 msgstr "Tarkoitus:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:204
-#: ../../data/tribes/scripting/help/building_help.lua:445
+#: ../../data/tribes/scripting/help/building_help.lua:241
+#: ../../data/tribes/scripting/help/building_help.lua:482
 msgid "Note:"
 msgstr "Huom:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:209
+#: ../../data/tribes/scripting/help/building_help.lua:246
 msgid "Work area radius:"
 msgstr "Työalueen säde:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:213
-#: ../../data/tribes/scripting/help/building_help.lua:218
+#: ../../data/tribes/scripting/help/building_help.lua:250
+#: ../../data/tribes/scripting/help/building_help.lua:255
 msgid "Healing:"
 msgstr "Parantuminen:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:214
-#: ../../data/tribes/scripting/help/building_help.lua:219
+#: ../../data/tribes/scripting/help/building_help.lua:251
+#: ../../data/tribes/scripting/help/building_help.lua:256
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "Varuskuntasotilaat paranevat %d terveys pistettä per sekuntti."
 msgstr[1] "Varuskuntasotilaat paranevat %d terveys pistettä per sekuntti."
 
-#: ../../data/tribes/scripting/help/building_help.lua:215
-#: ../../data/tribes/scripting/help/building_help.lua:221
+#: ../../data/tribes/scripting/help/building_help.lua:252
+#: ../../data/tribes/scripting/help/building_help.lua:258
 msgid "Conquer range:"
 msgstr "Valvonta-alue:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:220
-#: ../../data/tribes/scripting/help/building_help.lua:224
+#: ../../data/tribes/scripting/help/building_help.lua:257
+#: ../../data/tribes/scripting/help/building_help.lua:261
 msgid "Capacity:"
 msgstr "Kapasiteetti:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:226
+#: ../../data/tribes/scripting/help/building_help.lua:263
 msgid "Vision range:"
 msgstr "Näkökenttä:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:251
+#: ../../data/tribes/scripting/help/building_help.lua:288
 msgid "%1$s from: %2$s"
 msgstr "%1$s paikasta %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:258
+#: ../../data/tribes/scripting/help/building_help.lua:295
 msgid "Incoming:"
 msgstr "Saapuva:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:262
+#: ../../data/tribes/scripting/help/building_help.lua:299
 msgid "Collects:"
 msgstr "Kerää:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:274
+#: ../../data/tribes/scripting/help/building_help.lua:311
 msgid "Mines:"
 msgstr "Louhii:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:294
+#: ../../data/tribes/scripting/help/building_help.lua:331
 msgid "Produces:"
 msgstr "Tuottaa:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:336
+#: ../../data/tribes/scripting/help/building_help.lua:373
 msgid "Outgoing:"
 msgstr "Poistuva:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:338
+#: ../../data/tribes/scripting/help/building_help.lua:375
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../../data/tribes/scripting/help/building_help.lua:339
+#: ../../data/tribes/scripting/help/building_help.lua:376
 msgid "Dependencies"
 msgstr "Riippuvuudet"
 
-#: ../../data/tribes/scripting/help/building_help.lua:355
+#: ../../data/tribes/scripting/help/building_help.lua:392
 msgid "Health Training"
 msgstr "Terveyskoulutus"
 
-#: ../../data/tribes/scripting/help/building_help.lua:356
+#: ../../data/tribes/scripting/help/building_help.lua:393
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "Kouluttaa 'Terveys' tasolta %1% tasolle  %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:358
-#: ../../data/tribes/scripting/help/building_help.lua:372
-#: ../../data/tribes/scripting/help/building_help.lua:384
-#: ../../data/tribes/scripting/help/building_help.lua:397
+#: ../../data/tribes/scripting/help/building_help.lua:395
+#: ../../data/tribes/scripting/help/building_help.lua:409
+#: ../../data/tribes/scripting/help/building_help.lua:421
+#: ../../data/tribes/scripting/help/building_help.lua:434
 msgid "Soldiers:"
 msgstr "Sotilaat:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:368
+#: ../../data/tribes/scripting/help/building_help.lua:405
 msgid "Attack Training"
 msgstr "Hyökkäyskoulutus"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:370
+#: ../../data/tribes/scripting/help/building_help.lua:407
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "Kouluttaa 'Hyökkäys' tasolta  %1% tasolle %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:381
+#: ../../data/tribes/scripting/help/building_help.lua:418
 msgid "Defense Training"
 msgstr "Puolustuskoulutus"
 
-#: ../../data/tribes/scripting/help/building_help.lua:382
+#: ../../data/tribes/scripting/help/building_help.lua:419
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "Kouluttaa 'Puolustus' tasolta  %1% tasolle %2%"
 
-#: ../../data/tribes/scripting/help/building_help.lua:394
+#: ../../data/tribes/scripting/help/building_help.lua:431
 msgid "Evade Training"
 msgstr "Väistelykoulutus"
 
-#: ../../data/tribes/scripting/help/building_help.lua:395
+#: ../../data/tribes/scripting/help/building_help.lua:432
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "Kouluttaa 'Väistely' tasolta %1% tasolle %2%"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:422
+#: ../../data/tribes/scripting/help/building_help.lua:459
 msgid "Building"
 msgstr "Rakennus"
 
-#: ../../data/tribes/scripting/help/building_help.lua:426
+#: ../../data/tribes/scripting/help/building_help.lua:463
 msgid "Mine plot"
 msgstr "Kaivospaikka"
 
-#: ../../data/tribes/scripting/help/building_help.lua:426
-#: ../../data/tribes/scripting/help/building_help.lua:428
-#: ../../data/tribes/scripting/help/building_help.lua:431
-#: ../../data/tribes/scripting/help/building_help.lua:433
-#: ../../data/tribes/scripting/help/building_help.lua:435
-#: ../../data/tribes/scripting/help/building_help.lua:437
+#: ../../data/tribes/scripting/help/building_help.lua:463
+#: ../../data/tribes/scripting/help/building_help.lua:465
+#: ../../data/tribes/scripting/help/building_help.lua:468
+#: ../../data/tribes/scripting/help/building_help.lua:470
+#: ../../data/tribes/scripting/help/building_help.lua:472
+#: ../../data/tribes/scripting/help/building_help.lua:474
 msgid "Space required:"
 msgstr "Tilantarve:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:428
+#: ../../data/tribes/scripting/help/building_help.lua:465
 msgid "Port plot"
 msgstr "Satama-aihio"
 
-#: ../../data/tribes/scripting/help/building_help.lua:431
+#: ../../data/tribes/scripting/help/building_help.lua:468
 msgid "Small plot"
 msgstr "Pieni tontti"
 
-#: ../../data/tribes/scripting/help/building_help.lua:433
+#: ../../data/tribes/scripting/help/building_help.lua:470
 msgid "Medium plot"
 msgstr "Keskikokoinen tontti"
 
-#: ../../data/tribes/scripting/help/building_help.lua:435
+#: ../../data/tribes/scripting/help/building_help.lua:472
 msgid "Big plot"
 msgstr "Laaja tontti"
 
-#: ../../data/tribes/scripting/help/building_help.lua:437
-#: ../../data/tribes/scripting/help/building_help.lua:521
-#: ../../data/tribes/scripting/help/building_help.lua:570
+#: ../../data/tribes/scripting/help/building_help.lua:474
+#: ../../data/tribes/scripting/help/building_help.lua:558
+#: ../../data/tribes/scripting/help/building_help.lua:607
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../../data/tribes/scripting/help/building_help.lua:446
+#: ../../data/tribes/scripting/help/building_help.lua:483
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "Tämä rakennus voidaan rakentaa suoraan tai parantelemalla jotain toista olemassa olevaa rakennusta."
 
-#: ../../data/tribes/scripting/help/building_help.lua:452
+#: ../../data/tribes/scripting/help/building_help.lua:489
 msgid "Direct build cost:"
 msgstr "Välittömät rakennuskustannukset:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:454
+#: ../../data/tribes/scripting/help/building_help.lua:491
 msgid "Build cost:"
 msgstr "Rakennuskustannukset:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:465
+#: ../../data/tribes/scripting/help/building_help.lua:502
 msgid "Or enhanced from:"
 msgstr "Tai paranneltu rakennuksesta"
 
-#: ../../data/tribes/scripting/help/building_help.lua:467
+#: ../../data/tribes/scripting/help/building_help.lua:504
 msgid "Enhanced from:"
 msgstr "Laajennettu rakennuksesta"
 
-#: ../../data/tribes/scripting/help/building_help.lua:476
+#: ../../data/tribes/scripting/help/building_help.lua:513
 msgid "Cumulative cost:"
 msgstr "Kasautuva kulu:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:526
+#: ../../data/tribes/scripting/help/building_help.lua:563
 msgid "If built directly, dismantle yields:"
 msgstr "Jos rakennettu suoraan, purettaessa saadaan:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:531
+#: ../../data/tribes/scripting/help/building_help.lua:568
 msgid "If enhanced, dismantle yields:"
 msgstr "Jos rakennettu paloittain, purettaessa saadaan:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:534
-#: ../../data/tribes/scripting/help/building_help.lua:575
+#: ../../data/tribes/scripting/help/building_help.lua:571
+#: ../../data/tribes/scripting/help/building_help.lua:612
 msgid "Dismantle yields:"
 msgstr "Purettaessa saadaan:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:584
+#: ../../data/tribes/scripting/help/building_help.lua:621
 msgid "Can be enhanced to:"
 msgstr "Voidaan laajentaa rakennukseksi"
 
-#: ../../data/tribes/scripting/help/building_help.lua:614
+#: ../../data/tribes/scripting/help/building_help.lua:651
 msgid "Crew required:"
 msgstr "Henkilökuntatarve:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:614
+#: ../../data/tribes/scripting/help/building_help.lua:651
 #: ../../data/tribes/scripting/help/init.lua:86
 msgid "Workers"
 msgstr "Työläiset"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:636
+#: ../../data/tribes/scripting/help/building_help.lua:673
 #, lua-format
 msgid "%s or better"
 msgstr "%s tai kokeneempi"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:647
+#: ../../data/tribes/scripting/help/building_help.lua:684
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "Työkalu: "
 msgstr[1] "Työvälineet: "
 
-#: ../../data/tribes/scripting/help/building_help.lua:653
-msgid "Experience levels:"
-msgstr "Taitotaso:"
-
-#. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/building_help.lua:655
-#: ../../data/tribes/scripting/help/building_help.lua:664
-#: ../../data/tribes/scripting/help/worker_help.lua:157
-#: ../../data/tribes/scripting/help/worker_help.lua:166
-#, lua-format
-msgid "%s to %s (%s EP)"
-msgstr "%s yleneemä kohti %s (%s EP)"
-
-#: ../../data/tribes/scripting/help/building_help.lua:687
+#: ../../data/tribes/scripting/help/building_help.lua:706
 msgid "Production"
 msgstr "Tuotanto"
 
-#: ../../data/tribes/scripting/help/building_help.lua:688
+#: ../../data/tribes/scripting/help/building_help.lua:707
 msgid "Performance:"
 msgstr "Suoriutuminen:"
 
@@ -1814,236 +1818,236 @@ msgstr "Suoriutuminen:"
 msgid "Controls"
 msgstr "Hallinta"
 
-#: ../../data/tribes/scripting/help/controls.lua:16
+#: ../../data/tribes/scripting/help/controls.lua:15
 msgid "Window Control"
 msgstr "Ruudunhallinta"
 
-#: ../../data/tribes/scripting/help/controls.lua:19
+#: ../../data/tribes/scripting/help/controls.lua:18
 msgid "Close window"
 msgstr "Sulje ruutu"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:19
+#: ../../data/tribes/scripting/help/controls.lua:18
 msgctxt "hotkey"
 msgid "Right-click"
 msgstr "Hiiren oikea painike"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:21
+#: ../../data/tribes/scripting/help/controls.lua:20
 msgctxt "hotkey"
 msgid "Middle-click or Ctrl + Left-click"
 msgstr "Hiiren keskimmäinen painike tai Ctrl + Vasen"
 
-#: ../../data/tribes/scripting/help/controls.lua:21
+#: ../../data/tribes/scripting/help/controls.lua:20
 msgid "Minimize/Maximize window"
 msgstr "Minimoi/Maksimoi ruutu"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:23
+#: ../../data/tribes/scripting/help/controls.lua:22
 msgctxt "hotkey"
 msgid "Ctrl + Left-click on Button"
 msgstr "CTRL + Hiiren vasen painike"
 
-#: ../../data/tribes/scripting/help/controls.lua:23
+#: ../../data/tribes/scripting/help/controls.lua:22
 msgid "Skip confirmation dialog"
 msgstr "Ohita varmistusdialogi"
 
-#: ../../data/tribes/scripting/help/controls.lua:25
+#: ../../data/tribes/scripting/help/controls.lua:24
 msgid "Road Control"
 msgstr "Tie Hallinta"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:28
-#: ../../data/tribes/scripting/help/controls.lua:30
+#: ../../data/tribes/scripting/help/controls.lua:27
+#: ../../data/tribes/scripting/help/controls.lua:29
 msgctxt "hotkey"
 msgid "Ctrl + Left-click"
 msgstr "Ctrl + Vasen"
 
-#: ../../data/tribes/scripting/help/controls.lua:28
+#: ../../data/tribes/scripting/help/controls.lua:27
 msgid "While connecting two flags: Place flags automatically"
 msgstr "Yhdistäessä kaksi lippua: Sijoita liput automaattisesti"
 
-#: ../../data/tribes/scripting/help/controls.lua:30
+#: ../../data/tribes/scripting/help/controls.lua:29
 msgid "While removing a flag: Remove all flags up to the first junction"
 msgstr "Lippua poistaessa: Poista kaikki liput lähimpään risteykseen saakka"
 
-#: ../../data/tribes/scripting/help/controls.lua:32
+#: ../../data/tribes/scripting/help/controls.lua:31
 msgid "Keyboard Shortcuts"
 msgstr "Näppäimistöoikotiet"
 
-#: ../../data/tribes/scripting/help/controls.lua:35
+#: ../../data/tribes/scripting/help/controls.lua:34
 msgid "Increase game speed"
 msgstr "Nopeuta pelin kulkua"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:35
+#: ../../data/tribes/scripting/help/controls.lua:34
 msgctxt "hotkey"
 msgid "Page Up"
 msgstr "Page Up"
 
-#: ../../data/tribes/scripting/help/controls.lua:37
+#: ../../data/tribes/scripting/help/controls.lua:36
 msgid "Decrease game speed"
 msgstr "Hidastaapelin kulkua"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:37
+#: ../../data/tribes/scripting/help/controls.lua:36
 msgctxt "hotkey"
 msgid "Page Down"
 msgstr "Page Down"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:39
+#: ../../data/tribes/scripting/help/controls.lua:38
 msgctxt "hotkey"
 msgid "Pause"
 msgstr "Pause"
 
-#: ../../data/tribes/scripting/help/controls.lua:39
+#: ../../data/tribes/scripting/help/controls.lua:38
 msgid "Pause the game"
 msgstr "Pysäytä peli"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:41
+#: ../../data/tribes/scripting/help/controls.lua:40
 msgid "Toggle census"
 msgstr "Rakennusten nimet päälle/pois"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:43
+#: ../../data/tribes/scripting/help/controls.lua:42
 msgid "Toggle statistics"
 msgstr "Tilastot päälle/pois"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:47
+#: ../../data/tribes/scripting/help/controls.lua:46
 msgid "Toggle objectives"
 msgstr "Tavoitteet päälle/pois"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:49
+#: ../../data/tribes/scripting/help/controls.lua:48
 msgid "Toggle messages (‘news’)"
 msgstr "Viestit päälle/pois ('uutiset')"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:51
+#: ../../data/tribes/scripting/help/controls.lua:50
 #: ../../data/tribes/scripting/help/init.lua:48
 msgid "Tribal Encyclopedia"
 msgstr "Heimo-opas"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:53
+#: ../../data/tribes/scripting/help/controls.lua:52
 msgid "Toggle stock inventory"
 msgstr "Varastoluettelo päälle/pois"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:55
+#: ../../data/tribes/scripting/help/controls.lua:54
 msgid "Toggle building statistics"
 msgstr "Rakennustilastot päälle/pois"
 
-#: ../../data/tribes/scripting/help/controls.lua:57
+#: ../../data/tribes/scripting/help/controls.lua:56
 msgid "Center main mapview on starting location"
 msgstr "Keskitä pääkarttanäkymä aloituspaikkaan"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:57
+#: ../../data/tribes/scripting/help/controls.lua:56
 msgctxt "hotkey"
 msgid "Home"
 msgstr "Home"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:58
 msgctxt "hotkey"
 msgid "Ctrl + 1-9"
 msgstr "Ctrl + 1-9"
 
-#: ../../data/tribes/scripting/help/controls.lua:59
+#: ../../data/tribes/scripting/help/controls.lua:58
 msgid "Remember current location"
 msgstr "Paina muistiin tämänhetkinen paikka"
 
-#: ../../data/tribes/scripting/help/controls.lua:60
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgctxt "hotkey"
 msgid "1-9"
 msgstr "1-9"
 
-#: ../../data/tribes/scripting/help/controls.lua:60
+#: ../../data/tribes/scripting/help/controls.lua:59
 msgid "Go to previously remembered location"
 msgstr "Mene aiemmin muistiin painettuun paikkaan"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:61
 msgctxt "hotkey"
 msgid "Ctrl + +"
 msgstr "Ctrl + +"
 
-#: ../../data/tribes/scripting/help/controls.lua:62
+#: ../../data/tribes/scripting/help/controls.lua:61
 msgid "Increase zoom"
 msgstr "Kasvata suurennusta"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:63
 msgctxt "hotkey"
 msgid "Ctrl + -"
 msgstr "Ctrl + -"
 
-#: ../../data/tribes/scripting/help/controls.lua:64
+#: ../../data/tribes/scripting/help/controls.lua:63
 msgid "Decrease zoom"
 msgstr "Pienennä suurennusta"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:66
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgctxt "hotkey"
 msgid "Ctrl + 0"
 msgstr "Ctrl + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:66
+#: ../../data/tribes/scripting/help/controls.lua:65
 msgid "Reset zoom"
 msgstr "Resetoi suurennus"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgctxt "hotkey"
 msgid "Ctrl + F11"
 msgstr "Ctrl + F11"
 
-#: ../../data/tribes/scripting/help/controls.lua:68
+#: ../../data/tribes/scripting/help/controls.lua:67
 msgid "Take a screenshot"
 msgstr "Ota kuvakaappaus"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgctxt "hotkey"
 msgid "Ctrl + F10"
 msgstr "Ctrl + F10"
 
-#: ../../data/tribes/scripting/help/controls.lua:71
+#: ../../data/tribes/scripting/help/controls.lua:70
 msgid "Quit the game immediately"
 msgstr "Poistu pelistä välittömästi"
 
 #. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:73
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgctxt "hotkey"
 msgid "F6"
 msgstr "F6"
 
-#: ../../data/tribes/scripting/help/controls.lua:73
+#: ../../data/tribes/scripting/help/controls.lua:72
 msgid "Show the debug console (only in debug-builds)"
 msgstr "Näytä debug konsoli (vain debug käännöksissä)"
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:75
 msgid "Table Control"
 msgstr "Taulukon Hallinta"
 
-#: ../../data/tribes/scripting/help/controls.lua:77
+#: ../../data/tribes/scripting/help/controls.lua:76
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
@@ -2051,146 +2055,157 @@ msgstr "Niissä taulukoissa, jotka sallivat useiden kohtien valitsemisen, seuraa
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Ctrl + Klikkaus"
 
-#: ../../data/tribes/scripting/help/controls.lua:80
+#: ../../data/tribes/scripting/help/controls.lua:79
 msgctxt "table_control"
 msgid "Select multiple entries"
 msgstr "Valitse useita kohtia"
 
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgctxt "table_control"
 msgid "Select a range of entries"
 msgstr "Vallitse joukko kohtia"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:82
+#: ../../data/tribes/scripting/help/controls.lua:81
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Shift + Klikkaus"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgctxt "hotkey"
 msgid "Ctrl + A"
 msgstr "Ctrl + A"
 
-#: ../../data/tribes/scripting/help/controls.lua:84
+#: ../../data/tribes/scripting/help/controls.lua:83
 msgctxt "table_control"
 msgid "Select all entries"
 msgstr "Valitse kaikki kohdat"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
+#: ../../data/tribes/scripting/help/controls.lua:85
 msgid "Message Window"
 msgstr "Viestiruutu"
 
-#: ../../data/tribes/scripting/help/controls.lua:87
+#: ../../data/tribes/scripting/help/controls.lua:86
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr "Seuraavat vaihtoehtoiset pikanäppäimet ovat käytettävissä viestiruudussa:"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:90
+#: ../../data/tribes/scripting/help/controls.lua:89
 msgid "Show all messages"
 msgstr "Näytä kaikki viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:91
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:92
+#: ../../data/tribes/scripting/help/controls.lua:91
 msgid "Show geologists’ messages only"
 msgstr "Näytä vain geologien viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:94
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:94
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Show economy messages only"
 msgstr "Näytä vain talouden viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:95
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:96
+#: ../../data/tribes/scripting/help/controls.lua:95
 msgid "Show seafaring messages only"
 msgstr "Näytä vain merenkulut viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:98
+#: ../../data/tribes/scripting/help/controls.lua:97
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:98
+#: ../../data/tribes/scripting/help/controls.lua:97
 msgid "Show warfare messages only"
 msgstr "Näytä vain sodankäynnin viestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:100
+#: ../../data/tribes/scripting/help/controls.lua:99
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:100
+#: ../../data/tribes/scripting/help/controls.lua:99
 msgid "Show scenario messages only"
 msgstr "Näytä vain skenaarioviestit"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:102
+#: ../../data/tribes/scripting/help/controls.lua:101
 msgid "Jump to the location corresponding to the current message"
 msgstr "Siirry siihen kohtaan karttaa, jota tämänhetkinen viesti koskee"
 
-#: ../../data/tribes/scripting/help/controls.lua:104
+#: ../../data/tribes/scripting/help/controls.lua:103
 msgid "Archive/Restore the current message"
 msgstr "Arkistoi/Palauttaa tämänhetkinen viesti"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:104
+#: ../../data/tribes/scripting/help/controls.lua:103
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
 
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../data/tribes/scripting/help/format_help.lua:86
-#: ../../data/tribes/scripting/help/format_help.lua:145
+#: ../../data/tribes/scripting/help/format_help.lua:89
+#: ../../data/tribes/scripting/help/format_help.lua:180
 msgid "%1$dx %2$s"
 msgstr "%1$dx %2$s"
 
+#: ../../data/tribes/scripting/help/format_help.lua:103
+msgid "Experience levels"
+msgstr "Taitotaso:"
+
+#. TRANSLATORS: EP = Experience Points
+#: ../../data/tribes/scripting/help/format_help.lua:105
+#: ../../data/tribes/scripting/help/format_help.lua:115
+#, lua-format
+msgid "%s to %s (%s EP)"
+msgstr "%s yleneemä kohti %s (%s EP)"
+
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
 #. a productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:175
+#: ../../data/tribes/scripting/help/format_help.lua:215
 msgid "Wares and workers consumed:"
 msgstr "Käytetyt tavarat ja työntekijät:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:178
+#: ../../data/tribes/scripting/help/format_help.lua:218
 msgid "Workers consumed:"
 msgstr "Käytetyt työntekijät:"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:182
+#: ../../data/tribes/scripting/help/format_help.lua:222
 msgid "Wares consumed:"
 msgstr "Käytetyt tavarat:"
 
@@ -2222,7 +2237,7 @@ msgid "Introduction"
 msgstr "Esittely"
 
 #: ../../data/tribes/scripting/help/init.lua:70
-#: ../../data/tribes/scripting/help/tips.lua:71
+#: ../../data/tribes/scripting/help/tips.lua:70
 msgid "Tips"
 msgstr "Vinkit"
 
@@ -2238,23 +2253,23 @@ msgstr "Rakennukset"
 msgid "About Widelands"
 msgstr "Tietoa Widelandsista"
 
-#: ../../data/tribes/scripting/help/tips.lua:50
+#: ../../data/tribes/scripting/help/tips.lua:49
 msgid "Atlanteans"
 msgstr "Atlantislaiset"
 
-#: ../../data/tribes/scripting/help/tips.lua:53
+#: ../../data/tribes/scripting/help/tips.lua:52
 msgid "Barbarians"
 msgstr "Barbaarit"
 
-#: ../../data/tribes/scripting/help/tips.lua:56
+#: ../../data/tribes/scripting/help/tips.lua:55
 msgid "Empire"
 msgstr "Keisarikunta"
 
-#: ../../data/tribes/scripting/help/tips.lua:62
+#: ../../data/tribes/scripting/help/tips.lua:61
 msgid "Single Player"
 msgstr "Yksinpeli"
 
-#: ../../data/tribes/scripting/help/tips.lua:65
+#: ../../data/tribes/scripting/help/tips.lua:64
 msgid "Multiplayer"
 msgstr "Moninpeli"
 
@@ -2314,73 +2329,69 @@ msgstr[1] "Työskentelee"
 msgid "Worker uses"
 msgstr "Työläinen käyttää"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:156
-msgid "Experience levels"
-msgstr "Taitotaso:"
-
 #. TRANSLATORS: Soldier levels
-#: ../../data/tribes/scripting/help/worker_help.lua:177
+#: ../../data/tribes/scripting/help/worker_help.lua:161
 msgid "Levels"
 msgstr "Tasot"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:179
+#: ../../data/tribes/scripting/help/worker_help.lua:163
 msgid "Health"
 msgstr "Terveys"
 
 #. TRANSLATORS: Soldier health / defense / evade points. A 5 digit number.
-#: ../../data/tribes/scripting/help/worker_help.lua:183
+#: ../../data/tribes/scripting/help/worker_help.lua:167
 msgid "Starts at %1% points."
 msgstr "Aloittaa arvosta %1% pistettä."
 
 #. TRANSLATORS: Soldier health / attack defense / evade points
-#: ../../data/tribes/scripting/help/worker_help.lua:186
-#: ../../data/tribes/scripting/help/worker_help.lua:197
+#: ../../data/tribes/scripting/help/worker_help.lua:170
+#: ../../data/tribes/scripting/help/worker_help.lua:181
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] "Korotetaan %1% pistettä jokaista taso kohden."
 msgstr[1] "Korotetaan %1% pistettä jokaista taso kohden."
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
-#: ../../data/tribes/scripting/help/worker_help.lua:189
-#: ../../data/tribes/scripting/help/worker_help.lua:199
-#: ../../data/tribes/scripting/help/worker_help.lua:209
-#: ../../data/tribes/scripting/help/worker_help.lua:224
+#: ../../data/tribes/scripting/help/worker_help.lua:173
+#: ../../data/tribes/scripting/help/worker_help.lua:183
+#: ../../data/tribes/scripting/help/worker_help.lua:193
+#: ../../data/tribes/scripting/help/worker_help.lua:208
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] "Korkein taso on %1%."
 msgstr[1] "Korkein taso on %1%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:191
+#: ../../data/tribes/scripting/help/worker_help.lua:175
 msgid "Attack"
 msgstr "Hyökkäys"
 
 #. TRANSLATORS: Points are 4 digit numbers.
-#: ../../data/tribes/scripting/help/worker_help.lua:194
+#: ../../data/tribes/scripting/help/worker_help.lua:178
 msgid "A random value between %1% and %2% points is added to each attack."
 msgstr "Satunnainen arvo %1% ja %2% pisteen väliltä lisätään jokaiseen hyökkäykseen."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:201
+#: ../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Defense"
 msgstr "Puolustus"
 
-#: ../../data/tribes/scripting/help/worker_help.lua:205
-#: ../../data/tribes/scripting/help/worker_help.lua:213
-#: ../../data/tribes/scripting/help/worker_help.lua:220
+#: ../../data/tribes/scripting/help/worker_help.lua:189
+#: ../../data/tribes/scripting/help/worker_help.lua:197
+#: ../../data/tribes/scripting/help/worker_help.lua:204
 #, lua-format
 msgid "Starts at %d%%."
 msgstr "Aloittaa arvosta %d%%."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:207
-#: ../../data/tribes/scripting/help/worker_help.lua:222
+#: ../../data/tribes/scripting/help/worker_help.lua:191
+#: ../../data/tribes/scripting/help/worker_help.lua:206
 #, lua-format
 msgid "Increased by %d%% for each level."
 msgstr "Korotetaan %d%% jokaista taso kohden."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:214
+#: ../../data/tribes/scripting/help/worker_help.lua:198
 msgid "This soldier cannot be trained in defense."
 msgstr "Tätä sotilasta ei voi kouluttaa puolustuksessa."
 
-#: ../../data/tribes/scripting/help/worker_help.lua:217
+#: ../../data/tribes/scripting/help/worker_help.lua:201
 msgid "Evade"
 msgstr "Väistely"
 

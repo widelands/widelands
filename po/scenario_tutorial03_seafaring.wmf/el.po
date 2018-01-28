@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# Panos Ioannidis <panos.ioannidis@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-30 12:41+0000\n"
-"PO-Revision-Date: 2016-11-30 12:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
+"PO-Revision-Date: 2018-01-24 17:47+0000\n"
+"Last-Translator: Panos Ioannidis <panos.ioannidis@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,53 +19,53 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:20
 msgid "Seafaring"
-msgstr ""
+msgstr "Ναυτιλία"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:22
 msgid "Seafaring Tutorial"
-msgstr ""
+msgstr "Εισαγωγή στην ναυτιλία"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:23
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr ""
+msgstr "Καλώς όρισες. Σε αυτήν την εισαγωγή, πρόκειται να μάθεις τα πιο σημαντικά πράγματα για την ναυτιλία, δηλαδή για τα καράβια, τα λιμάνια και την αποστολή έρευνας."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:24
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr ""
+msgstr "Πρώτα όμως επίτρεψέ μου να δώσω μια γενική εικόνα της περιοχής σου: εδώ στον νότο, έχεις μια ολόκληρη οικονομία που έχει σχεδόν ό,τι χρειαστείς."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:32
 msgid "The Northern Part"
-msgstr ""
+msgstr "Το Βόρειο Τμήμα"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:34
 msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr ""
+msgstr "Εδώ στο βόρειο τμήμα, έχεις μόνο ένα χρυσωρυχείο και μια αποθήκη. Οι μεταλλωρύχοι έχουν καλές προμήθειες φαγητού, όμως δεν υπάρχει τρόπος για να μεταφερθούν τα ψήγματα χρυσού στο μεταλλουργείο μας, στο νότιο τμήμα."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
-msgstr ""
+msgstr "Έχουμε προσπαθήσει να φτιάξουμε έναν δρόμο, αλλά το βουνό εκτείνεται σε μεγάλη απόσταση και είναι πολύ απότομο. Για τον λόγο αυτό έχουμε μόνο μία επιλογή: πρέπει να δημιουργήσουμε μία θαλάσσια οδό μεταξύ των δύο αυτών τμημάτων."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:36
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr ""
+msgstr "Δεν θέλω όμως να σε πιέσω: μόλις έχεις φτάσει εδώ και μάλλον θα θέλεις να δεις πιο προσεκτικά το στρατόπεδό σου. Θα κάνω και εγώ ένα σύντομο διάλειμμα και θα επιστρέψω σύντομα."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:45
 msgid "Ports"
-msgstr ""
+msgstr "Λιμάνια"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:46
 msgid ""
@@ -411,12 +412,12 @@ msgid ""
 "buildings there. There is also another island where you can build a port."
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:96
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
