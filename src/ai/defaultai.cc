@@ -3582,6 +3582,22 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		}
 	}
 
+	// Here we must consider how much are buildable fields lacking NOCOM
+	int32_t fields_necessity = 5;
+	if (spots_ < kSpotsTooLittle) {
+		fields_necessity += 10;
+	}
+	if (map_allows_seafaring_ && num_ports == 0)	{
+		fields_necessity += 10;
+	}
+	if (num_ports < 4)	{
+		fields_necessity += 10;
+	}
+	if (spots_ < kSpotsEnough){
+		fields_necessity += 5;
+	}
+	fields_necessity += std::abs(management_data.get_military_number_at(64)) * 10;
+
 	// We do not calculate roads to all nearby flags, ideally we investigate 4 roads, but the number
 	// can be higher if a road cannot be built to considered flag. The logic is: 2 points for
 	// possible
@@ -3595,7 +3611,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		Path path;
 
 		// value of pathcost is not important, it just indicates, that the path can be built
-		const int32_t pathcost = map.findpath(flag.get_position(), coords, 0, path, check);
+		const int32_t pathcost = map.findpath(flag.get_position(), coords, 0, path, check, 0, fields_necessity);
 		if (pathcost >= 0) {
 			RoadCandidates.road_possible(coords, path.get_nsteps());
 			count += 2;
@@ -3611,10 +3627,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		const Widelands::Coords target_coords = Coords::unhash(winner_hash);
 		Path& path = *new Path();
 #ifndef NDEBUG
-		const int32_t pathcost = map.findpath(flag.get_position(), target_coords, 0, path, check);
+		const int32_t pathcost = map.findpath(flag.get_position(), target_coords, 0, path, check, 0, fields_necessity);
 		assert(pathcost >= 0);
 #else
-		map.findpath(flag.get_position(), target_coords, 0, path, check);
+		map.findpath(flag.get_position(), target_coords, 0, path, check, 0, fields_necessity);
 #endif
 		game().send_player_build_road(player_number(), path);
 		return true;
