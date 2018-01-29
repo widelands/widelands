@@ -3596,7 +3596,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	if (spots_ < kSpotsEnough){
 		fields_necessity += 5;
 	}
-	fields_necessity += std::abs(management_data.get_military_number_at(64)) * 10;
+	fields_necessity *= std::abs(management_data.get_military_number_at(64)) * 5;
 
 	// We do not calculate roads to all nearby flags, ideally we investigate 4 roads, but the number
 	// can be higher if a road cannot be built to considered flag. The logic is: 2 points for
