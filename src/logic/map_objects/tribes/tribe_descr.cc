@@ -55,7 +55,9 @@ namespace Widelands {
   * The contents of 'table' are documented in
   * /data/tribes/atlanteans.lua
   */
-TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes)
+TribeDescr::TribeDescr(const LuaTable& table,
+                       const Widelands::TribeBasicInfo& info,
+                       const Tribes& init_tribes)
    : name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
 
 	try {
@@ -146,9 +148,8 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 			}
 		}
 
-		std::vector<std::string> immovables =
-		   table.get_table("immovables")->array_entries<std::string>();
-		for (const std::string& immovablename : immovables) {
+		for (const std::string& immovablename :
+		     table.get_table("immovables")->array_entries<std::string>()) {
 			try {
 				DescriptionIndex index = tribes_.safe_immovable_index(immovablename);
 				if (immovables_.count(index) == 1) {
@@ -221,6 +222,9 @@ const std::set<DescriptionIndex>& TribeDescr::wares() const {
 }
 const std::set<DescriptionIndex>& TribeDescr::workers() const {
 	return workers_;
+}
+const std::set<DescriptionIndex>& TribeDescr::immovables() const {
+	return immovables_;
 }
 
 bool TribeDescr::has_building(const DescriptionIndex& index) const {

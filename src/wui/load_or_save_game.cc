@@ -34,7 +34,6 @@
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/replay.h"
@@ -270,7 +269,7 @@ void LoadOrSaveGame::clicked_delete() {
 
 		UI::WLMessageBox confirmationBox(
 		   parent_->get_parent()->get_parent(),
-		   ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+		   ngettext("Confirm Deleting File", "Confirm Deleting Files", no_selections), message,
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
 	}
