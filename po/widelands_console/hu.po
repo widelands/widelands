@@ -4,15 +4,16 @@
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
 # GunChleoc, 2014
+# litoll <litoll@freemail.hu>, 2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-23 20:46+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-12-16 11:37+0000\n"
+"PO-Revision-Date: 2017-12-17 19:59+0000\n"
+"Last-Translator: litoll <litoll@freemail.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -189,6 +190,10 @@ msgstr "--xres=[...] Ablak szélessége pixelekkel megadva."
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr "--yres=[...] Ablak magassága pixelekkel megadva."
 
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands
+#. textdomain
 #: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Options for the internal window manager:"
@@ -197,7 +202,7 @@ msgstr "Options for the internal window manager:"
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr ""
+msgstr " --animate_map_panning=[yes|no]\n                      Az automatikus térkép mozgások animálva legyenek-e."
 
 #: ../../src/wlapplication_messages.cc:136
 msgid ""

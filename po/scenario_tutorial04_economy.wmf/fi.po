@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
+"PO-Revision-Date: 2018-01-21 16:54+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -199,9 +199,9 @@ msgstr "Nyt on sinun vuorosi"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:92
 msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know"
-" whether we still have taverns, so you have to choose the ‘Medium Buildings’"
+" whether we still have taverns, so you have to choose the ‘Medium buildings’"
 " tab. Close the building statistics menu afterwards."
-msgstr "Tässä on riittävästi selitystä tältä erää. Sinä saat kokeilla sitä nyt. Haluamme tietää onko meillä vielä krouveja, joten sinun täytyy valita ‘Keskikokoiset Rakennukset’ välilehti. Sulje rakennustilastot valikko sen jäljeen. "
+msgstr "Tämä selitys riittää tällä erää. Saat kokeilla sitä nyt itse. Haluamme tietää onko meillä vielä krouveja, joten sinun täytyy valita ‘Keskikokoiset rakennukset’ välilehti. Sulje rakennustilastot valikko sen jäljeen. "
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:95
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:98
@@ -209,8 +209,8 @@ msgid "Look up how many taverns you have."
 msgstr "Katso kuinka monta krouvia sinulla on."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
-msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
-msgstr "Valitse ‘Keskisuuret Rakennukset’ välilehti rakennustilastot ruudussa."
+msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
+msgstr "Valitse ‘Keskikokoiset rakennukset’ välilehti rakennustilastot ruudussa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
 msgid ""
@@ -308,7 +308,7 @@ msgstr "Toine välilehti näyttää sinulle kaikki työntekijäsi, jotka ovat te
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:156
 msgid "Now have a look at these two tabs. When you click on the"
-msgstr "Nyt olemme katsoneet noite kahta välilehteä. Kun painat"
+msgstr "Katso nyt noita kahta välilehteä. Kun painat"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:157
 msgid "third tab (‘Wares in warehouses’), I’ll continue."
@@ -511,8 +511,8 @@ msgid "I’ll continue as soon as you click on the"
 msgstr "Jatkan sen jälkeen kun klikkaat kuvaketta"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
-msgid "third tab (‘Economy Health’)."
-msgstr "kolmas välilehti (‘Talouden Kunto’)."
+msgid "third tab (‘Economy health’)."
+msgstr "kolmas välilehti (‘Talouden kunto’)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
 msgid "Switch to the third tab in the ware statistics menu window."
@@ -838,12 +838,12 @@ msgid ""
 "You can find it at:"
 msgstr "Tämä oli viimeinen opetuspeli, jonka olin valmistellut sinulle. Olen nyt opettanut sinulle kaikein minkä tiedän. Niiden lisäksi pelissä on silti piilotettuja salaisuuksia, joista minä en tidä mitään. Nyt aion etsiä itselleni hiljaisen paikan loppuelämäksi. Jos sinulla on vielä kysymyksiä, Widelands yhteisö varmastikin auttaa sinua. Löydät sen osoitteesta:"
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Uusi Tavoite"

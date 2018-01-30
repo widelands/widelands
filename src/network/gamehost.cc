@@ -44,7 +44,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
-#include "logic/map_objects/tribes/tribes.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
@@ -52,6 +52,7 @@
 #include "network/constants.h"
 #include "network/internet_gaming.h"
 #include "network/nethost.h"
+#include "network/nethostproxy.h"
 #include "network/network_gaming_messages.h"
 #include "network/network_lan_promotion.h"
 #include "network/network_player_settings_backend.h"
@@ -412,7 +413,7 @@ struct GameHostImpl {
 	HostGameSettingsProvider hp;
 	NetworkPlayerSettingsBackend npsb;
 
-	LanGamePromoter* promoter;
+	std::unique_ptr<LanGamePromoter> promoter;
 	std::unique_ptr<NetHostInterface> net;
 
 	/// List of connected clients. Note that clients are not in the same
@@ -459,7 +460,7 @@ struct GameHostImpl {
 	     chat(h),
 	     hp(h),
 	     npsb(&hp),
-	     promoter(nullptr),
+	     promoter(),
 	     net(),
 	     game(nullptr),
 	     pseudo_networktime(0),
@@ -480,21 +481,31 @@ GameHost::GameHost(const std::string& playername, bool internet)
    : d(new GameHostImpl(this)), internet_(internet), forced_pause_(false) {
 	log("[Host]: starting up.\n");
 
-	if (internet) {
-		InternetGaming::ref().open_game();
-	}
-
 	d->localplayername = playername;
 
 	// create a listening socket
-	d->net = NetHost::listen(kWidelandsLanPort);
-	if (d->net == nullptr) {
-		// This might happen when the widelands socket is already in use
-		throw WLWarning(_("Failed to start the server!"),
-		                _("Widelands could not start a server.\n"
-		                  "Probably some other process is already running a server on our port."));
+	if (internet) {
+		// No real listening socket. Instead, connect to the relay server
+		d->net = NetHostProxy::connect(InternetGaming::ref().ips(),
+		                               InternetGaming::ref().get_local_servername(),
+		                               InternetGaming::ref().relay_password());
+		if (d->net == nullptr) {
+			// Some kind of problem with the relay server. Bad luck :(
+			throw WLWarning(_("Failed to host the server!"),
+			                _("Widelands could not start hosting a server.\n"
+			                  "This should not happen and there is most likely "
+			                  "nothing you can do about it. Please report a bug."));
+		}
+	} else {
+		d->net = NetHost::listen(kWidelandsLanPort);
+		if (d->net == nullptr) {
+			// This might happen when the widelands socket is already in use
+			throw WLWarning(_("Failed to start the server!"),
+			                _("Widelands could not start a server.\n"
+			                  "Probably some other process is already running a server on our port."));
+		}
+		d->promoter.reset(new LanGamePromoter());
 	}
-	d->promoter = new LanGamePromoter();
 	d->game = nullptr;
 	d->pseudo_networktime = 0;
 	d->waiting = true;
@@ -525,7 +536,7 @@ GameHost::~GameHost() {
 
 	// close all open sockets
 	d->net.reset();
-	delete d->promoter;
+	d->promoter.reset();
 	delete d;
 	delete file_;
 }
@@ -941,8 +952,12 @@ bool GameHost::can_launch() {
 
 	// if there is one client that is currently receiving a file, we can not launch.
 	for (std::vector<Client>::iterator j = d->clients.begin(); j != d->clients.end(); ++j) {
-		if (!d->settings.users[j->usernum].ready)
+		if (j->usernum == -1) {
 			return false;
+		}
+		if (!d->settings.users[j->usernum].ready) {
+			return false;
+		}
 	}
 
 	// all players must be connected to a controller (human/ai) or be closed.
@@ -1173,7 +1188,7 @@ void GameHost::set_player_tribe(uint8_t const number,
 		actual_tribe = d->settings.tribes.at(random).name;
 	}
 
-	for (const TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
+	for (const Widelands::TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
 		if (temp_tribeinfo.name == player.tribe) {
 			player.tribe = actual_tribe;
 			if (temp_tribeinfo.initializations.size() <= player.initialization_index)
@@ -1200,7 +1215,7 @@ void GameHost::set_player_init(uint8_t const number, uint8_t const index) {
 	if (player.initialization_index == index)
 		return;
 
-	for (const TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
+	for (const Widelands::TribeBasicInfo& temp_tribeinfo : d->settings.tribes) {
 		if (temp_tribeinfo.name == player.tribe) {
 			if (index < temp_tribeinfo.initializations.size()) {
 				player.initialization_index = index;
@@ -1607,11 +1622,11 @@ void GameHost::welcome_client(uint32_t const number, std::string& playername) {
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_TRIBES);
 	packet.unsigned_8(d->settings.tribes.size());
-	for (const TribeBasicInfo& tribe : d->settings.tribes) {
+	for (const Widelands::TribeBasicInfo& tribe : d->settings.tribes) {
 		packet.string(tribe.name);
 		size_t const nr_initializations = tribe.initializations.size();
 		packet.unsigned_8(nr_initializations);
-		for (const TribeBasicInfo::Initialization& init : tribe.initializations)
+		for (const Widelands::TribeBasicInfo::Initialization& init : tribe.initializations)
 			packet.string(init.script);
 	}
 	d->net->send(client.sock_id, packet);
@@ -1896,8 +1911,9 @@ void GameHost::sync_report_callback() {
 
 void GameHost::handle_network() {
 
-	if (d->promoter != nullptr)
+	if (d->promoter) {
 		d->promoter->run();
+	}
 
 	// Check for new connections.
 	Client peer;
@@ -1929,11 +1945,12 @@ void GameHost::handle_network() {
 	}
 
 	// Check if we hear anything from our clients
-	RecvPacket packet;
 	for (size_t i = 0; i < d->clients.size(); ++i) {
 		try {
-			while (d->net->try_receive(d->clients.at(i).sock_id, &packet)) {
-				handle_packet(i, packet);
+			std::unique_ptr<RecvPacket> packet = d->net->try_receive(d->clients.at(i).sock_id);
+			while (packet) {
+				handle_packet(i, *packet);
+				packet = d->net->try_receive(d->clients.at(i).sock_id);
 			}
 			// Thrown by handle_packet()
 		} catch (const DisconnectException& e) {
