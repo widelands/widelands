@@ -909,7 +909,7 @@ void FlagsForRoads::Candidate::calculate_score() {
 }
 
 void FlagsForRoads::print() {  // this is for debugging and development purposes
-	for (auto& candidate_flag : queue) {
+	for (auto& candidate_flag : flags_queue) {
 		log("   %starget: %3dx%3d, saving: %5d (%3d), air distance: %3d, new road: %6d, score: %5d "
 		    "%s\n",
 		    (candidate_flag.reduction_score >= min_reduction && candidate_flag.new_road_possible) ?
@@ -927,7 +927,7 @@ void FlagsForRoads::print() {  // this is for debugging and development purposes
 // Queue is ordered but some target flags are only estimations so we take such a candidate_flag
 // first
 bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
-	for (auto& candidate_flag : queue) {
+	for (auto& candidate_flag : flags_queue) {
 		if (!candidate_flag.new_road_possible) {
 			*winner = candidate_flag.coords_hash;
 			return true;
@@ -938,65 +938,100 @@ bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
 
 // Road from starting flag to this flag can be built
 void FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) {
-	// std::set does not allow updating
-	Candidate new_candidate_flag = Candidate(0, 0, false);
-	for (auto candidate_flag : queue) {
+	for (auto& candidate_flag : flags_queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {
-			new_candidate_flag = candidate_flag;
-			assert(new_candidate_flag.coords_hash == candidate_flag.coords_hash);
-			queue.erase(candidate_flag);
-			break;
+			candidate_flag.new_road_length = distance;
+			candidate_flag.new_road_possible = true;
+			candidate_flag.calculate_score();
+			return;
 		}
 	}
-
-	new_candidate_flag.new_road_length = distance;
-	new_candidate_flag.new_road_possible = true;
-	new_candidate_flag.calculate_score();
-	queue.insert(new_candidate_flag);
+	NEVER_HERE();
 }
+
 
 // Remove the flag from candidates as interconnecting road is not possible
 void FlagsForRoads::road_impossible(Widelands::Coords coords) {
 	const uint32_t hash = coords.hash();
-	for (auto candidate_flag : queue) {
-		if (candidate_flag.coords_hash == hash) {
-			queue.erase(candidate_flag);
+	for (auto candidate_flag = flags_queue.begin(); candidate_flag != flags_queue.end(); ++candidate_flag) {
+		if ((*candidate_flag).coords_hash  == hash) {
+			flags_queue.erase(candidate_flag);
 			return;
 		}
 	}
+
+	NEVER_HERE();
 }
 
 // Updating walking distance over existing roads
 // Queue does not allow modifying its members so we erase and then eventually insert modified member
 void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance) {
-	const uint32_t hash = coords.hash();
-	Candidate new_candidate_flag = Candidate(0, 0, false);
-	bool replacing = false;
-	for (auto candidate_flag : queue) {
-		if (candidate_flag.coords_hash == hash) {
-			assert(!candidate_flag.different_economy);
-			if (distance < candidate_flag.current_roads_distance) {
-				new_candidate_flag = candidate_flag;
-				queue.erase(candidate_flag);
-				replacing = true;
-				break;
-			}
-			break;
+	for (auto& candidate_flag : flags_queue) {
+		if (candidate_flag.coords_hash == coords.hash()) {
+			candidate_flag.new_road_length = distance;
+			candidate_flag.accessed_via_roads = true;
+			candidate_flag.calculate_score();
+			//printf ("Road distance re-set\n");
+			return;
 		}
+		//printf ("Hashes does not match %8d vs %8d\n", hash, (*candidate_flag).coords_hash);
 	}
-	if (replacing) {
-		new_candidate_flag.current_roads_distance = distance;
-		new_candidate_flag.accessed_via_roads = true;
-		new_candidate_flag.calculate_score();
-		queue.insert(new_candidate_flag);
-	}
+	//printf ("Road distance rcould not be e-set\n");
 }
+
+//// Updating walking distance over existing roads
+//// Queue does not allow modifying its members so we erase and then eventually insert modified member
+//void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance) {
+	//const uint32_t hash = coords.hash();
+	////Candidate new_candidate_flag = Candidate(0, 0, false);
+	////bool replacing = false;
+	//for (auto candidate_flag = flags_queue.begin(); candidate_flag != flags_queue.end(); ++candidate_flag) {
+		//if ((*candidate_flag).coords_hash  == hash) {
+			//assert(!(*candidate_flag).different_economy);
+			//if (distance < (*candidate_flag).current_roads_distance) {
+				//(*candidate_flag).current_roads_distance = distance;
+				//(*candidate_flag).accessed_via_roads = true;
+				//(*candidate_flag).calculate_score();
+			//}
+			//printf ("Road distance re-set\n");
+			//return;
+		//}
+		////printf ("Hashes does not match %8d vs %8d\n", hash, (*candidate_flag).coords_hash);
+	//}
+	//printf ("Road distance rcould not be e-set\n");
+//}
+
+//// Updating walking distance over existing roads
+//// Queue does not allow modifying its members so we erase and then eventually insert modified member
+//void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance) {
+	//const uint32_t hash = coords.hash();
+	//Candidate new_candidate_flag = Candidate(0, 0, false);
+	//bool replacing = false;
+	//for (auto candidate_flag : queue) {
+		//if (candidate_flag.coords_hash == hash) {
+			//assert(!candidate_flag.different_economy);
+			//if (distance < candidate_flag.current_roads_distance) {
+				//new_candidate_flag = candidate_flag;
+				//queue.erase(candidate_flag);
+				//replacing = true;
+				//break;
+			//}
+			//break;
+		//}
+	//}
+	//if (replacing) {
+		//new_candidate_flag.current_roads_distance = distance;
+		//new_candidate_flag.accessed_via_roads = true;
+		//new_candidate_flag.calculate_score();
+		//queue.insert(new_candidate_flag);
+	//}
+//}
 
 bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 	// If AI can ask for 2nd position, but there is only one viable candidate
 	// we return the first one of course
 	bool has_winner = false;
-	for (auto candidate_flag : queue) {
+	for (auto candidate_flag : flags_queue) {
 		if (candidate_flag.reduction_score < min_reduction || !candidate_flag.new_road_possible) {
 			continue;
 		}

@@ -3332,9 +3332,9 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	uint8_t pathcounts = 0;
 	uint8_t checkradius = 0;
 	if (spots_ > kSpotsEnough) {
-		checkradius = 7;
+		checkradius = 10;
 	} else if (spots_ > kSpotsTooLittle) {
-		checkradius = 11;
+		checkradius = 12;
 	} else {
 		checkradius = 15;
 	}
@@ -3401,6 +3401,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      int16_t min_reduction,
                                      int32_t gametime) {
 
+	printf("x1\n");
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
 	EconomyObserver* eco = get_economy_observer(flag.economy());
@@ -3415,6 +3416,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		eco->dismantle_grace_time = std::numeric_limits<int32_t>::max();
 	}
 
+	printf("x100\n");
 	// first we deal with situations when this is economy with no warehouses
 	// and this is a flag belonging to a building/constructionsite
 	// such economy must get dismantle grace time (if not set yet)
@@ -3485,6 +3487,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	const Map& map = game().map();
 
+	printf("x200\n");
 	// initializing new object of FlagsForRoads, we will push there all candidate flags
 	Widelands::FlagsForRoads RoadCandidates(min_reduction);
 
@@ -3528,7 +3531,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			RoadCandidates.add_flag(reachable_coords, air_distance, different_economy);
 		}
 	}
-
+	printf("x300\n");
 	// now we walk over roads and if field is reachable by roads, we change the distance assigned
 	// above
 	std::priority_queue<NearFlag> queue;
@@ -3571,7 +3574,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			queue.push(NearFlag(*endflag, nf.cost + road->get_path().get_nsteps(), dist));
 		}
 	}
-
+printf("x600\n");
 	// Sending calculated walking costs from nearflags to RoadCandidates to update info on
 	// Candidate flags/roads
 	for (auto& nf_walk : nearflags) {
@@ -3597,7 +3600,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		fields_necessity += 5;
 	}
 	fields_necessity *= std::abs(management_data.get_military_number_at(64)) * 5;
-
 	// We do not calculate roads to all nearby flags, ideally we investigate 4 roads, but the number
 	// can be higher if a road cannot be built to considered flag. The logic is: 2 points for
 	// possible
@@ -3605,6 +3607,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// roads without finding any possible
 	uint32_t count = 0;
 	uint32_t current = 0;  // hash of flag that we are going to calculate in the iteration
+	// let sort candidate flags by their air distance
+	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue));
+
 	while (count < 10 && RoadCandidates.get_best_uncalculated(&current)) {
 		const Widelands::Coords coords = Coords::unhash(current);
 
@@ -3621,9 +3626,24 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		}
 	}
 
+
+	//NOCOM
+	std::sort(RoadCandidates.flags_queue.begin(), RoadCandidates.flags_queue.end(), [](FlagsForRoads::Candidate a, FlagsForRoads::Candidate b) {
+        return a.new_road_length < b.new_road_length;
+    });
+	printf ("listing air distance\n");
+		for (auto& candidate_flag : RoadCandidates.flags_queue) {
+			printf ("%3dx%3d: Air distance: %3d, road distance: %4d, reduction %5d, new road %s possible\n",
+			Coords::unhash(candidate_flag.coords_hash).x,
+			Coords::unhash(candidate_flag.coords_hash).y,
+			 candidate_flag.air_distance, candidate_flag.new_road_length, candidate_flag.reduction_score,  (candidate_flag.new_road_possible) ? "":"not");
+		}
+
+
 	// Well and finally building the winning road
 	uint32_t winner_hash = 0;
 	if (RoadCandidates.get_winner(&winner_hash)) {
+		printf (" OK we are building to flag %3dx%3d\n", Coords::unhash(winner_hash).x, Coords::unhash(winner_hash).y);
 		const Widelands::Coords target_coords = Coords::unhash(winner_hash);
 		Path& path = *new Path();
 #ifndef NDEBUG
@@ -3635,7 +3655,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		game().send_player_build_road(player_number(), path);
 		return true;
 	}
-
 	// if all possible roads skipped
 	if (last_attempt_) {
 		Building* bld = flag.get_building();
@@ -3650,7 +3669,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		return true;
 	}
 
+	printf("x999\n");
 	return false;
+
 }
 
 /**
