@@ -170,8 +170,7 @@ bool InternetGaming::do_login(bool should_relogin) {
 			if (state_ == LOBBY) {
 				if (!should_relogin) {
 					format_and_add_chat(
-					   "", "", true, _("For hosting a game, please take a look at the notes at:"));
-					format_and_add_chat("", "", true, "http://wl.widelands.org/wiki/InternetGaming");
+					   "", "", true, _("Users marked with IRC will possibly not react to messages."));
 				}
 
 				// Try to establish a second connection to tell the metaserver about our IPv4 address
@@ -537,21 +536,29 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			// Client received the new list of clients
 			uint8_t number = boost::lexical_cast<int>(packet.string()) & 0xff;
 			std::vector<InternetClient> old = clientlist_;
+			// Push IRC users to a second list and add them to the back
+			std::vector<InternetClient> irc;
 			clientlist_.clear();
 			log("InternetGaming: Received a client list update with %u items.\n", number);
+			InternetClient inc;
 			for (uint8_t i = 0; i < number; ++i) {
-				InternetClient* inc = new InternetClient();
-				inc->name = packet.string();
-				inc->build_id = packet.string();
-				inc->game = packet.string();
-				inc->type = packet.string();
-				inc->points = packet.string();
-				clientlist_.push_back(*inc);
+				inc.name = packet.string();
+				inc.build_id = packet.string();
+				inc.game = packet.string();
+				inc.type = packet.string();
+				inc.points = packet.string();
+				if (inc.build_id == "IRC") {
+					irc.push_back(inc);
+					// No "join" or "left" messages for IRC users
+					continue;
+				}
+				// No IRC client
+				clientlist_.push_back(inc);
 
 				bool found =
 				   old.empty();  // do not show all clients, if this instance is the actual change
 				for (InternetClient& client : old) {
-					if (client.name == inc->name) {
+					if (client.name == inc.name) {
 						found = true;
 						client.name = "";
 						break;
@@ -559,14 +566,12 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				}
 				if (!found)
 					format_and_add_chat(
-					   "", "", true, (boost::format(_("%s joined the lobby")) % inc->name).str());
-
-				delete inc;
-				inc = nullptr;
+					   "", "", true, (boost::format(_("%s joined the lobby")) % inc.name).str());
 			}
+			clientlist_.insert(clientlist_.end(), irc.begin(), irc.end());
 
 			for (InternetClient& client : old) {
-				if (client.name.size()) {
+				if (client.name.size() && client.build_id != "IRC") {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
 				}
@@ -800,8 +805,17 @@ void InternetGaming::send(const std::string& msg) {
 			   _("Message could not be sent: Was this supposed to be a private message?"));
 			return;
 		}
-		s.string(trimmed);                   // message
-		s.string(msg.substr(1, space - 1));  // recipient
+		std::string recipient = msg.substr(1, space - 1);
+		for (const InternetClient& client : clientlist_) {
+			if (recipient == client.name && client.build_id == "IRC") {
+				format_and_add_chat(
+				   "", "", true, _("Private messages to IRC users are not supported."));
+				return;
+			}
+		}
+
+		s.string(trimmed);    // message
+		s.string(recipient);  // recipient
 
 		format_and_add_chat(clientname_, msg.substr(1, space - 1), false, msg.substr(space + 1));
 
