@@ -32,8 +32,7 @@ function immovable_help_string(tribe, immovable_description)
 
    -- TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably want to lose the blank space here.
    local purpose_text = pgettext("sentence_separator", "%s %s"):bformat(immovable_helptext(), immovable_helptext(tribe.name))
-
-   local result = rt("image=" .. immovable_description.representative_image, p(purpose_text))
+   local result = li_image(immovable_description.representative_image, purpose_text)
 
    -- Build cost
    local buildcost = ""
@@ -45,17 +44,17 @@ function immovable_help_string(tribe, immovable_description)
    -- Space required
    local space_required = ""
    if (immovable_description.size == "small") then
-      space_required = space_required .. text_line(_"Space required:",_"Small plot","images/wui/overlays/small.png")
+      space_required = space_required .. image_line("images/wui/overlays/small.png", 1, _"Space required: " .. _"Small plot")
    elseif (immovable_description.size == "medium") then
-      space_required = space_required .. text_line(_"Space required:",_"Medium plot","images/wui/overlays/medium.png")
+      space_required = space_required .. image_line("images/wui/overlays/medium.png", 1, _"Space required: " .. _"Medium plot")
    elseif (immovable_description.size == "big") then
-      space_required = space_required .. text_line(_"Space required:",_"Big plot","images/wui/overlays/big.png")
+      space_required = space_required .. image_line("images/wui/overlays/big.png", 1, _"Space required: " .. _"Big plot")
    end
 
    if (buildcost ~= "" or space_required ~= "") then
-      result = result .. rt(spacer() .. h2(_"Requirements"))
+      result = result .. h2(_"Requirements")
       if (buildcost ~= "") then
-         result = result .. rt(h3(_"Build cost:")) .. buildcost
+         result = result .. h3(_"Build cost:") .. buildcost
       end
       result = result .. space_required
    end
@@ -64,7 +63,7 @@ function immovable_help_string(tribe, immovable_description)
    local affinity = immovable_description.terrain_affinity
    if (affinity ~= nil) then
       include "scripting/help.lua"
-      result = result .. rt(h2(_"Preferred Terrains"))
+      result = result .. h2(_"Preferred Terrains")
       result = result .. terrain_affinity_help(immovable_description)
    end
 

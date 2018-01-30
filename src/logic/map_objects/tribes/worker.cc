@@ -25,6 +25,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/economy.h"
@@ -419,6 +420,85 @@ bool Worker::run_findobject(Game& game, State& state, const Action& action) {
 }
 
 /**
+ * Care about the game.forester_cache_.
+ *
+ * Making the run_findspace routine shorter, by putting one special case into its own function.
+ * This gets called many times each time the forester searches for a place for a sapling.
+ * Since this already contains three nested for-loops, I dedided to cache the values for a
+ * cpu/memory tradeoff (hint: Widelands is pretty heavy on my oldish PC).
+ * Since the implementation details of double could vary between platforms, I decided to
+ * quantize the terrain goodness into int16_t. This lowers the footprint of the caching,
+ * and also makes desyncs caused by different floats horribly unlikely.
+ *
+ * The forester_cache_ is sparse, but then, lookups are fast.
+ *
+ * At the moment of writing, map changing is really infrequent (only in two scenarios)
+ * and even those do not affect this. However, since map changes are possible, this
+ * checks the reliability of the cached value with a small probability (~1%), If a
+ * disparency is found, the entire cache is nuked.
+ *
+ * If somebody in the future makes a scenario, where the land first is barren, and then
+ * spots of eden show up, the foresters will not immediately notice (because of the cache).
+ * They will eventually notice, and since the instance is shared between tribes,
+ * all foresters notice this at the same moment, also in network play. I hope this is okay.
+ *
+ */
+int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map, Game& game) {
+
+	std::vector<int16_t>& forester_cache = game.forester_cache_;
+	const unsigned vecsize = 1 + unsigned(map.max_index());
+	const MapIndex mi = map.get_index(pos, map.get_width());
+	const FCoords fpos = map.get_fcoords(pos);
+	// This if-statement should be true only once per game.
+	if (vecsize != forester_cache.size()) {
+		forester_cache.resize(vecsize, kInvalidForesterEntry);
+	}
+	int16_t cache_entry = forester_cache[mi];
+	bool x_check = false;
+	assert(cache_entry >= kInvalidForesterEntry);
+	if (cache_entry != kInvalidForesterEntry) {
+		if (0 == ((game.logic_rand()) & 0xfe)) {
+			// Cached value found, but exceptionally not trusted.
+			x_check = true;
+		} else {
+			// Found the terrain forestability, no more work to do
+			return cache_entry;
+		}
+	}
+
+	// Okay, I do not know whether this terrain suits. Let's obtain the value (and then cache it)
+
+	const DescriptionMaintainer<ImmovableDescr>& immovables = game.world().immovables();
+
+	// TODO(kxq): could the tree_sapling come from config? Currently, there is only one sparam..
+	// TODO(k.halfmann): avoid fetching this vlaues every time, as it is const during runtime?.
+	// This code is only executed at cache miss.
+	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
+
+	const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
+	double best = 0.0;
+	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
+		const ImmovableDescr& immovable_descr = immovables.get(i);
+		if (immovable_descr.has_attribute(attribute_id) && immovable_descr.has_terrain_affinity()) {
+			double probability =
+			   probability_to_grow(immovable_descr.terrain_affinity(), fpos, map, terrains);
+			if (probability > best) {
+				best = probability;
+			}
+		}
+	}
+	// normalize value to int16 range
+	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) * best;
+
+	if (x_check && (correct_val != cache_entry)) {
+		forester_cache.clear();
+		forester_cache.resize(vecsize, kInvalidForesterEntry);
+	}
+	forester_cache[mi] = correct_val;
+	return correct_val;
+}
+
+/**
  * findspace key:value key:value ...
  *
  * Find a node based on a number of predicates.
@@ -556,6 +636,22 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 
 	// Pick a location at random
 	state.coords = list[game.logic_rand() % list.size()];
+
+	// Special case: forester checks multiple locations instead of one.
+	if (1 < action.iparam6) {
+		// In the bug comments, somebody asked for unequal quality for the foresters of various
+		// tribes to find the best spot. Here stubborness is the number of slots to consider.
+		int stubborness = action.iparam6;
+		int16_t best = findspace_helper_for_forester(state.coords, map, game);
+		while (1 < stubborness--) {
+			const Coords altpos = list[game.logic_rand() % list.size()];
+			const int16_t alt_pos_goodness = findspace_helper_for_forester(altpos, map, game);
+			if (alt_pos_goodness > best) {
+				best = alt_pos_goodness;
+				state.coords = altpos;
+			}
+		}
+	}
 
 	++state.ivar1;
 	schedule_act(game, 10);
@@ -1303,7 +1399,7 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 	}
 
 	// Signal handling
-	std::string const signal = get_signal();
+	const std::string& signal = get_signal();
 
 	if (signal.size()) {
 		// The caller requested a route update, or the previously calculated route
@@ -1502,7 +1598,7 @@ void Worker::shipping_update(Game& game, State& state) {
 	PlayerImmovable* location = get_location(game);
 
 	// Signal handling
-	const std::string signal = get_signal();
+	const std::string& signal = get_signal();
 
 	if (signal.size()) {
 		if (signal == "endshipping") {
@@ -2211,7 +2307,7 @@ void Worker::start_task_leavebuilding(Game& game, bool const changelocation) {
 }
 
 void Worker::leavebuilding_update(Game& game, State& state) {
-	std::string const signal = get_signal();
+	const std::string& signal = get_signal();
 
 	if (signal == "wakeup")
 		signal_handled();
@@ -2542,11 +2638,192 @@ bool Worker::run_scout(Game& game, State& state, const Action& action) {
 	return true;
 }
 
+/** Setup scouts_worklist at the start of its task.
+ *
+ * The first element of scouts_worklist vector stores the location of my hut, at the time of
+ * creation.
+ * If the building location changes, then pop the now-obsolete list of points of interest
+ */
+void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
+
+	if (!scouts_worklist.empty()) {
+		if (map.calc_distance(scouts_worklist[0].scoutme, hutpos) != 0) {
+			// Hut has been relocated, I must rebuild the worklist
+			scouts_worklist.clear();
+		}
+	}
+
+	if (scouts_worklist.empty()) {
+		// Store the position of homebase
+		const PlaceToScout home(hutpos);
+		scouts_worklist.push_back(home);
+	} else if (1 < scouts_worklist.size()) {
+		// If there was an old place to visit in queue, remove it.
+		scouts_worklist.pop_back();
+	}
+}
+
+/** Check if militray sites have becom visible by now.
+ *
+ * After the pop in prepare_scouts_worklist,
+ * the latest entry of scouts_worklist is the next MS to visit (if known)
+ * Check whether it is still interesting (=whether it is still invisible)
+ */
+void Worker::check_visible_sites(const Map& map, const Player& player) {
+	while (1 < scouts_worklist.size()) {
+		if (scouts_worklist.back().randomwalk) {
+			return;  // Random walk never goes out of fashion.
+		} else {
+			MapIndex mt = map.get_index(scouts_worklist.back().scoutme, map.get_width());
+			if (1 < player.vision(mt)) {
+				// The military site is now visible. Either player
+				// has acquired possession of more military sites
+				// of own, or own folks are nearby.
+				scouts_worklist.pop_back();
+			} else {
+				return;
+			}
+		}
+	}
+}
+
+/** Make a plan which militar sites (if any) to visit.
+ *
+ * @param found_sites list of miliar sites to consider.
+ */
+void Worker::add_sites(Game& game,
+                       const Map& map,
+                       const Player& player,
+                       std::vector<ImmovableFound>& found_sites) {
+
+	// If there are many enemy sites, push a random walk request into queue evry third finding.
+	uint32_t haveabreak = 3;
+
+	for (const ImmovableFound& vu : found_sites) {
+		upcast(Flag, aflag, vu.object);
+		Building* a_building = aflag->get_building();
+		// Assuming that this always succeeds.
+		if (upcast(MilitarySite const, ms, a_building)) {
+			// This would be safe even if this assert failed: Own militarysites are always visible.
+			// However: There would be something wrong with FindForeignMilitarySite or associated
+			// code. Hence, let's keep the assert.
+			assert(&ms->owner() != &player);
+			const Coords buildingpos = a_building->get_positions(game)[0];
+			// Check the visibility: only invisible ones interest the scout.
+			MapIndex mx = map.get_index(buildingpos, map.get_width());
+			if (2 > player.vision(mx)) {
+				// The find_reachable_immovable sometimes returns multiple instances.
+				// TODO(kxq): Is that okay? This could be a performance issue elsewhere.
+				// Let's not add duplicates to my work list.
+				bool unique = true;
+				unsigned worklist_size = scouts_worklist.size();
+				for (unsigned t = 1; t < worklist_size; t++) {
+					if (buildingpos.x == scouts_worklist[t].scoutme.x &&
+					    buildingpos.y == scouts_worklist[t].scoutme.y) {
+						unique = false;
+						break;
+					}
+				}
+				if (unique) {
+					if (1 > --haveabreak) {
+						// If there are many MSs to visit, do a random walk in-between also.
+						haveabreak = 3;
+						const PlaceToScout randomwalk;
+						scouts_worklist.push_back(randomwalk);
+					}
+					// if vision is zero, blacked out.
+					// if vision is one, old info exists; unattackable.
+					// When entering here, the place is worth scouting.
+					const PlaceToScout go_there(buildingpos);
+					scouts_worklist.push_back(go_there);
+				}
+			}
+		}
+	}
+
+	// I suppose that this never triggers. Anyway. In savegame, I assume that the vector
+	// length fits to eight bits. If the entire search area of the scout is full of
+	// enemy military sites that are invisible to player, >254 would be possible.
+	// Therefore,
+	while (254 < scouts_worklist.size()) {
+		scouts_worklist.pop_back();
+	}
+	// (the limit is 254 not 255, since one randomwalk is unconditionally pushed in later)
+}
+
+/**
+ * Make scout walk random or lurking around some military site.
+ *
+ * Enemy military sites cannot be attacked, if those are not visible.
+ * However, Widelands workers are still somewhat aware of their presence. For example,
+ * Player does not acquire ownership of land, even if a militarysite blocking it is
+ * invisible. Therefore, it is IMO okay for the scout to be aware of those as well.
+ * Scout occasionally pays special attention to enemy military sites, to give the player
+ * an opportunity to attack. This is important, if the player can only build small huts
+ * and the enemy has one of the biggest ones: without scout, the player has no way of attacking.
+ */
 void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const time) {
 	push_task(game, taskScout);
 	State& state = top_state();
 	state.ivar1 = radius;
 	state.ivar2 = game.get_gametime() + time;
+
+	// The following code switches between two modes of operation:
+	// - Random walk
+	// - Lurking near an enemy military site.
+	// The code keeps track of interesting military sites, so that they all are visited.
+	// When the list of unvisited potential attack targets is exhausted, the list is rebuilt.
+	// The first element in the vector is special: It is used to store the location of the scout's
+	// hut at the moment of creation. If player dismantles the site and builds a new, the old
+	// points of interest are no longer valid and the list is cleared.
+	// Random remarks:
+	// Some unattackable military sites are also visited (like one under construction).
+	// Also, dismantled buildings may end up here. I do not consider these bugs, but if somebody
+	// reports, the behavior can always be altered.
+
+	const FCoords& bobpos = get_position();
+	assert(nullptr != bobpos.field);
+
+	// Some assumptions: When scout starts working, he is located in his hut.
+	// I cannot imagine any situations where this is not the case. However,
+	// such situation could trigger bugs.
+	const BaseImmovable* homebase = bobpos.field->get_immovable();
+	assert(nullptr != homebase);
+
+	const Coords hutpos = homebase->get_positions(game)[0];
+	const Map& map = game.map();
+	const Player& player = owner();
+
+	// The prepare-routine checks that the list or places to visit is still valid,
+	// plus pushes in the "first entry", which is used to x-check the validity.
+	prepare_scouts_worklist(map, hutpos);
+
+	// If an enemy military site has become visible, this removes it from the work list.
+	// Note that dismantled/burnt military sites are *not* removed from work list.
+	// These changes are still somewhat interesting.
+	// TODO(kxq): Ideally, if the military site has been dismantled/burnt, then the
+	// scout should not spend that long around, but revert to random walking after
+	// first visiting the dismantlesite/ruins.
+	check_visible_sites(map, player);
+
+	// Check whether there is still undone work in the queue,
+	// keeping in mind that 1st element of the vector is special
+	if (2 > scouts_worklist.size()) {
+		assert(!scouts_worklist.empty());
+		// If there was only one entry, worklist has been exhausted. Rebuild it.
+		// Time to find new places worth visiting.
+		Area<FCoords> revealations(map.get_fcoords(get_position()), state.ivar1);
+		std::vector<ImmovableFound> found_sites;
+		CheckStepWalkOn csteb(MOVECAPS_WALK, true);
+		map.find_reachable_immovables(
+		   revealations, &found_sites, csteb, FindFlagOf(FindForeignMilitarysite(player)));
+
+		add_sites(game, map, player, found_sites);
+
+		// Always push a "go-anywhere" -directive into work list.
+		const PlaceToScout gosomewhere;
+		scouts_worklist.push_back(gosomewhere);
+	}
 
 	// first get out
 	push_task(game, taskLeavebuilding);
@@ -2555,8 +2832,121 @@ void Worker::start_task_scout(Game& game, uint16_t const radius, uint32_t const 
 	stateLeave.objvar1 = &dynamic_cast<Building&>(*get_location(game));
 }
 
+bool Worker::scout_random_walk(Game& game, const Map& map, State& state) {
+
+	Coords oldest_coords = get_position();
+
+	std::vector<Coords> list;  //< List of interesting points
+	CheckStepDefault cstep(descr().movecaps());
+	FindNodeAnd ffa;
+	ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
+	Area<FCoords> exploring_area(map.get_fcoords(get_position()), state.ivar1);
+	Time oldest_time = game.get_gametime();
+
+	// if some fields can be reached
+	if (map.find_reachable_fields(exploring_area, &list, cstep, ffa) > 0) {
+		// Parse randomly the reachable fields, maximum 50 iterations
+		uint8_t iterations = list.size() % 51;
+		uint8_t oldest_distance = 0;
+		for (uint8_t i = 0; i < iterations; ++i) {
+			const std::vector<Coords>::size_type lidx = game.logic_rand() % list.size();
+			Coords const coord = list[lidx];
+			list.erase(list.begin() + lidx);
+			MapIndex idx = map.get_index(coord, map.get_width());
+			Vision const visible = owner().vision(idx);
+
+			// If the field is not yet discovered, go there
+			if (!visible) {
+				molog("[scout]: Go to interesting field (%i, %i)\n", coord.x, coord.y);
+				if (!start_task_movepath(
+				       game, coord, 0, descr().get_right_walk_anims(does_carry_ware()))) {
+					molog("[scout]: failed to reach destination\n");
+					return false;
+				} else {
+					return true;  // start_task_movepath was successfull.
+				}
+			}
+
+			// Else evaluate for second best target
+			int dist = map.calc_distance(coord, get_position());
+			Time time = owner().fields()[idx].time_node_last_unseen;
+			// time is only valid if visible is 1
+			if (visible != 1)
+				time = oldest_time;
+
+			if (dist > oldest_distance || (dist == oldest_distance && time < oldest_time)) {
+				oldest_distance = dist;
+				oldest_time = time;
+				oldest_coords = coord;
+			}
+		}
+
+		// All fields discovered, go to second choice target
+
+		if (oldest_coords != get_position()) {
+			molog(
+			   "[scout]: All fields discovered. Go to (%i, %i)\n", oldest_coords.x, oldest_coords.y);
+			if (!start_task_movepath(
+			       game, oldest_coords, 0, descr().get_right_walk_anims(does_carry_ware()))) {
+				molog("[scout]: Failed to reach destination\n");
+				return false;  // If failed go home
+			} else
+				return true;  // Start task movepath success.
+		}
+	}
+	// No reachable fields found.
+	molog("[scout]: nowhere to go!\n");
+	return false;
+}
+
+/** Make scout hang around an enemy military site.
+ *
+ */
+bool Worker::scout_lurk_around(Game& game, const Map& map, struct Worker::PlaceToScout& scoutat) {
+
+	Coords oldest_coords = get_position();
+
+	std::vector<Coords> surrounding_places;  // locations near the MS under inspection
+	CheckStepDefault cstep(descr().movecaps());
+	FindNodeAnd fna;
+	fna.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
+
+	// scoutat points to the enemy military site; walk in random at vicinity.
+	// First try some near-close fields. If no success then try some further off ones.
+	// This code is partially copied from scout_random_walk(); I did not check why
+	// start_task_movepath
+	// would fail. Therefore, the looping can be a bit silly to more knowledgeable readers.
+	for (unsigned vicinity = 1; vicinity < 4; vicinity++) {
+		Area<FCoords> exploring_area(map.get_fcoords(scoutat.scoutme), vicinity);
+		if (map.find_reachable_fields(exploring_area, &surrounding_places, cstep, fna) > 0) {
+			unsigned formax = surrounding_places.size();
+			if (3 + vicinity < formax) {
+				formax = 3 + vicinity;
+			}
+			for (uint8_t i = 0; i < formax; ++i) {
+				const std::vector<Coords>::size_type l_idx =
+				   game.logic_rand() % surrounding_places.size();
+				Coords const coord = surrounding_places[l_idx];
+				surrounding_places.erase(surrounding_places.begin() + l_idx);
+				// The variable name "oldest_coords" makes sense in the "random walk" branch.
+				// Here, it simply is the current position of the scout.
+				if (coord.x != oldest_coords.x || coord.y != oldest_coords.y) {
+					if (!start_task_movepath(
+					       game, coord, 0, descr().get_right_walk_anims(does_carry_ware()))) {
+						molog("[scout]: failed to reach destination (x)\n");
+						return false;
+					} else {
+						return true;  // start_task_movepath was successfull.
+					}
+				}
+			}
+		}
+	}
+	return false;
+}
+
 void Worker::scout_update(Game& game, State& state) {
-	std::string signal = get_signal();
+	const std::string& signal = get_signal();
 	molog("  Update Scout (%i time)\n", state.ivar2);
 
 	if (signal.size()) {
@@ -2566,72 +2956,38 @@ void Worker::scout_update(Game& game, State& state) {
 
 	const Map& map = game.map();
 
+	if (scouts_worklist.empty()) {
+		// This routine assumes that scouts_worklist is not empty. There is one exception:
+		// First call to this routine after loading an old savegame. The least-invasive
+		// way to acquire old savegame compatibility was to simply ask the scout to go home early,
+		// under this special situation. Anybody reading this,
+		// TODO(kxq): Please remove this code block (and compatibility_2017 code from load routine)
+		// once Build 20 is out. Thanks.
+		log("Warning: sending scout home. Assuming the game was just started, from savegame, in "
+		    "compatibility mode.\n");
+		pop_task(game);
+		schedule_act(game, 10);
+		return;
+	}
+
+	bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0;
+
+	// do not pop; this function is called many times per run.
+	struct PlaceToScout scoutat = scouts_worklist.back();
+
 	// If not yet time to go home
-	if (static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0) {
-		std::vector<Coords> list;  //< List of interesting points
-		CheckStepDefault cstep(descr().movecaps());
-		FindNodeAnd ffa;
-		ffa.add(FindNodeImmovableSize(FindNodeImmovableSize::sizeNone), false);
-		Area<FCoords> exploring_area(map.get_fcoords(get_position()), state.ivar1);
-		Coords oldest_coords = get_position();
-		Time oldest_time = game.get_gametime();
-
-		// if some fields can be reached
-		if (map.find_reachable_fields(exploring_area, &list, cstep, ffa) > 0) {
-			// Parse randomly the reachable fields, maximum 50 iterations
-			uint8_t iterations = list.size() % 51;
-			uint8_t oldest_distance = 0;
-			for (uint8_t i = 0; i < iterations; ++i) {
-				const std::vector<Coords>::size_type lidx = game.logic_rand() % list.size();
-				Coords const coord = list[lidx];
-				list.erase(list.begin() + lidx);
-				MapIndex idx = map.get_index(coord, map.get_width());
-				Vision const visible = owner().vision(idx);
-
-				// If the field is not yet discovered, go there
-				if (!visible) {
-					molog("[scout]: Go to interesting field (%i, %i)\n", coord.x, coord.y);
-					if (!start_task_movepath(
-					       game, coord, 0, descr().get_right_walk_anims(does_carry_ware())))
-						molog("[scout]: failed to reach destination\n");
-					else
-						return;  // start_task_movepath was successfull.
-				}
-
-				// Else evaluate for best second target
-				int dist = map.calc_distance(coord, get_position());
-				Time time = owner().fields()[idx].time_node_last_unseen;
-				// time is only valid if visible is 1
-				if (visible != 1)
-					time = oldest_time;
-
-				if (dist > oldest_distance || (dist == oldest_distance && time < oldest_time)) {
-					oldest_distance = dist;
-					oldest_time = time;
-					oldest_coords = coord;
-				}
-			}
-			// All fields discovered, go to second choice target
-
-			if (oldest_coords != get_position()) {
-				molog("[scout]: All fields discovered. Go to (%i, %i)\n", oldest_coords.x,
-				      oldest_coords.y);
-
-				if (!start_task_movepath(
-				       game, oldest_coords, 0, descr().get_right_walk_anims(does_carry_ware())))
-					molog("[scout]: Failed to reach destination\n");
-				else
-					return;  // Start task movepath success.
-				            // If failed go home
-			}
+	if (do_run) {
+		if (scoutat.randomwalk) {
+			if (scout_random_walk(game, map, state))
+				return;
+		} else {
+			if (scout_lurk_around(game, map, scoutat))
+				return;
 		}
-		// No reachable fields found.
-		molog("[scout]: nowhere to go!\n");
 	}
 	// time to go home or found nothing to go to
 	pop_task(game);
 	schedule_act(game, 10);
-	return;
 }
 
 void Worker::draw_inner(const EditorGameBase& game,
@@ -2667,7 +3023,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 2;
+constexpr uint8_t kCurrentPacketVersion = 3;
 
 Worker::Loader::Loader() : location_(0), carried_ware_(0) {
 }
@@ -2676,7 +3032,11 @@ void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		// TODO(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) after B20
+		// TODO(kxq): Also remove the code fragment from Worker::scout_update with compatibility_2017
+		// in comment.
+		bool compatibility_2017 = 2 == packet_version;
+		if (packet_version == kCurrentPacketVersion || compatibility_2017) {
 
 			Worker& worker = get<Worker>();
 			location_ = fr.unsigned_32();
@@ -2687,6 +3047,27 @@ void Worker::Loader::load(FileRead& fr) {
 				worker.transfer_ = new Transfer(dynamic_cast<Game&>(egbase()), worker);
 				worker.transfer_->read(fr, transfer_);
 			}
+			unsigned veclen;
+			// TODO(kxq): Remove compatibility_2017 associated code from here and above,
+			// after build 20 has been released.
+			if (compatibility_2017) {
+				veclen = 0;
+			} else {
+				veclen = fr.unsigned_8();
+			}
+			for (unsigned q = 0; q < veclen; q++) {
+				if (fr.unsigned_8()) {
+					const PlaceToScout gsw;
+					worker.scouts_worklist.push_back(gsw);
+				} else {
+					const int16_t x = fr.signed_16();
+					const int16_t y = fr.signed_16();
+					Coords peekpos = Coords(x, y);
+					const PlaceToScout gtt(peekpos);
+					worker.scouts_worklist.push_back(gtt);
+				}
+			}
+
 		} else {
 			throw UnhandledVersionError("Worker", packet_version, kCurrentPacketVersion);
 		}
@@ -2832,6 +3213,19 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 		transfer_->write(mos, fw);
 	} else {
 		fw.unsigned_8(0);
+	}
+
+	fw.unsigned_8(scouts_worklist.size());
+	for (auto p : scouts_worklist) {
+		if (p.randomwalk) {
+			fw.unsigned_8(1);
+		} else {
+			fw.unsigned_8(0);
+			// Is there a better way to save Coords? This makes
+			// unnecessary assumptions of the internals of Coords
+			fw.signed_16(p.scoutme.x);
+			fw.signed_16(p.scoutme.y);
+		}
 	}
 }
 }

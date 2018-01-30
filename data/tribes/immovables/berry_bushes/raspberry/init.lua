@@ -1,4 +1,4 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 terrain_affinity = {
    preferred_temperature = 75,
@@ -24,8 +24,9 @@ tribes:new_immovable_type {
    },
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "tiny/idle_??.png"),
-         hotspot = { 7, 16 },
+         pictures = path.list_files (dirname .. "tiny/idle_?.png"),
+         hotspot = {21, 36},
+         scale = 3,
       },
    },
 }
@@ -47,8 +48,9 @@ tribes:new_immovable_type {
    },
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "small/idle_??.png"),
-         hotspot = { 15, 33 }
+         pictures = path.list_files (dirname .. "small/idle_?.png"),
+         hotspot = {21, 36},
+         scale = 3,
       },
    },
 }
@@ -70,8 +72,9 @@ tribes:new_immovable_type {
    },
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "medium/idle_??.png"),
-         hotspot = { 15, 33 },
+         pictures = path.list_files (dirname .. "medium/idle_?.png"),
+         hotspot = {21, 36},
+         scale = 3,
       },
    },
 }
@@ -95,8 +98,9 @@ tribes:new_immovable_type {
    },
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "ripe/idle_??.png"),
-         hotspot = { 15, 33 },
+         pictures = path.list_files (dirname .. "ripe/idle_?.png"),
+         hotspot = {21, 36},
+         scale = 3,
       },
    },
 }

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-10 16:38+0000\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2017\n"
 "Language-Team: English (United Kingdom) (https://www.transifex.com/widelands/teams/35159/en_GB/)\n"
@@ -434,6 +434,9 @@ msgid ""
 "his new power. His selfish instincts were as awful as his complete stupidity"
 " and inability to govern the city."
 msgstr ""
+"But this was one of his worst decisions ever. The secretary got blinded by "
+"his new power. His selfish instincts were as awful as his complete stupidity"
+" and inability to govern the city."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:269
 msgid ""
@@ -441,6 +444,9 @@ msgid ""
 "Afterwards, they elected me as mayor of this city. However, recovering from "
 "the chaos seems to be a task too big for my abilities."
 msgstr ""
+"After a while, the people discovered the truth and expelled the utter fool. "
+"Afterwards, they elected me as mayor of this city. However, recovering from "
+"the chaos seems to be a task too big for my abilities."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:277
 msgid "Amalea Looks Puzzled"
@@ -509,6 +515,10 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
+"Additionally, we should restrict the input of all buildings which consume "
+"any of our building materials to zero. Or maybe we could even pause the "
+"production in all bigger buildings and give the workers some rest until we "
+"have produced some of their input wares."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:304
 msgid "Amalea has Bad News"
@@ -794,6 +804,9 @@ msgid ""
 "the wares. In particular, we will need to shorten the supply to our mines "
 "drastically. This will give us a real drawback in metal production."
 msgstr ""
+"The only problem might be that it will take significant time to collect all "
+"the wares. In particular, we will need to shorten the supply to our mines "
+"drastically. This will be a real drawback in metal production."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:443
 msgid "Amalea Looks Sad"
@@ -1253,6 +1266,9 @@ msgid ""
 "But first of all we should have a beer or two to celebrate our victory and "
 "our reclaimed freedom."
 msgstr ""
+"Now it is time to find out how this big mess around us could have happened. "
+"But first of all we should have a beer or two to celebrate our victory and "
+"our reclaimed freedom."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:673
 msgid "The Enemy is Near"
@@ -1324,12 +1340,12 @@ msgid ""
 "family from the face of the earth!"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
