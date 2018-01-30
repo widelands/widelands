@@ -381,13 +381,20 @@ void DefaultAI::think() {
 			}
 			break;
 		case SchedulerTaskId::kCheckShips:
-			set_taskpool_task_time(gametime + 3 * kShipCheckInterval, SchedulerTaskId::kCheckShips);
-			check_ships(gametime);
+			// if function returns false, we can postpone next call
+			{
+				const uint8_t wait_multiplier = (check_ships(gametime)) ? 1 : 5;
+				set_taskpool_task_time(
+				   gametime + wait_multiplier * kShipCheckInterval, SchedulerTaskId::kCheckShips);
+			}
 			break;
 		case SchedulerTaskId::KMarineDecisions:
-			set_taskpool_task_time(
-			   gametime + kMarineDecisionInterval, SchedulerTaskId::KMarineDecisions);
-			marine_main_decisions();
+			// if function returns false, we can postpone for next call
+			{
+				const uint8_t wait_multiplier = (marine_main_decisions()) ? 1 : 5;
+				set_taskpool_task_time(gametime + wait_multiplier * kMarineDecisionInterval,
+				                       SchedulerTaskId::KMarineDecisions);
+			}
 			break;
 		case SchedulerTaskId::kCheckMines:
 			if (check_economies()) {  // economies must be consistent
