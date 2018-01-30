@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-16 17:26+0000\n"
-"PO-Revision-Date: 2018-01-16 19:46+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,6 +73,19 @@ msgstr "%1$s, %2$s"
 msgid "%1$s and %2$s"
 msgstr "%1$s ja %2$s"
 
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. TRANSLATORS: Terrain name (Climate)
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1067
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
+
+#. TRANSLATORS: Help text - Probability to grow for an immovable
+#: ../../data/scripting/help.lua:48
+#, lua-format
+msgid "%2.1f%%"
+msgstr ""
+
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:160
 msgid "No Space"
@@ -88,6 +101,15 @@ msgstr "Joillekin aloitusrakennuksistasi ei ollut tarpeeksi tilaa ja niitä ei r
 #: ../../data/scripting/infrastructure.lua:162
 msgid "Not enough space"
 msgstr "Ei tarpeeksi tilaa"
+
+#. TRANSLATORS: Put 2 sentences one after the other.
+#. TRANSLATORS: Languages using Chinese script probably want to lose the blank
+#. space here.
+#: ../../data/scripting/richtext.lua:459
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -1065,7 +1087,7 @@ msgstr "Tallennustiedosto ei ole yhteensopiva tämän Widelands-version kanssa."
 msgid "No description defined"
 msgstr "Kuvausta ei määritelty"
 
-#: ../../src/logic/map_objects/immovable.cc:515
+#: ../../src/logic/map_objects/immovable.cc:518
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
@@ -1452,16 +1474,16 @@ msgid ""
 "compatible with world"
 msgstr "pitäisi kasvattaa resurssia tyyppiä %s, joka ei esiinny maailmassa; heimo ei ole yhteensopiva maailman kanssa"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:887
+#: ../../src/logic/map_objects/tribes/worker.cc:884
 msgid "A geologist found resources."
 msgstr "Geologi löysi kaivettavaa."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1774
+#: ../../src/logic/map_objects/tribes/worker.cc:1771
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Sinun %s ei löydä reittiä kotiin ja todennäköisesti kuolee."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1780
+#: ../../src/logic/map_objects/tribes/worker.cc:1777
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1469,7 +1491,7 @@ msgid_plural "Workers"
 msgstr[0] "Työläinen"
 msgstr[1] "Työläiset"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1781
+#: ../../src/logic/map_objects/tribes/worker.cc:1778
 msgid "Worker got lost!"
 msgstr "Työläinen eksyi!"
 
@@ -2091,12 +2113,6 @@ msgstr "ei"
 #: ../../src/profile/profile.cc:64
 msgid "off"
 msgstr "pois"
-
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1067
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
 
 #: ../../src/ui_basic/dropdown.cc:81 ../../src/ui_basic/dropdown.cc:240
 msgctxt "dropdown"

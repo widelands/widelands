@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-16 17:26+0000\n"
-"PO-Revision-Date: 2018-01-20 12:41+0000\n"
-"Last-Translator: AhaNkem Obi <litoretura@gmail.com>\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Igbo (http://www.transifex.com/widelands/widelands/language/ig/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,6 +66,19 @@ msgstr ""
 msgid "%1$s and %2$s"
 msgstr ""
 
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. TRANSLATORS: Terrain name (Climate)
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1067
+msgid "%1% (%2%)"
+msgstr ""
+
+#. TRANSLATORS: Help text - Probability to grow for an immovable
+#: ../../data/scripting/help.lua:48
+#, lua-format
+msgid "%2.1f%%"
+msgstr ""
+
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:160
 msgid "No Space"
@@ -80,6 +93,15 @@ msgstr ""
 
 #: ../../data/scripting/infrastructure.lua:162
 msgid "Not enough space"
+msgstr ""
+
+#. TRANSLATORS: Put 2 sentences one after the other.
+#. TRANSLATORS: Languages using Chinese script probably want to lose the blank
+#. space here.
+#: ../../data/scripting/richtext.lua:459
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
@@ -1058,7 +1080,7 @@ msgstr ""
 msgid "No description defined"
 msgstr ""
 
-#: ../../src/logic/map_objects/immovable.cc:515
+#: ../../src/logic/map_objects/immovable.cc:518
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
@@ -1445,16 +1467,16 @@ msgid ""
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:887
+#: ../../src/logic/map_objects/tribes/worker.cc:884
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1774
+#: ../../src/logic/map_objects/tribes/worker.cc:1771
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1780
+#: ../../src/logic/map_objects/tribes/worker.cc:1777
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1462,7 +1484,7 @@ msgid_plural "Workers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1781
+#: ../../src/logic/map_objects/tribes/worker.cc:1778
 msgid "Worker got lost!"
 msgstr ""
 
@@ -2083,12 +2105,6 @@ msgstr ""
 #. console
 #: ../../src/profile/profile.cc:64
 msgid "off"
-msgstr ""
-
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1067
-msgid "%1% (%2%)"
 msgstr ""
 
 #: ../../src/ui_basic/dropdown.cc:81 ../../src/ui_basic/dropdown.cc:240

@@ -20,9 +20,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-16 17:26+0000\n"
-"PO-Revision-Date: 2018-01-17 10:53+0000\n"
-"Last-Translator: Elisabeth Jäger\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,6 +79,19 @@ msgstr "%1$s, %2$s"
 msgid "%1$s and %2$s"
 msgstr "%1$s und %2$s"
 
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. TRANSLATORS: Terrain name (Climate)
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1067
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
+
+#. TRANSLATORS: Help text - Probability to grow for an immovable
+#: ../../data/scripting/help.lua:48
+#, lua-format
+msgid "%2.1f%%"
+msgstr ""
+
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:160
 msgid "No Space"
@@ -94,6 +107,15 @@ msgstr "Einige deiner Startgebäude hatten nicht genug Platz und wurden nicht ge
 #: ../../data/scripting/infrastructure.lua:162
 msgid "Not enough space"
 msgstr "Nicht genug Platz"
+
+#. TRANSLATORS: Put 2 sentences one after the other.
+#. TRANSLATORS: Languages using Chinese script probably want to lose the blank
+#. space here.
+#: ../../data/scripting/richtext.lua:459
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -1071,7 +1093,7 @@ msgstr "Dieses Spiel wurde mit einer inkompatiblen Widelands-Version gespeichert
 msgid "No description defined"
 msgstr "Keine Beschreibung vorhanden"
 
-#: ../../src/logic/map_objects/immovable.cc:515
+#: ../../src/logic/map_objects/immovable.cc:518
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
@@ -1458,16 +1480,16 @@ msgid ""
 "compatible with world"
 msgstr "sollte Rohstoffe des Typs %s züchten, welche in dieser Welt nicht existieren; Stamm und Welt sind  inkompatibel"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:887
+#: ../../src/logic/map_objects/tribes/worker.cc:884
 msgid "A geologist found resources."
 msgstr "Ein Geologe hat Rohstoffe entdeckt."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1774
+#: ../../src/logic/map_objects/tribes/worker.cc:1771
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Dein %s findet keinen Weg heim und wird wahrscheinlich sterben."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1780
+#: ../../src/logic/map_objects/tribes/worker.cc:1777
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1475,7 +1497,7 @@ msgid_plural "Workers"
 msgstr[0] "Arbeiter"
 msgstr[1] "Arbeiter"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1781
+#: ../../src/logic/map_objects/tribes/worker.cc:1778
 msgid "Worker got lost!"
 msgstr "Ein Arbeiter ging verloren!"
 
@@ -2097,12 +2119,6 @@ msgstr "no"
 #: ../../src/profile/profile.cc:64
 msgid "off"
 msgstr "off"
-
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1067
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
 
 #: ../../src/ui_basic/dropdown.cc:81 ../../src/ui_basic/dropdown.cc:240
 msgctxt "dropdown"

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-16 17:26+0000\n"
-"PO-Revision-Date: 2018-01-22 22:24+0000\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-27 09:16+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -69,6 +69,19 @@ msgstr "%1$s, %2$s"
 msgid "%1$s and %2$s"
 msgstr "%1$s i %2$s"
 
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. TRANSLATORS: Terrain name (Climate)
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1067
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
+
+#. TRANSLATORS: Help text - Probability to grow for an immovable
+#: ../../data/scripting/help.lua:48
+#, lua-format
+msgid "%2.1f%%"
+msgstr "%2.1f%%"
+
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:160
 msgid "No Space"
@@ -84,6 +97,15 @@ msgstr "No hi havia prou espai per als vostres edificis inicials i no s'han cons
 #: ../../data/scripting/infrastructure.lua:162
 msgid "Not enough space"
 msgstr "No hi ha prou espai"
+
+#. TRANSLATORS: Put 2 sentences one after the other.
+#. TRANSLATORS: Languages using Chinese script probably want to lose the blank
+#. space here.
+#: ../../data/scripting/richtext.lua:459
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr "%s %s"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -242,7 +264,7 @@ msgstr "Jugadors"
 #: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show building spaces (on/off)"
-msgstr "Mostra els espais per construir (activat/desactivat)"
+msgstr "Mostra els espais de construcció (activat/desactivat)"
 
 #: ../../src/editor/editorinteractive.cc:102
 msgid "Show immovables (on/off)"
@@ -1061,7 +1083,7 @@ msgstr "La partida es va crear usant una versió diferent del Widelands i actual
 msgid "No description defined"
 msgstr "Sense descripció"
 
-#: ../../src/logic/map_objects/immovable.cc:515
+#: ../../src/logic/map_objects/immovable.cc:518
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
@@ -1448,16 +1470,16 @@ msgid ""
 "compatible with world"
 msgstr "hauria de criar %s, que no existeix en aquest món; la cultura no és compatible amb aquest món"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:887
+#: ../../src/logic/map_objects/tribes/worker.cc:884
 msgid "A geologist found resources."
 msgstr "Un geòleg ha trobat recursos."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1774
+#: ../../src/logic/map_objects/tribes/worker.cc:1771
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "El vostre %s no pot trobar un camí a casa i és probable que mori."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1780
+#: ../../src/logic/map_objects/tribes/worker.cc:1777
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1465,7 +1487,7 @@ msgid_plural "Workers"
 msgstr[0] "Treballador"
 msgstr[1] "Treballadors"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1781
+#: ../../src/logic/map_objects/tribes/worker.cc:1778
 msgid "Worker got lost!"
 msgstr "El treballador s'ha perdut!"
 
@@ -2087,12 +2109,6 @@ msgstr "no"
 #: ../../src/profile/profile.cc:64
 msgid "off"
 msgstr "off"
-
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1067
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
 
 #: ../../src/ui_basic/dropdown.cc:81 ../../src/ui_basic/dropdown.cc:240
 msgctxt "dropdown"
