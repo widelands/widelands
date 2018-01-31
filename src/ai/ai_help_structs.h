@@ -255,14 +255,14 @@ struct NearFlag {
 	// ordering nearflags by biggest reduction
 	struct CompareShortening {
 		bool operator()(const NearFlag& a, const NearFlag& b) const {
-			return (a.cost - a.distance) > (b.cost - b.distance);
+			return (a.current_road_distance - a.air_distance) > (b.current_road_distance - b.air_distance);
 		}
 	};
-
+	NearFlag();
 	NearFlag(const Flag& f, int32_t const c, int32_t const d);
 
 	bool operator<(const NearFlag& f) const {
-		return cost > f.cost;
+		return current_road_distance > f.current_road_distance;
 	}
 
 	bool operator==(Flag const* const f) const {
@@ -270,8 +270,9 @@ struct NearFlag {
 	}
 
 	Flag const* flag;
-	int32_t cost;
-	int32_t distance;
+	bool to_be_checked;
+	uint32_t current_road_distance;
+	int32_t air_distance;
 };
 
 // FIFO like structure for pairs <gametime,id>, where id is optional
@@ -735,7 +736,7 @@ struct FlagsForRoads {
 
 		uint32_t coords_hash;
 		int32_t new_road_length;
-		int32_t current_roads_distance;
+		int32_t current_road_distance;
 		int32_t air_distance;
 		int32_t reduction_score;
 		bool different_economy;
@@ -758,18 +759,20 @@ struct FlagsForRoads {
 	uint32_t count() {
 		return flags_queue.size();
 	}
+	bool has_candidate(const uint32_t hash);
 
 	// This is for debugging and development purposes
 	void print();
 	// during processing we need to pick first one uprocessed flag (with best score so far)
 	bool get_best_uncalculated(uint32_t* winner);
 	// When we test candidate flag if road can be built to it, there are two possible outcomes:
-	void road_possible(Widelands::Coords coords, uint32_t distance);
+	void road_possible(Widelands::Coords coords, const uint32_t new_road);
 	void road_impossible(Widelands::Coords coords);
 	// Updating walking distance over existing roads
-	void set_road_distance(Widelands::Coords coords, int32_t distance);
+	void set_cur_road_distance(Widelands::Coords coords, const int32_t cur_distance);
 	// Finally we query the flag that we will build a road to
 	bool get_winner(uint32_t* winner_hash);
+	int32_t get_candidate_score(const uint32_t hash);
 };
 
 // This is a struct that stores strength of players, info on teams and provides some outputs from

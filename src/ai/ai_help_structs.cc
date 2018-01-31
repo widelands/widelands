@@ -192,7 +192,15 @@ bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 }
 
 NearFlag::NearFlag(const Flag& f, int32_t const c, int32_t const d)
-   : flag(&f), cost(c), distance(d) {
+   : flag(&f), current_road_distance(c), air_distance(d) {
+	to_be_checked = true;
+}
+
+NearFlag::NearFlag() {
+	flag = nullptr;
+	current_road_distance = 0;
+	air_distance = 0;
+	to_be_checked = true;
 }
 
 EventTimeQueue::EventTimeQueue() {
@@ -876,7 +884,7 @@ FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool econ
 	accessed_via_roads = false;
 	// Values are only very rough, and are dependant on the map size
 	new_road_length = 2 * Widelands::kMapDimensions.at(Widelands::kMapDimensions.size() - 1);
-	current_roads_distance = 2 * (Widelands::kMapDimensions.size() - 1);  // must be big enough
+	current_road_distance = 2 * (Widelands::kMapDimensions.size() - 1);  // must be big enough
 	reduction_score = -air_distance;  // allows reasonable ordering from the start
 }
 
@@ -904,9 +912,20 @@ void FlagsForRoads::Candidate::calculate_score() {
 			reduction_score = kRoadNotFound;
 		}
 	} else {
-		reduction_score = current_roads_distance - 2 * new_road_length;
+		reduction_score = current_road_distance - 2 * new_road_length;
 	}
 }
+
+int32_t FlagsForRoads::get_candidate_score(const uint32_t hash) {
+	for (auto& candidate_flag : flags_queue) {
+		if (candidate_flag.coords_hash == hash) {
+			return candidate_flag.reduction_score;
+		}
+	}
+	NEVER_HERE();
+}
+
+
 
 void FlagsForRoads::print() {  // this is for debugging and development purposes
 	for (auto& candidate_flag : flags_queue) {
@@ -917,7 +936,7 @@ void FlagsForRoads::print() {  // this is for debugging and development purposes
 		       " ",
 		    Coords::unhash(candidate_flag.coords_hash).x,
 		    Coords::unhash(candidate_flag.coords_hash).y,
-		    candidate_flag.current_roads_distance - candidate_flag.new_road_length, min_reduction,
+		    candidate_flag.current_road_distance - candidate_flag.new_road_length, min_reduction,
 		    candidate_flag.air_distance, candidate_flag.new_road_length,
 		    candidate_flag.reduction_score,
 		    (candidate_flag.new_road_possible) ? ", new road possible" : " ");
@@ -937,10 +956,11 @@ bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
 }
 
 // Road from starting flag to this flag can be built
-void FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) {
+void FlagsForRoads::road_possible(Widelands::Coords coords, const uint32_t new_road) {
 	for (auto& candidate_flag : flags_queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {
-			candidate_flag.new_road_length = distance;
+			candidate_flag.new_road_length = new_road;
+			//candidate_flag.current_roads_distance = current_road;
 			candidate_flag.new_road_possible = true;
 			candidate_flag.calculate_score();
 			return;
@@ -963,12 +983,22 @@ void FlagsForRoads::road_impossible(Widelands::Coords coords) {
 	NEVER_HERE();
 }
 
+bool FlagsForRoads::has_candidate(const uint32_t hash){
+	for (auto& candidate_flag : flags_queue) {
+		if (candidate_flag.coords_hash == hash) {
+			return true;
+		}
+	}
+	return false;
+}
+
 // Updating walking distance over existing roads
 // Queue does not allow modifying its members so we erase and then eventually insert modified member
-void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance) {
+void FlagsForRoads::set_cur_road_distance(Widelands::Coords coords, int32_t cur_distance) {
 	for (auto& candidate_flag : flags_queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {
-			candidate_flag.new_road_length = distance;
+			//candidate_flag.new_road_length = new_distance;
+			candidate_flag.current_road_distance = cur_distance;
 			candidate_flag.accessed_via_roads = true;
 			candidate_flag.calculate_score();
 			//printf ("Road distance re-set\n");
@@ -979,53 +1009,6 @@ void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance
 	//printf ("Road distance rcould not be e-set\n");
 }
 
-//// Updating walking distance over existing roads
-//// Queue does not allow modifying its members so we erase and then eventually insert modified member
-//void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance) {
-	//const uint32_t hash = coords.hash();
-	////Candidate new_candidate_flag = Candidate(0, 0, false);
-	////bool replacing = false;
-	//for (auto candidate_flag = flags_queue.begin(); candidate_flag != flags_queue.end(); ++candidate_flag) {
-		//if ((*candidate_flag).coords_hash  == hash) {
-			//assert(!(*candidate_flag).different_economy);
-			//if (distance < (*candidate_flag).current_roads_distance) {
-				//(*candidate_flag).current_roads_distance = distance;
-				//(*candidate_flag).accessed_via_roads = true;
-				//(*candidate_flag).calculate_score();
-			//}
-			//printf ("Road distance re-set\n");
-			//return;
-		//}
-		////printf ("Hashes does not match %8d vs %8d\n", hash, (*candidate_flag).coords_hash);
-	//}
-	//printf ("Road distance rcould not be e-set\n");
-//}
-
-//// Updating walking distance over existing roads
-//// Queue does not allow modifying its members so we erase and then eventually insert modified member
-//void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance) {
-	//const uint32_t hash = coords.hash();
-	//Candidate new_candidate_flag = Candidate(0, 0, false);
-	//bool replacing = false;
-	//for (auto candidate_flag : queue) {
-		//if (candidate_flag.coords_hash == hash) {
-			//assert(!candidate_flag.different_economy);
-			//if (distance < candidate_flag.current_roads_distance) {
-				//new_candidate_flag = candidate_flag;
-				//queue.erase(candidate_flag);
-				//replacing = true;
-				//break;
-			//}
-			//break;
-		//}
-	//}
-	//if (replacing) {
-		//new_candidate_flag.current_roads_distance = distance;
-		//new_candidate_flag.accessed_via_roads = true;
-		//new_candidate_flag.calculate_score();
-		//queue.insert(new_candidate_flag);
-	//}
-//}
 
 bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 	// If AI can ask for 2nd position, but there is only one viable candidate

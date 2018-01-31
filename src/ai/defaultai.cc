@@ -3401,7 +3401,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      int16_t min_reduction,
                                      int32_t gametime) {
 
-	printf("x1\n");
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
 	EconomyObserver* eco = get_economy_observer(flag.economy());
@@ -3416,7 +3415,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		eco->dismantle_grace_time = std::numeric_limits<int32_t>::max();
 	}
 
-	printf("x100\n");
 	// first we deal with situations when this is economy with no warehouses
 	// and this is a flag belonging to a building/constructionsite
 	// such economy must get dismantle grace time (if not set yet)
@@ -3487,7 +3485,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	const Map& map = game().map();
 
-	printf("x200\n");
 	// initializing new object of FlagsForRoads, we will push there all candidate flags
 	Widelands::FlagsForRoads RoadCandidates(min_reduction);
 
@@ -3528,32 +3525,42 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			// This is a candidate, sending all necessary info to RoadCandidates
 			const bool different_economy = (player_immovable->get_economy() != flag.get_economy());
 			const int32_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
-			RoadCandidates.add_flag(reachable_coords, air_distance, different_economy);
+			if (!RoadCandidates.has_candidate(reachable_coords.hash()))  {
+				RoadCandidates.add_flag(reachable_coords, air_distance, different_economy);
+			}
 		}
 	}
-	printf("x300\n");
 	// now we walk over roads and if field is reachable by roads, we change the distance assigned
 	// above
-	std::priority_queue<NearFlag> queue;
-	std::vector<NearFlag> nearflags;  // only used to collect flags reachable walk over roads
-	queue.push(NearFlag(flag, 0, 0));
+
+
+	std::map<uint32_t, NearFlag> nearflags;  // only used to collect flags reachable walk over roads
+	//uint32_t tmpi= flag.get_position().hash();
+	nearflags[flag.get_position().hash()] = NearFlag(flag, 0, 0);
+	//nearflags[flag.get_position().hash()] = NearFlag(flag, 0, 0); // NearFlag(flag, 0, 0);
+
+    printf ("starting at %3dx%3d\n", flag.get_position().x, flag.get_position().y);
 
 	// algorithm to walk on roads
-	while (!queue.empty()) {
-		std::vector<NearFlag>::iterator f =
-		   find(nearflags.begin(), nearflags.end(), queue.top().flag);
+	while (true) {
 
-		if (f != nearflags.end()) {
-			queue.pop();
-			continue;
-		}
 
-		nearflags.push_back(queue.top());
-		queue.pop();
-		NearFlag& nf = nearflags.back();
+	    ////find candidate that has to be checked and with nearest distance NOCOM
+	    uint32_t start_field = std::numeric_limits<uint32_t>::max();
+	    uint32_t nearest_distance = 10000;
+	    for (auto item : nearflags) {
+	        if (item.second.current_road_distance < nearest_distance && item.second.to_be_checked) {
+	            nearest_distance = item.second.current_road_distance;
+	            start_field = item.first;
+	        }
+	    }
+	    if (start_field == std::numeric_limits<uint32_t>::max()) {break;}
+	    nearflags[start_field].to_be_checked = false;
+
+        // Now going over roads from this point
 
 		for (uint8_t i = 1; i <= 6; ++i) {
-			Road* const road = nf.flag->get_road(i);
+			Road* const road = nearflags[start_field].flag->get_road(i);
 
 			if (!road) {
 				continue;
@@ -3561,29 +3568,62 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 			Flag* endflag = &road->get_flag(Road::FlagStart);
 
-			if (endflag == nf.flag) {
+			if (endflag == nearflags[start_field].flag) {
 				endflag = &road->get_flag(Road::FlagEnd);
 			}
 
-			int32_t dist = map.calc_distance(flag.get_position(), endflag->get_position());
+            uint32_t endflag_hash = endflag->get_position().hash();
+
+			int32_t dist = map.calc_distance(nearflags[start_field].flag->get_position(), endflag->get_position());
 
 			if (dist > checkradius + 5) {  //  Testing bigger vicinity then checkradius....
 				continue;
 			}
 
-			queue.push(NearFlag(*endflag, nf.cost + road->get_path().get_nsteps(), dist));
+
+            //This is brand new nearflag
+            if (nearflags.count(endflag_hash) == 0){
+                nearflags[endflag_hash] = NearFlag(*endflag, nearflags[start_field].current_road_distance + road->get_path().get_nsteps(), dist);
+                printf (" Inserting new nearflag %3dx%3d with current road %4d, air distance: %d\n",
+                endflag->get_position().x, endflag->get_position().y,
+                nearflags[endflag_hash].current_road_distance,
+                dist);
+            } else {
+                // if distance is bigger, ignoring
+                if (nearflags[endflag_hash].current_road_distance <= nearflags[start_field].current_road_distance + road->get_path().get_nsteps()) {
+                    ; //printf (" Not overwriting costs in nearflags %3dx%3d\n", endflag->get_position().x, endflag->get_position().y);
+                } else {
+                    nearflags[endflag_hash].current_road_distance = nearflags[start_field].current_road_distance + road->get_path().get_nsteps();
+                     printf (" Overwritting costs in nearflags %3dx%3d to %d\n",
+                     endflag->get_position().x, endflag->get_position().y,
+                     nearflags[endflag_hash].current_road_distance);
+                     nearflags[endflag_hash].to_be_checked = true;
+                }
+            }
+
+
 		}
 	}
-printf("x600\n");
-	// Sending calculated walking costs from nearflags to RoadCandidates to update info on
+
+		// Sending calculated walking costs from nearflags to RoadCandidates to update info on
 	// Candidate flags/roads
 	for (auto& nf_walk : nearflags) {
-		if (map.calc_distance(flag.get_position(), nf_walk.flag->get_position()) <= checkradius) {
+		if (map.calc_distance(flag.get_position(), nf_walk.second.flag->get_position()) <= checkradius) {
 			// nearflags contains also flags beyond the radius, so we skip these
-			RoadCandidates.set_road_distance(
-			   nf_walk.flag->get_position(), static_cast<int32_t>(nf_walk.cost));
-		}
-	}
+			if (RoadCandidates.has_candidate(nf_walk.second.flag->get_position().hash())){
+				RoadCandidates.set_cur_road_distance(
+				   nf_walk.second.flag->get_position(), nf_walk.second.current_road_distance);
+				printf (" Updating road candidate for %3dx%3d, current road: %3d, calculated reduction score: %3d\n",
+				nf_walk.second.flag->get_position().x,
+				nf_walk.second.flag->get_position().y,
+				nf_walk.second.current_road_distance,
+				RoadCandidates.get_candidate_score(nf_walk.second.flag->get_position().hash()));
+			}
+
+
+		   }
+	   }
+
 
 	// Here we must consider how much are buildable fields lacking NOCOM
 	int32_t fields_necessity = 5;
@@ -3628,15 +3668,22 @@ printf("x600\n");
 
 
 	//NOCOM
+	printf("Road candidates before sorting: %d\n", RoadCandidates.flags_queue.size());
 	std::sort(RoadCandidates.flags_queue.begin(), RoadCandidates.flags_queue.end(), [](FlagsForRoads::Candidate a, FlagsForRoads::Candidate b) {
         return a.new_road_length < b.new_road_length;
     });
-	printf ("listing air distance\n");
+    printf("Road candidates after sorting: %d\n", RoadCandidates.flags_queue.size());
+	printf (" listing RoadCandidates:\n");
 		for (auto& candidate_flag : RoadCandidates.flags_queue) {
-			printf ("%3dx%3d: Air distance: %3d, road distance: %4d, reduction %5d, new road %s possible\n",
+			printf ("  %3dx%3d: Air distance: %3d, current road: %3d, possible: %4d, reduction %5d, new road %s possible, diff. economy: %s\n",
 			Coords::unhash(candidate_flag.coords_hash).x,
 			Coords::unhash(candidate_flag.coords_hash).y,
-			 candidate_flag.air_distance, candidate_flag.new_road_length, candidate_flag.reduction_score,  (candidate_flag.new_road_possible) ? "":"not");
+			 candidate_flag.air_distance,
+			 candidate_flag.current_road_distance,
+			 candidate_flag.new_road_length,
+			 candidate_flag.reduction_score,
+			 (candidate_flag.new_road_possible) ? "":"not",
+			 (candidate_flag.different_economy) ? "Y":"N");
 		}
 
 
@@ -3669,7 +3716,6 @@ printf("x600\n");
 		return true;
 	}
 
-	printf("x999\n");
 	return false;
 
 }

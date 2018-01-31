@@ -1703,7 +1703,7 @@ int32_t Map::findpath(Coords instart,
 				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_MINE) ? 1 : 0;
 				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_PORT) ? 9 : 0;
 				cost += buildcaps_score * caps_sensitivity;
-				if (buildcaps_score * caps_sensitivity > 0) printf (" Increasing score by %10d\n", buildcaps_score * caps_sensitivity);
+				//if (buildcaps_score * caps_sensitivity > 0) printf (" Increasing score by %10d\n", buildcaps_score * caps_sensitivity);
 			}
 
 			if (neighbpf.cycle != pathfields->cycle) {
