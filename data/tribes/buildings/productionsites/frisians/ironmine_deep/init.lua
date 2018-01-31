@@ -68,10 +68,10 @@ tribes:new_productionsite_type {
             "consume=meal",
             "animate=working 18000",
             "mine=iron 3 100 10 5",
-            "produce=iron_ore",
+            "produce=iron_ore:2",
             "animate=working 18000",
             "mine=iron 3 100 10 5",
-            "produce=iron_ore"
+            "produce=iron_ore:2"
          }
       },
    },

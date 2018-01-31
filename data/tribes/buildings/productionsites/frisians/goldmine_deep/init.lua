@@ -68,10 +68,10 @@ tribes:new_productionsite_type {
             "consume=meal",
             "animate=working 18000",
             "mine=gold 3 100 10 5",
-            "produce=gold_ore",
+            "produce=gold_ore:2",
             "animate=working 18000",
             "mine=gold 3 100 10 5",
-            "produce=gold_ore"
+            "produce=gold_ore:2"
          }
       },
    },

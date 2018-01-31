@@ -120,7 +120,7 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
             "check_soldier=soldier attack 3",
-            "animate=working 30000",
+            "animate=working 22800",
             "check_soldier=soldier attack 3", -- Because the soldier can be expelled by the player
             "consume=sword_long:2 honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 3 4",
@@ -132,7 +132,7 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 4 to level 5"),
          actions = {
             "check_soldier=soldier attack 4",
-            "animate=working 30000",
+            "animate=working 15600",
             "check_soldier=soldier attack 4", -- Because the soldier can be expelled by the player
             "consume=sword_curved:2 honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 4 5",
@@ -144,7 +144,7 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier attack from level 5 to level 6"),
          actions = {
             "check_soldier=soldier attack 5",
-            "animate=working 30000",
+            "animate=working 15600",
             "check_soldier=soldier attack 5", -- Because the soldier can be expelled by the player
             "consume=sword_double:2 honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 5 6",
@@ -156,7 +156,7 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier defense from level 1 to level 2"),
          actions = {
             "check_soldier=soldier defense 1",
-            "animate=working 30000",
+            "animate=working 22800",
             "check_soldier=soldier defense 1", -- Because the soldier can be expelled by the player
             "consume=fur_clothes_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier defense 1 2",
@@ -168,7 +168,7 @@ tribes:new_trainingsite_type {
          descname = pgettext ("frisians_building", "upgrading soldier health from level 1 to level 2"),
          actions = {
             "check_soldier=soldier health 1",
-            "animate=working 30000",
+            "animate=working 22800",
             "check_soldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier health 1 2",
