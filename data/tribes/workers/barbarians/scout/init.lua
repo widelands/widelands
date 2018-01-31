@@ -17,7 +17,7 @@ tribes:new_worker_type {
    descname = pgettext("barbarians_worker", "Scout"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   vision_range = 2,
+   vision_range = 3,
 
    buildcost = {
       barbarians_carrier = 1

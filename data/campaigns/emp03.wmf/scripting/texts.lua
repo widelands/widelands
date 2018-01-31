@@ -25,7 +25,7 @@ end
 function amalea3(title, text)
    return speech("map:Amalea3.png", "AF7511", title, text)
 end
- 
+
 function holy_shrine(text, image)
    return
       div("width=100%",

@@ -376,6 +376,7 @@ function mission_complete()
 
    campaign_message_box(story_msg_7)
 
+   p1:reveal_scenario("barbariantut02")
    p1:reveal_campaign("campsect1")
 end
 

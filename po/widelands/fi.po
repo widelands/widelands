@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-04 13:28+0000\n"
-"PO-Revision-Date: 2018-01-07 16:03+0000\n"
-"Last-Translator: Jukka Pakarinen\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,12 +24,14 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
+#: ../../data/scripting/richtext_scenarios.lua:34
 #, lua-format
 msgid "“%s”"
 msgstr "\"%s\""
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
+#: ../../data/scripting/richtext_scenarios.lua:85
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Uusi Tavoite"
@@ -37,7 +39,7 @@ msgstr[1] "Uudet Tavoitteet"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:37 ../../data/scripting/richtext.lua:38
+#: ../../data/scripting/formatting.lua:12 ../../data/scripting/richtext.lua:38
 #: ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
@@ -45,7 +47,7 @@ msgstr "%1$s ja %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:39 ../../data/scripting/richtext.lua:40
+#: ../../data/scripting/formatting.lua:14 ../../data/scripting/richtext.lua:40
 #: ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
@@ -55,8 +57,8 @@ msgstr "%1$s tai %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:41
-#: ../../data/scripting/formatting.lua:46 ../../data/scripting/richtext.lua:42
+#: ../../data/scripting/formatting.lua:16
+#: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:42
 #: ../../data/scripting/richtext.lua:47 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
@@ -65,11 +67,24 @@ msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:43 ../../data/scripting/richtext.lua:44
+#: ../../data/scripting/formatting.lua:18 ../../data/scripting/richtext.lua:44
 #: ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s ja %2$s"
+
+#. * TRANSLATORS: File name for saving objective achieved
+#. * TRANSLATORS: %1% = map name. %2% = achievement name
+#. TRANSLATORS: Terrain name (Climate)
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1067
+msgid "%1% (%2%)"
+msgstr "%1% (%2%)"
+
+#. TRANSLATORS: Help text - Probability to grow for an immovable
+#: ../../data/scripting/help.lua:48
+#, lua-format
+msgid "%2.1f%%"
+msgstr ""
 
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:160
@@ -86,6 +101,15 @@ msgstr "Joillekin aloitusrakennuksistasi ei ollut tarpeeksi tilaa ja niitä ei r
 #: ../../data/scripting/infrastructure.lua:162
 msgid "Not enough space"
 msgstr "Ei tarpeeksi tilaa"
+
+#. TRANSLATORS: Put 2 sentences one after the other.
+#. TRANSLATORS: Languages using Chinese script probably want to lose the blank
+#. space here.
+#: ../../data/scripting/richtext.lua:459
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -221,7 +245,7 @@ msgid "Loading tribes"
 msgstr "Lataan heimoja"
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/interactive_player.cc:165
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Main menu"
 msgstr "Päävalikko"
@@ -241,7 +265,7 @@ msgid "Players"
 msgstr "Pelaajat"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:224
+#: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show building spaces (on/off)"
 msgstr "Näytä rakennusalueet (päälle/pois)"
@@ -259,13 +283,13 @@ msgid "Show resources (on/off)"
 msgstr "Näytä resurssit (päälle/pois)"
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:220
+#: ../../src/wui/interactive_player.cc:177
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr "Pienoiskartta"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:226
+#: ../../src/wui/interactive_player.cc:183
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr "Resetoi suurennus"
@@ -279,7 +303,7 @@ msgid "Redo"
 msgstr "Tee uudelleen"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:334 ../../src/wui/interactive_player.cc:250
+#: ../../src/wui/buildingwindow.cc:334 ../../src/wui/interactive_player.cc:207
 msgid "Help"
 msgstr "Ohje"
 
@@ -523,7 +547,7 @@ msgid "Current: %s"
 msgstr "Nykyinen: %s"
 
 #: ../../src/editor/ui_menus/help.cc:42 ../../src/ui_fsmenu/multiplayer.cc:137
-#: ../../src/wui/encyclopedia_window.cc:145
+#: ../../src/wui/encyclopedia_window.cc:138
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
 msgstr "Virhe!"
@@ -1063,8 +1087,8 @@ msgstr "Tallennustiedosto ei ole yhteensopiva tämän Widelands-version kanssa."
 msgid "No description defined"
 msgstr "Kuvausta ei määritelty"
 
-#: ../../src/logic/map_objects/immovable.cc:515
-#: ../../src/logic/map_objects/tribes/constructionsite.cc:72
+#: ../../src/logic/map_objects/immovable.cc:518
+#: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
 msgstr "%i%% rakennettu"
@@ -1450,16 +1474,16 @@ msgid ""
 "compatible with world"
 msgstr "pitäisi kasvattaa resurssia tyyppiä %s, joka ei esiinny maailmassa; heimo ei ole yhteensopiva maailman kanssa"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:887
+#: ../../src/logic/map_objects/tribes/worker.cc:884
 msgid "A geologist found resources."
 msgstr "Geologi löysi kaivettavaa."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1774
+#: ../../src/logic/map_objects/tribes/worker.cc:1771
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Sinun %s ei löydä reittiä kotiin ja todennäköisesti kuolee."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1780
+#: ../../src/logic/map_objects/tribes/worker.cc:1777
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1467,7 +1491,7 @@ msgid_plural "Workers"
 msgstr[0] "Työläinen"
 msgstr[1] "Työläiset"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1781
+#: ../../src/logic/map_objects/tribes/worker.cc:1778
 msgid "Worker got lost!"
 msgstr "Työläinen eksyi!"
 
@@ -1659,13 +1683,13 @@ msgstr "Virheellinen komento! Kirjoita /help nähdäksesi komennot."
 
 #: ../../src/network/gamehost.cc:494
 msgid "Failed to host the server!"
-msgstr ""
+msgstr "Palvelimen isännöinti ei onnistunut!"
 
 #: ../../src/network/gamehost.cc:495
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr ""
+msgstr "Widelands ei voinut aloittaa palvelimen isännöintiä.\nTätä ei pitäisi tapahtua ja luultavasti et pystyt tekemään asille mitään. Tekisitkö tästä virheestä virheraportin."
 
 #: ../../src/network/gamehost.cc:503
 msgid "Failed to start the server!"
@@ -1719,7 +1743,7 @@ msgstr "Jotain meni pieleen: %s"
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "Olet kirjautuneena sisään nimellä '%s', koska ehdottamasi nimi on jo käytössä tai varattu."
 
 #: ../../src/network/internet_gaming.cc:416
 msgid "Mixed up"
@@ -2089,12 +2113,6 @@ msgstr "ei"
 #: ../../src/profile/profile.cc:64
 msgid "off"
 msgstr "pois"
-
-#. * TRANSLATORS: File name for saving objective achieved
-#. * TRANSLATORS: %1% = map name. %2% = achievement name
-#: ../../src/scripting/lua_game.cc:1067
-msgid "%1% (%2%)"
-msgstr "%1% (%2%)"
 
 #: ../../src/ui_basic/dropdown.cc:81 ../../src/ui_basic/dropdown.cc:240
 msgctxt "dropdown"
@@ -3212,7 +3230,7 @@ msgstr "Peruuta tie"
 msgid "Build roads"
 msgstr "Rakenna teitä"
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:233
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:190
 #: ../../src/wui/interactive_spectator.cc:87
 msgid "Chat"
 msgstr "Keskustelu"
@@ -3406,7 +3424,7 @@ msgid "Del: %s"
 msgstr "Del: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:243
+#: ../../src/wui/interactive_player.cc:200
 msgid "Objectives"
 msgstr "Tavoitteet"
 
@@ -3630,17 +3648,17 @@ msgstr "PYSÄYTETTY"
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:212
+#: ../../src/wui/interactive_player.cc:169
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
 msgstr "Tilastot"
 
-#: ../../src/wui/interactive_player.cc:247
-#: ../../src/wui/interactive_player.cc:299
+#: ../../src/wui/interactive_player.cc:204
+#: ../../src/wui/interactive_player.cc:256
 msgid "Messages"
 msgstr "Viestit"
 
-#: ../../src/wui/interactive_player.cc:304
+#: ../../src/wui/interactive_player.cc:261
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"

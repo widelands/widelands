@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -7,6 +7,7 @@
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
 # Arex <arex@ngs.ru>, 2015
 # CupIvan <mail@cupivan.ru>, 2017
+# George Matsune <georg29387878@gmail.com>, 2017
 # CupIvan <mail@cupivan.ru>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -14,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-25 03:55+0000\n"
-"PO-Revision-Date: 2017-11-25 03:58+0000\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-26 13:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +29,7 @@ msgstr ""
 #: ../../data/tribes/buildings/markets/barbarians/market/init.lua:14
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "Рынок"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
@@ -2452,7 +2453,7 @@ msgid "Warehouse"
 msgstr "Склад"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:40
+#: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Пепелище"
@@ -2604,62 +2605,62 @@ msgstr "Тростник (крохотный)"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
 msgctxt "immovable"
-msgid "Coal Vein"
-msgstr "Угольная жила"
+msgid "Resources: Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal2/init.lua:7
 msgctxt "immovable"
-msgid "Main Coal Vein"
-msgstr "Главная угольная жила"
+msgid "Resources: Main Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold1/init.lua:7
 msgctxt "immovable"
-msgid "Gold Vein"
-msgstr "Золотая жила"
+msgid "Resources: Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold2/init.lua:7
 msgctxt "immovable"
-msgid "Main Gold Vein"
-msgstr "Главная золотая жила"
+msgid "Resources: Main Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron1/init.lua:7
 msgctxt "immovable"
-msgid "Iron Vein"
-msgstr "Железная жила"
+msgid "Resources: Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron2/init.lua:7
 msgctxt "immovable"
-msgid "Main Iron Vein"
-msgstr "Главная железная жила"
+msgid "Resources: Main Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
-msgid "No Resources"
-msgstr "Нет ресурсов"
+msgid "Resources: None"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones1/init.lua:7
 msgctxt "immovable"
-msgid "Some Stones"
-msgstr "Немного камней"
+msgid "Resources: Some Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
-msgid "A Lot of Stones"
-msgstr "Много камней"
+msgid "Resources: A Lot of Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_water1/init.lua:7
 msgctxt "immovable"
-msgid "Water Vein"
-msgstr "Родник"
+msgid "Resources: Water Vein"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2703,37 +2704,41 @@ msgid ""
 "Atlantis."
 msgstr "Это племя известно из древнейших легенд. Сыновья и дочери Атлантиды."
 
-#: ../../data/tribes/scripting/help/init.lua:48
+#: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
 msgstr "Энциклопедия племён"
 
-#: ../../data/tribes/scripting/help/init.lua:53
+#: ../../data/tribes/scripting/help/init.lua:59
 msgid "General"
 msgstr "Главное"
 
-#: ../../data/tribes/scripting/help/init.lua:58
+#: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
 msgstr "Введение"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:70
 msgid "Controls"
 msgstr "Управление"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:76
 msgid "Tips"
 msgstr "Подсказки"
 
-#: ../../data/tribes/scripting/help/init.lua:79
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
 msgstr "Товары"
 
-#: ../../data/tribes/scripting/help/init.lua:86
+#: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Работники"
 
-#: ../../data/tribes/scripting/help/init.lua:93
+#: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "Здания"
+
+#: ../../data/tribes/scripting/help/init.lua:106
+msgid "Immovables"
+msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -2786,7 +2791,7 @@ msgstr "Если этому игроку не хватает на необход
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
 msgid "Village"
-msgstr ""
+msgstr "Деревня"
 
 #. TRANSLATORS: This is the tooltip for the "Village" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13

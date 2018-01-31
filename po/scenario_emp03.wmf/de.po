@@ -3,13 +3,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Elisabeth Jäger <elisabeth.jaeger@googlemail.com>, 2017
+# Elisabeth Jäger, 2017
 # Stephan Lutz <stephan-lutz@gmx.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-10 16:38+0000\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -1289,12 +1289,12 @@ msgstr ""
 msgid "Artifact Found"
 msgstr "Artefakt gefunden"
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"

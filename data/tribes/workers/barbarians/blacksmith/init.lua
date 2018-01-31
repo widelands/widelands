@@ -24,7 +24,7 @@ tribes:new_worker_type {
       hammer = 1
    },
 
-   experience = 24,
+   experience = 12,
    becomes = "barbarians_blacksmith_master",
 
    animations = animations,

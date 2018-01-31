@@ -121,7 +121,6 @@ function paragraphdivider()
    return ("<br></p><p font-size=8><br></p><p line-spacing=3 font-size=12>")
 end
 
--- RST
 -- .. function:: picture_li(imagepath, text)
 --
 --    Places a paragraph of text to the right of an image
@@ -135,7 +134,6 @@ function picture_li(imagepath, text)
       .. p(text) .. "</rt>"
 end
 
--- RST
 -- .. function:: spacer()
 --
 --    Adds a little space between two paragraphs
