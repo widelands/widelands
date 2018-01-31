@@ -2,8 +2,7 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
+include "scripting/richtext_scenarios.lua"
 
 function lutius(title, text)
    return speech("map:Lutius.png", "2F9131", title, text)
@@ -46,7 +45,8 @@ obj_dismantle_buildings = {
    title=_"Dismantle the unproductive buildings",
    number = 1,
    body = objective_text(_"Dismantle Buildings",
-      listitem_bullet(_[[Dismantle all unproductive small buildings to get some resources for new buildings. Remember to check the messages and the building statistics for unproductive buildings.]])
+      li(_[[Dismantle all unproductive small buildings to get some resources for new buildings.]]) ..
+      li_arrow(_[[Remember to check the messages and the building statistics for unproductive buildings.]])
    ),
 }
 
@@ -55,7 +55,7 @@ obj_clear_roads = {
    title=_"Clear all unnecessary roads",
    number = 1,
    body = objective_text(_"Clear Road Network",
-      listitem_bullet(_[[Resolve the chaotic road network by clearing all unnecessary roads.]])
+      li(_[[Resolve the chaotic road network by clearing all unnecessary roads.]])
    ),
 }
 
@@ -64,7 +64,7 @@ obj_find_farm_plans = {
    title=_"Find the construction plans for the farms",
    number = 1,
    body = objective_text(_"Find Farm Construction Plans",
-      listitem_bullet(_[[Recover the construction plans for the farms. Search for them in the hills east of your border.]])
+      li(_[[Recover the construction plans for the farms. Search for them in the hills east of your border.]])
    ),
 }
 
@@ -73,7 +73,7 @@ obj_build_quarries_and_lumberjacks = {
    title=_"Build at least 3 lumberjack’s houses and 2 quarries",
    number = 1,
    body = objective_text(_"Quarries and Lumberjacks",
-      listitem_bullet(_[[Build at least three lumberjack’s houses and two quarries to renew your building material supply chain.]])
+      li(_[[Build at least three lumberjack’s houses and two quarries to renew your building material supply chain.]])
    ),
 }
 
@@ -82,7 +82,7 @@ obj_produce_fish = {
    title=_"Produce fish and rations",
    number = 1,
    body = objective_text(_"Food Production",
-      listitem_bullet(_[[Find and catch some fish. Afterwards, produce rations for your miners.]])
+      li(_[[Find and catch some fish. Afterwards, produce rations for your miners.]])
    ),
 }
 
@@ -91,7 +91,7 @@ obj_replace_foresters = {
    title=_"Replace the old and ineffective forester’s houses",
    number = 1,
    body = objective_text(_"Build Two New Forester’s Houses",
-      listitem_bullet(_[[Replace the two forester’s houses by new ones to increase productivity.]])
+      li(_[[Replace the two forester’s houses by new ones to increase productivity.]])
    ),
 }
 
@@ -100,7 +100,8 @@ obj_find_monastery = {
    title=_"Find the monastery in the north",
    number = 1,
    body = objective_text(_"Find the Monastery",
-      listitem_bullet(_[[Find the monastery in the north to obtain the improved technology for your wheat production chain.]])),
+      li(_[[Find the monastery in the north to obtain the improved technology for your wheat production chain.]])
+   ),
 }
 
 obj_deal_with_julia = {
@@ -108,7 +109,8 @@ obj_deal_with_julia = {
    title=_"Deal with Julia to get the technology",
    number = 1,
    body = objective_text(_"Diplomacy: Trade or War",
-      listitem_bullet(_[[Decide: Either collect 35 wheat and 15 wine for the goddess in your headquarters or conquer the monastery.]])),
+      li(_[[Decide: Either collect 35 sheaves of wheat and 15 bottles of wine for the goddess in your headquarters or conquer the monastery.]])
+   ),
 }
 
 obj_heroes = {
@@ -116,7 +118,8 @@ obj_heroes = {
    title=_"Train at least 3 heroes",
    number = 1,
    body = objective_text(_"Hero Training",
-      listitem_bullet(_[[Use your resources wisely to train at least three heroes.]])),
+      li(_[[Use your resources wisely to train at least three fully promoted heroes.]])
+   ),
 }
 
 obj_produce_tools = {
@@ -124,7 +127,9 @@ obj_produce_tools = {
    title=_"Produce at least 10 tools",
    number = 1,
    body = objective_text(_"Tool Production",
-      listitem_bullet(_[[Produce at least ten tools to improve your economy. Remember that you can control the production amount in the economy settings.]])),
+      li(_[[Produce at least ten tools to improve your economy.]]) ..
+      li_arrow(_[[Remember that you can control the production amount in the economy settings.]])
+   ),
 }
 
 obj_recruit_soldiers = {
@@ -132,7 +137,8 @@ obj_recruit_soldiers = {
    title=_"Recruit new soldiers",
    number = 1,
    body = objective_text(_"New Soldier Recruiting",
-      listitem_bullet(_[[Recruit at least ten new soldiers in your barracks. Don’t forget to forge weapons and armor for them.]])
+      li(_[[Recruit at least ten new soldiers in your barracks.]]) ..
+      li_arrow(_[[Don’t forget to forge weapons and armor for them.]])
    ),
 }
 
@@ -141,7 +147,7 @@ obj_conquer_all = {
    title=_"Defeat the Barbarians",
    number = 1,
    body = objective_text(_"Defeat the Enemy",
-      listitem_bullet(_[[End the Barbarian intrusion into your very own part of the world.]])
+      li(_[[End the Barbarian intrusion into your very own part of the world.]])
    ),
 }
 
@@ -150,7 +156,8 @@ obj_charcoal = {
    title=_"Build 2 charcoal kiln",
    number = 1,
    body = objective_text(_"Build Two Charcoal Kilns",
-      listitem_bullet(_[[Build two charcoal kilns to support the iron industry. Remember to ensure a constant log supply for them.]])
+      li(_[[Build two charcoal kilns to support the iron industry.]]) ..
+      li_arrow(_[[Remember to ensure a constant log supply for them.]])
    ),
 }
 
@@ -159,16 +166,17 @@ obj_training = {
    title=_"Increase your military strength by training your soldiers",
    number = 1,
    body = objective_text(_"Training is Important",
-      listitem_bullet(_[[Train your soldiers hard and train them fast. You need to increase your military strength.]])
+      li(_[[Train your soldiers hard and train them fast.]]) ..
+      li_arrow(_[[You need to increase your military strength.]])
    ),
 }
 
 obj_upgrade = {
    name = "upgrade",
-   title=_"Build a training camp and upgrade the colosseum",
+   title=_"Build a training camp and enhance the arena",
    number = 1,
    body = objective_text(_"More Efficient Training Buildings",
-      listitem_bullet(_[[Build a training camp and enhance your colosseum to an arena.]])
+      li(_[[Build a training camp and enhance your arena to a colosseum.]])
    ),
 }
 
@@ -252,7 +260,7 @@ marcus_1 = {
    title=_"Welcome Back",
    body= marcus(_"A high Fremil official is welcoming you…",
       -- TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the chaos
-      _([[Ave Sire! The people and me are so glad to see you returning back home. We really need some good leadership around here.]])
+      _([[Ave, Sire! The people and me are so glad to see you returning back home. We really need some good leadership around here.]])
       .. paragraphdivider() ..
       _([[As you have already noticed, things have gone terribly wrong around here since you left.]])),
    posy=1,
@@ -277,7 +285,7 @@ amalea = {
    title=_"Amalea Looks Puzzled",
    body= amalea1(_"Amalea is doubtful…",
       -- TRANSLATORS: Amalea
-      _([[Ave Saledus. On the one hand you are right, it really is a delight to see our homeland again. But on the other hand. I have the impression that something went deeply wrong here.]])
+      _([[Ave, Saledus! On the one hand you are right, it really is a delight to see our homeland again. But on the other hand, I have the impression that something went deeply wrong here.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Have a look at the economy. There is hardly any productivity at all. Whoever managed our country while we were absent created utter chaos. I’m not quite sure how we can fix this, if at all possible.]])),
@@ -291,7 +299,7 @@ amalea_1 = {
       _([[Lutius, in my opinion this will again be a very difficult challenge. But I’m afraid that we’re doomed to manage this situation. To make things even worse, I was met with a nasty surprise at our warehouses: they’re all empty. You can hardly find a grain of dust left in there: no wares, no tools, no workers and no soldiers either.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, first of all we need some building materials to start correcting the mistakes made by the infamous secretary. I think we should try dismantling unproductive small buildings to recover some building materials from them and collect them in our headquarters. As far as I can see now, the fishermen’s houses and the quarries don’t have any resources near them. The lumberjacks’ houses and the well seem also to be inefficient or worn out.]])
+      _([[So, first of all we need some building materials to start correcting the mistakes made by the infamous secretary. I think we should try dismantling unproductive small buildings to recover some building materials from them and collect them in our headquarters. As far as I can see now, the fishermen’s houses and the quarries don’t have any resources near them. The lumberjacks’ houses and the wells seem also to be inefficient or worn out.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Additionally, we should restrict the input of all buildings which consume any of our building materials to zero. Or maybe we could even pause the production in all bigger buildings and get the workers some rest until we have produced some of their input wares.]]))
@@ -394,7 +402,7 @@ amalea_7 = {
       _([[And guess what? They are very old. Their houses and tools are worn and their seed is degenerated. For this reason, they need much more time than usual for planting trees.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[The only solution is to build 2 new forester’s houses near our lumberjacks. Be sure to first build a new forester’s house and then eventually destroy the old one or at least expel the forester to change houses. Dismantling them is also possible but will not return any wares because they are so torn.]]))
+      _([[The only solution is to build two new forester’s houses near our lumberjacks. Be sure to first build a new forester’s house and then eventually destroy the old one or at least expel the forester to change houses. Dismantling them is also possible but will not return any wares because they are so torn.]]))
       .. new_objectives(obj_replace_foresters),
    posy=1,
    h=500,
@@ -454,7 +462,7 @@ amalea_12 = {
    title=_"Amalea is Very Content",
    body= amalea2(_"Amalea claps her hands…",
       -- TRANSLATORS: Amalea
-      _([[Well done. Now we are able to build more effective buildings to refine our wheat. And, best of all, we have a new ally who just provided us with lots of water, flour and beer. Now I really think that nothing can prevent us from getting stronger and conquering back our homeland.]])),
+      _([[Well done. Now we are able to build more efficient buildings to refine our wheat. And, best of all, we have a new ally who just provided us with lots of water, flour and beer. Now I really think that nothing can prevent us from getting stronger and conquering back our homeland.]])),
    posy=1,
 }
 
@@ -540,7 +548,7 @@ amalea_20 = {
       _([[Look Brother, I have just realized we haven’t cleared the road network yet. I think we should do so very quickly to free enough space for new buildings.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[To achieve this, we should make sure that there aren’t more than three deadends (flags with only one road) and not more than one flag with more than four roads attached.]])),
+      _([[To achieve this, we should make sure that there aren’t more than three dead ends (flags with only one road) and not more than one flag with more than four roads attached.]])),
    posy=1,
 }
 
@@ -637,9 +645,9 @@ saledus_8 = {
    title=_"We Just Need Another Hero",
    body= saledus4(_"Saledus is in a good mood…",
       -- TRANSLATORS: Saledus
-      _([[General, now that we have more and better beer in addition to enhanced training facilities, we should train as many heroes as we can.]])
+      _([[General, now that we have more and better beer in addition to enhanced training facilities, we should train as many fully promoted soldiers as we can. I really would consider them heroes after that.]])
       .. paragraphdivider() ..
-      _([[It will give us great advantage in battle if our soldiers are much more powerful than the Barbarians’. So, we need to spend our resources wisely to get heroes as soon as we can.]])
+      _([[It will give us great advantage in battle if our soldiers are much more powerful than the Barbarians’. So, we need to spend our resources wisely to get some heroes as soon as we can.]])
       .. paragraphdivider() ..
       _([[I would say that three fully trained heroes should be sufficient to begin with. But don’t forget to send them to the front line, because they are not that useful back home.]]))
       .. new_objectives(obj_heroes),
@@ -665,7 +673,7 @@ saledus_10 = {
       -- TRANSLATORS: Saledus
       _([[Sire, finally we have defeated the Barbarians. We have expelled even the last of them. May they never come back!]])
       .. paragraphdivider() ..
-      _([[Now it is time to find out why this big mess around us could have happened. But first of all we should have a beer or two to celebrate our victory and our reclaimed freedom.]])),
+      _([[Now it is time to find out why this big mess around us could have happened. But first of all we should have some wine to celebrate our victory and our reclaimed freedom.]])),
    posy=1,
 }
 
@@ -675,7 +683,7 @@ saledus_11 = {
       -- TRANSLATORS: Saledus
       _([[Sire, although we don’t have enough fully trained soldiers yet, we just have made contact with the enemy.]])
       .. paragraphdivider() ..
-      _([[We have to finish them off and regain control over our lands. They shall regret deeply that they ever came.]]))
+      _([[We have to finish them off and regain control over our lands. They shall regret deeply that they ever came!]]))
       .. new_objectives(obj_conquer_all),
    posy=1,
    h=500,
@@ -689,7 +697,7 @@ julia_0 = {
    title=_"Worship to be Gifted",
    body= julia(_"Julia is demanding a sacrifice for Vesta…",
       -- TRANSLATORS: Julia - priestess of the goddess Vesta
-      _([[Ave Lutius, if you want us to help you, you first have to worship our goddess Vesta. Therefore deliver 35 wheat and 15 wine to prepare a worthy sacrifice for her.]])),
+      _([[Ave, Lutius! If you want us to help you, you first have to worship our goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 bottles of wine to prepare a worthy sacrifice for her.]])),
    posy=1,
 }
 
