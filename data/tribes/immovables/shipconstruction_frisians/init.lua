@@ -1,4 +1,4 @@
-dirname = path.dirname(__file__)
+dirname = path.dirname (__file__)
 
 tribes:new_immovable_type {
    msgctxt = "immovable",
@@ -7,6 +7,7 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Ship Under Construction"),
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
+   representative_image = dirname .. "build_03.png",
    attributes = { "shipconstruction" },
    programs = {
       program = {
@@ -22,7 +23,7 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "build_??.png"),
+         pictures = path.list_files (dirname .. "build_??.png"),
          hotspot = { 192, 226 },
          fps = 1
       },

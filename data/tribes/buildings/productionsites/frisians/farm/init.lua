@@ -25,24 +25,24 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = { 113, 104 },
+         hotspot = { 127, 117 },
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_???.png"),
-         hotspot = { 113, 104 },
-         fps = 10,
+         hotspot = { 127, 117 },
+         fps = 15,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = { 113, 104 },
+         hotspot = { 127, 117 },
       },
    },
 
    aihints = {
       space_consumer = true,
       prohibited_till = 220,
-      --supports_production_of = { "honey" }
+      supports_production_of = { "honey" }
    },
 
    working_positions = {
