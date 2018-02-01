@@ -262,6 +262,11 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
 
+			if (client.build_id == "IRC") {
+				// No icon for IRC users
+				continue;
+			}
+
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {
 			case 0:  // UNREGISTERED
@@ -295,6 +300,11 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 	// add a @clientname to the current edit text.
 	if (clientsonline_list_.has_selection()) {
 		UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_list_.get_record(i);
+
+		if (er.get_string(2) == "IRC") {
+			// No PM to IRC users
+			return;
+		}
 
 		std::string temp("@");
 		temp += er.get_string(1);

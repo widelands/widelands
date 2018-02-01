@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2016
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-25 03:55+0000\n"
-"PO-Revision-Date: 2017-11-25 03:58+0000\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-26 13:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -2447,7 +2447,7 @@ msgid "Warehouse"
 msgstr "Armazém"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:40
+#: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Cinzas"
@@ -2599,62 +2599,62 @@ msgstr "Junco minúsculo"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
 msgctxt "immovable"
-msgid "Coal Vein"
-msgstr "Veio de carvão"
+msgid "Resources: Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal2/init.lua:7
 msgctxt "immovable"
-msgid "Main Coal Vein"
-msgstr "Veio de carvão principal"
+msgid "Resources: Main Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold1/init.lua:7
 msgctxt "immovable"
-msgid "Gold Vein"
-msgstr "Veio de ouro"
+msgid "Resources: Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold2/init.lua:7
 msgctxt "immovable"
-msgid "Main Gold Vein"
-msgstr "Veio de ouro principal"
+msgid "Resources: Main Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron1/init.lua:7
 msgctxt "immovable"
-msgid "Iron Vein"
-msgstr "Veio de ferro"
+msgid "Resources: Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron2/init.lua:7
 msgctxt "immovable"
-msgid "Main Iron Vein"
-msgstr "Veio de ferro principal"
+msgid "Resources: Main Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
-msgid "No Resources"
-msgstr "Sem recursos"
+msgid "Resources: None"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones1/init.lua:7
 msgctxt "immovable"
-msgid "Some Stones"
-msgstr "Algumas pedras"
+msgid "Resources: Some Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
-msgid "A Lot of Stones"
-msgstr "Muitas pedras"
+msgid "Resources: A Lot of Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_water1/init.lua:7
 msgctxt "immovable"
-msgid "Water Vein"
-msgstr "Veio de água"
+msgid "Resources: Water Vein"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2698,37 +2698,41 @@ msgid ""
 "Atlantis."
 msgstr "Esta tribo é conhecida das mais antigas lendas. Apresento-te os filhos e filhas da Atlântida."
 
-#: ../../data/tribes/scripting/help/init.lua:48
+#: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
 msgstr "Enciclopédia da tribo"
 
-#: ../../data/tribes/scripting/help/init.lua:53
+#: ../../data/tribes/scripting/help/init.lua:59
 msgid "General"
 msgstr "Geral"
 
-#: ../../data/tribes/scripting/help/init.lua:58
+#: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
 msgstr "Introdução"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:70
 msgid "Controls"
 msgstr "Controle"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:76
 msgid "Tips"
 msgstr "Conselhos"
 
-#: ../../data/tribes/scripting/help/init.lua:79
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
 msgstr "Mercadorias"
 
-#: ../../data/tribes/scripting/help/init.lua:86
+#: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Trabalhadores"
 
-#: ../../data/tribes/scripting/help/init.lua:93
+#: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "Edifícios"
+
+#: ../../data/tribes/scripting/help/init.lua:106
+msgid "Immovables"
+msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11

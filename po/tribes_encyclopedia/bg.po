@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-10 16:38+0000\n"
-"PO-Revision-Date: 2018-01-11 07:33+0000\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
+"PO-Revision-Date: 2018-01-30 15:11+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -1551,6 +1551,216 @@ msgid ""
 "soldiers, wares and tools."
 msgstr "Служи като база за колонизация и търговия. Също така е място за войниците, стоките и инструментите Ви."
 
+#. TRANSLATORS: Helptext for a tribe immovable
+#: ../../data/tribes/immovables/ashes/helptexts.lua:4
+#: ../../data/tribes/immovables/destroyed_building/helptexts.lua:4
+msgid "The remains of a destroyed building."
+msgstr "Останките на разрушена сграда."
+
+#. TRANSLATORS: Helptext for a field
+#: ../../data/tribes/immovables/blackrootfield_harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield_harvested/helptexts.lua:4
+#: ../../data/tribes/immovables/field_harvested/helptexts.lua:4
+msgid "This field has been harvested."
+msgstr "Тази нива е събрана."
+
+#. TRANSLATORS: Helptext for a field
+#: ../../data/tribes/immovables/blackrootfield_medium/helptexts.lua:4
+#: ../../data/tribes/immovables/blackrootfield_small/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield_medium/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield_small/helptexts.lua:4
+#: ../../data/tribes/immovables/field_medium/helptexts.lua:4
+#: ../../data/tribes/immovables/field_small/helptexts.lua:4
+msgid "This field is growing."
+msgstr "Тази нива расте."
+
+#. TRANSLATORS: Helptext for a field
+#: ../../data/tribes/immovables/blackrootfield_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield_ripe/helptexts.lua:4
+#: ../../data/tribes/immovables/field_ripe/helptexts.lua:4
+msgid "This field is ready for harvesting."
+msgstr "Тази нива е готова за събиране."
+
+#. TRANSLATORS: Helptext for a field
+#: ../../data/tribes/immovables/blackrootfield_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/cornfield_tiny/helptexts.lua:4
+#: ../../data/tribes/immovables/field_tiny/helptexts.lua:4
+msgid "This field has just been planted."
+msgstr "Тази нива тъкмо е била засадена."
+
+#. TRANSLATORS: Helptext for a grapevine
+#: ../../data/tribes/immovables/grapevine_medium/helptexts.lua:4
+#: ../../data/tribes/immovables/grapevine_small/helptexts.lua:4
+msgid "This grapevine is growing."
+msgstr "Тези лози растат."
+
+#. TRANSLATORS: Helptext for a grapevine
+#: ../../data/tribes/immovables/grapevine_ripe/helptexts.lua:4
+msgid "This grapevine is ready for harvesting."
+msgstr "Тези лози са готови за обиране."
+
+#. TRANSLATORS: Helptext for a grapevine
+#: ../../data/tribes/immovables/grapevine_tiny/helptexts.lua:4
+msgid "This grapevine has just been planted."
+msgstr "Тези лози тъкмо са били насадени."
+
+#. TRANSLATORS: Helptext for a reed field
+#: ../../data/tribes/immovables/reed_medium/helptexts.lua:4
+#: ../../data/tribes/immovables/reed_small/helptexts.lua:4
+msgid "This reed is growing."
+msgstr "Тази тръстика расте."
+
+#. TRANSLATORS: Helptext for a reed field
+#: ../../data/tribes/immovables/reed_ripe/helptexts.lua:4
+msgid "This reed is ready for harvesting."
+msgstr "Тази тръстика е готова за събиране."
+
+#. TRANSLATORS: Helptext for a reed field
+#: ../../data/tribes/immovables/reed_tiny/helptexts.lua:4
+msgid "This reed has just been planted."
+msgstr "Тази тръстика тъкмо е била засадена."
+
+#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
+#. script probably want to lose the blank space here.
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#: ../../data/tribes/immovables/resi_coal1/helptexts.lua:3
+#: ../../data/tribes/immovables/resi_coal2/helptexts.lua:3
+#: ../../data/tribes/immovables/resi_gold1/helptexts.lua:3
+#: ../../data/tribes/immovables/resi_gold2/helptexts.lua:3
+#: ../../data/tribes/immovables/resi_iron1/helptexts.lua:3
+#: ../../data/tribes/immovables/resi_iron2/helptexts.lua:3
+#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:3
+#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:8
+#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:13
+#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:3
+#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:8
+#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:13
+#: ../../data/tribes/scripting/help/immovable_help.lua:34
+#: ../../data/tribes/scripting/help/ware_help.lua:31
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr "%s %s"
+
+#. TRANSLATORS: Helptext for a resource: Coal
+#: ../../data/tribes/immovables/resi_coal1/helptexts.lua:5
+#: ../../data/tribes/immovables/resi_coal2/helptexts.lua:5
+msgid "Coal veins contain coal that can be dug up by coal mines."
+msgstr "Въглищните запаси съдържат въглища, които могат да бъдат изкопани чрез мини за въглища."
+
+#. TRANSLATORS: Helptext for a resource: Coal
+#: ../../data/tribes/immovables/resi_coal1/helptexts.lua:7
+msgid "There is only a little bit of coal here."
+msgstr "Тук има съвсем малко въглища."
+
+#. TRANSLATORS: Helptext for a resource: Coal
+#: ../../data/tribes/immovables/resi_coal2/helptexts.lua:7
+msgid "There is a lot of coal here."
+msgstr "Тук има много въглища."
+
+#. TRANSLATORS: Helptext for a resource: Gold
+#: ../../data/tribes/immovables/resi_gold1/helptexts.lua:5
+#: ../../data/tribes/immovables/resi_gold2/helptexts.lua:5
+msgid "Gold veins contain gold ore that can be dug up by gold mines."
+msgstr "Златните запаси съдържат златна руда, която може да бъде изкопана чрез златни мини."
+
+#. TRANSLATORS: Helptext for a resource: Gold
+#: ../../data/tribes/immovables/resi_gold1/helptexts.lua:7
+msgid "There is only a little bit of gold here."
+msgstr "Тук има съвсем малко злато."
+
+#. TRANSLATORS: Helptext for a resource: Gold
+#: ../../data/tribes/immovables/resi_gold2/helptexts.lua:7
+msgid "There is a lot of gold here."
+msgstr "Тук има много злато."
+
+#. TRANSLATORS: Helptext for a resource: Iron
+#: ../../data/tribes/immovables/resi_iron1/helptexts.lua:5
+#: ../../data/tribes/immovables/resi_iron2/helptexts.lua:5
+msgid "Iron veins contain iron ore that can be dug up by iron mines."
+msgstr "Железните запаси съдържат желязна руда, която може да бъде изкопана чрез мини за желязо."
+
+#. TRANSLATORS: Helptext for a resource: Iron
+#: ../../data/tribes/immovables/resi_iron1/helptexts.lua:7
+msgid "There is only a little bit of iron here."
+msgstr "Тук има съвсем малко желязо."
+
+#. TRANSLATORS: Helptext for a resource: Iron
+#: ../../data/tribes/immovables/resi_iron2/helptexts.lua:7
+msgid "There is a lot of iron here."
+msgstr "Тук има много желязо."
+
+#. TRANSLATORS: Helptext for a resource: No resources
+#: ../../data/tribes/immovables/resi_none/helptexts.lua:4
+msgid "There are no resources in the ground here."
+msgstr "В земята тук няма никакви ресурси."
+
+#. TRANSLATORS: Helptext for an Atlantean resource: Stones
+#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:5
+#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:5
+msgid ""
+"Precious stones are used in the construction of big buildings. They can be "
+"dug up by a crystal mine. You will also get granite from the mine."
+msgstr "Ценните камъни се използват при строителството на големи сгради. Те могат да бъдат изкопани чрез кристална мина. От нея ще получавате и гранит."
+
+#. TRANSLATORS: Helptext for an Atlantean resource: Stones
+#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:7
+msgid "There are only a few precious stones here."
+msgstr "Тук има съвсем малко ценни камъни."
+
+#. TRANSLATORS: Helptext for a Barbarian resource: Stones
+#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:10
+#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:10
+msgid ""
+"Granite is a basic building material and can be dug up by a granite mine."
+msgstr "Гранитът е основен строителен материал и може да бъде изкопан чрез мина за гранит."
+
+#. TRANSLATORS: Helptext for a Barbarian resource: Stones
+#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:12
+msgid "There is only a little bit of granite here."
+msgstr "Тук има съвсем малко гранит."
+
+#. TRANSLATORS: Helptext for an Empire resource: Stones
+#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:15
+#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:15
+msgid ""
+"Marble is a basic building material and can be dug up by a marble mine. You "
+"will also get granite from the mine."
+msgstr "Мраморът е основен строителен материал и може да бъде изкопан чрез мина за мрамор. От нея ще получавате и гранит."
+
+#. TRANSLATORS: Helptext for an Empire resource: Stones
+#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:17
+msgid "There is only a little bit of marble here."
+msgstr "Тук има съвсем малко мрамор."
+
+#. TRANSLATORS: Helptext for an Atlantean resource: Stones
+#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:7
+msgid "There are many precious stones here."
+msgstr "Тук има много ценни камъни."
+
+#. TRANSLATORS: Helptext for a Barbarian resource: Stones
+#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:12
+msgid "There is a lot of granite here."
+msgstr "Тук има много гранит."
+
+#. TRANSLATORS: Helptext for an Empire resource: Stones
+#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:17
+msgid "There is a lot of marble here."
+msgstr "Тук има много мрамор."
+
+#. TRANSLATORS: Helptext for a resource: Water
+#: ../../data/tribes/immovables/resi_water1/helptexts.lua:4
+msgid "There is water in the ground here that can be pulled up by a well."
+msgstr "В земята тук има вода, която може да бъде извадена чрез кладенец."
+
+#. TRANSLATORS: Helptext for a ship construction site.
+#: ../../data/tribes/immovables/shipconstruction_atlanteans/helptexts.lua:4
+#: ../../data/tribes/immovables/shipconstruction_barbarians/helptexts.lua:4
+#: ../../data/tribes/immovables/shipconstruction_empire/helptexts.lua:4
+msgid "A ship is being constructed at this site."
+msgstr "Тук се строи кораб."
+
 #: ../../data/tribes/scripting/help/building_help.lua:104
 #: ../../data/tribes/scripting/help/format_help.lua:188
 #, lua-format
@@ -1571,7 +1781,7 @@ msgid "Lore"
 msgstr "Информация"
 
 #: ../../data/tribes/scripting/help/building_help.lua:212
-#: ../../data/tribes/scripting/help/init.lua:53
+#: ../../data/tribes/scripting/help/init.lua:59
 #: ../../data/tribes/scripting/help/tips.lua:44
 msgid "General"
 msgstr "Общи"
@@ -1716,14 +1926,17 @@ msgid "Port plot"
 msgstr "Парцел за пристанище"
 
 #: ../../data/tribes/scripting/help/building_help.lua:468
+#: ../../data/tribes/scripting/help/immovable_help.lua:47
 msgid "Small plot"
 msgstr "Малък парцел"
 
 #: ../../data/tribes/scripting/help/building_help.lua:470
+#: ../../data/tribes/scripting/help/immovable_help.lua:49
 msgid "Medium plot"
 msgstr "Среден парцел"
 
 #: ../../data/tribes/scripting/help/building_help.lua:472
+#: ../../data/tribes/scripting/help/immovable_help.lua:51
 msgid "Big plot"
 msgstr "Голям парцел"
 
@@ -1744,6 +1957,7 @@ msgid "Direct build cost:"
 msgstr "Цена за директно построяване:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:491
+#: ../../data/tribes/scripting/help/immovable_help.lua:57
 msgid "Build cost:"
 msgstr "Цена за строеж:"
 
@@ -1783,7 +1997,7 @@ msgid "Crew required:"
 msgstr "Нужен екип:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:651
-#: ../../data/tribes/scripting/help/init.lua:86
+#: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Работници"
 
@@ -1809,7 +2023,7 @@ msgid "Performance:"
 msgstr "Производителност:"
 
 #: ../../data/tribes/scripting/help/controls.lua:13
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:70
 msgid "Controls"
 msgstr "Управление"
 
@@ -1929,7 +2143,7 @@ msgstr "Превключване на съобщенията („новинит�
 
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/tribes/scripting/help/controls.lua:50
-#: ../../data/tribes/scripting/help/init.lua:48
+#: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
 msgstr "Енциклопедия на племената"
 
@@ -2227,22 +2441,40 @@ msgstr "Не е изчислено"
 msgid "%1% and %2%"
 msgstr "%1% и %2%"
 
-#: ../../data/tribes/scripting/help/init.lua:58
+#: ../../data/tribes/scripting/help/immovable_help.lua:47
+#: ../../data/tribes/scripting/help/immovable_help.lua:49
+#: ../../data/tribes/scripting/help/immovable_help.lua:51
+msgid "Space required: "
+msgstr "Нужно място: "
+
+#: ../../data/tribes/scripting/help/immovable_help.lua:55
+msgid "Requirements"
+msgstr "Изисквания"
+
+#: ../../data/tribes/scripting/help/immovable_help.lua:66
+msgid "Preferred Terrains"
+msgstr "Предпочитани видове терен"
+
+#: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
 msgstr "Въведение"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:76
 #: ../../data/tribes/scripting/help/tips.lua:70
 msgid "Tips"
 msgstr "Съвети"
 
-#: ../../data/tribes/scripting/help/init.lua:79
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
 msgstr "Стоки"
 
-#: ../../data/tribes/scripting/help/init.lua:93
+#: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "Сгради"
+
+#: ../../data/tribes/scripting/help/init.lua:106
+msgid "Immovables"
+msgstr "Неподвижни"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"
@@ -2268,28 +2500,20 @@ msgstr "Самостоятелна игра"
 msgid "Multiplayer"
 msgstr "Мрежова игра"
 
-#. TRANSLATORS: Put 2 sentences one after the other.
-#. Languages using Chinese script probably want to lose the blank space here.
-#: ../../data/tribes/scripting/help/ware_help.lua:33
-#, lua-format
-msgctxt "sentence_separator"
-msgid "%s %s"
-msgstr "%s %s"
-
-#: ../../data/tribes/scripting/help/ware_help.lua:36
+#: ../../data/tribes/scripting/help/ware_help.lua:34
 #: ../../data/tribes/scripting/help/worker_help.lua:129
 msgid "Purpose"
 msgstr "Цел"
 
 #. TRANSLATORS: Ware Encyclopedia: A building producing a ware
 #. TRANSLATORS: Worker Encyclopedia: A building recruiting a worker
-#: ../../data/tribes/scripting/help/ware_help.lua:56
+#: ../../data/tribes/scripting/help/ware_help.lua:54
 #: ../../data/tribes/scripting/help/worker_help.lua:38
 msgid "Producer"
 msgstr "Производител"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:97
+#: ../../data/tribes/scripting/help/ware_help.lua:95
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "Произведена стока:"
@@ -2297,7 +2521,7 @@ msgstr[1] "Произведени стоки:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:158
+#: ../../data/tribes/scripting/help/ware_help.lua:156
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "Консуматор"
@@ -3564,12 +3788,6 @@ msgctxt "atlanteans_worker"
 msgid "Burns coal."
 msgstr "Изгаря въглища."
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
-#. TODO(GunChleoc): This is unused
-#. TRANSLATORS#: Helptext for a resource: Stones
-#. TRANSLATORS#: Helptext for a resource: Stones
-#. TRANSLATORS#: Helptext for a resource: Stones
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"

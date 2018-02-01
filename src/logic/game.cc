@@ -118,6 +118,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
+     forester_cache_(),
      syncwrapper_(*this, synchash_),
      ctrl_(nullptr),
      writereplay_(true),

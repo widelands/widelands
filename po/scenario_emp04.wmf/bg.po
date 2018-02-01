@@ -3,14 +3,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Любомир Василев <lyubomirv@abv.bg>, 2017
+# Любомир Василев, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-10 16:38+0000\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Любомир Василев <lyubomirv@abv.bg>, 2017\n"
+"Last-Translator: Любомир Василев, 2017\n"
 "Language-Team: Bulgarian (https://www.transifex.com/widelands/teams/35159/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1482,12 +1482,12 @@ msgstr ""
 "животът и земите ти бъдат прокълнати и нека гневът на богинята да преследва "
 "семейството ти!"
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr "„%s“"
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Нова задача"

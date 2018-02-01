@@ -266,7 +266,6 @@ function expedition()
    sleep(25000)
    campaign_message_box(diary_page_5)
 
-   p1:reveal_campaign("campsect2")
    p1:reveal_scenario("empiretut03")
 end
 

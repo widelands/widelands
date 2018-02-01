@@ -381,13 +381,20 @@ void DefaultAI::think() {
 			}
 			break;
 		case SchedulerTaskId::kCheckShips:
-			set_taskpool_task_time(gametime + 3 * kShipCheckInterval, SchedulerTaskId::kCheckShips);
-			check_ships(gametime);
+			// if function returns false, we can postpone next call
+			{
+				const uint8_t wait_multiplier = (check_ships(gametime)) ? 1 : 5;
+				set_taskpool_task_time(
+				   gametime + wait_multiplier * kShipCheckInterval, SchedulerTaskId::kCheckShips);
+			}
 			break;
 		case SchedulerTaskId::KMarineDecisions:
-			set_taskpool_task_time(
-			   gametime + kMarineDecisionInterval, SchedulerTaskId::KMarineDecisions);
-			marine_main_decisions();
+			// if function returns false, we can postpone for next call
+			{
+				const uint8_t wait_multiplier = (marine_main_decisions()) ? 1 : 5;
+				set_taskpool_task_time(gametime + wait_multiplier * kMarineDecisionInterval,
+				                       SchedulerTaskId::KMarineDecisions);
+			}
 			break;
 		case SchedulerTaskId::kCheckMines:
 			if (check_economies()) {  // economies must be consistent
@@ -1048,45 +1055,125 @@ void DefaultAI::late_initialization() {
 }
 
 /**
- * Checks ALL available buildable fields.
+ * Checks PART of available buildable fields.
  *
- * this shouldn't be used often, as it might hang the game for some 100
- * milliseconds if the area the computer owns is big.
+ * this checks about 40-50 buildable fields. In big games, the player can have thousands
+ * of them, so we rotate the buildable_fields container and check 35 fields, and in addition
+ * we look for medium & big fields and near border fields if needed.
  */
 void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
+
+	// Every call we try to check first 35 buildable fields
+	constexpr uint16_t kMinimalFieldsCheck = 35;
+
 	uint16_t i = 0;
 
 	// To be sure we have some info about enemies we might see
 	update_player_stat(gametime);
 
-	// we test 40 fields that were update more than 1 seconds ago
+	// Generally we check fields as they are in the container, but we need also given
+	// number of "special" fields. So if given number of fields are not found within
+	// "regular" check, we must go on and look also on other fields...
+	uint8_t non_small_needed = 4;
+	uint8_t near_border_needed = 10;
+
+	// we test 35 fields that were update more than 1 seconds ago
 	while (!buildable_fields.empty() &&
-	       (buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
-	          gametime &&
-	       i < 40) {
+	       i < std::min<uint16_t>(kMinimalFieldsCheck, buildable_fields.size())) {
 		BuildableField& bf = *buildable_fields.front();
 
-		//  check whether we lost ownership of the node
-		if (bf.coords.field->get_owned_by() != player_number()) {
-			delete &bf;
-			buildable_fields.pop_front();
-			continue;
-		}
+		if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
+		    gametime) {
 
-		//  check whether we can still construct regular buildings on the node
-		if ((player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
-			unusable_fields.push_back(bf.coords);
-			delete &bf;
-			buildable_fields.pop_front();
-			continue;
-		}
+			//  check whether we lost ownership of the node
+			if (bf.coords.field->get_owned_by() != player_number()) {
+				delete &bf;
+				buildable_fields.pop_front();
+				continue;
+			}
 
-		update_buildable_field(bf);
+			//  check whether we can still construct regular buildings on the node
+			if ((player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
+				unusable_fields.push_back(bf.coords);
+				delete &bf;
+				buildable_fields.pop_front();
+				continue;
+			}
+
+			update_buildable_field(bf);
+			if (non_small_needed > 0) {
+				int32_t const maxsize = player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK;
+				if (maxsize > 1) {
+					non_small_needed -= 1;
+				}
+			}
+			if (near_border_needed > 0) {
+				if (bf.near_border) {
+					near_border_needed -= 1;
+				}
+			}
+		}
 		bf.field_info_expiration = gametime + kFieldInfoExpiration;
 		buildable_fields.push_back(&bf);
 		buildable_fields.pop_front();
 
 		i += 1;
+	}
+
+	// If needed we iterate once more and look for 'special' fields
+	// starting in the middle of buildable_fields to skip fields tested lately
+	// But not doing this if the count of buildable fields is too low
+	// (no need to bother)
+	if (buildable_fields.size() < kMinimalFieldsCheck * 3) {
+		return;
+	}
+
+	for (uint32_t j = buildable_fields.size() / 2; j < buildable_fields.size(); j++) {
+		// If we dont need to iterate (anymore) ...
+		if (non_small_needed + near_border_needed == 0) {
+			break;
+		}
+
+		// Skip if the field is not ours or was updated lately
+		if (buildable_fields[j]->coords.field->get_owned_by() != player_number()) {
+			continue;
+		}
+		// We are not interested in fields where info has expired less than 20s ago
+		if (buildable_fields[j]->field_info_expiration + 20000 > gametime) {
+			continue;
+		}
+
+		// Continue if field is blocked at the moment
+		if (blocked_fields.is_blocked(buildable_fields[j]->coords)) {
+			continue;
+		}
+
+		// Few constants to keep the code cleaner
+		const int32_t field_maxsize =
+		   player_->get_buildcaps(buildable_fields[j]->coords) & BUILDCAPS_SIZEMASK;
+		const bool field_near_border = buildable_fields[j]->near_border;
+
+		// Let decide if we need to update and for what reason
+		const bool update_due_size = non_small_needed && field_maxsize > 1;
+		const bool update_due_border = near_border_needed && field_near_border;
+
+		if (!(update_due_size || update_due_border)) {
+			continue;
+		}
+
+		// decreasing the counters
+		if (update_due_size) {
+			assert(non_small_needed > 0);
+			non_small_needed -= 1;
+		}
+		if (update_due_border) {
+			assert(near_border_needed > 0);
+			near_border_needed -= 1;
+		}
+
+		// and finnaly update the buildable field
+		update_buildable_field(*buildable_fields[j]);
+		buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
 	}
 }
 
