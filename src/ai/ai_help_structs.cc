@@ -191,15 +191,14 @@ bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 	return false;
 }
 
-NearFlag::NearFlag(const Flag& f, int32_t const c, int32_t const d)
-   : flag(&f), current_road_distance(c), air_distance(d) {
+NearFlag::NearFlag(const Flag& f, int32_t const c)
+   : flag(&f), current_road_distance(c) {
 	to_be_checked = true;
 }
 
 NearFlag::NearFlag() {
 	flag = nullptr;
 	current_road_distance = 0;
-	air_distance = 0;
 	to_be_checked = true;
 }
 
@@ -889,11 +888,12 @@ FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool econ
 }
 
 bool FlagsForRoads::Candidate::operator<(const Candidate& other) const {
-	if (reduction_score == other.reduction_score) {
-		return coords_hash < other.coords_hash;
-	} else {
-		return reduction_score > other.reduction_score;
-	}
+	const bool this_accessed_via_roads = !accessed_via_roads;
+	const bool that_accessed_via_roads = !other.accessed_via_roads;
+	const int32_t this_reduction_score = -reduction_score;
+	const int32_t that_reduction_score = -other.reduction_score;
+	 return std::tie(new_road_possible, different_economy, other.accessed_via_roads, other.reduction_score) <
+	  std::tie(new_road_possible, other.different_economy, accessed_via_roads, reduction_score);
 }
 
 bool FlagsForRoads::Candidate::operator==(const Candidate& other) const {

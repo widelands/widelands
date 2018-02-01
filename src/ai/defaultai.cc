@@ -3328,7 +3328,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	std::priority_queue<NearFlag> queue;
 	// only used to collect flags reachable walking over roads
 	std::vector<NearFlag> reachableflags;
-	queue.push(NearFlag(roadstartflag, 0, 0));
+	queue.push(NearFlag(roadstartflag, 0));
 	uint8_t pathcounts = 0;
 	uint8_t checkradius = 0;
 	if (spots_ > kSpotsEnough) {
@@ -3388,7 +3388,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 				continue;
 			}
 
-			queue.push(NearFlag(*endflag, 0, dist));
+			queue.push(NearFlag(*endflag, 0));
 		}
 	}
 	return false;
@@ -3486,6 +3486,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	const Map& map = game().map();
 
 	// initializing new object of FlagsForRoads, we will push there all candidate flags
+	// First we dont even know if a road can be built there (from current flag)
 	Widelands::FlagsForRoads RoadCandidates(min_reduction);
 
 	FindNodeWithFlagOrRoad functor;
@@ -3530,21 +3531,19 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			}
 		}
 	}
+
+
 	// now we walk over roads and if field is reachable by roads, we change the distance assigned
 	// above
-
-
 	std::map<uint32_t, NearFlag> nearflags;  // only used to collect flags reachable walk over roads
 	//uint32_t tmpi= flag.get_position().hash();
-	nearflags[flag.get_position().hash()] = NearFlag(flag, 0, 0);
+	nearflags[flag.get_position().hash()] = NearFlag(flag, 0);
 	//nearflags[flag.get_position().hash()] = NearFlag(flag, 0, 0); // NearFlag(flag, 0, 0);
 
     printf ("starting at %3dx%3d\n", flag.get_position().x, flag.get_position().y);
 
 	// algorithm to walk on roads
 	while (true) {
-
-
 	    ////find candidate that has to be checked and with nearest distance NOCOM
 	    uint32_t start_field = std::numeric_limits<uint32_t>::max();
 	    uint32_t nearest_distance = 10000;
@@ -3583,11 +3582,13 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
             //This is brand new nearflag
             if (nearflags.count(endflag_hash) == 0){
-                nearflags[endflag_hash] = NearFlag(*endflag, nearflags[start_field].current_road_distance + road->get_path().get_nsteps(), dist);
+                //NOCOM we don need air distance here
+                int32_t overall_dist = map.calc_distance(flag.get_position(), endflag->get_position());
+                nearflags[endflag_hash] = NearFlag(*endflag, nearflags[start_field].current_road_distance + road->get_path().get_nsteps());
                 printf (" Inserting new nearflag %3dx%3d with current road %4d, air distance: %d\n",
                 endflag->get_position().x, endflag->get_position().y,
                 nearflags[endflag_hash].current_road_distance,
-                dist);
+                overall_dist);
             } else {
                 // if distance is bigger, ignoring
                 if (nearflags[endflag_hash].current_road_distance <= nearflags[start_field].current_road_distance + road->get_path().get_nsteps()) {
@@ -3600,16 +3601,13 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
                      nearflags[endflag_hash].to_be_checked = true;
                 }
             }
-
-
 		}
 	}
 
-		// Sending calculated walking costs from nearflags to RoadCandidates to update info on
+	// Sending calculated walking costs from nearflags to RoadCandidates to update info on
 	// Candidate flags/roads
 	for (auto& nf_walk : nearflags) {
-		if (map.calc_distance(flag.get_position(), nf_walk.second.flag->get_position()) <= checkradius) {
-			// nearflags contains also flags beyond the radius, so we skip these
+	        // NearFlag contains also flags beyond check radius, these are not relevent for us
 			if (RoadCandidates.has_candidate(nf_walk.second.flag->get_position().hash())){
 				RoadCandidates.set_cur_road_distance(
 				   nf_walk.second.flag->get_position(), nf_walk.second.current_road_distance);
@@ -3618,9 +3616,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				nf_walk.second.flag->get_position().y,
 				nf_walk.second.current_road_distance,
 				RoadCandidates.get_candidate_score(nf_walk.second.flag->get_position().hash()));
-			}
-
-
 		   }
 	   }
 
@@ -3640,14 +3635,11 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		fields_necessity += 5;
 	}
 	fields_necessity *= std::abs(management_data.get_military_number_at(64)) * 5;
-	// We do not calculate roads to all nearby flags, ideally we investigate 4 roads, but the number
-	// can be higher if a road cannot be built to considered flag. The logic is: 2 points for
-	// possible
-	// road, 1 for impossible, and count < 10 so in worst scenario we will calculate 10 impossible
-	// roads without finding any possible
+
+	// We do not calculate roads to all nearby flags....
 	uint32_t count = 0;
 	uint32_t current = 0;  // hash of flag that we are going to calculate in the iteration
-	// let sort candidate flags by their air distance
+	// let sort candidate flags by their air distance and economy and so on
 	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue));
 
 	while (count < 10 && RoadCandidates.get_best_uncalculated(&current)) {
@@ -3667,13 +3659,13 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	}
 
 
-	//NOCOM
-	printf("Road candidates before sorting: %d\n", RoadCandidates.flags_queue.size());
-	std::sort(RoadCandidates.flags_queue.begin(), RoadCandidates.flags_queue.end(), [](FlagsForRoads::Candidate a, FlagsForRoads::Candidate b) {
-        return a.new_road_length < b.new_road_length;
-    });
-    printf("Road candidates after sorting: %d\n", RoadCandidates.flags_queue.size());
-	printf (" listing RoadCandidates:\n");
+	// Re-sorrting RoadCandidates by reduction - probably not needed
+	//std::sort(RoadCandidates.flags_queue.begin(), RoadCandidates.flags_queue.end(), [](FlagsForRoads::Candidate a, FlagsForRoads::Candidate b) {
+     //   return a.reduction < b.reduction;
+    //});
+    std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue));
+
+	printf (" listing RoadCandidates (starting with best reduction):\n");
 		for (auto& candidate_flag : RoadCandidates.flags_queue) {
 			printf ("  %3dx%3d: Air distance: %3d, current road: %3d, possible: %4d, reduction %5d, new road %s possible, diff. economy: %s\n",
 			Coords::unhash(candidate_flag.coords_hash).x,

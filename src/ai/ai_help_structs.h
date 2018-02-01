@@ -255,11 +255,11 @@ struct NearFlag {
 	// ordering nearflags by biggest reduction
 	struct CompareShortening {
 		bool operator()(const NearFlag& a, const NearFlag& b) const {
-			return (a.current_road_distance - a.air_distance) > (b.current_road_distance - b.air_distance);
+			return a.current_road_distance > b.current_road_distance;
 		}
 	};
 	NearFlag();
-	NearFlag(const Flag& f, int32_t const c, int32_t const d);
+	NearFlag(const Flag& f, int32_t const c);
 
 	bool operator<(const NearFlag& f) const {
 		return current_road_distance > f.current_road_distance;
@@ -272,7 +272,6 @@ struct NearFlag {
 	Flag const* flag;
 	bool to_be_checked;
 	uint32_t current_road_distance;
-	int32_t air_distance;
 };
 
 // FIFO like structure for pairs <gametime,id>, where id is optional
