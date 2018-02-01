@@ -11,13 +11,14 @@
 # CupIvan <mail@cupivan.ru>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
+"PO-Revision-Date: 2018-02-01 09:16+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1597,7 +1598,7 @@ msgstr "Каменоломня"
 msgctxt "barbarians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Камнетёс из этой каменоломни больше не может найти скалы в своей рабочей области."
+msgstr "Камнетес из этой каменоломни больше не может найти скалы в своей рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:7
@@ -2009,7 +2010,7 @@ msgstr "добывает мрамор"
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "Каменщик из этой каменоломни больше не может найти скалы в своей рабочей области."
+msgstr "Камнетес из этой каменоломни больше не может найти скалы в своей рабочей области."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:7
@@ -2050,7 +2051,7 @@ msgstr "Литейная"
 #: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/init.lua:7
 msgctxt "empire_building"
 msgid "Stonemason’s House"
-msgstr "Домик каменщика"
+msgstr "Домик камнетеса"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sculpting a marble column
 #. because ...
@@ -2606,61 +2607,61 @@ msgstr "Тростник (крохотный)"
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Coal Vein"
-msgstr ""
+msgstr "Ресурсы: Угольная жила"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Main Coal Vein"
-msgstr ""
+msgstr "Ресурсы: Главная угольная жила"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Gold Vein"
-msgstr ""
+msgstr "Ресурсы: Золотая жила"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Main Gold Vein"
-msgstr ""
+msgstr "Ресурсы: Главная золотая жила"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Iron Vein"
-msgstr ""
+msgstr "Ресурсы: Железная жила"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Main Iron Vein"
-msgstr ""
+msgstr "Ресурсы: Главная железная жила"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
 msgid "Resources: None"
-msgstr ""
+msgstr "Ресурсы: Нет"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Some Stones"
-msgstr ""
+msgstr "Ресурсы: Немного камней"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: A Lot of Stones"
-msgstr ""
+msgstr "Ресурсы: Много камней"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_water1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Water Vein"
-msgstr ""
+msgstr "Ресурсы: Родник"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2738,7 +2739,7 @@ msgstr "Здания"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr ""
+msgstr "Статичные объекты"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -2798,7 +2799,7 @@ msgstr "Деревня"
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
 msgid "Start the game with a peaceful village"
-msgstr ""
+msgstr "Начать игру в мирной деревне"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:55
@@ -3675,7 +3676,7 @@ msgstr "Солдат"
 #: ../../data/tribes/workers/barbarians/stonemason/init.lua:23
 msgctxt "barbarians_worker"
 msgid "Stonemason"
-msgstr "Каменщик"
+msgstr "Камнетес"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/trainer/init.lua:16
@@ -3849,7 +3850,7 @@ msgstr "Солдат"
 #: ../../data/tribes/workers/empire/stonemason/init.lua:23
 msgctxt "empire_worker"
 msgid "Stonemason"
-msgstr "Каменщик"
+msgstr "Камнетес"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/toolsmith/init.lua:17

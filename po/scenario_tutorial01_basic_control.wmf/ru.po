@@ -8,14 +8,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
-# Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
+"PO-Revision-Date: 2018-02-01 09:29+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,18 +86,18 @@ msgstr "Обычно игра начинается лишь с одним шта
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Нам нужно найти подходящее место для хижины дровосека. Чтобы упростить задачу, мы можем активировать \"Показать места строительства\".\nЭто можно сделать двумя способами:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Press the Space bar to toggle them, or"
-msgstr ""
+msgstr "Нажмите ПРОБЕЛ для переключения показа, или"
 
 #. TRANSLATORS: List item. Has an image of the button next to it.
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr ""
+msgstr "щелкнуть кнопку \"Показать места строительства\" в нижней части экрана."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -119,7 +119,7 @@ msgstr "Когда включены значки мест строительст
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Right-click on this window now and then give it a try."
-msgstr ""
+msgstr "А теперь щелкните правой кнопкой мыши по этому окну и попробуйте."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Lumberjack’s Spot"
@@ -280,7 +280,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "Если щёлкнуть мышкой на строительной площадке — откроется окно. Тут можно увидеть какие товары всё ещё отсутствуют — они закрашены серым цветом. Здесь же можно посмотреть прогресс строительства."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
@@ -854,7 +854,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Отлично! Давайте посмотрим, как работает система сообщений в реальной игре, приступим? Для этого я уберу все скалы подальше от бедных каменщиков в каменоломнях. Тогда каждый из них отправит сообщение о том, что он не может найти каких либо скал в его рабочей области, а потом они попробуют сделать какую-нибудь другую работу."
+msgstr "Отлично! Давайте посмотрим, как работает система сообщений в реальной игре, приступим? Для этого я уберу все скалы подальше от несчастных камнетесов в каменоломнях. Тогда каждый из них отправит сообщение о том, что он не может найти каких либо скал в его рабочей области, а потом они попробуют сделать какую-нибудь другую работу."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:427
 msgid "Messages Arrived!"

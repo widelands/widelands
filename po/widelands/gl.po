@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
+"PO-Revision-Date: 2018-01-30 12:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Galician (http://www.transifex.com/widelands/widelands/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -235,8 +235,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:211
-#: ../../src/logic/game.cc:264
+#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:212
+#: ../../src/logic/game.cc:265
 msgid "Loading tribes"
 msgstr ""
 
@@ -314,8 +314,8 @@ msgid ""
 "incompatible."
 msgstr "Widelands non puido cargar o ficheiro «%s». O formato do ficheiro semella incompatible."
 
-#: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:221
-#: ../../src/logic/game.cc:271
+#: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:222
+#: ../../src/logic/game.cc:272
 msgid "Creating players"
 msgstr "Creando os xogadores"
 
@@ -1028,48 +1028,48 @@ msgid "Loading graphics"
 msgstr ""
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:130
+#: ../../src/logic/game.cc:131
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:203 ../../src/logic/game.cc:255
-#: ../../src/logic/game.cc:325 ../../src/logic/game.cc:353
+#: ../../src/logic/game.cc:204 ../../src/logic/game.cc:256
+#: ../../src/logic/game.cc:326 ../../src/logic/game.cc:354
 msgid "Preloading map"
 msgstr "Preparando a carga do mapa"
 
-#: ../../src/logic/game.cc:209 ../../src/logic/game.cc:261
+#: ../../src/logic/game.cc:210 ../../src/logic/game.cc:262
 msgid "Loading world"
 msgstr ""
 
-#: ../../src/logic/game.cc:231 ../../src/logic/game.cc:299
+#: ../../src/logic/game.cc:232 ../../src/logic/game.cc:300
 msgid "Loading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:338 ../../src/logic/game.cc:370
+#: ../../src/logic/game.cc:339 ../../src/logic/game.cc:371
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1378
 msgid "Loading…"
 msgstr ""
 
-#: ../../src/logic/game.cc:433
+#: ../../src/logic/game.cc:434
 msgid "Creating player infrastructure"
 msgstr "Creando infraestructura do xogador"
 
-#: ../../src/logic/game.cc:444 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:219
 msgid "Missing starting position"
 msgstr "Falta unha posición de inicio"
 
-#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:220
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands non puido iniciar a partida porque o xogador %u non tiña unha posición inicial.\nPodes engadir unha posición inicial manualmente co editor do Widelands para solucionar o problema."
 
-#: ../../src/logic/game.cc:785
+#: ../../src/logic/game.cc:786
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:787
+#: ../../src/logic/game.cc:788
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -1456,30 +1456,30 @@ msgstr ""
 msgid "A new warehouse was added to your economy."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:115
+#: ../../src/logic/map_objects/tribes/worker.cc:116
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:216
+#: ../../src/logic/map_objects/tribes/worker.cc:217
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:884
+#: ../../src/logic/map_objects/tribes/worker.cc:980
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1771
+#: ../../src/logic/map_objects/tribes/worker.cc:1867
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1777
+#: ../../src/logic/map_objects/tribes/worker.cc:1873
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1487,7 +1487,7 @@ msgid_plural "Workers"
 msgstr[0] "Traballador"
 msgstr[1] "Traballadores"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1778
+#: ../../src/logic/map_objects/tribes/worker.cc:1874
 msgid "Worker got lost!"
 msgstr ""
 
@@ -1721,122 +1721,126 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/internet_gaming.cc:173
-msgid "For hosting a game, please take a look at the notes at:"
+msgid "Users marked with IRC will possibly not react to messages."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:212
+#: ../../src/network/internet_gaming.cc:211
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:286
+#: ../../src/network/internet_gaming.cc:285
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Algo foi mal: %s"
 
-#: ../../src/network/internet_gaming.cc:395
+#: ../../src/network/internet_gaming.cc:394
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:416
+#: ../../src/network/internet_gaming.cc:415
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:416
+#: ../../src/network/internet_gaming.cc:415
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:427
+#: ../../src/network/internet_gaming.cc:426
 msgid "Unexpected packet"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:428
+#: ../../src/network/internet_gaming.cc:427
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:440
+#: ../../src/network/internet_gaming.cc:439
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:451
+#: ../../src/network/internet_gaming.cc:450
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/network/internet_gaming.cc:475
+#: ../../src/network/internet_gaming.cc:474
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:475
+#: ../../src/network/internet_gaming.cc:474
 msgid "Invalid message type"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:513
+#: ../../src/network/internet_gaming.cc:512
 #, c-format
 msgid "The game %s is now available"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:523
+#: ../../src/network/internet_gaming.cc:522
 #, c-format
 msgid "The game %s has been closed"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:562
+#: ../../src/network/internet_gaming.cc:569
 #, c-format
 msgid "%s joined the lobby"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:571
+#: ../../src/network/internet_gaming.cc:576
 #, c-format
 msgid "%s left the lobby"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:623
+#: ../../src/network/internet_gaming.cc:628
 msgid "Chat message could not be sent."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:637
+#: ../../src/network/internet_gaming.cc:642
 #, c-format
 msgid "ERROR: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:647
+#: ../../src/network/internet_gaming.cc:652
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:774
+#: ../../src/network/internet_gaming.cc:779
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:793
-#: ../../src/network/internet_gaming.cc:800
+#: ../../src/network/internet_gaming.cc:798
+#: ../../src/network/internet_gaming.cc:805
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:875
+#: ../../src/network/internet_gaming.cc:812
+msgid "Private messages to IRC users are not supported."
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:889
 msgid "Conversion error"
 msgstr ""
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:878
+#: ../../src/network/internet_gaming.cc:892
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:895
+#: ../../src/network/internet_gaming.cc:909
 msgid "unknown"
 msgstr "descoñecido"
 
@@ -2385,20 +2389,20 @@ msgstr ""
 msgid "Game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:364
+#: ../../src/ui_fsmenu/internet_lobby.cc:374
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:367
+#: ../../src/ui_fsmenu/internet_lobby.cc:377
 msgid "Connection Timed Out"
 msgstr ""
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:402
+#: ../../src/ui_fsmenu/internet_lobby.cc:412
 msgctxt "server_name"
 msgid "unnamed"
 msgstr ""
