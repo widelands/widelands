@@ -877,68 +877,38 @@ bool BlockedFields::is_blocked(Coords coords) {
 	return (blocked_fields_.count(coords.hash()) != 0);
 }
 
-FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool economy)
-   : coords_hash(coords), air_distance(distance), different_economy(economy) {
+// as a policy, we just set some default value, that will be updated later on
+FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool different_economy)
+   : coords_hash(coords), air_distance(distance) {
 	new_road_possible = false;
-	accessed_via_roads = false;
+	new_road_length = 200;
 	// Values are only very rough, and are dependant on the map size
-	new_road_length = 2 * Widelands::kMapDimensions.at(Widelands::kMapDimensions.size() - 1);
-	current_road_distance = 2 * (Widelands::kMapDimensions.size() - 1);  // must be big enough
-	reduction_score = -air_distance;  // allows reasonable ordering from the start
+	current_road_length = (different_economy) ? 300 : 100;  // must be big enough
 }
 
+// Used when sorting cadidate flags from best one
 bool FlagsForRoads::Candidate::operator<(const Candidate& other) const {
-	const bool this_accessed_via_roads = !accessed_via_roads;
-	const bool that_accessed_via_roads = !other.accessed_via_roads;
-	const int32_t this_reduction_score = -reduction_score;
-	const int32_t that_reduction_score = -other.reduction_score;
-	 return std::tie(new_road_possible, different_economy, other.accessed_via_roads, other.reduction_score) <
-	  std::tie(new_road_possible, other.different_economy, accessed_via_roads, reduction_score);
+	const int32_t other_rs = other.reduction_score();
+	const int32_t this_rs = reduction_score();
+	return std::tie(new_road_possible, other_rs) < std::tie(new_road_possible, this_rs);
 }
 
 bool FlagsForRoads::Candidate::operator==(const Candidate& other) const {
 	return coords_hash == other.coords_hash;
 }
 
-void FlagsForRoads::Candidate::calculate_score() {
-	if (!new_road_possible) {
-		reduction_score = kRoadNotFound - air_distance;  // to have at least some ordering preserved
-	} else if (different_economy) {
-		reduction_score = kRoadToDifferentEconomy - air_distance - 2 * new_road_length;
-	} else if (!accessed_via_roads) {
-		if (air_distance + 6 > new_road_length) {
-			reduction_score = kShortcutWithinSameEconomy - air_distance - 2 * new_road_length;
-		} else {
-			reduction_score = kRoadNotFound;
-		}
-	} else {
-		reduction_score = current_road_distance - 2 * new_road_length;
-	}
-}
-
-int32_t FlagsForRoads::get_candidate_score(const uint32_t hash) {
-	for (auto& candidate_flag : flags_queue) {
-		if (candidate_flag.coords_hash == hash) {
-			return candidate_flag.reduction_score;
-		}
-	}
-	NEVER_HERE();
-}
-
-
-
 void FlagsForRoads::print() {  // this is for debugging and development purposes
 	for (auto& candidate_flag : flags_queue) {
 		log("   %starget: %3dx%3d, saving: %5d (%3d), air distance: %3d, new road: %6d, score: %5d "
 		    "%s\n",
-		    (candidate_flag.reduction_score >= min_reduction && candidate_flag.new_road_possible) ?
+		    (candidate_flag.reduction_score() >= min_reduction && candidate_flag.new_road_possible) ?
 		       "+" :
 		       " ",
 		    Coords::unhash(candidate_flag.coords_hash).x,
 		    Coords::unhash(candidate_flag.coords_hash).y,
-		    candidate_flag.current_road_distance - candidate_flag.new_road_length, min_reduction,
+		    candidate_flag.current_road_length - candidate_flag.new_road_length, min_reduction,
 		    candidate_flag.air_distance, candidate_flag.new_road_length,
-		    candidate_flag.reduction_score,
+		    candidate_flag.reduction_score(),
 		    (candidate_flag.new_road_possible) ? ", new road possible" : " ");
 	}
 }
@@ -960,30 +930,17 @@ void FlagsForRoads::road_possible(Widelands::Coords coords, const uint32_t new_r
 	for (auto& candidate_flag : flags_queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {
 			candidate_flag.new_road_length = new_road;
-			//candidate_flag.current_roads_distance = current_road;
+			// candidate_flag.current_roads_distance = current_road;
 			candidate_flag.new_road_possible = true;
-			candidate_flag.calculate_score();
+			candidate_flag.reduction_score();
 			return;
 		}
 	}
 	NEVER_HERE();
 }
 
-
-// Remove the flag from candidates as interconnecting road is not possible
-void FlagsForRoads::road_impossible(Widelands::Coords coords) {
-	const uint32_t hash = coords.hash();
-	for (auto candidate_flag = flags_queue.begin(); candidate_flag != flags_queue.end(); ++candidate_flag) {
-		if ((*candidate_flag).coords_hash  == hash) {
-			flags_queue.erase(candidate_flag);
-			return;
-		}
-	}
-
-	NEVER_HERE();
-}
-
-bool FlagsForRoads::has_candidate(const uint32_t hash){
+// find_reachable_fields returns duplicates so we deal with them
+bool FlagsForRoads::has_candidate(const uint32_t hash) {
 	for (auto& candidate_flag : flags_queue) {
 		if (candidate_flag.coords_hash == hash) {
 			return true;
@@ -992,40 +949,34 @@ bool FlagsForRoads::has_candidate(const uint32_t hash){
 	return false;
 }
 
-// Updating walking distance over existing roads
-// Queue does not allow modifying its members so we erase and then eventually insert modified member
+// Updating walking distance into flags_queue
 void FlagsForRoads::set_cur_road_distance(Widelands::Coords coords, int32_t cur_distance) {
 	for (auto& candidate_flag : flags_queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {
-			//candidate_flag.new_road_length = new_distance;
-			candidate_flag.current_road_distance = cur_distance;
-			candidate_flag.accessed_via_roads = true;
-			candidate_flag.calculate_score();
-			//printf ("Road distance re-set\n");
+			candidate_flag.current_road_length = cur_distance;
+			candidate_flag.reduction_score();
 			return;
 		}
-		//printf ("Hashes does not match %8d vs %8d\n", hash, (*candidate_flag).coords_hash);
 	}
-	//printf ("Road distance rcould not be e-set\n");
 }
 
-
+// Returns mostly best candidate, as a result of sorting
 bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 	// If AI can ask for 2nd position, but there is only one viable candidate
 	// we return the first one of course
 	bool has_winner = false;
 	for (auto candidate_flag : flags_queue) {
-		if (candidate_flag.reduction_score < min_reduction || !candidate_flag.new_road_possible) {
+		if (candidate_flag.reduction_score() < min_reduction || !candidate_flag.new_road_possible) {
 			continue;
 		}
 		assert(candidate_flag.air_distance > 0);
-		assert(candidate_flag.reduction_score >= min_reduction);
+		assert(candidate_flag.reduction_score() >= min_reduction);
 		assert(candidate_flag.new_road_possible);
 		*winner_hash = candidate_flag.coords_hash;
 		has_winner = true;
 
-		if (std::rand() % 3 > 0) {
-			// with probability of 2/3 we accept this flag
+		if (std::rand() % 4 > 0) {
+			// with probability of 3/4 we accept this flag
 			return true;
 		}
 	}

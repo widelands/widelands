@@ -731,28 +731,26 @@ struct FlagsForRoads {
 
 	struct Candidate {
 		Candidate();
-		Candidate(uint32_t coords, int32_t distance, bool economy);
+		Candidate(uint32_t coords, int32_t distance, bool different_economy);
 
 		uint32_t coords_hash;
 		int32_t new_road_length;
-		int32_t current_road_distance;
+		int32_t current_road_length;
 		int32_t air_distance;
-		int32_t reduction_score;
-		bool different_economy;
+
 		bool new_road_possible;
-		bool accessed_via_roads;
 
 		bool operator<(const Candidate& other) const;
 		bool operator==(const Candidate& other) const;
-		void calculate_score();
+		int32_t reduction_score() const {return current_road_length - new_road_length - (new_road_length - air_distance) / 3;};
 	};
 
 	int32_t min_reduction;
 	// This is the core of this object - candidate flags to be ordered by air_distance
 	std::deque<Candidate> flags_queue; //NOCOM
 
-	void add_flag(Widelands::Coords coords, int32_t air_dist, bool diff_economy) {
-		flags_queue.push_back(Candidate(coords.hash(), air_dist, diff_economy));
+	void add_flag(Widelands::Coords coords, int32_t air_dist, bool different_economy) {
+		flags_queue.push_back(Candidate(coords.hash(), air_dist, different_economy));
 	}
 
 	uint32_t count() {
@@ -766,12 +764,11 @@ struct FlagsForRoads {
 	bool get_best_uncalculated(uint32_t* winner);
 	// When we test candidate flag if road can be built to it, there are two possible outcomes:
 	void road_possible(Widelands::Coords coords, const uint32_t new_road);
-	void road_impossible(Widelands::Coords coords);
 	// Updating walking distance over existing roads
 	void set_cur_road_distance(Widelands::Coords coords, const int32_t cur_distance);
 	// Finally we query the flag that we will build a road to
 	bool get_winner(uint32_t* winner_hash);
-	int32_t get_candidate_score(const uint32_t hash);
+
 };
 
 // This is a struct that stores strength of players, info on teams and provides some outputs from

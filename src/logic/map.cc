@@ -1696,14 +1696,13 @@ int32_t Map::findpath(Coords instart,
 			cost = curpf->real_cost + ((flags & fpBidiCost) ? calc_bidi_cost(cur, *direction) :
 			                                                  calc_cost(cur, *direction));
 
-			//building capacity on neighb
+			// If required (indicated by caps_sensitivity) we increase the path costs
+			// if the path is just crossing a field with building capabilities
 			if (caps_sensitivity > 0) {
-				 //NOCOM
 				int32_t buildcaps_score = neighb.field->get_caps() & BUILDCAPS_SIZEMASK;
 				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_MINE) ? 1 : 0;
 				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_PORT) ? 9 : 0;
 				cost += buildcaps_score * caps_sensitivity;
-				//if (buildcaps_score * caps_sensitivity > 0) printf (" Increasing score by %10d\n", buildcaps_score * caps_sensitivity);
 			}
 
 			if (neighbpf.cycle != pathfields->cycle) {
