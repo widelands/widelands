@@ -742,7 +742,7 @@ struct FlagsForRoads {
 
 		bool operator<(const Candidate& other) const;
 		bool operator==(const Candidate& other) const;
-		int32_t reduction_score() const {return current_road_length - new_road_length - (new_road_length - air_distance) / 3;};
+		int32_t reduction_score() const;
 	};
 
 	int32_t min_reduction;

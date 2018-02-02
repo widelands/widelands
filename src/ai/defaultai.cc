@@ -3401,8 +3401,8 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 // can be built to them
 // - Walking over road network to collect info on flags that are accessible over road network
 // - Than merge info from NearFlags to RoadCandidates and consider roads to few best candidates from
-// RoadCandidates We use score named "reduction" that is basically diff between connection over
-// existing roads minus possible road from starting flag to candidate flag Of course there are two
+// RoadCandidates. We use score named "reduction" that is basically diff between connection over
+// existing roads minus possible road from starting flag to candidate flag. Of course there are two
 // special cases:
 // - the candidate flag does not belong to the same economy, so no road connection exists
 // - they are from same economy, but are connected beyond range of checkradius, so actual length of
@@ -3600,7 +3600,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				   NearFlag(*endflag, nearflags[start_field].current_road_distance +
 				                         road->get_path().get_nsteps());
 			} else {
-				// Were here
+				// We know about this flag already
 				if (nearflags[endflag_hash].current_road_distance >
 				    nearflags[start_field].current_road_distance + road->get_path().get_nsteps()) {
 					// ..but this current connection is shorter than one found before
@@ -3641,7 +3641,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	fields_necessity *= std::abs(management_data.get_military_number_at(64)) * 5;
 
 	// We need to sort these flags somehow, because we are not going to investigate all of them
-	// so sorting by air_distance (nearer flags first)
+	// so sorting first by current road lenght (that might contain fake values for flags that were
+	// not reached over roads) and secondary by air_distance (nearer flags first)
 	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue),
 	          [](const FlagsForRoads::Candidate& a, const FlagsForRoads::Candidate& b) {
 				  // Here we are doing a kind of bucketing
@@ -3667,7 +3668,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		}
 	}
 
-	// re-sorting again, now by reduction score
+	// re-sorting again, now by reduction score (custom operator specified in .h file)
 	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue));
 
 	// Well and finally building the winning road (if any)

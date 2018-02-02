@@ -877,12 +877,12 @@ bool BlockedFields::is_blocked(Coords coords) {
 	return (blocked_fields_.count(coords.hash()) != 0);
 }
 
-// as a policy, we just set some default value, that will be updated later on
+// As a policy, we just set some default value, that will be updated later on
 FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool different_economy)
    : coords_hash(coords), air_distance(distance) {
 	new_road_possible = false;
+	// Just custom values
 	new_road_length = 200;
-	// Values are only very rough, and are dependant on the map size
 	current_road_length = (different_economy) ? 600 : 400;  // must be big enough
 }
 
@@ -895,6 +895,10 @@ bool FlagsForRoads::Candidate::operator<(const Candidate& other) const {
 
 bool FlagsForRoads::Candidate::operator==(const Candidate& other) const {
 	return coords_hash == other.coords_hash;
+}
+
+int32_t FlagsForRoads::Candidate::reduction_score() const {
+	return current_road_length - new_road_length - (new_road_length - air_distance) / 3;
 }
 
 void FlagsForRoads::print() {  // this is for debugging and development purposes
