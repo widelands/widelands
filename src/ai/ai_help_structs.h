@@ -747,7 +747,7 @@ struct FlagsForRoads {
 
 	int32_t min_reduction;
 	// This is the core of this object - candidate flags to be ordered by air_distance
-	std::deque<Candidate> flags_queue; //NOCOM
+	std::deque<Candidate> flags_queue;
 
 	void add_flag(Widelands::Coords coords, int32_t air_dist, bool different_economy) {
 		flags_queue.push_back(Candidate(coords.hash(), air_dist, different_economy));
