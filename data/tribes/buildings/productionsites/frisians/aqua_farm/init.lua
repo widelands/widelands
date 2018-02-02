@@ -53,29 +53,30 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant",
-            "call=fish",
+            "call=breed_fish",
+            "call=fish_pond",
             "return=skipped",
          },
       },
-      plant = {
+      breed_fish = {
          -- TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
          descname = _"breeding fish",
          actions = {
             "return=skipped unless economy needs fish",
             "sleep=23000",
-            "return=failed unless site has water:3 and site has fruit",
+            "return=failed unless site has water:3",
+            "return=failed unless site has fruit",
             "worker=breed_in_pond",
-            "consume=fruit water:3"
+            "consume=fruit water:3",
          },
       },
-      fish = {
+      fish_pond = {
          -- TRANSLATORS: Completed/Skipped/Did not start fishing because ...
          descname = _"fishing",
          actions = {
             "return=skipped unless economy needs fish",
             "sleep=9000",
-            "worker=fish_in_pond"
+            "worker=fish_in_pond",
          },
       },
    },
