@@ -11,18 +11,18 @@ tribes:new_militarysite_type {
    vision_range = 21,
 
    buildcost = {
-      brick = 2,
-      granite = 8,
+      brick = 6,
+      granite = 4,
       log = 6,
       thatch_reed = 3
    },
    return_on_dismantle = {
-      brick = 1,
-      granite = 4,
+      brick = 3,
+      granite = 2,
       log = 3,
       thatch_reed = 1
-   },
 
+   },
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
@@ -43,8 +43,8 @@ tribes:new_militarysite_type {
    },
 
    max_soldiers = 7,
-   heal_per_second = 190,
-   conquers = 11,
+   heal_per_second = 170,
+   conquers = 10,
    prefer_heroes = true,
 
    messages = {

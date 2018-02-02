@@ -41,7 +41,7 @@ tribes:new_militarysite_type {
       prohibited_till = 1500
    },
 
-   max_soldiers = 10,
+   max_soldiers = 12,
    heal_per_second = 220,
    conquers = 12,
    prefer_heroes = true,

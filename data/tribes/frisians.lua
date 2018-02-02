@@ -207,6 +207,12 @@ tribes:new_tribe {
       "resi_stones1",
       "resi_stones2",
       "frisians_shipconstruction",
+      --These non-frisian immovables can be used by bee-keepers
+      "field_medium",
+      "cornfield_medium",
+      "blackrootfield_medium",
+      "grapevine_medium",
+      "grapevine_ripe", --used by the fruit collector
    },
 
    -- The order here also determines the order in lists on screen.

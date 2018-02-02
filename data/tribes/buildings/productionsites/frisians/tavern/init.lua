@@ -64,12 +64,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=produce_fast",
-            "call=produce_cheap",
+            "call=produce_malus",
+            "call=produce_bonus",
             "return=skipped"
          },
       },
-      produce_fast = {
+      produce_malus = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _"preparing only one ration",
          actions = {
@@ -81,13 +81,13 @@ tribes:new_productionsite_type {
             "produce=ration"
          },
       },
-      produce_cheap = {
+      produce_bonus = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
          descname = _"preparing rations",
          actions = {
             "return=skipped unless economy needs ration",
-            "sleep=28000",
             "consume=fruit,bread_frisians smoked_fish,smoked_meat",
+            "sleep=28000",
             "animate=working 38000",
             "produce=ration:2"
          },
