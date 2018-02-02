@@ -883,14 +883,14 @@ FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool diff
 	new_road_possible = false;
 	new_road_length = 200;
 	// Values are only very rough, and are dependant on the map size
-	current_road_length = (different_economy) ? 300 : 100;  // must be big enough
+	current_road_length = (different_economy) ? 600 : 400;  // must be big enough
 }
 
 // Used when sorting cadidate flags from best one
 bool FlagsForRoads::Candidate::operator<(const Candidate& other) const {
 	const int32_t other_rs = other.reduction_score();
 	const int32_t this_rs = reduction_score();
-	return std::tie(new_road_possible, other_rs) < std::tie(new_road_possible, this_rs);
+	return std::tie(other.new_road_possible, other_rs) < std::tie(new_road_possible, this_rs);
 }
 
 bool FlagsForRoads::Candidate::operator==(const Candidate& other) const {

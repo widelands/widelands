@@ -3273,7 +3273,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 
 	// Various tests to invoke building of a shortcut (new road)
 	if (flag.nr_of_roads() == 0 || needs_warehouse) {
-		create_shortcut_road(flag, 17, 22, gametime);
+		create_shortcut_road(flag, 22, 22, gametime);
 		inhibit_road_building_ = gametime + 800;
 	} else if (!has_building && flag.nr_of_roads() == 1) {
 		// This is end of road without any building, we do not initiate interconnection thus
@@ -3281,7 +3281,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	} else if (flag.nr_of_roads() == 1 || std::rand() % 10 == 0) {
 		if (spots_ > kSpotsEnough) {
 			// This is the normal situation
-			create_shortcut_road(flag, 15, 22, gametime);
+			create_shortcut_road(flag, 18, 22, gametime);
 			inhibit_road_building_ = gametime + 800;
 		} else if (spots_ > kSpotsTooLittle) {
 			// We are short of spots so shortening must be significant
@@ -3294,11 +3294,11 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		}
 		// a warehouse with 3 or less roads
 	} else if (is_warehouse && flag.nr_of_roads() <= 3) {
-		create_shortcut_road(flag, 9, -10, gametime);
+		create_shortcut_road(flag, 15, -10, gametime);
 		inhibit_road_building_ = gametime + 400;
 		// and when a flag is full with wares
 	} else if (spots_ > kSpotsEnough && flag.current_wares() > 5) {
-		create_shortcut_road(flag, 9, -5, gametime);
+		create_shortcut_road(flag, 15, -5, gametime);
 		inhibit_road_building_ = gametime + 400;
 	} else {
 		return false;
@@ -3330,7 +3330,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	std::vector<NearFlag> reachableflags;
 	queue.push(NearFlag(roadstartflag, 0));
 	uint8_t pathcounts = 0;
-	uint8_t checkradius = 0;
+	uint8_t checkradius = 15;
 	if (spots_ > kSpotsEnough) {
 		checkradius = 10;
 	} else if (spots_ > kSpotsTooLittle) {
@@ -3539,7 +3539,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			const bool different_economy = (player_immovable->get_economy() != flag.get_economy());
 			const int32_t air_distance = map.calc_distance(flag.get_position(), reachable_coords);
 			if (!RoadCandidates.has_candidate(reachable_coords.hash())) {
-				// NOCOM get rid of air_distance
 				RoadCandidates.add_flag(reachable_coords, air_distance, different_economy);
 			}
 		}
@@ -3590,7 +3589,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			int32_t dist =
 			   map.calc_distance(nearflags[start_field].flag->get_position(), endflag->get_position());
 
-			if (dist > checkradius + 5) {  //  Testing bigger vicinity then checkradius....
+			if (dist > checkradius + 2) {  //  Testing bigger vicinity then checkradius....
 				continue;
 			}
 
@@ -3645,13 +3644,16 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// so sorting by air_distance (nearer flags first)
 	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue),
 	          [](const FlagsForRoads::Candidate& a, const FlagsForRoads::Candidate& b) {
-		          return a.air_distance < b.air_distance;
+				  // Here we are doing a kind of bucketing
+		          const int32_t a_length = a.current_road_length/50;
+		          const int32_t b_length = b.current_road_length/50;
+		          return std::tie(b_length, a.air_distance) < std::tie(a_length, b.air_distance);
 	          });
 
 	// Now we calculate roads from here to few best looking RoadCandidates....
-	uint32_t count = 0;
+	uint32_t possible_roads_count = 0;
 	uint32_t current = 0;  // hash of flag that we are going to calculate in the iteration
-	while (count < 5 && RoadCandidates.get_best_uncalculated(&current)) {
+	while (possible_roads_count < 5 && RoadCandidates.get_best_uncalculated(&current)) {
 		const Widelands::Coords coords = Coords::unhash(current);
 		Path path;
 
@@ -3661,7 +3663,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		   map.findpath(flag.get_position(), coords, 0, path, check, 0, fields_necessity);
 		if (pathcost >= 0) {
 			RoadCandidates.road_possible(coords, path.get_nsteps());
-			count += 1;
+			possible_roads_count += 1;
 		}
 	}
 
