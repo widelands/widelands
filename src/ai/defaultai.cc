@@ -987,7 +987,7 @@ void DefaultAI::late_initialization() {
 	}
 
 	// getting list of all fields nearby port space
-	// TODO it seems port spaces can change over time so ports_vicinity needs to be refreshed from
+	// TODO(tiborb ?): it seems port spaces can change over time so ports_vicinity needs to be refreshed from
 	// time to time
 	for (const Coords& c : map.get_port_spaces()) {
 		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(c), 3));
