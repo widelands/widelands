@@ -3552,7 +3552,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// algorithm to walk on roads
 	// All nodes are marked as to_be_checked and under some conditions, the same node can be checked
 	// twice
-	while (true) {
+	for (;;) {
 		// looking for a node with shortest existing road distance from starting flag and one that has
 		// to be checked
 		uint32_t start_field = std::numeric_limits<uint32_t>::max();
@@ -3584,10 +3584,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				endflag = &road->get_flag(Road::FlagEnd);
 			}
 
-			uint32_t endflag_hash = endflag->get_position().hash();
+			const uint32_t endflag_hash = endflag->get_position().hash();
 
-			int32_t dist =
-			   map.calc_distance(nearflags[start_field].flag->get_position(), endflag->get_position());
+			const int32_t dist =
+			   map.calc_distance(flag->get_position(), endflag->get_position());
 
 			if (dist > checkradius + 2) {  //  Testing bigger vicinity then checkradius....
 				continue;

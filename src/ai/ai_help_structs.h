@@ -756,16 +756,16 @@ struct FlagsForRoads {
 	uint32_t count() {
 		return flags_queue.size();
 	}
-	bool has_candidate(const uint32_t hash);
+	bool has_candidate(uint32_t hash);
 
 	// This is for debugging and development purposes
 	void print();
 	// during processing we need to pick first one uprocessed flag (with best score so far)
 	bool get_best_uncalculated(uint32_t* winner);
 	// When we test candidate flag if road can be built to it, there are two possible outcomes:
-	void road_possible(Widelands::Coords coords, const uint32_t new_road);
+	void road_possible(Widelands::Coords coords, uint32_t new_road);
 	// Updating walking distance over existing roads
-	void set_cur_road_distance(Widelands::Coords coords, const int32_t cur_distance);
+	void set_cur_road_distance(Widelands::Coords coords, int32_t cur_distance);
 	// Finally we query the flag that we will build a road to
 	bool get_winner(uint32_t* winner_hash);
 
