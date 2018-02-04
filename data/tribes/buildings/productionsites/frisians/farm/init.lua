@@ -25,17 +25,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = { 127, 117 },
+         hotspot = { 124, 135 },
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_???.png"),
-         hotspot = { 127, 117 },
+         hotspot = { 124, 135 },
          fps = 15,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = { 127, 117 },
+         hotspot = { 124, 135 },
       },
    },
 
@@ -67,7 +67,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _"planting barley",
          actions = {
-            "sleep=42000",
+            "sleep=70000",
             "worker=plant"
          }
       },
@@ -75,9 +75,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _"harvesting barley",
          actions = {
-            "sleep=12000",
+            "sleep=20000",
             "worker=harvest",
-            "animate=working 90000"
+            "animate=working 148500",
+            "produce=barley" --produces 2 barley per field
          }
       },
    },

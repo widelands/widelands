@@ -5,25 +5,16 @@ shewnWarningReed = false
 shewnWarningClay = false
 shewnWarningBricks = false
 
-local fields = {}
-for y=0,map.height - 1 do
-   local fld = {}
-   for x=0,map.width - 1 do
-      local f = map:get_field (x, y)
-      fld [#fld + 1] = f
-   end
-   fields [#fields + 1] = fld
-end
-
 function checkWarningEarlyAttack ()
    local y = 0
    local westernmostEnemy = map.width - 1
    local easternmostOwn = 0
    while not shewWarningEarlyAttack do
-      for x,field in fields [y] do
+      for x=0,map.width - 1 do
+         local field = map:get_field (x, y)
          if field.owner == p1 and x > easternmostOwn then easternmostOwn = x end
          if field.owner == p2 and x < westernmostEnemy then westernmostEnemy = x end
-         if easternmostEnemy - westernmostOwn < 21 then --if they are so close that they´d be inside a new tower´s vision range
+         if westernmostEnemy - easternmostOwn < 21 then --if they are so close that they´d be inside a new tower´s vision range
             campaign_message_box (warning_early_attack)
             return
          end
@@ -89,6 +80,12 @@ function warningClay ()
          ready = 0
       end
    end
+end
+
+function supersoldier ()
+   
+   
+   
 end
 
 function count (ware)
@@ -261,13 +258,17 @@ function mission_thread ()
    o = add_campaign_objective (obj_train_soldiers)
    
    --wait until at least 1 soldier has level 10
+   local skipToFlood = false
    local hasL10 = false
    run (checkWarningEarlyAttack)
-   while not hasL10 do
+   while not (hasL10 or skipToFlood) do
       local bld = array_combine (
          p1:get_buildings ("frisians_headquarters"),
          p1:get_buildings ("frisians_warehouse"),
+         p1:get_buildings ("frisians_port"),
          p1:get_buildings ("frisians_sentinel"),
+         p1:get_buildings ("frisians_fortress"),
+         p1:get_buildings ("frisians_tower"),
          p1:get_buildings ("frisians_wooden_tower"),
          p1:get_buildings ("frisians_wooden_tower_high"),
          p1:get_buildings ("frisians_outpost")
@@ -275,6 +276,7 @@ function mission_thread ()
       for idx,site in ipairs (bld) do
          hasL10 = hasL10 or (site:get_soldiers {2,6,2,0} > 0)
       end
+      skipToFlood = skipToFlood or p2.defeated
       sleep (4273)
    end
    shewWarningEarlyAttack = true --We are strong enough now – no need for the warning if it didn´t appear yet
@@ -282,15 +284,17 @@ function mission_thread ()
    
    --Attack!
    set_objective_done (o)
-   campaign_message_box (training_4)
-   campaign_message_box (training_5)
-   campaign_message_box (training_6)
    p1:allow_buildings {"frisians_wooden_tower_high", "frisians_tower", "frisians_scouts_house"}
-   o = add_campaign_objective (obj_defeat_enemy)
-   while not p2.defeated do sleep (4273) end
+   if not skipToFlood then
+      campaign_message_box (training_4)
+      campaign_message_box (training_5)
+      campaign_message_box (training_6)
+      o = add_campaign_objective (obj_defeat_enemy)
+      while not p2.defeated do sleep (4273) end
+      set_objective_done (o)
+   end
    shewnWarningReed = true
    shewnWarningClay = true
-   set_objective_done (o)
    
    sleep (2000)
    scroll_to_field (map.player_slots [2].starting_field)

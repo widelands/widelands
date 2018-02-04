@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    attributes = { "field" },
    programs = {
       program = {
-         "animate=idle 135000",
+         "animate=idle 225000",
          "transform=barleyfield_medium",
       }
    },

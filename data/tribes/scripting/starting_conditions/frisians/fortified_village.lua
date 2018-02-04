@@ -69,6 +69,8 @@ return {
              frisians_reed_farmer = 2,
              frisians_berry_farmer = 1,
              frisians_farmer = 1,
+             frisians_landlady = 1,
+             frisians_smoker = 1,
              frisians_geologist = 4,
              frisians_woodcutter = 3,
              frisians_beekeeper = 1,

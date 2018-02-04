@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    attributes = { "ripe_barley", "field" },
    programs = {
       program = {
-         "animate=idle 1500000",
+         "animate=idle 2500000",
          "remove=",
       },
       harvest = {

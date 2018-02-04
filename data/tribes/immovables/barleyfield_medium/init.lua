@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    attributes = { "field", "flowering" },
    programs = {
       program = {
-         "animate=idle 150000",
+         "animate=idle 250000",
          "transform=barleyfield_ripe",
       }
    },

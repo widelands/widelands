@@ -47,22 +47,22 @@ animations = {
       fps = 10
    },
    die_w_alt = {
-      pictures = path.list_files (dirname .. "die_f_e_??.png"),
-      hotspot = { 23, 27 },
-      fps = 10
-   },
-   die_e_alt = {
       pictures = path.list_files (dirname .. "die_f_w_??.png"),
       hotspot = { 23, 27 },
       fps = 10
    },
+   die_e_alt = {
+      pictures = path.list_files (dirname .. "die_f_e_??.png"),
+      hotspot = { 23, 27 },
+      fps = 10
+   },
    die_w = {
-      pictures = path.list_files (dirname .. "die_b_e_??.png"),
+      pictures = path.list_files (dirname .. "die_b_w_??.png"),
       hotspot = { 23, 27 },
       fps = 10
    },
    die_e = {
-      pictures = path.list_files (dirname .. "die_b_w_??.png"),
+      pictures = path.list_files (dirname .. "die_b_e_??.png"),
       hotspot = { 23, 27 },
       fps = 10
    },
