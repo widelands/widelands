@@ -28,9 +28,9 @@
 namespace Widelands {
 
 // couple of constants for calculation of road interconnections
-constexpr int kRoadNotFound = -1000;
-constexpr int kShortcutWithinSameEconomy = 1000;
-constexpr int kRoadToDifferentEconomy = 10000;
+constexpr int kRoadPossiblyBuildable = 200;
+constexpr int kConnectedByRoads = 400;
+constexpr int kNotConnectedByRoads = 600;
 constexpr int kNoAiTrainingMutation = 200;
 constexpr int kUpperDefaultMutationLimit = 150;
 constexpr int kLowerDefaultMutationLimit = 75;
@@ -882,8 +882,8 @@ FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool diff
    : coords_hash(coords), air_distance(distance) {
 	new_road_possible = false;
 	// Just custom values
-	new_road_length = 200;
-	current_road_length = (different_economy) ? 600 : 400;  // must be big enough
+	new_road_length = kRoadPossiblyBuildable;
+	current_road_length = (different_economy) ? kNotConnectedByRoads : kConnectedByRoads;
 }
 
 // Used when sorting cadidate flags from best one

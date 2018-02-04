@@ -3587,7 +3587,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			const uint32_t endflag_hash = endflag->get_position().hash();
 
 			const int32_t dist =
-			   map.calc_distance(flag->get_position(), endflag->get_position());
+			   map.calc_distance(flag.get_position(), endflag->get_position());
 
 			if (dist > checkradius + 2) {  //  Testing bigger vicinity then checkradius....
 				continue;
