@@ -3316,20 +3316,79 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	Flag& roadstartflag = road.get_flag(Road::FlagStart);
 	Flag& roadendflag = road.get_flag(Road::FlagEnd);
 
+	//Collecting full path (from crossing/building to another crossing/building)
+	std::vector<Widelands::Flag*> full_road;
+	full_road.push_back(&roadstartflag);
+	full_road.push_back(&roadendflag);
+
+	//Making sure it starts with proper flag NOCOM
+	uint16_t road_length = road.get_path().get_nsteps();
+	// Ignore wares on end flags !
+	uint16_t wares_on_road = roadstartflag.current_wares() + roadendflag.current_wares();
+	for (int j = 0;j < 2;j++) {
+		//printf ("Starting first iteration\n");
+		bool new_road_found = true;
+		while (new_road_found && full_road.back()->nr_of_roads() <= 2 && full_road.back()->get_building() == nullptr) {
+			const size_t sz = full_road.size();
+			new_road_found = false;
+			//printf ("DEBUG testing %3dx%3d [%3dx%3d, %3dx%3d], roads: %d\n",
+				//full_road.back()->get_position().x,  full_road.back()->get_position().y,
+				//full_road[sz-1]->get_position().x,  full_road[sz-1]->get_position().y,
+				//full_road[sz-2]->get_position().x,  full_road[sz-2]->get_position().y,
+				//full_road.back()->nr_of_roads());
+			for (uint8_t i = 1; i <= 6; ++i) {
+				Road* const near_road = full_road.back()->get_road(i);
+
+				if (!near_road) {
+					continue;
+				}
+
+				Flag* other_end;
+				if (near_road->get_flag(Road::FlagStart).get_position().hash() == full_road.back()->get_position().hash()){
+					other_end = &near_road->get_flag(Road::FlagEnd);
+				} else {
+					other_end = &near_road->get_flag(Road::FlagStart);
+				}
+
+				if (other_end->get_position() == full_road[sz-2]->get_position()) {
+					//printf("DEBUG this is known road (%3dx%3d)\n", other_end->get_position().x, other_end->get_position().y);
+					continue;
+				}
+				//printf("DEBUG we found another road to %3dx%3d\n", other_end->get_position().x, other_end->get_position().y);
+				full_road.push_back(other_end);
+				wares_on_road += other_end->current_wares();
+				road_length += near_road->get_path().get_nsteps();
+				new_road_found = true;
+				break;
+
+			}
+		}
+		//Reverting
+		std::reverse(full_road.begin(), full_road.end());
+	}
+	printf ("DEBUG Current road: %3dx%3d to  %3dx%3d, length: %2d, wares: %2d\n",
+	full_road.front()->get_position().x,
+	full_road.front()->get_position().y,
+	full_road.back()->get_position().x,
+	full_road.back()->get_position().y,
+	road_length,
+	wares_on_road
+	);
+
 	// We do not dismantle (even consider it) if the road is busy (some wares on flags), unless there
 	// is shortage of build spots
 
-	if (spots_ > kSpotsEnough && roadstartflag.current_wares() + roadendflag.current_wares() > 0) {
+	if (spots_ > kSpotsEnough && wares_on_road > 5) {
 		return false;
-	} else if (roadstartflag.current_wares() + roadendflag.current_wares() > 2) {
+	} else if (wares_on_road > 8) {
 		return false;
 	}
 
 	std::priority_queue<NearFlag> queue;
 	// only used to collect flags reachable walking over roads
 	std::vector<NearFlag> reachableflags;
-	queue.push(NearFlag(roadstartflag, 0));
-	uint8_t pathcounts = 0;
+	queue.push(NearFlag(*full_road.front(), 0));
+	uint16_t alternative_path = 0;
 	uint8_t checkradius = 15;
 	if (spots_ > kSpotsEnough) {
 		checkradius = 10;
@@ -3339,21 +3398,21 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 		checkradius = 15;
 	}
 
+	//Need to push all flags from road to reachableflags to be properly ignored
+
 	// algorithm to walk on roads
 	while (!queue.empty()) {
 
+		printf ("DEBUG testing queue flag %3dx%3d\n", queue.top().flag->get_position().x, queue.top().flag->get_position().y);
 		// testing if we stand on the roadendflag
 		// if is is for first time, just go on,
 		// if second time, the goal is met, function returns true
-		if (roadendflag.get_position().x == queue.top().flag->get_position().x &&
-		    roadendflag.get_position().y == queue.top().flag->get_position().y) {
-			pathcounts += 1;
-			if (pathcounts > 1) {
-				// OK, this is a second route how to get to roadendflag
-				return true;
-			}
-			queue.pop();
-			continue;
+		if (full_road.back()->get_position().x == queue.top().flag->get_position().x &&
+		    full_road.back()->get_position().y == queue.top().flag->get_position().y) {
+			//queue.pop();
+			printf ("DEBUG * other end achieved with distance: %d\n", queue.top().current_road_distance);
+			alternative_path = queue.top().current_road_distance;
+			break;
 		}
 
 		std::vector<NearFlag>::iterator f =
@@ -3368,6 +3427,7 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 		queue.pop();
 		NearFlag& nf = reachableflags.back();
 
+
 		for (uint8_t i = 1; i <= 6; ++i) {
 			Road* const near_road = nf.flag->get_road(i);
 
@@ -3381,14 +3441,20 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 				endflag = &near_road->get_flag(Road::FlagEnd);
 			}
 
-			int32_t dist =
-			   game().map().calc_distance(roadstartflag.get_position(), endflag->get_position());
+			printf ("DEBUG testing candidate flag %3dx%3d\n", endflag->get_position().x, endflag->get_position().y);
 
-			if (dist > checkradius) {  //  out of range of interest
+			const int32_t dist1 =
+			   game().map().calc_distance(full_road.front()->get_position(), endflag->get_position());
+			const int32_t dist2 =
+			   game().map().calc_distance(full_road.back()->get_position(), endflag->get_position());
+
+
+			if (dist1 > checkradius && dist2 > checkradius) {  //  out of range of interest
 				continue;
 			}
 
-			queue.push(NearFlag(*endflag, 0));
+			const uint32_t new_length = nf.current_road_distance + near_road->get_path().get_nsteps();
+			queue.push(NearFlag(*endflag, new_length));
 		}
 	}
 	return false;
