@@ -201,7 +201,7 @@ private:
 	                          int16_t minReduction,
 	                          const int32_t gametime);
 	// trying to identify roads that might be removed
-	bool dispensable_road_test(Widelands::Road&);
+	bool dispensable_road_test(const Widelands::Road&);
 
 	bool check_economies();
 	bool check_productionsites(uint32_t);

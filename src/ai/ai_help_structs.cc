@@ -891,6 +891,7 @@ bool FlagsForRoads::Candidate::operator<(const Candidate& other) const {
 	const int32_t other_rs = other.reduction_score();
 	const int32_t this_rs = reduction_score();
 	return std::tie(other.new_road_possible, other_rs) < std::tie(new_road_possible, this_rs);
+	//return new_road_length * 10 / current_road_length > other.new_road_length * 10 / other.current_road_length; NOCOM
 }
 
 bool FlagsForRoads::Candidate::operator==(const Candidate& other) const {
@@ -970,7 +971,8 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 	// we return the first one of course
 	bool has_winner = false;
 	for (auto candidate_flag : flags_queue) {
-		if (candidate_flag.reduction_score() < min_reduction || !candidate_flag.new_road_possible) {
+		if (candidate_flag.reduction_score() < min_reduction || !candidate_flag.new_road_possible ||
+		candidate_flag.new_road_length * 2 > candidate_flag.current_road_length) {
 			continue;
 		}
 		assert(candidate_flag.air_distance > 0);
@@ -981,6 +983,7 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 
 		if (std::rand() % 4 > 0) {
 			// with probability of 3/4 we accept this flag
+			printf ("Winner has new road %d, existing road: %d\n",candidate_flag.new_road_length, candidate_flag.current_road_length);
 			return true;
 		}
 	}

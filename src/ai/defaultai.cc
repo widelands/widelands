@@ -3311,7 +3311,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 // and tries to find alternative route from one flag to another.
 // if route exists, it is not too long, and current road is not intensively used
 // the road can be dismantled
-bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
+bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 
 	Flag& roadstartflag = road.get_flag(Road::FlagStart);
 	Flag& roadendflag = road.get_flag(Road::FlagEnd);
@@ -3324,7 +3324,16 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	//Making sure it starts with proper flag NOCOM
 	uint16_t road_length = road.get_path().get_nsteps();
 	// Ignore wares on end flags !
-	uint16_t wares_on_road = roadstartflag.current_wares() + roadendflag.current_wares();
+	uint16_t wares_on_road = 0;
+	assert(full_road.size() > 1);
+	if (full_road.size() == 2){
+		wares_on_road = roadstartflag.current_wares() + roadendflag.current_wares();
+	} else {
+		for (uint16_t k = 1; k < full_road.size()-1;k++) {
+			wares_on_road += full_road[k]->current_wares();
+		}
+	}
+
 	for (int j = 0;j < 2;j++) {
 		//printf ("Starting first iteration\n");
 		bool new_road_found = true;
@@ -3366,14 +3375,30 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 		//Reverting
 		std::reverse(full_road.begin(), full_road.end());
 	}
-	printf ("DEBUG Current road: %3dx%3d to  %3dx%3d, length: %2d, wares: %2d\n",
-	full_road.front()->get_position().x,
-	full_road.front()->get_position().y,
-	full_road.back()->get_position().x,
-	full_road.back()->get_position().y,
-	road_length,
-	wares_on_road
-	);
+	//printf ("DEBUG Current road: %3dx%3d to  %3dx%3d, length: %2d, wares: %2d\n",
+	//full_road.front()->get_position().x,
+	//full_road.front()->get_position().y,
+	//full_road.back()->get_position().x,
+	//full_road.back()->get_position().y,
+	//road_length,
+	//wares_on_road
+	//);
+
+	//If it by chance starts or end next to a warehouse...
+	if (Building* b = full_road.front()->get_building()) {
+		BuildingObserver& bo = get_building_observer(b->descr().name().c_str());
+		if (bo.type == BuildingObserver::Type::kWarehouse) {
+			return false;
+		}
+	}
+	if (Building* b = full_road.back()->get_building()) {
+		BuildingObserver& bo = get_building_observer(b->descr().name().c_str());
+		if (bo.type == BuildingObserver::Type::kWarehouse) {
+			return false;
+		}
+	}
+
+	//bo.type = BuildingObserver::Type::kWarehouse;
 
 	// We do not dismantle (even consider it) if the road is busy (some wares on flags), unless there
 	// is shortage of build spots
@@ -3387,8 +3412,13 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	std::priority_queue<NearFlag> queue;
 	// only used to collect flags reachable walking over roads
 	std::vector<NearFlag> reachableflags;
+	std::set<uint32_t> existing_road_flags;
+	for (uint16_t j = 1; j < full_road.size() - 1; j++) {
+		existing_road_flags.insert(full_road[j]->get_position().hash());
+	}
+
 	queue.push(NearFlag(*full_road.front(), 0));
-	uint16_t alternative_path = 0;
+	uint16_t alternative_path = 10000;
 	uint8_t checkradius = 15;
 	if (spots_ > kSpotsEnough) {
 		checkradius = 10;
@@ -3403,14 +3433,14 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 	// algorithm to walk on roads
 	while (!queue.empty()) {
 
-		printf ("DEBUG testing queue flag %3dx%3d\n", queue.top().flag->get_position().x, queue.top().flag->get_position().y);
+		//printf ("DEBUG testing queue flag %3dx%3d\n", queue.top().flag->get_position().x, queue.top().flag->get_position().y);
 		// testing if we stand on the roadendflag
 		// if is is for first time, just go on,
 		// if second time, the goal is met, function returns true
 		if (full_road.back()->get_position().x == queue.top().flag->get_position().x &&
 		    full_road.back()->get_position().y == queue.top().flag->get_position().y) {
 			//queue.pop();
-			printf ("DEBUG * other end achieved with distance: %d\n", queue.top().current_road_distance);
+			//printf ("DEBUG * other end achieved with distance: %d\n", queue.top().current_road_distance);
 			alternative_path = queue.top().current_road_distance;
 			break;
 		}
@@ -3441,7 +3471,12 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 				endflag = &near_road->get_flag(Road::FlagEnd);
 			}
 
-			printf ("DEBUG testing candidate flag %3dx%3d\n", endflag->get_position().x, endflag->get_position().y);
+
+			if (existing_road_flags.count(endflag->get_position().hash())>0){
+				continue; // this is just a road we consider to get rid of
+			}
+
+			//printf ("DEBUG testing candidate flag %3dx%3d\n", endflag->get_position().x, endflag->get_position().y);
 
 			const int32_t dist1 =
 			   game().map().calc_distance(full_road.front()->get_position(), endflag->get_position());
@@ -3457,6 +3492,14 @@ bool DefaultAI::dispensable_road_test(Widelands::Road& road) {
 			queue.push(NearFlag(*endflag, new_length));
 		}
 	}
+
+	if (alternative_path + wares_on_road / 2 <= road_length + 1){
+		printf ("DEBUG we have candidate for dismantle of road with length %d, alternative %d. Wares: %d\n",
+		road_length, alternative_path, wares_on_road);
+		return true;
+	}
+
+
 	return false;
 }
 
@@ -3565,7 +3608,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// initializing new object of FlagsForRoads, we will push there all candidate flags
 	// First we dont even know if a road can be built there (from current flag)
-	Widelands::FlagsForRoads RoadCandidates(min_reduction);
+	Widelands::FlagsForRoads RoadCandidates(min_reduction); //NOCOM
 
 	FindNodeWithFlagOrRoad functor;
 	CheckStepRoadAI check(player_, MOVECAPS_WALK, true);
@@ -3715,6 +3758,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		          const int32_t a_length = a.current_road_length/50;
 		          const int32_t b_length = b.current_road_length/50;
 		          return std::tie(b_length, a.air_distance) < std::tie(a_length, b.air_distance);
+					//return b_length * 10 / b.air_distance < a_length * 10 / a.air_distance;
+
 	          });
 
 	// Now we calculate roads from here to few best looking RoadCandidates....
@@ -3736,6 +3781,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// re-sorting again, now by reduction score (custom operator specified in .h file)
 	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue));
+
+	for (uint16_t k = 0; k < RoadCandidates.flags_queue.size(); k++) {
+		printf ("pos: %d, portion %d\n", k, RoadCandidates.flags_queue[k].new_road_length * 10 / RoadCandidates.flags_queue[k].current_road_length);
+	}
 
 	// Well and finally building the winning road (if any)
 	uint32_t winner_hash = 0;
