@@ -14,7 +14,7 @@ p1 = wl.Game ().players[1]
 p2 = wl.Game ().players[2]
 
 firstToFlood = map:get_field (9, 89)
-expansionMark = map:get_field (86, 66)
+expansionMark = map:get_field (68, 68)
 
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

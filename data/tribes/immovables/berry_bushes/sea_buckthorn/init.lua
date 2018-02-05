@@ -25,7 +25,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "tiny/idle_?.png"),
-         hotspot = {21, 40},
+         hotspot = {9, 19},
          scale = 3,
       },
    },
@@ -49,7 +49,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "small/idle_?.png"),
-         hotspot = {21, 40},
+         hotspot = {14, 32},
          scale = 3,
       },
    },
@@ -73,7 +73,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "medium/idle_?.png"),
-         hotspot = {21, 40},
+         hotspot = {17, 40},
          scale = 3,
       },
    },
@@ -99,7 +99,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "ripe/idle_?.png"),
-         hotspot = {21, 40},
+         hotspot = {17, 40},
          scale = 3,
       },
    },

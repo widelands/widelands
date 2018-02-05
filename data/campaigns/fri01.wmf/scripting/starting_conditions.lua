@@ -57,6 +57,7 @@ p2:allow_buildings {
    "frisians_woodcutters_house",
    "frisians_foresters_house",
    "frisians_well",
+   "frisians_reed_farm",
    "frisians_claypit",
    "frisians_brick_burners_house",
    "frisians_fishers_house",
@@ -80,26 +81,24 @@ p2:allow_buildings {
    "frisians_mead_brewery",
    "frisians_honey_bread_bakery",
    "frisians_drinking_hall",
-   "frisians_fortress",
-   "frisians_sentinel",
-   "frisians_outpost"}
+   "frisians_sentinel"}
 
 hq2 = p2:place_building ("frisians_headquarters", map.player_slots [2].starting_field, false, true)
 hq2:set_wares {
    log = 50,
-   brick = 500,
-   clay = 100,
-   granite = 500,
-   thatch_reed = 500,
-   water = 100,
-   coal = 200,
+   brick = 200,
+   clay = 30,
+   granite = 200,
+   thatch_reed = 200,
+   water = 20,
+   coal = 100,
    iron = 50,
 }
 hq2:set_workers {
    frisians_woodcutter = 10,
    frisians_forester = 20,
    frisians_clay_burner = 10,
-   frisians_builder = 20,
+   frisians_builder = 10,
    frisians_blacksmith = 5,
    frisians_miner_master = 10,
    frisians_smelter = 4,

@@ -2,8 +2,7 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
+include "scripting/richtext_scenarios.lua"
 
 function reebaud (title, text)
    return speech ("map:reebaud.png", "55BB55", title, text)
@@ -28,7 +27,7 @@ obj_new_home = {
    title=_"Build a basic economy",
    number = 1,
    body = objective_text (_"Take care of supplies of all basic materials",
-      listitem_bullet (_[[Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, and houses for a brick burner, a woodcutter and a forester.]])
+      li (_[[Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, and houses for a brick burner, a woodcutter and a forester.]])
    ),
 }
 obj_expand_south = {
@@ -36,7 +35,7 @@ obj_expand_south = {
    title=_"Expand to the South",
    number = 1,
    body = objective_text (_"Expand your territory to explore the South",
-      listitem_bullet (_[[The North looks not very useful to us, but who knows what we might find in the South?]])
+      li (_[[The North looks not very useful to us, but who knows what we might find in the South?]])
    ),
 }
 obj_train_recycle = {
@@ -44,7 +43,7 @@ obj_train_recycle = {
    title=_"Train soldiers and recycle their weapons",
    number = 1,
    body = objective_text (_"Train your soldiers and recycle the discarded weapons to regain some metal",
-      listitem_bullet (_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a Recycling Centre. Use the weapons in the store to train soldiers and recycle some scrap metal.]])
+      li (_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a Recycling Centre. Use the weapons in the store to train soldiers and recycle some scrap metal.]])
    ),
 }
 obj_aqua_farm = {
@@ -52,7 +51,7 @@ obj_aqua_farm = {
    title=_"Build an Aqua Farm",
    number = 1,
    body = objective_text (_"Build an Aqua Farm to start producing fish",
-      listitem_bullet (_[[Build an Aqua Farm to produce fish. The Aqua Farm needs the holes left by a clay pit nearby to use as ponds to grow fish in. Only a fisher working at an Aqua Farm can fish from these ponds.]])
+      li (_[[Build an Aqua Farm to produce fish. The Aqua Farm needs the holes left by a clay pit nearby to use as ponds to grow fish in. Only a fisher working at an Aqua Farm can fish from these ponds.]])
    ),
 }
 obj_supply_murilius = {
@@ -60,7 +59,7 @@ obj_supply_murilius = {
    title=_"Decide whether you want to cooperate with the Empire",
    number = 1,
    body = objective_text (_"Gather wares as a gift or destroy the Empire´s warehouse",
-      listitem_bullet (_([[Decide whether you want to work with Murilius against the barbarians. If so, fill his warehouse with these wares:]])
+      li (_([[Decide whether you want to work with Murilius against the barbarians. If so, fill his warehouse with these wares:]])
       .. paragraphdivider () ..
       _([[30×Log, 40×Granite, 30×Fish, 30×Beer, 150×Water, 40×Ration, 10×Meal, 30×Coal, 40×Iron Ore, 20×Iron, 20×Gold Ore, 10×Gold.]]) 
       .. paragraphdivider () ..
@@ -73,7 +72,7 @@ obj_defeat_barbarians = {
    title=_"Defeat the Barbarians!",
    number = 1,
    body = objective_text (_"Defeat the barbarians",
-      listitem_bullet (_[[Defeat the hostile tribe living northwest of the Empire outpost!]])
+      li (_[[Defeat the hostile tribe living northwest of the Empire outpost!]])
    ),
 }
 obj_defeat_murilius = {
@@ -81,7 +80,7 @@ obj_defeat_murilius = {
    title=_"Defeat Murilius!",
    number = 1,
    body = objective_text (_"Defeat the arrogant Outpost of the Empire",
-      listitem_bullet (_[[The only way to put an end to the Empire´s desire to steal our liberty is to destroy this outpost once and for all. Conquer its entire land.]])
+      li (_[[The only way to put an end to the Empire´s desire to steal our liberty is to destroy this outpost once and for all. Conquer its entire land.]])
    ),
 }
 obj_defeat_both = {
@@ -89,7 +88,7 @@ obj_defeat_both = {
    title=_"Defeat Murilius and the Barbarians!",
    number = 1,
    body = objective_text (_"Defeat the Barbarians and the Empire colony",
-      listitem_bullet (_[[The Barbarians and the Empire are too dangerous to allow them to live near us. We must defeat them both.]])
+      li (_[[The Barbarians and the Empire are too dangerous to allow them to live near us. We must defeat them both.]])
    ),
 }
 

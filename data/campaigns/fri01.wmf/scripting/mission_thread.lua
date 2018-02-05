@@ -191,7 +191,7 @@ function mission_thread ()
    campaign_message_box (food_1)
    run (warningBricks)
    p1:allow_buildings {"frisians_fishers_house", "frisians_smokery", "frisians_hunters_house", "frisians_tavern", 
-      "frisians_berry_farm", "frisians_collectors_house"}
+      "frisians_berry_farm", "frisians_collectors_house", "frisians_outpost"}
    o = add_campaign_objective (obj_build_food_economy)
    while not check_for_buildings (p1, {frisians_fishers_house = 1, frisians_smokery = 1, frisians_tavern = 1, 
       frisians_berry_farm = 1, frisians_collectors_house = 1}) do sleep (4273) end
@@ -213,6 +213,7 @@ function mission_thread ()
    p1:allow_buildings {"frisians_ironmine", "frisians_goldmine", "frisians_coalmine_deep", "frisians_rockmine_deep", 
        "frisians_ironmine_deep", "frisians_goldmine_deep", "frisians_furnace", "frisians_blacksmithy", 
        "frisians_armour_smithy_small", "frisians_charcoal_kiln"}
+   p2:allow_buildings {"frisians_outpost"}
    o = add_campaign_objective (obj_build_mining)
    while not check_for_buildings (p1, {frisians_ironmine = 1, frisians_furnace = 1, frisians_blacksmithy = 1, 
       frisians_armour_smithy_small = 1}) do sleep (4273) end
@@ -222,7 +223,7 @@ function mission_thread ()
    campaign_message_box (recruit_1)
    campaign_message_box (recruit_2)
    o = add_campaign_objective (obj_recruit_soldiers)
-   p1:allow_buildings {"frisians_outpost", "frisians_barracks", "frisians_reindeer_farm", "frisians_seamstress"}
+   p1:allow_buildings {"frisians_barracks", "frisians_reindeer_farm", "frisians_seamstress", "frisians_fortress"}
    while not check_for_buildings (p1, {frisians_barracks = 1, frisians_seamstress = 1, 
       frisians_reindeer_farm = 1}) do sleep (4273) end
    set_objective_done (o)
@@ -254,7 +255,8 @@ function mission_thread ()
    campaign_message_box (training_2)
    campaign_message_box (training_3)
    p1:allow_buildings {"frisians_training_camp", "frisians_training_arena", "frisians_seamstress_master", 
-      "frisians_armour_smithy_large", "frisians_wooden_tower", "frisians_fortress"}
+      "frisians_armour_smithy_large", "frisians_wooden_tower", "frisians_wooden_tower_high", "frisians_scouts_house"}
+   p2:allow_buildings {"frisians_fortress", "frisians_reindeer_farm"}
    o = add_campaign_objective (obj_train_soldiers)
    
    --wait until at least 1 soldier has level 10
@@ -284,7 +286,8 @@ function mission_thread ()
    
    --Attack!
    set_objective_done (o)
-   p1:allow_buildings {"frisians_wooden_tower_high", "frisians_tower", "frisians_scouts_house"}
+   p1:allow_buildings {"frisians_tower"}
+   p2:allow_buildings {"frisians_barracks", "frisians_seamstress", "frisians_armour_smithy_small"}
    if not skipToFlood then
       campaign_message_box (training_4)
       campaign_message_box (training_5)

@@ -2,8 +2,7 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
+include "scripting/richtext_scenarios.lua"
 
 function reebaud (title, text)
    return speech ("map:reebaud.png", "55BB55", title, text)
@@ -28,7 +27,7 @@ obj_build_wood_economy = {
    title=_"Build a wood economy and a reed farm",
    number = 1,
    body = objective_text (_"Wood Economy",
-      listitem_bullet (_[[Build at least one woodcutter´s house and two forester´s houses to start producing logs, and a reed farm to start growing reed.]])
+      li (_[[Build at least one woodcutter´s house and two forester´s houses to start producing logs, and a reed farm to start growing reed.]])
    ),
 }
 obj_build_brick_economy = {
@@ -36,7 +35,7 @@ obj_build_brick_economy = {
    title=_"Start producing bricks",
    number = 1,
    body = objective_text (_"Brick Economy",
-      listitem_bullet (_[[Build a brick burner´s house, a coal mine, a rock mine, a clay pit and a well to start producing bricks.]])
+      li (_[[Build a brick burner´s house, a coal mine, a rock mine, a clay pit and a well to start producing bricks.]])
    ),
 }
 obj_build_food_economy = {
@@ -44,7 +43,7 @@ obj_build_food_economy = {
    title=_"Produce food for the miners",
    number = 1,
    body = objective_text (_"Food Economy",
-      listitem_bullet (_[[Build a tavern, a fisher´s house, a smokery, a berry farm and a fruit collector´s house.]])
+      li (_[[Build a tavern, a fisher´s house, a smokery, a berry farm and a fruit collector´s house.]])
    ),
 }
 obj_build_food_economy_2 = {
@@ -52,7 +51,7 @@ obj_build_food_economy_2 = {
    title=_"Enhance your food economy",
    number = 1,
    body = objective_text (_"Enhance Food Economy",
-      listitem_bullet (_[[Build at least two farms, a bee-keeper´s house (next to the berry farm), a bakery, a brewery, and another tavern.]])
+      li (_[[Build at least two farms, a bee-keeper´s house (next to the berry farm), a bakery, a brewery, and another tavern.]])
    ),
 }
 obj_build_mining = {
@@ -60,7 +59,7 @@ obj_build_mining = {
    title=_"Build an iron mine and a mining infrastructure",
    number = 1,
    body = objective_text (_"Build mines and mining infrastructure",
-      listitem_bullet (_[[Build an iron mine, a furnace, a blacksmithy and a small armour smithy.]])
+      li (_[[Build an iron mine, a furnace, a blacksmithy and a small armour smithy.]])
    ),
 }
 obj_recruit_soldiers = {
@@ -68,7 +67,7 @@ obj_recruit_soldiers = {
    title=_"Start recruiting soldiers",
    number = 1,
    body = objective_text (_"Recruiting Soldiers",
-      listitem_bullet (_[[Build a barracks, a reindeer farm and a seamstress.]])
+      li (_[[Build a barracks, a reindeer farm and a seamstress.]])
    ),
 }
 obj_expand = {
@@ -76,7 +75,7 @@ obj_expand = {
    title=_"Discover more of the island",
    number = 1,
    body = objective_text (_"Expand and discover",
-      listitem_bullet (_[[Expand further and discover more of the island.]])
+      li (_[[Expand further and discover more of the island.]])
    ),
 }
 obj_train_soldiers = {
@@ -84,7 +83,7 @@ obj_train_soldiers = {
    title=_"Train your soldiers",
    number = 1,
    body = objective_text (_"Training Soldiers",
-      listitem_bullet (_[[Train a soldier to the highest possible level. Soldiers are trained in small training camps and large training arenas. We will need a gold mine, a master seamstress to sew better armour, and a large armour smithy for better weapons and helmets.]])
+      li (_[[Train a soldier to the highest possible level. Soldiers are trained in small training camps and large training arenas. We will need a gold mine, a master seamstress to sew better armour, and a large armour smithy for better weapons and helmets.]])
    ),
 }
 obj_defeat_enemy = {
@@ -92,7 +91,7 @@ obj_defeat_enemy = {
    title=_"Defeat the enemy!",
    number = 1,
    body = objective_text (_"Defeat the enemy!",
-      listitem_bullet (_[[Destroy the enemy tribe´s headquarters.]])
+      li (_[[Destroy the enemy tribe´s headquarters.]])
    ),
 }
 obj_escape = {
@@ -100,7 +99,7 @@ obj_escape = {
    title=_"Escape from the floods",
    number = 1,
    body = objective_text (_"Flee from the floods",
-      listitem_bullet (_[[Build a port, a weaving mill and a shipyard, then start an expedition to flee before the stormflood drowns the island.]])
+      li (_[[Build a port, a weaving mill and a shipyard, then start an expedition to flee before the stormflood drowns the island.]])
    ),
 }
 
@@ -194,7 +193,10 @@ food_1 = {
       _([[Chieftain Reebaud! I bring bad news. The miners are working so hard that they have no time to prepare their own food. They demand to be supplied with it.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – no rations left
-      _([[We need to build a tavern to prepare rations. To get the raw food, we have to build a fisher´s house, and as nobody likes raw fish, a smokery to smoke it. Further, build a berry farm, which plants berry bushes, and a fruit collector´s house, so the bushes are harvested.]]))
+      _([[We need to build a tavern to prepare rations. To get the raw food, we have to build a fisher´s house, and as nobody likes raw fish, a smokery to smoke it. Further, build a berry farm, which plants berry bushes, and a fruit collector´s house, so the bushes are harvested.]])
+      .. paragraphdivider () ..
+      -- TRANSLATORS: Hauke – no rations left
+      _([[We should start expanding out territory faster, so we have enough space for many berry farms, and a longer coastline for fishing.]]))
       .. new_objectives (obj_build_food_economy),
 }
 food_2 = {
@@ -207,7 +209,7 @@ food_2 = {
       _([[But when the mines have to be expanded, rations won´t keep the miners happy. Better take precautions – build a second tavern, then consider enhancing one to a drinking hall.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – better food
-      _([[A drinking hall needs better food. Build a bakery, a brewery, and two or three farms to start growing barley. Keep in mind that barley grows very slowly; therefore, these few farms won´t suffice when we actually need the bread and beer.]])
+      _([[A drinking hall needs better food. Build a bakery, a brewery, and two or three farms to start growing barley. Keep in mind that barley grows very slowly; therefore, these few farms won´t suffice when we actually need the bread and beer. We should keep expanding quickly to have more space for farming.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – better food
       _([[The bakery and brewery should be enhanced as soon as the workers have enough experience. They can then produce mead, and bread sweetened with honey. Build a bee-keeper´s house next to the berry farm to produce some honey, which we can store until we need it.]]))
