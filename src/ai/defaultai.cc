@@ -3315,9 +3315,11 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		return false;
 	} else if (is_warehouse && flag.nr_of_roads() <= 3) {
 		;
+	} else if (needs_warehouse) {
+		;
 	} else if (flag.current_wares() > 5) {
 		;
-	} else if (has_building && std::rand() % 3 == 0 {
+	} else if (has_building && std::rand() % 3 == 0) {
 		;
 	} else if (std::rand() % 5 == 0){
 		;
@@ -3368,6 +3370,8 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 // if route exists, it is not too long, and current road is not intensively used
 // the road can be dismantled
 bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
+
+	//printf ("Testing road: %d\n", road.serial());
 
 	Flag& roadstartflag = road.get_flag(Road::FlagStart);
 	Flag& roadendflag = road.get_flag(Road::FlagEnd);
@@ -3475,7 +3479,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 
 	queue.push(NearFlag(*full_road.front(), 0));
 	uint16_t alternative_path = 10000;
-	const uint8_t checkradius = game().map().calc_distance(full_road.front()->get_position(), full_road.front()->get_position());
+	const uint8_t checkradius = 2 * game().map().calc_distance(full_road.front()->get_position(), full_road.front()->get_position());
 
 	//Need to push all flags from road to reachableflags to be properly ignored
 
@@ -3514,6 +3518,11 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 				continue;
 			}
 
+			// alternate road cannot lead via road to be dismantled
+			if (near_road->serial() == road.serial()) {
+				continue;
+			}
+
 			Flag* endflag = &near_road->get_flag(Road::FlagStart);
 
 			if (endflag == nf.flag) {
@@ -3543,7 +3552,9 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	}
 
 	if (alternative_path + wares_on_road <= road_length + 5){
-		printf ("DEBUG we have candidate for dismantle of road with length %d, alternative %d. Wares: %d\n",
+		printf ("DEBUG Dismantling road %3dx%3d - %3dx%3d with length %d, alternative %d. Wares: %d\n",
+		full_road.front()->get_position().x, full_road.front()->get_position().y,
+		full_road.back()->get_position().x, full_road.back()->get_position().y,
 		road_length, alternative_path, wares_on_road);
 		return true;
 	}
