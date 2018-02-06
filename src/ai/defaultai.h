@@ -202,6 +202,7 @@ private:
 	                          const int32_t gametime);
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(const Widelands::Road&);
+	bool dismantle_dead_ends();
 
 	bool check_economies();
 	bool check_productionsites(uint32_t);
@@ -354,8 +355,9 @@ private:
 	int16_t ts_without_trainers_;
 
 	// for roads
-	uint32_t inhibit_road_building_;
+	//uint32_t inhibit_road_building_; NOCOM
 	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
+	bool dead_ends_check_; // Do we need to check and dismantle dead ends?
 
 	uint32_t enemy_last_seen_;
 	uint32_t last_attack_time_;

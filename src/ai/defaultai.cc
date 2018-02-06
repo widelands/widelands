@@ -108,7 +108,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
      ts_finished_count_(0),
      ts_in_const_count_(0),
      ts_without_trainers_(0),
-     inhibit_road_building_(0),
+     //inhibit_road_building_(0),
      enemysites_check_delay_(30),
      resource_necessity_water_needed_(false),
      highest_nonmil_prio_(0),
@@ -1045,6 +1045,7 @@ void DefaultAI::late_initialization() {
 	spots_avail.resize(4);
 	trees_nearby_treshold_ = 3 + std::abs(management_data.get_military_number_at(121)) / 2;
 	last_road_dismantled_ = 0;
+	dead_ends_check_ = true;
 }
 
 /**
@@ -3171,8 +3172,45 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	return true;
 }
 
+bool DefaultAI::dismantle_dead_ends(){
+    bool road_dismantled = false;
+    for (uint16_t i = 0; i < roads.size(); i++) {
+        const Flag& roadstartflag = roads[i]->get_flag(Road::FlagStart);
+        const Flag& roadendflag = roads[i]->get_flag(Road::FlagEnd);
+        if (roadstartflag.get_building()){
+            continue;
+        }
+        if (roadstartflag.get_building()){
+            continue;
+        }
+        if (roadendflag.get_building()){
+            continue;
+        }
+        if (roadstartflag.is_dead_end()){
+            game().send_player_bulldoze(*const_cast<Flag*>(&roadstartflag));
+            road_dismantled = true;
+        }
+        if (roadendflag.is_dead_end()){
+            game().send_player_bulldoze(*const_cast<Flag*>(&roadstartflag));
+            road_dismantled = true;
+        }
+    }
+    return road_dismantled;
+}
+
+
 // improves current road system
 bool DefaultAI::improve_roads(uint32_t gametime) {
+
+	// First try to dismantle some dead ends on road
+	if (dead_ends_check_) {
+		printf ("Doing deads end check\n");
+		if (dismantle_dead_ends()) {
+			return true;
+		}
+		dead_ends_check_ = false;
+		return false;
+	}
 
 	if (!roads.empty()) {
 		const Path& path = roads.front()->get_path();
@@ -3205,6 +3243,7 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 
 			// Unable to set a flag - perhaps the road was build stupid
 			game().send_player_bulldoze(*const_cast<Road*>(roads.front()));
+			dead_ends_check_ = true;
 			return true;
 		}
 
@@ -3214,19 +3253,20 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 		// Occasionaly (not more then once in 15 seconds) we test if the road can be dismantled
 		// if there is shortage of spots we do it always
 		if (last_road_dismantled_ + 15 * 1000 < gametime &&
-		    (std::rand() % 5 == 0 || spots_ <= kSpotsEnough)) {
+		    (std::rand() % 3 == 0 || spots_ <= kSpotsEnough)) {
 			const Road& road = *roads.front();
 			if (dispensable_road_test(*const_cast<Road*>(&road))) {
 				game().send_player_bulldoze(*const_cast<Road*>(&road));
 				last_road_dismantled_ = gametime;
+				dead_ends_check_ = true;
 				return true;
 			}
 		}
 	}
 
-	if (inhibit_road_building_ >= gametime) {
-		return true;
-	}
+	//if (inhibit_road_building_ >= gametime) {
+		//return true;
+	//}
 
 	// now we rotate economies and flags to get one flag to go on with
 	if (economies.empty()) {
@@ -3271,38 +3311,54 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	// is connected to a warehouse?
 	const bool needs_warehouse = flag.get_economy()->warehouses().empty();
 
-	// Various tests to invoke building of a shortcut (new road)
-	if (flag.nr_of_roads() == 0 || needs_warehouse) {
-		create_shortcut_road(flag, 22, 22, gametime);
-		inhibit_road_building_ = gametime + 800;
-	} else if (!has_building && flag.nr_of_roads() == 1) {
-		// This is end of road without any building, we do not initiate interconnection thus
+	if (!has_building && flag.nr_of_roads() == 1) {
 		return false;
-	} else if (flag.nr_of_roads() == 1 || std::rand() % 10 == 0) {
-		if (spots_ > kSpotsEnough) {
-			// This is the normal situation
-			create_shortcut_road(flag, 18, 22, gametime);
-			inhibit_road_building_ = gametime + 800;
-		} else if (spots_ > kSpotsTooLittle) {
-			// We are short of spots so shortening must be significant
-			create_shortcut_road(flag, 15, 35, gametime);
-			inhibit_road_building_ = gametime + 800;
-		} else {
-			// We are very short of spots so shortening must be even bigger
-			create_shortcut_road(flag, 15, 50, gametime);
-			inhibit_road_building_ = gametime + 800;
-		}
-		// a warehouse with 3 or less roads
 	} else if (is_warehouse && flag.nr_of_roads() <= 3) {
-		create_shortcut_road(flag, 15, -10, gametime);
-		inhibit_road_building_ = gametime + 400;
-		// and when a flag is full with wares
-	} else if (spots_ > kSpotsEnough && flag.current_wares() > 5) {
-		create_shortcut_road(flag, 15, -5, gametime);
-		inhibit_road_building_ = gametime + 400;
+		;
+	} else if (flag.current_wares() > 5) {
+		;
+	} else if (has_building && std::rand() % 3 == 0 {
+		;
+	} else if (std::rand() % 5 == 0){
+		;
 	} else {
 		return false;
 	}
+	create_shortcut_road(flag, 14, 2, gametime);
+
+
+	//// Various tests to invoke building of a shortcut (new road)
+	//if (flag.nr_of_roads() == 0 || needs_warehouse) {
+		//create_shortcut_road(flag, 22, 22, gametime);
+		//inhibit_road_building_ = gametime + 800;
+	//} else if (!has_building && flag.nr_of_roads() == 1) {
+		//// This is end of road without any building, we do not initiate interconnection thus
+		//return false;
+	//} else if (flag.nr_of_roads() == 1 || std::rand() % 10 == 0) {
+		//if (spots_ > kSpotsEnough) {
+			//// This is the normal situation
+			//create_shortcut_road(flag, 18, 2, gametime); // NOCOM 22
+			//inhibit_road_building_ = gametime + 800;
+		//} else if (spots_ > kSpotsTooLittle) {
+			//// We are short of spots so shortening must be significant
+			//create_shortcut_road(flag, 15, 4, gametime);  // NOCOM 35
+			//inhibit_road_building_ = gametime + 800;
+		//} else {
+			//// We are very short of spots so shortening must be even bigger
+			//create_shortcut_road(flag, 15, 6, gametime);  // NOCOM 50
+			//inhibit_road_building_ = gametime + 800;
+		//}
+		//// a warehouse with 3 or less roads
+	//} else if (is_warehouse && flag.nr_of_roads() <= 3) {
+		//create_shortcut_road(flag, 15, -10, gametime);
+		//inhibit_road_building_ = gametime + 400;
+		//// and when a flag is full with wares
+	//} else if (spots_ > kSpotsEnough && flag.current_wares() > 5) {
+		//create_shortcut_road(flag, 15, -5, gametime);
+		//inhibit_road_building_ = gametime + 400;
+	//} else {
+		//return false;
+	//}
 
 	return true;
 }
@@ -3419,14 +3475,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 
 	queue.push(NearFlag(*full_road.front(), 0));
 	uint16_t alternative_path = 10000;
-	uint8_t checkradius = 15;
-	if (spots_ > kSpotsEnough) {
-		checkradius = 10;
-	} else if (spots_ > kSpotsTooLittle) {
-		checkradius = 12;
-	} else {
-		checkradius = 15;
-	}
+	const uint8_t checkradius = game().map().calc_distance(full_road.front()->get_position(), full_road.front()->get_position());
 
 	//Need to push all flags from road to reachableflags to be properly ignored
 
@@ -3493,7 +3542,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		}
 	}
 
-	if (alternative_path + wares_on_road / 2 <= road_length + 1){
+	if (alternative_path + wares_on_road <= road_length + 5){
 		printf ("DEBUG we have candidate for dismantle of road with length %d, alternative %d. Wares: %d\n",
 		road_length, alternative_path, wares_on_road);
 		return true;
@@ -3734,7 +3783,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 	// Here we must consider how much are buildable fields lacking
 	// the number will be transformed to a weight passed to findpath function
-	int32_t fields_necessity = 5;
+	int32_t fields_necessity = 0;
 	if (spots_ < kSpotsTooLittle) {
 		fields_necessity += 10;
 	}
@@ -3742,7 +3791,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		fields_necessity += 10;
 	}
 	if (num_ports < 4) {
-		fields_necessity += 10;
+		fields_necessity += 5;
 	}
 	if (spots_ < kSpotsEnough) {
 		fields_necessity += 5;
@@ -3782,9 +3831,9 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// re-sorting again, now by reduction score (custom operator specified in .h file)
 	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue));
 
-	for (uint16_t k = 0; k < RoadCandidates.flags_queue.size(); k++) {
-		printf ("pos: %d, portion %d\n", k, RoadCandidates.flags_queue[k].new_road_length * 10 / RoadCandidates.flags_queue[k].current_road_length);
-	}
+	//for (uint16_t k = 0; k < RoadCandidates.flags_queue.size(); k++) {
+		//printf ("pos: %d, portion %d\n", k, RoadCandidates.flags_queue[k].new_road_length * 10 / RoadCandidates.flags_queue[k].current_road_length);
+	//}
 
 	// Well and finally building the winning road (if any)
 	uint32_t winner_hash = 0;
