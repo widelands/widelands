@@ -3,71 +3,71 @@ dirname = path.dirname (__file__)
 animations = {
    idle = {
       pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = { 21, 25 },
+      hotspot = {9, 25},
       fps = 10
    },
    atk_ok_e = {
       pictures = path.list_files (dirname .. "atk_ok_w_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 5, 26 },
       fps = 10
    },
    atk_fail_e = {
       pictures = path.list_files (dirname .. "atk_fail_w_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 5, 26 },
       fps = 10
    },
    atk_ok_w = {
       pictures = path.list_files (dirname .. "atk_ok_e_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 23, 26 },
       fps = 10
    },
    atk_fail_w = {
       pictures = path.list_files (dirname .. "atk_fail_e_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 23, 26 },
       fps = 10
    },
    eva_ok_e = {
       pictures = path.list_files (dirname .. "eva_ok_w_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 5, 26 },
       fps = 10
    },
    eva_fail_e = {
       pictures = path.list_files (dirname .. "eva_fail_w_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 5, 26 },
       fps = 10
    },
    eva_ok_w = {
       pictures = path.list_files (dirname .. "eva_ok_e_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 11, 26 },
       fps = 10
    },
    eva_fail_w = {
       pictures = path.list_files (dirname .. "eva_fail_e_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 12, 26 },
       fps = 10
    },
    die_w_alt = {
       pictures = path.list_files (dirname .. "die_f_w_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 5, 26 },
       fps = 10
    },
    die_e_alt = {
       pictures = path.list_files (dirname .. "die_f_e_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 20, 26 },
       fps = 10
    },
    die_w = {
       pictures = path.list_files (dirname .. "die_b_w_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 22, 27 },
       fps = 10
    },
    die_e = {
       pictures = path.list_files (dirname .. "die_b_e_??.png"),
-      hotspot = { 23, 27 },
+      hotspot = { 13, 26 },
       fps = 10
    },
 }
-add_walking_animations (animations, "walk", dirname, "walk", { 21, 25 }, 15)
+add_walking_animations (animations, "walk", dirname, "walk", {10, 25}, 15)
 
 tribes:new_soldier_type {
    msgctxt = "frisians_worker",

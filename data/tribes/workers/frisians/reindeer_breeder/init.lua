@@ -3,11 +3,11 @@ dirname = path.dirname (__file__)
 animations = {
    idle = {
       pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = { 21, 25 }
+      hotspot = {8, 23},
    }
 }
-add_walking_animations (animations, "walk", dirname, "walk", {21, 25}, 10)
-add_walking_animations (animations, "walkload", dirname, "walkload", {23, 27}, 10)
+add_walking_animations (animations, "walk", dirname, "walk", {10, 23}, 10)
+add_walking_animations (animations, "walkload", dirname, "walkload", {10, 26}, 10)
 
 tribes:new_worker_type {
    msgctxt = "frisians_worker",

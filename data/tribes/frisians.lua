@@ -10,7 +10,7 @@ tribes:new_tribe {
       },
       flag = {
          pictures = path.list_files (dirname .. "images/frisians/flag_??.png"),
-         hotspot = { 45, 55 },
+         hotspot = { 10, 39 },
          fps = 10,
          scale = 4.2,
       }
