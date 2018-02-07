@@ -6183,7 +6183,7 @@ uint32_t DefaultAI::msites_built() const {
 // The main purpose of this is when a game creator needs to finetune a map
 // and needs to know what resourcess are missing for which player and so on.
 // By default it is off (see kPrintStats)
-// TODO(tiborb ?): - it would be nice to have this activated by a command line switch
+// TODO(tiborb): - it would be nice to have this activated by a command line switch
 void DefaultAI::print_stats(uint32_t const gametime) {
 
 	if (!kPrintStats) {
