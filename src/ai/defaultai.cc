@@ -3177,21 +3177,14 @@ bool DefaultAI::dismantle_dead_ends(){
     for (uint16_t i = 0; i < roads.size(); i++) {
         const Flag& roadstartflag = roads[i]->get_flag(Road::FlagStart);
         const Flag& roadendflag = roads[i]->get_flag(Road::FlagEnd);
-        if (roadstartflag.get_building()){
-            continue;
-        }
-        if (roadstartflag.get_building()){
-            continue;
-        }
-        if (roadendflag.get_building()){
-            continue;
-        }
-        if (roadstartflag.is_dead_end()){
+
+        if (!roadstartflag.get_building() && roadstartflag.is_dead_end()){
             game().send_player_bulldoze(*const_cast<Flag*>(&roadstartflag));
             road_dismantled = true;
         }
-        if (roadendflag.is_dead_end()){
-            game().send_player_bulldoze(*const_cast<Flag*>(&roadstartflag));
+
+        if (!roadendflag.get_building() && roadendflag.is_dead_end()){
+            game().send_player_bulldoze(*const_cast<Flag*>(&roadendflag));
             road_dismantled = true;
         }
     }
@@ -3203,8 +3196,8 @@ bool DefaultAI::dismantle_dead_ends(){
 bool DefaultAI::improve_roads(uint32_t gametime) {
 
 	// First try to dismantle some dead ends on road
-	if (dead_ends_check_) {
-		printf ("Doing deads end check\n");
+	if (dead_ends_check_ || gametime % 50 == 0 ) {
+		printf ("DEBUG %d Doing deads end check\n", player_number());
 		if (dismantle_dead_ends()) {
 			return true;
 		}
@@ -3291,12 +3284,12 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 
 	const Flag& flag = *eco->flags.front();
 
-	// now we test if it is dead end flag, if yes, destroying it
-	if (flag.is_dead_end() && flag.current_wares() == 0) {
-		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
-		eco->flags.pop_front();
-		return true;
-	}
+	//// now we test if it is dead end flag, if yes, destroying it
+	//if (flag.is_dead_end() && flag.current_wares() == 0) {
+		//game().send_player_bulldoze(*const_cast<Flag*>(&flag));
+		//eco->flags.pop_front();
+		//return true;
+	//}
 
 	bool is_warehouse = false;
 	bool has_building = false;
@@ -3326,7 +3319,21 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 	} else {
 		return false;
 	}
-	create_shortcut_road(flag, 14, 2, gametime);
+
+	int16_t expected_shortcut = 27;
+	if (has_building) {
+		expected_shortcut -= 3;
+	}
+	expected_shortcut -= flag.current_wares() * 3;
+	if (is_warehouse) {
+		expected_shortcut -= 10;
+	}
+	if (std::rand() % 5 == 0) {
+		expected_shortcut -= 10;
+	}
+	expected_shortcut -= 2 * flag.nr_of_roads();
+
+	create_shortcut_road(flag, 14, expected_shortcut, gametime);
 
 
 	//// Various tests to invoke building of a shortcut (new road)
@@ -3435,14 +3442,14 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		//Reverting
 		std::reverse(full_road.begin(), full_road.end());
 	}
-	//printf ("DEBUG Current road: %3dx%3d to  %3dx%3d, length: %2d, wares: %2d\n",
-	//full_road.front()->get_position().x,
-	//full_road.front()->get_position().y,
-	//full_road.back()->get_position().x,
-	//full_road.back()->get_position().y,
-	//road_length,
-	//wares_on_road
-	//);
+	printf ("DEBUG Current road: %3dx%3d to  %3dx%3d, length: %2d, wares: %2d\n",
+	full_road.front()->get_position().x,
+	full_road.front()->get_position().y,
+	full_road.back()->get_position().x,
+	full_road.back()->get_position().y,
+	road_length,
+	wares_on_road
+	);
 
 	//If it by chance starts or end next to a warehouse...
 	if (Building* b = full_road.front()->get_building()) {
@@ -3472,28 +3479,29 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	std::priority_queue<NearFlag> queue;
 	// only used to collect flags reachable walking over roads
 	std::vector<NearFlag> reachableflags;
-	std::set<uint32_t> existing_road_flags;
+	std::set<uint32_t> existing_road_flags; // get rid of this
 	for (uint16_t j = 1; j < full_road.size() - 1; j++) {
 		existing_road_flags.insert(full_road[j]->get_position().hash());
 	}
 
 	queue.push(NearFlag(*full_road.front(), 0));
 	uint16_t alternative_path = 10000;
-	const uint8_t checkradius = 2 * game().map().calc_distance(full_road.front()->get_position(), full_road.front()->get_position());
+	const uint8_t checkradius = 3 * game().map().calc_distance(full_road.front()->get_position(), full_road.back()->get_position());
 
 	//Need to push all flags from road to reachableflags to be properly ignored
 
 	// algorithm to walk on roads
 	while (!queue.empty()) {
 
-		//printf ("DEBUG testing queue flag %3dx%3d\n", queue.top().flag->get_position().x, queue.top().flag->get_position().y);
+		//printf (" DEBUG testing queue flag %3dx%3d, roads here %d\n",
+		//queue.top().flag->get_position().x, queue.top().flag->get_position().y, queue.top().flag->nr_of_roads());
 		// testing if we stand on the roadendflag
 		// if is is for first time, just go on,
 		// if second time, the goal is met, function returns true
 		if (full_road.back()->get_position().x == queue.top().flag->get_position().x &&
 		    full_road.back()->get_position().y == queue.top().flag->get_position().y) {
 			//queue.pop();
-			//printf ("DEBUG * other end achieved with distance: %d\n", queue.top().current_road_distance);
+			//printf (" DEBUG * other end achieved with distance: %d\n", queue.top().current_road_distance);
 			alternative_path = queue.top().current_road_distance;
 			break;
 		}
@@ -3502,6 +3510,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		   find(reachableflags.begin(), reachableflags.end(), queue.top().flag);
 
 		if (f != reachableflags.end()) {
+			//printf (" DEBUG - we had been here\n");
 			queue.pop();
 			continue;
 		}
@@ -3520,6 +3529,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 
 			// alternate road cannot lead via road to be dismantled
 			if (near_road->serial() == road.serial()) {
+				//printf (" DEBUG skipping this road [%d] as this is the same one: %d == %d\n", i , near_road->serial(), road.serial());
 				continue;
 			}
 
@@ -3530,9 +3540,9 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 			}
 
 
-			if (existing_road_flags.count(endflag->get_position().hash())>0){
-				continue; // this is just a road we consider to get rid of
-			}
+			//if (existing_road_flags.count(endflag->get_position().hash())>0){
+				//continue; // this is just a road we consider to get rid of
+			//}
 
 			//printf ("DEBUG testing candidate flag %3dx%3d\n", endflag->get_position().x, endflag->get_position().y);
 
@@ -3542,7 +3552,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 			   game().map().calc_distance(full_road.back()->get_position(), endflag->get_position());
 
 
-			if (dist1 > checkradius && dist2 > checkradius) {  //  out of range of interest
+			if ((dist1 + dist2) > checkradius) {  //  out of range of interest
 				continue;
 			}
 
@@ -3552,7 +3562,8 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	}
 
 	if (alternative_path + wares_on_road <= road_length + 5){
-		printf ("DEBUG Dismantling road %3dx%3d - %3dx%3d with length %d, alternative %d. Wares: %d\n",
+		printf ("DEBUG %d Dismantling road %3dx%3d - %3dx%3d with length %d, alternative %d. Wares: %d\n",
+		player_number(),
 		full_road.front()->get_position().x, full_road.front()->get_position().y,
 		full_road.back()->get_position().x, full_road.back()->get_position().y,
 		road_length, alternative_path, wares_on_road);
@@ -3872,6 +3883,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		} while (mr.advance(map));
 		remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
 		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
+		dead_ends_check_ = true;
 		return true;
 	}
 	return false;

@@ -983,7 +983,7 @@ bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 
 		if (std::rand() % 4 > 0) {
 			// with probability of 3/4 we accept this flag
-			printf ("Winner has new road %d, existing road: %d\n",candidate_flag.new_road_length, candidate_flag.current_road_length);
+			//printf ("Winner has new road %d, existing road: %d\n",candidate_flag.new_road_length, candidate_flag.current_road_length);
 			return true;
 		}
 	}
