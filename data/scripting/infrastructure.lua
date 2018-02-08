@@ -98,12 +98,12 @@ end
 --          are filled with workers by default.
 --    :type b1_descr: :class:`array`
 --
---    :returns: The building created
+--    :returns: A table of created buildings
 
 function prefilled_buildings(p, ...)
-   local b = nil
+   local b_table = {}
    for idx,bdescr in ipairs({...}) do
-      b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)
+      local b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)
       -- Fill with workers
       if b.valid_workers then b:set_workers(b.valid_workers) end
       if bdescr.workers then b:set_workers(bdescr.workers) end
@@ -120,8 +120,10 @@ function prefilled_buildings(p, ...)
       -- Fill with wares if this is requested
       if bdescr.wares then b:set_wares(bdescr.wares) end
       if bdescr.inputs then b:set_inputs(bdescr.inputs) end
+
+      table.insert(b_table, b)
    end
-   return b
+   return b_table
 end
 
 -- RST
@@ -157,7 +159,7 @@ function place_building_in_region(plr, building, fields, gargs)
          args[1] = building
          args[2] = f.x
          args[3] = f.y
-         return prefilled_buildings(plr, args)
+         return prefilled_buildings(plr, args)[1]
       end
       table.remove(fields, idx)
    end
