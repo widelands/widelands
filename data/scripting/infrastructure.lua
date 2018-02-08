@@ -173,7 +173,7 @@ end
 -- RST
 -- .. function:: is_building(immovable)
 --
---    Checks whether an immpovable is a finished building, i.e. not
+--    Checks whether an immovable is a finished building, i.e. not
 --    a construction site.
 --
 --    :arg immovable: The immovable to test
