@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
+"PO-Revision-Date: 2018-01-30 12:58+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -237,8 +237,8 @@ msgstr "11월"
 msgid "Dec"
 msgstr "12월"
 
-#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:211
-#: ../../src/logic/game.cc:264
+#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:212
+#: ../../src/logic/game.cc:265
 msgid "Loading tribes"
 msgstr "부족들을 불러오는 중"
 
@@ -316,8 +316,8 @@ msgid ""
 "incompatible."
 msgstr "Widelands는 파일 \"%s\"를 불러올 수 없습니다. 파일 형식이 적합하지 않습니다."
 
-#: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:221
-#: ../../src/logic/game.cc:271
+#: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:222
+#: ../../src/logic/game.cc:272
 msgid "Creating players"
 msgstr "플레이어 생성중"
 
@@ -1029,48 +1029,48 @@ msgid "Loading graphics"
 msgstr "그래픽 불러오는 중"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:130
+#: ../../src/logic/game.cc:131
 msgid "Not set"
 msgstr "설정되지 않음"
 
-#: ../../src/logic/game.cc:203 ../../src/logic/game.cc:255
-#: ../../src/logic/game.cc:325 ../../src/logic/game.cc:353
+#: ../../src/logic/game.cc:204 ../../src/logic/game.cc:256
+#: ../../src/logic/game.cc:326 ../../src/logic/game.cc:354
 msgid "Preloading map"
 msgstr "지도를 미리 불러오는 중"
 
-#: ../../src/logic/game.cc:209 ../../src/logic/game.cc:261
+#: ../../src/logic/game.cc:210 ../../src/logic/game.cc:262
 msgid "Loading world"
 msgstr "월드 불러오는 중"
 
-#: ../../src/logic/game.cc:231 ../../src/logic/game.cc:299
+#: ../../src/logic/game.cc:232 ../../src/logic/game.cc:300
 msgid "Loading map…"
 msgstr "지도 불러오는 중..."
 
-#: ../../src/logic/game.cc:338 ../../src/logic/game.cc:370
+#: ../../src/logic/game.cc:339 ../../src/logic/game.cc:371
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1378
 msgid "Loading…"
 msgstr "불러오는 중..."
 
-#: ../../src/logic/game.cc:433
+#: ../../src/logic/game.cc:434
 msgid "Creating player infrastructure"
 msgstr "플레이어 환경 생성 중"
 
-#: ../../src/logic/game.cc:444 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:219
 msgid "Missing starting position"
 msgstr "시작 위치를 찾을 수 없음"
 
-#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:220
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands는 플레이어 %u의 시작 위치가 없어서 게임을 시작할 수가 없습니다.\n이 문제를 해결하려면 Widelands 편집기에서 시작 위치를 수동으로 추가해야 합니다."
 
-#: ../../src/logic/game.cc:785
+#: ../../src/logic/game.cc:786
 msgid "Trade Offer"
 msgstr "거래 제안"
 
-#: ../../src/logic/game.cc:787
+#: ../../src/logic/game.cc:788
 msgid "This market has received a new trade offer."
 msgstr "이 시장은 새로운 무역 제안을 받았습니다."
 
@@ -1449,37 +1449,37 @@ msgstr "새로운 본부가 경제에 추가되었습니다."
 msgid "A new warehouse was added to your economy."
 msgstr "새로운 창고가 경제에 추가되었습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:115
+#: ../../src/logic/map_objects/tribes/worker.cc:116
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "세계에 존재하지 않는 자원 %s 를 채굴해야 함; 부족은 세계에 부적합함"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:216
+#: ../../src/logic/map_objects/tribes/worker.cc:217
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "세계에 존재하지 않는 자원 종류 %s 를 사육해야 함; 부족은 세계에 부적합함"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:884
+#: ../../src/logic/map_objects/tribes/worker.cc:980
 msgid "A geologist found resources."
 msgstr "지질학자가 자원을 발견했습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1771
+#: ../../src/logic/map_objects/tribes/worker.cc:1867
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "당신의 %s이 집으로 가는 길을 찾을 수 없어서 죽을 것 같습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1777
+#: ../../src/logic/map_objects/tribes/worker.cc:1873
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "일꾼"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1778
+#: ../../src/logic/map_objects/tribes/worker.cc:1874
 msgid "Worker got lost!"
 msgstr "일꾼이 길을 잃었네요!"
 
@@ -1712,121 +1712,125 @@ msgid ""
 msgstr "Widelands는 주어진 주소에 연결을 수립할 수 없습니다.\n해당 포트에 운영되는 메타서버가 없거나 당신의 네트워크 셋업이 깨져서입니다."
 
 #: ../../src/network/internet_gaming.cc:173
-msgid "For hosting a game, please take a look at the notes at:"
-msgstr "게임을 호스트하려면 다음 노트를 확인하세요:"
+msgid "Users marked with IRC will possibly not react to messages."
+msgstr ""
 
-#: ../../src/network/internet_gaming.cc:212
+#: ../../src/network/internet_gaming.cc:211
 msgid "Successfully reconnected to the metaserver!"
 msgstr "성공적으로 메타서버와 다시 연결되었습니다!"
 
-#: ../../src/network/internet_gaming.cc:286
+#: ../../src/network/internet_gaming.cc:285
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "무언가가 잘못됐음: %s"
 
-#: ../../src/network/internet_gaming.cc:395
+#: ../../src/network/internet_gaming.cc:394
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:416
+#: ../../src/network/internet_gaming.cc:415
 msgid "Mixed up"
 msgstr "혼성"
 
-#: ../../src/network/internet_gaming.cc:416
+#: ../../src/network/internet_gaming.cc:415
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "메타서버가 연결 도중에 이상한 오류를 전송했습니다"
 
-#: ../../src/network/internet_gaming.cc:427
+#: ../../src/network/internet_gaming.cc:426
 msgid "Unexpected packet"
 msgstr "기대치 않은 패킷"
 
-#: ../../src/network/internet_gaming.cc:428
+#: ../../src/network/internet_gaming.cc:427
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "서버로부터 로그인, 재로그인 혹은 거절 패킷을 기대했지만, 명령 %s를 수신했습니다. 혹시 메타서버가 다른 프로토콜 버전을 사용하고 있나요?"
 
-#: ../../src/network/internet_gaming.cc:440
+#: ../../src/network/internet_gaming.cc:439
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "경고: 비록 우리가 연결된 상태가 아니어도 명령 %s를 수신함."
 
-#: ../../src/network/internet_gaming.cc:451
+#: ../../src/network/internet_gaming.cc:450
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "서버 시간 오프셋은 %d 초입니다."
 
-#: ../../src/network/internet_gaming.cc:475
+#: ../../src/network/internet_gaming.cc:474
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "잘못된 채팅 메시지 타입 \"%s\""
 
-#: ../../src/network/internet_gaming.cc:475
+#: ../../src/network/internet_gaming.cc:474
 msgid "Invalid message type"
 msgstr "잘못된 메시지 타입"
 
-#: ../../src/network/internet_gaming.cc:513
+#: ../../src/network/internet_gaming.cc:512
 #, c-format
 msgid "The game %s is now available"
 msgstr "게임 %s 는 지금 이용가능함"
 
-#: ../../src/network/internet_gaming.cc:523
+#: ../../src/network/internet_gaming.cc:522
 #, c-format
 msgid "The game %s has been closed"
 msgstr "게임 %s 는 닫혔음"
 
-#: ../../src/network/internet_gaming.cc:562
+#: ../../src/network/internet_gaming.cc:569
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s 가 로비에 접속했음"
 
-#: ../../src/network/internet_gaming.cc:571
+#: ../../src/network/internet_gaming.cc:576
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s 가 로비를 떠났음"
 
-#: ../../src/network/internet_gaming.cc:623
+#: ../../src/network/internet_gaming.cc:628
 msgid "Chat message could not be sent."
 msgstr "채팅 메시지가 전송되지 않습니다."
 
-#: ../../src/network/internet_gaming.cc:637
+#: ../../src/network/internet_gaming.cc:642
 #, c-format
 msgid "ERROR: %s"
 msgstr "오류: %s"
 
-#: ../../src/network/internet_gaming.cc:647
+#: ../../src/network/internet_gaming.cc:652
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "메타서버에서 알 수 없는 명령을 수신함: %s"
 
-#: ../../src/network/internet_gaming.cc:774
+#: ../../src/network/internet_gaming.cc:779
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "메시지가 전송되지 않습니다: 메타서버에 연결되지 않았습니다!"
 
-#: ../../src/network/internet_gaming.cc:793
-#: ../../src/network/internet_gaming.cc:800
+#: ../../src/network/internet_gaming.cc:798
+#: ../../src/network/internet_gaming.cc:805
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "메시지가 전송되지 않습니다. 개인 메시지인가요?"
 
-#: ../../src/network/internet_gaming.cc:875
+#: ../../src/network/internet_gaming.cc:812
+msgid "Private messages to IRC users are not supported."
+msgstr ""
+
+#: ../../src/network/internet_gaming.cc:889
 msgid "Conversion error"
 msgstr "전환 오류"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:878
+#: ../../src/network/internet_gaming.cc:892
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "\"%s\"의 참값을 얻지 못함"
 
-#: ../../src/network/internet_gaming.cc:895
+#: ../../src/network/internet_gaming.cc:909
 msgid "unknown"
 msgstr "알 수 없음"
 
@@ -2370,20 +2374,20 @@ msgstr "버전"
 msgid "Game"
 msgstr "게임"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:364
+#: ../../src/ui_fsmenu/internet_lobby.cc:374
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:367
+#: ../../src/ui_fsmenu/internet_lobby.cc:377
 msgid "Connection Timed Out"
 msgstr ""
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:402
+#: ../../src/ui_fsmenu/internet_lobby.cc:412
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "이름없음"

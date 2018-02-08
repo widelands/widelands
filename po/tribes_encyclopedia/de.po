@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:28+0000\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
+"PO-Revision-Date: 2018-01-30 12:57+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1929,9 +1929,6 @@ msgstr "Minenbauplatz"
 #: ../../data/tribes/scripting/help/building_help.lua:470
 #: ../../data/tribes/scripting/help/building_help.lua:472
 #: ../../data/tribes/scripting/help/building_help.lua:474
-#: ../../data/tribes/scripting/help/immovable_help.lua:48
-#: ../../data/tribes/scripting/help/immovable_help.lua:50
-#: ../../data/tribes/scripting/help/immovable_help.lua:52
 msgid "Space required:"
 msgstr "Benötigter Platz:"
 
@@ -1940,17 +1937,17 @@ msgid "Port plot"
 msgstr "Hafenbauplatz"
 
 #: ../../data/tribes/scripting/help/building_help.lua:468
-#: ../../data/tribes/scripting/help/immovable_help.lua:48
+#: ../../data/tribes/scripting/help/immovable_help.lua:47
 msgid "Small plot"
 msgstr "Kleiner Bauplatz"
 
 #: ../../data/tribes/scripting/help/building_help.lua:470
-#: ../../data/tribes/scripting/help/immovable_help.lua:50
+#: ../../data/tribes/scripting/help/immovable_help.lua:49
 msgid "Medium plot"
 msgstr "Mittelgroßer Bauplatz"
 
 #: ../../data/tribes/scripting/help/building_help.lua:472
-#: ../../data/tribes/scripting/help/immovable_help.lua:52
+#: ../../data/tribes/scripting/help/immovable_help.lua:51
 msgid "Big plot"
 msgstr "Großer Bauplatz"
 
@@ -1971,7 +1968,7 @@ msgid "Direct build cost:"
 msgstr "Kosten für das direkte Bauen:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:491
-#: ../../data/tribes/scripting/help/immovable_help.lua:58
+#: ../../data/tribes/scripting/help/immovable_help.lua:57
 msgid "Build cost:"
 msgstr "Baukosten:"
 
@@ -2455,11 +2452,17 @@ msgstr "Berechnung erforderlich"
 msgid "%1% and %2%"
 msgstr "%1% und %2%"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:56
+#: ../../data/tribes/scripting/help/immovable_help.lua:47
+#: ../../data/tribes/scripting/help/immovable_help.lua:49
+#: ../../data/tribes/scripting/help/immovable_help.lua:51
+msgid "Space required: "
+msgstr ""
+
+#: ../../data/tribes/scripting/help/immovable_help.lua:55
 msgid "Requirements"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:67
+#: ../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Preferred Terrains"
 msgstr ""
 

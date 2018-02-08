@@ -7,7 +7,7 @@ animations = {
       fps = 10
    }
 }
-add_walking_animations (animations, "sail", dirname, "sail", {146, 146}, 10)
+add_walking_animations (animations, "sail", dirname, "sail", {146, 153}, 10)
 
 tribes:new_ship_type {
    name = "frisians_ship",

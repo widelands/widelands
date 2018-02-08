@@ -365,7 +365,6 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/warehouses/frisians/headquarters/init.lua"
       include "tribes/buildings/warehouses/frisians/port/init.lua"
       include "tribes/buildings/warehouses/frisians/warehouse/init.lua"
-      include "tribes/buildings/warehouses/frisians/warehouse_empire/init.lua"
    end)
 
    -- ===================================

@@ -221,7 +221,6 @@ tribes:new_tribe {
       "frisians_headquarters",
       "frisians_warehouse",
       "frisians_port",
-      "frisians_warehouse_empire", --Special building – used by scenarios, unavailable in normal games
 
       -- Small
       "frisians_quarry",

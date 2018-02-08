@@ -11,15 +11,15 @@
 # CupIvan <mail@cupivan.ru>, 2015
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Олег Шевченко <olegrock@gmail.com>, 2017
-# Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2017-2018
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
+"PO-Revision-Date: 2018-02-01 08:25+0000\n"
+"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1012,7 +1012,7 @@ msgstr "Каменоломне для работы нужны скалы в ра
 #, lua-format
 msgctxt "barbarians_building"
 msgid "The stonemason pauses %s before going back to work again."
-msgstr "Каменщик делает перерыв в работе на %s."
+msgstr "Камнетес делает перерыв в работе на %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/helptexts.lua:4
@@ -1931,9 +1931,6 @@ msgstr "Область шахт"
 #: ../../data/tribes/scripting/help/building_help.lua:470
 #: ../../data/tribes/scripting/help/building_help.lua:472
 #: ../../data/tribes/scripting/help/building_help.lua:474
-#: ../../data/tribes/scripting/help/immovable_help.lua:48
-#: ../../data/tribes/scripting/help/immovable_help.lua:50
-#: ../../data/tribes/scripting/help/immovable_help.lua:52
 msgid "Space required:"
 msgstr "Требуемая область:"
 
@@ -1942,17 +1939,17 @@ msgid "Port plot"
 msgstr "Портовая область"
 
 #: ../../data/tribes/scripting/help/building_help.lua:468
-#: ../../data/tribes/scripting/help/immovable_help.lua:48
+#: ../../data/tribes/scripting/help/immovable_help.lua:47
 msgid "Small plot"
 msgstr "Малый участок"
 
 #: ../../data/tribes/scripting/help/building_help.lua:470
-#: ../../data/tribes/scripting/help/immovable_help.lua:50
+#: ../../data/tribes/scripting/help/immovable_help.lua:49
 msgid "Medium plot"
 msgstr "Средний участок"
 
 #: ../../data/tribes/scripting/help/building_help.lua:472
-#: ../../data/tribes/scripting/help/immovable_help.lua:52
+#: ../../data/tribes/scripting/help/immovable_help.lua:51
 msgid "Big plot"
 msgstr "Большой участок"
 
@@ -1973,7 +1970,7 @@ msgid "Direct build cost:"
 msgstr "Стоимость строительства \"с нуля\":"
 
 #: ../../data/tribes/scripting/help/building_help.lua:491
-#: ../../data/tribes/scripting/help/immovable_help.lua:58
+#: ../../data/tribes/scripting/help/immovable_help.lua:57
 msgid "Build cost:"
 msgstr "Стоимость строительства:"
 
@@ -2459,11 +2456,17 @@ msgstr "Необходим расчет"
 msgid "%1% and %2%"
 msgstr "%1% и %2%"
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:56
+#: ../../data/tribes/scripting/help/immovable_help.lua:47
+#: ../../data/tribes/scripting/help/immovable_help.lua:49
+#: ../../data/tribes/scripting/help/immovable_help.lua:51
+msgid "Space required: "
+msgstr ""
+
+#: ../../data/tribes/scripting/help/immovable_help.lua:55
 msgid "Requirements"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:67
+#: ../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Preferred Terrains"
 msgstr ""
 
@@ -3313,7 +3316,7 @@ msgid ""
 "Marble is the beautiful stone which is cut out of the mountains or produced "
 "in a quarry. Marble is used as a building material and gets chiseled into "
 "marble columns in the stonemason’s house."
-msgstr "Мрамор, это красивый камень, который высекают в горах или каменоломнях. Мрамор используется как строительный материал и для изготовления мраморных колонн из него в домике каменщика."
+msgstr "Мрамор, это красивый камень, который высекают в горах или каменоломнях. Мрамор используется как строительный материал и для изготовления мраморных колонн из него в домике камнетеса."
 
 #. TRANSLATORS: Helptext for a ware: Marble Column
 #: ../../data/tribes/wares/marble_column/helptexts.lua:4
@@ -3322,7 +3325,7 @@ msgid ""
 "Marble columns represent the high culture of the Empire, so they are needed "
 "for nearly every larger building. They are produced out of marble at a "
 "stonemason’s house."
-msgstr "Мраморные колонны олицетворяют высокую культуру Империи, поэтому они нужны почти для каждого большого здания. Они изготавливаются из мрамора в домике каменщика."
+msgstr "Мраморные колонны олицетворяют высокую культуру Империи, поэтому они нужны почти для каждого большого здания. Они изготавливаются из мрамора в домике камнетеса."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:4
@@ -3397,7 +3400,7 @@ msgid ""
 "Picks are used by stonemasons and miners. They are produced in the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr "Кирки используются каменщиками и шахтёрами. Они производятся в кузнице (но производство прекращается, если здание улучшить до топорной мастерской или военной фабрики)."
+msgstr "Кирки используются камнетесами и шахтёрами. Они производятся в кузнице (но производство прекращается, если здание улучшить до топорной мастерской или военной фабрики)."
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../data/tribes/wares/pick/helptexts.lua:8
@@ -3405,7 +3408,7 @@ msgctxt "empire_ware"
 msgid ""
 "Picks are used by stonemasons and miners. They are produced by the "
 "toolsmith."
-msgstr "Кирки используются каменщиками и шахтёрами. Изготавливаются в инструментальной мастерской."
+msgstr "Кирки используются камнетесами и шахтёрами. Изготавливаются в инструментальной мастерской."
 
 #. TRANSLATORS: Helptext for a ware: Planks
 #: ../../data/tribes/wares/planks/helptexts.lua:4

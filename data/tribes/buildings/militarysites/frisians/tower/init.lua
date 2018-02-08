@@ -26,17 +26,16 @@ tribes:new_militarysite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {95, 162},
+         hotspot = {99, 180},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {95, 162},
+         hotspot = {99, 180},
       },
    },
 
    aihints = {
-      expansion = true,
       fighting = true,
       mountain_conqueror = true,
       prohibited_till = 600
