@@ -32,6 +32,7 @@
 --    :arg create_carriers: If this is :const:`true` carriers are created for
 --       the roads. Otherwise no carriers will be created.
 --    :type create_carriers: :class:`boolean`
+
 function connected_road(p, start, cmd, g_create_carriers)
    create_carriers = true
    if g_create_carriers ~= nil then
@@ -96,9 +97,13 @@ end
 --          :meth:`wl.map.Warehouse.set_workers`.  Note that ProductionSites
 --          are filled with workers by default.
 --    :type b1_descr: :class:`array`
+--
+--    :returns: The building created
+
 function prefilled_buildings(p, ...)
+   local b = nil
    for idx,bdescr in ipairs({...}) do
-      local b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)
+      b = p:place_building(bdescr[1], wl.Game().map:get_field(bdescr[2],bdescr[3]), false, true)
       -- Fill with workers
       if b.valid_workers then b:set_workers(b.valid_workers) end
       if bdescr.workers then b:set_workers(bdescr.workers) end
@@ -116,6 +121,7 @@ function prefilled_buildings(p, ...)
       if bdescr.wares then b:set_wares(bdescr.wares) end
       if bdescr.inputs then b:set_inputs(bdescr.inputs) end
    end
+   return b
 end
 
 -- RST
@@ -132,12 +138,12 @@ end
 --    :type building: :class:`string`
 --    :arg region: The fields which are tested for suitability.
 --    :type region: :class:`array`
---    :arg opts:  a table with prefill information (wares, soldiers, workers,
---       see :func:`prefilled_buildings`) and the following options:
---
+--    :arg opts:  A table with prefill information (wares, soldiers, workers,
+--       see :func:`prefilled_buildings`)
 --    :type opts: :class:`table`
 --
---    :returns: the building created
+--    :returns: The building created
+
 function place_building_in_region(plr, building, fields, gargs)
    local idx
    local f
@@ -167,12 +173,13 @@ end
 -- RST
 -- .. function:: is_building(immovable)
 --
---    Checks whether an immpvable is a finished building, i.e. not
+--    Checks whether an immpovable is a finished building, i.e. not
 --    a construction site.
 --
 --    :arg immovable: The immovable to test
 --
 --    :returns: true if the immovable is a building
+
 function is_building(immovable)
    return immovable.descr.type_name == "productionsite" or
       immovable.descr.type_name == "warehouse" or
