@@ -5,6 +5,11 @@ animations = {
       pictures = path.list_files (dirname .. "idle_??.png"),
       hotspot = {79, 143},
       fps = 10
+   },
+   sinking = {
+      pictures = path.list_files (dirname .. "sinking_??.png"),
+      hotspot = {88, 141},
+      fps = 7
    }
 }
 add_walking_animations (animations, "sail", dirname, "sail", {146, 153}, 10)
