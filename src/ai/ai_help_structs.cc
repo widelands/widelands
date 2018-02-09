@@ -891,7 +891,6 @@ bool FlagsForRoads::Candidate::operator<(const Candidate& other) const {
 	const int32_t other_rs = other.reduction_score();
 	const int32_t this_rs = reduction_score();
 	return std::tie(other.new_road_possible, other_rs) < std::tie(new_road_possible, this_rs);
-	//return new_road_length * 10 / current_road_length > other.new_road_length * 10 / other.current_road_length; NOCOM
 }
 
 bool FlagsForRoads::Candidate::operator==(const Candidate& other) const {

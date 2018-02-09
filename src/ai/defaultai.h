@@ -355,7 +355,6 @@ private:
 	int16_t ts_without_trainers_;
 
 	// for roads
-	//uint32_t inhibit_road_building_; NOCOM
 	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
 	bool dead_ends_check_; // Do we need to check and dismantle dead ends?
 
