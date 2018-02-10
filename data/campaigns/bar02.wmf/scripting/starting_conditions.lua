@@ -94,7 +94,7 @@ prefilled_buildings(p2,
 --                                 Player 3
 -- =======================================================================
 p3:forbid_buildings("all")
-prefilled_buildings(p3,
+b_table = prefilled_buildings(p3,
    {"barbarians_sentry", 137, 87, soldiers = {[{0,0,0,0}]=2}},
    {"barbarians_barrier", 130, 86, soldiers = {[{0,0,0,0}]=4}},
    {"barbarians_barrier", 132, 82, soldiers = {[{0,0,0,0}]=4}},
@@ -105,6 +105,11 @@ prefilled_buildings(p3,
       [{0,0,0,0}]=1, [{1,1,0,1}]=1, [{0,1,0,0}]=1,
    }}
 )
+
+connected_road(p3, b_table[1].flag, "l, tl, tl" , true)
+connected_road(p3, b_table[2].flag, "r, r, r, r, r, tr", true)
+connected_road(p3, b_table[3].flag, "bl, bl, bl, bl" , true)
+connected_road(p3, b_table[5].flag, "br, br, bl, bl" , true)
 
 -- =======================================================================
 --                                 Player 4
