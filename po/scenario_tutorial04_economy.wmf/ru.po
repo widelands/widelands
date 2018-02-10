@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-02-01 08:23+0000\n"
+"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"PO-Revision-Date: 2018-02-01 09:33+0000\n"
 "Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -204,7 +204,7 @@ msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know"
 " whether we still have taverns, so you have to choose the ‘Medium buildings’"
 " tab. Close the building statistics menu afterwards."
-msgstr ""
+msgstr "Пока достаточно объяснений. Теперь попробуйте сами. Мы хотим знать, есть ли у нас таверны, поэтому вы должны выбрать вкладку \"Средние здания\". После этого закройте меню \"Статистика построек\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:89
@@ -213,7 +213,7 @@ msgstr "Проверьте, сколько у вас таверн."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
-msgstr ""
+msgstr "Выберете вкладку \"Средние здания\" в окне \"Статистика построек\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:90
 msgid ""
@@ -515,7 +515,7 @@ msgstr "Я продолжу, как только вы щёлкните на"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:253
 msgid "third tab (‘Economy health’)."
-msgstr ""
+msgstr "третьей вкладке (\"Состояние экономики\")."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:258
 msgid "Switch to the third tab in the ware statistics menu window."

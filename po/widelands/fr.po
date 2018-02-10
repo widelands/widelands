@@ -4,7 +4,7 @@
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015-2016
 # Bouchard Renaud <renaud.bouchard@gmail.com>, 2014
-# David D, 2017
+# David D, 2017-2018
 # GunChleoc, 2016
 # Samuël Weber <samuel.weber@normalesup.org>, 2017
 # finki boy, 2015
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-01-30 12:58+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"PO-Revision-Date: 2018-02-05 15:48+0000\n"
+"Last-Translator: David D\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,7 +88,7 @@ msgstr "%1% (%2%)"
 #: ../../data/scripting/help.lua:48
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:160
@@ -113,7 +113,7 @@ msgstr "Espace insuffisant"
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -1730,7 +1730,7 @@ msgstr "Widelands n'a pas pu établir de connexion à l'adresse donnée.\nSoit i
 
 #: ../../src/network/internet_gaming.cc:173
 msgid "Users marked with IRC will possibly not react to messages."
-msgstr ""
+msgstr "Les utilisateurs étiquetés IRC ne réagiront probablement pas aux messages."
 
 #: ../../src/network/internet_gaming.cc:211
 msgid "Successfully reconnected to the metaserver!"
@@ -1835,7 +1835,7 @@ msgstr "Le message n'a pas pu être envoyé : était-ce censé être un message 
 
 #: ../../src/network/internet_gaming.cc:812
 msgid "Private messages to IRC users are not supported."
-msgstr ""
+msgstr "Les messages privés vers des utilisateurs d'IRC ne sont pas soutenus."
 
 #: ../../src/network/internet_gaming.cc:889
 msgid "Conversion error"
