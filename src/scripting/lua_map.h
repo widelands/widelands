@@ -86,6 +86,8 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_allows_seafaring(lua_State*);
+	int get_number_of_port_spaces(lua_State*);
 	int get_width(lua_State*);
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
@@ -96,6 +98,7 @@ public:
 	int place_immovable(lua_State*);
 	int get_field(lua_State*);
 	int recalculate(lua_State*);
+	int set_port_space(lua_State*);
 
 	/*
 	 * C methods
@@ -129,6 +132,7 @@ public:
 	int get_carrier(lua_State*);
 	int get_carrier2(lua_State*);
 	int get_descname(lua_State*);
+	int get_immovables(lua_State*);
 	int get_geologist(lua_State*);
 	int get_name(lua_State*);
 	int get_port(lua_State*);
@@ -185,6 +189,7 @@ public:
 	 */
 	int get_descname(lua_State*);
 	int get_icon_name(lua_State*);
+	int get_helptext_script(lua_State*);
 	int get_name(lua_State*);
 	int get_type_name(lua_State*);
 	int get_representative_image(lua_State*);
@@ -237,7 +242,7 @@ public:
 	 * Properties
 	 */
 	int get_species(lua_State*);
-	int get_build_cost(lua_State*);
+	int get_buildcost(lua_State*);
 	int get_editor_category(lua_State*);
 	int get_terrain_affinity(lua_State*);
 	int get_owner_type(lua_State*);
@@ -278,11 +283,10 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_build_cost(lua_State*);
+	int get_buildcost(lua_State*);
 	int get_buildable(lua_State*);
 	int get_conquers(lua_State*);
 	int get_destructible(lua_State*);
-	int get_helptext_script(lua_State*);
 	int get_enhanced(lua_State*);
 	int get_enhanced_from(lua_State*);
 	int get_enhancement_cost(lua_State*);
@@ -555,7 +559,6 @@ public:
 	 * Properties
 	 */
 	int get_consumers(lua_State*);
-	int get_helptext_script(lua_State*);
 	int get_producers(lua_State*);
 
 	/*
@@ -595,7 +598,6 @@ public:
 	int get_becomes(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_employers(lua_State*);
-	int get_helptext_script(lua_State*);
 	int get_is_buildable(lua_State*);
 	int get_needed_experience(lua_State*);
 

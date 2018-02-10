@@ -55,24 +55,6 @@ function count_in_warehouses(ware)
    return rv
 end
 
-function send_building_lost_message(f)
-   set_textdomain("scenario_atl01.wmf")
-   send_message(
-      p1,
-      -- TRANSLATORS: Short message title. Translate as "Lost!" if you don't have enough space.
-      pgettext("message_short_title", "Building lost!"),
-      rt("image=".. f.immovable.descr.representative_image,
-         p(_"We lost a building to the ocean!")
-      ),
-      {
-         field = f,
-         popup = false,
-         icon = f.immovable.descr.representative_image,
-         heading = pgettext("message_heading", "Building lost!")
-      }
-   )
-end
-
 -- starting conditions are included later in the intro
 include "map:scripting/mission_thread.lua"
 include "map:scripting/water_rising.lua"

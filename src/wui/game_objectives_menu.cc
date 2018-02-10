@@ -87,7 +87,8 @@ void GameObjectivesMenu::think() {
  */
 void GameObjectivesMenu::selected(uint32_t const t) {
 	const std::string text = t == ListType::no_selection_index() ? "" : list[t].descr();
-	// TODO(GunChleoc): When all campaigns, scenarios and win conditions have been converted, simply add the text above.
+	// TODO(GunChleoc): When all campaigns, scenarios and win conditions have been converted, simply
+	// add the text above.
 	try {
 		objectivetext.force_new_renderer();
 		objectivetext.set_text(text);

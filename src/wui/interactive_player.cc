@@ -130,57 +130,14 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
 	}
 	if (player_field.constructionsite.becomes) {
 		assert(field.owner != nullptr);
-		const Widelands::ConstructionsiteInformation& csinf = player_field.constructionsite;
-		// draw the partly finished constructionsite
-		uint32_t anim_idx;
-		try {
-			anim_idx = csinf.becomes->get_animation("build");
-		} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-			try {
-				anim_idx = csinf.becomes->get_animation("unoccupied");
-			} catch (Widelands::MapObjectDescr::AnimationNonexistent) {
-				anim_idx = csinf.becomes->get_animation("idle");
-			}
-		}
-		const Animation& anim = g_gr->animations().get_animation(anim_idx);
-		const size_t nr_frames = anim.nr_frames();
-		uint32_t cur_frame = csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
-		uint32_t tanim = cur_frame * FRAME_LENGTH;
+		player_field.constructionsite.draw(
+		   field.rendertarget_pixel, scale, field.owner->get_playercolor(), dst);
 
-		uint32_t percent = 100 * csinf.completedtime * nr_frames;
-		if (csinf.totaltime) {
-			percent /= csinf.totaltime;
-		}
-		percent -= 100 * cur_frame;
-
-		if (cur_frame) {  // not the first frame
-			// Draw the prev frame
-			dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim - FRAME_LENGTH,
-			                    field.owner->get_playercolor());
-		} else if (csinf.was) {
-			// Is the first frame, but there was another building here before,
-			// get its last build picture and draw it instead.
-			uint32_t a;
-			try {
-				a = csinf.was->get_animation("unoccupied");
-			} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-				a = csinf.was->get_animation("idle");
-			}
-			dst->blit_animation(field.rendertarget_pixel, scale, a, tanim - FRAME_LENGTH,
-			                    field.owner->get_playercolor());
-		}
-		dst->blit_animation(
-		   field.rendertarget_pixel, scale, anim_idx, tanim, field.owner->get_playercolor(), percent);
 	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		uint32_t pic;
-		try {
-			pic = building->get_animation("unoccupied");
-		} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-			pic = building->get_animation("idle");
-		}
-		dst->blit_animation(field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
+		dst->blit_animation(field.rendertarget_pixel, scale, building->get_unoccupied_animation(), 0,
+		                    field.owner->get_playercolor());
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
 		dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(), 0,
@@ -205,7 +162,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()) {
 	add_toolbar_button(
-	   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
+	   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
 	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
 
 	add_toolbar_button(
@@ -221,7 +178,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	minimap_registry().open_window = [this] { toggle_minimap(); };
 
 	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect([this] {
@@ -247,7 +204,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	   "wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"), &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
-	add_toolbar_button("ui_basic/menu_help", "help", _("Tribal Encyclopedia"), &encyclopedia_, true);
+	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
 	};

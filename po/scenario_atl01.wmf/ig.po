@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# AhaNkem Obi <litoretura@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-25 03:55+0000\n"
-"PO-Revision-Date: 2015-02-03 14:29+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-12-02 08:24+0000\n"
+"PO-Revision-Date: 2017-12-16 08:00+0000\n"
+"Last-Translator: AhaNkem Obi <litoretura@gmail.com>\n"
 "Language-Team: Igbo (http://www.transifex.com/widelands/widelands/language/ig/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,16 +22,16 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Ụnọ efugo!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "Ụnọ anyị furu n'osimmiri!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Ụnọ efugo!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
@@ -85,7 +86,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:57
 msgid "Food Production"
-msgstr ""
+msgstr "Mmepụta nri"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:58
 msgid ""
@@ -216,7 +217,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid "Recruiting new soldiers"
-msgstr ""
+msgstr "Ana-ewete ndị-agha ọhụrụ"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid ""
@@ -232,7 +233,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Ebe ana-ekuzi ndị agha"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:112
 msgid ""
@@ -295,7 +296,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:147
 msgid "Favored by the God"
-msgstr ""
+msgstr "Nke chi hụrụ n'ọma"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:149
@@ -324,7 +325,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:157
 msgid "The God’s Punishment"
-msgstr ""
+msgstr "Ntaramahụhụ chi nyere"
 
 #. TRANSLATORS: Foreword
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:159
@@ -431,7 +432,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:194
 msgid "Loftomor and Sidolus Arrive"
-msgstr ""
+msgstr "Loftomo na Sidolus batara"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:195
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:230
@@ -447,7 +448,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:460
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:473
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:197
@@ -460,7 +461,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:200
 msgid "Loftomor Speaks"
-msgstr ""
+msgstr "Loftomo na-ekwu okwu"
 
 #. TRANSLATORS: Loftomor
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:203
@@ -476,7 +477,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 msgid "Sidolus Speaks"
-msgstr ""
+msgstr "Sidolus na-ekwu okwu"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:210
@@ -525,7 +526,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:439
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:459
 msgid "Jundlina Replies"
-msgstr ""
+msgstr "Jundlina na-aza"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:232
@@ -539,7 +540,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:235
 msgid "Colionder is in Thought"
-msgstr ""
+msgstr "Kolionda na-eche uche"
 
 #. TRANSLATORS: Colionder
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:238
@@ -574,7 +575,7 @@ msgstr ""
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:247
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:248
 msgid "Jundlina Agrees"
-msgstr ""
+msgstr "Jundlina na-ekwe"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:250
@@ -594,7 +595,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:266
 msgid "A Man Comes to Jundlina"
-msgstr ""
+msgstr "Otu nwoke bịakwutara Jundlina"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:269
@@ -626,7 +627,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:285
 msgid "Opol Seeks Out Jundlina"
-msgstr ""
+msgstr "Opol na-achọ Jundlina"
 
 #. TRANSLATORS: Opol
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:288
@@ -646,7 +647,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:301
 msgid "Sidolus Seeks Out Jundlina"
-msgstr ""
+msgstr "Sidolus na-achọ Jundlina"
 
 #. TRANSLATORS: Sidolus
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:304
@@ -672,7 +673,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:317
 msgid "Jundlina Writes a Letter"
-msgstr ""
+msgstr "Jundlina na-ede edemede"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:320
@@ -691,11 +692,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:336
 msgid "Jundlina Summons Sidolus"
-msgstr ""
+msgstr "Jundlina kpọrọ Sidolus"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:337
 msgid "Jundlina is Angry"
-msgstr ""
+msgstr "Jundlina na-ewe iwe"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:339
@@ -732,7 +733,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:358
 msgid "Jundlina Received a Letter"
-msgstr ""
+msgstr "Jundlina wetere edemede"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:361
@@ -766,12 +767,12 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:385
 msgid "A Dangerous Discovery"
-msgstr ""
+msgstr "Nchọpụta dị ize ndụ"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:386
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:414
 msgid "Jundlina is in Thought"
-msgstr ""
+msgstr "Jundlina na-eche uche"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:388
@@ -803,11 +804,11 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:402
 msgid "Another Building"
-msgstr ""
+msgstr "Ụnọ ọzọ"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:403
 msgid "Jundlina is Worried"
-msgstr ""
+msgstr "Jundlina na-echegbu"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:405
@@ -836,7 +837,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:427
 msgid "The Water is Rising!"
-msgstr ""
+msgstr "Mmiri na-ebinite!"
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:430
@@ -849,7 +850,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:433
 msgid "A Young Man Approaches"
-msgstr ""
+msgstr "Otu okorobịa na-abịa"
 
 #. TRANSLATORS: Ostur
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:436
@@ -920,7 +921,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:479
 msgid "Congratulations"
-msgstr ""
+msgstr "Ị meela"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:480
 msgid ""
@@ -936,5 +937,5 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ebumnuche Ọhụrụ"
+msgstr[1] "Ebumnuche Ọhụrụ"
