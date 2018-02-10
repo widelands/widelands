@@ -934,7 +934,6 @@ void FlagsForRoads::road_possible(Widelands::Coords coords, const uint32_t new_r
 	for (auto& candidate_flag : flags_queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {
 			candidate_flag.new_road_length = new_road;
-			// candidate_flag.current_roads_distance = current_road;
 			candidate_flag.new_road_possible = true;
 			candidate_flag.reduction_score();
 			return;

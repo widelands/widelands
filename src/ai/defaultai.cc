@@ -3749,8 +3749,6 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		          const int32_t a_length = a.current_road_length / 50;
 		          const int32_t b_length = b.current_road_length / 50;
 		          return std::tie(b_length, a.air_distance) < std::tie(a_length, b.air_distance);
-		          // return b_length * 10 / b.air_distance < a_length * 10 / a.air_distance;
-
 	          });
 
 	// Now we calculate roads from here to few best looking RoadCandidates....
