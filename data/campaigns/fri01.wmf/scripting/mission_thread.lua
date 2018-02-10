@@ -82,12 +82,6 @@ function warningClay ()
    end
 end
 
-function supersoldier ()
-   
-   
-   
-end
-
 function count (ware)
    local whs = array_combine (
       p1:get_buildings ("frisians_headquarters"),
@@ -148,7 +142,7 @@ function mission_thread ()
    campaign_message_box (intro_1)
    include "map:scripting/starting_conditions.lua"
    scroll_to_field (map.player_slots [1].starting_field)
-   sleep (1000)
+   sleep (5000)
    campaign_message_box (intro_2)
    campaign_message_box (intro_3)
    --build wood economy and reed yard
