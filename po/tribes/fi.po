@@ -1,10 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-25 03:55+0000\n"
-"PO-Revision-Date: 2017-11-25 03:58+0000\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-26 13:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -2452,7 +2452,7 @@ msgid "Warehouse"
 msgstr "Varasto"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:40
+#: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Tuhkaa"
@@ -2604,62 +2604,62 @@ msgstr "Pieni kaislikko"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
 msgctxt "immovable"
-msgid "Coal Vein"
-msgstr "Hiilisuoni"
+msgid "Resources: Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal2/init.lua:7
 msgctxt "immovable"
-msgid "Main Coal Vein"
-msgstr "Hiilimalmion pääsuoni"
+msgid "Resources: Main Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold1/init.lua:7
 msgctxt "immovable"
-msgid "Gold Vein"
-msgstr "Kultasuoni"
+msgid "Resources: Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold2/init.lua:7
 msgctxt "immovable"
-msgid "Main Gold Vein"
-msgstr "Kultamalmion pääsuoni"
+msgid "Resources: Main Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron1/init.lua:7
 msgctxt "immovable"
-msgid "Iron Vein"
-msgstr "Rautamalmisuoni"
+msgid "Resources: Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron2/init.lua:7
 msgctxt "immovable"
-msgid "Main Iron Vein"
-msgstr "Rautamalmion pääsuoni"
+msgid "Resources: Main Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
-msgid "No Resources"
-msgstr "Ei resursseja"
+msgid "Resources: None"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones1/init.lua:7
 msgctxt "immovable"
-msgid "Some Stones"
-msgstr "Joitain kiviä"
+msgid "Resources: Some Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
-msgid "A Lot of Stones"
-msgstr "Paljon kiviä"
+msgid "Resources: A Lot of Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_water1/init.lua:7
 msgctxt "immovable"
-msgid "Water Vein"
-msgstr "Vesisuoni"
+msgid "Resources: Water Vein"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2703,37 +2703,41 @@ msgid ""
 "Atlantis."
 msgstr "Tämä heimo tunnetaan jo vanhimmista taruista: Atlantiksen pojat ja tyttäret."
 
-#: ../../data/tribes/scripting/help/init.lua:48
+#: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
 msgstr "Heimo-opas"
 
-#: ../../data/tribes/scripting/help/init.lua:53
+#: ../../data/tribes/scripting/help/init.lua:59
 msgid "General"
 msgstr "Yleistä"
 
-#: ../../data/tribes/scripting/help/init.lua:58
+#: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
 msgstr "Esittely"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:70
 msgid "Controls"
 msgstr "Hallinta"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:76
 msgid "Tips"
 msgstr "Vinkit"
 
-#: ../../data/tribes/scripting/help/init.lua:79
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
 msgstr "Tarvikkeet"
 
-#: ../../data/tribes/scripting/help/init.lua:86
+#: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Työläiset"
 
-#: ../../data/tribes/scripting/help/init.lua:93
+#: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "Rakennukset"
+
+#: ../../data/tribes/scripting/help/init.lua:106
+msgid "Immovables"
+msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -2786,14 +2790,14 @@ msgstr "Jos pelaajalta loppuvat tärkät tarvikkeet, ne korvautuvat itsestään"
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
 msgid "Village"
-msgstr ""
+msgstr "Kylä"
 
 #. TRANSLATORS: This is the tooltip for the "Village" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
 msgid "Start the game with a peaceful village"
-msgstr ""
+msgstr "Aloita peli rauhallisella kylällä"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:55

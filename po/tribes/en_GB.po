@@ -1,16 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # Adam Piggott, 2016-2017
+# Andi Chandler <andi@gowling.com>, 2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Rhian G <rhianmarie@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-25 03:55+0000\n"
-"PO-Revision-Date: 2017-11-25 03:58+0000\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-26 13:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +25,7 @@ msgstr ""
 #: ../../data/tribes/buildings/markets/barbarians/market/init.lua:14
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "Market"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
@@ -1525,7 +1527,7 @@ msgstr "mixing grout"
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
-msgstr "Lumberjack's Hut"
+msgstr "Woodcutter's Hut"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:61
 msgctxt "barbarians_building"
@@ -1533,7 +1535,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "The lumberjack working at this lumberjack’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."
+msgstr "The woodcutter working at this woodcutter’s hut can’t find any trees in his work area. You should consider dismantling or destroying the building or building a ranger’s hut."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
@@ -1912,7 +1914,7 @@ msgstr "This iron mine’s main vein is exhausted. Expect strongly diminished re
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr "Lumberjack’s House"
+msgstr "Woodcutter’s House"
 
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
 msgctxt "empire_building"
@@ -1920,7 +1922,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "The lumberjack working at this lumberjack’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."
+msgstr "The woodcutter working at this woodcutter’s house can’t find any trees in his work area. You should consider dismantling or destroying the building or building a forester’s house."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:7
@@ -2447,7 +2449,7 @@ msgid "Warehouse"
 msgstr "Warehouse"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:40
+#: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Ashes"
@@ -2599,62 +2601,62 @@ msgstr "Reed (tiny)"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
 msgctxt "immovable"
-msgid "Coal Vein"
-msgstr "Coal Vein"
+msgid "Resources: Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal2/init.lua:7
 msgctxt "immovable"
-msgid "Main Coal Vein"
-msgstr "Main Coal Vein"
+msgid "Resources: Main Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold1/init.lua:7
 msgctxt "immovable"
-msgid "Gold Vein"
-msgstr "Gold Vein"
+msgid "Resources: Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold2/init.lua:7
 msgctxt "immovable"
-msgid "Main Gold Vein"
-msgstr "Main Gold Vein"
+msgid "Resources: Main Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron1/init.lua:7
 msgctxt "immovable"
-msgid "Iron Vein"
-msgstr "Iron Vein"
+msgid "Resources: Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron2/init.lua:7
 msgctxt "immovable"
-msgid "Main Iron Vein"
-msgstr "Main Iron Vein"
+msgid "Resources: Main Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
-msgid "No Resources"
-msgstr "No Resources"
+msgid "Resources: None"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones1/init.lua:7
 msgctxt "immovable"
-msgid "Some Stones"
-msgstr "Some Stones"
+msgid "Resources: Some Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
-msgid "A Lot of Stones"
-msgstr "A Lot of Stones"
+msgid "Resources: A Lot of Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_water1/init.lua:7
 msgctxt "immovable"
-msgid "Water Vein"
-msgstr "Water Vein"
+msgid "Resources: Water Vein"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2698,37 +2700,41 @@ msgid ""
 "Atlantis."
 msgstr "This tribe is known from the oldest tales. The sons and daughters of Atlantis."
 
-#: ../../data/tribes/scripting/help/init.lua:48
+#: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
 msgstr "Tribal Encyclopedia"
 
-#: ../../data/tribes/scripting/help/init.lua:53
+#: ../../data/tribes/scripting/help/init.lua:59
 msgid "General"
 msgstr "General"
 
-#: ../../data/tribes/scripting/help/init.lua:58
+#: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
 msgstr "Introduction"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:70
 msgid "Controls"
 msgstr "Controls"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:76
 msgid "Tips"
 msgstr "Tips"
 
-#: ../../data/tribes/scripting/help/init.lua:79
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
 msgstr "Wares"
 
-#: ../../data/tribes/scripting/help/init.lua:86
+#: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Workers"
 
-#: ../../data/tribes/scripting/help/init.lua:93
+#: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "Buildings"
+
+#: ../../data/tribes/scripting/help/init.lua:106
+msgid "Immovables"
+msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -2781,14 +2787,14 @@ msgstr "If this player runs low on important wares, they will be replenished for
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
 msgid "Village"
-msgstr ""
+msgstr "Village"
 
 #. TRANSLATORS: This is the tooltip for the "Village" starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
 msgid "Start the game with a peaceful village"
-msgstr ""
+msgstr "Start the game with a peaceful village"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:55
@@ -3773,7 +3779,7 @@ msgstr "Innkeeper"
 #: ../../data/tribes/workers/empire/lumberjack/init.lua:23
 msgctxt "empire_worker"
 msgid "Lumberjack"
-msgstr "Lumberjack"
+msgstr "Woodcutter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/miller/init.lua:17

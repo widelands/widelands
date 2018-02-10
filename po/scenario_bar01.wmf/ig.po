@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
+# AhaNkem Obi <litoretura@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-25 03:55+0000\n"
-"PO-Revision-Date: 2015-02-03 14:30+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2017-12-02 08:24+0000\n"
+"PO-Revision-Date: 2017-12-16 08:31+0000\n"
+"Last-Translator: AhaNkem Obi <litoretura@gmail.com>\n"
 "Language-Team: Igbo (http://www.transifex.com/widelands/widelands/language/ig/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -945,7 +946,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
 msgid "Victory"
-msgstr ""
+msgstr "Mmeri"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:515
 msgid ""

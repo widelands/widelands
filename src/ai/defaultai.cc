@@ -82,6 +82,9 @@ DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
 DefaultAI::VeryWeakImpl DefaultAI::very_weak_impl;
 
+uint32_t DefaultAI::last_seafaring_check_ = 0;
+bool DefaultAI::map_allows_seafaring_ = false;
+
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType const t)
    : ComputerPlayer(ggame, pid),
@@ -109,7 +112,6 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
      enemysites_check_delay_(30),
      resource_necessity_water_needed_(false),
      highest_nonmil_prio_(0),
-     seafaring_economy(false),
      expedition_ship_(kNoShip) {
 
 	// Subscribe to NoteFieldPossession.
@@ -379,13 +381,20 @@ void DefaultAI::think() {
 			}
 			break;
 		case SchedulerTaskId::kCheckShips:
-			set_taskpool_task_time(gametime + 3 * kShipCheckInterval, SchedulerTaskId::kCheckShips);
-			check_ships(gametime);
+			// if function returns false, we can postpone next call
+			{
+				const uint8_t wait_multiplier = (check_ships(gametime)) ? 1 : 5;
+				set_taskpool_task_time(
+				   gametime + wait_multiplier * kShipCheckInterval, SchedulerTaskId::kCheckShips);
+			}
 			break;
 		case SchedulerTaskId::KMarineDecisions:
-			set_taskpool_task_time(
-			   gametime + kMarineDecisionInterval, SchedulerTaskId::KMarineDecisions);
-			marine_main_decisions();
+			// if function returns false, we can postpone for next call
+			{
+				const uint8_t wait_multiplier = (marine_main_decisions()) ? 1 : 5;
+				set_taskpool_task_time(gametime + wait_multiplier * kMarineDecisionInterval,
+				                       SchedulerTaskId::KMarineDecisions);
+			}
 			break;
 		case SchedulerTaskId::kCheckMines:
 			if (check_economies()) {  // economies must be consistent
@@ -1046,45 +1055,125 @@ void DefaultAI::late_initialization() {
 }
 
 /**
- * Checks ALL available buildable fields.
+ * Checks PART of available buildable fields.
  *
- * this shouldn't be used often, as it might hang the game for some 100
- * milliseconds if the area the computer owns is big.
+ * this checks about 40-50 buildable fields. In big games, the player can have thousands
+ * of them, so we rotate the buildable_fields container and check 35 fields, and in addition
+ * we look for medium & big fields and near border fields if needed.
  */
 void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
+
+	// Every call we try to check first 35 buildable fields
+	constexpr uint16_t kMinimalFieldsCheck = 35;
+
 	uint16_t i = 0;
 
 	// To be sure we have some info about enemies we might see
 	update_player_stat(gametime);
 
-	// we test 40 fields that were update more than 1 seconds ago
+	// Generally we check fields as they are in the container, but we need also given
+	// number of "special" fields. So if given number of fields are not found within
+	// "regular" check, we must go on and look also on other fields...
+	uint8_t non_small_needed = 4;
+	uint8_t near_border_needed = 10;
+
+	// we test 35 fields that were update more than 1 seconds ago
 	while (!buildable_fields.empty() &&
-	       (buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
-	          gametime &&
-	       i < 40) {
+	       i < std::min<uint16_t>(kMinimalFieldsCheck, buildable_fields.size())) {
 		BuildableField& bf = *buildable_fields.front();
 
-		//  check whether we lost ownership of the node
-		if (bf.coords.field->get_owned_by() != player_number()) {
-			delete &bf;
-			buildable_fields.pop_front();
-			continue;
-		}
+		if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
+		    gametime) {
 
-		//  check whether we can still construct regular buildings on the node
-		if ((player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
-			unusable_fields.push_back(bf.coords);
-			delete &bf;
-			buildable_fields.pop_front();
-			continue;
-		}
+			//  check whether we lost ownership of the node
+			if (bf.coords.field->get_owned_by() != player_number()) {
+				delete &bf;
+				buildable_fields.pop_front();
+				continue;
+			}
 
-		update_buildable_field(bf);
+			//  check whether we can still construct regular buildings on the node
+			if ((player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
+				unusable_fields.push_back(bf.coords);
+				delete &bf;
+				buildable_fields.pop_front();
+				continue;
+			}
+
+			update_buildable_field(bf);
+			if (non_small_needed > 0) {
+				int32_t const maxsize = player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK;
+				if (maxsize > 1) {
+					non_small_needed -= 1;
+				}
+			}
+			if (near_border_needed > 0) {
+				if (bf.near_border) {
+					near_border_needed -= 1;
+				}
+			}
+		}
 		bf.field_info_expiration = gametime + kFieldInfoExpiration;
 		buildable_fields.push_back(&bf);
 		buildable_fields.pop_front();
 
 		i += 1;
+	}
+
+	// If needed we iterate once more and look for 'special' fields
+	// starting in the middle of buildable_fields to skip fields tested lately
+	// But not doing this if the count of buildable fields is too low
+	// (no need to bother)
+	if (buildable_fields.size() < kMinimalFieldsCheck * 3) {
+		return;
+	}
+
+	for (uint32_t j = buildable_fields.size() / 2; j < buildable_fields.size(); j++) {
+		// If we dont need to iterate (anymore) ...
+		if (non_small_needed + near_border_needed == 0) {
+			break;
+		}
+
+		// Skip if the field is not ours or was updated lately
+		if (buildable_fields[j]->coords.field->get_owned_by() != player_number()) {
+			continue;
+		}
+		// We are not interested in fields where info has expired less than 20s ago
+		if (buildable_fields[j]->field_info_expiration + 20000 > gametime) {
+			continue;
+		}
+
+		// Continue if field is blocked at the moment
+		if (blocked_fields.is_blocked(buildable_fields[j]->coords)) {
+			continue;
+		}
+
+		// Few constants to keep the code cleaner
+		const int32_t field_maxsize =
+		   player_->get_buildcaps(buildable_fields[j]->coords) & BUILDCAPS_SIZEMASK;
+		const bool field_near_border = buildable_fields[j]->near_border;
+
+		// Let decide if we need to update and for what reason
+		const bool update_due_size = non_small_needed && field_maxsize > 1;
+		const bool update_due_border = near_border_needed && field_near_border;
+
+		if (!(update_due_size || update_due_border)) {
+			continue;
+		}
+
+		// decreasing the counters
+		if (update_due_size) {
+			assert(non_small_needed > 0);
+			non_small_needed -= 1;
+		}
+		if (update_due_border) {
+			assert(near_border_needed > 0);
+			near_border_needed -= 1;
+		}
+
+		// and finnaly update the buildable field
+		update_buildable_field(*buildable_fields[j]);
+		buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
 	}
 }
 
@@ -1951,11 +2040,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Map& map = game().map();
 
-	if (gametime % 5 == 0) {
-		// TODO(unknown): Counting port spaces is very primitive way for this
-		// there should be better alternative f.e. like map::allows_seafaring()
-		// function but simplier
-		seafaring_economy = map.get_port_spaces().size() >= 2;
+	if (gametime > last_seafaring_check_ + 20000U) {
+		map_allows_seafaring_ = map.allows_seafaring();
+		last_seafaring_check_ = gametime;
 	}
 
 	for (int32_t i = 0; i < 4; ++i)
@@ -2663,7 +2750,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						assert(!bo.is(BuildingAttribute::kShipyard));
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						assert(bo.new_building == BuildingNecessity::kAllowed);
-						if (!seafaring_economy) {
+						if (!map_allows_seafaring_) {
 							continue;
 						}
 					} else {
@@ -2702,12 +2789,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						    bf->unowned_mines_spots_nearby) {  // not close to mountains
 							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
 						}
-					}
-
-					else if (bo.is(BuildingAttribute::kShipyard)) {
+					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard
 						assert(bo.total_count() == 0);
-						if (bf->open_water_nearby > 3 && seafaring_economy) {
+						if (bf->open_water_nearby > 3 && map_allows_seafaring_) {
 							prio += productionsites.size() * 5 +
 							        bf->open_water_nearby *
 							           std::abs(management_data.get_military_number_at(109)) / 10;
@@ -4253,7 +4338,7 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 		return BuildingNecessity::kForbidden;
 	}
 
-	if (bo.is(BuildingAttribute::kPort) && !seafaring_economy) {
+	if (bo.is(BuildingAttribute::kPort) && !map_allows_seafaring_) {
 		bo.new_building_overdue = 0;
 		bo.primary_priority = 0;
 		return BuildingNecessity::kForbidden;
@@ -4331,7 +4416,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	}
 
 	// Perhaps buildings are not allowed because the map is no seafaring
-	if (purpose == PerfEvaluation::kForConstruction && !seafaring_economy &&
+	if (purpose == PerfEvaluation::kForConstruction && !map_allows_seafaring_ &&
 	    bo.is(BuildingAttribute::kNeedsSeafaring)) {
 		return BuildingNecessity::kForbidden;
 	}

@@ -26,5 +26,6 @@ wl_binary(wl_map_object_info
     io_fileread
     io_filesystem
     logic
+    logic_tribe_basic_info
     sound
 )

@@ -15,9 +15,15 @@ wl_library(network
     netclient_interface.h
     netclient.cc
     netclient.h
+    netclientproxy.cc
+    netclientproxy.h
     nethost_interface.h
     nethost.cc
     nethost.h
+    nethostproxy.cc
+    nethostproxy.h
+    netrelayconnection.cc
+    netrelayconnection.h
     network.cc
     network.h
     network_gaming_messages.cc
@@ -27,6 +33,7 @@ wl_library(network
     network_player_settings_backend.cc
     network_player_settings_backend.h
     network_protocol.h
+    relay_protocol.h
   DEPENDS
     ai
     base_exceptions
@@ -46,13 +53,14 @@ wl_library(network
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_tribe_basic_info
     map_io_map_loader
     profile
     random
     scripting_lua_interface
     scripting_lua_table
     ui_basic
-    ui_fsmenu
+    ui_fsmenu_gameloading
     widelands_ball_of_mud
     wui
 )
