@@ -1,14 +1,15 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# Panos Ioannidis <panos.ioannidis@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-19 19:35+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-01-16 17:26+0000\n"
+"PO-Revision-Date: 2018-01-25 10:13+0000\n"
+"Last-Translator: Panos Ioannidis <panos.ioannidis@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,62 +19,62 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:63
 msgctxt "message_short_title"
 msgid "Building lost!"
-msgstr ""
+msgstr "Το κτίριο χάθηκε!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:65
 msgid "We lost a building to the ocean!"
-msgstr ""
+msgstr "Χάσαμε ένα κτίριο στον ωκεανό!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:71
 msgctxt "message_heading"
 msgid "Building lost!"
-msgstr ""
+msgstr "Το κτίριο χάθηκε!"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:32
 msgid "Ensure the supply of building wares"
-msgstr ""
+msgstr "Επιβεβαίωσε την παροχή προϊόντων στο κτίριο"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:34
 msgid "Supply Building Wares"
-msgstr ""
+msgstr "Προμήθευσε προϊόντα για το κτίριο"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:35
 msgid "Supply basic building material for your economy:"
-msgstr ""
+msgstr "Προμήθευσε βασικά δομικά υλικά για την οικονομία σου:"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
-msgstr ""
+msgstr "Κατασκεύασε ένα λατομείο"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:37
 msgid "Build two woodcutter’s houses"
-msgstr ""
+msgstr "Κατασκεύασε δύο σπίτια ξυλοκόπου"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:38
 msgid "Build two forester’s houses"
-msgstr ""
+msgstr "Κατασκεύασε δύο σπίτια δασοκόμου"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:39
 msgid "Build a sawmill"
-msgstr ""
+msgstr "Κατασκεύασε ένα ξυλουργείο"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:45
 msgid "Expand your territory and explore"
-msgstr ""
+msgstr "Επέκτεινε την περιοχή σου και εξερεύνησε"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:47
 msgid "Expand and Explore"
-msgstr ""
+msgstr "Επεκτάσου και εξερεύνησε"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:48
 msgid ""
 "The island is huge and as long as we are not sure that we are alone here, we"
 " cannot relax. Explore and conquer it, this is the only way to protect us "
 "from threats on the island and from Atlantis."
-msgstr ""
+msgstr "Το νησί είναι τεράστιο και όσο δεν είμαστε σίγουροι ότι είμαστε μόνοι μας, δεν μπορούμε να ησυχάσουμε. Εξερεύνησέ το και κατάκτησέ το, αυτός είναι ο μόνος τρόπος για να προστατευθούμε από τις απειλές στο νησί και από την Ατλαντίδα."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:49
 msgid "Build military sites to expand your territory"
@@ -928,12 +929,12 @@ msgid ""
 " long as you like."
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""

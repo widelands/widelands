@@ -31,7 +31,7 @@ namespace UI {
  * This class provides a scrollbar
  */
 struct Scrollbar : public Panel {
-	enum Area { None, Minus, Plus, Knob, MinusPage, PlusPage };
+	enum class Area { None, Minus, Plus, Knob, MinusPage, PlusPage };
 
 	/// default width for vertical scrollbars,
 	/// or height for horizontal scrollbars
