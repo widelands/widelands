@@ -108,9 +108,6 @@ public:
 		return return_enhanced_;
 	}
 
-	std::string helptext_script() const {
-		return helptext_script_;
-	}
 	int32_t get_size() const {
 		return size_;
 	}
@@ -178,11 +175,10 @@ private:
 	bool buildable_;     // the player can build this himself
 	bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;
-	Buildcost return_dismantle_;   // Returned wares on dismantle
-	Buildcost enhance_cost_;       // cost for enhancing
-	Buildcost return_enhanced_;    // Returned ware for dismantling an enhanced building
-	std::string helptext_script_;  // The path and filename to the building's helptext script
-	int32_t size_;                 // size of the building
+	Buildcost return_dismantle_;  // Returned wares on dismantle
+	Buildcost enhance_cost_;      // cost for enhancing
+	Buildcost return_enhanced_;   // Returned ware for dismantling an enhanced building
+	int32_t size_;                // size of the building
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
