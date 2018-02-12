@@ -29,7 +29,9 @@
 namespace Widelands {
 
 // Introduction of genetic algorithm with all structures that are needed for it
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 5;
+// Last version with 150 magic numbers
+constexpr uint16_t kOldMagicNumbers = 4;
 // First version with genetics
 constexpr uint16_t kPacketVersion3 = 3;
 // Old Version before using genetics
@@ -84,17 +86,34 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					// Magic numbers
 					size_t magic_numbers_size = fr.unsigned_32();
 
-					// TODO(GunChleoc): We allow for smaller size for savegame compatibility.
-					// Investigate if we can make the size static after Build 20.
-					if (magic_numbers_size > Widelands::Player::AiPersistentState::kMagicNumbersSize) {
-						throw GameDataError(
-						   "Too many magic numbers: We have %" PRIuS " but only %" PRIuS "are allowed",
-						   magic_numbers_size, Widelands::Player::AiPersistentState::kMagicNumbersSize);
-					}
-					assert(player->ai_data.magic_numbers.size() ==
-					       Widelands::Player::AiPersistentState::kMagicNumbersSize);
-					for (size_t i = 0; i < magic_numbers_size; ++i) {
-						player->ai_data.magic_numbers.at(i) = fr.signed_16();
+					// Here we deal with old savegames that contains 150 magic numbers only
+					if (packet_version <= kOldMagicNumbers) {
+						// The savegame contains less then expected number of magic numbers
+						assert(magic_numbers_size <
+						       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+						assert(player->ai_data.magic_numbers.size() ==
+						       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+						for (size_t i = 0; i < magic_numbers_size; ++i) {
+							player->ai_data.magic_numbers.at(i) = fr.signed_16();
+						}
+						// Adding '50' to missing possitions
+						for (size_t i = magic_numbers_size;
+						     i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
+							player->ai_data.magic_numbers.at(i) = 50;
+						}
+					} else {
+						if (magic_numbers_size >
+						    Widelands::Player::AiPersistentState::kMagicNumbersSize) {
+							throw GameDataError("Too many magic numbers: We have %" PRIuS
+							                    " but only %" PRIuS "are allowed",
+							                    magic_numbers_size,
+							                    Widelands::Player::AiPersistentState::kMagicNumbersSize);
+						}
+						assert(player->ai_data.magic_numbers.size() ==
+						       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+						for (size_t i = 0; i < magic_numbers_size; ++i) {
+							player->ai_data.magic_numbers.at(i) = fr.signed_16();
+						}
 					}
 
 					// Neurons
