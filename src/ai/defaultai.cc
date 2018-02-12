@@ -3348,14 +3348,14 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	full_road.push_back(&roadstartflag);
 	full_road.push_back(&roadendflag);
 
-	// Making sure it starts with proper flag NOCOM
+	// Making sure it starts with proper flag
 	uint16_t road_length = road.get_path().get_nsteps();
 
-	for (int j = 0; j < 2; j++) {
+	for (int j = 0; j < 2; ++j) {
 		bool new_road_found = true;
 		while (new_road_found && full_road.back()->nr_of_roads() <= 2 &&
 		       full_road.back()->get_building() == nullptr) {
-			const size_t sz = full_road.size();
+			const size_t full_road_size = full_road.size();
 			new_road_found = false;
 			for (uint8_t i = 1; i <= 6; ++i) {
 				Road* const near_road = full_road.back()->get_road(i);
@@ -3372,7 +3372,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 					other_end = &near_road->get_flag(Road::FlagStart);
 				}
 
-				if (other_end->get_position() == full_road[sz - 2]->get_position()) {
+				if (other_end->get_position() == full_road[full_road_size - 2]->get_position()) {
 					continue;
 				}
 				full_road.push_back(other_end);
@@ -3381,7 +3381,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 				break;
 			}
 		}
-		// we walked to one end, not let revert the concent of full_road and repeat in opposite
+		// we walked to one end, now let revert the concent of full_road and repeat in opposite
 		// direction
 		std::reverse(full_road.begin(), full_road.end());
 	}
@@ -3394,12 +3394,12 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 		wares_on_road = roadstartflag.current_wares() + roadendflag.current_wares();
 	} else {
 		// We count wares only on inner flags
-		for (uint16_t k = 1; k < full_road.size() - 1; k++) {
+		for (uint16_t k = 1; k < full_road.size() - 1; ++k) {
 			wares_on_road += full_road[k]->current_wares();
 		}
 	}
 
-	// If it by chance starts or end next to a warehouse...
+	// If it by chance starts or ends next to a warehouse...
 	if (Building* b = full_road.front()->get_building()) {
 		BuildingObserver& bo = get_building_observer(b->descr().name().c_str());
 		if (bo.type == BuildingObserver::Type::kWarehouse) {
@@ -3422,10 +3422,6 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	std::priority_queue<NearFlag> queue;
 	// only used to collect flags reachable walking over roads
 	std::vector<NearFlag> reachableflags;
-	std::set<uint32_t> existing_road_flags;  // get rid of this
-	for (uint16_t j = 1; j < full_road.size() - 1; j++) {
-		existing_road_flags.insert(full_road[j]->get_position().hash());
-	}
 
 	queue.push(NearFlag(*full_road.front(), 0));
 	uint16_t alternative_path = std::numeric_limits<uint16_t>::max();
@@ -3501,7 +3497,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 // - Collect all flags within checkradius into RoadCandidates, but first we dont even know if a road
 // can be built to them
 // - Walking over road network to collect info on flags that are accessible over road network
-// - Than merge info from NearFlags to RoadCandidates and consider roads to few best candidates from
+// - Then merge info from NearFlags to RoadCandidates and consider roads to few best candidates from
 // RoadCandidates. We use score named "reduction" that is basically diff between connection over
 // existing roads minus possible road from starting flag to candidate flag. Of course there are two
 // special cases:
@@ -3664,7 +3660,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				start_field = item.first;
 			}
 		}
-		// OK, so no node to be checked - quitting now
+		// OK, so no NearFlag left to be checked - quitting the loop now
 		if (start_field == std::numeric_limits<uint32_t>::max()) {
 			break;
 		}
@@ -3741,7 +3737,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	fields_necessity *= std::abs(management_data.get_military_number_at(64)) * 5;
 
 	// We need to sort these flags somehow, because we are not going to investigate all of them
-	// so sorting first by current road lenght (that might contain fake values for flags that were
+	// so sorting first by current road length (that might contain fake values for flags that were
 	// not reached over roads) and secondary by air_distance (nearer flags first)
 	std::sort(std::begin(RoadCandidates.flags_queue), std::end(RoadCandidates.flags_queue),
 	          [](const FlagsForRoads::Candidate& a, const FlagsForRoads::Candidate& b) {
