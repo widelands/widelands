@@ -316,6 +316,7 @@ struct BuildableField {
 	uint16_t unowned_land_nearby;
 	uint16_t enemy_owned_land_nearby;
 	uint16_t unowned_buildable_spots_nearby;
+	uint16_t unowned_portspace_vicinity_nearby;
 	uint16_t nearest_buildable_spot_nearby;
 	// to identify that field is too close to border and no production building should be built there
 	bool near_border;
@@ -356,7 +357,7 @@ struct BuildableField {
 	Widelands::ExtendedBool is_portspace;
 	bool port_nearby;  // to increase priority if a port is nearby,
 	// especially for new colonies
-	Widelands::ExtendedBool portspace_nearby;  // prefer military buildings closer to the portspace
+	Widelands::ExtendedBool portspace_nearby;  // special fields intended for ports
 	int32_t max_buildcap_nearby;
 	// It is not necessary to check resources (stones, fish...) too frequently as they do not change
 	// fast. This stores the time of the last check.
