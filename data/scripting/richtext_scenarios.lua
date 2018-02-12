@@ -64,13 +64,16 @@ end
 
 
 -- RST
--- Append an objective text with a header to a dialog box in a nice fashion.
--- For displaying objectives with an extra title when an advisor is talking
+-- .. function:: new_objectives(...)
+--
+--    Append an objective text with a header to a dialog box in a nice fashion.
+--    For displaying objectives with an extra title when an advisor is talking
 --
 --    Provides nice formatting for objective texts.
---    the following arguments will be parsed:
---    number: the number of objectives described in the body
---    body: the objective text, e.g. created with function objective_text(heading, body)
+--    The following arguments will be parsed:
+--
+--       - number: the number of objectives described in the body
+--       - body: the objective text, e.g. created with function objective_text(heading, body)
 --
 --    :returns: a rich text object that contains the formatted
 --       objective text & title.

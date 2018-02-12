@@ -26,6 +26,7 @@
 --    :returns: The concatenated list string, using localized concatenation operators.
 --
 -- Same algorithm as in src/base/i18n
+
 function localize_list(items, listtype, former_textdomain)
    set_textdomain("widelands")
    local result = ""
@@ -61,10 +62,10 @@ end
 --    So, only use this function if you wish to add some attributes to the tag.
 --
 --    Allowed attributes are:
---       padding, padding_r, padding_l, padding_b, padding_t: TODO(GunChleoc): Document
---       background:  a background color or image
---       debug:       add visual debug information and debug log
---       editor_mode: allow multiple blank spaces for editing
+--       - padding, padding_r, padding_l, padding_b, padding_t: TODO(GunChleoc): Document
+--       - background:  a background color or image
+--       - debug:       add visual debug information and debug log
+--       - editor_mode: allow multiple blank spaces for editing
 --
 --    :arg attributes: the attributes for the rt tag.
 --    :type attributes: :class:`string`
@@ -92,8 +93,8 @@ end
 --    :type attributes: :class:`string`
 --
 --    Allowed attributes are:
---       color:     a hex color to be applied to the image's player color mask, if it has any
---       ref:       TODO(GunChleoc): I have no idea what it does.
+--       - color:     a hex color to be applied to the image's player color mask, if it has any
+--       - ref:       TODO(GunChleoc): I have no idea what it does.
 --
 --    :returns: the img tag.
 
@@ -118,6 +119,7 @@ end
 --    The mnemonic comes from HTML.
 --
 --    :returns: A paragraph with text formatted as heading.
+
 function h1(text_or_color, text)
    if text then
       return p_font("", "size=18 bold=1 color=".. text_or_color, vspace(12) .. text .. vspace(1))
@@ -132,6 +134,7 @@ end
 --    Like :func:`h1` but smaller.
 --
 --    :returns: A paragraph with text formatted as heading.
+
 function h2(text)
    return p_font("", "size=14 bold=1 color=D1D1D1", vspace(12) .. text .. vspace(1))
 end
@@ -164,9 +167,10 @@ end
 --    Returns one paragraph with text followed by a small vertical gap. Options
 --    can be given as first argument similar to :func:`rt`.
 --
---    Allowed attributes are documented in the open_p function.
+--    Allowed attributes are documented in the :func:`open_p` function.
 --
 --    :returns: The text wrapped in <p>%s</p>
+
 function p(text_or_attributes, text)
    if text then
       return open_p(text_or_attributes) .. text .. close_p()
@@ -182,11 +186,12 @@ end
 --    Returns one paragraph with text followed by a small vertical gap. Options
 --    can be given as first argument similar to :func:`rt`.
 --
---    Allowed p attributes are documented in the open_p function.
+--    Allowed p attributes are documented in the :func:`open_p` function.
 --
---    Allowed font attributes are are documented in the font function.
+--    Allowed font attributes are are documented in the :func:`font` function.
 --
 --    :returns: The text wrapped in <p attributes><font attributes>text</font></p>
+
 function p_font(p_or_font_or_attributes, text_or_font_attributes, text)
    if text then
       return ("<p %s>"):format(p_or_font_or_attributes) .. "<font " .. text_or_font_attributes .. ">" .. text .. close_p()
@@ -203,12 +208,13 @@ end
 --    can be given as first argument similar to :func:`rt`.
 --
 --    Allowed attributes are:
---       indent:  indents the first line of the paragraph
---       align:   horizontal alignment (left, center, right)
---       valign:  vertical alignment (top, middle, bottom)
---       spacing: line spacing in pixels
+--       - indent:  indents the first line of the paragraph
+--       - align:   horizontal alignment (left, center, right)
+--       - valign:  vertical alignment (top, middle, bottom)
+--       - spacing: line spacing in pixels
 --
 --    :returns: <p> with added attributes and default font
+
 function open_p(attributes)
    if attributes then
       return ("<p %s>"):format(attributes) .. "<font size=12>"
@@ -224,6 +230,7 @@ end
 --    Closes a paragraph.
 --
 --    :returns: The closing tags for a paragraph
+
 function close_p(t)
    return vspace(6) .. "</font>" .. vspace(6)  .. "</p>"
 end
@@ -234,14 +241,14 @@ end
 --    Wraps the text in font tags.
 --
 --    Allowed attributes are:
---       size:      the font size in pt
---       face:      sans, serif or condensed
---       color:     a hex color
---       bold:      if you add bold=1, the text will be bold
---       italic:    if you add italic=1, the text will be italic
---       underline: if you add underline=1, the text will be underlined
---       shadow:    if you add shadow=1, the text will have a shadow
---       ref:       TODO(GunChleoc): I don't know what this does.
+--       - size:      the font size in pt
+--       - face:      sans, serif or condensed
+--       - color:     a hex color
+--       - bold:      if you add bold=1, the text will be bold
+--       - italic:    if you add italic=1, the text will be italic
+--       - underline: if you add underline=1, the text will be underlined
+--       - shadow:    if you add shadow=1, the text will have a shadow
+--       - ref:       TODO(GunChleoc): I don't know what this does.
 --
 --    :returns: The text wrapped in font tags with the given attributes
 
@@ -253,6 +260,7 @@ end
 -- .. function:: space(gap)
 --
 --    Adds a horizontal space
+--
 --    :arg gap: the size of the space as pixels.
 --
 --    :returns: a space tag
@@ -265,6 +273,7 @@ end
 -- .. function:: vspace(gap)
 --
 --    Adds a vertical space
+--
 --    :arg gap: the size of the space as pixels.
 --
 --    :returns: a vspace tag
@@ -276,7 +285,8 @@ end
 -- RST
 -- .. function:: dl(dt, dd)
 --
--- This function imitates a HTML description list
+--    This function imitates a HTML description list
+--
 --    :arg dt: "description term", will be rendered in bold.
 --    :arg dd: "description data", will be rendered normally.
 --
@@ -313,16 +323,17 @@ end
 --    :arg text: the text of the list item
 --
 --    :returns: li("→", text)
+
 function li_arrow(text)
    -- TODO(GunChleoc): Reverse arrow for rtl languages.
    return li("→", text)
 end
 
 -- RST
--- .. function li_image(imagepath, text)
+-- .. function:: li_image(imagepath, text)
 --
 --    Places a paragraph of text to the right of an image
-
+--
 --    :arg imagepath: the full path to the image file
 --    :arg text_width_percent: the percentatge of space that the text will occupy
 --    :arg text: the text to be placed next to the image
@@ -341,7 +352,8 @@ end
 -- RST
 -- .. function:: a(link)
 --
--- This function imitates a HTML link. We can't do real links yet, so the text just gets underlines.
+--    This function imitates a HTML link. We can't do real links yet, so the text just gets underlines.
+--
 --    :arg link: the text to format
 --
 --    :returns: a font tag containing the underlined text
@@ -351,10 +363,11 @@ function a(link)
 end
 
 -- RST
--- .. function:: b(link)
+-- .. function:: b(text)
 --
--- This makes the text bold.
---    :arg link: the text to format
+--    This makes the text bold.
+--
+--    :arg text: the text to format
 --
 --    :returns: a font tag containing the bold text
 
@@ -363,10 +376,11 @@ function b(text)
 end
 
 -- RST
--- .. function:: i(link)
+-- .. function:: i(text)
 --
--- This makes the text italic.
---    :arg link: the text to format
+--    This makes the text italic.
+--
+--    :arg text: the text to format
 --
 --    :returns: a font tag containing the italic text
 
@@ -375,10 +389,11 @@ function i(text)
 end
 
 -- RST
--- .. function:: u(link)
+-- .. function:: u(text)
 --
--- This underlines the text.
---    :arg link: the text to format
+--    This underlines the text.
+--
+--    :arg text: the text to format
 --
 --    :returns: a font tag containing the underlined text
 
@@ -395,13 +410,13 @@ end
 --    :type attributes: :class:`string`
 --
 --    Allowed attributes are:
---       padding, padding_r, padding_l, padding_b, padding_t: TODO(GunChleoc): Document
---       margin:     TODO(GunChleoc): Document
---       float:      TODO(GunChleoc): this does not work yet
---       margin:     inner margin for the div
---       valign:     vertical alignment
---       background: a background color or image
---       width:      the width of the div in pixels or percent
+--       - padding, padding_r, padding_l, padding_b, padding_t: TODO(GunChleoc): Document
+--       - margin:     TODO(GunChleoc): Document
+--       - float:      TODO(GunChleoc): this does not work yet
+--       - margin:     inner margin for the div
+--       - valign:     vertical alignment
+--       - background: a background color or image
+--       - width:      the width of the div in pixels or percent
 --
 --    :arg text: the text to be enclosed in div tags.
 --    :type text: :class:`string`
@@ -416,12 +431,12 @@ function div(text_or_attributes, text)
 end
 
 -- RST
--- .. function:: inline_header(t1, t2)
+-- .. function:: inline_header(header, text)
 --
 --    Creates a line of h3 formatted text followed by normal paragraph text.
 --
---    :arg t1: text in h3 format.
---    :arg t2: text in p format.
+--    :arg header: text in h3 format.
+--    :arg text: text in p format.
 --    :returns: header text followed by normal text.
 
 function inline_header(header, text)
@@ -440,7 +455,7 @@ end
 --    :arg sentence1: text of the first sentence
 --    :arg sentence2: text of the second sentence
 --    :returns: two concatenated sentences with a localized sentence joiner.
---
+
 function join_sentences(sentence1, sentence2)
    -- TRANSLATORS: Put 2 sentences one after the other.
    -- TRANSLATORS: Languages using Chinese script probably want to lose the blank space here.
