@@ -35,7 +35,7 @@ tribes:new_productionsite_type {
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {105, 109},
+         hotspot = {105, 108},
       },
    },
 
