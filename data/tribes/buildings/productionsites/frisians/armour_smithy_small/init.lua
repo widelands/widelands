@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
             "call=produce_s1",

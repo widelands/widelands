@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
          }
       },
       recruit_deer = {
-         -- TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start rearing reindeer because ...
          descname = pgettext("frisians_building", "rearing reindeer"),
          actions = {
             "return=skipped unless economy needs frisians_reindeer",

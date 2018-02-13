@@ -97,7 +97,7 @@ function expand_south ()
       end
    end
    scroll_to_field (wh.fields [1])
-   sleep (1500)
+   sleep (3000)
    p2:forbid_buildings {"empire_fortress", "empire_castle", "empire_barrier", "empire_blockhouse", "empire_tower"}
    p3:forbid_buildings {"barbarians_citadel", "barbarians_tower"}
    campaign_message_box (supply_murilius_6)
@@ -200,7 +200,9 @@ function supply_yes ()
    local wh = p1:get_buildings ("frisians_warehouse_empire") [1]
    local hq = p2:get_buildings ("empire_headquarters") [1]
    -- transfer all wares that frisians and empire have in common
-   for idx,name in ipairs ({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish", "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe", "bread_paddle", "basket", "kitchen_tools", "ire_tongs"}) do
+   for idx,name in ipairs ({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish", 
+         "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe", 
+         "bread_paddle", "basket", "kitchen_tools", "ire_tongs"}) do
       local nb = wh:get_wares (name)
       wh:set_wares (name, 0)
       hq:set_wares (name, hq:get_wares (name) + nb)
@@ -234,6 +236,7 @@ function supply_no ()
    campaign_message_box (defeat_both)
    local o = add_campaign_objective (obj_defeat_both)
    while not (p2.defeated and p3.defeated) do sleep (4829) end
+   set_objective_done (o)
    done_fight = true
 end
 
@@ -260,7 +263,7 @@ function mission_thread()
    campaign_message_box (intro_1)
    campaign_message_box (intro_2)
    include "map:scripting/starting_conditions.lua"
-   sleep (2000)
+   sleep (5000)
    
    p1.team = 1
    p2.team = 1
@@ -272,7 +275,9 @@ function mission_thread()
    
    campaign_message_box (intro_3)
    local o = add_campaign_objective (obj_new_home)
-   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1, frisians_charcoal_kiln = 1}) do sleep (4273) end
+   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, 
+         frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1, 
+         frisians_charcoal_kiln = 1}) do sleep (4273) end
    set_objective_done (o)
    
    run (expand_south)

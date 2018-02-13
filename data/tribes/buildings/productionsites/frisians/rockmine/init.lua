@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining rock because ...
+         -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
             "sleep=45000",
