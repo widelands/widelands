@@ -41,7 +41,7 @@ Button::Button  //  Common constructor
     int32_t const y,
     uint32_t const w,
     uint32_t const h,
-    UI::ButtonStyle style,
+    UI::ButtonStyle init_style,
     const Image* title_image,
     const std::string& title_text,
     const std::string& tooltip_text,
@@ -58,7 +58,7 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     background_style_(g_gr->styles().button_style(style)),
+     background_style_(g_gr->styles().button_style(init_style)),
      clr_down_(229, 161, 2) {
 	set_thinks(false);
 	set_can_focus(true);
@@ -71,7 +71,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
     int32_t const y,
     uint32_t const w,
     uint32_t const h,
-    UI::ButtonStyle style,
+    UI::ButtonStyle init_style,
     const std::string& title_text,
     const std::string& tooltip_text,
     UI::Button::VisualState init_state)
@@ -81,7 +81,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
             y,
             w,
             h,
-            style,
+            init_style,
             nullptr,
             title_text,
             tooltip_text,
@@ -102,12 +102,12 @@ Button::Button  //  for pictorial buttons
     const int32_t y,
     const uint32_t w,
     const uint32_t h,
-    UI::ButtonStyle style,
+    UI::ButtonStyle init_style,
     const Image* title_image,
     const std::string& tooltip_text,
     UI::Button::VisualState init_state,
     ImageMode mode)
-   : Button(parent, name, x, y, w, h, style, title_image, "", tooltip_text, init_state, mode) {
+   : Button(parent, name, x, y, w, h, init_style, title_image, "", tooltip_text, init_state, mode) {
 }
 
 Button::~Button() {
