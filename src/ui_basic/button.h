@@ -167,7 +167,7 @@ protected:
 
 	uint32_t time_nextact_;
 
-	std::string title_;         //  title string used when pic_custom_ == 0
+	std::string title_;         //  title string used when title_image_ == nullptr
 	const Image* title_image_;  //  custom icon on the button
 
 	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
