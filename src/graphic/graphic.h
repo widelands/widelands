@@ -30,7 +30,6 @@
 #include "notifications/notifications.h"
 
 class AnimationManager;
-class StyleManager;
 class RenderTarget;
 class Screen;
 class StreamWrite;
