@@ -291,7 +291,7 @@ NetRelayConnection::NetRelayConnection(const NetAddress& host)
 	assert(host.is_valid());
 	const boost::asio::ip::tcp::endpoint destination(host.ip, host.port);
 
-	log("[NetRelayConnection]: Trying to connect to %s:%u ... ", host.ip.to_string().c_str(),
+	log("[NetRelayConnection] Trying to connect to %s:%u ... ", host.ip.to_string().c_str(),
 	    host.port);
 	boost::system::error_code ec;
 	socket_.connect(destination, ec);
