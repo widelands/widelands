@@ -63,7 +63,7 @@ BaseListselect::BaseListselect(Panel* const parent,
      selection_mode_(selection_mode),
      background_style_(selection_mode == ListselectLayout::kDropdown ?
                           g_gr->styles().dropdown_style(style) :
-                          new UI::PanelStyleInfo()) {
+								  nullptr) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -316,7 +316,9 @@ void BaseListselect::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
-	draw_background(dst, *background_style_);
+	if (background_style_ != nullptr) {
+		draw_background(dst, *background_style_);
+	}
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		RGBAColor black(0, 0, 0, 255);
