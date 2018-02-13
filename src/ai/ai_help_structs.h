@@ -259,7 +259,7 @@ struct NearFlag {
 		}
 	};
 	NearFlag();
-	NearFlag(const Flag& f, int32_t const c);
+	NearFlag(const Flag* f, int32_t const c);
 
 	bool operator<(const NearFlag& f) const {
 		return current_road_distance > f.current_road_distance;

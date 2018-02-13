@@ -3423,7 +3423,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	// only used to collect flags reachable walking over roads
 	std::vector<NearFlag> reachableflags;
 
-	queue.push(NearFlag(*full_road.front(), 0));
+	queue.push(NearFlag(full_road.front(), 0));
 	uint16_t alternative_path = std::numeric_limits<uint16_t>::max();
 	const uint8_t checkradius = 3 * game().map().calc_distance(full_road.front()->get_position(),
 	                                                           full_road.back()->get_position());
@@ -3480,7 +3480,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 			}
 
 			const uint32_t new_length = nf.current_road_distance + near_road->get_path().get_nsteps();
-			queue.push(NearFlag(*endflag, new_length));
+			queue.push(NearFlag(endflag, new_length));
 		}
 	}
 
@@ -3644,7 +3644,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// now we walk over roads and if field is reachable by roads, we change the distance assigned
 	// above
 	std::map<uint32_t, NearFlag> nearflags;  // only used to collect flags reachable walk over roads
-	nearflags[flag.get_position().hash()] = NearFlag(flag, 0);
+	nearflags[flag.get_position().hash()] = NearFlag(&flag, 0);
 
 	// algorithm to walk on roads
 	// All nodes are marked as to_be_checked and under some conditions, the same node can be checked
@@ -3693,7 +3693,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 			if (nearflags.count(endflag_hash) == 0) {
 				// This is brand new flag
 				nearflags[endflag_hash] =
-				   NearFlag(*endflag, nearflags[start_field].current_road_distance +
+				   NearFlag(endflag, nearflags[start_field].current_road_distance +
 				                         road->get_path().get_nsteps());
 			} else {
 				// We know about this flag already

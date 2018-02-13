@@ -191,8 +191,8 @@ bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 	return false;
 }
 
-NearFlag::NearFlag(const Flag& f, int32_t const c)
-   : flag(&f), current_road_distance(c) {
+NearFlag::NearFlag(const Flag* f, int32_t const c)
+   : flag(f), current_road_distance(c) {
 	to_be_checked = true;
 }
 
