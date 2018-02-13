@@ -1,9 +1,10 @@
--- TODO(GunChleoc): This is unused
-
 function immovable_helptext(tribe)
    local helptext = {
-      -- TRANSLATORS#: Helptext for a resource: Iron
-      default = "Iron veins contain iron ore that can be dug up by iron mines." .. " " .. "There is a lot of iron here."
+      default = pgettext("sentence_separator", "%s %s"):bformat(
+         -- TRANSLATORS: Helptext for a resource: Iron
+         _("Iron veins contain iron ore that can be dug up by iron mines."),
+         -- TRANSLATORS: Helptext for a resource: Iron
+         _("There is a lot of iron here."))
    }
    local result = ""
    if tribe then

@@ -78,9 +78,10 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
                                                   const std::string& text,
                                                   void (AttackBox::*fn)(),
                                                   const std::string& tooltip_text) {
-	std::unique_ptr<UI::Button> button(new UI::Button(
-	   &parent, text, 8, 8, 26, 26, UI::ButtonStyle::kWuiPrimary, text, tooltip_text));
-	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
+	std::unique_ptr<UI::Button> button(new UI::Button(&parent, text, 8, 8, 26, 26,
+	                                                  UI::ButtonStyle::kWuiPrimary,
+	                                                  text, tooltip_text));
+	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
 	parent.add(button.get());
 	return button;
 }
@@ -111,9 +112,8 @@ void AttackBox::update_attack() {
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
 	less_soldiers_->set_enabled(soldiers_slider_->get_value() > 0);
-
-	/** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
 	soldiers_text_->set_text(
+	   /** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
 	   (boost::format(_("%1% / %2%")) % soldiers_slider_->get_value() % max_attackers).str());
 
 	more_soldiers_->set_title(std::to_string(max_attackers));

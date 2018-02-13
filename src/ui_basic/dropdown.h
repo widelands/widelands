@@ -69,7 +69,7 @@ protected:
 	             const std::string& label,
 	             const DropdownType type,
 	             PanelStyle style);
-	~BaseDropdown();
+	~BaseDropdown() override;
 
 public:
 	/// An entry was selected
@@ -129,6 +129,8 @@ protected:
 	/// \param pic          an image to illustrate the entry. Can be nullptr for textual dropdowns.
 	/// \param select_this  whether this element should be selected
 	/// \param tooltip_text a tooltip for this entry
+	///
+	/// Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
 	void add(const std::string& name,
 	         uint32_t value,
 	         const Image* pic = nullptr,
@@ -202,6 +204,7 @@ public:
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
 	/// \param style              the style used for buttons and background
+	/// Text conventions: Title Case for all elements
 	Dropdown(Panel* parent,
 	         int32_t x,
 	         int32_t y,

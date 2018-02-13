@@ -53,6 +53,7 @@ namespace UI {
 class Window : public NamedPanel {
 public:
 	/// Do not use richtext for 'title'.
+	/// Text conventions: Title Case for the 'title'
 	Window(Panel* parent,
 	       const std::string& name,
 	       int32_t x,

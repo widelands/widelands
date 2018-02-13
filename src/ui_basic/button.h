@@ -75,6 +75,10 @@ private:
 	    UI::Button::ImageMode mode);
 
 public:
+
+	/**
+	 * Text conventions: Title Case for the 'title_text', Sentence case for the 'tooltip_text'
+	 */
 	Button  /// for textual buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -87,6 +91,9 @@ public:
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::VisualState state = UI::Button::VisualState::kRaised);
 
+	/**
+	 * Text conventions: Sentence case for the 'tooltip_text'
+	 */
 	Button  /// for pictorial buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -99,7 +106,7 @@ public:
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::VisualState state = UI::Button::VisualState::kRaised,
 	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
-	~Button();
+	~Button() override;
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string&);

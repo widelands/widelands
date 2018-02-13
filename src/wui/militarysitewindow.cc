@@ -29,17 +29,15 @@ MilitarySiteWindow::MilitarySiteWindow(InteractiveGameBase& parent,
                                        UI::UniqueWindow::Registry& reg,
                                        Widelands::MilitarySite& ms,
                                        bool avoid_fastclick)
-   : BuildingWindow(parent, reg, ms, avoid_fastclick) {
+   : BuildingWindow(parent, reg, ms, avoid_fastclick), military_site_(&ms) {
 	init(avoid_fastclick);
 }
 
-void MilitarySiteWindow::create_capsbuttons(UI::Box* buttons) {
-	BuildingWindow::create_capsbuttons(buttons);
-}
-
 void MilitarySiteWindow::init(bool avoid_fastclick) {
+	Widelands::MilitarySite* military_site = military_site_.get(igbase()->egbase());
+	assert(military_site != nullptr);
 	BuildingWindow::init(avoid_fastclick);
 	get_tabs()->add("soldiers", g_gr->images().get(pic_tab_military),
-	                create_soldier_list(*get_tabs(), *igbase(), militarysite()), _("Soldiers"));
+	                create_soldier_list(*get_tabs(), *igbase(), *military_site), _("Soldiers"));
 	think();
 }

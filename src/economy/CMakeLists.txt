@@ -53,6 +53,7 @@ wl_library(economy
     io_fileread
     logic
     logic_constants
+    logic_exceptions
     logic_widelands_geometry
     map_io
     notifications

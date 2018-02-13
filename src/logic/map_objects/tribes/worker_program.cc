@@ -411,7 +411,7 @@ findspace
          "findspace size:any radius:2 space", -- The farmer will want to walk to this field again later for harvesting his crop
          "walk coords",
          "animation planting 4000",
-         "plant tribe:field_tiny",
+         "plant attrib:seed_wheat",
          "animation planting 4000",
          "return",
       },
@@ -422,6 +422,7 @@ findspace
  * iparam3 = whether the "space" flag is set
  * iparam4 = whether the "breed" flag is set
  * iparam5 = Immovable attribute id
+ * iparam6 = Forester retries
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -433,6 +434,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->iparam3 = 0;
 	act->iparam4 = 0;
 	act->iparam5 = -1;
+	act->iparam6 = 1;
 	act->sparam1 = "";
 
 	// Parse predicates
@@ -475,6 +477,14 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			act->iparam3 = 1;
 		} else if (key == "avoid") {
 			act->iparam5 = MapObjectDescr::get_attribute_id(value);
+		} else if (key == "saplingsearches") {
+			int ival = strtol(value.c_str(), nullptr, 10);
+			if (1 != act->iparam6 || 1 > ival) {
+				throw wexception("Findspace: Forester should consider at least one spot.%d %d %s",
+				                 act->iparam6, ival, value.c_str());
+			} else {
+				act->iparam6 = ival;
+			}
 		} else
 			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
 	}
@@ -504,7 +514,7 @@ walk
          "findspace size:any radius:2",
          "walk coords", -- Walk to the space found by the command above
          "animation planting 4000",
-         "plant tribe:blackrootfield_tiny",
+         "plant attrib:seed_blackroot",
          "animation planting 4000",
          "return"
       },
@@ -521,7 +531,7 @@ walk
 
       buildship = {
          "walk object-or-coords", -- Walk to coordinates from 1. or to object from 2.
-         "plant tribe:barbarians_shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
+         "plant attrib:shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
          "play_sound sound/sawmill sawmill 230",
          "animation work 500",
          "construct", -- 1. This will find a space for us if no object has been planted yet
@@ -562,7 +572,7 @@ animation
          "findspace size:any radius:1",
          "walk coords",
          "animation dig 2000", -- Play a digging animation for 2 seconds.
-         "plant tribe:grapevine_tiny",
+         "plant attrib:seed_grapes",
          "animation planting 3000", -- Play a planting animation for 3 seconds.
          "return"
       },
@@ -648,13 +658,10 @@ void WorkerProgram::parse_object(Worker::Action* act, const std::vector<std::str
 /* RST
 plant
 ^^^^^
-.. function:: plant \<immmovable_type\> [\<immovable_type\> ...] [unless object]
+.. function:: plant attrib:\<attribute\> [attrib:\<attribute\> ...] [unless object]
 
-   :arg string immovable_type: The immovable to be planted. This can be specified
-      in two different ways:
-
-      * ``attrib:<attribute>``: Select at random any immovable that has this attribute.
-      * ``tribe:<immovable_name>``: Name a specific immovable to be planted.
+   :arg string attrib\:\<attribute\>: Select at random any world immovable or immovable
+      of the worker's tribe that has this attribute.
 
    :arg empty unless object: Do not plant the immovable if it already exists at
       the current position.
@@ -676,14 +683,14 @@ plant
          "findspace size:any radius:2 space",
          "walk coords",
          "animation planting 4000",
-         "plant tribe:field_tiny", -- Plant the tiny field immovable that the worker's tribe knows about
+         "plant attrib:seed_wheat", -- Plant a random wheat field immovable that the worker's tribe knows about
          "animation planting 4000",
          "return",
       },
 
       buildship = {
          "walk object-or-coords",
-         "plant tribe:empire_shipconstruction unless object", -- Only create a shipconstruction if we don't already have one
+         "plant attrib:shipconstruction unless object", -- Only create a shipconstruction if we don't already have one
          "play_sound sound/sawmill sawmill 230",
          "animation work 500",
          "construct",
@@ -692,12 +699,13 @@ plant
       }
 */
 /**
- * sparamv  list of object names
+ * sparamv  list of attributes
  * iparam1  one of plantXXX
  */
 void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() < 2)
-		throw wexception("Usage: plant <immovable type> <immovable type> ... [unless object]");
+		throw wexception(
+		   "Usage: plant plant attrib:<attribute> [attrib:<attribute> ...] [unless object]");
 
 	act->function = &Worker::run_plant;
 	act->iparam1 = Worker::Action::plantAlways;
@@ -716,21 +724,19 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 
 		// Check if immovable type exists
 		std::vector<std::string> const list(split_string(cmd[i], ":"));
-		if (list.size() != 2) {
-			throw GameDataError("plant takes either tribe:<immovable> or attrib:<attribute>");
+		if (list.size() != 2 || list.at(0) != "attrib") {
+			throw GameDataError("plant takes a list of attrib:<attribute> that reference world and/or "
+			                    "tribe immovables");
 		}
 
-		if (list[0] == "attrib") {
-			// This will throw a GameDataError if the attribute doesn't exist.
-			ImmovableDescr::get_attribute_id(list[1]);
-		} else {
-			DescriptionIndex idx = tribes_.safe_immovable_index(list[1]);
-			if (!tribes_.immovable_exists(idx)) {
-				throw GameDataError(
-				   "There is no tribe immovable %s for workers to plant.", list[1].c_str());
-			}
+		const std::string& attrib_name = list[1];
+		if (attrib_name.empty()) {
+			throw GameDataError("plant has an empty attrib:<attribute> at position %d", i);
 		}
-		act->sparamv.push_back(cmd[i]);
+
+		// This will throw a GameDataError if the attribute doesn't exist.
+		ImmovableDescr::get_attribute_id(attrib_name);
+		act->sparamv.push_back(attrib_name);
 	}
 }
 
@@ -918,7 +924,7 @@ construct
 
       buildship = {
          "walk object-or-coords", -- Walk to coordinates from 1. or to object from 2.
-         "plant tribe:barbarians_shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
+         "plant attrib:shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
          "play_sound sound/sawmill sawmill 230",
          "animation work 500",
          "construct", -- 1. Add the current ware to the shipconstruction. This will find a space for us if no shipconstruction object has been planted yet

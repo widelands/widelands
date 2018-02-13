@@ -34,6 +34,7 @@ wl_library(game_io
     io_fileread
     io_filesystem
     logic
+    logic_exceptions
     logic_game_controller
     map_io
     map_io_map_loader

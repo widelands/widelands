@@ -117,6 +117,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
+     forester_cache_(),
      syncwrapper_(*this, synchash_),
      ctrl_(nullptr),
      writereplay_(true),
@@ -209,6 +210,12 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	world();
 	loader_ui.step(_("Loading tribes"));
 	tribes();
+
+	// If the scenario has custrom tribe entites, load them.
+	const std::string custom_tribe_script = mapname + "/scripting/tribes/init.lua";
+	if (g_fs->file_exists(custom_tribe_script)) {
+		lua().run_script(custom_tribe_script);
+	}
 
 	// We have to create the players here.
 	loader_ui.step(_("Creating players"));

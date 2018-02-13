@@ -217,9 +217,9 @@ void MainMenuSaveMap::edit_box_changed() {
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
-	/** TRANSLATORS: The folder that a file will be saved to. */
 	directory_info_.set_text(
-	   (boost::format(_("Current Directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
+	   /** TRANSLATORS: The folder that a file will be saved to. */
+	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
 	      .str());
 }
 
@@ -278,6 +278,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		   g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
+		map->cleanup_port_spaces(egbase.world());
 		if (map->allows_seafaring()) {
 			map->add_tag("seafaring");
 		} else {

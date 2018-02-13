@@ -1,3 +1,13 @@
+wl_library(logic_exceptions
+  SRCS
+    game_data_error.cc
+    game_data_error.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+)
+
+
 wl_library(logic_widelands_geometry
   SRCS
     widelands_geometry.cc
@@ -11,8 +21,8 @@ wl_library(logic_game_settings
     player_end_result.h
   DEPENDS
     io_filesystem
-    logic
     logic_constants
+    logic_tribe_basic_info
     notifications
     scripting_lua_interface
     scripting_lua_table
@@ -25,8 +35,9 @@ wl_library(logic_single_player_game_settings
   DEPENDS
     ai
     base_exceptions
-    logic
+    base_i18n
     logic_game_settings
+    logic_tribe_basic_info
 )
 
 wl_library(logic_game_controller
@@ -70,6 +81,17 @@ wl_library(logic_filesystem_constants
     filesystem_constants.h
     filesystem_constants.cc
 )
+wl_library(logic_tribe_basic_info
+  SRCS
+    map_objects/tribes/tribe_basic_info.cc
+    map_objects/tribes/tribe_basic_info.h
+  DEPENDS
+    base_i18n
+    logic_exceptions
+    scripting_lua_table
+    scripting_lua_interface
+
+)
 
 wl_library(logic
   SRCS
@@ -103,8 +125,6 @@ wl_library(logic
     findnode.h
     game.cc
     game.h
-    game_data_error.cc
-    game_data_error.h
     map.cc
     map.h
     map_revision.cc
@@ -144,6 +164,7 @@ wl_library(logic
     roadtype.h
     save_handler.cc
     save_handler.h
+    see_unsee_node.h
     trade_agreement.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
@@ -196,8 +217,6 @@ wl_library(logic
     map_objects/tribes/training_attribute.h
     map_objects/tribes/trainingsite.cc
     map_objects/tribes/trainingsite.h
-    map_objects/tribes/tribe_basic_info.cc
-    map_objects/tribes/tribe_basic_info.h
     map_objects/tribes/tribe_descr.cc
     map_objects/tribes/tribe_descr.h
     map_objects/tribes/tribes.cc
@@ -260,9 +279,11 @@ wl_library(logic
     io_filesystem
     io_stream
     logic_constants
+    logic_exceptions
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_tribe_basic_info
     logic_widelands_geometry
     map_io
     map_io_map_loader

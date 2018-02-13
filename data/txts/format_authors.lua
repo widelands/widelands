@@ -1,14 +1,11 @@
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 
--- Formatting functions
+-- Formatting functions for developers and translators
+
 function h1_authors(text)
-   return "<rt text-align=left><p font-size=24 font-decoration=bold font-face=serif font-color=f4a131>" .. text .. "</p></rt>"
+   return p_font("align=left", "size=24 color=f4a131", text .. vspace(12))
 end
 
 function h2_authors(text)
-   return "<rt><p font-size=4> <br></p>" .. h2(text) .. "</rt>"
-end
-
-function p_authors(person, image)
-   return "<rt image=" .. image .. " text-align=left image-align=left><p font-size=12>" .. person .. "</p></rt>"
+   return h2(text .. vspace(3))
 end

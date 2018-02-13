@@ -76,7 +76,7 @@ public:
 	/// Write the file out to disk. If successful, this clears the buffers.
 	/// Otherwise, an exception is thrown but the buffer remains intact (don't
 	/// worry, it will be cleared by the destructor).
-	void write(FileSystem& fs, char const* const filename);
+	void write(FileSystem& fs, const std::string& filename);
 
 	/// Get the position that will be written to in the next write operation that
 	/// does not specify a position.

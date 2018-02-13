@@ -63,6 +63,7 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
 		helptext = err.what();
 	}
 
+	textarea_->force_new_renderer();
 	textarea_->set_size(width - 2 * margin, height - btn->get_h() - 3 * margin);
 	textarea_->set_text(helptext);
 

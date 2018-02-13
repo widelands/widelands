@@ -175,22 +175,24 @@ WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent,
                                  UI::UniqueWindow::Registry& reg,
                                  Widelands::Warehouse& wh,
                                  bool avoid_fastclick)
-   : BuildingWindow(parent, reg, wh, avoid_fastclick) {
+   : BuildingWindow(parent, reg, wh, avoid_fastclick), warehouse_(&wh) {
 	init(avoid_fastclick);
 }
 
 void WarehouseWindow::init(bool avoid_fastclick) {
+	Widelands::Warehouse* warehouse = warehouse_.get(igbase()->egbase());
+	assert(warehouse != nullptr);
 	BuildingWindow::init(avoid_fastclick);
 	get_tabs()->add(
 	   "wares", g_gr->images().get(pic_tab_wares),
-	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), warehouse(), Widelands::wwWARE),
+	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), *warehouse, Widelands::wwWARE),
 	   _("Wares"));
 	get_tabs()->add(
 	   "workers", g_gr->images().get(pic_tab_workers),
-	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), warehouse(), Widelands::wwWORKER),
+	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
-	if (Widelands::PortDock* pd = warehouse().get_portdock()) {
+	if (Widelands::PortDock* pd = warehouse->get_portdock()) {
 		get_tabs()->add("dock_wares", g_gr->images().get(pic_tab_dock_wares),
 		                create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 		                _("Wares waiting to be shipped"));
@@ -199,7 +201,7 @@ void WarehouseWindow::init(bool avoid_fastclick) {
 		                _("Workers waiting to embark"));
 		if (pd->expedition_started()) {
 			get_tabs()->add("expedition_wares_queue", g_gr->images().get(pic_tab_expedition),
-			                create_portdock_expedition_display(get_tabs(), warehouse(), *igbase()),
+			                create_portdock_expedition_display(get_tabs(), *warehouse, *igbase()),
 			                _("Expedition"));
 		}
 	}

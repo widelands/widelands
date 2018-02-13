@@ -1403,8 +1403,9 @@ void Soldier::start_task_die(Game& game) {
 	// Dead soldier is not owned by a location
 	set_location(nullptr);
 
-	start_task_idle(
-	   game, descr().get_animation(combat_walking_ == CD_COMBAT_W ? "die_w" : "die_e"), 1000);
+	const uint32_t anim =
+	   descr().get_rand_anim(game, combat_walking_ == CD_COMBAT_W ? "die_w" : "die_e");
+	start_task_idle(game, anim, 1000);
 }
 
 void Soldier::die_update(Game& game, State& state) {

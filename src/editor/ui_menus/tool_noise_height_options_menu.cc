@@ -47,7 +47,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             1,
             MAX_FIELD_HEIGHT,
             UI::PanelStyle::kWui,
-            _("Minimum Height:"),
+            _("Minimum height:"),
             UI::SpinBox::Units::kNone,
             UI::SpinBox::Type::kSmall),
      upper_(&box_,
@@ -59,7 +59,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             0,
             MAX_FIELD_HEIGHT,
             UI::PanelStyle::kWui,
-            _("Maximum Height:"),
+            _("Maximum height:"),
             UI::SpinBox::Units::kNone,
             UI::SpinBox::Type::kSmall),
      set_to_(&box_,
@@ -71,7 +71,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
              0,
              MAX_FIELD_HEIGHT,
              UI::PanelStyle::kWui,
-             _("Set Value:"),
+             _("Set height to:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall) {
 	lower_.set_tooltip(
@@ -92,14 +92,14 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_set_to, boost::ref(*this)));
 
 	UI::Textarea* label =
-	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random Height"), UI::Align::kCenter);
+	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&upper_);
 	box_.add(&lower_);
 
 	box_.add_space(2 * vspacing());
-	label = new UI::Textarea(&box_, 0, 0, 0, 0, _("Fixed Height"), UI::Align::kCenter);
+	label = new UI::Textarea(&box_, 0, 0, 0, 0, _("Fixed height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&set_to_);

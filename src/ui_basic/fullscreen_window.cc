@@ -20,6 +20,7 @@
 #include "ui_basic/fullscreen_window.h"
 
 #include <cstdio>
+#include <memory>
 
 #include "graphic/graphic.h"
 #include "graphic/image.h"

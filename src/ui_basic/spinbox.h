@@ -47,6 +47,9 @@ public:
 
 	enum class Units { kNone, kPixels, kMinutes, kPercent };
 
+	/**
+	 * Text conventions: Sentence case for the 'label_text' and for all values
+	 */
 	SpinBox(Panel*,
 	        int32_t x,
 	        int32_t y,
@@ -63,7 +66,7 @@ public:
 	        // button is pressed.
 	        int32_t step_size = 1,
 	        int32_t big_step_size = 10);
-	~SpinBox();
+	~SpinBox() override;
 
 	boost::signals2::signal<void()> changed;
 

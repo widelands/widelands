@@ -56,36 +56,44 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	std::vector<std::string> caps_strings;
 	Widelands::NodeCaps const caps = f.nodecaps();
 	switch (caps & Widelands::BUILDCAPS_SIZEMASK) {
-	/** TRANSLATORS: Editor terrain property: small building plot */
-	case Widelands::BUILDCAPS_SMALL:
+
+	case Widelands::BUILDCAPS_SMALL: {
+		/** TRANSLATORS: Editor terrain property: small building plot */
 		caps_strings.push_back(_("small"));
-		break;
-	/** TRANSLATORS: Editor terrain property: medium building plot */
-	case Widelands::BUILDCAPS_MEDIUM:
+	} break;
+
+	case Widelands::BUILDCAPS_MEDIUM: {
+		/** TRANSLATORS: Editor terrain property: medium building plot */
 		caps_strings.push_back(_("medium"));
-		break;
-	/** TRANSLATORS: Editor terrain property: big building plot */
-	case Widelands::BUILDCAPS_BIG:
+	} break;
+	case Widelands::BUILDCAPS_BIG: {
+		/** TRANSLATORS: Editor terrain property: big building plot */
 		caps_strings.push_back(_("big"));
-		break;
+	} break;
 	default:
 		break;
 	};
-	/** TRANSLATORS: Editor terrain property: space for a flag */
-	if (caps & Widelands::BUILDCAPS_FLAG)
+
+	if (caps & Widelands::BUILDCAPS_FLAG) {
+		/** TRANSLATORS: Editor terrain property: space for a flag */
 		caps_strings.push_back(_("flag"));
-	/** TRANSLATORS: Editor terrain property: mine building plot */
-	if (caps & Widelands::BUILDCAPS_MINE)
+	}
+	if (caps & Widelands::BUILDCAPS_MINE) {
+		/** TRANSLATORS: Editor terrain property: mine building plot */
 		caps_strings.push_back(_("mine"));
-	/** TRANSLATORS: Editor terrain property: port space */
-	if (caps & Widelands::BUILDCAPS_PORT)
+	}
+	if (caps & Widelands::BUILDCAPS_PORT) {
+		/** TRANSLATORS: Editor terrain property: port space */
 		caps_strings.push_back(_("port"));
-	/** TRANSLATORS: Editor terrain property: units can walk on this terrain */
-	if (caps & Widelands::MOVECAPS_WALK)
+	}
+	if (caps & Widelands::MOVECAPS_WALK) {
+		/** TRANSLATORS: Editor terrain property: units can walk on this terrain */
 		caps_strings.push_back(_("walkable"));
-	/** TRANSLATORS: Editor terrain property: units can swim on this terrain (fish, ships) */
-	if (caps & Widelands::MOVECAPS_SWIM)
+	}
+	if (caps & Widelands::MOVECAPS_SWIM) {
+		/** TRANSLATORS: Editor terrain property: units can swim on this terrain (fish, ships) */
 		caps_strings.push_back(_("swimmable"));
+	}
 
 	buf += std::string("• ") +
 	       (boost::format(_("Caps: %s")) %
@@ -122,10 +130,11 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
 		terrain_is_strings.push_back(terrain_type.descname);
 	}
-	/** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and
-	 * unwalkable" */
-	/** TRANSLATORS: You can also translate this as "Category: %s" or "Property: %s" */
+
 	buf += "• " +
+	       /** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and
+	        * unwalkable" */
+	       /** TRANSLATORS: You can also translate this as "Category: %s" or "Property: %s" */
 	       (boost::format(_("Is: %s")) %
 	        i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND))
 	          .str() +

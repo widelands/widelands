@@ -27,10 +27,12 @@
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
+#include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
+#include "random/random.h"
 #include "ui_basic/messagebox.h"
 
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
@@ -188,9 +190,10 @@ void FullscreenMenuInternetLobby::clicked_ok() {
 void FullscreenMenuInternetLobby::connect_to_metaserver() {
 	Section& s = g_options.pull_section("global");
 	const std::string& metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
-
-	InternetGaming::ref().login(nickname_, password_, is_registered_, metaserver, port);
+	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
+	std::string auth = is_registered_ ? password_ : s.get_string("uuid");
+	assert(!auth.empty());
+	InternetGaming::ref().login(nickname_, auth, is_registered_, metaserver, port);
 }
 
 /// fills the server list
@@ -256,6 +259,11 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
 
+			if (client.build_id == "IRC") {
+				// No icon for IRC users
+				continue;
+			}
+
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {
 			case 0:  // UNREGISTERED
@@ -289,6 +297,11 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 	// add a @clientname to the current edit text.
 	if (clientsonline_list_.has_selection()) {
 		UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_list_.get_record(i);
+
+		if (er.get_string(2) == "IRC") {
+			// No PM to IRC users
+			return;
+		}
 
 		std::string temp("@");
 		temp += er.get_string(1);
@@ -346,30 +359,40 @@ void FullscreenMenuInternetLobby::change_servername() {
 	}
 }
 
+bool FullscreenMenuInternetLobby::wait_for_ip() {
+	// Wait until the metaserver provided us with an IP address
+	uint32_t const secs = time(nullptr);
+	while (!InternetGaming::ref().ips().first.is_valid()) {
+		InternetGaming::ref().handle_metaserver_communication();
+		// give some time for the answer + for a relogin, if a problem occurs.
+		if ((kInternetGamingTimeout * 5 / 3) < time(nullptr) - secs) {
+			// Show a popup warning message
+			const std::string warning(
+			   _("Widelands was unable to get the IP address of the server in time. "
+			     "There seems to be a network problem, either on your side or on the side "
+			     "of the server.\n"));
+			UI::WLMessageBox mmb(this, _("Connection Timed Out"), warning,
+			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
+			mmb.run<UI::Panel::Returncodes>();
+			InternetGaming::ref().set_error();
+			return false;
+		}
+	}
+	return true;
+}
+
 /// called when the 'join game' button was clicked
 void FullscreenMenuInternetLobby::clicked_joingame() {
 	if (opengames_list_.has_selection()) {
 		InternetGaming::ref().join_game(opengames_list_.get_selected().name);
 
-		uint32_t const secs = time(nullptr);
-		while (!InternetGaming::ref().ips().first.is_valid()) {
-			InternetGaming::ref().handle_metaserver_communication();
-			// give some time for the answer + for a relogin, if a problem occurs.
-			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(nullptr) - secs) {
-				// Show a popup warning message
-				const std::string warning(
-				   _("Widelands was unable to get the IP address of the server in time.\n"
-				     "There seems to be a network problem, either on your side or on the side\n"
-				     "of the server.\n"));
-				UI::WLMessageBox mmb(this, _("Connection timed out"), warning,
-				                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
-				mmb.run<UI::Panel::Returncodes>();
-				return InternetGaming::ref().set_error();
-			}
+		if (!wait_for_ip()) {
+			return;
 		}
 		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
-		GameClient netgame(ips, InternetGaming::ref().get_local_clientname(), true);
+		GameClient netgame(ips, InternetGaming::ref().get_local_clientname(), true,
+		                   opengames_list_.get_selected().name);
 		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");
@@ -393,6 +416,16 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 
 	// Start the game
 	try {
+
+		// Tell the metaserver about it
+		InternetGaming::ref().open_game();
+
+		// Wait for his response with the IPs of the relay server
+		if (!wait_for_ip()) {
+			return;
+		}
+
+		// Start our relay host
 		GameHost netgame(InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} catch (...) {

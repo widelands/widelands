@@ -20,6 +20,8 @@
 #ifndef WL_WUI_LOAD_OR_SAVE_GAME_H
 #define WL_WUI_LOAD_OR_SAVE_GAME_H
 
+#include <memory>
+
 #include "logic/game.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
@@ -28,8 +30,8 @@
 
 /// Common functions for loading or saving a game or replay.
 class LoadOrSaveGame {
-	friend class GameMainMenuSaveGame;
 	friend class FullscreenMenuLoadGame;
+	friend struct GameMainMenuSaveGame;
 
 protected:
 	/// Choose which type of files to show
@@ -43,7 +45,7 @@ protected:
 	               bool localize_autosave);
 
 	/// Update gamedetails and tooltips and return information about the current selection
-	const SavegameData* entry_selected();
+	std::unique_ptr<SavegameData> entry_selected();
 
 	/// Whether the table has a selection
 	bool has_selection() const;

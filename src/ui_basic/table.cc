@@ -425,7 +425,7 @@ void Table<void*>::move_selection(const int32_t offset) {
  * Args: i  the entry to select
  */
 void Table<void*>::select(const uint32_t i) {
-	if (empty() || selection_ == i || i == no_selection_index())
+	if (empty() || i == no_selection_index())
 		return;
 
 	selection_ = i;

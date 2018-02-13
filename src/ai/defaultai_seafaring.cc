@@ -37,8 +37,8 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 	    candidate_spot.y, persistent_data->colony_scan_area);
 
 	// abort if any player - including self - is too near to the spot (radius 10)
-	if (other_player_accessible(kColonyScanMinArea, &tested_fields, &mineable_fields_count,
-	                            candidate_spot, WalkSearch::kAnyPlayer)) {
+	if (other_player_accessible(Player::AiPersistentState::kColonyScanMinArea, &tested_fields,
+	                            &mineable_fields_count, candidate_spot, WalkSearch::kAnyPlayer)) {
 		return 0;
 	}
 
@@ -104,9 +104,8 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // - build a ship
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions() {
-
-	if (!seafaring_economy) {
-		set_taskpool_task_time(kNever, SchedulerTaskId::KMarineDecisions);
+	if (!map_allows_seafaring_ &&
+	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
 		return false;
 	}
 
@@ -135,6 +134,14 @@ bool DefaultAI::marine_main_decisions() {
 		if (ps_obs.bo->is(BuildingAttribute::kShipyard)) {
 			shipyards_count += 1;
 
+			// In very rare situation, we might have non-seafaring map but the shipyard is working
+			if (!map_allows_seafaring_ && !ps_obs.site->is_stopped()) {
+				log("  %1d: we have working shipyard in a non seafaring ecoomy, stopping it...\n",
+				    player_number());
+				game().send_player_start_stop_building(*ps_obs.site);
+				return false;
+			}
+
 			// counting stocks
 			uint8_t stocked_wares = 0;
 			std::vector<InputQueue*> const inputqueues = ps_obs.site->inputqueues();
@@ -147,6 +154,11 @@ bool DefaultAI::marine_main_decisions() {
 				idle_shipyard_stocked = true;
 			}
 		}
+	}
+
+	// If non-seafaring economy, no sense to go on with this function
+	if (!map_allows_seafaring_) {
+		return false;
 	}
 
 	// and now over ships
@@ -216,6 +228,8 @@ bool DefaultAI::marine_main_decisions() {
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 			if (wh_obs.bo->is(BuildingAttribute::kPort)) {
+				log("  %1d: Starting preparation for expedition in port at %3dx%3d\n", player_number(),
+				    wh_obs.site->get_position().x, wh_obs.site->get_position().y);
 				game().send_player_start_or_cancel_expedition(*wh_obs.site);
 				return true;
 			}
@@ -226,13 +240,12 @@ bool DefaultAI::marine_main_decisions() {
 
 // This identifies ships that are waiting for command
 bool DefaultAI::check_ships(uint32_t const gametime) {
-
-	if (!seafaring_economy) {
-		set_taskpool_task_time(std::numeric_limits<int32_t>::max(), SchedulerTaskId::kCheckShips);
+	// There is possibility that the map is not seafaring but we still have ships and/or shipyards
+	if (!map_allows_seafaring_ &&
+	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
+		// False indicates that we can postpone next call of this function
 		return false;
 	}
-
-	bool action_taken = false;
 
 	if (!allships.empty()) {
 		// iterating over ships and doing what is needed
@@ -256,7 +269,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				// so resetting start time
 			} else if (expedition_ship_ == so.ship->serial()) {
 				// Obviously expedition just ended
-				persistent_data->expedition_start_time = kNoExpedition;
+				persistent_data->expedition_start_time = Player::AiPersistentState::kNoExpedition;
 				expedition_ship_ = kNoShip;
 			}
 
@@ -278,7 +291,6 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			// if ship is waiting for command
 			if (so.waiting_for_command_) {
 				expedition_management(so);
-				action_taken = true;
 			}
 
 			// Checking utilization
@@ -328,10 +340,11 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 		marine_task_queue.pop_back();
 	}
 
-	if (action_taken) {
-		set_taskpool_task_time(gametime + kShipCheckInterval, SchedulerTaskId::kCheckShips);
+	if (map_allows_seafaring_) {
+		// here we indicate that normal frequency check makes sense
+		return true;
 	}
-	return true;
+	return false;
 }
 
 /**
@@ -346,9 +359,9 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 
 	// Obviously a new expedition
 	if (expedition_ship_ == kNoShip) {
-		assert(persistent_data->expedition_start_time == kNoExpedition);
+		assert(persistent_data->expedition_start_time == Player::AiPersistentState::kNoExpedition);
 		persistent_data->expedition_start_time = gametime;
-		persistent_data->colony_scan_area = kColonyScanStartArea;
+		persistent_data->colony_scan_area = Player::AiPersistentState::kColonyScanStartArea;
 		expedition_ship_ = so.ship->serial();
 
 		// Expedition is overdue: cancel expedition, set no_more_expeditions = true
@@ -356,8 +369,8 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		// TODO(toptopple): - test expedition cancellation deeply (may need to be fixed)
 	} else if (expedition_time >= expedition_max_duration) {
 		assert(persistent_data->expedition_start_time > 0);
-		persistent_data->colony_scan_area = kColonyScanMinArea;
-		persistent_data->no_more_expeditions = kTrue;
+		persistent_data->colony_scan_area = Player::AiPersistentState::kColonyScanMinArea;
+		persistent_data->no_more_expeditions = true;
 		game().send_player_cancel_expedition_ship(*so.ship);
 		log("%d: %s at %3dx%3d: END OF EXPEDITION due to time-out\n", pn,
 		    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
@@ -373,7 +386,7 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		// For known and running expedition
 	} else {
 		// set persistent_data->colony_scan_area based on elapsed expedition time
-		assert(persistent_data->expedition_start_time > kNoExpedition);
+		assert(persistent_data->expedition_start_time > Player::AiPersistentState::kNoExpedition);
 		assert(expedition_time < expedition_max_duration);
 
 		// calculate percentage of remaining expedition time (range 0-100)
@@ -382,10 +395,12 @@ void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gameti
 		assert(remaining_time <= 100);
 
 		// calculate a new persistent_data->colony_scan_area
-		const uint32_t expected_colony_scan =
-		   kColonyScanMinArea + (kColonyScanStartArea - kColonyScanMinArea) * remaining_time / 100;
-		assert(expected_colony_scan >= kColonyScanMinArea &&
-		       expected_colony_scan <= kColonyScanStartArea);
+		const uint32_t expected_colony_scan = Player::AiPersistentState::kColonyScanMinArea +
+		                                      (Player::AiPersistentState::kColonyScanStartArea -
+		                                       Player::AiPersistentState::kColonyScanMinArea) *
+		                                         remaining_time / 100;
+		assert(expected_colony_scan >= Player::AiPersistentState::kColonyScanMinArea &&
+		       expected_colony_scan <= Player::AiPersistentState::kColonyScanStartArea);
 		persistent_data->colony_scan_area = expected_colony_scan;
 	}
 }
@@ -400,7 +415,6 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 	if (type == NewShip::kBuilt) {
 		marine_task_queue.push_back(kStopShipyard);
 	} else {
-		seafaring_economy = true;
 		if (ship.state_is_expedition()) {
 			if (expedition_ship_ == kNoShip) {
 				// OK, this ship is in expedition

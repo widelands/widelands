@@ -45,7 +45,7 @@
 
 struct MapObjectDebugPanel : public UI::Panel, public Widelands::MapObject::LogSink {
 	MapObjectDebugPanel(UI::Panel& parent, const Widelands::EditorGameBase&, Widelands::MapObject&);
-	~MapObjectDebugPanel();
+	~MapObjectDebugPanel() override;
 
 	void log(const std::string& str) override;
 

@@ -58,9 +58,8 @@ std::string as_header_with_content(const std::string& header,
 		        (noescape ? header : richtext_escape(header)) %
 		        (noescape ? content : richtext_escape(content)))
 		   .str();
-	default:
-		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 }  // namespace

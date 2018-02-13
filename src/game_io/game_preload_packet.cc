@@ -121,7 +121,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	}
 
 	std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
-	if (sw.get() != nullptr) {
+	if (sw != nullptr) {
 		const MiniMapLayer layers =
 		   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		std::unique_ptr<Texture> texture;

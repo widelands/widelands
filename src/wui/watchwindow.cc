@@ -55,7 +55,7 @@ struct WatchWindow : public UI::Window {
 	            uint32_t w,
 	            uint32_t h,
 	            bool single_window_ = false);
-	~WatchWindow();
+	~WatchWindow() override;
 
 	Widelands::Game& game() const {
 		return parent_.game();

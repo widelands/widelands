@@ -44,7 +44,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 1,
                 MAX_FIELD_HEIGHT_DIFF,
                 UI::PanelStyle::kWui,
-                _("Increase/Decrease Value:"),
+                _("Increase/Decrease height by:"),
                 UI::SpinBox::Units::kNone,
                 UI::SpinBox::Type::kSmall),
      set_to_(&box_,
@@ -56,7 +56,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              0,
              MAX_FIELD_HEIGHT,
              UI::PanelStyle::kWui,
-             _("Set Value:"),
+             _("Set height to:"),
              UI::SpinBox::Units::kNone,
              UI::SpinBox::Type::kSmall) {
 	change_by_.set_tooltip(

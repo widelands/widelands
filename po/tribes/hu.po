@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# Balázs Meskó <meskobalazs@gmail.com>, 2016
+# Balázs Meskó <meskobalazs@gmail.com>, 2016-2017
 # Dániel Varga <vargad88@gmail.com>, 2007
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-29 15:54+0000\n"
-"PO-Revision-Date: 2017-09-29 15:57+0000\n"
+"POT-Creation-Date: 2018-01-26 13:16+0000\n"
+"PO-Revision-Date: 2018-01-26 13:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: ../../data/tribes/buildings/markets/barbarians/market/init.lua:14
 msgctxt "barbarians_building"
 msgid "Market"
-msgstr ""
+msgstr "Piac"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
@@ -427,9 +427,9 @@ msgstr "Páncélkovács műhely"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:143
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:46
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:48
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:61
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:50
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:42
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:64
@@ -442,7 +442,7 @@ msgstr "Páncélkovács műhely"
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:48
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:60
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:68
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:58
@@ -454,14 +454,14 @@ msgstr "Páncélkovács műhely"
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:68
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:51
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:54
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:43
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:47
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:48
 msgid "working"
@@ -489,7 +489,7 @@ msgstr "Pékség"
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:55
 msgctxt "atlanteans_building"
 msgid "baking bread"
-msgstr ""
+msgstr "kenyér sütése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:7
@@ -501,7 +501,7 @@ msgstr "Laktanya"
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/init.lua:58
 msgctxt "atlanteans_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "katona toborzása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:7
@@ -510,35 +510,35 @@ msgid "Blackroot Farm"
 msgstr "Feketegyökér-termesztő"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:55
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:57
 msgid "planting blackroot"
 msgstr "feketegyökér ültetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:63
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:65
 msgid "harvesting blackroot"
 msgstr "feketegyökér betakarítása"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:72
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:76
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:85
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:78
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:87
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:70
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:73
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
 msgid "No Fields"
 msgstr "Nincs mező"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:73
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:86
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:88
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:76
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:77
 msgid "Out of Fields"
 msgstr "A mezők kifogytak"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:74
+#: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/init.lua:76
 msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer working at this blackroot farm has no cleared soil to "
@@ -644,16 +644,16 @@ msgid "Farm"
 msgstr "Farm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:61
 msgid "planting corn"
 msgstr "kukorica vetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:67
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:69
 msgid "harvesting corn"
 msgstr "kukorica betakarítása"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:78
+#: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:80
 msgctxt "atlanteans_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -668,18 +668,18 @@ msgstr "Haltenyésztőház"
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 msgid "breeding fish"
-msgstr "halakat tenyészt"
+msgstr "halaka tenyésztése"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
 msgid "No Fish"
 msgstr "Nincs hal"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:55
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
 msgid "Out of Fish"
 msgstr "A halak elfogytak"
@@ -690,11 +690,11 @@ msgid ""
 "The fish breeder working out of this fish breeder’s house can’t find any "
 "fish in his work area. Remember that you can only regenerate your fish "
 "resources if there are some fish left to breed."
-msgstr ""
+msgstr "A haltenyésztő, aki ennél a haltenyésztőháznál dolgozik nem talál halat a munkaterületén. Ne felejtsd el, hogy csak akkor tudod helyreállítani a halak számát, ha maradt még tenyészthető hal."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:58
 msgid "The fishing grounds are full"
-msgstr ""
+msgstr "A halászhelyek tele vannak"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:7
@@ -703,13 +703,13 @@ msgid "Fisher’s House"
 msgstr "Halászház"
 
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:44
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:50
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:46
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:44
 msgid "fishing"
 msgstr "horgászik"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:58
 msgctxt "atlanteans_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -724,9 +724,9 @@ msgid "Forester’s House"
 msgstr "Erdészház"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:41
-#: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:47
-#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:41
+#: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:43
+#: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:49
+#: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:43
 msgid "planting trees"
 msgstr "fákat ültet"
 
@@ -792,7 +792,7 @@ msgstr "Lovarda"
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:53
 msgctxt "atlanteans_building"
 msgid "breeding horses"
-msgstr ""
+msgstr "lovakat tenyészt"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:7
@@ -802,20 +802,20 @@ msgstr "Vadászház"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:43
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:52
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:54
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:43
 msgid "hunting"
 msgstr "vadászik"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:52
 msgid "No Game"
 msgstr "Nincsenek vadak"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:54
 msgid "Out of Game"
 msgstr "A vadak elfogytak"
@@ -1231,7 +1231,7 @@ msgstr "Pékség"
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:58
 msgctxt "barbarians_building"
 msgid "baking pitta bread"
-msgstr ""
+msgstr "pita kenyér sütése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:7
@@ -1243,7 +1243,7 @@ msgstr "Laktanaya"
 #: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "katona toborzása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:7
@@ -1294,7 +1294,7 @@ msgstr "Marhafarm"
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:53
 msgctxt "barbarians_building"
 msgid "rearing cattle"
-msgstr ""
+msgstr "marhák nevelése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:7
@@ -1343,18 +1343,18 @@ msgid "Farm"
 msgstr "Farm"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:67
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:69
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:60
 msgid "planting wheat"
 msgstr "búza vetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:66
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:68
 msgid "harvesting wheat"
 msgstr "búza aratása"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:87
+#: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:89
 msgctxt "barbarians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -1366,7 +1366,7 @@ msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
 msgstr "Halászkunyhó"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:63
 msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
@@ -1464,7 +1464,7 @@ msgid "Hunter’s Hut"
 msgstr "Vadászkunyhó"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:67
 msgctxt "barbarians_building"
 msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
@@ -1737,10 +1737,10 @@ msgid "Bakery"
 msgstr "Pékség"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-#: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:58
+#: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:60
 msgctxt "empire_building"
 msgid "baking bread"
-msgstr ""
+msgstr "kenyér sütése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:7
@@ -1752,7 +1752,7 @@ msgstr "Laktanya"
 #: ../../data/tribes/buildings/productionsites/empire/barracks/init.lua:59
 msgctxt "empire_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "katona toborzása"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:7
@@ -1803,7 +1803,7 @@ msgstr "Szamárfarm"
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:53
 msgctxt "empire_building"
 msgid "rearing donkeys"
-msgstr ""
+msgstr "szamarak nevelése"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:7
@@ -1811,7 +1811,7 @@ msgctxt "empire_building"
 msgid "Farm"
 msgstr "Farm"
 
-#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:79
 msgctxt "empire_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -2026,7 +2026,7 @@ msgid "Sheep Farm"
 msgstr "Juhtelep"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding sheep because ...
-#: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:52
+#: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:54
 msgid "breeding sheep"
 msgstr "juhok tenyésztése"
 
@@ -2079,17 +2079,17 @@ msgstr "Szőlőskert"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:59
 msgid "planting grapevines"
 msgstr "szőlőtőkék ültetése"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because
 #. ...
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:64
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:67
 msgid "harvesting grapes"
 msgstr "szőlő szüretelése"
 
-#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:78
 msgctxt "empire_building"
 msgid ""
 "The vine farmer working at this vineyard has no cleared soil to plant his "
@@ -2180,25 +2180,25 @@ msgstr "alszik"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:163
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "katona támadásának fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:174
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "katona támadásának fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:185
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:196
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "katona támadásának feljesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:7
@@ -2210,49 +2210,49 @@ msgstr "Labirintus"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:100
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "katona védelmének fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:111
 msgctxt "atlanteans_building"
 msgid "upgrading soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "katona védelmének feljesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:122
 msgctxt "atlanteans_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "katona életerejének feljesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:133
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "katona kitérésének feljesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:144
 msgctxt "atlanteans_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "katona kitérésének feljesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:7
 msgctxt "barbarians_building"
 msgid "Battle Arena"
-msgstr "Harci Aréna"
+msgstr "Küzdőtér"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "katona kitérésének feljesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:101
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "katona kitérésének feljesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:7
@@ -2264,49 +2264,49 @@ msgstr "Kiképzőtábor"
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:109
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "katona támadásának fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:120
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "katona támadásának fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:131
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:142
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "katona támadásának feljesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:153
 msgctxt "barbarians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "katona életerejének feljesztése 4-esről 5-ös szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:164
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "katona életerejének feljesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:175
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "katona életerejének feljesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:186
 msgctxt "barbarians_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "katona életerejének feljesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:7
@@ -2319,7 +2319,7 @@ msgstr "Aréna"
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:74
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "katona kitérésének feljesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:7
@@ -2331,7 +2331,7 @@ msgstr "Kolosszeum"
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "katona kitérésének feljesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:7
@@ -2343,49 +2343,49 @@ msgstr "Kiképzőtábor"
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:103
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "katona támadásának fejlesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:114
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "katona támadásának fejlesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:125
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "katona támadásának fejlesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:136
 msgctxt "empire_building"
 msgid "upgrading soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "katona támadásának feljesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:147
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 0 to level 1"
-msgstr ""
+msgstr "katona életerejének feljesztése 0-sról 1-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:158
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 1 to level 2"
-msgstr ""
+msgstr "katona életerejének feljesztése 1-esről 2-es szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:169
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 2 to level 3"
-msgstr ""
+msgstr "katona életerejének feljesztése 2-esről 3-as szintre"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:180
 msgctxt "empire_building"
 msgid "upgrading soldier health from level 3 to level 4"
-msgstr ""
+msgstr "katona életerejének feljesztése 3-asról 4-es szintre"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua:47
@@ -2449,7 +2449,7 @@ msgid "Warehouse"
 msgstr "Raktár"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
-#: ../../data/tribes/immovables/ashes/init.lua:40
+#: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
 msgid "Ashes"
 msgstr "Hamu"
@@ -2601,62 +2601,62 @@ msgstr "Nád (pici)"
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
 msgctxt "immovable"
-msgid "Coal Vein"
-msgstr "Szén telér"
+msgid "Resources: Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal2/init.lua:7
 msgctxt "immovable"
-msgid "Main Coal Vein"
-msgstr "Fő szén telér"
+msgid "Resources: Main Coal Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold1/init.lua:7
 msgctxt "immovable"
-msgid "Gold Vein"
-msgstr "Arany telér"
+msgid "Resources: Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold2/init.lua:7
 msgctxt "immovable"
-msgid "Main Gold Vein"
-msgstr "Fő arany telér"
+msgid "Resources: Main Gold Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron1/init.lua:7
 msgctxt "immovable"
-msgid "Iron Vein"
-msgstr "Vasérc telér"
+msgid "Resources: Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron2/init.lua:7
 msgctxt "immovable"
-msgid "Main Iron Vein"
-msgstr "Fő vasérc telér"
+msgid "Resources: Main Iron Vein"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
-msgid "No Resources"
-msgstr "Nincsenek nyersanyagok"
+msgid "Resources: None"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones1/init.lua:7
 msgctxt "immovable"
-msgid "Some Stones"
-msgstr "Némi kő"
+msgid "Resources: Some Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
-msgid "A Lot of Stones"
-msgstr "Sok kő"
+msgid "Resources: A Lot of Stones"
+msgstr ""
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_water1/init.lua:7
 msgctxt "immovable"
-msgid "Water Vein"
-msgstr "Víz ér"
+msgid "Resources: Water Vein"
+msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2666,8 +2666,8 @@ msgctxt "immovable"
 msgid "Ship Under Construction"
 msgstr "Hajóépítési terület"
 
-#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:31
-#: ../../data/tribes/preload.lua:47
+#: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
+#: ../../data/tribes/preload.lua:49
 msgid "The Widelands Development Team"
 msgstr "A Widelands fejlesztőcsapat"
 
@@ -2681,56 +2681,60 @@ msgid "The mighty tribes of the east-lands."
 msgstr "A keleti földek hatalmas törzsei."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:33
+#: ../../data/tribes/preload.lua:34
 msgid "Empire"
 msgstr "Birodalom"
 
-#: ../../data/tribes/preload.lua:34
+#: ../../data/tribes/preload.lua:35
 msgid "This is the culture of the Roman Empire."
 msgstr "Ez a Római Birodalom kultúrája."
 
 #. TRANSLATORS: This is a tribe name
-#: ../../data/tribes/preload.lua:49
+#: ../../data/tribes/preload.lua:51
 msgid "Atlanteans"
 msgstr "Atlantisziak"
 
-#: ../../data/tribes/preload.lua:50
+#: ../../data/tribes/preload.lua:52
 msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr "Ez a törzs a legrégebbi mesékből ismert. Atlantisz fiai és leányai."
 
-#: ../../data/tribes/scripting/help/init.lua:48
+#: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
 msgstr "Törzsi enciklopédia"
 
-#: ../../data/tribes/scripting/help/init.lua:53
+#: ../../data/tribes/scripting/help/init.lua:59
 msgid "General"
 msgstr "Általános"
 
-#: ../../data/tribes/scripting/help/init.lua:58
+#: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
 msgstr "Bevezetés"
 
-#: ../../data/tribes/scripting/help/init.lua:64
+#: ../../data/tribes/scripting/help/init.lua:70
 msgid "Controls"
 msgstr "Irányítás"
 
-#: ../../data/tribes/scripting/help/init.lua:70
+#: ../../data/tribes/scripting/help/init.lua:76
 msgid "Tips"
-msgstr ""
+msgstr "Tippek"
 
-#: ../../data/tribes/scripting/help/init.lua:79
+#: ../../data/tribes/scripting/help/init.lua:85
 msgid "Wares"
 msgstr "Áruk"
 
-#: ../../data/tribes/scripting/help/init.lua:86
+#: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "Munkások"
 
-#: ../../data/tribes/scripting/help/init.lua:93
+#: ../../data/tribes/scripting/help/init.lua:99
 msgid "Buildings"
 msgstr "Épületek"
+
+#: ../../data/tribes/scripting/help/init.lua:106
+msgid "Immovables"
+msgstr ""
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11
@@ -2777,6 +2781,20 @@ msgid ""
 "If this player runs low on important wares, they will be replenished for "
 "free"
 msgstr "Ha ez a játékos fogytán van a fontos nyersanyagoknak, akkor ingyen pótlásra kerülnek"
+
+#. TRANSLATORS: This is the name of a starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
+msgid "Village"
+msgstr "Falu"
+
+#. TRANSLATORS: This is the tooltip for the "Village" starting condition
+#: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
+msgid "Start the game with a peaceful village"
+msgstr "A játék indítása egy békés faluval"
 
 #. TRANSLATORS: This is the ship's name used in lists of units
 #: ../../data/tribes/ships/atlanteans/init.lua:55
@@ -3395,7 +3413,7 @@ msgstr "Bányász"
 #: ../../data/tribes/workers/atlanteans/recruit/init.lua:16
 msgctxt "atlanteans_worker"
 msgid "Recruit"
-msgstr ""
+msgstr "Újonc"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/sawyer/init.lua:17
@@ -3623,7 +3641,7 @@ msgstr "Erdőőr"
 #: ../../data/tribes/workers/barbarians/recruit/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Recruit"
-msgstr ""
+msgstr "Újonc"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/scout/init.lua:17
@@ -3791,7 +3809,7 @@ msgstr "Kondás"
 #: ../../data/tribes/workers/empire/recruit/init.lua:17
 msgctxt "empire_worker"
 msgid "Recruit"
-msgstr ""
+msgstr "Újonc"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/scout/init.lua:17

@@ -72,7 +72,6 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 }
 
 EditorGameBase::~EditorGameBase() {
-	delete player_manager_.release();
 }
 
 void EditorGameBase::think() {

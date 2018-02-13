@@ -141,6 +141,12 @@ std::string as_aligned(const std::string& txt,
 	return f.str();
 }
 
+std::string as_richtext(const std::string& txt) {
+	static boost::format f("<rt>%s</rt>");
+	f % txt;
+	return f.str();
+}
+
 std::string as_tooltip(const std::string& txt) {
 	static boost::format f("<rt><p><font face=sans size=%i bold=1 color=%s>%s</font></p></rt>");
 

@@ -135,6 +135,21 @@ void Box::update_desired_size() {
 	layout();
 }
 
+bool Box::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	if (scrollbar_) {
+		assert(scrolling_);
+		return scrollbar_->handle_mousewheel(which, x, y);
+	}
+	return Panel::handle_mousewheel(which, x, y);
+}
+bool Box::handle_key(bool down, SDL_Keysym code) {
+	if (scrollbar_) {
+		assert(scrolling_);
+		return scrollbar_->handle_key(down, code);
+	}
+	return Panel::handle_key(down, code);
+}
+
 /**
  * Adjust all the children and the box's size.
  */

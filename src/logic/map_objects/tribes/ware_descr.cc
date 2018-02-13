@@ -36,16 +36,16 @@ namespace Widelands {
  */
 WareDescr::WareDescr(const std::string& init_descname, const LuaTable& table)
    : MapObjectDescr(MapObjectType::WARE, table.get_string("name"), init_descname, table) {
-
+	if (helptext_script().empty()) {
+		throw GameDataError("Ware %s has no helptext script", name().c_str());
+	}
 	if (!is_animation_known("idle")) {
-		throw GameDataError("Ware %s has no idle animation", table.get_string("name").c_str());
+		throw GameDataError("Ware %s has no idle animation", name().c_str());
 	}
 	if (icon_filename().empty()) {
-		throw GameDataError("Ware %s has no menu icon", table.get_string("name").c_str());
+		throw GameDataError("Ware %s has no menu icon", name().c_str());
 	}
 	i18n::Textdomain td("tribes");
-
-	helptext_script_ = table.get_string("helptext_script");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("default_target_quantity");
 	for (const std::string& key : items_table->keys<std::string>()) {

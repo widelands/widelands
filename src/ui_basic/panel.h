@@ -315,6 +315,9 @@ protected:
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
+	static const Image* default_cursor_;
+	static const Image* default_cursor_click_;
+
 private:
 	bool handles_mouse() const {
 		return (flags_ & pf_handle_mouse) != 0;
@@ -380,8 +383,6 @@ private:
 	static Panel* mousegrab_;
 	static Panel* mousein_;
 	static bool allow_user_input_;
-	static const Image* default_cursor_;
-	static const Image* default_cursor_click_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };

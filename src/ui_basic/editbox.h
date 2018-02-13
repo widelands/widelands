@@ -40,6 +40,8 @@ struct EditBoxImpl;
  * released and a callback function is called.
  * If h == 0, height will be dynamic according to font set.
  * If h > 0, margin_y has no effect.
+ *
+ * Text conventions: Sentence case for labels associated with the editbox
  */
 struct EditBox : public Panel {
 	EditBox(Panel*,
@@ -50,7 +52,7 @@ struct EditBox : public Panel {
 	        int margin_y,
 	        UI::PanelStyle style,
 	        int font_size = UI_FONT_SIZE_SMALL);
-	virtual ~EditBox();
+	~EditBox() override;
 
 	boost::signals2::signal<void()> changed;
 	boost::signals2::signal<void()> ok;

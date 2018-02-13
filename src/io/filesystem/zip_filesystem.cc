@@ -498,10 +498,10 @@ ZipFilesystem::ZipStreamRead::~ZipStreamRead() {
 size_t ZipFilesystem::ZipStreamRead::data(void* read_data, size_t bufsize) {
 	int copied = unzReadCurrentFile(zip_file_->read_handle(), read_data, bufsize);
 	if (copied < 0) {
-		throw new DataError("Failed to read from zip file %s", zip_file_->path().c_str());
+		throw DataError("Failed to read from zip file %s", zip_file_->path().c_str());
 	}
 	if (copied == 0) {
-		throw new DataError("End of file reaced while reading zip %s", zip_file_->path().c_str());
+		throw DataError("End of file reached while reading zip %s", zip_file_->path().c_str());
 	}
 	return copied;
 }

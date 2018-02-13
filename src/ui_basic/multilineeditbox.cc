@@ -49,10 +49,10 @@ struct MultilineEditbox::Data {
 	/// text.size() inidicates that the cursor is after the last character.
 	uint32_t cursor_pos;
 
-	int lineheight;
+	const int lineheight;
 
 	/// Maximum length of the text string, in bytes
-	uint32_t maxbytes;
+	const uint32_t maxbytes;
 
 	/// Cached wrapping info; see @ref refresh_ww and @ref update
 	/*@{*/
@@ -60,7 +60,7 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	Data(MultilineEditbox&);
+	Data(MultilineEditbox&, const UI::PanelStyleInfo* style);
 	void refresh_ww();
 
 	void update();
@@ -84,19 +84,19 @@ private:
 */
 MultilineEditbox::MultilineEditbox(
    Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
-   : Panel(parent, x, y, w, h), d_(new Data(*this)) {
-	d_->background_style = g_gr->styles().editbox_style(style);
-	d_->lineheight = text_height();
+   : Panel(parent, x, y, w, h), d_(new Data(*this, g_gr->styles().editbox_style(style))) {
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
 	set_handle_textinput();
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& o)
+MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::PanelStyleInfo* style)
    : scrollbar(
         &o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::PanelStyle::kWui),
+	  background_style(style),
      cursor_pos(0),
+     lineheight(text_height()),
      maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
      ww_valid(false),
      owner(o) {
@@ -367,6 +367,7 @@ bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			d_->insert(d_->cursor_pos, "\n");
+			d_->update();
 			changed();
 			break;
 

@@ -64,7 +64,7 @@ int32_t EditorSetPortSpaceTool::handle_click_impl(const Widelands::World& world,
 	do {
 		//  check if field is valid
 		if (port_tool_nodecaps(mr.location(), *map) != NodeCaps::CAPS_NONE) {
-			map->set_port_space(mr.location(), true);
+			map->set_port_space(world, mr.location(), true);
 			Area<FCoords> a(mr.location(), 0);
 			map->recalc_for_field_area(world, a);
 			++nr;
@@ -105,7 +105,7 @@ int32_t EditorUnsetPortSpaceTool::handle_click_impl(const Widelands::World& worl
 	do {
 		//  check if field is valid
 		if (port_tool_nodecaps(mr.location(), *map)) {
-			map->set_port_space(mr.location(), false);
+			map->set_port_space(world, mr.location(), false);
 			Area<FCoords> a(mr.location(), 0);
 			map->recalc_for_field_area(world, a);
 			++nr;

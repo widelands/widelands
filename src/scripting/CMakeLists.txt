@@ -111,6 +111,7 @@ wl_library(scripting_logic
     logic_constants
     logic_game_controller
     logic_game_settings
+    logic_tribe_basic_info
     logic_widelands_geometry
     map_io
     scripting_base

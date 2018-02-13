@@ -46,7 +46,7 @@ class LuaInterface;
 class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
 public:
 	FullscreenMenuLaunchMPG(GameSettingsProvider*, GameController*);
-	~FullscreenMenuLaunchMPG();
+	~FullscreenMenuLaunchMPG() override;
 
 	void set_chat_provider(ChatProvider&);
 	void refresh() override;
