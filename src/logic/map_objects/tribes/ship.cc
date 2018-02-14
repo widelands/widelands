@@ -284,7 +284,7 @@ void Ship::ship_update(Game& game, Bob::State& state) {
 	case ShipStates::kSinkAnimation:
 		// The sink animation has been played, so finally remove the ship from the map
 		pop_task(game);
-		remove(game);
+		schedule_destroy(game);
 		return;
 	}
 	// if the real update function failed (e.g. nothing to transport), the ship goes idle
