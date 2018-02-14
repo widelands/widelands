@@ -24,7 +24,6 @@
 
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/world/world.h"

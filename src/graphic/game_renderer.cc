@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "graphic/gl/coordinate_conversion.h"
-#include "graphic/graphic.h"
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"

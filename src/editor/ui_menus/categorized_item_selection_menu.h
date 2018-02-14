@@ -27,7 +27,6 @@
 #include "boost/format.hpp"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "logic/description_maintainer.h"
 #include "logic/map_objects/world/editor_category.h"

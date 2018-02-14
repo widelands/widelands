@@ -22,8 +22,6 @@
 #include <cstdio>
 #include <memory>
 
-#include "graphic/graphic.h"
-#include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text_constants.h"

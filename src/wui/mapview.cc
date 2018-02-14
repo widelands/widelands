@@ -23,7 +23,6 @@
 
 #include "base/macros.h"
 #include "base/math.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "profile/profile.h"
 #include "wlapplication.h"
