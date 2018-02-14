@@ -19,6 +19,8 @@
 
 #include "wui/seafaring_statistics_menu.h"
 
+#include <memory>
+
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
@@ -97,8 +99,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 					g_gr->images().get("images/ui_basic/but2.png"),
                g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
                (boost::format(_("%1% (Hotkey: %2%)"))
-                /** TRANSLATORS: Tooltip in the messages window */
                 %
+					 /** TRANSLATORS: Tooltip in the seafaring statistics window */
                 _("Watch the selected ship") % pgettext("hotkey", "W"))
                   .str()),
      openwindowbtn_(&navigation_box_,
@@ -110,8 +112,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 						  g_gr->images().get("images/ui_basic/but2.png"),
                     g_gr->images().get("images/ui_basic/fsel.png"),
                     (boost::format(_("%1% (Hotkey: %2%)"))
-                     /** TRANSLATORS: Tooltip in the messages window */
                      %
+							/** TRANSLATORS: Tooltip in the seafaring statistics window */
                      _("Go to the selected ship and open its window") % pgettext("hotkey", "O"))
                        .str()),
      centerviewbtn_(&navigation_box_,
@@ -123,8 +125,8 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 						  g_gr->images().get("images/ui_basic/but2.png"),
                     g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
                     (boost::format(_("%1% (Hotkey: %2%)"))
-                     /** TRANSLATORS: Tooltip in the messages window */
                      %
+							/** TRANSLATORS: Tooltip in the seafaring statistics window */
                      _("Center the map on the selected ship") % pgettext("hotkey", "G"))
                        .str()),
      table_(&main_box_,
