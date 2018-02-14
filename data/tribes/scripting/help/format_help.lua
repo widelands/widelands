@@ -202,7 +202,7 @@ function help_consumed_wares_workers(tribe, building, program_name)
       end
       consumed_items_string =
          div("width=100%",
-            div("width=50%", p(vspace(6) .. text .. space(6))) ..
+            div("width=70%", p(vspace(6) .. text .. space(6))) ..
             div("width=*", p("align=right", vspace(6) .. images .. vspace(12)))
          )
          .. consumed_items_string
