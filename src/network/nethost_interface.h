@@ -20,6 +20,8 @@
 #ifndef WL_NETWORK_NETHOST_INTERFACE_H
 #define WL_NETWORK_NETHOST_INTERFACE_H
 
+#include <memory>
+
 #include "network/network.h"
 
 /**
@@ -66,12 +68,10 @@ public:
 	/**
 	 * Tries to receive a packet.
 	 * \param id The connection id of the client that should be received.
-	 * \param packet A packet that should be overwritten with the received data.
-	 * \return \c true if a packet is available, \c false otherwise.
-	 *   The given packet is only modified when \c true is returned.
-	 *   Calling this on a closed connection will return false.
+	 * \return A pointer to a packet if one is available, an invalid pointer otherwise.
+	 *   Calling this on a closed connection will return an invalid pointer.
 	 */
-	virtual bool try_receive(ConnectionId id, RecvPacket* packet) = 0;
+	virtual std::unique_ptr<RecvPacket> try_receive(ConnectionId id) = 0;
 
 	/**
 	 * Sends a packet.

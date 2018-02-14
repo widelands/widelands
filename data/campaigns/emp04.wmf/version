@@ -1,0 +1,11 @@
+# Automatically created by Widelands master-2813_Debug_x64 (Debug)
+
+[global]
+map_source_url=
+map_release=
+map_creator_version="master-2813_Debug_x64"
+map_version_major="0"
+map_version_minor="1"
+map_version_timestamp="1515617961"
+packet_version="1"
+packet_compatibility="1"

@@ -153,7 +153,7 @@ struct CmdBuildRoad : public PlayerCommand {
 	CmdBuildRoad(uint32_t, int32_t, Path&);
 	explicit CmdBuildRoad(StreamRead&);
 
-	virtual ~CmdBuildRoad();
+	~CmdBuildRoad() override;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;

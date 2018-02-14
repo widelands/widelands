@@ -21,8 +21,10 @@
 
 #include "base/i18n.h"
 #include "graphic/text_constants.h"
+#include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
+#include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "wui/login_box.h"
 
@@ -121,8 +123,10 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 	// Try to connect to the metaserver
 	const std::string& meta = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
-	InternetGaming::ref().login(nickname_, password_, register_, meta, port);
+	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
+	std::string auth = register_ ? password_ : s.get_string("uuid");
+	assert(!auth.empty());
+	InternetGaming::ref().login(nickname_, auth, register_, meta, port);
 
 	// Check whether metaserver send some data
 	if (InternetGaming::ref().logged_in())

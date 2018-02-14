@@ -8,6 +8,7 @@ include "scripting/coroutine.lua"
 include "scripting/objective_utils.lua"
 include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
+include "scripting/field_animations.lua"
 
 -- ==========
 -- Constants

@@ -38,6 +38,7 @@
 
 #define REFRESH_TIME 5000
 
+// Holds information for a view
 static WatchWindow* g_watch_window = nullptr;
 
 Widelands::Game& WatchWindow::game() const {

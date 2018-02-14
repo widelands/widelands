@@ -208,7 +208,7 @@ void ShipWindow::no_port_error_message() {
 			UI::WLMessageBox messagebox(
 			   get_parent(),
 			   /** TRANSLATORS: Window label when an expedition can't be canceled */
-			   _("Cancel expedition"), _("This expedition can’t be canceled, because the "
+			   _("Cancel Expedition"), _("This expedition can’t be canceled, because the "
 			                             "ship has no port to return to."),
 			   UI::WLMessageBox::MBoxType::kOk);
 			messagebox.run<UI::Panel::Returncodes>();

@@ -236,6 +236,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      unowned_land_nearby(0),
      enemy_owned_land_nearby(0U),
      unowned_buildable_spots_nearby(0U),
+     unowned_portspace_vicinity_nearby(0U),
      nearest_buildable_spot_nearby(0U),
      near_border(false),
      unowned_mines_spots_nearby(0),
@@ -505,24 +506,26 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	primary_parent = std::rand() % 4;
 	const uint8_t parent2 = std::rand() % 4;
 
-	std::vector<int16_t> AI_military_numbers_P1(kMagicNumbersSize);
-	std::vector<int8_t> input_weights_P1(kNeuronPoolSize);
-	std::vector<int8_t> input_func_P1(kNeuronPoolSize);
-	std::vector<uint32_t> f_neurons_P1(kFNeuronPoolSize);
+	std::vector<int16_t> AI_military_numbers_P1(
+	   Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	std::vector<int8_t> input_weights_P1(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	std::vector<int8_t> input_func_P1(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	std::vector<uint32_t> f_neurons_P1(Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 	ai_dna_handler.fetch_dna(
 	   AI_military_numbers_P1, input_weights_P1, input_func_P1, f_neurons_P1, primary_parent + 1);
 
-	std::vector<int16_t> AI_military_numbers_P2(kMagicNumbersSize);
-	std::vector<int8_t> input_weights_P2(kNeuronPoolSize);
-	std::vector<int8_t> input_func_P2(kNeuronPoolSize);
-	std::vector<uint32_t> f_neurons_P2(kFNeuronPoolSize);
+	std::vector<int16_t> AI_military_numbers_P2(
+	   Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	std::vector<int8_t> input_weights_P2(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	std::vector<int8_t> input_func_P2(Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	std::vector<uint32_t> f_neurons_P2(Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 	ai_dna_handler.fetch_dna(
 	   AI_military_numbers_P2, input_weights_P2, input_func_P2, f_neurons_P2, parent2 + 1);
 
 	log("    ... Primary parent: %d, secondary parent: %d\n", primary_parent, parent2);
 
 	// First setting of military numbers, they go directly to persistent data
-	for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
+	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 		// Child inherits DNA with probability 1/kSecondParentProbability from main parent
 		DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ? DnaParent::kPrimary :
 		                                                                       DnaParent::kSecondary;
@@ -537,9 +540,6 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		case DnaParent::kSecondary:
 			set_military_number_at(i, AI_military_numbers_P2[i]);
 			break;
-		default:
-			log("Invalid dna_donor for military numbers\n");
-			NEVER_HERE();
 		}
 	}
 
@@ -547,7 +547,7 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 	persistent_data->neuron_functs.clear();
 	persistent_data->f_neurons.clear();
 
-	for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
+	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
 		                               DnaParent::kPrimary :
 		                               DnaParent::kSecondary;
@@ -561,13 +561,10 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 			persistent_data->neuron_weights.push_back(input_weights_P2[i]);
 			persistent_data->neuron_functs.push_back(input_func_P2[i]);
 			break;
-		default:
-			log("Invalid dna_donor for neurons\n");
-			NEVER_HERE();
 		}
 	}
 
-	for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
+	for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
 		const DnaParent dna_donor = ((std::rand() % kSecondParentProbability) > 0) ?
 		                               DnaParent::kPrimary :
 		                               DnaParent::kSecondary;
@@ -578,15 +575,11 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		case DnaParent::kSecondary:
 			persistent_data->f_neurons.push_back(f_neurons_P2[i]);
 			break;
-		default:
-			log("Invalid dna_donor for f-neurons\n");
-			NEVER_HERE();
 		}
 	}
 
-	persistent_data->magic_numbers_size = kMagicNumbersSize;
-	persistent_data->neuron_pool_size = kNeuronPoolSize;
-	persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
+	assert(persistent_data->magic_numbers.size() ==
+	       Widelands::Player::AiPersistentState::kMagicNumbersSize);
 }
 // Decides if mutation takes place and how intensive it will be
 MutatingIntensity ManagementData::do_mutate(const uint8_t is_preferred,
@@ -660,7 +653,7 @@ void ManagementData::mutate(const uint8_t pn) {
 				preferred_numbers.insert(std::rand() % pref_number_probability);
 			}
 
-			for (uint16_t i = 0; i < kMagicNumbersSize; i += 1) {
+			for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
 				if (i == kMutationRatePosition) {  // mutated above
 					continue;
 				}
@@ -758,50 +751,48 @@ void ManagementData::mutate(const uint8_t pn) {
 // Now we copy persistent to local
 void ManagementData::copy_persistent_to_local() {
 
-	assert(persistent_data->neuron_weights.size() == kNeuronPoolSize);
-	assert(persistent_data->neuron_functs.size() == kNeuronPoolSize);
+	assert(persistent_data->neuron_weights.size() ==
+	       Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(persistent_data->neuron_functs.size() ==
+	       Widelands::Player::AiPersistentState::kNeuronPoolSize);
 	neuron_pool.clear();
-	for (uint32_t i = 0; i < kNeuronPoolSize; i = i + 1) {
+	for (uint32_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
 		neuron_pool.push_back(
 		   Neuron(persistent_data->neuron_weights[i], persistent_data->neuron_functs[i], i));
 	}
 
-	assert(persistent_data->f_neurons.size() == kFNeuronPoolSize);
+	assert(persistent_data->f_neurons.size() ==
+	       Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 	f_neuron_pool.clear();
-	for (uint32_t i = 0; i < kFNeuronPoolSize; i = i + 1) {
+	for (uint32_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
 		f_neuron_pool.push_back(FNeuron(persistent_data->f_neurons[i], i));
 	}
 
-	persistent_data->magic_numbers_size = kMagicNumbersSize;
-	persistent_data->neuron_pool_size = kNeuronPoolSize;
-	persistent_data->f_neuron_pool_size = kFNeuronPoolSize;
+	assert(persistent_data->magic_numbers.size() ==
+	       Widelands::Player::AiPersistentState::kMagicNumbersSize);
 
 	test_consistency();
 	log("    ... DNA initialized\n");
 }
 
 void ManagementData::test_consistency(bool itemized) {
-
-	assert(persistent_data->neuron_weights.size() == persistent_data->neuron_pool_size);
-	assert(persistent_data->neuron_functs.size() == persistent_data->neuron_pool_size);
-	assert(neuron_pool.size() == persistent_data->neuron_pool_size);
-	assert(neuron_pool.size() == kNeuronPoolSize);
-
-	assert(persistent_data->magic_numbers_size == kMagicNumbersSize);
-	assert(persistent_data->magic_numbers.size() == kMagicNumbersSize);
-
-	assert(persistent_data->f_neurons.size() == persistent_data->f_neuron_pool_size);
-	assert(f_neuron_pool.size() == persistent_data->f_neuron_pool_size);
-	assert(f_neuron_pool.size() == kFNeuronPoolSize);
+	assert(persistent_data->magic_numbers.size() ==
+	       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	assert(persistent_data->neuron_weights.size() ==
+	       Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(persistent_data->neuron_functs.size() ==
+	       Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(neuron_pool.size() == Widelands::Player::AiPersistentState::kNeuronPoolSize);
+	assert(f_neuron_pool.size() == Widelands::Player::AiPersistentState::kFNeuronPoolSize);
 
 	if (itemized) {
 		// comparing contents of neuron and fneuron pools
-		for (uint16_t i = 0; i < kNeuronPoolSize; i += 1) {
+		for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kNeuronPoolSize; ++i) {
 			assert(persistent_data->neuron_weights[i] == neuron_pool[i].get_weight());
 			assert(persistent_data->neuron_functs[i] == neuron_pool[i].get_type());
 			assert(neuron_pool[i].get_id() == i);
 		}
-		for (uint16_t i = 0; i < kFNeuronPoolSize; i += 1) {
+		for (uint16_t i = 0; i < Widelands::Player::AiPersistentState::kFNeuronPoolSize; ++i) {
 			assert(persistent_data->f_neurons[i] == f_neuron_pool[i].get_int());
 			assert(f_neuron_pool[i].get_id() == i);
 		}
@@ -816,20 +807,16 @@ void ManagementData::dump_data(const PlayerNumber pn) {
 
 // Querying military number at a possition
 int16_t ManagementData::get_military_number_at(uint8_t pos) {
-	assert(pos < kMagicNumbersSize);
-	return persistent_data->magic_numbers[pos];
+	assert(pos < Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	return persistent_data->magic_numbers.at(pos);
 }
 
 // Setting military number (persistent numbers are used also for local use)
 void ManagementData::set_military_number_at(const uint8_t pos, int16_t value) {
-	assert(pos < kMagicNumbersSize);
-
-	while (pos >= persistent_data->magic_numbers.size()) {
-		persistent_data->magic_numbers.push_back(0);
-	}
-
-	value = Neuron::clip_weight_to_range(value);
-	persistent_data->magic_numbers[pos] = value;
+	assert(pos < Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	assert(persistent_data->magic_numbers.size() ==
+	       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+	persistent_data->magic_numbers.at(pos) = Neuron::clip_weight_to_range(value);
 }
 
 uint16_t MineTypesObserver::total_count() const {

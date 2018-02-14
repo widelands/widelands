@@ -66,7 +66,6 @@ constexpr int kRemainingBasicBuildingsResetTime = 1 * 60 * 1000;
 
 // following two are used for roads management, for creating shortcuts and dismantling dispensable
 // roads
-constexpr int32_t kSpotsTooLittle = 15;
 constexpr int32_t kSpotsEnough = 25;
 
 constexpr uint16_t kTargetQuantCap = 30;
@@ -82,6 +81,9 @@ using namespace Widelands;
 DefaultAI::NormalImpl DefaultAI::normal_impl;
 DefaultAI::WeakImpl DefaultAI::weak_impl;
 DefaultAI::VeryWeakImpl DefaultAI::very_weak_impl;
+
+uint32_t DefaultAI::last_seafaring_check_ = 0;
+bool DefaultAI::map_allows_seafaring_ = false;
 
 /// Constructor of DefaultAI
 DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType const t)
@@ -107,9 +109,9 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
      ts_in_const_count_(0),
      ts_without_trainers_(0),
      inhibit_road_building_(0),
+     enemysites_check_delay_(30),
      resource_necessity_water_needed_(false),
      highest_nonmil_prio_(0),
-     seafaring_economy(false),
      expedition_ship_(kNoShip) {
 
 	// Subscribe to NoteFieldPossession.
@@ -383,13 +385,20 @@ void DefaultAI::think() {
 			}
 			break;
 		case SchedulerTaskId::kCheckShips:
-			set_taskpool_task_time(gametime + 3 * kShipCheckInterval, SchedulerTaskId::kCheckShips);
-			check_ships(gametime);
+			// if function returns false, we can postpone next call
+			{
+				const uint8_t wait_multiplier = (check_ships(gametime)) ? 1 : 5;
+				set_taskpool_task_time(
+				   gametime + wait_multiplier * kShipCheckInterval, SchedulerTaskId::kCheckShips);
+			}
 			break;
 		case SchedulerTaskId::KMarineDecisions:
-			set_taskpool_task_time(
-			   gametime + kMarineDecisionInterval, SchedulerTaskId::KMarineDecisions);
-			marine_main_decisions();
+			// if function returns false, we can postpone for next call
+			{
+				const uint8_t wait_multiplier = (marine_main_decisions()) ? 1 : 5;
+				set_taskpool_task_time(gametime + wait_multiplier * kMarineDecisionInterval,
+				                       SchedulerTaskId::KMarineDecisions);
+			}
 			break;
 		case SchedulerTaskId::kCheckMines:
 			if (check_economies()) {  // economies must be consistent
@@ -454,14 +463,14 @@ void DefaultAI::think() {
 				};
 				if (!basic_economy_established) {
 					assert(!persistent_data->remaining_basic_buildings.empty());
-					assert(persistent_data->remaining_buildings_size > 0);
-					log("%2d: Basic economy not achieved, %lu building(s) missing, f.e.: %s\n",
+					log("%2d: Basic economy not achieved, %" PRIuS " building(s) missing, f.e.: %s\n",
 					    player_number(), persistent_data->remaining_basic_buildings.size(),
 					    get_building_observer(persistent_data->remaining_basic_buildings.begin()->first)
 					       .name);
 				}
 				if (!enemy_warehouses.empty())
-					log("Conquered warehouses: %d / %lu\n", conquered_wh, enemy_warehouses.size());
+					log(
+					   "Conquered warehouses: %d / %" PRIuS "\n", conquered_wh, enemy_warehouses.size());
 				management_data.review(
 				   gametime, player_number(), player_statistics.get_player_land(player_number()),
 				   player_statistics.get_enemies_max_land(),
@@ -516,29 +525,13 @@ void DefaultAI::late_initialization() {
 	// The data struct below is owned by Player object, the purpose is to have them saved therein
 	persistent_data = player_->get_mutable_ai_persistent_state();
 	management_data.persistent_data = player_->get_mutable_ai_persistent_state();
-	const bool create_basic_buildings_list = (gametime < kRemainingBasicBuildingsResetTime);
+	const bool create_basic_buildings_list =
+	   !persistent_data->initialized || (gametime < kRemainingBasicBuildingsResetTime);
 
-	if (persistent_data->initialized == kFalse) {
+	if (!persistent_data->initialized) {
 		// As all data are initialized without given values, they must be populated with reasonable
 		// values first
-		persistent_data->colony_scan_area = kColonyScanStartArea;
-		persistent_data->trees_around_cutters = 0;
-		persistent_data->initialized = kTrue;
-		persistent_data->last_attacked_player = std::numeric_limits<int16_t>::max();
-		persistent_data->expedition_start_time = kNoExpedition;
-		persistent_data->ships_utilization = 200;
-		persistent_data->no_more_expeditions = kFalse;
-		persistent_data->target_military_score = 100;
-		persistent_data->least_military_score = 0;
-		persistent_data->ai_productionsites_ratio = std::rand() % 5 + 7;
-		persistent_data->ai_personality_mil_upper_limit = 100;
-
-		// all zeroes
-		assert(persistent_data->neuron_weights.empty());
-		assert(persistent_data->neuron_functs.empty());
-		assert(persistent_data->magic_numbers_size == 0);
-		assert(persistent_data->neuron_pool_size == 0);
-		assert(persistent_data->magic_numbers.empty());
+		persistent_data->initialize();
 
 		// AI's DNA population
 		management_data.new_dna_for_persistent(player_number(), type_);
@@ -552,7 +545,7 @@ void DefaultAI::late_initialization() {
 		assert(management_data.get_military_number_at(42) ==
 		       management_data.get_military_number_at(kMutationRatePosition));
 
-	} else if (persistent_data->initialized == kTrue) {
+	} else {
 		// Doing some consistency checks
 		check_range<uint32_t>(
 		   persistent_data->expedition_start_time, gametime, "expedition_start_time");
@@ -580,21 +573,17 @@ void DefaultAI::late_initialization() {
 
 		management_data.test_consistency(true);
 
-		log(" %2d: %lu basic buildings in savegame file. %s\n", player_number(),
+		log(" %2d: %" PRIuS " basic buildings in savegame file. %s\n", player_number(),
 		    persistent_data->remaining_basic_buildings.size(),
 		    (create_basic_buildings_list) ?
 		       "New list will be recreated though (kAITrainingMode is true)" :
 		       "");
-
-	} else {
-		throw wexception("Corrupted AI data");
 	}
 
 	// Even if we have basic buildings from savefile, we ignore them and recreate them based
 	// on lua conf files
 	if (create_basic_buildings_list) {
 		persistent_data->remaining_basic_buildings.clear();
-		persistent_data->remaining_buildings_size = 0;
 	}
 
 	for (DescriptionIndex building_index = 0; building_index < nr_buildings; ++building_index) {
@@ -643,8 +632,9 @@ void DefaultAI::late_initialization() {
 		}
 		if (create_basic_buildings_list &&
 		    bh.basic_amount() > 0) {  // This is the very begining of the game
-			persistent_data->remaining_basic_buildings[bo.id] = bh.basic_amount();
-			++persistent_data->remaining_buildings_size;
+			assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0);
+			persistent_data->remaining_basic_buildings.emplace(
+			   std::make_pair(bo.id, bh.basic_amount()));
 		}
 		bo.basic_amount = bh.basic_amount();
 		if (bh.get_needs_water()) {
@@ -944,26 +934,6 @@ void DefaultAI::late_initialization() {
 
 	const Map& map = game().map();
 
-	// here we generate list of all ports and their vicinity from entire map
-	for (const Coords& c : map.get_port_spaces()) {
-		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(c), 3));
-		do {
-			const int32_t hash = map.get_fcoords(*(mr.location().field)).hash();
-			if (port_reserved_coords.count(hash) == 0)
-				port_reserved_coords.insert(hash);
-		} while (mr.advance(map));
-
-		// the same for NW neighbour of a field
-		Coords c_nw;
-		map.get_tln(c, &c_nw);
-		MapRegion<Area<FCoords>> mr_nw(map, Area<FCoords>(map.get_fcoords(c_nw), 3));
-		do {
-			const int32_t hash = map.get_fcoords(*(mr_nw.location().field)).hash();
-			if (port_reserved_coords.count(hash) == 0)
-				port_reserved_coords.insert(hash);
-		} while (mr_nw.advance(map));
-	}
-
 	// here we scan entire map for own ships
 	std::set<OPtr<Ship>> found_ships;
 	for (int16_t y = 0; y < map.get_height(); ++y) {
@@ -1018,6 +988,20 @@ void DefaultAI::late_initialization() {
 		}
 	}
 
+	// getting list of all fields nearby port space
+	// TODO(tiborb): it seems port spaces can change over time so ports_vicinity needs to be
+	// refreshed from
+	// time to time
+	for (const Coords& c : map.get_port_spaces()) {
+		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(c), 3));
+		do {
+			const uint32_t hash = mr.location().hash();
+			if (!ports_vicinity.count(hash)) {
+				ports_vicinity.insert(hash);
+			}
+		} while (mr.advance(map));
+	}
+
 	// printing identified basic buildings if we are in the basic economy mode
 	basic_economy_established = persistent_data->remaining_basic_buildings.empty();
 	if (!basic_economy_established) {
@@ -1027,8 +1011,6 @@ void DefaultAI::late_initialization() {
 			    bb.second);
 		}
 	}
-	assert(persistent_data->remaining_basic_buildings.size() ==
-	       persistent_data->remaining_buildings_size);
 
 	update_player_stat(gametime);
 
@@ -1051,8 +1033,9 @@ void DefaultAI::late_initialization() {
 
 	// Sometimes there can be a ship in expedition, but expedition start time is not given
 	// e.g. human player played this player before
-	if (expedition_ship_ != kNoShip && persistent_data->expedition_start_time == kNoExpedition) {
-		// Current gametime is better then 'kNoExpedition'
+	if (expedition_ship_ != kNoShip &&
+	    persistent_data->expedition_start_time == Player::AiPersistentState::kNoExpedition) {
+		// Current gametime is better then 'Player::AiPersistentState::kNoExpedition'
 		persistent_data->expedition_start_time = gametime;
 	}
 
@@ -1060,9 +1043,6 @@ void DefaultAI::late_initialization() {
 	assert(iron_ore_id != INVALID_INDEX);
 
 	productionsites_ratio_ = management_data.get_military_number_at(86) / 10 + 12;
-
-	assert(persistent_data->remaining_basic_buildings.size() ==
-	       persistent_data->remaining_buildings_size);
 
 	// Just to be initialized
 	soldier_status_ = SoldiersStatus::kEnough;
@@ -1073,45 +1053,125 @@ void DefaultAI::late_initialization() {
 }
 
 /**
- * Checks ALL available buildable fields.
+ * Checks PART of available buildable fields.
  *
- * this shouldn't be used often, as it might hang the game for some 100
- * milliseconds if the area the computer owns is big.
+ * this checks about 40-50 buildable fields. In big games, the player can have thousands
+ * of them, so we rotate the buildable_fields container and check 35 fields, and in addition
+ * we look for medium & big fields and near border fields if needed.
  */
 void DefaultAI::update_all_buildable_fields(const uint32_t gametime) {
+
+	// Every call we try to check first 35 buildable fields
+	constexpr uint16_t kMinimalFieldsCheck = 35;
+
 	uint16_t i = 0;
 
 	// To be sure we have some info about enemies we might see
 	update_player_stat(gametime);
 
-	// we test 40 fields that were update more than 1 seconds ago
+	// Generally we check fields as they are in the container, but we need also given
+	// number of "special" fields. So if given number of fields are not found within
+	// "regular" check, we must go on and look also on other fields...
+	uint8_t non_small_needed = 4;
+	uint8_t near_border_needed = 10;
+
+	// we test 35 fields that were update more than 1 seconds ago
 	while (!buildable_fields.empty() &&
-	       (buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
-	          gametime &&
-	       i < 40) {
+	       i < std::min<uint16_t>(kMinimalFieldsCheck, buildable_fields.size())) {
 		BuildableField& bf = *buildable_fields.front();
 
-		//  check whether we lost ownership of the node
-		if (bf.coords.field->get_owned_by() != player_number()) {
-			delete &bf;
-			buildable_fields.pop_front();
-			continue;
-		}
+		if ((buildable_fields.front()->field_info_expiration - kFieldInfoExpiration + 1000) <=
+		    gametime) {
 
-		//  check whether we can still construct regular buildings on the node
-		if ((player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
-			unusable_fields.push_back(bf.coords);
-			delete &bf;
-			buildable_fields.pop_front();
-			continue;
-		}
+			//  check whether we lost ownership of the node
+			if (bf.coords.field->get_owned_by() != player_number()) {
+				delete &bf;
+				buildable_fields.pop_front();
+				continue;
+			}
 
-		update_buildable_field(bf);
+			//  check whether we can still construct regular buildings on the node
+			if ((player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK) == 0) {
+				unusable_fields.push_back(bf.coords);
+				delete &bf;
+				buildable_fields.pop_front();
+				continue;
+			}
+
+			update_buildable_field(bf);
+			if (non_small_needed > 0) {
+				int32_t const maxsize = player_->get_buildcaps(bf.coords) & BUILDCAPS_SIZEMASK;
+				if (maxsize > 1) {
+					non_small_needed -= 1;
+				}
+			}
+			if (near_border_needed > 0) {
+				if (bf.near_border) {
+					near_border_needed -= 1;
+				}
+			}
+		}
 		bf.field_info_expiration = gametime + kFieldInfoExpiration;
 		buildable_fields.push_back(&bf);
 		buildable_fields.pop_front();
 
 		i += 1;
+	}
+
+	// If needed we iterate once more and look for 'special' fields
+	// starting in the middle of buildable_fields to skip fields tested lately
+	// But not doing this if the count of buildable fields is too low
+	// (no need to bother)
+	if (buildable_fields.size() < kMinimalFieldsCheck * 3) {
+		return;
+	}
+
+	for (uint32_t j = buildable_fields.size() / 2; j < buildable_fields.size(); j++) {
+		// If we dont need to iterate (anymore) ...
+		if (non_small_needed + near_border_needed == 0) {
+			break;
+		}
+
+		// Skip if the field is not ours or was updated lately
+		if (buildable_fields[j]->coords.field->get_owned_by() != player_number()) {
+			continue;
+		}
+		// We are not interested in fields where info has expired less than 20s ago
+		if (buildable_fields[j]->field_info_expiration + 20000 > gametime) {
+			continue;
+		}
+
+		// Continue if field is blocked at the moment
+		if (blocked_fields.is_blocked(buildable_fields[j]->coords)) {
+			continue;
+		}
+
+		// Few constants to keep the code cleaner
+		const int32_t field_maxsize =
+		   player_->get_buildcaps(buildable_fields[j]->coords) & BUILDCAPS_SIZEMASK;
+		const bool field_near_border = buildable_fields[j]->near_border;
+
+		// Let decide if we need to update and for what reason
+		const bool update_due_size = non_small_needed && field_maxsize > 1;
+		const bool update_due_border = near_border_needed && field_near_border;
+
+		if (!(update_due_size || update_due_border)) {
+			continue;
+		}
+
+		// decreasing the counters
+		if (update_due_size) {
+			assert(non_small_needed > 0);
+			non_small_needed -= 1;
+		}
+		if (update_due_border) {
+			assert(near_border_needed > 0);
+			near_border_needed -= 1;
+		}
+
+		// and finnaly update the buildable field
+		update_buildable_field(*buildable_fields[j]);
+		buildable_fields[j]->field_info_expiration = gametime + kFieldInfoExpiration;
 	}
 }
 
@@ -1239,9 +1299,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	   Area<FCoords>(field.coords, actual_enemy_check_area), nullptr, find_enemy_owned_walkable);
 
 	field.nearest_buildable_spot_nearby = std::numeric_limits<uint16_t>::max();
+	field.unowned_buildable_spots_nearby = 0;
+	field.unowned_portspace_vicinity_nearby = 0;
 	if (field.unowned_land_nearby > 0) {
 		std::vector<Coords> found_buildable_fields;
 
+		// first looking for unowned buildable spots
 		field.unowned_buildable_spots_nearby =
 		   map.find_fields(Area<FCoords>(field.coords, kBuildableSpotsCheckArea),
 		                   &found_buildable_fields, find_unowned_buildable);
@@ -1252,8 +1315,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 				field.nearest_buildable_spot_nearby = cur_distance;
 			}
 		}
-	} else {
-		field.unowned_buildable_spots_nearby = 0;
+
+		// now looking for unowned_portspace_vicinity_nearby
+		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(field.coords, kBuildableSpotsCheckArea));
+		do {
+
+			if (mr.location().field->get_owned_by() == 0 &&
+			    ports_vicinity.count(mr.location().hash()) > 0) {
+				field.unowned_portspace_vicinity_nearby += 1;
+			}
+		} while (mr.advance(map));
 	}
 
 	// Is this near the border? Get rid of fields owned by ally
@@ -1301,25 +1372,17 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	}
 
 	// identifying portspace fields
-	if (field.is_portspace ==
-	    Widelands::ExtendedBool::kUnset) {  // if we know it, no need to do it once more
-		if (player_->get_buildcaps(field.coords) & BUILDCAPS_PORT) {
-			field.is_portspace = ExtendedBool::kTrue;
-		} else {
-			field.is_portspace = ExtendedBool::kFalse;
-		}
+	if (player_->get_buildcaps(field.coords) & BUILDCAPS_PORT) {
+		field.is_portspace = ExtendedBool::kTrue;
+	} else {
+		field.is_portspace = ExtendedBool::kFalse;
 	}
 
 	// testing for near portspaces
-	if (field.portspace_nearby == Widelands::ExtendedBool::kUnset) {
+	if (ports_vicinity.count(field.coords.hash()) > 0) {
+		field.portspace_nearby = ExtendedBool::kTrue;
+	} else {
 		field.portspace_nearby = ExtendedBool::kFalse;
-		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(field.coords, 4));
-		do {
-			if (port_reserved_coords.count(mr.location().hash()) > 0) {
-				field.portspace_nearby = ExtendedBool::kTrue;
-				break;
-			}
-		} while (mr.advance(map));
 	}
 
 	// testing if a port is nearby, such field will get a priority boost
@@ -1806,6 +1869,15 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	                     0;
 	score_parts[56] =
 	   (any_unconnected_imm) ? 2 * std::abs(management_data.get_military_number_at(23)) : 0;
+	score_parts[57] = 1 *
+	                  management_data.neuron_pool[18].get_result_safe(
+	                     2 * field.unowned_portspace_vicinity_nearby, kAbsValue);
+	score_parts[58] = 3 *
+	                  management_data.neuron_pool[19].get_result_safe(
+	                     5 * field.unowned_portspace_vicinity_nearby, kAbsValue);
+	score_parts[59] = (field.unowned_portspace_vicinity_nearby) ?
+	                     10 * std::abs(management_data.get_military_number_at(31)) :
+	                     0;
 
 	for (uint16_t i = 0; i < score_parts_size; i++) {
 		field.military_score_ += score_parts[i];
@@ -1978,11 +2050,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	const Map& map = game().map();
 
-	if (gametime % 5 == 0) {
-		// TODO(unknown): Counting port spaces is very primitive way for this
-		// there should be better alternative f.e. like map::allows_seafaring()
-		// function but simplier
-		seafaring_economy = map.get_port_spaces().size() >= 2;
+	if (gametime > last_seafaring_check_ + 20000U) {
+		map_allows_seafaring_ = map.allows_seafaring();
+		last_seafaring_check_ = gametime;
 	}
 
 	for (int32_t i = 0; i < 4; ++i)
@@ -2017,18 +2087,18 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 		log("%2d: Player has achieved the basic economy at %s\n", player_number(),
 		    gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
-		assert(persistent_data->remaining_buildings_size == 0);
+		assert(persistent_data->remaining_basic_buildings.empty());
 	}
 
 	if (!basic_economy_established && player_statistics.any_enemy_seen_lately(gametime) &&
 	    management_data.f_neuron_pool[17].get_position(0)) {
-		log("%2d: Player has not all buildings for basic economy yet (%lu missing), but enemy is "
+		log("%2d: Player has not all buildings for basic economy yet (%" PRIuS
+		    " missing), but enemy is "
 		    "nearby, so quitting the mode at %s\n",
 		    player_number(), persistent_data->remaining_basic_buildings.size(),
 		    gamestring_with_leading_zeros(gametime));
 		basic_economy_established = true;
 		// Zeroing following to preserve consistency
-		persistent_data->remaining_buildings_size = 0;
 		persistent_data->remaining_basic_buildings.clear();
 	}
 
@@ -2452,13 +2522,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				continue;
 			}
 
-			// testing for reserved ports
-			if (!bo.is(BuildingAttribute::kPort)) {
-				if (port_reserved_coords.count(bf->coords.hash()) > 0) {
-					continue;
-				}
-			}
-
 			if (std::rand() % 3 == 0 && bo.total_count() > 0) {
 				continue;
 			}  // add randomnes and ease AI
@@ -2481,10 +2544,21 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			int32_t prio = 0;  // score of a bulding on a field
 
+			// testing for reserved ports
+			if (!bo.is(BuildingAttribute::kPort)) {
+				if (bf->portspace_nearby == ExtendedBool::kTrue) {
+					if (num_ports == 0) {
+						continue;
+					}
+					// If we have at least on port, we can perhaps build here something
+					// but decreasing the score to discourage it
+					prio -= 5 * std::abs(management_data.get_military_number_at(52));
+				}
+			}
+
 			if (bo.type == BuildingObserver::Type::kProductionsite) {
 
-				prio = management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 5;
-				assert(prio >= -20 && prio <= 20);
+				prio += management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 5;
 
 				// this can be only a well (as by now)
 				if (bo.is(BuildingAttribute::kWell)) {
@@ -2497,7 +2571,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						continue;
 					}
 
-					prio = bo.primary_priority;
+					prio += bo.primary_priority;
 
 					// keep wells more distant
 					if (bf->producers_nearby.at(bo.outputs.at(0)) > 2) {
@@ -2514,7 +2588,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				} else if (bo.is(BuildingAttribute::kLumberjack)) {
 
-					prio = bo.primary_priority;
+					prio += bo.primary_priority;
 
 					if (bo.new_building == BuildingNecessity::kForced) {
 						prio += 5 * std::abs(management_data.get_military_number_at(17));
@@ -2539,7 +2613,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Quarries are generally to be built everywhere where rocks are
 					// no matter the need for granite, as rocks are considered an obstacle
 					// to expansion
-					prio = 2 * bf->rocks_nearby;
+					prio += 2 * bf->rocks_nearby;
 
 					if (bf->rocks_nearby > 0 && bf->near_border) {
 						prio += management_data.get_military_number_at(27) / 2;
@@ -2614,8 +2688,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						assert(bo.new_building == BuildingNecessity::kNeeded);
 
-						prio = 0;
-
 						if (bo.total_count() == 0) {
 							prio += 200;
 						} else {
@@ -2675,10 +2747,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						if (bf->enemy_nearby) {
 							prio -= 20;
 						}
+
+						if (bf->unowned_portspace_vicinity_nearby > 0) {
+							prio -= 500;
+						}
 					}
 
 				} else if (bo.is(BuildingAttribute::kRecruitment)) {
-					prio = bo.primary_priority;
+					prio += bo.primary_priority;
 					prio -= bf->unowned_land_nearby * 2;
 					prio -= (bf->enemy_nearby) * 100;
 					prio -= (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 100;
@@ -2690,7 +2766,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						assert(!bo.is(BuildingAttribute::kShipyard));
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						assert(bo.new_building == BuildingNecessity::kAllowed);
-						if (!seafaring_economy) {
+						if (!map_allows_seafaring_) {
 							continue;
 						}
 					} else {
@@ -2729,12 +2805,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						    bf->unowned_mines_spots_nearby) {  // not close to mountains
 							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
 						}
-					}
-
-					else if (bo.is(BuildingAttribute::kShipyard)) {
+					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard
 						assert(bo.total_count() == 0);
-						if (bf->open_water_nearby > 3 && seafaring_economy) {
+						if (bf->open_water_nearby > 3 && map_allows_seafaring_) {
 							prio += productionsites.size() * 5 +
 							        bf->open_water_nearby *
 							           std::abs(management_data.get_military_number_at(109)) / 10;
@@ -2785,7 +2859,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// Consider border with exemption of some huts
 				if (!(bo.is(BuildingAttribute::kLumberjack) || bo.is(BuildingAttribute::kNeedsCoast) ||
 				      bo.is(BuildingAttribute::kFisher))) {
-					prio = recalc_with_border_range(*bf, prio);
+					prio += recalc_with_border_range(*bf, prio);
 				} else if (bf->near_border && (bo.is(BuildingAttribute::kLumberjack) ||
 				                               bo.is(BuildingAttribute::kNeedsCoast))) {
 					prio /= 2;
@@ -2794,12 +2868,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			}  // production sites done
 			else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 
-				assert(prio == 0);
-				prio = bo.primary_priority;
+				prio += bo.primary_priority;
 
 				// Two possibilities why to construct militarysite here
 				if (!bf->defense_msite_allowed &&
-				    bf->nearest_buildable_spot_nearby < bo.desc->get_conquers() &&
+				    (bf->nearest_buildable_spot_nearby < bo.desc->get_conquers() ||
+				     bf->unowned_portspace_vicinity_nearby > 0) &&
 				    (bf->military_in_constr_nearby + bf->military_unstationed) <
 				       concurent_ms_in_constr_no_enemy) {
 					// it will conquer new buildable spots for buildings or mines
@@ -2840,7 +2914,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				if (bf->is_portspace != ExtendedBool::kTrue && bo.is(BuildingAttribute::kPort)) {
 					continue;
 				}
-				prio = bo.primary_priority;
+				prio += bo.primary_priority;
 
 				// iterating over current warehouses and testing a distance
 				// getting distance to nearest warehouse and adding it to a score
@@ -2878,7 +2952,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// Even if a site is forced it has kNeeded necessity now
 				assert(bo.primary_priority > 0 && bo.new_building == BuildingNecessity::kNeeded);
 
-				prio = bo.primary_priority;
+				prio += bo.primary_priority;
 
 				// for spots close to a border
 				if (bf->near_border) {
@@ -2908,13 +2982,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			// Stop here, if priority is 0 or less.
 			if (prio <= 0) {
 				continue;
-			}
-
-			// testing also vicinity
-			if (!bo.is(BuildingAttribute::kPort)) {
-				if (port_reserved_coords.count(bf->coords.hash()) > 0) {
-					continue;
-				}
 			}
 
 			// Prefer road side fields
@@ -3644,12 +3711,11 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// Get link to productionsite that should be checked
 	ProductionSiteObserver& site = productionsites.front();
 
-	// Make sure we are not above ai type limit
+	// Inform if we are above ai type limit.
 	if (site.bo->total_count() > site.bo->cnt_limit_by_aimode) {
-		log("Too many %s: %d, ai limit: %d\n", site.bo->name, site.bo->total_count(),
-		    site.bo->cnt_limit_by_aimode);
+		log("AI check_productionsites: Too many %s: %d, ai limit: %d\n", site.bo->name,
+		    site.bo->total_count(), site.bo->cnt_limit_by_aimode);
 	}
-	assert(site.bo->total_count() <= site.bo->cnt_limit_by_aimode);
 
 	// first we werify if site is working yet (can be unoccupied since the start)
 	if (!site.site->can_start_working()) {
@@ -4274,28 +4340,51 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
                                                        const uint32_t gametime) {
 	bo.primary_priority = 0;
 
-	if (numof_warehouses_in_const_ > 0 ||
-	    bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed || !basic_economy_established) {
+	// First there are situation when we cannot built the warehouse/port
+	// a) This is port and map is not seafaring one
+	if (bo.is(BuildingAttribute::kPort) && !map_allows_seafaring_) {
 		bo.new_building_overdue = 0;
-		bo.primary_priority = 0;
 		return BuildingNecessity::kForbidden;
 	}
 
-	if (bo.is(BuildingAttribute::kPort) && !seafaring_economy) {
+	// b) the site is prohibited
+	if (bo.prohibited_till > gametime) {
 		bo.new_building_overdue = 0;
-		bo.primary_priority = 0;
 		return BuildingNecessity::kForbidden;
 	}
 
-	bo.primary_priority = 0;
+	// If this is a port and is the first bo be built
+	const bool first_port_allowed = (bo.is(BuildingAttribute::kPort) && bo.total_count() == 0);
 
-	//  Build one warehouse for ~every 35 productionsites and mines_.
-	//  Militarysites are slightly important as well, to have a bigger
-	//  chance for a warehouses (containing waiting soldiers or wares
-	//  needed for soldier training) near the frontier.
-	int32_t needed_count = static_cast<int32_t>(productionsites.size() + mines_.size()) /
-	                          (40 + management_data.get_military_number_at(21) / 10) +
-	                       1;
+	// c) there are warehouses in construction (first port is exemption)
+	if (numof_warehouses_in_const_ > 0 && !first_port_allowed) {
+		bo.new_building_overdue = 0;
+		return BuildingNecessity::kForbidden;
+	}
+
+	// d) there is ai limit for this bulding
+	if (bo.aimode_limit_status() != AiModeBuildings::kAnotherAllowed) {
+		bo.new_building_overdue = 0;
+		return BuildingNecessity::kForbidden;
+	}
+
+	// e) basic economy not established, but first port is an exemption
+	if (!basic_economy_established && !first_port_allowed) {
+		bo.new_building_overdue = 0;
+		return BuildingNecessity::kForbidden;
+	}
+
+	// Number of needed warehouses decides if new one is needed and also
+	// converts to the score
+	int32_t needed_count = 0;
+	if (first_port_allowed) {
+		needed_count += numof_warehouses_ + numof_warehouses_in_const_ + 1;
+	} else {
+		needed_count += static_cast<int32_t>(productionsites.size() + mines_.size()) /
+		                   (40 + management_data.get_military_number_at(21) / 10) +
+		                1;
+	}
+
 	assert(needed_count >= 0 &&
 	       needed_count <= (static_cast<uint16_t>(productionsites.size() + mines_.size()) / 10) + 2);
 
@@ -4305,8 +4394,14 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 		++needed_count;
 	}
 
-	if (bo.is(BuildingAttribute::kPort) && (productionsites.size() + mines_.size()) > 10) {
+	// Port should always have higher score than a warehouse
+	if (bo.is(BuildingAttribute::kPort)) {
 		++needed_count;
+	}
+
+	// suppres a warehouse if not enough spots
+	if (spots_ < kSpotsEnough && !bo.is(BuildingAttribute::kPort)) {
+		--needed_count;
 	}
 
 	if (needed_count <= numof_warehouses_in_const_ + numof_warehouses_) {
@@ -4315,12 +4410,12 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 	}
 
 	// So now we know the warehouse here is needed.
-	bo.primary_priority = 1 +
-	                      (needed_count - numof_warehouses_in_const_ - numof_warehouses_) *
-	                         std::abs(management_data.get_military_number_at(22));
+	bo.primary_priority =
+	   1 +
+	   (needed_count - numof_warehouses_) * std::abs(management_data.get_military_number_at(22) * 5);
 	++bo.new_building_overdue;
 	bo.primary_priority +=
-	   bo.new_building_overdue * std::abs(management_data.get_military_number_at(16)) / 40;
+	   bo.new_building_overdue * std::abs(management_data.get_military_number_at(16)) / 10;
 	return BuildingNecessity::kAllowed;
 }
 
@@ -4359,7 +4454,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	}
 
 	// Perhaps buildings are not allowed because the map is no seafaring
-	if (purpose == PerfEvaluation::kForConstruction && !seafaring_economy &&
+	if (purpose == PerfEvaluation::kForConstruction && !map_allows_seafaring_ &&
 	    bo.is(BuildingAttribute::kNeedsSeafaring)) {
 		return BuildingNecessity::kForbidden;
 	}
@@ -4569,7 +4664,12 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	// And finally the 'core' of this function
 	// First deal with construction of new sites
 	if (purpose == PerfEvaluation::kForConstruction) {
-		assert(bo.total_count() <= bo.cnt_limit_by_aimode);
+		// Inform if we are above ai type limit.
+		if (bo.total_count() > bo.cnt_limit_by_aimode) {
+			log("AI check_building_necessity: Too many %s: %d, ai limit: %d\n", bo.name,
+			    bo.total_count(), bo.cnt_limit_by_aimode);
+		}
+
 		if (bo.forced_after < gametime && bo.total_count() == 0 && !has_substitution_building) {
 			if (!bo.is(BuildingAttribute::kBarracks)) {
 				bo.max_needed_preciousness = bo.max_preciousness;
@@ -5415,6 +5515,7 @@ EconomyObserver* DefaultAI::get_economy_observer(Economy& economy) {
 }
 
 // counts buildings with the BuildingAttribute
+// Type of buildings, not individual buildings are meant
 uint8_t DefaultAI::count_buildings_with_attribute(BuildingAttribute attribute) {
 	uint8_t count = 0;
 	if (tribe_ == nullptr) {
@@ -5452,7 +5553,7 @@ uint32_t DefaultAI::count_productionsites_without_buildings() {
 		}
 	}
 
-	return existing / total;
+	return (total > 0) ? (existing / total) : 0;
 }
 
 // \returns the building observer
@@ -5692,15 +5793,12 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 				--persistent_data->remaining_basic_buildings[bo.id];
 			} else {
 				persistent_data->remaining_basic_buildings.erase(bo.id);
-				--persistent_data->remaining_buildings_size;
 			}
 		}
 		// Remaining basic buildings map contain either no entry for the building, or the number is
 		// nonzero
 		assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0 ||
 		       persistent_data->remaining_basic_buildings[bo.id] > 0);
-		assert(persistent_data->remaining_basic_buildings.size() ==
-		       persistent_data->remaining_buildings_size);
 
 		if (bo.type == BuildingObserver::Type::kProductionsite) {
 			productionsites.push_back(ProductionSiteObserver());
@@ -5778,15 +5876,6 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			warehousesites.back().bo = &bo;
 			if (bo.is(BuildingAttribute::kPort)) {
 				++num_ports;
-				// unblock nearby fields, might be used for other buildings...
-				const Map& map = game().map();
-				MapRegion<Area<FCoords>> mr(
-				   map, Area<FCoords>(map.get_fcoords(warehousesites.back().site->get_position()), 3));
-				do {
-					const int32_t hash = map.get_fcoords(*(mr.location().field)).hash();
-					if (port_reserved_coords.count(hash) > 0)
-						port_reserved_coords.erase(hash);
-				} while (mr.advance(map));
 			}
 		}
 	}
@@ -6120,7 +6209,7 @@ uint32_t DefaultAI::msites_built() const {
 // The main purpose of this is when a game creator needs to finetune a map
 // and needs to know what resourcess are missing for which player and so on.
 // By default it is off (see kPrintStats)
-// TODO(tiborb ?): - it would be nice to have this activated by a command line switch
+// TODO(tiborb): - it would be nice to have this activated by a command line switch
 void DefaultAI::print_stats(uint32_t const gametime) {
 
 	if (!kPrintStats) {

@@ -271,7 +271,6 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 	// Now we destroy the old building before we place the new one.
 	// Waiting for the destroy playercommand causes crashes with the building window, so we need to
 	// close it right away.
-	Notifications::publish(NoteBuilding(military_site_->serial(), NoteBuilding::Action::kDeleted));
 	military_site_->set_defeating_player(enemyplayer->player_number());
 	military_site_->schedule_destroy(game);
 
@@ -379,10 +378,11 @@ void MilitarySite::update_statistics_string(std::string* s) {
 		}
 	} else {
 		if (capacity_ > stationed) {
-			/** TRANSLATORS: %1% is the number of soldiers the plural refers to */
-			/** TRANSLATORS: %2% are currently open soldier slots in the building */
-			/** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
+
 			*s = (boost::format(
+			         /** TRANSLATORS: %1% is the number of soldiers the plural refers to */
+			         /** TRANSLATORS: %2% are currently open soldier slots in the building */
+			         /** TRANSLATORS: %3% is the maximum number of soldier slots in the building */
 			         ngettext("%1%(+%2%) soldier (+%3%)", "%1%(+%2%) soldiers (+%3%)", stationed)) %
 			      present % (stationed - present) % (capacity_ - stationed))
 			        .str();

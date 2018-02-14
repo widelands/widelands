@@ -73,7 +73,7 @@ end
 --    :arg text: the text to be enclosed in rich text tags.
 --    :type text: :class:`string`
 --    :returns: the wrapped rich text.
---
+
 function rt(text_or_attributes, text)
    if text then
       return "<rt " .. text_or_attributes .. ">" .. text .. "</rt>"
@@ -99,7 +99,7 @@ end
 --       ref:       TODO(GunChleoc): I have no idea what it does.
 --
 --    :returns: the img tag.
---
+
 function img(src, attributes)
    if attributes then
       return "<img src=" .. src .." " .. attributes .. ">"
@@ -124,9 +124,9 @@ end
 --    :returns: A paragraph with text formatted as heading.
 function h1(text_or_color, text)
    if text then
-      return p_font("", "size=18 bold=1 color=".. text_or_color, vspace(6) .. text .. vspace(1))
+      return p_font("", "size=18 bold=1 color=".. text_or_color, vspace(12) .. text .. vspace(1))
    else
-      return p_font("", "size=18 bold=1 color=D1D1D1", vspace(6) .. text_or_color .. vspace(1))
+      return p_font("", "size=18 bold=1 color=D1D1D1", vspace(12) .. text_or_color .. vspace(1))
    end
 end
 
@@ -138,7 +138,7 @@ end
 --
 --    :returns: A paragraph with text formatted as heading.
 function h2(text)
-   return p_font("", "size=14 bold=1 color=D1D1D1", vspace(6) .. text .. vspace(1))
+   return p_font("", "size=14 bold=1 color=D1D1D1", vspace(12) .. text .. vspace(1))
 end
 
 -- RST
@@ -148,9 +148,9 @@ end
 --    Like :func:`h2` but smaller.
 --
 --    :returns: A paragraph with text formatted as heading.
---
+
 function h3(text)
-   return p_font("", "size=13 color=D1D1D1", vspace(4) .. text .. vspace(1))
+   return p_font("", "size=13 color=D1D1D1", vspace(6) .. text .. vspace(1))
 end
 
 -- RST
@@ -160,7 +160,7 @@ end
 --    Like :func:`h3` but smaller.
 --
 --    :returns: A paragraph with text formatted as heading.
---
+
 function h4(text)
    return p_font("", "size=12 italic=1 color=D1D1D1", text)
 end
@@ -233,7 +233,7 @@ end
 --
 --    :returns: The closing tags for a paragraph
 function close_p(t)
-   return vspace(6) .. "</font></p>"
+   return vspace(6) .. "</font>" .. vspace(6)  .. "</p>"
 end
 
 -- RST
@@ -252,7 +252,7 @@ end
 --       ref:       TODO(GunChleoc): I don't know what this does.
 --
 --    :returns: The text wrapped in font tags with the given attributes
---
+
 function font(attributes, text)
    return ("<font %s>"):format(attributes) .. text .. "</font>"
 end
@@ -264,7 +264,7 @@ end
 --    :arg gap: the size of the space as pixels.
 --
 --    :returns: a space tag
---
+
 function space(gap)
    return "<space gap="..gap..">"
 end
@@ -276,7 +276,7 @@ end
 --    :arg gap: the size of the space as pixels.
 --
 --    :returns: a vspace tag
---
+
 function vspace(gap)
    return "<vspace gap="..gap..">"
 end
@@ -290,7 +290,7 @@ end
 --    :arg dd: "description data", will be rendered normally.
 --
 --    :returns: a p tag containing the formatted text
---
+
 function dl(dt, dd)
    return p(b(dt) .. " " .. dd)
 end
@@ -304,12 +304,13 @@ end
 --    :arg symbol: the item symbol for the list, e.g. "•" or "→"
 --    :arg text: the text of the list item
 --
---    :returns: a p tag containint the formatted text
+--    :returns: a p tag containing the formatted text
+
 function li(text_or_symbol, text)
    if text then
-      return p(text_or_symbol .. " " .. text .. vspace(6))
+      return div(p(text_or_symbol)) .. div(p(space(6))) .. div("width=*", p(text .. vspace(6)))
    else
-      return p("• " .. text_or_symbol .. vspace(6))
+      return div(p("•")) .. div(p(space(6))) .. div("width=*", p(text_or_symbol .. vspace(6)))
    end
 end
 
@@ -335,13 +336,15 @@ end
 --    :arg text_width_percent: the percentatge of space that the text will occupy
 --    :arg text: the text to be placed next to the image
 --
---    :returns: the text wrapped in a paragraph and placed next to the image, The outer tag is a div.
-function li_image(imagepath, text_width_percent, text)
-   return p("<br>") .. div("width=100%", "") ..
-         div(p(img(imagepath))) ..
+--    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
+
+function li_image(imagepath, text)
+   return
+      div("width=100%",
+         div(p(vspace(6) .. img(imagepath) .. space(6))) ..
          div(p(space(6))) ..
-         div("width="..text_width_percent.."%", p(text)) ..
-         div("width=100%", "")
+         div("width=*", p(vspace(6) .. text .. vspace(12)))
+      )
 end
 
 -- RST
@@ -352,7 +355,7 @@ end
 --    :arg link: the text to format
 --
 --    :returns: a font tag containing the underlined text
---
+
 function a(link)
    return font("underline=1", link)
 end
@@ -365,7 +368,7 @@ end
 --    :arg link: the text to format
 --
 --    :returns: a font tag containing the bold text
---
+
 function b(text)
    return font("bold=1", text)
 end
@@ -378,7 +381,7 @@ end
 --    :arg link: the text to format
 --
 --    :returns: a font tag containing the italic text
---
+
 function i(text)
    return font("italic=1", text)
 end
@@ -390,7 +393,7 @@ end
 --    :arg link: the text to format
 --
 --    :returns: a font tag containing the underlined text
---
+
 function u(text)
    return font("underline=1", text)
 end
@@ -415,11 +418,43 @@ end
 --    :arg text: the text to be enclosed in div tags.
 --    :type text: :class:`string`
 --    :returns: the text wrapped in a div tag.
---
+
 function div(text_or_attributes, text)
    if text then
       return ("<div %s>"):format(text_or_attributes) .. text .. "</div>"
    else
       return ("<div>") .. text_or_attributes .. "</div>"
    end
+end
+
+-- RST
+-- .. function:: inline_header(t1, t2)
+--
+--    Creates a line of h3 formatted text followed by normal paragraph text.
+--
+--    :arg t1: text in h3 format.
+--    :arg t2: text in p format.
+--    :returns: header text followed by normal text.
+
+function inline_header(header, text)
+   return
+      div("width=100%", vspace(8)) ..
+      div("width=100%", font("size=13 color=D1D1D1", header .. " ") ..
+      font("size=12", text))
+end
+
+-- RST
+-- .. function:: join_sentences(sentence1, sentence2)
+--
+--    Joins 2 sentences together. Use this rather than manually concatenating
+--    a blank space, because some languages don't use blank spaces.
+--
+--    :arg sentence1: text of the first sentence
+--    :arg sentence2: text of the second sentence
+--    :returns: two concatenated sentences with a localized sentence joiner.
+--
+function join_sentences(sentence1, sentence2)
+   -- TRANSLATORS: Put 2 sentences one after the other.
+   -- TRANSLATORS: Languages using Chinese script probably want to lose the blank space here.
+   return pgettext("sentence_separator", "%s %s"):bformat(sentence1, sentence2)
 end

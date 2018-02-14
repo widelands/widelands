@@ -25,12 +25,17 @@ fi
 # Configure the build
 mkdir build
 cd build
-cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE"
+cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_ASAN="OFF"
 
 if [ "$BUILD_TYPE" == "Debug" ]; then
 
    # Build the documentation. Any warning is an error.
-   sudo pip install sphinx
+   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+     sudo pip install sphinx
+   fi
+   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+     pip2 install sphinx
+   fi
    pushd ../doc/sphinx
    mkdir source/_static
    ./extract_rst.py
@@ -45,7 +50,7 @@ if [ "$BUILD_TYPE" == "Debug" ]; then
    # Any codecheck warning is an error in Debug builds. Keep the codebase clean!!
    # Suppress color output.
    TERM=dumb make -j1 codecheck 2>&1 | tee codecheck.out
-   if grep '^[/_.a-zA-Z]\+:[0-9]\+:' codecheck.out; then 
+   if grep '^[/_.a-zA-Z]\+:[0-9]\+:' codecheck.out; then
       echo "You have codecheck warnings (see above) Please fix."
       exit 1 # CodeCheck warnings.
    fi
