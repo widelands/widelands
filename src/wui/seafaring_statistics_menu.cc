@@ -316,16 +316,16 @@ void SeafaringStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 	}
 	// Try to find the ship in the table
 	if (data_.count(info->serial) == 1) {
-		const ShipInfo* old_info = data_[info->serial];
+		const ShipInfo* old_info = data_[info->serial].get();
 		if (info->status != old_info->status) {
 			// The status has changed - we need an update
-			data_[info->serial] = info;
+			data_[info->serial] = std::unique_ptr<const ShipInfo>(info);
 			UI::Table<uintptr_t>::EntryRecord* er = table_.find(info->serial);
 			set_entry_record(er, *info);
 		}
 	} else {
-		// This is a new ship or it was filteres away before
-		data_.insert(std::make_pair(info->serial, info));
+		// This is a new ship or it was filtered away before
+		data_.insert(std::make_pair(info->serial, std::unique_ptr<const ShipInfo>(info)));
 		UI::Table<uintptr_t>::EntryRecord& er = table_.add(info->serial);
 		set_entry_record(&er, *info);
 	}
@@ -539,8 +539,8 @@ bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info, ShipFilterS
 
 void SeafaringStatisticsMenu::fill_table() {
 	const Widelands::Serial last_selection = table_.has_selection() ? table_.get_selected() : Widelands::INVALID_INDEX;
-	data_.clear();
 	table_.clear();
+	data_.clear();
 	set_buttons_enabled();
 	for (const auto& serial : iplayer().player().ships()) {
 		Widelands::Ship* ship = serial_to_ship(serial);
@@ -548,7 +548,7 @@ void SeafaringStatisticsMenu::fill_table() {
 		const ShipInfo* info = create_shipinfo(*ship);
 		if (info->status != ShipFilterStatus::kAll) {
 			if (ship_filter_ == ShipFilterStatus::kAll || satisfies_filter(*info, ship_filter_)) {
-				data_.insert(std::make_pair(serial, info));
+				data_.insert(std::make_pair(serial, std::unique_ptr<const ShipInfo>(info)));
 				UI::Table<uintptr_t const>::EntryRecord& er = table_.add(serial, serial == last_selection);
 				set_entry_record(&er, *info);
 			}

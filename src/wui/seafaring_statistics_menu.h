@@ -83,7 +83,7 @@ private:
 		const Widelands::Serial serial;
 	};
 
-	/// Creates our dataset from a 'ship'
+	/// Creates our dataset from a 'ship'. Make sure to take ownership of the result.
 	const ShipInfo* create_shipinfo(const Widelands::Ship& ship) const;
 	/// Uses the 'serial' to identify and get a ship from the game.
 	Widelands::Ship* serial_to_ship(Widelands::Serial serial) const;
@@ -150,7 +150,7 @@ private:
 
 	// Data
 	UI::Table<uintptr_t> table_;
-	std::unordered_map<Widelands::Serial, const ShipInfo*> data_;
+	std::unordered_map<Widelands::Serial, std::unique_ptr<const ShipInfo>> data_;
 
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 };
