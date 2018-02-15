@@ -2703,11 +2703,11 @@ void Worker::add_sites(Game& game,
 		upcast(Flag, aflag, vu.object);
 		Building* a_building = aflag->get_building();
 		// Assuming that this always succeeds.
-		if (upcast(MilitarySite const, ms, a_building)) {
+		if (a_building->descr().type() == MapObjectType::MILITARYSITE) {
 			// This would be safe even if this assert failed: Own militarysites are always visible.
 			// However: There would be something wrong with FindForeignMilitarySite or associated
 			// code. Hence, let's keep the assert.
-			assert(&ms->owner() != &player);
+			assert(&a_building->owner() != &player);
 			const Coords buildingpos = a_building->get_positions(game)[0];
 			// Check the visibility: only invisible ones interest the scout.
 			MapIndex mx = map.get_index(buildingpos, map.get_width());
