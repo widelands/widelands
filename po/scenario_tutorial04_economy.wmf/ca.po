@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2017-12-28 17:49+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -197,7 +197,7 @@ msgstr "Ara és el vostre torn"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:92
 msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know"
-" whether we still have taverns, so you have to choose the ‘Medium Buildings’"
+" whether we still have taverns, so you have to choose the ‘Medium buildings’"
 " tab. Close the building statistics menu afterwards."
 msgstr "Ja està bé d'explicacions per ara. Practiquem-ho una mica. Volem saber si encara tenim tavernes, així que heu d'escollir la pestanya d'«Edificis mitjans». Després tanqueu la finestra d'«Estadístiques d'edificis»."
 
@@ -207,7 +207,7 @@ msgid "Look up how many taverns you have."
 msgstr "Busqueu quantes tavernes teniu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
-msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
+msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
 msgstr "Escolliu la pestanya d'edificis mitjans de la finestra d'estadístiques d'edificis."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
@@ -290,7 +290,7 @@ msgid ""
 "The stock menu window has four tabs. The first (and currently selected) one "
 "shows you all your current wares, including those on roads, at flags and "
 "inside buildings waiting for processing."
-msgstr "La finestra de l'estoc té quatre pestanyes. La primera (la que està seleccionada ara) mostra els béns actuals, incloent-hi els que hi ha en els camins, banderes i dins dels edificis esperant ser processats."
+msgstr "La finestra d'estoc té quatre pestanyes. La primera (la que està seleccionada ara) mostra els béns actuals, incloent-hi els que hi ha en els camins, banderes i dins dels edificis esperant ser processats."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:154
 msgid ""
@@ -509,7 +509,7 @@ msgid "I’ll continue as soon as you click on the"
 msgstr "El tutorial continuarà quan facis clic en la"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
-msgid "third tab (‘Economy Health’)."
+msgid "third tab (‘Economy health’)."
 msgstr "tercera pestanya: «Salut econòmica»."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
@@ -839,7 +839,7 @@ msgstr "Aquest era l'últim tutorial que us tenia preparat. Us he ensenyat tot e
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr "«%s»"
 
 #: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"

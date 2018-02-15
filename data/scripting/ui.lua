@@ -67,7 +67,7 @@ end
 --
 function mouse_to_pixel(x, y)
    _await_animation()
-   wl.ui.MapView():mouse_to_pixel(x, y)
+   wl.ui.MapView():mouse_to_pixel(math.floor(x), math.floor(y))
    _await_animation()
 end
 

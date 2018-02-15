@@ -37,11 +37,11 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
      player_(plr),
      windows_(windows),
      box_(this, 0, 0, UI::Box::Horizontal, 0, 0, 5) {
-	add_button("wui/menus/menu_general_stats", "general_stats", _("General Statistics"),
+	add_button("wui/menus/menu_general_stats", "general_stats", _("General statistics"),
 	           &windows_.general_stats);
 	add_button(
-	   "wui/menus/menu_ware_stats", "ware_stats", _("Ware Statistics"), &windows_.ware_stats);
-	add_button("wui/menus/menu_building_stats", "building_stats", _("Building Statistics"),
+	   "wui/menus/menu_ware_stats", "ware_stats", _("Ware statistics"), &windows_.ware_stats);
+	add_button("wui/menus/menu_building_stats", "building_stats", _("Building statistics"),
 	           &windows_.building_stats);
 	add_button("wui/menus/menu_stock", "stock", _("Stock"), &windows_.stock);
 	box_.set_pos(Vector2i(10, 10));
@@ -72,10 +72,13 @@ UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
 	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	box_.add(button);
 	if (window) {
-		if (!window->on_create) {
-			window->assign_toggle_button(button);
-			registries_.push_back(*window);
+		if (window->window) {
+			button->set_style(UI::Button::Style::kPermpressed);
 		}
+		window->opened.connect(
+		   boost::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed));
+		window->closed.connect(
+		   boost::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised));
 		button->sigclicked.connect(
 		   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
 	}
@@ -83,7 +86,4 @@ UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
 }
 
 GameStatisticsMenu::~GameStatisticsMenu() {
-	for (auto& registry : registries_) {
-		registry.unassign_toggle_button();
-	}
 }

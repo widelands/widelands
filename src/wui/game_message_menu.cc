@@ -620,7 +620,6 @@ void GameMessageMenu::update_archive_button_tooltip() {
 	switch (mode) {
 	case Archive:
 		if (no_selections > 1) {
-
 			button_tooltip =
 					/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
 					 * DO NOT omit the placeholder in your translation.
@@ -636,7 +635,6 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		break;
 	case Inbox:
 		if (no_selections > 1) {
-
 			button_tooltip =
 					/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
 					 * DO NOT omit the placeholder in your translation.

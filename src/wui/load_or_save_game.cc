@@ -20,6 +20,7 @@
 #include "wui/load_or_save_game.h"
 
 #include <ctime>
+#include <memory>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
@@ -33,7 +34,6 @@
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/replay.h"
@@ -168,8 +168,8 @@ bool LoadOrSaveGame::compare_date_descending(uint32_t rowa, uint32_t rowb) const
 	return r1.savetimestamp < r2.savetimestamp;
 }
 
-const SavegameData* LoadOrSaveGame::entry_selected() {
-	SavegameData* result = new SavegameData();
+std::unique_ptr<SavegameData> LoadOrSaveGame::entry_selected() {
+	std::unique_ptr<SavegameData> result(new SavegameData());
 	size_t selections = table_.selections().size();
 	if (selections == 1) {
 		delete_->set_tooltip(
@@ -178,7 +178,7 @@ const SavegameData* LoadOrSaveGame::entry_selected() {
 		      _("Delete this replay") :
 		      /** TRANSLATORS: Tooltip for the delete button. The user has selected 1 file */
 		      _("Delete this game"));
-		result = &games_data_[table_.get_selected()];
+		result.reset(new SavegameData(games_data_[table_.get_selected()]));
 	} else if (selections > 1) {
 		delete_->set_tooltip(
 		   filetype_ == FileType::kReplay ?
@@ -271,7 +271,7 @@ void LoadOrSaveGame::clicked_delete() {
 
 		UI::WLMessageBox confirmationBox(
 		   parent_->get_parent()->get_parent(),
-		   ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+		   ngettext("Confirm Deleting File", "Confirm Deleting Files", no_selections), message,
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
 	}
@@ -286,7 +286,7 @@ void LoadOrSaveGame::clicked_delete() {
 		fill_table();
 
 		// Select something meaningful if possible, then scroll to it.
-		const uint32_t selectme = std::max(0U, *selections.begin());
+		const uint32_t selectme = *selections.begin();
 		if (selectme < table_.size() - 1) {
 			table_.select(selectme);
 		} else if (!table_.empty()) {
@@ -413,8 +413,8 @@ void LoadOrSaveGame::fill_table() {
 					gamedata.savedatestring =
 					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 					      month day, year */
-					   (boost::format(_("%2% %1%, %3%")) % savedate->tm_mday %
-					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
+					   (boost::format(_("%1% %2%, %3%")) % localize_month(savedate->tm_mon) %
+					    savedate->tm_mday % (1900 + savedate->tm_year))
 					      .str();
 					gamedata.savedonstring =
 					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:

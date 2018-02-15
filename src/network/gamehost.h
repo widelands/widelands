@@ -40,7 +40,7 @@ struct Client;
  */
 struct GameHost : public GameController {
 	GameHost(const std::string& playername, bool internet = false);
-	virtual ~GameHost();
+	~GameHost() override;
 
 	void run();
 	const std::string& get_local_playername() const;

@@ -46,7 +46,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
    EditorInteractive& parent,
    EditorIncreaseResourcesTool& increase_tool,
    UI::UniqueWindow::Registry& registry)
-   : EditorToolOptionsMenu(parent, registry, 350, 120, _("Resources")),
+   : EditorToolOptionsMenu(parent, registry, 370, 120, _("Resources")),
      increase_tool_(increase_tool),
      box_(this, hmargin(), vmargin(), UI::Box::Vertical, 0, 0, vspacing()),
      change_by_(&box_,
@@ -57,7 +57,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
                 increase_tool_.get_change_by(),
                 1,
                 kMaxValue,
-                _("Increase/Decrease Value:"),
+                _("Increase/Decrease amount by:"),
                 UI::SpinBox::Units::kNone,
                 g_gr->images().get("images/ui_basic/but1.png"),
                 UI::SpinBox::Type::kSmall),
@@ -69,7 +69,7 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              increase_tool_.set_tool().get_set_to(),
              0,
              kMaxValue,
-             _("Set Value:"),
+             _("Set amount to:"),
              UI::SpinBox::Units::kNone,
              g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall),
@@ -82,7 +82,8 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	     "Shift + Click on the map to decrease the amount of the selected resource"));
 	set_to_.set_tooltip(
 	   /** TRANSLATORS: Editor set rseources access key. **/
-	   _("Ctrl + Click on the map to set the amount of the selected resource"));
+	   _("Ctrl + Click on the map to set the amount of the selected resource. This will replace "
+	     "already set resources."));
 
 	change_by_.changed.connect(
 	   boost::bind(&EditorToolChangeResourcesOptionsMenu::update_change_by, boost::ref(*this)));
@@ -94,16 +95,16 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
 	box_.set_size(get_inner_w() - 2 * hmargin(), change_by_.get_h() + set_to_.get_h() + vspacing());
 
 	// Add resource buttons
+	resources_box_.add_inf_space();
 	const Widelands::World& world = parent.egbase().world();
-	const Widelands::DescriptionIndex nr_resources = world.get_nr_resources();
-
-	for (Widelands::DescriptionIndex i = 0; i < nr_resources; ++i) {
+	for (Widelands::DescriptionIndex i = 0; i < world.get_nr_resources(); ++i) {
 		const Widelands::ResourceDescription& resource = *world.get_resource(i);
 		radiogroup_.add_button(&resources_box_, Vector2i::zero(),
 		                       g_gr->images().get(resource.representative_image()),
 		                       resource.descname());
 		resources_box_.add(radiogroup_.get_first_button(), UI::Box::Resizing::kFillSpace);
 	}
+	resources_box_.add_inf_space();
 
 	box_.add_space(vspacing());
 	box_.add(&resources_box_, UI::Box::Resizing::kFullSize);

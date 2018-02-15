@@ -33,7 +33,7 @@ It also manages the list of wares in the warehouse.
 struct WarehouseSupply : public Supply {
 	explicit WarehouseSupply(Warehouse* const wh) : economy_(nullptr), warehouse_(wh) {
 	}
-	virtual ~WarehouseSupply();
+	~WarehouseSupply() override;
 
 	void set_economy(Economy*);
 

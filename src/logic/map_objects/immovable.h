@@ -207,7 +207,7 @@ public:
 	/// display information about it.
 	Immovable(const ImmovableDescr&,
 	          const Widelands::BuildingDescr* former_building_descr = nullptr);
-	~Immovable();
+	~Immovable() override;
 
 	Coords get_position() const {
 		return position_;
@@ -330,7 +330,7 @@ private:
  */
 struct PlayerImmovable : public BaseImmovable {
 	explicit PlayerImmovable(const MapObjectDescr&);
-	virtual ~PlayerImmovable();
+	~PlayerImmovable() override;
 
 	Player* get_owner() const {
 		return owner_;

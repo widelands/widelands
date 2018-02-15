@@ -3,12 +3,13 @@
 # 
 # Translators:
 # ks k, 2017
+# ks k, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-11 07:38+0000\n"
-"PO-Revision-Date: 2017-11-16 16:53+0000\n"
+"POT-Creation-Date: 2017-11-25 03:55+0000\n"
+"PO-Revision-Date: 2017-11-29 18:05+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +24,7 @@ msgstr "오소리"
 
 #: ../../data/world/critters/brownbear/init.lua:15
 msgid "Brown bear"
-msgstr "갈색 곰"
+msgstr "붉은 곰"
 
 #: ../../data/world/critters/bunny/init.lua:14
 msgid "Bunny"
@@ -31,7 +32,7 @@ msgstr "토끼"
 
 #: ../../data/world/critters/chamois/init.lua:15
 msgid "Chamois"
-msgstr "샤무아"
+msgstr "산양"
 
 #: ../../data/world/critters/deer/init.lua:15
 msgid "Deer"
@@ -43,7 +44,7 @@ msgstr "오리"
 
 #: ../../data/world/critters/elk/init.lua:20
 msgid "Elk"
-msgstr "와피티사슴"
+msgstr "큰사슴"
 
 #: ../../data/world/critters/fox/init.lua:20
 msgid "Fox"
@@ -75,7 +76,7 @@ msgstr "멧돼지"
 
 #: ../../data/world/critters/wisent/init.lua:15
 msgid "Wisent"
-msgstr "유럽들소"
+msgstr "들소"
 
 #: ../../data/world/critters/wolf/init.lua:20
 msgid "Wolf"
