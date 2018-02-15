@@ -1,6 +1,6 @@
 set_textdomain("tribes_encyclopedia")
 
-include "scripting/formatting.lua"
+include "scripting/richtext.lua"
 include "txts/help/common_helptexts.lua"
 
 local toggle_minimap_hotkey = help_toggle_minimap_hotkey()
@@ -12,7 +12,6 @@ set_textdomain("tribes_encyclopedia")
 return {
    title = _"Controls",
    text =
-      rt(
          h2(_"Window Control") ..
          p(
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
@@ -105,5 +104,4 @@ return {
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Delete")), _"Archive/Restore the current message")
           )
-      )
 }

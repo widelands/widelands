@@ -34,6 +34,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
+#include "logic/see_unsee_node.h"
 #include "logic/widelands.h"
 
 class Node;
@@ -146,7 +147,6 @@ public:
 	// For cheating
 	void set_see_all(bool const t) {
 		see_all_ = t;
-		view_changed_ = true;
 	}
 	bool see_all() const {
 		return see_all_;
@@ -155,41 +155,49 @@ public:
 	/// Data that are used and managed by AI. They are here to have it saved as a part of player's
 	/// data
 	struct AiPersistentState {
+		// TODO(tiborb): this should be replaced by command line switch
+		static constexpr size_t kMagicNumbersSize = 200;
+		static constexpr size_t kNeuronPoolSize = 80;
+		static constexpr size_t kFNeuronPoolSize = 60;
+
+		// Seafaring constants for controlling expeditions
+		static constexpr uint32_t kColonyScanStartArea = 35;
+		static constexpr uint32_t kColonyScanMinArea = 12;
+		static constexpr uint32_t kNoExpedition = 0;
+
 		AiPersistentState()
-		   : initialized(0),  // zero here is important, it means "~first time"
+		   : initialized(false),
 		     colony_scan_area(0),
 		     trees_around_cutters(0),
 		     expedition_start_time(0),
 		     ships_utilization(0),
-		     no_more_expeditions(0),
+		     no_more_expeditions(false),
 		     last_attacked_player(0),
 		     least_military_score(0),
 		     target_military_score(0),
 		     ai_productionsites_ratio(0),
 		     ai_personality_mil_upper_limit(0),
-		     magic_numbers_size(0),
-		     neuron_pool_size(0),
-		     f_neuron_pool_size(0),
-		     remaining_buildings_size(0) {
+		     magic_numbers(kMagicNumbersSize, 0),
+		     neuron_weights(kNeuronPoolSize, 0),
+		     neuron_functs(kNeuronPoolSize, 0),
+		     f_neurons(kFNeuronPoolSize, 0) {
 		}
 
+		void initialize();
+
 		// Was initialized
-		uint8_t initialized;
+		bool initialized;
 		uint32_t colony_scan_area;
 		uint32_t trees_around_cutters;
 		uint32_t expedition_start_time;
 		int16_t
 		   ships_utilization;  // 0-10000 to avoid floats, used for decision for building new ships
-		uint8_t no_more_expeditions;
+		bool no_more_expeditions;
 		int16_t last_attacked_player;
 		int32_t least_military_score;
 		int32_t target_military_score;
 		uint32_t ai_productionsites_ratio;
 		int32_t ai_personality_mil_upper_limit;
-		uint32_t magic_numbers_size;
-		uint32_t neuron_pool_size;
-		uint32_t f_neuron_pool_size;
-		uint32_t remaining_buildings_size;
 		std::vector<int16_t> magic_numbers;
 		std::vector<int8_t> neuron_weights;
 		std::vector<int8_t> neuron_functs;
@@ -209,6 +217,7 @@ public:
 		     roads(0),
 		     owner(0),
 		     time_node_last_unseen(0),
+		     map_object_descr(nullptr),
 		     border(0),
 		     border_r(0),
 		     border_br(0),
@@ -220,9 +229,6 @@ public:
 
 			time_triangle_last_surveyed[0] = never();
 			time_triangle_last_surveyed[1] = never();
-
-			//  Initialized for debug purposes only.
-			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = nullptr;
 		}
 
 		/// Military influence is exerted by buildings with the help of soldiers.
@@ -377,7 +383,7 @@ public:
 		 * Only valid when the player has seen this node (or maybe a nearby node
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
-		const MapObjectDescr* map_object_descr[3];
+		const MapObjectDescr* map_object_descr;
 
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node
@@ -405,9 +411,7 @@ public:
 		//  time_triangle_last_surveyed[0]  0x040  0x20   0x040  0x20
 		//  time_triangle_last_surveyed[1]  0x060  0x20   0x060  0x20
 		//  time_node_last_unseen           0x080  0x20   0x080  0x20
-		//  map_object_descr[0]             0x0a0  0x20   0x0a0  0x40
-		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
-		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
+		//  map_object_descr                0x0a0  0x20   0x0a0  0x40
 		//  ConstructionsiteInformation
 		//  border
 		//  border_r
@@ -429,37 +433,25 @@ public:
 		return (see_all_ ? 2 : 0) + fields_[i].vision;
 	}
 
-	bool has_view_changed() {
-		bool t = view_changed_;
-		view_changed_ = false;
-		return t;
-	}
-
 	/**
 	 * Update this player's information about this node and the surrounding
 	 * triangles and edges.
 	 */
-	void see_node(const Map&,
-	              const Widelands::Field& first_map_field,
-	              const FCoords&,
-	              const Time,
-	              const bool forward = false);
+	Vision see_node(const Map&, const FCoords&, const Time, const bool forward = false);
 
 	/// Decrement this player's vision for a node.
-	enum class UnseeNodeMode { kUnsee, kUnexplore };
-	void
-	unsee_node(MapIndex, Time, UnseeNodeMode mode = UnseeNodeMode::kUnsee, bool forward = false);
+
+	Vision
+	unsee_node(MapIndex, Time, SeeUnseeNode mode = SeeUnseeNode::kUnsee, bool forward = false);
 
 	/// Call see_node for each node in the area.
 	void see_area(const Area<FCoords>& area) {
 		const Time gametime = egbase().get_gametime();
 		const Map& map = egbase().map();
-		const Widelands::Field& first_map_field = map[0];
 		MapRegion<Area<FCoords>> mr(map, area);
 		do {
-			see_node(map, first_map_field, mr.location(), gametime);
+			see_node(map, mr.location(), gametime);
 		} while (mr.advance(map));
-		view_changed_ = true;
 	}
 
 	/// Decrement this player's vision for each node in an area.
@@ -471,8 +463,14 @@ public:
 		do
 			unsee_node(mr.location().field - &first_map_field, gametime);
 		while (mr.advance(map));
-		view_changed_ = true;
 	}
+
+	/// Explicitly hide or reveal the field at 'c'. The modes are as follows:
+	/// - kUnsee:     Decrement the field's vision
+	/// - kUnexplore: Set the field's vision to 0
+	/// - kReveal:    If the field was hidden previously, restore the vision to the value it had
+	///               at the time of hiding. Otherwise, increment the vision.
+	void hide_or_reveal_field(const uint32_t gametime, const Coords& c, SeeUnseeNode mode);
 
 	MilitaryInfluence military_influence(MapIndex const i) const {
 		return fields_[i].military_influence;
@@ -614,7 +612,7 @@ private:
 	// Called when a node becomes seen or has changed.  Discovers the node and
 	// those of the 6 surrounding edges/triangles that are not seen from another
 	// node.
-	void rediscover_node(const Map&, const Widelands::Field&, const FCoords&);
+	void rediscover_node(const Map&, const FCoords&);
 
 	std::unique_ptr<Notifications::Subscriber<NoteImmovable>> immovable_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<NoteFieldTerrainChanged>>
@@ -630,7 +628,6 @@ private:
 	std::vector<Player*> team_player_;
 	bool team_player_uptodate_;
 	bool see_all_;
-	bool view_changed_;
 	const PlayerNumber player_number_;
 	const TribeDescr& tribe_;  // buildings, wares, workers, sciences
 	uint32_t casualties_, kills_;
@@ -644,6 +641,9 @@ private:
 	Economies economies_;
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
+
+	// Fields that were explicitly hidden, with their vision at the time of hiding
+	std::map<MapIndex, Widelands::Vision> hidden_fields_;
 
 	/**
 	 * Wares produced (by ware id) since the last call to @ref sample_statistics

@@ -44,7 +44,7 @@ tribes:new_productionsite_type {
    aihints = {
       needs_water = true,
       shipyard = true,
-      prohibited_till = 1500
+      prohibited_till = 1050
    },
 
    working_positions = {

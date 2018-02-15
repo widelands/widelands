@@ -1,3 +1,52 @@
+widelands (1:19+repack-4widelands1) UNRELEASED; urgency=medium
+
+  * Changed build dependencies:
+      - New build dependencies required:
+        libboost-system-dev
+      - No longer needed;
+        libsdl2-net-dev
+      - Also dropped version-specific glew alternative.
+        1.6 doesn't seem to be around anymore and the versionless one
+        seems to work across the different distro releases we build for
+  * Build with ASAN disabled since parts of the code atm breaks
+  * Merged Debian packaging of Widelands 1:19+repack-4. Remaining changes:
+    - Revert debhelper/compat level to 9. (Ubuntu 14.04 doesn't have debhelper 10.)
+    - Disabled all Debian-patches since applying them might cause conflicts as
+      development moves along in latest trunk. They mostly concern
+      architectures which we don't have access to build/test with normally, so
+      they would be hard to maintain.
+    - Dropped patches:
+        gcc7 
+          (Already applied in trunk)
+        system-wide_minizip
+          (Should be included in trunk once we iron out the remaining bugs)
+    - Build using embedded minizip since we support older Ubuntu releases where
+      the package is not available.
+    - .stub-files to make widelands.desktop and appdata localizable.
+    - Additional translations for appdata and desktop file.
+    - Re-added font entries to copyright file, since we will most likely be using
+      the embedded fonts.
+    - Modified rules to use our embedded fonts and install all binaries.
+    - Comment out get-orig-source. We just want to build current trunk
+
+ -- Widelands <widelands-dev@lists.launchpad.net>  Sat, 26 Aug 2017 11:14:47 +0200
+
+widelands (1:19+repack-4) unstable; urgency=medium
+
+  * Team upload.
+  * Remove empty gbp.conf file.
+  * Switch to compat level 10.
+  * Declare compliance with Debian Policy 4.1.0.
+  * Vcs-Browser: Use canonical Vcs-URI.
+  * Do not convert png files to xpm anymore. Drop imagemagick from B-D.
+  * Move font dependencies from widelands to widelands-data. (Closes: #861043)
+  * Add gcc7.patch and fix FTBFS with GCC 7. (Closes: #871114)
+  * Drop -dbg package and use the automatically provided -dbgsym package
+    instead.
+  * Install appdata file into canonical /usr/share/metainfo directory.
+
+ -- Markus Koschany <apo@debian.org>  Thu, 24 Aug 2017 00:05:16 +0200
+
 widelands (1:19+repack-3widelands1) UNRELEASED; urgency=medium
 
   * Changed build dependencies:
@@ -33,7 +82,7 @@ widelands (1:19+repack-3) unstable; urgency=medium
 
   * Pick a new appdata file from upstream, so that widelands appears
     back in the software center.
-  * Fix path to amiri-font (Closes: #845660) 
+  * Fix path to amiri-font (Closes: #845660)
     Thanks to eingousef for the report and Nobuhiro Ban for the patch.
   * Forget commented patches: they are actually useless now.
 
@@ -221,7 +270,7 @@ widelands (1:18~rc1-2) unstable; urgency=medium
 widelands (1:18~rc1-1) unstable; urgency=medium
 
   * New upstream release (release candidate)
-    - Update our patches, drop the ones that were integrated upstream 
+    - Update our patches, drop the ones that were integrated upstream
       (gcc4.7, Werror, boost-linking-4.7)
     - The following bugs were fixed upstream (Closes: #668894, #678310)
   * d/control: Move build-deps to boost 1.54
@@ -278,7 +327,7 @@ widelands (1:17-1) experimental; urgency=low
 
   * new upstream release
   * disable patches/s390
-  * debian/rules: use && istead of ; so that failures are reported correctly 
+  * debian/rules: use && istead of ; so that failures are reported correctly
   * we go to experimental to see if s390 is happy and not to disturb
     transitions for libpng15 and boost
 
@@ -314,9 +363,9 @@ widelands (1:16-1) unstable; urgency=low
 
 widelands (1:16~rc1-1) unstable; urgency=low
 
-  * New upsteram release candidate 
-  * Updated Standards-Version to 3.9.1, no changes required 
-  * Removed patches/secfix-617960 since part of the new release 
+  * New upstream release candidate
+  * Updated Standards-Version to 3.9.1, no changes required
+  * Removed patches/secfix-617960 since part of the new release
   * Do not override widelands version number in debian/rules
 
  -- Enrico Tassi <gareuselesinge@debian.org>  Wed, 06 Apr 2011 10:02:21 +0200
@@ -339,7 +388,7 @@ widelands (1:15-2) unstable; urgency=low
 widelands (1:15-1) unstable; urgency=low
 
   * New upstream release
-  * source format 3.0 (quilt) 
+  * source format 3.0 (quilt)
 
  -- Enrico Tassi <gareuselesinge@debian.org>  Sat, 17 Apr 2010 16:43:43 +0200
 
@@ -351,8 +400,8 @@ widelands (1:15~rc2-1) unstable; urgency=low
 
 widelands (1:15~rc1-2) unstable; urgency=low
 
-  * fix typo in package description, thanks Erik Esterer (Closes: #566267) 
-  * fixed paths passed to cmake, locale are working (Closes: #472406) 
+  * fix typo in package description, thanks Erik Esterer (Closes: #566267)
+  * fixed paths passed to cmake, locale are working (Closes: #472406)
 
  -- Enrico Tassi <gareuselesinge@debian.org>  Wed, 17 Mar 2010 22:28:04 +0100
 
@@ -362,7 +411,7 @@ widelands (1:15~rc1-1) unstable; urgency=low
   * new build-dependencies over lua5.1 and cmake
   * all debian/patches were obsolete and are thus have been removed
   * switched from CDBS to dh
-  * standard versions to 3.8.4, no changes 
+  * standard versions to 3.8.4, no changes
   * get rid of duplicate fonts in ttf-freefont, install symlinks instead
 
  -- Enrico Tassi <gareuselesinge@debian.org>  Tue, 16 Mar 2010 20:34:24 +0100
@@ -370,7 +419,7 @@ widelands (1:15~rc1-1) unstable; urgency=low
 widelands (1:14-3) unstable; urgency=low
 
   * more prcise build-depends to ease backporting, thanks Romain Chantereau
-    (Closes: #546840) 
+    (Closes: #546840)
 
  -- Enrico Tassi <gareuselesinge@debian.org>  Mon, 12 Oct 2009 22:24:26 +0200
 
@@ -428,8 +477,8 @@ widelands (1:13~3472-1) experimental; urgency=low
 
 widelands (1:13~3230-1) experimental; urgency=low
 
-  * Svn snapshot with many bugfixes, most notably the game is not using 
-    100% of CPU time anymore (Closes: #370528) 
+  * Svn snapshot with many bugfixes, most notably the game is not using
+    100% of CPU time anymore (Closes: #370528)
 
  -- Enrico Tassi <gareuselesinge@debian.org>  Thu, 31 Jul 2008 09:29:23 +0200
 
@@ -482,7 +531,7 @@ widelands (1:11-1) unstable; urgency=low
   * versions must be strictly increasing, thus use epoch 1 to make
     11 greater than build10
   * Standards-Version bumped to 3.7.3, no modifications needed
-  * debian/ directory put under vcs on svn.d.o/collab-maint 
+  * debian/ directory put under vcs on svn.d.o/collab-maint
 
  -- Enrico Tassi <gareuselesinge@debian.org>  Sat, 19 Jan 2008 17:02:26 +0100
 
@@ -497,11 +546,11 @@ widelands (build10-1) unstable; urgency=low
       Forwarded upstream and solved at some point.
     - closes #345386: --coredump option use is not intuitive.
       Was marked fixed-upstream in debian since a while
-    - The building mecanism was completely changed upstream. 
+    - The building mecanism was completely changed upstream.
       Completely redo the packaging.
   * Drop the most of the patches since they were integrated upstream.
     Only locale is still there, but this is because upstream hardcoded
-    a path in the game...    
+    a path in the game...
 
  -- Martin Quinson <mquinson@debian.org>  Wed, 21 Mar 2007 10:11:56 +0100
 
@@ -590,10 +639,10 @@ widelands (build9half-1) unstable; urgency=low
       road are more expensive and thus less taken
     - lowering_requested_soldiers [Nanne Wams] (bug fix)
     - Fisher_run_mine_bug_1196918 [Ted Carlson] (bug fix)
-  * Debian packaging: 
+  * Debian packaging:
     - let -data depend on ttf-bitstream-vera which provide the Vera.ttf
       font, and don't include our own copy (Closes: #302054)
-    
+
  -- Martin Quinson <mquinson@debian.org>  Sun,  20 Dec 2005 11:17:27 +0200
 
 widelands (build9-7) unstable; urgency=low
@@ -650,7 +699,7 @@ widelands (build9-1) unstable; urgency=low
   * New upstream release.
   * Remove the Knights.ttf font for licencing reasons (Thanks to Josh
     Triplett for noticing and sorry for not having checked myself).
-    Vera.ttf is used instead, as done upstream. 
+    Vera.ttf is used instead, as done upstream.
     (Closes: #289750)
   * Add patch to port to AMD64 from Andreas Jochens (Thanks!).
     (Closes: #289678)
@@ -693,7 +742,7 @@ widelands (build8-2) unstable; urgency=low
   * Fix a typo in postinst (s/urge/purge)
   * Rename {menu,postinst,postrm} to widelands.{menu,postinst,postrm} since
     we build more than one package.
-    
+
   [Martin Quinson]
   * Fix the versionning scheme. This is not a native package.
 

@@ -36,6 +36,7 @@
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -93,12 +94,11 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						char const* const animation_name = fr.c_string();
 						try {
 							building.anim_ = building.descr().get_animation(animation_name);
-						} catch (const MapObjectDescr::AnimationNonexistent&) {
-							log("WARNING: %s %s does not have animation \"%s\"; "
-							    "using animation \"idle\" instead\n",
-							    building.owner().tribe().name().c_str(),
-							    building.descr().descname().c_str(), animation_name);
+						} catch (const GameDataError& e) {
 							building.anim_ = building.descr().get_animation("idle");
+							log("Warning: Tribe %s building: %s, using animation %s instead.\n",
+							    building.owner().tribe().name().c_str(), e.what(),
+							    building.descr().get_animation_name(building.anim_).c_str());
 						}
 					} else {
 						building.anim_ = 0;
@@ -339,6 +339,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				}
 			}
 
+			// TODO(sirver,trading): Pull out and reuse this for market workers.
 			assert(warehouse.incorporated_workers_.empty());
 			{
 				uint16_t const nrworkers = fr.unsigned_16();
@@ -434,9 +435,10 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				}
 			}
 
+			const Map& map = game.map();
+
 			if (uint32_t const conquer_radius = warehouse.descr().get_conquers()) {
 				//  Add to map of military influence.
-				const Map& map = game.map();
 				Area<FCoords> a(map.get_fcoords(warehouse.get_position()), conquer_radius);
 				const Field& first_map_field = map[0];
 				Player::Field* const player_fields = player.fields_;
@@ -447,7 +449,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				while (mr.advance(map));
 			}
 			player.see_area(Area<FCoords>(
-			   game.map().get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
+			   map.get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
 		} else {
 			throw UnhandledVersionError(
@@ -830,7 +832,7 @@ void MapBuildingdataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	// Walk the map again
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	const uint32_t mapwidth = map.get_width();
 	MapIndex const max_index = map.max_index();
 	for (MapIndex i = 0; i < max_index; ++i) {

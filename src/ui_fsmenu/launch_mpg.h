@@ -23,6 +23,7 @@
 #include <memory>
 #include <string>
 
+#include "logic/game_settings.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/multilinetextarea.h"
@@ -46,7 +47,7 @@ class LuaInterface;
 class FullscreenMenuLaunchMPG : public FullscreenMenuLaunchGame {
 public:
 	FullscreenMenuLaunchMPG(GameSettingsProvider*, GameController*);
-	~FullscreenMenuLaunchMPG();
+	~FullscreenMenuLaunchMPG() override;
 
 	void set_chat_provider(ChatProvider&);
 	void refresh() override;

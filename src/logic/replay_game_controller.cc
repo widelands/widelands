@@ -31,9 +31,6 @@ ReplayGameController::ReplayGameController(Widelands::Game& game, const std::str
      speed_(1000),
      paused_(false) {
 	game_.set_game_controller(this);
-
-	// We have to create an empty map, otherwise nothing will load properly
-	game.set_map(new Widelands::Map);
 	replayreader_.reset(new Widelands::ReplayReader(game_, filename));
 }
 
@@ -97,7 +94,7 @@ void ReplayGameController::set_paused(bool const paused) {
 
 void ReplayGameController::CmdReplayEnd::execute(Widelands::Game& game) {
 	game.game_controller()->set_desired_speed(0);
-	UI::WLMessageBox mmb(game.get_ibase(), _("End of replay"),
+	UI::WLMessageBox mmb(game.get_ibase(), _("End of Replay"),
 	                     _("The end of the replay has been reached and the game has "
 	                       "been paused. You may unpause the game and continue watching "
 	                       "if you want to."),

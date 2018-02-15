@@ -41,7 +41,6 @@
 #include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
 #include "wui/economy_options_window.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 #include "wui/waresdisplay.h"
@@ -148,7 +147,7 @@ public:
 	FieldActionWindow(InteractiveBase* ibase,
 	                  Widelands::Player* plr,
 	                  UI::UniqueWindow::Registry* registry);
-	~FieldActionWindow();
+	~FieldActionWindow() override;
 
 	InteractiveBase& ibase() {
 		return dynamic_cast<InteractiveBase&>(*get_parent());
@@ -195,15 +194,14 @@ private:
 	void reset_mouse_and_die();
 
 	Widelands::Player* player_;
-	Widelands::Map* map_;
-	FieldOverlayManager& field_overlay_manager_;
+	const Widelands::Map& map_;
 
 	Widelands::FCoords node_;
 
 	UI::TabPanel tabpanel_;
 	bool fastclick_;  // if true, put the mouse over first button in first tab
 	uint32_t best_tab_;
-	FieldOverlayManager::OverlayId workarea_preview_overlay_id_;
+	bool showing_workarea_preview_;
 
 	/// Variables to use with attack dialog.
 	AttackBox* attack_box_;
@@ -246,22 +244,20 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
                                      UI::UniqueWindow::Registry* const registry)
    : UI::UniqueWindow(ib, "field_action", registry, 68, 34, _("Action")),
      player_(plr),
-     map_(&ib->egbase().map()),
-     field_overlay_manager_(*ib->mutable_field_overlay_manager()),
-     node_(ib->get_sel_pos().node, &(*map_)[ib->get_sel_pos().node]),
+     map_(ib->egbase().map()),
+     node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
      tabpanel_(this, g_gr->images().get("images/ui_basic/but1.png")),
      fastclick_(true),
      best_tab_(0),
-     workarea_preview_overlay_id_(0),
+     showing_workarea_preview_(false),
      attack_box_(nullptr) {
 	ib->set_sel_freeze(true);
-
 	set_center_panel(&tabpanel_);
 }
 
 FieldActionWindow::~FieldActionWindow() {
-	if (workarea_preview_overlay_id_)
-		field_overlay_manager_.remove_overlay(workarea_preview_overlay_id_);
+	if (showing_workarea_preview_)
+		ibase().hide_work_area(node_);
 	ibase().set_sel_freeze(false);
 	delete attack_box_;
 }
@@ -305,7 +301,7 @@ void FieldActionWindow::add_buttons_auto() {
 	const Widelands::PlayerNumber owner = node_.field->get_owned_by();
 
 	if (!igbase || igbase->can_see(owner)) {
-		Widelands::BaseImmovable* const imm = map_->get_immovable(node_);
+		Widelands::BaseImmovable* const imm = map_.get_immovable(node_);
 		const bool can_act = igbase ? igbase->can_act(owner) : true;
 
 		// The box with road-building buttons
@@ -380,7 +376,7 @@ void FieldActionWindow::add_buttons_auto() {
 void FieldActionWindow::add_buttons_attack() {
 	UI::Box& a_box = *new UI::Box(&tabpanel_, 0, 0, UI::Box::Horizontal);
 
-	if (upcast(Widelands::Building, building, map_->get_immovable(node_))) {
+	if (upcast(Widelands::Building, building, map_.get_immovable(node_))) {
 		if (const Widelands::AttackTarget* attack_target = building->attack_target()) {
 			if (player_ && player_->is_hostile(building->owner()) &&
 			    attack_target->can_be_attacked()) {
@@ -420,11 +416,13 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
 		//  Some building types cannot be built (i.e. construction site) and not
 		//  allowed buildings.
 		if (dynamic_cast<const Game*>(&ibase().egbase())) {
-			if (!building_descr->is_buildable() || !player_->is_building_type_allowed(building_index))
+			if (!building_descr->is_buildable() ||
+			    !player_->is_building_type_allowed(building_index)) {
 				continue;
-			if (building_descr->needs_seafaring() &&
-			    ibase().egbase().map().get_port_spaces().size() < 2)
+			}
+			if (building_descr->needs_seafaring() && !ibase().egbase().map().allows_seafaring()) {
 				continue;
+			}
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
 			continue;
 
@@ -529,7 +527,7 @@ It resets the mouse to its original position and closes the window
 ===============
 */
 void FieldActionWindow::reset_mouse_and_die() {
-	ibase().mouse_to_field(node_, MapView::Transition::Jump);
+	ibase().map_view()->mouse_to_field(node_, MapView::Transition::Jump);
 	die();
 }
 
@@ -681,23 +679,23 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 	upcast(InteractivePlayer, iaplayer, &ibase());
 
 	game->send_player_build(iaplayer->player_number(), node_, Widelands::DescriptionIndex(idx));
-	ibase().reference_player_tribe(player_->player_number(), &player_->tribe());
 	iaplayer->set_flag_to_connect(game->map().br_n(node_));
 	reset_mouse_and_die();
 }
 
 void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
-	if (workarea_preview_overlay_id_) {
-		field_overlay_manager_.remove_overlay(workarea_preview_overlay_id_);
-		workarea_preview_overlay_id_ = 0;
+	if (showing_workarea_preview_) {
+		ibase().hide_work_area(node_);
+		showing_workarea_preview_ = false;
 	}
 }
 
 void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex idx) {
-	if (ibase().show_workarea_preview_ && !workarea_preview_overlay_id_) {
+	if (ibase().show_workarea_preview_ && !showing_workarea_preview_) {
 		const WorkareaInfo& workarea_info =
-		   player_->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->workarea_info_;
-		workarea_preview_overlay_id_ = ibase().show_work_area(workarea_info, node_);
+		   player_->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->workarea_info();
+		ibase().show_work_area(workarea_info, node_);
+		showing_workarea_preview_ = true;
 	}
 }
 

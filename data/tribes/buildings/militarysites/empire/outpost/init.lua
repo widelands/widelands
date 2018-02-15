@@ -30,7 +30,7 @@ tribes:new_militarysite_type {
 
    aihints = {
       expansion = true,
-      prohibited_till=600
+      fighting = true
    },
 
    max_soldiers = 3,

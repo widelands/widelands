@@ -8,14 +8,14 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009
 # GunChleoc, 2014
-# Guybrush88 <erpizzo@alice.it>, 2015-2016
+# Guybrush88 <erpizzo@alice.it>, 2015-2017
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:32+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2017-12-27 17:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:105
 msgid "From Nemesis to Genesis"
 msgstr "Dalla nemesi alla genesi"
 
@@ -145,19 +145,24 @@ msgstr "Un avamposto per l'esilio"
 
 #: ../../data/campaigns/campaigns.conf:88
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "La vendetta di Nettuno"
 
 #: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr ""
+
+#: ../../data/campaigns/campaigns.conf:98
+#: ../../data/campaigns/campaigns.conf:110
+#: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Non ancora implementato"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Nessuno"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "Spiacente, questa mappa non è ancora implementata."
 
@@ -182,6 +187,13 @@ msgstr "Infine la nave fu riparata, così Lutius e la sua gente andarono nuovame
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
+msgstr ""
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8

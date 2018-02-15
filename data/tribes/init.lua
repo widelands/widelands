@@ -290,6 +290,13 @@ print_loading_message("┗━ took", function()
    end)
 
    -- ===================================
+   --    Markets
+   -- ===================================
+
+   print_loading_message("┃    Markets", function()
+      include "tribes/buildings/markets/barbarians/market/init.lua"
+   end)
+   -- ===================================
    --    Productionsites
    -- ===================================
 
@@ -473,4 +480,6 @@ print_loading_message("┗━ took", function()
       include "tribes/barbarians.lua"
       include "tribes/empire.lua"
    end)
+
+
 end)

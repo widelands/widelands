@@ -100,15 +100,16 @@ static std::string const base_immovable_name = "unknown";
 void BaseImmovable::set_position(EditorGameBase& egbase, const Coords& c) {
 	assert(c);
 
-	Map& map = egbase.map();
-	FCoords f = map.get_fcoords(c);
+	Map* map = egbase.mutable_map();
+	FCoords f = map->get_fcoords(c);
 	if (f.field->immovable && f.field->immovable != this)
 		f.field->immovable->remove(egbase);
 
 	f.field->immovable = this;
 
-	if (get_size() >= SMALL)
-		map.recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+	if (get_size() >= SMALL) {
+		map->recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+	}
 }
 
 /**
@@ -117,8 +118,8 @@ void BaseImmovable::set_position(EditorGameBase& egbase, const Coords& c) {
  * Only call this during cleanup.
 */
 void BaseImmovable::unset_position(EditorGameBase& egbase, const Coords& c) {
-	Map& map = egbase.map();
-	FCoords const f = map.get_fcoords(c);
+	Map* map = egbase.mutable_map();
+	FCoords const f = map->get_fcoords(c);
 
 	// this is to help to debug failing assertion below (see bug 1542238)
 	if (f.field->immovable != this) {
@@ -130,10 +131,11 @@ void BaseImmovable::unset_position(EditorGameBase& egbase, const Coords& c) {
 	assert(f.field->immovable == this);
 
 	f.field->immovable = nullptr;
-	egbase.inform_players_about_immovable(f.field - &map[0], nullptr);
+	egbase.inform_players_about_immovable(f.field - &(*map)[0], nullptr);
 
-	if (get_size() >= SMALL)
-		map.recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+	if (get_size() >= SMALL) {
+		map->recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
+	}
 }
 
 /*
@@ -202,6 +204,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
      editor_category_(nullptr) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
+	}
+	if (input_type == MapObjectDescr::OwnerType::kTribe && helptext_script().empty()) {
+		throw GameDataError("Tribe immovable %s has no helptext script", name().c_str());
 	}
 
 	if (table.has_key("size")) {
@@ -284,7 +289,7 @@ const EditorCategory* ImmovableDescr::editor_category() const {
 }
 
 bool ImmovableDescr::has_terrain_affinity() const {
-	return terrain_affinity_.get() != nullptr;
+	return terrain_affinity_ != nullptr;
 }
 
 const TerrainAffinity& ImmovableDescr::terrain_affinity() const {
@@ -573,10 +578,10 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	char const* const animname = fr.c_string();
 	try {
 		imm.anim_ = imm.descr().get_animation(animname);
-	} catch (const MapObjectDescr::AnimationNonexistent&) {
+	} catch (const GameDataError& e) {
 		imm.anim_ = imm.descr().main_animation();
-		log("Warning: (%s) Animation \"%s\" not found, using animation %s).\n",
-		    imm.descr().name().c_str(), animname, imm.descr().get_animation_name(imm.anim_).c_str());
+		log("Warning: Immovable: %s, using animation %s instead.\n", e.what(),
+		    imm.descr().get_animation_name(imm.anim_).c_str());
 	}
 	imm.animstart_ = fr.signed_32();
 	if (packet_version >= 4) {

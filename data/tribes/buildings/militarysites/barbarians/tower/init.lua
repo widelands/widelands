@@ -40,7 +40,7 @@ tribes:new_militarysite_type {
       expansion = true,
       fighting = true,
       mountain_conqueror = true,
-      prohibited_till = 1200
+      prohibited_till = 400
    },
 
    max_soldiers = 5,

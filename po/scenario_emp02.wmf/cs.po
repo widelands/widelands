@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-12 13:53+0000\n"
-"PO-Revision-Date: 2017-05-15 18:53+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2017-12-29 17:05+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -170,10 +170,10 @@ msgstr "Nový ostrov"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:136
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:148
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:156
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:231
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:249
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:258
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:278
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:236
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:254
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
 msgid "Diary of Lutius"
 msgstr "Deník Lucia"
 
@@ -266,12 +266,12 @@ msgstr "Výborně! Dnes byl dokončen lom. Teď už budeme mít dostatek žuly a
 msgid "Dangerous Ship Parts"
 msgstr "Vrak cizí lodi"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:164
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:165
 msgid "Saledus looks unhappy"
 msgstr "Saledus je znepokojen"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:166
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:167
 msgid ""
 "Sire, I don’t want to start a panic, but I found something which gives me a "
 "sinking feeling in my stomach and spreads waves of fear in my heart. As I "
@@ -281,29 +281,29 @@ msgid ""
 msgstr "Pane, nerad bych podněcoval paniku ale našel jsem něco, co mi leží v žaludku a šíří to vlny strachu až do mého srdce. Cestou na jižní pobřeží, jsem našel zbytky jiné lodi. Nevím, zda jsou ty kusy vše, co z té lodi zbylo. V každém případě ty kusy nevypadají staře."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:169
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:170
 msgid ""
 "Perhaps the people aboard that ship were caught in the same storm which "
 "brought us to Malac’ Mor – and were brought to this island."
 msgstr "Je tu možnost, že lidé, kteří se na té lodi plavili, byli zastiženi stejnou bouří u Malac Moru jako my - a stejně jako my skončili na tomto ostrově."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:172
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:173
 msgid ""
 "I beg you to be cautious and to build some blockhouses or sentries around "
 "our colony."
 msgstr "Buď prosím obezřetný a postav pár malých pevností nebo strážnic kolem naší kolonie."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:177
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:180
 msgid "Marble on the Mountain"
 msgstr "Mramor z hor"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:178
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:181
 msgid "Saledus smiles"
 msgstr "Saledus se usmívá"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:180
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:183
 msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
@@ -311,7 +311,7 @@ msgid ""
 msgstr "Pane, mám pro Vás dobré zprávy: Cestou na jich jsem našel velkou horu. Nejsem si jistý - geolog by ji měl prohlédnout, zda se nemýlím - ale věřím, že by se tam dal těžit mramor."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:183
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:186
 msgid ""
 "It would be a good source for bolstering our supply of quality marble, "
 "beyond the meager quantities available from the quarry. Perhaps you were "
@@ -319,20 +319,20 @@ msgid ""
 msgstr "Byl by to dobrý zdroj kvalitního mramoru. Několikanásobně větší množství, než jsme schopni získat z lomu. Zřejmě jsi měl pravdu, když jsi tento ostrov nazval rájem."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:186
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:189
 msgid "Please, expand to that mountain and start mining marble."
 msgstr "Prosím, rozšiř území k horám a zační těžit mramor."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:191
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:196
 msgid "Further Mountains"
 msgstr "Další pohoří"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:192
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:197
 msgid "Saledus is excited"
 msgstr "Saledus je nadšený"
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:194
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:199
 msgid ""
 "By the Gods, this is an unbelievable stroke of fortune! There are two more "
 "mountains, and it seems that one has a large quantity of coal and the other "
@@ -342,7 +342,7 @@ msgid ""
 msgstr "U všech bohů, to je neuvěřitelná náhoda! Jsou zde další dvě hory a zdá se, že jedna ukrývá bohaté zásoby uhlí a druhá železné rudy. Radím ti okamžitě postavit důl na uhlí a železnou rudu (nebo alespoň milíř na dřevěné uhlí), slévárny, dílny, platnéřsví a zbrojařství."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:197
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:202
 msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
@@ -350,25 +350,25 @@ msgid ""
 msgstr "Nicméně: na všechny tyto velké budovy budeme potřebovat lepší a elegantnější stavební materiály. Takže je třeba postavit domek kameníka, který bude vyrábět mramorové sloupy."
 
 #. TRANSLATORS: Saledus
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:200
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:205
 msgid "After everything, we can now begin to live like we did in Fremil."
 msgstr "Snad nakonec můžeme začít žít stejně, jako jsme žili ve Fremil."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:205
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:210
 msgid "Food for the Miners"
 msgstr "Jídlo pro horníky"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:206
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:211
 msgid "Amalea enters…"
 msgstr "Vchází Amalea…"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:208
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:213
 msgid "Lutius, don’t you think you forgot something important?"
 msgstr "Lutiusi, nemyslíš, že jsi zapomněl na něco důležitého?"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:211
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:216
 msgid ""
 "It’s nice, and of course a good idea, to build up mines, which will give us "
 "a more comfortable life, but the people working in the mines are unhappy "
@@ -377,40 +377,40 @@ msgid ""
 msgstr "Vybudovat doly a začít těžit suroviny je chvályhodné a určitě je to skvělý nápad, ale lidé, kteří tam pracují, jsou s nynější situací velmi nespokojeni. Musí tvrdě pracovat a ani nemají čas připravit si pořádné jídlo."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:214
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:219
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
 msgstr "Co si myslíš o tom, že bychom jim pomohli? Ndokážu říci přesně, co všechno potřebujeme... ale tady jsou aspoň má doporučení:"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:219
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:224
 msgid "Our New Tavern"
 msgstr "Naše nová hospoda"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:220
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:225
 msgid "Amalea smiles"
 msgstr "Amalea se usmívá"
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:222
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:227
 msgid ""
 "I just visited our new tavern ‘At the palms’. The beer they serve is really "
 "tasty. You really should have a drink there, too."
 msgstr "Právě jsem navštívil naši novou hospodu \"U palem\". Pivo, které podávají je velmi dobré. Vážně by si tam měl na jedno zajít."
 
 #. TRANSLATORS: Amalea
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:225
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:230
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
 msgstr "Je příjemné vidět, že si na ostrově dokážeme vybudovat přijemnější a přátelštější prostředí. Děkuji, Lucie."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:229
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:234
 msgid "The Barbarians"
 msgstr "Barbaři"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:233
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:238
 msgid ""
 "By the Gods! This is absolutely terrible. It seems as if we stand close to a"
 " test – and it seems as if Saledus was right with his fear concerning the "
@@ -418,7 +418,7 @@ msgid ""
 msgstr "U Bohů! To je strašlivé zjištění. Vypadá to, že nám osud připravil další zkoušku - a zdá se, že Saledovy obavy ohledně nalezeného vraku lodi byly oprávněné."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:236
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:241
 msgid ""
 "Today, as I walked down to the eastern shore, I got a shock. I caught sight "
 "of one of those hated, evil, Barbarian tribes with whom we have had so many "
@@ -426,7 +426,7 @@ msgid ""
 msgstr "Při mé dnešní procházece na východním pobřeží jsem zažil šok. Zahlédl jsem tam jeden z těch nenáviděných, zatracených, barbarských kmenů, se kterými jsme se už tolikrát potýkali."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:239
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:244
 msgid ""
 "At first, I was naive and hoped that they were peaceful, but as soon as one "
 "of them saw me, they charged towards me and started attacking me with their "
@@ -435,69 +435,69 @@ msgid ""
 msgstr "Nejprve jsem naivně doufal, že jde o mírumilovný kmen, ale jakmile mě jeden z nich uviděl, rozeběhli se na mne a okamžitě zaútočili svými vrhacími oštěpy. Děkuji Bohům, že se mi podařilo utéct, skrýt se a večer pod rouškou tmy, dorazit zpět do bezpečí našeho tábora."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:242
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:247
 msgid ""
 "Anyway, we must build up stronger military buildings as soon as possible."
 msgstr "V každém případě hned jakmile to bude možné, musíme začít s budováním silnějších vojenských budov."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:247
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:252
 msgid "Command to Attack"
 msgstr "Rozkaz k útoku"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:251
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:256
 msgid ""
 "That’s good. The first large military building is complete and the mining "
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
 msgstr "Výborně. První velká vojenská budova je dokončena a infrastruktura pro těžbu surovin je den ode dne lepší. Nyní bychom se měli začít připravovat na bitvu."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:256
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:261
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
 msgid "Victory"
 msgstr "Vítězství"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:260
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:265
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
 msgstr "Dnes je slavný den. Bojovali jsme o svůj nový domov a zvítězili jsme."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:263
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:268
 msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
 msgstr "Na ostrově se ještě určitě nějací Barbaři ukrývají, ale určitě je brzy najdeme a zlikvidujeme. Každý Barbar, který na nás nezaúčtočí, bude poslán lodí spolu s ostatními mírumilovnými Barbary zpět do jejich země."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:265
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:270
 msgid ""
 "You have established a working economy, trained new soldiers and driven the "
 "Barbarians from the island."
 msgstr "Vystavěl si fungující hospodářství, vycvičil nové vojáky a vyhnal Barbary z ostrova."
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:274
 msgid "As Time is Running By"
 msgstr "Jak plyne čas"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:272
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:277
 msgid "7 days later…"
 msgstr "O 7 dní později…"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:276
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:281
 msgid "A Message"
 msgstr "Zpráva"
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:280
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
 msgstr "Dnes na náš ostrov přilétl holub. Přinesl zprávy, které mou mysl opět naplnily temnými myšlenkami a obavami."
 
 #. TRANSLATORS: Lutius - Diary
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:283
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:288
 msgid ""
 "The message was addressed to me, begging me to come back to Fremil. It says "
 "that the Empire is at war with the Barbarians. They were attacked from the "
@@ -505,7 +505,7 @@ msgid ""
 "must do…"
 msgstr "Zpráva byla určena mně, prosila mě o návrat do Fremilu. Císařství je prý ve válce s Barbary. Byli napadeni ze severu kmenem, na který jsem nesměl zaútočit. Vím, co musím udělat…"
 
-#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:285
+#: ../../data/campaigns/emp02.wmf/scripting/texts.lua:290
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."

@@ -9,8 +9,8 @@
 --
 -- Soldiers, like workers, are defined in
 -- ``data/tribes/workers/<tribe name>/soldier/init.lua``.
--- The soldier will also need its help texts, which are defined in
--- ``data/tribes/wares/<tribe name>/soldier/helptexts.lua``
+-- The soldier will also need its :ref:`help texts <lua_tribes_workers_helptexts>`,
+-- which are defined in ``data/tribes/wares/<tribe name>/soldier/helptexts.lua``
 
 dirname = path.dirname(__file__)
 
@@ -74,7 +74,7 @@ animations = {
 add_walking_animations(animations, "walk", dirname, "walk", {20, 34}, 10)
 
 -- RST
--- .. function:: new_soldier_type(table)
+-- .. function:: new_soldier_type{table}
 --
 --    This function adds the definition of a soldier to the engine.
 --
@@ -215,7 +215,7 @@ tribes:new_soldier_type {
       max_level = 4,
       base = 1200,
       maximum = 1600,
-      increase_per_level = 800,
+      increase_per_level = 920,
       pictures = path.list_files(dirname .. "attack_level?.png"),
    },
    defense = {

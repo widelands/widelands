@@ -18,6 +18,7 @@ init = {
       sf = shared_in_start
    else
       player:allow_workers("all")
+      player:forbid_buildings{"barbarians_market"}
    end
 
    hq = prefilled_buildings(player, { "barbarians_headquarters", sf.x, sf.y,
@@ -64,6 +65,7 @@ init = {
          barbarians_miner_master = 4,
          barbarians_ranger = 1,
          barbarians_stonemason = 2,
+         barbarians_trainer = 3,
          barbarians_ox = 5,
       },
       soldiers = {

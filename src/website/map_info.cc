@@ -75,9 +75,8 @@ int main(int argc, char** argv) {
 		FileSystem* in_out_filesystem = &FileSystem::create(map_dir);
 		g_fs->add_file_system(in_out_filesystem);
 
-		Map* map = new Map();
 		EditorGameBase egbase(nullptr);
-		egbase.set_map(map);
+		auto* map = egbase.mutable_map();
 		std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(map_file));
 
 		if (!ml) {

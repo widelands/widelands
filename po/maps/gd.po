@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2016
+# GunChleoc, 2015-2017
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:32+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2017-12-27 17:11+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:105
 msgid "From Nemesis to Genesis"
 msgstr "On aimhleas dhan ghineachas"
 
@@ -140,19 +140,24 @@ msgstr "Tuineachadh nam fògarrach"
 
 #: ../../data/campaigns/campaigns.conf:88
 msgid "Neptune’s Revenge"
-msgstr ""
+msgstr "Dìoghail Neaptuin"
 
 #: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr ""
+
+#: ../../data/campaigns/campaigns.conf:98
+#: ../../data/campaigns/campaigns.conf:110
+#: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Chan eil seo ann fhathast"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Gun urram"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "Duilich, ach cha deach am mapa seo a phrògramachadh fhathast."
 
@@ -177,6 +182,13 @@ msgstr "Bha an long air a càradh mu dheireadh thall agus lean Lutius ’s a chu
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
+msgstr "Le toil nan diathan, thàinig cnap-starra eile ann an rathad sgioba Lutius mus do thill iad dhachaigh gus an Impireachd a dhìon."
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
@@ -543,7 +555,7 @@ msgstr "Cha do fhreagair na diathan baogaideach ri ar n-ùrnaighean. Rinn solas 
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr " Na dìochuimhnich fiodh gu leòr a thoirt leat on a bhios feum agad air."
+msgstr "Na dìochuimhnich fiodh gu leòr a thoirt leat on a bhios feum agad air."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"

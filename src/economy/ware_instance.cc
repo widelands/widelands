@@ -47,7 +47,7 @@ namespace Widelands {
 // TODO(unknown): This maybe shouldn't be here.
 struct IdleWareSupply : public Supply {
 	explicit IdleWareSupply(WareInstance&);
-	virtual ~IdleWareSupply();
+	~IdleWareSupply() override;
 
 	void set_economy(Economy*);
 
@@ -309,8 +309,9 @@ void WareInstance::update(Game& game) {
 
 	// Update whether we have a Supply or not
 	if (!transfer_ || !transfer_->get_request()) {
-		if (!supply_)
+		if (!supply_) {
 			supply_ = new IdleWareSupply(*this);
+		}
 	} else {
 		delete supply_;
 		supply_ = nullptr;
@@ -517,9 +518,6 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 2;
-
-WareInstance::Loader::Loader() : location_(0), transfer_nextstep_(0) {
-}
 
 void WareInstance::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);

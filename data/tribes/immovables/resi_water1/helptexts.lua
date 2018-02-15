@@ -1,9 +1,7 @@
--- TODO(GunChleoc): This is unused
-
 function immovable_helptext(tribe)
    local helptext = {
-      -- TRANSLATORS#: Helptext for a resource: Water
-      default = "There is water in the ground here that can be pulled up by a well."
+      -- TRANSLATORS: Helptext for a resource: Water
+      default = _("There is water in the ground here that can be pulled up by a well.")
    }
    local result = ""
    if tribe then

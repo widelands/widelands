@@ -1,7 +1,10 @@
 function building_helptext_lore()
-   -- TRANSLATORS#: Lore helptext for a building
-   return pgettext("barbarians_building", [[Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>
-Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.]])
+   return {
+      -- TRANSLATORS: Lore helptext for a coal mine building, part 1
+      pgettext("barbarians_building", "Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces."),
+      -- TRANSLATORS: Lore helptext for a coal mine building, part 2
+      pgettext("barbarians_building", "Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.")
+   }
 end
 
 function building_helptext_lore_author()
@@ -10,7 +13,7 @@ function building_helptext_lore_author()
 end
 
 function building_helptext_purpose()
-   -- TRANSLATORS#: Purpose helptext for a building
+   -- TRANSLATORS: Purpose helptext for a building
    return pgettext("building", "Digs coal out of the ground in mountain terrain.")
 end
 

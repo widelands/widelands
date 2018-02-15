@@ -87,7 +87,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 		   }
 		});
 
-	chat_overlay_->set_chat_provider(*chat_provider);
+	chat_overlay()->set_chat_provider(*chat_provider);
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -132,16 +132,11 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
  * during single/multiplayer/scenario).
  */
 void InteractiveGameBase::postload() {
-	Widelands::Map& map = egbase().map();
-	auto* overlay_manager = mutable_field_overlay_manager();
 	show_buildhelp(false);
 	on_buildhelp_changed(buildhelp());
 
-	overlay_manager->register_overlay_callback_function(
-	   boost::bind(&InteractiveGameBase::calculate_buildcaps, this, _1));
-
 	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map(egbase().world());
+	egbase().mutable_map()->recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
 	fieldaction_.destroy();
@@ -231,6 +226,7 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
 			   *this, registry, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
 		};
 		break;
+	// TODO(sirver,trading): Add UI for market.
 	default:
 		log("Unable to show window for building '%s', type '%s'.\n", building->descr().name().c_str(),
 		    to_string(building->descr().type()).c_str());
@@ -245,7 +241,7 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
  * If so, do it and return true; otherwise, return false.
  */
 bool InteractiveGameBase::try_show_ship_window() {
-	Widelands::Map& map(game().map());
+	const Widelands::Map& map = game().map();
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
 
 	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM))

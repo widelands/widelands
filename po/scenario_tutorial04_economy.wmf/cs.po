@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-29 17:32+0000\n"
-"PO-Revision-Date: 2017-04-02 08:18+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2017-12-29 17:52+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -197,7 +197,7 @@ msgstr "Jsi na tahu"
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:92
 msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know"
-" whether we still have taverns, so you have to choose the ‘Medium Buildings’"
+" whether we still have taverns, so you have to choose the ‘Medium buildings’"
 " tab. Close the building statistics menu afterwards."
 msgstr "Prozatím toho vysvětlování necháme. Zkus si to sám. Teď bychom rádi věděli, zda máme ještě nějaké hospody, takže vyber záložku \"Střední budovy\". Následně zavři statistiky budov."
 
@@ -207,7 +207,7 @@ msgid "Look up how many taverns you have."
 msgstr "Podívej kolik hospod máš."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:97
-msgid "Choose the ‘Medium Buildings’ tab in the building statistics window."
+msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
 msgstr "Vyber \"Střední budovy\" v okně statistiky budov."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:99
@@ -509,8 +509,8 @@ msgid "I’ll continue as soon as you click on the"
 msgstr "Budu pokračovat až klikneš na"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
-msgid "third tab (‘Economy Health’)."
-msgstr "třetí záložka (’Zdraví hospodářství’)."
+msgid "third tab (‘Economy health’)."
+msgstr "třetí záložka (\"Zdraví hospodářství\")."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:280
 msgid "Switch to the third tab in the ware statistics menu window."
