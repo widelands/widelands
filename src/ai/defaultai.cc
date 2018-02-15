@@ -3658,9 +3658,11 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	std::map<uint32_t, NearFlag> nearflags;  // only used to collect flags reachable walk over roads
 	nearflags[flag.get_position().hash()] = NearFlag(&flag, 0);
 
-	// algorithm to walk on roads
-	// All nodes are marked as to_be_checked and under some conditions, the same node can be checked
-	// twice
+	// Algorithm to walk on roads
+	// All nodes are marked as to_be_checked == true first and once the node is checked it is changed
+	// to false. Under some conditions, the same node can be checked twice, the to_be_checked can
+	// be set back to true. Because less hoops (less flag-to-flag roads) does not always mean shortest
+	// road.
 	for (;;) {
 		// looking for a node with shortest existing road distance from starting flag and one that has
 		// to be checked
@@ -3672,7 +3674,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				start_field = item.first;
 			}
 		}
-		// OK, so no NearFlag left to be checked - quitting the loop now
+		// OK, we failed to find a NearFlag where to_be_checked == true, so quitting the loop now
 		if (start_field == std::numeric_limits<uint32_t>::max()) {
 			break;
 		}
