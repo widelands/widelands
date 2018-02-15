@@ -3661,7 +3661,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// Algorithm to walk on roads
 	// All nodes are marked as to_be_checked == true first and once the node is checked it is changed
 	// to false. Under some conditions, the same node can be checked twice, the to_be_checked can
-	// be set back to true. Because less hoops (less flag-to-flag roads) does not always mean shortest
+	// be set back to true. Because less hoops (fewer flag-to-flag roads) does not always mean shortest
 	// road.
 	for (;;) {
 		// looking for a node with shortest existing road distance from starting flag and one that has
