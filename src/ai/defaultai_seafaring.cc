@@ -303,6 +303,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			// escape mode here indicates that we are going over known ports
 			} else if (so.escape_mode && so.ship->get_ship_state() ==
 			        Widelands::Ship::ShipStates::kExpeditionScouting) {
+				printf ("%2d DEBUG - ship scouting, but still attempting to escape\n", player_number());
 				attempt_escape(so);
 			}
 
@@ -598,6 +599,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 				possible_directions.push_back(dir);
 			}
 			if (player_->vision(map.get_index(tmp_coords, map.get_width())) == 0) {
+				printf ("%2d DEBUG %s sees unknown territories, direction: %d\n", player_number(),  so.ship->get_shipname().c_str(), dir);
 			    // Unseen territory here
 				new_teritory_directions.push_back(dir);
 				break;
@@ -605,21 +607,23 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 		}
 	}
 
+	assert(possible_directions.size() >= new_teritory_directions.size());
+
 	// Going to know directory is discouraged
 
 	if (new_teritory_directions.empty() and game().logic_rand() % 100 < 80){
-	    printf ("DEBUG %s not diverting to known territories\n", so.ship->get_shipname().c_str());
+	    printf ("DEBUG %s no unknown teritories in sight, not changing direction\n", so.ship->get_shipname().c_str());
 	    return false;
 	}
 
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
 	    const Direction direction = !new_teritory_directions.empty() ?
-			   new_teritory_directions.at(game().logic_rand() % possible_directions.size()) :
+			   new_teritory_directions.at(game().logic_rand() % new_teritory_directions.size()) :
 			   possible_directions.at(game().logic_rand() % possible_directions.size());
 			game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
 
 			log("%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,
-			    so.ship->get_shipname().c_str(), new_teritory_directions.empty()? "unexplored" : "free", direction);
+			    so.ship->get_shipname().c_str(), !new_teritory_directions.empty()? "unexplored" : "free", direction);
 			so.escape_mode = false;
 			return true; // we were successfull
 	}
