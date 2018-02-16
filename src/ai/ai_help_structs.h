@@ -509,6 +509,7 @@ struct ShipObserver {
 	Widelands::Ship* ship;
 	bool waiting_for_command_ = false;
 	uint32_t last_command_time = 0;
+	bool escape_mode = false;
 
 	// direction by which the ship circumvents an island
 	// this is the last circle-island command's direction

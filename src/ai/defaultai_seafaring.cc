@@ -104,7 +104,7 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // - build a ship
 // - start preparation for expedition
 bool DefaultAI::marine_main_decisions() {
-	if (!map_allows_seafaring_ &&
+	if (!map_allows_seafaring_ && //NOCOM OK this?
 	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
 		return false;
 	}
@@ -196,6 +196,10 @@ bool DefaultAI::marine_main_decisions() {
 		}
 	}
 
+    if (enough_ships == FleetStatus::kNeedShip) { //NOCOM
+        printf ("%2d: DEBUG: ship needed, ships now: %lu\n",  player_number(), allships.size());
+    }
+
 	// building a ship? if yes, find a shipyard and order it to build a ship
 	if (enough_ships == FleetStatus::kNeedShip) {
 
@@ -216,6 +220,7 @@ bool DefaultAI::marine_main_decisions() {
 				}
 
 				game().send_player_start_stop_building(*ps_obs.site);
+				printf ("%2d: DEBUG: starting building a ship\n",  player_number());
 				return true;
 			}
 		}
@@ -291,6 +296,12 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 			// if ship is waiting for command
 			if (so.waiting_for_command_) {
 				expedition_management(so);
+
+			// Sometimes we look for other direction even if ship is still scouting,
+			// escape mode here indicates that we are going over known ports
+			} else if (so.escape_mode && so.ship->get_ship_state() ==
+			        Widelands::Ship::ShipStates::kExpeditionScouting) {
+				attempt_escape(so);
 			}
 
 			// Checking utilization
@@ -440,12 +451,15 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	const int32_t gametime = game().get_gametime();
 	PlayerNumber const pn = player_->player_number();
 	// probability for island exploration repetition
-	const int repeat_island_prob = 20;
+	//const int repeat_island_prob = 20;
 
 	// second we put current spot into expedition visited_spots
 	bool first_time_here = expedition_visited_spots.count(so.ship->get_position().hash()) == 0;
 	if (first_time_here) {
 		expedition_visited_spots.insert(so.ship->get_position().hash());
+		so.escape_mode = false;
+	} else {
+	    so.escape_mode = true;
 	}
 
 	// if we have a port-space we can build a Port or continue exploring
@@ -472,14 +486,14 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	// 2. Go on with expedition
 	// we were not here before
 	// OR we might randomly repeat island exploration
-	if (first_time_here || game().logic_rand() % 100 < repeat_island_prob) {
-		if (first_time_here) {
+	if (first_time_here) {//} || game().logic_rand() % 100 < repeat_island_prob) {
+		//if (first_time_here) {
 			log("%d: %s at %3dx%3d: explore uphold, visited first time\n", pn,
 			    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
-		} else {
-			log("%d: %s at %3dx%3d: explore uphold, visited before\n", pn,
-			    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
-		}
+		//} else {
+		//	log("%d: %s at %3dx%3d: explore uphold, visited before\n", pn,
+		//	    so.ship->get_shipname().c_str(), so.ship->get_position().x, so.ship->get_position().y);
+		//}
 
 		// Determine direction of island circle movement
 		// Note: if the ship doesn't own an island-explore-direction it is in inter-island exploration
@@ -498,46 +512,115 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 
 		// we head for open sea again
 	} else {
-		// determine swimmable directions
-		const Map& map = game().map();
-		std::vector<Direction> possible_directions;
-		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-			// testing distance of 8 fields
-			// this would say there is an 'open sea' there
-			Widelands::FCoords tmp_fcoords = map.get_fcoords(so.ship->get_position());
-			for (int8_t i = 0; i < 8; ++i) {
-				tmp_fcoords = map.get_neighbour(tmp_fcoords, dir);
-				if (tmp_fcoords.field->nodecaps() & MOVECAPS_SWIM) {
-					if (i == 7) {
-						possible_directions.push_back(dir);
-					}
-				} else {
-					break;
-				}
-			}
-		}
 
-		// we test if there is open sea
-		if (possible_directions.empty()) {
-			// 2.A No there is no open sea
-			// TODO(toptopple): we should implement a 'rescue' procedure like 'sail for x fields and
-			// wait-state'
-			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
+	    if (!attempt_escape(so)) {
+	        // So it was not possible to go for open see...
+	    	game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 			log("%d: %s: in JAMMING spot, continue circumvention, dir=%u\n", pn,
 			    so.ship->get_shipname().c_str(), static_cast<uint32_t>(so.island_circ_direction));
-
-		} else {
-			// 2.B Yes, pick one of available directions
-			const Direction direction =
-			   possible_directions.at(game().logic_rand() % possible_directions.size());
-			game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
-
-			log("%d: %s: exploration - breaking for free sea, dir=%u\n", pn,
-			    so.ship->get_shipname().c_str(), direction);
-		}
+	    }
 	}
+
+
+//		// determine swimmable directions
+//		const Map& map = game().map();
+//		std::vector<Direction> possible_directions;
+//		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+//			// testing distance of 8 fields
+//			// this would say there is an 'open sea' there
+//			Widelands::FCoords tmp_fcoords = map.get_fcoords(so.ship->get_position());
+//			for (int8_t i = 0; i < 8; ++i) {
+//				tmp_fcoords = map.get_neighbour(tmp_fcoords, dir);
+//				if (tmp_fcoords.field->nodecaps() & MOVECAPS_SWIM) {
+//					if (i == 7) {
+//						possible_directions.push_back(dir);
+//					}
+//				} else {
+//					break;
+//				}
+//			}
+//		}
+//
+//		// we test if there is open sea
+//		if (possible_directions.empty()) {
+//			// 2.A No there is no open sea
+//			// TODO(toptopple): we should implement a 'rescue' procedure like 'sail for x fields and
+//			// wait-state'
+//			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
+//			log("%d: %s: in JAMMING spot, continue circumvention, dir=%u\n", pn,
+//			    so.ship->get_shipname().c_str(), static_cast<uint32_t>(so.island_circ_direction));
+//
+//		} else {
+//			// 2.B Yes, pick one of available directions
+//			const Direction direction =
+//			   possible_directions.at(game().logic_rand() % possible_directions.size());
+//			game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
+//
+//			log("%d: %s: exploration - breaking for free sea, dir=%u\n", pn,
+//			    so.ship->get_shipname().c_str(), direction);
+//		}
+//	}
 
 	so.last_command_time = gametime;
 	so.waiting_for_command_ = false;
 	return;
+}
+
+// Here we investigate possibility to go for open see, preferably to unexplored territories
+bool DefaultAI::attempt_escape(ShipObserver& so) {
+
+	//const int32_t gametime = game().get_gametime();
+	PlayerNumber const pn = player_->player_number();
+
+	log("%d: %s: DEBUG attempting escape\n", pn,
+			    so.ship->get_shipname().c_str());
+
+	// determine swimmable directions
+	const Map& map = game().map();
+	std::vector<Direction> new_teritory_directions;
+	std::vector<Direction> possible_directions;
+	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		// testing distance of 8 fields
+		// this would say there is an 'open sea' there
+		//Widelands::FCoords tmp_fcoords = map.get_fcoords(so.ship->get_position());
+		Coords tmp_coords = so.ship->get_position();
+
+		for (int8_t i = 0; i < 30; ++i) {
+			//tmp_fcoords = map.get_neighbour(tmp_fcoords, dir);
+			map.get_neighbour(tmp_coords, dir, &tmp_coords);
+			//if (!(tmp_fcoords.field->nodecaps() & MOVECAPS_SWIM)){
+			if (!(map.get_fcoords(tmp_coords).field->nodecaps() & MOVECAPS_SWIM)){
+			    break;
+			}
+			if (i == 5) {
+				possible_directions.push_back(dir);
+			}
+			if (player_->vision(map.get_index(tmp_coords, map.get_width())) == 0) {
+			    // Unseen territory here
+				new_teritory_directions.push_back(dir);
+				break;
+				}
+		}
+	}
+
+	// Going to know directory is discouraged
+
+	if (new_teritory_directions.empty() and game().logic_rand() % 100 < 80){
+	    printf ("DEBUG %s not diverting to known territories\n", so.ship->get_shipname().c_str());
+	    return false;
+	}
+
+	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
+	    const Direction direction = !new_teritory_directions.empty() ?
+			   new_teritory_directions.at(game().logic_rand() % possible_directions.size()) :
+			   possible_directions.at(game().logic_rand() % possible_directions.size());
+			game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
+
+			log("%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,
+			    so.ship->get_shipname().c_str(), new_teritory_directions.empty()? "unexplored" : "free", direction);
+			so.escape_mode = false;
+			return true; // we were successfull
+	}
+	printf ("DEBUG No free sea found from %3dx%3d\n",so.ship->get_position().x, so.ship->get_position().y);
+	return false;
 }
