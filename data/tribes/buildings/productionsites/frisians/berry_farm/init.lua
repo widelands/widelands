@@ -34,7 +34,7 @@ tribes:new_productionsite_type {
    aihints = {
       supports_production_of = { "fruit", "honey" },
       space_consumer = true,
-      prohibited_till = 500
+      prohibited_till = 460
    },
 
    working_positions = {

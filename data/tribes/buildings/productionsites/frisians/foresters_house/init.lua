@@ -34,8 +34,6 @@ tribes:new_productionsite_type {
    aihints = {
       supports_production_of = { "log" },
       space_consumer = true,
-      prohibited_till = 200,
-      forced_after = 400,
    },
 
    working_positions = {
