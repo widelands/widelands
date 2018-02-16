@@ -179,8 +179,10 @@ bool DefaultAI::marine_main_decisions() {
 	FleetStatus enough_ships = FleetStatus::kDoNothing;
 	if (ports_count > 0 && shipyards_count > 0 && idle_shipyard_stocked) {
 
+		if (!basic_economy_established) {
+			enough_ships = FleetStatus::kEnoughShips;
 		// we always need at least one ship in transport mode
-		if (!ship_free) {
+		} else if (!ship_free) {
 			enough_ships = FleetStatus::kNeedShip;
 
 			// we want at least as many free ships as we have ports
@@ -228,7 +230,7 @@ bool DefaultAI::marine_main_decisions() {
 
 	// starting an expedition? if yes, find a port and order it to start an expedition
 	if (ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
-	    persistent_data->no_more_expeditions == kFalse && ship_free) {
+	    persistent_data->no_more_expeditions == kFalse && ship_free && basic_economy_established) {
 
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
