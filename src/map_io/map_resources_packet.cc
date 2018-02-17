@@ -118,8 +118,6 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 			DescriptionIndex res = f.get_resources();
 			ResourceAmount const amount = f.get_resources_amount();
 			ResourceAmount const start_amount = f.get_initial_res_amount();
-			if (!amount)
-				res = 0;
 			fw.unsigned_8(res);
 			fw.unsigned_8(amount);
 			fw.unsigned_8(start_amount);
