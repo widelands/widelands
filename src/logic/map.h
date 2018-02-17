@@ -354,7 +354,8 @@ public:
 	                 const int32_t persist,
 	                 Path&,
 	                 const CheckStep&,
-	                 const uint32_t flags = 0) const;
+	                 const uint32_t flags = 0,
+	                 const uint32_t caps_sensitivity = 0) const;
 
 	/**
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
