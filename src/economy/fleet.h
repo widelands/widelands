@@ -75,14 +75,7 @@ struct Fleet : MapObject {
 
 	const FleetDescr& descr() const;
 
-	explicit Fleet(Player& player);
-
-	Player* get_owner() const {
-		return &owner_;
-	}
-	Player& owner() const {
-		return owner_;
-	}
+	explicit Fleet(Player* player);
 
 	PortDock* get_dock(Flag& flag) const;
 	PortDock* get_dock(EditorGameBase&, Coords) const;
@@ -125,7 +118,6 @@ private:
 	PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse);
 	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
-	Player& owner_;
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
 

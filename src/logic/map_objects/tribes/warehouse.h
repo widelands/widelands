@@ -253,7 +253,7 @@ private:
 	void init_portdock(EditorGameBase& egbase);
 
 	/// Initializes the container sizes for the owner's tribe.
-	void init_containers(Player& owner);
+	void init_containers(const Player& owner);
 
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means

@@ -171,7 +171,7 @@ bool Ship::init(EditorGameBase& egbase) {
  */
 bool Ship::init_fleet(EditorGameBase& egbase) {
 	assert(get_owner() != nullptr);
-	Fleet* fleet = new Fleet(*get_owner());
+	Fleet* fleet = new Fleet(get_owner());
 	fleet->add_ship(this);
 	return fleet->init(egbase);
 	// fleet calls the set_fleet function appropriately

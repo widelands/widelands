@@ -108,7 +108,7 @@ public:
 	                   const std::string& name,
 	                   TeamNumber team = 0);
 	Player* get_player(int32_t n) const;
-	Player& player(int32_t n) const;
+	const Player& player(int32_t n) const;
 	virtual Player* get_safe_player(PlayerNumber);
 
 	// loading stuff
