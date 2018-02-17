@@ -723,7 +723,8 @@ void DefaultAI::late_initialization() {
 			}
 
 			// and fishers
-			if (bo.outputs.size() == 1 && tribe_->safe_ware_index("fish") == bo.outputs.at(0)) {
+			if (bo.outputs.size() == 1 && tribe_->safe_ware_index("fish") == bo.outputs.at(0) &&
+				bo.inputs.empty()) {
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 
