@@ -1611,7 +1611,8 @@ int32_t Map::findpath(Coords instart,
                       int32_t const persist,
                       Path& path,
                       const CheckStep& checkstep,
-                      uint32_t const flags) const {
+                      uint32_t const flags,
+                      uint32_t const caps_sensitivity) const {
 	FCoords start;
 	FCoords end;
 	int32_t upper_cost_limit;
@@ -1693,6 +1694,15 @@ int32_t Map::findpath(Coords instart,
 			// Calculate cost
 			cost = curpf->real_cost + ((flags & fpBidiCost) ? calc_bidi_cost(cur, *direction) :
 			                                                  calc_cost(cur, *direction));
+
+			// If required (indicated by caps_sensitivity) we increase the path costs
+			// if the path is just crossing a field with building capabilities
+			if (caps_sensitivity > 0) {
+				int32_t buildcaps_score = neighb.field->get_caps() & BUILDCAPS_SIZEMASK;
+				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_MINE) ? 1 : 0;
+				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_PORT) ? 9 : 0;
+				cost += buildcaps_score * caps_sensitivity;
+			}
 
 			if (neighbpf.cycle != pathfields->cycle) {
 				// add to open list
