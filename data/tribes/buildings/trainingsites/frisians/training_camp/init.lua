@@ -4,7 +4,7 @@ tribes:new_trainingsite_type {
    msgctxt = "frisians_building",
    name = "frisians_training_camp",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Small Training Camp"),
+   descname = pgettext ("frisians_building", "Training Camp"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
@@ -60,13 +60,13 @@ tribes:new_trainingsite_type {
       { name = "sword_curved", amount = 2 },
       { name = "sword_double", amount = 2 },
       { name = "helmet", amount = 2 },
-      { name = "fur_clothes_studded", amount = 2 },
+      { name = "fur_garment_studded", amount = 2 },
    },
    outputs = {
       "frisians_soldier",
       "scrap_metal_mixed",
-      "scrap_metal_iron",
-      "fur_clothes_old",
+      "scrap_iron",
+      "fur_garment_old",
    },
 
    ["soldier attack"] = {
@@ -104,7 +104,7 @@ tribes:new_trainingsite_type {
          {"smoked_fish", "smoked_meat"},
       },
       weapons = {
-         "fur_clothes_studded",
+         "fur_garment_studded",
       }
    },
 
@@ -126,7 +126,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 0", -- Because the soldier can be expelled by the player
             "consume=sword_long bread_frisians,beer,smoked_fish,smoked_meat",
             "train=soldier attack 0 1",
-            "produce=scrap_metal_iron"
+            "produce=scrap_iron"
          }
       },
       upgrade_soldier_attack_1 = {
@@ -138,7 +138,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 1",
             "consume=sword_curved bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 1 2",
-            "produce=scrap_metal_iron:2"
+            "produce=scrap_iron:2"
          }
       },
       upgrade_soldier_attack_2 = {
@@ -150,7 +150,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 2",
             "consume=sword_double bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 2 3",
-            "produce=scrap_metal_iron scrap_metal_mixed"
+            "produce=scrap_iron scrap_metal_mixed"
          }
       },
       upgrade_soldier_health_0 = {
@@ -171,9 +171,9 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier defense 0",
             "animate=working 26400",
             "check_soldier=soldier defense 0",
-            "consume=fur_clothes_studded bread_frisians,beer smoked_fish,smoked_meat",
+            "consume=fur_garment_studded bread_frisians,beer smoked_fish,smoked_meat",
             "train=soldier defense 0 1",
-            "produce=fur_clothes_old"
+            "produce=fur_garment_old"
          }
       },
    },

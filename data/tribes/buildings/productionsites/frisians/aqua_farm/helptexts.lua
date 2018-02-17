@@ -3,7 +3,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Why on earth shouldn't we be able to catch fish even in the desert?")
+   return pgettext ("frisians_building", "Why on earth shouldn’t we be able to catch fish even in the desert?")
 end
 
 function building_helptext_lore_author ()
@@ -18,7 +18,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return "The aqua farm needs holes in the ground as dug by a clay digger nearby to use as fishing ponds."
+   return pgettext("building", "The aqua farm needs holes in the ground that were dug by a clay burner nearby to use as fishing ponds.")
 end
 
 function building_helptext_performance()

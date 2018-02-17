@@ -36,7 +36,7 @@ print_loading_message("┗━ took", function()
    -- ===================================
 
    print_loading_message("┃    Wares", function()
-      
+
       include "tribes/wares/clay/init.lua"
       include "tribes/wares/brick/init.lua"
       include "tribes/wares/fruit/init.lua"
@@ -45,13 +45,13 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/bread_frisians/init.lua"
       include "tribes/wares/honey_bread/init.lua"
       include "tribes/wares/mead/init.lua"
-      include "tribes/wares/scrap_metal_iron/init.lua"
+      include "tribes/wares/scrap_iron/init.lua"
       include "tribes/wares/scrap_metal_mixed/init.lua"
       include "tribes/wares/fur/init.lua"
-      include "tribes/wares/fur_clothes/init.lua"
-      include "tribes/wares/fur_clothes_old/init.lua"
-      include "tribes/wares/fur_clothes_studded/init.lua"
-      include "tribes/wares/fur_clothes_golden/init.lua"
+      include "tribes/wares/fur_garment/init.lua"
+      include "tribes/wares/fur_garment_old/init.lua"
+      include "tribes/wares/fur_garment_studded/init.lua"
+      include "tribes/wares/fur_garment_golden/init.lua"
       include "tribes/wares/helmet_golden/init.lua"
       include "tribes/wares/sword_basic/init.lua"
       include "tribes/wares/sword_long/init.lua"
@@ -143,7 +143,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/wheat/init.lua"
       include "tribes/wares/wine/init.lua"
       include "tribes/wares/wool/init.lua"
-      
+
    end)
 
    -- ===================================
@@ -309,7 +309,7 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/empire/vintner/init.lua"
       include "tribes/workers/empire/weaponsmith/init.lua"
       include "tribes/workers/empire/weaver/init.lua"
-      
+
       include "tribes/workers/frisians/carrier/init.lua"
       include "tribes/workers/frisians/reindeer/init.lua"
       include "tribes/workers/frisians/builder/init.lua"
@@ -498,7 +498,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/empire/marblemine/init.lua"
       include "tribes/buildings/productionsites/empire/goldmine_deep/init.lua"
       include "tribes/buildings/productionsites/empire/goldmine/init.lua"
-      
+
       --Frisians mines
       include "tribes/buildings/productionsites/frisians/coalmine_deep/init.lua"
       include "tribes/buildings/productionsites/frisians/rockmine_deep/init.lua"
@@ -524,7 +524,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/fishers_house/init.lua"
       include "tribes/buildings/productionsites/frisians/berry_farm/init.lua"
       include "tribes/buildings/productionsites/frisians/collectors_house/init.lua"
-      include "tribes/buildings/productionsites/frisians/claypit/init.lua"
+      include "tribes/buildings/productionsites/frisians/clay_pit/init.lua"
       --Frisians medium
       include "tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua"
       include "tribes/buildings/productionsites/frisians/bakery/init.lua"
@@ -536,10 +536,10 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/smokery/init.lua"
       include "tribes/buildings/productionsites/frisians/shipyard/init.lua"
       include "tribes/buildings/productionsites/frisians/furnace/init.lua"
-      include "tribes/buildings/productionsites/frisians/recycling_centre/init.lua"
+      include "tribes/buildings/productionsites/frisians/recycling_center/init.lua"
       include "tribes/buildings/productionsites/frisians/blacksmithy/init.lua"
-      include "tribes/buildings/productionsites/frisians/armour_smithy_large/init.lua"
-      include "tribes/buildings/productionsites/frisians/armour_smithy_small/init.lua"
+      include "tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua"
+      include "tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua"
       include "tribes/buildings/productionsites/frisians/seamstress_master/init.lua"
       include "tribes/buildings/productionsites/frisians/seamstress/init.lua"
       include "tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua"
@@ -588,7 +588,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/militarysites/empire/tower/init.lua"
       include "tribes/buildings/militarysites/empire/castle/init.lua"
       include "tribes/buildings/militarysites/empire/fortress/init.lua"
-      
+
       include "tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua"
       include "tribes/buildings/militarysites/frisians/wooden_tower/init.lua"
       include "tribes/buildings/militarysites/frisians/sentinel/init.lua"

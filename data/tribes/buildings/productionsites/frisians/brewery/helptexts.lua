@@ -1,6 +1,6 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "I know not a single master miner who ever works without a nice pint of beer!")
+   return pgettext ("frisians_building", "I know no single master miner who’ll ever work without a nice pint of beer!")
 end
 
 function building_helptext_lore_author ()

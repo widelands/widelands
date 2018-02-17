@@ -2,9 +2,9 @@ dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
-   name = "frisians_recycling_centre",
+   name = "frisians_recycling_center",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Recycling Centre"),
+   descname = pgettext ("frisians_building", "Recycling Center"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
@@ -51,9 +51,9 @@ tribes:new_productionsite_type {
 
    inputs = {
       { name = "coal", amount = 8 },
-      { name = "scrap_metal_iron", amount = 8 },
+      { name = "scrap_iron", amount = 8 },
       { name = "scrap_metal_mixed", amount = 8 },
-      { name = "fur_clothes_old", amount = 8 },
+      { name = "fur_garment_old", amount = 8 },
    },
    outputs = {
       "iron",
@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = pgettext("frisians_building", "working"),
+         descname = _"working",
          actions = {
             "call=make_fur",
             "call=smelt_iron",
@@ -77,9 +77,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
          descname = pgettext("frisians_building", "recycling fur"),
          actions = {
-            "return=skipped unless site has fur_clothes_old",
+            "return=skipped unless site has fur_garment_old",
             "sleep=40000",
-            "consume=fur_clothes_old",
+            "consume=fur_garment_old",
             "animate=working 15000",
             "produce=fur"
          }
@@ -90,7 +90,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs iron",
             "sleep=40000",
-            "consume=scrap_metal_iron:2 coal",
+            "consume=scrap_iron:2 coal",
             "animate=working 40000",
             "produce=iron:2"
          }

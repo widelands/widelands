@@ -4,7 +4,7 @@ tribes:new_ware_type {
    msgctxt = "frisians_ware",
    name = "honey_bread",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("frisians_ware", "Honeybread"),
+   descname = pgettext("frisians_ware", "Honey Bread"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {

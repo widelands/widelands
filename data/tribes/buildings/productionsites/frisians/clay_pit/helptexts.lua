@@ -3,7 +3,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Think you can build a house without my help?")
+   return pgettext ("frisians_building", "You think you can build a house without my help?")
 end
 
 function building_helptext_lore_author ()
@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Digs up earth and uses water to turn it into clay. Clay is used to make bricks, reinforce the charcoal kiln and to build ships.")
+   return pgettext("building", "Digs up mud from the ground and uses water to turn it into clay. Clay is used to make bricks, reinforce the charcoal kiln and to build ships.")
 end
 
 function building_helptext_note()

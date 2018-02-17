@@ -5,7 +5,7 @@ end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "A farmer's reply when asked by his chieftain why he plants such a slow-growing grain.")
+   return pgettext ("frisians_building", "A farmer’s reply when asked by his chieftain why he was planting such a slow-growing grain.")
 end
 
 function building_helptext_purpose()
@@ -14,11 +14,11 @@ function building_helptext_purpose()
 end
 
 function building_helptext_note()
-   -- TRANSLATORS#: Note helptext for a building
-   return "Needs free space around to plant seeds."
+   -- TRANSLATORS: Note helptext for a building
+   return pgettext ("frisians_building", "The farm needs free space within the work area to plant seeds.")
 end
 
 function building_helptext_performance()
    -- TRANSLATORS: Performance helptext for a building
-   return pgettext("frisians_building", "The farms needs approximately %s to produce one sheath of barley."):bformat(ngettext("%d minute", "%d minutes", 5):bformat(5))
+   return pgettext("frisians_building", "The farm needs approximately %s to produce one sheaf of barley."):bformat(ngettext("%d minute", "%d minutes", 5):bformat(5))
 end

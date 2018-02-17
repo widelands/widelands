@@ -1,6 +1,6 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Meat doesn't grow on bushes. Fruit do.")
+   return pgettext ("frisians_building", "Meat doesn’t grow on bushes. Fruit does.")
 end
 
 function building_helptext_lore_author ()

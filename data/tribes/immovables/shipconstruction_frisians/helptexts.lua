@@ -1,6 +1,7 @@
 function immovable_helptext(tribe)
    local helptext = {
-      default = ""
+      -- TRANSLATORS: Helptext for a ship construction site.
+      default = _("A ship is being constructed at this site.")
    }
    local result = ""
    if tribe then

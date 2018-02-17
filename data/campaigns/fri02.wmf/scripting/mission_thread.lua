@@ -20,11 +20,11 @@ for x=0,map.width-1 do
 end
 
 function count_military_buildings_p1 ()
-   return (#p1:get_buildings ("frisians_sentinel") + 
-      #p1:get_buildings ("frisians_outpost") + 
-      #p1:get_buildings ("frisians_tower") + 
-      #p1:get_buildings ("frisians_fortress") + 
-      #p1:get_buildings ("frisians_wooden_tower") + 
+   return (#p1:get_buildings ("frisians_sentinel") +
+      #p1:get_buildings ("frisians_outpost") +
+      #p1:get_buildings ("frisians_tower") +
+      #p1:get_buildings ("frisians_fortress") +
+      #p1:get_buildings ("frisians_wooden_tower") +
       #p1:get_buildings ("frisians_wooden_tower_high"))
 end
 
@@ -32,7 +32,7 @@ function check_mountain ()
    while true do
       sleep (7777)
       for idx,f in ipairs(mountains) do
-         if f:has_caps ("mine") and f.owner == p1 then 
+         if f:has_caps ("mine") and f.owner == p1 then
             has_mountain = f
             return
          end
@@ -51,7 +51,7 @@ function check_empire ()
                if cl == p1 then p1c = true end
                if cl == p2 then p2c = true end
             end
-            if p1c and p2c then 
+            if p1c and p2c then
                see_empire = f
                return
             end
@@ -108,13 +108,13 @@ function expand_south ()
    sleep (2000)
    campaign_message_box (supply_murilius_9)
    set_objective_done (o)
-   
+
    o = add_campaign_objective (obj_supply_murilius)
    local choice = nil
    local milbld = count_military_buildings_p1 ()
    while choice == nil do
       sleep (2791)
-      if #(p1:get_buildings ("frisians_warehouse_empire")) < 1 then 
+      if #(p1:get_buildings ("frisians_warehouse_empire")) < 1 then
          choice = "destroy"
       elseif count_military_buildings_p1 () > milbld then --it IS possible to destroy a military building and build a new one elsewhere
          choice = "military"
@@ -162,10 +162,10 @@ function mining_issues ()
    campaign_message_box (train_recycle_3)
    local o = add_campaign_objective (obj_train_recycle)
    campaign_message_box (train_recycle_4)
-   p1:allow_buildings {"frisians_recycling_centre", "frisians_training_camp", "frisians_training_arena"}
+   p1:allow_buildings {"frisians_recycling_center", "frisians_training_camp", "frisians_training_arena"}
    local miner = false
-   while not miner do 
-      sleep (4473) 
+   while not miner do
+      sleep (4473)
       local mines = array_combine(
          p1:get_buildings ("frisians_coalmine"),
          p1:get_buildings ("frisians_rockmine"),
@@ -176,10 +176,10 @@ function mining_issues ()
          p1:get_buildings ("frisians_ironmine_deep"),
          p1:get_buildings ("frisians_goldmine_deep")
       )
-      for idx,bld in ipairs (mines) do 
-         if bld:get_workers ("frisians_miner") + bld:get_workers ("frisians_miner_master") > 0 then 
-            miner = true 
-         end 
+      for idx,bld in ipairs (mines) do
+         if bld:get_workers ("frisians_miner") + bld:get_workers ("frisians_miner_master") > 0 then
+            miner = true
+         end
       end
    end
    set_objective_done (o)
@@ -192,7 +192,7 @@ function mining_issues ()
    set_objective_done (o)
    campaign_message_box (aqua_farm_3)
    campaign_message_box (aqua_farm_4)
-   p1:allow_buildings {"frisians_armour_smithy_small", "frisians_seamstress_master", "frisians_barracks"}
+   p1:allow_buildings {"frisians_armor_smithy_small", "frisians_seamstress_master", "frisians_barracks"}
    done_mine = true
 end
 
@@ -200,8 +200,8 @@ function supply_yes ()
    local wh = p1:get_buildings ("frisians_warehouse_empire") [1]
    local hq = p2:get_buildings ("empire_headquarters") [1]
    -- transfer all wares that frisians and empire have in common
-   for idx,name in ipairs ({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish", 
-         "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe", 
+   for idx,name in ipairs ({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish",
+         "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe",
          "bread_paddle", "basket", "kitchen_tools", "ire_tongs"}) do
       local nb = wh:get_wares (name)
       wh:set_wares (name, 0)
@@ -211,7 +211,7 @@ function supply_yes ()
    local o = add_campaign_objective (obj_defeat_barbarians)
    while not p3.defeated do sleep (4513) end
    set_objective_done (o)
-   if not p2.defeated then 
+   if not p2.defeated then
       campaign_message_box (defeat_murilius_1)
       campaign_message_box (defeat_murilius_2)
       p2.team = 2
@@ -249,7 +249,7 @@ function victory ()
 end
 
 function mission_thread()
-   
+
    p3:conquer (p1start, 8)
    place_building_in_region (p3, "barbarians_farm", p1start:region (2))
    place_building_in_region (p3, "barbarians_quarry", p1start:region (7))
@@ -264,7 +264,7 @@ function mission_thread()
    campaign_message_box (intro_2)
    include "map:scripting/starting_conditions.lua"
    sleep (5000)
-   
+
    p1.team = 1
    p2.team = 1
    p3.team = 2
@@ -272,14 +272,14 @@ function mission_thread()
 --     · Beginning:          forbid 1>2, 2>1, 2>3
 --     · Refusing alliance:  forbid only 2>3
 --     · Accepting alliance: first unchanged, after p3 defeated: allow all
-   
+
    campaign_message_box (intro_3)
    local o = add_campaign_objective (obj_new_home)
-   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1, 
-         frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_claypit = 1, 
+   while not check_for_buildings (p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1,
+         frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_clay_pit = 1,
          frisians_charcoal_kiln = 1}) do sleep (4273) end
    set_objective_done (o)
-   
+
    run (expand_south)
    run (mining_issues)
 

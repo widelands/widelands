@@ -65,9 +65,9 @@ tribes:new_tribe {
           "iron",
           "gold_ore",
           "gold",
-          "scrap_metal_iron",
+          "scrap_iron",
           "scrap_metal_mixed",
-          "fur_clothes_old",
+          "fur_garment_old",
       },
       {
          -- Tools
@@ -90,9 +90,9 @@ tribes:new_tribe {
           "sword_long",
           "sword_curved",
           "sword_double",
-          "fur_clothes",
-          "fur_clothes_studded",
-          "fur_clothes_golden",
+          "fur_garment",
+          "fur_garment_studded",
+          "fur_garment_golden",
           "helmet",
           "helmet_golden",
       }
@@ -230,7 +230,7 @@ tribes:new_tribe {
       "frisians_fishers_house",
       "frisians_reed_farm",
       "frisians_well",
-      "frisians_claypit",
+      "frisians_clay_pit",
       "frisians_berry_farm",
       "frisians_collectors_house",
       "frisians_beekeepers_house",
@@ -240,10 +240,10 @@ tribes:new_tribe {
       -- Medium
       "frisians_brick_burners_house",
       "frisians_furnace",
-      "frisians_recycling_centre",
+      "frisians_recycling_center",
       "frisians_blacksmithy",
-      "frisians_armour_smithy_small",
-      "frisians_armour_smithy_large",
+      "frisians_armor_smithy_small",
+      "frisians_armor_smithy_large",
       "frisians_seamstress",
       "frisians_seamstress_master",
       "frisians_charcoal_kiln",
@@ -318,7 +318,7 @@ tribes:new_tribe {
    ship = "frisians_ship",
    headquarters = "frisians_headquarters",
    port = "frisians_port",
-   
+
    -- AI hints
    barracks = "frisians_barracks",
    ironore = "iron_ore",

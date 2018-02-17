@@ -50,19 +50,19 @@ tribes:new_productionsite_type {
       { name = "fur", amount = 8 },
    },
    outputs = {
-      "fur_clothes"
+      "fur_garment"
    },
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start sewing fur clothes because ...
-         descname = _"sewing fur clothes",
+         -- TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
+         descname = _"sewing fur garment",
          actions = {
             "sleep=20000",
-            "return=skipped unless economy needs fur_clothes or workers need experience",
+            "return=skipped unless economy needs fur_garment or workers need experience",
             "consume=fur:2",
             "animate=working 25000",
-            "produce=fur_clothes"
+            "produce=fur_garment"
          },
       },
    },

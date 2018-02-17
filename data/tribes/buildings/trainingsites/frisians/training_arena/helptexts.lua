@@ -3,7 +3,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Now you have two swords, meaning there's more of a risk you'll accidently stab yourself, but if you got this far, you'll likely master this challenge as well.")
+   return pgettext ("frisians_building", "Now that you have two swords, there’s more of a risk you’ll accidently stab yourself, but if you got this far, you’ll likely master this challenge as well.")
 end
 
 function building_helptext_lore_author ()
@@ -13,12 +13,12 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext ("frisians_building", "Trains soldiers in Attack, Defence and Health to the final level. Equips the soldiers with all necessary weapons and armour parts.")
+   return pgettext ("frisians_building", "Trains soldiers in Attack, Defense and Health to the final level. Equips the soldiers with all necessary weapons and armor parts.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("frisians_building", "Trains only soldiers who have been trained to the maximum level by the Small Training Camp.")
+   return pgettext("frisians_building", "Trains only soldiers who have been trained to the maximum level by the Training Camp.")
 end
 
 function building_helptext_performance()

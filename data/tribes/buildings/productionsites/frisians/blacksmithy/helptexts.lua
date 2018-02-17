@@ -1,6 +1,6 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "If you don't have iron, change your name from blacksmith to lacksmith!")
+   return pgettext ("frisians_building", "If you don’t have iron, change your name from blacksmith to lacksmith!")
 end
 
 function building_helptext_lore_author ()

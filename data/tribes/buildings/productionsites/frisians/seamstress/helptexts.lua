@@ -10,7 +10,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Sews fur clothes out of reindeer fur.")
+   return pgettext("building", "Sews fur garments out of reindeer fur.")
 end
 
 function building_helptext_note()

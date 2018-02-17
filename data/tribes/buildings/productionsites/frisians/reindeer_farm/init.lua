@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
    programs = {
       work = {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
-         descname = pgettext("frisians_building", "working"),
+         descname = _"working",
          actions = {
             "call=recruit_deer",
             "call=make_fur",

@@ -59,7 +59,7 @@ obj_build_mining = {
    title=_"Build an iron mine and a mining infrastructure",
    number = 1,
    body = objective_text (_"Build mines and mining infrastructure",
-      li (_[[Build an iron mine, a furnace, a blacksmithy and a small armour smithy.]])
+      li (_[[Build an iron mine, a furnace, a blacksmithy and a small armor smithy.]])
    ),
 }
 obj_recruit_soldiers = {
@@ -83,7 +83,7 @@ obj_train_soldiers = {
    title=_"Train your soldiers",
    number = 1,
    body = objective_text (_"Training Soldiers",
-      li (_[[Train a soldier to the highest possible level. Soldiers are trained in small training camps and large training arenas. We will need a gold mine, a master seamstress to sew better armour, and a large armour smithy for better weapons and helmets.]])
+      li (_[[Train a soldier to the highest possible level. Soldiers are trained in small training camps and large training arenas. We will need a gold mine, a master seamstress to sew better armor, and a large armor smithy for better weapons and helmets.]])
    ),
 }
 obj_defeat_enemy = {
@@ -223,7 +223,7 @@ mining_1 = {
       _([[We can now produce all the kinds of food we are used to. I wonder what treasures these hills might contain? We should find out.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – mining economy
-      _([[Build an iron mine and perhaps a gold mine. As they produce only ores, we will need a furnace to smelt them. Also build a blacksmithy to ensure we won´t run out of tools – and yes, a small armour smithy as well. It produces helmets as well as swords. I hope we won´t meet enemies here, but it´s better to be prepared.]]))
+      _([[Build an iron mine and perhaps a gold mine. As they produce only ores, we will need a furnace to smelt them. Also build a blacksmithy to ensure we won´t run out of tools – and yes, a small armor smithy as well. It produces helmets as well as swords. I hope we won´t meet enemies here, but it´s better to be prepared.]]))
       .. new_objectives (obj_build_mining),
 }
 recruit_1 = {
@@ -233,16 +233,16 @@ recruit_1 = {
       _([[Our mines are working well. We can now produce all the tools we need, and some weapons as well.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – recruit 1
-      _([[We could use these weapons to equip some new soldiers. I hope we won´t find enemies here, but it is always better to be prepared. New soldiers are equipped in a barracks with a basic sword and a set of fur clothes, the uniform of all honourable warriors.]])),
+      _([[We could use these weapons to equip some new soldiers. I hope we won´t find enemies here, but it is always better to be prepared. New soldiers are equipped in a barracks with a basic sword and a fur garment, the uniform of all honourable warriors.]])),
 }
 recruit_2 = {
    title =_ "Be Prepared",
-   body=hauke (_"Build a recruitment centre",
+   body=hauke (_"Build a recruitment center",
       -- TRANSLATORS: Hauke – recruit 2
       _([[We will need a barracks, of course; a reindeer farm to produce fur, and a seamstress to sew the fur into garments. The reindeer farm produces some meat as a by-product of fur, and it also trains reindeer to help our carriers on busy roads.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – recruit 2
-      _([[I advise to build all those buildings within a short distance of each other, and to construct two warehouses nearby: One should be set to store only weapons, armour, ores, metal and coal; the other to store building materials.]])
+      _([[I advise to build all those buildings within a short distance of each other, and to construct two warehouses nearby: One should be set to store only weapons, armor, ores, metal and coal; the other to store building materials.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – recruit 2
       _([[We should also build other related buildings nearby, such as a furnace, and some wells and farms to supply the reindeer farm. This design will make our military economy more efficient, because it reduces the waiting time for wares in the processing buildings.]]))
@@ -304,12 +304,12 @@ training_2 = {
 }
 training_3 = {
    title =_ "Training Soldiers",
-   body=hauke (_"Planning a training centre",
+   body=hauke (_"Planning a training center",
       -- TRANSLATORS: Hauke – train soldiers 3
-      _([[We will need a master seamstress to sew better armour, and another seamstress to keep producing normal fur clothes. Also, enhance the small armour smithy to produce better weapons and helmets, and build a new small one so we still get basic weapons. We need at least one gold mine now, because the best weapons and armour use gold.]])
+      _([[We will need a master seamstress to sew better armor, and another seamstress to keep producing normal fur garments. Also, enhance the small armor smithy to produce better weapons and helmets, and build a new small one so we still get basic weapons. We need at least one gold mine now, because the best weapons and armor use gold.]])
        .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – train soldiers 3
-      _([[We should build these buildings close to the barracks, since it is, as I already mentioned earlier, much more efficient to centralise all our military facilities in one recruiting and training centre, than if they were strewn out over a long distance. Build a third warehouse there which will store only the food needed for training.]])
+      _([[We should build these buildings close to the barracks, since it is, as I already mentioned earlier, much more efficient to centralise all our military facilities in one recruiting and training center, than if they were strewn out over a long distance. Build a third warehouse there which will store only the food needed for training.]])
        .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – train soldiers 3
       _([[When soldiers train to use new weapons, their old equipment is discarded. Take into account that the useless scraps will clutter up your roads until they are stored in a warehouse somewhere.]])

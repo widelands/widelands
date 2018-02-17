@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
 
    inputs = {
       { name = "sword_basic", amount = 8 },
-      { name = "fur_clothes", amount = 8 },
+      { name = "fur_garment", amount = 8 },
       { name = "frisians_carrier", amount = 8 }
    },
    outputs = {
@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=15000",
             "return=skipped unless economy needs frisians_soldier",
-            "consume=sword_basic fur_clothes frisians_carrier",
+            "consume=sword_basic fur_garment frisians_carrier",
             "animate=working 15000",
             "recruit=frisians_soldier"
          }

@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
       -- TRANSLATORS: "Game" means animals that you can hunt
       heading = _"Out of Game",
       -- TRANSLATORS: "game" means animals that you can hunt
-      message = pgettext ("frisians_building", "The hunter working out of this hunter’s house can’t find any game in his work area."),
+      message = pgettext("frisians_building", "The hunter working out of this hunter’s house can’t find any game in his work area."),
       productivity_threshold = 33
    },
 }

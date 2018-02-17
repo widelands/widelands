@@ -4,7 +4,7 @@ tribes:new_productionsite_type {
    msgctxt = "frisians_building",
    name = "frisians_collectors_house",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Fruit Collector´s House"),
+   descname = pgettext ("frisians_building", "Fruit Collector’s House"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
@@ -53,12 +53,12 @@ tribes:new_productionsite_type {
          }
       },
    },
-   
+
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Bushes",
       heading = _"Out of Berries",
-      message = pgettext ("frisians_building", "The fruit collector working at this collector´s house can’t find any berry bushes in his work area. You should consider building another berry farm, or dismantling or destroying this building."),
+      message = pgettext ("frisians_building", "The fruit collector working at this fruit collector’s house can’t find any berry bushes in his work area. You should consider building another berry farm, or dismantling or destroying this building."),
       productivity_threshold = 8
    },
 }

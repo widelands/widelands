@@ -58,7 +58,7 @@ p2:allow_buildings {
    "frisians_foresters_house",
    "frisians_well",
    "frisians_reed_farm",
-   "frisians_claypit",
+   "frisians_clay_pit",
    "frisians_brick_burners_house",
    "frisians_fishers_house",
    "frisians_hunters_house",

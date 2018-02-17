@@ -2,13 +2,13 @@ dirname = path.dirname(__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
-   name = "frisians_armour_smithy_small",
+   name = "frisians_armor_smithy_small",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("frisians_building", "Small Armour Smithy"),
+   descname = pgettext("frisians_building", "Small Armor Smithy"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "frisians_armour_smithy_large",
+   enhancement = "frisians_armor_smithy_large",
 
    buildcost = {
       brick = 3,

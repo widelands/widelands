@@ -10,7 +10,7 @@ terrain_affinity = {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_currant_black_tiny",
-   descname = _ "Black Currant (Tiny)",
+   descname = _ "Black Currant (tiny)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "seed_berrybush" },
@@ -34,7 +34,7 @@ tribes:new_immovable_type {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_currant_black_small",
-   descname = _ "Black Currant (Small)",
+   descname = _ "Black Currant (small)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = {},
@@ -58,7 +58,7 @@ tribes:new_immovable_type {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_currant_black_medium",
-   descname = _ "Black Currant (Medium)",
+   descname = _ "Black Currant (medium)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "flowering" },
@@ -82,7 +82,7 @@ tribes:new_immovable_type {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_currant_black_ripe",
-   descname = _ "Black Currant (Ripe)",
+   descname = _ "Black Currant (ripe)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "ripe_bush" },

@@ -1,11 +1,11 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "We love the sea so much that we don´t want to drink it empty!")
+   return pgettext ("frisians_building", "We love the sea so much that we don’t want to drink it empty!")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Chieftain Arldor's retort when he was asked why his tribe can't drink salt water")
+   return pgettext ("frisians_building", "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt water")
 end
 
 function building_helptext_note()

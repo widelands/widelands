@@ -1,6 +1,6 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "What can ever be more beautiful tham the brilliant sun's beams shining through the glistering canopy of leaves?")
+   return pgettext ("frisians_building", "What can ever be more beautiful than the brilliant sun’s beams shining through the glistering canopy of leaves?")
 end
 
 function building_helptext_lore_author ()
@@ -15,7 +15,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("frisians_building", "The forester´s house needs free space within the work area to plant the trees.")
+   return pgettext("frisians_building", "The forester’s house needs free space within the work area to plant the trees.")
 end
 
 function building_helptext_performance()

@@ -43,7 +43,7 @@ obj_train_recycle = {
    title=_"Train soldiers and recycle their weapons",
    number = 1,
    body = objective_text (_"Train your soldiers and recycle the discarded weapons to regain some metal",
-      li (_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a Recycling Centre. Use the weapons in the store to train soldiers and recycle some scrap metal.]])
+      li (_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a recycling center. Use the weapons in the store to train soldiers and recycle some scrap metal.]])
    ),
 }
 obj_aqua_farm = {
@@ -61,9 +61,9 @@ obj_supply_murilius = {
    body = objective_text (_"Gather wares as a gift or destroy the Empire´s warehouse",
       li (_([[Decide whether you want to work with Murilius against the barbarians. If so, fill his warehouse with these wares:]])
       .. paragraphdivider () ..
-      _([[30×Log, 40×Granite, 30×Fish, 30×Beer, 150×Water, 40×Ration, 10×Meal, 30×Coal, 40×Iron Ore, 20×Iron, 20×Gold Ore, 10×Gold.]]) 
+      _([[30×Log, 40×Granite, 30×Fish, 30×Beer, 150×Water, 40×Ration, 10×Meal, 30×Coal, 40×Iron Ore, 20×Iron, 20×Gold Ore, 10×Gold.]])
       .. paragraphdivider () ..
-      _([[Or just destroy the warehouse and risk having Murilius as an enemy. He forbade you to expand your territory until the wares have been handed over.]]) 
+      _([[Or just destroy the warehouse and risk having Murilius as an enemy. He forbade you to expand your territory until the wares have been handed over.]])
       )
    ),
 }
@@ -181,7 +181,7 @@ aqua_farm_1 = {
       _([[Our mines have started working. Now, we only need to build a furnace and the metal production will be running smoothly.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Aqua Farms 1
-      _([[Do we have a reindeer farm already? If not, we should build one now. We need more reindeer for the crowded roads, and we could already start sewing fur clothes to equip new soldiers. Who knows whether we will have to fight eventually?]])),
+      _([[Do we have a reindeer farm already? If not, we should build one now. We need more reindeer for the crowded roads, and we could already start sewing fur garments to equip new soldiers. Who knows whether we will have to fight eventually?]])),
 }
 aqua_farm_2 = {
    title =_ "Fishing",
@@ -197,7 +197,7 @@ aqua_farm_3 = {
    title =_ "Fishing",
    body=hauke (_"We have fish again",
       -- TRANSLATORS: Hauke – Aqua Farms 3
-      _([[Well done. We have an aqua farm now, and our mining economy is stable for now. However, the miners tell me that the resources are already low, and the mines may run empty completely soon.]]) 
+      _([[Well done. We have an aqua farm now, and our mining economy is stable for now. However, the miners tell me that the resources are already low, and the mines may run empty completely soon.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – Aqua Farms 3
       _([[The mines will still be able to produce then, but it will take about twenty times longer – ten times if it is a deep mine – to produce ores or coal. You probably want to prepare for the increasing demands of time and food.]])),
@@ -209,7 +209,7 @@ aqua_farm_4 = {
       _([[You are right – we should build more berry farms, collector´s houses and taverns as well as a drinking hall, and advanced bakeries and breweries.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Aqua Farms 4
-      _([[But meanwhile, we can start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and armour. I propose to build armour smithies, a barracks, a training arena and a master seamstress now.]])),
+      _([[But meanwhile, we can start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and armor. I propose to build armor smithies, a barracks, a training arena and a master seamstress now.]])),
 }
 
 supply_murilius_1 = {
@@ -287,7 +287,7 @@ supply_murilius_destroy = {
    title =_ "The Empire is angry",
    body=murilius ("Hostes Imperii estis!",
       -- TRANSLATORS: Murilius – enemy of the Empire
-      _([[Barbarians! You have refused my offer of friendship most ingraciously by ]]) .. 
+      _([[Barbarians! You have refused my offer of friendship most ingraciously by ]]) ..
       -- TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
       _([[destroying the beautiful building we presented you with!]])
       .. paragraphdivider () ..
@@ -298,7 +298,7 @@ supply_murilius_military = {
    title =_ "The Empire is angry",
    body=murilius ("Hostes Imperii estis!",
       -- TRANSLATORS: Murilius – enemy of the Empire
-      _([[Barbarians! You have refused my offer of friendship most ingraciously by ]]) .. 
+      _([[Barbarians! You have refused my offer of friendship most ingraciously by ]]) ..
       -- TRANSLATORS: Murilius – enemy of the Empire: player built forbidden military buildings
       _([[basely wasting your precious resources on expansion!]])
       .. paragraphdivider () ..
@@ -351,8 +351,8 @@ victory_1 = {
       _([[We have defeated all our enemies! Now no other tribe will ever dare settle here again. We are safe, and we can finally live our lifes in peace.]]))
       .. objective_text (_"Congratulations",
       -- TRANSLATORS: Reebaud – victory
-      _[[You have completed this campaign!]] 
-      .. paragraphdivider () .. 
+      _[[You have completed this campaign!]]
+      .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – victory
       _[[To be continued…]]),
 }

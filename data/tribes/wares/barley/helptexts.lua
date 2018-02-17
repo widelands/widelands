@@ -1,7 +1,7 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Barley
-      frisians = pgettext("frisians_ware", "Barley is a slow-growing grain that is used to bake bread and brew beer. It is also eaten by reindeer.")
+      frisians = pgettext("frisians_ware", "Barley is a slow-growing grain that is used for baking bread and brewing beer. It is also eaten by reindeer.")
    }
    local result = ""
    if tribe then

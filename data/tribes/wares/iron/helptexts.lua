@@ -9,7 +9,7 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Iron
       empire = pgettext("empire_ware", "Weapons, armor and tools are made of iron."),
       -- TRANSLATORS: Helptext for a ware: Iron
-      frisians = pgettext("frisians_ware", "Tools and weapons are made of iron. It is also used as jewellery for fur cloth armour to give it a silver shine.")
+      frisians = pgettext("frisians_ware", "Tools and weapons are made of iron. It is also used as jewellery for fur garment armor to give it a silver shine.")
    }
    local result = ""
    if tribe then

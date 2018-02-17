@@ -48,13 +48,13 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "fur_clothes", amount = 8 },
+      { name = "fur_garment", amount = 8 },
       { name = "iron", amount = 8 },
       { name = "gold", amount = 4 },
    },
    outputs = {
-      "fur_clothes_studded",
-      "fur_clothes_golden"
+      "fur_garment_studded",
+      "fur_garment_golden"
    },
 
    programs = {
@@ -68,25 +68,25 @@ tribes:new_productionsite_type {
          },
       },
       weave_studded = {
-         -- TRANSLATORS: Completed/Skipped/Did not start sewing studded fur clothes because ...
-         descname = _"sewing studded fur clothes",
+         -- TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment because ...
+         descname = _"sewing studded fur garment",
          actions = {
-            "return=skipped unless economy needs fur_clothes_studded",
+            "return=skipped unless economy needs fur_garment_studded",
             "sleep=45000",
-            "consume=fur_clothes iron",
+            "consume=fur_garment iron",
             "animate=working 45000",
-            "produce=fur_clothes_studded"
+            "produce=fur_garment_studded"
          },
       },
       weave_gold = {
-         -- TRANSLATORS: Completed/Skipped/Did not start sewing golden fur clothes because ...
-         descname = _"sewing golden fur clothes",
+         -- TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment because ...
+         descname = _"sewing golden fur garment",
          actions = {
-            "return=skipped unless economy needs fur_clothes_golden",
+            "return=skipped unless economy needs fur_garment_golden",
             "sleep=47000",
-            "consume=fur_clothes iron gold",
+            "consume=fur_garment iron gold",
             "animate=working 61000",
-            "produce=fur_clothes_golden"
+            "produce=fur_garment_golden"
          },
       },
    },

@@ -1,6 +1,6 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Hunters can't sell anything on fridays, but fishers don't have such problems.")
+   return pgettext ("frisians_building", "Hunters can’t sell anything on a Friday, but fishers don’t have such problems.")
 end
 
 function building_helptext_lore_author ()
@@ -10,12 +10,12 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("frisians_building", "Fishes on the coast near the fisher’s hut.")
+   return pgettext("frisians_building", "Fishes on the coast near the fisher’s house.")
 end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("frisians_building", "The fisher’s hut needs water full of fish within the work area.")
+   return pgettext("frisians_building", "The fisher’s house needs water full of fish within the work area.")
 end
 
 function building_helptext_performance()

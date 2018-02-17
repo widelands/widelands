@@ -1,6 +1,6 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "My bushes may not be as tall as your trees, but I know nobody who likes to eat bark!")
+   return pgettext ("frisians_building", "My bushes may not be as tall as your trees, but I don’t know anybody who likes to eat bark!")
 end
 
 function building_helptext_lore_author ()

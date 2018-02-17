@@ -1,6 +1,6 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Nothing but fruit all day… Couldn't you hurry up a bit?")
+   return pgettext ("frisians_building", "Nothing but fruit all day… Couldn’t you hurry up a bit?")
 end
 
 function building_helptext_lore_author ()
@@ -20,5 +20,5 @@ end
 
 function building_helptext_performance()
    -- TRANSLATORS#: Performance helptext for a building
-   return pgettext("frisians_building", "The tavern can produce one ration in %s on average if the supply is steady; otherwise, it takes 50 percent longer."):bformat(ngettext("%d second", "%d seconds", 33):bformat(33))
+   return pgettext("frisians_building", "The tavern can produce one ration in %s on average if the supply is steady; otherwise, it will take 50 percent longer."):bformat(ngettext("%d second", "%d seconds", 33):bformat(33))
 end

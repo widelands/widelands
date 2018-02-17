@@ -1,7 +1,7 @@
 function ware_helptext(tribe)
    local helptext = {
-      -- TRANSLATORS: Helptext for a ware: Scrap metal (iron)
-      frisians = pgettext("frisians_ware", "Discarded weapon and armour can be recycled in a recycling centre to produce new tools, weapon and armour.")
+      -- TRANSLATORS: Helptext for a ware: Studded Fur Garment
+      frisians = pgettext("frisians_ware", "Ordinary fur garments can be decorated with iron to give them a silvery shine. These clothes make good armor."),
    }
    local result = ""
    if tribe then

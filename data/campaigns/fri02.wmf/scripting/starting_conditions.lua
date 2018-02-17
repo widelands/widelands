@@ -3,10 +3,10 @@
 -- =======================================================================
 p1:allow_buildings ("all")
 p1:forbid_buildings {
-   "frisians_aqua_farm", 
-   "frisians_recycling_centre",
+   "frisians_aqua_farm",
+   "frisians_recycling_center",
    "frisians_furnace",
-   "frisians_armour_smithy_small",
+   "frisians_armor_smithy_small",
    "frisians_barracks",
    "frisians_training_camp",
    "frisians_training_arena",

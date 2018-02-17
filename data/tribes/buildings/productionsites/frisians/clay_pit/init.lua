@@ -2,7 +2,7 @@ dirname = path.dirname (__file__)
 
 tribes:new_productionsite_type {
    msgctxt = "frisians_building",
-   name = "frisians_claypit",
+   name = "frisians_clay_pit",
    -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext ("frisians_building", "Clay Pit"),
    helptext_script = dirname .. "helptexts.lua",
@@ -74,9 +74,9 @@ tribes:new_productionsite_type {
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of Earth" for clay pits
-      title = _"No flat earth",
-      heading = _"Out of Earth",
-      message = pgettext ("frisians_building", "The clay burner working at this clay pit can’t find any flat earth in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
+      title = _"No Ground",
+      heading = _"No Level Ground",
+      message = pgettext ("frisians_building", "The clay burner working at this clay pit can’t find any level ground in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
       productivity_threshold = 33
    },
 }

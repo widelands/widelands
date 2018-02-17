@@ -47,7 +47,7 @@ return {
              beer = 5,
              cloth = 5,
              fur = 10,
-             fur_clothes = 5,
+             fur_garment = 5,
              sword_basic = 5,
              hammer = 5,
              fire_tongs = 2,
@@ -101,7 +101,7 @@ return {
          }
       })
 
-      place_building_in_region(player, "frisians_claypit", sf:region(11), {
+      place_building_in_region(player, "frisians_clay_pit", sf:region(11), {
          inputs = {
             water = 4
          }

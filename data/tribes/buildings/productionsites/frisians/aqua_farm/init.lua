@@ -79,12 +79,12 @@ tribes:new_productionsite_type {
          },
       },
    },
-   
+
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
-      title = _"No Fish Ponds",
+      title = _"No Ponds",
       heading = _"Out of Fish Ponds",
-      message = pgettext ("frisians_building", "The fisher working at this aqua farm can’t find any ponds in his work area. Please make sure there is a working claypit nearby and the aqua farm is supplied with all needed wares, or consider dismantling or destroying this building."),
+      message = pgettext ("frisians_building", "The fisher working at this aqua farm can’t find any fish ponds in his work area. Please make sure there is a working clay pit nearby and the aqua farm is supplied with all needed wares, or consider dismantling or destroying this building."),
       productivity_threshold = 12
    },
 }

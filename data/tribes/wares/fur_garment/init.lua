@@ -2,13 +2,13 @@ dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
    msgctxt = "ware",
-   name = "fur_clothes_golden",
+   name = "fur_garment",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Golden Fur Garment"),
+   descname = pgettext("ware", "Fur Garment"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
-      frisians = 2,
+      frisians = 30,
    },
    preciousness = {
       frisians = 3,

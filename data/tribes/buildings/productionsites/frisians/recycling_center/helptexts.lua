@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- #TRANSLATORS: Purpose helptext for a building
-   return pgettext("frisians_building", "Recycles old armour and weapon parts from training sites into iron and gold.")
+   return pgettext("frisians_building", "Recycles old armor and weapon parts that have been used up by training sites into iron and gold.")
 end
 
 function building_helptext_note()

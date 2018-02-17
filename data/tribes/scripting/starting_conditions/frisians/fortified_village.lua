@@ -43,7 +43,7 @@ return {
             iron_ore = 10,
             cloth = 5,
             fur = 10,
-            fur_clothes = 5,
+            fur_garment = 5,
             sword_basic = 5,
             hammer = 5,
             fire_tongs = 2,
@@ -95,7 +95,7 @@ return {
             sword_long = 1,
             sword_curved = 1,
             sword_double = 1,
-            fur_clothes_studded = 1,
+            fur_garment_studded = 1,
             helmet = 1
          },
       })
@@ -109,19 +109,19 @@ return {
             sword_long = 1,
             sword_curved = 1,
             sword_double = 1,
-            fur_clothes_golden = 1,
+            fur_garment_golden = 1,
             helmet_golden = 1
          },
       })
 
-      place_building_in_region(plr, "frisians_armour_smithy_small", sf:region(11), {
+      place_building_in_region(plr, "frisians_armor_smithy_small", sf:region(11), {
          inputs = {
             coal = 6,
             iron = 6,
          }
       })
 
-      place_building_in_region(plr, "frisians_armour_smithy_large", sf:region(11), {
+      place_building_in_region(plr, "frisians_armor_smithy_large", sf:region(11), {
          inputs = {
             gold = 4,
             coal = 4,
@@ -137,7 +137,7 @@ return {
          }
       })
 
-      place_building_in_region(plr, "frisians_claypit", sf:region(11), {
+      place_building_in_region(plr, "frisians_clay_pit", sf:region(11), {
          inputs = {
             water = 2,
          }

@@ -2,20 +2,22 @@ dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
    msgctxt = "ware",
-   name = "scrap_metal_iron",
+   name = "fur_garment_studded",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Scrap Metal (Iron)"),
+   descname = pgettext("ware", "Studded Fur Garment"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   default_target_quantity = {},
+   default_target_quantity = {
+      frisians = 2,
+   },
    preciousness = {
-      frisians = 0
+      frisians = 3,
    },
 
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle.png"),
-         hotspot = { 7, 9 },
+         hotspot = { 6, 9 },
       },
    }
 }

@@ -3,7 +3,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Who says a carrier cannot be useful for other things but transport?")
+   return pgettext ("frisians_building", "Who says a beast of burden cannot be useful for other things than transport?")
 end
 
 function building_helptext_lore_author ()
@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("frisians_building", "Breeds strong reindeer for adding them to the transportation system. Also keeps them for their fur, which is turned into armour and cloth.")
+   return pgettext("frisians_building", "Breeds strong reindeer for adding them to the transportation system. Also keeps them for their fur, which is turned into armor and cloth.")
 end
 
 function building_helptext_note()

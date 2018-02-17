@@ -1,6 +1,6 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Why shouldn't my bread taste well? It's only barley and water!")
+   return pgettext ("frisians_building", "Why shouldn’t my bread taste good? It’s only barley and water!")
 end
 
 function building_helptext_lore_author ()

@@ -5,7 +5,7 @@ end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "Over-enthusiastic woodcutter")
+   return pgettext ("frisians_building", "An over-enthusiastic woodcutter")
 end
 
 function building_helptext_purpose()
@@ -15,10 +15,11 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("frisians_building", "The woodcutter´s house needs trees to fell within the work area.")
+   return pgettext("frisians_building", "The woodcutter’s house needs trees to fell within the work area.")
 end
 
 function building_helptext_performance()
+   -- NOCOM Have all of these been measured/calculated, or just pasted from the Barbarians?
    -- TRANSLATORS: Performance helptext for a building
    return pgettext("frisians_building", "The woodcutter pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
 end

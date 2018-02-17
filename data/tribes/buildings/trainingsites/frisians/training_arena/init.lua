@@ -4,7 +4,7 @@ tribes:new_trainingsite_type {
    msgctxt = "frisians_building",
    name = "frisians_training_arena",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Large Training Arena"),
+   descname = pgettext ("frisians_building", "Training Arena"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
@@ -60,13 +60,13 @@ tribes:new_trainingsite_type {
       { name = "sword_curved", amount = 4 },
       { name = "sword_double", amount = 4 },
       { name = "helmet_golden", amount = 2 },
-      { name = "fur_clothes_golden", amount = 2 },
+      { name = "fur_garment_golden", amount = 2 },
    },
    outputs = {
       "frisians_soldier",
-      "scrap_metal_iron",
+      "scrap_iron",
       "scrap_metal_mixed",
-      "fur_clothes_old",
+      "fur_garment_old",
    },
 
    ["soldier attack"] = {
@@ -102,7 +102,7 @@ tribes:new_trainingsite_type {
          {"honey_bread", "mead"}
       },
       weapons = {
-         "fur_clothes_golden",
+         "fur_garment_golden",
       }
    },
 
@@ -136,7 +136,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 4", -- Because the soldier can be expelled by the player
             "consume=sword_curved:2 honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 4 5",
-            "produce=scrap_metal_iron:4"
+            "produce=scrap_iron:4"
          }
       },
       upgrade_soldier_attack_5 = {
@@ -148,7 +148,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 5", -- Because the soldier can be expelled by the player
             "consume=sword_double:2 honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 5 6",
-            "produce=scrap_metal_iron:2 scrap_metal_mixed:2"
+            "produce=scrap_iron:2 scrap_metal_mixed:2"
          }
       },
       upgrade_soldier_defense_1 = {
@@ -158,9 +158,9 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier defense 1",
             "animate=working 22800",
             "check_soldier=soldier defense 1", -- Because the soldier can be expelled by the player
-            "consume=fur_clothes_golden honey_bread,mead smoked_fish,smoked_meat",
+            "consume=fur_garment_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier defense 1 2",
-            "produce=scrap_metal_iron fur_clothes_old"
+            "produce=scrap_iron fur_garment_old"
          }
       },
       upgrade_soldier_health_1 = {
@@ -172,7 +172,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier health 1 2",
-            "produce=scrap_metal_iron:2"
+            "produce=scrap_iron:2"
          }
       },
    },

@@ -3,7 +3,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Just be quiet, listen carefully, and do try not to stab yourself until I explained how to hold a curved sword.")
+   return pgettext ("frisians_building", "Just be quiet, listen carefully, and do try not to stab yourself until I’ve explained to you how to hold a curved sword.")
 end
 
 function building_helptext_lore_author ()
@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext ("frisians_building", "Trains soldiers in Attack up to level 3 as well as in Defence and Health to level 1. Equips the soldiers with all necessary weapons and armour parts.")
+   return pgettext ("frisians_building", "Trains soldiers in Attack up to level 3 as well as in Defense and Health to level 1. Equips the soldiers with all necessary weapons and armor parts.")
 end
 
 function building_helptext_note()

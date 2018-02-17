@@ -4,7 +4,7 @@ tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "pond_growing",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
-   descname = pgettext ("immovable", "Pond with young fish"),
+   descname = pgettext ("immovable", "Pond With Fish Spawn"),
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = {},

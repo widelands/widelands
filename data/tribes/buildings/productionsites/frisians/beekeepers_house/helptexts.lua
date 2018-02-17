@@ -1,11 +1,11 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "If my honey tastes bitter, I must have left some bee stings in it. There are never bee stings in my honey, therefore, it is not bitter.")
+   return pgettext ("frisians_building", "If my honey tastes bitter, I must have left some bee stings in it. There are never any bee stings in my honey, therefore, it is not bitter.")
 end
 
 function building_helptext_lore_author ()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "A bee-keeper ignoring a customer's complaint")
+   return pgettext ("frisians_building", "A beekeeper ignoring a customer’s complaint")
 end
 
 function building_helptext_purpose()
