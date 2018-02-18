@@ -295,8 +295,10 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				expedition_management(so);
 
 				// Sometimes we look for other direction even if ship is still scouting,
-				// escape mode here indicates that we are going over known ports // NOCOM going over or skipping?
-			} else if (so.escape_mode &&
+				// escape mode here indicates that we are going over known ports, that means that last
+				// port space we found when circumventing the island was already known to the ship.
+				// Or(!) this is a island without a port and ship would sail around forever
+			} else if ((so.escape_mode || (so.last_command_time + 5 * 60 * 1000) < gametime) &&
 			           so.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting) {
 				attempt_escape(so);
 			}
@@ -540,8 +542,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 				break;
 			}
 			if (i == 5) {
-				// NOCOM 5 fields?
-				// If open sea goes at least  fields from the ship this is considerd a
+				// If open sea goes at least 5 fields from the ship this is considerd a
 				// candidate, but worse than directions in new_teritory_directions
 				// Of course, this direction can be inserted also into new_teritory_directions
 				// below
