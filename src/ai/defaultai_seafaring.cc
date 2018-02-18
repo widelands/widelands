@@ -295,7 +295,7 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 				expedition_management(so);
 
 				// Sometimes we look for other direction even if ship is still scouting,
-				// escape mode here indicates that we are going over known ports
+				// escape mode here indicates that we are going over known ports // NOCOM going over or skipping?
 			} else if (so.escape_mode &&
 			           so.ship->get_ship_state() == Widelands::Ship::ShipStates::kExpeditionScouting) {
 				attempt_escape(so);
@@ -502,7 +502,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		// 2b) We were here before, let try break for open sea
 	} else {
 		if (!attempt_escape(so)) {  // return true if the ship was sent to open sea
-			// otherwise we continue circumventing the island
+			// otherwise we continue circumnavigating the island
 			game().send_player_ship_explore_island(*so.ship, so.island_circ_direction);
 			log("%d: %s: in JAMMING spot, continue circumvention, dir=%u\n", pn,
 			    so.ship->get_shipname().c_str(), static_cast<uint32_t>(so.island_circ_direction));
@@ -514,7 +514,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 	return;
 }
 
-// Here we investigate possibility to go for open see, preferably to unexplored territories
+// Here we investigate possibility to go for open sea, preferably to unexplored territories
 bool DefaultAI::attempt_escape(ShipObserver& so) {
 
 	const Map& map = game().map();
@@ -530,7 +530,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	possible_directions.clear();
 	possible_directions.reserve(6);
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
-		// testing distance of 30 fields (or as long as the sea goes, and untill
+		// testing distance of 30 fields (or as long as the sea goes, and until
 		// unknown territory is reached)
 		Coords tmp_coords = so.ship->get_position();
 
@@ -540,9 +540,10 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 				break;
 			}
 			if (i == 5) {
+				// NOCOM 5 fields?
 				// If open sea goes at least  fields from the ship this is considerd a
-				// candidate, but worse then directions in new_teritory_directions
-				// Of course this direction can be inserted also into new_teritory_directions
+				// candidate, but worse than directions in new_teritory_directions
+				// Of course, this direction can be inserted also into new_teritory_directions
 				// below
 				possible_directions.push_back(dir);
 			}
@@ -557,8 +558,8 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 
 	assert(possible_directions.size() >= new_teritory_directions.size());
 
-	// If only open sea (no unexplored sea) is found, we dont divert ship always
-	if (new_teritory_directions.empty() and game().logic_rand() % 100 < 80) {
+	// If only open sea (no unexplored sea) is found, we don't always divert the ship
+	if (new_teritory_directions.empty() && game().logic_rand() % 100 < 80) {
 		return false;
 	}
 
@@ -573,7 +574,7 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 		    so.ship->get_shipname().c_str(), !new_teritory_directions.empty() ? "unexplored" : "free",
 		    direction);
 		so.escape_mode = false;
-		return true;  // we were successfull
+		return true;  // we were successful
 	}
 	return false;
 }
