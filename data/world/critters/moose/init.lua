@@ -16,8 +16,8 @@ animations = {
 add_walking_animations(animations, "walk", dirname, "walk", {21, 34}, 20)
 
 world:new_critter_type{
-   name = "elk",
-   descname = _ "Elk",
+   name = "moose",
+   descname = _ "Moose",
    editor_category = "critters_herbivores",
    attributes = { "eatable" },
    programs = {

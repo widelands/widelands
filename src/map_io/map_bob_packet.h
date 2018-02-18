@@ -42,7 +42,7 @@ private:
 	              EditorGameBase&,
 	              MapObjectLoader&,
 	              const Coords&,
-	              const WorldLegacyLookupTable& lookup_table);
+	              const WorldLegacyLookupTable& lookup_table, uint16_t packet_version);
 };
 }
 

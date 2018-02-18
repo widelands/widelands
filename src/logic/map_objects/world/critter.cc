@@ -269,7 +269,8 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 1;
+// We need to bump this packet version every time we rename a critter, so that the world legacy lookup table will work.
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 Critter::Loader::Loader() {
 }
@@ -304,7 +305,7 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 			const CritterDescr* descr = nullptr;
 
 			if (owner == "world") {
-				critter_name = lookup_table.lookup_critter(critter_name);
+				critter_name = lookup_table.lookup_critter(critter_name, packet_version);
 				descr = egbase.world().get_critter_descr(critter_name);
 			} else {
 				throw GameDataError(
