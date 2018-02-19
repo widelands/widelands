@@ -18,7 +18,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return "If the supply is steady, the reindeer farm produces one meat after producing three pieces of fur."
+   return pgettext ("frisians_building", "If the supply is steady, the reindeer farm produces one meat after producing three pieces of fur.")
 end
 
 function building_helptext_performance()
