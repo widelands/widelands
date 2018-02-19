@@ -102,7 +102,6 @@ void InternetGaming::initialize_connection() {
 	// First of all try to connect to the metaserver
 	log("InternetGaming: Connecting to the metaserver.\n");
 	NetAddress addr;
-	net.reset();
 	if (NetAddress::resolve_to_v6(&addr, meta_, port_)) {
 		net = NetClient::connect(addr);
 	}
@@ -126,6 +125,10 @@ bool InternetGaming::login(const std::string& nick,
                            bool registered,
                            const std::string& meta,
                            uint32_t port) {
+
+	// Reset local state. Only resetting on logout() or error isn't enough since
+	// the game might jump to the main menu from other places, too
+	reset();
 
 	clientname_ = nick;
 	reg_ = registered;

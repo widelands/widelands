@@ -86,7 +86,7 @@ tribes:new_tribe {
       },
       {
          -- Weapons & Armor
-          "sword_basic",
+          "sword_short",
           "sword_long",
           "sword_curved",
           "sword_double",
@@ -244,8 +244,8 @@ tribes:new_tribe {
       "frisians_blacksmithy",
       "frisians_armor_smithy_small",
       "frisians_armor_smithy_large",
-      "frisians_seamstress",
-      "frisians_seamstress_master",
+      "frisians_sewing_room",
+      "frisians_tailors_shop",
       "frisians_charcoal_kiln",
       "frisians_smokery",
       "frisians_bakery",

@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-02-01 09:16+0000\n"
+"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"PO-Revision-Date: 2018-02-02 08:33+0000\n"
 "Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -2559,25 +2559,25 @@ msgstr "Поле (крохотное)"
 #: ../../data/tribes/immovables/grapevine_medium/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (medium)"
-msgstr "Лоза (средняя)"
+msgstr "Виноград (средний)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (ripe)"
-msgstr "Лоза (зрелая)"
+msgstr "Виноград (зрелый)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine_small/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (small)"
-msgstr "Лоза (малая)"
+msgstr "Виноград (малый)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (tiny)"
-msgstr "Лоза (крохотная)"
+msgstr "Виноград (крохотный)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_medium/init.lua:7

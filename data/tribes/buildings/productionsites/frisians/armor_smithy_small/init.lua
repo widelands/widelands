@@ -52,7 +52,7 @@ tribes:new_productionsite_type {
       { name = "iron", amount = 8 },
    },
    outputs = {
-      "sword_basic",
+      "sword_short",
       "sword_long",
       "helmet",
    },
@@ -69,14 +69,14 @@ tribes:new_productionsite_type {
          },
       },
       produce_s1 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a basic sword because ...
-         descname = _"forging a basic sword",
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a short sword because ...
+         descname = _"forging a short sword",
          actions = {
-            "return=skipped unless economy needs sword_basic",
+            "return=skipped unless economy needs sword_short",
             "sleep=36000",
             "consume=coal iron",
             "animate=working 28000",
-            "produce=sword_basic"
+            "produce=sword_short"
          },
       },
       produce_s2 = {

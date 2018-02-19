@@ -209,7 +209,7 @@ aqua_farm_4 = {
       _([[You are right – we should build more berry farms, collector´s houses and taverns as well as a drinking hall, and advanced bakeries and breweries.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Aqua Farms 4
-      _([[But meanwhile, we can start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and armor. I propose to build armor smithies, a barracks, a training arena and a master seamstress now.]])),
+      _([[But meanwhile, we can start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and armor. I propose to build armor smithies, a barracks, a training arena and a tailor´s shop now.]])),
 }
 
 supply_murilius_1 = {

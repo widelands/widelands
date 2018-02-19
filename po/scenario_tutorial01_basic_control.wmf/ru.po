@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-02-01 09:29+0000\n"
+"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"PO-Revision-Date: 2018-02-01 09:31+0000\n"
 "Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -604,14 +604,14 @@ msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "Не забывайте про уклоны местности, когда будете строить дороги и используйте их в ваших интересах. Кроме того, постарайтесь делать дороги максимально короткими и всегда помните о том, чтобы ставить как можно больше флагов на дороге, чтобы разделить ее на сегменты для ускорения перемещения товаров."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:315
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Если удерживать Ctrl или Shift+Ctrl во время прокладки дороги - флаги будут установлены автоматически. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."

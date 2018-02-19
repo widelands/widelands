@@ -44,7 +44,7 @@ return {
             cloth = 5,
             fur = 10,
             fur_garment = 5,
-            sword_basic = 5,
+            sword_short = 5,
             hammer = 5,
             fire_tongs = 2,
             bread_paddle = 2,

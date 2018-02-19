@@ -20,7 +20,7 @@ tribes:new_worker_type {
 
    buildcost = {
       frisians_carrier = 1,
-      sword_basic = 1,
+      sword_short = 1,
       fur_garment = 1
    },
 

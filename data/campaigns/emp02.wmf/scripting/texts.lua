@@ -2,8 +2,7 @@
 -- Some formating functions
 -- =========================
 
-include "scripting/formatting.lua"
-include "scripting/format_scenario.lua"
+include "scripting/richtext_scenarios.lua"
 
 function lutius(title, text)
    return speech("map:Lutius.png", "2F9131", title, text)
@@ -28,7 +27,7 @@ obj_build_woodeconomy = {
    title =_"Build up a wood economy",
    number = 5,
    body = objective_text(_"Wood Economy",
-      listitem_bullet(_[[Build three lumberjack’s houses, a forester’s house and a sawmill.]])
+      li(_[[Build three lumberjack’s houses, a forester’s house and a sawmill.]])
    ),
 }
 
@@ -37,7 +36,7 @@ obj_build_quarry = {
    title =_"Build a quarry",
    number = 1,
    body = objective_text(_"Quarry",
-      listitem_bullet(_[[Build a quarry to the south of your headquarters.]])
+      li(_[[Build a quarry to the south of your headquarters.]])
    ),
 }
 
@@ -46,7 +45,7 @@ obj_build_military_buildings = {
    title =_"Protect your colony",
    number = 1,
    body = objective_text(_"Protect Your Colony",
-      listitem_bullet(_[[Build some blockhouses and sentries around the colony.]])
+      li(_[[Build some blockhouses and sentries around the colony.]])
    ),
 }
 
@@ -55,7 +54,7 @@ obj_build_marblemine = {
    title =_"Start mining marble",
    number = 1,
    body = objective_text(_"Marble",
-      listitem_bullet(_[[Expand to the east, to start mining marble from the mountain.]])
+      li(_[[Expand to the east, to start mining marble from the mountain.]])
    ),
 }
 
@@ -64,7 +63,7 @@ obj_build_mining_infrastructure = {
    title =_"Build a stonemason’s house and mining infrastructure",
    number = 7,
    body = objective_text(_"Stonemason’s house and Mining Infrastructure",
-      listitem_bullet(_[[Build a stonemason’s house and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, weapon smithy, armor smithy and smelting works).]])
+      li(_[[Build a stonemason’s house and then a complete mining and production infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, weapon smithy, armor smithy and smelting works).]])
    ),
 }
 
@@ -73,10 +72,10 @@ obj_build_food_infrastructure = {
    title =_"Provide your miners with food",
    number = 1,
    body = objective_text(_"Food For Your Miners",
-      listitem_bullet(_[[To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.]]) ..
-      listitem_bullet(_[[Of course this means we will need more resources for preparing this food – like fish, meat or bread. To provide these foodstuffs, you would have to build a fisher’s house, a farm, a mill and a bakery.]]) ..
-      listitem_bullet(_[[Maybe you will also need a hunter’s house, a piggery, a vineyard and some wells.]]) ..
-      listitem_arrow(_[[It’s up to you what you want to build. But remember – coal and iron mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])
+      li(_[[To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.]]) ..
+      li(_[[Of course this means we will need more resources for preparing this food – like fish, meat or bread. To provide these foodstuffs, you would have to build a fisher’s house, a farm, a mill and a bakery.]]) ..
+      li(_[[Maybe you will also need a hunter’s house, a piggery, a vineyard and some wells.]]) ..
+      li_arrow(_[[It’s up to you what you want to build. But remember – coal and iron mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])
    ),
 }
 
@@ -85,8 +84,8 @@ obj_build_bigger_military_buildings = {
    title =_"Protect your eastern frontier",
    number = 1,
    body = objective_text(_"Protect Your Eastern Frontier",
-      listitem_bullet(_[[Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier.]]) ..
-      listitem_arrow(_[[To watch deep inside the enemy territory, build a tower.]])
+      li(_[[Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier.]]) ..
+      li_arrow(_[[To watch deep inside the enemy territory, build a tower.]])
    ),
 }
 
@@ -95,9 +94,9 @@ obj_remove_the_barbarians = {
    title =_"Destroy the Barbarian tribe",
    number = 2,
    body = objective_text(_"Destroy the Barbarian Tribe",
-      listitem_bullet(_[[Build a barracks to start training soldiers.]]) ..
-      listitem_bullet(_[[As soon as you have enough soldiers, attack and completely destroy the Barbarian buildings.]]) ..
-      listitem_bullet(_[[Finally, build up a fortress on the peninsula (near where the Barbarian headquarters stood before), to avoid new settlements of other tribes in that region.]])
+      li(_[[Build a barracks to start training soldiers.]]) ..
+      li(_[[As soon as you have enough soldiers, attack and completely destroy the Barbarian buildings.]]) ..
+      li(_[[Finally, build up a fortress on the peninsula (near where the Barbarian headquarters stood before), to avoid new settlements of other tribes in that region.]])
    ),
 }
 
@@ -274,7 +273,7 @@ seven_days_later = {
    title =_ "As Time is Running By",
    w=200,
    h=150,
-   body=rt(p(_"7 days later…")),
+   body=p(_"7 days later…"),
 }
 
 diary_page_11 = {

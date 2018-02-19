@@ -3,6 +3,7 @@
 # 
 # Translators:
 # adrien vigneron <adrienvigneron@ml1.net>, 2015
+# David D, 2018
 # GunChleoc, 2016
 # GunChleoc, 2014
 # Jaypad <ju-ju@nataju.fr>, 2015-2016
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-01-30 12:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"PO-Revision-Date: 2018-02-05 15:53+0000\n"
+"Last-Translator: David D\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1560,14 +1561,14 @@ msgstr "Sert de base pour coloniser des terres situées au-delà des mers et le 
 #: ../../data/tribes/immovables/ashes/helptexts.lua:4
 #: ../../data/tribes/immovables/destroyed_building/helptexts.lua:4
 msgid "The remains of a destroyed building."
-msgstr ""
+msgstr "Les restes d'un bâtiment détruit."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_harvested/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield_harvested/helptexts.lua:4
 #: ../../data/tribes/immovables/field_harvested/helptexts.lua:4
 msgid "This field has been harvested."
-msgstr ""
+msgstr "Ce champ a été récolté."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_medium/helptexts.lua:4
@@ -1577,21 +1578,21 @@ msgstr ""
 #: ../../data/tribes/immovables/field_medium/helptexts.lua:4
 #: ../../data/tribes/immovables/field_small/helptexts.lua:4
 msgid "This field is growing."
-msgstr ""
+msgstr "Ce champ est en croissance."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_ripe/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield_ripe/helptexts.lua:4
 #: ../../data/tribes/immovables/field_ripe/helptexts.lua:4
 msgid "This field is ready for harvesting."
-msgstr ""
+msgstr "Ce champ est prêt pour la récolte."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_tiny/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield_tiny/helptexts.lua:4
 #: ../../data/tribes/immovables/field_tiny/helptexts.lua:4
 msgid "This field has just been planted."
-msgstr ""
+msgstr "Ce champ vient d'être planté."
 
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine_medium/helptexts.lua:4
@@ -1662,7 +1663,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a resource: Coal
 #: ../../data/tribes/immovables/resi_coal2/helptexts.lua:7
 msgid "There is a lot of coal here."
-msgstr ""
+msgstr "Il y a beaucoup de charbon ici."
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi_gold1/helptexts.lua:5
@@ -1678,7 +1679,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi_gold2/helptexts.lua:7
 msgid "There is a lot of gold here."
-msgstr ""
+msgstr "Il y a beaucoup d'or ici."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi_iron1/helptexts.lua:5
@@ -1694,7 +1695,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi_iron2/helptexts.lua:7
 msgid "There is a lot of iron here."
-msgstr ""
+msgstr "Il y a beaucoup de fer ici."
 
 #. TRANSLATORS: Helptext for a resource: No resources
 #: ../../data/tribes/immovables/resi_none/helptexts.lua:4
@@ -1747,12 +1748,12 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #: ../../data/tribes/immovables/resi_stones2/helptexts.lua:12
 msgid "There is a lot of granite here."
-msgstr ""
+msgstr "Il y a beaucoup de granit ici."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi_stones2/helptexts.lua:17
 msgid "There is a lot of marble here."
-msgstr ""
+msgstr "Il y a beaucoup de marbre ici."
 
 #. TRANSLATORS: Helptext for a resource: Water
 #: ../../data/tribes/immovables/resi_water1/helptexts.lua:4
@@ -2450,7 +2451,7 @@ msgstr "%1% et %2%"
 #: ../../data/tribes/scripting/help/immovable_help.lua:49
 #: ../../data/tribes/scripting/help/immovable_help.lua:51
 msgid "Space required: "
-msgstr ""
+msgstr "Espace requis :"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:55
 msgid "Requirements"
@@ -2458,7 +2459,7 @@ msgstr ""
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Preferred Terrains"
-msgstr ""
+msgstr "Terrains préférés"
 
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
@@ -2479,7 +2480,7 @@ msgstr "Bâtiments"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr ""
+msgstr "Immobiles"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"

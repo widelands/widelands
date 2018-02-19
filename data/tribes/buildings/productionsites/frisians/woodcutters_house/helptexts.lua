@@ -1,3 +1,6 @@
+-- This include can be removed when all help texts have been defined.
+include "tribes/scripting/help/global_helptexts.lua"
+
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
    return pgettext ("frisians_building", "I cannot see a tree without imagining what it would look like in terms of furniture.")
@@ -19,7 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- NOCOM Have all of these been measured/calculated, or just pasted from the Barbarians?
-   -- TRANSLATORS: Performance helptext for a building
-   return pgettext("frisians_building", "The woodcutter pauses %s before going to work again."):bformat(ngettext("%d second", "%d seconds", 30):bformat(30))
+   -- TRANSLATORS#: Performance helptext for a building
+   return no_performance_text_yet ()
 end

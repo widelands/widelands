@@ -10,8 +10,8 @@ p1:forbid_buildings {
    "frisians_barracks",
    "frisians_training_camp",
    "frisians_training_arena",
-   "frisians_seamstress",
-   "frisians_seamstress_master",
+   "frisians_sewing_room",
+   "frisians_tailors_shop",
    -- the map is non-seafaring, but just in case:
    "frisians_shipyard",
    "frisians_weaving_mill",

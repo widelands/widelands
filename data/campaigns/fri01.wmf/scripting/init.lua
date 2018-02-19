@@ -15,6 +15,8 @@ p2 = wl.Game ().players[2]
 
 firstToFlood = map:get_field (9, 89)
 expansionMark = map:get_field (68, 68)
+warehouseMark = map:get_field (44, 77)
+portSpace = map:get_field (210, 10)
 
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

@@ -187,12 +187,12 @@ function mining_issues ()
    sleep (10000)
    campaign_message_box (aqua_farm_2)
    local o = add_campaign_objective (obj_aqua_farm)
-   p1:allow_buildings {"frisians_aqua_farm", "frisians_furnace", "frisians_seamstress"}
+   p1:allow_buildings {"frisians_aqua_farm", "frisians_furnace", "frisians_sewing_room"}
    while not check_for_buildings (p1, {frisians_aqua_farm = 1}) do sleep (4473) end
    set_objective_done (o)
    campaign_message_box (aqua_farm_3)
    campaign_message_box (aqua_farm_4)
-   p1:allow_buildings {"frisians_armor_smithy_small", "frisians_seamstress_master", "frisians_barracks"}
+   p1:allow_buildings {"frisians_armor_smithy_small", "frisians_tailors_shop", "frisians_barracks"}
    done_mine = true
 end
 
@@ -202,7 +202,7 @@ function supply_yes ()
    -- transfer all wares that frisians and empire have in common
    for idx,name in ipairs ({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish",
          "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe",
-         "bread_paddle", "basket", "kitchen_tools", "ire_tongs"}) do
+         "bread_paddle", "basket", "kitchen_tools", "fire_tongs"}) do
       local nb = wh:get_wares (name)
       wh:set_wares (name, 0)
       hq:set_wares (name, hq:get_wares (name) + nb)

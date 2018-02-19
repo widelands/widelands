@@ -5,6 +5,17 @@ shewnWarningReed = false
 shewnWarningClay = false
 shewnWarningBricks = false
 
+function hintWarehouseEast ()
+   local fields = warehouseMark:region (5)
+   for i,f in ipairs (fields) do
+      sleep (123)
+      if f.owner == p1 then
+         campaign_message_box (warehouse_on_expand)
+         return
+      end
+   end
+end
+
 function checkWarningEarlyAttack ()
    local y = 0
    local westernmostEnemy = map.width - 1
@@ -107,9 +118,10 @@ function stormflood ()
       --turn the settlement into Rungholt; even swimming things (like ships) are destroyed by the storm
       for idx,field in ipairs (nextF:region (1)) do
          if field.immovable then
-            local fs = field.immovable.fields
+            local fs = nil
+            if is_building (field.immovable) then fs = field.immovable.fields end
             field.immovable:remove ()
-            for idy,f in ipairs (fs) do map:place_immovable ("ashes", f, "tribes") end
+            if fs ~= nil then for idy,f in ipairs (fs) do map:place_immovable ("ashes", f, "tribes") end end
          end
          for idb,bob in ipairs (field.bobs) do bob:remove () end
       end
@@ -164,10 +176,12 @@ function mission_thread ()
    campaign_message_box (intro_5)
    run (warningClay)
 
+   run (hintWarehouseEast)
+
    --wait until no rations left
-   sleep (60000)
    local somethingLeft = true
    while somethingLeft do
+      sleep (4273)
       local inWH = count ("ration")
       local whs = array_combine(
          p1:get_buildings ("frisians_coalmine"),
@@ -178,7 +192,6 @@ function mission_thread ()
          mW = mW or (wh:get_inputs ("ration") == 0)
       end
       somethingLeft = (inWH > 0) or not mW
-      sleep (4273)
    end
 
    --great, you forgot to provide rations…
@@ -194,7 +207,7 @@ function mission_thread ()
    --we want better food
    campaign_message_box (food_2)
    p1:allow_buildings {"frisians_beekeepers_house", "frisians_farm", "frisians_bakery", "frisians_brewery",
-      "frisians_mead_brewery", "frisians_honey_bread_bakery"}
+      "frisians_mead_brewery", "frisians_honey_bread_bakery", "frisians_ironmine", "frisians_furnace", "frisians_blacksmithy"}
    o = add_campaign_objective (obj_build_food_economy_2)
    while not check_for_buildings (p1, {frisians_tavern = 2}) do sleep (4273) end
    p1:allow_buildings {"frisians_drinking_hall"}
@@ -204,9 +217,8 @@ function mission_thread ()
 
    --we can start some real mining
    campaign_message_box (mining_1)
-   p1:allow_buildings {"frisians_ironmine", "frisians_goldmine", "frisians_coalmine_deep", "frisians_rockmine_deep",
-       "frisians_ironmine_deep", "frisians_goldmine_deep", "frisians_furnace", "frisians_blacksmithy",
-       "frisians_armor_smithy_small", "frisians_charcoal_kiln"}
+   p1:allow_buildings {"frisians_goldmine", "frisians_coalmine_deep", "frisians_rockmine_deep",
+       "frisians_ironmine_deep", "frisians_goldmine_deep", "frisians_armor_smithy_small", "frisians_charcoal_kiln"}
    p2:allow_buildings {"frisians_outpost"}
    o = add_campaign_objective (obj_build_mining)
    while not check_for_buildings (p1, {frisians_ironmine = 1, frisians_furnace = 1, frisians_blacksmithy = 1,
@@ -217,8 +229,8 @@ function mission_thread ()
    campaign_message_box (recruit_1)
    campaign_message_box (recruit_2)
    o = add_campaign_objective (obj_recruit_soldiers)
-   p1:allow_buildings {"frisians_barracks", "frisians_reindeer_farm", "frisians_seamstress", "frisians_fortress"}
-   while not check_for_buildings (p1, {frisians_barracks = 1, frisians_seamstress = 1,
+   p1:allow_buildings {"frisians_barracks", "frisians_reindeer_farm", "frisians_sewing_room", "frisians_fortress"}
+   while not check_for_buildings (p1, {frisians_barracks = 1, frisians_sewing_room = 1,
       frisians_reindeer_farm = 1}) do sleep (4273) end
    set_objective_done (o)
 
@@ -248,7 +260,7 @@ function mission_thread ()
    campaign_message_box (training_1)
    campaign_message_box (training_2)
    campaign_message_box (training_3)
-   p1:allow_buildings {"frisians_training_camp", "frisians_training_arena", "frisians_seamstress_master",
+   p1:allow_buildings {"frisians_training_camp", "frisians_training_arena", "frisians_tailors_shop",
       "frisians_armor_smithy_large", "frisians_wooden_tower", "frisians_wooden_tower_high", "frisians_scouts_house"}
    p2:allow_buildings {"frisians_fortress", "frisians_reindeer_farm"}
    o = add_campaign_objective (obj_train_soldiers)
@@ -281,7 +293,7 @@ function mission_thread ()
    --Attack!
    set_objective_done (o)
    p1:allow_buildings {"frisians_tower"}
-   p2:allow_buildings {"frisians_barracks", "frisians_seamstress", "frisians_armor_smithy_small"}
+   p2:allow_buildings {"frisians_barracks", "frisians_sewing_room", "frisians_armor_smithy_small"}
    if not skipToFlood then
       campaign_message_box (training_4)
       campaign_message_box (training_5)
@@ -299,8 +311,8 @@ function mission_thread ()
    campaign_message_box (rising_water_2)
 
    --Stormflood!
-   for x=4,map.width - 5 do
-      for y=4,map.height - 5 do --leave some small margin, show everything else
+   for x=3,map.width - 4 do
+      for y=3,map.height - 4 do --leave some small margin, show everything else
          p1:reveal_fields {map:get_field (x, y)}
       end
    end
@@ -310,6 +322,10 @@ function mission_thread ()
 
    campaign_message_box (rising_water_3)
    campaign_message_box (rising_water_4)
+   for i,f in ipairs (portSpace:region (3)) do --make the port space immediately accessible if it is blocked with trees etc (but not buildings)
+      if f.immovable and f.immovable.descr.type_name == "immovable" then f.immovable:remove () end
+   end
+   scroll_to_field (portSpace)
    p1:allow_buildings {"frisians_port", "frisians_weaving_mill", "frisians_shipyard"}
    o = add_campaign_objective (obj_escape)
 

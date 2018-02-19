@@ -67,7 +67,7 @@ obj_recruit_soldiers = {
    title=_"Start recruiting soldiers",
    number = 1,
    body = objective_text (_"Recruiting Soldiers",
-      li (_[[Build a barracks, a reindeer farm and a seamstress.]])
+      li (_[[Build a barracks, a reindeer farm and a sewing room.]])
    ),
 }
 obj_expand = {
@@ -83,7 +83,7 @@ obj_train_soldiers = {
    title=_"Train your soldiers",
    number = 1,
    body = objective_text (_"Training Soldiers",
-      li (_[[Train a soldier to the highest possible level. Soldiers are trained in small training camps and large training arenas. We will need a gold mine, a master seamstress to sew better armor, and a large armor smithy for better weapons and helmets.]])
+      li (_[[Train a soldier to the highest possible level. Soldiers are trained in small training camps and large training arenas. We will need a gold mine, a tailor´s shop to sew better armor, and a large armor smithy for better weapons and helmets.]])
    ),
 }
 obj_defeat_enemy = {
@@ -185,6 +185,12 @@ warning_bricks = {
       -- TRANSLATORS: Hauke – no bricks
       _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick burner´s house, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]])),
 }
+warehouse_on_expand = {
+   title =_ "Warehouses",
+   body=hauke (_"Build a warehouse in the east",
+      -- TRANSLATORS: Hauke – build a warehouse
+      _([[We are expanding our territory further and further to the east, and wares need to be transported over longer distances. We should build warehouses near our eastern border in certain distances and preferably store construction materials in the easternmost one. Our headquarters is too far in the west to be useful for long-time ware storage.]])),
+}
 
 food_1 = {
    title =_ "Hungry miners",
@@ -233,13 +239,13 @@ recruit_1 = {
       _([[Our mines are working well. We can now produce all the tools we need, and some weapons as well.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – recruit 1
-      _([[We could use these weapons to equip some new soldiers. I hope we won´t find enemies here, but it is always better to be prepared. New soldiers are equipped in a barracks with a basic sword and a fur garment, the uniform of all honourable warriors.]])),
+      _([[We could use these weapons to equip some new soldiers. I hope we won´t find enemies here, but it is always better to be prepared. New soldiers are equipped in a barracks with a short sword and a fur garment, the uniform of all honourable warriors.]])),
 }
 recruit_2 = {
    title =_ "Be Prepared",
    body=hauke (_"Build a recruitment center",
       -- TRANSLATORS: Hauke – recruit 2
-      _([[We will need a barracks, of course; a reindeer farm to produce fur, and a seamstress to sew the fur into garments. The reindeer farm produces some meat as a by-product of fur, and it also trains reindeer to help our carriers on busy roads.]])
+      _([[We will need a barracks, of course; a reindeer farm to produce fur, and a sewing room to sew the fur into garments. The reindeer farm produces some meat as a by-product of fur, and it also trains reindeer to help our carriers on busy roads.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – recruit 2
       _([[I advise to build all those buildings within a short distance of each other, and to construct two warehouses nearby: One should be set to store only weapons, armor, ores, metal and coal; the other to store building materials.]])
@@ -306,7 +312,7 @@ training_3 = {
    title =_ "Training Soldiers",
    body=hauke (_"Planning a training center",
       -- TRANSLATORS: Hauke – train soldiers 3
-      _([[We will need a master seamstress to sew better armor, and another seamstress to keep producing normal fur garments. Also, enhance the small armor smithy to produce better weapons and helmets, and build a new small one so we still get basic weapons. We need at least one gold mine now, because the best weapons and armor use gold.]])
+      _([[We will need a tailor´s shop to sew better armor, and another sewing room to keep producing normal fur garments. Also, enhance the small armor smithy to produce better weapons and helmets, and build a new small one so we still get basic weapons. We need at least one gold mine now, because the best weapons and armor use gold.]])
        .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – train soldiers 3
       _([[We should build these buildings close to the barracks, since it is, as I already mentioned earlier, much more efficient to centralise all our military facilities in one recruiting and training center, than if they were strewn out over a long distance. Build a third warehouse there which will store only the food needed for training.]])

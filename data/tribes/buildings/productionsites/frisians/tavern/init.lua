@@ -71,7 +71,7 @@ tribes:new_productionsite_type {
       },
       produce_malus = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
-         descname = _"preparing a ration",
+         descname = _"preparing only one ration",
          actions = {
             "return=skipped unless economy needs ration",
             "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",

@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-02-01 08:30+0000\n"
+"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"PO-Revision-Date: 2018-02-01 10:07+0000\n"
 "Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr "Недостаточно места"
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -1752,7 +1752,7 @@ msgstr "«Widelands» не может установить соединение 
 
 #: ../../src/network/internet_gaming.cc:173
 msgid "Users marked with IRC will possibly not react to messages."
-msgstr ""
+msgstr "Пользователи, помеченные IRC, возможно, не будут реагировать на сообщения."
 
 #: ../../src/network/internet_gaming.cc:211
 msgid "Successfully reconnected to the metaserver!"
@@ -1769,7 +1769,7 @@ msgstr "Где-то допущена ошибка: %s"
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "Вы были подключены с именем %s, так как запрашиваемое Вами имя уже используется или зарезервировано."
 
 #: ../../src/network/internet_gaming.cc:415
 msgid "Mixed up"
@@ -1859,7 +1859,7 @@ msgstr "Сообщение не может быть отправлено: быт
 
 #: ../../src/network/internet_gaming.cc:812
 msgid "Private messages to IRC users are not supported."
-msgstr ""
+msgstr "Личные сообщения пользователям IRC не поддерживаются."
 
 #: ../../src/network/internet_gaming.cc:889
 msgid "Conversion error"
@@ -2102,7 +2102,7 @@ msgstr "Не удалось использовать локальную сеть
 msgid ""
 "Widelands was unable to use the local network. Maybe some other process is "
 "already running a server on port %sor your network setup is broken."
-msgstr ""
+msgstr "Widelands не удалось использовать локальную сеть. Вероятно, какой-то другой процесс ранее запустил сервер на порту %s либо настройки сети неверные."
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2436,11 +2436,11 @@ msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
-msgstr ""
+msgstr "Widelands не удалось получить IP-адрес сервера за отведённое время. Похоже имеются проблемы с сетью на вашей стороне или стороне сервера.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:377
 msgid "Connection Timed Out"
-msgstr ""
+msgstr "Время ожидания для соединения истекло"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
@@ -2538,7 +2538,7 @@ msgstr "На хосте ещё не выбрана карта или сохра�
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:319
 msgid "Saved Game is Directory"
-msgstr ""
+msgstr "Сохраненная игра – каталог"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:320
 msgid ""
@@ -2797,7 +2797,7 @@ msgstr "Во весь экран"
 
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "Grab input"
-msgstr ""
+msgstr "Захват ввода"
 
 #: ../../src/ui_fsmenu/options.cc:132
 msgid "Maximum FPS:"
@@ -2813,7 +2813,7 @@ msgstr "Парковать окна по краям"
 
 #: ../../src/ui_fsmenu/options.cc:140
 msgid "Animate automatic map movements"
-msgstr ""
+msgstr "Анимировать автоматические перемещения карты"
 
 #: ../../src/ui_fsmenu/options.cc:150
 msgid "Distance for windows to snap to other panels:"
@@ -2826,12 +2826,12 @@ msgstr "Дистанция до стыковки окон к границам:"
 #: ../../src/ui_fsmenu/options.cc:165
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Enable music"
-msgstr ""
+msgstr "Включить музыку"
 
 #: ../../src/ui_fsmenu/options.cc:166
 #: ../../src/wui/game_options_sound_menu.cc:31
 msgid "Enable sound effects"
-msgstr ""
+msgstr "Включить звуковые эффекты"
 
 #: ../../src/ui_fsmenu/options.cc:167
 msgid "Play a sound at message arrival"
@@ -2906,17 +2906,17 @@ msgstr "Пытаться использовать язык системы"
 #: ../../src/ui_fsmenu/options.cc:520
 #, c-format
 msgid "The translation into %s is complete."
-msgstr ""
+msgstr "Перевод на %sзавершен."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
 #: ../../src/ui_fsmenu/options.cc:523
 msgid "The translation into %1% is %2%%% complete."
-msgstr ""
+msgstr "Перевод на %1% завершен на %2%%%."
 
 #: ../../src/ui_fsmenu/options.cc:537
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
-msgstr ""
+msgstr "Если вы хотите помочь нам с переводами, пожалуйста посетите %s"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
 msgid "New Game"
@@ -2951,7 +2951,7 @@ msgstr "Пожалуйста, добавьте эту информацию в о
 
 #: ../../src/wlapplication.cc:1207
 msgid "Invalid Address"
-msgstr ""
+msgstr "Некорректный адрес"
 
 #: ../../src/wlapplication.cc:1208
 msgid "The entered hostname or address is invalid and can’t be connected to."
@@ -3053,15 +3053,15 @@ msgstr "%:"
 
 #: ../../src/wui/building_statistics_menu.cc:130
 msgid "Small buildings"
-msgstr ""
+msgstr "Малые здания"
 
 #: ../../src/wui/building_statistics_menu.cc:133
 msgid "Medium buildings"
-msgstr ""
+msgstr "Средние здания"
 
 #: ../../src/wui/building_statistics_menu.cc:136
 msgid "Big buildings"
-msgstr ""
+msgstr "Большие здания"
 
 #: ../../src/wui/building_statistics_menu.cc:139
 msgid "Mines"
@@ -3500,11 +3500,11 @@ msgstr "Выход из игры"
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music volume"
-msgstr ""
+msgstr "Громкость музыки"
 
 #: ../../src/wui/game_options_sound_menu.cc:50
 msgid "Sound effects volume"
-msgstr ""
+msgstr "Громкость звуков"
 
 #: ../../src/wui/game_statistics_menu.cc:36
 msgid "Statistics Menu"
@@ -3512,15 +3512,15 @@ msgstr "Меню статистики"
 
 #: ../../src/wui/game_statistics_menu.cc:40
 msgid "General statistics"
-msgstr ""
+msgstr "Общая статистика"
 
 #: ../../src/wui/game_statistics_menu.cc:43
 msgid "Ware statistics"
-msgstr ""
+msgstr "Статистика товаров"
 
 #: ../../src/wui/game_statistics_menu.cc:44
 msgid "Building statistics"
-msgstr ""
+msgstr "Статистика построек"
 
 #: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
 #: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
@@ -3604,7 +3604,7 @@ msgstr "Имя карты:"
 #. * TRANSLATORS: The time a replay starts. Shown in the replay loading screen
 #: ../../src/wui/gamedetails.cc:156
 msgid "Start of Replay:"
-msgstr ""
+msgstr "Запуск повтора:"
 
 #. * TRANSLATORS: The current time of a savegame. Shown in the game saving and
 #. loading screens.
@@ -3715,7 +3715,7 @@ msgstr[3] "%u новых сообщений"
 
 #: ../../src/wui/interactive_spectator.cc:53
 msgid "Exit replay"
-msgstr ""
+msgstr "Выйти из повтора"
 
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save game"
@@ -3735,7 +3735,7 @@ msgstr "Автосохранение %1%: %2%"
 #: ../../src/wui/load_or_save_game.cc:62
 msgctxt "filename_mapname"
 msgid "%1%: %2%"
-msgstr ""
+msgstr "%1%: %2%"
 
 #: ../../src/wui/load_or_save_game.cc:97
 msgid "Delete"
@@ -3795,7 +3795,7 @@ msgstr "Описание"
 
 #: ../../src/wui/load_or_save_game.cc:130
 msgid "Map name (start of replay)"
-msgstr ""
+msgstr "Имя карты (запуск повтора)"
 
 #: ../../src/wui/load_or_save_game.cc:131
 msgid ""
@@ -3823,7 +3823,7 @@ msgstr "Удалить этот повтор"
 #. multiple files
 #: ../../src/wui/load_or_save_game.cc:188
 msgid "Delete these games"
-msgstr ""
+msgstr "Удалить эти игры"
 
 #: ../../src/wui/load_or_save_game.cc:190
 #, c-format
@@ -3865,10 +3865,10 @@ msgstr[3] "Вы действительно хотите удалить игры 
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting File"
 msgid_plural "Confirm Deleting Files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Подтверждение удаления файла"
+msgstr[1] "Подтверждение удаления файлов"
+msgstr[2] "Подтверждение удаления файлов"
+msgstr[3] "Подтверждение удаления файлов"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -3882,7 +3882,7 @@ msgstr "Сегодня, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:391
 msgid "saved today at %1%:%2%"
-msgstr ""
+msgstr "сохранена сегодня в %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -3896,21 +3896,21 @@ msgstr "Вчера, %1%:%2%"
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:408
 msgid "saved yesterday at %1%:%2%"
-msgstr ""
+msgstr "сохранена вчера в %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
 #: ../../src/wui/load_or_save_game.cc:414
 msgid "%1% %2%, %3%"
-msgstr ""
+msgstr "%2% %1%, %3%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:420
 msgid "saved on %1% %2%, %3%"
-msgstr ""
+msgstr "сохранена %2% %1%, %3%"
 
 #. * TRANSLATORS: "Single Player" entry in the Game Mode table column.
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
@@ -3944,7 +3944,7 @@ msgstr "MP (%1%)"
 #: ../../src/wui/load_or_save_game.cc:467
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
-msgstr ""
+msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
@@ -4202,7 +4202,7 @@ msgstr "Племя будет выбрано случайно"
 
 #: ../../src/wui/multiplayersetupgroup.cc:516
 msgid "No Team"
-msgstr ""
+msgstr "Нет команды"
 
 #: ../../src/wui/multiplayersetupgroup.cc:522
 #, c-format
@@ -4349,7 +4349,7 @@ msgstr "Идти в корабль"
 #. * TRANSLATORS: Window label when an expedition can't be canceled
 #: ../../src/wui/shipwindow.cc:172
 msgid "Cancel Expedition"
-msgstr ""
+msgstr "Отмена экспедиции"
 
 #: ../../src/wui/shipwindow.cc:172
 msgid ""
@@ -4382,11 +4382,11 @@ msgstr "ЗД: %1$u/%2$u  АТ: %3$u/%4$u  ЗЩ: %5$u/%6$u  УК: %7$u/%8$u"
 
 #: ../../src/wui/soldierlist.cc:401
 msgid "Prefer rookies"
-msgstr ""
+msgstr "Предпочитать новобранцев"
 
 #: ../../src/wui/soldierlist.cc:404
 msgid "Prefer heroes"
-msgstr ""
+msgstr "Предпочитать героев"
 
 #: ../../src/wui/stock_menu.cc:41
 msgid "Wares (total)"
@@ -4422,7 +4422,7 @@ msgstr "Потребление"
 
 #: ../../src/wui/ware_statistics_menu.cc:141
 msgid "Economy health"
-msgstr ""
+msgstr "Здоровье экономики"
 
 #: ../../src/wui/warehousewindow.cc:146
 msgid "Normal policy"

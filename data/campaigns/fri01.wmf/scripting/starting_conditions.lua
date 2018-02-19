@@ -19,14 +19,14 @@ hq:set_wares {
    smoked_fish = 10,
    smoked_meat = 10,
    bread_frisians = 10,
-   ration = 30,
+   ration = 24,
    iron = 2,
    iron_ore = 5,
    gold_ore = 1,
 }
 hq:set_workers {
    frisians_woodcutter = 3,
-   frisians_forester = 5,
+   frisians_forester = 6,
    frisians_clay_burner = 4,
    frisians_builder = 10,
    frisians_blacksmith = 4,
@@ -42,7 +42,7 @@ hq:set_workers {
    frisians_hunter = 1,
    frisians_geologist = 2,
    frisians_farmer = 3,
-   frisians_reed_farmer = 2,
+   frisians_reed_farmer = 3,
    frisians_baker = 1,
    frisians_brewer = 1,
    frisians_trainer = 3,
@@ -116,5 +116,4 @@ hq2:set_workers {
    frisians_brewer_master = 5,
    frisians_reindeer = 50,
 }
-hq2:set_soldiers ({2,0,2,0}, 150)
 hq2:set_soldiers ({0,6,0,0}, 50)
