@@ -1,3 +1,6 @@
+-- This include can be removed when all help texts have been defined.
+include "tribes/scripting/help/global_helptexts.lua"
+
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
    return pgettext ("frisians_building", "No frost, no heat; no rain, no draught; no rats, no locusts; naught can destroy my harvest.")
@@ -19,6 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- TRANSLATORS: Performance helptext for a building
-   return pgettext("frisians_building", "The farm needs approximately %s to produce one sheaf of barley."):bformat(ngettext("%d minute", "%d minutes", 5):bformat(5))
+   -- TRANSLATORS#: Performance helptext for a building
+   return no_performance_text_yet()
 end

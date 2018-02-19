@@ -1,3 +1,6 @@
+-- This include can be removed when all help texts have been defined.
+include "tribes/scripting/help/global_helptexts.lua"
+
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
    return pgettext ("frisians_building", "No worse fortune can befall a reed farmer than to see his roof leaking.")
@@ -19,6 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- TRANSLATORS: Performance helptext for a building
-   return pgettext("frisians_building", "Calculation needed")
+   -- TRANSLATORS#: Performance helptext for a building
+   return no_performance_text_yet()
 end
