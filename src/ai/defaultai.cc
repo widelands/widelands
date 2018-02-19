@@ -2389,6 +2389,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			if (bo.is(BuildingAttribute::kShipyard)) {
 				assert(bo.new_building == BuildingNecessity::kAllowed ||
+				       bo.new_building == BuildingNecessity::kNeeded ||
 				       bo.new_building == BuildingNecessity::kForbidden);
 			}
 
@@ -2761,7 +2762,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += 150;
 						assert(!bo.is(BuildingAttribute::kShipyard));
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
-						assert(bo.new_building == BuildingNecessity::kAllowed);
 						if (!map_allows_seafaring_) {
 							continue;
 						}
@@ -4572,12 +4572,15 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 	}
 
 	// So now we know the warehouse here is needed.
-	bo.primary_priority =
-	   1 +
-	   (needed_count - numof_warehouses_) * std::abs(management_data.get_military_number_at(22) * 5);
+	bo.primary_priority = 1 +
+	                      (needed_count - numof_warehouses_) *
+	                         std::abs(management_data.get_military_number_at(22) * 20);
 	++bo.new_building_overdue;
 	bo.primary_priority +=
-	   bo.new_building_overdue * std::abs(management_data.get_military_number_at(16)) / 10;
+	   bo.new_building_overdue * std::abs(management_data.get_military_number_at(16));
+	if (bo.is(BuildingAttribute::kPort) && spots_ < kSpotsTooLittle) {
+		bo.primary_priority += std::abs(management_data.get_military_number_at(152)) * 10;
+	}
 	return BuildingNecessity::kAllowed;
 }
 
@@ -5511,8 +5514,20 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		} else if (bo.is(BuildingAttribute::kShipyard)) {
 			if (bo.total_count() > 0 ||
-			    site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
+			    (!basic_economy_established &&
+			     site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) ||
+			    !map_allows_seafaring_) {
 				return BuildingNecessity::kForbidden;
+			}
+			bo.primary_priority = 0;
+			if (num_ports > 0) {
+				bo.primary_priority += std::abs(management_data.get_military_number_at(150) * 3);
+			}
+			if (spots_ < kSpotsTooLittle) {
+				bo.primary_priority += std::abs(management_data.get_military_number_at(151) * 3);
+			}
+			if (bo.primary_priority > 0) {
+				return BuildingNecessity::kNeeded;
 			}
 			return BuildingNecessity::kAllowed;
 		} else if (bo.max_needed_preciousness == 0) {
