@@ -4,7 +4,7 @@ tribes:new_productionsite_type {
    msgctxt = "frisians_building",
    name = "frisians_tailors_shop",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Tailor´s Shop"),
+   descname = pgettext ("frisians_building", "Tailor’s Shop"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
