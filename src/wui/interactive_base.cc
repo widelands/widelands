@@ -27,6 +27,7 @@
 
 #include "base/macros.h"
 #include "base/time_string.h"
+#include "economy/economy.h" // NOCOM
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/default_resolution.h"
@@ -43,6 +44,7 @@
 #include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h" // NOCOM
 #include "logic/widelands_geometry.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
@@ -108,6 +110,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      lastframe_(SDL_GetTicks()),
      frametime_(0),
      avg_usframetime_(0),
+	  low_fps_count_(0),
      buildroad_(nullptr),
      road_build_player_(0),
      unique_window_handler_(new UniqueWindowHandler()),
@@ -424,6 +427,33 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 						ctrl->set_desired_speed(ctrl->desired_speed() + speed_diff);
 					}
 				}
+			}
+		}
+
+		// NOCOM logging the FPS and economy sizes
+		constexpr float kFpsCutoff = 20.0;
+		constexpr int kLowFpsRepeatThreshold = 10;
+		if (GameController* const ctrl1 = game->game_controller()) {
+			if ((1000.0 / frametime_ < kFpsCutoff) && 1000.0 / ((avg_usframetime_ / 1000) < kFpsCutoff)) {
+				if (!ctrl1->is_paused_or_zero_speed()) {
+					++low_fps_count_;
+					if (low_fps_count_ > kLowFpsRepeatThreshold) {
+						log("Low FPS: %5.1f fps (avg: %5.1f fps)\n", 1000.0 / frametime_, 1000.0 / (avg_usframetime_ / 1000));
+						for (Widelands::PlayerNumber pn = 1; pn < kMaxPlayers; ++pn) {
+							Widelands::Player* pl = game->player_manager()->get_player(pn);
+							if (pl != nullptr) {
+								for (uint32_t eco_nr = 0; eco_nr < pl->get_nr_economies(); ++eco_nr) {
+									Widelands::Economy* eco = pl->get_economy_by_number(eco_nr);
+									log("* Player %d has %" PRIuS " flags in economy %d\n", static_cast<unsigned int>(pn), eco->get_nrflags(), eco_nr);
+								}
+							}
+						}
+						throw wexception("Low FPS");
+					}
+				}
+			} else {
+				--low_fps_count_;
+				low_fps_count_ = std::max(0, low_fps_count_);
 			}
 		}
 	}

@@ -281,6 +281,7 @@ private:
 	uint32_t lastframe_;        //  system time (milliseconds)
 	uint32_t frametime_;        //  in millseconds
 	uint32_t avg_usframetime_;  //  in microseconds!
+	int low_fps_count_; // NOCOM
 
 	Widelands::CoordPath* buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;
