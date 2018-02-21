@@ -3,7 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2014,2017
-# GunChleoc, 2015-2017
+# GunChleoc, 2015-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
 # GunChleoc, 2013-2015
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-01-30 12:58+0000\n"
+"POT-Creation-Date: 2018-02-10 11:03+0000\n"
+"PO-Revision-Date: 2018-02-12 09:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgstr "%1% (%2%)"
 #: ../../data/scripting/help.lua:48
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:160
@@ -108,7 +108,7 @@ msgstr "Chan eil rum gu leòr ann"
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -1570,7 +1570,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa Bluebyte Settlers II. Cha deach beachd a mhìneachadh!"
 
 #: ../../src/network/gameclient.cc:115
-#: ../../src/network/internet_gaming.cc:113
+#: ../../src/network/internet_gaming.cc:112
 msgid "Could not establish connection to host"
 msgstr "Cha b’ urrainn dhuinn ceangal a dhèanamh ris an òstair"
 
@@ -1738,60 +1738,60 @@ msgstr[1] "%li dhiog"
 msgstr[2] "%li diogan"
 msgstr[3] "%li diog"
 
-#: ../../src/network/internet_gaming.cc:114
+#: ../../src/network/internet_gaming.cc:113
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr "Cha deach le Widelands ceangal a dhèanamh ris an t-seòladh shònraichte.\nCha robh meata-fhrithealaiche a’ ruith aig a’ phort sin air neo\ntha rèiteachadh an lìonraidh agad briste."
 
-#: ../../src/network/internet_gaming.cc:173
+#: ../../src/network/internet_gaming.cc:176
 msgid "Users marked with IRC will possibly not react to messages."
-msgstr ""
+msgstr "Dh’fhaoidte nach freagair daoine le comharra IRC riutha ri teachdaireachdan idir."
 
-#: ../../src/network/internet_gaming.cc:211
+#: ../../src/network/internet_gaming.cc:214
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Chaidh ceangal ris a’ mheata-fhrithealaiche!"
 
-#: ../../src/network/internet_gaming.cc:285
+#: ../../src/network/internet_gaming.cc:288
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Chaidh rudeigin cearr: %s"
 
-#: ../../src/network/internet_gaming.cc:394
+#: ../../src/network/internet_gaming.cc:397
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "Chaidh do chlàradh a-steach mar “%s” on a tha an t-ainm a dh’iarr thu ’ga chleachdadh mar-thà no aig cuideigin eile."
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:418
 msgid "Mixed up"
 msgstr "Breisleach"
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:418
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Chuir am meata-fhrithealaiche MEARACHD neònach rè a’ cheangail"
 
-#: ../../src/network/internet_gaming.cc:426
+#: ../../src/network/internet_gaming.cc:429
 msgid "Unexpected packet"
 msgstr "Pacaid air nach robh dùil"
 
-#: ../../src/network/internet_gaming.cc:427
+#: ../../src/network/internet_gaming.cc:430
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "Bha sinn an dùil air pacaid LOGIN, RELOGIN no REJECTED on fhrithealaiche, ach fhuair sinn an àithne %s. ’S dòcha gun chleachd am meata-fhrithealaiche tionndadh eile dhen phròtacal."
 
-#: ../../src/network/internet_gaming.cc:439
+#: ../../src/network/internet_gaming.cc:442
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "RABHADH: Fhuair sinn àithne %s ged nach eil sinn san staid CONNECTING."
 
-#: ../../src/network/internet_gaming.cc:450
+#: ../../src/network/internet_gaming.cc:453
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
@@ -1800,74 +1800,74 @@ msgstr[1] "Tha frith-àireamh ama an fhrithealaiche ’na %d dgiog."
 msgstr[2] "Tha frith-àireamh ama an fhrithealaiche ’na %d diogan."
 msgstr[3] "Tha frith-àireamh ama an fhrithealaiche ’na %d diog."
 
-#: ../../src/network/internet_gaming.cc:474
+#: ../../src/network/internet_gaming.cc:477
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Tha an seòrsa mì-dhligheach “%s” air teachdaireachd a’ chabadaich."
 
-#: ../../src/network/internet_gaming.cc:474
+#: ../../src/network/internet_gaming.cc:477
 msgid "Invalid message type"
 msgstr "Seòrsa teachdaireachd mì-dhligheach"
 
-#: ../../src/network/internet_gaming.cc:512
+#: ../../src/network/internet_gaming.cc:515
 #, c-format
 msgid "The game %s is now available"
 msgstr "Tha an geama %s ri làimh a-nis"
 
-#: ../../src/network/internet_gaming.cc:522
+#: ../../src/network/internet_gaming.cc:525
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Chaidh an geama %s a dhùnadh"
 
-#: ../../src/network/internet_gaming.cc:569
+#: ../../src/network/internet_gaming.cc:572
 #, c-format
 msgid "%s joined the lobby"
 msgstr "Thàinig %s a-steach dhan lobaidh"
 
-#: ../../src/network/internet_gaming.cc:576
+#: ../../src/network/internet_gaming.cc:579
 #, c-format
 msgid "%s left the lobby"
 msgstr "Dh’fhàg %s an lobaidh"
 
-#: ../../src/network/internet_gaming.cc:628
+#: ../../src/network/internet_gaming.cc:631
 msgid "Chat message could not be sent."
 msgstr "Cha b’ urrainn dhuinn teachdaireachd a’ chabadaich a chur."
 
-#: ../../src/network/internet_gaming.cc:642
+#: ../../src/network/internet_gaming.cc:645
 #, c-format
 msgid "ERROR: %s"
 msgstr "MEARACHD: %s"
 
-#: ../../src/network/internet_gaming.cc:652
+#: ../../src/network/internet_gaming.cc:655
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Fhuair sinn àithne nach aithne dhuinn on mheata-fhrithealaiche: %s"
 
-#: ../../src/network/internet_gaming.cc:779
+#: ../../src/network/internet_gaming.cc:782
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Cha b’ urrainn dhuinn an teachdaireachd a chur: chan eil thu ceangailte ris a’ mheata-fhrithealaiche!"
 
-#: ../../src/network/internet_gaming.cc:798
-#: ../../src/network/internet_gaming.cc:805
+#: ../../src/network/internet_gaming.cc:801
+#: ../../src/network/internet_gaming.cc:808
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Cha b’ urrainn dhuinn an teachdaireachd a chur: am bu chòir dha a bhith ’na theachdaireachd phrìobhaideach?"
 
-#: ../../src/network/internet_gaming.cc:812
+#: ../../src/network/internet_gaming.cc:815
 msgid "Private messages to IRC users are not supported."
-msgstr ""
+msgstr "Cha chuir sinn taic ri teachdaireachdan prìobhaideach gu daoine air IRC."
 
-#: ../../src/network/internet_gaming.cc:889
+#: ../../src/network/internet_gaming.cc:892
 msgid "Conversion error"
 msgstr "Mearachd leis an iompachadh"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:892
+#: ../../src/network/internet_gaming.cc:895
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Cha b’ urrainn dhuinn faighinn a-mach a bheil “%s” fìor no fallsa."
 
-#: ../../src/network/internet_gaming.cc:909
+#: ../../src/network/internet_gaming.cc:912
 msgid "unknown"
 msgstr "chan eil fhios"
 

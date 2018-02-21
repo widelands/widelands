@@ -227,7 +227,12 @@ function barbarians_thread()
 
    campaign_message_box(diary_page_8)
    local o = add_campaign_objective(obj_build_bigger_military_buildings)
-   p1:allow_buildings{"empire_outpost", "empire_barrier", "empire_tower"}
+   p1:allow_buildings{
+      "empire_outpost",
+      "empire_barrier",
+      "empire_tower",
+      "empire_warehouse",
+      "empire_donkeyfarm"}
    p2:allow_buildings{"barbarians_quarry"}
 
    -- Wait for one of the buildings to go up
