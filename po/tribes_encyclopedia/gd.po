@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2017
+# GunChleoc, 2015-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013-2014
 # GunChleoc, 2014-2015
 # GunChleoc, 2014-2015
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-01-30 12:57+0000\n"
+"POT-Creation-Date: 2018-02-10 11:03+0000\n"
+"PO-Revision-Date: 2018-02-12 09:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -512,7 +512,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
 "material that feeds their furnaces."
-msgstr ""
+msgstr "Dh’ionnsaich na Tùsanaich o chionn linntean mar a thochlar sna bràigheachan an tòir an stuith dhuibh a bhiadhas na fùirneisean aca."
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:6
@@ -522,7 +522,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
-msgstr ""
+msgstr "Bidh fiodh math gu leòr gus do thaigh a chumail blàth, ach a thaobh obrach le iarann no òr, cha dèan ach gual a’ chùis."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:22
@@ -709,7 +709,7 @@ msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
 "loner – gave, when he was asked to remain seated on an emergency meeting at "
 "Stonford in the year of the great flood."
-msgstr ""
+msgstr "Seo an fhreagairt a thug am mèinnear Rimbert – air a chuireadh Rimbert aonarain an uairsin – nuair a chaidh iarraidh dha gun a bhith a’ seasamh aig coinneamh èiginneach ann an Àth na Cloiche bliadhna na tuile mòire."
 
 #. TRANSLATORS: Lore author helptext for a granite mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:12
@@ -717,7 +717,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The same man had all the 244 granite blocks ready only a week later, and "
 "they still fortify the city’s levee."
-msgstr ""
+msgstr "Cha dug e ach seachdain gus an robh an 244 bhloca gaireil deiseil aig an dearbh dhuine is tha iad fhathast a’ neartachadh banca-tuile a’ bhaile."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:18
@@ -1118,7 +1118,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "Òran a rinn an fhilidh Sigurd nuair a thuit a’ chiad uisge an dèidh an Tairt Mhòir sa 21ad bliadhna aig rìoghachadh Chat’Charuid."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
@@ -1559,14 +1559,14 @@ msgstr "Seo an t-ionad agad airson tuineachadh is malart thar chuain. Cumaidh tu
 #: ../../data/tribes/immovables/ashes/helptexts.lua:4
 #: ../../data/tribes/immovables/destroyed_building/helptexts.lua:4
 msgid "The remains of a destroyed building."
-msgstr ""
+msgstr "Fuigheall togalaich air a mhilleadh."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_harvested/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield_harvested/helptexts.lua:4
 #: ../../data/tribes/immovables/field_harvested/helptexts.lua:4
 msgid "This field has been harvested."
-msgstr ""
+msgstr "Chaidh an t-achadh seo a bhuain."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_medium/helptexts.lua:4
@@ -1576,53 +1576,53 @@ msgstr ""
 #: ../../data/tribes/immovables/field_medium/helptexts.lua:4
 #: ../../data/tribes/immovables/field_small/helptexts.lua:4
 msgid "This field is growing."
-msgstr ""
+msgstr "Tha an t-achadh seo a’ fàs."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_ripe/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield_ripe/helptexts.lua:4
 #: ../../data/tribes/immovables/field_ripe/helptexts.lua:4
 msgid "This field is ready for harvesting."
-msgstr ""
+msgstr "Tha an t-achadh seo abaich."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_tiny/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield_tiny/helptexts.lua:4
 #: ../../data/tribes/immovables/field_tiny/helptexts.lua:4
 msgid "This field has just been planted."
-msgstr ""
+msgstr "Tha an t-achadh seo air a chur."
 
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine_medium/helptexts.lua:4
 #: ../../data/tribes/immovables/grapevine_small/helptexts.lua:4
 msgid "This grapevine is growing."
-msgstr ""
+msgstr "Tha an crann-fìona seo a’ fàs."
 
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine_ripe/helptexts.lua:4
 msgid "This grapevine is ready for harvesting."
-msgstr ""
+msgstr "Tha an crann-fìona seo abaich."
 
 #. TRANSLATORS: Helptext for a grapevine
 #: ../../data/tribes/immovables/grapevine_tiny/helptexts.lua:4
 msgid "This grapevine has just been planted."
-msgstr ""
+msgstr "Tha an crann-fìona seo air a chur."
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reed_medium/helptexts.lua:4
 #: ../../data/tribes/immovables/reed_small/helptexts.lua:4
 msgid "This reed is growing."
-msgstr ""
+msgstr "Tha an cuilceach seo a’ fàs."
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reed_ripe/helptexts.lua:4
 msgid "This reed is ready for harvesting."
-msgstr ""
+msgstr "Tha an cuilceach seo abaich."
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reed_tiny/helptexts.lua:4
 msgid "This reed has just been planted."
-msgstr ""
+msgstr "Tha an cuilceach seo air a chur."
 
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
@@ -1651,54 +1651,54 @@ msgstr "%s %s"
 #: ../../data/tribes/immovables/resi_coal1/helptexts.lua:5
 #: ../../data/tribes/immovables/resi_coal2/helptexts.lua:5
 msgid "Coal veins contain coal that can be dug up by coal mines."
-msgstr ""
+msgstr "Tha gual sa chuisle guail seo a ghabhas tochladh le mèinn guail."
 
 #. TRANSLATORS: Helptext for a resource: Coal
 #: ../../data/tribes/immovables/resi_coal1/helptexts.lua:7
 msgid "There is only a little bit of coal here."
-msgstr ""
+msgstr "Chan eil ach beagan a ghuail an-seo."
 
 #. TRANSLATORS: Helptext for a resource: Coal
 #: ../../data/tribes/immovables/resi_coal2/helptexts.lua:7
 msgid "There is a lot of coal here."
-msgstr ""
+msgstr "Tha torr guail an-seo."
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi_gold1/helptexts.lua:5
 #: ../../data/tribes/immovables/resi_gold2/helptexts.lua:5
 msgid "Gold veins contain gold ore that can be dug up by gold mines."
-msgstr ""
+msgstr "Tha òr sa chuisle òir seo a ghabhas tochladh le mèinn òir."
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi_gold1/helptexts.lua:7
 msgid "There is only a little bit of gold here."
-msgstr ""
+msgstr "Chan eil ach beagan a dh’òr an-seo."
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi_gold2/helptexts.lua:7
 msgid "There is a lot of gold here."
-msgstr ""
+msgstr "Tha torr òir an-seo."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi_iron1/helptexts.lua:5
 #: ../../data/tribes/immovables/resi_iron2/helptexts.lua:5
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
-msgstr ""
+msgstr "Tha iarann sa chuisle iarainn seo a ghabhas tochladh le mèinn iarainn."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi_iron1/helptexts.lua:7
 msgid "There is only a little bit of iron here."
-msgstr ""
+msgstr "Chan eil ach beagan a dh’iarann an-seo."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi_iron2/helptexts.lua:7
 msgid "There is a lot of iron here."
-msgstr ""
+msgstr "Tha torr iarainn an-seo."
 
 #. TRANSLATORS: Helptext for a resource: No resources
 #: ../../data/tribes/immovables/resi_none/helptexts.lua:4
 msgid "There are no resources in the ground here."
-msgstr ""
+msgstr "Chan eil stòras sam bith san talamh an-seo."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:5
@@ -1706,24 +1706,24 @@ msgstr ""
 msgid ""
 "Precious stones are used in the construction of big buildings. They can be "
 "dug up by a crystal mine. You will also get granite from the mine."
-msgstr ""
+msgstr "Thèid clachan uasail a chleachdadh gus togalaichean mòra a thogail. Tochlaidh mèin criostail iad. Gheibh thu gaireal on mhèinn cuideachd."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:7
 msgid "There are only a few precious stones here."
-msgstr ""
+msgstr "Chan eil ach beagan a chlachan uasail an-seo."
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:10
 #: ../../data/tribes/immovables/resi_stones2/helptexts.lua:10
 msgid ""
 "Granite is a basic building material and can be dug up by a granite mine."
-msgstr ""
+msgstr "’S e stuth togail bunasach a tha sa ghaireal agus tochlaidh mèinn gaireil e."
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:12
 msgid "There is only a little bit of granite here."
-msgstr ""
+msgstr "Chan eil ach beagan a ghaireal an-seo."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:15
@@ -1731,39 +1731,39 @@ msgstr ""
 msgid ""
 "Marble is a basic building material and can be dug up by a marble mine. You "
 "will also get granite from the mine."
-msgstr ""
+msgstr "’S e stuth togail bunasach a tha sa mharmor agus tochlaidh mèinn marmoir e. Gheibh thu gaireal on mhèinn cuideachd."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:17
 msgid "There is only a little bit of marble here."
-msgstr ""
+msgstr "Chan eil ach beagan a mharmoir an-seo."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi_stones2/helptexts.lua:7
 msgid "There are many precious stones here."
-msgstr ""
+msgstr "Tha torr chlachan uasail an-seo."
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #: ../../data/tribes/immovables/resi_stones2/helptexts.lua:12
 msgid "There is a lot of granite here."
-msgstr ""
+msgstr "Tha torr gaireil an-seo."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi_stones2/helptexts.lua:17
 msgid "There is a lot of marble here."
-msgstr ""
+msgstr "Tha torr marmoir an-seo."
 
 #. TRANSLATORS: Helptext for a resource: Water
 #: ../../data/tribes/immovables/resi_water1/helptexts.lua:4
 msgid "There is water in the ground here that can be pulled up by a well."
-msgstr ""
+msgstr "Tha uisge san talamh an-seo a ghabhas togail le tobar."
 
 #. TRANSLATORS: Helptext for a ship construction site.
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/helptexts.lua:4
 #: ../../data/tribes/immovables/shipconstruction_barbarians/helptexts.lua:4
 #: ../../data/tribes/immovables/shipconstruction_empire/helptexts.lua:4
 msgid "A ship is being constructed at this site."
-msgstr ""
+msgstr "Tha long ’ga togail aig an làrach seo."
 
 #: ../../data/tribes/scripting/help/building_help.lua:104
 #: ../../data/tribes/scripting/help/format_help.lua:188
@@ -2453,15 +2453,15 @@ msgstr "%1% ’s %2%"
 #: ../../data/tribes/scripting/help/immovable_help.lua:49
 #: ../../data/tribes/scripting/help/immovable_help.lua:51
 msgid "Space required: "
-msgstr ""
+msgstr "Rum riatanach:"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:55
 msgid "Requirements"
-msgstr ""
+msgstr "Riatanasan"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Preferred Terrains"
-msgstr ""
+msgstr "Na cruthan-tìre as fhearr leatha"
 
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"
@@ -2482,7 +2482,7 @@ msgstr "Togalaichean"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr ""
+msgstr "Nithean do-ghluasad"
 
 #: ../../data/tribes/scripting/help/introduction.lua:7
 msgid "About Widelands"

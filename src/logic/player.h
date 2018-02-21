@@ -156,7 +156,7 @@ public:
 	/// data
 	struct AiPersistentState {
 		// TODO(tiborb): this should be replaced by command line switch
-		static constexpr size_t kMagicNumbersSize = 150;
+		static constexpr size_t kMagicNumbersSize = 200;
 		static constexpr size_t kNeuronPoolSize = 80;
 		static constexpr size_t kFNeuronPoolSize = 60;
 
