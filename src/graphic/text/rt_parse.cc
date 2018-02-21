@@ -177,6 +177,7 @@ void Tag::parse(TextStream& ts, TagConstraints& tcs, const TagSet& allowed_tags)
 The Richtext Tags
 =================
 
+- :ref:`rt_tags_rt`
 - :ref:`rt_tags_br`
 - :ref:`rt_tags_div`
 - :ref:`rt_tags_font`

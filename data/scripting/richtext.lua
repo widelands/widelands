@@ -61,13 +61,7 @@ end
 --    because the backend will take care of it.
 --    So, only use this function if you wish to add some attributes to the tag.
 --
---    Allowed attributes are:
---       - padding, padding_r, padding_l, padding_b, padding_t: TODO(GunChleoc): Document
---       - background:  a background color or image
---       - debug:       add visual debug information and debug log
---       - editor_mode: allow multiple blank spaces for editing
---
---    :arg attributes: the attributes for the rt tag.
+--    :arg attributes: the :ref:`attributes <rt_tags_rt>` for the rt tag.
 --    :type attributes: :class:`string`
 --    :arg text: the text to be enclosed in rich text tags.
 --    :type text: :class:`string`
@@ -89,12 +83,8 @@ end
 --
 --    :arg src: the file path to the image.
 --    :type src: :class:`string`
---    :arg attributes: the attributes for the div tag.
+--    :arg attributes: the :ref:`attributes <rt_tags_img>` for the img tag.
 --    :type attributes: :class:`string`
---
---    Allowed attributes are:
---       - color:     a hex color to be applied to the image's player color mask, if it has any
---       - ref:       TODO(GunChleoc): I have no idea what it does.
 --
 --    :returns: the img tag.
 
