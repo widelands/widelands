@@ -13,7 +13,7 @@ syntax very similar to it. To tell our rendering system to go into richtext mode
 start your text with ``<rt>`` and end it with ``</rt>``.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    General Markup Functions <autogen_auxiliary_richtext.rst>
    Scenario Markup Functions <autogen_auxiliary_richtext_scenarios.rst>

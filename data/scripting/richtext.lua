@@ -1,6 +1,9 @@
 -- TODO(GunChleoc): Wrap all tags and document allowed attributes when we're done
 
 -- RST
+--
+-- .. _richtext.lua:
+--
 -- richtext.lua
 -- ------------
 --
@@ -10,7 +13,495 @@
 -- Function names generally follow HTML names.
 -- We strongly recommend that you make use of these functions rather than hacking
 -- the tags manually.
--- See also :ref:`wlrichtext` for an introduction to the richtext system.
+-- See also :ref:`wlrichtext` for an introduction to the richtext system and a code example.
+-- If you're writing a scenario, you should also have a look at
+-- :ref:`richtext_scenarios.lua`.
+--
+-- - `Blocks and Positioning`_
+-- - `Headings and Paragraphs`_
+-- - `Text Formatting`_
+-- - `Lists`_
+-- - `Images`_
+-- - `Links`_
+-- - `Text Composition`_
+
+
+-- RST
+-- Blocks and Positioning
+-- ^^^^^^^^^^^^^^^^^^^^^^
+--
+-- This section covers functions for structuring your text layout.
+
+
+-- RST
+-- .. function:: rt(text_or_attributes[, text = nil])
+--
+--    Wraps a block of text into Lua rich text.
+--    Only call this once for the whole text that gets sent to the backend.
+--    There is no general need to wrap an rt tag around your text,
+--    because the backend will take care of it.
+--    So, only use this function if you wish to add some attributes to the tag.
+--
+--    :arg text_or_attributes: see the :ref:`rt tag's documentation <rt_tags_rt>`
+--                             for a list of attributes and their descriptions.
+--    :type text_or_attributes: :class:`string`
+--    :arg text: the text to be enclosed in rich text tags.
+--    :type text: :class:`string`
+--    :returns: the wrapped rich text.
+
+function rt(text_or_attributes, text)
+   if text then
+      return "<rt " .. text_or_attributes .. ">" .. text .. "</rt>"
+   else
+      return "<rt>" .. text_or_attributes .. "</rt>"
+   end
+end
+
+
+-- RST
+-- .. function:: div(text_or_attributes[, text = nil])
+--
+--    Wraps a block of text into a div tag.
+--
+--    :arg text_or_attributes: see the :ref:`div tag's documentation <rt_tags_div>`
+--                             for a list of attributes and their descriptions.
+--    :type test_or_attributes: :class:`string`
+--
+--    :arg text: the text to be enclosed in div tags.
+--    :type text: :class:`string`
+--    :returns: the text wrapped in a div tag.
+
+function div(text_or_attributes, text)
+   if text then
+      return ("<div %s>"):format(text_or_attributes) .. text .. "</div>"
+   else
+      return ("<div>") .. text_or_attributes .. "</div>"
+   end
+end
+
+
+-- RST
+-- .. function:: space(gap)
+--
+--    Adds a horizontal space
+--
+--    :arg gap: the size of the space as pixels.
+--
+--    :returns: a space tag
+
+function space(gap)
+   return "<space gap="..gap..">"
+end
+
+
+-- RST
+-- .. function:: vspace(gap)
+--
+--    Adds a vertical space
+--
+--    :arg gap: the size of the space as pixels.
+--
+--    :returns: a vspace tag
+
+function vspace(gap)
+   return "<vspace gap="..gap..">"
+end
+
+
+-- RST
+-- :ref:`Return to index<richtext.lua>`
+--
+-- Headings and Paragraphs
+-- ^^^^^^^^^^^^^^^^^^^^^^^
+--
+-- This section covers functions for defining headings and paragraphs.
+
+
+-- RST
+-- .. function:: title(font_face, text)
+--
+--    Returns a paragraph formatted as a title heading. Use this on the top of
+--    your document only.
+--
+--    :returns: A paragraph with text formatted as title.
+
+function title(font_face, text)
+   return p_font("align=center", "size=38 face=".. font_face .. " color=2F9131", text)
+end
+
+
+-- RST
+-- .. function:: h1(text_or_color[, text = nil])
+--
+--    Returns a paragraph formatted as a big heading with a small gap after it.
+--
+--    :returns: A paragraph with text formatted as heading.
+
+function h1(text_or_color, text)
+   if text then
+      return p_font("", "size=18 bold=1 color=".. text_or_color, vspace(12) .. text .. vspace(1))
+   else
+      return p_font("", "size=18 bold=1 color=D1D1D1", vspace(12) .. text_or_color .. vspace(1))
+   end
+end
+
+
+-- RST
+-- .. function:: h2(text)
+--
+--    Like :func:`h1` but smaller.
+--
+--    :returns: A paragraph with text formatted as heading.
+
+function h2(text)
+   return p_font("", "size=14 bold=1 color=D1D1D1", vspace(12) .. text .. vspace(1))
+end
+
+
+-- RST
+-- .. function:: h3(text)
+--
+--    Like :func:`h2` but smaller.
+--
+--    :returns: A paragraph with text formatted as heading.
+
+function h3(text)
+   return p_font("", "size=13 color=D1D1D1", vspace(6) .. text .. vspace(1))
+end
+
+
+-- RST
+-- .. function:: h4(text)
+--
+--    Like :func:`h3` but smaller.
+--
+--    :returns: A paragraph with text formatted as heading.
+
+function h4(text)
+   return p_font("", "size=12 italic=1 color=D1D1D1", text)
+end
+
+
+-- RST
+-- .. function:: inline_header(header, text)
+--
+--    Creates a line of h3 formatted text followed by normal paragraph text.
+--
+--    :arg header: text in h3 format.
+--    :arg text: text in p format.
+--    :returns: header text followed by normal text.
+
+function inline_header(header, text)
+   return
+      div("width=100%", vspace(8)) ..
+      div("width=100%", font("size=13 color=D1D1D1", header .. " ") ..
+      font("size=12", text))
+end
+
+
+-- RST
+-- .. function:: p(text_or_attributes[, text = nil])
+--
+--    Returns one paragraph with text followed by a small vertical gap. Options
+--    can be given as first argument similar to :func:`rt`.
+--
+--    :arg text_or_attributes: see the :ref:`p tag's documentation <rt_tags_p>`
+--                             for a list of attributes and their descriptions.
+--    :type text_or_attributes: :class:`string`
+--
+--    :returns: The text wrapped in <p>%s</p>
+
+function p(text_or_attributes, text)
+   if text then
+      return open_p(text_or_attributes) .. text .. close_p()
+   else
+      return open_p() .. text_or_attributes .. close_p()
+   end
+end
+
+
+-- RST
+-- .. function:: open_p([attributes = nil])
+--
+--    Returns a paragraph open tag and default font size. Options
+--    can be given as first argument similar to :func:`rt`.
+--
+--    :arg attributes: see the :ref:`p tag's documentation <rt_tags_p>`
+--                     for a list of attributes and their descriptions.
+--    :type attributes: :class:`string`
+--
+--    :returns: <p> with added attributes and default font
+
+function open_p(attributes)
+   if attributes then
+      return ("<p %s>"):format(attributes) .. "<font size=12>"
+   else
+      return "<p><font size=12>"
+   end
+end
+
+
+-- RST
+-- .. function:: close_p(t)
+--
+--    Closes a paragraph.
+--
+--    :returns: The closing tags for a paragraph
+
+function close_p(t)
+   return vspace(6) .. "</font>" .. vspace(6)  .. "</p>"
+end
+
+
+-- RST
+-- .. function:: p_font(text_or_attributes[, text = nil])
+--
+--    Returns one paragraph with text followed by a small vertical gap. Options
+--    can be given as first argument similar to :func:`rt`.
+--
+--    :arg p_or_font_attributes: Optional paragraphs or font attributes.
+--    :type p_or_font_attributes: :class:`string`
+--
+--    :arg text_or_font_attributes: Optional font attributes or the text itself.
+--    :type text_or_font_attributes: :class:`string`
+--
+--    See the :ref:`p tag's documentation <rt_tags_p>` for a list of paragraph
+--    attributes and the :ref:`font tag's documentation <rt_tags_font>` for a
+--    list of font attributes.
+--
+--    :returns: The text wrapped in <p attributes><font attributes>text</font></p>
+
+function p_font(p_or_font_attributes, text_or_font_attributes, text)
+   if text then
+      return ("<p %s>"):format(p_or_font_attributes) .. "<font " .. text_or_font_attributes .. ">" .. text .. close_p()
+   else
+      return "<p><font " .. p_or_font_attributes .. ">" .. text_or_font_attributes .. close_p()
+   end
+end
+
+-- RST
+-- :ref:`Return to index<richtext.lua>`
+--
+-- Text Formatting
+-- ^^^^^^^^^^^^^^^
+--
+-- This section covers convenience functions for text formatting.
+
+
+-- RST
+-- .. function:: font(attributes, text)
+--
+--    Wraps the text in font tags. See also :any:`p_font`.
+--
+--    :arg attributes: see the :ref:`font tag's documentation <rt_tags_font>`
+--                     for a list of attributes and their descriptions.
+--    :type attributes: :class:`string`
+--
+--    :returns: The text wrapped in font tags with the given attributes
+
+function font(attributes, text)
+   return ("<font %s>"):format(attributes) .. text .. "</font>"
+end
+
+
+-- RST
+-- .. function:: b(text)
+--
+--    This makes the text bold.
+--
+--    :arg text: the text to format
+--
+--    :returns: a font tag containing the bold text
+
+function b(text)
+   return font("bold=1", text)
+end
+
+-- RST
+-- .. function:: i(text)
+--
+--    This makes the text italic.
+--
+--    :arg text: the text to format
+--
+--    :returns: a font tag containing the italic text
+
+function i(text)
+   return font("italic=1", text)
+end
+
+-- RST
+-- .. function:: u(text)
+--
+--    This underlines the text.
+--
+--    :arg text: the text to format
+--
+--    :returns: a font tag containing the underlined text
+
+function u(text)
+   return font("underline=1", text)
+end
+
+
+-- RST
+-- :ref:`Return to index<richtext.lua>`
+--
+-- Lists
+-- ^^^^^
+--
+-- This section covers functions for defining lists.
+
+
+-- RST
+-- .. function:: dl(dt, dd)
+--
+--    This function imitates a HTML description list
+--
+--    :arg dt: "description term", will be rendered in bold.
+--    :arg dd: "description data", will be rendered normally.
+--
+--    :returns: a p tag containing the formatted text
+
+function dl(dt, dd)
+   return p(b(dt) .. " " .. dd)
+end
+
+
+-- RST
+-- .. function:: li(text_or_symbol[, text = nil])
+--
+--    Adds the symbol in front of the text to create a list item and
+--    wraps it in a paragraph
+--
+--    :arg symbol: the item symbol for the list, e.g. "•" or "→". "•" is the default.
+--    :arg text: the text of the list item
+--
+--    :returns: a p tag containing the formatted text
+
+function li(text_or_symbol, text)
+   if text then
+      return div(p(text_or_symbol)) .. div(p(space(6))) .. div("width=*", p(text .. vspace(6)))
+   else
+      return div(p("•")) .. div(p(space(6))) .. div("width=*", p(text_or_symbol .. vspace(6)))
+   end
+end
+
+
+-- RST
+-- .. function:: li_arrow(text)
+--
+--    Creates a list item with an arrow
+--
+--    :arg text: the text of the list item
+--
+--    :returns: li("→", text)
+
+function li_arrow(text)
+   -- TODO(GunChleoc): Reverse arrow for rtl languages.
+   return li("→", text)
+end
+
+
+-- RST
+-- .. function:: li_image(imagepath, text)
+--
+--    Places a paragraph of text to the right of an image
+--
+--    :arg imagepath: the full path to the image file
+--    :arg text_width_percent: the percentatge of space that the text will occupy
+--    :arg text: the text to be placed next to the image
+--
+--    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
+
+function li_image(imagepath, text)
+   return
+      div("width=100%",
+         div(p(vspace(6) .. img(imagepath) .. space(6))) ..
+         div(p(space(6))) ..
+         div("width=*", p(vspace(6) .. text .. vspace(12)))
+      )
+end
+
+
+-- RST
+-- :ref:`Return to index<richtext.lua>`
+--
+-- Images
+-- ^^^^^^
+--
+-- This section covers functions for including images.
+
+
+-- RST
+-- .. function:: img(src[, attributes = nil])
+--
+--    Turns an image src path into an image tag for richtext. See also :any:`li_image`.
+--
+--    :arg src: the file path to the image.
+--    :type src: :class:`string`
+--    :arg attributes: see the :ref:`img tag's documentation <rt_tags_img>`
+--                     for a list of attributes and their descriptions.
+--    :type attributes: :class:`string`
+--
+--    :returns: the img tag.
+
+function img(src, attributes)
+   if attributes then
+      return "<img src=" .. src .." " .. attributes .. ">"
+   else
+      return "<img src=" .. src .. ">"
+   end
+end
+
+
+-- RST
+-- :ref:`Return to index<richtext.lua>`
+--
+-- Links
+-- ^^^^^
+--
+-- This section covers functions for including links. We can't do real links yet,
+-- so we only hightlight the text for now.
+
+-- RST
+-- .. function:: a(link)
+--
+--    This function imitates a HTML link. We can't do real links yet, so the text just gets underlines.
+--
+--    :arg link: the text to format
+--
+--    :returns: a font tag containing the underlined text
+
+function a(link)
+   return font("underline=1", link)
+end
+
+-- RST
+-- :ref:`Return to index<richtext.lua>`
+--
+-- Text Composition
+-- ^^^^^^^^^^^^^^^^
+--
+-- This section covers functions for text composition that help with proper markup
+-- to make the text translateable.
+
+
+-- RST
+-- .. function:: join_sentences(sentence1, sentence2)
+--
+--    Joins 2 sentences together. Use this rather than manually concatenating
+--    a blank space, because some languages don't use blank spaces.
+--
+--    :arg sentence1: text of the first sentence
+--    :arg sentence2: text of the second sentence
+--    :returns: two concatenated sentences with a localized sentence joiner.
+
+function join_sentences(sentence1, sentence2)
+   -- TRANSLATORS: Put 2 sentences one after the other.
+   -- TRANSLATORS: Languages using Chinese script probably want to lose the blank space here.
+   return pgettext("sentence_separator", "%s %s"):bformat(sentence1, sentence2)
+end
 
 
 -- RST
@@ -54,397 +545,5 @@ function localize_list(items, listtype, former_textdomain)
    return result
 end
 
-
 -- RST
--- .. function:: rt(text_or_attributes[, text = nil])
---
---    Wraps a block of text into Lua rich text.
---    Only call this once for the whole text that gets sent to the backend.
---    There is no general need to wrap an rt tag around your text,
---    because the backend will take care of it.
---    So, only use this function if you wish to add some attributes to the tag.
---
---    :arg text_or_attributes: see the :ref:`rt tag's documentation <rt_tags_rt>`
---                             for a list of attributes and their descriptions.
---    :type text_or_attributes: :class:`string`
---    :arg text: the text to be enclosed in rich text tags.
---    :type text: :class:`string`
---    :returns: the wrapped rich text.
-
-function rt(text_or_attributes, text)
-   if text then
-      return "<rt " .. text_or_attributes .. ">" .. text .. "</rt>"
-   else
-      return "<rt>" .. text_or_attributes .. "</rt>"
-   end
-end
-
-
--- RST
--- .. function:: img(src[, attributes = nil])
---
---    Turns an image src path into an image tag for richtext.
---
---    :arg src: the file path to the image.
---    :type src: :class:`string`
---    :arg attributes: see the :ref:`img tag's documentation <rt_tags_img>`
---                     for a list of attributes and their descriptions.
---    :type attributes: :class:`string`
---
---    :returns: the img tag.
-
-function img(src, attributes)
-   if attributes then
-      return "<img src=" .. src .." " .. attributes .. ">"
-   else
-      return "<img src=" .. src .. ">"
-   end
-end
-
-
-function title(font_face, text)
-   return p_font("align=center", "size=38 face=".. font_face .. " color=2F9131", text)
-end
-
-
--- RST
--- .. function:: h1(text_or_color[, text = nil])
---
---    Returns a paragraph formatted as a big heading with a small gap after it.
---    The mnemonic comes from HTML.
---
---    :returns: A paragraph with text formatted as heading.
-
-function h1(text_or_color, text)
-   if text then
-      return p_font("", "size=18 bold=1 color=".. text_or_color, vspace(12) .. text .. vspace(1))
-   else
-      return p_font("", "size=18 bold=1 color=D1D1D1", vspace(12) .. text_or_color .. vspace(1))
-   end
-end
-
--- RST
--- .. function:: h2(text)
---
---    Like :func:`h1` but smaller.
---
---    :returns: A paragraph with text formatted as heading.
-
-function h2(text)
-   return p_font("", "size=14 bold=1 color=D1D1D1", vspace(12) .. text .. vspace(1))
-end
-
--- RST
--- .. function:: h3(text)
---
---    Like :func:`h2` but smaller.
---
---    :returns: A paragraph with text formatted as heading.
-
-function h3(text)
-   return p_font("", "size=13 color=D1D1D1", vspace(6) .. text .. vspace(1))
-end
-
--- RST
--- .. function:: h4(text)
---
---    Like :func:`h3` but smaller.
---
---    :returns: A paragraph with text formatted as heading.
-
-function h4(text)
-   return p_font("", "size=12 italic=1 color=D1D1D1", text)
-end
-
--- RST
--- .. function:: p(text_or_attributes[, text = nil])
---
---    Returns one paragraph with text followed by a small vertical gap. Options
---    can be given as first argument similar to :func:`rt`.
---
---    :arg text_or_attributes: see the :ref:`p tag's documentation <rt_tags_p>`
---                             for a list of attributes and their descriptions.
---    :type text_or_attributes: :class:`string`
---
---    :returns: The text wrapped in <p>%s</p>
-
-function p(text_or_attributes, text)
-   if text then
-      return open_p(text_or_attributes) .. text .. close_p()
-   else
-      return open_p() .. text_or_attributes .. close_p()
-   end
-end
-
-
--- RST
--- .. function:: p_font(text_or_attributes[, text = nil])
---
---    Returns one paragraph with text followed by a small vertical gap. Options
---    can be given as first argument similar to :func:`rt`.
---
---    :arg p_or_font_attributes: Optional paragraphs or font attributes.
---    :type p_or_font_attributes: :class:`string`
---
---    :arg text_or_font_attributes: Optional font attributes or the text itself.
---    :type text_or_font_attributes: :class:`string`
---
---    See the :ref:`p tag's documentation <rt_tags_p>` for a list of paragraph
---    attributes and the :ref:`font tag's documentation <rt_tags_font>` for a
---    list of font attributes.
---
---    :returns: The text wrapped in <p attributes><font attributes>text</font></p>
-
-function p_font(p_or_font_attributes, text_or_font_attributes, text)
-   if text then
-      return ("<p %s>"):format(p_or_font_attributes) .. "<font " .. text_or_font_attributes .. ">" .. text .. close_p()
-   else
-      return "<p><font " .. p_or_font_attributes .. ">" .. text_or_font_attributes .. close_p()
-   end
-end
-
-
--- RST
--- .. function:: open_p([attributes = nil])
---
---    Returns a paragraph open tag and default font size. Options
---    can be given as first argument similar to :func:`rt`.
---
---    :arg attributes: see the :ref:`p tag's documentation <rt_tags_p>`
---                     for a list of attributes and their descriptions.
---    :type attributes: :class:`string`
---
---    :returns: <p> with added attributes and default font
-
-function open_p(attributes)
-   if attributes then
-      return ("<p %s>"):format(attributes) .. "<font size=12>"
-   else
-      return "<p><font size=12>"
-   end
-end
-
-
--- RST
--- .. function:: close_p(t)
---
---    Closes a paragraph.
---
---    :returns: The closing tags for a paragraph
-
-function close_p(t)
-   return vspace(6) .. "</font>" .. vspace(6)  .. "</p>"
-end
-
--- RST
--- .. function:: font(attributes, text)
---
---    Wraps the text in font tags.
---
---    :arg attributes: see the :ref:`font tag's documentation <rt_tags_font>`
---                     for a list of attributes and their descriptions.
---    :type attributes: :class:`string`
---
---    :returns: The text wrapped in font tags with the given attributes
-
-function font(attributes, text)
-   return ("<font %s>"):format(attributes) .. text .. "</font>"
-end
-
--- RST
--- .. function:: space(gap)
---
---    Adds a horizontal space
---
---    :arg gap: the size of the space as pixels.
---
---    :returns: a space tag
-
-function space(gap)
-   return "<space gap="..gap..">"
-end
-
--- RST
--- .. function:: vspace(gap)
---
---    Adds a vertical space
---
---    :arg gap: the size of the space as pixels.
---
---    :returns: a vspace tag
-
-function vspace(gap)
-   return "<vspace gap="..gap..">"
-end
-
--- RST
--- .. function:: dl(dt, dd)
---
---    This function imitates a HTML description list
---
---    :arg dt: "description term", will be rendered in bold.
---    :arg dd: "description data", will be rendered normally.
---
---    :returns: a p tag containing the formatted text
-
-function dl(dt, dd)
-   return p(b(dt) .. " " .. dd)
-end
-
--- RST
--- .. function:: li(text_or_symbol[, text = nil])
---
---    Adds the symbol in front of the text to create a list item and
---    wraps it in a paragraph
---
---    :arg symbol: the item symbol for the list, e.g. "•" or "→"
---    :arg text: the text of the list item
---
---    :returns: a p tag containing the formatted text
-
-function li(text_or_symbol, text)
-   if text then
-      return div(p(text_or_symbol)) .. div(p(space(6))) .. div("width=*", p(text .. vspace(6)))
-   else
-      return div(p("•")) .. div(p(space(6))) .. div("width=*", p(text_or_symbol .. vspace(6)))
-   end
-end
-
--- RST
--- .. function:: li_arrow(text)
---
---    Creates a list item with an arrow
---
---    :arg text: the text of the list item
---
---    :returns: li("→", text)
-
-function li_arrow(text)
-   -- TODO(GunChleoc): Reverse arrow for rtl languages.
-   return li("→", text)
-end
-
--- RST
--- .. function:: li_image(imagepath, text)
---
---    Places a paragraph of text to the right of an image
---
---    :arg imagepath: the full path to the image file
---    :arg text_width_percent: the percentatge of space that the text will occupy
---    :arg text: the text to be placed next to the image
---
---    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
-
-function li_image(imagepath, text)
-   return
-      div("width=100%",
-         div(p(vspace(6) .. img(imagepath) .. space(6))) ..
-         div(p(space(6))) ..
-         div("width=*", p(vspace(6) .. text .. vspace(12)))
-      )
-end
-
--- RST
--- .. function:: a(link)
---
---    This function imitates a HTML link. We can't do real links yet, so the text just gets underlines.
---
---    :arg link: the text to format
---
---    :returns: a font tag containing the underlined text
-
-function a(link)
-   return font("underline=1", link)
-end
-
--- RST
--- .. function:: b(text)
---
---    This makes the text bold.
---
---    :arg text: the text to format
---
---    :returns: a font tag containing the bold text
-
-function b(text)
-   return font("bold=1", text)
-end
-
--- RST
--- .. function:: i(text)
---
---    This makes the text italic.
---
---    :arg text: the text to format
---
---    :returns: a font tag containing the italic text
-
-function i(text)
-   return font("italic=1", text)
-end
-
--- RST
--- .. function:: u(text)
---
---    This underlines the text.
---
---    :arg text: the text to format
---
---    :returns: a font tag containing the underlined text
-
-function u(text)
-   return font("underline=1", text)
-end
-
--- RST
--- .. function:: div(text_or_attributes[, text = nil])
---
---    Wraps a block of text into a div tag.
---
---    :arg text_or_attributes: see the :ref:`div tag's documentation <rt_tags_div>`
---                             for a list of attributes and their descriptions.
---    :type test_or_attributes: :class:`string`
---
---    :arg text: the text to be enclosed in div tags.
---    :type text: :class:`string`
---    :returns: the text wrapped in a div tag.
-
-function div(text_or_attributes, text)
-   if text then
-      return ("<div %s>"):format(text_or_attributes) .. text .. "</div>"
-   else
-      return ("<div>") .. text_or_attributes .. "</div>"
-   end
-end
-
--- RST
--- .. function:: inline_header(header, text)
---
---    Creates a line of h3 formatted text followed by normal paragraph text.
---
---    :arg header: text in h3 format.
---    :arg text: text in p format.
---    :returns: header text followed by normal text.
-
-function inline_header(header, text)
-   return
-      div("width=100%", vspace(8)) ..
-      div("width=100%", font("size=13 color=D1D1D1", header .. " ") ..
-      font("size=12", text))
-end
-
--- RST
--- .. function:: join_sentences(sentence1, sentence2)
---
---    Joins 2 sentences together. Use this rather than manually concatenating
---    a blank space, because some languages don't use blank spaces.
---
---    :arg sentence1: text of the first sentence
---    :arg sentence2: text of the second sentence
---    :returns: two concatenated sentences with a localized sentence joiner.
-
-function join_sentences(sentence1, sentence2)
-   -- TRANSLATORS: Put 2 sentences one after the other.
-   -- TRANSLATORS: Languages using Chinese script probably want to lose the blank space here.
-   return pgettext("sentence_separator", "%s %s"):bformat(sentence1, sentence2)
-end
+-- :ref:`Return to index<richtext.lua>`

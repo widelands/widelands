@@ -1,12 +1,17 @@
 include "scripting/richtext.lua"
 
 -- RST
+-- .. _richtext_scenarios.lua:
+--
 -- richtext_scenarios.lua
 -- ----------------------
 --
--- Function to simplify and unique text formatting in scenarios.  Most of these
+-- Functions to simplify and unique text formatting in scenarios.  Most of these
 -- functions are simple wrapper functions that make working with widelands rich
 -- text formatting system more bearable.
+-- This file will include :ref:`richtext.lua` for you for additional formatting functions.
+-- See also :ref:`wlrichtext` for an introduction to the richtext system and a code example.
+
 
 -- RST
 -- .. function:: speech(img, clr, title, text)
@@ -36,6 +41,7 @@ function speech(img, clr, title, text)
    return title .. li_image(img, p(text))
 end
 
+
 -- RST
 -- .. function:: paragraphdivider()
 --
@@ -47,7 +53,6 @@ end
 function paragraphdivider()
    return close_p() .. open_p()
 end
-
 
 
 -- RST
