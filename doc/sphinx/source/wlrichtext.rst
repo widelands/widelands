@@ -1,3 +1,5 @@
+.. _wlrichtext:
+
 The Widelands Rich Text System
 ==============================
 

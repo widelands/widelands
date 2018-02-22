@@ -8,6 +8,9 @@
 -- Most of these functions are simple wrapper functions that make working with
 -- widelands rich text formatting system more bearable.
 -- Function names generally follow HTML names.
+-- We strongly recommend that you make use of these functions rather than hacking
+-- the tags manually.
+-- See also :ref:`wlrichtext` for an introduction to the richtext system.
 
 
 -- RST
@@ -61,8 +64,9 @@ end
 --    because the backend will take care of it.
 --    So, only use this function if you wish to add some attributes to the tag.
 --
---    :arg attributes: the :ref:`attributes <rt_tags_rt>` for the rt tag.
---    :type attributes: :class:`string`
+--    :arg text_or_attributes: see the :ref:`rt tag's documentation <rt_tags_rt>`
+--                             for a list of attributes and their descriptions.
+--    :type text_or_attributes: :class:`string`
 --    :arg text: the text to be enclosed in rich text tags.
 --    :type text: :class:`string`
 --    :returns: the wrapped rich text.
@@ -83,7 +87,8 @@ end
 --
 --    :arg src: the file path to the image.
 --    :type src: :class:`string`
---    :arg attributes: the :ref:`attributes <rt_tags_img>` for the img tag.
+--    :arg attributes: see the :ref:`img tag's documentation <rt_tags_img>`
+--                     for a list of attributes and their descriptions.
 --    :type attributes: :class:`string`
 --
 --    :returns: the img tag.
@@ -157,7 +162,9 @@ end
 --    Returns one paragraph with text followed by a small vertical gap. Options
 --    can be given as first argument similar to :func:`rt`.
 --
---    Allowed attributes are documented in the :func:`open_p` function.
+--    :arg text_or_attributes: see the :ref:`p tag's documentation <rt_tags_p>`
+--                             for a list of attributes and their descriptions.
+--    :type text_or_attributes: :class:`string`
 --
 --    :returns: The text wrapped in <p>%s</p>
 
@@ -176,17 +183,23 @@ end
 --    Returns one paragraph with text followed by a small vertical gap. Options
 --    can be given as first argument similar to :func:`rt`.
 --
---    Allowed p attributes are documented in the :func:`open_p` function.
+--    :arg p_or_font_attributes: Optional paragraphs or font attributes.
+--    :type p_or_font_attributes: :class:`string`
 --
---    Allowed font attributes are are documented in the :func:`font` function.
+--    :arg text_or_font_attributes: Optional font attributes or the text itself.
+--    :type text_or_font_attributes: :class:`string`
+--
+--    See the :ref:`p tag's documentation <rt_tags_p>` for a list of paragraph
+--    attributes and the :ref:`font tag's documentation <rt_tags_font>` for a
+--    list of font attributes.
 --
 --    :returns: The text wrapped in <p attributes><font attributes>text</font></p>
 
-function p_font(p_or_font_or_attributes, text_or_font_attributes, text)
+function p_font(p_or_font_attributes, text_or_font_attributes, text)
    if text then
-      return ("<p %s>"):format(p_or_font_or_attributes) .. "<font " .. text_or_font_attributes .. ">" .. text .. close_p()
+      return ("<p %s>"):format(p_or_font_attributes) .. "<font " .. text_or_font_attributes .. ">" .. text .. close_p()
    else
-      return "<p><font " .. p_or_font_or_attributes .. ">" .. text_or_font_attributes .. close_p()
+      return "<p><font " .. p_or_font_attributes .. ">" .. text_or_font_attributes .. close_p()
    end
 end
 
@@ -197,11 +210,9 @@ end
 --    Returns a paragraph open tag and default font size. Options
 --    can be given as first argument similar to :func:`rt`.
 --
---    Allowed attributes are:
---       - indent:  indents the first line of the paragraph
---       - align:   horizontal alignment (left, center, right)
---       - valign:  vertical alignment (top, middle, bottom)
---       - spacing: line spacing in pixels
+--    :arg attributes: see the :ref:`p tag's documentation <rt_tags_p>`
+--                     for a list of attributes and their descriptions.
+--    :type attributes: :class:`string`
 --
 --    :returns: <p> with added attributes and default font
 
@@ -230,15 +241,9 @@ end
 --
 --    Wraps the text in font tags.
 --
---    Allowed attributes are:
---       - size:      the font size in pt
---       - face:      sans, serif or condensed
---       - color:     a hex color
---       - bold:      if you add bold=1, the text will be bold
---       - italic:    if you add italic=1, the text will be italic
---       - underline: if you add underline=1, the text will be underlined
---       - shadow:    if you add shadow=1, the text will have a shadow
---       - ref:       TODO(GunChleoc): I don't know what this does.
+--    :arg attributes: see the :ref:`font tag's documentation <rt_tags_font>`
+--                     for a list of attributes and their descriptions.
+--    :type attributes: :class:`string`
 --
 --    :returns: The text wrapped in font tags with the given attributes
 
@@ -396,17 +401,9 @@ end
 --
 --    Wraps a block of text into a div tag.
 --
---    :arg attributes: the attributes for the div tag.
---    :type attributes: :class:`string`
---
---    Allowed attributes are:
---       - padding, padding_r, padding_l, padding_b, padding_t: TODO(GunChleoc): Document
---       - margin:     TODO(GunChleoc): Document
---       - float:      TODO(GunChleoc): this does not work yet
---       - margin:     inner margin for the div
---       - valign:     vertical alignment
---       - background: a background color or image
---       - width:      the width of the div in pixels or percent
+--    :arg text_or_attributes: see the :ref:`div tag's documentation <rt_tags_div>`
+--                             for a list of attributes and their descriptions.
+--    :type test_or_attributes: :class:`string`
 --
 --    :arg text: the text to be enclosed in div tags.
 --    :type text: :class:`string`
