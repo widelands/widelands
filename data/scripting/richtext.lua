@@ -551,22 +551,30 @@ end
 --
 -- Code Example
 -- ^^^^^^^^^^^^
--- Here's an example on how these functions can be used. Note that this ecample
+-- Here's an example on how these functions and their attributes can be used. The double point 
+-- (``..``) is the LUA string concatenation operator. Note that this example
 -- also includes translation markup (the ``_[[Some text]]`` function):
 --
 -- .. code-block:: lua
 --
 --    include "scripting/richtext.lua"
 --
---    h1(_[[Check out your taverns]]) ..
---    p(_[[At first, we should find out how many taverns we currently have. Widelands offers you a window where you can easily check this.]]) ..
---    li_image("images/wui/menus/menu_toggle_menu.png", _[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]]) ..
---    li_image("images/wui/menus/menu_building_stats.png", _[[Afterwards, choose the ‘Building statistics’.]]) ..
---    li(_[[Open the building statistics window.]]) ..
---    li_arrow(_[[You can also use the hotkey ‘b’.]])
+--    body = h1(_[[Normal header]]) ..
+--           h1("ff0000", _[[Colored header]]) ..
+--           p(_[[Normal paragraph, just with a bit more text to show how it looks like.]]) ..
+--           p("align=center", _[[A centered paragraph]]) ..
+--           li_image("images/wui/menus/menu_toggle_menu.png", _[[An image with right aligned text. This is just text to show automatic linebreaks and behavior in regard with images]]) ..
+--           li(_[[A list item]]) ..
+--           li(font("color=ff0000 bold=1", _[[Red and bold]])) ..
+--           li_arrow(_[[A list item with an arrow]]) ..
+--           p(_[[A more complicated paragraph with ]] .. 
+--              font("color=ff0000", _[[red text ]]) .. 
+--              _[[and ]] .. 
+--              font("italic=1 bold=1", _[[bold italic formatted text.]])
+--            ),
 --
 --
--- And this is what the final result looks like:
+-- This results in the following for a campaign message box:
 --
 -- .. image:: images/wlrichtext.png
 --    :scale: 100
