@@ -9,10 +9,10 @@ local see_empire = nil
 
 local fields = {}
 local mountains = {}
-for x=0,map.width-1 do
+for x=0,map.width - 1 do
    local fld = {}
-   for y=0,map.height-1 do
-      local f = map:get_field(x,y)
+   for y=0,map.height - 1 do
+      local f = map:get_field (x,y)
       fld [#fld + 1] = f
       if not (f.terd:find ("mountain") == nil) then mountains [#mountains + 1] = f end
    end
@@ -31,7 +31,7 @@ end
 function check_mountain ()
    while true do
       sleep (7777)
-      for idx,f in ipairs(mountains) do
+      for idx,f in ipairs (mountains) do
          if f:has_caps ("mine") and f.owner == p1 then
             has_mountain = f
             return
@@ -42,12 +42,12 @@ end
 
 function check_empire ()
    while true do
-      for idx,fld in ipairs(fields) do
+      for idx,fld in ipairs (fields) do
          sleep (40)
-         for idy,f in ipairs(fld) do
+         for idy,f in ipairs (fld) do
             local p1c = false
             local p2c = false
-            for idx,cl in ipairs(f.claimers) do
+            for idx,cl in ipairs (f.claimers) do
                if cl == p1 then p1c = true end
                if cl == p2 then p2c = true end
             end
