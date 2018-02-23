@@ -62,10 +62,11 @@ Here is a simplified version of a fancy message displayed to the user:
          ...
       </rt>"
 
-This is quite a lot of hacking, so we have convenience functions set up -- we
-recommend that you always use those, which will also give us consistency in
-style throughout Widelands. So, coding the message will become much easier,
-and it's also more convenient for including translation markup (the ``_[[Some text]]`` function).
+This is quite a lot of hacking, so we have Lua convenience functions set up -- we
+recommend that you always use those while scripting in Lua, which will also give us
+consistency in style throughout Widelands. So, coding the message will become much
+easier, and it's also more convenient for including translation markup
+(the ``_[[Some text]]`` function).
 The complete message now looks like this:
 
 .. code-block:: lua

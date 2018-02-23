@@ -178,14 +178,15 @@ The Richtext Tags
 =================
 
 - :ref:`rt_tags_rt`
-- :ref:`rt_tags_br`
 - :ref:`rt_tags_div`
-- :ref:`rt_tags_font`
-- :ref:`rt_tags_img`
-- :ref:`rt_tags_p`
-- :ref:`rt_tags_rt`
+- :ref:`rt_tags_br`
 - :ref:`rt_tags_space`
 - :ref:`rt_tags_vspace`
+- :ref:`rt_tags_p`
+- :ref:`rt_tags_font`
+- :ref:`rt_tags_img`
+
+For an introduction to our richtext system including a code example, see :ref:`wlrichtext`.
 
 */
 
@@ -248,98 +249,6 @@ Subtags
 	}
 	{
 		/* RST
-.. _rt_tags_br:
-
-Line Break -- <br>
-------------------
-
-A single line break. Use sparingly for things like poetry stanzas.
-If you are starting a new paragraph, use :ref:`rt_tags_p` instead.
-
-:ref:`Return to tag index<rt_tags>`
-		*/
-		TagConstraint tc;
-		tc.text_allowed = false;
-		tc.has_closing_tag = false;
-		tag_constraints_["br"] = tc;
-	}
-	{
-		/* RST
-.. _rt_tags_img:
-
-Image -- <img>
---------------
-
-Displays an image with your text.
-
-Attributes
-^^^^^^^^^^
-
-* **src**: The path to the image, relative to the ``data`` directory.
-* **ref**: To be implemented
-* **color**: Playercolor for the image as a hex value
-* **width**: Width of the image as a pixel amount. The corresponding height will be matched automatically.
-
-:ref:`Return to tag index<rt_tags>`
-		*/
-		TagConstraint tc;
-		tc.allowed_attrs.insert("src");
-		tc.allowed_attrs.insert("ref");
-		tc.allowed_attrs.insert("color");
-		tc.allowed_attrs.insert("width");
-		tc.text_allowed = false;
-		tc.has_closing_tag = false;
-		tag_constraints_["img"] = tc;
-	}
-	{
-		/* RST
-.. _rt_tags_vspace:
-
-Vertical Space -- <vspace>
---------------------------
-
-Inserts a vertical gap between the previous and the following text.
-
-Attributes
-^^^^^^^^^^
-
-* **gap**: The size of the gap as a pixel amount
-
-:ref:`Return to tag index<rt_tags>`
-		*/
-		TagConstraint tc;
-		tc.allowed_attrs.insert("gap");
-		tc.text_allowed = false;
-		tc.has_closing_tag = false;
-		tag_constraints_["vspace"] = tc;
-	}
-	{
-		/* RST
-.. _rt_tags_space:
-
-Horizontal Space -- <space>
----------------------------
-
-Inserts a horizontal gap between the previous and the following text.
-This space can be filled with a character of your choice.
-
-Attributes
-^^^^^^^^^^
-
-* **gap**: The size of the gap as a pixel amount
-* **fill**: A character to fill the gap with
-
-:ref:`Return to tag index<rt_tags>`
-		*/
-		TagConstraint tc;
-		tc.allowed_attrs.insert("gap");
-		tc.allowed_attrs.insert("fill");
-		tc.text_allowed = false;
-		tc.has_closing_tag = false;
-		tag_constraints_["space"] = tc;
-	}
-	{
-		/* RST
 .. _rt_tags_div:
 
 Division -- <div>
@@ -388,6 +297,70 @@ Subtags
 		tc.text_allowed = false;
 		tc.has_closing_tag = true;
 		tag_constraints_["div"] = tc;
+	}
+	{
+		/* RST
+.. _rt_tags_br:
+
+Line Break -- <br>
+------------------
+
+A single line break. Use sparingly for things like poetry stanzas.
+If you are starting a new paragraph, use :ref:`rt_tags_p` instead.
+
+:ref:`Return to tag index<rt_tags>`
+		*/
+		TagConstraint tc;
+		tc.text_allowed = false;
+		tc.has_closing_tag = false;
+		tag_constraints_["br"] = tc;
+	}
+	{
+		/* RST
+.. _rt_tags_space:
+
+Horizontal Space -- <space>
+---------------------------
+
+Inserts a horizontal gap between the previous and the following text.
+This space can be filled with a character of your choice.
+
+Attributes
+^^^^^^^^^^
+
+* **gap**: The size of the gap as a pixel amount
+* **fill**: A character to fill the gap with
+
+:ref:`Return to tag index<rt_tags>`
+		*/
+		TagConstraint tc;
+		tc.allowed_attrs.insert("gap");
+		tc.allowed_attrs.insert("fill");
+		tc.text_allowed = false;
+		tc.has_closing_tag = false;
+		tag_constraints_["space"] = tc;
+	}
+	{
+		/* RST
+.. _rt_tags_vspace:
+
+Vertical Space -- <vspace>
+--------------------------
+
+Inserts a vertical gap between the previous and the following text.
+
+Attributes
+^^^^^^^^^^
+
+* **gap**: The size of the gap as a pixel amount
+
+:ref:`Return to tag index<rt_tags>`
+		*/
+		TagConstraint tc;
+		tc.allowed_attrs.insert("gap");
+		tc.text_allowed = false;
+		tc.has_closing_tag = false;
+		tag_constraints_["vspace"] = tc;
 	}
 	{
 		/* RST
@@ -489,6 +462,34 @@ Subtags
 		tc.text_allowed = true;
 		tc.has_closing_tag = true;
 		tag_constraints_["font"] = tc;
+	}
+	{
+		/* RST
+.. _rt_tags_img:
+
+Image -- <img>
+--------------
+
+Displays an image with your text.
+
+Attributes
+^^^^^^^^^^
+
+* **src**: The path to the image, relative to the ``data`` directory.
+* **ref**: To be implemented
+* **color**: Playercolor for the image as a hex value
+* **width**: Width of the image as a pixel amount. The corresponding height will be matched automatically.
+
+:ref:`Return to tag index<rt_tags>`
+		*/
+		TagConstraint tc;
+		tc.allowed_attrs.insert("src");
+		tc.allowed_attrs.insert("ref");
+		tc.allowed_attrs.insert("color");
+		tc.allowed_attrs.insert("width");
+		tc.text_allowed = false;
+		tc.has_closing_tag = false;
+		tag_constraints_["img"] = tc;
 	}
 }
 
