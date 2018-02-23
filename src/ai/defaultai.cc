@@ -390,7 +390,7 @@ void DefaultAI::think() {
 		case SchedulerTaskId::KMarineDecisions:
 			// if function returns false, we can postpone for next call
 			{
-				const uint8_t wait_multiplier = (marine_main_decisions()) ? 1 : 5;
+				const uint8_t wait_multiplier = (marine_main_decisions(gametime)) ? 1 : 5;
 				set_taskpool_task_time(gametime + wait_multiplier * kMarineDecisionInterval,
 				                       SchedulerTaskId::KMarineDecisions);
 			}

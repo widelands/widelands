@@ -103,7 +103,12 @@ uint8_t DefaultAI::spot_scoring(Widelands::Coords candidate_spot) {
 // and makes two decisions:
 // - build a ship
 // - start preparation for expedition
-bool DefaultAI::marine_main_decisions() {
+bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
+	if (gametime > last_seafaring_check_ + 20000U) {
+		const Map& map = game().map();
+		map_allows_seafaring_ = map.allows_seafaring();
+		last_seafaring_check_ = gametime;
+	}
 	if (!map_allows_seafaring_ &&
 	    count_buildings_with_attribute(BuildingAttribute::kShipyard) == 0 && allships.empty()) {
 		return false;
@@ -540,6 +545,9 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 			map.get_neighbour(tmp_coords, dir, &tmp_coords);
 			if (!(map.get_fcoords(tmp_coords).field->nodecaps() & MOVECAPS_SWIM)) {
 				break;
+			}
+			if (i <= 4) {  // Four fields from the ship is too close for "open sea"
+				continue;
 			}
 			if (i == 5) {
 				// If open sea goes at least 5 fields from the ship this is considerd a
