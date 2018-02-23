@@ -33,6 +33,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       prohibited_till = 760,
+      supports_production_of = { "clay" },
    },
 
    working_positions = {

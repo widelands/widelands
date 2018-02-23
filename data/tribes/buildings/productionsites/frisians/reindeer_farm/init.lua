@@ -40,9 +40,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      recruitment = true,
-      prohibited_till = 610,
-      basic_amount = 1 --TODO remove this from basic economy when AI can handle buildings that produce wares AND recruit the 2nd carrier
+      prohibited_till = 1200
    },
 
    working_positions = {
