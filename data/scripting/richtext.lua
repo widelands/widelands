@@ -8,12 +8,11 @@
 -- ------------
 --
 -- Functions to simplify and unique text formatting in scenarios and help files.
--- Most of these functions are simple wrapper functions that make working with
--- widelands rich text formatting system more bearable.
+-- Most of these functions are simple wrapper functions that make working with the
+-- :ref:`widelands rich text formatting system <wlrichtext>` more bearable.
 -- Function names generally follow HTML names.
 -- We strongly recommend that you make use of these functions rather than hacking
 -- the tags manually.
--- See also :ref:`wlrichtext` for an introduction to the richtext system and a code example.
 -- If you're writing a scenario, you should also have a look at
 -- :ref:`richtext_scenarios.lua`.
 --
@@ -24,6 +23,7 @@
 -- - `Images`_
 -- - `Links`_
 -- - `Text Composition`_
+-- - `Code Example`_
 
 
 -- RST
@@ -545,5 +545,32 @@ function localize_list(items, listtype, former_textdomain)
    return result
 end
 
+
 -- RST
+-- :ref:`Return to index<richtext.lua>`
+--
+-- Code Example
+-- ^^^^^^^^^^^^
+-- Here's an example on how these functions can be used. Note that this ecample
+-- also includes translation markup (the ``_[[Some text]]`` function):
+--
+-- .. code-block:: lua
+--
+--    include "scripting/richtext.lua"
+--
+--    h1(_[[Check out your taverns]]) ..
+--    p(_[[At first, we should find out how many taverns we currently have. Widelands offers you a window where you can easily check this.]]) ..
+--    li_image("images/wui/menus/menu_toggle_menu.png", _[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]]) ..
+--    li_image("images/wui/menus/menu_building_stats.png", _[[Afterwards, choose the ‘Building statistics’.]]) ..
+--    li(_[[Open the building statistics window.]]) ..
+--    li_arrow(_[[You can also use the hotkey ‘b’.]])
+--
+--
+-- And this is what the final result looks like:
+--
+-- .. image:: images/wlrichtext.png
+--    :scale: 100
+--    :alt: sample rendering
+--    :align: center
+--
 -- :ref:`Return to index<richtext.lua>`

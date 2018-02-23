@@ -80,7 +80,7 @@ The complete message now looks like this:
    li_arrow(_[[You can also use the hotkey ‘b’.]])
 
 
-And this is what it looks like rendered on my system:
+And this is what the rendered result looks like:
 
 .. image:: images/wlrichtext.png
    :scale: 100
