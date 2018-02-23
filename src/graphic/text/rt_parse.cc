@@ -207,22 +207,13 @@ You can also set some options here what will affect your whole text.
 Attributes
 ^^^^^^^^^^
 
-Padding
-"""""""
-
 * **padding**: The rectangle of this tag is shrunk so leave a gap on its outside, on all four outer edges.
 * **padding_r**: Padding on the right-hand side
 * **padding_l**: Padding on the left-hand side
 * **padding_b**: Padding on the bottom
 * **padding_t**: Padding on the top
 
-Background color
-""""""""""""""""
-
 * **background**: Give this tag's rectangle a background color as a hex value.
-
-Global Formatting Controls
-""""""""""""""""""""""""""
 
 * **keep_spaces**: Do now trim away trailing and double spaces. Use this where the user is editing text.
 * **db_show_spaces**: Highlight all blank spaces for debugging purposes.
@@ -265,16 +256,6 @@ Line Break -- <br>
 A single line break. Use sparingly for things like poetry stanzas.
 If you are starting a new paragraph, use :ref:`rt_tags_p` instead.
 
-Attributes
-^^^^^^^^^^
-
-None
-
-Subtags
-^^^^^^^
-
-None
-
 :ref:`Return to tag index<rt_tags>`
 		*/
 		TagConstraint tc;
@@ -298,11 +279,6 @@ Attributes
 * **ref**: To be implemented
 * **color**: Playercolor for the image as a hex value
 * **width**: Width of the image as a pixel amount. The corresponding height will be matched automatically.
-
-Subtags
-^^^^^^^
-
-None
 
 :ref:`Return to tag index<rt_tags>`
 		*/
@@ -329,11 +305,6 @@ Attributes
 
 * **gap**: The size of the gap as a pixel amount
 
-Subtags
-^^^^^^^
-
-None
-
 :ref:`Return to tag index<rt_tags>`
 		*/
 		TagConstraint tc;
@@ -358,11 +329,6 @@ Attributes
 * **gap**: The size of the gap as a pixel amount
 * **fill**: A character to fill the gap with
 
-Subtags
-^^^^^^^
-
-None
-
 :ref:`Return to tag index<rt_tags>`
 		*/
 		TagConstraint tc;
@@ -384,18 +350,7 @@ This tag defines a rectangle and an be used as a layouting control.
 Attributes
 ^^^^^^^^^^
 
-Padding
-"""""""
-
-See :ref:`rt_tags_rt`
-
-Background color
-""""""""""""""""
-
-See :ref:`rt_tags_rt`
-
-Margins and placement
-"""""""""""""""""""""
+The same attributes as :ref:`rt_tags_rt`, plus the following:
 
 * **margin**: Shrink all contents to leave a margin towards the outer edge of this tag's rectangle
 * **float**: To be implemented. Allowed values are ``left``,  ``right``
