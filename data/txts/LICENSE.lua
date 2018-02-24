@@ -6,7 +6,7 @@ return {
    title = _"License",
    text = rt(
       p_font("align=center", "size=28 color=2F9131", _"Licensing information for Widelands") ..
-      p_font("align=center", "size=14 italic=1 color=D1D1D1", _"Copyright 2002 - 2016 by the Widelands Development Team.") ..
+      p_font("align=center", "size=14 italic=1 color=D1D1D1", _"Copyright 2002 - 2018 by the Widelands Development Team.") ..
 
       p(vspace(12) .. b(_"This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0.")) ..
 

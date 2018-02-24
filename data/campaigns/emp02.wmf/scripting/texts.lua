@@ -252,7 +252,7 @@ diary_page_9 = {
    posy=1,
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[That’s good. The first large military building is complete and the mining infrastructure is getting better and better. Now we should think about preparing ourselves for battle.]]))
+      _([[That’s good. The first big military building is complete and the mining infrastructure is getting better and better. Now we should think about preparing ourselves for battle.]]))
       .. new_objectives(obj_remove_the_barbarians)
 }
 
