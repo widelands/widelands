@@ -65,7 +65,7 @@ also give us consistency in style throughout Widelands.
 Using the convenience functions will also result in cleaner code when
 including translation markup (the ``_[[Some text]]`` or ``_"Some text"`` function).
 
-A code example how to use the convenience functions and the attributes is given in the 
-documentation for the :ref:`richtext convenience functions <lua_formatting_example>`
+A code example how to use the convenience functions and their attributes is given in the
+documentation for the :ref:`richtext convenience functions <lua_formatting_example>`.
 
 :ref:`Return to index<richtext.lua>`

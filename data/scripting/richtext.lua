@@ -254,12 +254,12 @@ end
 
 
 -- RST
--- .. function:: p_font(text_or_attributes[, text = nil])
+-- .. function:: p_font(p_or_font_attributes, text_or_font_attributes[, text = nil])
 --
 --    Returns one paragraph with text followed by a small vertical gap. Options
 --    can be given as first argument similar to :func:`rt`.
 --
---    :arg p_or_font_attributes: Optional paragraphs or font attributes.
+--    :arg p_or_font_attributes: Optional paragraph or font attributes.
 --    :type p_or_font_attributes: :class:`string`
 --
 --    :arg text_or_font_attributes: Optional font attributes or the text itself.
@@ -409,8 +409,10 @@ end
 --    Places a paragraph of text to the right of an image
 --
 --    :arg imagepath: the full path to the image file
---    :arg text_width_percent: the percentage of space that the text will occupy
+--    :type imagepath: :class:`string`
+--
 --    :arg text: the text to be placed next to the image
+--    :type text: :class:`string`
 --
 --    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
 
@@ -510,7 +512,7 @@ end
 --    Turns an array of string items into a localized string list with
 --    appropriate concatenation.
 --
---    e.g. localize_list({"foo", "bar", baz"}, "or", "widelands") will return
+--    e.g. localize_list({"foo", "bar", "baz"}, "or", "widelands") will return
 --    _"foo, bar or baz"
 --
 --    :arg items:              An array of strings
@@ -549,7 +551,7 @@ end
 -- RST
 -- :ref:`Return to index<richtext.lua>`
 --
--- :ref: .. _lua_formatting_example:
+-- .. _lua_formatting_example:
 --
 -- Code Example
 -- ^^^^^^^^^^^^

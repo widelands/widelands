@@ -254,7 +254,7 @@ Sub-tags
 Division -- <div>
 -----------------
 
-This tag defines a rectangle and an be used as a layout control.
+This tag defines a rectangle and can be used as a layout control.
 
 Attributes
 ^^^^^^^^^^
@@ -263,7 +263,7 @@ The same attributes as :ref:`rt_tags_rt`, plus the following:
 
 * **margin**: Shrink all contents to leave a margin towards the outer edge of this tag's rectangle
 * **float**: To be implemented. Allowed values are ``left``,  ``right``
-* **valign**: Align the contents vertically. Allowed values are ``top`` (default), ``center`` = ``middle``, ``bottom``.
+* **valign**: Align the contents vertically. Allowed values are ``top`` (default), ``center`` or ``middle``, ``bottom``.
 * **width**: The width of this element, as a pixel amount, or as a percentage.
   The last ``div`` in a row can be expanded automatically by using ``*``.
 
@@ -376,7 +376,7 @@ Attributes
 
 * **indent**: Adds an indent to the first line of the paragraph
 * **align**: The horizontal alignment for the paragraph's text.
-  Allowed values are ``left`` (default), ``center`` = ``middle``, ``right``.
+  Allowed values are ``left`` (default), ``center`` or ``middle``, ``right``.
 * **valign**: See :ref:`rt_tags_div`
 * **spacing**: Vertical line spacing as a pixel value
 
