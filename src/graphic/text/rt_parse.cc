@@ -238,6 +238,8 @@ Parser::Parser() {
 		tc.allowed_attrs.insert("background");
 		tc.allowed_attrs.insert("width");
 
+		tc.allowed_attrs.insert("abc");
+
 		tc.allowed_children.insert("p");
 		tc.allowed_children.insert("vspace");
 		tc.allowed_children.insert("font");

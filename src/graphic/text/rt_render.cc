@@ -825,6 +825,14 @@ public:
 			rendered_text->rects.push_back(std::unique_ptr<UI::RenderedRect>(std::move(bg_rect)));
 		}
 
+printf("Nodes to render in this div: ");
+for (std::shared_ptr<RenderNode> n : nodes_to_render_) {
+	//if (!n->attrs().has("abc"))
+		printf("%s ", n->debug_info().c_str());
+	//else
+		//printf("%s(%s) ", n->debug_info().c_str(), n->attrs()["abc"].get_string().c_str());
+}
+printf("\n");
 		for (std::shared_ptr<RenderNode> n : nodes_to_render_) {
 			// TODO(GunChleoc): With div width=*, we are getting newline nodes here, which should have
 			// been consumed
@@ -1091,8 +1099,9 @@ void TagHandler::emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) {
 			   *c->tag, font_cache_, nodestyle_, image_cache_, renderer_style_, fontsets_));
 			th->enter();
 			th->emit_nodes(nodes);
-		} else
+		} else {
 			make_text_nodes(c->text, nodes, nodestyle_);
+		}
 	}
 }
 
@@ -1379,28 +1388,75 @@ public:
 		}
 
 		std::vector<std::shared_ptr<RenderNode>> subnodes;
+		const uint16_t old_width = renderer_style_.overall_width;
+		if (render_node_->desired_width().unit == WidthUnit::kPercent) {
+			renderer_style_.overall_width = render_node_->desired_width().width * renderer_style_.overall_width / 100;
+		}
 		TagHandler::emit_nodes(subnodes);
+		renderer_style_.overall_width = old_width;
 
-		if (!w_) {  // Determine the width by the width of the widest subnode
-			for (std::shared_ptr<RenderNode> n : subnodes) {
+if (a.has("abc")) {
+static int counter = 0;
+printf("(%d) Sub-widths of div %s with width=%d:\n  ", ++counter, a["abc"].get_string().c_str(), w_);
+auto w2 = w_;
+for (std::shared_ptr<RenderNode> n : subnodes) {
+printf("%s:%d ", n->debug_info().c_str(), n->width());
 				if (n->width() >= INFINITE_WIDTH)
 					continue;
-				w_ = std::max<int>(w_, n->width() + padding.left + padding.right);
-			}
-		}
+				w2 = std::max<int>(w2, n->width() + padding.left + padding.right);
+}
+//printf("\n  Sum: %d\n", w2);
+printf("\n");
+if (counter > 24) {
+	//printf(" ");
+	//printf(" ");
+}
+}
 
+		// Determine the width by the width of the widest subnode
+		uint16_t width_first_subnode = INFINITE_WIDTH, widest_subnode = 0, sum_width_subnodes = 0;
+		for (std::shared_ptr<RenderNode> n : subnodes) {
+			if (n->width() >= INFINITE_WIDTH)
+				continue;
+			if (width_first_subnode >= INFINITE_WIDTH && n->width() > 0)
+				width_first_subnode = n->width() + padding.left + padding.right;
+			widest_subnode = std::max<int>(widest_subnode, n->width() + padding.left + padding.right);
+			sum_width_subnodes += n->width() + padding.left + padding.right;
+		}
+if (a.has("abc"))
+printf("A: first = %d, widest = %d, sum = %d, all = %d, rest = %d, w_ = %d\n", width_first_subnode, widest_subnode, sum_width_subnodes, renderer_style_.overall_width, renderer_style_.remaining_width, w_);
+		if (renderer_style_.remaining_width < width_first_subnode) {
+			// Not enough space for first subnode. Move to next line
+			renderer_style_.remaining_width = renderer_style_.overall_width;
+		}
+if (a.has("abc"))
+printf("B: first = %d, widest = %d, sum = %d, all = %d, rest = %d, w_ = %d\n", width_first_subnode, widest_subnode, sum_width_subnodes, renderer_style_.overall_width, renderer_style_.remaining_width, w_);
 		switch (render_node_->desired_width().unit) {
 		case WidthUnit::kPercent:
 			w_ = render_node_->desired_width().width * renderer_style_.overall_width / 100;
-			renderer_style_.remaining_width -= w_;
+
+			// Reduce remaining width
+			if (renderer_style_.remaining_width <= w_) {
+				// Not enough space. Div will be placed in the next line, calculate the remaining space
+				renderer_style_.remaining_width = renderer_style_.overall_width - w_;
+			} else {
+				renderer_style_.remaining_width -= w_;
+			}
 			break;
 		case WidthUnit::kFill:
 			w_ = renderer_style_.remaining_width;
+
+			// Reduce remaining width
 			renderer_style_.remaining_width = 0;
 			break;
-		default:;  // Do nothing
+		default:
+			if (!w_) {
+				w_ = widest_subnode;
+			}
+			// Else do nothing
 		}
-
+if (a.has("abc"))
+printf("C: first = %d, widest = %d, sum = %d, all = %d, rest = %d, w_ = %d\n", width_first_subnode, widest_subnode, sum_width_subnodes, renderer_style_.overall_width, renderer_style_.remaining_width, w_);
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
 		std::vector<std::shared_ptr<RenderNode>> nodes_to_render;
@@ -1435,10 +1491,6 @@ public:
 		}
 		if (shrink_to_fit_ || w_ >= INFINITE_WIDTH) {
 			w_ = max_line_width;
-		}
-
-		if (renderer_style_.remaining_width < w_) {
-			renderer_style_.remaining_width = renderer_style_.overall_width;
 		}
 
 		render_node_->set_dimensions(w_, layout.height(), margin);
@@ -1587,7 +1639,9 @@ Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_
 	if (!width) {
 		width = INFINITE_WIDTH;
 	}
-
+//if (width == 314) {
+//	printf("\n");
+//}
 	renderer_style_.remaining_width = width;
 	renderer_style_.overall_width = width;
 
@@ -1606,6 +1660,11 @@ Renderer::layout(const std::string& text, uint16_t width, const TagSet& allowed_
 	RTTagHandler rtrn(
 	   *rt, *font_cache_, default_style, image_cache_, renderer_style_, fontsets_, width);
 	std::vector<std::shared_ptr<RenderNode>> nodes;
+/*printf("Nodes resulting from layout(): \n");
+for (const auto& n : nodes) {
+	printf("%s ", n->debug_info().c_str());
+}
+printf("\n");*/
 	rtrn.enter();
 	rtrn.emit_nodes(nodes);
 

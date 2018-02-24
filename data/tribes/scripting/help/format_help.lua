@@ -201,9 +201,61 @@ function help_consumed_wares_workers(tribe, building, program_name)
          end
       end
       consumed_items_string =
-         div("width=100%",
-            div("width=70%", p(vspace(6) .. text .. space(6))) ..
-            div("width=*", p("align=right", vspace(6) .. images .. vspace(12)))
+         div("width=100% abc=outer100a",
+            div("width=51% abc=inner51a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=100% abc=outer100a",
+            div("width=51% abc=inner51a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=90% abc=outer90a",
+            div("width=30% abc=90inner30a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=90innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=90% abc=outer90a",
+            div("width=50% abc=90inner50a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=90innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=90% abc=outer90b",
+            div("width=51% abc=90inner51b", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=90innerStarb", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=100% abc=outer100nov",
+            div("width=51% abc=inner51nov", p(text)) ..
+            div("width=* abc=innerStarnov", p("align=right", images))
+         ) ..
+         div("width=100% abc=outer100nov2",
+            div("width=51% abc=inner51nov2", p(text)) ..
+            div("width=* abc=innerStarnov2", p("align=right", images))
+         ) ..
+         div("width=100% abc=outer100a",
+            div("width=70% abc=inner70a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=100% abc=outer100a",
+            div("width=80% abc=inner80a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=100% abc=outer100a",
+            div("width=85% abc=inner85a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=100% abc=outer100a",
+            div("width=90% abc=inner90a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=100% abc=outer100a",
+            div("width=95% abc=inner95a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=100% abc=outer100a",
+            div("width=99% abc=inner99a", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=innerStara", p("align=right", vspace(6) .. images .. vspace(12)))
+         ) ..
+         div("width=100% abc=outer100b",
+            div("width=50% abc=inner50b", p(vspace(6) .. text .. space(6))) ..
+            div("width=* abc=innerStarb", p("align=right", vspace(6) .. images .. vspace(12)))
          )
          .. consumed_items_string
    end
