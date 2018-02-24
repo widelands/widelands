@@ -27,17 +27,16 @@ Here is a simplified version of a fancy message displayed to the user:
 
 .. code-block:: lua
 
-   message_body =
+   body =
       "<rt>                                     -- This is richtext
          <p>                                    -- Start a paragraph
             <font size=18 bold=1 color=D1D1D1>  -- Set font size and color
-               Check out your taverns
+               Big font to create a header
             </font>
          </p>
          <p>
             <font size=12>
-               At first, we should find out how many taverns we currently have.
-               Widelands offers you a window where you can easily check this.
+               Normal paragraph, just with a bit more text to show how it looks like.
             </font>
          </p>
          -- The following content should be spread across a full line
@@ -52,9 +51,7 @@ Here is a simplified version of a fancy message displayed to the user:
             <div width=*>                       -- Fill up the remaining space
                <p>
                   <font size=12>
-                     First, you will have to open the statistics menu (you can
-                     find the corresponding button at the bottom).
-                     We will need this menu several times.
+                     Another normal paragraph
                   </font>
                </p>
             </div>
@@ -62,28 +59,37 @@ Here is a simplified version of a fancy message displayed to the user:
          ...
       </rt>"
 
-This is quite a lot of hacking, so we have Lua convenience functions set up -- we
-recommend that you always use those while scripting in Lua, which will also give us
-consistency in style throughout Widelands. So, coding the message will become much
-easier, and it's also more convenient for including translation markup
-(the ``_[[Some text]]`` function).
-The complete message now looks like this:
+This is quite a lot of hacking, so we have :ref:`Lua convenience functions <richtext.lua>`
+set up. We recommend that you always use those while scripting in Lua, which will
+also give us consistency in style throughout Widelands.
+Using the convenience functions will also result in cleaner code when
+including translation markup (the ``_[[Some text]]`` or ``_"Some text"`` function).
+We can now create complicated markup fairly easily, like this:
 
 .. code-block:: lua
 
    include "scripting/richtext.lua"
 
-   h1(_[[Check out your taverns]]) ..
-   p(_[[At first, we should find out how many taverns we currently have. Widelands offers you a window where you can easily check this.]]) ..
-   li_image("images/wui/menus/menu_toggle_menu.png", _[[First, you will have to open the statistics menu (you can find the corresponding button at the bottom). We will need this menu several times.]]) ..
-   li_image("images/wui/menus/menu_building_stats.png", _[[Afterwards, choose the ‘Building statistics’.]]) ..
-   li(_[[Open the building statistics window.]]) ..
-   li_arrow(_[[You can also use the hotkey ‘b’.]])
+   body = h1(_[[Normal header]]) ..
+          h1("ff0000", _[[Colored header]]) ..
+          p(_[[Normal paragraph, just with a bit more text to show how it looks like.]]) ..
+          p("align=center", _[[A centered paragraph]]) ..
+          li_image("images/wui/menus/menu_toggle_menu.png", _[[An image with right aligned text. This is just text to show automatic linebreaks and behavior in regard with images]]) ..
+          li(_[[A list item]]) ..
+          li(font("color=ff0000 bold=1", _[[Red and bold]])) ..
+          li_arrow(_[[A list item with an arrow]]) ..
+          p(_[[A more complicated paragraph with ]] ..
+             font("color=ff0000", _[[red text ]]) ..
+             _[[and ]] ..
+             font("italic=1 bold=1", _[[bold italic formatted text.]])
+           ),
 
 
-And this is what the rendered result looks like:
+This results in the following for a campaign message box:
 
 .. image:: images/wlrichtext.png
    :scale: 100
    :alt: sample rendering
    :align: center
+
+:ref:`Return to index<richtext.lua>`

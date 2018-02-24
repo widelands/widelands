@@ -551,9 +551,9 @@ end
 --
 -- Code Example
 -- ^^^^^^^^^^^^
--- Here's an example on how these functions and their attributes can be used. The double point 
+-- Here's an example on how these functions and their attributes can be used. The double dot
 -- (``..``) is the LUA string concatenation operator. Note that this example
--- also includes translation markup (the ``_[[Some text]]`` function):
+-- also includes translation markup (the ``_[[Some text]]`` or ``_"Some text"`` function):
 --
 -- .. code-block:: lua
 --
@@ -567,9 +567,9 @@ end
 --           li(_[[A list item]]) ..
 --           li(font("color=ff0000 bold=1", _[[Red and bold]])) ..
 --           li_arrow(_[[A list item with an arrow]]) ..
---           p(_[[A more complicated paragraph with ]] .. 
---              font("color=ff0000", _[[red text ]]) .. 
---              _[[and ]] .. 
+--           p(_[[A more complicated paragraph with ]] ..
+--              font("color=ff0000", _[[red text ]]) ..
+--              _[[and ]] ..
 --              font("italic=1 bold=1", _[[bold italic formatted text.]])
 --            ),
 --
