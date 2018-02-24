@@ -1,7 +1,7 @@
 -- =======================================================================
 --                                 Player 1
 -- =======================================================================
-p1:allow_buildings ("all")
+p1:allow_buildings("all")
 p1:forbid_buildings {
    "frisians_aqua_farm",
    "frisians_recycling_center",
@@ -18,7 +18,7 @@ p1:forbid_buildings {
    "frisians_port",
 }
 
-port1 = p1:place_building ("frisians_port", p1start, false, true)
+port1 = p1:place_building("frisians_port", p1start, false, true)
 port1:set_wares {
    log = 40,
    brick = 50,
@@ -60,12 +60,12 @@ port1:set_workers {
    frisians_reindeer = 1,
    frisians_charcoal_burner = 3
 }
-port1:set_soldiers ({0,0,0,0}, 25)
+port1:set_soldiers({0,0,0,0}, 25)
 
 -- =======================================================================
 --                                 Player 2
 -- =======================================================================
-p2:forbid_buildings ("all")
+p2:forbid_buildings("all")
 p2:allow_buildings {
    "empire_warehouse",
    "empire_sentry",
@@ -102,7 +102,7 @@ p2:allow_buildings {
    "empire_stonemasons_house",
    "empire_sawmill"
 }
-hq2 = p2:place_building ("empire_headquarters", map.player_slots [2].starting_field, false, true)
+hq2 = p2:place_building("empire_headquarters", map.player_slots [2].starting_field, false, true)
 hq2:set_wares {
    log = 80,
    granite = 40,
@@ -156,12 +156,12 @@ hq2:set_workers {
    empire_weaponsmith = 1,
    empire_geologist = 2
 }
-hq2:set_soldiers ({4,4,0,2}, 30)
+hq2:set_soldiers({4,4,0,2}, 30)
 
 -- =======================================================================
 --                                 Player 3
 -- =======================================================================
-p3:forbid_buildings ("all")
+p3:forbid_buildings("all")
 p3:allow_buildings {
    "barbarians_warehouse",
    "barbarians_sentry",
@@ -199,7 +199,7 @@ p3:allow_buildings {
    "barbarians_fishers_hut",
    "barbarians_gamekeepers_hut"
 }
-hq3 = p3:place_building ("barbarians_headquarters", map.player_slots [3].starting_field, false, true)
+hq3 = p3:place_building("barbarians_headquarters", map.player_slots [3].starting_field, false, true)
 hq3:set_wares {
    log = 100,
    granite = 50,
@@ -248,4 +248,4 @@ hq3:set_workers {
    barbarians_blacksmith_master = 1,
    barbarians_helmsmith = 1
 }
-hq3:set_soldiers ({3,5,0,2}, 40)
+hq3:set_soldiers({3,5,0,2}, 40)
