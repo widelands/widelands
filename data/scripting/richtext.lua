@@ -559,19 +559,20 @@ end
 --
 --    include "scripting/richtext.lua"
 --
+--    title = "Text Formatting",
 --    body = h1(_[[Normal header]]) ..
---           h1("ff0000", _[[Colored header]]) ..
+--           h1("004aff", _[[Colored header]]) ..
 --           p(_[[Normal paragraph, just with a bit more text to show how it looks like.]]) ..
 --           p("align=center", _[[A centered paragraph]]) ..
 --           li_image("images/wui/menus/menu_toggle_menu.png", _[[An image with right aligned text. This is just text to show automatic line breaks and behavior in regard with images]]) ..
 --           li(_[[A list item]]) ..
---           li(font("color=ff0000 bold=1", _[[Red and bold]])) ..
+--           li(font("color=004aff bold=1", _[[Blue and bold]])) ..
 --           li_arrow(_[[A list item with an arrow]]) ..
 --           p(_[[A more complicated paragraph with ]] ..
---              font("color=ff0000", _[[red text ]]) ..
+--              font("color=ffffff", _[[white text ]]) ..
 --              _[[and ]] ..
 --              font("italic=1 bold=1", _[[bold italic formatted text.]])
---            ),
+--           ),
 --
 --
 -- This results in the following for a campaign message box:
