@@ -390,7 +390,7 @@ void DefaultAI::think() {
 		case SchedulerTaskId::KMarineDecisions:
 			// if function returns false, we can postpone for next call
 			{
-				const uint8_t wait_multiplier = (marine_main_decisions()) ? 1 : 5;
+				const uint8_t wait_multiplier = (marine_main_decisions(gametime)) ? 1 : 5;
 				set_taskpool_task_time(gametime + wait_multiplier * kMarineDecisionInterval,
 				                       SchedulerTaskId::KMarineDecisions);
 			}
@@ -723,7 +723,8 @@ void DefaultAI::late_initialization() {
 			}
 
 			// and fishers
-			if (bo.outputs.size() == 1 && tribe_->safe_ware_index("fish") == bo.outputs.at(0)) {
+			if (bo.outputs.size() == 1 && tribe_->safe_ware_index("fish") == bo.outputs.at(0) &&
+			    bo.inputs.empty()) {
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 
@@ -2610,6 +2611,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Quarries are generally to be built everywhere where rocks are
 					// no matter the need for granite, as rocks are considered an obstacle
 					// to expansion
+					if (bf->rocks_nearby < 1) {
+						continue;
+					}
 					prio += 2 * bf->rocks_nearby;
 
 					if (bf->rocks_nearby > 0 && bf->near_border) {
