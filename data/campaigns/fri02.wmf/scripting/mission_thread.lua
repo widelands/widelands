@@ -13,10 +13,10 @@ for x=0,map.width - 1 do
    local fld = {}
    for y=0,map.height - 1 do
       local f = map:get_field(x,y)
-      fld [#fld + 1] = f
-      if not (f.terd:find("mountain") == nil) then mountains [#mountains + 1] = f end
+      fld[#fld + 1] = f
+      if not (f.terd:find("mountain") == nil) then mountains[#mountains + 1] = f end
    end
-   fields [#fields + 1] = fld
+   fields[#fields + 1] = fld
 end
 
 function count_military_buildings_p1()
@@ -89,7 +89,7 @@ function expand_south()
          end
       end
    end
-   local wh = p1:get_buildings("frisians_warehouse_empire") [1]
+   local wh = p1:get_buildings("frisians_warehouse_empire")[1]
    for idx,ware in ipairs(p1.tribe.wares) do
       if p2.tribe:has_ware(ware.name) then
          wh:set_warehouse_policies(ware.name, "prefer")
@@ -97,7 +97,7 @@ function expand_south()
          wh:set_warehouse_policies(ware.name, "dontstock")
       end
    end
-   scroll_to_field(wh.fields [1])
+   scroll_to_field(wh.fields[1])
    sleep(3000)
    p2:forbid_buildings {"empire_fortress", "empire_castle", "empire_barrier", "empire_blockhouse", "empire_tower"}
    p3:forbid_buildings {"barbarians_citadel", "barbarians_tower"}
@@ -198,8 +198,8 @@ function mining_issues()
 end
 
 function supply_yes()
-   local wh = p1:get_buildings("frisians_warehouse_empire") [1]
-   local hq = p2:get_buildings("empire_headquarters") [1]
+   local wh = p1:get_buildings("frisians_warehouse_empire")[1]
+   local hq = p2:get_buildings("empire_headquarters")[1]
    -- transfer all wares that frisians and empire have in common
    for idx,name in ipairs({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish",
          "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe",
