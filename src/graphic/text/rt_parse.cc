@@ -219,8 +219,8 @@ Attributes
 * **keep_spaces**: Do now trim away trailing and double spaces. Use this where the user is editing text.
 * **db_show_spaces**: Highlight all blank spaces for debugging purposes.
 
-Subtags
-^^^^^^^
+Sub-tags
+^^^^^^^^
 
 * :ref:`rt_tags_div`
 * :ref:`rt_tags_font`
@@ -254,7 +254,7 @@ Subtags
 Division -- <div>
 -----------------
 
-This tag defines a rectangle and an be used as a layouting control.
+This tag defines a rectangle and an be used as a layout control.
 
 Attributes
 ^^^^^^^^^^
@@ -264,11 +264,11 @@ The same attributes as :ref:`rt_tags_rt`, plus the following:
 * **margin**: Shrink all contents to leave a margin towards the outer edge of this tag's rectangle
 * **float**: To be implemented. Allowed values are ``left``,  ``right``
 * **valign**: Align the contents vertically. Allowed values are ``top`` (default), ``center`` = ``middle``, ``bottom``.
-* **width**: The width of this element, as a pixel amount, or as a precentage.
+* **width**: The width of this element, as a pixel amount, or as a percentage.
   The last ``div`` in a row can be expanded automatically by using ``*``.
 
-Subtags
-^^^^^^^
+Sub-tags
+^^^^^^^^
 
 * :ref:`rt_tags_div`
 * :ref:`rt_tags_font`
@@ -380,8 +380,8 @@ Attributes
 * **valign**: See :ref:`rt_tags_div`
 * **spacing**: Vertical line spacing as a pixel value
 
-Subtags
-^^^^^^^
+Sub-tags
+^^^^^^^^
 
 * :ref:`rt_tags_br`
 * :ref:`rt_tags_div`
@@ -429,8 +429,8 @@ Attributes
 * **shadow**: Add a background shadow
 * **ref**: To be implemented
 
-Subtags
-^^^^^^^
+Sub-tags
+^^^^^^^^
 
 * :ref:`rt_tags_br`
 * :ref:`rt_tags_div`
@@ -477,7 +477,7 @@ Attributes
 
 * **src**: The path to the image, relative to the ``data`` directory.
 * **ref**: To be implemented
-* **color**: Playercolor for the image as a hex value
+* **color**: Player color for the image as a hex value
 * **width**: Width of the image as a pixel amount. The corresponding height will be matched automatically.
 
 :ref:`Return to tag index<rt_tags>`

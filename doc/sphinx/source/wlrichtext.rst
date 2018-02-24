@@ -3,7 +3,7 @@
 The Widelands Rich Text System
 ==============================
 
-All texts that can be displayed to the user can be marked up to be layouted
+All texts that can be displayed to the user can be marked up to be laid out
 and nicely formatted. This allows for changing of font sizes, weights, colors
 and for the embedding of images. This documents how to format a string to be
 recognized as rich text and which attributes are understood.
@@ -74,7 +74,7 @@ We can now create complicated markup fairly easily, like this:
           h1("ff0000", _[[Colored header]]) ..
           p(_[[Normal paragraph, just with a bit more text to show how it looks like.]]) ..
           p("align=center", _[[A centered paragraph]]) ..
-          li_image("images/wui/menus/menu_toggle_menu.png", _[[An image with right aligned text. This is just text to show automatic linebreaks and behavior in regard with images]]) ..
+          li_image("images/wui/menus/menu_toggle_menu.png", _[[An image with right aligned text. This is just text to show automatic line breaks and behavior in regard with images]]) ..
           li(_[[A list item]]) ..
           li(font("color=ff0000 bold=1", _[[Red and bold]])) ..
           li_arrow(_[[A list item with an arrow]]) ..

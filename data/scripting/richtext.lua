@@ -409,7 +409,7 @@ end
 --    Places a paragraph of text to the right of an image
 --
 --    :arg imagepath: the full path to the image file
---    :arg text_width_percent: the percentatge of space that the text will occupy
+--    :arg text_width_percent: the percentage of space that the text will occupy
 --    :arg text: the text to be placed next to the image
 --
 --    :returns: the text wrapped in a paragraph and placed next to the image, the outer tag is a div.
@@ -462,7 +462,7 @@ end
 -- ^^^^^
 --
 -- This section covers functions for including links. We can't do real links yet,
--- so we only hightlight the text for now.
+-- so we only highlight the text for now.
 
 -- RST
 -- .. function:: a(link)
@@ -484,7 +484,7 @@ end
 -- ^^^^^^^^^^^^^^^^
 --
 -- This section covers functions for text composition that help with proper markup
--- to make the text translateable.
+-- to make the text translatable.
 
 
 -- RST
@@ -563,7 +563,7 @@ end
 --           h1("ff0000", _[[Colored header]]) ..
 --           p(_[[Normal paragraph, just with a bit more text to show how it looks like.]]) ..
 --           p("align=center", _[[A centered paragraph]]) ..
---           li_image("images/wui/menus/menu_toggle_menu.png", _[[An image with right aligned text. This is just text to show automatic linebreaks and behavior in regard with images]]) ..
+--           li_image("images/wui/menus/menu_toggle_menu.png", _[[An image with right aligned text. This is just text to show automatic line breaks and behavior in regard with images]]) ..
 --           li(_[[A list item]]) ..
 --           li(font("color=ff0000 bold=1", _[[Red and bold]])) ..
 --           li_arrow(_[[A list item with an arrow]]) ..
