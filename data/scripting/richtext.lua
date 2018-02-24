@@ -549,6 +549,8 @@ end
 -- RST
 -- :ref:`Return to index<richtext.lua>`
 --
+-- :ref: .. _lua_formatting_example:
+--
 -- Code Example
 -- ^^^^^^^^^^^^
 -- Here's an example on how these functions and their attributes can be used. The double dot

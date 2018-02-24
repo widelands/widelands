@@ -65,33 +65,7 @@ also give us consistency in style throughout Widelands.
 Using the convenience functions will also result in cleaner code when
 including translation markup (the ``_[[Some text]]`` or ``_"Some text"`` function).
 
-We can now create complicated markup fairly easily, like this:
-
-.. code-block:: lua
-
-   include "scripting/richtext.lua"
-
-   title = "Text Formatting",
-   body = h1(_[[Normal header]]) ..
-          h1("004aff", _[[Colored header]]) ..
-          p(_[[Normal paragraph, just with a bit more text to show how it looks like.]]) ..
-          p("align=center", _[[A centered paragraph]]) ..
-          li_image("images/wui/menus/menu_toggle_menu.png", _[[An image with right aligned text. This is just text to show automatic line breaks and behavior in regard with images]]) ..
-          li(_[[A list item]]) ..
-          li(font("color=004aff bold=1", _[[Blue and bold]])) ..
-          li_arrow(_[[A list item with an arrow]]) ..
-          p(_[[A more complicated paragraph with ]] ..
-             font("color=ffffff", _[[white text ]]) ..
-             _[[and ]] ..
-             font("italic=1 bold=1", _[[bold italic formatted text.]])
-          ),
-
-
-This results in the following for a campaign message box:
-
-.. image:: images/wlrichtext.png
-   :scale: 100
-   :alt: sample rendering
-   :align: center
+A code example how to use the convenience functions and the attributes is given in the 
+documentation for the :ref:`richtext convenience functions <lua_formatting_example>`
 
 :ref:`Return to index<richtext.lua>`
