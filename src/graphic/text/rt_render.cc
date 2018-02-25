@@ -52,8 +52,6 @@
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 
-// TODO(GunChleoc): text line can start with space text node when it's within a div.
-// https://bugs.launchpad.net/widelands/+bug/1738759
 namespace RT {
 
 static const uint16_t INFINITE_WIDTH = 65535;  // 2^16-1
@@ -305,10 +303,8 @@ public:
 	uint16_t height() {
 		return h_;
 	}
-	uint16_t fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
-	                   uint16_t w,
-	                   Borders p,
-	                   bool shrink_to_fit);
+	uint16_t
+	fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv, uint16_t w, Borders p, bool trim_spaces);
 
 private:
 	// Represents a change in the rendering constraints. For example when an
@@ -327,7 +323,7 @@ private:
 	uint16_t fit_line(uint16_t w,
 	                  const Borders&,
 	                  std::vector<std::shared_ptr<RenderNode>>* rv,
-	                  bool shrink_to_fit);
+	                  bool trim_spaces);
 
 	uint16_t h_;
 	size_t idx_;
@@ -338,11 +334,11 @@ private:
 uint16_t Layout::fit_line(uint16_t w,
                           const Borders& p,
                           std::vector<std::shared_ptr<RenderNode>>* rv,
-                          bool shrink_to_fit) {
+                          bool trim_spaces) {
 	assert(rv->empty());
 
 	// Remove leading spaces
-	while (idx_ < all_nodes_.size() && all_nodes_[idx_]->is_non_mandatory_space() && shrink_to_fit) {
+	while (idx_ < all_nodes_.size() && all_nodes_[idx_]->is_non_mandatory_space() && trim_spaces) {
 		all_nodes_[idx_++].reset();
 	}
 
@@ -366,7 +362,7 @@ uint16_t Layout::fit_line(uint16_t w,
 		++idx_;
 	}
 	// Remove trailing spaces
-	while (!rv->empty() && rv->back()->is_non_mandatory_space() && shrink_to_fit) {
+	while (!rv->empty() && rv->back()->is_non_mandatory_space() && trim_spaces) {
 		x -= rv->back()->width();
 		rv->pop_back();
 	}
@@ -420,7 +416,7 @@ uint16_t Layout::fit_line(uint16_t w,
 uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
                            uint16_t w,
                            Borders p,
-                           bool shrink_to_fit) {
+                           bool trim_spaces) {
 	assert(rv->empty());
 	h_ = p.top;
 
@@ -428,7 +424,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 	while (idx_ < all_nodes_.size()) {
 		std::vector<std::shared_ptr<RenderNode>> nodes_in_line;
 		size_t idx_before_iteration_ = idx_;
-		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, shrink_to_fit);
+		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, trim_spaces);
 
 		int line_height = 0;
 		int line_start = INFINITE_WIDTH;
@@ -679,12 +675,6 @@ public:
 		return 0;
 	}
 	std::shared_ptr<UI::RenderedText> render(TextureCache* /* texture_cache */) override {
-		// TODO(GunChleoc): When using div width=*, some newline nodes are not being consumed.
-		// Since it is working as expected otherwise and I can't find the problem, let's fix this some
-		// other time.
-		// Testing can be done with the editor terrains/trees help
-		// https://bugs.launchpad.net/widelands/+bug/1738760
-		// NEVER_HERE();
 		return std::shared_ptr<UI::RenderedText>(new UI::RenderedText());
 	}
 	bool is_non_mandatory_space() const override {
@@ -826,9 +816,6 @@ public:
 		}
 
 		for (std::shared_ptr<RenderNode> n : nodes_to_render_) {
-			// TODO(GunChleoc): With div width=*, we are getting newline nodes here, which should have
-			// been consumed
-			// https://bugs.launchpad.net/widelands/+bug/1738760
 			const auto& renderme = n->render(texture_cache);
 			for (auto& rendered_rect : renderme->rects) {
 				if (rendered_rect->was_visited()) {
@@ -1091,8 +1078,9 @@ void TagHandler::emit_nodes(std::vector<std::shared_ptr<RenderNode>>& nodes) {
 			   *c->tag, font_cache_, nodestyle_, image_cache_, renderer_style_, fontsets_));
 			th->enter();
 			th->emit_nodes(nodes);
-		} else
+		} else {
 			make_text_nodes(c->text, nodes, nodestyle_);
+		}
 	}
 }
 
@@ -1343,6 +1331,7 @@ public:
 	              bool shrink_to_fit = true)
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     shrink_to_fit_(shrink_to_fit),
+	     trim_spaces_(true),
 	     w_(max_w),
 	     render_node_(new DivTagRenderNode(ns)) {
 	}
@@ -1379,33 +1368,63 @@ public:
 		}
 
 		std::vector<std::shared_ptr<RenderNode>> subnodes;
+		// If a percentage width is used, temporarily set it as the overall width. This way, divs with
+		// width "fill" only use the width of their parent node. Also, percentages given in child
+		// nodes
+		// are relative to the width of their parent node.
+		const uint16_t old_overall_width = renderer_style_.overall_width;
+		if (render_node_->desired_width().unit == WidthUnit::kPercent) {
+			renderer_style_.overall_width =
+			   render_node_->desired_width().width * renderer_style_.overall_width / 100;
+		}
 		TagHandler::emit_nodes(subnodes);
+		renderer_style_.overall_width = old_overall_width;
 
-		if (!w_) {  // Determine the width by the width of the widest subnode
-			for (std::shared_ptr<RenderNode> n : subnodes) {
-				if (n->width() >= INFINITE_WIDTH)
-					continue;
-				w_ = std::max<int>(w_, n->width() + padding.left + padding.right);
+		// Determine the width by the width of the widest subnode
+		uint16_t width_first_subnode = INFINITE_WIDTH;
+		uint16_t widest_subnode = 0;
+		for (std::shared_ptr<RenderNode> n : subnodes) {
+			if (n->width() >= INFINITE_WIDTH) {
+				continue;
 			}
+			if (width_first_subnode >= INFINITE_WIDTH && n->width() > 0) {
+				width_first_subnode = n->width() + padding.left + padding.right;
+			}
+			widest_subnode = std::max<int>(widest_subnode, n->width() + padding.left + padding.right);
+		}
+		if (renderer_style_.remaining_width < width_first_subnode) {
+			// Not enough space for first subnode. Move to next line
+			renderer_style_.remaining_width = renderer_style_.overall_width;
 		}
 
 		switch (render_node_->desired_width().unit) {
 		case WidthUnit::kPercent:
 			w_ = render_node_->desired_width().width * renderer_style_.overall_width / 100;
-			renderer_style_.remaining_width -= w_;
+
+			// Reduce remaining width
+			if (renderer_style_.remaining_width <= w_) {
+				// Not enough space. Div will be placed in the next line, calculate the remaining space
+				// there
+				renderer_style_.remaining_width = renderer_style_.overall_width - w_;
+			} else {
+				renderer_style_.remaining_width -= w_;
+			}
 			break;
 		case WidthUnit::kFill:
 			w_ = renderer_style_.remaining_width;
 			renderer_style_.remaining_width = 0;
 			break;
-		default:;  // Do nothing
+		default:
+			if (!w_) {
+				w_ = widest_subnode;
+			}
+			// Else do nothing
 		}
 
 		// Layout takes ownership of subnodes
 		Layout layout(subnodes);
 		std::vector<std::shared_ptr<RenderNode>> nodes_to_render;
-
-		uint16_t max_line_width = layout.fit_nodes(&nodes_to_render, w_, padding, shrink_to_fit_);
+		uint16_t max_line_width = layout.fit_nodes(&nodes_to_render, w_, padding, trim_spaces_);
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
 			extra_width = w_ - max_line_width;
@@ -1435,10 +1454,6 @@ public:
 		}
 		if (shrink_to_fit_ || w_ >= INFINITE_WIDTH) {
 			w_ = max_line_width;
-		}
-
-		if (renderer_style_.remaining_width < w_) {
-			renderer_style_.remaining_width = renderer_style_.overall_width;
 		}
 
 		render_node_->set_dimensions(w_, layout.height(), margin);
@@ -1496,6 +1511,8 @@ public:
 
 protected:
 	bool shrink_to_fit_;
+	// Always true for DivTagHandler but might be overwritten in RTTagHandler
+	bool trim_spaces_;
 
 private:
 	uint16_t w_;
@@ -1518,8 +1535,8 @@ public:
 	void handle_unique_attributes() override {
 		const AttrMap& a = tag_.attrs();
 		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
-		shrink_to_fit_ =
-		   shrink_to_fit_ && (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
+		trim_spaces_ = (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
+		shrink_to_fit_ = shrink_to_fit_ && trim_spaces_;
 	}
 };
 

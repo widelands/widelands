@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-04 13:28+0000\n"
-"PO-Revision-Date: 2018-01-08 12:33+0000\n"
+"POT-Creation-Date: 2018-02-15 09:25+0000\n"
+"PO-Revision-Date: 2018-02-21 08:55+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:105
+#: ../../data/campaigns/campaigns.conf:109
 msgid "From Nemesis to Genesis"
 msgstr "Von Untergang zum Neuanfang"
 
@@ -133,30 +133,31 @@ msgid ""
 "time, but at a high cost: her humanity and soul."
 msgstr "Als ihr Gott sein Vertrauen in die Atlanter verlor und ihre Insel in den Fluten versenkte, wurde der Kampf einer Frau um Gerechtigkeit und eine zweite Chance für ihr Volk zur Legende. Indem sie die verbleibenden Atlanter in eine neue Zukunft in einem neuen Teil der Welt führte, wurde Jundlina zum mächtigsten Menschen ihrer Zeit – doch zu einem hohen Preis: ihrer Menschlichkeit und ihrer Seele."
 
-#: ../../data/campaigns/campaigns.conf:78
+#: ../../data/campaigns/campaigns.conf:77
+#: ../../data/campaigns/campaigns.conf:102
+#: ../../data/campaigns/campaigns.conf:114
+#: ../../data/campaigns/dummy.wmf/elemental:8
+msgid "Not yet implemented"
+msgstr "Noch nicht fertiggestellt"
+
+#: ../../data/campaigns/campaigns.conf:82
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
 msgstr "Die Strände von Malac’ Mor"
 
-#: ../../data/campaigns/campaigns.conf:83
+#: ../../data/campaigns/campaigns.conf:87
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
 msgstr "Ein Außenposten fürs Exil"
 
-#: ../../data/campaigns/campaigns.conf:88
+#: ../../data/campaigns/campaigns.conf:92
 msgid "Neptune’s Revenge"
 msgstr "Neptuns Rache"
 
-#: ../../data/campaigns/campaigns.conf:93
+#: ../../data/campaigns/campaigns.conf:97
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
 msgstr "Überraschung!"
-
-#: ../../data/campaigns/campaigns.conf:98
-#: ../../data/campaigns/campaigns.conf:110
-#: ../../data/campaigns/dummy.wmf/elemental:8
-msgid "Not yet implemented"
-msgstr "Noch nicht fertiggestellt"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"

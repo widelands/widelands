@@ -582,7 +582,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						}
 				}
 				// if we are here, it seems something really strange happend.
-				log("WARNING: ship was not able to start exploration. Entering WAIT mode.");
+				log("WARNING: ship %s was not able to start exploration. Entering WAIT mode.\n",
+				    shipname_.c_str());
 				ship_state_ = ShipStates::kExpeditionWaiting;
 				return start_task_idle(game, descr().main_animation(), 1500);
 			}

@@ -269,8 +269,9 @@ private:
 	void expedition_management(Widelands::ShipObserver&);
 	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
-	bool marine_main_decisions();
+	bool marine_main_decisions(uint32_t);
 	bool check_ships(uint32_t);
+	bool attempt_escape(Widelands::ShipObserver& so);
 
 	// finding and owner
 	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t);
