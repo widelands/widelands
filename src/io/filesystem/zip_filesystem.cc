@@ -364,14 +364,9 @@ void ZipFilesystem::make_directory(const std::string& dirname) {
  * \throw FileNotFoundError if the file couldn't be opened.
  */
 void* ZipFilesystem::load(const std::string& fname, size_t& length) {
-	try {
-		if (!file_exists(fname.c_str()) || is_directory(fname.c_str()))
-			throw ZipOperationError(
-				"ZipFilesystem::load", fname, zip_file_->path(), "could not open file from zipfile");
-	}  catch (const ZipOperationError& e) {
+	if (!file_exists(fname.c_str()) || is_directory(fname.c_str()))
 		throw ZipOperationError(
-			"ZipFilesystem::load", fname, zip_file_->path(), e.what());
-	}
+			"ZipFilesystem::load", fname, zip_file_->path(), "could not open file from zipfile");
 
 	char buffer[1024];
 	size_t totallen = 0;
