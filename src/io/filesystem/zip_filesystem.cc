@@ -217,8 +217,13 @@ bool ZipFilesystem::file_exists(const std::string& path) {
 	assert(path_in.size());
 
 	for (;;) {
-		unzGetCurrentFileInfo(zip_file_->read_handle(), &file_info, filename_inzip,
+		const int32_t success = unzGetCurrentFileInfo(zip_file_->read_handle(), &file_info, filename_inzip,
 		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+
+		// Handle corrupt files
+		if (success != UNZ_OK) {
+			return false;
+		}
 
 		std::string complete_filename = zip_file_->strip_basename(filename_inzip);
 
@@ -359,9 +364,14 @@ void ZipFilesystem::make_directory(const std::string& dirname) {
  * \throw FileNotFoundError if the file couldn't be opened.
  */
 void* ZipFilesystem::load(const std::string& fname, size_t& length) {
-	if (!file_exists(fname.c_str()) || is_directory(fname.c_str()))
+	try {
+		if (!file_exists(fname.c_str()) || is_directory(fname.c_str()))
+			throw ZipOperationError(
+				"ZipFilesystem::load", fname, zip_file_->path(), "could not open file from zipfile");
+	}  catch (const ZipOperationError& e) {
 		throw ZipOperationError(
-		   "ZipFilesystem::load", fname, zip_file_->path(), "could not open file from zipfile");
+			"ZipFilesystem::load", fname, zip_file_->path(), e.what());
+	}
 
 	char buffer[1024];
 	size_t totallen = 0;
