@@ -308,7 +308,7 @@ public:
 	uint16_t fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 	                   uint16_t w,
 	                   Borders p,
-	                   bool shrink_to_fit);
+	                   bool trim_spaces);
 
 private:
 	// Represents a change in the rendering constraints. For example when an
@@ -327,7 +327,7 @@ private:
 	uint16_t fit_line(uint16_t w,
 	                  const Borders&,
 	                  std::vector<std::shared_ptr<RenderNode>>* rv,
-	                  bool shrink_to_fit);
+	                  bool trim_spaces);
 
 	uint16_t h_;
 	size_t idx_;
@@ -338,11 +338,11 @@ private:
 uint16_t Layout::fit_line(uint16_t w,
                           const Borders& p,
                           std::vector<std::shared_ptr<RenderNode>>* rv,
-                          bool shrink_to_fit) {
+                          bool trim_spaces) {
 	assert(rv->empty());
 
 	// Remove leading spaces
-	while (idx_ < all_nodes_.size() && all_nodes_[idx_]->is_non_mandatory_space() && shrink_to_fit) {
+	while (idx_ < all_nodes_.size() && all_nodes_[idx_]->is_non_mandatory_space() && trim_spaces) {
 		all_nodes_[idx_++].reset();
 	}
 
@@ -366,7 +366,7 @@ uint16_t Layout::fit_line(uint16_t w,
 		++idx_;
 	}
 	// Remove trailing spaces
-	while (!rv->empty() && rv->back()->is_non_mandatory_space() && shrink_to_fit) {
+	while (!rv->empty() && rv->back()->is_non_mandatory_space() && trim_spaces) {
 		x -= rv->back()->width();
 		rv->pop_back();
 	}
@@ -420,7 +420,7 @@ uint16_t Layout::fit_line(uint16_t w,
 uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
                            uint16_t w,
                            Borders p,
-                           bool shrink_to_fit) {
+                           bool trim_spaces) {
 	assert(rv->empty());
 	h_ = p.top;
 
@@ -428,7 +428,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 	while (idx_ < all_nodes_.size()) {
 		std::vector<std::shared_ptr<RenderNode>> nodes_in_line;
 		size_t idx_before_iteration_ = idx_;
-		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, shrink_to_fit);
+		uint16_t biggest_hotspot = fit_line(w, p, &nodes_in_line, trim_spaces);
 
 		int line_height = 0;
 		int line_start = INFINITE_WIDTH;
@@ -1352,6 +1352,7 @@ public:
 	              bool shrink_to_fit = true)
 	   : TagHandler(tag, fc, ns, image_cache, init_renderer_style, fontsets),
 	     shrink_to_fit_(shrink_to_fit),
+	     trim_spaces_(true),
 	     w_(max_w),
 	     render_node_(new DivTagRenderNode(ns)) {
 	}
@@ -1461,7 +1462,7 @@ printf("C: first = %d, widest = %d, sum = %d, all = %d, rest = %d, w_ = %d\n", w
 		Layout layout(subnodes);
 		std::vector<std::shared_ptr<RenderNode>> nodes_to_render;
 
-		uint16_t max_line_width = layout.fit_nodes(&nodes_to_render, w_, padding, shrink_to_fit_);
+		uint16_t max_line_width = layout.fit_nodes(&nodes_to_render, w_, padding, trim_spaces_);
 		uint16_t extra_width = 0;
 		if (w_ < INFINITE_WIDTH && w_ > max_line_width) {
 			extra_width = w_ - max_line_width;
@@ -1548,6 +1549,8 @@ printf("C: first = %d, widest = %d, sum = %d, all = %d, rest = %d, w_ = %d\n", w
 
 protected:
 	bool shrink_to_fit_;
+	// Always true for DivTagHandler but might be overwritten in RTTagHandler
+	bool trim_spaces_;
 
 private:
 	uint16_t w_;
@@ -1570,8 +1573,8 @@ public:
 	void handle_unique_attributes() override {
 		const AttrMap& a = tag_.attrs();
 		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
-		shrink_to_fit_ =
-		   shrink_to_fit_ && (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
+		trim_spaces_ = (a.has("keep_spaces") ? !a["keep_spaces"].get_bool() : true);
+		shrink_to_fit_ = shrink_to_fit_ && trim_spaces_;
 	}
 };
 
