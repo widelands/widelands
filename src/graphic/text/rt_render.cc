@@ -1382,12 +1382,15 @@ public:
 		renderer_style_.overall_width = old_overall_width;
 
 		// Determine the width by the width of the widest subnode
-		uint16_t width_first_subnode = INFINITE_WIDTH, widest_subnode = 0;
+		uint16_t width_first_subnode = INFINITE_WIDTH;
+		uint16_t widest_subnode = 0;
 		for (std::shared_ptr<RenderNode> n : subnodes) {
-			if (n->width() >= INFINITE_WIDTH)
+			if (n->width() >= INFINITE_WIDTH) {
 				continue;
-			if (width_first_subnode >= INFINITE_WIDTH && n->width() > 0)
+			}
+			if (width_first_subnode >= INFINITE_WIDTH && n->width() > 0) {
 				width_first_subnode = n->width() + padding.left + padding.right;
+			}
 			widest_subnode = std::max<int>(widest_subnode, n->width() + padding.left + padding.right);
 		}
 		if (renderer_style_.remaining_width < width_first_subnode) {
