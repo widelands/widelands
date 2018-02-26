@@ -330,10 +330,10 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderCritter);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	const std::string owner = descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
+	const std::string save_owner = descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
 	                             "" :  // Tribes don't have critters
 	                             "world";
-	fw.c_string(owner);
+	fw.c_string(save_owner);
 	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);
