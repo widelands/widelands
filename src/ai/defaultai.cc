@@ -1302,11 +1302,16 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		std::vector<Coords> found_buildable_fields;
 
 		// first looking for unowned buildable spots
-		field.unowned_buildable_spots_nearby =
+ 	   field.unowned_buildable_spots_nearby =
 		   map.find_fields(Area<FCoords>(field.coords, kBuildableSpotsCheckArea),
 		                   &found_buildable_fields, find_unowned_buildable);
-		// Now iterate over fields to get nearest one
+		// Now iterate over fields to collect statistics
 		for (auto& coords : found_buildable_fields) {
+			// We are not interested in blocked fields
+			if (blocked_fields.is_blocked(coords)) {
+				continue;
+			}
+			// And now looking for nearest field
 			const uint32_t cur_distance = map.calc_distance(coords, field.coords);
 			if (cur_distance < field.nearest_buildable_spot_nearby) {
 				field.nearest_buildable_spot_nearby = cur_distance;
@@ -1875,6 +1880,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	score_parts[59] = (field.unowned_portspace_vicinity_nearby) ?
 	                     10 * std::abs(management_data.get_military_number_at(31)) :
 	                     0;
+	score_parts[60] = 3 *
+	                  management_data.neuron_pool[21].get_result_safe(
+	                     20 - field.nearest_buildable_spot_nearby, kAbsValue);
+	score_parts[61] = (field.nearest_buildable_spot_nearby < 8) ? std::abs(management_data.get_military_number_at(153) * 2 : 0)
+	score_parts[62] = (field.nearest_buildable_spot_nearby > 20) ? -std::abs(management_data.get_military_number_at(154) * 2 : 0)
+	score_parts[63] = (field.nearest_buildable_spot_nearby < 4) ? std::abs(management_data.get_military_number_at(155) * 2 : 0)
 
 	for (uint16_t i = 0; i < score_parts_size; i++) {
 		field.military_score_ += score_parts[i];
@@ -4890,7 +4901,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[24] = -5;
 			inputs[25] = (basic_economy_established) ? 1 : -1;
 			inputs[26] = (basic_economy_established) ? 1 : -1;
-
+			inputs[27] = (bo.total_count() > 0 && spots_ < kSpotsEnough ? -2 : 0;
+			inputs[28] = (bo.total_count() > 0 && spots_ < kSpotsTooLittle ? -2 : 0;
+			inputs[29] = (spots_ < kSpotsEnough ? -1 : 0;
+			inputs[30] = (spots_ < kSpotsTooLittle ? -1 : 0;
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 				if (management_data.f_neuron_pool[53].get_position(i)) {
@@ -4911,7 +4925,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					bo.max_needed_preciousness = 1;
 				}
 				bo.primary_priority =
-				   1 + tmp_score * std::abs(management_data.get_military_number_at(137));
+				   1 + tmp_score * std::abs(management_data.get_military_number_at(137) / 2);
 				return BuildingNecessity::kNeeded;
 			}
 		} else if (bo.is(BuildingAttribute::kLumberjack)) {
