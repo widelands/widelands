@@ -25,7 +25,7 @@ function check_warning_early_attack()
          local field = map:get_field(x, y)
          if field.owner == p1 and x > easternmost_own then easternmost_own = x end
          if field.owner == p2 and x < westernmost_enemy then westernmost_enemy = x end
-         -- If they are so close that they´d be inside a new tower's vision range
+         -- If they are so close that they'd be inside a new tower's vision range
          if westernmost_enemy - easternmost_own < 21 then
             campaign_message_box(warning_early_attack)
             return

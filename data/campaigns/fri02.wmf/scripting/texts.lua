@@ -26,7 +26,7 @@ obj_new_home = {
    name = "new_home",
    title=_"Build a basic economy",
    number = 1,
-   body = objective_text (_"Take care of supplies of all basic materials",
+   body = objective_text (_"Take care of supplying all basic materials",
       li (_[[Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, and houses for a brick burner, a woodcutter and a forester.]])
    ),
 }
@@ -42,6 +42,7 @@ obj_train_recycle = {
    name = "train_recycle",
    title=_"Train soldiers and recycle their weapons",
    number = 1,
+   -- NOCOM these titles are all very long. In texts like the one below, split the explanation from the objectives. Then you can shorten the title, which will also need Title Case.
    body = objective_text (_"Train your soldiers and recycle the discarded weapons to regain some metal",
       li (_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a recycling center. Use the weapons in the store to train soldiers and recycle some scrap metal.]])
    ),
@@ -58,7 +59,7 @@ obj_supply_murilius = {
    name = "supply_murilius",
    title=_"Decide whether you want to cooperate with the Empire",
    number = 1,
-   body = objective_text (_"Gather wares as a gift or destroy the Empire´s warehouse",
+   body = objective_text (_"Gather wares as a gift or destroy the Empire’s warehouse",
       li (_([[Decide whether you want to work with Murilius against the barbarians. If so, fill his warehouse with these wares:]])
       .. paragraphdivider () ..
       _([[30×Log, 40×Granite, 30×Fish, 30×Beer, 150×Water, 40×Ration, 10×Meal, 30×Coal, 40×Iron Ore, 20×Iron, 20×Gold Ore, 10×Gold.]])
@@ -80,7 +81,7 @@ obj_defeat_murilius = {
    title=_"Defeat Murilius!",
    number = 1,
    body = objective_text (_"Defeat the arrogant Outpost of the Empire",
-      li (_[[The only way to put an end to the Empire´s desire to steal our liberty is to destroy this outpost once and for all. Conquer its entire land.]])
+      li (_[[The only way to put an end to the Empire’s desire to steal our liberty is to destroy this outpost once and for all. Conquer its entire land.]])
    ),
 }
 obj_defeat_both = {
@@ -112,7 +113,7 @@ intro_2 = {
       _([[There was a small group of foreigners living here. They welcomed us by brandishing their axes at us, and shouted in an incoherent language.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Introduction 2
-      _([[Our ship was in no state to continue sailing, so we killed all the locals and took their land. I just hope there aren´t more of them, so we can live in peace.]])),
+      _([[Our ship was in no state to continue sailing, so we killed all the locals and took their land. I just hope there aren’t more of them, so we can live in peace.]])),
 }
 intro_3 = {
    title =_ "Welcome back!",
@@ -124,7 +125,7 @@ intro_3 = {
       _([[We will settle here. My scouts report no signs of living creatures anywhere nearby now. We will start building our new home here.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Introduction 3
-      _([[We must start by building all the basic buildings. I see no mountains nearby where we might mine coal. We´d better build a charcoal kiln to burn logs into charcoal. We improve the kilns with clay so they don´t consume so much wood. Our neighbours used to envy us for this clever technique, which they couldn´t copy.]]))
+      _([[We must start by building all the basic buildings. I see no mountains nearby where we might mine coal. We’d better build a charcoal kiln to burn logs into charcoal. We improve the kilns with clay so they don’t consume so much wood. Our neighbours used to envy us for this clever technique, which they couldn’t copy.]]))
       .. new_objectives (obj_new_home),
 }
 
@@ -135,7 +136,7 @@ expand_s_1 = {
       _([[We have built a home in this wonderful landscape. But as our tribe grows, we need more space. We should start expanding our territory.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Expand South
-      _([[The scouts reported that the lands North of us are rugged hills, beautiful to behold but not suited for buildings. Let´s find out what we can discover in the South.]]))
+      _([[The scouts reported that the lands North of us are rugged hills, beautiful to behold but not suited for buildings. Let’s find out what we can discover in the South.]]))
       .. new_objectives (obj_expand_south),
 }
 
@@ -146,7 +147,7 @@ train_recycle_1 = {
       _([[Chieftain Reebaud! We have a serious problem. We have discovered a mountain where we might be able to start mining coal and iron, but we have no miners, nor any picks to equip them with.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – Train and recycle 1
-      _([[And we don´t have any iron left. We must find a way to get some metal to forge new picks. Unfortunately, I can´t think of a way to do this.]])),
+      _([[And we don’t have any iron left. We must find a way to get some metal to forge new picks. Unfortunately, I can’t think of a way to do this.]])),
 }
 train_recycle_2 = {
    title =_ "Metal Shortage",
@@ -171,7 +172,7 @@ train_recycle_4 = {
    title =_ "Metal Shortage",
    body=reebaud (_"Getting new metal",
       -- TRANSLATORS: Reebaud – Train and recycle 4
-      _([[Not so hasty! To build a training camp, we will first need gold, and we don´t have any. We must first dismantle our port, which will give us just enough gold for a training camp. I don´t like this, but it is the only way. Of course, we will need to move all our wares to a warehouse before we can dismantle the port.]])),
+      _([[Not so hasty! To build a training camp, we will first need gold, and we don’t have any. We must first dismantle our port, which will give us just enough gold for a training camp. I don’t like this, but it is the only way. Of course, we will need to move all our wares to a warehouse before we can dismantle the port.]])),
 }
 
 aqua_farm_1 = {
@@ -187,7 +188,7 @@ aqua_farm_2 = {
    title =_ "Fishing",
    body=hauke (_"We need fish",
       -- TRANSLATORS: Hauke – Aqua Farms 2
-      _([[Chieftain Reebaud, I have more bad news. There are almost no fish in the waters nearby. While we can prepare rations using only fruit or bread, soldier training requires lots of smoked meat or fish. The scraps of meat a reindeer farm drops out as a by-product when making fur aren´t enough.]])
+      _([[Chieftain Reebaud, I have more bad news. There are almost no fish in the waters nearby. While we can prepare rations using only fruit or bread, soldier training requires lots of smoked meat or fish. The scraps of meat a reindeer farm drops out as a by-product when making fur aren’t enough.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – Aqua Farms 2
       _([[Fortunately, one of our fishermen thought of a solution. Our clay pits leave large holes in the ground; a fisher could fill them with water and grow fish in these ponds. He will only need lots of water for the ponds, and fruit to feed the fish.]]))
@@ -206,16 +207,16 @@ aqua_farm_4 = {
    title =_ "Recruiting",
    body=reebaud (_"Our economy is complete",
       -- TRANSLATORS: Reebaud – Aqua Farms 4
-      _([[You are right – we should build more berry farms, collector´s houses and taverns as well as a drinking hall, and advanced bakeries and breweries.]])
+      _([[You are right – we should build more berry farms, collector’s houses and taverns as well as a drinking hall, and advanced bakeries and breweries.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Aqua Farms 4
-      _([[But meanwhile, we can start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and armor. I propose to build armor smithies, a barracks, a training arena and a tailor´s shop now.]])),
+      _([[But meanwhile, we can start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and armor. I propose to build armor smithies, a barracks, a training arena and a tailor’s shop now.]])),
 }
 
 supply_murilius_1 = {
    title =_ "We are not alone",
    body=murilius ("Salvete peregrini!",
-      -- DO NOT TRANSLATE: Reebaud doesn´t understand Latin
+      -- DO NOT TRANSLATE: Reebaud doesn’t understand Latin
       ([[Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego sum. Vos nominate!]])),
 }
 supply_murilius_2 = {
@@ -237,7 +238,7 @@ supply_murilius_4 = {
    title =_ "We are not alone",
    body=reebaud (_"Strangers",
       -- TRANSLATORS: Reebaud – Supply Murilius 4
-      _([[Greetings, Empire Representative! I am Reebaud, the chieftain of this tribe. All we want is to settle down here, build our home and live our lifes in peace. We do not seek trouble, but we aren´t afraid to fight, either.]])),
+      _([[Greetings, Empire Representative! I am Reebaud, the chieftain of this tribe. All we want is to settle down here, build our home and live our lifes in peace. We do not seek trouble, but we aren’t afraid to fight, either.]])),
 }
 supply_murilius_5 = {
    title =_ "We are not alone",
@@ -280,7 +281,7 @@ supply_murilius_9 = {
       _([[This is the greatest outrage of all. How dare he order us to stop expanding our territory when all we want is to build a new home, and threaten us with war if we refuse to be his slaves?!]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Supply Murilius 9
-      _([[I´d like to say we should attack him right now, but I fear we aren´t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time. As for expansion – I wonder how strictly he can possibly control us…]])),
+      _([[I’d like to say we should attack him right now, but I fear we aren’t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time. As for expansion – I wonder how strictly he can possibly control us…]])),
 }
 
 supply_murilius_destroy = {
@@ -309,10 +310,10 @@ defeat_both = {
    title =_ "Two enemies",
    body=reebaud (_"Defeat the Enemies!",
       -- TRANSLATORS: Reebaud – defeat both enemies
-      _([[He has made it quite clear that he won´t leave us alone. I fear we must defeat Murilius and destroy his colony if we ever want to have peace here.]])
+      _([[He has made it quite clear that he won’t leave us alone. I fear we must defeat Murilius and destroy his colony if we ever want to have peace here.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – defeat both enemies
-      _([[The barbarian tribe he mentioned is also a threat. I don´t want to share this land with anyone, as sharing only leads to conflicts and battles, as we saw in our old home. We must defeat the barbarians as well.]]))
+      _([[The barbarian tribe he mentioned is also a threat. I don’t want to share this land with anyone, as sharing only leads to conflicts and battles, as we saw in our old home. We must defeat the barbarians as well.]]))
       .. new_objectives (obj_defeat_both),
 }
 supply_murilius_thanks = {
@@ -321,7 +322,7 @@ supply_murilius_thanks = {
       -- TRANSLATORS: Murilius – Supplied Murilius
       _([[Strangers! I see you have kept your word. The Empire rewards its friends, therefore I shall reward you with the friendship of the Empire!]])
       .. paragraphdivider () ..
-      -- TRANSLATORS: Murilius – Supplied Murilius. Murilius´s plan is to use the player as cannon fodder, while he himself only attacks when he has no choice
+      -- TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the player as cannon fodder, while he himself only attacks when he has no choice
       _([[Now I permit you to assist us in conquering the barbarians, who live in a sheltered valley northwest to us. I charge you, expand along the northern end of the mountains enclosing this outpost; you will find the barbarians there – attack them! We will fend off attacks lauched by the enemy.]]))
       .. new_objectives (obj_defeat_barbarians),
 }
