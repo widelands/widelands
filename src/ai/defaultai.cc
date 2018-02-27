@@ -1883,9 +1883,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	score_parts[60] = 3 *
 	                  management_data.neuron_pool[21].get_result_safe(
 	                     20 - field.nearest_buildable_spot_nearby, kAbsValue);
-	score_parts[61] = (field.nearest_buildable_spot_nearby < 8) ? std::abs(management_data.get_military_number_at(153) * 2 : 0)
-	score_parts[62] = (field.nearest_buildable_spot_nearby > 20) ? -std::abs(management_data.get_military_number_at(154) * 2 : 0)
-	score_parts[63] = (field.nearest_buildable_spot_nearby < 4) ? std::abs(management_data.get_military_number_at(155) * 2 : 0)
+	score_parts[61] = (field.nearest_buildable_spot_nearby < 8) ? std::abs(management_data.get_military_number_at(153) * 2) : 0;
+	score_parts[62] = (field.nearest_buildable_spot_nearby > 20) ? -std::abs(management_data.get_military_number_at(154) * 2) : 0;
+	score_parts[63] = (field.nearest_buildable_spot_nearby < 4) ? std::abs(management_data.get_military_number_at(155) * 2) : 0;
 
 	for (uint16_t i = 0; i < score_parts_size; i++) {
 		field.military_score_ += score_parts[i];
@@ -4901,10 +4901,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[24] = -5;
 			inputs[25] = (basic_economy_established) ? 1 : -1;
 			inputs[26] = (basic_economy_established) ? 1 : -1;
-			inputs[27] = (bo.total_count() > 0 && spots_ < kSpotsEnough ? -2 : 0;
-			inputs[28] = (bo.total_count() > 0 && spots_ < kSpotsTooLittle ? -2 : 0;
-			inputs[29] = (spots_ < kSpotsEnough ? -1 : 0;
-			inputs[30] = (spots_ < kSpotsTooLittle ? -1 : 0;
+			inputs[27] = (bo.total_count() > 0 && spots_ < kSpotsEnough) ? -2 : 0;
+			inputs[28] = (bo.total_count() > 0 && spots_ < kSpotsTooLittle) ? -2 : 0;
+			inputs[29] = (spots_ < kSpotsEnough) ? -1 : 0;
+			inputs[30] = (spots_ < kSpotsTooLittle) ? -1 : 0;
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 				if (management_data.f_neuron_pool[53].get_position(i)) {
