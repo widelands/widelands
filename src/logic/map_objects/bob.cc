@@ -767,11 +767,11 @@ void Bob::draw(const EditorGameBase& egbase,
 		return;
 	}
 
-	auto* const owner = get_owner();
+	auto* const bob_owner = get_owner();
 	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
-	if (owner != nullptr) {
+	if (bob_owner != nullptr) {
 		dst->blit_animation(
-		   point_on_dst, scale, anim_, egbase.get_gametime() - animstart_, owner->get_playercolor());
+		   point_on_dst, scale, anim_, egbase.get_gametime() - animstart_, bob_owner->get_playercolor());
 	} else {
 		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_);
 	}
