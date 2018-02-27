@@ -60,7 +60,7 @@ struct GameHost : public GameController {
 	// End GameController interface
 
 	// Pregame-related stuff
-	const GameSettings& settings();
+	const GameSettings& settings() const;
 	bool can_launch();
 	void set_scenario(bool);
 	void set_map(const std::string& mapname,

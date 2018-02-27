@@ -153,7 +153,7 @@ std::set<std::string> RealFSImpl::list_directory(const std::string& path) {
  * \e can't exist then)
  */
 // TODO(unknown): Can this be rewritten to just using exceptions? Should it?
-bool RealFSImpl::file_exists(const std::string& path) {
+bool RealFSImpl::file_exists(const std::string& path) const {
 	return FileSystemPath(canonicalize_name(path)).exists_;
 }
 
@@ -162,7 +162,7 @@ bool RealFSImpl::file_exists(const std::string& path) {
  * Also returns false if the pathname is invalid (obviously, because the file
  * \e can't exist then)
  */
-bool RealFSImpl::is_directory(const std::string& path) {
+bool RealFSImpl::is_directory(const std::string& path) const {
 	return FileSystemPath(canonicalize_name(path)).is_directory_;
 }
 

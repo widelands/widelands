@@ -99,7 +99,7 @@ std::set<std::string> LayeredFileSystem::list_directory(const std::string& path)
 /**
  * Returns true if the file can be found in at least one of the sub-filesystems
  */
-bool LayeredFileSystem::file_exists(const std::string& path) {
+bool LayeredFileSystem::file_exists(const std::string& path) const {
 	if (home_ && home_->file_exists(path))
 		return true;
 	for (auto it = filesystems_.rbegin(); it != filesystems_.rend(); ++it)
@@ -113,7 +113,7 @@ bool LayeredFileSystem::file_exists(const std::string& path) {
  * Returns true if path is a directory in at least one of the directories
  */
 // TODO(unknown): What if it's a file in some and a dir in others?????
-bool LayeredFileSystem::is_directory(const std::string& path) {
+bool LayeredFileSystem::is_directory(const std::string& path) const {
 	if (home_ && home_->is_directory(path))
 		return true;
 

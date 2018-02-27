@@ -129,7 +129,7 @@ public:
 
 	// May return nullptr when there is no expedition ongoing or if the
 	// expedition ship is already underway.
-	ExpeditionBootstrap* expedition_bootstrap();
+	ExpeditionBootstrap* expedition_bootstrap() const;
 
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
 	void expedition_bootstrap_complete(Game& game);

@@ -423,7 +423,7 @@ void PortDock::start_expedition() {
 	expedition_bootstrap_->start();
 }
 
-ExpeditionBootstrap* PortDock::expedition_bootstrap() {
+ExpeditionBootstrap* PortDock::expedition_bootstrap() const {
 	return expedition_bootstrap_.get();
 }
 

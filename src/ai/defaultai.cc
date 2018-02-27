@@ -5557,7 +5557,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
-uint32_t DefaultAI::calculate_stocklevel(BuildingObserver& bo, const WareWorker what) {
+uint32_t DefaultAI::calculate_stocklevel(BuildingObserver& bo, const WareWorker what) const {
 	uint32_t count = std::numeric_limits<uint32_t>::max();
 	std::vector<Widelands::DescriptionIndex>* items =
 	   (what == WareWorker::kWare ? &bo.outputs : &bo.positions);
@@ -5575,15 +5575,14 @@ uint32_t DefaultAI::calculate_stocklevel(BuildingObserver& bo, const WareWorker 
 
 // counts produced output on stock
 // if multiple outputs, it returns lowest value
-uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const WareWorker what) {
+uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const WareWorker what) const {
 	uint32_t count = 0;
 
-	for (std::deque<WarehouseSiteObserver>::iterator i = warehousesites.begin();
-	     i != warehousesites.end(); ++i) {
+	for (const Widelands::WarehouseSiteObserver& obs : warehousesites) {
 		if (what == WareWorker::kWare) {
-			count += i->site->get_wares().stock(wt);
+			count += obs.site->get_wares().stock(wt);
 		} else {
-			count += i->site->get_workers().stock(wt);
+			count += obs.site->get_workers().stock(wt);
 		}
 	}
 
@@ -5593,7 +5592,7 @@ uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const W
 // This is a wrapper function to prevent too frequent recalculation of stocklevel
 // and distinguish if we count stocks for production hint or for outputs of a productionsite
 uint32_t
-DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const WareWorker what) {
+DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const WareWorker what) const {
 	if (bo.stocklevel_time < gametime - 5 * 1000) {
 		if (!bo.production_hints.empty()) {
 			// looking for smallest value
@@ -6611,7 +6610,7 @@ void DefaultAI::initiate_dismantling(Widelands::ProductionSiteObserver& site, ui
 }
 
 Widelands::PlayerNumber DefaultAI::get_land_owner(const Widelands::Map& map,
-                                                  const uint32_t coords) {
+                                                  const uint32_t coords)  const {
 	FCoords f = map.get_fcoords(Widelands::Coords::unhash(coords));
 	return f.field->get_owned_by();
 }

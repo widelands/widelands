@@ -197,7 +197,7 @@ std::set<std::string> ZipFilesystem::list_directory(const std::string& path_in) 
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::file_exists(const std::string& path) {
+bool ZipFilesystem::file_exists(const std::string& path) const {
 	try {
 		unzGoToFirstFile(zip_file_->read_handle());
 	} catch (...) {
@@ -238,7 +238,7 @@ bool ZipFilesystem::file_exists(const std::string& path) {
  * Returns true if the given file is a directory, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::is_directory(const std::string& path) {
+bool ZipFilesystem::is_directory(const std::string& path) const {
 
 	if (!file_exists(path))
 		return false;
