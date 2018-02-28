@@ -448,7 +448,7 @@ void GameMessageMenu::center_view() {
 	if (Message const* const message =
 	       iplayer().player().messages()[MessageId((*list)[selection])]) {
 		assert(message->position());
-		iplayer().scroll_to_field(message->position(), MapView::Transition::Smooth);
+		iplayer().map_view()->scroll_to_field(message->position(), MapView::Transition::Smooth);
 	}
 }
 
@@ -487,6 +487,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kWarfareSiteDefeated:
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
+	case Widelands::Message::Type::kTradeOfferReceived:
 		set_filter_messages_tooltips();
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 		geologistsbtn_->set_perm_pressed(false);
@@ -580,6 +581,7 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 	case Widelands::Message::Type::kWarfareSiteDefeated:
 	case Widelands::Message::Type::kWarfareSiteLost:
 	case Widelands::Message::Type::kWarfareUnderAttack:
+	case Widelands::Message::Type::kTradeOfferReceived:
 		return "images/wui/messages/message_new.png";
 	}
 	NEVER_HERE();
@@ -618,9 +620,11 @@ void GameMessageMenu::update_archive_button_tooltip() {
 	switch (mode) {
 	case Archive:
 		if (no_selections > 1) {
-			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
-			 */
 			button_tooltip =
+			   /** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
+			    * message.
+			    * DO NOT omit the placeholder in your translation.
+			    */
 			   (boost::format(ngettext("Restore the selected %d message",
 			                           "Restore the selected %d messages", no_selections)) %
 			    no_selections)
@@ -632,9 +636,11 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		break;
 	case Inbox:
 		if (no_selections > 1) {
-			/** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1 message.
-			 */
 			button_tooltip =
+			   /** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
+			    * message.
+			    * DO NOT omit the placeholder in your translation.
+			    */
 			   (boost::format(ngettext("Archive the selected %d message",
 			                           "Archive the selected %d messages", no_selections)) %
 			    no_selections)

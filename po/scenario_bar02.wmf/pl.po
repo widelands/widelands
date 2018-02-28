@@ -5,13 +5,14 @@
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2016-2017
 # Stanislaw Gackowski <soeb@soeb.eu>, 2009
+# Tomasz Pudło <wptom@wp.pl>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-07-04 08:57+0000\n"
-"PO-Revision-Date: 2017-07-04 08:58+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2018-01-04 08:54+0000\n"
+"Last-Translator: Tomasz Pudło <wptom@wp.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -252,7 +253,7 @@ msgstr "Blisko domu"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:162
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:174
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:331
 msgid "Thron looks worried…"
 msgstr "Thron wygląda na zmartwionego..."
 
@@ -273,7 +274,7 @@ msgstr "Na razie odpoczywamy na skraju starego lasu i przygotowujemy się na dal
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:173
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:197
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:329
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:330
 msgid "Another Cold Day"
 msgstr "Kolejny zimny dzień"
 
@@ -314,9 +315,9 @@ msgstr "Opowieść ciągnie się dalej"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:190
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:238
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:263
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:318
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:264
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:273
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:319
 msgid "Boldreth says:"
 msgstr "Boldreth mówi:"
 
@@ -346,10 +347,10 @@ msgstr "Front mojej armii dotarł do skraju lasów. Mamy długą, zimną zimę i
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:206
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:224
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:255
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:293
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:301
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:310
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:294
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:302
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:311
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:344
 msgid "Thron says:"
 msgstr "Thron mówi:"
 
@@ -362,7 +363,7 @@ msgid ""
 "ring is intact. Until now, he has not answered any of my messages. But the "
 "time I spend waiting won’t be lost. I will train my soldiers further and "
 "prepare for battle."
-msgstr ""
+msgstr "Wysłałem kilku ludzi, aby spotkali się z Kalitathem w jego fortecy. Zabarykadował się w dawnym głównym wejściu do stolicy i próbuje oblegać Al’thunran. Nie pozwoli nikomu wejść ani wyjść z miasta, dopóki pierścień jest cały. Póki co jeszcze nie odpowiedział na żadną z moich wiadomości. Ale nie będę tracił czasu czekając. Zdążę lepiej wytrenować moich żołnierzy i przygotuję się do bitwy."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:212
 msgid "Your Loyal Companion"
@@ -457,12 +458,12 @@ msgid ""
 "successfully. Finally, none of us has to fear starvation anymore."
 msgstr "Khantrukh właśnie mnie poinformował, że nasza gospodarka żywnościowa została w pełni dokończona. W końcu nikt z nas nie musi się obawiać głodu."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:262
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:263
 msgid "Tracks"
 msgstr "Ślady"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:265
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:266
 msgid ""
 "Thron told me that he discovered tracks in the snow to the northeast of our "
 "settlement. He has instructed us to build a tower, to have a greater visual "
@@ -470,12 +471,12 @@ msgid ""
 "attacks."
 msgstr "Thron powiedział mi, że znalazł ślady w śniegu na północny wschód od naszej osady. Rozkazał nam wybudować stołp, abyśmy widzieli na większą odległość od hali, aby obronić ludzi przed nagłymi atakami."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:272
 msgid "Further Exploration"
 msgstr "Dalsza eksploracja"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:274
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:275
 msgid ""
 "The first fortification Thron ordered has just been completed. At the "
 "moment, he seeks to bring trust and belief to those who live inside the "
@@ -487,7 +488,7 @@ msgid ""
 msgstr "Pierwsze fortyfikacje, które Thron nakazał zbudować, zostały właśnie ukończone. Póki co próbuje on natchnąć zaufaniem i wiarą tych, co żyją w granicach naszego nowego siedliska, które nazwaliśmy 'Ondun', co oznacza 'ci, którzy czekają' w dawnym języku. Ale Thron nie jest zadowolony - i w pełni rozumiem jego obawy: lasy są głębokie, a nasze granice zbliżają się do Al'thunran. Jestem pewien, że istnieją znacznie większe niebezpieczeństwa, niż nieznane ścieżki."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:277
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:278
 msgid ""
 "To overlook more of the area around our hall, we should explore further and "
 "set up more guards and scouts to observe the frontier and keep an eye on the"
@@ -495,12 +496,12 @@ msgid ""
 " capture our woods."
 msgstr "Jeśli chcemy mieć oko na otaczające nas ziemie, powinniśmy nadal badać naszą okolicę oraz rozstawić więcej strażników i zwiadowców, by strzec naszej granicy i obserwować wojnę szalejącą na naszym progu. WÓWCZAS będziemy gotowi, gdy problemy nawiedzą nasze lasy."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:283
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:284
 msgid "Mountains Found"
 msgstr "Odnalezione góry"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:286
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:287
 msgid ""
 "I have just spoken to the leader of our patrol. He told me that they found "
 "some mountains to the north-east and east of our territory. With a bit of "
@@ -509,24 +510,24 @@ msgid ""
 "metal ores."
 msgstr "Właśnie mówiłem z liderem naszego zwiadu. Powiedział mi, że znaleźli góry na północny wschód i wschód od naszego terytorium. Jeśli będziemy mieć szczęście, da nam to szanse na odbudowanie naszej armii, ponieważ jak pamiętam, góry na zachód od Al'thunran są pełne węgla i rud metali."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:292
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:293
 msgid "Mining Economy Completed"
 msgstr "Gospodarka górnicza ukończona"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:295
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:296
 msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
 msgstr "Poinformowano mnie właśnie, że nasza gospodarka górnicza zaczęła działać. Te nowiny wywołały uśmiech na mej twarzy - choć najtrudniejsze wciąż jest do zrobienia, nasi kowale mogą już zacząć swoją pracą ułatwiać nam życie."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:300
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:301
 msgid "Fortress Needed"
 msgstr "Potrzebna forteca"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:303
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:304
 msgid ""
 "Boldreth and I just explored the area around the three mountains. One major "
 "strategic problem of that area seems to be that there are two bigger "
@@ -536,12 +537,12 @@ msgid ""
 " the east of the mountains!"
 msgstr "Boldreth i ja badaliśmy niedawno teren wokół gór. Jeden z największych strategicznych problemów tego obszaru to fakt, że są tam dwa większe przejścia - jedno z północy i jedno z południa prowadzące do środkowej góry. Te przełęcze są dosyć trudne do kontrolowania, wygląda więc na to, że jest tylko jeden sposób, by zabezpieczyć tę górę od wroga: musimy zbudować fortecę na wschód od gór!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:309
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:310
 msgid "Fortress Completed"
 msgstr "Forteca ukończona"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:312
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:313
 msgid ""
 "Finally! The fortress has just been completed, so the entrance to our "
 "settlement should be safe for now. For the future, we might think on "
@@ -549,12 +550,12 @@ msgid ""
 "but for now we can take a deep breath."
 msgstr "W końcu! Forteca właśnie została ukończona, zatem możemy uznać granicę naszej osady za bezpieczną. Na przyszłość moglibyśmy pomyśleć o wybudowaniu takich fortyfikacji, jak bariery lub wieże na przełęczach, ale na razie możemy odetchnąć z ulgą."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:318
 msgid "Enhanced Economy and Training"
 msgstr "Rozszerzona gospodarka i trening"
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:320
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:321
 msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
@@ -562,7 +563,7 @@ msgid ""
 msgstr "Nasza gospodarka górnicza wygląda dobrze, a to już są dobre wieści! W każdym razie, wiele kobiet i mężczyzn czeka w naszych salach na zadania, by mogli pomóc naszym żołnierzom przygotować się na nadchodzące bitwy."
 
 #. TRANSLATORS: Boldreth
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:323
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:324
 msgid ""
 "Our geologists found a lot more deposits of iron ore, coal and even gold. We"
 " should enhance our current mines as soon as our miners are more "
@@ -574,7 +575,7 @@ msgid ""
 msgstr "Nasi geologowie znaleźli znacznie więcej źródeł rudy żelaza, węgla i nawet złota. Zacznijmy rozbudowywać nasze obecne kopalnie, gdy tylko nasi górnicy zdobędą potrzebne doświadczenie. Powinniśmy zbudować więcej kopalni i zadbać o gospodarkę żywnościową, abyśmy zawsze mogli zapewnić naszym ludziom dość jedzenia, i dalszą gospodarką przetwórczą. Ale to nie wszystko - większość naszych żołnierzy jest całkiem młoda i nie ma ani dobrej broni, ani wyszkolenia. Powinniśmy zbudować place treningowe, żeby przygotować ich na zadania w przyszłości."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid ""
 "My brothers and their soldiers are dead and left fire and destruction "
 "behind. In none of all the ruins could I find any man or woman of the normal"
@@ -583,7 +584,7 @@ msgid ""
 msgstr "Moi bracia i ich żołnierze są martwi i zostawili za sobą ogień i zniszczenia. W żadnej z ruin nie znalazłem kobiety czy mężczyzny z pracującej ludności i mogę tylko liczyć, że uciekli z okrutnego pola bitwy i zaczęli gdzieś indziej lepsze życie."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:335
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:336
 msgid ""
 "Nothing is left of that beauty I remember, only ruins remain of the old "
 "capital. I am sorrowful but also relieved. I never hoped to see Al’thunran’s"
@@ -593,22 +594,22 @@ msgid ""
 "people have. I can’t wait to see it again in its old beauty."
 msgstr "Nic nie pozostało z piękności, którą pamiętam, tylko ruiny starej stolicy. Jestem zasmucony, ale i spokojny. Nigdy nie wierzyłem, że zobaczę Al'thunran w swojej wcześniejszej piękności - parę miesięcy temu zastanawiałem się, czy kiedykolwiek będę mógł znowu postawić moją nogę w pobliżu Al'thunran. Teraz to stare miasto jest znów w moich rękach i nie zawaham go odbudować z siłą wszystkich ludzi, których posiadam. Nie mogę się doczekać, by zobaczyć je w swojej dawnej piękności."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:336
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
 msgid "Victory"
 msgstr "Zwycięstwo"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:337
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:338
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr "Ukończono ostatnią misję barbarzyńcy z samouczka. Możesz kontynuować grę lub przejść do następnej kampanii."
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:342
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:343
 msgid "Military Assault"
 msgstr "Atak wojskowy"
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:345
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:346
 msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
@@ -616,7 +617,7 @@ msgid ""
 msgstr "Niech tak będzie. Generałowie wyruszyli celem rozstawienia moich wojsk, a Boldreth osobiście przeprowadzi pierwsze uderzenie. Będę jechał u jego boku, by uwolnić Al’thunran od tej wojny i znów przynieść pokój naszej stolicy."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:348
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:349
 msgid ""
 "When the young sun rises above the trees tomorrow morning, I will order the "
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
@@ -625,20 +626,20 @@ msgid ""
 msgstr "Kiedy młode słońce wzejdzie jutro nad drzewami, poprowadzę atak. Przed zachodem będę świętował swoje zwycięstwo w drewnianych halach wodza i ofiaruję nowo narodzone jagnię w ofierze dla mojego ojca, którego oczy dziś na mnie spoglądają."
 
 #. TRANSLATORS: Thron
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:351
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:352
 msgid "So be it!"
 msgstr "Niech tak będzie!"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:357
 msgid "Faster Transportation"
 msgstr "Szybszy transport"
 
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:357
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:358
 msgid "Khantrukh says:"
 msgstr "Khantrukh mówi:"
 
 #. TRANSLATORS: Khantrukh
-#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:359
+#: ../../data/campaigns/bar02.wmf/scripting/texts.lua:360
 msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "

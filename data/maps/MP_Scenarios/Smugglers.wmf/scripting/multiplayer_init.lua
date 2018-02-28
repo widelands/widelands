@@ -3,8 +3,8 @@
 -- =================================
 include "scripting/coroutine.lua"
 include "scripting/infrastructure.lua"
-include "scripting/formatting.lua"
 include "scripting/objective_utils.lua"
+include "scripting/richtext_scenarios.lua"
 include "scripting/set.lua"
 
 -- ==========
@@ -34,19 +34,6 @@ route_descrs = {
 -- Global Variables
 -- =================
 points = { 0, 0 }
-
--- =================
--- Utility functions
--- =================
-function send_to_all(text, long_title)
-   for idx,plr in ipairs(game.players) do
-      if (long_title ~= nil and long_title ~= "") then
-         send_message(plr, _"Status", text, {popup=true, heading=long_title})
-      else
-         send_message(plr, _"Status", text, {popup=true})
-      end
-   end
-end
 
 include "map:scripting/texts.lua"
 include "map:scripting/smuggling.lua"
@@ -145,7 +132,7 @@ function initialize()
    send_to_all(welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)), welcome_msg.heading)
    -- set the objective with the game type for all players
    -- TODO change this to a broadcast once individual game objectives have been implementes
-   game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)))
+   game.players[1]:add_objective("win_conditions", _"Rules", rt(welcome_msg.body:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win))))
 
    for idx,descr in ipairs(route_descrs) do
       run(wait_for_established_route, descr)

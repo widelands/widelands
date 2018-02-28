@@ -153,7 +153,7 @@ struct CmdBuildRoad : public PlayerCommand {
 	CmdBuildRoad(uint32_t, int32_t, Path&);
 	explicit CmdBuildRoad(StreamRead&);
 
-	virtual ~CmdBuildRoad();
+	~CmdBuildRoad() override;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -845,6 +845,28 @@ private:
 	bool isworker_;
 	DescriptionIndex ware_;
 	Warehouse::StockPolicy policy_;
+};
+
+struct CmdProposeTrade : PlayerCommand {
+	CmdProposeTrade(uint32_t time, PlayerNumber pn, const Trade& trade);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kProposeTrade;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdProposeTrade(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdProposeTrade();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Trade trade_;
 };
 }
 

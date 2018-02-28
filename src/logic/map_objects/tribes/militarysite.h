@@ -81,7 +81,7 @@ class MilitarySite : public Building {
 
 public:
 	explicit MilitarySite(const MilitarySiteDescr&);
-	virtual ~MilitarySite();
+	~MilitarySite() override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;

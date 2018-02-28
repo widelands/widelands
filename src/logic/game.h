@@ -27,6 +27,7 @@
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
 #include "logic/save_handler.h"
+#include "logic/trade_agreement.h"
 #include "random/random.h"
 #include "scripting/logic.h"
 
@@ -40,6 +41,11 @@ class GameController;
 
 namespace Widelands {
 
+/// How often are statistics to be sampled.
+constexpr uint32_t kStatisticsSampleTime = 30000;
+// See forester_cache_
+constexpr int16_t kInvalidForesterEntry = -1;
+
 struct Flag;
 struct Path;
 struct PlayerImmovable;
@@ -51,15 +57,6 @@ struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
 
-#define WLGF_SUFFIX ".wgf"
-#define WLGF_MAGIC "WLgf"
-
-/** class Game
- *
- * This class manages the entire lifetime of a game session, from creating the
- * game and setting options, selecting maps to the actual playing phase and the
- * final statistics screen(s).
- */
 enum {
 	gs_notrunning = 0,  // game is being prepared
 	gs_running,         // game was fully prepared at some point and is now in-game
@@ -71,6 +68,13 @@ class MapLoader;
 class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
+
+/** class Game
+ *
+ * This class manages the entire lifetime of a game session, from creating the
+ * game and setting options, selecting maps to the actual playing phase and the
+ * final statistics screen(s).
+ */
 
 class Game : public EditorGameBase {
 public:
@@ -97,8 +101,23 @@ public:
 	friend struct GamePlayerInfoPacket;
 	friend struct GameLoader;
 
+	// TODO(kxq): The lifetime of game-instance is okay for this, but is this the right spot?
+	// TODO(kxq): I should find the place where LUA changes map, and clear this whenever that
+	// happens.
+	// TODO(kxq): When done, the x_check in worker.cc could be removed (or made more rare, and put
+	// under an assert as then mismatch would indicate the presence of a bug).
+	// TODO(k.halfmann): this shoud perhpas better be a map, it will be quite sparse?
+
+	/** Qualitity of terrain for tree planting normalized to int16.
+	 *
+	 *  Indexed by MapIndex. -1  is an ivalid entry. Shared between all tribes (on the same server)
+	 *  will be cleared when diffrences are detected. Presently, that can only happen if terrain
+	 *  is changed (lua scripting). The map is sparse, lookups are fast.
+	 */
+	std::vector<int16_t> forester_cache_;
+
 	Game();
-	~Game();
+	~Game() override;
 
 	// life cycle
 	void set_game_controller(GameController*);
@@ -207,6 +226,7 @@ public:
 	void send_player_ship_explore_island(Ship&, IslandExploreDirection);
 	void send_player_sink_ship(Ship&);
 	void send_player_cancel_expedition_ship(Ship&);
+	void send_player_propose_trade(const Trade& trade);
 
 	InteractivePlayer* get_ipl();
 
@@ -232,6 +252,23 @@ public:
 		return replay_;
 	}
 
+	bool is_ai_training_mode() const {
+		return ai_training_mode_;
+	}
+
+	bool is_auto_speed() const {
+		return auto_speed_;
+	}
+
+	void set_ai_training_mode(bool);
+
+	void set_auto_speed(bool);
+
+	// TODO(sirver,trading): document these functions once the interface settles.
+	int propose_trade(const Trade& trade);
+	void accept_trade(int trade_id);
+	void cancel_trade(int trade_id);
+
 private:
 	void sync_reset();
 
@@ -246,7 +283,7 @@ private:
 		     syncstreamsave_(false) {
 		}
 
-		~SyncWrapper();
+		~SyncWrapper() override;
 
 		/// Start dumping the entire syncstream into a file.
 		///
@@ -282,6 +319,9 @@ private:
 	/// is written only if \ref writereplay_ is true too.
 	bool writesyncstream_;
 
+	bool ai_training_mode_;
+	bool auto_speed_;
+
 	int32_t state_;
 
 	RNG rng_;
@@ -293,6 +333,9 @@ private:
 	std::unique_ptr<ReplayWriter> replaywriter_;
 
 	GeneralStatsVector general_stats_;
+	int next_trade_agreement_id_ = 1;
+	// Maps from trade agreement id to the agreement.
+	std::map<int, TradeAgreement> trade_agreements_;
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;

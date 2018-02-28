@@ -70,17 +70,6 @@ void LayeredFileSystem::set_home_file_system(FileSystem* fs) {
 }
 
 /**
- * Remove a filesystem from the stack
- * \param fs The filesystem to be removed
- */
-void LayeredFileSystem::remove_file_system(const FileSystem& fs) {
-	if (filesystems_.back().get() != &fs)
-		throw std::logic_error("LayeredFileSystem::remove_file_system: interspersed add/remove "
-		                       "detected!");
-	filesystems_.pop_back();
-}
-
-/**
  * Find files in all sub-filesystems in the given path, with the given pattern.
  * Store all found files in results.
  *

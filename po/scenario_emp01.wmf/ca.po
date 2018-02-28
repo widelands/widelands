@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-12 13:53+0000\n"
-"PO-Revision-Date: 2017-05-16 21:44+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2017-12-28 17:49+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -430,7 +430,7 @@ msgstr "Senyor, heu fet d'aquesta península un lloc molt segur. És hora de con
 #: ../../data/scripting/format_scenario.lua:36
 #, lua-format
 msgid "“%s”"
-msgstr "“%s”"
+msgstr "«%s»"
 
 #: ../../data/scripting/format_scenario.lua:84
 msgid "New Objective"

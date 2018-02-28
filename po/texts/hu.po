@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016-2017
 # GunChleoc, 2014
-# litoll <litoll@freemail.hu>, 2016
+# litoll <litoll@freemail.hu>, 2016-2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-03-05 10:46+0000\n"
-"PO-Revision-Date: 2017-03-05 10:48+0000\n"
+"POT-Creation-Date: 2018-01-04 13:28+0000\n"
+"PO-Revision-Date: 2018-01-04 13:31+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -28,89 +28,89 @@ msgstr "Fejlesztők"
 msgid "Widelands Development Team"
 msgstr "Widelands fejlesztőcsapat"
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:6
 msgid "License"
 msgstr "Licenc"
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:8
 msgid "Licensing information for Widelands"
 msgstr "Licencelési információ a Widelandshez"
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - 2016 by the Widelands Development Team."
 msgstr "Copyright 2002 - 2016, Widelands fejlesztőcsapat."
 
-#: ../../data/txts/LICENSE.lua:24
+#: ../../data/txts/LICENSE.lua:11
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Ez a játék szabad és nyílt forrású, rá a GNU General Public License (GPL) V2.0 vonatkozik."
 
-#: ../../data/txts/LICENSE.lua:26
+#: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "További információkat találhatsz a szabad és nyílt forrású szoftverekről, valamint a GPL-ről, ha meglátogatod ezt a weboldalt: %s"
 
-#: ../../data/txts/LICENSE.lua:27
+#: ../../data/txts/LICENSE.lua:14
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Itt megtalálod a licenc teljes szövegét, illetve további tudnivalókat ennek filozófiájáról és jogi következményeiről. (A fordító megjegyzése: A GPL nemhivatalos magyar fordítása elérhető a http://gnu.hu/gpl.html webcímen.)"
 
-#: ../../data/txts/LICENSE.lua:29
+#: ../../data/txts/LICENSE.lua:16
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "A GPL-t szöveges dokumentumként is mellékeljük a Widelandsszel."
 
-#: ../../data/txts/LICENSE.lua:30
+#: ../../data/txts/LICENSE.lua:17
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Linuxon a COPYING nevű fájlt megtalálod a forrás- vagy az önálló bináris csomag gyökerében, vagy pedig a telepítési könyvtárban (ami ilyesmi: „%1%”)."
 
-#: ../../data/txts/LICENSE.lua:31
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Windowson a COPYING.txt nevű fájlt a telepítési könyvtárban találod, illetve a Widelands Start menüben lévő bejegyzése is tartalmaz egy parancsikont a fájlra."
 
-#: ../../data/txts/LICENSE.lua:32
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "MacOS-en a COPYING nevű fájlt a honlapról letöltött archívumban találod."
 
-#: ../../data/txts/LICENSE.lua:34
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "This game comes as-is and without any warranty. For more information and "
 "support you can find us at %1% (Website, Wiki, Forum for questions or "
 "general support), %2% (Bugtracker), and %3% (Translations)."
 msgstr "Ez a játék „jelen állapotában” kerül kiadásra, mindenféle garanciavállalás nélkül. További információkért és segítségért keress minket a %1% (honlap, wiki, fórum a kérdéseknek illetve általános segítséghez), a %2% (hibakövető), vagy a %3% (fordítások) címen."
 
-#: ../../data/txts/README.lua:7
+#: ../../data/txts/README.lua:6
 msgid "Readme"
 msgstr "Útmutató"
 
-#: ../../data/txts/README.lua:12
+#: ../../data/txts/README.lua:9
 msgid "an open source strategy game"
 msgstr "Szabad forráskódú stratégiai játék"
 
-#: ../../data/txts/README.lua:15
+#: ../../data/txts/README.lua:11
 msgid "Check out the Widelands project homepage:"
 msgstr "Ezen a weblapon nézhetsz utána a Widelands projektnek:"
 
-#: ../../data/txts/README.lua:17
+#: ../../data/txts/README.lua:12
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
 msgstr "A Widelands használatára és terjesztésére a GNU General Public License (GPL) vonatkozik. További tudnivalókért lásd a „COPYING” fájlt."
 
-#: ../../data/txts/README.lua:18
+#: ../../data/txts/README.lua:13
 msgid "Status"
 msgstr "Állapot"
 
-#: ../../data/txts/README.lua:19
+#: ../../data/txts/README.lua:14
 msgid ""
 "Widelands is nearly feature complete and is much fun to play alone and even "
 "more in multiplayer with others. Still, there is always more work to be done"
@@ -119,79 +119,79 @@ msgid ""
 " language or creating new maps – get in touch on our homepage."
 msgstr "A Widelands funkciói már közel teljesek, és jó szórakozást nyújt egyszemélyes\njátékban, még jobbat többjátékosban, másokkal. Azonban még mindig sok\nteendő van minden téren. Ha szívesen segítenél – legyen az grafika,\nhibajavítás, új funkciók hozzáadása, a játék saját nyelvedre való lefordítása,\nvagy új térképek készítése –, keress minket honlapunkon."
 
-#: ../../data/txts/README.lua:21
+#: ../../data/txts/README.lua:16
 msgid "Widelands Help"
 msgstr "Widelands súgó"
 
 #. TRANSLATORS: %1% is a key on the keyboard
-#: ../../data/txts/README.lua:23
+#: ../../data/txts/README.lua:18
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
 msgstr "Segítséget a játékmenetről vagy a szerkesztőről, az alsó menün található súgó gombbal kaphatsz, vagy az %1% megnyomásával."
 
 #. TRANSLATORS: This is a key on the keyboard
-#: ../../data/txts/README.lua:25
+#: ../../data/txts/README.lua:20
 msgid "F1"
 msgstr "F1"
 
-#: ../../data/txts/README.lua:28
+#: ../../data/txts/README.lua:23
 msgid "Reporting Bugs"
 msgstr "Hibák jelentése"
 
-#: ../../data/txts/README.lua:29
+#: ../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr "Ha hibával találkozol, kérjük, jelentsd hibakövetőnkön:"
 
-#: ../../data/txts/README.lua:31
+#: ../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
 msgstr "Kérjük, adj meg elegendő háttérinformációt:"
 
-#: ../../data/txts/README.lua:33
+#: ../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
 msgstr "Részletes lépések, hogy hogyan reprodukálható a hiba, ha az lehetséges."
 
-#: ../../data/txts/README.lua:34
+#: ../../data/txts/README.lua:29
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr "Mit vártál e lépésektől, és mi történt valójában."
 
-#: ../../data/txts/README.lua:35
+#: ../../data/txts/README.lua:30
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr "A Widelands melyik verziója fut (tehát vagy az építési szám vagy\na revízószám ha a fejlesztői verziót vagy napi építést használod.)"
 
-#: ../../data/txts/README.lua:36
+#: ../../data/txts/README.lua:31
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
 msgstr "Kérjük, azt is közöld, milyen operációs rendszeren futtatod a Widelands játékot,\nmivel egyes hibák platformfüggőek lehetnek."
 
-#: ../../data/txts/README.lua:37
+#: ../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
 msgstr "Melyik térképen játszottál, amikor a hiba megjelent."
 
-#: ../../data/txts/README.lua:38
+#: ../../data/txts/README.lua:33
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
 msgstr "Ha a hiba olyasmi, hogy valami nem jelenik meg helyesen; vagy\nha segít szemléltetni a dolgot, akkor kérjük, mellékelj egy vagy több\nképernyőképet."
 
-#: ../../data/txts/README.lua:39
+#: ../../data/txts/README.lua:34
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
 msgstr "Ha van egy játékmentésed vagy felvételed, ami szemlélteti a dolgot\n(például egy összeomlást, amelynek pontos okozóját nehéz megtalálni), \nkérjük, azt is mellékeld. További tudnivalókért lásd az alábbi,\nvisszajátszásokról szóló szakaszt."
 
-#: ../../data/txts/TRANSLATORS.lua:25
+#: ../../data/txts/TRANSLATORS.lua:24
 msgid "Translators"
 msgstr "Fordítók"
 
-#: ../../data/txts/TRANSLATORS.lua:27
+#: ../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
 msgstr "Widelands fordítók"
 
@@ -400,66 +400,66 @@ msgstr "Teljes képernyős mód (ha támogatja az OS)"
 msgid "Toggle minimap"
 msgstr "Kistérkép ki-/bekapcsolása"
 
-#: ../../data/txts/help/multiplayer_help.lua:10
+#: ../../data/txts/help/multiplayer_help.lua:7
 msgid "Multiplayer Game Setup"
 msgstr "Többjátékos beállítások"
 
-#: ../../data/txts/help/multiplayer_help.lua:11
+#: ../../data/txts/help/multiplayer_help.lua:8
 msgid "You are in the multiplayer launch game menu."
 msgstr "A többjátékos mód beállító menüjében vagy."
 
-#: ../../data/txts/help/multiplayer_help.lua:13
+#: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Client settings"
 msgstr "Ügyfélbeállítások"
 
-#: ../../data/txts/help/multiplayer_help.lua:14
+#: ../../data/txts/help/multiplayer_help.lua:11
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
 msgstr "Bal oldalon látható a résztvevők listája, téged is beleértve. Szerepedet a beceneved mögötti gombbal állíthatod be. A lehetséges szerepek:"
 
-#: ../../data/txts/help/multiplayer_help.lua:15
+#: ../../data/txts/help/multiplayer_help.lua:12
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr "Játékos, a megfelelő színű zászlóval. Ha egynél több résztvevő választja ugyanazon színt, akkor közösen irányítanak egy játékost („megosztott királyság mód”)."
 
-#: ../../data/txts/help/multiplayer_help.lua:16
+#: ../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
-"player."
-msgstr "Néző mód: mindent láthatsz, de egy játékost sem sem tudsz irányítani."
+"player"
+msgstr ""
 
-#: ../../data/txts/help/multiplayer_help.lua:18
+#: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
 msgstr "Játékosbeállítások"
 
-#: ../../data/txts/help/multiplayer_help.lua:19
+#: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
 msgstr "Középen a játékosok beállításai láthatók. A játék megkezdéséhez minden játékosnak az alábbiak egyikének kell lennie:"
 
-#: ../../data/txts/help/multiplayer_help.lua:20
+#: ../../data/txts/help/multiplayer_help.lua:17
 msgid "Connected to one or more clients (see ‘Client settings’)."
 msgstr "Csatlakozva egy vagy több résztvevőhöz (lásd „Ügyfélbeállítások”)."
 
-#: ../../data/txts/help/multiplayer_help.lua:21
+#: ../../data/txts/help/multiplayer_help.lua:18
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
 msgstr "Csatlakozva egy számítógépes játékoshoz (a képen látható arc és az egeret fölé mozgatva megjelenő szöveg mutatja az éppen kiválasztott számítógépes játékos erősségét)."
 
-#: ../../data/txts/help/multiplayer_help.lua:22
+#: ../../data/txts/help/multiplayer_help.lua:19
 msgid "Set as shared in starting position for another player."
 msgstr "Osztozva egy másik játékos kezdőpozíciójával."
 
-#: ../../data/txts/help/multiplayer_help.lua:23
+#: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Closed."
 msgstr "Kizárva."
 
-#: ../../data/txts/help/multiplayer_help.lua:24
+#: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
 "The latter three can only be set by the hosting client by left-clicking the "
 "‘type’ button of a player. Hosting players can also set the initialization "
@@ -467,17 +467,17 @@ msgid ""
 "with) and the tribe and team for computer players."
 msgstr "Az utóbbi három csak a gazda ügyfélnél állítható be a játékos „típus” gombjára kattintva. A gazdák az egyes játékosok kezdeti feltételeit is megadhatják (az épületek halmazát, árukat és a kezdeti munkások számát), valamint törzset és a csapatot a gépi játékosoknak."
 
-#: ../../data/txts/help/multiplayer_help.lua:25
+#: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
 msgstr "Minden játékoshoz kapcsolódó ügyfél (aki nem néző) beállíthatja a törzset és a csapatot ahhoz a játékoshoz."
 
-#: ../../data/txts/help/multiplayer_help.lua:27
+#: ../../data/txts/help/multiplayer_help.lua:24
 msgid "Map details"
 msgstr "Térkép adatai"
 
-#: ../../data/txts/help/multiplayer_help.lua:28
+#: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
 "You can see information about the selected map or savegame on the right-hand"
 " side. A button next to the map name allows the host to change to a "
@@ -635,8 +635,8 @@ msgstr "További kérdéseid vannak? A Gyakran Ismételt Kérdéseket, a wikit �
 #: ../../data/txts/tips/general_game.lua:28
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
-"specific ware."
-msgstr "A prioritás gomb az építés ablakban arra való, hogy szabályozd a megadott termék szállítását."
+"specific ware. Pressing Ctrl while clicking will adjust all wares at once."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:32
 msgid ""
@@ -654,12 +654,12 @@ msgstr "Kezeld üzeneteidet még hatékonyabban: használd az N billentyűt az �
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "1-9"
-msgstr ""
+msgstr "1-9"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgctxt "hotkey"
 msgid "Ctrl+(1-9)"
-msgstr ""
+msgstr "Ctrl+(1-9)"
 
 #: ../../data/txts/tips/general_game.lua:40
 msgid "Press %1% to store important locations, then press %2% to recall them."
@@ -702,12 +702,12 @@ msgstr "Néhány épületnek, mint a farmnak, nagyon kis munkaterülete van. Ha 
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+(+/-)"
-msgstr ""
+msgstr "Ctrl+(+/-)"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgctxt "hotkey"
 msgid "Ctrl+0"
-msgstr ""
+msgstr "Ctrl+0"
 
 #: ../../data/txts/tips/general_game.lua:68
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."

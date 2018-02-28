@@ -22,6 +22,7 @@ return {
          dirname .. "scripting/starting_conditions/barbarians/headquarters.lua";
          dirname .. "scripting/starting_conditions/barbarians/fortified_village.lua";
          dirname .. "scripting/starting_conditions/barbarians/trading_outpost.lua";
+         dirname .. "scripting/starting_conditions/barbarians/village.lua";
       }
    },
 
@@ -38,6 +39,7 @@ return {
          dirname .. "scripting/starting_conditions/empire/headquarters.lua";
          dirname .. "scripting/starting_conditions/empire/fortified_village.lua";
          dirname .. "scripting/starting_conditions/empire/trading_outpost.lua";
+         dirname .. "scripting/starting_conditions/empire/village.lua";
       }
    },
 
@@ -54,6 +56,7 @@ return {
          dirname .. "scripting/starting_conditions/atlanteans/headquarters.lua";
          dirname .. "scripting/starting_conditions/atlanteans/fortified_village.lua";
          dirname .. "scripting/starting_conditions/atlanteans/trading_outpost.lua";
+         dirname .. "scripting/starting_conditions/atlanteans/village.lua";
       }
    }
 }

@@ -432,7 +432,7 @@ void Carrier::find_pending_ware(Game& game) {
  * Find the flag we are closest to (in walking time).
  */
 int32_t Carrier::find_closest_flag(Game& game) {
-	Map& map = game.map();
+	const Map& map = game.map();
 	CoordPath startpath(map, dynamic_cast<Road&>(*get_location(game)).get_path());
 
 	CoordPath endpath;

@@ -45,7 +45,34 @@
 
 namespace Widelands {
 
-static const size_t STATISTICS_VECTOR_LENGTH = 20;
+namespace {
+
+constexpr size_t STATISTICS_VECTOR_LENGTH = 20;
+
+// Parses the descriptions of the working positions from 'items_table' and
+// fills in 'working_positions'. Throws an error if the table contains invalid
+// values.
+void parse_working_positions(const EditorGameBase& egbase,
+                             LuaTable* items_table,
+                             BillOfMaterials* working_positions) {
+	for (const std::string& worker_name : items_table->keys<std::string>()) {
+		int amount = items_table->get_int(worker_name);
+		try {
+			if (amount < 1 || 255 < amount) {
+				throw wexception("count is out of range 1 .. 255");
+			}
+			DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
+			if (!egbase.tribes().worker_exists(woi)) {
+				throw wexception("invalid");
+			}
+			working_positions->push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
+		} catch (const WException& e) {
+			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
+		}
+	}
+}
+
+}  // namespace
 
 /*
 ==============================================================================
@@ -146,28 +173,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		}
 	}
 
-	items_table = table.get_table("working_positions");
-	for (const std::string& worker_name : items_table->keys<std::string>()) {
-		int amount = items_table->get_int(worker_name);
-		try {
-			if (amount < 1 || 255 < amount) {
-				throw wexception("count is out of range 1 .. 255");
-			}
-			DescriptionIndex const woi = egbase.tribes().worker_index(worker_name);
-			if (egbase.tribes().worker_exists(woi)) {
-				for (const auto& wp : working_positions()) {
-					if (wp.first == woi) {
-						throw wexception("duplicated");
-					}
-				}
-				working_positions_.push_back(std::pair<DescriptionIndex, uint32_t>(woi, amount));
-			} else {
-				throw wexception("invalid");
-			}
-		} catch (const WException& e) {
-			throw wexception("%s=\"%d\": %s", worker_name.c_str(), amount, e.what());
-		}
-	}
+	parse_working_positions(egbase, table.get_table("working_positions").get(), &working_positions_);
 
 	// Get programs
 	items_table = table.get_table("programs");

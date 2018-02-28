@@ -32,6 +32,8 @@ namespace UI {
 /**
  * A panel that allows entering multi-line string, i.e. like a hybrid between
  * @ref Editbox and @ref MultilineTextarea
+ *
+ * Text conventions: Sentence case for labels associated with thie editbox
  */
 struct MultilineEditbox : public Panel {
 	MultilineEditbox(
@@ -48,8 +50,6 @@ struct MultilineEditbox : public Panel {
 
 	const std::string& get_text() const;
 	void set_text(const std::string&);
-
-	void set_maximum_bytes(uint32_t n);
 
 	void focus(bool topcaller = true) override;
 

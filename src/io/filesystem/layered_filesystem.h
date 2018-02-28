@@ -46,7 +46,7 @@
 class LayeredFileSystem : public FileSystem {
 public:
 	LayeredFileSystem();
-	virtual ~LayeredFileSystem();
+	~LayeredFileSystem() override;
 
 	// Add a new filesystem to the top of the stack. Take ownership of the given
 	// filesystem.
@@ -55,8 +55,6 @@ public:
 	// Set the home filesystem (which is the preferred filesystem for writing
 	// files). Take ownership of the given filesystem.
 	void set_home_file_system(FileSystem*);
-
-	virtual void remove_file_system(const FileSystem&);
 
 	std::set<std::string> list_directory(const std::string& path) override;
 

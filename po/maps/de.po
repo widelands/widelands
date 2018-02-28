@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# Elisabeth Jäger, 2016-2017
+# Elisabeth Jäger, 2016-2018
 # wl-zocker, 2014
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-26 17:01+0000\n"
-"PO-Revision-Date: 2017-05-30 20:27+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2018-02-15 09:25+0000\n"
+"PO-Revision-Date: 2018-02-21 08:55+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:109
 msgid "From Nemesis to Genesis"
 msgstr "Von Untergang zum Neuanfang"
 
@@ -133,31 +133,37 @@ msgid ""
 "time, but at a high cost: her humanity and soul."
 msgstr "Als ihr Gott sein Vertrauen in die Atlanter verlor und ihre Insel in den Fluten versenkte, wurde der Kampf einer Frau um Gerechtigkeit und eine zweite Chance für ihr Volk zur Legende. Indem sie die verbleibenden Atlanter in eine neue Zukunft in einem neuen Teil der Welt führte, wurde Jundlina zum mächtigsten Menschen ihrer Zeit – doch zu einem hohen Preis: ihrer Menschlichkeit und ihrer Seele."
 
-#: ../../data/campaigns/campaigns.conf:78
+#: ../../data/campaigns/campaigns.conf:77
+#: ../../data/campaigns/campaigns.conf:102
+#: ../../data/campaigns/campaigns.conf:114
+#: ../../data/campaigns/dummy.wmf/elemental:8
+msgid "Not yet implemented"
+msgstr "Noch nicht fertiggestellt"
+
+#: ../../data/campaigns/campaigns.conf:82
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
 msgstr "Die Strände von Malac’ Mor"
 
-#: ../../data/campaigns/campaigns.conf:83
+#: ../../data/campaigns/campaigns.conf:87
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
 msgstr "Ein Außenposten fürs Exil"
 
-#: ../../data/campaigns/campaigns.conf:88
+#: ../../data/campaigns/campaigns.conf:92
 msgid "Neptune’s Revenge"
 msgstr "Neptuns Rache"
 
-#: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
-msgid "Not yet implemented"
-msgstr "Noch nicht fertiggestellt"
+#: ../../data/campaigns/campaigns.conf:97
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Überraschung!"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Niemand"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "Es tut uns leid, aber diese Karte wurde noch nicht fertiggestellt."
 
@@ -183,6 +189,13 @@ msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
 msgstr "Als Lutius sich mit seinen Truppen endlich auf den Weg machen kann, in der Heimat das Imperium zu verteidigen, wird er von den Launen der Götter überrascht."
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr "Nach seiner Heimkehr finden Lutius und seine Mannschaft die Wirtschaft in heillosem Chaos vor. Die Engpässe der Wirtschaft zu lösen ist von größter Wichtigkeit, um die Pracht des Imperiums wiederherzustellen. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

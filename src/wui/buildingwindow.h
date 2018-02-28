@@ -28,7 +28,6 @@
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
@@ -49,11 +48,7 @@ struct BuildingWindow : public UI::UniqueWindow {
 	               Widelands::Building&,
 	               bool avoid_fastclick);
 
-	virtual ~BuildingWindow();
-
-	Widelands::Building& building() {
-		return building_;
-	}
+	~BuildingWindow() override;
 
 	InteractiveGameBase* igbase() const {
 		return parent_;
@@ -85,15 +80,25 @@ protected:
 	void
 	create_input_queue_panel(UI::Box*, Widelands::Building&, Widelands::InputQueue*, bool = false);
 
-	virtual void create_capsbuttons(UI::Box* buttons);
-
 	bool is_dying_;
 
 private:
-	InteractiveGameBase* parent_;
-	/// Actions performed when a NoteBuilding is received.
+	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
+
+	// Actions performed when a NoteBuilding is received.
 	void on_building_note(const Widelands::NoteBuilding& note);
-	Widelands::Building& building_;
+
+	// For ports only.
+	void update_expedition_button(bool expedition_was_canceled);
+
+	InteractiveGameBase* parent_;
+
+	Widelands::OPtr<Widelands::Building> building_;
+
+	// We require this to unregister overlays when we are closed. Since the
+	// building might have been destroyed by then we have to keep a copy of its
+	// position around.
+	const Widelands::Coords building_position_;
 
 	std::unique_ptr<UI::Box> vbox_;
 
@@ -107,11 +112,8 @@ private:
 	Widelands::PlayerNumber capscache_player_number_;
 	bool caps_setup_;
 
-	FieldOverlayManager::OverlayId workarea_overlay_id_;
+	bool showing_workarea_;
 	bool avoid_fastclick_;
-
-	// For ports only.
-	void update_expedition_button(bool expedition_was_canceled);
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>

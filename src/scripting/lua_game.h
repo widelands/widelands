@@ -114,7 +114,7 @@ class LuaObjective : public LuaGameModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaObjective);
 
-	virtual ~LuaObjective() {
+	~LuaObjective() override {
 	}
 
 	explicit LuaObjective(const Widelands::Objective& n);
@@ -157,7 +157,7 @@ class LuaMessage : public LuaGameModuleClass {
 
 public:
 	LUNA_CLASS_HEAD(LuaMessage);
-	virtual ~LuaMessage() {
+	~LuaMessage() override {
 	}
 
 	explicit LuaMessage(uint8_t, Widelands::MessageId);

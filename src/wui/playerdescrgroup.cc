@@ -29,7 +29,7 @@
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/game_settings.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -116,7 +116,7 @@ void PlayerDescriptionGroup::refresh() {
 
 	d->btnEnablePlayer->set_enabled(stateaccess);
 
-	if (player.state == PlayerSettings::stateClosed) {
+	if (player.state == PlayerSettings::State::kClosed) {
 		d->btnEnablePlayer->set_state(false);
 		d->btnPlayerTeam->set_visible(false);
 		d->btnPlayerTeam->set_enabled(false);
@@ -132,7 +132,7 @@ void PlayerDescriptionGroup::refresh() {
 		d->btnPlayerType->set_visible(true);
 		d->btnPlayerType->set_enabled(stateaccess);
 
-		if (player.state == PlayerSettings::stateOpen) {
+		if (player.state == PlayerSettings::State::kOpen) {
 			d->btnPlayerType->set_title(_("Open"));
 			d->btnPlayerTeam->set_visible(false);
 			d->btnPlayerTeam->set_visible(false);
@@ -144,7 +144,7 @@ void PlayerDescriptionGroup::refresh() {
 		} else {
 			std::string title;
 
-			if (player.state == PlayerSettings::stateComputer) {
+			if (player.state == PlayerSettings::State::kComputer) {
 				if (player.ai.empty())
 					title = _("Computer");
 				else {
@@ -156,12 +156,12 @@ void PlayerDescriptionGroup::refresh() {
 						title = _(impl->descname);
 					}
 				}
-			} else {  // PlayerSettings::stateHuman
+			} else {  // PlayerSettings::State::stateHuman
 				title = _("Human");
 			}
 			d->btnPlayerType->set_title(title);
 
-			TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
+			Widelands::TribeBasicInfo info = Widelands::get_tribeinfo(player.tribe);
 			if (!tribenames_[player.tribe].size()) {
 				// Tribe's localized name
 				tribenames_[player.tribe] = info.descname;
@@ -177,7 +177,7 @@ void PlayerDescriptionGroup::refresh() {
 
 			{
 				i18n::Textdomain td("tribes");  // for translated initialisation
-				for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 					if (tribeinfo.name == player.tribe) {
 						d->btnPlayerInit->set_title(
 						   _(tribeinfo.initializations.at(player.initialization_index).descname));
@@ -215,11 +215,11 @@ void PlayerDescriptionGroup::enable_player(bool on) {
 		return;
 
 	if (on) {
-		if (settings.players[d->plnum].state == PlayerSettings::stateClosed)
+		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed)
 			d->settings->next_player_state(d->plnum);
 	} else {
-		if (settings.players[d->plnum].state != PlayerSettings::stateClosed)
-			d->settings->set_player_state(d->plnum, PlayerSettings::stateClosed);
+		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed)
+			d->settings->set_player_state(d->plnum, PlayerSettings::State::kClosed);
 	}
 }
 
@@ -293,7 +293,7 @@ void PlayerDescriptionGroup::toggle_playerinit() {
 
 	const PlayerSettings& player = settings.players[d->plnum];
 
-	for (const TribeBasicInfo& tribeinfo : settings.tribes) {
+	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
 			return d->settings->set_player_init(
 			   d->plnum, (player.initialization_index + 1) % tribeinfo.initializations.size());

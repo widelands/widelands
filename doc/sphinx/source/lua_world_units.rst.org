@@ -1,0 +1,17 @@
+Defining Units
+==============
+
+A world can have the following types of units:
+
+* **Critters**: Animals that will move around the map at random
+* **Immovables**: Trees, rocks, artifacts and eye candy
+* **Resources**: Mineable map resources like fish, water, coal, ...
+* **Terrains**: The base of the landscape. Meadows, mountains, water...
+
+The definitions for the world's units are located in the subdirectories of
+``data/world``. Each unit needs to have an ``init.lua`` file, which will load the unit to be used in the game.
+
+.. toctree::
+   :maxdepth: 3
+
+REPLACE_ME

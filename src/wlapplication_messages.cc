@@ -90,6 +90,15 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      You can add a =FILENAME to directly load\n"
 	               "                      the map FILENAME in editor.")
 	          << endl
+	          << _(" --ai_training        Enables AI training mode. See\n"
+	               "                      https://wl.widelands.org/wiki/Ai%20Training/\n"
+	               "                      for a full description of the AI training logic.")
+	          << endl
+	          << _(" --auto_speed         In multiplayer games only, this will keep\n"
+	               "                      adjusting the game speed automatically,\n"
+	               "                      depending on FPS. Useful in conjunction with\n"
+	               "                      --ai_training.")
+	          << endl
 	          << _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 	               "                      map.")
 	          << endl
@@ -116,11 +125,14 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl
 	          << _(" --xres=[...]         Width of the window in pixel.") << endl
 	          << _(" --yres=[...]         Height of the window in pixel.") << endl
+	          << endl
 	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
 	             textdomain */
-	          << endl
 	          << _("Options for the internal window manager:") << endl
+	          << _(" --animate_map_panning=[yes|no]\n"
+	               "                      Should automatic map movements be animated.")
+	          << endl
 	          << _(" --border_snap_distance=[0 ...]\n"
 	               "                      Move a window to the edge of the screen\n"
 	               "                      when the edge of the window comes within\n"

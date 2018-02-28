@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2017 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Renaud Bouchard, 2015
+# Renaud Bouchard, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-10-15 08:42+0000\n"
-"PO-Revision-Date: 2015-02-22 01:17+0000\n"
+"POT-Creation-Date: 2017-10-09 18:20+0000\n"
+"PO-Revision-Date: 2017-10-12 19:06+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -39,11 +39,11 @@ msgstr "Enfin ! Nous avons fait notre premier pas vers la victoire ! La nuit der
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:26
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:28
 msgid "Capture the Ancient Castle"
-msgstr "Prenez le château antique"
+msgstr "Prenez le vieux château"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:29
 msgid "Defeat Lanissa and capture the ancient castle."
-msgstr "Battez Lanissa et prenez le château antique."
+msgstr "Battez Lanissa et prenez le vieux château."
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:35
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:37

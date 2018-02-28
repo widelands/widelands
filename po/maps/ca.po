@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-19 07:45+0000\n"
-"PO-Revision-Date: 2017-05-20 20:21+0000\n"
+"POT-Creation-Date: 2017-12-27 17:09+0000\n"
+"PO-Revision-Date: 2017-12-28 17:13+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:105
 msgid "From Nemesis to Genesis"
 msgstr "De la Nèmesi al Gènesi"
 
@@ -143,16 +143,21 @@ msgid "Neptune’s Revenge"
 msgstr "La revenja de Neptú"
 
 #: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Sorpresa, sorpresa!"
+
+#: ../../data/campaigns/campaigns.conf:98
+#: ../../data/campaigns/campaigns.conf:110
+#: ../../data/campaigns/dummy.wmf/elemental:8
 msgid "Not yet implemented"
 msgstr "Encara no s'ha implementat"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Ningú"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "Aquest mapa encara no s'ha implementat."
 
@@ -178,6 +183,13 @@ msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
 msgstr "Durant el seu camí a casa per defensar l'imperi, els déus i els seus desitjos van sorprendre la tripulació d'en Lutius "
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr "Després de retornar a casa, en Lutius i el seu grup es troben amb una economia desastrosa. Caldrà resoldre tots els embussaments dels béns per reinstaurar la glòria de l'imperi. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -225,7 +237,7 @@ msgstr "En aquest tutorial, aprendreu quines opcions us ofereix el Widelands per
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr "El mar dels Arxipèlags"
+msgstr "El mar dels arxipèlags"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""

@@ -67,7 +67,7 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr) : PartiallyFinish
 
 DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              EditorGameBase& egbase,
-                             Coords const c,
+                             const Coords& c,
                              Player& plr,
                              bool loading,
                              Building::FormerBuildings& former_buildings)
@@ -229,10 +229,8 @@ void DismantleSite::draw(uint32_t gametime,
 	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
 
 	// Blit bottom part of the animation according to dismantle progress
-	const uint32_t anim_idx =
-	   building_->get_animation(building_->is_animation_known("unoccupied") ? "unoccupied" : "idle");
-	dst->blit_animation(
-	   point_on_dst, scale, anim_idx, tanim, player_color, 100 - ((get_built_per64k() * 100) >> 16));
+	dst->blit_animation(point_on_dst, scale, building_->get_unoccupied_animation(), tanim,
+	                    player_color, 100 - ((get_built_per64k() * 100) >> 16));
 
 	// Draw help strings
 	draw_info(draw_text, point_on_dst, scale, dst);

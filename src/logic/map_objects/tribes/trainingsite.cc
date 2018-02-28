@@ -75,7 +75,7 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 		train_health_ = true;
 		min_health_ = items_table->get_int("min_level");
 		max_health_ = items_table->get_int("max_level");
-		add_training_inputs(*items_table.get(), &food_health_, &weapons_health_);
+		add_training_inputs(*items_table, &food_health_, &weapons_health_);
 	}
 
 	if (table.has_key("soldier attack")) {
@@ -83,21 +83,21 @@ TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
 		train_attack_ = true;
 		min_attack_ = items_table->get_int("min_level");
 		max_attack_ = items_table->get_int("max_level");
-		add_training_inputs(*items_table.get(), &food_attack_, &weapons_attack_);
+		add_training_inputs(*items_table, &food_attack_, &weapons_attack_);
 	}
 	if (table.has_key("soldier defense")) {
 		items_table = table.get_table("soldier defense");
 		train_defense_ = true;
 		min_defense_ = items_table->get_int("min_level");
 		max_defense_ = items_table->get_int("max_level");
-		add_training_inputs(*items_table.get(), &food_defense_, &weapons_defense_);
+		add_training_inputs(*items_table, &food_defense_, &weapons_defense_);
 	}
 	if (table.has_key("soldier evade")) {
 		items_table = table.get_table("soldier evade");
 		train_evade_ = true;
 		min_evade_ = items_table->get_int("min_level");
 		max_evade_ = items_table->get_int("max_level");
-		add_training_inputs(*items_table.get(), &food_evade_, &weapons_evade_);
+		add_training_inputs(*items_table, &food_evade_, &weapons_evade_);
 	}
 }
 
