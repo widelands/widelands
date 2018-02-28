@@ -125,10 +125,10 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
                           24,
-                          _("In-game resolution")),
+                          _("Window Size")),
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
-     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
+     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab input"), "", 0),
      sb_maxfps_(&box_interface_left_, 0, 0, 0, 0, opt.maxfps, 0, 99, _("Maximum FPS:")),
      translation_info_(&box_interface_, 0, 0, 100, 100),
 
@@ -162,8 +162,8 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     music_(&box_sound_, Vector2i::zero(), _("Enable Music"), "", 0),
-     fx_(&box_sound_, Vector2i::zero(), _("Enable Sound Effects"), "", 0),
+     music_(&box_sound_, Vector2i::zero(), _("Enable music"), "", 0),
+     fx_(&box_sound_, Vector2i::zero(), _("Enable sound effects"), "", 0),
      message_sound_(&box_sound_, Vector2i::zero(), _("Play a sound at message arrival"), "", 0),
 
      // Saving options
@@ -278,7 +278,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	apply_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_apply, this));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuOptions::clicked_ok, this));
 
-	/** TRANSLATORS Options: Save game automatically every: */
+	/** TRANSLATORS: Options: Save game automatically every: */
 	sb_autosave_.add_replacement(0, _("Off"));
 
 	// Fill in data
@@ -450,7 +450,7 @@ void FullscreenMenuOptions::add_languages_to_list(const std::string& current_loc
 
 				std::string name = i18n::make_ligatures(table->get_string("name").c_str());
 				const std::string sortname = table->get_string("sort_name");
-				LanguageEntry* entry = new LanguageEntry(localename, name);
+				std::unique_ptr<LanguageEntry> entry(new LanguageEntry(localename, name));
 				entries.insert(std::make_pair(sortname, *entry));
 				language_entries_.insert(std::make_pair(localename, *entry));
 
@@ -513,7 +513,7 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 				Section& s = prof.get_safe_section("global");
 				const int total = s.get_int("total");
 				s = prof.get_safe_section(locale);
-				percent = floor(100.f * s.get_int("translated") / total);
+				percent = static_cast<int>(floor(100 * s.get_int("translated") / total));
 				if (percent == 100) {
 					message =
 					   /** TRANSLATORS: %s = language name */

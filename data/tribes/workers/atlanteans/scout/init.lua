@@ -15,7 +15,7 @@ tribes:new_worker_type {
    descname = pgettext("atlanteans_worker", "Scout"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
-   vision_range = 2,
+   vision_range = 3,
 
    buildcost = {
       atlanteans_carrier = 1

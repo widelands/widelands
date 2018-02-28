@@ -36,7 +36,7 @@ void FileWrite::clear() {
 	filepos_ = 0;
 }
 
-void FileWrite::write(FileSystem& fs, char const* const filename) {
+void FileWrite::write(FileSystem& fs, const std::string& filename) {
 	fs.write(filename, data_, length_);
 	clear();
 }

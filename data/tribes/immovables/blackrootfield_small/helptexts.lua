@@ -1,8 +1,7 @@
--- TODO(GunChleoc): This is unused
-
 function immovable_helptext(tribe)
    local helptext = {
-      default = ""
+      -- TRANSLATORS: Helptext for a field
+      default = _("This field is growing.")
    }
    local result = ""
    if tribe then

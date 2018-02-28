@@ -23,7 +23,7 @@ tribes:new_worker_type {
       barbarians_carrier = 1
    },
 
-   experience = 19,
+   experience = 10,
    becomes = "barbarians_brewer_master",
 
    animations = animations,

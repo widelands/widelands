@@ -39,7 +39,7 @@ tribes:new_worker_type {
          "findspace=size:any radius:1",
          "walk=coords",
          "animate=planting 1500",
-         "plant=tribe:reed_tiny",
+         "plant=attrib:seed_reed",
          "animate=planting 1500",
          "return"
       },

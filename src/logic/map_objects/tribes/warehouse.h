@@ -128,7 +128,7 @@ public:
 	};
 
 	explicit Warehouse(const WarehouseDescr&);
-	virtual ~Warehouse();
+	~Warehouse() override;
 
 	void load_finish(EditorGameBase&) override;
 

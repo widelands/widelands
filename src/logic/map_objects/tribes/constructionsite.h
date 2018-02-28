@@ -36,6 +36,13 @@ class WaresQueue;
 struct ConstructionsiteInformation {
 	ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {
 	}
+
+	/// Draw the partly finished constructionsite
+	void draw(const Vector2f& point_on_dst,
+	          float scale,
+	          const RGBColor& player_color,
+	          RenderTarget* dst) const;
+
 	const BuildingDescr*
 	   becomes;  // Also works as a marker telling whether there is a construction site.
 	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.

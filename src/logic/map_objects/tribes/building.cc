@@ -69,11 +69,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      enhanced_building_(false),
      hints_(table.get_table("aihints")),
      vision_range_(0) {
+	if (helptext_script().empty()) {
+		throw GameDataError("Building %s has no helptext script", name().c_str());
+	}
 	if (!is_animation_known("idle")) {
-		throw GameDataError("Building %s has no idle animation", table.get_string("name").c_str());
+		throw GameDataError("Building %s has no idle animation", name().c_str());
 	}
 	if (icon_filename().empty()) {
-		throw GameDataError("Building %s needs a menu icon", table.get_string("name").c_str());
+		throw GameDataError("Building %s needs a menu icon", name().c_str());
 	}
 
 	i18n::Textdomain td("tribes");
@@ -155,8 +158,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		}
 	}
 
-	helptext_script_ = table.get_string("helptext_script");
-
 	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
 
 	if (table.has_key("vision_range")) {
@@ -195,6 +196,10 @@ const BuildingHints& BuildingDescr::hints() const {
 
 void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
 	hints_.set_trainingsites_max_percent(percent);
+}
+
+uint32_t BuildingDescr::get_unoccupied_animation() const {
+	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle");
 }
 
 /**
@@ -357,10 +362,7 @@ bool Building::init(EditorGameBase& egbase) {
 	}
 
 	// Start the animation
-	if (descr().is_animation_known("unoccupied"))
-		start_animation(egbase, descr().get_animation("unoccupied"));
-	else
-		start_animation(egbase, descr().get_animation("idle"));
+	start_animation(egbase, descr().get_unoccupied_animation());
 
 	leave_time_ = egbase.get_gametime();
 	return true;
@@ -443,7 +445,6 @@ applicable.
 ===============
 */
 void Building::destroy(EditorGameBase& egbase) {
-	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kDeleted));
 	const bool fire = burn_on_destroy();
 	const Coords pos = position_;
 	Player* building_owner = get_owner();

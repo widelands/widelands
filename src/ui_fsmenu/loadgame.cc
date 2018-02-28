@@ -19,12 +19,13 @@
 
 #include "ui_fsmenu/loadgame.h"
 
+#include <memory>
+
 #include "base/i18n.h"
 #include "wui/gamedetails.h"
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                                                GameSettingsProvider* gsp,
-                                               GameController* gc,
                                                bool is_replay)
    : FullscreenMenuLoadMapOrGame(),
 
@@ -47,10 +48,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                    GameDetails::Style::kFsMenu,
                    true),
 
-     is_replay_(is_replay),
-     game_(g),
-     settings_(gsp),
-     ctrl_(gc) {
+     is_replay_(is_replay) {
 
 	// Make sure that we have some space to work with.
 	main_box_.set_size(get_w(), get_w());
@@ -114,7 +112,7 @@ void FullscreenMenuLoadGame::clicked_ok() {
 		return;
 	}
 
-	const SavegameData* gamedata = load_or_save_.entry_selected();
+	std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
 	if (gamedata && gamedata->errormessage.empty()) {
 		filename_ = gamedata->filename;
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);

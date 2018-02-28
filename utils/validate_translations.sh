@@ -63,6 +63,7 @@ run_pofilter "urls"
 
 # These checks are nice to have
 run_pofilter "doublespacing"
+run_pofilter "doublewords"
 run_pofilter "startwhitespace"
 run_pofilter "endwhitespace"
 run_pofilter "startpunc"

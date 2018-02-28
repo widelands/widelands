@@ -59,7 +59,7 @@ void get_point(const LuaTable& table, Vector2i* p) {
  */
 class NonPackedAnimation : public Animation {
 public:
-	virtual ~NonPackedAnimation() {
+	~NonPackedAnimation() override {
 	}
 	explicit NonPackedAnimation(const LuaTable& table);
 

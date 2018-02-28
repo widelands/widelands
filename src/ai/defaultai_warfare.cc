@@ -970,6 +970,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		return BuildingNecessity::kForbidden;
 	}
 
+	// Skip if the building is prohibited for now
+	if (bo.prohibited_till > gametime) {
+		return BuildingNecessity::kForbidden;
+	}
+
 	bo.primary_priority = 0;
 
 	const uint32_t msites_total = msites_built() + msites_in_constr();

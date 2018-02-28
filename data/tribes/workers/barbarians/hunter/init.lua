@@ -30,7 +30,7 @@ tribes:new_worker_type {
          "findobject=type:bob radius:13 attrib:eatable",
          "walk=object",
          "animate=idle 1000",
-         "remove_object",
+         "removeobject",
          "createware=meat",
          "return"
       }

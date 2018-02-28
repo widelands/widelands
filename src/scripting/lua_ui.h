@@ -53,7 +53,7 @@ public:
 	explicit LuaPanel(lua_State* L) : panel_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
-	virtual ~LuaPanel() {
+	~LuaPanel() override {
 	}
 
 	void __persist(lua_State* L) override {
@@ -99,7 +99,7 @@ public:
 	}
 	explicit LuaButton(lua_State* L) : LuaPanel(L) {
 	}
-	virtual ~LuaButton() {
+	~LuaButton() override {
 	}
 
 	/*
@@ -193,7 +193,7 @@ public:
 	explicit LuaMapView(MapView* p) : LuaPanel(p) {
 	}
 	explicit LuaMapView(lua_State* L);
-	virtual ~LuaMapView() {
+	~LuaMapView() override {
 	}
 
 	void __persist(lua_State*) override {

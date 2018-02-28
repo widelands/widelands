@@ -68,7 +68,7 @@ public:
 
 	/// A full screen main menu outside of the game/editor itself.
 	FullscreenMenuBase();
-	virtual ~FullscreenMenuBase();
+	~FullscreenMenuBase() override;
 
 	/// Handle keypresses
 	bool handle_key(bool down, SDL_Keysym code) override;
