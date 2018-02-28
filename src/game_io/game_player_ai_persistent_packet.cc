@@ -29,7 +29,11 @@
 namespace Widelands {
 
 // Introduction of genetic algorithm with all structures that are needed for it
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 5;
+// Last version with 150 magic numbers
+constexpr uint16_t kOldMagicNumbers = 4;
+// First version with genetics
+constexpr uint16_t kPacketVersion3 = 3;
 // Old Version before using genetics
 constexpr uint16_t kPacketVersion2 = 2;
 
@@ -66,7 +70,7 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					// Make the AI initialize itself
 					player->ai_data.initialized = 0;
 				} else {
-					// kCurrentPacketVersion
+					// Contains Genetic algorithm data
 					player->ai_data.initialized = (fr.unsigned_8() == 1) ? true : false;
 					player->ai_data.colony_scan_area = fr.unsigned_32();
 					player->ai_data.trees_around_cutters = fr.unsigned_32();
@@ -82,17 +86,34 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 					// Magic numbers
 					size_t magic_numbers_size = fr.unsigned_32();
 
-					// TODO(GunChleoc): We allow for smaller size for savegame compatibility.
-					// Investigate if we can make the size static after Build 20.
-					if (magic_numbers_size > Widelands::Player::AiPersistentState::kMagicNumbersSize) {
-						throw GameDataError(
-						   "Too many magic numbers: We have %" PRIuS " but only %" PRIuS "are allowed",
-						   magic_numbers_size, Widelands::Player::AiPersistentState::kMagicNumbersSize);
-					}
-					assert(player->ai_data.magic_numbers.size() ==
-					       Widelands::Player::AiPersistentState::kMagicNumbersSize);
-					for (size_t i = 0; i < magic_numbers_size; ++i) {
-						player->ai_data.magic_numbers.at(i) = fr.signed_16();
+					// Here we deal with old savegames that contains 150 magic numbers only
+					if (packet_version <= kOldMagicNumbers) {
+						// The savegame contains less then expected number of magic numbers
+						assert(magic_numbers_size <
+						       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+						assert(player->ai_data.magic_numbers.size() ==
+						       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+						for (size_t i = 0; i < magic_numbers_size; ++i) {
+							player->ai_data.magic_numbers.at(i) = fr.signed_16();
+						}
+						// Adding '50' to missing possitions
+						for (size_t i = magic_numbers_size;
+						     i < Widelands::Player::AiPersistentState::kMagicNumbersSize; ++i) {
+							player->ai_data.magic_numbers.at(i) = 50;
+						}
+					} else {
+						if (magic_numbers_size >
+						    Widelands::Player::AiPersistentState::kMagicNumbersSize) {
+							throw GameDataError("Too many magic numbers: We have %" PRIuS
+							                    " but only %" PRIuS "are allowed",
+							                    magic_numbers_size,
+							                    Widelands::Player::AiPersistentState::kMagicNumbersSize);
+						}
+						assert(player->ai_data.magic_numbers.size() ==
+						       Widelands::Player::AiPersistentState::kMagicNumbersSize);
+						for (size_t i = 0; i < magic_numbers_size; ++i) {
+							player->ai_data.magic_numbers.at(i) = fr.signed_16();
+						}
 					}
 
 					// Neurons
@@ -131,8 +152,16 @@ void GamePlayerAiPersistentPacket::read(FileSystem& fs, Game& game, MapObjectLoa
 
 					size_t remaining_basic_buildings_size = fr.unsigned_32();
 					for (uint16_t i = 0; i < remaining_basic_buildings_size; ++i) {
-						player->ai_data.remaining_basic_buildings.emplace(
-						   static_cast<Widelands::DescriptionIndex>(fr.unsigned_32()), fr.unsigned_32());
+						if (packet_version == kPacketVersion3) {  // Old genetics (buildings saved as idx)
+							player->ai_data.remaining_basic_buildings.emplace(
+							   static_cast<Widelands::DescriptionIndex>(fr.unsigned_32()),
+							   fr.unsigned_32());
+						} else {  // New genetics (buildings saved as strigs)
+							const std::string building_string = fr.string();
+							const Widelands::DescriptionIndex bld_idx =
+							   player->tribe().building_index(building_string);
+							player->ai_data.remaining_basic_buildings.emplace(bld_idx, fr.unsigned_32());
+						}
 					}
 					// Basic sanity check for remaining basic buildings
 					assert(player->ai_data.remaining_basic_buildings.size() <
@@ -203,11 +232,12 @@ void GamePlayerAiPersistentPacket::write(FileSystem& fs, Game& game, MapObjectSa
 		// Remaining buildings for basic economy
 		fw.unsigned_32(player->ai_data.remaining_basic_buildings.size());
 		for (auto bb : player->ai_data.remaining_basic_buildings) {
-			fw.unsigned_32(bb.first);
+			const std::string bld_name = game.tribes().get_building_descr(bb.first)->name().c_str();
+			fw.string(bld_name);
 			fw.unsigned_32(bb.second);
 		}
 	}
 
 	fw.write(fs, "binary/player_ai");
 }
-}
+}  // namespace Widelands

@@ -58,7 +58,7 @@ public:
 	                  Widelands::Building& building,
 	                  Widelands::InputQueue* queue,
 	                  bool = false);
-	~InputQueueDisplay();
+	~InputQueueDisplay() override;
 
 	void think() override;
 	void draw(RenderTarget&) override;
@@ -86,6 +86,8 @@ private:
 	void decrease_max_fill_clicked();
 	void increase_max_fill_clicked();
 	void radiogroup_changed(int32_t);
+	void radiogroup_clicked();
+	void update_siblings(int32_t);
 
 	void compute_max_fill_buttons_enabled_state();
 };

@@ -147,7 +147,8 @@ tribes:new_tribe {
          "empire_weaponsmith",
          "empire_armorsmith",
          "empire_scout"
-      }
+      },
+
    },
 
    immovables = {

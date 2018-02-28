@@ -35,7 +35,7 @@ struct Radiobutton : public Statebox {
 	friend struct Radiogroup;
 
 	Radiobutton(Panel* parent, Vector2i, const Image* pic, Radiogroup&, int32_t id);
-	~Radiobutton();
+	~Radiobutton() override;
 
 	Radiobutton* next_button() {
 		return nextbtn_;
@@ -63,6 +63,9 @@ struct Radiogroup {
 	boost::signals2::signal<void(int32_t)> changedto;
 	boost::signals2::signal<void()> clicked;  //  clicked without things changed
 
+	/**
+	 * Text conventions: Sentence case for the 'tooltip'
+	 */
 	int32_t add_button(Panel* parent,
 	                   Vector2i,
 	                   const Image* pic,
