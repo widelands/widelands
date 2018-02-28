@@ -33,7 +33,7 @@ struct FindBobAttribute : public FindBob {
 	bool accept(Bob*) const override;
 
 	uint32_t attrib;
-	virtual ~FindBobAttribute() {
+	~FindBobAttribute() override {
 	}  // make gcc shut up
 };
 

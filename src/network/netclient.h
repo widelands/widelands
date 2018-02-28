@@ -40,7 +40,7 @@ public:
 	 */
 	static std::unique_ptr<NetClient> connect(const NetAddress& host);
 
-	~NetClient();
+	~NetClient() override;
 
 	/**
 	 * Returns the ip and port of the remote host we are connected to.
@@ -53,7 +53,7 @@ public:
 	// Inherited from NetClientInterface
 	bool is_connected() const override;
 	void close() override;
-	bool try_receive(RecvPacket* packet) override;
+	std::unique_ptr<RecvPacket> try_receive() override;
 	void send(const SendPacket& packet) override;
 
 private:

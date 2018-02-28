@@ -147,7 +147,7 @@ public:
 	FieldActionWindow(InteractiveBase* ibase,
 	                  Widelands::Player* plr,
 	                  UI::UniqueWindow::Registry* registry);
-	~FieldActionWindow();
+	~FieldActionWindow() override;
 
 	InteractiveBase& ibase() {
 		return dynamic_cast<InteractiveBase&>(*get_parent());
@@ -213,9 +213,9 @@ static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_ta
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
                                                  "images/wui/fieldaction/menu_tab_buildbig.png",
                                                  "images/wui/fieldaction/menu_tab_buildport.png"};
-static const std::string tooltip_tab_build[] = {
-   _("Build small building"), _("Build medium building"), _("Build large building"),
-   _("Build port building")};
+static const std::string tooltip_tab_build[] = {_("Build small building"),
+                                                _("Build medium building"), _("Build big building"),
+                                                _("Build port building")};
 static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
 
 static const char* const pic_tab_buildmine = "images/wui/fieldaction/menu_tab_buildmine.png";
@@ -416,11 +416,13 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
 		//  Some building types cannot be built (i.e. construction site) and not
 		//  allowed buildings.
 		if (dynamic_cast<const Game*>(&ibase().egbase())) {
-			if (!building_descr->is_buildable() || !player_->is_building_type_allowed(building_index))
+			if (!building_descr->is_buildable() ||
+			    !player_->is_building_type_allowed(building_index)) {
 				continue;
-			if (building_descr->needs_seafaring() &&
-			    ibase().egbase().map().get_port_spaces().size() < 2)
+			}
+			if (building_descr->needs_seafaring() && !ibase().egbase().map().allows_seafaring()) {
 				continue;
+			}
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
 			continue;
 

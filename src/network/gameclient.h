@@ -24,7 +24,7 @@
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/player_end_result.h"
-#include "network/netclient.h"
+#include "network/netclient_interface.h"
 
 struct GameClientImpl;
 
@@ -39,9 +39,10 @@ struct GameClientImpl;
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
 	GameClient(const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
-	           bool internet = false);
+	           bool internet = false,
+	           const std::string& gamename = "");
 
-	virtual ~GameClient();
+	~GameClient() override;
 
 	void run();
 

@@ -19,6 +19,8 @@
 
 #include "wui/game_main_menu_save_game.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
@@ -132,8 +134,8 @@ void GameMainMenuSaveGame::entry_selected() {
 	ok_.set_enabled(load_or_save_.table().selections().size() == 1);
 	load_or_save_.delete_button()->set_enabled(load_or_save_.has_selection());
 	if (load_or_save_.has_selection()) {
-		const SavegameData& gamedata = *load_or_save_.entry_selected();
-		filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata.filename.c_str()));
+		std::unique_ptr<SavegameData> gamedata = load_or_save_.entry_selected();
+		filename_editbox_.set_text(FileSystem::filename_without_ext(gamedata->filename.c_str()));
 	}
 }
 

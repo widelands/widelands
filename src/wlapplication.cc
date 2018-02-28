@@ -75,6 +75,7 @@
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
+#include "random/random.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -743,6 +744,7 @@ bool WLApplication::init_settings() {
 	s.get_bool("write_syncstreams");
 	s.get_bool("sound_at_message");
 	s.get_bool("transparent_chat");
+	s.get_string("uuid");
 	s.get_string("registered");
 	s.get_string("nickname");
 	s.get_string("password");
@@ -754,6 +756,24 @@ bool WLApplication::init_settings() {
 	s.get_string("metaserver");
 	s.get_natural("metaserverport");
 	// KLUDGE!
+
+	long int last_start = s.get_int("last_start", 0);
+	if (last_start + 12 * 60 * 60 < time(nullptr)) {
+		// First start of the game or not started for 12 hours. Create a (new) UUID.
+		// For the use of the UUID, see network/internet_gaming_protocol.h
+		s.set_string("uuid", generate_random_uuid());
+	}
+	s.set_int("last_start", time(nullptr));
+
+	// Save configuration now. Otherwise, the UUID is not saved
+	// when the game crashes, loosing part of its advantage
+	try {
+		g_options.write("config", false);
+	} catch (const std::exception& e) {
+		log("WARNING: could not save configuration: %s\n", e.what());
+	} catch (...) {
+		log("WARNING: could not save configuration");
+	}
 
 	return true;
 }
@@ -1184,7 +1204,7 @@ void WLApplication::mainmenu_multiplayer() {
 				NetAddress addr;
 				if (!ns.get_host_address(&addr)) {
 					UI::WLMessageBox mmb(
-					   &ns, _("Invalid address"),
+					   &ns, _("Invalid Address"),
 					   _("The entered hostname or address is invalid and can’t be connected to."),
 					   UI::WLMessageBox::MBoxType::kOk);
 					mmb.run<UI::Panel::Returncodes>();
@@ -1274,7 +1294,7 @@ bool WLApplication::load_game() {
 
 	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
-	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
+	FullscreenMenuLoadGame ssg(game, &sp);
 
 	if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk)
 		filename = ssg.filename();
@@ -1342,7 +1362,7 @@ void WLApplication::replay() {
 	Widelands::Game game;
 	if (filename_.empty()) {
 		SinglePlayerGameSettingsProvider sp;
-		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
+		FullscreenMenuLoadGame rm(game, &sp, true);
 		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack)
 			return;
 

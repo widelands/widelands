@@ -57,6 +57,7 @@ private:
 	void server_doubleclicked();
 
 	void change_servername();
+	bool wait_for_ip();
 	void clicked_joingame();
 	void clicked_hostgame();
 
