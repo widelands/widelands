@@ -71,6 +71,7 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
+#include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
@@ -747,7 +748,10 @@ bool WLApplication::init_settings() {
 	s.get_string("uuid");
 	s.get_string("registered");
 	s.get_string("nickname");
+	// TODO(Notabilis): Remove next line after build 20.
+	// Currently left in to avoid removing stored passwords for users of both build 19 and trunk
 	s.get_string("password");
+	s.get_string("password_sha1");
 	s.get_string("emailadd");
 	s.get_string("auto_log");
 	s.get_string("lasthost");
@@ -764,6 +768,13 @@ bool WLApplication::init_settings() {
 		s.set_string("uuid", generate_random_uuid());
 	}
 	s.set_int("last_start", time(nullptr));
+
+	// Replace the stored plaintext password with its SHA-1 hashed version
+	// Used to upgrade the stored password when upgrading widelands
+	if (s.get_string("password") != nullptr
+		&& (s.get_string("password_sha1") == nullptr || strlen(s.get_string("password_sha1")) == 0)) {
+		s.set_string("password_sha1", crypto::sha1(s.get_string("password")));
+	}
 
 	// Save configuration now. Otherwise, the UUID is not saved
 	// when the game crashes, loosing part of its advantage
@@ -1175,8 +1186,9 @@ void WLApplication::mainmenu_multiplayer() {
 			Section& s = g_options.pull_section("global");
 			s.set_string("nickname", playername);
 			// Only change the password if we use a registered account
-			if (registered)
-				s.set_string("password", password);
+			if (registered) {
+				s.set_string("password_sha1", password);
+			}
 
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
