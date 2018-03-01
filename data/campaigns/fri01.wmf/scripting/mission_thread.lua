@@ -27,7 +27,8 @@ function check_warning_early_attack()
          if field.owner == p2 and x < westernmost_enemy then westernmost_enemy = x end
          -- If they are so close that they'd be inside a new tower's vision range
          if westernmost_enemy - easternmost_own < 21 then
-            campaign_message_box(warning_early_attack)
+            campaign_message_box(warning_early_attack_1)
+            campaign_message_box(warning_early_attack_2)
             return
          end
       end
@@ -45,7 +46,7 @@ function warning_reed()
       if count("thatch_reed") < 4 then
          if ready > 8 then
             if #p1:get_buildings("frisians_reed_farm") < 3 then
-               campaign_message_box(warning_reed)
+               campaign_message_box(warning_no_reed)
             end
             return
          else
@@ -65,7 +66,7 @@ function warning_bricks()
       if count("brick") < 4 then
          if ready > 5 then
             if #p1:get_buildings("frisians_brick_burners_house") < 3 then
-               campaign_message_box(warning_bricks)
+               campaign_message_box(warning_no_bricks)
             end
             return
          else
@@ -85,7 +86,7 @@ function warning_clay()
       if count("clay") < 4 then
          if ready > 11 then
             if #p1:get_buildings("frisians_clay_pit") < 4 then
-               campaign_message_box(warning_clay)
+               campaign_message_box(warning_no_clay)
             end
             return
          else
@@ -123,11 +124,11 @@ function stormflood()
       -- are destroyed by the storm
       for idx,field in ipairs(next_field:region(1)) do
          if field.immovable then
-            local fs = nil -- NOCOM what does fs mean?
-            if is_building(field.immovable) then fs = field.immovable.fields end
+            local immovable_fields = nil
+            if is_building(field.immovable) then immovable_fields = field.immovable.fields end
             field.immovable:remove()
-            if fs ~= nil then
-               for idy,f in ipairs(fs) do map:place_immovable("ashes", f, "tribes") end
+            if immovable_fields ~= nil then
+               for idy,f in ipairs(immovable_fields) do map:place_immovable("ashes", f, "tribes") end
             end
          end
          for idb,bob in ipairs(field.bobs) do bob:remove() end

@@ -1,7 +1,7 @@
-tribes = wl.Tribes ()
+tribes = wl.Tribes()
 include "scripting/mapobjects.lua"
 
-print_loading_message ("Loading campaign-specific tribe units", function ()
+print_loading_message("Loading campaign-specific tribe units", function()
    include "map:scripting/tribes/warehouse_empire.lua"
 end)
 

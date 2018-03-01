@@ -12,13 +12,13 @@ p1:forbid_buildings {
    "frisians_training_arena",
    "frisians_sewing_room",
    "frisians_tailors_shop",
-   -- the map is non-seafaring, but just in case:
+   -- The map is non-seafaring, but just in case:
    "frisians_shipyard",
    "frisians_weaving_mill",
    "frisians_port",
 }
 
-port1 = p1:place_building("frisians_port", p1start, false, true)
+port1 = p1:place_building("frisians_port", p1_start, false, true)
 port1:set_wares {
    log = 40,
    brick = 50,
@@ -102,7 +102,7 @@ p2:allow_buildings {
    "empire_stonemasons_house",
    "empire_sawmill"
 }
-hq2 = p2:place_building("empire_headquarters", map.player_slots [2].starting_field, false, true)
+hq2 = p2:place_building("empire_headquarters", map.player_slots[2].starting_field, false, true)
 hq2:set_wares {
    log = 80,
    granite = 40,
@@ -127,7 +127,7 @@ hq2:set_wares {
    empire_bread = 20
 }
 hq2:set_workers {
-   empire_builder = 3, --to slow him down a bit
+   empire_builder = 3, -- To slow him down a bit
    empire_lumberjack = 8,
    empire_forester = 18,
    empire_stonemason = 7,
@@ -199,12 +199,12 @@ p3:allow_buildings {
    "barbarians_fishers_hut",
    "barbarians_gamekeepers_hut"
 }
-hq3 = p3:place_building("barbarians_headquarters", map.player_slots [3].starting_field, false, true)
+hq3 = p3:place_building("barbarians_headquarters", map.player_slots[3].starting_field, false, true)
 hq3:set_wares {
    log = 100,
    granite = 50,
    thatch_reed = 50,
-   blackwood = 10, --to delay expansion
+   blackwood = 10, -- To delay expansion
    grout = 20,
    coal = 20,
    water = 50,
@@ -216,7 +216,7 @@ hq3:set_wares {
    barbarians_bread = 20,
    beer = 10,
    beer_strong = 20,
-   ration = 200, --headstart at stealing ores
+   ration = 200, -- Headstart at stealing ores
    snack = 50,
    meal = 50,
    fish = 20,

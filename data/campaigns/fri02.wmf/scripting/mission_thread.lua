@@ -12,9 +12,9 @@ local mountains = {}
 for x=0,map.width - 1 do
    local fld = {}
    for y=0,map.height - 1 do
-      local f = map:get_field(x,y)
+      local f = map:get_field(x, y)
       fld[#fld + 1] = f
-      if not (f.terd:find("mountain") == nil) then mountains[#mountains + 1] = f end
+      if f.terd:find("mountain") ~= nil then mountains[#mountains + 1] = f end
    end
    fields[#fields + 1] = fld
 end
@@ -48,9 +48,9 @@ function check_empire()
          for idy,f in ipairs(fld) do
             local p1c = false
             local p2c = false
-            for idx,cl in ipairs(f.claimers) do
-               if cl == p1 then p1c = true end
-               if cl == p2 then p2c = true end
+            for idx,claimer in ipairs(f.claimers) do
+               if claimer == p1 then p1c = true end
+               if claimer == p2 then p2c = true end
             end
             if p1c and p2c then
                see_empire = f
@@ -80,7 +80,7 @@ function expand_south()
          if not placed then
             local suited = f:has_caps("medium") and f.brn:has_caps("flag")
             for idy,n in ipairs({f, f.brn, f.rn, f.ln, f.tln, f.trn, f.bln, f.brn.brn, f.brn.bln, f.brn.rn}) do
-               if not (n.owner == p1) then suited = false end
+               if n.owner ~= p1 then suited = false end
             end
             if suited then
                p1:place_building("frisians_warehouse_empire", f, false, true)
@@ -117,7 +117,8 @@ function expand_south()
       sleep(2791)
       if #(p1:get_buildings("frisians_warehouse_empire")) < 1 then
          choice = "destroy"
-      elseif count_military_buildings_p1() > milbld then --it IS possible to destroy a military building and build a new one elsewhere
+      elseif count_military_buildings_p1() > milbld then
+         -- It *is* permitted to destroy/dismantle a military building and build a new one elsewhere
          choice = "military"
       else
          if (wh:get_wares("log") >= 30 and
@@ -131,7 +132,7 @@ function expand_south()
             wh:get_wares("gold") >= 10 and
             wh:get_wares("iron_ore") >= 40 and
             wh:get_wares("gold_ore") >= 20 and
-            wh:get_wares("beer") >= 30 )
+            wh:get_wares("beer") >= 30)
          then
             choice = "yes"
          end
@@ -251,21 +252,22 @@ end
 
 function mission_thread()
 
-   p3:conquer(p1start, 8)
-   place_building_in_region(p3, "barbarians_farm", p1start:region(2))
-   place_building_in_region(p3, "barbarians_quarry", p1start:region(7))
-   place_building_in_region(p3, "barbarians_lumberjacks_hut", p1start:region(7))
-   place_building_in_region(p3, "barbarians_wood_hardener", p1start:region(7))
-   place_building_in_region(p3, "barbarians_bakery", p1start:region(7))
-   place_building_in_region(p3, "barbarians_metal_workshop", p1start:region(7))
-   place_building_in_region(p3, "barbarians_well", p1start:region(7))
-   place_building_in_region(p3, "barbarians_rangers_hut", p1start:region(7))
-   scroll_to_field(p1start)
    campaign_message_box(intro_1)
+   p3:conquer(p1_start, 8)
+   place_building_in_region(p3, "barbarians_farm", p1_start:region(2))
+   place_building_in_region(p3, "barbarians_quarry", p1_start:region(7))
+   place_building_in_region(p3, "barbarians_lumberjacks_hut", p1_start:region(7))
+   place_building_in_region(p3, "barbarians_wood_hardener", p1_start:region(7))
+   place_building_in_region(p3, "barbarians_metal_workshop", p1_start:region(7))
+   place_building_in_region(p3, "barbarians_well", p1_start:region(7))
+   place_building_in_region(p3, "barbarians_rangers_hut", p1_start:region(7))
+   p1:reveal_fields(p1_start:region(9))
+   scroll_to_field(p1_start)
    campaign_message_box(intro_2)
    include "map:scripting/starting_conditions.lua"
    sleep(5000)
-
+   p1:hide_fields(p1_start:region(9))
+  
    p1.team = 1
    p2.team = 1
    p3.team = 2

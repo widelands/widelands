@@ -4,7 +4,7 @@ tribes:new_warehouse_type {
    msgctxt = "frisians_building",
    name = "frisians_warehouse_empire",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext ("frisians_building", "Empire Warehouse"),
+   descname = pgettext("frisians_building", "Empire Warehouse"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",

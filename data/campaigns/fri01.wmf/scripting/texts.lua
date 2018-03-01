@@ -164,13 +164,13 @@ intro_5 = {
       _([[You did well. Our entire building material production is working now. Let’s wait until we have gathered some more materials. We could expand our territory some more, to see what else can be found on this island.]])),
 }
 
-warning_reed = {
+warning_no_reed = {
    title =_ "Reed Shortages",
    body=hauke (_"Build another reed farm",
       -- TRANSLATORS: Hauke – no reed
       _([[I noticed we have been short of reed for a while now. Our buildings seem to need quite a lot of it. We should build another reed farm or two. Reed is also used for making fishing nets and other tools; therefore, resolving this shortage should be a priority.]])),
 }
-warning_clay = {
+warning_no_clay = {
    title =_ "Clay Shortages",
    body=hauke (_"Build another clay pit",
       -- TRANSLATORS: Hauke – no clay
@@ -179,11 +179,11 @@ warning_clay = {
       -- TRANSLATORS: Hauke – no clay
       _([[Clay is also used in shipbuilding and to improve charcoal kilns. If we ever need to build a ship, or the mines cannot provide us with enough coal, we will need more clay, so the shortage must be resolved.]])),
 }
-warning_bricks = {
+warning_no_bricks = {
    title =_ "Brick Shortages",
    body=hauke (_"Build another brick burner",
       -- TRANSLATORS: Hauke – no bricks
-      -- NOCOM "constructionsite window" is immersion breaking - add an objective?
+      --_([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to build another brick burner’s house, and assign its construction site the highest priority for building materials so as to resolve the shortage as soon as possible.]])),
       _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick burner’s house, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]])),
 }
 warehouse_on_expand = {
@@ -344,18 +344,20 @@ training_6 = {
       _([[Of course I also prefer to keep our soldiers alive, but we can’t save every life. Soldiers die in battle, that’s just the way things are. You may decide how long to wait until attacking, but don’t take too long, or the enemies will exploit our weakness.]]))
       .. new_objectives (obj_defeat_enemy),
 }
-warning_early_attack = {
+warning_early_attack_1 = {
+   title =_ "Beware!",
+   body=hauke (_"Not strong enough",
+      -- TRANSLATORS: Hauke – beware of early attacks 1
+      _([[Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I fear we are not strong enough yet to defend ourselves if he attacks first. You must devise something to hold him off.]])),
+}
+warning_early_attack_2 = {
    title =_ "Beware!",
    body=reebaud (_"Not strong enough",
-      -- TRANSLATORS: Hauke – beware of early attacks
-      _([[Chieftain Reebaud! Our scouts report that the enemy is advancing fast. I fear we are not strong enough yet to defend ourselves if he attacks first. We must somehow hold him off.]])
+      -- TRANSLATORS: Reebaud – beware of early attacks 2
+      _([[The scouts informed me that the enemy can’t build towers. We could build a fortress, which is the building with the highest conquer radius, to push the border as far east as possible. The enemies can only see it if they build a fortress right at the border.]])
        .. paragraphdivider () ..
-      -- TRANSLATORS: Hauke – beware of early attacks
-      -- NOCOM "conquer radius" is immersion breaking - add an objective?
-      _([[But we have been informed that he can’t build towers. I suggest to build a fortress, which is the building with the highest conquer radius, to push the border as far east as possible. The enemies can only see it if they build a fortress right at the border.]])
-       .. paragraphdivider () ..
-      -- TRANSLATORS: Hauke – beware of early attacks
-      _([[We can prevent this, or at least make it harder to do, by ordering some foresters to plant trees at the border. The enemy will have to cut down many of them to make room for building a fortress, so we may be safe until we open the battle at a time of our choosing.]])),
+      -- TRANSLATORS: Reebaud – beware of early attacks 2
+      _([[We can prevent this, or at least make it harder to do, by ordering some foresters to plant trees at the border. The enemy will have to cut down many of them to make room for it, so we may be safe until we open the battle at a time of our choosing.]])),
 }
 rising_water_1 = {
    title =_ "Enemy Defeated",

@@ -40,10 +40,9 @@ obj_expand_south = {
 }
 obj_train_recycle = {
    name = "train_recycle",
-   title=_"Train soldiers and recycle their weapons",
+   title=_"Train and Recycle",
    number = 1,
-   -- NOCOM these titles are all very long. In texts like the one below, split the explanation from the objectives. Then you can shorten the title, which will also need Title Case.
-   body = objective_text (_"Train your soldiers and recycle the discarded weapons to regain some metal",
+   body = objective_text (_"Recycle weapons to regain metal",
       li (_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a recycling center. Use the weapons in the store to train soldiers and recycle some scrap metal.]])
    ),
 }
@@ -98,7 +97,7 @@ obj_defeat_both = {
 -- ==================
 
 intro_1 = {
-   title =_ "Welcome back!",
+   title =_ "Welcome Back!",
    body=reebaud (_"A new home",
       -- TRANSLATORS: Reebaud – Introduction 1
       _([[I began to believe the journey would never end. I have no idea how long we were on sea, tossed about by envious storms… it must have been months.]])
@@ -107,16 +106,16 @@ intro_1 = {
       _([[But we are here. Finally, we arrived at the mouth of a calmer fjord. We sailed upriver, and arrived here.]])),
 }
 intro_2 = {
-   title =_ "Welcome back!",
+   title =_ "Welcome Back!",
    body=reebaud (_"A new home",
       -- TRANSLATORS: Reebaud – Introduction 2
       _([[There was a small group of foreigners living here. They welcomed us by brandishing their axes at us, and shouted in an incoherent language.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Reebaud – Introduction 2
-      _([[Our ship was in no state to continue sailing, so we killed all the locals and took their land. I just hope there aren’t more of them, so we can live in peace.]])),
+      _([[Our ship was in no state to continue sailing, so we killed the locals and took their land. I just hope there aren’t more of them, so we can live in peace.]])),
 }
 intro_3 = {
-   title =_ "Welcome back!",
+   title =_ "Welcome Back!",
    body=reebaud (_"A new home",
       -- TRANSLATORS: Reebaud – Introduction 3
       _([[This place looks bleak and barren, my companions say, but I think it looks… beautiful.]])
@@ -176,7 +175,7 @@ train_recycle_4 = {
 }
 
 aqua_farm_1 = {
-   title =_ "Metal production",
+   title =_ "Metal Production",
    body=reebaud (_"The mines are working",
       -- TRANSLATORS: Reebaud – Aqua Farms 1
       _([[Our mines have started working. Now, we only need to build a furnace and the metal production will be running smoothly.]])
@@ -214,19 +213,19 @@ aqua_farm_4 = {
 }
 
 supply_murilius_1 = {
-   title =_ "We are not alone",
+   title =_ "We Are Not Alone",
    body=murilius ("Salvete peregrini!",
       -- DO NOT TRANSLATE: Reebaud doesn’t understand Latin
       ([[Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego sum. Vos nominate!]])),
 }
 supply_murilius_2 = {
-   title =_ "We are not alone",
+   title =_ "We Are Not Alone",
    body=reebaud (_"Strangers",
       -- TRANSLATORS: Reebaud – Supply Murilius 2
       _([[…does anyone understand what he is saying?]])),
 }
 supply_murilius_3 = {
-   title =_ "We are not alone",
+   title =_ "We Are Not Alone",
    body=murilius ("Salvete peregrini!",
       -- TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to Murilius, so he sounds very formal.
       _([[Do they not even speak the noble language of the Empire?]])
@@ -235,13 +234,13 @@ supply_murilius_3 = {
       _([[Strangers! I, Murilius, Proconsule of the Northern Lands, a province of the Empire, demand to know who you are and what your business in these lands is!]])),
 }
 supply_murilius_4 = {
-   title =_ "We are not alone",
+   title =_ "We Are Not Alone",
    body=reebaud (_"Strangers",
       -- TRANSLATORS: Reebaud – Supply Murilius 4
       _([[Greetings, Empire Representative! I am Reebaud, the chieftain of this tribe. All we want is to settle down here, build our home and live our lifes in peace. We do not seek trouble, but we aren’t afraid to fight, either.]])),
 }
 supply_murilius_5 = {
-   title =_ "We are not alone",
+   title =_ "We Are Not Alone",
    body=murilius ("Salvete peregrini!",
       -- TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the latin Vokativ (5th casus) of Reebaud.
       _([[In this case, Reebaude, I must inform you of the presence of an unwelcomely hostile tribe of barbarians in the vicinity of this very outpost of the Empire.]])
@@ -250,7 +249,7 @@ supply_murilius_5 = {
       _([[If you seek to live peacefully here, you are not faced with a choice whether to allow them to live here – you are required to assist the Empire in driving them out.]])),
 }
 supply_murilius_6 = {
-   title =_ "We are not alone",
+   title =_ "We Are Not Alone",
    body=murilius ("Salvete peregrini!",
       -- TRANSLATORS: Murilius – Supply Murilius 6
       _([[Also, as a sign of your good intentions, we demand a gift of friendship to the Empire. As you probably can see, I have presented you with a new warehouse. Fill it with the required gifts to hand them over. I permit you to give us these wares:]])
@@ -259,13 +258,13 @@ supply_murilius_6 = {
       _([[30 logs, 40 slabs of granite, 30 fish, 30 mugs of beer, 150 buckets of water, 40 rations, 10 meals, 30 pieces of coal, 40 pieces of iron ore, 20 iron ingots, 20 pieces of gold ore, and 10 gold bars.]])),
 }
 supply_murilius_7 = {
-   title =_ "We are not alone",
+   title =_ "We Are Not Alone",
    body=hauke (_"Strangers",
       -- TRANSLATORS: Hauke – Supply Murilius 7
       _([[Chieftain Reebaud – the demands of this arrogant Empire Proconsule are just outrageous. He treats us like we are his servants. And we certainly cannot afford to spare that many wares to aid him. I propose to destroy that ugly warehouse and let him fight his own battles.]])),
 }
 supply_murilius_8 = {
-   title =_ "We are not alone",
+   title =_ "We Are Not Alone",
    body=murilius ("Salvete peregrini!",
       -- TRANSLATORS: Murilius – Supply Murilius 8
       _([[If you fail to deliver these wares, the Empire shall treat you like enemies. And so as to prevent you wasting your precious metal, I forbid you to expand your territory from this moment on until you have given us your gift. Fail to obey, and the Empire shall treat you like enemies.]])
@@ -275,7 +274,7 @@ supply_murilius_8 = {
       .. new_objectives (obj_supply_murilius),
 }
 supply_murilius_9 = {
-   title =_ "We are not alone",
+   title =_ "We Are Not Alone",
    body=reebaud (_"Strangers",
       -- TRANSLATORS: Reebaud – Supply Murilius 9
       _([[This is the greatest outrage of all. How dare he order us to stop expanding our territory when all we want is to build a new home, and threaten us with war if we refuse to be his slaves?!]])
@@ -285,7 +284,7 @@ supply_murilius_9 = {
 }
 
 supply_murilius_destroy = {
-   title =_ "The Empire is angry",
+   title =_ "The Empire is Angry",
    body=murilius ("Hostes Imperii estis!",
       -- TRANSLATORS: Murilius – enemy of the Empire
       _([[Barbarians! You have refused my offer of friendship most ingraciously by ]]) ..
@@ -296,7 +295,7 @@ supply_murilius_destroy = {
       _([[You are enemies of the Empire, and I shall treat you as such!]])),
 }
 supply_murilius_military = {
-   title =_ "The Empire is angry",
+   title =_ "The Empire is Angry",
    body=murilius ("Hostes Imperii estis!",
       -- TRANSLATORS: Murilius – enemy of the Empire
       _([[Barbarians! You have refused my offer of friendship most ingraciously by ]]) ..
@@ -307,7 +306,7 @@ supply_murilius_military = {
       _([[You are enemies of the Empire, and I shall treat you as such!]])),
 }
 defeat_both = {
-   title =_ "Two enemies",
+   title =_ "Two Enemies",
    body=reebaud (_"Defeat the Enemies!",
       -- TRANSLATORS: Reebaud – defeat both enemies
       _([[He has made it quite clear that he won’t leave us alone. I fear we must defeat Murilius and destroy his colony if we ever want to have peace here.]])
@@ -317,7 +316,7 @@ defeat_both = {
       .. new_objectives (obj_defeat_both),
 }
 supply_murilius_thanks = {
-   title =_ "We are not alone",
+   title =_ "The Empire is Grateful",
    body=murilius ("Salve amicus Imperii!",
       -- TRANSLATORS: Murilius – Supplied Murilius
       _([[Strangers! I see you have kept your word. The Empire rewards its friends, therefore I shall reward you with the friendship of the Empire!]])
@@ -327,7 +326,7 @@ supply_murilius_thanks = {
       .. new_objectives (obj_defeat_barbarians),
 }
 defeat_murilius_1 = {
-   title =_ "The reward for your service",
+   title =_ "The Reward For Your Service",
    body=murilius (_"Amicus Imperii",
       -- TRANSLATORS: Murilius – defeat Murilius 1
       _([[You have done well, strangers! As I did tell you earlier, you will be rewarded with the friendship of the Empire!]])
@@ -336,7 +335,7 @@ defeat_murilius_1 = {
       _([[I propose you start by sending legates to the Capital, so as to discover the most recent political activities. Once there, you can receive instructions for your tribe from the Senate. Also, you will need to find out what tribute the Capital will demand from you, and of course, who shall be king of your tribe.]])),
 }
 defeat_murilius_2 = {
-   title =_ "Another enemy",
+   title =_ "Another Enemy",
    body=reebaud (_"Defeat the Empire!",
       -- TRANSLATORS: Reebaud – defeat Murilius 2
       _([[Did I understand him correctly? After all we have done for him, after so many of my soldiers have laid down their lifes for his sake, he wants us to be servants of this Empire, and take away my leadership? And does the hypocrite dare call this a reward?]])
