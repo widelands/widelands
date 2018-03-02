@@ -189,7 +189,7 @@ void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 		}
 		if (written < packet.get_size()) {
 			throw wexception(
-			   "[NetHost] Unable to send complete packet to relay (only %lu bytes of %lu)", written,
+			   "[NetHost] Unable to send complete packet to relay (only %" PRIuS " bytes of %" PRIuS ")", written,
 			   packet.get_size());
 		}
 	}

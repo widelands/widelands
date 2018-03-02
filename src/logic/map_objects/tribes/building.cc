@@ -684,7 +684,7 @@ void Building::log_general_info(const EditorGameBase& egbase) {
 
 	molog("leave_time: %i\n", leave_time_);
 
-	molog("leave_queue.size(): %lu\n", static_cast<long unsigned int>(leave_queue_.size()));
+	molog("leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF;
 	molog("leave_allow.get(): %p\n", leave_allow_.get(egbase));
 	FORMAT_WARNINGS_ON;

@@ -99,7 +99,7 @@ void NetClient::send(const SendPacket& packet) {
 	}
 	if (written < packet.get_size()) {
 		throw wexception(
-		   "[NetClient] Unable to send complete packet to relay (only %lu bytes of %lu)", written,
+		   "[NetClient] Unable to send complete packet to relay (only %" PRIuS " bytes of %" PRIuS ")", written,
 		   packet.get_size());
 	}
 }

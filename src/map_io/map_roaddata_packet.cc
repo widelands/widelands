@@ -106,7 +106,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
 							throw GameDataError(
-							   "step #%lu: %s", static_cast<long unsigned int>(nr_steps - i), e.what());
+							   "step #%" PRIuS ": %s", nr_steps - i, e.what());
 						}
 					road.set_path(egbase, p);
 

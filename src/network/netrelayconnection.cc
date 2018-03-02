@@ -252,7 +252,7 @@ void NetRelayConnection::send(const std::string& str) {
 	}
 	if (written < str.length() + 1) {
 		throw wexception(
-		   "[NetRelayConnection] Unable to send complete string to relay (only %lu bytes of %lu)",
+		   "[NetRelayConnection] Unable to send complete string to relay (only %" PRIuS " bytes of %" PRIuS ")",
 		   written, str.length() + 1);
 	}
 	if (ec) {
@@ -280,7 +280,7 @@ void NetRelayConnection::send(const SendPacket& packet) {
 	}
 	if (written < packet.get_size()) {
 		throw wexception(
-		   "[NetRelayConnection] Unable to send complete packet to relay (only %lu bytes of %lu)",
+		   "[NetRelayConnection] Unable to send complete packet to relay (only %" PRIuS " bytes of %" PRIuS ")",
 		   written, packet.get_size());
 	}
 }

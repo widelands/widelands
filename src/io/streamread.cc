@@ -50,8 +50,8 @@ void StreamRead::data_complete(void* const read_data, const size_t size) {
 	size_t read = data(read_data, size);
 
 	if (read != size)
-		throw data_error("Stream ended unexpectedly (%lu bytes read, %lu expected)",
-		                 static_cast<long unsigned int>(read), static_cast<long unsigned int>(size));
+		throw data_error("Stream ended unexpectedly (%" PRIuS " bytes read, %" PRIuS " expected)",
+		                 read, size);
 }
 
 int8_t StreamRead::signed_8() {
