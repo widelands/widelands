@@ -203,6 +203,13 @@ Production Sites
     the AI can tolerate such buildings, they will be primarily treated as normal
     production sites when deciding on the building's location.
 
+**requires_supporters**
+    This building will be built only if a supporter is nearby::
+
+        requires_supporters = true,
+
+    For example if set for lumberjack, it will be built only if a renger is nearby.
+
 **trainingsites_max_percent**
     The maximum percengate this training site will have among all training sites, e.g.::
 
@@ -237,6 +244,8 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      very_weak_ai_limit_(
         table->has_key("very_weak_ai_limit") ? table->get_int("very_weak_ai_limit") : -1),
      weak_ai_limit_(table->has_key("weak_ai_limit") ? table->get_int("weak_ai_limit") : -1),
+     normal_ai_limit_(table->has_key("normal_ai_limit") ? table->get_int("normal_ai_limit") : -1),
+     requires_supporters_(table->has_key("requires_supporters") ? table->get_bool("requires_supporters") : false),
      trainingsites_max_percent_(table->has_key("trainingsites_max_percent") ?
                                    table->get_int("trainingsites_max_percent") :
                                    0) {

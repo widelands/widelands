@@ -647,6 +647,10 @@ void DefaultAI::late_initialization() {
 		bo.expansion_type = bh.is_expansion_type();
 		bo.fighting_type = bh.is_fighting_type();
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
+		bo.requires_supporters = bh.requires_supporters();
+		if (bo.requires_supporters) {
+			log(" %d: %s strictly requires supporters\n", bo.name);
+		}
 		bo.prohibited_till = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after = bh.get_forced_after() * 1000;        // value in conf is in seconds
 		if (bld.get_isport()) {
@@ -672,6 +676,11 @@ void DefaultAI::late_initialization() {
 		if (type_ == Widelands::AiType::kWeak && bh.get_weak_ai_limit() >= 0) {
 			bo.cnt_limit_by_aimode = bh.get_weak_ai_limit();
 			log(" %d: AI 'weak' mode: applying limit %d building(s) for %s\n", player_number(),
+			    bo.cnt_limit_by_aimode, bo.name);
+		}
+		if (type_ == Widelands::AiType::kNormal && bh.get_normal_ai_limit() >= 0) {
+			bo.cnt_limit_by_aimode = bh.get_normal_ai_limit();
+			log(" %d: AI 'normal' mode: applying limit %d building(s) for %s\n", player_number(),
 			    bo.cnt_limit_by_aimode, bo.name);
 		}
 
@@ -2574,6 +2583,17 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			if (bo.type == BuildingObserver::Type::kProductionsite) {
 
 				prio += management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 5;
+
+				// Some productionsites strictly require supporting sites nearby
+				if (bo.requires_supporters) {
+					uint16_t supporters_nearby = 0;
+					for (auto output : bo.outputs) {
+						supporters_nearby += bf->supporters_nearby.at(output);
+					}
+					if (supporters_nearby == 0) {
+						continue;
+					}
+				}
 
 				// this can be only a well (as by now)
 				if (bo.is(BuildingAttribute::kWell)) {

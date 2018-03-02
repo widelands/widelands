@@ -450,6 +450,7 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	std::set<DescriptionIndex> production_hints;
+	bool requires_supporters;
 
 	// information needed for decision on new building construction
 	int16_t max_preciousness;

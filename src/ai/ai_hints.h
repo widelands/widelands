@@ -81,6 +81,10 @@ struct BuildingHints {
 		return mountain_conqueror_;
 	}
 
+	bool requires_supporters() const {
+		return requires_supporters_;
+	}
+
 	bool is_shipyard() const {
 		return shipyard_;
 	}
@@ -109,6 +113,10 @@ struct BuildingHints {
 		return weak_ai_limit_;
 	}
 
+	int16_t get_normal_ai_limit() const {
+		return normal_ai_limit_;
+	}
+
 	void set_trainingsites_max_percent(int percent);
 
 	uint8_t trainingsites_max_percent() const;
@@ -124,6 +132,7 @@ private:
 	bool expansion_;
 	bool fighting_;
 	bool mountain_conqueror_;
+	bool requires_supporters_;
 	bool shipyard_;
 	int32_t prohibited_till_;
 	uint32_t basic_amount_;
@@ -131,6 +140,7 @@ private:
 	int8_t mines_percent_;
 	int16_t very_weak_ai_limit_;
 	int16_t weak_ai_limit_;
+	int16_t normal_ai_limit_;
 	int trainingsites_max_percent_;
 	std::set<std::string> supported_production_;
 
