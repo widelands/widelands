@@ -340,9 +340,8 @@ static const std::string IGPCMD_CLIENTS = "CLIENTS";
 
 /**
  * Sent by the client to announce the startup of a game with following payload:
- * \li string:    name
- * \li string:    number of maximal clients
- * \note build_id is not necessary, as this is in every way the build_id of the hosting client.
+ * \li string:    name of the game
+ * \note build_id is not necessary, as this is the build_id of the hosting client anyway.
  *
  * Sent by the metaserver to acknowledge the startup of a new game with the following payload:
  * \li string:    a challenge that has to be "solved" to work as host of the new game.
