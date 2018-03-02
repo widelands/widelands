@@ -107,7 +107,7 @@ return {
          }
       })
 
-      place_building_in_region(player, "frisians_brick_burners_house", sf:region(11), {
+      place_building_in_region(player, "frisians_brick_kiln", sf:region(11), {
          inputs = {
             clay = 8,
             granite = 8,

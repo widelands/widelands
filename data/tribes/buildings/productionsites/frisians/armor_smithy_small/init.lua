@@ -11,9 +11,9 @@ tribes:new_productionsite_type {
    enhancement = "frisians_armor_smithy_large",
 
    buildcost = {
-      brick = 3,
+      brick = 4,
       granite = 1,
-      log = 1,
+      log = 2,
       thatch_reed = 3
    },
    return_on_dismantle = {

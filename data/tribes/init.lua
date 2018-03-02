@@ -543,7 +543,7 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/productionsites/frisians/tailors_shop/init.lua"
       include "tribes/buildings/productionsites/frisians/sewing_room/init.lua"
       include "tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua"
-      include "tribes/buildings/productionsites/frisians/brick_burners_house/init.lua"
+      include "tribes/buildings/productionsites/frisians/brick_kiln/init.lua"
       include "tribes/buildings/productionsites/frisians/barracks/init.lua"
    end)
 

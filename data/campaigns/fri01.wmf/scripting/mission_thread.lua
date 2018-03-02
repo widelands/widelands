@@ -65,7 +65,7 @@ function warning_bricks()
       sleep(10000)
       if count("brick") < 4 then
          if ready > 5 then
-            if #p1:get_buildings("frisians_brick_burners_house") < 3 then
+            if #p1:get_buildings("frisians_brick_kiln") < 3 then
                campaign_message_box(warning_no_bricks)
             end
             return
@@ -191,7 +191,7 @@ function mission_thread()
 
    -- Build brick economy
    p1:allow_buildings {
-      "frisians_brick_burners_house",
+      "frisians_brick_kiln",
       "frisians_well",
       "frisians_clay_pit",
       "frisians_coalmine",
@@ -199,7 +199,7 @@ function mission_thread()
    o = add_campaign_objective(obj_build_brick_economy)
    run(warning_reed)
    while not check_for_buildings(p1, {
-      frisians_brick_burners_house = 1,
+      frisians_brick_kiln = 1,
       frisians_well = 1,
       frisians_clay_pit = 1,
       frisians_coalmine = 1,

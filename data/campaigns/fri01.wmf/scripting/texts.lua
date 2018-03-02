@@ -35,7 +35,7 @@ obj_build_brick_economy = {
    title=_"Start producing bricks",
    number = 1,
    body = objective_text (_"Brick Economy",
-      li (_[[Build a brick burner’s house, a coal mine, a rock mine, a clay pit and a well to start producing bricks.]])
+      li (_[[Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start producing bricks.]])
    ),
 }
 obj_build_food_economy = {
@@ -145,7 +145,7 @@ intro_4 = {
    title =_ "Introduction",
    body=hauke (_"Building our new home",
       -- TRANSLATORS: Hauke – Introduction 4
-      _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick burner’s house out of granite and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don’t see any here. Perhaps these hills contain enough stones to mine some granite.]])
+      _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick kiln out of granite and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don’t see any here. Perhaps these hills contain enough stones to mine some granite.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – Introduction 4
       _([[Clay is easy to make: A clay burner will simply dig up some earth and mix it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
@@ -181,10 +181,9 @@ warning_no_clay = {
 }
 warning_no_bricks = {
    title =_ "Brick Shortages",
-   body=hauke (_"Build another brick burner",
+   body=hauke (_"Build another brick kiln",
       -- TRANSLATORS: Hauke – no bricks
-      --_([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to build another brick burner’s house, and assign its construction site the highest priority for building materials so as to resolve the shortage as soon as possible.]])),
-      _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick burner’s house, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]])),
+      _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick kiln, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]])),
 }
 warehouse_on_expand = {
    title =_ "Warehouses",

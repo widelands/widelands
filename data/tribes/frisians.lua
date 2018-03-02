@@ -238,7 +238,7 @@ tribes:new_tribe {
       "frisians_scouts_house",
 
       -- Medium
-      "frisians_brick_burners_house",
+      "frisians_brick_kiln",
       "frisians_furnace",
       "frisians_recycling_center",
       "frisians_blacksmithy",

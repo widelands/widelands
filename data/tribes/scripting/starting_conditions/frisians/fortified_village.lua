@@ -143,7 +143,7 @@ return {
          }
       })
 
-      place_building_in_region(plr, "frisians_brick_burners_house", sf:region(11), {
+      place_building_in_region(plr, "frisians_brick_kiln", sf:region(11), {
          inputs = {
             clay = 2,
             granite = 2,

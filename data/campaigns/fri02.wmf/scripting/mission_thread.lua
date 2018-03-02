@@ -279,7 +279,7 @@ function mission_thread()
    campaign_message_box(intro_3)
    local o = add_campaign_objective(obj_new_home)
    while not check_for_buildings(p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1,
-         frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_burners_house = 1, frisians_clay_pit = 1,
+         frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_kiln = 1, frisians_clay_pit = 1,
          frisians_charcoal_kiln = 1}) do sleep(4273) end
    set_objective_done(o)
 

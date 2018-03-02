@@ -27,7 +27,7 @@ obj_new_home = {
    title=_"Build a basic economy",
    number = 1,
    body = objective_text (_"Take care of supplying all basic materials",
-      li (_[[Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, and houses for a brick burner, a woodcutter and a forester.]])
+      li (_[[Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick kiln, and houses for a woodcutter and a forester.]])
    ),
 }
 obj_expand_south = {
