@@ -1,22 +1,23 @@
 include "scripting/messages.lua"
 
-local done_exp = false
-local done_mine = false
-local done_fight = false
+local done_mining = false
+local done_fighting = false
 
-local has_mountain = nil
 local see_empire = nil
 
-local fields = {}
+-- NOCOM if we use p2.defeated below, we can change the inly remaining loop that
+-- uses all_fields (in check_empire) and then read the mountains in the
+-- mining_issues thread
+local all_fields = {}
 local mountains = {}
 for x=0,map.width - 1 do
-   local fld = {}
    for y=0,map.height - 1 do
-      local f = map:get_field(x, y)
-      fld[#fld + 1] = f
-      if f.terd:find("mountain") ~= nil then mountains[#mountains + 1] = f end
+      local field = map:get_field(x, y)
+      if field.terd:find("mountain") ~= nil then
+         table.insert(mountains, field)
+      end
+      table.insert(all_fields, field)
    end
-   fields[#fields + 1] = fld
 end
 
 function count_military_buildings_p1()
@@ -29,40 +30,26 @@ function count_military_buildings_p1()
       #p1:get_buildings("frisians_wooden_tower_high")
 end
 
-function check_mountain()
+function check_empire()
    while true do
-      sleep(7777)
-      for idx,f in ipairs(mountains) do
-         if f:has_caps("mine") and f.owner == p1 then
-            has_mountain = f
+      for idx,field in ipairs(all_fields) do
+         sleep(5)
+         local p1c = false
+         local p2c = false
+         for idx,claimer in ipairs(field.claimers) do
+            if claimer == p1 then p1c = true end
+            if claimer == p2 then p2c = true end
+         end
+         if p1c and p2c then
+            see_empire = field
             return
          end
       end
    end
 end
 
-function check_empire()
-   while true do
-      for idx,fld in ipairs(fields) do
-         sleep(40)
-         for idy,f in ipairs(fld) do
-            local p1c = false
-            local p2c = false
-            for idx,claimer in ipairs(f.claimers) do
-               if claimer == p1 then p1c = true end
-               if claimer == p2 then p2c = true end
-            end
-            if p1c and p2c then
-               see_empire = f
-               return
-            end
-         end
-      end
-   end
-end
-
 function expand_south()
-   campaign_message_box(expand_s_1)
+   campaign_message_box(expand_south_1)
    local o = add_campaign_objective(obj_expand_south)
    run(check_empire)
    while see_empire == nil do sleep(2221) end
@@ -80,7 +67,10 @@ function expand_south()
          if not placed then
             local suited = f:has_caps("medium") and f.brn:has_caps("flag")
             for idy,n in ipairs({f, f.brn, f.rn, f.ln, f.tln, f.trn, f.bln, f.brn.brn, f.brn.bln, f.brn.rn}) do
-               if n.owner ~= p1 then suited = false end
+               if n.owner ~= p1 then
+                  suited = false
+                  break
+               end
             end
             if suited then
                p1:place_building("frisians_warehouse_empire", f, false, true)
@@ -111,9 +101,9 @@ function expand_south()
    set_objective_done(o)
 
    o = add_campaign_objective(obj_supply_murilius)
-   local choice = nil
+   local choice = ""
    local milbld = count_military_buildings_p1()
-   while choice == nil do
+   while choice == "" do
       sleep(2791)
       if #(p1:get_buildings("frisians_warehouse_empire")) < 1 then
          choice = "destroy"
@@ -134,30 +124,43 @@ function expand_south()
             wh:get_wares("gold_ore") >= 20 and
             wh:get_wares("beer") >= 30)
          then
-            choice = "yes"
+            choice = "supply"
          end
       end
    end
    set_objective_done(o)
    p2:allow_buildings("all")
    p3:allow_buildings("all")
-   done_exp = true
+   -- We're done expanding, so we chan start checking for victory
    run(victory)
-   if choice == "yes" then
-      supply_yes()
+
+   if choice == "supply" then
+      supply_murilius()
    else
       if choice == "military" then
          campaign_message_box(supply_murilius_military)
       else
          campaign_message_box(supply_murilius_destroy)
       end
-      supply_no()
+      defeat_murilius()
    end
 end
 
 function mining_issues()
-   run(check_mountain)
-   while has_mountain == nil do sleep(2221) end
+   -- Wait until we have conquered a mountain
+   local has_mountain = nil
+   while has_mountain == nil do
+      sleep(7777)
+      for idx,field in ipairs(mountains) do
+         if field:has_caps("mine") and field.owner == p1 then
+            has_mountain = field
+            break
+         end
+      end
+   end
+   sleep(2221)
+
+   -- NOCOM what do we do in this section?
    scroll_to_field(has_mountain)
    campaign_message_box(train_recycle_1)
    campaign_message_box(train_recycle_2)
@@ -165,8 +168,8 @@ function mining_issues()
    local o = add_campaign_objective(obj_train_recycle)
    campaign_message_box(train_recycle_4)
    p1:allow_buildings {"frisians_recycling_center", "frisians_training_camp", "frisians_training_arena"}
-   local miner = false
-   while not miner do
+   local has_miner = false
+   while not has_miner do
       sleep(4473)
       local mines = array_combine(
          p1:get_buildings("frisians_coalmine"),
@@ -180,11 +183,14 @@ function mining_issues()
       )
       for idx,bld in ipairs(mines) do
          if bld:get_workers("frisians_miner") + bld:get_workers("frisians_miner_master") > 0 then
-            miner = true
+            has_miner = true
+            break
          end
       end
    end
    set_objective_done(o)
+
+   -- NOCOM comment this section
    campaign_message_box(aqua_farm_1)
    sleep(10000)
    campaign_message_box(aqua_farm_2)
@@ -195,16 +201,20 @@ function mining_issues()
    campaign_message_box(aqua_farm_3)
    campaign_message_box(aqua_farm_4)
    p1:allow_buildings {"frisians_armor_smithy_small", "frisians_tailors_shop", "frisians_barracks"}
-   done_mine = true
+   done_mining = true
 end
 
-function supply_yes()
+function supply_murilius()
    local wh = p1:get_buildings("frisians_warehouse_empire")[1]
    local hq = p2:get_buildings("empire_headquarters")[1]
+
    -- transfer all wares that frisians and empire have in common
+   -- NOCOM this is hard-coded. Better to calculate this from the actual tribes
+   -- Something like: p1.tribe.wares will give you the full list for player1
    for idx,name in ipairs({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish",
          "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe",
          "bread_paddle", "basket", "kitchen_tools", "fire_tongs"}) do
+      -- NOCOM nb? Please be more descriptive with your variable names ;)
       local nb = wh:get_wares(name)
       wh:set_wares(name, 0)
       hq:set_wares(name, hq:get_wares(name) + nb)
@@ -213,37 +223,41 @@ function supply_yes()
    local o = add_campaign_objective(obj_defeat_barbarians)
    while not p3.defeated do sleep(4513) end
    set_objective_done(o)
+
+   -- NOCOM add a comment what is being done in this section
    if not p2.defeated then
       campaign_message_box(defeat_murilius_1)
       campaign_message_box(defeat_murilius_2)
       p2.team = 2
       o = add_campaign_objective(obj_defeat_murilius)
+      -- NOCOM why not simply check p2.defeated?
       local def = false
       while not def do
          def = true
-         for idx,ff in ipairs(fields) do
-            for idy,f in ipairs(ff) do
-               if f.owner == p2 then def = false end
+         for idx,field in ipairs(all_fields) do
+            if field.owner == p2 then
+               def = false
+               break
             end
-            sleep(40)
+            sleep(5)
          end
       end
       set_objective_done(o)
    end
-   done_fight = true
+   done_fighting = true
 end
 
-function supply_no()
+function defeat_murilius()
    p2.team = 2
    campaign_message_box(defeat_both)
    local o = add_campaign_objective(obj_defeat_both)
    while not (p2.defeated and p3.defeated) do sleep(4829) end
    set_objective_done(o)
-   done_fight = true
+   done_fighting = true
 end
 
 function victory()
-   while not (done_exp and done_mine and done_fight) do sleep(4731) end
+   while not (done_mining and done_fighting) do sleep(4731) end
    sleep(10000)
    campaign_message_box(victory_1)
    p1:reveal_scenario("frisians02")
@@ -265,9 +279,10 @@ function mission_thread()
    scroll_to_field(p1_start)
    campaign_message_box(intro_2)
    include "map:scripting/starting_conditions.lua"
+   -- NOCOM concentric_reveal?
    sleep(5000)
    p1:hide_fields(p1_start:region(9))
-  
+
    p1.team = 1
    p2.team = 1
    p3.team = 2
@@ -278,9 +293,15 @@ function mission_thread()
 
    campaign_message_box(intro_3)
    local o = add_campaign_objective(obj_new_home)
-   while not check_for_buildings(p1, {frisians_woodcutters_house = 1, frisians_foresters_house = 1, frisians_well = 1,
-         frisians_reed_farm = 1, frisians_quarry = 1, frisians_brick_kiln = 1, frisians_clay_pit = 1,
-         frisians_charcoal_kiln = 1}) do sleep(4273) end
+   while not check_for_buildings(p1, {
+      frisians_woodcutters_house = 1,
+      frisians_foresters_house = 1,
+      frisians_well = 1,
+      frisians_reed_farm = 1,
+      frisians_quarry = 1,
+      frisians_brick_kiln = 1,
+      frisians_clay_pit = 1,
+      frisians_charcoal_kiln = 1}) do sleep(4273) end
    set_objective_done(o)
 
    run(expand_south)

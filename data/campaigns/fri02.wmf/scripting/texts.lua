@@ -128,7 +128,7 @@ intro_3 = {
       .. new_objectives (obj_new_home),
 }
 
-expand_s_1 = {
+expand_south_1 = {
    title =_ "Go South",
    body=reebaud (_"Expand and conquer",
       -- TRANSLATORS: Reebaud – Expand South
