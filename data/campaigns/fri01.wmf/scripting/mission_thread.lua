@@ -21,7 +21,7 @@ function check_warning_early_attack()
    local westernmost_enemy = map.width - 1
    local easternmost_own = 0
    while show_warning_early_attack do
-      for x=0,map.width - 1 do
+      for x=0, map.width - 1 do
          local field = map:get_field(x, y)
          if field.owner == p1 and x > easternmost_own then easternmost_own = x end
          if field.owner == p2 and x < westernmost_enemy then westernmost_enemy = x end
@@ -33,6 +33,7 @@ function check_warning_early_attack()
          end
       end
       y = y + 1
+      -- NOCOM why not have "for y=0, map.height - 1 do" above?
       while y >= map.height do y = y - map.height end
       sleep(50) -- maximum delay = height×sleeptime = 128×50ms = 6,4s
    end
@@ -125,7 +126,9 @@ function stormflood()
       for idx,field in ipairs(next_field:region(1)) do
          if field.immovable then
             local immovable_fields = nil
-            if is_building(field.immovable) then immovable_fields = field.immovable.fields end
+            if is_building(field.immovable) then
+               immovable_fields = field.immovable.fields
+            end
             field.immovable:remove()
             if immovable_fields ~= nil then
                for idy,f in ipairs(immovable_fields) do map:place_immovable("ashes", f, "tribes") end
@@ -173,13 +176,17 @@ function mission_thread()
    sleep(1000)
    campaign_message_box(intro_1)
    include "map:scripting/starting_conditions.lua"
+   -- NOCOM do we want a reveal_concentric here?
    scroll_to_field(map.player_slots[1].starting_field)
    sleep(5000)
    campaign_message_box(intro_2)
    campaign_message_box(intro_3)
 
    -- Build wood economy and reed yard
-   p1:allow_buildings {"frisians_woodcutters_house", "frisians_foresters_house", "frisians_reed_farm"}
+   p1:allow_buildings {
+      "frisians_woodcutters_house",
+      "frisians_foresters_house",
+      "frisians_reed_farm"}
    local o = add_campaign_objective(obj_build_wood_economy)
    while not check_for_buildings(p1, {
       frisians_woodcutters_house = 1,
@@ -211,20 +218,24 @@ function mission_thread()
    run(hint_warehouse_east)
 
    -- Wait until no rations left
-   local something_left = true
-   while something_left do
+   repeat
       sleep(4273)
-      local in_warehouses = count("ration")
-      local whs = array_combine(
-         p1:get_buildings("frisians_coalmine"),
-         p1:get_buildings("frisians_rockmine")
-      )
-      local m_w = false -- Has at least 1 mine no rations left?
-      for idx,wh in ipairs(whs) do
-         m_w = m_w or (wh:get_inputs("ration") == 0)
+      -- Check warehouses
+      local something_left = count("ration") > 0
+      if not something_left then
+         -- Check that all mines have at least 1 ration
+         local mines = array_combine(
+            p1:get_buildings("frisians_coalmine"),
+            p1:get_buildings("frisians_rockmine")
+         )
+         for idx,mine in ipairs(mines) do
+            if mine:get_inputs("ration") == 0 then
+               something_left = false
+               break
+            end
+         end
       end
-      something_left = (in_warehouses > 0) or not m_w
-   end
+   until not something_left
 
    -- Great, you forgot to provide rations...
    campaign_message_box(food_1)
@@ -303,6 +314,7 @@ function mission_thread()
    set_objective_done(o)
 
    -- Show the "expand" objective only if we haven't expanded that far yet
+   -- NOCOM what happens if the player is really stupid and the enemy has already conquered the expansion mark?
    if expansion_mark.owner == nil then
       campaign_message_box(expand_1)
       o = add_campaign_objective(obj_expand)
@@ -310,8 +322,6 @@ function mission_thread()
       while expansion_mark.owner == nil do sleep(4273) end
       set_objective_done(o)
    end
-
-
 
    -- A friendly chat between neighbours
    p1:reveal_fields(map.player_slots[2].starting_field:region(6))
@@ -340,10 +350,9 @@ function mission_thread()
    o = add_campaign_objective(obj_train_soldiers)
 
    -- Wait until at least 1 soldier has level 10
-   local skip_to_flood = false
    local has_hero = false
    run(check_warning_early_attack)
-   while not (has_hero or skip_to_flood) do
+   while not (has_hero or p2.defeated) do
       local bld = array_combine(
          p1:get_buildings("frisians_headquarters"),
          p1:get_buildings("frisians_warehouse"),
@@ -356,23 +365,25 @@ function mission_thread()
          p1:get_buildings("frisians_outpost")
       )
       for idx,site in ipairs(bld) do
-         has_hero = has_hero or (site:get_soldiers {2,6,2,0} > 0)
+         if site:get_soldiers {2,6,2,0} > 0 then
+            has_hero = true
+            break
+         end
       end
-      skip_to_flood = skip_to_flood or p2.defeated
       sleep(4273)
    end
-   -- We are strong enough now – no need for the warning if it didn't appear yet
+   -- We are strong enough now – no need for the warnings if they didn't appear yet
    show_warning_early_attack = false
    show_warning_bricks = false
+   set_objective_done(o)
 
    -- Attack!
-   set_objective_done(o)
    p1:allow_buildings {"frisians_tower"}
    p2:allow_buildings {
       "frisians_barracks",
       "frisians_sewing_room",
       "frisians_armor_smithy_small"}
-   if not skip_to_flood then
+   if not p2.defeated then
       campaign_message_box(training_4)
       campaign_message_box(training_5)
       campaign_message_box(training_6)
@@ -384,13 +395,15 @@ function mission_thread()
    show_warning_clay = false
 
    sleep(2000)
+
+   -- Stormflood!
    scroll_to_field(map.player_slots[2].starting_field)
    campaign_message_box(rising_water_1)
    campaign_message_box(rising_water_2)
 
-   -- Stormflood!
-   for x=3,map.width - 4 do
-      for y=3,map.height - 4 do -- Leave some small margin, show everything else
+   -- NOCOM if a circular reveal will do, we could have an animated reveal (concentric or random)
+   for x=3, map.width - 4 do
+      for y=3, map.height - 4 do -- Leave some small margin, show everything else
          p1:reveal_fields {map:get_field(x, y)}
       end
    end
@@ -403,7 +416,9 @@ function mission_thread()
     -- Make the port space immediately accessible if it is blocked with trees etc
     -- (but not buildings)
    for i,f in ipairs(port_space:region(3)) do
-      if f.immovable and f.immovable.descr.type_name == "immovable" then f.immovable:remove() end
+      if f.immovable and f.immovable.descr.type_name == "immovable" then
+         f.immovable:remove()
+      end
    end
    scroll_to_field(port_space)
    p1:allow_buildings {"frisians_port", "frisians_weaving_mill", "frisians_shipyard"}
@@ -413,7 +428,10 @@ function mission_thread()
    local expedition_ready = false
    while not expedition_ready do
       for idx,ship in ipairs(p1:get_ships()) do
-         expedition_ready = expedition_ready or (ship.state:sub(1, 4) == "exp_")
+         if (ship.state:sub(1, 4) == "exp_") then
+            expedition_ready = true
+            break
+         end
       end
       sleep(1149)
    end

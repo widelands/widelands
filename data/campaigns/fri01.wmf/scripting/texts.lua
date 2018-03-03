@@ -182,6 +182,7 @@ warning_no_clay = {
 warning_no_bricks = {
    title =_ "Brick Shortages",
    body=hauke (_"Build another brick kiln",
+      -- NOCOM "constructionsite window" is immersion breaking - add an objective or rephrase
       -- TRANSLATORS: Hauke – no bricks
       _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick kiln, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]])),
 }
@@ -352,6 +353,7 @@ warning_early_attack_1 = {
 warning_early_attack_2 = {
    title =_ "Beware!",
    body=reebaud (_"Not strong enough",
+      -- NOCOM "conquer radius" is immersion breaking - add an objective or rephrase
       -- TRANSLATORS: Reebaud – beware of early attacks 2
       _([[The scouts informed me that the enemy can’t build towers. We could build a fortress, which is the building with the highest conquer radius, to push the border as far east as possible. The enemies can only see it if they build a fortress right at the border.]])
        .. paragraphdivider () ..
