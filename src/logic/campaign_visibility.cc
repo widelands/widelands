@@ -28,183 +28,156 @@
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 
-/**
- * Make sure that campaigns visibility-save is up to date and well-formed
- */
-void CampaignVisibilitySave::ensure_campvis_file_is_current() {
+CampaignVisibility::CampaignVisibility() {
 	g_fs->ensure_directory_exists(kSaveDir);
-	// NOCOM Use completed rather than visible?
 
 	// Get the current version of the campaign config
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
-	// NOCOM table.do_not_warn_about_unaccessed_keys();
 	const int current_version = table->get_int("version");
+	std::unique_ptr<Profile> campvis;
 
-	// Create a new file if there wasn't one
+	// Create a new campvis file if there wasn't one
 	if (!(g_fs->file_exists(kCampVisFile))) {
 		// There is no campvis file - create one.
-		Profile campvis(kCampVisFile.c_str());
-		campvis.pull_section("global");
-		campvis.get_safe_section("global").set_int("version", current_version - 1);
-		campvis.pull_section("campaigns");
+		campvis.reset(new Profile(kCampVisFile.c_str()));
+		campvis->pull_section("global");
+		campvis->get_safe_section("global").set_int("version", current_version - 1);
+		campvis->pull_section("campaigns");
 		log("NOCOM ensure_campvis_file_exists\n");
-		campvis.pull_section("scenarios");
-		campvis.write(kCampVisFile.c_str(), true);
+		campvis->pull_section("scenarios");
+		campvis->write(kCampVisFile.c_str(), true);
 	}
 
-	// Make sure that the file is up to date
-	Profile campvis(kCampVisFile.c_str());
-	bool is_legacy = campvis.get_section("campmaps") != nullptr;
-	if (campvis.get_safe_section("global").get_int("version") < current_version ||
-		 is_legacy) {
-		update_campvis(*table.get(), is_legacy);
+	// Handle legacy campvis file
+	// TODO(GunChleoc): Remove after Build 21
+	campvis.reset(new Profile(kCampVisFile.c_str()));
+	if (campvis->get_section("campmaps") != nullptr) {
+		update_legacy_campvis(current_version);
+	}
+
+	// Read solved scenarios
+	campvis.reset(new Profile(kCampVisFile.c_str()));
+	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
+
+	// Now read all the data from campaign config
+	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
+	i18n::Textdomain td("maps");
+
+	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
+		CampaignData* campaign_data = new CampaignData();
+		// NOCOM campaign_data.index = counter;
+		campaign_data->name = campaign->get_string("name");
+		campaign_data->descname = _(campaign->get_string("descname"));
+		campaign_data->tribename = _(campaign->get_string("tribe"));
+		campaign_data->description = _(campaign->get_string("description"));
+		campaign_data->prerequisite = campaign->get_string("prerequisite");
+
+		std::unique_ptr<LuaTable> difficulty(campaign->get_table("difficulty"));
+		campaign_data->difficulty = difficulty->get_int("value");
+		campaign_data->difficulty_description = _(difficulty->get_string("description"));
+
+		// Scenarios
+		std::unique_ptr<LuaTable> scenarios_table(campaigns_table->get_table("scenarios"));
+		for (const auto& scenario : scenarios_table->array_entries<std::unique_ptr<LuaTable>>()) {
+			ScenarioData* scenario_data = new ScenarioData();
+			// NOCOM scenario_data.index = counter + 1;
+			scenario_data->path = scenario->get_string("path");
+			if (campvis_scenarios.get_bool(scenario_data->path.c_str(), false)) {
+				solved_scenarios.insert(scenario_data->path);
+			}
+
+			scenario_data->descname = _(scenario->get_string("descname")); // NOCOM get this from the map later
+			scenario_data->is_tutorial = false;
+			scenario_data->playable = scenario_data->path != "dummy.wmf";
+			scenario_data->visible = false; // NOCOM
+			campaign_data->scenarios.push_back(std::unique_ptr<ScenarioData>(std::move(scenario_data)));
+		}
+
+		campaigns_.push_back(std::unique_ptr<CampaignData>(std::move(campaign_data)));
+	}
+
+	// Now calculate the visibility
+	update_visibility_info();
+}
+
+void CampaignVisibility::update_visibility_info() {
+	for (auto& campaign : campaigns_) {
+		if (campaign->prerequisite.empty() || solved_scenarios.count(campaign->prerequisite) == 1) {
+			campaign->visible = true;
+			// Only a visible campaign can contain visible scenarios
+			for (size_t i = 0; i < campaign->scenarios.size(); ++i) {
+				auto& scenario = campaign->scenarios.at(i);
+				if (i == 0) {
+					// The first scenario in a visible campaign is always visible
+					scenario->visible = true;
+				} else {
+					// A scenario is visible if its predecessor was solved
+					scenario->visible = solved_scenarios.count(campaign->scenarios.at(i-1)->path) == 1;
+				}
+				if (!scenario->visible) {
+					// If a scenario is invisible, subsequent scenarios are also invisible
+					break;
+				}
+			}
+		}
 	}
 }
 
-
 /**
- * Update the campaign visibility save-file of the user
+ * Handle legacy campvis file
  */
-void CampaignVisibilitySave::update_campvis(const LuaTable& table, bool is_legacy) {
-	log("NOCOM updating campvis 1\n");
+// TODO(GunChleoc): Remove after Build 21
+void CampaignVisibility::update_legacy_campvis(int version) {
+	log("Converting legacy campvis\n");
 
-	Profile campvis(kCampVisFile.c_str());
-
-	// TODO(GunChleoc): Remove compatibility code after Build 21.
 	std::map<std::string, std::string> legacy_scenarios = {
-		{"bar01.wmf", "barbariantut00"}, {"bar02.wmf", "barbariantut01"}, {"emp01.wmf", "empiretut00"},
-		{"emp02.wmf", "empiretut01"},    {"emp03.wmf", "empiretut02"},    {"emp04.wmf", "empiretut03"},
-		{"atl01.wmf", "atlanteans00"},   {"atl02.wmf", "atlanteans01"},
-		{"fri01.wmf", "frisians00"},   {"fri02.wmf", "frisians01"},
+		{"fri02.wmf", "frisians01"},
+		{"fri01.wmf", "frisians00"},
+		{"atl02.wmf", "atlanteans01"},
+		{"atl01.wmf", "atlanteans00"},
+		{"emp04.wmf", "empiretut03"},
+		{"emp03.wmf", "empiretut02"},
+		{"emp02.wmf", "empiretut01"},
+		{"emp01.wmf", "empiretut00"},
+		{"bar02.wmf", "barbariantut01"},
+		{"bar01.wmf", "barbariantut00"},
 	};
 
-	Section& campvis_campaigns = campvis.get_safe_section("campaigns");
-	Section& campvis_scenarios =
-	   is_legacy ? campvis.get_safe_section("campmaps") : campvis.get_safe_section("scenarios");
-
-	// Prepare campaigns.lua
-	std::unique_ptr<LuaTable> campaigns_table(table.get_table("campaigns"));
-	campaigns_table->do_not_warn_about_unaccessed_keys();
-
-	// Collect all information about campaigns and scenarios
-	std::map<std::string, bool> campaigns;
-	std::map<std::string, bool> scenarios;
-	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
-		campaign->do_not_warn_about_unaccessed_keys();
-		const std::string campaign_name = campaign->get_string("name");
-		if (campaigns.count(campaign_name) != 1) {
-			campaigns[campaign_name] = false;
+	Profile read_campvis(kCampVisFile.c_str());
+	Section& campvis_scenarios = read_campvis.get_safe_section("campmaps");
+	bool set_solved = false;
+	std::set<std::string> solved_legacy_scenarios;
+	for (const auto& legacy_scenario : legacy_scenarios) {
+		if (set_solved) {
+			solved_legacy_scenarios.insert(legacy_scenario.first);
 		}
-		campaigns[campaign_name] = campaigns[campaign_name] || !campaign->has_key("prerequisite") ||
-		                           campvis_campaigns.get_bool(campaign_name.c_str());
-
-		std::unique_ptr<LuaTable> scenarios_table(campaign->get_table("scenarios"));
-		scenarios_table->do_not_warn_about_unaccessed_keys();
-		for (const auto& scenario : scenarios_table->array_entries<std::unique_ptr<LuaTable>>()) {
-			scenario->do_not_warn_about_unaccessed_keys();
-			const std::string scenario_path = scenario->get_string("path");
-			scenarios[scenario_path] =
-			   is_legacy ? campvis_scenarios.get_bool(legacy_scenarios[scenario_path].c_str()) :
-			               campvis_scenarios.get_bool(scenario_path.c_str());
-
-			// If a scenario is visible, this campaign is visible too.
-			if (scenarios[scenario_path]) {
-				campaigns[campaign_name] = true;
-			}
-		}
-
-		// A campaign can also make sure that scenarios of a previous campaign are visible
-		if (campaigns[campaign_name] && campaign->has_key<std::string>("reveal_scenarios")) {
-			for (const auto& scenario :
-			     campaign->get_table("reveal_scenarios")->array_entries<std::string>()) {
-				scenarios[scenario] = true;
-			}
-		}
+		set_solved = campvis_scenarios.get_bool(legacy_scenario.second.c_str(), false);
 	}
-
-	// Make sure that all visible campaigns have their first scenario visible.
-	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
-		campaign->do_not_warn_about_unaccessed_keys();
-		const std::string campaign_name = campaign->get_string("name");
-		if (campaigns[campaign_name]) {
-			std::unique_ptr<LuaTable> scenarios_table(campaign->get_table("scenarios"));
-			scenarios_table->do_not_warn_about_unaccessed_keys();
-			const auto& scenario = scenarios_table->get_table(1);
-			scenario->do_not_warn_about_unaccessed_keys();
-			scenarios[scenario->get_string("path")] = true;
-		}
-	}
-
-	log("NOCOM writing campvis\n");
 
 	// Now write everything
 	Profile write_campvis(kCampVisFile.c_str());
-	write_campvis.pull_section("global").set_int("version", table.get_int("version"));
+	write_campvis.pull_section("global").set_int("version", version);
 
-	Section& write_campaigns = write_campvis.pull_section("campaigns");
-	for (const auto& campaign : campaigns) {
-		write_campaigns.set_bool(campaign.first.c_str(), campaign.second);
-	}
-
-	log("NOCOM write_scenarios\n");
 	Section& write_scenarios = write_campvis.pull_section("scenarios");
-	for (const auto& scenario : scenarios) {
-		write_scenarios.set_bool(scenario.first.c_str(), scenario.second);
+	for (const auto& scenario : solved_legacy_scenarios) {
+		write_scenarios.set_bool(scenario.c_str(), true);
 	}
 
 	write_campvis.write(kCampVisFile.c_str(), true);
 }
 
 /**
- * Searches for the scenario with the given file 'path' in data/campaigns/campaigns.lua,
- * and if the scenario has 'reveal_campaign' and/or 'reveal_scenario' defined, marks the respective
- * campaign/scenario as visible.
+ * Marks the scenario with the given file 'path' as solved.
  */
-void CampaignVisibilitySave::mark_scenario_as_solved(const std::string& path) {
-	ensure_campvis_file_is_current();
-
-	// Check which campaign and/or scenario to reveal
-	std::string campaign_to_reveal = "";
-	std::string scenario_to_reveal = "";
-
-	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
-	table->do_not_warn_about_unaccessed_keys();
-	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
-	campaigns_table->do_not_warn_about_unaccessed_keys();
-
-	bool found = false;
-	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
-		campaign->do_not_warn_about_unaccessed_keys();
-		if (found) {
-			continue;
-		}
-		std::unique_ptr<LuaTable> scenarios_table(campaign->get_table("scenarios"));
-		scenarios_table->do_not_warn_about_unaccessed_keys();
-		for (const auto& scenario : scenarios_table->array_entries<std::unique_ptr<LuaTable>>()) {
-			scenario->do_not_warn_about_unaccessed_keys();
-			if (path == scenario->get_string("path")) {
-				if (scenario->has_key<std::string>("reveal_scenario")) {
-					scenario_to_reveal = scenario->get_string("reveal_scenario");
-				}
-				if (scenario->has_key<std::string>("reveal_campaign")) {
-					campaign_to_reveal = scenario->get_string("reveal_campaign");
-				}
-				// We can't break here, because we need to shut up the table warnings.
-				found = true;
-			}
-		}
-	}
+void CampaignVisibility::mark_scenario_as_solved(const std::string& path) {
+	assert(g_fs->file_exists(kCampVisFile));
+	// NOCOM evaluate whether we need to update here
+	solved_scenarios.insert(path);
+	update_visibility_info();
 
 	// Write the campvis
 	Profile campvis(kCampVisFile.c_str());
-	if (!campaign_to_reveal.empty()) {
-		campvis.pull_section("campaigns").set_bool(campaign_to_reveal.c_str(), true);
-	}
-	if (!scenario_to_reveal.empty()) {
-		log("NOCOM reveal scenario\n");
-		campvis.pull_section("scenarios").set_bool(scenario_to_reveal.c_str(), true);
-	}
+	campvis.pull_section("scenarios").set_bool(path.c_str(), true);
 	campvis.write(kCampVisFile.c_str(), false);
 }

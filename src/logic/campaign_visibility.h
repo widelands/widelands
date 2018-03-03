@@ -20,16 +20,62 @@
 #ifndef WL_LOGIC_CAMPAIGN_VISIBILITY_H
 #define WL_LOGIC_CAMPAIGN_VISIBILITY_H
 
+#include <memory>
+#include <set> // NOCOM unordered?
 #include <string>
+#include <vector>
 
 #include "scripting/lua_table.h"
+#include "wui/mapauthordata.h" // NOCOM move this
 
-struct CampaignVisibilitySave {
-	static void ensure_campvis_file_is_current();
-	static void mark_scenario_as_solved(const std::string& path);
+/**
+ * Data about a campaign or tutorial scenario that we're interested in.
+ */
+struct ScenarioData {
+	uint32_t index; // NOCOM
+	std::string path;
+	std::string descname;
+	std::string description;
+	MapAuthorData authors;
+	std::string campaign;
+	bool is_tutorial;
+	bool playable;
+	bool visible;
+
+	ScenarioData(const std::string& init_authors) : authors(init_authors) {}
+	// We start with empty authors, because those will come from the map
+	ScenarioData() : ScenarioData("") {}
+};
+
+/**
+ * Data about a campaign that we're interested in.
+ */
+struct CampaignData {
+	uint32_t index; // NOCOM
+	std::string name;
+	std::string descname;
+	std::string tribename;
+	uint32_t difficulty;
+	std::string difficulty_description;
+	std::string description;
+	std::string prerequisite;
+	bool visible;
+	std::vector<std::unique_ptr<ScenarioData>> scenarios;
+
+	CampaignData() = default;
+};
+
+struct CampaignVisibility {
+	CampaignVisibility();
+	void mark_scenario_as_solved(const std::string& path);
 
 private:
-	static void update_campvis(const LuaTable& table, bool is_legacy);
+	void update_visibility_info();
+	static void update_legacy_campvis(int version);
+
+	std::vector<std::unique_ptr<CampaignData>> campaigns_;
+	ScenarioData scenarios_;
+	std::set<std::string> solved_scenarios;
 };
 
 #endif  // end of include guard: WL_LOGIC_CAMPAIGN_VISIBILITY_H

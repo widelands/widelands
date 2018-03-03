@@ -637,7 +637,7 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		report_error(L, "Can only be called for interactive player!");
 
-	CampaignVisibilitySave cvs;
+	CampaignVisibility cvs;
 	cvs.mark_scenario_as_solved(luaL_checkstring(L, 2));
 
 	return 0;
