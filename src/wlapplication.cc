@@ -771,8 +771,7 @@ bool WLApplication::init_settings() {
 
 	// Replace the stored plaintext password with its SHA-1 hashed version
 	// Used to upgrade the stored password when upgrading widelands
-	if (s.get_string("password") != nullptr
-		&& (s.get_string("password_sha1") == nullptr || strlen(s.get_string("password_sha1")) == 0)) {
+	if (strlen(s.get_string("password", "")) > 0 && strlen(s.get_string("password_sha1", "")) == 0) {
 		s.set_string("password_sha1", crypto::sha1(s.get_string("password")));
 	}
 
