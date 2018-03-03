@@ -649,7 +649,7 @@ void DefaultAI::late_initialization() {
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
 		bo.requires_supporters = bh.requires_supporters();
 		if (bo.requires_supporters) {
-			log(" %d: %s strictly requires supporters\n", bo.name);
+			log(" %d: %s strictly requires supporters\n", player_number(), bo.name);
 		}
 		bo.prohibited_till = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after = bh.get_forced_after() * 1000;        // value in conf is in seconds
@@ -668,20 +668,8 @@ void DefaultAI::late_initialization() {
 			bo.set_is(BuildingAttribute::kRanger);
 		}
 		// Is total count of this building limited by AI mode?
-		if (type_ == Widelands::AiType::kVeryWeak && bh.get_very_weak_ai_limit() >= 0) {
-			bo.cnt_limit_by_aimode = bh.get_very_weak_ai_limit();
-			log(" %d: AI 'very weak' mode: applying limit %d building(s) for %s\n", player_number(),
-			    bo.cnt_limit_by_aimode, bo.name);
-		}
-		if (type_ == Widelands::AiType::kWeak && bh.get_weak_ai_limit() >= 0) {
-			bo.cnt_limit_by_aimode = bh.get_weak_ai_limit();
-			log(" %d: AI 'weak' mode: applying limit %d building(s) for %s\n", player_number(),
-			    bo.cnt_limit_by_aimode, bo.name);
-		}
-		if (type_ == Widelands::AiType::kNormal && bh.get_normal_ai_limit() >= 0) {
-			bo.cnt_limit_by_aimode = bh.get_normal_ai_limit();
-			log(" %d: AI 'normal' mode: applying limit %d building(s) for %s\n", player_number(),
-			    bo.cnt_limit_by_aimode, bo.name);
+		if (bh.get_ai_limit(type_) >= 0) {
+			bo.cnt_limit_by_aimode = bh.get_ai_limit(type_);
 		}
 
 		// Read all interesting data from ware producing buildings

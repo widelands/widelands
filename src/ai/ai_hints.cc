@@ -264,3 +264,15 @@ void BuildingHints::set_trainingsites_max_percent(int percent) {
 uint8_t BuildingHints::trainingsites_max_percent() const {
 	return trainingsites_max_percent_;
 }
+
+int16_t BuildingHints::get_ai_limit(const Widelands::AiType ai_type) const{
+	switch (ai_type) {
+	case Widelands::AiType::kVeryWeak:
+		return very_weak_ai_limit_;
+	case Widelands::AiType::kWeak:
+		return weak_ai_limit_;
+	case Widelands::AiType::kNormal:
+		return normal_ai_limit_;
+	}
+	NEVER_HERE();
+}

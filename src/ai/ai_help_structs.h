@@ -82,8 +82,6 @@ enum class BuildingAttribute : uint8_t {
 	kSupportingProducer,
 };
 
-enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
-
 enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
 
 enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
