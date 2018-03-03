@@ -48,7 +48,7 @@ private:
 		std::string name;
 		std::string author;
 		std::string path;
-		bool visible;
+		bool playable;
 
 		ScenarioTableData() = default;
 	};

@@ -53,7 +53,7 @@ void ScenarioDetails::update(const ScenarioMapData& scenariodata) {
 	                      as_content(scenariodata.name, UIStyle::kFsMenu))
 	                        .str());
 
-	if (scenariodata.visible) {
+	if (scenariodata.playable) {
 		std::string description =
 		   (boost::format("%s%s") %
 		    as_header(

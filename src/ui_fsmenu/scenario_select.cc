@@ -24,6 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h" // NOCOM
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
@@ -136,7 +137,7 @@ void FullscreenMenuScenarioSelect::clicked_ok() {
 		return;
 	}
 	const ScenarioTableData& scenario_data = scenarios_data_[table_.get_selected()];
-	if (!scenario_data.visible) {
+	if (!scenario_data.playable) {
 		return;
 	}
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
@@ -164,11 +165,11 @@ void FullscreenMenuScenarioSelect::entry_selected() {
 			scenario_map_data.description = _(map.get_description());
 		}
 		scenario_map_data.is_tutorial = is_tutorial_;
-		scenario_map_data.visible = scenario_data.visible;
+		scenario_map_data.playable = scenario_data.playable;
 		scenario_details_.update(scenario_map_data);
 
 		// The dummy scenario can't be played, so we disable the OK button.
-		ok_.set_enabled(scenario_map_data.visible);
+		ok_.set_enabled(scenario_map_data.playable);
 	}
 }
 
@@ -210,37 +211,33 @@ void FullscreenMenuScenarioSelect::fill_table() {
 				}
 			}
 
-			// Create the entry we use to load the section of the map
-			uint32_t counter = 0;
-
 			// Read in campvis-file
-			CampaignVisibilitySave::ensure_campvis_file_exists();
+			CampaignVisibilitySave::ensure_campvis_file_is_current();
 			Profile campvis(kCampVisFile.c_str());
+			log("NOCOM scenario select\n");
 			Section& scenario_visibility = campvis.get_safe_section("scenarios");
 
 			// Add all visible entries to the list.
+			size_t counter = 0;
 			std::unique_ptr<LuaTable> scenarios_table(campaign_table->get_table("scenarios"));
 			scenarios_table->do_not_warn_about_unaccessed_keys();
 			for (const auto& scenario : scenarios_table->array_entries<std::unique_ptr<LuaTable>>()) {
 				scenario->do_not_warn_about_unaccessed_keys();
-				const std::string name = scenario->get_string("name");
+				const std::string path = scenario->get_string("path");
 
-				if (is_tutorial_ || scenario_visibility.get_bool(name.c_str())) {
-					const std::string descname = scenario->get_string("descname");
-					const std::string path = scenario->get_string("path");
-
+				if (counter == 0 || is_tutorial_ || scenario_visibility.get_bool(path.c_str())) {
 					ScenarioTableData scenario_data;
 					scenario_data.index = counter + 1;
-					scenario_data.name = descname;
+					scenario_data.name = scenario->get_string("descname");
 					scenario_data.path = "campaigns/" + path;
-					scenario_data.visible = path != "dummy.wmf";
+					scenario_data.playable = path != "dummy.wmf";
 					scenarios_data_.push_back(scenario_data);
 
 					UI::Table<uintptr_t>::EntryRecord& te = table_.add(counter);
 					te.set_string(0, (boost::format("%u") % scenario_data.index).str());
 					te.set_picture(
 					   1, g_gr->images().get("images/ui_basic/ls_wlmap.png"), scenario_data.name);
-					if (!scenario_data.visible) {
+					if (!scenario_data.playable) {
 						te.set_color(UI_FONT_CLR_DISABLED);
 					}
 					++counter;
@@ -249,9 +246,8 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		}     // campaign
 	}
 
-	table_.sort();
-	if (table_.size()) {
+	if (!table_.empty()) {
 		table_.select(0);
 	}
-	set_has_selection();
+	entry_selected();
 }

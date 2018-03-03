@@ -146,7 +146,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 	}
 
 	// Read in campvis-file
-	CampaignVisibilitySave::ensure_campvis_file_exists();
+	CampaignVisibilitySave::ensure_campvis_file_is_current();
 	Profile campvis(kCampVisFile.c_str());
 	Section& campaign_visibility = campvis.get_safe_section("campaigns");
 

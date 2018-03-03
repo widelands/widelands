@@ -20,17 +20,16 @@
 #ifndef WL_LOGIC_CAMPAIGN_VISIBILITY_H
 #define WL_LOGIC_CAMPAIGN_VISIBILITY_H
 
-#include <cstring>
 #include <string>
 
-#include <stdint.h>
+#include "scripting/lua_table.h"
 
 struct CampaignVisibilitySave {
-	static void ensure_campvis_file_exists();
-	void mark_scenario_as_solved(const std::string& name);
+	static void ensure_campvis_file_is_current();
+	static void mark_scenario_as_solved(const std::string& path);
 
 private:
-	void update_campvis() const;
+	static void update_campvis(const LuaTable& table, bool is_legacy);
 };
 
 #endif  // end of include guard: WL_LOGIC_CAMPAIGN_VISIBILITY_H

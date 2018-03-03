@@ -3,6 +3,7 @@
 --##########################################
 
 return {
+   version = 9,
    campaigns = {
       {
          -- Barbarians Introduction
@@ -20,29 +21,26 @@ return {
          -- the campaign itself is visible, the following scenarios as well as
          -- campaigns marked as `visible = false` need to be unlocked with
          -- `reveal_scenario`/`reveal_campaign` on successful completion.
-         -- Call `player:mark_as_solved` in your scenario code when a user has
-         -- solved a scenario
+         -- Call `player:mark_scenario_as_solved` in your scenario code when a
+         -- user has solved a scenario
          scenarios = {
             {
                -- The name the user sees on screen
                descname = _"A Place to Call Home",
-               -- Internal name for reference
-               name = "bar01",
                -- Path to the scenario, relative to data/campaigns
                path = "bar01.wmf",
                -- The scenario to reveal when `player:mark_as_solved` is called
-               reveal_scenario = "bar02",
+               reveal_scenario = "bar02.wmf",
             },
             {
                descname = _"This Land is Our Land",
-               name = "bar02",
                path = "bar02.wmf",
                -- The campaign to reveal when player:mark_as_solved is called
                reveal_campaign = "empire",
+               reveal_scenario = "dummy.wmf",
             },
             {
                descname = _"Not yet implemented",
-               name = "bar03",
                path = "dummy.wmf",
             },
          }
@@ -59,36 +57,31 @@ return {
          -- to play in order to unlock this campaign.
          prerequisite = "barbarians",
          -- For scenarios that might have been added to Widelands since the last time that the user played a campaign
-         reveal_scenarios = { "bar02" },
+         reveal_scenarios = { "bar02.wmf", "dummy.wmf" },
          scenarios = {
             {
                descname = _"The Strands of Malac’ Mor",
-               name = "emp01",
                path = "emp01.wmf",
-               reveal_scenario = "emp02",
+               reveal_scenario = "emp02.wmf",
             },
             {
                descname = _"An Outpost for Exile",
-               name = "emp02",
                path = "emp02.wmf",
-               reveal_scenario = "emp03",
+               reveal_scenario = "emp03.wmf",
                reveal_campaign = "atlanteans",
             },
             {
                descname = _"Neptune’s Revenge",
-               name = "emp03",
                path = "emp03.wmf",
-               reveal_scenario = "emp04",
+               reveal_scenario = "emp04.wmf",
             },
             {
                descname = _"Surprise, Surprise!",
-               name = "emp04",
                path = "emp04.wmf",
-               reveal_scenario = "emp05",
+               reveal_scenario = "dummy.wmf",
             },
             {
                descname = _"Not yet implemented",
-               name = "emp05",
                path = "dummy.wmf",
             },
          }
@@ -101,17 +94,15 @@ return {
          difficulty = { value=2, description=_"Challenging. Introduces the Atlanteans" },
          description = _"When their God lost faith in the Atlanteans and drowned their island, one woman’s struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul.",
          prerequisite = "empire",
-         reveal_scenarios = { "emp02", "emp03" },
+         reveal_scenarios = { "emp02.wmf", "emp03.wmf", "dummy.wmf" },
          scenarios = {
             {
                descname = _"From Nemesis to Genesis",
-               name = "atl01",
                path = "atl01.wmf",
-               reveal_scenario = "atl02",
+               reveal_scenario = "dummy.wmf",
             },
             {
                descname = _"Not yet implemented",
-               name = "atl02",
                path = "dummy.wmf"
             },
          }
