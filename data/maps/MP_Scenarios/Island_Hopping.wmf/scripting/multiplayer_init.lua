@@ -2,10 +2,10 @@
 -- Island Hopping Fun Map Scripting
 -- =================================
 include "scripting/coroutine.lua"
-include "scripting/formatting.lua"
 include "scripting/infrastructure.lua"
 include "scripting/messages.lua"
 include "scripting/objective_utils.lua"
+include "scripting/richtext_scenarios.lua"
 
 -- ==========
 -- Constants
@@ -92,24 +92,13 @@ hill = map:get_field(0,0):region(3)
 -- Utility functions
 -- ==================
 
--- Sends a game status message to all players
-function send_to_all(text, long_title)
-   for idx,plr in ipairs(game.players) do
-      if (long_title ~= nil and long_title ~= "") then
-         send_message(plr, _"Status", text, {popup=true, heading=long_title})
-      else
-         send_message(plr, _"Status", text, {popup=true})
-      end
-   end
-end
-
 -- Returns a list of rewards from _finish_rewards, formatted with getplural(count, resource)
 function format_rewards(r)
    rv = {}
    for name,count in pairs(r) do
       local ware_description = wl.Game():get_ware_description(name)
       -- TRANSLATORS: number + resource name, e.g. '1x Log'
-      rv[#rv + 1] = _"%1$dx %2$s":bformat(count, ware_description.descname) .. "<br>\n"
+      rv[#rv + 1] = li(_"%1$dx %2$s":bformat(count, ware_description.descname))
    end
    return table.concat(rv)
 end
@@ -220,7 +209,7 @@ function initialize()
    send_to_all(welcome_msg.body, welcome_msg.heading)
    -- set the objective with the game type for all players
    -- TODO change this to a broadcast once individual game objectives have been implemented
-   game.players[1]:add_objective("win_conditions", _"Rules", welcome_msg.body)
+   game.players[1]:add_objective("win_conditions", _"Rules", rt(welcome_msg.body))
 
    for idx,plr in ipairs(game.players) do
       run(function() run_island(plr, 1) end)

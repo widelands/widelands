@@ -390,7 +390,7 @@ void DefaultAI::think() {
 		case SchedulerTaskId::KMarineDecisions:
 			// if function returns false, we can postpone for next call
 			{
-				const uint8_t wait_multiplier = (marine_main_decisions()) ? 1 : 5;
+				const uint8_t wait_multiplier = (marine_main_decisions(gametime)) ? 1 : 5;
 				set_taskpool_task_time(gametime + wait_multiplier * kMarineDecisionInterval,
 				                       SchedulerTaskId::KMarineDecisions);
 			}
@@ -723,7 +723,8 @@ void DefaultAI::late_initialization() {
 			}
 
 			// and fishers
-			if (bo.outputs.size() == 1 && tribe_->safe_ware_index("fish") == bo.outputs.at(0)) {
+			if (bo.outputs.size() == 1 && tribe_->safe_ware_index("fish") == bo.outputs.at(0) &&
+			    bo.inputs.empty()) {
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 
@@ -1304,8 +1305,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.unowned_buildable_spots_nearby =
 		   map.find_fields(Area<FCoords>(field.coords, kBuildableSpotsCheckArea),
 		                   &found_buildable_fields, find_unowned_buildable);
-		// Now iterate over fields to get nearest one
+		// Now iterate over fields to collect statistics
 		for (auto& coords : found_buildable_fields) {
+			// We are not interested in blocked fields
+			if (blocked_fields.is_blocked(coords)) {
+				continue;
+			}
+			// And now looking for nearest field
 			const uint32_t cur_distance = map.calc_distance(coords, field.coords);
 			if (cur_distance < field.nearest_buildable_spot_nearby) {
 				field.nearest_buildable_spot_nearby = cur_distance;
@@ -1694,7 +1700,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.inland = true;
 	}
 
-	const uint8_t score_parts_size = 60;
+	const uint8_t score_parts_size = 64;
 	int32_t score_parts[score_parts_size] = {0};
 	if (field.enemy_owned_land_nearby) {
 		score_parts[0] = 3 *
@@ -1873,6 +1879,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	                     5 * field.unowned_portspace_vicinity_nearby, kAbsValue);
 	score_parts[59] = (field.unowned_portspace_vicinity_nearby) ?
 	                     10 * std::abs(management_data.get_military_number_at(31)) :
+	                     0;
+	score_parts[60] = 3 *
+	                  management_data.neuron_pool[21].get_result_safe(
+	                     20 - field.nearest_buildable_spot_nearby, kAbsValue);
+	score_parts[61] = (field.nearest_buildable_spot_nearby < 8) ?
+	                     std::abs(management_data.get_military_number_at(153) * 2) :
+	                     0;
+	score_parts[62] = (field.nearest_buildable_spot_nearby > 20) ?
+	                     -std::abs(management_data.get_military_number_at(154) * 2) :
+	                     0;
+	score_parts[63] = (field.nearest_buildable_spot_nearby < 4) ?
+	                     std::abs(management_data.get_military_number_at(155) * 2) :
 	                     0;
 
 	for (uint16_t i = 0; i < score_parts_size; i++) {
@@ -2389,6 +2407,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			if (bo.is(BuildingAttribute::kShipyard)) {
 				assert(bo.new_building == BuildingNecessity::kAllowed ||
+				       bo.new_building == BuildingNecessity::kNeeded ||
 				       bo.new_building == BuildingNecessity::kForbidden);
 			}
 
@@ -2609,6 +2628,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Quarries are generally to be built everywhere where rocks are
 					// no matter the need for granite, as rocks are considered an obstacle
 					// to expansion
+					if (bf->rocks_nearby < 1) {
+						continue;
+					}
 					prio += 2 * bf->rocks_nearby;
 
 					if (bf->rocks_nearby > 0 && bf->near_border) {
@@ -2761,7 +2783,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio += 150;
 						assert(!bo.is(BuildingAttribute::kShipyard));
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
-						assert(bo.new_building == BuildingNecessity::kAllowed);
 						if (!map_allows_seafaring_) {
 							continue;
 						}
@@ -4572,12 +4593,15 @@ BuildingNecessity DefaultAI::check_warehouse_necessity(BuildingObserver& bo,
 	}
 
 	// So now we know the warehouse here is needed.
-	bo.primary_priority =
-	   1 +
-	   (needed_count - numof_warehouses_) * std::abs(management_data.get_military_number_at(22) * 5);
+	bo.primary_priority = 1 +
+	                      (needed_count - numof_warehouses_) *
+	                         std::abs(management_data.get_military_number_at(22) * 20);
 	++bo.new_building_overdue;
 	bo.primary_priority +=
-	   bo.new_building_overdue * std::abs(management_data.get_military_number_at(16)) / 10;
+	   bo.new_building_overdue * std::abs(management_data.get_military_number_at(16));
+	if (bo.is(BuildingAttribute::kPort) && spots_ < kSpotsTooLittle) {
+		bo.primary_priority += std::abs(management_data.get_military_number_at(152)) * 10;
+	}
 	return BuildingNecessity::kAllowed;
 }
 
@@ -4883,7 +4907,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[24] = -5;
 			inputs[25] = (basic_economy_established) ? 1 : -1;
 			inputs[26] = (basic_economy_established) ? 1 : -1;
-
+			inputs[27] = (bo.total_count() > 0 && spots_ < kSpotsEnough) ? -2 : 0;
+			inputs[28] = (bo.total_count() > 0 && spots_ < kSpotsTooLittle) ? -2 : 0;
+			inputs[29] = (spots_ < kSpotsEnough) ? -1 : 0;
+			inputs[30] = (spots_ < kSpotsTooLittle) ? -1 : 0;
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 				if (management_data.f_neuron_pool[53].get_position(i)) {
@@ -4904,7 +4931,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					bo.max_needed_preciousness = 1;
 				}
 				bo.primary_priority =
-				   1 + tmp_score * std::abs(management_data.get_military_number_at(137));
+				   1 + tmp_score * std::abs(management_data.get_military_number_at(137) / 2);
 				return BuildingNecessity::kNeeded;
 			}
 		} else if (bo.is(BuildingAttribute::kLumberjack)) {
@@ -5511,8 +5538,20 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 
 		} else if (bo.is(BuildingAttribute::kShipyard)) {
 			if (bo.total_count() > 0 ||
-			    site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) {
+			    (!basic_economy_established &&
+			     site_needed_for_economy == BasicEconomyBuildingStatus::kDiscouraged) ||
+			    !map_allows_seafaring_) {
 				return BuildingNecessity::kForbidden;
+			}
+			bo.primary_priority = 0;
+			if (num_ports > 0) {
+				bo.primary_priority += std::abs(management_data.get_military_number_at(150) * 3);
+			}
+			if (spots_ < kSpotsTooLittle) {
+				bo.primary_priority += std::abs(management_data.get_military_number_at(151) * 3);
+			}
+			if (bo.primary_priority > 0) {
+				return BuildingNecessity::kNeeded;
 			}
 			return BuildingNecessity::kAllowed;
 		} else if (bo.max_needed_preciousness == 0) {

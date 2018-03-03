@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
-"PO-Revision-Date: 2018-02-05 15:48+0000\n"
-"Last-Translator: David D\n"
+"POT-Creation-Date: 2018-02-23 18:16+0000\n"
+"PO-Revision-Date: 2018-02-23 18:19+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,18 +91,18 @@ msgid "%2.1f%%"
 msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:160
+#: ../../data/scripting/infrastructure.lua:168
 msgid "No Space"
 msgstr "Pas d'espace"
 
-#: ../../data/scripting/infrastructure.lua:161
+#: ../../data/scripting/infrastructure.lua:169
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Certains de vos bâtiments de départ n'ont pu être construits en raison du manque de place. Vous êtes désavantagé ; vous devriez envisager de redémarrer cette carte avec des conditions de départ équitables."
 
-#: ../../data/scripting/infrastructure.lua:162
+#: ../../data/scripting/infrastructure.lua:170
 msgid "Not enough space"
 msgstr "Espace insuffisant"
 
@@ -1373,68 +1373,68 @@ msgstr "En attente"
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Un navire d'expédition a navigué autour de ces îles sans encombre."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr "Côte atteinte"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
 msgstr "Terre en vue !"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Un navire d'expédition a atteint une côte et attend de nouveaux ordres."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:672
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "New port construction site is gone"
 msgstr "Le nouveau site de construction du port a disparu"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:672
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "Port Lost!"
 msgstr "Port perdu !"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:674
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Échec du déchargement des marchandises, l'expédition est maintenant annulée."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:847
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expédition"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:847
 msgid "Expedition Ready"
 msgstr "Expédition prête"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:848
 msgid "An expedition ship is waiting for your commands."
 msgstr "Un navire d'expédition attend vos ordres."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:983
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Livraison"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:987
+#: ../../src/logic/map_objects/tribes/ship.cc:988
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Attente"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:991
+#: ../../src/logic/map_objects/tribes/ship.cc:992
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Explore"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:995
+#: ../../src/logic/map_objects/tribes/ship.cc:996
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Espace portuaire trouvé"
@@ -1442,7 +1442,7 @@ msgstr "Espace portuaire trouvé"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1000
+#: ../../src/logic/map_objects/tribes/ship.cc:1001
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Fonde une colonie"
@@ -1555,7 +1555,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Carte Bluebyte Settlers II. Pas de commentaire défini !"
 
 #: ../../src/network/gameclient.cc:115
-#: ../../src/network/internet_gaming.cc:113
+#: ../../src/network/internet_gaming.cc:112
 msgid "Could not establish connection to host"
 msgstr "Impossible d'établir la connexion avec l'hôte"
 
@@ -1721,134 +1721,134 @@ msgid_plural "%li seconds"
 msgstr[0] "%li seconde"
 msgstr[1] "%li secondes"
 
-#: ../../src/network/internet_gaming.cc:114
+#: ../../src/network/internet_gaming.cc:113
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr "Widelands n'a pas pu établir de connexion à l'adresse donnée.\nSoit il n'y avait pas de méta-serveur au port supposé, soit\nvotre réseau est cassé."
 
-#: ../../src/network/internet_gaming.cc:173
+#: ../../src/network/internet_gaming.cc:176
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr "Les utilisateurs étiquetés IRC ne réagiront probablement pas aux messages."
 
-#: ../../src/network/internet_gaming.cc:211
+#: ../../src/network/internet_gaming.cc:214
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Reconnecté au méta-serveur avec succès !"
 
-#: ../../src/network/internet_gaming.cc:285
+#: ../../src/network/internet_gaming.cc:288
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Quelque-chose s'est mal passé : %s"
 
-#: ../../src/network/internet_gaming.cc:394
+#: ../../src/network/internet_gaming.cc:397
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "Vous avez été connecté en tant que '%s' car votre nom demandé est déjà utilisé ou réservé."
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:418
 msgid "Mixed up"
 msgstr "Mêlé"
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:418
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Le méta-serveur a envoyé une ERREUR étrange pendant la connexion"
 
-#: ../../src/network/internet_gaming.cc:426
+#: ../../src/network/internet_gaming.cc:429
 msgid "Unexpected packet"
 msgstr "Paquet inattendu"
 
-#: ../../src/network/internet_gaming.cc:427
+#: ../../src/network/internet_gaming.cc:430
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "Un paquet LOGIN, RELOGIN, ou REJECTED était attendu du serveur, mais la commande %s a été reçu. Peut-être le méta-serveur utilise-t-il une version du protocole différente ?"
 
-#: ../../src/network/internet_gaming.cc:439
+#: ../../src/network/internet_gaming.cc:442
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "AVERTISSEMENT : Une commande %s a été reçu, alors que nous ne sommes pas en train de CONNECTING."
 
-#: ../../src/network/internet_gaming.cc:450
+#: ../../src/network/internet_gaming.cc:453
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Le temps de compensation du serveur est de %d seconde."
 msgstr[1] "Le temps de compensation du serveur est de %d secondes."
 
-#: ../../src/network/internet_gaming.cc:474
+#: ../../src/network/internet_gaming.cc:477
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Type de message chat \"%s\" invalide."
 
-#: ../../src/network/internet_gaming.cc:474
+#: ../../src/network/internet_gaming.cc:477
 msgid "Invalid message type"
 msgstr "Type de message invalide"
 
-#: ../../src/network/internet_gaming.cc:512
+#: ../../src/network/internet_gaming.cc:515
 #, c-format
 msgid "The game %s is now available"
 msgstr "La partie %s est maintenant disponible"
 
-#: ../../src/network/internet_gaming.cc:522
+#: ../../src/network/internet_gaming.cc:525
 #, c-format
 msgid "The game %s has been closed"
 msgstr "La partie %s a été fermé"
 
-#: ../../src/network/internet_gaming.cc:569
+#: ../../src/network/internet_gaming.cc:572
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s rejoint le vestibule"
 
-#: ../../src/network/internet_gaming.cc:576
+#: ../../src/network/internet_gaming.cc:579
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s quitte le vestibule"
 
-#: ../../src/network/internet_gaming.cc:628
+#: ../../src/network/internet_gaming.cc:631
 msgid "Chat message could not be sent."
 msgstr "Le message tchat ne peut pas être envoyé."
 
-#: ../../src/network/internet_gaming.cc:642
+#: ../../src/network/internet_gaming.cc:645
 #, c-format
 msgid "ERROR: %s"
 msgstr "ERREUR : %s"
 
-#: ../../src/network/internet_gaming.cc:652
+#: ../../src/network/internet_gaming.cc:655
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Reçu une commande inconnue depuis le méta-serveur : %s"
 
-#: ../../src/network/internet_gaming.cc:779
+#: ../../src/network/internet_gaming.cc:782
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Le message n'a pas pu être envoyé : vous n'êtes pas connecté au méta-serveur !"
 
-#: ../../src/network/internet_gaming.cc:798
-#: ../../src/network/internet_gaming.cc:805
+#: ../../src/network/internet_gaming.cc:801
+#: ../../src/network/internet_gaming.cc:808
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Le message n'a pas pu être envoyé : était-ce censé être un message privé ?"
 
-#: ../../src/network/internet_gaming.cc:812
+#: ../../src/network/internet_gaming.cc:815
 msgid "Private messages to IRC users are not supported."
 msgstr "Les messages privés vers des utilisateurs d'IRC ne sont pas soutenus."
 
-#: ../../src/network/internet_gaming.cc:889
+#: ../../src/network/internet_gaming.cc:892
 msgid "Conversion error"
 msgstr "Erreur de conversion"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:892
+#: ../../src/network/internet_gaming.cc:895
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Impossible de déterminer la vrai valeur de \"%s\""
 
-#: ../../src/network/internet_gaming.cc:909
+#: ../../src/network/internet_gaming.cc:912
 msgid "unknown"
 msgstr "inconnu"
 
@@ -3154,17 +3154,17 @@ msgstr "Augmenter la valeur cible"
 msgid "Reset to default"
 msgstr "Réinitialiser aux valeurs par défaut"
 
+#: ../../src/wui/fieldaction.cc:216
+msgid "Build small building"
+msgstr "Construire un petit bâtiment"
+
 #: ../../src/wui/fieldaction.cc:217
-msgid "Build large building"
-msgstr "Construire un grand bâtiment"
+msgid "Build big building"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
 msgstr "Construire un bâtiment moyen"
-
-#: ../../src/wui/fieldaction.cc:217
-msgid "Build small building"
-msgstr "Construire un petit bâtiment"
 
 #: ../../src/wui/fieldaction.cc:218
 msgid "Build port building"
@@ -3397,8 +3397,9 @@ msgstr "Afficher la boîte de réception"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
-#. message.
-#: ../../src/wui/game_message_menu.cc:626
+#. * message.
+#. * DO NOT omit the placeholder in your translation.
+#: ../../src/wui/game_message_menu.cc:628
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -3406,14 +3407,15 @@ msgstr[0] "Restaurer le message %d sélectionné:"
 msgstr[1] "Restaurer les messages %d sélectionnés:"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:632
+#: ../../src/wui/game_message_menu.cc:634
 msgid "Restore selected message"
 msgstr "Restaurer le message sélectionné"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
-#. message.
-#: ../../src/wui/game_message_menu.cc:640
+#. * message.
+#. * DO NOT omit the placeholder in your translation.
+#: ../../src/wui/game_message_menu.cc:644
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -3421,12 +3423,12 @@ msgstr[0] "Archiver le message %d sélectionné"
 msgstr[1] "Archiver les messages %d sélectionnés"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:646
+#: ../../src/wui/game_message_menu.cc:650
 msgid "Archive selected message"
 msgstr "Archiver le message sélectionné"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:651
+#: ../../src/wui/game_message_menu.cc:655
 #, c-format
 msgid "Del: %s"
 msgstr "Suppr. : %s"
@@ -3797,26 +3799,28 @@ msgid "Do you really want to delete this replay?"
 msgstr "Voulez-vous vraiment effacer ce replay ?"
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
-#: ../../src/wui/load_or_save_game.cc:250
+#. DO NOT omit the placeholder in your translation.
+#: ../../src/wui/load_or_save_game.cc:251
 #, c-format
 msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
 msgstr[0] "Voulez vous réellement supprimer ce %d replay ?"
 msgstr[1] "Voulez vous réellement supprimer ces %d replays ?"
 
-#: ../../src/wui/load_or_save_game.cc:257
+#: ../../src/wui/load_or_save_game.cc:258
 msgid "Do you really want to delete this game?"
 msgstr "Voulez-vous vraiment effacer cette partie ?"
 
 #. * TRANSLATORS: Used with multiple games, 1 game has a separate string.
-#: ../../src/wui/load_or_save_game.cc:259
+#. DO NOT omit the placeholder in your translation.
+#: ../../src/wui/load_or_save_game.cc:261
 #, c-format
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
 msgstr[0] "Voulez vous réellement supprimer cette %d partie ?"
 msgstr[1] "Voulez vous réellement supprimer ces %d parties ?"
 
-#: ../../src/wui/load_or_save_game.cc:272
+#: ../../src/wui/load_or_save_game.cc:274
 msgid "Confirm Deleting File"
 msgid_plural "Confirm Deleting Files"
 msgstr[0] "Confirmez la suppression du fichier"
@@ -3825,42 +3829,42 @@ msgstr[1] "Confirmez la suppression des fichiers"
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:387
+#: ../../src/wui/load_or_save_game.cc:389
 msgid "Today, %1%:%2%"
 msgstr "Aujourd'hui, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:391
+#: ../../src/wui/load_or_save_game.cc:393
 msgid "saved today at %1%:%2%"
 msgstr "sauvegardé aujourd'hui à %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:404
+#: ../../src/wui/load_or_save_game.cc:406
 msgid "Yesterday, %1%:%2%"
 msgstr "Hier, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:408
+#: ../../src/wui/load_or_save_game.cc:410
 msgid "saved yesterday at %1%:%2%"
 msgstr "sauvegardé hier à %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/load_or_save_game.cc:414
+#: ../../src/wui/load_or_save_game.cc:416
 msgid "%1% %2%, %3%"
 msgstr "%1% %2%, %3%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
-#. month day, year. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:420
+#. month (short name) day (number), year (number). This is part of a list.
+#: ../../src/wui/load_or_save_game.cc:422
 msgid "saved on %1% %2%, %3%"
 msgstr "sauvé sur%1% %2%, %3%"
 
@@ -3869,7 +3873,7 @@ msgstr "sauvé sur%1% %2%, %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/wui/load_or_save_game.cc:441
+#: ../../src/wui/load_or_save_game.cc:443
 msgid "SP"
 msgstr "SP"
 
@@ -3879,7 +3883,7 @@ msgstr "SP"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:449
+#: ../../src/wui/load_or_save_game.cc:451
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -3889,31 +3893,31 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:457
+#: ../../src/wui/load_or_save_game.cc:459
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
-#: ../../src/wui/load_or_save_game.cc:467
+#: ../../src/wui/load_or_save_game.cc:469
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/load_or_save_game.cc:483
+#: ../../src/wui/load_or_save_game.cc:485
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Ce fichier n'est pas au bon format et ne peut être chargé. Il a peut-être été créé avec une vieille version de Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wui/load_or_save_game.cc:486
+#: ../../src/wui/load_or_save_game.cc:488
 msgid "Error message:"
 msgstr "Message d'erreur :"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/wui/load_or_save_game.cc:497
 #: ../../src/wui/load_or_save_game.cc:499
+#: ../../src/wui/load_or_save_game.cc:501
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Incompatible : %s"

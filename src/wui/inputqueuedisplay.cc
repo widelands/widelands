@@ -308,6 +308,11 @@ void InputQueueDisplay::update_siblings(int32_t state) {
 			// Cast failed. Sibling is no InputQueueDisplay
 			continue;
 		}
+		if (display->type_ != Widelands::wwWARE) {
+			// No ware, so there is no radio group
+			continue;
+		}
+		assert(display->priority_radiogroup_ != nullptr);
 		if (display->priority_radiogroup_->get_state() == state) {
 			// Nothing to do for this queue
 			continue;

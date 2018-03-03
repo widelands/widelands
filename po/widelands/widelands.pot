@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-15 09:25+0000\n"
+"POT-Creation-Date: 2018-03-02 08:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -15,13 +15,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../../data/scripting/format_scenario.lua:12
-#: ../../data/scripting/richtext_scenarios.lua:34
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr ""
 
 #: ../../data/scripting/format_scenario.lua:40
-#: ../../data/scripting/richtext_scenarios.lua:85
+#: ../../data/scripting/richtext_scenarios.lua:90
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] ""
@@ -29,7 +29,7 @@ msgstr[1] ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:12 ../../data/scripting/richtext.lua:38
+#: ../../data/scripting/formatting.lua:12 ../../data/scripting/richtext.lua:534
 #: ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
@@ -37,7 +37,7 @@ msgstr ""
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:14 ../../data/scripting/richtext.lua:40
+#: ../../data/scripting/formatting.lua:14 ../../data/scripting/richtext.lua:536
 #: ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
@@ -48,8 +48,8 @@ msgstr ""
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:16
-#: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:42
-#: ../../data/scripting/richtext.lua:47 ../../src/base/i18n.cc:341
+#: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:538
+#: ../../data/scripting/richtext.lua:543 ../../src/base/i18n.cc:341
 #: ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
@@ -57,7 +57,7 @@ msgstr ""
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:18 ../../data/scripting/richtext.lua:44
+#: ../../data/scripting/formatting.lua:18 ../../data/scripting/richtext.lua:540
 #: ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
@@ -92,9 +92,14 @@ msgstr ""
 msgid "Not enough space"
 msgstr ""
 
+#: ../../data/scripting/messages.lua:50 ../../data/scripting/messages.lua:52
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
+msgid "Status"
+msgstr ""
+
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank space here.
-#: ../../data/scripting/richtext.lua:459
+#: ../../data/scripting/richtext.lua:505
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
@@ -1323,72 +1328,72 @@ msgstr ""
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr ""
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:672
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:672
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "Port Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:674
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:847
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:847
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:848
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:983
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:987
+#: ../../src/logic/map_objects/tribes/ship.cc:988
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:991
+#: ../../src/logic/map_objects/tribes/ship.cc:992
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:995
+#: ../../src/logic/map_objects/tribes/ship.cc:996
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1000
+#: ../../src/logic/map_objects/tribes/ship.cc:1001
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
@@ -3094,16 +3099,16 @@ msgstr ""
 msgid "Reset to default"
 msgstr ""
 
+#: ../../src/wui/fieldaction.cc:216
+msgid "Build small building"
+msgstr ""
+
 #: ../../src/wui/fieldaction.cc:217
-msgid "Build large building"
+msgid "Build big building"
 msgstr ""
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
-msgstr ""
-
-#: ../../src/wui/fieldaction.cc:217
-msgid "Build small building"
 msgstr ""
 
 #: ../../src/wui/fieldaction.cc:218
@@ -3224,10 +3229,6 @@ msgctxt "message"
 msgid "Type"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
-msgid "Status"
-msgstr ""
-
 #. * TRANSLATORS: We have very little space here. You can also translate this as "Time" or "Time
 #. * Sent"
 #. * TRANSLATORS: This is used in the game messages menu - please open an issue if you need more
@@ -3332,8 +3333,10 @@ msgid "Show Inbox"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
-#. message.
-#: ../../src/wui/game_message_menu.cc:626
+#. * message.
+#. * DO NOT omit the placeholder in your translation.
+#.
+#: ../../src/wui/game_message_menu.cc:628
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -3341,13 +3344,15 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:632
+#: ../../src/wui/game_message_menu.cc:634
 msgid "Restore selected message"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
-#. message.
-#: ../../src/wui/game_message_menu.cc:640
+#. * message.
+#. * DO NOT omit the placeholder in your translation.
+#.
+#: ../../src/wui/game_message_menu.cc:644
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -3355,12 +3360,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:646
+#: ../../src/wui/game_message_menu.cc:650
 msgid "Archive selected message"
 msgstr ""
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:651
+#: ../../src/wui/game_message_menu.cc:655
 #, c-format
 msgid "Del: %s"
 msgstr ""
@@ -3722,26 +3727,28 @@ msgid "Do you really want to delete this replay?"
 msgstr ""
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
-#: ../../src/wui/load_or_save_game.cc:250
+#. DO NOT omit the placeholder in your translation.
+#: ../../src/wui/load_or_save_game.cc:251
 #, c-format
 msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/wui/load_or_save_game.cc:257
+#: ../../src/wui/load_or_save_game.cc:258
 msgid "Do you really want to delete this game?"
 msgstr ""
 
 #. * TRANSLATORS: Used with multiple games, 1 game has a separate string.
-#: ../../src/wui/load_or_save_game.cc:259
+#. DO NOT omit the placeholder in your translation.
+#: ../../src/wui/load_or_save_game.cc:261
 #, c-format
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/wui/load_or_save_game.cc:272
+#: ../../src/wui/load_or_save_game.cc:274
 msgid "Confirm Deleting File"
 msgid_plural "Confirm Deleting Files"
 msgstr[0] ""
@@ -3749,37 +3756,37 @@ msgstr[1] ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:387
+#: ../../src/wui/load_or_save_game.cc:389
 msgid "Today, %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:391
+#: ../../src/wui/load_or_save_game.cc:393
 msgid "saved today at %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:404
+#: ../../src/wui/load_or_save_game.cc:406
 msgid "Yesterday, %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:408
+#: ../../src/wui/load_or_save_game.cc:410
 msgid "saved yesterday at %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 #. month day, year
-#: ../../src/wui/load_or_save_game.cc:414
+#: ../../src/wui/load_or_save_game.cc:416
 msgid "%1% %2%, %3%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-#. month day, year. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:420
+#. month (short name) day (number), year (number). This is part of a list.
+#: ../../src/wui/load_or_save_game.cc:422
 msgid "saved on %1% %2%, %3%"
 msgstr ""
 
@@ -3787,7 +3794,7 @@ msgstr ""
 #. * TRANSLATORS: "Keep this to 6 letters maximum.
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
-#: ../../src/wui/load_or_save_game.cc:441
+#: ../../src/wui/load_or_save_game.cc:443
 msgid "SP"
 msgstr ""
 
@@ -3796,7 +3803,7 @@ msgstr ""
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:449
+#: ../../src/wui/load_or_save_game.cc:451
 msgid "H (%1%)"
 msgstr ""
 
@@ -3805,30 +3812,30 @@ msgstr ""
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:457
+#: ../../src/wui/load_or_save_game.cc:459
 msgid "MP (%1%)"
 msgstr ""
 
-#: ../../src/wui/load_or_save_game.cc:467
+#: ../../src/wui/load_or_save_game.cc:469
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr ""
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be loaded
-#: ../../src/wui/load_or_save_game.cc:483
+#: ../../src/wui/load_or_save_game.cc:485
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wui/load_or_save_game.cc:486
+#: ../../src/wui/load_or_save_game.cc:488
 msgid "Error message:"
 msgstr ""
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/wui/load_or_save_game.cc:497
 #: ../../src/wui/load_or_save_game.cc:499
+#: ../../src/wui/load_or_save_game.cc:501
 #, c-format
 msgid "Incompatible: %s"
 msgstr ""
