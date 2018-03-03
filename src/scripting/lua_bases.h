@@ -46,7 +46,7 @@ public:
 	explicit LuaEditorGameBase(lua_State* L) {
 		report_error(L, "Cannot instantiate a 'EditorGameBase' directly!");
 	}
-	virtual ~LuaEditorGameBase() {
+	~LuaEditorGameBase() override {
 	}
 
 	void __persist(lua_State* L) override;
@@ -89,7 +89,7 @@ public:
 	explicit LuaPlayerBase(Widelands::PlayerNumber n) {
 		player_number_ = n;
 	}
-	virtual ~LuaPlayerBase() {
+	~LuaPlayerBase() override {
 	}
 
 	void __persist(lua_State* L) override;

@@ -28,8 +28,7 @@
 /**
  * Build a render target for the given surface.
  */
-RenderTarget::RenderTarget(Surface* surf) {
-	surface_ = surf;
+RenderTarget::RenderTarget(Surface* surf) : surface_(surf) {
 	reset();
 }
 

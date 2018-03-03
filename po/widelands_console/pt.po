@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2016 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # GunChleoc, 2015
 # GunChleoc, 2015
-# zecas <jjorge@free.fr>, 2016
+# zecas <jjorge@free.fr>, 2016,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2016-11-15 06:27+0000\n"
-"PO-Revision-Date: 2016-11-15 22:02+0000\n"
+"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"PO-Revision-Date: 2018-02-04 21:10+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -125,15 +125,30 @@ msgstr " --editor             Inicia directamente no editor de Widelands.\n     
 
 #: ../../src/wlapplication_messages.cc:93
 msgid ""
+" --ai_training        Enables AI training mode. See\n"
+"                      https://wl.widelands.org/wiki/Ai%20Training/\n"
+"                      for a full description of the AI training logic."
+msgstr " --ai_training        Ativa o modo de treino da IA. Veja\n                      https://wl.widelands.org/wiki/Ai%20Training/\n                      para uma descrição completa do treino."
+
+#: ../../src/wlapplication_messages.cc:97
+msgid ""
+" --auto_speed         In multiplayer games only, this will keep\n"
+"                      adjusting the game speed automatically,\n"
+"                      depending on FPS. Useful in conjunction with\n"
+"                      --ai_training."
+msgstr " --auto_speed         Em jogos em rede, isto vai mudar a velocidade \n                       do jogo automaticamente seguinte as IPS. Útil\n                      em conjunção com o --ai_training."
+
+#: ../../src/wlapplication_messages.cc:102
+msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr " --scenario=FICHEIRO  Inicia directamente o nome de FICHEIRO como \n                      mapa de cenário."
 
-#: ../../src/wlapplication_messages.cc:96
+#: ../../src/wlapplication_messages.cc:105
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr " --loadgame=FICHEIRO  Inicia directamente o FICHEIRO do jogo guardado."
 
-#: ../../src/wlapplication_messages.cc:97
+#: ../../src/wlapplication_messages.cc:106
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
@@ -143,7 +158,7 @@ msgstr " --script=FILENAME Lança o script Lua indicado depois do arranque.\nSó
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:103
+#: ../../src/wlapplication_messages.cc:112
 msgid ""
 " --auto_roadbuild_mode=[true|false]\n"
 "                      Whether to enter roadbuilding mode\n"
@@ -151,7 +166,7 @@ msgid ""
 "                      not connected to a road."
 msgstr " --auto_roadbuild_mode=[yes|no]\n                      Entrar ou não automaticamente em modo de construção\n                      de estradas depois de plantar uma bandeira que não \n                      está ligada a uma estrada."
 
-#: ../../src/wlapplication_messages.cc:109
+#: ../../src/wlapplication_messages.cc:118
 msgid "Graphic options:"
 msgstr "Opções Gráficas:"
 
@@ -159,26 +174,36 @@ msgstr "Opções Gráficas:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:113
+#: ../../src/wlapplication_messages.cc:122
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[yes|no]\n                      Usar ou não o modo ecrã completo para mostrar o ecrã\n                      de jogo."
 
-#: ../../src/wlapplication_messages.cc:117
+#: ../../src/wlapplication_messages.cc:126
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         Largura da janela em pixel."
 
-#: ../../src/wlapplication_messages.cc:118
+#: ../../src/wlapplication_messages.cc:127
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Altura da janela em pixel."
 
-#: ../../src/wlapplication_messages.cc:123
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands
+#. textdomain
+#: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Opções para o gestor de janelas interno:"
 
-#: ../../src/wlapplication_messages.cc:124
+#: ../../src/wlapplication_messages.cc:133
+msgid ""
+" --animate_map_panning=[yes|no]\n"
+"                      Should automatic map movements be animated."
+msgstr " --animate_map_panning=[yes|no]\n                      Se os movimentos automáticos da mapa devem ser animados."
+
+#: ../../src/wlapplication_messages.cc:136
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -190,7 +215,7 @@ msgstr " --border_snap_distance=[0 ...]\n                      Mover uma janela 
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:132
+#: ../../src/wlapplication_messages.cc:144
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -198,7 +223,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr " --dock_windows_to_edges=[yes|no]\n                      Eliminar a borda da janela mais perto da\n                      borda do ecrã quando a borda da janela \n                      estiver próxima da borda do ecrã."
 
-#: ../../src/wlapplication_messages.cc:137
+#: ../../src/wlapplication_messages.cc:149
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -206,7 +231,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr " --panel_snap_distance=[0 ...]\n                      Mover uma janela para a borda do painel quando\n                      a borda da janela se aproximar da borda do\n                      painel à distância indicada."
 
-#: ../../src/wlapplication_messages.cc:142
+#: ../../src/wlapplication_messages.cc:154
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -214,15 +239,15 @@ msgid ""
 "                      panel."
 msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Apenas mover a janela para a borda do painel\n                      se a janela se sobrepuser ao painel."
 
-#: ../../src/wlapplication_messages.cc:148
+#: ../../src/wlapplication_messages.cc:160
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Activa mensagens de depuração verbosas"
 
-#: ../../src/wlapplication_messages.cc:149
+#: ../../src/wlapplication_messages.cc:161
 msgid " --help               Show this help"
 msgstr " --help               Apresenta esta ajuda"
 
-#: ../../src/wlapplication_messages.cc:150
+#: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"

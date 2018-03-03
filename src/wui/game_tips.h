@@ -29,7 +29,7 @@
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {
 	GameTips(UI::ProgressWindow& progressWindow, const std::vector<std::string>&);
-	virtual ~GameTips();
+	~GameTips() override;
 
 	void update(bool repaint) override;
 	void stop() override;

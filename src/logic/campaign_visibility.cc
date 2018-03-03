@@ -28,6 +28,7 @@
 
 #include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -37,33 +38,31 @@ constexpr int kCurrentVersion = 8;
 }
 
 /**
- * Get the path of campaign visibility save-file
+ * Make sure that campaigns visibility-save is up to date and well-formed
  */
-std::string CampaignVisibilitySave::get_path() {
-	std::string savepath = "save";
-	g_fs->ensure_directory_exists(savepath);  // Make sure save directory exists
-	savepath += "/campvis";                   // add the name of save-file
+void CampaignVisibilitySave::ensure_campvis_file_exists() {
+	g_fs->ensure_directory_exists(kSaveDir);
+	// NOCOM add compatibility layer to save/campvis?
+	// Use completed rather than visible?
 
-	// Make sure that campaigns visibility-save is up to date and well-formed
-	update_campvis(savepath);
-	return savepath;
+	if (!(g_fs->file_exists(kCampVisFile))) {
+		// There is no campvis file - create one.
+		Profile campvis(kCampVisFile.c_str());
+		campvis.pull_section("global");
+		campvis.pull_section("campaigns");
+		campvis.pull_section("scenarios");
+		campvis.write(kCampVisFile.c_str(), true);
+	}
 }
+
 
 /**
  * Update the campaign visibility save-file of the user
  */
-void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
-	// Prepare campvis
-	if (!(g_fs->file_exists(savepath))) {
-		// There is no campvis file - create one.
-		Profile campvis(savepath.c_str());
-		campvis.pull_section("global");
-		campvis.pull_section("campaigns");
-		campvis.pull_section("scenarios");
-		campvis.write(savepath.c_str(), true);
-	}
+void CampaignVisibilitySave::update_campvis() const {
+	ensure_campvis_file_exists();
 
-	Profile campvis(savepath.c_str());
+	Profile campvis(kCampVisFile.c_str());
 
 	// TODO(GunChleoc): Remove compatibility code after Build 21.
 	std::map<std::string, std::string> legacy_scenarios;
@@ -139,7 +138,7 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	}
 
 	// Now write everything
-	Profile write_campvis(savepath.c_str());
+	Profile write_campvis(kCampVisFile.c_str());
 	write_campvis.pull_section("global").set_int("version", kCurrentVersion);
 
 	Section& write_campaigns = write_campvis.pull_section("campaigns");
@@ -152,7 +151,7 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 		write_scenarios.set_bool(scenario.first.c_str(), scenario.second);
 	}
 
-	write_campvis.write(savepath.c_str(), true);
+	write_campvis.write(kCampVisFile.c_str(), true);
 }
 
 /**
@@ -161,6 +160,8 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
  * campaign/scenario as visible.
  */
 void CampaignVisibilitySave::mark_scenario_as_solved(const std::string& name) {
+	ensure_campvis_file_exists();
+
 	// Check which campaign and/or scenario to reveal
 	std::string campaign_to_reveal = "";
 	std::string scenario_to_reveal = "";
@@ -195,13 +196,12 @@ void CampaignVisibilitySave::mark_scenario_as_solved(const std::string& name) {
 	}
 
 	// Write the campvis
-	std::string savepath = get_path();
-	Profile campvis(savepath.c_str());
+	Profile campvis(kCampVisFile.c_str());
 	if (!campaign_to_reveal.empty()) {
 		campvis.pull_section("campaigns").set_bool(campaign_to_reveal.c_str(), true);
 	}
 	if (!scenario_to_reveal.empty()) {
 		campvis.pull_section("scenarios").set_bool(scenario_to_reveal.c_str(), true);
 	}
-	campvis.write(savepath.c_str(), false);
+	campvis.write(kCampVisFile.c_str(), false);
 }

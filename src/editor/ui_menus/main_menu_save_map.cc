@@ -37,6 +37,7 @@
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/messagebox.h"
@@ -129,12 +130,12 @@ void MainMenuSaveMap::clicked_ok() {
 		set_current_directory(complete_filename);
 		fill_table();
 	} else {  //  Ok, save this map
-		Widelands::Map& map = eia().egbase().map();
-		if (map.get_name() == _("No Name")) {
+		Widelands::Map* map = eia().egbase().mutable_map();
+		if (map->get_name() == _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
-			map.set_name(4 <= filename_size && boost::iends_with(filename, WLMF_SUFFIX) ?
-			                filename.substr(0, filename_size - 4) :
-			                filename);
+			map->set_name(4 <= filename_size && boost::iends_with(filename, kWidelandsMapExtension) ?
+			                 filename.substr(0, filename_size - 4) :
+			                 filename);
 		}
 		if (save_map(filename, !g_options.pull_section("global").get_bool("nozip", false))) {
 			die();
@@ -218,9 +219,9 @@ void MainMenuSaveMap::edit_box_changed() {
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
-	/** TRANSLATORS: The folder that a file will be saved to. */
 	directory_info_.set_text(
-	   (boost::format(_("Current Directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
+	   /** TRANSLATORS: The folder that a file will be saved to. */
+	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
 	      .str());
 }
 
@@ -239,8 +240,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	boost::trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, WLMF_SUFFIX))
-		filename += WLMF_SUFFIX;
+	if (!boost::iends_with(filename, kWidelandsMapExtension))
+		filename += kWidelandsMapExtension;
 
 	//  Append directory name.
 	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
@@ -272,23 +273,24 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	Widelands::EditorGameBase& egbase = eia().egbase();
-	Widelands::Map& map = egbase.map();
+	Widelands::Map* map = egbase.mutable_map();
 
 	{  // fs scope
 		std::unique_ptr<FileSystem> fs(
 		   g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
-		if (map.allows_seafaring()) {
-			map.add_tag("seafaring");
+		map->cleanup_port_spaces(egbase.world());
+		if (map->allows_seafaring()) {
+			map->add_tag("seafaring");
 		} else {
-			map.delete_tag("seafaring");
+			map->delete_tag("seafaring");
 		}
 
-		if (map.has_artifacts()) {
-			map.add_tag("artifacts");
+		if (map->has_artifacts()) {
+			map->add_tag("artifacts");
 		} else {
-			map.delete_tag("artifacts");
+			map->delete_tag("artifacts");
 		}
 
 		try {
@@ -297,14 +299,14 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			delete wms;
 			// Reset filesystem to avoid file locks on saves
 			fs.reset();
-			map.reset_filesystem();
+			map->reset_filesystem();
 			eia().set_need_save(false);
 			g_fs->fs_unlink(complete_filename);
 			g_fs->fs_rename(tmp_name, complete_filename);
 			// Also change fs, as we assign it to the map below
 			fs.reset(g_fs->make_sub_file_system(complete_filename));
 			// Set the filesystem of the map to the current save file / directory
-			map.swap_filesystem(fs);
+			map->swap_filesystem(fs);
 			// DONT use fs as of here, its garbage now!
 
 		} catch (const std::exception& e) {

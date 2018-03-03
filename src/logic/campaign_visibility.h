@@ -26,11 +26,11 @@
 #include <stdint.h>
 
 struct CampaignVisibilitySave {
-	std::string get_path();
+	static void ensure_campvis_file_exists();
 	void mark_scenario_as_solved(const std::string& name);
 
 private:
-	void update_campvis(const std::string&);
+	void update_campvis() const;
 };
 
 #endif  // end of include guard: WL_LOGIC_CAMPAIGN_VISIBILITY_H

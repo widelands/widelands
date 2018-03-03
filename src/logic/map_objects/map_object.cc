@@ -37,6 +37,7 @@
 #include "io/filewrite.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/player.h"
 #include "logic/queue_cmd_ids.h"
 #include "map_io/map_object_loader.h"
@@ -215,14 +216,21 @@ MapObjectDescr IMPLEMENTATION
 */
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
-                               const std::string& init_descname)
-   : type_(init_type), name_(init_name), descname_(init_descname) {
+                               const std::string& init_descname,
+                               const std::string& init_helptext_script)
+   : type_(init_type),
+     name_(init_name),
+     descname_(init_descname),
+     helptext_script_(init_helptext_script) {
 }
 MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
                                const std::string& init_name,
                                const std::string& init_descname,
                                const LuaTable& table)
-   : MapObjectDescr(init_type, init_name, init_descname) {
+   : MapObjectDescr(init_type,
+                    init_name,
+                    init_descname,
+                    table.has_key("helptext_script") ? table.get_string("helptext_script") : "") {
 	if (table.has_key("animations")) {
 		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 		for (const std::string& animation : anims->keys<std::string>()) {
@@ -246,6 +254,7 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 	if (table.has_key("representative_image")) {
 		representative_image_filename_ = table.get_string("representative_image");
 	}
+	check_representative_image();
 }
 MapObjectDescr::~MapObjectDescr() {
 	anims_.clear();
@@ -275,14 +284,29 @@ void MapObjectDescr::add_directional_animation(DirAnimations* anims, const std::
 		const std::string anim_name = prefix + std::string("_") + dirstrings[dir - 1];
 		try {
 			anims->set_animation(dir, get_animation(anim_name));
-		} catch (const MapObjectDescr::AnimationNonexistent&) {
-			throw GameDataError("MO: no directional animation '%s'", anim_name.c_str());
+		} catch (const GameDataError& e) {
+			throw GameDataError("MO: Missing directional animation: %s", e.what());
 		}
 	}
 }
 
-std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
+uint32_t MapObjectDescr::get_animation(char const* const anim) const {
+	std::map<std::string, uint32_t>::const_iterator it = anims_.find(anim);
+	if (it == anims_.end()) {
+		throw GameDataError("Unknown animation: %s for %s", anim, name().c_str());
+	}
+	return it->second;
+}
 
+uint32_t MapObjectDescr::get_animation(const std::string& animname) const {
+	return get_animation(animname.c_str());
+}
+
+uint32_t MapObjectDescr::main_animation() const {
+	return !anims_.empty() ? anims_.begin()->second : 0;
+}
+
+std::string MapObjectDescr::get_animation_name(uint32_t const anim) const {
 	for (const auto& temp_anim : anims_) {
 		if (temp_anim.second == anim) {
 			return temp_anim.first;
@@ -299,6 +323,14 @@ const Image* MapObjectDescr::representative_image(const RGBColor* player_color) 
 }
 const std::string& MapObjectDescr::representative_image_filename() const {
 	return representative_image_filename_;
+}
+
+void MapObjectDescr::check_representative_image() {
+	if (representative_image() == nullptr) {
+		throw Widelands::GameDataError(
+		   "The %s %s has no representative image. Does it have an \"idle\" animation?",
+		   to_string(type()).c_str(), name().c_str());
+	}
 }
 
 const Image* MapObjectDescr::icon() const {
@@ -653,6 +685,8 @@ std::string to_string(const MapObjectType type) {
 		return "dismantlesite";
 	case MapObjectType::WAREHOUSE:
 		return "warehouse";
+	case MapObjectType::MARKET:
+		return "market";
 	case MapObjectType::PRODUCTIONSITE:
 		return "productionsite";
 	case MapObjectType::MILITARYSITE:

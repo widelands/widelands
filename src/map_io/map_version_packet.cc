@@ -42,9 +42,9 @@ void MapVersionPacket::read(FileSystem& fs,
 	try {
 		prof.read("version", nullptr, fs);
 	} catch (...) {
-		Map& map = egbase.map();
-		map.map_version_.map_version_timestamp = 0;
-		map.map_version_.map_creator_version = "unknown";
+		Map* map = egbase.mutable_map();
+		map->map_version_.map_version_timestamp = 0;
+		map->map_version_.map_creator_version = "unknown";
 		return;
 	}
 
@@ -55,14 +55,14 @@ void MapVersionPacket::read(FileSystem& fs,
 		if ((packet_version == kCurrentPacketVersion) ||
 		    (packet_version > kCurrentPacketVersion &&
 		     forward_compatibility <= kCurrentPacketVersion)) {
-			Map& map = egbase.map();
-			map.map_version_.map_source_url = globv.get_safe_string("map_source_url");
-			map.map_version_.map_source_release = globv.get_safe_string("map_release");
-			map.map_version_.map_creator_version = globv.get_safe_string("map_creator_version");
-			map.map_version_.map_version_major = globv.get_safe_int("map_version_major");
-			map.map_version_.map_version_minor = globv.get_safe_int("map_version_minor");
+			Map* map = egbase.mutable_map();
+			map->map_version_.map_source_url = globv.get_safe_string("map_source_url");
+			map->map_version_.map_source_release = globv.get_safe_string("map_release");
+			map->map_version_.map_creator_version = globv.get_safe_string("map_creator_version");
+			map->map_version_.map_version_major = globv.get_safe_int("map_version_major");
+			map->map_version_.map_version_minor = globv.get_safe_int("map_version_minor");
 			uint32_t ts = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
-			map.map_version_.map_version_timestamp = ts;
+			map->map_version_.map_version_timestamp = ts;
 		} else {
 			throw UnhandledVersionError("MapVersionPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -108,7 +108,7 @@ void MapVersionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSa
 	// TODO(unknown): -- we could store the unix time in uint32, as a partial fix to 2038 problem.
 	// There seems to be a get_safe_natural method, but not corresponding setter.
 
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	globs.set_string("map_source_url", map.map_version_.map_source_url);
 	globs.set_string("map_release", map.map_version_.map_source_release);
 	globs.set_string("map_creator_version", map.map_version_.map_creator_version);

@@ -217,7 +217,7 @@ def main():
     args = parse_args()
 
     WidelandsTestCase.path_to_widelands_binary = args.binary
-    print("Using '{}' binary.".format(args.binary)) 
+    print("Using '{}' binary.".format(args.binary))
     WidelandsTestCase.do_use_random_directory = not args.nonrandom
     WidelandsTestCase.keep_output_around = args.keep_around
 

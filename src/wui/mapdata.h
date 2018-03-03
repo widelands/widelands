@@ -84,7 +84,7 @@ public:
 	uint32_t nrplayers;
 	uint32_t width;
 	uint32_t height;
-	std::vector<Widelands::Map::SuggestedTeamLineup> suggested_teams;
+	std::vector<Widelands::SuggestedTeamLineup> suggested_teams;
 	std::set<std::string> tags;
 	MapData::MapType maptype;
 	MapData::DisplayType displaytype;

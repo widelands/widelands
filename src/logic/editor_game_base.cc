@@ -67,15 +67,12 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
    : gametime_(0),
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
-     ibase_(nullptr),
-     map_(nullptr) {
+     ibase_(nullptr) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 }
 
 EditorGameBase::~EditorGameBase() {
-	delete map_;
-	delete player_manager_.release();
 }
 
 void EditorGameBase::think() {
@@ -182,22 +179,9 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
 			if (1 < player_field.vision) {
-				player_field.map_object_descr[TCoords<>::None] = descr;
+				player_field.map_object_descr = descr;
 			}
 		}
-}
-
-/**
- * Replaces the current map with the given one. Ownership of the map is transferred
- * to the EditorGameBase object.
- */
-void EditorGameBase::set_map(Map* const new_map) {
-	assert(new_map != map_);
-	assert(new_map);
-
-	delete map_;
-
-	map_ = new_map;
 }
 
 void EditorGameBase::allocate_player_maps() {
@@ -412,8 +396,7 @@ void EditorGameBase::cleanup_for_load() {
 
 	player_manager_->cleanup();
 
-	if (map_)
-		map_->cleanup();
+	map_.cleanup();
 }
 
 void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t const roadtype) {
@@ -566,7 +549,7 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 	//  This must reach one step beyond the conquered area to adjust the borders
 	//  of neighbour players.
 	++player_area.radius;
-	map().recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(world(), player_area);
 }
 
 /// Conquers the given area for that player; does the actual work.
@@ -642,21 +625,20 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	// This must reach one step beyond the conquered area to adjust the borders
 	// of neighbour players.
 	++player_area.radius;
-	map().recalc_for_field_area(world(), player_area);
+	map_.recalc_for_field_area(world(), player_area);
 }
 
 /// Makes sure that buildings cannot exist outside their owner's territory.
 void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> const area) {
 	std::vector<ImmovableFound> immovables;
 	std::vector<PlayerImmovable*> burnlist;
-	Map& m = map();
 
 	//  find all immovables that need fixing
-	m.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
+	map_.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
 
 	for (const ImmovableFound& temp_imm : immovables) {
 		upcast(PlayerImmovable, imm, temp_imm.object);
-		if (!m[temp_imm.coords].is_interior(imm->owner().player_number())) {
+		if (!map_[temp_imm.coords].is_interior(imm->owner().player_number())) {
 			if (std::find(burnlist.begin(), burnlist.end(), imm) == burnlist.end()) {
 				burnlist.push_back(imm);
 			}

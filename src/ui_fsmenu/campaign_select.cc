@@ -28,6 +28,7 @@
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/campaign_visibility.h"
+#include "logic/filesystem_constants.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -145,8 +146,8 @@ void FullscreenMenuCampaignSelect::fill_table() {
 	}
 
 	// Read in campvis-file
-	CampaignVisibilitySave cvs;
-	Profile campvis(cvs.get_path().c_str());
+	CampaignVisibilitySave::ensure_campvis_file_exists();
+	Profile campvis(kCampVisFile.c_str());
 	Section& campaign_visibility = campvis.get_safe_section("campaigns");
 
 	// Now get the campaigns data
@@ -156,7 +157,7 @@ void FullscreenMenuCampaignSelect::fill_table() {
 		CampaignData campaign_data;
 		campaign_data.index = counter;
 		campaign_data.name = campaign->get_string("name");
-		campaign_data.visible = campaign_visibility.get_bool(campaign_data.name.c_str());
+		campaign_data.visible = !campaign->has_key("prerequisite") || campaign_visibility.get_bool(campaign_data.name.c_str());
 
 		// Only list visible campaigns
 		{

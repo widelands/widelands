@@ -28,6 +28,7 @@
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/campaign_visibility.h"
+#include "logic/filesystem_constants.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
@@ -211,9 +212,10 @@ void FullscreenMenuScenarioSelect::fill_table() {
 
 			// Create the entry we use to load the section of the map
 			uint32_t counter = 0;
+
 			// Read in campvis-file
-			CampaignVisibilitySave cvs;
-			Profile campvis(cvs.get_path().c_str());
+			CampaignVisibilitySave::ensure_campvis_file_exists();
+			Profile campvis(kCampVisFile.c_str());
 			Section& scenario_visibility = campvis.get_safe_section("scenarios");
 
 			// Add all visible entries to the list.

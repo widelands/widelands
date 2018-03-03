@@ -5,6 +5,7 @@ tribes:new_immovable_type {
    name = "field_ripe",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Field (ripe)"),
+   helptext_script = dirname .. "helptexts.lua",
    size = "small",
    attributes = { "ripe_wheat", "field" },
    programs = {

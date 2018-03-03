@@ -45,14 +45,6 @@ struct TestingFlag : public Flag {
 		set_flag_position(c);
 	}
 };
-struct TestingMap : public Map {
-	TestingMap(int const w, int const h) : Map() {
-		set_size(w, h);
-	}
-
-	void recalc_for_field_area(const World&, Area<FCoords>) override {
-	}
-};
 
 /*************************************************************************/
 /*                                 TESTS                                 */
@@ -69,11 +61,9 @@ struct WlTestFixture {
 
 struct SimpleRoadTestsFixture : public WlTestFixture {
 	SimpleRoadTestsFixture() : g(nullptr), path(Coords(5, 5)) {
-		map = new TestingMap(32, 32);
-		g.set_map(map);
-
-		path.append(*map, WALK_E);
-		path.append(*map, WALK_E);
+		g.mutable_map()->set_size(32, 32);
+		path.append(g.map(), WALK_E);
+		path.append(g.map(), WALK_E);
 
 		start = new TestingFlag(g, Coords(5, 5));
 		end = new TestingFlag(g, Coords(7, 5));
@@ -84,7 +74,6 @@ struct SimpleRoadTestsFixture : public WlTestFixture {
 		// Map is deleted by EditorGameBase
 	}
 
-	TestingMap* map;
 	EditorGameBase g;
 	Road r;
 	Path path;

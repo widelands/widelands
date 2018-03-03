@@ -39,7 +39,12 @@ return {
                path = "bar02.wmf",
                -- The campaign to reveal when player:mark_as_solved is called
                reveal_campaign = "empire",
-            }
+            },
+            {
+               descname = _"Not yet implemented",
+               name = "bar03",
+               path = "dummy.wmf",
+            },
          }
       },
       {
@@ -67,19 +72,24 @@ return {
                name = "emp02",
                path = "emp02.wmf",
                reveal_scenario = "emp03",
+               reveal_campaign = "atlanteans",
             },
             {
                descname = _"Neptune’s Revenge",
                name = "emp03",
                path = "emp03.wmf",
                reveal_scenario = "emp04",
-               reveal_campaign = "atlanteans",
+            },
+            {
+               descname = _"Surprise, Surprise!",
+               name = "emp04",
+               path = "emp04.wmf",
+               reveal_scenario = "emp05",
             },
             {
                descname = _"Not yet implemented",
-               name = "emp04",
+               name = "emp05",
                path = "dummy.wmf",
-               reveal_campaign = "atlanteans",
             },
          }
       },

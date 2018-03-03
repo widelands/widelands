@@ -83,7 +83,7 @@ public:
 	LuaEditor() {
 	}
 	explicit LuaEditor(lua_State* L);
-	virtual ~LuaEditor() {
+	~LuaEditor() override {
 	}
 
 	void __persist(lua_State* L) override;
@@ -159,19 +159,21 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int new_carrier_type(lua_State* L);
 	int new_constructionsite_type(lua_State* L);
 	int new_dismantlesite_type(lua_State* L);
+	int new_immovable_type(lua_State* L);
+	int new_market_type(lua_State* L);
 	int new_militarysite_type(lua_State* L);
 	int new_productionsite_type(lua_State* L);
-	int new_trainingsite_type(lua_State* L);
-	int new_warehouse_type(lua_State* L);
-	int new_immovable_type(lua_State* L);
 	int new_ship_type(lua_State* L);
-	int new_ware_type(lua_State* L);
-	int new_carrier_type(lua_State* L);
 	int new_soldier_type(lua_State* L);
-	int new_worker_type(lua_State* L);
+	int new_trainingsite_type(lua_State* L);
 	int new_tribe(lua_State* L);
+	int new_ware_type(lua_State* L);
+	int new_warehouse_type(lua_State* L);
+	int new_worker_type(lua_State* L);
+	int add_custom_building(lua_State* L);
 
 	/*
 	 * C methods

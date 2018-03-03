@@ -33,23 +33,11 @@ include "map:scripting/texts.lua"
 -- =================
 -- Helper functions
 -- =================
--- Show one message box
-function msg_box(i)
-   if i.pre_func then i.pre_func() end
-
-   if not i.h then i.h = 400 end
-
-   message_box(p1, i.title, i.body, i)
-
-   if i.post_func then i.post_func() end
-
-   sleep(130)
-end
 
 -- Show many message boxes
 function msg_boxes(boxes_descr)
    for idx,box_descr in ipairs(boxes_descr) do
-      msg_box(box_descr)
+      campaign_message_box(box_descr)
    end
 end
 
@@ -65,24 +53,6 @@ function count_in_warehouses(ware)
       rv = rv + wh:get_wares(ware)
    end
    return rv
-end
-
-function send_building_lost_message(f)
-   set_textdomain("scenario_atl01.wmf")
-   send_message(
-      p1,
-      -- TRANSLATORS: Short message title. Translate as "Lost!" if you don't have enough space.
-      pgettext("message_short_title", "Building lost!"),
-      rt("image=".. f.immovable.descr.representative_image,
-         p(_"We lost a building to the ocean!")
-      ),
-      {
-         field = f,
-         popup = false,
-         icon = f.immovable.descr.representative_image,
-         heading = pgettext("message_heading", "Building lost!")
-      }
-   )
 end
 
 -- starting conditions are included later in the intro

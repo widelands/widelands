@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # Andrew Doubletrouble <vermilionjack@gmail.com>, 2016
@@ -12,13 +12,14 @@
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2018
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-21 08:34+0000\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
+"PO-Revision-Date: 2018-02-01 08:22+0000\n"
 "Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -29,16 +30,16 @@ msgstr ""
 
 #. TRANSLATORS: Short message title. Translate as "Lost!" if you don't have
 #. enough space.
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:75
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:63
 msgctxt "message_short_title"
 msgid "Building lost!"
 msgstr "Строение потеряно!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:77
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:65
 msgid "We lost a building to the ocean!"
 msgstr "Строение уничтожено морем!"
 
-#: ../../data/campaigns/atl01.wmf/scripting/init.lua:83
+#: ../../data/campaigns/atl01.wmf/scripting/init.lua:71
 msgctxt "message_heading"
 msgid "Building lost!"
 msgstr "Строение потеряно!"
@@ -483,7 +484,7 @@ msgid ""
 " most buildings can’t be made out of logs alone. Stronger buildings also "
 "need granite, but there is plenty to the north-east of here; we just need to"
 " build a quarry, and my stonemasons will go to work promptly."
-msgstr "Да согреет тебя Сатул, Джандлина! Самое необходимое для строительства поселения – строительные материалы. Деревья здесь есть, поэтому мы должны построить жилье для нескольких лесорубов и, конечно, для лесников, чтобы не вырубить все деревья. Да, и мы не должны забывать о лесопилке, большинство зданий не могут быть построены из одних только бревен. Для более прочных зданий понадобится камень, который в изобилии встречается к северо-востоку отсюда. Нужно только построить каменоломню и мои каменщики сразу приступят к работе."
+msgstr "Да согреет тебя Сатул, Джандлина! Самое необходимое для строительства поселения – строительные материалы. Деревья здесь есть, поэтому мы должны построить жилье для нескольких лесорубов и, конечно, для лесников, чтобы не вырубить все деревья. Да, и мы не должны забывать о лесопилке, большинство зданий не могут быть построены из одних только бревен. Для более прочных зданий понадобится камень, который в изобилии встречается к северо-востоку отсюда. Нужно только построить каменоломню и мои камнетесы сразу приступят к работе."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:207
 msgid "Sidolus Speaks"
@@ -939,12 +940,12 @@ msgid ""
 " long as you like."
 msgstr "Вы выиграли это миссию. Можете начать следующую или играть до тех пор, пока Вам не надоест."
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Новое задание"

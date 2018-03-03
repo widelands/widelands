@@ -42,13 +42,23 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
                                            UI::UniqueWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
                                            bool avoid_fastclick)
-   : BuildingWindow(parent, reg, ps, avoid_fastclick) {
+   : BuildingWindow(parent, reg, ps, avoid_fastclick),
+     production_site_(&ps),
+     worker_table_(nullptr),
+     worker_caps_(nullptr) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
-		   if (note.serial == building().serial() && !is_dying_) {
+		   if (is_dying_) {
+			   return;
+		   }
+		   Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+		   if (production_site == nullptr) {
+			   return;
+		   }
+		   if (note.serial == production_site->serial()) {
 			   switch (note.action) {
 			   case Widelands::NoteBuilding::Action::kWorkersChanged:
-				   update_worker_table();
+				   update_worker_table(production_site);
 				   break;
 			   default:
 				   break;
@@ -59,8 +69,11 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 }
 
 void ProductionSiteWindow::init(bool avoid_fastclick) {
+	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	assert(production_site != nullptr);
+
 	BuildingWindow::init(avoid_fastclick);
-	const std::vector<Widelands::InputQueue*>& inputqueues = productionsite().inputqueues();
+	const std::vector<Widelands::InputQueue*>& inputqueues = production_site->inputqueues();
 
 	if (inputqueues.size()) {
 		// Add the wares tab
@@ -69,14 +82,14 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
 			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), productionsite(), inputqueues[i]));
+			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, inputqueues[i]));
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));
 	}
 
 	// Add workers tab if applicable
-	if (!productionsite().descr().nr_working_positions()) {
+	if (!production_site->descr().nr_working_positions()) {
 		worker_table_ = nullptr;
 	} else {
 		UI::Box* worker_box = new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
@@ -84,16 +97,16 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		worker_caps_ = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
 		worker_table_->add_column(
-		   210, (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions())));
+		   210, (ngettext("Worker", "Workers", production_site->descr().nr_working_positions())));
 		worker_table_->add_column(60, _("Exp"));
 		worker_table_->add_column(150, _("Next Level"));
 
-		for (unsigned int i = 0; i < productionsite().descr().nr_working_positions(); ++i) {
+		for (unsigned int i = 0; i < production_site->descr().nr_working_positions(); ++i) {
 			worker_table_->add(i);
 		}
 		worker_table_->fit_height();
 
-		if (igbase()->can_act(building().owner().player_number())) {
+		if (igbase()->can_act(production_site->owner().player_number())) {
 			worker_caps_->add_inf_space();
 			UI::Button* evict_button = new UI::Button(
 			   worker_caps_, "evict", 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),
@@ -109,34 +122,45 @@ void ProductionSiteWindow::init(bool avoid_fastclick) {
 		worker_box->add(worker_caps_, UI::Box::Resizing::kFullSize);
 		get_tabs()->add(
 		   "workers", g_gr->images().get(pic_tab_workers), worker_box,
-		   (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions())));
-		update_worker_table();
+		   (ngettext("Worker", "Workers", production_site->descr().nr_working_positions())));
+		update_worker_table(production_site);
 	}
 	think();
 }
 
 void ProductionSiteWindow::think() {
+	// BuildingWindow::think() will call die in case we are no longer in
+	// existance.
 	BuildingWindow::think();
+
+	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	if (production_site == nullptr) {
+		return;
+	}
+
 	// If we have pending requests, update table each tick.
 	// This is required to update from 'vacant' to 'coming'
-	for (unsigned int i = 0; i < productionsite().descr().nr_working_positions(); ++i) {
-		Widelands::Request* r = productionsite().working_positions()[i].worker_request;
+	for (unsigned int i = 0; i < production_site->descr().nr_working_positions(); ++i) {
+		Widelands::Request* r = production_site->working_positions()[i].worker_request;
 		if (r) {
-			update_worker_table();
+			update_worker_table(production_site);
 			break;
 		}
 	}
 }
 
-void ProductionSiteWindow::update_worker_table() {
+void ProductionSiteWindow::update_worker_table(Widelands::ProductionSite* production_site) {
+	assert(production_site != nullptr);
+
 	if (worker_table_ == nullptr) {
 		return;
 	}
-	assert(productionsite().descr().nr_working_positions() == worker_table_->size());
 
-	for (unsigned int i = 0; i < productionsite().descr().nr_working_positions(); ++i) {
-		const Widelands::Worker* worker = productionsite().working_positions()[i].worker;
-		const Widelands::Request* request = productionsite().working_positions()[i].worker_request;
+	assert(production_site->descr().nr_working_positions() == worker_table_->size());
+
+	for (unsigned int i = 0; i < production_site->descr().nr_working_positions(); ++i) {
+		const Widelands::Worker* worker = production_site->working_positions()[i].worker;
+		const Widelands::Request* request = production_site->working_positions()[i].worker_request;
 		UI::Table<uintptr_t>::EntryRecord& er = worker_table_->get_record(i);
 
 		if (worker) {
@@ -162,7 +186,7 @@ void ProductionSiteWindow::update_worker_table() {
 			}
 		} else if (request) {
 			const Widelands::WorkerDescr* desc =
-			   productionsite().owner().tribe().get_worker_descr(request->get_index());
+			   production_site->owner().tribe().get_worker_descr(request->get_index());
 			er.set_picture(0, desc->icon(), request->is_open() ? _("(vacant)") : _("(coming)"));
 
 			er.set_string(1, "");
@@ -175,9 +199,14 @@ void ProductionSiteWindow::update_worker_table() {
 }
 
 void ProductionSiteWindow::evict_worker() {
+	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
+	if (production_site == nullptr) {
+		return;
+	}
+
 	if (worker_table_->has_selection()) {
 		Widelands::Worker* worker =
-		   productionsite().working_positions()[worker_table_->get_selected()].worker;
+		   production_site->working_positions()[worker_table_->get_selected()].worker;
 		if (worker) {
 			igbase()->game().send_player_evict_worker(*worker);
 		}

@@ -84,9 +84,11 @@ struct MultilineTextarea : public Panel {
 	void draw(RenderTarget&) override;
 
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 	void scroll_to_top();
 
 	void set_background(const Image* background);
+	void set_scrollmode(MultilineTextarea::ScrollMode scroll_mode);
 
 protected:
 	void layout() override;

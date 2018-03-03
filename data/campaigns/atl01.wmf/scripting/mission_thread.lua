@@ -2,6 +2,21 @@
 --                      Atlanteans Tutorial Mission 01
 -- =======================================================================
 
+function send_building_lost_message(f)
+   local icon = f.immovable.descr.representative_image
+   local message = building_lost(icon)
+   send_message(
+      p1,
+      message.title,
+      message.text,
+      {
+         field = f,
+         popup = false,
+         icon = icon,
+         message.title
+      }
+   )
+end
 
 -- ==============
 -- Logic Threads

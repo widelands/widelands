@@ -33,6 +33,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/world.h"
 #include "sound/sound_handler.h"
@@ -301,6 +302,9 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 		case MapObjectType::WAREHOUSE:
 			fw.write_key_value_string("type", "warehouse");
 			break;
+		case MapObjectType::MARKET:
+			fw.write_key_value_string("type", "market");
+			break;
 		case MapObjectType::MILITARYSITE:
 			fw.write_key_value_string("type", "militarysite");
 			break;
@@ -458,7 +462,7 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* 
  ==========================================================
  */
 
-void add_tribe_info(const TribeBasicInfo& tribe_info, JSONFileWrite* fw) {
+void add_tribe_info(const Widelands::TribeBasicInfo& tribe_info, JSONFileWrite* fw) {
 	fw->write_key_value_string("name", tribe_info.name);
 	fw->close_element();
 	fw->write_key_value_string("descname", tribe_info.descname);
@@ -479,9 +483,9 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 	egbase.mutable_tribes()->postload();  // Make sure that all values have been set.
 	const Tribes& tribes = egbase.tribes();
 
-	std::vector<TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
-		const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
+		const Widelands::TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
 		log("\n\n=========================\nWriting tribe: %s\n=========================\n",
 		    tribe_info.name.c_str());
 
