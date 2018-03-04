@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-01-30 12:58+0000\n"
+"POT-Creation-Date: 2018-02-23 18:16+0000\n"
+"PO-Revision-Date: 2018-02-23 18:19+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -85,18 +85,18 @@ msgid "%2.1f%%"
 msgstr ""
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:160
+#: ../../data/scripting/infrastructure.lua:168
 msgid "No Space"
 msgstr "공간 없음"
 
-#: ../../data/scripting/infrastructure.lua:161
+#: ../../data/scripting/infrastructure.lua:169
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "몇 가지 시작 건물이 공간 부족으로 건설되지 않았습니다. 불이익이 있을 것입니다; 이 지도를 공정한 시작 조건으로 다시 시작하기를 고려해 보십시오."
 
-#: ../../data/scripting/infrastructure.lua:162
+#: ../../data/scripting/infrastructure.lua:170
 msgid "Not enough space"
 msgstr "충분하지 않은 공간"
 
@@ -1358,68 +1358,68 @@ msgstr "기다리는 중"
 msgid "An expedition ship sailed around its island without any events."
 msgstr "탐험선이 별 일 없이 섬을 일주했습니다."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr "해안 도착"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
 msgstr "육지 발견!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "탐헌선이 해안에 도착해서 향후 명령을 기다리는 중입니다."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:672
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "New port construction site is gone"
 msgstr "새로운 항구 건설 위치가 사라졌습니다"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:672
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "Port Lost!"
 msgstr "항구 손실!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:674
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "용품을 하적하는데 실패해서 탐험을 취소합니다."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:847
 msgctxt "ship"
 msgid "Expedition"
 msgstr "탐험"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:847
 msgid "Expedition Ready"
 msgstr "탐험 준비 완료"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:848
 msgid "An expedition ship is waiting for your commands."
 msgstr "탐험선이 당신의 명령을 기다리는 중입니다."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:983
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "선적하는 중"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:987
+#: ../../src/logic/map_objects/tribes/ship.cc:988
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "대기하는 중"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:991
+#: ../../src/logic/map_objects/tribes/ship.cc:992
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "정찰하는 중"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:995
+#: ../../src/logic/map_objects/tribes/ship.cc:996
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "항구 공간 발견"
@@ -1427,7 +1427,7 @@ msgstr "항구 공간 발견"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1000
+#: ../../src/logic/map_objects/tribes/ship.cc:1001
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "식민지 건설 중"
@@ -1539,7 +1539,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Bluebyte Settlers II 지도. 아무런 코멘트 없음!"
 
 #: ../../src/network/gameclient.cc:115
-#: ../../src/network/internet_gaming.cc:113
+#: ../../src/network/internet_gaming.cc:112
 msgid "Could not establish connection to host"
 msgstr "호스트에 연결할 수 없습니다"
 
@@ -1704,133 +1704,133 @@ msgid "%li second"
 msgid_plural "%li seconds"
 msgstr[0] "%li 초"
 
-#: ../../src/network/internet_gaming.cc:114
+#: ../../src/network/internet_gaming.cc:113
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr "Widelands는 주어진 주소에 연결을 수립할 수 없습니다.\n해당 포트에 운영되는 메타서버가 없거나 당신의 네트워크 셋업이 깨져서입니다."
 
-#: ../../src/network/internet_gaming.cc:173
+#: ../../src/network/internet_gaming.cc:176
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:211
+#: ../../src/network/internet_gaming.cc:214
 msgid "Successfully reconnected to the metaserver!"
 msgstr "성공적으로 메타서버와 다시 연결되었습니다!"
 
-#: ../../src/network/internet_gaming.cc:285
+#: ../../src/network/internet_gaming.cc:288
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "무언가가 잘못됐음: %s"
 
-#: ../../src/network/internet_gaming.cc:394
+#: ../../src/network/internet_gaming.cc:397
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:418
 msgid "Mixed up"
 msgstr "혼성"
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:418
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "메타서버가 연결 도중에 이상한 오류를 전송했습니다"
 
-#: ../../src/network/internet_gaming.cc:426
+#: ../../src/network/internet_gaming.cc:429
 msgid "Unexpected packet"
 msgstr "기대치 않은 패킷"
 
-#: ../../src/network/internet_gaming.cc:427
+#: ../../src/network/internet_gaming.cc:430
 #, c-format
 msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr "서버로부터 로그인, 재로그인 혹은 거절 패킷을 기대했지만, 명령 %s를 수신했습니다. 혹시 메타서버가 다른 프로토콜 버전을 사용하고 있나요?"
 
-#: ../../src/network/internet_gaming.cc:439
+#: ../../src/network/internet_gaming.cc:442
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "경고: 비록 우리가 연결된 상태가 아니어도 명령 %s를 수신함."
 
-#: ../../src/network/internet_gaming.cc:450
+#: ../../src/network/internet_gaming.cc:453
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "서버 시간 오프셋은 %d 초입니다."
 
-#: ../../src/network/internet_gaming.cc:474
+#: ../../src/network/internet_gaming.cc:477
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "잘못된 채팅 메시지 타입 \"%s\""
 
-#: ../../src/network/internet_gaming.cc:474
+#: ../../src/network/internet_gaming.cc:477
 msgid "Invalid message type"
 msgstr "잘못된 메시지 타입"
 
-#: ../../src/network/internet_gaming.cc:512
+#: ../../src/network/internet_gaming.cc:515
 #, c-format
 msgid "The game %s is now available"
 msgstr "게임 %s 는 지금 이용가능함"
 
-#: ../../src/network/internet_gaming.cc:522
+#: ../../src/network/internet_gaming.cc:525
 #, c-format
 msgid "The game %s has been closed"
 msgstr "게임 %s 는 닫혔음"
 
-#: ../../src/network/internet_gaming.cc:569
+#: ../../src/network/internet_gaming.cc:572
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s 가 로비에 접속했음"
 
-#: ../../src/network/internet_gaming.cc:576
+#: ../../src/network/internet_gaming.cc:579
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s 가 로비를 떠났음"
 
-#: ../../src/network/internet_gaming.cc:628
+#: ../../src/network/internet_gaming.cc:631
 msgid "Chat message could not be sent."
 msgstr "채팅 메시지가 전송되지 않습니다."
 
-#: ../../src/network/internet_gaming.cc:642
+#: ../../src/network/internet_gaming.cc:645
 #, c-format
 msgid "ERROR: %s"
 msgstr "오류: %s"
 
-#: ../../src/network/internet_gaming.cc:652
+#: ../../src/network/internet_gaming.cc:655
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "메타서버에서 알 수 없는 명령을 수신함: %s"
 
-#: ../../src/network/internet_gaming.cc:779
+#: ../../src/network/internet_gaming.cc:782
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "메시지가 전송되지 않습니다: 메타서버에 연결되지 않았습니다!"
 
-#: ../../src/network/internet_gaming.cc:798
-#: ../../src/network/internet_gaming.cc:805
+#: ../../src/network/internet_gaming.cc:801
+#: ../../src/network/internet_gaming.cc:808
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "메시지가 전송되지 않습니다. 개인 메시지인가요?"
 
-#: ../../src/network/internet_gaming.cc:812
+#: ../../src/network/internet_gaming.cc:815
 msgid "Private messages to IRC users are not supported."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:889
+#: ../../src/network/internet_gaming.cc:892
 msgid "Conversion error"
 msgstr "전환 오류"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:892
+#: ../../src/network/internet_gaming.cc:895
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "\"%s\"의 참값을 얻지 못함"
 
-#: ../../src/network/internet_gaming.cc:909
+#: ../../src/network/internet_gaming.cc:912
 msgid "unknown"
 msgstr "알 수 없음"
 
@@ -3131,17 +3131,17 @@ msgstr "목표 증가"
 msgid "Reset to default"
 msgstr "기본값 복귀"
 
+#: ../../src/wui/fieldaction.cc:216
+msgid "Build small building"
+msgstr "소형 건물 건설"
+
 #: ../../src/wui/fieldaction.cc:217
-msgid "Build large building"
-msgstr "대형 건물 건설"
+msgid "Build big building"
+msgstr ""
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
 msgstr "중형 건물 건설"
-
-#: ../../src/wui/fieldaction.cc:217
-msgid "Build small building"
-msgstr "소형 건물 건설"
 
 #: ../../src/wui/fieldaction.cc:218
 msgid "Build port building"
@@ -3374,34 +3374,36 @@ msgstr "수신함 확인"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
-#. message.
-#: ../../src/wui/game_message_menu.cc:626
+#. * message.
+#. * DO NOT omit the placeholder in your translation.
+#: ../../src/wui/game_message_menu.cc:628
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
 msgstr[0] "선택된 %d 메시지 회복"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:632
+#: ../../src/wui/game_message_menu.cc:634
 msgid "Restore selected message"
 msgstr "선택된 메시지 회복"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
-#. message.
-#: ../../src/wui/game_message_menu.cc:640
+#. * message.
+#. * DO NOT omit the placeholder in your translation.
+#: ../../src/wui/game_message_menu.cc:644
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
 msgstr[0] "선택된 %d 메시지 보관"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:646
+#: ../../src/wui/game_message_menu.cc:650
 msgid "Archive selected message"
 msgstr "선택된 메시지 보관"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:651
+#: ../../src/wui/game_message_menu.cc:655
 #, c-format
 msgid "Del: %s"
 msgstr "Del: %s"
@@ -3770,24 +3772,26 @@ msgid "Do you really want to delete this replay?"
 msgstr "정말 이 리플레이를 삭제합니까?"
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
-#: ../../src/wui/load_or_save_game.cc:250
+#. DO NOT omit the placeholder in your translation.
+#: ../../src/wui/load_or_save_game.cc:251
 #, c-format
 msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
 msgstr[0] "정말 이 %d 리플레이들을 삭제합니까?"
 
-#: ../../src/wui/load_or_save_game.cc:257
+#: ../../src/wui/load_or_save_game.cc:258
 msgid "Do you really want to delete this game?"
 msgstr "정말 이 게임을 삭제합니까?"
 
 #. * TRANSLATORS: Used with multiple games, 1 game has a separate string.
-#: ../../src/wui/load_or_save_game.cc:259
+#. DO NOT omit the placeholder in your translation.
+#: ../../src/wui/load_or_save_game.cc:261
 #, c-format
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
 msgstr[0] "정말 이 %d 게임들을 삭제합니까?"
 
-#: ../../src/wui/load_or_save_game.cc:272
+#: ../../src/wui/load_or_save_game.cc:274
 msgid "Confirm Deleting File"
 msgid_plural "Confirm Deleting Files"
 msgstr[0] ""
@@ -3795,42 +3799,42 @@ msgstr[0] ""
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:387
+#: ../../src/wui/load_or_save_game.cc:389
 msgid "Today, %1%:%2%"
 msgstr "오늘, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:391
+#: ../../src/wui/load_or_save_game.cc:393
 msgid "saved today at %1%:%2%"
 msgstr "오늘 %1%:%2%에 저장 됨"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:404
+#: ../../src/wui/load_or_save_game.cc:406
 msgid "Yesterday, %1%:%2%"
 msgstr "어제, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:408
+#: ../../src/wui/load_or_save_game.cc:410
 msgid "saved yesterday at %1%:%2%"
 msgstr "어제 %1%:%2%에 저장됨"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/load_or_save_game.cc:414
+#: ../../src/wui/load_or_save_game.cc:416
 msgid "%1% %2%, %3%"
 msgstr "%3% %1% %2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
-#. month day, year. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:420
+#. month (short name) day (number), year (number). This is part of a list.
+#: ../../src/wui/load_or_save_game.cc:422
 msgid "saved on %1% %2%, %3%"
 msgstr "%3% %1% %2% 에 저장됨"
 
@@ -3839,7 +3843,7 @@ msgstr "%3% %1% %2% 에 저장됨"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/wui/load_or_save_game.cc:441
+#: ../../src/wui/load_or_save_game.cc:443
 msgid "SP"
 msgstr "SP"
 
@@ -3849,7 +3853,7 @@ msgstr "SP"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:449
+#: ../../src/wui/load_or_save_game.cc:451
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -3859,31 +3863,31 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:457
+#: ../../src/wui/load_or_save_game.cc:459
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
-#: ../../src/wui/load_or_save_game.cc:467
+#: ../../src/wui/load_or_save_game.cc:469
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/load_or_save_game.cc:483
+#: ../../src/wui/load_or_save_game.cc:485
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "이 파일은 잘못된 형식이고 불러올 수 없습니다. 아마 오래된 버전의 Widelands에서 만들어졌을지 모릅니다."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wui/load_or_save_game.cc:486
+#: ../../src/wui/load_or_save_game.cc:488
 msgid "Error message:"
 msgstr "오류 메시지:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/wui/load_or_save_game.cc:497
 #: ../../src/wui/load_or_save_game.cc:499
+#: ../../src/wui/load_or_save_game.cc:501
 #, c-format
 msgid "Incompatible: %s"
 msgstr "부적합: %s"

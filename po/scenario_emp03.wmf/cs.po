@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"POT-Creation-Date: 2018-02-23 18:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -47,6 +47,8 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Postav lom poblíž opuštěných kamenů, abys uvolnil prostor pro budovy a "
+"získal cenné suroviny."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -67,7 +69,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "Sniž poptávku po mramorových sloupech na 4"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Lower Demand for Marble Columns"
