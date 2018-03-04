@@ -21,10 +21,11 @@
 #define WL_LOGIC_CAMPAIGN_VISIBILITY_H
 
 #include <memory>
-#include <set> // NOCOM unordered?
 #include <string>
+#include <unordered_set>
 #include <vector>
 
+#include "graphic/image.h"
 #include "scripting/lua_table.h"
 #include "wui/mapauthordata.h" // NOCOM move this
 
@@ -37,7 +38,7 @@ struct ScenarioData {
 	std::string descname;
 	std::string description;
 	MapAuthorData authors;
-	std::string campaign;
+	std::string campaign; // NOCOM
 	bool is_tutorial;
 	bool playable;
 	bool visible;
@@ -51,11 +52,11 @@ struct ScenarioData {
  * Data about a campaign that we're interested in.
  */
 struct CampaignData {
-	uint32_t index; // NOCOM
 	std::string name;
 	std::string descname;
 	std::string tribename;
-	uint32_t difficulty;
+	uint32_t difficulty_level;
+	const Image* difficulty_image;
 	std::string difficulty_description;
 	std::string description;
 	std::string prerequisite;
@@ -69,13 +70,45 @@ struct CampaignVisibility {
 	CampaignVisibility();
 	void mark_scenario_as_solved(const std::string& path);
 
+	// NOCOM clean up these methods
+	ScenarioData* get_scenario(size_t campaign_index, size_t scenario_index) const {
+		assert(campaign_index < campaigns.size());
+		assert(scenario_index < campaigns_.at(campaign_index)->scenarios.size());
+		return campaigns_.at(campaign_index)->scenarios.at(scenario_index).get();
+	}
+
+	ScenarioData* get_scenario(const std::string& campaign_name, size_t scenario_index) const {
+		CampaignData* campaign = get_campaign(campaign_name);
+		if (campaign != nullptr) {
+			return campaign->scenarios.at(scenario_index).get();
+		}
+		return nullptr;
+	}
+
+	size_t no_of_campaigns() const {
+		return campaigns_.size();
+	}
+
+	CampaignData* get_campaign(size_t campaign_index) const {
+		assert(campaign_index < campaigns.size());
+		return campaigns_.at(campaign_index).get();
+	}
+
+	CampaignData* get_campaign(const std::string& name) const {
+		for (const auto& campaign : campaigns_) {
+			if (campaign->name == name) {
+				return campaign.get();
+			}
+		}
+		return nullptr;
+	}
+
 private:
 	void update_visibility_info();
 	static void update_legacy_campvis(int version);
 
 	std::vector<std::unique_ptr<CampaignData>> campaigns_;
-	ScenarioData scenarios_;
-	std::set<std::string> solved_scenarios;
+	std::unordered_set<std::string> solved_scenarios_;
 };
 
 #endif  // end of include guard: WL_LOGIC_CAMPAIGN_VISIBILITY_H

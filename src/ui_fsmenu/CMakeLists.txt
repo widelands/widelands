@@ -152,6 +152,8 @@ wl_library(ui_fsmenu_maploading
     logic_game_settings
     map_io_map_loader
     profile
+    scripting_lua_interface
+    scripting_lua_table
     ui_basic
     ui_fsmenu_base
     ui_fsmenu_loading_common

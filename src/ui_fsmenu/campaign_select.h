@@ -22,6 +22,7 @@
 
 #include <vector>
 
+#include "logic/campaign_visibility.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/campaigndetails.h"
@@ -54,11 +55,11 @@ private:
 	UI::Textarea title_;
 	CampaignDetails campaign_details_;
 
-	std::vector<CampaignData> campaigns_data_;
+	CampaignVisibility campaigns_;
 
 	/// Variables used for exchange between the two Campaign UIs and
 	/// Game::run_campaign
-	std::string campaign_;
+	std::string selected_campaign_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H

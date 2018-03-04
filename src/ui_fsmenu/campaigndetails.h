@@ -20,24 +20,9 @@
 #ifndef WL_UI_FSMENU_CAMPAIGNDETAILS_H
 #define WL_UI_FSMENU_CAMPAIGNDETAILS_H
 
+#include "logic/campaign_visibility.h"
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
-
-/**
- * Data about a campaign that we're interested in.
- */
-struct CampaignData {
-	uint32_t index;
-	std::string name;
-	std::string descname;
-	std::string tribename;
-	uint32_t difficulty;
-	std::string difficulty_description;
-	std::string description;
-	bool visible;
-
-	CampaignData() = default;
-};
 
 /**
  * Show a Box with information about a campaign.

@@ -27,7 +27,6 @@
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
-#include "logic/campaign_visibility.h"
 #include "logic/filesystem_constants.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
@@ -60,7 +59,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
 
 	/** TRANSLATORS: Campaign difficulty table header */
 	table_.add_column(45, _("Diff."), _("Difficulty"));
-	table_.add_column(100, _("Tribe"), _("Tribe Name"));
+	table_.add_column(130, _("Tribe"), _("Tribe Name"));
 	table_.add_column(
 	   0, _("Campaign Name"), _("Campaign Name"), UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
@@ -90,7 +89,7 @@ void FullscreenMenuCampaignSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
-	const CampaignData& campaign_data = campaigns_data_[table_.get_selected()];
+	const CampaignData& campaign_data = *campaigns_.get_campaign(table_.get_selected());
 	if (!campaign_data.visible) {
 		return;
 	}
@@ -98,13 +97,8 @@ void FullscreenMenuCampaignSelect::clicked_ok() {
 }
 
 std::string FullscreenMenuCampaignSelect::get_campaign() const {
-	return campaign_;
+	return selected_campaign_;
 }
-
-/// Pictorial descriptions of difficulty levels.
-static char const* const difficulty_picture_filenames[] = {
-   "images/novalue.png", "images/ui_fsmenu/easy.png", "images/ui_fsmenu/challenging.png",
-   "images/ui_fsmenu/hard.png"};
 
 bool FullscreenMenuCampaignSelect::set_has_selection() {
 	const bool has_selection = table_.has_selection();
@@ -114,8 +108,8 @@ bool FullscreenMenuCampaignSelect::set_has_selection() {
 
 void FullscreenMenuCampaignSelect::entry_selected() {
 	if (set_has_selection()) {
-		const CampaignData& campaign_data = campaigns_data_[table_.get_selected()];
-		campaign_ = campaign_data.name;
+		const CampaignData& campaign_data = *campaigns_.get_campaign(table_.get_selected());
+		selected_campaign_ = campaign_data.name;
 		ok_.set_enabled(campaign_data.visible);
 		campaign_details_.update(campaign_data);
 	}
@@ -125,93 +119,34 @@ void FullscreenMenuCampaignSelect::entry_selected() {
  * fill the campaign list
  */
 void FullscreenMenuCampaignSelect::fill_table() {
-	campaigns_data_.clear();
 	table_.clear();
 
-	// Read in the campaign configuration for all campaigns
-	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
-	table->do_not_warn_about_unaccessed_keys();
-	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
-	campaigns_table->do_not_warn_about_unaccessed_keys();
+	// NOCOM reset ? Or pass it around? CampaignVisibility campaign_visibility;
+	for (size_t i = 0; i < campaigns_.no_of_campaigns(); ++i) {
+		const CampaignData& campaign_data = *campaigns_.get_campaign(i);
 
-	// Grab the descnames so we can display prerequisites for locked campaigns
-	std::map<std::string, std::string> descnames;
-	{
-		i18n::Textdomain td("maps");
-		for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
-			campaign->do_not_warn_about_unaccessed_keys();
-			descnames[campaign->get_string("name")] = _(campaign->get_string("descname"));
-		}
-	}
-
-	// Read in campvis-file
-	CampaignVisibilitySave::ensure_campvis_file_is_current();
-	Profile campvis(kCampVisFile.c_str());
-	Section& campaign_visibility = campvis.get_safe_section("campaigns");
-
-	// Now get the campaigns data
-	uint32_t counter = 0;
-	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
-		campaign->do_not_warn_about_unaccessed_keys();
-		CampaignData campaign_data;
-		campaign_data.index = counter;
-		campaign_data.name = campaign->get_string("name");
-		campaign_data.visible = !campaign->has_key("prerequisite") || campaign_visibility.get_bool(campaign_data.name.c_str());
-
-		// Only list visible campaigns
-		{
-			i18n::Textdomain td("maps");
-
-			campaign_data.descname = descnames[campaign_data.name];
-			campaign_data.tribename = _(campaign->get_string("tribe"));
-			campaign_data.description = _(campaign->get_string("description"));
-
-			std::unique_ptr<LuaTable> difficulty(campaign->get_table("difficulty"));
-			campaign_data.difficulty = difficulty->get_int("value");
-			if (sizeof(difficulty_picture_filenames) / sizeof(*difficulty_picture_filenames) <=
-			    campaign_data.difficulty) {
-				campaign_data.difficulty = 0;
-			}
-			campaign_data.difficulty_description = _(difficulty->get_string("description"));
-		}
-
-		if (!campaign_data.visible) {
-			campaign_data.description =
-			   /** TRANSLATORS: This is shown on the campaign selection screen when a campaign is
-			      greyed out. %s is the name of another campaign. */
-			   (boost::format(_("Finish playing “%s” to unlock this campaign.")) %
-			    descnames[campaign->get_string("prerequisite")])
-			      .str();
-		}
-
-		campaigns_data_.push_back(campaign_data);
-
-		UI::Table<uintptr_t>::EntryRecord& tableEntry = table_.add(campaign_data.index);
-		tableEntry.set_picture(
-		   0, g_gr->images().get(difficulty_picture_filenames[campaign_data.difficulty]));
+		UI::Table<uintptr_t const>::EntryRecord& tableEntry = table_.add(i);
+		tableEntry.set_picture(0, campaign_data.difficulty_image);
 		tableEntry.set_string(1, campaign_data.tribename);
 		tableEntry.set_string(2, campaign_data.descname);
 		if (!campaign_data.visible) {
 			tableEntry.set_color(UI_FONT_CLR_DISABLED);
 		}
-		++counter;
 	}
 
-	table_.sort();
-
 	if (table_.size()) {
+		table_.sort();
 		table_.select(0);
 	}
 	set_has_selection();
 }
 
 bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
-	const CampaignData& r1 = campaigns_data_[table_[rowa]];
-	const CampaignData& r2 = campaigns_data_[table_[rowb]];
+	const CampaignData& r1 = *campaigns_.get_campaign(table_[rowa]);
+	const CampaignData& r2 = *campaigns_.get_campaign(table_[rowb]);
 
-	if (r1.difficulty < r2.difficulty) {
+	if (r1.difficulty_level < r2.difficulty_level) {
 		return true;
 	}
-	return r1.index < r2.index;
+	return table_[rowa]< table_[rowb];
 }

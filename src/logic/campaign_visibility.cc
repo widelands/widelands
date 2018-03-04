@@ -23,8 +23,10 @@
 #include <memory>
 
 #include "base/log.h"
+#include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/filesystem_constants.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 
@@ -44,7 +46,6 @@ CampaignVisibility::CampaignVisibility() {
 		campvis->pull_section("global");
 		campvis->get_safe_section("global").set_int("version", current_version - 1);
 		campvis->pull_section("campaigns");
-		log("NOCOM ensure_campvis_file_exists\n");
 		campvis->pull_section("scenarios");
 		campvis->write(kCampVisFile.c_str(), true);
 	}
@@ -56,6 +57,15 @@ CampaignVisibility::CampaignVisibility() {
 		update_legacy_campvis(current_version);
 	}
 
+	// Read difficulty images
+	std::unique_ptr<LuaTable> difficulties_table(table->get_table("difficulties"));
+	std::vector<std::pair<const std::string, const Image*>> difficulty_levels;
+	for (const auto& difficulty_level_table : difficulties_table->array_entries<std::unique_ptr<LuaTable>>()) {
+		difficulty_levels.push_back(std::make_pair(
+												 _(difficulty_level_table->get_string("descname")),
+												 g_gr->images().get(difficulty_level_table->get_string("image"))));
+	}
+
 	// Read solved scenarios
 	campvis.reset(new Profile(kCampVisFile.c_str()));
 	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
@@ -64,27 +74,35 @@ CampaignVisibility::CampaignVisibility() {
 	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
 	i18n::Textdomain td("maps");
 
-	for (const auto& campaign : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
+	for (const auto& campaign_table : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
 		CampaignData* campaign_data = new CampaignData();
-		// NOCOM campaign_data.index = counter;
-		campaign_data->name = campaign->get_string("name");
-		campaign_data->descname = _(campaign->get_string("descname"));
-		campaign_data->tribename = _(campaign->get_string("tribe"));
-		campaign_data->description = _(campaign->get_string("description"));
-		campaign_data->prerequisite = campaign->get_string("prerequisite");
+		campaign_data->name = campaign_table->get_string("name");
+		campaign_data->descname = _(campaign_table->get_string("descname"));
+		campaign_data->tribename = Widelands::get_tribeinfo(campaign_table->get_string("tribe")).descname;
+		campaign_data->description = _(campaign_table->get_string("description"));
+		campaign_data->prerequisite = campaign_table->has_key("prerequisite") ? campaign_table->get_string("prerequisite") : "";
+		campaign_data->visible = false;
 
-		std::unique_ptr<LuaTable> difficulty(campaign->get_table("difficulty"));
-		campaign_data->difficulty = difficulty->get_int("value");
-		campaign_data->difficulty_description = _(difficulty->get_string("description"));
+		// Collect difficulty information
+		std::unique_ptr<LuaTable> difficulty_table(campaign_table->get_table("difficulty"));
+		campaign_data->difficulty_level = difficulty_table->get_int("level");
+		campaign_data->difficulty_image = difficulty_levels.at(campaign_data->difficulty_level - 1).second;
+		campaign_data->difficulty_description = difficulty_levels.at(campaign_data->difficulty_level - 1).first;
+		const std::string difficulty_description = _(difficulty_table->get_string("description"));
+		if (!difficulty_description.empty()) {
+			campaign_data->difficulty_description =
+					i18n::join_sentences(campaign_data->difficulty_description, difficulty_description);
+
+		}
 
 		// Scenarios
-		std::unique_ptr<LuaTable> scenarios_table(campaigns_table->get_table("scenarios"));
+		std::unique_ptr<LuaTable> scenarios_table(campaign_table->get_table("scenarios"));
 		for (const auto& scenario : scenarios_table->array_entries<std::unique_ptr<LuaTable>>()) {
 			ScenarioData* scenario_data = new ScenarioData();
 			// NOCOM scenario_data.index = counter + 1;
 			scenario_data->path = scenario->get_string("path");
 			if (campvis_scenarios.get_bool(scenario_data->path.c_str(), false)) {
-				solved_scenarios.insert(scenario_data->path);
+				solved_scenarios_.insert(scenario_data->path);
 			}
 
 			scenario_data->descname = _(scenario->get_string("descname")); // NOCOM get this from the map later
@@ -103,9 +121,21 @@ CampaignVisibility::CampaignVisibility() {
 
 void CampaignVisibility::update_visibility_info() {
 	for (auto& campaign : campaigns_) {
-		if (campaign->prerequisite.empty() || solved_scenarios.count(campaign->prerequisite) == 1) {
+		if (campaign->prerequisite.empty() || solved_scenarios_.count(campaign->prerequisite) == 1) {
+			// A campaign is visible if its prerequisites have been fulfilled
 			campaign->visible = true;
-			// Only a visible campaign can contain visible scenarios
+		} else {
+			// A campaign is also visible if one of its scenarios has been solved
+			for (size_t i = 0; i < campaign->scenarios.size(); ++i) {
+				auto& scenario = campaign->scenarios.at(i);
+				if (solved_scenarios_.count(scenario->path) == 1) {
+					campaign->visible = true;
+					break;
+				}
+			}
+		}
+		// Now set scenario visibility
+		if (campaign->visible) {
 			for (size_t i = 0; i < campaign->scenarios.size(); ++i) {
 				auto& scenario = campaign->scenarios.at(i);
 				if (i == 0) {
@@ -113,7 +143,7 @@ void CampaignVisibility::update_visibility_info() {
 					scenario->visible = true;
 				} else {
 					// A scenario is visible if its predecessor was solved
-					scenario->visible = solved_scenarios.count(campaign->scenarios.at(i-1)->path) == 1;
+					scenario->visible = solved_scenarios_.count(campaign->scenarios.at(i-1)->path) == 1;
 				}
 				if (!scenario->visible) {
 					// If a scenario is invisible, subsequent scenarios are also invisible
@@ -173,7 +203,7 @@ void CampaignVisibility::update_legacy_campvis(int version) {
 void CampaignVisibility::mark_scenario_as_solved(const std::string& path) {
 	assert(g_fs->file_exists(kCampVisFile));
 	// NOCOM evaluate whether we need to update here
-	solved_scenarios.insert(path);
+	solved_scenarios_.insert(path);
 	update_visibility_info();
 
 	// Write the campvis

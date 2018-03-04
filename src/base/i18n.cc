@@ -352,4 +352,10 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
 	}
 	return result;
 }
+
+std::string join_sentences(const std::string& sentence1, const std::string& sentence2) {
+   /** TRANSLATORS: Put 2 sentences one after the other. */
+   /** TRANSLATORS: Languages using Chinese script probably want to lose the blank space here. */
+   return (boost::format(pgettext("sentence_separator", "%s %s")) % sentence1 % sentence2).str();
+}
 }
