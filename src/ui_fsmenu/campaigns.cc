@@ -30,26 +30,24 @@
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 
+namespace {
+const std::string kCampVisFileLegacy = "save/campvis";
+}
+
 Campaigns::Campaigns() {
-	g_fs->ensure_directory_exists(kSaveDir);
-
-
+	// Load solved scenarios
 	std::unique_ptr<Profile> campvis;
-
-	// Create a new campvis file if there wasn't one
 	if (!(g_fs->file_exists(kCampVisFile))) {
-		// There is no campvis file - create one.
+		// There is no campaigns.conf file - create one.
 		campvis.reset(new Profile(kCampVisFile.c_str()));
 		campvis->pull_section("scenarios");
 		campvis->write(kCampVisFile.c_str(), true);
+		if (g_fs->file_exists(kCampVisFileLegacy)) {
+			update_legacy_campvis();
+		}
 	}
-
-	// Handle legacy campvis file
-	// TODO(GunChleoc): Remove after Build 21
 	campvis.reset(new Profile(kCampVisFile.c_str()));
-	if (campvis->get_section("campmaps") != nullptr) {
-		update_legacy_campvis();
-	}
+	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
 
 	// Now load the campaign info
 	LuaInterface lua;
@@ -64,11 +62,7 @@ Campaigns::Campaigns() {
 												 g_gr->images().get(difficulty_level_table->get_string("image"))));
 	}
 
-	// Read solved scenarios
-	campvis.reset(new Profile(kCampVisFile.c_str()));
-	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
-
-	// Now read the campaigns themselves
+	// Read the campaigns themselves
 	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
 	i18n::Textdomain td("maps");
 
@@ -154,9 +148,14 @@ void Campaigns::update_visibility_info() {
  */
 // TODO(GunChleoc): Remove after Build 21
 void Campaigns::update_legacy_campvis() {
+	Profile legacy_campvis(kCampVisFileLegacy.c_str());
+	if (legacy_campvis.get_section("campmaps") == nullptr) {
+		return;
+	}
+
 	log("Converting legacy campvis\n");
 
-	std::map<std::string, std::string> legacy_scenarios = {
+	std::vector<std::pair<std::string, std::string>> legacy_scenarios = {
 		{"fri02.wmf", "frisians01"},
 		{"fri01.wmf", "frisians00"},
 		{"atl02.wmf", "atlanteans01"},
@@ -169,8 +168,7 @@ void Campaigns::update_legacy_campvis() {
 		{"bar01.wmf", "barbariantut00"},
 	};
 
-	Profile read_campvis(kCampVisFile.c_str());
-	Section& campvis_scenarios = read_campvis.get_safe_section("campmaps");
+	Section& campvis_scenarios = legacy_campvis.get_safe_section("campmaps");
 	bool set_solved = false;
 	std::set<std::string> solved_legacy_scenarios;
 	for (const auto& legacy_scenario : legacy_scenarios) {

@@ -49,7 +49,7 @@ constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
 
 /// Filesystem names and intervals for savegames
 const std::string kSaveDir = "save";
-const std::string kCampVisFile = "save/campvis";
+const std::string kCampVisFile = "campaigns.conf";
 const std::string kSavegameExtension = ".wgf";
 const std::string kAutosavePrefix = "wl_autosave";
 // Default autosave interval in minutes
