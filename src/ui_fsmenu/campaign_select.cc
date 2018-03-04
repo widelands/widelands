@@ -45,7 +45,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
 
      // Campaign description
      campaign_details_(this),
-	  campaigns_(campvis) {
+     campaigns_(campvis) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
@@ -147,5 +147,5 @@ bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t ro
 	if (r1.difficulty_level < r2.difficulty_level) {
 		return true;
 	}
-	return table_[rowa]< table_[rowb];
+	return table_[rowa] < table_[rowb];
 }

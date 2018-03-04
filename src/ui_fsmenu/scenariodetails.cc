@@ -47,11 +47,11 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
 }
 
 void ScenarioDetails::update(const ScenarioData& scenariodata) {
-	name_label_.set_text((boost::format("<rt>%s%s</rt>") %
-	                      as_header(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"),
-	                                UIStyle::kFsMenu, true) %
-	                      as_content(scenariodata.descname, UIStyle::kFsMenu))
-	                        .str());
+	name_label_.set_text(
+	   (boost::format("<rt>%s%s</rt>") %
+	    as_header(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"), UIStyle::kFsMenu, true) %
+	    as_content(scenariodata.descname, UIStyle::kFsMenu))
+	      .str());
 
 	if (scenariodata.playable) {
 		std::string description =

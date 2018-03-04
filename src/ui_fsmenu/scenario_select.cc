@@ -43,7 +43,7 @@
  */
 FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
    : FullscreenMenuLoadMapOrGame(),
-	  is_tutorial_(camp == nullptr),
+     is_tutorial_(camp == nullptr),
      table_(this, tablex_, tabley_, tablew_, tableh_),
      header_box_(this, 0, 0, UI::Box::Vertical),
 
@@ -63,7 +63,7 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
                g_gr->images().get("images/ui_basic/but3.png"),
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
      scenario_details_(this),
-	  campaign_(camp) {
+     campaign_(camp) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Set subtitle of the page
@@ -130,7 +130,8 @@ void FullscreenMenuScenarioSelect::layout() {
 
 std::string FullscreenMenuScenarioSelect::get_map() {
 	if (set_has_selection()) {
-		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + scenarios_data_.at(table_.get_selected()).path);
+		return g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" +
+		                                        scenarios_data_.at(table_.get_selected()).path);
 	}
 	return "";
 }
@@ -161,7 +162,6 @@ void FullscreenMenuScenarioSelect::entry_selected() {
 		ok_.set_enabled(scenario_data.playable);
 	}
 }
-
 
 /**
  * fill the campaign-map list
@@ -194,11 +194,13 @@ void FullscreenMenuScenarioSelect::fill_table() {
 	for (size_t i = 0; i < scenarios_data_.size(); ++i) {
 		// Get details info from maps
 		ScenarioData* scenario_data = &scenarios_data_.at(i);
-		const std::string full_path = g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + scenario_data->path);
+		const std::string full_path =
+		   g_fs->FileSystem::fix_cross_file(kCampaignsDir + "/" + scenario_data->path);
 		Widelands::Map map;
 		std::unique_ptr<Widelands::MapLoader> ml(map.get_correct_loader(full_path));
 		if (!ml) {
-			throw wexception(_("Invalid path to file in campaigns.lua of tutorials.lua: %s"), full_path.c_str());
+			throw wexception(
+			   _("Invalid path to file in campaigns.lua of tutorials.lua: %s"), full_path.c_str());
 		}
 
 		map.set_filename(full_path);

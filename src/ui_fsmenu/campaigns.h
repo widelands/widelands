@@ -41,7 +41,7 @@ struct ScenarioData {
 	bool playable;
 	bool visible;
 
-	ScenarioData()  = default;
+	ScenarioData() = default;
 };
 
 /**

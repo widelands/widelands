@@ -48,7 +48,7 @@ CampaignDetails::CampaignDetails(Panel* parent)
 
 void CampaignDetails::update(const CampaignData& campaigndata) {
 	name_label_.set_text((boost::format("<rt>%s%s</rt>") %
-								 /** TRANSLATORS: Header for campaign name */
+	                      /** TRANSLATORS: Header for campaign name */
 	                      as_header(_("Campaign"), UIStyle::kFsMenu, true) %
 	                      as_content(campaigndata.descname, UIStyle::kFsMenu))
 	                        .str());
@@ -61,16 +61,16 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 		               as_content(campaigndata.tribename, UIStyle::kFsMenu))
 		                 .str();
 		description =
-				/** TRANSLATORS: Header for campaign difficulty */
-		   (boost::format("%s%s") % description % as_header(_("Difficulty"), UIStyle::kFsMenu))
-		      .str();
+		   /** TRANSLATORS: Header for campaign difficulty */
+		   (boost::format("%s%s") % description % as_header(_("Difficulty"), UIStyle::kFsMenu)).str();
 		description = (boost::format("%s%s") % description %
 		               as_content(campaigndata.difficulty_description, UIStyle::kFsMenu))
 		                 .str();
 
 		description =
-				/** TRANSLATORS: Header for campaign description */
-		   (boost::format("%s%s") % description % as_header(_("Description"), UIStyle::kFsMenu)).str();
+		   /** TRANSLATORS: Header for campaign description */
+		   (boost::format("%s%s") % description % as_header(_("Description"), UIStyle::kFsMenu))
+		      .str();
 		description = (boost::format("%s%s") % description %
 		               as_content(campaigndata.description, UIStyle::kFsMenu))
 		                 .str();

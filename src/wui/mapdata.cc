@@ -41,7 +41,11 @@ MapData::MapData(const Widelands::Map& map,
                  const std::string& init_filename,
                  const MapData::MapType& init_maptype,
                  const MapData::DisplayType& init_displaytype)
-   : MapData(init_filename, _("No Name"), map.get_author().empty() ? _("No Author") : map.get_author(), init_maptype, init_displaytype) {
+   : MapData(init_filename,
+             _("No Name"),
+             map.get_author().empty() ? _("No Author") : map.get_author(),
+             init_maptype,
+             init_displaytype) {
 
 	i18n::Textdomain td("maps");
 	if (!map.get_name().empty()) {
