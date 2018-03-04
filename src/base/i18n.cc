@@ -322,6 +322,7 @@ const std::string& get_locale() {
 }
 
 std::string localize_list(const std::vector<std::string>& items, ConcatenateWith listtype) {
+	i18n::Textdomain td("widelands");
 	std::string result;
 	for (std::vector<std::string>::const_iterator it = items.begin(); it != items.end(); ++it) {
 		if (it == items.begin()) {
@@ -354,6 +355,7 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
 }
 
 std::string join_sentences(const std::string& sentence1, const std::string& sentence2) {
+	i18n::Textdomain td("widelands");
    /** TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably want to lose the blank space here. */
    return (boost::format(pgettext("sentence_separator", "%1% %2%")) % sentence1 % sentence2).str();
 }

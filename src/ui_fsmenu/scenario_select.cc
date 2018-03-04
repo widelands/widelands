@@ -180,11 +180,11 @@ void FullscreenMenuScenarioSelect::fill_table() {
 		}
 	} else {
 		// Load the current campaign
-		for (auto& scenario : campaign_->scenarios) {
-			if (scenario->visible) {
-				scenario->is_tutorial = false;
-				scenario->playable = scenario->path != "dummy.wmf";
-				scenarios_data_.push_back(*scenario.get());
+		for (auto& scenario_data : campaign_->scenarios) {
+			if (scenario_data->visible) {
+				scenario_data->is_tutorial = false;
+				scenario_data->playable = scenario_data->path != "dummy.wmf";
+				scenarios_data_.push_back(*scenario_data.get());
 			} else {
 				break;
 			}
@@ -206,9 +206,7 @@ void FullscreenMenuScenarioSelect::fill_table() {
 
 		{
 			i18n::Textdomain td("maps");
-			// Localizing this, because some author fields now have "edited by" text.
-			const std::string& author_list = _(map.get_author());
-			scenario_data->authors = author_list;
+			scenario_data->authors.set_authors(map.get_author());
 			scenario_data->descname = _(map.get_name());
 			scenario_data->description = _(map.get_description());
 		}

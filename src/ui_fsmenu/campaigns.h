@@ -41,9 +41,7 @@ struct ScenarioData {
 	bool playable;
 	bool visible;
 
-	ScenarioData(const std::string& init_authors) : authors(init_authors) {}
-	// We start with empty authors, because those will come from the map
-	ScenarioData() : ScenarioData("") {}
+	ScenarioData()  = default;
 };
 
 /**
