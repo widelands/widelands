@@ -33,18 +33,13 @@
 Campaigns::Campaigns() {
 	g_fs->ensure_directory_exists(kSaveDir);
 
-	// Get the current version of the campaign config
-	LuaInterface lua;
-	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
-	const int current_version = table->get_int("version");
+
 	std::unique_ptr<Profile> campvis;
 
 	// Create a new campvis file if there wasn't one
 	if (!(g_fs->file_exists(kCampVisFile))) {
 		// There is no campvis file - create one.
 		campvis.reset(new Profile(kCampVisFile.c_str()));
-		campvis->pull_section("global");
-		campvis->get_safe_section("global").set_int("version", current_version - 1);
 		campvis->pull_section("scenarios");
 		campvis->write(kCampVisFile.c_str(), true);
 	}
@@ -53,8 +48,12 @@ Campaigns::Campaigns() {
 	// TODO(GunChleoc): Remove after Build 21
 	campvis.reset(new Profile(kCampVisFile.c_str()));
 	if (campvis->get_section("campmaps") != nullptr) {
-		update_legacy_campvis(current_version);
+		update_legacy_campvis();
 	}
+
+	// Now load the campaign info
+	LuaInterface lua;
+	std::unique_ptr<LuaTable> table(lua.run_script("campaigns/campaigns.lua"));
 
 	// Read difficulty images
 	std::unique_ptr<LuaTable> difficulties_table(table->get_table("difficulties"));
@@ -69,7 +68,7 @@ Campaigns::Campaigns() {
 	campvis.reset(new Profile(kCampVisFile.c_str()));
 	Section& campvis_scenarios = campvis->get_safe_section("scenarios");
 
-	// Now read all the data from campaign config
+	// Now read the campaigns themselves
 	std::unique_ptr<LuaTable> campaigns_table(table->get_table("campaigns"));
 	i18n::Textdomain td("maps");
 
@@ -111,7 +110,7 @@ Campaigns::Campaigns() {
 		campaigns_.push_back(std::unique_ptr<CampaignData>(std::move(campaign_data)));
 	}
 
-	// Now calculate the visibility
+	// Finally, calculate the visibility
 	update_visibility_info();
 }
 
@@ -154,7 +153,7 @@ void Campaigns::update_visibility_info() {
  * Handle legacy campvis file
  */
 // TODO(GunChleoc): Remove after Build 21
-void Campaigns::update_legacy_campvis(int version) {
+void Campaigns::update_legacy_campvis() {
 	log("Converting legacy campvis\n");
 
 	std::map<std::string, std::string> legacy_scenarios = {
@@ -183,8 +182,6 @@ void Campaigns::update_legacy_campvis(int version) {
 
 	// Now write everything
 	Profile write_campvis(kCampVisFile.c_str());
-	write_campvis.pull_section("global").set_int("version", version);
-
 	Section& write_scenarios = write_campvis.pull_section("scenarios");
 	for (const auto& scenario : solved_legacy_scenarios) {
 		write_scenarios.set_bool(scenario.c_str(), true);
