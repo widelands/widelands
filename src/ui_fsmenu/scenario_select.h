@@ -32,10 +32,10 @@
  */
 class FullscreenMenuScenarioSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	explicit FullscreenMenuScenarioSelect(bool is_tutorial = false);
+	// If camp is not set, we'll be loading the tutorials
+	explicit FullscreenMenuScenarioSelect(CampaignData* camp = nullptr);
 
 	std::string get_map();
-	void set_campaign(const std::string& campaign_name);
 
 protected:
 	void clicked_ok() override;
@@ -43,21 +43,12 @@ protected:
 	void fill_table() override;
 
 private:
-	struct ScenarioTableData {
-		uint32_t index;
-		std::string name;
-		std::string author;
-		std::string path;
-		bool playable;
-
-		ScenarioTableData() = default;
-	};
-
 	void layout() override;
 
 	/// Updates buttons and text labels and returns whether a table entry is selected.
 	bool set_has_selection();
 
+	bool is_tutorial_;
 	UI::Table<uintptr_t const> table_;
 
 	UI::Box header_box_;
@@ -66,12 +57,9 @@ private:
 	UI::MultilineTextarea subtitle_;
 	ScenarioDetails scenario_details_;
 
-	std::string campaign_name_;
-	std::string campmapfile;
+	CampaignData* campaign_;
 
-	std::vector<ScenarioTableData> scenarios_data_;
-
-	bool is_tutorial_;
+	std::vector<ScenarioData> scenarios_data_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_SCENARIO_SELECT_H

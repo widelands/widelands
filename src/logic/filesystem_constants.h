@@ -34,6 +34,7 @@ constexpr double kAIFilesKeepAroundTime = 7 * 24 * 60 * 60;
 
 /// Filesystem names for maps
 const std::string kMapsDir = "maps";
+const std::string kCampaignsDir = "campaigns";
 const std::string kWidelandsMapExtension = ".wmf";
 const std::string kS2MapExtension1 = ".swd";
 const std::string kS2MapExtension2 = ".wld";

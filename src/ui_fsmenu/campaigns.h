@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_LOGIC_CAMPAIGN_VISIBILITY_H
-#define WL_LOGIC_CAMPAIGN_VISIBILITY_H
+#ifndef WL_UI_FSMENU_CAMPAIGNS_H
+#define WL_UI_FSMENU_CAMPAIGNS_H
 
 #include <memory>
 #include <string>
@@ -27,18 +27,16 @@
 
 #include "graphic/image.h"
 #include "scripting/lua_table.h"
-#include "wui/mapauthordata.h" // NOCOM move this
+#include "wui/mapauthordata.h"
 
 /**
  * Data about a campaign or tutorial scenario that we're interested in.
  */
 struct ScenarioData {
-	uint32_t index; // NOCOM
 	std::string path;
 	std::string descname;
 	std::string description;
 	MapAuthorData authors;
-	std::string campaign; // NOCOM
 	bool is_tutorial;
 	bool playable;
 	bool visible;
@@ -52,7 +50,6 @@ struct ScenarioData {
  * Data about a campaign that we're interested in.
  */
 struct CampaignData {
-	std::string name;
 	std::string descname;
 	std::string tribename;
 	uint32_t difficulty_level;
@@ -66,24 +63,8 @@ struct CampaignData {
 	CampaignData() = default;
 };
 
-struct CampaignVisibility {
-	CampaignVisibility();
-	void mark_scenario_as_solved(const std::string& path);
-
-	// NOCOM clean up these methods
-	ScenarioData* get_scenario(size_t campaign_index, size_t scenario_index) const {
-		assert(campaign_index < campaigns.size());
-		assert(scenario_index < campaigns_.at(campaign_index)->scenarios.size());
-		return campaigns_.at(campaign_index)->scenarios.at(scenario_index).get();
-	}
-
-	ScenarioData* get_scenario(const std::string& campaign_name, size_t scenario_index) const {
-		CampaignData* campaign = get_campaign(campaign_name);
-		if (campaign != nullptr) {
-			return campaign->scenarios.at(scenario_index).get();
-		}
-		return nullptr;
-	}
+struct Campaigns {
+	Campaigns();
 
 	size_t no_of_campaigns() const {
 		return campaigns_.size();
@@ -94,15 +75,6 @@ struct CampaignVisibility {
 		return campaigns_.at(campaign_index).get();
 	}
 
-	CampaignData* get_campaign(const std::string& name) const {
-		for (const auto& campaign : campaigns_) {
-			if (campaign->name == name) {
-				return campaign.get();
-			}
-		}
-		return nullptr;
-	}
-
 private:
 	void update_visibility_info();
 	static void update_legacy_campvis(int version);
@@ -111,4 +83,4 @@ private:
 	std::unordered_set<std::string> solved_scenarios_;
 };
 
-#endif  // end of include guard: WL_LOGIC_CAMPAIGN_VISIBILITY_H
+#endif  // end of include guard: WL_UI_FSMENU_CAMPAIGNS_H

@@ -46,23 +46,23 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
 	add(&descr_, UI::Box::Resizing::kExpandBoth);
 }
 
-void ScenarioDetails::update(const ScenarioMapData& scenariodata) {
+void ScenarioDetails::update(const ScenarioData& scenariodata) {
 	name_label_.set_text((boost::format("<rt>%s%s</rt>") %
-	                      as_header(scenariodata.is_tutorial ? _("Tutorial:") : _("Scenario:"),
+	                      as_header(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"),
 	                                UIStyle::kFsMenu, true) %
-	                      as_content(scenariodata.name, UIStyle::kFsMenu))
+	                      as_content(scenariodata.descname, UIStyle::kFsMenu))
 	                        .str());
 
 	if (scenariodata.playable) {
 		std::string description =
 		   (boost::format("%s%s") %
 		    as_header(
-		       ngettext("Author:", "Authors:", scenariodata.authors.get_number()), UIStyle::kFsMenu) %
+		       ngettext("Author", "Authors", scenariodata.authors.get_number()), UIStyle::kFsMenu) %
 		    as_content(scenariodata.authors.get_names(), UIStyle::kFsMenu))
 		      .str();
 
 		description =
-		   (boost::format("%s%s") % description % as_header(_("Description:"), UIStyle::kFsMenu))
+		   (boost::format("%s%s") % description % as_header(_("Description"), UIStyle::kFsMenu))
 		      .str();
 		description = (boost::format("%s%s") % description %
 		               as_content(scenariodata.description, UIStyle::kFsMenu))

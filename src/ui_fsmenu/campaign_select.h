@@ -22,10 +22,10 @@
 
 #include <vector>
 
-#include "logic/campaign_visibility.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/campaigndetails.h"
+#include "ui_fsmenu/campaigns.h"
 #include "ui_fsmenu/load_map_or_game.h"
 
 /*
@@ -33,9 +33,9 @@
  */
 class FullscreenMenuCampaignSelect : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuCampaignSelect();
+	FullscreenMenuCampaignSelect(Campaigns* campvis);
 
-	std::string get_campaign() const;
+	size_t get_campaign_index() const;
 
 protected:
 	void clicked_ok() override;
@@ -55,11 +55,7 @@ private:
 	UI::Textarea title_;
 	CampaignDetails campaign_details_;
 
-	CampaignVisibility campaigns_;
-
-	/// Variables used for exchange between the two Campaign UIs and
-	/// Game::run_campaign
-	std::string selected_campaign_;
+	Campaigns* campaigns_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_CAMPAIGN_SELECT_H

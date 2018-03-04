@@ -25,7 +25,7 @@
 
 #include "economy/economy.h"
 #include "economy/flag.h"
-#include "logic/campaign_visibility.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message.h"
@@ -637,8 +637,9 @@ int LuaPlayer::mark_scenario_as_solved(lua_State* L) {
 	if (get_game(L).get_ipl()->player_number() != player_number())
 		report_error(L, "Can only be called for interactive player!");
 
-	CampaignVisibility cvs;
-	cvs.mark_scenario_as_solved(luaL_checkstring(L, 2));
+	Profile campvis(kCampVisFile.c_str());
+	campvis.pull_section("scenarios").set_bool(luaL_checkstring(L, 2), true);
+	campvis.write(kCampVisFile.c_str(), false);
 
 	return 0;
 }

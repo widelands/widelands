@@ -22,20 +22,7 @@
 
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
-#include "wui/mapauthordata.h"
-
-/**
- * Data about a campaign or tutorial scenario that we're interested in.
- */
-struct ScenarioMapData {
-	std::string name;
-	MapAuthorData authors;
-	std::string description;
-	bool is_tutorial;
-	bool playable;
-	ScenarioMapData(const std::string& author_list) : authors(author_list) {
-	}
-};
+#include "ui_fsmenu/campaigns.h"
 
 /**
  * Show a Box with information about a campaign or tutorial scenario.
@@ -44,7 +31,7 @@ class ScenarioDetails : public UI::Box {
 public:
 	explicit ScenarioDetails(Panel* parent);
 
-	void update(const ScenarioMapData& scenariodata);
+	void update(const ScenarioData& scenariodata);
 
 private:
 	UI::MultilineTextarea name_label_;

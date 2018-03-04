@@ -130,6 +130,8 @@ wl_library(ui_fsmenu_maploading
   SRCS
     campaigndetails.cc
     campaigndetails.h
+    campaigns.cc
+    campaigns.h
     campaign_select.cc
     campaign_select.h
     mapselect.cc
@@ -145,11 +147,12 @@ wl_library(ui_fsmenu_maploading
     graphic
     graphic_fonthandler
     graphic_text_constants
+    graphic_surface
     io_filesystem
-    logic_campaign_visibility
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_tribe_basic_info
     map_io_map_loader
     profile
     scripting_lua_interface

@@ -20,9 +20,9 @@
 #ifndef WL_UI_FSMENU_CAMPAIGNDETAILS_H
 #define WL_UI_FSMENU_CAMPAIGNDETAILS_H
 
-#include "logic/campaign_visibility.h"
 #include "ui_basic/box.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_fsmenu/campaigns.h"
 
 /**
  * Show a Box with information about a campaign.

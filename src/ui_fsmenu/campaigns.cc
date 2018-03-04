@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/campaign_visibility.h"
+#include "ui_fsmenu/campaigns.h"
 
 #include <map>
 #include <memory>
@@ -30,7 +30,7 @@
 #include "profile/profile.h"
 #include "scripting/lua_interface.h"
 
-CampaignVisibility::CampaignVisibility() {
+Campaigns::Campaigns() {
 	g_fs->ensure_directory_exists(kSaveDir);
 
 	// Get the current version of the campaign config
@@ -45,7 +45,6 @@ CampaignVisibility::CampaignVisibility() {
 		campvis.reset(new Profile(kCampVisFile.c_str()));
 		campvis->pull_section("global");
 		campvis->get_safe_section("global").set_int("version", current_version - 1);
-		campvis->pull_section("campaigns");
 		campvis->pull_section("scenarios");
 		campvis->write(kCampVisFile.c_str(), true);
 	}
@@ -76,7 +75,6 @@ CampaignVisibility::CampaignVisibility() {
 
 	for (const auto& campaign_table : campaigns_table->array_entries<std::unique_ptr<LuaTable>>()) {
 		CampaignData* campaign_data = new CampaignData();
-		campaign_data->name = campaign_table->get_string("name");
 		campaign_data->descname = _(campaign_table->get_string("descname"));
 		campaign_data->tribename = Widelands::get_tribeinfo(campaign_table->get_string("tribe")).descname;
 		campaign_data->description = _(campaign_table->get_string("description"));
@@ -97,18 +95,16 @@ CampaignVisibility::CampaignVisibility() {
 
 		// Scenarios
 		std::unique_ptr<LuaTable> scenarios_table(campaign_table->get_table("scenarios"));
-		for (const auto& scenario : scenarios_table->array_entries<std::unique_ptr<LuaTable>>()) {
+		for (const std::string& path : scenarios_table->array_entries<std::string>()) {
 			ScenarioData* scenario_data = new ScenarioData();
-			// NOCOM scenario_data.index = counter + 1;
-			scenario_data->path = scenario->get_string("path");
+			scenario_data->path = path;
 			if (campvis_scenarios.get_bool(scenario_data->path.c_str(), false)) {
 				solved_scenarios_.insert(scenario_data->path);
 			}
 
-			scenario_data->descname = _(scenario->get_string("descname")); // NOCOM get this from the map later
 			scenario_data->is_tutorial = false;
 			scenario_data->playable = scenario_data->path != "dummy.wmf";
-			scenario_data->visible = false; // NOCOM
+			scenario_data->visible = false;
 			campaign_data->scenarios.push_back(std::unique_ptr<ScenarioData>(std::move(scenario_data)));
 		}
 
@@ -119,7 +115,7 @@ CampaignVisibility::CampaignVisibility() {
 	update_visibility_info();
 }
 
-void CampaignVisibility::update_visibility_info() {
+void Campaigns::update_visibility_info() {
 	for (auto& campaign : campaigns_) {
 		if (campaign->prerequisite.empty() || solved_scenarios_.count(campaign->prerequisite) == 1) {
 			// A campaign is visible if its prerequisites have been fulfilled
@@ -158,7 +154,7 @@ void CampaignVisibility::update_visibility_info() {
  * Handle legacy campvis file
  */
 // TODO(GunChleoc): Remove after Build 21
-void CampaignVisibility::update_legacy_campvis(int version) {
+void Campaigns::update_legacy_campvis(int version) {
 	log("Converting legacy campvis\n");
 
 	std::map<std::string, std::string> legacy_scenarios = {
@@ -197,17 +193,3 @@ void CampaignVisibility::update_legacy_campvis(int version) {
 	write_campvis.write(kCampVisFile.c_str(), true);
 }
 
-/**
- * Marks the scenario with the given file 'path' as solved.
- */
-void CampaignVisibility::mark_scenario_as_solved(const std::string& path) {
-	assert(g_fs->file_exists(kCampVisFile));
-	// NOCOM evaluate whether we need to update here
-	solved_scenarios_.insert(path);
-	update_visibility_info();
-
-	// Write the campvis
-	Profile campvis(kCampVisFile.c_str());
-	campvis.pull_section("scenarios").set_bool(path.c_str(), true);
-	campvis.write(kCampVisFile.c_str(), false);
-}

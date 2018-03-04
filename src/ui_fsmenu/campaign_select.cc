@@ -36,7 +36,7 @@
  * CampaignSelect UI
  * Loads a list of all visible campaigns
  */
-FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
+FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
    : FullscreenMenuLoadMapOrGame(),
      table_(this, 0, 0, 0, 0),
 
@@ -44,7 +44,8 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
      title_(this, 0, 0, _("Choose a campaign"), UI::Align::kCenter),
 
      // Campaign description
-     campaign_details_(this) {
+     campaign_details_(this),
+	  campaigns_(campvis) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
@@ -89,15 +90,15 @@ void FullscreenMenuCampaignSelect::clicked_ok() {
 	if (!table_.has_selection()) {
 		return;
 	}
-	const CampaignData& campaign_data = *campaigns_.get_campaign(table_.get_selected());
+	const CampaignData& campaign_data = *campaigns_->get_campaign(table_.get_selected());
 	if (!campaign_data.visible) {
 		return;
 	}
 	end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kOk);
 }
 
-std::string FullscreenMenuCampaignSelect::get_campaign() const {
-	return selected_campaign_;
+size_t FullscreenMenuCampaignSelect::get_campaign_index() const {
+	return table_.get_selected();
 }
 
 bool FullscreenMenuCampaignSelect::set_has_selection() {
@@ -108,8 +109,7 @@ bool FullscreenMenuCampaignSelect::set_has_selection() {
 
 void FullscreenMenuCampaignSelect::entry_selected() {
 	if (set_has_selection()) {
-		const CampaignData& campaign_data = *campaigns_.get_campaign(table_.get_selected());
-		selected_campaign_ = campaign_data.name;
+		const CampaignData& campaign_data = *campaigns_->get_campaign(table_.get_selected());
 		ok_.set_enabled(campaign_data.visible);
 		campaign_details_.update(campaign_data);
 	}
@@ -121,9 +121,8 @@ void FullscreenMenuCampaignSelect::entry_selected() {
 void FullscreenMenuCampaignSelect::fill_table() {
 	table_.clear();
 
-	// NOCOM reset ? Or pass it around? CampaignVisibility campaign_visibility;
-	for (size_t i = 0; i < campaigns_.no_of_campaigns(); ++i) {
-		const CampaignData& campaign_data = *campaigns_.get_campaign(i);
+	for (size_t i = 0; i < campaigns_->no_of_campaigns(); ++i) {
+		const CampaignData& campaign_data = *campaigns_->get_campaign(i);
 
 		UI::Table<uintptr_t const>::EntryRecord& tableEntry = table_.add(i);
 		tableEntry.set_picture(0, campaign_data.difficulty_image);
@@ -142,8 +141,8 @@ void FullscreenMenuCampaignSelect::fill_table() {
 }
 
 bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t rowb) {
-	const CampaignData& r1 = *campaigns_.get_campaign(table_[rowa]);
-	const CampaignData& r2 = *campaigns_.get_campaign(table_[rowb]);
+	const CampaignData& r1 = *campaigns_->get_campaign(table_[rowa]);
+	const CampaignData& r2 = *campaigns_->get_campaign(table_[rowb]);
 
 	if (r1.difficulty_level < r2.difficulty_level) {
 		return true;

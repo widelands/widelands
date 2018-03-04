@@ -69,8 +69,8 @@ void CampaignDetails::update(const CampaignData& campaigndata) {
 		                 .str();
 
 		description =
-				/** TRANSLATORS: Header for campaign story */
-		   (boost::format("%s%s") % description % as_header(_("Story"), UIStyle::kFsMenu)).str();
+				/** TRANSLATORS: Header for campaign description */
+		   (boost::format("%s%s") % description % as_header(_("Description"), UIStyle::kFsMenu)).str();
 		description = (boost::format("%s%s") % description %
 		               as_content(campaigndata.description, UIStyle::kFsMenu))
 		                 .str();
