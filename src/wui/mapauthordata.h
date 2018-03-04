@@ -42,7 +42,7 @@ struct MapAuthorData {
 		return number_;
 	}
 
-	void set_authors(const std::string author_list) {
+	void set_authors(const std::string& author_list) {
 		std::vector<std::string> authors;
 		{
 			i18n::Textdomain td("maps");

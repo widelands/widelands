@@ -69,7 +69,7 @@ struct Campaigns {
 	}
 
 	CampaignData* get_campaign(size_t campaign_index) const {
-		assert(campaign_index < campaigns.size());
+		assert(campaign_index < campaigns_.size());
 		return campaigns_.at(campaign_index).get();
 	}
 
