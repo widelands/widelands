@@ -88,8 +88,8 @@ public:
 	const MessageQueue& messages() const {
 		return messages_;
 	}
-	MessageQueue& messages() {
-		return messages_;
+	MessageQueue* get_messages() {
+		return &messages_;
 	}
 
 	/// Adds the message to the queue.
@@ -108,7 +108,7 @@ public:
 	void message_object_removed(MessageId mid) const;
 
 	void set_message_status(const MessageId& id, Message::Status const status) {
-		messages().set_message_status(id, status);
+		get_messages()->set_message_status(id, status);
 	}
 
 	const EditorGameBase& egbase() const {

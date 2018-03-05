@@ -106,7 +106,7 @@ public:
 	// The buildings where this worker can work
 	const std::set<DescriptionIndex>& employers() const;
 
-	Worker& create(EditorGameBase&, Player&, PlayerImmovable*, Coords) const;
+	Worker& create(EditorGameBase&, Player*, PlayerImmovable*, Coords) const;
 
 	uint32_t movecaps() const override;
 

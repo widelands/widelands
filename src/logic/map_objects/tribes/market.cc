@@ -243,14 +243,14 @@ void Market::traded_ware_arrived(const int trade_id,
 	// ware to drop it off. The carrier then leaves the building and goes home.
 	const WorkerDescr& w_desc =
 	   *game->tribes().get_worker_descr(game->tribes().worker_index("barbarians_carrier"));
-	auto& worker = w_desc.create(*game, owner(), this, position_);
+	auto& worker = w_desc.create(*game, get_owner(), this, position_);
 	worker.start_task_dropoff(*game, *ware);
 	trade_order.received_traded_wares_in_this_batch += 1;
-	owner().ware_produced(ware_index);
+	get_owner()->ware_produced(ware_index);
 
 	auto* other_market = dynamic_cast<Market*>(game->objects().get_object(trade_order.other_side));
 	assert(other_market != nullptr);
-	other_market->owner().ware_consumed(ware_index, 1);
+	other_market->get_owner()->ware_consumed(ware_index, 1);
 	auto& other_trade_order = other_market->trade_orders_.at(trade_id);
 	if (trade_order.received_traded_wares_in_this_batch == other_trade_order.num_wares_per_batch() &&
 	    other_trade_order.received_traded_wares_in_this_batch == trade_order.num_wares_per_batch()) {
