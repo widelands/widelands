@@ -38,6 +38,21 @@ obj_build_brick_economy = {
       li (_[[Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start producing bricks.]])
    ),
 }
+obj_gather_materials = {
+   name = "gather_materials",
+   title=_"Gather building materials",
+   number = 1,
+   body = objective_text (_"Stockpile Building Materials",
+      p(_([[Stockpile some building materials in your headquarters. Gather at least:]])) ..
+      li(_"30 × Log") ..
+      li(_"30 × Granite") ..
+      li(_"10 × Clay") ..
+      li(_"40 × Brick") ..
+      li(_"20 × Coal") ..
+      li(_"30 × Thatch Reed") ..
+      p(_([[Remember that you can set target quantities for most of these wares in your economy settings.]]))
+   ),
+}
 obj_build_food_economy = {
    name = "build_food_economy",
    title=_"Produce food for the miners",
@@ -148,10 +163,10 @@ intro_4 = {
       _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick kiln out of granite and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don’t see any here. Perhaps these hills contain enough stones to mine some granite.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – Introduction 4
-      _([[Clay is easy to make: A clay burner will simply dig up some earth and mix it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
+      _([[Clay is easy to make: A brickmaker working at a clay pit will simply dig up some earth and mix it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – Introduction 4
-      _([[To burn bricks, the brick burner needs a fire. We need to use coal as fuel. Build a coal mine to make sure we don’t run out. No coal means no bricks, no bricks means no mines, no mines mean no coal… you can see the problem.]])
+      _([[To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. Build a coal mine to make sure we don’t run out. No coal means no bricks, no bricks means no mines, no mines mean no coal… you can see the problem.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – Introduction 4
       _([[Also, build a well – nobody likes to drink salt water, and it is no good for making clay.]]))
@@ -161,7 +176,8 @@ intro_5 = {
    title =_ "Introduction",
    body=reebaud (_"Our first settlement",
       -- TRANSLATORS: Reebaud – Introduction 5
-      _([[You did well. Our entire building material production is working now. Let’s wait until we have gathered some more materials. We could expand our territory some more, to see what else can be found on this island.]])),
+      _([[You did well. Our entire building material production is working now. Let’s wait until we have gathered some more materials. We could expand our territory some more, to see what else can be found on this island.]]))
+      .. new_objectives (obj_gather_materials),
 }
 
 warning_no_reed = {
@@ -174,7 +190,7 @@ warning_no_clay = {
    title =_ "Clay Shortages",
    body=hauke (_"Build another clay pit",
       -- TRANSLATORS: Hauke – no clay
-      _([[Our brick burners have been complaining about a shortage of clay for a while now. No clay means no bricks can be produced, so this shortage is slowing us down a lot. It would be better to build one or two more clay pits, and wells to supply them with water.]])
+      _([[Our brickmakers have been complaining about a shortage of clay for a while now. No clay means no bricks can be produced, so this shortage is slowing us down a lot. It would be better to build one or two more clay pits, and wells to supply them with water.]])
       .. paragraphdivider () ..
       -- TRANSLATORS: Hauke – no clay
       _([[Clay is also used in shipbuilding and to improve charcoal kilns. If we ever need to build a ship, or the mines cannot provide us with enough coal, we will need more clay, so the shortage must be resolved.]])),
@@ -183,6 +199,7 @@ warning_no_bricks = {
    title =_ "Brick Shortages",
    body=hauke (_"Build another brick kiln",
       -- NOCOM "constructionsite window" is immersion breaking - add an objective or rephrase
+      -- This isn´t really important enough for an objective, it´s only meant as a suggestion
       -- TRANSLATORS: Hauke – no bricks
       _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick kiln, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]])),
 }
@@ -354,6 +371,7 @@ warning_early_attack_2 = {
    title =_ "Beware!",
    body=reebaud (_"Not strong enough",
       -- NOCOM "conquer radius" is immersion breaking - add an objective or rephrase
+      -- I think it would be difficult to check whether an objective as complex as this is fulfilled
       -- TRANSLATORS: Reebaud – beware of early attacks 2
       _([[The scouts informed me that the enemy can’t build towers. We could build a fortress, which is the building with the highest conquer radius, to push the border as far east as possible. The enemies can only see it if they build a fortress right at the border.]])
        .. paragraphdivider () ..

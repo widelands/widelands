@@ -1,13 +1,11 @@
 include "scripting/messages.lua"
+include "scripting/field_animations.lua"
 
 local done_mining = false
 local done_fighting = false
 
 local see_empire = nil
 
--- NOCOM if we use p2.defeated below, we can change the inly remaining loop that
--- uses all_fields (in check_empire) and then read the mountains in the
--- mining_issues thread
 local all_fields = {}
 local mountains = {}
 for x=0,map.width - 1 do
@@ -131,7 +129,7 @@ function expand_south()
    set_objective_done(o)
    p2:allow_buildings("all")
    p3:allow_buildings("all")
-   -- We're done expanding, so we chan start checking for victory
+   -- We're done expanding, so we can start checking for victory
    run(victory)
 
    if choice == "supply" then
@@ -160,7 +158,7 @@ function mining_issues()
    end
    sleep(2221)
 
-   -- NOCOM what do we do in this section?
+   -- Now we need to recycle metal so we can get picks
    scroll_to_field(has_mountain)
    campaign_message_box(train_recycle_1)
    campaign_message_box(train_recycle_2)
@@ -190,7 +188,7 @@ function mining_issues()
    end
    set_objective_done(o)
 
-   -- NOCOM comment this section
+   -- The mines are working – now provide fish
    campaign_message_box(aqua_farm_1)
    sleep(10000)
    campaign_message_box(aqua_farm_2)
@@ -209,28 +207,26 @@ function supply_murilius()
    local hq = p2:get_buildings("empire_headquarters")[1]
 
    -- transfer all wares that frisians and empire have in common
-   -- NOCOM this is hard-coded. Better to calculate this from the actual tribes
-   -- Something like: p1.tribe.wares will give you the full list for player1
-   for idx,name in ipairs({"log", "granite", "coal", "iron", "iron_ore", "gold", "gold_ore", "water", "fish",
-         "meat", "beer", "ration", "meal", "pick", "felling_ax", "shovel", "hammer", "hunting_spear", "scythe",
-         "bread_paddle", "basket", "kitchen_tools", "fire_tongs"}) do
-      -- NOCOM nb? Please be more descriptive with your variable names ;)
-      local nb = wh:get_wares(name)
-      wh:set_wares(name, 0)
-      hq:set_wares(name, hq:get_wares(name) + nb)
+   for idx,name in ipairs(p1.tribe.wares) do
+      if p2.tribe:has_ware(name) then
+         local amount = wh:get_wares(name)
+         wh:set_wares(name, 0)
+         hq:set_wares(name, hq:get_wares(name) + amount)
+      end
    end
    campaign_message_box(supply_murilius_thanks)
    local o = add_campaign_objective(obj_defeat_barbarians)
    while not p3.defeated do sleep(4513) end
    set_objective_done(o)
 
-   -- NOCOM add a comment what is being done in this section
+   -- If the barbarians already defeated Murilius – well done
+   -- Otherwise, Murilius provokes Reebaud into ordering the player to conquer his entire colony
+   -- (merely defeating the Empire isn’t enough)
    if not p2.defeated then
       campaign_message_box(defeat_murilius_1)
       campaign_message_box(defeat_murilius_2)
       p2.team = 2
       o = add_campaign_objective(obj_defeat_murilius)
-      -- NOCOM why not simply check p2.defeated?
       local def = false
       while not def do
          def = true
@@ -275,13 +271,11 @@ function mission_thread()
    place_building_in_region(p3, "barbarians_metal_workshop", p1_start:region(7))
    place_building_in_region(p3, "barbarians_well", p1_start:region(7))
    place_building_in_region(p3, "barbarians_rangers_hut", p1_start:region(7))
-   p1:reveal_fields(p1_start:region(9))
+   reveal_concentric(p1, p1_start, 9, true, 100)
    scroll_to_field(p1_start)
    campaign_message_box(intro_2)
    include "map:scripting/starting_conditions.lua"
-   -- NOCOM concentric_reveal?
    sleep(5000)
-   p1:hide_fields(p1_start:region(9))
 
    p1.team = 1
    p2.team = 1

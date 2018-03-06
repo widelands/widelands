@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_clay_burner = 1
+      frisians_brickmaker = 1
    },
 
    inputs = {

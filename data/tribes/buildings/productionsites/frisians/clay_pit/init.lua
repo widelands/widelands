@@ -45,7 +45,7 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_clay_burner = 1
+      frisians_brickmaker = 1
    },
 
    inputs = {
@@ -76,7 +76,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of Earth" for clay pits
       title = _"No Ground",
       heading = _"No Level Ground",
-      message = pgettext ("frisians_building", "The clay burner working at this clay pit can’t find any level ground in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
+      message = pgettext ("frisians_building", "The brickmaker working at this clay pit can’t find any level ground in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
       productivity_threshold = 33
    },
 }

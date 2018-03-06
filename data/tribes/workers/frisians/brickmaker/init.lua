@@ -16,9 +16,9 @@ add_walking_animations (animations, "walkload", dirname, "walkload", {10, 26}, 1
 
 tribes:new_worker_type {
    msgctxt = "frisians_worker",
-   name = "frisians_clay_burner",
+   name = "frisians_brickmaker",
    -- TRANSLATORS: This is a worker name used in lists of workers
-   descname = pgettext ("frisians_worker", "Clay Burner"),
+   descname = pgettext ("frisians_worker", "Brickmaker"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    vision_range = 2,

@@ -1,4 +1,5 @@
 include "scripting/messages.lua"
+include "scripting/field_animations.lua"
 
 show_warning_early_attack = true
 show_warning_reed = true
@@ -17,25 +18,23 @@ function hint_warehouse_east()
 end
 
 function check_warning_early_attack()
-   local y = 0
    local westernmost_enemy = map.width - 1
    local easternmost_own = 0
    while show_warning_early_attack do
       for x=0, map.width - 1 do
-         local field = map:get_field(x, y)
-         if field.owner == p1 and x > easternmost_own then easternmost_own = x end
-         if field.owner == p2 and x < westernmost_enemy then westernmost_enemy = x end
-         -- If they are so close that they'd be inside a new tower's vision range
-         if westernmost_enemy - easternmost_own < 21 then
-            campaign_message_box(warning_early_attack_1)
-            campaign_message_box(warning_early_attack_2)
-            return
+         for y=0, map.height - 1 do
+            local field = map:get_field(x, y)
+            if field.owner == p1 and x > easternmost_own then easternmost_own = x end
+            if field.owner == p2 and x < westernmost_enemy then westernmost_enemy = x end
+            -- If they are so close that they'd be inside a new tower's vision range
+            if westernmost_enemy - easternmost_own < 21 then
+               campaign_message_box(warning_early_attack_1)
+               campaign_message_box(warning_early_attack_2)
+               return
+            end
          end
+         sleep(50) -- maximum delay = height×sleeptime = 128×50ms = 6,4s
       end
-      y = y + 1
-      -- NOCOM why not have "for y=0, map.height - 1 do" above?
-      while y >= map.height do y = y - map.height end
-      sleep(50) -- maximum delay = height×sleeptime = 128×50ms = 6,4s
    end
 end
 
@@ -175,9 +174,9 @@ function mission_thread()
    --Introduction
    sleep(1000)
    campaign_message_box(intro_1)
-   include "map:scripting/starting_conditions.lua"
-   -- NOCOM do we want a reveal_concentric here?
    scroll_to_field(map.player_slots[1].starting_field)
+   reveal_concentric(p1, map.player_slots[1].starting_field, 13, true, 50)
+   include "map:scripting/starting_conditions.lua"
    sleep(5000)
    campaign_message_box(intro_2)
    campaign_message_box(intro_3)
@@ -217,25 +216,23 @@ function mission_thread()
 
    run(hint_warehouse_east)
 
-   -- Wait until no rations left
-   repeat
-      sleep(4273)
-      -- Check warehouses
-      local something_left = count("ration") > 0
-      if not something_left then
-         -- Check that all mines have at least 1 ration
-         local mines = array_combine(
-            p1:get_buildings("frisians_coalmine"),
-            p1:get_buildings("frisians_rockmine")
-         )
-         for idx,mine in ipairs(mines) do
-            if mine:get_inputs("ration") == 0 then
-               something_left = false
-               break
-            end
-         end
+   -- Wait until we gathered a reasonable number of building materials
+   o = add_campaign_objective(obj_gather_materials)
+   while (
+      count("log") < 30 or
+      count("granite") < 30 or
+      count("coal") < 20 or
+      count("brick") < 40 or
+      count("clay") < 10 or
+      count("thatch_reed") < 30
+   ) do
+      -- We must not run out of rations yet
+      if count("ration") < 1 then
+         p1:get_buildings("frisians_headquarters")[1]:set_wares("ration", 3)
       end
-   until not something_left
+      sleep(2751)
+   end
+   set_objective_done(o)
 
    -- Great, you forgot to provide rations...
    campaign_message_box(food_1)
@@ -314,11 +311,11 @@ function mission_thread()
    set_objective_done(o)
 
    -- Show the "expand" objective only if we haven't expanded that far yet
-   -- NOCOM what happens if the player is really stupid and the enemy has already conquered the expansion mark?
    if expansion_mark.owner == nil then
       campaign_message_box(expand_1)
       o = add_campaign_objective(obj_expand)
-      -- Wait until we (or the enemy) have conquered the left half of the island
+      -- Wait until the left half of the island is conquered
+      -- If the player is so slow that the enemy arrives there first, the story continues anyway
       while expansion_mark.owner == nil do sleep(4273) end
       set_objective_done(o)
    end
@@ -401,12 +398,13 @@ function mission_thread()
    campaign_message_box(rising_water_1)
    campaign_message_box(rising_water_2)
 
-   -- NOCOM if a circular reveal will do, we could have an animated reveal (concentric or random)
+   local reveal_fields = {}
    for x=3, map.width - 4 do
-      for y=3, map.height - 4 do -- Leave some small margin, show everything else
-         p1:reveal_fields {map:get_field(x, y)}
+      for y=3, map.height - 4 do
+         table.insert(reveal_fields, map:get_field(x, y))
       end
    end
+   reveal_randomly(p1, reveal_fields, 2000)
    scroll_to_field(first_to_flood)
    run(stormflood)
    sleep(6000)

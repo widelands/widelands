@@ -114,7 +114,7 @@ tribes:new_tribe {
          "frisians_woodcutter",
          "frisians_forester",
          "frisians_builder",
-         "frisians_clay_burner",
+         "frisians_brickmaker",
          "frisians_reed_farmer",
          "frisians_seamstress",
          "frisians_seamstress_master",

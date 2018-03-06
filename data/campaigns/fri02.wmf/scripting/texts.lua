@@ -111,8 +111,7 @@ intro_1 = {
       _([[I began to believe the journey would never end. I have no idea how long we were on the sea, tossed about by envious storms… it must have been months.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 1
-      -- NOCOM "arrived" twice
-      _([[But we are here. Finally, we arrived at the mouth of a calmer fjord. We sailed upriver, and arrived here.]])),
+      _([[But we are here. Finally, we reached the mouth of a calmer fjord. We sailed upriver, and arrived here.]])),
 }
 intro_2 = {
    title =_ "Welcome Back!",
@@ -155,15 +154,13 @@ train_recycle_1 = {
       _([[Chieftain Reebaud! We have a serious problem. We have discovered a mountain where we might be able to start mining coal and iron, but we have no miners, nor any picks to equip them with.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Train and recycle 1
-      -- NOCOM "a way" twice
-      _([[And we don’t have any iron left. We must find a way to get some metal for forging new picks. Unfortunately, I can’t think of a way to do this.]])),
+      _([[And we don’t have any iron left. We must find a way to get some metal for forging new picks. Unfortunately, I have no idea how to do this.]])),
 }
 train_recycle_2 = {
    title =_ "Metal Shortage",
    body=reebaud(_"Getting new metal",
       -- TRANSLATORS: Reebaud – Train and recycle 2
-      -- NOCOM invent -> think of / come up with
-      _([[This is terrible news! Without iron or the means to produce any, we are stuck like this forever! You must invent a solution.]])
+      _([[This is terrible news! Without iron or the means to produce any, we are stuck like this forever! You must come up with a solution.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Train and recycle 2
       _([[I have seen some advanced weapons in our warehouses. Perhaps it would be possible to smelt them back into metal? But that seems like a waste of the precious swords…]])),
@@ -225,11 +222,9 @@ aqua_farm_4 = {
 
 supply_murilius_1 = {
    title =_ "We Are Not Alone",
-   -- NOCOM provide an English translation in the translators comment
-   -- TRANSLATORS: DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
+   -- TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
    body=murilius(_"Salvete peregrini!",
-      -- NOCOM provide an English translation in the translators comment
-      -- TRANSLATORS: DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
+      -- TRANSLATORS: "Be greeted, strangers! I am Proconsule Murilius of the province 'The Northern Lands'. Name yourselves!". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
       (_[[Salvete peregrini! Murilius Proconsul Terrae Septentrionalis provinciae ego sum. Vos nominate!]])),
 }
 supply_murilius_2 = {
@@ -299,11 +294,8 @@ supply_murilius_9 = {
 
 supply_murilius_destroy = {
    title =_ "The Empire is Angry",
-   -- NOCOM provide an English translation in the translators comment
-   -- TRANSLATORS: DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
+   -- TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
    body=murilius(_"Hostes Imperii estis!",
-      -- NOCOM always present the translators with full sentences. The translation memory
-      -- on Transifex will show fuzzy matches, so there is no time saved by splitting this up.
       -- TRANSLATORS: Murilius – enemy of the Empire: player destroyed the warehouse
       _([[Barbarians! You have refused my offer of friendship most ungraciously by destroying the beautiful building we presented you with!]])
       .. paragraphdivider() ..
@@ -331,8 +323,7 @@ defeat_both = {
 }
 supply_murilius_thanks = {
    title =_ "The Empire is Grateful",
-   -- NOCOM provide an English translation in the translators comment
-   -- TRANSLATORS: DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
+   -- TRANSLATORS: "Greetings, friend of the Empire!". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
    body=murilius(_"Salve amicus Imperii!",
       -- TRANSLATORS: Murilius – Supplied Murilius
       _([[Strangers! I see you have kept your word. The Empire rewards its friends, therefore I shall reward you with the friendship of the Empire!]])
@@ -343,8 +334,7 @@ supply_murilius_thanks = {
 }
 defeat_murilius_1 = {
    title =_ "The Reward For Your Service",
-   -- NOCOM provide an English translation in the translators comment
-   -- TRANSLATORS: DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
+   -- TRANSLATORS: "Friend of the Empire". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
    body=murilius(_"Amicus Imperii",
       -- TRANSLATORS: Murilius – defeat Murilius 1
       _([[You have done well, strangers! As I did tell you earlier, you will be rewarded with the friendship of the Empire!]])
@@ -368,10 +358,5 @@ victory_1 = {
       -- TRANSLATORS: Reebaud – victory
       _([[We have defeated all our enemies! Now no other tribe will ever dare settle here again. We are safe, and we can finally live our lives in peace.]]))
       .. objective_text(_"Congratulations",
-      -- NOCOM For incomplete campaigns, we show a "next mission" text and then unlock the dummy scenario.
-      -- Reebaud – victory
-      [[You have completed this campaign!]]
-      .. paragraphdivider() ..
-      -- Reebaud – victory
-      [[To be continued…]]),
+      [[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]]),
 }
