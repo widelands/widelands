@@ -111,7 +111,7 @@ intro_1 = {
       _([[I began to believe the journey would never end. I have no idea how long we were on the sea, tossed about by envious storms… it must have been months.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 1
-      _([[But we are here. Finally, we reached the mouth of a calmer fjord. We sailed upriver, and arrived here.]])),
+      _([[But we survived. Finally, we reached the mouth of a calmer fjord. We sailed upriver, and arrived here.]])),
 }
 intro_2 = {
    title =_ "Welcome Back!",
