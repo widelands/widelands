@@ -3,15 +3,15 @@
 # 
 # Translators:
 # ks k, 2017
-# ks k, 2017
+# ks k, 2017-2018
 # Moon Yeonki <backnii@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:18+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-03-02 08:01+0000\n"
+"PO-Revision-Date: 2018-03-03 13:09+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "Widelands 허가서 정보"
 
 #: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr ""
+msgstr "저작권 2002 - 2018 Widelands 개발팀."
 
 #: ../../data/txts/LICENSE.lua:11
 msgid ""
@@ -722,7 +722,7 @@ msgid ""
 "flag from which they can move by road to a connected warehouse. If there are"
 " no such flags in the vicinity, they will keep wandering around and "
 "eventually die."
-msgstr ""
+msgstr "건물이 파괴되면, 노동자들은 도로 근처의 연결된 창고로 이동할 수 있는 가까운 깃발을 찾기 시작할 것입니다. 주변에 그런 깃발이 없다면 주변을 방황하다가 결국 죽게될 것입니다."
 
 #: ../../data/txts/tips/multiplayer.lua:4
 msgid ""
@@ -754,4 +754,4 @@ msgstr ""
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "우리 컴퓨터 플레이어는 너무 지루합니까? 저희 웹 사이트 %s 에 방문하여 다른 사람들과 만나 온라인 게임을 즐기십시오."
