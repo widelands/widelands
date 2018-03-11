@@ -2072,9 +2072,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
 
+	// We calculate owned buildable spots, of course ignoring ones that are blocked
+	// for now
 	for (std::deque<BuildableField*>::iterator i = buildable_fields.begin();
-	     i != buildable_fields.end(); ++i)
+	     i != buildable_fields.end(); ++i) {
+			 if (blocked_fields.is_blocked((*i)->coords)){
+				 continue;
+			 }
 		++spots_avail.at((*i)->coords.field->nodecaps() & BUILDCAPS_SIZEMASK);
+	}
 
 	spots_ = spots_avail.at(BUILDCAPS_SMALL);
 	spots_ += spots_avail.at(BUILDCAPS_MEDIUM);
@@ -3819,19 +3825,63 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		game().send_player_build_road(player_number(), path);
 		return true;
 	}
-	// if all possible roads skipped
-	if (last_attempt_) {
-		Building* bld = flag.get_building();
-		// first we block the field and vicinity for 15 minutes, probably it is not a good place to
-		// build on
-		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(bld->get_position()), 2));
-		do {
-			blocked_fields.add(mr.location(), game().get_gametime() + 15 * 60 * 1000);
-		} while (mr.advance(map));
-		remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
-		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
-		dead_ends_check_ = true;
-		return true;
+	// We cant build a road so block the vicinity as an indication this area is not connectible
+	// Usually we block for 2 minutes, but if it is a last attempt we block for 15 minutes
+	// Note: we block the vicinity only if this economy (can be sole flag with a building) is not
+	// connected to a warehouse
+	if (flag.get_economy()->warehouses().empty()) {
+		uint32_t block_time = 2 * 60 * 1000;
+		if (last_attempt_) {
+			block_time = 15 * 60 * 1000;
+		}
+
+
+		//NOCOM
+		FindNodeWithFlagOrRoad functor;
+		CheckStepRoadAI check(player_, MOVECAPS_WALK, true);
+
+		// get all flags within radius
+		std::vector<Coords> reachable_to_block;
+		map.find_reachable_fields(
+		   Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable, check, functor);
+
+		for (auto coords : reachable_to_block) {
+			blocked_fields.add(coords, game().get_gametime() + block_time);
+		}
+		if (RoadCandidates.flags_queue.empty()) { //last_attempt_) {
+			printf ("DEBUG blocking %3dx%3d, %s last attempt, left grace time:%7d sec, fields to be blocked: %3d\n",
+			 flag.get_position().x, flag.get_position().y, (last_attempt_)?" is":"not",
+			 (eco->dismantle_grace_time - gametime) / 1000,
+			 reachable_to_block.size())
+			 ;
+		}
+
+		//uint16_t block_radius_ = 2;
+		//if (RoadCandidates.flags_queue.empty()){
+			//block_radius_  = 5;
+		//}
+
+		//if (last_attempt_) {
+			//printf ("DEBUG blocking %3dx%3d, %s last attempt, left grace time:%7d sec, flags in queue %2lu, radius: %d\n",
+			 //flag.get_position().x, flag.get_position().y, (last_attempt_)?" is":"not",
+			 //(eco->dismantle_grace_time - gametime) / 1000,
+			 //RoadCandidates.flags_queue.size(),
+			 //block_radius_)
+			 //;
+		//}
+
+		//MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(flag.get_position()), block_radius_));
+		//do {
+			//blocked_fields.add(mr.location(), game().get_gametime() + block_time);
+		//} while (mr.advance(map));
+
+		// If it last attempt we also destroy the flag (with a building if any attached)
+		if (last_attempt_) {
+			remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
+			game().send_player_bulldoze(*const_cast<Flag*>(&flag));
+			dead_ends_check_ = true;
+			return true;
+		}
 	}
 	return false;
 }
