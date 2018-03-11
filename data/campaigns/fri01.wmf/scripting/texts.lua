@@ -184,7 +184,8 @@ warning_no_reed = {
    title =_ "Reed Shortages",
    body=hauke(_"Build another reed farm",
       -- TRANSLATORS: Hauke – no reed
-      _([[I noticed we have been short of reed for a while now. Our buildings seem to need quite a lot of it. We should build another reed farm or two. Reed is also used for making fishing nets and other tools; therefore, resolving this shortage should be a priority.]])),
+      _([[I noticed we have been short of reed for a while now. Our buildings seem to need quite a lot of it. We should build another reed farm or two. Reed is also used for making fishing nets and other tools; therefore, resolving this shortage should be a priority.]]))
+      .. li_arrow (_([[You should assign the new reed farm the highest priority for thatch reed in the constructionsite window.]])),
 }
 warning_no_clay = {
    title =_ "Clay Shortages",
@@ -198,10 +199,9 @@ warning_no_clay = {
 warning_no_bricks = {
    title =_ "Brick Shortages",
    body=hauke(_"Build another brick kiln",
-      -- NOCOM "constructionsite window" is immersion breaking - add an objective or rephrase
-      -- This isn´t really important enough for an objective, it´s only meant as a suggestion
       -- TRANSLATORS: Hauke – no bricks
-      _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick kiln, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]])),
+      _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick kiln, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]]))
+      .. li_arrow (_([[You should assign the new brick kiln the highest priority for bricks in the constructionsite window.]])),
 }
 warehouse_on_expand = {
    title =_ "Warehouses",
@@ -370,10 +370,8 @@ warning_early_attack_1 = {
 warning_early_attack_2 = {
    title =_ "Beware!",
    body=reebaud(_"Not strong enough",
-      -- NOCOM "conquer radius" is immersion breaking - add an objective or rephrase
-      -- I think it would be difficult to check whether an objective as complex as this is fulfilled
       -- TRANSLATORS: Reebaud – beware of early attacks 2
-      _([[The scouts informed me that the enemy can’t build towers. We could build a fortress, which is the building with the highest conquer radius, to push the border as far east as possible. The enemies can only see it if they build a fortress right at the border.]])
+      _([[The scouts informed me that the enemy can’t build towers. We could build a fortress, which is the building that will push the border as far east as possible in one go. The enemies can only see it if they build a fortress right at the border.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – beware of early attacks 2
       _([[We can prevent this, or at least make it harder to do, by ordering some foresters to plant trees at the border. The enemy will have to cut down many of them to make room for it, so we may be safe until we open the battle at a time of our choosing.]])),

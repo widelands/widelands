@@ -18,7 +18,7 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return pgettext("building", "The aqua farm needs holes in the ground that were dug by a brickmaker nearby to use as fishing ponds.")
+   return pgettext("building", "The aqua farm needs holes in the ground that were dug by a clay pit worker nearby to use as fishing ponds.")
 end
 
 function building_helptext_performance()
