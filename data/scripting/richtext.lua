@@ -419,9 +419,8 @@ end
 function li_image(imagepath, text)
    return
       div("width=100%",
-         div(p(vspace(6) .. img(imagepath) .. space(6))) ..
-         div(p(space(6))) ..
-         div("width=*", p(vspace(6) .. text .. vspace(12)))
+		div("float=left padding_r=6", p(img(imagepath))) ..
+         p(text)
       )
 end
 
