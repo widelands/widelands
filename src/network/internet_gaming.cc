@@ -369,6 +369,10 @@ void InternetGaming::create_second_connection() {
 		s.string(clientname_);
 		s.string(reg_ ? "" : authenticator_);
 		tmpNet->send(s);
+		if (!reg_) {
+			// Not registered: We are done here
+			return;
+		}
 
 		// Wait for the challenge
 		uint32_t const secs = time(nullptr);
