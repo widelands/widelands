@@ -86,9 +86,8 @@ Road& Road::create(EditorGameBase& egbase, Flag& start, Flag& end, const Path& p
 	assert(end.get_position() == path.get_end());
 	assert(start.get_owner() == end.get_owner());
 
-	Player& owner = start.owner();
 	Road& road = *new Road();
-	road.set_owner(&owner);
+	road.set_owner(start.get_owner());
 	road.type_ = RoadType::kNormal;
 	road.flags_[FlagStart] = &start;
 	road.flags_[FlagEnd] = &end;
@@ -367,7 +366,7 @@ void Road::request_carrier_callback(
  * If we lost our carrier, re-request it.
 */
 void Road::remove_worker(Worker& w) {
-	EditorGameBase& egbase = owner().egbase();
+	EditorGameBase& egbase = get_owner()->egbase();
 
 	for (CarrierSlot& slot : carrier_slots_) {
 		Carrier const* carrier = slot.carrier.get(egbase);
