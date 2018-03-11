@@ -514,7 +514,7 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
 			continue;
 
 		// Okay, space is free and worker is fitting. Let's create him
-		Worker& worker = wdes.create(egbase, owner(), this, get_position());
+		Worker& worker = wdes.create(egbase, get_owner(), this, get_position());
 
 		if (upcast(Game, game, &egbase))
 			worker.start_task_idle(*game, 0, -1);
@@ -788,7 +788,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 				ware.init(game);
 				worker.start_task_dropoff(game, ware);
 			}
-			owner().ware_produced(ware_index);  //  for statistics
+			get_owner()->ware_produced(ware_index);  //  for statistics
 		}
 		assert(ware_type_with_count.second);
 		if (--ware_type_with_count.second == 0)
@@ -805,7 +805,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 			   *owner().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker& recruit = dynamic_cast<Worker&>(worker_descr.create_object());
-				recruit.set_owner(&worker.owner());
+				recruit.set_owner(worker.get_owner());
 				recruit.set_position(game, worker.get_position());
 				recruit.init(game);
 				recruit.set_location(this);

@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# ks k, 2017
+# ks k, 2017-2018
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-03-02 08:01+0000\n"
+"PO-Revision-Date: 2018-03-03 12:37+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2599,61 +2599,61 @@ msgstr "갈대 (새싹)"
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Coal Vein"
-msgstr ""
+msgstr "자원: 석탄 광맥"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Main Coal Vein"
-msgstr ""
+msgstr "자원: 중앙 석탄 광맥"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Gold Vein"
-msgstr ""
+msgstr "자원: 금 광맥"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Main Gold Vein"
-msgstr ""
+msgstr "자원: 중앙 금 광맥"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Iron Vein"
-msgstr ""
+msgstr "자원: 철 광맥"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Main Iron Vein"
-msgstr ""
+msgstr "자원: 중앙 철 광맥"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_none/init.lua:7
 msgctxt "immovable"
 msgid "Resources: None"
-msgstr ""
+msgstr "자원: 없음"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Some Stones"
-msgstr ""
+msgstr "자원:  약간의 석재"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_stones2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: A Lot of Stones"
-msgstr ""
+msgstr "자원: 많은 석재"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_water1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Water Vein"
-msgstr ""
+msgstr "자원: 수맥"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7
@@ -2731,7 +2731,7 @@ msgstr "건물"
 
 #: ../../data/tribes/scripting/help/init.lua:106
 msgid "Immovables"
-msgstr ""
+msgstr "고정물"
 
 #. TRANSLATORS: This is the name of a starting condition
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/fortified_village.lua:11

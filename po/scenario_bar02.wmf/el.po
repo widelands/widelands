@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-15 09:25+0000\n"
-"PO-Revision-Date: 2018-02-22 07:35+0000\n"
+"POT-Creation-Date: 2018-03-02 08:01+0000\n"
+"PO-Revision-Date: 2018-03-09 15:51+0000\n"
 "Last-Translator: Panos Ioannidis <panos.ioannidis@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -304,12 +304,12 @@ msgid ""
 "generals of our forces and his family never quite liked the thought of "
 "bowing before the banner of Chat’Karuth. Why should he march with "
 "Chat’Karuth’s son to reclaim his heritage and the throne?"
-msgstr ""
+msgstr "Ο Thron θέλει να πιστεύει ότι ο Kalitath έχει κουραστεί να μάχεται και ότι θα ήθελε να ενώσει τις δυνάμεις του μαζί μας όταν ξεκινήσουμε για να αποκαταστήσουμε τον νόμο και την τάξη στην Al'thunran. Αλλά δεν το νομίζω. Ο Kalitath είναι ο γιος ενός από τους μεγαλύτερους στρατηγούς των δυνάμεών μας και στην οικογένειά του δεν άρεσε ποτέ η ιδέα της υποταγής τον Chat'Karuth. Γιατί λοιπόν να βαδίσει μαζί με τον γιο του Chat'Karuth και να τον βοηθήσει να ξανακερδίσει την κληρονομιά και τον θρόνο του;"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:185
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:201
 msgid "The Story Continues"
-msgstr ""
+msgstr "Η ιστορία συνεχίζεται"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:234
@@ -317,7 +317,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:269
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:315
 msgid "Boldreth says:"
-msgstr ""
+msgstr "Ο Boldreth λέει:"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:188
@@ -325,11 +325,11 @@ msgid ""
 "However, Thron is not willing to listen to my doubts. He seeks to expand our"
 " fortifications to the borders of Kalitath’s territory and to reunite with "
 "his forces. I have to keep an eye on everything that happens here."
-msgstr ""
+msgstr "Ωστόσο, ο Thron δεν προτίθεται να ακούσει τις αμφιβολίες μου. Ψάχνει τρόπο για να επεκτείνει την οχύρωσή μας προς τα σύνορα με την περιοχή του Kalitath και να ξαναενωθεί με τις δυνάμεις μας. Πρέπει να έχω τον νου μου σε ό,τι συμβαίνει εδώ."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:194
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "Ο Thron μιλάει με βεβαιότητα"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:196
@@ -340,7 +340,7 @@ msgid ""
 "goods, and once Al’thunran is in my hands, the two cities will be linked by "
 "a good and defensible infrastructure. Still, I hope I will not walk alone on"
 " this mission, I hope Kalitath son of Kun will follow my call."
-msgstr ""
+msgstr "Η πρώτη γραμμή των δυνάμεών μου έχει επεκταθεί έως την άκρη των δασών. Έχουμε έναν μακρύ και κρύο χειμώνα και τόσα πολλά μίλια πίσω μας. Η οχύρωση που ανεγείραμε γύρω από το Ondun θα μας εγγυηθεί την γρήγορη προμήθεια ανδρών και αγαθών, και μόλις το Al'thunran βρεθεί στα χέρια μου, οι δύο πόλεις θα συνδεθούν μέσω μίας καλής υποδομής την οποία θα είναι δυνατόν να προστεύσουμε. Παρ' όλα αυτά, ελπίζω να μην εκστρατεύσω μόνος μου, ελπίζω ότι ο Kalitath, ο γιος του Kun να ακολουθήσει το κάλεσμά μου."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:220
@@ -350,7 +350,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:307
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
 msgid "Thron says:"
-msgstr ""
+msgstr "Ο Thron λέει:"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:204

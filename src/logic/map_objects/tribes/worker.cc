@@ -994,12 +994,12 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
-			owner().add_message_with_timeout(game,
-			                                 std::unique_ptr<Message>(new Message(
-			                                    message_type, game.get_gametime(), rdescr->descname(),
-			                                    ri.descr().representative_image_filename(),
-			                                    rdescr->descname(), message, position, serial_)),
-			                                 300000, 8);
+			get_owner()->add_message_with_timeout(
+			   game, std::unique_ptr<Message>(
+			            new Message(message_type, game.get_gametime(), rdescr->descname(),
+			                        ri.descr().representative_image_filename(), rdescr->descname(),
+			                        message, position, serial_)),
+			   300000, 8);
 		}
 	}
 
@@ -1049,7 +1049,7 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 	}
 
 	// Update consumption statistic
-	owner().ware_consumed(wareindex, 1);
+	get_owner()->ware_consumed(wareindex, 1);
 
 	ware = fetch_carried_ware(game);
 	ware->remove(game);
@@ -1143,7 +1143,7 @@ void Worker::set_location(PlayerImmovable* const location) {
 			// Interrupt whatever we've been doing.
 			set_economy(nullptr);
 
-			EditorGameBase& egbase = owner().egbase();
+			EditorGameBase& egbase = get_owner()->egbase();
 			if (upcast(Game, game, &egbase)) {
 				send_signal(*game, "location");
 			}
@@ -1165,7 +1165,7 @@ void Worker::set_economy(Economy* const economy) {
 
 	economy_ = economy;
 
-	if (WareInstance* const ware = get_carried_ware(owner().egbase()))
+	if (WareInstance* const ware = get_carried_ware(get_owner()->egbase()))
 		ware->set_economy(economy_);
 	if (supply_)
 		supply_->set_economy(economy_);
@@ -1868,7 +1868,7 @@ void Worker::return_update(Game& game, State& state) {
 		    descr().descname().c_str())
 		      .str();
 
-		owner().add_message(
+		get_owner()->add_message(
 		   game, std::unique_ptr<Message>(new Message(
 		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
 		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
@@ -2397,7 +2397,7 @@ struct FindFlagWithPlayersWarehouse {
 	}
 	bool accept(const BaseImmovable& imm) const {
 		if (upcast(Flag const, flag, &imm))
-			if (&flag->owner() == &owner_)
+			if (flag->get_owner() == &owner_)
 				if (flag->economy().warehouses().size())
 					return true;
 		return false;
@@ -2416,7 +2416,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 	const Map& map = game.map();
 	PlayerImmovable const* location = get_location(game);
 
-	if (location && &location->owner() == &owner()) {
+	if (location && location->get_owner() == get_owner()) {
 		molog("[fugitive]: we are on location\n");
 
 		if (dynamic_cast<Warehouse const*>(location))
@@ -2428,7 +2428,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (&flag->owner() == &owner() && flag->economy().warehouses().size()) {
+		if (flag->get_owner() == get_owner() && flag->economy().warehouses().size()) {
 			set_location(flag);
 			return pop_task(game);
 		}
@@ -2703,11 +2703,11 @@ void Worker::add_sites(Game& game,
 		upcast(Flag, aflag, vu.object);
 		Building* a_building = aflag->get_building();
 		// Assuming that this always succeeds.
-		if (upcast(MilitarySite const, ms, a_building)) {
+		if (a_building->descr().type() == MapObjectType::MILITARYSITE) {
 			// This would be safe even if this assert failed: Own militarysites are always visible.
 			// However: There would be something wrong with FindForeignMilitarySite or associated
 			// code. Hence, let's keep the assert.
-			assert(&ms->owner() != &player);
+			assert(a_building->get_owner() != &player);
 			const Coords buildingpos = a_building->get_positions(game)[0];
 			// Check the visibility: only invisible ones interest the scout.
 			MapIndex mx = map.get_index(buildingpos, map.get_width());
