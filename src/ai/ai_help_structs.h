@@ -135,6 +135,18 @@ struct CheckStepRoadAI {
 	Player* player;
 	uint8_t movecaps;
 	bool open_end;
+
+};
+
+struct CheckStepOwnTerritory {
+	CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe);
+
+	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
+	bool reachable_dest(const Map&, const FCoords& dest) const;
+
+	Player* player;
+	uint8_t movecaps;
+	bool open_end;
 };
 
 // We are looking for fields we can walk on
@@ -249,6 +261,10 @@ struct FindNodeOpenWater {
 
 struct FindNodeWithFlagOrRoad {
 	bool accept(const Map&, FCoords) const;
+};
+
+struct FindNodeAcceptAll {
+	bool accept(const Map&, FCoords) const {return true;};
 };
 
 struct NearFlag {
