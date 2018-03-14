@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "return=skipped unless economy needs granite or economy needs quartz",
+            "return=skipped unless economy needs granite",
             "sleep=45000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
             "animate=working 20000",
@@ -91,15 +91,15 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
          descname = _"mining quartz",
          actions = {
-            "return=skipped unless economy needs granite or economy needs quartz",
+            "return=skipped unless economy needs quartz",
             "sleep=45000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
             "animate=working 20000",
             "mine=stones 4 100 5 2",
-            "produce=granite:2",
+            "produce=granite quartz",
             "animate=working 20000",
             "mine=stones 4 100 5 2",
-            "produce=granite quartz",
+            "produce=granite:2",
             "animate=working 20000",
             "mine=stones 4 100 5 2",
             "produce=quartz:2"
@@ -109,7 +109,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
          descname = _"mining diamonds",
          actions = {
-            "return=skipped unless economy needs granite or economy needs diamond",
+            "return=skipped unless economy needs diamond",
             "sleep=45000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
             "animate=working 20000",
