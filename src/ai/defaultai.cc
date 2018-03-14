@@ -3547,7 +3547,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      uint16_t checkradius,
                                      int16_t min_reduction,
-                                     int32_t gametime) {
+                                     uint32_t gametime) {
 
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
@@ -3559,8 +3559,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// this should not happen, but if the economy has a warehouse and a dismantle
 	// grace time set, we must 'zero' the dismantle grace time
 	if (!flag.get_economy()->warehouses().empty() &&
-	    eco->dismantle_grace_time != std::numeric_limits<int32_t>::max()) {
-		eco->dismantle_grace_time = std::numeric_limits<int32_t>::max();
+	    eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
+		eco->dismantle_grace_time = std::numeric_limits<uint32_t>::max();
 	}
 
 	// first we deal with situations when this is economy with no warehouses
@@ -3581,12 +3581,12 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 		// if we are within grace time, it is OK, just go on
 		if (eco->dismantle_grace_time > gametime &&
-		    eco->dismantle_grace_time != std::numeric_limits<int32_t>::max()) {
+		    eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
 			;
 
 			// if grace time is not set, this is probably first time without a warehouse and we must
 			// set it
-		} else if (eco->dismantle_grace_time == std::numeric_limits<int32_t>::max()) {
+		} else if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
 
 			// constructionsites
 			if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
@@ -3825,38 +3825,45 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		game().send_player_build_road(player_number(), path);
 		return true;
 	}
-	// We cant build a road so block the vicinity as an indication this area is not connectible
+	// We cant build a road so let block the vicinity as an indication this area is not connectible
 	// Usually we block for 2 minutes, but if it is a last attempt we block for 15 minutes
-	// Note: we block the vicinity only if this economy (can be sole flag with a building) is not
+	// Note: we block the vicinity only if this economy (usually a sole flag with a building) is not
 	// connected to a warehouse
 	if (flag.get_economy()->warehouses().empty()) {
-		uint32_t block_time = 2 * 60 * 1000;
-		if (last_attempt_) {
-			block_time = 15 * 60 * 1000;
-		}
 
-		FindNodeAcceptAll buildable_functor;
-		CheckStepOwnTerritory check_own(player_, MOVECAPS_WALK, true);
+	    // blocking only if latest block was less then 60 seconds ago or it is last attempt
+	    if (eco->fields_block_last_time + 60000 < gametime || last_attempt_) {
+	        eco->fields_block_last_time = gametime;
 
-		// get all flags within radius
-		std::vector<Coords> reachable_to_block;
-		map.find_reachable_fields(
-		   Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable_to_block, check_own, buildable_functor);
+            uint32_t block_time = 2 * 60 * 1000;
+            if (last_attempt_) {
+                block_time = 15 * 60 * 1000;
+            }
+
+            FindNodeAcceptAll buildable_functor;
+            CheckStepOwnTerritory check_own(player_, MOVECAPS_WALK, true);
+
+            // get all flags within radius
+            std::vector<Coords> reachable_to_block;
+            map.find_reachable_fields(
+               Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable_to_block, check_own, buildable_functor);
 
 
-		for (auto coords : reachable_to_block) {
-			blocked_fields.add(coords, game().get_gametime() + block_time);
-		}
-		if (reachable_to_block.size() > 1) { //last_attempt_) {
-			printf ("DEBUG blocking %3dx%3d, %s last attempt, left grace time:%7d sec, fields to be blocked: %3d:",
-			 flag.get_position().x, flag.get_position().y, (last_attempt_)?" is":"not",
-			 (eco->dismantle_grace_time - gametime) / 1000,
-			 reachable_to_block.size());
-	    	for (auto coords : reachable_to_block) {
-    			printf ("%3dx%3d, ", coords.x, coords.y);
-    		}
-    		printf ("\n");
-		}
+            for (auto coords : reachable_to_block) {
+                blocked_fields.add(coords, game().get_gametime() + block_time);
+            }
+            if (reachable_to_block.size() > 1) { //NOCOM remove this block before merging
+                printf ("DEBUG blocking %3dx%3d, %s last attempt, left grace time:%7d sec, time: %6d, fields to be blocked: %3d:",
+                 flag.get_position().x, flag.get_position().y, (last_attempt_)?" is":"not",
+                 (eco->dismantle_grace_time - gametime) / 1000,
+                 gametime / 1000,
+                 reachable_to_block.size());
+                for (auto coords : reachable_to_block) {
+                    printf ("%3dx%3d, ", coords.x, coords.y);
+                }
+                printf ("\n");
+            }
+         }
 
 		// If it last attempt we also destroy the flag (with a building if any attached)
 		if (last_attempt_) {

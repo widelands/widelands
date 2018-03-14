@@ -84,18 +84,16 @@ bool CheckStepRoadAI::reachable_dest(const Map& map, const FCoords& dest) const 
 }
 
 
-// CheckStepOwnTerritory //NOCOM
+// CheckStepOwnTerritory
 CheckStepOwnTerritory::CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe)
    : player(pl), movecaps(mc), open_end(oe) {
 }
 
-
 // When movemen is allowed
 // 1. startfield is walkable (or very start of search)
-// 2. owner of endfield is me
 // Endfield either:
-// 3a. is walkable
-// 3b. has our PlayerImmovable
+// 2a. is walkable
+// 2b. has our PlayerImmovable
 bool CheckStepOwnTerritory::allowed(
    const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
 	uint8_t endcaps = player->get_buildcaps(end);
@@ -114,22 +112,8 @@ bool CheckStepOwnTerritory::allowed(
 	if (endcaps & MOVECAPS_SWIM)
 		return false;
 
-	//// Check for blocking immovables
-	//if (BaseImmovable const* const imm = map.get_immovable(end)) {
-	    //if (upcast(PlayerImmovable const, player_immovable,imm)) { return true;
-	    //} else {
-	    //return false;
-	    //}
-
-	//}
-	//if (! map.get_immovable(end) && endcaps & MOVECAPS_WALK){
-		//return true;
-	//}
-
-
 	return true;
 }
-
 
 // We return all
 bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) const {
@@ -225,17 +209,6 @@ FindNodeUnownedWalkable::FindNodeUnownedWalkable(Player* p, Game& g) : player(p)
 bool FindNodeUnownedWalkable::accept(const Map&, const FCoords& fc) const {
 	return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() == neutral());
 }
-
-//All nodes that are empty or with player immovable
-//FindNodeAcceptAll::FindNodeAcceptAll();
-
-//bool FindNodeToBlock::accept(const Map& map, const FCoords& fc) const { //NOCOM get rid of this
-	//if (fc.field->get_owned_by() != player->player_number()) {return false;}
-	//if (fc.field->nodecaps() & MOVECAPS_WALK) {return true;}
-	//if (upcast(PlayerImmovable const, player_immovable, map[fc].get_immovable())) {return true;}
-	//return false;
-	////return (fc.field->nodecaps() & MOVECAPS_WALK) && (fc.field->get_owned_by() == player.player_number());
-//}
 
 // Looking only for mines-capable fields nearby
 // of specific type
@@ -377,7 +350,8 @@ MineableField::MineableField(const Widelands::FCoords& fc)
 }
 
 EconomyObserver::EconomyObserver(Widelands::Economy& e) : economy(e) {
-	dismantle_grace_time = std::numeric_limits<int32_t>::max();
+	dismantle_grace_time = std::numeric_limits<uint32_t>::max();
+	fields_block_last_time = 0;
 }
 
 int32_t BuildingObserver::total_count() const {

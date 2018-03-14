@@ -138,6 +138,9 @@ struct CheckStepRoadAI {
 
 };
 
+// Used to walk ower own territory, on fields that are walkable (or as given by mc)
+// plus one movement more to field with own immovable. So that also flags and buildings are
+// included in resulting list
 struct CheckStepOwnTerritory {
 	CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe);
 
@@ -263,6 +266,7 @@ struct FindNodeWithFlagOrRoad {
 	bool accept(const Map&, FCoords) const;
 };
 
+// Accepts any field
 struct FindNodeAcceptAll {
 	bool accept(const Map&, FCoords) const {return true;};
 };
@@ -405,7 +409,8 @@ struct EconomyObserver {
 
 	Widelands::Economy& economy;
 	std::deque<Widelands::Flag const*> flags;
-	int32_t dismantle_grace_time;
+	uint32_t dismantle_grace_time;
+	uint32_t fields_block_last_time;
 };
 
 struct BuildingObserver {
