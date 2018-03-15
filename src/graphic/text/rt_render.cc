@@ -383,7 +383,7 @@ uint16_t Layout::fit_line(const uint16_t w_max, // Maximum width of line
 	// Pass 1: Run through all nodes who *might* end up in this line and check for floats
 	w = w_max - p.right;
 	x = p.left;
-	bool reduced_width = calculate_line_width(&x, &w, lineheight);
+	bool width_was_reduced = calculate_line_width(&x, &w, lineheight);
 	lineheight = 0;
 	uint16_t w_used = 0;
 	for (; idx_ < all_nodes_.size(); ++idx_) {
@@ -416,10 +416,10 @@ uint16_t Layout::fit_line(const uint16_t w_max, // Maximum width of line
 		// When the line width hasn't been reduced by a float yet, do so now.
 		// If it already has been reduced than the new float will be placed somewhere below
 		// the current line so no need to adapt the line width
-		if (!reduced_width) {
+		if (!width_was_reduced) {
 			// Don't need to reset x and w since they haven't been modified on last call
-			reduced_width = calculate_line_width(&x, &w, lineheight);
-			assert(reduced_width);
+			width_was_reduced = calculate_line_width(&x, &w, lineheight);
+			assert(width_was_reduced);
 		}
 	}
 
@@ -447,7 +447,7 @@ uint16_t Layout::fit_line(const uint16_t w_max, // Maximum width of line
 				// If it is the first element in the line, add it anyway and pretend that it matches exactly
 				nw = w - p.right - x;
 			} else {
-				// Too width and not the first element: We are done with the line
+				// Too wide and not the first element: We are done with the line
 				break;
 			}
 		}
