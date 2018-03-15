@@ -198,13 +198,13 @@ struct Reference {
 
 class RenderNode {
 public:
-	enum Floating {
-		NO_FLOAT = 0,
-		FLOAT_RIGHT,
-		FLOAT_LEFT,
+	enum class Floating {
+		kNone,
+		kRight,
+		kLeft,
 	};
 	explicit RenderNode(NodeStyle& ns)
-	   : floating_(NO_FLOAT), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
+	   : floating_(Floating::kNone), halign_(ns.halign), valign_(ns.valign), x_(0), y_(0) {
 	}
 	virtual ~RenderNode() {
 	}
@@ -326,7 +326,7 @@ private:
  * Calculate the width of a line at h_ taking into account floating elements.
  * @param x The first useable x position in the line. Has to be set by the caller,
  *          might be modified inside this function.
- * @param x The useable width of the line. Has to be set by the caller,
+ * @param w The useable width of the line. Has to be set by the caller,
  *          might be modified inside this function.
  * @param lineheight The height of the line the maximum width should be calculated of.
  * @return Whether less than the full width can be used (i.e., there is a float).
@@ -347,10 +347,10 @@ bool Layout::calculate_line_width(uint16_t *x, uint16_t *w, uint16_t lineheight)
 		return false;
 	}
 
-	if (n->get_floating() == RenderNode::FLOAT_LEFT) {
+	if (n->get_floating() == RenderNode::Floating::kLeft) {
 		*x += n->width();
 	} else {
-		assert(n->get_floating() == RenderNode::FLOAT_RIGHT);
+		assert(n->get_floating() == RenderNode::Floating::kRight);
 		*w -= n->width();
 	}
 	return true;
@@ -391,7 +391,7 @@ uint16_t Layout::fit_line(const uint16_t w_max, // Maximum width of line
 			// Line is full
 			break;
 		}
-		if (all_nodes_[idx_]->get_floating() == RenderNode::NO_FLOAT) {
+		if (all_nodes_[idx_]->get_floating() == RenderNode::Floating::kNone) {
 			// Normal, non-floating node
 			w_used += all_nodes_[idx_]->width();
 			assert(all_nodes_[idx_]->height() >= all_nodes_[idx_]->hotspot_y());
@@ -406,10 +406,10 @@ uint16_t Layout::fit_line(const uint16_t w_max, // Maximum width of line
 			all_nodes_[idx_]->set_y(h_);
 		}
 		// Set x position of the float based on its desired orientation
-		if (all_nodes_[idx_]->get_floating() == RenderNode::FLOAT_LEFT) {
+		if (all_nodes_[idx_]->get_floating() == RenderNode::Floating::kLeft) {
 			all_nodes_[idx_]->set_x(p.left);
 		} else {
-			assert(all_nodes_[idx_]->get_floating() == RenderNode::FLOAT_RIGHT);
+			assert(all_nodes_[idx_]->get_floating() == RenderNode::Floating::kRight);
 			all_nodes_[idx_]->set_x(w_max - all_nodes_[idx_]->width() - p.right);
 		}
 		floats_.push(all_nodes_[idx_]);
@@ -429,7 +429,7 @@ uint16_t Layout::fit_line(const uint16_t w_max, // Maximum width of line
 	// Calc fitting nodes
 	while (idx_ < all_nodes_.size()) {
 		std::shared_ptr<RenderNode> n = all_nodes_[idx_];
-		if (n->get_floating() != RenderNode::NO_FLOAT) {
+		if (n->get_floating() != RenderNode::Floating::kNone) {
 			// Don't handle floaters here
 			rv->push_back(n);
 			if (idx_ == first_idx) {
@@ -499,7 +499,7 @@ uint16_t Layout::fit_line(const uint16_t w_max, // Maximum width of line
 	// Find the biggest hotspot of the truly remaining non-floating items.
 	uint16_t cur_line_hotspot = 0;
 	for (std::shared_ptr<RenderNode> node : *rv) {
-		if (node->get_floating() != RenderNode::NO_FLOAT) {
+		if (node->get_floating() != RenderNode::Floating::kNone) {
 			continue;
 		}
 		cur_line_hotspot = std::max(cur_line_hotspot, node->hotspot_y());
@@ -531,7 +531,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 		int line_start = INFINITE_WIDTH;
 		// Compute real line height and width, taking into account alignment
 		for (std::shared_ptr<RenderNode> n : nodes_in_line) {
-			if (n->get_floating() == RenderNode::NO_FLOAT) {
+			if (n->get_floating() == RenderNode::Floating::kNone) {
 				line_height = std::max(line_height, biggest_hotspot - n->hotspot_y() + n->height());
 				n->set_y(h_ + biggest_hotspot - n->hotspot_y());
 			}
@@ -553,7 +553,7 @@ uint16_t Layout::fit_nodes(std::vector<std::shared_ptr<RenderNode>>* rv,
 			// Space can become negative, for example when we have mixed fontsets on the same line
 			// (e.g. "default" and "arabic"), due to differing font heights and hotspots.
 			// So, we fix the sign.
-			if (n->get_floating() == RenderNode::NO_FLOAT) {
+			if (n->get_floating() == RenderNode::Floating::kNone) {
 				n->set_y(std::abs(n->y() - space));
 			}
 		}
@@ -1492,7 +1492,7 @@ public:
 		case WidthUnit::kPercent:
 			w_ = render_node_->desired_width().width * renderer_style_.overall_width / 100;
 
-			if (render_node_->get_floating() != RenderNode::NO_FLOAT) {
+			if (render_node_->get_floating() != RenderNode::Floating::kNone) {
 				break;
 			}
 			// Reduce remaining width
@@ -1506,7 +1506,7 @@ public:
 			break;
 		case WidthUnit::kFill:
 			w_ = renderer_style_.remaining_width;
-			if (render_node_->get_floating() == RenderNode::NO_FLOAT) {
+			if (render_node_->get_floating() == RenderNode::Floating::kNone) {
 				renderer_style_.remaining_width = 0;
 			}
 			break;
@@ -1526,7 +1526,7 @@ public:
 			extra_width = w_ - max_line_width;
 		} else if (render_node_->desired_width().unit == WidthUnit::kShrink) {
 			w_ = max_line_width;
-			if (render_node_->get_floating() == RenderNode::NO_FLOAT) {
+			if (render_node_->get_floating() == RenderNode::Floating::kNone) {
 				renderer_style_.remaining_width -= w_;
 			}
 		}
@@ -1592,9 +1592,9 @@ public:
 		if (a.has("float")) {
 			const std::string s = a["float"].get_string();
 			if (s == "right")
-				render_node_->set_floating(RenderNode::FLOAT_RIGHT);
+				render_node_->set_floating(RenderNode::Floating::kRight);
 			else if (s == "left")
-				render_node_->set_floating(RenderNode::FLOAT_LEFT);
+				render_node_->set_floating(RenderNode::Floating::kLeft);
 		}
 		if (a.has("valign")) {
 			const std::string align = a["valign"].get_string();
