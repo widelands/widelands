@@ -3831,39 +3831,27 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// connected to a warehouse
 	if (flag.get_economy()->warehouses().empty()) {
 
-	    // blocking only if latest block was less then 60 seconds ago or it is last attempt
-	    if (eco->fields_block_last_time + 60000 < gametime || last_attempt_) {
-	        eco->fields_block_last_time = gametime;
+		// blocking only if latest block was less then 60 seconds ago or it is last attempt
+		if (eco->fields_block_last_time + 60000 < gametime || last_attempt_) {
+			eco->fields_block_last_time = gametime;
 
-            uint32_t block_time = 2 * 60 * 1000;
-            if (last_attempt_) {
-                block_time = 15 * 60 * 1000;
-            }
+			uint32_t block_time = 2 * 60 * 1000;
+			if (last_attempt_) {
+				block_time = 10 * 60 * 1000;
+			}
 
-            FindNodeAcceptAll buildable_functor;
-            CheckStepOwnTerritory check_own(player_, MOVECAPS_WALK, true);
+			FindNodeAcceptAll buildable_functor;
+			CheckStepOwnTerritory check_own(player_, MOVECAPS_WALK, true);
 
-            // get all flags within radius
-            std::vector<Coords> reachable_to_block;
-            map.find_reachable_fields(
-               Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius), &reachable_to_block, check_own, buildable_functor);
+			// get all flags within radius
+			std::vector<Coords> reachable_to_block;
+			map.find_reachable_fields(Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius),
+			                          &reachable_to_block, check_own, buildable_functor);
 
-
-            for (auto coords : reachable_to_block) {
-                blocked_fields.add(coords, game().get_gametime() + block_time);
-            }
-            if (reachable_to_block.size() > 1) { //NOCOM remove this block before merging
-                printf ("DEBUG blocking %3dx%3d, %s last attempt, left grace time:%7d sec, time: %6d, fields to be blocked: %3d:",
-                 flag.get_position().x, flag.get_position().y, (last_attempt_)?" is":"not",
-                 (eco->dismantle_grace_time - gametime) / 1000,
-                 gametime / 1000,
-                 reachable_to_block.size());
-                for (auto coords : reachable_to_block) {
-                    printf ("%3dx%3d, ", coords.x, coords.y);
-                }
-                printf ("\n");
-            }
-         }
+			for (auto coords : reachable_to_block) {
+				blocked_fields.add(coords, game().get_gametime() + block_time);
+			}
+		}
 
 		// If it last attempt we also destroy the flag (with a building if any attached)
 		if (last_attempt_) {

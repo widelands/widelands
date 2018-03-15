@@ -117,25 +117,21 @@ bool CheckStepOwnTerritory::allowed(
 
 // We return all
 bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) const {
-	//return true;
-// Check for blocking immovables
-uint8_t endcaps = player->get_buildcaps(dest);
+	// return true;
+	// Check for blocking immovables
+	uint8_t endcaps = player->get_buildcaps(dest);
 	if (BaseImmovable const* const imm = map.get_immovable(dest)) {
-	    if (upcast(PlayerImmovable const, player_immovable,imm)) {
+		if (upcast(PlayerImmovable const, player_immovable, imm)) {
 			return true;
-	    } else {
+		} else {
 			return false;
-	    }
-
+		}
 	}
-	if (endcaps & MOVECAPS_WALK){
+	if (endcaps & MOVECAPS_WALK) {
 		return true;
 	}
 	return false;
-
-
 }
-
 
 // We are looking for fields we can walk on
 // and owned by hostile player.
