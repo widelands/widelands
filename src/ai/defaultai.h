@@ -39,7 +39,7 @@
 namespace Widelands {
 struct Road;
 struct Flag;
-}
+}  // namespace Widelands
 
 /**
  * Default Widelands Computer Player (defaultAI)
@@ -201,7 +201,8 @@ private:
 	                          int16_t minReduction,
 	                          const int32_t gametime);
 	// trying to identify roads that might be removed
-	bool dispensable_road_test(Widelands::Road&);
+	bool dispensable_road_test(const Widelands::Road&);
+	bool dismantle_dead_ends();
 
 	bool check_economies();
 	bool check_productionsites(uint32_t);
@@ -268,8 +269,9 @@ private:
 	void expedition_management(Widelands::ShipObserver&);
 	// considering trees, rocks, mines, water, fish for candidate for colonization (new port)
 	uint8_t spot_scoring(Widelands::Coords candidate_spot);
-	bool marine_main_decisions();
+	bool marine_main_decisions(uint32_t);
 	bool check_ships(uint32_t);
+	bool attempt_escape(Widelands::ShipObserver& so);
 
 	// finding and owner
 	Widelands::PlayerNumber get_land_owner(const Widelands::Map&, uint32_t);
@@ -305,10 +307,10 @@ private:
 	std::deque<Widelands::FCoords> unusable_fields;
 	std::deque<Widelands::BuildableField*> buildable_fields;
 	Widelands::BlockedFields blocked_fields;
+	std::unordered_set<uint32_t> ports_vicinity;
 	Widelands::PlayersStrengths player_statistics;
 	Widelands::ManagementData management_data;
 	Widelands::ExpansionType expansion_type;
-	std::unordered_set<uint32_t> port_reserved_coords;
 	std::deque<Widelands::MineableField*> mineable_fields;
 	std::deque<Widelands::Flag const*> new_flags;
 	std::deque<Widelands::Road const*> roads;
@@ -354,8 +356,8 @@ private:
 	int16_t ts_without_trainers_;
 
 	// for roads
-	uint32_t inhibit_road_building_;
 	uint32_t last_road_dismantled_;  // uses to prevent too frequent road dismantling
+	bool dead_ends_check_;           // Do we need to check and dismantle dead ends?
 
 	uint32_t enemy_last_seen_;
 	uint32_t last_attack_time_;
