@@ -89,36 +89,35 @@ CheckStepOwnTerritory::CheckStepOwnTerritory(Player* const pl, uint8_t const mc,
    : player(pl), movecaps(mc), open_end(oe) {
 }
 
-// When movemen is allowed
-// 1. startfield is walkable (or very start of search)
-// Endfield either:
+// Defines when movement is allowed:
+// 1. startfield is walkable (or it is the first step)
+// And endfield either:
 // 2a. is walkable
-// 2b. has our PlayerImmovable
+// 2b. has our PlayerImmovable (building or flag)
 bool CheckStepOwnTerritory::allowed(
    const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
 	uint8_t endcaps = player->get_buildcaps(end);
 	uint8_t startcaps = player->get_buildcaps(start);
 
-	// we should not cross fields with road or flags (or any other immovable)
+	// We should not cross fields with road or flags (or any other immovable)
+	// Or rather we can step on it, but not go on from such field
 	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
 		return false;
 	}
 
-	// start field must be walkable
+	// Start field must be walkable
 	if (!(startcaps & movecaps))
 		return false;
 
-	// endfield can not be water
+	// Endfield can not be water
 	if (endcaps & MOVECAPS_SWIM)
 		return false;
 
 	return true;
 }
 
-// We return all
+// We accept either walkable teritory or field with own immovable
 bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) const {
-	// return true;
-	// Check for blocking immovables
 	uint8_t endcaps = player->get_buildcaps(dest);
 	if (BaseImmovable const* const imm = map.get_immovable(dest)) {
 		if (upcast(PlayerImmovable const, player_immovable, imm)) {

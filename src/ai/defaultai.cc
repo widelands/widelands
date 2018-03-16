@@ -2076,7 +2076,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// for now
 	for (std::deque<BuildableField*>::iterator i = buildable_fields.begin();
 	     i != buildable_fields.end(); ++i) {
-			 if (blocked_fields.is_blocked((*i)->coords)){
+			 if (blocked_fields.is_blocked((*i)->coords)) {
 				 continue;
 			 }
 		++spots_avail.at((*i)->coords.field->nodecaps() & BUILDCAPS_SIZEMASK);
@@ -3826,7 +3826,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		return true;
 	}
 	// We cant build a road so let block the vicinity as an indication this area is not connectible
-	// Usually we block for 2 minutes, but if it is a last attempt we block for 15 minutes
+	// Usually we block for 2 minutes, but if it is a last attempt we block for 10 minutes
 	// Note: we block the vicinity only if this economy (usually a sole flag with a building) is not
 	// connected to a warehouse
 	if (flag.get_economy()->warehouses().empty()) {

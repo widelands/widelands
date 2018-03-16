@@ -139,7 +139,7 @@ struct CheckStepRoadAI {
 };
 
 // Used to walk ower own territory, on fields that are walkable (or as given by mc)
-// plus one movement more to field with own immovable. So that also flags and buildings are
+// plus one step more to a field with own immovable. So that also flags and buildings are
 // included in resulting list
 struct CheckStepOwnTerritory {
 	CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe);
