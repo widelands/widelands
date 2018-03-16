@@ -62,10 +62,10 @@ tribes:new_productionsite_type {
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
             "animate=working 20000",
             "mine=iron 4 100 5 2",
-            "produce=iron_ore",
+            "produce=iron_ore:2",
             "animate=working 20000",
             "mine=iron 4 100 5 2",
-            "produce=iron_ore:2",
+            "produce=iron_ore",
             "animate=working 20000",
             "mine=iron 4 100 5 2",
             "produce=iron_ore:2"

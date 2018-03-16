@@ -78,19 +78,19 @@ void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) con
 	if (!warehouse_->descr().get_conquers())
 		return;
 
-	Player& owner = warehouse_->owner();
-	Game& game = dynamic_cast<Game&>(owner.egbase());
+	Player* owner = warehouse_->get_owner();
+	Game& game = dynamic_cast<Game&>(owner->egbase());
 	const Map& map = game.map();
-	if (enemy.get_owner() == &owner || enemy.get_battle() ||
+	if (enemy.get_owner() == owner || enemy.get_battle() ||
 	    warehouse_->descr().get_conquers() <=
 	       map.calc_distance(enemy.get_position(), warehouse_->get_position()))
 		return;
 
 	if (map.find_bobs(Area<FCoords>(map.get_fcoords(warehouse_->base_flag().get_position()), 2),
-	                  nullptr, FindBobEnemySoldier(&owner)))
+	                  nullptr, FindBobEnemySoldier(owner)))
 		return;
 
-	DescriptionIndex const soldier_index = owner.tribe().soldier();
+	DescriptionIndex const soldier_index = owner->tribe().soldier();
 	Requirements noreq;
 
 	if (!warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible))
@@ -102,9 +102,9 @@ void Warehouse::AttackTarget::enemy_soldier_approaches(const Soldier& enemy) con
 }
 
 AttackTarget::AttackResult Warehouse::AttackTarget::attack(Soldier* enemy) const {
-	Player& owner = warehouse_->owner();
-	Game& game = dynamic_cast<Game&>(owner.egbase());
-	DescriptionIndex const soldier_index = owner.tribe().soldier();
+	Player* owner = warehouse_->get_owner();
+	Game& game = dynamic_cast<Game&>(owner->egbase());
+	DescriptionIndex const soldier_index = owner->tribe().soldier();
 	Requirements noreq;
 
 	if (warehouse_->count_workers(game, soldier_index, noreq, Match::kCompatible)) {
@@ -495,24 +495,24 @@ void Warehouse::load_finish(EditorGameBase& egbase) {
 bool Warehouse::init(EditorGameBase& egbase) {
 	Building::init(egbase);
 
-	Player& player = owner();
+	Player* player = get_owner();
 
-	init_containers(player);
+	init_containers(*player);
 
 	// Even though technically, a warehouse might be completely empty,
 	// we let warehouse see always for simplicity's sake (since there's
 	// almost always going to be a carrier inside, that shouldn't hurt).
 	if (upcast(Game, game, &egbase)) {
-		player.see_area(
+		player->see_area(
 		   Area<FCoords>(egbase.map().get_fcoords(get_position()), descr().vision_range()));
 
 		{
 			uint32_t const act_time = schedule_act(*game, WORKER_WITHOUT_COST_SPAWN_INTERVAL);
 			const std::vector<DescriptionIndex>& worker_types_without_cost =
-			   owner().tribe().worker_types_without_cost();
+			   player->tribe().worker_types_without_cost();
 
 			for (size_t i = 0; i < worker_types_without_cost.size(); ++i) {
-				if (owner().is_worker_type_allowed(worker_types_without_cost.at(i))) {
+				if (player->is_worker_type_allowed(worker_types_without_cost.at(i))) {
 					next_worker_without_cost_spawn_[i] = act_time;
 				}
 			}
@@ -525,7 +525,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 		next_stock_remove_act_ = schedule_act(*game, 4000);
 
 		log("Message: adding %s for player %i at (%d, %d)\n", to_string(descr().type()).c_str(),
-		    player.player_number(), position_.x, position_.y);
+		    player->player_number(), position_.x, position_.y);
 
 		if (descr().get_isport()) {
 			send_message(*game, Message::Type::kSeafaring, descr().descname(), descr().icon_filename(),
@@ -542,7 +542,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	if (uint32_t const conquer_radius = descr().get_conquers()) {
 		egbase.conquer_area(
 		   PlayerArea<Area<FCoords>>(
-		      player.player_number(),
+		      player->player_number(),
 		      Area<FCoords>(egbase.map().get_fcoords(get_position()), conquer_radius)),
 		   true);
 	}
@@ -560,7 +560,7 @@ bool Warehouse::init(EditorGameBase& egbase) {
 	return true;
 }
 
-void Warehouse::init_containers(Player& player) {
+void Warehouse::init_containers(const Player& player) {
 	DescriptionIndex const nr_wares = player.egbase().tribes().nrwares();
 	DescriptionIndex const nr_workers = player.egbase().tribes().nrworkers();
 	supply_->set_nrwares(nr_wares);
@@ -676,8 +676,7 @@ void Warehouse::cleanup(EditorGameBase& egbase) {
 		   defeating_player_);
 
 	// Unsee the area that we started seeing in init()
-	Player& player = owner();
-	player.unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	get_owner()->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
 
 	Building::cleanup(egbase);
 }
@@ -917,7 +916,7 @@ Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const R
 				// NOTE: This code lies about the TrainingAttributes of the new worker
 				supply_->remove_workers(worker_id, 1);
 				const WorkerDescr& workerdescr = *game.tribes().get_worker_descr(worker_id);
-				return workerdescr.create(game, owner(), this, position_);
+				return workerdescr.create(game, get_owner(), this, position_);
 			}
 		}
 
@@ -934,7 +933,7 @@ Worker& Warehouse::launch_worker(Game& game, DescriptionIndex worker_id, const R
 
 void Warehouse::incorporate_worker(EditorGameBase& egbase, Worker* w) {
 	assert(w != nullptr);
-	assert(w->get_owner() == &owner());
+	assert(w->get_owner() == get_owner());
 
 	if (WareInstance* ware = w->fetch_carried_ware(egbase))
 		incorporate_ware(egbase, ware);
@@ -1091,12 +1090,12 @@ void Warehouse::create_worker(Game& game, DescriptionIndex const worker) {
 		if (owner().tribe().has_ware(id_ware)) {
 			remove_wares(id_ware, buildcost.second);
 			// Update statistics accordingly
-			owner().ware_consumed(id_ware, buildcost.second);
+			get_owner()->ware_consumed(id_ware, buildcost.second);
 		} else
 			remove_workers(owner().tribe().safe_worker_index(input), buildcost.second);
 	}
 
-	incorporate_worker(game, &w_desc.create(game, owner(), this, position_));
+	incorporate_worker(game, &w_desc.create(game, get_owner(), this, position_));
 
 	// Update PlannedWorkers::amount here if appropriate, because this function
 	// may have been called directly by the Economy.

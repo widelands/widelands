@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"POT-Creation-Date: 2018-02-23 18:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: English (Canada) (https://www.transifex.com/widelands/teams/35159/en_CA/)\n"
 "MIME-Version: 1.0\n"
@@ -124,7 +124,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:112
 msgid ""
-"Decide: Either collect 35 sheaves of wheat and 15 bottles of wine for the "
+"Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
 
@@ -287,8 +287,8 @@ msgstr ""
 msgid ""
 "Praise the gods, we have succeeded. We managed all the challenges that were "
 "imposed on us. We even expelled the Barbarians out of our country. However, "
-"this was only one battle won, as we are still only at the brink of war. "
-"Let’s see what the future still holds for us."
+"our victory is only temporary, as this is still just the beginning of the "
+"war. Let’s see what the future still holds for us."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:222
@@ -1204,8 +1204,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:700
 msgid ""
 "Ave, Lutius! If you want us to help you, you first have to worship our "
-"goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 bottles of wine "
-"to prepare a worthy sacrifice for her."
+"goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 amphoras of wine"
+" to prepare a worthy sacrifice for her."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:705

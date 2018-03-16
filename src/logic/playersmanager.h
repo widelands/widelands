@@ -73,7 +73,7 @@ public:
 		assert(n <= kMaxPlayers);
 		return players_[n - 1];
 	}
-	Player& player(int32_t n) const {
+	const Player& player(int32_t n) const {
 		assert(1 <= n);
 		assert(n <= kMaxPlayers);
 		return *players_[n - 1];

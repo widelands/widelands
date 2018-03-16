@@ -143,7 +143,7 @@ public:
 	/// Does not perform any sanity checks.
 	/// If former_buildings is not empty this is an enhancing.
 	Building& create(EditorGameBase&,
-	                 Player&,
+	                 Player*,
 	                 Coords,
 	                 bool construct,
 	                 bool loading = false,

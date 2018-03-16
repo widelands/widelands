@@ -218,6 +218,9 @@ private:
 	std::string authenticator_;
 	bool reg_;
 
+	/// Password for connecting as host to a game on the relay server
+	std::string relay_password_;
+
 	std::string meta_;
 	uint16_t port_;
 

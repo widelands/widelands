@@ -130,7 +130,7 @@ void PortDock::set_economy(Economy* e) {
 	if (fleet_)
 		fleet_->set_economy(e);
 
-	if (upcast(Game, game, &owner().egbase())) {
+	if (upcast(Game, game, &get_owner()->egbase())) {
 		for (ShippingItem& shipping_item : waiting_) {
 			shipping_item.set_economy(*game, e);
 		}
@@ -160,7 +160,7 @@ bool PortDock::init(EditorGameBase& egbase) {
  * that we merge with a larger fleet when possible.
  */
 void PortDock::init_fleet(EditorGameBase& egbase) {
-	Fleet* fleet = new Fleet(owner());
+	Fleet* fleet = new Fleet(get_owner());
 	fleet->add_port(egbase, this);
 	fleet->init(egbase);
 	// Note: the Fleet calls our set_fleet automatically
