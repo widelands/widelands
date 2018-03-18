@@ -6,6 +6,22 @@ show_warning_reed = true
 show_warning_clay = true
 show_warning_bricks = true
 
+done_gather_materials = false
+
+function check_materials()
+   local o = add_campaign_objective(obj_gather_materials)
+   while (
+      count("log") < 30 or
+      count("granite") < 30 or
+      count("coal") < 20 or
+      count("brick") < 40 or
+      count("clay") < 10 or
+      count("thatch_reed") < 30
+   ) do sleep(8731) end
+   set_objective_done(o)
+   done_gather_materials = true
+end
+
 function hint_warehouse_east()
    local fields = warehouse_mark:region(5)
    for i,f in ipairs(fields) do
@@ -122,18 +138,20 @@ function stormflood()
       next_field.terd = "winter_water"
       -- Turn the settlement into Rungholt; even swimming things (like ships)
       -- are destroyed by the storm
+      local place_ashes = {}
       for idx,field in ipairs(next_field:region(1)) do
          if field.immovable then
-            local immovable_fields = nil
             if is_building(field.immovable) then
-               immovable_fields = field.immovable.fields
+               table.insert(place_ashes, field.immovable.fields)
             end
             field.immovable:remove()
-            if immovable_fields ~= nil then
-               for idy,f in ipairs(immovable_fields) do map:place_immovable("ashes", f, "tribes") end
-            end
          end
          for idb,bob in ipairs(field.bobs) do bob:remove() end
+      end
+      for idx,fields in ipairs(place_ashes) do
+         for idy,f in ipairs(fields) do
+            map:place_immovable("ashes", f, "tribes")
+         end
       end
       x = next_field.x
       next_field = nil
@@ -213,27 +231,12 @@ function mission_thread()
    set_objective_done(o)
    campaign_message_box(intro_5)
    run(warning_clay)
-
    run(hint_warehouse_east)
+   run(check_materials)
 
-   -- Wait until we gathered a reasonable number of building materials
-   o = add_campaign_objective(obj_gather_materials)
-   while (
-      count("log") < 30 or
-      count("granite") < 30 or
-      count("coal") < 20 or
-      count("brick") < 40 or
-      count("clay") < 10 or
-      count("thatch_reed") < 30
-   ) do
-      -- We must not run out of rations yet
-      if count("ration") < 1 then
-         p1:get_buildings("frisians_headquarters")[1]:set_wares("ration", 3)
-      end
-      sleep(2751)
-   end
-   set_objective_done(o)
-
+   -- Wait until no rations are left in store
+   sleep(60000)
+   while count("ration") > 0 do sleep(9873) end
    -- Great, you forgot to provide rations...
    campaign_message_box(food_1)
    run(warning_bricks)
@@ -310,6 +313,7 @@ function mission_thread()
       frisians_reindeer_farm = 1}) do sleep(4273) end
    set_objective_done(o)
 
+   while not done_gather_materials do sleep(9641) end
    -- Show the "expand" objective only if we haven't expanded that far yet
    if expansion_mark.owner == nil then
       campaign_message_box(expand_1)
@@ -401,10 +405,13 @@ function mission_thread()
    local reveal_fields = {}
    for x=3, map.width - 4 do
       for y=3, map.height - 4 do
-         table.insert(reveal_fields, map:get_field(x, y))
+         local f = map:get_field(x, y)
+         if not p1:sees_field(f) then
+            table.insert(reveal_fields, f)
+         end
       end
    end
-   reveal_randomly(p1, reveal_fields, 2000)
+   reveal_randomly(p1, reveal_fields, 500)
    scroll_to_field(first_to_flood)
    run(stormflood)
    sleep(6000)

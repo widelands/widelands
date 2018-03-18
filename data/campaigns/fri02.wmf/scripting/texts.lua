@@ -43,7 +43,8 @@ obj_train_recycle = {
    title=_"Train and recycle",
    number = 1,
    body = objective_text(_"Recycle Weapons to Regain Metal",
-      li(_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a recycling center. Use the weapons in the store to train soldiers and recycle some scrap metal.]])
+      li(_[[When soldiers train, their old weapons are discarded. They can be turned into metal in a recycling center. Use the weapons in the store to train soldiers and recycle some scrap metal.]]) ..
+      li_arrow(_[[The blacksmithy only produces a pick in its second production cycle. If it is supplied with only one iron ingot at a time, it might never reach this cycle. You need to stop the blacksmithy until at least two iron are stored in its input queue.]])
    ),
 }
 obj_aqua_farm = {
