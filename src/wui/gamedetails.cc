@@ -29,7 +29,6 @@
 #include "base/log.h"
 #include "base/time_string.h"
 #include "graphic/image_io.h"
-#include "graphic/text_constants.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 
@@ -46,14 +45,14 @@ std::string as_header_with_content(const std::string& header,
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format(
 		           "<p><font size=%i bold=1 shadow=1>%s%s <font color=D1D1D1>%s</font></font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") %
+		        g_gr->styles().font_size(StyleManager::FontSize::kNormal) % (is_first ? "" : "<vspace gap=9>") %
 		        (noescape ? header : richtext_escape(header)) %
 		        (noescape ? content : richtext_escape(content)))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format(
 		           "<p><font size=%i>%s<font bold=1 color=D1D1D1>%s</font> %s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") %
+		        g_gr->styles().font_size(StyleManager::FontSize::kNormal) % (is_first ? "" : "<vspace gap=6>") %
 		        (noescape ? header : richtext_escape(header)) %
 		        (noescape ? content : richtext_escape(content)))
 		   .str();
@@ -119,7 +118,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
 	add(button_box_, UI::Box::Resizing::kFullSize);
 
 	minimap_icon_.set_visible(false);
-	minimap_icon_.set_frame(UI_FONT_CLR_FG);
+	minimap_icon_.set_frame(g_gr->styles().font_color(StyleManager::FontColor::kForeground));
 }
 
 void GameDetails::clear() {

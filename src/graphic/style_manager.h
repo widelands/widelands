@@ -30,6 +30,28 @@ static const std::string kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:
+	enum class FontSize {
+		kTitle,
+		kNormal,
+		kMessage,
+		kSlider,
+		kMinimum,
+	};
+	enum class FontColor {
+		// Global
+		kForeground,
+		kDisabled,
+		kWarning,
+		// Tooltips
+		kTooltip,
+		// Progress and productivity
+		kProgressBright,
+		kProgressConstruction,
+		kProductivityLow,
+		kProductivityMedium,
+		kProductivityHigh,
+	};
+
 	StyleManager() = default;
 	~StyleManager() = default;
 
@@ -43,12 +65,17 @@ public:
 	const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
 
+	int font_size(const FontSize size) const;
+	const RGBColor& font_color(const FontColor color) const;
+
 private:
 	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;
 	void add_button_style(UI::ButtonStyle style, const LuaTable& table);
 	void add_slider_style(UI::SliderStyle style, const LuaTable& table);
 	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
+	void add_font_size(FontSize size, const LuaTable& table, const std::string& key);
+	void add_font_color(FontColor color, const LuaTable& table);
 
 	std::map<UI::ButtonStyle, std::unique_ptr<const UI::PanelStyleInfo>> buttonstyles_;
 	std::map<UI::SliderStyle, std::unique_ptr<const UI::PanelStyleInfo>> sliderstyles_;
@@ -56,6 +83,9 @@ private:
 	PanelStyleMap editboxstyles_;
 	PanelStyleMap dropdownstyles_;
 	PanelStyleMap scrollbarstyles_;
+
+	std::map<FontSize, int> font_sizes_;
+	std::map<FontColor, std::unique_ptr<RGBColor>> font_colors_;
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };

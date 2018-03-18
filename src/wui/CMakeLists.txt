@@ -76,7 +76,6 @@ wl_library(wui_common_gamedetails
     graphic_fonthandler
     graphic_image_io
     graphic_surface
-    graphic_text_constants
     io_filesystem
     logic
     logic_filesystem_constants
@@ -101,7 +100,6 @@ wl_library(wui_common_mapdetails
     base_log
     graphic
     graphic_fonthandler
-    graphic_text_constants
     io_filesystem
     logic
     logic_constants
@@ -269,7 +267,6 @@ wl_library(wui
     graphic_playercolor
     graphic_surface
     graphic_text
-    graphic_text_constants
     graphic_text_layout
     io_fileread
     io_filesystem

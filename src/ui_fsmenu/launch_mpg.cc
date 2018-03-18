@@ -27,7 +27,6 @@
 #include "base/warning.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
-#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -370,13 +369,13 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	if (settings.mapfilename != filename_proof_) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			client_info_.set_color(UI_FONT_CLR_WARNING);
+			client_info_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kWarning));
 			client_info_.set_text(
 			   _("The selected file can not be found. If it is not automatically "
 			     "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			client_info_.set_color(UI_FONT_CLR_FG);
+			client_info_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kForeground));
 
 			// Update local nr of players - needed for the client UI
 			nr_players_ = settings.players.size();

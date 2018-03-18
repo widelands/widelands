@@ -28,7 +28,6 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
-#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -42,11 +41,11 @@ std::string as_header(const std::string& txt, UI::PanelStyle style, bool is_firs
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p><font size=%i bold=1 shadow=1>%s%s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") % richtext_escape(txt))
+		        g_gr->styles().font_size(StyleManager::FontSize::kNormal) % (is_first ? "" : "<vspace gap=9>") % richtext_escape(txt))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format("<p><font size=%i bold=1 color=D1D1D1>%s%s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") % richtext_escape(txt))
+		        g_gr->styles().font_size(StyleManager::FontSize::kNormal) % (is_first ? "" : "<vspace gap=6>") % richtext_escape(txt))
 		   .str();
 	}
 	NEVER_HERE();
@@ -55,11 +54,11 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p><font size=%i color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
-		        UI_FONT_SIZE_SMALL % richtext_escape(txt))
+		        g_gr->styles().font_size(StyleManager::FontSize::kNormal) % richtext_escape(txt))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format("<p><font size=%i><vspace gap=2>%s</font></p>") %
-		        (UI_FONT_SIZE_SMALL - 2) % richtext_escape(txt))
+		        (g_gr->styles().font_size(StyleManager::FontSize::kMessage)) % richtext_escape(txt))
 		   .str();
 	}
 	NEVER_HERE();

@@ -27,7 +27,6 @@
 #include "base/macros.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "logic/map_objects/tribes/soldier.h"
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
@@ -140,7 +139,7 @@ void AttackBox::init() {
 	   (boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
 
 	soldiers_text_.reset(
-	   &add_text(columnbox, attack_string, UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
+	   &add_text(columnbox, attack_string, UI::Align::kCenter, g_gr->styles().font_size(StyleManager::FontSize::kSlider)));
 
 	soldiers_slider_ = add_slider(
 	   columnbox, 100, 10, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));

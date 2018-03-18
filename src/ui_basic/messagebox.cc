@@ -54,7 +54,7 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	}
 
 	// Stupid heuristic to avoid excessively long lines
-	if (height < 2 * UI_FONT_SIZE_SMALL) {
+	if (height < 2 * g_gr->styles().font_size(StyleManager::FontSize::kNormal)) {
 		std::shared_ptr<const UI::RenderedText> temp_rendered_text =
 		   g_fh1->render(as_uifont(text), maxwidth / 2);
 		width = temp_rendered_text->width();

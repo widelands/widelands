@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "graphic/text_constants.h"
 #include "logic/campaign_visibility.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
@@ -82,7 +81,7 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
                      get_right_column_w(right_column_x_ + indent_),
                      buty_ - get_y_from_preceding(label_description_) - 4 * padding_,
                      UI::PanelStyle::kFsMenu) {
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
+	title_.set_fontsize(g_gr->styles().font_size(StyleManager::FontSize::kTitle));
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
 	ta_campname_.set_tooltip(_("The name of this campaign"));
@@ -312,7 +311,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
                      UI::PanelStyle::kFsMenu),
 
      is_tutorial_(is_tutorial) {
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
+	title_.set_fontsize(g_gr->styles().font_size(StyleManager::FontSize::kTitle));
 	back_.set_tooltip(_("Return to the main menu"));
 	if (is_tutorial_) {
 		ok_.set_tooltip(_("Play this tutorial"));

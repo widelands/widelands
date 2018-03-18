@@ -19,4 +19,28 @@
 
 #include "graphic/align.h"
 
-// Dummy
+namespace UI {
+
+/**
+ * Align pt horizontally to match align based on width w.
+ *
+ * When correcting for align, we never move from pixel boundaries to
+ * sub-pixels, because this might lead from pixel-perfect rendering to
+ * subsampled rendering - this can lead to blurry texts. That is why we
+ * never do float divisions in this function.
+ */
+void correct_for_align(Align align, uint32_t w, Vector2i* pt) {
+	if (align == Align::kCenter) {
+		pt->x -= w / 2;
+	} else if (align == Align::kRight) {
+		pt->x -= w;
+	}
+}
+
+/**
+ * Adjust the y coordinate in 'point 'pt' to vertically center an element with height 'h'.
+ */
+void center_vertically(uint32_t h, Vector2i* pt) {
+	pt->y -= h / 2;
+}
+} // namespace UI

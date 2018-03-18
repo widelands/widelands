@@ -35,7 +35,6 @@
 #include "graphic/render_queue.h"
 #include "graphic/rendertarget.h"
 #include "graphic/screen.h"
-#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"

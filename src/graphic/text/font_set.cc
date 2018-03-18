@@ -27,6 +27,7 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
+#include "graphic/text/bidi.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
@@ -167,6 +168,31 @@ void FontSet::set_font_group(const LuaTable& table,
 	*italic = get_string_with_default(table, (boost::format("%s_italic") % key).str(), *basic);
 	*bold_italic =
 	   get_string_with_default(table, (boost::format("%s_bold_italic") % key).str(), *bold);
+}
+
+/**
+ * This mirrors the horizontal alignment for RTL languages.
+ *
+ * Do not store this value as it is based on the global font setting.
+ *
+ * If 'checkme' is not empty, mirror the alignment if the first 20 characters contain an RTL
+ * character. Otherwise, mirror if the current fontset is RTL.
+ */
+Align FontSet::mirror_alignment(Align alignment, const std::string& checkme) const {
+	bool do_swap_alignment = checkme.empty() ? is_rtl() : i18n::has_rtl_character(checkme.c_str(), 20);
+	if (do_swap_alignment) {
+		switch (alignment) {
+		case Align::kLeft:
+			alignment = Align::kRight;
+			break;
+		case Align::kRight:
+			alignment = Align::kLeft;
+			break;
+		case Align::kCenter:
+			break;
+		}
+	}
+	return alignment;
 }
 
 FontSets::FontSets() {

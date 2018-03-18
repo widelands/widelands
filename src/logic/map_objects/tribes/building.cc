@@ -33,7 +33,6 @@
 #include "economy/input_queue.h"
 #include "economy/request.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -769,7 +768,7 @@ void Building::send_message(Game& game,
 	const std::string rt_description =
 	   (boost::format("<div padding_r=10><p><img width=%d src=%s color=%s></p></div>"
 	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    width % img % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
+	    width % img % owner().get_playercolor().hex_value() % g_gr->styles().font_size(StyleManager::FontSize::kMessage) % description)
 	      .str();
 
 	std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,

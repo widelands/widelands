@@ -26,7 +26,16 @@
 #include "scripting/lua_interface.h"
 
 namespace {
-// Read image filename and RGB color from LuaTable
+// Read RGB color from LuaTable
+std::unique_ptr<RGBColor> read_rgb_color(const LuaTable& table) {
+	std::vector<int> rgbcolor = table.array_entries<int>();
+	if (rgbcolor.size() != 3) {
+		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
+	}
+	return std::unique_ptr<RGBColor>(new RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]));
+}
+
+// Read image filename and RGBA color from LuaTable
 UI::PanelStyleInfo* read_style(const LuaTable& table) {
 	const std::string image = table.get_string("image");
 	std::vector<int> rgbcolor = table.get_table("color")->array_entries<int>();
@@ -119,6 +128,30 @@ void StyleManager::init() {
 	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &scrollbarstyles_);
 	check_completeness(
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
+
+	// Fonts
+	element_table = table->get_table("fonts");
+	style_table = element_table->get_table("sizes");
+	add_font_size(FontSize::kTitle, *style_table, "title");
+	add_font_size(FontSize::kNormal, *style_table, "normal");
+	add_font_size(FontSize::kMessage, *style_table, "message");
+	add_font_size(FontSize::kSlider, *style_table, "slider");
+	add_font_size(FontSize::kMinimum, *style_table, "minimum");
+	check_completeness(
+	   "font_sizes", font_sizes_.size(), static_cast<size_t>(FontSize::kMinimum));
+
+	style_table = element_table->get_table("colors");
+	add_font_color(FontColor::kForeground, *style_table->get_table("foreground"));
+	add_font_color(FontColor::kDisabled, *style_table->get_table("disabled"));
+	add_font_color(FontColor::kWarning, *style_table->get_table("warning"));
+	add_font_color(FontColor::kTooltip, *style_table->get_table("tooltip"));
+	add_font_color(FontColor::kProgressBright, *style_table->get_table("progress_bright"));
+	add_font_color(FontColor::kProgressConstruction, *style_table->get_table("progress_construction"));
+	add_font_color(FontColor::kProductivityLow, *style_table->get_table("productivity_low"));
+	add_font_color(FontColor::kProductivityMedium, *style_table->get_table("productivity_medium"));
+	add_font_color(FontColor::kProductivityHigh, *style_table->get_table("productivity_high"));
+	check_completeness(
+	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kProductivityHigh));
 }
 
 // Return functions for the styles
@@ -152,6 +185,14 @@ const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) co
 	return scrollbarstyles_.at(style).get();
 }
 
+int StyleManager::font_size(const FontSize size) const {
+	return font_sizes_.at(size);
+
+}
+const RGBColor& StyleManager::font_color(const FontColor color) const {
+	return *font_colors_.at(color).get();
+}
+
 // Fill the maps
 void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table) {
 	buttonstyles_.insert(
@@ -170,4 +211,16 @@ void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& t
 
 void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {
 	map->insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
+}
+
+void StyleManager::add_font_size(FontSize size, const LuaTable& table, const std::string& key) {
+	const int addme = table.get_int(key);
+	if (addme < 1) {
+		throw wexception("Font size too small for %s, must be at least 1!", key.c_str());
+	}
+	font_sizes_.emplace(std::make_pair(size, addme));
+}
+
+void StyleManager::add_font_color(FontColor color, const LuaTable& table) {
+	font_colors_.emplace(std::make_pair(color, read_rgb_color(table)));
 }

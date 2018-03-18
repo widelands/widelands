@@ -22,7 +22,6 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/graphic.h"
-#include "graphic/text_constants.h"
 #include "network/constants.h"
 #include "network/network.h"
 #include "profile/profile.h"
@@ -114,7 +113,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 
 	Section& s = g_options.pull_section("global");  //  for playername
 
-	title.set_fontsize(UI_FONT_SIZE_BIG);
+	title.set_fontsize(g_gr->styles().font_size(StyleManager::FontSize::kTitle));
 	hostname.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
 	playername.set_text(s.get_string("nickname", (_("nobody"))));
 	playername.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));

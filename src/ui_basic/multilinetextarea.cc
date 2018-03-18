@@ -25,7 +25,6 @@
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
@@ -43,7 +42,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
      text_(text),
-     color_(UI_FONT_CLR_FG),
+     color_(g_gr->styles().font_color(StyleManager::FontColor::kForeground)),
      align_(align),
      force_new_renderer_(false),
      use_old_renderer_(false),
@@ -126,7 +125,7 @@ void MultilineTextarea::layout() {
 	// Take care of the scrollbar
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
-	scrollbar_.set_pagesize(get_h() - 2 * UI_FONT_SIZE_BIG);
+	scrollbar_.set_pagesize(get_h() - 2 * g_gr->styles().font_size(StyleManager::FontSize::kTitle));
 }
 
 /**
@@ -143,7 +142,7 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 
 		if (blit_width > 0 && blit_height > 0) {
 			int anchor = 0;
-			Align alignment = mirror_alignment(align_, text_);
+			Align alignment = UI::g_fh1->fontset()->mirror_alignment(align_, text_);
 			switch (alignment) {
 			case UI::Align::kCenter:
 				anchor = (get_eff_w() - blit_width) / 2;
@@ -188,7 +187,7 @@ std::string MultilineTextarea::make_richtext() {
 	// TODO(GunChleoc): Revisit this once the old font renderer is completely gone.
 	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
 	boost::replace_all(temp, "\n", "<br>");
-	return as_aligned(temp, align_, UI_FONT_SIZE_SMALL, color_);
+	return as_aligned(temp, align_, g_gr->styles().font_size(StyleManager::FontSize::kNormal), color_);
 }
 
 }  // namespace UI

@@ -30,7 +30,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -296,7 +295,7 @@ void BaseListselect::layout() {
 		for (size_t i = 0; i < entry_records_.size(); ++i) {
 			const EntryRecord& er = *entry_records_[i];
 			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
-			   as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
+			   as_uifont(richtext_escape(er.name), g_gr->styles().font_size(StyleManager::FontSize::kNormal), g_gr->styles().font_color(StyleManager::FontColor::kForeground)));
 			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 			int difference = rendered_text->width() + picw + 8 - get_eff_w();
 			if (difference > 0) {
@@ -341,7 +340,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh1->render(as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
+		   UI::g_fh1->render(as_uifont(richtext_escape(er.name), g_gr->styles().font_size(StyleManager::FontSize::kNormal), g_gr->styles().font_color(StyleManager::FontColor::kForeground)));
 
 		int lineheight = std::max(get_lineheight(), rendered_text->height());
 

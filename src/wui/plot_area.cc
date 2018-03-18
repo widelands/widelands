@@ -189,7 +189,7 @@ uint32_t calc_plot_x_max_ticks(int32_t plot_width) {
 
 int calc_slider_label_width(const std::string& label) {
 	// Font size and style as used by DiscreteSlider
-	return UI::g_fh1->render(as_condensed(label, UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))->width();
+	return UI::g_fh1->render(as_condensed(label, UI::Align::kLeft, g_gr->styles().font_size(StyleManager::FontSize::kSlider)))->width();
 }
 
 /**

@@ -1153,7 +1153,7 @@ public:
 				nodestyle_.halign = UI::Align::kLeft;
 			}
 		}
-		nodestyle_.halign = mirror_alignment(nodestyle_.halign);
+		nodestyle_.halign = UI::g_fh1->fontset()->mirror_alignment(nodestyle_.halign);
 		if (a.has("valign")) {
 			const std::string align = a["valign"].get_string();
 			if (align == "bottom") {

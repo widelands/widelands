@@ -24,7 +24,6 @@
 #include "base/macros.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "logic/findbob.h"
 #include "logic/game.h"

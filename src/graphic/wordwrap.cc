@@ -299,7 +299,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	++where.y;
 
-	Align alignment = mirror_alignment(align);
+	Align alignment = UI::g_fh1->fontset()->mirror_alignment(align);
 
 	const int fontheight = text_height(fontsize_);
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {

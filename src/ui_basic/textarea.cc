@@ -60,8 +60,8 @@ void Textarea::init() {
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
-	color_ = UI_FONT_CLR_FG;
-	fontsize_ = UI_FONT_SIZE_SMALL;
+	color_ = g_gr->styles().font_color(StyleManager::FontColor::kForeground);
+	fontsize_ = g_gr->styles().font_size(StyleManager::FontSize::kNormal);
 	update();
 }
 

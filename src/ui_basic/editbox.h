@@ -51,7 +51,7 @@ struct EditBox : public Panel {
 	        uint32_t h,
 	        int margin_y,
 	        UI::PanelStyle style,
-	        int font_size = UI_FONT_SIZE_SMALL);
+	        int font_size = g_gr->styles().font_size(StyleManager::FontSize::kNormal));
 	~EditBox() override;
 
 	boost::signals2::signal<void()> changed;

@@ -272,7 +272,6 @@ wl_library(logic
     graphic_image_io
     graphic_playercolor
     graphic_surface
-    graphic_text_constants
     graphic_text_layout
     helper
     io_fileread

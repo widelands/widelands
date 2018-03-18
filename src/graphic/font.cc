@@ -26,9 +26,10 @@
 #include "base/i18n.h"
 #include "base/utf8.h"
 #include "graphic/font_handler1.h"  // We need the fontset for the size offset
+#include "graphic/graphic.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 
 namespace {
@@ -235,8 +236,8 @@ Default styles
 */
 
 TextStyle::TextStyle()
-   : font(Font::get(UI::g_fh1->fontset()->sans(), UI_FONT_SIZE_SMALL)),
-     fg(UI_FONT_CLR_FG),
+   : font(Font::get(UI::g_fh1->fontset()->sans(), g_gr->styles().font_size(StyleManager::FontSize::kNormal))),
+     fg(g_gr->styles().font_color(StyleManager::FontColor::kForeground)),
      bold(true),
      italics(false),
      underline(false) {

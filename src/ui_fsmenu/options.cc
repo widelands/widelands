@@ -35,7 +35,6 @@
 #include "graphic/graphic.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -208,7 +207,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
      os_(opt) {
 	// Set up UI Elements
-	title_.set_fontsize(UI_FONT_SIZE_BIG);
+	title_.set_fontsize(g_gr->styles().font_size(StyleManager::FontSize::kTitle));
 	translation_info_.force_new_renderer();
 
 	// Buttons

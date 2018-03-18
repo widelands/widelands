@@ -610,13 +610,13 @@ void BuildingStatisticsMenu::update() {
 
 				RGBColor color;
 				if (percent < low_production_) {
-					color = UI_FONT_CLR_BAD;
+					color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityLow);
 				} else if (percent < ((low_production_ < 50) ?
 				                         2 * low_production_ :
 				                         low_production_ + ((100 - low_production_) / 2))) {
-					color = UI_FONT_CLR_OK;
+					color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityMedium);
 				} else {
-					color = UI_FONT_CLR_GOOD;
+					color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityHigh);
 				}
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
@@ -643,11 +643,11 @@ void BuildingStatisticsMenu::update() {
 			if (nr_owned) {
 				RGBColor color;
 				if (total_stationed_soldiers < total_soldier_capacity / 2) {
-					color = UI_FONT_CLR_BAD;
+					color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityLow);
 				} else if (total_stationed_soldiers < total_soldier_capacity) {
-					color = UI_FONT_CLR_OK;
+					color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityMedium);
 				} else {
-					color = UI_FONT_CLR_GOOD;
+					color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityHigh);
 				}
 				const std::string perc_str =
 				   (boost::format(_("%1%/%2%")) % total_stationed_soldiers % total_soldier_capacity)
@@ -678,7 +678,7 @@ void BuildingStatisticsMenu::update() {
 		} else {
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
 		}
-		set_labeltext(owned_labels_[id], owned_text, UI_FONT_CLR_FG);
+		set_labeltext(owned_labels_[id], owned_text, g_gr->styles().font_color(StyleManager::FontColor::kForeground));
 		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);

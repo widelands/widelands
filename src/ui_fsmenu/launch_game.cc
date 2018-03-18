@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
-#include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"

@@ -24,7 +24,6 @@
 
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
-#include "graphic/text_constants.h"
 
 /*
 ==============================================================================
@@ -176,11 +175,11 @@ void FullscreenWindow::blit_image(RenderTarget& dst,
 }
 
 int FullscreenWindow::fs_small() {
-	return UI_FONT_SIZE_SMALL * get_h() / 600;
+	return g_gr->styles().font_size(StyleManager::FontSize::kNormal) * get_h() / 600;
 }
 
 int FullscreenWindow::fs_big() {
-	return UI_FONT_SIZE_BIG * get_h() / 600;
+	return g_gr->styles().font_size(StyleManager::FontSize::kTitle) * get_h() / 600;
 }
 
 }  // namespace UI

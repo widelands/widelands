@@ -32,7 +32,6 @@
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_errors.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -41,6 +40,7 @@
 namespace {
 
 constexpr int kMarginX = 4;
+constexpr int kLineMargin = 1;
 
 }  // namespace
 
@@ -98,7 +98,7 @@ EditBox::EditBox(Panel* const parent,
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	m_->maxLength =
-	   std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, std::numeric_limits<int32_t>::max());
+	   std::min(g_gr->max_texture_size() / g_gr->styles().font_size(StyleManager::FontSize::kNormal), std::numeric_limits<int32_t>::max());
 
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -146,7 +146,7 @@ void EditBox::set_text(const std::string& t) {
  * its end is cut off to fit into the maximum length.
  */
 void EditBox::set_max_length(uint32_t const n) {
-	m_->maxLength = std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, static_cast<int>(n));
+	m_->maxLength = std::min(g_gr->max_texture_size() / g_gr->styles().font_size(StyleManager::FontSize::kNormal), static_cast<int>(n));
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());

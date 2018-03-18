@@ -27,8 +27,8 @@
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/color.h"
+#include "graphic/graphic.h"
 #include "graphic/text/sdl_ttf_font.h"
-#include "graphic/text_constants.h"
 
 class RenderTarget;
 
@@ -38,8 +38,10 @@ namespace UI {
  * Helper struct that provides word wrapping and related functionality.
  */
 struct WordWrap {
-	WordWrap(int fontsize = UI_FONT_SIZE_SMALL,
-	         const RGBColor& color = UI_FONT_CLR_FG,
+	static constexpr int kLineMargin = 1;
+
+	WordWrap(int fontsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
+	         const RGBColor& color = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
 	         uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
 
 	void set_wrapwidth(uint32_t wrapwidth);

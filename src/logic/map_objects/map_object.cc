@@ -485,7 +485,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	if (scale < 1.f) {
 		return;
 	}
-	const int font_size = scale * UI_FONT_SIZE_SMALL;
+	const int font_size = scale * g_gr->styles().font_size(StyleManager::FontSize::kNormal);
 
 	// We always render this so we can have a stable position for the statistics string.
 	std::shared_ptr<const UI::RenderedText> rendered_census =

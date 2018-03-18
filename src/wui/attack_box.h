@@ -25,7 +25,6 @@
 
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "logic/map_objects/bob.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/player.h"
@@ -66,7 +65,7 @@ private:
 	UI::Textarea& add_text(UI::Box& parent,
 	                       std::string str,
 	                       UI::Align alignment = UI::Align::kLeft,
-	                       int fontsize = UI_FONT_SIZE_SMALL);
+	                       int fontsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal));
 	std::unique_ptr<UI::Button> add_button(UI::Box& parent,
 	                                       const std::string& text,
 	                                       void (AttackBox::*fn)(),

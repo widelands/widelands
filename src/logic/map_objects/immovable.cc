@@ -32,7 +32,6 @@
 #include "config.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -514,7 +513,7 @@ void Immovable::draw_construction(const uint32_t gametime,
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(draw_text, descr().descname(),
-	             (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK.hex_value() %
+	             (boost::format("<font color=%s>%s</font>") % g_gr->styles().font_color(StyleManager::FontColor::kProgressConstruction).hex_value() %
 	              (boost::format(_("%i%% built")) % (100 * done / total)).str())
 	                .str(),
 	             point_on_dst, scale, dst);

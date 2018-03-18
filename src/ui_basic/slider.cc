@@ -500,7 +500,7 @@ DiscreteSlider::DiscreteSlider(Panel* const parent,
             w / (2 * labels_in.size()) - cursor_size / 2,
             0,
             w - (w / labels_in.size()) + cursor_size,
-            h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) - 2,
+            h - text_height(g_gr->styles().font_size(StyleManager::FontSize::kSlider), UI::FontSet::Face::kCondensed) - 2,
             0,
             labels_in.size() - 1,
             value_,
@@ -526,7 +526,7 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh1->render(as_condensed(labels[i], UI::Align::kCenter, UI_FONT_SIZE_SMALL - 2));
+		   UI::g_fh1->render(as_condensed(labels[i], UI::Align::kCenter, g_gr->styles().font_size(StyleManager::FontSize::kSlider)));
 		rendered_text->draw(
 		   dst, Vector2i(gap_1 + i * gap_n, get_h() - rendered_text->height()), UI::Align::kCenter);
 	}
@@ -544,7 +544,7 @@ void DiscreteSlider::layout() {
 	assert(labels.size());
 	slider.set_pos(Vector2i(w / (2 * labels.size()) - slider.cursor_size_ / 2, 0));
 	slider.set_size(w - (w / labels.size()) + slider.cursor_size_,
-	                h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) + 2);
+	                h - text_height(g_gr->styles().font_size(StyleManager::FontSize::kSlider), UI::FontSet::Face::kCondensed) + 2);
 	Panel::layout();
 }
 }

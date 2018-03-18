@@ -26,10 +26,11 @@
 #include <boost/format.hpp>
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 
 namespace {
 bool is_paragraph(const std::string& text) {
@@ -150,15 +151,15 @@ std::string as_richtext(const std::string& txt) {
 std::string as_tooltip(const std::string& txt) {
 	static boost::format f("<rt><p><font face=sans size=%i bold=1 color=%s>%s</font></p></rt>");
 
-	f % UI_FONT_SIZE_SMALL;
-	f % UI_FONT_TOOLTIP_CLR.hex_value();
+	f % g_gr->styles().font_size(StyleManager::FontSize::kNormal);
+	f % g_gr->styles().font_color(StyleManager::FontColor::kTooltip).hex_value();
 	f % txt;
 	return f.str();
 }
 
 std::string as_waresinfo(const std::string& txt) {
 	static boost::format f("<rt><p><font face=condensed size=10 bold=0 color=%s>%s</font></p></rt>");
-	f % UI_FONT_TOOLTIP_CLR.hex_value();
+	f % g_gr->styles().font_color(StyleManager::FontColor::kTooltip).hex_value();
 	f % txt;
 	return f.str();
 }
@@ -175,7 +176,8 @@ autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize
 	std::shared_ptr<const UI::RenderedText> result =
 	   UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
-		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
+		const int minimum_size = g_gr->styles().font_size(StyleManager::FontSize::kMinimum);
+		for (; result->width() > width && fontsize >= minimum_size; --fontsize) {
 			result = UI::g_fh1->render(
 			   as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
 		}
@@ -183,54 +185,3 @@ autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize
 	return result;
 }
 
-namespace UI {
-
-/**
- * This mirrors the horizontal alignment for RTL languages.
- *
- * Do not store this value as it is based on the global font setting.
- *
- * If 'checkme' is not empty, mirror the alignment if the first 20 characters contain an RTL
- * character. Otherwise, mirror if the current fontset is RTL.
- */
-Align mirror_alignment(Align alignment, const std::string& checkme) {
-	bool do_swap_alignment = checkme.empty() ? UI::g_fh1->fontset()->is_rtl() :
-	                                           i18n::has_rtl_character(checkme.c_str(), 20);
-	if (do_swap_alignment) {
-		switch (alignment) {
-		case Align::kLeft:
-			alignment = Align::kRight;
-			break;
-		case Align::kRight:
-			alignment = Align::kLeft;
-			break;
-		case Align::kCenter:
-			break;
-		}
-	}
-	return alignment;
-}
-
-/**
- * Align pt horizontally to match align based on width w.
- *
- * When correcting for align, we never move from pixel boundaries to
- * sub-pixels, because this might lead from pixel-perfect rendering to
- * subsampled rendering - this can lead to blurry texts. That is why we
- * never do float divisions in this function.
- */
-void correct_for_align(Align align, uint32_t w, Vector2i* pt) {
-
-	if (align == Align::kCenter)
-		pt->x -= w / 2;
-	else if (align == Align::kRight)
-		pt->x -= w;
-}
-
-/**
- * Adjust the y coordinate in 'point 'pt' to vertically center an element with height 'h'.
- */
-void center_vertically(uint32_t h, Vector2i* pt) {
-	pt->y -= h / 2;
-}
-}  // namespace UI

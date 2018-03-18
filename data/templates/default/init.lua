@@ -97,5 +97,27 @@ return {
       wui = {
          menu = { image = wui_button, color = wui_brown },
       }
+   },
+
+   -- Font sizes and colors
+   fonts = {
+      sizes = {
+         title = 22,    -- Big titles
+         normal = 14,   -- Default UI color
+         message = 12,  -- Message font size
+         slider = 11,   -- Slider font size
+         minimum = 6,   -- When autoresizing text to fit, don't go below this size
+      },
+      colors = {
+         foreground = {255, 255, 0}, -- Main UI color
+         disabled = {127, 127, 127}, -- Disabled interactive UI elements
+         warning = {255, 22, 22},    -- For highlighting warnings
+         tooltip = {255, 255, 0},    -- Tooltips
+         progress_bright = {255, 250, 170},      -- Progress bar text
+         progress_construction = {163, 144, 19}, -- Construction/Dismantle site progress
+         productivity_low = {187, 0, 0},         -- Low building productivity
+         productivity_medium = {255, 225, 30},   -- Medium building productivity
+         productivity_high = {0, 187, 0},        -- High building productivity
+      }
    }
 }

@@ -31,7 +31,6 @@
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
 #include "graphic/rendertarget.h"
-#include "graphic/text_constants.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/findbob.h"
@@ -1002,7 +1001,7 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
+		statistics_string = (boost::format("<font color=%s>%s</font>") % g_gr->styles().font_color(StyleManager::FontColor::kProductivityMedium).hex_value() %
 		                     statistics_string)
 		                       .str();
 	}
@@ -1072,7 +1071,7 @@ void Ship::send_message(Game& game,
 	const std::string rt_description =
 	   (boost::format("<div padding_r=10><p><img src=%s></p></div>"
 	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    picture % UI_FONT_SIZE_MESSAGE % description)
+	    picture % g_gr->styles().font_size(StyleManager::FontSize::kMessage) % description)
 	      .str();
 
 	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(

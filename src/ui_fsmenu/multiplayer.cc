@@ -20,7 +20,6 @@
 #include "ui_fsmenu/multiplayer.h"
 
 #include "base/i18n.h"
-#include "graphic/text_constants.h"
 #include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"

@@ -19,6 +19,8 @@ wl_library(graphic_align
   SRCS
     align.h
     align.cc
+  DEPENDS
+    base_geometry
 )
 
 wl_library(graphic_color
@@ -271,7 +273,6 @@ wl_library(graphic_fonthandler_legacy
     graphic_fonthandler
     graphic_surface
     graphic_text
-    graphic_text_constants
     graphic_text_layout
     graphic_wordwrap
     helper
@@ -289,22 +290,16 @@ wl_library(graphic_fonthandler
     graphic_text
 )
 
-wl_library(graphic_text_constants
-  SRCS
-    text_constants.h
-    text_constants.cc
-)
-
 wl_library(graphic_text_layout
   SRCS
     text_layout.cc
     text_layout.h
   DEPENDS
+    graphic
     graphic_align
     graphic_color
     graphic_surface
     graphic_text
-    graphic_text_constants
     graphic_fonthandler
 )
 
@@ -322,7 +317,6 @@ wl_library(graphic_wordwrap
     graphic_color
     graphic_fonthandler
     graphic_text
-    graphic_text_constants
     graphic_text_layout
 )
 
@@ -360,7 +354,6 @@ wl_library(graphic
     graphic_render_queue
     graphic_styles
     graphic_surface
-    graphic_text_layout
     io_filesystem
     io_stream
     logic_constants

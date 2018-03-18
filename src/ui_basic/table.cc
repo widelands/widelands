@@ -25,7 +25,6 @@
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "ui_basic/mouse_constants.h"
@@ -232,7 +231,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
 			const Column& column = columns_[i];
 			const int curw = column.width;
-			Align alignment = mirror_alignment(column.alignment);
+			Align alignment = UI::g_fh1->fontset()->mirror_alignment(column.alignment);
 
 			const Image* entry_picture = er.get_picture(i);
 			const std::string& entry_string = er.get_string(i);
@@ -298,7 +297,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
 			// this always on, e.g. for mixed language savegame filenames.
-			alignment = mirror_alignment(column.alignment, entry_string);
+			alignment = UI::g_fh1->fontset()->mirror_alignment(column.alignment, entry_string);
 
 			// Position the text according to alignment
 			switch (alignment) {

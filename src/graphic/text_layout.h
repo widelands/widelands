@@ -25,9 +25,10 @@
 #include "graphic/align.h"
 #include "graphic/color.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 
 /**
  * This function replaces some HTML entities in strings, e.g. %nbsp;.
@@ -39,13 +40,13 @@ void replace_entities(std::string* text);
   * Returns the exact width of the text rendered as editorfont for the given font size.
   * This function is inefficient; only call when we need the exact width.
   */
-int text_width(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL);
+int text_width(const std::string& text, int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal));
 
 /**
   * Returns the exact height of the text rendered for the given font size and face.
   * This function is inefficient; only call when we need the exact height.
   */
-int text_height(int ptsize = UI_FONT_SIZE_SMALL, UI::FontSet::Face face = UI::FontSet::Face::kSans);
+int text_height(int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal), UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 /**
  * Checks it the given string is RichText or not. Does not do validity checking.
@@ -64,24 +65,24 @@ std::string richtext_escape(const std::string& given_text);
  * of rich text which can be rendered.
  */
 std::string as_uifont(const std::string&,
-                      int ptsize = UI_FONT_SIZE_SMALL,
-                      const RGBColor& clr = UI_FONT_CLR_FG,
+                      int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
+                      const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
                       UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 // Same as as_aligned, but with the condensed font preselected.
 std::string as_condensed(const std::string& text,
                          UI::Align align = UI::Align::kLeft,
-                         int ptsize = UI_FONT_SIZE_SMALL,
-                         const RGBColor& clr = UI_FONT_CLR_FG);
+                         int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
+                         const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground));
 
 std::string as_editorfont(const std::string& text,
-                          int ptsize = UI_FONT_SIZE_SMALL,
-                          const RGBColor& clr = UI_FONT_CLR_FG);
+                          int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
+                          const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground));
 
 std::string as_aligned(const std::string& txt,
                        UI::Align align,
-                       int ptsize = UI_FONT_SIZE_SMALL,
-                       const RGBColor& clr = UI_FONT_CLR_FG,
+                       int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
+                       const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
                        UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 std::string as_richtext(const std::string&);
@@ -94,20 +95,13 @@ std::string as_message(const std::string& heading, const std::string& body);
   * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
   * wide, it will first use the condensed font face and then make the text
   * smaller until it fits 'width'. The resulting font size will not go below
-  * 'kMinimumFontSize'.
+  * 'StyleManager::FontSize::kMinimum'.
   */
 std::shared_ptr<const UI::RenderedText> autofit_ui_text(const std::string& text,
                                                         int width = 0,
-                                                        RGBColor color = UI_FONT_CLR_FG,
-                                                        int fontsize = UI_FONT_SIZE_SMALL);
+                                                        RGBColor color = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
+                                                        int fontsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal));
 
-namespace UI {
 
-Align mirror_alignment(Align alignment, const std::string& checkme = "");
-
-void center_vertically(uint32_t h, Vector2i* pt);
-void correct_for_align(Align, uint32_t w, Vector2i* pt);
-
-}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H

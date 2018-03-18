@@ -280,7 +280,7 @@ struct TextBuilder {
 			int32_t alignref_right = rti.width;
 
 			if (text_y < rti.height + images_height) {
-				if (mirror_alignment(richtext->get_image_align()) == UI::Align::kRight) {
+				if (UI::g_fh1->fontset()->mirror_alignment(richtext->get_image_align()) == UI::Align::kRight) {
 					alignref_right -= images_width + h_space;
 				} else {
 					// Note: center image alignment with text is not properly supported
@@ -291,7 +291,7 @@ struct TextBuilder {
 
 			int32_t textleft = 0;
 
-			switch (mirror_alignment(richtext->get_text_align())) {
+			switch (UI::g_fh1->fontset()->mirror_alignment(richtext->get_text_align())) {
 			case UI::Align::kRight:
 				textleft = alignref_right - int32_t(linewidth);
 				break;
@@ -371,7 +371,7 @@ void RichText::parse(const std::string& rtext) {
 		// Fix up the alignment
 		int32_t imagealigndelta = 0;
 
-		switch (mirror_alignment(text.richtext->get_image_align())) {
+		switch (UI::g_fh1->fontset()->mirror_alignment(text.richtext->get_image_align())) {
 		case UI::Align::kCenter:
 			imagealigndelta = (int32_t(m->width) - int32_t(text.images_width)) / 2;
 			break;

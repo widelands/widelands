@@ -28,7 +28,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 
@@ -99,7 +98,7 @@ void ProgressWindow::step(const std::string& description) {
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
+	   UI::g_fh1->render(as_uifont(description, g_gr->styles().font_size(StyleManager::FontSize::kNormal), PROGRESS_FONT_COLOR_FG));
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 

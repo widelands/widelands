@@ -30,7 +30,6 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/findbob.h"
 #include "logic/game.h"
@@ -394,7 +393,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
+	*s = (boost::format("<font color=%s>%s</font>") % g_gr->styles().font_color(StyleManager::FontColor::kProductivityMedium).hex_value() %
 	      // Line break to make Codecheck happy.
 	      *s)
 	        .str();

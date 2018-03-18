@@ -24,7 +24,6 @@
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
-#include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 
@@ -219,7 +218,7 @@ void Button::draw(RenderTarget& dst) {
 		//  Otherwise draw title string centered
 		std::shared_ptr<const UI::RenderedText> rendered_text =
 		   autofit_ui_text(title_, get_inner_w() - 2 * kButtonImageMargin,
-		                   is_monochrome ? UI_FONT_CLR_DISABLED : UI_FONT_CLR_FG);
+		                   is_monochrome ? g_gr->styles().font_color(StyleManager::FontColor::kDisabled) : g_gr->styles().font_color(StyleManager::FontColor::kForeground));
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.
 		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2,
 		                                  (get_h() - rendered_text->height()) / 2));
