@@ -380,8 +380,9 @@ private:
 	// buildings
 	bool basic_economy_established;
 
-	// id of iron_ore to identify iron mines in mines_per_type map
+	// id of iron_ore and iron as resource to identify iron mines in mines_per_type map
 	int32_t iron_ore_id = Widelands::INVALID_INDEX;
+	int32_t iron_resource_id = Widelands::INVALID_INDEX;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites

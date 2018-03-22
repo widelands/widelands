@@ -556,19 +556,18 @@ struct MineTypesObserver {
 	uint16_t unoccupied;
 };
 
-// bla bla NOCOM
+// This struct contains count of mineable fields per ore type
 struct MineFieldsObserver {
-	//MineFieldsObserver();
 
 	void zero();
-	void set(Widelands::DescriptionIndex, uint16_t);
 	void add(Widelands::DescriptionIndex);
 	void add_critical_ore(Widelands::DescriptionIndex);
 	bool has_critical_ore_fields();
 	uint16_t get(Widelands::DescriptionIndex);
 	uint8_t count_types();
 
-	private:
+private:
+	// This is the central information of the struct: ore with count of fields
 	std::map<Widelands::DescriptionIndex, uint16_t> stat;
 	std::set<Widelands::DescriptionIndex> critical_ores;
 };

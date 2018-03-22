@@ -322,8 +322,8 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 				inputs[27] = (ts_finished_count_ - ts_without_trainers_) * 2;
 				inputs[28] = general_score * 3;
 				inputs[29] = general_score;
-				inputs[30] = ((mines_per_type[iron_ore_id].in_construction +
-				               mines_per_type[iron_ore_id].finished) > 0) ?
+				inputs[30] = ((mines_per_type[iron_resource_id].in_construction +
+				               mines_per_type[iron_resource_id].finished) > 0) ?
 				                1 :
 				                -1;
 				inputs[31] = (player_statistics.get_player_power(pn) >
@@ -682,7 +682,7 @@ bool DefaultAI::check_trainingsites(uint32_t gametime) {
 			               1 :
 			               0;
 			inputs[2] = (mines_.size() < 3) ? -1 : 0;
-			inputs[3] = (mines_per_type[iron_ore_id].total_count() == 0) ? -1 : 0;
+			inputs[3] = (mines_per_type[iron_resource_id].total_count() == 0) ? -1 : 0;
 			inputs[4] = (player_statistics.get_player_power(pn) * 2 >
 			             player_statistics.get_visible_enemies_power(gametime)) ?
 			               -1 :
@@ -1006,7 +1006,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[12] = (scores[size - 1] > total_score / 3) ? -2 : 0;
 	inputs[13] =
 	   (player_statistics.get_enemies_max_land() < player_statistics.get_player_land(pn)) ? -1 : 0;
-	inputs[14] = (mines_per_type[iron_ore_id].total_count() == 0) ? +1 : 0;
+	inputs[14] = (mines_per_type[iron_resource_id].total_count() == 0) ? +1 : 0;
 	inputs[15] = (spots_ < kSpotsTooLittle) ? +1 : 0;
 	inputs[16] = +1;
 	inputs[17] = +2;
@@ -1121,11 +1121,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	inputs[57] =
 	   player_statistics.any_enemy_seen_lately(gametime) && (spots_ < kSpotsTooLittle) ? +2 : 0;
 	inputs[58] =
-	   ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ?
+	   ((mines_per_type[iron_resource_id].in_construction + mines_per_type[iron_resource_id].finished) == 0) ?
 	      +3 :
 	      0;
 	inputs[59] =
-	   ((mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) == 0) ?
+	   ((mines_per_type[iron_resource_id].in_construction + mines_per_type[iron_resource_id].finished) == 0) ?
 	      +1 :
 	      0;
 	inputs[60] = (expansion_type.get_expansion_type() == ExpansionMode::kEconomy) ? -2 : 0;
