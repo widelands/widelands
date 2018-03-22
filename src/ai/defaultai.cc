@@ -713,6 +713,7 @@ void DefaultAI::late_initialization() {
 				if (bo.outputs[0] == iron_ore_id) {
 					bo.set_is(BuildingAttribute::kIronMine);
 					mines_per_type[bo.mines].is_critical = true;
+					mine_fields_stat.add_critical_ore(bo.mines);
 				}
 			}
 
@@ -784,6 +785,7 @@ void DefaultAI::late_initialization() {
 					if (bo.type == BuildingObserver::Type::kMine) {
 						has_critical_mines = true;
 						mines_per_type[bo.mines].is_critical = true;
+						mine_fields_stat.add_critical_ore(bo.mines);
 					}
 				}
 			}
@@ -1211,6 +1213,21 @@ void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 		mineable_fields.pop_front();
 
 		i += 1;
+	}
+	// Updating overall statistics NOCOM
+	mine_fields_stat.zero();
+	for (uint32_t j = 0; j < mineable_fields.size(); j++) {
+	    if (mineable_fields[j]->coords.field->get_resources_amount() > 0) {
+		    mine_fields_stat.add(mineable_fields[j]->coords.field->get_resources());
+		    printf ("Now %d fields for ore: %d\n",
+				mine_fields_stat.get(mineable_fields[j]->coords.field->get_resources()),
+				mineable_fields[j]->coords.field->get_resources()
+		    );
+		   }
+	}
+
+	if (mine_fields_stat.count_types() == 4) {
+		assert(mine_fields_stat.has_critical_ore_fields());
 	}
 }
 
@@ -2218,6 +2235,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	inputs[50] = (bakeries_count_ <= 1);
 	inputs[51] = (numof_psites_in_constr > 8);
 	inputs[52] = (numof_psites_in_constr < 8);
+	inputs[53] = (mine_fields_stat.has_critical_ore_fields());
+	inputs[54] = (!mine_fields_stat.has_critical_ore_fields());
+	inputs[55] = (mine_fields_stat.count_types() == 4);
+	inputs[56] = (mine_fields_stat.count_types() != 4);
+
 
 	static int16_t needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
 	needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
@@ -2242,10 +2264,13 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	// Finding expansion policy
 	// Do we need basic resources?
 	// This is a replacement for simple count of mines
-	const int32_t virtual_mines = mines_.size() + mineable_fields.size() / 15;
+	//const int32_t virtual_mines = mines_.size() + mineable_fields.size() / 15;
 	const bool needs_fishers = resource_necessity_water_needed_ && fishers_count_ < 1;
 
-	if (virtual_mines < 4 || mines_per_type[iron_ore_id].total_count() < 1 || needs_fishers) {
+	printf ("DEBUG: has critical ore mines fields: %s, overall ore count: %d\n", (mine_fields_stat.has_critical_ore_fields()) ? "Y": "N",
+	mine_fields_stat.count_types());
+
+	if (!mine_fields_stat.has_critical_ore_fields() || mines_per_type[iron_ore_id].total_count() < 1 || needs_fishers) {
 		expansion_type.set_expantion_type(ExpansionMode::kResources);
 	} else {
 		// now we must decide if we go after spots or economy boost
@@ -2977,8 +3002,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				}
 
 				// be should rather have some mines
-				if (virtual_mines < 6) {
-					prio -= (6 - virtual_mines) * 7;
+				if (!mine_fields_stat.has_critical_ore_fields()) { //NOCOM - should be considered here?
+					prio -=  std::abs(management_data.get_military_number_at(156) / 2);
 				}
 
 				// take care about borders and enemies

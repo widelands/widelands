@@ -1238,11 +1238,22 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		inputs[114] = -10;
 	}
 
+	//NOCOM
+	if (!mine_fields_stat.has_critical_ore_fields()){
+		inputs[115] = -3;
+		inputs[116] = -6;
+		inputs[117] = -8;
+	}
+    inputs[118] = -mine_fields_stat.count_types();
+    inputs[119] = -mine_fields_stat.count_types() * 3;
+
+
 	for (int i = 0; i < 4 * kFNeuronBitSize; i = i + 1) {
 		if (inputs[i] < -35 || inputs[i] > 6) {
 			log("Warning check_building_necessity score on position %2d too high %2d\n", i, inputs[i]);
 		}
 	}
+
 
 	int32_t final_score = 0;
 	for (int i = 0; i < kFNeuronBitSize; i = i + 1) {

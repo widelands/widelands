@@ -335,6 +335,54 @@ MineTypesObserver::MineTypesObserver()
    : in_construction(0), finished(0), is_critical(false), unoccupied(0) {
 }
 
+//NOCOM
+	//void set(Widelands::DescriptionIndex, uint16_t);
+	//uint16_t get(Widelands::DescriptionIndex);
+	//uint8_t count_types();
+void MineFieldsObserver::set(const Widelands::DescriptionIndex idx, const uint16_t count) {
+	stat[idx] = count;
+}
+void MineFieldsObserver::zero() {
+	for (auto& material : stat){
+		material.second = 0;
+	}
+}
+void MineFieldsObserver::add(const Widelands::DescriptionIndex idx) {
+	stat[idx] += 1;
+}
+
+void MineFieldsObserver::add_critical_ore(const Widelands::DescriptionIndex idx) {
+	critical_ores.insert(idx);
+}
+
+bool MineFieldsObserver::has_critical_ore_fields() {
+    for (auto ore : critical_ores) {
+        if (get(ore) == 0) {
+			printf ("has_critical_ore_fields: No mines for ore: %d\n", ore);
+            return false;
+        }
+     }
+     return true;
+}
+
+uint16_t MineFieldsObserver::get(const Widelands::DescriptionIndex idx) {
+	if (stat.count(idx) == 0) {
+		return 0;
+	}
+	return stat[idx];
+}
+uint8_t MineFieldsObserver::count_types() {
+	uint16_t count = 0;
+	for (auto material : stat){
+		if (material.second > 0){
+			count += 1;
+		}
+	}
+	return count;
+
+}
+
+
 ExpansionType::ExpansionType() {
 	type = ExpansionMode::kResources;
 }

@@ -287,6 +287,7 @@ private:
 	Widelands::BuildingNecessity check_building_necessity(Widelands::BuildingObserver&, uint32_t);
 	void soldier_trained(const Widelands::TrainingSite&);
 	bool critical_mine_unoccupied(uint32_t);
+
 	SoldiersStatus soldier_status_;
 	int32_t vacant_mil_positions_average_;
 	uint16_t attackers_count_;
@@ -330,6 +331,8 @@ private:
 	// it will map mined material to observer
 	std::map<int32_t, Widelands::MineTypesObserver> mines_per_type;
 	std::vector<uint32_t> spots_avail;
+	Widelands::MineFieldsObserver mine_fields_stat;
+
 
 	// used for statistics of buildings
 	uint32_t numof_psites_in_constr;

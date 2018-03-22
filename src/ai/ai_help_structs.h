@@ -556,6 +556,23 @@ struct MineTypesObserver {
 	uint16_t unoccupied;
 };
 
+// bla bla NOCOM
+struct MineFieldsObserver {
+	//MineFieldsObserver();
+
+	void zero();
+	void set(Widelands::DescriptionIndex, uint16_t);
+	void add(Widelands::DescriptionIndex);
+	void add_critical_ore(Widelands::DescriptionIndex);
+	bool has_critical_ore_fields();
+	uint16_t get(Widelands::DescriptionIndex);
+	uint8_t count_types();
+
+	private:
+	std::map<Widelands::DescriptionIndex, uint16_t> stat;
+	std::set<Widelands::DescriptionIndex> critical_ores;
+};
+
 constexpr int kNeuronWeightLimit = 100;
 constexpr size_t kNeuronMaxPosition = 20;
 constexpr size_t kSecondParentProbability = 50;
