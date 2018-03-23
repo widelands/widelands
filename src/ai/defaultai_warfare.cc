@@ -1238,8 +1238,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		inputs[114] = -10;
 	}
 
-	//NOCOM
-	if (!mine_fields_stat.has_critical_ore_fields()){
+	if (!mine_fields_stat.has_critical_ore_fields()) {
 		inputs[115] = -3;
 		inputs[116] = -6;
 		inputs[117] = -8;

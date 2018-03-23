@@ -380,8 +380,7 @@ private:
 	// buildings
 	bool basic_economy_established;
 
-	// id of iron_ore and iron as resource to identify iron mines in mines_per_type map
-	int32_t iron_ore_id = Widelands::INVALID_INDEX;
+	// id of iron as resource to identify iron mines in mines_per_type map
 	int32_t iron_resource_id = Widelands::INVALID_INDEX;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
@@ -402,7 +401,6 @@ private:
 	std::vector<std::vector<int16_t>> AI_military_matrix;
 	std::vector<int16_t> AI_military_numbers;
 
-	bool has_critical_mines = false;
 	uint16_t buil_material_mines_count = 0;
 
 	bool ai_training_mode_ = false;
