@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-01-30 12:57+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-02-23 18:16+0000\n"
+"PO-Revision-Date: 2018-02-25 18:42+0000\n"
+"Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,7 +121,6 @@ msgid ""
 "blackroot."
 msgstr "Pěstitel rozrazilu potřebuje v průměru %1% na zasetí sklizení otýpky rozrazilu."
 
-#. TRANSLATORS: Purpose helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #. This include can be removed when all help texts have been defined.
@@ -1558,14 +1557,14 @@ msgstr "Slouží jako základna pro zámořské plavby a obchod. Také skladuje 
 #: ../../data/tribes/immovables/ashes/helptexts.lua:4
 #: ../../data/tribes/immovables/destroyed_building/helptexts.lua:4
 msgid "The remains of a destroyed building."
-msgstr ""
+msgstr "Pozůstatky zničené budovy."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_harvested/helptexts.lua:4
 #: ../../data/tribes/immovables/cornfield_harvested/helptexts.lua:4
 #: ../../data/tribes/immovables/field_harvested/helptexts.lua:4
 msgid "This field has been harvested."
-msgstr ""
+msgstr "Pole bylo sklizeno."
 
 #. TRANSLATORS: Helptext for a field
 #: ../../data/tribes/immovables/blackrootfield_medium/helptexts.lua:4
@@ -1611,17 +1610,17 @@ msgstr ""
 #: ../../data/tribes/immovables/reed_medium/helptexts.lua:4
 #: ../../data/tribes/immovables/reed_small/helptexts.lua:4
 msgid "This reed is growing."
-msgstr ""
+msgstr "Tento rákos roste."
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reed_ripe/helptexts.lua:4
 msgid "This reed is ready for harvesting."
-msgstr ""
+msgstr "Tento rákos je zralý ke sklizni."
 
 #. TRANSLATORS: Helptext for a reed field
 #: ../../data/tribes/immovables/reed_tiny/helptexts.lua:4
 msgid "This reed has just been planted."
-msgstr ""
+msgstr "Tento rákos byl právě zasazen."
 
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
@@ -1655,12 +1654,12 @@ msgstr ""
 #. TRANSLATORS: Helptext for a resource: Coal
 #: ../../data/tribes/immovables/resi_coal1/helptexts.lua:7
 msgid "There is only a little bit of coal here."
-msgstr ""
+msgstr "Je tu pouze trocha uhlí."
 
 #. TRANSLATORS: Helptext for a resource: Coal
 #: ../../data/tribes/immovables/resi_coal2/helptexts.lua:7
 msgid "There is a lot of coal here."
-msgstr ""
+msgstr "Je tu hodně uhlí."
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi_gold1/helptexts.lua:5
@@ -1676,7 +1675,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi_gold2/helptexts.lua:7
 msgid "There is a lot of gold here."
-msgstr ""
+msgstr "Je tu hodně zlata."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi_iron1/helptexts.lua:5
@@ -1687,17 +1686,17 @@ msgstr ""
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi_iron1/helptexts.lua:7
 msgid "There is only a little bit of iron here."
-msgstr ""
+msgstr "Je tu pouze trocha železa."
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi_iron2/helptexts.lua:7
 msgid "There is a lot of iron here."
-msgstr ""
+msgstr "Je tu hodně železa."
 
 #. TRANSLATORS: Helptext for a resource: No resources
 #: ../../data/tribes/immovables/resi_none/helptexts.lua:4
 msgid "There are no resources in the ground here."
-msgstr ""
+msgstr "Nejsou zde žádné suroviny."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:5
@@ -1722,7 +1721,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:12
 msgid "There is only a little bit of granite here."
-msgstr ""
+msgstr "Je tu pouze trocha žuly."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:15
@@ -1735,7 +1734,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi_stones1/helptexts.lua:17
 msgid "There is only a little bit of marble here."
-msgstr ""
+msgstr "Je tu pouze trocha mramoru."
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi_stones2/helptexts.lua:7
@@ -1745,12 +1744,12 @@ msgstr ""
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #: ../../data/tribes/immovables/resi_stones2/helptexts.lua:12
 msgid "There is a lot of granite here."
-msgstr ""
+msgstr "Je tu hodně žuly."
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi_stones2/helptexts.lua:17
 msgid "There is a lot of marble here."
-msgstr ""
+msgstr "Je tu hodně mramoru."
 
 #. TRANSLATORS: Helptext for a resource: Water
 #: ../../data/tribes/immovables/resi_water1/helptexts.lua:4
@@ -2450,15 +2449,15 @@ msgstr "%1% a %2%"
 #: ../../data/tribes/scripting/help/immovable_help.lua:49
 #: ../../data/tribes/scripting/help/immovable_help.lua:51
 msgid "Space required: "
-msgstr ""
+msgstr "Potřebné místo:"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:55
 msgid "Requirements"
-msgstr ""
+msgstr "Požadavky"
 
 #: ../../data/tribes/scripting/help/immovable_help.lua:66
 msgid "Preferred Terrains"
-msgstr ""
+msgstr "Preferovaný terén"
 
 #: ../../data/tribes/scripting/help/init.lua:64
 msgid "Introduction"

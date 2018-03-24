@@ -146,8 +146,8 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 
 			f.brightness = field_brightness(f.fcoords);
 
-			Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
-			f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr;
+			const Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
+			f.owner = owned_by != 0 ? egbase.get_player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
 			f.vision = 2;
 			f.roads = f.fcoords.field->get_roads();
