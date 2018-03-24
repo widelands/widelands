@@ -44,8 +44,7 @@ end
 --    Consists of a header colored text, followed by normal text and an image.
 --
 --    :arg size: size key. Expected values are "mine", "port", "small, "medium", "big", "none".
---    Any other key will be deemed as "unknown".
---    :returns: header followed by normal text and image.
+--    :returns: header followed by normal text and image if a space is required, or empty string.
 --
 function plot_size_line(size)
    local text = ""
