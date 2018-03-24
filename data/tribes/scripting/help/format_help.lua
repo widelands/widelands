@@ -70,11 +70,8 @@ function plot_size_line(size)
       -- TRANSLATORS: Space on the map required for building a building there
       text = _"Big plot"
       image = "images/wui/overlays/big.png"
-   elseif (size == "none") then
-      return ""
    else
-      -- TRANSLATORS: Space on the map required for building a building there
-      return p(join_sentences(_"Space required:", _"Unknown"))
+      return ""
    end
 
    return
