@@ -113,7 +113,9 @@ return {
          disabled = {127, 127, 127}, -- Disabled interactive UI elements
          warning = {255, 22, 22},    -- For highlighting warnings
          tooltip = {255, 255, 0},    -- Tooltips
-         progress_bright = {255, 250, 170},      -- Progress bar text
+         progresswindow_text = { 128, 128, 255 },    -- FS Progress bar text
+         progresswindow_background = { 64, 64, 0 },  -- FS Progress bar background
+         progress_bright = {255, 250, 170},          -- Progress bar text
          progress_construction = {163, 144, 19}, -- Construction/Dismantle site progress
          productivity_low = {187, 0, 0},         -- Low building productivity
          productivity_medium = {255, 225, 30},   -- Medium building productivity
@@ -127,6 +129,14 @@ return {
          plot_xtick = { 255, 0, 0 },         -- Statistics plot
          plot_yscale_label = { 60, 125, 0 }, -- Statistics plot
          plot_min_value = { 125, 0, 0 },     -- Statistics plot
+         heading_color_wui = { 209, 209, 209 },      -- Map and game details etc
+         heading_color_fsmenu = { 255, 255, 0 },     -- Map and game details etc
+         contents_color_wui = { 255, 255, 0 },       -- Map and game details etc
+         contents_color_fsmenu = { 209, 209, 209 },  -- Map and game details etc
+         game_setup_headings = { 0, 255, 0 },     -- Internet lobby and launch game
+         game_setup_mapname = { 255, 255, 127 },  -- Internet lobby and launch game
+         game_tip = { 33, 33, 27 },  -- Tips in progress screen
+         intro = { 192, 192, 128 },  -- Intro screen
       }
    }
 }

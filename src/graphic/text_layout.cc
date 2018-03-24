@@ -55,10 +55,9 @@ int text_width(const std::string& text, int ptsize) {
 }
 
 int text_height(int ptsize, UI::FontSet::Face face) {
-	return UI::g_fh1->render(as_aligned(UI::g_fh1->fontset()->representative_character(),
-	                                    UI::Align::kLeft,
-	                                    ptsize - UI::g_fh1->fontset()->size_offset(),
-	                                    RGBColor(0, 0, 0), face))
+	return UI::g_fh1
+	   ->render(as_aligned(UI::g_fh1->fontset()->representative_character(), UI::Align::kLeft,
+	                       ptsize - UI::g_fh1->fontset()->size_offset(), RGBColor(0, 0, 0), face))
 	   ->height();
 }
 
@@ -71,10 +70,10 @@ std::string richtext_escape(const std::string& given_text) {
 }
 
 std::string as_game_tip(const std::string& txt) {
-	static boost::format f(
-	   "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
-	   "<p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
+	static boost::format f("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
+	                       "<p align=center><font color=%s face=serif size=16>%s</font></p></rt>");
 
+	f % g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings);
 	f % txt;
 	return f.str();
 }
@@ -165,10 +164,16 @@ std::string as_waresinfo(const std::string& txt) {
 }
 
 std::string as_message(const std::string& heading, const std::string& body) {
-	return ((boost::format(
-	            "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
-	         heading % (is_paragraph(body) || is_div(body) ? body : "<p>" + body + "</p>"))
-	           .str());
+	return (
+	   (boost::format(
+	       "<rt><p><font size=18 bold=1 color=%s>%s<br></font></p><vspace gap=6>%s</rt>") %
+	    g_gr->styles().font_color(StyleManager::FontColor::kHeadingWui).hex_value() % heading %
+	    (is_paragraph(body) || is_div(body) ?
+	        body :
+	        (boost::format("<p><font color=%s>%s</font></p>") %
+	         g_gr->styles().font_color(StyleManager::FontColor::kContentsWui).hex_value() % body)
+	           .str()))
+	      .str());
 }
 
 std::shared_ptr<const UI::RenderedText>
@@ -184,4 +189,3 @@ autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize
 	}
 	return result;
 }
-

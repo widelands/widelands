@@ -32,9 +32,6 @@
 #include "io/filesystem/layered_filesystem.h"
 
 namespace {
-
-#define PROGRESS_FONT_COLOR_FG RGBColor(128, 128, 255)
-#define PROGRESS_FONT_COLOR_BG RGBColor(64, 64, 0)
 #define PROGRESS_STATUS_RECT_PADDING 2
 #define PROGRESS_STATUS_BORDER_X 2
 #define PROGRESS_STATUS_BORDER_Y 2
@@ -75,7 +72,7 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
 	border_rect.h += 2 * PROGRESS_STATUS_BORDER_Y;
 
-	rt.draw_rect(border_rect, PROGRESS_FONT_COLOR_FG);
+	rt.draw_rect(border_rect, g_gr->styles().font_color(StyleManager::FontColor::kProgressWindowText));
 }
 
 /// Set a picture to render in the background
@@ -95,10 +92,9 @@ void ProgressWindow::step(const std::string& description) {
 	RenderTarget& rt = *g_gr->get_render_target();
 	// always repaint the background first
 	draw(rt);
-
-	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
+	rt.fill_rect(label_rectangle_, g_gr->styles().font_color(StyleManager::FontColor::kProgressWindowBackground));
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_uifont(description, g_gr->styles().font_size(StyleManager::FontSize::kNormal), PROGRESS_FONT_COLOR_FG));
+	   UI::g_fh1->render(as_uifont(description, g_gr->styles().font_size(StyleManager::FontSize::kNormal), g_gr->styles().font_color(StyleManager::FontColor::kProgressWindowText)));
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 

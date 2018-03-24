@@ -44,16 +44,17 @@ std::string as_header_with_content(const std::string& header,
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format(
-		           "<p><font size=%i bold=1 shadow=1>%s%s <font color=D1D1D1>%s</font></font></p>") %
-		        g_gr->styles().font_size(StyleManager::FontSize::kNormal) % (is_first ? "" : "<vspace gap=9>") %
-		        (noescape ? header : richtext_escape(header)) %
+		           "<p><font size=%i bold=1 colosr=%s shadow=1>%s%s <font color=%>%s</font></font></p>") %
+		        g_gr->styles().font_size(StyleManager::FontSize::kNormal) % g_gr->styles().font_color(StyleManager::FontColor::kHeadingFsMenu).hex_value() % (is_first ? "" : "<vspace gap=9>") %
+		        (noescape ? header : richtext_escape(header)) % g_gr->styles().font_color(StyleManager::FontColor::kContentsFsMenu).hex_value() %
 		        (noescape ? content : richtext_escape(content)))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format(
-		           "<p><font size=%i>%s<font bold=1 color=D1D1D1>%s</font> %s</font></p>") %
-		        g_gr->styles().font_size(StyleManager::FontSize::kNormal) % (is_first ? "" : "<vspace gap=6>") %
-		        (noescape ? header : richtext_escape(header)) %
+		           "<p><font size=%i>%s<font bold=1 color=%s>%s</font><font color=%s>%s</font></font></p>") %
+		        g_gr->styles().font_size(StyleManager::FontSize::kNormal) % (is_first ? "" : "<vspace gap=6>")
+				  % g_gr->styles().font_color(StyleManager::FontColor::kHeadingWui).hex_value() %
+		        (noescape ? header : richtext_escape(header)) % g_gr->styles().font_color(StyleManager::FontColor::kContentsWui).hex_value() %
 		        (noescape ? content : richtext_escape(content)))
 		   .str();
 	}

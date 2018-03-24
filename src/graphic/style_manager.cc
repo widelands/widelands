@@ -145,6 +145,8 @@ void StyleManager::init() {
 	add_font_color(FontColor::kDisabled, *style_table->get_table("disabled"));
 	add_font_color(FontColor::kWarning, *style_table->get_table("warning"));
 	add_font_color(FontColor::kTooltip, *style_table->get_table("tooltip"));
+	add_font_color(FontColor::kProgressWindowText, *style_table->get_table("progresswindow_text"));
+	add_font_color(FontColor::kProgressWindowBackground, *style_table->get_table("progresswindow_background"));
 	add_font_color(FontColor::kProgressBright, *style_table->get_table("progress_bright"));
 	add_font_color(FontColor::kProgressConstruction, *style_table->get_table("progress_construction"));
 	add_font_color(FontColor::kProductivityLow, *style_table->get_table("productivity_low"));
@@ -159,8 +161,16 @@ void StyleManager::init() {
 	add_font_color(FontColor::kPlotXtick, *style_table->get_table("plot_xtick"));
 	add_font_color(FontColor::kPlotYscaleLabel, *style_table->get_table("plot_yscale_label"));
 	add_font_color(FontColor::kPlotMinValue, *style_table->get_table("plot_min_value"));
+	add_font_color(FontColor::kHeadingWui, *style_table->get_table("heading_color_wui"));
+	add_font_color(FontColor::kHeadingFsMenu, *style_table->get_table("heading_color_fsmenu"));
+	add_font_color(FontColor::kContentsWui, *style_table->get_table("contents_color_wui"));
+	add_font_color(FontColor::kContentsFsMenu, *style_table->get_table("contents_color_fsmenu"));
+	add_font_color(FontColor::kGameSetupHeadings, *style_table->get_table("game_setup_headings"));
+	add_font_color(FontColor::kGameSetupMapname, *style_table->get_table("game_setup_mapname"));
+	add_font_color(FontColor::kGameTip, *style_table->get_table("game_tip"));
+	add_font_color(FontColor::kIntro, *style_table->get_table("intro"));
 	check_completeness(
-	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kPlotMinValue));
+	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kIntro));
 }
 
 // Return functions for the styles

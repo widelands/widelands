@@ -276,7 +276,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			case 2:  // SUPERUSER
 			case 3:  // BOT
 				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
-				er.set_color(RGBColor(0, 255, 0));
+				er.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings));
 				er.set_picture(0, pic);
 				break;
 			default:
