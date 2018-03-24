@@ -38,20 +38,43 @@ function image_line(image, count, text)
 end
 
 -- RST
--- .. function:: plot_size_line(header, text, image)
+-- .. function:: plot_size_line(size)
 --
---    Creates a line of header colored text, followed by normal text and an image.
+--    Creates a line describing space required on the map.
+--    Consists of a header colored text, followed by normal text and an image.
 --
---    :arg t1: header text.
---    :arg t2: in-line paragraphs text.
---    :arg image: image to be aligned right.
+--    :arg size: size key. Expected values are "mine", "port", "small, "medium", "big", "none".
+--    Any other key will be deemed as "unknown".
 --    :returns: header followed by normal text and image.
 --
-function plot_size_line(header, text, image)
+function plot_size_line(size)
+   local text = ""
+   local image = ""
+   if (size == "mine") then
+      text = _"Mine plot"
+      image = "images/wui/overlays/mine.png"
+   elseif (size == "port") then
+      text = _"Port plot"
+      image = "images/wui/overlays/port.png"
+   elseif (size == "small") then
+      text = _"Small plot"
+      image = "images/wui/overlays/small.png"
+   elseif (size == "medium") then
+      text = _"Medium plot"
+      image = "images/wui/overlays/medium.png"
+   elseif (size == "big") then
+      text = _"Big plot"
+      image = "images/wui/overlays/big.png"
+   elseif (size == "none") then
+      return ""
+   else
+      return p(join_sentences(_"Space required:", _"Unknown"))
+   end
+
    return
       div("width=100%",
          div("float=right padding_l=6", p(img(image))) ..
-         p(join_sentences(font("size=13 color=D1D1D1", header), text))
+         p(join_sentences(font("size=13 color=D1D1D1", _"Space required:"), text))
       )
 end
 

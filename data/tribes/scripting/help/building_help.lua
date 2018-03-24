@@ -442,19 +442,11 @@ function building_help_building_section(building_description)
 
    -- Space required
    if (building_description.is_mine) then
-      result = result .. plot_size_line(_"Space required:",_"Mine plot","images/wui/overlays/mine.png")
+      result = result .. plot_size_line("mine")
    elseif (building_description.is_port) then
-      result = result .. plot_size_line(_"Space required:",_"Port plot","images/wui/overlays/port.png")
+      result = result .. plot_size_line("port")
    else
-      if (building_description.size == "small") then
-         result = result .. plot_size_line(_"Space required:",_"Small plot","images/wui/overlays/small.png")
-      elseif (building_description.size == "medium") then
-         result = result .. plot_size_line(_"Space required:",_"Medium plot","images/wui/overlays/medium.png")
-      elseif (building_description.size == "big") then
-         result = result .. plot_size_line(_"Space required:",_"Big plot","images/wui/overlays/big.png")
-      else
-         result = result .. p(_"Space required:" .. _"Unknown")
-      end
+      result = result .. plot_size_line(building_description.size)
    end
 
    -- Enhanced from
