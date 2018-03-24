@@ -54,7 +54,7 @@ int text_width(const std::string& text, int ptsize) {
 	   ->width();
 }
 
-int text_height(int ptsize, UI::FontSet::Face face) {
+int text_height(int ptsize, StyleManager::FontStyleInfo::Face face) {
 	return UI::g_fh1
 	   ->render(as_aligned(UI::g_fh1->fontset()->representative_character(), UI::Align::kLeft,
 	                       ptsize - UI::g_fh1->fontset()->size_offset(), RGBColor(0, 0, 0), face))
@@ -73,19 +73,19 @@ std::string as_game_tip(const std::string& txt) {
 	static boost::format f("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
 	                       "<p align=center><font color=%s face=serif size=16>%s</font></p></rt>");
 
-	f % g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings);
+	f % g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings).hex_value();
 	f % txt;
 	return f.str();
 }
 
 std::string
-as_uifont(const std::string& txt, int size, const RGBColor& clr, UI::FontSet::Face face) {
+as_uifont(const std::string& txt, int size, const RGBColor& clr, StyleManager::FontStyleInfo::Face face) {
 	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
 }
 
 std::string
 as_condensed(const std::string& text, UI::Align align, int ptsize, const RGBColor& clr) {
-	return as_aligned(text, align, ptsize, clr, UI::FontSet::Face::kCondensed);
+	return as_aligned(text, align, ptsize, clr, StyleManager::FontStyleInfo::Face::kCondensed);
 }
 
 std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
@@ -102,7 +102,7 @@ std::string as_aligned(const std::string& txt,
                        UI::Align align,
                        int ptsize,
                        const RGBColor& clr,
-                       UI::FontSet::Face face) {
+                       StyleManager::FontStyleInfo::Face face) {
 	std::string alignment = "left";
 	switch (align) {
 	case UI::Align::kCenter:
@@ -119,13 +119,13 @@ std::string as_aligned(const std::string& txt,
 	std::string font_face = "sans";
 
 	switch (face) {
-	case UI::FontSet::Face::kCondensed:
+	case StyleManager::FontStyleInfo::Face::kCondensed:
 		font_face = "condensed";
 		break;
-	case UI::FontSet::Face::kSerif:
+	case StyleManager::FontStyleInfo::Face::kSerif:
 		font_face = "serif";
 		break;
-	case UI::FontSet::Face::kSans:
+	case StyleManager::FontStyleInfo::Face::kSans:
 		font_face = "sans";
 		break;
 	}

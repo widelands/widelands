@@ -17,6 +17,10 @@ local wui_light =  {85, 63, 35}
 local wui_green =  {3, 15, 0}
 local wui_brown =  {32, 19, 8}
 
+local default_font_color = {255, 255, 0}
+local default_font_face = "sans"
+local default_font_size = 14
+
 -- These are the style definitions to be returned.
 -- Note: you have to keep all the keys intact, or Widelands will not be happy.
 return {
@@ -99,7 +103,56 @@ return {
       }
    },
 
-   -- Font sizes and colors
+   font_styles = {
+      -- Font sizes and colors
+      --[[
+         required: face, color, size;
+         optional bools: bold, italic, underline, shadow
+      ]]
+      -- Buttons
+      button = {
+         color = default_font_color,
+         face = default_font_face,
+         size = default_font_size,
+         bold = true,
+         shadow = true
+      },
+      -- Intro screen
+      intro = {
+         color = { 192, 192, 128 },
+         face = default_font_face,
+         size = default_font_size,
+         bold = true,
+         shadow = true
+      },
+      -- Game and Map info panels
+      info_panel_heading_fsmenu = {
+         color = { 255, 255, 0 },
+         face = default_font_face,
+         size = default_font_size,
+         bold = true,
+         shadow = true
+      },
+      info_panel_paragraph_fsmenu = {
+         color = { 209, 209, 209 },
+         face = default_font_face,
+         size = default_font_size,
+         shadow = true
+      },
+      info_panel_heading_wui = {
+         color = { 209, 209, 209 },
+         face = default_font_face,
+         size = default_font_size,
+         bold = true,
+      },
+      info_panel_paragraph_wui = {
+         color = { 255, 255, 0 },
+         face = default_font_face,
+         size = default_font_size,
+      },
+   },
+
+   -- NOCOM clean this up and remove
    fonts = {
       sizes = {
          title = 22,    -- Big titles
@@ -136,7 +189,7 @@ return {
          game_setup_headings = { 0, 255, 0 },     -- Internet lobby and launch game
          game_setup_mapname = { 255, 255, 127 },  -- Internet lobby and launch game
          game_tip = { 33, 33, 27 },  -- Tips in progress screen
-         intro = { 192, 192, 128 },  -- Intro screen
+         intro = { 192, 192, 128 }
       }
    }
 }

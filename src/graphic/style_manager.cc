@@ -21,18 +21,29 @@
 
 #include <memory>
 
+#include <boost/format.hpp>
+
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "scripting/lua_interface.h"
 
 namespace {
-// Read RGB color from LuaTable
+// Read RGB color from LuaTable NOCOM get rid
 std::unique_ptr<RGBColor> read_rgb_color(const LuaTable& table) {
 	std::vector<int> rgbcolor = table.array_entries<int>();
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
 	return std::unique_ptr<RGBColor>(new RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]));
+}
+
+// Read RGB color from LuaTable
+RGBColor read_rgb_color2(const LuaTable& table) {
+	std::vector<int> rgbcolor = table.array_entries<int>();
+	if (rgbcolor.size() != 3) {
+		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
+	}
+	return RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]);
 }
 
 // Read image filename and RGBA color from LuaTable
@@ -171,6 +182,15 @@ void StyleManager::init() {
 	add_font_color(FontColor::kIntro, *style_table->get_table("intro"));
 	check_completeness(
 	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kIntro));
+
+	element_table = table->get_table("font_styles");
+	add_font_style(FontStyle::kButton, *element_table, "button");
+	add_font_style(FontStyle::kInfoPanelHeadingFsMenu, *element_table, "info_panel_heading_fsmenu");
+	add_font_style(FontStyle::kInfoPanelParagraphFsMenu, *element_table, "info_panel_paragraph_fsmenu");
+	add_font_style(FontStyle::kInfoPanelHeadingWui, *element_table, "info_panel_heading_wui");
+	add_font_style(FontStyle::kInfoPanelParagraphWui, *element_table, "info_panel_paragraph_wui");
+	add_font_style(FontStyle::kIntro, *element_table, "intro");
+	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(FontStyle::kIntro));
 }
 
 // Return functions for the styles
@@ -202,6 +222,10 @@ const UI::PanelStyleInfo* StyleManager::dropdown_style(UI::PanelStyle style) con
 const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) const {
 	assert(scrollbarstyles_.count(style) == 1);
 	return scrollbarstyles_.at(style).get();
+}
+
+const StyleManager::FontStyleInfo& StyleManager::font_style(FontStyle style) const {
+	return *fontstyles_.at(style);
 }
 
 int StyleManager::font_size(const FontSize size) const {
@@ -242,4 +266,72 @@ void StyleManager::add_font_size(FontSize size, const LuaTable& table, const std
 
 void StyleManager::add_font_color(FontColor color, const LuaTable& table) {
 	font_colors_.emplace(std::make_pair(color, read_rgb_color(table)));
+}
+
+void StyleManager::add_font_style(FontStyle font_key, const LuaTable& table, const std::string& table_key) {
+	std::unique_ptr<LuaTable> style_table = table.get_table(table_key);
+	FontStyleInfo* font = new FontStyleInfo();
+	font->size = style_table->get_int("size");
+	if (font->size < 1) {
+		throw wexception("Font size too small for %s, must be at least 1!", table_key.c_str());
+	}
+	font->set_face(style_table->get_string("face"));
+	font->color = read_rgb_color2(*style_table->get_table("color"));
+	if (style_table->has_key("bold")) {
+		font->bold = style_table->get_bool("bold");
+	}
+	if (style_table->has_key("italic")) {
+		font->italic = style_table->get_bool("italic");
+	}
+	if (style_table->has_key("underline")) {
+		font->underline = style_table->get_bool("underline");
+	}
+	if (style_table->has_key("shadow")) {
+		font->underline = style_table->get_bool("shadow");
+	}
+	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<FontStyleInfo>(std::move(font))));
+}
+
+const std::string StyleManager::FontStyleInfo::face_to_string() const {
+	switch (face) {
+	case Face::kSans:
+		return "sans";
+	case Face::kSerif:
+		return "serif";
+	case Face::kCondensed:
+		return "condensed";
+	}
+	return "sans";
+}
+
+void StyleManager::FontStyleInfo::set_face(const std::string& init_face) {
+	if (init_face == "sans") {
+		face = Face::kSans;
+	} else if (init_face == "serif") {
+		face = Face::kSerif;
+	} else if (init_face == "condensed") {
+		face = Face::kCondensed;
+	} else {
+		throw wexception("Unknown font face '%s', expected 'sans', 'serif' or 'condensed'", init_face.c_str());
+	}
+}
+
+std::string StyleManager::FontStyleInfo::as_font_tag(const std::string& text) const {
+	static boost::format f("<font face=%s size=%d color=%s%s>%s</font>");
+	std::string optionals = "";
+	if (bold) {
+		optionals += " bold=1";
+	}
+	if (italic) {
+		optionals += " italic=1";
+	}
+	if (shadow) {
+		optionals += " shadow=1";
+	}
+	f % face_to_string();
+	f % size;
+	f % color.hex_value();
+	f % optionals;
+	f % text;
+	return f.str();
 }

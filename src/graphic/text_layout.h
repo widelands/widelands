@@ -46,7 +46,7 @@ int text_width(const std::string& text, int ptsize = g_gr->styles().font_size(St
   * Returns the exact height of the text rendered for the given font size and face.
   * This function is inefficient; only call when we need the exact height.
   */
-int text_height(int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal), UI::FontSet::Face face = UI::FontSet::Face::kSans);
+int text_height(int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal), StyleManager::FontStyleInfo::Face face = StyleManager::FontStyleInfo::Face::kSans);
 
 /**
  * Checks it the given string is RichText or not. Does not do validity checking.
@@ -67,7 +67,7 @@ std::string richtext_escape(const std::string& given_text);
 std::string as_uifont(const std::string&,
                       int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
                       const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
-                      UI::FontSet::Face face = UI::FontSet::Face::kSans);
+                      StyleManager::FontStyleInfo::Face face = StyleManager::FontStyleInfo::Face::kSans);
 
 // Same as as_aligned, but with the condensed font preselected.
 std::string as_condensed(const std::string& text,
@@ -83,7 +83,7 @@ std::string as_aligned(const std::string& txt,
                        UI::Align align,
                        int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
                        const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
-                       UI::FontSet::Face face = UI::FontSet::Face::kSans);
+                       StyleManager::FontStyleInfo::Face face = StyleManager::FontStyleInfo::Face::kSans);
 
 std::string as_richtext(const std::string&);
 std::string as_tooltip(const std::string&);

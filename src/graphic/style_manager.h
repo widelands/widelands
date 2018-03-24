@@ -24,12 +24,23 @@
 #include <memory>
 
 #include "graphic/panel_styles.h"
+#include "graphic/text/font_set.h"
 #include "scripting/lua_table.h"
 
 static const std::string kTemplateDir = "templates/default/";
 
 class StyleManager {
 public:
+	enum class FontStyle {
+		// Global
+		kButton,
+		kInfoPanelHeadingFsMenu,
+		kInfoPanelParagraphFsMenu,
+		kInfoPanelHeadingWui,
+		kInfoPanelParagraphWui,
+		kIntro
+	};
+
 	enum class FontSize {
 		kTitle,
 		kNormal,
@@ -76,6 +87,24 @@ public:
 		kIntro
 	};
 
+	struct FontStyleInfo {
+		enum class Face { kSans, kSerif, kCondensed };
+
+		FontStyleInfo() = default;
+
+		const std::string face_to_string() const;
+		void set_face(const std::string& face);
+		std::string as_font_tag(const std::string& text) const;
+
+		Face face;
+		RGBColor color;
+		int size;
+		bool bold;
+		bool italic;
+		bool underline;
+		bool shadow;
+	};
+
 	StyleManager() = default;
 	~StyleManager() = default;
 
@@ -91,6 +120,7 @@ public:
 
 	int font_size(const FontSize size) const;
 	const RGBColor& font_color(const FontColor color) const;
+	const FontStyleInfo& font_style(FontStyle style) const;
 
 private:
 	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;
@@ -100,6 +130,7 @@ private:
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_size(FontSize size, const LuaTable& table, const std::string& key);
 	void add_font_color(FontColor color, const LuaTable& table);
+	void add_font_style(FontStyle font, const LuaTable& table, const std::string& key);
 
 	std::map<UI::ButtonStyle, std::unique_ptr<const UI::PanelStyleInfo>> buttonstyles_;
 	std::map<UI::SliderStyle, std::unique_ptr<const UI::PanelStyleInfo>> sliderstyles_;
@@ -110,6 +141,7 @@ private:
 
 	std::map<FontSize, int> font_sizes_;
 	std::map<FontColor, std::unique_ptr<RGBColor>> font_colors_;
+	std::map<FontStyle, std::unique_ptr<FontStyleInfo>> fontstyles_;
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };
