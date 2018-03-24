@@ -21,8 +21,8 @@
 
 #include <boost/format.hpp>
 
-#include "chat/chat.h"
 #include "graphic/color.h"
+#include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
 #include "logic/player.h"
 
@@ -31,12 +31,9 @@ namespace {
 // Returns the hexcolor for the 'player'.
 std::string color(const int16_t playern) {
 	if ((playern >= 0) && playern < kMaxPlayers) {
-		const RGBColor& clr = kPlayerColors[playern];
-		char buf[sizeof("ffffff")];
-		snprintf(buf, sizeof(buf), "%.2x%.2x%.2x", clr.r, clr.g, clr.b);
-		return buf;
+		return kPlayerColors[playern].hex_value();
 	}
-	return "999999";
+	return g_gr->styles().font_color(StyleManager::FontColor::kChatSpectator).hex_value();
 }
 
 }  // namespace
@@ -104,7 +101,7 @@ std::string format_as_old_richtext(const ChatMessage& chat_message) {
 // Returns a richtext string that can be displayed to the user.
 std::string format_as_richtext(const ChatMessage& chat_message) {
 	const std::string& font_face = "serif";
-	std::string message = "<p><font color=33ff33 size=9>";
+	std::string message = (boost::format("<p><font color=%s size=9>") % g_gr->styles().font_color(StyleManager::FontColor::kChatMessage).hex_value()).str();
 
 	std::string sanitized = sanitize_message(chat_message);
 
@@ -147,8 +144,8 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 			message += sanitized.substr(3);
 		} else if (chat_message.sender.size()) {
 			message =
-			   (boost::format("%s bold=1>%s:</font><font size=14 face=%s shadow=1 color=eeeeee> %s") %
-			    message % sender_escaped % font_face % sanitized)
+			   (boost::format("%s bold=1>%s:</font><font size=14 face=%s shadow=1 color=%s %s") %
+			    message % sender_escaped % font_face % g_gr->styles().font_color(StyleManager::FontColor::kChatMe).hex_value() % sanitized)
 			      .str();
 		} else {
 			message += " bold=1>*** ";

@@ -50,6 +50,17 @@ public:
 		kProductivityLow,
 		kProductivityMedium,
 		kProductivityHigh,
+		// Chat
+		kChatMessage,
+		kChatMe,
+		kChatSpectator,
+		kChatLog,
+		// Statistics plot
+		kPlotAxisLine,
+		kPlotZeroLine,
+		kPlotXtick,
+		kPlotYscaleLabel,
+		kPlotMinValue,
 	};
 
 	StyleManager() = default;

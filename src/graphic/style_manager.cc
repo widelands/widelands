@@ -150,8 +150,17 @@ void StyleManager::init() {
 	add_font_color(FontColor::kProductivityLow, *style_table->get_table("productivity_low"));
 	add_font_color(FontColor::kProductivityMedium, *style_table->get_table("productivity_medium"));
 	add_font_color(FontColor::kProductivityHigh, *style_table->get_table("productivity_high"));
+	add_font_color(FontColor::kChatMessage, *style_table->get_table("chat_message"));
+	add_font_color(FontColor::kChatMe, *style_table->get_table("chat_me"));
+	add_font_color(FontColor::kChatSpectator, *style_table->get_table("chat_spectator"));
+	add_font_color(FontColor::kChatLog, *style_table->get_table("chat_log"));
+	add_font_color(FontColor::kPlotAxisLine, *style_table->get_table("plot_axis_line"));
+	add_font_color(FontColor::kPlotZeroLine, *style_table->get_table("plot_zero_line"));
+	add_font_color(FontColor::kPlotXtick, *style_table->get_table("plot_xtick"));
+	add_font_color(FontColor::kPlotYscaleLabel, *style_table->get_table("plot_yscale_label"));
+	add_font_color(FontColor::kPlotMinValue, *style_table->get_table("plot_min_value"));
 	check_completeness(
-	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kProductivityHigh));
+	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kPlotMinValue));
 }
 
 // Return functions for the styles

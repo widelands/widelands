@@ -118,6 +118,15 @@ return {
          productivity_low = {187, 0, 0},         -- Low building productivity
          productivity_medium = {255, 225, 30},   -- Medium building productivity
          productivity_high = {0, 187, 0},        -- High building productivity
+         chat_message = {51, 255, 51},       -- Chat message text color
+         chat_me = { 238, 238, 238 },        -- Color for /me messages
+         chat_spectator = { 153, 153, 153 }, -- Chat spectator player color
+         chat_log = { 221, 221, 221 },       -- Chat log messages color
+         plot_axis_line = { 0, 0, 0 },       -- Statistics plot
+         plot_zero_line = { 255, 255, 255 }, -- Statistics plot
+         plot_xtick = { 255, 0, 0 },         -- Statistics plot
+         plot_yscale_label = { 60, 125, 0 }, -- Statistics plot
+         plot_min_value = { 125, 0, 0 },     -- Statistics plot
       }
    }
 }

@@ -50,10 +50,8 @@ const uint32_t time_in_ms[] = {
    15 * kMinutes, 30 * kMinutes, 1 * kHours, 2 * kHours, 5 * kHours, 10 * kHours, 30 * kHours};
 
 const char BG_PIC[] = "images/wui/plot_area_bg.png";
-const RGBColor kAxisLineColor(0, 0, 0);
 constexpr int kAxisLinesWidth = 2;
 constexpr int kPlotLinesWidth = 3;
-const RGBColor kZeroLineColor(255, 255, 255);
 
 enum class Units {
 	kMinutesNarrow,
@@ -66,14 +64,14 @@ enum class Units {
 
 std::string ytick_text_style(const std::string& text, const RGBColor& clr) {
 	static boost::format f(
-	   "<rt keep_spaces=1><p><font face=condensed size=13 color=%02x%02x%02x>%s</font></p></rt>");
-	f % int(clr.r) % int(clr.g) % int(clr.b);
+	   "<rt keep_spaces=1><p><font face=condensed size=13 color=%s>%s</font></p></rt>");
+	f % clr.hex_value();
 	f % text;
 	return f.str();
 }
 
 std::string xtick_text_style(const std::string& text) {
-	return ytick_text_style(text, RGBColor(255, 0, 0));
+	return ytick_text_style(text, g_gr->styles().font_color(StyleManager::FontColor::kPlotXtick));
 }
 
 /**
@@ -184,7 +182,7 @@ void draw_value(const std::string& value,
 
 uint32_t calc_plot_x_max_ticks(int32_t plot_width) {
 	// Render a number with 3 digits (maximal length which should appear)
-	return plot_width / UI::g_fh1->render(ytick_text_style(" -888 ", kAxisLineColor))->width();
+	return plot_width / UI::g_fh1->render(ytick_text_style(" -888 ", RGBColor(0, 0, 0)))->width();
 }
 
 int calc_slider_label_width(const std::string& label) {
@@ -200,6 +198,8 @@ void draw_diagram(uint32_t time_ms,
                   const uint32_t inner_h,
                   const float xline_length,
                   RenderTarget& dst) {
+	const RGBColor& axis_line_color = g_gr->styles().font_color(StyleManager::FontColor::kPlotAxisLine);
+
 	uint32_t how_many_ticks, max_x;
 
 	Units unit = get_suggested_unit(time_ms, true);
@@ -234,7 +234,7 @@ void draw_diagram(uint32_t time_ms,
 	// X Axis
 	dst.draw_line_strip({Vector2f(kSpacing, inner_h - kSpaceBottom),
 	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
-	                    kAxisLineColor, kAxisLinesWidth);
+	                    axis_line_color, kAxisLinesWidth);
 	// Arrow
 	dst.draw_line_strip(
 	   {
@@ -242,12 +242,12 @@ void draw_diagram(uint32_t time_ms,
 	      Vector2f(kSpacing, inner_h - kSpaceBottom),
 	      Vector2f(kSpacing + 5, inner_h - kSpaceBottom + 3),
 	   },
-	   kAxisLineColor, kAxisLinesWidth);
+	   axis_line_color, kAxisLinesWidth);
 
 	//  Y Axis
 	dst.draw_line_strip({Vector2f(inner_w - kSpaceRight, kSpacing),
 	                     Vector2f(inner_w - kSpaceRight, inner_h - kSpaceBottom)},
-	                    kAxisLineColor, kAxisLinesWidth);
+	                    axis_line_color, kAxisLinesWidth);
 	//  No Arrow here, since this doesn't continue.
 
 	float sub = (xline_length - kSpaceLeftOfLabel) / how_many_ticks;
@@ -256,7 +256,7 @@ void draw_diagram(uint32_t time_ms,
 	for (uint32_t i = 0; i <= how_many_ticks; ++i) {
 		dst.draw_line_strip({Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom),
 		                     Vector2f(static_cast<int32_t>(posx), inner_h - kSpaceBottom + 3)},
-		                    kAxisLineColor, kAxisLinesWidth);
+		                    axis_line_color, kAxisLinesWidth);
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
@@ -274,11 +274,11 @@ void draw_diagram(uint32_t time_ms,
 	//  draw yticks, one at full, one at half
 	dst.draw_line_strip(
 	   {Vector2f(inner_w - kSpaceRight, kSpacing), Vector2f(inner_w - kSpaceRight - 3, kSpacing)},
-	   kAxisLineColor, kAxisLinesWidth);
+	   axis_line_color, kAxisLinesWidth);
 	dst.draw_line_strip(
 	   {Vector2f(inner_w - kSpaceRight, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2),
 	    Vector2f(inner_w - kSpaceRight - 3, kSpacing + ((inner_h - kSpaceBottom) - kSpacing) / 2)},
-	   kAxisLineColor, kAxisLinesWidth);
+	   axis_line_color, kAxisLinesWidth);
 
 	//  print the used unit
 	std::shared_ptr<const UI::RenderedText> xtick =
@@ -483,7 +483,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
 
 	//  print the maximal value into the top right corner
-	draw_value(yscale_label, RGBColor(60, 125, 0),
+	draw_value(yscale_label, g_gr->styles().font_color(StyleManager::FontColor::kPlotYscaleLabel),
 	           Vector2i(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 }
 
@@ -682,13 +682,13 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
 	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
-	                    kZeroLineColor, kPlotLinesWidth);
+	                    g_gr->styles().font_color(StyleManager::FontColor::kPlotZeroLine), kPlotLinesWidth);
 
 	// Draw data and diagram
 	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
 
 	// Print the min value
-	draw_value((boost::format("-%u") % (highest_scale_)).str(), RGBColor(125, 0, 0),
+	draw_value((boost::format("-%u") % (highest_scale_)).str(), g_gr->styles().font_color(StyleManager::FontColor::kPlotMinValue),
 	           Vector2i(get_inner_w() - kSpaceRight - 3, get_inner_h() - kSpacing - 23), dst);
 }
 
