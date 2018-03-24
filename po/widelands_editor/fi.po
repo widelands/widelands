@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
 # Jukka Pakarinen, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:28+0000\n"
+"POT-Creation-Date: 2018-03-24 09:42+0000\n"
+"PO-Revision-Date: 2018-03-24 12:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -217,4 +218,4 @@ msgstr "Puita ei tule kasvamaan täällä."
 #. tree.
 #: ../../data/scripting/editor/tree_help.lua:19
 msgid "Preferred terrains"
-msgstr "Suositellut maastot "
+msgstr "Suositellut maastot"
