@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:18+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-03-10 07:34+0000\n"
+"PO-Revision-Date: 2018-03-20 17:31+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr "Widelands pelin lisenssi"
 
 #: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2018 Widelands-kehittäjät."
 
 #: ../../data/txts/LICENSE.lua:11
 msgid ""
@@ -530,7 +530,7 @@ msgstr "Useimmat laajennetut rakennukset tarvitsevat kokeneita työläisiä. Äl
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "Kartan muokkaus- ja muita ohjeita sekä lyhyt johdanto löytyy wikisivulta osoiteesta %s."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -592,7 +592,7 @@ msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr ""
+msgstr "Voit sijoittaa suuren rakennuksen mihin tahansa solmukohtaan, johon voisit sijoittaa keskisuuren rakennuksen, jos lännen, luoteen ja koillisen suunnalla ei ole esinettä tai viljelykelvotonta maata."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -636,7 +636,7 @@ msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeutt
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "Kysymyksiä mielessä? Vastauksia voit löytää FAQ sivuilta eli usein kysytyistä kysymyksistä, wikistä ja yhteisömme keskustelupalstoilta osoitteessa %s."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
@@ -757,4 +757,4 @@ msgstr "Jos peli sattuisi kaatumaan, älä hätäänny! Peli tallennetaan automa
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr ""
+msgstr "Ovatko tietokonevastustajamme liian tylsiä? Vieraile verkkosivuillamme osoitteessa %s ja tapaa muita pelaajia pelataksesi verkossa."

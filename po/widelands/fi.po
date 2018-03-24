@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:19+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-03-10 07:34+0000\n"
+"PO-Revision-Date: 2018-03-18 18:24+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,13 +25,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/scripting/format_scenario.lua:12
-#: ../../data/scripting/richtext_scenarios.lua:34
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "\"%s\""
 
 #: ../../data/scripting/format_scenario.lua:40
-#: ../../data/scripting/richtext_scenarios.lua:85
+#: ../../data/scripting/richtext_scenarios.lua:90
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Uusi Tavoite"
@@ -39,16 +39,16 @@ msgstr[1] "Uudet Tavoitteet"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:12 ../../data/scripting/richtext.lua:38
-#: ../../src/base/i18n.cc:333
+#: ../../data/scripting/formatting.lua:12
+#: ../../data/scripting/richtext.lua:534 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s ja %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:14 ../../data/scripting/richtext.lua:40
-#: ../../src/base/i18n.cc:337
+#: ../../data/scripting/formatting.lua:14
+#: ../../data/scripting/richtext.lua:536 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s tai %2$s"
@@ -58,17 +58,17 @@ msgstr "%1$s tai %2$s"
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:16
-#: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:42
-#: ../../data/scripting/richtext.lua:47 ../../src/base/i18n.cc:341
-#: ../../src/base/i18n.cc:350
+#: ../../data/scripting/formatting.lua:21
+#: ../../data/scripting/richtext.lua:538 ../../data/scripting/richtext.lua:543
+#: ../../src/base/i18n.cc:341 ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:18 ../../data/scripting/richtext.lua:44
-#: ../../src/base/i18n.cc:345
+#: ../../data/scripting/formatting.lua:18
+#: ../../data/scripting/richtext.lua:540 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s ja %2$s"
@@ -102,10 +102,15 @@ msgstr "Joillekin aloitusrakennuksistasi ei ollut tarpeeksi tilaa ja niitä ei r
 msgid "Not enough space"
 msgstr "Ei tarpeeksi tilaa"
 
+#: ../../data/scripting/messages.lua:50 ../../data/scripting/messages.lua:52
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
+msgid "Status"
+msgstr "Tila"
+
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../data/scripting/richtext.lua:459
+#: ../../data/scripting/richtext.lua:505
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
@@ -1831,7 +1836,7 @@ msgstr "Viestinlähetys epäonnistui. Yrititkö lähettää yksityisviestin?"
 
 #: ../../src/network/internet_gaming.cc:815
 msgid "Private messages to IRC users are not supported."
-msgstr ""
+msgstr "Yksityisviestit IRC käyttäjille ei ole tuettu."
 
 #: ../../src/network/internet_gaming.cc:892
 msgid "Conversion error"
@@ -3156,7 +3161,7 @@ msgstr "Rakenna pieni rakennus"
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build big building"
-msgstr ""
+msgstr "Rakenna suuri rakennus"
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
@@ -3281,10 +3286,6 @@ msgstr "Titteli"
 msgctxt "message"
 msgid "Type"
 msgstr "Tyyppi"
-
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
-msgid "Status"
-msgstr "Tila"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time

@@ -12,14 +12,14 @@
 # Lucía Pradillos <dreamers_88@hotmail.com>, 2015
 # Madkat Here, 2015-2017
 # Raul Ferriz <raul.ferriz@gmail.com>, 2009
-# Thadah D. Denyse <juchuf@gmail.com>, 2017
+# Thadah D. Denyse <juchuf@gmail.com>, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:19+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-03-10 07:34+0000\n"
+"PO-Revision-Date: 2018-03-12 15:25+0000\n"
+"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,13 +28,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/scripting/format_scenario.lua:12
-#: ../../data/scripting/richtext_scenarios.lua:34
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:40
-#: ../../data/scripting/richtext_scenarios.lua:85
+#: ../../data/scripting/richtext_scenarios.lua:90
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Nuevo Objetivo"
@@ -42,16 +42,16 @@ msgstr[1] "Nuevos Objetivos"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:12 ../../data/scripting/richtext.lua:38
-#: ../../src/base/i18n.cc:333
+#: ../../data/scripting/formatting.lua:12
+#: ../../data/scripting/richtext.lua:534 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s y %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:14 ../../data/scripting/richtext.lua:40
-#: ../../src/base/i18n.cc:337
+#: ../../data/scripting/formatting.lua:14
+#: ../../data/scripting/richtext.lua:536 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s o %2$s"
@@ -61,17 +61,17 @@ msgstr "%1$s o %2$s"
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:16
-#: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:42
-#: ../../data/scripting/richtext.lua:47 ../../src/base/i18n.cc:341
-#: ../../src/base/i18n.cc:350
+#: ../../data/scripting/formatting.lua:21
+#: ../../data/scripting/richtext.lua:538 ../../data/scripting/richtext.lua:543
+#: ../../src/base/i18n.cc:341 ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:18 ../../data/scripting/richtext.lua:44
-#: ../../src/base/i18n.cc:345
+#: ../../data/scripting/formatting.lua:18
+#: ../../data/scripting/richtext.lua:540 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s y %2$s"
@@ -87,7 +87,7 @@ msgstr "%1% (%2%)"
 #: ../../data/scripting/help.lua:48
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
 #: ../../data/scripting/infrastructure.lua:168
@@ -105,14 +105,19 @@ msgstr "Algunos de tus edificios iniciales no tenían suficiente espacio y no fu
 msgid "Not enough space"
 msgstr "No hay espacio suficiente"
 
+#: ../../data/scripting/messages.lua:50 ../../data/scripting/messages.lua:52
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
+msgid "Status"
+msgstr "Estado"
+
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../data/scripting/richtext.lua:459
+#: ../../data/scripting/richtext.lua:505
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -251,7 +256,7 @@ msgstr "Cargando tribus"
 #: ../../src/wui/interactive_player.cc:165
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Main menu"
-msgstr ""
+msgstr "Menú principal"
 
 #: ../../src/editor/editorinteractive.cc:82
 #: ../../src/editor/ui_menus/tool_menu.cc:45
@@ -260,7 +265,7 @@ msgstr "Herramientas"
 
 #: ../../src/editor/editorinteractive.cc:86
 msgid "Tool size"
-msgstr ""
+msgstr "Tamaño de herramienta"
 
 #: ../../src/editor/editorinteractive.cc:90
 #: ../../src/ui_fsmenu/launch_mpg.cc:145
@@ -271,19 +276,19 @@ msgstr "Jugadores"
 #: ../../src/wui/interactive_player.cc:181
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show building spaces (on/off)"
-msgstr ""
+msgstr "Mostrar zonas de construcción (sí/no)"
 
 #: ../../src/editor/editorinteractive.cc:102
 msgid "Show immovables (on/off)"
-msgstr ""
+msgstr "Mostrar inamovibles (sí/no)"
 
 #: ../../src/editor/editorinteractive.cc:106
 msgid "Show animals (on/off)"
-msgstr ""
+msgstr "Mostrar animales (sí/no)"
 
 #: ../../src/editor/editorinteractive.cc:110
 msgid "Show resources (on/off)"
-msgstr ""
+msgstr "Mostrar recursos (sí/no)"
 
 #: ../../src/editor/editorinteractive.cc:117
 #: ../../src/wui/interactive_player.cc:177
@@ -312,7 +317,7 @@ msgstr "Ayuda"
 
 #: ../../src/editor/editorinteractive.cc:166
 msgid "Unsupported Format"
-msgstr ""
+msgstr "Formato no soportado"
 
 #: ../../src/editor/editorinteractive.cc:167
 #, c-format
@@ -608,7 +613,7 @@ msgstr "Escenarios Multijugador"
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:224
 #, c-format
 msgid "Current directory: %s"
-msgstr ""
+msgstr "Directorio actual: %s"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:68
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:60
@@ -3284,10 +3289,6 @@ msgstr "Título"
 msgctxt "message"
 msgid "Type"
 msgstr "Tipo"
-
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
-msgid "Status"
-msgstr "Estado"
 
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time
