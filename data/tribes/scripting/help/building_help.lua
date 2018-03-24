@@ -15,24 +15,6 @@ include "tribes/scripting/help/format_help.lua"
 --  =======================================================
 
 -- RST
--- .. function:: building_section_line(header, text, image)
---
---    Creates a line of h3 formatted text followed by normal text and an image.
---
---    :arg t1: header text.
---    :arg t2: in-line paragraphs text.
---    :arg image: image to be aligned right.
---    :returns: header followed by normal text and image.
---
-function building_section_line(header, text, image)
-   return
-      div("width=100%",
-         div("width=50%", p_font("size=13 color=D1D1D1", vspace(6) .. text .. space(6))) ..
-         div("width=*", p("align=right", vspace(6) .. img(image) .. vspace(12)))
-      )
-end
-
--- RST
 -- .. function:: dependencies_basic(images[, text = nil])
 --
 --    Creates a dependencies line of any length.
@@ -460,16 +442,16 @@ function building_help_building_section(building_description)
 
    -- Space required
    if (building_description.is_mine) then
-      result = result .. building_section_line(_"Space required:",_"Mine plot","images/wui/overlays/mine.png")
+      result = result .. plot_size_line(_"Space required:",_"Mine plot","images/wui/overlays/mine.png")
    elseif (building_description.is_port) then
-      result = result .. building_section_line(_"Space required:",_"Port plot","images/wui/overlays/port.png")
+      result = result .. plot_size_line(_"Space required:",_"Port plot","images/wui/overlays/port.png")
    else
       if (building_description.size == "small") then
-         result = result .. building_section_line(_"Space required:",_"Small plot","images/wui/overlays/small.png")
+         result = result .. plot_size_line(_"Space required:",_"Small plot","images/wui/overlays/small.png")
       elseif (building_description.size == "medium") then
-         result = result .. building_section_line(_"Space required:",_"Medium plot","images/wui/overlays/medium.png")
+         result = result .. plot_size_line(_"Space required:",_"Medium plot","images/wui/overlays/medium.png")
       elseif (building_description.size == "big") then
-         result = result .. building_section_line(_"Space required:",_"Big plot","images/wui/overlays/big.png")
+         result = result .. plot_size_line(_"Space required:",_"Big plot","images/wui/overlays/big.png")
       else
          result = result .. p(_"Space required:" .. _"Unknown")
       end

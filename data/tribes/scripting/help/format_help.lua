@@ -37,6 +37,24 @@ function image_line(image, count, text)
       )
 end
 
+-- RST
+-- .. function:: plot_size_line(header, text, image)
+--
+--    Creates a line of header colored text, followed by normal text and an image.
+--
+--    :arg t1: header text.
+--    :arg t2: in-line paragraphs text.
+--    :arg image: image to be aligned right.
+--    :returns: header followed by normal text and image.
+--
+function plot_size_line(header, text, image)
+   return
+      div("width=100%",
+         div("float=right padding_l=6", p(img(image))) ..
+         p(join_sentences(font("size=13 color=D1D1D1", header), text))
+      )
+end
+
 
 --  =======================================================
 --  ********** Helper functions for dependencies **********
