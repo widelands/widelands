@@ -20,4 +20,3 @@ port_space = map:get_field(210, 10)
 
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"
-

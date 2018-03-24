@@ -38,7 +38,7 @@ tribes:new_productionsite_type {
    working_positions = {
       frisians_beekeeper = 1
    },
-   
+
    outputs = {
       "honey"
    },
