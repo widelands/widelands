@@ -1,0 +1,13 @@
+# Automatically created by Widelands bzr8439[frisians] (Release)
+
+[global]
+packet_version="1"
+map_w="208"
+map_h="208"
+nr_players="3"
+name=_"An Icy Welcome"
+author="Nordfriese"
+descr=_"Reebaud and his tribe have arrived in the North. But their arrival between the frozen steppes and the snow-covered mountains is less than welcome…"
+hint=
+background="campaigns/fri02.wmf/pics/background.jpg"
+tags="unbalanced"
