@@ -160,7 +160,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	std::cout << _(" --verbose            Enable verbose debug messages") << endl << endl;
 	std::cout << _(" --help               Show this help") << endl << endl;
 	std::cout << _("Bug reports? Suggestions? Check out the project website:\n"
-	               "        https://launchpad.net/widelands\n\n"
+	               "        https://wl.widelands.org/\n\n"
 	               "Hope you enjoy this game!")
 	          << endl;
 }

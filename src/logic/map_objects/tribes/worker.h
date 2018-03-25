@@ -76,11 +76,7 @@ public:
 	explicit Worker(const WorkerDescr&);
 	~Worker() override;
 
-	Player& owner() const {
-		assert(get_owner());
-		return *get_owner();
-	}
-	PlayerImmovable* get_location(EditorGameBase& egbase) {
+	PlayerImmovable* get_location(const EditorGameBase& egbase) const {
 		return location_.get(egbase);
 	}
 	OPtr<PlayerImmovable> get_location() const {

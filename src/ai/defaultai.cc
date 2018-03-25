@@ -647,6 +647,10 @@ void DefaultAI::late_initialization() {
 		bo.expansion_type = bh.is_expansion_type();
 		bo.fighting_type = bh.is_fighting_type();
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
+		bo.requires_supporters = bh.requires_supporters();
+		if (bo.requires_supporters) {
+			log(" %d: %s strictly requires supporters\n", player_number(), bo.name);
+		}
 		bo.prohibited_till = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after = bh.get_forced_after() * 1000;        // value in conf is in seconds
 		if (bld.get_isport()) {
@@ -664,15 +668,8 @@ void DefaultAI::late_initialization() {
 			bo.set_is(BuildingAttribute::kRanger);
 		}
 		// Is total count of this building limited by AI mode?
-		if (type_ == Widelands::AiType::kVeryWeak && bh.get_very_weak_ai_limit() >= 0) {
-			bo.cnt_limit_by_aimode = bh.get_very_weak_ai_limit();
-			log(" %d: AI 'very weak' mode: applying limit %d building(s) for %s\n", player_number(),
-			    bo.cnt_limit_by_aimode, bo.name);
-		}
-		if (type_ == Widelands::AiType::kWeak && bh.get_weak_ai_limit() >= 0) {
-			bo.cnt_limit_by_aimode = bh.get_weak_ai_limit();
-			log(" %d: AI 'weak' mode: applying limit %d building(s) for %s\n", player_number(),
-			    bo.cnt_limit_by_aimode, bo.name);
+		if (bh.get_ai_limit(type_) >= 0) {
+			bo.cnt_limit_by_aimode = bh.get_ai_limit(type_);
 		}
 
 		// Read all interesting data from ware producing buildings
@@ -1305,8 +1302,13 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.unowned_buildable_spots_nearby =
 		   map.find_fields(Area<FCoords>(field.coords, kBuildableSpotsCheckArea),
 		                   &found_buildable_fields, find_unowned_buildable);
-		// Now iterate over fields to get nearest one
+		// Now iterate over fields to collect statistics
 		for (auto& coords : found_buildable_fields) {
+			// We are not interested in blocked fields
+			if (blocked_fields.is_blocked(coords)) {
+				continue;
+			}
+			// And now looking for nearest field
 			const uint32_t cur_distance = map.calc_distance(coords, field.coords);
 			if (cur_distance < field.nearest_buildable_spot_nearby) {
 				field.nearest_buildable_spot_nearby = cur_distance;
@@ -1695,7 +1697,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.inland = true;
 	}
 
-	const uint8_t score_parts_size = 60;
+	const uint8_t score_parts_size = 64;
 	int32_t score_parts[score_parts_size] = {0};
 	if (field.enemy_owned_land_nearby) {
 		score_parts[0] = 3 *
@@ -1874,6 +1876,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	                     5 * field.unowned_portspace_vicinity_nearby, kAbsValue);
 	score_parts[59] = (field.unowned_portspace_vicinity_nearby) ?
 	                     10 * std::abs(management_data.get_military_number_at(31)) :
+	                     0;
+	score_parts[60] = 3 *
+	                  management_data.neuron_pool[21].get_result_safe(
+	                     20 - field.nearest_buildable_spot_nearby, kAbsValue);
+	score_parts[61] = (field.nearest_buildable_spot_nearby < 8) ?
+	                     std::abs(management_data.get_military_number_at(153) * 2) :
+	                     0;
+	score_parts[62] = (field.nearest_buildable_spot_nearby > 20) ?
+	                     -std::abs(management_data.get_military_number_at(154) * 2) :
+	                     0;
+	score_parts[63] = (field.nearest_buildable_spot_nearby < 4) ?
+	                     std::abs(management_data.get_military_number_at(155) * 2) :
 	                     0;
 
 	for (uint16_t i = 0; i < score_parts_size; i++) {
@@ -2557,6 +2571,17 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			if (bo.type == BuildingObserver::Type::kProductionsite) {
 
 				prio += management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 5;
+
+				// Some productionsites strictly require supporting sites nearby
+				if (bo.requires_supporters) {
+					uint16_t supporters_nearby = 0;
+					for (auto output : bo.outputs) {
+						supporters_nearby += bf->supporters_nearby.at(output);
+					}
+					if (supporters_nearby == 0) {
+						continue;
+					}
+				}
 
 				// this can be only a well (as by now)
 				if (bo.is(BuildingAttribute::kWell)) {
@@ -4890,7 +4915,10 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			inputs[24] = -5;
 			inputs[25] = (basic_economy_established) ? 1 : -1;
 			inputs[26] = (basic_economy_established) ? 1 : -1;
-
+			inputs[27] = (bo.total_count() > 0 && spots_ < kSpotsEnough) ? -2 : 0;
+			inputs[28] = (bo.total_count() > 0 && spots_ < kSpotsTooLittle) ? -2 : 0;
+			inputs[29] = (spots_ < kSpotsEnough) ? -1 : 0;
+			inputs[30] = (spots_ < kSpotsTooLittle) ? -1 : 0;
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 				if (management_data.f_neuron_pool[53].get_position(i)) {
@@ -4911,7 +4939,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 					bo.max_needed_preciousness = 1;
 				}
 				bo.primary_priority =
-				   1 + tmp_score * std::abs(management_data.get_military_number_at(137));
+				   1 + tmp_score * std::abs(management_data.get_military_number_at(137) / 2);
 				return BuildingNecessity::kNeeded;
 			}
 		} else if (bo.is(BuildingAttribute::kLumberjack)) {

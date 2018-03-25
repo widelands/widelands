@@ -332,12 +332,6 @@ struct PlayerImmovable : public BaseImmovable {
 	explicit PlayerImmovable(const MapObjectDescr&);
 	~PlayerImmovable() override;
 
-	Player* get_owner() const {
-		return owner_;
-	}
-	Player& owner() const {
-		return *owner_;
-	}
 	Economy* get_economy() const {
 		return economy_;
 	}

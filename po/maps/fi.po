@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2016
+# GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Jukka Pakarinen, 2016-2017
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-12-27 17:09+0000\n"
-"PO-Revision-Date: 2017-12-27 17:11+0000\n"
+"POT-Creation-Date: 2018-03-24 09:42+0000\n"
+"PO-Revision-Date: 2018-03-24 12:31+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:105
+#: ../../data/campaigns/campaigns.conf:109
 msgid "From Nemesis to Genesis"
 msgstr "Nemesiksestä Geneesiin"
 
@@ -130,30 +130,31 @@ msgid ""
 "time, but at a high cost: her humanity and soul."
 msgstr "Kun heidän Jumalansa menetti uskonsa Atlantislaisiin ja upotti heidän saarensa, eräs nainen kamppaili oikeuden puolesta ja hänen kansan saamasta toisesta mahdollisuudesta, mistä tulisi legendojen aihe. Johtaen jäljelle pääneet Atlantislaiset uuteen tulevaisuuteen, maailman toiseen osaan, Jundlinasta tuli hänen aikansa kaikkein mahtavin ihminen, mutta kalliilla hinnalla: hänen inhimillisyydellä ja sielulla."
 
-#: ../../data/campaigns/campaigns.conf:78
+#: ../../data/campaigns/campaigns.conf:77
+#: ../../data/campaigns/campaigns.conf:102
+#: ../../data/campaigns/campaigns.conf:114
+#: ../../data/campaigns/dummy.wmf/elemental:8
+msgid "Not yet implemented"
+msgstr "Ei vielä toteutettu"
+
+#: ../../data/campaigns/campaigns.conf:82
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
 msgstr "Malac’ Morin rannat"
 
-#: ../../data/campaigns/campaigns.conf:83
+#: ../../data/campaigns/campaigns.conf:87
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
 msgstr "Etuvartio Maanpakoon"
 
-#: ../../data/campaigns/campaigns.conf:88
+#: ../../data/campaigns/campaigns.conf:92
 msgid "Neptune’s Revenge"
 msgstr "Neptunuksen Kosto"
 
-#: ../../data/campaigns/campaigns.conf:93
+#: ../../data/campaigns/campaigns.conf:97
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
 msgstr ""
-
-#: ../../data/campaigns/campaigns.conf:98
-#: ../../data/campaigns/campaigns.conf:110
-#: ../../data/campaigns/dummy.wmf/elemental:8
-msgid "Not yet implemented"
-msgstr "Ei vielä toteutettu"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -325,11 +326,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Kauan sen jälkeen, kun meteori iskeytyi kahteen vuoreen, elämä kukoistaa kraaterissa. Nyt kaksi heimoa taistelevat sen rikkaista resursseista."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Taivaanrannan ylittäminen"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Miehitä laivasi ja purjehdi taivaanrantaan."
 
@@ -553,7 +554,7 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr "Oikuttelevat Jumalat eivät vastanneet rukouksiimme. Sen sijaan, voimistuva auringonvalo lämmitti maata tuhatkertaisesti ja sulatti jäätiköt sekä syöksi ihmiset turmioon. Mutta nyt – korkealla majesteettisilla vuorilla, viimeisellä maatilkulla – kaksi jäljelle jäänyttä heimoa ovat suojautuneena. Jumalien osoittaman armon myötä ilmasto tuli viileämmäksi, mutta veden pinta silti jatkoi nousuaan. Viimeisellä turvallisella paikalla – korkeimmalla vuorijonolla, jossa riittää kultaa ja tilaa tyydyttävästi yhden heimon tarpeisiin – on vain kaksi vastakkaista suuntausta vallalla. Muista olla varovainen… tämä viimeinen elinkelpoinen tila on kova ja pieni paikka elää. "
+msgstr "Oikuttelevat Jumalat eivät vastanneet rukouksiimme. Sen sijaan, voimistuva auringonvalo lämmitti maata tuhatkertaisesti ja sulatti jäätiköt sekä syöksi ihmiset turmioon. Mutta nyt – korkealla majesteettisilla vuorilla, viimeisellä maatilkulla – kaksi jäljelle jäänyttä heimoa ovat suojautuneena. Jumalien osoittaman armon myötä ilmasto tuli viileämmäksi, mutta veden pinta silti jatkoi nousuaan. Viimeisellä turvallisella paikalla – korkeimmalla vuorijonolla, jossa riittää kultaa ja tilaa tyydyttävästi yhden heimon tarpeisiin – on vain kaksi vastakkaista suuntausta vallalla. Muista olla varovainen… tämä viimeinen elinkelpoinen tila on kova ja pieni paikka elää."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."

@@ -82,8 +82,6 @@ enum class BuildingAttribute : uint8_t {
 	kSupportingProducer,
 };
 
-enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
-
 enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
 
 enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
@@ -450,6 +448,7 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	std::set<DescriptionIndex> production_hints;
+	bool requires_supporters;
 
 	// information needed for decision on new building construction
 	int16_t max_preciousness;

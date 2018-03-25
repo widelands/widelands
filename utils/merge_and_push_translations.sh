@@ -29,6 +29,12 @@ if [[ "$PARENT" != "bzr+ssh://bazaar.launchpad.net/~widelands-dev/widelands/trun
 	exit 1;
 fi
 
+STATUS="$(bzr status)"
+if [ ! -z "${STATUS}" ]; then
+  echo "bzr status must be empty to prevent accidental commits"
+  exit 1
+fi
+
 # Print all commands.
 set -x
 

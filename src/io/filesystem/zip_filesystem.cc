@@ -217,8 +217,14 @@ bool ZipFilesystem::file_exists(const std::string& path) {
 	assert(path_in.size());
 
 	for (;;) {
-		unzGetCurrentFileInfo(zip_file_->read_handle(), &file_info, filename_inzip,
-		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+		const int32_t success =
+		   unzGetCurrentFileInfo(zip_file_->read_handle(), &file_info, filename_inzip,
+		                         sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+
+		// Handle corrupt files
+		if (success != UNZ_OK) {
+			return false;
+		}
 
 		std::string complete_filename = zip_file_->strip_basename(filename_inzip);
 

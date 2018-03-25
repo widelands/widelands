@@ -52,7 +52,7 @@ return {
       local plrs = wl.Game().players
       if #artifact_fields == 0 then
          for idx, plr in ipairs(plrs) do
-            send_message(plr, _"No Artifacts", p(_"There are no artifacts on this map. This should not happen. Please file a bug report on https://launchpad.net/widelands and specify your Widelands version and the map you tried to load."), {popup = true})
+            send_message(plr, _"No Artifacts", p(_"There are no artifacts on this map. This should not happen. Please file a bug report on %s and specify your Widelands version and the map you tried to load."):bformat("https://wl.widelands.org/wiki/ReportingBugs/"), {popup = true})
          end
          return
       end

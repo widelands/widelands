@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2017
+# GunChleoc, 2015-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2015
 # GunChleoc, 2013-2014,2016
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-10 11:03+0000\n"
-"PO-Revision-Date: 2018-02-10 11:05+0000\n"
+"POT-Creation-Date: 2018-03-02 08:01+0000\n"
+"PO-Revision-Date: 2018-03-02 09:23+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -601,7 +601,7 @@ msgid ""
 "We offer to also produce the tabards for young soldiers and the golden "
 "tabards for officers for you in exchange. You will need them for sure as "
 "soon as you want to recruit new soldiers."
-msgstr "Tha sinn a’ tabhann cuideachd gun dèan sinn lèintean dha na saighdearan òga agus lèintean òir dha na seann-ghaisgich mar taing dhuibh. Bidh feum agaibh orra gun teagamh on a bhios sibh airson saighdearan ùra a thrusadh."
+msgstr "Tha sinn a’ tabhann cuideachd gun dèan sinn lèintean dha na saighdearan òga agus lèintean òrach dha na seann-ghaisgich mar taing dhuibh. Bidh feum agaibh orra gun teagamh on a bhios sibh airson saighdearan ùra a thrusadh."
 
 #. TRANSLATORS: Jundlina
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:277
@@ -610,7 +610,7 @@ msgid ""
 "but I understand your urgency. Your suggestion sounds fair to me, I will "
 "build your weaving mill and spider farm. I will also build a gold spinning "
 "mill so that the golden tabards you make will not be golden by name alone."
-msgstr "Gum blàthaicheadh Satul agus thusa, Opol. Bha mi airson dàil a chur air dèanamh sìoda ach tha mi a’ tuigsinn gur e cùis èiginneach a th’ ann a-nis. Dhomhsa dheth, tha na mhol thu cothromach agus togaidh mi taigh nam beart agus rainse dhamhan dhuibh. Togaidh mi ceàrdach òr-shnìomhaidh cuideachd ach am bi òr sna lèintean òir ann an da-rìribh."
+msgstr "Gum blàthaicheadh Satul agus thusa, Opol. Bha mi airson dàil a chur air dèanamh sìoda ach tha mi a’ tuigsinn gur e cùis èiginneach a th’ ann a-nis. Dhomhsa dheth, tha na mhol thu cothromach agus togaidh mi taigh nam beart agus rainse dhamhan dhuibh. Togaidh mi ceàrdach òr-shnìomhaidh cuideachd ach am bi òr sna lèintean òrach ann an da-rìribh."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:284
 msgid "Opol Seeks Out Jundlina"

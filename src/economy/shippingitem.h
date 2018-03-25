@@ -50,7 +50,7 @@ struct ShippingItem {
 	// Unboxes the item that is shipped which might be either a ware or a
 	// worker. It is safe to pass nullptr for 'ware' or 'worker' in case you are
 	// only interested in the ware if it is the one or the other.
-	void get(EditorGameBase& game, WareInstance** ware, Worker** worker) const;
+	void get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const;
 
 	void set_economy(Game&, Economy* e);
 	PortDock* get_destination(Game&);

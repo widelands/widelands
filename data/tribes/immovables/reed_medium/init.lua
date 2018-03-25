@@ -7,7 +7,7 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Reed (medium)"),
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "field" },
+   attributes = { "field", "flowering" },
    programs = {
       program = {
          "animate=idle 40000",

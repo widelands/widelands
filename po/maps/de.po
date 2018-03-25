@@ -4,6 +4,7 @@
 # Translators:
 # Elisabeth Jäger, 2016-2018
 # wl-zocker, 2014
+# GunChleoc, 2018
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-15 09:25+0000\n"
-"PO-Revision-Date: 2018-02-21 08:55+0000\n"
-"Last-Translator: Elisabeth Jäger\n"
+"POT-Creation-Date: 2018-03-24 09:42+0000\n"
+"PO-Revision-Date: 2018-03-24 12:19+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,7 +158,7 @@ msgstr "Neptuns Rache"
 #: ../../data/campaigns/campaigns.conf:97
 #: ../../data/campaigns/emp04.wmf/elemental:8
 msgid "Surprise, Surprise!"
-msgstr "Überraschung!"
+msgstr "Was für eine Überraschung!"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -195,7 +196,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr "Nach seiner Heimkehr finden Lutius und seine Mannschaft die Wirtschaft in heillosem Chaos vor. Die Engpässe der Wirtschaft zu lösen ist von größter Wichtigkeit, um die Pracht des Imperiums wiederherzustellen. "
+msgstr "Nach seiner Heimkehr finden Lutius und seine Mannschaft die Wirtschaft in heillosem Chaos vor. Die Engpässe der Wirtschaft zu lösen ist von größter Wichtigkeit, um die Pracht des Imperiums wiederherzustellen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -329,11 +330,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Lange nachdem ein Meteor in dieses Gebirge gestürzt ist, erblüht wieder das Leben imm Krater. Zwei Stämme kämpfen um die reichhaltigen Rohstoffe."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Über den Horizont hinaus"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Bemanne dein Schiff und segle dem Horizont entgegen."
 

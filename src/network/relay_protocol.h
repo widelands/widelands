@@ -123,7 +123,8 @@ enum class RelayCommand : uint8_t {
     * Has the following payload:
     * \li unsigned_8: Protocol version.
     * \li string:     Game name.
-    * \li string:     For the host: Password that was set on start of the relay.
+    * \li string:     For the host: Password that was set on start of the relay. Is the "solution"
+    *                 for the challenge send by the metaserver on IGPCMD_GAME_OPEN
     *                 For clients/observers: String "client".
     *
     * Is answered by kWelcome or kDisconnect (if a parameter is wrong/unknown).
