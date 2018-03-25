@@ -122,7 +122,7 @@ bool CheckStepOwnTerritory::allowed(
 bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) const {
 	const uint8_t endcaps = player->get_buildcaps(dest);
 	if (BaseImmovable const* const imm = map.get_immovable(dest)) {
-		if (upcast(PlayerImmovable const, player_immovable, imm)) {
+		if (imm->descr().type() >= MapObjectType::FLAG) {
 			return true;
 		} else {
 			return false;
