@@ -45,14 +45,14 @@ std::string as_header_with_content(const std::string& header,
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p>%s%s %s</p>") %
 		         (is_first ? "" : "<vspace gap=9>") %
-		        g_gr->styles().font_style(StyleManager::FontStyle::kInfoPanelHeadingFsMenu).as_font_tag(noescape ? header : richtext_escape(header)) %
-		        g_gr->styles().font_style(StyleManager::FontStyle::kInfoPanelParagraphFsMenu).as_font_tag(noescape ? content : richtext_escape(content)))
+		        g_gr->styles().font_style(StyleManager::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(noescape ? header : richtext_escape(header)) %
+		        g_gr->styles().font_style(StyleManager::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(noescape ? content : richtext_escape(content)))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format("<p>%s%s %s</p>") %
 		        (is_first ? "" : "<vspace gap=6>") %
-		        g_gr->styles().font_style(StyleManager::FontStyle::kInfoPanelHeadingWui).as_font_tag(noescape ? header : richtext_escape(header)) %
-		        g_gr->styles().font_style(StyleManager::FontStyle::kInfoPanelParagraphWui).as_font_tag(noescape ? content : richtext_escape(content)))
+		        g_gr->styles().font_style(StyleManager::FontStyle::kWuiInfoPanelHeading).as_font_tag(noescape ? header : richtext_escape(header)) %
+		        g_gr->styles().font_style(StyleManager::FontStyle::kWuiInfoPanelParagraph).as_font_tag(noescape ? content : richtext_escape(content)))
 		   .str();
 	}
 	NEVER_HERE();

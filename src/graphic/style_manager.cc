@@ -154,7 +154,6 @@ void StyleManager::init() {
 	add_font_color(FontColor::kForeground, *style_table->get_table("foreground"));
 	add_font_color(FontColor::kDisabled, *style_table->get_table("disabled"));
 	add_font_color(FontColor::kWarning, *style_table->get_table("warning"));
-	add_font_color(FontColor::kTooltip, *style_table->get_table("tooltip"));
 	add_font_color(FontColor::kProgressWindowText, *style_table->get_table("progresswindow_text"));
 	add_font_color(FontColor::kProgressWindowBackground, *style_table->get_table("progresswindow_background"));
 	add_font_color(FontColor::kProgressBright, *style_table->get_table("progress_bright"));
@@ -162,10 +161,6 @@ void StyleManager::init() {
 	add_font_color(FontColor::kProductivityLow, *style_table->get_table("productivity_low"));
 	add_font_color(FontColor::kProductivityMedium, *style_table->get_table("productivity_medium"));
 	add_font_color(FontColor::kProductivityHigh, *style_table->get_table("productivity_high"));
-	add_font_color(FontColor::kChatMessage, *style_table->get_table("chat_message"));
-	add_font_color(FontColor::kChatMe, *style_table->get_table("chat_me"));
-	add_font_color(FontColor::kChatSpectator, *style_table->get_table("chat_spectator"));
-	add_font_color(FontColor::kChatLog, *style_table->get_table("chat_log"));
 	add_font_color(FontColor::kPlotAxisLine, *style_table->get_table("plot_axis_line"));
 	add_font_color(FontColor::kPlotZeroLine, *style_table->get_table("plot_zero_line"));
 	add_font_color(FontColor::kPlotXtick, *style_table->get_table("plot_xtick"));
@@ -173,21 +168,28 @@ void StyleManager::init() {
 	add_font_color(FontColor::kPlotMinValue, *style_table->get_table("plot_min_value"));
 	add_font_color(FontColor::kGameSetupHeadings, *style_table->get_table("game_setup_headings"));
 	add_font_color(FontColor::kGameSetupMapname, *style_table->get_table("game_setup_mapname"));
-	add_font_color(FontColor::kGameTip, *style_table->get_table("game_tip"));
 	add_font_color(FontColor::kIntro, *style_table->get_table("intro"));
 	check_completeness(
 	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kIntro));
 
 	element_table = table->get_table("font_styles");
 	add_font_style(FontStyle::kButton, *element_table, "button");
-	add_font_style(FontStyle::kInfoPanelHeadingFsMenu, *element_table, "info_panel_heading_fsmenu");
-	add_font_style(FontStyle::kInfoPanelParagraphFsMenu, *element_table, "info_panel_paragraph_fsmenu");
-	add_font_style(FontStyle::kInfoPanelHeadingWui, *element_table, "info_panel_heading_wui");
-	add_font_style(FontStyle::kInfoPanelParagraphWui, *element_table, "info_panel_paragraph_wui");
-	add_font_style(FontStyle::kMessageHeading, *element_table, "message_heading");
-	add_font_style(FontStyle::kMessageParagraph, *element_table, "message_paragraph");
-	add_font_style(FontStyle::kIntro, *element_table, "intro");
-	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(FontStyle::kIntro));
+	add_font_style(FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
+	add_font_style(FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
+	add_font_style(FontStyle::kWuiInfoPanelHeading, *element_table, "wui_info_panel_heading");
+	add_font_style(FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
+	add_font_style(FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
+	add_font_style(FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
+	add_font_style(FontStyle::kTooltip, *element_table, "tooltip");
+	add_font_style(FontStyle::kWuiWaresInfo, *element_table, "wui_waresinfo");
+	add_font_style(FontStyle::kFsMenuGameTip, *element_table, "fsmenu_gametip");
+	add_font_style(FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
+	add_font_style(FontStyle::kChatMessage, *element_table, "chat_message");
+	add_font_style(FontStyle::kChatWhisper, *element_table, "chat_whisper");
+	add_font_style(FontStyle::kChatServer, *element_table, "chat_server");
+	add_font_style(FontStyle::kChatPlayername, *element_table, "chat_playername");
+	add_font_style(FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
+	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(FontStyle::kFsMenuIntro));
 }
 
 // Return functions for the styles
@@ -280,11 +282,11 @@ void StyleManager::add_font_style(FontStyle font_key, const LuaTable& table, con
 	if (style_table->has_key("italic")) {
 		font->italic = style_table->get_bool("italic");
 	}
+	if (style_table->has_key("shadow")) {
+		font->shadow = style_table->get_bool("shadow");
+	}
 	if (style_table->has_key("underline")) {
 		font->underline = style_table->get_bool("underline");
-	}
-	if (style_table->has_key("shadow")) {
-		font->underline = style_table->get_bool("shadow");
 	}
 	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<FontStyleInfo>(std::move(font))));
 }
@@ -324,6 +326,9 @@ std::string StyleManager::FontStyleInfo::as_font_tag(const std::string& text) co
 	}
 	if (shadow) {
 		optionals += " shadow=1";
+	}
+	if (underline) {
+		optionals += " underline=1";
 	}
 	f % face_to_string();
 	f % size;

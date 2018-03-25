@@ -1071,7 +1071,7 @@ void Ship::send_message(Game& game,
 	const std::string rt_description =
 	   (boost::format("<div padding_r=10><p><img src=%s></p></div>"
 	                  "<div width=*><p>%s</p></div>") %
-	    picture % g_gr->styles().font_style(StyleManager::FontStyle::kMessageParagraph).as_font_tag(description))
+	    picture % g_gr->styles().font_style(StyleManager::FontStyle::kWuiMessageParagraph).as_font_tag(description))
 	      .str();
 
 	get_owner()->add_message(game, std::unique_ptr<Message>(new Message(

@@ -34,13 +34,21 @@ public:
 	enum class FontStyle {
 		// Global
 		kButton,
-		kInfoPanelHeadingFsMenu,
-		kInfoPanelParagraphFsMenu,
-		kInfoPanelHeadingWui,
-		kInfoPanelParagraphWui,
-		kMessageHeading,
-		kMessageParagraph,
-		kIntro
+		kFsMenuInfoPanelHeading,
+		kFsMenuInfoPanelParagraph,
+		kWuiInfoPanelHeading,
+		kWuiInfoPanelParagraph,
+		kWuiMessageHeading,
+		kWuiMessageParagraph,
+		kTooltip,
+		kWuiWaresInfo,
+		kFsMenuGameTip,
+		kChatTimestamp,
+		kChatMessage,
+		kChatWhisper,
+		kChatPlayername,
+		kChatServer,
+		kFsMenuIntro
 	};
 
 	enum class FontSize {
@@ -54,8 +62,6 @@ public:
 		kForeground,
 		kDisabled,
 		kWarning,
-		// Tooltips
-		kTooltip,
 		// Progress and productivity
 		kProgressWindowText,
 		kProgressWindowBackground,
@@ -64,11 +70,6 @@ public:
 		kProductivityLow,
 		kProductivityMedium,
 		kProductivityHigh,
-		// Chat
-		kChatMessage,
-		kChatMe,
-		kChatSpectator,
-		kChatLog,
 		// Statistics plot
 		kPlotAxisLine,
 		kPlotZeroLine,
@@ -79,7 +80,6 @@ public:
 		kGameSetupHeadings,
 		kGameSetupMapname,
 		// Misc
-		kGameTip,
 		kIntro
 	};
 

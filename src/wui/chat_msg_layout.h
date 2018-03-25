@@ -22,9 +22,6 @@
 
 #include "chat/chat.h"
 
-// Formats 'chat_message' as old richtext.
-std::string format_as_old_richtext(const ChatMessage& chat_message);
-
 // Formats 'chat_message' as richtext.
 std::string format_as_richtext(const ChatMessage& chat_message);
 

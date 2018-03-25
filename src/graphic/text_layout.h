@@ -60,6 +60,8 @@ inline bool is_richtext(const std::string& text) {
  */
 std::string richtext_escape(const std::string& given_text);
 
+std::string as_richtext_paragraph(const std::string& text, const StyleManager::FontStyleInfo& style);
+
 /**
  * Convenience functions to convert simple text into a valid block
  * of rich text which can be rendered.
@@ -86,8 +88,6 @@ std::string as_aligned(const std::string& txt,
                        StyleManager::FontStyleInfo::Face face = StyleManager::FontStyleInfo::Face::kSans);
 
 std::string as_richtext(const std::string&);
-std::string as_tooltip(const std::string&);
-std::string as_waresinfo(const std::string&);
 std::string as_game_tip(const std::string&);
 std::string as_message(const std::string& heading, const std::string& body);
 

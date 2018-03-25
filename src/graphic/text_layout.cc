@@ -69,12 +69,22 @@ std::string richtext_escape(const std::string& given_text) {
 	return text;
 }
 
+std::string as_richtext(const std::string& txt) {
+	static boost::format f("<rt>%s</rt>");
+	f % txt;
+	return f.str();
+}
+
+std::string as_richtext_paragraph(const std::string& text, const StyleManager::FontStyleInfo& style) {
+	static boost::format f("<rt><p>%s</p></rt>");
+	f % style.as_font_tag(text);
+	return f.str();
+}
+
 std::string as_game_tip(const std::string& txt) {
 	static boost::format f("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
-	                       "<p align=center><font color=%s face=serif size=16>%s</font></p></rt>");
-
-	f % g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings).hex_value();
-	f % txt;
+	                       "<p align=center>%s</p></rt>");
+	f % g_gr->styles().font_style(StyleManager::FontStyle::kFsMenuGameTip).as_font_tag(txt);
 	return f.str();
 }
 
@@ -141,37 +151,15 @@ std::string as_aligned(const std::string& txt,
 	return f.str();
 }
 
-std::string as_richtext(const std::string& txt) {
-	static boost::format f("<rt>%s</rt>");
-	f % txt;
-	return f.str();
-}
-
-std::string as_tooltip(const std::string& txt) {
-	static boost::format f("<rt><p><font face=sans size=%i bold=1 color=%s>%s</font></p></rt>");
-
-	f % g_gr->styles().font_size(StyleManager::FontSize::kNormal);
-	f % g_gr->styles().font_color(StyleManager::FontColor::kTooltip).hex_value();
-	f % txt;
-	return f.str();
-}
-
-std::string as_waresinfo(const std::string& txt) {
-	static boost::format f("<rt><p><font face=condensed size=10 bold=0 color=%s>%s</font></p></rt>");
-	f % g_gr->styles().font_color(StyleManager::FontColor::kTooltip).hex_value();
-	f % txt;
-	return f.str();
-}
-
 std::string as_message(const std::string& heading, const std::string& body) {
 	return (
 	   (boost::format(
 	       "<rt><p>%s<br></p><vspace gap=6>%s</rt>") %
-	    g_gr->styles().font_style(StyleManager::FontStyle::kMessageHeading).as_font_tag(heading) %
+	    g_gr->styles().font_style(StyleManager::FontStyle::kWuiMessageHeading).as_font_tag(heading) %
 	    (is_paragraph(body) || is_div(body) ?
 	        body :
 	        (boost::format("<p>%s</p>") %
-	         g_gr->styles().font_style(StyleManager::FontStyle::kMessageParagraph).as_font_tag(body))
+	         g_gr->styles().font_style(StyleManager::FontStyle::kWuiMessageParagraph).as_font_tag(body))
 	           .str()))
 	      .str());
 }

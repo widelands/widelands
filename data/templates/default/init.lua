@@ -122,7 +122,7 @@ return {
          shadow = true
       },
       -- Intro screen
-      intro = {
+      fsmenu_intro = {
          color = { 192, 192, 128 },
          face = fs_font_face,
          size = fs_font_size,
@@ -130,41 +130,96 @@ return {
          shadow = true
       },
       -- Game and Map info panels
-      info_panel_heading_fsmenu = {
+      fsmenu_info_panel_heading = {
          color = { 255, 255, 0 },
          face = fs_font_face,
          size = fs_font_size,
          bold = true,
          shadow = true
       },
-      info_panel_paragraph_fsmenu = {
+      fsmenu_info_panel_paragraph = {
          color = { 209, 209, 209 },
          face = fs_font_face,
          size = fs_font_size,
          shadow = true
       },
-      info_panel_heading_wui = {
+      wui_info_panel_heading = {
          color = { 209, 209, 209 },
          face = fs_font_face,
          size = fs_font_size,
          bold = true,
       },
-      info_panel_paragraph_wui = {
+      wui_info_panel_paragraph = {
          color = { 255, 255, 0 },
          face = fs_font_face,
          size = fs_font_size,
       },
       -- Messages
-      message_heading = {
+      wui_message_heading = {
          color = { 209, 209, 209 },
          face = wui_font_face,
          size = 18,
          bold = true,
       },
-      message_paragraph = {
+      wui_message_paragraph = {
          color = { 255, 255, 0 },
          face = wui_font_face,
          size = wui_font_size,
+      },
+      tooltip = {
+         color = fs_font_color,
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+      },
+      wui_waresinfo = {
+         color = wui_font_color,
+         face = "condensed",
+         size = 10,
+      },
+      -- Basic chat message text color
+      chat_message = {
+         color = wui_font_color,
+         face = "serif",
+         size = fs_font_size,
+         shadow = true,
+      },
+      -- Basic chat message text color
+      chat_timestamp = {
+         color = { 51, 255, 51 },
+         face = "serif",
+         size = 9,
+         shadow = true,
+      },
+      -- Chat for private messages
+      chat_whisper = {
+         color = { 238, 238, 238 },
+         face = "serif",
+         size = fs_font_size,
+         italic = true,
+         shadow = true,
+      },
+      -- Chat playername highlight
+      chat_playername = {
+         color = { 255, 255, 255 },
+         face = "serif",
+         size = fs_font_size,
+         bold = true,
+         underline = true,
+         shadow = true,
+      },
+      -- Chat log messages color. Also doubles as spectator playercolor for chat messages.
+      chat_server = {
+         color = { 221, 221, 221 },
+         face = "serif",
+         size = fs_font_size,
+         bold = true,
+         shadow = true,
+      },
+      fsmenu_gametip = {
+         color = { 0, 0, 0 },
+         face = "serif",
+         size = 16,
       },
    },
 
@@ -180,7 +235,6 @@ return {
          foreground = fs_font_color, -- Main UI color
          disabled = {127, 127, 127}, -- Disabled interactive UI elements
          warning = {255, 22, 22},    -- For highlighting warnings
-         tooltip = fs_font_color,    -- Tooltips
          progresswindow_text = { 128, 128, 255 },    -- FS Progress bar text
          progresswindow_background = { 64, 64, 0 },  -- FS Progress bar background
          progress_bright = {255, 250, 170},          -- Progress bar text
@@ -188,10 +242,6 @@ return {
          productivity_low = {187, 0, 0},         -- Low building productivity
          productivity_medium = {255, 225, 30},   -- Medium building productivity
          productivity_high = {0, 187, 0},        -- High building productivity
-         chat_message = {51, 255, 51},       -- Chat message text color
-         chat_me = { 238, 238, 238 },        -- Color for /me messages
-         chat_spectator = { 153, 153, 153 }, -- Chat spectator player color
-         chat_log = { 221, 221, 221 },       -- Chat log messages color
          plot_axis_line = { 0, 0, 0 },       -- Statistics plot
          plot_zero_line = { 255, 255, 255 }, -- Statistics plot
          plot_xtick = { 255, 0, 0 },         -- Statistics plot
@@ -199,7 +249,6 @@ return {
          plot_min_value = { 125, 0, 0 },     -- Statistics plot
          game_setup_headings = { 0, 255, 0 },     -- Internet lobby and launch game
          game_setup_mapname = { 255, 255, 127 },  -- Internet lobby and launch game
-         game_tip = { 33, 33, 27 },  -- Tips in progress screen
          intro = { 192, 192, 128 }
       }
    }

@@ -134,8 +134,8 @@ void ChatOverlay::Impl::recompute() {
 			oldest_ = log_messages_[log_idx].time;
 			// Do some richtext formatting here
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {
-				richtext = (boost::format("<p><font face=serif size=14 color=%s bold=1>%s<br></font></p>")
-						% g_gr->styles().font_color(StyleManager::FontColor::kChatLog).hex_value() % log_messages_[log_idx].msg % richtext).str();
+				richtext = (boost::format("<p>%s</p>")
+						% g_gr->styles().font_style(StyleManager::FontStyle::kChatServer).as_font_tag(log_messages_[log_idx].msg)).str();
 			}
 			log_idx--;
 		} else if (log_idx < 0 ||

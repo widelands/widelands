@@ -41,11 +41,11 @@ std::string as_header(const std::string& txt, UI::PanelStyle style, bool is_firs
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p>%s%s</p>") %
-		        (is_first ? "" : "<vspace gap=9>") % g_gr->styles().font_style(StyleManager::FontStyle::kInfoPanelHeadingFsMenu).as_font_tag(richtext_escape(txt)))
+		        (is_first ? "" : "<vspace gap=9>") % g_gr->styles().font_style(StyleManager::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(richtext_escape(txt)))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format("<p>%s%s</p>") %
-		        (is_first ? "" : "<vspace gap=6>") % g_gr->styles().font_style(StyleManager::FontStyle::kInfoPanelHeadingWui).as_font_tag(richtext_escape(txt)))
+		        (is_first ? "" : "<vspace gap=6>") % g_gr->styles().font_style(StyleManager::FontStyle::kWuiInfoPanelHeading).as_font_tag(richtext_escape(txt)))
 		   .str();
 	}
 	NEVER_HERE();
@@ -54,11 +54,11 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p><vspace gap=2>%s</p>") %
-		        g_gr->styles().font_style(StyleManager::FontStyle::kInfoPanelParagraphFsMenu).as_font_tag(richtext_escape(txt)))
+		        g_gr->styles().font_style(StyleManager::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(richtext_escape(txt)))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format("<p><vspace gap=2>%s</p>") %
-		        g_gr->styles().font_style(StyleManager::FontStyle::kInfoPanelParagraphWui).as_font_tag(richtext_escape(txt)))
+		        g_gr->styles().font_style(StyleManager::FontStyle::kWuiInfoPanelParagraph).as_font_tag(richtext_escape(txt)))
 		   .str();
 	}
 	NEVER_HERE();
