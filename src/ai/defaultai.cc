@@ -1213,13 +1213,13 @@ void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 	}
 	// Updating overall statistics, first we flush the data and then iterate over all mine fields
 	mine_fields_stat.zero();
-	for (uint32_t j = 0; j < mineable_fields.size(); j++) {
-	    if (mineable_fields[j]->coords.field->get_resources_amount() > 0) {
-		    mine_fields_stat.add(mineable_fields[j]->coords.field->get_resources());
+	for (const auto& mineable_field : mineable_fields) {
+	    if (mineable_field->coords.field->get_resources_amount() > 0) {
+		    mine_fields_stat.add(mineable_field->coords.field->get_resources());
 		   }
 	}
 
-	// Following asserts presume that there is 1-3 critical mines
+	// Following asserts presume that there are 1-3 critical mines
 	if (mine_fields_stat.count_types() == 4) {
 		assert(mine_fields_stat.has_critical_ore_fields());
 	}
