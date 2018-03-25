@@ -3825,7 +3825,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		game().send_player_build_road(player_number(), path);
 		return true;
 	}
-	// We cant build a road so let block the vicinity as an indication this area is not connectible
+	// We can't build a road so let's block the vicinity as an indication this area is not connectible
 	// Usually we block for 2 minutes, but if it is a last attempt we block for 10 minutes
 	// Note: we block the vicinity only if this economy (usually a sole flag with a building) is not
 	// connected to a warehouse
@@ -3835,10 +3835,7 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		if (eco->fields_block_last_time + 60000 < gametime || last_attempt_) {
 			eco->fields_block_last_time = gametime;
 
-			uint32_t block_time = 2 * 60 * 1000;
-			if (last_attempt_) {
-				block_time = 10 * 60 * 1000;
-			}
+			const uint32_t block_time = last_attempt_ ? 10 * 60 * 1000 : 2 * 60 * 1000;
 
 			FindNodeAcceptAll buildable_functor;
 			CheckStepOwnTerritory check_own(player_, MOVECAPS_WALK, true);

@@ -42,7 +42,7 @@ CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const 
 
 bool CheckStepRoadAI::allowed(
    const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
-	uint8_t endcaps = player->get_buildcaps(end);
+	const uint8_t endcaps = player->get_buildcaps(end);
 
 	// we should not cross fields with road or flags (or any other immovable)
 	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
@@ -96,8 +96,8 @@ CheckStepOwnTerritory::CheckStepOwnTerritory(Player* const pl, uint8_t const mc,
 // 2b. has our PlayerImmovable (building or flag)
 bool CheckStepOwnTerritory::allowed(
    const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
-	uint8_t endcaps = player->get_buildcaps(end);
-	uint8_t startcaps = player->get_buildcaps(start);
+	const uint8_t endcaps = player->get_buildcaps(end);
+	const uint8_t startcaps = player->get_buildcaps(start);
 
 	// We should not cross fields with road or flags (or any other immovable)
 	// Or rather we can step on it, but not go on from such field
@@ -106,19 +106,21 @@ bool CheckStepOwnTerritory::allowed(
 	}
 
 	// Start field must be walkable
-	if (!(startcaps & movecaps))
+	if (!(startcaps & movecaps)) {
 		return false;
+	}
 
 	// Endfield can not be water
-	if (endcaps & MOVECAPS_SWIM)
+	if (endcaps & MOVECAPS_SWIM) {
 		return false;
+	}
 
 	return true;
 }
 
-// We accept either walkable teritory or field with own immovable
+// We accept either walkable territory or field with own immovable
 bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) const {
-	uint8_t endcaps = player->get_buildcaps(dest);
+	const uint8_t endcaps = player->get_buildcaps(dest);
 	if (BaseImmovable const* const imm = map.get_immovable(dest)) {
 		if (upcast(PlayerImmovable const, player_immovable, imm)) {
 			return true;
