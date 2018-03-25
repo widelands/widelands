@@ -145,7 +145,6 @@ void StyleManager::init() {
 	style_table = element_table->get_table("sizes");
 	add_font_size(FontSize::kTitle, *style_table, "title");
 	add_font_size(FontSize::kNormal, *style_table, "normal");
-	add_font_size(FontSize::kMessage, *style_table, "message");
 	add_font_size(FontSize::kSlider, *style_table, "slider");
 	add_font_size(FontSize::kMinimum, *style_table, "minimum");
 	check_completeness(
@@ -172,10 +171,6 @@ void StyleManager::init() {
 	add_font_color(FontColor::kPlotXtick, *style_table->get_table("plot_xtick"));
 	add_font_color(FontColor::kPlotYscaleLabel, *style_table->get_table("plot_yscale_label"));
 	add_font_color(FontColor::kPlotMinValue, *style_table->get_table("plot_min_value"));
-	add_font_color(FontColor::kHeadingWui, *style_table->get_table("heading_color_wui"));
-	add_font_color(FontColor::kHeadingFsMenu, *style_table->get_table("heading_color_fsmenu"));
-	add_font_color(FontColor::kContentsWui, *style_table->get_table("contents_color_wui"));
-	add_font_color(FontColor::kContentsFsMenu, *style_table->get_table("contents_color_fsmenu"));
 	add_font_color(FontColor::kGameSetupHeadings, *style_table->get_table("game_setup_headings"));
 	add_font_color(FontColor::kGameSetupMapname, *style_table->get_table("game_setup_mapname"));
 	add_font_color(FontColor::kGameTip, *style_table->get_table("game_tip"));
@@ -189,6 +184,8 @@ void StyleManager::init() {
 	add_font_style(FontStyle::kInfoPanelParagraphFsMenu, *element_table, "info_panel_paragraph_fsmenu");
 	add_font_style(FontStyle::kInfoPanelHeadingWui, *element_table, "info_panel_heading_wui");
 	add_font_style(FontStyle::kInfoPanelParagraphWui, *element_table, "info_panel_paragraph_wui");
+	add_font_style(FontStyle::kMessageHeading, *element_table, "message_heading");
+	add_font_style(FontStyle::kMessageParagraph, *element_table, "message_paragraph");
 	add_font_style(FontStyle::kIntro, *element_table, "intro");
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(FontStyle::kIntro));
 }

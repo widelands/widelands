@@ -767,8 +767,8 @@ void Building::send_message(Game& game,
 	const int width = descr().representative_image()->width();
 	const std::string rt_description =
 	   (boost::format("<div padding_r=10><p><img width=%d src=%s color=%s></p></div>"
-	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    width % img % owner().get_playercolor().hex_value() % g_gr->styles().font_size(StyleManager::FontSize::kMessage) % description)
+	                  "<div width=*><p>%s</p></div>") %
+	    width % img % owner().get_playercolor().hex_value() % g_gr->styles().font_style(StyleManager::FontStyle::kMessageParagraph).as_font_tag(description))
 	      .str();
 
 	std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,

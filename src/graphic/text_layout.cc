@@ -166,12 +166,12 @@ std::string as_waresinfo(const std::string& txt) {
 std::string as_message(const std::string& heading, const std::string& body) {
 	return (
 	   (boost::format(
-	       "<rt><p><font size=18 bold=1 color=%s>%s<br></font></p><vspace gap=6>%s</rt>") %
-	    g_gr->styles().font_color(StyleManager::FontColor::kHeadingWui).hex_value() % heading %
+	       "<rt><p>%s<br></p><vspace gap=6>%s</rt>") %
+	    g_gr->styles().font_style(StyleManager::FontStyle::kMessageHeading).as_font_tag(heading) %
 	    (is_paragraph(body) || is_div(body) ?
 	        body :
-	        (boost::format("<p><font color=%s>%s</font></p>") %
-	         g_gr->styles().font_color(StyleManager::FontColor::kContentsWui).hex_value() % body)
+	        (boost::format("<p>%s</p>") %
+	         g_gr->styles().font_style(StyleManager::FontStyle::kMessageParagraph).as_font_tag(body))
 	           .str()))
 	      .str());
 }

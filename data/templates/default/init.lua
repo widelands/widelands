@@ -17,9 +17,13 @@ local wui_light =  {85, 63, 35}
 local wui_green =  {3, 15, 0}
 local wui_brown =  {32, 19, 8}
 
-local default_font_color = {255, 255, 0}
-local default_font_face = "sans"
-local default_font_size = 14
+local fs_font_color = {255, 255, 0}
+local fs_font_face = "sans"
+local fs_font_size = 14
+
+local wui_font_color = {255, 255, 0}
+local wui_font_face = "sans"
+local wui_font_size = 12
 
 -- These are the style definitions to be returned.
 -- Note: you have to keep all the keys intact, or Widelands will not be happy.
@@ -111,44 +115,56 @@ return {
       ]]
       -- Buttons
       button = {
-         color = default_font_color,
-         face = default_font_face,
-         size = default_font_size,
+         color = fs_font_color,
+         face = fs_font_face,
+         size = fs_font_size,
          bold = true,
          shadow = true
       },
       -- Intro screen
       intro = {
          color = { 192, 192, 128 },
-         face = default_font_face,
-         size = default_font_size,
+         face = fs_font_face,
+         size = fs_font_size,
          bold = true,
          shadow = true
       },
       -- Game and Map info panels
       info_panel_heading_fsmenu = {
          color = { 255, 255, 0 },
-         face = default_font_face,
-         size = default_font_size,
+         face = fs_font_face,
+         size = fs_font_size,
          bold = true,
          shadow = true
       },
       info_panel_paragraph_fsmenu = {
          color = { 209, 209, 209 },
-         face = default_font_face,
-         size = default_font_size,
+         face = fs_font_face,
+         size = fs_font_size,
          shadow = true
       },
       info_panel_heading_wui = {
          color = { 209, 209, 209 },
-         face = default_font_face,
-         size = default_font_size,
+         face = fs_font_face,
+         size = fs_font_size,
          bold = true,
       },
       info_panel_paragraph_wui = {
          color = { 255, 255, 0 },
-         face = default_font_face,
-         size = default_font_size,
+         face = fs_font_face,
+         size = fs_font_size,
+      },
+      -- Messages
+      message_heading = {
+         color = { 209, 209, 209 },
+         face = wui_font_face,
+         size = 18,
+         bold = true,
+      },
+      message_paragraph = {
+         color = { 255, 255, 0 },
+         face = wui_font_face,
+         size = wui_font_size,
       },
    },
 
@@ -157,15 +173,14 @@ return {
       sizes = {
          title = 22,    -- Big titles
          normal = 14,   -- Default UI color
-         message = 12,  -- Message font size
          slider = 11,   -- Slider font size
          minimum = 6,   -- When autoresizing text to fit, don't go below this size
       },
       colors = {
-         foreground = {255, 255, 0}, -- Main UI color
+         foreground = fs_font_color, -- Main UI color
          disabled = {127, 127, 127}, -- Disabled interactive UI elements
          warning = {255, 22, 22},    -- For highlighting warnings
-         tooltip = {255, 255, 0},    -- Tooltips
+         tooltip = fs_font_color,    -- Tooltips
          progresswindow_text = { 128, 128, 255 },    -- FS Progress bar text
          progresswindow_background = { 64, 64, 0 },  -- FS Progress bar background
          progress_bright = {255, 250, 170},          -- Progress bar text
@@ -182,10 +197,6 @@ return {
          plot_xtick = { 255, 0, 0 },         -- Statistics plot
          plot_yscale_label = { 60, 125, 0 }, -- Statistics plot
          plot_min_value = { 125, 0, 0 },     -- Statistics plot
-         heading_color_wui = { 209, 209, 209 },      -- Map and game details etc
-         heading_color_fsmenu = { 255, 255, 0 },     -- Map and game details etc
-         contents_color_wui = { 255, 255, 0 },       -- Map and game details etc
-         contents_color_fsmenu = { 209, 209, 209 },  -- Map and game details etc
          game_setup_headings = { 0, 255, 0 },     -- Internet lobby and launch game
          game_setup_mapname = { 255, 255, 127 },  -- Internet lobby and launch game
          game_tip = { 33, 33, 27 },  -- Tips in progress screen

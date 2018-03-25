@@ -38,13 +38,14 @@ public:
 		kInfoPanelParagraphFsMenu,
 		kInfoPanelHeadingWui,
 		kInfoPanelParagraphWui,
+		kMessageHeading,
+		kMessageParagraph,
 		kIntro
 	};
 
 	enum class FontSize {
 		kTitle,
 		kNormal,
-		kMessage,
 		kSlider,
 		kMinimum,
 	};
@@ -74,11 +75,6 @@ public:
 		kPlotXtick,
 		kPlotYscaleLabel,
 		kPlotMinValue,
-		// Game and map details etc.
-		kHeadingWui,
-		kHeadingFsMenu,
-		kContentsWui,
-		kContentsFsMenu,
 		// Internet lobby and launch game
 		kGameSetupHeadings,
 		kGameSetupMapname,
