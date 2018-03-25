@@ -46,7 +46,7 @@ tribes:new_productionsite_type {
          descname = _"planting trees",
          actions = {
             "sleep=12000",
-            "worker=plant"
+            "callworker=plant"
          }
       },
    },

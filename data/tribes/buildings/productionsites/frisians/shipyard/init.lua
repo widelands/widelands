@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start constructing a ship because ...
          descname = _"constructing a ship",
          actions = {
-            "check_map=seafaring",
+            "checkmap=seafaring",
             "construct=frisians_shipconstruction buildship 6",
             "sleep=35000",
             "return=completed"

@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
          descname = _"gathering berries",
          actions = {
             "sleep=21000",
-            "worker=harvest",
+            "callworker=harvest",
          }
       },
    },
