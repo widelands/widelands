@@ -75,9 +75,9 @@ std::string as_richtext(const std::string& txt) {
 	return f.str();
 }
 
-std::string as_richtext_paragraph(const std::string& text, const StyleManager::FontStyleInfo& style) {
+std::string as_richtext_paragraph(const std::string& text, StyleManager::FontStyle style) {
 	static boost::format f("<rt><p>%s</p></rt>");
-	f % style.as_font_tag(text);
+	f % g_gr->styles().font_style(style).as_font_tag(text);
 	return f.str();
 }
 

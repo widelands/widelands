@@ -177,6 +177,11 @@ return {
          face = "condensed",
          size = 10,
       },
+      fsmenu_gametip = {
+         color = { 0, 0, 0 },
+         face = "serif",
+         size = 16,
+      },
       -- Basic chat message text color
       chat_message = {
          color = wui_font_color,
@@ -216,10 +221,21 @@ return {
          bold = true,
          shadow = true,
       },
-      fsmenu_gametip = {
-         color = { 0, 0, 0 },
-         face = "serif",
-         size = 16,
+      -- Plot area NOCOM scattered between here and the colors below for the lines
+      plot_xtick = {
+         color = { 255, 0, 0 },
+         face = "condensed",
+         size = 13,
+      },
+      plot_yscale_label = {
+         color = { 60, 125, 0  },
+         face = "condensed",
+         size = 13,
+      },
+      plot_min_value = {
+         color = { 125, 0, 0  },
+         face = "condensed",
+         size = 13,
       },
    },
 
@@ -244,9 +260,6 @@ return {
          productivity_high = {0, 187, 0},        -- High building productivity
          plot_axis_line = { 0, 0, 0 },       -- Statistics plot
          plot_zero_line = { 255, 255, 255 }, -- Statistics plot
-         plot_xtick = { 255, 0, 0 },         -- Statistics plot
-         plot_yscale_label = { 60, 125, 0 }, -- Statistics plot
-         plot_min_value = { 125, 0, 0 },     -- Statistics plot
          game_setup_headings = { 0, 255, 0 },     -- Internet lobby and launch game
          game_setup_mapname = { 255, 255, 127 },  -- Internet lobby and launch game
          intro = { 192, 192, 128 }

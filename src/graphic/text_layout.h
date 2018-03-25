@@ -60,7 +60,7 @@ inline bool is_richtext(const std::string& text) {
  */
 std::string richtext_escape(const std::string& given_text);
 
-std::string as_richtext_paragraph(const std::string& text, const StyleManager::FontStyleInfo& style);
+std::string as_richtext_paragraph(const std::string& text, StyleManager::FontStyle style);
 
 /**
  * Convenience functions to convert simple text into a valid block

@@ -48,6 +48,10 @@ public:
 		kChatWhisper,
 		kChatPlayername,
 		kChatServer,
+		// Statistics plot
+		kPlotXtick,
+		kPlotYscaleLabel,
+		kPlotMinValue,
 		kFsMenuIntro
 	};
 
@@ -73,9 +77,6 @@ public:
 		// Statistics plot
 		kPlotAxisLine,
 		kPlotZeroLine,
-		kPlotXtick,
-		kPlotYscaleLabel,
-		kPlotMinValue,
 		// Internet lobby and launch game
 		kGameSetupHeadings,
 		kGameSetupMapname,

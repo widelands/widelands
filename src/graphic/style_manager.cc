@@ -163,9 +163,6 @@ void StyleManager::init() {
 	add_font_color(FontColor::kProductivityHigh, *style_table->get_table("productivity_high"));
 	add_font_color(FontColor::kPlotAxisLine, *style_table->get_table("plot_axis_line"));
 	add_font_color(FontColor::kPlotZeroLine, *style_table->get_table("plot_zero_line"));
-	add_font_color(FontColor::kPlotXtick, *style_table->get_table("plot_xtick"));
-	add_font_color(FontColor::kPlotYscaleLabel, *style_table->get_table("plot_yscale_label"));
-	add_font_color(FontColor::kPlotMinValue, *style_table->get_table("plot_min_value"));
 	add_font_color(FontColor::kGameSetupHeadings, *style_table->get_table("game_setup_headings"));
 	add_font_color(FontColor::kGameSetupMapname, *style_table->get_table("game_setup_mapname"));
 	add_font_color(FontColor::kIntro, *style_table->get_table("intro"));
@@ -188,6 +185,9 @@ void StyleManager::init() {
 	add_font_style(FontStyle::kChatWhisper, *element_table, "chat_whisper");
 	add_font_style(FontStyle::kChatServer, *element_table, "chat_server");
 	add_font_style(FontStyle::kChatPlayername, *element_table, "chat_playername");
+	add_font_style(FontStyle::kPlotXtick, *element_table, "plot_xtick");
+	add_font_style(FontStyle::kPlotYscaleLabel, *element_table, "plot_yscale_label");
+	add_font_style(FontStyle::kPlotMinValue, *element_table, "plot_min_value");
 	add_font_style(FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(FontStyle::kFsMenuIntro));
 }

@@ -1067,7 +1067,7 @@ bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
 	}
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
-		text_to_render = as_richtext_paragraph(text, g_gr->styles().font_style(StyleManager::FontStyle::kTooltip));
+		text_to_render = as_richtext_paragraph(text, StyleManager::FontStyle::kTooltip);
 	}
 
 	constexpr uint32_t kTipWidthMax = 360;

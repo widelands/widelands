@@ -62,16 +62,14 @@ enum class Units {
 	kDayGeneric
 };
 
-std::string ytick_text_style(const std::string& text, const RGBColor& clr) {
-	static boost::format f(
-	   "<rt keep_spaces=1><p><font face=condensed size=13 color=%s>%s</font></p></rt>");
-	f % clr.hex_value();
-	f % text;
+std::string ytick_text_style(const std::string& text, StyleManager::FontStyle style) {
+	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
+	f % g_gr->styles().font_style(style).as_font_tag(text);
 	return f.str();
 }
 
 std::string xtick_text_style(const std::string& text) {
-	return ytick_text_style(text, g_gr->styles().font_color(StyleManager::FontColor::kPlotXtick));
+	return ytick_text_style(text, StyleManager::FontStyle::kPlotXtick);
 }
 
 /**
@@ -171,10 +169,10 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
  * print the string into the RenderTarget.
  */
 void draw_value(const std::string& value,
-                const RGBColor& color,
+                StyleManager::FontStyle style,
                 const Vector2i& pos,
                 RenderTarget& dst) {
-	std::shared_ptr<const UI::RenderedText> tick = UI::g_fh1->render(ytick_text_style(value, color));
+	std::shared_ptr<const UI::RenderedText> tick = UI::g_fh1->render(ytick_text_style(value, style));
 	Vector2i point(pos);  // Un-const this
 	UI::center_vertically(tick->height(), &point);
 	tick->draw(dst, point, UI::Align::kRight);
@@ -182,12 +180,15 @@ void draw_value(const std::string& value,
 
 uint32_t calc_plot_x_max_ticks(int32_t plot_width) {
 	// Render a number with 3 digits (maximal length which should appear)
-	return plot_width / UI::g_fh1->render(ytick_text_style(" -888 ", RGBColor(0, 0, 0)))->width();
+	return plot_width / UI::g_fh1->render(xtick_text_style(" -888 "))->width();
 }
 
 int calc_slider_label_width(const std::string& label) {
 	// Font size and style as used by DiscreteSlider
-	return UI::g_fh1->render(as_condensed(label, UI::Align::kLeft, g_gr->styles().font_size(StyleManager::FontSize::kSlider)))->width();
+	return UI::g_fh1
+	   ->render(as_condensed(
+	      label, UI::Align::kLeft, g_gr->styles().font_size(StyleManager::FontSize::kSlider)))
+	   ->width();
 }
 
 /**
@@ -198,7 +199,8 @@ void draw_diagram(uint32_t time_ms,
                   const uint32_t inner_h,
                   const float xline_length,
                   RenderTarget& dst) {
-	const RGBColor& axis_line_color = g_gr->styles().font_color(StyleManager::FontColor::kPlotAxisLine);
+	const RGBColor& axis_line_color =
+	   g_gr->styles().font_color(StyleManager::FontColor::kPlotAxisLine);
 
 	uint32_t how_many_ticks, max_x;
 
@@ -483,7 +485,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
 
 	//  print the maximal value into the top right corner
-	draw_value(yscale_label, g_gr->styles().font_color(StyleManager::FontColor::kPlotYscaleLabel),
+	draw_value(yscale_label, StyleManager::FontStyle::kPlotYscaleLabel,
 	           Vector2i(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 }
 
@@ -682,13 +684,14 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
 	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
-	                    g_gr->styles().font_color(StyleManager::FontColor::kPlotZeroLine), kPlotLinesWidth);
+	                    g_gr->styles().font_color(StyleManager::FontColor::kPlotZeroLine),
+	                    kPlotLinesWidth);
 
 	// Draw data and diagram
 	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
-
 	// Print the min value
-	draw_value((boost::format("-%u") % (highest_scale_)).str(), g_gr->styles().font_color(StyleManager::FontColor::kPlotMinValue),
+	draw_value((boost::format("-%u") % (highest_scale_)).str(),
+	           StyleManager::FontStyle::kPlotMinValue,
 	           Vector2i(get_inner_w() - kSpaceRight - 3, get_inner_h() - kSpacing - 23), dst);
 }
 
