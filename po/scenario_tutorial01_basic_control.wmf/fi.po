@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-03-10 07:34+0000\n"
+"PO-Revision-Date: 2018-03-18 18:14+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,18 +83,18 @@ msgstr "Tavallisesti peli aloitetaan yhdellä päämajalla. Se on iso rakennus, 
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Puunhakkaajalle täytyy etsiä sopiva paikka hänen mökkiä varten. Helpoiten se löytyy aktivoimalla 'Näytä Rakennusalueet'. Sen voi tehdä kahdella tavalla:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Press the Space bar to toggle them, or"
-msgstr ""
+msgstr "Paina välilyöntinäppäintä tai"
 
 #. TRANSLATORS: List item. Has an image of the button next to it.
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr ""
+msgstr "paina 'Näytä Rakennusalueet' painiketta ikkunan alareunassa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -116,7 +116,7 @@ msgstr "On helpompi ymmärtää minkä tyyppisiä rakennuksia voidaan rakentaa k
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Right-click on this window now and then give it a try."
-msgstr ""
+msgstr "Paina hiiren oikeanpuoleista nappia tämän ruudun päällä ja kokeile sitä sitten itse."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Lumberjack’s Spot"
@@ -277,7 +277,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "Jos painat rakennustyömaata, ruutu aukeaa. Voit nähdä harmaiksi värjättyinä tavarat, jotka vielä puuttuvat. Voit myös nähdä rakennustyömaan edistymisen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
@@ -601,14 +601,14 @@ msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "Huomioi kallistukset, kun sijoitat teitä ja käytä niitä eduksesi. Yritä myös pitää tiesi niiin lyhyinä kuin mahdollista ja aina muista asettaa niin paljon lippuja kuin mahdollista tieosioille tasataksesi niiden kuormaa."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:315
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Jos pidät Ctrl tai Shift+Ctrl pohjassa tien päätepisteen asettamisen aikaan, liput sijoitetaan automaattisesti. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."

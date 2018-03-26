@@ -28,6 +28,10 @@
 #include "base/macros.h"
 #include "scripting/lua_table.h"
 
+namespace Widelands {
+enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
+}
+
 /// This struct is used to read out the data given in [aihints] section of a
 /// buildings conf file. It is used to tell the computer player about the
 /// special properties of a building.
@@ -81,6 +85,10 @@ struct BuildingHints {
 		return mountain_conqueror_;
 	}
 
+	bool requires_supporters() const {
+		return requires_supporters_;
+	}
+
 	bool is_shipyard() const {
 		return shipyard_;
 	}
@@ -101,13 +109,7 @@ struct BuildingHints {
 		return mines_percent_;
 	}
 
-	int16_t get_very_weak_ai_limit() const {
-		return very_weak_ai_limit_;
-	}
-
-	int16_t get_weak_ai_limit() const {
-		return weak_ai_limit_;
-	}
+	int16_t get_ai_limit(Widelands::AiType) const;
 
 	void set_trainingsites_max_percent(int percent);
 
@@ -131,6 +133,8 @@ private:
 	int8_t mines_percent_;
 	int16_t very_weak_ai_limit_;
 	int16_t weak_ai_limit_;
+	int16_t normal_ai_limit_;
+	bool requires_supporters_;
 	int trainingsites_max_percent_;
 	std::set<std::string> supported_production_;
 

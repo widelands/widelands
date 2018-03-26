@@ -650,6 +650,10 @@ void DefaultAI::late_initialization() {
 		bo.expansion_type = bh.is_expansion_type();
 		bo.fighting_type = bh.is_fighting_type();
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
+		bo.requires_supporters = bh.requires_supporters();
+		if (bo.requires_supporters) {
+			log(" %d: %s strictly requires supporters\n", player_number(), bo.name);
+		}
 		bo.prohibited_till = bh.get_prohibited_till() * 1000;  // value in conf is in seconds
 		bo.forced_after = bh.get_forced_after() * 1000;        // value in conf is in seconds
 		if (bld.get_isport()) {
@@ -667,15 +671,8 @@ void DefaultAI::late_initialization() {
 			bo.set_is(BuildingAttribute::kRanger);
 		}
 		// Is total count of this building limited by AI mode?
-		if (type_ == Widelands::AiType::kVeryWeak && bh.get_very_weak_ai_limit() >= 0) {
-			bo.cnt_limit_by_aimode = bh.get_very_weak_ai_limit();
-			log(" %d: AI 'very weak' mode: applying limit %d building(s) for %s\n", player_number(),
-			    bo.cnt_limit_by_aimode, bo.name);
-		}
-		if (type_ == Widelands::AiType::kWeak && bh.get_weak_ai_limit() >= 0) {
-			bo.cnt_limit_by_aimode = bh.get_weak_ai_limit();
-			log(" %d: AI 'weak' mode: applying limit %d building(s) for %s\n", player_number(),
-			    bo.cnt_limit_by_aimode, bo.name);
+		if (bh.get_ai_limit(type_) >= 0) {
+			bo.cnt_limit_by_aimode = bh.get_ai_limit(type_);
 		}
 
 		// Read all interesting data from ware producing buildings
@@ -2099,9 +2096,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	for (int32_t i = 0; i < 4; ++i)
 		spots_avail.at(i) = 0;
 
+	// We calculate owned buildable spots, of course ignoring ones that are blocked
+	// for now
 	for (std::deque<BuildableField*>::iterator i = buildable_fields.begin();
-	     i != buildable_fields.end(); ++i)
+	     i != buildable_fields.end(); ++i) {
+		if (blocked_fields.is_blocked((*i)->coords)) {
+			continue;
+		}
 		++spots_avail.at((*i)->coords.field->nodecaps() & BUILDCAPS_SIZEMASK);
+	}
 
 	spots_ = spots_avail.at(BUILDCAPS_SMALL);
 	spots_ += spots_avail.at(BUILDCAPS_MEDIUM);
@@ -2605,6 +2608,17 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 			if (bo.type == BuildingObserver::Type::kProductionsite) {
 
 				prio += management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 5;
+
+				// Some productionsites strictly require supporting sites nearby
+				if (bo.requires_supporters) {
+					uint16_t supporters_nearby = 0;
+					for (auto output : bo.outputs) {
+						supporters_nearby += bf->supporters_nearby.at(output);
+					}
+					if (supporters_nearby == 0) {
+						continue;
+					}
+				}
 
 				// this can be only a well (as by now)
 				if (bo.is(BuildingAttribute::kWell)) {
@@ -3568,7 +3582,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 bool DefaultAI::create_shortcut_road(const Flag& flag,
                                      uint16_t checkradius,
                                      int16_t min_reduction,
-                                     int32_t gametime) {
+                                     uint32_t gametime) {
 
 	// Increasing the failed_connection_tries counter
 	// At the same time it indicates a time an economy is without a warehouse
@@ -3580,8 +3594,8 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 	// this should not happen, but if the economy has a warehouse and a dismantle
 	// grace time set, we must 'zero' the dismantle grace time
 	if (!flag.get_economy()->warehouses().empty() &&
-	    eco->dismantle_grace_time != std::numeric_limits<int32_t>::max()) {
-		eco->dismantle_grace_time = std::numeric_limits<int32_t>::max();
+	    eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
+		eco->dismantle_grace_time = std::numeric_limits<uint32_t>::max();
 	}
 
 	// first we deal with situations when this is economy with no warehouses
@@ -3602,12 +3616,12 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 
 		// if we are within grace time, it is OK, just go on
 		if (eco->dismantle_grace_time > gametime &&
-		    eco->dismantle_grace_time != std::numeric_limits<int32_t>::max()) {
+		    eco->dismantle_grace_time != std::numeric_limits<uint32_t>::max()) {
 			;
 
 			// if grace time is not set, this is probably first time without a warehouse and we must
 			// set it
-		} else if (eco->dismantle_grace_time == std::numeric_limits<int32_t>::max()) {
+		} else if (eco->dismantle_grace_time == std::numeric_limits<uint32_t>::max()) {
 
 			// constructionsites
 			if (upcast(ConstructionSite const, constructionsite, flag.get_building())) {
@@ -3846,19 +3860,39 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 		game().send_player_build_road(player_number(), path);
 		return true;
 	}
-	// if all possible roads skipped
-	if (last_attempt_) {
-		Building* bld = flag.get_building();
-		// first we block the field and vicinity for 15 minutes, probably it is not a good place to
-		// build on
-		MapRegion<Area<FCoords>> mr(map, Area<FCoords>(map.get_fcoords(bld->get_position()), 2));
-		do {
-			blocked_fields.add(mr.location(), game().get_gametime() + 15 * 60 * 1000);
-		} while (mr.advance(map));
-		remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
-		game().send_player_bulldoze(*const_cast<Flag*>(&flag));
-		dead_ends_check_ = true;
-		return true;
+	// We can't build a road so let's block the vicinity as an indication this area is not
+	// connectible
+	// Usually we block for 2 minutes, but if it is a last attempt we block for 10 minutes
+	// Note: we block the vicinity only if this economy (usually a sole flag with a building) is not
+	// connected to a warehouse
+	if (flag.get_economy()->warehouses().empty()) {
+
+		// blocking only if latest block was less then 60 seconds ago or it is last attempt
+		if (eco->fields_block_last_time + 60000 < gametime || last_attempt_) {
+			eco->fields_block_last_time = gametime;
+
+			const uint32_t block_time = last_attempt_ ? 10 * 60 * 1000 : 2 * 60 * 1000;
+
+			FindNodeAcceptAll buildable_functor;
+			CheckStepOwnTerritory check_own(player_, MOVECAPS_WALK, true);
+
+			// get all flags within radius
+			std::vector<Coords> reachable_to_block;
+			map.find_reachable_fields(Area<FCoords>(map.get_fcoords(flag.get_position()), checkradius),
+			                          &reachable_to_block, check_own, buildable_functor);
+
+			for (auto coords : reachable_to_block) {
+				blocked_fields.add(coords, game().get_gametime() + block_time);
+			}
+		}
+
+		// If it last attempt we also destroy the flag (with a building if any attached)
+		if (last_attempt_) {
+			remove_from_dqueue<Widelands::Flag>(eco->flags, &flag);
+			game().send_player_bulldoze(*const_cast<Flag*>(&flag));
+			dead_ends_check_ = true;
+			return true;
+		}
 	}
 	return false;
 }
