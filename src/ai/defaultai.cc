@@ -76,6 +76,9 @@ constexpr bool kPrintStats = false;
 // for scheduler
 constexpr int kMaxJobs = 4;
 
+// Count of mine types / ground resources
+constexpr int kMineTypes = 4;
+
 using namespace Widelands;
 
 DefaultAI::NormalImpl DefaultAI::normal_impl;
@@ -1220,7 +1223,7 @@ void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 	}
 
 	// Following asserts presume that there are 1-3 critical mines
-	if (mine_fields_stat.count_types() == 4) {
+	if (mine_fields_stat.count_types() == kMineTypes) {
 		assert(mine_fields_stat.has_critical_ore_fields());
 	}
 	if (mine_fields_stat.count_types() == 0) {
@@ -2244,8 +2247,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	inputs[52] = (numof_psites_in_constr < 8);
 	inputs[53] = (mine_fields_stat.has_critical_ore_fields());
 	inputs[54] = (!mine_fields_stat.has_critical_ore_fields());
-	inputs[55] = (mine_fields_stat.count_types() == 4);
-	inputs[56] = (mine_fields_stat.count_types() != 4);
+	inputs[55] = (mine_fields_stat.count_types() == kMineTypes);
+	inputs[56] = (mine_fields_stat.count_types() != kMineTypes);
 	inputs[57] = (mine_fields_stat.has_critical_ore_fields());
 	inputs[58] = (!mine_fields_stat.has_critical_ore_fields());
 
