@@ -42,7 +42,7 @@ CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const 
 
 bool CheckStepRoadAI::allowed(
    const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
-	uint8_t endcaps = player->get_buildcaps(end);
+	const uint8_t endcaps = player->get_buildcaps(end);
 
 	// we should not cross fields with road or flags (or any other immovable)
 	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
@@ -81,6 +81,56 @@ bool CheckStepRoadAI::reachable_dest(const Map& map, const FCoords& dest) const 
 	}
 
 	return true;
+}
+
+// CheckStepOwnTerritory
+CheckStepOwnTerritory::CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe)
+   : player(pl), movecaps(mc), open_end(oe) {
+}
+
+// Defines when movement is allowed:
+// 1. startfield is walkable (or it is the first step)
+// And endfield either:
+// 2a. is walkable
+// 2b. has our PlayerImmovable (building or flag)
+bool CheckStepOwnTerritory::allowed(
+   const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
+	const uint8_t endcaps = player->get_buildcaps(end);
+	const uint8_t startcaps = player->get_buildcaps(start);
+
+	// We should not cross fields with road or flags (or any other immovable)
+	// Or rather we can step on it, but not go on from such field
+	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
+		return false;
+	}
+
+	// Start field must be walkable
+	if (!(startcaps & movecaps)) {
+		return false;
+	}
+
+	// Endfield can not be water
+	if (endcaps & MOVECAPS_SWIM) {
+		return false;
+	}
+
+	return true;
+}
+
+// We accept either walkable territory or field with own immovable
+bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) const {
+	const uint8_t endcaps = player->get_buildcaps(dest);
+	if (BaseImmovable const* const imm = map.get_immovable(dest)) {
+		if (imm->descr().type() >= MapObjectType::FLAG) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	if (endcaps & MOVECAPS_WALK) {
+		return true;
+	}
+	return false;
 }
 
 // We are looking for fields we can walk on
@@ -296,7 +346,8 @@ MineableField::MineableField(const Widelands::FCoords& fc)
 }
 
 EconomyObserver::EconomyObserver(Widelands::Economy& e) : economy(e) {
-	dismantle_grace_time = std::numeric_limits<int32_t>::max();
+	dismantle_grace_time = std::numeric_limits<uint32_t>::max();
+	fields_block_last_time = 0;
 }
 
 int32_t BuildingObserver::total_count() const {

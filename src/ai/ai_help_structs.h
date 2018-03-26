@@ -135,6 +135,20 @@ struct CheckStepRoadAI {
 	bool open_end;
 };
 
+// Used to walk ower own territory, on fields that are walkable (or as given by mc)
+// plus one step more to a field with own immovable. So that also flags and buildings are
+// included in resulting list
+struct CheckStepOwnTerritory {
+	CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe);
+
+	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
+	bool reachable_dest(const Map&, const FCoords& dest) const;
+
+	Player* player;
+	uint8_t movecaps;
+	bool open_end;
+};
+
 // We are looking for fields we can walk on
 // and owned by hostile player.
 struct FindNodeEnemy {
@@ -247,6 +261,13 @@ struct FindNodeOpenWater {
 
 struct FindNodeWithFlagOrRoad {
 	bool accept(const Map&, FCoords) const;
+};
+
+// Accepts any field
+struct FindNodeAcceptAll {
+	bool accept(const Map&, FCoords) const {
+		return true;
+	};
 };
 
 struct NearFlag {
@@ -387,7 +408,8 @@ struct EconomyObserver {
 
 	Widelands::Economy& economy;
 	std::deque<Widelands::Flag const*> flags;
-	int32_t dismantle_grace_time;
+	uint32_t dismantle_grace_time;
+	uint32_t fields_block_last_time;
 };
 
 struct BuildingObserver {
