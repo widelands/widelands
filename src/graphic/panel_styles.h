@@ -20,7 +20,11 @@
 #ifndef WL_GRAPHIC_PANEL_STYLES_H
 #define WL_GRAPHIC_PANEL_STYLES_H
 
+#include <map>
+#include <memory>
+
 #include "graphic/color.h"
+#include "graphic/font_styles.h"
 #include "graphic/image.h"
 
 namespace UI {
@@ -50,6 +54,8 @@ struct PanelStyleInfo {
 
 	const Image* image;
 	const RGBAColor color;
+	// Optional font info
+	std::map<std::string, std::unique_ptr<UI::FontStyleInfo>> fonts;
 };
 
 }  // namespace UI

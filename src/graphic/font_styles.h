@@ -25,48 +25,53 @@
 #include "graphic/color.h"
 
 namespace UI {
+enum class FontStyle {
+	// Global
+	kFsMenuInfoPanelHeading,
+	kFsMenuInfoPanelParagraph,
+	kWuiInfoPanelHeading,
+	kWuiInfoPanelParagraph,
+	kWuiMessageHeading,
+	kWuiMessageParagraph,
+	kWuiWindowTitle,
+	kTooltip,
+	kWuiWaresInfo,
+	kFsMenuGameTip,
+	kChatTimestamp,
+	kChatMessage,
+	kChatWhisper,
+	kChatPlayername,
+	kChatServer,
+	// Statistics plot
+	kPlotXtick,
+	kPlotYscaleLabel,
+	kPlotMinValue,
+	kTextarea,
+	kFsMenuIntro
+};
 
-	enum class FontStyle {
-		// Global
-		kButton,
-		kFsMenuInfoPanelHeading,
-		kFsMenuInfoPanelParagraph,
-		kWuiInfoPanelHeading,
-		kWuiInfoPanelParagraph,
-		kWuiMessageHeading,
-		kWuiMessageParagraph,
-		kTooltip,
-		kWuiWaresInfo,
-		kFsMenuGameTip,
-		kChatTimestamp,
-		kChatMessage,
-		kChatWhisper,
-		kChatPlayername,
-		kChatServer,
-		// Statistics plot
-		kPlotXtick,
-		kPlotYscaleLabel,
-		kPlotMinValue,
-		kFsMenuIntro
-	};
+struct FontStyleInfo {
+	enum class Face { kSans, kSerif, kCondensed };
 
-	struct FontStyleInfo {
-		enum class Face { kSans, kSerif, kCondensed };
+	FontStyleInfo();
+	explicit FontStyleInfo(const std::string& face, const RGBColor& color, int size);
+	explicit FontStyleInfo(const Face& face, const RGBColor& color, int size);
 
-		FontStyleInfo() = default;
+	std::string as_font_tag(const std::string& text) const;
 
-		const std::string face_to_string() const;
-		void set_face(const std::string& face);
-		std::string as_font_tag(const std::string& text) const;
+private:
+	static Face string_to_face(const std::string& face);
+	const std::string face_to_string() const;
 
-		Face face;
-		RGBColor color;
-		int size;
-		bool bold;
-		bool italic;
-		bool underline;
-		bool shadow;
-	};
+public:
+	Face face;
+	RGBColor color;
+	int size;
+	bool bold;
+	bool italic;
+	bool underline;
+	bool shadow;
+};
 
 }  // namespace UI
 

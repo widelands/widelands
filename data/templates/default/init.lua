@@ -25,6 +25,23 @@ local wui_font_color = {255, 255, 0}
 local wui_font_face = "sans"
 local wui_font_size = 12
 
+local default_button_fonts = {
+   enabled = {
+         color = fs_font_color,
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+   },
+   disabled = {
+         color = {127, 127, 127},
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+   },
+}
+
 -- These are the style definitions to be returned.
 -- Note: you have to keep all the keys intact, or Widelands will not be happy.
 return {
@@ -33,23 +50,72 @@ return {
       -- Buttons used in Fullscreen menus
       fsmenu = {
          -- Main menu ("Single Player", "Watch Replay", ...)
-         menu = { image = fs_button, color = fs_blue },
+         menu = {
+            image = fs_button,
+            color = fs_blue,
+            fonts = {
+               enabled = default_button_fonts["enabled"],
+               disabled = default_button_fonts["disabled"]
+            }
+         },
          -- Primary user selection ("OK", ...)
-         primary = { image = fs_button, color = fs_green },
+         primary = {
+            image = fs_button,
+            color = fs_green,
+            fonts = {
+               enabled = default_button_fonts["enabled"],
+               disabled = default_button_fonts["disabled"]
+            }
+         },
          -- Secondary user selection ("Cancel", "Delete", selection buttons, ...)
-         secondary = { image = fs_button, color = fs_brown },
+         secondary = {
+            image = fs_button,
+            color = fs_brown,
+            fonts = {
+               enabled = default_button_fonts["enabled"],
+               disabled = default_button_fonts["disabled"]
+            }
+         },
       },
       -- Buttons used in-game and in the editor
       wui = {
          -- Main menu ("Exit Game"), Building Windows, selection buttons, ...
-         menu = { image = wui_button, color = wui_light },
+         menu = {
+            image = wui_button,
+            color = wui_light,
+            fonts = {
+               enabled = default_button_fonts["enabled"],
+               disabled = default_button_fonts["disabled"]
+            }
+         },
          -- Primary user selection ("OK", attack, ...)
-         primary = { image = wui_button, color = wui_green },
+         primary = {
+            image = wui_button,
+            color = wui_green,
+            fonts = {
+               enabled = default_button_fonts["enabled"],
+               disabled = default_button_fonts["disabled"]
+            }
+         },
          -- Secondary user selection ("Cancel", "Delete", ...)
-         secondary = { image = wui_button, color = wui_brown },
+         secondary = {
+            image = wui_button,
+            color = wui_brown,
+            fonts = {
+               enabled = default_button_fonts["enabled"],
+               disabled = default_button_fonts["disabled"]
+            }
+         },
          -- Building buttons on fieldaction and building statistics need to be
          -- transparent in order to match the background of the tab panel.
-         building_stats = { image = "", color = {0, 0, 0} },
+         building_stats = {
+            image = "",
+            color = {0, 0, 0},
+            fonts = {
+               enabled = default_button_fonts["enabled"],
+               disabled = default_button_fonts["disabled"]
+            }
+         },
       }
    },
    -- Slider cursors (Sound control, attack, statistics, ...)
@@ -109,18 +175,10 @@ return {
 
    font_styles = {
       -- Font sizes and colors
-      --[[
+      --[[ NOCOM better documentation
          required: face, color, size;
          optional bools: bold, italic, underline, shadow
       ]]
-      -- Buttons
-      button = {
-         color = fs_font_color,
-         face = fs_font_face,
-         size = fs_font_size,
-         bold = true,
-         shadow = true
-      },
       -- Intro screen
       fsmenu_intro = {
          color = { 192, 192, 128 },
@@ -165,6 +223,13 @@ return {
          color = { 255, 255, 0 },
          face = wui_font_face,
          size = wui_font_size,
+      },
+      wui_window_title = {
+         color = fs_font_color,
+         face = wui_font_face,
+         size = 13,
+         bold=true,
+         shadow=true,
       },
       tooltip = {
          color = fs_font_color,
@@ -228,14 +293,22 @@ return {
          size = 13,
       },
       plot_yscale_label = {
-         color = { 60, 125, 0  },
+         color = { 60, 125, 0 },
          face = "condensed",
          size = 13,
       },
       plot_min_value = {
-         color = { 125, 0, 0  },
+         color = { 125, 0, 0 },
          face = "condensed",
          size = 13,
+      },
+      -- Textarea default style
+      textarea = {
+         color = fs_font_color,
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
       },
    },
 

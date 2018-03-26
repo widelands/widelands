@@ -19,7 +19,29 @@
 
 #include "graphic/font_styles.h"
 
+#include <boost/format.hpp>
+
+#include "base/wexception.h"
+
 namespace UI {
+// NOCOM Use a LuaTable constructor instead?
+FontStyleInfo::FontStyleInfo() : FontStyleInfo("sans", RGBColor(0, 0, 0), 14) {
+}
+
+FontStyleInfo::FontStyleInfo(const std::string& init_face, const RGBColor& init_color, int init_size) :
+	FontStyleInfo(string_to_face(init_face), init_color, init_size) {
+}
+
+FontStyleInfo::FontStyleInfo(const FontStyleInfo::Face& init_face, const RGBColor& init_color, int init_size) :
+	face(init_face),
+	color(init_color),
+	size(init_size),
+	bold(false),
+	italic(false),
+	underline(false),
+	shadow(false) {
+
+}
 
 const std::string FontStyleInfo::face_to_string() const {
 	switch (face) {
@@ -33,16 +55,18 @@ const std::string FontStyleInfo::face_to_string() const {
 	return "sans";
 }
 
-void FontStyleInfo::set_face(const std::string& init_face) {
+FontStyleInfo::Face FontStyleInfo::string_to_face(const std::string& init_face) {
+	FontStyleInfo::Face result;
 	if (init_face == "sans") {
-		face = Face::kSans;
+		result = Face::kSans;
 	} else if (init_face == "serif") {
-		face = Face::kSerif;
+		result = Face::kSerif;
 	} else if (init_face == "condensed") {
-		face = Face::kCondensed;
+		result = Face::kCondensed;
 	} else {
 		throw wexception("Unknown font face '%s', expected 'sans', 'serif' or 'condensed'", init_face.c_str());
 	}
+	return result;
 }
 
 std::string FontStyleInfo::as_font_tag(const std::string& text) const {

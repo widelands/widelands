@@ -60,7 +60,9 @@ inline bool is_richtext(const std::string& text) {
  */
 std::string richtext_escape(const std::string& given_text);
 
+std::string as_richtext(const std::string&);
 std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style);
+std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style);
 
 /**
  * Convenience functions to convert simple text into a valid block
@@ -87,21 +89,18 @@ std::string as_aligned(const std::string& txt,
                        const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
                        UI::FontStyleInfo::Face face = UI::FontStyleInfo::Face::kSans);
 
-std::string as_richtext(const std::string&);
 std::string as_game_tip(const std::string&);
 std::string as_message(const std::string& heading, const std::string& body);
 
 /**
-  * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
+  * Render 'text' with the given font style. If 'width' > 0 and the rendered image is too
   * wide, it will first use the condensed font face and then make the text
   * smaller until it fits 'width'. The resulting font size will not go below
   * 'StyleManager::FontSize::kMinimum'.
   */
-std::shared_ptr<const UI::RenderedText> autofit_ui_text(const std::string& text,
-                                                        int width = 0,
-                                                        RGBColor color = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
-                                                        int fontsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal));
-
+std::shared_ptr<const UI::RenderedText> autofit_text(const std::string& text,
+																	  const UI::FontStyleInfo& font_info,
+																	  int width);
 
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_LAYOUT_H

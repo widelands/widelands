@@ -46,15 +46,49 @@ RGBColor read_rgb_color2(const LuaTable& table) {
 	return RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]);
 }
 
+UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::string& table_key) {
+	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
+	UI::FontStyleInfo* font = new UI::FontStyleInfo(style_table->get_string("face"), read_rgb_color2(*style_table->get_table("color")), style_table->get_int("size"));
+	if (font->size < 1) {
+		throw wexception("Font size too small for %s, must be at least 1!", table_key.c_str());
+	}
+	if (style_table->has_key("bold")) {
+		font->bold = style_table->get_bool("bold");
+	}
+	if (style_table->has_key("italic")) {
+		font->italic = style_table->get_bool("italic");
+	}
+	if (style_table->has_key("shadow")) {
+		font->shadow = style_table->get_bool("shadow");
+	}
+	if (style_table->has_key("underline")) {
+		font->underline = style_table->get_bool("underline");
+	}
+	return font;
+}
+
 // Read image filename and RGBA color from LuaTable
-UI::PanelStyleInfo* read_style(const LuaTable& table) {
+UI::PanelStyleInfo* read_style(const LuaTable& table, const std::string keyname = "", size_t expected_fonts = 0) {
 	const std::string image = table.get_string("image");
 	std::vector<int> rgbcolor = table.get_table("color")->array_entries<int>();
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
-	return new UI::PanelStyleInfo(image.empty() ? nullptr : g_gr->images().get(image),
+	UI::PanelStyleInfo* result = new UI::PanelStyleInfo(image.empty() ? nullptr : g_gr->images().get(image),
 	                              RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0));
+
+	if (table.has_key("fonts")) {
+		std::unique_ptr<LuaTable> fonts_table = table.get_table("fonts");
+		for (const std::string& key : fonts_table->keys<std::string>()) {
+			result->fonts.emplace(std::make_pair(key, std::unique_ptr<UI::FontStyleInfo>(read_font_style(*fonts_table, key))));
+		}
+	}
+
+	if (result->fonts.size() != expected_fonts) {
+		throw wexception("StyleManager: There is a definition missing for a style's fonts: %s", keyname.c_str());
+	}
+
+	return result;
 }
 
 // Stupid completeness check - enum classes weren't meant for iterating, so we just compare the size
@@ -81,15 +115,15 @@ void StyleManager::init() {
 	// Buttons
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
 	std::unique_ptr<LuaTable> style_table = element_table->get_table("fsmenu");
-	add_button_style(UI::ButtonStyle::kFsMenuMenu, *style_table->get_table("menu").get());
-	add_button_style(UI::ButtonStyle::kFsMenuPrimary, *style_table->get_table("primary").get());
-	add_button_style(UI::ButtonStyle::kFsMenuSecondary, *style_table->get_table("secondary").get());
+	add_button_style(UI::ButtonStyle::kFsMenuMenu, *style_table, "menu");
+	add_button_style(UI::ButtonStyle::kFsMenuPrimary, *style_table, "primary");
+	add_button_style(UI::ButtonStyle::kFsMenuSecondary, *style_table, "secondary");
 	style_table = element_table->get_table("wui");
-	add_button_style(UI::ButtonStyle::kWuiMenu, *style_table->get_table("menu").get());
-	add_button_style(UI::ButtonStyle::kWuiPrimary, *style_table->get_table("primary").get());
-	add_button_style(UI::ButtonStyle::kWuiSecondary, *style_table->get_table("secondary").get());
+	add_button_style(UI::ButtonStyle::kWuiMenu, *style_table, "menu");
+	add_button_style(UI::ButtonStyle::kWuiPrimary, *style_table, "primary");
+	add_button_style(UI::ButtonStyle::kWuiSecondary, *style_table, "secondary");
 	add_button_style(
-	   UI::ButtonStyle::kWuiBuildingStats, *style_table->get_table("building_stats").get());
+	   UI::ButtonStyle::kWuiBuildingStats, *style_table, "building_stats");
 	check_completeness(
 	   "buttons", buttonstyles_.size(), static_cast<size_t>(UI::ButtonStyle::kWuiBuildingStats));
 
@@ -170,13 +204,13 @@ void StyleManager::init() {
 	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kIntro));
 
 	element_table = table->get_table("font_styles");
-	add_font_style(UI::FontStyle::kButton, *element_table, "button");
 	add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
 	add_font_style(UI::FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
 	add_font_style(UI::FontStyle::kWuiInfoPanelHeading, *element_table, "wui_info_panel_heading");
 	add_font_style(UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
 	add_font_style(UI::FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
 	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
+	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
 	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
 	add_font_style(UI::FontStyle::kWuiWaresInfo, *element_table, "wui_waresinfo");
 	add_font_style(UI::FontStyle::kFsMenuGameTip, *element_table, "fsmenu_gametip");
@@ -188,6 +222,7 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kPlotXtick, *element_table, "plot_xtick");
 	add_font_style(UI::FontStyle::kPlotYscaleLabel, *element_table, "plot_yscale_label");
 	add_font_style(UI::FontStyle::kPlotMinValue, *element_table, "plot_min_value");
+	add_font_style(UI::FontStyle::kTextarea, *element_table, "textarea");
 	add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kFsMenuIntro));
 }
@@ -236,9 +271,15 @@ const RGBColor& StyleManager::font_color(const FontColor color) const {
 }
 
 // Fill the maps
-void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table) {
+void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table, const std::string& key) {
 	buttonstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
+	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(*table.get_table(key), key, 2))));
+	if (buttonstyles_.at(style)->fonts.count("enabled") == 0) {
+		throw wexception("Missing 'enabled' font style for button '%s'", key.c_str());
+	}
+	if (buttonstyles_.at(style)->fonts.count("disabled") == 0) {
+		throw wexception("Missing disabled' font style for button '%s'", key.c_str());
+	}
 }
 
 void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table) {
@@ -268,25 +309,5 @@ void StyleManager::add_font_color(FontColor color, const LuaTable& table) {
 }
 
 void StyleManager::add_font_style(UI::FontStyle font_key, const LuaTable& table, const std::string& table_key) {
-	std::unique_ptr<LuaTable> style_table = table.get_table(table_key);
-	UI::FontStyleInfo* font = new UI::FontStyleInfo();
-	font->size = style_table->get_int("size");
-	if (font->size < 1) {
-		throw wexception("Font size too small for %s, must be at least 1!", table_key.c_str());
-	}
-	font->set_face(style_table->get_string("face"));
-	font->color = read_rgb_color2(*style_table->get_table("color"));
-	if (style_table->has_key("bold")) {
-		font->bold = style_table->get_bool("bold");
-	}
-	if (style_table->has_key("italic")) {
-		font->italic = style_table->get_bool("italic");
-	}
-	if (style_table->has_key("shadow")) {
-		font->shadow = style_table->get_bool("shadow");
-	}
-	if (style_table->has_key("underline")) {
-		font->underline = style_table->get_bool("underline");
-	}
-	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(std::move(font))));
+	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(read_font_style(table, table_key))));
 }

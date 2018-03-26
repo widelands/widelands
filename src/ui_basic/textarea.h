@@ -92,13 +92,13 @@ private:
 	void expand();
 	void update();
 
-	LayoutMode layoutmode_;
+	const LayoutMode layoutmode_;
+	const Align align_;
+
 	std::string text_;
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
-	Align align_;
-	RGBColor color_;
-	int fontsize_;
 
+	FontStyleInfo style_;
 	int fixed_width_;
 };
 }

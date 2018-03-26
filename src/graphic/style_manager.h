@@ -80,7 +80,7 @@ public:
 
 private:
 	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;
-	void add_button_style(UI::ButtonStyle style, const LuaTable& table);
+	void add_button_style(UI::ButtonStyle style, const LuaTable& table, const std::string& key);
 	void add_slider_style(UI::SliderStyle style, const LuaTable& table);
 	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);

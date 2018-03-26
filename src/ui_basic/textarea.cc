@@ -60,21 +60,20 @@ void Textarea::init() {
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
-	color_ = g_gr->styles().font_color(StyleManager::FontColor::kForeground);
-	fontsize_ = g_gr->styles().font_size(StyleManager::FontSize::kNormal);
+	style_ = g_gr->styles().font_style(FontStyle::kTextarea);
 	update();
 }
 
 void Textarea::set_color(RGBColor color) {
-	if (color_ != color) {
-		color_ = color;
+	if (style_.color != color) {
+		style_.color = color;
 		update();
 	}
 }
 
 void Textarea::set_fontsize(int fontsize) {
-	if (fontsize_ != fontsize) {
-		fontsize_ = fontsize;
+	if (style_.size != fontsize) {
+		style_.size = fontsize;
 		update();
 	}
 }
@@ -84,7 +83,7 @@ void Textarea::update() {
 		collapse();  // collapse() implicitly updates the size and position
 	}
 
-	rendered_text_ = autofit_ui_text(text_, fixed_width_, color_, fontsize_);
+	rendered_text_ = autofit_text(text_, style_, fixed_width_);
 
 	if (layoutmode_ == AutoMove) {
 		expand();
@@ -192,7 +191,7 @@ void Textarea::update_desired_size() {
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = text_height(fontsize_);
+			h = text_height(style_.size);
 		}
 	}
 	set_desired_size(w, h);

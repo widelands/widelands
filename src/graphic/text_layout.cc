@@ -76,8 +76,12 @@ std::string as_richtext(const std::string& txt) {
 }
 
 std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style) {
+	return as_richtext_paragraph(text, g_gr->styles().font_style(style));
+}
+
+std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style) {
 	static boost::format f("<rt><p>%s</p></rt>");
-	f % g_gr->styles().font_style(style).as_font_tag(text);
+	f % style.as_font_tag(text);
 	return f.str();
 }
 
@@ -164,16 +168,23 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	      .str());
 }
 
-std::shared_ptr<const UI::RenderedText>
-autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
-	std::shared_ptr<const UI::RenderedText> result =
-	   UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
-	if (width > 0) {  // Autofit
+// NOCOM move to Panel as protected function?
+std::shared_ptr<const UI::RenderedText> autofit_text(const std::string& text,
+																	  const UI::FontStyleInfo& font_info,
+																	  int width) {
+	const std::string text_to_render = richtext_escape(text);
+	std::shared_ptr<const UI::RenderedText> rendered_text =
+	   UI::g_fh1->render(as_richtext_paragraph(text_to_render, font_info));
+
+	// Autoshrink if it doesn't fit
+	if (width > 0 && rendered_text->width() > width) {
 		const int minimum_size = g_gr->styles().font_size(StyleManager::FontSize::kMinimum);
-		for (; result->width() > width && fontsize >= minimum_size; --fontsize) {
-			result = UI::g_fh1->render(
-			   as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
+		// We take a copy, because we are changing values during the autofit.
+		UI::FontStyleInfo temp_font_info = font_info;
+		temp_font_info.face = UI::FontStyleInfo::Face::kCondensed;
+		for (; rendered_text->width() > width && temp_font_info.size >= minimum_size; --temp_font_info.size) {
+			rendered_text = UI::g_fh1->render(as_richtext_paragraph(text_to_render, temp_font_info));
 		}
 	}
-	return result;
+	return rendered_text;
 }
