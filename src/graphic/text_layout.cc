@@ -54,7 +54,7 @@ int text_width(const std::string& text, int ptsize) {
 	   ->width();
 }
 
-int text_height(int ptsize, StyleManager::FontStyleInfo::Face face) {
+int text_height(int ptsize, UI::FontStyleInfo::Face face) {
 	return UI::g_fh1
 	   ->render(as_aligned(UI::g_fh1->fontset()->representative_character(), UI::Align::kLeft,
 	                       ptsize - UI::g_fh1->fontset()->size_offset(), RGBColor(0, 0, 0), face))
@@ -75,7 +75,7 @@ std::string as_richtext(const std::string& txt) {
 	return f.str();
 }
 
-std::string as_richtext_paragraph(const std::string& text, StyleManager::FontStyle style) {
+std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style) {
 	static boost::format f("<rt><p>%s</p></rt>");
 	f % g_gr->styles().font_style(style).as_font_tag(text);
 	return f.str();
@@ -84,18 +84,18 @@ std::string as_richtext_paragraph(const std::string& text, StyleManager::FontSty
 std::string as_game_tip(const std::string& txt) {
 	static boost::format f("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
 	                       "<p align=center>%s</p></rt>");
-	f % g_gr->styles().font_style(StyleManager::FontStyle::kFsMenuGameTip).as_font_tag(txt);
+	f % g_gr->styles().font_style(UI::FontStyle::kFsMenuGameTip).as_font_tag(txt);
 	return f.str();
 }
 
 std::string
-as_uifont(const std::string& txt, int size, const RGBColor& clr, StyleManager::FontStyleInfo::Face face) {
+as_uifont(const std::string& txt, int size, const RGBColor& clr, UI::FontStyleInfo::Face face) {
 	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
 }
 
 std::string
 as_condensed(const std::string& text, UI::Align align, int ptsize, const RGBColor& clr) {
-	return as_aligned(text, align, ptsize, clr, StyleManager::FontStyleInfo::Face::kCondensed);
+	return as_aligned(text, align, ptsize, clr, UI::FontStyleInfo::Face::kCondensed);
 }
 
 std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
@@ -112,7 +112,7 @@ std::string as_aligned(const std::string& txt,
                        UI::Align align,
                        int ptsize,
                        const RGBColor& clr,
-                       StyleManager::FontStyleInfo::Face face) {
+                       UI::FontStyleInfo::Face face) {
 	std::string alignment = "left";
 	switch (align) {
 	case UI::Align::kCenter:
@@ -129,13 +129,13 @@ std::string as_aligned(const std::string& txt,
 	std::string font_face = "sans";
 
 	switch (face) {
-	case StyleManager::FontStyleInfo::Face::kCondensed:
+	case UI::FontStyleInfo::Face::kCondensed:
 		font_face = "condensed";
 		break;
-	case StyleManager::FontStyleInfo::Face::kSerif:
+	case UI::FontStyleInfo::Face::kSerif:
 		font_face = "serif";
 		break;
-	case StyleManager::FontStyleInfo::Face::kSans:
+	case UI::FontStyleInfo::Face::kSans:
 		font_face = "sans";
 		break;
 	}
@@ -155,11 +155,11 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	return (
 	   (boost::format(
 	       "<rt><p>%s<br></p><vspace gap=6>%s</rt>") %
-	    g_gr->styles().font_style(StyleManager::FontStyle::kWuiMessageHeading).as_font_tag(heading) %
+	    g_gr->styles().font_style(UI::FontStyle::kWuiMessageHeading).as_font_tag(heading) %
 	    (is_paragraph(body) || is_div(body) ?
 	        body :
 	        (boost::format("<p>%s</p>") %
-	         g_gr->styles().font_style(StyleManager::FontStyle::kWuiMessageParagraph).as_font_tag(body))
+	         g_gr->styles().font_style(UI::FontStyle::kWuiMessageParagraph).as_font_tag(body))
 	           .str()))
 	      .str());
 }

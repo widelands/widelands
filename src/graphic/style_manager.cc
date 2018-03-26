@@ -170,26 +170,26 @@ void StyleManager::init() {
 	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kIntro));
 
 	element_table = table->get_table("font_styles");
-	add_font_style(FontStyle::kButton, *element_table, "button");
-	add_font_style(FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
-	add_font_style(FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
-	add_font_style(FontStyle::kWuiInfoPanelHeading, *element_table, "wui_info_panel_heading");
-	add_font_style(FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
-	add_font_style(FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
-	add_font_style(FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
-	add_font_style(FontStyle::kTooltip, *element_table, "tooltip");
-	add_font_style(FontStyle::kWuiWaresInfo, *element_table, "wui_waresinfo");
-	add_font_style(FontStyle::kFsMenuGameTip, *element_table, "fsmenu_gametip");
-	add_font_style(FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
-	add_font_style(FontStyle::kChatMessage, *element_table, "chat_message");
-	add_font_style(FontStyle::kChatWhisper, *element_table, "chat_whisper");
-	add_font_style(FontStyle::kChatServer, *element_table, "chat_server");
-	add_font_style(FontStyle::kChatPlayername, *element_table, "chat_playername");
-	add_font_style(FontStyle::kPlotXtick, *element_table, "plot_xtick");
-	add_font_style(FontStyle::kPlotYscaleLabel, *element_table, "plot_yscale_label");
-	add_font_style(FontStyle::kPlotMinValue, *element_table, "plot_min_value");
-	add_font_style(FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
-	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(FontStyle::kFsMenuIntro));
+	add_font_style(UI::FontStyle::kButton, *element_table, "button");
+	add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
+	add_font_style(UI::FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
+	add_font_style(UI::FontStyle::kWuiInfoPanelHeading, *element_table, "wui_info_panel_heading");
+	add_font_style(UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
+	add_font_style(UI::FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
+	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
+	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
+	add_font_style(UI::FontStyle::kWuiWaresInfo, *element_table, "wui_waresinfo");
+	add_font_style(UI::FontStyle::kFsMenuGameTip, *element_table, "fsmenu_gametip");
+	add_font_style(UI::FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
+	add_font_style(UI::FontStyle::kChatMessage, *element_table, "chat_message");
+	add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
+	add_font_style(UI::FontStyle::kChatServer, *element_table, "chat_server");
+	add_font_style(UI::FontStyle::kChatPlayername, *element_table, "chat_playername");
+	add_font_style(UI::FontStyle::kPlotXtick, *element_table, "plot_xtick");
+	add_font_style(UI::FontStyle::kPlotYscaleLabel, *element_table, "plot_yscale_label");
+	add_font_style(UI::FontStyle::kPlotMinValue, *element_table, "plot_min_value");
+	add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
+	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kFsMenuIntro));
 }
 
 // Return functions for the styles
@@ -223,7 +223,7 @@ const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) co
 	return scrollbarstyles_.at(style).get();
 }
 
-const StyleManager::FontStyleInfo& StyleManager::font_style(FontStyle style) const {
+const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {
 	return *fontstyles_.at(style);
 }
 
@@ -267,9 +267,9 @@ void StyleManager::add_font_color(FontColor color, const LuaTable& table) {
 	font_colors_.emplace(std::make_pair(color, read_rgb_color(table)));
 }
 
-void StyleManager::add_font_style(FontStyle font_key, const LuaTable& table, const std::string& table_key) {
+void StyleManager::add_font_style(UI::FontStyle font_key, const LuaTable& table, const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = table.get_table(table_key);
-	FontStyleInfo* font = new FontStyleInfo();
+	UI::FontStyleInfo* font = new UI::FontStyleInfo();
 	font->size = style_table->get_int("size");
 	if (font->size < 1) {
 		throw wexception("Font size too small for %s, must be at least 1!", table_key.c_str());
@@ -288,52 +288,5 @@ void StyleManager::add_font_style(FontStyle font_key, const LuaTable& table, con
 	if (style_table->has_key("underline")) {
 		font->underline = style_table->get_bool("underline");
 	}
-	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<FontStyleInfo>(std::move(font))));
-}
-
-const std::string StyleManager::FontStyleInfo::face_to_string() const {
-	switch (face) {
-	case Face::kSans:
-		return "sans";
-	case Face::kSerif:
-		return "serif";
-	case Face::kCondensed:
-		return "condensed";
-	}
-	return "sans";
-}
-
-void StyleManager::FontStyleInfo::set_face(const std::string& init_face) {
-	if (init_face == "sans") {
-		face = Face::kSans;
-	} else if (init_face == "serif") {
-		face = Face::kSerif;
-	} else if (init_face == "condensed") {
-		face = Face::kCondensed;
-	} else {
-		throw wexception("Unknown font face '%s', expected 'sans', 'serif' or 'condensed'", init_face.c_str());
-	}
-}
-
-std::string StyleManager::FontStyleInfo::as_font_tag(const std::string& text) const {
-	static boost::format f("<font face=%s size=%d color=%s%s>%s</font>");
-	std::string optionals = "";
-	if (bold) {
-		optionals += " bold=1";
-	}
-	if (italic) {
-		optionals += " italic=1";
-	}
-	if (shadow) {
-		optionals += " shadow=1";
-	}
-	if (underline) {
-		optionals += " underline=1";
-	}
-	f % face_to_string();
-	f % size;
-	f % color.hex_value();
-	f % optionals;
-	f % text;
-	return f.str();
+	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(std::move(font))));
 }

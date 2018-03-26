@@ -8,6 +8,8 @@ add_subdirectory(text)
 
 wl_library(graphic_styles
   SRCS
+    font_styles.cc
+    font_styles.h
     panel_styles.cc
     panel_styles.h
   DEPENDS

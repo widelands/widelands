@@ -332,7 +332,7 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	              info_color_for_ware(id));
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_richtext_paragraph(info_for_ware(id), StyleManager::FontStyle::kWuiWaresInfo));
+	   UI::g_fh1->render(as_richtext_paragraph(info_for_ware(id), UI::FontStyle::kWuiWaresInfo));
 	rendered_text->draw(dst, Vector2i(p.x + w - rendered_text->width() - 1,
 	                                  p.y + WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 -
 	                                     rendered_text->height()));

@@ -33,12 +33,12 @@ std::string color(const int16_t playern) {
 	if ((playern >= 0) && playern < kMaxPlayers) {
 		return kPlayerColors[playern].hex_value();
 	}
-	return g_gr->styles().font_style(StyleManager::FontStyle::kChatServer).color.hex_value();
+	return g_gr->styles().font_style(UI::FontStyle::kChatServer).color.hex_value();
 }
 
 std::string as_playercolor(const int16_t playern, const std::string& text) {
 	const std::string colored_text = (boost::format("<font color=%s>%s</font>") % color(playern) % text).str();
-	return g_gr->styles().font_style(StyleManager::FontStyle::kChatPlayername).as_font_tag(colored_text);
+	return g_gr->styles().font_style(UI::FontStyle::kChatPlayername).as_font_tag(colored_text);
 }
 
 }  // namespace
@@ -56,12 +56,12 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 		if (sanitized.compare(0, 3, "/me")) {
 			message = as_playercolor(chat_message.playern,
 						(boost::format("%s @%s:") % sender_escaped % recipient_escaped).str());
-			message = g_gr->styles().font_style(StyleManager::FontStyle::kChatWhisper).as_font_tag(
+			message = g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag(
 						(boost::format("%s %s") % message % sanitized).str());
 		} else {
 			message = message = as_playercolor(chat_message.playern, (
 						(boost::format("@%s: -&gt; %s") % recipient_escaped % sender_escaped).str()));
-			message = g_gr->styles().font_style(StyleManager::FontStyle::kChatWhisper).as_font_tag(
+			message = g_gr->styles().font_style(UI::FontStyle::kChatWhisper).as_font_tag(
 						(boost::format("%s %s") % message % sanitized.substr(3)).str());
 		}
 	} else {
@@ -69,16 +69,16 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 		if (!sanitized.compare(0, 3, "/me")) {
 			message = message = as_playercolor(chat_message.playern, (
 						(boost::format("-&gt; %s") % (chat_message.sender.empty() ? "***" : sender_escaped)).str()));
-			message = g_gr->styles().font_style(StyleManager::FontStyle::kChatMessage).as_font_tag(
+			message = g_gr->styles().font_style(UI::FontStyle::kChatMessage).as_font_tag(
 						(boost::format("%s %s") % message % sanitized.substr(3)).str());
 		} else if (chat_message.sender.size()) {
 			const std::string sender_formatted = as_playercolor(chat_message.playern, (boost::format("%s:") % sender_escaped).str());
 			message =
 			   (boost::format("%s %s") %
-			    sender_formatted % g_gr->styles().font_style(StyleManager::FontStyle::kChatMessage).as_font_tag(sanitized))
+			    sender_formatted % g_gr->styles().font_style(UI::FontStyle::kChatMessage).as_font_tag(sanitized))
 			      .str();
 		} else {
-			message = g_gr->styles().font_style(StyleManager::FontStyle::kChatServer).as_font_tag("*** " + sanitized);
+			message = g_gr->styles().font_style(UI::FontStyle::kChatServer).as_font_tag("*** " + sanitized);
 		}
 	}
 
@@ -86,7 +86,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	char ts[13];
 	strftime(ts, sizeof(ts), "[%H:%M]", localtime(&chat_message.time));
 
-	return (boost::format("<p>%s %s</p>") % g_gr->styles().font_style(StyleManager::FontStyle::kChatTimestamp).as_font_tag(ts) % message).str();
+	return (boost::format("<p>%s %s</p>") % g_gr->styles().font_style(UI::FontStyle::kChatTimestamp).as_font_tag(ts) % message).str();
 }
 
 std::string sanitize_message(const ChatMessage& chat_message) {

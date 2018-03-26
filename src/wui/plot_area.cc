@@ -62,14 +62,14 @@ enum class Units {
 	kDayGeneric
 };
 
-std::string ytick_text_style(const std::string& text, StyleManager::FontStyle style) {
+std::string ytick_text_style(const std::string& text, UI::FontStyle style) {
 	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
 	f % g_gr->styles().font_style(style).as_font_tag(text);
 	return f.str();
 }
 
 std::string xtick_text_style(const std::string& text) {
-	return ytick_text_style(text, StyleManager::FontStyle::kPlotXtick);
+	return ytick_text_style(text, UI::FontStyle::kPlotXtick);
 }
 
 /**
@@ -169,7 +169,7 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
  * print the string into the RenderTarget.
  */
 void draw_value(const std::string& value,
-                StyleManager::FontStyle style,
+                UI::FontStyle style,
                 const Vector2i& pos,
                 RenderTarget& dst) {
 	std::shared_ptr<const UI::RenderedText> tick = UI::g_fh1->render(ytick_text_style(value, style));
@@ -485,7 +485,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
 
 	//  print the maximal value into the top right corner
-	draw_value(yscale_label, StyleManager::FontStyle::kPlotYscaleLabel,
+	draw_value(yscale_label, UI::FontStyle::kPlotYscaleLabel,
 	           Vector2i(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 }
 
@@ -691,7 +691,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
 	// Print the min value
 	draw_value((boost::format("-%u") % (highest_scale_)).str(),
-	           StyleManager::FontStyle::kPlotMinValue,
+	           UI::FontStyle::kPlotMinValue,
 	           Vector2i(get_inner_w() - kSpaceRight - 3, get_inner_h() - kSpacing - 23), dst);
 }
 
