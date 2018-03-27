@@ -53,7 +53,7 @@ BaseListselect::BaseListselect(Panel* const parent,
                                UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
-     lineheight_(text_height() + kMargin),
+     lineheight_(text_height_old() + kMargin),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
      scrollpos_(0),
      selection_(no_selection_index()),

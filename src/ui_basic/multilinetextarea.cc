@@ -51,7 +51,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	scrollbar_.set_singlestepsize(text_height());
+	scrollbar_.set_singlestepsize(text_height_old());
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);

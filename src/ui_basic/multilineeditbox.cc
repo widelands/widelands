@@ -96,7 +96,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::PanelStyleInfo* styl
         &o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::PanelStyle::kWui),
 	  background_style(style),
      cursor_pos(0),
-     lineheight(text_height()),
+     lineheight(text_height_old()),
      maxbytes(std::min(g_gr->max_texture_size() / g_gr->styles().font_size(StyleManager::FontSize::kNormal), 0xffff)),
      ww_valid(false),
      owner(o) {

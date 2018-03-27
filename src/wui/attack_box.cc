@@ -66,9 +66,9 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
 }
 
 UI::Textarea&
-AttackBox::add_text(UI::Box& parent, std::string str, UI::Align alignment, int fontsize) {
+AttackBox::add_text(UI::Box& parent, std::string str, UI::Align alignment, const UI::FontStyleInfo& style) {
 	UI::Textarea& result = *new UI::Textarea(&parent, str.c_str());
-	result.set_fontsize(fontsize);
+	result.set_style(style);
 	parent.add(&result, UI::Box::Resizing::kAlign, alignment);
 	return result;
 }
@@ -125,7 +125,7 @@ void AttackBox::init() {
 
 	UI::Box& linebox = *new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	add(&linebox);
-	add_text(linebox, _("Soldiers:"));
+	add_text(linebox, _("Soldiers:"), UI::Align::kLeft, g_gr->styles().font_style(UI::FontStyle::kLabel));
 	linebox.add_space(8);
 
 	less_soldiers_ =
@@ -137,9 +137,8 @@ void AttackBox::init() {
 
 	const std::string attack_string =
 	   (boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
-
 	soldiers_text_.reset(
-	   &add_text(columnbox, attack_string, UI::Align::kCenter, g_gr->styles().font_size(StyleManager::FontSize::kSlider)));
+	   &add_text(columnbox, attack_string, UI::Align::kCenter, *g_gr->styles().slider_style(UI::SliderStyle::kWuiDark)->fonts.at("labels")));
 
 	soldiers_slider_ = add_slider(
 	   columnbox, 100, 10, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));

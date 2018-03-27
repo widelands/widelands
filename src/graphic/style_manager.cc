@@ -130,10 +130,10 @@ void StyleManager::init() {
 	// Sliders
 	element_table = table->get_table("sliders");
 	style_table = element_table->get_table("fsmenu");
-	add_slider_style(UI::SliderStyle::kFsMenu, *style_table->get_table("menu").get());
+	add_slider_style(UI::SliderStyle::kFsMenu, *style_table, "menu");
 	style_table = element_table->get_table("wui");
-	add_slider_style(UI::SliderStyle::kWuiLight, *style_table->get_table("light").get());
-	add_slider_style(UI::SliderStyle::kWuiDark, *style_table->get_table("dark").get());
+	add_slider_style(UI::SliderStyle::kWuiLight, *style_table, "light");
+	add_slider_style(UI::SliderStyle::kWuiDark, *style_table, "dark");
 	check_completeness(
 	   "sliders", sliderstyles_.size(), static_cast<size_t>(UI::SliderStyle::kWuiDark));
 
@@ -179,7 +179,6 @@ void StyleManager::init() {
 	style_table = element_table->get_table("sizes");
 	add_font_size(FontSize::kTitle, *style_table, "title");
 	add_font_size(FontSize::kNormal, *style_table, "normal");
-	add_font_size(FontSize::kSlider, *style_table, "slider");
 	add_font_size(FontSize::kMinimum, *style_table, "minimum");
 	check_completeness(
 	   "font_sizes", font_sizes_.size(), static_cast<size_t>(FontSize::kMinimum));
@@ -222,7 +221,7 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kPlotXtick, *element_table, "plot_xtick");
 	add_font_style(UI::FontStyle::kPlotYscaleLabel, *element_table, "plot_yscale_label");
 	add_font_style(UI::FontStyle::kPlotMinValue, *element_table, "plot_min_value");
-	add_font_style(UI::FontStyle::kTextarea, *element_table, "textarea");
+	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
 	add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kFsMenuIntro));
 }
@@ -282,9 +281,12 @@ void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table
 	}
 }
 
-void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table) {
+void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table, const std::string key) {
 	sliderstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
+	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(*table.get_table(key), key, 1))));
+	if (sliderstyles_.at(style)->fonts.count("labels") == 0) {
+		throw wexception("Missing 'labels' font style for slider '%s'", key.c_str());
+	}
 }
 
 void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table) {

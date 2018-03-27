@@ -60,7 +60,7 @@ void Textarea::init() {
 	fixed_width_ = 0;
 	set_handle_mouse(false);
 	set_thinks(false);
-	style_ = g_gr->styles().font_style(FontStyle::kTextarea);
+	style_ = g_gr->styles().font_style(FontStyle::kLabel);
 	update();
 }
 
@@ -76,6 +76,11 @@ void Textarea::set_fontsize(int fontsize) {
 		style_.size = fontsize;
 		update();
 	}
+}
+
+void Textarea::set_style(UI::FontStyleInfo style) {
+	style_ = style;
+	update();
 }
 
 void Textarea::update() {
@@ -191,7 +196,7 @@ void Textarea::update_desired_size() {
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = text_height(style_.size);
+			h = text_height_old(style_.size);
 		}
 	}
 	set_desired_size(w, h);

@@ -54,12 +54,22 @@ int text_width(const std::string& text, int ptsize) {
 	   ->width();
 }
 
-int text_height(int ptsize, UI::FontStyleInfo::Face face) {
+// NOCOM get rid
+int text_height_old(int ptsize, UI::FontStyleInfo::Face face) {
 	return UI::g_fh1
 	   ->render(as_aligned(UI::g_fh1->fontset()->representative_character(), UI::Align::kLeft,
 	                       ptsize - UI::g_fh1->fontset()->size_offset(), RGBColor(0, 0, 0), face))
 	   ->height();
 }
+
+int text_height(const UI::FontStyleInfo& style) {
+	UI::FontStyleInfo info = style;
+	info.size -= UI::g_fh1->fontset()->size_offset();
+	return UI::g_fh1
+	   ->render(as_richtext_paragraph(UI::g_fh1->fontset()->representative_character(), info))
+	   ->height();
+}
+
 
 std::string richtext_escape(const std::string& given_text) {
 	std::string text = given_text;

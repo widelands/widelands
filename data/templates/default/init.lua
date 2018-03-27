@@ -25,14 +25,16 @@ local wui_font_color = {255, 255, 0}
 local wui_font_face = "sans"
 local wui_font_size = 12
 
-local default_button_fonts = {
-   enabled = {
+local default_ui_font = {
          color = fs_font_color,
          face = fs_font_face,
          size = fs_font_size,
          bold = true,
          shadow = true
-   },
+}
+
+local default_button_fonts = {
+   enabled = default_ui_font,
    disabled = {
          color = {127, 127, 127},
          face = fs_font_face,
@@ -100,13 +102,49 @@ return {
    -- Slider cursors (Sound control, attack, statistics, ...)
    sliders = {
       fsmenu = {
-         menu = { image = fs_button, color = fs_blue },
+         menu = {
+            image = fs_button,
+            color = fs_blue,
+            fonts = {
+               labels = {
+                  color = fs_font_color,
+                  face = "condensed",
+                  size = 11,
+                  bold = true,
+                  shadow = true
+               }
+            }
+         }
       },
       wui = {
          -- Sound Options, Statistics
-         light = { image = wui_button, color = wui_brown },
+         light = {
+            image = wui_button,
+            color = wui_brown,
+            fonts = {
+               labels = {
+                  color = fs_font_color,
+                  face = "condensed",
+                  size = 11,
+                  bold = true,
+                  shadow = true
+               }
+            }
+         },
          -- Fieldaction (attack)
-         dark = { image = wui_button, color = wui_green },
+         dark = {
+            image = wui_button,
+            color = wui_green,
+            fonts = {
+               labels = {
+                  color = fs_font_color,
+                  face = "condensed",
+                  size = 11,
+                  bold = true,
+                  shadow = true
+               }
+            }
+         },
       }
    },
    -- Background for tab panels
@@ -281,14 +319,8 @@ return {
          face = "condensed",
          size = 13,
       },
-      -- Textarea default style
-      textarea = {
-         color = fs_font_color,
-         face = fs_font_face,
-         size = fs_font_size,
-         bold = true,
-         shadow = true
-      },
+      -- Textarea default style, also used for sliders, checkboxes, ...
+      label = default_ui_font,
    },
 
    -- NOCOM clean this up and remove
@@ -296,7 +328,6 @@ return {
       sizes = {
          title = 22,    -- Big titles
          normal = 14,   -- Default UI color
-         slider = 11,   -- Slider font size
          minimum = 6,   -- When autoresizing text to fit, don't go below this size
       },
       colors = {

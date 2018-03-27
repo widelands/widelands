@@ -498,7 +498,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
 		   UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size));
-		position.y += rendered_census->height() + text_height(font_size) / 4;
+		position.y += rendered_census->height() + text_height_old(font_size) / 4;
 		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
 	}
 }

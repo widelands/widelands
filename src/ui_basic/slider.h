@@ -235,6 +235,11 @@ protected:
 	void draw(RenderTarget& dst) override;
 	void layout() override;
 
+private:
+	// We need the style to initialize the slider, so it has to come first.
+	const UI::PanelStyleInfo* style;
+
+protected:
 	HorizontalSlider slider;
 
 private:

@@ -100,7 +100,7 @@ void MapDetails::clear() {
 }
 
 void MapDetails::layout() {
-	name_label_.set_size(get_w() - padding_, text_height() + 2);
+	name_label_.set_size(get_w() - padding_, text_height_old() + 2);
 
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {

@@ -46,7 +46,8 @@ int text_width(const std::string& text, int ptsize = g_gr->styles().font_size(St
   * Returns the exact height of the text rendered for the given font size and face.
   * This function is inefficient; only call when we need the exact height.
   */
-int text_height(int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal), UI::FontStyleInfo::Face face = UI::FontStyleInfo::Face::kSans);
+int text_height_old(int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal), UI::FontStyleInfo::Face face = UI::FontStyleInfo::Face::kSans);
+int text_height(const UI::FontStyleInfo& style);
 
 /**
  * Checks it the given string is RichText or not. Does not do validity checking.

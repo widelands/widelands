@@ -80,6 +80,7 @@ struct Textarea : public Panel {
 
 	void set_color(RGBColor color);
 	void set_fontsize(int fontsize);
+	void set_style(UI::FontStyleInfo style);
 
 protected:
 	void update_desired_size() override;

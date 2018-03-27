@@ -46,7 +46,7 @@ enum class FontStyle {
 	kPlotXtick,
 	kPlotYscaleLabel,
 	kPlotMinValue,
-	kTextarea,
+	kLabel,
 	kFsMenuIntro
 };
 

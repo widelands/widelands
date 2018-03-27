@@ -82,7 +82,7 @@ EditBox::EditBox(Panel* const parent,
                  int margin_y,
                  UI::PanelStyle style,
                  int font_size)
-   : Panel(parent, x, y, w, h > 0 ? h : text_height(font_size) + 2 * margin_y),
+   : Panel(parent, x, y, w, h > 0 ? h : text_height_old(font_size) + 2 * margin_y),
      m_(new EditBoxImpl),
      history_active_(false),
      history_position_(-1) {
@@ -370,7 +370,7 @@ void EditBox::draw(RenderTarget& dst) {
 	   UI::g_fh1->render(as_editorfont(m_->text, m_->fontsize));
 
 	const int linewidth = rendered_text->width();
-	const int lineheight = m_->text.empty() ? text_height(m_->fontsize) : rendered_text->height();
+	const int lineheight = m_->text.empty() ? text_height_old(m_->fontsize) : rendered_text->height();
 
 	Vector2i point(kMarginX, get_h() / 2);
 	if (m_->align == UI::Align::kRight) {
@@ -407,7 +407,7 @@ void EditBox::draw(RenderTarget& dst) {
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
 		int caret_x = text_width(line_to_caret, m_->fontsize);
 
-		const uint16_t fontheight = text_height(m_->fontsize);
+		const uint16_t fontheight = text_height_old(m_->fontsize);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 		Vector2i caretpt = Vector2i::zero();

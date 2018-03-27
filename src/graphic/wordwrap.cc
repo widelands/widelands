@@ -248,7 +248,7 @@ uint32_t WordWrap::width() const {
  * Compute the total height of the word-wrapped text.
  */
 uint32_t WordWrap::height() const {
-	return text_height(fontsize_) * (lines_.size()) + 2 * kLineMargin;
+	return text_height_old(fontsize_) * (lines_.size()) + 2 * kLineMargin;
 }
 
 /**
@@ -301,7 +301,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	Align alignment = UI::g_fh1->fontset()->mirror_alignment(align);
 
-	const int fontheight = text_height(fontsize_);
+	const int fontheight = text_height_old(fontsize_);
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
 		if (where.y >= dst.height() || (where.y + fontheight) <= 0)
 			continue;

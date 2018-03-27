@@ -48,8 +48,8 @@ Table<void*>::Table(Panel* const parent,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
-     headerheight_(text_height() + 4),
-     lineheight_(text_height()),
+     headerheight_(text_height_old() + 4),
+     lineheight_(text_height_old()),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
      scrollbar_(nullptr),
