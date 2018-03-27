@@ -76,6 +76,9 @@ constexpr bool kPrintStats = false;
 // for scheduler
 constexpr int kMaxJobs = 4;
 
+// Count of mine types / ground resources
+constexpr int kMineTypes = 4;
+
 using namespace Widelands;
 
 DefaultAI::NormalImpl DefaultAI::normal_impl;
@@ -692,7 +695,8 @@ void DefaultAI::late_initialization() {
 				bo.set_is(BuildingAttribute::kSupportingProducer);
 			}
 
-			iron_ore_id = tribe_->ironore();
+			iron_resource_id = game().world().get_resource("iron");
+			assert(iron_resource_id != INVALID_INDEX);
 
 			if (bo.type == BuildingObserver::Type::kMine) {
 				// get the resource needed by the mine
@@ -707,9 +711,10 @@ void DefaultAI::late_initialization() {
 					mines_per_type[bo.mines] = MineTypesObserver();
 				}
 				// Identify iron mines based on output
-				if (bo.outputs[0] == iron_ore_id) {
+				if (bo.outputs[0] == tribe_->ironore()) {
 					bo.set_is(BuildingAttribute::kIronMine);
 					mines_per_type[bo.mines].is_critical = true;
+					mine_fields_stat.add_critical_ore(bo.mines);
 				}
 			}
 
@@ -779,8 +784,8 @@ void DefaultAI::late_initialization() {
 				    !(ware == tribe_->rawlog() || ware == tribe_->granite())) {
 					bo.set_is(BuildingAttribute::kBuildingMatProducer);
 					if (bo.type == BuildingObserver::Type::kMine) {
-						has_critical_mines = true;
 						mines_per_type[bo.mines].is_critical = true;
+						mine_fields_stat.add_critical_ore(bo.mines);
 					}
 				}
 			}
@@ -1032,9 +1037,6 @@ void DefaultAI::late_initialization() {
 		persistent_data->expedition_start_time = gametime;
 	}
 
-	// just to be sure we have iron mines identified
-	assert(iron_ore_id != INVALID_INDEX);
-
 	productionsites_ratio_ = management_data.get_military_number_at(86) / 10 + 12;
 
 	// Just to be initialized
@@ -1209,6 +1211,21 @@ void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 
 		i += 1;
 	}
+	// Updating overall statistics, first we flush the data and then iterate over all mine fields
+	mine_fields_stat.zero();
+	for (const auto& mineable_field : mineable_fields) {
+		if (mineable_field->coords.field->get_resources_amount() > 0) {
+			mine_fields_stat.add(mineable_field->coords.field->get_resources());
+		}
+	}
+
+	// Following asserts presume that there are 1-3 critical mines
+	if (mine_fields_stat.count_types() == kMineTypes) {
+		assert(mine_fields_stat.has_critical_ore_fields());
+	}
+	if (mine_fields_stat.count_types() == 0) {
+		assert(!mine_fields_stat.has_critical_ore_fields());
+	}
 }
 
 /**
@@ -1264,7 +1281,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	FindEnemyNodeWalkable find_enemy_owned_walkable(player_, game());
 	FindNodeUnownedBuildable find_unowned_buildable(player_, game());
 	FindNodeUnownedMineable find_unowned_mines_pots(player_, game());
-	FindNodeUnownedMineable find_unowned_iron_mines(player_, game(), iron_ore_id);
+	FindNodeUnownedMineable find_unowned_iron_mines(player_, game(), iron_resource_id);
 	FindNodeAllyOwned find_ally(player_, game(), player_number());
 	PlayerNumber const pn = player_->player_number();
 	const World& world = game().world();
@@ -1360,8 +1377,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		if (field.unowned_mines_spots_nearby > 0 &&
 		    // for performance considerations we count iron nodes only if we have less than 2 iron
 		    // mines now...
-		    (mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished) <=
-		       1) {
+		    (mines_per_type[iron_resource_id].in_construction +
+		     mines_per_type[iron_resource_id].finished) <= 1) {
 			// counting iron mines, if we have less than two iron mines
 			field.unowned_iron_mines_nearby = map.find_fields(
 			   Area<FCoords>(field.coords, kDistantResourcesArea), nullptr, find_unowned_iron_mines);
@@ -1697,7 +1714,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.inland = true;
 	}
 
-	const uint8_t score_parts_size = 64;
+	const uint8_t score_parts_size = 69;
 	int32_t score_parts[score_parts_size] = {0};
 	if (field.enemy_owned_land_nearby) {
 		score_parts[0] = 3 *
@@ -1752,7 +1769,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   (field.enemy_nearby) ? 3 * std::abs(management_data.get_military_number_at(68)) : 0;
 		score_parts[19] =
 		   (field.enemy_wh_nearby) ? 3 * std::abs(management_data.get_military_number_at(132)) : 0;
-		score_parts[58] = (field.enemy_wh_nearby) ?
+		score_parts[64] = (field.enemy_wh_nearby) ?
 		                     std::abs(management_data.get_military_number_at(135)) :
 		                     -std::abs(management_data.get_military_number_at(135));
 
@@ -1822,18 +1839,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 		if (msites_in_constr() > 0 && field.max_buildcap_nearby == BUILDCAPS_BIG &&
 		    spots_avail.at(BUILDCAPS_BIG) <= 2) {
-			score_parts[57] = -10 * std::abs(management_data.get_military_number_at(54));
+			score_parts[65] = -10 * std::abs(management_data.get_military_number_at(54));
 		}
 	}
 
 	// common inputs
-	if (field.unowned_iron_mines_nearby > 0 && ((mines_per_type[iron_ore_id].in_construction +
-	                                             mines_per_type[iron_ore_id].finished) == 0)) {
+	if (field.unowned_iron_mines_nearby > 0 && ((mines_per_type[iron_resource_id].in_construction +
+	                                             mines_per_type[iron_resource_id].finished) == 0)) {
 		score_parts[40] = field.unowned_iron_mines_nearby *
 		                  std::abs(management_data.get_military_number_at(92)) / 50;
 	}
-	if (field.unowned_iron_mines_nearby && ((mines_per_type[iron_ore_id].in_construction +
-	                                         mines_per_type[iron_ore_id].finished) <= 1)) {
+	if (field.unowned_iron_mines_nearby && ((mines_per_type[iron_resource_id].in_construction +
+	                                         mines_per_type[iron_resource_id].finished) <= 1)) {
 		score_parts[41] = 3 * std::abs(management_data.get_military_number_at(93));
 	}
 
@@ -1889,6 +1906,18 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	score_parts[63] = (field.nearest_buildable_spot_nearby < 4) ?
 	                     std::abs(management_data.get_military_number_at(155) * 2) :
 	                     0;
+	// 64 and 65 are used above
+	score_parts[66] =
+	   (field.unowned_mines_spots_nearby > 0 && !mine_fields_stat.has_critical_ore_fields()) ?
+	      std::abs(management_data.get_military_number_at(157)) :
+	      0;
+	score_parts[67] = (field.unowned_mines_spots_nearby > 0 && mine_fields_stat.count_types() <= 4) ?
+	                     std::abs(management_data.get_military_number_at(158)) :
+	                     0;
+	score_parts[68] =
+	   (field.unowned_mines_spots_nearby == 0 && mine_fields_stat.count_types() <= 4) ?
+	      -std::abs(management_data.get_military_number_at(159)) :
+	      0;
 
 	for (uint16_t i = 0; i < score_parts_size; i++) {
 		field.military_score_ += score_parts[i];
@@ -2221,6 +2250,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	inputs[50] = (bakeries_count_ <= 1);
 	inputs[51] = (numof_psites_in_constr > 8);
 	inputs[52] = (numof_psites_in_constr < 8);
+	inputs[53] = (mine_fields_stat.has_critical_ore_fields());
+	inputs[54] = (!mine_fields_stat.has_critical_ore_fields());
+	inputs[55] = (mine_fields_stat.count_types() == kMineTypes);
+	inputs[56] = (mine_fields_stat.count_types() != kMineTypes);
+	inputs[57] = (mine_fields_stat.has_critical_ore_fields());
+	inputs[58] = (!mine_fields_stat.has_critical_ore_fields());
 
 	static int16_t needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
 	needs_boost_economy_score = management_data.get_military_number_at(61) / 5;
@@ -2243,12 +2278,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 	}
 
 	// Finding expansion policy
-	// Do we need basic resources?
-	// This is a replacement for simple count of mines
-	const int32_t virtual_mines = mines_.size() + mineable_fields.size() / 15;
+	// Do we need basic resources? Do we have basic mines?
 	const bool needs_fishers = resource_necessity_water_needed_ && fishers_count_ < 1;
 
-	if (virtual_mines < 4 || mines_per_type[iron_ore_id].total_count() < 1 || needs_fishers) {
+	if (!mine_fields_stat.has_critical_ore_fields() ||
+	    mines_per_type[iron_resource_id].total_count() < 1 || needs_fishers) {
 		expansion_type.set_expantion_type(ExpansionMode::kResources);
 	} else {
 		// now we must decide if we go after spots or economy boost
@@ -2988,11 +3022,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 				// for spots close to a border
 				if (bf->near_border) {
 					prio -= 5;
-				}
-
-				// be should rather have some mines
-				if (virtual_mines < 6) {
-					prio -= (6 - virtual_mines) * 7;
 				}
 
 				// take care about borders and enemies
@@ -4436,7 +4465,8 @@ bool DefaultAI::check_mines_(uint32_t const gametime) {
 	// Single _critical is a critical mine if it is the only one of its type, so it needs special
 	// treatment
 	bool single_critical = false;
-	if ((site.bo->is(BuildingAttribute::kBuildingMatProducer) || site.bo->mines == iron_ore_id) &&
+	if ((site.bo->is(BuildingAttribute::kBuildingMatProducer) ||
+	     site.bo->mines == iron_resource_id) &&
 	    mines_per_type[site.bo->mines].total_count() == 1) {
 		single_critical = true;
 	}
@@ -4712,6 +4742,11 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 		// If we are close to enemy (was seen in last 15 minutes)
 		if (player_statistics.any_enemy_seen_lately(gametime)) {
 			bo.primary_priority += std::abs(management_data.get_military_number_at(57) / 2);
+		}
+
+		// Do we own some minefields for each critical mine
+		if (!mine_fields_stat.has_critical_ore_fields()) {
+			bo.primary_priority -= std::abs(management_data.get_military_number_at(156));
 		}
 
 		// We build one trainig site per X military sites
@@ -5049,17 +5084,17 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			}
 			inputs[31] = (persistent_data->trees_around_cutters < 100) * 2;
 			inputs[32] = (persistent_data->trees_around_cutters < 200) * 2;
-			inputs[33] = ((mines_per_type[iron_ore_id].in_construction +
-			               mines_per_type[iron_ore_id].finished) <= 1) *
+			inputs[33] = ((mines_per_type[iron_resource_id].in_construction +
+			               mines_per_type[iron_resource_id].finished) <= 1) *
 			             -1;
-			inputs[34] = ((mines_per_type[iron_ore_id].in_construction +
-			               mines_per_type[iron_ore_id].finished) <= 1) *
+			inputs[34] = ((mines_per_type[iron_resource_id].in_construction +
+			               mines_per_type[iron_resource_id].finished) <= 1) *
 			             -1;
-			inputs[35] = ((mines_per_type[iron_ore_id].in_construction +
-			               mines_per_type[iron_ore_id].finished) == 0) *
+			inputs[35] = ((mines_per_type[iron_resource_id].in_construction +
+			               mines_per_type[iron_resource_id].finished) == 0) *
 			             -1;
-			inputs[36] = ((mines_per_type[iron_ore_id].in_construction +
-			               mines_per_type[iron_ore_id].finished) == 0) *
+			inputs[36] = ((mines_per_type[iron_resource_id].in_construction +
+			               mines_per_type[iron_resource_id].finished) == 0) *
 			             -1;
 			inputs[37] = -1;
 			inputs[38] = -1;
@@ -5197,8 +5232,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			if (gametime > 30 * 60 * 1000 && bo.total_count() == 0) {
 
 				int16_t tmp_score = 1;
-				tmp_score +=
-				   mines_per_type[iron_ore_id].in_construction + mines_per_type[iron_ore_id].finished;
+				tmp_score += mines_per_type[iron_resource_id].in_construction +
+				             mines_per_type[iron_resource_id].finished;
 				tmp_score += (soldier_status_ == SoldiersStatus::kBadShortage) * 2;
 				tmp_score += (soldier_status_ == SoldiersStatus::kShortage) * 2;
 				tmp_score += (gametime / 60 / 1000 - 20) / 4;
@@ -5259,7 +5294,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			   (mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished == 1) ?
 			      2 :
 			      0;
-			inputs[5] = (bo.mines == iron_ore_id) ? 2 : 1;
+			inputs[5] = (bo.mines == iron_resource_id) ? 2 : 1;
 			inputs[6] = (bo.current_stats - 50) / 10;
 			inputs[7] = (gametime < 15 * 60 * 1000) ? -1 : 0;
 			inputs[8] = (gametime < 30 * 60 * 1000) ? -1 : 0;
@@ -5272,7 +5307,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			   (mines_per_type[bo.mines].in_construction + mines_per_type[bo.mines].finished == 1) ?
 			      1 :
 			      0;
-			inputs[12] = (bo.mines == iron_ore_id) ? 2 : 0;
+			inputs[12] = (bo.mines == iron_resource_id) ? 2 : 0;
 			inputs[13] = (bo.current_stats - 50) / 10;
 			inputs[14] = (bo.current_stats - 50) / 10;
 			inputs[15] = management_data.get_military_number_at(123) / 10;
