@@ -84,7 +84,7 @@
   - When considering a quarry, the AI makes sure there is at least one rock in
     the vicinity
   - Improved ship exploration decisions for AI.
-  - AI nows considers whether possible sea direction leads to unknown territories
+  - AI now considers whether possible sea direction leads to unknown territories
   - AI also continues exploring when the last port is lost to prevent crashes.
   - Prohibit seafaring buildings for AI on non-seafaring maps. AI can still
     handle ships and shipyards that already exist when a map does not allow
@@ -251,7 +251,7 @@
 
   - Overhauled the selection menu for critters to give them categories
   - Added an option "items per row" and rearranged the terrains and immovables
-  - Display of bobs ,immovables and resources can now be toggled individually
+  - Display of bobs, immovables and resources can now be toggled individually
   - Fixed drag and drop
   - Removed dead code for make infrastructure tool that was never finished
   - Fixed bug #1627537: Release mouse button does not work when placing things
