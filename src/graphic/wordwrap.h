@@ -40,9 +40,7 @@ namespace UI {
 struct WordWrap {
 	static constexpr int kLineMargin = 1;
 
-	WordWrap(int fontsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
-	         const RGBColor& color = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
-	         uint32_t wrapwidth = std::numeric_limits<uint32_t>::max());
+	explicit WordWrap(int fontsize, const RGBColor& color, uint32_t wrapwidth);
 
 	void set_wrapwidth(uint32_t wrapwidth);
 

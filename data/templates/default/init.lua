@@ -26,11 +26,11 @@ local wui_font_face = "sans"
 local wui_font_size = 12
 
 local default_ui_font = {
-         color = fs_font_color,
-         face = fs_font_face,
-         size = fs_font_size,
-         bold = true,
-         shadow = true
+   color = fs_font_color,
+   face = fs_font_face,
+   size = fs_font_size,
+   bold = true,
+   shadow = true
 }
 
 local default_button_fonts = {
@@ -165,10 +165,32 @@ return {
    -- Used both for one-line and multiline edit boxes
    editboxes = {
       fsmenu = {
-         menu = { image = fs_button, color = fs_green },
+         menu = {
+            image = fs_button,
+            color = fs_green,
+            fonts = {
+               default = {
+                  color = fs_font_color,
+                  face = fs_font_face,
+                  size = fs_font_size,
+                  shadow = true
+               }
+            }
+         },
       },
       wui = {
-         menu = { image = wui_button, color = wui_brown },
+         menu = {
+            image = wui_button,
+            color = wui_brown,
+            fonts = {
+               default = {
+                  color = wui_font_color,
+                  face = wui_font_face,
+                  size = wui_font_size,
+                  shadow = true
+               }
+            }
+         },
       }
    },
    -- Background for dropdown menus
@@ -200,7 +222,7 @@ return {
       fsmenu_intro = {
          color = { 192, 192, 128 },
          face = fs_font_face,
-         size = fs_font_size,
+         size = 16,
          bold = true,
          shadow = true
       },
@@ -321,19 +343,31 @@ return {
       },
       -- Textarea default style, also used for sliders, checkboxes, ...
       label = default_ui_font,
+      warning = {
+         color = {255, 22, 22},
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+      },
+      -- Page titles
+      title = {
+         color = fs_font_color,
+         face = fs_font_face,
+         size = 22,
+         bold = true,
+         shadow = true
+      }
    },
 
    -- NOCOM clean this up and remove
    fonts = {
       sizes = {
-         title = 22,    -- Big titles
          normal = 14,   -- Default UI color
-         minimum = 6,   -- When autoresizing text to fit, don't go below this size
+         minimum = 10,   -- When autoresizing text to fit, don't go below this size
       },
       colors = {
          foreground = fs_font_color, -- Main UI color
-         disabled = {127, 127, 127}, -- Disabled interactive UI elements
-         warning = {255, 22, 22},    -- For highlighting warnings
          progresswindow_text = { 128, 128, 255 },    -- FS Progress bar text
          progresswindow_background = { 64, 64, 0 },  -- FS Progress bar background
          progress_bright = {255, 250, 170},          -- Progress bar text
@@ -345,7 +379,6 @@ return {
          plot_zero_line = { 255, 255, 255 }, -- Statistics plot
          game_setup_headings = { 0, 255, 0 },     -- Internet lobby and launch game
          game_setup_mapname = { 255, 255, 127 },  -- Internet lobby and launch game
-         intro = { 192, 192, 128 }
       }
    }
 }

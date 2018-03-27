@@ -82,6 +82,7 @@ private:
 /**
  * Initialize an editbox that supports multiline strings.
 */
+// NOCOM typing is broken. Might be the bug that was already fixed in trunk.
 MultilineEditbox::MultilineEditbox(
    Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
    : Panel(parent, x, y, w, h), d_(new Data(*this, g_gr->styles().editbox_style(style))) {
@@ -99,6 +100,7 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::PanelStyleInfo* styl
      lineheight(text_height_old()),
      maxbytes(std::min(g_gr->max_texture_size() / g_gr->styles().font_size(StyleManager::FontSize::kNormal), 0xffff)),
      ww_valid(false),
+	  ww(background_style->fonts.at("default")->size, background_style->fonts.at("default")->color, o.get_w()),
      owner(o) {
 	scrollbar.moved.connect(boost::bind(&MultilineEditbox::scrollpos_changed, &o, _1));
 

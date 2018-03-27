@@ -207,7 +207,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
      os_(opt) {
 	// Set up UI Elements
-	title_.set_fontsize(g_gr->styles().font_size(StyleManager::FontSize::kTitle));
+	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kTitle));
 	translation_info_.force_new_renderer();
 
 	// Buttons

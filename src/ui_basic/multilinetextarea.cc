@@ -42,7 +42,8 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
      text_(text),
-     color_(g_gr->styles().font_color(StyleManager::FontColor::kForeground)),
+	  style_(g_gr->styles().font_style(FontStyle::kLabel)),
+	  font_scale_(1.0f),
      align_(align),
      force_new_renderer_(false),
      use_old_renderer_(false),
@@ -51,10 +52,20 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
-	scrollbar_.set_singlestepsize(text_height_old());
+	scrollbar_.set_singlestepsize(text_height(style_, font_scale_));
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
 	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
+}
+
+void MultilineTextarea::set_style(UI::FontStyleInfo style) {
+	style_ = style;
+	recompute();
+}
+void MultilineTextarea::set_font_scale(float scale) {
+	font_scale_ = scale;
+	scrollbar_.set_singlestepsize(text_height(style_, font_scale_));
+	recompute();
 }
 
 /**
@@ -125,7 +136,7 @@ void MultilineTextarea::layout() {
 	// Take care of the scrollbar
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_size(Scrollbar::kSize, get_h());
-	scrollbar_.set_pagesize(get_h() - 2 * g_gr->styles().font_size(StyleManager::FontSize::kTitle));
+	scrollbar_.set_pagesize(get_h() - 2 * style_.size * font_scale_);
 }
 
 /**
@@ -187,7 +198,10 @@ std::string MultilineTextarea::make_richtext() {
 	// TODO(GunChleoc): Revisit this once the old font renderer is completely gone.
 	boost::replace_all(temp, "\n\n", "<br>&nbsp;<br>");
 	boost::replace_all(temp, "\n", "<br>");
-	return as_aligned(temp, align_, g_gr->styles().font_size(StyleManager::FontSize::kNormal), color_);
+
+	FontStyleInfo scaled_style = style_;
+	scaled_style.size = scaled_style.size * font_scale_;
+	return as_richtext_paragraph(temp, scaled_style, align_);
 }
 
 }  // namespace UI

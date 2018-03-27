@@ -65,9 +65,8 @@ struct MultilineTextarea : public Panel {
 		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
 	}
 
-	void set_color(RGBColor fg) {
-		color_ = fg;
-	}
+	void set_style(UI::FontStyleInfo style);
+	void set_font_scale(float scale);
 
 	// Most MultilineTextareas that contain richtext markup still use the old
 	// font renderer, but some are already switched over the the new font
@@ -101,9 +100,10 @@ private:
 	 * turns '\\n' into '<br>' tags as needed, then creates the richtext style wrappers.
 	 */
 	std::string make_richtext();
-
 	std::string text_;
-	RGBColor color_;
+
+	FontStyleInfo style_;
+	float font_scale_;
 	const Align align_;
 
 	bool force_new_renderer_;

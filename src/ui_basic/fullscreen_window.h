@@ -71,9 +71,8 @@ public:
 	FullscreenWindow();
 	~FullscreenWindow() override;
 
-	/// \return the size for texts fitting to current resolution
-	int fs_small();
-	int fs_big();
+	/// \return the font size scale factor for fitting texts to current resolution
+	float scale_factor() const;
 
 protected:
 	void draw(RenderTarget&) override;

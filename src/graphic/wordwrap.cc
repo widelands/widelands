@@ -36,6 +36,24 @@
 #include "graphic/text/font_io.h"
 #include "graphic/text_layout.h"
 
+namespace {
+std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
+	// UI Text is always bold due to historic reasons
+	static boost::format f(
+	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
+	f % ptsize;
+	f % clr.hex_value();
+	f % richtext_escape(text);
+	return f.str();
+}
+
+int text_width(const std::string& text, int ptsize) {
+	RGBColor color(0, 0, 0);
+	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset(), color))
+	   ->width();
+}
+} // namespace
+
 namespace UI {
 
 WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)

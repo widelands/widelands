@@ -21,6 +21,8 @@
 
 #include "base/i18n.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
+#include "graphic/style_manager.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
@@ -39,6 +41,7 @@ LoginBox::LoginBox(Panel& parent)
 	pwd_warning =
 	   new UI::MultilineTextarea(this, margin, 65, 505, 50, UI::PanelStyle::kWui,
 	                             _("WARNING: Password will be shown and saved readable!"));
+	pwd_warning->set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
 
 	cb_register = new UI::Checkbox(this, Vector2i(margin, 110), _("Log in to a registered account"),
 	                               "", get_inner_w() - 2 * margin);

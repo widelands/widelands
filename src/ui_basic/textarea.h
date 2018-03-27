@@ -78,9 +78,10 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 
-	void set_color(RGBColor color);
-	void set_fontsize(int fontsize);
+	void set_color(RGBColor color); // NOCOM get rid
+	void set_fontsize(int fontsize); // NOCOM get rid
 	void set_style(UI::FontStyleInfo style);
+	void set_font_scale(float scale);
 
 protected:
 	void update_desired_size() override;
@@ -100,6 +101,7 @@ private:
 	std::shared_ptr<const UI::RenderedText> rendered_text_;
 
 	FontStyleInfo style_;
+	float font_scale_;
 	int fixed_width_;
 };
 }

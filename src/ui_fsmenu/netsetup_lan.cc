@@ -84,16 +84,14 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                 butw_,
                 buth_,
                 2,
-                UI::PanelStyle::kFsMenu,
-                fs_small()),
+                UI::PanelStyle::kFsMenu),
      hostname(this,
               get_w() * 16 / 25,
               get_h() * 19 / 40,
               get_w() * 17 / 80,
               buth_,
               2,
-              UI::PanelStyle::kFsMenu,
-              fs_small()),
+              UI::PanelStyle::kFsMenu),
 
      // List
      opengames(this,
@@ -113,7 +111,10 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 
 	Section& s = g_options.pull_section("global");  //  for playername
 
-	title.set_fontsize(g_gr->styles().font_size(StyleManager::FontSize::kTitle));
+	playername.set_font_scale(scale_factor());
+	hostname.set_font_scale(scale_factor());
+
+	title.set_style(g_gr->styles().font_style(UI::FontStyle::kTitle));
 	hostname.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
 	playername.set_text(s.get_string("nickname", (_("nobody"))));
 	playername.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));

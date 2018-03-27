@@ -19,6 +19,8 @@
 
 #include "ui_basic/textarea.h"
 
+#include <math.h>
+
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
 
@@ -61,6 +63,7 @@ void Textarea::init() {
 	set_handle_mouse(false);
 	set_thinks(false);
 	style_ = g_gr->styles().font_style(FontStyle::kLabel);
+	font_scale_ = 1.0f;
 	update();
 }
 
@@ -83,12 +86,20 @@ void Textarea::set_style(UI::FontStyleInfo style) {
 	update();
 }
 
+void Textarea::set_font_scale(float scale) {
+	font_scale_ = scale;
+	update();
+}
+
 void Textarea::update() {
 	if (layoutmode_ == AutoMove) {
 		collapse();  // collapse() implicitly updates the size and position
 	}
 
-	rendered_text_ = autofit_text(text_, style_, fixed_width_);
+	FontStyleInfo scaled_style = style_;
+	// NOCOM this check needs to live in the font style
+	scaled_style.size = std::max(g_gr->styles().font_size(StyleManager::FontSize::kMinimum), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
+	rendered_text_ = autofit_text(text_, scaled_style, fixed_width_);
 
 	if (layoutmode_ == AutoMove) {
 		expand();
@@ -196,7 +207,7 @@ void Textarea::update_desired_size() {
 		h = rendered_text_->height();
 		// We want empty textareas to have height
 		if (text_.empty()) {
-			h = text_height_old(style_.size);
+			h = text_height(style_, font_scale_);
 		}
 	}
 	set_desired_size(w, h);

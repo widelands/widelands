@@ -26,6 +26,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/align.h"
+#include "graphic/style_manager.h"
 #include "ui_basic/button.h"
 
 #define CHAT_HISTORY_SIZE 5
@@ -50,8 +51,7 @@ struct EditBox : public Panel {
 	        uint32_t w,
 	        uint32_t h,
 	        int margin_y,
-	        UI::PanelStyle style,
-	        int font_size = g_gr->styles().font_size(StyleManager::FontSize::kNormal));
+	        UI::PanelStyle style);
 	~EditBox() override;
 
 	boost::signals2::signal<void()> changed;
@@ -60,7 +60,8 @@ struct EditBox : public Panel {
 
 	const std::string& text() const;
 	void set_text(const std::string&);
-	void set_max_length(uint32_t);
+	void set_max_length(int);
+	void set_font_scale(float scale);
 
 	void activate_history(bool activate) {
 		history_active_ = activate;

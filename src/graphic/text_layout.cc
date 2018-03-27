@@ -49,8 +49,12 @@ void replace_entities(std::string* text) {
 	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
 }
 
-int text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
+int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale) {
+	UI::FontStyleInfo info = style;
+	info.size *= scale;
+	info.size -= UI::g_fh1->fontset()->size_offset();
+	return UI::g_fh1
+	   ->render(as_editor_richtext_paragraph(text, info))
 	   ->width();
 }
 
@@ -62,8 +66,9 @@ int text_height_old(int ptsize, UI::FontStyleInfo::Face face) {
 	   ->height();
 }
 
-int text_height(const UI::FontStyleInfo& style) {
+int text_height(const UI::FontStyleInfo& style, float scale) {
 	UI::FontStyleInfo info = style;
+	info.size *= scale;
 	info.size -= UI::g_fh1->fontset()->size_offset();
 	return UI::g_fh1
 	   ->render(as_richtext_paragraph(UI::g_fh1->fontset()->representative_character(), info))
@@ -85,15 +90,36 @@ std::string as_richtext(const std::string& txt) {
 	return f.str();
 }
 
-std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style) {
-	return as_richtext_paragraph(text, g_gr->styles().font_style(style));
+std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style, UI::Align align) {
+	return as_richtext_paragraph(text, g_gr->styles().font_style(style), align);
 }
 
-std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style) {
-	static boost::format f("<rt><p>%s</p></rt>");
+std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, UI::Align align) {
+	std::string alignment = "left";
+	switch (align) {
+	case UI::Align::kCenter:
+		alignment = "center";
+		break;
+	case UI::Align::kRight:
+		alignment = "right";
+		break;
+	case UI::Align::kLeft:
+		alignment = "left";
+		break;
+	}
+
+	static boost::format f("<rt><p align=%s>%s</p></rt>");
+	f % alignment;
 	f % style.as_font_tag(text);
 	return f.str();
 }
+
+std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style) {
+	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
+	f % style.as_font_tag(text);
+	return f.str();
+}
+
 
 std::string as_game_tip(const std::string& txt) {
 	static boost::format f("<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
@@ -112,15 +138,6 @@ as_condensed(const std::string& text, UI::Align align, int ptsize, const RGBColo
 	return as_aligned(text, align, ptsize, clr, UI::FontStyleInfo::Face::kCondensed);
 }
 
-std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
-	// UI Text is always bold due to historic reasons
-	static boost::format f(
-	   "<rt keep_spaces=1><p><font face=sans size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-	f % ptsize;
-	f % clr.hex_value();
-	f % richtext_escape(text);
-	return f.str();
-}
 
 std::string as_aligned(const std::string& txt,
                        UI::Align align,

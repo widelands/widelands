@@ -234,10 +234,9 @@ Default styles
 
 =============================
 */
-
 TextStyle::TextStyle()
-   : font(Font::get(UI::g_fh1->fontset()->sans(), g_gr->styles().font_size(StyleManager::FontSize::kNormal))),
-     fg(g_gr->styles().font_color(StyleManager::FontColor::kForeground)),
+   : font(Font::get(UI::g_fh1->fontset()->sans(), g_gr->styles().font_style(UI::FontStyle::kLabel).size)),
+     fg(g_gr->styles().font_style(UI::FontStyle::kLabel).color),
      bold(true),
      italics(false),
      underline(false) {

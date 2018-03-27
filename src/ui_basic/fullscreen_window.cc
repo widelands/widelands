@@ -22,6 +22,7 @@
 #include <cstdio>
 #include <memory>
 
+#include "base/log.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
 
@@ -174,12 +175,8 @@ void FullscreenWindow::blit_image(RenderTarget& dst,
 	}
 }
 
-int FullscreenWindow::fs_small() {
-	return g_gr->styles().font_size(StyleManager::FontSize::kNormal) * get_h() / 600;
-}
-
-int FullscreenWindow::fs_big() {
-	return g_gr->styles().font_size(StyleManager::FontSize::kTitle) * get_h() / 600;
+float FullscreenWindow::scale_factor() const {
+	return std::max(1.0f, get_h() / 600.0f);
 }
 
 }  // namespace UI

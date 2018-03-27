@@ -50,7 +50,8 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	   boost::bind(&FullscreenMenuMultiPlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kBack));
 
-	title.set_fontsize(fs_big());
+	title.set_style(g_gr->styles().font_style(UI::FontStyle::kTitle));
+	title.set_font_scale(scale_factor());
 
 	vbox_.add(&metaserver, UI::Box::Resizing::kFullSize);
 	vbox_.add(&lan, UI::Box::Resizing::kFullSize);

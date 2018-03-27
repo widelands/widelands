@@ -40,14 +40,14 @@ void replace_entities(std::string* text);
   * Returns the exact width of the text rendered as editorfont for the given font size.
   * This function is inefficient; only call when we need the exact width.
   */
-int text_width(const std::string& text, int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal));
+int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale = 1.0f);
 
 /**
   * Returns the exact height of the text rendered for the given font size and face.
   * This function is inefficient; only call when we need the exact height.
   */
 int text_height_old(int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal), UI::FontStyleInfo::Face face = UI::FontStyleInfo::Face::kSans);
-int text_height(const UI::FontStyleInfo& style);
+int text_height(const UI::FontStyleInfo& style, float scale = 1.0f);
 
 /**
  * Checks it the given string is RichText or not. Does not do validity checking.
@@ -62,8 +62,9 @@ inline bool is_richtext(const std::string& text) {
 std::string richtext_escape(const std::string& given_text);
 
 std::string as_richtext(const std::string&);
-std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style);
-std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style);
+std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style, UI::Align align = UI::Align::kLeft);
+std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, UI::Align align = UI::Align::kLeft);
+std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style);
 
 /**
  * Convenience functions to convert simple text into a valid block
@@ -79,10 +80,6 @@ std::string as_condensed(const std::string& text,
                          UI::Align align = UI::Align::kLeft,
                          int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
                          const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground));
-
-std::string as_editorfont(const std::string& text,
-                          int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
-                          const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground));
 
 std::string as_aligned(const std::string& txt,
                        UI::Align align,

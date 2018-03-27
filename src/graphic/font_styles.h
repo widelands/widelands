@@ -47,6 +47,8 @@ enum class FontStyle {
 	kPlotYscaleLabel,
 	kPlotMinValue,
 	kLabel,
+	kWarning,
+	kTitle,
 	kFsMenuIntro
 };
 

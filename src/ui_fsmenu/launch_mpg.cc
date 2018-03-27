@@ -98,7 +98,6 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                                                  GameController* const ctrl)
    : FullscreenMenuLaunchGame(settings, ctrl),
      // Values for alignment and size
-     fs_(fs_small()),
      // TODO(GunChleoc): We still need to use these consistently. Just getting them in for now
      // so we can have the SuggestedTeamsBox
      padding_(4),
@@ -176,13 +175,14 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	help_button_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
 
-	mapname_.set_fontsize(fs_);
+	mapname_.set_font_scale(scale_factor());
+	// NOCOM colors
 	mapname_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupMapname));
-	clients_.set_fontsize(fs_);
+	clients_.set_font_scale(scale_factor());
 	clients_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings));
-	players_.set_fontsize(fs_);
+	players_.set_font_scale(scale_factor());
 	players_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings));
-	map_.set_fontsize(fs_);
+	map_.set_font_scale(scale_factor());
 	map_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings));
 
 	mapname_.set_text(_("(no map)"));
@@ -369,13 +369,13 @@ void FullscreenMenuLaunchMPG::refresh() {
 
 	if (settings.mapfilename != filename_proof_) {
 		if (!g_fs->file_exists(settings.mapfilename)) {
-			client_info_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kWarning));
+			client_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
 			client_info_.set_text(
 			   _("The selected file can not be found. If it is not automatically "
 			     "transferred to you, please write to the host about this problem."));
 		} else {
 			// Reset font color
-			client_info_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kForeground));
+			client_info_.set_style(g_gr->styles().font_style(UI::FontStyle::kLabel));
 
 			// Update local nr of players - needed for the client UI
 			nr_players_ = settings.players.size();

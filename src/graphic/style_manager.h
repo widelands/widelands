@@ -33,15 +33,12 @@ static const std::string kTemplateDir = "templates/default/";
 class StyleManager {
 public:
 	enum class FontSize {
-		kTitle,
 		kNormal,
 		kMinimum,
 	};
 	enum class FontColor {
 		// Global
 		kForeground,
-		kDisabled,
-		kWarning,
 		// Progress and productivity
 		kProgressWindowText,
 		kProgressWindowBackground,
@@ -55,9 +52,7 @@ public:
 		kPlotZeroLine,
 		// Internet lobby and launch game
 		kGameSetupHeadings,
-		kGameSetupMapname,
-		// Misc
-		kIntro
+		kGameSetupMapname
 	};
 
 	StyleManager() = default;
@@ -80,7 +75,8 @@ public:
 private:
 	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;
 	void add_button_style(UI::ButtonStyle style, const LuaTable& table, const std::string& key);
-	void add_slider_style(UI::SliderStyle style, const LuaTable& table, const std::__cxx11::string key);
+	void add_slider_style(UI::SliderStyle style, const LuaTable& table, const std::string& key);
+	void add_editbox_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
 	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_size(FontSize size, const LuaTable& table, const std::string& key);

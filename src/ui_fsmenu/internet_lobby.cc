@@ -33,7 +33,7 @@
 #include "profile/profile.h"
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
-
+// NOCOM merge trunk and test
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                                                          char const* const pwd,
                                                          bool registered)
@@ -44,7 +44,6 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      butw_(get_w() * 36 / 125),
      buth_(get_h() * 19 / 400),
      lisw_(get_w() * 623 / 1000),
-     fs_(fs_small()),
      prev_clientlist_len_(1000),
 
      // Text labels
@@ -81,7 +80,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 
      // Edit boxes
      edit_servername_(
-        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, UI::PanelStyle::kFsMenu, fs_),
+        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, UI::PanelStyle::kFsMenu),
 
      // List
      clientsonline_list_(
@@ -112,11 +111,15 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	// Set the texts and style of UI elements
 	Section& s = g_options.pull_section("global");  //  for playername
 
-	title.set_fontsize(fs_big());
-	opengames_.set_fontsize(fs_);
-	clients_.set_fontsize(fs_);
-	servername_.set_fontsize(fs_);
+	title.set_style(g_gr->styles().font_style(UI::FontStyle::kTitle));
+	title.set_font_scale(scale_factor());
+
+	opengames_.set_font_scale(scale_factor());
+	clients_.set_font_scale(scale_factor());
+	servername_.set_font_scale(scale_factor());
+
 	std::string server = s.get_string("servername", "");
+	edit_servername_.set_font_scale(scale_factor());
 	edit_servername_.set_text(server);
 	edit_servername_.changed.connect(
 	   boost::bind(&FullscreenMenuInternetLobby::change_servername, this));

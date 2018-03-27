@@ -150,9 +150,9 @@ void StyleManager::init() {
 	// Editboxes
 	element_table = table->get_table("editboxes");
 	style_table = element_table->get_table("fsmenu");
-	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &editboxstyles_);
+	add_editbox_style(UI::PanelStyle::kFsMenu, *style_table, "menu");
 	style_table = element_table->get_table("wui");
-	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &editboxstyles_);
+	add_editbox_style(UI::PanelStyle::kWui, *style_table, "menu");
 	check_completeness(
 	   "editboxes", editboxstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
@@ -177,7 +177,6 @@ void StyleManager::init() {
 	// Fonts
 	element_table = table->get_table("fonts");
 	style_table = element_table->get_table("sizes");
-	add_font_size(FontSize::kTitle, *style_table, "title");
 	add_font_size(FontSize::kNormal, *style_table, "normal");
 	add_font_size(FontSize::kMinimum, *style_table, "minimum");
 	check_completeness(
@@ -185,8 +184,6 @@ void StyleManager::init() {
 
 	style_table = element_table->get_table("colors");
 	add_font_color(FontColor::kForeground, *style_table->get_table("foreground"));
-	add_font_color(FontColor::kDisabled, *style_table->get_table("disabled"));
-	add_font_color(FontColor::kWarning, *style_table->get_table("warning"));
 	add_font_color(FontColor::kProgressWindowText, *style_table->get_table("progresswindow_text"));
 	add_font_color(FontColor::kProgressWindowBackground, *style_table->get_table("progresswindow_background"));
 	add_font_color(FontColor::kProgressBright, *style_table->get_table("progress_bright"));
@@ -198,9 +195,8 @@ void StyleManager::init() {
 	add_font_color(FontColor::kPlotZeroLine, *style_table->get_table("plot_zero_line"));
 	add_font_color(FontColor::kGameSetupHeadings, *style_table->get_table("game_setup_headings"));
 	add_font_color(FontColor::kGameSetupMapname, *style_table->get_table("game_setup_mapname"));
-	add_font_color(FontColor::kIntro, *style_table->get_table("intro"));
 	check_completeness(
-	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kIntro));
+	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kGameSetupMapname));
 
 	element_table = table->get_table("font_styles");
 	add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
@@ -222,6 +218,8 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kPlotYscaleLabel, *element_table, "plot_yscale_label");
 	add_font_style(UI::FontStyle::kPlotMinValue, *element_table, "plot_min_value");
 	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
+	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
+	add_font_style(UI::FontStyle::kTitle, *element_table, "title");
 	add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kFsMenuIntro));
 }
@@ -281,13 +279,22 @@ void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table
 	}
 }
 
-void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table, const std::string key) {
+void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table, const std::string& key) {
 	sliderstyles_.insert(
 	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(*table.get_table(key), key, 1))));
 	if (sliderstyles_.at(style)->fonts.count("labels") == 0) {
 		throw wexception("Missing 'labels' font style for slider '%s'", key.c_str());
 	}
 }
+
+void StyleManager::add_editbox_style(UI::PanelStyle style, const LuaTable& table, const std::string& key) {
+	editboxstyles_.insert(
+	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(*table.get_table(key), key, 1))));
+	if (editboxstyles_.at(style)->fonts.count("default") == 0) {
+		throw wexception("Missing 'default' font style for editbox '%s'", key.c_str());
+	}
+}
+
 
 void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table) {
 	tabpanelstyles_.insert(

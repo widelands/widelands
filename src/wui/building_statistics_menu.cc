@@ -37,6 +37,7 @@ constexpr int kMargin = 5;
 constexpr int kColumns = 5;
 constexpr int kButtonHeight = 20;
 constexpr int kButtonRowHeight = kButtonHeight + kMargin;
+// NOCOM we will need to calculate label height etc. from actual font style used.
 constexpr int kLabelHeight = 18;
 constexpr int kLabelFontSize = 12;
 constexpr int kTabHeight = 35 + 5 * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
@@ -89,8 +90,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         35,
         0,
         1,
-        UI::PanelStyle::kWui,
-        kLabelFontSize - UI::g_fh1->fontset()->size_offset()),  // We need consistent height here
+        UI::PanelStyle::kWui),
      unproductive_label2_(
         &unproductive_box_,
         /** TRANSLATORS: This is the second part of productivity with input field */
@@ -149,6 +149,9 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
+
+	// NOCOM Find good scale. Used to be kLabelFontSize - UI::g_fh1->fontset()->size_offset()
+	unproductive_percent_.set_font_scale(0.8f);
 
 	// Column counters
 	int columns[kNoOfBuildingTabs] = {0, 0, 0, 0, 0};

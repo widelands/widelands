@@ -105,7 +105,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->add_column(0, _("Time"), "", UI::Align::kRight, UI::TableColumnType::kFlexible);
 
 	// Prepare Elements
-	title_area_->set_fontsize(g_gr->styles().font_size(StyleManager::FontSize::kTitle));
+	title_area_->set_style(g_gr->styles().font_style(UI::FontStyle::kTitle));
 
 	// Connections
 	continue_button_->sigclicked.connect(boost::bind(&GameSummaryScreen::continue_clicked, this));

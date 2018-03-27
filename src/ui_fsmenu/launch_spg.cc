@@ -90,12 +90,13 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 	select_map_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchSPG::select_map, boost::ref(*this)));
 
-	int smaller_fontsize = fs_small() * 4 / 5;
-	name_.set_fontsize(smaller_fontsize);
-	type_.set_fontsize(smaller_fontsize);
-	team_.set_fontsize(smaller_fontsize);
-	tribe_.set_fontsize(smaller_fontsize);
-	init_.set_fontsize(smaller_fontsize);
+	// We want to redesign this screen, so we won't bother defining a font size in the style manager.
+	const int small_scale_factor = scale_factor() * 4 / 5;
+	name_.set_font_scale(small_scale_factor);
+	type_.set_font_scale(small_scale_factor);
+	team_.set_font_scale(small_scale_factor);
+	tribe_.set_font_scale(small_scale_factor);
+	init_.set_font_scale(small_scale_factor);
 
 	uint32_t y = get_h() * 3 / 10 - buth_;
 	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
