@@ -53,28 +53,19 @@ return {
          menu = {
             image = fs_button,
             color = fs_blue,
-            fonts = {
-               enabled = default_button_fonts["enabled"],
-               disabled = default_button_fonts["disabled"]
-            }
+            fonts = default_button_fonts
          },
          -- Primary user selection ("OK", ...)
          primary = {
             image = fs_button,
             color = fs_green,
-            fonts = {
-               enabled = default_button_fonts["enabled"],
-               disabled = default_button_fonts["disabled"]
-            }
+            fonts = default_button_fonts
          },
          -- Secondary user selection ("Cancel", "Delete", selection buttons, ...)
          secondary = {
             image = fs_button,
             color = fs_brown,
-            fonts = {
-               enabled = default_button_fonts["enabled"],
-               disabled = default_button_fonts["disabled"]
-            }
+            fonts = default_button_fonts
          },
       },
       -- Buttons used in-game and in the editor
@@ -83,38 +74,26 @@ return {
          menu = {
             image = wui_button,
             color = wui_light,
-            fonts = {
-               enabled = default_button_fonts["enabled"],
-               disabled = default_button_fonts["disabled"]
-            }
+            fonts = default_button_fonts
          },
          -- Primary user selection ("OK", attack, ...)
          primary = {
             image = wui_button,
             color = wui_green,
-            fonts = {
-               enabled = default_button_fonts["enabled"],
-               disabled = default_button_fonts["disabled"]
-            }
+            fonts = default_button_fonts
          },
          -- Secondary user selection ("Cancel", "Delete", ...)
          secondary = {
             image = wui_button,
             color = wui_brown,
-            fonts = {
-               enabled = default_button_fonts["enabled"],
-               disabled = default_button_fonts["disabled"]
-            }
+            fonts = default_button_fonts
          },
          -- Building buttons on fieldaction and building statistics need to be
          -- transparent in order to match the background of the tab panel.
          building_stats = {
             image = "",
             color = {0, 0, 0},
-            fonts = {
-               enabled = default_button_fonts["enabled"],
-               disabled = default_button_fonts["disabled"]
-            }
+            fonts = default_button_fonts
          },
       }
    },
