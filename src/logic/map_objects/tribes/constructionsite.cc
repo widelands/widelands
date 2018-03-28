@@ -99,9 +99,7 @@ ConstructionSite::ConstructionSite(const ConstructionSiteDescr& cs_descr)
 
 void ConstructionSite::update_statistics_string(std::string* s) {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-	*s = (boost::format("<font color=%s>%s</font>") % g_gr->styles().font_color(StyleManager::FontColor::kProgressConstruction).hex_value() %
-	      (boost::format(_("%i%% built")) % percent))
-	        .str();
+	*s = g_gr->styles().font_style(UI::FontStyle::kWuiProgressConstruction).as_font_tag((boost::format(_("%i%% built")) % percent).str());
 }
 
 /*

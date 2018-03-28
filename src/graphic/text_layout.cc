@@ -90,11 +90,7 @@ std::string as_richtext(const std::string& txt) {
 	return f.str();
 }
 
-std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style, UI::Align align) {
-	return as_richtext_paragraph(text, g_gr->styles().font_style(style), align);
-}
-
-std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, UI::Align align) {
+std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
 	std::string alignment = "left";
 	switch (align) {
 	case UI::Align::kCenter:
@@ -110,8 +106,16 @@ std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleIn
 
 	static boost::format f("<rt><p align=%s>%s</p></rt>");
 	f % alignment;
-	f % style.as_font_tag(text);
+	f % text;
 	return f.str();
+}
+
+std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style, UI::Align align) {
+	return as_richtext_paragraph(text, g_gr->styles().font_style(style), align);
+}
+
+std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, UI::Align align) {
+	return as_richtext_paragraph(style.as_font_tag(text), align);
 }
 
 std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style) {

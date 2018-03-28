@@ -176,14 +176,13 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	   boost::bind(&FullscreenMenuLaunchMPG::help_clicked, boost::ref(*this)));
 
 	mapname_.set_font_scale(scale_factor());
-	// NOCOM colors
-	mapname_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupMapname));
+	mapname_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupMapname));
 	clients_.set_font_scale(scale_factor());
-	clients_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings));
+	clients_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
 	players_.set_font_scale(scale_factor());
-	players_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings));
+	players_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
 	map_.set_font_scale(scale_factor());
-	map_.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings));
+	map_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupHeadings));
 
 	mapname_.set_text(_("(no map)"));
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));

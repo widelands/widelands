@@ -43,12 +43,26 @@ enum class FontStyle {
 	kChatPlayername,
 	kChatServer,
 	// Statistics plot
-	kPlotXtick,
-	kPlotYscaleLabel,
-	kPlotMinValue,
+	kWuiPlotXtick,
+	kWuiPlotYscaleLabel,
+	kWuiPlotMinValue,
 	kLabel,
 	kWarning,
 	kTitle,
+	// Building statistics and in-game progress bar
+	kWuiProgressConstruction,
+	kWuiProductivityNeutral,
+	kWuiProductivityLow,
+	kWuiProductivityMedium,
+	kWuiProductivityHigh,
+	kWuiBuildingStatisticsLabel,
+	kWuiBuildingStatisticsProductivityLow,
+	kWuiBuildingStatisticsProductivityMedium,
+	kWuiBuildingStatisticsProductivityHigh,
+	// Internet lobby and launch game
+	kFsGameSetupHeadings,
+	kFsGameSetupMapname,
+	kWuiGameSpeedAndCoordinates,
 	kFsMenuIntro
 };
 

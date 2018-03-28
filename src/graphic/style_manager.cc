@@ -186,17 +186,10 @@ void StyleManager::init() {
 	add_font_color(FontColor::kForeground, *style_table->get_table("foreground"));
 	add_font_color(FontColor::kProgressWindowText, *style_table->get_table("progresswindow_text"));
 	add_font_color(FontColor::kProgressWindowBackground, *style_table->get_table("progresswindow_background"));
-	add_font_color(FontColor::kProgressBright, *style_table->get_table("progress_bright"));
-	add_font_color(FontColor::kProgressConstruction, *style_table->get_table("progress_construction"));
-	add_font_color(FontColor::kProductivityLow, *style_table->get_table("productivity_low"));
-	add_font_color(FontColor::kProductivityMedium, *style_table->get_table("productivity_medium"));
-	add_font_color(FontColor::kProductivityHigh, *style_table->get_table("productivity_high"));
 	add_font_color(FontColor::kPlotAxisLine, *style_table->get_table("plot_axis_line"));
 	add_font_color(FontColor::kPlotZeroLine, *style_table->get_table("plot_zero_line"));
-	add_font_color(FontColor::kGameSetupHeadings, *style_table->get_table("game_setup_headings"));
-	add_font_color(FontColor::kGameSetupMapname, *style_table->get_table("game_setup_mapname"));
 	check_completeness(
-	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kGameSetupMapname));
+	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kPlotZeroLine));
 
 	element_table = table->get_table("font_styles");
 	add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
@@ -214,12 +207,25 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
 	add_font_style(UI::FontStyle::kChatServer, *element_table, "chat_server");
 	add_font_style(UI::FontStyle::kChatPlayername, *element_table, "chat_playername");
-	add_font_style(UI::FontStyle::kPlotXtick, *element_table, "plot_xtick");
-	add_font_style(UI::FontStyle::kPlotYscaleLabel, *element_table, "plot_yscale_label");
-	add_font_style(UI::FontStyle::kPlotMinValue, *element_table, "plot_min_value");
+	add_font_style(UI::FontStyle::kWuiPlotXtick, *element_table, "wui_plot_xtick");
+	add_font_style(UI::FontStyle::kWuiPlotYscaleLabel, *element_table, "wui_plot_yscale_label");
+	add_font_style(UI::FontStyle::kWuiPlotMinValue, *element_table, "wui_plot_min_value");
 	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(UI::FontStyle::kTitle, *element_table, "title");
+	add_font_style(UI::FontStyle::kWuiProgressConstruction, *element_table, "wui_progress_construction");
+	add_font_style(UI::FontStyle::kWuiProductivityNeutral, *element_table, "wui_productivity_neutral");
+	add_font_style(UI::FontStyle::kWuiProductivityLow, *element_table, "wui_productivity_low");
+	add_font_style(UI::FontStyle::kWuiProductivityMedium, *element_table, "wui_productivity_medium");
+	add_font_style(UI::FontStyle::kWuiProductivityHigh, *element_table, "wui_productivity_high");
+	add_font_style(UI::FontStyle::kWuiBuildingStatisticsLabel, *element_table, "wui_building_statistics_label");
+	add_font_style(UI::FontStyle::kWuiBuildingStatisticsProductivityLow, *element_table, "wui_building_statistics_productivity_low");
+	add_font_style(UI::FontStyle::kWuiBuildingStatisticsProductivityMedium, *element_table, "wui_building_statistics_productivity_medium");
+	add_font_style(UI::FontStyle::kWuiBuildingStatisticsProductivityHigh, *element_table, "wui_building_statistics_productivity_high");
+	add_font_style(UI::FontStyle::kFsGameSetupHeadings, *element_table, "fs_game_setup_headings");
+	add_font_style(UI::FontStyle::kFsGameSetupMapname, *element_table, "fs_game_setup_mapname");
+	add_font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates, *element_table, "wui_game_speed_and_coordinates");
+
 	add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kFsMenuIntro));
 }

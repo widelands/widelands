@@ -393,10 +393,9 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = (boost::format("<font color=%s>%s</font>") % g_gr->styles().font_color(StyleManager::FontColor::kProductivityMedium).hex_value() %
+	*s = g_gr->styles().font_style(UI::FontStyle::kWuiProductivityMedium).as_font_tag(
 	      // Line break to make Codecheck happy.
-	      *s)
-	        .str();
+	      *s);
 }
 
 bool MilitarySite::init(EditorGameBase& egbase) {

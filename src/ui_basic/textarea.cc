@@ -67,20 +67,6 @@ void Textarea::init() {
 	update();
 }
 
-void Textarea::set_color(RGBColor color) {
-	if (style_.color != color) {
-		style_.color = color;
-		update();
-	}
-}
-
-void Textarea::set_fontsize(int fontsize) {
-	if (style_.size != fontsize) {
-		style_.size = fontsize;
-		update();
-	}
-}
-
 void Textarea::set_style(UI::FontStyleInfo style) {
 	style_ = style;
 	update();

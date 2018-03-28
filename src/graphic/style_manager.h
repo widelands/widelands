@@ -42,17 +42,9 @@ public:
 		// Progress and productivity
 		kProgressWindowText,
 		kProgressWindowBackground,
-		kProgressBright,
-		kProgressConstruction,
-		kProductivityLow,
-		kProductivityMedium,
-		kProductivityHigh,
 		// Statistics plot
 		kPlotAxisLine,
 		kPlotZeroLine,
-		// Internet lobby and launch game
-		kGameSetupHeadings,
-		kGameSetupMapname
 	};
 
 	StyleManager() = default;

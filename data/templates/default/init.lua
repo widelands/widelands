@@ -44,6 +44,12 @@ local default_button_fonts = {
    },
 }
 
+local productivity_colors = {
+   low = {187, 0, 0},
+   medium = {255, 225, 30},
+   high = {0, 187, 0},
+}
+
 -- These are the style definitions to be returned.
 -- Note: you have to keep all the keys intact, or Widelands will not be happy.
 return {
@@ -326,17 +332,17 @@ return {
          shadow = true,
       },
       -- Plot area NOCOM scattered between here and the colors below for the lines
-      plot_xtick = {
+      wui_plot_xtick = {
          color = { 255, 0, 0 },
          face = "condensed",
          size = 13,
       },
-      plot_yscale_label = {
+      wui_plot_yscale_label = {
          color = { 60, 125, 0 },
          face = "condensed",
          size = 13,
       },
-      plot_min_value = {
+      wui_plot_min_value = {
          color = { 125, 0, 0 },
          face = "condensed",
          size = 13,
@@ -357,7 +363,93 @@ return {
          size = 22,
          bold = true,
          shadow = true
-      }
+      },
+      -- Building statistics
+      wui_progress_construction = {
+         color = {0, 187, 0},
+         face = wui_font_face,
+         size = wui_font_size,
+         bold = true,
+         shadow = true
+      },
+      wui_productivity_neutral = {
+         color = {255, 250, 170},
+         face = "condensed",
+         size = wui_font_size,
+         bold = true,
+         shadow = true
+      },
+      wui_productivity_low = {
+         color = productivity_colors["low"],
+         face = "condensed",
+         size = wui_font_size,
+         bold = true,
+         shadow = true
+      },
+      wui_productivity_medium = {
+         color = productivity_colors["medium"],
+         face = "condensed",
+         size = wui_font_size,
+         bold = true,
+         shadow = true
+      },
+      wui_productivity_high = {
+         color = productivity_colors["high"],
+         face = "condensed",
+         size = wui_font_size,
+         bold = true,
+         shadow = true
+      },
+      wui_building_statistics_label = {
+         color = wui_font_color,
+         face = wui_font_face,
+         size = 12,
+         bold = true,
+         shadow = true
+      },
+      wui_building_statistics_productivity_low = {
+         color = productivity_colors["low"],
+         face = wui_font_face,
+         size = 12,
+         bold = true,
+         shadow = true
+      },
+      wui_building_statistics_productivity_medium = {
+         color = productivity_colors["medium"],
+         face = wui_font_face,
+         size = 12,
+         bold = true,
+         shadow = true
+      },
+      wui_building_statistics_productivity_high = {
+         color = productivity_colors["high"],
+         face = wui_font_face,
+         size = 12,
+         bold = true,
+         shadow = true
+      },
+      -- Internet lobby and launch game
+      fs_game_setup_headings = {
+         color = { 0, 255, 0 },
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+      },
+      fs_game_setup_mapname = {
+         color = { 255, 255, 127 },
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+      },
+      wui_game_speed_and_coordinates = {
+         color = wui_font_color,
+         face = "condensed",
+         size = wui_font_size,
+         bold = true,
+         shadow = true
+      },
    },
 
    -- NOCOM clean this up and remove
@@ -370,15 +462,8 @@ return {
          foreground = fs_font_color, -- Main UI color
          progresswindow_text = { 128, 128, 255 },    -- FS Progress bar text
          progresswindow_background = { 64, 64, 0 },  -- FS Progress bar background
-         progress_bright = {255, 250, 170},          -- Progress bar text
-         progress_construction = {163, 144, 19}, -- Construction/Dismantle site progress
-         productivity_low = {187, 0, 0},         -- Low building productivity
-         productivity_medium = {255, 225, 30},   -- Medium building productivity
-         productivity_high = {0, 187, 0},        -- High building productivity
          plot_axis_line = { 0, 0, 0 },       -- Statistics plot
          plot_zero_line = { 255, 255, 255 }, -- Statistics plot
-         game_setup_headings = { 0, 255, 0 },     -- Internet lobby and launch game
-         game_setup_mapname = { 255, 255, 127 },  -- Internet lobby and launch game
       }
    }
 }

@@ -69,7 +69,7 @@ std::string ytick_text_style(const std::string& text, UI::FontStyle style) {
 }
 
 std::string xtick_text_style(const std::string& text) {
-	return ytick_text_style(text, UI::FontStyle::kPlotXtick);
+	return ytick_text_style(text, UI::FontStyle::kWuiPlotXtick);
 }
 
 /**
@@ -485,7 +485,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
 
 	//  print the maximal value into the top right corner
-	draw_value(yscale_label, UI::FontStyle::kPlotYscaleLabel,
+	draw_value(yscale_label, UI::FontStyle::kWuiPlotYscaleLabel,
 	           Vector2i(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 }
 
@@ -691,7 +691,7 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
 	// Print the min value
 	draw_value((boost::format("-%u") % (highest_scale_)).str(),
-	           UI::FontStyle::kPlotMinValue,
+	           UI::FontStyle::kWuiPlotMinValue,
 	           Vector2i(get_inner_w() - kSpaceRight - 3, get_inner_h() - kSpacing - 23), dst);
 }
 

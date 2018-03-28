@@ -480,12 +480,13 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	}
 
 	// Rendering text is expensive, so let's just do it for only a few sizes.
-	// The forumla is a bit fancy to avoid too much text overlap.
+	// The formula is a bit fancy to avoid too much text overlap.
 	scale = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
 	if (scale < 1.f) {
 		return;
 	}
 	const int font_size = scale * g_gr->styles().font_size(StyleManager::FontSize::kNormal);
+	// NOCOM now the scale gets tricky, since the textx are already preformatted!
 
 	// We always render this so we can have a stable position for the statistics string.
 	std::shared_ptr<const UI::RenderedText> rendered_census =

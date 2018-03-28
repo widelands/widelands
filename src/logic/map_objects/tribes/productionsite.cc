@@ -266,23 +266,17 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		nr_workers += working_positions_[--i].worker ? 1 : 0;
 
 	if (nr_workers == 0) {
-		*s = (boost::format("<font color=%s>%s</font>") % g_gr->styles().font_color(StyleManager::FontColor::kProductivityLow).hex_value() %
-		      _("(not occupied)"))
-		        .str();
+		*s = g_gr->styles().font_style(UI::FontStyle::kWuiProductivityLow).as_font_tag(_("(not occupied)"));;
 		return;
 	}
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		*s = (boost::format("<font color=%s>%s</font>") % g_gr->styles().font_color(StyleManager::FontColor::kProductivityLow).hex_value() %
-		      ngettext("Worker missing", "Workers missing", nr_requests))
-		        .str();
+		*s = g_gr->styles().font_style(UI::FontStyle::kWuiProductivityLow).as_font_tag(ngettext("Worker missing", "Workers missing", nr_requests));
 		return;
 	}
 
 	if (is_stopped_) {
-		*s = (boost::format("<font color=%s>%s</font>") % g_gr->styles().font_color(StyleManager::FontColor::kProgressBright).hex_value() %
-		      _("(stopped)"))
-		        .str();
+		*s = g_gr->styles().font_style(UI::FontStyle::kWuiProductivityNeutral).as_font_tag(_("(stopped)"));
 		return;
 	}
 	*s = statistics_string_on_changed_statistics_;
@@ -372,32 +366,33 @@ void ProductionSite::calc_statistics() {
 
 	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
-	std::string color;
-	if (percOk < 33)
-		color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityLow).hex_value();
-	else if (percOk < 66)
-		color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityMedium).hex_value();
-	else
-		color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityHigh).hex_value();
+	UI::FontStyle style;
+	if (percOk < 33) {
+		style = UI::FontStyle::kWuiProductivityLow;
+	} else if (percOk < 66) {
+		style = UI::FontStyle::kWuiProductivityMedium;
+	} else {
+		style = UI::FontStyle::kWuiProductivityHigh;
+	}
 	const std::string perc_str =
-	   (boost::format("<font color=%s>%s</font>") % color % (boost::format(_("%i%%")) % percOk))
-	      .str();
+	   g_gr->styles().font_style(style).as_font_tag((boost::format(_("%i%%")) % percOk).str());
 
 	std::string trend;
 	if (lastPercOk > percOk) {
 		trend_ = Trend::kRising;
-		color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityHigh).hex_value();
+		style = UI::FontStyle::kWuiProductivityHigh;
 		trend = "+";
 	} else if (lastPercOk < percOk) {
 		trend_ = Trend::kFalling;
-		color = g_gr->styles().font_color(StyleManager::FontColor::kProductivityLow).hex_value();
+		style = UI::FontStyle::kWuiProductivityLow;
 		trend = "-";
 	} else {
 		trend_ = Trend::kUnchanged;
-		color = g_gr->styles().font_color(StyleManager::FontColor::kProgressBright).hex_value();
+		style = UI::FontStyle::kWuiProductivityNeutral;
 		trend = "=";
 	}
-	const std::string trend_str = (boost::format("<font color=%s>%s</font>") % color % trend).str();
+
+	const std::string trend_str = g_gr->styles().font_style(style).as_font_tag((boost::format(_("%i%%")) % trend).str());
 
 	if (0 < percOk && percOk < 100) {
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages

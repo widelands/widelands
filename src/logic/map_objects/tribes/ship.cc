@@ -1001,9 +1001,7 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = (boost::format("<font color=%s>%s</font>") % g_gr->styles().font_color(StyleManager::FontColor::kProductivityMedium).hex_value() %
-		                     statistics_string)
-		                       .str();
+		statistics_string = g_gr->styles().font_style(UI::FontStyle::kWuiProductivityMedium).as_font_tag(statistics_string);
 	}
 
 	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),

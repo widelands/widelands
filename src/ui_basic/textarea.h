@@ -78,8 +78,6 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 
-	void set_color(RGBColor color); // NOCOM get rid
-	void set_fontsize(int fontsize); // NOCOM get rid
 	void set_style(UI::FontStyleInfo style);
 	void set_font_scale(float scale);
 

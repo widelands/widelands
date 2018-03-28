@@ -62,6 +62,7 @@ inline bool is_richtext(const std::string& text) {
 std::string richtext_escape(const std::string& given_text);
 
 std::string as_richtext(const std::string&);
+std::string as_richtext_paragraph(const std::string& text, UI::Align align = UI::Align::kLeft);
 std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style, UI::Align align = UI::Align::kLeft);
 std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, UI::Align align = UI::Align::kLeft);
 std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style);
