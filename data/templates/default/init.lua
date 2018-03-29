@@ -218,6 +218,22 @@ return {
       }
    },
 
+   -- In-game statistics plots
+   statistics_plot = {
+      font = {
+         color = { 0, 0, 0 }, -- Dummy, the colors below are used.
+         face = "condensed",
+         size = 13,
+      },
+      colors = {
+         axis_line = { 0, 0, 0 },
+         zero_line = { 255, 255, 255 },
+         x_tick = { 255, 0, 0 },
+         y_max_value = { 60, 125, 0 },
+         y_min_value = { 125, 0, 0 },
+      }
+   },
+
    font_styles = {
       -- Font sizes and colors
       --[[ NOCOM better documentation
@@ -330,22 +346,6 @@ return {
          size = fs_font_size,
          bold = true,
          shadow = true,
-      },
-      -- Plot area NOCOM scattered between here and the colors below for the lines
-      wui_plot_xtick = {
-         color = { 255, 0, 0 },
-         face = "condensed",
-         size = 13,
-      },
-      wui_plot_yscale_label = {
-         color = { 60, 125, 0 },
-         face = "condensed",
-         size = 13,
-      },
-      wui_plot_min_value = {
-         color = { 125, 0, 0 },
-         face = "condensed",
-         size = 13,
       },
       -- Textarea default style, also used for sliders, checkboxes, ...
       label = default_ui_font,
@@ -462,8 +462,6 @@ return {
          foreground = fs_font_color, -- Main UI color
          progresswindow_text = { 128, 128, 255 },    -- FS Progress bar text
          progresswindow_background = { 64, 64, 0 },  -- FS Progress bar background
-         plot_axis_line = { 0, 0, 0 },       -- Statistics plot
-         plot_zero_line = { 255, 255, 255 }, -- Statistics plot
       }
    }
 }

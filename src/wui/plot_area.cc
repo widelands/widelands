@@ -62,14 +62,14 @@ enum class Units {
 	kDayGeneric
 };
 
-std::string ytick_text_style(const std::string& text, UI::FontStyle style) {
+std::string ytick_text_style(const std::string& text, const UI::FontStyleInfo& style) {
 	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
-	f % g_gr->styles().font_style(style).as_font_tag(text);
+	f % style.as_font_tag(text);
 	return f.str();
 }
 
 std::string xtick_text_style(const std::string& text) {
-	return ytick_text_style(text, UI::FontStyle::kWuiPlotXtick);
+	return ytick_text_style(text, *g_gr->styles().statistics_plot_style().fonts.at(UI::StatisticsPlotStyleInfo::FontStyle::kXTick));
 }
 
 /**
@@ -169,7 +169,7 @@ int32_t calc_how_many(uint32_t time_ms, uint32_t sample_rate) {
  * print the string into the RenderTarget.
  */
 void draw_value(const std::string& value,
-                UI::FontStyle style,
+                const UI::FontStyleInfo& style,
                 const Vector2i& pos,
                 RenderTarget& dst) {
 	std::shared_ptr<const UI::RenderedText> tick = UI::g_fh1->render(ytick_text_style(value, style));
@@ -200,7 +200,7 @@ void draw_diagram(uint32_t time_ms,
                   const float xline_length,
                   RenderTarget& dst) {
 	const RGBColor& axis_line_color =
-	   g_gr->styles().font_color(StyleManager::FontColor::kPlotAxisLine);
+	   g_gr->styles().statistics_plot_style().axis_line_color;
 
 	uint32_t how_many_ticks, max_x;
 
@@ -485,7 +485,7 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	draw_diagram(time_ms_, get_inner_w(), get_inner_h(), xline_length_, dst);
 
 	//  print the maximal value into the top right corner
-	draw_value(yscale_label, UI::FontStyle::kWuiPlotYscaleLabel,
+	draw_value(yscale_label, *g_gr->styles().statistics_plot_style().fonts.at(UI::StatisticsPlotStyleInfo::FontStyle::kYMaxValue),
 	           Vector2i(get_inner_w() - kSpaceRight - 3, kSpacing + 2), dst);
 }
 
@@ -684,14 +684,14 @@ void DifferentialPlotArea::draw(RenderTarget& dst) {
 	// draw zero line
 	dst.draw_line_strip({Vector2f(get_inner_w() - kSpaceRight, yoffset),
 	                     Vector2f(get_inner_w() - kSpaceRight - xline_length_, yoffset)},
-	                    g_gr->styles().font_color(StyleManager::FontColor::kPlotZeroLine),
+	                    g_gr->styles().statistics_plot_style().zero_line_color,
 	                    kPlotLinesWidth);
 
 	// Draw data and diagram
 	draw_plot(dst, yoffset, std::to_string(highest_scale_), 2 * highest_scale_);
 	// Print the min value
 	draw_value((boost::format("-%u") % (highest_scale_)).str(),
-	           UI::FontStyle::kWuiPlotMinValue,
+	           *g_gr->styles().statistics_plot_style().fonts.at(UI::StatisticsPlotStyleInfo::FontStyle::kYMinValue),
 	           Vector2i(get_inner_w() - kSpaceRight - 3, get_inner_h() - kSpacing - 23), dst);
 }
 

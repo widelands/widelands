@@ -174,6 +174,30 @@ void StyleManager::init() {
 	check_completeness(
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
+	// Statistics plot
+	statistics_plot_style_.reset(new UI::StatisticsPlotStyleInfo());
+	{
+		element_table = table->get_table("statistics_plot");
+		style_table = element_table->get_table("colors");
+
+		// Fonts
+		UI::FontStyleInfo* x_tick = read_font_style(*element_table, "font");
+		x_tick->color = read_rgb_color2(*style_table->get_table("x_tick"));
+		statistics_plot_style_->fonts.emplace(std::make_pair(UI::StatisticsPlotStyleInfo::FontStyle::kXTick, std::unique_ptr<UI::FontStyleInfo>(x_tick)));
+
+		UI::FontStyleInfo* y_max_value = read_font_style(*element_table, "font");
+		y_max_value->color = read_rgb_color2(*style_table->get_table("y_max_value"));
+		statistics_plot_style_->fonts.emplace(std::make_pair(UI::StatisticsPlotStyleInfo::FontStyle::kYMaxValue, std::unique_ptr<UI::FontStyleInfo>(y_max_value)));
+
+		UI::FontStyleInfo* y_min_value = read_font_style(*element_table, "font");
+		y_min_value->color = read_rgb_color2(*style_table->get_table("y_min_value"));
+		statistics_plot_style_->fonts.emplace(std::make_pair(UI::StatisticsPlotStyleInfo::FontStyle::kYMinValue, std::unique_ptr<UI::FontStyleInfo>(y_min_value)));
+
+		// Line colors
+		statistics_plot_style_->axis_line_color = read_rgb_color2(*style_table->get_table("axis_line"));
+		statistics_plot_style_->zero_line_color = read_rgb_color2(*style_table->get_table("zero_line"));
+	}
+
 	// Fonts
 	element_table = table->get_table("fonts");
 	style_table = element_table->get_table("sizes");
@@ -186,10 +210,8 @@ void StyleManager::init() {
 	add_font_color(FontColor::kForeground, *style_table->get_table("foreground"));
 	add_font_color(FontColor::kProgressWindowText, *style_table->get_table("progresswindow_text"));
 	add_font_color(FontColor::kProgressWindowBackground, *style_table->get_table("progresswindow_background"));
-	add_font_color(FontColor::kPlotAxisLine, *style_table->get_table("plot_axis_line"));
-	add_font_color(FontColor::kPlotZeroLine, *style_table->get_table("plot_zero_line"));
 	check_completeness(
-	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kPlotZeroLine));
+	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kProgressWindowBackground));
 
 	element_table = table->get_table("font_styles");
 	add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
@@ -207,9 +229,6 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
 	add_font_style(UI::FontStyle::kChatServer, *element_table, "chat_server");
 	add_font_style(UI::FontStyle::kChatPlayername, *element_table, "chat_playername");
-	add_font_style(UI::FontStyle::kWuiPlotXtick, *element_table, "wui_plot_xtick");
-	add_font_style(UI::FontStyle::kWuiPlotYscaleLabel, *element_table, "wui_plot_yscale_label");
-	add_font_style(UI::FontStyle::kWuiPlotMinValue, *element_table, "wui_plot_min_value");
 	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(UI::FontStyle::kTitle, *element_table, "title");
@@ -259,6 +278,10 @@ const UI::PanelStyleInfo* StyleManager::dropdown_style(UI::PanelStyle style) con
 const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) const {
 	assert(scrollbarstyles_.count(style) == 1);
 	return scrollbarstyles_.at(style).get();
+}
+
+const UI::StatisticsPlotStyleInfo& StyleManager::statistics_plot_style() const {
+	return *statistics_plot_style_;
 }
 
 const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {

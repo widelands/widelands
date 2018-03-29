@@ -42,10 +42,6 @@ enum class FontStyle {
 	kChatWhisper,
 	kChatPlayername,
 	kChatServer,
-	// Statistics plot
-	kWuiPlotXtick,
-	kWuiPlotYscaleLabel,
-	kWuiPlotMinValue,
 	kLabel,
 	kWarning,
 	kTitle,

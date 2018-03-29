@@ -30,6 +30,20 @@
 
 static const std::string kTemplateDir = "templates/default/";
 
+namespace UI {
+// NOCOM move to own file?
+struct StatisticsPlotStyleInfo {
+	enum class FontStyle {
+		kXTick,
+		kYMaxValue,
+		kYMinValue,
+	};
+	RGBColor axis_line_color;
+	RGBColor zero_line_color;
+	std::map<FontStyle, std::unique_ptr<UI::FontStyleInfo>> fonts;
+};
+} // namespace UI
+
 class StyleManager {
 public:
 	enum class FontSize {
@@ -42,9 +56,6 @@ public:
 		// Progress and productivity
 		kProgressWindowText,
 		kProgressWindowBackground,
-		// Statistics plot
-		kPlotAxisLine,
-		kPlotZeroLine,
 	};
 
 	StyleManager() = default;
@@ -59,6 +70,7 @@ public:
 	const UI::PanelStyleInfo* editbox_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
+	const UI::StatisticsPlotStyleInfo& statistics_plot_style() const;
 
 	int font_size(const FontSize size) const;
 	const RGBColor& font_color(const FontColor color) const;
@@ -85,6 +97,7 @@ private:
 	std::map<FontSize, int> font_sizes_;
 	std::map<FontColor, std::unique_ptr<RGBColor>> font_colors_;
 	std::map<UI::FontStyle, std::unique_ptr<UI::FontStyleInfo>> fontstyles_;
+	std::unique_ptr<UI::StatisticsPlotStyleInfo> statistics_plot_style_;
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };
