@@ -181,17 +181,14 @@ void StyleManager::init() {
 		style_table = element_table->get_table("colors");
 
 		// Fonts
-		UI::FontStyleInfo* x_tick = read_font_style(*element_table, "font");
-		x_tick->color = read_rgb_color2(*style_table->get_table("x_tick"));
-		statistics_plot_style_->fonts.emplace(std::make_pair(UI::StatisticsPlotStyleInfo::FontStyle::kXTick, std::unique_ptr<UI::FontStyleInfo>(x_tick)));
+		statistics_plot_style_->x_tick_font = *read_font_style(*element_table, "font");
+		statistics_plot_style_->x_tick_font.color = read_rgb_color2(*style_table->get_table("x_tick"));
 
-		UI::FontStyleInfo* y_max_value = read_font_style(*element_table, "font");
-		y_max_value->color = read_rgb_color2(*style_table->get_table("y_max_value"));
-		statistics_plot_style_->fonts.emplace(std::make_pair(UI::StatisticsPlotStyleInfo::FontStyle::kYMaxValue, std::unique_ptr<UI::FontStyleInfo>(y_max_value)));
+		statistics_plot_style_->y_max_value_font = *read_font_style(*element_table, "font");
+		statistics_plot_style_->y_max_value_font.color = read_rgb_color2(*style_table->get_table("y_max_value"));
 
-		UI::FontStyleInfo* y_min_value = read_font_style(*element_table, "font");
-		y_min_value->color = read_rgb_color2(*style_table->get_table("y_min_value"));
-		statistics_plot_style_->fonts.emplace(std::make_pair(UI::StatisticsPlotStyleInfo::FontStyle::kYMinValue, std::unique_ptr<UI::FontStyleInfo>(y_min_value)));
+		statistics_plot_style_->y_min_value_font = *read_font_style(*element_table, "font");
+		statistics_plot_style_->y_min_value_font.color = read_rgb_color2(*style_table->get_table("y_min_value"));
 
 		// Line colors
 		statistics_plot_style_->axis_line_color = read_rgb_color2(*style_table->get_table("axis_line"));

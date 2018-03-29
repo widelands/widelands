@@ -33,14 +33,11 @@ static const std::string kTemplateDir = "templates/default/";
 namespace UI {
 // NOCOM move to own file?
 struct StatisticsPlotStyleInfo {
-	enum class FontStyle {
-		kXTick,
-		kYMaxValue,
-		kYMinValue,
-	};
+	UI::FontStyleInfo x_tick_font;
+	UI::FontStyleInfo y_max_value_font;
+	UI::FontStyleInfo y_min_value_font;
 	RGBColor axis_line_color;
 	RGBColor zero_line_color;
-	std::map<FontStyle, std::unique_ptr<UI::FontStyleInfo>> fonts;
 };
 } // namespace UI
 
