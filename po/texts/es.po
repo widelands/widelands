@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:18+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-24 19:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -521,6 +521,7 @@ msgid ""
 msgstr "Construye siempre una cabaña del cazador y del guardabosques, para que no te quedes sin troncos o caza."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
@@ -603,6 +604,17 @@ msgstr "Siempre construye una casa de silvicultor para no quedarte sin troncos."
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
 msgstr "El imperio necesita mucho mármol. Asegurate de buscar recursos de mármol."
+
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr ""
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester´s house, so you will not run out of logs."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

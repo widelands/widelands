@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:18+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-24 19:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -517,6 +517,7 @@ msgid ""
 msgstr "Zawsze buduj leśniczówkę i gajówkę, żeby zapewnić sobie stałe dostawy drewna i jedzenia."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
@@ -599,6 +600,17 @@ msgstr "Zawsze buduj leśniczówkę, żeby zapewnić sobie stałe dostawy drewna
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
 msgstr "Imperium potrzebuje dużo marmuru. Szukaj złóż marmuru."
+
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr ""
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester´s house, so you will not run out of logs."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

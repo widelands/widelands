@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
 # ks k, 2017
 # ks k, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-25 03:55+0000\n"
-"PO-Revision-Date: 2017-11-29 18:05+0000\n"
-"Last-Translator: ks k\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-24 13:20+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -253,7 +254,7 @@ msgstr "오리나무"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:12
 msgid "Aspen (Sapling)"
-msgstr " 사시나무 (유목)"
+msgstr "사시나무 (유목)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:35
 msgid "Aspen (Pole)"
@@ -495,7 +496,7 @@ msgstr "참나무 (유목)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:35
 msgid "Oak (Pole)"
-msgstr "참나무 (성목) "
+msgstr "참나무 (성목)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:58
 msgid "Oak (Mature)"

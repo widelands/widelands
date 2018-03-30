@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-10 11:03+0000\n"
-"PO-Revision-Date: 2017-12-19 18:14+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-24 13:21+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -459,7 +460,7 @@ msgid ""
 "delivered less frequently. Green means that as many wares as possible should"
 " be delivered to this building, maybe because it produces something "
 "important."
-msgstr "빨간 점 (낮은 우선권) 을 클릭할 때, 해당하는 용품은 덜 자주 배달됩니다. 초록은 가능한 한 많은 용품을, 아마도 무언가 중요한 것을 생산하는 건물로 배달해야 하는 것을 의미합니다. "
+msgstr "빨간 점 (낮은 우선권) 을 클릭할 때, 해당하는 용품은 덜 자주 배달됩니다. 초록은 가능한 한 많은 용품을, 아마도 무언가 중요한 것을 생산하는 건물로 배달해야 하는 것을 의미합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:224
 msgid ""
@@ -527,7 +528,7 @@ msgid ""
 "called ‘economy health’. You can see at one glance which one of those two is"
 " higher for the selected ware, that means whether the amount increases or "
 "decreases."
-msgstr "이 탭에서, 당신은 '경제 활력' 으로 불리는 생산과 소비 간의 차이를 확인할 수 있습니다. 당신은 선택한 용품의 생산과 소비 중 하나가 더 높이 나오는 것을 바탕으로, 그 양이 증가했거나 감소했다는 의미를 한 번에 확인할 수 있습니다. "
+msgstr "이 탭에서, 당신은 '경제 활력' 으로 불리는 생산과 소비 간의 차이를 확인할 수 있습니다. 당신은 선택한 용품의 생산과 소비 중 하나가 더 높이 나오는 것을 바탕으로, 그 양이 증가했거나 감소했다는 의미를 한 번에 확인할 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:269
 msgid "Now try this out. You can also compare it with the two previous tabs."
@@ -694,7 +695,7 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr "목표 양을 바꿈으로써, 어떤 용품/도구로 당신 자원들을 (이 경우에는: 철) 바꿀지 아니면 철을 아끼고 그것이 쓰일 무언가에 대해 알도록 기다릴지 결정할 수 있습니다. "
+msgstr "목표 양을 바꿈으로써, 어떤 용품/도구로 당신 자원들을 (이 경우에는: 철) 바꿀지 아니면 철을 아끼고 그것이 쓰일 무언가에 대해 알도록 기다릴지 결정할 수 있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:374
 msgid ""

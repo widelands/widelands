@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# erimitis, 2018
 # Panos Ioannidis <panos.ioannidis@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-16 17:26+0000\n"
-"PO-Revision-Date: 2018-01-25 09:00+0000\n"
-"Last-Translator: Panos Ioannidis <panos.ioannidis@gmail.com>\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-27 01:13+0000\n"
+"Last-Translator: erimitis\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,19 +20,19 @@ msgstr ""
 
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:11
 msgid "Not yet implemented"
-msgstr "Δεν έχει υλοποιηθεί ακόμα"
+msgstr "Μη υλοποιημένος μέχρι στιγμής"
 
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
-msgstr "Συγγνώμη, αυτός ο χάρτης δεν έχει υλοποιηθεί προς το παρόν"
+msgstr "Λυπούμαστε, αυτός ο χάρτης δεν έχει υλοποιηθεί μέχρι στιγμής"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Νέος Στόχος"
+msgstr[1] "Νέοι Στόχοι"
