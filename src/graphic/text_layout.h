@@ -76,12 +76,6 @@ std::string as_uifont(const std::string&,
                       const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground),
                       UI::FontStyleInfo::Face face = UI::FontStyleInfo::Face::kSans);
 
-// Same as as_aligned, but with the condensed font preselected.
-std::string as_condensed(const std::string& text,
-                         UI::Align align = UI::Align::kLeft,
-                         int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),
-                         const RGBColor& clr = g_gr->styles().font_color(StyleManager::FontColor::kForeground));
-
 std::string as_aligned(const std::string& txt,
                        UI::Align align,
                        int ptsize = g_gr->styles().font_size(StyleManager::FontSize::kNormal),

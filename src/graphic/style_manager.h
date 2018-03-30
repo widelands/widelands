@@ -39,6 +39,18 @@ struct StatisticsPlotStyleInfo {
 	RGBColor axis_line_color;
 	RGBColor zero_line_color;
 };
+
+struct BuildingStatisticsStyleInfo {
+	std::string as_color_tag(const std::string& text, const RGBColor& color) const;
+
+	UI::FontStyleInfo census_font;
+	UI::FontStyleInfo statictics_font;
+	RGBColor construction_color;
+	RGBColor neutral_color;
+	RGBColor low_color;
+	RGBColor medium_color;
+	RGBColor high_color;
+};
 } // namespace UI
 
 class StyleManager {
@@ -67,6 +79,7 @@ public:
 	const UI::PanelStyleInfo* editbox_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
+	const UI::BuildingStatisticsStyleInfo& building_statistics_style() const;
 	const UI::StatisticsPlotStyleInfo& statistics_plot_style() const;
 
 	int font_size(const FontSize size) const;
@@ -94,6 +107,7 @@ private:
 	std::map<FontSize, int> font_sizes_;
 	std::map<FontColor, std::unique_ptr<RGBColor>> font_colors_;
 	std::map<UI::FontStyle, std::unique_ptr<UI::FontStyleInfo>> fontstyles_;
+	std::unique_ptr<UI::BuildingStatisticsStyleInfo> building_statistics_style_;
 	std::unique_ptr<UI::StatisticsPlotStyleInfo> statistics_plot_style_;
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);

@@ -85,7 +85,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 	}
 
 	// Print the state in percent without decimal points.
-	const std::string progress_text = g_gr->styles().font_style(UI::FontStyle::kWuiProductivityNeutral).as_font_tag((boost::format("%u%%") % floorf(fraction * 100.f)).str());
+	const std::string progress_text = g_gr->styles().font_style(UI::FontStyle::kWuiProgressBar).as_font_tag((boost::format("%u%%") % floorf(fraction * 100.f)).str());
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh1->render(as_uifont(progress_text));
 	Vector2i pos(get_w() / 2, get_h() / 2);

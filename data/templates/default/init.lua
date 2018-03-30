@@ -23,7 +23,7 @@ local fs_font_size = 14
 
 local wui_font_color = {255, 255, 0}
 local wui_font_face = "sans"
-local wui_font_size = 12
+local wui_font_size = 14
 
 local default_ui_font = {
    color = fs_font_color,
@@ -234,6 +234,30 @@ return {
       }
    },
 
+   building_statistics = {
+      census_font = {
+         color = wui_font_color, -- Default
+         face = "condensed",
+         size = wui_font_size,
+         bold = true,
+         shadow = true
+      },
+      statictics_font = {
+         color = wui_font_color, -- Default color
+         face = "condensed",
+         size = wui_font_size,
+         bold = true,
+         shadow = true
+      },
+      colors = {
+         construction = {0, 187, 0},
+         neutral = {255, 250, 170},
+         low = productivity_colors["low"],
+         medium = productivity_colors["medium"],
+         high = productivity_colors["high"],
+      }
+   },
+
    font_styles = {
       -- Font sizes and colors
       --[[ NOCOM better documentation
@@ -264,14 +288,14 @@ return {
       },
       wui_info_panel_heading = {
          color = { 209, 209, 209 },
-         face = fs_font_face,
-         size = fs_font_size,
+         face = wui_font_face,
+         size = wui_font_size,
          bold = true,
       },
       wui_info_panel_paragraph = {
          color = { 255, 255, 0 },
-         face = fs_font_face,
-         size = fs_font_size,
+         face = wui_font_face,
+         size = wui_font_size,
       },
       -- Messages
       wui_message_heading = {
@@ -283,7 +307,7 @@ return {
       wui_message_paragraph = {
          color = { 255, 255, 0 },
          face = wui_font_face,
-         size = wui_font_size,
+         size = 12,
       },
       wui_window_title = {
          color = fs_font_color,
@@ -364,42 +388,14 @@ return {
          bold = true,
          shadow = true
       },
-      -- Building statistics
-      wui_progress_construction = {
-         color = {0, 187, 0},
+      wui_progress_bar = {
+         color = {255, 250, 170},
          face = wui_font_face,
          size = wui_font_size,
          bold = true,
          shadow = true
       },
-      wui_productivity_neutral = {
-         color = {255, 250, 170},
-         face = "condensed",
-         size = wui_font_size,
-         bold = true,
-         shadow = true
-      },
-      wui_productivity_low = {
-         color = productivity_colors["low"],
-         face = "condensed",
-         size = wui_font_size,
-         bold = true,
-         shadow = true
-      },
-      wui_productivity_medium = {
-         color = productivity_colors["medium"],
-         face = "condensed",
-         size = wui_font_size,
-         bold = true,
-         shadow = true
-      },
-      wui_productivity_high = {
-         color = productivity_colors["high"],
-         face = "condensed",
-         size = wui_font_size,
-         bold = true,
-         shadow = true
-      },
+      -- Building statistics
       wui_building_statistics_label = {
          color = wui_font_color,
          face = wui_font_face,

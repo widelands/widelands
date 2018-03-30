@@ -101,6 +101,15 @@ void check_completeness(const std::string& name, size_t map_size, size_t last_en
 }
 }  // namespace
 
+namespace UI {
+	std::string BuildingStatisticsStyleInfo::as_color_tag(const std::string& text, const RGBColor& color) const {
+		static boost::format f("<font color=%s>%s</font>");
+		f % color.hex_value();
+		f % text;
+		return f.str();
+	}
+} // namespace UI
+
 void StyleManager::init() {
 	buttonstyles_.clear();
 	sliderstyles_.clear();
@@ -174,26 +183,34 @@ void StyleManager::init() {
 	check_completeness(
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
+	// Building statistics
+	building_statistics_style_.reset(new UI::BuildingStatisticsStyleInfo());
+	// Fonts
+	element_table = table->get_table("building_statistics");
+	building_statistics_style_->census_font = *read_font_style(*element_table, "census_font");
+	building_statistics_style_->statictics_font = *read_font_style(*element_table, "statictics_font");
+	// Colors
+	style_table = element_table->get_table("colors");
+	building_statistics_style_->construction_color = read_rgb_color2(*style_table->get_table("construction"));
+	building_statistics_style_->neutral_color = read_rgb_color2(*style_table->get_table("neutral"));
+	building_statistics_style_->low_color = read_rgb_color2(*style_table->get_table("low"));
+	building_statistics_style_->medium_color = read_rgb_color2(*style_table->get_table("medium"));
+	building_statistics_style_->high_color = read_rgb_color2(*style_table->get_table("high"));
+
 	// Statistics plot
 	statistics_plot_style_.reset(new UI::StatisticsPlotStyleInfo());
-	{
-		element_table = table->get_table("statistics_plot");
-		style_table = element_table->get_table("colors");
-
-		// Fonts
-		statistics_plot_style_->x_tick_font = *read_font_style(*element_table, "font");
-		statistics_plot_style_->x_tick_font.color = read_rgb_color2(*style_table->get_table("x_tick"));
-
-		statistics_plot_style_->y_max_value_font = *read_font_style(*element_table, "font");
-		statistics_plot_style_->y_max_value_font.color = read_rgb_color2(*style_table->get_table("y_max_value"));
-
-		statistics_plot_style_->y_min_value_font = *read_font_style(*element_table, "font");
-		statistics_plot_style_->y_min_value_font.color = read_rgb_color2(*style_table->get_table("y_min_value"));
-
-		// Line colors
-		statistics_plot_style_->axis_line_color = read_rgb_color2(*style_table->get_table("axis_line"));
-		statistics_plot_style_->zero_line_color = read_rgb_color2(*style_table->get_table("zero_line"));
-	}
+	element_table = table->get_table("statistics_plot");
+	style_table = element_table->get_table("colors");
+	// Fonts
+	statistics_plot_style_->x_tick_font = *read_font_style(*element_table, "font");
+	statistics_plot_style_->x_tick_font.color = read_rgb_color2(*style_table->get_table("x_tick"));
+	statistics_plot_style_->y_max_value_font = *read_font_style(*element_table, "font");
+	statistics_plot_style_->y_max_value_font.color = read_rgb_color2(*style_table->get_table("y_max_value"));
+	statistics_plot_style_->y_min_value_font = *read_font_style(*element_table, "font");
+	statistics_plot_style_->y_min_value_font.color = read_rgb_color2(*style_table->get_table("y_min_value"));
+	// Line colors
+	statistics_plot_style_->axis_line_color = read_rgb_color2(*style_table->get_table("axis_line"));
+	statistics_plot_style_->zero_line_color = read_rgb_color2(*style_table->get_table("zero_line"));
 
 	// Fonts
 	element_table = table->get_table("fonts");
@@ -229,11 +246,7 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(UI::FontStyle::kTitle, *element_table, "title");
-	add_font_style(UI::FontStyle::kWuiProgressConstruction, *element_table, "wui_progress_construction");
-	add_font_style(UI::FontStyle::kWuiProductivityNeutral, *element_table, "wui_productivity_neutral");
-	add_font_style(UI::FontStyle::kWuiProductivityLow, *element_table, "wui_productivity_low");
-	add_font_style(UI::FontStyle::kWuiProductivityMedium, *element_table, "wui_productivity_medium");
-	add_font_style(UI::FontStyle::kWuiProductivityHigh, *element_table, "wui_productivity_high");
+	add_font_style(UI::FontStyle::kWuiProgressBar, *element_table, "wui_progress_bar");
 	add_font_style(UI::FontStyle::kWuiBuildingStatisticsLabel, *element_table, "wui_building_statistics_label");
 	add_font_style(UI::FontStyle::kWuiBuildingStatisticsProductivityLow, *element_table, "wui_building_statistics_productivity_low");
 	add_font_style(UI::FontStyle::kWuiBuildingStatisticsProductivityMedium, *element_table, "wui_building_statistics_productivity_medium");
@@ -275,6 +288,10 @@ const UI::PanelStyleInfo* StyleManager::dropdown_style(UI::PanelStyle style) con
 const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) const {
 	assert(scrollbarstyles_.count(style) == 1);
 	return scrollbarstyles_.at(style).get();
+}
+
+const UI::BuildingStatisticsStyleInfo& StyleManager::building_statistics_style() const {
+	return *building_statistics_style_;
 }
 
 const UI::StatisticsPlotStyleInfo& StyleManager::statistics_plot_style() const {

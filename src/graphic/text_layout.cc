@@ -137,12 +137,6 @@ as_uifont(const std::string& txt, int size, const RGBColor& clr, UI::FontStyleIn
 	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
 }
 
-std::string
-as_condensed(const std::string& text, UI::Align align, int ptsize, const RGBColor& clr) {
-	return as_aligned(text, align, ptsize, clr, UI::FontStyleInfo::Face::kCondensed);
-}
-
-
 std::string as_aligned(const std::string& txt,
                        UI::Align align,
                        int ptsize,
