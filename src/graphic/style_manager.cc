@@ -187,8 +187,10 @@ void StyleManager::init() {
 	building_statistics_style_.reset(new UI::BuildingStatisticsStyleInfo());
 	// Fonts
 	element_table = table->get_table("building_statistics");
+	building_statistics_style_->building_statistics_font = *read_font_style(*element_table, "building_statistics_font");
 	building_statistics_style_->census_font = *read_font_style(*element_table, "census_font");
-	building_statistics_style_->statictics_font = *read_font_style(*element_table, "statictics_font");
+	building_statistics_style_->statistics_font = *read_font_style(*element_table, "statistics_font");
+
 	// Colors
 	style_table = element_table->get_table("colors");
 	building_statistics_style_->construction_color = read_rgb_color2(*style_table->get_table("construction"));
@@ -247,10 +249,6 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(UI::FontStyle::kTitle, *element_table, "title");
 	add_font_style(UI::FontStyle::kWuiProgressBar, *element_table, "wui_progress_bar");
-	add_font_style(UI::FontStyle::kWuiBuildingStatisticsLabel, *element_table, "wui_building_statistics_label");
-	add_font_style(UI::FontStyle::kWuiBuildingStatisticsProductivityLow, *element_table, "wui_building_statistics_productivity_low");
-	add_font_style(UI::FontStyle::kWuiBuildingStatisticsProductivityMedium, *element_table, "wui_building_statistics_productivity_medium");
-	add_font_style(UI::FontStyle::kWuiBuildingStatisticsProductivityHigh, *element_table, "wui_building_statistics_productivity_high");
 	add_font_style(UI::FontStyle::kFsGameSetupHeadings, *element_table, "fs_game_setup_headings");
 	add_font_style(UI::FontStyle::kFsGameSetupMapname, *element_table, "fs_game_setup_mapname");
 	add_font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates, *element_table, "wui_game_speed_and_coordinates");

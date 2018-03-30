@@ -221,7 +221,7 @@ return {
    -- In-game statistics plots
    statistics_plot = {
       font = {
-         color = { 0, 0, 0 }, -- Dummy, the colors below are used.
+         color = { 0, 0, 0 }, -- Dummy, the colors below are used
          face = "condensed",
          size = 13,
       },
@@ -236,16 +236,24 @@ return {
 
    building_statistics = {
       census_font = {
-         color = wui_font_color, -- Default
+         color = wui_font_color, -- Default color
          face = "condensed",
          size = wui_font_size,
          bold = true,
          shadow = true
       },
-      statictics_font = {
+      statistics_font = {
          color = wui_font_color, -- Default color
          face = "condensed",
          size = wui_font_size,
+         bold = true,
+         shadow = true
+      },
+      -- Building statistics window
+      building_statistics_font = {
+         color = wui_font_color, -- Default color
+         face = "condensed",
+         size = 12, -- Do not make this bigger - the UI element size is still hard-coded.
          bold = true,
          shadow = true
       },
@@ -392,35 +400,6 @@ return {
          color = {255, 250, 170},
          face = wui_font_face,
          size = wui_font_size,
-         bold = true,
-         shadow = true
-      },
-      -- Building statistics
-      wui_building_statistics_label = {
-         color = wui_font_color,
-         face = wui_font_face,
-         size = 12,
-         bold = true,
-         shadow = true
-      },
-      wui_building_statistics_productivity_low = {
-         color = productivity_colors["low"],
-         face = wui_font_face,
-         size = 12,
-         bold = true,
-         shadow = true
-      },
-      wui_building_statistics_productivity_medium = {
-         color = productivity_colors["medium"],
-         face = wui_font_face,
-         size = 12,
-         bold = true,
-         shadow = true
-      },
-      wui_building_statistics_productivity_high = {
-         color = productivity_colors["high"],
-         face = wui_font_face,
-         size = 12,
          bold = true,
          shadow = true
       },

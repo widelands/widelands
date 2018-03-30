@@ -76,8 +76,8 @@ private:
 	/// Jumps to the next / previous appropriate building
 	void jump_building(JumpTarget target, bool reverse);
 
-	/// Sets the label for id type to text in the chosen color with dynamic font size
-	void set_labeltext(UI::Textarea* textarea, const std::string& text, UI::FontStyle style);
+	/// Sets the label for the given textarea to text in the chosen color
+	void set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color);
 
 	/// Sets the current building type for the bottom navigation
 	void set_current_building_type(Widelands::DescriptionIndex id);
@@ -103,6 +103,8 @@ private:
 	std::vector<UI::Textarea*> owned_labels_;
 	/// Labels with buildings' productivity
 	std::vector<UI::Textarea*> productivity_labels_;
+
+	const UI::FontStyleInfo& font_style_;
 
 	/// The buttons for stepping through buildings
 	UI::Panel navigation_panel_;

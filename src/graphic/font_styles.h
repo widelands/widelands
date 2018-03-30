@@ -45,12 +45,7 @@ enum class FontStyle {
 	kLabel,
 	kWarning,
 	kTitle,
-	// Building statistics and in-game progress bar
 	kWuiProgressBar,
-	kWuiBuildingStatisticsLabel,
-	kWuiBuildingStatisticsProductivityLow,
-	kWuiBuildingStatisticsProductivityMedium,
-	kWuiBuildingStatisticsProductivityHigh,
 	// Internet lobby and launch game
 	kFsGameSetupHeadings,
 	kFsGameSetupMapname,

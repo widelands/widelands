@@ -50,7 +50,6 @@ struct EditBoxImpl {
 	explicit EditBoxImpl(UI::PanelStyle style) :
 		background_style(g_gr->styles().editbox_style(style)),
 		font_style(*background_style->fonts.at("default")) {
-
 	}
 
 	/// Background color and texture
@@ -59,7 +58,7 @@ struct EditBoxImpl {
 	/**
 	 * Font used for rendering text.
 	 */
-	FontStyleInfo& font_style;
+	FontStyleInfo font_style;
 	float font_scale;
 
 	/// Maximum number of characters in the input
@@ -165,6 +164,10 @@ void EditBox::set_max_length(int const n) {
 
 void EditBox::set_font_scale(float scale) {
 	m_->font_scale = scale;
+}
+
+void EditBox::set_style(const UI::FontStyleInfo& style) {
+	m_->font_style = style;
 }
 
 

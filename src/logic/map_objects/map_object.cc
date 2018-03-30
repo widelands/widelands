@@ -498,7 +498,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	}
 
 	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
-		UI::FontStyleInfo statistics_font = g_gr->styles().building_statistics_style().statictics_font;
+		UI::FontStyleInfo statistics_font = g_gr->styles().building_statistics_style().statistics_font;
 		statistics_font.size = scale * statistics_font.size;
 
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =

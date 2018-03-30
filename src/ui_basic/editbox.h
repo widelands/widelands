@@ -62,6 +62,7 @@ struct EditBox : public Panel {
 	void set_text(const std::string&);
 	void set_max_length(int);
 	void set_font_scale(float scale);
+	void set_style(const UI::FontStyleInfo& style);
 
 	void activate_history(bool activate) {
 		history_active_ = activate;

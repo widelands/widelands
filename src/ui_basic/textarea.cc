@@ -83,7 +83,6 @@ void Textarea::update() {
 	}
 
 	FontStyleInfo scaled_style = style_;
-	// NOCOM this check needs to live in the font style
 	scaled_style.size = std::max(g_gr->styles().font_size(StyleManager::FontSize::kMinimum), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
 	rendered_text_ = autofit_text(text_, scaled_style, fixed_width_);
 

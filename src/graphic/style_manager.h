@@ -43,8 +43,10 @@ struct StatisticsPlotStyleInfo {
 struct BuildingStatisticsStyleInfo {
 	std::string as_color_tag(const std::string& text, const RGBColor& color) const;
 
+	UI::FontStyleInfo building_statistics_font;
 	UI::FontStyleInfo census_font;
-	UI::FontStyleInfo statictics_font;
+	UI::FontStyleInfo statistics_font;
+
 	RGBColor construction_color;
 	RGBColor neutral_color;
 	RGBColor low_color;

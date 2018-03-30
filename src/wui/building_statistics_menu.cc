@@ -37,7 +37,6 @@ constexpr int kMargin = 5;
 constexpr int kColumns = 5;
 constexpr int kButtonHeight = 20;
 constexpr int kButtonRowHeight = kButtonHeight + kMargin;
-// NOCOM we will need to calculate label height etc. from actual font style used.
 constexpr int kLabelHeight = 18;
 constexpr int kTabHeight = 35 + 5 * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
@@ -60,7 +59,8 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       kWindowHeight,
                       _("Building Statistics")),
      tab_panel_(this, UI::TabPanelStyle::kWuiDark),
-     navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
+	  font_style_(g_gr->styles().building_statistics_style().building_statistics_font),
+	  navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
         &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
      owned_label_(&navigation_panel_, kMargin, kButtonRowHeight, 0, kButtonHeight, _("Owned:")),
@@ -81,7 +81,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         0,
         0,
         35,
-        0,
+        kLabelHeight,
         1,
         UI::PanelStyle::kWui),
      unproductive_label2_(
@@ -143,8 +143,10 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 
-	// NOCOM Find good scale. Used to be kLabelFontSize (= 12) - UI::g_fh1->fontset()->size_offset()
-	unproductive_percent_.set_font_scale(0.8f);
+	// For consistent height
+	UI::FontStyleInfo editbox_style = font_style_;
+	editbox_style.size = editbox_style.size - UI::g_fh1->fontset()->size_offset();
+	unproductive_percent_.set_style(editbox_style);
 
 	// Column counters
 	int columns[kNoOfBuildingTabs] = {0, 0, 0, 0, 0};
@@ -228,15 +230,13 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 		tabs_[i]->add(rows[i]);
 	}
 
-	owned_label_.set_style(g_gr->styles().font_style(UI::FontStyle::kWuiBuildingStatisticsLabel));
-	construction_label_.set_style(g_gr->styles().font_style(UI::FontStyle::kWuiBuildingStatisticsLabel));
-	unproductive_label_.set_style(g_gr->styles().font_style(UI::FontStyle::kWuiBuildingStatisticsLabel));
-	unproductive_label2_.set_style(g_gr->styles().font_style(UI::FontStyle::kWuiBuildingStatisticsLabel));
-	no_owned_label_.set_style(g_gr->styles().font_style(UI::FontStyle::kWuiBuildingStatisticsLabel));
-	no_construction_label_.set_style(g_gr->styles().font_style(UI::FontStyle::kWuiBuildingStatisticsLabel));
-	no_unproductive_label_.set_style(g_gr->styles().font_style(UI::FontStyle::kWuiBuildingStatisticsLabel));
-// NOCOM get rid of hard-coded height
-	// NOCOM editbox is broken
+	owned_label_.set_style(font_style_);
+	construction_label_.set_style(font_style_);
+	unproductive_label_.set_style(font_style_);
+	unproductive_label2_.set_style(font_style_);
+	no_owned_label_.set_style(font_style_);
+	no_construction_label_.set_style(font_style_);
+	no_unproductive_label_.set_style(font_style_);
 	unproductive_label_.set_size(unproductive_label_.get_w(), kButtonRowHeight);
 	unproductive_percent_.set_text(std::to_string(low_production_));
 	unproductive_percent_.set_max_length(4);
@@ -330,13 +330,13 @@ bool BuildingStatisticsMenu::add_button(
 
 	owned_labels_[id] =
 	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	owned_labels_[id]->set_style(g_gr->styles().font_style(UI::FontStyle::kWuiBuildingStatisticsLabel));
+	owned_labels_[id]->set_style(font_style_);
 	owned_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(owned_labels_[id]);
 
 	productivity_labels_[id] =
 	   new UI::Textarea(button_box, 0, 0, kBuildGridCellWidth, kLabelHeight, UI::Align::kCenter);
-	productivity_labels_[id]->set_style(g_gr->styles().font_style(UI::FontStyle::kWuiBuildingStatisticsLabel));
+	productivity_labels_[id]->set_style(font_style_);
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);
 
@@ -605,20 +605,20 @@ void BuildingStatisticsMenu::update() {
 				int const percent =
 				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 
-				UI::FontStyle style;
+				RGBColor color;
 				if (percent < low_production_) {
-					style = UI::FontStyle::kWuiBuildingStatisticsProductivityLow;
+					color = g_gr->styles().building_statistics_style().low_color;
 				} else if (percent < ((low_production_ < 50) ?
 				                         2 * low_production_ :
 				                         low_production_ + ((100 - low_production_) / 2))) {
-					style = UI::FontStyle::kWuiBuildingStatisticsProductivityMedium;
+					color = g_gr->styles().building_statistics_style().medium_color;
 				} else {
-					style = UI::FontStyle::kWuiBuildingStatisticsProductivityHigh;
+					color = g_gr->styles().building_statistics_style().high_color;
 				}
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
 				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
-				set_labeltext(productivity_labels_[id], perc_str, style);
+				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
 				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
@@ -638,18 +638,18 @@ void BuildingStatisticsMenu::update() {
 			}
 		} else if (building.type() == MapObjectType::MILITARYSITE) {
 			if (nr_owned) {
-				UI::FontStyle style;
+				RGBColor color;
 				if (total_stationed_soldiers < total_soldier_capacity / 2) {
-					style = UI::FontStyle::kWuiBuildingStatisticsProductivityLow;
+					color = g_gr->styles().building_statistics_style().low_color;
 				} else if (total_stationed_soldiers < total_soldier_capacity) {
-					style = UI::FontStyle::kWuiBuildingStatisticsProductivityMedium;
+					color = g_gr->styles().building_statistics_style().medium_color;
 				} else {
-					style = UI::FontStyle::kWuiBuildingStatisticsProductivityHigh;
+					color = g_gr->styles().building_statistics_style().high_color;
 				}
 				const std::string perc_str =
 				   (boost::format(_("%1%/%2%")) % total_stationed_soldiers % total_soldier_capacity)
 				      .str();
-				set_labeltext(productivity_labels_[id], perc_str, style);
+				set_labeltext(productivity_labels_[id], perc_str, color);
 			}
 			if (has_selection_ && id == current_building_type_) {
 				no_unproductive_label_.set_text(nr_unproductive > 0 ? std::to_string(nr_unproductive) :
@@ -675,7 +675,7 @@ void BuildingStatisticsMenu::update() {
 		} else {
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % "–").str();
 		}
-		set_labeltext(owned_labels_[id], owned_text, UI::FontStyle::kWuiBuildingStatisticsLabel);
+		set_labeltext(owned_labels_[id], owned_text, font_style_.color);
 		owned_labels_[id]->set_visible((nr_owned + nr_build) > 0);
 
 		building_buttons_[id]->set_enabled((nr_owned + nr_build) > 0);
@@ -701,14 +701,13 @@ void BuildingStatisticsMenu::update() {
 	}
 }
 
-void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea,
-                                           const std::string& text,
-                                           UI::FontStyle style) {
-	textarea->set_style(g_gr->styles().font_style(style));
+void BuildingStatisticsMenu::set_labeltext(UI::Textarea* textarea, const std::string& text, const RGBColor& color) {
+	UI::FontStyleInfo style = font_style_;
+	style.color = color;
+	textarea->set_style(style);
 	textarea->set_text(text);
 	textarea->set_visible(true);
 }
-
 
 void BuildingStatisticsMenu::set_current_building_type(DescriptionIndex id) {
 	assert(building_buttons_[id] != nullptr);
