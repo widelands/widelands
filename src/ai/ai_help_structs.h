@@ -346,7 +346,7 @@ struct BuildableField {
 	int16_t water_nearby;
 	int16_t open_water_nearby;
 	int16_t distant_water;
-	int8_t fish_nearby;
+	int16_t fish_nearby;
 	int8_t critters_nearby;
 	ResourceAmount ground_water;  // used by wells
 	uint8_t space_consumers_nearby;

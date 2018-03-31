@@ -1469,10 +1469,27 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 	}
 
-	// counting fields with fish
-	if (field.water_nearby > 0 && (field.fish_nearby == kUncalculated || resource_count_now)) {
-		field.fish_nearby = map.find_fields(Area<FCoords>(field.coords, kProductionArea), nullptr,
-		                                    FindNodeResource(world.get_resource("fish")));
+	// counting fields with fish, doing it roughly every 10-th minute is enough
+	if (field.water_nearby > 0 && (field.fish_nearby == kUncalculated || (resource_count_now && gametime % 10 == 0))) {
+		//NOCOM
+		CheckStepWalkOn fisher_cstep(MOVECAPS_WALK, false); // Tfalse is here to allow one step into unwalkable terrain
+		static std::vector<Coords> fish_fields_list; // pity this contains duplicities
+		fish_fields_list.clear();
+		map.find_reachable_fields(Area<FCoords>(field.coords, kProductionArea),
+			&fish_fields_list, fisher_cstep, FindNodeResource(world.get_resource("fish")));
+
+		// This is "list" of unique fields in fish_fields_list we got above
+		static std::set<Coords> counted_fields;
+		counted_fields.clear();
+		field.fish_nearby = 0;
+		for (auto fish_coords : fish_fields_list) {
+			if (counted_fields.insert(fish_coords).second){
+				field.fish_nearby += map.get_fcoords(fish_coords).field->get_resources_amount();
+				printf("  DEBUG adding fish on  %3dx%3d: %2d\n", fish_coords.x, fish_coords.y, map.get_fcoords(fish_coords).field->get_resources_amount());
+			}
+		}
+
+	printf ("DEBUG fields with fish: %2d, actual fish: %3d, from position %3dx%3d\n", fish_fields_list.size(), field.fish_nearby, field.coords.x, field.coords.y);
 	}
 
 	// Counting resources that do not change fast
