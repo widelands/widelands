@@ -45,7 +45,6 @@ enum class FontStyle {
 	kLabel,
 	kWarning,
 	kTitle,
-	kWuiProgressBar,
 	// Internet lobby and launch game
 	kFsGameSetupHeadings,
 	kFsGameSetupMapname,

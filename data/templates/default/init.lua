@@ -266,6 +266,37 @@ return {
       }
    },
 
+   progressbar = {
+      fsmenu = {
+         font = {
+            color = { 128, 128, 255 },
+            face = fs_font_face,
+            size = fs_font_size,
+            bold = true,
+            shadow = true
+         },
+         background_colors = {
+            low = { 64, 64, 0 }, -- Unused
+            medium = { 64, 64, 0 },
+            high = { 64, 64, 0 }, -- Unused
+         }
+      },
+      wui = {
+         font = {
+            color = {255, 250, 170},
+            face = wui_font_face,
+            size = wui_font_size,
+            bold = true,
+            shadow = true
+         },
+         background_colors = {
+            low = productivity_colors["low"],
+            medium = productivity_colors["medium"],
+            high = productivity_colors["high"],
+         }
+      }
+   },
+
    font_styles = {
       -- Font sizes and colors
       --[[ NOCOM better documentation
@@ -435,8 +466,6 @@ return {
       },
       colors = {
          foreground = fs_font_color, -- Main UI color
-         progresswindow_text = { 128, 128, 255 },    -- FS Progress bar text
-         progresswindow_background = { 64, 64, 0 },  -- FS Progress bar background
       }
    }
 }

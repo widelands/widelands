@@ -42,7 +42,7 @@ namespace {
 namespace UI {
 
 ProgressWindow::ProgressWindow(const std::string& background)
-   : UI::FullscreenWindow(), label_center_(Vector2i::zero()) {
+   : UI::FullscreenWindow(), label_center_(Vector2i::zero()), style_(g_gr->styles().progressbar_style(UI::PanelStyle::kFsMenu)) {
 	set_background(background);
 	step(_("Loading…"));
 }
@@ -72,7 +72,9 @@ void ProgressWindow::draw(RenderTarget& rt) {
 	border_rect.w += 2 * PROGRESS_STATUS_BORDER_X;
 	border_rect.h += 2 * PROGRESS_STATUS_BORDER_Y;
 
-	rt.draw_rect(border_rect, g_gr->styles().font_color(StyleManager::FontColor::kProgressWindowText));
+	rt.draw_rect(border_rect, style_.font.color);
+	// TODO(GunChleoc): this should depend on actual progress. Add a total steps variable and reuse the Progressbar class.
+	rt.fill_rect(label_rectangle_, style_.medium_color);
 }
 
 /// Set a picture to render in the background
@@ -92,9 +94,9 @@ void ProgressWindow::step(const std::string& description) {
 	RenderTarget& rt = *g_gr->get_render_target();
 	// always repaint the background first
 	draw(rt);
-	rt.fill_rect(label_rectangle_, g_gr->styles().font_color(StyleManager::FontColor::kProgressWindowBackground));
+
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_uifont(description, g_gr->styles().font_size(StyleManager::FontSize::kNormal), g_gr->styles().font_color(StyleManager::FontColor::kProgressWindowText)));
+	   UI::g_fh1->render(as_richtext_paragraph(description, style_.font));
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 

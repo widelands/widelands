@@ -32,6 +32,14 @@ static const std::string kTemplateDir = "templates/default/";
 
 namespace UI {
 // NOCOM move to own file?
+struct ProgressbarStyleInfo {
+	UI::FontStyleInfo font;
+	RGBColor low_color;
+	RGBColor medium_color;
+	RGBColor high_color;
+};
+
+
 struct StatisticsPlotStyleInfo {
 	UI::FontStyleInfo x_tick_font;
 	UI::FontStyleInfo y_max_value_font;
@@ -64,9 +72,6 @@ public:
 	enum class FontColor {
 		// Global
 		kForeground,
-		// Progress and productivity
-		kProgressWindowText,
-		kProgressWindowBackground,
 	};
 
 	StyleManager() = default;
@@ -82,6 +87,7 @@ public:
 	const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
 	const UI::BuildingStatisticsStyleInfo& building_statistics_style() const;
+	const UI::ProgressbarStyleInfo& progressbar_style(UI::PanelStyle) const;
 	const UI::StatisticsPlotStyleInfo& statistics_plot_style() const;
 
 	int font_size(const FontSize size) const;
@@ -94,6 +100,7 @@ private:
 	void add_slider_style(UI::SliderStyle style, const LuaTable& table, const std::string& key);
 	void add_editbox_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
 	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
+	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_size(FontSize size, const LuaTable& table, const std::string& key);
 	void add_font_color(FontColor color, const LuaTable& table);
@@ -110,6 +117,7 @@ private:
 	std::map<FontColor, std::unique_ptr<RGBColor>> font_colors_;
 	std::map<UI::FontStyle, std::unique_ptr<UI::FontStyleInfo>> fontstyles_;
 	std::unique_ptr<UI::BuildingStatisticsStyleInfo> building_statistics_style_;
+	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;
 	std::unique_ptr<UI::StatisticsPlotStyleInfo> statistics_plot_style_;
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);

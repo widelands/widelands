@@ -67,6 +67,7 @@ private:
 	Recti label_rectangle_;
 	VisualizationArray visualizations_;
 	std::string background_;
+	const UI::ProgressbarStyleInfo& style_;
 
 	void draw(RenderTarget&) override;
 	void update(bool repaint);

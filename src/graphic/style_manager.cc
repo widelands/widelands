@@ -199,6 +199,13 @@ void StyleManager::init() {
 	building_statistics_style_->medium_color = read_rgb_color2(*style_table->get_table("medium"));
 	building_statistics_style_->high_color = read_rgb_color2(*style_table->get_table("high"));
 
+	// Progress bars
+	element_table = table->get_table("progressbar");
+	add_progressbar_style(UI::PanelStyle::kFsMenu, *element_table->get_table("fsmenu"));
+	add_progressbar_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
+	check_completeness(
+	   "progressbars", progressbar_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
+
 	// Statistics plot
 	statistics_plot_style_.reset(new UI::StatisticsPlotStyleInfo());
 	element_table = table->get_table("statistics_plot");
@@ -224,10 +231,8 @@ void StyleManager::init() {
 
 	style_table = element_table->get_table("colors");
 	add_font_color(FontColor::kForeground, *style_table->get_table("foreground"));
-	add_font_color(FontColor::kProgressWindowText, *style_table->get_table("progresswindow_text"));
-	add_font_color(FontColor::kProgressWindowBackground, *style_table->get_table("progresswindow_background"));
 	check_completeness(
-	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kProgressWindowBackground));
+	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kForeground));
 
 	element_table = table->get_table("font_styles");
 	add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
@@ -248,7 +253,6 @@ void StyleManager::init() {
 	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
 	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
 	add_font_style(UI::FontStyle::kTitle, *element_table, "title");
-	add_font_style(UI::FontStyle::kWuiProgressBar, *element_table, "wui_progress_bar");
 	add_font_style(UI::FontStyle::kFsGameSetupHeadings, *element_table, "fs_game_setup_headings");
 	add_font_style(UI::FontStyle::kFsGameSetupMapname, *element_table, "fs_game_setup_mapname");
 	add_font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates, *element_table, "wui_game_speed_and_coordinates");
@@ -290,6 +294,11 @@ const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) co
 
 const UI::BuildingStatisticsStyleInfo& StyleManager::building_statistics_style() const {
 	return *building_statistics_style_;
+}
+
+const UI::ProgressbarStyleInfo& StyleManager::progressbar_style(UI::PanelStyle style) const {
+	assert(progressbar_styles_.count(style) == 1);
+	return *progressbar_styles_.at(style);
 }
 
 const UI::StatisticsPlotStyleInfo& StyleManager::statistics_plot_style() const {
@@ -340,6 +349,17 @@ void StyleManager::add_editbox_style(UI::PanelStyle style, const LuaTable& table
 void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table) {
 	tabpanelstyles_.insert(
 	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
+}
+
+void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& table) {
+	UI::ProgressbarStyleInfo* progress_bar_style = new UI::ProgressbarStyleInfo();
+	progress_bar_style->font = *read_font_style(table, "font");
+	std::unique_ptr<LuaTable> color_table = table.get_table("background_colors");
+	progress_bar_style->low_color = read_rgb_color2(*color_table->get_table("low"));
+	progress_bar_style->medium_color = read_rgb_color2(*color_table->get_table("medium"));
+	progress_bar_style->high_color = read_rgb_color2(*color_table->get_table("high"));
+	progressbar_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::ProgressbarStyleInfo>(std::move(progress_bar_style))));
+
 }
 
 void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {
