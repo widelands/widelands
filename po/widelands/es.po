@@ -4,7 +4,7 @@
 # Translators:
 # Antonio Trueba <atrueba@users.sourceforge.net>, 2007,2009
 # Diego Alberto Pereyra <diego.96.pereyra@gmail.com>, 2015-2017
-# GunChleoc, 2016
+# GunChleoc, 2016,2018
 # Javier Mora <morehash@gmail.com>, 2015
 # Thadah D. Denyse <juchuf@gmail.com>, 2015
 # Kiba Gasteiz <kibafang@gmail.com>, 2015
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-10 07:34+0000\n"
-"PO-Revision-Date: 2018-03-12 15:25+0000\n"
-"Last-Translator: Thadah D. Denyse <juchuf@gmail.com>\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-24 13:08+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +43,7 @@ msgstr[1] "Nuevos Objetivos"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:534 ../../src/base/i18n.cc:333
+#: ../../data/scripting/richtext.lua:533 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s y %2$s"
@@ -51,7 +51,7 @@ msgstr "%1$s y %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:536 ../../src/base/i18n.cc:337
+#: ../../data/scripting/richtext.lua:535 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s o %2$s"
@@ -62,7 +62,7 @@ msgstr "%1$s o %2$s"
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
-#: ../../data/scripting/richtext.lua:538 ../../data/scripting/richtext.lua:543
+#: ../../data/scripting/richtext.lua:537 ../../data/scripting/richtext.lua:542
 #: ../../src/base/i18n.cc:341 ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
@@ -71,7 +71,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:540 ../../src/base/i18n.cc:345
+#: ../../data/scripting/richtext.lua:539 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s y %2$s"
@@ -113,7 +113,7 @@ msgstr "Estado"
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../data/scripting/richtext.lua:505
+#: ../../data/scripting/richtext.lua:504
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
@@ -554,7 +554,7 @@ msgstr "Haz clic para seleccionar un elemento. Utiliza Ctrl para seleccionar var
 msgid "Current: %s"
 msgstr "Actual: %s"
 
-#: ../../src/editor/ui_menus/help.cc:42 ../../src/ui_fsmenu/multiplayer.cc:137
+#: ../../src/editor/ui_menus/help.cc:42 ../../src/ui_fsmenu/multiplayer.cc:152
 #: ../../src/wui/encyclopedia_window.cc:138
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
@@ -1058,7 +1058,7 @@ msgid "Loading map…"
 msgstr "Cargando mapa..."
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:371
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1378
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1389
 msgid "Loading…"
 msgstr "Cargando…"
 
@@ -1364,7 +1364,7 @@ msgstr "Un barco de expedición ha encontrado un espacio de construcción para u
 
 #: ../../src/logic/map_objects/tribes/ship.cc:538
 msgid "Island Circumnavigated"
-msgstr "Isla Circunnavegada "
+msgstr "Isla Circunnavegada"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
@@ -1559,7 +1559,7 @@ msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr "Mapa de Settlers II © Bluebyte. ¡Sin comentario definido!"
 
 #: ../../src/network/gameclient.cc:115
-#: ../../src/network/internet_gaming.cc:112
+#: ../../src/network/internet_gaming.cc:113
 msgid "Could not establish connection to host"
 msgstr "No ha conseguido conectar con el anfitrión"
 
@@ -1571,7 +1571,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1270
+#: ../../src/wlapplication.cc:1281
 msgid "Preparing game"
 msgstr "Preparando la partida"
 
@@ -1725,134 +1725,134 @@ msgid_plural "%li seconds"
 msgstr[0] "%li segundo"
 msgstr[1] "%li segundos"
 
-#: ../../src/network/internet_gaming.cc:113
+#: ../../src/network/internet_gaming.cc:114
 msgid ""
 "Widelands could not establish a connection to the given address.\n"
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr "Widelands no pudo establecer una conexión con la dirección indicada. \nNo había ningún metaservidor corriendo en el supuesto puerto o \nla configuración de su red no funciona."
 
-#: ../../src/network/internet_gaming.cc:176
+#: ../../src/network/internet_gaming.cc:177
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:214
+#: ../../src/network/internet_gaming.cc:215
 msgid "Successfully reconnected to the metaserver!"
 msgstr "¡Reconexión exitosa con el meta servidor!"
 
-#: ../../src/network/internet_gaming.cc:288
+#: ../../src/network/internet_gaming.cc:289
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Algo ha salido mal: %s"
 
-#: ../../src/network/internet_gaming.cc:397
+#: ../../src/network/internet_gaming.cc:449
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:418
+#: ../../src/network/internet_gaming.cc:471
 msgid "Mixed up"
 msgstr "Mezclado"
 
-#: ../../src/network/internet_gaming.cc:418
+#: ../../src/network/internet_gaming.cc:471
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "El meta servidor envió un mensaje de ERROR extraño durante la conexión."
 
-#: ../../src/network/internet_gaming.cc:429
+#: ../../src/network/internet_gaming.cc:486
 msgid "Unexpected packet"
 msgstr "Paquete inesperado."
 
-#: ../../src/network/internet_gaming.cc:430
-#, c-format
+#: ../../src/network/internet_gaming.cc:487
 msgid ""
-"Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
-"command %s. Maybe the metaserver is using a different protocol version ?"
-msgstr "Se esperaba una CONEXIÓN, RECONEXIÓN o paquete RECHAZADO desde el servidor, pero se recibió el comando %s. ¿Quizá el meta servidor está utilizando una versión diferente del protocolo?"
+"Received an unexpected network packet from the metaserver. The metaserver "
+"could be using a different protocol version. If the error persists, try "
+"updating your game."
+msgstr ""
 
-#: ../../src/network/internet_gaming.cc:442
+#: ../../src/network/internet_gaming.cc:499
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "ADVERTENCIA: Se recibió un comando %s, aunque no estamos en estado de CONEXIÓN."
 
-#: ../../src/network/internet_gaming.cc:453
+#: ../../src/network/internet_gaming.cc:510
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "La diferencia con el tiempo del servidor es de %d segundo."
 msgstr[1] "La diferencia con el tiempo del servidor es de %d segundos."
 
-#: ../../src/network/internet_gaming.cc:477
+#: ../../src/network/internet_gaming.cc:534
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Tipo de mensaje de chat «%s» no válido."
 
-#: ../../src/network/internet_gaming.cc:477
+#: ../../src/network/internet_gaming.cc:534
 msgid "Invalid message type"
 msgstr "Tipo de mensaje no válido"
 
-#: ../../src/network/internet_gaming.cc:515
+#: ../../src/network/internet_gaming.cc:572
 #, c-format
 msgid "The game %s is now available"
 msgstr "El juego %s está disponible ahora"
 
-#: ../../src/network/internet_gaming.cc:525
+#: ../../src/network/internet_gaming.cc:582
 #, c-format
 msgid "The game %s has been closed"
 msgstr "El juego %s ha sido cerrado"
 
-#: ../../src/network/internet_gaming.cc:572
+#: ../../src/network/internet_gaming.cc:629
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s se ha unido a la sala"
 
-#: ../../src/network/internet_gaming.cc:579
+#: ../../src/network/internet_gaming.cc:636
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s ha dejado la sala"
 
-#: ../../src/network/internet_gaming.cc:631
+#: ../../src/network/internet_gaming.cc:691
 msgid "Chat message could not be sent."
 msgstr "El mensaje del chat no pudo ser enviado."
 
-#: ../../src/network/internet_gaming.cc:645
+#: ../../src/network/internet_gaming.cc:705
 #, c-format
 msgid "ERROR: %s"
 msgstr "ERROR: %s"
 
-#: ../../src/network/internet_gaming.cc:655
+#: ../../src/network/internet_gaming.cc:715
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Se ha recibido un comando desconocido del metaserver: %s"
 
-#: ../../src/network/internet_gaming.cc:782
+#: ../../src/network/internet_gaming.cc:841
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "El mensaje no pudo ser enviado: ¡No está conectado al meta servidor!"
 
-#: ../../src/network/internet_gaming.cc:801
-#: ../../src/network/internet_gaming.cc:808
+#: ../../src/network/internet_gaming.cc:860
+#: ../../src/network/internet_gaming.cc:867
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "El mensaje no pudo ser enviado: ¿Se supone que era un mensaje privado?"
 
-#: ../../src/network/internet_gaming.cc:815
+#: ../../src/network/internet_gaming.cc:874
 msgid "Private messages to IRC users are not supported."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:892
+#: ../../src/network/internet_gaming.cc:951
 msgid "Conversion error"
 msgstr "Error de conversión"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:895
+#: ../../src/network/internet_gaming.cc:954
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "No se ha podido determinar valor verdadero de \"%s\""
 
-#: ../../src/network/internet_gaming.cc:912
+#: ../../src/network/internet_gaming.cc:971
 msgid "unknown"
 msgstr "desconocido"
 
@@ -2900,11 +2900,11 @@ msgstr "Campañas"
 msgid "Load Game"
 msgstr "Cargar juego"
 
-#: ../../src/wlapplication.cc:1066
+#: ../../src/wlapplication.cc:1076
 msgid "Game data error"
 msgstr "Error de datos de juego"
 
-#: ../../src/wlapplication.cc:1074
+#: ../../src/wlapplication.cc:1084
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2912,18 +2912,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Por favor informa de este problema para ayudarnos a mejorar Widelands. Encontrarás mensajes relacionados en la salida estándar (stdout.txt en windows). Estas usando la build %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1081
+#: ../../src/wlapplication.cc:1091
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Por favor añade esta información a tu informe.\n\nWidelands intenta crear un archivo de guardado cuando ocurren errores durante la partida. Es normalmente – aunque no siempre – posible cargarlo y seguir jugando."
 
-#: ../../src/wlapplication.cc:1207
+#: ../../src/wlapplication.cc:1218
 msgid "Invalid Address"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1208
+#: ../../src/wlapplication.cc:1219
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
@@ -3950,27 +3950,27 @@ msgstr "Usar automáticamente esta información para iniciar sesión desde ahora
 msgid "Login"
 msgstr "Iniciar sesión"
 
-#: ../../src/wui/login_box.cc:78
+#: ../../src/wui/login_box.cc:77
 msgid "Empty Nickname"
 msgstr "Alias vacío"
 
-#: ../../src/wui/login_box.cc:78
+#: ../../src/wui/login_box.cc:77
 msgid "Please enter a nickname!"
 msgstr "¡Por favor, introduzca un alias!"
 
-#: ../../src/wui/login_box.cc:83
+#: ../../src/wui/login_box.cc:82
 msgid "Space in Nickname"
 msgstr "Espacio en el alias"
 
-#: ../../src/wui/login_box.cc:84
+#: ../../src/wui/login_box.cc:83
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr "¡Lo siento, pero los espacios no están permitidos en los alias!"
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:89
 msgid "Empty Password"
 msgstr "Contraseña vacía"
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:89
 msgid "Please enter your password!"
 msgstr "¡Por favor introduce tu contraseña!"
 

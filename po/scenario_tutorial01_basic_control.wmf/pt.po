@@ -3,7 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2015-2016
-# GunChleoc, 2016
+# GunChleoc, 2016,2018
 # GunChleoc, 2014-2016
 # GunChleoc, 2014
 # zecas <jjorge@free.fr>, 2016-2017
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-24 13:05+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -774,7 +774,7 @@ msgstr "Quando arquivares uma mensagem, outra mensagem será selecionada na list
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr "Podes mantar a tecla Ctrl ou Maj carregada para selecionar mais mensagens, ou carregar em Ctrl + A para as selecionar todas. "
+msgstr "Podes mantar a tecla Ctrl ou Maj carregada para selecionar mais mensagens, ou carregar em Ctrl + A para as selecionar todas."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:382
 msgid ""

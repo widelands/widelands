@@ -3,14 +3,15 @@
 # 
 # Translators:
 # D M <hunter12@home.se>, 2017
+# GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-24 13:12+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -334,7 +335,7 @@ msgstr "Flytta din vy"
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr "Att kunna flytta vyn är nödvändigt för att få en komplett överblick av hela din ekonomi. Det finns tre sätt att flytta vyn i Widelands. "
+msgstr "Att kunna flytta vyn är nödvändigt för att få en komplett överblick av hela din ekonomi. Det finns tre sätt att flytta vyn i Widelands."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:190
 msgid "The first one is to use the cursor keys on your keyboard."

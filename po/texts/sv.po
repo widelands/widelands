@@ -3,12 +3,13 @@
 # 
 # Translators:
 # D M <hunter12@home.se>, 2017
+# GunChleoc, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:18+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-24 19:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -175,7 +176,7 @@ msgstr "Vilken karta du spelade när felet uppkom."
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr "Om felet gäller något som inte visas på rätt sätt eller om det kan hjälpa till för att förklara felet, inkludera gärna en eller några skärmdumpar. "
+msgstr "Om felet gäller något som inte visas på rätt sätt eller om det kan hjälpa till för att förklara felet, inkludera gärna en eller några skärmdumpar."
 
 #: ../../data/txts/README.lua:34
 msgid ""
@@ -514,6 +515,7 @@ msgid ""
 msgstr "Bygg alltid en skogsvaktarkoja och en viltvårdarkoja så att inte träden eller viltet tar slut."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
@@ -596,6 +598,17 @@ msgstr "Bygg alltid ett hus åt skogsvaktaren så att dina stockar inte tar slut
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
 msgstr "Imperiet behöver mycket marmor. Håll utkik efter marmorresurser."
+
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr ""
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester´s house, so you will not run out of logs."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

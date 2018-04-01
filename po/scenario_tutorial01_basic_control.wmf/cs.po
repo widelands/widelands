@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Matej Svrcek <mmatej@yahoo.com>, 2015
@@ -10,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-25 18:13+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-25 17:15+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +84,7 @@ msgstr "Normálně začínáš hru s jednou hlavní budovou. To je ta velká bud
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Pro dřevorubcovu chatu musíme najít hezké místo. To si můžeme usnadnit tak, že aktivujeme \"Ukaž místa ke stavění\". Lze to provést dvěma způsoby:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
@@ -94,7 +95,7 @@ msgstr "Stiskni mezerník pro přepnutí, nebo"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr ""
+msgstr "klikni na tlačítko \"Ukaž místa ke stavění\" na dolním okraji obrazovky."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -116,7 +117,7 @@ msgstr "Je snazší rozeznat, jaký typ budov lze stavět na jakém políčku, k
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Right-click on this window now and then give it a try."
-msgstr ""
+msgstr "Klikni pravým tlačítkem na okno a zkus si to."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Lumberjack’s Spot"
@@ -608,7 +609,7 @@ msgstr ""
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Když držíš Ctrl nebo Shift+Ctrl během stavby cesty, vlajky se umístí automaticky."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."
@@ -968,7 +969,7 @@ msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr "Barbaři mají čtyři různé armádní budovy, které lze postavit: Strážnice (malá), Hradba a Věž (obě střední) a Pevnost (velká). Vyber si tu, která se ti nejvíce líbí. "
+msgstr "Barbaři mají čtyři různé armádní budovy, které lze postavit: Strážnice (malá), Hradba a Věž (obě střední) a Pevnost (velká). Vyber si tu, která se ti nejvíce líbí."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
