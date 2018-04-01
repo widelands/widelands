@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# erimitis, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: erimitis, 2018\n"
 "Language-Team: Greek (https://www.transifex.com/widelands/teams/35159/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,11 +20,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle the unproductive buildings"
-msgstr ""
+msgstr "Αποσυναρμολογήστε τα μη παραγωγικά κτίρια"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid "Dismantle Buildings"
-msgstr ""
+msgstr "Αποσυναρμολόγηση Κτιρίων"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:48
 msgid ""
@@ -63,17 +66,19 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Φτιάξτε τουλάχιστον 3 σπίτια υλοτόμων και 2 λατομεία"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:75
 msgid "Quarries and Lumberjacks"
-msgstr ""
+msgstr "Λατομεία και Υλοτόμοι"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
 msgstr ""
+"Φτιάξτε τουλάχιστον τρία σπίτια υλοτόμων και δύο λατομεία, για ανανέωση της "
+"αλυσίδας σας εφοδιασμού οικοδομικών υλικών."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Produce fish and rations"
@@ -93,7 +98,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:93
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "Φτιάξτε δύο νέα σπίτια δασοκόμων"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid ""
@@ -124,7 +129,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:112
 msgid ""
-"Decide: Either collect 35 sheaves of wheat and 15 bottles of wine for the "
+"Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
 
@@ -143,7 +148,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Produce at least 10 tools"
-msgstr ""
+msgstr "Παράγετε τουλάχιστον 10 εργαλεία"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:129
 msgid "Tool Production"
@@ -176,11 +181,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:147
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Καταβάλετε τους Βάρβαρους!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:149
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Καταβάλετε τον εχθρό"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:150
 msgid "End the Barbarian intrusion into your very own part of the world."
@@ -280,15 +285,15 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:217
 msgid "The Battle is Won"
-msgstr ""
+msgstr "Η μάχη κερδήθηκε"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:220
 msgid ""
 "Praise the gods, we have succeeded. We managed all the challenges that were "
 "imposed on us. We even expelled the Barbarians out of our country. However, "
-"this was only one battle won, as we are still only at the brink of war. "
-"Let’s see what the future still holds for us."
+"our victory is only temporary, as this is still just the beginning of the "
+"war. Let’s see what the future still holds for us."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:222
@@ -518,6 +523,8 @@ msgid ""
 "First of all, we need more construction materials. So, we should build at "
 "least three lumberjacks’ houses and two quarries."
 msgstr ""
+"Πρώτα από όλα, χρειαζόμαστε περισσότερα υλικά κατασκευών. Ώστε πρέπει να "
+"φτιάξουμε τουλάχιστον τρία σπίτια υλοτόμων και δύο λατομεία."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:337
@@ -637,6 +644,9 @@ msgid ""
 "behind his experience and expectations. So, I took a close look at our "
 "foresters’ performance."
 msgstr ""
+"Ένας από τους υλοτόμους μας μου είπε ότι η αναπαραγωγή των δασών μας είναι "
+"πολύ πίσω από την εμπειρία και τις προσδοκίες του. Έτσι, έριξα μια κοντινή "
+"ματιά στην επίδοση των δασοκόμων μας."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:402
@@ -1204,8 +1214,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:700
 msgid ""
 "Ave, Lutius! If you want us to help you, you first have to worship our "
-"goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 bottles of wine "
-"to prepare a worthy sacrifice for her."
+"goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 amphoras of wine"
+" to prepare a worthy sacrifice for her."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:705

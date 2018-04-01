@@ -50,6 +50,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
 	editbox.activate_history(true);
+	chatbox.force_new_renderer(true);
 
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -67,8 +68,7 @@ void GameChatPanel::recalculate() {
 
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs.size(); ++i) {
-		str += format_as_old_richtext(msgs[i]);
-		str += '\n';
+		str += format_as_richtext(msgs[i]);
 	}
 	str += "</rt>";
 

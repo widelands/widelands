@@ -36,7 +36,7 @@ ShippingItem::ShippingItem(WareInstance& ware) : object_(&ware) {
 ShippingItem::ShippingItem(Worker& worker) : object_(&worker) {
 }
 
-void ShippingItem::get(EditorGameBase& game, WareInstance** ware, Worker** worker) const {
+void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const {
 	if (ware) {
 		*ware = nullptr;
 	}

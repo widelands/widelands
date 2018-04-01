@@ -42,7 +42,7 @@ CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const 
 
 bool CheckStepRoadAI::allowed(
    const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
-	uint8_t endcaps = player->get_buildcaps(end);
+	const uint8_t endcaps = player->get_buildcaps(end);
 
 	// we should not cross fields with road or flags (or any other immovable)
 	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
@@ -81,6 +81,56 @@ bool CheckStepRoadAI::reachable_dest(const Map& map, const FCoords& dest) const 
 	}
 
 	return true;
+}
+
+// CheckStepOwnTerritory
+CheckStepOwnTerritory::CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe)
+   : player(pl), movecaps(mc), open_end(oe) {
+}
+
+// Defines when movement is allowed:
+// 1. startfield is walkable (or it is the first step)
+// And endfield either:
+// 2a. is walkable
+// 2b. has our PlayerImmovable (building or flag)
+bool CheckStepOwnTerritory::allowed(
+   const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
+	const uint8_t endcaps = player->get_buildcaps(end);
+	const uint8_t startcaps = player->get_buildcaps(start);
+
+	// We should not cross fields with road or flags (or any other immovable)
+	// Or rather we can step on it, but not go on from such field
+	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
+		return false;
+	}
+
+	// Start field must be walkable
+	if (!(startcaps & movecaps)) {
+		return false;
+	}
+
+	// Endfield can not be water
+	if (endcaps & MOVECAPS_SWIM) {
+		return false;
+	}
+
+	return true;
+}
+
+// We accept either walkable territory or field with own immovable
+bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) const {
+	const uint8_t endcaps = player->get_buildcaps(dest);
+	if (BaseImmovable const* const imm = map.get_immovable(dest)) {
+		if (imm->descr().type() >= MapObjectType::FLAG) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	if (endcaps & MOVECAPS_WALK) {
+		return true;
+	}
+	return false;
 }
 
 // We are looking for fields we can walk on
@@ -296,7 +346,8 @@ MineableField::MineableField(const Widelands::FCoords& fc)
 }
 
 EconomyObserver::EconomyObserver(Widelands::Economy& e) : economy(e) {
-	dismantle_grace_time = std::numeric_limits<int32_t>::max();
+	dismantle_grace_time = std::numeric_limits<uint32_t>::max();
+	fields_block_last_time = 0;
 }
 
 int32_t BuildingObserver::total_count() const {
@@ -333,6 +384,52 @@ bool BuildingObserver::buildable(Widelands::Player& p) {
 // so this observer will be used for this
 MineTypesObserver::MineTypesObserver()
    : in_construction(0), finished(0), is_critical(false), unoccupied(0) {
+}
+
+// Reset counter for all field types
+void MineFieldsObserver::zero() {
+	for (auto& material : stat) {
+		material.second = 0;
+	}
+}
+
+// Increase counter by one for specific ore/minefield type
+void MineFieldsObserver::add(const Widelands::DescriptionIndex idx) {
+	stat[idx] += 1;
+}
+
+// Add ore into critical_ores
+void MineFieldsObserver::add_critical_ore(const Widelands::DescriptionIndex idx) {
+	critical_ores.insert(idx);
+}
+
+// Does the player has at least one mineable field with positive amount for each critical ore?
+bool MineFieldsObserver::has_critical_ore_fields() {
+	for (auto ore : critical_ores) {
+		if (get(ore) == 0) {
+			return false;
+		}
+	}
+	return true;
+}
+
+// Returns count of fields with desired ore
+uint16_t MineFieldsObserver::get(const Widelands::DescriptionIndex idx) {
+	if (stat.count(idx) == 0) {
+		return 0;
+	}
+	return stat[idx];
+}
+
+// Count of types of mineable fields, up to 4 currently
+uint8_t MineFieldsObserver::count_types() {
+	uint16_t count = 0;
+	for (auto material : stat) {
+		if (material.second > 0) {
+			count += 1;
+		}
+	}
+	return count;
 }
 
 ExpansionType::ExpansionType() {

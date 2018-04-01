@@ -82,8 +82,6 @@ enum class BuildingAttribute : uint8_t {
 	kSupportingProducer,
 };
 
-enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
-
 enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
 
 enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
@@ -128,6 +126,20 @@ constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
+
+	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
+	bool reachable_dest(const Map&, const FCoords& dest) const;
+
+	Player* player;
+	uint8_t movecaps;
+	bool open_end;
+};
+
+// Used to walk ower own territory, on fields that are walkable (or as given by mc)
+// plus one step more to a field with own immovable. So that also flags and buildings are
+// included in resulting list
+struct CheckStepOwnTerritory {
+	CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe);
 
 	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
 	bool reachable_dest(const Map&, const FCoords& dest) const;
@@ -249,6 +261,13 @@ struct FindNodeOpenWater {
 
 struct FindNodeWithFlagOrRoad {
 	bool accept(const Map&, FCoords) const;
+};
+
+// Accepts any field
+struct FindNodeAcceptAll {
+	bool accept(const Map&, FCoords) const {
+		return true;
+	};
 };
 
 struct NearFlag {
@@ -389,7 +408,8 @@ struct EconomyObserver {
 
 	Widelands::Economy& economy;
 	std::deque<Widelands::Flag const*> flags;
-	int32_t dismantle_grace_time;
+	uint32_t dismantle_grace_time;
+	uint32_t fields_block_last_time;
 };
 
 struct BuildingObserver {
@@ -450,6 +470,7 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	std::set<DescriptionIndex> production_hints;
+	bool requires_supporters;
 
 	// information needed for decision on new building construction
 	int16_t max_preciousness;
@@ -509,6 +530,7 @@ struct ShipObserver {
 	Widelands::Ship* ship;
 	bool waiting_for_command_ = false;
 	uint32_t last_command_time = 0;
+	bool escape_mode = false;
 
 	// direction by which the ship circumvents an island
 	// this is the last circle-island command's direction
@@ -553,6 +575,22 @@ struct MineTypesObserver {
 	uint16_t finished;
 	bool is_critical;
 	uint16_t unoccupied;
+};
+
+// This struct contains count of mineable fields grouped by ore/resource type
+struct MineFieldsObserver {
+
+	void zero();
+	void add(Widelands::DescriptionIndex);
+	void add_critical_ore(Widelands::DescriptionIndex);
+	bool has_critical_ore_fields();
+	uint16_t get(Widelands::DescriptionIndex);
+	uint8_t count_types();
+
+private:
+	// This is the central information of the struct: a pair of resource and count of fields
+	std::map<Widelands::DescriptionIndex, uint16_t> stat;
+	std::set<Widelands::DescriptionIndex> critical_ores;
 };
 
 constexpr int kNeuronWeightLimit = 100;

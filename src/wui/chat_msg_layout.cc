@@ -41,66 +41,6 @@ std::string color(const int16_t playern) {
 
 }  // namespace
 
-// TODO(sirver): remove as soon as old text renderer is gone.
-std::string format_as_old_richtext(const ChatMessage& chat_message) {
-	const std::string& font_face = "serif";
-	std::string message = "<p font-color=#33ff33 font-size=9>";
-
-	std::string sanitized = sanitize_message(chat_message);
-
-	// time calculation
-	char ts[13];
-	strftime(ts, sizeof(ts), "[%H:%M] </p>", localtime(&chat_message.time));
-	message += ts;
-
-	message = (boost::format("%s<p font-size=14 font-face=%s font-color=#%s") % message % font_face %
-	           color(chat_message.playern))
-	             .str();
-
-	std::string sender_escaped = richtext_escape(chat_message.sender);
-	std::string recipient_escaped = richtext_escape(chat_message.recipient);
-
-	if (chat_message.recipient.size() && chat_message.sender.size()) {
-		// Personal message handling
-		if (sanitized.compare(0, 3, "/me")) {
-
-			message =
-			   (boost::format(
-			       "%s font-decoration=underline>%s @ %s:</p><p font-size=14 font-face=%s> %s") %
-			    message % sender_escaped % recipient_escaped % font_face % sanitized)
-			      .str();
-		} else {
-
-			message =
-			   (boost::format("%s>@%s &gt;&gt; </p>"
-			                  "<p font-size=14 font-face=%s font-color=#%s font-style=italic> %s%s") %
-			    message % recipient_escaped % font_face % color(chat_message.playern) %
-			    sender_escaped % sanitized.substr(3))
-			      .str();
-		}
-	} else {
-		// Normal messages handling
-		if (!sanitized.compare(0, 3, "/me")) {
-			message = (boost::format("%s font-style=italic>-&gt; %s%s") % message %
-			           (chat_message.sender.size() ? chat_message.sender.c_str() : "***") %
-			           sanitized.substr(3))
-			             .str();
-
-		} else if (chat_message.sender.size()) {
-			message =
-			   (boost::format("%s font-decoration=underline>%s:</p><p font-size=14 font-face=%s> %s") %
-			    message % sender_escaped % font_face % sanitized)
-			      .str();
-		} else {
-			message += " font-weight=bold>*** ";
-			message += sanitized;
-		}
-	}
-
-	// return the formated message
-	return message + "<br></p>";
-}
-
 // Returns a richtext string that can be displayed to the user.
 std::string format_as_richtext(const ChatMessage& chat_message) {
 	const std::string& font_face = "serif";

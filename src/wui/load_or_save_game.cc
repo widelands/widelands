@@ -245,7 +245,8 @@ void LoadOrSaveGame::clicked_delete() {
 	if (filetype_ == FileType::kReplay) {
 		header = no_selections == 1 ?
 		            _("Do you really want to delete this replay?") :
-		            /** TRANSLATORS: Used with multiple replays, 1 replay has a separate string. */
+		            /** TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
+		    DO NOT omit the placeholder in your translation. */
 		            (boost::format(ngettext("Do you really want to delete this %d replay?",
 		                                    "Do you really want to delete these %d replays?",
 		                                    no_selections)) %
@@ -254,7 +255,8 @@ void LoadOrSaveGame::clicked_delete() {
 	} else {
 		header = no_selections == 1 ?
 		            _("Do you really want to delete this game?") :
-		            /** TRANSLATORS: Used with multiple games, 1 game has a separate string. */
+		            /** TRANSLATORS: Used with multiple games, 1 game has a separate string.
+		   DO NOT omit the placeholder in your translation. */
 		            (boost::format(ngettext("Do you really want to delete this %d game?",
 		                                    "Do you really want to delete these %d games?",
 		                                    no_selections)) %
@@ -415,9 +417,9 @@ void LoadOrSaveGame::fill_table() {
 					      .str();
 					gamedata.savedonstring =
 					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-					      month day, year. This is part of a list. */
-					   (boost::format(_("saved on %1% %2%, %3%")) % localize_month(savedate->tm_mon) %
-					    savedate->tm_mday % (1900 + savedate->tm_year))
+					      month (short name) day (number), year (number). This is part of a list. */
+					   (boost::format(_("saved on %1% %2%, %3%")) % savedate->tm_mday %
+					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
 					      .str();
 				}
 			}

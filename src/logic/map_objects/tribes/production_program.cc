@@ -911,7 +911,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 				// Update consumption statistics
 				if (inputqueues[i]->get_type() == wwWARE) {
-					ps.owner().ware_consumed(inputqueues[i]->get_index(), q);
+					ps.get_owner()->ware_consumed(inputqueues[i]->get_index(), q);
 				}
 			}
 		}

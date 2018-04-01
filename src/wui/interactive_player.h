@@ -51,7 +51,7 @@ public:
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
-	Widelands::Player& player() const {
+	const Widelands::Player& player() const {
 		return game().player(player_number_);
 	}
 	Widelands::Player* get_player() const override {

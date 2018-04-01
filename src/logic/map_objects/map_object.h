@@ -206,8 +206,8 @@ private:
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,
- * potentially set it up by calling basic functions like set_position(),
- * set_owner(), etc. and then call init(). After that, the object is supposed to
+ * potentially set it up by calling basic functions like set_position(), etc.
+ * and then call init(). After that, the object is supposed to
  * be fully created.
 */
 
@@ -306,6 +306,11 @@ public:
 
 	Player* get_owner() const {
 		return owner_;
+	}
+
+	const Player& owner() const {
+		assert(get_owner());
+		return *owner_;
 	}
 
 	// Header bytes to distinguish between data packages for the different

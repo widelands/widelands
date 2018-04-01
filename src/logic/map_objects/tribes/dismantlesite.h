@@ -69,7 +69,7 @@ public:
 	explicit DismantleSite(const DismantleSiteDescr& descr,
 	                       EditorGameBase&,
 	                       const Coords&,
-	                       Player&,
+	                       Player*,
 	                       bool,
 	                       Building::FormerBuildings& former_buildings);
 

@@ -584,7 +584,7 @@ int do_set_soldiers(lua_State* L,
 		} else if (d > 0) {
 			for (; d; --d) {
 				Soldier& soldier = dynamic_cast<Soldier&>(
-				   soldier_descr.create(egbase, *owner, nullptr, building_position));
+				   soldier_descr.create(egbase, owner, nullptr, building_position));
 				soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
 				if (sc->incorporate_soldier(egbase, soldier)) {
 					soldier.remove(egbase);
@@ -4326,7 +4326,8 @@ int LuaRoad::create_new_worker(PlayerImmovable& pi,
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i)
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
-	Carrier& carrier = dynamic_cast<Carrier&>(wdes->create(egbase, r.owner(), &r, idle_position));
+	Carrier& carrier =
+	   dynamic_cast<Carrier&>(wdes->create(egbase, r.get_owner(), &r, idle_position));
 
 	if (upcast(Game, game, &egbase)) {
 		carrier.start_task_road(*game);
