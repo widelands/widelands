@@ -1212,9 +1212,11 @@ void DefaultAI::update_all_mineable_fields(const uint32_t gametime) {
 		i += 1;
 	}
 	// Updating overall statistics, first we flush the data and then iterate over all mine fields
+	// ignoring fields that are blocked usually because they are not accessible
 	mine_fields_stat.zero();
 	for (const auto& mineable_field : mineable_fields) {
-		if (mineable_field->coords.field->get_resources_amount() > 0) {
+		if (mineable_field->coords.field->get_resources_amount() > 0 &&
+		    !blocked_fields.is_blocked(mineable_field->coords)) {
 			mine_fields_stat.add(mineable_field->coords.field->get_resources());
 		}
 	}
