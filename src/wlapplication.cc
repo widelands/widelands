@@ -727,6 +727,8 @@ bool WLApplication::init_settings() {
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
+	s.get_bool("ai_training");
+	s.get_bool("auto_speed");
 	s.get_bool("fullscreen");
 	s.get_bool("animate_map_panning");
 	s.get_int("xres");
