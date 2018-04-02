@@ -111,7 +111,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	// Set the texts and style of UI elements
 	Section& s = g_options.pull_section("global");  //  for playername
 
-	title.set_style(g_gr->styles().font_style(UI::FontStyle::kTitle));
+	title.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	title.set_font_scale(scale_factor());
 
 	opengames_.set_font_scale(scale_factor());
@@ -279,7 +279,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			case 2:  // SUPERUSER
 			case 3:  // BOT
 				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
-				// NOCOM implement styles er.set_color(g_gr->styles().font_color(StyleManager::FontColor::kGameSetupHeadings));
+				er.set_font_style(g_gr->styles().font_style(UI::FontStyle::kFsGameSetupIrcClient));
 				er.set_picture(0, pic);
 				break;
 			default:

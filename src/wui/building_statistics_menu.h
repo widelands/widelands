@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "graphic/color.h"
+#include "graphic/map_object_style_info.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
@@ -92,6 +93,10 @@ private:
 
 	InteractivePlayer& iplayer() const;
 
+	/// Style
+	const UI::MapObjectStyleInfo&  style_;
+	const UI::FontStyleInfo& font_style_;
+
 	/// UI tabs
 	UI::TabPanel tab_panel_;
 	UI::Box* tabs_[kNoOfBuildingTabs];
@@ -103,8 +108,6 @@ private:
 	std::vector<UI::Textarea*> owned_labels_;
 	/// Labels with buildings' productivity
 	std::vector<UI::Textarea*> productivity_labels_;
-
-	const UI::FontStyleInfo& font_style_;
 
 	/// The buttons for stepping through buildings
 	UI::Panel navigation_panel_;

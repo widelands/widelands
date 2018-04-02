@@ -81,7 +81,7 @@ void Statebox::layout() {
 		}
 		rendered_text_ = label_text_.empty() ?
 		                    nullptr :
-		                    UI::g_fh1->render(as_uifont(label_text_), text_width(get_w(), pic_width));
+		                    UI::g_fh1->render(as_richtext_paragraph(label_text_, UI::FontStyle::kLabel), text_width(get_w(), pic_width));
 		if (rendered_text_.get()) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);

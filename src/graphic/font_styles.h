@@ -26,30 +26,29 @@
 
 namespace UI {
 enum class FontStyle {
-	// Global
-	kFsMenuInfoPanelHeading,
-	kFsMenuInfoPanelParagraph,
-	kWuiInfoPanelHeading,
-	kWuiInfoPanelParagraph,
-	kWuiMessageHeading,
-	kWuiMessageParagraph,
-	kWuiWindowTitle,
-	kTooltip,
-	kWuiWaresInfo,
-	kFsMenuGameTip,
-	kChatTimestamp,
 	kChatMessage,
-	kChatWhisper,
-	kChatPlayername,
-	kChatServer,
-	kLabel,
-	kWarning,
-	kTitle,
-	// Internet lobby and launch game
-	kFsGameSetupHeadings,
-	kFsGameSetupMapname,
-	kWuiGameSpeedAndCoordinates,
-	kFsMenuIntro
+   kChatPlayername,
+   kChatServer,
+   kChatTimestamp,
+   kChatWhisper,
+   kFsGameSetupHeadings,
+   kFsGameSetupIrcClient,
+   kFsGameSetupMapname,
+   kFsMenuGameTip,
+   kFsMenuInfoPanelHeading,
+   kFsMenuInfoPanelParagraph,
+   kFsMenuIntro,
+	kFsMenuTitle,
+   kLabel,
+   kTooltip,
+   kWarning,
+   kWuiGameSpeedAndCoordinates,
+   kWuiInfoPanelHeading,
+   kWuiInfoPanelParagraph,
+   kWuiMessageHeading,
+   kWuiMessageParagraph,
+   kWuiWaresInfo,
+   kWuiWindowTitle
 };
 
 struct FontStyleInfo {

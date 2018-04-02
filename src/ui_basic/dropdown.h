@@ -166,6 +166,8 @@ private:
 	/// Returns true if the mouse pointer left the vicinity of the dropdown.
 	bool is_mouse_away() const;
 
+	int base_height(int button_dimension) const;
+
 	/// Give each dropdown a unique ID
 	static int next_id_;
 	const int id_;

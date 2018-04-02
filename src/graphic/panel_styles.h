@@ -54,7 +54,7 @@ struct PanelStyleInfo {
 
 	const Image* image;
 	const RGBAColor color;
-	// Optional font info
+	// Optional font info NOCOM don't like the string keys
 	std::map<std::string, std::unique_ptr<UI::FontStyleInfo>> fonts;
 };
 

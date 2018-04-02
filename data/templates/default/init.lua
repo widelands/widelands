@@ -1,5 +1,6 @@
 -- This script defines a GUI style for Widelands. At the moment, we only
 -- support the default template.
+-- NOCOM update documentation
 -- So far, only background textures and colors can be defined, and they all have
 -- the format { image = filename, color = {r, g, b } }.
 
@@ -53,6 +54,12 @@ local productivity_colors = {
 -- These are the style definitions to be returned.
 -- Note: you have to keep all the keys intact, or Widelands will not be happy.
 return {
+   -- Automatic resizing of fonts to make them fit onto buttons etc.
+   -- won't go below this size
+   minimum_font_size = 10,
+   -- TODO(GunChleoc): Revisit this - general icon frame styles for waresinfo, etc too?
+   minimap_icon_frame = fs_font_color,
+
    -- Button backgrounds
    buttons = {
       -- Buttons used in Fullscreen menus
@@ -220,21 +227,30 @@ return {
 
    -- In-game statistics plots
    statistics_plot = {
-      font = {
-         color = { 0, 0, 0 }, -- Dummy, the colors below are used
-         face = "condensed",
-         size = 13,
+      fonts = {
+         x_tick = {
+            color = { 255, 0, 0 },
+            face = "condensed",
+            size = 13,
+         },
+         y_min_value = {
+            color = { 125, 0, 0 },
+            face = "condensed",
+            size = 13,
+         },
+         y_max_value = {
+            color = { 60, 125, 0 },
+            face = "condensed",
+            size = 13,
+         },
       },
       colors = {
          axis_line = { 0, 0, 0 },
          zero_line = { 255, 255, 255 },
-         x_tick = { 255, 0, 0 },
-         y_max_value = { 60, 125, 0 },
-         y_min_value = { 125, 0, 0 },
       }
    },
 
-   building_statistics = {
+   map_object = {
       census_font = {
          color = wui_font_color, -- Default color
          face = "condensed",
@@ -258,8 +274,8 @@ return {
          shadow = true
       },
       colors = {
-         construction = {0, 187, 0},
-         neutral = {255, 250, 170},
+         construction = { 163, 144, 19 },
+         neutral = { 255, 250, 170 },
          low = productivity_colors["low"],
          medium = productivity_colors["medium"],
          high = productivity_colors["high"],
@@ -297,80 +313,47 @@ return {
       }
    },
 
-   font_styles = {
-      -- Font sizes and colors
-      --[[ NOCOM better documentation
-         required: face, color, size;
-         optional bools: bold, italic, underline, shadow
-      ]]
-      -- Intro screen
-      fsmenu_intro = {
-         color = { 192, 192, 128 },
-         face = fs_font_face,
-         size = 16,
-         bold = true,
-         shadow = true
+   tables = {
+      fsmenu = {
+         enabled = {
+            color = fs_font_color,
+            face = fs_font_face,
+            size = fs_font_size,
+            bold = true,
+            shadow = true
+         },
+         disabled = {
+            color = {127, 127, 127},
+            face = fs_font_face,
+            size = fs_font_size,
+            bold = true,
+            shadow = true
+         }
       },
-      -- Game and Map info panels
-      fsmenu_info_panel_heading = {
-         color = { 255, 255, 0 },
-         face = fs_font_face,
-         size = fs_font_size,
-         bold = true,
-         shadow = true
+      wui = {
+         enabled = {
+            color = fs_font_color,
+            face = fs_font_face,
+            size = fs_font_size,
+            bold = true,
+            shadow = true
+         },
+         disabled = {
+            color = {127, 127, 127},
+            face = fs_font_face,
+            size = fs_font_size,
+            bold = true,
+            shadow = true
+         }
       },
-      fsmenu_info_panel_paragraph = {
-         color = { 209, 209, 209 },
-         face = fs_font_face,
-         size = fs_font_size,
-         shadow = true
-      },
-      wui_info_panel_heading = {
-         color = { 209, 209, 209 },
-         face = wui_font_face,
-         size = wui_font_size,
-         bold = true,
-      },
-      wui_info_panel_paragraph = {
-         color = { 255, 255, 0 },
-         face = wui_font_face,
-         size = wui_font_size,
-      },
-      -- Messages
-      wui_message_heading = {
-         color = { 209, 209, 209 },
-         face = wui_font_face,
-         size = 18,
-         bold = true,
-      },
-      wui_message_paragraph = {
-         color = { 255, 255, 0 },
-         face = wui_font_face,
-         size = 12,
-      },
-      wui_window_title = {
-         color = fs_font_color,
-         face = wui_font_face,
-         size = 13,
-         bold=true,
-         shadow=true,
-      },
-      tooltip = {
-         color = fs_font_color,
-         face = fs_font_face,
-         size = fs_font_size,
-         bold = true,
-      },
-      wui_waresinfo = {
-         color = wui_font_color,
-         face = "condensed",
-         size = 10,
-      },
-      fsmenu_gametip = {
-         color = { 0, 0, 0 },
-         face = "serif",
-         size = 16,
-      },
+   },
+
+   -- Font styles. Required parameters are:
+   -- * face: string
+   -- * color: table with r, g, b values as int
+   -- * size; int
+   -- Optional bools are: bold, italic, underline, shadow
+   fonts = {
       -- Basic chat message text color
       chat_message = {
          color = wui_font_color,
@@ -410,8 +393,74 @@ return {
          bold = true,
          shadow = true,
       },
-      -- Textarea default style, also used for sliders, checkboxes, ...
+      -- Intro screen
+      fsmenu_intro = {
+         color = { 192, 192, 128 },
+         face = fs_font_face,
+         size = 16,
+         bold = true,
+         shadow = true
+      },
+      -- Displayed in the loading screens
+      fsmenu_gametip = {
+         color = { 0, 0, 0 },
+         face = "serif",
+         size = 16,
+      },
+      -- Game and Map info panels
+      fsmenu_info_panel_heading = {
+         color = { 255, 255, 0 },
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+      },
+      fsmenu_info_panel_paragraph = {
+         color = { 209, 209, 209 },
+         face = fs_font_face,
+         size = fs_font_size,
+         shadow = true
+      },
+      -- Internet lobby and launch game
+      fsmenu_game_setup_headings = {
+         color = { 0, 255, 0 },
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+      },
+      fsmenu_game_setup_mapname = {
+         color = { 255, 255, 127 },
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+      },
+      -- List IRC clients in the internet lobby
+      fsmenu_game_setup_irc_client = {
+         color = { 0, 255, 0 },
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+         shadow = true
+      },
+      -- Page titles. Also used in game summary TODO(GunChleoc): Refactor game summary
+      fsmenu_title = {
+         color = fs_font_color,
+         face = fs_font_face,
+         size = 22,
+         bold = true,
+         shadow = true
+      },
+
+      -- Textarea default style, also used for sliders, checkboxes, both in fsmenu and wui ...
       label = default_ui_font,
+      tooltip = {
+         color = fs_font_color,
+         face = fs_font_face,
+         size = fs_font_size,
+         bold = true,
+      },
       warning = {
          color = {255, 22, 22},
          face = fs_font_face,
@@ -419,35 +468,36 @@ return {
          bold = true,
          shadow = true
       },
-      -- Page titles
-      title = {
-         color = fs_font_color,
-         face = fs_font_face,
-         size = 22,
-         bold = true,
-         shadow = true
-      },
-      wui_progress_bar = {
-         color = {255, 250, 170},
+
+      wui_info_panel_heading = {
+         color = { 209, 209, 209 },
          face = wui_font_face,
          size = wui_font_size,
          bold = true,
-         shadow = true
       },
-      -- Internet lobby and launch game
-      fs_game_setup_headings = {
-         color = { 0, 255, 0 },
-         face = fs_font_face,
-         size = fs_font_size,
-         bold = true,
-         shadow = true
+      wui_info_panel_paragraph = {
+         color = { 255, 255, 0 },
+         face = wui_font_face,
+         size = wui_font_size,
       },
-      fs_game_setup_mapname = {
-         color = { 255, 255, 127 },
-         face = fs_font_face,
-         size = fs_font_size,
+      -- Messages
+      wui_message_heading = {
+         color = { 209, 209, 209 },
+         face = wui_font_face,
+         size = 18,
          bold = true,
-         shadow = true
+      },
+      wui_message_paragraph = {
+         color = { 255, 255, 0 },
+         face = wui_font_face,
+         size = 12,
+      },
+      wui_window_title = {
+         color = fs_font_color,
+         face = wui_font_face,
+         size = 13,
+         bold=true,
+         shadow=true,
       },
       wui_game_speed_and_coordinates = {
          color = wui_font_color,
@@ -456,16 +506,10 @@ return {
          bold = true,
          shadow = true
       },
-   },
-
-   -- NOCOM clean this up and remove
-   fonts = {
-      sizes = {
-         normal = 14,   -- Default UI color
-         minimum = 10,   -- When autoresizing text to fit, don't go below this size
+      wui_waresinfo = {
+         color = wui_font_color,
+         face = "condensed",
+         size = 10,
       },
-      colors = {
-         foreground = fs_font_color, -- Main UI color
-      }
-   }
+   },
 }

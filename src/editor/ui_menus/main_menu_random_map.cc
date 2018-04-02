@@ -32,6 +32,7 @@
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
 #include "graphic/font_handler1.h"
+#include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
@@ -51,7 +52,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
      // UI elements
      margin_(4),
      box_width_(get_inner_w() - 2 * margin_),
-     label_height_(text_height_old() + 2),
+     label_height_(text_height(UI::FontStyle::kLabel) + 2),
      box_(this, margin_, margin_, UI::Box::Vertical, 0, 0, margin_),
      // Size
      width_(&box_,

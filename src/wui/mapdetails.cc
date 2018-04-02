@@ -28,6 +28,8 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
@@ -40,12 +42,16 @@ namespace {
 std::string as_header(const std::string& txt, UI::PanelStyle style, bool is_first = false) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
-		return (boost::format("<p>%s%s</p>") %
-		        (is_first ? "" : "<vspace gap=9>") % g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelHeading).as_font_tag(richtext_escape(txt)))
+		return (boost::format("<p>%s%s</p>") % (is_first ? "" : "<vspace gap=9>") %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kFsMenuInfoPanelHeading)
+		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	case UI::PanelStyle::kWui:
-		return (boost::format("<p>%s%s</p>") %
-		        (is_first ? "" : "<vspace gap=6>") % g_gr->styles().font_style(UI::FontStyle::kWuiInfoPanelHeading).as_font_tag(richtext_escape(txt)))
+		return (boost::format("<p>%s%s</p>") % (is_first ? "" : "<vspace gap=6>") %
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kWuiInfoPanelHeading)
+		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	}
 	NEVER_HERE();
@@ -54,11 +60,15 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p><vspace gap=2>%s</p>") %
-		        g_gr->styles().font_style(UI::FontStyle::kFsMenuInfoPanelParagraph).as_font_tag(richtext_escape(txt)))
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kFsMenuInfoPanelParagraph)
+		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	case UI::PanelStyle::kWui:
 		return (boost::format("<p><vspace gap=2>%s</p>") %
-		        g_gr->styles().font_style(UI::FontStyle::kWuiInfoPanelParagraph).as_font_tag(richtext_escape(txt)))
+		        g_gr->styles()
+		           .font_style(UI::FontStyle::kWuiInfoPanelParagraph)
+		           .as_font_tag(richtext_escape(txt)))
 		   .str();
 	}
 	NEVER_HERE();
@@ -100,7 +110,10 @@ void MapDetails::clear() {
 }
 
 void MapDetails::layout() {
-	name_label_.set_size(get_w() - padding_, text_height_old() + 2);
+	name_label_.set_size(get_w() - padding_, text_height(style_ == UI::PanelStyle::kFsMenu ?
+	                                                        UI::FontStyle::kFsMenuInfoPanelHeading :
+	                                                        UI::FontStyle::kWuiInfoPanelHeading) +
+	                                            2);
 
 	// Adjust sizes for show / hide suggested teams
 	if (suggested_teams_box_->is_visible()) {

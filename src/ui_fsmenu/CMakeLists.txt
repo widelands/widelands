@@ -9,7 +9,6 @@ wl_library(ui_fsmenu_options
     graphic
     graphic_fonthandler
     graphic_text
-    graphic_text_layout
     helper
     io_filesystem
     logic_filesystem_constants

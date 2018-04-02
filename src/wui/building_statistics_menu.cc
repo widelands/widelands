@@ -58,8 +58,9 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       kWindowWidth,
                       kWindowHeight,
                       _("Building Statistics")),
+	  style_(g_gr->styles().map_object_style()),
+	  font_style_(style_.building_statistics_font),
      tab_panel_(this, UI::TabPanelStyle::kWuiDark),
-	  font_style_(g_gr->styles().building_statistics_style().building_statistics_font),
 	  navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
      building_name_(
         &navigation_panel_, get_inner_w() / 2, 0, 0, kButtonHeight, "", UI::Align::kCenter),
@@ -605,16 +606,14 @@ void BuildingStatisticsMenu::update() {
 				int const percent =
 				   static_cast<int>(static_cast<float>(total_prod) / static_cast<float>(nr_owned));
 
-				RGBColor color;
-				if (percent < low_production_) {
-					color = g_gr->styles().building_statistics_style().low_color;
-				} else if (percent < ((low_production_ < 50) ?
-				                         2 * low_production_ :
-				                         low_production_ + ((100 - low_production_) / 2))) {
-					color = g_gr->styles().building_statistics_style().medium_color;
-				} else {
-					color = g_gr->styles().building_statistics_style().high_color;
-				}
+				const RGBColor& color = (percent < low_production_) ?
+							style_.low_color :
+							(percent < ((low_production_ < 50) ?
+												2 * low_production_ :
+												low_production_ + ((100 - low_production_) / 2))) ?
+								style_.medium_color :
+								style_.high_color;
+
 				/** TRANSLATORS: Percent in building statistics window, e.g. 85% */
 				/** TRANSLATORS: If you wish to add a space, translate as '%i %%' */
 				const std::string perc_str = (boost::format(_("%i%%")) % percent).str();
@@ -638,14 +637,11 @@ void BuildingStatisticsMenu::update() {
 			}
 		} else if (building.type() == MapObjectType::MILITARYSITE) {
 			if (nr_owned) {
-				RGBColor color;
-				if (total_stationed_soldiers < total_soldier_capacity / 2) {
-					color = g_gr->styles().building_statistics_style().low_color;
-				} else if (total_stationed_soldiers < total_soldier_capacity) {
-					color = g_gr->styles().building_statistics_style().medium_color;
-				} else {
-					color = g_gr->styles().building_statistics_style().high_color;
-				}
+				const RGBColor& color =  (total_stationed_soldiers < total_soldier_capacity / 2) ?
+							style_.low_color :
+							(total_stationed_soldiers < total_soldier_capacity) ?
+								style_.medium_color :
+								style_.high_color;
 				const std::string perc_str =
 				   (boost::format(_("%1%/%2%")) % total_stationed_soldiers % total_soldier_capacity)
 				      .str();

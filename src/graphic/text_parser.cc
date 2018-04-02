@@ -24,14 +24,26 @@
 #include <string>
 #include <vector>
 
+#include <boost/algorithm/string.hpp>
+
 #include "base/log.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
-#include "graphic/text_layout.h"
 #include "helper.h"
 
 namespace UI {
+
+/**
+ * This function replaces some HTML entities in strings, e.g. %nbsp;.
+ * It is used by the renderer after the tags have been parsed.
+ */
+void replace_entities(std::string* text) {
+	boost::replace_all(*text, "&gt;", ">");
+	boost::replace_all(*text, "&lt;", "<");
+	boost::replace_all(*text, "&nbsp;", " ");
+	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
+}
 
 RichtextBlock::RichtextBlock() : image_align_(UI::Align::kLeft), text_align_(UI::Align::kLeft) {
 }
@@ -115,13 +127,13 @@ bool TextParser::parse_textblock(std::string& block,
 			if (next_break == std::string::npos) {
 				if (line.size()) {
 					std::string word = line;
-					replace_entities(&word);
+					UI::replace_entities(&word);
 					words.push_back(word);
 				}
 				break;
 			} else if (next_break) {
 				std::string word = line.substr(0, next_break);
-				replace_entities(&word);
+				UI::replace_entities(&word);
 				words.push_back(word);
 			}
 			line_breaks.push_back(words.size());

@@ -266,17 +266,17 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		nr_workers += working_positions_[--i].worker ? 1 : 0;
 
 	if (nr_workers == 0) {
-		*s = g_gr->styles().building_statistics_style().as_color_tag(_("(not occupied)"), g_gr->styles().building_statistics_style().low_color);
+		*s = g_gr->styles().map_object_style().as_color_tag(_("(not occupied)"), g_gr->styles().map_object_style().low_color);
 		return;
 	}
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		*s = g_gr->styles().building_statistics_style().as_color_tag(ngettext("Worker missing", "Workers missing", nr_requests), g_gr->styles().building_statistics_style().low_color);
+		*s = g_gr->styles().map_object_style().as_color_tag(ngettext("Worker missing", "Workers missing", nr_requests), g_gr->styles().map_object_style().low_color);
 		return;
 	}
 
 	if (is_stopped_) {
-		*s = g_gr->styles().building_statistics_style().as_color_tag(_("(stopped)"), g_gr->styles().building_statistics_style().neutral_color);
+		*s = g_gr->styles().map_object_style().as_color_tag(_("(stopped)"), g_gr->styles().map_object_style().neutral_color);
 		return;
 	}
 	*s = statistics_string_on_changed_statistics_;
@@ -366,35 +366,32 @@ void ProductionSite::calc_statistics() {
 
 	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
-	RGBColor color;
-	if (percOk < 33) {
-		color = g_gr->styles().building_statistics_style().low_color;
-	} else if (percOk < 66) {
-		color = g_gr->styles().building_statistics_style().medium_color;
-	} else {
-		color = g_gr->styles().building_statistics_style().high_color;
-	}
 	const std::string perc_str =
-			g_gr->styles().building_statistics_style().as_color_tag((boost::format(_("%i%%")) % percOk).str(), color);
-
-	std::string trend;
-	if (lastPercOk > percOk) {
-		trend_ = Trend::kRising;
-		color = g_gr->styles().building_statistics_style().high_color;
-		trend = "+";
-	} else if (lastPercOk < percOk) {
-		trend_ = Trend::kFalling;
-		color = g_gr->styles().building_statistics_style().low_color;
-		trend = "-";
-	} else {
-		trend_ = Trend::kUnchanged;
-		color = g_gr->styles().building_statistics_style().neutral_color;
-		trend = "=";
-	}
-
-	const std::string trend_str = g_gr->styles().building_statistics_style().as_color_tag((boost::format(_("%i%%")) % trend).str(), color);
+			g_gr->styles().map_object_style().as_color_tag((boost::format(_("%i%%")) % percOk).str(),
+									  (percOk < 33) ? g_gr->styles().map_object_style().low_color :
+															(percOk < 66) ?
+																g_gr->styles().map_object_style().medium_color :
+																g_gr->styles().map_object_style().high_color);
 
 	if (0 < percOk && percOk < 100) {
+		RGBColor color = g_gr->styles().map_object_style().high_color;
+		std::string trend;
+		if (lastPercOk > percOk) {
+			trend_ = Trend::kRising;
+			color = g_gr->styles().map_object_style().high_color;
+			trend = "+";
+		} else if (lastPercOk < percOk) {
+			trend_ = Trend::kFalling;
+			color = g_gr->styles().map_object_style().low_color;
+			trend = "-";
+		} else {
+			trend_ = Trend::kUnchanged;
+			color = g_gr->styles().map_object_style().neutral_color;
+			trend = "=";
+		}
+
+		const std::string trend_str = g_gr->styles().map_object_style().as_color_tag((boost::format(_("%i%%")) % trend).str(), color);
+
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =
 		   (boost::format("%s\u2009%s") % perc_str % trend_str).str();

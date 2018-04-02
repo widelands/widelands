@@ -29,12 +29,12 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
+#include "graphic/font_styles.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
-struct Button;
 
 enum class TableRows { kSingle, kMulti, kSingleDescending, kMultiDescending };
 enum class TableColumnType { kFixed, kFlexible };
@@ -138,23 +138,19 @@ public:
 		void* entry() const {
 			return entry_;
 		}
-		void set_color(const RGBColor& c) {
-			use_clr = true;
-			clr = c;
-		}
 
-		bool use_color() const {
-			return use_clr;
+		void set_font_style(const UI::FontStyleInfo& style) {
+			font_style_ = &style;
 		}
-		RGBColor get_color() const {
-			return clr;
+		const UI::FontStyleInfo* font_style() const {
+			return font_style_;
 		}
 
 	private:
 		friend class Table<void*>;
 		void* entry_;
-		bool use_clr;
-		RGBColor clr;
+		const UI::FontStyleInfo* font_style_;
+
 		struct Data {
 			const Image* d_picture;
 			std::string d_string;
@@ -297,8 +293,9 @@ private:
 
 	Columns columns_;
 	int total_width_;
-	const uint32_t headerheight_;
 	int32_t lineheight_;
+	const uint32_t headerheight_;
+	UI::PanelStyle style_;
 	UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar

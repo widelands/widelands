@@ -23,14 +23,12 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "graphic/color.h"
+#include "graphic/panel_styles.h"
 #include "graphic/richtext.h"
-#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
 namespace UI {
-struct Scrollbar;
 
 /**
  * This defines an area, where a text can easily be printed.

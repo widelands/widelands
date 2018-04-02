@@ -35,7 +35,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
-#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "graphic/wordwrap.h"
 

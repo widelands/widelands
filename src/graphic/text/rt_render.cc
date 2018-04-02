@@ -36,6 +36,7 @@
 #include "base/vector.h"
 #include "base/wexception.h"
 #include "graphic/align.h"
+#include "graphic/font_handler1.h" // NOCOM circular dependency
 #include "graphic/graphic.h"
 #include "graphic/image_cache.h"
 #include "graphic/image_io.h"
@@ -47,7 +48,6 @@
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/sdl_ttf_font.h"
 #include "graphic/text/textstream.h"
-#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -57,6 +57,17 @@
 namespace RT {
 
 static const uint16_t INFINITE_WIDTH = 65535;  // 2^16-1
+
+/**
+ * This function replaces some HTML entities in strings, e.g. %nbsp;.
+ * It is used by the renderer after the tags have been parsed.
+ */
+void replace_entities(std::string* text) {
+	boost::replace_all(*text, "&gt;", ">");
+	boost::replace_all(*text, "&lt;", "<");
+	boost::replace_all(*text, "&nbsp;", " ");
+	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
+}
 
 // Helper Stuff
 struct Borders {
@@ -1026,7 +1037,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
 			if (!word.empty()) {
-				replace_entities(&word);
+				RT::replace_entities(&word);
 				bool word_is_bidi = i18n::has_rtl_character(word.c_str());
 				word = i18n::make_ligatures(word.c_str());
 				if (word_is_bidi || i18n::has_rtl_character(previous_word.c_str())) {
@@ -1069,7 +1080,7 @@ void TagHandler::make_text_nodes(const std::string& txt,
 			word = ts.till_any_or_end(" \t\n\r");
 			ns.fontset = i18n::find_fontset(word.c_str(), fontsets_);
 			if (!word.empty()) {
-				replace_entities(&word);
+				RT::replace_entities(&word);
 				word = i18n::make_ligatures(word.c_str());
 				if (i18n::has_script_character(word.c_str(), UI::FontSets::Selector::kCJK)) {
 					std::vector<std::string> units = i18n::split_cjk_word(word.c_str());

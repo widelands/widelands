@@ -19,10 +19,10 @@
 
 #include "ui_basic/textarea.h"
 
-#include <math.h>
-
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 
 namespace UI {
 
@@ -67,7 +67,7 @@ void Textarea::init() {
 	update();
 }
 
-void Textarea::set_style(UI::FontStyleInfo style) {
+void Textarea::set_style(const FontStyleInfo& style) {
 	style_ = style;
 	update();
 }
@@ -83,7 +83,7 @@ void Textarea::update() {
 	}
 
 	FontStyleInfo scaled_style = style_;
-	scaled_style.size = std::max(g_gr->styles().font_size(StyleManager::FontSize::kMinimum), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
+	scaled_style.size = std::max(g_gr->styles().minimum_font_size(), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
 	rendered_text_ = autofit_text(text_, scaled_style, fixed_width_);
 
 	if (layoutmode_ == AutoMove) {

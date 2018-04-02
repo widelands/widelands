@@ -28,6 +28,7 @@
 #include "editor/editorinteractive.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
+#include "graphic/text_layout.h"
 #include "logic/map.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
@@ -45,7 +46,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
    : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
      indent_(10),
-     labelh_(text_height_old() + 4),
+     labelh_(text_height(UI::FontStyle::kLabel) + 4),
      checkbox_space_(25),
      butw_((get_inner_w() - 3 * padding_) / 2),
      max_w_(get_inner_w() - 2 * padding_),

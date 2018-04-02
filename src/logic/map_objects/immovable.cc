@@ -513,7 +513,7 @@ void Immovable::draw_construction(const uint32_t gametime,
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(draw_text, descr().descname(),
-	             g_gr->styles().building_statistics_style().as_color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(), g_gr->styles().building_statistics_style().construction_color),
+	             g_gr->styles().map_object_style().as_color_tag((boost::format(_("%i%% built")) % (100 * done / total)).str(), g_gr->styles().map_object_style().construction_color),
 	             point_on_dst, scale, dst);
 }
 

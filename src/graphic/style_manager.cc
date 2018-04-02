@@ -28,17 +28,8 @@
 #include "scripting/lua_interface.h"
 
 namespace {
-// Read RGB color from LuaTable NOCOM get rid
-std::unique_ptr<RGBColor> read_rgb_color(const LuaTable& table) {
-	std::vector<int> rgbcolor = table.array_entries<int>();
-	if (rgbcolor.size() != 3) {
-		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
-	}
-	return std::unique_ptr<RGBColor>(new RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]));
-}
-
 // Read RGB color from LuaTable
-RGBColor read_rgb_color2(const LuaTable& table) {
+RGBColor read_rgb_color(const LuaTable& table) {
 	std::vector<int> rgbcolor = table.array_entries<int>();
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
@@ -46,9 +37,30 @@ RGBColor read_rgb_color2(const LuaTable& table) {
 	return RGBColor(rgbcolor[0], rgbcolor[1], rgbcolor[2]);
 }
 
-UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::string& table_key) {
+UI::FontStyleInfo read_font_style(const LuaTable& parent_table, const std::string& table_key) {
 	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
-	UI::FontStyleInfo* font = new UI::FontStyleInfo(style_table->get_string("face"), read_rgb_color2(*style_table->get_table("color")), style_table->get_int("size"));
+	UI::FontStyleInfo font(style_table->get_string("face"), read_rgb_color(*style_table->get_table("color")), style_table->get_int("size"));
+	if (font.size < 1) {
+		throw wexception("Font size too small for %s, must be at least 1!", table_key.c_str());
+	}
+	if (style_table->has_key("bold")) {
+		font.bold = style_table->get_bool("bold");
+	}
+	if (style_table->has_key("italic")) {
+		font.italic = style_table->get_bool("italic");
+	}
+	if (style_table->has_key("shadow")) {
+		font.shadow = style_table->get_bool("shadow");
+	}
+	if (style_table->has_key("underline")) {
+		font.underline = style_table->get_bool("underline");
+	}
+	return font;
+}
+// NOCOM code duplication to avoid memory leaks. Meh.
+UI::FontStyleInfo* read_font_style_to_pointer(const LuaTable& parent_table, const std::string& table_key) {
+	std::unique_ptr<LuaTable> style_table = parent_table.get_table(table_key);
+	UI::FontStyleInfo* font = new UI::FontStyleInfo(style_table->get_string("face"), read_rgb_color(*style_table->get_table("color")), style_table->get_int("size"));
 	if (font->size < 1) {
 		throw wexception("Font size too small for %s, must be at least 1!", table_key.c_str());
 	}
@@ -68,7 +80,7 @@ UI::FontStyleInfo* read_font_style(const LuaTable& parent_table, const std::stri
 }
 
 // Read image filename and RGBA color from LuaTable
-UI::PanelStyleInfo* read_style(const LuaTable& table, const std::string keyname = "", size_t expected_fonts = 0) {
+UI::PanelStyleInfo* read_style(const LuaTable& table, const std::string& keyname = "", size_t expected_fonts = 0) {
 	const std::string image = table.get_string("image");
 	std::vector<int> rgbcolor = table.get_table("color")->array_entries<int>();
 	if (rgbcolor.size() != 3) {
@@ -80,7 +92,7 @@ UI::PanelStyleInfo* read_style(const LuaTable& table, const std::string keyname 
 	if (table.has_key("fonts")) {
 		std::unique_ptr<LuaTable> fonts_table = table.get_table("fonts");
 		for (const std::string& key : fonts_table->keys<std::string>()) {
-			result->fonts.emplace(std::make_pair(key, std::unique_ptr<UI::FontStyleInfo>(read_font_style(*fonts_table, key))));
+			result->fonts.emplace(std::make_pair(key, std::unique_ptr<UI::FontStyleInfo>(read_font_style_to_pointer(*fonts_table, key))));
 		}
 	}
 
@@ -100,15 +112,6 @@ void check_completeness(const std::string& name, size_t map_size, size_t last_en
 	}
 }
 }  // namespace
-
-namespace UI {
-	std::string BuildingStatisticsStyleInfo::as_color_tag(const std::string& text, const RGBColor& color) const {
-		static boost::format f("<font color=%s>%s</font>");
-		f % color.hex_value();
-		f % text;
-		return f.str();
-	}
-} // namespace UI
 
 void StyleManager::init() {
 	buttonstyles_.clear();
@@ -183,21 +186,22 @@ void StyleManager::init() {
 	check_completeness(
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
-	// Building statistics
-	building_statistics_style_.reset(new UI::BuildingStatisticsStyleInfo());
+	// Building statistics etc. for map objects
+	UI::MapObjectStyleInfo* map_object_info = new UI::MapObjectStyleInfo();
 	// Fonts
-	element_table = table->get_table("building_statistics");
-	building_statistics_style_->building_statistics_font = *read_font_style(*element_table, "building_statistics_font");
-	building_statistics_style_->census_font = *read_font_style(*element_table, "census_font");
-	building_statistics_style_->statistics_font = *read_font_style(*element_table, "statistics_font");
+	element_table = table->get_table("map_object");
+	map_object_info->building_statistics_font = read_font_style(*element_table, "building_statistics_font");
+	map_object_info->census_font = read_font_style(*element_table, "census_font");
+	map_object_info->statistics_font = read_font_style(*element_table, "statistics_font");
 
 	// Colors
 	style_table = element_table->get_table("colors");
-	building_statistics_style_->construction_color = read_rgb_color2(*style_table->get_table("construction"));
-	building_statistics_style_->neutral_color = read_rgb_color2(*style_table->get_table("neutral"));
-	building_statistics_style_->low_color = read_rgb_color2(*style_table->get_table("low"));
-	building_statistics_style_->medium_color = read_rgb_color2(*style_table->get_table("medium"));
-	building_statistics_style_->high_color = read_rgb_color2(*style_table->get_table("high"));
+	map_object_info->construction_color = read_rgb_color(*style_table->get_table("construction"));
+	map_object_info->neutral_color = read_rgb_color(*style_table->get_table("neutral"));
+	map_object_info->low_color = read_rgb_color(*style_table->get_table("low"));
+	map_object_info->medium_color = read_rgb_color(*style_table->get_table("medium"));
+	map_object_info->high_color = read_rgb_color(*style_table->get_table("high"));
+	map_object_style_.reset(std::move(map_object_info));
 
 	// Progress bars
 	element_table = table->get_table("progressbar");
@@ -206,59 +210,60 @@ void StyleManager::init() {
 	check_completeness(
 	   "progressbars", progressbar_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
+	// Table and listselect
+	element_table = table->get_table("tables");
+	add_table_style(UI::PanelStyle::kFsMenu, *element_table->get_table("fsmenu"));
+	add_table_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
+	check_completeness(
+	   "tables", table_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
+
 	// Statistics plot
-	statistics_plot_style_.reset(new UI::StatisticsPlotStyleInfo());
+	UI::StatisticsPlotStyleInfo* statistics_plot_info = new UI::StatisticsPlotStyleInfo();
 	element_table = table->get_table("statistics_plot");
-	style_table = element_table->get_table("colors");
 	// Fonts
-	statistics_plot_style_->x_tick_font = *read_font_style(*element_table, "font");
-	statistics_plot_style_->x_tick_font.color = read_rgb_color2(*style_table->get_table("x_tick"));
-	statistics_plot_style_->y_max_value_font = *read_font_style(*element_table, "font");
-	statistics_plot_style_->y_max_value_font.color = read_rgb_color2(*style_table->get_table("y_max_value"));
-	statistics_plot_style_->y_min_value_font = *read_font_style(*element_table, "font");
-	statistics_plot_style_->y_min_value_font.color = read_rgb_color2(*style_table->get_table("y_min_value"));
+	style_table = element_table->get_table("fonts");
+	statistics_plot_info->x_tick_font = read_font_style(*style_table, "x_tick");
+	statistics_plot_info->y_min_value_font = read_font_style(*style_table, "y_min_value");
+	statistics_plot_info->y_max_value_font = read_font_style(*style_table, "y_max_value");
+	style_table = element_table->get_table("colors");
 	// Line colors
-	statistics_plot_style_->axis_line_color = read_rgb_color2(*style_table->get_table("axis_line"));
-	statistics_plot_style_->zero_line_color = read_rgb_color2(*style_table->get_table("zero_line"));
+	statistics_plot_info->axis_line_color = read_rgb_color(*style_table->get_table("axis_line"));
+	statistics_plot_info->zero_line_color = read_rgb_color(*style_table->get_table("zero_line"));
+	statistics_plot_style_.reset(std::move(statistics_plot_info));
+
+	// Special elements
+	minimum_font_size_ = table->get_int("minimum_font_size");
+	if (minimum_font_size_ < 1) {
+		throw wexception("Font size too small for minimum_font_size, must be at least 1!");
+	}
+	minimap_icon_frame_ = read_rgb_color(*table->get_table("minimap_icon_frame"));
 
 	// Fonts
 	element_table = table->get_table("fonts");
-	style_table = element_table->get_table("sizes");
-	add_font_size(FontSize::kNormal, *style_table, "normal");
-	add_font_size(FontSize::kMinimum, *style_table, "minimum");
-	check_completeness(
-	   "font_sizes", font_sizes_.size(), static_cast<size_t>(FontSize::kMinimum));
-
-	style_table = element_table->get_table("colors");
-	add_font_color(FontColor::kForeground, *style_table->get_table("foreground"));
-	check_completeness(
-	   "font_colors", font_colors_.size(), static_cast<size_t>(FontColor::kForeground));
-
-	element_table = table->get_table("font_styles");
-	add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
-	add_font_style(UI::FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
-	add_font_style(UI::FontStyle::kWuiInfoPanelHeading, *element_table, "wui_info_panel_heading");
-	add_font_style(UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
-	add_font_style(UI::FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
-	add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
-	add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
-	add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
-	add_font_style(UI::FontStyle::kWuiWaresInfo, *element_table, "wui_waresinfo");
-	add_font_style(UI::FontStyle::kFsMenuGameTip, *element_table, "fsmenu_gametip");
-	add_font_style(UI::FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
 	add_font_style(UI::FontStyle::kChatMessage, *element_table, "chat_message");
-	add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
-	add_font_style(UI::FontStyle::kChatServer, *element_table, "chat_server");
-	add_font_style(UI::FontStyle::kChatPlayername, *element_table, "chat_playername");
-	add_font_style(UI::FontStyle::kLabel, *element_table, "label");
-	add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
-	add_font_style(UI::FontStyle::kTitle, *element_table, "title");
-	add_font_style(UI::FontStyle::kFsGameSetupHeadings, *element_table, "fs_game_setup_headings");
-	add_font_style(UI::FontStyle::kFsGameSetupMapname, *element_table, "fs_game_setup_mapname");
-	add_font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates, *element_table, "wui_game_speed_and_coordinates");
-
-	add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
-	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kFsMenuIntro));
+   add_font_style(UI::FontStyle::kChatPlayername, *element_table, "chat_playername");
+   add_font_style(UI::FontStyle::kChatServer, *element_table, "chat_server");
+   add_font_style(UI::FontStyle::kChatTimestamp, *element_table, "chat_timestamp");
+   add_font_style(UI::FontStyle::kChatWhisper, *element_table, "chat_whisper");
+   add_font_style(UI::FontStyle::kFsGameSetupHeadings, *element_table, "fsmenu_game_setup_headings");
+   add_font_style(UI::FontStyle::kFsGameSetupIrcClient, *element_table, "fsmenu_game_setup_irc_client");
+   add_font_style(UI::FontStyle::kFsGameSetupMapname, *element_table, "fsmenu_game_setup_mapname");
+   add_font_style(UI::FontStyle::kFsMenuGameTip, *element_table, "fsmenu_gametip");
+   add_font_style(UI::FontStyle::kFsMenuInfoPanelHeading, *element_table, "fsmenu_info_panel_heading");
+   add_font_style(UI::FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
+   add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
+	add_font_style(UI::FontStyle::kFsMenuTitle, *element_table, "fsmenu_title");
+   add_font_style(UI::FontStyle::kLabel, *element_table, "label");
+   add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
+   add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
+   add_font_style(UI::FontStyle::kWuiGameSpeedAndCoordinates, *element_table, "wui_game_speed_and_coordinates");
+   add_font_style(UI::FontStyle::kWuiInfoPanelHeading, *element_table, "wui_info_panel_heading");
+   add_font_style(UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
+   add_font_style(UI::FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
+   add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
+   add_font_style(UI::FontStyle::kWuiWaresInfo, *element_table, "wui_waresinfo");
+   add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
+	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kWuiWindowTitle));
 }
 
 // Return functions for the styles
@@ -292,8 +297,8 @@ const UI::PanelStyleInfo* StyleManager::scrollbar_style(UI::PanelStyle style) co
 	return scrollbarstyles_.at(style).get();
 }
 
-const UI::BuildingStatisticsStyleInfo& StyleManager::building_statistics_style() const {
-	return *building_statistics_style_;
+const UI::MapObjectStyleInfo& StyleManager::map_object_style() const {
+	return *map_object_style_;
 }
 
 const UI::ProgressbarStyleInfo& StyleManager::progressbar_style(UI::PanelStyle style) const {
@@ -305,16 +310,21 @@ const UI::StatisticsPlotStyleInfo& StyleManager::statistics_plot_style() const {
 	return *statistics_plot_style_;
 }
 
+const UI::TableStyleInfo& StyleManager::table_style(UI::PanelStyle style) const {
+	assert(table_styles_.count(style) == 1);
+	return *table_styles_.at(style);
+}
+
 const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {
 	return *fontstyles_.at(style);
 }
 
-int StyleManager::font_size(const FontSize size) const {
-	return font_sizes_.at(size);
-
+int StyleManager::minimum_font_size() const {
+	return minimum_font_size_;
 }
-const RGBColor& StyleManager::font_color(const FontColor color) const {
-	return *font_colors_.at(color).get();
+
+const RGBColor& StyleManager::minimap_icon_frame() const {
+	return minimap_icon_frame_;
 }
 
 // Fill the maps
@@ -353,31 +363,26 @@ void StyleManager::add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& t
 
 void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& table) {
 	UI::ProgressbarStyleInfo* progress_bar_style = new UI::ProgressbarStyleInfo();
-	progress_bar_style->font = *read_font_style(table, "font");
+	progress_bar_style->font = read_font_style(table, "font");
 	std::unique_ptr<LuaTable> color_table = table.get_table("background_colors");
-	progress_bar_style->low_color = read_rgb_color2(*color_table->get_table("low"));
-	progress_bar_style->medium_color = read_rgb_color2(*color_table->get_table("medium"));
-	progress_bar_style->high_color = read_rgb_color2(*color_table->get_table("high"));
+	progress_bar_style->low_color = read_rgb_color(*color_table->get_table("low"));
+	progress_bar_style->medium_color = read_rgb_color(*color_table->get_table("medium"));
+	progress_bar_style->high_color = read_rgb_color(*color_table->get_table("high"));
 	progressbar_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::ProgressbarStyleInfo>(std::move(progress_bar_style))));
 
+}
+
+void StyleManager::add_table_style(UI::PanelStyle style, const LuaTable& table) {
+	UI::TableStyleInfo* table_style = new UI::TableStyleInfo();
+	table_style->enabled = read_font_style(table, "enabled");
+	table_style->disabled = read_font_style(table, "disabled");
+	table_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::TableStyleInfo>(std::move(table_style))));
 }
 
 void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {
 	map->insert(std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(table))));
 }
 
-void StyleManager::add_font_size(FontSize size, const LuaTable& table, const std::string& key) {
-	const int addme = table.get_int(key);
-	if (addme < 1) {
-		throw wexception("Font size too small for %s, must be at least 1!", key.c_str());
-	}
-	font_sizes_.emplace(std::make_pair(size, addme));
-}
-
-void StyleManager::add_font_color(FontColor color, const LuaTable& table) {
-	font_colors_.emplace(std::make_pair(color, read_rgb_color(table)));
-}
-
 void StyleManager::add_font_style(UI::FontStyle font_key, const LuaTable& table, const std::string& table_key) {
-	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(read_font_style(table, table_key))));
+	fontstyles_.emplace(std::make_pair(font_key, std::unique_ptr<UI::FontStyleInfo>(read_font_style_to_pointer(table, table_key))));
 }

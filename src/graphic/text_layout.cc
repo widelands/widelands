@@ -19,9 +19,6 @@
 
 #include "graphic/text_layout.h"
 
-#include <map>
-
-#include <SDL_ttf.h>
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
@@ -29,7 +26,6 @@
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/style_manager.h"
-#include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 
 namespace {
@@ -39,55 +35,6 @@ bool is_paragraph(const std::string& text) {
 
 bool is_div(const std::string& text) {
 	return boost::starts_with(text, "<div");
-}
-}  // namespace
-
-void replace_entities(std::string* text) {
-	boost::replace_all(*text, "&gt;", ">");
-	boost::replace_all(*text, "&lt;", "<");
-	boost::replace_all(*text, "&nbsp;", " ");
-	boost::replace_all(*text, "&amp;", "&");  // Must be performed last
-}
-
-int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale) {
-	UI::FontStyleInfo info = style;
-	info.size *= scale;
-	info.size -= UI::g_fh1->fontset()->size_offset();
-	return UI::g_fh1
-	   ->render(as_editor_richtext_paragraph(text, info))
-	   ->width();
-}
-
-// NOCOM get rid
-int text_height_old(int ptsize, UI::FontStyleInfo::Face face) {
-	return UI::g_fh1
-	   ->render(as_aligned(UI::g_fh1->fontset()->representative_character(), UI::Align::kLeft,
-	                       ptsize - UI::g_fh1->fontset()->size_offset(), RGBColor(0, 0, 0), face))
-	   ->height();
-}
-
-int text_height(const UI::FontStyleInfo& style, float scale) {
-	UI::FontStyleInfo info = style;
-	info.size *= scale;
-	info.size -= UI::g_fh1->fontset()->size_offset();
-	return UI::g_fh1
-	   ->render(as_richtext_paragraph(UI::g_fh1->fontset()->representative_character(), info))
-	   ->height();
-}
-
-
-std::string richtext_escape(const std::string& given_text) {
-	std::string text = given_text;
-	boost::replace_all(text, "&", "&amp;");  // Must be performed first
-	boost::replace_all(text, ">", "&gt;");
-	boost::replace_all(text, "<", "&lt;");
-	return text;
-}
-
-std::string as_richtext(const std::string& txt) {
-	static boost::format f("<rt>%s</rt>");
-	f % txt;
-	return f.str();
 }
 
 std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
@@ -107,6 +54,43 @@ std::string as_richtext_paragraph(const std::string& text, UI::Align align) {
 	static boost::format f("<rt><p align=%s>%s</p></rt>");
 	f % alignment;
 	f % text;
+	return f.str();
+}
+}  // namespace
+
+int text_width(const std::string& text, const UI::FontStyleInfo& style, float scale) {
+	UI::FontStyleInfo info = style;
+	info.size *= scale;
+	info.size -= UI::g_fh1->fontset()->size_offset();
+	return UI::g_fh1
+	   ->render(as_editor_richtext_paragraph(text, info))
+	   ->width();
+}
+
+int text_height(const UI::FontStyleInfo& style, float scale) {
+	UI::FontStyleInfo info = style;
+	info.size *= scale;
+	info.size -= UI::g_fh1->fontset()->size_offset();
+	return UI::g_fh1
+	   ->render(as_richtext_paragraph(UI::g_fh1->fontset()->representative_character(), info))
+	   ->height();
+}
+
+int text_height(UI::FontStyle style, float scale) {
+	return text_height(g_gr->styles().font_style(style), scale);
+}
+
+std::string richtext_escape(const std::string& given_text) {
+	std::string text = given_text;
+	boost::replace_all(text, "&", "&amp;");  // Must be performed first
+	boost::replace_all(text, ">", "&gt;");
+	boost::replace_all(text, "<", "&lt;");
+	return text;
+}
+
+std::string as_richtext(const std::string& txt) {
+	static boost::format f("<rt>%s</rt>");
+	f % txt;
 	return f.str();
 }
 
@@ -132,54 +116,6 @@ std::string as_game_tip(const std::string& txt) {
 	return f.str();
 }
 
-std::string
-as_uifont(const std::string& txt, int size, const RGBColor& clr, UI::FontStyleInfo::Face face) {
-	return as_aligned(txt, UI::Align::kLeft, size, clr, face);
-}
-
-std::string as_aligned(const std::string& txt,
-                       UI::Align align,
-                       int ptsize,
-                       const RGBColor& clr,
-                       UI::FontStyleInfo::Face face) {
-	std::string alignment = "left";
-	switch (align) {
-	case UI::Align::kCenter:
-		alignment = "center";
-		break;
-	case UI::Align::kRight:
-		alignment = "right";
-		break;
-	case UI::Align::kLeft:
-		alignment = "left";
-		break;
-	}
-
-	std::string font_face = "sans";
-
-	switch (face) {
-	case UI::FontStyleInfo::Face::kCondensed:
-		font_face = "condensed";
-		break;
-	case UI::FontStyleInfo::Face::kSerif:
-		font_face = "serif";
-		break;
-	case UI::FontStyleInfo::Face::kSans:
-		font_face = "sans";
-		break;
-	}
-
-	// UI Text is always bold due to historic reasons
-	static boost::format f(
-	   "<rt><p align=%s><font face=%s size=%i bold=1 shadow=1 color=%s>%s</font></p></rt>");
-	f % alignment;
-	f % font_face;
-	f % ptsize;
-	f % clr.hex_value();
-	f % txt;
-	return f.str();
-}
-
 std::string as_message(const std::string& heading, const std::string& body) {
 	return (
 	   (boost::format(
@@ -193,7 +129,6 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	      .str());
 }
 
-// NOCOM move to Panel as protected function?
 std::shared_ptr<const UI::RenderedText> autofit_text(const std::string& text,
 																	  const UI::FontStyleInfo& font_info,
 																	  int width) {
@@ -203,7 +138,7 @@ std::shared_ptr<const UI::RenderedText> autofit_text(const std::string& text,
 
 	// Autoshrink if it doesn't fit
 	if (width > 0 && rendered_text->width() > width) {
-		const int minimum_size = g_gr->styles().font_size(StyleManager::FontSize::kMinimum);
+		const int minimum_size = g_gr->styles().minimum_font_size();
 		// We take a copy, because we are changing values during the autofit.
 		UI::FontStyleInfo temp_font_info = font_info;
 		temp_font_info.face = UI::FontStyleInfo::Face::kCondensed;

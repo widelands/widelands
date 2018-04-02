@@ -29,18 +29,9 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"
-
-namespace {
-
-int base_height(int button_dimension) {
-	return std::max(
-	   button_dimension,
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
-}
-
-}  // namespace
 
 namespace UI {
 
@@ -336,6 +327,10 @@ bool BaseDropdown::is_mouse_away() const {
 	       get_mouse_position().x > (list_offset_x_ + list_->get_w() + mouse_tolerance_) ||
 	       (get_mouse_position().y + mouse_tolerance_) < list_offset_y_ ||
 	       get_mouse_position().y > (list_offset_y_ + get_h() + list_->get_h() + mouse_tolerance_);
+}
+
+int BaseDropdown::base_height(int button_dimension) const {
+	return std::max(button_dimension, text_height(g_gr->styles().table_style(UI::PanelStyle::kWui).enabled) + 2);
 }
 
 bool BaseDropdown::handle_key(bool down, SDL_Keysym code) {

@@ -28,7 +28,9 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/time_string.h"
+#include "graphic/graphic.h"
 #include "graphic/image_io.h"
+#include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 
@@ -116,7 +118,7 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
 	add(button_box_, UI::Box::Resizing::kFullSize);
 
 	minimap_icon_.set_visible(false);
-	minimap_icon_.set_frame(g_gr->styles().font_color(StyleManager::FontColor::kForeground));
+	minimap_icon_.set_frame(g_gr->styles().minimap_icon_frame());
 }
 
 void GameDetails::clear() {

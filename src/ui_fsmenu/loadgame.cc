@@ -99,7 +99,7 @@ void FullscreenMenuLoadGame::layout() {
 	FullscreenMenuLoadMapOrGame::layout();
 	main_box_.set_size(get_w() - 2 * tablex_, tabley_ + tableh_ + padding_);
 	main_box_.set_pos(Vector2i(tablex_, 0));
-	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kTitle));
+	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	title_.set_font_scale(scale_factor());
 	load_or_save_.delete_button()->set_desired_size(butw_, buth_);
 	button_spacer_->set_desired_size(butw_, buth_ + 2 * padding_);

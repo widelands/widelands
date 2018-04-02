@@ -22,13 +22,13 @@
 #include <boost/bind.hpp>
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
 #include "ui_basic/mouse_constants.h"
-#include "ui_basic/scrollbar.h"
 
 namespace UI {
 
@@ -48,8 +48,9 @@ Table<void*>::Table(Panel* const parent,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
-     headerheight_(text_height_old() + 4),
-     lineheight_(text_height_old()),
+	  lineheight_(text_height(g_gr->styles().table_style(style).enabled)),
+     headerheight_(lineheight_ + 4),
+	  style_(style),
      button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
                                                       UI::ButtonStyle::kWuiSecondary),
      scrollbar_(nullptr),
@@ -292,8 +293,11 @@ void Table<void*>::draw(RenderTarget& dst) {
 				curx += curw;
 				continue;
 			}
+
+			// TODO(GunChleoc): Add disabling of entries. Implemented in the campaign_box branch.
+			const UI::FontStyleInfo font_style = er.font_style() != nullptr ? *er.font_style() : g_gr->styles().table_style(style_).enabled;
 			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
+			   UI::g_fh1->render(as_richtext_paragraph(richtext_escape(entry_string), font_style));
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
 			// this always on, e.g. for mixed language savegame filenames.
@@ -668,7 +672,7 @@ bool Table<void*>::default_compare_string(uint32_t column, uint32_t a, uint32_t 
 	return ea.get_string(column) < eb.get_string(column);
 }
 
-Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e) {
+Table<void*>::EntryRecord::EntryRecord(void* const e) : entry_(e), font_style_(nullptr) {
 }
 
 void Table<void*>::EntryRecord::set_picture(uint8_t const col,

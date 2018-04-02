@@ -97,8 +97,8 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::PanelStyleInfo* styl
         &o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::PanelStyle::kWui),
 	  background_style(style),
      cursor_pos(0),
-     lineheight(text_height_old()),
-     maxbytes(std::min(g_gr->max_texture_size() / g_gr->styles().font_size(StyleManager::FontSize::kNormal), 0xffff)),
+     lineheight(text_height(*background_style->fonts.at("default"))),
+     maxbytes(std::min(g_gr->max_texture_size() / text_height(*background_style->fonts.at("default")), 0xffff)),
      ww_valid(false),
 	  ww(background_style->fonts.at("default")->size, background_style->fonts.at("default")->color, o.get_w()),
      owner(o) {
@@ -426,7 +426,6 @@ void MultilineEditbox::draw(RenderTarget& dst) {
 	d_->refresh_ww();
 
 	d_->ww.set_draw_caret(has_focus());
-
 	d_->ww.draw(dst, Vector2i(0, -int32_t(d_->scrollbar.get_scrollpos())), UI::Align::kLeft,
 	            has_focus() ? d_->cursor_pos : std::numeric_limits<uint32_t>::max());
 }

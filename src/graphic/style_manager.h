@@ -24,8 +24,8 @@
 #include <memory>
 
 #include "graphic/font_styles.h"
+#include "graphic/map_object_style_info.h"
 #include "graphic/panel_styles.h"
-#include "graphic/text/font_set.h"
 #include "scripting/lua_table.h"
 
 static const std::string kTemplateDir = "templates/default/";
@@ -39,41 +39,24 @@ struct ProgressbarStyleInfo {
 	RGBColor high_color;
 };
 
-
 struct StatisticsPlotStyleInfo {
 	UI::FontStyleInfo x_tick_font;
-	UI::FontStyleInfo y_max_value_font;
 	UI::FontStyleInfo y_min_value_font;
+	UI::FontStyleInfo y_max_value_font;
+
 	RGBColor axis_line_color;
 	RGBColor zero_line_color;
 };
 
-struct BuildingStatisticsStyleInfo {
-	std::string as_color_tag(const std::string& text, const RGBColor& color) const;
-
-	UI::FontStyleInfo building_statistics_font;
-	UI::FontStyleInfo census_font;
-	UI::FontStyleInfo statistics_font;
-
-	RGBColor construction_color;
-	RGBColor neutral_color;
-	RGBColor low_color;
-	RGBColor medium_color;
-	RGBColor high_color;
+struct TableStyleInfo {
+	UI::FontStyleInfo enabled;
+	UI::FontStyleInfo disabled;
 };
+
 } // namespace UI
 
 class StyleManager {
 public:
-	enum class FontSize {
-		kNormal,
-		kMinimum,
-	};
-	enum class FontColor {
-		// Global
-		kForeground,
-	};
-
 	StyleManager() = default;
 	~StyleManager() = default;
 
@@ -86,13 +69,15 @@ public:
 	const UI::PanelStyleInfo* editbox_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
-	const UI::BuildingStatisticsStyleInfo& building_statistics_style() const;
+	const UI::MapObjectStyleInfo& map_object_style() const;
 	const UI::ProgressbarStyleInfo& progressbar_style(UI::PanelStyle) const;
 	const UI::StatisticsPlotStyleInfo& statistics_plot_style() const;
-
-	int font_size(const FontSize size) const;
-	const RGBColor& font_color(const FontColor color) const;
+	const UI::TableStyleInfo& table_style(UI::PanelStyle) const;
 	const UI::FontStyleInfo& font_style(UI::FontStyle style) const;
+
+	// Special elements
+	int minimum_font_size() const;
+	const RGBColor& minimap_icon_frame() const;
 
 private:
 	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;
@@ -101,9 +86,8 @@ private:
 	void add_editbox_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
 	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
 	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table);
+	void add_table_style(UI::PanelStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
-	void add_font_size(FontSize size, const LuaTable& table, const std::string& key);
-	void add_font_color(FontColor color, const LuaTable& table);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
 
 	std::map<UI::ButtonStyle, std::unique_ptr<const UI::PanelStyleInfo>> buttonstyles_;
@@ -113,12 +97,13 @@ private:
 	PanelStyleMap dropdownstyles_;
 	PanelStyleMap scrollbarstyles_;
 
-	std::map<FontSize, int> font_sizes_;
-	std::map<FontColor, std::unique_ptr<RGBColor>> font_colors_;
-	std::map<UI::FontStyle, std::unique_ptr<UI::FontStyleInfo>> fontstyles_;
-	std::unique_ptr<UI::BuildingStatisticsStyleInfo> building_statistics_style_;
+	int minimum_font_size_;
+	RGBColor minimap_icon_frame_;
+	std::map<UI::FontStyle, std::unique_ptr<const UI::FontStyleInfo>> fontstyles_;
+	std::unique_ptr<const UI::MapObjectStyleInfo> map_object_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;
-	std::unique_ptr<UI::StatisticsPlotStyleInfo> statistics_plot_style_;
+	std::unique_ptr<const UI::StatisticsPlotStyleInfo> statistics_plot_style_;
+	std::map<UI::PanelStyle, std::unique_ptr<const UI::TableStyleInfo>> table_styles_;
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };

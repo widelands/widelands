@@ -114,7 +114,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 	playername.set_font_scale(scale_factor());
 	hostname.set_font_scale(scale_factor());
 
-	title.set_style(g_gr->styles().font_style(UI::FontStyle::kTitle));
+	title.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	hostname.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_hostname, this));
 	playername.set_text(s.get_string("nickname", (_("nobody"))));
 	playername.changed.connect(boost::bind(&FullscreenMenuNetSetupLAN::change_playername, this));

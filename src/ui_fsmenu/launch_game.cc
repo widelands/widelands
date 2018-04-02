@@ -70,7 +70,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 
 	lua_ = new LuaInterface();
 
-	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kTitle));
+	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	title_.set_font_scale(scale_factor());
 }
 

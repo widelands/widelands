@@ -37,6 +37,7 @@
 #include "graphic/text_layout.h"
 
 namespace {
+// NOCOM Get rid of these - we need to delete the old font renderer first.
 std::string as_editorfont(const std::string& text, int ptsize, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
 	static boost::format f(
@@ -51,6 +52,12 @@ int text_width(const std::string& text, int ptsize) {
 	RGBColor color(0, 0, 0);
 	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset(), color))
 	   ->width();
+}
+
+int text_height(int ptsize) {
+	RGBColor font_color(0, 0, 0);
+	const UI::FontStyleInfo font_info("sans", font_color, ptsize);
+	return UI::g_fh1->render(as_richtext_paragraph(UI::g_fh1->fontset()->representative_character(), font_info))->height();
 }
 } // namespace
 
@@ -266,7 +273,7 @@ uint32_t WordWrap::width() const {
  * Compute the total height of the word-wrapped text.
  */
 uint32_t WordWrap::height() const {
-	return text_height_old(fontsize_) * (lines_.size()) + 2 * kLineMargin;
+	return text_height(fontsize_) * (lines_.size()) + 2 * kLineMargin;
 }
 
 /**
@@ -319,7 +326,7 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 
 	Align alignment = UI::g_fh1->fontset()->mirror_alignment(align);
 
-	const int fontheight = text_height_old(fontsize_);
+	const int fontheight = text_height(fontsize_);
 	for (uint32_t line = 0; line < lines_.size(); ++line, where.y += fontheight) {
 		if (where.y >= dst.height() || (where.y + fontheight) <= 0)
 			continue;

@@ -10,9 +10,12 @@ wl_library(graphic_styles
   SRCS
     font_styles.cc
     font_styles.h
+    map_object_style_info.cc
+    map_object_style_info.h
     panel_styles.cc
     panel_styles.h
   DEPENDS
+    base_exceptions
     graphic_color
     graphic_surface
 )
@@ -275,7 +278,6 @@ wl_library(graphic_fonthandler_legacy
     graphic_fonthandler
     graphic_surface
     graphic_text
-    graphic_text_layout
     graphic_wordwrap
     helper
     io_fileread
@@ -299,8 +301,8 @@ wl_library(graphic_text_layout
   DEPENDS
     graphic
     graphic_align
-    graphic_color
     graphic_surface
+    graphic_styles
     graphic_text
     graphic_fonthandler
 )

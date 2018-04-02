@@ -1001,7 +1001,7 @@ void Ship::draw(const EditorGameBase& egbase,
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		statistics_string = g_gr->styles().building_statistics_style().as_color_tag(statistics_string, g_gr->styles().building_statistics_style().medium_color);
+		statistics_string = g_gr->styles().map_object_style().as_color_tag(statistics_string, g_gr->styles().map_object_style().medium_color);
 	}
 
 	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),

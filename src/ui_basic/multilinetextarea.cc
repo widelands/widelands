@@ -23,6 +23,7 @@
 #include <boost/bind.hpp>
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_layout.h"
@@ -200,7 +201,7 @@ std::string MultilineTextarea::make_richtext() {
 	boost::replace_all(temp, "\n", "<br>");
 
 	FontStyleInfo scaled_style = style_;
-	scaled_style.size = std::max(g_gr->styles().font_size(StyleManager::FontSize::kMinimum), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
+	scaled_style.size = std::max(g_gr->styles().minimum_font_size(), static_cast<int>(std::ceil(scaled_style.size * font_scale_)));
 	return as_richtext_paragraph(temp, scaled_style, align_);
 }
 

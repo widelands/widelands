@@ -31,6 +31,7 @@
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
 #include "graphic/font_handler1.h"
+#include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"

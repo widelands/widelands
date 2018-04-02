@@ -21,7 +21,6 @@
 #define WL_UI_BASIC_TEXTAREA_H
 
 #include "graphic/align.h"
-#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -78,7 +77,7 @@ struct Textarea : public Panel {
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
 
-	void set_style(UI::FontStyleInfo style);
+	void set_style(const UI::FontStyleInfo& style);
 	void set_font_scale(float scale);
 
 protected:

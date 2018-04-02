@@ -22,7 +22,6 @@
 #include <memory>
 
 #include "graphic/graphic.h"
-#include "graphic/text_layout.h"
 
 namespace UI {
 // RenderedRect

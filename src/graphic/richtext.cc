@@ -27,7 +27,6 @@
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
-#include "graphic/text_layout.h"
 #include "graphic/text_parser.h"
 
 namespace UI {

@@ -32,6 +32,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -486,7 +487,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 		return;
 	}
 
-	UI::FontStyleInfo census_font = g_gr->styles().building_statistics_style().census_font;
+	UI::FontStyleInfo census_font = g_gr->styles().map_object_style().census_font;
 	census_font.size = scale * census_font.size;
 
 	// We always render this so we can have a stable position for the statistics string.
@@ -498,7 +499,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	}
 
 	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
-		UI::FontStyleInfo statistics_font = g_gr->styles().building_statistics_style().statistics_font;
+		UI::FontStyleInfo statistics_font = g_gr->styles().map_object_style().statistics_font;
 		statistics_font.size = scale * statistics_font.size;
 
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
