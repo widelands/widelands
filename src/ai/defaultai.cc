@@ -2739,7 +2739,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
 
-					if (bf->fish_nearby < 5) {
+					if (bf->fish_nearby <= 10) {
 						continue;
 					}
 
