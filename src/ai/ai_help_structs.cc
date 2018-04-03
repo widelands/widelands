@@ -195,7 +195,8 @@ FindNodeUnownedBuildable::FindNodeUnownedBuildable(Player* p, Game& g) : player(
 }
 
 bool FindNodeUnownedBuildable::accept(const Map&, const FCoords& fc) const {
-	return (fc.field->nodecaps() & BUILDCAPS_SIZEMASK) && (fc.field->get_owned_by() == neutral());
+	return ((fc.field->nodecaps() & BUILDCAPS_SIZEMASK) || (fc.field->nodecaps() & BUILDCAPS_MINE)) &&
+			(fc.field->get_owned_by() == neutral());
 }
 
 // Unowned but walkable fields nearby

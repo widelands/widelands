@@ -208,7 +208,7 @@ struct FindNodeUnownedMineable {
 };
 
 // When looking for unowned terrain to acquire, we must
-// consider if any buildings can be built on unowned land.
+// consider if any buildings (incl. mines) can be built on unowned land.
 struct FindNodeUnownedBuildable {
 	FindNodeUnownedBuildable(Player* p, Game& g);
 
