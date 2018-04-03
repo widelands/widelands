@@ -1,5 +1,5 @@
 -- =======================================================================
---                 Start conditions for Village
+--                Frisians Village Starting Conditions
 -- =======================================================================
 
 include "scripting/infrastructure.lua"
@@ -10,7 +10,7 @@ return {
    -- TRANSLATORS: This is the name of a starting condition
    descname = _ "Village",
    -- TRANSLATORS: This is the tooltip for the "Village" starting condition
-   tooltip = _"Start the game with a village installation",
+   tooltip = _"Start the game with a peaceful village",
    func = function(plr, shared_in_start)
 
    local sf = wl.Game().map.player_slots[plr.number].starting_field
@@ -20,7 +20,7 @@ return {
       plr:allow_workers("all")
    end
 
-  hq = prefilled_buildings(plr, { "frisians_headquarters", sf.x, sf.y,
+   hq = prefilled_buildings(plr, { "frisians_headquarters", sf.x, sf.y,
       wares = {
          log = 60,
          granite = 60,
@@ -88,11 +88,11 @@ return {
       }
    })
 
-       place_building_in_region(plr, "frisians_blacksmithy", sf:region(10), {
+      place_building_in_region(plr, "frisians_blacksmithy", sf:region(10), {
          inputs = {
             iron = 7,
             log = 7,
-	    thatch_reed = 7
+	        thatch_reed = 7
          },
       })
 
@@ -113,6 +113,3 @@ return {
 
 end
 }
-
-
-
