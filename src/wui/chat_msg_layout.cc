@@ -30,7 +30,6 @@ namespace {
 
 // Returns a player name font tag with player color.
 std::string as_playercolor(const int16_t playern, const std::string& text) {
-	// NOCOM test this
 	const RGBColor& playercolor = ((playern >= 0) && playern < kMaxPlayers) ?
 				kPlayerColors[playern] :
 				g_gr->styles().font_style(UI::FontStyle::kChatServer).color;

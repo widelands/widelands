@@ -26,6 +26,7 @@
 #include "graphic/font_styles.h"
 #include "graphic/map_object_style_info.h"
 #include "graphic/panel_styles.h"
+#include "graphic/ware_info_style_info.h"
 #include "scripting/lua_table.h"
 
 static const std::string kTemplateDir = "templates/default/";
@@ -73,6 +74,7 @@ public:
 	const UI::ProgressbarStyleInfo& progressbar_style(UI::PanelStyle) const;
 	const UI::StatisticsPlotStyleInfo& statistics_plot_style() const;
 	const UI::TableStyleInfo& table_style(UI::PanelStyle) const;
+	const UI::WareInfoStyleInfo& ware_info_style(UI::WareInfoStyle) const;
 	const UI::FontStyleInfo& font_style(UI::FontStyle style) const;
 
 	// Special elements
@@ -88,6 +90,7 @@ private:
 	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
 	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table);
 	void add_table_style(UI::PanelStyle style, const LuaTable& table);
+	void add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table);
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
 
@@ -105,6 +108,7 @@ private:
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::ProgressbarStyleInfo>> progressbar_styles_;
 	std::unique_ptr<const UI::StatisticsPlotStyleInfo> statistics_plot_style_;
 	std::map<UI::PanelStyle, std::unique_ptr<const UI::TableStyleInfo>> table_styles_;
+	std::map<UI::WareInfoStyle, std::unique_ptr<const UI::WareInfoStyleInfo>> ware_info_styles_;
 
 	DISALLOW_COPY_AND_ASSIGN(StyleManager);
 };

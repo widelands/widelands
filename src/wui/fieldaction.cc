@@ -90,13 +90,10 @@ void BuildGrid::add(Widelands::DescriptionIndex id) {
 	const Widelands::BuildingDescr& descr =
 	   *plr_->tribe().get_building_descr(Widelands::DescriptionIndex(id));
 
-	// TODO(sirver): change this to take a Button subclass instead of
-	// parameters. This will allow overriding the way it is rendered
-	// to bring back player colors.
 	UI::IconGrid::add(descr.name(), descr.representative_image(&plr_->get_playercolor()),
 	                  reinterpret_cast<void*>(id),
-	                  descr.descname() + "<br><font size=11>" + _("Construction costs:") +
-	                     "</font><br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
+	                  descr.descname() + "<br>" + g_gr->styles().ware_info_style(UI::WareInfoStyle::kNormal).header_font.as_font_tag(_("Construction costs:")) +
+	                     "<br>" + waremap_to_richtext(plr_->tribe(), descr.buildcost()));
 }
 
 /*

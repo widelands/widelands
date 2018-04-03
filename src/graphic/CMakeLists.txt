@@ -10,10 +10,10 @@ wl_library(graphic_styles
   SRCS
     font_styles.cc
     font_styles.h
-    map_object_style_info.cc
     map_object_style_info.h
     panel_styles.cc
     panel_styles.h
+    ware_info_style_info.h
   DEPENDS
     base_exceptions
     graphic_color

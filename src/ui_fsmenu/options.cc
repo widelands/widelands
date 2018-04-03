@@ -35,6 +35,7 @@
 #include "graphic/graphic.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
+#include "graphic/text_layout.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -208,11 +209,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	// Set up UI Elements
 	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
 	translation_info_.force_new_renderer();
-	// Make font a bit smaller so the link will fit at 800x600 resolution.
-	// NOCOM hard-coded
-	UI::FontStyleInfo translation_info_style = g_gr->styles().font_style(UI::FontStyle::kLabel);
-	translation_info_style.size -= 2;
-	translation_info_.set_style(translation_info_style);
 
 	// Buttons
 	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_);
@@ -533,7 +529,8 @@ void FullscreenMenuOptions::update_language_stats(bool include_system_lang) {
 		           "<font underline=1>widelands.org/wiki/TranslatingWidelands</font>")
 		             .str();
 	}
-	translation_info_.set_text(message);
+	// Make font a bit smaller so the link will fit at 800x600 resolution.
+	translation_info_.set_text(as_richtext_paragraph(message, UI::FontStyle::kFsMenuTranslationInfo));
 }
 
 void FullscreenMenuOptions::clicked_apply() {

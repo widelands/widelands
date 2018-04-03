@@ -39,6 +39,7 @@ enum class FontStyle {
    kFsMenuInfoPanelParagraph,
    kFsMenuIntro,
 	kFsMenuTitle,
+	kFsMenuTranslationInfo,
    kLabel,
    kTooltip,
    kWarning,
@@ -47,7 +48,6 @@ enum class FontStyle {
    kWuiInfoPanelParagraph,
    kWuiMessageHeading,
    kWuiMessageParagraph,
-   kWuiWaresInfo,
    kWuiWindowTitle
 };
 

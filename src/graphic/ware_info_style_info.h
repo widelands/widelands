@@ -17,26 +17,29 @@
  *
  */
 
-#ifndef WL_GRAPHIC_MAP_OBJECT_STYLE_INFO_H
-#define WL_GRAPHIC_MAP_OBJECT_STYLE_INFO_H
+#ifndef WL_GRAPHIC_WARE_INFO_STYLE_INFO_H
+#define WL_GRAPHIC_WARE_INFO_STYLE_INFO_H
 
 #include "graphic/color.h"
 #include "graphic/font_styles.h"
+#include "graphic/image.h"
 
 namespace UI {
 
-struct MapObjectStyleInfo {
-	UI::FontStyleInfo building_statistics_font;
-	UI::FontStyleInfo census_font;
-	UI::FontStyleInfo statistics_font;
+enum class WareInfoStyle {
+	kNormal,
+	kHighlight
+};
 
-	RGBColor construction_color;
-	RGBColor neutral_color;
-	RGBColor low_color;
-	RGBColor medium_color;
-	RGBColor high_color;
+struct WareInfoStyleInfo {
+	UI::FontStyleInfo header_font;
+	UI::FontStyleInfo info_font;
+	const Image* icon_background_image;
+	RGBColor icon_frame;
+	RGBColor icon_background;
+	RGBColor info_background;
 };
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_MAP_OBJECT_STYLE_INFO_H
+#endif  // end of include guard: WL_GRAPHIC_WARE_INFO_STYLE_INFO_H

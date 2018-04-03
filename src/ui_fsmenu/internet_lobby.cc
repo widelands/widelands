@@ -125,6 +125,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 	   boost::bind(&FullscreenMenuInternetLobby::change_servername, this));
 
 	// prepare the lists
+	// NOCOM make style
 	std::string t_tip =
 	   (boost::format("%s%s%s%s%s%s%s%s%s%s") % "<rt><p><font underline=yes>" % _("User Status") %
 	    "</font><br>" % "<img src=images/wui/overlays/roadb_yellow.png> " % _("Registered") %

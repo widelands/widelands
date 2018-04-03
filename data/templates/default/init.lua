@@ -57,7 +57,6 @@ return {
    -- Automatic resizing of fonts to make them fit onto buttons etc.
    -- won't go below this size
    minimum_font_size = 10,
-   -- TODO(GunChleoc): Revisit this - general icon frame styles for waresinfo, etc too?
    minimap_icon_frame = fs_font_color,
 
    -- Button backgrounds
@@ -348,6 +347,51 @@ return {
       },
    },
 
+   wareinfo = {
+      -- TODO(GunChleoc): This design is ugly.
+      -- Group stuff more logically once everything has been styled.
+      normal = {
+         fonts = {
+            header = {
+               color = wui_font_color,
+               face = "sans",
+               size = 11,
+            },
+            info = {
+               color = wui_font_color,
+               face = "condensed",
+               size = 10,
+            },
+         },
+         colors = {
+            icon_frame = { 69, 69, 69 },
+            icon_background = { 69, 69, 69 },
+            info_background = { 0, 0, 0 },
+         },
+         icon_background_image = "images/wui/ware_list_bg.png",
+      },
+      highlight = {
+         fonts = {
+            header = {
+               color = wui_font_color,
+               face = "sans",
+               size = 11,
+            },
+            info = {
+               color = wui_font_color,
+               face = "condensed",
+               size = 10,
+            },
+         },
+         colors = {
+            icon_frame = {255, 255, 0},
+            icon_background = {69, 69, 69},
+            info_background = {0, 0, 0},
+         },
+         icon_background_image = "images/wui/ware_list_bg_selected.png",
+      }
+   },
+
    -- Font styles. Required parameters are:
    -- * face: string
    -- * color: table with r, g, b values as int
@@ -452,6 +496,14 @@ return {
          bold = true,
          shadow = true
       },
+      -- Make font a bit smaller so the link will fit at 800x600 resolution.
+      fsmenu_translation_info = {
+         color = fs_font_color,
+         face = fs_font_face,
+         size = fs_font_size - 2,
+         bold = true,
+         shadow = true
+      },
 
       -- Textarea default style, also used for sliders, checkboxes, both in fsmenu and wui ...
       label = default_ui_font,
@@ -505,11 +557,6 @@ return {
          size = wui_font_size,
          bold = true,
          shadow = true
-      },
-      wui_waresinfo = {
-         color = wui_font_color,
-         face = "condensed",
-         size = 10,
       },
    },
 }

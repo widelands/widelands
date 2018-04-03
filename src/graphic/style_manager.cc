@@ -231,6 +231,13 @@ void StyleManager::init() {
 	statistics_plot_info->zero_line_color = read_rgb_color(*style_table->get_table("zero_line"));
 	statistics_plot_style_.reset(std::move(statistics_plot_info));
 
+	// Ware info in warehouses, construction actions etc.
+	element_table = table->get_table("wareinfo");
+	add_ware_info_style(UI::WareInfoStyle::kNormal, *element_table->get_table("normal"));
+	add_ware_info_style(UI::WareInfoStyle::kHighlight, *element_table->get_table("highlight"));
+	check_completeness(
+	   "wareinfos", ware_info_styles_.size(), static_cast<size_t>(UI::WareInfoStyle::kHighlight));
+
 	// Special elements
 	minimum_font_size_ = table->get_int("minimum_font_size");
 	if (minimum_font_size_ < 1) {
@@ -253,6 +260,7 @@ void StyleManager::init() {
    add_font_style(UI::FontStyle::kFsMenuInfoPanelParagraph, *element_table, "fsmenu_info_panel_paragraph");
    add_font_style(UI::FontStyle::kFsMenuIntro, *element_table, "fsmenu_intro");
 	add_font_style(UI::FontStyle::kFsMenuTitle, *element_table, "fsmenu_title");
+	add_font_style(UI::FontStyle::kFsMenuTranslationInfo, *element_table, "fsmenu_translation_info");
    add_font_style(UI::FontStyle::kLabel, *element_table, "label");
    add_font_style(UI::FontStyle::kTooltip, *element_table, "tooltip");
    add_font_style(UI::FontStyle::kWarning, *element_table, "warning");
@@ -261,7 +269,6 @@ void StyleManager::init() {
    add_font_style(UI::FontStyle::kWuiInfoPanelParagraph, *element_table, "wui_info_panel_paragraph");
    add_font_style(UI::FontStyle::kWuiMessageHeading, *element_table, "wui_message_heading");
    add_font_style(UI::FontStyle::kWuiMessageParagraph, *element_table, "wui_message_paragraph");
-   add_font_style(UI::FontStyle::kWuiWaresInfo, *element_table, "wui_waresinfo");
    add_font_style(UI::FontStyle::kWuiWindowTitle, *element_table, "wui_window_title");
 	check_completeness("fonts", fontstyles_.size(), static_cast<size_t>(UI::FontStyle::kWuiWindowTitle));
 }
@@ -313,6 +320,11 @@ const UI::StatisticsPlotStyleInfo& StyleManager::statistics_plot_style() const {
 const UI::TableStyleInfo& StyleManager::table_style(UI::PanelStyle style) const {
 	assert(table_styles_.count(style) == 1);
 	return *table_styles_.at(style);
+}
+
+const UI::WareInfoStyleInfo& StyleManager::ware_info_style(UI::WareInfoStyle style) const {
+	assert(ware_info_styles_.count(style) == 1);
+	return *ware_info_styles_.at(style);
 }
 
 const UI::FontStyleInfo& StyleManager::font_style(UI::FontStyle style) const {
@@ -384,6 +396,19 @@ void StyleManager::add_table_style(UI::PanelStyle style, const LuaTable& table) 
 	table_style->enabled = read_font_style(table, "enabled");
 	table_style->disabled = read_font_style(table, "disabled");
 	table_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::TableStyleInfo>(std::move(table_style))));
+}
+
+void StyleManager::add_ware_info_style(UI::WareInfoStyle style, const LuaTable& table) {
+	std::unique_ptr<LuaTable> element_table = table.get_table("fonts");
+	UI::WareInfoStyleInfo* ware_info_style = new UI::WareInfoStyleInfo();
+	ware_info_style->header_font = read_font_style(*element_table, "header");
+	ware_info_style->info_font = read_font_style(*element_table, "info");
+	ware_info_style->icon_background_image = g_gr->images().get(table.get_string("icon_background_image"));
+	element_table = table.get_table("colors");
+	ware_info_style->icon_frame = read_rgb_color(*element_table->get_table("icon_frame"));
+	ware_info_style->icon_background = read_rgb_color(*element_table->get_table("icon_background"));
+	ware_info_style->info_background = read_rgb_color(*element_table->get_table("info_background"));
+	ware_info_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::WareInfoStyleInfo>(std::move(ware_info_style))));
 }
 
 void StyleManager::add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map) {
