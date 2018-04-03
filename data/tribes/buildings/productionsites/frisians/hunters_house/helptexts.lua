@@ -1,11 +1,11 @@
-function building_helptext_lore ()
+function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "")
+   return pgettext("frisians_building", "You want to know why I don’t get more meat from oxen than from bunnies? Of course I do! But I like to eat up the surplus myself.")
 end
 
-function building_helptext_lore_author ()
+function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "")
+   return pgettext("frisians_building", "Hunters don’t consider it illogical that all kinds of animals produce the same amount of meat")
 end
 
 function building_helptext_purpose()
