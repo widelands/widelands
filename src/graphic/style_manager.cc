@@ -327,6 +327,13 @@ const RGBColor& StyleManager::minimap_icon_frame() const {
 	return minimap_icon_frame_;
 }
 
+std::string StyleManager::color_tag(const std::string& text, const RGBColor& color) {
+	static boost::format f("<font color=%s>%s</font>");
+	f % color.hex_value();
+	f % text;
+	return f.str();
+}
+
 // Fill the maps
 void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table, const std::string& key) {
 	buttonstyles_.insert(

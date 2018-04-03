@@ -393,7 +393,7 @@ void MilitarySite::update_statistics_string(std::string* s) {
 			        .str();
 		}
 	}
-	*s = g_gr->styles().map_object_style().as_color_tag(
+	*s = g_gr->styles().color_tag(
 				// Line break to make Codecheck happy.
 				*s, g_gr->styles().map_object_style().medium_color);
 }

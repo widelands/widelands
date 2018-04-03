@@ -266,17 +266,17 @@ void ProductionSite::update_statistics_string(std::string* s) {
 		nr_workers += working_positions_[--i].worker ? 1 : 0;
 
 	if (nr_workers == 0) {
-		*s = g_gr->styles().map_object_style().as_color_tag(_("(not occupied)"), g_gr->styles().map_object_style().low_color);
+		*s = g_gr->styles().color_tag(_("(not occupied)"), g_gr->styles().map_object_style().low_color);
 		return;
 	}
 
 	if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		*s = g_gr->styles().map_object_style().as_color_tag(ngettext("Worker missing", "Workers missing", nr_requests), g_gr->styles().map_object_style().low_color);
+		*s = g_gr->styles().color_tag(ngettext("Worker missing", "Workers missing", nr_requests), g_gr->styles().map_object_style().low_color);
 		return;
 	}
 
 	if (is_stopped_) {
-		*s = g_gr->styles().map_object_style().as_color_tag(_("(stopped)"), g_gr->styles().map_object_style().neutral_color);
+		*s = g_gr->styles().color_tag(_("(stopped)"), g_gr->styles().map_object_style().neutral_color);
 		return;
 	}
 	*s = statistics_string_on_changed_statistics_;
@@ -367,7 +367,7 @@ void ProductionSite::calc_statistics() {
 	const unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
 	const std::string perc_str =
-			g_gr->styles().map_object_style().as_color_tag((boost::format(_("%i%%")) % percOk).str(),
+			g_gr->styles().color_tag((boost::format(_("%i%%")) % percOk).str(),
 									  (percOk < 33) ? g_gr->styles().map_object_style().low_color :
 															(percOk < 66) ?
 																g_gr->styles().map_object_style().medium_color :
@@ -390,7 +390,7 @@ void ProductionSite::calc_statistics() {
 			trend = "=";
 		}
 
-		const std::string trend_str = g_gr->styles().map_object_style().as_color_tag((boost::format(_("%i%%")) % trend).str(), color);
+		const std::string trend_str = g_gr->styles().color_tag((boost::format(_("%i%%")) % trend).str(), color);
 
 		// TODO(GunChleoc): We might need to reverse the order here for RTL languages
 		statistics_string_on_changed_statistics_ =

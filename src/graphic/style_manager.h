@@ -78,6 +78,7 @@ public:
 	// Special elements
 	int minimum_font_size() const;
 	const RGBColor& minimap_icon_frame() const;
+	static std::string color_tag(const std::string& text, const RGBColor& color);
 
 private:
 	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;

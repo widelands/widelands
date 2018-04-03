@@ -28,8 +28,6 @@
 namespace UI {
 
 struct MapObjectStyleInfo {
-	static std::string as_color_tag(const std::string& text, const RGBColor& color);
-
 	UI::FontStyleInfo building_statistics_font;
 	UI::FontStyleInfo census_font;
 	UI::FontStyleInfo statistics_font;

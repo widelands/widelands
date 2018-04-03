@@ -28,17 +28,13 @@
 
 namespace {
 
-// Returns the hexcolor for the 'player'.
-std::string color(const int16_t playern) {
-	if ((playern >= 0) && playern < kMaxPlayers) {
-		return kPlayerColors[playern].hex_value();
-	}
-	return g_gr->styles().font_style(UI::FontStyle::kChatServer).color.hex_value();
-}
-
+// Returns a player name font tag with player color.
 std::string as_playercolor(const int16_t playern, const std::string& text) {
-	const std::string colored_text = (boost::format("<font color=%s>%s</font>") % color(playern) % text).str();
-	return g_gr->styles().font_style(UI::FontStyle::kChatPlayername).as_font_tag(colored_text);
+	// NOCOM test this
+	const RGBColor& playercolor = ((playern >= 0) && playern < kMaxPlayers) ?
+				kPlayerColors[playern] :
+				g_gr->styles().font_style(UI::FontStyle::kChatServer).color;
+	return g_gr->styles().font_style(UI::FontStyle::kChatPlayername).as_font_tag(g_gr->styles().color_tag(text, playercolor));
 }
 
 }  // namespace
