@@ -271,7 +271,6 @@ wl_library(logic
     graphic_fonthandler
     graphic_image_io
     graphic_playercolor
-    graphic_styles
     graphic_surface
     graphic_text_layout
     helper

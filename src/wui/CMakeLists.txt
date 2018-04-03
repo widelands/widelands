@@ -269,7 +269,6 @@ wl_library(wui
     graphic_fonthandler
     graphic_minimap_renderer
     graphic_playercolor
-    graphic_styles
     graphic_surface
     graphic_text
     graphic_text_layout

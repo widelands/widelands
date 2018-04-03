@@ -1,0 +1,13 @@
+wl_library(graphic_styles
+  SRCS
+    font_styles.cc
+    font_styles.h
+    map_object_style.h
+    panel_styles.cc
+    panel_styles.h
+    ware_info_style.h
+  DEPENDS
+    base_exceptions
+    graphic_color
+    graphic_surface
+)

@@ -17,7 +17,7 @@
  *
  */
 
-#include "graphic/font_styles.h"
+#include "graphic/styles/font_styles.h"
 
 #include <boost/format.hpp>
 

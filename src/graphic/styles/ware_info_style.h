@@ -21,7 +21,7 @@
 #define WL_GRAPHIC_WARE_INFO_STYLE_INFO_H
 
 #include "graphic/color.h"
-#include "graphic/font_styles.h"
+#include "graphic/styles/font_styles.h"
 #include "graphic/image.h"
 
 namespace UI {

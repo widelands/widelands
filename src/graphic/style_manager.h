@@ -23,10 +23,10 @@
 #include <map>
 #include <memory>
 
-#include "graphic/font_styles.h"
-#include "graphic/map_object_style_info.h"
-#include "graphic/panel_styles.h"
-#include "graphic/ware_info_style_info.h"
+#include "graphic/styles/font_styles.h"
+#include "graphic/styles/map_object_style.h"
+#include "graphic/styles/panel_styles.h"
+#include "graphic/styles/ware_info_style.h"
 #include "scripting/lua_table.h"
 
 static const std::string kTemplateDir = "templates/default/";

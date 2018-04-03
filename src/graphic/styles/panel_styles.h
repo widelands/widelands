@@ -24,7 +24,7 @@
 #include <memory>
 
 #include "graphic/color.h"
-#include "graphic/font_styles.h"
+#include "graphic/styles/font_styles.h"
 #include "graphic/image.h"
 
 namespace UI {

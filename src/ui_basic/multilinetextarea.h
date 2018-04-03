@@ -23,8 +23,8 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "graphic/panel_styles.h"
 #include "graphic/richtext.h"
+#include "graphic/styles/panel_styles.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 

@@ -23,7 +23,7 @@
 #include <string>
 
 #include "graphic/align.h"
-#include "graphic/font_styles.h"
+#include "graphic/styles/font_styles.h"
 #include "graphic/text/rendered_text.h"
 
 /**

@@ -23,7 +23,6 @@
 #include <vector>
 
 #include "graphic/color.h"
-#include "graphic/map_object_style_info.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/widelands.h"
 #include "ui_basic/box.h"

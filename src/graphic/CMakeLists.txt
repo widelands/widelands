@@ -1,24 +1,10 @@
+add_subdirectory(styles)
 add_subdirectory(text)
 
 # TODO(sirver): Separate this directory into a base directory and one
 # that is Widelands aware (can include logic stuff).
 
 # Align and color
-
-
-wl_library(graphic_styles
-  SRCS
-    font_styles.cc
-    font_styles.h
-    map_object_style_info.h
-    panel_styles.cc
-    panel_styles.h
-    ware_info_style_info.h
-  DEPENDS
-    base_exceptions
-    graphic_color
-    graphic_surface
-)
 
 wl_library(graphic_align
   SRCS
@@ -367,3 +353,4 @@ wl_library(graphic
     scripting_lua_table
     sound
 )
+
