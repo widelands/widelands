@@ -1489,7 +1489,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 			}
 		}
 
-	printf ("DEBUG  fish: %3d, on position %3dx%3d\n", field.fish_nearby, field.coords.x, field.coords.y);
+	log ("DEBUG  fish: %3d, on position %3dx%3d\n", field.fish_nearby, field.coords.x, field.coords.y);
 	}
 
 	// Counting resources that do not change fast
@@ -2743,7 +2743,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						continue;
 					}
 
-					printf ("DEBUG Considering fisher at %3dx%3d fishes nearby: %3d\n", bf->coords.x, bf->coords.y,bf->fish_nearby);
+					log ("DEBUG Considering fisher at %3dx%3d fishes nearby: %3d\n", bf->coords.x, bf->coords.y,bf->fish_nearby);
 
 					if (bo.new_building == BuildingNecessity::kForced) {
 						prio += 200;
@@ -4383,7 +4383,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	    site.site->get_statistics_percent() < 5 &&
 	    ((game().get_gametime() - site.built_time) > 10 * 60 * 1000)) {
 
-		if (site.bo->is(BuildingAttribute::kFisher)) printf ("DEBUG Dismantling fisher with productivity %d on %3dx%3d\n",
+		if (site.bo->is(BuildingAttribute::kFisher)) log ("DEBUG Dismantling fisher with productivity %d on %3dx%3d\n",
 		site.site->get_statistics_percent(), site.site->get_position().x, site.site->get_position().y);
 
 		site.bo->last_dismantle_time = game().get_gametime();
