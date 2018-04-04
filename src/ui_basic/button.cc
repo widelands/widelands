@@ -57,7 +57,7 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     background_style_(g_gr->styles().button_style(init_style)),
+     style_(g_gr->styles().button_style(init_style)),
      clr_down_(229, 161, 2) {
 	set_thinks(false);
 	set_can_focus(true);
@@ -88,7 +88,7 @@ Button::Button  //  for textual buttons. If h = 0, h will resize according to th
             UI::Button::ImageMode::kShrink) {
 	// Automatically resize for font height and give it a margin.
 	if (h < 1) {
-		const int new_height = text_height(*g_gr->styles().button_style(init_style)->fonts.at("enabled")) + 4;
+		const int new_height = text_height(g_gr->styles().button_style(init_style).enabled.font) + 4;
 		set_desired_size(w, new_height);
 		set_size(w, new_height);
 	}
@@ -171,8 +171,10 @@ void Button::draw(RenderTarget& dst) {
 	const bool is_monochrome =
 	   !enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kMonochrome);
 
+	UI::TextPanelStyleInfo style = is_monochrome ? style_.disabled : style_.enabled;
+
 	// Draw the background
-	draw_background(dst, *background_style_);
+	draw_background(dst, style.background);
 
 	if (is_flat && highlighted_)
 		dst.brighten_rect(Recti(0, 0, get_w(), get_h()), MOUSE_OVER_BRIGHT_FACTOR);
@@ -219,7 +221,7 @@ void Button::draw(RenderTarget& dst) {
 		std::shared_ptr<const UI::RenderedText> rendered_text =
 				autofit_text(
 					title_,
-					*(is_monochrome ? background_style_->fonts.at("disabled") : background_style_->fonts.at("enabled")),
+					style.font,
 					get_inner_w() - 2 * kButtonImageMargin);
 
 		// Blit on pixel boundary (not float), so that the text is blitted pixel perfect.

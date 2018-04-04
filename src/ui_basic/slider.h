@@ -21,6 +21,7 @@
 
 #include <boost/signals2.hpp>
 
+#include "graphic/styles/text_panel_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -237,7 +238,7 @@ protected:
 
 private:
 	// We need the style to initialize the slider, so it has to come first.
-	const UI::PanelStyleInfo* style;
+	const UI::TextPanelStyleInfo& style;
 
 protected:
 	HorizontalSlider slider;

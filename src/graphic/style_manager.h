@@ -23,38 +23,18 @@
 #include <map>
 #include <memory>
 
-#include "graphic/styles/font_styles.h"
+#include "graphic/styles/button_style.h"
+#include "graphic/styles/font_style.h"
 #include "graphic/styles/map_object_style.h"
 #include "graphic/styles/panel_styles.h"
+#include "graphic/styles/progreess_bar_style.h"
+#include "graphic/styles/statistics_plot_style.h"
+#include "graphic/styles/table_style.h"
+#include "graphic/styles/text_panel_style.h"
 #include "graphic/styles/ware_info_style.h"
 #include "scripting/lua_table.h"
 
 static const std::string kTemplateDir = "templates/default/";
-
-namespace UI {
-// NOCOM move to own file?
-struct ProgressbarStyleInfo {
-	UI::FontStyleInfo font;
-	RGBColor low_color;
-	RGBColor medium_color;
-	RGBColor high_color;
-};
-
-struct StatisticsPlotStyleInfo {
-	UI::FontStyleInfo x_tick_font;
-	UI::FontStyleInfo y_min_value_font;
-	UI::FontStyleInfo y_max_value_font;
-
-	RGBColor axis_line_color;
-	RGBColor zero_line_color;
-};
-
-struct TableStyleInfo {
-	UI::FontStyleInfo enabled;
-	UI::FontStyleInfo disabled;
-};
-
-} // namespace UI
 
 class StyleManager {
 public:
@@ -64,10 +44,10 @@ public:
 	// Late initialization, because Graphics needs to load the image files first.
 	void init();
 
-	const UI::PanelStyleInfo* button_style(UI::ButtonStyle) const;
-	const UI::PanelStyleInfo* slider_style(UI::SliderStyle) const;
+	const UI::ButtonStyleInfo& button_style(UI::ButtonStyle) const;
+	const UI::TextPanelStyleInfo& slider_style(UI::SliderStyle) const;
 	const UI::PanelStyleInfo* tabpanel_style(UI::TabPanelStyle) const;
-	const UI::PanelStyleInfo* editbox_style(UI::PanelStyle) const;
+	const UI::TextPanelStyleInfo& editbox_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* dropdown_style(UI::PanelStyle) const;
 	const UI::PanelStyleInfo* scrollbar_style(UI::PanelStyle) const;
 	const UI::MapObjectStyleInfo& map_object_style() const;
@@ -84,9 +64,9 @@ public:
 
 private:
 	using PanelStyleMap = std::map<UI::PanelStyle, std::unique_ptr<const UI::PanelStyleInfo>>;
-	void add_button_style(UI::ButtonStyle style, const LuaTable& table, const std::string& key);
-	void add_slider_style(UI::SliderStyle style, const LuaTable& table, const std::string& key);
-	void add_editbox_style(UI::PanelStyle style, const LuaTable& table, const std::string& key);
+	void add_button_style(UI::ButtonStyle style, const LuaTable& table);
+	void add_slider_style(UI::SliderStyle style, const LuaTable& table);
+	void add_editbox_style(UI::PanelStyle style, const LuaTable& table);
 	void add_tabpanel_style(UI::TabPanelStyle style, const LuaTable& table);
 	void add_progressbar_style(UI::PanelStyle style, const LuaTable& table);
 	void add_table_style(UI::PanelStyle style, const LuaTable& table);
@@ -94,10 +74,10 @@ private:
 	void add_style(UI::PanelStyle style, const LuaTable& table, PanelStyleMap* map);
 	void add_font_style(UI::FontStyle font, const LuaTable& table, const std::string& key);
 
-	std::map<UI::ButtonStyle, std::unique_ptr<const UI::PanelStyleInfo>> buttonstyles_;
-	std::map<UI::SliderStyle, std::unique_ptr<const UI::PanelStyleInfo>> sliderstyles_;
+	std::map<UI::ButtonStyle, std::unique_ptr<const UI::ButtonStyleInfo>> buttonstyles_;
+	std::map<UI::PanelStyle, std::unique_ptr<const UI::TextPanelStyleInfo>> editboxstyles_;
+	std::map<UI::SliderStyle, std::unique_ptr<const UI::TextPanelStyleInfo>> sliderstyles_;
 	std::map<UI::TabPanelStyle, std::unique_ptr<const UI::PanelStyleInfo>> tabpanelstyles_;
-	PanelStyleMap editboxstyles_;
 	PanelStyleMap dropdownstyles_;
 	PanelStyleMap scrollbarstyles_;
 

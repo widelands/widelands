@@ -80,27 +80,18 @@ UI::FontStyleInfo* read_font_style_to_pointer(const LuaTable& parent_table, cons
 }
 
 // Read image filename and RGBA color from LuaTable
-UI::PanelStyleInfo* read_style(const LuaTable& table, const std::string& keyname = "", size_t expected_fonts = 0) {
+UI::PanelStyleInfo* read_style(const LuaTable& table) {
 	const std::string image = table.get_string("image");
 	std::vector<int> rgbcolor = table.get_table("color")->array_entries<int>();
 	if (rgbcolor.size() != 3) {
 		throw wexception("Expected 3 entries for RGB color, but got %" PRIuS ".", rgbcolor.size());
 	}
-	UI::PanelStyleInfo* result = new UI::PanelStyleInfo(image.empty() ? nullptr : g_gr->images().get(image),
+	return new UI::PanelStyleInfo(image.empty() ? nullptr : g_gr->images().get(image),
 	                              RGBAColor(rgbcolor[0], rgbcolor[1], rgbcolor[2], 0));
+}
 
-	if (table.has_key("fonts")) {
-		std::unique_ptr<LuaTable> fonts_table = table.get_table("fonts");
-		for (const std::string& key : fonts_table->keys<std::string>()) {
-			result->fonts.emplace(std::make_pair(key, std::unique_ptr<UI::FontStyleInfo>(read_font_style_to_pointer(*fonts_table, key))));
-		}
-	}
-
-	if (result->fonts.size() != expected_fonts) {
-		throw wexception("StyleManager: There is a definition missing for a style's fonts: %s", keyname.c_str());
-	}
-
-	return result;
+UI::TextPanelStyleInfo* read_text_panel_style(const LuaTable& table) {
+	return new UI::TextPanelStyleInfo(read_font_style(table, "font"), *read_style(*table.get_table("background")));
 }
 
 // Stupid completeness check - enum classes weren't meant for iterating, so we just compare the size
@@ -125,31 +116,34 @@ void StyleManager::init() {
 	std::unique_ptr<LuaTable> table(lua.run_script(kTemplateDir + "init.lua"));
 
 	// Buttons
+	log("Loading button styles...\n");
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
 	std::unique_ptr<LuaTable> style_table = element_table->get_table("fsmenu");
-	add_button_style(UI::ButtonStyle::kFsMenuMenu, *style_table, "menu");
-	add_button_style(UI::ButtonStyle::kFsMenuPrimary, *style_table, "primary");
-	add_button_style(UI::ButtonStyle::kFsMenuSecondary, *style_table, "secondary");
+	add_button_style(UI::ButtonStyle::kFsMenuMenu, *style_table->get_table("menu"));
+	add_button_style(UI::ButtonStyle::kFsMenuPrimary, *style_table->get_table("primary"));
+	add_button_style(UI::ButtonStyle::kFsMenuSecondary, *style_table->get_table("secondary"));
 	style_table = element_table->get_table("wui");
-	add_button_style(UI::ButtonStyle::kWuiMenu, *style_table, "menu");
-	add_button_style(UI::ButtonStyle::kWuiPrimary, *style_table, "primary");
-	add_button_style(UI::ButtonStyle::kWuiSecondary, *style_table, "secondary");
+	add_button_style(UI::ButtonStyle::kWuiMenu, *style_table->get_table("menu"));
+	add_button_style(UI::ButtonStyle::kWuiPrimary, *style_table->get_table("primary"));
+	add_button_style(UI::ButtonStyle::kWuiSecondary, *style_table->get_table("secondary"));
 	add_button_style(
-	   UI::ButtonStyle::kWuiBuildingStats, *style_table, "building_stats");
+	   UI::ButtonStyle::kWuiBuildingStats, *style_table->get_table("building_stats"));
 	check_completeness(
 	   "buttons", buttonstyles_.size(), static_cast<size_t>(UI::ButtonStyle::kWuiBuildingStats));
 
 	// Sliders
+	log("Loading slider styles...\n");
 	element_table = table->get_table("sliders");
 	style_table = element_table->get_table("fsmenu");
-	add_slider_style(UI::SliderStyle::kFsMenu, *style_table, "menu");
+	add_slider_style(UI::SliderStyle::kFsMenu, *style_table->get_table("menu"));
 	style_table = element_table->get_table("wui");
-	add_slider_style(UI::SliderStyle::kWuiLight, *style_table, "light");
-	add_slider_style(UI::SliderStyle::kWuiDark, *style_table, "dark");
+	add_slider_style(UI::SliderStyle::kWuiLight, *style_table->get_table("light"));
+	add_slider_style(UI::SliderStyle::kWuiDark, *style_table->get_table("dark"));
 	check_completeness(
 	   "sliders", sliderstyles_.size(), static_cast<size_t>(UI::SliderStyle::kWuiDark));
 
 	// Tabpanels
+	log("Loading tabpanel styles...\n");
 	element_table = table->get_table("tabpanels");
 	style_table = element_table->get_table("fsmenu");
 	add_tabpanel_style(UI::TabPanelStyle::kFsMenu, *style_table->get_table("menu").get());
@@ -160,15 +154,15 @@ void StyleManager::init() {
 	   "tabpanels", tabpanelstyles_.size(), static_cast<size_t>(UI::TabPanelStyle::kWuiDark));
 
 	// Editboxes
+	log("Loading editbox styles...\n");
 	element_table = table->get_table("editboxes");
-	style_table = element_table->get_table("fsmenu");
-	add_editbox_style(UI::PanelStyle::kFsMenu, *style_table, "menu");
-	style_table = element_table->get_table("wui");
-	add_editbox_style(UI::PanelStyle::kWui, *style_table, "menu");
+	add_editbox_style(UI::PanelStyle::kFsMenu, *element_table->get_table("fsmenu"));
+	add_editbox_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
 	check_completeness(
 	   "editboxes", editboxstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Dropdowns
+	log("Loading dropdown styles...\n");
 	element_table = table->get_table("dropdowns");
 	style_table = element_table->get_table("fsmenu");
 	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &dropdownstyles_);
@@ -178,6 +172,7 @@ void StyleManager::init() {
 	   "dropdowns", dropdownstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Scrollbars
+	log("Loading scrollbar styles...\n");
 	element_table = table->get_table("scrollbars");
 	style_table = element_table->get_table("fsmenu");
 	add_style(UI::PanelStyle::kFsMenu, *style_table->get_table("menu").get(), &scrollbarstyles_);
@@ -187,6 +182,7 @@ void StyleManager::init() {
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Building statistics etc. for map objects
+	log("Loading map object styles...\n");
 	UI::MapObjectStyleInfo* map_object_info = new UI::MapObjectStyleInfo();
 	// Fonts
 	element_table = table->get_table("map_object");
@@ -195,6 +191,7 @@ void StyleManager::init() {
 	map_object_info->statistics_font = read_font_style(*element_table, "statistics_font");
 
 	// Colors
+	log("Loading style colors...\n");
 	style_table = element_table->get_table("colors");
 	map_object_info->construction_color = read_rgb_color(*style_table->get_table("construction"));
 	map_object_info->neutral_color = read_rgb_color(*style_table->get_table("neutral"));
@@ -204,6 +201,7 @@ void StyleManager::init() {
 	map_object_style_.reset(std::move(map_object_info));
 
 	// Progress bars
+	log("Loading progressbar styles...\n");
 	element_table = table->get_table("progressbar");
 	add_progressbar_style(UI::PanelStyle::kFsMenu, *element_table->get_table("fsmenu"));
 	add_progressbar_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
@@ -211,6 +209,7 @@ void StyleManager::init() {
 	   "progressbars", progressbar_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Table and listselect
+	log("Loading table styles...\n");
 	element_table = table->get_table("tables");
 	add_table_style(UI::PanelStyle::kFsMenu, *element_table->get_table("fsmenu"));
 	add_table_style(UI::PanelStyle::kWui, *element_table->get_table("wui"));
@@ -218,6 +217,7 @@ void StyleManager::init() {
 	   "tables", table_styles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
 	// Statistics plot
+	log("Loading statistics plot styles...\n");
 	UI::StatisticsPlotStyleInfo* statistics_plot_info = new UI::StatisticsPlotStyleInfo();
 	element_table = table->get_table("statistics_plot");
 	// Fonts
@@ -232,6 +232,7 @@ void StyleManager::init() {
 	statistics_plot_style_.reset(std::move(statistics_plot_info));
 
 	// Ware info in warehouses, construction actions etc.
+	log("Loading wareinfo styles...\n");
 	element_table = table->get_table("wareinfo");
 	add_ware_info_style(UI::WareInfoStyle::kNormal, *element_table->get_table("normal"));
 	add_ware_info_style(UI::WareInfoStyle::kHighlight, *element_table->get_table("highlight"));
@@ -239,6 +240,7 @@ void StyleManager::init() {
 	   "wareinfos", ware_info_styles_.size(), static_cast<size_t>(UI::WareInfoStyle::kHighlight));
 
 	// Special elements
+	log("Loading special style elements...\n");
 	minimum_font_size_ = table->get_int("minimum_font_size");
 	if (minimum_font_size_ < 1) {
 		throw wexception("Font size too small for minimum_font_size, must be at least 1!");
@@ -246,6 +248,7 @@ void StyleManager::init() {
 	minimap_icon_frame_ = read_rgb_color(*table->get_table("minimap_icon_frame"));
 
 	// Fonts
+	log("Loading font styles...\n");
 	element_table = table->get_table("fonts");
 	add_font_style(UI::FontStyle::kChatMessage, *element_table, "chat_message");
    add_font_style(UI::FontStyle::kChatPlayername, *element_table, "chat_playername");
@@ -274,14 +277,14 @@ void StyleManager::init() {
 }
 
 // Return functions for the styles
-const UI::PanelStyleInfo* StyleManager::button_style(UI::ButtonStyle style) const {
+const UI::ButtonStyleInfo& StyleManager::button_style(UI::ButtonStyle style) const {
 	assert(buttonstyles_.count(style) == 1);
-	return buttonstyles_.at(style).get();
+	return *buttonstyles_.at(style);
 }
 
-const UI::PanelStyleInfo* StyleManager::slider_style(UI::SliderStyle style) const {
+const UI::TextPanelStyleInfo& StyleManager::slider_style(UI::SliderStyle style) const {
 	assert(sliderstyles_.count(style) == 1);
-	return sliderstyles_.at(style).get();
+	return *sliderstyles_.at(style);
 }
 
 const UI::PanelStyleInfo* StyleManager::tabpanel_style(UI::TabPanelStyle style) const {
@@ -289,9 +292,9 @@ const UI::PanelStyleInfo* StyleManager::tabpanel_style(UI::TabPanelStyle style) 
 	return tabpanelstyles_.at(style).get();
 }
 
-const UI::PanelStyleInfo* StyleManager::editbox_style(UI::PanelStyle style) const {
+const UI::TextPanelStyleInfo& StyleManager::editbox_style(UI::PanelStyle style) const {
 	assert(editboxstyles_.count(style) == 1);
-	return editboxstyles_.at(style).get();
+	return *editboxstyles_.at(style);
 }
 
 const UI::PanelStyleInfo* StyleManager::dropdown_style(UI::PanelStyle style) const {
@@ -347,31 +350,24 @@ std::string StyleManager::color_tag(const std::string& text, const RGBColor& col
 }
 
 // Fill the maps
-void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table, const std::string& key) {
+void StyleManager::add_button_style(UI::ButtonStyle style, const LuaTable& table) {
 	buttonstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(*table.get_table(key), key, 2))));
-	if (buttonstyles_.at(style)->fonts.count("enabled") == 0) {
-		throw wexception("Missing 'enabled' font style for button '%s'", key.c_str());
-	}
-	if (buttonstyles_.at(style)->fonts.count("disabled") == 0) {
-		throw wexception("Missing disabled' font style for button '%s'", key.c_str());
-	}
+				std::make_pair(
+					style,
+					std::unique_ptr<const UI::ButtonStyleInfo>(
+						new UI::ButtonStyleInfo(
+							*read_text_panel_style(*table.get_table("enabled")),
+							*read_text_panel_style(*table.get_table("disabled"))))));
 }
 
-void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table, const std::string& key) {
+void StyleManager::add_slider_style(UI::SliderStyle style, const LuaTable& table) {
 	sliderstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(*table.get_table(key), key, 1))));
-	if (sliderstyles_.at(style)->fonts.count("labels") == 0) {
-		throw wexception("Missing 'labels' font style for slider '%s'", key.c_str());
-	}
+	   std::make_pair(style, std::unique_ptr<UI::TextPanelStyleInfo>(read_text_panel_style(table))));
 }
 
-void StyleManager::add_editbox_style(UI::PanelStyle style, const LuaTable& table, const std::string& key) {
+void StyleManager::add_editbox_style(UI::PanelStyle style, const LuaTable& table) {
 	editboxstyles_.insert(
-	   std::make_pair(style, std::unique_ptr<UI::PanelStyleInfo>(read_style(*table.get_table(key), key, 1))));
-	if (editboxstyles_.at(style)->fonts.count("default") == 0) {
-		throw wexception("Missing 'default' font style for editbox '%s'", key.c_str());
-	}
+	   std::make_pair(style, std::unique_ptr<UI::TextPanelStyleInfo>(read_text_panel_style(table))));
 }
 
 
@@ -388,7 +384,6 @@ void StyleManager::add_progressbar_style(UI::PanelStyle style, const LuaTable& t
 	progress_bar_style->medium_color = read_rgb_color(*color_table->get_table("medium"));
 	progress_bar_style->high_color = read_rgb_color(*color_table->get_table("high"));
 	progressbar_styles_.insert(std::make_pair(style, std::unique_ptr<const UI::ProgressbarStyleInfo>(std::move(progress_bar_style))));
-
 }
 
 void StyleManager::add_table_style(UI::PanelStyle style, const LuaTable& table) {

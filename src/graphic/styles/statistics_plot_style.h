@@ -17,26 +17,23 @@
  *
  */
 
-#ifndef WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
-#define WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#ifndef WL_GRAPHIC_STYLES_STATISTICS_PLOT_STYLE_H
+#define WL_GRAPHIC_STYLES_STATISTICS_PLOT_STYLE_H
 
 #include "graphic/color.h"
 #include "graphic/styles/font_style.h"
 
 namespace UI {
 
-struct MapObjectStyleInfo {
-	UI::FontStyleInfo building_statistics_font;
-	UI::FontStyleInfo census_font;
-	UI::FontStyleInfo statistics_font;
+struct StatisticsPlotStyleInfo {
+	UI::FontStyleInfo x_tick_font;
+	UI::FontStyleInfo y_min_value_font;
+	UI::FontStyleInfo y_max_value_font;
 
-	RGBColor construction_color;
-	RGBColor neutral_color;
-	RGBColor low_color;
-	RGBColor medium_color;
-	RGBColor high_color;
+	RGBColor axis_line_color;
+	RGBColor zero_line_color;
 };
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#endif  // end of include guard: WL_GRAPHIC_STYLES_STATISTICS_PLOT_STYLE_H

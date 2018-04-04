@@ -25,6 +25,7 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
+#include "graphic/styles/button_style.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -169,7 +170,7 @@ protected:
 	std::string title_;         //  title string used when title_image_ == nullptr
 	const Image* title_image_;  //  custom icon on the button
 
-	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
+	const UI::ButtonStyleInfo& style_;  // Background color and texture. Not owned.
 	RGBColor clr_down_;                           //  color of border while a flat button is "down"
 };
 

@@ -17,26 +17,26 @@
  *
  */
 
-#ifndef WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
-#define WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#ifndef WL_GRAPHIC_STYLES_TEXT_PANEL_STYLE_H
+#define WL_GRAPHIC_STYLES_TEXT_PANEL_STYLE_H
 
-#include "graphic/color.h"
 #include "graphic/styles/font_style.h"
+#include "graphic/styles/panel_styles.h"
 
 namespace UI {
 
-struct MapObjectStyleInfo {
-	UI::FontStyleInfo building_statistics_font;
-	UI::FontStyleInfo census_font;
-	UI::FontStyleInfo statistics_font;
+enum class SliderStyle { kFsMenu, kWuiLight, kWuiDark };
 
-	RGBColor construction_color;
-	RGBColor neutral_color;
-	RGBColor low_color;
-	RGBColor medium_color;
-	RGBColor high_color;
+struct TextPanelStyleInfo {
+	TextPanelStyleInfo(const UI::FontStyleInfo& init_font, const UI::PanelStyleInfo& init_background) :
+		font(init_font),
+		background(init_background) {
+	}
+
+	UI::FontStyleInfo font;
+	UI::PanelStyleInfo background;
 };
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#endif  // end of include guard: WL_GRAPHIC_STYLES_TEXT_PANEL_STYLE_H

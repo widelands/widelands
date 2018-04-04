@@ -17,11 +17,11 @@
  *
  */
 
-#ifndef WL_GRAPHIC_WARE_INFO_STYLE_INFO_H
-#define WL_GRAPHIC_WARE_INFO_STYLE_INFO_H
+#ifndef WL_GRAPHIC_STYLES_WARE_INFO_STYLE_H
+#define WL_GRAPHIC_STYLES_WARE_INFO_STYLE_H
 
 #include "graphic/color.h"
-#include "graphic/styles/font_styles.h"
+#include "graphic/styles/font_style.h"
 #include "graphic/image.h"
 
 namespace UI {
@@ -42,4 +42,4 @@ struct WareInfoStyleInfo {
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_WARE_INFO_STYLE_INFO_H
+#endif  // end of include guard: WL_GRAPHIC_STYLES_WARE_INFO_STYLE_H

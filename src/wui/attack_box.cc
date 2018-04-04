@@ -138,7 +138,7 @@ void AttackBox::init() {
 	const std::string attack_string =
 	   (boost::format(_("%1% / %2%")) % (max_attackers > 0 ? 1 : 0) % max_attackers).str();
 	soldiers_text_.reset(
-	   &add_text(columnbox, attack_string, UI::Align::kCenter, *g_gr->styles().slider_style(UI::SliderStyle::kWuiDark)->fonts.at("labels")));
+	   &add_text(columnbox, attack_string, UI::Align::kCenter, g_gr->styles().slider_style(UI::SliderStyle::kWuiDark).font));
 
 	soldiers_slider_ = add_slider(
 	   columnbox, 100, 10, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));

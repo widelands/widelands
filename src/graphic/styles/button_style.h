@@ -17,26 +17,35 @@
  *
  */
 
-#ifndef WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
-#define WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#ifndef WL_GRAPHIC_STYLES_BUTTON_STYLE_H
+#define WL_GRAPHIC_STYLES_BUTTON_STYLE_H
 
-#include "graphic/color.h"
 #include "graphic/styles/font_style.h"
+#include "graphic/styles/panel_styles.h"
+#include "graphic/styles/text_panel_style.h"
 
 namespace UI {
 
-struct MapObjectStyleInfo {
-	UI::FontStyleInfo building_statistics_font;
-	UI::FontStyleInfo census_font;
-	UI::FontStyleInfo statistics_font;
+enum class ButtonStyle {
+	kFsMenuMenu,
+	kFsMenuPrimary,
+	kFsMenuSecondary,
+	kWuiMenu,
+	kWuiPrimary,
+	kWuiSecondary,
+	kWuiBuildingStats
+};
 
-	RGBColor construction_color;
-	RGBColor neutral_color;
-	RGBColor low_color;
-	RGBColor medium_color;
-	RGBColor high_color;
+struct ButtonStyleInfo {
+	ButtonStyleInfo(const UI::TextPanelStyleInfo& init_enabled, const UI::TextPanelStyleInfo& init_disabled) :
+		enabled(init_enabled),
+		disabled(init_disabled) {
+	}
+
+	UI::TextPanelStyleInfo enabled;
+	UI::TextPanelStyleInfo disabled;
 };
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#endif  // end of include guard: WL_GRAPHIC_STYLES_BUTTON_STYLE_H

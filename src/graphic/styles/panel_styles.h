@@ -17,29 +17,17 @@
  *
  */
 
-#ifndef WL_GRAPHIC_PANEL_STYLES_H
-#define WL_GRAPHIC_PANEL_STYLES_H
+#ifndef WL_GRAPHIC_STYLES_PANEL_STYLES_H
+#define WL_GRAPHIC_STYLES_PANEL_STYLES_H
 
 #include <map>
 #include <memory>
 
 #include "graphic/color.h"
-#include "graphic/styles/font_styles.h"
+#include "graphic/styles/font_style.h"
 #include "graphic/image.h"
 
 namespace UI {
-
-// Buttons
-enum class ButtonStyle {
-	kFsMenuMenu,
-	kFsMenuPrimary,
-	kFsMenuSecondary,
-	kWuiMenu,
-	kWuiPrimary,
-	kWuiSecondary,
-	kWuiBuildingStats
-};
-enum class SliderStyle { kFsMenu, kWuiLight, kWuiDark };
 
 // Backgrounds
 enum class PanelStyle { kFsMenu, kWui };
@@ -54,10 +42,8 @@ struct PanelStyleInfo {
 
 	const Image* image;
 	const RGBAColor color;
-	// Optional font info NOCOM don't like the string keys
-	std::map<std::string, std::unique_ptr<UI::FontStyleInfo>> fonts;
 };
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_PANEL_STYLES_H
+#endif  // end of include guard: WL_GRAPHIC_STYLES_PANEL_STYLES_H

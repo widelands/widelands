@@ -47,18 +47,14 @@ constexpr int kLineMargin = 1;
 namespace UI {
 
 struct EditBoxImpl {
-	explicit EditBoxImpl(UI::PanelStyle style) :
-		background_style(g_gr->styles().editbox_style(style)),
-		font_style(*background_style->fonts.at("default")) {
+	explicit EditBoxImpl(UI::PanelStyle init_style) :
+		style(g_gr->styles().editbox_style(init_style)), font_scale(1.0f) {
 	}
 
-	/// Background color and texture
-	const UI::PanelStyleInfo* background_style;
+	/// Background color and texture + font style
+	UI::TextPanelStyleInfo style;
 
-	/**
-	 * Font used for rendering text.
-	 */
-	FontStyleInfo font_style;
+	/// Scale for font size
 	float font_scale;
 
 	/// Maximum number of characters in the input
@@ -90,10 +86,8 @@ EditBox::EditBox(Panel* const parent,
      history_position_(-1) {
 	set_thinks(false);
 
-	set_font_scale(1.0f);
-
 	if (get_h() == 0) {
-		set_size(get_w(), text_height(m_->font_style, m_->font_scale) + 2 * margin_y);
+		set_size(get_w(), text_height(m_->style.font, m_->font_scale) + 2 * margin_y);
 	}
 
 	// Set alignment to the UI language's principal writing direction
@@ -102,7 +96,7 @@ EditBox::EditBox(Panel* const parent,
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
 	m_->maxLength =
-	   std::min(static_cast<int>(std::floor(g_gr->max_texture_size() / (m_->font_style.size * m_->font_scale))), std::numeric_limits<int32_t>::max());
+	   std::min(static_cast<int>(std::floor(g_gr->max_texture_size() / (m_->style.font.size * m_->font_scale))), std::numeric_limits<int32_t>::max());
 
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -151,7 +145,7 @@ void EditBox::set_text(const std::string& t) {
  */
 void EditBox::set_max_length(int const n) {
 	assert(n > 0);
-	m_->maxLength = std::min(static_cast<int>(std::floor(g_gr->max_texture_size() / (m_->font_style.size * m_->font_scale))), n);
+	m_->maxLength = std::min(static_cast<int>(std::floor(g_gr->max_texture_size() / (m_->style.font.size * m_->font_scale))), n);
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
@@ -167,7 +161,7 @@ void EditBox::set_font_scale(float scale) {
 }
 
 void EditBox::set_style(const UI::FontStyleInfo& style) {
-	m_->font_style = style;
+	m_->style.font = style;
 }
 
 
@@ -356,7 +350,7 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 }
 
 void EditBox::draw(RenderTarget& dst) {
-	draw_background(dst, *m_->background_style);
+	draw_background(dst, m_->style.background);
 
 	// Draw border.
 	if (get_w() >= 2 && get_h() >= 2) {
@@ -379,7 +373,7 @@ void EditBox::draw(RenderTarget& dst) {
 	}
 
 	const int max_width = get_w() - 2 * kMarginX;
-	FontStyleInfo scaled_style = m_->font_style;
+	FontStyleInfo scaled_style = m_->style.font;
 	scaled_style.size *= m_->font_scale;
 	std::shared_ptr<const UI::RenderedText> rendered_text =
 	   UI::g_fh1->render(as_editor_richtext_paragraph(m_->text, scaled_style));
@@ -420,9 +414,9 @@ void EditBox::draw(RenderTarget& dst) {
 		// Draw the caret
 		std::string line_to_caret = m_->text.substr(0, m_->caret);
 		// TODO(GunChleoc): Arabic: Fix cursor position for BIDI text.
-		int caret_x = text_width(line_to_caret, m_->font_style, m_->font_scale);
+		int caret_x = text_width(line_to_caret, m_->style.font, m_->font_scale);
 
-		const uint16_t fontheight = text_height(m_->font_style, m_->font_scale);
+		const uint16_t fontheight = text_height(m_->style.font, m_->font_scale);
 
 		const Image* caret_image = g_gr->images().get("images/ui_basic/caret.png");
 		Vector2i caretpt = Vector2i::zero();
@@ -438,8 +432,8 @@ void EditBox::draw(RenderTarget& dst) {
 void EditBox::check_caret() {
 	std::string leftstr(m_->text, 0, m_->caret);
 	std::string rightstr(m_->text, m_->caret, std::string::npos);
-	int32_t leftw = text_width(leftstr, m_->font_style, m_->font_scale);
-	int32_t rightw = text_width(rightstr, m_->font_style, m_->font_scale);
+	int32_t leftw = text_width(leftstr, m_->style.font, m_->font_scale);
+	int32_t rightw = text_width(rightstr, m_->style.font, m_->font_scale);
 
 	int32_t caretpos = 0;
 

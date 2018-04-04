@@ -187,7 +187,7 @@ int calc_slider_label_width(const std::string& label) {
 	// Font size and style as used by DiscreteSlider
 	return UI::g_fh1
 	   ->render(as_richtext_paragraph(
-	      label, *g_gr->styles().slider_style(UI::SliderStyle::kWuiLight)->fonts.at("labels")))
+	      label, g_gr->styles().slider_style(UI::SliderStyle::kWuiLight).font))
 	   ->width();
 }
 

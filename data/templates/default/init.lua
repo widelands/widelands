@@ -59,55 +59,132 @@ return {
    minimum_font_size = 10,
    minimap_icon_frame = fs_font_color,
 
-   -- Button backgrounds
+   -- Buttons
    buttons = {
       -- Buttons used in Fullscreen menus
       fsmenu = {
          -- Main menu ("Single Player", "Watch Replay", ...)
          menu = {
-            image = fs_button,
-            color = fs_blue,
-            fonts = default_button_fonts
+            enabled = {
+               font = default_button_fonts["enabled"],
+               background = {
+                  image = fs_button,
+                  color = fs_blue,
+               }
+            },
+            disabled = {
+               font = default_button_fonts["disabled"],
+               background = {
+                  image = fs_button,
+                  color = fs_blue,
+               }
+            }
          },
          -- Primary user selection ("OK", ...)
          primary = {
-            image = fs_button,
-            color = fs_green,
-            fonts = default_button_fonts
+            enabled = {
+               font = default_button_fonts["enabled"],
+               background = {
+                  image = fs_button,
+                  color = fs_green,
+               }
+            },
+            disabled = {
+               font = default_button_fonts["disabled"],
+               background = {
+                  image = fs_button,
+                  color = fs_green,
+               }
+            }
          },
          -- Secondary user selection ("Cancel", "Delete", selection buttons, ...)
          secondary = {
-            image = fs_button,
-            color = fs_brown,
-            fonts = default_button_fonts
+            enabled = {
+               font = default_button_fonts["enabled"],
+               background = {
+                  image = fs_button,
+                  color = fs_brown,
+               }
+            },
+            disabled = {
+               font = default_button_fonts["disabled"],
+               background = {
+                  image = fs_button,
+                  color = fs_brown,
+               }
+            }
          },
       },
       -- Buttons used in-game and in the editor
       wui = {
          -- Main menu ("Exit Game"), Building Windows, selection buttons, ...
          menu = {
-            image = wui_button,
-            color = wui_light,
-            fonts = default_button_fonts
+            enabled = {
+               font = default_button_fonts["enabled"],
+               background = {
+                  image = wui_button,
+                  color = wui_light,
+               }
+            },
+            disabled = {
+               font = default_button_fonts["disabled"],
+               background = {
+                  image = wui_button,
+                  color = wui_light,
+               }
+            }
          },
          -- Primary user selection ("OK", attack, ...)
          primary = {
-            image = wui_button,
-            color = wui_green,
-            fonts = default_button_fonts
+            enabled = {
+               font = default_button_fonts["enabled"],
+               background = {
+                  image = wui_button,
+                  color = wui_green,
+               }
+            },
+            disabled = {
+               font = default_button_fonts["disabled"],
+               background = {
+                  image = wui_button,
+                  color = wui_green,
+               }
+            }
          },
          -- Secondary user selection ("Cancel", "Delete", ...)
          secondary = {
-            image = wui_button,
-            color = wui_brown,
-            fonts = default_button_fonts
+            enabled = {
+               font = default_button_fonts["enabled"],
+               background = {
+                  image = wui_button,
+                  color = wui_brown,
+               }
+            },
+            disabled = {
+               font = default_button_fonts["disabled"],
+               background = {
+                  image = wui_button,
+                  color = wui_brown,
+               }
+            }
          },
          -- Building buttons on fieldaction and building statistics need to be
          -- transparent in order to match the background of the tab panel.
          building_stats = {
-            image = "",
-            color = {0, 0, 0},
-            fonts = default_button_fonts
+            enabled = {
+               font = default_button_fonts["enabled"],
+               background = {
+                  image = "",
+                  color = {0, 0, 0},
+               }
+            },
+            disabled = {
+               font = default_button_fonts["disabled"],
+               background = {
+                  image = "",
+                  color = {0, 0, 0},
+               }
+            }
          },
       }
    },
@@ -115,46 +192,46 @@ return {
    sliders = {
       fsmenu = {
          menu = {
-            image = fs_button,
-            color = fs_blue,
-            fonts = {
-               labels = {
-                  color = fs_font_color,
-                  face = "condensed",
-                  size = 11,
-                  bold = true,
-                  shadow = true
-               }
+            background = {
+               image = fs_button,
+               color = fs_blue,
+            },
+            font = {
+               color = fs_font_color,
+               face = "condensed",
+               size = 11,
+               bold = true,
+               shadow = true
             }
          }
       },
       wui = {
          -- Sound Options, Statistics
          light = {
-            image = wui_button,
-            color = wui_brown,
-            fonts = {
-               labels = {
-                  color = fs_font_color,
-                  face = "condensed",
-                  size = 11,
-                  bold = true,
-                  shadow = true
-               }
+            background = {
+               image = wui_button,
+               color = wui_brown,
+            },
+            font = {
+               color = fs_font_color,
+               face = "condensed",
+               size = 11,
+               bold = true,
+               shadow = true
             }
          },
          -- Fieldaction (attack)
          dark = {
-            image = wui_button,
-            color = wui_green,
-            fonts = {
-               labels = {
-                  color = fs_font_color,
-                  face = "condensed",
-                  size = 11,
-                  bold = true,
-                  shadow = true
-               }
+            background = {
+               image = wui_button,
+               color = wui_green,
+            },
+            font = {
+               color = fs_font_color,
+               face = "condensed",
+               size = 11,
+               bold = true,
+               shadow = true
             }
          },
       }
@@ -177,32 +254,28 @@ return {
    -- Used both for one-line and multiline edit boxes
    editboxes = {
       fsmenu = {
-         menu = {
+         background = {
             image = fs_button,
             color = fs_green,
-            fonts = {
-               default = {
-                  color = fs_font_color,
-                  face = fs_font_face,
-                  size = fs_font_size,
-                  shadow = true
-               }
-            }
          },
+         font = {
+            color = fs_font_color,
+            face = fs_font_face,
+            size = fs_font_size,
+            shadow = true
+         }
       },
       wui = {
-         menu = {
+         background = {
             image = wui_button,
             color = wui_brown,
-            fonts = {
-               default = {
-                  color = wui_font_color,
-                  face = wui_font_face,
-                  size = wui_font_size,
-                  shadow = true
-               }
-            }
          },
+         font = {
+            color = wui_font_color,
+            face = wui_font_face,
+            size = wui_font_size,
+            shadow = true
+         }
       }
    },
    -- Background for dropdown menus

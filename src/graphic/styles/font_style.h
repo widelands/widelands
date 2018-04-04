@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_GRAPHIC_FONT_STYLES_H
-#define WL_GRAPHIC_FONT_STYLES_H
+#ifndef WL_GRAPHIC_STYLES_FONT_STYLE_H
+#define WL_GRAPHIC_STYLES_FONT_STYLE_H
 
 #include <string>
 
@@ -76,4 +76,4 @@ public:
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_FONT_STYLES_H
+#endif  // end of include guard: WL_GRAPHIC_STYLES_FONT_STYLE_H

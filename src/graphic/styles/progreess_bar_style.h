@@ -17,21 +17,16 @@
  *
  */
 
-#ifndef WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
-#define WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#ifndef WL_GRAPHIC_STYLES_PROGRESS_BAR_STYLE_H
+#define WL_GRAPHIC_STYLES_PROGRESS_BAR_STYLE_H
 
 #include "graphic/color.h"
 #include "graphic/styles/font_style.h"
 
 namespace UI {
 
-struct MapObjectStyleInfo {
-	UI::FontStyleInfo building_statistics_font;
-	UI::FontStyleInfo census_font;
-	UI::FontStyleInfo statistics_font;
-
-	RGBColor construction_color;
-	RGBColor neutral_color;
+struct ProgressbarStyleInfo {
+	UI::FontStyleInfo font;
 	RGBColor low_color;
 	RGBColor medium_color;
 	RGBColor high_color;
@@ -39,4 +34,4 @@ struct MapObjectStyleInfo {
 
 }  // namespace UI
 
-#endif  // end of include guard: WL_GRAPHIC_STYLES_MAP_OBJECT_STYLE_H
+#endif  // end of include guard: WL_GRAPHIC_STYLES_PROGRESS_BAR_STYLE_H

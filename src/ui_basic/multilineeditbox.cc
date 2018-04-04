@@ -41,8 +41,8 @@ struct MultilineEditbox::Data {
 	/// The text in the edit box
 	std::string text;
 
-	/// Background color and texture
-	const UI::PanelStyleInfo* background_style;
+	/// Background color and texture + font style
+	const UI::TextPanelStyleInfo& style;
 
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
@@ -60,7 +60,7 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	Data(MultilineEditbox&, const UI::PanelStyleInfo* style);
+	Data(MultilineEditbox&, const TextPanelStyleInfo& style);
 	void refresh_ww();
 
 	void update();
@@ -92,15 +92,15 @@ MultilineEditbox::MultilineEditbox(
 	set_handle_textinput();
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::PanelStyleInfo* style)
+MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& init_style)
    : scrollbar(
         &o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::PanelStyle::kWui),
-	  background_style(style),
+	  style(init_style),
      cursor_pos(0),
-     lineheight(text_height(*background_style->fonts.at("default"))),
-     maxbytes(std::min(g_gr->max_texture_size() / text_height(*background_style->fonts.at("default")), 0xffff)),
+     lineheight(text_height(style.font)),
+     maxbytes(std::min(g_gr->max_texture_size() / text_height(style.font), 0xffff)),
      ww_valid(false),
-	  ww(background_style->fonts.at("default")->size, background_style->fonts.at("default")->color, o.get_w()),
+	  ww(style.font.size, style.font.color, o.get_w()),
      owner(o) {
 	scrollbar.moved.connect(boost::bind(&MultilineEditbox::scrollpos_changed, &o, _1));
 
@@ -402,7 +402,7 @@ void MultilineEditbox::focus(bool topcaller) {
  * Redraw the Editbox
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
-	draw_background(dst, *d_->background_style);
+	draw_background(dst, d_->style.background);
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {

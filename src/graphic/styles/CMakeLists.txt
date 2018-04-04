@@ -1,10 +1,14 @@
 wl_library(graphic_styles
   SRCS
-    font_styles.cc
-    font_styles.h
+    button_style.h
+    font_style.cc
+    font_style.h
     map_object_style.h
-    panel_styles.cc
     panel_styles.h
+    progreess_bar_style.h
+    text_panel_style.h
+    statistics_plot_style.h
+    table_style.h
     ware_info_style.h
   DEPENDS
     base_exceptions

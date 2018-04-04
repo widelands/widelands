@@ -17,14 +17,13 @@
  *
  */
 
-#include "graphic/styles/font_styles.h"
+#include "graphic/styles/font_style.h"
 
 #include <boost/format.hpp>
 
 #include "base/wexception.h"
 
 namespace UI {
-// NOCOM Use a LuaTable constructor instead?
 FontStyleInfo::FontStyleInfo() : FontStyleInfo("sans", RGBColor(0, 0, 0), 14) {
 }
 

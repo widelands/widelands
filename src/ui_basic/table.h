@@ -29,7 +29,7 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/styles/font_styles.h"
+#include "graphic/styles/font_style.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
