@@ -577,6 +577,22 @@ struct MineTypesObserver {
 	uint16_t unoccupied;
 };
 
+// This struct contains count of mineable fields grouped by ore/resource type
+struct MineFieldsObserver {
+
+	void zero();
+	void add(Widelands::DescriptionIndex);
+	void add_critical_ore(Widelands::DescriptionIndex);
+	bool has_critical_ore_fields();
+	uint16_t get(Widelands::DescriptionIndex);
+	uint8_t count_types();
+
+private:
+	// This is the central information of the struct: a pair of resource and count of fields
+	std::map<Widelands::DescriptionIndex, uint16_t> stat;
+	std::set<Widelands::DescriptionIndex> critical_ores;
+};
+
 constexpr int kNeuronWeightLimit = 100;
 constexpr size_t kNeuronMaxPosition = 20;
 constexpr size_t kSecondParentProbability = 50;

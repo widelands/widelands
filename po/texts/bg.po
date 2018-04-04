@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-24 11:38+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-26 11:09+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -515,6 +515,7 @@ msgid ""
 msgstr "Винаги стройте лесничейска и дивечовъдска хижи, за да не останете без дървени трупи или дивеч."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
@@ -597,6 +598,17 @@ msgstr "Винаги стройте лесничейска къща, за да �
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
 msgstr "Империята се нуждае от много мрамор. Търсете залежи на мрамор."
+
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr "За да произвеждате тухли, се нуждаете от гранит. За да произвеждате гранит, се нуждаете от кариера или мина за камъни. А за да ги построите, се нуждаете от тухли. Пазете се от подобни неизпълнени циклични зависимости!"
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester´s house, so you will not run out of logs."
+msgstr "Винаги стройте лесничейска къща, за да не останете без дървени трупи."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""
