@@ -57,8 +57,8 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start burning charcoal because ...
-         descname = _"burning charcoal",
+         -- TRANSLATORS: Completed/Skipped/Did not start producing coal because ...
+         descname = _"producing coal",
          actions = {
             "sleep=30000",
             "return=skipped unless economy needs coal",

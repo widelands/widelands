@@ -46,8 +46,8 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining water because ...
-         descname = _"mining water",
+         -- TRANSLATORS: Completed/Skipped/Did not start working because ...
+         descname = _"working",
          actions = {
             "sleep=20000",
             "animate=working 20000",
