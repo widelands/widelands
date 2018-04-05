@@ -31,7 +31,9 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
                                                UI::UniqueWindow::Registry& reg,
                                                Widelands::ConstructionSite& cs,
                                                bool avoid_fastclick)
-   : BuildingWindow(parent, reg, cs, avoid_fastclick), construction_site_(&cs), progress_(nullptr) {
+   : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
+     construction_site_(&cs),
+     progress_(nullptr) {
 	init(avoid_fastclick);
 }
 
