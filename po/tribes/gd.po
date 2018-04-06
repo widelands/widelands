@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 20:27+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-04-02 10:14+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -2370,7 +2370,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr ""
+msgstr "Chan urrainn dhan iasgair a tha ag obair aig an tuathanas-uisge seo poll-èisg a lorg  taobh a-staigh an raoin-obrach tuilleadh. Dèan cinnteach gu bheil sùil-chriadha faisg air agus gu bheil an tuathanas-uisge a’ faighinn nam batharan uile a dh’fheumas e no thoir às a chèile no mill e."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
@@ -2382,19 +2382,19 @@ msgstr "Ceàrdach armachd mhòr"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:74
 msgid "forging a curved sword"
-msgstr ""
+msgstr "claidheamh-crom a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:85
 msgid "forging a double-edged sword"
-msgstr ""
+msgstr "claidheamh dà-fhaobharach a dèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:96
 msgid "forging a golden helmet"
-msgstr ""
+msgstr "clogaid òrach a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:7
@@ -2406,13 +2406,13 @@ msgstr "Ceàrdach armachd bheag"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:73
 msgid "forging a short sword"
-msgstr ""
+msgstr "claidheamh goirid a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:84
 msgid "forging a long sword"
-msgstr ""
+msgstr "claidheamh fhada a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:7
@@ -2458,7 +2458,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr ""
+msgstr "Cha do lorg am beachlannair a tha ag obair aig a’ bheachlann seo achadh fo bhlàth no preas taobh a-staigh an raoin-obrach. Bu chòir dhut tuathanas no croit-dhearc eile a thogail faisg air no an togalach a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:7
@@ -2507,7 +2507,7 @@ msgstr "sleagh seilg a dhèanamh"
 #. TRANSLATORS: Completed/Skipped/Did not start forging a hammer because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:193
 msgid "forging a hammer"
-msgstr ""
+msgstr "òrd a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging fire tongs because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:204
@@ -2534,7 +2534,7 @@ msgstr "Àth bhreigichean"
 #. TRANSLATORS: Completed/Skipped/Did not start burning bricks because ...
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:63
 msgid "burning bricks"
-msgstr ""
+msgstr "breigichean a losgadh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
@@ -2572,7 +2572,7 @@ msgid ""
 "The brickmaker working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr ""
+msgstr "Cha do lorg fear na breigichean a tha ag obair aig an t-sùil-chriadha seo talamh rèidh taobh a-staigh an raoin-obrach. Bu chòir dhut an sùil-chriadha seo a thoirt às a chèile ’s tè ùr a thogail am baideigin eile."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:7
@@ -2585,7 +2585,7 @@ msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:7
@@ -2599,7 +2599,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "Tha prìomh-chuisle na mèinne guail seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:7
@@ -2626,7 +2626,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr ""
+msgstr "Cha do lorg an cruinniche a tha ag obair aig an taigh-chruinniche seo preas dearcan taobh a-staigh an raoin-obrach. Bu chòir dhut croit-dhearc eile a thogail faisg air no an togalach a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:7
@@ -2654,7 +2654,7 @@ msgstr "eòrna a bhuain"
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach a tha ag obair aig an tuathanas seo sìol."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:7
@@ -2667,7 +2667,7 @@ msgctxt "frisians_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
 "work area."
-msgstr ""
+msgstr "Cha do lorg an t-iasgair a tha ag obair aig an taigh-iasgair seo iasg sam bith taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:7
@@ -2692,7 +2692,7 @@ msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:7
@@ -2706,7 +2706,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "Tha prìomh-chuisle na mèinne òir seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:7
@@ -2731,7 +2731,7 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr ""
+msgstr "Cha do lorg an sealgair a tha a’ fuireach san taigh-shealgair seo sitheann taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:7
@@ -2744,7 +2744,7 @@ msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:7
@@ -2758,7 +2758,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "Tha prìomh-chuisle na mèinne iarainn seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:7
@@ -2781,7 +2781,7 @@ msgstr "Cuaraidh"
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
+msgstr "Chan urrainn dhan chlachair a tha ag obair aig a’ chuaraidh seo carraig a lorg taobh a-staigh an raoin-obrach tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:7
@@ -2818,7 +2818,7 @@ msgstr "Tuathanas-cuilce"
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this reed farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach-cuilce a tha ag obair aig an tuathanas-cuilce seo sìol."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:7
@@ -2850,7 +2850,7 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "Tha prìomh-chuisle na mèinne cloiche seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:7
@@ -2864,7 +2864,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "Tha prìomh-chuisle na mèinne cloiche seo air a caitheamh. Bi an dùil gum faigh thu mòran nas lugha a-mach aiste a-nis. Cha ghabh a leasachadh tuilleadh, mar sin bu chòir dhut a thoirt às a chèile no a mhilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:7
@@ -2955,7 +2955,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:64
 msgctxt "frisians_building"
 msgid "The carrier working at this well can’t find any water in his well."
-msgstr ""
+msgstr "Chan urrainn dhan ghiùlanair a tha ag obair aig an tobar seo uisge a lorg san tobar aige tuilleadh."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/init.lua:7
@@ -2969,7 +2969,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr ""
+msgstr "Cha do lorg an coilltear a tha ag obair aig an taigh buaineadair-fhiodha seo craobh taobh a-staigh an raoin-obrach. Bu chòir dhut an togalach a thoirt às a chèile no a mhilleadh no taigh planntair-choille a thogail."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:84
@@ -3774,7 +3774,7 @@ msgstr "Frìoslannaich (deuchainneil)"
 msgid ""
 "The inhabitants of the rough North Sea shore. This tribe is still under "
 "development."
-msgstr ""
+msgstr "Tha an sluagh seo a’ fuireach air cladach garbh a’ Chuain a Tuath. Tha an treubh seo ’ga leasachadh fhathast."
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"

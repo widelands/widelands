@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # abuyop <abuyop@gmail.com>, 2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-30 07:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -186,6 +186,10 @@ msgstr " --xres=[...]         Lebar tetingkap dalam piksel."
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Tinggi tetingkap dalam piksel."
 
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands
+#. textdomain
 #: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Pilihan untuk pengurus tetingkap dalaman:"
@@ -243,7 +247,7 @@ msgstr " --help               Tunjuk bantuan ini"
 #: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
+"        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Laporan pepijat? Cadangan? Pergi ke laman sesawang projek:\n        https://launchpad.net/widelands\n\nKami harap anda menyukai permainan ini!"
+msgstr ""

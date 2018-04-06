@@ -6,14 +6,15 @@
 # Andi Chandler <andi@gowling.com>, 2017-2018
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2014
+# Lindsay Smart <robertsonsmart+transifex@gmail.com>, 2018
 # Rhian G <rhianmarie@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-25 11:35+0000\n"
-"Last-Translator: Rhian G <rhianmarie@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-31 11:12+0000\n"
+"Last-Translator: Lindsay Smart <robertsonsmart+transifex@gmail.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4596,7 +4597,7 @@ msgid ""
 " are also used in the blacksmithy to build basic tools, and in the charcoal "
 "kiln for the production of coal. Smokeries use logs as fuel for smoking meat"
 " and fish."
-msgstr ""
+msgstr "Woodcutters fell the trees; foresters take care of the supply of trees. Logs are also used in the blacksmithy to build basic tools, and in the charcoal kiln for the production of coal. Smokeries use logs as fuel for smoking meat and fish."
 
 #. TRANSLATORS: Helptext for a ware: Log
 #: ../../data/tribes/wares/log/helptexts.lua:12
@@ -5857,7 +5858,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/charcoal_burner/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
-msgstr ""
+msgstr "Burns logs and clay to produce coal."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/frisians/farmer/helptexts.lua:3
@@ -5907,7 +5908,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/miner_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "Works deep in the mines to obtain coal, iron, gold or granite."
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/frisians/reed_farmer/helptexts.lua:3

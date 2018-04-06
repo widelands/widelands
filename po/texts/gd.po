@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 19:39+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-04-02 09:24+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -52,40 +52,44 @@ msgid ""
 "webpage: %s"
 msgstr "Gheibh thu barrachd fiosrachaidh air FOSS is an GPL air an làrach-lìn a leanas: %s"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Gheibh thu an teacsa slàn dhen cheadachas an-siud cho math ri barrachd fiosrachaidh air a fheallsanachd is a chiall laghail."
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Lìbhrigidh sinn faidhle teacsa sa bheil an GPL le Widelands fhèin cuideachd."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Air Linux, lorgaidh tu am faidhle air a bheil COPYING ann am freumh a’ bhun-tùis no na pacaid bìnearaidh aon-seasmhaich no sa phasgan stàlaidh (can ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Air Windows, lorgaidh tu am faidhle air a bheil COPYING.txt sa phasgan stàlaidh is bheir an t-innteart aig Widelands sa chlàr-taice tòiseachaidh ceangal dhan fhaidhle seo dhut."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "Air MacOS, lorgaidh tu am faidhle air a bheil COPYING san tasglann a luchdaich thu a-nuas on làrach-lìn."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:22
+msgid "This game comes as-is and without any warranty."
+msgstr "Gheibh thu an geama seo mar a tha e is gun bharantas sam bith."
+
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Gheibh thu an geama seo mar a tha e is gun bharantas sam bith. Gheibh thu barrachd fiosrachaidh is taice uainn air %1% (làrach-lìn, uicidh, bòrd-brath airson cheistean no taice coitchinne) no %2% (tracaiche nam bugaichean) agus %3% (eadar-theangachaidhean)."
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr "Gheibh thu barrachd fiosrachaidh is taice uainn air %1% (làrach-lìn, uicidh, bòrd-brath airson cheistean no taice coitchinne) no %2% (tracaiche nam bugaichean) agus %3% (eadar-theangachaidhean)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -605,7 +609,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "Feumaidh tu gaireal airson breigichean; cuaraidh no mèinn cloiche airson gaireal; feumaidh tu breigichean gus an togail. Thoir an aire nach ruith na breigichean ort!"
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester´s house, so you will not run out of logs."

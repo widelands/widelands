@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 12:43+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-30 07:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Arabic (http://www.transifex.com/widelands/widelands/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -33,11 +33,12 @@ msgid "No Artifacts"
 msgstr "لا أثار"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:55
+#, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
-"bug report on https://launchpad.net/widelands and specify your Widelands "
-"version and the map you tried to load."
-msgstr "ليس هناك آثار على هذه الخريطة. هذا ليس من المفترض أن يَحصُل. من فضلك إملأ ملف الخطأ على \"https://launchpad.net/widelands\" وحدد رقم نسخة اللعبة و أسم الخريطة التي حَاولت تحميلها."
+"bug report on %s and specify your Widelands version and the map you tried to"
+" load."
+msgstr ""
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"

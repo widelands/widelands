@@ -14,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-25 11:23+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-31 20:40+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -58,40 +58,44 @@ msgid ""
 "webpage: %s"
 msgstr "Vous pouvez trouver plus d'informations sur les logiciels libres et open source ou sur la licence publique générale GNU (GPL) en visitant la page suivante : %s"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Vous pourrez y trouver le texte complet de la licence ainsi que de plus amples informations au sujet de sa philosophie et ses implications juridiques."
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Nous livrons aussi la GPL en tant que document texte avec Widelands."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Sous GNU/Linux, vous pouvez trouver le fichier appelé COPYING soit à la racine de la source, du paquet binaire ou dans le répertoire d'installation (comme ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Dans Windows, vous pouvez trouver ce fichier appelé COPYING.txt dans le dossier de destination, et le menu de démarrage de Widelands contient un lien vers ce fichier."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "Sur MacOS, vous pouvez trouver le fichier appelé COPYING dans l'archive que vous avez téléchargé à partir du site Web."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:22
+msgid "This game comes as-is and without any warranty."
+msgstr "Ce jeux vient tel quel et sans aucune garantie."
+
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Ce jeu est livré tel-quel et sans aucune garantie. Pour plus d'information et de support vous pouvez nous trouver à %1% (Site web, Wiki, Forum pour les questions ou une assistance générale), %2% (Suivi des bugs), et %3% (Traductions)."
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr "Pour plus d'information et de support vous pouvez nous trouver à %1%(Site Web, Wiki, Forum pour des questions ou support général), %2%(Bugtracker), and %3%(Traductions)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"

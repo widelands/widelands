@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-27 01:06+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-04-02 08:09+0000\n"
 "Last-Translator: erimitis\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -229,7 +229,7 @@ msgstr "Όρθιος Λίθος"
 #. TRANSLATORS: This track is made of footprints in the snow
 #: ../../data/world/immovables/track_winter/init.lua:6
 msgid "Track"
-msgstr ""
+msgstr "Πατημασιές"
 
 #: ../../data/world/immovables/trees/alder/init.lua:20
 msgid "Alder (Sapling)"
@@ -314,27 +314,27 @@ msgstr "Σημύδα"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:13
 msgid "Cirrus Tree (Sapling)"
-msgstr ""
+msgstr "Ελικόδεντρο (Δενδρύλλιο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:37
 msgid "Cirrus Tree (Pole)"
-msgstr ""
+msgstr "Ελικόδεντρο (Πόλος)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:61
 msgid "Cirrus Tree (Mature)"
-msgstr ""
+msgstr "Ελικόδεντρο (Ώριμο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:85
 msgid "Cirrus Tree (Old)"
-msgstr ""
+msgstr "Ελικόδεντρο (Γέρικο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/cirrus/init.lua:87
 msgid "Cirrus Tree"
-msgstr ""
+msgstr "Ελικόδεντρο"
 
 #: ../../data/world/immovables/trees/deadtree1/init.lua:5
 #: ../../data/world/immovables/trees/deadtree2/init.lua:5
@@ -372,27 +372,27 @@ msgstr "Πεύκη"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:13
 msgid "Liana Tree (Sapling)"
-msgstr ""
+msgstr "Χαμόδεντρο (Δενδρύλλιο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:37
 msgid "Liana Tree (Pole)"
-msgstr ""
+msgstr "Χαμόδεντρο (Πόλος)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:61
 msgid "Liana Tree (Mature)"
-msgstr ""
+msgstr "Χαμόδεντρο (Ώριμο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:88
 msgid "Liana Tree (Old)"
-msgstr ""
+msgstr "Χαμόδεντρο (Γέρικο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/liana/init.lua:90
 msgid "Liana Tree"
-msgstr ""
+msgstr "Χαμόδεντρο"
 
 #: ../../data/world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
@@ -417,77 +417,77 @@ msgstr "Σφένδαμος"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:13
 msgid "Dark Mushroom Tree (Sapling)"
-msgstr ""
+msgstr "Σκούρο Μανιταρόδεντρο (Δενδρύλλιο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:37
 msgid "Dark Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Σκούρο Μανιταρόδεντρο (Πόλος)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:61
 msgid "Dark Mushroom Tree (Mature)"
-msgstr ""
+msgstr "Σκούρο Μανιταρόδεντρο (Ώριμο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:85
 msgid "Dark Mushroom Tree (Old)"
-msgstr ""
+msgstr "Σκούρο Μανιταρόδεντρο (Γέρικο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_dark/init.lua:87
 msgid "Dark Mushroom Tree"
-msgstr ""
+msgstr "Σκούρο Μανιταρόδεντρο"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:13
 msgid "Green Mushroom Tree (Sapling)"
-msgstr ""
+msgstr "Πράσινο Μανιταρόδεντρο (Δενδρύλλιο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:37
 msgid "Green Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Πράσινο Μανιταρόδεντρο (Πόλος)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:61
 msgid "Green Mushroom Tree (Mature)"
-msgstr ""
+msgstr "Πράσινο Μανιταρόδεντρο (Ώριμο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:85
 msgid "Green Mushroom Tree (Old)"
-msgstr ""
+msgstr "Πράσινο Μανιταρόδεντρο (Γέρικο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_green/init.lua:87
 msgid "Green Mushroom Tree"
-msgstr ""
+msgstr "Πράσινο Μανιταρόδεντρο"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:13
 msgid "Red Mushroom Tree (Sapling)"
-msgstr ""
+msgstr "Κόκκινο Μανιταρόδεντρο (Δενδρύλλιο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:37
 msgid "Red Mushroom Tree (Pole)"
-msgstr ""
+msgstr "Κόκκινο Μανιταρόδεντρο (Πόλος)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:61
 msgid "Red Mushroom Tree (Mature)"
-msgstr ""
+msgstr "Κόκκινο Μανιταρόδεντρο (Ώριμο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:88
 msgid "Red Mushroom Tree (Old)"
-msgstr ""
+msgstr "Κόκκινο Μανιταρόδεντρο (Γέρικο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/mushroom_red/init.lua:90
 msgid "Red Mushroom Tree"
-msgstr ""
+msgstr "Κόκκινο Μανιταρόδεντρο"
 
 #: ../../data/world/immovables/trees/oak/init.lua:12
 msgid "Oak (Sapling)"
@@ -511,23 +511,23 @@ msgstr "Βελανιδιά"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:12
 msgid "Borassus Palm (Sapling)"
-msgstr ""
+msgstr "Φοινικιά (Δενδρύλλιο)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:35
 msgid "Borassus Palm (Pole)"
-msgstr ""
+msgstr "Φοινικιά (Πόλος)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:58
 msgid "Borassus Palm (Mature)"
-msgstr ""
+msgstr "Φοινικιά (Ώριμη)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:81
 msgid "Borassus Palm (Old)"
-msgstr ""
+msgstr "Φοινικιά (Γέρικη)"
 
 #: ../../data/world/immovables/trees/palm_borassus/init.lua:82
 msgid "Borassus Palm"
-msgstr ""
+msgstr "Φοινικιά"
 
 #: ../../data/world/immovables/trees/palm_coconut/init.lua:12
 msgid "Coconut Palm (Sapling)"
@@ -591,23 +591,23 @@ msgstr "Ελαιοφοίνικας"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
-msgstr ""
+msgstr "Φοίνικας (Δενδρύλλιο)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:35
 msgid "Roystonea regia Palm (Pole)"
-msgstr ""
+msgstr "Φοίνικας (Πόλος)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:58
 msgid "Roystonea regia Palm (Mature)"
-msgstr ""
+msgstr "Φοίνικας (Ώριμος)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:81
 msgid "Roystonea regia Palm (Old)"
-msgstr ""
+msgstr "Φοίνικας (Γέρικος)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
 msgid "Roystonea regia Palm"
-msgstr ""
+msgstr "Φοίνικας"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
@@ -652,77 +652,77 @@ msgstr "Έλατο"
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:13
 msgid "Twine Tree (Sapling)"
-msgstr ""
+msgstr "Σπαγγόδεντρο (Δενδρύλλιο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:37
 msgid "Twine Tree (Pole)"
-msgstr ""
+msgstr "Σπαγγόδεντρο (Πόλος)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:61
 msgid "Twine Tree (Mature)"
-msgstr ""
+msgstr "Σπαγγόδεντρο (Ώριμο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:85
 msgid "Twine Tree (Old)"
-msgstr ""
+msgstr "Σπαγγόδεντρο (Γέρικο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:87
 msgid "Twine Tree"
-msgstr ""
+msgstr "Σπαγγόδεντρο"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:13
 msgid "Green Umbrella Tree (Sapling)"
-msgstr ""
+msgstr "Πράσινο Ομπρελόδεντρο (Δενδρύλλιο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:37
 msgid "Green Umbrella Tree (Pole)"
-msgstr ""
+msgstr "Πράσινο Ομπρελόδεντρο (Πόλος)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:61
 msgid "Green Umbrella Tree (Mature)"
-msgstr ""
+msgstr "Πράσινο Ομπρελόδεντρο (Ώριμο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:85
 msgid "Green Umbrella Tree (Old)"
-msgstr ""
+msgstr "Πράσινο Ομπρελόδεντρο (Γέρικο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_green/init.lua:87
 msgid "Green Umbrella Tree"
-msgstr ""
+msgstr "Πράσινο Ομπρελόδεντρο"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:13
 msgid "Red Umbrella Tree (Sapling)"
-msgstr ""
+msgstr "Κόκκινο Ομπρελόδεντρο (Δενδρύλλιο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:37
 msgid "Red Umbrella Tree (Pole)"
-msgstr ""
+msgstr "Κόκκινο Ομπρελόδεντρο (Πόλος)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:61
 msgid "Red Umbrella Tree (Mature)"
-msgstr ""
+msgstr "Κόκκινο Ομπρελόδεντρο (Ώριμο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:88
 msgid "Red Umbrella Tree (Old)"
-msgstr ""
+msgstr "Κόκκινο Ομπρελόδεντρο (Γέρικο)"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/umbrella_red/init.lua:90
 msgid "Red Umbrella Tree"
-msgstr ""
+msgstr "Κόκκινο Ομπρελόδεντρο"
 
 #: ../../data/world/init.lua:35
 msgid "Summer"
@@ -750,7 +750,7 @@ msgstr "Κομψοτεχνήματα"
 
 #: ../../data/world/init.lua:105
 msgid "These immovables are used by the win condition “Artifacts”."
-msgstr "Αυτά τα ακίνητα χρησιμοποιούνται από τη συνθήκη νίκης “Κομψοτεχνήματα”."
+msgstr "Αυτά τα αμετακίνητα χρησιμοποιούνται από το κριτήριο νίκης “Κομψοτεχνήματα”."
 
 #: ../../data/world/init.lua:118
 msgid "Plants"
@@ -913,7 +913,7 @@ msgstr "Λιβάδι 1"
 #: ../../data/world/terrains/init.lua:1191
 #: ../../data/world/terrains/init.lua:1210
 msgid "likes trees"
-msgstr "προτιμά δέντρα"
+msgstr "ευνοεί δέντρα"
 
 #: ../../data/world/terrains/init.lua:177
 msgid "Meadow 2"
@@ -1029,15 +1029,15 @@ msgstr "Τραχύ Έδαφος 4"
 
 #: ../../data/world/terrains/init.lua:592
 msgid "Igneous Rocks"
-msgstr "Ηφαιστειογενή Βράχια"
+msgstr "Πυριγενή Βράχια"
 
 #: ../../data/world/terrains/init.lua:726
 msgid "Lava Rocks 1"
-msgstr "Ηφαιστειακά Βράχια 1"
+msgstr "Ηφαιστειογενή Βράχια 1"
 
 #: ../../data/world/terrains/init.lua:743
 msgid "Lava Rocks 2"
-msgstr "Ηφαιστειακά Βράχια 2"
+msgstr "Ηφαιστειογενή Βράχια 2"
 
 #: ../../data/world/terrains/init.lua:782
 msgid "Tundra 1"
@@ -1065,11 +1065,11 @@ msgstr "Πάγος"
 
 #: ../../data/world/terrains/init.lua:1022
 msgid "Ice Floes 1"
-msgstr "Επιπλέον Πάγος 1"
+msgstr "Επιπλέων Πάγος 1"
 
 #: ../../data/world/terrains/init.lua:1039
 msgid "Ice Floes 2"
-msgstr "Επιπλέον Πάγος 2"
+msgstr "Επιπλέων Πάγος 2"
 
 #: ../../data/world/terrains/init.lua:1077
 msgid "Desert 4"

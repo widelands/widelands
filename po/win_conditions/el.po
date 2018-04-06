@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-26 23:50+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-04-01 09:46+0000\n"
 "Last-Translator: erimitis\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -33,11 +33,12 @@ msgid "No Artifacts"
 msgstr "Κανένα Κομψοτέχνημα"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:55
+#, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
-"bug report on https://launchpad.net/widelands and specify your Widelands "
-"version and the map you tried to load."
-msgstr "Δεν υπάρχουν κομψοτεχνήματα σε αυτόν τον χάρτη. Αυτό δεν έπρεπε να συμβεί. Παρακαλώ καταχωρείστε μια αναφορά σφάλματος στο https://launchpad.net/widelands και αναφέρετε την έκδοση του Widelands σας και τον χάρτη που προσπαθήσατε να φορτώσετε."
+"bug report on %s and specify your Widelands version and the map you tried to"
+" load."
+msgstr "Δεν υπάρχουν κομψοτεχνήματα σε αυτόν τον χάρτη. Αυτό δεν έπρεπε να συμβεί. Παρακαλώ καταχωρείστε μια αναφορά σφάλματος στο %s και αναφέρετε την έκδοση του Widelands σας και τον χάρτη που προσπαθήσατε να φορτώσετε."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
@@ -104,11 +105,11 @@ msgstr "Συλλέκτες"
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
-msgstr "Παίρνετε πόντους για πολύτιμα υλικά στις αποθήκες σας. Ο παίκτης με τον υψηλότερο αριθμό υλικών στο τέλος 4 ωρών, νικάει το παιχνίδι."
+msgstr "Παίρνετε βαθμούς για πολύτιμα υλικά στις αποθήκες σας. Ο παίκτης με τον υψηλότερο αριθμό υλικών στο τέλος 4 ωρών, νικάει το παιχνίδι."
 
 #: ../../data/scripting/win_conditions/collectors.lua:23
 msgid "Points"
-msgstr "Πόντοι"
+msgstr "Βαθμοί"
 
 #: ../../data/scripting/win_conditions/collectors.lua:126
 #, lua-format
@@ -125,7 +126,7 @@ msgstr "%1$s (%2$i Π) x %3$i = %4$i Π"
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Σύνολο: %i πόντος"
-msgstr[1] "Σύνολο: %i πόντοι"
+msgstr[1] "Σύνολο: %i βαθμοί"
 
 #: ../../data/scripting/win_conditions/collectors.lua:156
 msgid "The game has ended."
@@ -169,7 +170,7 @@ msgstr "Κατάσταση Ομάδας %d"
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
 msgstr[0] "Σύνολο Ομάδας: %i πόντος"
-msgstr[1] "Σύνολο Ομάδας: %i πόντοι"
+msgstr[1] "Σύνολο Ομάδας: %i βαθμοί"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"

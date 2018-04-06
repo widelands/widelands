@@ -13,9 +13,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 19:39+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-30 07:06+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -57,40 +57,44 @@ msgid ""
 "webpage: %s"
 msgstr "Weitere Informationen zu FOSS und GPL findest du auf folgender Webseite: %s"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Dort findest du den vollständigen Lizenztext sowie weitere Informationen zur dahinterstehenden Philosophie und der rechtlichen Bedeutung."
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Wir liefern die GPL auch als Textdokument zusammen mit Widelands selbst aus."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Unter Linux befindet sich die Datei COPYING im Stammverzeichnis des Quell- oder Binärpakets oder im Installationsverzeichnis (etwa „%1%“)."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Unter Windows befindet sich die Datei COPYING.txt im Installationsverzeichnis. Außerdem stellt der Startmenüeintrag für Widelands eine Verknüpfung zu dieser Datei bereit."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "Unter MacOS befindet sich die Datei COPYING im Archiv, das du von der Website heruntergeladen hast."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:22
+msgid "This game comes as-is and without any warranty."
+msgstr ""
+
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Dieses Spiel wird so, wie es ist, und ohne jegliche Garantie verbreitet. Für weitere Informationen und Hilfe sind wir auf folgenden Webseiten zu finden: %1% (Webseite, Wiki, Forum für Fragen und Diskussionen), %2% (Bugtracker) und %3% (Übersetzungen)."
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr ""
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"

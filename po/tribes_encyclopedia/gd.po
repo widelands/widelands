@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 19:39+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-04-02 10:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1489,7 +1489,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds fish as food for soldiers and miners."
-msgstr ""
+msgstr "Togaidh e iasg mar biadh airson nan saighdearan is mèinnearan."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:21
@@ -1503,13 +1503,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:16
 msgctxt "building"
 msgid "Produces advanced weapons and golden helmets for your soldiers."
-msgstr ""
+msgstr "Nì e airm adhartach is clogaidean òrach airson nan saighdearan agad."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:16
 msgctxt "building"
 msgid "Produces basic weapons and helmets for your soldiers."
-msgstr ""
+msgstr "Nì e airm is clogaidean bunasach airson nan saighdearan agad."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:3
@@ -1521,25 +1521,25 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "Fuineadair"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:13
 msgctxt "building"
 msgid "Bakes bread out of barley and water to feed miners and soldiers."
-msgstr ""
+msgstr "Fuinidh e aran à eòrna is uisge gus na mèinnearan is na saighdearan a bhiadhachadh."
 
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The bakery needs %s to produce one loaf of bread."
-msgstr ""
+msgstr "Bheir an taigh-fuine %s gus lofa arain a dhèanamh."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:16
 msgctxt "frisians_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Bheir e uidheamachd is oideachadh dha ghlas-laoich ach an dèid iad ’nan saighdearan."
 
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
@@ -1547,7 +1547,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks needs %s to recruit one soldier."
-msgstr ""
+msgstr "Bheir an taigh-feachd %s gus saighdear a thrusadh."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:3
@@ -1575,7 +1575,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The beekeeper pauses %s before going to work again."
-msgstr ""
+msgstr "Gabhaidh am beachlannair fois fad %s mus tòisich e air an obair a-rithist."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:3
@@ -1595,21 +1595,21 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:13
 msgctxt "building"
 msgid "Plants berry bushes in the surrounding area."
-msgstr ""
+msgstr "Cuiridh e preasan dhearcan mu thimcheall."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:18
 msgctxt "frisians_building"
 msgid ""
 "The berry farm needs free space within the work area to plant the bushes."
-msgstr ""
+msgstr "Bidh a’ chroit-dhearc feumach air rum shaor am broinn an raoin-obrach aice gus na preasan a chur ann."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The berry farmer pauses %s before going to work again."
-msgstr ""
+msgstr "Gabhaidh fear nan dearcan fois fad %s mus tòisich e air an obair a-rithist."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:3
@@ -1627,13 +1627,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:13
 msgctxt "building"
 msgid "Forges tools to equip new workers."
-msgstr ""
+msgstr "Nì e acainnean gus luchd-obrach ùr uidheamachadh."
 
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The blacksmith needs %s to produce one tool."
-msgstr ""
+msgstr "Bheir an gobha %s gus acainn a dhèanamh."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:3
@@ -1705,7 +1705,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:13
 msgctxt "building"
 msgid "Produces coal out of logs."
-msgstr ""
+msgstr "Nì e gual de dh’fhiodh."
 
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:23
 #, lua-format
@@ -5833,14 +5833,14 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/blacksmith/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Produces weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "Nì e airm is armachd airson saighdearan is acainnean airson an luchd-obrach."
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #: ../../data/tribes/workers/frisians/blacksmith_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid ""
 "Produces the best weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "Nì e na h-airm is armachd as fhearr airson saighdearan is acainnean airson an luchd-obrach."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/frisians/brewer/helptexts.lua:3
@@ -5958,7 +5958,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/seamstress/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Produces cloth and sews fur garments."
-msgstr ""
+msgstr "Nì e clò is fuaighidh e còtaichean-bèin."
 
 #. TRANSLATORS: Helptext for a worker: Master Seamstress
 #: ../../data/tribes/workers/frisians/seamstress_master/helptexts.lua:3

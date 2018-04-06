@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# Joe Hansen <joedalton2@yahoo.dk>, 2016-2017
+# Joe Hansen <joedalton2@yahoo.dk>, 2016-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-10-09 18:20+0000\n"
-"PO-Revision-Date: 2017-10-12 16:04+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-04-02 20:12+0000\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -186,6 +186,10 @@ msgstr " --xres=[...]         Bredde på vinduet i billedpunkter."
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]         Højde på vindet i billedpunkter."
 
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands
+#. textdomain
 #: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Indstillinger for den interne vindueshåndtering:"
@@ -243,7 +247,7 @@ msgstr " --help               Vis denne hjælpetekst"
 #: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
+"        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Fejlrapporter? Forslag? Se projektets hjemmeside:\n        https://launchpad.net/widelands\n\nHåber du nød dette spil!"
+msgstr "Fejlrapporter? Forslag? Se projektets hjemmeside:\n        https://wl.widelands.org/\n\nHåber du nød dette spil!"

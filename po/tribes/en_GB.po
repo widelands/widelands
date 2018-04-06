@@ -6,14 +6,15 @@
 # Andi Chandler <andi@gowling.com>, 2017
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# Lindsay Smart <robertsonsmart+transifex@gmail.com>, 2018
 # Rhian G <rhianmarie@gmail.com>, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-25 11:55+0000\n"
-"Last-Translator: Rhian G <rhianmarie@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-31 11:20+0000\n"
+"Last-Translator: Lindsay Smart <robertsonsmart+transifex@gmail.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -729,14 +730,14 @@ msgstr "No Coal"
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:79
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:87
 msgid "Main Coal Vein Exhausted"
-msgstr "Main Coal Vein Exhausted"
+msgstr "Main Coal Seam Exhausted"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:80
 msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
+msgstr "This coal mine’s main seam is exhausted. Expect strongly diminished returns on investment. You should consider dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -1494,7 +1495,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "This coal mine’s main seam is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
@@ -1514,7 +1515,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
+msgstr "This coal mine's main seam is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:7
@@ -1967,7 +1968,7 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "This coal mine’s main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
+msgstr "This coal mine's main seam is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
@@ -2156,7 +2157,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "This marble mine’s main vein is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
+msgstr "This marble mine's main vein is exhausted. Expect strongly diminished returns on investment. This mine can't be enhanced any further, so you should consider dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:7
@@ -2541,12 +2542,12 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:7
 msgctxt "frisians_building"
 msgid "Charcoal Kiln"
-msgstr ""
+msgstr "Charcoal Kiln"
 
 #. TRANSLATORS: Completed/Skipped/Did not start burning charcoal because ...
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:61
 msgid "burning charcoal"
-msgstr ""
+msgstr "burning charcoal"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:7
@@ -2579,20 +2580,20 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:7
 msgctxt "frisians_building"
 msgid "Coal Mine"
-msgstr ""
+msgstr "Coal Mine"
 
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:81
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "This coal mine's main seam is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:7
 msgctxt "frisians_building"
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "Deep Coal Mine"
 
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:89
 msgctxt "frisians_building"
@@ -2600,7 +2601,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "This coal mine's main seam is exhausted. Expect strongly diminished returns on investment. This mine can’t be enhanced any further, so you should consider dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:7
@@ -2693,7 +2694,7 @@ msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "This gold mine's main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:7
@@ -2707,7 +2708,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "This gold mine's main vein is exhausted. Expect strongly diminished returns on investment. This mine can't be enhanced any further, so you should consider dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:7
@@ -2745,7 +2746,7 @@ msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "This iron mine's main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:7
@@ -2759,7 +2760,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "This iron mine's main vein is exhausted. Expect strongly diminished returns on investment. This mine can't be enhanced any further, so you should consider dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:7
@@ -2851,7 +2852,7 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "This rock mine's main vein is exhausted. Expect strongly diminished returns on investment. You should consider enhancing, dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:7
@@ -2865,7 +2866,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "This rock mine's main vein is exhausted. Expect strongly diminished returns on investment. This mine can't be enhanced any further, so you should consider dismantling or destroying it."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:7
@@ -3339,13 +3340,13 @@ msgstr "Warehouse"
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/init.lua:7
 msgctxt "frisians_building"
 msgid "Headquarters"
-msgstr ""
+msgstr "Headquarters"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/port/init.lua:7
 msgctxt "frisians_building"
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/warehouse/init.lua:7
@@ -3363,7 +3364,7 @@ msgstr "Ashes"
 #: ../../data/tribes/immovables/barleyfield_harvested/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (harvested)"
-msgstr ""
+msgstr "Barley Field (harvested)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_medium/init.lua:7
@@ -3375,19 +3376,19 @@ msgstr ""
 #: ../../data/tribes/immovables/barleyfield_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (ripe)"
-msgstr ""
+msgstr "Barley Field (ripe)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_small/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (small)"
-msgstr ""
+msgstr "Barley Field (small)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (tiny)"
-msgstr ""
+msgstr "Barley Field (tiny)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:13
 msgid "Blueberry Bush (tiny)"
@@ -3667,37 +3668,37 @@ msgstr "Reed (tiny)"
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Coal Vein"
-msgstr ""
+msgstr "Resources: Coal Seam"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Main Coal Vein"
-msgstr ""
+msgstr "Resources: Main Coal Seam"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Gold Vein"
-msgstr ""
+msgstr "Resources: Gold Vein"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_gold2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Main Gold Vein"
-msgstr ""
+msgstr "Resources: Main Gold Vein"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron1/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Iron Vein"
-msgstr ""
+msgstr "Resources: Iron Vein"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_iron2/init.lua:7
 msgctxt "immovable"
 msgid "Resources: Main Iron Vein"
-msgstr ""
+msgstr "Resources: Main Iron Vein"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_none/init.lua:7
@@ -5163,7 +5164,7 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/charcoal_burner/init.lua:16
 msgctxt "frisians_worker"
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Charcoal Burner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:31
@@ -5223,19 +5224,19 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/reed_farmer/init.lua:31
 msgctxt "frisians_worker"
 msgid "Reed Farmer"
-msgstr ""
+msgstr "Reed Farmer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/reindeer/init.lua:18
 msgctxt "frisians_worker"
 msgid "Reindeer"
-msgstr ""
+msgstr "Reindeer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/reindeer_breeder/init.lua:16
 msgctxt "frisians_worker"
 msgid "Reindeer Breeder"
-msgstr ""
+msgstr "Reindeer Breeder"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/scout/init.lua:16
@@ -5295,4 +5296,4 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/woodcutter/init.lua:22
 msgctxt "frisians_worker"
 msgid "Woodcutter"
-msgstr ""
+msgstr "Woodcutter"

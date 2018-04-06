@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-28 01:56+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-04-06 09:00+0000\n"
 "Last-Translator: erimitis\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -38,13 +38,13 @@ msgstr "Επεκταθείτε βορειοανατολικά και φτιάξ�
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Expand north-east to the rocks"
-msgstr "Επεκταθείτε βορειοανατολικά προς τα βράχια."
+msgstr "Επεκταθείτε βορειοανατολικά προς τα βράχια"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:35
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "Φτιάξτε στρατιωτικά κτίρια (όπως φυλάκια ή προμαχώνες) για επέκταση της περιοχής σας."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:36
 msgid "Get to the rocks north-east from you and build a quarry there."
@@ -70,7 +70,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "Για να το κάνετε, βάλτε μια σημαία στην πλευρά του βουνού στα ανατολικά (αλλά σε ορεινό έδαφος, όχι σε ορεινό λιβάδι). Όταν κάνετε κλικ στη νέα σημαία, μπορείτε να στείλετε εκεί γεωλόγους. Επειδή η σημαία είναι σε βουνό, οι γεωλόγοι θα ψάξουν για ορυκτά, διαφορετικά θα ψάξουν για νερό. Μετά φτιάξτε ένα ορυχείο για τα δύο είδη πόρων που θα βρουν, επιλέγοντας να φτιαχτεί το κατάλληλο ορυχείο:"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "a bit of coal"
@@ -124,7 +124,7 @@ msgstr "Εφοδιάστε τους μεταλλωρύχους σας με φα�
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr "Φτιάξτε μια καλύβα κυνηγού, μια καλύβα κτηνοτρόφου και μια ταβέρνα"
+msgstr "Φτιάξτε μία καλύβα κυνηγού, μία καλύβα θηροτρόφου και μία ταβέρνα"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:64
 msgid "In order to work, your miners need food."
@@ -135,7 +135,7 @@ msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr "Ένας κυνηγός μπορεί να κυνηγήσει ζώα, ενώ ένας κτηνοτρόφος αποτρέπει την εξαφάνισή τους. Το κρέας μεταφέρεται ύστερα σε μια ταβέρνα, όπου μετατρέπεται σε γεύμα για τους μεταλλωρύχους σας."
+msgstr "Ένας κυνηγός μπορεί να κυνηγήσει ζώα, ενώ ένας θηροτρόφος αποτρέπει την εξαφάνισή τους. Το κρέας μεταφέρεται ύστερα σε μια ταβέρνα, όπου μετατρέπεται σε γεύμα για τους μεταλλωρύχους σας."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:65
 msgid ""
@@ -157,7 +157,7 @@ msgid ""
 "farms. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr "Άλλοι τρόποι παραγωγής τροφής (διαφορετικού τύπου) είναι οι ψαράδες και οι γεωργοί. Προτού γίνει φαγώσιμο, το σιτάρι από τα αγροκτήματα πρέπει να το επεξεργαστεί με νερό ένας φούρνος. Μπορείτε να αποκτήσετε νερό φτιάχνοντας ένα πηγάδι σε σημείο όπου οι γεωλόγοι σας έχουν βρει πηγή νερού."
+msgstr "Άλλοι τρόποι παραγωγής τροφής – διαφορετικού τύπου – είναι οι ψαράδες και οι γεωργοί. Προτού γίνει φαγώσιμο, το σιτάρι από τα αγροκτήματα πρέπει να το επεξεργαστεί με νερό ένας φούρνος. Μπορείτε να αποκτήσετε νερό φτιάχνοντας ένα πηγάδι σε σημείο όπου οι γεωλόγοι σας έχουν βρει πηγή νερού."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Refine your mined resources"
@@ -171,7 +171,7 @@ msgstr "Φτιάξτε ένα χυτήριο"
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr "Το μετάλλευμα σιδήρου που εξόρυξαν οι μεταλλωρύχοι σας δεν είναι ακόμη εύχρηστο, πρέπει προηγουμένως να λιώσει σε σίδηρο."
+msgstr "Το μετάλλευμα σιδήρου που εξόρυξαν οι μεταλλωρύχοι σας δεν είναι ακόμη εύχρηστο – πρέπει προηγουμένως να λιώσει σε σίδηρο."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance buildings and build a micro brewery"
@@ -213,20 +213,20 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Τέτοια κτίρια συνήθως έχουν μεγαλύτερες απαιτήσεις από ό,τι οι βασικές εκδοχές τους. Για παράδειγμα, τα βαθιά ορυχεία χρειάζονται κολατσιά αντί για μερίδες. Θα πρέπει να αναβαθμίσετε την ταβέρνα σας σε πανδοχείο, προκειμένου να παράγει κολατσιά από πίτες ΚΑΙ ένα δεύτερο είδος φαγητού (κρέας ή ψάρι) ΚΑΙ μπύρα."
+msgstr "Τέτοια κτίρια συνήθως έχουν μεγαλύτερες απαιτήσεις από ό,τι οι βασικές εκδοχές τους – για παράδειγμα, τα βαθιά ορυχεία χρειάζονται κολατσιά αντί για μερίδες. Θα πρέπει να αναβαθμίσετε την ταβέρνα σας σε πανδοχείο, προκειμένου να παράγει κολατσιά από πίτες ΚΑΙ ένα δεύτερο είδος φαγητού (κρέας ή ψάρι) ΚΑΙ μπύρα."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "Μπορείτε φυσικά να αναβαθμίσετε όλα τα ορυχεία σε βαθειά ορυχεία αμέσως μόλις έχετε τους εργάτες. Τα μεγαλύτερα ορυχεία λειτουργούν λίγο ταχύτερα, ενώ τα μικρότερα χρειάζονται φθηνότερο φαγητό. Επαφίεται σε εσάς το ποια στρατηγική προτιμάτε."
+msgstr "Μπορείτε φυσικά να αναβαθμίσετε όλα τα ορυχεία σε βαθειά ορυχεία αμέσως μόλις έχετε τους εργάτες – τα μεγαλύτερα ορυχεία λειτουργούν λίγο ταχύτερα, ενώ τα μικρότερα χρειάζονται φθηνότερο φαγητό. Επαφίεται σε εσάς το ποια στρατηγική προτιμάτε."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:103
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Φτιάξτε έναν πυρωτή ξύλων"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:102
 msgid ""
@@ -235,7 +235,7 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "Τα μεγαλύτερα και καλύτερα κτίρια – συμπεριλαμβανομένων των στρατιωτικών – απαιτούν καλύτερα οικοδομικά υλικά. Δεν μπορούν να κτιστούν από απλούς κορμούς – οι κορμοί πρέπει προηγουμένως να βελτιωθούν σε πυρόξυλα από έναν πυρωτή ξύλων. Πάντα να θυμάστε να φτιάχνετε έναν πυρωτή ξύλων πριν ξεμείνετε από πυρόξυλα, καθώς χωρίς αυτά δεν μπορείτε να επεκταθείτε."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid "Build a lime kiln and coal economy"
@@ -251,14 +251,14 @@ msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "Τα καλύτερα κτίρια μπορεί εκτός από πυρόξυλα να απαιτούν και άλλα βελτιωμένα υλικά. Ένα από αυτά είναι το τσιμέντο, το οποίο παράγεται από έναν ασβεστοποιό, με γρανίτη, νερό και άνθρακα."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "Απόκτηση νερού είναι εφικτή με το φτιάξιμο ενός πηγαδιού πάνω σε μια πηγή νερού, την οποία μπορούν να ανακαλύψουν οι γεωλόγοι σας, όταν τους στείλετε σε μια σημαία που δεν βρίσκεται πάνω σε βουνό."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
@@ -284,14 +284,14 @@ msgstr "Φτιάξτε μία ασβεστοκάμινο και ένα πηγά�
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:124
 msgid "Build a reed yard"
-msgstr "Φτιάξτε έναν καλαμώνα"
+msgstr "Φτιάξτε έναν καλαμόκηπο"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr "Το τρίτο υλικό που απαιτείται για βελτιωμένα κτίρια, είναι τα αχυροκάλαμα, που χρησιμοποιούνται στις σκεπές. Τα αχυροκάλαμα φυτεύονται από έναν κηπουρό γύρω από το κτίριό του, τον καλαμώνα."
+msgstr "Το τρίτο υλικό που απαιτείται για βελτιωμένα κτίρια, είναι τα αχυροκάλαμα, που χρησιμοποιούνται στις σκεπές. Τα αχυροκάλαμα φυτεύονται από έναν κηπουρό γύρω από το κτίριό του, τον καλαμόκηπο."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
@@ -388,7 +388,7 @@ msgstr "Ο Θρον κουνάει το κεφάλι του…"
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr "Και όμως ο πόλεμος συνεχίζεται. Περισσότεροι και περισσότεροι από τους αδερφούς και τις αδερφές μας τρέχουν μακριά από τον κτηνώδη πόλεμο που μαίνεται στην πρωτεύουσα κάτω από τα δέντρα."
+msgstr "Και όμως ο πόλεμος συνεχίζεται. Περισσότεροι και περισσότερες από τους αδερφούς και τις αδερφές μας τρέχουν μακριά από τον κτηνώδη πόλεμο που μαίνεται στην πρωτεύουσα κάτω από τα δέντρα."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:194
@@ -398,7 +398,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr ""
+msgstr "Οι ιστορίες που λένε για τις πράξεις του γένους μας είναι θλιβερές να τις ακούς. Έχω ξαγρυπνήσει για νύχτες ανήσυχος, πιο κουρασμένος από όσο πίστευα ποτέ ότι γίνεται. Κι όμως όταν κλείνω τα μάτια μου, βλέπω το φρούριο που έχτισε ο πατέρας μου να καταναλώνεται από φλόγες. Ο Θρόνος ανάμεσα στα δέντρα, το σύμβολο ενότητας και ειρήνης του γένους μας, έγινε η σφήνα που μας χωρίζει."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
@@ -410,7 +410,7 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "Σήμερα οι κυνηγοί μου έφεραν μπροστά μου άντρες, γυναίκες και μικρά παιδιά που είχαν κρυφτεί έξω στα δάση, προσπαθώντας να ξεφύγουν τον πόλεμο, το μίσος και την εκδίκηση που μαίνονται μεταξύ των φυλών, οι οποίες μάχονται αναμεταξύ τους όπως παλιότερα, όταν δεν ήμασταν παρά άγρια θηρία, υποκινούμενα από ένστικτα. Κανένας από τους αδερφούς μου δεν θα κερδίσει και διατηρήσει ποτέ τον έλεγχο του ξύλινου θρόνου, καμιά από τις φυλές δεν θα είναι αρκετά ισχυρή να υποτάξει τις άλλες. Δεν θα υπάρξει τέλος σε αυτήν τη σφαγή, εκτός… είναι αυτό; Όπως μου είπε ο πατέρας;"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:207
@@ -431,7 +431,7 @@ msgid ""
 "more than huts and barracks. I never intended to stay out here in the "
 "wilderness for so long – but I never thought my brothers would engage in "
 "this senseless battle for so long either."
-msgstr ""
+msgstr "Ο Μπόλντρεθ δείχνει όλο και πιο διαλυμένος όσο περνούν οι ημέρες. Η διάθεση των συντρόφων μου βυθίζεται καθώς πλησιάζει η κρύα εποχή, και ακόμη ζούμε σε απλές καλύβες και στρατώνες. Ποτέ δεν σχεδίασα να μείνουμε εδώ έξω στην ερημιά για τόσο πολύ – αλλά και ποτέ δεν σκέφτηκα ότι οι αδερφοί μου θα συμπλέκονταν σε αυτόν τον παράλογο εμφύλιο για τόσο πολύ."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:219
@@ -440,7 +440,7 @@ msgid ""
 " it’s time to give those who still live and think united a new home, "
 "replacing what is now lost to us? Until we can return to the place we once "
 "called our home…"
-msgstr ""
+msgstr "Ίσως είναι καιρός να κάνουμε τους εαυτούς μας να αισθανθούν λίγο πιο άνετοι εδώ. Ίσως είναι καιρός να δώσουμε σε αυτούς που ακόμη ζουν και σκέφτονται ενωμένοι ένα νέο σπίτι, αντικαθιστώντας ό,τι είναι πλέον χαμένο για μας; Μέχρι να μπορέσουμε να επιστρέψουμε στο μέρος που κάποτε καλούσαμε σπίτι μας…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:224
 msgid "Somebody Comes up to You"
@@ -455,7 +455,7 @@ msgstr "Ένας γέροντας λέει…"
 msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
-msgstr "Χαίρε, φύλαρχε. Είμαι ο Κάντρουκ και έχω δει πολλούς χειμώνες να περνούν. Σε παρακαλώ επέτρεψέ μου να σε βοηθήσω με τις συμβουλές μου σε αυτές τις σκοτεινές ημέρες."
+msgstr "Χαίρε, φύλαρχε. Είμαι ο Κάντρουκ και έχω δει πολλούς χειμώνες να περνούν. Σε παρακαλώ επίτρεψέ μου να σε βοηθήσω με τις συμβουλές μου σε αυτές τις σκοτεινές ημέρες."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:230

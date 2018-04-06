@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Juanjo, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Juanjo, 2018\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,11 +20,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Build a basic economy"
-msgstr ""
+msgstr "Construïu els edificis bàsics"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:29
 msgid "Supply All Basic Materials"
-msgstr ""
+msgstr "Subministreu materials bàsics"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:30
 msgid ""
@@ -31,11 +34,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand to the south"
-msgstr ""
+msgstr "Expandiu-vos cap al sud"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:37
 msgid "Expand Your Territory to Explore the South"
-msgstr ""
+msgstr "Expandiu el territori i exploreu el sud."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:38
 msgid ""
@@ -45,7 +48,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Train and recycle"
-msgstr ""
+msgstr "Entreneu i recicleu"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:45
 msgid "Recycle Weapons to Regain Metal"
@@ -68,11 +71,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:52
 msgid "Build an aqua farm"
-msgstr ""
+msgstr "Construïu una granja aqüícola"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:54
 msgid "Build an Aqua Farm to Start Producing Fish"
-msgstr ""
+msgstr "Construïu una granja aqüícola per produir peix"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:55
 msgid ""
@@ -83,7 +86,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Decide whether you want to cooperate with the Empire"
-msgstr ""
+msgstr "Decidiu si voleu cooperar amb l'Imperi"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
@@ -97,51 +100,51 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Troncs"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:65
 msgid "40 × Granite"
-msgstr ""
+msgstr "40 × Granit"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:66
 msgid "30 × Fish"
-msgstr ""
+msgstr "30 × Peix"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:67
 msgid "30 × Beer"
-msgstr ""
+msgstr "30 × Cervesa"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:68
 msgid "150 × Water"
-msgstr ""
+msgstr "150 × Aigua"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × Racions"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "10 × Meal"
-msgstr ""
+msgstr "10 × Àpats"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:71
 msgid "30 × Coal"
-msgstr ""
+msgstr "30 × Carbó"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:72
 msgid "40 × Iron Ore"
-msgstr ""
+msgstr "40 × Mineral de ferro"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:73
 msgid "20 × Iron"
-msgstr ""
+msgstr "20 × Ferro"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:74
 msgid "30 × Gold Ore"
-msgstr ""
+msgstr "30 × Mineral d'or"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:75
 msgid "10 × Gold"
-msgstr ""
+msgstr "10 × Or"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:76
 msgid ""
@@ -151,11 +154,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:81
 msgid "Defeat the Barbarians!"
-msgstr ""
+msgstr "Derroteu els bàrbars!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:83
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Derroteu els bàrbars"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:84
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
@@ -163,7 +166,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:89
 msgid "Defeat Murilius!"
-msgstr ""
+msgstr "Derroteu en Murilius!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:91
 msgid "Defeat the Arrogant Outpost of the Empire"
@@ -177,7 +180,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:97
 msgid "Defeat Murilius and the Barbarians!"
-msgstr ""
+msgstr "Derroteu en Murilius i els bàrbars!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:99
 msgid "Defeat the Barbarians and the Empire Colony"
@@ -193,13 +196,13 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:127
 msgid "Welcome Back!"
-msgstr ""
+msgstr "Benvingut de nou!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:119
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:128
 msgid "A new home"
-msgstr ""
+msgstr "Una nova llar"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:112
@@ -256,11 +259,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:141
 msgid "Go South"
-msgstr ""
+msgstr "Cap al sud"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:142
 msgid "Expand and conquer"
-msgstr ""
+msgstr "Expandiu i conqueriu"
 
 #. TRANSLATORS: Reebaud – Expand South
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:144
@@ -282,11 +285,11 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:170
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:180
 msgid "Metal Shortage"
-msgstr ""
+msgstr "Fa falta més metall"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:153
 msgid "We are out of metals"
-msgstr ""
+msgstr "No ens queden metalls"
 
 #. TRANSLATORS: Hauke – Train and recycle 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:155
@@ -306,7 +309,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:162
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:181
 msgid "Getting new metal"
-msgstr ""
+msgstr "Aconseguint metall nou"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:164
@@ -325,7 +328,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:171
 msgid "New metal"
-msgstr ""
+msgstr "Metall nou"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:173
@@ -355,11 +358,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:187
 msgid "Metal Production"
-msgstr ""
+msgstr "Producció de metall"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:188
 msgid "The mines are working"
-msgstr ""
+msgstr "Les mines funcionen"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:190
@@ -380,11 +383,11 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:196
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:206
 msgid "Fishing"
-msgstr ""
+msgstr "La pesca"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:197
 msgid "We need fish"
-msgstr ""
+msgstr "Necessitem peix"
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:199
@@ -406,7 +409,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:207
 msgid "We have fish again"
-msgstr ""
+msgstr "Tenim peix de nou"
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:209
@@ -426,11 +429,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "Recruiting"
-msgstr ""
+msgstr "Reclutant"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:216
 msgid "Our economy is complete"
-msgstr ""
+msgstr "Tenim una economia completa"
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:218
@@ -458,7 +461,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:277
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:287
 msgid "We Are Not Alone"
-msgstr ""
+msgstr "No estem sols"
 
 #. TRANSLATORS: "Greetings, strangers!". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -598,7 +601,7 @@ msgstr ""
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:297
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:307
 msgid "The Empire is Angry"
-msgstr ""
+msgstr "L'Imperi està enfadat"
 
 #. TRANSLATORS: "You are enemies of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -631,11 +634,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:316
 msgid "Two Enemies"
-msgstr ""
+msgstr "Dos enemics"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:317
 msgid "Defeat the enemies!"
-msgstr ""
+msgstr "Derroteu els enemics!"
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:319
@@ -654,7 +657,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:326
 msgid "The Empire is Grateful"
-msgstr ""
+msgstr "L'Imperi està agraït"
 
 #. TRANSLATORS: "Greetings, friend of the Empire!". DO NOT TRANSLATE. Reebaud
 #. doesn’t understand Latin. You can transliterate into non-Latin scripts
@@ -683,7 +686,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:337
 msgid "The Reward For Your Service"
-msgstr ""
+msgstr "La recompensa pel vostre servei"
 
 #. TRANSLATORS: "Friend of the Empire". DO NOT TRANSLATE. Reebaud doesn’t
 #. understand Latin. You can transliterate into non-Latin scripts though
@@ -710,11 +713,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:347
 msgid "Another Enemy"
-msgstr ""
+msgstr "Un altre enemic"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:348
 msgid "Defeat the Empire!"
-msgstr ""
+msgstr "Derroteu l'imperi!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:350
@@ -735,11 +738,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:357
 msgid "Victory"
-msgstr ""
+msgstr "Victòria"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:358
 msgid "Victory!"
-msgstr ""
+msgstr "Victòria!"
 
 #. TRANSLATORS: Reebaud – victory
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:360
@@ -750,15 +753,15 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:361
 msgid "Congratulations"
-msgstr ""
+msgstr "Felicitats"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "«%s»"
 
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Objectiu nou"
+msgstr[1] "Objectius nous"
