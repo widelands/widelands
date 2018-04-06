@@ -1471,8 +1471,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 
 	// counting fields with fish, doing it roughly every 10-th minute is enough
 	if (field.water_nearby > 0 && (field.fish_nearby == kUncalculated || (resource_count_now && gametime % 10 == 0))) {
-		//NOCOM
-		CheckStepWalkOn fisher_cstep(MOVECAPS_WALK, true); // Tfalse is here to allow one step into unwalkable terrain NOCOM change comment
+		CheckStepWalkOn fisher_cstep(MOVECAPS_WALK, true);
 		static std::vector<Coords> fish_fields_list; // pity this contains duplicities
 		fish_fields_list.clear();
 		map.find_reachable_fields(Area<FCoords>(field.coords, kProductionArea),
@@ -1483,13 +1482,10 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		counted_fields.clear();
 		field.fish_nearby = 0;
 		for (auto fish_coords : fish_fields_list) {
-			if (counted_fields.insert(fish_coords).second){
+			if (counted_fields.insert(fish_coords).second) {
 				field.fish_nearby += map.get_fcoords(fish_coords).field->get_resources_amount();
-				//printf("  DEBUG adding fish on  %3dx%3d: %2d\n", fish_coords.x, fish_coords.y, map.get_fcoords(fish_coords).field->get_resources_amount());
 			}
 		}
-
-	log ("DEBUG  fish: %3d, on position %3dx%3d\n", field.fish_nearby, field.coords.x, field.coords.y);
 	}
 
 	// Counting resources that do not change fast
@@ -2739,11 +2735,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
 
-					if (bf->fish_nearby <= 5) {
+					if (bf->fish_nearby <= 15) {
 						continue;
 					}
-
-					log ("DEBUG Considering fisher at %3dx%3d fishes nearby: %3d\n", bf->coords.x, bf->coords.y,bf->fish_nearby);
 
 					if (bo.new_building == BuildingNecessity::kForced) {
 						prio += 200;
@@ -3249,10 +3243,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 	if (best_building->is(BuildingAttribute::kRecruitment)) {
 		log("%2d: Building a recruitment site: %s\n", player_number(), best_building->name);
-	}
-
-	if (best_building->is(BuildingAttribute::kFisher)) { //NOCOM
-		log("DEBUG Building a fisher: on %3dx%3d\n",  proposed_coords.x, proposed_coords.y);
 	}
 
 	if (!(best_building->type == BuildingObserver::Type::kMilitarysite)) {
@@ -4382,9 +4372,6 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	    site.site->can_start_working() && !site.bo->is(BuildingAttribute::kSpaceConsumer) &&
 	    site.site->get_statistics_percent() < 5 &&
 	    ((game().get_gametime() - site.built_time) > 10 * 60 * 1000)) {
-
-		if (site.bo->is(BuildingAttribute::kFisher)) log ("DEBUG Dismantling fisher with productivity %d on %3dx%3d\n",
-		site.site->get_statistics_percent(), site.site->get_position().x, site.site->get_position().y);
 
 		site.bo->last_dismantle_time = game().get_gametime();
 		if (connected_to_wh) {
