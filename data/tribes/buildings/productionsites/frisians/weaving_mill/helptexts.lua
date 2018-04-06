@@ -1,6 +1,6 @@
 function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext("frisians_building", "Reindeer’s fur and roofing reed/ These items two make up the seed/ For ships of wood to chain the gales/ In sturdy, beautious, blowing sails!")
+   return pgettext("frisians_building", "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!")
 end
 
 function building_helptext_lore_author()

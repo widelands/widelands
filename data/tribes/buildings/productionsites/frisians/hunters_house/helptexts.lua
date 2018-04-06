@@ -1,11 +1,14 @@
+-- This include can be removed when all help texts have been defined.
+include "tribes/scripting/help/global_helptexts.lua"
+
 function building_helptext_lore()
-   -- TRANSLATORS: Lore helptext for a building
-   return pgettext("frisians_building", "You want to know why I don’t get more meat from oxen than from bunnies? Of course I do! But I like to eat up the surplus myself.")
+   -- TRANSLATORS#: Lore helptext for a building
+   return no_lore_text_yet()
 end
 
 function building_helptext_lore_author()
-   -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("frisians_building", "Hunters don’t consider it illogical that all kinds of animals produce the same amount of meat")
+   -- TRANSLATORS#: Lore author helptext for a building
+   return no_lore_author_text_yet()
 end
 
 function building_helptext_purpose()

@@ -8,7 +8,7 @@ end
 
 function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext("frisians_building", "Do not underestimate your blacksmiths’ influence on soldier training!")
+   return pgettext("frisians_building", "A blacksmith pointing out his influence on soldier training")
 end
 
 function building_helptext_purpose()
