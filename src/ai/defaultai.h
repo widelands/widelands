@@ -352,6 +352,8 @@ private:
 	uint16_t fishers_count_;
 	uint16_t bakeries_count_;
 
+	uint32_t first_iron_mine_built;
+
 	// for training sites per type
 	int16_t ts_finished_count_;
 	int16_t ts_in_const_count_;

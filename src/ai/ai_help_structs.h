@@ -678,10 +678,9 @@ struct ManagementData {
 	            uint32_t old_land,
 	            uint16_t attackers,
 	            int16_t trained_soldiers,
-	            int16_t latest_attackers,
-	            uint16_t conq_ws,
 	            uint16_t strength,
-	            uint32_t existing_ps);
+	            uint32_t existing_ps,
+	            uint32_t first_iron_mine_time);
 	void dump_data(PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;

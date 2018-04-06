@@ -565,33 +565,28 @@ void ManagementData::review(const uint32_t gametime,
                             const uint32_t old_land,
                             const uint16_t attackers,
                             const int16_t trained_soldiers,
-                            const int16_t latest_attackers,
-                            const uint16_t conq_ws,
                             const uint16_t strength,
-                            const uint32_t existing_ps) {
+                            const uint32_t existing_ps,
+                            const uint32_t first_iron_mine_time) {
 
-	const int16_t main_bonus =
-	   ((static_cast<int32_t>(land - old_land) > 0 && land > max_e_land * 5 / 6 && attackers > 0 &&
-	     trained_soldiers > 0 && latest_attackers > 0) ?
-	       kBonus :
-	       0);
+    // bonuses (1000 or nothing)
+    const uint16_t territory_bonus = (land > old_land || land > max_e_land) ? 1000 : 0;
+    const uint16_t iron_mine_bonus = (first_iron_mine_time < 2 * 60 * 60 * 1000) ? 1000 : 0;
+    const uint16_t attack_bonus = (attackers > 0) ? 1000 : 0;
+    const uint16_t training_bonus = (trained_soldiers > 0) ? 1000 : 0;
 
-	const int16_t land_delta_bonus = static_cast<int16_t>(land - old_land) * kLandDeltaMultiplier;
+	// scores (numbers dependant on performance)
+    const uint16_t land_score =  land / kCurrentLandDivider;
+    const uint16_t strength_score = std::min<uint16_t>(strength, 100) * kStrengthMultiplier;
+    const uint16_t attack_score = std::min<uint16_t>(attackers, 40) * 50;
+    const uint32_t ps_sites_score = kPSitesRatioMultiplier * std::pow(existing_ps, 3) / 1000 / 1000;
 
-	const uint32_t ps_sites_bonus = kPSitesRatioMultiplier * std::pow(existing_ps, 3) / 1000 / 1000;
+    score = territory_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score + strength_score + ps_sites_score + attack_score;
 
-	score = land / kCurrentLandDivider + land_delta_bonus + main_bonus +
-	        attackers * kAttackersMultiplier + ((attackers > 0) ? kAttackBonus : -kAttackBonus) +
-	        trained_soldiers * kTrainedSoldiersScore + kConqueredWhBonus * conq_ws +
-	        strength * kStrengthMultiplier + ps_sites_bonus - 500 * kPSitesRatioMultiplier;
-
-	log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l:%4d/%s/%4d, "
-	    "at:%4d(%3d),ts:%4d/%2d,cWH:%2d,str:%2d/%4d,ps:%4d/%4d)\n",
-	    pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
-	    land / kCurrentLandDivider, (main_bonus) ? "*" : " ", land_delta_bonus,
-	    attackers * kAttackersMultiplier, latest_attackers, trained_soldiers * kTrainedSoldiersScore,
-	    trained_soldiers, conq_ws, strength, strength * kStrengthMultiplier, existing_ps,
-	    ps_sites_bonus);
+    log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
+    pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
+    (territory_bonus)?"Y":"N", (iron_mine_bonus)?"Y":"N", (attack_bonus)?"Y":"N", (training_bonus)?"Y":"N",
+    land_score, strength_score, ps_sites_score, attack_score);
 
 	if (score < -10000 || score > 30000) {
 		log("%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,

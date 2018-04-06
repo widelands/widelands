@@ -108,6 +108,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
      next_mine_construction_due_(0),
      fishers_count_(0),
      bakeries_count_(),
+     first_iron_mine_built(50 * 60 * 60 * 1000),
      ts_finished_count_(0),
      ts_in_const_count_(0),
      ts_without_trainers_(0),
@@ -473,9 +474,9 @@ void DefaultAI::think() {
 				   gametime, player_number(), player_statistics.get_player_land(player_number()),
 				   player_statistics.get_enemies_max_land(),
 				   player_statistics.get_old60_player_land(player_number()), attackers_count_,
-				   soldier_trained_log.count(gametime), soldier_attacks_log.count(gametime),
-				   conquered_wh, player_statistics.get_player_power(player_number()),
-				   count_productionsites_without_buildings());
+				   soldier_trained_log.count(gametime), player_statistics.get_player_power(player_number()),
+				   count_productionsites_without_buildings(),
+				   first_iron_mine_built);
 				set_taskpool_task_time(
 				   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			}
@@ -6120,6 +6121,11 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			}
 
 			set_inputs_to_zero(mines_.back());
+
+			// Is this first mine?
+			if (bo.mines == iron_resource_id && gametime < first_iron_mine_built) {
+				first_iron_mine_built = gametime;
+			}
 
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 			militarysites.push_back(MilitarySiteObserver());
