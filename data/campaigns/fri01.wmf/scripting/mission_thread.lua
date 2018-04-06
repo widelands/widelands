@@ -183,7 +183,7 @@ function stormflood()
          end
          x = x + 1
       end
-      sleep(413)
+      sleep(flood_speed)
    end
 end
 
