@@ -312,7 +312,7 @@ training_1 = {
       _([[We are recruiting soldiers easily enough, but they are fairly weak. We must train our soldiers if they are to beat the enemy.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 1
-      _([[Soldiers are trained in basic attack, health and defense by a training camp. They can learn the finer points in a large training arena.]])),
+      _([[Soldiers are trained in basic attack, health and defense by a training camp. They can learn the finer points in a training arena.]])),
 }
 training_2 = {
    title =_ "Training Soldiers",
