@@ -160,22 +160,22 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	}
 
 	// We want to add player tribe's buildings in correct order
-	const TribeDescr& tribe = iplayer().player().tribe();
+	const Widelands::Player& player = iplayer().player();
+	const TribeDescr& tribe = player.tribe();
 	std::vector<DescriptionIndex> buildings_to_add;
+	// Add the player's own tribe's buildings.
 	for (DescriptionIndex index : tribe.buildings()) {
-		// Only add headquarter types that are owned by player.
+		// Only add allowed buildings or buildings that are owned by the player.
 		const BuildingDescr& descr = *tribe.get_building_descr(index);
-		const Widelands::Player& player = iplayer().player();
-		if (descr.is_buildable() || descr.is_enhanced() ||
+		if ((player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
 		    !player.get_building_statistics(index).empty()) {
 			buildings_to_add.push_back(index);
 		}
 	}
 
-	// We want to add other tribes' militarysites on the bottom
+	// We want to add other tribes' buildings on the bottom. Only add the ones that the player owns.
 	for (DescriptionIndex index = 0; index < nr_buildings; ++index) {
-		const BuildingDescr& descr = *parent.egbase().tribes().get_building_descr(index);
-		if (descr.type() == MapObjectType::MILITARYSITE && !tribe.has_building(index)) {
+		if (!tribe.has_building(index) && !player.get_building_statistics(index).empty()) {
 			buildings_to_add.push_back(index);
 		}
 	}
