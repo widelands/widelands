@@ -1472,7 +1472,7 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	// counting fields with fish, doing it roughly every 10-th minute is enough
 	if (field.water_nearby > 0 && (field.fish_nearby == kUncalculated || (resource_count_now && gametime % 10 == 0))) {
 		CheckStepWalkOn fisher_cstep(MOVECAPS_WALK, true);
-		static std::vector<Coords> fish_fields_list; // pity this contains duplicities
+		static std::vector<Coords> fish_fields_list; // pity this contains duplicates
 		fish_fields_list.clear();
 		map.find_reachable_fields(Area<FCoords>(field.coords, kProductionArea),
 			&fish_fields_list, fisher_cstep, FindNodeResource(world.get_resource("fish")));
