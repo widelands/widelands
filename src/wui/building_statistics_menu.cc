@@ -209,7 +209,7 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 }
 
 void BuildingStatisticsMenu::reset() {
-	update(); // In case a building got removed, make sure to deselect it first
+	update();  // In case a building got removed, make sure to deselect it first
 
 	const int last_selected_tab = tab_assignments_[tab_panel_.active()];
 
@@ -296,7 +296,8 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 
 	// Show the tabs that have buttons on them
 	int tab_counter = 0;
-	auto add_tab = [this, row_counters, &tab_counter, last_selected_tab](int tab_index, const std::string& name, const std::string& image, const std::string& descr) {
+	auto add_tab = [this, row_counters, &tab_counter, last_selected_tab](
+	   int tab_index, const std::string& name, const std::string& image, const std::string& descr) {
 		if (row_counters[tab_index] > 0) {
 			tab_panel_.add(name, g_gr->images().get(image), tabs_[tab_index], descr);
 			if (last_selected_tab == tab_index) {
@@ -307,11 +308,16 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 			++tab_counter;
 		}
 	};
-	add_tab(BuildingTab::Small, "building_stats_small", "images/wui/fieldaction/menu_tab_buildsmall.png", _("Small buildings"));
-	add_tab(BuildingTab::Medium, "building_stats_medium", "images/wui/fieldaction/menu_tab_buildmedium.png", _("Medium buildings"));
-	add_tab(BuildingTab::Big, "building_stats_big", "images/wui/fieldaction/menu_tab_buildbig.png", _("Big buildings"));
-	add_tab(BuildingTab::Mines, "building_stats_mines", "images/wui/fieldaction/menu_tab_buildmine.png", _("Mines"));
-	add_tab(BuildingTab::Ports, "building_stats_ports", "images/wui/fieldaction/menu_tab_buildport.png", _("Ports"));
+	add_tab(BuildingTab::Small, "building_stats_small",
+	        "images/wui/fieldaction/menu_tab_buildsmall.png", _("Small buildings"));
+	add_tab(BuildingTab::Medium, "building_stats_medium",
+	        "images/wui/fieldaction/menu_tab_buildmedium.png", _("Medium buildings"));
+	add_tab(BuildingTab::Big, "building_stats_big", "images/wui/fieldaction/menu_tab_buildbig.png",
+	        _("Big buildings"));
+	add_tab(BuildingTab::Mines, "building_stats_mines",
+	        "images/wui/fieldaction/menu_tab_buildmine.png", _("Mines"));
+	add_tab(BuildingTab::Ports, "building_stats_ports",
+	        "images/wui/fieldaction/menu_tab_buildport.png", _("Ports"));
 
 	update();
 }
@@ -320,10 +326,12 @@ bool BuildingStatisticsMenu::own_building_is_valid(Widelands::DescriptionIndex i
 	const Widelands::Player& player = iplayer().player();
 	const BuildingDescr& descr = *player.tribe().get_building_descr(index);
 	// Skip seafaring buildings if not needed
-	if (descr.needs_seafaring() && !iplayer().game().map().allows_seafaring() && player.get_building_statistics(index).empty()) {
+	if (descr.needs_seafaring() && !iplayer().game().map().allows_seafaring() &&
+	    player.get_building_statistics(index).empty()) {
 		return false;
 	}
-	if (descr.type() == MapObjectType::CONSTRUCTIONSITE || descr.type() == MapObjectType::DISMANTLESITE) {
+	if (descr.type() == MapObjectType::CONSTRUCTIONSITE ||
+	    descr.type() == MapObjectType::DISMANTLESITE) {
 		return false;
 	}
 	// Only add allowed buildings or buildings that are owned by the player.
@@ -334,11 +342,13 @@ bool BuildingStatisticsMenu::own_building_is_valid(Widelands::DescriptionIndex i
 	return false;
 }
 
-bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(Widelands::DescriptionIndex index) const {
+bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(
+   Widelands::DescriptionIndex index) const {
 	const Widelands::Player& player = iplayer().player();
 	if (!player.tribe().has_building(index) && !player.get_building_statistics(index).empty()) {
 		const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(index);
-		if (descr.type() == MapObjectType::CONSTRUCTIONSITE || descr.type() == MapObjectType::DISMANTLESITE) {
+		if (descr.type() == MapObjectType::CONSTRUCTIONSITE ||
+		    descr.type() == MapObjectType::DISMANTLESITE) {
 			return false;
 		}
 		return true;
@@ -363,7 +373,7 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 			return BuildingTab::Big;
 		default:
 			throw wexception(
-				"Building statictics: Found building without a size: %s", descr.name().c_str());
+			   "Building statictics: Found building without a size: %s", descr.name().c_str());
 		}
 	}
 	NEVER_HERE();
@@ -371,7 +381,8 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 
 void BuildingStatisticsMenu::update_building_list() {
 	for (DescriptionIndex index = 0; index < iplayer().egbase().tribes().nrbuildings(); ++index) {
-		const bool should_have_this_building = own_building_is_valid(index) || foreign_tribe_building_is_valid(index);
+		const bool should_have_this_building =
+		   own_building_is_valid(index) || foreign_tribe_building_is_valid(index);
 		const bool has_this_building = building_buttons_[index] != nullptr;
 		if (should_have_this_building != has_this_building) {
 			reset();
@@ -387,7 +398,9 @@ void BuildingStatisticsMenu::update_building_list() {
  * - Buildings owned, steps through constructionsites
  * - Productivity, steps though buildings with low productivity and stopped buildings
  */
-void BuildingStatisticsMenu::add_button(DescriptionIndex id, const BuildingDescr& descr, UI::Box* row) {
+void BuildingStatisticsMenu::add_button(DescriptionIndex id,
+                                        const BuildingDescr& descr,
+                                        UI::Box* row) {
 	UI::Box* button_box = new UI::Box(row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(
 	   button_box, (boost::format("building_button%s") % id).str(), 0, 0, kBuildGridCellWidth,
@@ -561,7 +574,8 @@ void BuildingStatisticsMenu::think() {
 	} else {
 		const int tab_height =
 		   35 +
-		   row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight) + kMargin;
+		   row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight) +
+		   kMargin;
 		tab_panel_.set_size(kWindowWidth, tab_height);
 		set_size(
 		   get_w(), tab_height + kMargin + navigation_panel_.get_h() + get_tborder() + get_bborder());
