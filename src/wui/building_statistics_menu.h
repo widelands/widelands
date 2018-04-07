@@ -67,7 +67,7 @@ private:
 
 	/// Initialize the buttons
 	void reset();
-	void init();
+	void init(int last_selected_tab = 0);
 
 	bool own_building_is_valid(Widelands::DescriptionIndex index) const;
 	bool foreign_tribe_building_is_valid(Widelands::DescriptionIndex index) const;
@@ -104,6 +104,7 @@ private:
 	UI::TabPanel tab_panel_;
 	UI::Box* tabs_[kNoOfBuildingTabs];
 	int row_counters_[kNoOfBuildingTabs];
+	int tab_assignments_[kNoOfBuildingTabs];
 
 	/// Button with building icon
 	std::vector<UI::Button*> building_buttons_;

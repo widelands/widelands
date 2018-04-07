@@ -211,6 +211,8 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 void BuildingStatisticsMenu::reset() {
 	update(); // In case a building got removed, make sure to deselect it first
 
+	const int last_selected_tab = tab_assignments_[tab_panel_.active()];
+
 	tab_panel_.remove_last_tab("building_stats_ports");
 	tab_panel_.remove_last_tab("building_stats_mines");
 	tab_panel_.remove_last_tab("building_stats_big");
@@ -233,16 +235,20 @@ void BuildingStatisticsMenu::reset() {
 		}
 	}
 
-	init();
+	init(last_selected_tab);
 
 	// Reset navigator
 	building_name_.set_text("");
-	if (building_buttons_[current_building_type_] != nullptr) {
-		set_current_building_type(current_building_type_);
+	if (has_selection_) {
+		if (building_buttons_[current_building_type_] != nullptr) {
+			set_current_building_type(current_building_type_);
+		} else {
+			has_selection_ = false;
+		}
 	}
 }
 
-void BuildingStatisticsMenu::init() {
+void BuildingStatisticsMenu::init(int last_selected_tab) {
 	// We want to add player tribe's buildings in correct order
 	const Widelands::Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
@@ -294,30 +300,50 @@ void BuildingStatisticsMenu::init() {
 		tab_panel_.add("building_stats_small",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildsmall.png"),
 							tabs_[BuildingTab::Small], _("Small buildings"));
+		if (last_selected_tab == BuildingTab::Small) {
+			tab_panel_.activate(tab_counter);
+		}
+		tab_assignments_[tab_counter] = BuildingTab::Small;
 		row_counters_[tab_counter++] = row_counters[BuildingTab::Small];
 	}
 	if (row_counters[BuildingTab::Medium] > 0) {
 		tab_panel_.add("building_stats_medium",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildmedium.png"),
 							tabs_[BuildingTab::Medium], _("Medium buildings"));
+		if (last_selected_tab == BuildingTab::Medium) {
+			tab_panel_.activate(tab_counter);
+		}
+		tab_assignments_[tab_counter] = BuildingTab::Medium;
 		row_counters_[tab_counter++] = row_counters[BuildingTab::Medium];
 	}
 	if (row_counters[BuildingTab::Big] > 0) {
 		tab_panel_.add("building_stats_big",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildbig.png"),
 							tabs_[BuildingTab::Big], _("Big buildings"));
+		if (last_selected_tab == BuildingTab::Big) {
+			tab_panel_.activate(tab_counter);
+		}
+		tab_assignments_[tab_counter] = BuildingTab::Big;
 		row_counters_[tab_counter++] = row_counters[BuildingTab::Big];
 	}
 	if (row_counters[BuildingTab::Mines] > 0) {
 		tab_panel_.add("building_stats_mines",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
 							tabs_[BuildingTab::Mines], _("Mines"));
+		if (last_selected_tab == BuildingTab::Mines) {
+			tab_panel_.activate(tab_counter);
+		}
+		tab_assignments_[tab_counter] = BuildingTab::Mines;
 		row_counters_[tab_counter++] = row_counters[BuildingTab::Mines];
 	}
 	if (row_counters[BuildingTab::Ports] > 0) {
 		tab_panel_.add("building_stats_ports",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
 							tabs_[BuildingTab::Ports], _("Ports"));
+		if (last_selected_tab == BuildingTab::Ports) {
+			tab_panel_.activate(tab_counter);
+		}
+		tab_assignments_[tab_counter] = BuildingTab::Ports;
 		row_counters_[tab_counter++] = row_counters[BuildingTab::Ports];
 	}
 
