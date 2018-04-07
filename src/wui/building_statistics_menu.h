@@ -66,9 +66,14 @@ private:
 	};
 
 	/// Initialize the buttons
+	void reset();
 	void init();
 
+	bool own_building_is_valid(Widelands::DescriptionIndex index) const;
+	bool foreign_tribe_building_is_valid(Widelands::DescriptionIndex index) const;
 	int find_tab_for_building(const Widelands::BuildingDescr& descr) const;
+
+	void update_building_list();
 
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.

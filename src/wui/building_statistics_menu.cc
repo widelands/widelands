@@ -208,6 +208,40 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 	productivity_labels_.clear();
 }
 
+void BuildingStatisticsMenu::reset() {
+	update(); // In case a building got removed, make sure to deselect it first
+
+	tab_panel_.remove_last_tab("building_stats_ports");
+	tab_panel_.remove_last_tab("building_stats_mines");
+	tab_panel_.remove_last_tab("building_stats_big");
+	tab_panel_.remove_last_tab("building_stats_medium");
+	tab_panel_.remove_last_tab("building_stats_small");
+
+	// Clean state if buildings disappear from list
+	const DescriptionIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
+	building_buttons_.clear();
+	building_buttons_.resize(nr_buildings);
+	owned_labels_.clear();
+	owned_labels_.resize(nr_buildings);
+	productivity_labels_.clear();
+	productivity_labels_.resize(nr_buildings);
+
+	// Ensure that defunct buttons disappear
+	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
+		if (tabs_[tab_index] != nullptr) {
+			tabs_[tab_index]->die();
+		}
+	}
+
+	init();
+
+	// Reset navigator
+	building_name_.set_text("");
+	if (building_buttons_[current_building_type_] != nullptr) {
+		set_current_building_type(current_building_type_);
+	}
+}
+
 void BuildingStatisticsMenu::init() {
 	// We want to add player tribe's buildings in correct order
 	const Widelands::Player& player = iplayer().player();
@@ -215,29 +249,15 @@ void BuildingStatisticsMenu::init() {
 	std::vector<DescriptionIndex> buildings_to_add[kNoOfBuildingTabs];
 	// Add the player's own tribe's buildings.
 	for (DescriptionIndex index : tribe.buildings()) {
-		const BuildingDescr& descr = *tribe.get_building_descr(index);
-		// Skip seafaring buildings if not needed
-		if (descr.needs_seafaring() && !iplayer().game().map().allows_seafaring() && player.get_building_statistics(index).empty()) {
-			continue;
-		}
-		if (descr.type() == MapObjectType::CONSTRUCTIONSITE || descr.type() == MapObjectType::DISMANTLESITE) {
-			continue;
-		}
-		// Only add allowed buildings or buildings that are owned by the player.
-		if ((player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
-		    !player.get_building_statistics(index).empty()) {
-			buildings_to_add[find_tab_for_building(descr)].push_back(index);
+		if (own_building_is_valid(index)) {
+			buildings_to_add[find_tab_for_building(*tribe.get_building_descr(index))].push_back(index);
 		}
 	}
 
 	// We want to add other tribes' buildings on the bottom. Only add the ones that the player owns.
 	for (DescriptionIndex index = 0; index < iplayer().egbase().tribes().nrbuildings(); ++index) {
-		if (!tribe.has_building(index) && !player.get_building_statistics(index).empty()) {
-			const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(index);
-			if (descr.type() == MapObjectType::CONSTRUCTIONSITE || descr.type() == MapObjectType::DISMANTLESITE) {
-				continue;
-			}
-			buildings_to_add[find_tab_for_building(descr)].push_back(index);
+		if (foreign_tribe_building_is_valid(index)) {
+			buildings_to_add[find_tab_for_building(*tribe.get_building_descr(index))].push_back(index);
 		}
 	}
 
@@ -247,10 +267,9 @@ void BuildingStatisticsMenu::init() {
 		tabs_[tab_index] = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
 		UI::Box* row = new UI::Box(tabs_[tab_index], 0, 0, UI::Box::Horizontal);
 		row_counters_[tab_index] = 0;
-		log("NOCOM tab: %d\n", tab_index);
+
 		for (const Widelands::DescriptionIndex id : buildings_to_add[tab_index]) {
 			const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(id);
-			log("NOCOM building: %s\n", descr.name().c_str());
 			add_button(id, descr, row);
 			++current_column;
 			if (current_column == 1) {
@@ -269,12 +288,6 @@ void BuildingStatisticsMenu::init() {
 	}
 
 	// Only show tabs with buttons in them
-	tab_panel_.remove_last_tab("building_stats_ports");
-	tab_panel_.remove_last_tab("building_stats_mines");
-	tab_panel_.remove_last_tab("building_stats_big");
-	tab_panel_.remove_last_tab("building_stats_medium");
-	tab_panel_.remove_last_tab("building_stats_small");
-
 	if (row_counters_[BuildingTab::Small] > 0) {
 		tab_panel_.add("building_stats_small",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildsmall.png"),
@@ -304,6 +317,36 @@ void BuildingStatisticsMenu::init() {
 	update();
 }
 
+bool BuildingStatisticsMenu::own_building_is_valid(Widelands::DescriptionIndex index) const {
+	const Widelands::Player& player = iplayer().player();
+	const BuildingDescr& descr = *player.tribe().get_building_descr(index);
+	// Skip seafaring buildings if not needed
+	if (descr.needs_seafaring() && !iplayer().game().map().allows_seafaring() && player.get_building_statistics(index).empty()) {
+		return false;
+	}
+	if (descr.type() == MapObjectType::CONSTRUCTIONSITE || descr.type() == MapObjectType::DISMANTLESITE) {
+		return false;
+	}
+	// Only add allowed buildings or buildings that are owned by the player.
+	if ((player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
+	    !player.get_building_statistics(index).empty()) {
+		return true;
+	}
+	return false;
+}
+
+bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(Widelands::DescriptionIndex index) const {
+	const Widelands::Player& player = iplayer().player();
+	if (!player.tribe().has_building(index) && !player.get_building_statistics(index).empty()) {
+		const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(index);
+		if (descr.type() == MapObjectType::CONSTRUCTIONSITE || descr.type() == MapObjectType::DISMANTLESITE) {
+			return false;
+		}
+		return true;
+	}
+	return false;
+}
+
 int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr& descr) const {
 	assert(descr.type() != MapObjectType::CONSTRUCTIONSITE);
 	assert(descr.type() != MapObjectType::DISMANTLESITE);
@@ -327,6 +370,17 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 	NEVER_HERE();
 }
 
+void BuildingStatisticsMenu::update_building_list() {
+	for (DescriptionIndex index = 0; index < iplayer().egbase().tribes().nrbuildings(); ++index) {
+		const bool should_have_this_building = own_building_is_valid(index) || foreign_tribe_building_is_valid(index);
+		const bool has_this_building = building_buttons_[index] != nullptr;
+		if (should_have_this_building != has_this_building) {
+			reset();
+			return;
+		}
+	}
+}
+
 /**
  * Adds 3 buttons per building type.
  *
@@ -334,9 +388,7 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
  * - Buildings owned, steps through constructionsites
  * - Productivity, steps though buildings with low productivity and stopped buildings
  */
-void BuildingStatisticsMenu::add_button(
-   DescriptionIndex id, const BuildingDescr& descr, UI::Box* row) {
-
+void BuildingStatisticsMenu::add_button(DescriptionIndex id, const BuildingDescr& descr, UI::Box* row) {
 	UI::Box* button_box = new UI::Box(row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(
 	   button_box, (boost::format("building_button%s") % id).str(), 0, 0, kBuildGridCellWidth,
@@ -493,6 +545,17 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
  * Update this statistic
  */
 void BuildingStatisticsMenu::think() {
+	// Update statistics
+	const int32_t gametime = iplayer().game().get_gametime();
+
+	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
+		update_building_list();
+		update();
+		lastupdate_ = gametime;
+	}
+	// Make sure we don't have a delay with displaying labels when we restore the window.
+	was_minimized_ = is_minimal();
+
 	// Adjust height to current tab
 	if (is_minimal()) {
 		tab_panel_.set_size(0, 0);
@@ -506,16 +569,6 @@ void BuildingStatisticsMenu::think() {
 		   get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
 		navigation_panel_.set_pos(Vector2i(0, tab_height + kMargin));
 	}
-
-	// Update statistics
-	const int32_t gametime = iplayer().game().get_gametime();
-
-	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
-		update();
-		lastupdate_ = gametime;
-	}
-	// Make sure we don't have a delay with displaying labels when we restore the window.
-	was_minimized_ = is_minimal();
 }
 
 /*
