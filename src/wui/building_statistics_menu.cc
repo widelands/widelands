@@ -39,9 +39,7 @@ constexpr int kButtonHeight = 20;
 constexpr int kButtonRowHeight = kButtonHeight + kMargin;
 constexpr int kLabelHeight = 18;
 constexpr int kLabelFontSize = 12;
-constexpr int kTabHeight = 35 + 5 * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
-constexpr int32_t kWindowHeight = kTabHeight + kMargin + 4 * kButtonRowHeight;
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
 
@@ -63,7 +61,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                       "building_statistics",
                       &registry,
                       kWindowWidth,
-                      kWindowHeight,
+                      100,
                       _("Building Statistics")),
      tab_panel_(this, g_gr->images().get("images/ui_basic/but1.png")),
      navigation_panel_(this, 0, 0, kWindowWidth, 4 * kButtonRowHeight),
