@@ -262,20 +262,21 @@ void BuildingStatisticsMenu::init() {
 	}
 
 	// Now create the tab contents and add the building buttons
+	int row_counters[kNoOfBuildingTabs];
 	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
 		int current_column = 0;
 		tabs_[tab_index] = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
 		UI::Box* row = new UI::Box(tabs_[tab_index], 0, 0, UI::Box::Horizontal);
-		row_counters_[tab_index] = 0;
+		row_counters[tab_index] = 0;
 
 		for (const Widelands::DescriptionIndex id : buildings_to_add[tab_index]) {
 			const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(id);
 			add_button(id, descr, row);
 			++current_column;
 			if (current_column == 1) {
-				++row_counters_[tab_index];
+				++row_counters[tab_index];
 			} else if (current_column == kColumns) {
-				tabs_[tab_index]->add(row);
+				tabs_[tab_index]->add(row, UI::Box::Resizing::kFullSize);
 				tabs_[tab_index]->add_space(6);
 				row = new UI::Box(tabs_[tab_index], 0, 0, UI::Box::Horizontal);
 				current_column = 0;
@@ -283,35 +284,41 @@ void BuildingStatisticsMenu::init() {
 		}
 		// Add final row
 		if (current_column != 0) {
-			tabs_[tab_index]->add(row);
+			tabs_[tab_index]->add(row, UI::Box::Resizing::kFullSize);
 		}
 	}
 
 	// Only show tabs with buttons in them
-	if (row_counters_[BuildingTab::Small] > 0) {
+	int tab_counter = 0;
+	if (row_counters[BuildingTab::Small] > 0) {
 		tab_panel_.add("building_stats_small",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildsmall.png"),
 							tabs_[BuildingTab::Small], _("Small buildings"));
+		row_counters_[tab_counter++] = row_counters[BuildingTab::Small];
 	}
-	if (row_counters_[BuildingTab::Medium] > 0) {
+	if (row_counters[BuildingTab::Medium] > 0) {
 		tab_panel_.add("building_stats_medium",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildmedium.png"),
 							tabs_[BuildingTab::Medium], _("Medium buildings"));
+		row_counters_[tab_counter++] = row_counters[BuildingTab::Medium];
 	}
-	if (row_counters_[BuildingTab::Big] > 0) {
+	if (row_counters[BuildingTab::Big] > 0) {
 		tab_panel_.add("building_stats_big",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildbig.png"),
 							tabs_[BuildingTab::Big], _("Big buildings"));
+		row_counters_[tab_counter++] = row_counters[BuildingTab::Big];
 	}
-	if (row_counters_[BuildingTab::Mines] > 0) {
+	if (row_counters[BuildingTab::Mines] > 0) {
 		tab_panel_.add("building_stats_mines",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
 							tabs_[BuildingTab::Mines], _("Mines"));
+		row_counters_[tab_counter++] = row_counters[BuildingTab::Mines];
 	}
-	if (row_counters_[BuildingTab::Ports] > 0) {
+	if (row_counters[BuildingTab::Ports] > 0) {
 		tab_panel_.add("building_stats_ports",
 							g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
 							tabs_[BuildingTab::Ports], _("Ports"));
+		row_counters_[tab_counter++] = row_counters[BuildingTab::Ports];
 	}
 
 	update();
@@ -560,13 +567,12 @@ void BuildingStatisticsMenu::think() {
 	if (is_minimal()) {
 		tab_panel_.set_size(0, 0);
 	} else {
-		int tab_height =
+		const int tab_height =
 		   35 +
-		   row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
-		tab_height +=100; // NOCOM height calculation is buggy
+		   row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight) + kMargin;
 		tab_panel_.set_size(kWindowWidth, tab_height);
 		set_size(
-		   get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());
+		   get_w(), tab_height + kMargin + navigation_panel_.get_h() + get_tborder() + get_bborder());
 		navigation_panel_.set_pos(Vector2i(0, tab_height + kMargin));
 	}
 }
