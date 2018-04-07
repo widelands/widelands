@@ -46,6 +46,8 @@ struct BuildingStatisticsMenu : public UI::UniqueWindow {
 	~BuildingStatisticsMenu() override;
 
 	void think() override;
+
+	/// Update state of current building buttons
 	void update();
 
 private:
@@ -69,10 +71,14 @@ private:
 	void reset();
 	void init(int last_selected_tab = 0);
 
+	/// Whether a building that is used by the player's tribe should be added
 	bool own_building_is_valid(Widelands::DescriptionIndex index) const;
+	/// Whether a building that isn't used by the player's tribe should be added
 	bool foreign_tribe_building_is_valid(Widelands::DescriptionIndex index) const;
+	/// Determine which tab a building button should end up on, according to building size etc.
 	int find_tab_for_building(const Widelands::BuildingDescr& descr) const;
 
+	/// If the buildings that should be shown have changes, update the list and reinitialize
 	void update_building_list();
 
 	/// Adds a button for the building type belonging to the id and descr to the tab.
@@ -103,7 +109,9 @@ private:
 	/// UI tabs
 	UI::TabPanel tab_panel_;
 	UI::Box* tabs_[kNoOfBuildingTabs];
+	/// How many button rows each tab has
 	int row_counters_[kNoOfBuildingTabs];
+	/// We can have gaps in the tab sequence, so we need to map the indices for remembering the last selected tab
 	int tab_assignments_[kNoOfBuildingTabs];
 
 	/// Button with building icon
