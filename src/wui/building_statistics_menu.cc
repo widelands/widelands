@@ -294,58 +294,24 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 		}
 	}
 
-	// Only show tabs with buttons in them
+	// Show the tabs that have buttons on them
 	int tab_counter = 0;
-	if (row_counters[BuildingTab::Small] > 0) {
-		tab_panel_.add("building_stats_small",
-							g_gr->images().get("images/wui/fieldaction/menu_tab_buildsmall.png"),
-							tabs_[BuildingTab::Small], _("Small buildings"));
-		if (last_selected_tab == BuildingTab::Small) {
-			tab_panel_.activate(tab_counter);
+	auto add_tab = [this, row_counters, &tab_counter, last_selected_tab](int tab_index, const std::string& name, const std::string& image, const std::string& descr) {
+		if (row_counters[tab_index] > 0) {
+			tab_panel_.add(name, g_gr->images().get(image), tabs_[tab_index], descr);
+			if (last_selected_tab == tab_index) {
+				tab_panel_.activate(tab_counter);
+			}
+			tab_assignments_[tab_counter] = tab_index;
+			row_counters_[tab_counter] = row_counters[tab_index];
+			++tab_counter;
 		}
-		tab_assignments_[tab_counter] = BuildingTab::Small;
-		row_counters_[tab_counter++] = row_counters[BuildingTab::Small];
-	}
-	if (row_counters[BuildingTab::Medium] > 0) {
-		tab_panel_.add("building_stats_medium",
-							g_gr->images().get("images/wui/fieldaction/menu_tab_buildmedium.png"),
-							tabs_[BuildingTab::Medium], _("Medium buildings"));
-		if (last_selected_tab == BuildingTab::Medium) {
-			tab_panel_.activate(tab_counter);
-		}
-		tab_assignments_[tab_counter] = BuildingTab::Medium;
-		row_counters_[tab_counter++] = row_counters[BuildingTab::Medium];
-	}
-	if (row_counters[BuildingTab::Big] > 0) {
-		tab_panel_.add("building_stats_big",
-							g_gr->images().get("images/wui/fieldaction/menu_tab_buildbig.png"),
-							tabs_[BuildingTab::Big], _("Big buildings"));
-		if (last_selected_tab == BuildingTab::Big) {
-			tab_panel_.activate(tab_counter);
-		}
-		tab_assignments_[tab_counter] = BuildingTab::Big;
-		row_counters_[tab_counter++] = row_counters[BuildingTab::Big];
-	}
-	if (row_counters[BuildingTab::Mines] > 0) {
-		tab_panel_.add("building_stats_mines",
-							g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
-							tabs_[BuildingTab::Mines], _("Mines"));
-		if (last_selected_tab == BuildingTab::Mines) {
-			tab_panel_.activate(tab_counter);
-		}
-		tab_assignments_[tab_counter] = BuildingTab::Mines;
-		row_counters_[tab_counter++] = row_counters[BuildingTab::Mines];
-	}
-	if (row_counters[BuildingTab::Ports] > 0) {
-		tab_panel_.add("building_stats_ports",
-							g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
-							tabs_[BuildingTab::Ports], _("Ports"));
-		if (last_selected_tab == BuildingTab::Ports) {
-			tab_panel_.activate(tab_counter);
-		}
-		tab_assignments_[tab_counter] = BuildingTab::Ports;
-		row_counters_[tab_counter++] = row_counters[BuildingTab::Ports];
-	}
+	};
+	add_tab(BuildingTab::Small, "building_stats_small", "images/wui/fieldaction/menu_tab_buildsmall.png", _("Small buildings"));
+	add_tab(BuildingTab::Medium, "building_stats_medium", "images/wui/fieldaction/menu_tab_buildmedium.png", _("Medium buildings"));
+	add_tab(BuildingTab::Big, "building_stats_big", "images/wui/fieldaction/menu_tab_buildbig.png", _("Big buildings"));
+	add_tab(BuildingTab::Mines, "building_stats_mines", "images/wui/fieldaction/menu_tab_buildmine.png", _("Mines"));
+	add_tab(BuildingTab::Ports, "building_stats_ports", "images/wui/fieldaction/menu_tab_buildport.png", _("Ports"));
 
 	update();
 }
