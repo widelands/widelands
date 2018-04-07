@@ -120,33 +120,10 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      low_production_(33),
      has_selection_(false) {
 
-	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		tabs_[i] = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
-	}
-
-	tab_panel_.add("building_stats_small",
-	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildsmall.png"),
-	               tabs_[BuildingTab::Small], _("Small buildings"));
-	tab_panel_.add("building_stats_medium",
-	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildmedium.png"),
-	               tabs_[BuildingTab::Medium], _("Medium buildings"));
-	tab_panel_.add("building_stats_big",
-	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildbig.png"),
-	               tabs_[BuildingTab::Big], _("Big buildings"));
-	tab_panel_.add("building_stats_mines",
-	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
-	               tabs_[BuildingTab::Mines], _("Mines"));
-
-	tab_panel_.add("building_stats_ports",
-	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
-	               tabs_[BuildingTab::Ports], _("Ports"));
-
 	const DescriptionIndex nr_buildings = parent.egbase().tribes().nrbuildings();
 	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
-
-	init();
 
 	set_label_font(&owned_label_);
 	set_label_font(&construction_label_);
@@ -222,7 +199,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	unproductive_percent_.cancel.connect(
 	   boost::bind(&BuildingStatisticsMenu::low_production_reset_focus, boost::ref(*this)));
 
-	update();
+	init();
 }
 
 BuildingStatisticsMenu::~BuildingStatisticsMenu() {
@@ -232,96 +209,122 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 }
 
 void BuildingStatisticsMenu::init() {
-	// Only show the ports tab for seafaring maps
-	// Update for seafaring NOCOM what if we already have a port?
-	const bool allows_seafaring = iplayer().game().map().allows_seafaring();
-	if (!allows_seafaring && tab_panel_.active() == BuildingTab::Ports) {
-		tab_panel_.activate(0);
-	}
-	tabs_[BuildingTab::Ports]->set_visible(allows_seafaring);
-
-	// Column counters
-	int columns[kNoOfBuildingTabs] = {0, 0, 0, 0, 0};
-
-	// Row containers
-	UI::Box* rows[kNoOfBuildingTabs];
-	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		row_counters_[i] = 0;
-		rows[i] = new UI::Box(tabs_[i], 0, 0, UI::Box::Horizontal);
-	}
-
 	// We want to add player tribe's buildings in correct order
 	const Widelands::Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
-	std::vector<DescriptionIndex> buildings_to_add;
+	std::vector<DescriptionIndex> buildings_to_add[kNoOfBuildingTabs];
 	// Add the player's own tribe's buildings.
 	for (DescriptionIndex index : tribe.buildings()) {
-		// Only add allowed buildings or buildings that are owned by the player.
 		const BuildingDescr& descr = *tribe.get_building_descr(index);
+		// Skip seafaring buildings if not needed
+		if (descr.needs_seafaring() && !iplayer().game().map().allows_seafaring() && player.get_building_statistics(index).empty()) {
+			continue;
+		}
+		if (descr.type() == MapObjectType::CONSTRUCTIONSITE || descr.type() == MapObjectType::DISMANTLESITE) {
+			continue;
+		}
+		// Only add allowed buildings or buildings that are owned by the player.
 		if ((player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
 		    !player.get_building_statistics(index).empty()) {
-			buildings_to_add.push_back(index);
+			buildings_to_add[find_tab_for_building(descr)].push_back(index);
 		}
 	}
 
 	// We want to add other tribes' buildings on the bottom. Only add the ones that the player owns.
 	for (DescriptionIndex index = 0; index < iplayer().egbase().tribes().nrbuildings(); ++index) {
 		if (!tribe.has_building(index) && !player.get_building_statistics(index).empty()) {
-			buildings_to_add.push_back(index);
+			const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(index);
+			if (descr.type() == MapObjectType::CONSTRUCTIONSITE || descr.type() == MapObjectType::DISMANTLESITE) {
+				continue;
+			}
+			buildings_to_add[find_tab_for_building(descr)].push_back(index);
 		}
 	}
 
-	for (DescriptionIndex id : buildings_to_add) {
-		const BuildingDescr& descr = *tribe.get_building_descr(id);
-
-		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
-		    descr.type() != MapObjectType::DISMANTLESITE) {
-			if (descr.get_ismine()) {
-				if (add_button(id, descr, BuildingTab::Mines, *rows[BuildingTab::Mines],
-				               &columns[BuildingTab::Mines])) {
-					rows[BuildingTab::Mines] =
-					   new UI::Box(tabs_[BuildingTab::Mines], 0, 0, UI::Box::Horizontal);
-				}
-			} else if (descr.get_isport()) {
-				if (add_button(id, descr, BuildingTab::Ports, *rows[BuildingTab::Ports],
-				               &columns[BuildingTab::Ports])) {
-					rows[BuildingTab::Ports] =
-					   new UI::Box(tabs_[BuildingTab::Ports], 0, 0, UI::Box::Horizontal);
-				}
-			} else {
-				switch (descr.get_size()) {
-				case BaseImmovable::SMALL:
-					if (add_button(id, descr, BuildingTab::Small, *rows[BuildingTab::Small],
-					               &columns[BuildingTab::Small])) {
-						rows[BuildingTab::Small] =
-						   new UI::Box(tabs_[BuildingTab::Small], 0, 0, UI::Box::Horizontal);
-					}
-					break;
-				case BaseImmovable::MEDIUM:
-					if (add_button(id, descr, BuildingTab::Medium, *rows[BuildingTab::Medium],
-					               &columns[BuildingTab::Medium])) {
-						rows[BuildingTab::Medium] =
-						   new UI::Box(tabs_[BuildingTab::Medium], 0, 0, UI::Box::Horizontal);
-					}
-					break;
-				case BaseImmovable::BIG:
-					if (add_button(id, descr, BuildingTab::Big, *rows[BuildingTab::Big],
-					               &columns[BuildingTab::Big])) {
-						rows[BuildingTab::Big] =
-						   new UI::Box(tabs_[BuildingTab::Big], 0, 0, UI::Box::Horizontal);
-					}
-					break;
-				default:
-					throw wexception(
-					   "Building statictics: Found building without a size: %s", descr.name().c_str());
-				}
+	// Now create the tab contents and add the building buttons
+	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
+		int current_column = 0;
+		tabs_[tab_index] = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
+		UI::Box* row = new UI::Box(tabs_[tab_index], 0, 0, UI::Box::Horizontal);
+		row_counters_[tab_index] = 0;
+		log("NOCOM tab: %d\n", tab_index);
+		for (const Widelands::DescriptionIndex id : buildings_to_add[tab_index]) {
+			const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(id);
+			log("NOCOM building: %s\n", descr.name().c_str());
+			add_button(id, descr, row);
+			++current_column;
+			if (current_column == 1) {
+				++row_counters_[tab_index];
+			} else if (current_column == kColumns) {
+				tabs_[tab_index]->add(row);
+				tabs_[tab_index]->add_space(6);
+				row = new UI::Box(tabs_[tab_index], 0, 0, UI::Box::Horizontal);
+				current_column = 0;
 			}
 		}
+		// Add final row
+		if (current_column != 0) {
+			tabs_[tab_index]->add(row);
+		}
 	}
 
-	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		tabs_[i]->add(rows[i]);
+	// Only show tabs with buttons in them
+	tab_panel_.remove_last_tab("building_stats_ports");
+	tab_panel_.remove_last_tab("building_stats_mines");
+	tab_panel_.remove_last_tab("building_stats_big");
+	tab_panel_.remove_last_tab("building_stats_medium");
+	tab_panel_.remove_last_tab("building_stats_small");
+
+	if (row_counters_[BuildingTab::Small] > 0) {
+		tab_panel_.add("building_stats_small",
+							g_gr->images().get("images/wui/fieldaction/menu_tab_buildsmall.png"),
+							tabs_[BuildingTab::Small], _("Small buildings"));
 	}
+	if (row_counters_[BuildingTab::Medium] > 0) {
+		tab_panel_.add("building_stats_medium",
+							g_gr->images().get("images/wui/fieldaction/menu_tab_buildmedium.png"),
+							tabs_[BuildingTab::Medium], _("Medium buildings"));
+	}
+	if (row_counters_[BuildingTab::Big] > 0) {
+		tab_panel_.add("building_stats_big",
+							g_gr->images().get("images/wui/fieldaction/menu_tab_buildbig.png"),
+							tabs_[BuildingTab::Big], _("Big buildings"));
+	}
+	if (row_counters_[BuildingTab::Mines] > 0) {
+		tab_panel_.add("building_stats_mines",
+							g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
+							tabs_[BuildingTab::Mines], _("Mines"));
+	}
+	if (row_counters_[BuildingTab::Ports] > 0) {
+		tab_panel_.add("building_stats_ports",
+							g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
+							tabs_[BuildingTab::Ports], _("Ports"));
+	}
+
+	update();
+}
+
+int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr& descr) const {
+	assert(descr.type() != MapObjectType::CONSTRUCTIONSITE);
+	assert(descr.type() != MapObjectType::DISMANTLESITE);
+	if (descr.get_ismine()) {
+		return BuildingTab::Mines;
+	} else if (descr.get_isport()) {
+		return BuildingTab::Ports;
+	} else {
+		switch (descr.get_size()) {
+		case BaseImmovable::SMALL:
+			return BuildingTab::Small;
+		case BaseImmovable::MEDIUM:
+			return BuildingTab::Medium;
+		case BaseImmovable::BIG:
+			return BuildingTab::Big;
+		default:
+			throw wexception(
+				"Building statictics: Found building without a size: %s", descr.name().c_str());
+		}
+	}
+	NEVER_HERE();
 }
 
 /**
@@ -331,10 +334,10 @@ void BuildingStatisticsMenu::init() {
  * - Buildings owned, steps through constructionsites
  * - Productivity, steps though buildings with low productivity and stopped buildings
  */
-bool BuildingStatisticsMenu::add_button(
-   DescriptionIndex id, const BuildingDescr& descr, int tab_index, UI::Box& row, int* column) {
+void BuildingStatisticsMenu::add_button(
+   DescriptionIndex id, const BuildingDescr& descr, UI::Box* row) {
 
-	UI::Box* button_box = new UI::Box(&row, 0, 0, UI::Box::Vertical);
+	UI::Box* button_box = new UI::Box(row, 0, 0, UI::Box::Vertical);
 	building_buttons_[id] = new UI::Button(
 	   button_box, (boost::format("building_button%s") % id).str(), 0, 0, kBuildGridCellWidth,
 	   kBuildGridCellHeight, g_gr->images().get("images/ui_basic/but1.png"),
@@ -356,25 +359,10 @@ bool BuildingStatisticsMenu::add_button(
 	productivity_labels_[id]->set_fixed_width(kBuildGridCellWidth);
 	button_box->add(productivity_labels_[id]);
 
-	row.add(button_box);
+	row->add(button_box);
 
 	building_buttons_[id]->sigclicked.connect(
 	   boost::bind(&BuildingStatisticsMenu::set_current_building_type, boost::ref(*this), id));
-
-	// For dynamic window height
-	if (*column == 0) {
-		++row_counters_[tab_index];
-	}
-
-	// Check if the row is full
-	++*column;
-	if (*column == kColumns) {
-		tabs_[tab_index]->add(&row);
-		tabs_[tab_index]->add_space(6);
-		*column = 0;
-		return true;
-	}
-	return false;
 }
 
 void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
@@ -512,6 +500,7 @@ void BuildingStatisticsMenu::think() {
 		int tab_height =
 		   35 +
 		   row_counters_[tab_panel_.active()] * (kBuildGridCellHeight + kLabelHeight + kLabelHeight);
+		tab_height +=100; // NOCOM height calculation is buggy
 		tab_panel_.set_size(kWindowWidth, tab_height);
 		set_size(
 		   get_w(), tab_height + kMargin + 4 * kButtonRowHeight + get_tborder() + get_bborder());

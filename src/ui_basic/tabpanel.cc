@@ -225,6 +225,9 @@ const TabPanel::TabList& TabPanel::tabs() {
 }
 
 bool TabPanel::remove_last_tab(const std::string& tabname) {
+	if (tabs_.empty()) {
+		return false;
+	}
 	if (tabs_.back()->get_name() == tabname) {
 		tabs_.pop_back();
 		if (active_ > tabs_.size() - 1) {
