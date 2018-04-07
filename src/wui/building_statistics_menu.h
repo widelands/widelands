@@ -65,6 +65,9 @@ private:
 		NextUnproductive
 	};
 
+	/// Initialize the buttons
+	void init();
+
 	/// Adds a button for the building type belonging to the id and descr to the tab.
 	/// Returns true when a new row needs to be created.
 	bool add_button(Widelands::DescriptionIndex id,

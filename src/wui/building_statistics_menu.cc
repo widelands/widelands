@@ -121,7 +121,6 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
      has_selection_(false) {
 
 	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		row_counters_[i] = 0;
 		tabs_[i] = new UI::Box(&tab_panel_, 0, 0, UI::Box::Vertical);
 	}
 
@@ -138,99 +137,16 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
 	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildmine.png"),
 	               tabs_[BuildingTab::Mines], _("Mines"));
 
-	// Only show the ports tab for seafaring maps
-	if (iplayer().game().map().allows_seafaring()) {
-		tab_panel_.add("building_stats_ports",
-		               g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
-		               tabs_[BuildingTab::Ports], _("Ports"));
-	}
+	tab_panel_.add("building_stats_ports",
+	               g_gr->images().get("images/wui/fieldaction/menu_tab_buildport.png"),
+	               tabs_[BuildingTab::Ports], _("Ports"));
 
 	const DescriptionIndex nr_buildings = parent.egbase().tribes().nrbuildings();
 	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
 
-	// Column counters
-	int columns[kNoOfBuildingTabs] = {0, 0, 0, 0, 0};
-
-	// Row containers
-	UI::Box* rows[kNoOfBuildingTabs];
-	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		rows[i] = new UI::Box(tabs_[i], 0, 0, UI::Box::Horizontal);
-	}
-
-	// We want to add player tribe's buildings in correct order
-	const Widelands::Player& player = iplayer().player();
-	const TribeDescr& tribe = player.tribe();
-	std::vector<DescriptionIndex> buildings_to_add;
-	// Add the player's own tribe's buildings.
-	for (DescriptionIndex index : tribe.buildings()) {
-		// Only add allowed buildings or buildings that are owned by the player.
-		const BuildingDescr& descr = *tribe.get_building_descr(index);
-		if ((player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
-		    !player.get_building_statistics(index).empty()) {
-			buildings_to_add.push_back(index);
-		}
-	}
-
-	// We want to add other tribes' buildings on the bottom. Only add the ones that the player owns.
-	for (DescriptionIndex index = 0; index < nr_buildings; ++index) {
-		if (!tribe.has_building(index) && !player.get_building_statistics(index).empty()) {
-			buildings_to_add.push_back(index);
-		}
-	}
-
-	for (DescriptionIndex id : buildings_to_add) {
-		const BuildingDescr& descr = *tribe.get_building_descr(id);
-
-		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
-		    descr.type() != MapObjectType::DISMANTLESITE) {
-			if (descr.get_ismine()) {
-				if (add_button(id, descr, BuildingTab::Mines, *rows[BuildingTab::Mines],
-				               &columns[BuildingTab::Mines])) {
-					rows[BuildingTab::Mines] =
-					   new UI::Box(tabs_[BuildingTab::Mines], 0, 0, UI::Box::Horizontal);
-				}
-			} else if (descr.get_isport()) {
-				if (add_button(id, descr, BuildingTab::Ports, *rows[BuildingTab::Ports],
-				               &columns[BuildingTab::Ports])) {
-					rows[BuildingTab::Ports] =
-					   new UI::Box(tabs_[BuildingTab::Ports], 0, 0, UI::Box::Horizontal);
-				}
-			} else {
-				switch (descr.get_size()) {
-				case BaseImmovable::SMALL:
-					if (add_button(id, descr, BuildingTab::Small, *rows[BuildingTab::Small],
-					               &columns[BuildingTab::Small])) {
-						rows[BuildingTab::Small] =
-						   new UI::Box(tabs_[BuildingTab::Small], 0, 0, UI::Box::Horizontal);
-					}
-					break;
-				case BaseImmovable::MEDIUM:
-					if (add_button(id, descr, BuildingTab::Medium, *rows[BuildingTab::Medium],
-					               &columns[BuildingTab::Medium])) {
-						rows[BuildingTab::Medium] =
-						   new UI::Box(tabs_[BuildingTab::Medium], 0, 0, UI::Box::Horizontal);
-					}
-					break;
-				case BaseImmovable::BIG:
-					if (add_button(id, descr, BuildingTab::Big, *rows[BuildingTab::Big],
-					               &columns[BuildingTab::Big])) {
-						rows[BuildingTab::Big] =
-						   new UI::Box(tabs_[BuildingTab::Big], 0, 0, UI::Box::Horizontal);
-					}
-					break;
-				default:
-					throw wexception(
-					   "Building statictics: Found building without a size: %s", descr.name().c_str());
-				}
-			}
-		}
-	}
-
-	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
-		tabs_[i]->add(rows[i]);
-	}
+	init();
 
 	set_label_font(&owned_label_);
 	set_label_font(&construction_label_);
@@ -313,6 +229,99 @@ BuildingStatisticsMenu::~BuildingStatisticsMenu() {
 	building_buttons_.clear();
 	owned_labels_.clear();
 	productivity_labels_.clear();
+}
+
+void BuildingStatisticsMenu::init() {
+	// Only show the ports tab for seafaring maps
+	// Update for seafaring NOCOM what if we already have a port?
+	const bool allows_seafaring = iplayer().game().map().allows_seafaring();
+	if (!allows_seafaring && tab_panel_.active() == BuildingTab::Ports) {
+		tab_panel_.activate(0);
+	}
+	tabs_[BuildingTab::Ports]->set_visible(allows_seafaring);
+
+	// Column counters
+	int columns[kNoOfBuildingTabs] = {0, 0, 0, 0, 0};
+
+	// Row containers
+	UI::Box* rows[kNoOfBuildingTabs];
+	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
+		row_counters_[i] = 0;
+		rows[i] = new UI::Box(tabs_[i], 0, 0, UI::Box::Horizontal);
+	}
+
+	// We want to add player tribe's buildings in correct order
+	const Widelands::Player& player = iplayer().player();
+	const TribeDescr& tribe = player.tribe();
+	std::vector<DescriptionIndex> buildings_to_add;
+	// Add the player's own tribe's buildings.
+	for (DescriptionIndex index : tribe.buildings()) {
+		// Only add allowed buildings or buildings that are owned by the player.
+		const BuildingDescr& descr = *tribe.get_building_descr(index);
+		if ((player.is_building_type_allowed(index) && (descr.is_buildable() || descr.is_enhanced())) ||
+		    !player.get_building_statistics(index).empty()) {
+			buildings_to_add.push_back(index);
+		}
+	}
+
+	// We want to add other tribes' buildings on the bottom. Only add the ones that the player owns.
+	for (DescriptionIndex index = 0; index < iplayer().egbase().tribes().nrbuildings(); ++index) {
+		if (!tribe.has_building(index) && !player.get_building_statistics(index).empty()) {
+			buildings_to_add.push_back(index);
+		}
+	}
+
+	for (DescriptionIndex id : buildings_to_add) {
+		const BuildingDescr& descr = *tribe.get_building_descr(id);
+
+		if (descr.type() != MapObjectType::CONSTRUCTIONSITE &&
+		    descr.type() != MapObjectType::DISMANTLESITE) {
+			if (descr.get_ismine()) {
+				if (add_button(id, descr, BuildingTab::Mines, *rows[BuildingTab::Mines],
+				               &columns[BuildingTab::Mines])) {
+					rows[BuildingTab::Mines] =
+					   new UI::Box(tabs_[BuildingTab::Mines], 0, 0, UI::Box::Horizontal);
+				}
+			} else if (descr.get_isport()) {
+				if (add_button(id, descr, BuildingTab::Ports, *rows[BuildingTab::Ports],
+				               &columns[BuildingTab::Ports])) {
+					rows[BuildingTab::Ports] =
+					   new UI::Box(tabs_[BuildingTab::Ports], 0, 0, UI::Box::Horizontal);
+				}
+			} else {
+				switch (descr.get_size()) {
+				case BaseImmovable::SMALL:
+					if (add_button(id, descr, BuildingTab::Small, *rows[BuildingTab::Small],
+					               &columns[BuildingTab::Small])) {
+						rows[BuildingTab::Small] =
+						   new UI::Box(tabs_[BuildingTab::Small], 0, 0, UI::Box::Horizontal);
+					}
+					break;
+				case BaseImmovable::MEDIUM:
+					if (add_button(id, descr, BuildingTab::Medium, *rows[BuildingTab::Medium],
+					               &columns[BuildingTab::Medium])) {
+						rows[BuildingTab::Medium] =
+						   new UI::Box(tabs_[BuildingTab::Medium], 0, 0, UI::Box::Horizontal);
+					}
+					break;
+				case BaseImmovable::BIG:
+					if (add_button(id, descr, BuildingTab::Big, *rows[BuildingTab::Big],
+					               &columns[BuildingTab::Big])) {
+						rows[BuildingTab::Big] =
+						   new UI::Box(tabs_[BuildingTab::Big], 0, 0, UI::Box::Horizontal);
+					}
+					break;
+				default:
+					throw wexception(
+					   "Building statictics: Found building without a size: %s", descr.name().c_str());
+				}
+			}
+		}
+	}
+
+	for (int i = 0; i < kNoOfBuildingTabs; ++i) {
+		tabs_[i]->add(rows[i]);
+	}
 }
 
 /**
