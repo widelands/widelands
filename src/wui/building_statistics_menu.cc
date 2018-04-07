@@ -739,7 +739,9 @@ void BuildingStatisticsMenu::update() {
 		}
 
 		std::string owned_text;
-		if (player.tribe().has_building(id) && (building.is_buildable() || building.is_enhanced())) {
+		const bool can_construct_this_building = player.tribe().has_building(id) &&
+				(building.is_buildable() || building.is_enhanced());
+		if (can_construct_this_building) {
 			/** TRANSLATORS: Buildings: owned / under construction */
 			owned_text = (boost::format(_("%1%/%2%")) % nr_owned % nr_build).str();
 		} else {
@@ -757,7 +759,7 @@ void BuildingStatisticsMenu::update() {
 			no_owned_label_.set_visible(true);
 			navigation_buttons_[NavigationButton::NextOwned]->set_visible(true);
 			navigation_buttons_[NavigationButton::PrevOwned]->set_visible(true);
-			if (player.tribe().has_building(id) && building.is_buildable()) {
+			if (can_construct_this_building) {
 				no_construction_label_.set_text(nr_build > 0 ? std::to_string(nr_build) : "");
 				navigation_buttons_[NavigationButton::NextConstruction]->set_enabled(nr_build > 0);
 				navigation_buttons_[NavigationButton::PrevConstruction]->set_enabled(nr_build > 0);
