@@ -585,7 +585,7 @@ void ManagementData::review(const uint32_t gametime,
 
     log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
     pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
-    (territory_bonus)?"Y":"N", (iron_mine_bonus)?"Y":"N", (attack_bonus)?"Y":"N", (training_bonus)?"Y":"N",
+    (territory_bonus) ? "Y" : "N", (iron_mine_bonus) ? "Y" : "N", (attack_bonus)? "Y" : "N", (training_bonus) ? "Y" : "N",
     land_score, strength_score, ps_sites_score, attack_score);
 
 	if (score < -10000 || score > 30000) {
