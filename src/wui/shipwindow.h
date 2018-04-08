@@ -36,7 +36,7 @@
  */
 class ShipWindow : public UI::UniqueWindow {
 public:
-	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship& ship);
+	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
 
 private:
 	void think() override;
@@ -58,7 +58,7 @@ private:
 	void act_explore_island(Widelands::IslandExploreDirection);
 
 	InteractiveGameBase& igbase_;
-	Widelands::Ship& ship_;
+	Widelands::OPtr<Widelands::Ship> ship_;
 
 	UI::Box vbox_;
 	UI::Box navigation_box_;
