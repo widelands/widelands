@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2016
+# Juanjo, 2015-2016,2018
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-30 10:56+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -35,11 +35,12 @@ msgid "No Artifacts"
 msgstr "Sense artefactes"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:55
+#, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
-"bug report on https://launchpad.net/widelands and specify your Widelands "
-"version and the map you tried to load."
-msgstr "Aquest mapa no té artefactes i això no hauria de ser així. Si us plau, escriviu un informe d'error en https://launchpad.net/widelands i especifiqueu la versió del Widelands i el mapa que heu provat de carregar."
+"bug report on %s and specify your Widelands version and the map you tried to"
+" load."
+msgstr "Aquest mapa no té artefactes i això no hauria de ser així. Si us plau, escriviu un informe d'error en %s i especifiqueu la versió del Widelands i el mapa que heu provat de carregar."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
@@ -112,29 +113,29 @@ msgstr "Aconseguireu punts per béns valuosos en els teus magatzems. Guanyarà e
 msgid "Points"
 msgstr "Punts"
 
-#: ../../data/scripting/win_conditions/collectors.lua:109
+#: ../../data/scripting/win_conditions/collectors.lua:126
 #, lua-format
 msgid "Status for %s"
 msgstr "Estat del %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:122
+#: ../../data/scripting/win_conditions/collectors.lua:139
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s: %2$i punts/unitat x %3$i unitats = %4$i punts"
 
-#: ../../data/scripting/win_conditions/collectors.lua:126
+#: ../../data/scripting/win_conditions/collectors.lua:143
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Total: %i punt"
 msgstr[1] "Total: %i punts"
 
-#: ../../data/scripting/win_conditions/collectors.lua:139
+#: ../../data/scripting/win_conditions/collectors.lua:156
 msgid "The game has ended."
 msgstr "La partida ja ha acabat."
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:146
+#: ../../data/scripting/win_conditions/collectors.lua:163
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -142,31 +143,31 @@ msgstr[0] "%i minut"
 msgstr[1] "%i minuts"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:151
+#: ../../data/scripting/win_conditions/collectors.lua:168
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] "%1% hora i %2%"
 msgstr[1] "%1% hores i %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/collectors.lua:154
+#: ../../data/scripting/win_conditions/collectors.lua:171
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] "%1% hora"
 msgstr[1] "%1% hores"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:158
+#: ../../data/scripting/win_conditions/collectors.lua:175
 #, lua-format
 msgid "The game will end in %s."
 msgstr "La partida acabarà en %s."
 
-#: ../../data/scripting/win_conditions/collectors.lua:171
+#: ../../data/scripting/win_conditions/collectors.lua:188
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Estat de l'equip %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:173
+#: ../../data/scripting/win_conditions/collectors.lua:190
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"

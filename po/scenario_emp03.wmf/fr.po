@@ -6,13 +6,15 @@
 # Jaypad <ju-ju@nataju.fr>, 2017
 # Renaud Bouchard, 2017
 # zecas <jjorge@free.fr>, 2017
+# GunChleoc, 2017
+# David D, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: zecas <jjorge@free.fr>, 2017\n"
+"Last-Translator: David D, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,6 +51,8 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Construisez une carrière à proximité des roches abondantes afin de libérer "
+"des emplacements de construction et obtenir des ressources de valeur."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -70,7 +74,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "Réduisez la demande en colonnes de marbre à 4"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Lower Demand for Marble Columns"
@@ -81,6 +85,8 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
+"Réduire la demande de colonnes de marbre à quatre dans les paramètres "
+"d'économie. Ceci aidera à économiser un peu de marbre pour des bâtiments."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid ""
@@ -99,7 +105,7 @@ msgstr "Espace portuaire"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Search for a port space in order to regain access to the sea."
-msgstr ""
+msgstr "Cherchez un espace portuaire afin de retrouver un accès à la mer."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Build a port and a shipyard on the Island"
@@ -121,7 +127,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Produce wheat"
-msgstr ""
+msgstr "Produire du blé"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:104
 msgid "Wheat Production"
@@ -131,6 +137,8 @@ msgstr "Production de blé"
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr ""
+"Produisez au moins 50 liasses de blé pour faire commencer votre production "
+"de laine."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Produce cloth for building our first ship"
@@ -145,6 +153,8 @@ msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
 msgstr ""
+"Maintenant, transformez tout le blé en au moins 50 rouleaux de laine, puis "
+"utilisez la laine pour tisser du tissu afin de construire un navire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:120
 msgid "Build 2 ports on distant islands"
@@ -154,19 +164,23 @@ msgstr "Bâtissez 2 ports sur d'autres îles."
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Build two Expedition Ports"
-msgstr ""
+msgstr "Construisez deux ports d'expédition"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:124
 msgid ""
 "Explore the island in the south. Use an expedition to build a port there. "
 "Afterwards, try to find some mining resources."
 msgstr ""
+"Explorez l'île au sud. Utilisez une expédition pour bâtir un port à cet "
+"endroit. Après ça, essayez de trouver des ressources minières."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
+"Envoyez un navire au nord afin de quérir des informations sur les barbares. "
+"Essayez de construire un port sur l'île et trouvez un avant-poste."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Produce gold to send out expeditions"
@@ -180,6 +194,7 @@ msgstr "Production d'Or"
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
+"Produisez au moins six lingots d'or pour pouvoir coloniser votre voisinage."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Barbarians"
@@ -191,7 +206,7 @@ msgstr "Battre l'ennemi"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Supprimez la présence de Barbares dans cette partie du monde."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore further and build ports"
@@ -204,7 +219,7 @@ msgstr "Explorez d'autres îles et cherchez des zones portuaires"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:152
 msgid ""
 "Discover more land in your vicinity and build as many ports as you can."
-msgstr ""
+msgstr "Découvrez plus de terres et construisez autant de ports que possible."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
@@ -235,6 +250,8 @@ msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr ""
+"Construisez un camp d’entraînement, quelques casernes et une arène ou un "
+"colisée pour entraîner vos soldats."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:184
 msgid "The Journey Home"
@@ -527,6 +544,11 @@ msgid ""
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
+"Mais voici le problème, si nous utilisons tout notre marbre pour les "
+"colonnes, nous allons en manquer. Donc, nous devrons baisser l'objectif de "
+"colonnes de marbre dans les réglages économiques vers un nombre plus bas. Je"
+" pense qu'une réserve de quatre colonnes devrait être suffisante pour le "
+"moment."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
 msgid "Amalea Looks Happy"
@@ -634,6 +656,9 @@ msgid ""
 "have only five bales of cloth left, which we will need to build the port and"
 " the shipyard."
 msgstr ""
+"Pour envoyer un navire en expédition, nous avons d'abord besoin d'un navire."
+" Malheureusement, nous avons seulement cinq rouleaux de tissu restants, que "
+"nous allons utiliser pour construire le port et le chantier naval."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:371
@@ -657,7 +682,7 @@ msgstr ""
 "Bon, pensons ceci dans son ensemble. Pour tisser de l'étoffe nous avons "
 "besoin de laine d'une bergerie. La bergerie elle-même aura besoin d'eau et "
 "de blé pour fonctionner. Donc, cherchons un endroit pour un grand bâtiment "
-"et construisez une ferme en premier. "
+"et construisez une ferme en premier."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:377
@@ -679,6 +704,9 @@ msgid ""
 "I think a stock of 50 sheaves of wheat would be enough for starters. Perhaps"
 " we will have to adjust the target quantity for wheat to achieve this."
 msgstr ""
+"Je pense qu'un stock de 50 liasses de blé serait assez pour débuter. Peut-"
+"être que nous devrons ajuster l'objectif quantité concernant le blé afin de "
+"réaliser ceci."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:388
 msgid "Seafaring is Possible Again"
@@ -755,7 +783,7 @@ msgstr ""
 "En premier, nous devons trouver plus de ressources pour soutenir notre "
 "développement économique. J'ai repéré une île avec quelques montagnes au "
 "sud. Peut-être que nous y trouverons des ressources précieuse comme du fer "
-"là bas. "
+"là bas."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:423
@@ -1032,7 +1060,7 @@ msgstr ""
 "Nous avons aussi besoin de tissus pour produire des armures dans notre "
 "forge. C'est indispensable pour construire certains sites d'entraînement "
 "pour nos soldats. Et plus important et imminent encore, nous en avons besoin"
-" pour affréter des expéditions. "
+" pour affréter des expéditions."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:542
 msgid ""
@@ -1042,6 +1070,10 @@ msgid ""
 "a reserve of six to nine bales giving us two to three expeditions would be "
 "sufficient."
 msgstr ""
+"Par conséquent, je recommande vraiment de surveiller de près nos réserves de"
+" tissu pour s'assurer d'en conserver assez afin de lancer quelques "
+"expéditions. Chacune nécessite trois rouleaux de tissu, une réserve de six à"
+" neuf rouleaux nous permettant deux à trois expéditions devrait suffire."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:548
 msgid "Victory is Ours"

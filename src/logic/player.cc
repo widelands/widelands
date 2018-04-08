@@ -325,7 +325,7 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 }
 
 MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, bool const popup) {
-	MessageId id = messages().add_message(std::move(new_message));
+	MessageId id = get_messages()->add_message(std::move(new_message));
 	const Message* message = messages()[id];
 
 	// MapObject connection
@@ -423,7 +423,7 @@ Flag* Player::build_flag(const Coords& c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		return new Flag(egbase(), *this, c);
+		return new Flag(egbase(), this, c);
 	return nullptr;
 }
 
@@ -432,7 +432,7 @@ Flag& Player::force_flag(const FCoords& c) {
 	const Map& map = egbase().map();
 	if (BaseImmovable* const immovable = c.field->get_immovable()) {
 		if (upcast(Flag, existing_flag, immovable)) {
-			if (&existing_flag->owner() == this)
+			if (existing_flag->get_owner() == this)
 				return *existing_flag;
 		} else if (!dynamic_cast<Road const*>(immovable))  //  A road is OK.
 			immovable->remove(egbase());                    //  Make room for the flag.
@@ -446,7 +446,7 @@ Flag& Player::force_flag(const FCoords& c) {
 	//  Make sure that the player owns the area around.
 	egbase().conquer_area_no_building(
 	   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
-	return *new Flag(egbase(), *this, c);
+	return *new Flag(egbase(), this, c);
 }
 
 /*
@@ -521,7 +521,7 @@ Building& Player::force_building(Coords const location,
 	map.get_brn(map.get_fcoords(location), &flag_loc);
 	force_flag(flag_loc);
 
-	return descr->create(egbase(), *this, map.get_fcoords(location), false, false, former_buildings);
+	return descr->create(egbase(), this, map.get_fcoords(location), false, false, former_buildings);
 }
 
 Building& Player::force_csite(Coords const location,
@@ -587,7 +587,7 @@ Building* Player::build(Coords c,
 	if (constructionsite)
 		return &egbase().warp_constructionsite(c, player_number_, idx, false, former_buildings);
 	else {
-		return &descr->create(egbase(), *this, c, false, false, former_buildings);
+		return &descr->create(egbase(), this, c, false, false, former_buildings);
 	}
 }
 
@@ -682,13 +682,13 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 }
 
 void Player::start_stop_building(PlayerImmovable& imm) {
-	if (&imm.owner() == this)
+	if (imm.get_owner() == this)
 		if (upcast(ProductionSite, productionsite, &imm))
 			productionsite->set_stopped(!productionsite->is_stopped());
 }
 
 void Player::start_or_cancel_expedition(Warehouse& wh) {
-	if (&wh.owner() == this)
+	if (wh.get_owner() == this)
 		if (PortDock* pd = wh.get_portdock()) {
 			if (pd->expedition_started()) {
 				upcast(Game, game, &egbase());
@@ -700,7 +700,7 @@ void Player::start_or_cancel_expedition(Warehouse& wh) {
 
 void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
                                                   SoldierPreference soldier_preference) {
-	if (&imm.owner() == this)
+	if (imm.get_owner() == this)
 		if (upcast(MilitarySite, milsite, &imm))
 			milsite->set_soldier_preference(soldier_preference);
 }
@@ -722,8 +722,9 @@ void Player::dismantle_building(Building* building) {
 }
 void Player::enhance_or_dismantle(Building* building,
                                   DescriptionIndex const index_of_new_building) {
-	if (&building->owner() == this && (index_of_new_building == INVALID_INDEX ||
-	                                   building->descr().enhancement() == index_of_new_building)) {
+	if (building->get_owner() == this &&
+	    (index_of_new_building == INVALID_INDEX ||
+	     building->descr().enhancement() == index_of_new_building)) {
 		Building::FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 
@@ -771,7 +772,7 @@ Perform an action on the given flag.
 ===============
 */
 void Player::flagaction(Flag& flag) {
-	if (&flag.owner() == this) {  //  Additional security check.
+	if (flag.get_owner() == this) {  //  Additional security check.
 		flag.add_flag_job(dynamic_cast<Game&>(egbase()), tribe().geologist(), "expedition");
 	}
 }
@@ -848,7 +849,7 @@ Forces the drop of given soldier at given house
 ===========
 */
 void Player::drop_soldier(PlayerImmovable& imm, Soldier& soldier) {
-	if (&imm.owner() != this)
+	if (imm.get_owner() != this)
 		return;
 	if (soldier.descr().type() != MapObjectType::SOLDIER)
 		return;

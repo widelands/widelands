@@ -7,7 +7,7 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Grapevine (medium)"),
    helptext_script = dirname .. "helptexts.lua",
    size = "medium",
-   attributes = { "field" },
+   attributes = { "field", "flowering" },
    programs = {
       program = {
          "animate=idle 40000",

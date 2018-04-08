@@ -767,11 +767,11 @@ void Bob::draw(const EditorGameBase& egbase,
 		return;
 	}
 
-	auto* const owner = get_owner();
+	auto* const bob_owner = get_owner();
 	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
-	if (owner != nullptr) {
-		dst->blit_animation(
-		   point_on_dst, scale, anim_, egbase.get_gametime() - animstart_, owner->get_playercolor());
+	if (bob_owner != nullptr) {
+		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_,
+		                    bob_owner->get_playercolor());
 	} else {
 		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_);
 	}
@@ -919,11 +919,10 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 
 	molog("Signal: %s\n", signal_.c_str());
 
-	molog("Stack size: %lu\n", static_cast<long unsigned int>(stack_.size()));
+	molog("Stack size: %" PRIuS "\n", stack_.size());
 
 	for (size_t i = 0; i < stack_.size(); ++i) {
-		molog("Stack dump %lu/%lu\n", static_cast<long unsigned int>(i + 1),
-		      static_cast<long unsigned int>(stack_.size()));
+		molog("Stack dump %" PRIuS "/%" PRIuS "\n", i + 1, stack_.size());
 
 		molog("* task->name: %s\n", stack_[i].task->name);
 
@@ -946,8 +945,7 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 		FORMAT_WARNINGS_ON;
 		if (stack_[i].path) {
 			const Path& path = *stack_[i].path;
-			Path::StepVector::size_type nr_steps = path.get_nsteps();
-			molog("** Path length: %lu\n", static_cast<long unsigned int>(nr_steps));
+			molog("** Path length: %" PRIuS "\n", path.get_nsteps());
 			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
 			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
 			// Printing all coordinates of the path

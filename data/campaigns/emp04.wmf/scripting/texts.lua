@@ -109,7 +109,7 @@ obj_deal_with_julia = {
    title=_"Deal with Julia to get the technology",
    number = 1,
    body = objective_text(_"Diplomacy: Trade or War",
-      li(_[[Decide: Either collect 35 sheaves of wheat and 15 bottles of wine for the goddess in your headquarters or conquer the monastery.]])
+      li(_[[Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the goddess in your headquarters or conquer the monastery.]])
    ),
 }
 
@@ -217,7 +217,7 @@ diary_page_4 = {
    title=_"The Battle is Won",
    body= lutius(_"Diary of Lutius",
       -- TRANSLATORS: Lutius - Diary
-      _([[Praise the gods, we have succeeded. We managed all the challenges that were imposed on us. We even expelled the Barbarians out of our country. However, this was only one battle won, as we are still only at the brink of war. Let’s see what the future still holds for us.]])
+      _([[Praise the gods, we have succeeded. We managed all the challenges that were imposed on us. We even expelled the Barbarians out of our country. However, our victory is only temporary, as this is still just the beginning of the war. Let’s see what the future still holds for us.]])
       .. paragraphdivider() ..
       _([[You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission.]])),
    posy=1,
@@ -697,7 +697,7 @@ julia_0 = {
    title=_"Worship to be Gifted",
    body= julia(_"Julia is demanding a sacrifice for Vesta…",
       -- TRANSLATORS: Julia - priestess of the goddess Vesta
-      _([[Ave, Lutius! If you want us to help you, you first have to worship our goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 bottles of wine to prepare a worthy sacrifice for her.]])),
+      _([[Ave, Lutius! If you want us to help you, you first have to worship our goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 amphoras of wine to prepare a worthy sacrifice for her.]])),
    posy=1,
 }
 

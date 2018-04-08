@@ -171,7 +171,7 @@ bool Ship::init(EditorGameBase& egbase) {
  */
 bool Ship::init_fleet(EditorGameBase& egbase) {
 	assert(get_owner() != nullptr);
-	Fleet* fleet = new Fleet(*get_owner());
+	Fleet* fleet = new Fleet(get_owner());
 	fleet->add_ship(this);
 	return fleet->init(egbase);
 	// fleet calls the set_fleet function appropriately
@@ -580,7 +580,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						}
 				}
 				// if we are here, it seems something really strange happend.
-				log("WARNING: ship was not able to start exploration. Entering WAIT mode.");
+				log("WARNING: ship %s was not able to start exploration. Entering WAIT mode.",shipname_.c_str());
 				set_ship_state_and_notify(ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
 				start_task_idle(game, descr().main_animation(), 1500);
 				return;

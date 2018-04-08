@@ -622,7 +622,7 @@ bool Soldier::can_be_challenged() {
 	if (!battle_) {
 		return true;
 	}
-	return !battle_->locked(dynamic_cast<Game&>(owner().egbase()));
+	return !battle_->locked(dynamic_cast<Game&>(get_owner()->egbase()));
 }
 
 /**
@@ -1345,12 +1345,12 @@ void Soldier::battle_update(Game& game, State&) {
 					    (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no")) %
 					    descr().descname().c_str())
 					      .str();
-					owner().add_message(
+					get_owner()->add_message(
 					   game, std::unique_ptr<Message>(
 					            new Message(Message::Type::kGameLogic, game.get_gametime(),
 					                        descr().descname(), "images/ui_basic/menu_help.png",
 					                        _("Logic error"), messagetext, get_position(), serial_)));
-					opponent.owner().add_message(
+					opponent.get_owner()->add_message(
 					   game, std::unique_ptr<Message>(new Message(
 					            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
 					            "images/ui_basic/menu_help.png", _("Logic error"), messagetext,

@@ -20,12 +20,7 @@
 #ifndef WL_WUI_CHAT_MSG_LAYOUT_H
 #define WL_WUI_CHAT_MSG_LAYOUT_H
 
-#include <string>
-
-struct ChatMessage;
-
-// Formats 'chat_message' as old richtext.
-std::string format_as_old_richtext(const ChatMessage& chat_message);
+#include "chat/chat.h"
 
 // Formats 'chat_message' as richtext.
 std::string format_as_richtext(const ChatMessage& chat_message);

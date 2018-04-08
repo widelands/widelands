@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2017
+# GunChleoc, 2015-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-23 20:45+0000\n"
+"POT-Creation-Date: 2018-03-02 08:01+0000\n"
+"PO-Revision-Date: 2018-03-02 20:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgstr "Taghan"
 
 #: ../../data/world/critters/reindeer/init.lua:16
 msgid "Reindeer"
-msgstr "Fast"
+msgstr "Rèin-fhiadh"
 
 #: ../../data/world/critters/sheep/init.lua:19
 msgid "Sheep"

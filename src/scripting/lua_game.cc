@@ -1214,7 +1214,7 @@ int LuaMessage::set_status(lua_State* L) {
 	else
 		report_error(L, "Invalid message status <%s>!", s.c_str());
 
-	get_plr(L, get_game(L)).messages().set_message_status(message_id_, status);
+	get_plr(L, get_game(L)).get_messages()->set_message_status(message_id_, status);
 
 	return 0;
 }

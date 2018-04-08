@@ -3,7 +3,7 @@
 # 
 # Translators:
 # GunChleoc, 2014,2017
-# GunChleoc, 2015-2017
+# GunChleoc, 2015-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
 # GunChleoc, 2013-2015
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-30 12:53+0000\n"
-"PO-Revision-Date: 2018-01-30 12:58+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-24 10:25+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -22,13 +22,13 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #: ../../data/scripting/format_scenario.lua:12
-#: ../../data/scripting/richtext_scenarios.lua:34
+#: ../../data/scripting/richtext_scenarios.lua:36
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:40
-#: ../../data/scripting/richtext_scenarios.lua:85
+#: ../../data/scripting/richtext_scenarios.lua:90
 msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Amas ùr"
@@ -38,16 +38,16 @@ msgstr[3] "Amasan ùra"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:12 ../../data/scripting/richtext.lua:38
-#: ../../src/base/i18n.cc:333
+#: ../../data/scripting/formatting.lua:12
+#: ../../data/scripting/richtext.lua:533 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s ⁊ %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:14 ../../data/scripting/richtext.lua:40
-#: ../../src/base/i18n.cc:337
+#: ../../data/scripting/formatting.lua:14
+#: ../../data/scripting/richtext.lua:535 ../../src/base/i18n.cc:337
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s no %2$s"
@@ -57,17 +57,17 @@ msgstr "%1$s no %2$s"
 #. * TRANSLATORS: Concatenate 2 items at in the middle of a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:16
-#: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:42
-#: ../../data/scripting/richtext.lua:47 ../../src/base/i18n.cc:341
-#: ../../src/base/i18n.cc:350
+#: ../../data/scripting/formatting.lua:21
+#: ../../data/scripting/richtext.lua:537 ../../data/scripting/richtext.lua:542
+#: ../../src/base/i18n.cc:341 ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
-#: ../../data/scripting/formatting.lua:18 ../../data/scripting/richtext.lua:44
-#: ../../src/base/i18n.cc:345
+#: ../../data/scripting/formatting.lua:18
+#: ../../data/scripting/richtext.lua:539 ../../src/base/i18n.cc:345
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s ’s %2$s"
@@ -83,32 +83,37 @@ msgstr "%1% (%2%)"
 #: ../../data/scripting/help.lua:48
 #, lua-format
 msgid "%2.1f%%"
-msgstr ""
+msgstr "%2.1f%%"
 
 #. TRANSLATORS: Short for "Not enough space"
-#: ../../data/scripting/infrastructure.lua:160
+#: ../../data/scripting/infrastructure.lua:168
 msgid "No Space"
 msgstr "Gainnead ruim"
 
-#: ../../data/scripting/infrastructure.lua:161
+#: ../../data/scripting/infrastructure.lua:169
 msgid ""
 "Some of your starting buildings didn’t have enough room and weren’t built. "
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr "Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu air a’ mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
 
-#: ../../data/scripting/infrastructure.lua:162
+#: ../../data/scripting/infrastructure.lua:170
 msgid "Not enough space"
 msgstr "Chan eil rum gu leòr ann"
+
+#: ../../data/scripting/messages.lua:50 ../../data/scripting/messages.lua:52
+#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
+msgid "Status"
+msgstr "Staid"
 
 #. TRANSLATORS: Put 2 sentences one after the other.
 #. TRANSLATORS: Languages using Chinese script probably want to lose the blank
 #. space here.
-#: ../../data/scripting/richtext.lua:459
+#: ../../data/scripting/richtext.lua:504
 #, lua-format
 msgctxt "sentence_separator"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
@@ -545,7 +550,7 @@ msgstr "Briog gus nì a thaghadh. Cleachd an iuchair Ctrl gus iomadh nì a thagh
 msgid "Current: %s"
 msgstr "Làithreach: %s"
 
-#: ../../src/editor/ui_menus/help.cc:42 ../../src/ui_fsmenu/multiplayer.cc:137
+#: ../../src/editor/ui_menus/help.cc:42 ../../src/ui_fsmenu/multiplayer.cc:152
 #: ../../src/wui/encyclopedia_window.cc:138
 #: ../../src/wui/tribal_encyclopedia.cc:56
 msgid "Error!"
@@ -1051,7 +1056,7 @@ msgid "Loading map…"
 msgstr "A’ luchdadh a’ mhapa…"
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:371
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1378
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1389
 msgid "Loading…"
 msgstr "’Ga luchdadh…"
 
@@ -1386,68 +1391,68 @@ msgstr "A’ feitheamh"
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Sheòl triall luinge timcheall air eilean gun tachartas sam bith."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Coast Reached"
 msgstr "Chaidh oirthir a ruigsinn"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:602
+#: ../../src/logic/map_objects/tribes/ship.cc:603
 msgid "Land Ahoy!"
 msgstr "Tìr air fàire!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:604
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ràinig triall luinge oirthir is e a’ feitheamh air òrduighean ùra."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:672
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "New port construction site is gone"
 msgstr "Chailleadh làrach togail puirt ùr"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:672
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "Port Lost!"
 msgstr "Port air a chall!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:674
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Chaidh sgur dhen triall on a dh’fhàillig le dì-luchdadh a’ bhathair."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:847
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Triall"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:846
+#: ../../src/logic/map_objects/tribes/ship.cc:847
 msgid "Expedition Ready"
 msgstr "Tha triall deiseil"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:848
 msgid "An expedition ship is waiting for your commands."
 msgstr "Tha triall luinge a’ feitheamh air d’ òrduighean."
 
 #. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:983
+#: ../../src/logic/map_objects/tribes/ship.cc:984
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Ag aiseag"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:987
+#: ../../src/logic/map_objects/tribes/ship.cc:988
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "A’ feitheamh"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:991
+#: ../../src/logic/map_objects/tribes/ship.cc:992
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "A’ rùrachadh"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:995
+#: ../../src/logic/map_objects/tribes/ship.cc:996
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Air raon puirt a lorg"
@@ -1455,7 +1460,7 @@ msgstr "Air raon puirt a lorg"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1000
+#: ../../src/logic/map_objects/tribes/ship.cc:1001
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "A’ tuineachadh"
@@ -1582,7 +1587,7 @@ msgid ""
 msgstr "Cha deach le Widelands ceangal a dhèanamh ris an t-seòladh shònraichte. Cha robh frithealaiche Widelands a’ ruith aig a’ phort sin air neo chaidh am frithealaiche a dhùnadh sìos fhad ’s a bha thu a’ feuchainn ri ceangal."
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1270
+#: ../../src/wlapplication.cc:1281
 msgid "Preparing game"
 msgstr "Ag ullachadh a’ gheama"
 
@@ -1745,53 +1750,53 @@ msgid ""
 "your network setup is broken."
 msgstr "Cha deach le Widelands ceangal a dhèanamh ris an t-seòladh shònraichte.\nCha robh meata-fhrithealaiche a’ ruith aig a’ phort sin air neo\ntha rèiteachadh an lìonraidh agad briste."
 
-#: ../../src/network/internet_gaming.cc:173
+#: ../../src/network/internet_gaming.cc:177
 msgid "Users marked with IRC will possibly not react to messages."
-msgstr ""
+msgstr "Dh’fhaoidte nach freagair daoine le comharra IRC riutha ri teachdaireachdan idir."
 
-#: ../../src/network/internet_gaming.cc:211
+#: ../../src/network/internet_gaming.cc:215
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Chaidh ceangal ris a’ mheata-fhrithealaiche!"
 
-#: ../../src/network/internet_gaming.cc:285
+#: ../../src/network/internet_gaming.cc:289
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Chaidh rudeigin cearr: %s"
 
-#: ../../src/network/internet_gaming.cc:394
+#: ../../src/network/internet_gaming.cc:449
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "Chaidh do chlàradh a-steach mar “%s” on a tha an t-ainm a dh’iarr thu ’ga chleachdadh mar-thà no aig cuideigin eile."
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:471
 msgid "Mixed up"
 msgstr "Breisleach"
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:471
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Chuir am meata-fhrithealaiche MEARACHD neònach rè a’ cheangail"
 
-#: ../../src/network/internet_gaming.cc:426
+#: ../../src/network/internet_gaming.cc:486
 msgid "Unexpected packet"
 msgstr "Pacaid air nach robh dùil"
 
-#: ../../src/network/internet_gaming.cc:427
-#, c-format
+#: ../../src/network/internet_gaming.cc:487
 msgid ""
-"Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
-"command %s. Maybe the metaserver is using a different protocol version ?"
-msgstr "Bha sinn an dùil air pacaid LOGIN, RELOGIN no REJECTED on fhrithealaiche, ach fhuair sinn an àithne %s. ’S dòcha gun chleachd am meata-fhrithealaiche tionndadh eile dhen phròtacal."
+"Received an unexpected network packet from the metaserver. The metaserver "
+"could be using a different protocol version. If the error persists, try "
+"updating your game."
+msgstr "Fhuair sinn pacaid air nach robh dùil on mheata-fhrithealaiche. ’S dòcha gu bheil am meata-fhrithealaiche a’ cleachdadh tionndadh diofraichte dhen phròtacal. Ma mhaireas an duilgheadas, feuch an ùraich thu an geama agad."
 
-#: ../../src/network/internet_gaming.cc:439
+#: ../../src/network/internet_gaming.cc:499
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "RABHADH: Fhuair sinn àithne %s ged nach eil sinn san staid CONNECTING."
 
-#: ../../src/network/internet_gaming.cc:450
+#: ../../src/network/internet_gaming.cc:510
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
@@ -1800,74 +1805,74 @@ msgstr[1] "Tha frith-àireamh ama an fhrithealaiche ’na %d dgiog."
 msgstr[2] "Tha frith-àireamh ama an fhrithealaiche ’na %d diogan."
 msgstr[3] "Tha frith-àireamh ama an fhrithealaiche ’na %d diog."
 
-#: ../../src/network/internet_gaming.cc:474
+#: ../../src/network/internet_gaming.cc:534
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Tha an seòrsa mì-dhligheach “%s” air teachdaireachd a’ chabadaich."
 
-#: ../../src/network/internet_gaming.cc:474
+#: ../../src/network/internet_gaming.cc:534
 msgid "Invalid message type"
 msgstr "Seòrsa teachdaireachd mì-dhligheach"
 
-#: ../../src/network/internet_gaming.cc:512
+#: ../../src/network/internet_gaming.cc:572
 #, c-format
 msgid "The game %s is now available"
 msgstr "Tha an geama %s ri làimh a-nis"
 
-#: ../../src/network/internet_gaming.cc:522
+#: ../../src/network/internet_gaming.cc:582
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Chaidh an geama %s a dhùnadh"
 
-#: ../../src/network/internet_gaming.cc:569
+#: ../../src/network/internet_gaming.cc:629
 #, c-format
 msgid "%s joined the lobby"
 msgstr "Thàinig %s a-steach dhan lobaidh"
 
-#: ../../src/network/internet_gaming.cc:576
+#: ../../src/network/internet_gaming.cc:636
 #, c-format
 msgid "%s left the lobby"
 msgstr "Dh’fhàg %s an lobaidh"
 
-#: ../../src/network/internet_gaming.cc:628
+#: ../../src/network/internet_gaming.cc:691
 msgid "Chat message could not be sent."
 msgstr "Cha b’ urrainn dhuinn teachdaireachd a’ chabadaich a chur."
 
-#: ../../src/network/internet_gaming.cc:642
+#: ../../src/network/internet_gaming.cc:705
 #, c-format
 msgid "ERROR: %s"
 msgstr "MEARACHD: %s"
 
-#: ../../src/network/internet_gaming.cc:652
+#: ../../src/network/internet_gaming.cc:715
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Fhuair sinn àithne nach aithne dhuinn on mheata-fhrithealaiche: %s"
 
-#: ../../src/network/internet_gaming.cc:779
+#: ../../src/network/internet_gaming.cc:841
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Cha b’ urrainn dhuinn an teachdaireachd a chur: chan eil thu ceangailte ris a’ mheata-fhrithealaiche!"
 
-#: ../../src/network/internet_gaming.cc:798
-#: ../../src/network/internet_gaming.cc:805
+#: ../../src/network/internet_gaming.cc:860
+#: ../../src/network/internet_gaming.cc:867
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Cha b’ urrainn dhuinn an teachdaireachd a chur: am bu chòir dha a bhith ’na theachdaireachd phrìobhaideach?"
 
-#: ../../src/network/internet_gaming.cc:812
+#: ../../src/network/internet_gaming.cc:874
 msgid "Private messages to IRC users are not supported."
-msgstr ""
+msgstr "Cha chuir sinn taic ri teachdaireachdan prìobhaideach gu daoine air IRC."
 
-#: ../../src/network/internet_gaming.cc:889
+#: ../../src/network/internet_gaming.cc:951
 msgid "Conversion error"
 msgstr "Mearachd leis an iompachadh"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:892
+#: ../../src/network/internet_gaming.cc:954
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Cha b’ urrainn dhuinn faighinn a-mach a bheil “%s” fìor no fallsa."
 
-#: ../../src/network/internet_gaming.cc:909
+#: ../../src/network/internet_gaming.cc:971
 msgid "unknown"
 msgstr "chan eil fhios"
 
@@ -2925,11 +2930,11 @@ msgstr "Iomairtean"
 msgid "Load Game"
 msgstr "Luchdaich geama"
 
-#: ../../src/wlapplication.cc:1066
+#: ../../src/wlapplication.cc:1076
 msgid "Game data error"
 msgstr "Mearachd le dàta a’ gheama"
 
-#: ../../src/wlapplication.cc:1074
+#: ../../src/wlapplication.cc:1084
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2937,18 +2942,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Nach innis thu dhuinn mun duilgheadas seo ach an doir sinn piseach air Widelands? Chì thu teachdaireachdan co-cheangailte ris san às-chur stannardach (stdout.txt air Windows). Tha thu a’ chleachdadh an togail %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1081
+#: ../../src/wlapplication.cc:1091
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Feuch an cuir thu am fiosrachadh seo ris an aithris agad.\n\nFeuchaidh Widelands ris an geama a shàbhaladh nuair a thachras mearachd rè a’ gheama. ’S urrainn dhut a luchdadh is leantainn air adhart leis a gheama mar as trice, ged nach obraich seo an-còmhnaidh."
 
-#: ../../src/wlapplication.cc:1207
+#: ../../src/wlapplication.cc:1218
 msgid "Invalid Address"
 msgstr "Seòladh mì-dhligheach"
 
-#: ../../src/wlapplication.cc:1208
+#: ../../src/wlapplication.cc:1219
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Tha ainm no seòladh an òstair a chaidh a chur a-steach mì-dhligheach agus cha ghabh ceangal a dhèanamh ris."
 
@@ -3183,17 +3188,17 @@ msgstr "Meudaich an t-amas"
 msgid "Reset to default"
 msgstr "Ath-shuidhich air a’ bhun-roghainn"
 
+#: ../../src/wui/fieldaction.cc:216
+msgid "Build small building"
+msgstr "Tog togalach beag"
+
 #: ../../src/wui/fieldaction.cc:217
-msgid "Build large building"
+msgid "Build big building"
 msgstr "Tog togalach mòr"
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
 msgstr "Tog togalach meadhanach"
-
-#: ../../src/wui/fieldaction.cc:217
-msgid "Build small building"
-msgstr "Tog togalach beag"
 
 #: ../../src/wui/fieldaction.cc:218
 msgid "Build port building"
@@ -3315,10 +3320,6 @@ msgctxt "message"
 msgid "Type"
 msgstr "Seòrsa"
 
-#: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:103
-msgid "Status"
-msgstr "Staid"
-
 #. * TRANSLATORS: We have very little space here. You can also translate this
 #. as "Time" or "Time
 #. * Sent"
@@ -3426,8 +3427,9 @@ msgstr "Dhan bhogsa a-steach"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
-#. message.
-#: ../../src/wui/game_message_menu.cc:626
+#. * message.
+#. * DO NOT omit the placeholder in your translation.
+#: ../../src/wui/game_message_menu.cc:628
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -3437,14 +3439,15 @@ msgstr[2] "Aisig na %d teachdaireachdan a thagh thu"
 msgstr[3] "Aisig am %d teachdaireachd a thagh thu"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:632
+#: ../../src/wui/game_message_menu.cc:634
 msgid "Restore selected message"
 msgstr "Aisig an teachdaireachd a thagh thu"
 
 #. * TRANSLATORS: Tooltip in the messages window. There is a separate string
 #. for 1
-#. message.
-#: ../../src/wui/game_message_menu.cc:640
+#. * message.
+#. * DO NOT omit the placeholder in your translation.
+#: ../../src/wui/game_message_menu.cc:644
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -3454,12 +3457,12 @@ msgstr[2] "Cuir na %d teachdaireachdan a thagh thu gun tasglann"
 msgstr[3] "Cuir am %d teachdaireachd a thagh thu gun tasglann"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:646
+#: ../../src/wui/game_message_menu.cc:650
 msgid "Archive selected message"
 msgstr "Cuir an teachdaireachd a thagh thu dhan tasglann"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:651
+#: ../../src/wui/game_message_menu.cc:655
 #, c-format
 msgid "Del: %s"
 msgstr "Del: %s"
@@ -3834,7 +3837,8 @@ msgid "Do you really want to delete this replay?"
 msgstr "A bheil thu cinnteach gu bheil thu airson an ath-chluiche seo a sguabadh às?"
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
-#: ../../src/wui/load_or_save_game.cc:250
+#. DO NOT omit the placeholder in your translation.
+#: ../../src/wui/load_or_save_game.cc:251
 #, c-format
 msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
@@ -3843,12 +3847,13 @@ msgstr[1] "A bheil thu cinnteach gu bheil thu airson an %d ath-chluiche seo a sg
 msgstr[2] "A bheil thu cinnteach gu bheil thu airson na %d ath-chluichean seo a sguabadh às?"
 msgstr[3] "A bheil thu cinnteach gu bheil thu airson am %d ath-chluiche seo a sguabadh às?"
 
-#: ../../src/wui/load_or_save_game.cc:257
+#: ../../src/wui/load_or_save_game.cc:258
 msgid "Do you really want to delete this game?"
 msgstr "A bheil thu cinnteach gu bheil thu airson an geama seo a sguabadh às?"
 
 #. * TRANSLATORS: Used with multiple games, 1 game has a separate string.
-#: ../../src/wui/load_or_save_game.cc:259
+#. DO NOT omit the placeholder in your translation.
+#: ../../src/wui/load_or_save_game.cc:261
 #, c-format
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
@@ -3857,7 +3862,7 @@ msgstr[1] "A bheil thu cinnteach gu bheil thu airson an %d gheama seo a sguabadh
 msgstr[2] "A bheil thu cinnteach gu bheil thu airson na %d geamannan seo a sguabadh às?"
 msgstr[3] "A bheil thu cinnteach gu bheil thu airson am %d geama seo a sguabadh às?"
 
-#: ../../src/wui/load_or_save_game.cc:272
+#: ../../src/wui/load_or_save_game.cc:274
 msgid "Confirm Deleting File"
 msgid_plural "Confirm Deleting Files"
 msgstr[0] "Dearbh sguabadh às an fhaidhle"
@@ -3868,42 +3873,42 @@ msgstr[3] "Dearbh sguabadh às nam faidhlichean"
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:387
+#: ../../src/wui/load_or_save_game.cc:389
 msgid "Today, %1%:%2%"
 msgstr "An-diugh, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:391
+#: ../../src/wui/load_or_save_game.cc:393
 msgid "saved today at %1%:%2%"
 msgstr "air a shàbhaladh an-diugh %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:404
+#: ../../src/wui/load_or_save_game.cc:406
 msgid "Yesterday, %1%:%2%"
 msgstr "An-dè, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:408
+#: ../../src/wui/load_or_save_game.cc:410
 msgid "saved yesterday at %1%:%2%"
 msgstr "air a shàbhaladh an-dè %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/load_or_save_game.cc:414
+#: ../../src/wui/load_or_save_game.cc:416
 msgid "%1% %2%, %3%"
 msgstr "%2% %1% %3%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
-#. month day, year. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:420
+#. month (short name) day (number), year (number). This is part of a list.
+#: ../../src/wui/load_or_save_game.cc:422
 msgid "saved on %1% %2%, %3%"
 msgstr "air a shàbhaladh %2% %1% %3%"
 
@@ -3912,7 +3917,7 @@ msgstr "air a shàbhaladh %2% %1% %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/wui/load_or_save_game.cc:441
+#: ../../src/wui/load_or_save_game.cc:443
 msgid "SP"
 msgstr "Aon"
 
@@ -3922,7 +3927,7 @@ msgstr "Aon"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:449
+#: ../../src/wui/load_or_save_game.cc:451
 msgid "H (%1%)"
 msgstr "Ò (%1%)"
 
@@ -3932,31 +3937,31 @@ msgstr "Ò (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:457
+#: ../../src/wui/load_or_save_game.cc:459
 msgid "MP (%1%)"
 msgstr "Iom (%1%)"
 
-#: ../../src/wui/load_or_save_game.cc:467
+#: ../../src/wui/load_or_save_game.cc:469
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/load_or_save_game.cc:483
+#: ../../src/wui/load_or_save_game.cc:485
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Chan eil am fòrmat a bu chòir air an fhaidhle seo agus cha ghabh a luchdadh. ’S dòcha gun deach a chruthachadh le seann-tionndadh de Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wui/load_or_save_game.cc:486
+#: ../../src/wui/load_or_save_game.cc:488
 msgid "Error message:"
 msgstr "Teachdaireachd na mearachd:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/wui/load_or_save_game.cc:497
 #: ../../src/wui/load_or_save_game.cc:499
+#: ../../src/wui/load_or_save_game.cc:501
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Neo-chòrdail: %s"
@@ -3989,27 +3994,27 @@ msgstr "Cleachd am fiosrachadh clàraidh a-steach seo gu fèin-obrachail o seo a
 msgid "Login"
 msgstr "Clàraich a-steach"
 
-#: ../../src/wui/login_box.cc:78
+#: ../../src/wui/login_box.cc:77
 msgid "Empty Nickname"
 msgstr "Far-ainm falamh"
 
-#: ../../src/wui/login_box.cc:78
+#: ../../src/wui/login_box.cc:77
 msgid "Please enter a nickname!"
 msgstr "Cuir far-ainm a-steach!"
 
-#: ../../src/wui/login_box.cc:83
+#: ../../src/wui/login_box.cc:82
 msgid "Space in Nickname"
 msgstr "Beàrn san fhar-ainm"
 
-#: ../../src/wui/login_box.cc:84
+#: ../../src/wui/login_box.cc:83
 msgid "Sorry, but spaces are not allowed in nicknames!"
 msgstr "Duilich, ach chan eil beàrnan ceadaichte ann am far-ainm!"
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:89
 msgid "Empty Password"
 msgstr "Facal-faire falamh"
 
-#: ../../src/wui/login_box.cc:90
+#: ../../src/wui/login_box.cc:89
 msgid "Please enter your password!"
 msgstr "Cuir a-steach am facal-faire agad!"
 

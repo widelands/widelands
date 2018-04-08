@@ -82,8 +82,6 @@ enum class BuildingAttribute : uint8_t {
 	kSupportingProducer,
 };
 
-enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
-
 enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
 
 enum class AiModeBuildings : uint8_t { kAnotherAllowed, kOnLimit, kLimitExceeded };
@@ -128,6 +126,20 @@ constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
+
+	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
+	bool reachable_dest(const Map&, const FCoords& dest) const;
+
+	Player* player;
+	uint8_t movecaps;
+	bool open_end;
+};
+
+// Used to walk ower own territory, on fields that are walkable (or as given by mc)
+// plus one step more to a field with own immovable. So that also flags and buildings are
+// included in resulting list
+struct CheckStepOwnTerritory {
+	CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe);
 
 	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
 	bool reachable_dest(const Map&, const FCoords& dest) const;
@@ -196,7 +208,7 @@ struct FindNodeUnownedMineable {
 };
 
 // When looking for unowned terrain to acquire, we must
-// consider if any buildings can be built on unowned land.
+// consider if any buildings (incl. mines) can be built on unowned land.
 struct FindNodeUnownedBuildable {
 	FindNodeUnownedBuildable(Player* p, Game& g);
 
@@ -251,18 +263,25 @@ struct FindNodeWithFlagOrRoad {
 	bool accept(const Map&, FCoords) const;
 };
 
+// Accepts any field
+struct FindNodeAcceptAll {
+	bool accept(const Map&, FCoords) const {
+		return true;
+	};
+};
+
 struct NearFlag {
 	// ordering nearflags by biggest reduction
 	struct CompareShortening {
 		bool operator()(const NearFlag& a, const NearFlag& b) const {
-			return (a.cost - a.distance) > (b.cost - b.distance);
+			return a.current_road_distance > b.current_road_distance;
 		}
 	};
-
-	NearFlag(const Flag& f, int32_t const c, int32_t const d);
+	NearFlag();
+	NearFlag(const Flag* f, int32_t const c);
 
 	bool operator<(const NearFlag& f) const {
-		return cost > f.cost;
+		return current_road_distance > f.current_road_distance;
 	}
 
 	bool operator==(Flag const* const f) const {
@@ -270,8 +289,8 @@ struct NearFlag {
 	}
 
 	Flag const* flag;
-	int32_t cost;
-	int32_t distance;
+	bool to_be_checked;
+	uint32_t current_road_distance;
 };
 
 // FIFO like structure for pairs <gametime,id>, where id is optional
@@ -389,7 +408,8 @@ struct EconomyObserver {
 
 	Widelands::Economy& economy;
 	std::deque<Widelands::Flag const*> flags;
-	int32_t dismantle_grace_time;
+	uint32_t dismantle_grace_time;
+	uint32_t fields_block_last_time;
 };
 
 struct BuildingObserver {
@@ -450,6 +470,7 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	std::set<DescriptionIndex> production_hints;
+	bool requires_supporters;
 
 	// information needed for decision on new building construction
 	int16_t max_preciousness;
@@ -509,6 +530,7 @@ struct ShipObserver {
 	Widelands::Ship* ship;
 	bool waiting_for_command_ = false;
 	uint32_t last_command_time = 0;
+	bool escape_mode = false;
 
 	// direction by which the ship circumvents an island
 	// this is the last circle-island command's direction
@@ -553,6 +575,22 @@ struct MineTypesObserver {
 	uint16_t finished;
 	bool is_critical;
 	uint16_t unoccupied;
+};
+
+// This struct contains count of mineable fields grouped by ore/resource type
+struct MineFieldsObserver {
+
+	void zero();
+	void add(Widelands::DescriptionIndex);
+	void add_critical_ore(Widelands::DescriptionIndex);
+	bool has_critical_ore_fields();
+	uint16_t get(Widelands::DescriptionIndex);
+	uint8_t count_types();
+
+private:
+	// This is the central information of the struct: a pair of resource and count of fields
+	std::map<Widelands::DescriptionIndex, uint16_t> stat;
+	std::set<Widelands::DescriptionIndex> critical_ores;
 };
 
 constexpr int kNeuronWeightLimit = 100;
@@ -732,43 +770,41 @@ struct FlagsForRoads {
 
 	struct Candidate {
 		Candidate();
-		Candidate(uint32_t coords, int32_t distance, bool economy);
+		Candidate(uint32_t coords, int32_t distance, bool different_economy);
 
 		uint32_t coords_hash;
 		int32_t new_road_length;
-		int32_t current_roads_distance;
+		int32_t current_road_length;
 		int32_t air_distance;
-		int32_t reduction_score;
-		bool different_economy;
+
 		bool new_road_possible;
-		bool accessed_via_roads;
 
 		bool operator<(const Candidate& other) const;
 		bool operator==(const Candidate& other) const;
-		void calculate_score();
+		int32_t reduction_score() const;
 	};
 
 	int32_t min_reduction;
-	// This is the core of this object - candidate flags ordered by score
-	std::set<Candidate> queue;
+	// This is the core of this object - candidate flags to be ordered by air_distance
+	std::deque<Candidate> flags_queue;
 
-	void add_flag(Widelands::Coords coords, int32_t air_dist, bool diff_economy) {
-		queue.insert(Candidate(coords.hash(), air_dist, diff_economy));
+	void add_flag(Widelands::Coords coords, int32_t air_dist, bool different_economy) {
+		flags_queue.push_back(Candidate(coords.hash(), air_dist, different_economy));
 	}
 
 	uint32_t count() {
-		return queue.size();
+		return flags_queue.size();
 	}
+	bool has_candidate(uint32_t hash);
 
 	// This is for debugging and development purposes
 	void print();
 	// during processing we need to pick first one uprocessed flag (with best score so far)
 	bool get_best_uncalculated(uint32_t* winner);
 	// When we test candidate flag if road can be built to it, there are two possible outcomes:
-	void road_possible(Widelands::Coords coords, uint32_t distance);
-	void road_impossible(Widelands::Coords coords);
+	void road_possible(Widelands::Coords coords, uint32_t new_road);
 	// Updating walking distance over existing roads
-	void set_road_distance(Widelands::Coords coords, int32_t distance);
+	void set_cur_road_distance(Widelands::Coords coords, int32_t cur_distance);
 	// Finally we query the flag that we will build a road to
 	bool get_winner(uint32_t* winner_hash);
 };

@@ -303,7 +303,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->roads = player_field.roads;
 			f->vision = player_field.vision;
 			if (player_field.vision == 1) {
-				f->owner = player_field.owner != 0 ? &gbase.player(player_field.owner) : nullptr;
+				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
 			}
 		}

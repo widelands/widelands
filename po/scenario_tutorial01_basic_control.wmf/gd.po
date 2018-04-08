@@ -2,15 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2017
+# GunChleoc, 2015-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"POT-Creation-Date: 2018-02-10 11:03+0000\n"
+"PO-Revision-Date: 2018-02-12 09:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -82,18 +82,18 @@ msgstr "Tòisichidh tu air geama le aon phrìomh-àras mar as trice. Seo an toga
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Feumaidh sinn àite ghoireasach a lorg airson bothan a’ choillteir. Nochdamaid na h-ionadan togail gus seo a dhèanamh nas fhasa. Tha dà dhòigh ann gus an gleus seo a chur air:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Press the Space bar to toggle them, or"
-msgstr ""
+msgstr "Brùth air an iuchair Space gus an cur air is dheth air neo"
 
 #. TRANSLATORS: List item. Has an image of the button next to it.
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr ""
+msgstr "briog air a’ phutan “Seall na h-ionadan togail” aig bonn na sgrìn."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -115,7 +115,7 @@ msgstr "Tha e nas fhasa tuigsinn na dh’fhaodas tu togail air gach raon ma bhio
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Right-click on this window now and then give it a try."
-msgstr ""
+msgstr "Dèan briogadh deas air an uinneag seo an-dràsta is feuch e."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Lumberjack’s Spot"
@@ -276,7 +276,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "Ma nì thu briogadh air an làrach togail, nochdaidh uinneag. Chì thu na seòrsaichean de bhathar a tha a dhìth fhathast le dath liath orra. Chì thu adhartas na làraich togail cuideachd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
@@ -600,14 +600,14 @@ msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "Thoir an aire air na slèibhtean nuair a thogas tu rathaidean is faigh buannachd asta. Feuch cuideachd gun cum thu na rathaidean cho goirid ’s a ghabhas is cuimhnich gun tog thu an uiread de bhrataich a ghabhas air roinnean an rathaid gus an eallach a sgaoileadh nas fhearr."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:315
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Ma chumas tu Ctrl no Shift+Ctrl sìos fad ’s a bhios tu a’ cur crìoch air an rathad, thèid na brataich a chur ann gu fèin-obrachail."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."

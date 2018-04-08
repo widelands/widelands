@@ -163,7 +163,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
  * If both are identical, sort by time sent.
  */
 bool GameMessageMenu::compare_title(uint32_t a, uint32_t b) {
-	MessageQueue& mq = iplayer().player().messages();
+	const MessageQueue& mq = iplayer().player().messages();
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
@@ -181,7 +181,7 @@ bool GameMessageMenu::compare_title(uint32_t a, uint32_t b) {
  * If both are identical, sort by time sent.
  */
 bool GameMessageMenu::compare_status(uint32_t a, uint32_t b) {
-	MessageQueue& mq = iplayer().player().messages();
+	const MessageQueue& mq = iplayer().player().messages();
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
@@ -199,7 +199,7 @@ bool GameMessageMenu::compare_status(uint32_t a, uint32_t b) {
  * If both are identical, sort by time sent.
  */
 bool GameMessageMenu::compare_type(uint32_t a, uint32_t b) {
-	MessageQueue& mq = iplayer().player().messages();
+	const MessageQueue& mq = iplayer().player().messages();
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
@@ -218,7 +218,7 @@ bool GameMessageMenu::compare_type(uint32_t a, uint32_t b) {
  * When comparing messages by time sent, older messages come before others.
  */
 bool GameMessageMenu::compare_time_sent(uint32_t a, uint32_t b) {
-	MessageQueue& mq = iplayer().player().messages();
+	const MessageQueue& mq = iplayer().player().messages();
 	const Message* msga = mq[MessageId((*list)[a])];
 	const Message* msgb = mq[MessageId((*list)[b])];
 
@@ -252,7 +252,7 @@ void GameMessageMenu::show_new_message(MessageId const id, const Widelands::Mess
 }
 
 void GameMessageMenu::think() {
-	MessageQueue& mq = iplayer().player().messages();
+	const MessageQueue& mq = iplayer().player().messages();
 	size_t no_selections = list->selections().size();
 	size_t list_size = list->size();
 
@@ -310,8 +310,8 @@ void GameMessageMenu::update_record(UI::Table<uintptr_t>::EntryRecord& er,
  * Something has been selected
  */
 void GameMessageMenu::selected(uint32_t const t) {
-	Widelands::Player& player = iplayer().player();
-	MessageQueue& mq = player.messages();
+	const Widelands::Player& player = iplayer().player();
+	const MessageQueue& mq = player.messages();
 	if (t != UI::Table<uintptr_t>::no_selection_index()) {
 		MessageId const id = MessageId((*list)[t]);
 		if (Message const* const message = mq[id]) {
@@ -622,7 +622,9 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		if (no_selections > 1) {
 			button_tooltip =
 			   /** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
-			      message. */
+			    * message.
+			    * DO NOT omit the placeholder in your translation.
+			    */
 			   (boost::format(ngettext("Restore the selected %d message",
 			                           "Restore the selected %d messages", no_selections)) %
 			    no_selections)
@@ -636,7 +638,9 @@ void GameMessageMenu::update_archive_button_tooltip() {
 		if (no_selections > 1) {
 			button_tooltip =
 			   /** TRANSLATORS: Tooltip in the messages window. There is a separate string for 1
-			      message. */
+			    * message.
+			    * DO NOT omit the placeholder in your translation.
+			    */
 			   (boost::format(ngettext("Archive the selected %d message",
 			                           "Archive the selected %d messages", no_selections)) %
 			    no_selections)
