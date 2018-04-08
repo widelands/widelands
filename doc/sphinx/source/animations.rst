@@ -33,12 +33,45 @@ Let's have a detailed look at the ``idle`` animation:
 **fps**
    *Optional*. The frames per second for this animation if you want to deviate from the default fps. This will control the playback speed of the animation. Do not specify this value if you have only 1 animation frame.
 
-**scale**
-   *Optional*. If the animation should be blitted at any other scale than 1:1,
-   specify the float value here. For example, if the animation images are 2.5 times the size of what should be blitted at default zoom, use ``scale = 2.5``.
-
 **sound_effect**
    *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play them in sequence.
+
+
+Mipmaps
+-------
+
+We support mipmaps for animations. They allow us to provide the same image in different
+resolutions for optimum rendering quality. Let's look at an example with a mipmap ``idle`` animation and a normal ``build`` animation::
+
+   animations = {
+      idle = {
+         mipmap = {
+            {
+               scale = 0.5,
+               pictures = path.list_files(dirname .. "idle_0.5_??.png"),
+               hotspot = { 30, 39 },
+            },
+            {
+               scale = 1,
+               pictures = path.list_files(dirname .. "idle_1_??.png"),
+               hotspot = { 60, 78 },
+            },
+            {
+               scale = 2,
+               pictures = path.list_files(dirname .. "idle_2_??.png"),
+               hotspot = { 120, 156 },
+            }
+         }
+      },
+      build = {
+         pictures = path.list_files(dirname .. "build_??.png"),
+         hotspot = { 60, 78 },
+      }
+   },
+
+Scales should be at power of 2, and the scale of 1 is mandatory.
+The base table should no longer contain the ``pictures`` and ``hotspot`` entries
+when you're using a mipmap.
 
 
 Directional Animations
