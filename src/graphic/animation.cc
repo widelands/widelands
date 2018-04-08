@@ -62,7 +62,6 @@ public:
 	struct MipMapEntry {
 		explicit MipMapEntry(const float scale, const LuaTable& table);
 
-		Vector2i hotspot;
 		bool hasplrclrs;
 		std::vector<std::string> image_files;
 		std::vector<std::string> pc_mask_image_files;
@@ -106,6 +105,8 @@ private:
 	uint32_t frametime_;
 	uint16_t nr_frames_;
 
+	Vector2i hotspot_;
+
 	struct MipMapCompare {
 	  bool operator() (const float lhs, const float rhs) const
 	  {return lhs > rhs;}
@@ -119,11 +120,10 @@ private:
 	bool play_once_;
 };
 
-NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& table) : hotspot(Vector2i::zero()), hasplrclrs(false) {
+NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& table) : hasplrclrs(false) {
 	if (scale <= 0.0f) {
 		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
 	}
-	get_point(*table.get_table("hotspot"), &hotspot);
 
 	image_files = table.get_table("pictures")->array_entries<std::string>();
 
@@ -147,7 +147,7 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& 
 }
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : frametime_(FRAME_LENGTH), play_once_(false) {
+   : frametime_(FRAME_LENGTH), hotspot_(Vector2i::zero()), play_once_(false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
@@ -165,6 +165,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		}
 
 		// Images
+		get_point(*table.get_table("hotspot"), &hotspot_);
+
 		if (table.has_key("mipmap")) {
 			std::unique_ptr<LuaTable> mipmaps_table = table.get_table("mipmap");
 			for (const int key : mipmaps_table->keys<int>()) {
@@ -334,12 +336,10 @@ Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
                                                 const float scale) const {
 	ensure_graphics_are_loaded();
 	const float best_scale = find_best_scale(scale);
-	const float internal_scale = scale / best_scale;
-	const Vector2i internal_hotspot = mipmaps_.at(best_scale)->hotspot;
 	// Using floor + ceil for pixel perfect positioning
-	return Rectf(std::floor(position.x - (internal_hotspot.x - source_rect.x) * internal_scale),
-	             std::floor(position.y - (internal_hotspot.y - source_rect.y) * internal_scale),
-	             std::ceil(source_rect.w * internal_scale), std::ceil(source_rect.h * internal_scale));
+	return Rectf(std::floor(position.x - hotspot_.x * scale - source_rect.x),
+	             std::floor(position.y - hotspot_.y * scale - source_rect.y),
+	             std::ceil(source_rect.w * scale / best_scale), std::ceil(source_rect.h * scale / best_scale));
 }
 
 void NonPackedAnimation::blit(uint32_t time,

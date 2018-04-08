@@ -25,21 +25,19 @@ tribes:new_warehouse_type {
 
    animations = {
       idle = {
+         hotspot = { 60, 78 },
          mipmap = {
             {
                scale = 0.5,
                pictures = path.list_files(dirname .. "idle_0.5_??.png"),
-               hotspot = { 30, 39 },
             },
             {
                scale = 1,
                pictures = path.list_files(dirname .. "idle_1_??.png"),
-               hotspot = { 60, 78 },
             },
             {
                scale = 2,
                pictures = path.list_files(dirname .. "idle_2_??.png"),
-               hotspot = { 120, 156 },
             }
          }
       },

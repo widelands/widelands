@@ -45,21 +45,19 @@ resolutions for optimum rendering quality. Let's look at an example with a mipma
 
    animations = {
       idle = {
+         hotspot = { 60, 78 },
          mipmap = {
             {
                scale = 0.5,
                pictures = path.list_files(dirname .. "idle_0.5_??.png"),
-               hotspot = { 30, 39 },
             },
             {
                scale = 1,
                pictures = path.list_files(dirname .. "idle_1_??.png"),
-               hotspot = { 60, 78 },
             },
             {
                scale = 2,
                pictures = path.list_files(dirname .. "idle_2_??.png"),
-               hotspot = { 120, 156 },
             }
          }
       },
@@ -69,9 +67,11 @@ resolutions for optimum rendering quality. Let's look at an example with a mipma
       }
    },
 
-Scales should be at power of 2, and the scale of 1 is mandatory.
-The base table should no longer contain the ``pictures`` and ``hotspot`` entries
+Scales should be at power of 2, and the scale of ``1`` is mandatory.
+Recommended scales are ``0.5``, ``1``, ``2`` and ``4``.
+The base table should no longer contain the ``pictures`` entry
 when you're using a mipmap.
+Each mimap entry must define the ``pictures`` and the ``scale``.
 
 
 Directional Animations

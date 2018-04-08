@@ -36,21 +36,19 @@ tribes:new_productionsite_type {
          hotspot = { 62, 48 },
       },
       working = {
+         hotspot = { 62, 48 },
          mipmap = {
             {
                scale = 0.5,
                pictures = path.list_files(dirname .. "working_0.5_??.png"),
-               hotspot = { 31, 24 },
             },
             {
                scale = 1,
                pictures = path.list_files(dirname .. "working_1_??.png"),
-               hotspot = { 62, 48 },
             },
             {
                scale = 2,
                pictures = path.list_files(dirname .. "working_2_??.png"),
-               hotspot = { 124, 96 },
             }
          }
 
