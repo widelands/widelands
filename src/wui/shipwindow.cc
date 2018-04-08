@@ -53,18 +53,18 @@ constexpr int kPadding = 5;
 
 using namespace Widelands;
 
-ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Ship& ship)
-   : UniqueWindow(&igb, "shipwindow", &reg, 0, 0, ship.get_shipname()),
+ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Ship* ship)
+   : UniqueWindow(&igb, "shipwindow", &reg, 0, 0, ship->get_shipname()),
      igbase_(igb),
      ship_(ship),
      vbox_(this, 0, 0, UI::Box::Vertical),
      navigation_box_(&vbox_, 0, 0, UI::Box::Vertical),
      navigation_box_height_(0) {
 	vbox_.set_inner_spacing(kPadding);
-	assert(ship_.get_owner());
+	assert(ship->get_owner());
 
-	display_ = new ItemWaresDisplay(&vbox_, *ship_.get_owner());
-	display_->set_capacity(ship_.descr().get_capacity());
+	display_ = new ItemWaresDisplay(&vbox_, ship->owner());
+	display_->set_capacity(ship->descr().get_capacity());
 	vbox_.add(display_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
 	// Expedition buttons
@@ -191,10 +191,14 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 }
 
 void ShipWindow::set_button_visibility() {
-	if (navigation_box_.is_visible() != ship_.state_is_expedition()) {
-		navigation_box_.set_visible(ship_.state_is_expedition());
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+	if (navigation_box_.is_visible() != ship->state_is_expedition()) {
+		navigation_box_.set_visible(ship->state_is_expedition());
 		navigation_box_.set_desired_size(
-		   navigation_box_.get_w(), ship_.state_is_expedition() ? navigation_box_height_ : 0);
+		   navigation_box_.get_w(), ship->state_is_expedition() ? navigation_box_height_ : 0);
 		layout();
 	}
 	if (btn_cancel_expedition_->is_visible() != btn_cancel_expedition_->enabled()) {
@@ -203,8 +207,12 @@ void ShipWindow::set_button_visibility() {
 }
 
 void ShipWindow::no_port_error_message() {
-	if (upcast(InteractiveGameBase, igamebase, ship_.get_owner()->egbase().get_ibase())) {
-		if (igamebase->can_act(ship_.get_owner()->player_number())) {
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+	if (upcast(InteractiveGameBase, igamebase, ship->get_owner()->egbase().get_ibase())) {
+		if (igamebase->can_act(ship->owner().player_number())) {
 			UI::WLMessageBox messagebox(
 			   get_parent(),
 			   /** TRANSLATORS: Window label when an expedition can't be canceled */
@@ -218,17 +226,21 @@ void ShipWindow::no_port_error_message() {
 
 void ShipWindow::think() {
 	UI::Window::think();
-	InteractiveBase* ib = ship_.get_owner()->egbase().get_ibase();
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+	InteractiveBase* ib = ship->get_owner()->egbase().get_ibase();
 	bool can_act = false;
 	if (upcast(InteractiveGameBase, igb, ib))
-		can_act = igb->can_act(ship_.get_owner()->player_number());
+		can_act = igb->can_act(ship->owner().player_number());
 
-	btn_destination_->set_enabled(ship_.get_destination(igbase_.egbase()));
+	btn_destination_->set_enabled(ship->get_destination(igbase_.egbase()));
 	btn_sink_->set_enabled(can_act);
 
 	display_->clear();
-	for (uint32_t idx = 0; idx < ship_.get_nritems(); ++idx) {
-		Widelands::ShippingItem item = ship_.get_item(idx);
+	for (uint32_t idx = 0; idx < ship->get_nritems(); ++idx) {
+		Widelands::ShippingItem item = ship->get_item(idx);
 		Widelands::WareInstance* ware;
 		Widelands::Worker* worker;
 		item.get(igbase_.egbase(), &ware, &worker);
@@ -241,8 +253,8 @@ void ShipWindow::think() {
 		}
 	}
 
-	Ship::ShipStates state = ship_.get_ship_state();
-	if (ship_.state_is_expedition()) {
+	Ship::ShipStates state = ship->get_ship_state();
+	if (ship->state_is_expedition()) {
 		/* The following rules apply:
 		 * - The "construct port" button is only active, if the ship is waiting for commands and found
 		 * a port
@@ -259,9 +271,9 @@ void ShipWindow::think() {
 		bool coast_nearby = false;
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
-			btn_scout_[dir - 1]->set_enabled(can_act && ship_.exp_dir_swimmable(dir) &&
+			btn_scout_[dir - 1]->set_enabled(can_act && ship->exp_dir_swimmable(dir) &&
 			                                 (state != Ship::ShipStates::kExpeditionColonizing));
-			coast_nearby |= !ship_.exp_dir_swimmable(dir);
+			coast_nearby |= !ship->exp_dir_swimmable(dir);
 		}
 		btn_explore_island_cw_->set_enabled(can_act && coast_nearby &&
 		                                    (state != Ship::ShipStates::kExpeditionColonizing));
@@ -269,7 +281,7 @@ void ShipWindow::think() {
 		                                     (state != Ship::ShipStates::kExpeditionColonizing));
 		btn_sink_->set_enabled(can_act && (state != Ship::ShipStates::kExpeditionColonizing));
 	}
-	btn_cancel_expedition_->set_enabled(ship_.state_is_expedition() && can_act &&
+	btn_cancel_expedition_->set_enabled(ship->state_is_expedition() && can_act &&
 	                                    (state != Ship::ShipStates::kExpeditionColonizing));
 	// Expedition specific buttons
 	set_button_visibility();
@@ -289,12 +301,20 @@ UI::Button* ShipWindow::make_button(UI::Panel* parent,
 
 /// Move the main view towards the current ship location
 void ShipWindow::act_goto() {
-	igbase_.map_view()->scroll_to_field(ship_.get_position(), MapView::Transition::Smooth);
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+	igbase_.map_view()->scroll_to_field(ship->get_position(), MapView::Transition::Smooth);
 }
 
 /// Move the main view towards the current destination of the ship
 void ShipWindow::act_destination() {
-	if (PortDock* destination = ship_.get_destination(igbase_.egbase())) {
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+	if (PortDock* destination = ship->get_destination(igbase_.egbase())) {
 		igbase_.map_view()->scroll_to_field(
 		   destination->get_warehouse()->get_position(), MapView::Transition::Smooth);
 	}
@@ -302,53 +322,77 @@ void ShipWindow::act_destination() {
 
 /// Sink the ship if confirmed
 void ShipWindow::act_sink() {
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
 	if (SDL_GetModState() & KMOD_CTRL) {
-		igbase_.game().send_player_sink_ship(ship_);
+		igbase_.game().send_player_sink_ship(*ship);
 	} else {
-		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(igbase_), ship_);
+		show_ship_sink_confirm(dynamic_cast<InteractivePlayer&>(igbase_), *ship);
 	}
 }
 
 /// Show debug info
 void ShipWindow::act_debug() {
-	show_mapobject_debug(igbase_, ship_);
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
+	show_mapobject_debug(igbase_, *ship);
 }
 
 /// Cancel expedition if confirmed
 void ShipWindow::act_cancel_expedition() {
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
 	if (SDL_GetModState() & KMOD_CTRL) {
-		igbase_.game().send_player_cancel_expedition_ship(ship_);
+		igbase_.game().send_player_cancel_expedition_ship(*ship);
 	} else {
-		show_ship_cancel_expedition_confirm(dynamic_cast<InteractivePlayer&>(igbase_), ship_);
+		show_ship_cancel_expedition_confirm(dynamic_cast<InteractivePlayer&>(igbase_), *ship);
 	}
 }
 
 /// Sends a player command to the ship to scout towards a specific direction
 void ShipWindow::act_scout_towards(WalkingDir direction) {
-	// ignore request if the direction is not swimmable at all
-	if (!ship_.exp_dir_swimmable(static_cast<Direction>(direction)))
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
 		return;
-	igbase_.game().send_player_ship_scouting_direction(ship_, direction);
+	}
+	// ignore request if the direction is not swimmable at all
+	if (!ship->exp_dir_swimmable(static_cast<Direction>(direction)))
+		return;
+	igbase_.game().send_player_ship_scouting_direction(*ship, direction);
 }
 
 /// Constructs a port at the port build space in vision range
 void ShipWindow::act_construct_port() {
-	if (ship_.exp_port_spaces().empty())
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
 		return;
-	igbase_.game().send_player_ship_construct_port(ship_, ship_.exp_port_spaces().front());
+	}
+	if (ship->exp_port_spaces().empty())
+		return;
+	igbase_.game().send_player_ship_construct_port(*ship, ship->exp_port_spaces().front());
 }
 
 /// Explores the island cw or ccw
 void ShipWindow::act_explore_island(IslandExploreDirection direction) {
+	Widelands::Ship* ship = ship_.get(igbase_.egbase());
+	if (ship == nullptr) {
+		return;
+	}
 	bool coast_nearby = false;
 	bool moveable = false;
 	for (Direction dir = 1; (dir <= LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
-		if (!ship_.exp_dir_swimmable(dir))
+		if (!ship->exp_dir_swimmable(dir))
 			coast_nearby = true;
 		else
 			moveable = true;
 	}
 	if (!coast_nearby || !moveable)
 		return;
-	igbase_.game().send_player_ship_explore_island(ship_, direction);
+	igbase_.game().send_player_ship_explore_island(*ship, direction);
 }

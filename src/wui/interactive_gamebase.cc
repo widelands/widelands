@@ -245,7 +245,7 @@ void InteractiveGameBase::show_ship_window(Widelands::Ship* ship) {
 	UI::UniqueWindow::Registry& registry =
 		unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
 	registry.open_window = [this, &registry, ship] {
-		new ShipWindow(*this, registry, *ship);
+		new ShipWindow(*this, registry, ship);
 	};
 	registry.create();
 }
