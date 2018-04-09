@@ -83,6 +83,9 @@ Each of these 6 animations will then be defined like the animation above, so we 
 
 In order to cut down on the manual coding needed, we have a convenience function :any:`add_walking_animations` to define the animation tables for walking animations. The corresponding ``.lua`` script file is included centrally when the tribe or world loading is started, so you won't need to include it again.
 
+We also support mipmaps here - use the convenience function :any:`add_directional_animations` for this and name the files ``walk_ne_0.5_00.png``, ``walk_ne_1_00.png`` etc.
+
+
 Map Object Types
 ----------------
 

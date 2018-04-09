@@ -7,7 +7,6 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Ship Under Construction"),
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
-   representative_image = dirname .. "build_03.png",
    attributes = { "shipconstruction" },
    programs = {
       program = {
