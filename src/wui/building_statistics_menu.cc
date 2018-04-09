@@ -116,12 +116,12 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                             "",
                             UI::Align::kRight),
      low_production_(33),
-     has_selection_(false) {
+     has_selection_(false),
+	  nr_building_types_(parent.egbase().tribes().nrbuildings()) {
 
-	const DescriptionIndex nr_buildings = parent.egbase().tribes().nrbuildings();
-	building_buttons_ = std::vector<UI::Button*>(nr_buildings);
-	owned_labels_ = std::vector<UI::Textarea*>(nr_buildings);
-	productivity_labels_ = std::vector<UI::Textarea*>(nr_buildings);
+	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);
+	owned_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
+	productivity_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
 
 	set_label_font(&owned_label_);
 	set_label_font(&construction_label_);
@@ -218,13 +218,12 @@ void BuildingStatisticsMenu::reset() {
 	tab_panel_.remove_last_tab("building_stats_small");
 
 	// Clean state if buildings disappear from list
-	const DescriptionIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
 	building_buttons_.clear();
-	building_buttons_.resize(nr_buildings);
+	building_buttons_.resize(nr_building_types_);
 	owned_labels_.clear();
-	owned_labels_.resize(nr_buildings);
+	owned_labels_.resize(nr_building_types_);
 	productivity_labels_.clear();
-	productivity_labels_.resize(nr_buildings);
+	productivity_labels_.resize(nr_building_types_);
 
 	// Ensure that defunct buttons disappear
 	for (int tab_index = 0; tab_index < kNoOfBuildingTabs; ++tab_index) {
@@ -253,14 +252,14 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	std::vector<DescriptionIndex> buildings_to_add[kNoOfBuildingTabs];
 	// Add the player's own tribe's buildings.
 	for (DescriptionIndex index : tribe.buildings()) {
-		if (own_building_is_valid(index)) {
+		if (own_building_is_valid(player, index)) {
 			buildings_to_add[find_tab_for_building(*tribe.get_building_descr(index))].push_back(index);
 		}
 	}
 
 	// We want to add other tribes' buildings on the bottom. Only add the ones that the player owns.
-	for (DescriptionIndex index = 0; index < iplayer().egbase().tribes().nrbuildings(); ++index) {
-		if (foreign_tribe_building_is_valid(index)) {
+	for (DescriptionIndex index = 0; index < nr_building_types_; ++index) {
+		if (foreign_tribe_building_is_valid(player, index)) {
 			buildings_to_add[find_tab_for_building(*tribe.get_building_descr(index))].push_back(index);
 		}
 	}
@@ -320,8 +319,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	update();
 }
 
-bool BuildingStatisticsMenu::own_building_is_valid(Widelands::DescriptionIndex index) const {
-	const Widelands::Player& player = iplayer().player();
+bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& player, Widelands::DescriptionIndex index) const {
 	const BuildingDescr& descr = *player.tribe().get_building_descr(index);
 	// Skip seafaring buildings if not needed
 	if (descr.needs_seafaring() && !iplayer().game().map().allows_seafaring() &&
@@ -341,8 +339,7 @@ bool BuildingStatisticsMenu::own_building_is_valid(Widelands::DescriptionIndex i
 }
 
 bool BuildingStatisticsMenu::foreign_tribe_building_is_valid(
-   Widelands::DescriptionIndex index) const {
-	const Widelands::Player& player = iplayer().player();
+   const Widelands::Player& player, Widelands::DescriptionIndex index) const {
 	if (!player.tribe().has_building(index) && !player.get_building_statistics(index).empty()) {
 		const BuildingDescr& descr = *iplayer().egbase().tribes().get_building_descr(index);
 		if (descr.type() == MapObjectType::CONSTRUCTIONSITE ||
@@ -378,9 +375,10 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 }
 
 void BuildingStatisticsMenu::update_building_list() {
-	for (DescriptionIndex index = 0; index < iplayer().egbase().tribes().nrbuildings(); ++index) {
+	const Widelands::Player& player = iplayer().player();
+	for (DescriptionIndex index = 0; index < nr_building_types_; ++index) {
 		const bool should_have_this_building =
-		   own_building_is_valid(index) || foreign_tribe_building_is_valid(index);
+		   own_building_is_valid(player, index) || foreign_tribe_building_is_valid(player, index);
 		const bool has_this_building = building_buttons_[index] != nullptr;
 		if (should_have_this_building != has_this_building) {
 			reset();
@@ -601,7 +599,6 @@ int32_t BuildingStatisticsMenu::validate_pointer(int32_t* const id, int32_t cons
 void BuildingStatisticsMenu::update() {
 	const Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
-	const DescriptionIndex nr_buildings = iplayer().egbase().tribes().nrbuildings();
 
 	owned_label_.set_visible(false);
 	no_owned_label_.set_visible(false);
@@ -619,7 +616,7 @@ void BuildingStatisticsMenu::update() {
 	navigation_buttons_[NavigationButton::NextUnproductive]->set_visible(false);
 	navigation_buttons_[NavigationButton::PrevUnproductive]->set_visible(false);
 
-	for (DescriptionIndex id = 0; id < nr_buildings; ++id) {
+	for (DescriptionIndex id = 0; id < nr_building_types_; ++id) {
 		const BuildingDescr& building = *tribe.get_building_descr(id);
 		if (building_buttons_[id] == nullptr) {
 			continue;

@@ -72,9 +72,9 @@ private:
 	void init(int last_selected_tab = 0);
 
 	/// Whether a building that is used by the player's tribe should be added
-	bool own_building_is_valid(Widelands::DescriptionIndex index) const;
+	bool own_building_is_valid(const Widelands::Player& player, Widelands::DescriptionIndex index) const;
 	/// Whether a building that isn't used by the player's tribe should be added
-	bool foreign_tribe_building_is_valid(Widelands::DescriptionIndex index) const;
+	bool foreign_tribe_building_is_valid(const Widelands::Player& player, Widelands::DescriptionIndex index) const;
 	/// Determine which tab a building button should end up on, according to building size etc.
 	int find_tab_for_building(const Widelands::BuildingDescr& descr) const;
 
@@ -151,6 +151,9 @@ private:
 
 	/// Whether a building has been selected
 	bool has_selection_;
+
+	/// The total number of building types available for all the tribes
+	const Widelands::DescriptionIndex nr_building_types_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H
