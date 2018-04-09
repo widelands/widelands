@@ -34,7 +34,7 @@ Let's have a detailed look at the ``idle`` animation:
    *Optional*. The frames per second for this animation if you want to deviate from the default fps. This will control the playback speed of the animation. Do not specify this value if you have only 1 animation frame.
 
 **scale**
-   *Optional*. If the animation should be blitted at any other scale than 1:1,
+   **DEPRECATED**. If the animation should be blitted at any other scale than 1:1,
    specify the float value here. For example, if the animation images are 2.5 times the size of what should be blitted at default zoom, use ``scale = 2.5``.
 
 **sound_effect**
