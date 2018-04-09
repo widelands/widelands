@@ -42,6 +42,7 @@ constexpr int kLabelFontSize = 12;
 constexpr int32_t kWindowWidth = kColumns * kBuildGridCellWidth;
 
 constexpr int32_t kUpdateTimeInGametimeMs = 1000;  //  1 second, gametime
+constexpr int32_t kSeafaringUpdateTimeInGametimeMs = 120 * 1000;  //  1 minutes, gametime
 
 using namespace Widelands;
 
@@ -117,7 +118,9 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
                             UI::Align::kRight),
      low_production_(33),
      has_selection_(false),
-	  nr_building_types_(parent.egbase().tribes().nrbuildings()) {
+	  nr_building_types_(parent.egbase().tribes().nrbuildings()),
+	  last_seafaring_check_(parent.game().get_gametime()),
+	  map_allows_seafaring_(parent.game().map().allows_seafaring()) {
 
 	building_buttons_ = std::vector<UI::Button*>(nr_building_types_);
 	owned_labels_ = std::vector<UI::Textarea*>(nr_building_types_);
@@ -322,7 +325,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 bool BuildingStatisticsMenu::own_building_is_valid(const Widelands::Player& player, Widelands::DescriptionIndex index) const {
 	const BuildingDescr& descr = *player.tribe().get_building_descr(index);
 	// Skip seafaring buildings if not needed
-	if (descr.needs_seafaring() && !iplayer().game().map().allows_seafaring() &&
+	if (descr.needs_seafaring() && !map_allows_seafaring_ &&
 	    player.get_building_statistics(index).empty()) {
 		return false;
 	}
@@ -555,6 +558,11 @@ void BuildingStatisticsMenu::jump_building(JumpTarget target, bool reverse) {
 void BuildingStatisticsMenu::think() {
 	// Update statistics
 	const int32_t gametime = iplayer().game().get_gametime();
+
+	if ((gametime - last_seafaring_check_) > kSeafaringUpdateTimeInGametimeMs) {
+		map_allows_seafaring_ = iplayer().game().map().allows_seafaring();
+		last_seafaring_check_ = gametime;
+	}
 
 	if (was_minimized_ || (gametime - lastupdate_) > kUpdateTimeInGametimeMs) {
 		update_building_list();
