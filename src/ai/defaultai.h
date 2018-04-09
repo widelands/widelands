@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -351,6 +351,8 @@ private:
 	uint32_t next_mine_construction_due_;
 	uint16_t fishers_count_;
 	uint16_t bakeries_count_;
+
+	uint32_t first_iron_mine_built;
 
 	// for training sites per type
 	int16_t ts_finished_count_;
