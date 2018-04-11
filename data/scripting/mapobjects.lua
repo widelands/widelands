@@ -34,7 +34,7 @@ end
 function add_walking_animations(animationtable, animationname, dirname, basename, hotspot, fps)
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
       animationtable[animationname .. "_" .. dir] = {
-         pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
+         files = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
          hotspot = hotspot,
       }
       if (fps ~= nil) then
@@ -65,7 +65,7 @@ function add_directional_animations(animationtable, animationname, dirname, base
             mipmap,
             {
                scale = current_scale,
-               pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_" .. current_scale .. "_??.png"),
+               files = path.list_files(dirname .. basename .. "_" .. dir ..  "_" .. current_scale .. "_??.png"),
             }
          )
       end

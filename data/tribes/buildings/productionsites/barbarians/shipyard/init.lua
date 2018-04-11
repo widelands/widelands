@@ -40,15 +40,15 @@ tribes:new_productionsite_type {
          mipmap = {
             {
                scale = 0.5,
-               pictures = path.list_files(dirname .. "working_0.5_??.png"),
+               files = path.list_files(dirname .. "working_0.5_??.png"),
             },
             {
                scale = 1,
-               pictures = path.list_files(dirname .. "working_1_??.png"),
+               files = path.list_files(dirname .. "working_1_??.png"),
             },
             {
                scale = 2,
-               pictures = path.list_files(dirname .. "working_2_??.png"),
+               files = path.list_files(dirname .. "working_2_??.png"),
             }
          }
 

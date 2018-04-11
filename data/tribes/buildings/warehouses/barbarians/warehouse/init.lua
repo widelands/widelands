@@ -29,15 +29,15 @@ tribes:new_warehouse_type {
          mipmap = {
             {
                scale = 0.5,
-               pictures = path.list_files(dirname .. "idle_0.5_??.png"),
+               files = path.list_files(dirname .. "idle_0.5_??.png"),
             },
             {
                scale = 1,
-               pictures = path.list_files(dirname .. "idle_1_??.png"),
+               files = path.list_files(dirname .. "idle_1_??.png"),
             },
             {
                scale = 2,
-               pictures = path.list_files(dirname .. "idle_2_??.png"),
+               files = path.list_files(dirname .. "idle_2_??.png"),
             }
          }
       },

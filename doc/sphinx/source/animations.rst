@@ -7,7 +7,7 @@ Animations are defined as Lua tables. All map objects have a mandatory ``idle`` 
 
    animations = {
       idle = {
-         pictures = path.list_files(path.dirname(__file__) .. "idle_??.png"),
+         files = path.list_files(path.dirname(__file__) .. "idle_??.png"),
          hotspot = { 5, 7 },
          scale = 2.5,
          fps = 4,
@@ -24,8 +24,11 @@ Let's have a detailed look at the ``idle`` animation:
 **idle**
    *Mandatory*. This is the name of the animation. The animation can then be referenced by this name e.g. if you want to trigger it in a production program.
 
-**pictures**
+**files**
    *Mandatory*. A template for the image names. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path – the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names.
+
+**pictures**
+   *DEPRECATED*. The same as ``files``.
 
 **hotspot**
    *Mandatory*. Hotspots define a place on a graphic image through its *x* and *y* coordinates that can be used as a handle or reference point to provide control over positioning the image on the map. For example, hotspots help carriers stay on the road, and control the positioning of the wares they carry. Increase ``x`` to shift the animation to the left and ``y`` to shift it upwards.
@@ -49,29 +52,29 @@ resolutions for optimum rendering quality. Let's look at an example with a mipma
          mipmap = {
             {
                scale = 0.5,
-               pictures = path.list_files(dirname .. "idle_0.5_??.png"),
+               files = path.list_files(dirname .. "idle_0.5_??.png"),
             },
             {
                scale = 1,
-               pictures = path.list_files(dirname .. "idle_1_??.png"),
+               files = path.list_files(dirname .. "idle_1_??.png"),
             },
             {
                scale = 2,
-               pictures = path.list_files(dirname .. "idle_2_??.png"),
+               files = path.list_files(dirname .. "idle_2_??.png"),
             }
          }
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
+         files = path.list_files(dirname .. "build_??.png"),
          hotspot = { 60, 78 },
       }
    },
 
 Scales should be at power of 2, and the scale of ``1`` is mandatory.
-Recommended scales are ``0.5``, ``1``, ``2`` and ``4``.
-The base table should no longer contain the ``pictures`` entry
+Supported scales are ``0.5``, ``1``, ``2`` and ``4``.
+The base table should no longer contain the ``files`` entry
 when you're using a mipmap.
-Each mimap entry must define the ``pictures`` and the ``scale``.
+Each mimap entry must define the ``files`` and the ``scale``.
 
 
 Directional Animations
@@ -79,7 +82,7 @@ Directional Animations
 
 For objects that move around the map, like carriers, ships or animals, there need to be 6 animations for the walking directions northeast ``"ne"``, east ``"e"``, southeast ``"se"``, southwest ``"sw"``, west ``"w"``, and northwest ``"nw"``. So, a "walk" animation would consist of 6 animations called ``"walk_ne"``, ``"walk_e"``, ``"walk_se"``, ``"walk_sw"``, ``"walk_w"``, and ``"walk_nw"``.
 
-Each of these 6 animations will then be defined like the animation above, so we would end up with pictures called ``walk_ne_00.png``, ``walk_ne_01.png`` ... ``walk_nw_00.png``,  ``walk_nw_01.png`` ..., and for player color: ``walk_ne_00_pc.png``, ``walk_ne_01_pc.png`` ... ``walk_nw_00_pc.png``,  ``walk_nw_01_pc.png``, ...
+Each of these 6 animations will then be defined like the animation above, so we would end up with files called ``walk_ne_00.png``, ``walk_ne_01.png`` ... ``walk_nw_00.png``,  ``walk_nw_01.png`` ..., and for player color: ``walk_ne_00_pc.png``, ``walk_ne_01_pc.png`` ... ``walk_nw_00_pc.png``,  ``walk_nw_01_pc.png``, ...
 
 In order to cut down on the manual coding needed, we have a convenience function :any:`add_walking_animations` to define the animation tables for walking animations. The corresponding ``.lua`` script file is included centrally when the tribe or world loading is started, so you won't need to include it again.
 
@@ -120,19 +123,19 @@ For example, a mine could look like this::
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
+         files = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 21, 36 },
       },
       build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
+         files = path.list_files(dirname .. "build_??.png"),
          hotspot = { 21, 36 },
       },
       working = {
-         pictures = path.list_files(dirname .. "working_??.png"),
+         files = path.list_files(dirname .. "working_??.png"),
          hotspot = { 21, 36 },
       },
       empty = {
-         pictures = path.list_files(dirname .. "empty_??.png"),
+         files = path.list_files(dirname .. "empty_??.png"),
          hotspot = { 21, 36 },
       },
    },
@@ -166,11 +169,11 @@ For example, a fisher could look like this::
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
+         files = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 9, 39 },
       },
       fishing = {
-         pictures = path.list_files(dirname .. "fishing_??.png"),
+         files = path.list_files(dirname .. "fishing_??.png"),
          hotspot = { 9, 39 },
          fps = 10
       }
@@ -189,12 +192,12 @@ For example, attacking towards the west can be defined like this::
    animations = {
       ...
       atk_ok_w1 = {
-         pictures = path.list_files(dirname .. "atk_ok_w1_??.png"),
+         files = path.list_files(dirname .. "atk_ok_w1_??.png"),
          hotspot = { 36, 40 },
          fps = 20
       },
       atk_ok_w2 = {
-         pictures = path.list_files(dirname .. "atk_ok_w2_??.png"),
+         files = path.list_files(dirname .. "atk_ok_w2_??.png"),
          hotspot = { 36, 40 },
          fps = 20
       },

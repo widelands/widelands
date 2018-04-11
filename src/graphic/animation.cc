@@ -125,10 +125,12 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& 
 		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
 	}
 
-	image_files = table.get_table("pictures")->array_entries<std::string>();
+	// TODO(GunChleoc): We want to rename these from "pictures" to "files", because we'll have spritesheets etc. in the future, and this naming will be clearer.
+	// We don't want to convert them in bulk right now though - it will take care of itself as we convert to mipmaps.
+	image_files = (table.has_key("files") ? table.get_table("files") : table.get_table("pictures"))->array_entries<std::string>();
 
 	if (image_files.empty()) {
-		throw wexception("Animation without pictures. For a scale of 1.0, the template should look similar to this:"
+		throw wexception("Animation without image files. For a scale of 1.0, the template should look similar to this:"
 		                 " 'directory/idle_1_??.png' for 'directory/idle_1_00.png' etc.");
 	}
 
@@ -235,7 +237,7 @@ void NonPackedAnimation::load_graphics() {
 		MipMapEntry* mipmap = entry.second.get();
 
 		if (mipmap->image_files.empty()) {
-			throw wexception("animation without pictures at promised scale %.2f.", entry.first);
+			throw wexception("animation without image files at promised scale %.2f.", entry.first);
 		}
 		if (mipmap->pc_mask_image_files.size() && mipmap->pc_mask_image_files.size() != mipmap->image_files.size()) {
 			throw wexception("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames for scale %.2f",
