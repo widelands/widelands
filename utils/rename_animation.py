@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-"""Tool to rename all files for a widelands animation in bulk"""
+"""Tool to rename all files for a widelands animation in bulk."""
 
 
 from subprocess import call
@@ -9,8 +9,11 @@ import os.path
 import subprocess
 import sys
 
+
 def main():
-    """Finds all files with the given relative source path with file prefix and bzr moves all files that match this prefix to the given destination path with file prefix."""
+    """Finds all files with the given relative source path with file prefix and
+    bzr moves all files that match this prefix to the given destination path
+    with file prefix."""
 
     print('Tool to rename all files for a widelands animation in bulk')
 

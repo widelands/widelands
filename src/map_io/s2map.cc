@@ -1065,4 +1065,5 @@ void S2MapLoader::postload_set_port_spaces(const Widelands::World& world) {
 			log("SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
 		}
 	}
+	map_.recalculate_allows_seafaring();
 }
