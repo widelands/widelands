@@ -54,20 +54,22 @@ end
 --    :arg dirname: The name of the directory where the animation image files are located.
 --    :arg basename: The basename of the animation files. The filenames of the animation files need to have the format ``<basename>_(e|ne|se|sw|w|nw)_\d+.png``
 --    :arg hotspot: The hotspot coordinates for blitting, e.g. ``{ 2, 20 }``.
---    :arg scales: The mipmap scales to be used, e.g. ``{ 0.5, 1, 2, 4 }``.
 --    :arg fps: Frames per second. Only use this if the animation has more than 1 frame, and if you need to deviate from the default frame rate.
 function add_directional_animations(animationtable, animationname, dirname, basename, hotspot, scales, fps)
-
+   local supported_scales = { 0.5, 1, 2, 4 }
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
       mipmap = {}
-      for scale_idx, current_scale in ipairs(scales) do
-         table.insert(
-            mipmap,
-            {
-               scale = current_scale,
-               files = path.list_files(dirname .. basename .. "_" .. dir ..  "_" .. current_scale .. "_??.png"),
-            }
-         )
+      for scale_idx, current_scale in ipairs(supported_scales) do
+         local listed_files = path.list_files(dirname .. basename .. "_" .. dir ..  "_" .. current_scale .. "_??.png")
+         if #listed_files > 0 then
+            table.insert(
+               mipmap,
+               {
+                  scale = current_scale,
+                  files = listed_files,
+               }
+            )
+         end
       end
       animationtable[animationname .. "_" .. dir] = {
          mipmap = mipmap,
