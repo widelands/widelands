@@ -1171,8 +1171,7 @@ void LuaMap::__unpersist(lua_State* /* L */) {
 /* RST
    .. attribute:: allows_seafaring
 
-      (RO) Whether the map currently allows seafaring. This will calculate a path between port spaces,
-		so it's more accurate but less efficient than :any:`number_of_port_spaces`.
+      (RO) Whether the map currently allows seafaring.
 
 		:returns: True if there are at least two port spaces that can be reached from each other.
 */
@@ -1183,9 +1182,7 @@ int LuaMap::get_allows_seafaring(lua_State* L) {
 /* RST
    .. attribute:: number_of_port_spaces
 
-      (RO) The amount of port spaces on the map. If this is >= 2, one can assume that the map
-      allows seafaring. This is checked very quickly and is more efficient than :any:`allows_seafaring`,
-      but it won't detect whether the port spaces can be reached from each other, so it's less accurate.
+      (RO) The amount of port spaces on the map.
 
       :returns: An integer with the number of port spaces.
 */
