@@ -72,7 +72,7 @@ private:
 	void init(int last_selected_tab = 0);
 
 	/// Whether a building that is used by the player's tribe should be added
-	bool own_building_is_valid(const Widelands::Player& player, Widelands::DescriptionIndex index) const;
+	bool own_building_is_valid(const Widelands::Player& player, Widelands::DescriptionIndex index, bool map_allows_seafaring) const;
 	/// Whether a building that isn't used by the player's tribe should be added
 	bool foreign_tribe_building_is_valid(const Widelands::Player& player, Widelands::DescriptionIndex index) const;
 	/// Determine which tab a building button should end up on, according to building size etc.
@@ -154,10 +154,6 @@ private:
 
 	/// The total number of building types available for all the tribes
 	const Widelands::DescriptionIndex nr_building_types_;
-
-	/// Seafaring check is slow, so we check this less often
-	uint32_t last_seafaring_check_;
-	bool map_allows_seafaring_;
 };
 
 #endif  // end of include guard: WL_WUI_BUILDING_STATISTICS_MENU_H
