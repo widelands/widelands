@@ -23,8 +23,10 @@
 #include <cstdio>
 #include <limits>
 #include <memory>
+#include <set>
 
 #include <boost/algorithm/string/replace.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -42,6 +44,8 @@
 #include "sound/sound_handler.h"
 
 namespace {
+
+const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
 
 // Parses an array { 12, 23 } into a point.
 void get_point(const LuaTable& table, Vector2i* p) {
@@ -174,6 +178,14 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			for (const int key : mipmaps_table->keys<int>()) {
 				std::unique_ptr<LuaTable> current_scale_table = mipmaps_table->get_table(key);
 				const float current_scale = current_scale_table->get_double("scale");
+				if (kSupportedScales.count(current_scale) != 1) {
+					std::string supported_scales = "";
+					for (const float supported_scale : kSupportedScales) {
+						supported_scales = (boost::format("%s %.1f") % supported_scales % supported_scale).str();
+					}
+					throw wexception(
+						"Animation has unsupported scale '%.1f' in mipmap - supported scales are:%s", current_scale, supported_scales.c_str());
+				}
 				mipmaps_.insert(std::make_pair(current_scale, std::unique_ptr<MipMapEntry>(new MipMapEntry(current_scale, *current_scale_table))));
 			}
 		} else {
