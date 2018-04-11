@@ -6130,10 +6130,12 @@ int LuaField::get_bobs(lua_State* L) {
 
       (RW) The terrain of the right/down triangle. This is a string value
       containing the name of the terrain as it is defined in the world
-      configuration. If you are changing the terrain from or to water, the map
-      will not recalculate whether it allows seafaring, because this recalculation
-      can take up a lot of performance. If you need this recalculated, you can do
-      so by calling :any:`recalculate_seafaring` after you're done changing terrains.
+      configuration. You can change the terrain by simply assigning another
+      valid name to these variables. If you are changing the terrain from or to
+      water, the map will not recalculate whether it allows seafaring, because
+      this recalculation can take up a lot of performance. If you need this
+      recalculated, you can do so by calling :any:`recalculate_seafaring` after
+      you're done changing terrains.
 */
 int LuaField::get_terr(lua_State* L) {
 	TerrainDescription& td = get_egbase(L).world().terrain_descr(fcoords(L).field->terrain_r());
