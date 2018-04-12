@@ -1,5 +1,11 @@
 dirname = path.dirname(__file__)
 
+animations = {}
+add_animation(animations, "idle", dirname, "idle", { 62, 48 })
+add_animation(animations, "build", dirname, "build", { 62, 48 })
+add_animation(animations, "unoccupied", dirname, "unoccupied", { 62, 48 })
+add_animation(animations, "working", dirname, "working", { 62, 48 })
+
 tribes:new_productionsite_type {
    msgctxt = "barbarians_building",
    name = "barbarians_shipyard",
@@ -22,38 +28,7 @@ tribes:new_productionsite_type {
       granite = 2
    },
 
-   animations = {
-      idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 62, 48 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 62, 48 },
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 62, 48 },
-      },
-      working = {
-         hotspot = { 62, 48 },
-         mipmap = {
-            {
-               scale = 0.5,
-               files = path.list_files(dirname .. "working_0.5_??.png"),
-            },
-            {
-               scale = 1,
-               files = path.list_files(dirname .. "working_1_??.png"),
-            },
-            {
-               scale = 2,
-               files = path.list_files(dirname .. "working_2_??.png"),
-            }
-         }
-
-      },
-   },
+   animations = animations,
 
    aihints = {
       needs_water = true,

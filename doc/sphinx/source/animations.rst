@@ -3,13 +3,19 @@
 Animations
 ==========
 
-Animations are defined as Lua tables. All map objects have a mandatory ``idle`` animation. They can then have further animations, depending on what their specific capabilities are. Let's look at an example::
+Animations are defined as `Lua tables <http://lua-users.org/wiki/TablesTutorial>`_.
+All map objects have a mandatory ``idle`` animation. They can then have further
+animations, depending on what their specific capabilities are.
+We recommend that you use the convenience functions below for the Lua coding,
+but let's look at an example first to understand which options are available,
+and what your image files need to look like:
+
+.. code-block:: lua
 
    animations = {
       idle = {
          files = path.list_files(path.dirname(__file__) .. "idle_??.png"),
          hotspot = { 5, 7 },
-         scale = 2.5,
          fps = 4,
          sound_effect = {
             directory = "sound/foo",
@@ -25,7 +31,7 @@ Let's have a detailed look at the ``idle`` animation:
    *Mandatory*. This is the name of the animation. The animation can then be referenced by this name e.g. if you want to trigger it in a production program.
 
 **files**
-   *Mandatory*. A template for the image names. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path – the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names.
+   *Mandatory*. A template for the image names. Our example will pick up any image from ``idle_00.png`` through ``idle_99.png`` in the specified directory path -- the current path in our example. These images can optionally have corresponding player color mask images called ``idle_00_pc.png`` through ``idle_99_pc.png``. Make sure to include leading 0's in the file names and to have consistent length -- we support either 2 digit or 3 digit numbers in an animation.
 
 **pictures**
    *DEPRECATED*. The same as ``files``.
@@ -44,11 +50,12 @@ Mipmaps
 -------
 
 We support mipmaps for animations. They allow us to provide the same image in different
-resolutions for optimum rendering quality. Let's look at an example with a mipmap ``idle`` animation and a normal ``build`` animation::
+resolutions for optimum rendering quality. Let's look at an example with a mipmap ``idle`` animation and a normal ``build`` animation:
+
+.. code-block:: lua
 
    animations = {
       idle = {
-         hotspot = { 60, 78 },
          mipmap = {
             {
                scale = 0.5,
@@ -61,17 +68,27 @@ resolutions for optimum rendering quality. Let's look at an example with a mipma
             {
                scale = 2,
                files = path.list_files(dirname .. "idle_2_??.png"),
+            },
+            {
+               scale = 4,
+               files = path.list_files(dirname .. "idle_4_??.png"),
             }
-         }
+         },
+         hotspot = { 5, 7 },
+         fps = 4,
+         sound_effect = {
+            directory = "sound/foo",
+            name = "bar",
+         },
       },
       build = {
          files = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 60, 78 },
+         hotspot = { 5, 7 },
       }
    },
 
-Scales should be at power of 2, and the scale of ``1`` is mandatory.
-Supported scales are ``0.5``, ``1``, ``2`` and ``4``.
+The scale of ``1`` is mandatory, and other supported scales are ``0.5``, ``2``
+and ``4``.
 The base table should no longer contain the ``files`` entry
 when you're using a mipmap.
 Each mimap entry must define the ``files`` and the ``scale``.
@@ -84,12 +101,57 @@ For objects that move around the map, like carriers, ships or animals, there nee
 
 Each of these 6 animations will then be defined like the animation above, so we would end up with files called ``walk_ne_00.png``, ``walk_ne_01.png`` ... ``walk_nw_00.png``,  ``walk_nw_01.png`` ..., and for player color: ``walk_ne_00_pc.png``, ``walk_ne_01_pc.png`` ... ``walk_nw_00_pc.png``,  ``walk_nw_01_pc.png``, ...
 
-In order to cut down on the manual coding needed, we have a convenience function :any:`add_walking_animations` to define the animation tables for walking animations. The corresponding ``.lua`` script file is included centrally when the tribe or world loading is started, so you won't need to include it again.
+We also support mipmaps here -- name the files ``walk_ne_0.5_00.png``,
+``walk_ne_0.5_01.png`` etc. for scale `0.5`, ``walk_ne_1_00.png``,
+``walk_ne_1_01.png`` etc. for scale `1` and so on.
 
-We also support mipmaps here - name the files ``walk_ne_0.5_00.png``,
-``walk_ne_0.5_01.png`` etc. for scale 0.5, ``walk_ne_1_00.png``,
-``walk_ne_1_01.png`` etc. for scale 1 and so on.
-Supported scales are ``0.5``, ``1``, ``2`` and ``4``.
+
+Convenience Functions
+---------------------
+
+In order to cut down on the manual coding needed, we provide the convenience functions
+:any:`add_animation` for static animations and :any:`add_walking_animations` for walking
+animations, both of which will also detect mipmaps automatically.
+The corresponding ``.lua`` script file is included centrally when the tribe or world
+loading is started, so you won't need to include it again. Example:
+
+.. code-block:: lua
+
+   dirname = path.dirname(__file__)
+
+   -- This table will contain the animations
+   animations = {}
+
+   -- Add an idle animation with hotspot = {16, 30} and fps = 5
+   add_animation(animations, "idle", dirname, "idle", {16, 30}, 5)
+
+   -- Add animations for the 6 directions with hotspot = {16, 30} and fps = 10
+   add_walking_animations(animations, "walk", dirname, "walk", {16, 30}, 10)
+
+   -- Add a "walkload" animation. The animation hasn't been created yet in this example, so we reuse the files for the "walk" animation.
+   add_walking_animations(animations, "walkload", dirname, "walk", {16, 30}, 10)
+
+
+   tribes:new_worker_type {
+      msgctxt = "fancytribe_worker",
+      name = "fancytribe_diligentworker",
+      ...
+
+      animations = animations, -- Include the animations table in your map object
+      ...
+   }
+
+The convenience functions don't support sound effects directly, so you'll have to
+add them manually, like this:
+
+.. code-block:: lua
+
+   animations = {}
+   add_animation(animations, "work", dirname, "work", {11, 26}, 10)
+   animations["work"]["sound_effect"] = {
+      name = "bar",
+      directory = "sound/foo"
+   }
 
 
 Map Object Types
@@ -120,28 +182,17 @@ Typical building animations are:
 
 Any animation other than the ``build`` and ``idle`` animations are referenced in the building's ``programs`` table via the ``animate`` command. For more information on building programs, see :ref:`productionsite_programs`.
 
-For example, a mine could look like this::
+For example, a the animations for a mine could look like this:
+
+.. code-block:: lua
 
    dirname = path.dirname(__file__)
 
-   animations = {
-      idle = {
-         files = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 21, 36 },
-      },
-      build = {
-         files = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 21, 36 },
-      },
-      working = {
-         files = path.list_files(dirname .. "working_??.png"),
-         hotspot = { 21, 36 },
-      },
-      empty = {
-         files = path.list_files(dirname .. "empty_??.png"),
-         hotspot = { 21, 36 },
-      },
-   },
+   animations = {}
+   add_animation(animations, "idle", dirname, "idle", {21, 36})
+   add_animation(animations, "build", dirname, "build", {21, 36})
+   add_animation(animations, "working", dirname, "working", {21, 36})
+   add_animation(animations, "empty", dirname, "empty", {21, 36})
 
 
 Immovables
@@ -166,21 +217,15 @@ Workers can have both non-directional animations and directional animations. The
 
 Any further animations like e.g. "plant", "harvest", or "breed" will be referenced in the :ref:`tribes_worker_programs`, under the ``animation`` command.
 
-For example, a fisher could look like this::
+For example, a fisher's animations could look like this:
+
+.. code-block:: lua
 
    dirname = path.dirname(__file__)
 
-   animations = {
-      idle = {
-         files = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 9, 39 },
-      },
-      fishing = {
-         files = path.list_files(dirname .. "fishing_??.png"),
-         hotspot = { 9, 39 },
-         fps = 10
-      }
-   }
+   animations = {}
+   add_animation(animations, "idle", dirname, "idle", {9, 39})
+   add_animation(animations, "fishing", dirname, "fishing", {9, 39}, 10)
    add_walking_animations(animations, "walk", dirname, "walk", {10, 38}, 10)
    add_walking_animations(animations, "walkload", dirname, "walk", {10, 38}, 10)
 
@@ -188,29 +233,33 @@ Soldiers
 ^^^^^^^^
 
 Soldiers have the same animations as workers, plus additional non-directional battle animations. There can be multiple animations for each action in battle to be selected at random.
-For example, attacking towards the west can be defined like this::
+For example, attacking towards the west can be defined like this:
+
+.. code-block:: lua
 
    dirname = path.dirname(__file__)
 
-   animations = {
-      ...
-      atk_ok_w1 = {
-         files = path.list_files(dirname .. "atk_ok_w1_??.png"),
-         hotspot = { 36, 40 },
-         fps = 20
-      },
-      atk_ok_w2 = {
-         files = path.list_files(dirname .. "atk_ok_w2_??.png"),
-         hotspot = { 36, 40 },
-         fps = 20
-      },
-      ...
-   },
+   animations = {}
+   add_animation(animations, "idle", dirname, "idle", {16, 31}, 5)
+   add_walking_animations(animations, "walk", dirname, "walk", {16, 31}, 10)
+   ...
 
-   attack_success_w = {
-      "atk_ok_w1",
-      "atk_ok_w2"
-   },
+   add_animation(animations, "atk_ok_w1", dirname, "atk_ok_w1", {36, 40}, 20) -- First attack animation
+   add_animation(animations, "atk_ok_w2", dirname, "atk_ok_w2", {36, 40}, 20) -- Second attack animation
+   ...
+
+   tribes:new_soldier_type {
+      msgctxt = "fancytribe_worker",
+      name = "fancytribe_soldier",
+      ...
+
+      -- Reference the attack animations in your map object
+      attack_success_w = {
+         "atk_ok_w1",
+         "atk_ok_w2"
+      },
+      ...
+   }
 
 The battle animations are:
 

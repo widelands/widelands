@@ -1,5 +1,9 @@
 dirname = path.dirname(__file__)
 
+animations = {}
+add_animation(animations, "idle", dirname, "idle", { 60, 78 })
+add_animation(animations, "build", dirname, "build", { 60, 78 })
+
 tribes:new_warehouse_type {
    msgctxt = "barbarians_building",
    name = "barbarians_warehouse",
@@ -23,29 +27,7 @@ tribes:new_warehouse_type {
       grout = 1
    },
 
-   animations = {
-      idle = {
-         hotspot = { 60, 78 },
-         mipmap = {
-            {
-               scale = 0.5,
-               files = path.list_files(dirname .. "idle_0.5_??.png"),
-            },
-            {
-               scale = 1,
-               files = path.list_files(dirname .. "idle_1_??.png"),
-            },
-            {
-               scale = 2,
-               files = path.list_files(dirname .. "idle_2_??.png"),
-            }
-         }
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 60, 78 },
-      }
-   },
+   animations = animations,
 
    aihints = {},
 

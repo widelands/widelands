@@ -1,19 +1,11 @@
 dirname = path.dirname(__file__)
 
-animations = {
-   idle = {
-      pictures = path.list_files(dirname .. "idle_??.png"),
-      hotspot = { 11, 23 },
-   },
-   work = {
-      pictures = path.list_files(dirname .. "work_??.png"),
-      sound_effect = {
-            directory = "sound/hammering",
-            name = "hammering",
-      },
-      hotspot = { 11, 26 },
-      fps = 10
-   }
+animations = {}
+add_animation(animations, "idle", dirname, "idle", {11, 23})
+add_animation(animations, "work", dirname, "work", {11, 26}, 10)
+animations["work"]["sound_effect"] = {
+   name = "hammering",
+   directory = "sound/hammering"
 }
 add_walking_animations(animations, "walk", dirname, "walk", {9, 24}, 10)
 add_walking_animations(animations, "walkload", dirname, "walkload", {11, 22}, 10)
