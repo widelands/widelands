@@ -1144,7 +1144,8 @@ Map
 */
 const char LuaMap::className[] = "Map";
 const MethodType<LuaMap> LuaMap::Methods[] = {
-   METHOD(LuaMap, place_immovable), METHOD(LuaMap, get_field), METHOD(LuaMap, recalculate),
+   METHOD(LuaMap, place_immovable), METHOD(LuaMap, get_field),
+   METHOD(LuaMap, recalculate),     METHOD(LuaMap, recalculate_seafaring),
    METHOD(LuaMap, set_port_space),  {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
@@ -1170,8 +1171,7 @@ void LuaMap::__unpersist(lua_State* /* L */) {
 /* RST
    .. attribute:: allows_seafaring
 
-      (RO) Whether the map currently allows seafaring. This will calculate a path between port spaces,
-		so it's more accurate but less efficient than :any:`number_of_port_spaces`.
+      (RO) Whether the map currently allows seafaring.
 
 		:returns: True if there are at least two port spaces that can be reached from each other.
 */
@@ -1182,9 +1182,7 @@ int LuaMap::get_allows_seafaring(lua_State* L) {
 /* RST
    .. attribute:: number_of_port_spaces
 
-      (RO) The amount of port spaces on the map. If this is >= 2, one can assume that the map
-      allows seafaring. This is checked very quickly and is more efficient than :any:`allows_seafaring`,
-      but it won't detect whether the port spaces can be reached from each other, so it's less accurate.
+      (RO) The amount of port spaces on the map.
 
       :returns: An integer with the number of port spaces.
 */
@@ -1312,14 +1310,26 @@ int LuaMap::get_field(lua_State* L) {
 /* RST
    .. method:: recalculate()
 
-      This map recalculates the whole map state: height of fields, buildcaps
-      and so on. You only need to call this function if you changed
-      Field.raw_height in any way.
+      This map recalculates the whole map state: height of fields, buildcaps,
+      whether the map allows seafaring and so on. You only need to call this
+      function if you changed :any:`raw_height` in any way.
 */
 // TODO(unknown): do we really want this function?
 int LuaMap::recalculate(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	egbase.mutable_map()->recalc_whole_map(egbase.world());
+	return 0;
+}
+
+/* RST
+   .. method:: recalculate_seafaring()
+
+      This method recalculates whether the map allows seafaring.
+      You only need to call this function if you have been changing terrains to/from
+      water and wanted to defer recalculating whether the map allows seafaring.
+*/
+int LuaMap::recalculate_seafaring(lua_State* L) {
+	get_egbase(L).mutable_map()->recalculate_allows_seafaring();
 	return 0;
 }
 
@@ -1344,7 +1354,7 @@ int LuaMap::set_port_space(lua_State* L) {
 	const int y = luaL_checkint32(L, 3);
 	const bool allowed = luaL_checkboolean(L, 4);
 	const bool success = get_egbase(L).mutable_map()->set_port_space(
-	   get_egbase(L).world(), Widelands::Coords(x, y), allowed);
+	   get_egbase(L).world(), Widelands::Coords(x, y), allowed, false, true);
 	lua_pushboolean(L, success);
 	return 1;
 }
@@ -5932,7 +5942,9 @@ int LuaField::get_y(lua_State* L) {
       (RW) The height of this field. The default height is 10, you can increase
       or decrease this value to build mountains. Note though that if you change
       this value too much, all surrounding fields will also change their
-      heights because the slope is constrained.
+      heights because the slope is constrained. If you are changing the height
+      of many terrains at once, use :attr:`raw_height` instead and then call
+      :any:`recalculate` afterwards.
 */
 int LuaField::get_height(lua_State* L) {
 	lua_pushuint32(L, fcoords(L).field->get_height());
@@ -5957,10 +5969,10 @@ int LuaField::set_height(lua_State* L) {
 /* RST
    .. attribute:: raw_height
 
-      (RW The same as :attr:`height`, but setting this will not trigger a
+      (RW) The same as :attr:`height`, but setting this will not trigger a
       recalculation of the surrounding fields. You can use this field to
       change the height of many fields on a map quickly, then use
-      :func:`wl.map.recalculate()` to make sure that everything is in order.
+      :any:`recalculate` to make sure that everything is in order.
 */
 // UNTESTED
 int LuaField::get_raw_height(lua_State* L) {
@@ -6119,7 +6131,11 @@ int LuaField::get_bobs(lua_State* L) {
       (RW) The terrain of the right/down triangle. This is a string value
       containing the name of the terrain as it is defined in the world
       configuration. You can change the terrain by simply assigning another
-      valid name to these variables.
+      valid name to these variables. If you are changing the terrain from or to
+      water, the map will not recalculate whether it allows seafaring, because
+      this recalculation can take up a lot of performance. If you need this
+      recalculated, you can do so by calling :any:`recalculate_seafaring` after
+      you're done changing terrains.
 */
 int LuaField::get_terr(lua_State* L) {
 	TerrainDescription& td = get_egbase(L).world().terrain_descr(fcoords(L).field->terrain_r());
@@ -6131,7 +6147,7 @@ int LuaField::set_terr(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
 	const DescriptionIndex td = world.terrains().get_index(name);
-	if (td == static_cast<DescriptionIndex>(-1))
+	if (td == static_cast<DescriptionIndex>(Widelands::INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);

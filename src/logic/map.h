@@ -408,7 +408,8 @@ public:
 	/***
 	 * Changes the given triangle's terrain. This happens in the editor and might
 	 * happen in the game too if some kind of land increasement is implemented (like
-	 * drying swamps). The nodecaps need to be recalculated
+	 * drying swamps). The nodecaps need to be recalculated. If terrain was changed from
+	 * or to water, we need to recalculate_allows_seafaring too, depending on the situation.
 	 *
 	 * @return the radius of changes.
 	 */
@@ -447,15 +448,21 @@ public:
 	/// If 'set', set the space at 'c' as port space, otherwise unset.
 	/// 'force' sets the port space even if it isn't viable, and is to be used for map loading only.
 	/// Returns whether the port space was set/unset successfully.
-	bool
-	set_port_space(const World& world, const Widelands::Coords& c, bool set, bool force = false);
+	bool set_port_space(const World& world,
+	                    const Widelands::Coords& c,
+	                    bool set,
+	                    bool force = false,
+	                    bool recalculate_seafaring = false);
 	const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 
-	/// Check whether there are at least 2 port spaces that can be reached from each other by water
+	/// Return true if there are at least 2 port spaces that can be reached from each other by water
 	bool allows_seafaring() const;
+	/// Calculate whether there are at least 2 port spaces that can be reached from each other by
+	/// water and set the allows_seafaring property
+	void recalculate_allows_seafaring();
 	/// Remove all port spaces that are not valid (Buildcap < big or not enough space for a
 	/// portdock).
 	void cleanup_port_spaces(const World& world);
@@ -518,6 +525,8 @@ private:
 	std::unique_ptr<FileSystem> filesystem_;
 
 	PortSpacesSet port_spaces_;
+	bool allows_seafaring_;
+
 	Objectives objectives_;
 
 	MapVersion map_version_;
