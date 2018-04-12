@@ -308,14 +308,15 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		}
 
 		const auto blit = [&dst, scale](
-		   const Image* pic, const Vector2f& position, const Vector2i& hotspot) {
-			dst.blitrect_scale(Rectf(position - hotspot.cast<float>() * scale, pic->width() * scale,
-			                         pic->height() * scale),
+		   const Image* pic, const Vector2i& position, const Vector2i& hotspot) {
+			const Recti pixel_perfect_rect = Recti(position - hotspot * scale,
+														pic->width() * scale, pic->height() * scale);
+			dst.blitrect_scale(pixel_perfect_rect.cast<float>(),
 			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                   BlendMode::UseAlpha);
 		};
 		const auto blit_overlay = [&field, &blit](const Image* pic, const Vector2i& hotspot) {
-			blit(pic, field.rendertarget_pixel, hotspot);
+			blit(pic, field.rendertarget_pixel.cast<int>(), hotspot);
 		};
 
 		// Draw resource overlay.
@@ -361,21 +362,21 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			const FieldsToDraw::Field& bln = fields_to_draw->at(field.bln_index);
 			if (selected_triangles.count(
 			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R))) {
-				const Vector2f tripos(
+				const Vector2i tripos(
 				   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-				      3.f,
+				      3,
 				   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-				      3.f);
+				      3);
 				const Image* pic = get_sel_picture();
 				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
 			}
 			if (selected_triangles.count(
 			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
-				const Vector2f tripos(
+				const Vector2i tripos(
 				   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-				      3.f,
+				      3,
 				   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-				      3.f);
+				      3);
 				const Image* pic = get_sel_picture();
 				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
 			}

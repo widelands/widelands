@@ -141,8 +141,9 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		}
 
 		const auto blit_overlay = [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
-			                          pic->width() * scale, pic->height() * scale),
+			const Recti pixel_perfect_rect = Recti(field.rendertarget_pixel.cast<int>() - hotspot * scale,
+														pic->width() * scale, pic->height() * scale);
+			dst->blitrect_scale(pixel_perfect_rect.cast<float>(),
 			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                    BlendMode::UseAlpha);
 		};
