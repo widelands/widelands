@@ -197,6 +197,8 @@ protected:
 	void mainview_move();
 
 	void draw_overlay(RenderTarget&) override;
+	void blit_overlay(RenderTarget* dst, const Vector2i& pos, const Image* image, const Vector2i& hotspot, float scale);
+	void blit_field_overlay(RenderTarget* dst, const FieldsToDraw::Field& field, const Image* image, const Vector2i& hotspot, float scale);
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);

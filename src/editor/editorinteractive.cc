@@ -307,18 +307,6 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		const auto blit = [&dst, scale](
-		   const Image* pic, const Vector2i& position, const Vector2i& hotspot) {
-			const Recti pixel_perfect_rect = Recti(position - hotspot * scale,
-														pic->width() * scale, pic->height() * scale);
-			dst.blitrect_scale(pixel_perfect_rect.cast<float>(),
-			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                   BlendMode::UseAlpha);
-		};
-		const auto blit_overlay = [&field, &blit](const Image* pic, const Vector2i& hotspot) {
-			blit(pic, field.rendertarget_pixel.cast<int>(), hotspot);
-		};
-
 		// Draw resource overlay.
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
 		if (draw_resources_ && amount > 0) {
@@ -326,7 +314,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			   world.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
 			if (!immname.empty()) {
 				const auto* pic = g_gr->images().get(immname);
-				blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+				blit_field_overlay(&dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
 		}
 
@@ -335,7 +323,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			const auto* overlay =
 			   get_buildhelp_overlay(tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase));
 			if (overlay != nullptr) {
-				blit_overlay(overlay->pic, overlay->hotspot);
+				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale);
 			}
 		}
 
@@ -346,13 +334,13 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			   playercolor_image(it->second - 1, "images/players/player_position.png");
 			assert(player_image != nullptr);
 			constexpr int kStartingPosHotspotY = 55;
-			blit_overlay(player_image, Vector2i(player_image->width() / 2, kStartingPosHotspotY));
+			blit_field_overlay(&dst, field, player_image, Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
 		}
 
 		// Draw selection markers on the field.
 		if (selected_nodes.count(field.fcoords) > 0) {
 			const Image* pic = get_sel_picture();
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			blit_field_overlay(&dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
 
 		// Draw selection markers on the triangles.
@@ -368,7 +356,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
 				      3);
 				const Image* pic = get_sel_picture();
-				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+				blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
 			if (selected_triangles.count(
 			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
@@ -378,7 +366,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 				   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
 				      3);
 				const Image* pic = get_sel_picture();
-				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+				blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
 		}
 	}
