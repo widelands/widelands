@@ -4,16 +4,16 @@
 # Translators:
 # GunChleoc, 2018
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2017
+# Jukka Pakarinen, 2016-2018
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-03-30 07:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-07 17:26+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -254,4 +254,4 @@ msgid ""
 "        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "Virheraportteja? Ehdotuksia? Tarkista projektin verkkosivut:\n         https://wl.widelands.org/\n\nToivottavasti nautit pelistä!"

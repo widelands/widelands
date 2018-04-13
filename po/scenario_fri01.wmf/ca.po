@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo, 2018\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -31,6 +31,8 @@ msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
+"Construïu almenys una casa de llenyataire i dues cases del guarda forestal "
+"per començar a produir troncs i una masoveria de juncs per cultivar juncs."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Start producing bricks"
@@ -174,10 +176,10 @@ msgstr "Entrenant els soldats"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:101
 msgid ""
-"Train a soldier to the highest possible level. Soldiers are trained in small"
-" training camps and large training arenas. We will need a gold mine, a "
-"tailor’s shop to sew better armor, and a large armor smithy for better "
-"weapons and helmets."
+"Train a soldier to the highest possible level. Soldiers are trained in "
+"training camps and training arenas. We will need a gold mine, a tailor’s "
+"shop to sew better armor, and a large armor smithy for better weapons and "
+"helmets."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
@@ -663,8 +665,8 @@ msgstr ""
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:315
 msgid ""
-"Soldiers are trained in basic attack, health and defense by a small training"
-" camp. They can learn the finer points in a large training arena."
+"Soldiers are trained in basic attack, health and defense by a training camp."
+" They can learn the finer points in a training arena."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-03-31 08:41+0000\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-07 13:56+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -245,6 +245,10 @@ msgstr "Primers ancians"
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
 msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisian"
+msgstr "Frisons"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -612,8 +616,8 @@ msgid ""
 msgstr "Per produir maons necessiteu granit. Per produir granit, necessitareu una pedrera o una mina de roques. Per construir aquestes infraestructures, necessitareu maons. Aneu amb compte que no arribeu a un punt mort on no pugueu aconseguir maons."
 
 #: ../../data/txts/tips/frisians.lua:8
-msgid "Always build a forester´s house, so you will not run out of logs."
-msgstr "Construïu sempre una casa de guarda forestal per no quedar-vos sense troncs."
+msgid "Always build a forester’s house, so you will not run out of logs."
+msgstr "Construïu sempre una casa de guarda forestal, així eviteu quedar-vos sense troncs."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

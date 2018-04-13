@@ -3,14 +3,14 @@
 # 
 # Translators:
 # Любомир Василев, 2015
-# Любомир Василев, 2016
+# Любомир Василев, 2016,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-03-30 07:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-07 17:53+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr ""
+msgstr "На тази карта няма артефакти. Това не трябва да се случва. Моля, докладвайте проблема на %s и отбележете версията на Widelands и картата, която сте се опитали да заредите."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"

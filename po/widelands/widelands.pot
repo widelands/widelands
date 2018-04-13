@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"POT-Creation-Date: 2018-04-13 17:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -858,7 +858,7 @@ msgid "Number of Players"
 msgstr ""
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:204 ../../src/logic/map.cc:310
+#: ../../src/editor/ui_menus/player_menu.cc:204 ../../src/logic/map.cc:313
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
 #: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:492
