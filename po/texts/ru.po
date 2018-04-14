@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-03-30 07:06+0000\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-06 16:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -253,6 +253,10 @@ msgstr "Бывшие старейшины"
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
 msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisian"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -620,8 +624,8 @@ msgid ""
 msgstr "Для производства кирпичей вам необходим гранит; для производства гранита нужны карьер или каменоломня; но для их постройки нужны кирпичи. Будьте осторожны, чтобы не зайти в тупик!"
 
 #: ../../data/txts/tips/frisians.lua:8
-msgid "Always build a forester´s house, so you will not run out of logs."
-msgstr "Если не хотите остаться без брёвен, всегда стройте домик лесника."
+msgid "Always build a forester’s house, so you will not run out of logs."
+msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

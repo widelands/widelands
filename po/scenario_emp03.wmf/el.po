@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: erimitis, 2018\n"
 "Language-Team: Greek (https://www.transifex.com/widelands/teams/35159/el/)\n"
@@ -119,7 +119,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:104
 msgid "Wheat Production"
-msgstr ""
+msgstr "Παραγωγή Σιταριού"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:105
 msgid ""
