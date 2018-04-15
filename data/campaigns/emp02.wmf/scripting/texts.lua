@@ -23,7 +23,7 @@ end
 -- Objectives
 -- ===========
 obj_build_woodeconomy = {
-   name = "build_woodeconomy ",
+   name = "build_woodeconomy",
    title =_"Build up a wood economy",
    number = 5,
    body = objective_text(_"Wood Economy",
@@ -32,7 +32,7 @@ obj_build_woodeconomy = {
 }
 
 obj_build_quarry = {
-   name = "build_quarry ",
+   name = "build_quarry",
    title =_"Build a quarry",
    number = 1,
    body = objective_text(_"Quarry",
@@ -41,7 +41,7 @@ obj_build_quarry = {
 }
 
 obj_build_military_buildings = {
-   name = "build_military_buildings ",
+   name = "build_military_buildings",
    title =_"Protect your colony",
    number = 1,
    body = objective_text(_"Protect Your Colony",
@@ -50,7 +50,7 @@ obj_build_military_buildings = {
 }
 
 obj_build_marblemine = {
-   name = "build_marblemine ",
+   name = "build_marblemine",
    title =_"Start mining marble",
    number = 1,
    body = objective_text(_"Marble",
@@ -59,7 +59,7 @@ obj_build_marblemine = {
 }
 
 obj_build_mining_infrastructure = {
-   name = "build_mining_infrastructure ",
+   name = "build_mining_infrastructure",
    title =_"Build a stonemason’s house and mining infrastructure",
    number = 7,
    body = objective_text(_"Stonemason’s house and Mining Infrastructure",
@@ -72,31 +72,33 @@ obj_build_food_infrastructure = {
    title =_"Provide your miners with food",
    number = 1,
    body = objective_text(_"Food For Your Miners",
-      li(_[[To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.]]) ..
-      li(_[[Of course this means we will need more resources for preparing this food – like fish, meat or bread. To provide these foodstuffs, you would have to build a fisher’s house, a farm, a mill and a bakery.]]) ..
-      li(_[[Maybe you will also need a hunter’s house, a piggery, a vineyard and some wells.]]) ..
+      li(_[[Build up a tavern to produce some sustaining food for our miners.]]) ..
+      li_arrow(_[[Of course this means you will need more resources for preparing this food – like fish, meat or bread.]]) ..
+      li_arrow(_[[To provide these foodstuffs, you would have to build a fisher’s house, a hunter’s house, a farm, a mill and a bakery.]]) ..
+      li(_[[Build up a brewery and a winery to supply the miners with some good and strong drinks.]]) ..
+      li_arrow(_[[Maybe you will also need a piggery, a vineyard and some wells.]]) ..
       li_arrow(_[[It’s up to you what you want to build. But remember – coal and iron mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])
    ),
 }
 
 obj_build_bigger_military_buildings = {
-   name = "build_bigger_military_buildings ",
+   name = "build_bigger_military_buildings",
    title =_"Protect your eastern frontier",
    number = 1,
    body = objective_text(_"Protect Your Eastern Frontier",
       li(_[[Build up stronger military buildings, such as an outpost, a barrier or a tower, on the eastern frontier.]]) ..
-      li_arrow(_[[To watch deep inside the enemy territory, build a tower.]])
+      li_arrow(_[[Build a tower to watch deep inside the enemy territory.]])
    ),
 }
 
 obj_remove_the_barbarians = {
-   name = "remove_the_barbarians ",
+   name = "remove_the_barbarians",
    title =_"Destroy the Barbarian tribe",
    number = 2,
    body = objective_text(_"Destroy the Barbarian Tribe",
       li(_[[Build a barracks to start training soldiers.]]) ..
-      li(_[[As soon as you have enough soldiers, attack and completely destroy the Barbarian buildings.]]) ..
-      li(_[[Finally, build up a fortress on the peninsula (near where the Barbarian headquarters stood before), to avoid new settlements of other tribes in that region.]])
+      li(_[[Attack and completely destroy the Barbarian buildings as soon as you have enough soldiers.]]) ..
+      li(_[[Build up a fortress on the peninsula (near where the Barbarian headquarters stood before). Finally, this will avoid new settlements of other tribes in that region.]])
    ),
 }
 
