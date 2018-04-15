@@ -37,6 +37,50 @@ function image_line(image, count, text)
       )
 end
 
+-- RST
+-- .. function:: plot_size_line(size)
+--
+--    Creates a line describing space required on the map.
+--    Consists of a header colored text, followed by normal text and an image.
+--
+--    :arg size: size key. Expected values are "mine", "port", "small, "medium", "big", "none".
+--    :returns: header followed by normal text and image if a space is required, or empty string.
+--
+function plot_size_line(size)
+   local text = ""
+   local image = ""
+   if (size == "mine") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Mine plot"
+      image = "images/wui/overlays/mine.png"
+   elseif (size == "port") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Port plot"
+      image = "images/wui/overlays/port.png"
+   elseif (size == "small") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Small plot"
+      image = "images/wui/overlays/small.png"
+   elseif (size == "medium") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Medium plot"
+      image = "images/wui/overlays/medium.png"
+   elseif (size == "big") then
+      -- TRANSLATORS: Space on the map required for building a building there
+      text = _"Big plot"
+      image = "images/wui/overlays/big.png"
+   else
+      return ""
+   end
+
+   return
+      div("width=100%",
+         div("float=right padding_l=6", p(img(image))) ..
+         -- TRANSLATORS: Space on the map required for building a building there
+         p(join_sentences(font("size=13 color=D1D1D1", _"Space required:"), text))
+      )
+end
+
 
 --  =======================================================
 --  ********** Helper functions for dependencies **********
