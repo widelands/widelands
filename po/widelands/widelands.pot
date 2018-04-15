@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-13 17:55+0000\n"
+"POT-Creation-Date: 2018-04-15 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1292,7 +1292,7 @@ msgstr ""
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:384
-#: ../../src/wui/building_statistics_menu.cc:627
+#: ../../src/wui/building_statistics_menu.cc:686
 #, c-format
 msgid "%i%%"
 msgstr ""
@@ -2937,75 +2937,75 @@ msgstr ""
 msgid "Send more soldiers"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:67
+#: ../../src/wui/building_statistics_menu.cc:61
 msgid "Building Statistics"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:72
+#: ../../src/wui/building_statistics_menu.cc:66
 msgid "Owned:"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:78
+#: ../../src/wui/building_statistics_menu.cc:72
 msgid "Under Construction:"
 msgstr ""
 
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:84
-#: ../../src/wui/building_statistics_menu.cc:639
+#: ../../src/wui/building_statistics_menu.cc:78
+#: ../../src/wui/building_statistics_menu.cc:698
 msgid "Low Productivity"
 msgstr ""
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:98
+#: ../../src/wui/building_statistics_menu.cc:92
 msgid "%:"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:130
-msgid "Small buildings"
-msgstr ""
-
-#: ../../src/wui/building_statistics_menu.cc:133
-msgid "Medium buildings"
-msgstr ""
-
-#: ../../src/wui/building_statistics_menu.cc:136
-msgid "Big buildings"
-msgstr ""
-
-#: ../../src/wui/building_statistics_menu.cc:139
-msgid "Mines"
-msgstr ""
-
 #: ../../src/wui/building_statistics_menu.cc:145
-msgid "Ports"
-msgstr ""
-
-#: ../../src/wui/building_statistics_menu.cc:258
-#: ../../src/wui/building_statistics_menu.cc:269
-#: ../../src/wui/building_statistics_menu.cc:281
+#: ../../src/wui/building_statistics_menu.cc:156
+#: ../../src/wui/building_statistics_menu.cc:168
 msgid "Show previous building"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:263
-#: ../../src/wui/building_statistics_menu.cc:275
-#: ../../src/wui/building_statistics_menu.cc:287
+#: ../../src/wui/building_statistics_menu.cc:150
+#: ../../src/wui/building_statistics_menu.cc:162
+#: ../../src/wui/building_statistics_menu.cc:174
 msgid "Show next building"
+msgstr ""
+
+#: ../../src/wui/building_statistics_menu.cc:306
+msgid "Small buildings"
+msgstr ""
+
+#: ../../src/wui/building_statistics_menu.cc:308
+msgid "Medium buildings"
+msgstr ""
+
+#: ../../src/wui/building_statistics_menu.cc:310
+msgid "Big buildings"
+msgstr ""
+
+#: ../../src/wui/building_statistics_menu.cc:312
+msgid "Mines"
+msgstr ""
+
+#: ../../src/wui/building_statistics_menu.cc:314
+msgid "Ports"
 msgstr ""
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:657
-#: ../../src/wui/building_statistics_menu.cc:681
-#: ../../src/wui/building_statistics_menu.cc:683
+#: ../../src/wui/building_statistics_menu.cc:716
+#: ../../src/wui/building_statistics_menu.cc:742
+#: ../../src/wui/building_statistics_menu.cc:744
 #: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr ""
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:671
+#: ../../src/wui/building_statistics_menu.cc:730
 msgid "Lacking Soldiers:"
 msgstr ""
 
