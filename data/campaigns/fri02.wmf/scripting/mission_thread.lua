@@ -207,11 +207,11 @@ function supply_murilius()
    local hq = p2:get_buildings("empire_headquarters")[1]
 
    -- transfer all wares that frisians and empire have in common
-   for idx,name in ipairs(p1.tribe.wares) do
-      if p2.tribe:has_ware(name) then
-         local amount = wh:get_wares(name)
-         wh:set_wares(name, 0)
-         hq:set_wares(name, hq:get_wares(name) + amount)
+   for idx,ware in ipairs(p1.tribe.wares) do
+      if p2.tribe:has_ware(ware.name) then
+         local amount = wh:get_wares(ware.name)
+         wh:set_wares(ware.name, 0)
+         hq:set_wares(ware.name, hq:get_wares(ware.name) + amount)
       end
    end
    campaign_message_box(supply_murilius_thanks)
