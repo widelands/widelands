@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-04-01 10:15+0000\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-07 14:53+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -149,7 +149,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Viure de l'oceà és una lluita constant. I més pels habitants frisons de la costa del Mar del Nord. Va ser l'última tempesta i inundació, la més devastadora de la memòria dels humans, només un altre exemple de les dificultats que els frisons han d'afrontar o un signe dels déus que aquesta tribu ha de buscar un altre lloc per viure?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -232,7 +232,7 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "El 1.362, la tranquil·la i pacífica vida dels habitants frisons de les illes del nord va ser interrompuda per les tempestes i inundacions més grans que recorden els humans: la inundació de Sant Marcellus. És només una tempesta ordinària o un senyal dels déus dient que la comunitat frisona de l'illa de Langeness no és benvinguda?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
@@ -248,7 +248,7 @@ msgstr "Una benvinguda glacial"
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "En Reebaud i la seva tribu han arribat al nord. Però la seva arribada entre estepes gèlides i les muntanyes cobertes de neu no ha sigut ben acollida…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

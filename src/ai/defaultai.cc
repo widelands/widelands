@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,6 +108,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
      next_mine_construction_due_(0),
      fishers_count_(0),
      bakeries_count_(),
+     first_iron_mine_built(50 * 60 * 60 * 1000),
      ts_finished_count_(0),
      ts_in_const_count_(0),
      ts_without_trainers_(0),
@@ -477,9 +478,9 @@ void DefaultAI::think() {
 				   gametime, player_number(), player_statistics.get_player_land(player_number()),
 				   player_statistics.get_enemies_max_land(),
 				   player_statistics.get_old60_player_land(player_number()), attackers_count_,
-				   soldier_trained_log.count(gametime), soldier_attacks_log.count(gametime),
-				   conquered_wh, player_statistics.get_player_power(player_number()),
-				   count_productionsites_without_buildings());
+				   soldier_trained_log.count(gametime),
+				   player_statistics.get_player_power(player_number()),
+				   count_productionsites_without_buildings(), first_iron_mine_built);
 				set_taskpool_task_time(
 				   gametime + kManagementUpdateInterval, SchedulerTaskId::kManagementUpdate);
 			}
@@ -1475,10 +1476,24 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		}
 	}
 
-	// counting fields with fish
-	if (field.water_nearby > 0 && (field.fish_nearby == kUncalculated || resource_count_now)) {
-		field.fish_nearby = map.find_fields(Area<FCoords>(field.coords, kProductionArea), nullptr,
-		                                    FindNodeResource(world.get_resource("fish")));
+	// counting fields with fish, doing it roughly every 10-th minute is enough
+	if (field.water_nearby > 0 &&
+	    (field.fish_nearby == kUncalculated || (resource_count_now && gametime % 10 == 0))) {
+		CheckStepWalkOn fisher_cstep(MOVECAPS_WALK, true);
+		static std::vector<Coords> fish_fields_list;  // pity this contains duplicates
+		fish_fields_list.clear();
+		map.find_reachable_fields(Area<FCoords>(field.coords, kProductionArea), &fish_fields_list,
+		                          fisher_cstep, FindNodeResource(world.get_resource("fish")));
+
+		// This is "list" of unique fields in fish_fields_list we got above
+		static std::set<Coords> counted_fields;
+		counted_fields.clear();
+		field.fish_nearby = 0;
+		for (auto fish_coords : fish_fields_list) {
+			if (counted_fields.insert(fish_coords).second) {
+				field.fish_nearby += map.get_fcoords(fish_coords).field->get_resources_amount();
+			}
+		}
 	}
 
 	// Counting resources that do not change fast
@@ -2728,7 +2743,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
 
-					if (bf->water_nearby < 2 || bf->fish_nearby < 2) {
+					if (bf->fish_nearby <= 15) {
 						continue;
 					}
 
@@ -4363,7 +4378,7 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 	// hunters)
 	if (site.bo->inputs.empty() && site.bo->production_hints.empty() &&
 	    site.site->can_start_working() && !site.bo->is(BuildingAttribute::kSpaceConsumer) &&
-	    site.site->get_statistics_percent() < 10 &&
+	    site.site->get_statistics_percent() < 5 &&
 	    ((game().get_gametime() - site.built_time) > 10 * 60 * 1000)) {
 
 		site.bo->last_dismantle_time = game().get_gametime();
@@ -6124,6 +6139,11 @@ void DefaultAI::gain_building(Building& b, const bool found_on_load) {
 			}
 
 			set_inputs_to_zero(mines_.back());
+
+			// Is this first mine?
+			if (bo.mines == iron_resource_id && gametime < first_iron_mine_built) {
+				first_iron_mine_built = gametime;
+			}
 
 		} else if (bo.type == BuildingObserver::Type::kMilitarysite) {
 			militarysites.push_back(MilitarySiteObserver());

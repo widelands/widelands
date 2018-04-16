@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-04-02 07:53+0000\n"
-"Last-Translator: erimitis\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-06 16:28+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -589,6 +589,7 @@ msgstr "Πανοπλοποιείο"
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:50
 msgid "working"
 msgstr "την εργασία"
 
@@ -684,6 +685,7 @@ msgstr "Κάμινος Ξυλάνθρακα"
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:51
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:52
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:61
 msgid "producing coal"
 msgstr "παράγει άνθρακα"
 
@@ -1190,6 +1192,7 @@ msgstr "φτιάχνει ένα ζεύγος κουβάδων"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:110
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:119
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:204
 msgid "making fire tongs"
 msgstr "φτιάχνει μία λαβίδα πυρός"
 
@@ -1204,6 +1207,7 @@ msgstr "φτιάχνει ένα δίχτυ ψαρέματος"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:136
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:142
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:143
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:193
 msgid "making a hammer"
 msgstr "φτιάχνει ένα σφυρί"
 
@@ -1241,6 +1245,7 @@ msgstr "φτιάχνει ένα πριόνι"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:214
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:190
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:203
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:116
 msgid "making a scythe"
 msgstr "φτιάχνει ένα δρεπάνι"
 
@@ -1248,6 +1253,7 @@ msgstr "φτιάχνει ένα δρεπάνι"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:227
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:202
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:215
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:127
 msgid "making a shovel"
 msgstr "φτιάχνει ένα φτυάρι"
 
@@ -1742,6 +1748,7 @@ msgstr "φτιάχνει ένα καλάμι ψαρέματος"
 #. ...
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:154
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:155
+#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:149
 msgid "making a hunting spear"
 msgstr "φτιάχνει ένα κυνηγετικό ακόντιο"
 
@@ -2485,32 +2492,6 @@ msgstr "σφυρηλατεί ένα τσεκούρι"
 msgid "forging a pick"
 msgstr "σφυρηλατεί μία αξίνα"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a scythe because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:116
-msgid "forging a scythe"
-msgstr "σφυρηλατεί ένα δρεπάνι"
-
-#. TRANSLATORS: Completed/Skipped/Did not start forging a shovel because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:127
-msgid "forging a shovel"
-msgstr "σφυρηλατεί ένα φτυάρι"
-
-#. TRANSLATORS: Completed/Skipped/Did not start forging a hunting spear
-#. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:149
-msgid "forging a hunting spear"
-msgstr "φτιάχνει ένα κυνηγετικό ακόντιο"
-
-#. TRANSLATORS: Completed/Skipped/Did not start forging a hammer because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:193
-msgid "forging a hammer"
-msgstr "σφυρηλατεί ένα σφυρί"
-
-#. TRANSLATORS: Completed/Skipped/Did not start forging fire tongs because ...
-#: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:204
-msgid "forging fire tongs"
-msgstr "σφυρηλατεί μία λαβίδα πυρός"
-
 #. TRANSLATORS: Completed/Skipped/Did not start forging needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
 msgid "forging needles"
@@ -2538,11 +2519,6 @@ msgstr "ψήνει τούβλα"
 msgctxt "frisians_building"
 msgid "Charcoal Kiln"
 msgstr "Κάμινος Ξυλάνθρακα"
-
-#. TRANSLATORS: Completed/Skipped/Did not start burning charcoal because ...
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:61
-msgid "burning charcoal"
-msgstr "καίει ξυλάνθρακα"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:7
@@ -2943,11 +2919,6 @@ msgstr "υφαίνει ύφασμα"
 msgctxt "frisians_building"
 msgid "Well"
 msgstr "Πηγάδι"
-
-#. TRANSLATORS: Completed/Skipped/Did not start mining water because ...
-#: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:50
-msgid "mining water"
-msgstr "αντλεί νερό"
 
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:64
 msgctxt "frisians_building"
@@ -3865,6 +3836,7 @@ msgstr "Εάν αυτός ο παίκτης ξεμείνει από σημαντ
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:11
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:11
+#: ../../data/tribes/scripting/starting_conditions/frisians/village.lua:11
 msgid "Village"
 msgstr "Χωριό"
 
@@ -3872,6 +3844,7 @@ msgstr "Χωριό"
 #: ../../data/tribes/scripting/starting_conditions/atlanteans/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/barbarians/village.lua:13
 #: ../../data/tribes/scripting/starting_conditions/empire/village.lua:13
+#: ../../data/tribes/scripting/starting_conditions/frisians/village.lua:13
 msgid "Start the game with a peaceful village"
 msgstr "Έναρξη του παιχνιδιού με ένα ειρηνικό χωριό"
 
