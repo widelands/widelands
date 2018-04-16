@@ -53,7 +53,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                0,
                kButtonSize,
                kButtonSize,
-					g_gr->images().get("images/ui_basic/but0.png"),
+               g_gr->images().get("images/ui_basic/but0.png"),
                status_to_image(ShipFilterStatus::kIdle)),
      waiting_btn_(&filter_box_,
                   "filter_ship_waiting",
@@ -61,7 +61,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                   0,
                   kButtonSize,
                   kButtonSize,
-						g_gr->images().get("images/ui_basic/but0.png"),
+                  g_gr->images().get("images/ui_basic/but0.png"),
                   status_to_image(ShipFilterStatus::kExpeditionWaiting)),
      scouting_btn_(&filter_box_,
                    "filter_ship_scouting",
@@ -69,7 +69,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    0,
                    kButtonSize,
                    kButtonSize,
-						 g_gr->images().get("images/ui_basic/but0.png"),
+                   g_gr->images().get("images/ui_basic/but0.png"),
                    status_to_image(ShipFilterStatus::kExpeditionScouting)),
      portspace_btn_(&filter_box_,
                     "filter_ship_portspace",
@@ -77,7 +77,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     0,
                     kButtonSize,
                     kButtonSize,
-						  g_gr->images().get("images/ui_basic/but0.png"),
+                    g_gr->images().get("images/ui_basic/but0.png"),
                     status_to_image(ShipFilterStatus::kExpeditionPortspaceFound)),
      shipping_btn_(&filter_box_,
                    "filter_ship_transporting",
@@ -85,7 +85,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    0,
                    kButtonSize,
                    kButtonSize,
-						 g_gr->images().get("images/ui_basic/but0.png"),
+                   g_gr->images().get("images/ui_basic/but0.png"),
                    status_to_image(ShipFilterStatus::kShipping)),
      ship_filter_(ShipFilterStatus::kAll),
      navigation_box_(
@@ -96,12 +96,12 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                0,
                kButtonSize,
                kButtonSize,
-					g_gr->images().get("images/ui_basic/but2.png"),
+               g_gr->images().get("images/ui_basic/but2.png"),
                g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
-               (boost::format(_("%1% (Hotkey: %2%)"))
-                %
-					 /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                _("Watch the selected ship") % pgettext("hotkey", "W"))
+               (boost::format(_("%1% (Hotkey: %2%)")) %
+                /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                _("Watch the selected ship") %
+                pgettext("hotkey", "W"))
                   .str()),
      openwindowbtn_(&navigation_box_,
                     "seafaring_stats_watch_button",
@@ -109,12 +109,12 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     0,
                     kButtonSize,
                     kButtonSize,
-						  g_gr->images().get("images/ui_basic/but2.png"),
+                    g_gr->images().get("images/ui_basic/but2.png"),
                     g_gr->images().get("images/ui_basic/fsel.png"),
-                    (boost::format(_("%1% (Hotkey: %2%)"))
-                     %
-							/** TRANSLATORS: Tooltip in the seafaring statistics window */
-                     _("Go to the selected ship and open its window") % pgettext("hotkey", "O"))
+                    (boost::format(_("%1% (Hotkey: %2%)")) %
+                     /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                     _("Go to the selected ship and open its window") %
+                     pgettext("hotkey", "O"))
                        .str()),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
@@ -122,12 +122,12 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     0,
                     kButtonSize,
                     kButtonSize,
-						  g_gr->images().get("images/ui_basic/but2.png"),
+                    g_gr->images().get("images/ui_basic/but2.png"),
                     g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
-                    (boost::format(_("%1% (Hotkey: %2%)"))
-                     %
-							/** TRANSLATORS: Tooltip in the seafaring statistics window */
-                     _("Center the map on the selected ship") % pgettext("hotkey", "G"))
+                    (boost::format(_("%1% (Hotkey: %2%)")) %
+                     /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                     _("Center the map on the selected ship") %
+                     pgettext("hotkey", "G"))
                        .str()),
      table_(&main_box_,
             0,
@@ -190,20 +190,20 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 
 	shipnotes_subscriber_ =
 	   Notifications::subscribe<Widelands::NoteShip>([this](const Widelands::NoteShip& note) {
-			if (iplayer().get_player() == note.ship->get_owner()) {
-				switch (note.action) {
-				case Widelands::NoteShip::Action::kDestinationChanged:
-				case Widelands::NoteShip::Action::kWaitingForCommand:
-				case Widelands::NoteShip::Action::kGained:
-					update_ship(*note.ship);
-					break;
-				case Widelands::NoteShip::Action::kLost:
-					remove_ship(note.ship->serial());
-					break;
-				default:
-					NEVER_HERE();
-				}
-			}
+		   if (iplayer().get_player() == note.ship->get_owner()) {
+			   switch (note.action) {
+			   case Widelands::NoteShip::Action::kDestinationChanged:
+			   case Widelands::NoteShip::Action::kWaitingForCommand:
+			   case Widelands::NoteShip::Action::kGained:
+				   update_ship(*note.ship);
+				   break;
+			   case Widelands::NoteShip::Action::kLost:
+				   remove_ship(note.ship->serial());
+				   break;
+			   default:
+				   NEVER_HERE();
+			   }
+		   }
 		});
 }
 
@@ -526,21 +526,22 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 	                           /** TRANSLATORS: Tooltip in the messages window */
 	                           % _("Show scouting expeditions") % pgettext("hotkey", "Alt + 4"))
 	                             .str());
-	portspace_btn_.set_tooltip((boost::format(_("%1% (Hotkey: %2%)"))
-	                            /** TRANSLATORS: Tooltip in the messages window */
-	                            % _("Show colonizing expeditions and expeditions with port space found") %
-	                            pgettext("hotkey", "Alt + 5"))
-	                              .str());
+	portspace_btn_.set_tooltip(
+	   (boost::format(_("%1% (Hotkey: %2%)"))
+	    /** TRANSLATORS: Tooltip in the messages window */
+	    % _("Show colonizing expeditions and expeditions with port space found") %
+	    pgettext("hotkey", "Alt + 5"))
+	      .str());
 }
 
 bool SeafaringStatisticsMenu::satisfies_filter(const ShipInfo& info, ShipFilterStatus filter) {
-	return filter == info.status ||
-			(filter == ShipFilterStatus::kExpeditionPortspaceFound
-			 && info.status == ShipFilterStatus::kExpeditionColonizing);
+	return filter == info.status || (filter == ShipFilterStatus::kExpeditionPortspaceFound &&
+	                                 info.status == ShipFilterStatus::kExpeditionColonizing);
 }
 
 void SeafaringStatisticsMenu::fill_table() {
-	const Widelands::Serial last_selection = table_.has_selection() ? table_.get_selected() : Widelands::INVALID_INDEX;
+	const Widelands::Serial last_selection =
+	   table_.has_selection() ? table_.get_selected() : Widelands::INVALID_INDEX;
 	table_.clear();
 	data_.clear();
 	set_buttons_enabled();
@@ -551,7 +552,8 @@ void SeafaringStatisticsMenu::fill_table() {
 		if (info->status != ShipFilterStatus::kAll) {
 			if (ship_filter_ == ShipFilterStatus::kAll || satisfies_filter(*info, ship_filter_)) {
 				data_.insert(std::make_pair(serial, std::unique_ptr<const ShipInfo>(info)));
-				UI::Table<uintptr_t const>::EntryRecord& er = table_.add(serial, serial == last_selection);
+				UI::Table<uintptr_t const>::EntryRecord& er =
+				   table_.add(serial, serial == last_selection);
 				set_entry_record(&er, *info);
 			}
 		}

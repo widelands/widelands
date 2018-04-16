@@ -52,8 +52,8 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
                          uint32_t const h,
                          bool const init_single_window)
    : UI::Window(&parent, "watch", x, y, w, h, _("Watch")),
-	  parent_(parent),
-	  map_view_(this, game().map(), 0, 0, 200, 166),
+     parent_(parent),
+     map_view_(this, game().map(), 0, 0, 200, 166),
      last_visit_(game().get_gametime()),
      single_window_(init_single_window),
      cur_index_(0) {
@@ -82,24 +82,24 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	}
 
 	map_view_.field_clicked.connect(
-      [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
-              parent.map_view()->field_clicked(node_and_triangle);
-           });
-   map_view_.track_selection.connect(
-      [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
-              parent.map_view()->track_selection(node_and_triangle);
-           });
-   map_view_.changeview.connect([this] { stop_tracking_by_drag(); });
+	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		   parent.map_view()->field_clicked(node_and_triangle);
+		});
+	map_view_.track_selection.connect(
+	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
+		   parent.map_view()->track_selection(node_and_triangle);
+		});
+	map_view_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 	});
 }
 
 void WatchWindow::draw(RenderTarget& dst) {
-        UI::Window::draw(dst);
-        if (!is_minimal()) {
-                parent_.draw_map_view(&map_view_, &dst);
-        }
+	UI::Window::draw(dst);
+	if (!is_minimal()) {
+		parent_.draw_map_view(&map_view_, &dst);
+	}
 }
 
 /**
@@ -182,7 +182,7 @@ void WatchWindow::think() {
 
 	if (upcast(Widelands::Bob, bob, views_[cur_index_].tracking.get(game()))) {
 		const Widelands::Map& map = game().map();
-      const Vector2f field_position = MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
+		const Vector2f field_position = MapviewPixelFunctions::to_map_pixel(map, bob->get_position());
 		const Vector2f pos = bob->calc_drawpos(game(), field_position, 1.f);
 
 		// Drop the tracking if it leaves our vision range
