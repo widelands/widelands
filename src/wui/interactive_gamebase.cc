@@ -148,6 +148,27 @@ void InteractiveGameBase::postload() {
 	hide_minimap();
 }
 
+void InteractiveGameBase::start() {
+	InteractiveBase::start();
+	// Multiplayer games don't save the view position, so we go to the starting position instead
+	if (is_multiplayer()) {
+		Widelands::PlayerNumber pln = player_number();
+		const Widelands::PlayerNumber max = game().map().get_nrplayers();
+		if (pln == 0) {
+			// Spectator, use the view of the first viable player
+			for (pln = 1; pln <= max; ++pln) {
+				if (game().get_player(pln)) {
+					break;
+				}
+			}
+		}
+		// Adding a check, just in case there was no viable player found for spectator
+		if (game().get_player(pln)) {
+			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
+		}
+	}
+}
+
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_->set_perm_pressed(value);
 }
