@@ -182,9 +182,9 @@ void Ship::cleanup(EditorGameBase& egbase) {
 		fleet_->remove_ship(egbase, this);
 	}
 
-	Player* owner = get_owner();
-	if (owner != nullptr) {
-		owner->remove_ship(serial());
+	Player* o = get_owner();
+	if (o != nullptr) {
+		o->remove_ship(serial());
 	}
 
 	while (!items_.empty()) {
