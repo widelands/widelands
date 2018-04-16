@@ -3,12 +3,17 @@
 Animations
 ==========
 
+This article covers how to get your animations into the Widelands engine.
+For information on how to create the animations' images with Blender, see
+`GraphicsDevelopment <https://wl.widelands.org/wiki/GraphicsDevelopment/>`_.
+
 Animations are defined as `Lua tables <http://lua-users.org/wiki/TablesTutorial>`_.
-All map objects have a mandatory ``idle`` animation. They can then have further
-animations, depending on what their specific capabilities are.
-We recommend that you use the convenience functions below for the Lua coding,
-but let's look at an example first to understand which options are available,
-and what your image files need to look like:
+All :ref:`map objects <animations_map_object_types>` have a mandatory ``idle`` animation.
+They can then have further animations, depending on what their specific capabilities are.
+
+We recommend that you use the :ref:`animations_convenience_functions` below for
+the Lua coding, but let's look at an example first to understand which options
+are available, and what your image files need to look like:
 
 .. code-block:: lua
 
@@ -92,6 +97,7 @@ and ``4``.
 The base table should no longer contain the ``files`` entry
 when you're using a mipmap.
 Each mimap entry must define the ``files`` and the ``scale``.
+See also :ref:`animations_converting_formats`.
 
 
 Directional Animations
@@ -105,6 +111,9 @@ We also support mipmaps here -- name the files ``walk_ne_0.5_00.png``,
 ``walk_ne_0.5_01.png`` etc. for scale `0.5`, ``walk_ne_1_00.png``,
 ``walk_ne_1_01.png`` etc. for scale `1` and so on.
 
+
+
+.. _animations_convenience_functions:
 
 Convenience Functions
 ---------------------
@@ -153,6 +162,26 @@ add them manually, like this:
       directory = "sound/foo"
    }
 
+
+.. _animations_converting_formats:
+
+Converting Animation Formats
+----------------------------
+
+When converting a simple file animation to a mipmap animation, follow these steps:
+
+* Use `utils/rename_animation.py` to rename the previous animation, to make sure
+  that our version control system will not lose its history, e.g.::
+
+   utils/rename_animation.py data/tribes/workers/fancytribe/diligentworker/walk_ne data/tribes/workers/fancytribe/diligentworker/walk_ne_1
+   utils/rename_animation.py data/tribes/workers/fancytribe/diligentworker/walk_nw data/tribes/workers/fancytribe/diligentworker/walk_nw_1
+   ...
+
+* Export the new animations from Blender, preferably at all supported scales.
+  Only export the higher resolution scales if the textures have sufficient resolution.
+
+
+.. _animations_map_object_types:
 
 Map Object Types
 ----------------
