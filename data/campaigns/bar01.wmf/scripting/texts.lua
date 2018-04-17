@@ -18,31 +18,32 @@ end
 --                                OBJECTIVES
 -- =======================================================================
 obj_build_rangers = {
-   name = "mission rangers",
-   title = _"Build two ranger’s huts",
+   name = "mission_rangers",
+   title = _"Build 2 ranger’s huts",
    number = 1,
-   body = objective_text(_"Build two ranger’s huts",
+   body = objective_text(_"Build Ranger’s Huts",
       li(_"Build a ranger’s hut next to each lumberjack’s hut.") ..
-      li_arrow(_"Naturally, trees only grow at a slow rate. To make sure you have enough logs, you have to build rangers.")
-   )
+      li_arrow(_"Naturally, trees only grow at a slow rate. To make sure you have enough logs, you have to build rangers."))
 }
 
 obj_claim_northeastern_rocks = {
-   name = "mission quarry",
-   title = _"Expand north-east and build a quarry",
+   name = "mission_quarry",
+   title = _"Expand north-east to the rocks and build a quarry",
    number = 1,
-   body = objective_text(_"Expand north-east to the rocks",
+   body = objective_text(_"Expand North-East",
       li(_"Build military buildings (like sentries or barriers) to expand your territory.") ..
       li(_"Get to the rocks north-east from you and build a quarry there."))
 }
 
 obj_build_mines = {
-   name = "mission mines",
-   title = _"Start building mines on the mountain",
+   name = "mission_mines",
+   title = _"Start building coal and iron mines on the mountain",
    number = 2,
-   body = objective_text(_"Build coal and iron mines",
+   body = objective_text(_"Build Mines",
       li(_"Build a coal mine and an iron mine.") ..
-      li_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow). When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water. Then build a mine for both kinds of resources that they will find, choosing the appropriate mine to be built:") ..
+      li_arrow(_"To do so, place a flag up on the mountain’s flank to the east (on mountain terrain though, not mountain meadow).") ..
+      li_arrow(_"When you click on the new flag, you can send geologists there. Because the flag is on a mountain, the geologists will search for ores; otherwise, they would search for water.") ..
+      li_arrow(_"Then build a mine for both kinds of resources that they will find, choosing the appropriate mine to be built:") ..
       li_image("tribes/immovables/resi_coal1/idle_00.png", _"a bit of coal") ..
       li_image("tribes/immovables/resi_coal2/idle_00.png", _"a lot of coal") ..
       li_image("tribes/immovables/resi_iron1/idle_00.png", _"a bit of iron") ..
@@ -53,85 +54,101 @@ obj_build_mines = {
       li_image("tribes/immovables/resi_stones2/idle_00.png", _"a lot of granite") ..
       li_image("tribes/immovables/resi_water1/idle_00.png", _"water") ..
       li_image("tribes/immovables/resi_none/idle_00.png", _"nothing was found here") ..
-      p(_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]))
+      li_arrow(_"Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols."))
 }
 
 obj_basic_food = {
-   name = "basic food began",
+   name = "basic_food_began",
    title = _"Provide your miners with food",
    number = 3,
-   body = objective_text(_"Build a hunter’s hut, a gamekeeper’s hut and a tavern",
-      li(_"In order to work, your miners need food.") ..
-      li_arrow(join_sentences(_([[A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct. The meat is then processed in a tavern into lunches for your miners.]]), _([[This is only the first example of a ware which has to be refined before being used in a secondary building – others will follow.]]))))
+   body = objective_text(_"Produce Rations",
+      li(_"Build a hunter’s hut, a gamekeeper’s hut and a tavern") ..
+      li_arrow(_"A hunter can hunt down animals, while a gamekeeper prevents them from becoming extinct.") ..
+      li_arrow(_"The meat is then processed in a tavern into rations for your miners.") ..
+      li_arrow(_"This is only the first example of a ware which has to be refined before being used in a secondary building – others will follow."))
 }
 
 obj_begin_farming = {
-   name = "farming began",
-   title = _"Bake bread",
+   name = "farming_began",
+   title = _"Bake bread to enhance food production",
    number = 3,
-   body = objective_text(_"Build a well, a farm and a bakery",
-      _([[Other ways to produce food – different kinds of food – are fishers and farms. The wheat of the farms has to be processed with water in a bakery before it becomes edible. You can obtain water by building a well on a spot where your geologists have found a water source.]]))
+   body = objective_text(_"Bake Bread",
+      li(_"Build a well, a farm and a bakery") ..
+      li_arrow(_"Other ways to produce food – different kinds of food – are fishers and farms.") ..
+      li_arrow(_"The wheat of the farms has to be processed with water in a bakery before it becomes edible.") ..
+      li_arrow(_"You can obtain water by building a well on a spot where your geologists have found a water source."))
 }
 
 obj_refine_ores = {
-   name = "refining began",
+   name = "refining_began",
    title = _"Refine your mined resources",
    number = 1,
-   body = objective_text(_"Build a smelting works",
-      _[[The iron ore your miners dig up is not usable yet – it has to be melted into iron first.]])
+   body = objective_text(_"Iron Economy",
+      li(_"Build a smelting works") ..
+      li_arrow(_"The iron ore your miners dig up is not usable yet – it has to be melted into iron first."))
 }
 
 obj_enhance_buildings = {
-   name = "enhance buildings",
-   title = _"Enhance buildings and build a micro brewery",
+   name = "enhance_buildings",
+   title = _"Enhance a mine and the tavern and build a micro brewery",
    number = 3,
-   body = objective_text(_[[Enhance a mine and the tavern, and build a micro brewery.]],
-      li(_"Enhance the coal mine or the iron mine to a deep mine, and enhance the tavern to an inn.") ..
-      li(_"Also build a micro brewery.") ..
-      li_arrow(_"A normal mine can only dig up about one third of all the resources that lie beneath it; then it must be enhanced to a deep mine in order to keep it working properly. To enhance a building, choose it and then click the appropriate button in the appearing window.")  ..
-      li_arrow(_"Workers gain experience by successful work. With enough experience, they become more advanced workers, who are necessary to operate the enhanced buildings. Do not enhance a building before you have enough advanced workers to operate the advanced building!") ..
-      li_arrow(_"Such buildings usually have greater demands than the basic kind of that building – for instance, deep mines need snacks instead of rations. You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish) AND beer.") ..
-      _"You may of course enhance all mines to deep mines instantly given you have the workers – bigger mines work a bit faster, smaller mines need cheaper food. It’s up to you which strategy you prefer.")
+   body = objective_text(_"Enhance Buildings",
+      li(_"Enhance the coal mine or the iron mine to a deep mine.") ..
+      li_arrow(_"A normal mine can only dig up about one third of all the resources that lie beneath it; then it must be enhanced to a deep mine in order to keep it working properly.") ..
+      li_arrow(_"To enhance a building, choose it and then click the appropriate button in the appearing window.") ..
+      li_arrow(_"Workers gain experience by successful work. With enough experience, they become more advanced workers, who are necessary to operate the enhanced buildings.") ..
+      li_arrow(_"Do not enhance a building before you have enough advanced workers to operate the advanced building!") ..
+      li_arrow(_"You may of course enhance all mines to deep mines instantly given you have the workers – bigger mines work a bit faster, smaller mines need cheaper food. It’s up to you which strategy you prefer.") ..
+      li(_"Enhance the tavern to an inn.") ..
+      li_arrow(_"Enhanced buildings usually have greater demands than the basic kind of that building – for instance, deep mines need snacks instead of rations.") ..
+      li_arrow(_"You will have to enhance your tavern to an inn in order to produce snacks out of pitta bread AND a second kind of food (meat or fish) AND beer.") ..
+      li(_"Build a micro brewery to produce the beer for the snacks."))
 }
 
 obj_better_material_1 = {
-   name = "build hardener",
+   name = "build_hardener",
    title = _"Build a wood hardener",
    number = 1,
-   body = objective_text(_"Build a wood hardener",
-      p(_([[Bigger and better buildings – including all military ones – require better building materials. They cannot be built out of simple logs – the logs have to be refined to blackwood by a wood hardener first. Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand.]])) ..
-      li(_"Build a wood hardener"))
+   body = objective_text(_"Wood Hardener",
+      li(_"Build a wood hardener") ..
+      li_arrow(_"Bigger and better buildings – including all military ones – require better building materials.") ..
+      li_arrow(_"They cannot be built out of simple logs – the logs have to be refined to blackwood by a wood hardener first.") ..
+      li_arrow(_"Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand."))
 }
 
 obj_better_material_2 = {
-   name = "mission grout",
-   title = _"Build a lime kiln and coal economy",
+   name = "mission_grout",
+   title = _"Build a lime kiln and a charcoal kiln or a coal mine",
    number = 3,
-   body = objective_text(_"Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine",
-      p(_([[Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of granite, water and coal by a lime-burner.]])) ..
-      p(_([[You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain.]])) ..
-      li_image("images/wui/fieldaction/menu_geologist.png", _"In order to call a geologist to search for water, click on a flag in the area that you want him to search and then on the button labeled ‘Send geologist to explore site’.") ..
-      p(_([[Coal can be obtained by building a charcoal kiln or a coal mine. Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available.]])) ..
-      li(_"Build a lime kiln and a well. Additionally, build either a charcoal kiln or a coal mine for coal supply."))
+   body = objective_text(_"Lime Kiln and Coal Economy",
+      li(_"Build a lime kiln and a well.") ..
+      li_arrow(_"Better buildings may also require other improved materials besides blackwood. One of these is grout, which is produced out of granite, water and coal by a lime-burner.") ..
+      li_arrow(_"You can obtain water by building a well upon a water source, which your geologists can discover when you send them to any flag that is not on a mountain.") ..
+      li_arrow(_"In order to call a geologist to search for water, click on a flag in the area that you want him to search and then on the following button.") ..
+      li_image("images/wui/fieldaction/menu_geologist.png", _"Button ‘Send geologist to explore site’") ..
+      li(_"Build either a charcoal kiln or a coal mine for the coal supply.") ..
+      li_arrow(_"Coal can be obtained by building a charcoal kiln or a coal mine.") ..
+      li_arrow(_"Burning charcoal out of logs is slow. You should only build a charcoal kiln when no coal is available."))
 }
 
 obj_better_material_3 = {
-   name = "mission reed_yard",
+   name = "mission_reed_yard",
    title = _"Build a reed yard",
    number = 1,
-   body = objective_text(_"Build a reed yard",
-      p(_([[The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a gardener around his building, the reed yard.]])) ..
-      li(_"Build a reed yard"))
+   body = objective_text(_"Reed Yard",
+      li(_"Build a reed yard") ..
+      li_arrow(_"The third material necessary for improved buildings is thatch reed, used to cover roofs. Thatch reed is planted by a gardener around his building, the reed yard."))
 }
 
 obj_build_cattlefarm = {
-   name = "mission cattlefarm",
+   name = "mission_cattlefarm",
    title = _"Build a cattle farm",
    number = 1,
-   body = objective_text(_"Build a cattle farm",
-      p(_([[When roads are under heavy load for a long time, one carrier is usually not enough to transport goods swiftly. Traffic jams are the consequence. Such roads therefore employ a second carrier: an ox that helps to carry the wares. This doubles the transport capacity.]])) ..
-      li_arrow(_([[Oxen are bred in cattle farms out of wheat and water.]])) ..
-      li(_"Build a cattle farm"))
+   body = objective_text(_"Cattle Farm",
+      li(_"Build a cattle farm") ..
+      li_arrow(_"When roads are under heavy load for a long time, one carrier is usually not enough to transport goods swiftly. Traffic jams are the consequence.") ..
+      li_arrow(_"Such roads therefore employ a second carrier: an ox that helps to carry the wares. This doubles the transport capacity.") ..
+      li_arrow(_"Oxen are bred in cattle farms out of wheat and water."))
 }
 
 
