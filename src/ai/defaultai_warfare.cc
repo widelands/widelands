@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -430,7 +430,9 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 					}
 				}
 			}
-			site->second.score += management_data.get_military_number_at(138) / 4;
+			site->second.score += (management_data.get_military_number_at(138) +
+			                       management_data.get_military_number_at(159)) /
+			                      8;
 
 			if (site->second.score > 0) {
 				assert(is_visible);

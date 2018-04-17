@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -167,10 +167,10 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:101
 msgid ""
-"Train a soldier to the highest possible level. Soldiers are trained in small"
-" training camps and large training arenas. We will need a gold mine, a "
-"tailor’s shop to sew better armor, and a large armor smithy for better "
-"weapons and helmets."
+"Train a soldier to the highest possible level. Soldiers are trained in "
+"training camps and training arenas. We will need a gold mine, a tailor’s "
+"shop to sew better armor, and a large armor smithy for better weapons and "
+"helmets."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
@@ -644,8 +644,8 @@ msgstr ""
 #. TRANSLATORS: Reebaud – train soldiers 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:315
 msgid ""
-"Soldiers are trained in basic attack, health and defense by a small training"
-" camp. They can learn the finer points in a large training arena."
+"Soldiers are trained in basic attack, health and defense by a training camp."
+" They can learn the finer points in a training arena."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319

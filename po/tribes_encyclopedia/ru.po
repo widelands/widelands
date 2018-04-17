@@ -16,10 +16,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-28 08:49+0000\n"
-"Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-06 16:28+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -98,24 +98,8 @@ msgstr "Если у вас мало солдат для захвата воен�
 #. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Lore helptext for a building
@@ -154,12 +138,6 @@ msgstr "Если у вас мало солдат для захвата воен�
 #: ../../data/tribes/buildings/militarysites/frisians/tower/helptexts.lua:8
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:3
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:11
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:11
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:3
@@ -168,24 +146,14 @@ msgstr "Если у вас мало солдат для захвата воен�
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:11
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:11
-#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:8
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:3
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:8
 #: ../../data/tribes/buildings/warehouses/frisians/port/helptexts.lua:3
@@ -206,10 +174,10 @@ msgstr "Новое здание строится на этой строител�
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16
 msgctxt "building"
 msgid ""
-"A building is being dismantled at this dismantlesite, returning some of the "
-"resources that were used during this building’s construction to your tribe’s"
-" stores."
-msgstr "Здание разбирается на этой площадке демонтажа, возвращая в хранилище вашего племени немного ресурсов, которые использовались при строительстве этого здания."
+"A building is being dismantled at this dismantle site, returning some of the"
+" resources that were used during this building’s construction to your "
+"tribe’s stores."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -359,7 +327,7 @@ msgstr "Разводит крепких лошадей для Атлантов �
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:16
 msgctxt "building"
 msgid "Hunts animals to produce meat."
 msgstr "Охотится на зверей для производства мяса."
@@ -550,7 +518,7 @@ msgstr "Варварская топорная мастерская - проме�
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:27
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
@@ -564,7 +532,7 @@ msgstr "Варварская топорная мастерская - проме�
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:23
@@ -1506,11 +1474,41 @@ msgid ""
 " nearby to use as fishing ponds."
 msgstr "Акваферме, чтобы использовать в качестве рыболовных прудов, нужны ямы в земле. Их роют работники глиняных карьеров, расположенных поблизости."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:6
+msgctxt "frisians_building"
+msgid ""
+"Naturally, I can still forge short and long swords, but it is beneath my "
+"honor to bother with such basic equipment now."
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
+msgctxt "frisians_building"
+msgid ""
+"A master blacksmith refusing to forge anything but the most sophisticated "
+"helmets and weapons"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:16
 msgctxt "building"
 msgid "Produces advanced weapons and golden helmets for your soldiers."
 msgstr "Изготавливает улучшенное вооружение и золотые шлемы для ваших солдат."
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:6
+msgctxt "frisians_building"
+msgid ""
+"I don’t forge swords because soldiers need ’em, but soldiers get ’em because"
+" I forge ’em."
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:11
+msgctxt "frisians_building"
+msgid "A blacksmith pointing out his influence on soldier training"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:16
@@ -1542,15 +1540,32 @@ msgctxt "frisians_building"
 msgid "The bakery needs %s to produce one loaf of bread."
 msgstr "Пекарне нужно %s для выпекания одной буханки хлеба."
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:3
+msgctxt "frisians_building"
+msgid ""
+"You have thirty seconds to learn the basics of swordfighting and how to stay"
+" alive in battle. A third of that time has gone by for the introduction "
+"alone! You’d better pay close attention to me in order to make the most of "
+"it. Now here is your new short sword, forged just for you by our best "
+"blacksmiths. Time’s up everyone, now go occupy your sentinels!"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:8
+msgctxt "frisians_building"
+msgid "A trainer greeting the new recruits"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:13
 msgctxt "frisians_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr "Снаряжает новобранцев и тренирует их до солдат."
 
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks needs %s to recruit one soldier."
@@ -1991,13 +2006,13 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:21
 msgctxt "frisians_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
 msgid "The hunter pauses %s before going to work again."
@@ -2086,6 +2101,21 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The stonemason pauses %s before going to work again."
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:6
+msgctxt "frisians_building"
+msgid ""
+"Of course these weapons could be used by other soldiers again without being "
+"smelted down first! The only drawback is that they’d break in two at the "
+"first blow."
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:11
+msgctxt "frisians_building"
+msgid "A smelter explaining the need for recycling to his impatient chieftain"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2194,6 +2224,22 @@ msgctxt "frisians_building"
 msgid "The deep rock mine needs %s to produce three blocks of granite."
 msgstr ""
 
+#. TRANSLATORS: Lore helptext for a building. Reference to frequent
+#. discussions about good scouting algorithms
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:3
+msgctxt "frisians_building"
+msgid ""
+"Everyone has their own ideas on how exactly we should explore the enemy’s "
+"territory… One more ‘improvement’ suggestion and we’ll demand meals instead "
+"of rations!"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:8
+msgctxt "frisians_building"
+msgid "The spokesman of the scouts’ labor union"
+msgstr ""
+
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -2224,6 +2270,23 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The sewing room needs %s to produce one fur garment."
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building. "Yard" is a wordplay with the
+#. measurement unit
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:6
+msgctxt "frisians_building"
+msgid ""
+"This house may be called a shipyard, but my ships are rather longer than one"
+" yard!"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:11
+msgctxt "frisians_building"
+msgid ""
+"A shipwright who only constructed toy ships after being chid that his ships "
+"were too small"
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -2292,6 +2355,20 @@ msgctxt "frisians_building"
 msgid ""
 "The tavern can produce one ration in %s on average if the supply is steady; "
 "otherwise, it will take 50 percent longer."
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:3
+msgctxt "frisians_building"
+msgid ""
+"Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For "
+"ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:8
+msgctxt "frisians_building"
+msgid "A seamstress’s work song"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building

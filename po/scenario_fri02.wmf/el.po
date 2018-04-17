@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: erimitis, 2018\n"
 "Language-Team: Greek (https://www.transifex.com/widelands/teams/35159/el/)\n"
@@ -123,7 +123,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:69
 msgid "40 × Ration"
-msgstr ""
+msgstr "40 × Μερίδα"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:70
 msgid "10 × Meal"
@@ -143,7 +143,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:74
 msgid "30 × Gold Ore"
-msgstr ""
+msgstr "30 × Μετάλλευμα Χρυσού"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:75
 msgid "10 × Gold"
