@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,9 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
      worker_caps_(nullptr) {
 	productionsitenotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) {
+		   if (is_dying_) {
+			   return;
+		   }
 		   Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
 		   if (production_site == nullptr) {
 			   return;

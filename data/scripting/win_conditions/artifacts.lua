@@ -52,7 +52,7 @@ return {
       local plrs = wl.Game().players
       if #artifact_fields == 0 then
          for idx, plr in ipairs(plrs) do
-            send_message(plr, _"No Artifacts", p(_"There are no artifacts on this map. This should not happen. Please file a bug report on https://launchpad.net/widelands and specify your Widelands version and the map you tried to load."), {popup = true})
+            send_message(plr, _"No Artifacts", p(_"There are no artifacts on this map. This should not happen. Please file a bug report on %s and specify your Widelands version and the map you tried to load."):bformat("https://wl.widelands.org/wiki/ReportingBugs/"), {popup = true})
          end
          return
       end
@@ -134,16 +134,11 @@ return {
       local max_artifacts = _max(artifacts_per_team)
 
       local function _get_member_names(t)
-         local s = ""
+         local membernames = {}
          for idx, plr in ipairs(t) do
-            if s == "" then
-               s = plr.name
-            else
-               -- TRANSLATORS: This is used to seperate players’ names in a list, e.g. "Steve, Robert, David"
-               s = s .. _", " .. plr.name
-            end
+            table.insert(membernames, plr.name)
          end
-         return s
+         return localize_list(membernames, ",", "win_conditions")
       end
 
       local teams = {}

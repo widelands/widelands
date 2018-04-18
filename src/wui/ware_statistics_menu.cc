@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -138,7 +138,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	                            Widelands::kStatisticsSampleTime, WuiPlotArea::Plotmode::kRelative);
 
 	tabs->add(
-	   "economy_health", g_gr->images().get(pic_tab_economy), plot_economy_, _("Economy Health"));
+	   "economy_health", g_gr->images().get(pic_tab_economy), plot_economy_, _("Economy health"));
 
 	plot_stock_ =
 	   new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,

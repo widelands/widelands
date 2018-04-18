@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -188,9 +188,8 @@ int Panel::do_run() {
 		if (start_time >= next_draw_time) {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
-			rt.blit(
-			   (app->get_mouse_position() - Vector2i(3, 7)),
-			   WLApplication::get()->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
+			rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
+			        app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
 			forefather->do_tooltip();
 			g_gr->refresh();
 			next_draw_time = start_time + draw_delay;
@@ -499,9 +498,12 @@ void Panel::handle_mousein(bool) {
  * If the panel doesn't process the mouse-click, it is handed to the panel's
  * parent.
  *
- * \return true if the mouseclick was processed, flase otherwise
+ * \return true if the mouseclick was processed, false otherwise
  */
-bool Panel::handle_mousepress(const uint8_t, int32_t, int32_t) {
+bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+	if (btn == SDL_BUTTON_LEFT) {
+		focus();
+	}
 	return false;
 }
 

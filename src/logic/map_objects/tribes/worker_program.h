@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ struct WorkerProgram : public BobProgramBase {
 	WorkerProgram(const std::string& name, const WorkerDescr& worker, const Tribes& tribes)
 	   : name_(name), worker_(worker), tribes_(tribes) {
 	}
-	virtual ~WorkerProgram() {
+	~WorkerProgram() override {
 	}
 
 	std::string get_name() const override {

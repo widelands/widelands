@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ struct ChatProvider;
  */
 struct ChatOverlay : public UI::Panel {
 	ChatOverlay(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h);
-	~ChatOverlay();
+	~ChatOverlay() override;
 
 	void set_chat_provider(ChatProvider&);
 	void draw(RenderTarget&) override;

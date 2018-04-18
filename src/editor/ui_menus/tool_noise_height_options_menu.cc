@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             noise_tool_.get_interval().min,
             1,
             MAX_FIELD_HEIGHT,
-            _("Minimum Height:"),
+            _("Minimum height:"),
             UI::SpinBox::Units::kNone,
             g_gr->images().get("images/ui_basic/but1.png"),
             UI::SpinBox::Type::kSmall),
@@ -59,7 +59,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
             noise_tool_.get_interval().max,
             0,
             MAX_FIELD_HEIGHT,
-            _("Maximum Height:"),
+            _("Maximum height:"),
             UI::SpinBox::Units::kNone,
             g_gr->images().get("images/ui_basic/but1.png"),
             UI::SpinBox::Type::kSmall),
@@ -71,7 +71,7 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
              noise_tool_.set_tool().get_interval().min,
              0,
              MAX_FIELD_HEIGHT,
-             _("Set Value:"),
+             _("Set height to:"),
              UI::SpinBox::Units::kNone,
              g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall) {
@@ -93,14 +93,14 @@ EditorToolNoiseHeightOptionsMenu::EditorToolNoiseHeightOptionsMenu(
 	   boost::bind(&EditorToolNoiseHeightOptionsMenu::update_set_to, boost::ref(*this)));
 
 	UI::Textarea* label =
-	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random Height"), UI::Align::kCenter);
+	   new UI::Textarea(&box_, 0, 0, 0, 0, _("Random height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&upper_);
 	box_.add(&lower_);
 
 	box_.add_space(2 * vspacing());
-	label = new UI::Textarea(&box_, 0, 0, 0, 0, _("Fixed Height"), UI::Align::kCenter);
+	label = new UI::Textarea(&box_, 0, 0, 0, 0, _("Fixed height"), UI::Align::kCenter);
 	label->set_fixed_width(get_inner_w() - 2 * hmargin());
 	box_.add(label);
 	box_.add(&set_to_);

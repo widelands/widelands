@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -221,7 +221,7 @@ void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
 	directory_info_.set_text(
 	   /** TRANSLATORS: The folder that a file will be saved to. */
-	   (boost::format(_("Current Directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
+	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
 	      .str());
 }
 
@@ -280,6 +280,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		   g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
+		map->cleanup_port_spaces(egbase.world());
 		if (map->allows_seafaring()) {
 			map->add_tag("seafaring");
 		} else {

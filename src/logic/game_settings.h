@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -157,7 +157,7 @@ struct GameSettings {
 	bool savegame;
 
 	/// List of tribes that players are allowed to choose
-	std::vector<TribeBasicInfo> tribes;
+	std::vector<Widelands::TribeBasicInfo> tribes;
 
 	/// Player configuration, with 0-based indices for players
 	std::vector<PlayerSettings> players;

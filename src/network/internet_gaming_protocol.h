@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2017 by the Widelands Development Team
+ * Copyright (C) 2012-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,13 +34,12 @@
  * 0: Build 19 and before [stable, supported]
  * 1: Between build 19 and build 20 - IPv6 support added
  * 2: Between build 19 and build 20 - Added UUID to allow reconnect with same username after
- * crashes.
- *                                    When logging twice with a registered account, the second
- * connection
- *                                    gets a free username assigned. Dropping RELOGIN command.
- * [supported]
+ *    crashes. When logging twice with a registered account, the second connection gets a free
+ *     username assigned. Dropping RELOGIN command.
+ * 3: Between build 19 and build 20 - Added network relay for internet games
+ * 4: Between build 19 and build 20 - Using CHAP for password authentication [supported]
  */
-#define INTERNET_GAMING_PROTOCOL_VERSION 2
+constexpr unsigned int kInternetGamingProtocolVersion = 4;
 
 /**
  * The default timeout time after which the client tries to resend a package or even finally closes
@@ -51,29 +50,19 @@
  * value is in milliseconds
  */
 // TODO(unknown): Should this be resettable by the user?
-#define INTERNET_GAMING_TIMEOUT 10  // 10 seconds
-
-/**
- * The default timeout time after which the client tries to resend a package or even finally closes
- * the
- * connection to the metaserver, if no answer to a previous package (which requires an answer) was
- * received. In case of a login or reconnect, this is the time to wait for the metaservers answer.
- *
- * value is in milliseconds
- */
-// TODO(unknown): Should this be resettable by the user?
-#define INTERNET_GAMING_CLIENT_TIMEOUT 60  // 60 seconds - some time to reconnect
-
-/**
- * The default number of retries after a timeout after which the client finally closes the
- * connection to the metaserver.
- */
-// TODO(unknown): Should this be resettable by the user?
-#define INTERNET_GAMING_RETRIES 3
+constexpr time_t kInternetGamingTimeout = 10;  // 10 seconds
 
 /// Metaserver connection details
 static const std::string INTERNET_GAMING_METASERVER = "widelands.org";
-#define INTERNET_GAMING_PORT 7395
+// Default port for connecting to the metaserver
+constexpr uint16_t kInternetGamingPort = 7395;
+// Default port for connecting to the relay
+constexpr uint16_t kInternetRelayPort = 7397;
+// The following ones are only used between metaserver and relay
+// Port used by the metaserver to contact the relay
+// INTERNET_RELAY_RPC_PORT 7398
+// Port used by the relay to contact the metaserver
+// INTERNET_GAMING_RPC_PORT 7399
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * CLIENT RIGHTS                                                           *
@@ -122,10 +111,9 @@ static const std::string INTERNET_CLIENT_BOT = "BOT";
  * 1) Linking connections with IPv4 and IPv6
  * The UUID is used on the metaserver to link multiple connections by the same client. This
  * normally happens when the client supports IPv4 and IPv6 and connects with both protocol versions.
- * This
- * way, the metaserver knows that the client supports both versions and can show games / offer its
- * game
- * of/for clients with both protocol versions.
+ * This way, the metaserver knows that the client supports both versions and can show games / offer
+ * its
+ * game of/for clients with both protocol versions.
  *
  * When a network client connects to the metaserver with (RE)LOGIN it also sends the UUID.
  * When "another" netclient connects to the metaserver and sends TELL_IP containing the same UUID,
@@ -137,8 +125,7 @@ static const std::string INTERNET_CLIENT_BOT = "BOT";
  * connection is active. So when the player reconnects, another name is chosen. Sending the UUID
  * allows
  * to reclaim the old name, since the server recognizes that there isn't a second player trying to
- * use
- * the same name.
+ * use the same name.
  */
 
 /**
@@ -156,8 +143,7 @@ static const std::string INTERNET_CLIENT_BOT = "BOT";
  *
  * \note If you want to change the payload of this command, change it only by appending new items.
  *       The reason is that this is the only command that can be sent by the metaserver even when
- * the
- *       protocol versions differ.
+ *       the protocol versions differ.
  *
  */
 static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
@@ -165,25 +151,32 @@ static const std::string IGPCMD_DISCONNECT = "DISCONNECT";
 /**
  * Initiate a connection.
  *
- * The first communication across the network stream is a LOGIN command
+ * The first communication across the network stream is a IGPCMD_LOGIN command
  * sent by the client, with the following payload:
- * \li string:    protocol version
+ * \li string:    protocol version (see kInternetGamingProtocolVersion)
  * \li string:    client name
  * \li string:    build_id of the client
  * \li string:    whether the client wants to login in to a registered account
  *                ("true" or "false" as string)
- * \li string:    for registered accounts: password in clear text
+ * \li string:    for registered accounts: string of length 0
  *                for unregistered users the UUID to recognize the matching IPv4 and IPv6
  *                connections or to reclaim the username after a unintended disconnect.
  *                For an explanation of the UUID, see above.
  *
- * If the metaserver accepts, it replies with a LOGIN command with the following payload:
- * \li string:    client name (might be different to the previously chosen one, if the client did
- *                NOT login to a registered account and either the chosen is registered or already
- *                used.)
- * \li string:    clients rights  (see client rights section above)
+ * If the user tries to login to a registered account, a IGPCMD_PWD_CHALLENGE exchange follows
+ * before
+ * the server replies with a IGPCMD_LOGIN or IGPCMD_ERROR message.
  *
- * If no answer is received in \ref INTERNET_GAMING_TIMEOUT s the client will again try to login
+ * If the metaserver accepts, it replies with a IGPCMD_LOGIN command with the following payload:
+ * \li string:    client name. Might be different to the previously chosen one, if the chosen
+ *                name already used or is registered (and the connecting client is not registered).
+ * \li string:    clients rights (see client rights section above)
+ *
+ * When the client is downgraded to an unregistered user on login, a special UUID value
+ * of sha1(assignedName | passwordHash) has to be used on reconnects.
+ *
+ * If no answer is received in \ref kInternetGamingTimeout seconds the client will again try to
+ * login
  * \ref INTERNET_GAMING_RETRIES times until it finally bails out something like "server does not
  * answer"
  *
@@ -196,17 +189,38 @@ static const std::string IGPCMD_LOGIN = "LOGIN";
  *
  * Assuming the client already has a connection over IPv6 and tries to establish a secondary
  * connection over IPv4, this is the only message sent.
- * It should be sent as soon as a connection is established, immediately followed by closing
- * the connection. No answer from the server should be expected.
+ * It should be sent as soon as a connection is established.
+ * For unregistered users, the connection should be closed immediately following the command. No
+ * answer from the server should be expected.
+ * For registered users, an exchange of IGPCMD_PWD_CHALLENGE commands is done before closing the
+ * connection.
  *
  * Is sent by the client, with the following payload:
- * \li string:    protocol version
+ * \li string:    protocol version (see kInternetGamingProtocolVersion)
  * \li string:    client name - the one the metaserver replied at the first login
- * \li string:    for registered accounts: password in clear text
+ * \li string:    for registered accounts: string of length 0
  *                for unregistered users the UUID used on login
  *                for an explanation of the UUID, see above.
  */
 static const std::string IGPCMD_TELL_IP = "TELL_IP";
+
+/**
+ * This is sent by the metaserver after a IGPCMD_LOGIN or IGPCMD_TELL_IP by a registered client.
+ * This is the first message of the a protocol similar to the challenge handshake authentication
+ * protocol (CHAP) for secure transmission of the users password.
+ * The server sends the nonce for hashing:
+ * \li string:    a nonce for hashing
+ *
+ * The client should answer the message by an own IGPCMD_PWD_CHALLENGE containing the hashed
+ * password:
+ * \li string:    HASH_SHA1(nonce | HASH_SHA1(password))
+ *
+ * If the transmitted value is correct, the normal IGPCMD_LOGIN/IGPCMD_TELL_IP sequence continues.
+ * If the
+ * value is wrong (e.g., wrong password) the connection is terminated by the servers
+ * IGPCMD_DISCONNECT.
+ */
+static const std::string IGPCMD_PWD_CHALLENGE = "PWD_CHALLENGE";
 
 /**
  * This command is sent by the metaserver if something went wrong.
@@ -333,16 +347,18 @@ static const std::string IGPCMD_CLIENTS = "CLIENTS";
 
 /**
  * Sent by the client to announce the startup of a game with following payload:
- * \li string:    name
- * \li string:    number of maximal clients
- * \note build_id is not necessary, as this is in every way the build_id of the hosting client.
+ * \li string:    name of the game
+ * \note build_id is not necessary, as this is the build_id of the hosting client anyway.
  *
- * Sent by the metaserver to acknowledge the startup of a new game without payload. The metaserver
- * will
- * list the new game, but set it as not connectable and recheck the connectability for
- * INTERNET_GAMING_TIMEOUT ms.
- * If the game gets connectable in time, the metaserver lists the game as connectable, else it
- * removes the game from the list of games.
+ * Sent by the metaserver to acknowledge the startup of a new game with the following payload:
+ * \li string:    a challenge that has to be "solved" to work as host of the new game.
+ *                See IGPCMD_PWD_CHALLENGE. The response is send to the relay
+ * \li string:    primary ip of relay server for the game.
+ * \li string:    whether a secondary ip for the relay follows ("true" or "false" as string)
+ * \li string:    secondary ip of the relay - only valid if previous was true
+ * The metaserver will list the new game, but set it as not connectable.
+ * When the client connects to the relay within kInternetGamingTimeout milliseconds,
+ * the metaserver lists the game as connectable, else it removes the game from the list of games.
  */
 static const std::string IGPCMD_GAME_OPEN = "GAME_OPEN";
 

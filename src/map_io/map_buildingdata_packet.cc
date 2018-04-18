@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -93,12 +94,11 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 						char const* const animation_name = fr.c_string();
 						try {
 							building.anim_ = building.descr().get_animation(animation_name);
-						} catch (const MapObjectDescr::AnimationNonexistent&) {
-							log("WARNING: %s %s does not have animation \"%s\"; "
-							    "using animation \"idle\" instead\n",
-							    building.owner().tribe().name().c_str(),
-							    building.descr().descname().c_str(), animation_name);
+						} catch (const GameDataError& e) {
 							building.anim_ = building.descr().get_animation("idle");
+							log("Warning: Tribe %s building: %s, using animation %s instead.\n",
+							    building.owner().tribe().name().c_str(), e.what(),
+							    building.descr().get_animation_name(building.anim_).c_str());
 						}
 					} else {
 						building.anim_ = 0;
@@ -314,9 +314,9 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version >= 6) {
-			Player& player = warehouse.owner();
-			warehouse.init_containers(player);
-			const TribeDescr& tribe = player.tribe();
+			Player* player = warehouse.get_owner();
+			warehouse.init_containers(*player);
+			const TribeDescr& tribe = player->tribe();
 
 			while (fr.unsigned_8()) {
 				const DescriptionIndex& id = tribe.ware_index(fr.c_string());
@@ -441,14 +441,14 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				//  Add to map of military influence.
 				Area<FCoords> a(map.get_fcoords(warehouse.get_position()), conquer_radius);
 				const Field& first_map_field = map[0];
-				Player::Field* const player_fields = player.fields_;
+				Player::Field* const player_fields = player->fields_;
 				MapRegion<Area<FCoords>> mr(map, a);
 				do
 					player_fields[mr.location().field - &first_map_field].military_influence +=
 					   map.calc_influence(mr.location(), Area<>(a, a.radius));
 				while (mr.advance(map));
 			}
-			player.see_area(Area<FCoords>(
+			player->see_area(Area<FCoords>(
 			   map.get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
 		} else {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,12 +66,15 @@ public:
 	boost::signals2::signal<void(uint32_t)> double_clicked;
 
 	/// A column that has a title is sortable (by clicking on the title).
+	///
+	/// Text conventions: Title Case for the 'title', Sentence case for the 'tooltip'
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
 	                TableColumnType column_type = TableColumnType::kFixed);
 
+	/// Text conventions: Title Case for the 'title'
 	void set_column_title(uint8_t col, const std::string& title);
 
 	void clear();
@@ -126,8 +129,10 @@ public:
 	struct EntryRecord {
 		explicit EntryRecord(void* entry);
 
-		void set_picture(uint8_t col, const Image* pic, const std::string& = std::string());
-		void set_string(uint8_t col, const std::string&);
+		/// Text conventions: Title Case for the 'str'
+		void set_picture(uint8_t col, const Image* pic, const std::string& str = std::string());
+		/// Text conventions: Title Case for the 'str'
+		void set_string(uint8_t col, const std::string& str);
 		const Image* get_picture(uint8_t col) const;
 		const std::string& get_string(uint8_t col) const;
 		void* entry() const {
@@ -164,7 +169,7 @@ public:
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle);
-	~Table();
+	~Table() override;
 
 	/**
 	 * Compare the two items at the given indices in the list.

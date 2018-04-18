@@ -1,21 +1,21 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # Renaud Bouchard, 2014
-# GunChleoc, 2016
+# GunChleoc, 2016,2018
 # GunChleoc, 2016
 # GwendalD <samuel.weber@gresille.org>, 2017
 # Samuël Weber <samuel.weber@normalesup.org>, 2017
 # Jaypad <ju-ju@nataju.fr>, 2016
-# Renaud Bouchard, 2015-2017
+# Renaud Bouchard, 2015-2018
 # Tubuntu <tubuntu@testimonium.be>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-16 17:50+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-31 20:36+0000\n"
 "Last-Translator: Renaud Bouchard\n"
 "Language-Team: French (http://www.transifex.com/widelands/widelands/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: ../../src/wlapplication_messages.cc:38
 #, c-format
 msgid "This is Widelands Build %s"
-msgstr "Vous êtes dans Widelands version %s"
+msgstr "Voici Widelands version %s"
 
 #: ../../src/wlapplication_messages.cc:43
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
@@ -132,7 +132,7 @@ msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://wl.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr "--ai_training Active le mode d'entraînement de l'IA. Voyez\nHttps://wl.widelans.org/wiki/Ai%20Training/\npour une description complète de la logique d'entraînement de l'IA."
+msgstr "--ai_training Active le mode d'entraînement de l'IA. Voyez\nhttps://wl.widelans.org/wiki/Ai%20Training/\npour une description complète de la logique d'entraînement de l'IA."
 
 #: ../../src/wlapplication_messages.cc:97
 msgid ""
@@ -140,7 +140,7 @@ msgid ""
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr "--auto_speed Dans les jeux multijoueurs seulement, ceci ajustera\nla vitesse du jeu automatiquement,\npar rapport au IPS. Utile en conjonction avec\n--ai_training. "
+msgstr "--auto_speed Dans les jeux multijoueurs seulement, ceci ajustera\nla vitesse du jeu automatiquement,\npar rapport au IPS. Utile en conjonction avec\n--ai_training."
 
 #: ../../src/wlapplication_messages.cc:102
 msgid ""
@@ -193,6 +193,10 @@ msgstr " --xres=[...]\n\tLargeur de la fenêtre en pixels."
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]\n\tHauteur de la fenêtre en pixels."
 
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands
+#. textdomain
 #: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Options pour le gestionnaire de fenêtre interne :"
@@ -250,7 +254,7 @@ msgstr " --help\n\tMontre cette aide."
 #: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
+"        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Rapport de bug ? Suggestions ? Visitez le site web de notre projet :\n        https://launchpad.net/widelands\n\nNous espérons que vous avez aimez ce jeu !"
+msgstr "Rapports de bogues ? Suggestions ? Visitez le site web du projet\n https://wl.widelands.org/\n\nNous espérons que vous appréciez ce jeu !"

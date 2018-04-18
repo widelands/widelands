@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -163,7 +163,7 @@ class ProductionSite : public Building {
 
 public:
 	explicit ProductionSite(const ProductionSiteDescr& descr);
-	virtual ~ProductionSite();
+	~ProductionSite() override;
 
 	void log_general_info(const EditorGameBase&) override;
 

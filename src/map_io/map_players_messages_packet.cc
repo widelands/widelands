@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,11 +59,11 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 		}
 		uint32_t packet_version = prof.get_safe_section("global").get_positive("packet_version");
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			MessageQueue& messages = player->messages();
+			MessageQueue* messages = player->get_messages();
 
 			{
-				const auto begin = messages.begin();
-				if (begin != messages.end()) {
+				const auto begin = messages->begin();
+				if (begin != messages->end()) {
 					log("ERROR: The message queue for player %u contains a message "
 					    "before any messages have been loaded into it. This is a bug "
 					    "in the savegame loading code. It created a new message and "
@@ -79,7 +79,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 					    p, static_cast<int>(begin->second->type()), begin->second->title().c_str(),
 					    begin->second->sent(), begin->second->position().x, begin->second->position().y,
 					    static_cast<int>(begin->second->status()), begin->second->body().c_str());
-					messages.clear();
+					messages->clear();
 				}
 			}
 
@@ -120,13 +120,13 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 					// Compatibility code needed for map loading.
 					if (packet_version == 1) {
 						const std::string name = s->get_name();
-						messages.add_message(std::unique_ptr<Message>(new Message(
+						messages->add_message(std::unique_ptr<Message>(new Message(
 						   static_cast<Message::Type>(s->get_natural("type")), sent, name,
 						   "images/wui/fieldaction/menu_build_flag.png", name, s->get_safe_string("body"),
 						   get_coords("position", extent, Coords::null(), s), serial, status)));
 					} else {
 
-						messages.add_message(std::unique_ptr<Message>(new Message(
+						messages->add_message(std::unique_ptr<Message>(new Message(
 						   static_cast<Message::Type>(s->get_natural("type")), sent, s->get_name(),
 						   s->get_safe_string("icon"), s->get_safe_string("heading"),
 						   s->get_safe_string("body"), get_coords("position", extent, Coords::null(), s),

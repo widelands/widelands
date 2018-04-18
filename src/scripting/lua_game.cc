@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -413,9 +413,6 @@ int LuaPlayer::send_message(lua_State* L) {
       :arg posy: y position of window in pixels. Default: centered
       :type posy: :class:`integer`
 
-      :arg button_text: Text on the button. Default: OK.
-      :type button_text: :class:`string`
-
       :returns: :const:`nil`
 */
 // UNTESTED
@@ -430,49 +427,32 @@ int LuaPlayer::message_box(lua_State* L) {
 	uint32_t h = 300;
 	int32_t posx = -1;
 	int32_t posy = -1;
-	std::string button_text = _("OK");
+	Coords coords = Coords::null();
 
-#define CHECK_ARG(var, type)                                                                       \
+#define CHECK_UINT(var)                                                                            \
 	lua_getfield(L, -1, #var);                                                                      \
 	if (!lua_isnil(L, -1))                                                                          \
-		var = luaL_check##type(L, -1);                                                               \
+		var = luaL_checkuint32(L, -1);                                                               \
 	lua_pop(L, 1);
 
 	if (lua_gettop(L) == 4) {
-		CHECK_ARG(posx, uint32);
-		CHECK_ARG(posy, uint32);
-		CHECK_ARG(w, uint32);
-		CHECK_ARG(h, uint32);
-		CHECK_ARG(button_text, string);
+		CHECK_UINT(posx);
+		CHECK_UINT(posy);
+		CHECK_UINT(w);
+		CHECK_UINT(h);
 
-		// This must be done manually
+		// If a field has been defined, read the coordinates to jump to.
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
-			Coords c = (*get_user_class<LuaField>(L, -1))->coords();
-			game.get_ipl()->map_view()->scroll_to_field(c, MapView::Transition::Jump);
+			coords = (*get_user_class<LuaField>(L, -1))->coords();
 		}
 		lua_pop(L, 1);
 	}
-#undef CHECK_ARG
-
-	uint32_t cspeed = game.game_controller()->desired_speed();
-	game.game_controller()->set_desired_speed(0);
-
-	game.save_handler().set_allow_saving(false);
-
-	StoryMessageBox* mb = new StoryMessageBox(game.get_ipl(), luaL_checkstring(L, 2),
-	                                          luaL_checkstring(L, 3), button_text, posx, posy, w, h);
+#undef CHECK_UINT
+	std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(
+	   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h));
 
 	mb->run<UI::Panel::Returncodes>();
-	delete mb;
-
-	// Manually force the game to reevaluate it's current state,
-	// especially time information.
-	game.game_controller()->think();
-
-	game.game_controller()->set_desired_speed(cspeed);
-
-	game.save_handler().set_allow_saving(true);
 
 	return 1;
 }
@@ -585,24 +565,24 @@ int LuaPlayer::add_objective(lua_State* L) {
    .. method:: reveal_fields(fields)
 
       Make these fields visible for the current player. The fields will remain
-      visible until they are hidden again.
+      visible until they are hidden again. See also :ref:`field_animations` for
+      animated revealing.
 
-      :arg fields: The fields to show
+      :arg fields: The fields to reveal
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
       :returns: :const:`nil`
 */
 int LuaPlayer::reveal_fields(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& p = get(L, egbase);
-	const Map& map = egbase.map();
+	Game& game = get_game(L);
+	Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.see_node(
-		   map, map[0], (*get_user_class<LuaField>(L, -1))->fcoords(L), egbase.get_gametime());
+		p.hide_or_reveal_field(
+		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kReveal);
 		lua_pop(L, 1);
 	}
 
@@ -613,28 +593,30 @@ int LuaPlayer::reveal_fields(lua_State* L) {
    .. method:: hide_fields(fields)
 
       Make these fields hidden for the current player if they are not
-      seen by a military building.
+      seen by a military building. See also :ref:`field_animations` for
+      animated hiding.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
-      :arg hide_completely: *Optional*. The fields will be marked as unexplored.
-      :type hide_completely: :class:`boolean`
+      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored.
+      :type unexplore: :class:`boolean`
 
       :returns: :const:`nil`
 */
 int LuaPlayer::hide_fields(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& p = get(L, egbase);
+	Game& game = get_game(L);
+	Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const bool mode = !lua_isnone(L, 3) && luaL_checkboolean(L, 3);
+	const SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	                             SeeUnseeNode::kUnexplore :
+	                             SeeUnseeNode::kUnsee;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &egbase.map()[0],
-		             egbase.get_gametime(),
-		             mode ? Player::UnseeNodeMode::kUnexplore : Player::UnseeNodeMode::kUnsee);
+		p.hide_or_reveal_field(
+		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), mode);
 		lua_pop(L, 1);
 	}
 
@@ -1244,7 +1226,7 @@ int LuaMessage::set_status(lua_State* L) {
 	else
 		report_error(L, "Invalid message status <%s>!", s.c_str());
 
-	get_plr(L, get_game(L)).messages().set_message_status(message_id_, status);
+	get_plr(L, get_game(L)).get_messages()->set_message_status(message_id_, status);
 
 	return 0;
 }

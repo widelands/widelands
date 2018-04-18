@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -166,6 +166,9 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 
 bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	return scrollbar_.handle_mousewheel(which, x, y);
+}
+bool MultilineTextarea::handle_key(bool down, SDL_Keysym code) {
+	return scrollbar_.handle_key(down, code);
 }
 
 void MultilineTextarea::scroll_to_top() {

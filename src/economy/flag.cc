@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -106,7 +106,7 @@ void Flag::load_finish(EditorGameBase& egbase) {
 /**
  * Create a flag at the given location
 */
-Flag::Flag(EditorGameBase& egbase, Player& owning_player, const Coords& coords, Economy* economy)
+Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, Economy* economy)
    : PlayerImmovable(g_flag_descr),
      building_(nullptr),
      ware_capacity_(8),
@@ -116,7 +116,7 @@ Flag::Flag(EditorGameBase& egbase, Player& owning_player, const Coords& coords, 
 	for (uint32_t i = 0; i < 6; ++i)
 		roads_[i] = nullptr;
 
-	set_owner(&owning_player);
+	set_owner(owning_player);
 
 	set_flag_position(coords);
 
@@ -129,8 +129,7 @@ Flag::Flag(EditorGameBase& egbase, Player& owning_player, const Coords& coords, 
 			economy->add_flag(*this);
 		} else {
 			//  we split a road, or a new, standalone flag is created
-			(road ? road->get_economy() : owning_player.create_economy())->add_flag(*this);
-
+			(road ? road->get_economy() : owning_player->create_economy())->add_flag(*this);
 			if (road) {
 				road->presplit(*game, coords);
 			}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ public:
 	 */
 	static std::unique_ptr<NetClient> connect(const NetAddress& host);
 
-	~NetClient();
+	~NetClient() override;
 
 	/**
 	 * Returns the ip and port of the remote host we are connected to.
@@ -53,7 +53,7 @@ public:
 	// Inherited from NetClientInterface
 	bool is_connected() const override;
 	void close() override;
-	bool try_receive(RecvPacket* packet) override;
+	std::unique_ptr<RecvPacket> try_receive() override;
 	void send(const SendPacket& packet) override;
 
 private:

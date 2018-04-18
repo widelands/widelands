@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -204,6 +204,9 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
      editor_category_(nullptr) {
 	if (!is_animation_known("idle")) {
 		throw GameDataError("Immovable %s has no idle animation", table.get_string("name").c_str());
+	}
+	if (input_type == MapObjectDescr::OwnerType::kTribe && helptext_script().empty()) {
+		throw GameDataError("Tribe immovable %s has no helptext script", name().c_str());
 	}
 
 	if (table.has_key("size")) {
@@ -575,10 +578,10 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 	char const* const animname = fr.c_string();
 	try {
 		imm.anim_ = imm.descr().get_animation(animname);
-	} catch (const MapObjectDescr::AnimationNonexistent&) {
+	} catch (const GameDataError& e) {
 		imm.anim_ = imm.descr().main_animation();
-		log("Warning: (%s) Animation \"%s\" not found, using animation %s).\n",
-		    imm.descr().name().c_str(), animname, imm.descr().get_animation_name(imm.anim_).c_str());
+		log("Warning: Immovable: %s, using animation %s instead.\n", e.what(),
+		    imm.descr().get_animation_name(imm.anim_).c_str());
 	}
 	imm.animstart_ = fr.signed_32();
 	if (packet_version >= 4) {

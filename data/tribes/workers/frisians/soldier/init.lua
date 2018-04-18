@@ -1,0 +1,145 @@
+dirname = path.dirname (__file__)
+
+animations = {
+   idle = {
+      pictures = path.list_files (dirname .. "idle_??.png"),
+      hotspot = {9, 25},
+      fps = 10
+   },
+   atk_ok_e = {
+      pictures = path.list_files (dirname .. "atk_ok_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   atk_fail_e = {
+      pictures = path.list_files (dirname .. "atk_fail_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   atk_ok_w = {
+      pictures = path.list_files (dirname .. "atk_ok_e_??.png"),
+      hotspot = { 23, 26 },
+      fps = 10
+   },
+   atk_fail_w = {
+      pictures = path.list_files (dirname .. "atk_fail_e_??.png"),
+      hotspot = { 23, 26 },
+      fps = 10
+   },
+   eva_ok_e = {
+      pictures = path.list_files (dirname .. "eva_ok_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   eva_fail_e = {
+      pictures = path.list_files (dirname .. "eva_fail_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   eva_ok_w = {
+      pictures = path.list_files (dirname .. "eva_ok_e_??.png"),
+      hotspot = { 11, 26 },
+      fps = 10
+   },
+   eva_fail_w = {
+      pictures = path.list_files (dirname .. "eva_fail_e_??.png"),
+      hotspot = { 12, 26 },
+      fps = 10
+   },
+   die_w_alt = {
+      pictures = path.list_files (dirname .. "die_f_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   die_e_alt = {
+      pictures = path.list_files (dirname .. "die_f_e_??.png"),
+      hotspot = { 20, 26 },
+      fps = 10
+   },
+   die_w = {
+      pictures = path.list_files (dirname .. "die_b_w_??.png"),
+      hotspot = { 22, 27 },
+      fps = 10
+   },
+   die_e = {
+      pictures = path.list_files (dirname .. "die_b_e_??.png"),
+      hotspot = { 13, 26 },
+      fps = 10
+   },
+}
+add_walking_animations (animations, "walk", dirname, "walk", {10, 25}, 15)
+
+tribes:new_soldier_type {
+   msgctxt = "frisians_worker",
+   name = "frisians_soldier",
+   -- TRANSLATORS: This is a worker name used in lists of workers
+   descname = pgettext ("frisians_worker", "Soldier"),
+   helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "menu.png",
+   vision_range = 2,
+
+   animations = animations,
+
+   default_target_quantity = 10,
+
+   -- Battle attributes - initial values and per level increase
+   health = {
+      max_level = 2,
+      base = 12250,
+      increase_per_level = 3250,
+      pictures = path.list_files (dirname .. "health_level?.png"),
+   },
+   attack = {
+      max_level = 6,
+      base = 1350,
+      maximum = 1550,
+      increase_per_level = 975,
+      pictures = path.list_files (dirname .. "attack_level?.png"),
+   },
+   defense = {
+      max_level = 2,
+      base = 4,
+      increase_per_level = 15,
+      pictures = path.list_files (dirname .. "defense_level?.png"),
+   },
+   evade = {
+      max_level = 0,
+      base = 35,
+      increase_per_level = 0,
+      pictures = path.list_files (dirname .. "evade_level?.png"),
+   },
+
+   -- Random animations for battle
+   attack_success_w = {
+      "atk_ok_w",
+   },
+   attack_success_e = {
+      "atk_ok_e",
+   },
+   attack_failure_w = {
+      "atk_fail_w",
+   },
+   attack_failure_e = {
+      "atk_fail_e",
+   },
+   evade_success_w = {
+      "eva_ok_w",
+   },
+   evade_success_e = {
+      "eva_ok_e",
+   },
+   evade_failure_w = {
+      "eva_fail_w",
+   },
+   evade_failure_e = {
+      "eva_fail_e",
+   },
+   die_w = {
+      "die_w",
+      "die_w_alt",
+   },
+   die_e = {
+      "die_e",
+      "die_e_alt",
+   },
+}

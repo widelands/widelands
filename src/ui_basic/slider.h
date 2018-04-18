@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,6 +37,9 @@ class Slider : public Panel {
 	friend struct DiscreteSlider;
 
 protected:
+	/**
+	 * Text conventions: Sentence case for the 'tooltip_text'
+	 */
 	Slider(Panel* parent,
 	       int32_t x,
 	       int32_t y,

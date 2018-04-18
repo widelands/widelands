@@ -5,8 +5,9 @@ tribes:new_immovable_type {
    name = "cornfield_tiny",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Cornfield (tiny)"),
+   helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "field" },
+   attributes = { "field", "seed_corn" },
    programs = {
       program = {
          "animate=idle 30000",

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ struct Console : public ChatProvider, public Handler {
 		default_handler = boost::bind(&Console::cmdErr, this, _1);
 	}
 
-	~Console() {
+	~Console() override {
 	}
 
 	void cmdHelp(const std::vector<std::string>&) {

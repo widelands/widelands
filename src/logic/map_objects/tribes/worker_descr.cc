@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,8 +44,11 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      needed_experience_(INVALID_INDEX),
      becomes_(INVALID_INDEX),
      egbase_(egbase) {
+	if (helptext_script().empty()) {
+		throw GameDataError("Worker %s has no helptext script", name().c_str());
+	}
 	if (icon_filename().empty()) {
-		throw GameDataError("Worker %s has no menu icon", table.get_string("name").c_str());
+		throw GameDataError("Worker %s has no menu icon", name().c_str());
 	}
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
@@ -76,8 +79,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 			}
 		}
 	}
-
-	helptext_script_ = table.get_string("helptext_script");
 
 	// Read the walking animations
 	add_directional_animation(&walk_anims_, "walk");
@@ -145,11 +146,11 @@ WorkerProgram const* WorkerDescr::get_program(const std::string& programname) co
  * Custom creation routing that accounts for the location.
  */
 Worker& WorkerDescr::create(EditorGameBase& egbase,
-                            Player& owner,
+                            Player* owner,
                             PlayerImmovable* const location,
                             Coords const coords) const {
 	Worker& worker = dynamic_cast<Worker&>(create_object());
-	worker.set_owner(&owner);
+	worker.set_owner(owner);
 	worker.set_location(location);
 	worker.set_position(egbase, coords);
 	worker.init(egbase);

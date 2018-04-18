@@ -41,7 +41,7 @@ public:
 	// another texture. Ownership of 'texture' is not taken.
 	Texture(const GLuint texture, const Recti& subrect, int parent_w, int parent_h);
 
-	virtual ~Texture();
+	~Texture() override;
 
 	// Implements Surface
 	int width() const override;

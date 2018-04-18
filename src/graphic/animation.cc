@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ void get_point(const LuaTable& table, Vector2i* p) {
  */
 class NonPackedAnimation : public Animation {
 public:
-	virtual ~NonPackedAnimation() {
+	~NonPackedAnimation() override {
 	}
 	explicit NonPackedAnimation(const LuaTable& table);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,8 +45,7 @@ int32_t EditorSetResourcesTool::handle_click_impl(const Widelands::World& world,
 		if (amount > max_amount)
 			amount = max_amount;
 
-		if (map->is_resource_valid(world, mr.location(), args->current_resource) &&
-		    mr.location().field->get_resources_amount() != amount) {
+		if (map->is_resource_valid(world, mr.location(), args->current_resource)) {
 
 			args->original_resource.push_back(
 			   EditorActionArgs::ResourceState{mr.location(), mr.location().field->get_resources(),

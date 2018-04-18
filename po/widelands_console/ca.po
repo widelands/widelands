@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# Juanjo, 2015-2017
+# Juanjo, 2015-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-22 21:05+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-30 10:41+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -186,6 +186,10 @@ msgstr " --xres=[…]         Amplada de la finestra en píxels."
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[…]         Alçada de la finestra en píxels."
 
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands
+#. textdomain
 #: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Opcions per al gestor de finestres intern:"
@@ -243,7 +247,7 @@ msgstr " --help               Mostra aquesta ajuda"
 #: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
+"        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Informes d'errors? Suggeriments? Visiteu el lloc web del projecte:\n https://launchpad.net/widelands\nEsperem que us agradi aquest joc!"
+msgstr "Informes d'errors? Suggeriments? Visiteu el lloc web del projecte:\n https://wl.widelands.org/\nEsperem que us agradi aquest joc!"

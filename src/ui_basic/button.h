@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,6 +59,9 @@ struct Button : public NamedPanel {
 		kUnscaled  // Show the foreground image without any scaling
 	};
 
+	/**
+	 * Text conventions: Title Case for the 'title_text', Sentence case for the 'tooltip_text'
+	 */
 	Button  /// for textual buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -71,6 +74,9 @@ struct Button : public NamedPanel {
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::Style init_style = UI::Button::Style::kRaised);
 
+	/**
+	 * Text conventions: Sentence case for the 'tooltip_text'
+	 */
 	Button  /// for pictorial buttons
 	   (Panel* const parent,
 	    const std::string& name,
@@ -83,7 +89,7 @@ struct Button : public NamedPanel {
 	    const std::string& tooltip_text = std::string(),
 	    UI::Button::Style init_style = UI::Button::Style::kRaised,
 	    UI::Button::ImageMode mode = UI::Button::ImageMode::kShrink);
-	~Button();
+	~Button() override;
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string&);

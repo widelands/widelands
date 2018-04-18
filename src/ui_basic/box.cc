@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -133,6 +133,21 @@ void Box::update_desired_size() {
 	//  desired size, we were typically called because of a child window that
 	//  changed, and we need to relayout that.
 	layout();
+}
+
+bool Box::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
+	if (scrollbar_) {
+		assert(scrolling_);
+		return scrollbar_->handle_mousewheel(which, x, y);
+	}
+	return Panel::handle_mousewheel(which, x, y);
+}
+bool Box::handle_key(bool down, SDL_Keysym code) {
+	if (scrollbar_) {
+		assert(scrolling_);
+		return scrollbar_->handle_key(down, code);
+	}
+	return Panel::handle_key(down, code);
 }
 
 /**

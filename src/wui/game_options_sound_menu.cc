@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,14 +25,14 @@
 GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                                            UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&gb, "sound_options_menu", &registry, 160, 160, _("Sound Options")),
-     ingame_music(this, Vector2i(hmargin(), vmargin()), _("Enable Music")),
+     ingame_music(this, Vector2i(hmargin(), vmargin()), _("Enable music")),
      ingame_sound(this,
                   Vector2i(hmargin(), vmargin() + kStateboxSize + vspacing()),
-                  _("Enable Sound Effects")),
+                  _("Enable sound effects")),
      ingame_music_volume_label(this,
                                hmargin(),
                                vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing(),
-                               _("Music Volume")),
+                               _("Music volume")),
      ingame_music_volume(this,
                          hmargin(),
                          vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing() +
@@ -47,7 +47,7 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                                hmargin(),
                                vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing() +
                                   2 * vspacing() + slideh() + ingame_music_volume_label.get_h(),
-                               _("Sound Effects Volume")),
+                               _("Sound effects volume")),
      ingame_sound_volume(this,
                          hmargin(),
                          vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing() +

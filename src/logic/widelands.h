@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include <cassert>
 #include <cstddef>
 #include <limits>
+#include <vector>
 
 #include <stdint.h>
 
@@ -100,6 +101,11 @@ struct SoldierStrength {
 		          (defense < other.defense || (defense == other.defense && evade < other.evade)))));
 	}
 };
+
+// For suggested teams info during map preload
+using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
+// Recommended teams to play against each other
+using SuggestedTeamLineup = std::vector<SuggestedTeam>;
 
 }  // namespace Widelands
 

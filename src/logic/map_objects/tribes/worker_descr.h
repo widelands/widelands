@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,10 +82,6 @@ public:
 			default_target_quantity_ = 1;
 	}
 
-	std::string helptext_script() const {
-		return helptext_script_;
-	}
-
 	const DirAnimations& get_walk_anims() const {
 		return walk_anims_;
 	}
@@ -110,7 +106,7 @@ public:
 	// The buildings where this worker can work
 	const std::set<DescriptionIndex>& employers() const;
 
-	Worker& create(EditorGameBase&, Player&, PlayerImmovable*, Coords) const;
+	Worker& create(EditorGameBase&, Player*, PlayerImmovable*, Coords) const;
 
 	uint32_t movecaps() const override;
 
@@ -121,7 +117,6 @@ public:
 
 protected:
 	Quantity default_target_quantity_;
-	std::string helptext_script_;  // The path and filename to the worker's helptext script
 	DirAnimations walk_anims_;
 	DirAnimations walkload_anims_;
 	bool buildable_;

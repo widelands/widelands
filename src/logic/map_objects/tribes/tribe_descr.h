@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,9 @@ Two players can choose the same tribe.
 */
 class TribeDescr {
 public:
-	TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes);
+	TribeDescr(const LuaTable& table,
+	           const Widelands::TribeBasicInfo& info,
+	           const Tribes& init_tribes);
 
 	const std::string& name() const;
 	const std::string& descname() const;
@@ -69,6 +71,7 @@ public:
 	const std::vector<DescriptionIndex>& buildings() const;
 	const std::set<DescriptionIndex>& wares() const;
 	const std::set<DescriptionIndex>& workers() const;
+	const std::set<DescriptionIndex>& immovables() const;
 
 	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;
@@ -130,7 +133,7 @@ public:
 	                                        const ResourceAmount amount) const;
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
-	const TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
+	const Widelands::TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
 		return initializations_.at(index);
 	}
 
@@ -204,7 +207,7 @@ private:
 	WaresOrder workers_order_;
 	WaresOrderCoords workers_order_coords_;
 
-	std::vector<TribeBasicInfo::Initialization> initializations_;
+	std::vector<Widelands::TribeBasicInfo::Initialization> initializations_;
 
 	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };

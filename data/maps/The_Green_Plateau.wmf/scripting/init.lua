@@ -80,6 +80,7 @@ function mission_thread()
    end)
 
    while not (p2.defeated and p3.defeated) do sleep(4325) end
+   sleep(4325)
 
    campaign_message_box(last_briefing_victory)
 end

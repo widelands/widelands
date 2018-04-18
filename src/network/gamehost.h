@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ struct Client;
  */
 struct GameHost : public GameController {
 	GameHost(const std::string& playername, bool internet = false);
-	virtual ~GameHost();
+	~GameHost() override;
 
 	void run();
 	const std::string& get_local_playername() const;

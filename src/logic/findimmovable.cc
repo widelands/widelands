@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 
 #include "base/macros.h"
 #include "economy/flag.h"
+#include "logic/map.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/militarysite.h"
 
@@ -63,6 +64,18 @@ bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable& imm) const {
 bool FindImmovableAttackTarget::accept(const BaseImmovable& imm) const {
 	if (upcast(Building const, b, &imm)) {
 		return b->attack_target() != nullptr;
+	}
+	return false;
+}
+
+// Enemy military sites that cannot be attacked (for scout)
+// Note that this also select ally's military sites. This is okay
+// for scout, since those are stripped away later: Allied foreign
+// msites are visible.
+
+bool FindForeignMilitarysite::accept(const BaseImmovable& imm) const {
+	if (upcast(MilitarySite const, ms, &imm)) {
+		return &ms->owner() != &player;
 	}
 	return false;
 }

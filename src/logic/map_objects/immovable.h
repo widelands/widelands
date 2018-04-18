@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -207,7 +207,7 @@ public:
 	/// display information about it.
 	Immovable(const ImmovableDescr&,
 	          const Widelands::BuildingDescr* former_building_descr = nullptr);
-	~Immovable();
+	~Immovable() override;
 
 	Coords get_position() const {
 		return position_;
@@ -330,14 +330,8 @@ private:
  */
 struct PlayerImmovable : public BaseImmovable {
 	explicit PlayerImmovable(const MapObjectDescr&);
-	virtual ~PlayerImmovable();
+	~PlayerImmovable() override;
 
-	Player* get_owner() const {
-		return owner_;
-	}
-	Player& owner() const {
-		return *owner_;
-	}
 	Economy* get_economy() const {
 		return economy_;
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -189,7 +189,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
      island_mode_(&box_, Vector2i::zero(), _("Island mode")),
      // Geeky stuff
      map_number_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     map_number_label_(&map_number_box_, 0, 0, _("Random Number:")),
+     map_number_label_(&map_number_box_, 0, 0, _("Random number:")),
      map_number_edit_(&map_number_box_,
                       0,
                       0,

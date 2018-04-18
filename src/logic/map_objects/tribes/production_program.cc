@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -742,9 +742,9 @@ ProductionProgram::ActCheckMap::ActCheckMap(char* parameters) {
 void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) const {
 	switch (feature_) {
 	case SEAFARING: {
-		if (game.map().get_port_spaces().size() > 1)
+		if (game.map().allows_seafaring()) {
 			return ps.program_step(game, 0);
-		else {
+		} else {
 			ps.set_production_result(_("No use for ships on this map!"));
 			return ps.program_end(game, Failed);
 		}
@@ -912,7 +912,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 				// Update consumption statistics
 				if (inputqueues[i]->get_type() == wwWARE) {
-					ps.owner().ware_consumed(inputqueues[i]->get_index(), q);
+					ps.get_owner()->ware_consumed(inputqueues[i]->get_index(), q);
 				}
 			}
 		}

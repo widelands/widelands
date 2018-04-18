@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -137,6 +137,12 @@ std::string as_aligned(const std::string& txt,
 	f % font_face;
 	f % ptsize;
 	f % clr.hex_value();
+	f % txt;
+	return f.str();
+}
+
+std::string as_richtext(const std::string& txt) {
+	static boost::format f("<rt>%s</rt>");
 	f % txt;
 	return f.str();
 }

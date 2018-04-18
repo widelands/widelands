@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,11 +105,12 @@ void MapFlagPacket::read(FileSystem& fs,
 						economy = player->create_economy(economy_serial);
 					}
 
-					// Create a flag without connecting anything.
-					// We always create this, no matter what skip is
-					// since we have to read the data packets. We delete this
-					// object later again if it is not wanted.
-					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), *player, fc, economy);
+					//  Now, create this Flag. Directly create it, do not call
+					//  the player class since we recreate the data in another
+					//  packet. We always create this, no matter what skip is
+					//  since we have to read the data packets. We delete this
+					//  object later again, if it is not wanted.
+					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), player, fc, economy);
 					mol.register_object<Flag>(serial, *flag);
 
 					log("NOCOM Flag has economy %d\n", flag->economy().serial());

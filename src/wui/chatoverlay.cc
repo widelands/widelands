@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -167,7 +167,7 @@ void ChatOverlay::draw(RenderTarget& dst) {
 	if (!m->havemessages_)
 		return;
 
-	std::shared_ptr<const UI::RenderedText> im = std::shared_ptr<const UI::RenderedText>(nullptr);
+	std::shared_ptr<const UI::RenderedText> im(nullptr);
 	try {
 		im = UI::g_fh1->render(m->all_text_, get_w());
 	} catch (RT::WidthTooSmall&) {

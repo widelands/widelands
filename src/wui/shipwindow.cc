@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -169,7 +169,7 @@ ShipWindow::ShipWindow(InteractiveGameBase& igb, UniqueWindow::Registry& reg, Sh
 						UI::WLMessageBox messagebox(
 						   get_parent(),
 						   /** TRANSLATORS: Window label when an expedition can't be canceled */
-						   _("Cancel expedition"), _("This expedition can’t be canceled, because the "
+						   _("Cancel Expedition"), _("This expedition can’t be canceled, because the "
 						                             "ship has no port to return to."),
 						   UI::WLMessageBox::MBoxType::kOk);
 						messagebox.run<UI::Panel::Returncodes>();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ class WareInstance;
 class FlagDescr : public MapObjectDescr {
 public:
 	FlagDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname) {
+	   : MapObjectDescr(MapObjectType::FLAG, init_name, init_descname, "") {
 	}
 	~FlagDescr() override {
 	}
@@ -78,7 +78,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	/// Create a new flag. Only specify an economy during saveloading.
 	/// Otherwise, a new economy will be created automatically if needed.
-	Flag(EditorGameBase&, Player& owner, const Coords&, Economy* economy = nullptr);
+	Flag(EditorGameBase&, Player* owner, const Coords&, Economy* economy = nullptr);
 	~Flag() override;
 
 	void load_finish(EditorGameBase&) override;

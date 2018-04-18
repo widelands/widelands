@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,6 +71,7 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
+#include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
@@ -726,6 +727,8 @@ bool WLApplication::init_settings() {
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
+	s.get_bool("ai_training");
+	s.get_bool("auto_speed");
 	s.get_bool("fullscreen");
 	s.get_bool("animate_map_panning");
 	s.get_int("xres");
@@ -747,7 +750,10 @@ bool WLApplication::init_settings() {
 	s.get_string("uuid");
 	s.get_string("registered");
 	s.get_string("nickname");
+	// TODO(Notabilis): Remove next line after build 20.
+	// Currently left in to avoid removing stored passwords for users of both build 19 and trunk
 	s.get_string("password");
+	s.get_string("password_sha1");
 	s.get_string("emailadd");
 	s.get_string("auto_log");
 	s.get_string("lasthost");
@@ -764,6 +770,12 @@ bool WLApplication::init_settings() {
 		s.set_string("uuid", generate_random_uuid());
 	}
 	s.set_int("last_start", time(nullptr));
+
+	// Replace the stored plaintext password with its SHA-1 hashed version
+	// Used to upgrade the stored password when upgrading widelands
+	if (strlen(s.get_string("password", "")) > 0 && strlen(s.get_string("password_sha1", "")) == 0) {
+		s.set_string("password_sha1", crypto::sha1(s.get_string("password")));
+	}
 
 	// Save configuration now. Otherwise, the UUID is not saved
 	// when the game crashes, loosing part of its advantage
@@ -1175,8 +1187,9 @@ void WLApplication::mainmenu_multiplayer() {
 			Section& s = g_options.pull_section("global");
 			s.set_string("nickname", playername);
 			// Only change the password if we use a registered account
-			if (registered)
-				s.set_string("password", password);
+			if (registered) {
+				s.set_string("password_sha1", password);
+			}
 
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
@@ -1204,7 +1217,7 @@ void WLApplication::mainmenu_multiplayer() {
 				NetAddress addr;
 				if (!ns.get_host_address(&addr)) {
 					UI::WLMessageBox mmb(
-					   &ns, _("Invalid address"),
+					   &ns, _("Invalid Address"),
 					   _("The entered hostname or address is invalid and can’t be connected to."),
 					   UI::WLMessageBox::MBoxType::kOk);
 					mmb.run<UI::Panel::Returncodes>();

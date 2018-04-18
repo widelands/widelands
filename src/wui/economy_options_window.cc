@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -139,13 +139,15 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
      display_(this, 0, 0, serial_, player_, type_, can_act_) {
 	add(&display_, UI::Box::Resizing::kFullSize);
 
+	if (!can_act_) {
+		return;
+	}
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	add(buttons);
 
 	UI::Button* b =
 	   new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
 	                  g_gr->images().get("images/ui_basic/but4.png"), "-", _("Decrease target"));
-	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, -1));
 	buttons->add(b);
 	b->set_repeating(true);
@@ -153,7 +155,6 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 
 	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34,
 	                   g_gr->images().get("images/ui_basic/but4.png"), "+", _("Increase target"));
-	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, 1));
 	buttons->add(b);
 	b->set_repeating(true);
@@ -161,7 +162,6 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 
 	b = new UI::Button(buttons, "reset_target", 0, 0, 34, 34,
 	                   g_gr->images().get("images/ui_basic/but4.png"), "R", _("Reset to default"));
-	b->set_enabled(can_act_);
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::reset_target, this));
 	buttons->add(b);
 }

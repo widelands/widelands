@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -153,7 +153,7 @@ struct CmdBuildRoad : public PlayerCommand {
 	CmdBuildRoad(uint32_t, int32_t, Path&);
 	explicit CmdBuildRoad(StreamRead&);
 
-	virtual ~CmdBuildRoad();
+	~CmdBuildRoad() override;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ struct CritterAction {
 struct CritterProgram : public BobProgramBase {
 	explicit CritterProgram(const std::string& name) : name_(name) {
 	}
-	virtual ~CritterProgram() {
+	~CritterProgram() override {
 	}
 
 	std::string get_name() const override {

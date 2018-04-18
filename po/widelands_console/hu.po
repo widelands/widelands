@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # Balázs Meskó <meskobalazs@gmail.com>, 2016
 # GunChleoc, 2014
+# litoll <litoll@freemail.hu>, 2017
 # Szűcs Kornél Géza <sz.kornelgeza@gmail.com>, 2016
 # zone <z-one@freemail.hu>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-23 20:46+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-03-30 07:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -189,6 +190,10 @@ msgstr "--xres=[...] Ablak szélessége pixelekkel megadva."
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr "--yres=[...] Ablak magassága pixelekkel megadva."
 
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands
+#. textdomain
 #: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Options for the internal window manager:"
@@ -197,7 +202,7 @@ msgstr "Options for the internal window manager:"
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr ""
+msgstr " --animate_map_panning=[yes|no]\n                      Az automatikus térkép mozgások animálva legyenek-e."
 
 #: ../../src/wlapplication_messages.cc:136
 msgid ""
@@ -246,7 +251,7 @@ msgstr " --help               Megjeleníti ezt a segítséget"
 #: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
+"        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Hibabejelentések? Javaslatok? Nézd meg a projekt weblapját:\n        https://launchpad.net/widelands\n\nReméljük, hogy tetszett a játék!"
+msgstr ""

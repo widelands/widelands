@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,6 +71,9 @@ constexpr uint8_t kCurrentPacketVersionSurveyAmounts = 2;
 
 constexpr uint8_t kCurrentPacketVersionSurveyTimes = 1;
 #define SURVEY_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/survey_times_%u"
+
+constexpr uint8_t kCurrentPacketVersionHidden = 1;
+#define HIDDEN_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/hidden_%u"
 
 constexpr uint8_t kCurrentPacketVersionVision = 1;
 #define VISION_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/vision_%u"
@@ -292,7 +295,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 	const uint16_t mapheight = map.get_height();
 	Field& first_field = map[0];
 	const PlayerNumber nr_players = map.get_nrplayers();
-	iterate_players_existing_const(plnum, nr_players, egbase, player) {
+	iterate_players_existing(plnum, nr_players, egbase, player) {
 		Player::Field* const player_fields = player->fields_;
 		uint32_t const gametime = egbase.get_gametime();
 
@@ -466,9 +469,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 		OPEN_INPUT_FILE(FileRead, survey_times_file, survey_times_filename,
 		                SURVEY_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyTimes);
 
-		OPEN_INPUT_FILE_NEW_VERSION_SILENT(FileRead, border_file, border_filename,
-		                                   border_file_version, BORDER_FILENAME_TEMPLATE,
-		                                   kCurrentPacketVersionBorder);
+		OPEN_INPUT_FILE_NEW_VERSION(FileRead, border_file, border_filename, border_file_version,
+		                            BORDER_FILENAME_TEMPLATE, kCurrentPacketVersionBorder);
+
+		OPEN_INPUT_FILE_NEW_VERSION_SILENT(FileRead, hidden_file, hidden_filename,
+		                                   hidden_file_version, HIDDEN_FILENAME_TEMPLATE,
+		                                   kCurrentPacketVersionHidden);
 
 		for (FCoords first_in_row(Coords(0, 0), &first_field); first_in_row.y < mapheight;
 		     ++first_in_row.y, first_in_row.field += mapwidth) {
@@ -777,6 +783,24 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				}
 			} while (r.x);
 		}
+
+		// Read the number of explicitly hidden fields and then loop through them
+		if (hidden_file_version == kCurrentPacketVersionHidden) {
+			const uint32_t no_of_hidden_fields = hidden_file.unsigned_32();
+			for (uint32_t i = 0; i < no_of_hidden_fields; ++i) {
+				player->hidden_fields_.insert(
+				   std::make_pair(hidden_file.unsigned_32(), hidden_file.unsigned_16()));
+			}
+		} else if (hidden_file_version < 0) {
+			// TODO(GunChleoc): Savegame compatibility - remove after Build 20
+			log("MapPlayersViewPacket - No hidden fields to read for Player %d - probably an old save "
+			    "file\n",
+			    plnum);
+		} else {
+			throw UnhandledVersionError("MapPlayersViewPacket - Hidden fields file",
+			                            hidden_file_version, kCurrentPacketVersionHidden);
+		}
+
 		CHECK_TRAILING_BYTES(unseen_times_file, unseen_times_filename);
 		CHECK_TRAILING_BYTES(node_immovable_kinds_file, node_immovable_kinds_filename);
 		CHECK_TRAILING_BYTES(node_immovables_file, node_immovables_filename);
@@ -788,6 +812,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 		CHECK_TRAILING_BYTES(surveys_file, surveys_filename);
 		CHECK_TRAILING_BYTES(survey_amounts_file, survey_amounts_filename);
 		CHECK_TRAILING_BYTES(survey_times_file, survey_times_filename);
+		CHECK_TRAILING_BYTES(border_file, border_filename);
+		CHECK_TRAILING_BYTES(hidden_file, hidden_filename);
 	}
 }
 
@@ -864,6 +890,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 		FileWrite surveys_file;
 		FileWrite survey_amounts_file;
 		FileWrite survey_times_file;
+		FileWrite hidden_file;
 		FileWrite vision_file;
 		FileWrite border_file;
 		for (FCoords first_in_row(Coords(0, 0), &first_field); first_in_row.y < mapheight;
@@ -970,6 +997,12 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 				}
 			} while (r.x);
 		}
+		// Write the number of explicitly hidden fields and then loop through them
+		hidden_file.unsigned_32(player->hidden_fields_.size());
+		for (const auto& hidden : player->hidden_fields_) {
+			hidden_file.unsigned_32(hidden.first);
+			hidden_file.unsigned_16(hidden.second);
+		}
 
 		char filename[FILENAME_SIZE];
 
@@ -1004,6 +1037,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 		   survey_amounts_file, SURVEY_AMOUNTS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyAmounts);
 
 		WRITE(survey_times_file, SURVEY_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyTimes);
+
+		WRITE(hidden_file, HIDDEN_FILENAME_TEMPLATE, kCurrentPacketVersionHidden);
 
 		WRITE(vision_file, VISION_FILENAME_TEMPLATE, kCurrentPacketVersionVision);
 

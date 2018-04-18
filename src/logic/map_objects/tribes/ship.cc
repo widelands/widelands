@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -171,7 +171,7 @@ bool Ship::init(EditorGameBase& egbase) {
  */
 bool Ship::init_fleet(EditorGameBase& egbase) {
 	assert(get_owner() != nullptr);
-	Fleet* fleet = new Fleet(*get_owner());
+	Fleet* fleet = new Fleet(get_owner());
 	fleet->add_ship(this);
 	return fleet->init(egbase);
 	// fleet calls the set_fleet function appropriately
@@ -582,7 +582,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						}
 				}
 				// if we are here, it seems something really strange happend.
-				log("WARNING: ship was not able to start exploration. Entering WAIT mode.");
+				log("WARNING: ship %s was not able to start exploration. Entering WAIT mode.\n",
+				    shipname_.c_str());
 				ship_state_ = ShipStates::kExpeditionWaiting;
 				return start_task_idle(game, descr().main_animation(), 1500);
 			}
