@@ -1170,14 +1170,16 @@ void Ship::Loader::load_finish() {
 
 	Ship& ship = get<Ship>();
 
-	ship.economy_ = ship.get_owner()->get_economy(economy_serial_);
-	log("NOCOM Want economy %d for ship\n", economy_serial_);
-	if (!ship.economy_) {
-		log("NOCOM Creating economy %d for ship\n", economy_serial_);
-		ship.economy_ = ship.get_owner()->create_economy(economy_serial_);
+	// The economy can sometimes be nullptr (e.g. when there are no ports).
+	if (economy_serial_ != kInvalidSerial) {
+		ship.economy_ = ship.get_owner()->get_economy(economy_serial_);
+		log("NOCOM Want economy %d for ship\n", economy_serial_);
+		if (!ship.economy_) {
+			log("NOCOM Creating economy %d for ship\n", economy_serial_);
+			ship.economy_ = ship.get_owner()->create_economy(economy_serial_);
+		}
+		log("NOCOM Ship has economy %d\n", ship.economy_->serial());
 	}
-
-	log("NOCOM Ship has economy %d\n", ship.economy_->serial());
 
 	// restore the state the ship is in
 	ship.ship_state_ = ship_state_;
@@ -1237,8 +1239,8 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	Bob::save(egbase, mos, fw);
 
-	// Economy
-	fw.unsigned_32(economy_->serial());
+	// The economy can sometimes be nullptr (e.g. when there are no ports).
+	fw.unsigned_32(economy_ != nullptr ? economy_->serial() : kInvalidSerial);
 
 	// state the ship is in
 	fw.unsigned_8(static_cast<uint8_t>(ship_state_));
