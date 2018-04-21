@@ -37,9 +37,10 @@
  *    crashes. When logging twice with a registered account, the second connection gets a free
  *     username assigned. Dropping RELOGIN command.
  * 3: Between build 19 and build 20 - Added network relay for internet games
- * 4: Between build 19 and build 20 - Using CHAP for password authentication [supported]
+ * 4: Between build 19 and build 20 - Using CHAP for password authentication
+ * 5: Build 20 - Removed obsolete TELL_IP, modifications on user and game listing [supported]
  */
-constexpr unsigned int kInternetGamingProtocolVersion = 4;
+constexpr unsigned int kInternetGamingProtocolVersion = 5;
 
 /**
  * The default timeout time after which the client tries to resend a package or even finally closes
