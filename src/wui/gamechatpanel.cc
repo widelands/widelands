@@ -74,7 +74,7 @@ void GameChatPanel::recalculate() {
 	chatbox.set_text(str);
 
 	// If there are new messages, play a sound
-	if (msgs.size() < chat_message_counter) {
+	if (chat_message_counter < msgs.size()) {
 		if (!chat_.sound_off()) {
 			for (size_t i = chat_message_counter; i < msgs.size(); ++i) {
 				if (msgs[i].sender.empty()) {
