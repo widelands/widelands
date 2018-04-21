@@ -406,19 +406,4 @@ static const std::string IGPCMD_GAME_DISCONNECT = "GAME_DISCONNECT";
  */
 static const std::string IGPCMD_GAME_START = "GAME_START";
 
-/**
- * Sent by every participating player of a game to announce the end of the game and to send the
- * statistics.
- * Payload is:
- * \li string:     name of the map
- * \li string:     names of the winners seperated with spaces
- * \li string:     informative string about the win condition.
- * \li string:     in game time until end
- *
- * \note this does not end the physical game and thus the metaserver should not remove the game from
- *       the list. The clients might want to play on, so...
- *
- */
-static const std::string IGPCMD_GAME_END = "GAME_END";
-
 #endif  // end of include guard: WL_NETWORK_INTERNET_GAMING_PROTOCOL_H
