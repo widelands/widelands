@@ -71,7 +71,7 @@ constexpr uint16_t kInternetRelayPort = 7397;
 static const std::string INTERNET_CLIENT_UNREGISTERED = "UNREGISTERED";
 static const std::string INTERNET_CLIENT_REGISTERED = "REGISTERED";
 static const std::string INTERNET_CLIENT_SUPERUSER = "SUPERUSER";
-static const std::string INTERNET_CLIENT_BOT = "BOT";
+static const std::string INTERNET_CLIENT_IRC = "IRC";
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * COMMUNICATION PROTOCOL BETWEEN CLIENT AND METASERVER                    *
@@ -322,10 +322,8 @@ static const std::string IGPCMD_GAMES = "GAMES";
 
 /**
  * Sent by the metaserver to inform the client, that the list of clients was changed. No payload is
- * sent,
- * as e.g. clients in a game are not really interested about other clients and we want to keep
- * traffic
- * as low as possible.
+ * sent, as e.g. clients in a game are not really interested about other clients and we want to
+ * keep traffic as low as possible.
  *
  * To get the new list of clients, the client must send \ref IGPCMD_CLIENT
  */
@@ -338,9 +336,8 @@ static const std::string IGPCMD_CLIENTS_UPDATE = "CLIENTS_UPDATE";
  * \li string:    Number of client packages and for uint8_t i = 0; i < num; ++i {:
  * \li string:    Name of the client
  * \li string:    Widelands version
- * \li string:    Game the player is connected to, else empty.
+ * \li string:    Game the player is connected to, else empty
  * \li string:    Clients rights (see client rights section above)
- * \li string:    Points of the client
  * }
  */
 static const std::string IGPCMD_CLIENTS = "CLIENTS";

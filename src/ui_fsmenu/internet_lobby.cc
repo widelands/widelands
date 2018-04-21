@@ -235,8 +235,9 @@ uint8_t FullscreenMenuInternetLobby::convert_clienttype(const std::string& type)
 		return 1;
 	if (type == INTERNET_CLIENT_SUPERUSER)
 		return 2;
-	if (type == INTERNET_CLIENT_BOT)
-		return 3;
+	// 3 was INTERNET_CLIENT_BOT which is not used
+	if (type == INTERNET_CLIENT_IRC)
+		return 4;
 	// if (type == INTERNET_CLIENT_UNREGISTERED)
 	return 0;
 }
@@ -262,11 +263,6 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
 
-			if (client.build_id == "IRC") {
-				// No icon for IRC users
-				continue;
-			}
-
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {
 			case 0:  // UNREGISTERED
@@ -278,11 +274,13 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 				er.set_picture(0, pic);
 				break;
 			case 2:  // SUPERUSER
-			case 3:  // BOT
 				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;
+			case 4:  // IRC
+				// No icon for IRC users
+				continue;
 			default:
 				continue;
 			}
@@ -300,11 +298,6 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 	// add a @clientname to the current edit text.
 	if (clientsonline_list_.has_selection()) {
 		UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_list_.get_record(i);
-
-		if (er.get_string(2) == "IRC") {
-			// No PM to IRC users
-			return;
-		}
 
 		std::string temp("@");
 		temp += er.get_string(1);
