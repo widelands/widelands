@@ -19,15 +19,21 @@
 
 #include "scripting/lua_bases.h"
 
+#include <memory>
+
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "economy/economy.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
+#include "profile/profile.h"
 #include "scripting/factory.h"
 #include "scripting/globals.h"
 #include "scripting/lua_map.h"
@@ -83,6 +89,8 @@ const MethodType<LuaEditorGameBase> LuaEditorGameBase::Methods[] = {
    METHOD(LuaEditorGameBase, get_worker_description),
    METHOD(LuaEditorGameBase, get_resource_description),
    METHOD(LuaEditorGameBase, get_terrain_description),
+   METHOD(LuaEditorGameBase, save_campaign_data),
+   METHOD(LuaEditorGameBase, read_campaign_data),
    {nullptr, nullptr},
 };
 const PropertyType<LuaEditorGameBase> LuaEditorGameBase::Properties[] = {
@@ -317,6 +325,91 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
 		report_error(L, "Terrain %s does not exist", terrain_name.c_str());
 	}
 	return to_lua<LuaMaps::LuaTerrainDescription>(L, new LuaMaps::LuaTerrainDescription(descr));
+}
+
+/* RST
+   .. function:: save_campaign_data(campaign_name, scenario_name, text)
+
+      :arg campaign_name: the name of the current campaign
+      :arg scenario_name: the name of the current scenario
+      :arg text: the text to write
+
+      Saves a string that can be read by other scenarios.
+*/
+int LuaEditorGameBase::save_campaign_data(lua_State* L) {
+	const std::string campaign_name = luaL_checkstring(L, 2);
+	const std::string scenario_name = luaL_checkstring(L, 3);
+	std::string text = luaL_checkstring(L, 4);
+
+    std::string dir = kCampaignDataDir + g_fs->file_separator() + campaign_name;
+	boost::trim(dir);
+	g_fs->ensure_directory_exists(dir);
+
+    std::string complete_filename = dir + g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	boost::trim(complete_filename);
+
+	Profile profile;
+	Section& section = profile.create_section("campaign_data");
+	
+	uint32_t line = 0;
+	while (!text.empty()) {
+	    int32_t linebreak = text.find_first_of("\n");
+	    std::string data;
+	    if (linebreak < 0) {
+	        data = text;
+	        text = "";
+	    }
+	    else {
+	        data = text.substr(0, linebreak);
+	        text = text.substr(linebreak + 1);
+	    }
+	    std::string key = "line_" + std::to_string(line);
+	    section.set_string(key.c_str(), data);
+	    ++line;
+	}
+    section.set_natural("size", line);
+    profile.write(complete_filename.c_str(), false);
+
+	return 0;
+}
+
+/* RST
+   .. function:: read_campaign_data(campaign_name, scenario_name)
+
+      :arg campaign_name: the name of the campaign
+      :arg scenario_name: the name of the scenario to read data from
+
+      Reads a string that was saved by another scenario.
+      This function returns :const:`nil` if the file cannot be opened for reading.
+*/
+int LuaEditorGameBase::read_campaign_data(lua_State* L) {
+	const std::string campaign_name = luaL_checkstring(L, 2);
+	const std::string scenario_name = luaL_checkstring(L, 3);
+
+    std::string complete_filename = kCampaignDataDir + g_fs->file_separator() + campaign_name +
+            g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	boost::trim(complete_filename);
+
+	Profile profile;
+	profile.read(complete_filename.c_str());
+	Section* section = profile.get_section("campaign_data");
+	if (section == nullptr) {
+	    lua_pushnil(L);
+	}
+	else {
+        uint32_t size = section->get_natural("size");
+	    std::string text = "";
+	    for(uint32_t i = 0; i < size; i++) {
+	        if (i > 0) {
+	            text += "\n";
+	        }
+	        std::string key = "line_" + std::to_string(i);
+	        text += section->get_string(key.c_str());
+	    }
+	    lua_pushstring(L, text);
+	}
+
+	return 1;
 }
 
 /*
