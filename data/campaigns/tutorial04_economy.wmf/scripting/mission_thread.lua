@@ -154,7 +154,7 @@ function plan_the_future()
 
    local eco = sf.brn.immovable.economy
    while eco:ware_target_quantity("marble_column") ~= 20 do
-      sleep(2434)
+      sleep(200)
    end
    -- wait that the player has really changed the target quantity
    set_objective_done(o)

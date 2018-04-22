@@ -230,14 +230,14 @@ explain_encyclopedia = {
       p(_[[The in-game help shows you five tabs. The first tab which you could access by clicking on ]])..
       li_image("images/logos/wl-ico-32.png", _[[presents you all the basic interface controls for widelands. Furthermore you can find there all tips relevant for your tribe.]]) ..
       p(_[[The next tab where you can find valuable information is the ‘Wares’ tab.]])..
-      li_image("images/wui/stats/genstats_nrwares.png", _[[For all your tribe’s wares, it shows a short help text, a list of buildings that produces the ware, the needed wares to produce it and where the ware is consumed.]]) ..
+      li_image("images/wui/buildings/menu_tab_wares.png", _[[For all your tribe’s wares, it shows a short help text, a list of buildings that produces the ware, the needed wares to produce it and where the ware is consumed.]]) ..
       p(_[[The third tab of your tribes encyclopedia is the ‘Workers’ tab.]])..
-      li_image("images/wui/stats/genstats_nrworkers.png", _[[It presents you all the information about the workers of your tribe in a similar manner as for the wares in the second tab.]]) ..
+      li_image("images/wui/buildings/menu_tab_workers.png", _[[It presents you all the information about the workers of your tribe in a similar manner as for the wares in the second tab.]]) ..
       p(_[[Next to it is the ‘buldings’ tab.]])..
       li_image("images/wui/stats/genstats_nrbuildings.png", _[[This tab contains all the necessary information about the buildings of your tribe.]]) ..
       p(_[[Finally we have the ‘immovables’ tab.]])..
       li_image("tribes/immovables/field_harvested/idle_00.png", _[[Here you can see the information for the specific immovables of your tribe.]]) ..
-      p(_[[Now you should try to solve the question of the beginning of this advice. A soldier needs a wooden spear and a helmet – from there on out, you can search backwards to find the wares and the buildings you need to supply your barracks where the soldier is recruited.]])
+      p(_[[Now you should try to solve the question of the beginning of this advice. A soldier needs a wooden spear and a helmet – from there on out, you can search backwards to find the wares and the buildings you need to supply your barracks where the soldier is recruited. When you are finished just close the encyclopedia window.]])
    ),
    h = 450,
    show_instantly = true,
