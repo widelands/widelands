@@ -65,28 +65,27 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 void GameChatPanel::recalculate() {
 	const std::vector<ChatMessage> msgs = chat_.get_messages();
 
+	size_t msgs_size = msgs.size();
 	std::string str = "<rt>";
-	for (uint32_t i = 0; i < msgs.size(); ++i) {
+	for (uint32_t i = 0; i < msgs_size; ++i) {
 		str += format_as_richtext(msgs[i]);
 	}
 	str += "</rt>";
 
 	chatbox.set_text(str);
 
-	// If there are new messages, play a sound
-	if (chat_message_counter < msgs.size()) {
-		if (!chat_.sound_off()) {
-			for (size_t i = chat_message_counter; i < msgs.size(); ++i) {
+	if (chat_message_counter < msgs_size) { // are there new messages?
+		if (!chat_.sound_off()) { // play a sound, if needed
+			for (size_t i = chat_message_counter; i < msgs_size; ++i) {
 				if (msgs[i].sender.empty()) {
-					// System message. Don't play a sound
-					continue;
+					continue; // System message. Don't play a sound
 				}
 				// Got a message that is no system message. Beep
 				play_new_chat_message();
 				break;
 			}
 		}
-		chat_message_counter = msgs.size();
+		chat_message_counter = msgs_size;
 	}
 }
 
