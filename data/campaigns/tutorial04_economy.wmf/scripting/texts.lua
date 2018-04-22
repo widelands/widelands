@@ -202,15 +202,74 @@ build_taverns = {
 }
 
 ware_encyclopedia = {
-   title = _"Ware Encyclopedia",
+   title = _"Encyclopedia",
    body = (
-      p(_[[I am not sure if you could follow my remarks. Why do we need rations to get soldiers?]]) ..
-      p(_[[When you’ve played a lot, you will know such things by heart. But when you’re unsure what this tribe needs for a special ware, you can easily look it up in your tribe’s ware encyclopedia.]]) ..
-      p(_[[This encyclopedia can be accessed via]])..
-      li_image("images/ui_basic/menu_help.png", _[[the help button at the bottom. For all your tribe’s wares, it shows a short help text, a list of buildings that produces the ware and the needed wares.]]) ..
-      p(_[[If you want, you can try it out. A soldier needs a wooden spear and a helmet – from there on out, you can search backwards.]])
+      h1(_[[How to get help?]]) ..
+      p(_[[Of course it is difficult to remember all of my remarks and advices. For example you might ask: "Why do we need rations to get soldiers?"]]) ..
+      p(_[[When you’ve played a lot, you will know all these things by heart. But until then or if you’re unsure what are your tribes needs and his abilities, his buildings or workers, you can easily look it up in our tribe specific in-game help and encyclopedia.]]) ..
+      p(_[[This encyclopedia can be accessed via the help button at the bottom right.]])..
+      li_image("images/ui_basic/menu_help.png", _[[Please open the in-game help and I'll explain you its contents.]])
    ),
-   h = 350
+   h = 350,
+   show_instantly = true,
+   obj_name = "open_encyclopedia",
+   obj_title = _"Open the in-game help window.",
+   obj_body = (
+      li_image("images/ui_basic/menu_help.png", _[[The encyclopedia window contains the in-game help and an encyclopedia of the tribe you chose.]]) ..
+      -- TRANSLATORS: "it" refers to the encaclopedia window
+      li(_[[Open it. You can access it via the button at the bottom of the game.]]) ..
+      li_arrow(_[[Alternatively you can access it directly with the ‘F1’ key.]])
+   ),
+}
+
+explain_encyclopedia = {
+   position = "topright",
+   title = _"Encyclopedia explanations",
+   body = (
+      h1(_[[What information is contained in the encyclopedia?]]) ..
+      p(_[[The in-game help shows you five tabs. The first tab which you could access by clicking on ]])..
+      li_image("images/logos/wl-ico-32.png", _[[presents you all the basic interface controls for widelands. Furthermore you can find there all tips relevant for your tribe.]]) ..
+      p(_[[The next tab where you can find valuable information is the ‘Wares’ tab.]])..
+      li_image("images/wui/stats/genstats_nrwares.png", _[[For all your tribe’s wares, it shows a short help text, a list of buildings that produces the ware, the needed wares to produce it and where the ware is consumed.]]) ..
+      p(_[[The third tab of your tribes encyclopedia is the ‘Workers’ tab.]])..
+      li_image("images/wui/stats/genstats_nrworkers.png", _[[It presents you all the information about the workers of your tribe in a similar manner as for the wares in the second tab.]]) ..
+      p(_[[Next to it is the ‘buldings’ tab.]])..
+      li_image("images/wui/stats/genstats_nrbuildings.png", _[[This tab contains all the necessary information about the buildings of your tribe.]]) ..
+      p(_[[Finally we have the ‘immovables’ tab.]])..
+      li_image("tribes/immovables/field_harvested/idle_00.png", _[[Here you can see the information for the specific immovables of your tribe.]]) ..
+      p(_[[Now you should try to solve the question of the beginning of this advice. A soldier needs a wooden spear and a helmet – from there on out, you can search backwards to find the wares and the buildings you need to supply your barracks where the soldier is recruited.]])
+   ),
+   h = 450,
+   show_instantly = true,
+   obj_name = "check_wares",
+   obj_title = _"Look up which wares are needed to recruit soldiers.",
+   obj_body = (
+      li(_[[Choose the ‘Wares’ tab in the encyclopedia window.]]) ..
+      li(_[[Look up what is needed to produce a helmet and what is needed to produce a wooden spear.]]) ..
+      li_arrow(_[[If you want you may continue to look up what is needed to produce the wares you just looked up.]]) ..
+      li(_[[Close the encyclopedia window when you are done.]])
+   )
+}
+
+reopen_encyclopedia = {
+   title = _"You closed the encyclopedia!",
+   body = (
+      p(_[[You have closed the encyclopedia window, but I didn't notice you were trying to find out which wares are needed to recruit a soldier. Would you please reopen it and do so?]])
+   ),
+   show_instantly = true,
+   w = 300,
+   h = 250
+}
+
+reopen_encyclopedia_obj = {
+   obj_name = "open_encyclopedia_again",
+   obj_title = _"Open the encyclopedia window again.",
+   obj_body = (
+      p(_[[You closed the encyclopedia window, although you did not even try to find out what I told you. If you already know all this stuff, please feel free to leave this tutorial at any time.]]) ..
+      -- TRANSLATORS: "it" refers to the stock menu window.
+      li(_[[Otherwise, please reopen the encyclopedia Window and choose the second tab.]])
+   ),
+   h = 250
 }
 
 building_priority_settings = {
@@ -394,15 +453,15 @@ warehouse_preference_settings = {
       p(_[[The production of marble columns is working fine now, but it would be great if they were stored where we need them.]]) ..
       p(_[[Normally, produced wares are brought to the closest warehouse if they are not needed elsewhere. In this case, this means our headquarters. But we would like to have them in the warehouse near our fortresses.]]) ..
       p(_[[Every warehouse has four buttons to set the preference. If you move your mouse pointer over them, you will see tooltips that explain what the buttons do.]]) ..
-      li(_[[Bring all the marble columns to the warehouse near the front line.]]) ..
+      li(_[[Bring all the 20 marble columns to the warehouse near the front line.]]) ..
       li_arrow(_[[To achieve this, you will have to do two things. First, set a preference for marble columns in the desired warehouse. All marble columns produced in the future will be brought there if possible.]]) ..
       li_arrow(_[[Then, to move the marble columns out of your headquarters, you will have to click on the remove button there.]])
    ),
    obj_name = "bring_marble_columns_to_front",
    obj_title = _"Bring 20 marble columns to the front line.",
-   obj_body = economy_settings3.obj_body .. (
+   obj_body = (
       p(_[[To decide where your wares get stored, you can use the preference buttons in the warehouses.]]) ..
-      li(_[[Bring all the marble columns to the warehouse near the front line.]]) ..
+      li(_[[Bring all the 20 marble columns to the warehouse near the front line.]]) ..
       li_arrow(_[[To achieve this, you will have to do two things. First, set a preference for marble columns in the desired warehouse. All marble columns produced in the future will be brought there if possible.]]) ..
       li_arrow(_[[Then, to move the marble columns out of your headquarters, you will have to click on the remove button there.]])
    )
