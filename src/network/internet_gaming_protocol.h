@@ -75,6 +75,14 @@ static const std::string INTERNET_CLIENT_SUPERUSER = "SUPERUSER";
 static const std::string INTERNET_CLIENT_BOT = "BOT";
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * GAME STATUS                                                             *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/// States an online game can be in
+static const std::string INTERNET_GAME_CLOSED = "CLOSED"; // Not yet connectable or not over relay
+static const std::string INTERNET_GAME_SETUP = "SETUP"; // Map selection, ...
+static const std::string INTERNET_GAME_RUNNING = "RUNNING"; // Playing
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * COMMUNICATION PROTOCOL BETWEEN CLIENT AND METASERVER                    *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /**
@@ -316,7 +324,8 @@ static const std::string IGPCMD_GAMES_UPDATE = "GAMES_UPDATE";
  * \li string:    Number of game packages and for uint8_t i = 0; i < num; ++i {:
  * \li string:    Name of the game
  * \li string:    Widelands version
- * \li string:    Whether game is connectable ("true", "false")
+ * \li string:    Status of the game, see above. Note that only because a game is connectable
+ *                this does not mean that gaming will work when the versions differ
  * }
  */
 static const std::string IGPCMD_GAMES = "GAMES";
