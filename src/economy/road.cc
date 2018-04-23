@@ -50,8 +50,8 @@ bool Road::is_road_descr(MapObjectDescr const* const descr) {
 */
 Road::Road()
    : PlayerImmovable(g_road_descr),
-     busyness_(0),
-     busyness_last_update_(0),
+     wallet_(0),
+     last_wallet_check_(0),
      type_(0),
      idle_index_(0) {
 	flags_[0] = flags_[1] = nullptr;
@@ -543,68 +543,73 @@ void Road::postsplit(Game& game, Flag& flag) {
  * \return true if a carrier has been sent on its way, false otherwise.
  */
 bool Road::notify_ware(Game& game, FlagId const flagid) {
-	uint32_t const gametime = game.get_gametime();
-	assert(busyness_last_update_ <= gametime);
-	uint32_t const tdelta = gametime - busyness_last_update_;
+uint32_t const gametime = game.get_gametime();
+  assert(last_wallet_check_ <= gametime);
+  const int16_t some_factor = 2;
+  const int16_t animal_price = 2;
+  const int16_t max_wallet  = 500;
 
-	//  Iterate over all carriers and try to find one which takes the ware.
-	for (CarrierSlot& slot : carrier_slots_) {
-		if (Carrier* const carrier = slot.carrier.get(game))
-			if (carrier->notify_ware(game, flagid)) {
-				//  notify_ware returns false if the carrier currently can not take
-				//  the ware. If we get here, the carrier took the ware. So we
-				//  decrement the usage busyness.
-				if (500 < tdelta) {
-					busyness_last_update_ = gametime;
-					if (busyness_) {
-						--busyness_;
+  printf ("DEBUG Carriers slots: %lu\n", carrier_slots_.size());
 
-						// If busyness_ drops below a limit, release the donkey.
-						// remember that every time a ware is waiting at the flag
-						// busyness_ increase by 10 but every time a ware is immediatly
-						// acked by a carrier busyness_ is decreased by 1 only.
-						// so the limit is not so easy to reach
-						if (busyness_ < 350) {
-							Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
-							if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
-								second_carrier->send_signal(game, "cancel");
-								// this signal is not handled in any special way
-								// so it simply pop the task off the stack
-								// the string "cancel" has been used to make clear
-								// the final goal we want to achieve
-								// ie: cancelling current task
-								carrier_slots_[1].carrier = nullptr;
-								carrier_slots_[1].carrier_request = nullptr;
-								type_ = RoadType::kNormal;
-								mark_map(game);
-							}
-						}
-					}
-				}
-				return true;
-			}
-	}
-
-	//  If we get here, no carrier took the ware. So we check if we should
-	//  increment the usage counter. busyness_last_update_ prevents that the
-	//  counter is incremented too often.
-	if (100 < tdelta) {
-		busyness_last_update_ = gametime;
-		if (500 < (busyness_ += 10)) {
-			type_ = RoadType::kBusy;
-			mark_map(game);
-			for (CarrierSlot& slot : carrier_slots_) {
-				if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type != 1) {
-					request_carrier(slot);
-				}
-			}
-		}
-	}
-	return false;
+  //  Iterate over all carriers and try to find one which takes the ware.
+  for (CarrierSlot& slot : carrier_slots_) {
+    if (Carrier* const carrier = slot.carrier.get(game)) {
+      if (carrier->notify_ware(game, flagid)) {
+        //  notify_ware returns false if the carrier currently can not take
+        //  the ware. If we get here, the carrier took the ware.
+        wallet_ -= carrier_slots_.size() * (gametime - last_wallet_check_);
+        last_wallet_check_ = gametime;
+        wallet_ += some_factor * (flags_[flagid]->current_wares() + path_.get_nsteps());
+        if (wallet_ < 0) {
+          wallet_ = 0;
+          if (type_ == RoadType::kBusy) {
+            // beginning of code for demotion
+            // should be moved in a function
+            Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
+            if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
+              second_carrier->send_signal(game, "cancel");
+              // this signal is not handled in any special way
+              // so it simply pop the task off the stack
+              // the string "cancel" has been used to make clear
+              // the final goal we want to achieve
+              // ie: cancelling current task
+              carrier_slots_[1].carrier = nullptr;
+              carrier_slots_[1].carrier_request = nullptr;
+              type_ = RoadType::kNormal;
+              mark_map(game);
+            }
+            // end of code for demotion
+          }
+        } else {
+          if (type_ == RoadType::kNormal) {
+            if (wallet_ > 1.5 * animal_price) {
+              wallet_ -= animal_price;
+              // beginning of code for promotion
+              // should be moved in a function
+              type_ = RoadType::kBusy;
+              mark_map(game);
+              for (CarrierSlot& slot : carrier_slots_) {
+                if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type != 1) {
+                  request_carrier(slot);
+                }
+              }
+              // end of code for promotion
+            }
+          }
+          if (wallet_ > max_wallet) wallet_ = max_wallet;
+        }
+        return true;
+      }
+    }
+  }
+  //  If we get here, no carrier took the ware.
+  // potentially insert here some logic for edge cases like road congestion
+  return false;
 }
+
 
 void Road::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
-	molog("busyness_: %i\n", busyness_);
+	molog("busyness_: %i\n", wallet_);
 }
 }

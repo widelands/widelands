@@ -139,10 +139,10 @@ private:
 private:
 	/// Counter that is incremented when a ware does not get a carrier for this
 	/// road immediately and decremented over time.
-	uint32_t busyness_;
+	int32_t wallet_;
 
 	/// holds the gametime when busyness_ was last updated
-	uint32_t busyness_last_update_;
+	uint32_t last_wallet_check_;
 
 	uint8_t type_;        ///< RoadType, 2 bits used
 	Flag* flags_[2];      ///< start and end flag
