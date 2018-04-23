@@ -79,7 +79,7 @@ static const std::string INTERNET_CLIENT_BOT = "BOT";
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /// States an online game can be in
 static const std::string INTERNET_GAME_CLOSED = "CLOSED"; // Not yet connectable or not over relay
-static const std::string INTERNET_GAME_SETUP = "SETUP"; // Map selection, ...
+static const std::string INTERNET_GAME_SETUP = "SETUP"; // Map selection and so
 static const std::string INTERNET_GAME_RUNNING = "RUNNING"; // Playing
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
