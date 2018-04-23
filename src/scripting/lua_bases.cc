@@ -330,9 +330,9 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
 /* RST
    .. function:: save_campaign_data(campaign_name, scenario_name, text)
 
-      :arg campaign_name: the name of the current campaign
-      :arg scenario_name: the name of the current scenario
-      :arg text: the text to write
+      :arg campaign_name: the name of the current campaign, e.g. "empiretut" or "frisians"
+      :arg scenario_name: the name of the current scenario, e.g. "emp04" or "fri03"
+      :arg text: the text to write (use "\n" as line separator)
 
       Saves a string that can be read by other scenarios.
 */
@@ -341,34 +341,34 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 	const std::string scenario_name = luaL_checkstring(L, 3);
 	std::string text = luaL_checkstring(L, 4);
 
-    std::string dir = kCampaignDataDir + g_fs->file_separator() + campaign_name;
+	std::string dir = kCampaignDataDir + g_fs->file_separator() + campaign_name;
 	boost::trim(dir);
 	g_fs->ensure_directory_exists(dir);
 
-    std::string complete_filename = dir + g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	std::string complete_filename = dir + g_fs->file_separator() + scenario_name + kCampaignDataExtension;
 	boost::trim(complete_filename);
 
 	Profile profile;
 	Section& section = profile.create_section("campaign_data");
-	
+
 	uint32_t line = 0;
 	while (!text.empty()) {
-	    int32_t linebreak = text.find_first_of("\n");
-	    std::string data;
-	    if (linebreak < 0) {
-	        data = text;
-	        text = "";
-	    }
-	    else {
-	        data = text.substr(0, linebreak);
-	        text = text.substr(linebreak + 1);
-	    }
-	    std::string key = "line_" + std::to_string(line);
-	    section.set_string(key.c_str(), data);
-	    ++line;
+		int32_t linebreak = text.find_first_of("\n");
+		std::string data;
+		if (linebreak < 0) {
+			data = text;
+			text = "";
+		}
+		else {
+			data = text.substr(0, linebreak);
+			text = text.substr(linebreak + 1);
+		}
+		std::string key = "line_" + std::to_string(line);
+		section.set_string(key.c_str(), data);
+		++line;
 	}
-    section.set_natural("size", line);
-    profile.write(complete_filename.c_str(), false);
+	section.set_natural("size", line);
+	profile.write(complete_filename.c_str(), false);
 
 	return 0;
 }
@@ -376,37 +376,37 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 /* RST
    .. function:: read_campaign_data(campaign_name, scenario_name)
 
-      :arg campaign_name: the name of the campaign
-      :arg scenario_name: the name of the scenario to read data from
+      :arg campaign_name: the name of the campaign, e.g. "empiretut" or "frisians"
+      :arg scenario_name: the name of the scenario that saved the data, e.g. "emp04" or "fri03"
 
-      Reads a string that was saved by another scenario.
+      Reads a string that was saved by another scenario. "\n" is used as line separator.
       This function returns :const:`nil` if the file cannot be opened for reading.
 */
 int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	const std::string campaign_name = luaL_checkstring(L, 2);
 	const std::string scenario_name = luaL_checkstring(L, 3);
 
-    std::string complete_filename = kCampaignDataDir + g_fs->file_separator() + campaign_name +
-            g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	std::string complete_filename = kCampaignDataDir + g_fs->file_separator() + campaign_name +
+			g_fs->file_separator() + scenario_name + kCampaignDataExtension;
 	boost::trim(complete_filename);
 
 	Profile profile;
 	profile.read(complete_filename.c_str());
 	Section* section = profile.get_section("campaign_data");
 	if (section == nullptr) {
-	    lua_pushnil(L);
+		lua_pushnil(L);
 	}
 	else {
-        uint32_t size = section->get_natural("size");
-	    std::string text = "";
-	    for(uint32_t i = 0; i < size; i++) {
-	        if (i > 0) {
-	            text += "\n";
-	        }
-	        std::string key = "line_" + std::to_string(i);
-	        text += section->get_string(key.c_str());
-	    }
-	    lua_pushstring(L, text);
+		uint32_t size = section->get_natural("size");
+		std::string text = "";
+		for(uint32_t i = 0; i < size; i++) {
+			if (i > 0) {
+				text += "\n";
+			}
+			std::string key = "line_" + std::to_string(i);
+			text += section->get_string(key.c_str());
+		}
+		lua_pushstring(L, text);
 	}
 
 	return 1;
