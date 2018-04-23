@@ -727,6 +727,9 @@ bool WLApplication::init_settings() {
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
+
+	// TODO(Notabilis): Document this options in wlapplication_messages.cc
+	// Also, some of these does not seem to be used anywhere
 	s.get_bool("ai_training");
 	s.get_bool("auto_speed");
 	s.get_bool("fullscreen");

@@ -43,6 +43,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	std::cout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << endl << endl;
 	std::cout << _("Options:") << endl << endl;
 	std::cout << _(" --<config-entry-name>=value overwrites any config file setting") << endl
+	          << _("                      Note: New value will be written to config file") << endl
 	          << endl
 	          << _(" --datadir=DIRNAME    Use specified directory for the widelands\n"
 	               "                      data files")
@@ -76,6 +77,12 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << _(" --autosave=[...]     Automatically save each n minutes") << endl
 	          << _(" --rolling_autosave=[...]\n"
 	               "                      Use this many files for rolling autosaves")
+	          << endl
+	          << _(" --metaserver=[...]\n"
+	               "                      Connect to a different metaserver for internet gaming.")
+	          << endl
+	          << _(" --metaserverport=[...]\n"
+	               "                      Port number of the metaserver for internet gaming.")
 	          << endl
 	          << endl
 
