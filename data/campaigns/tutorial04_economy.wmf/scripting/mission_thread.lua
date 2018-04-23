@@ -104,7 +104,7 @@ function burn_tavern_down()
    sleep(2000)
    o = message_box_objective(plr, build_taverns)
 
-  encyclopedia_tutorial()
+   encyclopedia_tutorial()
 
    while #plr:get_buildings("empire_tavern") < 2 do sleep(500) end
    set_objective_done(o, 0)

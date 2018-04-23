@@ -204,29 +204,29 @@ build_taverns = {
 ware_encyclopedia = {
    title = _"Encyclopedia",
    body = (
-      h1(_[[How to get help?]]) ..
-      p(_[[Of course it is difficult to remember all of my remarks and advices. For example you might ask: "Why do we need rations to get soldiers?"]]) ..
-      p(_[[When you’ve played a lot, you will know all these things by heart. But until then or if you’re unsure what are your tribes needs and his abilities, his buildings or workers, you can easily look it up in our tribe specific in-game help and encyclopedia.]]) ..
+      h1(_[[How to get help]]) ..
+      p(_[[Of course, it is difficult to remember all of my remarks and advice. For example, you might ask yourself: ‘Why do we need rations to get soldiers?’]]) ..
+      p(_[[When you’ve played a lot, you will know all these things by heart. But until then or if you’re unsure about your tribe’s needs and abilities and how its buildings and workers operate, you can look it up easily in our tribe-specific in-game help and encyclopedia.]]) ..
       p(_[[This encyclopedia can be accessed via the help button at the bottom right.]])..
-      li_image("images/ui_basic/menu_help.png", _[[Please open the in-game help and I'll explain you its contents.]])
+      li_image("images/ui_basic/menu_help.png", _[[Please open the in-game help, and I’ll explain its contents to you.]])
    ),
    h = 350,
    show_instantly = true,
    obj_name = "open_encyclopedia",
    obj_title = _"Open the in-game help window.",
    obj_body = (
-      li_image("images/ui_basic/menu_help.png", _[[The encyclopedia window contains the in-game help and an encyclopedia of the tribe you chose.]]) ..
-      -- TRANSLATORS: "it" refers to the encaclopedia window
-      li(_[[Open it. You can access it via the button at the bottom of the game.]]) ..
-      li_arrow(_[[Alternatively you can access it directly with the ‘F1’ key.]])
+      li_image("images/ui_basic/menu_help.png", _[[The encyclopedia window contains the in-game help and an encyclopedia of the tribe you’re currently playing.]]) ..
+      -- TRANSLATORS: "it" refers to the encyclopedia window
+      li(_[[Open it. You can access it via the button at the bottom of the screen.]]) ..
+      li_arrow(_[[Alternatively, you can access it directly with the ‘F1’ key.]])
    ),
 }
 
 explain_encyclopedia = {
    position = "topright",
-   title = _"Encyclopedia explanations",
+   title = _"Encyclopedia details",
    body = (
-      h1(_[[What information is contained in the encyclopedia?]]) ..
+      h1(_[[Information contained in the encyclopedia]]) ..
       p(_[[The in-game help shows you five tabs. The first tab which you could access by clicking on ]])..
       li_image("images/logos/wl-ico-32.png", _[[presents you all the basic interface controls for widelands. Furthermore you can find there all tips relevant for your tribe.]]) ..
       p(_[[The next tab where you can find valuable information is the ‘Wares’ tab.]])..
@@ -266,8 +266,7 @@ reopen_encyclopedia_obj = {
    obj_title = _"Open the encyclopedia window again.",
    obj_body = (
       p(_[[You closed the encyclopedia window, although you did not even try to find out what I told you. If you already know all this stuff, please feel free to leave this tutorial at any time.]]) ..
-      -- TRANSLATORS: "it" refers to the stock menu window.
-      li(_[[Otherwise, please reopen the encyclopedia Window and choose the second tab.]])
+      li(_[[Otherwise, please reopen the encyclopedia window and choose the second tab.]])
    ),
    h = 250
 }
