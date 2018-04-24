@@ -549,7 +549,8 @@ uint32_t const gametime = game.get_gametime();
   const int16_t animal_price = 2;
   const int16_t max_wallet  = 500;
 
-  printf ("DEBUG Carriers slots: %lu\n", carrier_slots_.size());
+	const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
+  printf ("DEBUG Carriers count: %d\n", carriers_count);
 
   //  Iterate over all carriers and try to find one which takes the ware.
   for (CarrierSlot& slot : carrier_slots_) {
@@ -557,7 +558,7 @@ uint32_t const gametime = game.get_gametime();
       if (carrier->notify_ware(game, flagid)) {
         //  notify_ware returns false if the carrier currently can not take
         //  the ware. If we get here, the carrier took the ware.
-        wallet_ -= carrier_slots_.size() * (gametime - last_wallet_check_);
+        wallet_ -= carriers_count * (gametime - last_wallet_check_);
         last_wallet_check_ = gametime;
         wallet_ += some_factor * (flags_[flagid]->current_wares() + path_.get_nsteps());
         if (wallet_ < 0) {
@@ -588,9 +589,9 @@ uint32_t const gametime = game.get_gametime();
               // should be moved in a function
               type_ = RoadType::kBusy;
               mark_map(game);
-              for (CarrierSlot& slot : carrier_slots_) {
-                if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type != 1) {
-                  request_carrier(slot);
+              for (CarrierSlot& slot2 : carrier_slots_) {
+                if (!slot2.carrier.get(game) && !slot2.carrier_request && slot2.carrier_type != 1) {
+                  request_carrier(slot2);
                 }
               }
               // end of code for promotion
