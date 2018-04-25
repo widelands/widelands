@@ -610,6 +610,6 @@ uint32_t const gametime = game.get_gametime();
 
 void Road::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
-	molog("busyness_: %i\n", wallet_);
+	molog("wallet_: %i\n", wallet_);
 }
 }
