@@ -545,9 +545,8 @@ void Road::postsplit(Game& game, Flag& flag) {
 bool Road::notify_ware(Game& game, FlagId const flagid) {
 uint32_t const gametime = game.get_gametime();
   assert(last_wallet_check_ <= gametime);
-  const int16_t some_factor = 2;
-  const int16_t animal_price = 2;
-  const int16_t max_wallet  = 500;
+  const int16_t animal_price = 600;
+  const int16_t max_wallet  = 2.5 * animal_price;
 
 	const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
   printf ("DEBUG Carriers count: %d\n", carriers_count);
@@ -560,7 +559,7 @@ uint32_t const gametime = game.get_gametime();
         //  the ware. If we get here, the carrier took the ware.
         wallet_ -= carriers_count * (gametime - last_wallet_check_);
         last_wallet_check_ = gametime;
-        wallet_ += some_factor * (flags_[flagid]->current_wares() + path_.get_nsteps());
+        wallet_ += 2 * (carriers_count + 1) * (4 * (flags_[flagid]->current_wares() - 1) + path_.get_nsteps());
         if (wallet_ < 0) {
           wallet_ = 0;
           if (type_ == RoadType::kBusy) {
