@@ -433,16 +433,21 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 		uint32_t size = keys_section->get_natural("size");
 		lua_newtable(L);
 		for (uint32_t i = 0; i < size; i++) {
-			const char* key_key = std::to_string(i).c_str();
-			const char* key = keys_section->get_string(key_key);
+		    log("Parsing the %i-th item: ", i);
+			char const* key_key = std::to_string(i).c_str();
+		    log("key_key = %s; ", key_key);
+			char const* key = keys_section->get_string(key_key);
+		    log("key = %s; ", key);
 			std::string type = type_section->get_string(key_key);
+		    log("data type = %s; ", type.c_str());
+		    log("raw value = %s.\n", data_section->get_string(key));
 
 			lua_pushstring(L, key);
 			if (type == "boolean") {
 				lua_pushboolean(L, data_section->get_bool(key));
 			}
 			else if (type == "number") {
-				lua_pushint(L, data_section->get_int(key));
+				lua_pushinteger(L, data_section->get_int(key));
 			}
 			else if (type == "string") {
 				lua_pushstring(L, data_section->get_string(key));
