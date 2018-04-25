@@ -328,18 +328,22 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
 }
 
 /* RST
-   .. function:: save_campaign_data(campaign_name, scenario_name, text)
+   .. function:: save_campaign_data(campaign_name, scenario_name, data)
 
       :arg campaign_name: the name of the current campaign, e.g. "empiretut" or "frisians"
       :arg scenario_name: the name of the current scenario, e.g. "emp04" or "fri03"
-      :arg text: the text to write (use "\n" as line separator)
+      :arg data: a table of key-value pairs to save
 
-      Saves a string that can be read by other scenarios.
+      Saves information that can be read by other scenarios.
+
+      All keys have to be strings; in particular, arrays cannot be used as campaign data.
+      Only strings, integer numbers and booleans may be used as values.
+      The table is not guaranteed to be saved in the specified order.
 */
 int LuaEditorGameBase::save_campaign_data(lua_State* L) {
+
 	const std::string campaign_name = luaL_checkstring(L, 2);
 	const std::string scenario_name = luaL_checkstring(L, 3);
-	std::string text = luaL_checkstring(L, 4);
 
 	std::string dir = kCampaignDataDir + g_fs->file_separator() + campaign_name;
 	boost::trim(dir);
@@ -349,25 +353,49 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 	boost::trim(complete_filename);
 
 	Profile profile;
-	Section& section = profile.create_section("campaign_data");
+	Section& data_section = profile.create_section("data");
+	std::vector<std::string> key_names;
+	std::vector<const char*> type_names;
 
-	uint32_t line = 0;
-	while (!text.empty()) {
-		int32_t linebreak = text.find_first_of("\n");
-		std::string data;
-		if (linebreak < 0) {
-			data = text;
-			text = "";
-		}
-		else {
-			data = text.substr(0, linebreak);
-			text = text.substr(linebreak + 1);
-		}
-		std::string key = "line_" + std::to_string(line);
-		section.set_string(key.c_str(), data);
-		++line;
+	luaL_checktype(L, 4, LUA_TTABLE);
+	lua_pushnil(L);
+	uint32_t size = 0;
+	while (lua_next(L, 4) != 0) {
+		std::string key = luaL_checkstring(L, -2);
+
+		key_names.push_back(key);
+		const char* type = lua_typename(L, lua_type(L, -1));
+		type_names.push_back(type);
+
+		std::string t = std::string(type);
+		if (t == "number")
+			data_section.set_int(key.c_str(), luaL_checknumber(L, -1));
+		else if (t == "boolean")
+			data_section.set_bool(key.c_str(), luaL_checkboolean(L, -1));
+		else if (t == "string")
+			data_section.set_string(key.c_str(), luaL_checkstring(L, -1));
+		else
+			report_error(L, "A campaign data value may be a string, integer, or boolean; but not a %s!", type);
+
+		++size;
+		lua_pop(L, 1);
 	}
-	section.set_natural("size", line);
+
+	size = 0;
+	Section& keys_section = profile.create_section("keys");
+	for (std::string key : key_names) {
+		keys_section.set_string(std::to_string(size).c_str(), key.c_str());
+		++size;
+	}
+	keys_section.set_natural("size", size);
+
+	size = 0;
+	Section& type_section = profile.create_section("type");
+	for (const char* type : type_names) {
+		type_section.set_string(std::to_string(size).c_str(), type);
+		++size;
+	}
+
 	profile.write(complete_filename.c_str(), false);
 
 	return 0;
@@ -379,7 +407,9 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
       :arg campaign_name: the name of the campaign, e.g. "empiretut" or "frisians"
       :arg scenario_name: the name of the scenario that saved the data, e.g. "emp04" or "fri03"
 
-      Reads a string that was saved by another scenario. "\n" is used as line separator.
+      Reads information that was saved by another scenario.
+      The data is returned as a table of key-value pairs.
+      The table is not guaranteed to be in the same order as the scenario that saved this data specified it.
       This function returns :const:`nil` if the file cannot be opened for reading.
 */
 int LuaEditorGameBase::read_campaign_data(lua_State* L) {
@@ -392,21 +422,37 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 
 	Profile profile;
 	profile.read(complete_filename.c_str());
-	Section* section = profile.get_section("campaign_data");
-	if (section == nullptr) {
+	Section* data_section = profile.get_section("data");
+	Section* keys_section = profile.get_section("keys");
+	Section* type_section = profile.get_section("type");
+	if (data_section == nullptr || keys_section == nullptr || type_section == nullptr) {
+		log("Unable to read campaign data file, returning nil\n");
 		lua_pushnil(L);
 	}
 	else {
-		uint32_t size = section->get_natural("size");
-		std::string text = "";
-		for(uint32_t i = 0; i < size; i++) {
-			if (i > 0) {
-				text += "\n";
+		uint32_t size = keys_section->get_natural("size");
+		lua_newtable(L);
+		for (uint32_t i = 0; i < size; i++) {
+			const char* key_key = std::to_string(i).c_str();
+			const char* key = keys_section->get_string(key_key);
+			std::string type = type_section->get_string(key_key);
+
+			lua_pushstring(L, key);
+			if (type == "boolean") {
+				lua_pushboolean(L, data_section->get_bool(key));
 			}
-			std::string key = "line_" + std::to_string(i);
-			text += section->get_string(key.c_str());
+			else if (type == "number") {
+				lua_pushint(L, data_section->get_int(key));
+			}
+			else if (type == "string") {
+				lua_pushstring(L, data_section->get_string(key));
+			}
+			else {
+				log("Illegal data type %s in campaign data file, interpreting key %s as nil\n", type.c_str(), key);
+				lua_pushnil(L);
+			}
+			lua_settable(L, -3);
 		}
-		lua_pushstring(L, text);
 	}
 
 	return 1;
