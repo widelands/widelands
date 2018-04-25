@@ -200,6 +200,7 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/berry_bushes/strawberry/init.lua"
       include "tribes/immovables/berry_bushes/sea_buckthorn/init.lua"
       include "tribes/immovables/berry_bushes/desert_hackberry/init.lua"
+      include "tribes/immovables/berry_bushes/juniper/init.lua"
       include "tribes/immovables/barleyfield_tiny/init.lua"
       include "tribes/immovables/barleyfield_small/init.lua"
       include "tribes/immovables/barleyfield_medium/init.lua"

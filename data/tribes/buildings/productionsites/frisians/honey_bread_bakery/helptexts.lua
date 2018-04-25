@@ -3,7 +3,7 @@ include "tribes/scripting/help/global_helptexts.lua"
 
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "Rookies will say that vengeance is sweet. Heroes will say that bread is sweeter.")
+   return pgettext ("frisians_building", "Rookies will say that vengeance is sweet. Heroes will say that honey bread is sweeter.")
 end
 
 function building_helptext_lore_author ()
