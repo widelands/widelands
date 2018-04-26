@@ -549,7 +549,6 @@ uint32_t const gametime = game.get_gametime();
   const int16_t max_wallet  = 2.5 * animal_price;
 
 	const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
-  printf ("DEBUG Carriers count: %d\n", carriers_count);
 
   //  Iterate over all carriers and try to find one which takes the ware.
   for (CarrierSlot& slot : carrier_slots_) {
@@ -557,7 +556,8 @@ uint32_t const gametime = game.get_gametime();
       if (carrier->notify_ware(game, flagid)) {
         //  notify_ware returns false if the carrier currently can not take
         //  the ware. If we get here, the carrier took the ware.
-        wallet_ -= carriers_count * (gametime - last_wallet_check_);
+        wallet_ -= carriers_count * (gametime - last_wallet_check_) / 1000;
+        const uint32_t last_wallet_check_old_ = last_wallet_check_;
         last_wallet_check_ = gametime;
         wallet_ += 2 * (carriers_count + 1) * (4 * (flags_[flagid]->current_wares() - 1) + path_.get_nsteps());
         if (wallet_ < 0) {
@@ -598,6 +598,9 @@ uint32_t const gametime = game.get_gametime();
           }
           if (wallet_ > max_wallet) wallet_ = max_wallet;
         }
+        printf ("wallet_: %5d, carriers: %d, gametime: %d, last_wallet_check_: %d, current_wares: %d, nsteps: %lu\n",
+		wallet_, carriers_count,
+		gametime, last_wallet_check_old_, flags_[flagid]->current_wares(), path_.get_nsteps());
         return true;
       }
     }
