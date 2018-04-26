@@ -19,8 +19,6 @@
 
 #include "scripting/lua_bases.h"
 
-#include <memory>
-
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
@@ -362,8 +360,8 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 	uint32_t size = 0;
 	while (lua_next(L, 4) != 0) {
 		std::string key = luaL_checkstring(L, -2);
-
 		key_names.push_back(key);
+
 		const char* type = lua_typename(L, lua_type(L, -1));
 		type_names.push_back(type);
 
@@ -433,30 +431,30 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 		uint32_t size = keys_section->get_natural("size");
 		lua_newtable(L);
 		for (uint32_t i = 0; i < size; i++) {
-		    log("Parsing the %i-th item: ", i);
-			char const* key_key = std::to_string(i).c_str();
-		    log("key_key = %s; ", key_key);
-			char const* key = keys_section->get_string(key_key);
-		    log("key = %s; ", key);
+			log("Parsing the %i-th item: ", i); //delete this line
+			const char* key_key = std::to_string(i).c_str();
+			log("key_key = %s; ", key_key); //delete this line
+			const char* key = keys_section->get_string(key_key);
+			log("key = %s; ", key); //delete this line
 			std::string type = type_section->get_string(key_key);
-		    log("data type = %s; ", type.c_str());
-		    log("raw value = %s.\n", data_section->get_string(key));
+			log("data type = %s; ", type.c_str()); //delete this line
+			log("raw value = %s.\n", data_section->get_string(key)); //delete this line
 
 			lua_pushstring(L, key);
-			if (type == "boolean") {
+			if (type == "boolean")
 				lua_pushboolean(L, data_section->get_bool(key));
-			}
-			else if (type == "number") {
+			else if (type == "number")
 				lua_pushinteger(L, data_section->get_int(key));
-			}
-			else if (type == "string") {
+			else if (type == "string")
 				lua_pushstring(L, data_section->get_string(key));
-			}
 			else {
 				log("Illegal data type %s in campaign data file, interpreting key %s as nil\n", type.c_str(), key);
 				lua_pushnil(L);
 			}
+			log("Setting table value: %s=%s\n", lua_tostring(L, -2), lua_tostring(L, -1)); //delete this line
+			luaL_checktype(L, -3, LUA_TTABLE); //delete this line
 			lua_settable(L, -3);
+			luaL_checktype(L, -1, LUA_TTABLE); //delete this line
 		}
 	}
 

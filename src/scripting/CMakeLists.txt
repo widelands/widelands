@@ -110,6 +110,7 @@ wl_library(scripting_logic
     logic
     logic_campaign_visibility
     logic_constants
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     logic_tribe_basic_info
