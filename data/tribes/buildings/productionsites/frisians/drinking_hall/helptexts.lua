@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Prepares rations and meals to feed the miners in the basic and deep mines.")
+   return pgettext("frisians_building", "Prepares rations for scouts and rations and meals to feed the miners in all mines.")
 end
 
 function building_helptext_note()
