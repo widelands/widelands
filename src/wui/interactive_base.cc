@@ -448,13 +448,13 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 
 	// In-game clock and FPS
 	if (game != nullptr) {
-		// Blit in-game clock.
+		// Blit in-game clock
 		const std::string gametime(gametimestring(egbase().get_gametime(), true));
 		std::shared_ptr<const UI::RenderedText> rendered_text =
 		   UI::g_fh1->render(as_condensed(gametime));
 		rendered_text->draw(dst, Vector2i(5, 5));
 
-		// Blit FPS when playing a game in debug mode.
+		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
 			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
 			rendered_text = UI::g_fh1->render(as_condensed(
