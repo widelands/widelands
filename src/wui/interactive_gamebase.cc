@@ -149,7 +149,6 @@ void InteractiveGameBase::postload() {
 }
 
 void InteractiveGameBase::start() {
-	InteractiveBase::start();
 	// Multiplayer games don't save the view position, so we go to the starting position instead
 	if (is_multiplayer()) {
 		Widelands::PlayerNumber pln = player_number();
