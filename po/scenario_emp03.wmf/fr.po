@@ -6,13 +6,14 @@
 # Jaypad <ju-ju@nataju.fr>, 2017
 # Renaud Bouchard, 2017
 # zecas <jjorge@free.fr>, 2017
+# balkh mogaehild <balkhmogaehild@protonmail.com>, 2017
 # GunChleoc, 2017
 # David D, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: David D, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -202,7 +203,7 @@ msgstr "Battre les Barbares"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:142
 msgid "Defeat the Enemy"
-msgstr "Battre l'ennemi"
+msgstr "Défaire l'ennemi"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "End the Barbarians’ existence in this part of the world."
