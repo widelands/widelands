@@ -73,6 +73,7 @@ return {
          dirname .. "scripting/starting_conditions/frisians/headquarters.lua";
          dirname .. "scripting/starting_conditions/frisians/fortified_village.lua";
          dirname .. "scripting/starting_conditions/frisians/trading_outpost.lua";
+         dirname .. "scripting/starting_conditions/frisians/village.lua";
       }
    }
 }

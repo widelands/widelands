@@ -1,11 +1,11 @@
-function building_helptext_lore ()
+function building_helptext_lore()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "")
+   return pgettext("frisians_building", "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!")
 end
 
-function building_helptext_lore_author ()
+function building_helptext_lore_author()
    -- TRANSLATORS: Lore author helptext for a building
-   return pgettext ("frisians_building", "")
+   return pgettext("frisians_building", "A seamstress’s work song")
 end
 
 function building_helptext_purpose()

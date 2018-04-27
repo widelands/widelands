@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -208,7 +208,7 @@ struct FindNodeUnownedMineable {
 };
 
 // When looking for unowned terrain to acquire, we must
-// consider if any buildings can be built on unowned land.
+// consider if any buildings (incl. mines) can be built on unowned land.
 struct FindNodeUnownedBuildable {
 	FindNodeUnownedBuildable(Player* p, Game& g);
 
@@ -346,7 +346,7 @@ struct BuildableField {
 	int16_t water_nearby;
 	int16_t open_water_nearby;
 	int16_t distant_water;
-	int8_t fish_nearby;
+	int16_t fish_nearby;
 	int8_t critters_nearby;
 	ResourceAmount ground_water;  // used by wells
 	uint8_t space_consumers_nearby;
@@ -678,10 +678,9 @@ struct ManagementData {
 	            uint32_t old_land,
 	            uint16_t attackers,
 	            int16_t trained_soldiers,
-	            int16_t latest_attackers,
-	            uint16_t conq_ws,
 	            uint16_t strength,
-	            uint32_t existing_ps);
+	            uint32_t existing_ps,
+	            uint32_t first_iron_mine_time);
 	void dump_data(PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;

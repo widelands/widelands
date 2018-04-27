@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,7 +69,8 @@ Map::Map()
      scenario_types_(NO_SCENARIO),
      width_(0),
      height_(0),
-     pathfieldmgr_(new PathfieldManager) {
+     pathfieldmgr_(new PathfieldManager),
+     allows_seafaring_(false) {
 }
 
 Map::~Map() {
@@ -156,6 +157,7 @@ void Map::recalc_whole_map(const World& world) {
 			f = get_fcoords(Coords(x, y));
 			recalc_nodecaps_pass2(world, f);
 		}
+	recalculate_allows_seafaring();
 }
 
 void Map::recalc_default_resources(const World& world) {
@@ -277,6 +279,7 @@ void Map::cleanup() {
 	objectives_.clear();
 
 	port_spaces_.clear();
+	allows_seafaring_ = false;
 
 	// TODO(meitis): should be done here ... but WidelandsMapLoader::preload_map calls
 	// this cleanup AFTER assigning filesystem_ in WidelandsMapLoader::WidelandsMapLoader
@@ -1315,7 +1318,8 @@ bool Map::is_port_space(const Coords& c) const {
 	return port_spaces_.count(c);
 }
 
-bool Map::set_port_space(const World& world, const Coords& c, bool set, bool force) {
+bool Map::set_port_space(
+   const World& world, const Coords& c, bool set, bool force, bool recalculate_seafaring) {
 	bool success = false;
 	if (set) {
 		success = force || is_port_space_allowed(world, get_fcoords(c));
@@ -1325,6 +1329,9 @@ bool Map::set_port_space(const World& world, const Coords& c, bool set, bool for
 	} else {
 		port_spaces_.erase(c);
 		success = true;
+	}
+	if (recalculate_seafaring) {
+		recalculate_allows_seafaring();
 	}
 	return success;
 }
@@ -1972,10 +1979,16 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t& area) {
 }
 
 bool Map::allows_seafaring() const {
+	return allows_seafaring_;
+}
+
+// This check can become very expensive, so we only recalculate this on relevant map changes.
+void Map::recalculate_allows_seafaring() {
 
 	// There need to be at least 2 port spaces for seafaring to make sense
 	if (get_port_spaces().size() < 2) {
-		return false;
+		allows_seafaring_ = false;
+		return;
 	}
 
 	std::set<Coords> reachable_from_previous_ports;
@@ -1999,7 +2012,8 @@ bool Map::allows_seafaring() const {
 
 			// Found one
 			if (reachable_from_previous_ports.count(current_position) > 0) {
-				return true;
+				allows_seafaring_ = true;
+				return;
 			}
 
 			// Adding the neighbors to the list
@@ -2020,7 +2034,7 @@ bool Map::allows_seafaring() const {
 			reachable_from_previous_ports.insert(reachable_coord);
 		}
 	}
-	return false;
+	allows_seafaring_ = false;
 }
 
 void Map::cleanup_port_spaces(const World& world) {
@@ -2030,6 +2044,7 @@ void Map::cleanup_port_spaces(const World& world) {
 			continue;
 		}
 	}
+	recalculate_allows_seafaring();
 }
 
 bool Map::has_artifacts() {

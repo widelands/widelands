@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 19:39+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-06 16:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -53,40 +53,44 @@ msgid ""
 "webpage: %s"
 msgstr "자유-오픈소스 소프트웨어 및 GPL에 대한 자세한 내용은 다음 웹 페이지를 참조하십시오:%s"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "이 허가서의 전체 내용과 그 철학 및 법적 의미에 대한 자세한 정보를 찾을 수 있습니다."
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "또한 우리는 GPL을 Widelands에 텍스트 문서로 포함하고 있습니다."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "리눅스에서는 소스 또는 독립 실행형 바이너리 패키지의 루트 또는 설치 디렉토리 (예 : '%1%')에서 COPYING이라는 파일을 찾을 수 있습니다."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "윈도우즈에서는 설치 폴더에 COPYING.txt라는 파일을 찾을 수 있으며 Widelands 시작 메뉴 항목은 이 파일에 대한 링크를 제공합니다."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "맥오에스에서는 웹 사이트에서 다운로드 한 압축파일에서 COPYING이라는 파일을 찾을 수 있습니다."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:22
+msgid "This game comes as-is and without any warranty."
+msgstr ""
+
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "이 게임은 아무런 보증도없이 제공됩니다. 더 자세한 정보와 지원을 원하시면 %1% (웹 사이트, 위키, 질문 또는 일반적인 지원을위한 포럼), %2% (버그 트랙커), %3% (번역)에서 찾으실 수 있습니다."
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr ""
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -242,6 +246,10 @@ msgstr "전직 장로"
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
 msgstr "프리BSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisian"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -609,7 +617,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/txts/tips/frisians.lua:8
-msgid "Always build a forester´s house, so you will not run out of logs."
+msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:6

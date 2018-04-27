@@ -4,14 +4,15 @@
 # Translators:
 # GunChleoc, 2015
 # GunChleoc, 2015-2016,2018
+# Rui <xymarior@yandex.com>, 2018
 # zecas <jjorge@free.fr>, 2016-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 13:04+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-16 16:33+0000\n"
+"Last-Translator: Rui <xymarior@yandex.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +39,7 @@ msgstr[1] "Novos Objetivos"
 #: ../../data/scripting/richtext.lua:533 ../../src/base/i18n.cc:333
 #, c-format
 msgid "%1$s & %2$s"
-msgstr "%1$s & %2$s"
+msgstr "%1$s e %2$s"
 
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
@@ -272,7 +273,7 @@ msgstr "Mostrar lotes de construção (ligar/desligar)"
 
 #: ../../src/editor/editorinteractive.cc:102
 msgid "Show immovables (on/off)"
-msgstr "Mostrar imoveis (ligar/desligar)"
+msgstr "Mostrar imóveis (ligar/desligar)"
 
 #: ../../src/editor/editorinteractive.cc:106
 msgid "Show animals (on/off)"
@@ -303,7 +304,7 @@ msgid "Redo"
 msgstr "Refazer"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:334 ../../src/wui/interactive_player.cc:207
+#: ../../src/wui/buildingwindow.cc:343 ../../src/wui/interactive_player.cc:207
 msgid "Help"
 msgstr "Ajuda"
 
@@ -321,7 +322,7 @@ msgstr "Widelands não conseguiu carregar o ficheiro «&nbsp;%s&nbsp;». O forma
 #: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:222
 #: ../../src/logic/game.cc:272
 msgid "Creating players"
-msgstr "Criando jogadores"
+msgstr "A criar jogadores"
 
 #: ../../src/editor/editorinteractive.cc:228
 msgid "Unsaved Map"
@@ -334,7 +335,7 @@ msgstr "O mapa não foi guardado, queres mesmo sair?"
 #: ../../src/editor/editorinteractive.cc:620
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:144
 msgid "Creating empty map…"
-msgstr "Criando um mapa vazido…"
+msgstr "A criar um mapa vazio…"
 
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:624
@@ -357,7 +358,7 @@ msgstr "Desconhecido"
 #: ../../src/editor/editorinteractive.cc:634
 #, c-format
 msgid "Loading map “%s”…"
-msgstr "Carregando mapa «&nbsp;%s&nbsp;»…"
+msgstr "A carregar o mapa «&nbsp;%s&nbsp;»…"
 
 #: ../../src/editor/map_generator.cc:715
 msgid "Random Player"
@@ -404,7 +405,7 @@ msgstr "mina"
 #. * TRANSLATORS: Editor terrain property: port space
 #: ../../src/editor/tools/info_tool.cc:89
 msgid "port"
-msgstr "porto"
+msgstr "porta"
 
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
@@ -417,7 +418,7 @@ msgstr "andável"
 #. (fish, ships)
 #: ../../src/editor/tools/info_tool.cc:97
 msgid "swimmable"
-msgstr "natável"
+msgstr "nadável"
 
 #: ../../src/editor/tools/info_tool.cc:101
 #, c-format
@@ -575,7 +576,7 @@ msgstr "Carregar mapa"
 #: ../../src/editor/ui_menus/main_menu.cc:76
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:53
 msgid "Save Map"
-msgstr "Guardar mapa"
+msgstr "Gravar mapa"
 
 #: ../../src/editor/ui_menus/main_menu.cc:84
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:46
@@ -843,13 +844,13 @@ msgstr "sem nome"
 #: ../../src/wui/game_main_menu_save_game.cc:168
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr "Já tem ficheiro com o nome «&nbsp;%s&nbsp;». Queres escrever sobre ele?"
+msgstr "Já existe um ficheiro com o nome «&nbsp;%s&nbsp;». Substituí-lo?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:256
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:270
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:316
 msgid "Error Saving Map!"
-msgstr "Erro a guardar mapa!"
+msgstr "Erro ao gravar o mapa!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:267
 #, c-format
@@ -864,7 +865,7 @@ msgid ""
 "Saved map file may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr "Erro a guardar mapa!\nO ficheiro pode estar corrupto!\n\nCausa:\n"
+msgstr "Erro ao gravar o mapa!\nO ficheiro pode estar corrompido!\n\nCausa:\n"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:41
 msgid "Enter Directory Name:"
@@ -887,7 +888,7 @@ msgid "Number of Players"
 msgstr "Número de jogadores"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:204 ../../src/logic/map.cc:310
+#: ../../src/editor/ui_menus/player_menu.cc:204 ../../src/logic/map.cc:313
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
 #: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:492
@@ -1050,7 +1051,7 @@ msgid "Loading map…"
 msgstr "Carregando o mapa …"
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:371
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1389
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1391
 msgid "Loading…"
 msgstr "A carregar …"
 
@@ -1333,7 +1334,7 @@ msgstr "(parado)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:384
-#: ../../src/wui/building_statistics_menu.cc:627
+#: ../../src/wui/building_statistics_menu.cc:686
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -1563,7 +1564,7 @@ msgid ""
 msgstr "Não foi possível ao Widelands estabelecer uma ligação ao endereço indicado. Ou nenhum servidor do Widelands estava em execução na suposta porta ou o servidor desligou-se assim que tentou ligar."
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1281
+#: ../../src/wlapplication.cc:1283
 msgid "Preparing game"
 msgstr "Preparando jogo"
 
@@ -1689,7 +1690,7 @@ msgstr "Erro ao iniciar o servidor!"
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr ""
+msgstr "Widelands não conseguiu lançar o servidor.\nIsto não deveria acontecer e é provável que não possas fazer nada. Indica-nos o problema por favor."
 
 #: ../../src/network/gamehost.cc:503
 msgid "Failed to start the server!"
@@ -1726,7 +1727,7 @@ msgstr "Não foi possível a Widelands estabelecer uma ligação ao endereço fo
 
 #: ../../src/network/internet_gaming.cc:177
 msgid "Users marked with IRC will possibly not react to messages."
-msgstr ""
+msgstr "O Jogadores marcados com IRC podem não reagir a mensagens."
 
 #: ../../src/network/internet_gaming.cc:215
 msgid "Successfully reconnected to the metaserver!"
@@ -1743,7 +1744,7 @@ msgstr "Alguma coisa correu mal:  %s"
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
-msgstr ""
+msgstr "Foste identificado com '%s' já que o nome que pedis-te já está utilizado ou reservado."
 
 #: ../../src/network/internet_gaming.cc:471
 msgid "Mixed up"
@@ -1762,7 +1763,7 @@ msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
-msgstr ""
+msgstr "Recebi um pacote de rede inesperado do meta-servidor. Pode ser que a versão do protocolo do meta-servidor é diferente. Si o erro persiste, tenta atualizar para uma versão mais recente do jogo."
 
 #: ../../src/network/internet_gaming.cc:499
 #, c-format
@@ -1831,7 +1832,7 @@ msgstr "A mensagem não pode ser enviada: Fora suposto ser privada?"
 
 #: ../../src/network/internet_gaming.cc:874
 msgid "Private messages to IRC users are not supported."
-msgstr ""
+msgstr "Mensagens privadas para jogadores IRC não são aceites."
 
 #: ../../src/network/internet_gaming.cc:951
 msgid "Conversion error"
@@ -2164,11 +2165,11 @@ msgstr[1] "%d minutos"
 msgid "%d pixel"
 msgid_plural "%d pixels"
 msgstr[0] "%d pixel"
-msgstr[1] "%d pixeis"
+msgstr[1] "%d píxeis"
 
 #: ../../src/ui_fsmenu/about.cc:29 ../../src/ui_fsmenu/main.cc:81
 msgid "About Widelands"
-msgstr "Sobre Widelands"
+msgstr "Sobre o Widelands"
 
 #: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:126
 msgid "Close"
@@ -2176,7 +2177,7 @@ msgstr "Fechar"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:48
 msgid "Choose a campaign"
-msgstr "Escolha uma campanha"
+msgstr "Escolhe uma campanha"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:82
 #: ../../src/ui_fsmenu/campaign_select.cc:308
@@ -2236,11 +2237,11 @@ msgstr "Dificuldade:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:274
 msgid "Choose a scenario"
-msgstr "Escolha um cenário"
+msgstr "Escolhe um cenário"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:274
 msgid "Choose a tutorial"
-msgstr "Escolha uma tutorial"
+msgstr "Escolhe um tutorial"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:310
 msgid "Play this tutorial"
@@ -2398,7 +2399,7 @@ msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
-msgstr ""
+msgstr "Widelands não conseguiu obter o IP do servidor em tempo útil.\nParece haver um problema de rede, seja do teu lado ou do lado\ndo servidor.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:377
 msgid "Connection Timed Out"
@@ -2597,11 +2598,11 @@ msgstr "Muda para a posição"
 
 #: ../../src/ui_fsmenu/loadgame.cc:39
 msgid "Choose a replay"
-msgstr "Escolha uma repetição"
+msgstr "Escolhe uma repetição"
 
 #: ../../src/ui_fsmenu/loadgame.cc:39
 msgid "Choose a saved game"
-msgstr "Escolha jogo guardado"
+msgstr "Escolhe um jogo gravado"
 
 #: ../../src/ui_fsmenu/loadgame.cc:78
 msgid "Load this replay"
@@ -2656,15 +2657,15 @@ msgstr "Versão %1$s (%2$s)"
 #. * TRANSLATORS: Placeholders are the copyright years
 #: ../../src/ui_fsmenu/main.cc:103
 msgid "(C) %1%-%2% by the Widelands Development Team"
-msgstr "(C) %1%-%2% pela Equipa de Desenvolvimento de Widelands"
+msgstr "(C) %1%-%2% pela Equipa de Desenvolvimento do Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:106
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr "Licenciado com a Licença Pública Geral GNU (GPL) V2.0"
+msgstr "Licenciado sob a Licença Pública Geral GNU (GPL) V2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:51
 msgid "Choose a map"
-msgstr "Escolha um mapa"
+msgstr "Escolhe um mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:94
 msgid "Show all maps"
@@ -2775,57 +2776,57 @@ msgstr "Alinha as janelas nos limites do ecrã"
 
 #: ../../src/ui_fsmenu/options.cc:140
 msgid "Animate automatic map movements"
-msgstr ""
+msgstr "Animar os movimentos automáticos do mapa"
 
 #: ../../src/ui_fsmenu/options.cc:150
 msgid "Distance for windows to snap to other panels:"
-msgstr "Distância mínima para as janelas se acoplarem aos painéis:"
+msgstr "Distância para as janelas se acoplarem aos painéis:"
 
 #: ../../src/ui_fsmenu/options.cc:161
 msgid "Distance for windows to snap to borders:"
-msgstr "Distância mínima para as janelas se acoplarem às bordas:"
+msgstr "Distância para as janelas se acoplarem às bordas:"
 
 #: ../../src/ui_fsmenu/options.cc:165
 #: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Enable music"
-msgstr "Disponibiliza música"
+msgstr "Reproduzir música"
 
 #: ../../src/ui_fsmenu/options.cc:166
 #: ../../src/wui/game_options_sound_menu.cc:31
 msgid "Enable sound effects"
-msgstr "Disponibiliza efeitos sonoros"
+msgstr "Reproduzir efeitos sonoros"
 
 #: ../../src/ui_fsmenu/options.cc:167
 msgid "Play a sound at message arrival"
-msgstr "Emite um som quando chegar uma mensagem"
+msgstr "Emitir um som quando chegar uma mensagem"
 
 #: ../../src/ui_fsmenu/options.cc:178
 msgid "Save game automatically every:"
-msgstr "Auto-salvar o jogo a cada:"
+msgstr "Gravar automaticamente o jogo a cada:"
 
 #: ../../src/ui_fsmenu/options.cc:191
 msgid "Maximum number of autosave files:"
-msgstr "Numero máximo de ficheiros auto-salvados:"
+msgstr "Número máximo de ficheiros gravados autom.:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Compress widelands data files (maps, replays and savegames)"
-msgstr "Comprime os ficheiros de dados do Widelands (mapas, repetições, e salvaguardas)."
+msgstr "Comprimir ficheiros do Widelands (mapas, repetições e jogos gravados)."
 
 #: ../../src/ui_fsmenu/options.cc:203
 msgid "Write syncstreams in network games to debug desyncs"
-msgstr "Escrever as sincronisações -syncstreams- nos jogos em rede para apurar as desincronisações"
+msgstr "Gravar sincronizações nos jogos em rede para detetar erros"
 
 #: ../../src/ui_fsmenu/options.cc:209
 msgid "Start building road after placing a flag"
-msgstr "Quando se pôr uma bandeira, começa a construír uma estrada em seguida"
+msgstr "Começar a construir a estrada após colocar a bandeira"
 
 #: ../../src/ui_fsmenu/options.cc:210
 msgid "Show buildings area preview"
-msgstr "Mostra a vista da área de construção"
+msgstr "Mostrar previsão da área de edifícios"
 
 #: ../../src/ui_fsmenu/options.cc:212
 msgid "Show in-game chat with transparent background"
-msgstr "Apresentar a conversação com fundo transparente"
+msgstr "Mostrar conversação com fundo transparente"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
@@ -2848,7 +2849,7 @@ msgstr "Som"
 
 #: ../../src/ui_fsmenu/options.cc:233
 msgid "Saving"
-msgstr "Guardar"
+msgstr "Gravar"
 
 #. * TRANSLATORS: Options: Save game automatically every:
 #: ../../src/ui_fsmenu/options.cc:282
@@ -2892,11 +2893,11 @@ msgstr "Campanhas"
 msgid "Load Game"
 msgstr "Carregar jogo"
 
-#: ../../src/wlapplication.cc:1076
+#: ../../src/wlapplication.cc:1078
 msgid "Game data error"
 msgstr "Erro de dados de jogo"
 
-#: ../../src/wlapplication.cc:1084
+#: ../../src/wlapplication.cc:1086
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2904,18 +2905,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Por favor relata este problema para nos ajudar a melhorar o Widelands. Irás encontrar as mensagens relacionadas no ficheiro de saída standard (stdout.txt no Windows). Estás a usar a versão %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1091
+#: ../../src/wlapplication.cc:1093
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
-msgstr "Por favor ajunta esta informação ao teu relatório.\n\nO Widelands tenta guardar o estado atual do jogo quando ocorrem erros durante o jogo. É frequente – embora nem sempre – ser possível voltar a carregá-lo e continuar a jogar."
+msgstr "Por favor ajunta esta informação ao teu relatório.\n\nO Widelands tenta gravar o estado atual do jogo quando ocorrem erros durante o jogo. É frequente – embora nem sempre – ser possível voltar a carregá-lo e continuar a jogar."
 
-#: ../../src/wlapplication.cc:1218
+#: ../../src/wlapplication.cc:1220
 msgid "Invalid Address"
-msgstr ""
+msgstr "Endereço Inválido"
 
-#: ../../src/wlapplication.cc:1219
+#: ../../src/wlapplication.cc:1221
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "O nome ou endereço indicado é inválido e não pode ser atingido."
 
@@ -2988,135 +2989,135 @@ msgstr "Quantidade de soldados"
 msgid "Send more soldiers"
 msgstr "Envia mais soldados"
 
-#: ../../src/wui/building_statistics_menu.cc:67
+#: ../../src/wui/building_statistics_menu.cc:61
 msgid "Building Statistics"
 msgstr "Estatísticas dos edificios"
 
-#: ../../src/wui/building_statistics_menu.cc:72
+#: ../../src/wui/building_statistics_menu.cc:66
 msgid "Owned:"
 msgstr "Teus:"
 
-#: ../../src/wui/building_statistics_menu.cc:78
+#: ../../src/wui/building_statistics_menu.cc:72
 msgid "Under Construction:"
 msgstr "Construindo:"
 
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:84
-#: ../../src/wui/building_statistics_menu.cc:639
+#: ../../src/wui/building_statistics_menu.cc:78
+#: ../../src/wui/building_statistics_menu.cc:698
 msgid "Low Productivity"
 msgstr "Baixa Produtividade"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:98
+#: ../../src/wui/building_statistics_menu.cc:92
 msgid "%:"
 msgstr "%:"
 
-#: ../../src/wui/building_statistics_menu.cc:130
-msgid "Small buildings"
-msgstr "Edifícios pequenos"
-
-#: ../../src/wui/building_statistics_menu.cc:133
-msgid "Medium buildings"
-msgstr "Edifícios médios"
-
-#: ../../src/wui/building_statistics_menu.cc:136
-msgid "Big buildings"
-msgstr "Edifícios grandes"
-
-#: ../../src/wui/building_statistics_menu.cc:139
-msgid "Mines"
-msgstr "Minas"
-
 #: ../../src/wui/building_statistics_menu.cc:145
-msgid "Ports"
-msgstr "Portos"
-
-#: ../../src/wui/building_statistics_menu.cc:258
-#: ../../src/wui/building_statistics_menu.cc:269
-#: ../../src/wui/building_statistics_menu.cc:281
+#: ../../src/wui/building_statistics_menu.cc:156
+#: ../../src/wui/building_statistics_menu.cc:168
 msgid "Show previous building"
 msgstr "Mostrar o edifício anterior"
 
-#: ../../src/wui/building_statistics_menu.cc:263
-#: ../../src/wui/building_statistics_menu.cc:275
-#: ../../src/wui/building_statistics_menu.cc:287
+#: ../../src/wui/building_statistics_menu.cc:150
+#: ../../src/wui/building_statistics_menu.cc:162
+#: ../../src/wui/building_statistics_menu.cc:174
 msgid "Show next building"
 msgstr "Mostrar o edifício seguinte"
+
+#: ../../src/wui/building_statistics_menu.cc:306
+msgid "Small buildings"
+msgstr "Edifícios pequenos"
+
+#: ../../src/wui/building_statistics_menu.cc:308
+msgid "Medium buildings"
+msgstr "Edifícios médios"
+
+#: ../../src/wui/building_statistics_menu.cc:310
+msgid "Big buildings"
+msgstr "Edifícios grandes"
+
+#: ../../src/wui/building_statistics_menu.cc:312
+msgid "Mines"
+msgstr "Minas"
+
+#: ../../src/wui/building_statistics_menu.cc:314
+msgid "Ports"
+msgstr "Portos"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:657
-#: ../../src/wui/building_statistics_menu.cc:681
-#: ../../src/wui/building_statistics_menu.cc:683
+#: ../../src/wui/building_statistics_menu.cc:716
+#: ../../src/wui/building_statistics_menu.cc:742
+#: ../../src/wui/building_statistics_menu.cc:744
 #: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:671
+#: ../../src/wui/building_statistics_menu.cc:730
 msgid "Lacking Soldiers:"
 msgstr "Falta de soldados:"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:219
+#: ../../src/wui/buildingwindow.cc:228
 msgid "Continue"
 msgstr "Continua"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:221
+#: ../../src/wui/buildingwindow.cc:230
 msgid "Stop"
 msgstr "Parar"
 
-#: ../../src/wui/buildingwindow.cc:242
+#: ../../src/wui/buildingwindow.cc:251
 #, c-format
 msgid "Enhance to %s"
 msgstr "Melhorar para %s"
 
-#: ../../src/wui/buildingwindow.cc:243 ../../src/wui/fieldaction.cc:98
+#: ../../src/wui/buildingwindow.cc:252 ../../src/wui/fieldaction.cc:98
 msgid "Construction costs:"
 msgstr "Custos de construção:"
 
-#: ../../src/wui/buildingwindow.cc:260
+#: ../../src/wui/buildingwindow.cc:269
 msgid "Destroy"
 msgstr "Destruir"
 
-#: ../../src/wui/buildingwindow.cc:275
+#: ../../src/wui/buildingwindow.cc:284
 msgid "Dismantle"
 msgstr "Desmanchar"
 
-#: ../../src/wui/buildingwindow.cc:275
+#: ../../src/wui/buildingwindow.cc:284
 msgid "Returns:"
 msgstr "Voltar:"
 
-#: ../../src/wui/buildingwindow.cc:303 ../../src/wui/buildingwindow.cc:498
+#: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:507
 msgid "Hide work area"
 msgstr "Esconder a área de trabalho"
 
-#: ../../src/wui/buildingwindow.cc:315 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:324 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Mostrar a janela de depuração"
 
-#: ../../src/wui/buildingwindow.cc:322
+#: ../../src/wui/buildingwindow.cc:331
 msgid "Center view on this"
 msgstr "Centrar a vista nisto"
 
-#: ../../src/wui/buildingwindow.cc:501
+#: ../../src/wui/buildingwindow.cc:510
 msgid "Show work area"
 msgstr "Mostrar a área de trabalho"
 
-#: ../../src/wui/buildingwindow.cc:534
+#: ../../src/wui/buildingwindow.cc:543
 msgid "Start an expedition"
 msgstr "Começar uma nova expedição"
 
-#: ../../src/wui/buildingwindow.cc:538
+#: ../../src/wui/buildingwindow.cc:547
 msgid "Cancel the expedition"
 msgstr "Cancelar a expedição"
 
-#: ../../src/wui/constructionsitewindow.cc:58
+#: ../../src/wui/constructionsitewindow.cc:60
 #: ../../src/wui/dismantlesitewindow.cc:55
 msgid "Building materials"
 msgstr "Materiais de construção"
@@ -3156,7 +3157,7 @@ msgstr "Construír um edifício pequeno"
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build big building"
-msgstr ""
+msgstr "Construír um edifício grande"
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
@@ -3253,7 +3254,7 @@ msgstr "Depuração do campo"
 #: ../../src/wui/game_main_menu_save_game.cc:50
 #: ../../src/wui/game_options_menu.cc:89
 msgid "Save Game"
-msgstr "Guardar o Jogo"
+msgstr "Gravar o Jogo"
 
 #: ../../src/wui/game_main_menu_save_game.cc:155
 msgid ""
@@ -3261,12 +3262,12 @@ msgid ""
 "Saved game file may be corrupt!\n"
 "\n"
 "Reason given:\n"
-msgstr "Erro a Guardar Jogo!\nO ficheiro do jogo pode estar corrupto!\n\nCausa:\n"
+msgstr "Erro ao Gravar o Jogo!\nO ficheiro do jogo pode estar corrompido!\n\nCausa:\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:158
 #: ../../src/wui/game_main_menu_save_game.cc:167
 msgid "Save Game Error!"
-msgstr "Erro a Guardar Jogo!"
+msgstr "Erro ao Gravar o Jogo!"
 
 #: ../../src/wui/game_message_menu.cc:51
 #: ../../src/wui/game_message_menu.cc:602
@@ -3673,7 +3674,7 @@ msgstr "Sair da repetição"
 
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Save game"
-msgstr "Guardar o Jogo"
+msgstr "Gravar o Jogo"
 
 #. * TRANSLATORS: %1% is a map's name.
 #: ../../src/wui/load_or_save_game.cc:55
@@ -3815,8 +3816,8 @@ msgstr[1] "Queres mesmo apagar estes %d jogos?"
 #: ../../src/wui/load_or_save_game.cc:274
 msgid "Confirm Deleting File"
 msgid_plural "Confirm Deleting Files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Confirma o Apagamento do Ficheiro"
+msgstr[1] "Confirma o Apagamento dos Ficheiros"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:

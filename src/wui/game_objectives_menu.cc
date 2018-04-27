@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,9 +92,8 @@ void GameObjectivesMenu::selected(uint32_t const t) {
 	try {
 		objectivetext.force_new_renderer();
 		objectivetext.set_text(text);
-		log("Objectives: using NEW font renderer.\n");
 	} catch (const std::exception& e) {
-		log("Objectives: falling back to OLD font renderer:\n%s\n%s\n", text.c_str(), e.what());
+		log("Objectives: falling back to old font renderer:\n%s\n%s\n", text.c_str(), e.what());
 		objectivetext.force_new_renderer(false);
 		objectivetext.set_text(text);
 	}

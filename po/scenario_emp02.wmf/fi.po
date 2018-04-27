@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-10 07:34+0000\n"
-"PO-Revision-Date: 2018-03-14 18:08+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-15 17:47+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Puutalous"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:30
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr "Rakenna kolme puunhakkaajan mökkiä, puunistuttajan mökki ja saha."
+msgstr "Rakenna kolme puunhakkaajan mökkiä, metsänhoitajan mökki ja saha."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
@@ -191,7 +191,7 @@ msgid ""
 "On this island, we will start our new life. We will build up an outpost for "
 "our exile, which perhaps will become a new, beautiful home for every one of "
 "us."
-msgstr "Tällä saarella aloitamme uuden elämämme. Rakennamme rajalinnoituksen maanpaollemme, josta kasvaa kenties uusi, kaunis koti meille kaikille."
+msgstr "Tällä saarella aloitamme uuden elämämme. Rakennamme etuvartioaseman maanpaollemme, josta kasvaa kenties uusi, kaunis koti meille kaikille."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:118
 msgid "The Green Forests"

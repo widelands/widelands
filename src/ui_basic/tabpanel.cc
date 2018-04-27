@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -231,6 +231,9 @@ const TabPanel::TabList& TabPanel::tabs() {
 }
 
 bool TabPanel::remove_last_tab(const std::string& tabname) {
+	if (tabs_.empty()) {
+		return false;
+	}
 	if (tabs_.back()->get_name() == tabname) {
 		tabs_.pop_back();
 		if (active_ > tabs_.size() - 1) {

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"POT-Creation-Date: 2018-04-27 05:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -239,6 +239,10 @@ msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
+msgstr ""
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisian"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
@@ -604,7 +608,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/txts/tips/frisians.lua:8
-msgid "Always build a forester´s house, so you will not run out of logs."
+msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:6

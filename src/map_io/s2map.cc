@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1065,4 +1065,5 @@ void S2MapLoader::postload_set_port_spaces(const Widelands::World& world) {
 			log("SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
 		}
 	}
+	map_.recalculate_allows_seafaring();
 }

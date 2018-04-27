@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 19:39+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-15 15:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Hebrew (http://www.transifex.com/widelands/widelands/language/he/)\n"
 "MIME-Version: 1.0\n"
@@ -89,24 +89,8 @@ msgstr ""
 #. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
 #. TRANSLATORS: Lore helptext for a building
@@ -145,12 +129,6 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/tower/helptexts.lua:8
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:3
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:11
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:11
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:3
@@ -159,24 +137,14 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:11
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:8
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:3
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:6
-#: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:11
-#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:8
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:3
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:8
 #: ../../data/tribes/buildings/warehouses/frisians/port/helptexts.lua:3
@@ -197,9 +165,9 @@ msgstr ""
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16
 msgctxt "building"
 msgid ""
-"A building is being dismantled at this dismantlesite, returning some of the "
-"resources that were used during this building’s construction to your tribe’s"
-" stores."
+"A building is being dismantled at this dismantle site, returning some of the"
+" resources that were used during this building’s construction to your "
+"tribe’s stores."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -350,7 +318,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:16
 msgctxt "building"
 msgid "Hunts animals to produce meat."
 msgstr ""
@@ -541,7 +509,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/helptexts.lua:27
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
@@ -555,7 +523,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:23
@@ -1495,10 +1463,40 @@ msgid ""
 " nearby to use as fishing ponds."
 msgstr ""
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:6
+msgctxt "frisians_building"
+msgid ""
+"Naturally, I can still forge short and long swords, but it is beneath my "
+"honor to bother with such basic equipment now."
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
+msgctxt "frisians_building"
+msgid ""
+"A master blacksmith refusing to forge anything but the most sophisticated "
+"helmets and weapons"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:16
 msgctxt "building"
 msgid "Produces advanced weapons and golden helmets for your soldiers."
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:6
+msgctxt "frisians_building"
+msgid ""
+"I don’t forge swords because soldiers need ’em, but soldiers get ’em because"
+" I forge ’em."
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:11
+msgctxt "frisians_building"
+msgid "A blacksmith pointing out his influence on soldier training"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -1531,15 +1529,32 @@ msgctxt "frisians_building"
 msgid "The bakery needs %s to produce one loaf of bread."
 msgstr ""
 
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:3
+msgctxt "frisians_building"
+msgid ""
+"You have thirty seconds to learn the basics of swordfighting and how to stay"
+" alive in battle. A third of that time has gone by for the introduction "
+"alone! You’d better pay close attention to me in order to make the most of "
+"it. Now here is your new short sword, forged just for you by our best "
+"blacksmiths. Time’s up everyone, now go occupy your sentinels!"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:8
+msgctxt "frisians_building"
+msgid "A trainer greeting the new recruits"
+msgstr ""
+
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:13
 msgctxt "frisians_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks needs %s to recruit one soldier."
@@ -1980,13 +1995,13 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:21
 msgctxt "frisians_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
 msgid "The hunter pauses %s before going to work again."
@@ -2075,6 +2090,21 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The stonemason pauses %s before going to work again."
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:6
+msgctxt "frisians_building"
+msgid ""
+"Of course these weapons could be used by other soldiers again without being "
+"smelted down first! The only drawback is that they’d break in two at the "
+"first blow."
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:11
+msgctxt "frisians_building"
+msgid "A smelter explaining the need for recycling to his impatient chieftain"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2183,6 +2213,22 @@ msgctxt "frisians_building"
 msgid "The deep rock mine needs %s to produce three blocks of granite."
 msgstr ""
 
+#. TRANSLATORS: Lore helptext for a building. Reference to frequent
+#. discussions about good scouting algorithms
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:3
+msgctxt "frisians_building"
+msgid ""
+"Everyone has their own ideas on how exactly we should explore the enemy’s "
+"territory… One more ‘improvement’ suggestion and we’ll demand meals instead "
+"of rations!"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:8
+msgctxt "frisians_building"
+msgid "The spokesman of the scouts’ labor union"
+msgstr ""
+
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -2213,6 +2259,23 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The sewing room needs %s to produce one fur garment."
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building. "Yard" is a wordplay with the
+#. measurement unit
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:6
+msgctxt "frisians_building"
+msgid ""
+"This house may be called a shipyard, but my ships are rather longer than one"
+" yard!"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:11
+msgctxt "frisians_building"
+msgid ""
+"A shipwright who only constructed toy ships after being chid that his ships "
+"were too small"
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -2281,6 +2344,20 @@ msgctxt "frisians_building"
 msgid ""
 "The tavern can produce one ration in %s on average if the supply is steady; "
 "otherwise, it will take 50 percent longer."
+msgstr ""
+
+#. TRANSLATORS: Lore helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:3
+msgctxt "frisians_building"
+msgid ""
+"Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For "
+"ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!"
+msgstr ""
+
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:8
+msgctxt "frisians_building"
+msgid "A seamstress’s work song"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2850,264 +2927,231 @@ msgstr ""
 msgid "A ship is being constructed at this site."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:104
-#: ../../data/tribes/scripting/help/format_help.lua:188
+#: ../../data/tribes/scripting/help/building_help.lua:86
+#: ../../data/tribes/scripting/help/format_help.lua:232
 #, lua-format
 msgid "%s and"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:118
+#: ../../data/tribes/scripting/help/building_help.lua:100
 msgid "Food:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:168
+#: ../../data/tribes/scripting/help/building_help.lua:150
 msgid "Equipment:"
 msgstr ""
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../data/tribes/scripting/help/building_help.lua:191
+#: ../../data/tribes/scripting/help/building_help.lua:173
 msgid "Lore"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:212
+#: ../../data/tribes/scripting/help/building_help.lua:194
 #: ../../data/tribes/scripting/help/init.lua:59
 #: ../../data/tribes/scripting/help/tips.lua:49
 msgid "General"
 msgstr "גנרל"
 
-#: ../../data/tribes/scripting/help/building_help.lua:213
+#: ../../data/tribes/scripting/help/building_help.lua:195
 msgid "Purpose:"
 msgstr "מטרה:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:241
-#: ../../data/tribes/scripting/help/building_help.lua:482
+#: ../../data/tribes/scripting/help/building_help.lua:223
+#: ../../data/tribes/scripting/help/building_help.lua:456
 msgid "Note:"
 msgstr "הודעה:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:246
+#: ../../data/tribes/scripting/help/building_help.lua:228
 msgid "Work area radius:"
 msgstr "אזור עבודה"
 
-#: ../../data/tribes/scripting/help/building_help.lua:250
-#: ../../data/tribes/scripting/help/building_help.lua:255
+#: ../../data/tribes/scripting/help/building_help.lua:232
+#: ../../data/tribes/scripting/help/building_help.lua:237
 msgid "Healing:"
 msgstr "ריפוי:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:251
-#: ../../data/tribes/scripting/help/building_help.lua:256
+#: ../../data/tribes/scripting/help/building_help.lua:233
+#: ../../data/tribes/scripting/help/building_help.lua:238
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:252
-#: ../../data/tribes/scripting/help/building_help.lua:258
+#: ../../data/tribes/scripting/help/building_help.lua:234
+#: ../../data/tribes/scripting/help/building_help.lua:240
 msgid "Conquer range:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:257
-#: ../../data/tribes/scripting/help/building_help.lua:261
+#: ../../data/tribes/scripting/help/building_help.lua:239
+#: ../../data/tribes/scripting/help/building_help.lua:243
 msgid "Capacity:"
 msgstr "כמות:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:263
+#: ../../data/tribes/scripting/help/building_help.lua:245
 msgid "Vision range:"
 msgstr "טווח ראיה"
 
-#: ../../data/tribes/scripting/help/building_help.lua:288
+#: ../../data/tribes/scripting/help/building_help.lua:270
 msgid "%1$s from: %2$s"
 msgstr ""
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:295
+#: ../../data/tribes/scripting/help/building_help.lua:277
 msgid "Incoming:"
 msgstr "מגיע"
 
-#: ../../data/tribes/scripting/help/building_help.lua:299
+#: ../../data/tribes/scripting/help/building_help.lua:281
 msgid "Collects:"
 msgstr "אוסף:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:311
+#: ../../data/tribes/scripting/help/building_help.lua:293
 msgid "Mines:"
 msgstr "מכרות:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:331
+#: ../../data/tribes/scripting/help/building_help.lua:313
 msgid "Produces:"
 msgstr "מוצרים:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:373
+#: ../../data/tribes/scripting/help/building_help.lua:355
 msgid "Outgoing:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:375
+#: ../../data/tribes/scripting/help/building_help.lua:357
 msgid "None"
 msgstr "אף אחד"
 
-#: ../../data/tribes/scripting/help/building_help.lua:376
+#: ../../data/tribes/scripting/help/building_help.lua:358
 msgid "Dependencies"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:392
+#: ../../data/tribes/scripting/help/building_help.lua:374
 msgid "Health Training"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:393
+#: ../../data/tribes/scripting/help/building_help.lua:375
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:395
-#: ../../data/tribes/scripting/help/building_help.lua:409
-#: ../../data/tribes/scripting/help/building_help.lua:421
-#: ../../data/tribes/scripting/help/building_help.lua:434
+#: ../../data/tribes/scripting/help/building_help.lua:377
+#: ../../data/tribes/scripting/help/building_help.lua:391
+#: ../../data/tribes/scripting/help/building_help.lua:403
+#: ../../data/tribes/scripting/help/building_help.lua:416
 msgid "Soldiers:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:405
+#: ../../data/tribes/scripting/help/building_help.lua:387
 msgid "Attack Training"
 msgstr ""
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:407
+#: ../../data/tribes/scripting/help/building_help.lua:389
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:418
+#: ../../data/tribes/scripting/help/building_help.lua:400
 msgid "Defense Training"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:419
+#: ../../data/tribes/scripting/help/building_help.lua:401
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:431
+#: ../../data/tribes/scripting/help/building_help.lua:413
 msgid "Evade Training"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:432
+#: ../../data/tribes/scripting/help/building_help.lua:414
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr ""
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:459
+#: ../../data/tribes/scripting/help/building_help.lua:441
 msgid "Building"
 msgstr "בניין"
 
-#: ../../data/tribes/scripting/help/building_help.lua:463
-msgid "Mine plot"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/building_help.lua:463
-#: ../../data/tribes/scripting/help/building_help.lua:465
-#: ../../data/tribes/scripting/help/building_help.lua:468
-#: ../../data/tribes/scripting/help/building_help.lua:470
-#: ../../data/tribes/scripting/help/building_help.lua:472
-#: ../../data/tribes/scripting/help/building_help.lua:474
-msgid "Space required:"
-msgstr "מקום נדרש:"
-
-#: ../../data/tribes/scripting/help/building_help.lua:465
-msgid "Port plot"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/building_help.lua:468
-#: ../../data/tribes/scripting/help/immovable_help.lua:47
-msgid "Small plot"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/building_help.lua:470
-#: ../../data/tribes/scripting/help/immovable_help.lua:49
-msgid "Medium plot"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/building_help.lua:472
-#: ../../data/tribes/scripting/help/immovable_help.lua:51
-msgid "Big plot"
-msgstr ""
-
-#: ../../data/tribes/scripting/help/building_help.lua:474
-#: ../../data/tribes/scripting/help/building_help.lua:558
-#: ../../data/tribes/scripting/help/building_help.lua:607
-msgid "Unknown"
-msgstr "לא ידוע"
-
-#: ../../data/tribes/scripting/help/building_help.lua:483
+#: ../../data/tribes/scripting/help/building_help.lua:457
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:489
+#: ../../data/tribes/scripting/help/building_help.lua:463
 msgid "Direct build cost:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:491
-#: ../../data/tribes/scripting/help/immovable_help.lua:57
+#: ../../data/tribes/scripting/help/building_help.lua:465
+#: ../../data/tribes/scripting/help/immovable_help.lua:50
 msgid "Build cost:"
 msgstr "עלות בנייה:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:502
+#: ../../data/tribes/scripting/help/building_help.lua:476
 msgid "Or enhanced from:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:504
+#: ../../data/tribes/scripting/help/building_help.lua:478
 msgid "Enhanced from:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:513
+#: ../../data/tribes/scripting/help/building_help.lua:487
 msgid "Cumulative cost:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:563
+#: ../../data/tribes/scripting/help/building_help.lua:532
+#: ../../data/tribes/scripting/help/building_help.lua:581
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: ../../data/tribes/scripting/help/building_help.lua:537
 msgid "If built directly, dismantle yields:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:568
+#: ../../data/tribes/scripting/help/building_help.lua:542
 msgid "If enhanced, dismantle yields:"
 msgstr ""
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:571
-#: ../../data/tribes/scripting/help/building_help.lua:612
+#: ../../data/tribes/scripting/help/building_help.lua:545
+#: ../../data/tribes/scripting/help/building_help.lua:586
 msgid "Dismantle yields:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:621
+#: ../../data/tribes/scripting/help/building_help.lua:595
 msgid "Can be enhanced to:"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:651
+#: ../../data/tribes/scripting/help/building_help.lua:625
 msgid "Crew required:"
 msgstr "צוות דרוש:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:651
+#: ../../data/tribes/scripting/help/building_help.lua:625
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "עובדים"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:673
+#: ../../data/tribes/scripting/help/building_help.lua:647
 #, lua-format
 msgid "%s or better"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:684
+#: ../../data/tribes/scripting/help/building_help.lua:658
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:706
+#: ../../data/tribes/scripting/help/building_help.lua:680
 msgid "Production"
 msgstr "ייצור"
 
-#: ../../data/tribes/scripting/help/building_help.lua:707
+#: ../../data/tribes/scripting/help/building_help.lua:681
 msgid "Performance:"
 msgstr ""
 
@@ -3472,38 +3516,68 @@ msgctxt "hotkey"
 msgid "Delete"
 msgstr ""
 
+#. TRANSLATORS: Space on the map required for building a building there
+#: ../../data/tribes/scripting/help/format_help.lua:54
+msgid "Mine plot"
+msgstr ""
+
+#. TRANSLATORS: Space on the map required for building a building there
+#: ../../data/tribes/scripting/help/format_help.lua:58
+msgid "Port plot"
+msgstr ""
+
+#. TRANSLATORS: Space on the map required for building a building there
+#: ../../data/tribes/scripting/help/format_help.lua:62
+msgid "Small plot"
+msgstr ""
+
+#. TRANSLATORS: Space on the map required for building a building there
+#: ../../data/tribes/scripting/help/format_help.lua:66
+msgid "Medium plot"
+msgstr ""
+
+#. TRANSLATORS: Space on the map required for building a building there
+#: ../../data/tribes/scripting/help/format_help.lua:70
+msgid "Big plot"
+msgstr ""
+
+#. TRANSLATORS: Space on the map required for building a building there
+#: ../../data/tribes/scripting/help/format_help.lua:80
+msgid "Space required:"
+msgstr "מקום נדרש:"
+
 #. TRANSLATORS: %1$d is a number, %2$s the name of a ware, e.g. 12x Stone
-#: ../../data/tribes/scripting/help/format_help.lua:89
-#: ../../data/tribes/scripting/help/format_help.lua:180
+#: ../../data/tribes/scripting/help/format_help.lua:133
+#: ../../data/tribes/scripting/help/format_help.lua:224
 msgid "%1$dx %2$s"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/format_help.lua:103
+#: ../../data/tribes/scripting/help/format_help.lua:147
 msgid "Experience levels"
 msgstr ""
 
 #. TRANSLATORS: EP = Experience Points
-#: ../../data/tribes/scripting/help/format_help.lua:105
-#: ../../data/tribes/scripting/help/format_help.lua:115
+#: ../../data/tribes/scripting/help/format_help.lua:149
+#: ../../data/tribes/scripting/help/format_help.lua:159
 #, lua-format
 msgid "%s to %s (%s EP)"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares and workers consumed by
 #. a productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:215
+#: ../../data/tribes/scripting/help/format_help.lua:259
 msgid "Wares and workers consumed:"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for workers consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:218
+#: ../../data/tribes/scripting/help/format_help.lua:262
 msgid "Workers consumed:"
 msgstr ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for wares consumed by a
 #. productionsite
-#: ../../data/tribes/scripting/help/format_help.lua:222
+#: ../../data/tribes/scripting/help/format_help.lua:266
 msgid "Wares consumed:"
 msgstr ""
 
@@ -3530,17 +3604,11 @@ msgstr ""
 msgid "%1% and %2%"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:47
-#: ../../data/tribes/scripting/help/immovable_help.lua:49
-#: ../../data/tribes/scripting/help/immovable_help.lua:51
-msgid "Space required: "
-msgstr ""
-
-#: ../../data/tribes/scripting/help/immovable_help.lua:55
+#: ../../data/tribes/scripting/help/immovable_help.lua:48
 msgid "Requirements"
 msgstr ""
 
-#: ../../data/tribes/scripting/help/immovable_help.lua:66
+#: ../../data/tribes/scripting/help/immovable_help.lua:59
 msgid "Preferred Terrains"
 msgstr ""
 
@@ -5401,8 +5469,8 @@ msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
+#. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #: ../../data/tribes/workers/barbarians/blacksmith/helptexts.lua:3
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"

@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 19:39+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-15 17:36+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,40 +55,44 @@ msgid ""
 "webpage: %s"
 msgstr "Löydät lisätietoa vapaista FOSS ohjelmistoista ja GPL-lisenssistä osoitteesta: %s"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Sieltä löydät linsenssitekstin sekä muuta tietoa vapaista ohjelmistoista."
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "GPL-lisenssiteksti löytyy myös Widelands-paketista."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Linux-käyttöjärjerstelmässä teksti löytyy COPYING -nimisestä tiedostosta, joka puolestaan löytyy asennuspuun juurihakemistosta (usein ‘%1%’)."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Windows-käyttöjärjestelmässä lisenssi löytyy COPYING.txt -nimisestä tiedostosta. Asennushakemiston löydät Widelands Start -valikon avulla."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "MacOS:n alla lisenssiteksti löytyy COPYING -nimisestä tiedostosta, joka löytyy veppisivulta lataamastasi asennuspaketista."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:22
+msgid "This game comes as-is and without any warranty."
+msgstr "Tämä peli tulee sellaisena kuin se on ja ilman minkäänlaista takuuta."
+
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Tämä peli tulee sellaisena kuin se on ja ilman minkäänlaista takuuta. Lisätietoja ja tukea voit etsiä osoitteista %1% (Kotisivut, Wiki, Foorumi kysymyksille tai yleistuki), %2% (Virheraportointi), ja %3% (Kielikäännökset)."
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr "Lisätietoa ja tukea voit etsiä ja saada osoitteesta %1% (Kotisivut, Wiki, Keskustelupalsta kysymyksille tai yleiselle tuelle), %2% (Bugiraportointijärjestelmä), ja %3% (Käännökset)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -244,6 +248,10 @@ msgstr "Entiset vanhimmat"
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
 msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisian"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -611,8 +619,8 @@ msgid ""
 msgstr ""
 
 #: ../../data/txts/tips/frisians.lua:8
-msgid "Always build a forester´s house, so you will not run out of logs."
-msgstr ""
+msgid "Always build a forester’s house, so you will not run out of logs."
+msgstr "Rakenna aina metsänhoitajan mökki, jottei taloutesi tukehtuisi tukkipulaan."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

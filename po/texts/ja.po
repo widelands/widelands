@@ -3,13 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# tamanegi, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 19:39+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-26 13:28+0000\n"
+"Last-Translator: tamanegi\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../data/txts/AUTHORS.lua:27
 msgid "Developers"
-msgstr ""
+msgstr "開発者"
 
 #: ../../data/txts/AUTHORS.lua:29
 msgid "Widelands Development Team"
@@ -35,59 +36,63 @@ msgstr "Widelandsのライセンス情報"
 
 #: ../../data/txts/LICENSE.lua:9
 msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2018 by the Widelands Development Team."
 
 #: ../../data/txts/LICENSE.lua:11
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "このゲームはフリーかつオープンソース（FOSS）であり、\nGNU一般公衆利用許諾契約書（GPL）V2.0の下でライセンスされています。"
+msgstr "このゲームはフリーかつオープンソース（FOSS）であり、GNU一般公衆利用許諾契約書（GPL）V2.0の下でライセンスされています。"
 
 #: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr ""
+msgstr "FOSSやGPLに関する詳しい情報は次のウェブページで確認することができます: %s"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
-msgstr "あなたはそこにライセンスの全文だけでなく、\nその理念や法的意味についての詳しい情報を見つけることができます。"
-
-#: ../../data/txts/LICENSE.lua:16
-msgid "We are also shipping the GPL as a text document with Widelands itself."
-msgstr "わたしたちはWidelandsと共に、\nテキスト文書としてGPL文書も添付しています。"
+msgstr "そこではライセンスの全文はもちろんのこと、その理念や法的意味についての詳しい情報を見つけることもできます。"
 
 #: ../../data/txts/LICENSE.lua:17
-msgid ""
-"On Linux, you can find the file called COPYING in the root of the source or "
-"standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr ""
+msgid "We are also shipping the GPL as a text document with Widelands itself."
+msgstr "わたしたちはWidelands本体にテキスト文書としてGPL文書も添付しています。"
 
 #: ../../data/txts/LICENSE.lua:18
 msgid ""
-"On Windows, you can find the file called COPYING.txt in the installation "
-"folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "Windowsでは、\nインストールフォルダに\nCOPYING.TXTという名前のファイルを\n見つけることができますし、\nスタートメニューのWidelandsの項目に\nこのファイルへのリンクを提供しています。<br>"
+"On Linux, you can find the file called COPYING in the root of the source or "
+"standalone binary package, or in the installation directory (like ‘%1%’)."
+msgstr "Linuxでは、スタンドアローンのバイナリパッケージの最上位ディレクトリ、もしくはインストール先のディレクトリ（例えば %1%）にCOPYINGというファイルを見つけることができるでしょう。"
 
 #: ../../data/txts/LICENSE.lua:19
 msgid ""
+"On Windows, you can find the file called COPYING.txt in the installation "
+"folder, and the Widelands Start menu entry provides a link to this file."
+msgstr "Windowsでは、インストールフォルダにCOPYING.txtという名前のファイルを見つけることができますし、スタートメニューのWidelandsの項目でもこのファイルへのリンクを提示しています。"
+
+#: ../../data/txts/LICENSE.lua:20
+msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
-msgstr "MacOSでは、\nあなたはウェブサイトからダウンロードしたアーカイブに\nCOPYINGという名前のファイルを見つけることができます。"
+msgstr "MacOSでは、ウェブサイトからダウンロードしたアーカイブの中にCOPYINGという名前のファイルを見つけることができます。"
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:22
+msgid "This game comes as-is and without any warranty."
+msgstr "このゲームは現状のまま提供され、一切の保証を伴いません。"
+
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr ""
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr "さらなる情報やサポートを望まれるならば、%1% (質問や一般的なサポートのためのウェブサイト、Wiki、フォーラム)、%2% (バグトラッカー)、%3% (翻訳) をごらんください。\n(この日本語訳は参考訳です。ライセンスについての正確な情報は原文をご参照ください。)"
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
-msgstr ""
+msgstr "Readme"
 
 #: ../../data/txts/README.lua:9
 msgid "an open source strategy game"
@@ -101,11 +106,11 @@ msgstr "Widelandsプロジェクトのホームページを確認してくださ
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more "
 "information, see the file ‘COPYING’."
-msgstr ""
+msgstr "WidelandsはGNU一般公衆利用許諾契約書（GPL）でライセンスされています。詳細については付属の「COPYING」ファイルをご覧ください。"
 
 #: ../../data/txts/README.lua:13
 msgid "Status"
-msgstr "現状"
+msgstr "開発状況"
 
 #: ../../data/txts/README.lua:14
 msgid ""
@@ -114,23 +119,23 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr ""
+msgstr "Widelandsの基本的機能についてはほぼ実装が完了しており (feature complete)、シングルプレイで楽しく遊ぶことはもちろんですが、多人数でのプレイも充分に楽しむことができます。それでもまだあらゆる面でやるべきことが残っています。もしあなたに開発に貢献する意志があるのなら、どうぞ我々のホームページを訪れてください。画像の作成、バグ修正、新たな機能の追加、あなたの知る言語への翻訳、新しいマップの作成、といった様々な面であなたの力が必要です。"
 
 #: ../../data/txts/README.lua:16
 msgid "Widelands Help"
-msgstr ""
+msgstr "Widelandsヘルプ"
 
 #. TRANSLATORS: %1% is a key on the keyboard
 #: ../../data/txts/README.lua:18
 msgid ""
 "You can find help about gameplay or the editor by using the help button on "
 "the bottom menu, or by pressing %1%."
-msgstr ""
+msgstr "ゲームやエディタに関するヘルプは下部メニューのヘルプボタンか、キーボードの %1% を打つことで参照できます。"
 
 #. TRANSLATORS: This is a key on the keyboard
 #: ../../data/txts/README.lua:20
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
 #: ../../data/txts/README.lua:23
 msgid "Reporting Bugs"
@@ -142,47 +147,47 @@ msgstr "バグが発生した場合は、バグトラッカーに報告してく
 
 #: ../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
-msgstr "どうか十分なバックグラウンド情報を提供してください。内容は、"
+msgstr "報告の際には以下にあげるような情報の提供もお願いします。"
 
 #: ../../data/txts/README.lua:28
 msgid "Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "バグを再現するための手順の詳細説明 (可能であれば)"
 
 #: ../../data/txts/README.lua:29
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "その操作をしたときにあなたが予想した結果と、実際に起こったこと"
 
 #: ../../data/txts/README.lua:30
 msgid ""
 "Which version of Widelands you are running (i.e. either the build number or "
 "the revision number if you are running a development version or a daily "
 "build.)"
-msgstr ""
+msgstr "あなたが遊んでいたWidelandsのバージョン (ビルド番号、開発版の場合ならばリビジョン番号)"
 
 #: ../../data/txts/README.lua:31
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr ""
+msgstr "OS特有のエラーである可能性もあるので、Widelandsを実行したOSについても記述をお願いします"
 
 #: ../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "バグが起こったときにプレイしていたマップの情報"
 
 #: ../../data/txts/README.lua:33
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr ""
+msgstr "もし、何かが表示されるはずだったのに表示されなかった、あるいはデモを見せることが何らかの役にたちそうな場合は、一つ以上のスクリーンショットを含めてください"
 
 #: ../../data/txts/README.lua:34
 msgid ""
 "If you have a save game or replay demonstrating the issue (for instance "
 "crashes where it can be hard to tell exactly what is triggering it), please "
 "include that too. For more information, see the section on Replays below."
-msgstr ""
+msgstr "もしゲームのセーブファイルや問題を含むリプレイがあるのなら、それも含めてください (例えばクラッシュしたものの、その原因が特定できないとき等)。この項に関する詳細な情報については下のリプレイセクションをご参照ください"
 
 #: ../../data/txts/TRANSLATORS.lua:24
 msgid "Translators"
@@ -190,7 +195,7 @@ msgstr "翻訳者"
 
 #: ../../data/txts/TRANSLATORS.lua:26
 msgid "Widelands Translators"
-msgstr ""
+msgstr "Widelands翻訳者"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlantean"
@@ -198,7 +203,7 @@ msgstr "アトランティス"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarian"
-msgstr "バーバリアン"
+msgstr "野蛮人"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -206,7 +211,7 @@ msgstr "キャンペーン"
 
 #: ../../data/txts/developers.lua:3
 msgid "Chieftains"
-msgstr ""
+msgstr "首領"
 
 #: ../../data/txts/developers.lua:3
 msgid "Coders"
@@ -214,7 +219,7 @@ msgstr "コーダー"
 
 #: ../../data/txts/developers.lua:3
 msgid "Debian Linux"
-msgstr ""
+msgstr "Debian Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Documentation, Help and Wiki"
@@ -230,15 +235,19 @@ msgstr "帝国"
 
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
-msgstr ""
+msgstr "Fedora Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
-msgstr ""
+msgstr "元長老"
 
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
-msgstr ""
+msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisian"
+msgstr "フリジア"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -258,11 +267,11 @@ msgstr "ホームページコーダー"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mac OS X"
-msgstr ""
+msgstr "Mac OS X"
 
 #: ../../data/txts/developers.lua:3
 msgid "Mandriva Linux"
-msgstr ""
+msgstr "Mandriva Linux"
 
 #: ../../data/txts/developers.lua:3
 msgid "Maps and Missions"
@@ -298,11 +307,11 @@ msgstr "翻訳"
 
 #: ../../data/txts/developers.lua:3
 msgid "Windows"
-msgstr ""
+msgstr "Windows"
 
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
-msgstr ""
+msgstr "ZetaOS"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
@@ -314,7 +323,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr ""
+msgstr "WidelandsやWidelandsエディタに関するさらなる情報が必要ならば、我々のホームページ %s を見てください。そこにある我々のwikiにオンラインヘルプがあります。"
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
@@ -606,7 +615,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/txts/tips/frisians.lua:8
-msgid "Always build a forester´s house, so you will not run out of logs."
+msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:6
