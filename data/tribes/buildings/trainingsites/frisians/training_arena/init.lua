@@ -10,18 +10,18 @@ tribes:new_trainingsite_type {
    size = "big",
 
    buildcost = {
-      brick = 6,
+      brick = 7,
       granite = 3,
       log = 4,
       gold = 3,
-      thatch_reed = 6
+      thatch_reed = 3
    },
    return_on_dismantle = {
       brick = 3,
       granite = 2,
       log = 2,
       gold = 1,
-      thatch_reed = 3
+      thatch_reed = 1
    },
 
    animations = {
@@ -57,8 +57,8 @@ tribes:new_trainingsite_type {
       { name = "mead", amount = 8 },
       { name = "honey_bread", amount = 8 },
       { name = "sword_long", amount = 4 },
-      { name = "sword_curved", amount = 4 },
-      { name = "sword_double", amount = 4 },
+      { name = "sword_curved", amount = 3 },
+      { name = "sword_double", amount = 3 },
       { name = "helmet_golden", amount = 2 },
       { name = "fur_garment_golden", amount = 2 },
    },
@@ -122,9 +122,9 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 3",
             "animate=working 22800",
             "check_soldier=soldier attack 3", -- Because the soldier can be expelled by the player
-            "consume=sword_long:2 honey_bread mead:2 smoked_fish,smoked_meat",
+            "consume=sword_long honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 3 4",
-            "produce=scrap_metal_mixed:2"
+            "produce=scrap_iron"
          }
       },
       upgrade_soldier_attack_4 = {
@@ -134,9 +134,9 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 4",
             "animate=working 15600",
             "check_soldier=soldier attack 4", -- Because the soldier can be expelled by the player
-            "consume=sword_curved:2 honey_bread mead:2 smoked_fish,smoked_meat",
+            "consume=sword_curved honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 4 5",
-            "produce=scrap_iron:4"
+            "produce=scrap_iron scrap_metal_mixed"
          }
       },
       upgrade_soldier_attack_5 = {
@@ -146,9 +146,9 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 5",
             "animate=working 15600",
             "check_soldier=soldier attack 5", -- Because the soldier can be expelled by the player
-            "consume=sword_double:2 honey_bread mead:2 smoked_fish,smoked_meat",
+            "consume=sword_double honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 5 6",
-            "produce=scrap_iron:2 scrap_metal_mixed:2"
+            "produce=scrap_iron scrap_metal_mixed"
          }
       },
       upgrade_soldier_defense_1 = {

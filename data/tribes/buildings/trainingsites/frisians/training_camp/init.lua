@@ -10,18 +10,18 @@ tribes:new_trainingsite_type {
    size = "medium",
 
    buildcost = {
-      brick = 4,
+      brick = 6,
       granite = 3,
       log = 3,
       gold = 1,
-      thatch_reed = 4
+      thatch_reed = 2
    },
    return_on_dismantle = {
-      brick = 2,
+      brick = 3,
       granite = 1,
       log = 1,
       gold = 1,
-      thatch_reed = 2
+      thatch_reed = 1
    },
 
    animations = {
@@ -138,7 +138,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 1",
             "consume=sword_curved bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 1 2",
-            "produce=scrap_iron:2"
+            "produce=scrap_iron scrap_metal_mixed"
          }
       },
       upgrade_soldier_attack_2 = {

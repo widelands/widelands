@@ -11,7 +11,6 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 1,
-      granite = 1,
       log = 1,
       thatch_reed = 1
    },

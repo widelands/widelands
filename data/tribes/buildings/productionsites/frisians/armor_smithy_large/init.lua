@@ -10,15 +10,14 @@ tribes:new_productionsite_type {
    size = "medium",
 
    enhancement_cost = {
-      brick = 3,
+      brick = 4,
       granite = 2,
       log = 1,
-      thatch_reed = 3
+      thatch_reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 2,
-      granite = 1,
-      thatch_reed = 1
+      granite = 1
    },
 
    animations = {
@@ -86,7 +85,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs sword_double",
             "sleep=64000",
-            "consume=coal:2 iron:2 gold:2",
+            "consume=coal:2 iron:2 gold:1",
             "animate=working 51000",
             "produce=sword_double"
          },
