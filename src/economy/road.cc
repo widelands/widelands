@@ -598,7 +598,7 @@ uint32_t const gametime = game.get_gametime();
           }
           if (wallet_ > max_wallet) wallet_ = max_wallet;
         }
-        printf ("wallet_: %5d, carriers: %d, gametime: %d, last_wallet_check_: %d, current_wares: %d, nsteps: %lu\n",
+        log ("wallet_: %5d, carriers: %d, gametime: %d, last_wallet_check_: %d, current_wares: %d, nsteps: %lu\n",
 		wallet_, carriers_count,
 		gametime, last_wallet_check_old_, flags_[flagid]->current_wares(), path_.get_nsteps());
         return true;
