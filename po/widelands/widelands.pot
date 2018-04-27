@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"POT-Creation-Date: 2018-04-27 05:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -2736,12 +2736,12 @@ msgid "Distance for windows to snap to borders:"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:165
-#: ../../src/wui/game_options_sound_menu.cc:28
+#: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Enable music"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:166
-#: ../../src/wui/game_options_sound_menu.cc:31
+#: ../../src/wui/game_options_sound_menu.cc:32
 msgid "Enable sound effects"
 msgstr ""
 
@@ -2799,32 +2799,37 @@ msgstr ""
 msgid "Saving"
 msgstr ""
 
+#: ../../src/ui_fsmenu/options.cc:264
+#: ../../src/wui/game_options_sound_menu.cc:85
+msgid "Sound is disabled due to a problem with the sound driver"
+msgstr ""
+
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:282
+#: ../../src/ui_fsmenu/options.cc:289
 msgid "Off"
 msgstr ""
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:308 ../../src/ui_fsmenu/options.cc:317
+#: ../../src/ui_fsmenu/options.cc:315 ../../src/ui_fsmenu/options.cc:324
 msgid "%1% x %2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:429
 msgid "Try system language"
 msgstr ""
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:520
+#: ../../src/ui_fsmenu/options.cc:528
 #, c-format
 msgid "The translation into %s is complete."
 msgstr ""
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:523
+#: ../../src/ui_fsmenu/options.cc:531
 msgid "The translation into %1% is %2%%% complete."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:537
+#: ../../src/ui_fsmenu/options.cc:545
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr ""
@@ -3385,7 +3390,7 @@ msgid "Are you sure you wish to exit this game?"
 msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:77
-#: ../../src/wui/game_options_sound_menu.cc:27
+#: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
 msgstr ""
 
@@ -3399,11 +3404,11 @@ msgstr ""
 msgid "Exit Game"
 msgstr ""
 
-#: ../../src/wui/game_options_sound_menu.cc:35
+#: ../../src/wui/game_options_sound_menu.cc:36
 msgid "Music volume"
 msgstr ""
 
-#: ../../src/wui/game_options_sound_menu.cc:50
+#: ../../src/wui/game_options_sound_menu.cc:51
 msgid "Sound effects volume"
 msgstr ""
 
