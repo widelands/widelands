@@ -605,10 +605,10 @@ void Road::pay_for_road(Game& game, uint8_t wares_count) {
   const int16_t max_wallet  = 2.5 * animal_price;
   const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
 
-log ("wallet: %d, carriers: %d, wares: %d, steps: %lu\n",
+log ("wallet: %d, carriers: %d, queue: %d, steps: %lu\n",
      wallet_, carriers_count, wares_count, path_.get_nsteps());
 
-  wallet_ += 2 * (carriers_count + 1) * (4 * (wares_count - 1) + path_.get_nsteps());
+  wallet_ += 2 * (carriers_count + 1) * (4 * queue_length + path_.get_nsteps());
   this->charge_wallet(game);
   if (type_ == RoadType::kNormal && wallet_ > 1.5 * animal_price) {
     // Promote the road.

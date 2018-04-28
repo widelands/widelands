@@ -281,11 +281,11 @@ void Carrier::drop_ware(Game& game, State& state) {
 	WareInstance* other = nullptr;
 	Road& road = dynamic_cast<Road&>(*get_location(game));
 	Flag& flag = road.get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
+	Flag& otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1));
 
 	if (promised_pickup_to_ == (state.ivar1 ^ 1)) {
 		// If there's a ware we acked, we can drop ours even if the flag is
 		// flooded
-		Flag& otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1));
 		other = flag.fetch_pending_ware(game, otherflag);
 
 
@@ -309,7 +309,6 @@ void Carrier::drop_ware(Game& game, State& state) {
 	// Pick up new load, if any
 	if (other) {
 	// pay before getting the ware, while checking for road promotion
-	Flag& otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1)); // Added by Tibor, is it OK?
 	road.pay_for_road(game, flag.count_wares_in_queue(game, otherflag));
 	set_carried_ware(game, other);
 
