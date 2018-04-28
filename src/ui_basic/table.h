@@ -151,7 +151,7 @@ public:
 			return clr;
 		}
 
-	private:
+    private:
 		friend class Table<void*>;
 		void* entry_;
 		bool use_clr;
@@ -190,8 +190,6 @@ public:
 
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
-
-	void layout() override;
 
 	void clear();
 	void set_sort_column(uint8_t const col) {
@@ -276,6 +274,8 @@ public:
 	/// Adjust the desired size to fit the height needed for the number of entries.
 	/// If entries == 0, the current entries are used.
 	void fit_height(uint32_t entries = 0);
+
+    void layout() override;
 
 	// Drawing and event handling
 	void draw(RenderTarget&) override;

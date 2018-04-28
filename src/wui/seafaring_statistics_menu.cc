@@ -573,5 +573,8 @@ void SeafaringStatisticsMenu::fill_table() {
             // This will take care of the button state too
 			table_.select(0);
 		}
-	}
+    } else {
+        // Fix column width. Because no entries were added, the table didn't layout itself
+        table_.layout();
+    }
 }
