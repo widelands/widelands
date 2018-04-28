@@ -195,6 +195,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 			   case Widelands::NoteShip::Action::kDestinationChanged:
 			   case Widelands::NoteShip::Action::kWaitingForCommand:
 			   case Widelands::NoteShip::Action::kGained:
+                   assert(note.ship != nullptr);
 				   update_ship(*note.ship);
 				   break;
 			   case Widelands::NoteShip::Action::kLost:
@@ -261,9 +262,6 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 
 const SeafaringStatisticsMenu::ShipInfo*
 SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
-	if (&ship == nullptr) {
-		return new ShipInfo();
-	}
 	const Widelands::Ship::ShipStates state = ship.get_ship_state();
 	ShipFilterStatus status = ShipFilterStatus::kAll;
 	switch (state) {
@@ -548,6 +546,7 @@ void SeafaringStatisticsMenu::fill_table() {
 	update_button_states();
 	for (const auto& serial : iplayer().player().ships()) {
 		Widelands::Ship* ship = serial_to_ship(serial);
+        assert(ship != nullptr);
 		assert(iplayer().get_player() == ship->get_owner());
 		const ShipInfo* info = create_shipinfo(*ship);
 		if (info->status != ShipFilterStatus::kAll) {

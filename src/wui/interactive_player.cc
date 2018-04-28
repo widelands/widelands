@@ -459,14 +459,16 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				main_windows_.building_stats.toggle();
 			}
 			return true;
-// NOCOM deactivate for seafaring maps
+
 		case SDLK_e:
-			if (main_windows_.seafaring_stats.window == nullptr) {
-				new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
-			} else {
-				main_windows_.seafaring_stats.toggle();
-			}
-			return true;
+            if (game().map().allows_seafaring()) {
+                if (main_windows_.seafaring_stats.window == nullptr) {
+                    new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
+                } else {
+                    main_windows_.seafaring_stats.toggle();
+                }
+            }
+            return true;
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
