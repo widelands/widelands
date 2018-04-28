@@ -309,7 +309,8 @@ void Carrier::drop_ware(Game& game, State& state) {
 	// Pick up new load, if any
 	if (other) {
 	// pay before getting the ware, while checking for road promotion
-	road.pay_for_road(game, flag.count_wares_in_queue(game, other));
+	Flag& otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1)); // Added by Tibor, is it OK?
+	road.pay_for_road(game, flag.count_wares_in_queue(game, otherflag));
 	set_carried_ware(game, other);
 
 
