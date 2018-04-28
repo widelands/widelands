@@ -265,7 +265,7 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 	return g_gr->images().get(filename);
 }
 
-const SeafaringStatisticsMenu::ShipInfo*
+std::unique_ptr<const SeafaringStatisticsMenu::ShipInfo>
 SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	const Widelands::Ship::ShipStates state = ship.get_ship_state();
 	ShipFilterStatus status = ShipFilterStatus::kAll;
@@ -293,7 +293,7 @@ SeafaringStatisticsMenu::create_shipinfo(const Widelands::Ship& ship) const {
 	case Widelands::Ship::ShipStates::kSinkAnimation:
 		status = ShipFilterStatus::kAll;
 	}
-	return new ShipInfo(ship.get_shipname(), status, ship.serial());
+	return std::unique_ptr<const ShipInfo>(new ShipInfo(ship.get_shipname(), status, ship.serial()));
 }
 
 void SeafaringStatisticsMenu::set_entry_record(UI::Table<uintptr_t>::EntryRecord* er,
@@ -313,7 +313,7 @@ Widelands::Ship* SeafaringStatisticsMenu::serial_to_ship(Widelands::Serial seria
 
 void SeafaringStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 	assert(iplayer().get_player() == ship.get_owner());
-	const ShipInfo* info = create_shipinfo(ship);
+	std::unique_ptr<const ShipInfo> info = create_shipinfo(ship);
 	// Remove ships that don't satisfy the filter
 	if (ship_filter_ != ShipFilterStatus::kAll && !satisfies_filter(*info, ship_filter_)) {
 		remove_ship(info->serial);
@@ -324,15 +324,15 @@ void SeafaringStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 		const ShipInfo* old_info = data_[info->serial].get();
 		if (info->status != old_info->status) {
 			// The status has changed - we need an update
-			data_[info->serial] = std::unique_ptr<const ShipInfo>(info);
 			UI::Table<uintptr_t>::EntryRecord* er = table_.find(info->serial);
 			set_entry_record(er, *info);
+			data_[info->serial] = std::move(info);
 		}
 	} else {
 		// This is a new ship or it was filtered away before
-		data_.insert(std::make_pair(info->serial, std::unique_ptr<const ShipInfo>(info)));
 		UI::Table<uintptr_t>::EntryRecord& er = table_.add(info->serial);
 		set_entry_record(&er, *info);
+		data_.insert(std::make_pair(info->serial, std::move(info)));
 	}
 	table_.sort();
 	update_button_states();
@@ -556,13 +556,13 @@ void SeafaringStatisticsMenu::fill_table() {
 		Widelands::Ship* ship = serial_to_ship(serial);
         assert(ship != nullptr);
 		assert(iplayer().get_player() == ship->get_owner());
-		const ShipInfo* info = create_shipinfo(*ship);
+		std::unique_ptr<const ShipInfo> info = create_shipinfo(*ship);
 		if (info->status != ShipFilterStatus::kAll) {
 			if (ship_filter_ == ShipFilterStatus::kAll || satisfies_filter(*info, ship_filter_)) {
-				data_.insert(std::make_pair(serial, std::unique_ptr<const ShipInfo>(info)));
 				UI::Table<uintptr_t const>::EntryRecord& er =
 				   table_.add(serial, serial == last_selection);
 				set_entry_record(&er, *info);
+				data_.insert(std::make_pair(serial, std::move(info)));
 			}
 		}
 	}
