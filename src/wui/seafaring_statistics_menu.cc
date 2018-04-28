@@ -535,7 +535,7 @@ void SeafaringStatisticsMenu::set_filter_ships_tooltips() {
 	portspace_btn_.set_tooltip(
 	   (boost::format(_("%1% (Hotkey: %2%)"))
 	    /** TRANSLATORS: Tooltip in the messages window */
-	    % _("Show colonizing expeditions and expeditions with port space found") %
+	    % _("Show expeditions that have found a port space or are founding a colony") %
 	    pgettext("hotkey", "Alt + 5"))
 	      .str());
 }

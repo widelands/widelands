@@ -119,7 +119,7 @@ return {
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(pgettext("hotkey", "Alt + 4")), _"Show scouting expeditions") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 5")), _"Show expeditions with port space found or building a port") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Alt + 5")), _"Show expeditions that have found a port space or are founding a colony") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("G"), _"Center the map on the selected ship") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
