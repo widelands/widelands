@@ -243,21 +243,21 @@ bool InteractiveGameBase::try_show_ship_window() {
 	const Widelands::Map& map = game().map();
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
 
-	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM))
+    if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM)) {
 		return false;
+    }
 
 	std::vector<Widelands::Bob*> ships;
-	if (!map.find_bobs(area, &ships, Widelands::FindBobShip()))
-		return false;
-
-	for (Widelands::Bob* temp_ship : ships) {
-		if (upcast(Widelands::Ship, ship, temp_ship)) {
-			if (can_see(ship->get_owner()->player_number())) {
-				show_ship_window(ship);
-				return true;
-			}
-		}
-	}
+    if (map.find_bobs(area, &ships, Widelands::FindBobShip())) {
+        for (Widelands::Bob* ship : ships) {
+            if (can_see(ship->owner().player_number())) {
+                // FindBobShip should have returned only ships
+                assert(ship->descr().type() == Widelands::MapObjectType::SHIP);
+                show_ship_window(dynamic_cast<Widelands::Ship*>(ship));
+                return true;
+            }
+        }
+    }
 	return false;
 }
 
