@@ -555,7 +555,7 @@ void Table<void*>::remove(const uint32_t i) {
  * Remove the given table entry if it exists.
  */
 void Table<void*>::remove_entry(const void* const entry) {
-    // find() is iterating over the table entries as well. Skip the find() call and iterate immediately? Not sure whether that is really more efficient on average since I don't know about possible speed differences between for-each and for(int).
+    // NOCOM find() is iterating over the table entries as well. Skip the find() call and iterate immediately? Not sure whether that is really more efficient on average since I don't know about possible speed differences between for-each and for(int).
 	EntryRecord* er = find(entry);
 	if (er != nullptr) {
 		for (uint32_t i = 0; i < entry_records_.size(); ++i) {
