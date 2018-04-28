@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-03-30 07:07+0000\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-15 15:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -67,31 +67,25 @@ msgstr "유물 강탈"
 msgid "Your team stole an artifact from an enemy."
 msgstr "당신의 팀이 적에게서 유물을 탈취했습니다."
 
-#. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
-#. "Steve, Robert, David"
-#: ../../data/scripting/win_conditions/artifacts.lua:143
-msgid ", "
-msgstr ","
-
-#: ../../data/scripting/win_conditions/artifacts.lua:150
+#: ../../data/scripting/win_conditions/artifacts.lua:145
 msgid "Overview:"
 msgstr "총계:"
 
-#: ../../data/scripting/win_conditions/artifacts.lua:153
-#: ../../data/scripting/win_conditions/artifacts.lua:166
+#: ../../data/scripting/win_conditions/artifacts.lua:148
+#: ../../data/scripting/win_conditions/artifacts.lua:161
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
 msgstr[0] "%i 유물"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:155
+#: ../../data/scripting/win_conditions/artifacts.lua:150
 msgid "%1$s owns %2$s."
 msgstr "%1$s 이 %2$s 을 소유합니다."
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:168
+#: ../../data/scripting/win_conditions/artifacts.lua:163
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr "팀 %1$i (%2$s) 이 %3$s 을 소유합니다."
 
