@@ -96,6 +96,9 @@ void Carrier::road_update(Game& game, State& state) {
 
 	Road& road = dynamic_cast<Road&>(*get_location(game));
 
+	// subtract maintenance cost and check for road demotion
+	road.charge_wallet(game);
+
 	// Move into idle position if necessary
 	if (start_task_movepath(game, road.get_path(), road.get_idle_index(),
 	                        descr().get_right_walk_anims(does_carry_ware())))
@@ -124,7 +127,7 @@ void Carrier::road_pop(Game& game, State& /* state */) {
 }
 
 /**
- * Fetch an ware from a flag, drop it on the other flag.
+ * Fetch a ware from a flag, drop it on the other flag.
  * ivar1 is the flag we fetch from, or -1 when we're in the target building.
  *
  * Signal "update" when the road has been split etc.
@@ -175,8 +178,14 @@ void Carrier::transport_update(Game& game, State& state) {
 		// A sanity check is necessary, in case the building has been destroyed
 		PlayerImmovable* const next = ware.get_next_move_step(game);
 
-		if (next && next != &flag && &next->base_flag() == &flag)
+		if (next && next != &flag && &next->base_flag() == &flag) {
+			// pay some coins before entering the building,
+			// to compensate for the time to be spent in its street-segment
+			road.pay_for_building(game);
 			enter_building(game, state);
+		}
+
+
 
 		// If the flag is overloaded we are allowed to drop wares as
 		// long as we can pick another up. Otherwise we have to wait.
@@ -247,7 +256,11 @@ void Carrier::pickup_from_flag(Game& game, State& state) {
 
 		// Are there wares to move between our flags?
 		if (WareInstance* const ware = flag.fetch_pending_ware(game, otherflag)) {
+			// pay before getting the ware, while checking for road promotion
+			road.pay_for_road(game, flag.count_wares_in_queue(game, otherflag));
 			set_carried_ware(game, ware);
+
+
 
 			set_animation(game, descr().get_animation("idle"));
 			return schedule_act(game, 20);
@@ -270,9 +283,12 @@ void Carrier::drop_ware(Game& game, State& state) {
 	Flag& flag = road.get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
 
 	if (promised_pickup_to_ == (state.ivar1 ^ 1)) {
-		// If there's an ware we acked, we can drop ours even if the flag is
+		// If there's a ware we acked, we can drop ours even if the flag is
 		// flooded
-		other = flag.fetch_pending_ware(game, road.get_flag(static_cast<Road::FlagId>(state.ivar1)));
+		Flag& otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1));
+		other = flag.fetch_pending_ware(game, otherflag);
+
+
 
 		if (!other && !flag.has_capacity()) {
 			molog("[Carrier]: strange: acked ware from busy flag no longer "
@@ -292,7 +308,11 @@ void Carrier::drop_ware(Game& game, State& state) {
 
 	// Pick up new load, if any
 	if (other) {
-		set_carried_ware(game, other);
+	// pay before getting the ware, while checking for road promotion
+	road.pay_for_road(game, flag.count_wares_in_queue(game, other));
+	set_carried_ware(game, other);
+
+
 
 		set_animation(game, descr().get_animation("idle"));
 		return schedule_act(game, 20);
@@ -332,7 +352,7 @@ bool Carrier::swap_or_wait(Game& game, State& state) {
 	Flag& otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1));
 
 	if (promised_pickup_to_ == (state.ivar1 ^ 1)) {
-		// All is well, we already acked an ware that we can pick up
+		// All is well, we already acked a ware that we can pick up
 		// from this flag
 		return false;
 	} else if (flag.has_pending_ware(game, otherflag)) {
@@ -366,7 +386,7 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 	//     (the transport code does not have priorities for the actual
 	//     carrier that is notified)
 	//  b) the transport task has logic that allows it to
-	//     drop an ware on an overloaded flag iff it can pick up an ware
+	//     drop a ware on an overloaded flag iff it can pick up a ware
 	//     at the same time.
 	//     We should ack said ware to avoid more confusion before we move
 	//     onto the flag, but we can't do that if we have already acked
@@ -386,8 +406,12 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 
 	if (state.task == &taskRoad)
 		send_signal(game, "ware");
-	else if (state.task == &taskWaitforcapacity)
-		send_signal(game, "wakeup");
+	else if (state.task == &taskWaitforcapacity) {
+	  // skip maintenance charges for the time-length of congestion
+	  Road& road = dynamic_cast<Road&>(*get_location(game));
+	  road.reset_charging(game);
+	  send_signal(game, "wakeup");
+	}
 
 	return true;
 }
@@ -410,7 +434,7 @@ void Carrier::find_pending_ware(Game& game) {
 		havewarebits |= 2;
 	}
 
-	//  If both flags have an ware, we pick the one closer to us.
+	//  If both flags have a ware, we pick the one closer to us.
 	if (havewarebits == 3) {
 		havewarebits = 1 << find_closest_flag(game);
 	}

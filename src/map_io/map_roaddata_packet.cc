@@ -74,7 +74,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 					road.set_owner(egbase.get_player(player_index));
 					road.wallet_ = fr.unsigned_32();
-					road.last_wallet_check_ = fr.unsigned_32();
+					road.last_wallet_charge_ = fr.unsigned_32();
 					road.type_ = fr.unsigned_32();
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
@@ -191,7 +191,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				fw.unsigned_8(r->owner().player_number());
 
 				fw.unsigned_32(r->wallet_);
-				fw.unsigned_32(r->last_wallet_check_);
+				fw.unsigned_32(r->last_wallet_charge_);
 
 				fw.unsigned_32(r->type_);
 

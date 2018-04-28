@@ -108,6 +108,10 @@ struct Road : public PlayerImmovable {
 	void postsplit(Game&, Flag&);
 
 	bool notify_ware(Game& game, FlagId flagid);
+	void reset_charging(Game& game);
+	void charge_wallet(Game& game);
+	void pay_for_road(Game& game, uint8_t wares_count);
+	void pay_for_building(Game& game);
 
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t);
@@ -142,7 +146,7 @@ private:
 	int32_t wallet_;
 
 	/// holds the gametime when busyness_ was last updated
-	uint32_t last_wallet_check_;
+	uint32_t last_wallet_charge_;
 
 	uint8_t type_;        ///< RoadType, 2 bits used
 	Flag* flags_[2];      ///< start and end flag

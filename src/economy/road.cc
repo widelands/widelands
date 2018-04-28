@@ -51,7 +51,7 @@ bool Road::is_road_descr(MapObjectDescr const* const descr) {
 Road::Road()
    : PlayerImmovable(g_road_descr),
      wallet_(0),
-     last_wallet_check_(0),
+     last_wallet_charge_(0),
      type_(0),
      idle_index_(0) {
 	flags_[0] = flags_[1] = nullptr;
@@ -543,74 +543,95 @@ void Road::postsplit(Game& game, Flag& flag) {
  * \return true if a carrier has been sent on its way, false otherwise.
  */
 bool Road::notify_ware(Game& game, FlagId const flagid) {
-uint32_t const gametime = game.get_gametime();
-  assert(last_wallet_check_ <= gametime);
-  const int16_t animal_price = 600;
-  const int16_t max_wallet  = 2.5 * animal_price;
-
-	const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
-
-  //  Iterate over all carriers and try to find one which takes the ware.
+  // Iterate over all carriers and try to find one which takes the ware.
   for (CarrierSlot& slot : carrier_slots_) {
     if (Carrier* const carrier = slot.carrier.get(game)) {
       if (carrier->notify_ware(game, flagid)) {
-        //  notify_ware returns false if the carrier currently can not take
-        //  the ware. If we get here, the carrier took the ware.
-        wallet_ -= carriers_count * (gametime - last_wallet_check_) / 1000;
-        const uint32_t last_wallet_check_old_ = last_wallet_check_;
-        last_wallet_check_ = gametime;
-        wallet_ += 2 * (carriers_count + 1) * (4 * (flags_[flagid]->current_wares() - 1) + path_.get_nsteps());
-        if (wallet_ < 0) {
-          wallet_ = 0;
-          if (type_ == RoadType::kBusy) {
-            // beginning of code for demotion
-            // should be moved in a function
-            Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
-            if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
-              second_carrier->send_signal(game, "cancel");
-              // this signal is not handled in any special way
-              // so it simply pop the task off the stack
-              // the string "cancel" has been used to make clear
-              // the final goal we want to achieve
-              // ie: cancelling current task
-              carrier_slots_[1].carrier = nullptr;
-              carrier_slots_[1].carrier_request = nullptr;
-              type_ = RoadType::kNormal;
-              mark_map(game);
-            }
-            // end of code for demotion
-          }
-        } else {
-          if (type_ == RoadType::kNormal) {
-            if (wallet_ > 1.5 * animal_price) {
-              wallet_ -= animal_price;
-              // beginning of code for promotion
-              // should be moved in a function
-              type_ = RoadType::kBusy;
-              mark_map(game);
-              for (CarrierSlot& slot2 : carrier_slots_) {
-                if (!slot2.carrier.get(game) && !slot2.carrier_request && slot2.carrier_type != 1) {
-                  request_carrier(slot2);
-                }
-              }
-              // end of code for promotion
-            }
-          }
-          if (wallet_ > max_wallet) wallet_ = max_wallet;
-        }
-        log ("wallet_: %5d, carriers: %d, gametime: %d, last_wallet_check_: %d, current_wares: %d, nsteps: %lu\n",
-		wallet_, carriers_count,
-		gametime, last_wallet_check_old_, flags_[flagid]->current_wares(), path_.get_nsteps());
+        // notify_ware returns true if the carrier took the ware
         return true;
       }
     }
   }
-  //  If we get here, no carrier took the ware.
-  // potentially insert here some logic for edge cases like road congestion
+  // no carrier took the ware
   return false;
 }
 
+/**
+ * Reset last_wallet_charge_ .
+*/
+void Road::reset_charging(Game& game) {
+  last_wallet_charge_ = game.get_gametime();
+}
 
+/**
+ * Subtract maintenance cost, and check for demotion.
+*/
+void Road::charge_wallet(Game& game) {
+  const uint32_t gametime = game.get_gametime();
+  assert(last_wallet_charge_ <= gametime);
+  const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
+
+log ("wallet: %d, carriers: %d, gametime: %d, last_charge: %d, steps: %lu\n",
+     wallet_, carriers_count, gametime, last_wallet_charge_, path_.get_nsteps());
+
+  wallet_ -= carriers_count * (gametime - last_wallet_charge_) / 1000;
+  last_wallet_charge_ = gametime;
+  if (wallet_ < 0) {
+    wallet_ = 0;
+    if (type_ == RoadType::kBusy) {
+      // Demote the road.
+      Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
+      if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
+        second_carrier->send_signal(game, "cancel");
+        // this signal is not handled in any special way
+        // so it simply pop the task off the stack
+        // the string "cancel" has been used to make clear
+        // the final goal we want to achieve
+        // ie: cancelling current task
+        carrier_slots_[1].carrier = nullptr;
+        carrier_slots_[1].carrier_request = nullptr;
+        type_ = RoadType::kNormal;
+        mark_map(game);
+      }
+    }
+  }
+}
+
+/**
+ * Add carrying payment, and check for promotion.
+*/
+void Road::pay_for_road(Game& game, uint8_t wares_count) {
+  const uint16_t animal_price = 600;
+  const int16_t max_wallet  = 2.5 * animal_price;
+  const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
+
+log ("wallet: %d, carriers: %d, wares: %d, steps: %lu\n",
+     wallet_, carriers_count, wares_count, path_.get_nsteps());
+
+  wallet_ += 2 * (carriers_count + 1) * (4 * (wares_count - 1) + path_.get_nsteps());
+  this->charge_wallet(game);
+  if (type_ == RoadType::kNormal && wallet_ > 1.5 * animal_price) {
+    // Promote the road.
+    wallet_ -= animal_price;
+    type_ = RoadType::kBusy;
+    mark_map(game);
+    for (CarrierSlot& slot : carrier_slots_) {
+      if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type != 1) {
+        request_carrier(slot);
+      }
+    }
+  }
+  if (wallet_ > max_wallet) wallet_ = max_wallet;
+}
+
+/**
+ * Add extra coins for street-segment at building.
+*/
+void Road::pay_for_building(Game& game) {
+  const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
+  wallet_ += 2 * (carriers_count + 1);
+  // don't bother with checks, since next ware will cause them anyway
+}
 void Road::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
 	molog("wallet_: %i\n", wallet_);
