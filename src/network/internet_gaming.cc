@@ -402,7 +402,7 @@ void InternetGaming::create_second_connection() {
 				// Our work is done
 				return;
 			}
-		} catch (const std::exception& e) {
+		} catch (const std::exception&) {
 			log("InternetGaming: Error when trying to transmit secondary IP.\n");
 			return;
 		}
