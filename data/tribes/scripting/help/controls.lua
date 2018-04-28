@@ -123,7 +123,9 @@ return {
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("G"), _"Center the map on the selected ship") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey("O"), _"Go to the selected ship and open its window") ..
+               dl(help_format_hotkey("O"), _"Open the selected ship’s window") ..
+               -- TRANSLATORS: This is the helptext for an access key combination.
+               dl(help_format_hotkey("CTRL + O"), _"Go to the selected ship and open its window") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("W"), _"Watch the selected ship")
          )

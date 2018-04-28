@@ -104,7 +104,7 @@ private:
 	void center_view();
 	/// Follow the selected ship in a watch window.
 	void watch_ship();
-	/// Center the mapview on the currently selected ship and open its window.
+	/// Open the currently selected ship's window. If CTRL is pressed, center the mapview on it.
 	void open_ship_window();
 
 	/**

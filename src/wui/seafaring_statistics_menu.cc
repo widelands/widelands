@@ -111,11 +111,16 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     kButtonSize,
                     g_gr->images().get("images/ui_basic/but2.png"),
                     g_gr->images().get("images/ui_basic/fsel.png"),
-                    (boost::format(_("%1% (Hotkey: %2%)")) %
-                     /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                     _("Go to the selected ship and open its window") %
-                     pgettext("hotkey", "O"))
-                       .str()),
+                    (boost::format("%s<br>%s") %
+                     (boost::format(pgettext("hotkey_description", "%1%: %2%")) %
+                      pgettext("hotkey", "O") %
+                      /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                      _("Open the selected ship’s window")) %
+                     (boost::format(pgettext("hotkey_description", "%1%: %2%")) %
+                      pgettext("hotkey", "CTRL + O") %
+                      /** TRANSLATORS: Tooltip in the seafaring statistics window */
+                      _("Go to the selected ship and open its window")))
+                    .str()),
      centerviewbtn_(&navigation_box_,
                     "seafaring_stats_center_main_mapview_button",
                     0,
@@ -444,7 +449,10 @@ void SeafaringStatisticsMenu::watch_ship() {
 
 void SeafaringStatisticsMenu::open_ship_window() {
 	if (table_.has_selection()) {
-		center_view();
+        // Move to ship if CTRL is prssed
+        if (SDL_GetModState() & KMOD_CTRL) {
+            center_view();
+        }
 		Widelands::Ship* ship = serial_to_ship(table_.get_selected());
 		iplayer().show_ship_window(ship);
 	}
