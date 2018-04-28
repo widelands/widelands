@@ -600,13 +600,13 @@ log ("wallet: %d, carriers: %d, gametime: %d, last_charge: %d, steps: %lu\n",
 /**
  * Add carrying payment, and check for promotion.
 */
-void Road::pay_for_road(Game& game, uint8_t wares_count) {
+void Road::pay_for_road(Game& game, uint8_t queue_length) {
   const uint16_t animal_price = 600;
   const int16_t max_wallet  = 2.5 * animal_price;
   const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
 
 log ("wallet: %d, carriers: %d, queue: %d, steps: %lu\n",
-     wallet_, carriers_count, wares_count, path_.get_nsteps());
+     wallet_, carriers_count, queue_length, path_.get_nsteps());
 
   wallet_ += 2 * (carriers_count + 1) * (4 * queue_length + path_.get_nsteps());
   this->charge_wallet(game);
