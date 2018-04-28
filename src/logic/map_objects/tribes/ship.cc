@@ -849,6 +849,7 @@ void Ship::start_task_expedition(Game& game) {
 	             pgettext("ship", "Expedition"), _("Expedition Ready"),
 	             _("An expedition ship is waiting for your commands."),
 	             "images/wui/buildings/start_expedition.png");
+    // NOCOM set_ship_state_and_notify()?
 	Notifications::publish(NoteShip(this, NoteShip::Action::kWaitingForCommand));
 }
 

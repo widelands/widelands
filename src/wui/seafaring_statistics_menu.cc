@@ -332,7 +332,7 @@ void SeafaringStatisticsMenu::update_ship(const Widelands::Ship& ship) {
 		set_entry_record(&er, *info);
 	}
 	table_.sort();
-	set_buttons_enabled();
+	update_button_states();
 }
 
 void SeafaringStatisticsMenu::remove_ship(Widelands::Serial serial) {
@@ -342,7 +342,7 @@ void SeafaringStatisticsMenu::remove_ship(Widelands::Serial serial) {
 		if (!table_.empty() && !table_.has_selection()) {
 			table_.select(0);
 		}
-		set_buttons_enabled();
+		update_button_states();
 	}
 }
 
@@ -352,7 +352,7 @@ void SeafaringStatisticsMenu::update_entry_record(UI::Table<uintptr_t>::EntryRec
 }
 
 void SeafaringStatisticsMenu::selected() {
-	set_buttons_enabled();
+	update_button_states();
 }
 
 void SeafaringStatisticsMenu::double_clicked() {
@@ -361,7 +361,7 @@ void SeafaringStatisticsMenu::double_clicked() {
 	}
 }
 
-void SeafaringStatisticsMenu::set_buttons_enabled() {
+void SeafaringStatisticsMenu::update_button_states() {
 	centerviewbtn_.set_enabled(table_.has_selection());
 	openwindowbtn_.set_enabled(table_.has_selection());
 	watchbtn_.set_enabled(table_.has_selection());
@@ -544,7 +544,8 @@ void SeafaringStatisticsMenu::fill_table() {
 	   table_.has_selection() ? table_.get_selected() : Widelands::INVALID_INDEX;
 	table_.clear();
 	data_.clear();
-	set_buttons_enabled();
+    // Disable buttons while we update the data
+	update_button_states();
 	for (const auto& serial : iplayer().player().ships()) {
 		Widelands::Ship* ship = serial_to_ship(serial);
 		assert(iplayer().get_player() == ship->get_owner());
@@ -562,6 +563,7 @@ void SeafaringStatisticsMenu::fill_table() {
 	if (!table_.empty()) {
 		table_.sort();
 		if (!table_.has_selection()) {
+            // This will take care of the button state too
 			table_.select(0);
 		}
 	}

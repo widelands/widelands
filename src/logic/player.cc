@@ -380,6 +380,7 @@ void Player::add_ship(Serial ship) {
 	ships_.insert(ship);
 }
 void Player::remove_ship(Serial ship) {
+    // NOCOM Using ships.find() + erase(iter) could be a bit faster.
 	if (ships_.count(ship) == 1) {
 		ships_.erase(ship);
 	}
@@ -1316,6 +1317,7 @@ const std::string Player::pick_shipname() {
 		remaining_shipnames_.erase(it);
 		return new_name;
 	}
+    // NOCOM I think this will return strange results after sinking a ship, i.e. having two (or more) with the same number. Maybe add an explicit counter for the additional ships?
 	return (boost::format(pgettext("shipname", "Ship %d")) % ships_.size()).str();
 }
 

@@ -99,7 +99,7 @@ private:
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 	/// Enables the navigation buttons if a ship is selected, disables them otherwise.
-	void set_buttons_enabled();
+	void update_button_states();
 	/// Center the mapview on the currently selected ship.
 	void center_view();
 	/// Follow the selected ship in a watch window.

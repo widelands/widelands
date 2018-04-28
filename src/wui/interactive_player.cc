@@ -459,7 +459,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				main_windows_.building_stats.toggle();
 			}
 			return true;
-
+// NOCOM deactivate for seafaring maps
 		case SDLK_e:
 			if (main_windows_.seafaring_stats.window == nullptr) {
 				new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);

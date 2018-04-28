@@ -62,7 +62,7 @@ return {
                dl(help_format_hotkey("I"), _"Toggle stock inventory") ..
                -- TRANSLATORS: This is an access key combination. The hotkey is 'b'
                dl(help_format_hotkey("B"), _"Toggle building statistics") ..
-               -- TRANSLATORS: This is an access key combination. The hotkey is 'p'
+               -- TRANSLATORS: This is an access key combination. The hotkey is 'e'
                dl(help_format_hotkey("E"), _"Toggle seafaring statistics") ..
                -- TRANSLATORS: This is an access key combination. Localize, but do not change the key.
                dl(help_format_hotkey(pgettext("hotkey", "Home")), _"Center main mapview on starting location") ..
@@ -119,7 +119,7 @@ return {
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey(pgettext("hotkey", "Alt + 4")), _"Show scouting expeditions") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
-               dl(help_format_hotkey(pgettext("hotkey", "Alt + 5")), _"Show colonizing expeditions and expeditions with port space found") ..
+               dl(help_format_hotkey(pgettext("hotkey", "Alt + 5")), _"Show expeditions with port space found or building a port") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
                dl(help_format_hotkey("G"), _"Center the map on the selected ship") ..
                -- TRANSLATORS: This is the helptext for an access key combination.
