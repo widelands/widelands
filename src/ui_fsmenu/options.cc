@@ -259,6 +259,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_sound_.add(&fx_);
 	box_sound_.add(&message_sound_);
 
+	if (g_sound_handler.is_backend_disabled()) {
+		UI::Textarea* sound_warning = new UI::Textarea(
+		   &box_sound_, 0, 0, _("Sound is disabled due to a problem with the sound driver"));
+		sound_warning->set_color(UI_FONT_CLR_WARNING);
+		box_sound_.add(sound_warning);
+	}
+
 	// Saving
 	box_saving_.add(&sb_autosave_);
 	box_saving_.add(&sb_rolling_autosave_);
@@ -327,10 +334,11 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Sound options
 	music_.set_state(opt.music);
-	music_.set_enabled(!g_sound_handler.lock_audio_disabling_);
+	music_.set_enabled(!g_sound_handler.is_backend_disabled());
 	fx_.set_state(opt.fx);
-	fx_.set_enabled(!g_sound_handler.lock_audio_disabling_);
+	fx_.set_enabled(!g_sound_handler.is_backend_disabled());
 	message_sound_.set_state(opt.message_sound);
+	message_sound_.set_enabled(!g_sound_handler.is_backend_disabled());
 
 	// Saving options
 	zip_.set_state(opt.zip);
