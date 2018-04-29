@@ -346,9 +346,12 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 	std::string dir = kCampaignDataDir + g_fs->file_separator() + campaign_name;
 	boost::trim(dir);
 	g_fs->ensure_directory_exists(dir);
+	log("NOCOM Writing campaign data to dir %s\n", dir.c_str());
 
 	std::string complete_filename = dir + g_fs->file_separator() + scenario_name + kCampaignDataExtension;
 	boost::trim(complete_filename);
+
+	log("NOCOM Writing campaign data to file %s\n", complete_filename.c_str());
 
 	Profile profile;
 	Section& data_section = profile.create_section("data");
@@ -366,14 +369,15 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 		type_names.push_back(type);
 
 		std::string t = std::string(type);
-		if (t == "number")
+		if (t == "number") {
 			data_section.set_int(key.c_str(), luaL_checknumber(L, -1));
-		else if (t == "boolean")
+		} else if (t == "boolean") {
 			data_section.set_bool(key.c_str(), luaL_checkboolean(L, -1));
-		else if (t == "string")
+		} else if (t == "string") {
 			data_section.set_string(key.c_str(), luaL_checkstring(L, -1));
-		else
+		} else {
 			report_error(L, "A campaign data value may be a string, integer, or boolean; but not a %s!", type);
+		}
 
 		++size;
 		lua_pop(L, 1);
@@ -418,6 +422,8 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 			g_fs->file_separator() + scenario_name + kCampaignDataExtension;
 	boost::trim(complete_filename);
 
+	log("NOCOM Reading campaign data from file %s\n", complete_filename.c_str());
+
 	Profile profile;
 	profile.read(complete_filename.c_str());
 	Section* data_section = profile.get_section("data");
@@ -428,33 +434,30 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 		lua_pushnil(L);
 	}
 	else {
-		uint32_t size = keys_section->get_natural("size");
+		const uint32_t size = keys_section->get_natural("size");
 		lua_newtable(L);
 		for (uint32_t i = 0; i < size; i++) {
-			log("Parsing the %i-th item: ", i); //delete this line
+
 			const char* key_key = std::to_string(i).c_str();
-			log("key_key = %s; ", key_key); //delete this line
 			const char* key = keys_section->get_string(key_key);
-			log("key = %s; ", key); //delete this line
-			std::string type = type_section->get_string(key_key);
-			log("data type = %s; ", type.c_str()); //delete this line
-			log("raw value = %s.\n", data_section->get_string(key)); //delete this line
+			const std::string type = type_section->get_string(key_key);
 
 			lua_pushstring(L, key);
-			if (type == "boolean")
+			log("NOCOM Pushing the %i-th item: %s ", i, key);
+			if (type == "boolean") {
+				log("\tBoolean %s\n", data_section->get_bool(key) ? "true" : "false"); // NOCOM delete this line
 				lua_pushboolean(L, data_section->get_bool(key));
-			else if (type == "number")
+			} else if (type == "number") {
+				log("\tInteger %d\n", data_section->get_int(key)); // NOCOM delete this line
 				lua_pushinteger(L, data_section->get_int(key));
-			else if (type == "string")
+			} else if (type == "string") {
+				log("\tString  %s\n", data_section->get_string(key)); // NOCOM delete this line
 				lua_pushstring(L, data_section->get_string(key));
-			else {
+			} else {
 				log("Illegal data type %s in campaign data file, interpreting key %s as nil\n", type.c_str(), key);
 				lua_pushnil(L);
 			}
-			log("Setting table value: %s=%s\n", lua_tostring(L, -2), lua_tostring(L, -1)); //delete this line
-			luaL_checktype(L, -3, LUA_TTABLE); //delete this line
 			lua_settable(L, -3);
-			luaL_checktype(L, -1, LUA_TTABLE); //delete this line
 		}
 	}
 
