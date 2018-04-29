@@ -47,7 +47,7 @@ Economy::Economy(Player& player) : Economy(player, last_economy_serial_++) {
 }
 
 Economy::Economy(Player& player, Serial init_serial) : serial_(init_serial), owner_(player), request_timerid_(0), has_window_(false) {
-	last_economy_serial_ = std::max(last_economy_serial_, serial_);
+	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares = player.egbase().tribes().nrwares();
 	DescriptionIndex const nr_workers = player.egbase().tribes().nrworkers();
