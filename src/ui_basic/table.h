@@ -84,6 +84,7 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(Entry);
 
 	EntryRecord& add(void* const entry, const bool select_this = false);
 
@@ -190,8 +191,6 @@ public:
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
-	void layout() override;
-
 	void clear();
 	void set_sort_column(uint8_t const col) {
 		assert(col < columns_.size());
@@ -209,6 +208,7 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(const void* const entry);
 
 	EntryRecord& add(void* entry = nullptr, bool select = false);
 
@@ -275,6 +275,8 @@ public:
 	/// If entries == 0, the current entries are used.
 	void fit_height(uint32_t entries = 0);
 
+	void layout() override;
+
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
@@ -335,6 +337,10 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
+	void remove_entry(Entry const* const entry) {
+		Base::remove_entry(const_cast<Entry*>(entry));
+	}
+
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
 		return Base::add(const_cast<Entry*>(entry), select_this);
 	}
@@ -365,6 +371,10 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
+	void remove_entry(Entry const* entry) {
+		Base::remove_entry(entry);
+	}
+
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
 		return Base::add(entry, select_this);
 	}
@@ -393,6 +403,10 @@ public:
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	}
+
+	void remove_entry(const Entry& entry) {
+		Base::remove_entry(&const_cast<Entry&>(entry));
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
@@ -429,6 +443,10 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
+	void remove_entry(Entry& entry) {
+		Base::remove_entry(&entry);
+	}
+
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
 		return Base::add(&entry, select_this);
 	}
@@ -463,6 +481,10 @@ public:
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	}
+
+	void remove_entry(uintptr_t const entry) {
+		Base::remove_entry(reinterpret_cast<void*>(entry));
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {

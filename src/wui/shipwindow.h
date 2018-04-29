@@ -47,6 +47,7 @@ private:
 	                        const std::string& picname,
 	                        boost::function<void()> callback);
 	void set_button_visibility();
+	void no_port_error_message();
 
 	void act_goto();
 	void act_destination();
@@ -74,7 +75,7 @@ private:
 	UI::Button* btn_construct_port_;
 	ItemWaresDisplay* display_;
 	int navigation_box_height_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>> shipnotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };
 

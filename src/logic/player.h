@@ -111,6 +111,10 @@ public:
 		get_messages()->set_message_status(id, status);
 	}
 
+	const std::set<Serial>& ships() const;
+	void add_ship(Serial ship);
+	void remove_ship(Serial ship);
+
 	const EditorGameBase& egbase() const {
 		return egbase_;
 	}
@@ -583,7 +587,7 @@ public:
 
 	void read_statistics(FileRead&);
 	void write_statistics(FileWrite&) const;
-	void read_remaining_shipnames(FileRead&);
+	void read_remaining_shipnames(FileRead&, uint16_t packet_version);
 	void write_remaining_shipnames(FileWrite&) const;
 	void sample_statistics();
 	void ware_produced(DescriptionIndex);
@@ -634,11 +638,14 @@ private:
 	uint32_t msites_lost_, msites_defeated_;
 	uint32_t civil_blds_lost_, civil_blds_defeated_;
 	std::unordered_set<std::string> remaining_shipnames_;
+	// If we run out of ship names, we'll want to continue with unique numbers
+	uint32_t ship_name_counter_;
 
 	Field* fields_;
 	std::vector<bool> allowed_worker_types_;
 	std::vector<bool> allowed_building_types_;
 	Economies economies_;
+	std::set<Serial> ships_;
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */
 
