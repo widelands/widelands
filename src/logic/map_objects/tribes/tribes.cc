@@ -350,7 +350,7 @@ void Tribes::postload() {
 		// Verify that the preciousness has been set for all of the tribe's wares
 		for (const DescriptionIndex ware_index : tribe_descr->wares()) {
 			if (tribe_descr->get_ware_descr(ware_index)->preciousness(tribe_descr->name()) == kInvalidWare) {
-				throw GameDataError("The ware %s needs to define a preciousness for tribe %s", tribe_descr->get_ware_descr(ware_index)->name().c_str(), tribe_descr->name().c_str());
+				throw GameDataError("The ware '%s' needs to define a preciousness for tribe '%s'", tribe_descr->get_ware_descr(ware_index)->name().c_str(), tribe_descr->name().c_str());
 			}
 		}
 	}
