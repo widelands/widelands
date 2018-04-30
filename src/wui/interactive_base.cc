@@ -428,33 +428,40 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		}
 	}
 
-	// Blit node information when in debug mode.
-	if (get_display_flag(dfDebug) || game == nullptr) {
-		std::string node_text;
-		if (game != nullptr) {
-			const std::string gametime(gametimestring(egbase().get_gametime(), true));
-			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh1->render(as_condensed(gametime));
-			rendered_text->draw(dst, Vector2i(5, 5));
-
-			static boost::format node_format("(%i, %i)");
-			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
-		} else {  // This is an editor
-			static boost::format node_format("(%i, %i, %i)");
-			const int32_t height = egbase().map()[sel_.pos.node].get_height();
-			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
-		}
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(node_text);
+	// Node information
+	std::string node_text("");
+	if (game == nullptr) {
+		// Always blit node information in the editor
+		static boost::format node_format("(%i, %i, %i)");
+		const int32_t height = egbase().map()[sel_.pos.node].get_height();
+		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
+	} else if (get_display_flag(dfDebug)) {
+		// Blit node information for games in debug mode - we're not interested in the height
+		static boost::format node_format("(%i, %i)");
+		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
+	}
+	if (!node_text.empty()) {
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   UI::g_fh1->render(as_condensed(node_text));
 		rendered_text->draw(
 		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
 
-	// Blit FPS when playing a game in debug mode.
-	if (get_display_flag(dfDebug) && game != nullptr) {
-		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_condensed(
-		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
-		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
+	// In-game clock and FPS
+	if (game != nullptr) {
+		// Blit in-game clock
+		const std::string gametime(gametimestring(egbase().get_gametime(), true));
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   UI::g_fh1->render(as_condensed(gametime));
+		rendered_text->draw(dst, Vector2i(5, 5));
+
+		// Blit FPS when playing a game in debug mode
+		if (get_display_flag(dfDebug)) {
+			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
+			rendered_text = UI::g_fh1->render(as_condensed(
+			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
+			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
+		}
 	}
 }
 

@@ -148,6 +148,26 @@ void InteractiveGameBase::postload() {
 	hide_minimap();
 }
 
+void InteractiveGameBase::start() {
+	// Multiplayer games don't save the view position, so we go to the starting position instead
+	if (is_multiplayer()) {
+		Widelands::PlayerNumber pln = player_number();
+		const Widelands::PlayerNumber max = game().map().get_nrplayers();
+		if (pln == 0) {
+			// Spectator, use the view of the first viable player
+			for (pln = 1; pln <= max; ++pln) {
+				if (game().get_player(pln)) {
+					break;
+				}
+			}
+		}
+		// Adding a check, just in case there was no viable player found for spectator
+		if (game().get_player(pln)) {
+			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
+		}
+	}
+}
+
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_->set_perm_pressed(value);
 }
@@ -223,28 +243,29 @@ bool InteractiveGameBase::try_show_ship_window() {
 	const Widelands::Map& map = game().map();
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
 
-	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM))
+	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM)) {
 		return false;
+	}
 
 	std::vector<Widelands::Bob*> ships;
-	if (!map.find_bobs(area, &ships, Widelands::FindBobShip()))
-		return false;
-
-	for (Widelands::Bob* temp_ship : ships) {
-		if (upcast(Widelands::Ship, ship, temp_ship)) {
-			if (can_see(ship->get_owner()->player_number())) {
-				UI::UniqueWindow::Registry& registry =
-				   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
-				registry.open_window = [this, &registry, ship] {
-					new ShipWindow(*this, registry, *ship);
-				};
-				registry.create();
+	if (map.find_bobs(area, &ships, Widelands::FindBobShip())) {
+		for (Widelands::Bob* ship : ships) {
+			if (can_see(ship->owner().player_number())) {
+				// FindBobShip should have returned only ships
+				assert(ship->descr().type() == Widelands::MapObjectType::SHIP);
+				show_ship_window(dynamic_cast<Widelands::Ship*>(ship));
 				return true;
 			}
 		}
 	}
-
 	return false;
+}
+
+void InteractiveGameBase::show_ship_window(Widelands::Ship* ship) {
+	UI::UniqueWindow::Registry& registry =
+	   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
+	registry.open_window = [this, &registry, ship] { new ShipWindow(*this, registry, ship); };
+	registry.create();
 }
 
 void InteractiveGameBase::show_game_summary() {
