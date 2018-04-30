@@ -560,22 +560,22 @@ bool Road::notify_ware(Game& game, FlagId const flagid) {
  * Reset last_wallet_charge_ .
 */
 void Road::reset_charging(Game& game) {
-  last_wallet_charge_ = game.get_gametime();
+	last_wallet_charge_ = game.get_gametime() / 1000;
 }
 
 /**
  * Subtract maintenance cost, and check for demotion.
 */
 void Road::charge_wallet(Game& game) {
-  const uint32_t gametime = game.get_gametime();
-  assert(last_wallet_charge_ <= gametime);
-  const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
+	const uint32_t gamesecs = game.get_gametime() / 1000;
+	assert(last_wallet_charge_ <= gamesecs);
+	const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
 
-log ("wallet: %d, carriers: %d, gametime: %d, last_charge: %d, steps: %lu\n",
-     wallet_, carriers_count, gametime, last_wallet_charge_, path_.get_nsteps());
+	log ("wallet: %d, carriers: %d, gamesecs: %d, last_charge: %d, steps: %lu\n",
+	     wallet_, carriers_count, gamesecs, last_wallet_charge_, path_.get_nsteps());
 
-  wallet_ -= carriers_count * (gametime - last_wallet_charge_) / 1000;
-  last_wallet_charge_ = gametime;
+	wallet_ -= carriers_count * (gamesecs - last_wallet_charge_);
+	last_wallet_charge_ = gamesecs;
   if (wallet_ < 0) {
     wallet_ = 0;
     if (type_ == RoadType::kBusy) {
