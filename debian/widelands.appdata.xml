@@ -20,6 +20,7 @@
   <summary xml:lang="gd">Geama ro-innleachd togail fìor-ama</summary>
   <summary xml:lang="hu">Egy valós idejű, építkezős stratégiai játék</summary>
   <summary xml:lang="it">Un gioco di costruzione e strategia in tempo reale</summary>
+  <summary xml:lang="ja">リアルタイム発展型ストラテジーゲーム</summary>
   <summary xml:lang="ko">실시간 건설 전략 게임</summary>
   <summary xml:lang="la">Ludus strategicae exstructionis in tempore vero</summary>
   <summary xml:lang="ms">Permainan strategi pembinaan masa-nyata</summary>
@@ -142,6 +143,12 @@
     </p>
     <p xml:lang="it">
       Widelands è giocabile in modalità giocatore singolo, con campagne che raccontano storie delle tribù e la loro lotta nell'universo Widelands . Oppure, l'insediamento in realtà inizia quando vi unite con gli amici su Internet o in LAN per costruire nuovi imperi insieme – o per schiacciare gli altri nella polvere in una guerra. In Widelands è presente anche una intelligenza artificiale per metterti alla prova.
+    </p>
+    <p xml:lang="ja">
+      あなたは小さな部族の執政官です。あなたの使命は部族を発展させていくことにあります。部族の全てのメンバーがさらなる発展のため各種生産活動に力を尽くしてくれることでしょう。
+    </p>
+    <p xml:lang="ja">
+      Widelandsのシングルプレイモードであるキャンペーンでは、各部族の物語とWidelands世界における彼らの奮闘が語られることでしょう。それも楽しい体験となるでしょうが、ネットワーク越しにトモダチと協力して新たな帝国を作り上げること、もしくはその相手を戦場の塵とするべく戦うこと、それこそがWidelandsの本当の醍醐味です。また、それら他のプレイヤー相手とのゲームに加えて、AIとのプレイも可能です。
     </p>
     <p xml:lang="ko">
       당신은 작은 일족의 섭정입니다. 당신의 임무는 성장하는 정착지를 건설하는 것입니다. 당신의 일족 모든 일원은 성장을 위한 더 많은 자원을 생산하기 위해 자신의 역할을 다할 것입니다.
