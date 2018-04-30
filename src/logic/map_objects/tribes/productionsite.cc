@@ -35,6 +35,7 @@
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -93,6 +94,12 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const EditorGameBase& egbase)
    : BuildingDescr(init_descname, init_type, table, egbase),
      out_of_resource_productivity_threshold_(100) {
+	if (msgctxt.empty()) {
+		throw Widelands::GameDataError("Productionsite '%s' has empty Gettext msgctxt", name().c_str());
+	}
+	// Let's convert this only once, it's cheaper
+	const char* msgctxt_char = msgctxt.c_str();
+
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 
@@ -101,7 +108,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		out_of_resource_title_ = _(items_table->get_string("title"));
 		out_of_resource_heading_ = _(items_table->get_string("heading"));
 		out_of_resource_message_ =
-		   pgettext_expr(msgctxt.c_str(), items_table->get_string("message").c_str());
+		   pgettext_expr(msgctxt_char, items_table->get_string("message").c_str());
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
@@ -190,7 +197,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			const std::string program_descname_unlocalized = program_table->get_string("descname");
 			std::string program_descname = _(program_descname_unlocalized);
 			if (program_descname == program_descname_unlocalized) {
-				program_descname = pgettext_expr(msgctxt.c_str(), program_descname_unlocalized.c_str());
+				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
 			}
 			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
 			   program_name, program_descname, program_table->get_table("actions"), egbase, this));
