@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# Elisabeth Jäger, 2017
+# Elisabeth Jäger, 2017-2018
 # wl-zocker, 2014
 # millimarg, 2015,2017
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-03-30 07:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-22 19:41+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -256,4 +256,4 @@ msgid ""
 "        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "Fehlermeldungen? Vorschläge? Die Webseite des Projekts gibt entsprechende Hinweise – siehe:\n        https://wl.widelands.org/\n\nWir hoffen, das Spiel gefällt dir!"
