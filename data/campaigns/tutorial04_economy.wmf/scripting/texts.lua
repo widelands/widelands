@@ -228,10 +228,10 @@ explain_encyclopedia = {
    body = (
       h1(_[[The Encyclopedia Categories]]) ..
       p(_[[The encyclopedia has five tabs:]])..
-      li_image("images/logos/wl-ico-32.png", _[[The ‘General’ tab contains information about all the basic interface controls for Widelands. Furthermore, you can find tips that are relevant for your tribe there.]]) ..
-      li_image("images/wui/buildings/menu_tab_wares.png", _[[The ‘Wares’ tab shows information about the wares that your tribe needs, including a short help text, a list of buildings that produce each ware, the needed wares to produce it and where the ware is consumed.]]) ..
-      li_image("images/wui/buildings/menu_tab_workers.png", _[[The ‘Workers’ tab shows information about your tribe’s workers in a similar manner to the wares in the second tab.]]) ..
-      li_image("images/wui/stats/genstats_nrbuildings.png", _[[The ‘Buldings’ tab contains all the necessary information about the buildings of your tribe.]]) ..
+      div("width=100%", div("float=left padding_r=14 padding_t=5",p(img("images/logos/wl-ico-32.png"))) .. p(_[[The ‘General’ tab contains information about all the basic interface controls for Widelands. Furthermore, you can find tips that are relevant for your tribe there.]])) ..
+      div("width=100%", div("float=left padding_r=18 padding_t=15 padding_b=15 padding_l=4",p(img("images/wui/buildings/menu_tab_wares.png"))) .. p(_[[The ‘Wares’ tab shows information about the wares that your tribe needs, including a short help text, a list of buildings that produce each ware, the needed wares to produce it and where the ware is consumed.]])) ..
+      div("width=100%", div("float=left padding_r=16",p(img("images/wui/buildings/menu_tab_workers.png"))) .. p(_[[The ‘Workers’ tab shows information about your tribe’s workers in a similar manner to the wares in the second tab.]])) ..
+      div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("images/wui/stats/genstats_nrbuildings.png"))) .. p(_[[The ‘Buldings’ tab contains all the necessary information about the buildings of your tribe.]])) ..
       li_image("tribes/immovables/field_harvested/idle_00.png", _[[Finally, the ‘Immovables’ tab shows information about the specific immovables that your tribe’s workers can place on the map.]]) ..
       li(_[[Now use the encyclopedia to find out how to create new soldiers.]]) ..
       li_arrow(_[[A soldier needs a wooden spear and a helmet – from there on out, you can search backwards to find the wares and the buildings you need to supply your barracks where the soldier is recruited. When you are finished, just close the encyclopedia window.]])
