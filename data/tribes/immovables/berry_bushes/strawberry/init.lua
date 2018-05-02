@@ -10,7 +10,7 @@ terrain_affinity = {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_strawberry_tiny",
-   descname = _ "Strawberry Bush (tiny)",
+   descname = _ "Strawberries (tiny)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "seed_berrybush" },
@@ -34,7 +34,7 @@ tribes:new_immovable_type {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_strawberry_small",
-   descname = _ "Strawberry Bush (small)",
+   descname = _ "Strawberries (small)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = {},
@@ -58,7 +58,7 @@ tribes:new_immovable_type {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_strawberry_medium",
-   descname = _ "Strawberry Bush (medium)",
+   descname = _ "Strawberries (medium)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "flowering" },
@@ -82,7 +82,7 @@ tribes:new_immovable_type {
 tribes:new_immovable_type {
    msgctxt = "immovable",
    name = "berry_bush_strawberry_ripe",
-   descname = _ "Strawberry Bush (ripe)",
+   descname = _ "Strawberries (ripe)",
    size = "small",
    helptext_script = dirname .. "helptexts.lua",
    attributes = { "ripe_bush" },
