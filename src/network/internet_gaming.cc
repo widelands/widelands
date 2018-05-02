@@ -606,8 +606,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				inc.build_id = packet.string();
 				inc.game = packet.string();
 				inc.type = packet.string();
-				inc.points = packet.string();
-				if (inc.build_id == "IRC") {
+				if (inc.type == INTERNET_CLIENT_IRC) {
 					irc.push_back(inc);
 					// No "join" or "left" messages for IRC users
 					continue;
@@ -631,7 +630,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			clientlist_.insert(clientlist_.end(), irc.begin(), irc.end());
 
 			for (InternetClient& client : old) {
-				if (client.name.size() && client.build_id != "IRC") {
+				if (client.name.size() && client.type != INTERNET_CLIENT_IRC) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
 				}
@@ -867,17 +866,9 @@ void InternetGaming::send(const std::string& msg) {
 			   _("Message could not be sent: Was this supposed to be a private message?"));
 			return;
 		}
-		std::string recipient = msg.substr(1, space - 1);
-		for (const InternetClient& client : clientlist_) {
-			if (recipient == client.name && client.build_id == "IRC") {
-				format_and_add_chat(
-				   "", "", true, _("Private messages to IRC users are not supported."));
-				return;
-			}
-		}
 
-		s.string(trimmed);    // message
-		s.string(recipient);  // recipient
+		s.string(trimmed);                   // message
+		s.string(msg.substr(1, space - 1));  // recipient
 
 		format_and_add_chat(clientname_, msg.substr(1, space - 1), false, msg.substr(space + 1));
 
