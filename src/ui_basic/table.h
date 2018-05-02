@@ -275,6 +275,8 @@ public:
 	/// If entries == 0, the current entries are used.
 	void fit_height(uint32_t entries = 0);
 
+	void scroll_to_top();
+
 	void layout() override;
 
 	// Drawing and event handling

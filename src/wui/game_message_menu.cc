@@ -241,14 +241,23 @@ static char const* const status_picture_filename[] = {"images/wui/messages/messa
                                                       "images/wui/messages/message_archived.png"};
 
 void GameMessageMenu::show_new_message(MessageId const id, const Widelands::Message& message) {
+	// Do not disturb the user while multiselecting.
+	if (list->selections().size() > 1) {
+		return;
+	}
+
 	assert(iplayer().player().messages()[id] == &message);
 	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
-	if ((mode == Archive) != (status == Message::Status::kArchived))
+	if ((mode == Archive) != (status == Message::Status::kArchived)) {
 		toggle_mode();
-	UI::Table<uintptr_t>::EntryRecord& te = list->add(id.value(), true);
+	}
+	UI::Table<uintptr_t>::EntryRecord& te = list->add(id.value());
 	update_record(te, message);
 	list->sort();
+	list->clear_selections();
+	list->select(0);
+	list->scroll_to_top();
 }
 
 void GameMessageMenu::think() {
