@@ -37,9 +37,10 @@
  *    crashes. When logging twice with a registered account, the second connection gets a free
  *     username assigned. Dropping RELOGIN command.
  * 3: Between build 19 and build 20 - Added network relay for internet games
- * 4: Between build 19 and build 20 - Using CHAP for password authentication [supported]
+ * 4: Between build 19 and build 20 - Using CHAP for password authentication
+ * 5: Build 20 - Removed obsolete TELL_IP, modifications on user and game listing [supported]
  */
-constexpr unsigned int kInternetGamingProtocolVersion = 4;
+constexpr unsigned int kInternetGamingProtocolVersion = 5;
 
 /**
  * The default timeout time after which the client tries to resend a package or even finally closes
@@ -72,6 +73,15 @@ static const std::string INTERNET_CLIENT_UNREGISTERED = "UNREGISTERED";
 static const std::string INTERNET_CLIENT_REGISTERED = "REGISTERED";
 static const std::string INTERNET_CLIENT_SUPERUSER = "SUPERUSER";
 static const std::string INTERNET_CLIENT_BOT = "BOT";
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * GAME STATUS                                                             *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/// States an online game can be in.
+/// Other values might appear but should be considered as "CLOSED"
+static const std::string INTERNET_GAME_CLOSED = "CLOSED";  // Not yet connectable or not over relay
+static const std::string INTERNET_GAME_SETUP = "SETUP";    // Map selection and so
+static const std::string INTERNET_GAME_RUNNING = "RUNNING";  // Playing
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * COMMUNICATION PROTOCOL BETWEEN CLIENT AND METASERVER                    *
@@ -315,7 +325,8 @@ static const std::string IGPCMD_GAMES_UPDATE = "GAMES_UPDATE";
  * \li string:    Number of game packages and for uint8_t i = 0; i < num; ++i {:
  * \li string:    Name of the game
  * \li string:    Widelands version
- * \li string:    Whether game is connectable ("true", "false")
+ * \li string:    Status of the game, see above. Note that only because a game is connectable
+ *                this does not mean that gaming will work when the versions differ
  * }
  */
 static const std::string IGPCMD_GAMES = "GAMES";
@@ -404,20 +415,5 @@ static const std::string IGPCMD_GAME_DISCONNECT = "GAME_DISCONNECT";
  * Sent by the metaserver to acknowledge the start without payload.
  */
 static const std::string IGPCMD_GAME_START = "GAME_START";
-
-/**
- * Sent by every participating player of a game to announce the end of the game and to send the
- * statistics.
- * Payload is:
- * \li string:     name of the map
- * \li string:     names of the winners seperated with spaces
- * \li string:     informative string about the win condition.
- * \li string:     in game time until end
- *
- * \note this does not end the physical game and thus the metaserver should not remove the game from
- *       the list. The clients might want to play on, so...
- *
- */
-static const std::string IGPCMD_GAME_END = "GAME_END";
 
 #endif  // end of include guard: WL_NETWORK_INTERNET_GAMING_PROTOCOL_H

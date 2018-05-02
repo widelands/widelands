@@ -555,7 +555,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				InternetGame* ing = new InternetGame();
 				ing->name = packet.string();
 				ing->build_id = packet.string();
-				ing->connectable = str2bool(packet.string());
+				ing->connectable = (packet.string() == INTERNET_GAME_SETUP);
 				gamelist_.push_back(*ing);
 
 				bool found = false;
