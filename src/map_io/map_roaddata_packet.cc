@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,9 +71,8 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					if (!(0 < player_index && player_index <= nr_players)) {
 						throw GameDataError("Invalid player number: %i.", player_index);
 					}
-					Player& plr = egbase.player(player_index);
 
-					road.set_owner(&plr);
+					road.set_owner(egbase.get_player(player_index));
 					road.busyness_ = fr.unsigned_32();
 					road.busyness_last_update_ = fr.unsigned_32();
 					road.type_ = fr.unsigned_32();
@@ -106,8 +105,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 						try {
 							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
-							throw GameDataError(
-							   "step #%lu: %s", static_cast<long unsigned int>(nr_steps - i), e.what());
+							throw GameDataError("step #%" PRIuS ": %s", nr_steps - i, e.what());
 						}
 					road.set_path(egbase, p);
 

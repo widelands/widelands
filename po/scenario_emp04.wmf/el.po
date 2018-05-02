@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# erimitis, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: erimitis, 2018\n"
 "Language-Team: Greek (https://www.transifex.com/widelands/teams/35159/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,11 +20,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle the unproductive buildings"
-msgstr ""
+msgstr "Αποσυναρμολογήστε τα μη παραγωγικά κτίρια"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid "Dismantle Buildings"
-msgstr ""
+msgstr "Αποσυναρμολόγηση Κτιρίων"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:48
 msgid ""
@@ -63,17 +66,19 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Φτιάξτε τουλάχιστον 3 σπίτια υλοτόμων και 2 λατομεία"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:75
 msgid "Quarries and Lumberjacks"
-msgstr ""
+msgstr "Λατομεία και Υλοτόμοι"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
 msgstr ""
+"Φτιάξτε τουλάχιστον τρία σπίτια υλοτόμων και δύο λατομεία, για ανανέωση της "
+"αλυσίδας σας εφοδιασμού οικοδομικών υλικών."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Produce fish and rations"
@@ -93,7 +98,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:93
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "Φτιάξτε δύο νέα σπίτια δασοκόμων"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid ""
@@ -134,7 +139,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:120
 msgid "Hero Training"
-msgstr ""
+msgstr "Εκπαίδευση Ήρωα"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
 msgid ""
@@ -143,7 +148,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Produce at least 10 tools"
-msgstr ""
+msgstr "Παράγετε τουλάχιστον 10 εργαλεία"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:129
 msgid "Tool Production"
@@ -176,11 +181,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:147
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Καταβάλετε τους Βάρβαρους!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:149
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Καταβάλετε τον εχθρό"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:150
 msgid "End the Barbarian intrusion into your very own part of the world."
@@ -280,7 +285,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:217
 msgid "The Battle is Won"
-msgstr ""
+msgstr "Η μάχη κερδήθηκε"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:220
@@ -518,6 +523,8 @@ msgid ""
 "First of all, we need more construction materials. So, we should build at "
 "least three lumberjacks’ houses and two quarries."
 msgstr ""
+"Πρώτα από όλα, χρειαζόμαστε περισσότερα υλικά κατασκευών. Ώστε πρέπει να "
+"φτιάξουμε τουλάχιστον τρία σπίτια υλοτόμων και δύο λατομεία."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:337
@@ -637,6 +644,9 @@ msgid ""
 "behind his experience and expectations. So, I took a close look at our "
 "foresters’ performance."
 msgstr ""
+"Ένας από τους υλοτόμους μας μου είπε ότι η αναπαραγωγή των δασών μας είναι "
+"πολύ πίσω από την εμπειρία και τις προσδοκίες του. Έτσι, έριξα μια κοντινή "
+"ματιά στην επίδοση των δασοκόμων μας."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:402

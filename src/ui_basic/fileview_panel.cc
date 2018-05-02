@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 by the Widelands Development Team
+ * Copyright (C) 2016-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 
+#include "base/macros.h"
 #include "scripting/lua_interface.h"
 #include "scripting/lua_table.h"
 
@@ -63,7 +64,7 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 	}
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(std::move(textarea)));
-	add((boost::format("about_%lu") % index).str(), title, boxes_.at(index).get(), "");
+	add((boost::format("about_%" PRIuS) % index).str(), title, boxes_.at(index).get(), "");
 
 	assert(boxes_.size() == textviews_.size());
 	assert(tabs().size() == textviews_.size());

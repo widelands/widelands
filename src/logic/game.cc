@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -452,6 +452,9 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		}
 
 		if (get_ipl()) {
+			// Scroll map to starting position for new games.
+			// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
+			// InteractiveGameBase::start() for multiplayer.
 			get_ipl()->map_view()->scroll_to_field(
 			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
 		}

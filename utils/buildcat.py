@@ -126,7 +126,7 @@ XGETTEXTOPTS = '-k_ --from-code=UTF-8'
 XGETTEXTOPTS += " -F -c\"* TRANSLATORS\""
 # escaped double quotes are necessary for windows, as it ignores single quotes
 XGETTEXTOPTS += " --copyright-holder=\"Widelands Development Team\""
-XGETTEXTOPTS += " --msgid-bugs-address=\"https://bugs.launchpad.net/widelands\""
+XGETTEXTOPTS += " --msgid-bugs-address=\"https://wl.widelands.org/wiki/ReportingBugs/\""
 
 # Options for xgettext when parsing Lua scripts
 # Official Lua backend of xgettext does not support pgettext and npgettext right
@@ -150,7 +150,7 @@ HEAD += '#\n'
 HEAD += "msgid \"\"\n"
 HEAD += "msgstr \"\"\n"
 HEAD += "\"Project-Id-Version: Widelands svnVERSION\\n\"\n"
-HEAD += "\"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\\n\"\n"
+HEAD += "\"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\\n\"\n"
 HEAD += "\"POT-Creation-Date: " + \
     strftime('%Y-%m-%d %H:%M+0000', time_now) + "\\n\"\n"
 HEAD += "\"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\\n\"\n"

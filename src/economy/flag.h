@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,7 +74,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	const FlagDescr& descr() const;
 
 	Flag();                                               /// empty flag for savegame loading
-	Flag(EditorGameBase&, Player& owner, const Coords&);  /// create a new flag
+	Flag(EditorGameBase&, Player* owner, const Coords&);  /// create a new flag
 	~Flag() override;
 
 	void load_finish(EditorGameBase&) override;

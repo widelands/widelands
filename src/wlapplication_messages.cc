@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2017 by the Widelands Development Team
+ * Copyright (C) 2012-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -160,7 +160,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	std::cout << _(" --verbose            Enable verbose debug messages") << endl << endl;
 	std::cout << _(" --help               Show this help") << endl << endl;
 	std::cout << _("Bug reports? Suggestions? Check out the project website:\n"
-	               "        https://launchpad.net/widelands\n\n"
+	               "        https://wl.widelands.org/\n\n"
 	               "Hope you enjoy this game!")
 	          << endl;
 }

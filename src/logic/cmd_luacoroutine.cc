@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ void CmdLuaCoroutine::execute(Game& game) {
 			   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
 			   "images/ui_basic/menu_help.png", "Lua Coroutine Failed",
 			   (boost::format("<rt><p font-size=12>%s</p></rt>") % e.what()).str()));
-			game.player(i).add_message(game, std::move(msg), true);
+			game.get_player(i)->add_message(game, std::move(msg), true);
 		}
 		game.game_controller()->set_desired_speed(0);
 	}

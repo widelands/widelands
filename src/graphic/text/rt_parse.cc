@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -261,8 +261,10 @@ Attributes
 
 The same attributes as :ref:`rt_tags_rt`, plus the following:
 
-* **margin**: Shrink all contents to leave a margin towards the outer edge of this tag's rectangle
-* **float**: To be implemented. Allowed values are ``left``,  ``right``
+* **margin**: Shrink all contents to leave a margin towards the outer edge of this tag's rectangle.
+* **float**: Make text float around this div. Allowed values are ``left``,  ``right``.
+  The structure has to be something like: ``div("width=100%", div("float=left padding_r=6", p(img(imagepath))) .. p(text))``,
+  with the first embedded div being the floating one.
 * **valign**: Align the contents vertically. Allowed values are ``top`` (default), ``center`` or ``middle``, ``bottom``.
 * **width**: The width of this element, as a pixel amount, or as a percentage.
   The last ``div`` in a row can be expanded automatically by using ``*``.

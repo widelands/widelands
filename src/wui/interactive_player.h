@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ public:
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
-	Widelands::Player& player() const {
+	const Widelands::Player& player() const {
 		return game().player(player_number_);
 	}
 	Widelands::Player* get_player() const override {

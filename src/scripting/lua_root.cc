@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,9 +84,8 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
    METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
-   PROP_RO(LuaGame, real_speed),    PROP_RO(LuaGame, time),
-   PROP_RW(LuaGame, desired_speed), PROP_RW(LuaGame, allow_autosaving),
-   PROP_RW(LuaGame, allow_saving),  {nullptr, nullptr, nullptr},
+   PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time),      PROP_RW(LuaGame, desired_speed),
+   PROP_RW(LuaGame, allow_saving), {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -158,16 +157,6 @@ int LuaGame::set_allow_saving(lua_State* L) {
 }
 // UNTESTED
 int LuaGame::get_allow_saving(lua_State* L) {
-	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
-	return 1;
-}
-int LuaGame::set_allow_autosaving(lua_State* L) {
-	// WAS_DEPRECATED_BEFORE(build18), use allow_saving
-	get_game(L).save_handler().set_allow_saving(luaL_checkboolean(L, -1));
-	return 0;
-}
-int LuaGame::get_allow_autosaving(lua_State* L) {
-	// WAS_DEPRECATED_BEFORE(build18), use allow_saving
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
 	return 1;
 }

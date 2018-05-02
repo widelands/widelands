@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,7 @@ public:
 		GeneralStatisticsMenu::Registry general_stats;
 		UI::UniqueWindow::Registry ware_stats;
 		UI::UniqueWindow::Registry stock;
+		UI::UniqueWindow::Registry seafaring_stats;
 	};
 
 	InteractiveGameBase(Widelands::Game&,
@@ -86,14 +87,14 @@ public:
 	                                bool was_minimal);
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords, bool avoid_fastclick);
 	bool try_show_ship_window();
+	void show_ship_window(Widelands::Ship* ship);
 	bool is_multiplayer() {
 		return multiplayer_;
 	}
 
 	void show_game_summary();
 	void postload() override;
-	void start() override {
-	}
+	void start() override;
 
 protected:
 	void draw_overlay(RenderTarget&) override;

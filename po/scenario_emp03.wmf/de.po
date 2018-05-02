@@ -5,12 +5,13 @@
 # Translators:
 # Elisabeth Jäger, 2017
 # Stephan Lutz <stephan-lutz@gmx.de>, 2017
+# GunChleoc, 2017
 # Daniel Hahn <giggeler53@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Hahn <giggeler53@gmail.com>, 2018\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -1177,7 +1178,7 @@ msgid ""
 msgstr ""
 "Herr, wir haben die Ruinen einer alten Barbarenfestung und eines Dorfes "
 "gefunden. Ich habe die Befürchtung, dass wir gegen sie kämpfen müssen, bevor"
-" wir dazu bereit sind. "
+" wir dazu bereit sind."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:596
 msgid "Train Faster, Train Harder"

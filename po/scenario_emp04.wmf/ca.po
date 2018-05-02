@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Juanjo, 2017
+# GunChleoc, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Juanjo, 2017\n"
+"Last-Translator: GunChleoc, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle the unproductive buildings"
-msgstr "Desmantelleu els edificis improductius "
+msgstr "Desmantelleu els edificis improductius"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid "Dismantle Buildings"
@@ -58,19 +59,19 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Find the construction plans for the farms"
-msgstr "Trobeu els plànols de construcció de les granges"
+msgstr "Trobeu els plànols de construcció de les masoveries"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Find Farm Construction Plans"
-msgstr "Trobeu els plànols de les granges"
+msgstr "Trobeu els plànols de les masoveries"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
-"Recupereu els plànols de construcció de les granges. Busqueu-los als turons "
-"a l'est de la frontera."
+"Recupereu els plànols de construcció de les masoveries. Busqueu-los als "
+"turons a l'est de la frontera."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
@@ -564,8 +565,8 @@ msgid ""
 "The only option is to destroy them."
 msgstr ""
 "Germà, estic preocupat perquè us he de donar males notícies un altre cop. "
-"Tal com podeu veure, les nostres granges no produeixen res i no les podem "
-"desmantellar. L'única opció és destruir-les."
+"Tal com podeu veure, les nostres masoveries no produeixen gens de blat i no "
+"les podem desmantellar. L'única opció és destruir-les."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:318
@@ -575,7 +576,7 @@ msgid ""
 " productivity and the constructors don’t know how to dismantle them either."
 msgstr ""
 "Això ha passat pel trist fet que la nostra gent ha perdut les instruccions "
-"sobre com construir i fer servir les granges. Per tant, tenen una "
+"sobre com construir i emprar les masoveries. Per tant, tenen una "
 "productivitat zero i els constructors tampoc saben com desmantellar-les."
 
 #. TRANSLATORS: Amalea
@@ -586,8 +587,8 @@ msgid ""
 "concealed in a cave in the hills east of our border."
 msgstr ""
 "Per això necessitem urgentment recuperar els plànols de construcció i "
-"funcionament de les granges. Un vell constructor em va dir que podrien estar"
-" ocults en una cova dels turons a l'est de la frontera."
+"funcionament de les masoveries. Un vell constructor em va dir que podrien "
+"estar ocults en una cova dels turons a l'est de la frontera."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:328
 msgid "Amalea Looks Confident"
@@ -641,7 +642,7 @@ msgid ""
 " farms."
 msgstr ""
 "Lloats siguin els déus, Lutius! Acabem de trobar els plànols per construir i"
-" operar granges."
+" operar masoveries."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:350
@@ -649,8 +650,8 @@ msgid ""
 "Now we can start building farms to produce the beer which our miners need so"
 " desperately."
 msgstr ""
-"Ja podem construir granges per produir la cervesa que necessiten els miners "
-"desesperadament."
+"Ja podem construir masoveries de blat per produir la cervesa que necessiten "
+"els miners desesperadament."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:353
@@ -1000,8 +1001,8 @@ msgid ""
 "supply afterwards."
 msgstr ""
 "Mentrestant, podria ajudar si construïm un kiln per proveir carbó vegetal si"
-" hi ha escassedat de carbó. Però caldrà anar amb compte i garantir un "
-"abastiment de troncs continu."
+" teniu poc carbó. Però caldrà anar amb compte i garantir un abastiment de "
+"troncs continu."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:499
 msgid "Amalea is in a Good Mood"
@@ -1065,7 +1066,7 @@ msgstr "L'Amalea analitza l'economia"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:524
 msgid "Amalea reminds Lutius of the farms…"
-msgstr "L'Amalea recorda en Lutius sobre les granges…"
+msgstr "L'Amalea recorda en Lutius sobre les masoveries…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:526
@@ -1075,8 +1076,8 @@ msgid ""
 "although there is enough space to plant wheat."
 msgstr ""
 "Mireu, Lutius. He analitzat l'economia una mica més a fons. Crec que tenim "
-"un problema a les granges. Sembla que no produeixen res encara que disposen "
-"d'espai per produir blat."
+"un problema a les masoveries. Sembla que no produeixen res encara que "
+"disposen d'espai per produir blat."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:529
@@ -1240,7 +1241,7 @@ msgstr ""
 "Senyor, admeto que probablement ens hem buscat el ressentiment dels déus, "
 "però en temps de guerra, el fi sovint justifica els mitjans. I tampoc serem "
 "capaços de fer tractes amb els bàrbars, així que millor que els soldats "
-"estiguin de bon humor i que els entrenem adequadament. "
+"estiguin de bon humor i que els entrenem adequadament."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:606
 msgid "Saledus asks for a stronger army…"

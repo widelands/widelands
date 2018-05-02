@@ -98,6 +98,22 @@ return {
             "atl01.wmf",
             "dummy.wmf"
          }
+      },
+      {
+         -- **** Frisian Introduction ****
+         -- TRANSLATORS: The name of a Frisian campign
+         descname = _"From Water to Ice",
+         tribe = "frisians",
+         -- TRANSLATORS: A short description of a campign
+         difficulty = { level=4, description=_"Introduces the Frisians." },
+         -- TRANSLATORS: A long description of a campign
+         description = _"Living off the ocean is a constant struggle, and even more so for the inhabitants of the Frisian North Sea shore. Was the last storm flood, the most devastating one in human memory, really nothing more than yet another example for the hardships all Frisians have to face – or a sign from the gods that a tribe that only just settled here must seek out an entirely new home?",
+         prerequisite = "atl01.wmf",
+         scenarios = {
+            "fri01.wmf",
+            "fri02.wmf",
+            "dummy.wmf"
+         }
       }
    }
 }

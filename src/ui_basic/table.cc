@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -510,10 +510,15 @@ uint32_t Table<void*>::toggle_entry(uint32_t row) {
 /**
  * Add a new entry to the table.
 */
-Table<void*>::EntryRecord& Table<void*>::add(void* const entry) {
+Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_select) {
 	EntryRecord& result = *new EntryRecord(entry);
 	entry_records_.push_back(&result);
 	result.data_.resize(columns_.size());
+
+	if (do_select) {
+		select(entry_records_.size() - 1);
+		scrollbar_->set_scrollpos(std::numeric_limits<int32_t>::max());
+	}
 	layout();
 	return result;
 }
@@ -548,6 +553,18 @@ void Table<void*>::remove(const uint32_t i) {
 		multiselect_.insert(selection_);
 	}
 	layout();
+}
+
+/**
+ * Remove the given table entry if it exists.
+ */
+void Table<void*>::remove_entry(const void* const entry) {
+	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
+		if (entry_records_[i]->entry() == entry) {
+			remove(i);
+			return;
+		}
+	}
 }
 
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {

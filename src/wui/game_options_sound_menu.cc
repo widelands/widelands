@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/multilinetextarea.h"
 
 GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                                            UI::UniqueWindow::Registry& registry)
@@ -62,11 +63,32 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
 	ingame_music.set_state(!g_sound_handler.get_disable_music());
 	ingame_sound.set_state(!g_sound_handler.get_disable_fx());
 
-	if (g_sound_handler.lock_audio_disabling_) {  //  disabling sound options
+	uint32_t boxes_width =
+	   kStateboxSize + hspacing() + std::max(ingame_music.get_w(), ingame_sound.get_w());
+	uint32_t labels_width =
+	   std::max(ingame_music_volume_label.get_w(), ingame_sound_volume_label.get_w());
+
+	set_inner_size(std::max(static_cast<uint32_t>(get_inner_w()),
+	                        2 * hmargin() + std::max(boxes_width, labels_width)),
+	               2 * vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing() +
+	                  3 * vspacing() + 2 * slideh() + ingame_music_volume_label.get_h() +
+	                  ingame_music_volume_label.get_h());
+
+	if (g_sound_handler.is_backend_disabled()) {  //  disabling sound options
 		ingame_music.set_enabled(false);
 		ingame_sound.set_enabled(false);
 		ingame_music_volume.set_enabled(false);
 		ingame_sound_volume.set_enabled(false);
+		UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
+		   this, hmargin(), ingame_sound_volume.get_y() + ingame_sound_volume.get_h() + vspacing(),
+		   get_inner_w() - 2 * hmargin(), 0,
+		   _("Sound is disabled due to a problem with the sound driver"), UI::Align::kLeft,
+		   g_gr->images().get("images/ui_basic/but4.png"),
+		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+
+		sound_warning->set_color(UI_FONT_CLR_WARNING);
+		set_size(get_w(), get_h() + sound_warning->get_h() + vspacing());
+
 	} else {  // initial widget states
 		ingame_music.set_state(!g_sound_handler.get_disable_music());
 		ingame_sound.set_state(!g_sound_handler.get_disable_fx());
@@ -83,17 +105,6 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
 	   boost::bind(&GameOptionsSoundMenu::music_volume_changed, this, _1));
 	ingame_sound_volume.changedto.connect(
 	   boost::bind(&GameOptionsSoundMenu::sound_volume_changed, this, _1));
-
-	uint32_t boxes_width =
-	   kStateboxSize + hspacing() + std::max(ingame_music.get_w(), ingame_sound.get_w());
-	uint32_t labels_width =
-	   std::max(ingame_music_volume_label.get_w(), ingame_sound_volume_label.get_w());
-
-	set_inner_size(std::max(static_cast<uint32_t>(get_inner_w()),
-	                        2 * hmargin() + std::max(boxes_width, labels_width)),
-	               2 * vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing() +
-	                  3 * vspacing() + 2 * slideh() + ingame_music_volume_label.get_h() +
-	                  ingame_music_volume_label.get_h());
 
 	if (get_usedefaultpos())
 		center_to_parent();

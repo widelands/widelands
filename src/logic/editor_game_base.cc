@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -160,7 +160,7 @@ Player* EditorGameBase::get_player(const int32_t n) const {
 	return player_manager_->get_player(n);
 }
 
-Player& EditorGameBase::player(const int32_t n) const {
+const Player& EditorGameBase::player(const int32_t n) const {
 	return player_manager_->player(n);
 }
 
@@ -225,8 +225,8 @@ Building& EditorGameBase::warp_building(const Coords& c,
                                         PlayerNumber const owner,
                                         DescriptionIndex const idx,
                                         Building::FormerBuildings former_buildings) {
-	Player& plr = player(owner);
-	const TribeDescr& tribe = plr.tribe();
+	Player* plr = get_player(owner);
+	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, former_buildings);
 }
 
@@ -242,8 +242,8 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
                                                 DescriptionIndex idx,
                                                 bool loading,
                                                 Building::FormerBuildings former_buildings) {
-	Player& plr = player(owner);
-	const TribeDescr& tribe = plr.tribe();
+	Player* plr = get_player(owner);
+	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
 }
 
@@ -256,15 +256,15 @@ Building& EditorGameBase::warp_dismantlesite(const Coords& c,
                                              PlayerNumber const owner,
                                              bool loading,
                                              Building::FormerBuildings former_buildings) {
-	Player& plr = player(owner);
-	const TribeDescr& tribe = plr.tribe();
+	Player* plr = get_player(owner);
+	const TribeDescr& tribe = plr->tribe();
 
 	BuildingDescr const* const descr =
 	   tribe.get_building_descr(tribe.safe_building_index("dismantlesite"));
 
 	upcast(const DismantleSiteDescr, ds_descr, descr);
 
-	return *new DismantleSite(*ds_descr, *this, c, *get_player(owner), loading, former_buildings);
+	return *new DismantleSite(*ds_descr, *this, c, plr, loading, former_buildings);
 }
 
 /**
@@ -576,7 +576,7 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(preferred_player <= map().get_nrplayers());
 	assert(preferred_player != player_area.player_number);
 	assert(!conquer || !preferred_player);
-	Player& conquering_player = player(player_area.player_number);
+	Player* conquering_player = get_player(player_area.player_number);
 	MapRegion<Area<FCoords>> mr(map(), player_area);
 	do {
 		MapIndex const index = mr.location().field - &first_field;
@@ -586,14 +586,14 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 		PlayerNumber const owner = mr.location().field->get_owned_by();
 		if (conquer) {
 			//  adds the influence
-			MilitaryInfluence new_influence_modified = conquering_player.military_influence(index) +=
+			MilitaryInfluence new_influence_modified = conquering_player->military_influence(index) +=
 			   influence;
 			if (owner && !conquer_guarded_location_by_superior_influence)
 				new_influence_modified = 1;
 			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
 				change_field_owner(mr.location(), player_area.player_number);
 			}
-		} else if (!(conquering_player.military_influence(index) -= influence) &&
+		} else if (!(conquering_player->military_influence(index) -= influence) &&
 		           owner == player_area.player_number) {
 			//  The player completely lost influence over the location, which he
 			//  owned. Now we must see if some other player has influence and if

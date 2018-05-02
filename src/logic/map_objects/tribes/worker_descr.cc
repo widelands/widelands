@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -146,11 +146,11 @@ WorkerProgram const* WorkerDescr::get_program(const std::string& programname) co
  * Custom creation routing that accounts for the location.
  */
 Worker& WorkerDescr::create(EditorGameBase& egbase,
-                            Player& owner,
+                            Player* owner,
                             PlayerImmovable* const location,
                             Coords const coords) const {
 	Worker& worker = dynamic_cast<Worker&>(create_object());
-	worker.set_owner(&owner);
+	worker.set_owner(owner);
 	worker.set_location(location);
 	worker.set_position(egbase, coords);
 	worker.init(egbase);

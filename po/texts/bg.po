@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-24 11:38+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-07 17:52+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -51,40 +51,44 @@ msgid ""
 "webpage: %s"
 msgstr "Можете да намерите повече информация относно софтуера с отворен код и ОПЛ като посетите следната страница: %s"
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Там ще откриете пълния текст на лиценза, както и още информация относно философията му и правните подробности."
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Ние сме включили ОПЛ като текстов документ в Widelands."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "На Линукс, можете да откриете файла COPYING в главната папка на двоичния пакет или този с изходния код, или в инсталационната папка (напр. „%1%“)."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "На Windows, можете да откриете файла COPYING.txt в инсталационната папка. В папката на Widelands в менюто Старт също има връзка към този файл."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "На MacOS, можете да откриете файла COPYING в архива, който сте изтеглили от уеб сайта."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:22
+msgid "This game comes as-is and without any warranty."
+msgstr "Тази игра се предоставя във вида, в който е, без никакви гаранции."
+
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Тази игра се предоставя във вида, в който е и без никакви гаранции. За повече информация и поддръжка, можете да ни откриете на %1% (уеб сайт, уики, форум за въпроси и обща поддръжка), %2% (система за докладване на грешки) и %3% (преводи)."
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr "За повече информация и поддръжка, можете да ни откриете на %1% (уеб сайт, уики, форум за въпроси и обща поддръжка), %2% (система за докладване на грешки) и %3% (преводи)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -240,6 +244,10 @@ msgstr "Предишни старейшини"
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
 msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisian"
+msgstr "Фризийци"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -515,6 +523,7 @@ msgid ""
 msgstr "Винаги стройте лесничейска и дивечовъдска хижи, за да не останете без дървени трупи или дивеч."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
@@ -597,6 +606,17 @@ msgstr "Винаги стройте лесничейска къща, за да �
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
 msgstr "Империята се нуждае от много мрамор. Търсете залежи на мрамор."
+
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr "За да произвеждате тухли, се нуждаете от гранит. За да произвеждате гранит, се нуждаете от кариера или мина за камъни. А за да ги построите, се нуждаете от тухли. Пазете се от подобни неизпълнени циклични зависимости!"
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester’s house, so you will not run out of logs."
+msgstr "Винаги стройте лесничейска къща, за да не останете без дървени трупи."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

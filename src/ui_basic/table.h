@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,8 +84,9 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(Entry);
 
-	EntryRecord& add(void* const entry);
+	EntryRecord& add(void* const entry, bool const select_this = false);
 
 	uint32_t size() const;
 	bool empty() const;
@@ -184,8 +185,6 @@ public:
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
-	void layout() override;
-
 	void clear();
 	void set_sort_column(uint8_t const col) {
 		assert(col < columns_.size());
@@ -203,8 +202,9 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(const void* const entry);
 
-	EntryRecord& add(void* entry = nullptr);
+	EntryRecord& add(void* entry = nullptr, bool const select_this = false);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -271,6 +271,8 @@ public:
 
 	void scroll_to_top();
 
+	void layout() override;
+
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
@@ -331,8 +333,12 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(Entry const* const entry = 0) {
-		return Base::add(const_cast<Entry*>(entry));
+	void remove_entry(Entry const* const entry) {
+		Base::remove_entry(const_cast<Entry*>(entry));
+	}
+
+	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
+		return Base::add(const_cast<Entry*>(entry), select_this);
 	}
 
 	Entry const* operator[](uint32_t const i) const {
@@ -361,8 +367,12 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(Entry* const entry = 0) {
-		return Base::add(entry);
+	void remove_entry(Entry const* entry) {
+		Base::remove_entry(entry);
+	}
+
+	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
+		return Base::add(entry, select_this);
 	}
 
 	Entry* operator[](uint32_t const i) const {
@@ -391,8 +401,12 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(const Entry& entry) {
-		return Base::add(&const_cast<Entry&>(entry));
+	void remove_entry(const Entry& entry) {
+		Base::remove_entry(&const_cast<Entry&>(entry));
+	}
+
+	EntryRecord& add(const Entry& entry, bool const select_this = false) {
+		return Base::add(&const_cast<Entry&>(entry), select_this);
 	}
 
 	const Entry& operator[](uint32_t const i) const {
@@ -425,8 +439,12 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(Entry& entry) {
-		return Base::add(&entry);
+	void remove_entry(Entry& entry) {
+		Base::remove_entry(&entry);
+	}
+
+	EntryRecord& add(Entry& entry, bool const select_this = false) {
+		return Base::add(&entry, select_this);
 	}
 
 	Entry& operator[](uint32_t const i) const {
@@ -461,8 +479,12 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
-	EntryRecord& add(uintptr_t const entry) {
-		return Base::add(reinterpret_cast<void*>(entry));
+	void remove_entry(uintptr_t const entry) {
+		Base::remove_entry(reinterpret_cast<void*>(entry));
+	}
+
+	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {
+		return Base::add(reinterpret_cast<void*>(entry), select_this);
 	}
 
 	uintptr_t operator[](uint32_t const i) const {

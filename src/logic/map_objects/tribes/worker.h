@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,11 +76,7 @@ public:
 	explicit Worker(const WorkerDescr&);
 	~Worker() override;
 
-	Player& owner() const {
-		assert(get_owner());
-		return *get_owner();
-	}
-	PlayerImmovable* get_location(EditorGameBase& egbase) {
+	PlayerImmovable* get_location(const EditorGameBase& egbase) const {
 		return location_.get(egbase);
 	}
 	OPtr<PlayerImmovable> get_location() const {

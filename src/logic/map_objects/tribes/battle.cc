@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -176,8 +176,8 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 
 	if (soldier.get_current_health() < 1) {
 		molog("[battle] soldier %u lost the battle\n", soldier.serial());
-		soldier.owner().count_casualty();
-		opponent(soldier)->owner().count_kill();
+		soldier.get_owner()->count_casualty();
+		opponent(soldier)->get_owner()->count_kill();
 		soldier.start_task_die(game);
 		molog("[battle] waking up winner %d\n", opponent(soldier)->serial());
 		opponent(soldier)->send_signal(game, "wakeup");
