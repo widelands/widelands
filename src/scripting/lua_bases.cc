@@ -345,11 +345,16 @@ std::map<std::string, const char*> *keys, std::map<std::string, const char*> *ty
 			report_error(L, "A campaign data value may be a string, integer, boolean, or table; but not a %s!", type_name);
 		}
 
-		lua_pop(L, 1);
-		const char* key = luaL_checkstring(L, -1);
-
-		(*keys)[key_key] = key;
 		(*type)[key_key] = type_name;
+
+		lua_pop(L, 1);
+		if (lua_type(L, -1) == LUA_TSTRING) {
+		    (*keys)[key_key] = luaL_checkstring(L, -1);
+		}
+		else if (lua_type(L, -1) != LUA_TNUMBER) {
+			report_error(L, "A campaign data key may be a string or integer; but not a %s!",
+					lua_typename(L, lua_type(L, -1)));
+		}
 
 		++i;
 	}
@@ -365,9 +370,11 @@ std::map<std::string, const char*> *keys, std::map<std::string, const char*> *ty
 
       Saves information that can be read by other scenarios.
 
-      All keys have to be strings; in particular, arrays cannot be used as campaign data.
+      If an array is used, the data will be saved in the correct order.
+      Note that any values that are :const:`nil` will be omitted, wherefore subsequent indices are decremented!
+      If the table is not an array, all keys have to be strings.
       Tables may contain subtables of any depth. Cyclic dependencies will cause Widelands to crash.
-      Only tables, strings, integer numbers and booleans may be used as values.
+      Only tables/arrays, strings, integer numbers and booleans may be used as values.
 */
 int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 
@@ -419,10 +426,14 @@ Section* type_section, Section* size_section) {
 	for (uint32_t i = 0; i < size; i++) {
 		const char* key_key = (depth + "_" + std::to_string(i)).c_str();
 
-		const char* key = keys_section->get_string(key_key);
+		if (keys_section->has_val(key_key)) {
+			lua_pushstring(L, keys_section->get_string(key_key));
+		}
+		else {
+			lua_pushinteger(L, i + 1);
+		}
 		const std::string type = type_section->get_string(key_key);
 
-		lua_pushstring(L, key);
 		if (type == "boolean") {
 			lua_pushboolean(L, data_section->get_bool(key_key));
 		} else if (type == "number") {
@@ -431,9 +442,10 @@ Section* type_section, Section* size_section) {
 			lua_pushstring(L, data_section->get_string(key_key));
 		} else if (type == "table") {
 			push_table_recursively(L, depth + "_" + std::to_string(i),
-			        data_section, keys_section, type_section, size_section);
+					data_section, keys_section, type_section, size_section);
 		} else {
-			log("Illegal data type %s in campaign data file, interpreting key %s as nil\n", type.c_str(), key);
+			log("Illegal data type %s in campaign data file, interpreting key %s as nil\n",
+					type.c_str(), luaL_checkstring(L, -1));
 			lua_pushnil(L);
 		}
 		lua_settable(L, -3);
@@ -448,7 +460,8 @@ Section* type_section, Section* size_section) {
 
       Reads information that was saved by another scenario.
       The data is returned as a table of key-value pairs.
-      The table is not guaranteed to be in any particular order.
+      The table is not guaranteed to be in any particular order, unless it is an array,
+      in which case it will be returned in the same order as it was saved.
       This function returns :const:`nil` if the file cannot be opened for reading.
 */
 int LuaEditorGameBase::read_campaign_data(lua_State* L) {
