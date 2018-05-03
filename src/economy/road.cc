@@ -357,7 +357,7 @@ void Road::request_carrier_callback(
 	delete &rq;
 	w->start_task_gowarehouse(game);
 }
-const uint8_t Road::carriers_count() const {
+uint8_t Road::carriers_count() const {
 	return (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
 }
 
@@ -605,7 +605,7 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 	    path_.get_nsteps());
 
 	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
-	this->charge_wallet(game);
+	charge_wallet(game);
 
 	if (type_ == RoadType::kNormal && wallet_ > 1.5 * kAnimalPrice) {
 		// Promote the road

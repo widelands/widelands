@@ -140,7 +140,7 @@ private:
 	static void
 	request_carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
-	const uint8_t carriers_count() const;
+	uint8_t carriers_count() const;
 
 private:
 	/// Counter that is incremented when a ware does not get a carrier for this
