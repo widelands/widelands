@@ -538,20 +538,20 @@ void Road::postsplit(Game& game, Flag& flag) {
 }
 
 /**
- * Called by Flag code: an ware should be picked up from the given flag.
+ * Try to pick up a ware from the given flag.
  * \return true if a carrier has been sent on its way, false otherwise.
  */
 bool Road::notify_ware(Game& game, FlagId const flagid) {
-	// Iterate over all carriers and try to find one which takes the ware.
+	// Iterate over all carriers and try to find one which will take the ware
 	for (CarrierSlot& slot : carrier_slots_) {
 		if (Carrier* const carrier = slot.carrier.get(game)) {
 			if (carrier->notify_ware(game, flagid)) {
-				// notify_ware returns true if the carrier took the ware
+				// The carrier took the ware, so we're done
 				return true;
 			}
 		}
 	}
-	// no carrier took the ware
+	// No carrier took the ware
 	return false;
 }
 
@@ -578,7 +578,7 @@ void Road::charge_wallet(Game& game) {
 	if (wallet_ < 0) {
 		wallet_ = 0;
 		if (type_ == RoadType::kBusy) {
-			// Demote the road.
+			// Demote the road
 			Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
 			if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
 				second_carrier->send_signal(game, "cancel");
@@ -606,8 +606,9 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 
 	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
 	this->charge_wallet(game);
+
 	if (type_ == RoadType::kNormal && wallet_ > 1.5 * kAnimalPrice) {
-		// Promote the road.
+		// Promote the road
 		wallet_ -= kAnimalPrice;
 		type_ = RoadType::kBusy;
 		mark_map(game);
@@ -617,8 +618,9 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 			}
 		}
 	}
-	if (wallet_ > kMaxWallet)
+	if (wallet_ > kMaxWallet) {
 		wallet_ = kMaxWallet;
+	}
 }
 
 /**
@@ -626,7 +628,7 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
  */
 void Road::pay_for_building() {
 	wallet_ += 2 * (carriers_count() + 1);
-	// don't bother with checks, since next ware will cause them anyway
+	// Don't bother with checks here, since the next ware will cause them anyway
 }
 void Road::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
