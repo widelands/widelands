@@ -132,6 +132,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	          << endl
 	          << _(" --xres=[...]         Width of the window in pixel.") << endl
 	          << _(" --yres=[...]         Height of the window in pixel.") << endl
+	          << _(" --maxfps=[5 ...]     Maximal optical framerate of the game.") << endl
 	          << endl
 	          /** TRANSLATORS: You may translate true/false, also as on/off or yes/no, but */
 	          /** TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the widelands
