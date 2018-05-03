@@ -509,7 +509,7 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
 /**
  * Count only those wares which are awaiting to be carried along the same road.
 */
-uint8_t Flag::count_wares_in_queue(Game& game, PlayerImmovable& dest) {
+uint8_t Flag::count_wares_in_queue(PlayerImmovable& dest) const {
   uint8_t n = 0;
   for (int32_t i = 0; i < ware_filled_; ++i) {
     if (wares_[i].nextstep == &dest) ++n;

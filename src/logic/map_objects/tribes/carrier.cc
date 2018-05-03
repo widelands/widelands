@@ -257,7 +257,7 @@ void Carrier::pickup_from_flag(Game& game, State& state) {
 		// Are there wares to move between our flags?
 		if (WareInstance* const ware = flag.fetch_pending_ware(game, otherflag)) {
 			// pay before getting the ware, while checking for road promotion
-			road.pay_for_road(game, flag.count_wares_in_queue(game, otherflag));
+			road.pay_for_road(game, flag.count_wares_in_queue(otherflag));
 			set_carried_ware(game, ware);
 
 
@@ -309,7 +309,7 @@ void Carrier::drop_ware(Game& game, State& state) {
 	// Pick up new load, if any
 	if (other) {
 	// pay before getting the ware, while checking for road promotion
-	road.pay_for_road(game, flag.count_wares_in_queue(game, otherflag));
+	road.pay_for_road(game, flag.count_wares_in_queue(otherflag));
 	set_carried_ware(game, other);
 
 

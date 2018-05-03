@@ -131,7 +131,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool cancel_pickup(Game&, Flag& destflag);
 	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
 	Wares get_wares();
-	uint8_t count_wares_in_queue(Game& game, PlayerImmovable& dest);
+	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
 
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);
 	void update_wares(Game&, Flag* other);
