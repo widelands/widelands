@@ -47,13 +47,9 @@ bool Road::is_road_descr(MapObjectDescr const* const descr) {
 
 /**
  * Most of the actual work is done in init.
-*/
+ */
 Road::Road()
-   : PlayerImmovable(g_road_descr),
-     wallet_(0),
-     last_wallet_charge_(0),
-     type_(0),
-     idle_index_(0) {
+   : PlayerImmovable(g_road_descr), wallet_(0), last_wallet_charge_(0), type_(0), idle_index_(0) {
 	flags_[0] = flags_[1] = nullptr;
 	flagidx_[0] = flagidx_[1] = -1;
 
@@ -80,7 +76,7 @@ Road::~Road() {
 
 /**
  * Create a road between the given flags, using the given path.
-*/
+ */
 Road& Road::create(EditorGameBase& egbase, Flag& start, Flag& end, const Path& path) {
 	assert(start.get_position() == path.get_start());
 	assert(end.get_position() == path.get_end());
@@ -129,7 +125,7 @@ Flag& Road::base_flag() {
 
 /**
  * Return the cost of getting from fromflag to the other flag.
-*/
+ */
 int32_t Road::get_cost(FlagId fromflag) {
 	return cost_[fromflag];
 }
@@ -137,7 +133,7 @@ int32_t Road::get_cost(FlagId fromflag) {
 /**
  * Set the new path, calculate costs.
  * You have to set start and end flags before calling this function.
-*/
+ */
 void Road::set_path(EditorGameBase& egbase, const Path& path) {
 	assert(path.get_nsteps() >= 2);
 	assert(path.get_start() == flags_[FlagStart]->get_position());
@@ -152,7 +148,7 @@ void Road::set_path(EditorGameBase& egbase, const Path& path) {
 
 /**
  * Add road markings to the map
-*/
+ */
 void Road::mark_map(EditorGameBase& egbase) {
 	const Map& map = egbase.map();
 	FCoords curf = map.get_fcoords(path_.get_start());
@@ -186,7 +182,7 @@ void Road::mark_map(EditorGameBase& egbase) {
 
 /**
  * Remove road markings from the map
-*/
+ */
 void Road::unmark_map(EditorGameBase& egbase) {
 	const Map& map = egbase.map();
 	FCoords curf(path_.get_start(), &map[path_.get_start()]);
@@ -220,7 +216,7 @@ void Road::unmark_map(EditorGameBase& egbase) {
 
 /**
  * Initialize the road.
-*/
+ */
 bool Road::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
@@ -275,7 +271,7 @@ void Road::link_into_flags(EditorGameBase& egbase) {
 
 /**
  * Cleanup the road
-*/
+ */
 void Road::cleanup(EditorGameBase& egbase) {
 
 	for (CarrierSlot& slot : carrier_slots_) {
@@ -306,7 +302,7 @@ void Road::cleanup(EditorGameBase& egbase) {
 /**
  * Workers' economies are fixed by PlayerImmovable, but we need to handle
  * any requests ourselves.
-*/
+ */
 void Road::set_economy(Economy* const e) {
 	PlayerImmovable::set_economy(e);
 
@@ -322,7 +318,7 @@ void Road::set_economy(Economy* const e) {
  *
  * Only call this if the road can handle a new carrier, and if no request has
  * been issued.
-*/
+ */
 void Road::request_carrier(CarrierSlot& slot) {
 	if (slot.carrier_type == 1)
 		slot.carrier_request =
@@ -334,7 +330,7 @@ void Road::request_carrier(CarrierSlot& slot) {
 
 /**
  * The carrier has arrived successfully.
-*/
+ */
 void Road::request_carrier_callback(
    Game& game, Request& rq, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
 	assert(w);
@@ -362,12 +358,12 @@ void Road::request_carrier_callback(
 	w->start_task_gowarehouse(game);
 }
 const uint8_t Road::carriers_count() const {
- return (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
+	return (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
 }
 
 /**
  * If we lost our carrier, re-request it.
-*/
+ */
 void Road::remove_worker(Worker& w) {
 	EditorGameBase& egbase = get_owner()->egbase();
 
@@ -407,7 +403,7 @@ void Road::assign_carrier(Carrier& c, uint8_t slot) {
  * A flag has been placed that splits this road. This function is called before
  * the new flag initializes. We remove markings to avoid interference with the
  * flag.
-*/
+ */
 void Road::presplit(Game& game, Coords) {
 	unmark_map(game);
 }
@@ -418,7 +414,7 @@ void Road::presplit(Game& game, Coords) {
  *
  * After the split, this road will span [start...new flag]. A new road will
  * be created to span [new flag...end]
-*/
+ */
 // TODO(SirVer): This needs to take an EditorGameBase as well.
 void Road::postsplit(Game& game, Flag& flag) {
 	Flag& oldend = *flags_[FlagEnd];
@@ -546,92 +542,94 @@ void Road::postsplit(Game& game, Flag& flag) {
  * \return true if a carrier has been sent on its way, false otherwise.
  */
 bool Road::notify_ware(Game& game, FlagId const flagid) {
-  // Iterate over all carriers and try to find one which takes the ware.
-  for (CarrierSlot& slot : carrier_slots_) {
-    if (Carrier* const carrier = slot.carrier.get(game)) {
-      if (carrier->notify_ware(game, flagid)) {
-        // notify_ware returns true if the carrier took the ware
-        return true;
-      }
-    }
-  }
-  // no carrier took the ware
-  return false;
+	// Iterate over all carriers and try to find one which takes the ware.
+	for (CarrierSlot& slot : carrier_slots_) {
+		if (Carrier* const carrier = slot.carrier.get(game)) {
+			if (carrier->notify_ware(game, flagid)) {
+				// notify_ware returns true if the carrier took the ware
+				return true;
+			}
+		}
+	}
+	// no carrier took the ware
+	return false;
 }
 
 /**
  * Reset last_wallet_charge_.
-*/
+ */
 void Road::reset_charging(Game& game) {
 	last_wallet_charge_ = game.get_gametime() / 1000;
 }
 
 /**
  * Subtract maintenance cost, and check for demotion.
-*/
+ */
 void Road::charge_wallet(Game& game) {
 	const uint32_t gamesecs = game.get_gametime() / 1000;
 	assert(last_wallet_charge_ <= gamesecs);
 
-	log ("wallet: %d, carriers: %d, gamesecs: %d, last_charge: %d, steps: %lu\n",
-	     wallet_, carriers_count(), gamesecs, last_wallet_charge_, path_.get_nsteps());
+	log("wallet: %d, carriers: %d, gamesecs: %d, last_charge: %d, steps: %lu\n", wallet_,
+	    carriers_count(), gamesecs, last_wallet_charge_, path_.get_nsteps());
 
 	wallet_ -= carriers_count() * (gamesecs - last_wallet_charge_);
 	last_wallet_charge_ = gamesecs;
 
-  if (wallet_ < 0) {
-    wallet_ = 0;
-    if (type_ == RoadType::kBusy) {
-      // Demote the road.
-      Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
-      if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
-        second_carrier->send_signal(game, "cancel");
-        // This signal is not handled in any special way. It will simply pop the task off the stack.
-        // The string "cancel" has been used to clarify the final goal we want to achieve, ie: cancelling the current task.
-        carrier_slots_[1].carrier = nullptr;
-        carrier_slots_[1].carrier_request = nullptr;
-        type_ = RoadType::kNormal;
-        mark_map(game);
-      }
-    }
-  }
+	if (wallet_ < 0) {
+		wallet_ = 0;
+		if (type_ == RoadType::kBusy) {
+			// Demote the road.
+			Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
+			if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
+				second_carrier->send_signal(game, "cancel");
+				// This signal is not handled in any special way. It will simply pop the task off the
+				// stack. The string "cancel" has been used to clarify the final goal we want to
+				// achieve, ie: cancelling the current task.
+				carrier_slots_[1].carrier = nullptr;
+				carrier_slots_[1].carrier_request = nullptr;
+				type_ = RoadType::kNormal;
+				mark_map(game);
+			}
+		}
+	}
 }
 
 /**
  * Add carrying payment, and check for promotion.
-*/
+ */
 void Road::pay_for_road(Game& game, uint8_t queue_length) {
-  constexpr uint16_t kAnimalPrice = 600;
-  constexpr int16_t kMaxWallet  = 2.5 * kAnimalPrice;
+	constexpr uint16_t kAnimalPrice = 600;
+	constexpr int16_t kMaxWallet = 2.5 * kAnimalPrice;
 
-	log ("wallet: %d, carriers: %d, queue: %d, steps: %lu\n",
-		 wallet_, carriers_count(), queue_length, path_.get_nsteps());
+	log("wallet: %d, carriers: %d, queue: %d, steps: %lu\n", wallet_, carriers_count(), queue_length,
+	    path_.get_nsteps());
 
-  wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
-  this->charge_wallet(game);
-  if (type_ == RoadType::kNormal && wallet_ > 1.5 * kAnimalPrice) {
-    // Promote the road.
-    wallet_ -= kAnimalPrice;
-    type_ = RoadType::kBusy;
-    mark_map(game);
-    for (CarrierSlot& slot : carrier_slots_) {
-      if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type != 1) {
-        request_carrier(slot);
-      }
-    }
-  }
-  if (wallet_ > kMaxWallet) wallet_ = kMaxWallet;
+	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
+	this->charge_wallet(game);
+	if (type_ == RoadType::kNormal && wallet_ > 1.5 * kAnimalPrice) {
+		// Promote the road.
+		wallet_ -= kAnimalPrice;
+		type_ = RoadType::kBusy;
+		mark_map(game);
+		for (CarrierSlot& slot : carrier_slots_) {
+			if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type != 1) {
+				request_carrier(slot);
+			}
+		}
+	}
+	if (wallet_ > kMaxWallet)
+		wallet_ = kMaxWallet;
 }
 
 /**
  * Add extra coins for street-segment at building.
-*/
+ */
 void Road::pay_for_building() {
-  wallet_ += 2 * (carriers_count() + 1);
-  // don't bother with checks, since next ware will cause them anyway
+	wallet_ += 2 * (carriers_count() + 1);
+	// don't bother with checks, since next ware will cause them anyway
 }
 void Road::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
 	molog("wallet_: %i\n", wallet_);
 }
-}
+}  // namespace Widelands
