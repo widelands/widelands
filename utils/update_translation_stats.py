@@ -65,12 +65,12 @@ def generate_translation_stats(po_dir, output_file):
             if 'ERROR' in stats_output:
                 print('\nError running pocount:\n' + stats_output.split('\n', 0)
                       [0]) + '\nAborted creating translation statistics.'
-                return False
+                return 1
 
         except CalledProcessError:
             print('Failed to run pocount:\n  FILE: ' + po_dir +
                   '\n  ' + stats_output.split('\n', 1)[1])
-            return False
+            return 1
 
         result = stats_output.split('\n')
 
@@ -129,7 +129,7 @@ def generate_translation_stats(po_dir, output_file):
     with open(output_file, 'w+') as destination:
         destination.write(result[:-1])  # Strip the final \n
     print('\nResult written to ' + output_file)
-    return True
+    return 0
 
 
 def main():
@@ -139,6 +139,7 @@ def main():
         output_file = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '../data/i18n/translation_stats.conf'))
         result = generate_translation_stats(po_dir, output_file)
+        sys.stdout.flush()
         return result
 
     except Exception:
