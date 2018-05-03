@@ -181,7 +181,7 @@ void Carrier::transport_update(Game& game, State& state) {
 		if (next && next != &flag && &next->base_flag() == &flag) {
 			// pay some coins before entering the building,
 			// to compensate for the time to be spent in its street-segment
-			road.pay_for_building(game);
+			road.pay_for_building();
 			enter_building(game, state);
 		}
 

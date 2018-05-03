@@ -111,7 +111,7 @@ struct Road : public PlayerImmovable {
 	void reset_charging(Game& game);
 	void charge_wallet(Game& game);
 	void pay_for_road(Game& game, uint8_t wares_count);
-	void pay_for_building(Game& game);
+	void pay_for_building();
 
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t);
@@ -139,6 +139,8 @@ private:
 	void request_carrier(CarrierSlot&);
 	static void
 	request_carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+
+	const uint8_t carriers_count() const;
 
 private:
 	/// Counter that is incremented when a ware does not get a carrier for this

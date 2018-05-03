@@ -361,6 +361,9 @@ void Road::request_carrier_callback(
 	delete &rq;
 	w->start_task_gowarehouse(game);
 }
+const uint8_t Road::carriers_count() const {
+ return (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
+}
 
 /**
  * If we lost our carrier, re-request it.
@@ -557,7 +560,7 @@ bool Road::notify_ware(Game& game, FlagId const flagid) {
 }
 
 /**
- * Reset last_wallet_charge_ .
+ * Reset last_wallet_charge_.
 */
 void Road::reset_charging(Game& game) {
 	last_wallet_charge_ = game.get_gametime() / 1000;
@@ -569,13 +572,13 @@ void Road::reset_charging(Game& game) {
 void Road::charge_wallet(Game& game) {
 	const uint32_t gamesecs = game.get_gametime() / 1000;
 	assert(last_wallet_charge_ <= gamesecs);
-	const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
 
 	log ("wallet: %d, carriers: %d, gamesecs: %d, last_charge: %d, steps: %lu\n",
-	     wallet_, carriers_count, gamesecs, last_wallet_charge_, path_.get_nsteps());
+	     wallet_, carriers_count(), gamesecs, last_wallet_charge_, path_.get_nsteps());
 
-	wallet_ -= carriers_count * (gamesecs - last_wallet_charge_);
+	wallet_ -= carriers_count() * (gamesecs - last_wallet_charge_);
 	last_wallet_charge_ = gamesecs;
+
   if (wallet_ < 0) {
     wallet_ = 0;
     if (type_ == RoadType::kBusy) {
@@ -583,11 +586,8 @@ void Road::charge_wallet(Game& game) {
       Carrier* const second_carrier = carrier_slots_[1].carrier.get(game);
       if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
         second_carrier->send_signal(game, "cancel");
-        // this signal is not handled in any special way
-        // so it simply pop the task off the stack
-        // the string "cancel" has been used to make clear
-        // the final goal we want to achieve
-        // ie: cancelling current task
+        // This signal is not handled in any special way. It will simply pop the task off the stack.
+        // The string "cancel" has been used to clarify the final goal we want to achieve, ie: cancelling the current task.
         carrier_slots_[1].carrier = nullptr;
         carrier_slots_[1].carrier_request = nullptr;
         type_ = RoadType::kNormal;
@@ -601,18 +601,17 @@ void Road::charge_wallet(Game& game) {
  * Add carrying payment, and check for promotion.
 */
 void Road::pay_for_road(Game& game, uint8_t queue_length) {
-  const uint16_t animal_price = 600;
-  const int16_t max_wallet  = 2.5 * animal_price;
-  const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
+  constexpr uint16_t kAnimalPrice = 600;
+  constexpr int16_t kMaxWallet  = 2.5 * kAnimalPrice;
 
-log ("wallet: %d, carriers: %d, queue: %d, steps: %lu\n",
-     wallet_, carriers_count, queue_length, path_.get_nsteps());
+	log ("wallet: %d, carriers: %d, queue: %d, steps: %lu\n",
+		 wallet_, carriers_count(), queue_length, path_.get_nsteps());
 
-  wallet_ += 2 * (carriers_count + 1) * (4 * queue_length + path_.get_nsteps());
+  wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
   this->charge_wallet(game);
-  if (type_ == RoadType::kNormal && wallet_ > 1.5 * animal_price) {
+  if (type_ == RoadType::kNormal && wallet_ > 1.5 * kAnimalPrice) {
     // Promote the road.
-    wallet_ -= animal_price;
+    wallet_ -= kAnimalPrice;
     type_ = RoadType::kBusy;
     mark_map(game);
     for (CarrierSlot& slot : carrier_slots_) {
@@ -621,15 +620,14 @@ log ("wallet: %d, carriers: %d, queue: %d, steps: %lu\n",
       }
     }
   }
-  if (wallet_ > max_wallet) wallet_ = max_wallet;
+  if (wallet_ > kMaxWallet) wallet_ = kMaxWallet;
 }
 
 /**
  * Add extra coins for street-segment at building.
 */
-void Road::pay_for_building(Game& game) {
-  const uint8_t carriers_count = (carrier_slots_[1].carrier == nullptr) ? 1 : 2;
-  wallet_ += 2 * (carriers_count + 1);
+void Road::pay_for_building() {
+  wallet_ += 2 * (carriers_count() + 1);
   // don't bother with checks, since next ware will cause them anyway
 }
 void Road::log_general_info(const EditorGameBase& egbase) {
