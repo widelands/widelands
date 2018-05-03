@@ -129,6 +129,7 @@ def generate_translation_stats(po_dir, output_file):
     with open(output_file, 'w+') as destination:
         destination.write(result[:-1])  # Strip the final \n
     print('\nResult written to ' + output_file)
+    sys.stdout.flush()
     return True
 
 
