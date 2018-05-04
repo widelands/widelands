@@ -283,9 +283,8 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.add(button);
 	if (window) {
-		window->opened.connect(
-		   [this, button] { button->set_style(UI::Button::Style::kPermpressed); });
-		window->closed.connect([this, button] { button->set_style(UI::Button::Style::kRaised); });
+		window->opened.connect([button] { button->set_style(UI::Button::Style::kPermpressed); });
+		window->closed.connect([button] { button->set_style(UI::Button::Style::kRaised); });
 
 		if (bind_default_toggle) {
 			button->sigclicked.connect(

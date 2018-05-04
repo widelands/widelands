@@ -267,7 +267,7 @@ struct FindNodeWithFlagOrRoad {
 struct FindNodeAcceptAll {
 	bool accept(const Map&, FCoords) const {
 		return true;
-	};
+	}
 };
 
 struct NearFlag {
