@@ -12,10 +12,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 13:19+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-05-03 05:41+0000\n"
+"PO-Revision-Date: 2018-05-03 06:58+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +75,7 @@ msgstr "%1$s и %2$s"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1067
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1053
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -249,7 +249,7 @@ msgid "Loading tribes"
 msgstr "Зареждане на племена"
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:165
+#: ../../src/wui/interactive_player.cc:166
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Main menu"
 msgstr "Главно меню"
@@ -269,7 +269,7 @@ msgid "Players"
 msgstr "Играчи"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:181
+#: ../../src/wui/interactive_player.cc:182
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show building spaces (on/off)"
 msgstr "Показване на местата за строеж (вкл/изкл.)"
@@ -287,13 +287,13 @@ msgid "Show resources (on/off)"
 msgstr "Показване на ресурсите (вкл/изкл.)"
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:177
+#: ../../src/wui/interactive_player.cc:178
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr "Миникарта"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:183
+#: ../../src/wui/interactive_player.cc:184
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr "Връщане към нормалното ниво на приближение"
@@ -307,7 +307,7 @@ msgid "Redo"
 msgstr "Повтаряне"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:334 ../../src/wui/interactive_player.cc:207
+#: ../../src/wui/buildingwindow.cc:343 ../../src/wui/interactive_player.cc:208
 msgid "Help"
 msgstr "Помощ"
 
@@ -891,7 +891,7 @@ msgid "Number of Players"
 msgstr "Брой играчи"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:204 ../../src/logic/map.cc:310
+#: ../../src/editor/ui_menus/player_menu.cc:204 ../../src/logic/map.cc:313
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
 #: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:492
@@ -1054,7 +1054,7 @@ msgid "Loading map…"
 msgstr "Зареждане на картата…"
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:371
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1389
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1391
 msgid "Loading…"
 msgstr "Зареждане…"
 
@@ -1062,22 +1062,22 @@ msgstr "Зареждане…"
 msgid "Creating player infrastructure"
 msgstr "Създаване на инфраструктурата на играча"
 
-#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:221
 msgid "Missing starting position"
 msgstr "Липсва начална позиция"
 
-#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:222
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands не може да започне играта, тъй като играч %u няма начална позиция.\nЗа да поправите този проблем, можете да добавите начална позиция ръчно чрез редактора на Widelands."
 
-#: ../../src/logic/game.cc:786
+#: ../../src/logic/game.cc:789
 msgid "Trade Offer"
 msgstr "Предложение за търговия"
 
-#: ../../src/logic/game.cc:788
+#: ../../src/logic/game.cc:791
 msgid "This market has received a new trade offer."
 msgstr "Този пазар получи предложение за търговия."
 
@@ -1337,7 +1337,7 @@ msgstr "(спряно)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:384
-#: ../../src/wui/building_statistics_menu.cc:627
+#: ../../src/wui/building_statistics_menu.cc:686
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -1346,95 +1346,109 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "Не могат да се намерят повече ресурси!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:424
 msgid "Port Space"
 msgstr "Място за пристанище"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:424
 msgid "Port Space Found"
 msgstr "Открито е място за пристанище"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:425
 msgid "An expedition ship found a new port build space."
 msgstr "Кораб от експедиция откри ново място за пристанище."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:543
 msgid "Island Circumnavigated"
 msgstr "Островът е заобиколен"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:543
 msgctxt "ship"
 msgid "Waiting"
 msgstr "В изчакване"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:544
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Кораб от експедиция обиколи острова си без нищо да се случи."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:606
 msgid "Coast Reached"
 msgstr "Достигнат е бряг"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:606
 msgid "Land Ahoy!"
 msgstr "Земя на хоризонта!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:607
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Кораб от експедиция достигна бряг и чака команда."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "New port construction site is gone"
 msgstr "Новата строителна площадка за пристанище изчезна"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "Port Lost!"
 msgstr "Загубено е пристанище!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "Разтоварването на стоките се провали, експедицията е отменена."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Експедиция"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgid "Expedition Ready"
 msgstr "Експедицията е готова"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:848
+#: ../../src/logic/map_objects/tribes/ship.cc:855
 msgid "An expedition ship is waiting for your commands."
 msgstr "Кораб от експедиция чака Вашата команда."
 
-#. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:984
+#. * TRANSLATORS: This is a ship state. The ship is currently transporting
+#. wares.
+#: ../../src/logic/map_objects/tribes/ship.cc:994
+#: ../../src/wui/seafaring_statistics_menu.cc:222
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Доставяне"
 
+#. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
+#. but has
+#. * nothing to do.
+#: ../../src/logic/map_objects/tribes/ship.cc:998
+#: ../../src/wui/seafaring_statistics_menu.cc:220
+msgctxt "ship_state"
+msgid "Idle"
+msgstr "Бездействие"
+
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:988
+#: ../../src/logic/map_objects/tribes/ship.cc:1003
+#: ../../src/wui/seafaring_statistics_menu.cc:224
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Изчакване"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:992
+#: ../../src/logic/map_objects/tribes/ship.cc:1007
+#: ../../src/wui/seafaring_statistics_menu.cc:226
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Разузнаване"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:996
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
+#: ../../src/wui/seafaring_statistics_menu.cc:228
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "Открито е място за пристанище"
@@ -1442,7 +1456,8 @@ msgstr "Открито е място за пристанище"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1001
+#: ../../src/logic/map_objects/tribes/ship.cc:1016
+#: ../../src/wui/seafaring_statistics_menu.cc:230
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Основаване на колония"
@@ -1528,6 +1543,12 @@ msgstr "непроходимо"
 msgid "This objective has no description."
 msgstr "Тази задача няма описание."
 
+#: ../../src/logic/player.cc:1323
+#, c-format
+msgctxt "shipname"
+msgid "Ship %d"
+msgstr "Кораб %d"
+
 #: ../../src/logic/replay_game_controller.cc:97
 msgid "End of Replay"
 msgstr "Край на повторението"
@@ -1567,7 +1588,7 @@ msgid ""
 msgstr "Widelands не може да установи връзка с посочения адрес. Или там няма сървър на Widelands, работещ на очаквания порт, или сървърът е бил спрян докато сте се свързвали."
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1281
+#: ../../src/wlapplication.cc:1283
 msgid "Preparing game"
 msgstr "Подготовка на играта"
 
@@ -1732,123 +1753,119 @@ msgstr "Widelands не може да установи връзка с посоч
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr "Потребителите отбелязани с „IRC“ най-вероятно няма да отговорят на съобщенията."
 
-#: ../../src/network/internet_gaming.cc:215
+#: ../../src/network/internet_gaming.cc:213
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Успешно повторно свързване с мета сървъра!"
 
-#: ../../src/network/internet_gaming.cc:289
+#: ../../src/network/internet_gaming.cc:287
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Има някаква грешка: %s"
 
-#: ../../src/network/internet_gaming.cc:449
+#: ../../src/network/internet_gaming.cc:373
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "Системата Ви вписа като „%s“, тъй като желаното от Вас име е вече заето или запазено."
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:395
 msgid "Mixed up"
 msgstr "Разбъркано"
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:395
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Мета сървърът изпрати странен пакет ERROR (грешка) по време на свързването"
 
-#: ../../src/network/internet_gaming.cc:486
+#: ../../src/network/internet_gaming.cc:410
 msgid "Unexpected packet"
 msgstr "Неочакван пакет"
 
-#: ../../src/network/internet_gaming.cc:487
+#: ../../src/network/internet_gaming.cc:411
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "Получен е неочакван мрежов пакет от мета-сървъра. Възможно е той да използва различна версия на протокола. Ако тази грешка се повтори, опитайте да обновите играта."
 
-#: ../../src/network/internet_gaming.cc:499
+#: ../../src/network/internet_gaming.cc:423
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "ВНИМАНИЕ: Беше получена команда %s , въпреки, че не сме в състояние CONNECTING (свързване)."
 
-#: ../../src/network/internet_gaming.cc:510
+#: ../../src/network/internet_gaming.cc:434
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Разминаването със сървърното време е %d секунда."
 msgstr[1] "Разминаването със сървърното време е %d секунди."
 
-#: ../../src/network/internet_gaming.cc:534
+#: ../../src/network/internet_gaming.cc:458
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Грешен тип на чат съобщение „%s“."
 
-#: ../../src/network/internet_gaming.cc:534
+#: ../../src/network/internet_gaming.cc:458
 msgid "Invalid message type"
 msgstr "Грешен тип съобщение"
 
-#: ../../src/network/internet_gaming.cc:572
+#: ../../src/network/internet_gaming.cc:496
 #, c-format
 msgid "The game %s is now available"
 msgstr "Играта %s вече е достъпна"
 
-#: ../../src/network/internet_gaming.cc:582
+#: ../../src/network/internet_gaming.cc:506
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Играта %s беше затворена"
 
-#: ../../src/network/internet_gaming.cc:629
+#: ../../src/network/internet_gaming.cc:552
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s се присъедини към стаята"
 
-#: ../../src/network/internet_gaming.cc:636
+#: ../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s напусна стаята"
 
-#: ../../src/network/internet_gaming.cc:691
+#: ../../src/network/internet_gaming.cc:614
 msgid "Chat message could not be sent."
 msgstr "Чат съобщението не може да бъде изпратено."
 
-#: ../../src/network/internet_gaming.cc:705
+#: ../../src/network/internet_gaming.cc:628
 #, c-format
 msgid "ERROR: %s"
 msgstr "ГРЕШКА: %s"
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:638
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Получена е непозната команда от мета сървъра: %s"
 
-#: ../../src/network/internet_gaming.cc:841
+#: ../../src/network/internet_gaming.cc:764
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Съобщението не може да бъде изпратено: Не сте свързани с мета сървъра!"
 
-#: ../../src/network/internet_gaming.cc:860
-#: ../../src/network/internet_gaming.cc:867
+#: ../../src/network/internet_gaming.cc:783
+#: ../../src/network/internet_gaming.cc:790
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Съобщението не може да бъде изпратено: Трябваше ли да бъде тайно съобщение?"
 
-#: ../../src/network/internet_gaming.cc:874
-msgid "Private messages to IRC users are not supported."
-msgstr "Не се поддържат лични съобщения до потребители на IRC."
-
-#: ../../src/network/internet_gaming.cc:951
+#: ../../src/network/internet_gaming.cc:866
 msgid "Conversion error"
 msgstr "Грешка при превръщането"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:954
+#: ../../src/network/internet_gaming.cc:869
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Не може да бъде установена вярната стойност за „%s“"
 
-#: ../../src/network/internet_gaming.cc:971
+#: ../../src/network/internet_gaming.cc:886
 msgid "unknown"
 msgstr "неизвестно"
 
@@ -2174,7 +2191,7 @@ msgstr[1] "%d пиксела"
 msgid "About Widelands"
 msgstr "Относно Widelands"
 
-#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:126
+#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:80
 msgid "Close"
 msgstr "Затваряне"
 
@@ -2332,32 +2349,32 @@ msgstr "Можете да видите описание на текущо изб
 msgid "Help: %s"
 msgstr "Помощ: %s"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:52
+#: ../../src/ui_fsmenu/internet_lobby.cc:62
 msgid "Metaserver Lobby"
 msgstr "Стая на мета сървъра"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:53
+#: ../../src/ui_fsmenu/internet_lobby.cc:63
 msgid "Clients online:"
 msgstr "Клиенти на линия:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:54
+#: ../../src/ui_fsmenu/internet_lobby.cc:64
 msgid "List of games:"
 msgstr "Списък от игри:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:55
+#: ../../src/ui_fsmenu/internet_lobby.cc:65
 msgid "Name of your server:"
 msgstr "Име на Вашия сървър:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:65
+#: ../../src/ui_fsmenu/internet_lobby.cc:75
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Join this game"
 msgstr "Присъед. към тази игра"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:73
+#: ../../src/ui_fsmenu/internet_lobby.cc:83
 msgid "Open a new game"
 msgstr "Създаване на нова игра"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:81
+#: ../../src/ui_fsmenu/internet_lobby.cc:91
 #: ../../src/ui_fsmenu/launch_game.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:37
 #: ../../src/ui_fsmenu/multiplayer.cc:55
@@ -2366,51 +2383,51 @@ msgstr "Създаване на нова игра"
 msgid "Back"
 msgstr "Назад"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:130
+#: ../../src/ui_fsmenu/internet_lobby.cc:140
 msgid "User Status"
 msgstr "Съст. на потребителя"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:131
+#: ../../src/ui_fsmenu/internet_lobby.cc:141
 msgid "Registered"
 msgstr "Регистриран"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:132
+#: ../../src/ui_fsmenu/internet_lobby.cc:142
 msgid "Administrator"
 msgstr "Администратор"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:133
+#: ../../src/ui_fsmenu/internet_lobby.cc:143
 msgid "Unregistered"
 msgstr "Нерегистриран"
 
 #. * TRANSLATORS: Player Name
-#: ../../src/ui_fsmenu/internet_lobby.cc:137
+#: ../../src/ui_fsmenu/internet_lobby.cc:147
 msgctxt "player"
 msgid "Name"
 msgstr "Име"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:138
+#: ../../src/ui_fsmenu/internet_lobby.cc:148
 msgid "Version"
 msgstr "Версия"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:140
+#: ../../src/ui_fsmenu/internet_lobby.cc:150
 #: ../../src/ui_fsmenu/options.cc:234
 msgid "Game"
 msgstr "Игра"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:374
+#: ../../src/ui_fsmenu/internet_lobby.cc:376
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr "Widelands не успя да получи IP адреса на сървъра навреме. Изглежда има проблем с мрежата – Вашата или тази на сървъра.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:377
+#: ../../src/ui_fsmenu/internet_lobby.cc:379
 msgid "Connection Timed Out"
 msgstr "Просрочено време за връзка"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:412
+#: ../../src/ui_fsmenu/internet_lobby.cc:414
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "без име"
@@ -2790,12 +2807,12 @@ msgid "Distance for windows to snap to borders:"
 msgstr "Разстояние, при което прозорците се прилепват към рамки:"
 
 #: ../../src/ui_fsmenu/options.cc:165
-#: ../../src/wui/game_options_sound_menu.cc:28
+#: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Enable music"
 msgstr "Включване на музиката"
 
 #: ../../src/ui_fsmenu/options.cc:166
-#: ../../src/wui/game_options_sound_menu.cc:31
+#: ../../src/wui/game_options_sound_menu.cc:32
 msgid "Enable sound effects"
 msgstr "Включване на звуковите ефекти"
 
@@ -2854,32 +2871,37 @@ msgstr "Звук"
 msgid "Saving"
 msgstr "Запазване"
 
+#: ../../src/ui_fsmenu/options.cc:264
+#: ../../src/wui/game_options_sound_menu.cc:85
+msgid "Sound is disabled due to a problem with the sound driver"
+msgstr "Звукът е изключен поради проблем със звуковия драйвер"
+
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:282
+#: ../../src/ui_fsmenu/options.cc:289
 msgid "Off"
 msgstr "Изкл."
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:308 ../../src/ui_fsmenu/options.cc:317
+#: ../../src/ui_fsmenu/options.cc:315 ../../src/ui_fsmenu/options.cc:324
 msgid "%1% x %2%"
 msgstr "%1% х %2%"
 
-#: ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:429
 msgid "Try system language"
 msgstr "Ако е възможно, системния език"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:520
+#: ../../src/ui_fsmenu/options.cc:528
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "Преводът на %s е завършен."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:523
+#: ../../src/ui_fsmenu/options.cc:531
 msgid "The translation into %1% is %2%%% complete."
 msgstr "Преводът на %1% е завършен на %2%%%."
 
-#: ../../src/ui_fsmenu/options.cc:537
+#: ../../src/ui_fsmenu/options.cc:545
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Ако искате да помогнете, моля, посетете %s"
@@ -2896,11 +2918,11 @@ msgstr "Кампании"
 msgid "Load Game"
 msgstr "Зареждане на игра"
 
-#: ../../src/wlapplication.cc:1076
+#: ../../src/wlapplication.cc:1078
 msgid "Game data error"
 msgstr "Грешка в данните за играта"
 
-#: ../../src/wlapplication.cc:1084
+#: ../../src/wlapplication.cc:1086
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2908,18 +2930,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Моля, докладвайте за този проблем, за да ни помогнете да подобрим Widelands. Ще намерите нужната информация на стандартния изход (stdout.txt под Уиндоус). Вие използвате версия на играта %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1091
+#: ../../src/wlapplication.cc:1093
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Моля, добавете тази информация към доклада си.\n\nWidelands се опитва да запази играта, в случай че се появят грешки по време на игра. Често, но не винаги, е възможно играта да бъде заредена и да продължите."
 
-#: ../../src/wlapplication.cc:1218
+#: ../../src/wlapplication.cc:1220
 msgid "Invalid Address"
 msgstr "Неправилен адрес"
 
-#: ../../src/wlapplication.cc:1219
+#: ../../src/wlapplication.cc:1221
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Въведеното име на сървър или адрес е неправилно и е невъзможно да се установи връзка с него."
 
@@ -2992,135 +3014,135 @@ msgstr "Брой войници"
 msgid "Send more soldiers"
 msgstr "Изпращане на повече войници"
 
-#: ../../src/wui/building_statistics_menu.cc:67
+#: ../../src/wui/building_statistics_menu.cc:61
 msgid "Building Statistics"
 msgstr "Статистика за сградите"
 
-#: ../../src/wui/building_statistics_menu.cc:72
+#: ../../src/wui/building_statistics_menu.cc:66
 msgid "Owned:"
 msgstr "Притежавани:"
 
-#: ../../src/wui/building_statistics_menu.cc:78
+#: ../../src/wui/building_statistics_menu.cc:72
 msgid "Under Construction:"
 msgstr "В строеж:"
 
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:84
-#: ../../src/wui/building_statistics_menu.cc:639
+#: ../../src/wui/building_statistics_menu.cc:78
+#: ../../src/wui/building_statistics_menu.cc:698
 msgid "Low Productivity"
 msgstr "Слаба производителност"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:98
+#: ../../src/wui/building_statistics_menu.cc:92
 msgid "%:"
 msgstr "%:"
 
-#: ../../src/wui/building_statistics_menu.cc:130
-msgid "Small buildings"
-msgstr "Малки сгради"
-
-#: ../../src/wui/building_statistics_menu.cc:133
-msgid "Medium buildings"
-msgstr "Средни сгради"
-
-#: ../../src/wui/building_statistics_menu.cc:136
-msgid "Big buildings"
-msgstr "Големи сгради"
-
-#: ../../src/wui/building_statistics_menu.cc:139
-msgid "Mines"
-msgstr "Мини"
-
 #: ../../src/wui/building_statistics_menu.cc:145
-msgid "Ports"
-msgstr "Пристанища"
-
-#: ../../src/wui/building_statistics_menu.cc:258
-#: ../../src/wui/building_statistics_menu.cc:269
-#: ../../src/wui/building_statistics_menu.cc:281
+#: ../../src/wui/building_statistics_menu.cc:156
+#: ../../src/wui/building_statistics_menu.cc:168
 msgid "Show previous building"
 msgstr "Показване на пред. сграда"
 
-#: ../../src/wui/building_statistics_menu.cc:263
-#: ../../src/wui/building_statistics_menu.cc:275
-#: ../../src/wui/building_statistics_menu.cc:287
+#: ../../src/wui/building_statistics_menu.cc:150
+#: ../../src/wui/building_statistics_menu.cc:162
+#: ../../src/wui/building_statistics_menu.cc:174
 msgid "Show next building"
 msgstr "Показване на следв. сграда"
+
+#: ../../src/wui/building_statistics_menu.cc:306
+msgid "Small buildings"
+msgstr "Малки сгради"
+
+#: ../../src/wui/building_statistics_menu.cc:308
+msgid "Medium buildings"
+msgstr "Средни сгради"
+
+#: ../../src/wui/building_statistics_menu.cc:310
+msgid "Big buildings"
+msgstr "Големи сгради"
+
+#: ../../src/wui/building_statistics_menu.cc:312
+msgid "Mines"
+msgstr "Мини"
+
+#: ../../src/wui/building_statistics_menu.cc:314
+msgid "Ports"
+msgstr "Пристанища"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:657
-#: ../../src/wui/building_statistics_menu.cc:681
-#: ../../src/wui/building_statistics_menu.cc:683
+#: ../../src/wui/building_statistics_menu.cc:716
+#: ../../src/wui/building_statistics_menu.cc:742
+#: ../../src/wui/building_statistics_menu.cc:744
 #: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:671
+#: ../../src/wui/building_statistics_menu.cc:730
 msgid "Lacking Soldiers:"
 msgstr "Без войници:"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:219
+#: ../../src/wui/buildingwindow.cc:228
 msgid "Continue"
 msgstr "Продължаване"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:221
+#: ../../src/wui/buildingwindow.cc:230
 msgid "Stop"
 msgstr "Спиране"
 
-#: ../../src/wui/buildingwindow.cc:242
+#: ../../src/wui/buildingwindow.cc:251
 #, c-format
 msgid "Enhance to %s"
 msgstr "Надграждане до %s"
 
-#: ../../src/wui/buildingwindow.cc:243 ../../src/wui/fieldaction.cc:98
+#: ../../src/wui/buildingwindow.cc:252 ../../src/wui/fieldaction.cc:98
 msgid "Construction costs:"
 msgstr "Цена за изграждане:"
 
-#: ../../src/wui/buildingwindow.cc:260
+#: ../../src/wui/buildingwindow.cc:269
 msgid "Destroy"
 msgstr "Разрушаване"
 
-#: ../../src/wui/buildingwindow.cc:275
+#: ../../src/wui/buildingwindow.cc:284
 msgid "Dismantle"
 msgstr "Демонтиране"
 
-#: ../../src/wui/buildingwindow.cc:275
+#: ../../src/wui/buildingwindow.cc:284
 msgid "Returns:"
 msgstr "Връща:"
 
-#: ../../src/wui/buildingwindow.cc:303 ../../src/wui/buildingwindow.cc:498
+#: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:507
 msgid "Hide work area"
 msgstr "Скриване на работната област"
 
-#: ../../src/wui/buildingwindow.cc:315 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:324 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Показване на прозореца за отстраняване на грешки"
 
-#: ../../src/wui/buildingwindow.cc:322
+#: ../../src/wui/buildingwindow.cc:331
 msgid "Center view on this"
 msgstr "Центриране на изгледа върху това"
 
-#: ../../src/wui/buildingwindow.cc:501
+#: ../../src/wui/buildingwindow.cc:510
 msgid "Show work area"
 msgstr "Показване на работната област"
 
-#: ../../src/wui/buildingwindow.cc:534
+#: ../../src/wui/buildingwindow.cc:543
 msgid "Start an expedition"
 msgstr "Започване на експедиция"
 
-#: ../../src/wui/buildingwindow.cc:538
+#: ../../src/wui/buildingwindow.cc:547
 msgid "Cancel the expedition"
 msgstr "Отмяна на експедицията"
 
-#: ../../src/wui/constructionsitewindow.cc:58
+#: ../../src/wui/constructionsitewindow.cc:60
 #: ../../src/wui/dismantlesitewindow.cc:55
 msgid "Building materials"
 msgstr "Строителни материали"
@@ -3210,7 +3232,7 @@ msgstr "Превключване на показването на статист
 msgid "Toggle building label display"
 msgstr "Превключване на показването на наименованията на сградите"
 
-#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:100
+#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:54
 msgid "Watch"
 msgstr "Наблюдение"
 
@@ -3238,7 +3260,7 @@ msgstr "Отмяна на пътя"
 msgid "Build roads"
 msgstr "Строеж на пътища"
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:190
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:191
 #: ../../src/wui/interactive_spectator.cc:87
 msgid "Chat"
 msgstr "Чат"
@@ -3320,10 +3342,19 @@ msgstr "Центриране на картата върху място"
 #: ../../src/wui/game_message_menu.cc:542
 #: ../../src/wui/game_message_menu.cc:546
 #: ../../src/wui/game_message_menu.cc:550
+#: ../../src/wui/seafaring_statistics_menu.cc:101
+#: ../../src/wui/seafaring_statistics_menu.cc:132
+#: ../../src/wui/seafaring_statistics_menu.cc:509
+#: ../../src/wui/seafaring_statistics_menu.cc:518
+#: ../../src/wui/seafaring_statistics_menu.cc:522
+#: ../../src/wui/seafaring_statistics_menu.cc:527
+#: ../../src/wui/seafaring_statistics_menu.cc:531
+#: ../../src/wui/seafaring_statistics_menu.cc:536
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (Клавиш: %2%)"
 
 #: ../../src/wui/game_message_menu.cc:524
+#: ../../src/wui/seafaring_statistics_menu.cc:511
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Алт + 0"
@@ -3339,11 +3370,13 @@ msgid "Show geologists' messages only"
 msgstr "Показване само на съобщенията от геолозите"
 
 #: ../../src/wui/game_message_menu.cc:536
+#: ../../src/wui/seafaring_statistics_menu.cc:520
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Алт + 1"
 
 #: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Алт + 2"
@@ -3354,6 +3387,7 @@ msgid "Show economy messages only"
 msgstr "Показване само на съобщенията за икономиката"
 
 #: ../../src/wui/game_message_menu.cc:544
+#: ../../src/wui/seafaring_statistics_menu.cc:529
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Алт + 3"
@@ -3364,6 +3398,7 @@ msgid "Show seafaring messages only"
 msgstr "Показване само на съобщенията за мореплаването"
 
 #: ../../src/wui/game_message_menu.cc:548
+#: ../../src/wui/seafaring_statistics_menu.cc:533
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Алт + 4"
@@ -3374,6 +3409,7 @@ msgid "Show warfare messages only"
 msgstr "Показване само на военните съобщения"
 
 #: ../../src/wui/game_message_menu.cc:552
+#: ../../src/wui/seafaring_statistics_menu.cc:539
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Алт + 5"
@@ -3430,7 +3466,7 @@ msgid "Del: %s"
 msgstr "Del: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:200
+#: ../../src/wui/interactive_player.cc:201
 msgid "Objectives"
 msgstr "Задачи"
 
@@ -3444,7 +3480,7 @@ msgid "Are you sure you wish to exit this game?"
 msgstr "Сигурни ли сте, че искате да излезете от тази игра?"
 
 #: ../../src/wui/game_options_menu.cc:77
-#: ../../src/wui/game_options_sound_menu.cc:27
+#: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
 msgstr "Настройки на звука"
 
@@ -3458,34 +3494,39 @@ msgstr "Задаване на настройките на музиката и з
 msgid "Exit Game"
 msgstr "Изход от играта"
 
-#: ../../src/wui/game_options_sound_menu.cc:35
+#: ../../src/wui/game_options_sound_menu.cc:36
 msgid "Music volume"
 msgstr "Сила на музиката"
 
-#: ../../src/wui/game_options_sound_menu.cc:50
+#: ../../src/wui/game_options_sound_menu.cc:51
 msgid "Sound effects volume"
 msgstr "Сила на звуковите ефекти"
 
-#: ../../src/wui/game_statistics_menu.cc:36
+#: ../../src/wui/game_statistics_menu.cc:37
 msgid "Statistics Menu"
 msgstr "Меню за статистиките"
 
-#: ../../src/wui/game_statistics_menu.cc:40
+#: ../../src/wui/game_statistics_menu.cc:42
 msgid "General statistics"
 msgstr "Общи статистики"
 
-#: ../../src/wui/game_statistics_menu.cc:43
+#: ../../src/wui/game_statistics_menu.cc:45
 msgid "Ware statistics"
 msgstr "Статистики за стоките"
 
-#: ../../src/wui/game_statistics_menu.cc:44
+#: ../../src/wui/game_statistics_menu.cc:46
 msgid "Building statistics"
 msgstr "Статистики за сградите"
 
-#: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
+#: ../../src/wui/game_statistics_menu.cc:48 ../../src/wui/stock_menu.cc:36
 #: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
 msgid "Stock"
 msgstr "Запаси"
+
+#: ../../src/wui/game_statistics_menu.cc:50
+#: ../../src/wui/seafaring_statistics_menu.cc:46
+msgid "Seafaring Statistics"
+msgstr "Статистики за мореплаването"
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
@@ -3654,17 +3695,17 @@ msgstr "ПАУЗА"
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:169
+#: ../../src/wui/interactive_player.cc:170
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
 msgstr "Статистики"
 
-#: ../../src/wui/interactive_player.cc:204
-#: ../../src/wui/interactive_player.cc:256
+#: ../../src/wui/interactive_player.cc:205
+#: ../../src/wui/interactive_player.cc:257
 msgid "Messages"
 msgstr "Съобщения"
 
-#: ../../src/wui/interactive_player.cc:261
+#: ../../src/wui/interactive_player.cc:262
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -4240,6 +4281,92 @@ msgstr "(идва)"
 msgid "(vacant)"
 msgstr "(свободно)"
 
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:103
+msgid "Watch the selected ship"
+msgstr "Наблюдаване на избрания кораб"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:104
+msgctxt "hotkey"
+msgid "W"
+msgstr "W"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:116
+#: ../../src/wui/seafaring_statistics_menu.cc:119
+msgctxt "hotkey_description"
+msgid "%1%: %2%"
+msgstr "%1%: %2%"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:116
+msgctxt "hotkey"
+msgid "O"
+msgstr "O"
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:118
+msgid "Open the selected ship’s window"
+msgstr "Отваряне на прозореца на избрания кораб"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:120
+msgctxt "hotkey"
+msgid "CTRL + O"
+msgstr "CTRL + O"
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:122
+msgid "Go to the selected ship and open its window"
+msgstr "Фокусиране върху избрания кораб и отваряне на прозореца му"
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:134
+msgid "Center the map on the selected ship"
+msgstr "Центриране на картата върху избрания кораб"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:135
+msgctxt "hotkey"
+msgid "G"
+msgstr "G"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:187
+msgctxt "ship"
+msgid "Name"
+msgstr "Име"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:188
+msgctxt "ship"
+msgid "Status"
+msgstr "Състояние"
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:511
+msgid "Show all ships"
+msgstr "Показване на всички кораби"
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:520
+msgid "Show idle ships"
+msgstr "Показване на бездействащите кораби"
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:524
+msgid "Show ships shipping wares and workers"
+msgstr "Показване на корабите, превозващи стоки и работници"
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:529
+msgid "Show waiting expeditions"
+msgstr "Показване на чакащите експедиции"
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:533
+msgid "Show scouting expeditions"
+msgstr "Показване на разузнаващите експедиции"
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:538
+msgid "Show expeditions that have found a port space or are founding a colony"
+msgstr "Показване на експедициите, които са открили място за пристанище или основават колония"
+
 #: ../../src/wui/shipwindow.cc:79
 msgid "Scout towards the north west"
 msgstr "Разузнаване на северозапад"
@@ -4293,11 +4420,11 @@ msgid "Go to ship"
 msgstr "Към кораба"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:172
+#: ../../src/wui/shipwindow.cc:219
 msgid "Cancel Expedition"
 msgstr "Отмяна на експедицията"
 
-#: ../../src/wui/shipwindow.cc:172
+#: ../../src/wui/shipwindow.cc:219
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
@@ -4398,10 +4525,10 @@ msgstr "Работници, чакащи да се качат на кораб"
 msgid "Expedition"
 msgstr "Експедиция"
 
-#: ../../src/wui/watchwindow.cc:108
+#: ../../src/wui/watchwindow.cc:62
 msgid "Follow"
 msgstr "Следване"
 
-#: ../../src/wui/watchwindow.cc:114
+#: ../../src/wui/watchwindow.cc:68
 msgid "Center the main view on this"
 msgstr "Центриране на основния изглед върху това"

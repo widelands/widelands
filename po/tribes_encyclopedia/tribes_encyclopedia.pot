@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-03 05:41+0000\n"
+"POT-Creation-Date: 2018-05-04 07:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -255,7 +255,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
@@ -443,10 +443,10 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:26
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:23
@@ -1932,20 +1932,8 @@ msgctxt "frisians_building"
 msgid "The hunter pauses %s before going to work again."
 msgstr ""
 
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:8
-msgctxt "frisians_building"
-msgid ""
-msgstr ""
-
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:21
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -1954,7 +1942,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -2113,14 +2101,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs granite out of the ground in mountain terrain."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:21
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -2129,7 +2117,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -2284,7 +2272,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "The tavern can produce one ration in %s on average if the supply is steady; "
-"otherwise, it will take 50 percent longer."
+"otherwise, it will take 50%% longer."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -2298,7 +2286,7 @@ msgstr ""
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:8
 msgctxt "frisians_building"
-msgid "A seamstress’s work song"
+msgid "A seamstress’ work song"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -4243,8 +4231,8 @@ msgstr ""
 #: ../../data/tribes/wares/fur/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"Fur is won from reindeer in a reindeer farm. It is spun into cloth or turned "
-"into fur garments for soldiers."
+"Fur is won from reindeer in a reindeer farm. It is woven into cloth or "
+"turned into fur garments for soldiers."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Fur Garment
@@ -4358,8 +4346,8 @@ msgstr ""
 #: ../../data/tribes/wares/granite/helptexts.lua:10
 msgctxt "frisians_ware"
 msgid ""
-"The Frisians produce granite blocks in quarries and granite mines. They can "
-"be refined by a brick burner."
+"The Frisians produce granite blocks in quarries and rock mines. They can be "
+"refined by a brick burner."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Granite
@@ -4572,26 +4560,25 @@ msgstr ""
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:4
 msgctxt "barbarians_ware"
 msgid ""
-"How can one create a meal, snack or ration, if there are no kitchen tools? "
-"Be sure to have a metal workshop to produce this basic tool (but it ceases "
-"to be produced by the building if it is enhanced to an ax workshop and war "
-"mill)."
+"Kitchen tools are needed for preparing rations, snacks and meals. Be sure to "
+"have a metal workshop to produce this basic tool (but it ceases to be "
+"produced by the building if it is enhanced to an ax workshop and war mill)."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:6
 msgctxt "frisians_ware"
 msgid ""
-"How can one create a meal or ration, if there are no kitchen tools? The "
-"smoker also needs them."
+"Kitchen tools are needed for preparing rations and meals. The smoker also "
+"needs them."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:8
 msgctxt "empire_ware"
 msgid ""
-"How can one create a ration or meal if there are no kitchen tools? They are "
-"produced in a toolsmithy and used in taverns and inns."
+"Kitchen tools are needed for preparing rations and meals. They are produced "
+"in a toolsmithy and used in taverns and inns."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Log
@@ -4840,8 +4827,8 @@ msgstr ""
 #: ../../data/tribes/wares/ration/helptexts.lua:10
 msgctxt "frisians_ware"
 msgid ""
-"They are produced in taverns and drinking halls out of beer and something to "
-"eat: Fruit, smoked meat or fish or bread."
+"Rations are produced in taverns and drinking halls out of beer and something "
+"to eat: Fruit, smoked meat or fish or bread."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Saw
@@ -4952,8 +4939,8 @@ msgstr ""
 #: ../../data/tribes/wares/shovel/helptexts.lua:12
 msgctxt "frisians_ware"
 msgid ""
-"They are used by berry and reed farmers as well as foresters. Diggers also "
-"need them to dig mud out of hard soil."
+"They are used by berry and reed farmers as well as foresters. Brickmakers "
+"also need them to dig mud out of hard soil."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
@@ -4969,7 +4956,7 @@ msgstr ""
 msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
-"training or turned into rations and meals for miners."
+"training or turned into rations and meals for miners and scouts."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Smoked Meat
@@ -4986,7 +4973,7 @@ msgstr ""
 msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
-"training or turned into rations and meals for miners."
+"training or turned into rations and meals for miners and scouts."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Snack
@@ -5432,7 +5419,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a worker: Baker
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
-msgid "Bakes pitta bread for the miners."
+msgid "Bakes pitta bread for the miners, soldiers and scouts."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
@@ -5926,7 +5913,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a worker: Landlady
 #: ../../data/tribes/workers/frisians/landlady/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Prepares rations and meals for miners."
+msgid "Prepares rations and meals for miners and scouts."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Miner
