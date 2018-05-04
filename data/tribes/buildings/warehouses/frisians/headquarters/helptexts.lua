@@ -18,11 +18,10 @@ end
 
 function building_helptext_note()
    -- TRANSLATORS: Note helptext for a building
-   return
-      pgettext ("frisians_building", "The headquarters is your main building.")
+   return pgettext ("frisians_building", "The headquarters is your main building.")
 end
 
 function building_helptext_performance()
    -- TRANSLATORS#: Performance helptext for a building
-   return ""
+   return no_performance_text_yet ()
 end
