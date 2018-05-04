@@ -49,7 +49,10 @@ tribes:new_productionsite_type {
          descname = _"hunting",
          actions = {
             "sleep=35000",
-            "worker=hunt"
+            "worker=hunt",
+            "sleep=35000",
+            "worker=hunt",
+            "produce=fur"
          }
       },
    },

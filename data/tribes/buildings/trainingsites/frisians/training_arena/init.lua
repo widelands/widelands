@@ -123,8 +123,7 @@ tribes:new_trainingsite_type {
             "animate=working 22800",
             "check_soldier=soldier attack 3", -- Because the soldier can be expelled by the player
             "consume=sword_long honey_bread mead:2 smoked_fish,smoked_meat",
-            "train=soldier attack 3 4",
-            "produce=scrap_iron"
+            "train=soldier attack 3 4"
          }
       },
       upgrade_soldier_attack_4 = {
