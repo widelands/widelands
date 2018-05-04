@@ -50,7 +50,7 @@ run(function()
    assert_equal("Hello", result.pq)
 
    assert_equal("number", type(result.uv))
-   assert_equal(999, result.rstuv)
+   assert_equal(999, result.uv)
 
    assert_equal("boolean", type(result.wxyz))
    assert_equal(false, result.wxyz)
@@ -68,7 +68,7 @@ run(function()
    assert_equal(20, result.rst[4])
 
    assert_equal("string", type(result.rst[5].hello))
-   assert_equal("World", result.rst[5])
+   assert_equal("World", result.rst[5].hello)
 
    print("Done.")
 
