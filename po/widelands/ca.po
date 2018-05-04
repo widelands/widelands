@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-03-30 10:59+0000\n"
-"Last-Translator: Juanjo\n"
+"POT-Creation-Date: 2018-05-03 05:41+0000\n"
+"PO-Revision-Date: 2018-05-03 05:42+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +72,7 @@ msgstr "%1$s i %2$s"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1067
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1053
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -246,7 +246,7 @@ msgid "Loading tribes"
 msgstr "S'estan carregant les diferents cultures"
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:165
+#: ../../src/wui/interactive_player.cc:166
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Main menu"
 msgstr "Menú principal"
@@ -266,7 +266,7 @@ msgid "Players"
 msgstr "Jugadors"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:181
+#: ../../src/wui/interactive_player.cc:182
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show building spaces (on/off)"
 msgstr "Mostra els espais de construcció (activat/desactivat)"
@@ -284,13 +284,13 @@ msgid "Show resources (on/off)"
 msgstr "Mostra recursos (sí/no)"
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:177
+#: ../../src/wui/interactive_player.cc:178
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr "Minimapa"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:183
+#: ../../src/wui/interactive_player.cc:184
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr "Restableix el zoom"
@@ -304,7 +304,7 @@ msgid "Redo"
 msgstr "Refés"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:334 ../../src/wui/interactive_player.cc:207
+#: ../../src/wui/buildingwindow.cc:343 ../../src/wui/interactive_player.cc:208
 msgid "Help"
 msgstr "Ajuda"
 
@@ -888,7 +888,7 @@ msgid "Number of Players"
 msgstr "Nombre de jugadors"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:204 ../../src/logic/map.cc:310
+#: ../../src/editor/ui_menus/player_menu.cc:204 ../../src/logic/map.cc:313
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
 #: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:492
@@ -1051,7 +1051,7 @@ msgid "Loading map…"
 msgstr "S'està carregant el mapa…"
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:371
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1389
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1391
 msgid "Loading…"
 msgstr "S'està carregant…"
 
@@ -1059,22 +1059,22 @@ msgstr "S'està carregant…"
 msgid "Creating player infrastructure"
 msgstr "S'està creant la infraestructura del jugador"
 
-#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:221
 msgid "Missing starting position"
 msgstr "No s'ha trobat la posició inicial"
 
-#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:222
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "El Widelands no ha pogut iniciar la partida perquè el jugador %u no té posició inicial.\nPodeu afegir una posició inicial manualment amb l'editor del Widelands per arreglar-ho."
 
-#: ../../src/logic/game.cc:786
+#: ../../src/logic/game.cc:789
 msgid "Trade Offer"
 msgstr "Oferta de canvi"
 
-#: ../../src/logic/game.cc:788
+#: ../../src/logic/game.cc:791
 msgid "This market has received a new trade offer."
 msgstr "Aquest mercat ha rebut una oferta de canvi nova."
 
@@ -1334,7 +1334,7 @@ msgstr "(parat)"
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:384
-#: ../../src/wui/building_statistics_menu.cc:627
+#: ../../src/wui/building_statistics_menu.cc:686
 #, c-format
 msgid "%i%%"
 msgstr "%i%%"
@@ -1343,95 +1343,109 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "No es troben més recursos!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:424
 msgid "Port Space"
 msgstr "Zona portuària"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:424
 msgid "Port Space Found"
 msgstr "S'ha trobat una zona portuària"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:425
 msgid "An expedition ship found a new port build space."
 msgstr "Una expedició ha trobat un nou lloc on construir un port."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:543
 msgid "Island Circumnavigated"
 msgstr "Illa circumnavegada"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:543
 msgctxt "ship"
 msgid "Waiting"
 msgstr "Esperant"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:544
 msgid "An expedition ship sailed around its island without any events."
 msgstr "Un vaixell d'expedició ha navegat al voltant de la seva illa sense esdeveniments."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:606
 msgid "Coast Reached"
 msgstr "Hem arribat a la costa"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:606
 msgid "Land Ahoy!"
 msgstr "Terra a la vista!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:607
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Un vaixell d'expedició ha arribat a la costa i espera ordres."
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "New port construction site is gone"
 msgstr "La zona portuària nova s'ha esfumat"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "Port Lost!"
 msgstr "Hem perdut un port!"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "La descàrrega de béns ha fallat. L'expedició s'ha cancel·lat."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Expedició"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgid "Expedition Ready"
 msgstr "Expedició preparada"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:848
+#: ../../src/logic/map_objects/tribes/ship.cc:855
 msgid "An expedition ship is waiting for your commands."
 msgstr "Un vaixell espera l'ordre de començar l'expedició."
 
-#. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:984
+#. * TRANSLATORS: This is a ship state. The ship is currently transporting
+#. wares.
+#: ../../src/logic/map_objects/tribes/ship.cc:994
+#: ../../src/wui/seafaring_statistics_menu.cc:222
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "Està embarcant"
 
+#. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
+#. but has
+#. * nothing to do.
+#: ../../src/logic/map_objects/tribes/ship.cc:998
+#: ../../src/wui/seafaring_statistics_menu.cc:220
+msgctxt "ship_state"
+msgid "Idle"
+msgstr "Inactiu"
+
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:988
+#: ../../src/logic/map_objects/tribes/ship.cc:1003
+#: ../../src/wui/seafaring_statistics_menu.cc:224
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "Està a l'espera"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:992
+#: ../../src/logic/map_objects/tribes/ship.cc:1007
+#: ../../src/wui/seafaring_statistics_menu.cc:226
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Està explorant"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:996
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
+#: ../../src/wui/seafaring_statistics_menu.cc:228
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "S'ha trobat una zona portuària"
@@ -1439,7 +1453,8 @@ msgstr "S'ha trobat una zona portuària"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1001
+#: ../../src/logic/map_objects/tribes/ship.cc:1016
+#: ../../src/wui/seafaring_statistics_menu.cc:230
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Fundació de colònies"
@@ -1525,6 +1540,12 @@ msgstr "no transitable"
 msgid "This objective has no description."
 msgstr "Aquest objectiu no disposa de descripció."
 
+#: ../../src/logic/player.cc:1323
+#, c-format
+msgctxt "shipname"
+msgid "Ship %d"
+msgstr "Vaixell %d"
+
 #: ../../src/logic/replay_game_controller.cc:97
 msgid "End of Replay"
 msgstr "Fi de la repetició"
@@ -1564,7 +1585,7 @@ msgid ""
 msgstr "El Widelands no ha pogut establir una connexió amb l'adreça donada. O bé el servidor no estava en funcionament al port indicat o bé el servidor s'ha tancat quan us hi heu intentat connectar."
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1281
+#: ../../src/wlapplication.cc:1283
 msgid "Preparing game"
 msgstr "S'està preparant la partida"
 
@@ -1729,123 +1750,119 @@ msgstr "El Widelands no pot establir la connexió a l'adreça donada.\nO bé no 
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr "Els usuaris d'IRC probablement no reaccionaran als missatges."
 
-#: ../../src/network/internet_gaming.cc:215
+#: ../../src/network/internet_gaming.cc:213
 msgid "Successfully reconnected to the metaserver!"
 msgstr "Èxit reconnectant-se al metaservidor!"
 
-#: ../../src/network/internet_gaming.cc:289
+#: ../../src/network/internet_gaming.cc:287
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "Alguna cosa ha sortit malament: %s"
 
-#: ../../src/network/internet_gaming.cc:449
+#: ../../src/network/internet_gaming.cc:373
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "Heu entrat com a «%s» ja que el nom que heu demanat està reservat o bé ja s'està usant."
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:395
 msgid "Mixed up"
 msgstr "Confós"
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:395
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "El metaservidor ha enviat un missatge d'error estrany durant la connexió"
 
-#: ../../src/network/internet_gaming.cc:486
+#: ../../src/network/internet_gaming.cc:410
 msgid "Unexpected packet"
 msgstr "Paquet d'informació inesperat"
 
-#: ../../src/network/internet_gaming.cc:487
+#: ../../src/network/internet_gaming.cc:411
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "S'ha rebut un paquet de xarxa inesperat des del metaservidor . El metaservidor pot estar emprant una versió diferent del protocol de xarxa. Si l'error continua produint-se, proveu d'actualitzar el programa."
 
-#: ../../src/network/internet_gaming.cc:499
+#: ../../src/network/internet_gaming.cc:423
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "AVÍS: S'ha rebut l'ordre %s, tot i que no estem en estat de connexió (CONNECTING state)."
 
-#: ../../src/network/internet_gaming.cc:510
+#: ../../src/network/internet_gaming.cc:434
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "El desfasament temporal del servidor és d'%d segon."
 msgstr[1] "El desfasament temporal del servidor és de %d segons."
 
-#: ../../src/network/internet_gaming.cc:534
+#: ../../src/network/internet_gaming.cc:458
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Missatge de xat invàlid, del tipus «%s»."
 
-#: ../../src/network/internet_gaming.cc:534
+#: ../../src/network/internet_gaming.cc:458
 msgid "Invalid message type"
 msgstr "Tipus de missatge invàlid"
 
-#: ../../src/network/internet_gaming.cc:572
+#: ../../src/network/internet_gaming.cc:496
 #, c-format
 msgid "The game %s is now available"
 msgstr "La partida %s ara està disponible"
 
-#: ../../src/network/internet_gaming.cc:582
+#: ../../src/network/internet_gaming.cc:506
 #, c-format
 msgid "The game %s has been closed"
 msgstr "La partida %s s'ha tancat"
 
-#: ../../src/network/internet_gaming.cc:629
+#: ../../src/network/internet_gaming.cc:552
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s s'ha unit a la sala d'espera"
 
-#: ../../src/network/internet_gaming.cc:636
+#: ../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s ha abandonat la sala d'espera"
 
-#: ../../src/network/internet_gaming.cc:691
+#: ../../src/network/internet_gaming.cc:614
 msgid "Chat message could not be sent."
 msgstr "No s'ha pogut enviar el missatge de xat."
 
-#: ../../src/network/internet_gaming.cc:705
+#: ../../src/network/internet_gaming.cc:628
 #, c-format
 msgid "ERROR: %s"
 msgstr "Error: %s"
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:638
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "S'ha rebut una ordre desconeguda del metaservidor: %s"
 
-#: ../../src/network/internet_gaming.cc:841
+#: ../../src/network/internet_gaming.cc:764
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "No s'ha pogut enviar el missatge perquè no esteu connectats al metaservidor."
 
-#: ../../src/network/internet_gaming.cc:860
-#: ../../src/network/internet_gaming.cc:867
+#: ../../src/network/internet_gaming.cc:783
+#: ../../src/network/internet_gaming.cc:790
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "No s'ha pogut enviar el missatge. Era un missatge privat?"
 
-#: ../../src/network/internet_gaming.cc:874
-msgid "Private messages to IRC users are not supported."
-msgstr "Els missatges privats a usuaris d'IRC no estan suportats."
-
-#: ../../src/network/internet_gaming.cc:951
+#: ../../src/network/internet_gaming.cc:866
 msgid "Conversion error"
 msgstr "Error de conversió"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:954
+#: ../../src/network/internet_gaming.cc:869
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "No s'ha pogut determinar el valor vertader de «%s»."
 
-#: ../../src/network/internet_gaming.cc:971
+#: ../../src/network/internet_gaming.cc:886
 msgid "unknown"
 msgstr "desconegut"
 
@@ -2171,7 +2188,7 @@ msgstr[1] "%d píxels"
 msgid "About Widelands"
 msgstr "Quant al Widelands"
 
-#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:126
+#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:80
 msgid "Close"
 msgstr "Tanca"
 
@@ -2329,32 +2346,32 @@ msgstr "Podeu veure una descripció del tutorial seleccionat a la dreta."
 msgid "Help: %s"
 msgstr "Ajuda: %s"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:52
+#: ../../src/ui_fsmenu/internet_lobby.cc:62
 msgid "Metaserver Lobby"
 msgstr "Sala d'espera del metaservidor"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:53
+#: ../../src/ui_fsmenu/internet_lobby.cc:63
 msgid "Clients online:"
 msgstr "Clients en línia:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:54
+#: ../../src/ui_fsmenu/internet_lobby.cc:64
 msgid "List of games:"
 msgstr "Llista de partides:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:55
+#: ../../src/ui_fsmenu/internet_lobby.cc:65
 msgid "Name of your server:"
 msgstr "Nom del vostre servidor:"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:65
+#: ../../src/ui_fsmenu/internet_lobby.cc:75
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Join this game"
 msgstr "Afegiu-me a la partida"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:73
+#: ../../src/ui_fsmenu/internet_lobby.cc:83
 msgid "Open a new game"
 msgstr "Comença una partida nova"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:81
+#: ../../src/ui_fsmenu/internet_lobby.cc:91
 #: ../../src/ui_fsmenu/launch_game.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:37
 #: ../../src/ui_fsmenu/multiplayer.cc:55
@@ -2363,51 +2380,51 @@ msgstr "Comença una partida nova"
 msgid "Back"
 msgstr "Enrere"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:130
+#: ../../src/ui_fsmenu/internet_lobby.cc:140
 msgid "User Status"
 msgstr "Estat de l'usuari"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:131
+#: ../../src/ui_fsmenu/internet_lobby.cc:141
 msgid "Registered"
 msgstr "Registrat"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:132
+#: ../../src/ui_fsmenu/internet_lobby.cc:142
 msgid "Administrator"
 msgstr "Administrador"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:133
+#: ../../src/ui_fsmenu/internet_lobby.cc:143
 msgid "Unregistered"
 msgstr "Sense registrar"
 
 #. * TRANSLATORS: Player Name
-#: ../../src/ui_fsmenu/internet_lobby.cc:137
+#: ../../src/ui_fsmenu/internet_lobby.cc:147
 msgctxt "player"
 msgid "Name"
 msgstr "Nom"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:138
+#: ../../src/ui_fsmenu/internet_lobby.cc:148
 msgid "Version"
 msgstr "Versió"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:140
+#: ../../src/ui_fsmenu/internet_lobby.cc:150
 #: ../../src/ui_fsmenu/options.cc:234
 msgid "Game"
 msgstr "Partida"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:374
+#: ../../src/ui_fsmenu/internet_lobby.cc:376
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr "El Widelands no ha pogut obtenir l'adreça IP a temps. Sembla que hi ha un problema a la vostra xarxa o a la del servidor.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:377
+#: ../../src/ui_fsmenu/internet_lobby.cc:379
 msgid "Connection Timed Out"
 msgstr "La connexió ha superat el temps límit"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:412
+#: ../../src/ui_fsmenu/internet_lobby.cc:414
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "sense nom"
@@ -2787,12 +2804,12 @@ msgid "Distance for windows to snap to borders:"
 msgstr "Distància de les finestres per adherir-se a les vores:"
 
 #: ../../src/ui_fsmenu/options.cc:165
-#: ../../src/wui/game_options_sound_menu.cc:28
+#: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Enable music"
 msgstr "Activa la música"
 
 #: ../../src/ui_fsmenu/options.cc:166
-#: ../../src/wui/game_options_sound_menu.cc:31
+#: ../../src/wui/game_options_sound_menu.cc:32
 msgid "Enable sound effects"
 msgstr "Activa els efectes de so"
 
@@ -2851,32 +2868,37 @@ msgstr "So"
 msgid "Saving"
 msgstr "Desades"
 
+#: ../../src/ui_fsmenu/options.cc:264
+#: ../../src/wui/game_options_sound_menu.cc:85
+msgid "Sound is disabled due to a problem with the sound driver"
+msgstr "S'ha desactivat el so degut a un problema amb el controlador de so."
+
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:282
+#: ../../src/ui_fsmenu/options.cc:289
 msgid "Off"
 msgstr "Desactivat"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:308 ../../src/ui_fsmenu/options.cc:317
+#: ../../src/ui_fsmenu/options.cc:315 ../../src/ui_fsmenu/options.cc:324
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:429
 msgid "Try system language"
 msgstr "Prova l'idioma del sistema"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:520
+#: ../../src/ui_fsmenu/options.cc:528
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "La traducció a l'idioma %s està completada."
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:523
+#: ../../src/ui_fsmenu/options.cc:531
 msgid "The translation into %1% is %2%%% complete."
 msgstr "La traducció a l'idioma %1% està completada un %2%%%."
 
-#: ../../src/ui_fsmenu/options.cc:537
+#: ../../src/ui_fsmenu/options.cc:545
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "Si desitgeu ajudar-nos a traduir el Widelands, si us plau visiteu %s."
@@ -2893,11 +2915,11 @@ msgstr "Campanyes"
 msgid "Load Game"
 msgstr "Carrega partida"
 
-#: ../../src/wlapplication.cc:1076
+#: ../../src/wlapplication.cc:1078
 msgid "Game data error"
 msgstr "Error en les dades de la partida"
 
-#: ../../src/wlapplication.cc:1084
+#: ../../src/wlapplication.cc:1086
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2905,18 +2927,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Si us plau, informeu-nos d'aquest problema per ajudar-nos a millorar el Widelands. La sortida estàndard (en Windows, stdout.txt) conté missatges relacionats. Esteu emprant «build %1$s (%2$s)»."
 
-#: ../../src/wlapplication.cc:1091
+#: ../../src/wlapplication.cc:1093
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Per favor, envieu aquesta informació en el vostre informe.\n\nEl Widelands intenta desar la partida quan ocorre algun error durant la partida. És possible, encara que no sempre, carregar-la de nou i continuar jugant."
 
-#: ../../src/wlapplication.cc:1218
+#: ../../src/wlapplication.cc:1220
 msgid "Invalid Address"
 msgstr "Adreça no vàlida"
 
-#: ../../src/wlapplication.cc:1219
+#: ../../src/wlapplication.cc:1221
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "El nom de l'amfitrió o l'adreça no és vàlid i no us hi podeu connectar."
 
@@ -2989,135 +3011,135 @@ msgstr "Nombre de soldats"
 msgid "Send more soldiers"
 msgstr "Envia més soldats"
 
-#: ../../src/wui/building_statistics_menu.cc:67
+#: ../../src/wui/building_statistics_menu.cc:61
 msgid "Building Statistics"
 msgstr "Estadístiques d'edificis"
 
-#: ../../src/wui/building_statistics_menu.cc:72
+#: ../../src/wui/building_statistics_menu.cc:66
 msgid "Owned:"
 msgstr "Propietari:"
 
-#: ../../src/wui/building_statistics_menu.cc:78
+#: ../../src/wui/building_statistics_menu.cc:72
 msgid "Under Construction:"
 msgstr "En construcció:"
 
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:84
-#: ../../src/wui/building_statistics_menu.cc:639
+#: ../../src/wui/building_statistics_menu.cc:78
+#: ../../src/wui/building_statistics_menu.cc:698
 msgid "Low Productivity"
 msgstr "Productivitat baixa"
 
 #. * TRANSLATORS: This is the second part of productivity with input field
 #. * TRANSLATORS: Building statistics window -  'Low Productivity <input>%:'
-#: ../../src/wui/building_statistics_menu.cc:98
+#: ../../src/wui/building_statistics_menu.cc:92
 msgid "%:"
 msgstr "%:"
 
-#: ../../src/wui/building_statistics_menu.cc:130
-msgid "Small buildings"
-msgstr "Edificis petits"
-
-#: ../../src/wui/building_statistics_menu.cc:133
-msgid "Medium buildings"
-msgstr "Edificis mitjans"
-
-#: ../../src/wui/building_statistics_menu.cc:136
-msgid "Big buildings"
-msgstr "Edificis grans"
-
-#: ../../src/wui/building_statistics_menu.cc:139
-msgid "Mines"
-msgstr "Mines"
-
 #: ../../src/wui/building_statistics_menu.cc:145
-msgid "Ports"
-msgstr "Ports"
-
-#: ../../src/wui/building_statistics_menu.cc:258
-#: ../../src/wui/building_statistics_menu.cc:269
-#: ../../src/wui/building_statistics_menu.cc:281
+#: ../../src/wui/building_statistics_menu.cc:156
+#: ../../src/wui/building_statistics_menu.cc:168
 msgid "Show previous building"
 msgstr "Mostra l'edifici anterior"
 
-#: ../../src/wui/building_statistics_menu.cc:263
-#: ../../src/wui/building_statistics_menu.cc:275
-#: ../../src/wui/building_statistics_menu.cc:287
+#: ../../src/wui/building_statistics_menu.cc:150
+#: ../../src/wui/building_statistics_menu.cc:162
+#: ../../src/wui/building_statistics_menu.cc:174
 msgid "Show next building"
 msgstr "Mostra l'edifici posterior"
+
+#: ../../src/wui/building_statistics_menu.cc:306
+msgid "Small buildings"
+msgstr "Edificis petits"
+
+#: ../../src/wui/building_statistics_menu.cc:308
+msgid "Medium buildings"
+msgstr "Edificis mitjans"
+
+#: ../../src/wui/building_statistics_menu.cc:310
+msgid "Big buildings"
+msgstr "Edificis grans"
+
+#: ../../src/wui/building_statistics_menu.cc:312
+msgid "Mines"
+msgstr "Mines"
+
+#: ../../src/wui/building_statistics_menu.cc:314
+msgid "Ports"
+msgstr "Ports"
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:657
-#: ../../src/wui/building_statistics_menu.cc:681
-#: ../../src/wui/building_statistics_menu.cc:683
+#: ../../src/wui/building_statistics_menu.cc:716
+#: ../../src/wui/building_statistics_menu.cc:742
+#: ../../src/wui/building_statistics_menu.cc:744
 #: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr "%1%/%2%"
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:671
+#: ../../src/wui/building_statistics_menu.cc:730
 msgid "Lacking Soldiers:"
 msgstr "Falten soldats:"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:219
+#: ../../src/wui/buildingwindow.cc:228
 msgid "Continue"
 msgstr "Continua"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:221
+#: ../../src/wui/buildingwindow.cc:230
 msgid "Stop"
 msgstr "Atura"
 
-#: ../../src/wui/buildingwindow.cc:242
+#: ../../src/wui/buildingwindow.cc:251
 #, c-format
 msgid "Enhance to %s"
 msgstr "Amplia a %s"
 
-#: ../../src/wui/buildingwindow.cc:243 ../../src/wui/fieldaction.cc:98
+#: ../../src/wui/buildingwindow.cc:252 ../../src/wui/fieldaction.cc:98
 msgid "Construction costs:"
 msgstr "Costos de construcció:"
 
-#: ../../src/wui/buildingwindow.cc:260
+#: ../../src/wui/buildingwindow.cc:269
 msgid "Destroy"
 msgstr "Destrueix"
 
-#: ../../src/wui/buildingwindow.cc:275
+#: ../../src/wui/buildingwindow.cc:284
 msgid "Dismantle"
 msgstr "Desmantella"
 
-#: ../../src/wui/buildingwindow.cc:275
+#: ../../src/wui/buildingwindow.cc:284
 msgid "Returns:"
 msgstr "Retorna:"
 
-#: ../../src/wui/buildingwindow.cc:303 ../../src/wui/buildingwindow.cc:498
+#: ../../src/wui/buildingwindow.cc:312 ../../src/wui/buildingwindow.cc:507
 msgid "Hide work area"
 msgstr "Amaga l'àrea de treball"
 
-#: ../../src/wui/buildingwindow.cc:315 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:324 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Mostra la finestra de depuració"
 
-#: ../../src/wui/buildingwindow.cc:322
+#: ../../src/wui/buildingwindow.cc:331
 msgid "Center view on this"
 msgstr "Centra la vista aquí"
 
-#: ../../src/wui/buildingwindow.cc:501
+#: ../../src/wui/buildingwindow.cc:510
 msgid "Show work area"
 msgstr "Mostra l'àrea de treball"
 
-#: ../../src/wui/buildingwindow.cc:534
+#: ../../src/wui/buildingwindow.cc:543
 msgid "Start an expedition"
 msgstr "Comença l'expedició"
 
-#: ../../src/wui/buildingwindow.cc:538
+#: ../../src/wui/buildingwindow.cc:547
 msgid "Cancel the expedition"
 msgstr "Cancel·la l'expedició"
 
-#: ../../src/wui/constructionsitewindow.cc:58
+#: ../../src/wui/constructionsitewindow.cc:60
 #: ../../src/wui/dismantlesitewindow.cc:55
 msgid "Building materials"
 msgstr "Materials de construcció"
@@ -3207,7 +3229,7 @@ msgstr "Commuta la finestra d'estadístiques d'edificis"
 msgid "Toggle building label display"
 msgstr "Mostrar o amagar els noms d'edificis"
 
-#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:100
+#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:54
 msgid "Watch"
 msgstr "Veure"
 
@@ -3235,7 +3257,7 @@ msgstr "Cancel·la el camí"
 msgid "Build roads"
 msgstr "Construeix camí"
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:190
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:191
 #: ../../src/wui/interactive_spectator.cc:87
 msgid "Chat"
 msgstr "Xat"
@@ -3317,10 +3339,19 @@ msgstr "Centra la vista principal en la posició"
 #: ../../src/wui/game_message_menu.cc:542
 #: ../../src/wui/game_message_menu.cc:546
 #: ../../src/wui/game_message_menu.cc:550
+#: ../../src/wui/seafaring_statistics_menu.cc:101
+#: ../../src/wui/seafaring_statistics_menu.cc:132
+#: ../../src/wui/seafaring_statistics_menu.cc:509
+#: ../../src/wui/seafaring_statistics_menu.cc:518
+#: ../../src/wui/seafaring_statistics_menu.cc:522
+#: ../../src/wui/seafaring_statistics_menu.cc:527
+#: ../../src/wui/seafaring_statistics_menu.cc:531
+#: ../../src/wui/seafaring_statistics_menu.cc:536
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1%\n(drecera de teclat: %2%)"
 
 #: ../../src/wui/game_message_menu.cc:524
+#: ../../src/wui/seafaring_statistics_menu.cc:511
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt+0"
@@ -3336,11 +3367,13 @@ msgid "Show geologists' messages only"
 msgstr "Mostra només els missatges dels geòlegs"
 
 #: ../../src/wui/game_message_menu.cc:536
+#: ../../src/wui/seafaring_statistics_menu.cc:520
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt+1"
 
 #: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt+2"
@@ -3351,6 +3384,7 @@ msgid "Show economy messages only"
 msgstr "Mostra només els missatges de l'economia"
 
 #: ../../src/wui/game_message_menu.cc:544
+#: ../../src/wui/seafaring_statistics_menu.cc:529
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt+3"
@@ -3361,6 +3395,7 @@ msgid "Show seafaring messages only"
 msgstr "Mostra només els missatges de navegació marítima"
 
 #: ../../src/wui/game_message_menu.cc:548
+#: ../../src/wui/seafaring_statistics_menu.cc:533
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt+4"
@@ -3371,6 +3406,7 @@ msgid "Show warfare messages only"
 msgstr "Mostra només els missatges militars"
 
 #: ../../src/wui/game_message_menu.cc:552
+#: ../../src/wui/seafaring_statistics_menu.cc:539
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt+5"
@@ -3427,7 +3463,7 @@ msgid "Del: %s"
 msgstr "Supr: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:200
+#: ../../src/wui/interactive_player.cc:201
 msgid "Objectives"
 msgstr "Objectius"
 
@@ -3441,7 +3477,7 @@ msgid "Are you sure you wish to exit this game?"
 msgstr "Segur que voleu sortir de la partida?"
 
 #: ../../src/wui/game_options_menu.cc:77
-#: ../../src/wui/game_options_sound_menu.cc:27
+#: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
 msgstr "Opcions de so"
 
@@ -3455,34 +3491,39 @@ msgstr "Canvia les opcions d'efectes de so i música"
 msgid "Exit Game"
 msgstr "Surt del joc"
 
-#: ../../src/wui/game_options_sound_menu.cc:35
+#: ../../src/wui/game_options_sound_menu.cc:36
 msgid "Music volume"
 msgstr "Volum de la música"
 
-#: ../../src/wui/game_options_sound_menu.cc:50
+#: ../../src/wui/game_options_sound_menu.cc:51
 msgid "Sound effects volume"
 msgstr "Volum dels efectes de so"
 
-#: ../../src/wui/game_statistics_menu.cc:36
+#: ../../src/wui/game_statistics_menu.cc:37
 msgid "Statistics Menu"
 msgstr "Menú d'estadístiques"
 
-#: ../../src/wui/game_statistics_menu.cc:40
+#: ../../src/wui/game_statistics_menu.cc:42
 msgid "General statistics"
 msgstr "Estadístiques generals"
 
-#: ../../src/wui/game_statistics_menu.cc:43
+#: ../../src/wui/game_statistics_menu.cc:45
 msgid "Ware statistics"
 msgstr "Estadístiques de béns"
 
-#: ../../src/wui/game_statistics_menu.cc:44
+#: ../../src/wui/game_statistics_menu.cc:46
 msgid "Building statistics"
 msgstr "Estadístiques d'edificis"
 
-#: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
+#: ../../src/wui/game_statistics_menu.cc:48 ../../src/wui/stock_menu.cc:36
 #: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
 msgid "Stock"
 msgstr "Estoc"
+
+#: ../../src/wui/game_statistics_menu.cc:50
+#: ../../src/wui/seafaring_statistics_menu.cc:46
+msgid "Seafaring Statistics"
+msgstr "Estadístiques de navegació"
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
@@ -3651,17 +3692,17 @@ msgstr "PAUSA"
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:169
+#: ../../src/wui/interactive_player.cc:170
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
 msgstr "Estadístiques"
 
-#: ../../src/wui/interactive_player.cc:204
-#: ../../src/wui/interactive_player.cc:256
+#: ../../src/wui/interactive_player.cc:205
+#: ../../src/wui/interactive_player.cc:257
 msgid "Messages"
 msgstr "Missatges"
 
-#: ../../src/wui/interactive_player.cc:261
+#: ../../src/wui/interactive_player.cc:262
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -4237,6 +4278,92 @@ msgstr "(en camí)"
 msgid "(vacant)"
 msgstr "(vacant)"
 
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:103
+msgid "Watch the selected ship"
+msgstr "Mira el vaixell seleccionat"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:104
+msgctxt "hotkey"
+msgid "W"
+msgstr "W"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:116
+#: ../../src/wui/seafaring_statistics_menu.cc:119
+msgctxt "hotkey_description"
+msgid "%1%: %2%"
+msgstr "%1%: %2%"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:116
+msgctxt "hotkey"
+msgid "O"
+msgstr "O"
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:118
+msgid "Open the selected ship’s window"
+msgstr "Obre la finestra del vaixell seleccionat."
+
+#: ../../src/wui/seafaring_statistics_menu.cc:120
+msgctxt "hotkey"
+msgid "CTRL + O"
+msgstr "Ctrl+O"
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:122
+msgid "Go to the selected ship and open its window"
+msgstr "Vés al vaixell seleccionat i obre'n la finestra."
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:134
+msgid "Center the map on the selected ship"
+msgstr "Centra el mapa al vaixell seleccionat."
+
+#: ../../src/wui/seafaring_statistics_menu.cc:135
+msgctxt "hotkey"
+msgid "G"
+msgstr "G"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:187
+msgctxt "ship"
+msgid "Name"
+msgstr "Nom"
+
+#: ../../src/wui/seafaring_statistics_menu.cc:188
+msgctxt "ship"
+msgid "Status"
+msgstr "Estat"
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:511
+msgid "Show all ships"
+msgstr "Mostra tots els vaixells."
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:520
+msgid "Show idle ships"
+msgstr "Mostra els vaixells inactius."
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:524
+msgid "Show ships shipping wares and workers"
+msgstr "Mostra vaixells transportant béns i treballadors."
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:529
+msgid "Show waiting expeditions"
+msgstr "Mostra les expedicions que estan en espera."
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:533
+msgid "Show scouting expeditions"
+msgstr "Mostra les expedicions que estan explorant."
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:538
+msgid "Show expeditions that have found a port space or are founding a colony"
+msgstr "Mostra les expedicions que han trobat un espai portuari o estan fundant una colònia."
+
 #: ../../src/wui/shipwindow.cc:79
 msgid "Scout towards the north west"
 msgstr "Explora cap al nord-oest"
@@ -4290,11 +4417,11 @@ msgid "Go to ship"
 msgstr "Vés al vaixell"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:172
+#: ../../src/wui/shipwindow.cc:219
 msgid "Cancel Expedition"
 msgstr "Cancel·la l'expedició"
 
-#: ../../src/wui/shipwindow.cc:172
+#: ../../src/wui/shipwindow.cc:219
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
@@ -4395,10 +4522,10 @@ msgstr "Treballadors esperant per embarcar"
 msgid "Expedition"
 msgstr "Expedició"
 
-#: ../../src/wui/watchwindow.cc:108
+#: ../../src/wui/watchwindow.cc:62
 msgid "Follow"
 msgstr "Segueix"
 
-#: ../../src/wui/watchwindow.cc:114
+#: ../../src/wui/watchwindow.cc:68
 msgid "Center the main view on this"
 msgstr "Centra la vista principal aquí"

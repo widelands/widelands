@@ -84,10 +84,10 @@ matrix:
       env: GCC_VERSION="4.9" BUILD_TYPE="Debug"
     - os: linux
       compiler: gcc
-      env: GCC_VERSION="6" BUILD_TYPE="Debug"
+      env: GCC_VERSION="7" BUILD_TYPE="Debug"
     - os: linux
       compiler: gcc
-      env: GCC_VERSION="7" BUILD_TYPE="Debug"
+      env: GCC_VERSION="8" BUILD_TYPE="Debug"
     - os: linux
       compiler: gcc
       env: GCC_VERSION="4.8" BUILD_TYPE="Release"
@@ -96,7 +96,7 @@ matrix:
       env: GCC_VERSION="4.9" BUILD_TYPE="Release"
     - os: linux
       compiler: gcc
-      env: GCC_VERSION="6" BUILD_TYPE="Release"
+      env: GCC_VERSION="7" BUILD_TYPE="Release"
     - os: linux
       compiler: gcc
-      env: GCC_VERSION="7" BUILD_TYPE="Release"
+      env: GCC_VERSION="8" BUILD_TYPE="Release"
