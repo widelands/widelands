@@ -1412,6 +1412,7 @@ public:
 	int get_initial_resource_amount(lua_State*);
 	int get_claimers(lua_State*);
 	int get_owner(lua_State*);
+	int get_is_buildable(lua_State*);
 
 	/*
 	 * Lua methods

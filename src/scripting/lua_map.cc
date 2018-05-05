@@ -5897,6 +5897,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, initial_resource_amount),
    PROP_RO(LuaField, claimers),
    PROP_RO(LuaField, owner),
+   PROP_RO(LuaField, is_buildable),
    {nullptr, nullptr, nullptr},
 };
 
@@ -6221,6 +6222,23 @@ int LuaField::get_owner(lua_State* L) {
 		return 1;
 	}
 	return 0;
+}
+
+/* RST
+   .. attribute:: is_buildable
+
+      Returns :const:`true` if a flag or building could be built on this field,
+      independently of whether anybody currently owns this field.
+*/
+int LuaField::get_is_buildable(lua_State* L) {
+	const NodeCaps caps = fcoords(L).field->nodecaps();
+	const bool is_buildable = (caps & BUILDCAPS_FLAG)
+			|| (caps & BUILDCAPS_SMALL)
+			|| (caps & BUILDCAPS_MEDIUM)
+			|| (caps & BUILDCAPS_BIG)
+			|| (caps & BUILDCAPS_MINE);
+	lua_pushboolean(L, is_buildable);
+	return 1;
 }
 
 /* RST
