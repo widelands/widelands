@@ -68,9 +68,8 @@ void Tribes::add_productionsite_type(const LuaTable& table, const EditorGameBase
 
 void Tribes::add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	const std::string msgctxt = table.get_string("msgctxt");
 	buildings_->add(new TrainingSiteDescr(
-	   pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()), msgctxt,
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()), msgctxt,
 	   table, egbase));
 }
 
