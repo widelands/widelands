@@ -49,9 +49,9 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "granite", amount = 4 },
-      { name = "clay", amount = 9 },
-      { name = "coal", amount = 4 },
+      { name = "granite", amount = 3 },
+      { name = "clay", amount = 6 },
+      { name = "coal", amount = 3 },
    },
    outputs = {
       "brick"

@@ -53,6 +53,8 @@ tribes:new_productionsite_type {
             "worker=hunt",
             "sleep=35000",
             "worker=hunt",
+            "sleep=35000",
+            "worker=hunt",
             "produce=fur"
          }
       },

@@ -10,11 +10,11 @@ tribes:new_trainingsite_type {
    size = "big",
 
    buildcost = {
-      brick = 7,
+      brick = 6,
       granite = 3,
       log = 4,
       gold = 3,
-      thatch_reed = 3
+      thatch_reed = 4
    },
    return_on_dismantle = {
       brick = 3,
@@ -135,7 +135,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 4", -- Because the soldier can be expelled by the player
             "consume=sword_curved honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 4 5",
-            "produce=scrap_iron scrap_metal_mixed"
+            "produce=scrap_iron:2"
          }
       },
       upgrade_soldier_attack_5 = {
