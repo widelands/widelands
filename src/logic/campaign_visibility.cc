@@ -78,8 +78,8 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	// Variable declaration
 	int32_t i = 0;
 	int32_t imap = 0;
-	char csection[12];
-	char number[4];
+	char csection[24];
+	char number[12];
 	std::string mapsection;
 	std::string cms;
 
@@ -98,8 +98,8 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	{
 		Section& vis = campvisw.pull_section("campaigns");
 		sprintf(csection, "campsect%i", i);
-		char cvisible[12];
-		char cnewvisi[12];
+		char cvisible[24];
+		char cnewvisi[24];
 		while (cconf_s.get_string(csection)) {
 			sprintf(cvisible, "campvisi%i", i);
 			sprintf(cnewvisi, "cnewvisi%i", i);

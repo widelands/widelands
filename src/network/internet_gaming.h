@@ -37,7 +37,6 @@ struct InternetClient {
 	std::string build_id;
 	std::string game;
 	std::string type;
-	std::string points;  // Currently unused
 };
 
 /// A simple network game struct
