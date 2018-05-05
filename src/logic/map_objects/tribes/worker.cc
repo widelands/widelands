@@ -34,6 +34,7 @@
 #include "economy/road.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -975,9 +976,12 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
+			const int width = g_gr->images().get(rdescr->representative_image())->width();
 			const std::string message =
-			   (boost::format("<rt image=%s><p font-face=serif font-size=14>%s</p></rt>") %
-			    rdescr->representative_image() % _("A geologist found resources."))
+			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
+			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
+			    width % rdescr->representative_image() % UI_FONT_SIZE_MESSAGE %
+			    _("A geologist found resources."))
 			      .str();
 
 			Message::Type message_type = Message::Type::kGeologists;

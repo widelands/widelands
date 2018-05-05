@@ -329,7 +329,9 @@ void GameMessageMenu::selected(uint32_t const t) {
 			try {
 				message_body.force_new_renderer();
 				message_body.set_text(as_message(message->heading(), message->body()));
-			} catch (const std::exception&) {
+			} catch (const std::exception& e) {
+				log("Game Message Menu: falling back to old font renderer:\n%s\n%s\n",
+				    message->body().c_str(), e.what());
 				message_body.force_new_renderer(false);
 				message_body.set_text(
 				   (boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"

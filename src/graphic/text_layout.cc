@@ -164,10 +164,14 @@ std::string as_waresinfo(const std::string& txt) {
 }
 
 std::string as_message(const std::string& heading, const std::string& body) {
-	return ((boost::format(
-	            "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
-	         heading % (is_paragraph(body) || is_div(body) ? body : "<p>" + body + "</p>"))
-	           .str());
+	return (
+	   (boost::format(
+	       "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
+	    heading %
+	    (is_paragraph(body) || is_div(body) ?
+	        body :
+	        (boost::format("<p><font size=%d>%s</font></p>") % UI_FONT_SIZE_MESSAGE % body).str()))
+	      .str());
 }
 
 std::shared_ptr<const UI::RenderedText>
