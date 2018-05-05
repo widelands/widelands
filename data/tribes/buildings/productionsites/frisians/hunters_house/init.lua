@@ -40,7 +40,8 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "meat"
+      "meat",
+      "fur"
    },
 
    programs = {

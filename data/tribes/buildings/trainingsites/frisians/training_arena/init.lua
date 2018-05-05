@@ -52,11 +52,11 @@ tribes:new_trainingsite_type {
    },
 
    inputs = {
-      { name = "smoked_fish", amount = 8 },
-      { name = "smoked_meat", amount = 8 },
+      { name = "smoked_fish", amount = 6 },
+      { name = "smoked_meat", amount = 6 },
       { name = "mead", amount = 8 },
-      { name = "honey_bread", amount = 8 },
-      { name = "sword_long", amount = 4 },
+      { name = "honey_bread", amount = 6 },
+      { name = "sword_long", amount = 3 },
       { name = "sword_curved", amount = 3 },
       { name = "sword_double", amount = 3 },
       { name = "helmet_golden", amount = 2 },
