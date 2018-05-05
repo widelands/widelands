@@ -52,7 +52,22 @@ return {
       local remaining_time = 10 -- (dummy) -- time in secs, if == 0 -> victory
 
       -- Find all valid teams
-      local teamnumbers = get_teamnumbers(plrs) -- array with team numbers
+      local teamnumbers = {} -- array with team numbers
+      for idx,p in ipairs(plrs) do
+         local team = p.team
+         if team > 0 then
+            local found = false
+            for idy,t in ipairs(teamnumbers) do
+               if t == team then
+                  found = true
+                  break
+               end
+            end
+            if not found then
+               table.insert(teamnumbers, team)
+            end
+         end
+      end
 
       local all_player_points = {}
 

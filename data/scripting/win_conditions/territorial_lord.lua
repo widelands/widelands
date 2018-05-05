@@ -6,6 +6,7 @@ include "scripting/coroutine.lua" -- for sleep
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
+include "scripting/win_conditions/win_condition_texts.lua"
 include "scripting/win_conditions/territorial_functions.lua"
 
 set_textdomain("win_conditions")
@@ -31,99 +32,75 @@ return {
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
 
+      -- Configure how long the winner has to hold on to the territory
+      local time_to_keep_territory = 20 * 60 -- 20 minutes
+      local remaining_time = time_to_keep_territory -- time in secs, if == 0 -> victory
+
       -- Get all valueable fields of the map
       local fields = get_buildable_fields()
 
-      -- these variables will be used once a player or team owns more than half
-      -- of the map's area
-      local currentcandidate = "" -- Name of Team or Player
-      local candidateisteam = false
-      local remaining_time = 10 -- (dummy) -- time in secs, if == 0 -> victory
-
-      -- Find all valid teams
-      local teamnumbers = get_teamnumbers(plrs) -- array with team numbers
-
+      -- Remember current points for reports
       local all_player_points = {}
+      local somebody_is_winning = false
+
+      -- These variables will be used once a player or team owns more than half
+      -- of the map's area
+      local no_winner = {}
+      no_winner["type"] = "none"
+      local winner = no_winner
 
       local function _calc_points()
-         local teampoints = {}     -- points of teams
-         local maxplayerpoints = 0 -- the highest points of a player without team
-         local maxpointsplayer = 0 -- the player
-         local foundcandidate = false
-
+         local last_winner = winner
          all_player_points = count_owned_fields_for_all_players(fields, plrs)
+         winner = find_winner(all_player_points, plrs)
 
-         for idx, p in ipairs(plrs) do
-            local team = p.team
-            if team == 0 then
-               if maxplayerpoints < all_player_points[p.number] then
-                  maxplayerpoints = all_player_points[p.number]
-                  maxpointsplayer = p
-               end
-            else
-               if not teampoints[team] then -- init the value
-                  teampoints[team] = 0
-               end
-               teampoints[team] = teampoints[team] + all_player_points[p.number]
-            end
-         end
-
-         if maxplayerpoints > ( #fields / 2 ) then
-            -- player owns more than half of the map's area
-            foundcandidate = true
-            if candidateisteam == false and currentcandidate == maxpointsplayer.name then
+         -- Check if we are (still) winning
+         if winner["points"] > ( #fields / 2 ) then
+            -- Calculate whether territory was kept or the winner changed. Make sure that the player still exists.
+            if winner["type"] == last_winner["type"] and winner["winner"] == last_winner["winner"] then
                remaining_time = remaining_time - 30
             else
-               currentcandidate = maxpointsplayer.name
-               candidateisteam = false
-               remaining_time = 20 * 60 -- 20 minutes
+               remaining_time = time_to_keep_territory
             end
+            last_winner = winner
+            somebody_is_winning = true
          else
-            for idx, t in ipairs(teamnumbers) do
-               if teampoints[t] > ( #fields / 2 ) then
-                  -- this team owns more than half of the map's area
-                  foundcandidate = true
-                  if candidateisteam == true and currentcandidate == t then
-                     remaining_time = remaining_time - 30
-                  else
-                     currentcandidate = t
-                     candidateisteam = true
-                     remaining_time = 20 * 60 -- 20 minutes
-                  end
-               end
-            end
-         end
-         if not foundcandidate then
-            currentcandidate = ""
-            candidateisteam = false
-            remaining_time = 10
+            -- Nobody is currently winning
+            last_winner = no_winner
+            remaining_time = time_to_keep_territory
+            somebody_is_winning = false
          end
       end
 
       local function _send_state()
-         set_textdomain("win_conditions")
-         local candidate = currentcandidate
-         if candidateisteam then
-            candidate = (_"Team %i"):format(currentcandidate)
-         end
-         local msg1 = p(_"%s owns more than half of the map’s area."):format(candidate)
-         msg1 = msg1 .. p(ngettext("You’ve still got %i minute to prevent a victory.",
-                   "You’ve still got %i minutes to prevent a victory.",
-                   remaining_time / 60))
-               :format(remaining_time / 60)
+         local remaining_minutes = math.max(0, math.floor(remaining_time / 60))
 
-         local msg2 = p(_"You own more than half of the map’s area.")
-         msg2 = msg2 .. p(ngettext("Keep it for %i more minute to win the game.",
-                   "Keep it for %i more minutes to win the game.",
-                   remaining_time / 60))
-               :format(remaining_time / 60)
+         -- Player might have been defeated since the last time the winner was checked
+         if remaining_minutes > 0 and plrs[winner["winner"]] then
+            set_textdomain("win_conditions")
+            local candidate = plrs[winner["winner"]].name
+            if winner["type"] == "team" then
+               candidate = (_"Team %i"):format(winner["winner"])
+            end
 
-         for idx, player in ipairs(plrs) do
-            if candidateisteam and currentcandidate == player.team
-               or not candidateisteam and currentcandidate == player.name then
-               send_message(player, game_status.title, msg2, {popup = true})
-            else
-               send_message(player, game_status.title, msg1, {popup = true})
+            local msg1 = p(_"%s owns more than half of the map’s area."):format(candidate)
+            msg1 = msg1 .. p(ngettext("You’ve still got %i minute to prevent a victory.",
+                      "You’ve still got %i minutes to prevent a victory.",
+                      remaining_minutes))
+                  :format(remaining_minutes)
+
+            local msg2 = p(_"You own more than half of the map’s area.")
+            msg2 = msg2 .. p(ngettext("Keep it for %i more minute to win the game.",
+                      "Keep it for %i more minutes to win the game.",
+                      remaining_minutes))
+                  :format(remaining_minutes)
+            for idx, player in ipairs(plrs) do
+               if winner["type"] == "team" and winner["winner"] == player.team
+                  or winner["type"] == "player" and winner["winner"] == player.number then
+                  send_message(player, game_status.title, msg2, {popup = true})
+               else
+                  send_message(player, game_status.title, msg1, {popup = true})
+               end
             end
          end
       end
@@ -146,22 +123,28 @@ return {
 
          -- Do this stuff, if the game is over
          if remaining_time == 0 then
-            for idx, p in ipairs(plrs) do
-               p.see_all = 1
-               if candidateisteam and currentcandidate == p.team
-                  or not candidateisteam and currentcandidate == p.name then
-                  p:send_message(won_game_over.title, won_game_over.body)
-                  wl.game.report_result(p, 1, make_extra_data(p, wc_descname, wc_version, {score=all_player_points[p.number]}))
+            -- For formatting the winner's name
+            local candidate = plrs[winner["winner"]].name
+            if winner["type"] == "team" then
+               candidate = (_"Team %i"):format(winner["winner"])
+            end
+
+            for idx, plr in ipairs(plrs) do
+               plr.see_all = 1
+               if winner["type"] == "team" and winner["winner"] == plr.team
+                  or winner["type"] == "player" and winner["winner"] == plr.number then
+                  plr:send_message(won_game_over.title, won_game_over.body .. p(_"You own more than half of the map’s area."))
+                  wl.game.report_result(plr, 1, make_extra_data(plr, wc_descname, wc_version, {score=all_player_points[plr.number]}))
                else
-                  p:send_message(lost_game_over.title, lost_game_over.body)
-                  wl.game.report_result(p, 0, make_extra_data(p, wc_descname, wc_version, {score=all_player_points[p.number]}))
+                  plr:send_message(lost_game_over.title, lost_game_over.body .. p(_"%s owns more than half of the map’s area."):format(candidate))
+                  wl.game.report_result(plr, 0, make_extra_data(plr, wc_descname, wc_version, {score=all_player_points[plr.number]}))
                end
             end
             break
          end
 
          -- If there is a candidate, check whether we have to send an update
-         if remaining_time % 300 == 0 then -- every 5 minutes (5 * 60 )
+         if somebody_is_winning and remaining_time >= 0 and remaining_time % 300 == 0 then
             _send_state()
          end
       end
