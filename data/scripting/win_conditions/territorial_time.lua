@@ -9,6 +9,7 @@ include "scripting/coroutine.lua" -- for sleep
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
+include "scripting/win_conditions/territorial_functions.lua"
 
 set_textdomain("win_conditions")
 
@@ -39,26 +40,7 @@ return {
       broadcast_objective("win_condition", wc_descname, wc_desc)
 
       -- Get all valueable fields of the map
-      local fields = {}
-      local map = wl.Game().map
-      for x=0,map.width-1 do
-         for y=0,map.height-1 do
-            local f = map:get_field(x,y)
-            if f then
-               -- add this field to the list as long as it has not movecaps swim
-               if not f:has_caps("swimmable") then
-                  if f:has_caps("walkable") then
-                     fields[#fields+1] = f
-                  else
-                     -- editor disallows placement of immovables on dead and acid fields
-                     if f.immovable then
-                        fields[#fields+1] = f
-                     end
-                  end
-               end
-            end
-         end
-      end
+      local fields = get_buildable_fields()
 
       -- variables to track the maximum 4 hours of gametime
       local remaining_max_time = 4 * 60 * 60 -- 4 hours
@@ -70,39 +52,9 @@ return {
       local remaining_time = 10 -- (dummy) -- time in secs, if == 0 -> victory
 
       -- Find all valid teams
-      local teamnumbers = {} -- array with team numbers
-      for idx,pl in ipairs(plrs) do
-         local team = pl.team
-         if team > 0 then
-            local found = false
-            for idy,t in ipairs(teamnumbers) do
-               if t == team then
-                  found = true
-                  break
-               end
-            end
-            if not found then
-               teamnumbers[#teamnumbers+1] = team
-            end
-         end
-      end
+      local teamnumbers = get_teamnumbers(plrs) -- array with team numbers
 
-      local _landsizes = {}
-      local function _calc_current_landsizes()
-         -- init the landsizes for each player
-         for idx,plr in ipairs(plrs) do
-            _landsizes[plr.number] = 0
-         end
-
-         for idx,f in ipairs(fields) do
-            -- check if field is owned by a player
-            local o = f.owner
-            if o then
-               local n = o.number
-               _landsizes[n] = _landsizes[n] + 1
-            end
-         end
-      end
+      local all_player_points = {}
 
       local function _calc_points()
          local teampoints = {}     -- points of teams
@@ -111,21 +63,21 @@ return {
          local maxpointsplayer = 0 -- the player
          local foundcandidate = false
 
-         _calc_current_landsizes()
+         all_player_points = count_owned_fields_for_all_players(fields, plrs)
 
          for idx, pl in ipairs(plrs) do
             local team = pl.team
             if team == 0 then
-               if maxplayerpoints < _landsizes[pl.number] then
-                  maxplayerpoints = _landsizes[pl.number]
+               if maxplayerpoints < all_player_points[pl.number] then
+                  maxplayerpoints = all_player_points[pl.number]
                   maxpointsplayer = pl
                end
-               points[#points + 1] = { pl.name, _landsizes[pl.number] }
+               points[#points + 1] = { pl.name, all_player_points[pl.number] }
             else
                if not teampoints[team] then -- init the value
                   teampoints[team] = 0
                end
-               teampoints[team] = teampoints[team] + _landsizes[pl.number]
+               teampoints[team] = teampoints[team] + all_player_points[pl.number]
             end
          end
 
@@ -290,10 +242,10 @@ return {
             if points[i][1] == team_str:format(pl.team) or points[i][1] == pl.name then
                if points[i][2] >= maxpoints then
                   pl:send_message(won_game_over.title, wonmsg .. _status(points, "had"))
-                  wl.game.report_result(pl, 1, make_extra_data(pl, wc_descname, wc_version, {score=_landsizes[pl.number]}))
+                  wl.game.report_result(pl, 1, make_extra_data(pl, wc_descname, wc_version, {score=all_player_points[pl.number]}))
                else
                   pl:send_message(lost_game_over.title, lostmsg .. _status(points, "had"))
-                  wl.game.report_result(pl, 0, make_extra_data(pl, wc_descname, wc_version, {score=_landsizes[pl.number]}))
+                  wl.game.report_result(pl, 0, make_extra_data(pl, wc_descname, wc_version, {score=all_player_points[pl.number]}))
                end
             end
          end
