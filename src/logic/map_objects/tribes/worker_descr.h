@@ -130,7 +130,7 @@ private:
 	Buildcost buildcost_;
 
 	/**
-	 * Type that this worker can become, i.e. level up to (or null).
+	 * Type that this worker can become, i.e. level up to, or INVALID_INDEX if the worker cannot level up.
 	 */
 	const DescriptionIndex becomes_;
 
