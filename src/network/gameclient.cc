@@ -106,7 +106,7 @@ GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
 	if ((!d->net || !d->net->is_connected()) && host.second.is_valid()) {
 		// First IP did not work? Try the second IP
 		if (internet) {
-			d->net = NetClientProxy::connect(host.first, gamename);
+			d->net = NetClientProxy::connect(host.second, gamename);
 		} else {
 			d->net = NetClient::connect(host.second);
 		}
