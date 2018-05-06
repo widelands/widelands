@@ -1,6 +1,6 @@
 function building_helptext_lore ()
    -- TRANSLATORS: Lore helptext for a building
-   return pgettext ("frisians_building", "If there is not enough coal, only the most foolish of leaders would deprive his brick kilns first.")
+   return pgettext ("frisians_building", "If there is not enough coal, only the most foolish of leaders would deprive his brick kilns of it first.")
 end
 
 function building_helptext_lore_author ()
