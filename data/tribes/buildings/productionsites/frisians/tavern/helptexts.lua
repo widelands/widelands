@@ -19,6 +19,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- TRANSLATORS#: Performance helptext for a building
+   -- TRANSLATORS: Performance helptext for a building
    return pgettext("frisians_building", "The tavern can produce one ration in %s on average if the supply is steady; otherwise, it will take 50%% longer."):bformat(ngettext("%d second", "%d seconds", 33):bformat(33))
 end
