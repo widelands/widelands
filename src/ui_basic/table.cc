@@ -530,6 +530,10 @@ void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
 }
 
+void Table<void*>::scroll_to_top() {
+	scrollbar_->set_scrollpos(0);
+}
+
 /**
  * Remove the table entry at the given (zero-based) index.
  */
