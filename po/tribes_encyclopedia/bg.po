@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-16 06:37+0000\n"
+"POT-Creation-Date: 2018-05-03 05:41+0000\n"
+"PO-Revision-Date: 2018-05-03 07:02+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -20,12 +20,6 @@ msgstr ""
 "Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. TRANSLATORS: Purpose helptext for a building
-#. TRANSLATORS: Performance helptext for a building. Placeholders are for "4
-#. minutes" and "40 seconds"
-#. This include can be removed when all help texts have been defined.
-#. TRANSLATORS#: Lore helptext for a building
-#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:19
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/helptexts.lua:16
@@ -45,11 +39,11 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/empire/outpost/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/empire/sentry/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/empire/tower/helptexts.lua:16
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/helptexts.lua:13
-#: ../../data/tribes/buildings/militarysites/frisians/outpost/helptexts.lua:13
-#: ../../data/tribes/buildings/militarysites/frisians/sentinel/helptexts.lua:13
-#: ../../data/tribes/buildings/militarysites/frisians/tower/helptexts.lua:13
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:13
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/helptexts.lua:16
+#: ../../data/tribes/buildings/militarysites/frisians/outpost/helptexts.lua:16
+#: ../../data/tribes/buildings/militarysites/frisians/sentinel/helptexts.lua:16
+#: ../../data/tribes/buildings/militarysites/frisians/tower/helptexts.lua:16
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:16
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/helptexts.lua:16
 msgctxt "building"
 msgid "Garrisons soldiers to expand your territory."
@@ -74,11 +68,11 @@ msgstr "Поставя войниците на гарнизон, така че �
 #: ../../data/tribes/buildings/militarysites/empire/outpost/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/empire/sentry/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/empire/tower/helptexts.lua:21
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/helptexts.lua:18
-#: ../../data/tribes/buildings/militarysites/frisians/outpost/helptexts.lua:18
-#: ../../data/tribes/buildings/militarysites/frisians/sentinel/helptexts.lua:18
-#: ../../data/tribes/buildings/militarysites/frisians/tower/helptexts.lua:18
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:18
+#: ../../data/tribes/buildings/militarysites/frisians/fortress/helptexts.lua:21
+#: ../../data/tribes/buildings/militarysites/frisians/outpost/helptexts.lua:21
+#: ../../data/tribes/buildings/militarysites/frisians/sentinel/helptexts.lua:21
+#: ../../data/tribes/buildings/militarysites/frisians/tower/helptexts.lua:21
+#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:21
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/helptexts.lua:21
 msgctxt "building"
 msgid ""
@@ -86,76 +80,6 @@ msgid ""
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
 msgstr "Ако нямате достатъчно войници, които да заемат новите военни съоръжения, използвайте бутона със стрелка надолу, за да намалите капацитета. Също можете и да щракнете върху даден войник, за да го премахнете."
-
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#. TRANSLATORS: Lore helptext for a building
-#. TRANSLATORS: Lore author helptext for a building
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/helptexts.lua:3
-#: ../../data/tribes/buildings/militarysites/frisians/fortress/helptexts.lua:8
-#: ../../data/tribes/buildings/militarysites/frisians/outpost/helptexts.lua:3
-#: ../../data/tribes/buildings/militarysites/frisians/outpost/helptexts.lua:8
-#: ../../data/tribes/buildings/militarysites/frisians/sentinel/helptexts.lua:3
-#: ../../data/tribes/buildings/militarysites/frisians/sentinel/helptexts.lua:8
-#: ../../data/tribes/buildings/militarysites/frisians/tower/helptexts.lua:3
-#: ../../data/tribes/buildings/militarysites/frisians/tower/helptexts.lua:8
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:3
-#: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:8
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:3
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:8
-#: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:3
-#: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:8
-#: ../../data/tribes/buildings/warehouses/frisians/port/helptexts.lua:3
-#: ../../data/tribes/buildings/warehouses/frisians/port/helptexts.lua:8
-#: ../../data/tribes/buildings/warehouses/frisians/warehouse/helptexts.lua:3
-#: ../../data/tribes/buildings/warehouses/frisians/warehouse/helptexts.lua:8
-msgctxt "frisians_building"
-msgid ""
-msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:16
@@ -223,8 +147,8 @@ msgstr "Изгаря дървени трупи, за да ги превърне 
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:17
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:13
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs coal out of the ground in mountain terrain."
 msgstr "Добива въглища от земята на планинските терени."
@@ -302,8 +226,8 @@ msgstr "Преде златни конци от злато."
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:13
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/helptexts.lua:16
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:13
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs gold ore out of the ground in mountain terrain."
 msgstr "Добива злато от земята на планинските терени."
@@ -339,7 +263,7 @@ msgstr "Ловджийската къща се нуждае от животни 
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:13
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs iron ore out of the ground in mountain terrain."
 msgstr "Добива желязна руда от земята на планинските терени."
@@ -518,19 +442,19 @@ msgstr "Работилницата за брадви на варварите е 
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:26
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:23
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:26
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
@@ -1505,19 +1429,19 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:16
 msgctxt "building"
 msgid "Produces basic weapons and helmets for your soldiers."
-msgstr ""
+msgstr "Произвежда основни оръжия и шлемове за войниците."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "Why shouldn’t my bread taste good? It’s only barley and water!"
-msgstr ""
+msgstr "Защо хлябът ми да не е вкусен? Той е само от ечемик и вода!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "Пекар"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:13
@@ -1528,7 +1452,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The bakery needs %s to produce one loaf of bread."
+msgid "The bakery needs %s on average to produce one loaf of bread."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1559,7 +1483,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The barracks needs %s to recruit one soldier."
+msgid "The barracks needs %s on average to recruit one soldier."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1588,7 +1512,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The beekeeper pauses %s before going to work again."
-msgstr ""
+msgstr "Пчеларят спира за %s преди да започне работа отново."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:3
@@ -1596,7 +1520,7 @@ msgctxt "frisians_building"
 msgid ""
 "My bushes may not be as tall as your trees, but I don’t know anybody who "
 "likes to eat bark!"
-msgstr ""
+msgstr "Храстите ми може да не са високи колкото вашите дървета, но не познавам никого, който да обича да яде дървесна кора!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:8
@@ -1645,7 +1569,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The blacksmith needs %s to produce one tool."
+msgid "The blacksmith needs %s on average to produce one tool."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1670,7 +1594,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The brewery needs %s to brew one mug of beer."
+msgid "The brewery needs %s on average to brew one mug of beer."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1698,7 +1622,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The brick kiln needs %s to produce two bricks."
+msgid "The brick kiln needs %s on average to produce two bricks."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1723,7 +1647,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The charcoal kiln needs %s to produce one coal."
+msgid "The charcoal kiln needs %s on average to produce one coal."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1747,7 +1671,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:21
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -1756,14 +1680,16 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
-msgid "The coal mine needs %s to produce two pieces of coal."
+msgid ""
+"If the food supply is steady, the coal mine can produce two pieces of coal "
+"in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:21
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -1773,10 +1699,12 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
-msgid "The deep coal mine needs %s to produce four pieces of coal."
+msgid ""
+"If the food supply is steady, the deep coal mine can produce four pieces of "
+"coal in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1826,9 +1754,10 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:16
-msgctxt "building"
+msgctxt "frisians_building"
 msgid ""
-"Prepares rations and meals to feed the miners in the basic and deep mines."
+"Prepares rations for scouts and rations and meals to feed the miners in all "
+"mines."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1942,7 +1871,7 @@ msgid "Smelts iron ore and gold ore into iron and gold ingots using coal."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:21
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -1951,14 +1880,16 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
-msgid "The gold mine needs %s to produce one piece of gold ore."
+msgid ""
+"If the food supply is steady, the gold mine can produce one piece of gold "
+"ore in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:21
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -1968,18 +1899,20 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
-msgid "The deep gold mine needs %s to produce two pieces of gold ore."
+msgid ""
+"If the food supply is steady, the deep gold mine can produce two pieces of "
+"gold ore in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:6
 msgctxt "frisians_building"
 msgid ""
-"Rookies will say that vengeance is sweet. Heroes will say that bread is "
-"sweeter."
+"Rookies will say that vengeance is sweet. Heroes will say that honey bread "
+"is sweeter."
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a building
@@ -2009,6 +1942,18 @@ msgctxt "frisians_building"
 msgid "The hunter pauses %s before going to work again."
 msgstr ""
 
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#. TRANSLATORS: Lore helptext for a building
+#. TRANSLATORS: Lore author helptext for a building
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:3
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:8
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:3
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:8
+msgctxt "frisians_building"
+msgid ""
+msgstr ""
+
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:18
 #, lua-format
@@ -2022,11 +1967,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The iron mine needs %s to produce one piece of iron ore."
+msgid ""
+"If the food supply is steady, the iron mine can produce one piece of iron "
+"ore in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:21
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -2036,10 +1983,12 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
-msgid "The deep iron mine needs %s to produce two pieces of iron ore."
+msgid ""
+"If the food supply is steady, the deep iron mine can produce two pieces of "
+"iron ore in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -2177,7 +2126,7 @@ msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:13
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:13
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs granite out of the ground in mountain terrain."
 msgstr ""
@@ -2195,11 +2144,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The rock mine needs %s to produce two blocks of granite."
+msgid ""
+"If the food supply is steady, the rock mine can produce two blocks of "
+"granite in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:18
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:21
 #, lua-format
 msgctxt "frisians_building"
 msgid ""
@@ -2209,10 +2160,12 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:23
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:26
 #, lua-format
 msgctxt "frisians_building"
-msgid "The deep rock mine needs %s to produce three blocks of granite."
+msgid ""
+"If the food supply is steady, the deep rock mine can produce three blocks of"
+" granite in %s on average."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building. Reference to frequent
@@ -2260,7 +2213,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The sewing room needs %s to produce one fur garment."
+msgid "The sewing room needs %s on average to produce one fur garment."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building. "Yard" is a wordplay with the
@@ -2305,7 +2258,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The smokery needs %s to smoke two fish or two meat."
+msgid "The smokery needs %s on average to smoke two fish or two meat."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -2371,7 +2324,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
-msgid "The weaving mill needs %s to produce one piece of cloth."
+msgid "The weaving mill needs %s on average to produce one piece of cloth."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -2392,7 +2345,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
 #, lua-format
 msgctxt "frisians_building"
-msgid "The well needs %s to produce one bucket of water."
+msgid "The well needs %s on average to produce one bucket of water."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -2637,7 +2590,7 @@ msgstr "Служи като база за колонизация и търгов
 #: ../../data/tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
 #: ../../data/tribes/buildings/warehouses/barbarians/warehouse/helptexts.lua:16
 #: ../../data/tribes/buildings/warehouses/empire/warehouse/helptexts.lua:16
-#: ../../data/tribes/buildings/warehouses/frisians/warehouse/helptexts.lua:13
+#: ../../data/tribes/buildings/warehouses/frisians/warehouse/helptexts.lua:16
 msgctxt "building"
 msgid ""
 "Your workers and soldiers will find shelter here. Also stores your wares and"
@@ -2701,19 +2654,24 @@ msgid ""
 msgstr "Служи като база за колонизация и търговия. Също така е място за войниците, стоките и инструментите Ви."
 
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:13
+#: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:16
 msgctxt "frisians_building"
 msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:19
+#: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:22
 msgctxt "frisians_building"
 msgid "The headquarters is your main building."
 msgstr ""
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. This include can be removed when all help texts have been defined.
+#. TRANSLATORS#: Lore helptext for a building
+#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/warehouses/frisians/port/helptexts.lua:13
+#: ../../data/tribes/buildings/warehouses/frisians/port/helptexts.lua:16
 msgctxt "frisians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
@@ -2789,6 +2747,12 @@ msgstr "Тази тръстика е готова за събиране."
 msgid "This reed has just been planted."
 msgstr "Тази тръстика тъкмо е била засадена."
 
+#. TRANSLATORS: Performance helptext for a building. Placeholders are for "4
+#. minutes" and "40 seconds"
+#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
+#. script probably want to lose the blank space here.
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
 #: ../../data/tribes/immovables/resi_coal1/helptexts.lua:3
@@ -3200,198 +3164,10 @@ msgid "Skip confirmation dialog"
 msgstr "Пропускане на прозорец за потвърждение"
 
 #: ../../data/tribes/scripting/help/controls.lua:24
-msgid "Road Control"
-msgstr "Управление на пътищата"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:27
-#: ../../data/tribes/scripting/help/controls.lua:29
-msgctxt "hotkey"
-msgid "Ctrl + Left-click"
-msgstr "Контрол + ляв бутон"
-
-#: ../../data/tribes/scripting/help/controls.lua:27
-msgid "While connecting two flags: Place flags automatically"
-msgstr "При свързване на два флага: автоматично поставяне на флагове"
-
-#: ../../data/tribes/scripting/help/controls.lua:29
-msgid "While removing a flag: Remove all flags up to the first junction"
-msgstr "При премахване на флаг: премахване на всички флагове до първото кръстовище"
-
-#: ../../data/tribes/scripting/help/controls.lua:31
-msgid "Keyboard Shortcuts"
-msgstr "Клавиши и комбинации"
-
-#: ../../data/tribes/scripting/help/controls.lua:34
-msgid "Increase game speed"
-msgstr "Увеличаване на скоростта на играта"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:34
-msgctxt "hotkey"
-msgid "Page Up"
-msgstr "Page Up"
-
-#: ../../data/tribes/scripting/help/controls.lua:36
-msgid "Decrease game speed"
-msgstr "Намаляване на скоростта на играта"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:36
-msgctxt "hotkey"
-msgid "Page Down"
-msgstr "Page Down"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:38
-msgctxt "hotkey"
-msgid "Pause"
-msgstr "Pause"
-
-#: ../../data/tribes/scripting/help/controls.lua:38
-msgid "Pause the game"
-msgstr "Спиране на играта на пауза"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'c'
-#: ../../data/tribes/scripting/help/controls.lua:40
-msgid "Toggle census"
-msgstr "Превключване на преброяването"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 's'
-#: ../../data/tribes/scripting/help/controls.lua:42
-msgid "Toggle statistics"
-msgstr "Превключване на статистиките"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'o'
-#: ../../data/tribes/scripting/help/controls.lua:46
-msgid "Toggle objectives"
-msgstr "Превключване на задачите"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'n'
-#: ../../data/tribes/scripting/help/controls.lua:48
-msgid "Toggle messages (‘news’)"
-msgstr "Превключване на съобщенията („новините“)"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:50
-#: ../../data/tribes/scripting/help/init.lua:54
-msgid "Tribal Encyclopedia"
-msgstr "Енциклопедия на племената"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
-#: ../../data/tribes/scripting/help/controls.lua:52
-msgid "Toggle stock inventory"
-msgstr "Превключване на инвентара на запасите"
-
-#. TRANSLATORS: This is an access key combination. The hotkey is 'b'
-#: ../../data/tribes/scripting/help/controls.lua:54
-msgid "Toggle building statistics"
-msgstr "Превключване на статистиките за сградите"
-
-#: ../../data/tribes/scripting/help/controls.lua:56
-msgid "Center main mapview on starting location"
-msgstr "Центриране на картата върху началната позиция"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:56
-msgctxt "hotkey"
-msgid "Home"
-msgstr "Home"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:58
-msgctxt "hotkey"
-msgid "Ctrl + 1-9"
-msgstr "Контрол + 1-9"
-
-#: ../../data/tribes/scripting/help/controls.lua:58
-msgid "Remember current location"
-msgstr "Запомняне на текущата позиция"
-
-#: ../../data/tribes/scripting/help/controls.lua:59
-msgctxt "hotkey"
-msgid "1-9"
-msgstr "1-9"
-
-#: ../../data/tribes/scripting/help/controls.lua:59
-msgid "Go to previously remembered location"
-msgstr "Преминаване към предварително запомнена позиция"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:61
-msgctxt "hotkey"
-msgid "Ctrl + +"
-msgstr "Контрол + +"
-
-#: ../../data/tribes/scripting/help/controls.lua:61
-msgid "Increase zoom"
-msgstr "Приближаване"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:63
-msgctxt "hotkey"
-msgid "Ctrl + -"
-msgstr "Контрол + -"
-
-#: ../../data/tribes/scripting/help/controls.lua:63
-msgid "Decrease zoom"
-msgstr "Отдалечаване"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:65
-msgctxt "hotkey"
-msgid "Ctrl + 0"
-msgstr "Контрол + 0"
-
-#: ../../data/tribes/scripting/help/controls.lua:65
-msgid "Reset zoom"
-msgstr "Връщане към нормалното ниво на приближение"
-
-#. TRANSLATORS: This is an access key combination. Localize, but do not change
-#. the key.
-#: ../../data/tribes/scripting/help/controls.lua:67
-msgctxt "hotkey"
-msgid "Ctrl + F11"
-msgstr "Контрол + F11"
-
-#: ../../data/tribes/scripting/help/controls.lua:67
-msgid "Take a screenshot"
-msgstr "Снимка на екрана"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:70
-msgctxt "hotkey"
-msgid "Ctrl + F10"
-msgstr "Контрол + F10"
-
-#: ../../data/tribes/scripting/help/controls.lua:70
-msgid "Quit the game immediately"
-msgstr "Излизане от играта моментално"
-
-#. TRANSLATORS: This is an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:72
-msgctxt "hotkey"
-msgid "F6"
-msgstr "F6"
-
-#: ../../data/tribes/scripting/help/controls.lua:72
-msgid "Show the debug console (only in debug-builds)"
-msgstr "Показване на конзолата за отстраняване на грешки (само ако играта е компилирана в такъв режим)"
-
-#: ../../data/tribes/scripting/help/controls.lua:75
 msgid "Table Control"
 msgstr "Управление на таблици"
 
-#: ../../data/tribes/scripting/help/controls.lua:76
+#: ../../data/tribes/scripting/help/controls.lua:25
 msgid ""
 "In tables that allow the selection of multiple entries, the following key "
 "combinations are available:"
@@ -3399,124 +3175,368 @@ msgstr "В таблиците, които позволяват избиране�
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:79
+#: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "hotkey"
 msgid "Ctrl + Click"
 msgstr "Контрол + щракване"
 
-#: ../../data/tribes/scripting/help/controls.lua:79
+#: ../../data/tribes/scripting/help/controls.lua:28
 msgctxt "table_control"
 msgid "Select multiple entries"
 msgstr "Избиране на множество записи"
 
-#: ../../data/tribes/scripting/help/controls.lua:81
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "table_control"
 msgid "Select a range of entries"
 msgstr "Избиране на интервал от записи"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:81
+#: ../../data/tribes/scripting/help/controls.lua:30
 msgctxt "hotkey"
 msgid "Shift + Click"
 msgstr "Шифт + щракване"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:83
+#: ../../data/tribes/scripting/help/controls.lua:32
 msgctxt "hotkey"
 msgid "Ctrl + A"
 msgstr "Контрол + A"
 
-#: ../../data/tribes/scripting/help/controls.lua:83
+#: ../../data/tribes/scripting/help/controls.lua:32
 msgctxt "table_control"
 msgid "Select all entries"
 msgstr "Избиране на всички записи"
 
-#: ../../data/tribes/scripting/help/controls.lua:85
+#: ../../data/tribes/scripting/help/controls.lua:34
+msgid "Road Control"
+msgstr "Управление на пътищата"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:37
+#: ../../data/tribes/scripting/help/controls.lua:39
+msgctxt "hotkey"
+msgid "Ctrl + Left-click"
+msgstr "Контрол + ляв бутон"
+
+#: ../../data/tribes/scripting/help/controls.lua:37
+msgid "While connecting two flags: Place flags automatically"
+msgstr "При свързване на два флага: автоматично поставяне на флагове"
+
+#: ../../data/tribes/scripting/help/controls.lua:39
+msgid "While removing a flag: Remove all flags up to the first junction"
+msgstr "При премахване на флаг: премахване на всички флагове до първото кръстовище"
+
+#: ../../data/tribes/scripting/help/controls.lua:41
+msgid "Keyboard Shortcuts"
+msgstr "Клавиши и комбинации"
+
+#: ../../data/tribes/scripting/help/controls.lua:44
+msgid "Increase game speed"
+msgstr "Увеличаване на скоростта на играта"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:44
+msgctxt "hotkey"
+msgid "Page Up"
+msgstr "Page Up"
+
+#: ../../data/tribes/scripting/help/controls.lua:46
+msgid "Decrease game speed"
+msgstr "Намаляване на скоростта на играта"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:46
+msgctxt "hotkey"
+msgid "Page Down"
+msgstr "Page Down"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:48
+msgctxt "hotkey"
+msgid "Pause"
+msgstr "Pause"
+
+#: ../../data/tribes/scripting/help/controls.lua:48
+msgid "Pause the game"
+msgstr "Спиране на играта на пауза"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'c'
+#: ../../data/tribes/scripting/help/controls.lua:50
+msgid "Toggle census"
+msgstr "Превключване на преброяването"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 's'
+#: ../../data/tribes/scripting/help/controls.lua:52
+msgid "Toggle statistics"
+msgstr "Превключване на статистиките"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'o'
+#: ../../data/tribes/scripting/help/controls.lua:56
+msgid "Toggle objectives"
+msgstr "Превключване на задачите"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'n'
+#: ../../data/tribes/scripting/help/controls.lua:58
+msgid "Toggle messages (‘news’)"
+msgstr "Превключване на съобщенията („новините“)"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:60
+#: ../../data/tribes/scripting/help/init.lua:54
+msgid "Tribal Encyclopedia"
+msgstr "Енциклопедия на племената"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'i'
+#: ../../data/tribes/scripting/help/controls.lua:62
+msgid "Toggle stock inventory"
+msgstr "Превключване на инвентара на запасите"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'b'
+#: ../../data/tribes/scripting/help/controls.lua:64
+msgid "Toggle building statistics"
+msgstr "Превключване на статистиките за сградите"
+
+#. TRANSLATORS: This is an access key combination. The hotkey is 'e'
+#: ../../data/tribes/scripting/help/controls.lua:66
+msgid "Toggle seafaring statistics"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:68
+msgid "Center main mapview on starting location"
+msgstr "Центриране на картата върху началната позиция"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:68
+msgctxt "hotkey"
+msgid "Home"
+msgstr "Home"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:70
+msgctxt "hotkey"
+msgid "Ctrl + 1-9"
+msgstr "Контрол + 1-9"
+
+#: ../../data/tribes/scripting/help/controls.lua:70
+msgid "Remember current location"
+msgstr "Запомняне на текущата позиция"
+
+#: ../../data/tribes/scripting/help/controls.lua:71
+msgctxt "hotkey"
+msgid "1-9"
+msgstr "1-9"
+
+#: ../../data/tribes/scripting/help/controls.lua:71
+msgid "Go to previously remembered location"
+msgstr "Преминаване към предварително запомнена позиция"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:73
+msgctxt "hotkey"
+msgid "Ctrl + +"
+msgstr "Контрол + +"
+
+#: ../../data/tribes/scripting/help/controls.lua:73
+msgid "Increase zoom"
+msgstr "Приближаване"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:75
+msgctxt "hotkey"
+msgid "Ctrl + -"
+msgstr "Контрол + -"
+
+#: ../../data/tribes/scripting/help/controls.lua:75
+msgid "Decrease zoom"
+msgstr "Отдалечаване"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:77
+msgctxt "hotkey"
+msgid "Ctrl + 0"
+msgstr "Контрол + 0"
+
+#: ../../data/tribes/scripting/help/controls.lua:77
+msgid "Reset zoom"
+msgstr "Връщане към нормалното ниво на приближение"
+
+#. TRANSLATORS: This is an access key combination. Localize, but do not change
+#. the key.
+#: ../../data/tribes/scripting/help/controls.lua:79
+msgctxt "hotkey"
+msgid "Ctrl + F11"
+msgstr "Контрол + F11"
+
+#: ../../data/tribes/scripting/help/controls.lua:79
+msgid "Take a screenshot"
+msgstr "Снимка на екрана"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgctxt "hotkey"
+msgid "Ctrl + F10"
+msgstr "Контрол + F10"
+
+#: ../../data/tribes/scripting/help/controls.lua:82
+msgid "Quit the game immediately"
+msgstr "Излизане от играта моментално"
+
+#. TRANSLATORS: This is an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:84
+msgctxt "hotkey"
+msgid "F6"
+msgstr "F6"
+
+#: ../../data/tribes/scripting/help/controls.lua:84
+msgid "Show the debug console (only in debug-builds)"
+msgstr "Показване на конзолата за отстраняване на грешки (само ако играта е компилирана в такъв режим)"
+
+#. TRANSLATORS: Heading in "Controls" help
+#: ../../data/tribes/scripting/help/controls.lua:88
 msgid "Message Window"
 msgstr "Прозорец за съобщения"
 
-#: ../../data/tribes/scripting/help/controls.lua:86
-msgid ""
-"In the message window, the following additional shortcuts are available:"
-msgstr "Следните допълнителни клавиши могат да бъдат използвани в прозореца със съобщения:"
-
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:89
+#: ../../data/tribes/scripting/help/controls.lua:91
+#: ../../data/tribes/scripting/help/controls.lua:112
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Алт + 0"
 
-#: ../../data/tribes/scripting/help/controls.lua:89
+#: ../../data/tribes/scripting/help/controls.lua:91
 msgid "Show all messages"
 msgstr "Показва всички съобщения"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:91
+#: ../../data/tribes/scripting/help/controls.lua:93
+#: ../../data/tribes/scripting/help/controls.lua:114
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Алт + 1"
 
-#: ../../data/tribes/scripting/help/controls.lua:91
+#: ../../data/tribes/scripting/help/controls.lua:93
 msgid "Show geologists’ messages only"
 msgstr "Показване само на съобщенията от геолозите"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:93
+#: ../../data/tribes/scripting/help/controls.lua:95
+#: ../../data/tribes/scripting/help/controls.lua:116
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Алт + 2"
 
-#: ../../data/tribes/scripting/help/controls.lua:93
+#: ../../data/tribes/scripting/help/controls.lua:95
 msgid "Show economy messages only"
 msgstr "Показване само на съобщенията за икономиката"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:95
+#: ../../data/tribes/scripting/help/controls.lua:97
+#: ../../data/tribes/scripting/help/controls.lua:118
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Алт + 3"
 
-#: ../../data/tribes/scripting/help/controls.lua:95
+#: ../../data/tribes/scripting/help/controls.lua:97
 msgid "Show seafaring messages only"
 msgstr "Показване само на съобщенията за мореплаването"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:97
+#: ../../data/tribes/scripting/help/controls.lua:99
+#: ../../data/tribes/scripting/help/controls.lua:120
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Алт + 4"
 
-#: ../../data/tribes/scripting/help/controls.lua:97
+#: ../../data/tribes/scripting/help/controls.lua:99
 msgid "Show warfare messages only"
 msgstr "Показване само на военните съобщения"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:99
+#: ../../data/tribes/scripting/help/controls.lua:101
+#: ../../data/tribes/scripting/help/controls.lua:122
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Алт + 5"
 
-#: ../../data/tribes/scripting/help/controls.lua:99
+#: ../../data/tribes/scripting/help/controls.lua:101
 msgid "Show scenario messages only"
 msgstr "Показване само на съобщенията за сценария"
 
 #. TRANSLATORS: This is the helptext for an access key combination.
-#: ../../data/tribes/scripting/help/controls.lua:101
+#: ../../data/tribes/scripting/help/controls.lua:103
 msgid "Jump to the location corresponding to the current message"
 msgstr "Преминаване към местоположението, свързано с текущото съобщение"
 
-#: ../../data/tribes/scripting/help/controls.lua:103
+#: ../../data/tribes/scripting/help/controls.lua:105
 msgid "Archive/Restore the current message"
 msgstr "Архивира/възстановява текущото съобщение"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
-#: ../../data/tribes/scripting/help/controls.lua:103
+#: ../../data/tribes/scripting/help/controls.lua:105
 msgctxt "hotkey"
 msgid "Delete"
 msgstr "Delete"
+
+#. TRANSLATORS: Heading in "Controls" help
+#: ../../data/tribes/scripting/help/controls.lua:109
+msgid "Ship Statistics"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:112
+msgid "Show all ships"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:114
+msgid "Show idle ships"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:116
+msgid "Show ships shipping wares and workers"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:118
+msgid "Show waiting expeditions"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:120
+msgid "Show scouting expeditions"
+msgstr ""
+
+#: ../../data/tribes/scripting/help/controls.lua:122
+msgid "Show expeditions that have found a port space or are founding a colony"
+msgstr ""
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:124
+msgid "Center the map on the selected ship"
+msgstr ""
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:126
+msgid "Open the selected ship’s window"
+msgstr ""
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:128
+msgid "Go to the selected ship and open its window"
+msgstr ""
+
+#. TRANSLATORS: This is the helptext for an access key combination.
+#: ../../data/tribes/scripting/help/controls.lua:130
+msgid "Watch the selected ship"
+msgstr ""
 
 #. TRANSLATORS: Space on the map required for building a building there
 #: ../../data/tribes/scripting/help/format_help.lua:54
@@ -3928,8 +3948,6 @@ msgid ""
 "inns to prepare meals."
 msgstr "Само тази бира е подходяща за воините в бойната арена. Някои казват, че цялата сила на варварите идва от това пиво. То помага за обучението на войниците и повишаването на нивото им на Ловкост от 0 на 1 и до 2. Силната бира се използва и в големите ханове за приготвянето на ястия."
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -5471,8 +5489,8 @@ msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners."
 msgstr "Пече питки за миньорите."
 
-#. TRANSLATORS: Helptext for a worker: Blacksmith
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
+#. TRANSLATORS: Helptext for a worker: Blacksmith
 #: ../../data/tribes/workers/barbarians/blacksmith/helptexts.lua:3
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"

@@ -727,6 +727,8 @@ bool WLApplication::init_settings() {
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
+
+	// Some of the options listed here are documented in wlapplication_messages.cc
 	s.get_bool("ai_training");
 	s.get_bool("auto_speed");
 	s.get_bool("fullscreen");
@@ -738,26 +740,40 @@ bool WLApplication::init_settings() {
 	s.get_int("panel_snap_distance");
 	s.get_int("autosave");
 	s.get_int("rolling_autosave");
+	// Undocumented on command line, appears in game options
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
+	// Undocumented on command line, appears in game options
 	s.get_bool("workareapreview");
 	s.get_bool("nozip");
 	s.get_bool("snap_windows_only_when_overlapping");
 	s.get_bool("dock_windows_to_edges");
 	s.get_bool("write_syncstreams");
+	// Undocumented on command line, appears in game options
 	s.get_bool("sound_at_message");
+	// Undocumented on command line, appears in game options
 	s.get_bool("transparent_chat");
+	// Undocumented. Unique ID used to allow the metaserver to recognize players
 	s.get_string("uuid");
+	// Undocumented, appears in online login box
+	// Whether the used metaserver login is for a registered user
 	s.get_string("registered");
+	// Undocumented, appears in online login box and LAN lobby
+	// The nickname used for LAN and online games
 	s.get_string("nickname");
+	// Undocumented. The plaintext password for online logins
 	// TODO(Notabilis): Remove next line after build 20.
 	// Currently left in to avoid removing stored passwords for users of both build 19 and trunk
 	s.get_string("password");
+	// Undocumented, appears in online login box. The hashed password for online logins
 	s.get_string("password_sha1");
-	s.get_string("emailadd");
+	// Undocumented, appears in online login box. Whether to automatically use the stored login
 	s.get_string("auto_log");
+	// Undocumented, appears in LAN lobby. The last host connected to
 	s.get_string("lasthost");
+	// Undocumented, appears in online lobby. The name of the last hosted game
 	s.get_string("servername");
+	// Undocumented, appears in editor. Name of map author
 	s.get_string("realname");
 	s.get_string("metaserver");
 	s.get_natural("metaserverport");
