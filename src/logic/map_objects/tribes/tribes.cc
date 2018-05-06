@@ -68,9 +68,10 @@ void Tribes::add_productionsite_type(const LuaTable& table, const EditorGameBase
 
 void Tribes::add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(new TrainingSiteDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	const std::string msgctxt = table.get_string("msgctxt");
+	buildings_->add(
+	   new TrainingSiteDescr(pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
+	                         msgctxt, table, egbase));
 }
 
 void Tribes::add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase) {
