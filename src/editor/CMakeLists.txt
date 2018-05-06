@@ -97,6 +97,8 @@ wl_library(editor
     io_filesystem
     logic
     logic_constants
+    logic_filesystem_constants
+    logic_tribe_basic_info
     logic_widelands_geometry
     map_io
     map_io_map_loader
@@ -107,6 +109,6 @@ wl_library(editor
     scripting_lua_table
     ui_basic
     wui
-    wui_common
+    wui_common_mapdetails
     wui_mapview_pixelfunctions
 )

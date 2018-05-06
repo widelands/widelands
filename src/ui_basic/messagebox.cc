@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,9 +42,8 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 	// Ample space for the buttons, but not hugely wide
 	const int maxwidth = std::min(600, std::max(outerwidth * 2 / 3, minwidth));
 	// Make sure that there is space for buttons + message, but not too tall
-	const int maxheight = std::min(400, std::max(outerheight * 2 / 3, 200));
+	const int maxheight = std::min(260, std::max(outerheight * 2 / 3, 200));
 
-	const int button_space = 50;
 	const int margin = 5;
 	int width, height = 0;
 	{
@@ -64,12 +63,11 @@ WLMessageBox::WLMessageBox(Panel* const parent,
 
 	// Make sure that the buttons really fit
 	width = std::max(std::min(width, maxwidth), minwidth);
-	height += button_space;
 
 	// Find out whether the textarea needs a scrollbar
 	MultilineTextarea::ScrollMode scrollmode = MultilineTextarea::ScrollMode::kNoScrolling;
 	if (height > maxheight) {
-		height = maxheight - button_space;
+		height = maxheight;
 		scrollmode = MultilineTextarea::ScrollMode::kScrollNormal;
 	}
 
@@ -146,12 +144,18 @@ bool WLMessageBox::handle_key(bool down, SDL_Keysym code) {
 }
 
 void WLMessageBox::clicked_ok() {
+	ok_button_->set_enabled(false);
+	if (cancel_button_) {
+		cancel_button_->set_enabled(false);
+	}
 	ok();
 	if (is_modal())
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }
 
 void WLMessageBox::clicked_back() {
+	ok_button_->set_enabled(false);
+	cancel_button_->set_enabled(false);
 	cancel();
 	if (is_modal())
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);

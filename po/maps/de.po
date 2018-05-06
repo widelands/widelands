@@ -1,9 +1,10 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# Elisabeth Jäger, 2016-2017
+# Elisabeth Jäger, 2016-2018
 # wl-zocker, 2014
+# GunChleoc, 2018
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
@@ -13,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-23 20:45+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-18 15:27+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +26,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "Von Untergang zum Neuanfang"
 
@@ -36,7 +37,7 @@ msgid ""
 msgstr "Nach der Landung auf einer mysteriösen Insel nahe Atlantis versuchen die verbleibenden Atlanter, eine neue Heimat zu gründen."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:67
+#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "Eine neue Heimat"
 
@@ -47,7 +48,7 @@ msgid ""
 msgstr "In diesem Szenario werden die höheren Produktionsgebäude einschließlich der Minen vorgestellt."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:72
+#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "Dieses Land ist unser Land"
 
@@ -133,31 +134,69 @@ msgid ""
 "time, but at a high cost: her humanity and soul."
 msgstr "Als ihr Gott sein Vertrauen in die Atlanter verlor und ihre Insel in den Fluten versenkte, wurde der Kampf einer Frau um Gerechtigkeit und eine zweite Chance für ihr Volk zur Legende. Indem sie die verbleibenden Atlanter in eine neue Zukunft in einem neuen Teil der Welt führte, wurde Jundlina zum mächtigsten Menschen ihrer Zeit – doch zu einem hohen Preis: ihrer Menschlichkeit und ihrer Seele."
 
-#: ../../data/campaigns/campaigns.conf:78
+#: ../../data/campaigns/campaigns.conf:52
+msgid "From Water to Ice"
+msgstr "Von Wasser zu Eis"
+
+#: ../../data/campaigns/campaigns.conf:54
+msgid "Frisians"
+msgstr "Friesen"
+
+#: ../../data/campaigns/campaigns.conf:56
+msgid "For advanced players. Introduces the Frisians"
+msgstr "Für fortgeschrittene Spieler. Führt die Friesen ein."
+
+#: ../../data/campaigns/campaigns.conf:57
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "Vom Ozean zu leben, ist ein konstanter Kampf, um so mehr für die Einwohner der friesischen Nordseeküste. War die letzte Sturmflut, die verheerendste im Gedächtnis der Menschheit, wirklich nicht mehr als ein weiteres Beispiel für die Mühsal, der die Friesen stets trotzen müssen – oder ein Zeichen von den Göttern, dass sich ein Stamm, der sich gerade erst hier niedergelassen hat, eine neue Heimat suchen muss?"
+
+#: ../../data/campaigns/campaigns.conf:86
+#: ../../data/campaigns/campaigns.conf:111
+#: ../../data/campaigns/campaigns.conf:123
+#: ../../data/campaigns/campaigns.conf:139
+#: ../../data/campaigns/dummy.wmf/elemental:8
+msgid "Not yet implemented"
+msgstr "Noch nicht fertiggestellt"
+
+#: ../../data/campaigns/campaigns.conf:91
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
 msgstr "Die Strände von Malac’ Mor"
 
-#: ../../data/campaigns/campaigns.conf:83
+#: ../../data/campaigns/campaigns.conf:96
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
 msgstr "Ein Außenposten fürs Exil"
 
-#: ../../data/campaigns/campaigns.conf:88
+#: ../../data/campaigns/campaigns.conf:101
 msgid "Neptune’s Revenge"
 msgstr "Neptuns Rache"
 
-#: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
-msgid "Not yet implemented"
-msgstr "Noch nicht fertiggestellt"
+#: ../../data/campaigns/campaigns.conf:106
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Was für eine Überraschung!"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/campaigns.conf:129
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "Die große Sturmflut"
+
+#: ../../data/campaigns/campaigns.conf:134
+msgid "Colder than Ice"
+msgstr "Kälter als Eis"
+
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Niemand"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "Es tut uns leid, aber diese Karte wurde noch nicht fertiggestellt."
 
@@ -183,6 +222,38 @@ msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
 msgstr "Als Lutius sich mit seinen Truppen endlich auf den Weg machen kann, in der Heimat das Imperium zu verteidigen, wird er von den Launen der Götter überrascht."
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr "Nach seiner Heimkehr finden Lutius und seine Mannschaft die Wirtschaft in heillosem Chaos vor. Die Engpässe der Wirtschaft zu lösen ist von größter Wichtigkeit, um die Pracht des Imperiums wiederherzustellen."
+
+#: ../../data/campaigns/fri01.wmf/elemental:10
+msgid ""
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
+"is not wanted here?"
+msgstr "1362 wurde das ruhige, friedliche Leben der Einwohner der nordfriesischen Inseln durch eine der größten Sturmfluten im Gedächtnis der Menschheit zerstört: die zweite Marcellusflut. Ist das wirklich nicht mehr als ein weiterer Sturm, oder doch ein Zeichen der Götter, dass das friesische Volk auf der Insel Langeness nicht geduldet wird?"
+
+#: ../../data/campaigns/fri01.wmf/elemental:11
+msgid ""
+"This scenario is set in a historical context, but most of the story line is "
+"fiction."
+msgstr "Dieses Szenario spielt in einem historischen Kontext, die Handlung ist aber größtenteils erfunden."
+
+#: ../../data/campaigns/fri02.wmf/elemental:8
+msgid "An Icy Welcome"
+msgstr "Ein eisiges Willkommen"
+
+#: ../../data/campaigns/fri02.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe have arrived in the North. But their arrival between "
+"the frozen steppes and the snow-covered mountains is less than welcome…"
+msgstr "Reebaud und sein Stamm sind im Norden angekommen. Ihre Ankunft zwischen den gefrorenen Steppen und den schneebedeckten Bergen ist jedoch alles andere als erwünscht …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -316,11 +387,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Lange nachdem ein Meteor in dieses Gebirge gestürzt ist, erblüht wieder das Leben imm Krater. Zwei Stämme kämpfen um die reichhaltigen Rohstoffe."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Über den Horizont hinaus"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Bemanne dein Schiff und segle dem Horizont entgegen."
 

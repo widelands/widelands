@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,6 @@ struct InternetClient {
 	std::string build_id;
 	std::string game;
 	std::string type;
-	std::string points;  // Currently unused
 };
 
 /// A simple network game struct
@@ -51,15 +50,29 @@ struct InternetGame {
  * The InternetGaming struct.
  */
 struct InternetGaming : public ChatProvider {
+
 	/// The only instance of InternetGaming -> the constructor is private by purpose!
 	static InternetGaming& ref();
 
 	void reset();
 
 	// Login and logout
+
 	void initialize_connection();
+
+	/**
+	 * Try to login on the metaserver.
+	 * @param nick The preferred username. Another username might be chosen by the metaserver if
+	 *             the requested one is already in use.
+	 * @param authenticator If \c registered is \c true, this is the password. Otherwise, it is some
+	 * unique
+	 *             id the server can use to identify the user.
+	 * @param metaserver The hostname of the metaserver.
+	 * @param port The port number of the metaserver.
+	 * @return Whether the login was successful.
+	 */
 	bool login(const std::string& nick,
-	           const std::string& pwd,
+	           const std::string& authenticator,
 	           bool registered,
 	           const std::string& metaserver,
 	           uint32_t port);
@@ -87,10 +100,17 @@ struct InternetGaming : public ChatProvider {
 	 * Contains two addresses when the host supports IPv4 and IPv6, one address when the host
 	 * only supports one of the protocols, no addresses when no join-request was sent to
 	 * the metaserver. "No address" means a default constructed address.
+	 * Also returns the IPs of the relay server when trying to host a game.
 	 * Use NetAddress::is_valid() to check whether a NetAddress has been default constructed.
 	 * @return The addresses.
 	 */
 	const std::pair<NetAddress, NetAddress>& ips();
+
+	/**
+	 * Returns the password required to connect to the relay server as host.
+	 */
+	const std::string relay_password();
+
 	void join_game(const std::string& gamename);
 	void open_game();
 	void set_game_playing();
@@ -180,6 +200,13 @@ private:
 	                         bool system,
 	                         const std::string& msg);
 
+	/**
+	 * Does the real work of the login.
+	 * \param relogin Whether this is a relogin. Only difference is that
+	 *                on first login a greeting is shown.
+	 */
+	bool do_login(bool relogin = false);
+
 	/// The connection to the metaserver
 	std::unique_ptr<NetClient> net;
 
@@ -187,8 +214,12 @@ private:
 	enum { OFFLINE, CONNECTING, LOBBY, IN_GAME, COMMUNICATION_ERROR } state_;
 
 	/// data saved for possible relogin
-	std::string pwd_;
+	std::string authenticator_;
 	bool reg_;
+
+	/// Password for connecting as host to a game on the relay server
+	std::string relay_password_;
+
 	std::string meta_;
 	uint16_t port_;
 

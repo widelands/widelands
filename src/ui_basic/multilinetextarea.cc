@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,19 +48,15 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      force_new_renderer_(false),
      use_old_renderer_(false),
      scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background, false),
-     scrollmode_(scroll_mode),
      pic_background_(nullptr) {
-	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
 
 	scrollbar_.set_singlestepsize(text_height());
 	scrollbar_.set_steps(1);
-	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
-	                          scrollmode_ == ScrollMode::kScrollLogForced);
-
-	layout();
+	set_scrollmode(scroll_mode);
+	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 }
 
 /**
@@ -171,6 +167,9 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {
 	return scrollbar_.handle_mousewheel(which, x, y);
 }
+bool MultilineTextarea::handle_key(bool down, SDL_Keysym code) {
+	return scrollbar_.handle_key(down, code);
+}
 
 void MultilineTextarea::scroll_to_top() {
 	scrollbar_.set_scrollpos(0);
@@ -178,6 +177,12 @@ void MultilineTextarea::scroll_to_top() {
 
 void MultilineTextarea::set_background(const Image* background) {
 	pic_background_ = background;
+}
+void MultilineTextarea::set_scrollmode(MultilineTextarea::ScrollMode scroll_mode) {
+	scrollmode_ = scroll_mode;
+	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
+	                          scrollmode_ == ScrollMode::kScrollLogForced);
+	layout();
 }
 
 std::string MultilineTextarea::make_richtext() {

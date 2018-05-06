@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,18 +40,32 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
                          const LuaTable& table,
                          const EditorGameBase& egbase)
    : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
-     buildable_(false),
-     needed_experience_(INVALID_INDEX),
-     becomes_(INVALID_INDEX),
+     ware_hotspot_(table.has_key("ware_hotspot") ?
+                      Vector2i(table.get_table("ware_hotspot")->get_int(1),
+                               table.get_table("ware_hotspot")->get_int(2)) :
+                      Vector2i(0, 15)),
+     default_target_quantity_(table.has_key("default_target_quantity") ?
+                                 table.get_int("default_target_quantity") :
+                                 std::numeric_limits<uint32_t>::max()),
+     buildable_(table.has_key("buildcost")),
+     // Read what the worker can become and the needed experience. If one of the keys is there, the
+     // other key must be there too. So, we cross the checks to trigger an exception if this is
+     // violated.
+     becomes_(table.has_key("experience") ?
+                 egbase.tribes().safe_worker_index(table.get_string("becomes")) :
+                 INVALID_INDEX),
+     needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
      egbase_(egbase) {
+	if (helptext_script().empty()) {
+		throw GameDataError("Worker %s has no helptext script", name().c_str());
+	}
 	if (icon_filename().empty()) {
-		throw GameDataError("Worker %s has no menu icon", table.get_string("name").c_str());
+		throw GameDataError("Worker %s has no menu icon", name().c_str());
 	}
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 
 	if (table.has_key("buildcost")) {
-		buildable_ = true;
 		const Tribes& tribes = egbase_.tribes();
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
@@ -77,8 +91,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		}
 	}
 
-	helptext_script_ = table.get_string("helptext_script");
-
 	// Read the walking animations
 	add_directional_animation(&walk_anims_, "walk");
 
@@ -87,12 +99,6 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 	anims->do_not_warn_about_unaccessed_keys();
 	if (anims->has_key("walkload_e")) {
 		add_directional_animation(&walkload_anims_, "walkload");
-	}
-
-	// Read what the worker can become and the needed experience
-	if (table.has_key("becomes")) {
-		becomes_ = egbase_.tribes().safe_worker_index(table.get_string("becomes"));
-		needed_experience_ = table.get_int("experience");
 	}
 
 	// Read programs
@@ -107,16 +113,11 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 				programs_[program_name] = std::unique_ptr<WorkerProgram>(
 				   new WorkerProgram(program_name, *this, egbase_.tribes()));
-				programs_[program_name]->parse(*programs_table->get_table(program_name).get());
+				programs_[program_name]->parse(*programs_table->get_table(program_name));
 			} catch (const std::exception& e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
 			}
 		}
-	}
-	if (table.has_key("default_target_quantity")) {
-		default_target_quantity_ = table.get_int("default_target_quantity");
-	} else {
-		default_target_quantity_ = std::numeric_limits<uint32_t>::max();
 	}
 }
 
@@ -145,11 +146,11 @@ WorkerProgram const* WorkerDescr::get_program(const std::string& programname) co
  * Custom creation routing that accounts for the location.
  */
 Worker& WorkerDescr::create(EditorGameBase& egbase,
-                            Player& owner,
+                            Player* owner,
                             PlayerImmovable* const location,
                             Coords const coords) const {
 	Worker& worker = dynamic_cast<Worker&>(create_object());
-	worker.set_owner(&owner);
+	worker.set_owner(owner);
 	worker.set_location(location);
 	worker.set_position(egbase, coords);
 	worker.init(egbase);

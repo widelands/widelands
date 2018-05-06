@@ -1,0 +1,9 @@
+# Automatically created by Widelands bzr8483[bug-1718745-allows-seafaring] (Release)
+
+[global]
+packet_version="1"
+number_of_port_spaces="2"
+
+[port_spaces]
+0="7 2"
+1="12 24"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,6 @@ LoginBox::LoginBox(Panel& parent)
 
 	Section& s = g_options.pull_section("global");
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
-	eb_password->set_text(s.get_string("password", ""));
 	cb_register->set_state(s.get_bool("registered", false));
 	eb_nickname->focus();
 }

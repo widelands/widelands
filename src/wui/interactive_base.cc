@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -182,7 +182,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
-	sel_.pic = g_gr->images().get("images/ui_basic/fsel.png");
+	unset_sel_picture();
 
 	setDefaultCommand(boost::bind(&InteractiveBase::cmd_lua, this, _1));
 	addCommand("mapobject", boost::bind(&InteractiveBase::cmd_map_object, this, _1));
@@ -191,9 +191,6 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 InteractiveBase::~InteractiveBase() {
 	if (buildroad_) {
 		abort_build_road();
-	}
-	for (auto& registry : registries_) {
-		registry.unassign_toggle_button();
 	}
 }
 
@@ -286,8 +283,9 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.add(button);
 	if (window) {
-		window->assign_toggle_button(button);
-		registries_.push_back(*window);
+		window->opened.connect([button] { button->set_style(UI::Button::Style::kPermpressed); });
+		window->closed.connect([button] { button->set_style(UI::Button::Style::kRaised); });
+
 		if (bind_default_toggle) {
 			button->sigclicked.connect(
 			   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
@@ -429,33 +427,40 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		}
 	}
 
-	// Blit node information when in debug mode.
-	if (get_display_flag(dfDebug) || game == nullptr) {
-		std::string node_text;
-		if (game != nullptr) {
-			const std::string gametime(gametimestring(egbase().get_gametime(), true));
-			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh1->render(as_condensed(gametime));
-			rendered_text->draw(dst, Vector2i(5, 5));
-
-			static boost::format node_format("(%i, %i)");
-			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
-		} else {  // This is an editor
-			static boost::format node_format("(%i, %i, %i)");
-			const int32_t height = egbase().map()[sel_.pos.node].get_height();
-			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
-		}
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(node_text);
+	// Node information
+	std::string node_text("");
+	if (game == nullptr) {
+		// Always blit node information in the editor
+		static boost::format node_format("(%i, %i, %i)");
+		const int32_t height = egbase().map()[sel_.pos.node].get_height();
+		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
+	} else if (get_display_flag(dfDebug)) {
+		// Blit node information for games in debug mode - we're not interested in the height
+		static boost::format node_format("(%i, %i)");
+		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
+	}
+	if (!node_text.empty()) {
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   UI::g_fh1->render(as_condensed(node_text));
 		rendered_text->draw(
 		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
 
-	// Blit FPS when playing a game in debug mode.
-	if (get_display_flag(dfDebug) && game != nullptr) {
-		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_condensed(
-		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
-		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
+	// In-game clock and FPS
+	if (game != nullptr) {
+		// Blit in-game clock
+		const std::string gametime(gametimestring(egbase().get_gametime(), true));
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   UI::g_fh1->render(as_condensed(gametime));
+		rendered_text->draw(dst, Vector2i(5, 5));
+
+		// Blit FPS when playing a game in debug mode
+		if (get_display_flag(dfDebug)) {
+			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
+			rendered_text = UI::g_fh1->render(as_condensed(
+			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
+			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
+		}
 	}
 }
 
@@ -551,6 +556,8 @@ void InteractiveBase::start_build_road(Coords road_start, Widelands::PlayerNumbe
 	road_build_player_ = player;
 
 	roadb_add_overlay();
+
+	set_sel_picture(g_gr->images().get("images/ui_basic/fsel_roadbuilding.png"));
 }
 
 /*
@@ -567,6 +574,8 @@ void InteractiveBase::abort_build_road() {
 
 	delete buildroad_;
 	buildroad_ = nullptr;
+
+	unset_sel_picture();
 }
 
 /*
@@ -620,6 +629,8 @@ void InteractiveBase::finish_build_road() {
 
 	delete buildroad_;
 	buildroad_ = nullptr;
+
+	unset_sel_picture();
 }
 
 /*

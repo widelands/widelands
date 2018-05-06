@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,13 +51,13 @@ struct MultiPlayerSetupGroup : public UI::Box {
 	                      int32_t h,
 	                      GameSettingsProvider* settings,
 	                      uint32_t buth);
-	~MultiPlayerSetupGroup();
+	~MultiPlayerSetupGroup() override;
 
 private:
 	void update();
 	void draw(RenderTarget& dst) override;
 
-	GameSettingsProvider* const s;
+	GameSettingsProvider* const settings_;
 	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
 	std::vector<MultiPlayerClientGroup*> multi_player_client_groups;  // not owned
 	std::vector<MultiPlayerPlayerGroup*> multi_player_player_groups;  // not owned

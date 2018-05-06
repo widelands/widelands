@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ class Request;
 class RoadDescr : public MapObjectDescr {
 public:
 	RoadDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::ROAD, init_name, init_descname) {
+	   : MapObjectDescr(MapObjectType::ROAD, init_name, init_descname, "") {
 	}
 	~RoadDescr() override {
 	}
@@ -77,7 +77,7 @@ struct Road : public PlayerImmovable {
 	};
 
 	Road();
-	virtual ~Road();
+	~Road() override;
 
 	static Road& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 

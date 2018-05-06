@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,8 +73,9 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
      undo_(nullptr),
      redo_(nullptr),
      tools_(new Tools()),
-     history_(new EditorHistory(*undo_, *redo_)) {
-	add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main Menu"), &mainmenu_, true);
+     history_(nullptr)  // history needs the undo/redo buttons
+{
+	add_toolbar_button("wui/menus/menu_toggle_menu", "menu", _("Main menu"), &mainmenu_, true);
 	mainmenu_.open_window = [this] { new EditorMainMenu(*this, mainmenu_); };
 
 	add_toolbar_button(
@@ -82,7 +83,7 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolmenu_.open_window = [this] { new EditorToolMenu(*this, toolmenu_); };
 
 	add_toolbar_button(
-	   "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool Size"), &toolsizemenu_, true);
+	   "wui/editor/editor_menu_set_toolsize_menu", "toolsize", _("Tool size"), &toolsizemenu_, true);
 	toolsizemenu_.open_window = [this] { new EditorToolsizeMenu(*this, toolsizemenu_); };
 
 	add_toolbar_button(
@@ -95,18 +96,18 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolbar()->add_space(15);
 
 	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&EditorInteractive::toggle_buildhelp, this));
 	toggle_immovables_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_immovables", "immovables", _("Show Immovables (on/off)"));
+	   "wui/menus/menu_toggle_immovables", "immovables", _("Show immovables (on/off)"));
 	toggle_immovables_->set_perm_pressed(true);
 	toggle_immovables_->sigclicked.connect([this]() { toggle_immovables(); });
 	toggle_bobs_ =
-	   add_toolbar_button("wui/menus/menu_toggle_bobs", "animals", _("Show Animals (on/off)"));
+	   add_toolbar_button("wui/menus/menu_toggle_bobs", "animals", _("Show animals (on/off)"));
 	toggle_bobs_->set_perm_pressed(true);
 	toggle_bobs_->sigclicked.connect([this]() { toggle_bobs(); });
 	toggle_resources_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_resources", "resources", _("Show Resources (on/off)"));
+	   "wui/menus/menu_toggle_resources", "resources", _("Show resources (on/off)"));
 	toggle_resources_->set_perm_pressed(true);
 	toggle_resources_->sigclicked.connect([this]() { toggle_resources(); });
 
@@ -125,9 +126,11 @@ EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
 	toolbar()->add_space(15);
 
 	undo_ = add_toolbar_button("wui/editor/editor_undo", "undo", _("Undo"));
-	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
-
 	redo_ = add_toolbar_button("wui/editor/editor_redo", "redo", _("Redo"));
+
+	history_.reset(new EditorHistory(*undo_, *redo_));
+
+	undo_->sigclicked.connect([this] { history_->undo_action(egbase().world()); });
 	redo_->sigclicked.connect([this] { history_->redo_action(egbase().world()); });
 
 	toolbar()->add_space(15);
@@ -160,7 +163,7 @@ void EditorInteractive::load(const std::string& filename) {
 	std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(filename));
 	if (!ml.get())
 		throw WLWarning(
-		   _("Unsupported format"),
+		   _("Unsupported Format"),
 		   _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
 		   filename.c_str());
 	ml->preload_map(true);
@@ -304,15 +307,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		const auto blit = [&dst, &field, scale](
+		const auto blit = [&dst, scale](
 		   const Image* pic, const Vector2f& position, const Vector2i& hotspot) {
 			dst.blitrect_scale(Rectf(position - hotspot.cast<float>() * scale, pic->width() * scale,
 			                         pic->height() * scale),
 			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                   BlendMode::UseAlpha);
 		};
-		const auto blit_overlay = [&dst, &field, scale, &blit](
-		   const Image* pic, const Vector2i& hotspot) {
+		const auto blit_overlay = [&field, &blit](const Image* pic, const Vector2i& hotspot) {
 			blit(pic, field.rendertarget_pixel, hotspot);
 		};
 
@@ -619,10 +621,10 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				egbase.mutable_map()->create_empty_map(
 				   egbase.world(), 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
-				   _("No Name"),
-				   /** TRANSLATORS: Map author name when it hasn't been set yet */
-				   g_options.pull_section("global").get_string(
-				      "realname", pgettext("author_name", "Unknown")));
+				   _("No Name"), g_options.pull_section("global").get_string(
+				                    "realname",
+				                    /** TRANSLATORS: Map author name when it hasn't been set yet */
+				                    pgettext("author_name", "Unknown")));
 
 				load_all_tribes(&egbase, &loader_ui);
 

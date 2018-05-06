@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include <string>
 
 #include "editor/editorinteractive.h"
+#include "logic/filesystem_constants.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
@@ -38,7 +39,7 @@ struct MainMenuLoadOrSaveMap : public UI::Window {
 	                      int no_of_bottom_rows,
 	                      const std::string& name,
 	                      const std::string& title,
-	                      const std::string& basedir = "maps");
+	                      const std::string& basedir = kMapsDir);
 
 protected:
 	virtual void clicked_ok() = 0;

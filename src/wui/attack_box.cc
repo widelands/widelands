@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,7 +83,7 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
 	std::unique_ptr<UI::Button> button(new UI::Button(&parent, text, 8, 8, 26, 26,
 	                                                  g_gr->images().get("images/ui_basic/but2.png"),
 	                                                  text, tooltip_text));
-	button.get()->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
+	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
 	parent.add(button.get());
 	return button;
 }
@@ -114,9 +114,8 @@ void AttackBox::update_attack() {
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
 	less_soldiers_->set_enabled(soldiers_slider_->get_value() > 0);
-
-	/** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
 	soldiers_text_->set_text(
+	   /** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
 	   (boost::format(_("%1% / %2%")) % soldiers_slider_->get_value() % max_attackers).str());
 
 	more_soldiers_->set_title(std::to_string(max_attackers));

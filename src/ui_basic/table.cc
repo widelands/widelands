@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -416,25 +416,8 @@ void Table<void*>::move_selection(const int32_t offset) {
 		new_selection = entry_records_.size() - 1;
 
 	multiselect(new_selection);
-
 	// Scroll to newly selected entry
-	if (scrollbar_) {
-		// Keep an unselected item above or below
-		int32_t scroll_item = new_selection + offset;
-		if (scroll_item < 0)
-			scroll_item = 0;
-		if (scroll_item > static_cast<int32_t>(entry_records_.size())) {
-			scroll_item = entry_records_.size();
-		}
-
-		// Ensure scroll_item is visible
-		if (static_cast<int32_t>(scroll_item * get_lineheight()) < scrollpos_) {
-			scrollbar_->set_scrollpos(scroll_item * get_lineheight());
-		} else if (static_cast<int32_t>((scroll_item + 1) * get_lineheight() - get_inner_h()) >
-		           scrollpos_) {
-			scrollbar_->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
-		}
-	}
+	scroll_to_item(new_selection + offset);
 }
 
 /**
@@ -443,7 +426,7 @@ void Table<void*>::move_selection(const int32_t offset) {
  * Args: i  the entry to select
  */
 void Table<void*>::select(const uint32_t i) {
-	if (empty() || selection_ == i || i == no_selection_index())
+	if (empty() || i == no_selection_index())
 		return;
 
 	selection_ = i;
@@ -481,6 +464,25 @@ void Table<void*>::multiselect(uint32_t row) {
 		last_multiselect_ = row;
 	} else {
 		select(row);
+	}
+}
+
+// Scroll to the given item. Out of range items will be corrected automatically.
+void Table<void*>::scroll_to_item(int32_t item) {
+	if (scrollbar_) {
+		// Correct out of range items
+		if (item < 0) {
+			item = 0;
+		} else if (item >= static_cast<int32_t>(entry_records_.size())) {
+			item = entry_records_.size() - 1;
+		}
+
+		// Ensure item is visible
+		if (static_cast<int32_t>(item * get_lineheight()) < scrollpos_) {
+			scrollbar_->set_scrollpos(item * get_lineheight());
+		} else if (static_cast<int32_t>((item + 2) * get_lineheight() - get_inner_h()) > scrollpos_) {
+			scrollbar_->set_scrollpos((item + 3) * get_lineheight() - get_inner_h());
+		}
 	}
 }
 
@@ -528,6 +530,10 @@ void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
 }
 
+void Table<void*>::scroll_to_top() {
+	scrollbar_->set_scrollpos(0);
+}
+
 /**
  * Remove the table entry at the given (zero-based) index.
  */
@@ -547,6 +553,18 @@ void Table<void*>::remove(const uint32_t i) {
 		multiselect_.insert(selection_);
 	}
 	layout();
+}
+
+/**
+ * Remove the given table entry if it exists.
+ */
+void Table<void*>::remove_entry(const void* const entry) {
+	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
+		if (entry_records_[i]->entry() == entry) {
+			remove(i);
+			return;
+		}
+	}
 }
 
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {

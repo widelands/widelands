@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,6 +61,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/ai_dna_handler.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/game_settings.h"
@@ -70,10 +71,12 @@
 #include "logic/single_player_game_controller.h"
 #include "logic/single_player_game_settings_provider.h"
 #include "map_io/map_loader.h"
+#include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
+#include "random/random.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -94,16 +97,7 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-#define MINIMUM_DISK_SPACE 250000000lu
-#define SCREENSHOT_DIR "screenshots"
-
 namespace {
-
-// The time in seconds for how long old replays/syncstreams should be kept
-// around, in seconds. Right now this is 4 weeks.
-constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;
-// Similary we delete AI files older than one week
-constexpr double kAIFilesKeepAroundTime = 7 * 24 * 60 * 60;
 
 /**
  * Shut the hardware down: stop graphics mode, stop sound handler
@@ -505,15 +499,15 @@ bool WLApplication::handle_key(bool down, const SDL_Keycode& keycode, int modifi
 		case SDLK_F11:
 			// Takes a screenshot.
 			if (ctrl) {
-				if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
-					log("Omitting screenshot because diskspace is lower than %luMB\n",
-					    MINIMUM_DISK_SPACE / (1000 * 1000));
+				if (g_fs->disk_space() < kMinimumDiskSpace) {
+					log("Omitting screenshot because diskspace is lower than %lluMB\n",
+					    kMinimumDiskSpace / (1000 * 1000));
 					break;
 				}
-				g_fs->ensure_directory_exists(SCREENSHOT_DIR);
+				g_fs->ensure_directory_exists(kScreenshotsDir);
 				for (uint32_t nr = 0; nr < 10000; ++nr) {
 					const std::string filename =
-					   (boost::format(SCREENSHOT_DIR "/shot%04u.png") % nr).str();
+					   (boost::format("%s/shot%04u.png") % kScreenshotsDir % nr).str();
 					if (g_fs->file_exists(filename)) {
 						continue;
 					}
@@ -721,7 +715,7 @@ void WLApplication::refresh_graphics() {
 bool WLApplication::init_settings() {
 
 	// Read in the configuration file
-	g_options.read("config", "global");
+	g_options.read(kConfigFile.c_str(), "global");
 	Section& s = g_options.pull_section("global");
 
 	// Then parse the commandline - overwrites conffile settings
@@ -733,6 +727,10 @@ bool WLApplication::init_settings() {
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
+
+	// Some of the options listed here are documented in wlapplication_messages.cc
+	s.get_bool("ai_training");
+	s.get_bool("auto_speed");
 	s.get_bool("fullscreen");
 	s.get_bool("animate_map_panning");
 	s.get_int("xres");
@@ -742,26 +740,68 @@ bool WLApplication::init_settings() {
 	s.get_int("panel_snap_distance");
 	s.get_int("autosave");
 	s.get_int("rolling_autosave");
+	// Undocumented on command line, appears in game options
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
+	// Undocumented on command line, appears in game options
 	s.get_bool("workareapreview");
 	s.get_bool("nozip");
 	s.get_bool("snap_windows_only_when_overlapping");
 	s.get_bool("dock_windows_to_edges");
 	s.get_bool("write_syncstreams");
+	// Undocumented on command line, appears in game options
 	s.get_bool("sound_at_message");
+	// Undocumented on command line, appears in game options
 	s.get_bool("transparent_chat");
+	// Undocumented. Unique ID used to allow the metaserver to recognize players
+	s.get_string("uuid");
+	// Undocumented, appears in online login box
+	// Whether the used metaserver login is for a registered user
 	s.get_string("registered");
+	// Undocumented, appears in online login box and LAN lobby
+	// The nickname used for LAN and online games
 	s.get_string("nickname");
+	// Undocumented. The plaintext password for online logins
+	// TODO(Notabilis): Remove next line after build 20.
+	// Currently left in to avoid removing stored passwords for users of both build 19 and trunk
 	s.get_string("password");
-	s.get_string("emailadd");
+	// Undocumented, appears in online login box. The hashed password for online logins
+	s.get_string("password_sha1");
+	// Undocumented, appears in online login box. Whether to automatically use the stored login
 	s.get_string("auto_log");
+	// Undocumented, appears in LAN lobby. The last host connected to
 	s.get_string("lasthost");
+	// Undocumented, appears in online lobby. The name of the last hosted game
 	s.get_string("servername");
+	// Undocumented, appears in editor. Name of map author
 	s.get_string("realname");
 	s.get_string("metaserver");
 	s.get_natural("metaserverport");
 	// KLUDGE!
+
+	long int last_start = s.get_int("last_start", 0);
+	if (last_start + 12 * 60 * 60 < time(nullptr)) {
+		// First start of the game or not started for 12 hours. Create a (new) UUID.
+		// For the use of the UUID, see network/internet_gaming_protocol.h
+		s.set_string("uuid", generate_random_uuid());
+	}
+	s.set_int("last_start", time(nullptr));
+
+	// Replace the stored plaintext password with its SHA-1 hashed version
+	// Used to upgrade the stored password when upgrading widelands
+	if (strlen(s.get_string("password", "")) > 0 && strlen(s.get_string("password_sha1", "")) == 0) {
+		s.set_string("password_sha1", crypto::sha1(s.get_string("password")));
+	}
+
+	// Save configuration now. Otherwise, the UUID is not saved
+	// when the game crashes, loosing part of its advantage
+	try {
+		g_options.write("config", false);
+	} catch (const std::exception& e) {
+		log("WARNING: could not save configuration: %s\n", e.what());
+	} catch (...) {
+		log("WARNING: could not save configuration");
+	}
 
 	return true;
 }
@@ -792,7 +832,7 @@ void WLApplication::shutdown_settings() {
 	i18n::release_textdomain();
 
 	try {  //  overwrite the old config file
-		g_options.write("config", true);
+		g_options.write(kConfigFile.c_str(), true);
 	} catch (const std::exception& e) {
 		log("WARNING: could not save configuration: %s\n", e.what());
 	} catch (...) {
@@ -1163,8 +1203,9 @@ void WLApplication::mainmenu_multiplayer() {
 			Section& s = g_options.pull_section("global");
 			s.set_string("nickname", playername);
 			// Only change the password if we use a registered account
-			if (registered)
-				s.set_string("password", password);
+			if (registered) {
+				s.set_string("password_sha1", password);
+			}
 
 			// reinitalise in every run, else graphics look strange
 			FullscreenMenuInternetLobby ns(playername.c_str(), password.c_str(), registered);
@@ -1192,7 +1233,7 @@ void WLApplication::mainmenu_multiplayer() {
 				NetAddress addr;
 				if (!ns.get_host_address(&addr)) {
 					UI::WLMessageBox mmb(
-					   &ns, _("Invalid address"),
+					   &ns, _("Invalid Address"),
 					   _("The entered hostname or address is invalid and can’t be connected to."),
 					   UI::WLMessageBox::MBoxType::kOk);
 					mmb.run<UI::Panel::Returncodes>();
@@ -1282,7 +1323,7 @@ bool WLApplication::load_game() {
 
 	game.set_ai_training_mode(g_options.pull_section("global").get_bool("ai_training", false));
 	SinglePlayerGameSettingsProvider sp;
-	FullscreenMenuLoadGame ssg(game, &sp, nullptr);
+	FullscreenMenuLoadGame ssg(game, &sp);
 
 	if (ssg.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kOk)
 		filename = ssg.filename();
@@ -1350,7 +1391,7 @@ void WLApplication::replay() {
 	Widelands::Game game;
 	if (filename_.empty()) {
 		SinglePlayerGameSettingsProvider sp;
-		FullscreenMenuLoadGame rm(game, &sp, nullptr, true);
+		FullscreenMenuLoadGame rm(game, &sp, true);
 		if (rm.run<FullscreenMenuBase::MenuTarget>() == FullscreenMenuBase::MenuTarget::kBack)
 			return;
 
@@ -1391,8 +1432,7 @@ void WLApplication::emergency_save(Widelands::Game& game) {
 			SaveHandler& save_handler = game.save_handler();
 			std::string error;
 			if (!save_handler.save_game(
-			       game, save_handler.create_file_name(save_handler.get_base_dir(), timestring()),
-			       &error)) {
+			       game, save_handler.create_file_name(kSaveDir, timestring()), &error)) {
 				log("Emergency save failed: %s\n", error.c_str());
 			}
 		} catch (...) {
@@ -1408,8 +1448,10 @@ void WLApplication::emergency_save(Widelands::Game& game) {
  */
 void WLApplication::cleanup_replays() {
 	for (const std::string& filename :
-	     filter(g_fs->list_directory(REPLAY_DIR),
-	            [](const std::string& fn) { return boost::ends_with(fn, REPLAY_SUFFIX ".wss"); })) {
+	     filter(g_fs->list_directory(kReplayDir), [](const std::string& fn) {
+		     return boost::ends_with(
+		        fn, (boost::format("%s%s") % kReplayExtension % kSyncstreamExtension).str());
+		  })) {
 		if (is_autogenerated_and_expired(filename)) {
 			log("Delete syncstream %s\n", filename.c_str());
 			g_fs->fs_unlink(filename);
@@ -1417,12 +1459,12 @@ void WLApplication::cleanup_replays() {
 	}
 
 	for (const std::string& filename :
-	     filter(g_fs->list_directory(REPLAY_DIR),
-	            [](const std::string& fn) { return boost::ends_with(fn, REPLAY_SUFFIX); })) {
+	     filter(g_fs->list_directory(kReplayDir),
+	            [](const std::string& fn) { return boost::ends_with(fn, kReplayExtension); })) {
 		if (is_autogenerated_and_expired(filename)) {
 			log("Deleting replay %s\n", filename.c_str());
 			g_fs->fs_unlink(filename);
-			g_fs->fs_unlink(filename + WLGF_SUFFIX);
+			g_fs->fs_unlink(filename + kSavegameExtension);
 		}
 	}
 }
@@ -1431,11 +1473,10 @@ void WLApplication::cleanup_replays() {
  * Delete old ai dna files generated during AI initialization
  */
 void WLApplication::cleanup_ai_files() {
-	for (const std::string& filename : filter(
-	        g_fs->list_directory(Widelands::AiDnaHandler::get_ai_dir()), [](const std::string& fn) {
-		        return boost::ends_with(fn, Widelands::AiDnaHandler::get_ai_suffix()) ||
-		               boost::contains(fn, "ai_player");
-		     })) {
+	for (const std::string& filename :
+	     filter(g_fs->list_directory(kAiDir), [](const std::string& fn) {
+		     return boost::ends_with(fn, kAiExtension) || boost::contains(fn, "ai_player");
+		  })) {
 		if (is_autogenerated_and_expired(filename, kAIFilesKeepAroundTime)) {
 			log("Deleting generated ai file: %s\n", filename.c_str());
 			g_fs->fs_unlink(filename);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@ namespace UI {
  * This class provides a scrollbar
  */
 struct Scrollbar : public Panel {
-	enum Area { None, Minus, Plus, Knob, MinusPage, PlusPage };
+	enum class Area { None, Minus, Plus, Knob, MinusPage, PlusPage };
 
 	/// default width for vertical scrollbars,
 	/// or height for horizontal scrollbars
@@ -67,6 +67,7 @@ public:
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_mousewheel(uint32_t, int32_t, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void set_force_draw(bool const t) {
 		force_draw_ = t;

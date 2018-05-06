@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2014
 # Markus7cz <markus7cz@gmail.com>, 2008
 # Matej Svrcek <mmatej@yahoo.com>, 2015-2016
-# Milan Fašina <matrix17@seznam.cz>, 2016-2017
+# Milan Fašina <matrix17@seznam.cz>, 2016-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-10-09 18:20+0000\n"
-"PO-Revision-Date: 2017-10-09 19:35+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-12 17:47+0000\n"
 "Last-Translator: Milan Fašina <matrix17@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/widelands/widelands/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -189,6 +189,10 @@ msgstr "--xres=[...] Šířka okna v pixelech."
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr "--yres=[...] Výška okna v pixelech."
 
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands
+#. textdomain
 #: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Volby pro interního správce oken:"
@@ -246,7 +250,7 @@ msgstr " --help               Zobrazí tuto nápovědu"
 #: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
+"        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Nalezli jste nějaký herní bug? Máte nějaké návrhy? Navštivte stránky projektu:\nhttps://launchpad.net/widelands\n\nDoufáme, že si užívate naší hry!"
+msgstr "Nahlášení chyby? Nápady na zlepšení? Navštivte stránky projektu:\nhttps://wl.widelands.org/\n\nDoufáme, že se vám tato hra líbí."

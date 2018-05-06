@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,35 +26,35 @@
 
 #include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "profile/profile.h"
 
 /**
  * Get the path of campaign visibility save-file
  */
 std::string CampaignVisibilitySave::get_path() {
-	std::string savepath = "save";
-	g_fs->ensure_directory_exists(savepath);  // Make sure save directory exists
-	savepath += "/campvis";                   // add the name of save-file
+	g_fs->ensure_directory_exists(kSaveDir);  // Make sure save directory exists
 
 	// check if campaigns visibility-save is available
-	if (!(g_fs->file_exists(savepath)))
-		make_campvis(savepath);
+	if (!(g_fs->file_exists(kCampVisFile))) {
+		make_campvis(kCampVisFile);
+	}
 
 	// check if campaigns visibility-save is up to date
-	Profile ca(savepath.c_str());
+	Profile ca(kCampVisFile.c_str());
 
 	//  1st version of campvis had no global section
 	if (!ca.get_section("global"))
-		update_campvis(savepath);
+		update_campvis(kCampVisFile);
 	else {
 		Section& ca_s = ca.get_safe_section("global");
 		Profile cc("campaigns/campaigns.conf");
 		Section& cc_s = cc.get_safe_section("global");
 		if (cc_s.get_int("version") > ca_s.get_int("version"))
-			update_campvis(savepath);
+			update_campvis(kCampVisFile);
 	}
 
-	return savepath;
+	return kCampVisFile;
 }
 
 /**
@@ -78,8 +78,8 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	// Variable declaration
 	int32_t i = 0;
 	int32_t imap = 0;
-	char csection[12];
-	char number[4];
+	char csection[24];
+	char number[12];
 	std::string mapsection;
 	std::string cms;
 
@@ -98,8 +98,8 @@ void CampaignVisibilitySave::update_campvis(const std::string& savepath) {
 	{
 		Section& vis = campvisw.pull_section("campaigns");
 		sprintf(csection, "campsect%i", i);
-		char cvisible[12];
-		char cnewvisi[12];
+		char cvisible[24];
+		char cnewvisi[24];
 		while (cconf_s.get_string(csection)) {
 			sprintf(cvisible, "campvisi%i", i);
 			sprintf(cnewvisi, "cnewvisi%i", i);

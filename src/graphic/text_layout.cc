@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -141,6 +141,12 @@ std::string as_aligned(const std::string& txt,
 	return f.str();
 }
 
+std::string as_richtext(const std::string& txt) {
+	static boost::format f("<rt>%s</rt>");
+	f % txt;
+	return f.str();
+}
+
 std::string as_tooltip(const std::string& txt) {
 	static boost::format f("<rt><p><font face=sans size=%i bold=1 color=%s>%s</font></p></rt>");
 
@@ -158,10 +164,14 @@ std::string as_waresinfo(const std::string& txt) {
 }
 
 std::string as_message(const std::string& heading, const std::string& body) {
-	return ((boost::format(
-	            "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
-	         heading % (is_paragraph(body) || is_div(body) ? body : "<p>" + body + "</p>"))
-	           .str());
+	return (
+	   (boost::format(
+	       "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
+	    heading %
+	    (is_paragraph(body) || is_div(body) ?
+	        body :
+	        (boost::format("<p><font size=%d>%s</font></p>") % UI_FONT_SIZE_MESSAGE % body).str()))
+	      .str());
 }
 
 std::shared_ptr<const UI::RenderedText>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,8 +40,15 @@ EditorSetOriginTool::handle_undo_impl(const Widelands::World&,
                                       EditorInteractive& eia,
                                       EditorActionArgs* /* args */,
                                       Widelands::Map* map) {
-	Widelands::Coords nc(
-	   map->get_width() - 1 - center.node.x, map->get_height() - 1 - center.node.y);
+	Widelands::Coords nc(map->get_width() - center.node.x, map->get_height() - center.node.y);
+
+	// Because of the triangle design of map, y is changed by an odd number.
+	// The x must be syncronized with the y when coordinate pair is applied
+	// and also when undoing an action like here.
+	if ((nc.y % 2) != 0) {
+		nc.x = nc.x - 1;
+	}
+	map->normalize_coords(nc);
 	map->set_origin(nc);
 	eia.map_changed(EditorInteractive::MapWas::kGloballyMutated);
 	eia.map_view()->scroll_to_field(Widelands::Coords(0, 0), MapView::Transition::Jump);

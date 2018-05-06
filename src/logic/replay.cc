@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_data_error.h"
@@ -80,7 +81,7 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) {
 	replaytime_ = 0;
 
 	{
-		GameLoader gl(filename + WLGF_SUFFIX, game);
+		GameLoader gl(filename + kSavegameExtension, game);
 		gl.load_game();
 	}
 
@@ -210,18 +211,18 @@ public:
  */
 ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
    : game_(game), filename_(filename) {
-	g_fs->ensure_directory_exists(REPLAY_DIR);
+	g_fs->ensure_directory_exists(kReplayDir);
 
 	SaveHandler& save_handler = game_.save_handler();
 
 	std::string error;
-	if (!save_handler.save_game(game_, filename_ + WLGF_SUFFIX, &error))
+	if (!save_handler.save_game(game_, filename_ + kSavegameExtension, &error))
 		throw wexception("Failed to save game for replay: %s", error.c_str());
 
 	log("Reloading the game from replay\n");
 	game.cleanup_for_load();
 	{
-		GameLoader gl(filename_ + WLGF_SUFFIX, game);
+		GameLoader gl(filename_ + kSavegameExtension, game);
 		gl.load_game();
 	}
 	game.postload();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,9 +84,8 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
    METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
-   PROP_RO(LuaGame, real_speed),    PROP_RO(LuaGame, time),
-   PROP_RW(LuaGame, desired_speed), PROP_RW(LuaGame, allow_autosaving),
-   PROP_RW(LuaGame, allow_saving),  {nullptr, nullptr, nullptr},
+   PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time),      PROP_RW(LuaGame, desired_speed),
+   PROP_RW(LuaGame, allow_saving), {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -158,16 +157,6 @@ int LuaGame::set_allow_saving(lua_State* L) {
 }
 // UNTESTED
 int LuaGame::get_allow_saving(lua_State* L) {
-	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
-	return 1;
-}
-int LuaGame::set_allow_autosaving(lua_State* L) {
-	// WAS_DEPRECATED_BEFORE(build18), use allow_saving
-	get_game(L).save_handler().set_allow_saving(luaL_checkboolean(L, -1));
-	return 0;
-}
-int LuaGame::get_allow_autosaving(lua_State* L) {
-	// WAS_DEPRECATED_BEFORE(build18), use allow_saving
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
 	return 1;
 }
@@ -517,6 +506,7 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_ware_type),
    METHOD(LuaTribes, new_warehouse_type),
    METHOD(LuaTribes, new_worker_type),
+   METHOD(LuaTribes, add_custom_building),
    {0, 0},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
@@ -871,6 +861,40 @@ int LuaTribes::new_tribe(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
 		egbase.mutable_tribes()->add_tribe(table, egbase);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: add_custom_building{table}
+
+		Adds a custom building to a tribe, e.g. for use in a scenario.
+		The building must already be known to the tribes and should be defined in
+		the ``map:scripting/tribes/`` directory.
+
+		**Note:** This function *has* to be called from ``map:scripting/tribes/init.lua``.
+
+		The table has the following entries:
+
+		**tribename**
+			*Mandatory*. The name of the tribe that this building will be added to.
+
+		**buildingname**
+			*Mandatory*. The name of the building to be added to the tribe.
+
+		:returns: :const:`0`
+*/
+int LuaTribes::add_custom_building(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_custom_building(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

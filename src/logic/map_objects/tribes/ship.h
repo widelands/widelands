@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,29 +41,16 @@ enum class IslandExploreDirection {
 	kNotSet
 };
 
-struct NoteShipMessage {
-	CAN_BE_SENT_AS_NOTE(NoteId::ShipMessage)
+struct NoteShip {
+	CAN_BE_SENT_AS_NOTE(NoteId::Ship)
 
 	Ship* ship;
 
-	enum class Message { kLost, kGained, kWaitingForCommand };
-	Message message;
+	enum class Action { kDestinationChanged, kWaitingForCommand, kNoPortLeft, kLost, kGained };
+	Action action;
 
-	NoteShipMessage(Ship* const init_ship, const Message& init_message)
-	   : ship(init_ship), message(init_message) {
-	}
-};
-
-struct NoteShipWindow {
-	CAN_BE_SENT_AS_NOTE(NoteId::ShipWindow)
-
-	Serial serial;
-
-	enum class Action { kClose, kNoPortLeft };
-	const Action action;
-
-	NoteShipWindow(Serial init_serial, const Action& init_action)
-	   : serial(init_serial), action(init_action) {
+	NoteShip(Ship* const init_ship, const Action& init_action)
+	   : ship(init_ship), action(init_action) {
 	}
 };
 
@@ -99,7 +86,7 @@ struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
 	explicit Ship(const ShipDescr& descr);
-	virtual ~Ship();
+	~Ship() override;
 
 	// Returns the fleet the ship is a part of.
 	Fleet* get_fleet() const;
@@ -263,6 +250,8 @@ private:
 	bool ship_update_transport(Game&, State&);
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
+	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
+	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 
 	bool init_fleet(EditorGameBase&);
 	void set_fleet(Fleet* fleet);

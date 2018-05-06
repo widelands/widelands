@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,6 +62,10 @@ public:
 		return buildcost_;
 	}
 
+	const Vector2i& ware_hotspot() const {
+		return ware_hotspot_;
+	}
+
 	/// How much of the worker type that an economy should store in warehouses.
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
 	/// the target quantity of this ware type will never be checked and should
@@ -82,13 +86,6 @@ public:
 			default_target_quantity_ = 1;
 	}
 
-	std::string helptext_script() const {
-		return helptext_script_;
-	}
-
-	const DirAnimations& get_walk_anims() const {
-		return walk_anims_;
-	}
 	const DirAnimations& get_right_walk_anims(bool const carries_ware) const {
 		return carries_ware ? walkload_anims_ : walk_anims_;
 	}
@@ -110,7 +107,7 @@ public:
 	// The buildings where this worker can work
 	const std::set<DescriptionIndex>& employers() const;
 
-	Worker& create(EditorGameBase&, Player&, PlayerImmovable*, Coords) const;
+	Worker& create(EditorGameBase&, Player*, PlayerImmovable*, Coords) const;
 
 	uint32_t movecaps() const override;
 
@@ -120,27 +117,35 @@ public:
 	}
 
 protected:
-	Quantity default_target_quantity_;
-	std::string helptext_script_;  // The path and filename to the worker's helptext script
+	Programs programs_;
+
+private:
+	const Vector2i ware_hotspot_;
+
 	DirAnimations walk_anims_;
 	DirAnimations walkload_anims_;
-	bool buildable_;
+
+	Quantity default_target_quantity_;
+	const bool buildable_;
 	Buildcost buildcost_;
+
+	/**
+	 * Type that this worker can become, i.e. level up to, or INVALID_INDEX if the worker cannot
+	 * level up.
+	 */
+	const DescriptionIndex becomes_;
 
 	/**
 	 * Number of experience points required for leveling up,
 	 * or INVALID_INDEX if the worker cannot level up.
 	 */
-	int32_t needed_experience_;
+	const int32_t needed_experience_;
 
-	/**
-	 * Type that this worker can become, i.e. level up to (or null).
-	 */
-	DescriptionIndex becomes_;
-	Programs programs_;
-	std::set<DescriptionIndex> employers_;  // Buildings where ths worker can work
-private:
+	/// Buildings where this worker can work
+	std::set<DescriptionIndex> employers_;
+
 	const EditorGameBase& egbase_;
+
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
 }

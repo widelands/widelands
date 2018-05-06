@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -114,14 +114,19 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
 	exit_game_.sigclicked.connect(
 	   boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
-	windows_.sound_options.assign_toggle_button(&sound_);
+	if (windows_.sound_options.window) {
+		sound_.set_style(UI::Button::Style::kPermpressed);
+	}
+	windows_.sound_options.opened.connect(
+	   boost::bind(&UI::Button::set_style, &sound_, UI::Button::Style::kPermpressed));
+	windows_.sound_options.closed.connect(
+	   boost::bind(&UI::Button::set_style, &sound_, UI::Button::Style::kRaised));
 
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
 GameOptionsMenu::~GameOptionsMenu() {
-	windows_.sound_options.unassign_toggle_button();
 }
 
 void GameOptionsMenu::clicked_save_game() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ It also manages the list of wares in the warehouse.
 struct WarehouseSupply : public Supply {
 	explicit WarehouseSupply(Warehouse* const wh) : economy_(nullptr), warehouse_(wh) {
 	}
-	virtual ~WarehouseSupply();
+	~WarehouseSupply() override;
 
 	void set_economy(Economy*);
 

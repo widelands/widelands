@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,17 +57,6 @@ struct RendererStyle {
 };
 
 /**
- * A map that maps pixels to a string. The string are the references which can be used
- * for hyperlink like constructions.
- */
-class IRefMap {
-public:
-	virtual ~IRefMap() {
-	}
-	virtual std::string query(int16_t x, int16_t y) = 0;
-};
-
-/**
  * This is the rendering engine. The returned images are not owned by the
  * caller.
  */
@@ -83,13 +72,9 @@ public:
 	std::shared_ptr<const UI::RenderedText>
 	render(const std::string&, uint16_t width, const TagSet& tagset = TagSet());
 
-	// Returns a reference map of the clickable hyperlinks in the image. This
-	// will do no caching and needs to do all layouting, so do not call this too
-	// often. The returned object must be freed.
-	IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet& = TagSet());
-
 private:
-	RenderNode* layout_(const std::string& text, uint16_t width, const TagSet& allowed_tags);
+	std::shared_ptr<RenderNode>
+	layout(const std::string& text, uint16_t width, const TagSet& allowed_tags);
 
 	std::unique_ptr<FontCache> font_cache_;
 	std::unique_ptr<Parser> parser_;

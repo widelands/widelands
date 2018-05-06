@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,6 +47,7 @@
 #include "logic/cmd_calculate_statistics.h"
 #include "logic/cmd_luacoroutine.h"
 #include "logic/cmd_luascript.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/market.h"
@@ -80,11 +81,9 @@ Game::SyncWrapper::~SyncWrapper() {
 }
 
 void Game::SyncWrapper::start_dump(const std::string& fname) {
-	dumpfname_ = fname + ".wss";
+	dumpfname_ = fname + kSyncstreamExtension;
 	dump_.reset(g_fs->open_stream_write(dumpfname_));
 }
-
-static const unsigned long long MINIMUM_DISK_SPACE = 256 * 1024 * 1024;
 
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 #ifdef SYNC_DEBUG
@@ -98,7 +97,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 	if (dump_ != nullptr && static_cast<int32_t>(counter_ - next_diskspacecheck_) >= 0) {
 		next_diskspacecheck_ = counter_ + 16 * 1024 * 1024;
 
-		if (g_fs->disk_space() < MINIMUM_DISK_SPACE) {
+		if (g_fs->disk_space() < kMinimumDiskSpace) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
 			dump_.reset();
 		}
@@ -119,6 +118,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
+     forester_cache_(),
      syncwrapper_(*this, synchash_),
      ctrl_(nullptr),
      writereplay_(true),
@@ -211,6 +211,12 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	world();
 	loader_ui.step(_("Loading tribes"));
 	tribes();
+
+	// If the scenario has custrom tribe entites, load them.
+	const std::string custom_tribe_script = mapname + "/scripting/tribes/init.lua";
+	if (g_fs->file_exists(custom_tribe_script)) {
+		lua().run_script(custom_tribe_script);
+	}
 
 	// We have to create the players here.
 	loader_ui.step(_("Creating players"));
@@ -446,6 +452,9 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		}
 
 		if (get_ipl()) {
+			// Scroll map to starting position for new games.
+			// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
+			// InteractiveGameBase::start() for multiplayer.
 			get_ipl()->map_view()->scroll_to_field(
 			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
 		}
@@ -483,9 +492,8 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	if (writereplay_ || writesyncstream_) {
 		// Derive a replay filename from the current time
-		const std::string fname = (boost::format("%s/%s_%s%s") % REPLAY_DIR % timestring() %
-		                           prefix_for_replays % REPLAY_SUFFIX)
-		                             .str();
+		const std::string fname = kReplayDir + g_fs->file_separator() + std::string(timestring()) +
+		                          std::string("_") + prefix_for_replays + kReplayExtension;
 		if (writereplay_) {
 			log("Starting replay writer\n");
 

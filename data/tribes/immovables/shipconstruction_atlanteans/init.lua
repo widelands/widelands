@@ -5,7 +5,9 @@ tribes:new_immovable_type {
    name = "atlanteans_shipconstruction",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Ship Under Construction"),
+   helptext_script = dirname .. "helptexts.lua",
    size = "small",
+   attributes = { "shipconstruction" },
    programs = {
       program = {
          "construction=idle 5000 210000",

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,21 +32,20 @@ struct ProductionSiteWindow : public BuildingWindow {
 	                     Widelands::ProductionSite&,
 	                     bool avoid_fastclick);
 
-	Widelands::ProductionSite& productionsite() {
-		return dynamic_cast<Widelands::ProductionSite&>(building());
-	}
-	void update_worker_table();
-
 protected:
-	void init(bool avoid_fastclick) override;
 	void think() override;
+	void init(bool avoid_fastclick) override;
 	void evict_worker();
 
 private:
+	void update_worker_table(Widelands::ProductionSite* production_site);
+
+	Widelands::OPtr<Widelands::ProductionSite> production_site_;
 	UI::Table<uintptr_t>* worker_table_;
 	UI::Box* worker_caps_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>>
 	   productionsitenotes_subscriber_;
+
 	DISALLOW_COPY_AND_ASSIGN(ProductionSiteWindow);
 };
 

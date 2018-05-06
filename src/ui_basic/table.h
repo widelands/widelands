@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,12 +66,15 @@ public:
 	boost::signals2::signal<void(uint32_t)> double_clicked;
 
 	/// A column that has a title is sortable (by clicking on the title).
+	///
+	/// Text conventions: Title Case for the 'title', Sentence case for the 'tooltip'
 	void add_column(uint32_t width,
 	                const std::string& title = std::string(),
 	                const std::string& tooltip = std::string(),
 	                Align = UI::Align::kLeft,
 	                TableColumnType column_type = TableColumnType::kFixed);
 
+	/// Text conventions: Title Case for the 'title'
 	void set_column_title(uint8_t col, const std::string& title);
 
 	void clear();
@@ -81,6 +84,7 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(Entry);
 
 	EntryRecord& add(void* const entry, const bool select_this = false);
 
@@ -105,6 +109,7 @@ public:
 			return "UI::Table<Entry>: No selection";
 		}
 	};
+	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const;
 	Entry get_selected() const;
 
@@ -125,8 +130,10 @@ public:
 	struct EntryRecord {
 		explicit EntryRecord(void* entry);
 
-		void set_picture(uint8_t col, const Image* pic, const std::string& = std::string());
-		void set_string(uint8_t col, const std::string&);
+		/// Text conventions: Title Case for the 'str'
+		void set_picture(uint8_t col, const Image* pic, const std::string& str = std::string());
+		/// Text conventions: Title Case for the 'str'
+		void set_string(uint8_t col, const std::string& str);
 		const Image* get_picture(uint8_t col) const;
 		const std::string& get_string(uint8_t col) const;
 		void* entry() const {
@@ -163,7 +170,7 @@ public:
 	      uint32_t h,
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle);
-	~Table();
+	~Table() override;
 
 	/**
 	 * Compare the two items at the given indices in the list.
@@ -184,8 +191,6 @@ public:
 	void set_column_title(uint8_t col, const std::string& title);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
-	void layout() override;
-
 	void clear();
 	void set_sort_column(uint8_t const col) {
 		assert(col < columns_.size());
@@ -203,6 +208,7 @@ public:
 
 	void sort(uint32_t lower_bound = 0, uint32_t upper_bound = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
+	void remove_entry(const void* const entry);
 
 	EntryRecord& add(void* entry = nullptr, bool select = false);
 
@@ -249,6 +255,7 @@ public:
 			return "UI::Table<void *>: No selection";
 		}
 	};
+	void scroll_to_item(int32_t item);
 	EntryRecord& get_selected_record() const {
 		if (selection_ == no_selection_index())
 			throw NoSelection();
@@ -267,6 +274,10 @@ public:
 	/// Adjust the desired size to fit the height needed for the number of entries.
 	/// If entries == 0, the current entries are used.
 	void fit_height(uint32_t entries = 0);
+
+	void scroll_to_top();
+
+	void layout() override;
 
 	// Drawing and event handling
 	void draw(RenderTarget&) override;
@@ -328,6 +339,10 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
+	void remove_entry(Entry const* const entry) {
+		Base::remove_entry(const_cast<Entry*>(entry));
+	}
+
 	EntryRecord& add(Entry const* const entry = 0, bool const select_this = false) {
 		return Base::add(const_cast<Entry*>(entry), select_this);
 	}
@@ -358,6 +373,10 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
+	void remove_entry(Entry const* entry) {
+		Base::remove_entry(entry);
+	}
+
 	EntryRecord& add(Entry* const entry = 0, bool const select_this = false) {
 		return Base::add(entry, select_this);
 	}
@@ -386,6 +405,10 @@ public:
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	}
+
+	void remove_entry(const Entry& entry) {
+		Base::remove_entry(&const_cast<Entry&>(entry));
 	}
 
 	EntryRecord& add(const Entry& entry, bool const select_this = false) {
@@ -422,6 +445,10 @@ public:
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
 	}
 
+	void remove_entry(Entry& entry) {
+		Base::remove_entry(&entry);
+	}
+
 	EntryRecord& add(Entry& entry, bool const select_this = false) {
 		return Base::add(&entry, select_this);
 	}
@@ -456,6 +483,10 @@ public:
 	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	      TableRows rowtype = TableRows::kSingle)
 	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	}
+
+	void remove_entry(uintptr_t const entry) {
+		Base::remove_entry(reinterpret_cast<void*>(entry));
 	}
 
 	EntryRecord& add(uintptr_t const entry, bool const select_this = false) {

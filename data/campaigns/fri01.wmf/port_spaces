@@ -1,0 +1,9 @@
+# Automatically created by Widelands bzr8485[frisians] (Release)
+
+[global]
+packet_version="1"
+number_of_port_spaces="2"
+
+[port_spaces]
+0="210 10"
+1="22 109"

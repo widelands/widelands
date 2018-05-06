@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/soldier.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/warelist.h"
 #include "logic/map_objects/world/editor_category.h"
@@ -584,7 +585,7 @@ int do_set_soldiers(lua_State* L,
 		} else if (d > 0) {
 			for (; d; --d) {
 				Soldier& soldier = dynamic_cast<Soldier&>(
-				   soldier_descr.create(egbase, *owner, nullptr, building_position));
+				   soldier_descr.create(egbase, owner, nullptr, building_position));
 				soldier.set_level(sp.first.health, sp.first.attack, sp.first.defense, sp.first.evade);
 				if (sc->incorporate_soldier(egbase, soldier)) {
 					soldier.remove(egbase);
@@ -1138,17 +1139,18 @@ Map
 
 .. class:: Map
 
-   Access to the map and it's objects. You cannot instantiate this directly,
+   Access to the map and its objects. You cannot instantiate this directly,
    instead access it via :attr:`wl.Game.map`.
 */
 const char LuaMap::className[] = "Map";
 const MethodType<LuaMap> LuaMap::Methods[] = {
-   METHOD(LuaMap, place_immovable),
-   METHOD(LuaMap, get_field),
-   METHOD(LuaMap, recalculate),
-   {nullptr, nullptr},
+   METHOD(LuaMap, place_immovable), METHOD(LuaMap, get_field),
+   METHOD(LuaMap, recalculate),     METHOD(LuaMap, recalculate_seafaring),
+   METHOD(LuaMap, set_port_space),  {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
+   PROP_RO(LuaMap, allows_seafaring),
+   PROP_RO(LuaMap, number_of_port_spaces),
    PROP_RO(LuaMap, width),
    PROP_RO(LuaMap, height),
    PROP_RO(LuaMap, player_slots),
@@ -1166,6 +1168,28 @@ void LuaMap::__unpersist(lua_State* /* L */) {
  PROPERTIES
  ==========================================================
  */
+/* RST
+   .. attribute:: allows_seafaring
+
+      (RO) Whether the map currently allows seafaring.
+
+		:returns: True if there are at least two port spaces that can be reached from each other.
+*/
+int LuaMap::get_allows_seafaring(lua_State* L) {
+	lua_pushboolean(L, get_egbase(L).map().allows_seafaring());
+	return 1;
+}
+/* RST
+   .. attribute:: number_of_port_spaces
+
+      (RO) The amount of port spaces on the map.
+
+      :returns: An integer with the number of port spaces.
+*/
+int LuaMap::get_number_of_port_spaces(lua_State* L) {
+	lua_pushuint32(L, get_egbase(L).map().get_port_spaces().size());
+	return 1;
+}
 /* RST
    .. attribute:: width
 
@@ -1286,15 +1310,53 @@ int LuaMap::get_field(lua_State* L) {
 /* RST
    .. method:: recalculate()
 
-      This map recalculates the whole map state: height of fields, buildcaps
-      and so on. You only need to call this function if you changed
-      Field.raw_height in any way.
+      This map recalculates the whole map state: height of fields, buildcaps,
+      whether the map allows seafaring and so on. You only need to call this
+      function if you changed :any:`raw_height` in any way.
 */
 // TODO(unknown): do we really want this function?
 int LuaMap::recalculate(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	egbase.mutable_map()->recalc_whole_map(egbase.world());
 	return 0;
+}
+
+/* RST
+   .. method:: recalculate_seafaring()
+
+      This method recalculates whether the map allows seafaring.
+      You only need to call this function if you have been changing terrains to/from
+      water and wanted to defer recalculating whether the map allows seafaring.
+*/
+int LuaMap::recalculate_seafaring(lua_State* L) {
+	get_egbase(L).mutable_map()->recalculate_allows_seafaring();
+	return 0;
+}
+
+/* RST
+   .. method:: set_port_space(x, y, allowed)
+
+      Sets whether a port space is allowed at the coordinates (x, y).
+      Returns false if the port space couldn't be set.
+
+      :arg x: The x coordinate of the port space to set/unset.
+      :type x: :class:`int`
+      :arg y: The y coordinate of the port space to set/unset.
+      :type y: :class:`int`
+      :arg allowed: Whether building a port will be allowed here.
+      :type allowed: :class:`bool`
+
+      :returns: :const:`true` on success, or :const:`false` otherwise
+      :rtype: :class:`bool`
+*/
+int LuaMap::set_port_space(lua_State* L) {
+	const int x = luaL_checkint32(L, 2);
+	const int y = luaL_checkint32(L, 3);
+	const bool allowed = luaL_checkboolean(L, 4);
+	const bool success = get_egbase(L).mutable_map()->set_port_space(
+	   get_egbase(L).world(), Widelands::Coords(x, y), allowed, false, true);
+	lua_pushboolean(L, success);
+	return 1;
 }
 
 /*
@@ -1324,7 +1386,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, carrier2),
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
-   PROP_RO(LuaTribeDescription, headquarters),
+   PROP_RO(LuaTribeDescription, immovables),
    PROP_RO(LuaTribeDescription, name),
    PROP_RO(LuaTribeDescription, port),
    PROP_RO(LuaTribeDescription, ship),
@@ -1417,13 +1479,20 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: headquarters
+   .. attribute:: immovables
 
-         (RO) the :class:`string` internal name of the default headquarters type that this tribe uses
+      (RO) an array of :class:`LuaImmovableDescription` with all the immovables that the tribe can use.
 */
-
-int LuaTribeDescription::get_headquarters(lua_State* L) {
-	lua_pushstring(L, get_egbase(L).tribes().get_building_descr(get()->headquarters())->name());
+int LuaTribeDescription::get_immovables(lua_State* L) {
+	const TribeDescr& tribe = *get();
+	lua_newtable(L);
+	int counter = 0;
+	for (DescriptionIndex immovable : tribe.immovables()) {
+		lua_pushinteger(L, ++counter);
+		to_lua<LuaImmovableDescription>(
+		   L, new LuaImmovableDescription(tribe.get_immovable_descr(immovable)));
+		lua_settable(L, -3);
+	}
 	return 1;
 }
 
@@ -1571,6 +1640,7 @@ const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
 };
 const PropertyType<LuaMapObjectDescription> LuaMapObjectDescription::Properties[] = {
    PROP_RO(LuaMapObjectDescription, descname),
+   PROP_RO(LuaMapObjectDescription, helptext_script),
    PROP_RO(LuaMapObjectDescription, icon_name),
    PROP_RO(LuaMapObjectDescription, name),
    PROP_RO(LuaMapObjectDescription, type_name),
@@ -1601,6 +1671,16 @@ void LuaMapObjectDescription::__unpersist(lua_State*) {
 
 int LuaMapObjectDescription::get_descname(lua_State* L) {
 	lua_pushstring(L, get()->descname());
+	return 1;
+}
+
+/* RST
+   .. attribute:: helptext_script
+
+         (RO) The path and filename to the helptext script. Can be empty.
+*/
+int LuaMapObjectDescription::get_helptext_script(lua_State* L) {
+	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -1737,7 +1817,7 @@ const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
 };
 const PropertyType<LuaImmovableDescription> LuaImmovableDescription::Properties[] = {
    PROP_RO(LuaImmovableDescription, species),
-   PROP_RO(LuaImmovableDescription, build_cost),
+   PROP_RO(LuaImmovableDescription, buildcost),
    PROP_RO(LuaImmovableDescription, editor_category),
    PROP_RO(LuaImmovableDescription, terrain_affinity),
    PROP_RO(LuaImmovableDescription, owner_type),
@@ -1774,12 +1854,12 @@ int LuaImmovableDescription::get_species(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: build_cost
+   .. attribute:: buildcost
 
          (RO) a table of ware-to-count pairs, describing the build cost for the
          immovable.
 */
-int LuaImmovableDescription::get_build_cost(lua_State* L) {
+int LuaImmovableDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
 }
 
@@ -1944,11 +2024,10 @@ const MethodType<LuaBuildingDescription> LuaBuildingDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaBuildingDescription> LuaBuildingDescription::Properties[] = {
-   PROP_RO(LuaBuildingDescription, build_cost),
+   PROP_RO(LuaBuildingDescription, buildcost),
    PROP_RO(LuaBuildingDescription, buildable),
    PROP_RO(LuaBuildingDescription, conquers),
    PROP_RO(LuaBuildingDescription, destructible),
-   PROP_RO(LuaBuildingDescription, helptext_script),
    PROP_RO(LuaBuildingDescription, enhanced),
    PROP_RO(LuaBuildingDescription, enhanced_from),
    PROP_RO(LuaBuildingDescription, enhancement_cost),
@@ -1983,11 +2062,11 @@ void LuaBuildingDescription::__unpersist(lua_State* L) {
  */
 
 /* RST
-   .. attribute:: build_cost
+   .. attribute:: buildcost
 
          (RO) a list of ware build cost for the building.
 */
-int LuaBuildingDescription::get_build_cost(lua_State* L) {
+int LuaBuildingDescription::get_buildcost(lua_State* L) {
 	return wares_or_workers_map_to_lua(L, get()->buildcost(), MapObjectType::WARE);
 }
 
@@ -2018,16 +2097,6 @@ int LuaBuildingDescription::get_conquers(lua_State* L) {
 */
 int LuaBuildingDescription::get_destructible(lua_State* L) {
 	lua_pushboolean(L, get()->is_destructible());
-	return 1;
-}
-
-/* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the building's helptext script
-*/
-int LuaBuildingDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -2813,7 +2882,6 @@ const MethodType<LuaWareDescription> LuaWareDescription::Methods[] = {
 };
 const PropertyType<LuaWareDescription> LuaWareDescription::Properties[] = {
    PROP_RO(LuaWareDescription, consumers),
-   PROP_RO(LuaWareDescription, helptext_script),
    PROP_RO(LuaWareDescription, producers),
    {nullptr, nullptr, nullptr},
 };
@@ -2852,16 +2920,6 @@ int LuaWareDescription::get_consumers(lua_State* L) {
 		   L, get_egbase(L).tribes().get_building_descr(building_index));
 		lua_rawset(L, -3);
 	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the ware's helptext script
-*/
-int LuaWareDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -2921,13 +2979,9 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
-   PROP_RO(LuaWorkerDescription, becomes),
-   PROP_RO(LuaWorkerDescription, buildcost),
-   PROP_RO(LuaWorkerDescription, employers),
-   PROP_RO(LuaWorkerDescription, helptext_script),
-   PROP_RO(LuaWorkerDescription, is_buildable),
-   PROP_RO(LuaWorkerDescription, needed_experience),
-   {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWorkerDescription, becomes),           PROP_RO(LuaWorkerDescription, buildcost),
+   PROP_RO(LuaWorkerDescription, employers),         PROP_RO(LuaWorkerDescription, is_buildable),
+   PROP_RO(LuaWorkerDescription, needed_experience), {nullptr, nullptr, nullptr},
 };
 
 void LuaWorkerDescription::__persist(lua_State* L) {
@@ -2998,16 +3052,6 @@ int LuaWorkerDescription::get_employers(lua_State* L) {
 		   L, get_egbase(L).tribes().get_building_descr(building_index));
 		lua_rawset(L, -3);
 	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: helptext_script
-
-         (RO) The path and filename to the worker's helptext script
-*/
-int LuaWorkerDescription::get_helptext_script(lua_State* L) {
-	lua_pushstring(L, get()->helptext_script());
 	return 1;
 }
 
@@ -4114,7 +4158,7 @@ int LuaFlag::set_wares(lua_State* L) {
 		if (sp.second > 0) {
 			c_wares = count_wares_on_flag_(*f, tribes);
 			assert(c_wares.count(index) == 1);
-			assert(c_wares[index] = sp.second);
+			assert(c_wares.at(index) == sp.second);
 		}
 #endif
 	}
@@ -4293,7 +4337,8 @@ int LuaRoad::create_new_worker(PlayerImmovable& pi,
 	for (Path::StepVector::size_type i = 0; i < idle_index; ++i)
 		egbase.map().get_neighbour(idle_position, path[i], &idle_position);
 
-	Carrier& carrier = dynamic_cast<Carrier&>(wdes->create(egbase, r.owner(), &r, idle_position));
+	Carrier& carrier =
+	   dynamic_cast<Carrier&>(wdes->create(egbase, r.get_owner(), &r, idle_position));
 
 	if (upcast(Game, game, &egbase)) {
 		carrier.start_task_road(*game);
@@ -5897,7 +5942,9 @@ int LuaField::get_y(lua_State* L) {
       (RW) The height of this field. The default height is 10, you can increase
       or decrease this value to build mountains. Note though that if you change
       this value too much, all surrounding fields will also change their
-      heights because the slope is constrained.
+      heights because the slope is constrained. If you are changing the height
+      of many terrains at once, use :attr:`raw_height` instead and then call
+      :any:`recalculate` afterwards.
 */
 int LuaField::get_height(lua_State* L) {
 	lua_pushuint32(L, fcoords(L).field->get_height());
@@ -5922,10 +5969,10 @@ int LuaField::set_height(lua_State* L) {
 /* RST
    .. attribute:: raw_height
 
-      (RW The same as :attr:`height`, but setting this will not trigger a
+      (RW) The same as :attr:`height`, but setting this will not trigger a
       recalculation of the surrounding fields. You can use this field to
       change the height of many fields on a map quickly, then use
-      :func:`wl.map.recalculate()` to make sure that everything is in order.
+      :any:`recalculate` to make sure that everything is in order.
 */
 // UNTESTED
 int LuaField::get_raw_height(lua_State* L) {
@@ -6084,7 +6131,11 @@ int LuaField::get_bobs(lua_State* L) {
       (RW) The terrain of the right/down triangle. This is a string value
       containing the name of the terrain as it is defined in the world
       configuration. You can change the terrain by simply assigning another
-      valid name to these variables.
+      valid name to these variables. If you are changing the terrain from or to
+      water, the map will not recalculate whether it allows seafaring, because
+      this recalculation can take up a lot of performance. If you need this
+      recalculated, you can do so by calling :any:`recalculate_seafaring` after
+      you're done changing terrains.
 */
 int LuaField::get_terr(lua_State* L) {
 	TerrainDescription& td = get_egbase(L).world().terrain_descr(fcoords(L).field->terrain_r());
@@ -6096,7 +6147,7 @@ int LuaField::set_terr(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	const World& world = egbase.world();
 	const DescriptionIndex td = world.terrains().get_index(name);
-	if (td == static_cast<DescriptionIndex>(-1))
+	if (td == static_cast<DescriptionIndex>(Widelands::INVALID_INDEX))
 		report_error(L, "Unknown terrain '%s'", name);
 
 	egbase.mutable_map()->change_terrain(world, TCoords<FCoords>(fcoords(L), TriangleIndex::R), td);

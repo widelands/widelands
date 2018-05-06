@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 by the Widelands Development Team
+ * Copyright (C) 2017-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -79,7 +79,7 @@ RenderedRect::RenderedRect(const Image* init_image)
 }
 
 const Image* RenderedRect::image() const {
-	assert(permanent_image_ == nullptr || transient_image_.get() == nullptr);
+	assert(permanent_image_ == nullptr || transient_image_ == nullptr);
 	return permanent_image_ == nullptr ? transient_image_.get() : permanent_image_;
 }
 
@@ -165,7 +165,7 @@ void RenderedText::draw(RenderTarget& dst,
 
 	// Blit the rects
 	for (const auto& rect : rects) {
-		blit_rect(dst, offset_x, aligned_pos, *rect.get(), region, align, cropmode);
+		blit_rect(dst, offset_x, aligned_pos, *rect, region, align, cropmode);
 	}
 }
 

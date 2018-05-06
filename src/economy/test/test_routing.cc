@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ using namespace Widelands;
 class BadAccess : public std::exception {};
 class TestingRoutingNode : public RoutingNode {
 public:
-	TestingRoutingNode(int32_t wcost = 0, Coords pos = Coords(0, 0))
+	explicit TestingRoutingNode(int32_t wcost = 0, Coords pos = Coords(0, 0))
 	   : waitcost_(wcost), position_(pos) {
 	}
 	void add_neighbour(TestingRoutingNode* nb) {

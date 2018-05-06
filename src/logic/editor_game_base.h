@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,7 +108,7 @@ public:
 	                   const std::string& name,
 	                   TeamNumber team = 0);
 	Player* get_player(int32_t n) const;
-	Player& player(int32_t n) const;
+	const Player& player(int32_t n) const;
 	virtual Player* get_safe_player(PlayerNumber);
 
 	// loading stuff

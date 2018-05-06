@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ namespace Widelands {
 // TODO(unknown): This maybe shouldn't be here.
 struct IdleWareSupply : public Supply {
 	explicit IdleWareSupply(WareInstance&);
-	virtual ~IdleWareSupply();
+	~IdleWareSupply() override;
 
 	void set_economy(Economy*);
 

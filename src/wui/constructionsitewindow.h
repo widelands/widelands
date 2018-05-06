@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,6 +39,7 @@ protected:
 	void init(bool avoid_fastclick) override;
 
 private:
+	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;
 	UI::ProgressBar* progress_;
 	DISALLOW_COPY_AND_ASSIGN(ConstructionSiteWindow);
 };

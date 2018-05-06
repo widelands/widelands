@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -149,9 +149,9 @@ bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	}
 
 	// The user probably entered a hostname on his own. Try to resolve it
-	if (NetAddress::resolve_to_v6(addr, host, WIDELANDS_PORT))
+	if (NetAddress::resolve_to_v6(addr, host, kWidelandsLanPort))
 		return true;
-	if (NetAddress::resolve_to_v4(addr, host, WIDELANDS_PORT))
+	if (NetAddress::resolve_to_v4(addr, host, kWidelandsLanPort))
 		return true;
 	return false;
 }
@@ -193,8 +193,8 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 	case LAN_GAME_CLOSED:
 		er.set_string(2, _("Closed"));
 		break;
-	/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 	default:
+		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
 	};

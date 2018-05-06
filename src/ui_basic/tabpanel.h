@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,10 @@ struct Tab : public NamedPanel {
 	friend struct TabPanel;
 
 	/** If title is not empty, this will be a textual tab.
-	 *  In that case, pic will need to be the rendered title */
+	 *  In that case, pic will need to be the rendered title
+	 *
+	 * Text conventions: Title Case for the 'title', Sentence case for the 'gtooltip'
+ */
 	Tab(TabPanel* parent,
 	    size_t id,
 	    int32_t x,
@@ -91,13 +94,18 @@ struct TabPanel : public Panel {
 	         const Image* background,
 	         TabPanel::Type border_type = TabPanel::Type::kNoBorder);
 
-	/** Add textual tab */
+	/** Add textual tab
+	 *
+	 * Text conventions: Title Case for the 'title', Sentence case for the 'tooltip'
+*/
 	uint32_t add(const std::string& name,
 	             const std::string& title,
 	             Panel* panel,
 	             const std::string& tooltip = std::string());
 
-	/** Add pictorial tab */
+	/** Add pictorial tab
+	 * Text conventions: Sentence case for the 'tooltip'
+ */
 	uint32_t add(const std::string& name,
 	             const Image* pic,
 	             Panel* panel,

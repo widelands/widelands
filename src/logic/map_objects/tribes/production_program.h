@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -153,7 +153,7 @@ struct ProductionProgram {
 	/// is implicitly set to Completed.
 	struct ActReturn : public Action {
 		ActReturn(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
-		virtual ~ActReturn();
+		~ActReturn() override;
 		void execute(Game&, ProductionSite&) const override;
 
 		struct Condition {
@@ -168,7 +168,7 @@ struct ProductionProgram {
 			Negation(char*& parameters, const ProductionSiteDescr& descr, const Tribes& tribes)
 			   : operand(create_condition(parameters, descr, tribes)) {
 			}
-			virtual ~Negation();
+			~Negation() override;
 			bool evaluate(const ProductionSite&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
 			std::string description(const Tribes&) const override;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,5 +86,15 @@ void GameObjectivesMenu::think() {
  * An entry in the objectives menu has been selected
  */
 void GameObjectivesMenu::selected(uint32_t const t) {
-	objectivetext.set_text(t == ListType::no_selection_index() ? std::string() : list[t].descr());
+	const std::string text = t == ListType::no_selection_index() ? "" : list[t].descr();
+	// TODO(GunChleoc): When all campaigns, scenarios and win conditions have been converted, simply
+	// add the text above.
+	try {
+		objectivetext.force_new_renderer();
+		objectivetext.set_text(text);
+	} catch (const std::exception& e) {
+		log("Objectives: falling back to old font renderer:\n%s\n%s\n", text.c_str(), e.what());
+		objectivetext.force_new_renderer(false);
+		objectivetext.set_text(text);
+	}
 }

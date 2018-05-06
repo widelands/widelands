@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ class WareInstance : public MapObject {
 
 public:
 	WareInstance(DescriptionIndex, const WareDescr* const);
-	~WareInstance();
+	~WareInstance() override;
 
 	MapObject* get_location(EditorGameBase& egbase) {
 		return location_.get(egbase);

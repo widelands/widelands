@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,6 +75,7 @@ private:
 	void server_doubleclicked();
 
 	void change_servername();
+	bool wait_for_ip();
 	void clicked_joingame();
 	void clicked_hostgame();
 

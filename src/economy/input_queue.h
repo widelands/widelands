@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -167,7 +167,7 @@ public:
 	 * Returns the player owning the building containing this queue.
 	 * @return A reference to the owning player.
 	 */
-	Player& owner() const {
+	const Player& owner() const {
 		return owner_.owner();
 	}
 
@@ -196,6 +196,14 @@ protected:
 	 * @param type Whether wares or workers are stored in this queue.
 	*/
 	InputQueue(PlayerImmovable& owner, DescriptionIndex index, uint8_t max_size, WareWorker type);
+
+	/**
+	 * Returns the mutable player owning the building containing this queue.
+	 * @return A pointer to the owning player.
+	 */
+	Player* get_owner() const {
+		return owner_.get_owner();
+	}
 
 	/**
 	 * Called when an item arrives at the owning building.

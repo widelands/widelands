@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,7 +127,7 @@ void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 InputQueue& ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type) const {
 	for (const std::unique_ptr<InputQueue>& iq : queues_) {
 		if (iq->get_index() == index && iq->get_type() == type) {
-			return *iq.get();
+			return *iq;
 		}
 	}
 	NEVER_HERE();

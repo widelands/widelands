@@ -58,11 +58,6 @@ function test_descr:test_get_carrier2()
    assert_equal("atlanteans_horse", tribe.carrier2)
 end
 
-function test_descr:test_get_headquarters()
-   local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("atlanteans_headquarters", tribe.headquarters)
-end
-
 function test_descr:test_get_geologist()
    local tribe = egbase:get_tribe_description("atlanteans")
    assert_equal("atlanteans_geologist", tribe.geologist)

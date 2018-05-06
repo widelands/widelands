@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,7 @@ void get_point(const LuaTable& table, Vector2i* p) {
  */
 class NonPackedAnimation : public Animation {
 public:
-	virtual ~NonPackedAnimation() {
+	~NonPackedAnimation() override {
 	}
 	explicit NonPackedAnimation(const LuaTable& table);
 
@@ -328,7 +328,7 @@ const Animation& AnimationManager::get_animation(uint32_t id) const {
 	if (!id || id > animations_.size())
 		throw wexception("Requested unknown animation with id: %i", id);
 
-	return *animations_[id - 1].get();
+	return *animations_[id - 1];
 }
 
 const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {

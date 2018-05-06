@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ struct Ship;
 class FleetDescr : public MapObjectDescr {
 public:
 	FleetDescr(char const* const init_name, char const* const init_descname)
-	   : MapObjectDescr(MapObjectType::FLEET, init_name, init_descname) {
+	   : MapObjectDescr(MapObjectType::FLEET, init_name, init_descname, "") {
 	}
 	~FleetDescr() override {
 	}
@@ -75,14 +75,7 @@ struct Fleet : MapObject {
 
 	const FleetDescr& descr() const;
 
-	explicit Fleet(Player& player);
-
-	Player* get_owner() const {
-		return &owner_;
-	}
-	Player& owner() const {
-		return owner_;
-	}
+	explicit Fleet(Player* player);
 
 	PortDock* get_dock(Flag& flag) const;
 	PortDock* get_dock(EditorGameBase&, Coords) const;
@@ -115,8 +108,8 @@ protected:
 	void act(Game&, uint32_t data) override;
 
 private:
-	void find_other_fleet(EditorGameBase& egbase);
-	void merge(EditorGameBase& egbase, Fleet* other);
+	bool find_other_fleet(EditorGameBase& egbase);
+	bool merge(EditorGameBase& egbase, Fleet* other);
 	void check_merge_economy();
 	void connect_port(EditorGameBase& egbase, uint32_t idx);
 
@@ -125,7 +118,6 @@ private:
 	PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse);
 	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
-	Player& owner_;
 	std::vector<Ship*> ships_;
 	std::vector<PortDock*> ports_;
 

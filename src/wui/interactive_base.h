@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ public:
 	UniqueWindowHandler& unique_windows();
 
 	InteractiveBase(Widelands::EditorGameBase&, Section& global_s);
-	virtual ~InteractiveBase();
+	~InteractiveBase() override;
 
 	Widelands::EditorGameBase& egbase() const {
 		return egbase_;
@@ -259,10 +259,6 @@ private:
 	bool buildhelp_;
 	MapView map_view_;
 	ChatOverlay* chat_overlay_;
-
-	// These get collected by add_toolbar_button
-	// so we can call unassign_toggle_button on them in the destructor.
-	std::vector<UI::UniqueWindow::Registry> registries_;
 
 	UI::Box toolbar_;
 	// No unique_ptr on purpose: 'minimap_' is a UniqueWindow, its parent will

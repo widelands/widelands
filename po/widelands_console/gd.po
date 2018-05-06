@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016-2017
-# GunChleoc, 2016
+# GunChleoc, 2016-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2016
 # GunChleoc, 2013-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-04-02 09:15+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -190,6 +190,10 @@ msgstr " --xres=[...]              Leud na h-uinneige ann am piogsailean."
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...]              Àirde na h-uinneige ann am piogsailean."
 
+#. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
+#. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
+#. widelands
+#. textdomain
 #: ../../src/wlapplication_messages.cc:132
 msgid "Options for the internal window manager:"
 msgstr "Roghainnean airson manaidsear nan uinneagan taobh a-staigh:"
@@ -198,7 +202,7 @@ msgstr "Roghainnean airson manaidsear nan uinneagan taobh a-staigh:"
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
-msgstr ""
+msgstr " --animate_map_panning=[yes|no]\n                           Am bi beòthachadh air gluasadan fèin-obrachail a’ mhapa\n                           gus nach bi."
 
 #: ../../src/wlapplication_messages.cc:136
 msgid ""
@@ -247,7 +251,7 @@ msgstr " --help                    Seall a' chobhair seo"
 #: ../../src/wlapplication_messages.cc:162
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
-"        https://launchpad.net/widelands\n"
+"        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "A bheil thu airson innse dhuinn mu bhuga? No beachd a chur thugainn? Thoir sùil air làrach-lìn a' phròiseict:\n        https://launchpad.net/widelands\n\nTha sinn an dòchas gun còrd an geama riut!"
+msgstr "A bheil thu airson innse dhuinn mu bhuga? No beachd a chur thugainn? Thoir sùil air làrach-lìn a' phròiseict:\n        https://wl.widelands.org/\n\nTha sinn an dòchas gun còrd an geama riut!"

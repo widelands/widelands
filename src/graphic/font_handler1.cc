@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,7 +77,7 @@ public:
 	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
 	     image_cache_(image_cache) {
 	}
-	virtual ~FontHandler1() {
+	~FontHandler1() override {
 	}
 
 	// This will render the 'text' with a width restriction of 'w'. If 'w' == 0, no restriction is
@@ -86,7 +86,7 @@ public:
 	                                               uint16_t w = 0) override {
 		const std::string hash = boost::lexical_cast<std::string>(w) + text;
 		std::shared_ptr<const RenderedText> rendered_text = render_cache_->get(hash);
-		if (rendered_text.get() == nullptr) {
+		if (rendered_text == nullptr) {
 			rendered_text = render_cache_->insert(hash, rt_renderer_->render(text, w));
 		}
 		return rendered_text;

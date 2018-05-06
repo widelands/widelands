@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,16 +43,22 @@ struct BuildingWindow : public UI::UniqueWindow {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
+protected:
+	// This constructor allows setting a building description for the help button independent of the
+	// base building
+	BuildingWindow(InteractiveGameBase& parent,
+	               UI::UniqueWindow::Registry& reg,
+	               Widelands::Building&,
+	               const Widelands::BuildingDescr&,
+	               bool avoid_fastclick);
+
+public:
 	BuildingWindow(InteractiveGameBase& parent,
 	               UI::UniqueWindow::Registry& reg,
 	               Widelands::Building&,
 	               bool avoid_fastclick);
 
-	virtual ~BuildingWindow();
-
-	Widelands::Building& building() {
-		return building_;
-	}
+	~BuildingWindow() override;
 
 	InteractiveGameBase* igbase() const {
 		return parent_;
@@ -84,11 +90,11 @@ protected:
 	void
 	create_input_queue_panel(UI::Box*, Widelands::Building&, Widelands::InputQueue*, bool = false);
 
-	virtual void create_capsbuttons(UI::Box* buttons);
-
 	bool is_dying_;
 
 private:
+	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
+
 	// Actions performed when a NoteBuilding is received.
 	void on_building_note(const Widelands::NoteBuilding& note);
 
@@ -97,7 +103,11 @@ private:
 
 	InteractiveGameBase* parent_;
 
-	Widelands::Building& building_;
+	// The building that this window belongs to
+	Widelands::OPtr<Widelands::Building> building_;
+
+	// The building description that will be used for the help button
+	const Widelands::BuildingDescr& building_descr_for_help_;
 
 	// We require this to unregister overlays when we are closed. Since the
 	// building might have been destroyed by then we have to keep a copy of its

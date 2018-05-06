@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -100,7 +100,7 @@ void MapFlagPacket::read(FileSystem& fs,
 					//  since we have to read the data packets. We delete this
 					//  object later again, if it is not wanted.
 					mol.register_object<Flag>(
-					   serial, *new Flag(dynamic_cast<Game&>(egbase), egbase.player(owner), fc));
+					   serial, *new Flag(dynamic_cast<Game&>(egbase), egbase.get_player(owner), fc));
 				} catch (const WException& e) {
 					throw GameDataError(
 					   "%u (at (%i, %i), owned by player %u): %s", serial, fc.x, fc.y, owner, e.what());

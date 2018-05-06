@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,15 +33,11 @@ struct TrainingSiteWindow : public ProductionSiteWindow {
 	                   Widelands::TrainingSite&,
 	                   bool avoid_fastclick);
 
-	Widelands::TrainingSite& trainingsite() {
-		return dynamic_cast<Widelands::TrainingSite&>(building());
-	}
-
-protected:
-	void init(bool avoid_fastclick) override;
-	void create_capsbuttons(UI::Box* buttons) override;
-
 private:
+	void init(bool avoid_fastclick) override;
+
+	Widelands::OPtr<Widelands::TrainingSite> training_site_;
+
 	DISALLOW_COPY_AND_ASSIGN(TrainingSiteWindow);
 };
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 20;
+constexpr uint16_t kCurrentPacketVersion = 21;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -55,19 +55,19 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					std::string const name = fr.c_string();
 
 					game.add_player(plnum, 0, tribe_name, name, team);
-					Player& player = game.player(plnum);
-					player.set_see_all(see_all);
+					Player* player = game.get_player(plnum);
+					player->set_see_all(see_all);
 
-					player.set_ai(fr.c_string());
-					player.read_statistics(fr);
-					player.read_remaining_shipnames(fr);
+					player->set_ai(fr.c_string());
+					player->read_statistics(fr);
+					player->read_remaining_shipnames(fr, packet_version);
 
-					player.casualties_ = fr.unsigned_32();
-					player.kills_ = fr.unsigned_32();
-					player.msites_lost_ = fr.unsigned_32();
-					player.msites_defeated_ = fr.unsigned_32();
-					player.civil_blds_lost_ = fr.unsigned_32();
-					player.civil_blds_defeated_ = fr.unsigned_32();
+					player->casualties_ = fr.unsigned_32();
+					player->kills_ = fr.unsigned_32();
+					player->msites_lost_ = fr.unsigned_32();
+					player->msites_defeated_ = fr.unsigned_32();
+					player->civil_blds_lost_ = fr.unsigned_32();
+					player->civil_blds_defeated_ = fr.unsigned_32();
 				}
 			}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 #include "base/i18n.h"
 #include "io/filesystem/filesystem.h"
 #include "logic/map.h"
+#include "logic/widelands.h"
 
 /**
  * Author data for a map or scenario.
@@ -109,7 +110,7 @@ public:
 	uint32_t nrplayers;
 	uint32_t width;
 	uint32_t height;
-	std::vector<Widelands::Map::SuggestedTeamLineup> suggested_teams;
+	std::vector<Widelands::SuggestedTeamLineup> suggested_teams;
 	std::set<std::string> tags;
 	MapData::MapType maptype;
 	MapData::DisplayType displaytype;

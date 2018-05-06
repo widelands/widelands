@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -58,7 +58,9 @@ Two players can choose the same tribe.
 */
 class TribeDescr {
 public:
-	TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes);
+	TribeDescr(const LuaTable& table,
+	           const Widelands::TribeBasicInfo& info,
+	           const Tribes& init_tribes);
 
 	const std::string& name() const;
 	const std::string& descname() const;
@@ -69,6 +71,7 @@ public:
 	const std::vector<DescriptionIndex>& buildings() const;
 	const std::set<DescriptionIndex>& wares() const;
 	const std::set<DescriptionIndex>& workers() const;
+	const std::set<DescriptionIndex>& immovables() const;
 
 	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;
@@ -101,7 +104,6 @@ public:
 	DescriptionIndex geologist() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
-	DescriptionIndex headquarters() const;
 	DescriptionIndex port() const;
 	DescriptionIndex barracks() const;
 	DescriptionIndex ironore() const;
@@ -131,7 +133,7 @@ public:
 	                                        const ResourceAmount amount) const;
 
 	// Returns the initalization at 'index' (which must not be out of bounds).
-	const TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
+	const Widelands::TribeBasicInfo::Initialization& initialization(const uint8_t index) const {
 		return initializations_.at(index);
 	}
 
@@ -156,6 +158,8 @@ public:
 	const std::vector<std::string>& get_ship_names() const {
 		return ship_names_;
 	}
+
+	void add_building(const std::string& buildingname);
 
 private:
 	// Helper function for adding a special worker type (carriers etc.)
@@ -183,19 +187,18 @@ private:
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.
-	DescriptionIndex builder_;       // The builder for this tribe
-	DescriptionIndex carrier_;       // The basic carrier for this tribe
-	DescriptionIndex carrier2_;      // Additional carrier for busy roads
-	DescriptionIndex geologist_;     // This tribe's geologist worker
-	DescriptionIndex soldier_;       // The soldier that this tribe uses
-	DescriptionIndex ship_;          // The ship that this tribe uses
-	DescriptionIndex headquarters_;  // The tribe's default headquarters, needed by the editor
-	DescriptionIndex port_;          // The port that this tribe uses
-	DescriptionIndex barracks_;      // The barracks to create soldiers
-	DescriptionIndex ironore_;       // Iron ore
-	DescriptionIndex rawlog_;        // Simple log
-	DescriptionIndex refinedlog_;    // Refined log, e.g. wood or blackwood
-	DescriptionIndex granite_;       // Granite
+	DescriptionIndex builder_;     // The builder for this tribe
+	DescriptionIndex carrier_;     // The basic carrier for this tribe
+	DescriptionIndex carrier2_;    // Additional carrier for busy roads
+	DescriptionIndex geologist_;   // This tribe's geologist worker
+	DescriptionIndex soldier_;     // The soldier that this tribe uses
+	DescriptionIndex ship_;        // The ship that this tribe uses
+	DescriptionIndex port_;        // The port that this tribe uses
+	DescriptionIndex barracks_;    // The barracks to create soldiers
+	DescriptionIndex ironore_;     // Iron ore
+	DescriptionIndex rawlog_;      // Simple log
+	DescriptionIndex refinedlog_;  // Refined log, e.g. wood or blackwood
+	DescriptionIndex granite_;     // Granite
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display
@@ -204,7 +207,7 @@ private:
 	WaresOrder workers_order_;
 	WaresOrderCoords workers_order_coords_;
 
-	std::vector<TribeBasicInfo::Initialization> initializations_;
+	std::vector<Widelands::TribeBasicInfo::Initialization> initializations_;
 
 	DISALLOW_COPY_AND_ASSIGN(TribeDescr);
 };

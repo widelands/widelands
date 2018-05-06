@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -442,7 +442,7 @@ struct RealFSStreamRead : public StreamRead {
 			throw wexception("could not open %s for reading", fname.c_str());
 	}
 
-	~RealFSStreamRead() {
+	~RealFSStreamRead() override {
 		fclose(file_);
 	}
 
@@ -480,7 +480,7 @@ struct RealFSStreamWrite : public StreamWrite {
 			throw wexception("could not open %s for writing", fname.c_str());
 	}
 
-	~RealFSStreamWrite() {
+	~RealFSStreamWrite() override {
 		fclose(file_);
 	}
 

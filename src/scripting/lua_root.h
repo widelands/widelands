@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,8 +57,6 @@ public:
 	int get_time(lua_State*);
 	int get_desired_speed(lua_State*);
 	int set_desired_speed(lua_State*);
-	int get_allow_autosaving(lua_State*);
-	int set_allow_autosaving(lua_State*);
 	int get_allow_saving(lua_State*);
 	int set_allow_saving(lua_State*);
 
@@ -83,7 +81,7 @@ public:
 	LuaEditor() {
 	}
 	explicit LuaEditor(lua_State* L);
-	virtual ~LuaEditor() {
+	~LuaEditor() override {
 	}
 
 	void __persist(lua_State* L) override;
@@ -173,6 +171,7 @@ public:
 	int new_ware_type(lua_State* L);
 	int new_warehouse_type(lua_State* L);
 	int new_worker_type(lua_State* L);
+	int add_custom_building(lua_State* L);
 
 	/*
 	 * C methods

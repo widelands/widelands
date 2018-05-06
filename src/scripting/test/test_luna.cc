@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ public:
 	}
 	LuaClass() : x(123), prop(246) {
 	}
-	virtual ~LuaClass();
+	~LuaClass() override;
 	explicit LuaClass(lua_State* /* L */) : x(124), prop(248) {
 	}
 	virtual int test(lua_State* L) {

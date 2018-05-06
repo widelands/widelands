@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,7 +71,7 @@ void MainMenuLoadMap::set_current_directory(const std::string& filename) {
 		boost::replace_first(display_dir, "MP_Scenarios", _("Multiplayer Scenarios"));
 	}
 	/** TRANSLATORS: The folder that a file will be saved to. */
-	directory_info_.set_text((boost::format(_("Current Directory: %s")) % display_dir).str());
+	directory_info_.set_text((boost::format(_("Current directory: %s")) % display_dir).str());
 }
 
 /**

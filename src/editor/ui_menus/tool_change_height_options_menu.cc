@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 increase_tool_.get_change_by(),
                 1,
                 MAX_FIELD_HEIGHT_DIFF,
-                _("Increase/Decrease Value:"),
+                _("Increase/Decrease height by:"),
                 UI::SpinBox::Units::kNone,
                 g_gr->images().get("images/ui_basic/but1.png"),
                 UI::SpinBox::Type::kSmall),
@@ -56,7 +56,7 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              increase_tool_.set_tool().get_interval().min,
              0,
              MAX_FIELD_HEIGHT,
-             _("Set Value:"),
+             _("Set height to:"),
              UI::SpinBox::Units::kNone,
              g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall) {

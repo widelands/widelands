@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,7 @@
 #include "wui/game_options_menu.h"
 #include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
+#include "wui/seafaring_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
@@ -130,57 +131,14 @@ void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field
 	}
 	if (player_field.constructionsite.becomes) {
 		assert(field.owner != nullptr);
-		const Widelands::ConstructionsiteInformation& csinf = player_field.constructionsite;
-		// draw the partly finished constructionsite
-		uint32_t anim_idx;
-		try {
-			anim_idx = csinf.becomes->get_animation("build");
-		} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-			try {
-				anim_idx = csinf.becomes->get_animation("unoccupied");
-			} catch (Widelands::MapObjectDescr::AnimationNonexistent) {
-				anim_idx = csinf.becomes->get_animation("idle");
-			}
-		}
-		const Animation& anim = g_gr->animations().get_animation(anim_idx);
-		const size_t nr_frames = anim.nr_frames();
-		uint32_t cur_frame = csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
-		uint32_t tanim = cur_frame * FRAME_LENGTH;
+		player_field.constructionsite.draw(
+		   field.rendertarget_pixel, scale, field.owner->get_playercolor(), dst);
 
-		uint32_t percent = 100 * csinf.completedtime * nr_frames;
-		if (csinf.totaltime) {
-			percent /= csinf.totaltime;
-		}
-		percent -= 100 * cur_frame;
-
-		if (cur_frame) {  // not the first frame
-			// Draw the prev frame
-			dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, tanim - FRAME_LENGTH,
-			                    field.owner->get_playercolor());
-		} else if (csinf.was) {
-			// Is the first frame, but there was another building here before,
-			// get its last build picture and draw it instead.
-			uint32_t a;
-			try {
-				a = csinf.was->get_animation("unoccupied");
-			} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-				a = csinf.was->get_animation("idle");
-			}
-			dst->blit_animation(field.rendertarget_pixel, scale, a, tanim - FRAME_LENGTH,
-			                    field.owner->get_playercolor());
-		}
-		dst->blit_animation(
-		   field.rendertarget_pixel, scale, anim_idx, tanim, field.owner->get_playercolor(), percent);
 	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		uint32_t pic;
-		try {
-			pic = building->get_animation("unoccupied");
-		} catch (Widelands::MapObjectDescr::AnimationNonexistent&) {
-			pic = building->get_animation("idle");
-		}
-		dst->blit_animation(field.rendertarget_pixel, scale, pic, 0, field.owner->get_playercolor());
+		dst->blit_animation(field.rendertarget_pixel, scale, building->get_unoccupied_animation(), 0,
+		                    field.owner->get_playercolor());
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
 		dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(), 0,
@@ -205,7 +163,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()) {
 	add_toolbar_button(
-	   "wui/menus/menu_options_menu", "options_menu", _("Main Menu"), &options_, true);
+	   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
 	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
 
 	add_toolbar_button(
@@ -221,7 +179,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	minimap_registry().open_window = [this] { toggle_minimap(); };
 
 	toggle_buildhelp_ = add_toolbar_button(
-	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"));
+	   "wui/menus/menu_toggle_buildhelp", "buildhelp", _("Show building spaces (on/off)"));
 	toggle_buildhelp_->sigclicked.connect(boost::bind(&InteractiveBase::toggle_buildhelp, this));
 	reset_zoom_ = add_toolbar_button("wui/menus/menu_reset_zoom", "reset_zoom", _("Reset zoom"));
 	reset_zoom_->sigclicked.connect([this] {
@@ -247,7 +205,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
 	   "wui/menus/menu_toggle_oldmessage_menu", "messages", _("Messages"), &message_menu_, true);
 	message_menu_.open_window = [this] { new GameMessageMenu(*this, message_menu_); };
 
-	add_toolbar_button("ui_basic/menu_help", "help", _("Tribal Encyclopedia"), &encyclopedia_, true);
+	add_toolbar_button("ui_basic/menu_help", "help", _("Help"), &encyclopedia_, true);
 	encyclopedia_.open_window = [this] {
 		new TribalEncyclopedia(*this, encyclopedia_, &game().lua());
 	};
@@ -344,42 +302,39 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->brightness = adjusted_field_brightness(f->fcoords, gametime, player_field);
 			f->roads = player_field.roads;
 			f->vision = player_field.vision;
-			if (player_field.vision == 0) {
-				// If the player cannot see the field, no need to do any more work.
-				continue;
-			} else if (player_field.vision == 1) {
-				f->owner = player_field.owner != 0 ? &gbase.player(player_field.owner) : nullptr;
+			if (player_field.vision == 1) {
+				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
 			}
 		}
 
-		// Add road building overlays if applicable.
-		{
-			const auto it = road_building.road_previews.find(f->fcoords);
-			if (it != road_building.road_previews.end()) {
-				f->roads |= it->second;
-			}
-		}
-
 		const float scale = 1.f / given_map_view->view().zoom;
-		draw_border_markers(*f, scale, *fields_to_draw, dst);
-
-		// Render stuff that belongs to the node.
-		if (f->vision > 1) {
-			const auto text_to_draw = get_text_to_draw();
-			draw_immovables_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
-			draw_bobs_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
-		} else if (f->vision == 1) {
-			// We never show census or statistics for objects in the fog.
-			draw_immovables_for_formerly_visible_field(*f, player_field, scale, dst);
-		}
-
 		const auto blit_overlay = [dst, f, scale](const Image* pic, const Vector2i& hotspot) {
 			dst->blitrect_scale(Rectf(f->rendertarget_pixel - hotspot.cast<float>() * scale,
 			                          pic->width() * scale, pic->height() * scale),
 			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                    BlendMode::UseAlpha);
 		};
+
+		// Add road building overlays if applicable.
+		if (f->vision > 0) {
+			const auto it = road_building.road_previews.find(f->fcoords);
+			if (it != road_building.road_previews.end()) {
+				f->roads |= it->second;
+			}
+
+			draw_border_markers(*f, scale, *fields_to_draw, dst);
+
+			// Render stuff that belongs to the node.
+			if (f->vision > 1) {
+				const auto text_to_draw = get_text_to_draw();
+				draw_immovables_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
+				draw_bobs_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
+			} else if (f->vision == 1) {
+				// We never show census or statistics for objects in the fog.
+				draw_immovables_for_formerly_visible_field(*f, player_field, scale, dst);
+			}
+		}
 
 		// Draw work area previews.
 		{
@@ -389,25 +344,28 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 		}
 
-		// Draw build help.
-		if (buildhelp()) {
-			const auto* overlay = get_buildhelp_overlay(plr.get_buildcaps(f->fcoords));
-			if (overlay != nullptr) {
-				blit_overlay(overlay->pic, overlay->hotspot);
+		if (f->vision > 0) {
+			// Draw build help.
+			if (buildhelp()) {
+				const auto* overlay = get_buildhelp_overlay(plr.get_buildcaps(f->fcoords));
+				if (overlay != nullptr) {
+					blit_overlay(overlay->pic, overlay->hotspot);
+				}
 			}
-		}
 
-		// Blit the selection marker.
-		if (f->fcoords == get_sel_pos().node) {
-			const Image* pic = get_sel_picture();
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
-		}
+			// Blit the selection marker.
+			if (f->fcoords == get_sel_pos().node) {
+				const Image* pic = get_sel_picture();
+				blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			}
 
-		// Draw road building slopes.
-		{
-			const auto it = road_building.steepness_indicators.find(f->fcoords);
-			if (it != road_building.steepness_indicators.end()) {
-				blit_overlay(it->second, Vector2i(it->second->width() / 2, it->second->height() / 2));
+			// Draw road building slopes.
+			{
+				const auto it = road_building.steepness_indicators.find(f->fcoords);
+				if (it != road_building.steepness_indicators.end()) {
+					blit_overlay(
+					   it->second, Vector2i(it->second->width() / 2, it->second->height() / 2));
+				}
 			}
 		}
 	}
@@ -499,6 +457,16 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				new BuildingStatisticsMenu(*this, main_windows_.building_stats);
 			} else {
 				main_windows_.building_stats.toggle();
+			}
+			return true;
+
+		case SDLK_e:
+			if (game().map().allows_seafaring()) {
+				if (main_windows_.seafaring_stats.window == nullptr) {
+					new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
+				} else {
+					main_windows_.seafaring_stats.toggle();
+				}
 			}
 			return true;
 

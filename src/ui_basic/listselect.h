@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ struct BaseListselect : public Panel {
 	               uint32_t h,
 	               const Image* button_background,
 	               ListselectLayout selection_mode = ListselectLayout::kPlain);
-	~BaseListselect();
+	~BaseListselect() override;
 
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> clicked;
@@ -61,11 +61,17 @@ struct BaseListselect : public Panel {
 
 	void clear();
 	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	/**
+	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
+	 */
 	void add(const std::string& name,
 	         uint32_t value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string());
+	/**
+	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
+	 */
 	void add_front(const std::string& name,
 	               const Image* pic = nullptr,
 	               const bool select_this = false,
