@@ -61,6 +61,7 @@ private:
 struct Road : public PlayerImmovable {
 	friend class MapRoaddataPacket;  // For saving
 	friend class MapRoadPacket;      // For init()
+	friend class Flag; // for wallet stuff
 
 	const RoadDescr& descr() const;
 

@@ -130,6 +130,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool ack_pickup(Game&, Flag& destflag);
 	bool cancel_pickup(Game&, Flag& destflag);
 	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
+	void propagate_promoted_road(Road* promoted_road);
 	Wares get_wares();
 	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
 

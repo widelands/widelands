@@ -611,6 +611,8 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 		// Promote the road
 		wallet_ -= kAnimalPrice;
 		type_ = RoadType::kBusy;
+		flags_[0]->propagate_promoted_road(this);
+		flags_[1]->propagate_promoted_road(this);
 		mark_map(game);
 		for (CarrierSlot& slot : carrier_slots_) {
 			if (!slot.carrier.get(game) && !slot.carrier_request && slot.carrier_type != 1) {
