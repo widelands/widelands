@@ -73,7 +73,7 @@ obj_supply_murilius = {
       li(_"20 × Iron") ..
       li(_"30 × Gold Ore") ..
       li(_"10 × Gold") ..
-      -- TRANSLATORS: Continues from "Decide whether you want to work with Murilius against the Barbarians. If so, fill his warehouse with these wares: [list of weares]"
+      -- TRANSLATORS: Continues from "Decide whether you want to work with Murilius against the Barbarians. If so, fill his warehouse with these wares: [list of wares]"
       p(_([[Otherwise, just destroy the warehouse and risk having Murilius as an enemy. He forbade you to expand your territory until the wares have been handed over.]]))
    ),
 }
@@ -325,7 +325,7 @@ defeat_both = {
 }
 supply_murilius_thanks = {
    title =_ "The Empire is Grateful",
-   -- TRANSLATORS: "Greetings, friend of the Empire!". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
+   -- TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
    body=murilius(_"Salvete amici Imperii!",
       -- TRANSLATORS: Murilius – Supplied Murilius
       _([[Strangers! I see you have kept your word. The Empire rewards its friends, therefore I shall reward you with the friendship of the Empire!]])
@@ -336,7 +336,7 @@ supply_murilius_thanks = {
 }
 defeat_murilius_1 = {
    title =_ "The Reward For Your Service",
-   -- TRANSLATORS: "Friend of the Empire". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
+   -- TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
    body=murilius(_"Amici Imperii",
       -- TRANSLATORS: Murilius – defeat Murilius 1
       _([[You have done well, strangers! As I did tell you earlier, you will be rewarded with the friendship of the Empire!]])
