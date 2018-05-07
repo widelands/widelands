@@ -73,7 +73,8 @@ obj_supply_murilius = {
       li(_"20 × Iron") ..
       li(_"30 × Gold Ore") ..
       li(_"10 × Gold") ..
-      p(_([[Or just destroy the warehouse and risk having Murilius as an enemy. He forbade you to expand your territory until the wares have been handed over.]]))
+      -- TRANSLATORS: Continues from "Decide whether you want to work with Murilius against the Barbarians. If so, fill his warehouse with these wares: [list of wares]"
+      p(_([[Otherwise, just destroy the warehouse and risk having Murilius as an enemy. He forbade you to expand your territory until the wares have been handed over.]]))
    ),
 }
 obj_defeat_barbarians = {
@@ -218,7 +219,7 @@ aqua_farm_4 = {
       _([[You are right – we should build more berry farms, collector’s houses and taverns as well as a drinking hall, and advanced bakeries and breweries.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Aqua Farms 4
-      _([[But meanwhile, we can start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and armor. I propose building armor smithies, a barracks, a training arena and a tailor’s shop now.]])),
+      _([[However, we can already start focusing on recruiting and training soldiers. We can now afford to use metal for weapons, helmets and garments. I propose building armor smithies, a barracks, a training arena and a tailor’s shop now.]])),
 }
 
 supply_murilius_1 = {
@@ -241,7 +242,7 @@ supply_murilius_3 = {
       _([[Do they not even speak the noble language of the Empire?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Murilius – Supply Murilius 3
-      _([[Strangers! I, Murilius, Proconsul of the Northern Lands, a province of the Empire, demand to know who you are and what your business you have in these lands!]])),
+      _([[Strangers! I, Murilius, Proconsul of the Northern Lands, a province of the Empire, demand to know who you are and what business you have in these lands!]])),
 }
 supply_murilius_4 = {
    title =_ "We Are Not Alone",
@@ -324,8 +325,8 @@ defeat_both = {
 }
 supply_murilius_thanks = {
    title =_ "The Empire is Grateful",
-   -- TRANSLATORS: "Greetings, friend of the Empire!". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
-   body=murilius(_"Salve amicus Imperii!",
+   -- TRANSLATORS: "Greetings, friends of the Empire!". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
+   body=murilius(_"Salvete amici Imperii!",
       -- TRANSLATORS: Murilius – Supplied Murilius
       _([[Strangers! I see you have kept your word. The Empire rewards its friends, therefore I shall reward you with the friendship of the Empire!]])
       .. paragraphdivider() ..
@@ -335,8 +336,8 @@ supply_murilius_thanks = {
 }
 defeat_murilius_1 = {
    title =_ "The Reward For Your Service",
-   -- TRANSLATORS: "Friend of the Empire". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
-   body=murilius(_"Amicus Imperii",
+   -- TRANSLATORS: "Friends of the Empire". DO NOT TRANSLATE. Reebaud doesn’t understand Latin. You can transliterate into non-Latin scripts though
+   body=murilius(_"Amici Imperii",
       -- TRANSLATORS: Murilius – defeat Murilius 1
       _([[You have done well, strangers! As I did tell you earlier, you will be rewarded with the friendship of the Empire!]])
       .. paragraphdivider() ..
