@@ -46,7 +46,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              UI::Align::kLeft,
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
      editbox(this, 0, h - 20, w, 20, 2, style),
-     chat_message_counter(std::numeric_limits<uint32_t>::max()) {
+     chat_message_counter(0) {
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
 	editbox.activate_history(true);
@@ -66,31 +66,27 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 void GameChatPanel::recalculate() {
 	const std::vector<ChatMessage> msgs = chat_.get_messages();
 
+	size_t msgs_size = msgs.size();
 	std::string str = "<rt>";
-	for (uint32_t i = 0; i < msgs.size(); ++i) {
+	for (uint32_t i = 0; i < msgs_size; ++i) {
 		str += format_as_richtext(msgs[i]);
 	}
 	str += "</rt>";
 
 	chatbox.set_text(str);
 
-	// If there are new messages, play a sound
-	if (0 < msgs.size() && msgs.size() != chat_message_counter) {
-		// computer generated ones are ignored
-		// Note: if many messages arrive simultaneously,
-		// the latest is a system message and some others
-		// are not, then this act wrong!
-		if (!msgs.back().sender.empty() && !chat_.sound_off()) {
-			// The latest message is not a system message
-			if (std::string::npos == msgs.back().sender.find("(IRC)") &&
-			    chat_message_counter < msgs.size()) {
-				// The latest message was not relayed from IRC.
-				// The above built-in string constant should match
-				// that of the IRC bridge.
+	if (chat_message_counter < msgs_size) {  // are there new messages?
+		if (!chat_.sound_off()) {             // play a sound, if needed
+			for (size_t i = chat_message_counter; i < msgs_size; ++i) {
+				if (msgs[i].sender.empty()) {
+					continue;  // System message. Don't play a sound
+				}
+				// Got a message that is no system message. Beep
 				play_new_chat_message();
+				break;
 			}
 		}
-		chat_message_counter = msgs.size();
+		chat_message_counter = msgs_size;
 	}
 }
 

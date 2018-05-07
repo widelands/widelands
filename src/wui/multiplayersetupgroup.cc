@@ -224,25 +224,31 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		add(&team_dropdown_);
 		add_space(0);
 
-		subscriber_ = Notifications::subscribe<NoteGameSettings>([this](
-		   const NoteGameSettings& note) {
-			const std::vector<PlayerSettings>& players = settings_->settings().players;
-			switch (note.action) {
-			case NoteGameSettings::Action::kMap:
-				// We don't care about map updates, since we receive enough notifications for the
-				// slots.
-				break;
-			default:
-				if (players.empty()) {
-					// No map/savegame yet
-					return;
-				}
-				if (id_ == note.position ||
-				    (id_ < players.size() && players.at(id_).state == PlayerSettings::State::kShared)) {
-					update();
-				}
-			}
-		});
+		subscriber_ =
+		   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
+			   if (settings_->settings().players.empty()) {
+				   // No map/savegame yet
+				   return;
+			   }
+
+			   switch (note.action) {
+			   case NoteGameSettings::Action::kMap:
+				   // We don't care about map updates, since we receive enough notifications for the
+				   // slots.
+				   break;
+			   case NoteGameSettings::Action::kUser:
+				   // We might have moved away from a slot, so we need to update the previous slot too.
+				   // Since we can't track the slots here, we just update everything.
+				   update();
+				   break;
+			   default:
+				   if (id_ == note.position || (id_ < settings_->settings().players.size() &&
+				                                settings_->settings().players.at(id_).state ==
+				                                   PlayerSettings::State::kShared)) {
+					   update();
+				   }
+			   }
+			});
 
 		// Init dropdowns
 		update();

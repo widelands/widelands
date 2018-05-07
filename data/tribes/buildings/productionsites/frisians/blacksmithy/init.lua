@@ -211,8 +211,8 @@ tribes:new_productionsite_type {
          },
       },
       produce_12 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging needles because ...
-         descname = _"forging needles",
+         -- TRANSLATORS: Completed/Skipped/Did not start making needles because ...
+         descname = _"making needles",
          actions = {
             "return=skipped unless economy needs needles",
             "sleep=32000",

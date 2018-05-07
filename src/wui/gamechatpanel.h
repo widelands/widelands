@@ -64,7 +64,7 @@ private:
 	ChatProvider& chat_;
 	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
-	uint32_t chat_message_counter;
+	size_t chat_message_counter;
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 };
 

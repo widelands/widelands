@@ -236,14 +236,23 @@ static char const* const status_picture_filename[] = {"images/wui/messages/messa
                                                       "images/wui/messages/message_archived.png"};
 
 void GameMessageMenu::show_new_message(MessageId const id, const Widelands::Message& message) {
+	// Do not disturb the user while multiselecting.
+	if (list->selections().size() > 1) {
+		return;
+	}
+
 	assert(iplayer().player().messages()[id] == &message);
 	assert(!list->find(id.value()));
 	Message::Status const status = message.status();
-	if ((mode == Archive) != (status == Message::Status::kArchived))
+	if ((mode == Archive) != (status == Message::Status::kArchived)) {
 		toggle_mode();
-	UI::Table<uintptr_t>::EntryRecord& te = list->add(id.value(), true);
+	}
+	UI::Table<uintptr_t>::EntryRecord& te = list->add(id.value());
 	update_record(te, message);
 	list->sort();
+	list->clear_selections();
+	list->select(0);
+	list->scroll_to_top();
 }
 
 void GameMessageMenu::think() {
@@ -324,7 +333,9 @@ void GameMessageMenu::selected(uint32_t const t) {
 			try {
 				message_body.force_new_renderer();
 				message_body.set_text(as_message(message->heading(), message->body()));
-			} catch (const std::exception&) {
+			} catch (const std::exception& e) {
+				log("Game Message Menu: falling back to old font renderer:\n%s\n%s\n",
+				    message->body().c_str(), e.what());
 				message_body.force_new_renderer(false);
 				message_body.set_text(
 				   (boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"

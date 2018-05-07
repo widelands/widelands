@@ -284,8 +284,8 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
 	toolbar_.add(button);
 	if (window) {
 		window->opened.connect(
-		   [this, button] { button->set_perm_pressed(true); });
-		window->closed.connect([this, button] { button->set_perm_pressed(false); });
+		   [button] { button->set_perm_pressed(true); });
+		window->closed.connect([button] { button->set_perm_pressed(false); });
 
 		if (bind_default_toggle) {
 			button->sigclicked.connect(
