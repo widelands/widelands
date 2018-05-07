@@ -510,27 +510,32 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
  * Accelerate potential promotion of roads adjacent to newly promoted road.
  */
 void Flag::propagate_promoted_road(Road* const promoted_road) {
-   // abort if flag has a building attached to it
-   if (building_){
-	   return;
-   }
-  // calculate the sum of the involved wallets
-  int32_t sum = 0;
-  for (int8_t i = 0; i < 6; ++i) {
-    Road* const road = roads_[i];
-    if (!road || road == promoted_road) continue;
-    // abort if another promoted road is found
-    if (road->type_ == RoadType::kBusy) return;
-    sum += road->wallet_;
-  }
+	// abort if flag has a building attached to it
+	if (building_) {
+		return;
+	}
+	// calculate the sum of the involved wallets
+	int32_t sum = 0;
+	for (int8_t i = 0; i < 6; ++i) {
+		Road* const road = roads_[i];
+		if (!road || road == promoted_road)
+			continue;
+		// abort if another promoted road is found
+		if (road->type_ == RoadType::kBusy)
+			return;
+		sum += road->wallet_;
+	}
 
-   assert(sum > 0);
-  // distribute animal price proportionally
-  for (int8_t i = 0; i < 6; ++i) {
-    Road* const road = roads_[i];
-    if (!road || road == promoted_road) continue;
-    road->wallet_ += 600 * road->wallet_ / sum; // NOCOM 600 is animal_price
-  }
+	if (sum == 0) {
+		return;
+	}
+	// distribute animal price proportionally
+	for (int8_t i = 0; i < 6; ++i) {
+		Road* const road = roads_[i];
+		if (!road || road == promoted_road)
+			continue;
+		road->wallet_ += 600 * road->wallet_ / sum;  // NOCOM 600 is animal_price
+	}
 }
 
 /**

@@ -515,6 +515,7 @@ void Road::postsplit(Game& game, Flag& flag) {
 
 	// Initialize the new road
 	newroad.init(game);
+	newroad.wallet_ = wallet_;
 
 	// Actually reassign workers after the new road has initialized,
 	// so that the reassignment is safe
