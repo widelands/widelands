@@ -263,7 +263,7 @@ public:
 
 	/**
 	 * Is called right before the object will be removed from
-	 * the game. No conncetion is handled in this class.
+	 * the game. No connection is handled in this class.
 	 *
 	 * param serial : the object serial (cannot use param comment as this is a callback)
 	 */
