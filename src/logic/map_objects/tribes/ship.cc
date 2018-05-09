@@ -1188,12 +1188,9 @@ void Ship::Loader::load_finish() {
 	// The economy can sometimes be nullptr (e.g. when there are no ports).
 	if (economy_serial_ != kInvalidSerial) {
 		ship.economy_ = ship.get_owner()->get_economy(economy_serial_);
-		log("NOCOM Want economy %d for ship\n", economy_serial_);
 		if (!ship.economy_) {
-			log("NOCOM Creating economy %d for ship\n", economy_serial_);
 			ship.economy_ = ship.get_owner()->create_economy(economy_serial_);
 		}
-		log("NOCOM Ship has economy %d\n", ship.economy_->serial());
 	}
 
 	// restore the state the ship is in
@@ -1206,7 +1203,6 @@ void Ship::Loader::load_finish() {
 	if (expedition_) {
 		ship.expedition_.swap(expedition_);
 		ship.expedition_->economy = ship.economy_;
-		log("NOCOM Ship expedition has economy %d\n", ship.expedition_->economy->serial());
 	} else
 		assert(ship_state_ == ShipStates::kTransport);
 
@@ -1228,7 +1224,6 @@ MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, File
 		if (packet_version == kCurrentPacketVersion) {
 			try {
 				const ShipDescr* descr = nullptr;
-				// NOCOM Need to fix test suite? Packet < 5 is not available.
 				// Removing this will break the test suite
 				std::string name = fr.c_string();
 				const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);

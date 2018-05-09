@@ -799,7 +799,6 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
  * Economy stuff below
  */
 Economy* Player::create_economy() {
-	log("NOCOM Player %d: creating economy without serial\n", player_number_);
 	std::unique_ptr<Economy> eco(new Economy(*this));
 	const Serial serial = eco->serial();
 
@@ -812,7 +811,6 @@ Economy* Player::create_economy() {
 }
 
 Economy* Player::create_economy(Serial serial) {
-	log("NOCOM Player %d: creating economy from serial %d\n", player_number_, serial);
 	std::unique_ptr<Economy> eco(new Economy(*this, serial));
 
 	assert(economies_.count(serial) == 0);
@@ -824,7 +822,6 @@ Economy* Player::create_economy(Serial serial) {
 }
 
 void Player::remove_economy(Serial serial) {
-	log("NOCOM removing economy %d - we have %lu economies\n", serial, economies_.size());
 	assert(has_economy(serial));
 	economies_.erase(economies_.find(serial));
 	assert(!has_economy(serial));

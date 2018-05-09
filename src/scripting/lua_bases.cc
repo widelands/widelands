@@ -572,14 +572,11 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	Building* b = nullptr;
 	if (force) {
 		if (constructionsite) {
-			log("NOCOM force construction site: %s\n", name.c_str());
 			b = &get(L, egbase).force_csite(c->coords(), building_index, former_buildings);
 		} else {
-			log("NOCOM force building: %s\n", name.c_str());
 			b = &get(L, egbase).force_building(c->coords(), former_buildings);
 		}
 	} else {
-		log("NOCOM place building: %s\n", name.c_str());
 		b = get(L, egbase).build(c->coords(), building_index, constructionsite, former_buildings);
 	}
 	if (!b)

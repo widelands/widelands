@@ -99,9 +99,7 @@ void MapFlagPacket::read(FileSystem& fs,
 					// Get economy from serial
 					Player* player = egbase.get_player(owner);
 					Economy* economy = player->get_economy(economy_serial);
-					log("NOCOM Want economy %d for flag\n", economy_serial);
 					if (!economy) {
-						log("NOCOM Creating economy %d for flag\n", economy_serial);
 						economy = player->create_economy(economy_serial);
 					}
 
@@ -112,8 +110,6 @@ void MapFlagPacket::read(FileSystem& fs,
 					//  object later again, if it is not wanted.
 					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), player, fc, economy);
 					mol.register_object<Flag>(serial, *flag);
-
-					log("NOCOM Flag has economy %d\n", flag->economy().serial());
 
 				} catch (const WException& e) {
 					throw GameDataError(
