@@ -21,8 +21,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
 #include "io/fileread.h"
@@ -55,8 +53,7 @@ void CmdLuaCoroutine::execute(Game& game) {
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			std::unique_ptr<Message> msg(new Widelands::Message(
 			   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
-			   "images/ui_basic/menu_help.png", "Lua Coroutine Failed",
-			   (boost::format("<rt><p font-size=12>%s</p></rt>") % e.what()).str()));
+			   "images/ui_basic/menu_help.png", "Lua Coroutine Failed", e.what()));
 			game.get_player(i)->add_message(game, std::move(msg), true);
 		}
 		game.game_controller()->set_desired_speed(0);

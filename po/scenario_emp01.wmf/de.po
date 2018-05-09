@@ -2,7 +2,8 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# Elisabeth Jäger, 2016
+# Wuzzy <almikes@aol.com>, 2018
+# Elisabeth Jäger, 2016,2018
 # wl-zocker, 2014
 # German Translation <widelands-public@lists.sourceforge.net>, 2007
 # Jürgen Eberlein <juergen.eberlein@web.de>, 2015
@@ -12,9 +13,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-15 09:25+0000\n"
-"PO-Revision-Date: 2018-02-21 08:50+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-24 09:30+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -293,7 +294,7 @@ msgid ""
 "Perhaps it would be a good idea to wait until he has cleared enough space "
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
-msgstr "Ich bekam die Nachricht, dass unser erster Holzfäller seine Arbeit aufgenommen hat. Vielleicht wäre es eine gute Idee, zu warten, bis er genug Platz für zwei weitere Holzfällerhäuser geschaffen hat, sodass wir schneller genug Stämme haben."
+msgstr "Ich bekam die Nachricht, dass unser erster Holzfäller seine Arbeit aufgenommen hat. Vielleicht wäre es eine gute Idee, zu warten, bis er genug Platz für zwei weitere Holzfällerhäuser geschaffen hat, damit wir noch schneller Bäume fällen können."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:173

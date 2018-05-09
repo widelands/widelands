@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-15 15:38+0000\n"
+"POT-Creation-Date: 2018-05-07 10:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -66,7 +66,7 @@ msgstr ""
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1067
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1053
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -107,7 +107,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
 #: ../../src/ai/computer_player.cc:43
-#: ../../src/wui/multiplayersetupgroup.cc:347
+#: ../../src/wui/multiplayersetupgroup.cc:353
 msgid "No AI"
 msgstr ""
 
@@ -227,7 +227,7 @@ msgid "Loading tribes"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:165
+#: ../../src/wui/interactive_player.cc:166
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Main menu"
 msgstr ""
@@ -247,7 +247,7 @@ msgid "Players"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:181
+#: ../../src/wui/interactive_player.cc:182
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show building spaces (on/off)"
 msgstr ""
@@ -265,13 +265,13 @@ msgid "Show resources (on/off)"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:177
+#: ../../src/wui/interactive_player.cc:178
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:183
+#: ../../src/wui/interactive_player.cc:184
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr ""
@@ -285,7 +285,7 @@ msgid "Redo"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:343 ../../src/wui/interactive_player.cc:207
+#: ../../src/wui/buildingwindow.cc:343 ../../src/wui/interactive_player.cc:208
 msgid "Help"
 msgstr ""
 
@@ -985,7 +985,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:77
 #: ../../src/ui_basic/dropdown.cc:227 ../../src/ui_basic/dropdown.cc:292
 #: ../../src/ui_basic/dropdown.cc:300
-#: ../../src/wui/multiplayersetupgroup.cc:337
+#: ../../src/wui/multiplayersetupgroup.cc:343
 msgid "%1%: %2%"
 msgstr ""
 
@@ -1021,7 +1021,7 @@ msgid "Loading map…"
 msgstr ""
 
 #: ../../src/logic/game.cc:339 ../../src/logic/game.cc:371
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1391
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1407
 msgid "Loading…"
 msgstr ""
 
@@ -1029,11 +1029,11 @@ msgstr ""
 msgid "Creating player infrastructure"
 msgstr ""
 
-#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:221
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:222
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1042,11 +1042,11 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:786
+#: ../../src/logic/game.cc:789
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:788
+#: ../../src/logic/game.cc:791
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -1275,125 +1275,138 @@ msgstr ""
 msgid "No soldier found for this training level!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:271
+#: ../../src/logic/map_objects/tribes/productionsite.cc:279
 msgid "(not occupied)"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:278
+#: ../../src/logic/map_objects/tribes/productionsite.cc:286
 msgid "Worker missing"
 msgid_plural "Workers missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:285
+#: ../../src/logic/map_objects/tribes/productionsite.cc:293
 msgid "(stopped)"
 msgstr ""
 
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
-#: ../../src/logic/map_objects/tribes/productionsite.cc:384
+#: ../../src/logic/map_objects/tribes/productionsite.cc:392
 #: ../../src/wui/building_statistics_menu.cc:686
 #, c-format
 msgid "%i%%"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:945
+#: ../../src/logic/map_objects/tribes/productionsite.cc:953
 msgid "Can’t find any more resources!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:424
 msgid "Port Space"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:424
 msgid "Port Space Found"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:425
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:543
 msgid "Island Circumnavigated"
 msgstr ""
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:543
 msgctxt "ship"
 msgid "Waiting"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:544
 msgid "An expedition ship sailed around its island without any events."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:606
 msgid "Coast Reached"
 msgstr ""
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:606
 msgid "Land Ahoy!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:607
 msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "New port construction site is gone"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "Port Lost!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr ""
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgctxt "ship"
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgid "Expedition Ready"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/ship.cc:848
+#: ../../src/logic/map_objects/tribes/ship.cc:855
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
-#. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:984
+#. * TRANSLATORS: This is a ship state. The ship is currently transporting wares.
+#: ../../src/logic/map_objects/tribes/ship.cc:994
+#: ../../src/wui/seafaring_statistics_menu.cc:222
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr ""
 
+#. * TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
+#. * nothing to do.
+#: ../../src/logic/map_objects/tribes/ship.cc:998
+#: ../../src/wui/seafaring_statistics_menu.cc:220
+msgctxt "ship_state"
+msgid "Idle"
+msgstr ""
+
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:988
+#: ../../src/logic/map_objects/tribes/ship.cc:1003
+#: ../../src/wui/seafaring_statistics_menu.cc:224
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:992
+#: ../../src/logic/map_objects/tribes/ship.cc:1007
+#: ../../src/wui/seafaring_statistics_menu.cc:226
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:996
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
+#: ../../src/wui/seafaring_statistics_menu.cc:228
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr ""
 
 #. * TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1001
+#: ../../src/logic/map_objects/tribes/ship.cc:1016
+#: ../../src/wui/seafaring_statistics_menu.cc:230
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr ""
@@ -1415,30 +1428,30 @@ msgstr ""
 msgid "A new warehouse was added to your economy."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:116
+#: ../../src/logic/map_objects/tribes/worker.cc:117
 #, c-format
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:217
+#: ../../src/logic/map_objects/tribes/worker.cc:218
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:980
+#: ../../src/logic/map_objects/tribes/worker.cc:984
 msgid "A geologist found resources."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1867
+#: ../../src/logic/map_objects/tribes/worker.cc:1871
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1873
+#: ../../src/logic/map_objects/tribes/worker.cc:1877
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1446,7 +1459,7 @@ msgid_plural "Workers"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1874
+#: ../../src/logic/map_objects/tribes/worker.cc:1878
 msgid "Worker got lost!"
 msgstr ""
 
@@ -1477,6 +1490,12 @@ msgstr ""
 
 #: ../../src/logic/objective.h:38
 msgid "This objective has no description."
+msgstr ""
+
+#: ../../src/logic/player.cc:1323
+#, c-format
+msgctxt "shipname"
+msgid "Ship %d"
 msgstr ""
 
 #: ../../src/logic/replay_game_controller.cc:97
@@ -1517,7 +1536,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1283
+#: ../../src/wlapplication.cc:1299
 msgid "Preparing game"
 msgstr ""
 
@@ -1683,122 +1702,118 @@ msgstr ""
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:215
+#: ../../src/network/internet_gaming.cc:213
 msgid "Successfully reconnected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:289
+#: ../../src/network/internet_gaming.cc:287
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:449
+#: ../../src/network/internet_gaming.cc:373
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:395
 msgid "Mixed up"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:395
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:486
+#: ../../src/network/internet_gaming.cc:410
 msgid "Unexpected packet"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:487
+#: ../../src/network/internet_gaming.cc:411
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:499
+#: ../../src/network/internet_gaming.cc:423
 #, c-format
 msgid "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:510
+#: ../../src/network/internet_gaming.cc:434
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/network/internet_gaming.cc:534
+#: ../../src/network/internet_gaming.cc:458
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:534
+#: ../../src/network/internet_gaming.cc:458
 msgid "Invalid message type"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:572
+#: ../../src/network/internet_gaming.cc:496
 #, c-format
 msgid "The game %s is now available"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:582
+#: ../../src/network/internet_gaming.cc:506
 #, c-format
 msgid "The game %s has been closed"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:629
+#: ../../src/network/internet_gaming.cc:552
 #, c-format
 msgid "%s joined the lobby"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:636
+#: ../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "%s left the lobby"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:691
+#: ../../src/network/internet_gaming.cc:614
 msgid "Chat message could not be sent."
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:705
+#: ../../src/network/internet_gaming.cc:628
 #, c-format
 msgid "ERROR: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:638
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:841
+#: ../../src/network/internet_gaming.cc:764
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:860
-#: ../../src/network/internet_gaming.cc:867
+#: ../../src/network/internet_gaming.cc:783
+#: ../../src/network/internet_gaming.cc:790
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:874
-msgid "Private messages to IRC users are not supported."
-msgstr ""
-
-#: ../../src/network/internet_gaming.cc:951
+#: ../../src/network/internet_gaming.cc:866
 msgid "Conversion error"
 msgstr ""
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:954
+#: ../../src/network/internet_gaming.cc:869
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:971
+#: ../../src/network/internet_gaming.cc:886
 msgid "unknown"
 msgstr ""
 
@@ -2118,7 +2133,7 @@ msgstr[1] ""
 msgid "About Widelands"
 msgstr ""
 
-#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:126
+#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:80
 msgid "Close"
 msgstr ""
 
@@ -2276,32 +2291,32 @@ msgstr ""
 msgid "Help: %s"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:52
+#: ../../src/ui_fsmenu/internet_lobby.cc:62
 msgid "Metaserver Lobby"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:53
+#: ../../src/ui_fsmenu/internet_lobby.cc:63
 msgid "Clients online:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:54
+#: ../../src/ui_fsmenu/internet_lobby.cc:64
 msgid "List of games:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:55
+#: ../../src/ui_fsmenu/internet_lobby.cc:65
 msgid "Name of your server:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:65
+#: ../../src/ui_fsmenu/internet_lobby.cc:75
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Join this game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:73
+#: ../../src/ui_fsmenu/internet_lobby.cc:83
 msgid "Open a new game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:81
+#: ../../src/ui_fsmenu/internet_lobby.cc:91
 #: ../../src/ui_fsmenu/launch_game.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:37
 #: ../../src/ui_fsmenu/multiplayer.cc:55 ../../src/ui_fsmenu/netsetup_lan.cc:70
@@ -2309,50 +2324,50 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:130
+#: ../../src/ui_fsmenu/internet_lobby.cc:140
 msgid "User Status"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:131
+#: ../../src/ui_fsmenu/internet_lobby.cc:141
 msgid "Registered"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:132
+#: ../../src/ui_fsmenu/internet_lobby.cc:142
 msgid "Administrator"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:133
+#: ../../src/ui_fsmenu/internet_lobby.cc:143
 msgid "Unregistered"
 msgstr ""
 
 #. * TRANSLATORS: Player Name
-#: ../../src/ui_fsmenu/internet_lobby.cc:137
+#: ../../src/ui_fsmenu/internet_lobby.cc:147
 msgctxt "player"
 msgid "Name"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:138
+#: ../../src/ui_fsmenu/internet_lobby.cc:148
 msgid "Version"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:140 ../../src/ui_fsmenu/options.cc:234
+#: ../../src/ui_fsmenu/internet_lobby.cc:150 ../../src/ui_fsmenu/options.cc:234
 msgid "Game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:374
+#: ../../src/ui_fsmenu/internet_lobby.cc:376
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr ""
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:377
+#: ../../src/ui_fsmenu/internet_lobby.cc:379
 msgid "Connection Timed Out"
 msgstr ""
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:412
+#: ../../src/ui_fsmenu/internet_lobby.cc:414
 msgctxt "server_name"
 msgid "unnamed"
 msgstr ""
@@ -2367,7 +2382,7 @@ msgstr ""
 
 #. * TRANSLATORS: This is a map tag
 #: ../../src/ui_fsmenu/launch_game.cc:104 ../../src/wui/map_tags.cc:36
-#: ../../src/wui/multiplayersetupgroup.cc:474
+#: ../../src/wui/multiplayersetupgroup.cc:480
 msgid "Scenario"
 msgstr ""
 
@@ -2376,7 +2391,7 @@ msgid "Win condition is set through the scenario"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_game.cc:110 ../../src/ui_fsmenu/launch_mpg.cc:72
-#: ../../src/wui/multiplayersetupgroup.cc:477
+#: ../../src/wui/multiplayersetupgroup.cc:483
 msgid "Saved Game"
 msgstr ""
 
@@ -2674,14 +2689,14 @@ msgid "State"
 msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:191
-#: ../../src/wui/multiplayersetupgroup.cc:329
+#: ../../src/wui/multiplayersetupgroup.cc:335
 #: ../../src/wui/playerdescrgroup.cc:136
 msgid "Open"
 msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:194
-#: ../../src/wui/multiplayersetupgroup.cc:324
-#: ../../src/wui/multiplayersetupgroup.cc:325
+#: ../../src/wui/multiplayersetupgroup.cc:330
+#: ../../src/wui/multiplayersetupgroup.cc:331
 msgid "Closed"
 msgstr ""
 
@@ -2736,12 +2751,12 @@ msgid "Distance for windows to snap to borders:"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:165
-#: ../../src/wui/game_options_sound_menu.cc:28
+#: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Enable music"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:166
-#: ../../src/wui/game_options_sound_menu.cc:31
+#: ../../src/wui/game_options_sound_menu.cc:32
 msgid "Enable sound effects"
 msgstr ""
 
@@ -2799,32 +2814,37 @@ msgstr ""
 msgid "Saving"
 msgstr ""
 
+#: ../../src/ui_fsmenu/options.cc:264
+#: ../../src/wui/game_options_sound_menu.cc:85
+msgid "Sound is disabled due to a problem with the sound driver"
+msgstr ""
+
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:282
+#: ../../src/ui_fsmenu/options.cc:289
 msgid "Off"
 msgstr ""
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:308 ../../src/ui_fsmenu/options.cc:317
+#: ../../src/ui_fsmenu/options.cc:315 ../../src/ui_fsmenu/options.cc:324
 msgid "%1% x %2%"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:429
 msgid "Try system language"
 msgstr ""
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:520
+#: ../../src/ui_fsmenu/options.cc:528
 #, c-format
 msgid "The translation into %s is complete."
 msgstr ""
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:523
+#: ../../src/ui_fsmenu/options.cc:531
 msgid "The translation into %1% is %2%%% complete."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:537
+#: ../../src/ui_fsmenu/options.cc:545
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr ""
@@ -2841,11 +2861,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1078
+#: ../../src/wlapplication.cc:1094
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1086
+#: ../../src/wlapplication.cc:1102
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2853,7 +2873,7 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1093
+#: ../../src/wlapplication.cc:1109
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2861,11 +2881,11 @@ msgid ""
 "It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1220
+#: ../../src/wlapplication.cc:1236
 msgid "Invalid Address"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1221
+#: ../../src/wlapplication.cc:1237
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
@@ -3155,7 +3175,7 @@ msgstr ""
 msgid "Toggle building label display"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:100
+#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:54
 msgid "Watch"
 msgstr ""
 
@@ -3183,7 +3203,7 @@ msgstr ""
 msgid "Build roads"
 msgstr ""
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:190
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:191
 #: ../../src/wui/interactive_spectator.cc:87
 msgid "Chat"
 msgstr ""
@@ -3216,7 +3236,7 @@ msgstr ""
 msgid "Save Game Error!"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:51 ../../src/wui/game_message_menu.cc:602
+#: ../../src/wui/game_message_menu.cc:51 ../../src/wui/game_message_menu.cc:613
 msgid "Messages: Inbox"
 msgstr ""
 
@@ -3239,7 +3259,7 @@ msgid "Sent"
 msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:129
-#: ../../src/wui/game_message_menu.cc:605
+#: ../../src/wui/game_message_menu.cc:616
 msgid "Show Archive"
 msgstr ""
 
@@ -3255,80 +3275,94 @@ msgid "Center main mapview on location"
 msgstr ""
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:522
 #: ../../src/wui/game_message_menu.cc:533
-#: ../../src/wui/game_message_menu.cc:538
-#: ../../src/wui/game_message_menu.cc:542
-#: ../../src/wui/game_message_menu.cc:546
-#: ../../src/wui/game_message_menu.cc:550
+#: ../../src/wui/game_message_menu.cc:544
+#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:553
+#: ../../src/wui/game_message_menu.cc:557
+#: ../../src/wui/game_message_menu.cc:561
+#: ../../src/wui/seafaring_statistics_menu.cc:101
+#: ../../src/wui/seafaring_statistics_menu.cc:132
+#: ../../src/wui/seafaring_statistics_menu.cc:509
+#: ../../src/wui/seafaring_statistics_menu.cc:518
+#: ../../src/wui/seafaring_statistics_menu.cc:522
+#: ../../src/wui/seafaring_statistics_menu.cc:527
+#: ../../src/wui/seafaring_statistics_menu.cc:531
+#: ../../src/wui/seafaring_statistics_menu.cc:536
 msgid "%1% (Hotkey: %2%)"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:524
+#: ../../src/wui/game_message_menu.cc:535
+#: ../../src/wui/seafaring_statistics_menu.cc:511
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:524
+#: ../../src/wui/game_message_menu.cc:535
 msgid "Show all messages"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:535
+#: ../../src/wui/game_message_menu.cc:546
 msgid "Show geologists' messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:536
+#: ../../src/wui/game_message_menu.cc:547
+#: ../../src/wui/seafaring_statistics_menu.cc:520
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/game_message_menu.cc:551
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/game_message_menu.cc:551
 msgid "Show economy messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:544
+#: ../../src/wui/game_message_menu.cc:555
+#: ../../src/wui/seafaring_statistics_menu.cc:529
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:544
+#: ../../src/wui/game_message_menu.cc:555
 msgid "Show seafaring messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:548
+#: ../../src/wui/game_message_menu.cc:559
+#: ../../src/wui/seafaring_statistics_menu.cc:533
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:548
+#: ../../src/wui/game_message_menu.cc:559
 msgid "Show warfare messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:552
+#: ../../src/wui/game_message_menu.cc:563
+#: ../../src/wui/seafaring_statistics_menu.cc:539
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:552
+#: ../../src/wui/game_message_menu.cc:563
 msgid "Show scenario messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:595
+#: ../../src/wui/game_message_menu.cc:606
 msgid "Messages: Archive"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:598
+#: ../../src/wui/game_message_menu.cc:609
 msgid "Show Inbox"
 msgstr ""
 
@@ -3336,7 +3370,7 @@ msgstr ""
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
 #.
-#: ../../src/wui/game_message_menu.cc:628
+#: ../../src/wui/game_message_menu.cc:639
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -3344,7 +3378,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:634
+#: ../../src/wui/game_message_menu.cc:645
 msgid "Restore selected message"
 msgstr ""
 
@@ -3352,7 +3386,7 @@ msgstr ""
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
 #.
-#: ../../src/wui/game_message_menu.cc:644
+#: ../../src/wui/game_message_menu.cc:655
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -3360,18 +3394,18 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:650
+#: ../../src/wui/game_message_menu.cc:661
 msgid "Archive selected message"
 msgstr ""
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:655
+#: ../../src/wui/game_message_menu.cc:666
 #, c-format
 msgid "Del: %s"
 msgstr ""
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:200
+#: ../../src/wui/interactive_player.cc:201
 msgid "Objectives"
 msgstr ""
 
@@ -3385,7 +3419,7 @@ msgid "Are you sure you wish to exit this game?"
 msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:77
-#: ../../src/wui/game_options_sound_menu.cc:27
+#: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
 msgstr ""
 
@@ -3399,33 +3433,38 @@ msgstr ""
 msgid "Exit Game"
 msgstr ""
 
-#: ../../src/wui/game_options_sound_menu.cc:35
+#: ../../src/wui/game_options_sound_menu.cc:36
 msgid "Music volume"
 msgstr ""
 
-#: ../../src/wui/game_options_sound_menu.cc:50
+#: ../../src/wui/game_options_sound_menu.cc:51
 msgid "Sound effects volume"
 msgstr ""
 
-#: ../../src/wui/game_statistics_menu.cc:36
+#: ../../src/wui/game_statistics_menu.cc:37
 msgid "Statistics Menu"
 msgstr ""
 
-#: ../../src/wui/game_statistics_menu.cc:40
+#: ../../src/wui/game_statistics_menu.cc:42
 msgid "General statistics"
 msgstr ""
 
-#: ../../src/wui/game_statistics_menu.cc:43
+#: ../../src/wui/game_statistics_menu.cc:45
 msgid "Ware statistics"
 msgstr ""
 
-#: ../../src/wui/game_statistics_menu.cc:44
+#: ../../src/wui/game_statistics_menu.cc:46
 msgid "Building statistics"
 msgstr ""
 
-#: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
+#: ../../src/wui/game_statistics_menu.cc:48 ../../src/wui/stock_menu.cc:36
 #: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
 msgid "Stock"
+msgstr ""
+
+#: ../../src/wui/game_statistics_menu.cc:50
+#: ../../src/wui/seafaring_statistics_menu.cc:46
+msgid "Seafaring Statistics"
 msgstr ""
 
 #: ../../src/wui/game_summary.cc:44
@@ -3592,17 +3631,17 @@ msgstr ""
 msgid "%1$s (%2$s)"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:169
+#: ../../src/wui/interactive_player.cc:170
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:204
-#: ../../src/wui/interactive_player.cc:256
+#: ../../src/wui/interactive_player.cc:205
+#: ../../src/wui/interactive_player.cc:257
 msgid "Messages"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:261
+#: ../../src/wui/interactive_player.cc:262
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -4034,49 +4073,49 @@ msgid "Spectator"
 msgstr ""
 
 #: ../../src/wui/multiplayersetupgroup.cc:191
-#: ../../src/wui/multiplayersetupgroup.cc:337
+#: ../../src/wui/multiplayersetupgroup.cc:343
 msgid "Type"
 msgstr ""
 
 #. * TRANSLATORS: This is the name of an AI used in the game setup screens
-#: ../../src/wui/multiplayersetupgroup.cc:312
-#: ../../src/wui/multiplayersetupgroup.cc:313
+#: ../../src/wui/multiplayersetupgroup.cc:318
+#: ../../src/wui/multiplayersetupgroup.cc:319
 #: ../../src/wui/playerdescrgroup.cc:152
 msgid "Random AI"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:317
-#: ../../src/wui/multiplayersetupgroup.cc:319
+#: ../../src/wui/multiplayersetupgroup.cc:323
+#: ../../src/wui/multiplayersetupgroup.cc:325
 msgid "Shared in"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:337
+#: ../../src/wui/multiplayersetupgroup.cc:343
 #: ../../src/wui/playerdescrgroup.cc:160
 msgid "Human"
 msgstr ""
 
 #. * TRANSLATORS: This is an option in multiplayer setup for sharing
 #. another player's starting position.
-#: ../../src/wui/multiplayersetupgroup.cc:413
+#: ../../src/wui/multiplayersetupgroup.cc:419
 #, c-format
 msgid "Shared in Player %u"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:429
+#: ../../src/wui/multiplayersetupgroup.cc:435
 #: ../../src/wui/playerdescrgroup.cc:170
 msgctxt "tribe"
 msgid "Random"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:431
+#: ../../src/wui/multiplayersetupgroup.cc:437
 msgid "The tribe will be selected at random"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:516
+#: ../../src/wui/multiplayersetupgroup.cc:522
 msgid "No Team"
 msgstr ""
 
-#: ../../src/wui/multiplayersetupgroup.cc:522
+#: ../../src/wui/multiplayersetupgroup.cc:528
 #, c-format
 msgid "Team %d"
 msgstr ""
@@ -4159,6 +4198,92 @@ msgstr ""
 msgid "(vacant)"
 msgstr ""
 
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:103
+msgid "Watch the selected ship"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:104
+msgctxt "hotkey"
+msgid "W"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:116
+#: ../../src/wui/seafaring_statistics_menu.cc:119
+msgctxt "hotkey_description"
+msgid "%1%: %2%"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:116
+msgctxt "hotkey"
+msgid "O"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:118
+msgid "Open the selected ship’s window"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:120
+msgctxt "hotkey"
+msgid "CTRL + O"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:122
+msgid "Go to the selected ship and open its window"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:134
+msgid "Center the map on the selected ship"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:135
+msgctxt "hotkey"
+msgid "G"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:187
+msgctxt "ship"
+msgid "Name"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:188
+msgctxt "ship"
+msgid "Status"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:511
+msgid "Show all ships"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:520
+msgid "Show idle ships"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:524
+msgid "Show ships shipping wares and workers"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:529
+msgid "Show waiting expeditions"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:533
+msgid "Show scouting expeditions"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:538
+msgid "Show expeditions that have found a port space or are founding a colony"
+msgstr ""
+
 #: ../../src/wui/shipwindow.cc:79
 msgid "Scout towards the north west"
 msgstr ""
@@ -4212,11 +4337,11 @@ msgid "Go to ship"
 msgstr ""
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:172
+#: ../../src/wui/shipwindow.cc:219
 msgid "Cancel Expedition"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:172
+#: ../../src/wui/shipwindow.cc:219
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return to."
 msgstr ""
@@ -4316,10 +4441,10 @@ msgstr ""
 msgid "Expedition"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:108
+#: ../../src/wui/watchwindow.cc:62
 msgid "Follow"
 msgstr ""
 
-#: ../../src/wui/watchwindow.cc:114
+#: ../../src/wui/watchwindow.cc:68
 msgid "Center the main view on this"
 msgstr ""

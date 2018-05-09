@@ -167,8 +167,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 		});
 
 	// Subscribe to ShipNotes.
-	shipnotes_subscriber_ = Notifications::subscribe<NoteShipMessage>([this](
-	   const NoteShipMessage& note) {
+	shipnotes_subscriber_ = Notifications::subscribe<NoteShip>([this](const NoteShip& note) {
 
 		// in a short time between start and late_initialization the player
 		// can get notes that can not be processed.
@@ -180,13 +179,13 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 			return;
 		}
 
-		switch (note.message) {
+		switch (note.action) {
 
-		case NoteShipMessage::Message::kGained:
+		case NoteShip::Action::kGained:
 			gain_ship(*note.ship, NewShip::kBuilt);
 			break;
 
-		case NoteShipMessage::Message::kLost:
+		case NoteShip::Action::kLost:
 			for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 				if (i->ship == note.ship) {
 					allships.erase(i);
@@ -195,13 +194,16 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 			}
 			break;
 
-		case NoteShipMessage::Message::kWaitingForCommand:
+		case NoteShip::Action::kWaitingForCommand:
 			for (std::deque<ShipObserver>::iterator i = allships.begin(); i != allships.end(); ++i) {
 				if (i->ship == note.ship) {
 					i->waiting_for_command_ = true;
 					break;
 				}
 			}
+		default:
+			// Do nothing
+			break;
 		}
 	});
 }

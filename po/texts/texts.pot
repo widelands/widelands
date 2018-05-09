@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-15 15:38+0000\n"
+"POT-Creation-Date: 2018-05-07 10:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -194,11 +194,11 @@ msgid "Widelands Translators"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
+msgid "Atlanteans"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
+msgid "Barbarians"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
@@ -242,7 +242,7 @@ msgid "FreeBSD"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3
-msgid "Frisian"
+msgid "Frisians"
 msgstr ""
 
 #: ../../data/txts/developers.lua:3

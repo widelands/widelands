@@ -62,10 +62,9 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	try {
 		textarea_.force_new_renderer();
 		textarea_.set_text(body);
-		log("Story Message Box: using NEW font renderer.\n");
 	} catch (const std::exception& e) {
 		log(
-		   "Story Message Box: falling back to OLD font renderer:\n%s\n%s\n", body.c_str(), e.what());
+		   "Story Message Box: falling back to old font renderer:\n%s\n%s\n", body.c_str(), e.what());
 		textarea_.force_new_renderer(false);
 		textarea_.set_text(body);
 	}

@@ -530,6 +530,10 @@ void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
 }
 
+void Table<void*>::scroll_to_top() {
+	scrollbar_->set_scrollpos(0);
+}
+
 /**
  * Remove the table entry at the given (zero-based) index.
  */
@@ -549,6 +553,18 @@ void Table<void*>::remove(const uint32_t i) {
 		multiselect_.insert(selection_);
 	}
 	layout();
+}
+
+/**
+ * Remove the given table entry if it exists.
+ */
+void Table<void*>::remove_entry(const void* const entry) {
+	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
+		if (entry_records_[i]->entry() == entry) {
+			remove(i);
+			return;
+		}
+	}
 }
 
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {

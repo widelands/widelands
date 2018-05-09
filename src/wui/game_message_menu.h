@@ -40,7 +40,8 @@ struct GameMessageMenu : public UI::UniqueWindow {
 
 	/// Shows a newly created message. Assumes that the message is not yet in
 	/// the list (the message was added to the queue after the last time think()
-	/// was executed.
+	/// was executed. Toggles to inbox and autoselects the new entry unless the user
+	/// is currently multiselecting messages.
 	void show_new_message(Widelands::MessageId, const Widelands::Message&);
 
 	enum Mode { Inbox, Archive };

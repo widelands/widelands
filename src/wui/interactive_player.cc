@@ -51,6 +51,7 @@
 #include "wui/game_options_menu.h"
 #include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
+#include "wui/seafaring_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
@@ -456,6 +457,16 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				new BuildingStatisticsMenu(*this, main_windows_.building_stats);
 			} else {
 				main_windows_.building_stats.toggle();
+			}
+			return true;
+
+		case SDLK_e:
+			if (game().map().allows_seafaring()) {
+				if (main_windows_.seafaring_stats.window == nullptr) {
+					new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
+				} else {
+					main_windows_.seafaring_stats.toggle();
+				}
 			}
 			return true;
 

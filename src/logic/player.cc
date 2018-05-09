@@ -23,6 +23,7 @@
 #include <memory>
 
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
 #include <boost/signals2.hpp>
 
 #include "base/i18n.h"
@@ -133,6 +134,7 @@ Player::Player(EditorGameBase& the_egbase,
      msites_defeated_(0),
      civil_blds_lost_(0),
      civil_blds_defeated_(0),
+     ship_name_counter_(0),
      fields_(nullptr),
      allowed_worker_types_(the_egbase.tribes().nrworkers(), true),
      allowed_building_types_(the_egbase.tribes().nrbuildings(), true),
@@ -370,6 +372,19 @@ void Player::message_object_removed(MessageId message_id) const {
 	}
 
 	game->cmdqueue().enqueue(new CmdDeleteMessage(game->get_gametime(), player_number_, message_id));
+}
+
+const std::set<Serial>& Player::ships() const {
+	return ships_;
+}
+void Player::add_ship(Serial ship) {
+	ships_.insert(ship);
+}
+void Player::remove_ship(Serial ship) {
+	auto it = ships_.find(ship);
+	if (it != ships_.end()) {
+		ships_.erase(it);
+	}
 }
 
 /*
@@ -1306,6 +1321,8 @@ const std::string& Player::get_ai() const {
  * Pick random name from remaining names (if any)
  */
 const std::string Player::pick_shipname() {
+	++ship_name_counter_;
+
 	if (!remaining_shipnames_.empty()) {
 		Game& game = dynamic_cast<Game&>(egbase());
 		assert(is_a(Game, &egbase()));
@@ -1316,7 +1333,7 @@ const std::string Player::pick_shipname() {
 		remaining_shipnames_.erase(it);
 		return new_name;
 	}
-	return "Ship";
+	return (boost::format(pgettext("shipname", "Ship %d")) % ship_name_counter_).str();
 }
 
 /**
@@ -1324,12 +1341,18 @@ const std::string Player::pick_shipname() {
  *
  * \param fr source stream
  */
-void Player::read_remaining_shipnames(FileRead& fr) {
+void Player::read_remaining_shipnames(FileRead& fr, uint16_t packet_version) {
 	// First get rid of default shipnames
 	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());
+	}
+	// TODO(GunChleoc): Savegame compatibility. Remove after Build 20.
+	if (packet_version >= 21) {
+		ship_name_counter_ = fr.unsigned_32();
+	} else {
+		ship_name_counter_ = ships_.size();
 	}
 }
 
@@ -1409,13 +1432,14 @@ void Player::read_statistics(FileRead& fr) {
 }
 
 /**
- * Write remaining ship indexes to the give file
+ * Write remaining ship indexes to the given file
  */
 void Player::write_remaining_shipnames(FileWrite& fw) const {
 	fw.unsigned_16(remaining_shipnames_.size());
 	for (const auto& shipname : remaining_shipnames_) {
 		fw.string(shipname);
 	}
+	fw.unsigned_32(ship_name_counter_);
 }
 
 /**

@@ -7,13 +7,14 @@
 # GunChleoc, 2018
 # David D, 2018
 # zecas <jjorge@free.fr>, 2018
+# balkh mogaehild <balkhmogaehild@protonmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: zecas <jjorge@free.fr>, 2018\n"
+"Last-Translator: balkh mogaehild <balkhmogaehild@protonmail.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1149,6 +1150,9 @@ msgid ""
 "ends (flags with only one road) and not more than one flag with more than "
 "four roads attached."
 msgstr ""
+"Pour ce faire, nous devons nous assurer qu'il n'y a pas plus de trois "
+"impasses (drapeaux avec une seule route) et pas plus d'un drapeau avec plus "
+"de quatre routes attachées."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:560
 msgid "Saledus looks very relaxed…"
@@ -1161,6 +1165,9 @@ msgid ""
 "can see we still have some military strength. I can count five towers and a "
 "fortress in our vicinity to guard us."
 msgstr ""
+"Sire, c'est vraiment un grand plaisir d'être de retour cheez nous. Et "
+"surtout, je vois que nous avons encore une certaine force militaire. Je peux"
+" compter cinq tours et une forteresse à proximité pour nous protéger."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:567
 msgid "We Could Use The Military Instead"
@@ -1176,6 +1183,8 @@ msgid ""
 "Sire, if we need the technology that badly, why don’t we conquer it? We "
 "could defeat the little monastery in an instant."
 msgstr ""
+"Sire, si nous avons tant besoin de la technologie, pourquoi ne pas la "
+"conquérir ? Nous pourrions défaire le petit monastère en un clin d'œil."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:573
@@ -1183,6 +1192,9 @@ msgid ""
 "The problem is however that the gods won’t be amused if we destroy one of "
 "their temples. And you never know what this could lead to."
 msgstr ""
+"Cependant, le problème est que les dieux ne seront pas très contents si nous"
+" détruisons l'un de leurs temples. Et on ne sait jamais à quoi cela pourrait"
+" mener."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:580
 msgid "Easy Victory"
@@ -1198,6 +1210,8 @@ msgid ""
 "General, our armies just swept over the priestesses and conquered the plans."
 " That was a rather easy victory."
 msgstr ""
+"Général, nos armées ont juste balayé les prêtresses et se sont emparés des "
+"plans. C'était une victoire plutôt facile."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:588
 msgid "Defiance"
@@ -1216,6 +1230,11 @@ msgid ""
 "deals with the Barbarians, so we better keep our soldiers in a good mood and"
 " train them adequately."
 msgstr ""
+"Sire, j'admets que cela s'est avéré être une très bonne affaire, bien que "
+"nous aurions pu avoir les plans beaucoup plus tôt. Quoi qu'il en soit, nous "
+"ne serons pas en mesure de conclure des accords avec les Barbares, alors "
+"nous ferions mieux de garder nos soldats de bonne humeur et de les former "
+"adéquatement."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:596
 msgid "Pride"
@@ -1229,6 +1248,11 @@ msgid ""
 "make any deals with the Barbarians either, so we better keep our soldiers in"
 " good mood and train them adequately."
 msgstr ""
+"Sire, j'admets que nous avons probablement suscité le mécontentement des "
+"dieux, mais en temps de guerre, la fin justifie parfois les moyens. Et nous "
+"ne pourrons pas non plus conclure d'accords avec les Barbares, alors nous "
+"ferions mieux de garder nos soldats de bonne humeur et de les entraîner "
+"adéquatement."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:606
 msgid "Saledus asks for a stronger army…"
@@ -1240,6 +1264,9 @@ msgid ""
 "Now that we have produced some tools, I think it is time to divert some of "
 "our iron and coal towards military production."
 msgstr ""
+"Maintenant que nous avons produit des outils, je pense qu'il est temps de "
+"réaffecter une partie de notre fer et de notre charbon à la production "
+"militaire."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:611
@@ -1248,6 +1275,9 @@ msgid ""
 "increase our military power. As a starting point, we should recruit at least"
 " ten new soldiers."
 msgstr ""
+"Je m'inquiète vraiment de la faiblesse de notre armée. Nous devrions "
+"commencer à accroître notre puissance militaire. Pour commencer, nous "
+"devrions recruter au moins dix nouveaux soldats."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:614
@@ -1255,6 +1285,9 @@ msgid ""
 "Remember, we need to produce wooden spears and helmets to recruit them in "
 "the barracks. Perhaps we should train them further in the arena as well."
 msgstr ""
+"N'oubliez pas que nous devons produire des lances et des casques en bois "
+"pour les recruter dans les casernes. Peut-être devrions-nous également les "
+"former davantage dans l'arène."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:621
 msgid "Training is Needed"
@@ -1271,6 +1304,9 @@ msgid ""
 "train them well. It is important to increase the strength of our soldiers as"
 " fast as we can."
 msgstr ""
+"Général, bien que nous ayons commencé à recruter de nouveaux soldats, nous "
+"devons encore bien les entraîner. Il est important d'accroître la force de "
+"nos soldats le plus rapidement possible."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:626
 msgid ""
@@ -1279,6 +1315,10 @@ msgid ""
 "improve this. Alas! But we need to use what we have to get prepared for "
 "battle."
 msgstr ""
+"Malheureusement, nous n'avons qu'une arène et un très vieux et petit camp "
+"d'entraînement avec très peu de capacité de stockage. Et aucun de nos "
+"constructeurs ne sait comment l'améliorer. Hélas ! Mais nous devons utiliser"
+" ce que nous avons pour nous préparer à la bataille."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:633
 msgid "Praise The Army of The Empire"
@@ -1295,12 +1335,17 @@ msgid ""
 "builders and developed better and more efficient training buildings "
 "together."
 msgstr ""
+"Sire, après avoir formé un groupe de recrues, nos formateurs se sont "
+"entretenus avec nos constructeurs et ont développé ensemble des bâtiments "
+"d'entraînement meilleurs et plus efficaces."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:638
 msgid ""
 "Now we can really improve our army and build the military strength that we "
 "will need to defend our country."
 msgstr ""
+"Maintenant, nous pouvons vraiment améliorer notre armée et bâtir la force "
+"militaire dont nous aurons besoin pour défendre notre pays."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:645
 msgid "We Just Need Another Hero"
@@ -1317,6 +1362,10 @@ msgid ""
 "training facilities, we should train as many fully promoted soldiers as we "
 "can. I really would consider them heroes after that."
 msgstr ""
+"Général, maintenant que nous avons plus de bière et de meilleure qualité en "
+"plus d'installations d'entraînement améliorées, nous devrions former autant "
+"de soldats promus que possible. Je les considérerais comme de vrai héros "
+"après ça."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:650
 msgid ""
@@ -1324,6 +1373,9 @@ msgid ""
 "powerful than the Barbarians’. So, we need to spend our resources wisely to "
 "get some heroes as soon as we can."
 msgstr ""
+"Cela nous donnera un grand avantage au combat si nos soldats sont beaucoup "
+"plus puissants que les Barbares. Nous devons donc dépenser judicieusement "
+"nos ressources pour obtenir des héros dès que possible."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:652
 msgid ""
@@ -1331,6 +1383,9 @@ msgid ""
 "with. But don’t forget to send them to the front line, because they are not "
 "that useful back home."
 msgstr ""
+"Je dirais que trois héros bien entraînés devraient suffire pour commencer. "
+"Mais n'oubliez pas de les envoyer au front, parce qu'ils ne sont pas très "
+"utiles chez eux."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:659
 msgid "We Should Expel The Barbarians"
@@ -1346,12 +1401,16 @@ msgid ""
 "Now that we have some fully trained soldiers, it is time to expel the "
 "Barbarians from our homeland."
 msgstr ""
+"Maintenant que nous avons des soldats bien entraînés, il est temps "
+"d'expulser les Barbares de notre pays."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:664
 msgid ""
 "Let’s finish them off and regain control over our lands. They shall regret "
 "deeply that they ever came!"
 msgstr ""
+"Finissons-les et reprenons le contrôle de nos terres. Ils regretteront "
+"profondément d'être venus !"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:671
 msgid "Victory is Ours"
@@ -1367,6 +1426,8 @@ msgid ""
 "Sire, finally we have defeated the Barbarians. We have expelled even the "
 "last of them. May they never come back!"
 msgstr ""
+"Sire, nous avons enfin vaincu les Barbares. Nous avons expulsé le dernier "
+"d'entre eux. Qu'ils ne reviennent jamais !"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:676
 msgid ""
@@ -1374,6 +1435,9 @@ msgid ""
 "But first of all we should have some wine to celebrate our victory and our "
 "reclaimed freedom."
 msgstr ""
+"Maintenant, il est temps de découvrir pourquoi ce grand désordre autour de "
+"nous aurait pu se produire. Mais avant tout, nous devrions avoir du vin pour"
+" célébrer notre victoire et notre liberté retrouvée."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:681
 msgid "The Enemy is Near"
@@ -1389,16 +1453,20 @@ msgid ""
 "Sire, although we don’t have enough fully trained soldiers yet, we just have"
 " made contact with the enemy."
 msgstr ""
+"Sire, bien que nous n'ayons pas encore assez de soldats bien entraînés, nous"
+" venons d'entrer en contact avec l'ennemi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:686
 msgid ""
 "We have to finish them off and regain control over our lands. They shall "
 "regret deeply that they ever came!"
 msgstr ""
+"Nous devons les achever et reprendre le contrôle de nos terres. Ils "
+"regretteront profondément d'être venus !"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:697
 msgid "Worship to be Gifted"
-msgstr ""
+msgstr "Le Culte du Don"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:698
 msgid "Julia is demanding a sacrifice for Vesta…"
@@ -1411,6 +1479,9 @@ msgid ""
 "goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 amphoras of wine"
 " to prepare a worthy sacrifice for her."
 msgstr ""
+"Ave, Lutius ! Si vous voulez que nous vous aidions, vous devez d'abord "
+"vénérer notre déesse Vesta. Livrez donc 35 gerbes de blé et 15 amphores de "
+"vin pour préparer un sacrifice digne d'elle."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:705
 msgid "May The Gods Bless You"
@@ -1428,6 +1499,11 @@ msgid ""
 "you need so desperately as well. Furthermore, we will pray for you and join "
 "your party to safeguard our land from the Barbarians."
 msgstr ""
+"Merci Lutius, vous avez bien servi notre déesse. Vous ne serez pas seulement"
+" doté des améliorations de votre technologie, mais aussi de certaines des "
+"marchandises dont vous avez désespérément besoin. De plus, nous prierons "
+"pour vous et nous nous joindrons à vous pour protéger notre terre des "
+"Barbares."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:713
 msgid "Damned"
@@ -1444,6 +1520,9 @@ msgid ""
 " life and your land be cursed and may the wrath of the goddess scourge your "
 "family from the face of the earth!"
 msgstr ""
+"Maudit soit Lutius pour avoir tué les paisibles serviteurs de la déesse "
+"Vesta ! Que votre vie et votre terre soient maudites et que la colère de la "
+"déesse éradique votre famille de la surface de la terre !"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
