@@ -43,7 +43,7 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_brickmaker = 1
+      frisians_claydigger = 1
    },
 
    inputs = {

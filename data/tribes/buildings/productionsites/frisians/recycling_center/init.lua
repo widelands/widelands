@@ -66,6 +66,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=smelt_iron",
             "call=make_fur",
             "call=smelt_iron",
             "call=smelt_mixed",

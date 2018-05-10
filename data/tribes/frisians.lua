@@ -113,6 +113,7 @@ tribes:new_tribe {
          "frisians_stonemason",
          "frisians_woodcutter",
          "frisians_forester",
+         "frisians_claydigger",
          "frisians_builder",
          "frisians_brickmaker",
          "frisians_reed_farmer",
