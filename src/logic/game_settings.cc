@@ -34,5 +34,5 @@ bool GameSettings::is_shared_usable(PlayerSlot slot, Widelands::PlayerNumber sha
 }
 
 bool GameSettings::uncloseable(PlayerSlot slot) const {
-	return (scenario && !players.at(slot).closeable) || savegame;
+	return (scenario && !players.at(slot).closeable) || (savegame && players.at(slot).state != PlayerSettings::State::kClosed);
 }
