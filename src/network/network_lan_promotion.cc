@@ -23,6 +23,8 @@
 #include <ifaddrs.h>
 #endif
 
+#include <memory>
+
 #include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
@@ -467,30 +469,28 @@ void LanGameFinder::run() {
 		//  if the game already is in the list, update the information
 		//  otherwise just append it to the list
 		bool was_in_list = false;
-		for (NetOpenGame* opengame : opengames) {
+		for (const auto& opengame : opengames) {
 			if (0 == strncmp(opengame->info.hostname, info.hostname, 128)) {
 				opengame->info = info;
 				if (!opengame->address.is_ipv6() && addr.is_ipv6()) {
 					opengame->address.ip = addr.ip;
 				}
-				callback(GameUpdated, opengame, userdata);
+				callback(GameUpdated, opengame.get(), userdata);
 				was_in_list = true;
 				break;
 			}
 		}
 
 		if (!was_in_list) {
-			opengames.push_back(new NetOpenGame);
 			addr.port = kWidelandsLanPort;
-			opengames.back()->address = addr;
-			opengames.back()->info = info;
-			callback(GameOpened, opengames.back(), userdata);
+			opengames.push_back(std::unique_ptr<NetOpenGame>(new NetOpenGame(addr, info)));
+			callback(GameOpened, opengames.back().get(), userdata);
 			break;
 		}
 	}
 }
 
-void LanGameFinder::set_callback(void (*const cb)(int32_t, NetOpenGame const*, void*),
+void LanGameFinder::set_callback(void (*const cb)(int32_t, const NetOpenGame* const, void*),
                                  void* const ud) {
 	callback = cb;
 	userdata = ud;
