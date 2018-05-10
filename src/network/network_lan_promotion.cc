@@ -452,6 +452,11 @@ void LanGameFinder::reset() {
 
 void LanGameFinder::run() {
 	while (is_available()) {
+		// Make sure that the callback function has been set before we do anything
+		if (!callback) {
+			continue;
+		}
+
 		NetGameInfo info;
 		NetAddress addr;
 
