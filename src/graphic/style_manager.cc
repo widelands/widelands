@@ -21,6 +21,7 @@
 
 #include <memory>
 
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "scripting/lua_interface.h"
@@ -48,6 +49,9 @@ void check_completeness(const std::string& name, size_t map_size, size_t last_en
 }  // namespace
 
 void StyleManager::init() {
+
+	ScopedTimer timer("Style Manager: Reading style templates took %ums");
+
 	buttonstyles_.clear();
 	sliderstyles_.clear();
 	tabpanelstyles_.clear();
@@ -55,8 +59,13 @@ void StyleManager::init() {
 	dropdownstyles_.clear();
 	scrollbarstyles_.clear();
 
+	log("Style Manager: Loading %sinit.lua ... ", kTemplateDir.c_str());
+
 	LuaInterface lua;
 	std::unique_ptr<LuaTable> table(lua.run_script(kTemplateDir + "init.lua"));
+
+	log("took %ums\n", timer.ms_since_last_query());
+	log("Style Manager: Reading button styles ... ");
 
 	// Buttons
 	std::unique_ptr<LuaTable> element_table = table->get_table("buttons");
@@ -73,6 +82,9 @@ void StyleManager::init() {
 	check_completeness(
 	   "buttons", buttonstyles_.size(), static_cast<size_t>(UI::ButtonStyle::kWuiBuildingStats));
 
+	log("took %ums\n", timer.ms_since_last_query());
+	log("Style Manager: Reading slider styles ... ");
+
 	// Sliders
 	element_table = table->get_table("sliders");
 	style_table = element_table->get_table("fsmenu");
@@ -82,6 +94,9 @@ void StyleManager::init() {
 	add_slider_style(UI::SliderStyle::kWuiDark, *style_table->get_table("dark").get());
 	check_completeness(
 	   "sliders", sliderstyles_.size(), static_cast<size_t>(UI::SliderStyle::kWuiDark));
+
+	log("took %ums\n", timer.ms_since_last_query());
+	log("Style Manager: Reading tabpanel styles ... ");
 
 	// Tabpanels
 	element_table = table->get_table("tabpanels");
@@ -93,6 +108,9 @@ void StyleManager::init() {
 	check_completeness(
 	   "tabpanels", tabpanelstyles_.size(), static_cast<size_t>(UI::TabPanelStyle::kWuiDark));
 
+	log("took %ums\n", timer.ms_since_last_query());
+	log("Style Manager: Reading editbox styles ... ");
+
 	// Editboxes
 	element_table = table->get_table("editboxes");
 	style_table = element_table->get_table("fsmenu");
@@ -101,6 +119,9 @@ void StyleManager::init() {
 	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &editboxstyles_);
 	check_completeness(
 	   "editboxes", editboxstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
+
+	log("took %ums\n", timer.ms_since_last_query());
+	log("Style Manager: Reading dropdown styles ... ");
 
 	// Dropdowns
 	element_table = table->get_table("dropdowns");
@@ -111,6 +132,9 @@ void StyleManager::init() {
 	check_completeness(
 	   "dropdowns", dropdownstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
 
+	log("took %ums\n", timer.ms_since_last_query());
+	log("Style Manager: Reading scrollbar styles ... ");
+
 	// Scrollbars
 	element_table = table->get_table("scrollbars");
 	style_table = element_table->get_table("fsmenu");
@@ -119,6 +143,8 @@ void StyleManager::init() {
 	add_style(UI::PanelStyle::kWui, *style_table->get_table("menu").get(), &scrollbarstyles_);
 	check_completeness(
 	   "scrollbars", scrollbarstyles_.size(), static_cast<size_t>(UI::PanelStyle::kWui));
+
+	log("took %ums\n", timer.ms_since_last_query());
 }
 
 // Return functions for the styles

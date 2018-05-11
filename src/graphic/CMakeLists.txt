@@ -348,6 +348,7 @@ wl_library(graphic
     base_i18n
     base_log
     base_macros
+    base_scoped_timer
     build_info
     graphic_align
     graphic_build_texture_atlas
