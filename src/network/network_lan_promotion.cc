@@ -452,24 +452,23 @@ void LanGameFinder::reset() {
 
 void LanGameFinder::run() {
 	while (is_available()) {
-		// Make sure that the callback function has been set before we do anything
-		if (!callback) {
-			continue;
-		}
-
 		NetGameInfo info;
 		NetAddress addr;
 
-		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info)))
+		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info))) {
 			continue;
+		}
 
 		log("Received %s packet from %s\n", info.magic, addr.ip.to_string().c_str());
 
-		if (strncmp(info.magic, "GAME", 6))
+		if (strncmp(info.magic, "GAME", 6) || info.version != LAN_PROMOTION_PROTOCOL_VERSION) {
 			continue;
+		}
 
-		if (info.version != LAN_PROMOTION_PROTOCOL_VERSION)
+		// Make sure that the callback function has been set before we do any callbacks
+		if (!callback) {
 			continue;
+		}
 
 		//  if the game already is in the list, update the information
 		//  otherwise just append it to the list
