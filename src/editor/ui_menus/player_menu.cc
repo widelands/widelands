@@ -147,7 +147,7 @@ void EditorPlayerMenu::update() {
 			posx += 140 + spacing;
 			std::string player_name = map->get_scenario_player_name(p);
 			// Localize default player names
-			if (player_name == (boost::format("Player %u") % static_cast<unsigned int>(p)).str()) {
+			if (player_name.empty() || player_name == (boost::format("Player %u") % static_cast<unsigned int>(p)).str()) {
 				player_name = (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
 			}
 

@@ -90,9 +90,11 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 		// Make sure that no player name is empty, and trim leading/trailing whitespaces.
 		std::string player_name = map.get_scenario_player_name(p);
 		boost::trim(player_name);
-		// Make sure that default player names are saved without localization - we only want to localize this on screen
-		if (player_name.empty() || player_name == (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str()) {
-			player_name = (boost::format("Player %u") % static_cast<unsigned int>(p)).str();
+
+		// Save default player names as empty
+		if (player_name == (boost::format("Player %u") % static_cast<unsigned int>(p)).str() ||
+			player_name == (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str()) {
+			player_name = "";
 		}
 
 		Section& s = prof.create_section(section_key.c_str());
