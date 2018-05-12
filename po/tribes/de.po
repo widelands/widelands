@@ -21,9 +21,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-25 07:05+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-05-07 10:16+0000\n"
+"PO-Revision-Date: 2018-05-09 10:56+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2506,10 +2506,10 @@ msgstr "Das Herstellen einer Holzfälleraxt"
 msgid "forging a pick"
 msgstr "Das Schmieden einer Spitzhacke"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging needles because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
-msgid "forging needles"
-msgstr "Das Schmieden von Nadeln"
+msgid "making needles"
+msgstr "Das Herstellen von Nadeln"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:7
@@ -2804,7 +2804,8 @@ msgstr "Reetpflanzung"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgctxt "frisians_building"
 msgid ""
-"The farmer working at this reed farm has no cleared soil to plant his seeds."
+"The reed farmer working at this reed farm has no cleared soil to plant his "
+"seeds."
 msgstr "Der Reetbauer in dieser Reetpflanzung hat keinen freien Platz, um Reet anzubauen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3434,6 +3435,22 @@ msgstr "Wüstenzürgelbaum (mittel)"
 msgid "Desert Hackberry (ripe)"
 msgstr "Wüstenzürgelbaum (reif)"
 
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:13
+msgid "Juniper (tiny)"
+msgstr "Wacholder (jung)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:37
+msgid "Juniper (small)"
+msgstr "Wacholder (klein)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:61
+msgid "Juniper (medium)"
+msgstr "Wacholder (mittel)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:85
+msgid "Juniper (ripe)"
+msgstr "Wacholder (reif)"
+
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:13
 msgid "Raspberry Bush (tiny)"
 msgstr "Himbeerbusch (jung)"
@@ -3467,19 +3484,19 @@ msgid "Sea Buckthorn (ripe)"
 msgstr "Seekreuzdorn (reif)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
-msgid "Strawberry Bush (tiny)"
+msgid "Strawberries (tiny)"
 msgstr "Erdbeerfeld (jung)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:37
-msgid "Strawberry Bush (small)"
+msgid "Strawberries (small)"
 msgstr "Erdbeerfeld (klein)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
-msgid "Strawberry Bush (medium)"
+msgid "Strawberries (medium)"
 msgstr "Erdbeerfeld (mittel)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
-msgid "Strawberry Bush (ripe)"
+msgid "Strawberries (ripe)"
 msgstr "Erdbeerfeld (reif)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables

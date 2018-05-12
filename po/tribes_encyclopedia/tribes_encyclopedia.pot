@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-04 07:14+0000\n"
+"POT-Creation-Date: 2018-05-11 05:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -129,6 +129,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/helptexts.lua:16
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:13
 msgctxt "building"
 msgid "Burns logs into charcoal."
 msgstr ""
@@ -1383,7 +1384,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:6
 msgctxt "frisians_building"
 msgid ""
-"Naturally, I can still forge short and long swords, but it is beneath my "
+"Of course I could still forge short and long swords, but it is beneath my "
 "honor to bother with such basic equipment now."
 msgstr ""
 
@@ -1398,7 +1399,7 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:16
 msgctxt "building"
-msgid "Produces advanced weapons and golden helmets for your soldiers."
+msgid "Produces advanced weapons and golden helmets for the soldiers."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1418,7 +1419,7 @@ msgstr ""
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:16
 msgctxt "building"
-msgid "Produces basic weapons and helmets for your soldiers."
+msgid "Produces basic weapons and helmets for the soldiers."
 msgstr ""
 
 #. TRANSLATORS: Lore helptext for a building
@@ -1439,6 +1440,7 @@ msgctxt "building"
 msgid "Bakes bread out of barley and water to feed miners and soldiers."
 msgstr ""
 
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -1468,7 +1470,6 @@ msgctxt "frisians_building"
 msgid "Equips recruits and trains them as soldiers."
 msgstr ""
 
-#. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:23
 #, lua-format
@@ -1556,6 +1557,7 @@ msgctxt "building"
 msgid "Forges tools to equip new workers."
 msgstr ""
 
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -1581,6 +1583,7 @@ msgctxt "building"
 msgid "Brews beer for miners and soldier training."
 msgstr ""
 
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -1592,7 +1595,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "If there is not enough coal, only the most foolish of leaders would deprive "
-"his brick kilns first."
+"his brick kilns of it first."
 msgstr ""
 
 #. TRANSLATORS: Lore author helptext for a building
@@ -1609,6 +1612,7 @@ msgid ""
 "important building material."
 msgstr ""
 
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -1628,12 +1632,7 @@ msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
 msgstr ""
 
-#. TRANSLATORS: Purpose helptext for a building
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:13
-msgctxt "building"
-msgid "Produces coal out of logs."
-msgstr ""
-
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -2159,6 +2158,7 @@ msgctxt "frisians_building"
 msgid "The spokesman of the scouts’ labor union"
 msgstr ""
 
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -2185,6 +2185,7 @@ msgctxt "building"
 msgid "Sews fur garments out of reindeer fur."
 msgstr ""
 
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -2229,6 +2230,7 @@ msgid ""
 "to be eaten by miners and soldiers."
 msgstr ""
 
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -2267,6 +2269,7 @@ msgctxt "frisians_building"
 msgid "Hungry customers in times of a shortage of smoked fish and meat"
 msgstr ""
 
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -2295,6 +2298,7 @@ msgctxt "building"
 msgid "Sews cloth for ship sails out of reed and reindeer fur."
 msgstr ""
 
+#. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
@@ -2632,16 +2636,11 @@ msgid "Accommodation for your people. Also stores your wares and tools."
 msgstr ""
 
 #. TRANSLATORS: Note helptext for a building
-#: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:22
+#: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:21
 msgctxt "frisians_building"
 msgid "The headquarters is your main building."
 msgstr ""
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
-#. This include can be removed when all help texts have been defined.
-#. TRANSLATORS#: Lore helptext for a building
-#. TRANSLATORS#: Lore author helptext for a building
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/frisians/port/helptexts.lua:16
 msgctxt "frisians_building"
@@ -2719,7 +2718,6 @@ msgstr ""
 msgid "This reed has just been planted."
 msgstr ""
 
-#. TRANSLATORS: Performance helptext for a building. Placeholders are for "4 minutes" and "40 seconds"
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese script probably want to lose the blank space here.
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
@@ -3866,8 +3864,8 @@ msgstr ""
 #: ../../data/tribes/wares/beer/helptexts.lua:6
 msgctxt "frisians_ware"
 msgid ""
-"Beer is produced in breweries and used in taverns and drinking halls to "
-"produce rations. Soldiers drink beer while receiving basic training."
+"Beer is produced in breweries and used in drinking halls to produce meals. "
+"Soldiers drink beer while receiving basic training."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Beer
@@ -4673,8 +4671,8 @@ msgstr ""
 #: ../../data/tribes/wares/meal/helptexts.lua:8
 msgctxt "frisians_ware"
 msgid ""
-"A meal is made out of honey bread, mead and either fruit or smoked fish or "
-"meat. It is consumed by miners in deep mines."
+"A meal is made out of honey bread and beer and either smoked fish or meat. "
+"It is consumed by miners in deep mines."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Meat
@@ -4827,8 +4825,8 @@ msgstr ""
 #: ../../data/tribes/wares/ration/helptexts.lua:10
 msgctxt "frisians_ware"
 msgid ""
-"Rations are produced in taverns and drinking halls out of beer and something "
-"to eat: Fruit, smoked meat or fish or bread."
+"Rations are produced in taverns and drinking halls out of something to eat: "
+"Fruit, bread or smoked meat or fish."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Saw
