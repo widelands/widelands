@@ -93,7 +93,7 @@ bool FileSystem::is_path_absolute(const std::string& path) const {
 /**
  * Fix a path that might come from another OS.
  * This function is used to make sure that paths send via network are usable
- * on locale OS.
+ * on local OS.
  */
 std::string FileSystem::fix_cross_file(const std::string& path) const {
 	uint32_t path_size = path.size();
