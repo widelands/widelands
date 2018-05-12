@@ -62,7 +62,13 @@ void MapPlayerNamesAndTribesPacket::pre_read(FileSystem& fs, Map* const map, boo
 			iterate_player_numbers(p, nr_players) {
 				Section& s = prof.get_safe_section(
 				   (boost::format("player_%u") % static_cast<unsigned int>(p)).str());
-				map->set_scenario_player_name(p, s.get_string("name", ""));
+
+				// Replace empty or standard player names with localized standard player name
+				std::string player_name = s.get_string("name", "");
+				if (player_name.empty() || player_name == (boost::format("Player %u") % static_cast<unsigned int>(p)).str()) {
+					player_name = (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
+				}
+				map->set_scenario_player_name(p, player_name);
 				map->set_scenario_player_tribe(p, s.get_string("tribe", ""));
 				map->set_scenario_player_ai(p, s.get_string("ai", ""));
 				map->set_scenario_player_closeable(p, s.get_bool("closeable", false));

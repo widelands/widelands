@@ -145,13 +145,7 @@ void EditorPlayerMenu::update() {
 			plr_names_[p - 1]->changed.connect(
 			   boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;
-			std::string player_name = map->get_scenario_player_name(p);
-			// Localize default player names
-			if (player_name.empty() || player_name == (boost::format("Player %u") % static_cast<unsigned int>(p)).str()) {
-				player_name = (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str();
-			}
-
-			plr_names_[p - 1]->set_text(player_name);
+			plr_names_[p - 1]->set_text(map->get_scenario_player_name(p));
 		}
 
 		if (!plr_set_tribes_buts_[p - 1]) {
