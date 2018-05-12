@@ -93,8 +93,17 @@ void GameChatPanel::recalculate() {
  * Put the focus on the message input panel.
  */
 void GameChatPanel::focus_edit() {
+	editbox.set_can_focus(true);
 	editbox.focus();
 }
+
+/**
+ * Remove the focus from the message input panel.
+ */
+void GameChatPanel::unfocus_edit() {
+	editbox.set_can_focus(false);
+}
+
 
 void GameChatPanel::key_enter() {
 	const std::string& str = editbox.text();

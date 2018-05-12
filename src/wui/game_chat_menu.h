@@ -49,6 +49,9 @@ struct GameChatMenu : public UI::UniqueWindow {
 
 private:
 	GameChatMenu(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&, const std::string& title);
+
+	void restore() override;
+	void minimize() override;
 	void acknowledge();
 	GameChatPanel chat_;
 	bool close_on_send_;

@@ -49,6 +49,7 @@ struct GameChatPanel : public UI::Panel {
 	}
 
 	void focus_edit();
+	void unfocus_edit();
 
 private:
 	void recalculate();
