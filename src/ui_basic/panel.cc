@@ -648,8 +648,6 @@ void Panel::focus(const bool topcaller) {
 	if (!parent_ || this == modal_) {
 		return;
 	}
-	if (parent_->focus_ == this)
-		return;
 
 	parent_->focus_ = this;
 	parent_->focus(false);
