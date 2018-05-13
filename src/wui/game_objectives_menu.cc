@@ -40,15 +40,15 @@ GameObjectivesMenu::GameObjectivesMenu(UI::Panel* parent, UI::UniqueWindow::Regi
                       580,
                       5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5 + BUTTON_HEIGHT + 5,
                       _("Objectives")),
-     list(this, 5, 5, get_inner_w() - 10, OBJECTIVE_LIST),
+     list(this, 5, 5, get_inner_w() - 10, OBJECTIVE_LIST, UI::PanelStyle::kWui),
      objectivetext(this,
                    5,
                    130,
                    get_inner_w() - 10,
                    FULL_OBJECTIVE_TEXT,
+                   UI::PanelStyle::kWui,
                    "",
                    UI::Align::kLeft,
-                   g_gr->images().get("images/ui_basic/but1.png"),
                    UI::MultilineTextarea::ScrollMode::kScrollNormalForced) {
 	list.selected.connect(boost::bind(&GameObjectivesMenu::selected, this, _1));
 	if (get_usedefaultpos())

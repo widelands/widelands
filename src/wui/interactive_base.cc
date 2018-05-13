@@ -278,13 +278,13 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 const std::string& tooltip_text,
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
-	UI::Button* button = new UI::Button(
-	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
-	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
+	UI::Button* button =
+	   new UI::Button(&toolbar_, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
+	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.add(button);
 	if (window) {
-		window->opened.connect([button] { button->set_style(UI::Button::Style::kPermpressed); });
-		window->closed.connect([button] { button->set_style(UI::Button::Style::kRaised); });
+		window->opened.connect([button] { button->set_perm_pressed(true); });
+		window->closed.connect([button] { button->set_perm_pressed(false); });
 
 		if (bind_default_toggle) {
 			button->sigclicked.connect(

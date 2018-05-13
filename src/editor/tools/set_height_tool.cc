@@ -23,7 +23,6 @@
 #include "editor/tools/decrease_height_tool.h"
 #include "editor/tools/increase_height_tool.h"
 #include "logic/field.h"
-#include "logic/map.h"
 #include "logic/mapregion.h"
 
 int32_t EditorSetHeightTool::handle_click_impl(const Widelands::World& world,

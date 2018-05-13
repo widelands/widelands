@@ -35,9 +35,7 @@ namespace UI {
  */
 class FileViewPanel : public TabPanel {
 public:
-	FileViewPanel(Panel* parent,
-	              const Image* background,
-	              TabPanel::Type border_type = TabPanel::Type::kNoBorder);
+	FileViewPanel(Panel* parent, UI::PanelStyle scrollbar_style, UI::TabPanelStyle background_style);
 
 	/// Adds a tab with the contents of 'lua_script'.
 	/// 'lua_script' must return a table that contains 'title' and 'text' keys.
@@ -49,6 +47,7 @@ private:
 	const int padding_;
 	int contents_width_;
 	int contents_height_;
+	const UI::PanelStyle style_;
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;

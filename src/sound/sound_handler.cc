@@ -32,7 +32,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"

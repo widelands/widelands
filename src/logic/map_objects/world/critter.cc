@@ -27,7 +27,6 @@
 #include <stdint.h>
 
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
