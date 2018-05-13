@@ -518,7 +518,7 @@ public:
 	Economy* create_economy();
 	Economy* create_economy(Serial serial); // For saveloading only
 	void remove_economy(Serial serial);
-	const std::map<Serial,std::unique_ptr<Economy>>& economies() const;
+	const std::map<Serial, std::unique_ptr<Economy>>& economies() const;
 	Economy* get_economy(Widelands::Serial serial) const;
 	bool has_economy(Widelands::Serial serial) const;
 
@@ -638,7 +638,7 @@ private:
 	Field* fields_;
 	std::vector<bool> allowed_worker_types_;
 	std::vector<bool> allowed_building_types_;
-	std::map<Serial,std::unique_ptr<Economy>> economies_;
+	std::map<Serial, std::unique_ptr<Economy>> economies_;
 	std::set<Serial> ships_;
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */

@@ -827,7 +827,7 @@ void Player::remove_economy(Serial serial) {
 	assert(!has_economy(serial));
 }
 
-const std::map<Serial,std::unique_ptr<Economy>>& Player::economies() const {
+const std::map<Serial, std::unique_ptr<Economy>>& Player::economies() const {
 	return economies_;
 }
 
