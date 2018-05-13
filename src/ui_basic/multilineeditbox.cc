@@ -209,6 +209,17 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 }
 
 /**
+ * The mouse was clicked on this editbox
+*/
+bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		focus();
+		return true;
+	}
+	return false;
+}
+
+/**
  * This is called by the UI code whenever a key press or release arrives
  */
 bool MultilineEditbox::handle_key(bool const down, SDL_Keysym const code) {
