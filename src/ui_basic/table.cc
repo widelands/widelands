@@ -432,6 +432,7 @@ void Table<void*>::select(const uint32_t i) {
 	selection_ = i;
 	if (is_multiselect_) {
 		multiselect_.insert(selection_);
+		last_multiselect_ = selection_;
 	}
 
 	selected(selection_);
@@ -549,8 +550,11 @@ void Table<void*>::remove(const uint32_t i) {
 	} else if (selection_ > i && selection_ != no_selection_index()) {
 		selection_--;
 	}
-	if (is_multiselect_ && selection_ != no_selection_index()) {
-		multiselect_.insert(selection_);
+	if (is_multiselect_) {
+		if (selection_ != no_selection_index()) {
+			multiselect_.insert(selection_);
+		}
+		last_multiselect_ = selection_;
 	}
 	layout();
 }
