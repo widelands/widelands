@@ -49,8 +49,16 @@ AttackBox::AttackBox(UI::Panel* parent,
 uint32_t AttackBox::get_max_attackers() {
 	assert(player_);
 
-	if (upcast(Building, building, map_.get_immovable(*node_coordinates_)))
+	if (upcast(Building, building, map_.get_immovable(*node_coordinates_))) {
+        if (player_->vision(
+            map_.get_index(building->get_position(), map_.get_width())) <= 1) {
+            // Player can't see the buildings door, so it can't be attacked
+            // This is the same check as done later on in send_player_enemyflagaction()
+            return 0;
+        }
+
 		return player_->find_attack_soldiers(building->base_flag());
+	}
 	return 0;
 }
 
