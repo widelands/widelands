@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-24 09:46+0000\n"
-"Last-Translator: tamanegi\n"
+"POT-Creation-Date: 2018-05-03 05:41+0000\n"
+"PO-Revision-Date: 2018-05-03 05:42+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,7 +70,7 @@ msgstr "%1$sと%2$s"
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1067
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1053
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
@@ -244,7 +244,7 @@ msgid "Loading tribes"
 msgstr "部族を読込中"
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:165
+#: ../../src/wui/interactive_player.cc:166
 #: ../../src/wui/interactive_spectator.cc:48
 msgid "Main menu"
 msgstr "メインメニュー"
@@ -264,7 +264,7 @@ msgid "Players"
 msgstr "プレイヤー"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:181
+#: ../../src/wui/interactive_player.cc:182
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Show building spaces (on/off)"
 msgstr "建物用地の表示 (オン/オフ)"
@@ -282,13 +282,13 @@ msgid "Show resources (on/off)"
 msgstr "資源の表示 (オン/オフ)"
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:177
+#: ../../src/wui/interactive_player.cc:178
 #: ../../src/wui/interactive_spectator.cc:71
 msgid "Minimap"
 msgstr "ミニマップ"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:183
+#: ../../src/wui/interactive_player.cc:184
 #: ../../src/wui/interactive_spectator.cc:78
 msgid "Reset zoom"
 msgstr "ズーム初期化"
@@ -302,7 +302,7 @@ msgid "Redo"
 msgstr "やり直し"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:343 ../../src/wui/interactive_player.cc:207
+#: ../../src/wui/buildingwindow.cc:343 ../../src/wui/interactive_player.cc:208
 msgid "Help"
 msgstr "ヘルプ"
 
@@ -1056,22 +1056,22 @@ msgstr "読込中……"
 msgid "Creating player infrastructure"
 msgstr "プレイヤーのベース情報を構成中"
 
-#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:219
+#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:221
 msgid "Missing starting position"
 msgstr "開始位置が見つかりません"
 
-#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:220
+#: ../../src/logic/game.cc:446 ../../src/logic/player.cc:222
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "プレイヤー %u の開始位置が存在しないため、Widelandsはゲームを開始できませんでした。\nWidelandsエディタ上で手動で開始位置を追加すれば、問題を解決できます。"
 
-#: ../../src/logic/game.cc:786
+#: ../../src/logic/game.cc:789
 msgid "Trade Offer"
 msgstr "トレードの提案"
 
-#: ../../src/logic/game.cc:788
+#: ../../src/logic/game.cc:791
 msgid "This market has received a new trade offer."
 msgstr "このマーケットは新たなトレードの提案を受け取りました。"
 
@@ -1161,7 +1161,7 @@ msgstr "襲撃を受けています。"
 #: ../../src/logic/map_objects/tribes/production_program.cc:309
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr "経済が物資「%s」を必要としている"
+msgstr "経済が物資「%s」を必要としているの"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the
@@ -1169,7 +1169,7 @@ msgstr "経済が物資「%s」を必要としている"
 #: ../../src/logic/map_objects/tribes/production_program.cc:318
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr "経済が物資「%s」を必要としていない"
+msgstr "経済が物資「%s」を必要としていないの"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -1177,14 +1177,14 @@ msgstr "経済が物資「%s」を必要としていない"
 #: ../../src/logic/map_objects/tribes/production_program.cc:331
 #, c-format
 msgid "the economy needs the worker ‘%s’"
-msgstr "経済が労働者「%s」を必要としている"
+msgstr "経済が労働者「%s」を必要としているの"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ...
 #. * TRANSLATORS:      ... because the economy doesn’t need the worker ‘%s’
 #: ../../src/logic/map_objects/tribes/production_program.cc:341
 #, c-format
 msgid "the economy doesn’t need the worker ‘%s’"
-msgstr "経済が労働者「%s」を必要としていない"
+msgstr "経済が労働者「%s」を必要としていないの"
 
 #. * TRANSLATORS: This is an item in a list of wares, e.g. "3x water":
 #. * TRANSLATORS:    %1$i = "3"
@@ -1215,25 +1215,25 @@ msgstr "%2$sx%1$i"
 #: ../../src/logic/map_objects/tribes/production_program.cc:394
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr "この建物には物資 %s がある"
+msgstr "この建物には物資 %s があるの"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/map_objects/tribes/production_program.cc:420
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr "この建物には物資 %s が無い"
+msgstr "この建物には物資 %s が無いの"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:433
 msgid "a worker needs experience"
-msgstr "労働者が経験を必要としている"
+msgstr "労働者が経験を必要としているの"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because the workers
 #. need no experience'.
 #: ../../src/logic/map_objects/tribes/production_program.cc:439
 msgid "the workers need no experience"
-msgstr "労働者が経験を必要としていない"
+msgstr "労働者が経験を必要としていないの"
 
 #. * TRANSLATORS: "Did not start working because the economy needs the ware
 #. ‘%s’"
@@ -1252,19 +1252,19 @@ msgstr "労働者が経験を必要としていない"
 #: ../../src/logic/map_objects/tribes/production_program.cc:901
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr "%2$sため、%1$sを中止しました"
+msgstr "%2$sで、%1$sを中止しました"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:548
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr "%2$sので、%1$sを完了しました"
+msgstr "%2$sで、%1$sを完了しました"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:553
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr "%2$sので、%1$sをスキップしました"
+msgstr "%2$sで、%1$sをスキップしました"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:748
 msgid "No use for ships on this map!"
@@ -1278,7 +1278,7 @@ msgstr "このマップでは船は無用です！"
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
-msgstr[0] "%sが無い"
+msgstr[0] "%sが無いの"
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
@@ -1332,95 +1332,109 @@ msgstr "%i%%"
 msgid "Can’t find any more resources!"
 msgstr "これ以上資源を見つけられません！"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:424
 msgid "Port Space"
 msgstr "港の候補地"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:416
+#: ../../src/logic/map_objects/tribes/ship.cc:424
 msgid "Port Space Found"
 msgstr "港の候補地を発見"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:417
+#: ../../src/logic/map_objects/tribes/ship.cc:425
 msgid "An expedition ship found a new port build space."
 msgstr "探検船が港を建設可能な場所を発見しました。"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:543
 msgid "Island Circumnavigated"
 msgstr "島を一周しました"
 
 #. * TRANSLATORS: A ship has circumnavigated an island and is waiting
 #. for orders
-#: ../../src/logic/map_objects/tribes/ship.cc:538
+#: ../../src/logic/map_objects/tribes/ship.cc:543
 msgctxt "ship"
 msgid "Waiting"
 msgstr "待機中"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:539
+#: ../../src/logic/map_objects/tribes/ship.cc:544
 msgid "An expedition ship sailed around its island without any events."
 msgstr "探検船は何事も無く島を一周してしまいました。"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:606
 msgid "Coast Reached"
 msgstr "岸に到達"
 
 #. * TRANSLATORS: A ship has discovered land
-#: ../../src/logic/map_objects/tribes/ship.cc:603
+#: ../../src/logic/map_objects/tribes/ship.cc:606
 msgid "Land Ahoy!"
 msgstr "おーい陸だぞー！"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:604
+#: ../../src/logic/map_objects/tribes/ship.cc:607
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "探検船は陸地に到達し、次の指示を待っています。"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "New port construction site is gone"
 msgstr "新たな港の建設現場が無くなりました"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:673
+#: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "Port Lost!"
 msgstr "港消失！"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:674
+#: ../../src/logic/map_objects/tribes/ship.cc:673
 msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "物資の回収はできず、探検も中止されます。"
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgctxt "ship"
 msgid "Expedition"
 msgstr "探検"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:847
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgid "Expedition Ready"
 msgstr "探検準備完了"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:848
+#: ../../src/logic/map_objects/tribes/ship.cc:855
 msgid "An expedition ship is waiting for your commands."
 msgstr "探検船はあなたの命令を待っています。"
 
-#. * TRANSLATORS: This is a ship state
-#: ../../src/logic/map_objects/tribes/ship.cc:984
+#. * TRANSLATORS: This is a ship state. The ship is currently transporting
+#. wares.
+#: ../../src/logic/map_objects/tribes/ship.cc:994
+#: ../../src/wui/seafaring_statistics_menu.cc:222
 msgctxt "ship_state"
 msgid "Shipping"
 msgstr "輸送中"
 
+#. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
+#. but has
+#. * nothing to do.
+#: ../../src/logic/map_objects/tribes/ship.cc:998
+#: ../../src/wui/seafaring_statistics_menu.cc:220
+msgctxt "ship_state"
+msgid "Idle"
+msgstr ""
+
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:988
+#: ../../src/logic/map_objects/tribes/ship.cc:1003
+#: ../../src/wui/seafaring_statistics_menu.cc:224
 msgctxt "ship_state"
 msgid "Waiting"
 msgstr "待機中"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:992
+#: ../../src/logic/map_objects/tribes/ship.cc:1007
+#: ../../src/wui/seafaring_statistics_menu.cc:226
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "偵察中"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:996
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
+#: ../../src/wui/seafaring_statistics_menu.cc:228
 msgctxt "ship_state"
 msgid "Port Space Found"
 msgstr "港の候補地を発見"
@@ -1428,7 +1442,8 @@ msgstr "港の候補地を発見"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1001
+#: ../../src/logic/map_objects/tribes/ship.cc:1016
+#: ../../src/wui/seafaring_statistics_menu.cc:230
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "居留地を設立中"
@@ -1512,6 +1527,12 @@ msgstr "歩行不能"
 #: ../../src/logic/objective.h:38
 msgid "This objective has no description."
 msgstr "この目的には説明がありません。"
+
+#: ../../src/logic/player.cc:1323
+#, c-format
+msgctxt "shipname"
+msgid "Ship %d"
+msgstr ""
 
 #: ../../src/logic/replay_game_controller.cc:97
 msgid "End of Replay"
@@ -1716,122 +1737,118 @@ msgstr "Widelandsは、指定されたアドレスへの接続を確立できま
 msgid "Users marked with IRC will possibly not react to messages."
 msgstr "IRCとマークされているユーザはおそらくメッセージに応答しないでしょう。"
 
-#: ../../src/network/internet_gaming.cc:215
+#: ../../src/network/internet_gaming.cc:213
 msgid "Successfully reconnected to the metaserver!"
 msgstr "正常にメタサーバーに再接続しました。"
 
-#: ../../src/network/internet_gaming.cc:289
+#: ../../src/network/internet_gaming.cc:287
 #: ../../src/network/network_gaming_messages.cc:129
 #, c-format
 msgid "Something went wrong: %s"
 msgstr "何らかの問題が発生しました: %s"
 
-#: ../../src/network/internet_gaming.cc:449
+#: ../../src/network/internet_gaming.cc:373
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "あなたのリクエストした名前は予約されているか既に使われているため、あなたは「%s」という名前でログインしています。"
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:395
 msgid "Mixed up"
 msgstr "混乱中"
 
-#: ../../src/network/internet_gaming.cc:471
+#: ../../src/network/internet_gaming.cc:395
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "メタサーバーが接続中に奇妙な ERROR を送信しました"
 
-#: ../../src/network/internet_gaming.cc:486
+#: ../../src/network/internet_gaming.cc:410
 msgid "Unexpected packet"
 msgstr "予期しないパケット"
 
-#: ../../src/network/internet_gaming.cc:487
+#: ../../src/network/internet_gaming.cc:411
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "メタサーバーから予期しないパケットを受信しました。メタサーバーが違うプロトコルのバージョンを使っているのかもしれません。エラーが続くようなら、ゲームを更新してください。"
 
-#: ../../src/network/internet_gaming.cc:499
+#: ../../src/network/internet_gaming.cc:423
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "警告: 接続状態ではありませんが、%sコマンドを受信しました。"
 
-#: ../../src/network/internet_gaming.cc:510
+#: ../../src/network/internet_gaming.cc:434
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "サーバー時間とのオフセットは %d 秒です。"
 
-#: ../../src/network/internet_gaming.cc:534
+#: ../../src/network/internet_gaming.cc:458
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "不正なチャットメッセージタイプ「%s」です。"
 
-#: ../../src/network/internet_gaming.cc:534
+#: ../../src/network/internet_gaming.cc:458
 msgid "Invalid message type"
 msgstr "不正なメッセージタイプ"
 
-#: ../../src/network/internet_gaming.cc:572
+#: ../../src/network/internet_gaming.cc:496
 #, c-format
 msgid "The game %s is now available"
 msgstr "ゲーム%sは利用可能です"
 
-#: ../../src/network/internet_gaming.cc:582
+#: ../../src/network/internet_gaming.cc:506
 #, c-format
 msgid "The game %s has been closed"
 msgstr "ゲーム%sはクローズされています"
 
-#: ../../src/network/internet_gaming.cc:629
+#: ../../src/network/internet_gaming.cc:552
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%sがロビーに入室しました"
 
-#: ../../src/network/internet_gaming.cc:636
+#: ../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "%s left the lobby"
 msgstr "%sがロビーを退室しました"
 
-#: ../../src/network/internet_gaming.cc:691
+#: ../../src/network/internet_gaming.cc:614
 msgid "Chat message could not be sent."
 msgstr "チャットメッセージが送れませんでした。"
 
-#: ../../src/network/internet_gaming.cc:705
+#: ../../src/network/internet_gaming.cc:628
 #, c-format
 msgid "ERROR: %s"
 msgstr "エラー: %s"
 
-#: ../../src/network/internet_gaming.cc:715
+#: ../../src/network/internet_gaming.cc:638
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "メタサーバーから不明なコマンドを受信しました: %s"
 
-#: ../../src/network/internet_gaming.cc:841
+#: ../../src/network/internet_gaming.cc:764
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "メッセージを送信できませんでした。あなたはメタサーバーに接続されていません！"
 
-#: ../../src/network/internet_gaming.cc:860
-#: ../../src/network/internet_gaming.cc:867
+#: ../../src/network/internet_gaming.cc:783
+#: ../../src/network/internet_gaming.cc:790
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "メッセージを送信できませんでした。これはプライベートメッセージのつもりでしたか？"
 
-#: ../../src/network/internet_gaming.cc:874
-msgid "Private messages to IRC users are not supported."
-msgstr "IRCユーザーにプライベートメッセージを送ることはできません。"
-
-#: ../../src/network/internet_gaming.cc:951
+#: ../../src/network/internet_gaming.cc:866
 msgid "Conversion error"
 msgstr "変換エラー"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:954
+#: ../../src/network/internet_gaming.cc:869
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "「%s」を真偽値に変換できません"
 
-#: ../../src/network/internet_gaming.cc:971
+#: ../../src/network/internet_gaming.cc:886
 msgid "unknown"
 msgstr "不明"
 
@@ -2155,7 +2172,7 @@ msgstr[0] "%dピクセル"
 msgid "About Widelands"
 msgstr "Widelandsについて"
 
-#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:126
+#: ../../src/ui_fsmenu/about.cc:30 ../../src/wui/watchwindow.cc:80
 msgid "Close"
 msgstr "閉じる"
 
@@ -2310,32 +2327,32 @@ msgstr "右側に選択中のチュートリアルの説明が表示されます
 msgid "Help: %s"
 msgstr "ヘルプ: %s"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:52
+#: ../../src/ui_fsmenu/internet_lobby.cc:62
 msgid "Metaserver Lobby"
 msgstr "メタサーバー ロビー"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:53
+#: ../../src/ui_fsmenu/internet_lobby.cc:63
 msgid "Clients online:"
 msgstr "オンラインのクライアント: "
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:54
+#: ../../src/ui_fsmenu/internet_lobby.cc:64
 msgid "List of games:"
 msgstr "ゲーム一覧: "
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:55
+#: ../../src/ui_fsmenu/internet_lobby.cc:65
 msgid "Name of your server:"
 msgstr "あなたのサーバー名: "
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:65
+#: ../../src/ui_fsmenu/internet_lobby.cc:75
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Join this game"
 msgstr "このゲームに参加"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:73
+#: ../../src/ui_fsmenu/internet_lobby.cc:83
 msgid "Open a new game"
 msgstr "新規ゲームを開く"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:81
+#: ../../src/ui_fsmenu/internet_lobby.cc:91
 #: ../../src/ui_fsmenu/launch_game.cc:72
 #: ../../src/ui_fsmenu/load_map_or_game.cc:37
 #: ../../src/ui_fsmenu/multiplayer.cc:55
@@ -2344,51 +2361,51 @@ msgstr "新規ゲームを開く"
 msgid "Back"
 msgstr "戻る"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:130
+#: ../../src/ui_fsmenu/internet_lobby.cc:140
 msgid "User Status"
 msgstr "ユーザーの状態"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:131
+#: ../../src/ui_fsmenu/internet_lobby.cc:141
 msgid "Registered"
 msgstr "登録済"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:132
+#: ../../src/ui_fsmenu/internet_lobby.cc:142
 msgid "Administrator"
 msgstr "管理者"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:133
+#: ../../src/ui_fsmenu/internet_lobby.cc:143
 msgid "Unregistered"
 msgstr "未登録"
 
 #. * TRANSLATORS: Player Name
-#: ../../src/ui_fsmenu/internet_lobby.cc:137
+#: ../../src/ui_fsmenu/internet_lobby.cc:147
 msgctxt "player"
 msgid "Name"
 msgstr "名前"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:138
+#: ../../src/ui_fsmenu/internet_lobby.cc:148
 msgid "Version"
 msgstr "バージョン"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:140
+#: ../../src/ui_fsmenu/internet_lobby.cc:150
 #: ../../src/ui_fsmenu/options.cc:234
 msgid "Game"
 msgstr "ゲーム"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:374
+#: ../../src/ui_fsmenu/internet_lobby.cc:376
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr "Widelandsは時間内にサーバのIPアドレスを取得できませんでした。あなたの側かサーバ側のどちらかのネットワークに問題があるようです。\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:377
+#: ../../src/ui_fsmenu/internet_lobby.cc:379
 msgid "Connection Timed Out"
 msgstr "接続がタイムアウトしました"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:412
+#: ../../src/ui_fsmenu/internet_lobby.cc:414
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "無名"
@@ -2768,12 +2785,12 @@ msgid "Distance for windows to snap to borders:"
 msgstr "ウィンドウが画面外に収納される距離"
 
 #: ../../src/ui_fsmenu/options.cc:165
-#: ../../src/wui/game_options_sound_menu.cc:28
+#: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Enable music"
 msgstr "音楽を有効にする"
 
 #: ../../src/ui_fsmenu/options.cc:166
-#: ../../src/wui/game_options_sound_menu.cc:31
+#: ../../src/wui/game_options_sound_menu.cc:32
 msgid "Enable sound effects"
 msgstr "効果音を有効にする"
 
@@ -2832,32 +2849,37 @@ msgstr "サウンド"
 msgid "Saving"
 msgstr "保存"
 
+#: ../../src/ui_fsmenu/options.cc:264
+#: ../../src/wui/game_options_sound_menu.cc:85
+msgid "Sound is disabled due to a problem with the sound driver"
+msgstr "サウンドドライバの問題のため、サウンドを無効化しました。"
+
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:282
+#: ../../src/ui_fsmenu/options.cc:289
 msgid "Off"
 msgstr "オフ"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:308 ../../src/ui_fsmenu/options.cc:317
+#: ../../src/ui_fsmenu/options.cc:315 ../../src/ui_fsmenu/options.cc:324
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:421
+#: ../../src/ui_fsmenu/options.cc:429
 msgid "Try system language"
 msgstr "システム言語を試す"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:520
+#: ../../src/ui_fsmenu/options.cc:528
 #, c-format
 msgid "The translation into %s is complete."
 msgstr "%sへの翻訳は完了しています。"
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:523
+#: ../../src/ui_fsmenu/options.cc:531
 msgid "The translation into %1% is %2%%% complete."
 msgstr "%1%への翻訳は%2%%%完了しています。"
 
-#: ../../src/ui_fsmenu/options.cc:537
+#: ../../src/ui_fsmenu/options.cc:545
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr "翻訳に協力するつもりならば、%sを見てください。"
@@ -3009,15 +3031,15 @@ msgstr "次の建物を表示する"
 
 #: ../../src/wui/building_statistics_menu.cc:306
 msgid "Small buildings"
-msgstr "小さな建物"
+msgstr "小サイズの建物"
 
 #: ../../src/wui/building_statistics_menu.cc:308
 msgid "Medium buildings"
-msgstr "中くらいな建物"
+msgstr "中サイズの建物"
 
 #: ../../src/wui/building_statistics_menu.cc:310
 msgid "Big buildings"
-msgstr "大きな建物"
+msgstr "大サイズの建物"
 
 #: ../../src/wui/building_statistics_menu.cc:312
 msgid "Mines"
@@ -3134,15 +3156,15 @@ msgstr "デフォルトにリセット"
 
 #: ../../src/wui/fieldaction.cc:216
 msgid "Build small building"
-msgstr "小さな建物を建設"
+msgstr "小サイズの建物を建設"
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build big building"
-msgstr "大きな建物を建設"
+msgstr "大サイズの建物を建設"
 
 #: ../../src/wui/fieldaction.cc:217
 msgid "Build medium building"
-msgstr "中くらいな建物を建設"
+msgstr "中サイズの建物を建設"
 
 #: ../../src/wui/fieldaction.cc:218
 msgid "Build port building"
@@ -3188,7 +3210,7 @@ msgstr "建物の状態の表示/非表示を切替"
 msgid "Toggle building label display"
 msgstr "建物名の表示/非表示を切替"
 
-#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:100
+#: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:54
 msgid "Watch"
 msgstr "監視"
 
@@ -3216,7 +3238,7 @@ msgstr "道の敷設をキャンセル"
 msgid "Build roads"
 msgstr "道を敷設"
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:190
+#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:191
 #: ../../src/wui/interactive_spectator.cc:87
 msgid "Chat"
 msgstr "チャット"
@@ -3298,10 +3320,19 @@ msgstr "マップ視点の中心をこの場所にする"
 #: ../../src/wui/game_message_menu.cc:542
 #: ../../src/wui/game_message_menu.cc:546
 #: ../../src/wui/game_message_menu.cc:550
+#: ../../src/wui/seafaring_statistics_menu.cc:101
+#: ../../src/wui/seafaring_statistics_menu.cc:132
+#: ../../src/wui/seafaring_statistics_menu.cc:509
+#: ../../src/wui/seafaring_statistics_menu.cc:518
+#: ../../src/wui/seafaring_statistics_menu.cc:522
+#: ../../src/wui/seafaring_statistics_menu.cc:527
+#: ../../src/wui/seafaring_statistics_menu.cc:531
+#: ../../src/wui/seafaring_statistics_menu.cc:536
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (ホットキー: %2%)"
 
 #: ../../src/wui/game_message_menu.cc:524
+#: ../../src/wui/seafaring_statistics_menu.cc:511
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
@@ -3317,11 +3348,13 @@ msgid "Show geologists' messages only"
 msgstr "地質学者のメッセージだけを表示"
 
 #: ../../src/wui/game_message_menu.cc:536
+#: ../../src/wui/seafaring_statistics_menu.cc:520
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
 #: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
@@ -3332,6 +3365,7 @@ msgid "Show economy messages only"
 msgstr "経済関連メッセージのみ表示"
 
 #: ../../src/wui/game_message_menu.cc:544
+#: ../../src/wui/seafaring_statistics_menu.cc:529
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
@@ -3342,6 +3376,7 @@ msgid "Show seafaring messages only"
 msgstr "航海関連メッセージのみ表示"
 
 #: ../../src/wui/game_message_menu.cc:548
+#: ../../src/wui/seafaring_statistics_menu.cc:533
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
@@ -3352,6 +3387,7 @@ msgid "Show warfare messages only"
 msgstr "戦闘関連メッセージのみ表示"
 
 #: ../../src/wui/game_message_menu.cc:552
+#: ../../src/wui/seafaring_statistics_menu.cc:539
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
@@ -3406,7 +3442,7 @@ msgid "Del: %s"
 msgstr "削除: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:200
+#: ../../src/wui/interactive_player.cc:201
 msgid "Objectives"
 msgstr "目的"
 
@@ -3420,7 +3456,7 @@ msgid "Are you sure you wish to exit this game?"
 msgstr "本当にゲームを終了しますか？"
 
 #: ../../src/wui/game_options_menu.cc:77
-#: ../../src/wui/game_options_sound_menu.cc:27
+#: ../../src/wui/game_options_sound_menu.cc:28
 msgid "Sound Options"
 msgstr "サウンドオプション"
 
@@ -3434,34 +3470,39 @@ msgstr "音楽と効果音のオプション"
 msgid "Exit Game"
 msgstr "ゲーム終了"
 
-#: ../../src/wui/game_options_sound_menu.cc:35
+#: ../../src/wui/game_options_sound_menu.cc:36
 msgid "Music volume"
 msgstr "音楽ボリューム"
 
-#: ../../src/wui/game_options_sound_menu.cc:50
+#: ../../src/wui/game_options_sound_menu.cc:51
 msgid "Sound effects volume"
 msgstr "効果音の音量"
 
-#: ../../src/wui/game_statistics_menu.cc:36
+#: ../../src/wui/game_statistics_menu.cc:37
 msgid "Statistics Menu"
 msgstr "統計メニュー"
 
-#: ../../src/wui/game_statistics_menu.cc:40
+#: ../../src/wui/game_statistics_menu.cc:42
 msgid "General statistics"
 msgstr "一般統計"
 
-#: ../../src/wui/game_statistics_menu.cc:43
+#: ../../src/wui/game_statistics_menu.cc:45
 msgid "Ware statistics"
 msgstr "物資統計"
 
-#: ../../src/wui/game_statistics_menu.cc:44
+#: ../../src/wui/game_statistics_menu.cc:46
 msgid "Building statistics"
 msgstr "建物統計"
 
-#: ../../src/wui/game_statistics_menu.cc:46 ../../src/wui/stock_menu.cc:36
+#: ../../src/wui/game_statistics_menu.cc:48 ../../src/wui/stock_menu.cc:36
 #: ../../src/wui/ware_statistics_menu.cc:147 ../../src/wui/waresdisplay.cc:68
 msgid "Stock"
 msgstr "ストック"
+
+#: ../../src/wui/game_statistics_menu.cc:50
+#: ../../src/wui/seafaring_statistics_menu.cc:46
+msgid "Seafaring Statistics"
+msgstr ""
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
@@ -3630,17 +3671,17 @@ msgstr "一時停止"
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:169
+#: ../../src/wui/interactive_player.cc:170
 #: ../../src/wui/interactive_spectator.cc:62
 msgid "Statistics"
 msgstr "統計"
 
-#: ../../src/wui/interactive_player.cc:204
-#: ../../src/wui/interactive_player.cc:256
+#: ../../src/wui/interactive_player.cc:205
+#: ../../src/wui/interactive_player.cc:257
 msgid "Messages"
 msgstr "メッセージ"
 
-#: ../../src/wui/interactive_player.cc:261
+#: ../../src/wui/interactive_player.cc:262
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -4208,6 +4249,92 @@ msgstr "(接近中)"
 msgid "(vacant)"
 msgstr "(不在)"
 
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:103
+msgid "Watch the selected ship"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:104
+msgctxt "hotkey"
+msgid "W"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:116
+#: ../../src/wui/seafaring_statistics_menu.cc:119
+msgctxt "hotkey_description"
+msgid "%1%: %2%"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:116
+msgctxt "hotkey"
+msgid "O"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:118
+msgid "Open the selected ship’s window"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:120
+msgctxt "hotkey"
+msgid "CTRL + O"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:122
+msgid "Go to the selected ship and open its window"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the seafaring statistics window
+#: ../../src/wui/seafaring_statistics_menu.cc:134
+msgid "Center the map on the selected ship"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:135
+msgctxt "hotkey"
+msgid "G"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:187
+msgctxt "ship"
+msgid "Name"
+msgstr ""
+
+#: ../../src/wui/seafaring_statistics_menu.cc:188
+msgctxt "ship"
+msgid "Status"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:511
+msgid "Show all ships"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:520
+msgid "Show idle ships"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:524
+msgid "Show ships shipping wares and workers"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:529
+msgid "Show waiting expeditions"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:533
+msgid "Show scouting expeditions"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip in the messages window
+#: ../../src/wui/seafaring_statistics_menu.cc:538
+msgid "Show expeditions that have found a port space or are founding a colony"
+msgstr ""
+
 #: ../../src/wui/shipwindow.cc:79
 msgid "Scout towards the north west"
 msgstr "北西を偵察"
@@ -4261,11 +4388,11 @@ msgid "Go to ship"
 msgstr "船に視点移動"
 
 #. * TRANSLATORS: Window label when an expedition can't be canceled
-#: ../../src/wui/shipwindow.cc:172
+#: ../../src/wui/shipwindow.cc:219
 msgid "Cancel Expedition"
 msgstr "探検キャンセル"
 
-#: ../../src/wui/shipwindow.cc:172
+#: ../../src/wui/shipwindow.cc:219
 msgid ""
 "This expedition can’t be canceled, because the ship has no port to return "
 "to."
@@ -4344,15 +4471,15 @@ msgstr "通常の方針"
 
 #: ../../src/wui/warehousewindow.cc:147
 msgid "Preferably store selected wares here"
-msgstr "選択したアイテムをここに優先的に格納"
+msgstr "選択した物資をここに優先的に保管"
 
 #: ../../src/wui/warehousewindow.cc:148
 msgid "Do not store selected wares here"
-msgstr "選択したアイテムをここに格納しない"
+msgstr "選択した物資をここに保管しない"
 
 #: ../../src/wui/warehousewindow.cc:149
 msgid "Remove selected wares from here"
-msgstr "選択したアイテムをここから移動"
+msgstr "選択した物資をここから移動"
 
 #: ../../src/wui/warehousewindow.cc:199
 msgid "Wares waiting to be shipped"
@@ -4366,10 +4493,10 @@ msgstr "乗船待ちの労働者"
 msgid "Expedition"
 msgstr "探検"
 
-#: ../../src/wui/watchwindow.cc:108
+#: ../../src/wui/watchwindow.cc:62
 msgid "Follow"
 msgstr "追跡"
 
-#: ../../src/wui/watchwindow.cc:114
+#: ../../src/wui/watchwindow.cc:68
 msgid "Center the main view on this"
 msgstr "ここに視点移動"

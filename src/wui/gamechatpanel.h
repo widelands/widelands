@@ -33,7 +33,13 @@ struct ChatProvider;
  * entry field.
  */
 struct GameChatPanel : public UI::Panel {
-	GameChatPanel(UI::Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, ChatProvider&);
+	GameChatPanel(UI::Panel*,
+	              int32_t x,
+	              int32_t y,
+	              uint32_t w,
+	              uint32_t h,
+	              ChatProvider&,
+	              UI::PanelStyle style);
 
 	// Signal is called when a message has been sent by the user.
 	boost::signals2::signal<void()> sent;
@@ -58,7 +64,7 @@ private:
 	ChatProvider& chat_;
 	UI::MultilineTextarea chatbox;
 	UI::EditBox editbox;
-	uint32_t chat_message_counter;
+	size_t chat_message_counter;
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 };
 

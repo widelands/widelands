@@ -22,14 +22,12 @@
 #include <boost/bind.hpp>
 
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
-#include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 
@@ -47,16 +45,17 @@ Table<void*>::Table(Panel* const parent,
                     int32_t y,
                     uint32_t w,
                     uint32_t h,
-                    const Image* button_background,
+                    PanelStyle style,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
      headerheight_(text_height() + 4),
      lineheight_(text_height()),
-     button_background_(button_background),
+     button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
+                                                      UI::ButtonStyle::kWuiSecondary),
      scrollbar_(nullptr),
      scrollbar_filler_button_(
-        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "")),
+        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
@@ -71,7 +70,7 @@ Table<void*>::Table(Panel* const parent,
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
 	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
-	                           get_h() - headerheight_, button_background);
+	                           get_h() - headerheight_, style);
 	scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
@@ -113,8 +112,8 @@ void Table<void*>::add_column(uint32_t const width,
 		Column c;
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
-		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_background_,
-		                   title, tooltip_string);
+		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title,
+		                   tooltip_string);
 		c.btn->sigclicked.connect(
 		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
@@ -528,6 +527,10 @@ Table<void*>::EntryRecord& Table<void*>::add(void* const entry, const bool do_se
 */
 void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
+}
+
+void Table<void*>::scroll_to_top() {
+	scrollbar_->set_scrollpos(0);
 }
 
 /**

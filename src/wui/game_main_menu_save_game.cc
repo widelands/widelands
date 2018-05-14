@@ -54,27 +54,16 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      main_box_(this, 0, 0, UI::Box::Vertical),
      info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
-     load_or_save_(&info_box_,
-                   igbase().game(),
-                   LoadOrSaveGame::FileType::kGame,
-                   GameDetails::Style::kWui,
-                   false),
+     load_or_save_(
+        &info_box_, igbase().game(), LoadOrSaveGame::FileType::kGame, UI::PanelStyle::kWui, false),
 
      filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
      filename_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
-     filename_editbox_(
-        &filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     filename_editbox_(&filename_box_, 0, 0, 0, 0, 2, UI::PanelStyle::kWui),
 
      buttons_box_(load_or_save_.game_details()->button_box(), 0, 0, UI::Box::Horizontal),
-     cancel_(&buttons_box_,
-             "cancel",
-             0,
-             0,
-             0,
-             0,
-             g_gr->images().get("images/ui_basic/but1.png"),
-             _("Cancel")),
-     ok_(&buttons_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but5.png"), _("OK")),
+     cancel_(&buttons_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
+     ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
      curdir_(kSaveDir) {
 

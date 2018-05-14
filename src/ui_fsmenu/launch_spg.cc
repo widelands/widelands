@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -52,7 +51,7 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
                  get_h() * 3 / 10,
                  butw_,
                  buth_,
-                 g_gr->images().get("images/ui_basic/but1.png"),
+                 UI::ButtonStyle::kFsMenuSecondary,
                  _("Select map")),
 
      // Text labels
@@ -106,8 +105,8 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
 		pos_[i] =
 		   new UI::Button(this, "switch_to_position", get_w() / 100, y += buth_, get_h() * 17 / 500,
-		                  get_h() * 17 / 500, g_gr->images().get("images/ui_basic/but1.png"),
-		                  player_image, _("Switch to position"));
+		                  get_h() * 17 / 500, UI::ButtonStyle::kFsMenuSecondary, player_image,
+		                  _("Switch to position"));
 		pos_[i]->sigclicked.connect(
 		   boost::bind(&FullscreenMenuLaunchSPG::switch_to_position, boost::ref(*this), i));
 		players_[i] = new PlayerDescriptionGroup(

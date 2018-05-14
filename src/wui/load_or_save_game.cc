@@ -68,18 +68,11 @@ map_filename(const std::string& filename, const std::string& mapname, bool local
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                Widelands::Game& g,
                                FileType filetype,
-                               GameDetails::Style style,
+                               UI::PanelStyle style,
                                bool localize_autosave)
    : parent_(parent),
      table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
-     table_(table_box_,
-            0,
-            0,
-            0,
-            0,
-            g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
-                                                                      "images/ui_basic/but1.png"),
-            UI::TableRows::kMultiDescending),
+     table_(table_box_, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
      filetype_(filetype),
      localize_autosave_(localize_autosave),
      // Savegame description
@@ -93,7 +86,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                             0,
                             0,
                             0,
-                            g_gr->images().get("images/ui_basic/but0.png"),
+                            style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                               UI::ButtonStyle::kWuiSecondary,
                             _("Delete"))),
      game_(g) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
