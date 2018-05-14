@@ -76,6 +76,7 @@ public:
 
 	/// Text conventions: Title Case for the 'title'
 	void set_column_title(uint8_t col, const std::string& title);
+	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 
 	void clear();
 	void set_sort_column(uint8_t col);
@@ -189,6 +190,7 @@ public:
 	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
+	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
 	void clear();
