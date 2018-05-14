@@ -54,15 +54,15 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
                   kMessageBodyY,
                   kWindowWidth - 2 * kPadding,
                   get_inner_h() - kMessageBodyY - 2 * kPadding - kButtonSize,
+                  UI::PanelStyle::kWui,
                   "",
                   UI::Align::kLeft,
-                  g_gr->images().get("images/ui_basic/but1.png"),
                   UI::MultilineTextarea::ScrollMode::kScrollNormalForced),
      mode(Inbox) {
 
-	list = new UI::Table<uintptr_t>(
-	   this, kPadding, kButtonSize + 2 * kPadding, kWindowWidth - 2 * kPadding, kTableHeight,
-	   g_gr->images().get("images/ui_basic/but1.png"), UI::TableRows::kMulti);
+	list = new UI::Table<uintptr_t>(this, kPadding, kButtonSize + 2 * kPadding,
+	                                kWindowWidth - 2 * kPadding, kTableHeight, UI::PanelStyle::kWui,
+	                                UI::TableRows::kMulti);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column(kWindowWidth - 2 * kPadding - 60 - 60 - 75, _("Title"));
@@ -76,38 +76,34 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	list->focus();
 
 	// Buttons for message types
-	geologistsbtn_ =
-	   new UI::Button(this, "filter_geologists_messages", kPadding, kPadding, kButtonSize,
-	                  kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                  g_gr->images().get("images/wui/fieldaction/menu_geologist.png"));
+	geologistsbtn_ = new UI::Button(this, "filter_geologists_messages", kPadding, kPadding,
+	                                kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	                                g_gr->images().get("images/wui/fieldaction/menu_geologist.png"));
 	geologistsbtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kGeologists));
 
-	economybtn_ =
-	   new UI::Button(this, "filter_economy_messages", 2 * kPadding + kButtonSize, kPadding,
-	                  kButtonSize, kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                  g_gr->images().get("images/wui/stats/genstats_nrwares.png"));
+	economybtn_ = new UI::Button(this, "filter_economy_messages", 2 * kPadding + kButtonSize,
+	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	                             g_gr->images().get("images/wui/stats/genstats_nrwares.png"));
 	economybtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kEconomy));
 
 	seafaringbtn_ =
 	   new UI::Button(this, "filter_seafaring_messages", 3 * kPadding + 2 * kButtonSize, kPadding,
-	                  kButtonSize, kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
+	                  kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
 	                  g_gr->images().get("images/wui/buildings/start_expedition.png"));
 	seafaringbtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kSeafaring));
 
-	warfarebtn_ =
-	   new UI::Button(this, "filter_warfare_messages", 4 * kPadding + 3 * kButtonSize, kPadding,
-	                  kButtonSize, kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                  g_gr->images().get("images/wui/messages/messages_warfare.png"));
+	warfarebtn_ = new UI::Button(this, "filter_warfare_messages", 4 * kPadding + 3 * kButtonSize,
+	                             kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	                             g_gr->images().get("images/wui/messages/messages_warfare.png"));
 	warfarebtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kWarfare));
 
-	scenariobtn_ =
-	   new UI::Button(this, "filter_scenario_messages", 5 * kPadding + 4 * kButtonSize, kPadding,
-	                  kButtonSize, kButtonSize, g_gr->images().get("images/ui_basic/but0.png"),
-	                  g_gr->images().get("images/wui/menus/menu_objectives.png"));
+	scenariobtn_ = new UI::Button(this, "filter_scenario_messages", 5 * kPadding + 4 * kButtonSize,
+	                              kPadding, kButtonSize, kButtonSize, UI::ButtonStyle::kWuiSecondary,
+	                              g_gr->images().get("images/wui/menus/menu_objectives.png"));
 	scenariobtn_->sigclicked.connect(
 	   boost::bind(&GameMessageMenu::filter_messages, this, Widelands::Message::Type::kScenario));
 
@@ -117,7 +113,7 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 
 	archivebtn_ = new UI::Button(this, "archive_or_restore_selected_messages", kPadding,
 	                             kWindowHeight - kPadding - kButtonSize, kButtonSize, kButtonSize,
-	                             g_gr->images().get("images/ui_basic/but2.png"),
+	                             UI::ButtonStyle::kWuiPrimary,
 	                             g_gr->images().get("images/wui/messages/message_archive.png"));
 	update_archive_button_tooltip();
 	archivebtn_->sigclicked.connect(boost::bind(&GameMessageMenu::archive_or_restore, this));
@@ -125,14 +121,13 @@ GameMessageMenu::GameMessageMenu(InteractivePlayer& plr, UI::UniqueWindow::Regis
 	togglemodebtn_ = new UI::Button(
 	   this, "toggle_between_inbox_or_archive",
 	   archivebtn_->get_x() + archivebtn_->get_w() + kPadding, archivebtn_->get_y(), kButtonSize,
-	   kButtonSize, g_gr->images().get("images/ui_basic/but2.png"),
+	   kButtonSize, UI::ButtonStyle::kWuiPrimary,
 	   g_gr->images().get("images/wui/messages/message_archived.png"), _("Show Archive"));
 	togglemodebtn_->sigclicked.connect(boost::bind(&GameMessageMenu::toggle_mode, this));
 
 	centerviewbtn_ =
 	   new UI::Button(this, "center_main_mapview_on_location", kWindowWidth - kPadding - kButtonSize,
-	                  archivebtn_->get_y(), kButtonSize, kButtonSize,
-	                  g_gr->images().get("images/ui_basic/but2.png"),
+	                  archivebtn_->get_y(), kButtonSize, kButtonSize, UI::ButtonStyle::kWuiPrimary,
 	                  g_gr->images().get("images/wui/menus/menu_goto.png"),
 	                  /** TRANSLATORS: %s is a tooltip, G is the corresponding hotkey */
 	                  (boost::format(_("G: %s"))
@@ -517,7 +512,7 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 void GameMessageMenu::toggle_filter_messages_button(UI::Button& button,
                                                     Widelands::Message::Type msgtype) {
 	set_filter_messages_tooltips();
-	if (button.style() == UI::Button::Style::kPermpressed) {
+	if (button.style() == UI::Button::VisualState::kPermpressed) {
 		button.set_perm_pressed(false);
 		message_filter_ = Widelands::Message::Type::kAllMessages;
 	} else {

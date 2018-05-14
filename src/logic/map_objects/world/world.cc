@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"

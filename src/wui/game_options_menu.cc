@@ -73,7 +73,7 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
             0,
             width,
             0,
-            g_gr->images().get("images/ui_basic/but4.png"),
+            UI::ButtonStyle::kWuiMenu,
             _("Sound Options"),
             /** TRANSLATORS: Button tooltip */
             _("Set sound effect and music options")),
@@ -83,7 +83,7 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
                 0,
                 width,
                 35,
-                g_gr->images().get("images/ui_basic/but4.png"),
+                UI::ButtonStyle::kWuiMenu,
                 g_gr->images().get("images/wui/menus/menu_save_game.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Save Game")),
@@ -93,7 +93,7 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
                 0,
                 width,
                 35,
-                g_gr->images().get("images/ui_basic/but4.png"),
+                UI::ButtonStyle::kWuiMenu,
                 g_gr->images().get("images/wui/menus/menu_exit_game.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Exit Game")) {
@@ -115,12 +115,11 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
 	   boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
 	if (windows_.sound_options.window) {
-		sound_.set_style(UI::Button::Style::kPermpressed);
+		sound_.set_perm_pressed(true);
 	}
-	windows_.sound_options.opened.connect(
-	   boost::bind(&UI::Button::set_style, &sound_, UI::Button::Style::kPermpressed));
+	windows_.sound_options.opened.connect(boost::bind(&UI::Button::set_perm_pressed, &sound_, true));
 	windows_.sound_options.closed.connect(
-	   boost::bind(&UI::Button::set_style, &sound_, UI::Button::Style::kRaised));
+	   boost::bind(&UI::Button::set_perm_pressed, &sound_, false));
 
 	if (get_usedefaultpos())
 		center_to_parent();
