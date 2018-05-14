@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -53,23 +52,11 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              butw_,
                              get_h() - get_h() * 4 / 10 - buth_,
                              buth_,
-                             ""),
-     ok_(this,
-         "ok",
-         0,
-         0,
-         butw_,
-         buth_,
-         g_gr->images().get("images/ui_basic/but2.png"),
-         _("Start game")),
-     back_(this,
-           "back",
-           0,
-           0,
-           butw_,
-           buth_,
-           g_gr->images().get("images/ui_basic/but0.png"),
-           _("Back")),
+                             "",
+                             UI::DropdownType::kTextual,
+                             UI::PanelStyle::kFsMenu),
+     ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
+     back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
      title_(this, get_w() / 2, get_h() / 25, "", UI::Align::kCenter),
      // Variables and objects used in the menu

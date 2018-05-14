@@ -25,6 +25,7 @@
 #include <SDL.h>
 
 #include "graphic/image_cache.h"
+#include "graphic/style_manager.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 
@@ -90,6 +91,9 @@ public:
 	AnimationManager& animations() const {
 		return *animation_manager_.get();
 	}
+	StyleManager& styles() const {
+		return *style_manager_.get();
+	}
 
 	// Requests a screenshot being taken on the next frame.
 	void screenshot(const std::string& fname);
@@ -123,6 +127,9 @@ private:
 
 	/// This holds all animations.
 	std::unique_ptr<AnimationManager> animation_manager_;
+
+	/// This holds all GUI styles.
+	std::unique_ptr<StyleManager> style_manager_;
 
 	/// Screenshot filename. If a screenshot is requested, this will be set to
 	/// the requested filename. On the next frame the screenshot will be written

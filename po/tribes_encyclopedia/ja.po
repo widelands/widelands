@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
-"PO-Revision-Date: 2018-05-10 12:56+0000\n"
+"POT-Creation-Date: 2018-05-11 05:42+0000\n"
+"PO-Revision-Date: 2018-05-12 03:26+0000\n"
 "Last-Translator: tamanegi\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -1664,7 +1664,7 @@ msgctxt "building"
 msgid ""
 "Digs up mud from the ground and uses water to turn it into clay. Clay is "
 "used to make bricks, reinforce the charcoal kiln and to build ships."
-msgstr "地面から泥を掘り出し、水を加えて粘土にします。粘土はレンガの製造、炭焼き窯の強化、船の建造に使われます。"
+msgstr "地面から泥を掘り出し、水を加えて粘土にします。粘土はレンガの製造、炭焼き小屋での炭焼き効率向上、船の建造に使われます。"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:21
@@ -4035,7 +4035,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Clay is made out of water and mud to be turned into bricks, used in ship "
 "construction and to improve the charcoal kiln."
-msgstr "粘土は泥と水から作られ、レンガの原料となります。また、船の建造や炭焼き窯の補強にも使われます。"
+msgstr "粘土は泥と水から作られ、レンガの原料となります。また、船の建造や炭焼き小屋の作業効率向上のためにも使われます。"
 
 #. TRANSLATORS: Helptext for a ware: Cloth
 #: ../../data/tribes/wares/cloth/helptexts.lua:4
@@ -4853,7 +4853,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Rations are produced in a tavern, an inn or a big inn out of fish or meat or"
 " pitta bread."
-msgstr "レーションはピタパンと肉か魚を材料として、酒場、食堂、大食堂で生産されます。"
+msgstr "レーションはピタパンか肉か魚を材料として、酒場、食堂、大食堂で生産されます。"
 
 #. TRANSLATORS: Helptext for a ware: Ration
 #: ../../data/tribes/wares/ration/helptexts.lua:8
@@ -4867,7 +4867,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Rations are produced in taverns and drinking halls out of something to eat: "
 "Fruit, bread or smoked meat or fish."
-msgstr "レーションは酒場や宴会場で様々な食料から作られます。材料はフルーツかパンと、燻製魚か燻製肉です。"
+msgstr "レーションは酒場や宴会場で様々な食料から作られます。材料はフルーツかパンか燻製魚か燻製肉です。"
 
 #. TRANSLATORS: Helptext for a ware: Saw
 #: ../../data/tribes/wares/saw/helptexts.lua:4
@@ -4932,7 +4932,7 @@ msgid ""
 "These advanced shields are used by the best soldiers of the Atlanteans. They"
 " are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from defense level 1 to level 2."
-msgstr ""
+msgstr "アドバンストシールドはアトランティスの最高の兵士達の防具です。防具工房で製作され、迷宮で兵士の防御レベルを１から２に訓練する際に食物とともに用いられます。"
 
 #. TRANSLATORS: Helptext for a ware: Steel Shield
 #: ../../data/tribes/wares/shield_steel/helptexts.lua:4
@@ -4940,13 +4940,13 @@ msgctxt "atlanteans_ware"
 msgid ""
 "This steel shield is produced in the armor smithy and used in the labyrinth "
 "– together with food – to train soldiers from defense level 0 to level 1."
-msgstr "この鋼鉄製の盾は、防具工房で製造され、迷宮で兵士を防御レベル０からレベル１に訓練するために――食物とともに――使用されます。"
+msgstr "スティールシールドは、防具工房で製作され、迷宮で兵士の防御レベルを０から１に訓練する際に食物とともに使われます。"
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:4
 msgctxt "ware"
 msgid "Shovels are needed for the proper handling of plants."
-msgstr ""
+msgstr "適切に植物を扱うためにはシャベルが必要になります。"
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:6
@@ -4954,7 +4954,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Therefore the forester and the blackroot farmer use them. They are produced "
 "by the toolsmith."
-msgstr ""
+msgstr "そのため、植樹番や黒根農家はシャベルを使います。シャベルは道具工房で製作されます。"
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:8
@@ -4963,7 +4963,7 @@ msgid ""
 "Therefore the gardener and the ranger use them. Produced at the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr ""
+msgstr "そのため、カヤ農夫や植樹番に使われます。シャベルは金物工房で製作されます。ただし、建物が斧工房や戦鍛冶に拡張されてしまうと生産されなくなります。"
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:10
@@ -4971,7 +4971,7 @@ msgctxt "empire_ware"
 msgid ""
 "Therefore the forester and the vine farmer use them. They are produced by "
 "the toolsmith."
-msgstr ""
+msgstr "そのため、植樹番やブドウ農夫に利用されます。シャベルは道具工房で生産されます。"
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:12
@@ -4979,7 +4979,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used by berry and reed farmers as well as foresters. Brickmakers "
 "also need them to dig mud out of hard soil."
-msgstr ""
+msgstr "そのため、ベリー農家やカヤ農夫、そして植樹番はこれを道具としています。また、レンガ職人も固い地面から泥を掘り出す際にシャベルを使います。"
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../data/tribes/wares/smoked_fish/helptexts.lua:4
@@ -4987,7 +4987,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
-msgstr "アトラスは生魚を嫌います。燻製工房で燻製にするのが、もっとも一般的な食べ方です。"
+msgstr "アトランティス人は生魚を嫌います。燻製工房で燻製にするのがもっとも一般的な食べ方です。"
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../data/tribes/wares/smoked_fish/helptexts.lua:6
@@ -4995,7 +4995,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "魚は燻製工房で燻製にされます。燻製魚は兵士の鉱夫や斥候のためのレーションや食事として利用されるか、訓練中の兵士に直接消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Smoked Meat
 #: ../../data/tribes/wares/smoked_meat/helptexts.lua:4
@@ -5004,7 +5004,7 @@ msgid ""
 "Smoked meat is made out of meat in a smokery. It is delivered to the mines "
 "and training sites (labyrinth and dungeon) where the miners and soldiers "
 "prepare a nutritious lunch for themselves."
-msgstr "燻製肉は、燻製工房で肉を使用して生産されます。\n　鉱夫と兵士が自分の手で栄養価の高い弁当をとるために、鉱山や訓練施設（迷宮、ダンジョンタワー）に運ばれます。"
+msgstr "燻製肉は、燻製工房で肉を加工して生産されます。燻製肉は鉱山やダンジョンや迷宮のような訓練施設に送られ、栄養価の高い昼食として彼らに消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Smoked Meat
 #: ../../data/tribes/wares/smoked_meat/helptexts.lua:6
@@ -5012,7 +5012,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "肉は燻製工房で燻製されます。燻製肉は兵士の鉱夫や斥候のためのレーションや食事として利用されるか、訓練中の兵士に直接消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Snack
 #: ../../data/tribes/wares/snack/helptexts.lua:4
@@ -5020,7 +5020,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr ""
+msgstr "レーションよりも大きな軽食は深鉱山の鉱夫達の元気の素です。食堂か大食堂でピタパンとビール、そして肉か魚を使って調理されています。"
 
 #. TRANSLATORS: Helptext for a ware: Spear
 #: ../../data/tribes/wares/spear/helptexts.lua:4
@@ -5029,7 +5029,7 @@ msgid ""
 "This spear has an iron spike. It is produced in a weapon smithy and used in "
 "a training camp – together with food – to train soldiers from attack level 0"
 " to attack level 1."
-msgstr ""
+msgstr "鉄の槍です。武器工房で作られ、訓練場で兵士の攻撃レベルを０から１に訓練する際に食物とともに使われます。"
 
 #. TRANSLATORS: Helptext for a ware: Advanced Spear
 #: ../../data/tribes/wares/spear_advanced/helptexts.lua:4
@@ -5038,7 +5038,7 @@ msgid ""
 "This is an advanced spear with a steel tip. It is produced in a weapon "
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
-msgstr ""
+msgstr "鋼槍は鋼の穂先を持つ上質な槍です。武器工房で作られ、訓練場で兵士の攻撃レベルを１から２に訓練する際に食物と一緒に用いられます。"
 
 #. TRANSLATORS: Helptext for a ware: Heavy Spear
 #: ../../data/tribes/wares/spear_heavy/helptexts.lua:4
@@ -5047,7 +5047,7 @@ msgid ""
 "This is a strong spear with a steel-tip and a little blade. It is produced "
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
-msgstr ""
+msgstr "重鋼槍は鋼の穂先と小さな刃を持つ強力な槍です。武器工房で作られ、訓練場で兵士の攻撃レベルを２から３に訓練する際に食物と一緒に用いられます。"
 
 #. TRANSLATORS: Helptext for a ware: War Spear
 #: ../../data/tribes/wares/spear_war/helptexts.lua:4
@@ -5056,7 +5056,7 @@ msgid ""
 "This is the best and sharpest weapon the Empire weaponsmith creates for the "
 "soldiers. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
-msgstr ""
+msgstr "戦槍は帝国の武器工房が誇る最高の一品です。訓練場で兵士の攻撃レベルを３から４に訓練する際に食料とあわせて使われます。"
 
 #. TRANSLATORS: Helptext for a ware: Wooden Spear
 #: ../../data/tribes/wares/spear_wooden/helptexts.lua:4
@@ -5065,7 +5065,7 @@ msgid ""
 "This wooden spear is the basic weapon in the Empire military system. It is "
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
-msgstr ""
+msgstr "木槍は帝国兵の標準的な武器で、武器工房で生産されます。若い兵士はこの槍とヘルムで武装することになります。"
 
 #. TRANSLATORS: Helptext for a ware: Spider Silk
 #: ../../data/tribes/wares/spider_silk/helptexts.lua:4
@@ -5073,7 +5073,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "Spider silk is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving mill."
-msgstr ""
+msgstr "蜘蛛糸は蜘蛛園の蜘蛛によって生産されます。この糸は織物工房で蜘蛛布に加工されます。"
 
 #. TRANSLATORS: Helptext for a ware: Spidercloth
 #: ../../data/tribes/wares/spidercloth/helptexts.lua:4
@@ -5082,7 +5082,7 @@ msgid ""
 "Spidercloth is made out of spider silk in a weaving mill. It is used in the "
 "toolsmithy and the shipyard. Also some higher developed buildings need "
 "spidercloth for their construction."
-msgstr ""
+msgstr "蜘蛛布は織物工房で蜘蛛糸から作られ、道具工房や造船所で利用されます。また、高度な用途を持つ建物の建築の際にも必要となるでしょう。"
 
 #. TRANSLATORS: Helptext for a ware: Curved Sword
 #: ../../data/tribes/wares/sword_curved/helptexts.lua:4
@@ -5090,7 +5090,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The curved sword is the weapon used by level 2 soldiers. Level 5 soldiers "
 "are equipped with two curved swords."
-msgstr ""
+msgstr "曲剣は攻撃レベル２の兵士が用います。また、攻撃レベル５の兵士は曲剣を二本装備します。"
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
 #: ../../data/tribes/wares/sword_double/helptexts.lua:4
@@ -5098,7 +5098,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The double-edged sword is the weapon used by level 3 soldiers. Level 6 "
 "soldiers are equipped with two of these ferocious swords."
-msgstr ""
+msgstr "両刃剣は攻撃レベル３の兵士が使います。また、攻撃レベル６の兵士はこの凶悪な武器を二本同時に操ります。"
 
 #. TRANSLATORS: Helptext for a ware: Long Sword
 #: ../../data/tribes/wares/sword_long/helptexts.lua:4
@@ -5106,7 +5106,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
 "equipped with two long swords."
-msgstr ""
+msgstr "長剣は攻撃レベル１の兵士の扱う武器です。また、攻撃レベル４の兵士は二本の長剣を操ります。"
 
 #. TRANSLATORS: Helptext for a ware: Short sword
 #: ../../data/tribes/wares/sword_short/helptexts.lua:4
@@ -5115,7 +5115,7 @@ msgid ""
 "This is the basic weapon of the Frisian soldiers. Together with a fur "
 "garment, it makes up the equipment of young soldiers. Short swords are "
 "produced by the small armor smithy."
-msgstr ""
+msgstr "小剣はフリジア兵の標準武装で、武具製作所で製作されます。若い兵士は通常この小剣と革鎧を装備することになります。"
 
 #. TRANSLATORS: Helptext for a ware: Tabard
 #: ../../data/tribes/wares/tabard/helptexts.lua:4
@@ -5123,7 +5123,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr "タバードとライトトライデントは、若い兵士の標準的な装備です。タバードは機織所で作られます。"
+msgstr "タバードとライトトライデントは、若い兵士の標準的な装備です。タバードは織物工房で作られます。"
 
 #. TRANSLATORS: Helptext for a ware: Golden Tabard
 #: ../../data/tribes/wares/tabard_golden/helptexts.lua:4
@@ -5132,7 +5132,7 @@ msgid ""
 "Golden tabards are produced in Atlantean weaving mills out of gold thread. "
 "They are used in the labyrinth – together with food – to train soldiers from"
 " health level 0 to level 1."
-msgstr "ゴールデンタバードは、アトラスの機織所で金糸を使用して製造されます。訓練場で兵士の体力レベル０からレベル１に訓練するために――食物とともに――使用されます。"
+msgstr "ゴールデンタバードは、織物工房で金糸を使用して製造されます。訓練場で兵士の体力レベルを０から１に訓練するために食物とともに使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Thatch Reed
 #: ../../data/tribes/wares/thatch_reed/helptexts.lua:4
@@ -5140,7 +5140,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Thatch reed is produced in a reed yard and used to make the roofs of "
 "buildings waterproof."
-msgstr ""
+msgstr "カヤはカヤ園で生産されます。収穫されたカヤは建物の屋根となり、雨を防ぎます。"
 
 #. TRANSLATORS: Helptext for a ware: Thatch Reed
 #: ../../data/tribes/wares/thatch_reed/helptexts.lua:6
@@ -5149,7 +5149,7 @@ msgid ""
 "Thatch reed is a special kind of reed that is grown in a reed farm. Nothing "
 "is better suited to make roofs waterproof. It is also used to make buckets "
 "and fishing nets as well as cloth."
-msgstr ""
+msgstr "このカヤはカヤ園で育てられる特別なものです。防水屋根としてこれ以上の素材はありません。これは他にもバケツや漁網、さらには布にも加工されます。"
 
 #. TRANSLATORS: Helptext for a ware: Double Trident
 #: ../../data/tribes/wares/trident_double/helptexts.lua:4
@@ -5158,7 +5158,7 @@ msgid ""
 "The double trident is one of the best tridents produced by the Atlantean "
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
-msgstr "ダブルトライデントは、アトラスの武器工房でつくられる最高の槍です。\n　ダンジョンタワーで、兵士の攻撃レベル２からレベル３へ訓練するために――食物とともに――使用されます。"
+msgstr "ダブルトライデントは、武器工房でつくられる上質の槍です。ダンジョンで兵士の攻撃レベルを２から３へ訓練するために食物とともに使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Heavy Double Trident
 #: ../../data/tribes/wares/trident_heavy_double/helptexts.lua:4
@@ -5168,7 +5168,7 @@ msgid ""
 "of the best soldiers may use it. It is produced in the weapon smithy and "
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
-msgstr "これは、アトランティス軍のもっとも危険な武器です。最強中の最強の兵士のみが使用します。\n　武器工房で製造され、ダンジョンタワーで兵士を攻撃レベル３からレベル４に訓練するために――食物とともに――使用されます。"
+msgstr "これは、アトランティス軍のもっとも危険な武器です。兵士の中の兵士、最強の兵士のみが使用します。武器工房で製造され、ダンジョンで兵士の攻撃レベルを３から４に訓練する際に食物とともに使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Light Trident
 #: ../../data/tribes/wares/trident_light/helptexts.lua:4
@@ -5177,7 +5177,7 @@ msgid ""
 "This is the basic weapon of the Atlantean soldiers. Together with a tabard, "
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
-msgstr "これは、アトランティス兵士の基本の武器です。タバードとともに、若い兵士が着用するための装備です。ライトトライデントは、ほかのすべての槍をつくる武器工房で製造されます。"
+msgstr "これは、アトランティス兵士の基本の武器で、武器工房で製造されます。若い兵士は通常このトライデントとタバードを装備しています。"
 
 #. TRANSLATORS: Helptext for a ware: Long Trident
 #: ../../data/tribes/wares/trident_long/helptexts.lua:4
@@ -5186,7 +5186,7 @@ msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
 "produced in the weapon smithy and used in the dungeon – together with food –"
 " to train soldiers from attack level 0 to level 1."
-msgstr "この槍は、鉄の穂先をもちます。\n　武器工房で製造され、訓練場で兵士を攻撃レベル０からレベル１に訓練するために――食物とともに――使用されます。"
+msgstr "ロングトライデントは訓練場で兵士の扱う最初のトライデントです。武器工房で製造され、訓練場で兵士の攻撃レベルを０から１に訓練するために食物とともに使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Steel Trident
 #: ../../data/tribes/wares/trident_steel/helptexts.lua:4
@@ -5195,19 +5195,19 @@ msgid ""
 "This is the medium trident. It is produced in the weapon smithy and used by "
 "advanced soldiers in the dungeon – together with food – to train from attack"
 " level 1 to level 2."
-msgstr ""
+msgstr "スティールトライデントは中級の槍です。武器工房で作られ、ダンジョンで兵士の攻撃レベルを１から２に訓練する際に食料とともに用いられます。"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:4
 msgctxt "ware"
 msgid "Water is the essence of life!"
-msgstr ""
+msgstr "水は命の糧です！"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:6
 msgctxt "atlanteans_ware"
 msgid "Water is used in the bakery and the horse and spider farms."
-msgstr ""
+msgstr "水はパン工房、馬牧場、蜘蛛園で使用されます。"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:8
@@ -5215,7 +5215,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Water is used to bake bread and brew beer. Reindeer farms and aqua farms "
 "also consume it."
-msgstr ""
+msgstr "水はパンの調理やビールの醸造に利用されます。トナカイ牧場や養殖場でも消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:10
@@ -5223,7 +5223,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Water is used in the bakery, the micro brewery and the brewery. The lime "
 "kiln and the cattle farm also need to be supplied with water."
-msgstr ""
+msgstr "水はパン工房、ビール工房、醸造所で使用されます。石灰窯や牛牧場も水の供給を必要とします。"
 
 #. TRANSLATORS: Helptext for a ware: Water
 #: ../../data/tribes/wares/water/helptexts.lua:12
@@ -5231,13 +5231,13 @@ msgctxt "empire_ware"
 msgid ""
 "Water is used in the bakery and the brewery. The donkey farm, the sheep farm"
 " and the piggery also need to be supplied with water."
-msgstr ""
+msgstr "水はパン工房や醸造所で利用されます。ロバ牧場、羊牧場、そして養豚場も水の供給を必要とします。"
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:4
 msgctxt "ware"
 msgid "Wheat is essential for survival."
-msgstr ""
+msgstr "小麦がなければ生きていけません。"
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:6
@@ -5245,14 +5245,14 @@ msgctxt "barbarians_ware"
 msgid ""
 "Wheat is produced by farms and consumed by bakeries, micro breweries and "
 "breweries. Cattle farms also need to be supplied with wheat."
-msgstr ""
+msgstr "小麦は農場で生産され、パン工房、ビール工房、そして醸造所で消費されます。牛牧場もまた小麦の供給を必要とします。"
 
 #. TRANSLATORS: Helptext for a ware: Wheat
 #: ../../data/tribes/wares/wheat/helptexts.lua:8
 msgid ""
 "Wheat is produced by farms and used by mills and breweries. Donkey farms, "
 "sheep farms and piggeries also need to be supplied with wheat."
-msgstr ""
+msgstr "小麦は農場で生産され、製粉所や醸造所で消費されます。ロバ牧場、羊牧場、そして養豚場でも小麦の供給を必要とします。"
 
 #. TRANSLATORS: Helptext for a ware: Wine
 #: ../../data/tribes/wares/wine/helptexts.lua:4
@@ -5260,19 +5260,19 @@ msgctxt "empire_ware"
 msgid ""
 "This tasty wine is drunk by the miners working the marble and gold mines. It"
 " is produced in a winery."
-msgstr "この美味しいワインは、大理石鉱山と金鉱山で消費されます。\n　ワイナリーで生産されます。"
+msgstr "美味しいワインはワイナリーで生産され、大理石鉱と金鉱で消費されます。"
 
 #. TRANSLATORS: Helptext for a ware: Wool
 #: ../../data/tribes/wares/wool/helptexts.lua:4
 msgctxt "empire_ware"
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
-msgstr "羊毛は、羊の体毛です。機織所が布を生産するために使用します。"
+msgstr "羊毛は文字通り羊の毛です。織物工房で布を生産するために使用します。"
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../data/tribes/workers/atlanteans/armorsmith/helptexts.lua:5
 msgctxt "atlanteans_worker"
 msgid "Produces armor for the soldiers."
-msgstr "兵士のために防具をつくります。"
+msgstr "兵士のための防具をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Baker
 #: ../../data/tribes/workers/atlanteans/baker/helptexts.lua:3
@@ -5284,31 +5284,31 @@ msgstr "労働者のためにパンを焼きます。"
 #: ../../data/tribes/workers/atlanteans/blackroot_farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests blackroot."
-msgstr "甘草の種を蒔き収穫します。"
+msgstr "黒根の種を蒔き、収穫します。"
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/atlanteans/builder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "新しい建物を立ち上げる建設地で働きます。"
+msgstr "新しい建物を建設します。"
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/atlanteans/carrier/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Carries items along your roads."
-msgstr "道路に沿って物を運びます。"
+msgstr "道に沿って物資を運びます。"
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../data/tribes/workers/atlanteans/charcoal_burner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Burns coal."
-msgstr "木炭を燃やします。"
+msgstr "炭を焼きます。"
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
-msgstr "甘草の種を蒔き収穫します。"
+msgstr "トウモロコシの種を蒔き、収穫します。"
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
@@ -5320,7 +5320,7 @@ msgstr "魚を育てます。"
 #: ../../data/tribes/workers/atlanteans/fisher/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "The fisher fishes delicious fish."
-msgstr "漁師はおいしい魚を釣り上げます。"
+msgstr "漁師はおいしい魚を獲ります。"
 
 #. TRANSLATORS: Helptext for a worker: Forester
 #: ../../data/tribes/workers/atlanteans/forester/helptexts.lua:3
@@ -5332,7 +5332,7 @@ msgstr "木を植えます。"
 #: ../../data/tribes/workers/atlanteans/geologist/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Discovers resources for mining."
-msgstr "採掘する資源を発見します。"
+msgstr "採掘可能な資源を探します。"
 
 #. TRANSLATORS: Helptext for a worker: Horse
 #: ../../data/tribes/workers/atlanteans/horse/helptexts.lua:3
@@ -5340,7 +5340,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Horses help to carry items along busy roads. They are reared in a horse "
 "farm."
-msgstr "馬は交通の激しい道路でアイテムを運ぶのを助けます。馬は馬牧場で育てられます。"
+msgstr "馬は交通量の多い道で物資の輸送を補助します。馬牧場で育てられます。"
 
 #. TRANSLATORS: Helptext for a worker: Horse Breeder
 #: ../../data/tribes/workers/atlanteans/horsebreeder/helptexts.lua:3
@@ -5348,13 +5348,13 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Breeds the strong Atlantean horses for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "輸送システムに組み込むため、アトランティスの強靭な馬を繁殖させましょう。"
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/atlanteans/hunter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr "狩人は入植者においしい肉をもたらします。"
+msgstr "狩人は獲物を狩って新鮮な肉を供給します。"
 
 #. TRANSLATORS: Helptext for a worker: Miller
 #: ../../data/tribes/workers/atlanteans/miller/helptexts.lua:3
@@ -5362,50 +5362,50 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Grinds blackroots and corn to produce blackroot flour and cornmeal, "
 "respectively."
-msgstr ""
+msgstr "黒根やトウモロコシを挽いて粉にします。"
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #: ../../data/tribes/workers/atlanteans/miner/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or precious stones."
-msgstr ""
+msgstr "鉱山で石炭、鉄、金、貴重な石を採掘するために働きます。"
 
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/atlanteans/recruit/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "兵士になり部族を守りたいと熱望しています！"
 
 #. TRANSLATORS: Helptext for a worker: Sawyer
 #: ../../data/tribes/workers/atlanteans/sawyer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Saws logs to produce planks."
-msgstr "板材をつくるために、丸太を製材します。"
+msgstr "丸太を製材して板材を作ります。"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/atlanteans/scout/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "スコット偵察風偵察兵、偵察服着て未偵察地を偵察する。"
+msgstr "貞宗偵察兵、偵察服着て未偵察地を偵察中。"
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/atlanteans/shipwright/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "新しい船を造り上げる造船所で働きます。"
+msgstr "造船所で新たな船を建造します。"
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/atlanteans/smelter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "原石を金属に精錬します。"
 
 #. TRANSLATORS: Helptext for a worker: Smoker
 #: ../../data/tribes/workers/atlanteans/smoker/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smokes meat and fish."
-msgstr "肉と魚を燻製にします。"
+msgstr "肉や魚を燻製にします。"
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/atlanteans/soldier/helptexts.lua:3
@@ -5417,13 +5417,13 @@ msgstr "守って攻めろ！"
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds spiders for silk."
-msgstr ""
+msgstr "蜘蛛を育てて絹を取ります。"
 
 #. TRANSLATORS: Helptext for a worker: Stonecutter
 #: ../../data/tribes/workers/atlanteans/stonecutter/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Cuts blocks of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "近くにある岩から花崗岩を切り出します。"
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../data/tribes/workers/atlanteans/toolsmith/helptexts.lua:3
@@ -5447,7 +5447,7 @@ msgstr "兵士のために武器をつくります。"
 #: ../../data/tribes/workers/atlanteans/weaver/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Produces spidercloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "建物、船、兵士の使う蜘蛛布を生産します。"
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../data/tribes/workers/atlanteans/woodcutter/helptexts.lua:3
@@ -5459,7 +5459,7 @@ msgstr "木を伐採します。"
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "鉱夫、兵士、斥候のためにピタパンを焼きます。"
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
@@ -5467,44 +5467,44 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "兵士のための武器と労働者のための道具を作ります。"
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/barbarians/brewer/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces beer to keep the miners strong and happy."
-msgstr ""
+msgstr "鉱夫が幸せな気分でいられるようにビールを醸造します。"
 
 #. TRANSLATORS: Helptext for a worker: Master Brewer
 #: ../../data/tribes/workers/barbarians/brewer_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Produces the finest ales to keep soldiers strong and happy in training."
-msgstr ""
+msgstr "訓練中の兵士ですらハッピーな気分にできるようなきっついエールを生産します。"
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/barbarians/builder/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "新しい建物を立ち上げる建設地で働きます。"
+msgstr "新しい建物を建設します。"
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/barbarians/carrier/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Carries items along your roads."
-msgstr "道路に沿って物を運びます。"
+msgstr "道に沿って物資を運びます。"
 
 #. TRANSLATORS: Helptext for a worker: Cattle Breeder
 #: ../../data/tribes/workers/barbarians/cattlebreeder/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Breeds strong oxen for adding them to the transportation system."
-msgstr ""
+msgstr "輸送システムに組み込むため、力持ちな牛を繁殖させます。"
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../data/tribes/workers/barbarians/charcoal_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Burns coal."
-msgstr "木炭を燃やします。"
+msgstr "炭を燃やします。"
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/barbarians/farmer/helptexts.lua:3
@@ -5524,43 +5524,43 @@ msgctxt "barbarians_worker"
 msgid ""
 "The gamekeeper makes sure that the natural population of animals never drops"
 " too low."
-msgstr ""
+msgstr "狩猟番は野生動物の生息数が少なくなりすぎないようにします。"
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "カヤを育てます。"
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Discovers resources for mining."
-msgstr "採掘する資源を発見します。"
+msgstr "採掘可能な資源を探します。"
 
 #. TRANSLATORS: Helptext for a worker: Helmsmith
 #: ../../data/tribes/workers/barbarians/helmsmith/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Forges helmets for soldiers."
-msgstr ""
+msgstr "兵士のヘルムを鍛造します。"
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/barbarians/hunter/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr "狩人は入植者においしい肉をもたらします。"
+msgstr "狩人は獲物を狩って新鮮な肉を供給します。"
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../data/tribes/workers/barbarians/innkeeper/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces food for miners."
-msgstr "鉱夫のために食物をつくります。"
+msgstr "鉱夫のための食料をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Lime-Burner
 #: ../../data/tribes/workers/barbarians/lime_burner/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Mixes grout out of granite, water and coal in the lime kiln."
-msgstr ""
+msgstr "石灰窯で花崗岩と水と石炭からモルタルを作ります。"
 
 #. TRANSLATORS: Helptext for a worker: Helmsmith
 #: ../../data/tribes/workers/barbarians/lumberjack/helptexts.lua:3
@@ -5576,14 +5576,14 @@ msgstr "木を伐採します。"
 #: ../../data/tribes/workers/barbarians/miner_master/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "鉱山で石炭、鉄、金、花崗岩を採掘するために働きます。"
 
 #. TRANSLATORS: Helptext for a worker: Ox
 #: ../../data/tribes/workers/barbarians/ox/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid ""
 "Oxen help to carry items along busy roads. They are reared in a cattle farm."
-msgstr ""
+msgstr "牛は交通量の多い道で物資の輸送を補助します。牛牧場で育てられます。"
 
 #. TRANSLATORS: Helptext for a worker: Ranger
 #: ../../data/tribes/workers/barbarians/ranger/helptexts.lua:3
@@ -5595,7 +5595,7 @@ msgstr "木を植えます。"
 #: ../../data/tribes/workers/barbarians/recruit/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "兵士になり部族を守りたいと熱望しています！"
 
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
@@ -5604,19 +5604,19 @@ msgstr ""
 msgctxt "barbarians_worker"
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "スコット偵察風偵察兵、偵察服着て未偵察地を偵察する。"
+msgstr "貞宗偵察兵、偵察服着て未偵察地を偵察中。"
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/barbarians/shipwright/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "新しい船を造り上げる造船所で働きます。"
+msgstr "造船所で新たな船を建造します。"
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/barbarians/smelter/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "原石を金属に精錬します。"
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/barbarians/soldier/helptexts.lua:3
@@ -5628,7 +5628,7 @@ msgstr "守って攻めろ！"
 #: ../../data/tribes/workers/barbarians/stonemason/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "近くにある岩から花崗岩を切り出します。"
 
 #. TRANSLATORS: Helptext for a worker: Trainer
 #: ../../data/tribes/workers/barbarians/trainer/helptexts.lua:3
@@ -5640,7 +5640,7 @@ msgstr "兵士を訓練します。"
 #: ../../data/tribes/workers/barbarians/weaver/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Produces cloth for ships’ sails."
-msgstr ""
+msgstr "船の帆の材料となる布を生産します。"
 
 #. TRANSLATORS: Helptext for a worker: Armorsmith
 #: ../../data/tribes/workers/empire/armorsmith/helptexts.lua:3
@@ -5658,13 +5658,13 @@ msgstr "労働者のためにパンを焼きます。"
 #: ../../data/tribes/workers/empire/brewer/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces beer."
-msgstr ""
+msgstr "ビールを生産します。"
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/empire/builder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "新しい建物を立ち上げる建設地で働きます。"
+msgstr "新しい建物を建設します。"
 
 #. TRANSLATORS: Helptext for a worker: Carpenter
 #: ../../data/tribes/workers/empire/carpenter/helptexts.lua:3
@@ -5676,13 +5676,13 @@ msgstr "製材所で働きます。"
 #: ../../data/tribes/workers/empire/carrier/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Carries items along your roads."
-msgstr "道路に沿って物を運びます。"
+msgstr "道に沿って物を運びます。"
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../data/tribes/workers/empire/charcoal_burner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Burns coal."
-msgstr "木炭を燃やします。"
+msgstr "炭を燃やします。"
 
 #. TRANSLATORS: Helptext for a worker: Donkey
 #: ../../data/tribes/workers/empire/donkey/helptexts.lua:3
@@ -5690,7 +5690,7 @@ msgctxt "empire_worker"
 msgid ""
 "Donkeys help to carry items along busy roads. They are reared in a donkey "
 "farm."
-msgstr "ロバは、交通の激しい道路に沿ってアイテムを運ぶのを助けます。\n　ロバ牧場で育てられます。"
+msgstr "ロバは交通量の多い道で物資の輸送を補助します。ロバ牧場で育てられます。"
 
 #. TRANSLATORS: Helptext for a worker: Donkey Breeder
 #: ../../data/tribes/workers/empire/donkeybreeder/helptexts.lua:3
@@ -5698,7 +5698,7 @@ msgctxt "empire_worker"
 msgid ""
 "Breeds cute and helpful donkeys for adding them to the transportation "
 "system."
-msgstr ""
+msgstr "輸送システムに取り込むため、かわいくて役に立つロバを繁殖させます。"
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/empire/farmer/helptexts.lua:3
@@ -5722,19 +5722,19 @@ msgstr "木を植えます。"
 #: ../../data/tribes/workers/empire/geologist/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Discovers resources for mining."
-msgstr "採掘する資源を発見します。"
+msgstr "採掘可能な資源を探します。"
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/empire/hunter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr "狩人は入植者においしい肉をもたらします。"
+msgstr "狩人は獲物を狩って新鮮な肉を供給します。"
 
 #. TRANSLATORS: Helptext for a worker: Innkeeper
 #: ../../data/tribes/workers/empire/innkeeper/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces food for miners."
-msgstr "鉱夫のために食物をつくります。"
+msgstr "鉱夫のための食料をつくります。"
 
 #. TRANSLATORS: Helptext for a worker: Lumberjack
 #: ../../data/tribes/workers/empire/lumberjack/helptexts.lua:3
@@ -5746,7 +5746,7 @@ msgstr "木を伐採します。"
 #: ../../data/tribes/workers/empire/miller/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Grinds wheat to produce flour."
-msgstr "小麦粉を生産するために小麦を粉びきします。"
+msgstr "小麦粉を挽いて粉にします。"
 
 #. TRANSLATORS: Helptext for a worker: Master Miner
 #. TRANSLATORS: Helptext for a worker: Miner
@@ -5754,7 +5754,7 @@ msgstr "小麦粉を生産するために小麦を粉びきします。"
 #: ../../data/tribes/workers/empire/miner_master/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or marble."
-msgstr ""
+msgstr "鉱山で石炭、鉄、金、大理石を採掘するために働きます。"
 
 #. TRANSLATORS: Helptext for a worker: Pig Breeder
 #: ../../data/tribes/workers/empire/pigbreeder/helptexts.lua:3
@@ -5766,14 +5766,14 @@ msgstr "豚を育てます。"
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Eager to become a soldier and defend his tribe!"
-msgstr ""
+msgstr "兵士になり部族を守りたいと熱望しています！"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/empire/scout/helptexts.lua:3
 msgctxt "empire_worker"
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr "スコット偵察風偵察兵、偵察服着て未偵察地を偵察する。"
+msgstr "貞宗偵察兵、偵察服着て未偵察地を偵察中。"
 
 #. TRANSLATORS: Helptext for a worker: Shepherd
 #: ../../data/tribes/workers/empire/shepherd/helptexts.lua:3
@@ -5785,13 +5785,13 @@ msgstr "羊を飼います。"
 #: ../../data/tribes/workers/empire/shipwright/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "新しい船を造り上げる造船所で働きます。"
+msgstr "造船所で新たな船を建造します。"
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/empire/smelter/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Smelts ores into metal."
-msgstr ""
+msgstr "原石を金属に精錬します。"
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/empire/soldier/helptexts.lua:3
@@ -5803,7 +5803,7 @@ msgstr "守って攻めろ！"
 #: ../../data/tribes/workers/empire/stonemason/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Cuts blocks of granite and marble out of rocks in the vicinity."
-msgstr ""
+msgstr "近くにある岩から花崗岩や大理石を切り出します。"
 
 #. TRANSLATORS: Helptext for a worker: Toolsmith
 #: ../../data/tribes/workers/empire/toolsmith/helptexts.lua:3
@@ -5827,7 +5827,7 @@ msgstr "ブドウを育てます。"
 #: ../../data/tribes/workers/empire/vintner/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Produces wine."
-msgstr ""
+msgstr "ワインを作ります。"
 
 #. TRANSLATORS: Helptext for a worker: Weaponsmith
 #: ../../data/tribes/workers/empire/weaponsmith/helptexts.lua:3
@@ -5847,116 +5847,116 @@ msgstr "船と兵士のために布をつくります。"
 #: ../../data/tribes/workers/frisians/baker/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Bakes bread for miners and soldiers."
-msgstr ""
+msgstr "鉱夫や兵士のためにパンを焼きます。"
 
 #. TRANSLATORS: Helptext for a worker: Master Baker
 #: ../../data/tribes/workers/frisians/baker_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "This baker is skilled enough to bake bread sweetened with honey."
-msgstr ""
+msgstr "このパン職人はハチミツで甘くしたパンを焼く技を持っています。"
 
 #. TRANSLATORS: Helptext for a worker: Bee-keeper
 #: ../../data/tribes/workers/frisians/beekeeper/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Lets bees swarm over flowers, then gathers the honey."
-msgstr ""
+msgstr "ハチを放し飼いにして、後で蜜を回収します。"
 
 #. TRANSLATORS: Helptext for a worker: Berry farmer
 #: ../../data/tribes/workers/frisians/berry_farmer/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Plants berry bushes."
-msgstr ""
+msgstr "ベリーの木を植えます。"
 
 #. TRANSLATORS: Helptext for a worker: Blacksmith
 #: ../../data/tribes/workers/frisians/blacksmith/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Produces weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "兵士のための武器防具、そして労働者のための道具を作ります。"
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #: ../../data/tribes/workers/frisians/blacksmith_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid ""
 "Produces the best weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "兵士のための最高の武器防具、そして労働者のための道具を作ります。"
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/frisians/brewer/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Brews beer."
-msgstr ""
+msgstr "ビールを醸造します。"
 
 #. TRANSLATORS: Helptext for a worker: Master Brewer
 #: ../../data/tribes/workers/frisians/brewer_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Brews beer and mead."
-msgstr ""
+msgstr "ビールやミードを醸造します。"
 
 #. TRANSLATORS: Helptext for a worker: Brickmaker
 #: ../../data/tribes/workers/frisians/brickmaker/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Makes clay out of mud and water or bricks out of clay and granite."
-msgstr ""
+msgstr "泥と水から粘土を作ったり、花崗岩と粘土からレンガを焼いたりします。"
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/frisians/builder/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "新しい建物を建設します。"
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/frisians/carrier/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "道に沿って物を運びます。"
 
 #. TRANSLATORS: Helptext for a worker: Charcoal burner
 #: ../../data/tribes/workers/frisians/charcoal_burner/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
-msgstr ""
+msgstr "丸太と粘土を燃やして炭を作ります。"
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/frisians/farmer/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Plants fields."
-msgstr ""
+msgstr "大麦を育てます。"
 
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../data/tribes/workers/frisians/fisher/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "海で魚を捕まえます。"
 
 #. TRANSLATORS: Helptext for a worker: Forester
 #: ../../data/tribes/workers/frisians/forester/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Plants trees."
-msgstr ""
+msgstr "木を植えます。"
 
 #. TRANSLATORS: Helptext for a worker: Fruit Collector
 #: ../../data/tribes/workers/frisians/fruit_collector/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Gathers berries."
-msgstr ""
+msgstr "ベリーを採取します。"
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/frisians/geologist/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "採掘可能な資源を探します。"
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/frisians/hunter/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "The hunter brings fresh, raw meat to the colonists."
-msgstr ""
+msgstr "狩人は獲物を狩って新鮮な肉を供給します。"
 
 #. TRANSLATORS: Helptext for a worker: Landlady
 #: ../../data/tribes/workers/frisians/landlady/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Prepares rations and meals for miners and scouts."
-msgstr ""
+msgstr "鉱夫や斥候のためのレーションや食事を作ります。"
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner
@@ -5964,13 +5964,13 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/miner_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Works deep in the mines to obtain coal, iron, gold or granite."
-msgstr ""
+msgstr "鉱山で石炭、鉄、金、花崗岩を採掘するために働きます。"
 
 #. TRANSLATORS: Helptext for a worker: Gardener
 #: ../../data/tribes/workers/frisians/reed_farmer/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "カヤを育てます。"
 
 #. TRANSLATORS: Helptext for a worker: Reindeer
 #: ../../data/tribes/workers/frisians/reindeer/helptexts.lua:3
@@ -5978,70 +5978,70 @@ msgctxt "frisians_worker"
 msgid ""
 "Reindeer help to carry items along busy roads. They are reared in a reindeer"
 " farm."
-msgstr ""
+msgstr "トナカイは交通量の多い道で物資の輸送を補助します。トナカイ牧場で育てられます。"
 
 #. TRANSLATORS: Helptext for a worker: Reindeer Breeder
 #: ../../data/tribes/workers/frisians/reindeer_breeder/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Breeds reindeer as carriers and for their fur."
-msgstr ""
+msgstr "運び手として、また毛皮を取るためにトナカイを育てます。"
 
 #. TRANSLATORS: Helptext for a worker: Scout
 #: ../../data/tribes/workers/frisians/scout/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Explores unknown territory."
-msgstr ""
+msgstr "未知の領域を探検します。"
 
 #. TRANSLATORS: Helptext for a worker: Seamstress
 #: ../../data/tribes/workers/frisians/seamstress/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Produces cloth and sews fur garments."
-msgstr ""
+msgstr "布を織ったり革鎧を縫ったりします。"
 
 #. TRANSLATORS: Helptext for a worker: Master Seamstress
 #: ../../data/tribes/workers/frisians/seamstress_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Sews armor out of fur garments and metal."
-msgstr ""
+msgstr "革鎧と金属を縫い合わせます。"
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/frisians/shipwright/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "造船所で新たな船を建造します。"
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/frisians/smelter/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Smelts iron and gold at furnaces or recycling centers."
-msgstr ""
+msgstr "溶鉱炉やリサイクルセンターで鉄や金の精錬をします。"
 
 #. TRANSLATORS: Helptext for a worker: Smoker
 #: ../../data/tribes/workers/frisians/smoker/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Refines meat and fish by smoking them."
-msgstr ""
+msgstr "燻製にして肉や魚の旨味を凝縮させます。"
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/frisians/soldier/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "守って攻めろ！"
 
 #. TRANSLATORS: Helptext for a worker: Stonemason
 #: ../../data/tribes/workers/frisians/stonemason/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "近くにある岩から花崗岩を切り出します。"
 
 #. TRANSLATORS: Helptext for a worker: Trainer
 #: ../../data/tribes/workers/frisians/trainer/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "兵士を訓練します。"
 
 #. TRANSLATORS: Helptext for a worker: Woodcutter
 #: ../../data/tribes/workers/frisians/woodcutter/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Fells trees."
-msgstr ""
+msgstr "木を伐採します。"

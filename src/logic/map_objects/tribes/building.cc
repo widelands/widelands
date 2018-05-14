@@ -32,7 +32,6 @@
 #include "economy/flag.h"
 #include "economy/input_queue.h"
 #include "economy/request.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"

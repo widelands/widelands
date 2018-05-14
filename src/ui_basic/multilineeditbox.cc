@@ -25,6 +25,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 #include "graphic/wordwrap.h"
 #include "ui_basic/mouse_constants.h"
@@ -40,8 +41,8 @@ struct MultilineEditbox::Data {
 	/// The text in the edit box
 	std::string text;
 
-	/// Background tile style.
-	const Image* background;
+	/// Background color and texture
+	const UI::PanelStyleInfo* background_style;
 
 	/// Position of the cursor inside the text.
 	/// 0 indicates that the cursor is before the first character,
@@ -59,7 +60,7 @@ struct MultilineEditbox::Data {
 	WordWrap ww;
 	/*@}*/
 
-	Data(MultilineEditbox&, const Image* init_background, const Image* button_background);
+	Data(MultilineEditbox&, const UI::PanelStyleInfo* style);
 	void refresh_ww();
 
 	void update();
@@ -81,28 +82,19 @@ private:
 /**
  * Initialize an editbox that supports multiline strings.
 */
-MultilineEditbox::MultilineEditbox(Panel* parent,
-                                   int32_t x,
-                                   int32_t y,
-                                   uint32_t w,
-                                   uint32_t h,
-                                   const std::string& text,
-                                   const Image* background,
-                                   const Image* button_background)
-   : Panel(parent, x, y, w, h), d_(new Data(*this, background, button_background)) {
+MultilineEditbox::MultilineEditbox(
+   Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
+   : Panel(parent, x, y, w, h), d_(new Data(*this, g_gr->styles().editbox_style(style))) {
 	set_handle_mouse(true);
 	set_can_focus(true);
 	set_thinks(false);
 	set_handle_textinput();
-
-	set_text(text);
 }
 
-MultilineEditbox::Data::Data(MultilineEditbox& o,
-                             const Image* init_background,
-                             const Image* button_background)
-   : scrollbar(&o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), button_background),
-     background(init_background),
+MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::PanelStyleInfo* style)
+   : scrollbar(
+        &o, o.get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, o.get_h(), UI::PanelStyle::kWui),
+     background_style(style),
      cursor_pos(0),
      lineheight(text_height()),
      maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
@@ -419,8 +411,7 @@ void MultilineEditbox::focus(bool topcaller) {
  * Redraw the Editbox
  */
 void MultilineEditbox::draw(RenderTarget& dst) {
-	// Draw the background
-	dst.tile(Recti(Vector2i::zero(), get_w(), get_h()), d_->background, Vector2i(get_x(), get_y()));
+	draw_background(dst, *d_->background_style);
 
 	// Draw border.
 	if (get_w() >= 4 && get_h() >= 4) {

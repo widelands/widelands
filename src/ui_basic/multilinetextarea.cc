@@ -37,9 +37,9 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const int32_t y,
                                      const uint32_t w,
                                      const uint32_t h,
+                                     UI::PanelStyle style,
                                      const std::string& text,
                                      const Align align,
-                                     const Image* button_background,
                                      MultilineTextarea::ScrollMode scroll_mode)
    : Panel(parent, x, y, w, h),
      text_(text),
@@ -47,8 +47,7 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
      align_(align),
      force_new_renderer_(false),
      use_old_renderer_(false),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background, false),
-     pic_background_(nullptr) {
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style, false) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&MultilineTextarea::scrollpos_changed, this, _1));
@@ -134,9 +133,6 @@ void MultilineTextarea::layout() {
  * Redraw the textarea
  */
 void MultilineTextarea::draw(RenderTarget& dst) {
-	if (pic_background_) {
-		dst.tile(Recti(0, 0, get_inner_w(), get_inner_h()), pic_background_, Vector2i::zero());
-	}
 	if (use_old_renderer_) {
 		rt.draw(dst, Vector2i(RICHTEXT_MARGIN, RICHTEXT_MARGIN - scrollbar_.get_scrollpos()));
 	} else {
@@ -175,9 +171,6 @@ void MultilineTextarea::scroll_to_top() {
 	scrollbar_.set_scrollpos(0);
 }
 
-void MultilineTextarea::set_background(const Image* background) {
-	pic_background_ = background;
-}
 void MultilineTextarea::set_scrollmode(MultilineTextarea::ScrollMode scroll_mode) {
 	scrollmode_ = scroll_mode;
 	scrollbar_.set_force_draw(scrollmode_ == ScrollMode::kScrollNormalForced ||
