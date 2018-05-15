@@ -98,8 +98,7 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 		boost::trim(player_name);
 
 		// Save default player names as empty
-		if (player_name == (boost::format("Player %u") % static_cast<unsigned int>(p)).str() ||
-			player_name == (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str()) {
+		if (player_name == (boost::format(_("Player %u")) % static_cast<unsigned int>(p)).str()) {
 			player_name = "";
 		}
 
