@@ -6,7 +6,6 @@ include "scripting/coroutine.lua" -- for sleep
 include "scripting/messages.lua"
 include "scripting/table.lua"
 include "scripting/win_conditions/win_condition_functions.lua"
-include "scripting/win_conditions/win_condition_texts.lua"
 include "scripting/win_conditions/territorial_functions.lua"
 
 set_textdomain("win_conditions")
