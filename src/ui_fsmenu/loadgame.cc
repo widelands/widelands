@@ -121,14 +121,14 @@ void FullscreenMenuLoadGame::toggle_filenames() {
 	showing_filenames_ = show_filenames_->get_state();
 
 	// Remember selection
-	uint32_t selected = load_or_save_.table().selection_index();
+	const std::set<uint32_t> selected = load_or_save_.table().selections();
 	// Fill table again
 	fill_table();
 
-	// Restore one selection item
+	// Restore selection items
 	// TODO(GunChleoc): It would be nice to have a function to just change the entry texts
-	if (selected != UI::Table<uintptr_t const>::no_selection_index()) {
-		load_or_save_.table().select(selected);
+	for (const uint32_t selectme : selected) {
+		load_or_save_.table().multiselect(selectme, true);
 	}
 	entry_selected();
 }

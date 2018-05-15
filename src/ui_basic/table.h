@@ -102,7 +102,7 @@ public:
 	EntryRecord* find(Entry) const;
 
 	void select(uint32_t);
-	void multiselect(uint32_t row);
+	void multiselect(uint32_t row, bool force = false);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
@@ -249,7 +249,7 @@ public:
 	EntryRecord* find(const void* entry) const;
 
 	void select(uint32_t);
-	void multiselect(uint32_t row);
+	void multiselect(uint32_t row, bool force = false);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {

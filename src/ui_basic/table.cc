@@ -444,7 +444,14 @@ void Table<void*>::select(const uint32_t i) {
 	selected(selection_);
 }
 
-void Table<void*>::multiselect(uint32_t row) {
+/**
+ * If 'force' is true, adds the given 'row' to the selection, ignoring everything else.
+ */
+void Table<void*>::multiselect(uint32_t row, bool force) {
+	if (force) {
+		select(row);
+		return;
+	}
 	if (is_multiselect_) {
 		// Ranged selection with Shift
 		if (SDL_GetModState() & KMOD_SHIFT) {
