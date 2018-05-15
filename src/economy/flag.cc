@@ -507,26 +507,30 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
 }
 
 /**
- * Accelerate potential promotion of roads adjacent to newly promoted road.
+ * Accelerate potential promotion of roads adjacent to a newly promoted road.
  */
 void Flag::propagate_promoted_road(Road* const promoted_road) {
-  // abort if flag has a building attached to it
-  if (building_) return;
-
-  // calculate the sum of the involved wallets' adjusted value
-  int16_t max_wallet = 1500; // NOCOM should be replaced by kMaxWallet
-  int32_t sum = 0;
-  for (int8_t i = 0; i < 6; ++i) {
-    Road* const road = roads_[i];
-    if (!road || road == promoted_road) continue;
-    sum += max_wallet + road->wallet_ * road->wallet_;
+  // Abort if flag has a building attached to it
+  if (building_) {
+	  return;
   }
 
-  // distribute propagation coins in a smart way
-  for (int8_t i = 0; i < 6; ++i) {
+  // Calculate the sum of the involved wallets' adjusted value
+  static constexpr int16_t kMaxWallet = 1500; // NOCOM does this need to be identical with the one in Road::pay_for_road?
+  int32_t sum = 0;
+  for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
     Road* const road = roads_[i];
-    if (!road || road->type_ == RoadType::kBusy) continue;
-    road->wallet_ += 0.5 * (max_wallet - road->wallet_) * (max_wallet + road->wallet_ * road->wallet_) / sum;
+	if (road && road != promoted_road) {
+		sum += kMaxWallet + road->wallet() * road->wallet();
+	}
+  }
+
+  // Distribute propagation coins in a smart way
+  for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+    Road* const road = roads_[i];
+	if (road && road->get_roadtype() != RoadType::kBusy) {
+		road->add_to_wallet(0.5 * (kMaxWallet - road->wallet()) * (kMaxWallet + road->wallet() * road->wallet()) / sum);
+	}
   }
 }
 
@@ -536,7 +540,9 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 uint8_t Flag::count_wares_in_queue(PlayerImmovable& dest) const {
   uint8_t n = 0;
   for (int32_t i = 0; i < ware_filled_; ++i) {
-    if (wares_[i].nextstep == &dest) ++n;
+    if (wares_[i].nextstep == &dest) {
+		++n;
+	}
   }
   return n;
 }

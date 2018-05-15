@@ -557,24 +557,24 @@ bool Road::notify_ware(Game& game, FlagId const flagid) {
 }
 
 /**
- * Reset last_wallet_charge_.
+ * Update last_wallet_charge_ with the current gametime.
  */
-void Road::reset_charging(Game& game) {
-	last_wallet_charge_ = game.get_gametime() / 1000;
+void Road::update_wallet_chargetime(Game& game) {
+	last_wallet_charge_ = game.get_gametime();
 }
 
 /**
  * Subtract maintenance cost, and check for demotion.
  */
 void Road::charge_wallet(Game& game) {
-	const uint32_t gamesecs = game.get_gametime() / 1000;
-	assert(last_wallet_charge_ <= gamesecs);
+	const uint32_t current_gametime = game.get_gametime();
+	assert(last_wallet_charge_ <= current_gametime);
 
-	log("wallet: %d, carriers: %d, gamesecs: %d, last_charge: %d, steps: %lu\n", wallet_,
-	    carriers_count(), gamesecs, last_wallet_charge_, path_.get_nsteps());
+	log("NOCOM wallet: %d, carriers: %d, gamesecs: %d, last_charge: %d, steps: %lu\n", wallet_,
+	    carriers_count(), current_gametime, last_wallet_charge_, path_.get_nsteps());
 
-	wallet_ -= carriers_count() * (gamesecs - last_wallet_charge_);
-	last_wallet_charge_ = gamesecs;
+	wallet_ -= carriers_count() * (current_gametime - last_wallet_charge_) / 1000;
+	last_wallet_charge_ = current_gametime;
 
 	if (wallet_ < 0) {
 		wallet_ = 0;
@@ -595,14 +595,22 @@ void Road::charge_wallet(Game& game) {
 	}
 }
 
+int32_t Road::wallet() const {
+	return wallet_;
+}
+
+void Road::add_to_wallet(int32_t sum) {
+	wallet_ += sum;
+}
+
 /**
  * Add carrying payment, and check for promotion.
  */
 void Road::pay_for_road(Game& game, uint8_t queue_length) {
-	constexpr uint16_t kAnimalPrice = 600;
-	constexpr int16_t kMaxWallet = 2.5 * kAnimalPrice;
+	constexpr int32_t kAnimalPrice = 600;
+	constexpr int32_t kMaxWallet = 2.5 * kAnimalPrice;
 
-	log("wallet: %d, carriers: %d, queue: %d, steps: %lu\n", wallet_, carriers_count(), queue_length,
+	log("NOCOM wallet: %d, carriers: %d, queue: %d, steps: %lu\n", wallet_, carriers_count(), queue_length,
 	    path_.get_nsteps());
 
 	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
@@ -621,9 +629,7 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 			}
 		}
 	}
-	if (wallet_ > kMaxWallet) {
-		wallet_ = kMaxWallet;
-	}
+	wallet_ = std::min(wallet_, kMaxWallet);
 }
 
 /**
@@ -633,6 +639,7 @@ void Road::pay_for_building() {
 	wallet_ += 2 * (carriers_count() + 1);
 	// Don't bother with checks here, since the next ware will cause them anyway
 }
+
 void Road::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
 	molog("wallet_: %i\n", wallet_);

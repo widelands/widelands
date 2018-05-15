@@ -409,7 +409,7 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 	else if (state.task == &taskWaitforcapacity) {
 	  // skip maintenance charges for the time-length of congestion
 	  Road& road = dynamic_cast<Road&>(*get_location(game));
-	  road.reset_charging(game);
+	  road.update_wallet_chargetime(game);
 	  send_signal(game, "wakeup");
 	}
 

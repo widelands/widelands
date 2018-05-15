@@ -61,7 +61,6 @@ private:
 struct Road : public PlayerImmovable {
 	friend class MapRoaddataPacket;  // For saving
 	friend class MapRoadPacket;      // For init()
-	friend class Flag; // for wallet stuff
 
 	const RoadDescr& descr() const;
 
@@ -109,8 +108,10 @@ struct Road : public PlayerImmovable {
 	void postsplit(Game&, Flag&);
 
 	bool notify_ware(Game& game, FlagId flagid);
-	void reset_charging(Game& game);
+	void update_wallet_chargetime(Game& game);
 	void charge_wallet(Game& game);
+	int32_t wallet() const;
+	void add_to_wallet(int32_t sum);
 	void pay_for_road(Game& game, uint8_t wares_count);
 	void pay_for_building();
 

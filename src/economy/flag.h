@@ -27,6 +27,7 @@
 #include "economy/routing_node.h"
 #include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {
 class Building;
@@ -177,7 +178,7 @@ private:
 	int32_t animstart_;
 
 	Building* building_;  ///< attached building (replaces road WALK_NW)
-	Road* roads_[6];      ///< WALK_xx - 1 as index
+	Road* roads_[WalkingDir::LAST_DIRECTION];
 
 	int32_t ware_capacity_;  ///< size of wares_ array
 	int32_t ware_filled_;    ///< number of wares currently on the flag
