@@ -10,7 +10,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "Produces coal out of logs.")
+   return pgettext("building", "Burns logs into charcoal.")
 end
 
 function building_helptext_note()
@@ -19,6 +19,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- TRANSLATORS#: Performance helptext for a building
+   -- TRANSLATORS: Performance helptext for a building
    return pgettext("frisians_building", "The charcoal kiln needs %s on average to produce one coal."):bformat(ngettext("%d second", "%d seconds", 60):bformat(60))
 end

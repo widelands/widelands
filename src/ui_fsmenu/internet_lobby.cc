@@ -71,7 +71,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                get_h() * 55 / 100,
                butw_,
                buth_,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
      hostgame_(this,
                "host_game",
@@ -79,7 +79,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                get_h() * 81 / 100,
                butw_,
                buth_,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
      back_(this,
            "back",
@@ -87,22 +87,18 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
            get_h() * 90 / 100,
            butw_,
            buth_,
-           g_gr->images().get("images/ui_basic/but0.png"),
+           UI::ButtonStyle::kFsMenuSecondary,
            _("Back")),
 
      // Edit boxes
-     edit_servername_(this,
-                      get_w() * 17 / 25,
-                      get_h() * 68 / 100,
-                      butw_,
-                      buth_,
-                      2,
-                      g_gr->images().get("images/ui_basic/but2.png"),
-                      fs_),
+     edit_servername_(
+        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, UI::PanelStyle::kFsMenu, fs_),
 
      // List
-     clientsonline_list_(this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10),
-     opengames_list_(this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20),
+     clientsonline_list_(
+        this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10, UI::PanelStyle::kFsMenu),
+     opengames_list_(
+        this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20, UI::PanelStyle::kFsMenu),
 
      // The chat UI
      chat(this,
@@ -110,7 +106,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
           get_h() * 51 / 100,
           lisw_,
           get_h() * 44 / 100,
-          InternetGaming::ref()),
+          InternetGaming::ref(),
+          UI::PanelStyle::kFsMenu),
 
      // Login information
      nickname_(nick),

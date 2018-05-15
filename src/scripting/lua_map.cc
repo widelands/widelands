@@ -27,7 +27,6 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/input_queue.h"
-#include "graphic/graphic.h"
 #include "logic/findimmovable.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/immovable.h"

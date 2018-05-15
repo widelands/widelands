@@ -93,5 +93,5 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 }
 
 std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& path) {
-	return ::run_script(lua_state_, path, g_fs);
+	return ::run_script(lua_state_, g_fs->fix_cross_file(path), g_fs);
 }

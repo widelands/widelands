@@ -20,7 +20,6 @@
 #include "wui/trainingsitewindow.h"
 
 #include "graphic/graphic.h"
-#include "ui_basic/tabpanel.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
 
