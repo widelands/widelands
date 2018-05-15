@@ -97,7 +97,7 @@ void Carrier::road_update(Game& game, State& state) {
 	Road& road = dynamic_cast<Road&>(*get_location(game));
 
 	// subtract maintenance cost and check for road demotion
-	road.charge_wallet(game);
+	// NOCOM road.charge_wallet(game);
 
 	// Move into idle position if necessary
 	if (start_task_movepath(game, road.get_path(), road.get_idle_index(),
@@ -408,8 +408,8 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 		send_signal(game, "ware");
 	else if (state.task == &taskWaitforcapacity) {
 	  // skip maintenance charges for the time-length of congestion
-	  Road& road = dynamic_cast<Road&>(*get_location(game));
-	  road.update_wallet_chargetime(game);
+	  // NOCOM Road& road = dynamic_cast<Road&>(*get_location(game));
+	  // NOCOM road.update_wallet_chargetime(game);
 	  send_signal(game, "wakeup");
 	}
 
