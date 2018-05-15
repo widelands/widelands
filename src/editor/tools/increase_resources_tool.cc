@@ -20,11 +20,9 @@
 #include "editor/tools/increase_resources_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 
 using Widelands::TCoords;

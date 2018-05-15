@@ -79,17 +79,15 @@ UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
                                            const std::string& tooltip_text,
                                            UI::UniqueWindow::Registry* window) {
 	UI::Button* button =
-	   new UI::Button(&box_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but4.png"),
+	   new UI::Button(&box_, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiMenu,
 	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	box_.add(button);
 	if (window) {
 		if (window->window) {
-			button->set_style(UI::Button::Style::kPermpressed);
+			button->set_perm_pressed(true);
 		}
-		window->opened.connect(
-		   boost::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed));
-		window->closed.connect(
-		   boost::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised));
+		window->opened.connect(boost::bind(&UI::Button::set_perm_pressed, button, true));
+		window->closed.connect(boost::bind(&UI::Button::set_perm_pressed, button, false));
 		button->sigclicked.connect(
 		   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
 	}

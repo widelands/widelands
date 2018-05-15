@@ -23,6 +23,7 @@
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "ui_basic/mouse_constants.h"
 
 namespace UI {
@@ -43,7 +44,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                      int32_t const y,
                      uint32_t const w,
                      uint32_t const h,
-                     const Image* button_background,
+                     UI::PanelStyle style,
                      bool const horiz)
    : Panel(parent, x, y, w, h),
      horizontal_(horiz),
@@ -60,7 +61,7 @@ Scrollbar::Scrollbar(Panel* const parent,
                                            "images/ui_basic/scrollbar_up.png")),
      pic_plus_(g_gr->images().get(horiz ? "images/ui_basic/scrollbar_right.png" :
                                           "images/ui_basic/scrollbar_down.png")),
-     pic_buttons_(button_background) {
+     button_style_(g_gr->styles().scrollbar_style(style)) {
 	set_thinks(true);
 	layout();
 }
@@ -233,7 +234,7 @@ void Scrollbar::action(Area const area) {
 }
 
 void Scrollbar::draw_button(RenderTarget& dst, Area area, const Recti& r) {
-	dst.tile(r.cast<int>(), pic_buttons_, Vector2i(get_x(), get_y()));
+	draw_background(dst, r.cast<int>(), *button_style_);
 
 	// Draw the picture
 	const Image* pic = nullptr;

@@ -24,7 +24,6 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -36,15 +35,7 @@ namespace UI {
  * Text conventions: Sentence case for labels associated with thie editbox
  */
 struct MultilineEditbox : public Panel {
-	MultilineEditbox(
-	   Panel*,
-	   int32_t x,
-	   int32_t y,
-	   uint32_t w,
-	   uint32_t h,
-	   const std::string& text,
-	   const Image* background = g_gr->images().get("images/ui_basic/but2.png"),
-	   const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"));
+	MultilineEditbox(Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, PanelStyle style);
 
 	boost::signals2::signal<void()> changed;
 
@@ -56,6 +47,7 @@ struct MultilineEditbox : public Panel {
 protected:
 	void draw(RenderTarget&) override;
 
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
 	bool handle_key(bool down, SDL_Keysym) override;
 	bool handle_textinput(const std::string& text) override;
 
