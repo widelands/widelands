@@ -73,7 +73,6 @@ wl_library(wui_common_gamedetails
     base_time_string
     helper
     game_io
-    graphic
     graphic_fonthandler
     graphic_image_io
     graphic_surface
