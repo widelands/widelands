@@ -134,11 +134,11 @@ void Table<void*>::set_column_title(uint8_t const col, const std::string& title)
 	column.btn->set_title(title);
 }
 
-void Table<void*>::set_column_tooltip(uint8_t col, const std::string& tooltip) {
+void Table<void*>::set_column_tooltip(uint8_t col, const std::string& text) {
 	assert(col < columns_.size());
 	Column& column = columns_.at(col);
 	assert(column.btn);
-	column.btn->set_tooltip(tooltip);
+	column.btn->set_tooltip(text);
 }
 
 /**
