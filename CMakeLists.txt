@@ -289,6 +289,7 @@ install(
     data/images
     data/scripting
     data/shaders
+    data/templates
     data/tribes
     data/txts
     data/world
