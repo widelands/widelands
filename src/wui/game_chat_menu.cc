@@ -58,9 +58,13 @@ GameChatMenu* GameChatMenu::create_script_console(UI::Panel* parent,
 	return new GameChatMenu(parent, registry, chat, _("Script console"));
 }
 
-void GameChatMenu::enter_chat_message(bool close_on_send) {
+bool GameChatMenu::enter_chat_message(bool close_on_send) {
+	if (is_minimal()) {
+		return false;
+	}
 	chat_.focus_edit();
 	close_on_send_ = close_on_send;
+	return true;
 }
 
 void GameChatMenu::restore() {

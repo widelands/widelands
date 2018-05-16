@@ -45,7 +45,7 @@ struct GameChatMenu : public UI::UniqueWindow {
 	 * Put the focus on the message entry field, close the menu automatically
 	 * when return is pressed, etc.
 	 */
-	void enter_chat_message(bool close_on_send = true);
+	bool enter_chat_message(bool close_on_send = true);
 
 private:
 	GameChatMenu(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&, const std::string& title);
