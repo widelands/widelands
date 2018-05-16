@@ -449,6 +449,10 @@ void Carrier::find_pending_ware(Game& game) {
 		promised_pickup_to_ = END_FLAG;
 		if (!road.get_flag(Road::FlagEnd).ack_pickup(game, road.get_flag(Road::FlagStart)))
 			throw wexception("Carrier::find_pending_ware: end flag is messed up");
+	} else {
+		// Demote idle roads
+		log("NOCOM DEMOTE idle road\n");
+		road.charge_wallet(game);
 	}
 }
 
