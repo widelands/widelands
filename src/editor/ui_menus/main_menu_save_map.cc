@@ -68,7 +68,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    UI::ButtonStyle::kWuiPrimary,
                    _("Map Options")),
      editbox_label_(
-        this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {
+        this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")),
+	 illegal_filename_tooltip_(LayeredFileSystem::illegal_filename_tooltip()) {
 	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button
@@ -212,7 +213,9 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
-	ok_.set_enabled(LayeredFileSystem::is_legal_filename(editbox_->text()));
+	const bool is_legal_filename = LayeredFileSystem::is_legal_filename(editbox_->text());
+	ok_.set_enabled(is_legal_filename);
+	editbox_->set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 }
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {

@@ -141,6 +141,13 @@ std::string as_aligned(const std::string& txt,
 	return f.str();
 }
 
+/// Bullet list item
+std::string as_listitem(const std::string& txt, int ptsize, const RGBColor& clr) {
+	static boost::format f("<div width=100%%><div><p><font size=%d color=%s>•</font></p></div><div><p><space gap=6></p></div><div width=*><p><font size=%d color=%s>%s<vspace gap=6></font></p></div></div>");
+	f % ptsize % clr.hex_value() % ptsize % clr.hex_value() % txt;
+	return f.str();
+}
+
 std::string as_richtext(const std::string& txt) {
 	static boost::format f("<rt>%s</rt>");
 	f % txt;

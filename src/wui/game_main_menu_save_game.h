@@ -80,6 +80,7 @@ private:
 	std::string parentdir_;
 	std::string filename_;
 	bool overwrite_;
+	const std::string illegal_filename_tooltip_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H
