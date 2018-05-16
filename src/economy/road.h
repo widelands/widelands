@@ -62,6 +62,10 @@ struct Road : public PlayerImmovable {
 	friend class MapRoaddataPacket;  // For saving
 	friend class MapRoadPacket;      // For init()
 
+	static constexpr int32_t kAnimalPrice = 600;
+	static constexpr int32_t kMaxWallet = 2.5 * kAnimalPrice;
+
+
 	const RoadDescr& descr() const;
 
 	static bool is_road_descr(MapObjectDescr const*);

@@ -516,12 +516,11 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
   }
 
   // Calculate the sum of the involved wallets' adjusted value
-  static constexpr int16_t kMaxWallet = 1500; // NOCOM does this need to be identical with the one in Road::pay_for_road?
   int32_t sum = 0;
   for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
     Road* const road = roads_[i];
 	if (road && road != promoted_road) {
-		sum += kMaxWallet + road->wallet() * road->wallet();
+		sum += Road::kMaxWallet + road->wallet() * road->wallet();
 	}
   }
 
@@ -529,7 +528,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
   for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
     Road* const road = roads_[i];
 	if (road && road->get_roadtype() != RoadType::kBusy) {
-		road->add_to_wallet(0.5 * (kMaxWallet - road->wallet()) * (kMaxWallet + road->wallet() * road->wallet()) / sum);
+		road->add_to_wallet(0.5 * (Road::kMaxWallet - road->wallet()) * (Road::kMaxWallet + road->wallet() * road->wallet()) / sum);
 	}
   }
 }
