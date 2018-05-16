@@ -17,7 +17,7 @@
  *
  */
 
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 
 #include <limits>
 #include <string>

@@ -17,7 +17,7 @@
  *
  */
 
-#include "wui/chatoverlay.h"
+#include "wui/chat_overlay.h"
 
 #include <memory>
 

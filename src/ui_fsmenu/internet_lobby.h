@@ -32,7 +32,7 @@
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 
 class FullscreenMenuInternetLobby : public FullscreenMenuBase {
 public:
