@@ -55,7 +55,7 @@ print_loading_message("┗━ took", function()
       include "tribes/wares/helmet_golden/init.lua"
       include "tribes/wares/sword_short/init.lua"
       include "tribes/wares/sword_long/init.lua"
-      include "tribes/wares/sword_curved/init.lua"
+      include "tribes/wares/sword_broad/init.lua"
       include "tribes/wares/sword_double/init.lua"
       include "tribes/wares/needles/init.lua"
       include "tribes/wares/armor/init.lua"

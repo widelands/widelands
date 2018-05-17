@@ -71,6 +71,7 @@ tribes:new_productionsite_type {
             "call=smelt_iron",
             "call=smelt_mixed",
             "call=smelt_iron",
+            "call=make_fur",
             "return=skipped"
          }
       },

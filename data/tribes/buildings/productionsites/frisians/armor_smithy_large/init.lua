@@ -52,7 +52,7 @@ tribes:new_productionsite_type {
       { name = "gold", amount = 8 },
    },
    outputs = {
-      "sword_curved",
+      "sword_broad",
       "sword_double",
       "helmet_golden",
    },
@@ -69,14 +69,14 @@ tribes:new_productionsite_type {
          },
       },
       produce_s3 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a curved sword because ...
-         descname = _"forging a curved sword",
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because ...
+         descname = _"forging a broadsword",
          actions = {
-            "return=skipped unless economy needs sword_curved",
+            "return=skipped unless economy needs sword_broad",
             "sleep=59000",
             "consume=coal iron:2 gold",
             "animate=working 51000",
-            "produce=sword_curved"
+            "produce=sword_broad"
          },
       },
       produce_s4 = {

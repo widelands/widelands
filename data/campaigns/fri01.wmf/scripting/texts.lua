@@ -321,7 +321,7 @@ training_2 = {
       _([[Soldiers are trained in two steps in defense and health. They get fur garments studded with iron and also gold to cushion blows; and helmets forged from iron, and gold as well, to lengthen their life in battle.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 2
-      _([[They learn to attack with three different swords: The long, curved and double-edged sword. The latter two contain gold, and all of them iron. The advanced soldiers are taught to use two matching swords at once. This makes six steps of attack training.]])
+      _([[They learn to attack with three different swords: The long sword, broadsword and double-edged sword. The latter two contain gold, and all of them iron. The advanced soldiers are taught to use two swords at once: They keep their first double-edged sword, and are given various other swords to wield in their other hand. This makes six steps of attack training.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 2
       _([[We do not train soldiers to evade attacks; a true warrior can block his opponent’s blows with a skillful twist of the sword instead of jumping away like a coward.]])),

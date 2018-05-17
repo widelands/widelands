@@ -2,9 +2,9 @@ dirname = path.dirname(__file__)
 
 tribes:new_ware_type {
    msgctxt = "ware",
-   name = "sword_curved",
+   name = "sword_broad",
    -- TRANSLATORS: This is a ware name used in lists of wares
-   descname = pgettext("ware", "Curved Sword"),
+   descname = pgettext("ware", "Broadsword"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    default_target_quantity = {
@@ -17,7 +17,7 @@ tribes:new_ware_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle.png"),
-         hotspot = {4, 12},
+         hotspot = {12, 10},
       },
    }
 }

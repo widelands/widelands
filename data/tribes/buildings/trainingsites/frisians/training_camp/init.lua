@@ -57,7 +57,7 @@ tribes:new_trainingsite_type {
       { name = "smoked_fish", amount = 6 },
       { name = "smoked_meat", amount = 6 },
       { name = "sword_long", amount = 2 },
-      { name = "sword_curved", amount = 2 },
+      { name = "sword_broad", amount = 2 },
       { name = "sword_double", amount = 2 },
       { name = "helmet", amount = 2 },
       { name = "fur_garment_studded", amount = 2 },
@@ -79,7 +79,7 @@ tribes:new_trainingsite_type {
       },
       weapons = {
          "sword_long",
-         "sword_curved",
+         "sword_broad",
          "sword_double",
       }
    },
@@ -136,7 +136,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 1",
             "animate=working 22800",
             "check_soldier=soldier attack 1",
-            "consume=sword_curved bread_frisians beer smoked_fish,smoked_meat",
+            "consume=sword_broad bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 1 2",
             "produce=scrap_iron:2"
          }

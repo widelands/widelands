@@ -57,7 +57,7 @@ tribes:new_trainingsite_type {
       { name = "mead", amount = 8 },
       { name = "honey_bread", amount = 6 },
       { name = "sword_long", amount = 3 },
-      { name = "sword_curved", amount = 3 },
+      { name = "sword_broad", amount = 3 },
       { name = "sword_double", amount = 3 },
       { name = "helmet_golden", amount = 2 },
       { name = "fur_garment_golden", amount = 2 },
@@ -79,7 +79,7 @@ tribes:new_trainingsite_type {
       },
       weapons = {
          "sword_long",
-         "sword_curved",
+         "sword_broad",
          "sword_double",
       }
    },
@@ -133,7 +133,7 @@ tribes:new_trainingsite_type {
             "check_soldier=soldier attack 4",
             "animate=working 15600",
             "check_soldier=soldier attack 4", -- Because the soldier can be expelled by the player
-            "consume=sword_curved honey_bread mead:2 smoked_fish,smoked_meat",
+            "consume=sword_broad honey_bread mead:2 smoked_fish,smoked_meat",
             "train=soldier attack 4 5",
             "produce=scrap_iron:2"
          }

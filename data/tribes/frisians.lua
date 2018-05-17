@@ -88,7 +88,7 @@ tribes:new_tribe {
          -- Weapons & Armor
           "sword_short",
           "sword_long",
-          "sword_curved",
+          "sword_broad",
           "sword_double",
           "fur_garment",
           "fur_garment_studded",
