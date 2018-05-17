@@ -63,7 +63,9 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=produce_s1",
+            "call=produce_s2",
             "call=produce_h",
+            "call=produce_s1",
             "call=produce_s2",
             "return=skipped",
          },
