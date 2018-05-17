@@ -614,9 +614,9 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
 	charge_wallet(game);
 
-	if (type_ == RoadType::kNormal && wallet_ > 1.5 * kAnimalPrice) {
+	if (type_ == RoadType::kNormal && wallet_ > 1.5 * Road::kAnimalPrice) {
 		// Promote the road
-		wallet_ -= kAnimalPrice;
+		wallet_ -= Road::kAnimalPrice;
 		type_ = RoadType::kBusy;
 		flags_[0]->propagate_promoted_road(this);
 		flags_[1]->propagate_promoted_road(this);
