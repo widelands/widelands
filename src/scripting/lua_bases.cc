@@ -335,6 +335,8 @@ std::map<std::string, const char*> *keys, std::map<std::string, const char*> *ty
 		const char* type_name = lua_typename(L, lua_type(L, -1));
 		std::string t = std::string(type_name);
 
+		(*type)[key_key] = type_name;
+
 		if (t == "number" || t == "string") {
 			(*data)[key_key] = luaL_checkstring(L, -1);
 		} else if (t == "boolean") {
@@ -345,18 +347,20 @@ std::map<std::string, const char*> *keys, std::map<std::string, const char*> *ty
 			report_error(L, "A campaign data value may be a string, integer, boolean, or table; but not a %s!", type_name);
 		}
 
-		(*type)[key_key] = type_name;
+		++i;
 
 		lua_pop(L, 1);
 		if (lua_type(L, -1) == LUA_TSTRING) {
-		    (*keys)[key_key] = luaL_checkstring(L, -1);
+			(*keys)[key_key] = luaL_checkstring(L, -1);
 		}
-		else if (lua_type(L, -1) != LUA_TNUMBER) {
+		else if (lua_type(L, -1) == LUA_TNUMBER) {
+			if ( i != luaL_checkuint32(L, -1)) {
+				report_error(L, "A campaign data array entry must not be nil!");
+			}
+		} else {
 			report_error(L, "A campaign data key may be a string or integer; but not a %s!",
 					lua_typename(L, lua_type(L, -1)));
 		}
-
-		++i;
 	}
 	(*size)[depth] = i;
 }
@@ -370,8 +374,7 @@ std::map<std::string, const char*> *keys, std::map<std::string, const char*> *ty
 
       Saves information that can be read by other scenarios.
 
-      If an array is used, the data will be saved in the correct order.
-      Note that any values that are :const:`nil` will be omitted, wherefore subsequent indices are decremented!
+      If an array is used, the data will be saved in the correct order. Arrays may not contain nil values.
       If the table is not an array, all keys have to be strings.
       Tables may contain subtables of any depth. Cyclic dependencies will cause Widelands to crash.
       Only tables/arrays, strings, integer numbers and booleans may be used as values.
@@ -426,6 +429,8 @@ Section* type_section, Section* size_section) {
 	for (uint32_t i = 0; i < size; i++) {
 		const char* key_key = (depth + "_" + std::to_string(i)).c_str();
 
+		//log("Reading key_key %s: ", key_key);
+
 		if (keys_section->has_val(key_key)) {
 			lua_pushstring(L, keys_section->get_string(key_key));
 		}
@@ -433,6 +438,7 @@ Section* type_section, Section* size_section) {
 			lua_pushinteger(L, i + 1);
 		}
 		const std::string type = type_section->get_string(key_key);
+		//log("Type is %s\n ", type.c_str());
 
 		if (type == "boolean") {
 			lua_pushboolean(L, data_section->get_bool(key_key));
@@ -440,6 +446,8 @@ Section* type_section, Section* size_section) {
 			lua_pushinteger(L, data_section->get_int(key_key));
 		} else if (type == "string") {
 			lua_pushstring(L, data_section->get_string(key_key));
+		} else if (type == "nil") {
+			lua_pushnil(L);
 		} else if (type == "table") {
 			push_table_recursively(L, depth + "_" + std::to_string(i),
 					data_section, keys_section, type_section, size_section);
