@@ -627,7 +627,7 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 			}
 		}
 	}
-	wallet_ = std::min(wallet_, kMaxWallet);
+	wallet_ = std::min(wallet_, Road::kMaxWallet);
 }
 
 /**
