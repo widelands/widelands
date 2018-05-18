@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
-"PO-Revision-Date: 2018-05-07 18:08+0000\n"
+"POT-Creation-Date: 2018-05-14 05:35+0000\n"
+"PO-Revision-Date: 2018-05-14 19:49+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -596,7 +596,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
-msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar carbó és del %s."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:27
@@ -724,7 +724,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
-msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar mineral d'or és del %s."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
@@ -771,7 +771,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "granite."
-msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar granit és del %s."
+msgstr ""
 
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -884,7 +884,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr "Aquesta mina s'explota a fons i la probabilitat de trobar mineral de ferro és del %s."
+msgstr ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
@@ -1627,7 +1627,7 @@ msgstr ""
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce two bricks."
-msgstr ""
+msgstr "La bòbila necessita %s de mitjana per produir dos maons."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:3
@@ -1647,7 +1647,7 @@ msgstr "L'inventor del kiln de carbó vegetal frisó."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "El kiln de carbó vegetal necessita %s de mitjana per produir una unitat de carbó."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:6
@@ -1676,7 +1676,7 @@ msgctxt "frisians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any coal."
-msgstr ""
+msgstr "Aquesta mina explota només el %s dels recursos. A partir d'ara tindrà només un 5%% de probabilitat de trobar carbó."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:26
@@ -1685,7 +1685,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce two pieces of coal "
 "in %s on average."
-msgstr ""
+msgstr "Si se li subministren els aliments necessaris adequadament, la mina de carbó pot cavar per aconseguir dues unitats de carbó cada %s de mitjana."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:21
@@ -1716,7 +1716,7 @@ msgstr "La carn no creix als arbres. La fruita sí ho fa."
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A fruit collector advertising his harvest to a landlady"
-msgstr ""
+msgstr "Un recol·lector de fruita mostrant la seva collita a una patrona"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:13
@@ -1749,7 +1749,7 @@ msgstr "Tot el que necessito per ser feliç és una llesca de pa dolç amb carn 
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A master miner to the landlady"
-msgstr ""
+msgstr "Un mestre miner a la patrona"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:16
@@ -4921,7 +4921,7 @@ msgstr "Les dalles es fabriquen al taller d'eines."
 #: ../../data/tribes/wares/scythe/helptexts.lua:8
 msgctxt "frisians_ware"
 msgid "Scythes are produced by the blacksmithy."
-msgstr ""
+msgstr "Les dalles es produeixen a la forja."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:10
@@ -4991,7 +4991,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used by berry and reed farmers as well as foresters. Brickmakers "
 "also need them to dig mud out of hard soil."
-msgstr ""
+msgstr "Les usen els agricultors que treballen amb baies i juncs i també els guardes forestals. Els artesans de maons també les necessiten per treure fang del terra."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../data/tribes/wares/smoked_fish/helptexts.lua:4
@@ -5007,7 +5007,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fish is smoked in a smokery. Smoked fish is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "El peix es fuma al fumador. El peix fumat el consumeixen els soldats en els entrenaments o es fa servir per elaborar racions i àpats pels miners i exploradors."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Meat
 #: ../../data/tribes/wares/smoked_meat/helptexts.lua:4
@@ -5024,7 +5024,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Meat is smoked in a smokery. Smoked meat is then consumed by soldiers in "
 "training or turned into rations and meals for miners and scouts."
-msgstr ""
+msgstr "La carn es fuma al fumador. La carn fumada la consumeixen els soldats en els entrenaments o es fa servir per elaborar racions i àpats pels miners i exploradors."
 
 #. TRANSLATORS: Helptext for a ware: Snack
 #: ../../data/tribes/wares/snack/helptexts.lua:4
@@ -5102,7 +5102,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The curved sword is the weapon used by level 2 soldiers. Level 5 soldiers "
 "are equipped with two curved swords."
-msgstr ""
+msgstr "L'espasa corbada és l'arma que fan servir els soldats de nivell 2. Els soldats de nivell 5 van equipats amb dues d'aquestes espases."
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
 #: ../../data/tribes/wares/sword_double/helptexts.lua:4
@@ -5110,7 +5110,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The double-edged sword is the weapon used by level 3 soldiers. Level 6 "
 "soldiers are equipped with two of these ferocious swords."
-msgstr ""
+msgstr "L'espasa de doble fil és l'arma que usen els soldats de nivell 3. Els soldats de nivell 6 van equipats amb dues d'aquestes feroces espases."
 
 #. TRANSLATORS: Helptext for a ware: Long Sword
 #: ../../data/tribes/wares/sword_long/helptexts.lua:4
@@ -5118,7 +5118,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
 "equipped with two long swords."
-msgstr ""
+msgstr "L'espasa llarga és l'arma que usen els soldats de nivell 1. Els de nivell 4 van equipats amb dues d'aquestes espases."
 
 #. TRANSLATORS: Helptext for a ware: Short sword
 #: ../../data/tribes/wares/sword_short/helptexts.lua:4
@@ -5471,7 +5471,7 @@ msgstr "Tala arbres."
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "Forneja pa de pita pels miners, soldats i exploradors."
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
@@ -5883,14 +5883,14 @@ msgstr "Planta arbustos d'on després es podran recollir baies."
 #: ../../data/tribes/workers/frisians/blacksmith/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Produces weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "Produeix armes i armadures pels soldats i eines pels treballadors."
 
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #: ../../data/tribes/workers/frisians/blacksmith_master/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid ""
 "Produces the best weapons and armor for soldiers and tools for workers."
-msgstr ""
+msgstr "Produeix les millors armes i armadures pels soldats i eines pels treballadors."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/frisians/brewer/helptexts.lua:3
@@ -5908,7 +5908,7 @@ msgstr "Elabora cervesa i aiguamel."
 #: ../../data/tribes/workers/frisians/brickmaker/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Makes clay out of mud and water or bricks out of clay and granite."
-msgstr ""
+msgstr "Obté peces d'argila a partir del fang i aigua o maons a partir de fang i granit."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/frisians/builder/helptexts.lua:3
@@ -5968,7 +5968,7 @@ msgstr "El caçador aconsegueix carn fresca per als atlants."
 #: ../../data/tribes/workers/frisians/landlady/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Prepares rations and meals for miners and scouts."
-msgstr ""
+msgstr "Prepara racions i àpats pels miners i exploradors."
 
 #. TRANSLATORS: Helptext for a worker: Miner
 #. TRANSLATORS: Helptext for a worker: Master Miner

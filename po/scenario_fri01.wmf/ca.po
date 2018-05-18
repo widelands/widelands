@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
+"POT-Creation-Date: 2018-05-14 05:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo, 2018\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -47,6 +47,8 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Construïu una bòbila, una mina de carbó, una mina de roques, una fossa de "
+"fang i un pou per començar a produir maons."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Gather building materials"
@@ -92,6 +94,8 @@ msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Recordeu que podeu establir les quantitats desitjades per la majoria dels "
+"béns a la configuració de l'economia."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Produce food for the miners"
@@ -106,6 +110,8 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Construïu una taverna, una casa del pescador, un fumador, una masoveria de "
+"baies i una casa del recol·lector de fruita."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance your food economy"
@@ -227,6 +233,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
+"Benvingut a la preciosa illa de Langeness! Sóc en Reebaud, el cabdill "
+"d'aquesta illa prístina."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:132
@@ -668,7 +676,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr ""
+msgstr "Lluita frisona"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321
@@ -697,7 +705,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr ""
+msgstr "Planificant un centre d'entrenament"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
@@ -726,6 +734,9 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
+"Quan els soldats s'entrenen en l'ús d'armes, els seu equipament es fa malbé."
+" Tingueu en compte que la ferralla d'aquestes armes pot obstruir els camins "
+"fins que s'emmagatzemin en algun lloc."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -745,7 +756,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "Els nostres soldats són prou forts?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -777,7 +788,7 @@ msgstr "Compte!"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
-msgstr ""
+msgstr "No prou forts"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368

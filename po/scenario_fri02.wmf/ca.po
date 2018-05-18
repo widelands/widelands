@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-11 05:42+0000\n"
+"POT-Creation-Date: 2018-05-14 05:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo, 2018\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -48,6 +48,8 @@ msgid ""
 "The north looks not very useful to us, but who knows what we might find in "
 "the south?"
 msgstr ""
+"El nord no sembla que ens sigui gaire útil, però qui sap què podem trobar al"
+" sud."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:43
 msgid "Train and recycle"
@@ -63,6 +65,9 @@ msgid ""
 "into metal in a recycling center. Use the weapons in the store to train "
 "soldiers and recycle some scrap metal."
 msgstr ""
+"Quan els soldats s'entrenen, les seves armes velles es retiren. Se'n pot "
+"recuperar el metall en un centre de reciclatge. Useu les armes del magatzem "
+"per entrenar soldats i recicleu-ne la ferralla."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:47
 msgid ""
@@ -93,13 +98,15 @@ msgstr "Decidiu si voleu cooperar amb l'Imperi"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:62
 msgid "Gather Wares as a Gift or Destroy the Empire’s Warehouse"
-msgstr ""
+msgstr "Acumuleu béns com a regal o destruïu el magatzem de l'Imperi"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:63
 msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
+"Decidiu si voleu treballar amb en Murilius contra els bàrbars. Si ho voleu "
+"fer, ompliu el magatzem amb aquests béns:"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
 msgid "30 × Log"
@@ -170,6 +177,7 @@ msgstr "Derroteu els bàrbars"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:85
 msgid "Defeat the hostile tribe living northwest of the Empire’s outpost!"
 msgstr ""
+"Derroteu la tribu hostil que viu al nord-est del post avançat de l'Imperi!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Defeat Murilius!"
@@ -224,6 +232,8 @@ msgid ""
 "But we survived. Finally, we reached the mouth of a calmer fjord. We sailed "
 "upriver, and arrived here."
 msgstr ""
+"Però hem sobreviscut. Finalment, hem arribat a la boca d'un fiord en calma. "
+"Hem navegat més amunt pel riu fins aquí."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:122
@@ -352,6 +362,10 @@ msgid ""
 "smelt the scrap metal into iron and gold. And then our blacksmiths can "
 "produce picks to equip miners with. I will see to it at once!"
 msgstr ""
+"Haurem de fer això: Usarem les armes per entrenar els soldats i després "
+"fondrem els retalls de metall de nou per recuperar-ne el ferro i l'or. "
+"Llavors els forjadors podran produir pics per equipar els miners. Ho vull "
+"veure ja!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:184
@@ -404,6 +418,10 @@ msgid ""
 "soldier training requires lots of smoked meat or fish. The scraps of meat a "
 "reindeer farm drops out as a by-product when making fur aren’t enough."
 msgstr ""
+"Cabdill Reebaud, tinc més notícies dolentes. Pràcticament no queda peix en "
+"les aigües de la zona. Encara que podem preparar racions només amb fruita i "
+"pa, l'entrenament dels soldats requereix molt peix o carn fumats. La carn "
+"d'una granja de rens no serà suficient."
 
 #. TRANSLATORS: Hauke – Aqua Farms 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:203
@@ -671,7 +689,7 @@ msgstr "L'Imperi està agraït"
 #. though
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:329
 msgid "Salvete amici Imperii!"
-msgstr ""
+msgstr "Salvete amici Imperii!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:331
@@ -699,7 +717,7 @@ msgstr "La recompensa pel vostre servei"
 #. understand Latin. You can transliterate into non-Latin scripts though
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:340
 msgid "Amici Imperii"
-msgstr ""
+msgstr "Amici Imperii"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:342
