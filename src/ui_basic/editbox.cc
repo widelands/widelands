@@ -97,7 +97,8 @@ EditBox::EditBox(Panel* const parent,
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
-	m_->maxLength = std::numeric_limits<int32_t>::max();
+	m_->maxLength =
+	   std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, std::numeric_limits<int32_t>::max());
 
 	set_handle_mouse(true);
 	set_can_focus(true);
