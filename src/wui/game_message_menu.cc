@@ -262,17 +262,31 @@ void GameMessageMenu::think() {
 
 	// Update messages in the list and remove messages
 	// that should no longer be shown
+	uint32_t removed = 0;
+	const auto& sel = list->selections();
+	const uint32_t max_index = (sel.empty() ? 0 : *sel.rbegin());
 	for (uint32_t j = list->size(); j; --j) {
 		MessageId id_((*list)[j - 1]);
 		if (Message const* const message = mq[id_]) {
 			if (should_be_hidden(*message)) {
+				removed++;
 				list->remove(j - 1);
 			} else {
 				update_record(list->get_record(j - 1), *message);
 			}
 		} else {
+			removed++;
 			list->remove(j - 1);
 		}
+	}
+	if (removed > 0) {
+		// If something was removed, select entry below lowest removed entry
+		uint32_t index = 0;
+		if (removed <= max_index) {
+			index = std::min(max_index - removed + 1, list->size() - 1);
+		}
+		list->select(index);
+		list->scroll_to_item(index);
 	}
 
 	// Add new messages to the list
