@@ -97,8 +97,7 @@ EditBox::EditBox(Panel* const parent,
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
-	m_->maxLength =
-	   std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, std::numeric_limits<int32_t>::max());
+	set_max_length(std::numeric_limits<int32_t>::max());
 
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -124,7 +123,7 @@ const std::string& EditBox::text() const {
  * Set the current text in the edit box.
  *
  * The text is truncated if it is longer than the maximum length set by
- * \ref setMaxLength().
+ * \ref set_max_length().
  */
 void EditBox::set_text(const std::string& t) {
 	if (t == m_->text)
