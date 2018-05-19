@@ -181,8 +181,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}
 
-		description = (boost::format("<rt>%s</rt>") % description).str();
-		descr_.set_text(description);
+		descr_.set_text(as_richtext(description));
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {

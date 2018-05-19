@@ -141,9 +141,8 @@ void GameDetails::update(const SavegameData& gamedata) {
 	if (gamedata.errormessage.empty()) {
 		if (gamedata.filename_list.empty()) {
 			name_label_.set_text(
-			   (boost::format("<rt>%s</rt>") %
-			    as_header_with_content(_("Map Name:"), gamedata.mapname, style_, true))
-			      .str());
+			   as_richtext(
+			    as_header_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
 
 			// Show game information
 			std::string description = as_header_with_content(
@@ -167,8 +166,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 			               as_header_with_content(_("Win Condition:"), gamedata.wincondition, style_))
 			                 .str();
 
-			description = (boost::format("<rt>%s</rt>") % description).str();
-			descr_.set_text(description);
+			descr_.set_text(as_richtext(description));
 
 			std::string minimap_path = gamedata.minimap_path;
 			if (!minimap_path.empty()) {
@@ -186,20 +184,16 @@ void GameDetails::update(const SavegameData& gamedata) {
 		} else {
 			std::string filename_list = richtext_escape(gamedata.filename_list);
 			boost::replace_all(filename_list, "\n", "<br> • ");
-			name_label_.set_text((boost::format("<rt>%s</rt>") %
-			                      as_header_with_content(gamedata.mapname, "", style_, true))
-			                        .str());
+			name_label_.set_text(as_richtext(
+			                      as_header_with_content(gamedata.mapname, "", style_, true)));
 
-			descr_.set_text((boost::format("<rt>%s</rt>") %
-			                 as_header_with_content("", filename_list, style_, true, true))
-			                   .str());
+			descr_.set_text(as_richtext(
+			                 as_header_with_content("", filename_list, style_, true, true)));
 			minimap_icon_.set_visible(false);
 		}
 	} else {
 		name_label_.set_text(
-		   (boost::format("<rt>%s</rt>") %
-		    as_header_with_content(_("Error:"), gamedata.errormessage, style_, true, true))
-		      .str());
+		   as_richtext(as_header_with_content(_("Error:"), gamedata.errormessage, style_, true, true)));
 	}
 	layout();
 }
