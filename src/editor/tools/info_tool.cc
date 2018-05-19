@@ -146,21 +146,63 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 
 	// *** Map Object info
 	/** TRANSLATORS: Heading for immovables and animals in editor info tool */
-	buf += as_heading(_("Objects"));
+	const Widelands::BaseImmovable* immovable = f.get_immovable();
+	Widelands::Bob* bob =f.get_first_bob();
+	if (immovable || bob) {
+		buf += as_heading(_("Objects"));
+		if (immovable) {
+			buf += as_listitem(
+				   (boost::format(_("Immovable: %s")) % immovable->descr().descname()).str(), kListFontsize);
+		}
 
-	buf += as_listitem(f.get_immovable() ? _("Has immovable") : _("No immovable"), kListFontsize);
-	buf += as_listitem(f.get_first_bob() ? _("Has animals") : _("No animals"), kListFontsize);
+		if (bob) {
+			// Collect bobs
+			std::vector<std::string> critternames;
+			std::vector<std::string> shipnames;
+			std::vector<std::string> workernames;
+			do {
+				switch (bob->descr().type()) {
+				case (Widelands::MapObjectType::CRITTER):
+					critternames.push_back(bob->descr().descname());
+					break;
+				case (Widelands::MapObjectType::SHIP): {
+					if (upcast(Widelands::Ship, ship, bob)) {
+						shipnames.push_back(ship->get_shipname());
+					}
+				} break;
+				case (Widelands::MapObjectType::WORKER):
+				case (Widelands::MapObjectType::CARRIER):
+				case (Widelands::MapObjectType::SOLDIER):
+					workernames.push_back(bob->descr().descname());
+					break;
+				default:
+					break;
+				}
+			} while ((bob = bob->get_next_bob()));
+
+			// Add bobs
+			if (!critternames.empty()) {
+				buf += as_listitem(
+							(boost::format(_("Animals: %s")) % i18n::localize_list(critternames, i18n::ConcatenateWith::COMMA)).str(), kListFontsize);
+			}
+			if (!workernames.empty()) {
+				buf += as_listitem(
+							(boost::format(_("Workers: %s")) % i18n::localize_list(workernames, i18n::ConcatenateWith::COMMA)).str(), kListFontsize);
+			}
+			if (!workernames.empty()) {
+				buf += as_listitem(
+							(boost::format(_("Ships: %s")) % i18n::localize_list(shipnames, i18n::ConcatenateWith::COMMA)).str(), kListFontsize);
+			}
+		}
+	}
 
 	// *** Resources info
 	Widelands::ResourceAmount ramount = f.get_resources_amount();
 	if (ramount > 0) {
 		buf += as_heading(_("Resources"));
-
 		buf +=
 		   as_listitem(
-		   (boost::format(_("Resource name: %s")) % world.get_resource(f.get_resources())->name()).str(), kListFontsize);
-		buf += as_listitem(
-		       (boost::format(_("Resource amount: %i")) % static_cast<unsigned int>(ramount)).str(), kListFontsize);
+		   (boost::format(pgettext("resources", "%1%x %2%")) % static_cast<unsigned int>(ramount) % world.get_resource(f.get_resources())->descname()).str(), kListFontsize);
 	}
 
 	// *** Map info
