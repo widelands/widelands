@@ -26,10 +26,21 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
+#include "graphic/text_layout.h"
 #include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
+
+namespace {
+std::string as_heading(const std::string& txt) {
+	boost::format f("<p><font bold=1 size=%d color=%s><vspace gap=6>%s<vspace gap=3></font></p>");
+	f % UI_FONT_SIZE_SMALL;
+	f % "D1D1D1";
+	f % txt;
+	return f.str();
+}
+}
 
 /// Show a window with information about the pointed at node and triangle.
 int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
@@ -37,21 +48,21 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
                                           EditorInteractive& parent,
                                           EditorActionArgs* /* args */,
                                           Widelands::Map* map) {
+
+	static constexpr int kListFontsize = UI_FONT_SIZE_SMALL;
 	parent.stop_painting();
 
 	UI::Window* const w =
 	   new UI::Window(&parent, "field_information", 30, 30, 400, 200, _("Field Information"));
 	UI::MultilineTextarea* const multiline_textarea =
 	   new UI::MultilineTextarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), UI::PanelStyle::kWui);
+	multiline_textarea->force_new_renderer();
 
 	Widelands::Field& f = (*map)[center.node];
 
 	// *** Node info
-	std::string buf = _("Node:");
-	buf += "\n";
-	buf += "• " +
-	       (boost::format(_("Coordinates: (%1$i, %2$i)")) % center.node.x % center.node.y).str() +
-	       "\n";
+	std::string buf = as_heading(_("Node"));
+	buf += as_listitem((boost::format(_("Coordinates: (%1$i, %2$i)")) % center.node.x % center.node.y).str(), kListFontsize);
 
 	std::vector<std::string> caps_strings;
 	Widelands::NodeCaps const caps = f.nodecaps();
@@ -95,92 +106,81 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 		caps_strings.push_back(_("swimmable"));
 	}
 
-	buf += std::string("• ") +
+	buf += as_listitem(
 	       (boost::format(_("Caps: %s")) %
 	        i18n::localize_list(caps_strings, i18n::ConcatenateWith::COMMA))
-	          .str() +
-	       "\n";
+	          .str(), kListFontsize);
 
 	if (f.get_owned_by() > 0) {
-		buf += std::string("• ") +
+		buf += as_listitem(
 		       (boost::format(_("Owned by: Player %u")) % static_cast<unsigned int>(f.get_owned_by()))
-		          .str() +
-		       "\n";
+		          .str(), kListFontsize);
 	} else {
-		buf += std::string("• ") + _("Owned by: —") + "\n";
+		buf += as_listitem(_("Owned by: —"), kListFontsize);
 	}
 
-	std::string temp = f.get_immovable() ? _("Has immovable") : _("No immovable");
-	buf += "• " + temp + "\n";
-
-	temp = f.get_first_bob() ? _("Has animals") : _("No animals");
-	buf += "• " + temp + "\n";
-
 	// *** Terrain info
-	buf += std::string("\n") + _("Terrain:") + "\n";
+	buf += as_heading(_("Terrain"));
 
 	const Widelands::Field& tf = (*map)[center.triangle.node];
 	const Widelands::TerrainDescription& ter = world.terrain_descr(
 	   center.triangle.t == Widelands::TriangleIndex::D ? tf.terrain_d() : tf.terrain_r());
 
 	buf +=
-	   "• " + (boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str() + "\n";
+	   as_listitem((boost::format(pgettext("terrain_name", "Name: %s")) % ter.descname()).str(), kListFontsize);
 
 	std::vector<std::string> terrain_is_strings;
 	for (const Widelands::TerrainDescription::Type& terrain_type : ter.get_types()) {
 		terrain_is_strings.push_back(terrain_type.descname);
 	}
 
-	buf += "• " +
+	buf += as_listitem(
 	       /** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and
 	        * unwalkable" */
 	       /** TRANSLATORS: You can also translate this as "Category: %s" or "Property: %s" */
 	       (boost::format(_("Is: %s")) %
 	        i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND))
-	          .str() +
-	       "\n";
-	buf += "• " +
-	       (boost::format(_("Editor Category: %s")) % ter.editor_category()->descname()).str() +
-	       "\n";
+	          .str(), kListFontsize);
+	buf += as_listitem(
+	       (boost::format(_("Editor Category: %s")) % ter.editor_category()->descname()).str(), kListFontsize);
+
+	// *** Map Object info
+	/** TRANSLATORS: Heading for immovables and animals in editor info tool */
+	buf += as_heading(_("Objects"));
+
+	buf += as_listitem(f.get_immovable() ? _("Has immovable") : _("No immovable"), kListFontsize);
+	buf += as_listitem(f.get_first_bob() ? _("Has animals") : _("No animals"), kListFontsize);
 
 	// *** Resources info
-	buf += std::string("\n") + _("Resources:") + "\n";
-
-	Widelands::DescriptionIndex ridx = f.get_resources();
 	Widelands::ResourceAmount ramount = f.get_resources_amount();
-
 	if (ramount > 0) {
+		buf += as_heading(_("Resources"));
+
 		buf +=
-		   "• " +
-		   (boost::format(_("Resource name: %s")) % world.get_resource(ridx)->name().c_str()).str() +
-		   "\n";
-		buf += "• " +
-		       (boost::format(_("Resource amount: %i")) % static_cast<unsigned int>(ramount)).str() +
-		       "\n";
-	} else {
-		buf += "• " + std::string(_("No resources")) + "\n";
+		   as_listitem(
+		   (boost::format(_("Resource name: %s")) % world.get_resource(f.get_resources())->name()).str(), kListFontsize);
+		buf += as_listitem(
+		       (boost::format(_("Resource amount: %i")) % static_cast<unsigned int>(ramount)).str(), kListFontsize);
 	}
 
 	// *** Map info
-	buf += std::string("\n") + _("Map:") + "\n";
-	buf += "• " + (boost::format(pgettext("map_name", "Name: %s")) % map->get_name().c_str()).str() +
-	       "\n";
-	buf += "• " +
-	       (boost::format(_("Size: %1$ix%2$i")) % map->get_width() % map->get_height()).str() + "\n";
+	buf += as_heading(_("Map"));
+	buf += as_listitem((boost::format(pgettext("map_name", "Name: %s")) % map->get_name()).str(), kListFontsize);
+	buf += as_listitem(
+	       (boost::format(_("Size: %1$ix%2$i")) % map->get_width() % map->get_height()).str(), kListFontsize);
 
 	if (map->get_nrplayers() > 0) {
 		buf +=
-		   "• " +
-		   (boost::format(_("Players: %u")) % static_cast<unsigned int>(map->get_nrplayers())).str() +
-		   "\n";
+		   as_listitem(
+		   (boost::format(_("Players: %u")) % static_cast<unsigned int>(map->get_nrplayers())).str(), kListFontsize);
 	} else {
-		buf += "• " + std::string(_("Players: –")) + "\n";
+		buf += as_listitem(_("Players: –"), kListFontsize);
 	}
 
-	buf += "• " + (boost::format(_("Author: %s")) % map->get_author()).str() + "\n";
-	buf += "• " + (boost::format(_("Descr: %s")) % map->get_description().c_str()).str() + "\n";
+	buf += as_listitem((boost::format(_("Author: %s")) % map->get_author()).str(), kListFontsize);
+	buf += as_listitem((boost::format(_("Descr: %s")) % map->get_description()).str(), kListFontsize);
 
-	multiline_textarea->set_text(buf.c_str());
+	multiline_textarea->set_text(as_richtext(buf));
 
 	return 0;
 }
