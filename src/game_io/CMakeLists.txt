@@ -29,7 +29,6 @@ wl_library(game_io
     base_time_string
     build_info
     economy
-    graphic
     graphic_image_io
     graphic_minimap_renderer
     io_fileread

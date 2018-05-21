@@ -48,7 +48,7 @@ protected:
 	       int32_t min_value,
 	       int32_t max_value,
 	       int32_t value,
-	       const Image* background_picture_id,
+	       UI::SliderStyle style,
 	       const std::string& tooltip_text,
 	       uint32_t cursor_size,
 	       bool enabled,
@@ -118,7 +118,7 @@ private:
 	bool pressed_;      //  the cursor is pressed
 	bool enabled_;      //  enabled widget
 
-	const Image* pic_background_;  //  background texture (picture ID)
+	const UI::PanelStyleInfo* cursor_style_;  // Cursor color and texture. Not owned.
 
 protected:
 	int32_t x_gap_;  //  draw positions
@@ -141,7 +141,7 @@ struct HorizontalSlider : public Slider {
 	                 const int32_t min_value,
 	                 const int32_t max_value,
 	                 const int32_t value,
-	                 const Image* background_picture_id,
+	                 UI::SliderStyle style,
 	                 const std::string& tooltip_text = std::string(),
 	                 const uint32_t cursor_size = 20,
 	                 const bool enabled = true)
@@ -153,7 +153,7 @@ struct HorizontalSlider : public Slider {
 	            min_value,
 	            max_value,
 	            value,
-	            background_picture_id,
+	            style,
 	            tooltip_text,
 	            cursor_size,
 	            enabled,
@@ -181,7 +181,7 @@ struct VerticalSlider : public Slider {
 	               const int32_t min_value,
 	               const int32_t max_value,
 	               const int32_t value,
-	               const Image* background_picture_id,
+	               UI::SliderStyle style,
 	               const uint32_t cursor_size = 20,
 	               const std::string& tooltip_text = std::string(),
 	               const bool enabled = true)
@@ -193,7 +193,7 @@ struct VerticalSlider : public Slider {
 	            min_value,
 	            max_value,
 	            value,
-	            background_picture_id,
+	            style,
 	            tooltip_text,
 	            cursor_size,
 	            enabled,
@@ -221,7 +221,7 @@ struct DiscreteSlider : public Panel {
 	               const uint32_t h,
 	               const std::vector<std::string>& labels_in,
 	               uint32_t value_,
-	               const Image* background_picture_id,
+	               UI::SliderStyle style,
 	               const std::string& tooltip_text = std::string(),
 	               const uint32_t cursor_size = 20,
 	               const bool enabled = true);

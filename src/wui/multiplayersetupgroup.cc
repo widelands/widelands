@@ -56,7 +56,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 	                       PlayerSlot id,
 	                       GameSettingsProvider* const settings)
 	   : UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h, kPadding),
-	     slot_dropdown_(this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial),
+	     slot_dropdown_(
+	        this, 0, 0, h, 200, h, _("Role"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu),
 	     // Name needs to be initialized after the dropdown, otherwise the layout function will
 	     // crash.
 	     name(this, 0, 0, w - h - UI::Scrollbar::kSize * 11 / 5, h),
@@ -64,7 +65,6 @@ struct MultiPlayerClientGroup : public UI::Box {
 	     id_(id),
 	     slot_selection_locked_(false) {
 		set_size(w, h);
-
 		add(&slot_dropdown_);
 		add(&name, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 
@@ -184,15 +184,39 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 	            0,
 	            h,
 	            h,
-	            g_gr->images().get("images/ui_basic/but1.png"),
+	            UI::ButtonStyle::kFsMenuSecondary,
 	            playercolor_image(id, "images/players/player_position_menu.png"),
 	            (boost::format(_("Player %u")) % static_cast<unsigned int>(id_ + 1)).str(),
-	            UI::Button::Style::kFlat),
-	     type_dropdown_(this, 0, 0, 50, 200, h, _("Type"), UI::DropdownType::kPictorial),
-	     tribes_dropdown_(this, 0, 0, 50, 200, h, _("Tribe"), UI::DropdownType::kPictorial),
-	     init_dropdown_(
-	        this, 0, 0, w - 4 * h - 3 * kPadding, 200, h, "", UI::DropdownType::kTextualNarrow),
-	     team_dropdown_(this, 0, 0, h, 200, h, _("Team"), UI::DropdownType::kPictorial),
+	            UI::Button::VisualState::kFlat),
+	     type_dropdown_(this,
+	                    0,
+	                    0,
+	                    50,
+	                    200,
+	                    h,
+	                    _("Type"),
+	                    UI::DropdownType::kPictorial,
+	                    UI::PanelStyle::kFsMenu),
+	     tribes_dropdown_(this,
+	                      0,
+	                      0,
+	                      50,
+	                      200,
+	                      h,
+	                      _("Tribe"),
+	                      UI::DropdownType::kPictorial,
+	                      UI::PanelStyle::kFsMenu),
+	     init_dropdown_(this,
+	                    0,
+	                    0,
+	                    w - 4 * h - 3 * kPadding,
+	                    200,
+	                    h,
+	                    "",
+	                    UI::DropdownType::kTextualNarrow,
+	                    UI::PanelStyle::kFsMenu),
+	     team_dropdown_(
+	        this, 0, 0, h, 200, h, _("Team"), UI::DropdownType::kPictorial, UI::PanelStyle::kFsMenu),
 	     last_state_(PlayerSettings::State::kClosed),
 	     type_selection_locked_(false),
 	     tribe_selection_locked_(false),

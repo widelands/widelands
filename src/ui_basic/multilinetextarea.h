@@ -51,9 +51,9 @@ struct MultilineTextarea : public Panel {
 	   const int32_t y,
 	   const uint32_t w,
 	   const uint32_t h,
+	   UI::PanelStyle style,
 	   const std::string& text = std::string(),
 	   const Align = UI::Align::kLeft,
-	   const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	   MultilineTextarea::ScrollMode scroll_mode = MultilineTextarea::ScrollMode::kScrollNormal);
 
 	const std::string& get_text() const {
@@ -87,7 +87,6 @@ struct MultilineTextarea : public Panel {
 	bool handle_key(bool down, SDL_Keysym code) override;
 	void scroll_to_top();
 
-	void set_background(const Image* background);
 	void set_scrollmode(MultilineTextarea::ScrollMode scroll_mode);
 
 protected:
@@ -113,8 +112,6 @@ private:
 
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
-
-	const Image* pic_background_;
 };
 }
 

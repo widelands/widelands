@@ -23,7 +23,6 @@
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/set_height_tool.h"
 #include "logic/field.h"
-#include "logic/map.h"
 #include "logic/mapregion.h"
 
 /// Decreases the heights by a value. Chages surrounding nodes if necessary.

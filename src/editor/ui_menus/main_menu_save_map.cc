@@ -33,7 +33,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_map_options.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
@@ -58,7 +57,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                      tabley_ + tableh_ + 3 * padding_ - 1,
                      get_inner_w() - right_column_x_ - padding_,
                      buth_,
-                     g_gr->images().get("images/ui_basic/but1.png"),
+                     UI::ButtonStyle::kWuiSecondary,
                      _("Make Directory")),
      edit_options_(this,
                    "edit_options",
@@ -66,7 +65,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    tabley_ + tableh_ - buth_,
                    get_inner_w() - right_column_x_ - padding_,
                    buth_,
-                   g_gr->images().get("images/ui_basic/but5.png"),
+                   UI::ButtonStyle::kWuiPrimary,
                    _("Map Options")),
      editbox_label_(
         this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {
@@ -84,7 +83,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	editbox_ =
 	   new UI::EditBox(this, editbox_label_.get_x() + editbox_label_.get_w() + padding_,
 	                   editbox_label_.get_y(), tablew_ - editbox_label_.get_w() - padding_ + 1,
-	                   buth_, 2, g_gr->images().get("images/ui_basic/but1.png"));
+	                   buth_, 2, UI::PanelStyle::kWui);
 	editbox_->set_text(parent.egbase().map().get_name());
 
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));

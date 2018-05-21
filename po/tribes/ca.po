@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
-"PO-Revision-Date: 2018-04-07 15:07+0000\n"
+"POT-Creation-Date: 2018-05-14 05:35+0000\n"
+"PO-Revision-Date: 2018-05-16 17:48+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -576,7 +576,7 @@ msgstr "Taller d'armadures"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:54
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:50
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:59
@@ -2376,13 +2376,13 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr ""
+msgstr "El pescador que treballa en aquesta granja aqüícola no pot trobar estanys de peixos en la seva àrea de treball. Si us plau, assegureu-vos que hi ha una fossa de fang en funcionament a prop i que la granja aqüícola té tots els béns necessaris, o bé considereu desmantellar o destruir aquest edifici."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
 msgctxt "frisians_building"
 msgid "Large Armor Smithy"
-msgstr ""
+msgstr "Taller gran d'armadures"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a curved sword because
 #. ...
@@ -2406,7 +2406,7 @@ msgstr "forjar un casc daurat"
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:7
 msgctxt "frisians_building"
 msgid "Small Armor Smithy"
-msgstr ""
+msgstr "Taller petit d'armadures"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a short sword because
 #. ...
@@ -2450,15 +2450,15 @@ msgctxt "frisians_building"
 msgid "Beekeeper’s House"
 msgstr "Casa de l'apicultor"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
 msgid "No Flowers"
 msgstr "No hi ha flors"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
 msgid "Out of Flowers"
 msgstr "No queden flors"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
@@ -2481,23 +2481,23 @@ msgstr "plantar arbusts"
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:7
 msgctxt "frisians_building"
 msgid "Blacksmithy"
-msgstr ""
+msgstr "Forja"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:94
 msgid "forging a felling ax"
-msgstr ""
+msgstr "forjar una destral per talar arbres"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:105
 msgid "forging a pick"
 msgstr "forjar un pic"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging needles because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
-msgid "forging needles"
-msgstr "forjar agulles"
+msgid "making needles"
+msgstr "fabricar agulles"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:7
@@ -2535,11 +2535,11 @@ msgstr "fent argila"
 
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:77
 msgid "No Ground"
-msgstr ""
+msgstr "Sense terra"
 
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:78
 msgid "No Level Ground"
-msgstr ""
+msgstr "Sense terra anivellada"
 
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:79
 msgctxt "frisians_building"
@@ -2583,19 +2583,19 @@ msgid "Fruit Collector’s House"
 msgstr "Casa del recol·lector de fruita"
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:50
 msgid "gathering berries"
 msgstr "recollir baies"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
 msgid "No Bushes"
 msgstr "No hi ha arbustos"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
 msgid "Out of Berries"
 msgstr "Sense baies"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
@@ -2792,8 +2792,9 @@ msgstr "Masoveria de juncs"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgctxt "frisians_building"
 msgid ""
-"The farmer working at this reed farm has no cleared soil to plant his seeds."
-msgstr ""
+"The reed farmer working at this reed farm has no cleared soil to plant his "
+"seeds."
+msgstr "El cultivador de juncs que viu en aquesta masoveria de juncs no té terreny lliure per sembrar-hi llavors."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:7
@@ -2825,7 +2826,7 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "El filó principal d'aquesta mina de roques s'ha esgotat. Les extraccions es reduiran considerablement. Considereu ampliar-la, desmantellar-la o destruir-la."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:7
@@ -2839,7 +2840,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "El filó principal d'aquesta mina de roques s'ha esgotat. Les extraccions es reduiran considerablement. Aquesta mina no es pot millorar i hauríeu de considerar desmantellar-la o destruir-la."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:7
@@ -3338,13 +3339,13 @@ msgstr "Camp de civada (recol·lectat)"
 #: ../../data/tribes/immovables/barleyfield_medium/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (medium)"
-msgstr ""
+msgstr "Camp de civada (civada per madurar)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (ripe)"
-msgstr "Camp de civada (civada madura)"
+msgstr "Camp de civada (civada madurada)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_small/init.lua:7
@@ -3356,119 +3357,135 @@ msgstr "Camp de civada (jove)"
 #: ../../data/tribes/immovables/barleyfield_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Barley Field (tiny)"
-msgstr ""
+msgstr "Camp de civada (recent sembrat)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:13
 msgid "Blueberry Bush (tiny)"
-msgstr ""
+msgstr "Nabinera (recent plantada)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:37
 msgid "Blueberry Bush (small)"
-msgstr ""
+msgstr "Nabinera (jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:61
 msgid "Blueberry Bush (medium)"
-msgstr ""
+msgstr "Nabinera (baies per madurar)"
 
 #: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:85
 msgid "Blueberry Bush (ripe)"
-msgstr ""
+msgstr "Nabinera (fruits madurs)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:13
 msgid "Black Currant (tiny)"
-msgstr ""
+msgstr "Riber negre (recent plantat)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:37
 msgid "Black Currant (small)"
-msgstr ""
+msgstr "Riber negre (jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:61
 msgid "Black Currant (medium)"
-msgstr ""
+msgstr "Riber negre (baies per madurar)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_black/init.lua:85
 msgid "Black Currant (ripe)"
-msgstr ""
+msgstr "Riber negre (fruits madurs)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:13
 msgid "Red Currant (tiny)"
-msgstr ""
+msgstr "Riber vermell (recent plantat)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:37
 msgid "Red Currant (small)"
-msgstr ""
+msgstr "Riber vermell (jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:61
 msgid "Red Currant (medium)"
-msgstr ""
+msgstr "Riber vermell (baies per madurar)"
 
 #: ../../data/tribes/immovables/berry_bushes/currant_red/init.lua:85
 msgid "Red Currant (ripe)"
-msgstr ""
+msgstr "Riber vermell (fruits madurs)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:13
 msgid "Desert Hackberry (tiny)"
-msgstr ""
+msgstr "Tala (recent plantat)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:37
 msgid "Desert Hackberry (small)"
-msgstr ""
+msgstr "Tala (jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:61
 msgid "Desert Hackberry (medium)"
-msgstr ""
+msgstr "Tala (fruits per madurar)"
 
 #: ../../data/tribes/immovables/berry_bushes/desert_hackberry/init.lua:85
 msgid "Desert Hackberry (ripe)"
-msgstr ""
+msgstr "Tala (fruits madurs)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:13
+msgid "Juniper (tiny)"
+msgstr "Ginebre (recent plantat)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:37
+msgid "Juniper (small)"
+msgstr "Ginebre (jove)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:61
+msgid "Juniper (medium)"
+msgstr "Ginebre (fruits per madurar)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:85
+msgid "Juniper (ripe)"
+msgstr "Ginebre (fruits madurs)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:13
 msgid "Raspberry Bush (tiny)"
-msgstr ""
+msgstr "Gerdera (recent plantada)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:37
 msgid "Raspberry Bush (small)"
-msgstr ""
+msgstr "Gerdera (jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:61
 msgid "Raspberry Bush (medium)"
-msgstr ""
+msgstr "Gerdera (baies per madurar)"
 
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:85
 msgid "Raspberry Bush (ripe)"
-msgstr ""
+msgstr "Gerdera (baies madures)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:13
 msgid "Sea Buckthorn (tiny)"
-msgstr ""
+msgstr "Espí groc (recent plantat)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:37
 msgid "Sea Buckthorn (small)"
-msgstr ""
+msgstr "Espí groc (jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:61
 msgid "Sea Buckthorn (medium)"
-msgstr ""
+msgstr "Espí groc (fruits per madurar)"
 
 #: ../../data/tribes/immovables/berry_bushes/sea_buckthorn/init.lua:85
 msgid "Sea Buckthorn (ripe)"
-msgstr ""
+msgstr "Espí groc (fruits madurs)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
-msgid "Strawberry Bush (tiny)"
-msgstr ""
+msgid "Strawberries (tiny)"
+msgstr "Arbust maduixer (recent plantat)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:37
-msgid "Strawberry Bush (small)"
-msgstr ""
+msgid "Strawberries (small)"
+msgstr "Arbust maduixer (jove)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
-msgid "Strawberry Bush (medium)"
-msgstr ""
+msgid "Strawberries (medium)"
+msgstr "Arbust maduixer (maduixes per madurar)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
-msgid "Strawberry Bush (ripe)"
-msgstr ""
+msgid "Strawberries (ripe)"
+msgstr "Arbust maduixer (maduixes madures)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_harvested/init.lua:7
@@ -3480,13 +3497,13 @@ msgstr "Camp de negrarrel (recol·lectat)"
 #: ../../data/tribes/immovables/blackrootfield_medium/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (medium)"
-msgstr "Camp de negrarrel (mitjà)"
+msgstr "Camp de negrarrel (negrarrel per madurar)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (ripe)"
-msgstr "Camp de negrarrel (madur)"
+msgstr "Camp de negrarrel (negrarrel madura)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_small/init.lua:7
@@ -3498,7 +3515,7 @@ msgstr "Camp de negrarrel (jove)"
 #: ../../data/tribes/immovables/blackrootfield_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (tiny)"
-msgstr "Camp de negrarrel (recent plantat)"
+msgstr "Camp de negrarrel (recent sembrat)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield_harvested/init.lua:7
@@ -3510,7 +3527,7 @@ msgstr "Panissar (recol·lectat)"
 #: ../../data/tribes/immovables/cornfield_medium/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (medium)"
-msgstr "Panissar (mitjà)"
+msgstr "Panissar (panís per madurar)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield_ripe/init.lua:7
@@ -3528,7 +3545,7 @@ msgstr "Panissar (jove)"
 #: ../../data/tribes/immovables/cornfield_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (tiny)"
-msgstr "Panissar (recent plantat)"
+msgstr "Panissar (recent sembrat)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/destroyed_building/init.lua:7
@@ -3546,7 +3563,7 @@ msgstr "Camp de blat (recol·lectat)"
 #: ../../data/tribes/immovables/field_medium/init.lua:7
 msgctxt "immovable"
 msgid "Field (medium)"
-msgstr "Camp de blat (mitjà)"
+msgstr "Camp de blat (blat per madurar)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/field_ripe/init.lua:7
@@ -3564,13 +3581,13 @@ msgstr "Camp de blat (jove)"
 #: ../../data/tribes/immovables/field_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Field (tiny)"
-msgstr "Camp de blat (recent plantat)"
+msgstr "Camp de blat (recent sembrat)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine_medium/init.lua:7
 msgctxt "immovable"
 msgid "Grapevine (medium)"
-msgstr "Cep (mitjà)"
+msgstr "Cep (raïm per madurar)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine_ripe/init.lua:7
@@ -3612,7 +3629,7 @@ msgstr "Estany amb peixos"
 #: ../../data/tribes/immovables/reed_medium/init.lua:7
 msgctxt "immovable"
 msgid "Reed (medium)"
-msgstr "Juncs (mitjans)"
+msgstr "Juncs (juncs per madurar)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_ripe/init.lua:7
@@ -4306,13 +4323,13 @@ msgstr "Serra"
 #: ../../data/tribes/wares/scrap_iron/init.lua:7
 msgctxt "ware"
 msgid "Scrap Iron"
-msgstr ""
+msgstr "Retalls de ferro"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/scrap_metal_mixed/init.lua:7
 msgctxt "ware"
 msgid "Mixed Scrap Metal"
-msgstr ""
+msgstr "Retalls de diferents metalls"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/scythe/init.lua:7
@@ -5176,7 +5193,7 @@ msgstr "Caçador"
 #: ../../data/tribes/workers/frisians/landlady/init.lua:16
 msgctxt "frisians_worker"
 msgid "Landlady"
-msgstr ""
+msgstr "Patrona"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/miner/init.lua:16
