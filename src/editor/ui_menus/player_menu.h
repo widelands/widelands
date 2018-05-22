@@ -21,11 +21,9 @@
 #define WL_EDITOR_UI_MENUS_PLAYER_MENU_H
 
 #include <cstring>
-#include <map>
 #include <string>
 #include <vector>
 
-#include "graphic/playercolor.h"
 #include "logic/widelands.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -54,25 +52,19 @@ private:
 	EditorInteractive& eia();
 
 	void name_changed(int32_t);
-	void clicked_add_player(); // NOCOM broken
-	void clicked_remove_last_player(); // NOCOM broken
+	void no_of_players_clicked();
 	void player_tribe_clicked(uint8_t);
 	void set_starting_pos_clicked(uint8_t);
 
-	// NOCOM replace these 2 with layout()
-	void update();
-	void think() override;
+	void layout() override;
 
 	UI::Box box_;
 	std::vector<UI::Box*> rows_;
 	std::vector<std::unique_ptr<PlayerEdit>> player_edit_;
 
-	// NOCOM make this a dropdown too
-	UI::Textarea* nr_of_players_ta_;
-	UI::Button add_player_, remove_last_player_;
-	const std::string default_tribe_;
+	UI::Dropdown<uintptr_t> no_of_players_;
 
-	int32_t posy_;
+	const std::string default_tribe_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_PLAYER_MENU_H
