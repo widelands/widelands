@@ -27,15 +27,14 @@
 
 #include "graphic/playercolor.h"
 #include "logic/widelands.h"
+#include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/dropdown.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
 class EditorInteractive;
-namespace UI {
-struct Textarea;
-struct EditBox;
-struct Button;
-}
 
 class EditorPlayerMenu : public UI::UniqueWindow {
 public:
@@ -44,27 +43,36 @@ public:
 	}
 
 private:
+	struct PlayerEdit {
+		explicit PlayerEdit(UI::EditBox* init_name, UI::Button* init_position, UI::Dropdown<std::string>* init_tribe) :
+		name(init_name), position(init_position), tribe(init_tribe) {}
+		UI::EditBox* name;
+		UI::Button* position;
+		UI::Dropdown<std::string>* tribe;
+	};
+
 	EditorInteractive& eia();
-	UI::UniqueWindow::Registry allow_buildings_menu_;
-	UI::Textarea* nr_of_players_ta_;
-	UI::EditBox* plr_names_[kMaxPlayers];
-	UI::Button add_player_, remove_last_player_;
-	UI::Button *plr_set_pos_buts_[kMaxPlayers], *plr_set_tribes_buts_[kMaxPlayers];
-
-	std::vector<std::string> tribenames_;
-
-	/// List of the tribes currently selected for all players
-	std::string selected_tribes_[kMaxPlayers];
-
-	int32_t posy_;
 
 	void name_changed(int32_t);
-	void clicked_add_player();
-	void clicked_remove_last_player();
+	void clicked_add_player(); // NOCOM broken
+	void clicked_remove_last_player(); // NOCOM broken
 	void player_tribe_clicked(uint8_t);
 	void set_starting_pos_clicked(uint8_t);
+
+	// NOCOM replace these 2 with layout()
 	void update();
 	void think() override;
+
+	UI::Box box_;
+	std::vector<UI::Box*> rows_;
+	std::vector<std::unique_ptr<PlayerEdit>> player_edit_;
+
+	// NOCOM make this a dropdown too
+	UI::Textarea* nr_of_players_ta_;
+	UI::Button add_player_, remove_last_player_;
+	const std::string default_tribe_;
+
+	int32_t posy_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_PLAYER_MENU_H
