@@ -26,6 +26,7 @@
 #include <boost/format.hpp>
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
@@ -49,7 +50,7 @@ void replace_entities(std::string* text) {
 }
 
 int text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
+	return UI::g_fh1->render(as_editorfont(text.substr(0, g_gr->max_texture_size() / text_height() - 1), ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->width();
 }
 
