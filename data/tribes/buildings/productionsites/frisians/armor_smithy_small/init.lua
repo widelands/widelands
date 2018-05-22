@@ -65,7 +65,6 @@ tribes:new_productionsite_type {
             "call=produce_s1",
             "call=produce_s2",
             "call=produce_h",
-            "call=produce_s1",
             "call=produce_s2",
             "return=skipped",
          },
@@ -74,10 +73,14 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a short sword because ...
          descname = _"forging a short sword",
          actions = {
+            -- time total: 76
             "return=skipped unless economy needs sword_short",
-            "sleep=36000",
+            "sleep=37000",
             "consume=coal iron",
-            "animate=working 28000",
+            "play_sound=sound/smiths smith 192",
+            "animate=working 30000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=sword_short"
          },
       },
@@ -85,10 +88,14 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long sword because ...
          descname = _"forging a long sword",
          actions = {
+            -- time total: 79
             "return=skipped unless economy needs sword_long",
-            "sleep=56000",
+            "sleep=38000",
             "consume=coal iron:2",
-            "animate=working 46000",
+            "play_sound=sound/smiths smith 192",
+            "animate=working 32000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=sword_long"
          },
       },
@@ -96,10 +103,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
          descname = _"forging a helmet",
          actions = {
+            -- time total: 100
             "return=skipped unless economy needs helmet",
             "sleep=50000",
             "consume=coal iron:2",
-            "animate=working 60000",
+            "animate=working 50000",
             "produce=helmet"
          },
       },
