@@ -90,8 +90,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 79
             "return=skipped unless economy needs sword_long",
-            "sleep=38000",
             "consume=coal iron:2",
+            "sleep=38000",
             "play_sound=sound/smiths smith 192",
             "animate=working 32000",
             "play_sound=sound/smiths sharpening 120",
@@ -105,8 +105,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 100
             "return=skipped unless economy needs helmet",
-            "sleep=50000",
             "consume=coal iron:2",
+            "sleep=50000",
             "animate=working 50000",
             "produce=helmet"
          },
