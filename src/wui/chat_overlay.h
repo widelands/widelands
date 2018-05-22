@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_WUI_CHATOVERLAY_H
-#define WL_WUI_CHATOVERLAY_H
+#ifndef WL_WUI_CHAT_OVERLAY_H
+#define WL_WUI_CHAT_OVERLAY_H
 
 #include <memory>
 
@@ -47,4 +47,4 @@ private:
 	std::unique_ptr<Impl> m;
 };
 
-#endif  // end of include guard: WL_WUI_CHATOVERLAY_H
+#endif  // end of include guard: WL_WUI_CHAT_OVERLAY_H
