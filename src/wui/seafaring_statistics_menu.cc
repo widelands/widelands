@@ -53,7 +53,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                0,
                kButtonSize,
                kButtonSize,
-               g_gr->images().get("images/ui_basic/but0.png"),
+               UI::ButtonStyle::kWuiSecondary,
                status_to_image(ShipFilterStatus::kIdle)),
      waiting_btn_(&filter_box_,
                   "filter_ship_waiting",
@@ -61,7 +61,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                   0,
                   kButtonSize,
                   kButtonSize,
-                  g_gr->images().get("images/ui_basic/but0.png"),
+                  UI::ButtonStyle::kWuiSecondary,
                   status_to_image(ShipFilterStatus::kExpeditionWaiting)),
      scouting_btn_(&filter_box_,
                    "filter_ship_scouting",
@@ -69,7 +69,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    0,
                    kButtonSize,
                    kButtonSize,
-                   g_gr->images().get("images/ui_basic/but0.png"),
+                   UI::ButtonStyle::kWuiSecondary,
                    status_to_image(ShipFilterStatus::kExpeditionScouting)),
      portspace_btn_(&filter_box_,
                     "filter_ship_portspace",
@@ -77,7 +77,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     0,
                     kButtonSize,
                     kButtonSize,
-                    g_gr->images().get("images/ui_basic/but0.png"),
+                    UI::ButtonStyle::kWuiSecondary,
                     status_to_image(ShipFilterStatus::kExpeditionPortspaceFound)),
      shipping_btn_(&filter_box_,
                    "filter_ship_transporting",
@@ -85,7 +85,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                    0,
                    kButtonSize,
                    kButtonSize,
-                   g_gr->images().get("images/ui_basic/but0.png"),
+                   UI::ButtonStyle::kWuiSecondary,
                    status_to_image(ShipFilterStatus::kShipping)),
      ship_filter_(ShipFilterStatus::kAll),
      navigation_box_(
@@ -96,7 +96,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                0,
                kButtonSize,
                kButtonSize,
-               g_gr->images().get("images/ui_basic/but2.png"),
+               UI::ButtonStyle::kWuiPrimary,
                g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
                (boost::format(_("%1% (Hotkey: %2%)")) %
                 /** TRANSLATORS: Tooltip in the seafaring statistics window */
@@ -110,7 +110,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
         0,
         kButtonSize,
         kButtonSize,
-        g_gr->images().get("images/ui_basic/but2.png"),
+        UI::ButtonStyle::kWuiPrimary,
         g_gr->images().get("images/ui_basic/fsel.png"),
         (boost::format("%s<br>%s") %
          (boost::format(pgettext("hotkey_description", "%1%: %2%")) % pgettext("hotkey", "O") %
@@ -127,19 +127,14 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     0,
                     kButtonSize,
                     kButtonSize,
-                    g_gr->images().get("images/ui_basic/but2.png"),
+                    UI::ButtonStyle::kWuiPrimary,
                     g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
                     (boost::format(_("%1% (Hotkey: %2%)")) %
                      /** TRANSLATORS: Tooltip in the seafaring statistics window */
                      _("Center the map on the selected ship") %
                      pgettext("hotkey", "G"))
                        .str()),
-     table_(&main_box_,
-            0,
-            0,
-            get_inner_w() - 2 * kPadding,
-            100,
-            g_gr->images().get("images/ui_basic/but1.png")) {
+     table_(&main_box_, 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
 
 	const Widelands::TribeDescr& tribe = iplayer().player().tribe();
 	colony_icon_ = tribe.get_worker_descr(tribe.builder())->icon();
@@ -493,7 +488,7 @@ void SeafaringStatisticsMenu::filter_ships(ShipFilterStatus status) {
 void SeafaringStatisticsMenu::toggle_filter_ships_button(UI::Button& button,
                                                          ShipFilterStatus status) {
 	set_filter_ships_tooltips();
-	if (button.style() == UI::Button::Style::kPermpressed) {
+	if (button.style() == UI::Button::VisualState::kPermpressed) {
 		button.set_perm_pressed(false);
 		ship_filter_ = ShipFilterStatus::kAll;
 	} else {

@@ -29,7 +29,7 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/graphic.h"
+#include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 
 namespace UI {
@@ -58,7 +58,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
@@ -168,7 +168,7 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle);
 	~Table() override;
 
@@ -275,6 +275,8 @@ public:
 	/// If entries == 0, the current entries are used.
 	void fit_height(uint32_t entries = 0);
 
+	void scroll_to_top();
+
 	void layout() override;
 
 	// Drawing and event handling
@@ -301,7 +303,7 @@ private:
 	int total_width_;
 	const uint32_t headerheight_;
 	int32_t lineheight_;
-	const Image* button_background_;
+	UI::ButtonStyle button_style_;
 	Scrollbar* scrollbar_;
 	// A disabled button that will fill the space above the scroll bar
 	UI::Button* scrollbar_filler_button_;
@@ -332,9 +334,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(Entry const* const entry) {
@@ -366,9 +368,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(Entry const* entry) {
@@ -400,9 +402,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(const Entry& entry) {
@@ -438,9 +440,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(Entry& entry) {
@@ -478,9 +480,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 
 	void remove_entry(uintptr_t const entry) {
@@ -514,9 +516,9 @@ public:
 	      int32_t y,
 	      uint32_t w,
 	      uint32_t h,
-	      const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	      UI::PanelStyle style,
 	      TableRows rowtype = TableRows::kSingle)
-	   : Base(parent, x, y, w, h, button_background, rowtype) {
+	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 };
 }

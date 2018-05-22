@@ -19,7 +19,6 @@
 #include "wui/game_options_sound_menu.h"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/multilinetextarea.h"
 
@@ -43,7 +42,7 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                          0,
                          g_sound_handler.get_max_volume(),
                          g_sound_handler.get_music_volume(),
-                         g_gr->images().get("images/ui_basic/but1.png")),
+                         UI::SliderStyle::kWuiLight),
      ingame_sound_volume_label(this,
                                hmargin(),
                                vmargin() + 2 * (kStateboxSize + vspacing()) + vbigspacing() +
@@ -59,7 +58,7 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                          0,
                          g_sound_handler.get_max_volume(),
                          g_sound_handler.get_fx_volume(),
-                         g_gr->images().get("images/ui_basic/but1.png")) {
+                         UI::SliderStyle::kWuiLight) {
 	ingame_music.set_state(!g_sound_handler.get_disable_music());
 	ingame_sound.set_state(!g_sound_handler.get_disable_fx());
 
@@ -79,11 +78,11 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
 		ingame_sound.set_enabled(false);
 		ingame_music_volume.set_enabled(false);
 		ingame_sound_volume.set_enabled(false);
+
 		UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
 		   this, hmargin(), ingame_sound_volume.get_y() + ingame_sound_volume.get_h() + vspacing(),
-		   get_inner_w() - 2 * hmargin(), 0,
+		   get_inner_w() - 2 * hmargin(), 0, UI::PanelStyle::kWui,
 		   _("Sound is disabled due to a problem with the sound driver"), UI::Align::kLeft,
-		   g_gr->images().get("images/ui_basic/but4.png"),
 		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
 		sound_warning->set_color(UI_FONT_CLR_WARNING);

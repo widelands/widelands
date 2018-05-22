@@ -19,6 +19,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- TRANSLATORS#: Performance helptext for a building
+   -- TRANSLATORS: Performance helptext for a building
    return pgettext("frisians_building", "The weaving mill needs %s on average to produce one piece of cloth."):bformat(ngettext("%d second", "%d seconds", 45):bformat(45))
 end
