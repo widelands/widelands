@@ -39,7 +39,8 @@ port1:set_wares {
 port1:set_workers {
    frisians_woodcutter = 3,
    frisians_forester = 7,
-   frisians_brickmaker = 5,
+   frisians_claydigger = 3,
+   frisians_brickmaker = 2,
    frisians_builder = 10,
    frisians_blacksmith = 2,
    frisians_smelter = 3,
