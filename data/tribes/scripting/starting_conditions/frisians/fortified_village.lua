@@ -93,7 +93,7 @@ return {
             smoked_fish = 4,
             smoked_meat = 4,
             sword_long = 1,
-            sword_curved = 1,
+            sword_broad = 1,
             sword_double = 1,
             fur_garment_studded = 1,
             helmet = 1
@@ -107,7 +107,7 @@ return {
             smoked_fish = 4,
             smoked_meat = 4,
             sword_long = 1,
-            sword_curved = 1,
+            sword_broad = 1,
             sword_double = 1,
             fur_garment_golden = 1,
             helmet_golden = 1
