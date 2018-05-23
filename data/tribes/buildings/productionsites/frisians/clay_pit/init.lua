@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
       -- TRANSLATORS: Short for "No Level Ground" for clay pits
       title = _"No Ground",
       heading = _"No Level Ground",
-      message = pgettext ("frisians_building", "The brickmaker working at this clay pit can’t find any level ground in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
+      message = pgettext ("frisians_building", "The clay digger working at this clay pit can’t find any level ground in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
       productivity_threshold = 33
    },
 }
