@@ -23,17 +23,13 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/set_starting_pos_tool.h"
 #include "graphic/graphic.h"
 #include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
-#include "logic/player.h"
-#include "ui_basic/messagebox.h"
-
-// NOCOM clean up includes
+#include "logic/widelands.h"
 
 namespace {
 constexpr int kMargin = 4;
