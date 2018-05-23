@@ -32,6 +32,9 @@
 #include <string>
 #include <vector>
 
+// We have to add Boost to this block to make codecheck happy
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/format.hpp>
 #ifdef _WIN32
 #include <direct.h>
 #include <io.h>
@@ -42,9 +45,6 @@
 #endif
 #include <sys/stat.h>
 #include <unistd.h>
-
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
