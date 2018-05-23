@@ -41,8 +41,11 @@ public:
 
 private:
 	struct PlayerEdit {
-		explicit PlayerEdit(UI::EditBox* init_name, UI::Button* init_position, UI::Dropdown<std::string>* init_tribe) :
-		name(init_name), position(init_position), tribe(init_tribe) {}
+		explicit PlayerEdit(UI::EditBox* init_name,
+		                    UI::Button* init_position,
+		                    UI::Dropdown<std::string>* init_tribe)
+		   : name(init_name), position(init_position), tribe(init_tribe) {
+		}
 		UI::EditBox* name;
 		UI::Button* position;
 		UI::Dropdown<std::string>* tribe;

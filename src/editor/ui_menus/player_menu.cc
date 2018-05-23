@@ -33,9 +33,11 @@
 
 namespace {
 constexpr int kMargin = 4;
-} // namespace
+}  // namespace
 
-// NOCOM dropdowns don't close with the window on right-click, use a notification or boost::signal between window and the dropdown class, or let the listselect handle its own right-click if it's a dopdown
+// NOCOM dropdowns don't close with the window on right-click, use a notification or boost::signal
+// between window and the dropdown class, or let the listselect handle its own right-click if it's a
+// dopdown
 
 inline EditorInteractive& EditorPlayerMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
@@ -43,16 +45,16 @@ inline EditorInteractive& EditorPlayerMenu::eia() {
 
 EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "players_menu", &registry, 100, 100, _("Player Options")),
-	 box_(this, kMargin, kMargin, UI::Box::Vertical),
-	 no_of_players_(&box_,
-					0,
-					0,
-					50,
-					100,
-					24,
-					_("Number of players"),
-					UI::DropdownType::kTextual,
-					UI::PanelStyle::kWui),
+     box_(this, kMargin, kMargin, UI::Box::Vertical),
+     no_of_players_(&box_,
+                    0,
+                    0,
+                    50,
+                    100,
+                    24,
+                    _("Number of players"),
+                    UI::DropdownType::kTextual,
+                    UI::PanelStyle::kWui),
      default_tribe_(Widelands::get_all_tribenames().front()) {
 	// Make room for 8 players
 	no_of_players_.set_max_items(8);
@@ -83,36 +85,33 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 
 		// Tribe
 		// NOCOM fix height for Arabic
-		UI::Dropdown<std::string>* plr_tribe = new UI::Dropdown<std::string>(row,
-																			 0,
-																			 0,
-																			 50,
-																			 400,
-																			 plr_name->get_h(),
-																			 _("Tribe"),
-																			 UI::DropdownType::kPictorial,
-																			 UI::PanelStyle::kWui);
+		UI::Dropdown<std::string>* plr_tribe =
+		   new UI::Dropdown<std::string>(row, 0, 0, 50, 400, plr_name->get_h(), _("Tribe"),
+		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui);
 		{
 			i18n::Textdomain td("tribes");
 			for (const Widelands::TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
 				plr_tribe->add(_(tribeinfo.descname), tribeinfo.name,
-									 g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
+				               g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
 			}
 		}
-		const std::string player_scenario_tribe = map_has_player ? map.get_scenario_player_tribe(p) : default_tribe_;
-		plr_tribe->select(Widelands::tribe_exists(player_scenario_tribe) ? player_scenario_tribe : default_tribe_);
+		const std::string player_scenario_tribe =
+		   map_has_player ? map.get_scenario_player_tribe(p) : default_tribe_;
+		plr_tribe->select(Widelands::tribe_exists(player_scenario_tribe) ? player_scenario_tribe :
+		                                                                   default_tribe_);
 		plr_tribe->selected.connect(
 		   boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
 		row->add(plr_tribe);
 		row->add_space(kMargin);
-
 
 		// Starting position
 		const Image* player_image =
 		   playercolor_image(p - 1, "images/players/player_position_menu.png");
 		assert(player_image);
 
-		UI::Button* plr_position = new UI::Button(row, "tribe", 0, 0, plr_name->get_h(), plr_name->get_h(), UI::ButtonStyle::kWuiSecondary, player_image);
+		UI::Button* plr_position =
+		   new UI::Button(row, "tribe", 0, 0, plr_name->get_h(), plr_name->get_h(),
+		                  UI::ButtonStyle::kWuiSecondary, player_image);
 		plr_position->sigclicked.connect(
 		   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		row->add(plr_position);
@@ -121,7 +120,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		box_.add(row, UI::Box::Resizing::kFullSize);
 		box_.add_space(kMargin);
 		row->set_visible(map_has_player);
-		player_edit_.push_back(std::unique_ptr<PlayerEdit>(new PlayerEdit(plr_name, plr_position, plr_tribe)));
+		player_edit_.push_back(
+		   std::unique_ptr<PlayerEdit>(new PlayerEdit(plr_name, plr_position, plr_tribe)));
 	}
 	no_of_players_.select(nr_players);
 	layout();
@@ -129,11 +129,12 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 
 /**
  * Update all
-*/
+ */
 void EditorPlayerMenu::layout() {
 	assert(!player_edit_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
-	box_.set_size(300, no_of_players_.get_h() + kMargin + nr_players * (player_edit_.front()->tribe->get_h() + kMargin));
+	box_.set_size(300, no_of_players_.get_h() + kMargin +
+	                      nr_players * (player_edit_.front()->tribe->get_h() + kMargin));
 	set_inner_size(box_.get_w() + 2 * kMargin, box_.get_h() + 2 * kMargin);
 }
 
