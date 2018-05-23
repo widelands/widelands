@@ -33,26 +33,29 @@
 
 namespace {
 constexpr int kMargin = 4;
-constexpr int kButtonHeight = 24;
 } // namespace
+
+// NOCOM dropdowns don't close with the window on right-click, use a notification or boost::signal between window and the dropdown class, or let the listselect handle its own right-click if it's a dopdown
 
 inline EditorInteractive& EditorPlayerMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());
 }
 
 EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
-   : UI::UniqueWindow(&parent, "players_menu", &registry, 340, 400, _("Player Options")),
+   : UI::UniqueWindow(&parent, "players_menu", &registry, 100, 100, _("Player Options")),
 	 box_(this, kMargin, kMargin, UI::Box::Vertical),
 	 no_of_players_(&box_,
 					0,
 					0,
 					50,
-					200,
-					kButtonHeight,
+					100,
+					24,
 					_("Number of players"),
 					UI::DropdownType::kTextual,
 					UI::PanelStyle::kWui),
      default_tribe_(Widelands::get_all_tribenames().front()) {
+	// Make room for 8 players
+	no_of_players_.set_max_items(8);
 
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kMargin);
@@ -68,10 +71,9 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		   boost::bind(&EditorPlayerMenu::no_of_players_clicked, boost::ref(*this)));
 
 		UI::Box* row = new UI::Box(&box_, 0, 0, UI::Box::Horizontal);
-		// NOCOM refactor height
 
 		// Name
-		UI::EditBox* plr_name = new UI::EditBox(row, 0, 0, 0, kButtonHeight, kMargin, UI::PanelStyle::kWui);
+		UI::EditBox* plr_name = new UI::EditBox(row, 0, 0, 0, 0, kMargin, UI::PanelStyle::kWui);
 		if (map_has_player) {
 			plr_name->set_text(map.get_scenario_player_name(p));
 		}
@@ -80,12 +82,13 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		row->add_space(kMargin);
 
 		// Tribe
+		// NOCOM fix height for Arabic
 		UI::Dropdown<std::string>* plr_tribe = new UI::Dropdown<std::string>(row,
 																			 0,
 																			 0,
 																			 50,
-																			 200,
-																			 kButtonHeight,
+																			 400,
+																			 plr_name->get_h(),
 																			 _("Tribe"),
 																			 UI::DropdownType::kPictorial,
 																			 UI::PanelStyle::kWui);
@@ -109,7 +112,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		   playercolor_image(p - 1, "images/players/player_position_menu.png");
 		assert(player_image);
 
-		UI::Button* plr_position = new UI::Button(row, "tribe", 0, 0, kButtonHeight, kButtonHeight, UI::ButtonStyle::kWuiSecondary, player_image);
+		UI::Button* plr_position = new UI::Button(row, "tribe", 0, 0, plr_name->get_h(), plr_name->get_h(), UI::ButtonStyle::kWuiSecondary, player_image);
 		plr_position->sigclicked.connect(
 		   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		row->add(plr_position);
@@ -128,8 +131,9 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
  * Update all
 */
 void EditorPlayerMenu::layout() {
+	assert(!player_edit_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
-	box_.set_size(300, (nr_players + 1) * (kButtonHeight + kMargin));
+	box_.set_size(300, no_of_players_.get_h() + kMargin + nr_players * (player_edit_.front()->tribe->get_h() + kMargin));
 	set_inner_size(box_.get_w() + 2 * kMargin, box_.get_h() + 2 * kMargin);
 }
 
@@ -137,15 +141,17 @@ void EditorPlayerMenu::no_of_players_clicked() {
 	EditorInteractive& menu = eia();
 	Widelands::Map* map = menu.egbase().mutable_map();
 	Widelands::PlayerNumber const old_nr_players = map->get_nrplayers();
-	Widelands::PlayerNumber const nr_players = no_of_players_.get_selected() + 1;
+	Widelands::PlayerNumber const nr_players = no_of_players_.get_selected();
 	assert(1 <= nr_players);
 	assert(nr_players <= kMaxPlayers);
 
-	if (old_nr_players < nr_players) {
+	if (old_nr_players == nr_players) {
+		return;
+	} else if (old_nr_players < nr_players) {
 		// Add new players
 		map->set_nrplayers(nr_players);
 
-		for (Widelands::PlayerNumber pn = old_nr_players; pn < nr_players; ++pn) {
+		for (Widelands::PlayerNumber pn = old_nr_players + 1; pn <= nr_players; ++pn) {
 			map->set_scenario_player_ai(pn, "");
 			map->set_scenario_player_closeable(pn, false);
 
@@ -161,16 +167,16 @@ void EditorPlayerMenu::no_of_players_clicked() {
 			map->set_scenario_player_tribe(pn, tribename);
 			rows_.at(pn - 1)->set_visible(true);
 		}
-	} else if (old_nr_players > nr_players) {
+	} else {
 		// If removed player was selected switch to the highest player
 		if (old_nr_players >= menu.tools()->set_starting_pos.get_current_player()) {
-			set_starting_pos_clicked(nr_players - 1);
+			set_starting_pos_clicked(nr_players);
 		}
 
 		// Remove extra players
 		map->set_nrplayers(nr_players);
 		for (Widelands::PlayerNumber pn = nr_players; pn < old_nr_players; ++pn) {
-			rows_.at(pn - 1)->set_visible(false);
+			rows_.at(pn)->set_visible(false);
 		}
 	}
 	menu.set_need_save(true);
