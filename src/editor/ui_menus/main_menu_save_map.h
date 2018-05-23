@@ -46,6 +46,8 @@ private:
 	void clicked_item();
 	void double_clicked_item();
 	void edit_box_changed();
+	/// Resets the map's filename in the editbox. If mapname didn't change, die().
+	void reset_editbox_or_die(const std::string& current_filename);
 
 	bool save_map(std::string, bool);
 
