@@ -627,13 +627,31 @@ void DefaultAI::late_initialization() {
 		}
 		if (bh.collects_ware_from_map() == "log") {
 			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-			assert(bo.outputs.at(0) == tribe_->safe_ware_index("log"));
+			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("log"));
 			bo.set_is(BuildingAttribute::kLumberjack);
 		}
 		if (bh.collects_ware_from_map() == "granite") {
 			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-			assert(bo.outputs.at(0) == tribe_->safe_ware_index("granite"));
+			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("granite"));
 			bo.set_is(BuildingAttribute::kNeedsRocks);
+		}
+		if (bh.collects_ware_from_map() == "water") {
+			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
+			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("water"));
+			bo.set_is(BuildingAttribute::kWell);
+		}
+		// here we identify hunters
+		if (bh.collects_ware_from_map() == "meat") {
+			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
+			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("meat"));
+			bo.set_is(BuildingAttribute::kHunter);
+		}
+
+		// and fishers
+		if (bh.collects_ware_from_map() == "fish") {
+			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
+			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("fish"));
+			bo.set_is(BuildingAttribute::kFisher);
 		}
 		if (create_basic_buildings_list &&
 		    bh.basic_amount() > 0) {  // This is the very begining of the game
@@ -644,11 +662,6 @@ void DefaultAI::late_initialization() {
 		bo.basic_amount = bh.basic_amount();
 		if (bh.get_needs_water()) {
 			bo.set_is(BuildingAttribute::kNeedsCoast);
-		}
-		if (bh.collects_ware_from_map() == "water") {
-			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-			assert(bo.outputs.at(0) == tribe_->safe_ware_index("water"));
-			bo.set_is(BuildingAttribute::kWell);
 		}
 		if (bh.is_space_consumer()) {
 			bo.set_is(BuildingAttribute::kSpaceConsumer);
@@ -727,20 +740,6 @@ void DefaultAI::late_initialization() {
 				}
 			}
 
-			// here we identify hunters
-			if (bh.collects_ware_from_map() == "meat") {
-				// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-				assert(bo.outputs.at(0) == tribe_->safe_ware_index("meat"));
-				bo.set_is(BuildingAttribute::kHunter);
-			}
-
-			// and fishers
-			if (bh.collects_ware_from_map() == "fish") {
-				// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-				assert(bo.outputs.at(0) == tribe_->safe_ware_index("fish"));
-				bo.set_is(BuildingAttribute::kFisher);
-			}
-
 			if (bh.is_shipyard()) {
 				bo.set_is(BuildingAttribute::kShipyard);
 			}
@@ -810,6 +809,18 @@ void DefaultAI::late_initialization() {
 				}
 			}
 
+			// Now testing whether the building indeed produces required output
+			if (!bh.collects_ware_from_map().empty()) {
+				bool output_found = false;
+				// Usually such building produces only one output, but can be more than on
+				for (auto output : bo.outputs) {
+					output_found = output == tribe_->safe_ware_index(bh.collects_ware_from_map()) || found;
+				}
+				if (!output_found) {
+					throw wexception("AI: %s misses appropriate output (%s) as a map resource collector",
+						                 bo.desc->name().c_str(), bh.collects_ware_from_map().c_str());
+				}
+			}
 			continue;
 		}
 
