@@ -41,7 +41,7 @@ protected:
 	LoadOrSaveGame(UI::Panel* parent,
 	               Widelands::Game& g,
 	               FileType filetype,
-	               GameDetails::Style style,
+	               UI::PanelStyle style,
 	               bool localize_autosave);
 
 	/// Update gamedetails and tooltips and return information about the current selection

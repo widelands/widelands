@@ -133,7 +133,7 @@ static int L_dirname(lua_State* L) {
 .. function:: list_files(filename_template)
 
    Lists the full path for all files that fit the template pattern.
-   Use ? as placeholders for numbers, e.g. 'directory/idle_??.png' will list
+   Use ? as placeholders for numbers, e.g. 'directory/idle\_??.png' will list
    'directory/idle_00.png', 'directory/idle_01.png' etc, and
    'directory/idle.png' will just list 'directory/idle.png'.
 

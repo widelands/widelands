@@ -22,12 +22,9 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "chat/chat.h"
-#include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/fieldaction.h"
@@ -256,9 +253,8 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 				if (!chat_.window) {
 					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 				}
-				dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 			}
-			return true;
 		default:
 			break;
 		}

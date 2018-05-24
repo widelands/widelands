@@ -54,27 +54,16 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      main_box_(this, 0, 0, UI::Box::Vertical),
      info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
-     load_or_save_(&info_box_,
-                   igbase().game(),
-                   LoadOrSaveGame::FileType::kGame,
-                   GameDetails::Style::kWui,
-                   false),
+     load_or_save_(
+        &info_box_, igbase().game(), LoadOrSaveGame::FileType::kGame, UI::PanelStyle::kWui, false),
 
      filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
      filename_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
-     filename_editbox_(
-        &filename_box_, 0, 0, 0, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     filename_editbox_(&filename_box_, 0, 0, 0, 0, 2, UI::PanelStyle::kWui),
 
      buttons_box_(load_or_save_.game_details()->button_box(), 0, 0, UI::Box::Horizontal),
-     cancel_(&buttons_box_,
-             "cancel",
-             0,
-             0,
-             0,
-             0,
-             g_gr->images().get("images/ui_basic/but1.png"),
-             _("Cancel")),
-     ok_(&buttons_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but5.png"), _("OK")),
+     cancel_(&buttons_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kWuiSecondary, _("Cancel")),
+     ok_(&buttons_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
 
      curdir_(kSaveDir) {
 
@@ -106,12 +95,15 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 
 	filename_editbox_.changed.connect(boost::bind(&GameMainMenuSaveGame::edit_box_changed, this));
 	filename_editbox_.ok.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
+	filename_editbox_.cancel.connect(boost::bind(&GameMainMenuSaveGame::reset_editbox_or_die, this,
+	                                             parent.game().save_handler().get_cur_filename()));
 
 	ok_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
 	cancel_.sigclicked.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
 	load_or_save_.table().selected.connect(boost::bind(&GameMainMenuSaveGame::entry_selected, this));
 	load_or_save_.table().double_clicked.connect(boost::bind(&GameMainMenuSaveGame::ok, this));
+	load_or_save_.table().cancel.connect(boost::bind(&GameMainMenuSaveGame::die, this));
 
 	load_or_save_.fill_table();
 	load_or_save_.select_by_name(parent.game().save_handler().get_cur_filename());
@@ -145,6 +137,15 @@ void GameMainMenuSaveGame::edit_box_changed() {
 	ok_.set_enabled(is_legal_filename);
 	load_or_save_.delete_button()->set_enabled(false);
 	load_or_save_.clear_selections();
+}
+
+void GameMainMenuSaveGame::reset_editbox_or_die(const std::string& current_filename) {
+	if (filename_editbox_.text() == current_filename) {
+		die();
+	} else {
+		filename_editbox_.set_text(current_filename);
+		load_or_save_.select_by_name(current_filename);
+	}
 }
 
 static void dosave(InteractiveGameBase& igbase, const std::string& complete_filename) {

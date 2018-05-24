@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-29 14:16+0000\n"
+"POT-Creation-Date: 2018-05-18 18:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -2443,9 +2443,9 @@ msgstr ""
 msgid "forging a pick"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging needles because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
-msgid "forging needles"
+msgid "making needles"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2739,7 +2739,8 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgctxt "frisians_building"
 msgid ""
-"The farmer working at this reed farm has no cleared soil to plant his seeds."
+"The reed farmer working at this reed farm has no cleared soil to plant his "
+"seeds."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3415,19 +3416,19 @@ msgid "Sea Buckthorn (ripe)"
 msgstr ""
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
-msgid "Strawberry Bush (tiny)"
+msgid "Strawberries (tiny)"
 msgstr ""
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:37
-msgid "Strawberry Bush (small)"
+msgid "Strawberries (small)"
 msgstr ""
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
-msgid "Strawberry Bush (medium)"
+msgid "Strawberries (medium)"
 msgstr ""
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
-msgid "Strawberry Bush (ripe)"
+msgid "Strawberries (ripe)"
 msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables

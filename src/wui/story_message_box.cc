@@ -19,8 +19,6 @@
 
 #include "wui/story_message_box.h"
 
-#include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "logic/save_handler.h"
 #include "ui_basic/button.h"
@@ -43,8 +41,8 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
    : UI::Window(game->get_ipl(), "story_message_box", x, y, w, h, title.c_str()),
      main_box_(this, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
      button_box_(&main_box_, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
-     textarea_(&main_box_, 0, 0, 100, 100, ""),
-     ok_(&button_box_, "ok", 0, 0, 120, 0, g_gr->images().get("images/ui_basic/but5.png"), _("OK")),
+     textarea_(&main_box_, 0, 0, 100, 100, UI::PanelStyle::kWui),
+     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
      desired_speed_(game->game_controller()->desired_speed()),
      game_(game) {
 
