@@ -814,7 +814,7 @@ void DefaultAI::late_initialization() {
 				bool output_found = false;
 				// Usually such building produces only one output, but can be more than on
 				for (auto output : bo.outputs) {
-					output_found = output == tribe_->safe_ware_index(bh.collects_ware_from_map()) || found;
+					output_found = output == tribe_->safe_ware_index(bh.collects_ware_from_map()) || output_found;
 				}
 				if (!output_found) {
 					throw wexception("AI: %s misses appropriate output (%s) as a map resource collector",
