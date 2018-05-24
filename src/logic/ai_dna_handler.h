@@ -20,13 +20,9 @@
 #ifndef WL_LOGIC_AI_DNA_HANDLER_H
 #define WL_LOGIC_AI_DNA_HANDLER_H
 
-#include <cstring>
-#include <string>
-
+#include <vector>
 #include <stdint.h>
 
-#include "base/time_string.h"
-#include "logic/game.h"
 #include "logic/player.h"
 
 namespace Widelands {

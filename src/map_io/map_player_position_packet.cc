@@ -41,7 +41,7 @@ void MapPlayerPositionPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 		if (packet_version == kCurrentPacketVersion) {
 			//  Read all the positions
 			//  This could bring trouble if one player position/ is not set (this
-			//  is possible in the editor), is also -1, -1.
+			//  is possible in the editor), is also -1, -1 == Coords::null().
 			Map* map = egbase.mutable_map();
 			Extent const extent = map->extent();
 			PlayerNumber const nr_players = map->get_nrplayers();

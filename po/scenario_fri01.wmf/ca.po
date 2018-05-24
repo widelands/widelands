@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"POT-Creation-Date: 2018-05-14 05:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo, 2018\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -47,6 +47,8 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Construïu una bòbila, una mina de carbó, una mina de roques, una fossa de "
+"fang i un pou per començar a produir maons."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Gather building materials"
@@ -92,6 +94,8 @@ msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Recordeu que podeu establir les quantitats desitjades per la majoria dels "
+"béns a la configuració de l'economia."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Produce food for the miners"
@@ -106,6 +110,8 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Construïu una taverna, una casa del pescador, un fumador, una masoveria de "
+"baies i una casa del recol·lector de fruita."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance your food economy"
@@ -137,6 +143,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
 msgstr "Comenceu a reclutar soldats"
 
@@ -178,8 +185,8 @@ msgstr "Entrenant els soldats"
 msgid ""
 "Train a soldier to the highest possible level. Soldiers are trained in "
 "training camps and training arenas. We will need a gold mine, a tailor’s "
-"shop to sew better armor, and a large armor smithy for better weapons and "
-"helmets."
+"shop to sew sturdier garments, and a large armor smithy for better weapons "
+"and helmets."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
@@ -226,6 +233,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
+"Benvingut a la preciosa illa de Langeness! Sóc en Reebaud, el cabdill "
+"d'aquesta illa prístina."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:132
@@ -256,7 +265,7 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
 msgid ""
-"I have asked one of my advisors to oversee the construction of our "
+"I have asked Hauke, one of my advisors to oversee the construction of our "
 "settlement."
 msgstr ""
 
@@ -267,8 +276,8 @@ msgstr "Els primers edificis"
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
 msgid ""
-"Greetings, Chieftain Reebaud! I am Hauke, your First Advisor. I will start "
-"with the colonization of the island straight away."
+"Greetings, Chieftain Reebaud! I will start with the colonization of the "
+"island straight away."
 msgstr ""
 
 #. TRANSLATORS: Hauke – Introduction 3
@@ -371,7 +380,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for thatch reed in "
-"the constructionsite window."
+"the construction site window."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
@@ -413,14 +422,14 @@ msgid ""
 "I noticed we are running out of bricks. This slows down construction of our "
 "buildings a lot, since we need so many bricks. We should really start to "
 "construct another brick kiln, and assign it the highest priority for bricks "
-"in the constructionsite window so as to resolve the shortage as soon as "
+"in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
-"constructionsite window."
+"construction site window."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
@@ -559,10 +568,6 @@ msgid ""
 "all honorable warriors."
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
-msgid "Build a recruitment center"
-msgstr ""
-
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
 msgid ""
@@ -671,7 +676,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr ""
+msgstr "Lluita frisona"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321
@@ -700,16 +705,16 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr ""
+msgstr "Planificant un centre d'entrenament"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
 msgid ""
-"We will need a tailor’s shop to sew better armor, and another sewing room to"
-" keep producing normal fur garments. Also, enhance the small armor smithy to"
-" produce better weapons and helmets, and build a new small one so we will "
-"still get basic weapons. We need at least one gold mine now, because the "
-"best weapons and armor use gold."
+"We will need a tailor’s shop to sew more protective garments, and another "
+"sewing room to keep producing normal fur garments. Also, you should enhance "
+"the small armor smithy to produce better weapons and helmets, and build a "
+"new small one so we will still get basic weapons. We need at least one gold "
+"mine now, because the best weapons and armor use gold."
 msgstr ""
 
 #. TRANSLATORS: Hauke – train soldiers 3
@@ -729,6 +734,9 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
+"Quan els soldats s'entrenen en l'ús d'armes, els seu equipament es fa malbé."
+" Tingueu en compte que la ferralla d'aquestes armes pot obstruir els camins "
+"fins que s'emmagatzemin en algun lloc."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -748,7 +756,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "Els nostres soldats són prou forts?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -780,7 +788,7 @@ msgstr "Compte!"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
-msgstr ""
+msgstr "No prou forts"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
@@ -795,8 +803,8 @@ msgstr ""
 msgid ""
 "The scouts informed me that the enemy can’t build towers. We could build a "
 "fortress, which is the building that will push the border as far east as "
-"possible in one go. The enemies can only see it if they build a fortress "
-"right at the border."
+"possible in one go. The enemy will only be able to see it if they build a "
+"fortress right at the border."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2

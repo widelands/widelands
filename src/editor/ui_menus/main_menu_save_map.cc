@@ -33,7 +33,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_map_options.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
@@ -58,7 +57,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                      tabley_ + tableh_ + 3 * padding_ - 1,
                      get_inner_w() - right_column_x_ - padding_,
                      buth_,
-                     g_gr->images().get("images/ui_basic/but1.png"),
+                     UI::ButtonStyle::kWuiSecondary,
                      _("Make Directory")),
      edit_options_(this,
                    "edit_options",
@@ -66,7 +65,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    tabley_ + tableh_ - buth_,
                    get_inner_w() - right_column_x_ - padding_,
                    buth_,
-                   g_gr->images().get("images/ui_basic/but5.png"),
+                   UI::ButtonStyle::kWuiPrimary,
                    _("Map Options")),
      editbox_label_(
         this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {
@@ -78,18 +77,23 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(
 	   boost::bind(&MainMenuSaveMap::double_clicked_item, boost::ref(*this)));
+	table_.cancel.connect(boost::bind(&MainMenuSaveMap::die, this));
+	table_.set_can_focus(true);
 
-	editbox_ =
-	   new UI::EditBox(this, editbox_label_.get_x() + editbox_label_.get_w() + padding_,
-	                   editbox_label_.get_y(), tablew_ - editbox_label_.get_w() - padding_ + 1,
-	                   buth_, 2, g_gr->images().get("images/ui_basic/but1.png"));
-
+	editbox_ = new UI::EditBox(
+	   this, editbox_label_.get_x() + editbox_label_.get_w() + padding_, editbox_label_.get_y(),
+	   tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2, UI::PanelStyle::kWui);
 	editbox_->set_text(parent.egbase().map().get_name());
+
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 	edit_box_changed();
+	editbox_->ok.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
+	editbox_->cancel.connect(boost::bind(
+	   &MainMenuSaveMap::reset_editbox_or_die, boost::ref(*this), parent.egbase().map().get_name()));
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
 	cancel_.sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
+
 	make_directory_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
 	edit_options_.sigclicked.connect(
@@ -139,6 +143,8 @@ void MainMenuSaveMap::clicked_ok() {
 		}
 		if (save_map(filename, !g_options.pull_section("global").get_bool("nozip", false))) {
 			die();
+		} else {
+			table_.focus();
 		}
 	}
 }
@@ -217,6 +223,14 @@ void MainMenuSaveMap::edit_box_changed() {
 	ok_.set_enabled(LayeredFileSystem::is_legal_filename(editbox_->text()));
 }
 
+void MainMenuSaveMap::reset_editbox_or_die(const std::string& current_filename) {
+	if (editbox_->text() == current_filename) {
+		die();
+	} else {
+		editbox_->set_text(current_filename);
+	}
+}
+
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
 	directory_info_.set_text(
@@ -252,8 +266,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
 		    FileSystem::fs_filename(filename.c_str()))
 		      .str();
-		UI::WLMessageBox mbox(
-		   &eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox mbox(this, _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
 			return false;
 	}

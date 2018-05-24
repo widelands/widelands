@@ -101,6 +101,7 @@ Source: {#BuildFolder}\data\maps\*;                                    DestDir: 
 Source: {#BuildFolder}\data\music\*;                                   DestDir: {app}\data\music\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ;                  Components: "Music"
 Source: {#BuildFolder}\data\images\*;                                  DestDir: {app}\data\images\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\sound\*;                                   DestDir: {app}\data\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
+Source: {#BuildFolder}\data\templates\*;                               DestDir: {app}\data\templates\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\tribes\*;                                  DestDir: {app}\data\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\txts\*;                                    DestDir: {app}\data\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\world\*;                                   DestDir: {app}\data\world\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
