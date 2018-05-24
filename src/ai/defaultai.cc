@@ -625,10 +625,14 @@ void DefaultAI::late_initialization() {
 		if (bld.needs_seafaring()) {
 			bo.set_is(BuildingAttribute::kNeedsSeafaring);
 		}
-		if (bh.is_logproducer()) {
+		if (bh.collects_ware_from_map() == "log") {
+			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
+			assert(bo.outputs.at(0) == tribe_->safe_ware_index("log"));
 			bo.set_is(BuildingAttribute::kLumberjack);
 		}
-		if (bh.is_graniteproducer()) {
+		if (bh.collects_ware_from_map() == "granite") {
+			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
+			assert(bo.outputs.at(0) == tribe_->safe_ware_index("granite"));
 			bo.set_is(BuildingAttribute::kNeedsRocks);
 		}
 		if (create_basic_buildings_list &&
@@ -641,7 +645,9 @@ void DefaultAI::late_initialization() {
 		if (bh.get_needs_water()) {
 			bo.set_is(BuildingAttribute::kNeedsCoast);
 		}
-		if (bh.mines_water()) {
+		if (bh.collects_ware_from_map() == "water") {
+			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
+			assert(bo.outputs.at(0) == tribe_->safe_ware_index("water"));
 			bo.set_is(BuildingAttribute::kWell);
 		}
 		if (bh.is_space_consumer()) {
@@ -722,14 +728,16 @@ void DefaultAI::late_initialization() {
 			}
 
 			// here we identify hunters
-			if (bo.inputs.empty() && bo.outputs.size() == 1 &&
-			    tribe_->safe_ware_index("meat") == bo.outputs.at(0)) {
+			if (bh.collects_ware_from_map() == "meat") {
+				// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
+				assert(bo.outputs.at(0) == tribe_->safe_ware_index("meat"));
 				bo.set_is(BuildingAttribute::kHunter);
 			}
 
 			// and fishers
-			if (bo.outputs.size() == 1 && tribe_->safe_ware_index("fish") == bo.outputs.at(0) &&
-			    bo.inputs.empty()) {
+			if (bh.collects_ware_from_map() == "fish") {
+				// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
+				assert(bo.outputs.at(0) == tribe_->safe_ware_index("fish"));
 				bo.set_is(BuildingAttribute::kFisher);
 			}
 

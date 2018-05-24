@@ -32,6 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "meat",
       prohibited_till = 480
    },
 
