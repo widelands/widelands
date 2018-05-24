@@ -2675,7 +2675,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += bo.primary_priority;
 
 					// keep wells more distant
-					if (bf->producers_nearby.at(bo.outputs.at(0)) > 2) {
+					if (bf->count_producers_nearby(bo.outputs) > 2) {
 						continue;
 					}
 
@@ -2706,7 +2706,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// consider cutters and rangers nearby
 					prio += 2 * bf->supporters_nearby.at(bo.outputs.at(0)) *
 					        std::abs(management_data.get_military_number_at(25));
-					prio -= bf->producers_nearby.at(bo.outputs.at(0)) *
+					prio -= bf->count_producers_nearby(bo.outputs) *
 					        std::abs(management_data.get_military_number_at(36)) * 3;
 
 				} else if (bo.is(BuildingAttribute::kNeedsRocks)) {
@@ -2738,7 +2738,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 					// to prevent to many quaries on one spot
-					prio = prio - 50 * bf->producers_nearby.at(bo.outputs.at(0));
+					prio = prio - 50 * bf->count_producers_nearby(bo.outputs);
 
 				} else if (bo.is(BuildingAttribute::kHunter)) {
 
@@ -2756,7 +2756,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5;
 
 					prio +=
-					   (bf->critters_nearby * 3) - 8 - 5 * bf->producers_nearby.at(bo.outputs.at(0));
+					   (bf->critters_nearby * 3) - 8 - 5 * bf->count_producers_nearby(bo.outputs);
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
 
@@ -2771,7 +2771,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					prio -= bf->producers_nearby.at(bo.outputs.at(0)) * 20;
+					prio -= bf->count_producers_nearby(bo.outputs) * 20;
 					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 20;
 
 					prio +=
@@ -2895,7 +2895,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							           std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
-							prio -= bf->producers_nearby.at(bo.outputs.at(0)) *
+							prio -= bf->count_producers_nearby(bo.outputs) *
 							        std::abs(management_data.get_military_number_at(108)) / 5;
 						}
 

@@ -339,6 +339,14 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      is_militarysite(false) {
 }
 
+uint16_t BuildableField::count_producers_nearby(std::vector<uint8_t>& outputs) {
+	uint16_t count = 0;
+	for (auto output : outputs) {
+		count += producers_nearby.at(output);
+	}
+	return count;
+}
+
 MineableField::MineableField(const Widelands::FCoords& fc)
    : coords(fc),
      field_info_expiration(20000),

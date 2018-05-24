@@ -390,6 +390,7 @@ struct BuildableField {
 	std::vector<uint8_t> producers_nearby;
 	// and for rangers, fishbreeders:
 	std::vector<uint8_t> supporters_nearby;
+	uint16_t count_producers_nearby(std::vector<uint8_t>&);
 };
 
 struct MineableField {
