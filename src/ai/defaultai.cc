@@ -673,6 +673,11 @@ void DefaultAI::late_initialization() {
 		bo.fighting_type = bh.is_fighting_type();
 		bo.mountain_conqueror = bh.is_mountain_conqueror();
 		bo.requires_supporters = bh.requires_supporters();
+		if (!bh.collects_ware_from_map().empty()) {
+			bo.collected_map_resource = tribe_->safe_ware_index(bh.collects_ware_from_map());
+		} else {
+			bo.collected_map_resource = INVALID_INDEX;
+		}
 		if (bo.requires_supporters) {
 			log(" %d: %s strictly requires supporters\n", player_number(), bo.name);
 		}
@@ -1566,7 +1571,9 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 	field.own_military_presence = 0;
 	field.own_non_military_nearby = 0;
 	field.producers_nearby.clear();
+	field.collecting_producers_nearby.clear();
 	field.producers_nearby.resize(wares.size());
+	field.collecting_producers_nearby.resize(wares.size());
 	field.rangers_nearby = 0;
 	field.space_consumers_nearby = 0;
 	field.supporters_nearby.clear();
@@ -2648,6 +2655,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			if (bo.type == BuildingObserver::Type::kProductionsite) {
 
+				if (bo.collected_map_resource != INVALID_INDEX) {
+					printf ("DEBUG: considering %s at %3dx%3d - %d collecting producers nearby\n",
+					bo.name, bf->coords.x, bf->coords.y, bf->collecting_producers_nearby.at(bo.collected_map_resource));
+					}
+
 				prio += management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 5;
 
 				// Some productionsites strictly require supporting sites nearby
@@ -2675,7 +2687,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio += bo.primary_priority;
 
 					// keep wells more distant
-					if (bf->count_producers_nearby(bo.outputs) > 2) {
+					assert(bo.collected_map_resource != INVALID_INDEX);
+					if (bf->collecting_producers_nearby.at(bo.collected_map_resource) > 2) {
 						continue;
 					}
 
@@ -2704,9 +2717,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					        (bf->trees_nearby - trees_nearby_treshold_) / 10;
 
 					// consider cutters and rangers nearby
+					assert(bo.collected_map_resource != INVALID_INDEX);
 					prio += 2 * bf->supporters_nearby.at(bo.outputs.at(0)) *
 					        std::abs(management_data.get_military_number_at(25));
-					prio -= bf->count_producers_nearby(bo.outputs) *
+					prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) *
 					        std::abs(management_data.get_military_number_at(36)) * 3;
 
 				} else if (bo.is(BuildingAttribute::kNeedsRocks)) {
@@ -2738,7 +2752,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					}
 
 					// to prevent to many quaries on one spot
-					prio = prio - 50 * bf->count_producers_nearby(bo.outputs);
+					assert(bo.collected_map_resource != INVALID_INDEX);
+					prio = prio - 50 * bf->collecting_producers_nearby.at(bo.collected_map_resource);
 
 				} else if (bo.is(BuildingAttribute::kHunter)) {
 
@@ -2755,8 +2770,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5;
 
+					assert(bo.collected_map_resource != INVALID_INDEX);
 					prio +=
-					   (bf->critters_nearby * 3) - 8 - 5 * bf->count_producers_nearby(bo.outputs);
+					   (bf->critters_nearby * 3) - 8 - 5 * bf->collecting_producers_nearby.at(bo.collected_map_resource);
 
 				} else if (bo.is(BuildingAttribute::kFisher)) {  // fisher
 
@@ -2771,7 +2787,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					prio -= bf->count_producers_nearby(bo.outputs) * 20;
+					assert(bo.collected_map_resource != INVALID_INDEX);
+					prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) * 20;
 					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 20;
 
 					prio +=
@@ -2802,8 +2819,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						prio -= bf->water_nearby / 5;
 
 						for (auto ph : bo.production_hints) {
+							assert(ph != INVALID_INDEX);
 							prio += management_data.neuron_pool[67].get_result_safe(
-							           bf->producers_nearby.at(ph) * 5, kAbsValue) /
+							           bf->collecting_producers_nearby.at(ph) * 5, kAbsValue) /
 							        2;
 						}
 
@@ -2812,7 +2830,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						   5;
 
 						for (auto ph : bo.production_hints) {
-							prio += bf->producers_nearby.at(ph) * 5 -
+							assert(ph != INVALID_INDEX);
+							prio += bf->collecting_producers_nearby.at(ph) * 5 -
 							        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
 							        bf->space_consumers_nearby * 5 - bf->rocks_nearby / 3 +
 							        bf->supporters_nearby.at(ph) * 3;
@@ -2844,8 +2863,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 
 						for (auto ph : bo.production_hints) {
-							prio += bf->producers_nearby.at(ph) * 10;
-							prio -= bf->supporters_nearby.at(ph) * 20;
+							assert(ph != INVALID_INDEX);
+							prio += bf->collecting_producers_nearby.at(ph) * 10;
+							prio -= bf->collecting_producers_nearby.at(ph) * 20;
 						}
 
 						if (bf->enemy_nearby) {
@@ -2895,7 +2915,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							           std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
-							prio -= bf->count_producers_nearby(bo.outputs) *
+							prio -= bf->producers_nearby.at(bo.outputs.at(0)) *
 							        std::abs(management_data.get_military_number_at(108)) / 5;
 						}
 
@@ -2923,8 +2943,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// This is for a special case this is also supporter, it considers
 					// producers nearby
 					for (auto ph : bo.production_hints) {
+						assert(ph != INVALID_INDEX);
 						prio += management_data.neuron_pool[51].get_result_safe(
-						           bf->producers_nearby.at(ph) * 5, kAbsValue) /
+						           bf->collecting_producers_nearby.at(ph) * 5, kAbsValue) /
 						        2;
 					}
 
@@ -5799,6 +5820,9 @@ void DefaultAI::consider_productionsite_influence(BuildableField& field,
 
 	for (size_t i = 0; i < bo.outputs.size(); ++i) {
 		++field.producers_nearby.at(bo.outputs.at(i));
+	}
+	if (bo.collected_map_resource != INVALID_INDEX) {
+		++field.collecting_producers_nearby.at(bo.collected_map_resource);
 	}
 
 	if (!bo.production_hints.empty()) {

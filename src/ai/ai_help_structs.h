@@ -388,6 +388,7 @@ struct BuildableField {
 
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
+	std::vector<uint8_t> collecting_producers_nearby;
 	// and for rangers, fishbreeders:
 	std::vector<uint8_t> supporters_nearby;
 	uint16_t count_producers_nearby(std::vector<uint8_t>&);
@@ -471,6 +472,7 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	std::set<DescriptionIndex> production_hints;
+	DescriptionIndex collected_map_resource;
 	bool requires_supporters;
 
 	// information needed for decision on new building construction
