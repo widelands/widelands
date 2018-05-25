@@ -56,9 +56,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                     UI::DropdownType::kTextual,
                     UI::PanelStyle::kWui),
      default_tribe_(Widelands::get_all_tribenames().front()) {
-	// Make room for 8 players
-	no_of_players_.set_max_items(8);
 
+	box_.set_size(100, 100); // Prevent assert failures
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kMargin);
 
@@ -122,6 +121,9 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		player_edit_.push_back(
 		   std::unique_ptr<PlayerEdit>(new PlayerEdit(plr_name, plr_position, plr_tribe)));
 	}
+
+	// Make room for 8 players
+	no_of_players_.set_max_items(8);
 	no_of_players_.select(nr_players);
 	layout();
 }
