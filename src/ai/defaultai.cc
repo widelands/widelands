@@ -626,31 +626,21 @@ void DefaultAI::late_initialization() {
 			bo.set_is(BuildingAttribute::kNeedsSeafaring);
 		}
 		if (bh.collects_ware_from_map() == "log") {
-			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("log"));
 			bo.set_is(BuildingAttribute::kLumberjack);
 		}
 		if (bh.collects_ware_from_map() == "granite") {
-			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("granite"));
 			bo.set_is(BuildingAttribute::kNeedsRocks);
 		}
 		if (bh.collects_ware_from_map() == "water") {
-			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("water"));
 			bo.set_is(BuildingAttribute::kWell);
 		}
 		// here we identify hunters
 		if (bh.collects_ware_from_map() == "meat") {
-			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("meat"));
 			bo.set_is(BuildingAttribute::kHunter);
 		}
 
 		// and fishers
 		if (bh.collects_ware_from_map() == "fish") {
-			// TODO(GunChleoc): We have supporters_nearby.at(bo.outputs.at(0)) below, so we need an extra assert here for now
-			//assert(bo.outputs.at(0) == tribe_->safe_ware_index("fish"));
 			bo.set_is(BuildingAttribute::kFisher);
 		}
 		if (create_basic_buildings_list &&
@@ -811,19 +801,6 @@ void DefaultAI::late_initialization() {
 				    !(temp_buildcosts.first == tribe_->rawlog() ||
 				      temp_buildcosts.first == tribe_->granite())) {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
-				}
-			}
-
-			// Now testing whether the building indeed produces required output
-			if (!bh.collects_ware_from_map().empty()) {
-				bool output_found = false;
-				// Usually such building produces only one output, but can be more than on
-				for (auto output : bo.outputs) {
-					output_found = output == tribe_->safe_ware_index(bh.collects_ware_from_map()) || output_found;
-				}
-				if (!output_found) {
-					throw wexception("AI: %s misses appropriate output (%s) as a map resource collector",
-						                 bo.desc->name().c_str(), bh.collects_ware_from_map().c_str());
 				}
 			}
 			continue;
@@ -2768,7 +2745,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5;
+					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5; // NOCOM
 
 					assert(bo.collected_map_resource != INVALID_INDEX);
 					prio +=
