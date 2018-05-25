@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-18 18:10+0000\n"
+"POT-Creation-Date: 2018-05-25 07:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -322,7 +322,7 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:624
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:132
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:138
 #: ../../src/logic/map.h:161 ../../src/wui/mapdata.cc:44
 msgid "No Name"
 msgstr ""
@@ -568,7 +568,7 @@ msgstr ""
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:69
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:222
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:238
 #: ../../src/wui/mapdata.cc:162
 msgid "My Maps"
 msgstr ""
@@ -581,7 +581,7 @@ msgstr ""
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:74
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:222
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:238
 #, c-format
 msgid "Current directory: %s"
 msgstr ""
@@ -806,29 +806,29 @@ msgid "Filename:"
 msgstr ""
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:149
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:157
 msgid "unnamed"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:250
-#: ../../src/wui/game_main_menu_save_game.cc:157
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:266
+#: ../../src/wui/game_main_menu_save_game.cc:169
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:254
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:268
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:314
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:269
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:329
 msgid "Error Saving Map!"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:265
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:280
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it manually."
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:311
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:326
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -857,7 +857,7 @@ msgid "Number of Players"
 msgstr ""
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:201 ../../src/logic/map.cc:312
+#: ../../src/editor/ui_menus/player_menu.cc:205
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:70
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:102
@@ -3223,7 +3223,7 @@ msgstr ""
 msgid "Save Game"
 msgstr ""
 
-#: ../../src/wui/game_main_menu_save_game.cc:144
+#: ../../src/wui/game_main_menu_save_game.cc:156
 msgid ""
 "Game Saving Error!\n"
 "Saved game file may be corrupt!\n"
@@ -3231,8 +3231,8 @@ msgid ""
 "Reason given:\n"
 msgstr ""
 
-#: ../../src/wui/game_main_menu_save_game.cc:147
-#: ../../src/wui/game_main_menu_save_game.cc:156
+#: ../../src/wui/game_main_menu_save_game.cc:159
+#: ../../src/wui/game_main_menu_save_game.cc:168
 msgid "Save Game Error!"
 msgstr ""
 
