@@ -84,7 +84,6 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		row->add_space(kMargin);
 
 		// Tribe
-		// NOCOM fix height for Arabic
 		UI::Dropdown<std::string>* plr_tribe =
 		   new UI::Dropdown<std::string>(row, 0, 0, 50, 400, plr_name->get_h(), _("Tribe"),
 		                                 UI::DropdownType::kPictorial, UI::PanelStyle::kWui);
@@ -110,7 +109,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		assert(player_image);
 
 		UI::Button* plr_position =
-		   new UI::Button(row, "tribe", 0, 0, plr_name->get_h(), plr_name->get_h(),
+		   new UI::Button(row, "tribe", 0, 0, plr_tribe->get_h(), plr_tribe->get_h(),
 		                  UI::ButtonStyle::kWuiSecondary, player_image);
 		plr_position->sigclicked.connect(
 		   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
