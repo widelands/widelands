@@ -84,6 +84,12 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 
      // Variables and objects used in the menu
      is_scenario_(false) {
+	subscriber_ =
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) {
+		   update();
+		});
+
+
 	ok_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 9 / 10));
 	back_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 17 / 20));
 	win_condition_dropdown_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 4 / 10 + buth_));
@@ -113,6 +119,8 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
 		   this, get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500 * 2, settings, i);
 		y += buth_ / 1.17;
 	}
+
+	set_thinks(false);
 }
 
 FullscreenMenuLaunchSPG::~FullscreenMenuLaunchSPG() {
@@ -145,7 +153,7 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 	select_map();
 	if (settings_->settings().mapname.empty())
 		return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
-	refresh();
+	update();
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
@@ -181,10 +189,10 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
 }
 
 /**
- * update the user interface and take care about the visibility of
+ * update the user interface and take care of the visibility of
  * buttons and text.
  */
-void FullscreenMenuLaunchSPG::refresh() {
+void FullscreenMenuLaunchSPG::update() {
 	const GameSettings& settings = settings_->settings();
 
 	{
@@ -216,8 +224,9 @@ void FullscreenMenuLaunchSPG::refresh() {
 		pos_[i]->set_visible(false);
 
 	// update the player description groups
-	for (uint32_t i = 0; i < kMaxPlayers; ++i)
-		players_[i]->refresh();
+	for (uint32_t i = 0; i < kMaxPlayers; ++i) {
+		players_[i]->update();
+	}
 }
 
 /**
@@ -245,6 +254,7 @@ void FullscreenMenuLaunchSPG::select_map() {
 	safe_place_for_host(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 	update_win_conditions();
+	update();
 }
 
 /**
@@ -273,6 +283,7 @@ void FullscreenMenuLaunchSPG::set_scenario_values() {
  */
 void FullscreenMenuLaunchSPG::switch_to_position(uint8_t const pos) {
 	settings_->set_player_number(pos);
+	update();
 }
 
 /**

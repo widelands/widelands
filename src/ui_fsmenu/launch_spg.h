@@ -24,6 +24,7 @@
 #include <string>
 
 #include "graphic/playercolor.h"
+#include "logic/game_settings.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
@@ -51,7 +52,6 @@ public:
 	~FullscreenMenuLaunchSPG() override;
 
 	void start() override;
-	void refresh() override;
 
 protected:
 	void clicked_ok() override;
@@ -59,6 +59,7 @@ protected:
 
 private:
 	void layout() override;
+	void update();
 
 	void select_map();
 	void win_condition_selected() override;
@@ -76,6 +77,7 @@ private:
 	std::string player_save_name_[kMaxPlayers];
 	std::string player_save_tribe_[kMaxPlayers];
 	bool is_scenario_;
+	std::unique_ptr<Notifications::Subscriber<NoteGameSettings>> subscriber_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LAUNCH_SPG_H
