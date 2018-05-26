@@ -2695,7 +2695,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					// consider cutters and rangers nearby
 					assert(bo.collected_map_resource != INVALID_INDEX);
-					prio += 2 * bf->supporters_nearby.at(bo.outputs.at(0)) *
+					prio += 2 * bf->supporters_nearby.at(bo.collected_map_resource) *
 					        std::abs(management_data.get_military_number_at(25));
 					prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) *
 					        std::abs(management_data.get_military_number_at(36)) * 3;
@@ -2745,7 +2745,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					// Overdue priority here
 					prio += bo.primary_priority;
 
-					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 5; // NOCOM
+					prio += bf->supporters_nearby.at(bo.collected_map_resource) * 5;
 
 					assert(bo.collected_map_resource != INVALID_INDEX);
 					prio +=
@@ -2766,7 +2766,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 					assert(bo.collected_map_resource != INVALID_INDEX);
 					prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) * 20;
-					prio += bf->supporters_nearby.at(bo.outputs.at(0)) * 20;
+					prio += bf->supporters_nearby.at(bo.collected_map_resource) * 20;
 
 					prio +=
 					   -5 +
