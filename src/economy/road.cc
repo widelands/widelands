@@ -570,12 +570,8 @@ void Road::charge_wallet(Game& game) {
 	const uint32_t current_gametime = game.get_gametime();
 	assert(last_wallet_charge_ <= current_gametime);
 
-	log("NOCOM charge wallet: %d, carriers: %d, gamesecs: %d, last_charge: %d, steps: %lu ", wallet_,
-	    carriers_count(), current_gametime, last_wallet_charge_, path_.get_nsteps());
-
 	wallet_ -= carriers_count() * (current_gametime - last_wallet_charge_) / 1000;
 	last_wallet_charge_ = current_gametime;
-	log("NOCOM new wallet: %d\n", wallet_);
 
 	if (wallet_ < 0) {
 		wallet_ = 0;
@@ -608,9 +604,6 @@ void Road::add_to_wallet(int32_t sum) {
  * Add carrying payment, and check for promotion.
  */
 void Road::pay_for_road(Game& game, uint8_t queue_length) {
-	log("NOCOM PAY for road: %d, carriers: %d, queue: %d, steps: %lu\n", wallet_, carriers_count(), queue_length,
-	    path_.get_nsteps());
-
 	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
 	charge_wallet(game);
 

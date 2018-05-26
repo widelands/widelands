@@ -96,9 +96,6 @@ void Carrier::road_update(Game& game, State& state) {
 
 	Road& road = dynamic_cast<Road&>(*get_location(game));
 
-	// subtract maintenance cost and check for road demotion
-	// NOCOM road.charge_wallet(game);
-
 	// Move into idle position if necessary
 	if (start_task_movepath(game, road.get_path(), road.get_idle_index(),
 	                        descr().get_right_walk_anims(does_carry_ware())))
@@ -408,8 +405,6 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 		send_signal(game, "ware");
 	else if (state.task == &taskWaitforcapacity) {
 	  // skip maintenance charges for the time-length of congestion
-	  // NOCOM Road& road = dynamic_cast<Road&>(*get_location(game));
-	  // NOCOM road.update_wallet_chargetime(game);
 	  send_signal(game, "wakeup");
 	}
 
@@ -451,7 +446,6 @@ void Carrier::find_pending_ware(Game& game) {
 			throw wexception("Carrier::find_pending_ware: end flag is messed up");
 	} else {
 		// Demote idle roads
-		log("NOCOM DEMOTE idle road\n");
 		road.charge_wallet(game);
 	}
 }
