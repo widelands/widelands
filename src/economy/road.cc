@@ -614,9 +614,9 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 	wallet_ += 2 * (carriers_count() + 1) * (4 * queue_length + path_.get_nsteps());
 	charge_wallet(game);
 
-	if (type_ == RoadType::kNormal && wallet_ > 1.5 * Road::kAnimalPrice) {
+	if (type_ == RoadType::kNormal && wallet_ > 1.5 * kRoadAnimalPrice) {
 		// Promote the road
-		wallet_ -= Road::kAnimalPrice;
+		wallet_ -= kRoadAnimalPrice;
 		type_ = RoadType::kBusy;
 		flags_[0]->propagate_promoted_road(this);
 		flags_[1]->propagate_promoted_road(this);
@@ -627,7 +627,7 @@ void Road::pay_for_road(Game& game, uint8_t queue_length) {
 			}
 		}
 	}
-	wallet_ = std::min(wallet_, Road::kMaxWallet);
+	wallet_ = std::min(wallet_, kRoadMaxWallet);
 }
 
 /**

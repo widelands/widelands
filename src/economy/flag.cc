@@ -520,7 +520,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
   for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
     Road* const road = roads_[i];
 	if (road && road != promoted_road) {
-		sum += Road::kMaxWallet + road->wallet() * road->wallet();
+		sum += kRoadMaxWallet + road->wallet() * road->wallet();
 	}
   }
 
@@ -528,7 +528,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
   for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
     Road* const road = roads_[i];
 	if (road && road->get_roadtype() != RoadType::kBusy) {
-		road->add_to_wallet(0.5 * (Road::kMaxWallet - road->wallet()) * (Road::kMaxWallet + road->wallet() * road->wallet()) / sum);
+		road->add_to_wallet(0.5 * (kRoadMaxWallet - road->wallet()) * (kRoadMaxWallet + road->wallet() * road->wallet()) / sum);
 	}
   }
 }

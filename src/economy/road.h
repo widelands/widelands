@@ -43,6 +43,12 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(RoadDescr);
 };
 
+// C++11 allows static constexpr members in the compiler, but the linker can't handle it.
+// So, we don't have these in the class.
+// https://stackoverflow.com/questions/40690260/undefined-reference-error-for-static-constexpr-member
+constexpr int32_t kRoadAnimalPrice = 600;
+constexpr int32_t kRoadMaxWallet = static_cast<int32_t>(2.5 * kRoadAnimalPrice);
+
 /**
  * Road is a special object which connects two flags.
  * The Road itself is never rendered; however, the appropriate Field::roads are
@@ -61,10 +67,6 @@ private:
 struct Road : public PlayerImmovable {
 	friend class MapRoaddataPacket;  // For saving
 	friend class MapRoadPacket;      // For init()
-
-	static constexpr int32_t kAnimalPrice = 600;
-	static constexpr int32_t kMaxWallet = 2.5 * kAnimalPrice;
-
 
 	const RoadDescr& descr() const;
 
