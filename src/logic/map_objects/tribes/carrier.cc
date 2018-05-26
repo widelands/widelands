@@ -401,13 +401,11 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 	// Ack it if we haven't
 	promised_pickup_to_ = flag;
 
-	if (state.task == &taskRoad)
+	if (state.task == &taskRoad) {
 		send_signal(game, "ware");
-	else if (state.task == &taskWaitforcapacity) {
-	  // skip maintenance charges for the time-length of congestion
+	} else if (state.task == &taskWaitforcapacity) {
 	  send_signal(game, "wakeup");
 	}
-
 	return true;
 }
 
@@ -444,9 +442,6 @@ void Carrier::find_pending_ware(Game& game) {
 		promised_pickup_to_ = END_FLAG;
 		if (!road.get_flag(Road::FlagEnd).ack_pickup(game, road.get_flag(Road::FlagStart)))
 			throw wexception("Carrier::find_pending_ware: end flag is messed up");
-	} else {
-		// Demote idle roads
-		road.charge_wallet(game);
 	}
 }
 
