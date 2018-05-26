@@ -158,7 +158,7 @@ int Panel::do_run() {
 	// think() is called at most 15 times per second, that is roughly ever 66ms.
 	const uint32_t kGameLogicDelay = 1000 / 15;
 
-	// With the default of 33FPS, the game will be drawn every 33ms.
+	// With the default of 30FPS, the game will be drawn every 33ms.
 	const uint32_t draw_delay =
 	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
 
@@ -440,6 +440,22 @@ void Panel::draw_overlay(RenderTarget&) {
 }
 
 /**
+ * Draw texture and color from the info if they have been specified.
+ */
+void Panel::draw_background(RenderTarget& dst, const UI::PanelStyleInfo& info) {
+	draw_background(dst, Recti(0, 0, get_w(), get_h()), info);
+}
+void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo& info) {
+	if (info.image != nullptr) {
+		dst.fill_rect(rect, RGBAColor(0, 0, 0, 255));
+		dst.tile(rect, info.image, Vector2i(get_x(), get_y()));
+	}
+	if (info.color != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(rect, info.color, BlendMode::UseAlpha);
+	}
+}
+
+/**
  * Called once per event loop pass, unless set_think(false) has
  * been called. It is intended to be used for animations and game logic.
  */
@@ -648,8 +664,6 @@ void Panel::focus(const bool topcaller) {
 	if (!parent_ || this == modal_) {
 		return;
 	}
-	if (parent_->focus_ == this)
-		return;
 
 	parent_->focus_ = this;
 	parent_->focus(false);

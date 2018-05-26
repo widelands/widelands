@@ -663,7 +663,7 @@ void MapGenerator::create_random_map() {
 	const std::string ai = map_.get_scenario_player_ai(1);
 	map_.set_nrplayers(map_info_.numPlayers);
 	FindNodeSize functor(FindNodeSize::sizeBig);
-	Coords playerstart(-1, -1);
+	Coords playerstart(Coords::null());
 
 	// Build a basic structure how player start positions are placed
 	uint8_t line[3];
@@ -783,7 +783,7 @@ void MapGenerator::create_random_map() {
 
 			log("WARNING: Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
 			    coords2.x, coords2.y);
-			coords2 = Coords(-1, -1);
+			coords2 = Coords::null();
 		}
 
 		// Finally set the found starting position

@@ -45,7 +45,7 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                       LoadOrSaveGame::FileType::kReplay :
                       (gsp->settings().multiplayer ? LoadOrSaveGame::FileType::kGameMultiPlayer :
                                                      LoadOrSaveGame::FileType::kGameSinglePlayer),
-                   GameDetails::Style::kFsMenu,
+                   UI::PanelStyle::kFsMenu,
                    true),
 
      is_replay_(is_replay) {

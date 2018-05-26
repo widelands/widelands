@@ -25,7 +25,6 @@
 
 #include <SDL_keycode.h>
 
-#include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "notifications/notifications.h"
@@ -35,7 +34,7 @@
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "wui/chatoverlay.h"
+#include "wui/chat_overlay.h"
 #include "wui/debugconsole.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"

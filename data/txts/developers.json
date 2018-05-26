@@ -111,7 +111,8 @@
 						"Philipp Klaus Krause (PkK)",
 						"Notabilis",
 						"Jukka Pakarinen",
-						"Evgeny Kapun"
+						"Evgeny Kapun",
+						"ypopezios"
 					]
 				}
 			]
@@ -222,7 +223,7 @@
 			"image": "images/ui_basic/ls_wlmap.png",
 			"entries":[
 				{
-					"subheading": "Barbarian",
+					"subheading": "Barbarians",
 					"members":[
 						"Bastian Rapp",
 						"Alexander Kahl (wolfpac)",
@@ -237,14 +238,14 @@
 					]
 				},
 				{
-					"subheading": "Atlantean",
+					"subheading": "Atlanteans",
 					"members":[
 						"Holger Rapp (SirVer)",
 						"Peter Schwanemann (Nasenbaer)"
 					]
 				},
 				{
-					"subheading": "Frisian",
+					"subheading": "Frisians",
 					"members":[
 						"Benedikt Straub (Nordfriese)"
 					]

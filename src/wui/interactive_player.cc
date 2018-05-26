@@ -51,6 +51,7 @@
 #include "wui/game_options_menu.h"
 #include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
+#include "wui/seafaring_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
@@ -453,6 +454,16 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return true;
 
+		case SDLK_e:
+			if (game().map().allows_seafaring()) {
+				if (main_windows_.seafaring_stats.window == nullptr) {
+					new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
+				} else {
+					main_windows_.seafaring_stats.toggle();
+				}
+			}
+			return true;
+
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new GameMainMenuSaveGame(*this, main_windows_.savegame);
@@ -475,9 +486,8 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				if (!chat_.window) {
 					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 				}
-				dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 			}
-			return true;
 		default:
 			break;
 		}

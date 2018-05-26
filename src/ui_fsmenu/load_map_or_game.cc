@@ -22,10 +22,8 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
 /// Select a Map, Saved Game or Replay in Fullscreen Mode.
@@ -34,8 +32,8 @@
 FullscreenMenuLoadMapOrGame::FullscreenMenuLoadMapOrGame()
    : FullscreenMenuBase(),
      // Main buttons
-     back_(this, "back", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but0.png"), _("Back")),
-     ok_(this, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")) {
+     back_(this, "back", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
+     ok_(this, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")) {
 	layout();
 }
 

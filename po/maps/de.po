@@ -14,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-25 20:53+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-18 15:27+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -136,15 +136,15 @@ msgstr "Als ihr Gott sein Vertrauen in die Atlanter verlor und ihre Insel in den
 
 #: ../../data/campaigns/campaigns.conf:52
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Von Wasser zu Eis"
 
 #: ../../data/campaigns/campaigns.conf:54
 msgid "Frisians"
-msgstr ""
+msgstr "Friesen"
 
 #: ../../data/campaigns/campaigns.conf:56
 msgid "For advanced players. Introduces the Frisians"
-msgstr ""
+msgstr "Für fortgeschrittene Spieler. Führt die Friesen ein."
 
 #: ../../data/campaigns/campaigns.conf:57
 msgid ""
@@ -154,7 +154,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Vom Ozean zu leben, ist ein konstanter Kampf, um so mehr für die Einwohner der friesischen Nordseeküste. War die letzte Sturmflut, die verheerendste im Gedächtnis der Menschheit, wirklich nicht mehr als ein weiteres Beispiel für die Mühsal, der die Friesen stets trotzen müssen – oder ein Zeichen von den Göttern, dass sich ein Stamm, der sich gerade erst hier niedergelassen hat, eine neue Heimat suchen muss?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -186,11 +186,11 @@ msgstr "Was für eine Überraschung!"
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "Die große Sturmflut"
 
 #: ../../data/campaigns/campaigns.conf:134
 msgid "Colder than Ice"
-msgstr ""
+msgstr "Kälter als Eis"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -237,23 +237,23 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "1362 wurde das ruhige, friedliche Leben der Einwohner der nordfriesischen Inseln durch eine der größten Sturmfluten im Gedächtnis der Menschheit zerstört: die zweite Marcellusflut. Ist das wirklich nicht mehr als ein weiterer Sturm, oder doch ein Zeichen der Götter, dass das friesische Volk auf der Insel Langeness nicht geduldet wird?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Dieses Szenario spielt in einem historischen Kontext, die Handlung ist aber größtenteils erfunden."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Ein eisiges Willkommen"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud und sein Stamm sind im Norden angekommen. Ihre Ankunft zwischen den gefrorenen Steppen und den schneebedeckten Bergen ist jedoch alles andere als erwünscht …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

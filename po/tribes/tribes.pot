@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"POT-Creation-Date: 2018-05-25 07:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -569,7 +569,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:54
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:50
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:59
@@ -2400,15 +2400,15 @@ msgctxt "frisians_building"
 msgid "Beekeeper’s House"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
 msgid "No Flowers"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
 msgid "Out of Flowers"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
@@ -2443,9 +2443,9 @@ msgstr ""
 msgid "forging a pick"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging needles because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
-msgid "forging needles"
+msgid "making needles"
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -2532,19 +2532,19 @@ msgid "Fruit Collector’s House"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:50
 msgid "gathering berries"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
 msgid "No Bushes"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
 msgid "Out of Berries"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
@@ -2739,7 +2739,8 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgctxt "frisians_building"
 msgid ""
-"The farmer working at this reed farm has no cleared soil to plant his seeds."
+"The reed farmer working at this reed farm has no cleared soil to plant his "
+"seeds."
 msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
@@ -3366,6 +3367,22 @@ msgstr ""
 msgid "Desert Hackberry (ripe)"
 msgstr ""
 
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:13
+msgid "Juniper (tiny)"
+msgstr ""
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:37
+msgid "Juniper (small)"
+msgstr ""
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:61
+msgid "Juniper (medium)"
+msgstr ""
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:85
+msgid "Juniper (ripe)"
+msgstr ""
+
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:13
 msgid "Raspberry Bush (tiny)"
 msgstr ""
@@ -3399,19 +3416,19 @@ msgid "Sea Buckthorn (ripe)"
 msgstr ""
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
-msgid "Strawberry Bush (tiny)"
+msgid "Strawberries (tiny)"
 msgstr ""
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:37
-msgid "Strawberry Bush (small)"
+msgid "Strawberries (small)"
 msgstr ""
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
-msgid "Strawberry Bush (medium)"
+msgid "Strawberries (medium)"
 msgstr ""
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
-msgid "Strawberry Bush (ripe)"
+msgid "Strawberries (ripe)"
 msgstr ""
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables

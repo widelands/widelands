@@ -22,6 +22,7 @@ cpp_pairs = (
     ('src/scripting/lua_game.cc', 'autogen_wl_game.rst'),
     ('src/scripting/lua_ui.cc', 'autogen_wl_ui.rst'),
     ('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
+    ('src/scripting/lua_path.cc', 'autogen_path.rst'),
     ('src/logic/map_objects/tribes/worker_program.cc', 'autogen_tribes_worker_programs.rst'),
 )
 

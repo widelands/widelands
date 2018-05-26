@@ -32,7 +32,6 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/findimmovable.h"

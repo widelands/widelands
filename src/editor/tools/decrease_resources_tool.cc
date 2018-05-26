@@ -22,10 +22,8 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_resources_tool.h"
 #include "editor/tools/set_resources_tool.h"
-#include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/resource_description.h"
-#include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
 

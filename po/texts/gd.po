@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-04-02 09:24+0000\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-06 16:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -245,6 +245,10 @@ msgstr "Seann-sheanairean"
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
 msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisian"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -612,7 +616,7 @@ msgid ""
 msgstr "Feumaidh tu gaireal airson breigichean; cuaraidh no mèinn cloiche airson gaireal; feumaidh tu breigichean gus an togail. Thoir an aire nach ruith na breigichean ort!"
 
 #: ../../data/txts/tips/frisians.lua:8
-msgid "Always build a forester´s house, so you will not run out of logs."
+msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:6
