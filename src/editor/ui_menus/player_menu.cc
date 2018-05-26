@@ -19,6 +19,8 @@
 
 #include "editor/ui_menus/player_menu.h"
 
+#include <memory>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
@@ -34,10 +36,6 @@
 namespace {
 constexpr int kMargin = 4;
 }  // namespace
-
-// NOCOM dropdowns don't close with the window on right-click, use a notification or boost::signal
-// between window and the dropdown class, or let the listselect handle its own right-click if it's a
-// dopdown
 
 inline EditorInteractive& EditorPlayerMenu::eia() {
 	return dynamic_cast<EditorInteractive&>(*get_parent());

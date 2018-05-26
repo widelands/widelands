@@ -21,6 +21,7 @@
 #define WL_EDITOR_UI_MENUS_PLAYER_MENU_H
 
 #include <cstring>
+#include <memory>
 #include <string>
 #include <vector>
 
