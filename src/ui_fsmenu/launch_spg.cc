@@ -209,9 +209,7 @@ void FullscreenMenuLaunchSPG::update() {
 	select_map_.set_visible(settings_->can_change_map());
 	select_map_.set_enabled(settings_->can_change_map());
 
-	if (settings.scenario) {
-		set_scenario_values();
-	}
+	set_player_names_and_tribes();
 
 	// "Choose Position" Buttons in frond of PDG
 	for (uint8_t i = 0; i < nr_players_; ++i) {
@@ -262,7 +260,7 @@ void FullscreenMenuLaunchSPG::select_map() {
  * player names and player tribes and take care about visibility
  * and usability of all the parts of the UI.
  */
-void FullscreenMenuLaunchSPG::set_scenario_values() {
+void FullscreenMenuLaunchSPG::set_player_names_and_tribes() {
 	if (settings_->settings().mapfilename.empty()) {
 		throw wexception("settings()->scenario was set to true, but no map is available");
 	}
