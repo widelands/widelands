@@ -123,6 +123,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 	// Make room for 8 players
 	no_of_players_.set_max_items(8);
 	no_of_players_.select(nr_players);
+	// Init button states
+	set_starting_pos_clicked(1);
 	layout();
 }
 
@@ -167,6 +169,8 @@ void EditorPlayerMenu::no_of_players_clicked() {
 			map->set_scenario_player_tribe(pn, tribename);
 			rows_.at(pn - 1)->box->set_visible(true);
 		}
+		// Update button states
+		set_starting_pos_clicked(menu.tools()->set_starting_pos.get_current_player());
 	} else {
 		// If removed player was selected switch to the highest player
 		if (old_nr_players >= menu.tools()->set_starting_pos.get_current_player()) {
@@ -211,6 +215,17 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 
 	//  reselect tool, so everything is in a defined state
 	menu.select_tool(menu.tools()->current(), EditorTool::First);
+
+	// Signal player position states via button states
+	iterate_player_numbers(pn, map->get_nrplayers()) {
+		if (pn == n) {
+			rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiPrimary);
+			rows_.at(pn - 1)->position->set_perm_pressed(true);
+		} else {
+			rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiSecondary);
+			rows_.at(pn - 1)->position->set_perm_pressed(map->get_starting_pos(pn) != Widelands::Coords::null());
+		}
+	}
 }
 
 /**
