@@ -111,13 +111,13 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		plr_position->sigclicked.connect(
 		   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		row->add(plr_position);
-		rows_.push_back(row);
 
 		box_.add(row, UI::Box::Resizing::kFullSize);
 		box_.add_space(kMargin);
 		row->set_visible(map_has_player);
-		player_edit_.push_back(
-		   std::unique_ptr<PlayerEdit>(new PlayerEdit(plr_name, plr_position, plr_tribe)));
+
+		rows_.push_back(
+		   std::unique_ptr<PlayerEditRow>(new PlayerEditRow(row, plr_name, plr_position, plr_tribe)));
 	}
 
 	// Make room for 8 players
@@ -130,10 +130,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
  * Update all
  */
 void EditorPlayerMenu::layout() {
-	assert(!player_edit_.empty());
+	assert(!rows_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
 	box_.set_size(300, no_of_players_.get_h() + kMargin +
-	                      nr_players * (player_edit_.front()->tribe->get_h() + kMargin));
+	                      nr_players * (rows_.front()->tribe->get_h() + kMargin));
 	set_inner_size(box_.get_w() + 2 * kMargin, box_.get_h() + 2 * kMargin);
 }
 
@@ -160,12 +160,12 @@ void EditorPlayerMenu::no_of_players_clicked() {
 			   /** TRANSLATORS: Default player name, e.g. Player 1 */
 			   (boost::format(_("Player %u")) % static_cast<unsigned int>(pn)).str();
 			map->set_scenario_player_name(pn, name);
-			player_edit_.at(pn - 1)->name->set_text(name);
+			rows_.at(pn - 1)->name->set_text(name);
 
-			const std::string& tribename = player_edit_.at(pn - 1)->tribe->get_selected();
+			const std::string& tribename = rows_.at(pn - 1)->tribe->get_selected();
 			assert(Widelands::tribe_exists(tribename));
 			map->set_scenario_player_tribe(pn, tribename);
-			rows_.at(pn - 1)->set_visible(true);
+			rows_.at(pn - 1)->box->set_visible(true);
 		}
 	} else {
 		// If removed player was selected switch to the highest player
@@ -176,7 +176,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 		// Remove extra players
 		map->set_nrplayers(nr_players);
 		for (Widelands::PlayerNumber pn = nr_players; pn < old_nr_players; ++pn) {
-			rows_.at(pn)->set_visible(false);
+			rows_.at(pn)->box->set_visible(false);
 		}
 	}
 	menu.set_need_save(true);
@@ -187,7 +187,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
  * Player Tribe Button clicked
  */
 void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
-	const std::string& tribename = player_edit_.at(n)->tribe->get_selected();
+	const std::string& tribename = rows_.at(n)->tribe->get_selected();
 	assert(Widelands::tribe_exists(tribename));
 	EditorInteractive& menu = eia();
 	menu.egbase().mutable_map()->set_scenario_player_tribe(n + 1, tribename);
@@ -218,7 +218,7 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
  */
 void EditorPlayerMenu::name_changed(int32_t n) {
 	//  Player name has been changed.
-	const std::string& text = player_edit_.at(n)->name->text();
+	const std::string& text = rows_.at(n)->name->text();
 	EditorInteractive& menu = eia();
 	Widelands::Map* map = menu.egbase().mutable_map();
 	map->set_scenario_player_name(n + 1, text);

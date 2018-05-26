@@ -41,12 +41,13 @@ public:
 	}
 
 private:
-	struct PlayerEdit {
-		explicit PlayerEdit(UI::EditBox* init_name,
+	struct PlayerEditRow {
+		explicit PlayerEditRow(UI::Box* init_box, UI::EditBox* init_name,
 		                    UI::Button* init_position,
 		                    UI::Dropdown<std::string>* init_tribe)
-		   : name(init_name), position(init_position), tribe(init_tribe) {
+		   : box(init_box), name(init_name), position(init_position), tribe(init_tribe) {
 		}
+		UI::Box* box;
 		UI::EditBox* name;
 		UI::Button* position;
 		UI::Dropdown<std::string>* tribe;
@@ -62,10 +63,8 @@ private:
 	void layout() override;
 
 	UI::Box box_;
-	std::vector<UI::Box*> rows_;
-	std::vector<std::unique_ptr<PlayerEdit>> player_edit_;
-
 	UI::Dropdown<uintptr_t> no_of_players_;
+	std::vector<std::unique_ptr<PlayerEditRow>> rows_;
 
 	const std::string default_tribe_;
 };
