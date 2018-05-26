@@ -329,6 +329,21 @@ void Table<void*>::draw(RenderTarget& dst) {
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_ESCAPE:
+			cancel();
+			return true;
+
+		case SDLK_TAB:
+			// Let the panel handle the tab key
+			return get_parent()->handle_key(true, code);
+
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			if (selection_ != no_selection_index()) {
+				double_clicked(selection_);
+			}
+			return true;
+
 		case SDLK_a:
 			if (is_multiselect_ && (code.mod & KMOD_CTRL) && !empty()) {
 				multiselect_.clear();
@@ -431,6 +446,7 @@ void Table<void*>::select(const uint32_t i) {
 	selection_ = i;
 	if (is_multiselect_) {
 		multiselect_.insert(selection_);
+		last_multiselect_ = selection_;
 	}
 
 	selected(selection_);
@@ -548,8 +564,11 @@ void Table<void*>::remove(const uint32_t i) {
 	} else if (selection_ > i && selection_ != no_selection_index()) {
 		selection_--;
 	}
-	if (is_multiselect_ && selection_ != no_selection_index()) {
-		multiselect_.insert(selection_);
+	if (is_multiselect_) {
+		if (selection_ != no_selection_index()) {
+			multiselect_.insert(selection_);
+		}
+		last_multiselect_ = selection_;
 	}
 	layout();
 }

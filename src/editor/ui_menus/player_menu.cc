@@ -88,6 +88,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		plr_set_pos_buts_[i] = nullptr;
 		plr_set_tribes_buts_[i] = nullptr;
 	}
+
+	if (parent.egbase().map().get_nrplayers() < 1) {
+		clicked_add_player();
+	}
 	update();
 
 	set_thinks(true);

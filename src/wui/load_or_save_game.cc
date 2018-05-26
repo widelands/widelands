@@ -268,6 +268,7 @@ void LoadOrSaveGame::clicked_delete() {
 		   ngettext("Confirm Deleting File", "Confirm Deleting Files", no_selections), message,
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
+		table_.focus();
 	}
 	if (do_delete) {
 		for (const uint32_t index : selections) {
@@ -292,7 +293,6 @@ void LoadOrSaveGame::clicked_delete() {
 		// Make sure that the game details are updated
 		entry_selected();
 	}
-	// TODO(GunChleoc): When the removal dialog was open, navigation with arrow keys no longer works.
 }
 
 UI::Button* LoadOrSaveGame::delete_button() {

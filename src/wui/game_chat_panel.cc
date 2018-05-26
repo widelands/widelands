@@ -17,7 +17,7 @@
  *
  */
 
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 
 #include <limits>
 #include <string>
@@ -94,7 +94,15 @@ void GameChatPanel::recalculate() {
  * Put the focus on the message input panel.
  */
 void GameChatPanel::focus_edit() {
+	editbox.set_can_focus(true);
 	editbox.focus();
+}
+
+/**
+ * Remove the focus from the message input panel.
+ */
+void GameChatPanel::unfocus_edit() {
+	editbox.set_can_focus(false);
 }
 
 void GameChatPanel::key_enter() {
