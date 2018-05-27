@@ -145,7 +145,7 @@ void EditBox::set_text(const std::string& t) {
  * its end is cut off to fit into the maximum length.
  */
 void EditBox::set_max_length(uint32_t const n) {
-	m_->maxLength = std::min(g_gr->max_texture_size() / text_height(), static_cast<int>(n));
+	m_->maxLength = std::min(g_gr->max_texture_size_for_font_rendering() / text_height(), static_cast<int>(n));
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());

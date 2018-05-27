@@ -183,7 +183,7 @@ void RenderedText::blit_rect(RenderTarget& dst,
 #ifndef NDEBUG
 		const int maximum_size = kMinimumSizeForTextures;
 #else
-		const int maximum_size = g_gr->max_texture_size();
+		const int maximum_size = g_gr->max_texture_size_for_font_rendering();
 #endif
 		const int tile_width = std::min(maximum_size, rect.width());
 		const int tile_height = std::min(maximum_size, rect.height());
