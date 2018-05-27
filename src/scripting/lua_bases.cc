@@ -426,7 +426,8 @@ Section* type_section, Section* size_section) {
 	const uint32_t size = size_section->get_natural(depth.c_str());
 	lua_newtable(L);
 	for (uint32_t i = 0; i < size; i++) {
-		const char* key_key = (depth + "_" + std::to_string(i)).c_str();
+		std::string key_key_str(depth + '_' + std::to_string(i));
+		const char* key_key = key_key_str.c_str();
 
 		if (keys_section->has_val(key_key)) {
 			lua_pushstring(L, keys_section->get_string(key_key));
