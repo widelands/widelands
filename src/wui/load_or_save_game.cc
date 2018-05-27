@@ -317,7 +317,7 @@ void LoadOrSaveGame::fill_table() {
 	Widelands::GamePreloadPacket gpdp;
 
 	for (const std::string& gamefilename : gamefiles) {
-		if (gamefilename == g_fs->fix_cross_file("save/campvis")) {
+		if (gamefilename == kCampvisFile || gamefilename == g_fs->fix_cross_file(kCampvisFile)) {
 			continue;
 		}
 
