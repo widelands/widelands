@@ -325,6 +325,17 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
 	return to_lua<LuaMaps::LuaTerrainDescription>(L, new LuaMaps::LuaTerrainDescription(descr));
 }
 
+/* Helper function for save_campaign_data()
+
+   This function reads the lua table from the stack and saves information about its
+   keys, values and data types and its size to the provided maps.
+   This function is recursive so subtables to any depth can be saved.
+   Each value in the table (including all subtables) is uniquely identified by a key_key.
+   The key_key is used as key in all the map.
+   For the topmost table of size x, the key_keys are called '_0' through '_x-1'.
+   For a subtable of size z at key_key '_y', the subtable's key_keys are called '_y_0' through '_y_z-1'.
+   If a table is an array, the map 'keys' will contain no mappings for the array's key_keys.
+*/
 void save_table_recursively(lua_State* L, std::string depth, std::map<std::string, const char*> *data,
 std::map<std::string, const char*> *keys, std::map<std::string, const char*> *type, std::map<std::string, uint32_t> *size) {
 	lua_pushnil(L);
@@ -332,12 +343,14 @@ std::map<std::string, const char*> *keys, std::map<std::string, const char*> *ty
 	while (lua_next(L, -2) != 0) {
 		std::string key_key = depth + "_" + std::to_string(i);
 
+		// check the value's type
 		const char* type_name = lua_typename(L, lua_type(L, -1));
 		std::string t = std::string(type_name);
 
 		(*type)[key_key] = type_name;
 
 		if (t == "number" || t == "string") {
+			// numbers may be treated like strings here
 			(*data)[key_key] = luaL_checkstring(L, -1);
 		} else if (t == "boolean") {
 			(*data)[key_key] = luaL_checkboolean(L, -1) ? "true" : "false";
@@ -349,13 +362,19 @@ std::map<std::string, const char*> *keys, std::map<std::string, const char*> *ty
 
 		++i;
 
+		// put the key on the stack top
 		lua_pop(L, 1);
 		if (lua_type(L, -1) == LUA_TSTRING) {
+			// this is a table
 			(*keys)[key_key] = luaL_checkstring(L, -1);
 		} else if (lua_type(L, -1) == LUA_TNUMBER) {
+			// this is an array
 			if (i != luaL_checkuint32(L, -1)) {
+				// If we get here, the scripter must have set some array values to nil.
+				// This is forbidden because it causes problems when trying to read the data later.
 				report_error(L, "A campaign data array entry must not be nil!");
 			}
+			// otherwise, this is a normal array, so all is well
 		} else {
 			report_error(L, "A campaign data key may be a string or integer; but not a %s!",
 					lua_typename(L, lua_type(L, -1)));
@@ -421,6 +440,16 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 	return 0;
 }
 
+/* Helper function for read_campaign_data()
+
+   This function reads the campaign data file and re-creates the table the data was created from.
+   This function is recursive so subtables to any depth can be created.
+   For information on section structure and key_keys, see the comment for save_table_recursively().
+   This function first newly creates the table to write data to, and the number of items in the table is read.
+   For each item, the unique key_key is created. If the 'keys' section doesn't contain an entry for that key_key,
+   it must be because this table is supposed to be an array. Then the data type is checked
+   and the key-value pair is written to the table as the correct type.
+*/
 void push_table_recursively(lua_State* L, std::string depth, Section* data_section, Section* keys_section,
 Section* type_section, Section* size_section) {
 	const uint32_t size = size_section->get_natural(depth.c_str());
@@ -429,12 +458,20 @@ Section* type_section, Section* size_section) {
 		std::string key_key_str(depth + '_' + std::to_string(i));
 		const char* key_key = key_key_str.c_str();
 
+		log("Checking whether a key for '%s' (data type is %s) exists ... ", 
+				key_key, type_section->get_string(key_key)); // NOCOM remove this log
 		if (keys_section->has_val(key_key)) {
+			// this is a table
+			log("YES, the key is called '%s'.\n", keys_section->get_string(key_key)); // NOCOM remove this log
 			lua_pushstring(L, keys_section->get_string(key_key));
 		}
 		else {
+			// this must be an array
+			log("NO, [%i] will be used as key.\n", i + 1); // NOCOM remove this log
 			lua_pushinteger(L, i + 1);
 		}
+
+		// check the data type and push the value
 		const std::string type = type_section->get_string(key_key);
 
 		if (type == "boolean") {
@@ -444,10 +481,12 @@ Section* type_section, Section* size_section) {
 		} else if (type == "string") {
 			lua_pushstring(L, data_section->get_string(key_key));
 		} else if (type == "table") {
+			// creates a new (sub-)table at the stacktop, populated with its own key-value-pairs
 			push_table_recursively(L, depth + "_" + std::to_string(i),
 					data_section, keys_section, type_section, size_section);
 		} else {
-			log("Illegal data type %s in campaign data file, interpreting key %s as nil\n",
+			// this code should not be reached unless the user manually edited the .wcd file
+			log("Illegal data type %s in campaign data file, setting key %s to nil\n",
 					type.c_str(), luaL_checkstring(L, -1));
 			lua_pushnil(L);
 		}
