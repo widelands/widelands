@@ -83,26 +83,12 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
-     cancel_(&button_box_,
-             "cancel",
-             0,
-             0,
-             0,
-             0,
-             g_gr->images().get("images/ui_basic/but0.png"),
-             _("Cancel")),
-     apply_(&button_box_,
-            "apply",
-            0,
-            0,
-            0,
-            0,
-            g_gr->images().get("images/ui_basic/but0.png"),
-            _("Apply")),
-     ok_(&button_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")),
+     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Apply")),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
 
      // Tabs
-     tabs_(this, g_gr->images().get("images/ui_basic/but1.png"), UI::TabPanel::Type::kBorder),
+     tabs_(this, UI::TabPanelStyle::kFsMenu),
 
      box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
      box_interface_left_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
@@ -118,19 +104,32 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         100,  // 100 is arbitrary, will be resized in layout().
                         100,  // 100 is arbitrary, will be resized in layout().
                         24,
-                        _("Language")),
+                        _("Language"),
+                        UI::DropdownType::kTextual,
+                        UI::PanelStyle::kFsMenu),
      resolution_dropdown_(&box_interface_left_,
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
                           24,
-                          _("Window Size")),
+                          _("Window Size"),
+                          UI::DropdownType::kTextual,
+                          UI::PanelStyle::kFsMenu),
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
-     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab input"), "", 0),
-     sb_maxfps_(&box_interface_left_, 0, 0, 0, 0, opt.maxfps, 0, 99, _("Maximum FPS:")),
-     translation_info_(&box_interface_, 0, 0, 100, 100),
+     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
+     sb_maxfps_(&box_interface_left_,
+                0,
+                0,
+                0,
+                0,
+                opt.maxfps,
+                0,
+                99,
+                UI::PanelStyle::kFsMenu,
+                _("Maximum FPS:")),
+     translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
 
      // Windows options
      snap_win_overlap_only_(
@@ -147,6 +146,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                    opt.panel_snap_distance,
                    0,
                    99,
+                   UI::PanelStyle::kFsMenu,
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
@@ -158,6 +158,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     opt.border_snap_distance,
                     0,
                     99,
+                    UI::PanelStyle::kFsMenu,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
@@ -175,9 +176,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                   opt.autosave / 60,
                   0,
                   100,
+                  UI::PanelStyle::kFsMenu,
                   _("Save game automatically every:"),
                   UI::SpinBox::Units::kMinutes,
-                  g_gr->images().get("images/ui_basic/but3.png"),
                   UI::SpinBox::Type::kBig),
 
      sb_rolling_autosave_(&box_saving_,
@@ -188,9 +189,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           opt.rolling_autosave,
                           1,
                           20,
+                          UI::PanelStyle::kFsMenu,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
-                          g_gr->images().get("images/ui_basic/but3.png"),
                           UI::SpinBox::Type::kBig),
 
      zip_(&box_saving_,

@@ -38,7 +38,7 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
 	  serial_(economy->serial()),
 	  player_(&economy->owner()),
-     tabpanel_(this, g_gr->images().get("images/ui_basic/but1.png")),
+     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
      ware_panel_(new EconomyOptionsPanel(&tabpanel_, serial_, player_, can_act, Widelands::wwWARE)),
      worker_panel_(new EconomyOptionsPanel(&tabpanel_, serial_, player_, can_act, Widelands::wwWORKER)) {
 	set_center_panel(&tabpanel_);
@@ -145,23 +145,22 @@ EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	add(buttons);
 
-	UI::Button* b =
-	   new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
-	                  g_gr->images().get("images/ui_basic/but4.png"), "-", _("Decrease target"));
+	UI::Button* b = new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
+	                               UI::ButtonStyle::kWuiMenu, "-", _("Decrease target"));
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, -1));
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
 
-	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34,
-	                   g_gr->images().get("images/ui_basic/but4.png"), "+", _("Increase target"));
+	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "+",
+	                   _("Increase target"));
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, 1));
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
 
-	b = new UI::Button(buttons, "reset_target", 0, 0, 34, 34,
-	                   g_gr->images().get("images/ui_basic/but4.png"), "R", _("Reset to default"));
+	b = new UI::Button(
+	   buttons, "reset_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "R", _("Reset to default"));
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::reset_target, this));
 	buttons->add(b);
 }

@@ -26,7 +26,6 @@
 #include "ai/computer_player.h"
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/game_settings.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
@@ -69,21 +68,21 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	   boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
 	d->btnPlayerType =
 	   new UI::Button(this, "player_type", xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
-	                  g_gr->images().get("images/ui_basic/but1.png"), "");
+	                  UI::ButtonStyle::kFsMenuSecondary, "");
 	d->btnPlayerType->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playertype, boost::ref(*this)));
 	d->btnPlayerTeam =
 	   new UI::Button(this, "player_team", xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
-	                  g_gr->images().get("images/ui_basic/but1.png"), "");
+	                  UI::ButtonStyle::kFsMenuSecondary, "");
 	d->btnPlayerTeam->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playerteam, boost::ref(*this)));
 	d->btnPlayerTribe = new UI::Button(this, "player_tribe", xplayertribe, 0, w - xplayertribe,
-	                                   h / 2, g_gr->images().get("images/ui_basic/but1.png"), "");
+	                                   h / 2, UI::ButtonStyle::kFsMenuSecondary, "");
 	d->btnPlayerTribe->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playertribe, boost::ref(*this)));
 	d->btnPlayerInit =
 	   new UI::Button(this, "player_initialization", xplayerinit, h / 2, w - xplayerinit, h / 2,
-	                  g_gr->images().get("images/ui_basic/but1.png"), "", _("Initialization"));
+	                  UI::ButtonStyle::kFsMenuSecondary, "", _("Initialization"));
 	d->btnPlayerInit->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)));
 

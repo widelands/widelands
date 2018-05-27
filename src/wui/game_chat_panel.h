@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_WUI_GAMECHATPANEL_H
-#define WL_WUI_GAMECHATPANEL_H
+#ifndef WL_WUI_GAME_CHAT_PANEL_H
+#define WL_WUI_GAME_CHAT_PANEL_H
 
 #include <memory>
 
@@ -33,7 +33,13 @@ struct ChatProvider;
  * entry field.
  */
 struct GameChatPanel : public UI::Panel {
-	GameChatPanel(UI::Panel*, int32_t x, int32_t y, uint32_t w, uint32_t h, ChatProvider&);
+	GameChatPanel(UI::Panel*,
+	              int32_t x,
+	              int32_t y,
+	              uint32_t w,
+	              uint32_t h,
+	              ChatProvider&,
+	              UI::PanelStyle style);
 
 	// Signal is called when a message has been sent by the user.
 	boost::signals2::signal<void()> sent;
@@ -49,6 +55,7 @@ struct GameChatPanel : public UI::Panel {
 	}
 
 	void focus_edit();
+	void unfocus_edit();
 
 private:
 	void recalculate();
@@ -62,4 +69,4 @@ private:
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 };
 
-#endif  // end of include guard: WL_WUI_GAMECHATPANEL_H
+#endif  // end of include guard: WL_WUI_GAME_CHAT_PANEL_H

@@ -5,6 +5,16 @@ add_subdirectory(text)
 
 # Align and color
 
+
+wl_library(graphic_styles
+  SRCS
+    panel_styles.cc
+    panel_styles.h
+  DEPENDS
+    graphic_color
+    graphic_surface
+)
+
 wl_library(graphic_align
   SRCS
     align.h
@@ -115,7 +125,6 @@ wl_library(graphic_surface
     base_geometry
     base_log
     base_macros
-    graphic
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
@@ -195,7 +204,6 @@ wl_library(graphic_minimap_renderer
     base_geometry
     base_macros
     economy
-    graphic
     graphic_surface
     logic
     wui_mapview_pixelfunctions
@@ -228,7 +236,6 @@ wl_library(graphic_terrain_programs
     base_geometry
     base_log
     base_macros
-    graphic
     graphic_fields_to_draw
     graphic_gl_utils
     graphic_image_io
@@ -330,6 +337,8 @@ wl_library(graphic
     diranimations.h
     graphic.cc
     graphic.h
+    style_manager.cc
+    style_manager.h
     rendertarget.cc
     rendertarget.h
   USES_SDL2
@@ -339,6 +348,7 @@ wl_library(graphic
     base_i18n
     base_log
     base_macros
+    base_scoped_timer
     build_info
     graphic_align
     graphic_build_texture_atlas
@@ -349,6 +359,7 @@ wl_library(graphic
     graphic_image_io
     graphic_playercolor
     graphic_render_queue
+    graphic_styles
     graphic_surface
     graphic_text_layout
     io_filesystem
@@ -356,6 +367,7 @@ wl_library(graphic
     logic_constants
     note_sound
     notifications
+    scripting_lua_interface
     scripting_lua_table
     sound
 )

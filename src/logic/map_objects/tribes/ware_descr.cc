@@ -25,7 +25,6 @@
 
 #include "base/i18n.h"
 #include "graphic/animation.h"
-#include "graphic/graphic.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 

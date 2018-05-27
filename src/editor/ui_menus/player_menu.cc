@@ -47,7 +47,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                  5,
                  20,
                  20,
-                 g_gr->images().get("images/ui_basic/but1.png"),
+                 UI::ButtonStyle::kWuiSecondary,
                  g_gr->images().get("images/ui_basic/scrollbar_up.png"),
                  _("Add player")),
      remove_last_player_(this,
@@ -56,7 +56,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                          5,
                          20,
                          20,
-                         g_gr->images().get("images/ui_basic/but1.png"),
+                         UI::ButtonStyle::kWuiSecondary,
                          g_gr->images().get("images/ui_basic/scrollbar_down.png"),
                          _("Remove last player")),
      tribenames_(Widelands::get_all_tribenames()) {
@@ -87,6 +87,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		plr_names_[i] = nullptr;
 		plr_set_pos_buts_[i] = nullptr;
 		plr_set_tribes_buts_[i] = nullptr;
+	}
+
+	if (parent.egbase().map().get_nrplayers() < 1) {
+		clicked_add_player();
 	}
 	update();
 
@@ -140,8 +144,7 @@ void EditorPlayerMenu::update() {
 	iterate_player_numbers(p, nr_players) {
 		int32_t posx = spacing;
 		if (!plr_names_[p - 1]) {
-			plr_names_[p - 1] = new UI::EditBox(
-			   this, posx, posy, 140, size, 2, g_gr->images().get("images/ui_basic/but0.png"));
+			plr_names_[p - 1] = new UI::EditBox(this, posx, posy, 140, size, 2, UI::PanelStyle::kWui);
 			plr_names_[p - 1]->changed.connect(
 			   boost::bind(&EditorPlayerMenu::name_changed, this, p - 1));
 			posx += 140 + spacing;
@@ -149,9 +152,8 @@ void EditorPlayerMenu::update() {
 		}
 
 		if (!plr_set_tribes_buts_[p - 1]) {
-			plr_set_tribes_buts_[p - 1] =
-			   new UI::Button(this, "tribe", posx, posy, 140, size,
-			                  g_gr->images().get("images/ui_basic/but0.png"), "");
+			plr_set_tribes_buts_[p - 1] = new UI::Button(
+			   this, "tribe", posx, posy, 140, size, UI::ButtonStyle::kWuiSecondary, "");
 			plr_set_tribes_buts_[p - 1]->sigclicked.connect(
 			   boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
 			posx += 140 + spacing;
@@ -174,9 +176,8 @@ void EditorPlayerMenu::update() {
 
 		//  Set Starting pos button.
 		if (!plr_set_pos_buts_[p - 1]) {
-			plr_set_pos_buts_[p - 1] =
-			   new UI::Button(this, "starting_pos", posx, posy, size, size,
-			                  g_gr->images().get("images/ui_basic/but0.png"), nullptr, "");
+			plr_set_pos_buts_[p - 1] = new UI::Button(this, "starting_pos", posx, posy, size, size,
+			                                          UI::ButtonStyle::kWuiSecondary, nullptr, "");
 			plr_set_pos_buts_[p - 1]->sigclicked.connect(
 			   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		}

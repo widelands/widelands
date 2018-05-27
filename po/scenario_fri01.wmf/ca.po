@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
+"POT-Creation-Date: 2018-05-18 18:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo, 2018\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -47,6 +47,8 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Construïu una bòbila, una mina de carbó, una mina de roques, una fossa de "
+"fang i un pou per començar a produir maons."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Gather building materials"
@@ -92,6 +94,8 @@ msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Recordeu que podeu establir les quantitats desitjades per la majoria dels "
+"béns a la configuració de l'economia."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Produce food for the miners"
@@ -106,6 +110,8 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Construïu una taverna, una casa del pescador, un fumador, una masoveria de "
+"baies i una casa del recol·lector de fruita."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance your food economy"
@@ -134,6 +140,8 @@ msgstr "Construïu mines i altres infraestructures mineres"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:77
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
 msgstr ""
+"Construïu una mina de ferro, una farga, una forja i un taller d'armadures "
+"petites."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
@@ -147,7 +155,7 @@ msgstr "Reclutant soldats"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:85
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "Construïu un quarter, una granja de rens i un taller de costura."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Discover more of the island"
@@ -182,6 +190,10 @@ msgid ""
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
 msgstr ""
+"Entreneu un soldat fins al màxim nivell. Els soldats s'entrenen en camps i "
+"palestres d'entrenament. Necessitarem una mina d'or, un taller del sastre "
+"per cosir vestits més resistents i un taller d'armadures gran per obtenir "
+"millors armes i cascos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the enemy!"
@@ -208,6 +220,8 @@ msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
+"Construïu un port, un taller de teixir, unes drassanes i després inicieu una"
+" expedició per marxar abans que la inundació faci desaparèixer l'illa."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:126
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:135
@@ -227,6 +241,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
+"Benvingut a la preciosa illa de Langeness! Sóc en Reebaud, el cabdill "
+"d'aquesta illa prístina."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:132
@@ -260,6 +276,8 @@ msgid ""
 "I have asked Hauke, one of my advisors to oversee the construction of our "
 "settlement."
 msgstr ""
+"He preguntat en Hauke, un dels meus consellers per supervisar la construcció"
+" de l'assentament."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
@@ -271,6 +289,8 @@ msgid ""
 "Greetings, Chieftain Reebaud! I will start with the colonization of the "
 "island straight away."
 msgstr ""
+"Salutacions, cap Reebaud! Començaré amb la colonització de l'illa ara "
+"mateix."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -279,6 +299,9 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"Com tots els frisons, construïm les cases bàsicament amb maons. Els millorem"
+" afegint-hi troncs i granit. Les teulades estan cobertes amb juncs, com bé "
+"ja sabreu. No hi ha res millor per mantenir l'aigua de la pluja fora."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:153
@@ -287,6 +310,9 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
+"Hauríem de començar per la producció de fusta. Els arbres no creixen bé en "
+"aquesta illa; millor construïm almenys dues cases pels guardes forestals i "
+"una pel llenyataire."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:156
@@ -339,6 +365,8 @@ msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr ""
+"Construïu també un pou. L'aigua salada no li agrada a ningú i tampoc serveix"
+" per obtenir argila."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Our first settlement"
@@ -374,6 +402,8 @@ msgid ""
 "You should assign the new reed farm the highest priority for thatch reed in "
 "the construction site window."
 msgstr ""
+"Heu d'assignar una prioritat alta als juncs des de la finestra de "
+"construcció de la nova masoveria de juncs."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
@@ -476,7 +506,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
-msgstr ""
+msgstr "Millorant el subministrament d'aliments"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Feeding the soldiers"
@@ -486,6 +516,7 @@ msgstr "Alimentant els soldats"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:230
 msgid "Well done. The miners are satisfied and have started working again."
 msgstr ""
+"Ben fet. Els miners estan satisfets i han començat a treballar de nou."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:233
@@ -550,6 +581,8 @@ msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
 msgstr ""
+"Les mines funcionen bé. Ara podrem produir totes les eines que necessitem. I"
+" també algunes armes."
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:260
@@ -592,13 +625,13 @@ msgstr "Exploreu l'illa"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Expanding"
-msgstr ""
+msgstr "Expandint-nos"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:279
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
-msgstr ""
+msgstr "El quarter ja funciona i estem reclutant soldats."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:282
@@ -629,7 +662,7 @@ msgstr "Enemic a la vista!"
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:293
 msgid "Another tribe! On OUR island! What are you doing here, invaders?"
-msgstr ""
+msgstr "Una altra tribu! En la nostra illa! Què feu aquí, invasors?"
 
 #. TRANSLATORS: Maukor – enemy sighted. The great storm flood of 1362 was
 #. supposed to be a sign of the victory of the Christian God over the old
@@ -668,7 +701,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:319
 msgid "Frisian fighting"
-msgstr ""
+msgstr "Lluita frisona"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:321
@@ -697,7 +730,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:331
 msgid "Planning a training center"
-msgstr ""
+msgstr "Planificant un centre d'entrenament"
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
@@ -726,6 +759,9 @@ msgid ""
 "Take into account that the useless scraps will clutter up your roads until "
 "they are stored in a warehouse somewhere."
 msgstr ""
+"Quan els soldats s'entrenen en l'ús d'armes, els seu equipament es fa malbé."
+" Tingueu en compte que la ferralla d'aquestes armes pot obstruir els camins "
+"fins que s'emmagatzemin en algun lloc."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:342
@@ -742,10 +778,11 @@ msgstr "Els nostres soldats són forts"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:349
 msgid "We finally have our first fully trained soldier. Let’s attack!"
 msgstr ""
+"Al final hem aconseguit el primer soldat entrenat completament. Ataquem!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "Els nostres soldats són prou forts?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:355
@@ -777,7 +814,7 @@ msgstr "Compte!"
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Not strong enough"
-msgstr ""
+msgstr "No prou forts"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:368
@@ -832,12 +869,12 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:398
 msgid "Storm Flood"
-msgstr ""
+msgstr "La tempesta i la inundació"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "The island is flooding!"
-msgstr ""
+msgstr "L'illa s'està inundant!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:395
@@ -845,6 +882,8 @@ msgid ""
 "His God has granted his wish! The ocean is rising! The island is almost flat"
 " – we will all drown!"
 msgstr ""
+"El seu déu li ha concedit el desig! L'oceà està creixent! L'illa és plana i "
+"ens ofegarem tots!"
 
 #. TRANSLATORS: Hauke – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:401
