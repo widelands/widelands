@@ -183,7 +183,7 @@ void FullscreenMenuMapSelect::clicked_ok() {
 
 bool FullscreenMenuMapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
-	ok_.set_enabled(has_selection);
+	ok_.set_enabled(has_selection && maps_data_.at(table_.get_selected()).nrplayers > 0);
 
 	if (!has_selection) {
 		map_details_.clear();

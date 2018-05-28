@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
+"POT-Creation-Date: 2018-05-14 05:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/widelands/teams/35159/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,17 +20,20 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:27
 msgid "Build a basic economy"
-msgstr ""
+msgstr "Construa uma economia básica"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:29
 msgid "Supply All Basic Materials"
-msgstr ""
+msgstr "Fornecer todos os materiais básicos"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:30
 msgid ""
 "Build a quarry, a reed farm, a clay pit, a well, a charcoal kiln, a brick "
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
+"Construa uma Pedreira, uma Fazenda de Junco, uma Argilaria, um Poço, uma "
+"Casa do carvoeiro, um Forno de Tijolos, e casas para um Lenhador e um "
+"Silvicultor."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand to the south"
@@ -80,6 +86,10 @@ msgid ""
 "clay pit nearby to use as ponds to grow fish in. Only a fisher working at an"
 " aqua farm can fish from these ponds."
 msgstr ""
+"Construa uma Piscicultura para produzir peixes. A Piscicultura necessita dos"
+" buracos deixados por uma Argilaria próxima para usar como lagoas para "
+"produzir os peixes. Apenas um pescador trabalhando em uma Piscicultura pode "
+"pescar dessas lagoas."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Decide whether you want to cooperate with the Empire"
@@ -407,6 +417,10 @@ msgid ""
 "fish in these ponds. He will only need lots of water for the ponds, and "
 "fruit to feed the fish."
 msgstr ""
+"Felizmente, um de nossos pescadores pensou em uma solução. Nossas Argilarias"
+" deixam no solo buracos grandes; um pescador poderia enche-los com água e "
+"criar peixes nessas lagoas. Ele apenas precisa de muita água e frutas para "
+"alimentar os peixes."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "We have fish again"

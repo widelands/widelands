@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_WUI_GAMECHATPANEL_H
-#define WL_WUI_GAMECHATPANEL_H
+#ifndef WL_WUI_GAME_CHAT_PANEL_H
+#define WL_WUI_GAME_CHAT_PANEL_H
 
 #include <memory>
 
@@ -55,6 +55,7 @@ struct GameChatPanel : public UI::Panel {
 	}
 
 	void focus_edit();
+	void unfocus_edit();
 
 private:
 	void recalculate();
@@ -68,4 +69,4 @@ private:
 	std::unique_ptr<Notifications::Subscriber<ChatMessage>> chat_message_subscriber_;
 };
 
-#endif  // end of include guard: WL_WUI_GAMECHATPANEL_H
+#endif  // end of include guard: WL_WUI_GAME_CHAT_PANEL_H

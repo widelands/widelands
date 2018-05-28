@@ -304,15 +304,7 @@ void Map::create_empty_map(const World& world,
 	set_name(name);
 	set_author(author);
 	set_description(description);
-	set_nrplayers(1);
-	// Set first tribe found as the "basic" tribe
-	// <undefined> (as set before) is useless and will lead to a
-	// crash -> Widelands will search for tribe "<undefined>"
-	set_scenario_player_tribe(1, Widelands::get_all_tribenames()[0]);
-	set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
-	set_scenario_player_ai(1, "");
-	set_scenario_player_closeable(1, false);
-
+	set_nrplayers(0);
 	{
 		Field::Terrains default_terrains;
 		default_terrains.d = default_terrain;
@@ -493,7 +485,7 @@ void Map::set_nrplayers(PlayerNumber const nrplayers) {
 		return;
 	}
 
-	starting_pos_.resize(nrplayers, Coords(-1, -1));
+	starting_pos_.resize(nrplayers, Coords::null());
 	scenario_tribes_.resize(nrplayers);
 	scenario_ais_.resize(nrplayers);
 	scenario_closeables_.resize(nrplayers);
