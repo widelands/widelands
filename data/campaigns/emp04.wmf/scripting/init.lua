@@ -20,3 +20,4 @@ include "map:scripting/mission_thread.lua"
 map = wl.Game().map
 mv = wl.ui.MapView()
 sf = map.player_slots[1].starting_field
+
