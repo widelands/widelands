@@ -244,4 +244,3 @@ prefilled_buildings(p2,
    }
    }
 )
-p1.see_all = true
