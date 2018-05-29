@@ -625,12 +625,15 @@ void DefaultAI::late_initialization() {
 		if (bld.needs_seafaring()) {
 			bo.set_is(BuildingAttribute::kNeedsSeafaring);
 		}
+		// some important buildings are identified first the woodcutter/lumberjack
 		if (bh.collects_ware_from_map() == "log") {
 			bo.set_is(BuildingAttribute::kLumberjack);
 		}
+		// quarries
 		if (bh.collects_ware_from_map() == "granite") {
 			bo.set_is(BuildingAttribute::kNeedsRocks);
 		}
+		// wells
 		if (bh.collects_ware_from_map() == "water") {
 			bo.set_is(BuildingAttribute::kWell);
 		}
@@ -638,9 +641,8 @@ void DefaultAI::late_initialization() {
 		if (bh.collects_ware_from_map() == "meat") {
 			bo.set_is(BuildingAttribute::kHunter);
 		}
-
 		// and fishers
-		if (bh.collects_ware_from_map() == "fish") {
+		if (bh.collects_ware_from_map() == "fish" && bo.inputs.empty()) {
 			bo.set_is(BuildingAttribute::kFisher);
 		}
 		if (create_basic_buildings_list &&
@@ -2892,7 +2894,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							           std::abs(management_data.get_military_number_at(102)) / 5;
 						} else {
 							// leave some free space between them
-							prio -= bf->producers_nearby.at(bo.outputs.at(0)) *
+							prio -= bf->collecting_producers_nearby.at(bo.collected_map_resource) *
 							        std::abs(management_data.get_military_number_at(108)) / 5;
 						}
 
@@ -2900,9 +2902,11 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						    bf->water_nearby) {  // not close to water
 							prio -= std::abs(management_data.get_military_number_at(103)) / 5;
 						}
-
+						// NOCOM the following limitation is only true for space consumers placing immovables (seeds, ponds, etc.) with bad growth propability on mountains
+						// NOCOM in contrary for farms or claypits it is a good strategy to place them in the vicinity of mountains
+						// NOCOM currently only trees don't like mountains so we should assign this malus to the ranger only
 						if (bo.is(BuildingAttribute::kSpaceConsumer) &&
-						    bf->unowned_mines_spots_nearby) {  // not close to mountains
+						    bf->unowned_mines_spots_nearby) {  // not close to mountains 
 							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
