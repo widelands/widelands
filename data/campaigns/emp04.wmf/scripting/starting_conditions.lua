@@ -1,7 +1,7 @@
 -- =======================================================================
 --                                 Player 3
 -- =======================================================================
-
+-- AI for P3 is set to "empty" therefore we place the buildings and the roads and let the economy flow a bit
 field_well = map:get_field(17, 182)
 place_building_in_region(p3, "empire_well", {field_well})
 
@@ -18,7 +18,10 @@ place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {worke
    r2 = p3:place_road(field_mill.immovable.flag, "tr", "r", true)
    r3 = p3:place_road(field_mill.immovable.flag, "l", "tl", "tr", true)
    r4 = p3:place_road(field_mill.immovable.flag, "br", "r", true)
+
 p3:forbid_buildings("all")
+local eco = field_warehouse.brn.immovable.economy
+eco:set_ware_target_quantity("beer", 180)
 
 -- =======================================================================
 --                                 Player 1

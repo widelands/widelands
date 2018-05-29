@@ -24,7 +24,7 @@ function dismantle()
    p1:allow_buildings("all")
    p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum"}
    o.done = true
-   
+
    campaign_message_box(amalea_3)
    run(clear_roads)
    run(quarries_lumberjacks)
