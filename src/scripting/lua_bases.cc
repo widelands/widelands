@@ -336,7 +336,7 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
    For a subtable of size z at key_key '_y', the subtable's key_keys are called '_y_0' through '_y_z-1'.
    If a table is an array, the map 'keys' will contain no mappings for the array's key_keys.
 */
-void save_table_recursively(lua_State* L, std::string depth, std::map<std::string, const char*> *data,
+static void save_table_recursively(lua_State* L, std::string depth, std::map<std::string, const char*> *data,
 std::map<std::string, const char*> *keys, std::map<std::string, const char*> *type, std::map<std::string, uint32_t> *size) {
 	lua_pushnil(L);
 	uint32_t i = 0;
@@ -450,7 +450,7 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
    it must be because this table is supposed to be an array. Then the data type is checked
    and the key-value pair is written to the table as the correct type.
 */
-void push_table_recursively(lua_State* L, std::string depth, Section* data_section, Section* keys_section,
+static void push_table_recursively(lua_State* L, std::string depth, Section* data_section, Section* keys_section,
 Section* type_section, Section* size_section) {
 	const uint32_t size = size_section->get_natural(depth.c_str());
 	lua_newtable(L);
@@ -458,7 +458,7 @@ Section* type_section, Section* size_section) {
 		std::string key_key_str(depth + '_' + std::to_string(i));
 		const char* key_key = key_key_str.c_str();
 
-		log("Checking whether a key for '%s' (data type is %s) exists ... ", 
+		log("Checking whether a key for '%s' (data type is %s) exists ... ",
 				key_key, type_section->get_string(key_key)); // NOCOM remove this log
 		if (keys_section->has_val(key_key)) {
 			// this is a table
