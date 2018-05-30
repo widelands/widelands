@@ -2902,11 +2902,9 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						    bf->water_nearby) {  // not close to water
 							prio -= std::abs(management_data.get_military_number_at(103)) / 5;
 						}
-						// NOCOM the following limitation is only true for space consumers placing immovables (seeds, ponds, etc.) with bad growth propability on mountains
-						// NOCOM in contrary for farms or claypits it is a good strategy to place them in the vicinity of mountains
-						// NOCOM currently only trees don't like mountains so we should assign this malus to the ranger only
+
 						if (bo.is(BuildingAttribute::kSpaceConsumer) &&
-						    bf->unowned_mines_spots_nearby) {  // not close to mountains 
+						    bf->unowned_mines_spots_nearby) {  // not close to mountains
 							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
