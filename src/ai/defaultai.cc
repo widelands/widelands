@@ -2634,11 +2634,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 			if (bo.type == BuildingObserver::Type::kProductionsite) {
 
-				if (bo.collected_map_resource != INVALID_INDEX) {
-					printf ("DEBUG: considering %s at %3dx%3d - %d collecting producers nearby\n",
-					bo.name, bf->coords.x, bf->coords.y, bf->collecting_producers_nearby.at(bo.collected_map_resource));
-					}
-
 				prio += management_data.neuron_pool[44].get_result_safe(bf->military_score_ / 20) / 5;
 
 				// Some productionsites strictly require supporting sites nearby
