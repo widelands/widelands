@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# tamanegi, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-05-18 18:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,229 +20,229 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle the unproductive buildings"
-msgstr ""
+msgstr "非生産的な建物の解体"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid "Dismantle Buildings"
-msgstr ""
+msgstr "建物の解体"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:48
 msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
-msgstr ""
+msgstr "新しい建物を建てるため、生産性の無い小サイズ建物を解体しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:49
 msgid ""
 "Remember to check the messages and the building statistics for unproductive "
 "buildings."
-msgstr ""
+msgstr "メッセージや建物統計の情報を参考にして非生産的な建物を見極めましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 msgid "Clear all unnecessary roads"
-msgstr ""
+msgstr "不必要な道の除去"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:57
 msgid "Clear Road Network"
-msgstr ""
+msgstr "道ネットワークの掃除"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:58
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
-msgstr ""
+msgstr "不要な道を消去し、道ネットワークの混沌を解消する。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Find the construction plans for the farms"
-msgstr ""
+msgstr "農場の設計図の捜索"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Find Farm Construction Plans"
-msgstr ""
+msgstr "農場設計図の捜索"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
-msgstr ""
+msgstr "領土の東にある丘を探索し、農場の設計図面を発見しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "最低３つの木こり小屋と最低２つの採石場の建設"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:75
 msgid "Quarries and Lumberjacks"
-msgstr ""
+msgstr "採石場と木こり小屋"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
-msgstr ""
+msgstr "最低３つの木こり小屋と最低２つの採石場を建設し、建築資材の供給体制を再構築しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Produce fish and rations"
-msgstr ""
+msgstr "魚とレーションの生産"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:84
 msgid "Food Production"
-msgstr ""
+msgstr "食料生産"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
-msgstr ""
+msgstr "魚を見つけて獲りましょう。それから、鉱夫のためにレーションを生産しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:91
 msgid "Replace the old and ineffective forester’s houses"
-msgstr ""
+msgstr "古くて非効率な植樹番小屋の置き換え"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:93
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "新しく２件の植樹番小屋を建設しましょう"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
-msgstr ""
+msgstr "生産性を上げるため、２件の植樹番小屋を新しいものに置き換えましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:100
 msgid "Find the monastery in the north"
-msgstr ""
+msgstr "北にある修道院の捜索"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:102
 msgid "Find the Monastery"
-msgstr ""
+msgstr "修道院の捜索"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:103
 msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
-msgstr ""
+msgstr "小麦加工に関する優れた技術を入手するため、北にある修道院を探しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:109
 msgid "Deal with Julia to get the technology"
-msgstr ""
+msgstr "技術の獲得のためにジュリアを取引を"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:111
 msgid "Diplomacy: Trade or War"
-msgstr ""
+msgstr "外交：交換か戦争か"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:112
 msgid ""
 "Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
-msgstr ""
+msgstr "二つの選択肢：１つは女神のために 35 の小麦と 15 のワインを本拠地に集めること、もう１つは修道院を武力制圧すること。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:118
 msgid "Train at least 3 heroes"
-msgstr ""
+msgstr "最低３人のヒーローを鍛え上げる"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:120
 msgid "Hero Training"
-msgstr ""
+msgstr "ヒーローの訓練"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
 msgid ""
 "Use your resources wisely to train at least three fully promoted heroes."
-msgstr ""
+msgstr "資源をうまく使い、最低３人の完全に鍛え上げられたヒーローを作りましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Produce at least 10 tools"
-msgstr ""
+msgstr "10 以上の道具を生産する"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:129
 msgid "Tool Production"
-msgstr ""
+msgstr "道具製造"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:130
 msgid "Produce at least ten tools to improve your economy."
-msgstr ""
+msgstr "経済の発展のため、最低 10 個の道具を作製しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:131
 msgid ""
 "Remember that you can control the production amount in the economy settings."
-msgstr ""
+msgstr "経済の設定で生産量を調整できることを忘れないようにしましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:137
 msgid "Recruit new soldiers"
-msgstr ""
+msgstr "新兵雇用"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:139
 msgid "New Soldier Recruiting"
-msgstr ""
+msgstr "新兵の雇用"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:140
 msgid "Recruit at least ten new soldiers in your barracks."
-msgstr ""
+msgstr "兵舎で最低 10 人の兵士を新規に雇用しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:141
 msgid "Don’t forget to forge weapons and armor for them."
-msgstr ""
+msgstr "彼らのための武器と防具を忘れずに鍛造しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:147
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "野蛮人を倒しましょう"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:149
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "敵を撃破しましょう"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:150
 msgid "End the Barbarian intrusion into your very own part of the world."
-msgstr ""
+msgstr "この我々の世界に侵入した野蛮人を排除しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:156
 msgid "Build 2 charcoal kiln"
-msgstr ""
+msgstr "２つの炭焼き小屋"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:158
 msgid "Build Two Charcoal Kilns"
-msgstr ""
+msgstr "２つの炭焼き小屋を建設しましょう"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:159
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr ""
+msgstr "鉄の供給体制の補助のため、２つの炭焼き小屋を建てましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:160
 msgid "Remember to ensure a constant log supply for them."
-msgstr ""
+msgstr "彼らへの丸太の安定供給を心がけましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:166
 msgid "Increase your military strength by training your soldiers"
-msgstr ""
+msgstr "兵士を訓練し、軍事力を強化しましょう"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:168
 msgid "Training is Important"
-msgstr ""
+msgstr "訓練は重要"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:169
 msgid "Train your soldiers hard and train them fast."
-msgstr ""
+msgstr "速やかに、厳しく兵士を鍛え上げましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:170
 msgid "You need to increase your military strength."
-msgstr ""
+msgstr "軍事力を増強しなければなりません。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:176
 msgid "Build a training camp and enhance the arena"
-msgstr ""
+msgstr "訓練場を１つ建設し、アリーナを拡張しましょう"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:178
 msgid "More Efficient Training Buildings"
-msgstr ""
+msgstr "より効果的な訓練施設"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:179
 msgid "Build a training camp and enhance your arena to a colosseum."
-msgstr ""
+msgstr "訓練場を１つ建設し、既にあるアリーナをコロシアムに拡張しましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:190
 msgid "Home, Sweet Home"
-msgstr ""
+msgstr "懐かしき我が故郷"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:191
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:202
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:210
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:218
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "ルティウスの日記"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:193
@@ -248,39 +251,40 @@ msgid ""
 " again. I am really looking forward to a walk on our lovely coast and to "
 "hunting in our deep forests."
 msgstr ""
+"我らはついに故郷へとたどり着いた。再び美しいあの国を見れることが嬉しくてしょうがない。ああ、あのきれいな海岸を歩いたり、深い森で狩りをしてみたりする時が待ち遠しい。"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:196
 msgid "I expect that Saledus and Amalea are deeply delighted as well."
-msgstr ""
+msgstr "私はセールダスやアマリアも同じように喜んでいると思っていた。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:201
 msgid "Tools, Tools, Tools"
-msgstr ""
+msgstr "道具、道具、道具"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:204
 msgid ""
 "Praise the gods! We just ensured a constant tool supply. Now we should be "
 "able to expand our economy."
-msgstr ""
+msgstr "おお神よ！やっと道具の供給を確立することができた。これで経済を発展させることができるだろう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:209
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:559
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:605
 msgid "Military Strength"
-msgstr ""
+msgstr "軍事力"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:212
 msgid ""
 "Thank the gods! Now we have everything prepared to fully train our soldiers."
 " We can increase our military strength at last."
-msgstr ""
+msgstr "神よ、感謝します！これで兵士達を完全に鍛え上げる準備が整いました。やっと軍事力を増強できるようになったのです！"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:217
 msgid "The Battle is Won"
-msgstr ""
+msgstr "勝利を収めて"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:220
@@ -290,20 +294,21 @@ msgid ""
 "our victory is only temporary, as this is still just the beginning of the "
 "war. Let’s see what the future still holds for us."
 msgstr ""
+"神々よ、我々はやり遂げました。与えられた全ての試練を突破し、さらには我々の国より野蛮人を排除したのです。しかし、この勝利も一時のものでしかありません。戦争はまだ始まったばかりなのですから。我々を待つ未来が何であれ、力を尽くして乗り越えてみせましょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:222
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "このミッションを達成しました。このままプレイを続けることもできますが、終了して次のミッションに挑むこともできます。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:230
 msgid "Chaos"
-msgstr ""
+msgstr "混沌"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid "Lutius is disappointed"
-msgstr ""
+msgstr "ルティウスは失望しています"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:233
@@ -311,28 +316,28 @@ msgid ""
 "Oh no! Amalea is right. In fact, I can’t see any productivity at all. And "
 "the road network seems to be completely in shambles as well. Who might be "
 "responsible for this chaos?"
-msgstr ""
+msgstr "なんということだ！アマリアが正しかった。ここには何の生産性も見られない。さらに、道路網もめちゃくちゃだ。一体誰がこんなことをしたのだ？"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:238
 msgid "Explanation Needed"
-msgstr ""
+msgstr "説明が必要だ"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:239
 msgid "Lutius greets the official"
-msgstr ""
+msgstr "ルティウスは役人に声をかけました"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:241
 msgid "Ave! Who are you and what happened to our beautiful land?"
-msgstr ""
+msgstr "ごきげんよう！我々の美しい街に一体何が起こってしまったんだ？"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:246
 msgid "Difficult Times"
-msgstr ""
+msgstr "困難の時"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:247
 msgid "Lutius accepts the challenge"
-msgstr ""
+msgstr "ルティウスはなんとかしようと決意しました"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:249
@@ -340,22 +345,22 @@ msgid ""
 "Mayor, we have to thank you for your efforts to safeguard our city. And we "
 "will do our very best to recover from the chaos. But unfortunately, this "
 "seems to be very difficult."
-msgstr ""
+msgstr "市長よ、これまで街を守ってくれたことに感謝する。我々もこの混沌をなんとかするために全力を尽くそう。しかし、これはだいぶ大変そうだな。"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:252
 msgid ""
 "I am really afraid, because we are completely unprepared should the "
 "Barbarians decide to attack us."
-msgstr ""
+msgstr "野蛮人が襲ってこようとしているのに何の準備もできていない、この状況は非常にマズい。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:260
 msgid "Welcome Back"
-msgstr ""
+msgstr "おかえりなさい"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:261
 msgid "A high Fremil official is welcoming you…"
-msgstr ""
+msgstr "フレミルの高官はあなたを歓迎しています…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -363,21 +368,21 @@ msgstr ""
 msgid ""
 "Ave, Sire! The people and me are so glad to see you returning back home. We "
 "really need some good leadership around here."
-msgstr ""
+msgstr "ごきげんよう、ルティウス様！私も人々もあなたの帰還を喜んでいます。我々はリーダーシップのある人物を心待ちにしていたのです。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:265
 msgid ""
 "As you have already noticed, things have gone terribly wrong around here "
 "since you left."
-msgstr ""
+msgstr "もうご覧になったでしょうが、あなたが去った頃くらいから、何もかもがおかしくなってしまったのです。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:270
 msgid "A Long Story"
-msgstr ""
+msgstr "長い話"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:271
 msgid "The official sighs deeply…"
-msgstr ""
+msgstr "高官は深くため息をつきます…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -388,6 +393,7 @@ msgid ""
 "delegated the authority of running the city to his former secretary and "
 "instated him as his surrogate around here."
 msgstr ""
+"ルティウス様、初めから説明いたします。陛下は野蛮人との戦に臨むため、ずいぶん前にフレミルを離れました。陛下はその戦に全ての力を注がねばならないため、街の統括を陛下のかつての秘書官に委任し、陛下の代理人として任命しました。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:275
 msgid ""
@@ -395,6 +401,7 @@ msgid ""
 "his new power. His selfish instincts were as awful as his complete stupidity"
 " and inability to govern the city."
 msgstr ""
+"しかし、これは陛下にとって一、二を争うほどの最悪な決断でした。かの秘書官は賜った力に目が眩んでしまったのです。彼は街を統治する能力も皆無でしたが、その我欲の強さもまた非常に恐ろしいものでした。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:277
 msgid ""
@@ -402,14 +409,15 @@ msgid ""
 "Afterwards, they elected me as mayor of this city. However, recovering from "
 "the chaos seems to be a task too big for my abilities."
 msgstr ""
+"しばらくすると、市民達も問題に気がつき、あの完全無欠の馬鹿を追い出しました。その後、私は市長として選出されたのです。しかし、この混沌をどうにかする任務は私の手に余ります。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:285
 msgid "Amalea Looks Puzzled"
-msgstr ""
+msgstr "アマリアは当惑した様子です"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:286
 msgid "Amalea is doubtful…"
-msgstr ""
+msgstr "アマリアは何かを疑っているようです…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:288
@@ -418,6 +426,7 @@ msgid ""
 "our homeland again. But on the other hand, I have the impression that "
 "something went deeply wrong here."
 msgstr ""
+"ええ、ルティウス！たしかに故郷に帰れたはとっても嬉しいわ。でも、何かここの様子がおかしいようにも感じるの、何かが根本的におかしくなっているような…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:291
@@ -426,14 +435,15 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
+"ざっと街を見渡してみたわ。でもほとんど生産性が見られないの。私たちが留守にしている内に街を統治していた誰かが深い混沌を作ってしまったみたい。どうやったらこれを直せるのかしら？そもそも可能なのかしら？"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:296
 msgid "Amalea Investigates"
-msgstr ""
+msgstr "アマリアの調査"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:297
 msgid "Amalea is nodding thoughtfully…"
-msgstr ""
+msgstr "アマリアは考え込んだ様子で頷きます…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:299
@@ -444,6 +454,7 @@ msgid ""
 " You can hardly find a grain of dust left in there: no wares, no tools, no "
 "workers and no soldiers either."
 msgstr ""
+"ルティウス、私の意見では、今度もまた難しい試練だと思うわ。正直、どうにもならないかもしれないわ。それに、さらに悪いことに、倉庫を見てみたらとっても驚かされたわ。だって何にもなかったんだもの。あなたも見てみる？麦の一粒だって見つけられないと思うわ。物資も無い、道具も無い、職人もいない、おまけに兵士もいない。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:302
@@ -455,6 +466,7 @@ msgid ""
 "fishermen’s houses and the quarries don’t have any resources near them. The "
 "lumberjacks’ houses and the wells seem also to be inefficient or worn out."
 msgstr ""
+"その評判が最悪な秘書官のミスを正すためには、何よりもまず建築資材が必要だわ。私としては、まず非生産的な小サイズの建物を解体して、最低限の建築資材を本拠地に集めるべきだと思うの。今分かる範囲では、全ての漁師小屋と採石場の周囲には何の資源もないみたい。木こり小屋と井戸についても生産性が極端に低かったり、資源が枯渇していたりしているようね。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:305
@@ -464,14 +476,15 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
+"それと、せっかく集めた建築資材を消費しちゃう建物には物資が入らないようにするべきね。それどころか、全ての大サイズの建物の生産活動を停止しちゃってもいいかもしれないわね。物資がそろってくるまでは労働者には休憩をとってもらっても問題ないだろうし。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:312
 msgid "Amalea has Bad News"
-msgstr ""
+msgstr "アマリアが悪い知らせを持ってきました"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:313
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "アマリアが助言します…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:315
@@ -480,6 +493,7 @@ msgid ""
 "can see, our farms aren’t producing anything and we can’t dismantle them. "
 "The only option is to destroy them."
 msgstr ""
+"ねぇ、またこんなひどい知らせを持ってきちゃってごめんね。気づいているかもしれないけど、農場は何も生産できていないし、解体することもできないの。できることは破壊することだけ。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:318
@@ -488,6 +502,7 @@ msgid ""
 "instructions on how to construct and operate farms. Therefore they have zero"
 " productivity and the constructors don’t know how to dismantle them either."
 msgstr ""
+"何でこんなことになっているかと言うと、市民達は農場をどのように作るのか、そしてどのように運営するのか、その方法を失ってしまったらしいの。だから、何も生産できないし、建築者もどう解体すればいいのかわからないの。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:321
@@ -496,28 +511,29 @@ msgid ""
 "operation of farms. One older constructor told me that they might have been "
 "concealed in a cave in the hills east of our border."
 msgstr ""
+"だから農場の建築、運営の方法を回復させなくちゃならないの。それも緊急に。一応情報もあって、古株の建築者の一人が言うには、それが書いてある何かは領土の東の丘にある洞窟に隠してあるらしいの。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:328
 msgid "Amalea Looks Confident"
-msgstr ""
+msgstr "アマリアは誇らしげです"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:329
 msgid "Amalea is more confident"
-msgstr ""
+msgstr "アマリアは自信を深めています"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:331
 msgid ""
 "Lutius, now we are getting somewhere. As we have gained some construction "
 "materials, we can start to rebuild our economy."
-msgstr ""
+msgstr "ルティウス、なんとかなりそうよ。いくらか建築資材も集まったから、経済の再建も始められそうだわ。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:334
 msgid ""
 "First of all, we need more construction materials. So, we should build at "
 "least three lumberjacks’ houses and two quarries."
-msgstr ""
+msgstr "まずは建築資材をもっと集めないと。だから、最低３つの木こり小屋と２つの採石場を建てましょう。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:337
@@ -526,61 +542,62 @@ msgid ""
 " are doing their job, somebody should clear up our road network. They are "
 "leaving us no space to place the buildings that we need."
 msgstr ""
+"あっ、忘れてた、もう一つやらなきゃいけないことがあるんだっけ。建築者が働いている間にでも道路ネットワークの掃除をやっておかなくっちゃ。あれのおかげで必要な建物を建てるスペースも残ってないの。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:344
 msgid "Amalea is Somewhat Relieved"
-msgstr ""
+msgstr "アマリアはほっと息をつく"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:345
 msgid "Amalea is giving a deep sigh…"
-msgstr ""
+msgstr "アマリアは深いため息をつきます…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:347
 msgid ""
 "Praise the gods, Lutius! We have found the plans on how to build and operate"
 " farms."
-msgstr ""
+msgstr "ああ、良かった。ルティウス！農場の建設、運営の方法を記した図面が見つかったわ。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:350
 msgid ""
 "Now we can start building farms to produce the beer which our miners need so"
 " desperately."
-msgstr ""
+msgstr "これで農場を建設して、ビールを生産できるわ。ビールがあれば鉱夫達も満足してくれるでしょう。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:353
 msgid "But I’m afraid that this problem hasn’t been the last in our economy."
-msgstr ""
+msgstr "でも、この経済の問題はこれで最後じゃない気がするのよね……"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:359
 msgid "Amalea has Good News"
-msgstr ""
+msgstr "アマリアは良いしらせがありそうです"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:360
 msgid "Amalea smiles for the first time in weeks…"
-msgstr ""
+msgstr "アマリアは久しぶりに笑顔を浮かべています…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:362
 msgid ""
 "Lutius, well done so far. I just got the news that we have finished the "
 "basic buildings to obtain some construction materials."
-msgstr ""
+msgstr "ルティウス、今のところうまくいってるわ。さっき連絡をもらったんだけど、建築資材を生産する基本的な建物については準備が終わったみたい。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
 msgid ""
 "This is offering us more options to get the shambles in our economy solved."
-msgstr ""
+msgstr "これで、この経済の大問題を解決するために打てる手が増えてくるわ。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:368
 msgid ""
 "I really think we can start to be hopeful about our future now. I pray that "
 "we can make ourselves comfortable in our homeland again."
-msgstr ""
+msgstr "私もやっと未来に希望を抱けるようになってきた。どうかこの故郷で再び快適に過ごせる日が来ますように。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:371
@@ -589,46 +606,47 @@ msgid ""
 "some houses for our fishermen. As all the fish has been caught at our coast,"
 " we should try our luck in the eastern part of our territory."
 msgstr ""
+"でも、まだまだやることは残っているわ。とりあえず、漁師小屋を作るところから始めましょう。海岸の魚は完全に枯渇しているようだから、領土の東側に期待しましょう。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:374
 msgid "After we have managed this, we can start making rations in our tavern."
-msgstr ""
+msgstr "それがうまくいったら、今度は酒場でレーションを作らなきゃ。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:381
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "アマリアは嬉しそうです"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:382
 msgid "Amalea is nodding her head…"
-msgstr ""
+msgstr "アマリアは大きく頷いています…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:384
 msgid ""
 "Well done, well done. Our road network looks a lot more structured than "
 "before."
-msgstr ""
+msgstr "よし、よし。道のネットワークも前よりだいぶマシになったわね。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:387
 msgid "Now we can focus on rebuilding our economy."
-msgstr ""
+msgstr "それじゃあ、経済の再建の方に集中しましょうか。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:393
 msgid "Amalea Shakes Her Head"
-msgstr ""
+msgstr "アマリアは頭を振りました"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:394
 msgid "Amalea is getting fed up with all the problems in this economy…"
-msgstr ""
+msgstr "アマリアはあまりに多いこの経済の問題にうんざりしています……"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:396
 msgid ""
 "For the sake of Neptune, I just discovered another problem! It seems that "
 "really very few things are working as expected in this economy."
-msgstr ""
+msgstr "偉大なるネプチューン様のおかげかしら？また、問題が見つかったわ！この経済の中でまともに動いているものってほとんど存在しないわよね！"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:399
@@ -636,7 +654,7 @@ msgid ""
 "One of our lumberjacks told me that the reproduction of our forests is far "
 "behind his experience and expectations. So, I took a close look at our "
 "foresters’ performance."
-msgstr ""
+msgstr "森の再生が経験や感覚からすると、遅すぎるって木こりの一人が言っていたの。だから、私は植樹番のパフォーマンスを調べてみることにしたの。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:402
@@ -645,6 +663,7 @@ msgid ""
 " seed is degenerated. For this reason, they need much more time than usual "
 "for planting trees."
 msgstr ""
+"それでどうだったと思う？とっても古かったわ。小屋も道具も擦り切れていて、樹木の種すら劣化してたの。だから、彼らが木を植えるのにすごい時間がかかっていてみたい。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:405
@@ -655,14 +674,15 @@ msgid ""
 "houses. Dismantling them is also possible but will not return any wares "
 "because they are so torn."
 msgstr ""
+"もう新しい植樹番小屋を２つ、木こり達の近くに建てるしかないわ。まず新しい植樹番小屋を建てるようにしてね。それから古いのを壊すか、植樹番を古いのから追い出して小屋を変えてもらうようにするといいと思うわ。古い小屋は解体してもいいけど、あれだけくたびれていると何の資源も回収できないと思うわ。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:412
 msgid "Amalea Laughs Sarcastically"
-msgstr ""
+msgstr "アマリアは苦笑いしています"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:413
 msgid "Amalea is laughing sarcastically…"
-msgstr ""
+msgstr "アマリアは皮肉っぽく笑っています…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:415
@@ -670,20 +690,20 @@ msgid ""
 "Well, Lutius, we have just solved another weird behavior in our economy. Now"
 " our lumberjacks should be supplied with enough trees to enhance our "
 "economy."
-msgstr ""
+msgstr "ねぇ、ルティウス。これで私たちの経済の問題がまた一つ解決したわ。木こり達も十分な丸太を供給してくれることでしょう。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:418
 msgid "I am really very curious about what will go wrong next!"
-msgstr ""
+msgstr "でもきっとまだまだ他にも問題があるでしょうね！"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:423
 msgid "Amalea Shrugs"
-msgstr ""
+msgstr "アマリアは肩をすくめています"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:424
 msgid "Amalea is getting used to bad news…"
-msgstr ""
+msgstr "アマリアは悪い知らせに慣れてきたようです…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:426
