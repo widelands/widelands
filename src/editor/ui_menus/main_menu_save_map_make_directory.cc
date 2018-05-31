@@ -67,7 +67,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
 	ok_button_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
 	               boost::ref(*this), UI::Panel::Returncodes::kOk));
-	ok_button_.set_enabled(false);
+	ok_button_.set_enabled(!dirname_.empty());
 	cancel_button_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
 	               boost::ref(*this), UI::Panel::Returncodes::kBack));
