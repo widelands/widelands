@@ -167,6 +167,10 @@ void GameDetails::update(const SavegameData& gamedata) {
 			               as_header_with_content(_("Win Condition:"), gamedata.wincondition, style_))
 			                 .str();
 
+			description = (boost::format("%s%s") % description %
+			               as_header_with_content(_("Filename:"), gamedata.filename, style_))
+			                 .str();
+
 			description = (boost::format("<rt>%s</rt>") % description).str();
 			descr_.set_text(description);
 
