@@ -625,26 +625,6 @@ void DefaultAI::late_initialization() {
 		if (bld.needs_seafaring()) {
 			bo.set_is(BuildingAttribute::kNeedsSeafaring);
 		}
-		// some important buildings are identified first the woodcutter/lumberjack
-		if (bh.collects_ware_from_map() == "log") {
-			bo.set_is(BuildingAttribute::kLumberjack);
-		}
-		// quarries
-		if (bh.collects_ware_from_map() == "granite") {
-			bo.set_is(BuildingAttribute::kNeedsRocks);
-		}
-		// wells
-		if (bh.collects_ware_from_map() == "water") {
-			bo.set_is(BuildingAttribute::kWell);
-		}
-		// here we identify hunters
-		if (bh.collects_ware_from_map() == "meat") {
-			bo.set_is(BuildingAttribute::kHunter);
-		}
-		// and fishers
-		if (bh.collects_ware_from_map() == "fish" && bo.inputs.empty()) {
-			bo.set_is(BuildingAttribute::kFisher);
-		}
 		if (create_basic_buildings_list &&
 		    bh.basic_amount() > 0) {  // This is the very begining of the game
 			assert(persistent_data->remaining_basic_buildings.count(bo.id) == 0);
@@ -805,6 +785,28 @@ void DefaultAI::late_initialization() {
 					bo.critical_building_material.push_back(temp_buildcosts.first);
 				}
 			}
+
+			// some important buildings are identified first the woodcutter/lumberjack
+			if (bh.collects_ware_from_map() == "log") {
+				bo.set_is(BuildingAttribute::kLumberjack);
+			}
+			// quarries
+			if (bh.collects_ware_from_map() == "granite") {
+				bo.set_is(BuildingAttribute::kNeedsRocks);
+			}
+			// wells
+			if (bh.collects_ware_from_map() == "water") {
+				bo.set_is(BuildingAttribute::kWell);
+			}
+			// here we identify hunters
+			if (bh.collects_ware_from_map() == "meat") {
+				bo.set_is(BuildingAttribute::kHunter);
+			}
+			// and fishers
+			if (bh.collects_ware_from_map() == "fish" && bo.inputs.empty()) {
+				bo.set_is(BuildingAttribute::kFisher);
+			}
+
 			continue;
 		}
 
@@ -874,6 +876,7 @@ void DefaultAI::late_initialization() {
 	assert(count_buildings_with_attribute(BuildingAttribute::kLumberjack) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kHunter) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) >= 1);
+	assert(count_buildings_with_attribute(BuildingAttribute::kFisher) >= 1);
 	// If there will be a tribe with more than 3 mines of the same type, just increase the number
 	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) <= 3);
 
