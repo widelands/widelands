@@ -2842,7 +2842,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						for (auto ph : bo.production_hints) {
 							assert(ph != INVALID_INDEX);
 							prio += bf->collecting_producers_nearby.at(ph) * 10;
-							prio -= bf->collecting_producers_nearby.at(ph) * 20;
+							prio -= bf->supporters_nearby.at(ph) * 20;
 						}
 
 						if (bf->enemy_nearby) {
@@ -2883,10 +2883,15 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						if (bo.is(BuildingAttribute::kSpaceConsumer)) {
 							// we dont like trees nearby
+							// NOCOM this means we must have 30 trees in a radius of 6 to get a negative value
+							// NOCOM note: the radius to calculate all nearby values is hardcoded to 6 (kProductionArea)
 							prio += 1 - bf->trees_nearby / 15;
 							// we attempt to cluster space consumers together
+							// NOCOM not sure whther rangers are considered here as well cause they have also the
+							// NOCOM space consumer = true AI hint.
 							prio += bf->space_consumers_nearby * 2;
 							// and be far from rangers
+							// NOCOM as rangers have a very big working area we might be still to close to them
 							prio += 1 -
 							        bf->rangers_nearby *
 							           std::abs(management_data.get_military_number_at(102)) / 5;
@@ -5731,6 +5736,9 @@ DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const W
 			}
 			assert(bo.stocklevel_count < std::numeric_limits<uint32_t>::max());
 		} else if (!bo.outputs.empty()) {
+			// NOCOM from what I understand from the definition of calculate_stocklevel
+			// it is expecting a ware index or a worker index but I believe we are delivering a building index here
+			// might lead to nonsense results. 
 			bo.stocklevel_count = calculate_stocklevel(bo, what);
 		} else {
 			bo.stocklevel_count = 0;
