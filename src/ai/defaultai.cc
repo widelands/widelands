@@ -876,7 +876,7 @@ void DefaultAI::late_initialization() {
 	assert(count_buildings_with_attribute(BuildingAttribute::kLumberjack) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kHunter) == 1);
 	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) >= 1);
-	assert(count_buildings_with_attribute(BuildingAttribute::kFisher) >= 1);
+	assert(count_buildings_with_attribute(BuildingAttribute::kFisher) == 1);
 	// If there will be a tribe with more than 3 mines of the same type, just increase the number
 	assert(count_buildings_with_attribute(BuildingAttribute::kIronMine) <= 3);
 
@@ -2810,8 +2810,124 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 							assert(ph != INVALID_INDEX);
 							prio += bf->collecting_producers_nearby.at(ph) * 5 -
 							        (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 15 -
-							        bf->space_consumers_nearby * 5 - bf->rocks_nearby / 3 +
+							        bf->space_consumers_nearby * std::abs(management_data.get_military_number_at(102)) / 5 - bf->rocks_nearby / 3 +
 							        bf->supporters_nearby.at(ph) * 3;
+						}
+						// don't block port building spots with trees
+						if (bf->unowned_portspace_vicinity_nearby > 0) {
+							prio -= 500;
+						}
+						// frisian claypit and frisian farm
+					} else if (bo.is(BuildingAttribute::kSupportingProducer)) {
+						// we dont like trees nearby
+						prio += 1 - bf->trees_nearby / 3;
+						// and be far from rangers
+						prio += 1 - bf->rangers_nearby *
+							           std::abs(management_data.get_military_number_at(102)) / 5;
+
+						// This is for a special case this is also supporter, it considers
+						// producers nearby
+						for (auto ph : bo.production_hints) {
+							assert(ph != INVALID_INDEX);
+							prio += management_data.neuron_pool[51].get_result_safe(
+						           bf->collecting_producers_nearby.at(ph) * 5, kAbsValue) / 2;
+						}
+						// now we find out if the supporter is needed depending on output stocklevel
+						output_stocklevel = std::numeric_limits<uint32_t>::max();
+						for (auto ph : bo.outputs) {
+							const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph), what);
+							if (res < output_stocklevel) {
+							output_stocklevel = res;
+							}
+						}
+						assert(bo.stocklevel_count < std::numeric_limits<uint32_t>::max());
+
+						// and supported stocklevel
+						const uint32_t supports_stocklevel = (get_stocklevel(bo, gametime));
+
+						if (supports_stocklevel > 50 && output_stocklevel > 50 &&
+						    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
+							continue;
+						}
+
+						if (supports_stocklevel < 40) {
+							prio += 5 *
+							        management_data.neuron_pool[23].get_result_safe(
+							           (40 - supports_stocklevel) / 2, kAbsValue);
+						}
+						if (output_stocklevel < 40) {
+							prio += 5 *
+							        management_data.neuron_pool[23].get_result_safe(
+							           (40 - output_stocklevel) / 2, kAbsValue);
+						}
+						// taking into account the vicinity
+						for (auto ph : bo.production_hints) {
+							assert(ph != INVALID_INDEX);
+							prio += bf->collecting_producers_nearby.at(ph) * 10;
+							prio -= bf->supporters_nearby.at(ph) * 15;
+						}
+
+						if (bf->enemy_nearby) {  // not close to the enemy
+							prio -= 20;
+						}
+
+						// don't block port building spots with immovables
+						if (bo.is(BuildingAttribute::kSpaceConsumer) &&
+						       bf->unowned_portspace_vicinity_nearby > 0) {
+							prio -= 500;
+						}
+
+						if (bo.is(BuildingAttribute::kSpaceConsumer) && bf->water_nearby) {  // not close to water
+							prio -= std::abs(management_data.get_military_number_at(103)) / 5;
+						}
+
+						if (bo.is(BuildingAttribute::kSpaceConsumer) &&
+						    bf->unowned_mines_spots_nearby) {  // not close to mountains
+							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
+						}
+						// frisian berry farm
+					} else if (bo.is(BuildingAttribute::kSpaceConsumer)) {
+						// we dont like trees nearby
+						prio += 1 - bf->trees_nearby / 4;
+						// and be far from rangers
+						prio += 1 - bf->rangers_nearby *
+							           std::abs(management_data.get_military_number_at(102)) / 5;
+
+						// now we find out if the supporter is needed depending on stocklevel
+						const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
+
+						if (current_stocklevel > 50 &&
+						    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
+							continue;
+						}
+
+						if (current_stocklevel < 40) {
+							prio += 5 *
+							        management_data.neuron_pool[23].get_result_safe(
+							           (40 - current_stocklevel) / 2, kAbsValue);
+						}
+						// taking into account the vicinity
+						for (auto ph : bo.production_hints) {
+							assert(ph != INVALID_INDEX);
+							prio += bf->collecting_producers_nearby.at(ph) * 10;
+							prio -= bf->supporters_nearby.at(ph) * 15;
+						}
+
+						if (bf->enemy_nearby) {  // not close to the enemy
+							prio -= 20;
+						}
+
+						// don't block port building spots with immovables
+						if (bf->unowned_portspace_vicinity_nearby > 0) {
+							prio -= 500;
+						}
+
+						if (bf->water_nearby) {  // not close to water
+							prio -= std::abs(management_data.get_military_number_at(103)) / 5;
+						}
+
+						if (bf->unowned_mines_spots_nearby) {  // not close to mountains
+							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
 						}
 
 					} else {  // FISH BREEDERS and GAME KEEPERS
@@ -2860,7 +2976,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 					prio -= (bf->enemy_nearby) * 100;
 					prio -= (expansion_type.get_expansion_type() != ExpansionMode::kEconomy) * 100;
 				} else {  // finally normal productionsites
-					assert(bo.production_hints.empty() || bo.is(BuildingAttribute::kSupportingProducer));
+					assert(bo.production_hints.empty());
 
 					if (bo.new_building == BuildingNecessity::kForced) {
 						prio += 150;
@@ -2881,17 +2997,12 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						assert(!bo.is(BuildingAttribute::kShipyard));
 
-						if (bo.is(BuildingAttribute::kSpaceConsumer)) {
+						if (bo.is(BuildingAttribute::kSpaceConsumer)) { // e.g. farms
 							// we dont like trees nearby
-							// NOCOM this means we must have 30 trees in a radius of 6 to get a negative value
-							// NOCOM note: the radius to calculate all nearby values is hardcoded to 6 (kProductionArea)
 							prio += 1 - bf->trees_nearby / 15;
 							// we attempt to cluster space consumers together
-							// NOCOM not sure whther rangers are considered here as well cause they have also the
-							// NOCOM space consumer = true AI hint.
 							prio += bf->space_consumers_nearby * 2;
 							// and be far from rangers
-							// NOCOM as rangers have a very big working area we might be still to close to them
 							prio += 1 -
 							        bf->rangers_nearby *
 							           std::abs(management_data.get_military_number_at(102)) / 5;
@@ -2910,6 +3021,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						    bf->unowned_mines_spots_nearby) {  // not close to mountains
 							prio -= std::abs(management_data.get_military_number_at(104)) / 5;
 						}
+						if (bo.is(BuildingAttribute::kSpaceConsumer) &&
+						   bf->unowned_portspace_vicinity_nearby > 0) { // do not block Ports
+							prio -= 500;
+						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard
 						assert(bo.total_count() == 0);
@@ -2920,15 +3035,6 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						} else {
 							continue;
 						}
-					}
-
-					// This is for a special case this is also supporter, it considers
-					// producers nearby
-					for (auto ph : bo.production_hints) {
-						assert(ph != INVALID_INDEX);
-						prio += management_data.neuron_pool[51].get_result_safe(
-						           bf->collecting_producers_nearby.at(ph) * 5, kAbsValue) /
-						        2;
 					}
 
 					// This considers supporters nearby
@@ -5736,9 +5842,6 @@ DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const W
 			}
 			assert(bo.stocklevel_count < std::numeric_limits<uint32_t>::max());
 		} else if (!bo.outputs.empty()) {
-			// NOCOM from what I understand from the definition of calculate_stocklevel
-			// it is expecting a ware index or a worker index but I believe we are delivering a building index here
-			// might lead to nonsense results. 
 			bo.stocklevel_count = calculate_stocklevel(bo, what);
 		} else {
 			bo.stocklevel_count = 0;
