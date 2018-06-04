@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "In the temple of Vesta the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
+   return pgettext("building", "In the temple of Vesta, the wares to worship are stored. It is the home of the priestesses and the guards of the goddess.")
 end
 
 function building_helptext_note()
