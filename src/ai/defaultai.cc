@@ -2833,14 +2833,14 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						           bf->collecting_producers_nearby.at(ph) * 5, kAbsValue) / 2;
 						}
 						// now we find out if the supporter is needed depending on output stocklevel
-						output_stocklevel = std::numeric_limits<uint32_t>::max();
+						uint32_t output_stocklevel = std::numeric_limits<uint32_t>::max();
 						for (auto ph : bo.outputs) {
-							const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph), what);
+							const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph));
 							if (res < output_stocklevel) {
 							output_stocklevel = res;
 							}
 						}
-						assert(bo.stocklevel_count < std::numeric_limits<uint32_t>::max());
+						assert(output_stocklevel < std::numeric_limits<uint32_t>::max());
 
 						// and supported stocklevel
 						const uint32_t supports_stocklevel = (get_stocklevel(bo, gametime));
