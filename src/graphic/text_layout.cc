@@ -26,6 +26,7 @@
 #include <boost/format.hpp>
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
@@ -49,7 +50,11 @@ void replace_entities(std::string* text) {
 }
 
 int text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
+	return UI::g_fh1->render(
+	                   as_editorfont(
+	                      text.substr(
+	                         0, g_gr->max_texture_size_for_font_rendering() / text_height() - 1),
+	                      ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->width();
 }
 
@@ -138,6 +143,16 @@ std::string as_aligned(const std::string& txt,
 	f % ptsize;
 	f % clr.hex_value();
 	f % txt;
+	return f.str();
+}
+
+/// Bullet list item
+std::string as_listitem(const std::string& txt, int ptsize, const RGBColor& clr) {
+	static boost::format f("<div width=100%%><div><p><font size=%d "
+	                       "color=%s>•</font></p></div><div><p><space gap=6></p></div><div "
+	                       "width=*><p><font size=%d color=%s>%s<vspace "
+	                       "gap=6></font></p></div></div>");
+	f % ptsize % clr.hex_value() % ptsize % clr.hex_value() % txt;
 	return f.str();
 }
 

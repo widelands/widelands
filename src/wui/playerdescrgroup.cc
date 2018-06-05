@@ -214,11 +214,13 @@ void PlayerDescriptionGroup::enable_player(bool on) {
 		return;
 
 	if (on) {
-		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed)
-			d->settings->next_player_state(d->plnum);
+		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed) {
+			d->settings->set_player_state(d->plnum, PlayerSettings::State::kComputer);
+		}
 	} else {
-		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed)
+		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed) {
 			d->settings->set_player_state(d->plnum, PlayerSettings::State::kClosed);
+		}
 	}
 }
 

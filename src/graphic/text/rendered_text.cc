@@ -180,11 +180,7 @@ void RenderedText::blit_rect(RenderTarget& dst,
 
 	// Draw Solid background Color
 	if (rect.has_background_color()) {
-#ifndef NDEBUG
-		const int maximum_size = kMinimumSizeForTextures;
-#else
-		const int maximum_size = g_gr->max_texture_size();
-#endif
+		const int maximum_size = g_gr->max_texture_size_for_font_rendering();
 		const int tile_width = std::min(maximum_size, rect.width());
 		const int tile_height = std::min(maximum_size, rect.height());
 		for (int tile_x = blit_point.x; tile_x + tile_width <= blit_point.x + rect.width();
