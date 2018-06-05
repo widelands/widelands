@@ -155,7 +155,7 @@ private:
 	/// road immediately and decremented over time.
 	int32_t wallet_;
 
-	/// holds the gametime when busyness_ was last updated
+	/// holds the gametime when wallet_ was last charged
 	uint32_t last_wallet_charge_;
 
 	uint8_t type_;        ///< RoadType, 2 bits used

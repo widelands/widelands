@@ -105,7 +105,10 @@ void Carrier::road_update(Game& game, State& state) {
 	// TODO(unknown): idle animations
 	set_animation(game, descr().get_animation("idle"));
 	state.ivar1 = 1;    //  we are available immediately after an idle phase
-	return skip_act();  //  wait until signal
+	// subtract maintenance cost and check for road demotion
+	road.charge_wallet(game);
+	// if road still promoted then schedule demotion, otherwise go fully idle waiting until signal
+	return road.get_roadtype() == RoadType::kBusy ? schedule_act(game, (road.wallet() + 2) * 500) : skip_act();
 }
 
 /**
