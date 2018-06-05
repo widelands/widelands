@@ -2999,7 +2999,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 
 						if (bo.is(BuildingAttribute::kSpaceConsumer)) { // e.g. farms
 							// we dont like trees nearby
-							prio += 1 - bf->trees_nearby / 15;
+							prio += 1 - bf->trees_nearby / 4;
 							// we attempt to cluster space consumers together
 							prio += bf->space_consumers_nearby * 2;
 							// and be far from rangers
