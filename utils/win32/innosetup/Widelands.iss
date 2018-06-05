@@ -109,7 +109,7 @@ Source: {#BuildFolder}\data\scripting\*;                               DestDir: 
 Source: {#BuildFolder}\data\shaders\*;                                 DestDir: {app}\data\shaders\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\ai\*;                                 DestDir: {app}\data\ai\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#DLLFolder}\libglbinding.dll;                        DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libicuuc58.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libicuuc61.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libbz2-1.dll;                      DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libfreetype-6.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 #if GetEnv("PLATFORM") == "x64"
@@ -119,7 +119,7 @@ Source: {#DLLFolder}\libgcc_s_dw2-1.dll;                DestDir: {app};         
 #endif
 Source: {#DLLFolder}\libglib-2.0-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libharfbuzz-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
-Source: {#DLLFolder}\libicudt58.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libicudt61.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libjpeg-8.dll;                     DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\liblzma-5.dll;                     DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libogg-0.dll;                      DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
