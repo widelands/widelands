@@ -51,7 +51,7 @@ Songset::~Songset() {
  */
 void Songset::add_song(const std::string& filename) {
 	songs_.push_back(filename);
-	current_song_ = songs_.begin();
+	current_song_ = 0;
 }
 
 /** Get a song from the songset. Depending on
@@ -66,14 +66,16 @@ Mix_Music* Songset::get_song() {
 	if (g_sound_handler.get_disable_music() || songs_.empty())
 		return nullptr;
 
-	if (g_sound_handler.random_order_)
-		filename = songs_.at(g_sound_handler.rng_.rand() % songs_.size());
-	else {
-		if (current_song_ == songs_.end())
-			current_song_ = songs_.begin();
-
-		filename = *(current_song_++);
+	if (songs_.size() > 1) {
+		if (g_sound_handler.random_order_) {
+			// exclude current_song from playing two times in a row
+			current_song_ += 1 + g_sound_handler.rng_.rand() % (songs_.size() - 1);
+		} else {
+			++current_song_;
+		}
+		current_song_ = current_song_ % songs_.size();
 	}
+	filename = songs_.at(current_song_);
 
 	// First, close the previous song and remove it from memory
 	if (m_) {
