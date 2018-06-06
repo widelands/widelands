@@ -202,7 +202,7 @@ std::string FileSystem::illegal_filename_tooltip() {
 	const std::string illegal_start(as_listitem(
 	/** TRANSLATORS: Tooltip entry for characters in illegal filenames. %s is a list of illegal
 	 * characters */
-s	   (boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) %
+	   (boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) %
 	    richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR)))
 	      .str(),
 	   UI_FONT_SIZE_MESSAGE));
