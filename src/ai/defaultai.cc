@@ -2833,33 +2833,20 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						           bf->collecting_producers_nearby.at(ph) * 5, kAbsValue) / 2;
 						}
 						// now we find out if the supporter is needed depending on output stocklevel
-						uint32_t output_stocklevel = std::numeric_limits<uint32_t>::max();
-						for (auto ph : bo.outputs) {
-							const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph));
-							if (res < output_stocklevel) {
-							output_stocklevel = res;
-							}
-						}
-						assert(output_stocklevel < std::numeric_limits<uint32_t>::max());
-
 						// and supported stocklevel
-						const uint32_t supports_stocklevel = (get_stocklevel(bo, gametime));
+						const uint32_t combined_stocklevel = (get_stocklevel(bo, gametime));
 
-						if (supports_stocklevel > 50 && output_stocklevel > 50 &&
+						if (combined_stocklevel > 50 &&
 						    persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
 							continue;
 						}
 
-						if (supports_stocklevel < 40) {
+						if (combined_stocklevel < 40) {
 							prio += 5 *
 							        management_data.neuron_pool[23].get_result_safe(
-							           (40 - supports_stocklevel) / 2, kAbsValue);
+							           (40 - combined_stocklevel) / 2, kAbsValue);
 						}
-						if (output_stocklevel < 40) {
-							prio += 5 *
-							        management_data.neuron_pool[23].get_result_safe(
-							           (40 - output_stocklevel) / 2, kAbsValue);
-						}
+
 						// taking into account the vicinity
 						for (auto ph : bo.production_hints) {
 							assert(ph != INVALID_INDEX);
@@ -3037,6 +3024,16 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						}
 					}
 
+					// considering neededness depending on stocklevel
+					const uint32_t current_stocklevel = (get_stocklevel(bo, gametime));
+					if (current_stocklevel > 50 &&
+						persistent_data->remaining_basic_buildings.count(bo.id) == 0) {
+						continue;
+					}
+					if (current_stocklevel < 40) {
+						prio += 5 * management_data.neuron_pool[23].get_result_safe(
+							       (40 - current_stocklevel) / 2, kAbsValue);
+					}
 					// This considers supporters nearby
 					for (auto ph : bo.outputs) {
 						prio += management_data.neuron_pool[52].get_result_safe(
@@ -5836,6 +5833,12 @@ DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const W
 			bo.stocklevel_count = std::numeric_limits<uint32_t>::max();
 			for (auto ph : bo.production_hints) {
 				const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph), what);
+				if (res < bo.stocklevel_count) {
+					bo.stocklevel_count = res;
+				}
+			}
+			if (!bo.outputs.empty()) { // building is a supporting producer
+				res = calculate_stocklevel(bo, what);
 				if (res < bo.stocklevel_count) {
 					bo.stocklevel_count = res;
 				}
