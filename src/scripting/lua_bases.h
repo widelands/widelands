@@ -68,6 +68,8 @@ public:
 	int get_worker_description(lua_State* L);
 	int get_resource_description(lua_State* L);
 	int get_terrain_description(lua_State* L);
+	int save_campaign_data(lua_State* L);
+	int read_campaign_data(lua_State* L);
 
 	/*
 	 * C methods

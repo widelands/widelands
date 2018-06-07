@@ -336,6 +336,21 @@ void Table<void*>::draw(RenderTarget& dst) {
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_ESCAPE:
+			cancel();
+			return true;
+
+		case SDLK_TAB:
+			// Let the panel handle the tab key
+			return get_parent()->handle_key(true, code);
+
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			if (selection_ != no_selection_index()) {
+				double_clicked(selection_);
+			}
+			return true;
+
 		case SDLK_a:
 			if (is_multiselect_ && (code.mod & KMOD_CTRL) && !empty()) {
 				multiselect_.clear();
