@@ -5838,7 +5838,7 @@ DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const W
 				}
 			}
 			if (!bo.outputs.empty()) { // building is a supporting producer
-				res = calculate_stocklevel(bo, what);
+				const uint32_t res = calculate_stocklevel(bo, what);
 				if (res < bo.stocklevel_count) {
 					bo.stocklevel_count = res;
 				}
