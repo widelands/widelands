@@ -22,16 +22,12 @@
 #include <cstdio>
 #include <memory>
 
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/regex.hpp>
-
 #include "base/log.h"
 #include "base/wexception.h"
 #include "io/fileread.h"
 #include "io/streamread.h"
 
 LayeredFileSystem* g_fs;
-
 LayeredFileSystem::LayeredFileSystem() : home_(nullptr) {
 }
 
@@ -39,18 +35,6 @@ LayeredFileSystem::LayeredFileSystem() : home_(nullptr) {
  * Free all sub-filesystems
  */
 LayeredFileSystem::~LayeredFileSystem() {
-}
-
-bool LayeredFileSystem::is_legal_filename(const std::string& filename) {
-	// No potential file separators or other potentially illegal characters
-	// https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247(v=vs.85).aspx
-	// http://www.linfo.org/file_name.html
-	// https://support.apple.com/en-us/HT202808
-	// We can't just regex for word & digit characters here because of non-Latin scripts.
-	boost::regex re(".*[<>:\"|?*/\\\\].*");
-	return !filename.empty() && !boost::starts_with(filename, ".") &&
-	       !boost::starts_with(filename, " ") && !boost::starts_with(filename, "-") &&
-	       !boost::regex_match(filename, re);
 }
 
 /**

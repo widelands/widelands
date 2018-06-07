@@ -264,12 +264,7 @@ protected:
 	/// Throws a TextureTooBig exception if the given dimensions would be bigger than the graphics
 	/// can handle
 	void check_size(int check_w, int check_h) {
-// Test for minimum supported size in debug builds.
-#ifndef NDEBUG
-		const int maximum_size = kMinimumSizeForTextures;
-#else
-		const int maximum_size = g_gr->max_texture_size();
-#endif
+		const int maximum_size = g_gr->max_texture_size_for_font_rendering();
 		if (check_w > maximum_size || check_h > maximum_size) {
 			const std::string error_message =
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
