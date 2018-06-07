@@ -131,6 +131,7 @@ public:
 	/// Given a filename, return the name with any path or extension stripped off.
 	static std::string filename_without_ext(const char* n);
 	static std::string get_homedir();
+	static std::string get_xdgdir();
 
 	virtual unsigned long long disk_space() = 0;
 

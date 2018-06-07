@@ -262,6 +262,51 @@ std::string FileSystem::get_homedir() {
 	return homedir;
 }
 
+std::string FileSystem::get_xdgdir() {
+	std::string xdgdir;
+#ifdef HAS_GETENV
+	if (char const* const h = getenv("HOME")) {
+		if (char const* const x = getenv("XDG_DATA_HOME")) {
+			xdgdir = x;
+			
+			// Unlike the other function, this function returns the program name
+			// with. This is handled in 'src/wlapplication.cc'.
+			xdgdir = xdgdir + "/widelands";
+		}
+		else {
+			// If XDG_DATA_HOME is not set, the default path is used.
+			xdgdir = h;
+			xdgdir = xdgdir + "/.local/share";
+			
+			// Unlike the other function, this function returns the program name
+			// with. This is handled in 'src/wlapplication.cc'.
+			xdgdir = xdgdir + "/widelands";
+		}
+		
+		// Use dotfolder for backwards compatibility if it exists.
+		RealFSImpl dot(h);
+		if (dot.is_directory(".widelands")) {
+			xdgdir = h;
+			
+			// Unlike the other function, this function returns the program name
+			// with. This is handled in 'src/wlapplication.cc'.
+			xdgdir = xdgdir + "/.widelands";
+		}
+	}
+#endif
+
+	if (xdgdir.empty()) {
+		log("\nWARNING: either we can not detect your XDG or home directory "
+		    "or you do not have one! Please contact the developers.\n\n");
+
+		// TODO(unknown): is it really a good idea to set xdgdir to "." then ??
+		log("Instead of your XDG or home directory, '.' will be used.\n\n");
+		xdgdir = "./.widelands";
+	}
+
+	return xdgdir;
+}
+
 /**
  * Split a string into components separated by a certain character.
  *
