@@ -176,7 +176,7 @@ void PlayerDescriptionGroup::refresh() {
 
 			if (settings.scenario) {
 				d->btnPlayerInit->set_title(_("Scenario"));
-				d->btnPlayerInit->set_tooltip(_("Start type is set through the scenario"));
+				d->btnPlayerInit->set_tooltip(_("Start type is set via the scenario"));
 			} else {
 				i18n::Textdomain td("tribes");  // for translated initialisation
 				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
