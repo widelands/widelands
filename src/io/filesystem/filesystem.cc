@@ -299,7 +299,7 @@ std::string FileSystem::get_xdgdir() {
 		log("\nWARNING: either we can not detect your XDG or home directory "
 		    "or you do not have one! Please contact the developers.\n\n");
 
-		// TODO(unknown): is it really a good idea to set xdgdir to "." then ??
+		// TODO(Luki): is it really a good idea to set xdgdir to "." then ??
 		log("Instead of your XDG or home directory, '.' will be used.\n\n");
 		xdgdir = "./.widelands";
 	}
