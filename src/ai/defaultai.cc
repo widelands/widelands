@@ -5788,26 +5788,8 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 	NEVER_HERE();
 }
 
-// counts produced output on stock
-// if multiple outputs, it returns lowest value
-uint32_t DefaultAI::calculate_stocklevel(BuildingObserver& bo, const WareWorker what) {
-	uint32_t count = std::numeric_limits<uint32_t>::max();
-	std::vector<Widelands::DescriptionIndex>* items =
-	   (what == WareWorker::kWare ? &bo.outputs : &bo.positions);
-
-	for (uint32_t m = 0; m < items->size(); ++m) {
-		DescriptionIndex wt(static_cast<size_t>(items->at(m)));
-		const uint32_t stock = calculate_stocklevel(wt, what);
-		if (count > stock) {
-			count = stock;
-		}
-	}
-
-	return count;
-}
 
 // counts produced output on stock
-// if multiple outputs, it returns lowest value
 uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const WareWorker what) {
 	uint32_t count = 0;
 
@@ -5819,16 +5801,15 @@ uint32_t DefaultAI::calculate_stocklevel(Widelands::DescriptionIndex wt, const W
 			count += i->site->get_workers().stock(wt);
 		}
 	}
-
 	return count;
 }
 
 // This is a wrapper function to prevent too frequent recalculation of stocklevel
-// and distinguish if we count stocks for production hint or for outputs of a productionsite
-uint32_t
-DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const WareWorker what) {
+// and distinguish if we count stocks for production hint, for outputs or for workers of a productionsite
+// if multiple outputs, it returns lowest value
+uint32_t DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const WareWorker what) {
 	if (bo.stocklevel_time < gametime - 5 * 1000) {
-		if (!bo.production_hints.empty()) {
+		if (what == WareWorker::kWare && (!bo.production_hints.empty() || !bo.outputs.empty())) {
 			// looking for smallest value
 			bo.stocklevel_count = std::numeric_limits<uint32_t>::max();
 			for (auto ph : bo.production_hints) {
@@ -5837,18 +5818,24 @@ DefaultAI::get_stocklevel(BuildingObserver& bo, const uint32_t gametime, const W
 					bo.stocklevel_count = res;
 				}
 			}
-			if (!bo.outputs.empty()) { // building is a supporting producer
-				const uint32_t res = calculate_stocklevel(bo, what);
+			for (auto ph : bo.outputs) {
+				const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph), what);
 				if (res < bo.stocklevel_count) {
 					bo.stocklevel_count = res;
 				}
 			}
-			assert(bo.stocklevel_count < std::numeric_limits<uint32_t>::max());
-		} else if (!bo.outputs.empty()) {
-			bo.stocklevel_count = calculate_stocklevel(bo, what);
+		} else if (what == WareWorker::kWorker) {
+			bo.stocklevel_count = std::numeric_limits<uint32_t>::max();
+			for (auto ph : bo.positions) {
+				const uint32_t res = calculate_stocklevel(static_cast<size_t>(ph), what);
+				if (res < bo.stocklevel_count) {
+					bo.stocklevel_count = res;
+				}
+			}
 		} else {
 			bo.stocklevel_count = 0;
 		}
+		assert(bo.stocklevel_count < std::numeric_limits<uint32_t>::max());
 		bo.stocklevel_time = gametime;
 	}
 	return bo.stocklevel_count;
