@@ -777,6 +777,8 @@ bool WLApplication::init_settings() {
 	s.get_string("realname");
 	s.get_string("metaserver");
 	s.get_natural("metaserverport");
+	// Undocumented, checkbox appears on "Watch Replay" screen
+	s.get_bool("display_replay_filenames");
 	// KLUDGE!
 
 	long int last_start = s.get_int("last_start", 0);
