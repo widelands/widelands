@@ -806,6 +806,11 @@ void DefaultAI::late_initialization() {
 			if (bh.collects_ware_from_map() == "fish" && bo.inputs.empty()) {
 				bo.set_is(BuildingAttribute::kFisher);
 			}
+			// and collectors
+			if (bh.collects_ware_from_map() == "fruit") {
+				bo.set_is(BuildingAttribute::kNeedsBerry);
+			}
+
 
 			continue;
 		}
@@ -1527,6 +1532,12 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		field.trees_nearby =
 		   map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
 		                       FindImmovableAttribute(tree_attr));
+
+		// Counting bushes nearby
+		int32_t const bush_attr = MapObjectDescr::get_attribute_id("ripe_bush");
+		field.bushes_nearby =
+		   map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
+		                       FindImmovableAttribute(bush_attr));
 	}
 
 	// resetting some values
@@ -2897,7 +2908,7 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						for (auto ph : bo.production_hints) {
 							assert(ph != INVALID_INDEX);
 							prio += bf->collecting_producers_nearby.at(ph) * 10;
-							prio -= bf->supporters_nearby.at(ph) * 15;
+							prio -= bf->supporters_nearby.at(ph) * 8;
 						}
 
 						if (bf->enemy_nearby) {  // not close to the enemy
@@ -3011,6 +3022,10 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						if (bo.is(BuildingAttribute::kSpaceConsumer) &&
 						   bf->unowned_portspace_vicinity_nearby > 0) { // do not block Ports
 							prio -= 500;
+						}
+						if (bo.is(BuildingAttribute::kNeedsBerry) {
+						prio += std::abs(management_data.get_military_number_at(26)) *
+					        bf->bushes_nearby / 12;
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
 						// for now AI builds only one shipyard

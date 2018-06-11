@@ -300,6 +300,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      unowned_mines_spots_nearby(0),
      unowned_iron_mines_nearby(false),
      trees_nearby(0),
+     bushes_nearby(0),
      // explanation of starting values
      // this is done to save some work for AI (CPU utilization)
      // base rules are:
@@ -337,14 +338,6 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      inland(false),
      local_soldier_capacity(0),
      is_militarysite(false) {
-}
-
-uint16_t BuildableField::count_producers_nearby(std::vector<uint8_t>& outputs) {
-	uint16_t count = 0;
-	for (auto output : outputs) {
-		count += producers_nearby.at(output);
-	}
-	return count;
 }
 
 MineableField::MineableField(const Widelands::FCoords& fc)
