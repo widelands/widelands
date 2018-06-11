@@ -105,6 +105,6 @@ void RNG::write_state(StreamWrite& sw) {
 }
 
 std::string generate_random_uuid() {
-	static boost::uuids::random_generator gen = boost::uuids::random_generator();
+	static boost::uuids::random_generator gen;
 	return boost::uuids::to_string(gen());
 }
