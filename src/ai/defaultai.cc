@@ -3023,8 +3023,8 @@ bool DefaultAI::construct_building(uint32_t gametime) {
 						   bf->unowned_portspace_vicinity_nearby > 0) { // do not block Ports
 							prio -= 500;
 						}
-						if (bo.is(BuildingAttribute::kNeedsBerry) {
-						prio += std::abs(management_data.get_military_number_at(26)) *
+						if (bo.is(BuildingAttribute::kNeedsBerry)) {
+						prio += std::abs(management_data.get_military_number_at(13)) *
 					        bf->bushes_nearby / 12;
 						}
 					} else if (bo.is(BuildingAttribute::kShipyard)) {
