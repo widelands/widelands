@@ -60,7 +60,7 @@ protected:
 private:
 	void layout() override;
 
-	void select_map();
+	bool select_map();
 	void win_condition_selected() override;
 	void set_scenario_values();
 	void switch_to_position(uint8_t);
