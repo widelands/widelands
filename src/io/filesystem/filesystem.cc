@@ -268,7 +268,7 @@ std::string FileSystem::get_xdgdir() {
 	if (char const* const h = getenv("HOME")) {
 		if (char const* const x = getenv("XDG_DATA_HOME")) {
 			xdgdir = x;
-			
+
 			// Unlike the other function, this function returns the program name
 			// with. This is handled in 'src/wlapplication.cc'.
 			xdgdir = xdgdir + "/widelands";
@@ -277,17 +277,17 @@ std::string FileSystem::get_xdgdir() {
 			// If XDG_DATA_HOME is not set, the default path is used.
 			xdgdir = h;
 			xdgdir = xdgdir + "/.local/share";
-			
+
 			// Unlike the other function, this function returns the program name
 			// with. This is handled in 'src/wlapplication.cc'.
 			xdgdir = xdgdir + "/widelands";
 		}
-		
+
 		// Use dotfolder for backwards compatibility if it exists.
 		RealFSImpl dot(h);
 		if (dot.is_directory(".widelands")) {
 			xdgdir = h;
-			
+
 			// Unlike the other function, this function returns the program name
 			// with. This is handled in 'src/wlapplication.cc'.
 			xdgdir = xdgdir + "/.widelands";
