@@ -13,13 +13,11 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 2,
       log = 1,
-      thatch_reed = 3
+      thatch_reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 2,
-      granite = 1,
-      log = 1,
-      thatch_reed = 1
+      granite = 1
    },
 
    animations = {

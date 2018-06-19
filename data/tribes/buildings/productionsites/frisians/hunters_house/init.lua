@@ -11,7 +11,6 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 1,
-      granite = 1,
       log = 1,
       thatch_reed = 1
    },
@@ -33,6 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "meat",
       prohibited_till = 480
    },
 
@@ -41,7 +41,8 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "meat"
+      "meat",
+      "fur"
    },
 
    programs = {
@@ -50,7 +51,12 @@ tribes:new_productionsite_type {
          descname = _"hunting",
          actions = {
             "sleep=35000",
-            "worker=hunt"
+            "worker=hunt",
+            "sleep=35000",
+            "worker=hunt",
+            "sleep=35000",
+            "worker=hunt",
+            "produce=fur"
          }
       },
    },

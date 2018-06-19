@@ -169,9 +169,9 @@ public:
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
+	const EditorGameBase& egbase_;
 
 private:
-	const EditorGameBase& egbase_;
 	bool buildable_;     // the player can build this himself
 	bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;

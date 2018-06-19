@@ -52,18 +52,6 @@ struct BuildingHints {
 		return mines_.c_str();
 	}
 
-	bool is_logproducer() const {
-		return log_producer_;
-	}
-
-	bool is_graniteproducer() const {
-		return granite_producer_;
-	}
-
-	bool mines_water() const {
-		return mines_water_;
-	}
-
 	bool get_needs_water() const {
 		return needs_water_;
 	}
@@ -93,6 +81,10 @@ struct BuildingHints {
 		return shipyard_;
 	}
 
+	const std::string& collects_ware_from_map() const {
+		return collects_ware_from_map_;
+	}
+
 	uint32_t get_prohibited_till() const {
 		return prohibited_till_;
 	}
@@ -116,25 +108,23 @@ struct BuildingHints {
 	uint8_t trainingsites_max_percent() const;
 
 private:
-	std::string mines_;
-	bool log_producer_;
-	bool granite_producer_;
-	bool needs_water_;
-	bool mines_water_;
-	bool recruitment_;
-	bool space_consumer_;
-	bool expansion_;
-	bool fighting_;
-	bool mountain_conqueror_;
-	bool shipyard_;
-	int32_t prohibited_till_;
-	uint32_t basic_amount_;
-	int32_t forced_after_;
-	int8_t mines_percent_;
-	int16_t very_weak_ai_limit_;
-	int16_t weak_ai_limit_;
-	int16_t normal_ai_limit_;
-	bool requires_supporters_;
+	const std::string mines_;
+	const bool needs_water_;
+	const bool recruitment_;
+	const bool space_consumer_;
+	const bool expansion_;
+	const bool fighting_;
+	const bool mountain_conqueror_;
+	const bool shipyard_;
+	const std::string collects_ware_from_map_;
+	const int32_t prohibited_till_;
+	const uint32_t basic_amount_;
+	const int32_t forced_after_;
+	const int8_t mines_percent_;
+	const int16_t very_weak_ai_limit_;
+	const int16_t weak_ai_limit_;
+	const int16_t normal_ai_limit_;
+	const bool requires_supporters_;
 	int trainingsites_max_percent_;
 	std::set<std::string> supported_production_;
 
