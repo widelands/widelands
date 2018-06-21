@@ -30,6 +30,7 @@ print_help () {
     echo " "
     echo "-h or --help          Print this help."
     echo " "
+    echo "--with-xdg            Enable support for the XDG Base Directory Specification."
     echo " "
     echo "Omission options:"
     echo " "
@@ -77,6 +78,7 @@ BUILD_TRANSLATIONS="ON"
 BUILD_TYPE="Debug"
 USE_ASAN="ON"
 COMPILER="default"
+USE_XDG="OFF"
 while [ "$1" != "" ]; do
   if [ "$1" = "--no-website" -o "$1" = "-w" ]; then
     BUILD_WEBSITE="OFF"
@@ -87,6 +89,8 @@ while [ "$1" != "" ]; do
     BUILD_TRANSLATIONS="OFF"
   elif [ "$1" = "--no-asan" -o "$1" = "-a" ]; then
     USE_ASAN="OFF"
+  elif [ "$1" = "--with-xdg" ]; then
+    USE_XDG="ON"
   elif [ "$1" = "--gcc" ]; then
     if [ -f /usr/bin/gcc -a /usr/bin/g++ ]; then
       export CC=/usr/bin/gcc
@@ -135,6 +139,16 @@ if [ $USE_ASAN = "ON" ]; then
   echo "You can use -a or --no-asan to switch it off."
 else
   echo "Will build without AddressSanitizer."
+fi
+if [ $USE_XDG = "ON" ]; then
+  echo " "
+  echo "Basic XDG Base Directory Specification will be used on Linux"
+  echo "if no existing \$HOME/.widelands folder is found."
+  echo "The widelands user data can be found in \$XDG_DATA_HOME/widelands"
+  echo "and defaults to \$HOME/.local/share/widelands."
+  echo "See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+  echo "for more information."
+  echo " "
 fi
 echo " "
 echo "###########################################################"
@@ -194,9 +208,9 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
   # Compile Widelands
   compile_widelands () {
     if [ $buildtool = "ninja" ] || [ $buildtool = "ninja-build" ] ; then
-      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN
+      cmake -G Ninja .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
     else
-      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN
+      cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN -DUSE_XDG=$USE_XDG
     fi
 
     $buildtool
