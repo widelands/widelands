@@ -54,6 +54,10 @@ const std::string kAutosavePrefix = "wl_autosave";
 // Default autosave interval in minutes
 constexpr int kDefaultAutosaveInterval = 15;
 
+// Filesystem names for campaign data
+const std::string kCampaignDataDir = "campaigns";
+const std::string kCampaignDataExtension = ".wcd";
+
 /// Filesystem names for screenshots
 const std::string kScreenshotsDir = "screenshots";
 

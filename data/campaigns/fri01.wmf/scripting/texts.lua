@@ -163,7 +163,7 @@ intro_4 = {
       _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick kiln out of granite and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don’t see any here. Perhaps these hills contain enough stones to mine some granite.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 4
-      _([[Clay is easy to make: A brickmaker working at a clay pit will simply dig up some earth and mix it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
+      _([[Clay is easy to make: A clay digger working at a clay pit will simply dig up some earth and mix it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 4
       _([[To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. Build a coal mine to make sure we don’t run out. No coal means no bricks, no bricks means no mines, no mines mean no coal… you can see the problem.]])
@@ -321,7 +321,7 @@ training_2 = {
       _([[Soldiers are trained in two steps in defense and health. They get fur garments studded with iron and also gold to cushion blows; and helmets forged from iron, and gold as well, to lengthen their life in battle.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 2
-      _([[They learn to attack with three different swords: The long, curved and double-edged sword. The latter two contain gold, and all of them iron. The advanced soldiers are taught to use two matching swords at once. This makes six steps of attack training.]])
+      _([[They learn to attack with three different swords: The long sword, broadsword and double-edged sword. The latter two contain gold, and all of them iron. The advanced soldiers are taught to use two swords at once: They keep their first double-edged sword, and are given various other swords to wield in their other hand. This makes six steps of attack training.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 2
       _([[We do not train soldiers to evade attacks; a true warrior can block his opponent’s blows with a skillful twist of the sword instead of jumping away like a coward.]])),

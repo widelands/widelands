@@ -34,12 +34,13 @@ port1:set_wares {
    beer = 4,
    ration = 10,
    sword_long = 2,
-   sword_curved = 1
+   sword_broad = 1
 }
 port1:set_workers {
    frisians_woodcutter = 3,
    frisians_forester = 7,
-   frisians_brickmaker = 5,
+   frisians_claydigger = 3,
+   frisians_brickmaker = 2,
    frisians_builder = 10,
    frisians_blacksmith = 2,
    frisians_smelter = 3,

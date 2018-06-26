@@ -77,6 +77,7 @@ public:
 
 	/// Text conventions: Title Case for the 'title'
 	void set_column_title(uint8_t col, const std::string& title);
+	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 
 	void clear();
 	void set_sort_column(uint8_t col);
@@ -102,7 +103,7 @@ public:
 	EntryRecord* find(Entry) const;
 
 	void select(uint32_t);
-	void multiselect(uint32_t row);
+	void multiselect(uint32_t row, bool force = false);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
@@ -191,6 +192,7 @@ public:
 	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
+	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
 	void clear();
@@ -249,7 +251,7 @@ public:
 	EntryRecord* find(const void* entry) const;
 
 	void select(uint32_t);
-	void multiselect(uint32_t row);
+	void multiselect(uint32_t row, bool force = false);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {

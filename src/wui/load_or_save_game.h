@@ -57,7 +57,7 @@ protected:
 	void select_by_name(const std::string& name);
 
 	/// Read savegame/replay files and fill the table and games data.
-	void fill_table();
+	void fill_table(bool show_filenames = false);
 
 	/// The table panel
 	UI::Table<uintptr_t const>& table();
