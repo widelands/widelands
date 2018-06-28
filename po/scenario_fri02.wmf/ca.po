@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-31 10:07+0000\n"
+"POT-Creation-Date: 2018-06-16 18:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo, 2018\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -455,6 +455,9 @@ msgid ""
 "garments to equip new soldiers. Who knows whether we will have to fight "
 "eventually?"
 msgstr ""
+"Tenim una granja de rens? Si no, n'haurem de construir una ara. Necessitem "
+"més rens pels camins més atrafegats i per cosir vestits de pell per equipar "
+"els soldats. Qui sap si haurem de lluitar en algun moment."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:197
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:207
@@ -486,6 +489,10 @@ msgid ""
 "fish in these ponds. He will only need lots of water for the ponds, and "
 "fruit to feed the fish."
 msgstr ""
+"Afortunadament, un dels nostres pescadors ha pensat una solució. Les fosses "
+"d'argila deixen enormes forats al terra; un pescador els podria omplir amb "
+"aigua i fer-hi créixer peixos. Només li caldran molta aigua per als estanys "
+"i fruita per alimentar els peixos."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "We have fish again"
@@ -498,6 +505,9 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
+"Ben fet. Hem construït una granja aqüícola i la producció minera és estable."
+" No obstant, els miners em diuen que continua havent-hi escassedat de "
+"recursos i que les mines poden exhaurir-se aviat."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:213
@@ -506,6 +516,10 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
+"Les mines encara en produiran, però costarà vint vegades més, deu més si es "
+"tracta d'una mina profunda, aconseguir minerals o carbó. Probablement voleu "
+"preparar-vos per l'increment de la demanda de menjar i del temps que es "
+"necessitarà per obtenir minerals i carbó."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:216
 msgid "Recruiting"
@@ -521,6 +535,9 @@ msgid ""
 "You are right – we should build more berry farms, collector’s houses and "
 "taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
+"Teniu raó: hauríem de construir més masoveries de baies, cases de "
+"recol·lectors de fruita, tavernes i una sala de begudes, així com fleques "
+"avançades i cerveseries."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:222
@@ -594,6 +611,9 @@ msgid ""
 "Empire, demand to know who you are and what business you have in these "
 "lands!"
 msgstr ""
+"Forasters! Jo, Murilius, procònsol de les terres del nord, província de "
+"l'Imperi, us demano que expliqueu qui sou i quins assumptes teniu en "
+"aquestes terres!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:251
@@ -603,6 +623,9 @@ msgid ""
 "lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
 "either."
 msgstr ""
+"Salutacions, representant de l'Imperi! Sóc en Reebaud, el cabdill d'aquesta "
+"tribu. Només volem assentar-nos i construir la nostra llar aquí per viure en"
+" pau. No busquem problemes, però tampoc tenim por de lluitar."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -612,6 +635,8 @@ msgid ""
 "inhospitable, hostile tribe of barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"En aquest cas, Reebaud, us he d'informar de la presència d'una tribu hostil "
+"de bàrbars prop d'aquest post avançat de l'Imperi."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:260
@@ -620,6 +645,8 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
+"Si voleu viure pacíficament en aquestes terres, no teniu altra opció que "
+"assistir a l'Imperi i expulsar-los d'aquestes terres."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:266
