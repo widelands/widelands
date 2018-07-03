@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,10 +26,8 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
-#include "logic/map.h"
 #include "logic/map_objects/world/editor_category.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/map_objects/world/world.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
@@ -44,7 +42,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	UI::Window* const w =
 	   new UI::Window(&parent, "field_information", 30, 30, 400, 200, _("Field Information"));
 	UI::MultilineTextarea* const multiline_textarea =
-	   new UI::MultilineTextarea(w, 0, 0, w->get_inner_w(), w->get_inner_h());
+	   new UI::MultilineTextarea(w, 0, 0, w->get_inner_w(), w->get_inner_h(), UI::PanelStyle::kWui);
 
 	Widelands::Field& f = (*map)[center.node];
 

@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Foppe Benedictus <foppe.benedictus@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
+"POT-Creation-Date: 2018-03-10 07:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Foppe Benedictus <foppe.benedictus@gmail.com>, 2018\n"
 "Language-Team: Dutch (https://www.transifex.com/widelands/teams/35159/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,17 +20,19 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle the unproductive buildings"
-msgstr ""
+msgstr "Ontmantel de niet productieve gebouwen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid "Dismantle Buildings"
-msgstr ""
+msgstr "Ontmantel gebouwen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:48
 msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
+"Ontmantel alle niet productieve kleine gebouwen om enkele grondstoffen voor "
+"nieuwe gebouwen te krijgen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:49
 msgid ""
@@ -37,11 +42,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 msgid "Clear all unnecessary roads"
-msgstr ""
+msgstr "Verwijder alle onnodige wegen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:57
 msgid "Clear Road Network"
-msgstr ""
+msgstr "Verwijder wegennet"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:58
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
@@ -63,29 +68,31 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Bouw 3 houthakkershuizen en 2 steengroeves"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:75
 msgid "Quarries and Lumberjacks"
-msgstr ""
+msgstr "Steengroeves en houthakkershutten"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
 msgstr ""
+"Bouw tenminste drie houthakkershuizen en twee steengroeves om je "
+"bouwmateriaalketen weer op te starten."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Produce fish and rations"
-msgstr ""
+msgstr "Produceer vis en rantsoen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:84
 msgid "Food Production"
-msgstr ""
+msgstr "Voedselproductie"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
-msgstr ""
+msgstr "VInd en vang wat vis. Produceer daarna rantsoen voor je mijnwerkers."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:91
 msgid "Replace the old and ineffective forester’s houses"
@@ -735,11 +742,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:451
 msgid "Amalea Looks Sad"
-msgstr ""
+msgstr "Amelea kijkt treurig"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:452
 msgid "Amalea is really sad…"
-msgstr ""
+msgstr "Amelea kijkt erg treurig..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:454

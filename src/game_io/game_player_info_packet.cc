@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 20;
+constexpr uint16_t kCurrentPacketVersion = 21;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -60,7 +60,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 
 					player->set_ai(fr.c_string());
 					player->read_statistics(fr);
-					player->read_remaining_shipnames(fr);
+					player->read_remaining_shipnames(fr, packet_version);
 
 					player->casualties_ = fr.unsigned_32();
 					player->kills_ = fr.unsigned_32();

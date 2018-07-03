@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
@@ -43,6 +44,16 @@ struct BuildingWindow : public UI::UniqueWindow {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
+protected:
+	// This constructor allows setting a building description for the help button independent of the
+	// base building
+	BuildingWindow(InteractiveGameBase& parent,
+	               UI::UniqueWindow::Registry& reg,
+	               Widelands::Building&,
+	               const Widelands::BuildingDescr&,
+	               bool avoid_fastclick);
+
+public:
 	BuildingWindow(InteractiveGameBase& parent,
 	               UI::UniqueWindow::Registry& reg,
 	               Widelands::Building&,
@@ -93,7 +104,11 @@ private:
 
 	InteractiveGameBase* parent_;
 
+	// The building that this window belongs to
 	Widelands::OPtr<Widelands::Building> building_;
+
+	// The building description that will be used for the help button
+	const Widelands::BuildingDescr& building_descr_for_help_;
 
 	// We require this to unregister overlays when we are closed. Since the
 	// building might have been destroyed by then we have to keep a copy of its

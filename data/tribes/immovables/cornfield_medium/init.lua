@@ -7,7 +7,7 @@ tribes:new_immovable_type {
    descname = pgettext("immovable", "Cornfield (medium)"),
    helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "field" },
+   attributes = { "field", "flowering" },
    programs = {
       program = {
          "animate=idle 50000",

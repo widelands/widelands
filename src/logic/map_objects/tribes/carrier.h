@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,16 +33,10 @@ public:
 	~CarrierDescr() override {
 	}
 
-	Vector2i get_ware_hotspot() const {
-		return ware_hotspot_;
-	}
-
 protected:
 	Bob& create_object() const override;
 
 private:
-	Vector2i ware_hotspot_;
-
 	DISALLOW_COPY_AND_ASSIGN(CarrierDescr);
 };
 
@@ -70,12 +64,6 @@ struct Carrier : public Worker {
 	void log_general_info(const EditorGameBase&) override;
 
 	static Task const taskRoad;
-
-protected:
-	void draw_inner(const EditorGameBase& game,
-	                const Vector2f& point_on_dst,
-	                const float scale,
-	                RenderTarget* dst) const override;
 
 private:
 	void find_pending_ware(Game&);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/portdockwaresdisplay.h"
 #include "wui/waresdisplay.h"
@@ -137,7 +136,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
 	b = new UI::Button(                                                                             \
-	   buttons, #policy, 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),              \
+	   buttons, #policy, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,                                   \
 	   g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
 	b->sigclicked.connect(boost::bind(                                                              \
 	   &WarehouseWaresPanel::set_policy, this, Widelands::Warehouse::StockPolicy::k##policyname)),  \

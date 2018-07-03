@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2017 by the Widelands Development Team
+ * Copyright (C) 2005-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -66,7 +65,7 @@ SoundHandler g_sound_handler;
 */
 SoundHandler::SoundHandler()
    : nosound_(false),
-     lock_audio_disabling_(false),
+     is_backend_disabled_(false),
      disable_music_(false),
      disable_fx_(false),
      music_volume_(MIX_MAX_VOLUME),
@@ -100,10 +99,29 @@ void SoundHandler::init() {
 	const uint16_t bufsize = 1024;
 #endif
 
+	SDL_version sdl_version;
+	SDL_GetVersion(&sdl_version);
+	log("**** SOUND REPORT ****\n");
+	log("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+
+	/// SDL 2.0.6 will crash due to upstream bug:
+	/// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
+	if (sdl_version.major == 2 && sdl_version.minor == 0 && sdl_version.patch == 6) {
+		log("Disabled sound due to a bug in SDL 2.0.6\n");
+		nosound_ = true;
+	}
+
+	SDL_MIXER_VERSION(&sdl_version);
+	log("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+
+	log("**** END SOUND REPORT ****\n");
+
 	if (nosound_) {
 		set_disable_music(true);
 		set_disable_fx(true);
-		lock_audio_disabling_ = true;
+		is_backend_disabled_ = true;
 		return;
 	}
 
@@ -144,7 +162,7 @@ void SoundHandler::initialization_error(const std::string& msg) {
 
 	set_disable_music(true);
 	set_disable_fx(true);
-	lock_audio_disabling_ = true;
+	is_backend_disabled_ = true;
 	return;
 }
 
@@ -225,6 +243,13 @@ void SoundHandler::load_system_sounds() {
 	load_fx_if_needed("sound", "lobby_freshmen", "lobby_freshmen");
 }
 
+/**
+ * Returns 'true' if the playing of sounds is disabled due to sound driver problems.
+ */
+bool SoundHandler::is_backend_disabled() const {
+	return is_backend_disabled_;
+}
+
 /** Load a sound effect. One sound effect can consist of several audio files
  * named EFFECT_XX.ogg, where XX is between 00 and 99.
  *
@@ -269,8 +294,9 @@ void SoundHandler::load_fx_if_needed(const std::string& dir,
  * until the game is finished.
 */
 void SoundHandler::load_one_fx(const std::string& path, const std::string& fx_name) {
-	if (nosound_)
+	if (nosound_ || is_backend_disabled_) {
 		return;
+	}
 
 	FileRead fr;
 	if (!fr.try_open(*g_fs, path)) {
@@ -382,7 +408,7 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 void SoundHandler::play_fx(const std::string& fx_name,
                            int32_t const stereo_pos,
                            uint8_t const priority) {
-	if (nosound_)
+	if (nosound_ || is_backend_disabled_)
 		return;
 
 	assert(stereo_pos >= -1);
@@ -432,7 +458,7 @@ void SoundHandler::play_fx(const std::string& fx_name,
  * finished playing.
 */
 void SoundHandler::register_song(const std::string& dir, const std::string& basename) {
-	if (nosound_)
+	if (nosound_ || is_backend_disabled_)
 		return;
 	assert(g_fs);
 
@@ -461,7 +487,7 @@ void SoundHandler::register_song(const std::string& dir, const std::string& base
  * or \ref change_music() this function will block until the fadeout is complete
 */
 void SoundHandler::start_music(const std::string& songset_name, int32_t fadein_ms) {
-	if (get_disable_music() || nosound_)
+	if (get_disable_music() || nosound_ || is_backend_disabled_)
 		return;
 
 	if (fadein_ms == 0)
@@ -543,7 +569,7 @@ int32_t SoundHandler::get_fx_volume() const {
  * get lost otherwise.
  */
 void SoundHandler::set_disable_music(bool const disable) {
-	if (lock_audio_disabling_ || disable_music_ == disable)
+	if (is_backend_disabled_ || disable_music_ == disable)
 		return;
 
 	if (disable) {
@@ -562,7 +588,7 @@ void SoundHandler::set_disable_music(bool const disable) {
  * get lost otherwise.
 */
 void SoundHandler::set_disable_fx(bool const disable) {
-	if (lock_audio_disabling_)
+	if (is_backend_disabled_)
 		return;
 
 	disable_fx_ = disable;
@@ -578,7 +604,7 @@ void SoundHandler::set_disable_fx(bool const disable) {
  * \param volume The new music volume.
  */
 void SoundHandler::set_music_volume(int32_t volume) {
-	if (!lock_audio_disabling_ && !nosound_) {
+	if (!is_backend_disabled_ && !nosound_) {
 		music_volume_ = volume;
 		Mix_VolumeMusic(volume);
 		g_options.pull_section("global").set_int("music_volume", volume);
@@ -593,7 +619,7 @@ void SoundHandler::set_music_volume(int32_t volume) {
  * \param volume The new music volume.
  */
 void SoundHandler::set_fx_volume(int32_t volume) {
-	if (!lock_audio_disabling_ && !nosound_) {
+	if (!is_backend_disabled_ && !nosound_) {
 		fx_volume_ = volume;
 		Mix_Volume(-1, volume);
 		g_options.pull_section("global").set_int("fx_volume", volume);

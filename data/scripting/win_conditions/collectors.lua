@@ -76,6 +76,23 @@ return {
          "spear_war", "armor_helmet", "armor", "armor_chain", "armor_gilded"
       },
 
+      frisians = {
+         gold = 3,
+         sword_short = 1,
+         sword_long = 3,
+         sword_broad = 7,
+         sword_double = 10,
+         helmet = 3,
+         helmet_golden = 6,
+         fur_garment = 1,
+         fur_garment_studded = 3,
+         fur_garment_golden = 6,
+      },
+      frisians_order = {
+         "gold", "sword_short", "sword_long", "sword_broad", "sword_double",
+         "helmet", "helmet_golden", "fur_garment", "fur_garment_studded", "fur_garment_golden"
+      },
+
       atlanteans = {
          gold = 3,
          trident_light = 2,

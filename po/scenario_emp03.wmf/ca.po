@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -191,7 +191,7 @@ msgstr "Produïu almenys sis lingots d'or per poder colonitzar zones properes."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Barbarians"
-msgstr "Derrota els bàrbars"
+msgstr "Derroteu els bàrbars"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:142
 msgid "Defeat the Enemy"
@@ -664,7 +664,7 @@ msgid ""
 msgstr ""
 "Així que pensem-ho bé. Per teixir tela necessitem llana d'una granja "
 "d'ovelles. La granja d'ovelles necessitarà blat i aigua per funcionar. Així "
-"que busquem espai per construir una granja."
+"que busquem espai per construir una masoveria de blat."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:377
@@ -674,10 +674,10 @@ msgid ""
 "same spot to use our wool for weaving cloth. But for the moment being, let’s"
 " start by producing a reasonable amount of wheat."
 msgstr ""
-"Després de produir prou blat, podem desmantellar la granja i construir una "
-"granja d'ovelles per produir la llana. Després, podríem construir un taller "
-"de teixir al mateix lloc per usar la llana per teixir teles. Però de moment,"
-" comencem produint blat."
+"Després de produir prou blat, podem desmantellar la masoveria de blat i "
+"construir una granja d'ovelles per produir la llana. Després, podríem "
+"construir un taller de teixir al mateix lloc per usar la llana per teixir "
+"teles. Però de moment, comencem produint blat."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:380
@@ -711,7 +711,7 @@ msgid ""
 "Well done so far. We have produced enough wheat. Now dismantle the farm and "
 "build the next building in the production chain."
 msgstr ""
-"Ben fet per ara. Hem produït prou blat. Ara desmantelleu la granja i "
+"Ben fet per ara. Hem produït prou blat. Ara desmantelleu la masoveria i "
 "construïu el proper edifici de la cadena de producció."
 
 #. TRANSLATORS: Amalea

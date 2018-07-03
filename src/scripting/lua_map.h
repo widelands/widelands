@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,6 +98,7 @@ public:
 	int place_immovable(lua_State*);
 	int get_field(lua_State*);
 	int recalculate(lua_State*);
+	int recalculate_seafaring(lua_State*);
 	int set_port_space(lua_State*);
 
 	/*

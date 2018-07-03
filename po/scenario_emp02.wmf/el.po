@@ -2,13 +2,14 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# erimitis, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:17+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-28 02:38+0000\n"
+"Last-Translator: erimitis\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,23 +23,23 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:29
 msgid "Wood Economy"
-msgstr ""
+msgstr "Οικονομία Ξύλου"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:30
 msgid "Build three lumberjack’s houses, a forester’s house and a sawmill."
-msgstr ""
+msgstr "Φτιάξτε τρία σπίτια υλοτόμων, ένα σπίτι δασοκόμου και ένα πριονιστήριο."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:36
 msgid "Build a quarry"
-msgstr ""
+msgstr "Φτιάξτε ένα λατομείο"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:38
 msgid "Quarry"
-msgstr ""
+msgstr "Λατομείο"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:39
 msgid "Build a quarry to the south of your headquarters."
-msgstr ""
+msgstr "Φτιάξτε ένα λατομείο νότια του αρχηγείου σας."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:45
 msgid "Protect your colony"
@@ -142,7 +143,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:97
 msgid "Build a barracks to start training soldiers."
-msgstr ""
+msgstr "Φτιάξτε έναν στρατώνα για έναρξη εκπαίδευσης στρατιωτών."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:98
 msgid ""
@@ -208,7 +209,7 @@ msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr ""
+msgstr "Αλλά μέχρι εκείνη την ημέρα, πολλά χρόνια μπορεί να περάσουν! Για τώρα, πρέπει να συγκεντρωθούμε στο παρόν, και να φτιάξουμε λίγα σπίτια υλοτόμων και ένα πριονιστήριο, για παραγωγή μερικών βασικών οικοδομικών υλικών."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:128
@@ -219,7 +220,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "The Rocks"
-msgstr ""
+msgstr "Οι Βράχοι"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:137

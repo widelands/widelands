@@ -4,13 +4,15 @@
 # 
 # Translators:
 # zecas <jjorge@free.fr>, 2017
+# GunChleoc, 2017
+# Rui <xymarior@yandex.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: zecas <jjorge@free.fr>, 2017\n"
+"Last-Translator: Rui <xymarior@yandex.com>, 2018\n"
 "Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +34,7 @@ msgid ""
 "headquarters."
 msgstr ""
 "Construa um posto avançado no símbolo amarelo ao leste dos seu quartel-"
-"general provisório. "
+"general provisório."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:56
 msgid "Build a quarry"
@@ -220,7 +222,7 @@ msgstr "Recuperar o relicário"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:163
 msgid "Find the Holy Shrine"
-msgstr "Procurar o Santo Relicário "
+msgstr "Procurar o Santo Relicário"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:164
 msgid ""
@@ -657,7 +659,7 @@ msgid ""
 msgstr ""
 "Vamos ver todo o problema. Para tecer precisamos da lã duma ovinocultura. "
 "MAs esta mesmo precisa de trigo e água para se desenvolver. Portanto, "
-"comecemos por achar um grande espaço para construir primeiro uma quinta. "
+"comecemos por achar um grande espaço para construir primeiro uma quinta."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:377
@@ -1126,7 +1128,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:587
 msgid "Unpleasant Discoveries"
-msgstr ""
+msgstr "Descobertas Desagradáveis"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:588
 msgid "Saledus looks very worried…"
@@ -1230,15 +1232,15 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid "Artifact Found"
-msgstr ""
+msgstr "Artefacto Encontrado"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Novo Objetivo"
+msgstr[1] "Novos Objetivos"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -177,8 +177,6 @@ bool InternetGaming::do_login(bool should_relogin) {
 					   "", "", true, _("Users marked with IRC will possibly not react to messages."));
 				}
 
-				// Try to establish a second connection to tell the metaserver about our IPv4 address
-				create_second_connection();
 				return true;
 			} else if (error())
 				return false;
@@ -337,80 +335,6 @@ void InternetGaming::handle_metaserver_communication() {
 	}
 }
 
-void InternetGaming::create_second_connection() {
-	NetAddress addr_net;
-	net->get_remote_address(&addr_net);
-	if (!addr_net.is_ipv6()) {
-		// Primary connection already is IPv4, abort
-		return;
-	}
-
-	// Do real work in thread to reduce freezing of GUI
-	// $this cannot become invalid since it is a global variable
-	// Member variables of $this might change their values but it does not really matter if the
-	// thread fails
-	std::thread([this]() {
-
-		NetAddress addr;
-		if (!NetAddress::resolve_to_v4(&addr, meta_, port_)) {
-			// Could not get the IPv4 address of the metaserver? Strange :-/
-			return;
-		}
-
-		std::unique_ptr<NetClient> tmpNet = NetClient::connect(addr);
-		if (!tmpNet || !tmpNet->is_connected()) {
-			// Connecting by IPv4 doesn't work? Well, nothing to do then
-			return;
-		}
-
-		// Okay, we have a connection. Send the login message and terminate the connection
-		SendPacket s;
-		s.string(IGPCMD_TELL_IP);
-		s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
-		s.string(clientname_);
-		s.string(reg_ ? "" : authenticator_);
-		tmpNet->send(s);
-		if (!reg_) {
-			// Not registered: We are done here
-			return;
-		}
-
-		// Wait for the challenge
-		uint32_t const secs = time(nullptr);
-		try {
-			while (kInternetGamingTimeout > time(nullptr) - secs) {
-				// Check if the connection is still open
-				if (!tmpNet->is_connected()) {
-					return;
-				}
-				// Try to get a packet
-				std::unique_ptr<RecvPacket> packet = tmpNet->try_receive();
-				if (!packet) {
-					continue;
-				}
-				const std::string cmd = packet->string();
-				if (cmd != IGPCMD_PWD_CHALLENGE) {
-					// Wrong command, abort
-					return;
-				}
-				const std::string challenge = packet->string();
-				// Got a challenge. Calculate the response and send it
-				SendPacket s2;
-				s2.string(IGPCMD_PWD_CHALLENGE);
-				s2.string(crypto::sha1(challenge + authenticator_));
-				tmpNet->send(s2);
-				// Our work is done
-				return;
-			}
-		} catch (const std::exception& e) {
-			log("InternetGaming: Error when trying to transmit secondary IP.\n");
-			return;
-		}
-
-		log("InternetGaming: Timeout when trying to transmit secondary IP.\n");
-	}).detach();
-}
-
 /// Handle one packet received from the metaserver.
 void InternetGaming::handle_packet(RecvPacket& packet) {
 	std::string cmd = packet.string();
@@ -555,7 +479,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				InternetGame* ing = new InternetGame();
 				ing->name = packet.string();
 				ing->build_id = packet.string();
-				ing->connectable = str2bool(packet.string());
+				ing->connectable = (packet.string() == INTERNET_GAME_SETUP);
 				gamelist_.push_back(*ing);
 
 				bool found = false;
@@ -606,8 +530,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				inc.build_id = packet.string();
 				inc.game = packet.string();
 				inc.type = packet.string();
-				inc.points = packet.string();
-				if (inc.build_id == "IRC") {
+				if (inc.type == INTERNET_CLIENT_IRC) {
 					irc.push_back(inc);
 					// No "join" or "left" messages for IRC users
 					continue;
@@ -631,7 +554,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			clientlist_.insert(clientlist_.end(), irc.begin(), irc.end());
 
 			for (InternetClient& client : old) {
-				if (client.name.size() && client.build_id != "IRC") {
+				if (client.name.size() && client.type != INTERNET_CLIENT_IRC) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
 				}
@@ -867,17 +790,9 @@ void InternetGaming::send(const std::string& msg) {
 			   _("Message could not be sent: Was this supposed to be a private message?"));
 			return;
 		}
-		std::string recipient = msg.substr(1, space - 1);
-		for (const InternetClient& client : clientlist_) {
-			if (recipient == client.name && client.build_id == "IRC") {
-				format_and_add_chat(
-				   "", "", true, _("Private messages to IRC users are not supported."));
-				return;
-			}
-		}
 
-		s.string(trimmed);    // message
-		s.string(recipient);  // recipient
+		s.string(trimmed);                   // message
+		s.string(msg.substr(1, space - 1));  // recipient
 
 		format_and_add_chat(clientname_, msg.substr(1, space - 1), false, msg.substr(space + 1));
 

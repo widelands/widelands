@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 by the Widelands Development Team
+ * Copyright (C) 2017-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ struct NoteSound {
 	}
 	NoteSound(const std::string& init_fx, uint32_t init_stereo_position, uint8_t init_priority)
 	   : fx(init_fx),
-	     coords(Widelands::Coords(-1, -1)),
+	     coords(Widelands::Coords::null()),
 	     priority(init_priority),
 	     stereo_position(init_stereo_position) {
 	}

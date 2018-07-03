@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 
 #include "base/macros.h"
 #include "graphic/color.h"
-#include "graphic/graphic.h"
+#include "graphic/image.h"
 #include "logic/map_objects/world/resource_description.h"
 #include "logic/widelands.h"
 

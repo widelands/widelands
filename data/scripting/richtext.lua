@@ -516,7 +516,7 @@ end
 --
 --    :arg items:              An array of strings
 --    :arg listtype:           The type of concatenation to use.
---                             Legal values are "&", "and", "or", and ";"
+--                             Legal values are "&", "and", "or", and ","
 --    :arg former_textdomain:  The textdomain to restore after running this function.
 --    :returns: The concatenated list string, using localized concatenation operators.
 --

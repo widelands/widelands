@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	vbox->add_space(PADDING);
 
 	UI::Box* hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	players_table_ = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0);
+	players_table_ = new UI::Table<uintptr_t const>(hbox1, 0, 0, 0, 0, UI::PanelStyle::kWui);
 	players_table_->fit_height(game_.player_manager()->get_players_end_status().size());
 	hbox1->add_space(PADDING);
 	hbox1->add(players_table_);
@@ -63,7 +63,8 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	info_box->add(info_area_label_);
 	info_area_ = new UI::MultilineTextarea(
 	   info_box, 0, 0, 130,
-	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - PADDING), "");
+	   std::max(130, players_table_->get_h() - info_area_label_->get_h() - PADDING),
+	   UI::PanelStyle::kWui, "");
 	info_box->add(info_area_, UI::Box::Resizing::kFullSize);
 	info_box->add_space(PADDING);
 	hbox1->add(info_box);
@@ -82,14 +83,14 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 
 	bottom_box->add_inf_space();
 
-	continue_button_ = new UI::Button(
-	   bottom_box, "continue_button", 0, 0, 35, 35, g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/ui_basic/continue.png"), _("Continue playing"));
+	continue_button_ =
+	   new UI::Button(bottom_box, "continue_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
+	                  g_gr->images().get("images/ui_basic/continue.png"), _("Continue playing"));
 	bottom_box->add(continue_button_);
 	bottom_box->add_space(PADDING);
-	stop_button_ = new UI::Button(
-	   bottom_box, "stop_button", 0, 0, 35, 35, g_gr->images().get("images/ui_basic/but4.png"),
-	   g_gr->images().get("images/wui/menus/menu_exit_game.png"), _("Exit Game"));
+	stop_button_ =
+	   new UI::Button(bottom_box, "stop_button", 0, 0, 35, 35, UI::ButtonStyle::kWuiMenu,
+	                  g_gr->images().get("images/wui/menus/menu_exit_game.png"), _("Exit Game"));
 	bottom_box->add(stop_button_);
 	bottom_box->add_space(PADDING);
 
@@ -156,7 +157,9 @@ void GameSummaryScreen::fill_data() {
 		te.set_picture(0, player_image, p->get_name());
 		// Team
 		std::string teastr_ =
-		   (boost::format("%|1$u|") % static_cast<unsigned int>(p->team_number())).str();
+		   p->team_number() == 0 ?
+		      "—" :
+		      (boost::format("%|1$u|") % static_cast<unsigned int>(p->team_number())).str();
 		te.set_string(1, teastr_);
 		// Status
 		std::string stat_str;

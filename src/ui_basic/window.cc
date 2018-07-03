@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
@@ -87,11 +88,11 @@ Window::Window(Panel* const parent,
      drag_start_win_y_(0),
      drag_start_mouse_x_(0),
      drag_start_mouse_y_(0),
-     pic_lborder_(g_gr->images().get("images/wui/window_left.png")),
-     pic_rborder_(g_gr->images().get("images/wui/window_right.png")),
-     pic_top_(g_gr->images().get("images/wui/window_top.png")),
-     pic_bottom_(g_gr->images().get("images/wui/window_bottom.png")),
-     pic_background_(g_gr->images().get("images/wui/window_background.png")),
+     pic_lborder_(g_gr->images().get(kTemplateDir + "wui/left.png")),
+     pic_rborder_(g_gr->images().get(kTemplateDir + "wui/right.png")),
+     pic_top_(g_gr->images().get(kTemplateDir + "wui/top.png")),
+     pic_bottom_(g_gr->images().get(kTemplateDir + "wui/bottom.png")),
+     pic_background_(g_gr->images().get(kTemplateDir + "wui/background.png")),
      center_panel_(nullptr),
      fastclick_panel_(nullptr) {
 	set_title(title);

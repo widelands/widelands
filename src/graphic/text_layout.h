@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,6 +83,10 @@ std::string as_aligned(const std::string& txt,
                        int ptsize = UI_FONT_SIZE_SMALL,
                        const RGBColor& clr = UI_FONT_CLR_FG,
                        UI::FontSet::Face face = UI::FontSet::Face::kSans);
+
+std::string as_listitem(const std::string&,
+                        int ptsize = UI_FONT_SIZE_SMALL,
+                        const RGBColor& clr = UI_FONT_CLR_FG);
 
 std::string as_richtext(const std::string&);
 std::string as_tooltip(const std::string&);
