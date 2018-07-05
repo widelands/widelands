@@ -502,6 +502,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_setting = settings.players[id_];
 		if (settings.scenario) {
 			init_dropdown_.set_label(_("Scenario"));
+			init_dropdown_.set_tooltip(_("Start type is set via the scenario"));
 		} else if (settings.savegame) {
 			/** Translators: This is a game type */
 			init_dropdown_.set_label(_("Saved Game"));

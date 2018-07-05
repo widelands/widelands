@@ -25,7 +25,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      graniteproducer = true
+      collects_ware_from_map = "granite"
    },
 
    working_positions = {

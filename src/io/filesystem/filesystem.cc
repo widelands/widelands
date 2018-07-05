@@ -32,6 +32,9 @@
 #include <string>
 #include <vector>
 
+// We have to add Boost to this block to make codecheck happy
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/format.hpp>
 #ifdef _WIN32
 #include <direct.h>
 #include <io.h>
@@ -42,9 +45,6 @@
 #endif
 #include <sys/stat.h>
 #include <unistd.h>
-
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -65,13 +65,11 @@
 #define PATH_MAX MAX_PATH
 #endif
 
-
 namespace {
 // Characters that are allowed in filenames, but not at the beginning
 const std::vector<std::string> illegal_filename_starting_characters{
-	".",
-	"-",
-	" ", // Keep the blank last
+   ".", "-",
+   " ",  // Keep the blank last
 };
 
 // Characters that are disallowed anywhere in a filename
@@ -81,17 +79,9 @@ const std::vector<std::string> illegal_filename_starting_characters{
 // https://support.apple.com/en-us/HT202808
 // We can't just regex for word & digit characters here because of non-Latin scripts.
 const std::vector<std::string> illegal_filename_characters{
-	"<",
-	">",
-	":",
-	"\"",
-	"|",
-	"?",
-	"*",
-	"/",
-	"\\",
+   "<", ">", ":", "\"", "|", "?", "*", "/", "\\",
 };
-} // namespace
+}  // namespace
 
 /**
  * \param path A file or directory name
@@ -202,20 +192,36 @@ std::string FileSystem::illegal_filename_tooltip() {
 	std::vector<std::string> starting_characters;
 	for (const std::string& character : illegal_filename_starting_characters) {
 		if (character == " ") {
-			/** TRANSLATORS: Part of tooltip entry for characters in illegal filenames. replaces tha blank space in a list of illegal characters */
+			/** TRANSLATORS: Part of tooltip entry for characters in illegal filenames. replaces tha
+			 * blank space in a list of illegal characters */
 			starting_characters.push_back(pgettext("illegal_filename_characters", "blank space"));
 		} else {
 			starting_characters.push_back(character);
 		}
 	}
-	/** TRANSLATORS: Tooltip entry for characters in illegal filenames. %s is a list of illegal characters */
-	const std::string illegal_start(as_listitem((boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) % richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR))).str(), UI_FONT_SIZE_MESSAGE));
+	const std::string illegal_start(as_listitem(
+	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames. %s is a list of illegal
+	    * characters */
+	   (boost::format(pgettext("illegal_filename_characters", "%s at the start of the filename")) %
+	    richtext_escape(i18n::localize_list(starting_characters, i18n::ConcatenateWith::OR)))
+	      .str(),
+	   UI_FONT_SIZE_MESSAGE));
 
-	/** TRANSLATORS: Tooltip entry for characters in illegal filenames. %s is a list of illegal characters */
-	const std::string illegal(as_listitem((boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) % richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR))).str(), UI_FONT_SIZE_MESSAGE));
+	const std::string illegal(as_listitem(
+	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames. %s is a list of illegal
+	    * characters */
+	   (boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) %
+	    richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR)))
+	      .str(),
+	   UI_FONT_SIZE_MESSAGE));
 
-	/** TRANSLATORS: Tooltip header for characters in illegal filenames. This is followed by a list of bullet points */
-	return (boost::format("%s%s%s") % pgettext("illegal_filename_characters", "The following characters are not allowed:") % illegal_start % illegal).str();
+	return (boost::format("%s%s%s") %
+	        /** TRANSLATORS: Tooltip header for characters in illegal filenames. This is followed by
+	         * a list
+	         * of bullet points */
+	        pgettext("illegal_filename_characters", "The following characters are not allowed:") %
+	        illegal_start % illegal)
+	   .str();
 }
 
 // TODO(unknown): Write homedir detection for non-getenv-systems

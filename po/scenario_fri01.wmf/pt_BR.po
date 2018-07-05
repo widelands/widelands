@@ -2,12 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
+"POT-Creation-Date: 2018-05-14 05:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/widelands/teams/35159/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,17 +20,17 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "Construa uma economia madeireira e uma fazenda de junco."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:29
 msgid "Wood Economy"
-msgstr ""
+msgstr "Economia Madeireira"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:30
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
-msgstr ""
+msgstr "Construa ao menos uma Casa do Lenhador e duas Casas do Silvicultor"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Start producing bricks"
@@ -42,6 +45,8 @@ msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Construa um Forno de Tijolos, uma mina de carvão, uma mina de pedra, uma "
+"Argilaria e um poço para começar a produzir tijolos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Gather building materials"
@@ -303,6 +308,10 @@ msgid ""
 " for digging around his clay pit. It might be a good idea to build some "
 "sentinels to expand."
 msgstr ""
+"Argila é fácil de se fazer: Um oleiro trabalhando em uma Argilaria irá "
+"simplesmente cavar um pouco de terra e misturar com água. Apenas certifique-"
+"se de que ele tenha bastante espaço para cavar ao redor de sua Argilaria. "
+"Pode ser uma boa ideia enviar sentinelas para expandir."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -360,7 +369,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Build another clay pit"
-msgstr ""
+msgstr "Construa outra Argilaria"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:194
@@ -370,6 +379,10 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
+"Nossos Oleiros têm reclamado de falta de argila por algum tempo. Sem argila "
+"significa sem tijolos sendo produzidos, e essa carência está nos retardando "
+"muito. Seria melhor construir uma ou duas Argilarias a mais, e poços para "
+"supri-las com água."
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:197

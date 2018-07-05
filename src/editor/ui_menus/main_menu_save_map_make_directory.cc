@@ -55,7 +55,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                     buth_,
                     UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")),
-	 illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
+     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
 
 	vbox_.add(&label_);
 	vbox_.add_space(padding_);
@@ -67,7 +67,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
 	ok_button_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
 	               boost::ref(*this), UI::Panel::Returncodes::kOk));
-	ok_button_.set_enabled(false);
+	ok_button_.set_enabled(!dirname_.empty());
 	cancel_button_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
 	               boost::ref(*this), UI::Panel::Returncodes::kBack));

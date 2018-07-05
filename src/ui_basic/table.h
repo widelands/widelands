@@ -62,6 +62,7 @@ public:
 	      TableRows rowtype = TableRows::kSingle);
 	~Table();
 
+	boost::signals2::signal<void()> cancel;
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> double_clicked;
 
@@ -76,6 +77,7 @@ public:
 
 	/// Text conventions: Title Case for the 'title'
 	void set_column_title(uint8_t col, const std::string& title);
+	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 
 	void clear();
 	void set_sort_column(uint8_t col);
@@ -101,7 +103,7 @@ public:
 	EntryRecord* find(Entry) const;
 
 	void select(uint32_t);
-	void multiselect(uint32_t row);
+	void multiselect(uint32_t row, bool force = false);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {
@@ -122,7 +124,7 @@ public:
 	void draw(RenderTarget&);
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
 	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y);
-	virtual bool handle_key(bool down, SDL_Keysym code);
+	bool handle_key(bool down, SDL_Keysym code);
 };
 
 template <> class Table<void*> : public Panel {
@@ -179,6 +181,7 @@ public:
 	 */
 	using CompareFn = boost::function<bool(uint32_t, uint32_t)>;
 
+	boost::signals2::signal<void()> cancel;
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> double_clicked;
 
@@ -189,6 +192,7 @@ public:
 	                TableColumnType column_type = TableColumnType::kFixed);
 
 	void set_column_title(uint8_t col, const std::string& title);
+	void set_column_tooltip(uint8_t col, const std::string& tooltip);
 	void set_column_compare(uint8_t col, const CompareFn& fn);
 
 	void clear();
@@ -247,7 +251,7 @@ public:
 	EntryRecord* find(const void* entry) const;
 
 	void select(uint32_t);
-	void multiselect(uint32_t row);
+	void multiselect(uint32_t row, bool force = false);
 	uint32_t toggle_entry(uint32_t row);
 	void move_selection(int32_t offset);
 	struct NoSelection : public std::exception {

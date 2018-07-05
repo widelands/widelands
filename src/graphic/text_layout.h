@@ -85,8 +85,8 @@ std::string as_aligned(const std::string& txt,
                        UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 std::string as_listitem(const std::string&,
-                      int ptsize = UI_FONT_SIZE_SMALL,
-                      const RGBColor& clr = UI_FONT_CLR_FG);
+                        int ptsize = UI_FONT_SIZE_SMALL,
+                        const RGBColor& clr = UI_FONT_CLR_FG);
 
 std::string as_richtext(const std::string&);
 std::string as_tooltip(const std::string&);

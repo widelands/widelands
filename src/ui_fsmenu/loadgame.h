@@ -26,6 +26,7 @@
 #include "logic/game_settings.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
@@ -53,6 +54,7 @@ protected:
 
 private:
 	void layout() override;
+	void toggle_filenames();
 
 	UI::Box main_box_;
 	UI::Box info_box_;
@@ -65,6 +67,9 @@ private:
 	std::string filename_;
 
 	bool is_replay_;
+
+	UI::Checkbox* show_filenames_;
+	bool showing_filenames_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LOADGAME_H

@@ -166,6 +166,15 @@ void GameDetails::update(const SavegameData& gamedata) {
 			               as_header_with_content(_("Win Condition:"), gamedata.wincondition, style_))
 			                 .str();
 
+			std::string filename = gamedata.filename;
+			// Remove first directory from filename. This will be the save/ or replays/ folder
+			assert(filename.find('/') != std::string::npos);
+			filename.erase(0, filename.find('/') + 1);
+			assert(!filename.empty());
+			description = (boost::format("%s%s") % description %
+			               as_header_with_content(_("Filename:"), filename, style_))
+			                 .str();
+
 			descr_.set_text(as_richtext(description));
 
 			std::string minimap_path = gamedata.minimap_path;
