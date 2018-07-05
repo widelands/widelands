@@ -32,11 +32,11 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
                  0,
                  UI::Scrollbar::kSize,
                  0,
+				 UI::PanelStyle::kFsMenu,
                  "",
                  UI::Align::kLeft,
-                 g_gr->images().get("images/ui_basic/but3.png"),
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(this, 0, 0, UI::Scrollbar::kSize, 0, "") {
+     descr_(this, 0, 0, UI::Scrollbar::kSize, 0, UI::PanelStyle::kFsMenu) {
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
@@ -49,23 +49,23 @@ ScenarioDetails::ScenarioDetails(Panel* parent)
 void ScenarioDetails::update(const ScenarioData& scenariodata) {
 	name_label_.set_text(
 	   (boost::format("<rt>%s%s</rt>") %
-	    as_header(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"), UIStyle::kFsMenu, true) %
-	    as_content(scenariodata.descname, UIStyle::kFsMenu))
+	    as_header(scenariodata.is_tutorial ? _("Tutorial") : _("Scenario"), UI::PanelStyle::kFsMenu, true) %
+	    as_content(scenariodata.descname, UI::PanelStyle::kFsMenu))
 	      .str());
 
 	if (scenariodata.playable) {
 		std::string description =
 		   (boost::format("%s%s") %
 		    as_header(
-		       ngettext("Author", "Authors", scenariodata.authors.get_number()), UIStyle::kFsMenu) %
-		    as_content(scenariodata.authors.get_names(), UIStyle::kFsMenu))
+		       ngettext("Author", "Authors", scenariodata.authors.get_number()), UI::PanelStyle::kFsMenu) %
+		    as_content(scenariodata.authors.get_names(), UI::PanelStyle::kFsMenu))
 		      .str();
 
 		description =
-		   (boost::format("%s%s") % description % as_header(_("Description"), UIStyle::kFsMenu))
+		   (boost::format("%s%s") % description % as_header(_("Description"), UI::PanelStyle::kFsMenu))
 		      .str();
 		description = (boost::format("%s%s") % description %
-		               as_content(scenariodata.description, UIStyle::kFsMenu))
+		               as_content(scenariodata.description, UI::PanelStyle::kFsMenu))
 		                 .str();
 
 		description = (boost::format("<rt>%s</rt>") % description).str();

@@ -26,6 +26,7 @@
 #include "graphic/color.h"
 #include "graphic/font_handler1.h"
 #include "graphic/image.h"
+#include "graphic/panel_styles.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
@@ -94,12 +95,10 @@ std::string as_waresinfo(const std::string&);
 std::string as_game_tip(const std::string&);
 std::string as_message(const std::string& heading, const std::string& body);
 
-/// Fullscreen or in-game/in-editor style
-enum class UIStyle { kFsMenu, kWui };
 /// Header in menu info texts
-std::string as_header(const std::string& txt, UIStyle style, bool is_first = false);
+std::string as_header(const std::string& txt, UI::PanelStyle style, bool is_first = false);
 /// Paragraph in menu info texts
-std::string as_content(const std::string& txt, UIStyle style);
+std::string as_content(const std::string& txt, UI::PanelStyle style);
 
 /**
   * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too

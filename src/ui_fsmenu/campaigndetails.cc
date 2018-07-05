@@ -32,11 +32,11 @@ CampaignDetails::CampaignDetails(Panel* parent)
                  0,
                  UI::Scrollbar::kSize,
                  0,
+				 UI::PanelStyle::kFsMenu,
                  "",
                  UI::Align::kLeft,
-                 g_gr->images().get("images/ui_basic/but3.png"),
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(this, 0, 0, UI::Scrollbar::kSize, 0, "") {
+     descr_(this, 0, 0, UI::Scrollbar::kSize, 0, UI::PanelStyle::kFsMenu) {
 	name_label_.force_new_renderer();
 	descr_.force_new_renderer();
 
@@ -49,34 +49,34 @@ CampaignDetails::CampaignDetails(Panel* parent)
 void CampaignDetails::update(const CampaignData& campaigndata) {
 	name_label_.set_text((boost::format("<rt>%s%s</rt>") %
 	                      /** TRANSLATORS: Header for campaign name */
-	                      as_header(_("Campaign"), UIStyle::kFsMenu, true) %
-	                      as_content(campaigndata.descname, UIStyle::kFsMenu))
+	                      as_header(_("Campaign"), UI::PanelStyle::kFsMenu, true) %
+	                      as_content(campaigndata.descname, UI::PanelStyle::kFsMenu))
 	                        .str());
 
 	std::string description = "";
 
 	if (campaigndata.visible) {
 		/** TRANSLATORS: Header for campaign tribe */
-		description = (boost::format("%s%s") % as_header(_("Tribe"), UIStyle::kFsMenu) %
-		               as_content(campaigndata.tribename, UIStyle::kFsMenu))
+		description = (boost::format("%s%s") % as_header(_("Tribe"), UI::PanelStyle::kFsMenu) %
+		               as_content(campaigndata.tribename, UI::PanelStyle::kFsMenu))
 		                 .str();
 		description =
 		   /** TRANSLATORS: Header for campaign difficulty */
-		   (boost::format("%s%s") % description % as_header(_("Difficulty"), UIStyle::kFsMenu)).str();
+		   (boost::format("%s%s") % description % as_header(_("Difficulty"), UI::PanelStyle::kFsMenu)).str();
 		description = (boost::format("%s%s") % description %
-		               as_content(campaigndata.difficulty_description, UIStyle::kFsMenu))
+		               as_content(campaigndata.difficulty_description, UI::PanelStyle::kFsMenu))
 		                 .str();
 
 		description =
 		   /** TRANSLATORS: Header for campaign description */
-		   (boost::format("%s%s") % description % as_header(_("Description"), UIStyle::kFsMenu))
+		   (boost::format("%s%s") % description % as_header(_("Description"), UI::PanelStyle::kFsMenu))
 		      .str();
 		description = (boost::format("%s%s") % description %
-		               as_content(campaigndata.description, UIStyle::kFsMenu))
+		               as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
 		                 .str();
 	}
 	description =
-	   (boost::format("%s%s") % description % as_content(campaigndata.description, UIStyle::kFsMenu))
+	   (boost::format("%s%s") % description % as_content(campaigndata.description, UI::PanelStyle::kFsMenu))
 	      .str();
 
 	description = (boost::format("<rt>%s</rt>") % description).str();

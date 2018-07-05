@@ -147,5 +147,5 @@ bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t ro
 	if (r1.difficulty_level < r2.difficulty_level) {
 		return true;
 	}
-	return r1.index < r2.index;
+	return table_[rowa] < table_[rowb];
 }

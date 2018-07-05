@@ -44,7 +44,7 @@
 FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
    : FullscreenMenuLoadMapOrGame(),
      is_tutorial_(camp == nullptr),
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      header_box_(this, 0, 0, UI::Box::Vertical),
 
      // Main title
@@ -58,9 +58,9 @@ FullscreenMenuScenarioSelect::FullscreenMenuScenarioSelect(CampaignData* camp)
                0,
                UI::Scrollbar::kSize,
                0,
+			   UI::PanelStyle::kFsMenu,
                "",
                UI::Align::kCenter,
-               g_gr->images().get("images/ui_basic/but3.png"),
                UI::MultilineTextarea::ScrollMode::kNoScrolling),
      scenario_details_(this),
      campaign_(camp) {
