@@ -174,7 +174,10 @@ void PlayerDescriptionGroup::refresh() {
 				d->btnPlayerTribe->set_tooltip(info.tooltip);
 			}
 
-			{
+			if (settings.scenario) {
+				d->btnPlayerInit->set_title(_("Scenario"));
+				d->btnPlayerInit->set_tooltip(_("Start type is set via the scenario"));
+			} else {
 				i18n::Textdomain td("tribes");  // for translated initialisation
 				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 					if (tribeinfo.name == player.tribe) {
@@ -214,11 +217,13 @@ void PlayerDescriptionGroup::enable_player(bool on) {
 		return;
 
 	if (on) {
-		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed)
-			d->settings->next_player_state(d->plnum);
+		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed) {
+			d->settings->set_player_state(d->plnum, PlayerSettings::State::kComputer);
+		}
 	} else {
-		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed)
+		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed) {
 			d->settings->set_player_state(d->plnum, PlayerSettings::State::kClosed);
+		}
 	}
 }
 

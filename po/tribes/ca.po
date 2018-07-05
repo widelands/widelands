@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-14 05:35+0000\n"
-"PO-Revision-Date: 2018-05-16 17:48+0000\n"
+"POT-Creation-Date: 2018-05-18 18:10+0000\n"
+"PO-Revision-Date: 2018-05-20 13:44+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -2436,7 +2436,7 @@ msgstr "coure pa"
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:7
 msgctxt "frisians_building"
 msgid "Barracks"
-msgstr ""
+msgstr "Quarter"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:64
@@ -2464,7 +2464,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr ""
+msgstr "L'apicultor que viu aquí no pot trobar camps de flors o arbustos per treballar en la seva àrea de treball. Hauríeu de considerar construir una altra masoveria de blat o de baies prop, o desmantellar o destruir aquest edifici."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:7
@@ -2547,7 +2547,7 @@ msgid ""
 "The brickmaker working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr ""
+msgstr "L'artesà de maons que viu aquí no pot trobar terrenys plans en aquesta àrea. Considereu desmantellar aquesta fossa de fang i reconstruir-la en un altre lloc."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:7
@@ -2601,13 +2601,13 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr ""
+msgstr "El cultivador de baies que viu aquí no pot trobar arbustos amb baies en la seva àrea de treball. Hauríeu de considerar construir una altra masoveria de baies o desmantellar o destruir aquest edifici."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:7
 msgctxt "frisians_building"
 msgid "Drinking Hall"
-msgstr ""
+msgstr "Sala de begudes"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:7
@@ -3761,7 +3761,7 @@ msgstr "Frisons (en desenvolupament)"
 msgid ""
 "The inhabitants of the rough North Sea shore. This tribe is still under "
 "development."
-msgstr ""
+msgstr "Els habitants de les salvatges costes del Mar del Nord. Aquesta cultura encara està en desenvolupament."
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"

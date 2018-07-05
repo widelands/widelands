@@ -62,6 +62,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 	const Widelands::Map& map = eia().egbase().map();
 	const Widelands::PlayerNumber nr_players = map.get_nrplayers();
 
+	// NOCOM ensure that there is at least 1 player
+
 	iterate_player_numbers(p, kMaxPlayers) {
 		const bool map_has_player = p <= nr_players;
 

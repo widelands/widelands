@@ -32,8 +32,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "log",
       basic_amount = 1,
-      logproducer = true
    },
 
    working_positions = {
