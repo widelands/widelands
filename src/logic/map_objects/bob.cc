@@ -29,7 +29,6 @@
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"

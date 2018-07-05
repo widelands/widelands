@@ -38,7 +38,7 @@
  */
 FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect(Campaigns* campvis)
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, 0, 0, 0, 0),
+     table_(this, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Main Title
      title_(this, 0, 0, _("Choose a campaign"), UI::Align::kCenter),
@@ -147,5 +147,5 @@ bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t ro
 	if (r1.difficulty_level < r2.difficulty_level) {
 		return true;
 	}
-	return table_[rowa] < table_[rowb];
+	return r1.index < r2.index;
 }

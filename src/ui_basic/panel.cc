@@ -143,8 +143,9 @@ int Panel::do_run() {
 	app->set_mouse_lock(false);  // more paranoia :-)
 
 	Panel* forefather = this;
-	while (Panel* const p = forefather->parent_)
-		forefather = p;
+	while (forefather->parent_ != nullptr) {
+		forefather = forefather->parent_;
+	}
 
 	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
 	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
@@ -158,7 +159,7 @@ int Panel::do_run() {
 	// think() is called at most 15 times per second, that is roughly ever 66ms.
 	const uint32_t kGameLogicDelay = 1000 / 15;
 
-	// With the default of 33FPS, the game will be drawn every 33ms.
+	// With the default of 30FPS, the game will be drawn every 33ms.
 	const uint32_t draw_delay =
 	   1000 / std::max(5, g_options.pull_section("global").get_int("maxfps", 30));
 
@@ -175,13 +176,16 @@ int Panel::do_run() {
 		app->handle_input(&input_callback);
 
 		if (start_time >= next_think_time) {
-			if (app->should_die())
+			if (app->should_die()) {
 				end_modal<Returncodes>(Returncodes::kBack);
+			}
 
 			do_think();
 
-			if (flags_ & pf_child_die)
+			if (flags_ & pf_child_die) {
 				check_child_death();
+			}
+
 			next_think_time = start_time + kGameLogicDelay;
 		}
 
@@ -190,7 +194,13 @@ int Panel::do_run() {
 			forefather->do_draw(rt);
 			rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
 			        app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
-			forefather->do_tooltip();
+
+			if (is_modal()) {
+				do_tooltip();
+			} else {
+				forefather->do_tooltip();
+			}
+
 			g_gr->refresh();
 			next_draw_time = start_time + draw_delay;
 		}
@@ -440,6 +450,22 @@ void Panel::draw_overlay(RenderTarget&) {
 }
 
 /**
+ * Draw texture and color from the info if they have been specified.
+ */
+void Panel::draw_background(RenderTarget& dst, const UI::PanelStyleInfo& info) {
+	draw_background(dst, Recti(0, 0, get_w(), get_h()), info);
+}
+void Panel::draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo& info) {
+	if (info.image != nullptr) {
+		dst.fill_rect(rect, RGBAColor(0, 0, 0, 255));
+		dst.tile(rect, info.image, Vector2i(get_x(), get_y()));
+	}
+	if (info.color != RGBAColor(0, 0, 0, 0)) {
+		dst.fill_rect(rect, info.color, BlendMode::UseAlpha);
+	}
+}
+
+/**
  * Called once per event loop pass, unless set_think(false) has
  * been called. It is intended to be used for animations and game logic.
  */
@@ -578,8 +604,7 @@ bool Panel::handle_textinput(const std::string& /* text */) {
  * false otherwise.
  */
 bool Panel::handle_tooltip() {
-	RenderTarget& rt = *g_gr->get_render_target();
-	return draw_tooltip(rt, tooltip());
+	return draw_tooltip(tooltip());
 }
 
 /**
@@ -648,8 +673,6 @@ void Panel::focus(const bool topcaller) {
 	if (!parent_ || this == modal_) {
 		return;
 	}
-	if (parent_->focus_ == this)
-		return;
 
 	parent_->focus_ = this;
 	parent_->focus(false);
@@ -1046,13 +1069,15 @@ bool Panel::ui_textinput(const std::string& text) {
 /**
  * Draw the tooltip. Return true on success
  */
-bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
+bool Panel::draw_tooltip(const std::string& text) {
 	if (text.empty()) {
 		return false;
 	}
+
+	RenderTarget& dst = *g_gr->get_render_target();
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
-		text_to_render = as_tooltip(text);
+		text_to_render = as_tooltip(text_to_render);
 	}
 
 	constexpr uint32_t kTipWidthMax = 360;

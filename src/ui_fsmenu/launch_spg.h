@@ -26,8 +26,6 @@
 #include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
-#include "ui_basic/dropdown.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/launch_game.h"
 
@@ -62,7 +60,7 @@ protected:
 private:
 	void layout() override;
 
-	void select_map();
+	bool select_map();
 	void win_condition_selected() override;
 	void set_scenario_values();
 	void switch_to_position(uint8_t);

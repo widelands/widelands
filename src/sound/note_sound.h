@@ -41,7 +41,7 @@ struct NoteSound {
 	}
 	NoteSound(const std::string& init_fx, uint32_t init_stereo_position, uint8_t init_priority)
 	   : fx(init_fx),
-	     coords(Widelands::Coords(-1, -1)),
+	     coords(Widelands::Coords::null()),
 	     priority(init_priority),
 	     stereo_position(init_stereo_position) {
 	}

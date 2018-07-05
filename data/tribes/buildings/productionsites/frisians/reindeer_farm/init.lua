@@ -10,15 +10,15 @@ tribes:new_productionsite_type {
    size = "big",
 
    buildcost = {
-      brick = 4,
-      granite = 1,
-      log = 5,
-      thatch_reed = 3
-   },
-   return_on_dismantle = {
       brick = 2,
       granite = 1,
-      log = 2,
+      log = 3,
+      thatch_reed = 2
+   },
+   return_on_dismantle = {
+      brick = 1,
+      granite = 1,
+      log = 1,
       thatch_reed = 1
    },
 

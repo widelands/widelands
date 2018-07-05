@@ -22,6 +22,6 @@ function building_helptext_note()
 end
 
 function building_helptext_performance()
-   -- TRANSLATORS: Performance helptext for a building. Placeholders are for "4 minutes" and "40 seconds"
+   -- TRANSLATORS#: Performance helptext for a building. Placeholders are for "4 minutes" and "40 seconds"
    return no_performance_text_yet ()
 end

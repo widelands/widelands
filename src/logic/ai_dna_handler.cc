@@ -20,15 +20,12 @@
 #include "logic/ai_dna_handler.h"
 
 #include <cstring>
-#include <memory>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
-
-#include "base/macros.h"
+#include "base/time_string.h"
 #include "base/wexception.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "wui/interactive_base.h"
+#include "profile/profile.h"
 
 namespace Widelands {
 

@@ -27,7 +27,6 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
@@ -50,13 +49,13 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
      // Main title
      title_(this, 0, 0, _("Choose a map"), UI::Align::kCenter),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      map_details_(this,
                   right_column_x_,
                   tabley_,
                   get_right_column_w(right_column_x_),
                   tableh_ - buth_ - 4 * padding_,
-                  UIStyle::kFsMenu),
+                  UI::PanelStyle::kFsMenu),
 
      scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
      basedir_(kMapsDir),
@@ -184,7 +183,7 @@ void FullscreenMenuMapSelect::clicked_ok() {
 
 bool FullscreenMenuMapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
-	ok_.set_enabled(has_selection);
+	ok_.set_enabled(has_selection && maps_data_.at(table_.get_selected()).nrplayers > 0);
 
 	if (!has_selection) {
 		map_details_.clear();

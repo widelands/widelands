@@ -24,9 +24,11 @@
 #include <SDL_keycode.h>
 #include <boost/format.hpp>
 
+#include "graphic/color.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text/rt_errors.h"
@@ -53,8 +55,8 @@ struct EditBoxImpl {
 	uint32_t fontsize;
 	/*@}*/
 
-	/// Background tile style.
-	const Image* background;
+	/// Background color and texture
+	const UI::PanelStyleInfo* background_style;
 
 	/// Maximum number of characters in the input
 	uint32_t maxLength;
@@ -78,7 +80,7 @@ EditBox::EditBox(Panel* const parent,
                  uint32_t w,
                  uint32_t h,
                  int margin_y,
-                 const Image* background,
+                 UI::PanelStyle style,
                  int font_size)
    : Panel(parent, x, y, w, h > 0 ? h : text_height(font_size) + 2 * margin_y),
      m_(new EditBoxImpl),
@@ -86,7 +88,7 @@ EditBox::EditBox(Panel* const parent,
      history_position_(-1) {
 	set_thinks(false);
 
-	m_->background = background;
+	m_->background_style = g_gr->styles().editbox_style(style);
 	m_->fontname = UI::g_fh1->fontset()->sans();
 	m_->fontsize = font_size;
 
@@ -95,8 +97,7 @@ EditBox::EditBox(Panel* const parent,
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
-	m_->maxLength =
-	   std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, std::numeric_limits<int32_t>::max());
+	set_max_length(std::numeric_limits<int32_t>::max());
 
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -122,7 +123,7 @@ const std::string& EditBox::text() const {
  * Set the current text in the edit box.
  *
  * The text is truncated if it is longer than the maximum length set by
- * \ref setMaxLength().
+ * \ref set_max_length().
  */
 void EditBox::set_text(const std::string& t) {
 	if (t == m_->text)
@@ -144,7 +145,8 @@ void EditBox::set_text(const std::string& t) {
  * its end is cut off to fit into the maximum length.
  */
 void EditBox::set_max_length(uint32_t const n) {
-	m_->maxLength = std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, static_cast<int>(n));
+	m_->maxLength =
+	   std::min(g_gr->max_texture_size_for_font_rendering() / text_height(), static_cast<int>(n));
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());
@@ -340,9 +342,7 @@ bool EditBox::handle_textinput(const std::string& input_text) {
 }
 
 void EditBox::draw(RenderTarget& dst) {
-
-	// Draw the background
-	dst.tile(Recti(0, 0, get_w(), get_h()), m_->background, Vector2i(get_x(), get_y()));
+	draw_background(dst, *m_->background_style);
 
 	// Draw border.
 	if (get_w() >= 2 && get_h() >= 2) {

@@ -195,9 +195,9 @@ void Box::layout() {
 			pagesize = get_inner_h() - Scrollbar::kSize;
 		}
 		if (scrollbar_ == nullptr) {
-			scrollbar_.reset(new Scrollbar(this, sb_x, sb_y, sb_w, sb_h,
-			                               g_gr->images().get("images/ui_basic/but3.png"),
-			                               orientation_ == Horizontal));
+			// TODO(GunChleoc): Implement styling if we ever use the scrollbar function.
+			scrollbar_.reset(new Scrollbar(
+			   this, sb_x, sb_y, sb_w, sb_h, UI::PanelStyle::kFsMenu, orientation_ == Horizontal));
 			scrollbar_->moved.connect(boost::bind(&Box::scrollbar_moved, this, _1));
 		} else {
 			scrollbar_->set_pos(Vector2i(sb_x, sb_y));

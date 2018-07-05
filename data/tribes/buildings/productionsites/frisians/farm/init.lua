@@ -11,15 +11,15 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 3,
-      granite = 2,
+      granite = 1,
       log = 2,
-      thatch_reed = 4
+      thatch_reed = 3
    },
    return_on_dismantle = {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 2
+      thatch_reed = 1
    },
 
    animations = {
@@ -67,7 +67,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _"planting barley",
          actions = {
-            "sleep=70000",
+            "sleep=18000",
             "worker=plant"
          }
       },
@@ -75,9 +75,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _"harvesting barley",
          actions = {
-            "sleep=20000",
+            "sleep=8000",
             "worker=harvest",
-            "animate=working 148500",
+            "animate=working 40000",
             "produce=barley" --produces 2 barley per field
          }
       },
