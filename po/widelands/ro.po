@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-14 05:35+0000\n"
-"PO-Revision-Date: 2018-05-14 05:36+0000\n"
+"POT-Creation-Date: 2018-06-16 18:35+0000\n"
+"PO-Revision-Date: 2018-06-16 18:47+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Romanian (http://www.transifex.com/widelands/widelands/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -341,7 +341,7 @@ msgstr "Construire hartă goală..."
 #: ../../src/editor/editorinteractive.cc:624
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:132
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:138
 #: ../../src/logic/map.h:161 ../../src/wui/mapdata.cc:44
 msgid "No Name"
 msgstr "Fără nume"
@@ -590,7 +590,7 @@ msgstr "Ieși din editor"
 
 #. * TRANSLATORS: Directory name for user maps in map selection
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:69
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:222
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:240
 #: ../../src/wui/mapdata.cc:162
 msgid "My Maps"
 msgstr "Hărțile mele"
@@ -603,7 +603,7 @@ msgstr "Scenariu jucători multipli"
 
 #. * TRANSLATORS: The folder that a file will be saved to.
 #: ../../src/editor/ui_menus/main_menu_load_map.cc:74
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:222
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:240
 #, c-format
 msgid "Current directory: %s"
 msgstr ""
@@ -643,6 +643,7 @@ msgid "Show original map names"
 msgstr "Arată numele original al hărții"
 
 #: ../../src/editor/ui_menus/main_menu_load_or_save_map.cc:132
+#: ../../src/ui_fsmenu/loadgame.cc:63
 msgid "Show Filenames"
 msgstr "Arată denumirea fișierelor"
 
@@ -831,36 +832,37 @@ msgstr "Harta a fost construită. Verifică de două ori poziția de început pe
 msgid "Make Directory"
 msgstr "Crează director"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:71
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:70
 #: ../../src/wui/game_main_menu_save_game.cc:61
+#: ../../src/wui/gamedetails.cc:176
 msgid "Filename:"
 msgstr "Nume fișier:"
 
 #. * TRANSLATORS: A folder that hasn't been given a name yet
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:149
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:157
 msgid "unnamed"
 msgstr "nedenumic"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:250
-#: ../../src/wui/game_main_menu_save_game.cc:157
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:268
+#: ../../src/wui/game_main_menu_save_game.cc:171
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Un fișier cu numele ‘%s’ există deja. Suprascrie?"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:254
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:268
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:314
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:271
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:285
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:331
 msgid "Error Saving Map!"
 msgstr "Eroare la salvarea hărții"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:265
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:282
 #, c-format
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
 msgstr "Un fișier cu numele ‘%s’ există deja. Trebuie să o ștergi manual."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:311
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:328
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -889,9 +891,10 @@ msgid "Number of Players"
 msgstr "Numărul de jucători"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:201 ../../src/logic/map.cc:312
+#: ../../src/editor/ui_menus/player_menu.cc:205
 #: ../../src/logic/single_player_game_settings_provider.cc:90
-#: ../../src/map_io/map_player_names_and_tribes_packet.cc:94
+#: ../../src/map_io/map_player_names_and_tribes_packet.cc:70
+#: ../../src/map_io/map_player_names_and_tribes_packet.cc:102
 #: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:500
 #: ../../src/wui/multiplayersetupgroup.cc:135
 #: ../../src/wui/multiplayersetupgroup.cc:189
@@ -1029,6 +1032,41 @@ msgstr "Mărime unelte"
 msgid "Current Size: %u"
 msgstr "Dimensiune curentă: %u"
 
+#. * TRANSLATORS: Part of tooltip entry for characters in illegal filenames.
+#. replaces tha
+#. * blank space in a list of illegal characters
+#: ../../src/io/filesystem/filesystem.cc:197
+msgctxt "illegal_filename_characters"
+msgid "blank space"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip entry for characters in illegal filenames. %s is a
+#. list of illegal
+#. * characters
+#: ../../src/io/filesystem/filesystem.cc:205
+#, c-format
+msgctxt "illegal_filename_characters"
+msgid "%s at the start of the filename"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip entry for characters in illegal filenames. %s is a
+#. list of illegal
+#. * characters
+#: ../../src/io/filesystem/filesystem.cc:213
+#, c-format
+msgctxt "illegal_filename_characters"
+msgid "%s anywhere in the filename"
+msgstr ""
+
+#. * TRANSLATORS: Tooltip header for characters in illegal filenames. This is
+#. followed by
+#. * a list
+#. * of bullet points
+#: ../../src/io/filesystem/filesystem.cc:222
+msgctxt "illegal_filename_characters"
+msgid "The following characters are not allowed:"
+msgstr ""
+
 #: ../../src/logic/editor_game_base.cc:213
 msgid "Loading graphics"
 msgstr "Se încarcă grafica"
@@ -1052,7 +1090,7 @@ msgid "Loading map…"
 msgstr "Încărcare hartă..."
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:370
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1407
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1409
 msgid "Loading…"
 msgstr "Încărcare"
 
@@ -1595,7 +1633,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1299
+#: ../../src/wlapplication.cc:1301
 msgid "Preparing game"
 msgstr "Pregătirea jocului"
 
@@ -2212,7 +2250,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:86
 #: ../../src/ui_fsmenu/campaign_select.cc:316
-#: ../../src/ui_fsmenu/loadgame.cc:77
+#: ../../src/ui_fsmenu/loadgame.cc:83
 msgid "Return to the main menu"
 msgstr ""
 
@@ -2630,27 +2668,27 @@ msgstr ""
 msgid "Switch to position"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:39
+#: ../../src/ui_fsmenu/loadgame.cc:40
 msgid "Choose a replay"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:39
+#: ../../src/ui_fsmenu/loadgame.cc:40
 msgid "Choose a saved game"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:78
+#: ../../src/ui_fsmenu/loadgame.cc:84
 msgid "Load this replay"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:80 ../../src/ui_fsmenu/mapselect.cc:68
+#: ../../src/ui_fsmenu/loadgame.cc:86 ../../src/ui_fsmenu/mapselect.cc:68
 msgid "Return to the multiplayer game setup"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:81 ../../src/ui_fsmenu/mapselect.cc:70
+#: ../../src/ui_fsmenu/loadgame.cc:87 ../../src/ui_fsmenu/mapselect.cc:70
 msgid "Return to the single player menu"
 msgstr ""
 
-#: ../../src/ui_fsmenu/loadgame.cc:82
+#: ../../src/ui_fsmenu/loadgame.cc:88
 msgid "Load this game"
 msgstr ""
 
@@ -2932,11 +2970,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1094
+#: ../../src/wlapplication.cc:1096
 msgid "Game data error"
 msgstr "Eroare de date"
 
-#: ../../src/wlapplication.cc:1102
+#: ../../src/wlapplication.cc:1104
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2944,18 +2982,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1109
+#: ../../src/wlapplication.cc:1111
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1236
+#: ../../src/wlapplication.cc:1238
 msgid "Invalid Address"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1237
+#: ../../src/wlapplication.cc:1239
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
@@ -3008,23 +3046,23 @@ msgid "Do you really want to cancel the active expedition?"
 msgstr ""
 
 #. * TRANSLATORS: %1% of %2% soldiers. Used in Attack box.
-#: ../../src/wui/attack_box.cc:116 ../../src/wui/attack_box.cc:139
+#: ../../src/wui/attack_box.cc:123 ../../src/wui/attack_box.cc:146
 msgid "%1% / %2%"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:128
+#: ../../src/wui/attack_box.cc:135
 msgid "Soldiers:"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:132
+#: ../../src/wui/attack_box.cc:139
 msgid "Send less soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:145
+#: ../../src/wui/attack_box.cc:152
 msgid "Number of soldiers"
 msgstr ""
 
-#: ../../src/wui/attack_box.cc:149
+#: ../../src/wui/attack_box.cc:156
 msgid "Send more soldiers"
 msgstr ""
 
@@ -3274,12 +3312,12 @@ msgstr ""
 msgid "Build roads"
 msgstr ""
 
-#: ../../src/wui/game_chat_menu.cc:52 ../../src/wui/interactive_player.cc:191
+#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:191
 #: ../../src/wui/interactive_spectator.cc:84
 msgid "Chat"
 msgstr ""
 
-#: ../../src/wui/game_chat_menu.cc:58
+#: ../../src/wui/game_chat_menu.cc:59
 msgid "Script console"
 msgstr ""
 
@@ -3295,7 +3333,7 @@ msgstr ""
 msgid "Save Game"
 msgstr ""
 
-#: ../../src/wui/game_main_menu_save_game.cc:144
+#: ../../src/wui/game_main_menu_save_game.cc:158
 msgid ""
 "Game Saving Error!\n"
 "Saved game file may be corrupt!\n"
@@ -3303,13 +3341,13 @@ msgid ""
 "Reason given:\n"
 msgstr ""
 
-#: ../../src/wui/game_main_menu_save_game.cc:147
-#: ../../src/wui/game_main_menu_save_game.cc:156
+#: ../../src/wui/game_main_menu_save_game.cc:161
+#: ../../src/wui/game_main_menu_save_game.cc:170
 msgid "Save Game Error!"
 msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:608
+#: ../../src/wui/game_message_menu.cc:622
 msgid "Messages: Inbox"
 msgstr ""
 
@@ -3334,7 +3372,7 @@ msgid "Sent"
 msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:125
-#: ../../src/wui/game_message_menu.cc:611
+#: ../../src/wui/game_message_menu.cc:625
 msgid "Show Archive"
 msgstr ""
 
@@ -3350,12 +3388,12 @@ msgid "Center main mapview on location"
 msgstr ""
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:528
-#: ../../src/wui/game_message_menu.cc:539
-#: ../../src/wui/game_message_menu.cc:544
-#: ../../src/wui/game_message_menu.cc:548
-#: ../../src/wui/game_message_menu.cc:552
-#: ../../src/wui/game_message_menu.cc:556
+#: ../../src/wui/game_message_menu.cc:542
+#: ../../src/wui/game_message_menu.cc:553
+#: ../../src/wui/game_message_menu.cc:558
+#: ../../src/wui/game_message_menu.cc:562
+#: ../../src/wui/game_message_menu.cc:566
+#: ../../src/wui/game_message_menu.cc:570
 #: ../../src/wui/seafaring_statistics_menu.cc:101
 #: ../../src/wui/seafaring_statistics_menu.cc:132
 #: ../../src/wui/seafaring_statistics_menu.cc:504
@@ -3367,77 +3405,77 @@ msgstr ""
 msgid "%1% (Hotkey: %2%)"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:530
+#: ../../src/wui/game_message_menu.cc:544
 #: ../../src/wui/seafaring_statistics_menu.cc:506
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:530
+#: ../../src/wui/game_message_menu.cc:544
 msgid "Show all messages"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:541
+#: ../../src/wui/game_message_menu.cc:555
 msgid "Show geologists' messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:542
+#: ../../src/wui/game_message_menu.cc:556
 #: ../../src/wui/seafaring_statistics_menu.cc:515
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:546
+#: ../../src/wui/game_message_menu.cc:560
 #: ../../src/wui/seafaring_statistics_menu.cc:520
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:546
+#: ../../src/wui/game_message_menu.cc:560
 msgid "Show economy messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:550
+#: ../../src/wui/game_message_menu.cc:564
 #: ../../src/wui/seafaring_statistics_menu.cc:524
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:550
+#: ../../src/wui/game_message_menu.cc:564
 msgid "Show seafaring messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:554
+#: ../../src/wui/game_message_menu.cc:568
 #: ../../src/wui/seafaring_statistics_menu.cc:528
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:554
+#: ../../src/wui/game_message_menu.cc:568
 msgid "Show warfare messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:558
+#: ../../src/wui/game_message_menu.cc:572
 #: ../../src/wui/seafaring_statistics_menu.cc:534
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:558
+#: ../../src/wui/game_message_menu.cc:572
 msgid "Show scenario messages only"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:601
+#: ../../src/wui/game_message_menu.cc:615
 msgid "Messages: Archive"
 msgstr ""
 
-#: ../../src/wui/game_message_menu.cc:604
+#: ../../src/wui/game_message_menu.cc:618
 msgid "Show Inbox"
 msgstr ""
 
@@ -3445,7 +3483,7 @@ msgstr ""
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:634
+#: ../../src/wui/game_message_menu.cc:648
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -3454,7 +3492,7 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:640
+#: ../../src/wui/game_message_menu.cc:654
 msgid "Restore selected message"
 msgstr ""
 
@@ -3462,7 +3500,7 @@ msgstr ""
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:650
+#: ../../src/wui/game_message_menu.cc:664
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -3471,12 +3509,12 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:656
+#: ../../src/wui/game_message_menu.cc:670
 msgid "Archive selected message"
 msgstr ""
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:661
+#: ../../src/wui/game_message_menu.cc:675
 #, c-format
 msgid "Del: %s"
 msgstr ""
@@ -3566,51 +3604,51 @@ msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. lost.
-#: ../../src/wui/game_summary.cc:167
+#: ../../src/wui/game_summary.cc:169
 msgid "Lost"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. won.
-#: ../../src/wui/game_summary.cc:171
+#: ../../src/wui/game_summary.cc:173
 msgid "Won"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary for the players who have
 #. resigned.
-#: ../../src/wui/game_summary.cc:180
+#: ../../src/wui/game_summary.cc:182
 msgid "Resigned"
 msgstr ""
 
 #. * TRANSLATORS: This is shown in the game summary when we don't know
 #. * TRANSLATORS: if the player has lost or won.
-#: ../../src/wui/game_summary.cc:185
+#: ../../src/wui/game_summary.cc:187
 msgctxt "player_won"
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: ../../src/wui/game_summary.cc:195
+#: ../../src/wui/game_summary.cc:197
 msgid "You won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:197
+#: ../../src/wui/game_summary.cc:199
 msgid "You lost."
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:202
+#: ../../src/wui/game_summary.cc:204
 #, c-format
 msgid "%s won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:205
+#: ../../src/wui/game_summary.cc:207
 msgid "Team %|1$u| won!"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:250
+#: ../../src/wui/game_summary.cc:252
 msgid "Score"
 msgstr ""
 
-#: ../../src/wui/game_summary.cc:252
+#: ../../src/wui/game_summary.cc:254
 msgid "Team Score"
 msgstr ""
 
@@ -3637,7 +3675,7 @@ msgstr ""
 msgid "Win Condition:"
 msgstr ""
 
-#: ../../src/wui/gamedetails.cc:201
+#: ../../src/wui/gamedetails.cc:210
 msgid "Error:"
 msgstr ""
 
@@ -3809,39 +3847,35 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: ../../src/wui/load_or_save_game.cc:124
-msgid "Map name (start of replay)"
-msgstr ""
-
-#: ../../src/wui/load_or_save_game.cc:125
+#: ../../src/wui/load_or_save_game.cc:123
 msgid ""
 "The filename that the game was saved under followed by the map’s name, or "
 "the map’s name followed by the last objective achieved."
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../src/wui/load_or_save_game.cc:172
+#: ../../src/wui/load_or_save_game.cc:170
 msgid "Delete this replay"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
-#: ../../src/wui/load_or_save_game.cc:174
+#: ../../src/wui/load_or_save_game.cc:172
 msgid "Delete this game"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected
 #. multiple files
-#: ../../src/wui/load_or_save_game.cc:180
+#: ../../src/wui/load_or_save_game.cc:178
 msgid "Delete these replays"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected
 #. multiple files
-#: ../../src/wui/load_or_save_game.cc:182
+#: ../../src/wui/load_or_save_game.cc:180
 msgid "Delete these games"
 msgstr ""
 
-#: ../../src/wui/load_or_save_game.cc:184
+#: ../../src/wui/load_or_save_game.cc:182
 #, c-format
 msgid "Selected %d file:"
 msgid_plural "Selected %d files:"
@@ -3849,13 +3883,13 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/wui/load_or_save_game.cc:242
+#: ../../src/wui/load_or_save_game.cc:240
 msgid "Do you really want to delete this replay?"
 msgstr ""
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
 #. DO NOT omit the placeholder in your translation.
-#: ../../src/wui/load_or_save_game.cc:245
+#: ../../src/wui/load_or_save_game.cc:243
 #, c-format
 msgid "Do you really want to delete this %d replay?"
 msgid_plural "Do you really want to delete these %d replays?"
@@ -3863,13 +3897,13 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/wui/load_or_save_game.cc:252
+#: ../../src/wui/load_or_save_game.cc:250
 msgid "Do you really want to delete this game?"
 msgstr ""
 
 #. * TRANSLATORS: Used with multiple games, 1 game has a separate string.
 #. DO NOT omit the placeholder in your translation.
-#: ../../src/wui/load_or_save_game.cc:255
+#: ../../src/wui/load_or_save_game.cc:253
 #, c-format
 msgid "Do you really want to delete this %d game?"
 msgid_plural "Do you really want to delete these %d games?"
@@ -3877,52 +3911,60 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../../src/wui/load_or_save_game.cc:268
+#: ../../src/wui/load_or_save_game.cc:266
 msgid "Confirm Deleting File"
 msgid_plural "Confirm Deleting Files"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+#: ../../src/wui/load_or_save_game.cc:312
+msgid "Filename: Map name (start of replay)"
+msgstr ""
+
+#: ../../src/wui/load_or_save_game.cc:313
+msgid "Map name (start of replay)"
+msgstr ""
+
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:383
+#: ../../src/wui/load_or_save_game.cc:384
 msgid "Today, %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:387
+#: ../../src/wui/load_or_save_game.cc:388
 msgid "saved today at %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:400
+#: ../../src/wui/load_or_save_game.cc:401
 msgid "Yesterday, %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:404
+#: ../../src/wui/load_or_save_game.cc:405
 msgid "saved yesterday at %1%:%2%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/load_or_save_game.cc:410
+#: ../../src/wui/load_or_save_game.cc:411
 msgid "%1% %2%, %3%"
 msgstr ""
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month (short name) day (number), year (number). This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:416
+#: ../../src/wui/load_or_save_game.cc:417
 msgid "saved on %1% %2%, %3%"
 msgstr ""
 
@@ -3931,7 +3973,7 @@ msgstr ""
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/wui/load_or_save_game.cc:437
+#: ../../src/wui/load_or_save_game.cc:438
 msgid "SP"
 msgstr ""
 
@@ -3941,7 +3983,7 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:445
+#: ../../src/wui/load_or_save_game.cc:446
 msgid "H (%1%)"
 msgstr ""
 
@@ -3951,31 +3993,31 @@ msgstr ""
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:453
+#: ../../src/wui/load_or_save_game.cc:454
 msgid "MP (%1%)"
 msgstr ""
 
-#: ../../src/wui/load_or_save_game.cc:463
+#: ../../src/wui/load_or_save_game.cc:468
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr ""
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/load_or_save_game.cc:479
+#: ../../src/wui/load_or_save_game.cc:484
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr ""
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wui/load_or_save_game.cc:482
+#: ../../src/wui/load_or_save_game.cc:487
 msgid "Error message:"
 msgstr ""
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/wui/load_or_save_game.cc:493
-#: ../../src/wui/load_or_save_game.cc:495
+#: ../../src/wui/load_or_save_game.cc:498
+#: ../../src/wui/load_or_save_game.cc:500
 #, c-format
 msgid "Incompatible: %s"
 msgstr ""

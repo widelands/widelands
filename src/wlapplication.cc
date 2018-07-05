@@ -777,10 +777,12 @@ bool WLApplication::init_settings() {
 	s.get_string("realname");
 	s.get_string("metaserver");
 	s.get_natural("metaserverport");
+	// Undocumented, checkbox appears on "Watch Replay" screen
+	s.get_bool("display_replay_filenames");
 	// KLUDGE!
 
 	long int last_start = s.get_int("last_start", 0);
-	if (last_start + 12 * 60 * 60 < time(nullptr)) {
+	if (last_start + 12 * 60 * 60 < time(nullptr) || !s.get_string("uuid")) {
 		// First start of the game or not started for 12 hours. Create a (new) UUID.
 		// For the use of the UUID, see network/internet_gaming_protocol.h
 		s.set_string("uuid", generate_random_uuid());

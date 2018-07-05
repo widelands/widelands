@@ -127,8 +127,7 @@ void FullscreenMenuLaunchSPG::layout() {
  * showing the actual setup menu.
  */
 void FullscreenMenuLaunchSPG::start() {
-	select_map();
-	if (settings_->settings().mapname.empty()) {
+	if (!select_map()) {
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 	}
 }
@@ -141,11 +140,10 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 	//  user it seems as if the launchgame-menu is a child of mapselect and
 	//  not the other way around - just end_modal(0); will be seen as bug
 	//  from user point of view, so we reopen the mapselect-menu.
-	settings_->set_map(std::string(), std::string(), 0);
-	select_map();
-	if (settings_->settings().mapname.empty())
+	if (!select_map()) {
+		// No map has been selected: Go back to main menu
 		return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
-	refresh();
+	}
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
@@ -222,10 +220,11 @@ void FullscreenMenuLaunchSPG::refresh() {
 
 /**
  * Select a map and send all information to the user interface.
+ * Returns whether a map has been selected.
  */
-void FullscreenMenuLaunchSPG::select_map() {
+bool FullscreenMenuLaunchSPG::select_map() {
 	if (!settings_->can_change_map())
-		return;
+		return false;
 
 	FullscreenMenuMapSelect msm(settings_, nullptr);
 	FullscreenMenuBase::MenuTarget code = msm.run<FullscreenMenuBase::MenuTarget>();
@@ -233,7 +232,7 @@ void FullscreenMenuLaunchSPG::select_map() {
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
 		// Set scenario = false, else the menu might crash when back is pressed.
 		settings_->set_scenario(false);
-		return;  // back was pressed
+		return false;  // back was pressed
 	}
 
 	is_scenario_ = code == FullscreenMenuBase::MenuTarget::kScenarioGame;
@@ -245,6 +244,7 @@ void FullscreenMenuLaunchSPG::select_map() {
 	safe_place_for_host(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 	update_win_conditions();
+	return true;
 }
 
 /**

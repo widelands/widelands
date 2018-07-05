@@ -9,7 +9,7 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Shovel
       empire = pgettext("empire_ware", "Therefore the forester and the vine farmer use them. They are produced by the toolsmith."),
       -- TRANSLATORS: Helptext for a ware: Shovel
-      frisians = pgettext("frisians_ware", "They are used by berry and reed farmers as well as foresters. Brickmakers also need them to dig mud out of hard soil.")
+      frisians = pgettext("frisians_ware", "They are used by berry and reed farmers as well as foresters. Clay diggers also need them to dig mud out of hard soil.")
    }
    local result = ""
    if tribe then

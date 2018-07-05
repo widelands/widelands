@@ -300,6 +300,7 @@ wl_library(graphic_text_layout
     text_layout.cc
     text_layout.h
   DEPENDS
+    graphic # TODO(Gunchleoc): For text_width safety only - rewrite that function
     graphic_align
     graphic_color
     graphic_surface

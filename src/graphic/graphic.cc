@@ -171,6 +171,15 @@ RenderTarget* Graphic::get_render_target() {
 	return render_target_.get();
 }
 
+int Graphic::max_texture_size_for_font_rendering() const {
+// Test with minimum supported size in debug builds.
+#ifndef NDEBUG
+	return kMinimumSizeForTextures;
+#else
+	return max_texture_size_;
+#endif
+}
+
 bool Graphic::fullscreen() {
 	uint32_t flags = SDL_GetWindowFlags(sdl_window_);
 	return (flags & SDL_WINDOW_FULLSCREEN) || (flags & SDL_WINDOW_FULLSCREEN_DESKTOP);

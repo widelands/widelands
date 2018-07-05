@@ -10,15 +10,14 @@ tribes:new_productionsite_type {
    size = "medium",
 
    enhancement_cost = {
-      brick = 3,
+      brick = 4,
       granite = 2,
       log = 1,
-      thatch_reed = 3
+      thatch_reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 2,
-      granite = 1,
-      thatch_reed = 1
+      granite = 1
    },
 
    animations = {
@@ -53,7 +52,7 @@ tribes:new_productionsite_type {
       { name = "gold", amount = 8 },
    },
    outputs = {
-      "sword_curved",
+      "sword_broad",
       "sword_double",
       "helmet_golden",
    },
@@ -64,30 +63,40 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "call=produce_s3",
+            "call=produce_s4",
             "call=produce_hg",
+            "call=produce_s3",
             "call=produce_s4",
             "return=skipped",
          },
       },
       produce_s3 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a curved sword because ...
-         descname = _"forging a curved sword",
+         -- TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because ...
+         descname = _"forging a broadsword",
          actions = {
-            "return=skipped unless economy needs sword_curved",
-            "sleep=59000",
+            -- time total: 82
+            "return=skipped unless economy needs sword_broad",
+            "sleep=39000",
             "consume=coal iron:2 gold",
-            "animate=working 51000",
-            "produce=sword_curved"
+            "play_sound=sound/smiths smith 192",
+            "animate=working 34000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
+            "produce=sword_broad"
          },
       },
       produce_s4 = {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword because ...
          descname = _"forging a double-edged sword",
          actions = {
+            -- time total: 87
             "return=skipped unless economy needs sword_double",
-            "sleep=64000",
-            "consume=coal:2 iron:2 gold:2",
-            "animate=working 51000",
+            "consume=coal:2 iron:2 gold",
+            "sleep=41000",
+            "play_sound=sound/smiths smith 192",
+            "animate=working 37000",
+            "play_sound=sound/smiths sharpening 120",
+            "sleep=9000",
             "produce=sword_double"
          },
       },
@@ -95,9 +104,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet because ...
          descname = _"forging a golden helmet",
          actions = {
+            -- time total: 115
             "return=skipped unless economy needs helmet_golden",
-            "sleep=51000",
             "consume=coal:2 iron:2 gold",
+            "sleep=51000",
             "animate=working 64000",
             "produce=helmet_golden"
          },

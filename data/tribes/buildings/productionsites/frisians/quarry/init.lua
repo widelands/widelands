@@ -10,7 +10,7 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-      brick = 2,
+      brick = 1,
       log = 1,
       thatch_reed = 1
    },
@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      graniteproducer = true
+      collects_ware_from_map = "granite"
    },
 
    working_positions = {

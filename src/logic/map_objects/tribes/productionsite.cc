@@ -206,6 +206,21 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
+
+	// Verify that any map resource collected is valid
+	if (!hints().collects_ware_from_map().empty()) {
+		if (!(egbase_.tribes().ware_exists(hints().collects_ware_from_map()))) {
+			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
+		}
+		const DescriptionIndex collects_index =
+		   egbase_.tribes().safe_ware_index(hints().collects_ware_from_map());
+		if (!is_output_ware_type(collects_index)) {
+			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
+			                    "listed in the building's output",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
+		}
+	}
 }
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,

@@ -291,16 +291,14 @@
 
 ### Networking
 
-  - Implemented a relay server - opening a router port is no longer necessary
-    for the host
-  - Added IPv6 support for non-metaserver games
-  - Deliver received network packets even when the TCP connection is already
-    closed
-  - Improved the relogin code by adding semi-constant user ids that are valid
-    for 12 hours, and doubled logins with registered accounts
+  - Replaced SDL-Net with Boost.Asio
+  - Added IPv6 support
+  - Implemented a relay server. Opening a router port is no longer necessary
+    for the host of internet games
+  - Improved the online login code by adding semi-constant user ids that are
+    valid for 12 hours, allowing to reclaim a username after a disconnect
   - Increasing password security by no longer storing and transmitting it in
     plaintext
-  - Replaced SDL-Net with Boost.Asio
   - Fixed bug #1691335: Multiplayer client crashes when the host hasn't selected
                         a map yet
 

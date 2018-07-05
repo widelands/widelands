@@ -300,6 +300,7 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      unowned_mines_spots_nearby(0),
      unowned_iron_mines_nearby(false),
      trees_nearby(0),
+     bushes_nearby(0),
      // explanation of starting values
      // this is done to save some work for AI (CPU utilization)
      // base rules are:

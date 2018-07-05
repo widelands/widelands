@@ -143,8 +143,9 @@ int Panel::do_run() {
 	app->set_mouse_lock(false);  // more paranoia :-)
 
 	Panel* forefather = this;
-	while (Panel* const p = forefather->parent_)
-		forefather = p;
+	while (forefather->parent_ != nullptr) {
+		forefather = forefather->parent_;
+	}
 
 	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
 	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
@@ -175,13 +176,16 @@ int Panel::do_run() {
 		app->handle_input(&input_callback);
 
 		if (start_time >= next_think_time) {
-			if (app->should_die())
+			if (app->should_die()) {
 				end_modal<Returncodes>(Returncodes::kBack);
+			}
 
 			do_think();
 
-			if (flags_ & pf_child_die)
+			if (flags_ & pf_child_die) {
 				check_child_death();
+			}
+
 			next_think_time = start_time + kGameLogicDelay;
 		}
 
@@ -190,7 +194,13 @@ int Panel::do_run() {
 			forefather->do_draw(rt);
 			rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
 			        app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
-			forefather->do_tooltip();
+
+			if (is_modal()) {
+				do_tooltip();
+			} else {
+				forefather->do_tooltip();
+			}
+
 			g_gr->refresh();
 			next_draw_time = start_time + draw_delay;
 		}
@@ -594,8 +604,7 @@ bool Panel::handle_textinput(const std::string& /* text */) {
  * false otherwise.
  */
 bool Panel::handle_tooltip() {
-	RenderTarget& rt = *g_gr->get_render_target();
-	return draw_tooltip(rt, tooltip());
+	return draw_tooltip(tooltip());
 }
 
 /**
@@ -1060,13 +1069,15 @@ bool Panel::ui_textinput(const std::string& text) {
 /**
  * Draw the tooltip. Return true on success
  */
-bool Panel::draw_tooltip(RenderTarget& dst, const std::string& text) {
+bool Panel::draw_tooltip(const std::string& text) {
 	if (text.empty()) {
 		return false;
 	}
+
+	RenderTarget& dst = *g_gr->get_render_target();
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
-		text_to_render = as_tooltip(text);
+		text_to_render = as_tooltip(text_to_render);
 	}
 
 	constexpr uint32_t kTipWidthMax = 360;
