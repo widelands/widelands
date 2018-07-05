@@ -55,6 +55,7 @@ private:
 
 	UI::Textarea editbox_label_;
 	UI::EditBox* editbox_;
+	const std::string illegal_filename_tooltip_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_SAVE_MAP_H

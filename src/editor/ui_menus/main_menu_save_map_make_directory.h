@@ -50,6 +50,7 @@ private:
 	UI::EditBox edit_;
 	UI::Button ok_button_;
 	UI::Button cancel_button_;
+	const std::string illegal_filename_tooltip_;
 	void edit_changed();
 };
 

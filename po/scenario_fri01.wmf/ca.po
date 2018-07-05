@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-18 18:10+0000\n"
+"POT-Creation-Date: 2018-06-16 18:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo, 2018\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -192,7 +192,7 @@ msgid ""
 msgstr ""
 "Entreneu un soldat fins al màxim nivell. Els soldats s'entrenen en camps i "
 "palestres d'entrenament. Necessitarem una mina d'or, un taller del sastre "
-"per cosir vestits més resistents i un taller d'armadures gran per obtenir "
+"per cosir vestits més resistents i un taller gran d'armadures per obtenir "
 "millors armes i cascos."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
@@ -322,6 +322,11 @@ msgid ""
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing thatch reed."
 msgstr ""
+"A més a més, hauríem de construir una masoveria de juncs aviat. Les "
+"masoveries de juncs també en necessiten per construir-les, així que haurem "
+"de vigilar que no exhaurim els juncs fins que en puguem cultivar. Es cultiva"
+" fàcilment, així que el cultivador no necessita res més per començar a fer-"
+"ne créixer."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 msgid "Building our new home"
@@ -350,6 +355,11 @@ msgid ""
 " for digging around his clay pit. It might be a good idea to build some "
 "sentinels to expand."
 msgstr ""
+"L'argila és fàcil d'obtenir: Un artesà de maons treballant en una fossa de "
+"fang simplement remourà la terra i la barrejarà amb aigua. Només cal "
+"assegurar-se que té prou espai per cavar al voltant de la fossa. Construir "
+"algunes guardes sentinella al voltant per ampliar l'àrea seria una bona "
+"idea."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -358,6 +368,10 @@ msgid ""
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
+"Per coure els maons, la bòbila necessita foc. Necessitem carbó per "
+"alimentar-lo. Construïu una mina de carbó per assegurar-nos-en el "
+"subministrament. Sense carbó no tindrem maons, sense maons no tindrem mines,"
+" sense mines no tindrem carbó… ja veieu el problema."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:172
@@ -379,6 +393,10 @@ msgid ""
 "wait until we have gathered some more materials. We could expand our "
 "territory some more, to see what else can be found on this island."
 msgstr ""
+"Ho heu fet bé. Totes les cadenes de producció de materials de construcció "
+"funciona correctament. Esperem fins que haguéssim acumulat suficients "
+"materials. Podríem anar expandint el territori una mica més, per veure què "
+"més hi ha en aquesta illa."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:184
 msgid "Reed Shortages"
@@ -396,6 +414,10 @@ msgid ""
 "also used for making fishing nets and other tools; therefore, resolving this"
 " shortage should be a priority."
 msgstr ""
+"He observat que ens queden pocs juncs. Per construir edificis en necessitem "
+"bastants. Hauríem de construir una o dues masoveries de juncs més. Els juncs"
+" també s'empren per fer xarxes de pesca i altres eines. Per això cal "
+"resoldre'n l'escassedat ara mateix."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
@@ -421,6 +443,10 @@ msgid ""
 " down a lot. It would be better to build one or two more clay pits, and "
 "wells to supply them with water."
 msgstr ""
+"Els nostres artesans de maons s'han estat queixant sobre l'escassedat "
+"d'argila des de fa un temps. Sense argila no es poden produir maons, així "
+"que aquesta escassedat està frenant les noves construccions. Cal construir "
+"una o dues fosses de fang, i pous que els hi subministrin aigua."
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:197
@@ -429,6 +455,10 @@ msgid ""
 "need to build a ship, or the mines cannot provide us with enough coal, we "
 "will need more clay, so the shortage must be resolved."
 msgstr ""
+"L'argila també s'empra en la construcció de vaixells i per millorar els "
+"kilns de carbó vegetal. Si mai necessitem construir un vaixell o les mines "
+"no poden aconseguir prou carbó, necessitarem més argila. Per això cal "
+"resoldre el problema."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:200
 msgid "Brick Shortages"
@@ -453,6 +483,8 @@ msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
 "construction site window."
 msgstr ""
+"Hauríeu d'establir prioritat alta per l'entrega de maons per la construcció "
+"de la bòbila des de la finestra de construcció."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
@@ -471,6 +503,12 @@ msgid ""
 "construction materials in the easternmost one. Our headquarters is too far "
 "in the west to be useful for long-time ware storage."
 msgstr ""
+"Estem expandint el nostre territori cap a l'est i els béns s'han de "
+"transportar a molta distància. Hauríem de construir magatzems prop de la "
+"frontera oriental, separats per una distància prudent entre ells, i guardar-"
+"hi materials de construcció preferiblement al magatzem que hi hagi més prop "
+"de la frontera. El quarter general està massa lluny per ser útil per a "
+"l'emmagatzematge a llarg termini."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:214
 msgid "Hungry Miners"
@@ -487,6 +525,8 @@ msgid ""
 "they have no time to prepare their own food. They demand to be supplied with"
 " it."
 msgstr ""
+"Cap Reebaud! Us porto males notícies. Els miners treballen tant que no tenen"
+" temps per cuinar. Demanen que algú els prepari menjar."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:220
@@ -496,6 +536,11 @@ msgid ""
 "smoke it. Furthermore, build a berry farm which will plant berry bushes, and"
 " a fruit collector’s house so the bushes will be harvested."
 msgstr ""
+"Necessitem construir una taverna per preparar racions. Per aconseguir els "
+"ingredients per fer-les, necessitem una casa del pescador i, com que el peix"
+" cru no sol agradar-los, un fumador de peix i carn. A més a més, construïu "
+"una masoveria de baies que plantarà arbustos i una casa del recol·lector de "
+"fruita perquè reculli els fruits."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:223
@@ -503,6 +548,9 @@ msgid ""
 "We should start expanding our territory faster in order to have enough space"
 " for many berry farms, and a longer coastline for fishing."
 msgstr ""
+"Hem d'expandir el territori que controlem més ràpidament per tenir prou "
+"espai per les masoveries de baies que necessitem i que els nostres pescadors"
+" disposin de més costes on poder pescar."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:227
 msgid "Enhancing the Food Economy"
@@ -525,6 +573,9 @@ msgid ""
 "happy. Better take precautions – build a second tavern, then consider "
 "enhancing one to a drinking hall."
 msgstr ""
+"Però quan s'hagin d'expandir les mines, les racions no seran suficients. "
+"Prengueu mesures i construïu una segona taverna i considereu després si cal "
+"millorar-ne una a una sala de begudes."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:236
@@ -559,6 +610,9 @@ msgid ""
 "We can now produce all the kinds of food that we are used to. I wonder what "
 "treasures these hills might contain? We should find out."
 msgstr ""
+"Ara ja podem produir tots els tipus d'aliment als que necessitem. Em "
+"pregunto quins tresors hi ha amagats en aquelles muntanyes. Ho hauríem "
+"d'esbrinar."
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:250
@@ -858,6 +912,8 @@ msgid ""
 "They are defeated! I thank you, all my gods, for granting us victory over "
 "the unbelievers!"
 msgstr ""
+"Els hem derrotat! Us dono les gràcies, déus meus, per garantir-nos la "
+"victòria contra els infidels!"
 
 #. TRANSLATORS: Maukor – enemy defeated 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:389
@@ -865,6 +921,8 @@ msgid ""
 "I pray to God to hear my last words. Let not the false fiend triumph! Punish"
 " them for this ignoble feat!"
 msgstr ""
+"Prego a Déu que escolti les meves últimes paraules. Que no triomfi el fals "
+"dimoni! Castigueu-lo per aquest acte innoble!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:392
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:398
@@ -929,6 +987,8 @@ msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"
 msgstr ""
+"Heu completat la missió. Podeu avançar al proper escenari per ajudar-nos a "
+"construir una nova llar, lluny de l'abast d'aquest Déu impostor i venjatiu…"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format

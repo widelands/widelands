@@ -23,24 +23,3 @@ wl_library(io_fileread
     io_filesystem
     io_stream
 )
-
-wl_library(io_filesystem
-  SRCS
-    filesystem/disk_filesystem.cc
-    filesystem/disk_filesystem.h
-    filesystem/filesystem.cc
-    filesystem/filesystem.h
-    filesystem/filesystem_exceptions.h
-    filesystem/layered_filesystem.cc
-    filesystem/layered_filesystem.h
-    filesystem/zip_exceptions.h
-    filesystem/zip_filesystem.cc
-    filesystem/zip_filesystem.h
-  DEPENDS
-    base_exceptions
-    base_log
-    base_macros
-    io_fileread
-    io_stream
-    third_party_minizip
-)

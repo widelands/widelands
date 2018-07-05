@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-11 05:42+0000\n"
-"PO-Revision-Date: 2018-05-12 03:26+0000\n"
+"POT-Creation-Date: 2018-05-31 10:07+0000\n"
+"PO-Revision-Date: 2018-06-16 04:58+0000\n"
 "Last-Translator: tamanegi\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -1393,7 +1393,7 @@ msgctxt "frisians_building"
 msgid ""
 "Of course I could still forge short and long swords, but it is beneath my "
 "honor to bother with such basic equipment now."
-msgstr ""
+msgstr "当然、打とうと思えば今でも小剣や長剣を打つことはできる。しかし、今の私にはそのような普通の装備を打つことに意義を感じられない。"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
@@ -1407,7 +1407,7 @@ msgstr "最高級のヘルムと武器以外を打つことを拒んだ熟練鍛
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:16
 msgctxt "building"
 msgid "Produces advanced weapons and golden helmets for the soldiers."
-msgstr ""
+msgstr "兵士のために優れた武器とゴールデンヘルムを生産します。"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:6
@@ -1427,7 +1427,7 @@ msgstr "兵士の訓練への自身の影響力を指摘した鍛冶師の言葉
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:16
 msgctxt "building"
 msgid "Produces basic weapons and helmets for the soldiers."
-msgstr ""
+msgstr "兵士のための普通の武器やヘルムを生産します。"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:3
@@ -1603,7 +1603,7 @@ msgctxt "frisians_building"
 msgid ""
 "If there is not enough coal, only the most foolish of leaders would deprive "
 "his brick kilns of it first."
-msgstr ""
+msgstr "石炭が足りないからって真っ先にレンガ焼窯から石炭を取り上げるとか、最低レベルにアホなリーダーじゃないとできないよな。"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:8
@@ -2730,10 +2730,6 @@ msgstr "カヤは収穫を待つばかりです。"
 msgid "This reed has just been planted."
 msgstr "カヤは植えられたばかりです。"
 
-#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
-#. script probably want to lose the blank space here.
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
 #: ../../data/tribes/immovables/resi_coal1/helptexts.lua:3
@@ -3921,6 +3917,8 @@ msgid ""
 "inns to prepare meals."
 msgstr "闘技場の兵士はこの強いビールしか受け付けません。野蛮人の力の源がこのエールにあると言う人すらいるそうです。これは兵士の回避訓練の全ての段階で使われます。また、大食堂で食事を生産する際にも用いられます。"
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -5461,8 +5459,8 @@ msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
 msgstr "鉱夫、兵士、斥候のためにピタパンを焼きます。"
 
-#. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
+#. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #: ../../data/tribes/workers/barbarians/blacksmith/helptexts.lua:3
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"

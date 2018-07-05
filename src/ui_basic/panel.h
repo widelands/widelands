@@ -311,7 +311,7 @@ protected:
 	static void play_new_chat_member();
 	static void play_new_chat_message();
 
-	static bool draw_tooltip(RenderTarget&, const std::string& text);
+	static bool draw_tooltip(const std::string& text);
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
 	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
