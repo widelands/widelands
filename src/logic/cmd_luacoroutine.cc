@@ -23,6 +23,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -53,7 +54,7 @@ void CmdLuaCoroutine::execute(Game& game) {
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
 			std::unique_ptr<Message> msg(new Widelands::Message(
 			   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
-			   "images/ui_basic/menu_help.png", "Lua Coroutine Failed", e.what()));
+			   "images/ui_basic/menu_help.png", "Lua Coroutine Failed", richtext_escape(e.what())));
 			game.get_player(i)->add_message(game, std::move(msg), true);
 		}
 		game.game_controller()->set_desired_speed(0);
