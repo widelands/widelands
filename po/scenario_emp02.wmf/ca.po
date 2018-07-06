@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-05 17:07+0000\n"
-"PO-Revision-Date: 2018-05-06 10:00+0000\n"
+"POT-Creation-Date: 2018-06-28 06:01+0000\n"
+"PO-Revision-Date: 2018-07-02 16:49+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgid ""
 "Build a stonemason’s house and then a complete mining and production "
 "infrastructure (coal mine and / or charcoal kiln, iron mine, toolsmithy, "
 "weapon smithy, armor smithy and smelting works)."
-msgstr "Construïu un taller de la pedra. Després podreu completar la infraestructura de mineria i producció (mina de carbó i/o kiln de carbó vegetal, mina de ferro, forn de metalls i tallers d'eines, armes i armadures)."
+msgstr "Construïu un taller de la pedra. Després podreu completar la infraestructura de mineria i producció (mina de carbó i/o kiln de carbó, mina de ferro, forn de metalls i tallers d'eines, armes i armadures)."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:72
 msgid "Provide your miners with food"
@@ -343,7 +343,7 @@ msgid ""
 "of iron ore. I advise you to immediately build iron and coal mines (or at "
 "least charcoal kilns), smelting works, toolsmithies, armor and weapon "
 "smithies."
-msgstr "Pels déus! Un increïble cop de sort! Hi ha dues muntanyes més i sembla que una té una quantitat important de carbó i l'altra de mineral de ferro. Hauríem de començar a construir immediatament mines de mineral de ferro i de carbó (o almenys kilns de carbó vegetal), forns de metalls i tallers d'eines, armes i armadures."
+msgstr "Pels déus! Un increïble cop de sort! Hi ha dues muntanyes més i sembla que una té una quantitat important de carbó i l'altra de mineral de ferro. Hauríem de començar a construir immediatament mines de mineral de ferro i de carbó (o almenys kilns de carbó), forns de metalls i tallers d'eines, armes i armadures."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:203
