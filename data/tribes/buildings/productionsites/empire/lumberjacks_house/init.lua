@@ -26,7 +26,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      logproducer = true
+      collects_ware_from_map = "log"
    },
 
    working_positions = {

@@ -1,10 +1,27 @@
 -- =======================================================================
 --                                 Player 3
 -- =======================================================================
--- Player 3 (Vesta) will be introduced to the game when discovered
--- So, for the beginning we forbid everything and do not place any buildings
+-- AI for P3 is set to "empty" therefore we place the buildings and the roads and let the economy flow a bit
+field_well = map:get_field(17, 182)
+place_building_in_region(p3, "empire_well", {field_well})
+
+field_brewery = map:get_field(19, 183)
+place_building_in_region(p3, "empire_brewery", {field_brewery})
+
+field_mill = map:get_field(18, 184)
+place_building_in_region(p3, "empire_mill", {field_mill})
+
+field_warehouse = map:get_field(21, 186)
+place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}, wares = {wheat = 200}})
+
+   r1 = p3:place_road(field_warehouse.immovable.flag, "l", "tl", true)
+   r2 = p3:place_road(field_mill.immovable.flag, "tr", "r", true)
+   r3 = p3:place_road(field_mill.immovable.flag, "l", "tl", "tr", true)
+   r4 = p3:place_road(field_mill.immovable.flag, "br", "r", true)
 
 p3:forbid_buildings("all")
+local eco = field_warehouse.brn.immovable.economy
+eco:set_ware_target_quantity("beer", 180)
 
 -- =======================================================================
 --                                 Player 1
