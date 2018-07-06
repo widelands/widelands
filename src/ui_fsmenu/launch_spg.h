@@ -59,7 +59,7 @@ protected:
 
 private:
 	void layout() override;
-	void update();
+	void update(bool map_was_changed);
 
 	bool select_map();
 	void win_condition_selected() override;

@@ -85,10 +85,19 @@ FullscreenMenuLaunchSPG::FullscreenMenuLaunchSPG(GameSettingsProvider* const set
      // Variables and objects used in the menu
      is_scenario_(false) {
 	subscriber_ =
-	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings&) {
-		   update();
+	   Notifications::subscribe<NoteGameSettings>([this](const NoteGameSettings& note) {
+		switch (note.action) {
+		case NoteGameSettings::Action::kMap:
+			update(true);
+			break;
+		case NoteGameSettings::Action::kPlayer:
+			update(false);
+			break;
+		case NoteGameSettings::Action::kUser:
+			update(false);
+			break;
+		}
 		});
-
 
 	ok_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 9 / 10));
 	back_.set_pos(Vector2i(get_w() * 7 / 10, get_h() * 17 / 20));
@@ -152,7 +161,7 @@ void FullscreenMenuLaunchSPG::clicked_back() {
 		// No map has been selected: Go back to main menu
 		return end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kBack);
 	}
-	update();
+	update(true);
 }
 
 void FullscreenMenuLaunchSPG::win_condition_selected() {
@@ -191,26 +200,28 @@ void FullscreenMenuLaunchSPG::clicked_ok() {
  * update the user interface and take care of the visibility of
  * buttons and text.
  */
-void FullscreenMenuLaunchSPG::update() {
+void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
 	const GameSettings& settings = settings_->settings();
 
-	{
-		// Translate the maps name
-		const char* nomap = _("(no map)");
-		i18n::Textdomain td("maps");
-		mapname_.set_text(settings.mapname.size() != 0 ? _(settings.mapname) : nomap);
+	if (map_was_changed) {
+		{
+			// Translate the map's name
+			const char* nomap = _("(no map)");
+			i18n::Textdomain td("maps");
+			mapname_.set_text(settings.mapname.size() != 0 ? _(settings.mapname) : nomap);
+		}
+		filename_ = settings.mapfilename;
+		nr_players_ = settings.players.size();
+
+		ok_.set_enabled(settings_->can_launch());
+
+		select_map_.set_visible(settings_->can_change_map());
+		select_map_.set_enabled(settings_->can_change_map());
+
+		set_player_names_and_tribes();
 	}
-	filename_ = settings.mapfilename;
-	nr_players_ = settings.players.size();
 
-	ok_.set_enabled(settings_->can_launch());
-
-	select_map_.set_visible(settings_->can_change_map());
-	select_map_.set_enabled(settings_->can_change_map());
-
-	set_player_names_and_tribes();
-
-	// "Choose Position" Buttons in frond of PDG
+	// "Choose Position" Buttons in front of PlayerDescriptionGroups
 	for (uint8_t i = 0; i < nr_players_; ++i) {
 		pos_[i]->set_visible(true);
 		const PlayerSettings& player = settings.players[i];
@@ -252,7 +263,7 @@ bool FullscreenMenuLaunchSPG::select_map() {
 	safe_place_for_host(nr_players_);
 	settings_->set_map(mapdata.name, mapdata.filename, nr_players_);
 	update_win_conditions();
-	update();
+	update(true);
 	return true;
 }
 
@@ -282,7 +293,7 @@ void FullscreenMenuLaunchSPG::set_player_names_and_tribes() {
  */
 void FullscreenMenuLaunchSPG::switch_to_position(uint8_t const pos) {
 	settings_->set_player_number(pos);
-	update();
+	update(false);
 }
 
 /**
