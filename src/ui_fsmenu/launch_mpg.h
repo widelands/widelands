@@ -49,7 +49,8 @@ public:
 	~FullscreenMenuLaunchMPG() override;
 
 	void set_chat_provider(ChatProvider&);
-	void refresh() override;
+	void think() override;
+	void refresh();
 
 protected:
 	void clicked_ok() override;
