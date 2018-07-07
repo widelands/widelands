@@ -34,35 +34,6 @@
 #include "io/filesystem/layered_filesystem.h"
 
 // TODO(GunChleoc): Arabic: line height broken for descriptions for Arabic.
-namespace {
-// 'is_first' omits the vertical gap before the line.
-// 'noescape' is needed for error message formatting and does not call richtext_escape.
-std::string as_header_with_content(const std::string& header,
-                                   const std::string& content,
-                                   UI::PanelStyle style,
-                                   bool is_first = false,
-                                   bool noescape = false) {
-	switch (style) {
-	case UI::PanelStyle::kFsMenu:
-		return (boost::format(
-		           "<p><font size=%i bold=1 shadow=1>%s%s <font color=D1D1D1>%s</font></font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") %
-		        (noescape ? header : richtext_escape(header)) %
-		        (noescape ? content : richtext_escape(content)))
-		   .str();
-	case UI::PanelStyle::kWui:
-		return (boost::format(
-		           "<p><font size=%i>%s<font bold=1 color=D1D1D1>%s</font> %s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") %
-		        (noescape ? header : richtext_escape(header)) %
-		        (noescape ? content : richtext_escape(content)))
-		   .str();
-	}
-	NEVER_HERE();
-}
-
-}  // namespace
-
 SavegameData::SavegameData()
    : gametime(""),
      nrplayers("0"),

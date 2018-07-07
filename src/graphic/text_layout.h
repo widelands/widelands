@@ -26,6 +26,7 @@
 #include "graphic/color.h"
 #include "graphic/font_handler1.h"
 #include "graphic/image.h"
+#include "graphic/panel_styles.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 
@@ -93,6 +94,15 @@ std::string as_tooltip(const std::string&);
 std::string as_waresinfo(const std::string&);
 std::string as_game_tip(const std::string&);
 std::string as_message(const std::string& heading, const std::string& body);
+
+/**
+ * 'is_first' omits the vertical gap before the line.
+ * 'noescape' is needed for error message formatting and does not call richtext_escape. */
+std::string as_header_with_content(const std::string& header,
+                                   const std::string& content,
+                                   UI::PanelStyle style,
+                                   bool is_first = false,
+                                   bool noescape = false);
 
 /**
   * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too

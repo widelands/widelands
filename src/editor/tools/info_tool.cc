@@ -135,9 +135,8 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	}
 
 	buf += as_listitem(
-	       /** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and
-	        * unwalkable" */
-	       /** TRANSLATORS: You can also translate this as "Category: %s" or "Property: %s" */
+	       /** TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable, unreachable and
+	        * unwalkable". You can also translate this as "Category: %s" or "Property: %s" */
 	       (boost::format(_("Is: %s")) %
 	        i18n::localize_list(terrain_is_strings, i18n::ConcatenateWith::AMPERSAND))
 	          .str(), kListFontsize);
@@ -145,10 +144,10 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	       (boost::format(_("Editor Category: %s")) % ter.editor_category()->descname()).str(), kListFontsize);
 
 	// *** Map Object info
-	/** TRANSLATORS: Heading for immovables and animals in editor info tool */
 	const Widelands::BaseImmovable* immovable = f.get_immovable();
 	Widelands::Bob* bob =f.get_first_bob();
 	if (immovable || bob) {
+		/** TRANSLATORS: Heading for immovables and animals in editor info tool */
 		buf += as_heading(_("Objects"));
 		if (immovable) {
 			buf += as_listitem(
@@ -209,7 +208,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	buf += as_heading(_("Map"));
 	buf += as_listitem((boost::format(pgettext("map_name", "Name: %s")) % map->get_name()).str(), kListFontsize);
 	buf += as_listitem(
-	       (boost::format(_("Size: %1$ix%2$i")) % map->get_width() % map->get_height()).str(), kListFontsize);
+	       (boost::format(_("Size: %1% x %2%")) % map->get_width() % map->get_height()).str(), kListFontsize);
 
 	if (map->get_nrplayers() > 0) {
 		buf +=
@@ -220,7 +219,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	}
 
 	buf += as_listitem((boost::format(_("Author: %s")) % map->get_author()).str(), kListFontsize);
-	buf += as_listitem((boost::format(_("Descr: %s")) % map->get_description()).str(), kListFontsize);
+	buf += as_listitem((boost::format(_("Description: %s")) % map->get_description()).str(), kListFontsize);
 
 	multiline_textarea->set_text(as_richtext(buf));
 
