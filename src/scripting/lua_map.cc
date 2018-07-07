@@ -3586,7 +3586,7 @@ void LuaEconomy::__unpersist(lua_State* L) {
       Returns the amount of the given ware that should be kept in stock for this economy.
 
       **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you should get a fresh economy
+      through placing/deleting roads and flags, you must get a fresh economy
       object every time you use this function.
 
       :arg warename: the name of the ware.
@@ -3610,7 +3610,7 @@ int LuaEconomy::ware_target_quantity(lua_State* L) {
       Returns the amount of the given worker that should be kept in stock for this economy.
 
       **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you should get a fresh economy
+      through placing/deleting roads and flags, you must get a fresh economy
       object every time you use this function.
 
       :arg workername: the name of the worker.
@@ -3634,7 +3634,7 @@ int LuaEconomy::worker_target_quantity(lua_State* L) {
       Sets the amount of the given ware type that should be kept in stock for this economy.
 
       **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you should get a fresh economy
+      through placing/deleting roads and flags, you must get a fresh economy
       object every time you use this function.
 
       :arg warename: the name of the ware type.
@@ -3664,7 +3664,7 @@ int LuaEconomy::set_ware_target_quantity(lua_State* L) {
       Sets the amount of the given worker type that should be kept in stock for this economy.
 
       **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you should get a fresh economy
+      through placing/deleting roads and flags, you must get a fresh economy
       object every time you use this function.
 
       :arg workername: the name of the worker type.
@@ -4060,7 +4060,7 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
       (RO) Returns the economy that this flag belongs to.
 
       **Warning**: Since economies can disappear when a player merges them
-      through placing/deleting roads and flags, you should get a fresh economy
+      through placing/deleting roads and flags, you must get a fresh economy
       object every time you call another function on the resulting economy object.
 
       :returns: The :class:`Economy` associated with the flag.
