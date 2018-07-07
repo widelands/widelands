@@ -34,33 +34,36 @@
 #include "logic/widelands.h"
 #include "profile/profile.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/multilinetextarea.h"
 
 namespace {
 constexpr int kMargin = 4;
 // If this ever gets changed, don't forget to change the strings in the warning box as well.
 constexpr Widelands::PlayerNumber max_recommended_players = 8;
-} // namespace
+}  // namespace
 
 class EditorPlayerMenuWarningBox : public UI::Window {
 public:
-	explicit EditorPlayerMenuWarningBox(UI::Panel* parent) :
-		Window(parent, "editor_player_menu_warning_box", 0, 0, 500, 220, _("Too Many Players")),
-		box_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
-		warning_label_(&box_,
-					 0,
-					 0,
-					 300,
-					 0,
-					 UI::PanelStyle::kWui,
-					 /** TRANSLATORS: Info text in editor player menu */
-					 _("We do not recommend setting more than 8 players except for testing purposes. Are you sure that you want more than 8 players?"),
-					 UI::Align::kLeft,
-					 UI::MultilineTextarea::ScrollMode::kNoScrolling),
-		/** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except for testing purposes. Are you sure that you want more than 8 players?' */
-		reminder_choice_(&box_, Vector2i::zero(), _("Do not remind me again")),
-		button_box_(&box_, kMargin, kMargin, UI::Box::Horizontal, 0, 0, 2 * kMargin),
-		ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
-		cancel_(&button_box_, "cancel", 0, 0, 120, 0, UI::ButtonStyle::kWuiSecondary, _("Abort")) {
+	explicit EditorPlayerMenuWarningBox(UI::Panel* parent)
+	   : Window(parent, "editor_player_menu_warning_box", 0, 0, 500, 220, _("Too Many Players")),
+	     box_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
+	     warning_label_(&box_,
+	                    0,
+	                    0,
+	                    300,
+	                    0,
+	                    UI::PanelStyle::kWui,
+	                    /** TRANSLATORS: Info text in editor player menu */
+	                    _("We do not recommend setting more than 8 players except for testing "
+	                      "purposes. Are you sure that you want more than 8 players?"),
+	                    UI::Align::kLeft,
+	                    UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	     /** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except for
+	        testing purposes. Are you sure that you want more than 8 players?' */
+	     reminder_choice_(&box_, Vector2i::zero(), _("Do not remind me again")),
+	     button_box_(&box_, kMargin, kMargin, UI::Box::Horizontal, 0, 0, 2 * kMargin),
+	     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
+	     cancel_(&button_box_, "cancel", 0, 0, 120, 0, UI::ButtonStyle::kWuiSecondary, _("Abort")) {
 
 		set_center_panel(&box_);
 
@@ -77,7 +80,8 @@ public:
 		box_.add_space(kMargin);
 
 		ok_.sigclicked.connect(boost::bind(&EditorPlayerMenuWarningBox::ok, boost::ref(*this)));
-		cancel_.sigclicked.connect(boost::bind(&EditorPlayerMenuWarningBox::cancel, boost::ref(*this)));
+		cancel_.sigclicked.connect(
+		   boost::bind(&EditorPlayerMenuWarningBox::cancel, boost::ref(*this)));
 	}
 
 	void ok() {
@@ -92,7 +96,8 @@ public:
 
 	void write_option() {
 		if (reminder_choice_.get_state()) {
-			g_options.pull_section("global").set_bool("editor_player_menu_warn_too_many_players", false);
+			g_options.pull_section("global").set_bool(
+			   "editor_player_menu_warn_too_many_players", false);
 		}
 	}
 
@@ -122,7 +127,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                     UI::DropdownType::kTextual,
                     UI::PanelStyle::kWui),
      default_tribe_(Widelands::get_all_tribenames().front()) {
-	box_.set_size(100, 100); // Prevent assert failures
+	box_.set_size(100, 100);  // Prevent assert failures
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kMargin);
 
@@ -135,7 +140,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		// Init player 1
 		mutable_map->set_scenario_player_ai(1, "");
 		mutable_map->set_scenario_player_closeable(1, false);
- 	   /** TRANSLATORS: Default player name, e.g. Player 1 */
+		/** TRANSLATORS: Default player name, e.g. Player 1 */
 		mutable_map->set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
 		mutable_map->set_scenario_player_tribe(1, default_tribe_);
 		eia().set_need_save(true);
@@ -234,7 +239,8 @@ void EditorPlayerMenu::no_of_players_clicked() {
 
 	// Display a warning if there are too many players
 	if (nr_players > max_recommended_players) {
-		if (g_options.pull_section("global").get_bool("editor_player_menu_warn_too_many_players", true)) {
+		if (g_options.pull_section("global").get_bool(
+		       "editor_player_menu_warn_too_many_players", true)) {
 			EditorPlayerMenuWarningBox warning(get_parent());
 			if (warning.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 				// Abort setting of players
@@ -317,7 +323,8 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 			rows_.at(pn - 1)->position->set_perm_pressed(true);
 		} else {
 			rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiSecondary);
-			rows_.at(pn - 1)->position->set_perm_pressed(map->get_starting_pos(pn) != Widelands::Coords::null());
+			rows_.at(pn - 1)->position->set_perm_pressed(map->get_starting_pos(pn) !=
+			                                             Widelands::Coords::null());
 		}
 	}
 }

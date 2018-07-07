@@ -20,7 +20,6 @@
 #ifndef WL_EDITOR_UI_MENUS_PLAYER_MENU_H
 #define WL_EDITOR_UI_MENUS_PLAYER_MENU_H
 
-#include <cstring>
 #include <memory>
 #include <string>
 #include <vector>
@@ -29,8 +28,6 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
 class EditorInteractive;
@@ -43,9 +40,10 @@ public:
 
 private:
 	struct PlayerEditRow {
-		explicit PlayerEditRow(UI::Box* init_box, UI::EditBox* init_name,
-		                    UI::Button* init_position,
-		                    UI::Dropdown<std::string>* init_tribe)
+		explicit PlayerEditRow(UI::Box* init_box,
+		                       UI::EditBox* init_name,
+		                       UI::Button* init_position,
+		                       UI::Dropdown<std::string>* init_tribe)
 		   : box(init_box), name(init_name), position(init_position), tribe(init_tribe) {
 		}
 		UI::Box* box;
