@@ -507,6 +507,47 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
 }
 
 /**
+ * Accelerate potential promotion of roads adjacent to a newly promoted road.
+ */
+void Flag::propagate_promoted_road(Road* const promoted_road) {
+	// Abort if flag has a building attached to it
+	if (building_) {
+		return;
+	}
+
+	// Calculate the sum of the involved wallets' adjusted value
+	int32_t sum = 0;
+	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+		Road* const road = roads_[i];
+		if (road && road != promoted_road) {
+			sum += kRoadMaxWallet + road->wallet() * road->wallet();
+		}
+	}
+
+	// Distribute propagation coins in a smart way
+	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+		Road* const road = roads_[i];
+		if (road && road->get_roadtype() != RoadType::kBusy) {
+			road->add_to_wallet(0.5 * (kRoadMaxWallet - road->wallet()) *
+			                    (kRoadMaxWallet + road->wallet() * road->wallet()) / sum);
+		}
+	}
+}
+
+/**
+ * Count only those wares which are awaiting to be carried along the same road.
+*/
+uint8_t Flag::count_wares_in_queue(PlayerImmovable& dest) const {
+	uint8_t n = 0;
+	for (int32_t i = 0; i < ware_filled_; ++i) {
+		if (wares_[i].nextstep == &dest) {
+			++n;
+		}
+	}
+	return n;
+}
+
+/**
  * Return a List of all the wares currently on this Flag. Do not rely
  * the result value to stay valid and do not change them
  */

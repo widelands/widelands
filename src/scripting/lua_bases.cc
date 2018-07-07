@@ -338,7 +338,7 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
    If a table is an array, the map 'keys' will contain no mappings for the array's key_keys.
 */
 static void save_table_recursively(lua_State* L,
-                                   std::string depth,
+                                   const std::string& depth,
                                    std::map<std::string, const char*>* data,
                                    std::map<std::string, const char*>* keys,
                                    std::map<std::string, const char*>* type,
@@ -346,11 +346,11 @@ static void save_table_recursively(lua_State* L,
 	lua_pushnil(L);
 	uint32_t i = 0;
 	while (lua_next(L, -2) != 0) {
-		std::string key_key = depth + "_" + std::to_string(i);
+		const std::string key_key = depth + "_" + std::to_string(i);
 
 		// check the value's type
 		const char* type_name = lua_typename(L, lua_type(L, -1));
-		std::string t = std::string(type_name);
+		const std::string t = std::string(type_name);
 
 		(*type)[key_key] = type_name;
 
@@ -461,7 +461,7 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
    and the key-value pair is written to the table as the correct type.
 */
 static void push_table_recursively(lua_State* L,
-                                   std::string depth,
+                                   const std::string& depth,
                                    Section* data_section,
                                    Section* keys_section,
                                    Section* type_section,
@@ -469,19 +469,13 @@ static void push_table_recursively(lua_State* L,
 	const uint32_t size = size_section->get_natural(depth.c_str());
 	lua_newtable(L);
 	for (uint32_t i = 0; i < size; i++) {
-		std::string key_key_str(depth + '_' + std::to_string(i));
+		const std::string key_key_str(depth + '_' + std::to_string(i));
 		const char* key_key = key_key_str.c_str();
-
-		log("Checking whether a key for '%s' (data type is %s) exists ... ", key_key,
-		    type_section->get_string(key_key));  // NOCOM remove this log
 		if (keys_section->has_val(key_key)) {
-			// this is a table
-			log("YES, the key is called '%s'.\n",
-			    keys_section->get_string(key_key));  // NOCOM remove this log
+			// This is a table
 			lua_pushstring(L, keys_section->get_string(key_key));
 		} else {
-			// this must be an array
-			log("NO, [%i] will be used as key.\n", i + 1);  // NOCOM remove this log
+			// This must be an array
 			lua_pushinteger(L, i + 1);
 		}
 
