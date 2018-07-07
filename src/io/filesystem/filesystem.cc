@@ -274,7 +274,7 @@ std::string FileSystem::get_xdgdir() {
 #ifdef HAS_GETENV
 	else {
 		if (char const* const x = getenv("XDG_DATA_HOME")) {
-			xdgdir = xdgdir + "/widelands";
+			xdgdir = x + "/widelands";
 		}
 		else {
 			// If XDG_DATA_HOME is not set, the default path is used.
