@@ -24,6 +24,7 @@ function dismantle()
    p1:allow_buildings("all")
    p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum"}
    o.done = true
+
    campaign_message_box(amalea_3)
    run(clear_roads)
    run(quarries_lumberjacks)
@@ -395,21 +396,6 @@ function wheat_chain()
       sleep(2500)
    end
 
-   local field_well = map:get_field(17, 182)
-   place_building_in_region(p3, "empire_well", {field_well})
-
-   local field_brewery = map:get_field(19, 183)
-   place_building_in_region(p3, "empire_brewery", {field_brewery})
-
-   local fiel_mill = map:get_field(18, 184)
-   place_building_in_region(p3, "empire_mill", {fiel_mill})
-
-   local field_warehouse = map:get_field(21, 186)
-   place_building_in_region(p3, "empire_warehouse", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}})
-
-   local field_sentry = map:get_field(19, 185)
-   place_building_in_region(p3, "empire_sentry", {field_sentry}, {soldiers = {[{0,0,0,0}] = 1}})
-
    o.done = true
    sleep(4000)
 
@@ -425,7 +411,7 @@ function wheat_chain()
    scroll_to_map_pixel(prior_center)
 
    local hq = p1:get_buildings("empire_headquarters")
-   local wh = p3:get_buildings("empire_warehouse")
+   local wh = p3:get_buildings("empire_temple_of_vesta")
    while not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do sleep(4000) end
    if p3.defeated then
       o1.done = true
@@ -446,17 +432,30 @@ function wheat_chain()
       p1:allow_buildings{"empire_mill", "empire_brewery"}
       campaign_message_box(julia_1)
 
-      -- replace Julias buildings with similar ones of the player
+      --remove all workers from p3 to avoid having them wandering around
+      field_brewery.immovable:set_workers("empire_brewer", 0)
+      field_mill.immovable:set_workers("empire_miller", 0)
+      wh[1]:set_workers("empire_carrier", 0)
+      wh[1]:set_workers("empire_recruit", 0)
+      field_well.immovable:set_workers("empire_carrier", 0)
+      r1:set_workers("empire_carrier", 0)
+      r2:set_workers("empire_carrier", 0)
+      r3:set_workers("empire_carrier", 0)
+      r4:set_workers("empire_carrier", 0)
+      --replace Julias buildings with similar ones of the player
       field_well.immovable:remove()
       field_brewery.immovable:remove()
-      fiel_mill.immovable:remove()
+      field_mill.immovable:remove()
       field_warehouse.immovable:remove()
-      field_sentry.immovable:remove()
       place_building_in_region(p1, "empire_well", {field_well})
       place_building_in_region(p1, "empire_brewery", {field_brewery})
-      place_building_in_region(p1, "empire_mill", {fiel_mill})
-      place_building_in_region(p1, "empire_warehouse", {field_warehouse}, {wares = {water = 30, flour = 30, beer = 40,}})
-      place_building_in_region(p1, "empire_sentry", {field_sentry})
+      place_building_in_region(p1, "empire_mill", {field_mill})
+      place_building_in_region(p1, "empire_temple_of_vesta", {field_warehouse}, {wares = {water = 30, flour = 30, beer = 40,}})
+      connected_road(p1, field_warehouse.immovable.flag, "l, tl", true)
+      connected_road(p1, field_mill.immovable.flag, "tr, r", true)
+      connected_road(p1, field_mill.immovable.flag, "l, tl, tr", true)
+      connected_road(p1, field_mill.immovable.flag, "br, r", true)
+
 
       campaign_message_box(amalea_12)
       campaign_message_box(saledus_3)

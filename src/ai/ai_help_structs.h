@@ -80,6 +80,7 @@ enum class BuildingAttribute : uint8_t {
 	kIronMine,
 	kNeedsSeafaring,
 	kSupportingProducer,
+	kNeedsBerry,
 };
 
 enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
@@ -342,6 +343,7 @@ struct BuildableField {
 	uint16_t unowned_mines_spots_nearby;
 	uint16_t unowned_iron_mines_nearby;
 	uint8_t trees_nearby;
+	uint8_t bushes_nearby;
 	uint8_t rocks_nearby;
 	int16_t water_nearby;
 	int16_t open_water_nearby;
@@ -388,6 +390,7 @@ struct BuildableField {
 
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
+	std::vector<uint8_t> collecting_producers_nearby;
 	// and for rangers, fishbreeders:
 	std::vector<uint8_t> supporters_nearby;
 };
@@ -470,6 +473,7 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	std::set<DescriptionIndex> production_hints;
+	DescriptionIndex collected_map_resource;
 	bool requires_supporters;
 
 	// information needed for decision on new building construction

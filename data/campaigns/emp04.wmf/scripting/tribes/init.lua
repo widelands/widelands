@@ -18,6 +18,7 @@ print_loading_message("Loading campaign-specific tribe units", function()
    include "map:scripting/tribes/trainingcamp1.lua"
    include "map:scripting/tribes/well2.lua"
    include "map:scripting/tribes/well1.lua"
+   include "map:scripting/tribes/temple_of_vesta.lua"
 end)
 
 tribes:add_custom_building {
@@ -53,4 +54,9 @@ tribes:add_custom_building {
 tribes:add_custom_building {
    tribename = "empire",
    buildingname = "empire_well2",
+}
+
+tribes:add_custom_building {
+   tribename = "empire",
+   buildingname = "empire_temple_of_vesta",
 }

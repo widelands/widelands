@@ -22,6 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
+#include "profile/profile.h"
 #include "wui/gamedetails.h"
 
 FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
@@ -48,7 +49,8 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
                    UI::PanelStyle::kFsMenu,
                    true),
 
-     is_replay_(is_replay) {
+     is_replay_(is_replay),
+     showing_filenames_(false) {
 
 	// Make sure that we have some space to work with.
 	main_box_.set_size(get_w(), get_w());
@@ -57,6 +59,10 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	main_box_.add_inf_space();
 	main_box_.add(&title_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
 	main_box_.add_inf_space();
+	if (is_replay_) {
+		show_filenames_ = new UI::Checkbox(&main_box_, Vector2i::zero(), _("Show Filenames"));
+		main_box_.add(show_filenames_, UI::Box::Resizing::kFullSize);
+	}
 	main_box_.add_inf_space();
 	main_box_.add(&info_box_, UI::Box::Resizing::kExpandBoth);
 	main_box_.add_space(padding_);
@@ -89,6 +95,13 @@ FullscreenMenuLoadGame::FullscreenMenuLoadGame(Widelands::Game& g,
 	load_or_save_.table().double_clicked.connect(
 	   boost::bind(&FullscreenMenuLoadGame::clicked_ok, boost::ref(*this)));
 
+	if (is_replay_) {
+		show_filenames_->changed.connect(
+		   boost::bind(&FullscreenMenuLoadGame::toggle_filenames, boost::ref(*this)));
+		show_filenames_->set_state(
+		   g_options.pull_section("global").get_bool("display_replay_filenames", true));
+	}
+
 	fill_table();
 	if (!load_or_save_.table().empty()) {
 		load_or_save_.table().select(0);
@@ -105,6 +118,23 @@ void FullscreenMenuLoadGame::layout() {
 	load_or_save_.table().set_desired_size(tablew_, tableh_);
 	load_or_save_.game_details()->set_max_size(
 	   main_box_.get_w() - tablew_ - right_column_margin_, tableh_);
+}
+
+void FullscreenMenuLoadGame::toggle_filenames() {
+	showing_filenames_ = show_filenames_->get_state();
+	g_options.pull_section("global").set_bool("display_replay_filenames", showing_filenames_);
+
+	// Remember selection
+	const std::set<uint32_t> selected = load_or_save_.table().selections();
+	// Fill table again
+	fill_table();
+
+	// Restore selection items
+	// TODO(GunChleoc): It would be nice to have a function to just change the entry texts
+	for (const uint32_t selectme : selected) {
+		load_or_save_.table().multiselect(selectme, true);
+	}
+	entry_selected();
 }
 
 void FullscreenMenuLoadGame::clicked_ok() {
@@ -128,7 +158,7 @@ void FullscreenMenuLoadGame::entry_selected() {
 }
 
 void FullscreenMenuLoadGame::fill_table() {
-	load_or_save_.fill_table();
+	load_or_save_.fill_table(showing_filenames_);
 }
 
 const std::string& FullscreenMenuLoadGame::filename() const {

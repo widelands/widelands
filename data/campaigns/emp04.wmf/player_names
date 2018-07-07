@@ -12,11 +12,11 @@ closeable="false"
 [player_2]
 name="Runeth"
 tribe="barbarians"
-ai=
+ai="normal"
 closeable="false"
 
 [player_3]
 name="Vesta"
 tribe="empire"
-ai=
+ai="empty"
 closeable="false"

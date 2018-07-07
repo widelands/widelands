@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-05 17:07+0000\n"
-"PO-Revision-Date: 2018-05-06 10:16+0000\n"
+"POT-Creation-Date: 2018-05-31 10:07+0000\n"
+"PO-Revision-Date: 2018-06-16 04:55+0000\n"
 "Last-Translator: tamanegi\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -199,11 +199,11 @@ msgstr "Widelands翻訳者"
 
 #: ../../data/txts/developers.lua:3
 msgid "Atlanteans"
-msgstr ""
+msgstr "アトランティス"
 
 #: ../../data/txts/developers.lua:3
 msgid "Barbarians"
-msgstr ""
+msgstr "野蛮人"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -247,7 +247,7 @@ msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
 msgid "Frisians"
-msgstr ""
+msgstr "フリジア"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
