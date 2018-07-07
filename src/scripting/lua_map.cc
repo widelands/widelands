@@ -3585,6 +3585,10 @@ void LuaEconomy::__unpersist(lua_State* L) {
 
       Returns the amount of the given ware that should be kept in stock for this economy.
 
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you should get a fresh economy
+      object every time you use this function.
+
       :arg warename: the name of the ware.
       :type warename: :class:`string`
 */
@@ -3605,6 +3609,10 @@ int LuaEconomy::ware_target_quantity(lua_State* L) {
 
       Returns the amount of the given worker that should be kept in stock for this economy.
 
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you should get a fresh economy
+      object every time you use this function.
+
       :arg workername: the name of the worker.
       :type workername: :class:`string`
 */
@@ -3624,6 +3632,10 @@ int LuaEconomy::worker_target_quantity(lua_State* L) {
    .. method:: set_ware_target_quantity(warename)
 
       Sets the amount of the given ware type that should be kept in stock for this economy.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you should get a fresh economy
+      object every time you use this function.
 
       :arg warename: the name of the ware type.
       :type warename: :class:`string`
@@ -3650,6 +3662,10 @@ int LuaEconomy::set_ware_target_quantity(lua_State* L) {
    .. method:: set_worker_target_quantity(workername)
 
       Sets the amount of the given worker type that should be kept in stock for this economy.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you should get a fresh economy
+      object every time you use this function.
 
       :arg workername: the name of the worker type.
       :type workername: :class:`string`
@@ -4042,6 +4058,10 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
    .. attribute:: economy
 
       (RO) Returns the economy that this flag belongs to.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you should get a fresh economy
+      object every time you call another function on the resulting economy object.
 
       :returns: The :class:`Economy` associated with the flag.
 */
