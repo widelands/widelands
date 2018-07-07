@@ -29,6 +29,7 @@
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
