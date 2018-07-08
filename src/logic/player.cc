@@ -1345,7 +1345,7 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());
 	}
-	ship_name_counter_ = ships_.size();
+	ship_name_counter_ = fr.unsigned_32();
 }
 
 /**

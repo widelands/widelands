@@ -82,6 +82,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 				status.info = fr.c_string();
 				manager->set_player_end_status(status);
 			}
+
 			game.read_statistics(fr);
 		} else {
 			throw UnhandledVersionError("GamePlayerInfoPacket", packet_version, kCurrentPacketVersion);
