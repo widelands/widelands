@@ -94,6 +94,7 @@ wl_library(editor
     graphic_fonthandler
     graphic_playercolor
     graphic_surface
+    graphic_text_layout
     io_filesystem
     logic
     logic_constants
