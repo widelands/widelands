@@ -136,7 +136,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier attack 1",
             "animate=working 22800",
             "checksoldier=soldier attack 1",
-            "consume=sword_broad bread_frisians beer smoked_fish,smoked_mea",
+            "consume=sword_broad bread_frisians beer smoked_fish,smoked_meat",
             "train=soldier attack 1 2",
             "produce=scrap_iron:2"
          }
