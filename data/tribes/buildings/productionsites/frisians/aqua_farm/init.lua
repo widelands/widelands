@@ -11,7 +11,7 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 2,
-      log = 2,
+      log = 1,
       thatch_reed = 1
    },
    return_on_dismantle = {
@@ -32,6 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "fish",
       prohibited_till = 760,
       requires_supporters = true
    },

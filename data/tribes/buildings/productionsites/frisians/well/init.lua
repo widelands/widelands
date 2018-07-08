@@ -10,12 +10,12 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-      log = 2,
-      granite = 1,
+      log = 1,
+      granite = 2,
       brick = 1
    },
    return_on_dismantle = {
-      log = 1,
+      granite = 1,
       brick = 1
    },
 
@@ -32,7 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      mines_water = true,
+      collects_ware_from_map = "water",
       basic_amount = 1
    },
 

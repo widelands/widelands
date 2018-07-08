@@ -71,6 +71,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
+            "call=smelt_iron",
             "return=skipped",
          },
       },

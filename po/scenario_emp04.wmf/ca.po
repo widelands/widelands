@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"POT-Creation-Date: 2018-06-28 06:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: GunChleoc, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -212,17 +212,15 @@ msgstr "Acabeu amb la intrusió bàrbara en aquesta part del món."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:156
 msgid "Build 2 charcoal kiln"
-msgstr "Construïu 2 kilns de carbó vegetal"
+msgstr "Construïu 2 kilns de carbó"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:158
 msgid "Build Two Charcoal Kilns"
-msgstr "Construïu dos kilns de carbó vegetal"
+msgstr "Construïu dos kilns de carbó"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:159
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr ""
-"Construïu dos kilns de carbó vegetal per reforçar la indústria "
-"metal·lúrgica."
+msgstr "Construïu dos kilns de carbó per reforçar la indústria metal·lúrgica."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:160
 msgid "Remember to ensure a constant log supply for them."
@@ -1000,9 +998,8 @@ msgid ""
 "mining shortfalls with charcoal. But be careful to ensure a continuous log "
 "supply afterwards."
 msgstr ""
-"Mentrestant, podria ajudar si construïm un kiln per proveir carbó vegetal si"
-" teniu poc carbó. Però caldrà anar amb compte i garantir un abastiment de "
-"troncs continu."
+"Mentrestant, podria ajudar si construïm un kiln de carbó per si en teniu "
+"poc. Però caldrà anar amb compte i garantir un abastiment de troncs continu."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:499
 msgid "Amalea is in a Good Mood"
@@ -1018,7 +1015,7 @@ msgid ""
 "Great, another issue solved! Now the charcoal will support our metal "
 "production and we can concentrate more on exploration and military strength."
 msgstr ""
-"Bé! Un altre problema resolt! Ara el carbó vegetal servirà de suport per la "
+"Bé! Un altre problema resolt! Ara el carbó servirà de suport per la "
 "producció metal·lúrgica i podem concentrar-nos més en l'exploració i "
 "augmentar les forces militars."
 
