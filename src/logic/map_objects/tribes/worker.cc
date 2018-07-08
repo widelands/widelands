@@ -889,7 +889,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 /**
  * createbob=\<bob name\> \<bob name\> ...
  *
- * Plants a bob (critter usually, maybe also worker later on), randomly celected from one of the given types.
+ * Plants a bob (critter usually, maybe also worker later on), randomly selected from one of the given types.
  *
  * sparamv = possible bobs
  */
@@ -927,7 +927,7 @@ bool Worker::run_removeobject(Game& game, State& state, const Action&) {
 }
 
 /**
- * geologist=\<repeat #\> \<radius\> \<subcommand\>
+ * repeatsearch=\<repeat #\> \<radius\> \<subcommand\>
  *
  * Walk around the starting point randomly within a certain radius, and
  * execute the subcommand for some of the fields.
@@ -937,7 +937,7 @@ bool Worker::run_removeobject(Game& game, State& state, const Action&) {
  * sparam1 = subcommand
  */
 bool Worker::run_repeatsearch(Game& game, State& state, const Action& action) {
-	molog("  Start Geologist (%i attempts, %i radius -> %s)\n", action.iparam1, action.iparam2,
+	molog("  Start Repeat Search (%i attempts, %i radius -> %s)\n", action.iparam1, action.iparam2,
 	      action.sparam1.c_str());
 
 	++state.ivar1;

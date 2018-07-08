@@ -44,7 +44,7 @@ tribes:new_worker_type {
          "walk=coords",
          "animate=planting 8000",
          "plant=attrib:seed_barley",
-         "animate=planting 40800000",
+         "animate=planting 8000",
          "return"
       },
       harvest = {
