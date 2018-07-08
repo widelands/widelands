@@ -22,7 +22,6 @@
 #include <boost/format.hpp>
 
 #include "graphic/graphic.h"
-#include "ui_basic/tabpanel.h"
 #include "wui/inputqueuedisplay.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";

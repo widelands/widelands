@@ -28,6 +28,7 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -50,17 +51,19 @@ BaseListselect::BaseListselect(Panel* const parent,
                                const int32_t y,
                                const uint32_t w,
                                const uint32_t h,
-                               const Image* button_background,
+                               UI::PanelStyle style,
                                const ListselectLayout selection_mode)
    : Panel(parent, x, y, w, h),
      lineheight_(text_height() + kMargin),
-     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, button_background),
+     scrollbar_(this, get_w() - Scrollbar::kSize, 0, Scrollbar::kSize, h, style),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_click_time_(-10000),
      last_selection_(no_selection_index()),
      selection_mode_(selection_mode),
-     background_(nullptr) {
+     background_style_(selection_mode == ListselectLayout::kDropdown ?
+                          g_gr->styles().dropdown_style(style) :
+                          nullptr) {
 	set_thinks(false);
 
 	scrollbar_.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
@@ -283,6 +286,7 @@ void BaseListselect::layout() {
 	scrollbar_.set_size(scrollbar_.get_w(), get_h());
 	scrollbar_.set_pos(Vector2i(get_w() - Scrollbar::kSize, 0));
 	scrollbar_.set_pagesize(get_h() - 2 * get_lineheight());
+	scrollbar_.set_singlestepsize(get_lineheight());
 	const int steps = entry_records_.size() * get_lineheight() - get_h();
 	scrollbar_.set_steps(steps);
 	if (scrollbar_.is_enabled() && selection_mode_ == ListselectLayout::kDropdown) {
@@ -313,8 +317,8 @@ void BaseListselect::draw(RenderTarget& dst) {
 	uint32_t idx = scrollpos_ / get_lineheight();
 	int y = 1 + idx * get_lineheight() - scrollpos_;
 
-	if (background_ != nullptr) {
-		dst.tile(Recti(Vector2i::zero(), get_w(), get_h()), background_, Vector2i::zero());
+	if (background_style_ != nullptr) {
+		draw_background(dst, *background_style_);
 	}
 
 	if (selection_mode_ == ListselectLayout::kDropdown) {

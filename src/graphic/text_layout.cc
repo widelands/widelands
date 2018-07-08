@@ -26,6 +26,7 @@
 #include <boost/format.hpp>
 
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
@@ -49,7 +50,11 @@ void replace_entities(std::string* text) {
 }
 
 int text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(as_editorfont(text, ptsize - UI::g_fh1->fontset()->size_offset()))
+	return UI::g_fh1->render(
+	                   as_editorfont(
+	                      text.substr(
+	                         0, g_gr->max_texture_size_for_font_rendering() / text_height() - 1),
+	                      ptsize - UI::g_fh1->fontset()->size_offset()))
 	   ->width();
 }
 
@@ -141,6 +146,16 @@ std::string as_aligned(const std::string& txt,
 	return f.str();
 }
 
+/// Bullet list item
+std::string as_listitem(const std::string& txt, int ptsize, const RGBColor& clr) {
+	static boost::format f("<div width=100%%><div><p><font size=%d "
+	                       "color=%s>•</font></p></div><div><p><space gap=6></p></div><div "
+	                       "width=*><p><font size=%d color=%s>%s<vspace "
+	                       "gap=6></font></p></div></div>");
+	f % ptsize % clr.hex_value() % ptsize % clr.hex_value() % txt;
+	return f.str();
+}
+
 std::string as_richtext(const std::string& txt) {
 	static boost::format f("<rt>%s</rt>");
 	f % txt;
@@ -164,10 +179,14 @@ std::string as_waresinfo(const std::string& txt) {
 }
 
 std::string as_message(const std::string& heading, const std::string& body) {
-	return ((boost::format(
-	            "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
-	         heading % (is_paragraph(body) || is_div(body) ? body : "<p>" + body + "</p>"))
-	           .str());
+	return (
+	   (boost::format(
+	       "<rt><p><font size=18 bold=1 color=D1D1D1>%s<br></font></p><vspace gap=6>%s</rt>") %
+	    heading %
+	    (is_paragraph(body) || is_div(body) ?
+	        body :
+	        (boost::format("<p><font size=%d>%s</font></p>") % UI_FONT_SIZE_MESSAGE % body).str()))
+	      .str());
 }
 
 std::shared_ptr<const UI::RenderedText>

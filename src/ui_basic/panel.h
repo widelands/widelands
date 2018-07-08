@@ -32,6 +32,7 @@
 #include "base/vector.h"
 #include "graphic/align.h"
 #include "graphic/font_handler1.h"
+#include "graphic/panel_styles.h"
 
 class RenderTarget;
 class Image;
@@ -310,7 +311,9 @@ protected:
 	static void play_new_chat_member();
 	static void play_new_chat_message();
 
-	static bool draw_tooltip(RenderTarget&, const std::string& text);
+	static bool draw_tooltip(const std::string& text);
+	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
+	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
 
 	static const Image* default_cursor_;
 	static const Image* default_cursor_click_;

@@ -4,7 +4,7 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2015-2016
+# Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
 # Arex <arex@ngs.ru>, 2015
 # CupIvan <mail@cupivan.ru>, 2017
 # George Matsune <georg29387878@gmail.com>, 2017
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
-"PO-Revision-Date: 2018-04-06 16:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-06-16 18:35+0000\n"
+"PO-Revision-Date: 2018-06-17 07:07+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -565,7 +565,7 @@ msgstr "Бронная"
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:65
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:63
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
@@ -583,7 +583,7 @@ msgstr "Бронная"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:54
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:50
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:59
@@ -1124,7 +1124,7 @@ msgstr "Верфь"
 #. TRANSLATORS: Completed/Skipped/Did not start constructing a ship because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:73
-#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:74
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:72
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:66
 msgid "constructing a ship"
@@ -2457,15 +2457,15 @@ msgctxt "frisians_building"
 msgid "Beekeeper’s House"
 msgstr "Домик пчеловода"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
 msgid "No Flowers"
 msgstr "Нет цветов"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
 msgid "Out of Flowers"
 msgstr "Цветы закончились"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
@@ -2501,10 +2501,10 @@ msgstr "кует топор дровосека"
 msgid "forging a pick"
 msgstr "кует кирку"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging needles because ...
+#. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
-msgid "forging needles"
-msgstr "кует иглы"
+msgid "making needles"
+msgstr "Производит иглы"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:7
@@ -2590,19 +2590,19 @@ msgid "Fruit Collector’s House"
 msgstr "Домик сборщика фруктов"
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:49
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:50
 msgid "gathering berries"
 msgstr "собирает ягоды"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
 msgid "No Bushes"
 msgstr "Нет кустарника"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
 msgid "Out of Berries"
 msgstr "Закончились ягоды"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:62
 msgctxt "frisians_building"
 msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
@@ -2799,8 +2799,9 @@ msgstr "Тростниковая ферма"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
 msgctxt "frisians_building"
 msgid ""
-"The farmer working at this reed farm has no cleared soil to plant his seeds."
-msgstr "Фермер, работающий на этой тростниковой ферме, не может найти почву пригодную для посева."
+"The reed farmer working at this reed farm has no cleared soil to plant his "
+"seeds."
+msgstr "Заготовщик тростника не может найти свободное место для засеивания семян"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:7
@@ -3429,6 +3430,22 @@ msgstr "Каркас (среднее)"
 msgid "Desert Hackberry (ripe)"
 msgstr "Каркас (зрелое)"
 
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:13
+msgid "Juniper (tiny)"
+msgstr "Можжевельник (крохотное)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:37
+msgid "Juniper (small)"
+msgstr "Можжевельник (малое)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:61
+msgid "Juniper (medium)"
+msgstr "Можжевельник (среднее)"
+
+#: ../../data/tribes/immovables/berry_bushes/juniper/init.lua:85
+msgid "Juniper (ripe)"
+msgstr "Можжевельник (зрелое)"
+
 #: ../../data/tribes/immovables/berry_bushes/raspberry/init.lua:13
 msgid "Raspberry Bush (tiny)"
 msgstr "Малина (крохотное)"
@@ -3462,19 +3479,19 @@ msgid "Sea Buckthorn (ripe)"
 msgstr "Облепиха (зрелое)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
-msgid "Strawberry Bush (tiny)"
+msgid "Strawberries (tiny)"
 msgstr "Клубника (крохотное)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:37
-msgid "Strawberry Bush (small)"
+msgid "Strawberries (small)"
 msgstr "Клубника (малое)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
-msgid "Strawberry Bush (medium)"
+msgid "Strawberries (medium)"
 msgstr "Клубника (среднее)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
-msgid "Strawberry Bush (ripe)"
+msgid "Strawberries (ripe)"
 msgstr "Клубника (зрелое)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables

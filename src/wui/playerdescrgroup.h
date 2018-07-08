@@ -43,7 +43,7 @@ struct PlayerDescriptionGroup : public UI::Panel {
 	                       uint32_t plnum);
 	~PlayerDescriptionGroup();
 
-	void refresh();
+	void update();
 
 private:
 	void enable_player(bool);

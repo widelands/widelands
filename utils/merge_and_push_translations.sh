@@ -14,9 +14,9 @@ if [ -d "../utils" ]; then
 	pushd ..
 fi
 
-# Make sure 'utils/buildcat.py' and 'utils/remove_lf_in_translations.py' are there.
-if [ ! -f "utils/buildcat.py" -o ! -f "utils/remove_lf_in_translations.py" ]; then
-	echo "Unable to find 'utils/buildcat.py' or 'utils/remove_lf_in_translations.py'."
+# Make sure 'utils/buildcat.py' is there.
+if [ ! -f "utils/buildcat.py" ]; then
+	echo "Unable to find 'utils/buildcat.py'."
 	echo "Make sure you start this script from Widelands' base or utils directory.";
 	exit 1;
 fi
@@ -66,16 +66,21 @@ fi
 # Fix formatting is being run by bunnybot
 # utils/fix_formatting.py
 
-# Fix line breaks.
-# TODO(GunChleoc): We hope that Transifex will fix these already.
-# This script can be removed if we don't get any errors in the future.
-# utils/remove_lf_in_translations.py
-
 # Update catalogues.
 utils/buildcat.py
 
 # Update statistics.
+# Prior calls to bzr revert might have left behind backup files that will confuse pocount
+rm -f po/*/*.pot.~*~
+rm -f po/*/*.po.~*~
 utils/update_translation_stats.py
+if [ $? -eq 0 ]
+then
+  echo "Updated translation stats";
+else
+  echo "Failed to update translation stats";
+  exit 1;
+fi
 
 # Commit and push.
 bzr commit -m "Fetched translations and updated catalogues."

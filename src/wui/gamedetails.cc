@@ -28,7 +28,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/time_string.h"
-#include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/text_constants.h"
 #include "graphic/texture.h"
@@ -40,18 +39,18 @@ namespace {
 // 'noescape' is needed for error message formatting and does not call richtext_escape.
 std::string as_header_with_content(const std::string& header,
                                    const std::string& content,
-                                   GameDetails::Style style,
+                                   UI::PanelStyle style,
                                    bool is_first = false,
                                    bool noescape = false) {
 	switch (style) {
-	case GameDetails::Style::kFsMenu:
+	case UI::PanelStyle::kFsMenu:
 		return (boost::format(
 		           "<p><font size=%i bold=1 shadow=1>%s%s <font color=D1D1D1>%s</font></font></p>") %
 		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") %
 		        (noescape ? header : richtext_escape(header)) %
 		        (noescape ? content : richtext_escape(content)))
 		   .str();
-	case GameDetails::Style::kWui:
+	case UI::PanelStyle::kWui:
 		return (boost::format(
 		           "<p><font size=%i>%s<font bold=1 color=D1D1D1>%s</font> %s</font></p>") %
 		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") %
@@ -82,31 +81,28 @@ void SavegameData::set_mapname(const std::string& input_mapname) {
 	mapname = _(input_mapname);
 }
 
-GameDetails::GameDetails(Panel* parent, Style style, Mode mode)
+GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
      style_(style),
      mode_(mode),
      padding_(4),
-     name_label_(
-        this,
-        0,
-        0,
-        0,
-        0,
-        "",
-        UI::Align::kLeft,
-        g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
-                                                                  "images/ui_basic/but1.png"),
-        UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     name_label_(this,
+                 0,
+                 0,
+                 0,
+                 0,
+                 style,
+                 "",
+                 UI::Align::kLeft,
+                 UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(this,
             0,
             0,
             0,
             0,
+            style,
             "",
             UI::Align::kLeft,
-            g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
-                                                                      "images/ui_basic/but1.png"),
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(this, 0, 0, 0, 0, nullptr),
      button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)) {
@@ -169,6 +165,15 @@ void GameDetails::update(const SavegameData& gamedata) {
 
 			description = (boost::format("%s%s") % description %
 			               as_header_with_content(_("Win Condition:"), gamedata.wincondition, style_))
+			                 .str();
+
+			std::string filename = gamedata.filename;
+			// Remove first directory from filename. This will be the save/ or replays/ folder
+			assert(filename.find('/') != std::string::npos);
+			filename.erase(0, filename.find('/') + 1);
+			assert(!filename.empty());
+			description = (boost::format("%s%s") % description %
+			               as_header_with_content(_("Filename:"), filename, style_))
 			                 .str();
 
 			description = (boost::format("<rt>%s</rt>") % description).str();

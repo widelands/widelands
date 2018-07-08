@@ -81,7 +81,7 @@ constexpr uint8_t kCurrentPacketVersionVision = 1;
 constexpr uint8_t kCurrentPacketVersionBorder = 1;
 #define BORDER_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/border_%u"
 
-#define FILENAME_SIZE 48
+#define FILENAME_SIZE 64
 
 enum {
 	UNSEEN_NONE = 0,

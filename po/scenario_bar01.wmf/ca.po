@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-03-30 06:58+0000\n"
-"PO-Revision-Date: 2018-03-31 08:43+0000\n"
+"POT-Creation-Date: 2018-06-28 06:01+0000\n"
+"PO-Revision-Date: 2018-07-02 16:49+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -247,7 +247,7 @@ msgstr "Construïu un forn de calç i una economia carbonífera"
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr "Construïu un forn de calç proveït d'un pou d'aigua i un kiln de carbó vegetal o bé una mina de carbó."
+msgstr "Construïu un forn de calç proveït d'un pou d'aigua i un kiln de carbó o bé una mina de carbó."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
@@ -275,13 +275,13 @@ msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr "El carbó es pot obtenir construint un kiln de carbó vegetal o una mina de carbó. Cremar troncs per obtenir-ne carbó pot ser lent si disposeu d'un bosc petit. Potser només hauríeu de construir un kiln de carbó quan no pugueu obtenir carbó de les mines."
+msgstr "El carbó es pot obtenir construint un kiln de carbó o una mina de carbó. Cremar troncs per obtenir-ne carbó pot ser lent si disposeu d'un bosc petit. Potser només hauríeu de construir un kiln de carbó quan no pugueu obtenir carbó de les mines."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr "Construïu un forn de calç i un pou. A més a més, construïu o bé un kiln per obtenir carbó vegetal o una mina de carbó per subministrar el forn."
+msgstr "Construïu un forn de calç i un pou. A més a més, construïu o bé un kiln per obtenir carbó o una mina de carbó per subministrar el forn."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:122

@@ -42,14 +42,7 @@ function immovable_help_string(tribe, immovable_description)
    end
 
    -- Space required
-   local space_required = ""
-   if (immovable_description.size == "small") then
-      space_required = space_required .. image_line("images/wui/overlays/small.png", 1, _"Space required: " .. _"Small plot")
-   elseif (immovable_description.size == "medium") then
-      space_required = space_required .. image_line("images/wui/overlays/medium.png", 1, _"Space required: " .. _"Medium plot")
-   elseif (immovable_description.size == "big") then
-      space_required = space_required .. image_line("images/wui/overlays/big.png", 1, _"Space required: " .. _"Big plot")
-   end
+   local space_required = plot_size_line(immovable_description.size)
 
    if (buildcost ~= "" or space_required ~= "") then
       result = result .. h2(_"Requirements")

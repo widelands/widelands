@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
-"PO-Revision-Date: 2018-04-07 13:56+0000\n"
+"POT-Creation-Date: 2018-05-05 17:07+0000\n"
+"PO-Revision-Date: 2018-05-06 10:04+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -199,12 +199,12 @@ msgid "Widelands Translators"
 msgstr "Traductors del Widelands"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
-msgstr "Atlant"
+msgid "Atlanteans"
+msgstr "Atlants"
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
-msgstr "Els bàrbars"
+msgid "Barbarians"
+msgstr "Bàrbars"
 
 #: ../../data/txts/developers.lua:3
 msgid "Campaign Story"
@@ -247,7 +247,7 @@ msgid "FreeBSD"
 msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
-msgid "Frisian"
+msgid "Frisians"
 msgstr "Frisons"
 
 #: ../../data/txts/developers.lua:3

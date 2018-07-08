@@ -134,16 +134,11 @@ return {
       local max_artifacts = _max(artifacts_per_team)
 
       local function _get_member_names(t)
-         local s = ""
+         local membernames = {}
          for idx, plr in ipairs(t) do
-            if s == "" then
-               s = plr.name
-            else
-               -- TRANSLATORS: This is used to seperate players’ names in a list, e.g. "Steve, Robert, David"
-               s = s .. _", " .. plr.name
-            end
+            table.insert(membernames, plr.name)
          end
-         return s
+         return localize_list(membernames, ",", "win_conditions")
       end
 
       local teams = {}
