@@ -2965,7 +2965,7 @@ void Worker::scout_update(Game& game, State& state) {
 		// First call to this routine after loading an old savegame. The least-invasive
 		// way to acquire old savegame compatibility was to simply ask the scout to go home early,
 		// under this special situation. Anybody reading this,
-		// TODO(kxq): Please remove this code block (and compatibility_2017 code from load routine)
+		// NOCOM(kxq): Please remove this code block (and compatibility_2017 code from load routine)
 		// once Build 20 is out. Thanks.
 		log("Warning: sending scout home. Assuming the game was just started, from savegame, in "
 		    "compatibility mode.\n");
@@ -3044,8 +3044,8 @@ void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		// TODO(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) after B20
-		// TODO(kxq): Also remove the code fragment from Worker::scout_update with compatibility_2017
+		// NOCOM(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) after B20
+		// NOCOM(kxq): Also remove the code fragment from Worker::scout_update with compatibility_2017
 		// in comment.
 		bool compatibility_2017 = 2 == packet_version;
 		if (packet_version == kCurrentPacketVersion || compatibility_2017) {
@@ -3060,7 +3060,7 @@ void Worker::Loader::load(FileRead& fr) {
 				worker.transfer_->read(fr, transfer_);
 			}
 			unsigned veclen;
-			// TODO(kxq): Remove compatibility_2017 associated code from here and above,
+			// NOCOM(kxq): Remove compatibility_2017 associated code from here and above,
 			// after build 20 has been released.
 			if (compatibility_2017) {
 				veclen = 0;

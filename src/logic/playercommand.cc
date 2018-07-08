@@ -199,7 +199,7 @@ void PlayerCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionPlayerCommand) {
+		if (packet_version == kCurrentPacketVersionPlayerCommand) {
 			GameLogicCommand::read(fr, egbase, mol);
 			sender_ = fr.unsigned_8();
 			if (!egbase.get_player(sender_))
@@ -1140,16 +1140,14 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdSetInputMaxFill) {
+		if (packet_version == kCurrentPacketVersionCmdSetInputMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			index_ = fr.signed_32();
-			if (packet_version > 1) {
-				if (fr.unsigned_8() == 0) {
-					type_ = wwWARE;
-				} else {
-					type_ = wwWORKER;
-				}
+			if (fr.unsigned_8() == 0) {
+				type_ = wwWARE;
+			} else {
+				type_ = wwWORKER;
 			}
 			max_fill_ = fr.unsigned_32();
 		} else {

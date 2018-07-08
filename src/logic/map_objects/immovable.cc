@@ -550,6 +550,7 @@ void Immovable::Loader::load(FileRead& fr, uint8_t const packet_version) {
 
 	Immovable& imm = dynamic_cast<Immovable&>(*get_object());
 
+	// Supporting older versions for map loading
 	if (packet_version >= 5) {
 		PlayerNumber pn = fr.unsigned_8();
 		if (pn && pn <= kMaxPlayers) {

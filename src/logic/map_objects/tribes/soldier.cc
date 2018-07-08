@@ -1574,9 +1574,6 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 3;
-// TODO(TiborB): This is only for map compatibility in regression tests, we should get rid of this
-// ASAP
-constexpr uint8_t kOldPacketVersion = 2;
 
 Soldier::Loader::Loader() : battle_(0) {
 }
@@ -1586,17 +1583,10 @@ void Soldier::Loader::load(FileRead& fr) {
 
 	try {
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion || packet_version == kOldPacketVersion) {
-
+		if (packet_version == kCurrentPacketVersion) {
 			Soldier& soldier = get<Soldier>();
 			soldier.current_health_ = fr.unsigned_32();
-			if (packet_version == kCurrentPacketVersion) {
-				soldier.retreat_health_ = fr.unsigned_32();
-			} else {
-				// not ideal but will be used only for regression tests
-				soldier.retreat_health_ = 0;
-			}
-
+			soldier.retreat_health_ = fr.unsigned_32();
 			soldier.health_level_ = std::min(fr.unsigned_32(), soldier.descr().get_max_health_level());
 			soldier.attack_level_ = std::min(fr.unsigned_32(), soldier.descr().get_max_attack_level());
 			soldier.defense_level_ =
@@ -1614,7 +1604,6 @@ void Soldier::Loader::load(FileRead& fr) {
 				soldier.combat_walkstart_ = fr.unsigned_32();
 				soldier.combat_walkend_ = fr.unsigned_32();
 			}
-
 			battle_ = fr.unsigned_32();
 		} else {
 			throw UnhandledVersionError("Soldier", packet_version, kCurrentPacketVersion);
