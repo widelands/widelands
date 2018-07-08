@@ -135,7 +135,6 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
 	   main_box, 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,
 	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	textarea->force_new_renderer();
 
 	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
 	                                   g_gr->images().get("images/wui/menu_okay.png"));

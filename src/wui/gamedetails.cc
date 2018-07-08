@@ -77,8 +77,6 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
      minimap_icon_(this, 0, 0, 0, 0, nullptr),
      button_box_(new UI::Box(this, 0, 0, UI::Box::Vertical)) {
-	name_label_.force_new_renderer();
-	descr_.force_new_renderer();
 
 	add(&name_label_, UI::Box::Resizing::kFullSize);
 	add_space(padding_);

@@ -56,8 +56,6 @@ MapDetails::MapDetails(
      descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, style, ""),
      suggested_teams_box_(
         new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, w)) {
-	name_label_.force_new_renderer();
-	descr_.force_new_renderer();
 
 	main_box_.add(&name_label_);
 	main_box_.add_space(padding_);

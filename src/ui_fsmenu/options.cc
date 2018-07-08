@@ -218,7 +218,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      os_(opt) {
 	// Set up UI Elements
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
-	translation_info_.force_new_renderer();
 
 	// Buttons
 	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_);
