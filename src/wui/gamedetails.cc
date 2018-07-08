@@ -113,10 +113,10 @@ void GameDetails::update(const SavegameData& gamedata) {
 		if (gamedata.filename_list.empty()) {
 			name_label_.set_text(
 			   as_richtext(
-			    as_header_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
+			    as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
 
 			// Show game information
-			std::string description = as_header_with_content(
+			std::string description = as_heading_with_content(
 			   mode_ == Mode::kReplay ?
 			      /** TRANSLATORS: The time a replay starts. Shown in the replay loading screen*/
 			      _("Start of Replay:") :
@@ -126,15 +126,15 @@ void GameDetails::update(const SavegameData& gamedata) {
 			   gamedata.gametime, style_);
 
 			description = (boost::format("%s%s") % description %
-			               as_header_with_content(_("Players:"), gamedata.nrplayers, style_))
+			               as_heading_with_content(_("Players:"), gamedata.nrplayers, style_))
 			                 .str();
 
 			description = (boost::format("%s%s") % description %
-			               as_header_with_content(_("Widelands Version:"), gamedata.version, style_))
+			               as_heading_with_content(_("Widelands Version:"), gamedata.version, style_))
 			                 .str();
 
 			description = (boost::format("%s%s") % description %
-			               as_header_with_content(_("Win Condition:"), gamedata.wincondition, style_))
+			               as_heading_with_content(_("Win Condition:"), gamedata.wincondition, style_))
 			                 .str();
 
 			std::string filename = gamedata.filename;
@@ -143,7 +143,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 			filename.erase(0, filename.find('/') + 1);
 			assert(!filename.empty());
 			description = (boost::format("%s%s") % description %
-			               as_header_with_content(_("Filename:"), filename, style_))
+			               as_heading_with_content(_("Filename:"), filename, style_))
 			                 .str();
 
 			descr_.set_text(as_richtext(description));
@@ -165,15 +165,15 @@ void GameDetails::update(const SavegameData& gamedata) {
 			std::string filename_list = richtext_escape(gamedata.filename_list);
 			boost::replace_all(filename_list, "\n", "<br> • ");
 			name_label_.set_text(as_richtext(
-			                      as_header_with_content(gamedata.mapname, "", style_, true)));
+			                      as_heading_with_content(gamedata.mapname, "", style_, true)));
 
 			descr_.set_text(as_richtext(
-			                 as_header_with_content("", filename_list, style_, true, true)));
+			                 as_heading_with_content("", filename_list, style_, true, true)));
 			minimap_icon_.set_visible(false);
 		}
 	} else {
 		name_label_.set_text(
-		   as_richtext(as_header_with_content(_("Error:"), gamedata.errormessage, style_, true, true)));
+		   as_richtext(as_heading_with_content(_("Error:"), gamedata.errormessage, style_, true, true)));
 	}
 	layout();
 }

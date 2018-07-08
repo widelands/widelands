@@ -32,16 +32,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
-namespace {
-std::string as_heading(const std::string& txt) {
-	boost::format f("<p><font bold=1 size=%d color=%s><vspace gap=6>%s<vspace gap=3></font></p>");
-	f % UI_FONT_SIZE_SMALL;
-	f % "D1D1D1";
-	f % txt;
-	return f.str();
-}
-}
-
 /// Show a window with information about the pointed at node and triangle.
 int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
                                           const Widelands::NodeAndTriangle<>& center,
@@ -49,7 +39,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
                                           EditorActionArgs* /* args */,
                                           Widelands::Map* map) {
 
-	static constexpr int kListFontsize = UI_FONT_SIZE_SMALL;
+	static constexpr int kListFontsize = UI_FONT_SIZE_MESSAGE;
 	parent.stop_painting();
 
 	UI::Window* const w =
@@ -61,7 +51,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	Widelands::Field& f = (*map)[center.node];
 
 	// *** Node info
-	std::string buf = as_heading(_("Node"));
+	std::string buf = as_heading(_("Node"), UI::PanelStyle::kWui, true);
 	buf += as_listitem((boost::format(_("Coordinates: (%1$i, %2$i)")) % center.node.x % center.node.y).str(), kListFontsize);
 
 	std::vector<std::string> caps_strings;
@@ -120,7 +110,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	}
 
 	// *** Terrain info
-	buf += as_heading(_("Terrain"));
+	buf += as_heading(_("Terrain"), UI::PanelStyle::kWui);
 
 	const Widelands::Field& tf = (*map)[center.triangle.node];
 	const Widelands::TerrainDescription& ter = world.terrain_descr(
@@ -148,7 +138,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	Widelands::Bob* bob =f.get_first_bob();
 	if (immovable || bob) {
 		/** TRANSLATORS: Heading for immovables and animals in editor info tool */
-		buf += as_heading(_("Objects"));
+		buf += as_heading(_("Objects"), UI::PanelStyle::kWui);
 		if (immovable) {
 			buf += as_listitem(
 				   (boost::format(_("Immovable: %s")) % immovable->descr().descname()).str(), kListFontsize);
@@ -198,14 +188,14 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 	// *** Resources info
 	Widelands::ResourceAmount ramount = f.get_resources_amount();
 	if (ramount > 0) {
-		buf += as_heading(_("Resources"));
+		buf += as_heading(_("Resources"), UI::PanelStyle::kWui);
 		buf +=
 		   as_listitem(
 		   (boost::format(pgettext("resources", "%1%x %2%")) % static_cast<unsigned int>(ramount) % world.get_resource(f.get_resources())->descname()).str(), kListFontsize);
 	}
 
 	// *** Map info
-	buf += as_heading(_("Map"));
+	buf += as_heading(_("Map"), UI::PanelStyle::kWui);
 	buf += as_listitem((boost::format(pgettext("map_name", "Name: %s")) % map->get_name()).str(), kListFontsize);
 	buf += as_listitem(
 	       (boost::format(_("Size: %1% x %2%")) % map->get_width() % map->get_height()).str(), kListFontsize);

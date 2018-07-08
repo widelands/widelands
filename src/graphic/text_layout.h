@@ -98,11 +98,17 @@ std::string as_message(const std::string& heading, const std::string& body);
 /**
  * 'is_first' omits the vertical gap before the line.
  * 'noescape' is needed for error message formatting and does not call richtext_escape. */
-std::string as_header_with_content(const std::string& header,
+std::string as_heading_with_content(const std::string& header,
                                    const std::string& content,
                                    UI::PanelStyle style,
                                    bool is_first = false,
                                    bool noescape = false);
+
+/**
+ * 'is_first' omits the vertical gap before the line.
+ */
+std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_first = false);
+std::string as_content(const std::string& txt, UI::PanelStyle style);
 
 /**
   * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too

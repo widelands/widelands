@@ -189,7 +189,7 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	      .str());
 }
 
-std::string as_header_with_content(const std::string& header,
+std::string as_heading_with_content(const std::string& header,
                                    const std::string& content,
                                    UI::PanelStyle style,
                                    bool is_first,
@@ -208,6 +208,33 @@ std::string as_header_with_content(const std::string& header,
 		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") %
 		        (noescape ? header : richtext_escape(header)) %
 		        (noescape ? content : richtext_escape(content)))
+		   .str();
+	}
+	NEVER_HERE();
+}
+
+std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_first) {
+	switch (style) {
+	case UI::PanelStyle::kFsMenu:
+		return (boost::format("<p><font size=%i bold=1 shadow=1>%s%s</font></p>") %
+		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") % richtext_escape(txt))
+		   .str();
+	case UI::PanelStyle::kWui:
+		return (boost::format("<p><font size=%i bold=1 color=D1D1D1>%s%s</font></p>") %
+		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") % richtext_escape(txt))
+		   .str();
+	}
+	NEVER_HERE();
+}
+std::string as_content(const std::string& txt, UI::PanelStyle style) {
+	switch (style) {
+	case UI::PanelStyle::kFsMenu:
+		return (boost::format("<p><font size=%i color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
+		        UI_FONT_SIZE_SMALL % richtext_escape(txt))
+		   .str();
+	case UI::PanelStyle::kWui:
+		return (boost::format("<p><font size=%i><vspace gap=2>%s</font></p>") %
+		        (UI_FONT_SIZE_SMALL - 2) % richtext_escape(txt))
 		   .str();
 	}
 	NEVER_HERE();
