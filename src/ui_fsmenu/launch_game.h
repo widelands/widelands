@@ -45,10 +45,6 @@ public:
 	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
 	~FullscreenMenuLaunchGame() override;
 
-	void think() override;
-
-	virtual void refresh() = 0;
-
 protected:
 	void clicked_ok() override;
 	void clicked_back() override;
