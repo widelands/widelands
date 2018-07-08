@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 by the Widelands Development Team
+ * Copyright (C) 2016-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "base/macros.h"
 #include "graphic/align.h"
 #include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"
@@ -53,8 +54,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                            int button_dimension,
                            const std::string& label,
                            const DropdownType type,
-                           const Image* background,
-                           const Image* button_background)
+                           UI::PanelStyle style)
    : UI::Panel(parent,
                x,
                y,
@@ -76,7 +76,9 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     0,
                                     button_dimension,
                                     get_h(),
-                                    button_background,
+                                    style == UI::PanelStyle::kFsMenu ?
+                                       UI::ButtonStyle::kFsMenuMenu :
+                                       UI::ButtonStyle::kWuiSecondary,
                                     g_gr->images().get("images/ui_basic/scrollbar_down.png"),
                                     pgettext("dropdown", "Select Item")) :
                      nullptr),
@@ -88,7 +90,8 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                         w - button_dimension :
                         type == DropdownType::kTextualNarrow ? w : button_dimension,
                      get_h(),
-                     background,
+                     style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                        UI::ButtonStyle::kWuiSecondary,
                      label),
      label_(label),
      type_(type),
@@ -107,12 +110,9 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
 		parent = parent->get_parent();
 	}
-	list_ = new UI::Listselect<uintptr_t>(
-	   parent, 0, 0, w, 0, button_background, ListselectLayout::kDropdown);
+	list_ = new UI::Listselect<uintptr_t>(parent, 0, 0, w, 0, style, ListselectLayout::kDropdown);
 
 	list_->set_visible(false);
-	list_->set_background(background);
-
 	button_box_.add(&display_button_);
 	display_button_.sigclicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	if (push_button_ != nullptr) {

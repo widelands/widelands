@@ -11,7 +11,6 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 1,
-      granite = 1,
       log = 1,
       thatch_reed = 1
    },
@@ -33,6 +32,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "fish",
       needs_water = true,
       prohibited_till = 490
    },

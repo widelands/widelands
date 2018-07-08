@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -181,8 +181,11 @@ If construction was finished successfully, place the building at our position.
 ===============
 */
 void ConstructionSite::cleanup(EditorGameBase& egbase) {
-	// Register whether the window was open
-	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kStartWarp));
+	if (work_steps_ <= work_completed_) {
+		// If the building is finished, register whether the window was open
+		Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kStartWarp));
+	}
+
 	PartiallyFinishedBuilding::cleanup(egbase);
 
 	if (work_steps_ <= work_completed_) {

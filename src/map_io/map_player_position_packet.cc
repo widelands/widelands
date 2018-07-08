@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ void MapPlayerPositionPacket::read(FileSystem& fs, EditorGameBase& egbase, bool,
 		if (packet_version == kCurrentPacketVersion) {
 			//  Read all the positions
 			//  This could bring trouble if one player position/ is not set (this
-			//  is possible in the editor), is also -1, -1.
+			//  is possible in the editor), is also -1, -1 == Coords::null().
 			Map* map = egbase.mutable_map();
 			Extent const extent = map->extent();
 			PlayerNumber const nr_players = map->get_nrplayers();

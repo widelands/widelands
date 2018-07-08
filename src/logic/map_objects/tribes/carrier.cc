@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -104,8 +104,12 @@ void Carrier::road_update(Game& game, State& state) {
 	// Be bored. There's nothing good on TV, either.
 	// TODO(unknown): idle animations
 	set_animation(game, descr().get_animation("idle"));
-	state.ivar1 = 1;    //  we are available immediately after an idle phase
-	return skip_act();  //  wait until signal
+	state.ivar1 = 1;  //  we are available immediately after an idle phase
+	// subtract maintenance cost and check for road demotion
+	road.charge_wallet(game);
+	// if road still promoted then schedule demotion, otherwise go fully idle waiting until signal
+	return road.get_roadtype() == RoadType::kBusy ? schedule_act(game, (road.wallet() + 2) * 500) :
+	                                                skip_act();
 }
 
 /**
@@ -124,7 +128,7 @@ void Carrier::road_pop(Game& game, State& /* state */) {
 }
 
 /**
- * Fetch an ware from a flag, drop it on the other flag.
+ * Fetch a ware from a flag, drop it on the other flag.
  * ivar1 is the flag we fetch from, or -1 when we're in the target building.
  *
  * Signal "update" when the road has been split etc.
@@ -175,8 +179,12 @@ void Carrier::transport_update(Game& game, State& state) {
 		// A sanity check is necessary, in case the building has been destroyed
 		PlayerImmovable* const next = ware.get_next_move_step(game);
 
-		if (next && next != &flag && &next->base_flag() == &flag)
+		if (next && next != &flag && &next->base_flag() == &flag) {
+			// pay some coins before entering the building,
+			// to compensate for the time to be spent in its street-segment
+			road.pay_for_building();
 			enter_building(game, state);
+		}
 
 		// If the flag is overloaded we are allowed to drop wares as
 		// long as we can pick another up. Otherwise we have to wait.
@@ -247,6 +255,8 @@ void Carrier::pickup_from_flag(Game& game, State& state) {
 
 		// Are there wares to move between our flags?
 		if (WareInstance* const ware = flag.fetch_pending_ware(game, otherflag)) {
+			// pay before getting the ware, while checking for road promotion
+			road.pay_for_road(game, flag.count_wares_in_queue(otherflag));
 			set_carried_ware(game, ware);
 
 			set_animation(game, descr().get_animation("idle"));
@@ -268,11 +278,12 @@ void Carrier::drop_ware(Game& game, State& state) {
 	WareInstance* other = nullptr;
 	Road& road = dynamic_cast<Road&>(*get_location(game));
 	Flag& flag = road.get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
+	Flag& otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1));
 
 	if (promised_pickup_to_ == (state.ivar1 ^ 1)) {
-		// If there's an ware we acked, we can drop ours even if the flag is
+		// If there's a ware we acked, we can drop ours even if the flag is
 		// flooded
-		other = flag.fetch_pending_ware(game, road.get_flag(static_cast<Road::FlagId>(state.ivar1)));
+		other = flag.fetch_pending_ware(game, otherflag);
 
 		if (!other && !flag.has_capacity()) {
 			molog("[Carrier]: strange: acked ware from busy flag no longer "
@@ -292,6 +303,8 @@ void Carrier::drop_ware(Game& game, State& state) {
 
 	// Pick up new load, if any
 	if (other) {
+		// pay before getting the ware, while checking for road promotion
+		road.pay_for_road(game, flag.count_wares_in_queue(otherflag));
 		set_carried_ware(game, other);
 
 		set_animation(game, descr().get_animation("idle"));
@@ -332,7 +345,7 @@ bool Carrier::swap_or_wait(Game& game, State& state) {
 	Flag& otherflag = road.get_flag(static_cast<Road::FlagId>(state.ivar1));
 
 	if (promised_pickup_to_ == (state.ivar1 ^ 1)) {
-		// All is well, we already acked an ware that we can pick up
+		// All is well, we already acked a ware that we can pick up
 		// from this flag
 		return false;
 	} else if (flag.has_pending_ware(game, otherflag)) {
@@ -366,7 +379,7 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 	//     (the transport code does not have priorities for the actual
 	//     carrier that is notified)
 	//  b) the transport task has logic that allows it to
-	//     drop an ware on an overloaded flag iff it can pick up an ware
+	//     drop a ware on an overloaded flag iff it can pick up a ware
 	//     at the same time.
 	//     We should ack said ware to avoid more confusion before we move
 	//     onto the flag, but we can't do that if we have already acked
@@ -384,11 +397,11 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 	// Ack it if we haven't
 	promised_pickup_to_ = flag;
 
-	if (state.task == &taskRoad)
+	if (state.task == &taskRoad) {
 		send_signal(game, "ware");
-	else if (state.task == &taskWaitforcapacity)
+	} else if (state.task == &taskWaitforcapacity) {
 		send_signal(game, "wakeup");
-
+	}
 	return true;
 }
 
@@ -410,7 +423,7 @@ void Carrier::find_pending_ware(Game& game) {
 		havewarebits |= 2;
 	}
 
-	//  If both flags have an ware, we pick the one closer to us.
+	//  If both flags have a ware, we pick the one closer to us.
 	if (havewarebits == 3) {
 		havewarebits = 1 << find_closest_flag(game);
 	}
@@ -549,32 +562,10 @@ void Carrier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 	fw.signed_32(promised_pickup_to_);
 }
 
-void Carrier::draw_inner(const EditorGameBase& game,
-                         const Vector2f& point_on_dst,
-                         const float scale,
-                         RenderTarget* dst) const {
-	assert(get_owner() != nullptr);
-	Worker::draw_inner(game, point_on_dst, scale, dst);
-
-	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
-		const RGBColor& player_color = get_owner()->get_playercolor();
-		const Vector2f hotspot = descr().get_ware_hotspot().cast<float>();
-		const Vector2f location(
-		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
-		dst->blit_animation(
-		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
-	}
-}
-
 CarrierDescr::CarrierDescr(const std::string& init_descname,
                            const LuaTable& table,
                            const EditorGameBase& egbase)
-   : WorkerDescr(init_descname, MapObjectType::CARRIER, table, egbase),
-     ware_hotspot_(Vector2i(0, 15)) {
-	if (table.has_key("ware_hotspot")) {
-		std::unique_ptr<LuaTable> items_table = table.get_table("ware_hotspot");
-		ware_hotspot_ = Vector2i(items_table->get_int(1), items_table->get_int(2));
-	}
+   : WorkerDescr(init_descname, MapObjectType::CARRIER, table, egbase) {
 }
 
 /**

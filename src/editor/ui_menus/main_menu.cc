@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,54 +42,24 @@ inline EditorInteractive& EditorMainMenu::eia() {
 EditorMainMenu::EditorMainMenu(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "main_menu", &registry, 2 * margin + width, 0, _("Main Menu")),
      box_(this, margin, margin, UI::Box::Vertical, width, get_h() - 2 * margin, vspacing),
-     button_new_map_(&box_,
-                     "new_map",
-                     0,
-                     0,
-                     width,
-                     0,
-                     g_gr->images().get("images/ui_basic/but1.png"),
-                     _("New Map")),
+     button_new_map_(
+        &box_, "new_map", 0, 0, width, 0, UI::ButtonStyle::kWuiSecondary, _("New Map")),
      button_new_random_map_(&box_,
                             "new_random_map",
                             0,
                             0,
                             width,
                             0,
-                            g_gr->images().get("images/ui_basic/but1.png"),
+                            UI::ButtonStyle::kWuiSecondary,
                             _("New Random Map")),
-     button_load_map_(&box_,
-                      "load_map",
-                      0,
-                      0,
-                      width,
-                      0,
-                      g_gr->images().get("images/ui_basic/but1.png"),
-                      _("Load Map")),
-     button_save_map_(&box_,
-                      "save_map",
-                      0,
-                      0,
-                      width,
-                      0,
-                      g_gr->images().get("images/ui_basic/but1.png"),
-                      _("Save Map")),
-     button_map_options_(&box_,
-                         "map_options",
-                         0,
-                         0,
-                         width,
-                         0,
-                         g_gr->images().get("images/ui_basic/but1.png"),
-                         _("Map Options")),
-     button_exit_editor_(&box_,
-                         "exit",
-                         0,
-                         0,
-                         width,
-                         0,
-                         g_gr->images().get("images/ui_basic/but5.png"),
-                         _("Exit Editor")) {
+     button_load_map_(
+        &box_, "load_map", 0, 0, width, 0, UI::ButtonStyle::kWuiSecondary, _("Load Map")),
+     button_save_map_(
+        &box_, "save_map", 0, 0, width, 0, UI::ButtonStyle::kWuiSecondary, _("Save Map")),
+     button_map_options_(
+        &box_, "map_options", 0, 0, width, 0, UI::ButtonStyle::kWuiSecondary, _("Map Options")),
+     button_exit_editor_(
+        &box_, "exit", 0, 0, width, 0, UI::ButtonStyle::kWuiPrimary, _("Exit Editor")) {
 	box_.add(&button_new_map_);
 	box_.add(&button_new_random_map_);
 	box_.add(&button_load_map_);

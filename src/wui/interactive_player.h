@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,13 +27,7 @@
 #include "logic/message_id.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
-
-namespace UI {
-struct MultilineTextarea;
-struct Textarea;
-}
 
 /**
  * This is the interactive player. this one is

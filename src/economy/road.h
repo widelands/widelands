@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,6 +42,12 @@ public:
 private:
 	DISALLOW_COPY_AND_ASSIGN(RoadDescr);
 };
+
+// C++11 allows static constexpr members in the compiler, but the linker can't handle it.
+// So, we don't have these in the class.
+// https://stackoverflow.com/questions/40690260/undefined-reference-error-for-static-constexpr-member
+constexpr int32_t kRoadAnimalPrice = 600;
+constexpr int32_t kRoadMaxWallet = static_cast<int32_t>(2.5 * kRoadAnimalPrice);
 
 /**
  * Road is a special object which connects two flags.
@@ -108,6 +114,12 @@ struct Road : public PlayerImmovable {
 	void postsplit(Game&, Flag&);
 
 	bool notify_ware(Game& game, FlagId flagid);
+	void update_wallet_chargetime(Game& game);
+	void charge_wallet(Game& game);
+	int32_t wallet() const;
+	void add_to_wallet(int32_t sum);
+	void pay_for_road(Game& game, uint8_t wares_count);
+	void pay_for_building();
 
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t);
@@ -136,13 +148,15 @@ private:
 	static void
 	request_carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
+	uint8_t carriers_count() const;
+
 private:
 	/// Counter that is incremented when a ware does not get a carrier for this
 	/// road immediately and decremented over time.
-	uint32_t busyness_;
+	int32_t wallet_;
 
-	/// holds the gametime when busyness_ was last updated
-	uint32_t busyness_last_update_;
+	/// holds the gametime when wallet_ was last charged
+	uint32_t last_wallet_charge_;
 
 	uint8_t type_;        ///< RoadType, 2 bits used
 	Flag* flags_[2];      ///< start and end flag

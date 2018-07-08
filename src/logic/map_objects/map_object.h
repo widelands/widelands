@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,13 +39,11 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/tabpanel.h"
 
 class FileRead;
 class RenderTarget;
 struct DirAnimations;
-namespace UI {
-struct TabPanel;
-}
 
 namespace Widelands {
 
@@ -263,7 +261,7 @@ public:
 
 	/**
 	 * Is called right before the object will be removed from
-	 * the game. No conncetion is handled in this class.
+	 * the game. No connection is handled in this class.
 	 *
 	 * param serial : the object serial (cannot use param comment as this is a callback)
 	 */

@@ -98,7 +98,7 @@ obj_train_soldiers = {
    title=_"Train your soldiers",
    number = 1,
    body = objective_text(_"Training Soldiers",
-      li(_[[Train a soldier to the highest possible level. Soldiers are trained in small training camps and large training arenas. We will need a gold mine, a tailor’s shop to sew better armor, and a large armor smithy for better weapons and helmets.]])
+      li(_[[Train a soldier to the highest possible level. Soldiers are trained in training camps and training arenas. We will need a gold mine, a tailor’s shop to sew sturdier garments, and a large armor smithy for better weapons and helmets.]])
    ),
 }
 obj_defeat_enemy = {
@@ -138,13 +138,13 @@ intro_2 = {
       _([[This is as good a place as any to start building our new home. First of all, we must ensure a stable supply of basic building materials.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 2
-      _([[I have asked one of my advisors to oversee the construction of our settlement.]])),
+      _([[I have asked Hauke, one of my advisors to oversee the construction of our settlement.]])),
 }
 intro_3 = {
    title =_ "Introduction",
    body=hauke(_"The first buildings",
       -- TRANSLATORS: Hauke – Introduction 3
-      _([[Greetings, Chieftain Reebaud! I am Hauke, your First Advisor. I will start with the colonization of the island straight away.]])
+      _([[Greetings, Chieftain Reebaud! I will start with the colonization of the island straight away.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 3
       _([[Like all Frisians, we build our houses mainly with bricks. We improve them by adding some logs and granite. The roofs are thatched with reed, naturally. Nothing is better suited to keep the rain out.]])
@@ -163,7 +163,7 @@ intro_4 = {
       _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick kiln out of granite and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don’t see any here. Perhaps these hills contain enough stones to mine some granite.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 4
-      _([[Clay is easy to make: A brickmaker working at a clay pit will simply dig up some earth and mix it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
+      _([[Clay is easy to make: A clay digger working at a clay pit will simply dig up some earth and mix it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 4
       _([[To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. Build a coal mine to make sure we don’t run out. No coal means no bricks, no bricks means no mines, no mines mean no coal… you can see the problem.]])
@@ -185,7 +185,7 @@ warning_no_reed = {
    body=hauke(_"Build another reed farm",
       -- TRANSLATORS: Hauke – no reed
       _([[I noticed we have been short of reed for a while now. Our buildings seem to need quite a lot of it. We should build another reed farm or two. Reed is also used for making fishing nets and other tools; therefore, resolving this shortage should be a priority.]]))
-      .. li_arrow (_([[You should assign the new reed farm the highest priority for thatch reed in the constructionsite window.]])),
+      .. li_arrow (_([[You should assign the new reed farm the highest priority for thatch reed in the construction site window.]])),
 }
 warning_no_clay = {
    title =_ "Clay Shortages",
@@ -200,8 +200,8 @@ warning_no_bricks = {
    title =_ "Brick Shortages",
    body=hauke(_"Build another brick kiln",
       -- TRANSLATORS: Hauke – no bricks
-      _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick kiln, and assign it the highest priority for bricks in the constructionsite window so as to resolve the shortage as soon as possible.]]))
-      .. li_arrow (_([[You should assign the new brick kiln the highest priority for bricks in the constructionsite window.]])),
+      _([[I noticed we are running out of bricks. This slows down construction of our buildings a lot, since we need so many bricks. We should really start to construct another brick kiln, and assign it the highest priority for bricks in the construction site window so as to resolve the shortage as soon as possible.]]))
+      .. li_arrow (_([[You should assign the new brick kiln the highest priority for bricks in the construction site window.]])),
 }
 warehouse_on_expand = {
    title =_ "Warehouses",
@@ -261,7 +261,7 @@ recruit_1 = {
 }
 recruit_2 = {
    title =_ "Be Prepared",
-   body=hauke(_"Build a recruitment center",
+   body=hauke(_"Start recruiting soldiers",
       -- TRANSLATORS: Hauke – recruit 2
       _([[We will need a barracks, of course; a reindeer farm to produce fur, and a sewing room to sew the fur into garments. The reindeer farm produces some meat as a by-product of fur, and it also trains reindeer to help our carriers on busy roads.]])
       .. paragraphdivider() ..
@@ -312,7 +312,7 @@ training_1 = {
       _([[We are recruiting soldiers easily enough, but they are fairly weak. We must train our soldiers if they are to beat the enemy.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 1
-      _([[Soldiers are trained in basic attack, health and defense by a small training camp. They can learn the finer points in a large training arena.]])),
+      _([[Soldiers are trained in basic attack, health and defense by a training camp. They can learn the finer points in a training arena.]])),
 }
 training_2 = {
    title =_ "Training Soldiers",
@@ -321,7 +321,7 @@ training_2 = {
       _([[Soldiers are trained in two steps in defense and health. They get fur garments studded with iron and also gold to cushion blows; and helmets forged from iron, and gold as well, to lengthen their life in battle.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 2
-      _([[They learn to attack with three different swords: The long, curved and double-edged sword. The latter two contain gold, and all of them iron. The advanced soldiers are taught to use two matching swords at once. This makes six steps of attack training.]])
+      _([[They learn to attack with three different swords: The long sword, broadsword and double-edged sword. The latter two contain gold, and all of them iron. The advanced soldiers are taught to use two swords at once: They keep their first double-edged sword, and are given various other swords to wield in their other hand. This makes six steps of attack training.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 2
       _([[We do not train soldiers to evade attacks; a true warrior can block his opponent’s blows with a skillful twist of the sword instead of jumping away like a coward.]])),
@@ -330,7 +330,7 @@ training_3 = {
    title =_ "Training Soldiers",
    body=hauke(_"Planning a training center",
       -- TRANSLATORS: Hauke – train soldiers 3
-      _([[We will need a tailor’s shop to sew better armor, and another sewing room to keep producing normal fur garments. Also, enhance the small armor smithy to produce better weapons and helmets, and build a new small one so we will still get basic weapons. We need at least one gold mine now, because the best weapons and armor use gold.]])
+      _([[We will need a tailor’s shop to sew more protective garments, and another sewing room to keep producing normal fur garments. Also, you should enhance the small armor smithy to produce better weapons and helmets, and build a new small one so we will still get basic weapons. We need at least one gold mine now, because the best weapons and armor use gold.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – train soldiers 3
       _([[We should build these buildings close to the barracks, since it is, as I already mentioned earlier, much more efficient to centralize all our military facilities in one recruiting and training center, than if they were strewn out over a long distance. Build a third warehouse there which will store only the food needed for training.]])
@@ -371,7 +371,7 @@ warning_early_attack_2 = {
    title =_ "Beware!",
    body=reebaud(_"Not strong enough",
       -- TRANSLATORS: Reebaud – beware of early attacks 2
-      _([[The scouts informed me that the enemy can’t build towers. We could build a fortress, which is the building that will push the border as far east as possible in one go. The enemies can only see it if they build a fortress right at the border.]])
+      _([[The scouts informed me that the enemy can’t build towers. We could build a fortress, which is the building that will push the border as far east as possible in one go. The enemy will only be able to see it if they build a fortress right at the border.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – beware of early attacks 2
       _([[We can prevent this, or at least make it harder to do, by ordering some foresters to plant trees at the border. The enemy will have to cut down many of them to make room for it, so we may be safe until we open the battle at a time of our choosing.]])),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,6 +53,10 @@ const std::string kSavegameExtension = ".wgf";
 const std::string kAutosavePrefix = "wl_autosave";
 // Default autosave interval in minutes
 constexpr int kDefaultAutosaveInterval = 15;
+
+// Filesystem names for campaign data
+const std::string kCampaignDataDir = "campaigns";
+const std::string kCampaignDataExtension = ".wcd";
 
 /// Filesystem names for screenshots
 const std::string kScreenshotsDir = "screenshots";

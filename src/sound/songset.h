@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,10 +53,10 @@ protected:
 	/// The filenames of all configured songs
 	std::vector<std::string> songs_;
 
-	/** Pointer to the song that is currently playing (actually the one that
-	 * was last started); needed for linear playback
+	/** Index of the song that is currently playing
+	 * (actually the one that was last started)
 	 */
-	std::vector<std::string>::iterator current_song_;
+	uint32_t current_song_;
 
 	/// The current song
 	Mix_Music* m_;

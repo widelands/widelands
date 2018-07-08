@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ BuildingHelpWindow::BuildingHelpWindow(Panel* const parent,
                       width,
                       height,
                       (boost::format(_("Help: %s")) % building_description.descname()).str()),
-     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10)) {
+     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 10, UI::PanelStyle::kWui)) {
 	assert(tribe.has_building(tribe.building_index(building_description.name())) ||
 	       building_description.type() == Widelands::MapObjectType::MILITARYSITE);
 	try {

@@ -11,13 +11,13 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2017
 # Luigi Lain <lainluigi86@tiscali.it>, 2015
-# theo the best <enthusedquill6@gmail.com>, 2016
+# Mat V <enthusedquill6@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
-"PO-Revision-Date: 2018-02-23 18:18+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-06 16:28+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -59,40 +59,44 @@ msgid ""
 "webpage: %s"
 msgstr ""
 
-#: ../../data/txts/LICENSE.lua:14
+#: ../../data/txts/LICENSE.lua:15
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Lì puoi trovare il testo completo della licenza ed ulteriori informazioni circa la sua filosofia e le implicazioni legali."
 
-#: ../../data/txts/LICENSE.lua:16
+#: ../../data/txts/LICENSE.lua:17
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "Abbiamo distribuito la GPL come documento di testo insieme a Widelands stesso."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
 msgstr "Su Linux, puoi trovare il file chiamato COPYING nella cartella principale dei sorgenti o del pacchetto binario, o nella cartella di installazione (esempio: '%1%')."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Su Windows, puoi trovare il file chiamato COPYING nella cartella di installazione, e nello Star menu Widelands c'è un link che punta a questo file."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "Su MacOS, puoi trovare il file chiamato COPYING nell'archivio che hai scaricato dal sito."
 
-#: ../../data/txts/LICENSE.lua:21
+#: ../../data/txts/LICENSE.lua:22
+msgid "This game comes as-is and without any warranty."
+msgstr ""
+
+#: ../../data/txts/LICENSE.lua:23
 msgid ""
-"This game comes as-is and without any warranty. For more information and "
-"support you can find us at %1% (Website, Wiki, Forum for questions or "
-"general support), %2% (Bugtracker), and %3% (Translations)."
-msgstr "Questo gioco è così com'è, senza alcuna garanzia. Per maggiori informazioni e supporto puoi trovarci a %1% (Website, Wiki, Forum per domande o supporto in genere), %2% (Bugtracker), e %3% (Traduzioni)."
+"For more information and support you can find us at %1% (Website, Wiki, "
+"Forum for questions or general support), %2% (Bugtracker), and %3% "
+"(Translations)."
+msgstr ""
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -248,6 +252,10 @@ msgstr "Precedenti Anziani"
 #: ../../data/txts/developers.lua:3
 msgid "FreeBSD"
 msgstr "FreeBSD"
+
+#: ../../data/txts/developers.lua:3
+msgid "Frisian"
+msgstr ""
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -523,6 +531,7 @@ msgid ""
 msgstr ""
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
+#: ../../data/txts/tips/frisians.lua:12
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
@@ -604,6 +613,17 @@ msgstr "Costruisci sempre una casa della guardia forestale per non esaurire i tr
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
+msgstr ""
+
+#: ../../data/txts/tips/frisians.lua:4
+msgid ""
+"To produce bricks, you need granite; to produce granite, you need a quarry "
+"or rock mine; to build those, you need bricks. Take care not to get "
+"deadlocked!"
+msgstr ""
+
+#: ../../data/txts/tips/frisians.lua:8
+msgid "Always build a forester’s house, so you will not run out of logs."
 msgstr ""
 
 #: ../../data/txts/tips/general_game.lua:6

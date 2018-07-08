@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 #include "wui/multiplayersetupgroup.h"
 
 /// Simple user interaction window for selecting either map, save or cancel
@@ -59,24 +59,24 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t space = y;
 		uint32_t butw = get_inner_w() - 2 * space;
 		uint32_t buth = (get_inner_h() - 2 * space) / 5;
-		UI::Button* btn = new UI::Button(this, "map", space, y, butw, buth,
-		                                 g_gr->images().get("images/ui_basic/but0.png"), _("Map"),
-		                                 _("Select a map"));
+		UI::Button* btn =
+		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kFsMenuSecondary,
+		                  _("Map"), _("Select a map"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kNormalGame));
 
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
-		                     g_gr->images().get("images/ui_basic/but0.png"),
+		                     UI::ButtonStyle::kFsMenuSecondary,
 		                     /** Translators: This is a button to select a savegame */
 		                     _("Saved Game"), _("Select a saved game"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kScenarioGame));
 
-		btn = new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2,
-		                     buth, g_gr->images().get("images/ui_basic/but1.png"), _("Cancel"),
-		                     _("Cancel selection"));
+		btn =
+		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
+		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kBack));
@@ -114,7 +114,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                          get_h() * 3 / 20,
                          buth_,
                          buth_,
-                         g_gr->images().get("images/ui_basic/but1.png"),
+                         UI::ButtonStyle::kFsMenuSecondary,
                          g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
                          _("Change map or saved game")),
      help_button_(this,
@@ -123,7 +123,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   get_h() / 100,
                   buth_,
                   buth_,
-                  g_gr->images().get("images/ui_basic/but1.png"),
+                  UI::ButtonStyle::kFsMenuSecondary,
                   g_gr->images().get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
 
@@ -151,10 +151,18 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                         _("Type of game"),
                         UI::Align::kCenter),
 
-     map_info_(
-        this, right_column_x_, get_h() * 2 / 10, butw_, get_h() * 23 / 80 - 2 * label_height_),
-     client_info_(
-        this, right_column_x_, get_h() * 13 / 20 - 2 * label_height_, butw_, 2 * label_height_),
+     map_info_(this,
+               right_column_x_,
+               get_h() * 2 / 10,
+               butw_,
+               get_h() * 23 / 80 - 2 * label_height_,
+               UI::PanelStyle::kFsMenu),
+     client_info_(this,
+                  right_column_x_,
+                  get_h() * 13 / 20 - 2 * label_height_,
+                  butw_,
+                  2 * label_height_,
+                  UI::PanelStyle::kFsMenu),
      help_(nullptr),
 
      // Variables and objects used in the menu
@@ -215,8 +223,8 @@ void FullscreenMenuLaunchMPG::layout() {
  */
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
-	chat_ = new GameChatPanel(
-	   this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80, get_h() * 3 / 10, chat);
+	chat_ = new GameChatPanel(this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80,
+	                          get_h() * 3 / 10, chat, UI::PanelStyle::kFsMenu);
 }
 
 /**
@@ -349,6 +357,13 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 		}
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
 	}
+}
+
+void FullscreenMenuLaunchMPG::think() {
+	if (ctrl_) {
+		ctrl_->think();
+	}
+	refresh();
 }
 
 /**

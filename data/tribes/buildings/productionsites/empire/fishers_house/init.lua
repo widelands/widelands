@@ -26,6 +26,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "fish",
       needs_water = true,
       prohibited_till = 410
    },

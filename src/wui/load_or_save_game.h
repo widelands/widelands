@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ protected:
 	LoadOrSaveGame(UI::Panel* parent,
 	               Widelands::Game& g,
 	               FileType filetype,
-	               GameDetails::Style style,
+	               UI::PanelStyle style,
 	               bool localize_autosave);
 
 	/// Update gamedetails and tooltips and return information about the current selection
@@ -57,7 +57,7 @@ protected:
 	void select_by_name(const std::string& name);
 
 	/// Read savegame/replay files and fill the table and games data.
-	void fill_table();
+	void fill_table(bool show_filenames = false);
 
 	/// The table panel
 	UI::Table<uintptr_t const>& table();

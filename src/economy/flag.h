@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "economy/routing_node.h"
 #include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {
 class Building;
@@ -130,7 +131,9 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool ack_pickup(Game&, Flag& destflag);
 	bool cancel_pickup(Game&, Flag& destflag);
 	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
+	void propagate_promoted_road(Road* promoted_road);
 	Wares get_wares();
+	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
 
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);
 	void update_wares(Game&, Flag* other);
@@ -175,7 +178,7 @@ private:
 	int32_t animstart_;
 
 	Building* building_;  ///< attached building (replaces road WALK_NW)
-	Road* roads_[6];      ///< WALK_xx - 1 as index
+	Road* roads_[WalkingDir::LAST_DIRECTION];
 
 	int32_t ware_capacity_;  ///< size of wares_ array
 	int32_t ware_filled_;    ///< number of wares currently on the flag

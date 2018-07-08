@@ -112,8 +112,8 @@ tribes:new_productionsite_type {
          },
       },
       produce_3 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a scythe because ...
-         descname = _"forging a scythe",
+         -- TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
+         descname = _"making a scythe",
          actions = {
             "return=skipped unless economy needs scythe",
             "sleep=32000",
@@ -123,8 +123,8 @@ tribes:new_productionsite_type {
          },
       },
       produce_4 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a shovel because ...
-         descname = _"forging a shovel",
+         -- TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
+         descname = _"making a shovel",
          actions = {
             "return=skipped unless economy needs shovel",
             "sleep=32000",
@@ -145,8 +145,8 @@ tribes:new_productionsite_type {
          },
       },
       produce_6 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a hunting spear because ...
-         descname = _"forging a hunting spear",
+         -- TRANSLATORS: Completed/Skipped/Did not start making a hunting spear because ...
+         descname = _"making a hunting spear",
          actions = {
             "return=skipped unless economy needs hunting_spear",
             "sleep=32000",
@@ -189,8 +189,8 @@ tribes:new_productionsite_type {
          },
       },
       produce_10 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging a hammer because ...
-         descname = _"forging a hammer",
+         -- TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
+         descname = _"making a hammer",
          actions = {
             "return=skipped unless economy needs hammer",
             "sleep=32000",
@@ -200,8 +200,8 @@ tribes:new_productionsite_type {
          },
       },
       produce_11 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging fire tongs because ...
-         descname = _"forging fire tongs",
+         -- TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
+         descname = _"making fire tongs",
          actions = {
             "return=skipped unless economy needs fire_tongs",
             "sleep=32000",
@@ -211,8 +211,8 @@ tribes:new_productionsite_type {
          },
       },
       produce_12 = {
-         -- TRANSLATORS: Completed/Skipped/Did not start forging needles because ...
-         descname = _"forging needles",
+         -- TRANSLATORS: Completed/Skipped/Did not start making needles because ...
+         descname = _"making needles",
          actions = {
             "return=skipped unless economy needs needles",
             "sleep=32000",

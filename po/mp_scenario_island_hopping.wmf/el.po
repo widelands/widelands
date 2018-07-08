@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Elias Delakovias, 2015
+# erimitis, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-02 08:01+0000\n"
-"PO-Revision-Date: 2018-03-02 08:05+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-08 12:42+0000\n"
+"Last-Translator: erimitis\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,7 +20,7 @@ msgstr ""
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
-msgstr ""
+msgstr "5 λεπτά"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/first_island.lua:74
 msgid "10 minutes"
@@ -37,7 +38,7 @@ msgstr ""
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:212
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
 msgid "Rules"
-msgstr ""
+msgstr "Κανόνες"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"

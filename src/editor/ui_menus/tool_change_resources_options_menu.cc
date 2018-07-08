@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,9 +57,9 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
                 increase_tool_.get_change_by(),
                 1,
                 kMaxValue,
+                UI::PanelStyle::kWui,
                 _("Increase/Decrease amount by:"),
                 UI::SpinBox::Units::kNone,
-                g_gr->images().get("images/ui_basic/but1.png"),
                 UI::SpinBox::Type::kSmall),
      set_to_(&box_,
              0,
@@ -69,9 +69,9 @@ EditorToolChangeResourcesOptionsMenu::EditorToolChangeResourcesOptionsMenu(
              increase_tool_.set_tool().get_set_to(),
              0,
              kMaxValue,
+             UI::PanelStyle::kWui,
              _("Set amount to:"),
              UI::SpinBox::Units::kNone,
-             g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall),
      resources_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, 1),
      cur_selection_(&box_, 0, 0, "", UI::Align::kCenter) {

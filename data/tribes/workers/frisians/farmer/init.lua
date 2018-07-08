@@ -42,9 +42,9 @@ tribes:new_worker_type {
       plant = {
          "findspace=size:any radius:2 space",
          "walk=coords",
-         "animate=planting 4000",
+         "animate=planting 8000",
          "plant=attrib:seed_barley",
-         "animate=planting 4000",
+         "animate=planting 40800000",
          "return"
       },
       harvest = {
@@ -52,7 +52,7 @@ tribes:new_worker_type {
          "walk=object",
          "animate=harvesting 10000",
          "callobject=harvest",
-         "animate=gathering 4000",
+         "animate=gathering 8000",
          "createware=barley",
          "return"
       }

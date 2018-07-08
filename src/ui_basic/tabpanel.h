@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -86,13 +86,10 @@ private:
  *
  */
 struct TabPanel : public Panel {
-	enum class Type { kNoBorder, kBorder };
 
 	friend struct Tab;
 
-	TabPanel(Panel* parent,
-	         const Image* background,
-	         TabPanel::Type border_type = TabPanel::Type::kNoBorder);
+	TabPanel(Panel* parent, UI::TabPanelStyle style);
 
 	/** Add textual tab
 	 *
@@ -129,7 +126,7 @@ protected:
 	void layout() override;
 	void update_desired_size() override;
 
-	TabPanel::Type border_type_;  ///< whether there will be a border around the panels.
+	UI::TabPanelStyle style_;
 
 private:
 	// Common adding function for textual and pictorial tabs
@@ -153,7 +150,7 @@ private:
 	size_t active_;     ///< index of the currently active tab
 	size_t highlight_;  ///< index of the highlighted button
 
-	const Image* pic_background_;  ///< picture used to draw background
+	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
 };
 }
 

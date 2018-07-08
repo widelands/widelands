@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -117,7 +117,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 
 	// Setup plot widgets
 	// Create a tabbed environment for the different plots
-	UI::TabPanel* tabs = new UI::TabPanel(box, g_gr->images().get("images/ui_basic/but1.png"));
+	UI::TabPanel* tabs = new UI::TabPanel(box, UI::TabPanelStyle::kWuiDark);
 
 	plot_production_ =
 	   new WuiPlotArea(tabs, 0, 0, kPlotWidth, kPlotHeight + kSpacing,
@@ -183,9 +183,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	            color_map_),
 	         UI::Box::Resizing::kFullSize);
 
-	WuiPlotAreaSlider* slider =
-	   new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45,
-	                         g_gr->images().get("images/ui_basic/but1.png"));
+	WuiPlotAreaSlider* slider = new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45);
 	slider->changedto.connect([this](const int32_t timescale) { set_time(timescale); });
 	box->add(slider, UI::Box::Resizing::kFullSize);
 }

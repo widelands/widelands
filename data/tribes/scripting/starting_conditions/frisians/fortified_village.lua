@@ -64,7 +64,8 @@ return {
              frisians_brewer = 1,
              frisians_builder = 10,
              frisians_charcoal_burner = 1,
-             frisians_brickmaker = 4,
+             frisians_claydigger = 2,
+             frisians_brickmaker = 2,
              frisians_carrier = 40,
              frisians_reed_farmer = 2,
              frisians_berry_farmer = 1,
@@ -93,7 +94,7 @@ return {
             smoked_fish = 4,
             smoked_meat = 4,
             sword_long = 1,
-            sword_curved = 1,
+            sword_broad = 1,
             sword_double = 1,
             fur_garment_studded = 1,
             helmet = 1
@@ -107,7 +108,7 @@ return {
             smoked_fish = 4,
             smoked_meat = 4,
             sword_long = 1,
-            sword_curved = 1,
+            sword_broad = 1,
             sword_double = 1,
             fur_garment_golden = 1,
             helmet_golden = 1

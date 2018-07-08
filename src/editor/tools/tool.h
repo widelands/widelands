@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,16 +24,12 @@
 
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/widelands_geometry.h"
 
 class EditorInteractive;
-namespace Widelands {
-class Map;
-class World;
-}
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:

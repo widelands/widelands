@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 #ifndef _WIN32
 #include <ifaddrs.h>
 #endif
+
+#include <memory>
 
 #include <boost/lexical_cast.hpp>
 
@@ -453,44 +455,46 @@ void LanGameFinder::run() {
 		NetGameInfo info;
 		NetAddress addr;
 
-		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info)))
+		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info))) {
 			continue;
+		}
 
 		log("Received %s packet from %s\n", info.magic, addr.ip.to_string().c_str());
 
-		if (strncmp(info.magic, "GAME", 6))
+		if (strncmp(info.magic, "GAME", 6) || info.version != LAN_PROMOTION_PROTOCOL_VERSION) {
 			continue;
+		}
 
-		if (info.version != LAN_PROMOTION_PROTOCOL_VERSION)
+		// Make sure that the callback function has been set before we do any callbacks
+		if (!callback) {
 			continue;
+		}
 
 		//  if the game already is in the list, update the information
 		//  otherwise just append it to the list
 		bool was_in_list = false;
-		for (NetOpenGame* opengame : opengames) {
+		for (const auto& opengame : opengames) {
 			if (0 == strncmp(opengame->info.hostname, info.hostname, 128)) {
 				opengame->info = info;
 				if (!opengame->address.is_ipv6() && addr.is_ipv6()) {
 					opengame->address.ip = addr.ip;
 				}
-				callback(GameUpdated, opengame, userdata);
+				callback(GameUpdated, opengame.get(), userdata);
 				was_in_list = true;
 				break;
 			}
 		}
 
 		if (!was_in_list) {
-			opengames.push_back(new NetOpenGame);
 			addr.port = kWidelandsLanPort;
-			opengames.back()->address = addr;
-			opengames.back()->info = info;
-			callback(GameOpened, opengames.back(), userdata);
+			opengames.push_back(std::unique_ptr<NetOpenGame>(new NetOpenGame(addr, info)));
+			callback(GameOpened, opengames.back().get(), userdata);
 			break;
 		}
 	}
 }
 
-void LanGameFinder::set_callback(void (*const cb)(int32_t, NetOpenGame const*, void*),
+void LanGameFinder::set_callback(void (*const cb)(int32_t, const NetOpenGame* const, void*),
                                  void* const ud) {
 	callback = cb;
 	userdata = ud;

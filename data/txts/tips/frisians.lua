@@ -5,7 +5,7 @@ tips = {
       seconds = 9
    },
    {
-      text = _"Always build a forester´s house, so you will not run out of logs.",
+      text = _"Always build a forester’s house, so you will not run out of logs.",
       seconds = 4
    },
    {

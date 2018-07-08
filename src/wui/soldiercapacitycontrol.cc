@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                0,
                32,
                32,
-               g_gr->images().get("images/ui_basic/but4.png"),
+               UI::ButtonStyle::kWuiMenu,
                g_gr->images().get("images/wui/buildings/menu_down_train.png"),
                _("Decrease capacity")),
      increase_(this,
@@ -76,7 +76,7 @@ SoldierCapacityControl::SoldierCapacityControl(UI::Panel* parent,
                0,
                32,
                32,
-               g_gr->images().get("images/ui_basic/but4.png"),
+               UI::ButtonStyle::kWuiMenu,
                g_gr->images().get("images/wui/buildings/menu_up_train.png"),
                _("Increase capacity")),
      value_(this, "199", UI::Align::kCenter) {

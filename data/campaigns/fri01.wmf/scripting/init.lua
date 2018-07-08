@@ -18,5 +18,8 @@ expansion_mark = map:get_field(68, 68)
 warehouse_mark = map:get_field(44, 77)
 port_space = map:get_field(210, 10)
 
+-- Time in ms that elapses between the drowning of two fields when flooding
+flood_speed = 430
+
 include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

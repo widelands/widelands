@@ -104,17 +104,18 @@ wl_library(scripting_logic
     base_log
     base_macros
     economy
-    graphic
     io_fileread
     io_filesystem
     logic
     logic_campaign_visibility
     logic_constants
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io
+    profile
     scripting_base
     scripting_coroutine
     scripting_errors

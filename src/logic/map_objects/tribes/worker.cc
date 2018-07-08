@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "economy/road.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -965,9 +966,12 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
+			const int width = g_gr->images().get(rdescr->representative_image())->width();
 			const std::string message =
-			   (boost::format("<rt image=%s><p font-face=serif font-size=14>%s</p></rt>") %
-			    rdescr->representative_image() % _("A geologist found resources."))
+			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
+			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
+			    width % rdescr->representative_image() % UI_FONT_SIZE_MESSAGE %
+			    _("A geologist found resources."))
 			      .str();
 
 			Message::Type message_type = Message::Type::kGeologists;
@@ -2989,6 +2993,14 @@ void Worker::draw_inner(const EditorGameBase& game,
 
 	dst->blit_animation(
 	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+
+	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
+		const Vector2f hotspot = descr().ware_hotspot().cast<float>();
+		const Vector2f location(
+		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
+		dst->blit_animation(
+		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
+	}
 }
 
 /**
