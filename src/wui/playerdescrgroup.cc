@@ -86,7 +86,7 @@ PlayerDescriptionGroup::PlayerDescriptionGroup(UI::Panel* const parent,
 	d->btnPlayerInit->sigclicked.connect(
 	   boost::bind(&PlayerDescriptionGroup::toggle_playerinit, boost::ref(*this)));
 
-	refresh();
+	update();
 }
 
 PlayerDescriptionGroup::~PlayerDescriptionGroup() {
@@ -97,7 +97,7 @@ PlayerDescriptionGroup::~PlayerDescriptionGroup() {
 /**
  * Update display and enabled buttons based on current settings.
  */
-void PlayerDescriptionGroup::refresh() {
+void PlayerDescriptionGroup::update() {
 	const GameSettings& settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size()) {
@@ -174,7 +174,10 @@ void PlayerDescriptionGroup::refresh() {
 				d->btnPlayerTribe->set_tooltip(info.tooltip);
 			}
 
-			{
+			if (settings.scenario) {
+				d->btnPlayerInit->set_title(_("Scenario"));
+				d->btnPlayerInit->set_tooltip(_("Start type is set via the scenario"));
+			} else {
 				i18n::Textdomain td("tribes");  // for translated initialisation
 				for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 					if (tribeinfo.name == player.tribe) {
@@ -214,16 +217,20 @@ void PlayerDescriptionGroup::enable_player(bool on) {
 		return;
 
 	if (on) {
-		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed)
-			d->settings->next_player_state(d->plnum);
+		if (settings.players[d->plnum].state == PlayerSettings::State::kClosed) {
+			d->settings->set_player_state(d->plnum, PlayerSettings::State::kComputer);
+		}
 	} else {
-		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed)
+		if (settings.players[d->plnum].state != PlayerSettings::State::kClosed) {
 			d->settings->set_player_state(d->plnum, PlayerSettings::State::kClosed);
+		}
 	}
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kPlayer, d->plnum));
 }
 
 void PlayerDescriptionGroup::toggle_playertype() {
 	d->settings->next_player_state(d->plnum);
+	update();
 }
 
 /**
@@ -256,6 +263,7 @@ void PlayerDescriptionGroup::toggle_playertribe() {
 	}
 
 	d->settings->set_player_tribe(d->plnum, nexttribe, random_tribe);
+	update();
 }
 
 /**
@@ -281,6 +289,7 @@ void PlayerDescriptionGroup::toggle_playerteam() {
 		newteam = currentteam + 1;
 
 	d->settings->set_player_team(d->plnum, newteam);
+	update();
 }
 
 /// Cycle through available initializations for the player's tribe.
@@ -294,8 +303,10 @@ void PlayerDescriptionGroup::toggle_playerinit() {
 
 	for (const Widelands::TribeBasicInfo& tribeinfo : settings.tribes) {
 		if (tribeinfo.name == player.tribe) {
-			return d->settings->set_player_init(
+			d->settings->set_player_init(
 			   d->plnum, (player.initialization_index + 1) % tribeinfo.initializations.size());
+			update();
+			return;
 		}
 	}
 	NEVER_HERE();

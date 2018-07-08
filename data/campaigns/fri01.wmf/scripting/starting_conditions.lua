@@ -27,7 +27,8 @@ hq:set_wares {
 hq:set_workers {
    frisians_woodcutter = 3,
    frisians_forester = 6,
-   frisians_brickmaker = 5,
+   frisians_claydigger = 3,
+   frisians_brickmaker = 2,
    frisians_builder = 10,
    frisians_blacksmith = 4,
    frisians_miner = 5,

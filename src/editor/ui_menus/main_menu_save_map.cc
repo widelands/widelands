@@ -67,8 +67,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    buth_,
                    UI::ButtonStyle::kWuiPrimary,
                    _("Map Options")),
-     editbox_label_(
-        this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {
+     editbox_label_(this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")),
+     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
 	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button
@@ -77,17 +77,23 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(
 	   boost::bind(&MainMenuSaveMap::double_clicked_item, boost::ref(*this)));
+	table_.cancel.connect(boost::bind(&MainMenuSaveMap::die, this));
+	table_.set_can_focus(true);
 
 	editbox_ = new UI::EditBox(
 	   this, editbox_label_.get_x() + editbox_label_.get_w() + padding_, editbox_label_.get_y(),
 	   tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2, UI::PanelStyle::kWui);
-
 	editbox_->set_text(parent.egbase().map().get_name());
+
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 	edit_box_changed();
+	editbox_->ok.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
+	editbox_->cancel.connect(boost::bind(
+	   &MainMenuSaveMap::reset_editbox_or_die, boost::ref(*this), parent.egbase().map().get_name()));
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
 	cancel_.sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
+
 	make_directory_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
 	edit_options_.sigclicked.connect(
@@ -137,6 +143,8 @@ void MainMenuSaveMap::clicked_ok() {
 		}
 		if (save_map(filename, !g_options.pull_section("global").get_bool("nozip", false))) {
 			die();
+		} else {
+			table_.focus();
 		}
 	}
 }
@@ -212,7 +220,17 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
-	ok_.set_enabled(LayeredFileSystem::is_legal_filename(editbox_->text()));
+	const bool is_legal_filename = FileSystem::is_legal_filename(editbox_->text());
+	ok_.set_enabled(is_legal_filename);
+	editbox_->set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
+}
+
+void MainMenuSaveMap::reset_editbox_or_die(const std::string& current_filename) {
+	if (editbox_->text() == current_filename) {
+		die();
+	} else {
+		editbox_->set_text(current_filename);
+	}
 }
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
@@ -250,8 +268,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
 		    FileSystem::fs_filename(filename.c_str()))
 		      .str();
-		UI::WLMessageBox mbox(
-		   &eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox mbox(this, _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
 			return false;
 	}

@@ -11,13 +11,13 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 4,
-      granite = 4,
-      log = 3,
+      granite = 2,
+      log = 2,
       thatch_reed = 2
    },
    return_on_dismantle = {
       brick = 2,
-      granite = 2,
+      granite = 1,
       log = 1,
       thatch_reed = 1
    },
@@ -66,10 +66,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
+            "call=smelt_iron",
             "call=make_fur",
             "call=smelt_iron",
             "call=smelt_mixed",
             "call=smelt_iron",
+            "call=make_fur",
             "return=skipped"
          }
       },

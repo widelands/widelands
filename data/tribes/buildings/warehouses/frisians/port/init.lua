@@ -16,7 +16,7 @@ tribes:new_warehouse_type {
       log = 6,
       cloth = 2,
       gold = 2,
-      thatch_reed = 6
+      thatch_reed = 4
    },
    return_on_dismantle = {
       brick = 3,
@@ -24,7 +24,7 @@ tribes:new_warehouse_type {
       log = 3,
       gold = 1,
       cloth = 1,
-      thatch_reed = 3
+      thatch_reed = 2
    },
 
    animations = {

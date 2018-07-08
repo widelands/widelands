@@ -43,7 +43,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 #include "wui/multiplayersetupgroup.h"
 
 /// Simple user interaction window for selecting either map, save or cancel
@@ -357,6 +357,13 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 		}
 		end_modal<FullscreenMenuBase::MenuTarget>(FullscreenMenuBase::MenuTarget::kNormalGame);
 	}
+}
+
+void FullscreenMenuLaunchMPG::think() {
+	if (ctrl_) {
+		ctrl_->think();
+	}
+	refresh();
 }
 
 /**

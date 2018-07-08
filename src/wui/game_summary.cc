@@ -157,7 +157,9 @@ void GameSummaryScreen::fill_data() {
 		te.set_picture(0, player_image, p->get_name());
 		// Team
 		std::string teastr_ =
-		   (boost::format("%|1$u|") % static_cast<unsigned int>(p->team_number())).str();
+		   p->team_number() == 0 ?
+		      "—" :
+		      (boost::format("%|1$u|") % static_cast<unsigned int>(p->team_number())).str();
 		te.set_string(1, teastr_);
 		// Status
 		std::string stat_str;

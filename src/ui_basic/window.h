@@ -80,8 +80,8 @@ public:
 	bool is_minimal() const {
 		return is_minimal_;
 	}
-	void restore();
-	void minimize();
+	virtual void restore();
+	virtual void minimize();
 	bool is_snap_target() const override {
 		return true;
 	}

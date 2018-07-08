@@ -1,11 +1,11 @@
 wl_library(wui_chat_ui
   SRCS
-    chatoverlay.cc
-    chatoverlay.h
+    chat_overlay.cc
+    chat_overlay.h
     game_chat_menu.cc
     game_chat_menu.h
-    gamechatpanel.cc
-    gamechatpanel.h
+    game_chat_panel.cc
+    game_chat_panel.h
     chat_msg_layout.h
     chat_msg_layout.cc
   DEPENDS
