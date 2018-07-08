@@ -146,7 +146,7 @@ public:
 	void set_perm_pressed(bool pressed);
 
 	/// Change the background style of the button.
-	void set_background_style(UI::ButtonStyle style);
+	void set_background_style(UI::ButtonStyle bstyle);
 
 	/// Convenience function. Toggles between raised and permpressed style
 	void toggle();

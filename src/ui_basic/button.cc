@@ -365,8 +365,8 @@ void Button::set_perm_pressed(bool pressed) {
 	                           UI::Button::VisualState::kRaised);
 }
 
-void Button::set_background_style(UI::ButtonStyle style) {
-	background_style_ = g_gr->styles().button_style(style);
+void Button::set_background_style(UI::ButtonStyle bstyle) {
+	background_style_ = g_gr->styles().button_style(bstyle);
 }
 
 void Button::toggle() {
