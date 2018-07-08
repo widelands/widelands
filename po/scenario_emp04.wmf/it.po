@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-23 18:16+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-06-28 06:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Guybrush88 <erpizzo@alice.it>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/widelands/teams/35159/it/)\n"
@@ -354,7 +354,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:260
 msgid "Welcome Back"
-msgstr ""
+msgstr "Bentornato"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:261
 msgid "A high Fremil official is welcoming you…"
@@ -870,7 +870,7 @@ msgstr "Amalea è positivamente sorpresa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:516
 msgid "Amalea is celebrating a happy event…"
-msgstr ""
+msgstr "Amalea sta festeggiando un evento felice..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:518
@@ -1085,7 +1085,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:634
 msgid "Saledus is happy…"
-msgstr ""
+msgstr "Saledus è felice..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:636
@@ -1107,7 +1107,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:646
 msgid "Saledus is in a good mood…"
-msgstr ""
+msgstr "Saledus è di buonumore..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:648
@@ -1247,10 +1247,10 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nuovo obiettivo"
+msgstr[1] "Nuovi obiettivi"

@@ -78,13 +78,6 @@ FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 	delete lua_;
 }
 
-void FullscreenMenuLaunchGame::think() {
-	if (ctrl_)
-		ctrl_->think();
-
-	refresh();
-}
-
 bool FullscreenMenuLaunchGame::init_win_condition_label() {
 	if (settings_->settings().scenario) {
 		win_condition_dropdown_.set_enabled(false);
