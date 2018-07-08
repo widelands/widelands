@@ -248,8 +248,8 @@ wl_library(graphic_terrain_programs
 # Font handler and text
 wl_library(graphic_fonthandler
   SRCS
-    font_handler1.cc
-    font_handler1.h
+    font_handler.cc
+    font_handler.h
   DEPENDS
     base_macros
     graphic_image_cache

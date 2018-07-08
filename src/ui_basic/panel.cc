@@ -20,7 +20,7 @@
 #include "ui_basic/panel.h"
 
 #include "base/log.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
@@ -1082,7 +1082,7 @@ bool Panel::draw_tooltip(const std::string& text) {
 
 	constexpr uint32_t kTipWidthMax = 360;
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   g_fh1->render(text_to_render, kTipWidthMax);
+	   g_fh->render(text_to_render, kTipWidthMax);
 	if (rendered_text->rects.empty()) {
 		return false;
 	}

@@ -30,7 +30,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/default_resolution.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -441,7 +441,7 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 	if (!node_text.empty()) {
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh1->render(as_condensed(node_text));
+		   UI::g_fh->render(as_condensed(node_text));
 		rendered_text->draw(
 		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
@@ -451,13 +451,13 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		// Blit in-game clock
 		const std::string gametime(gametimestring(egbase().get_gametime(), true));
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh1->render(as_condensed(gametime));
+		   UI::g_fh->render(as_condensed(gametime));
 		rendered_text->draw(dst, Vector2i(5, 5));
 
 		// Blit FPS when playing a game in debug mode
 		if (get_display_flag(dfDebug)) {
 			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-			rendered_text = UI::g_fh1->render(as_condensed(
+			rendered_text = UI::g_fh->render(as_condensed(
 			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
 			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
 		}

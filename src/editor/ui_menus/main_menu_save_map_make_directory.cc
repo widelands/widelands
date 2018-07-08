@@ -20,7 +20,7 @@
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "io/filesystem/layered_filesystem.h"
 
 MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const parent,
@@ -41,7 +41,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
      edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, 0, 4, UI::PanelStyle::kWui),
      ok_button_(this,
                 "ok",
-                UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
+                UI::g_fh->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
                 get_inner_h() - padding_ - buth_,
                 butw_,
                 buth_,
@@ -49,7 +49,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
                 _("OK")),
      cancel_button_(this,
                     "cancel",
-                    UI::g_fh1->fontset()->is_rtl() ? get_inner_w() - butw_ - padding_ : padding_,
+                    UI::g_fh->fontset()->is_rtl() ? get_inner_w() - butw_ - padding_ : padding_,
                     get_inner_h() - padding_ - buth_,
                     butw_,
                     buth_,

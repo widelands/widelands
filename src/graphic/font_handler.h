@@ -33,10 +33,10 @@ namespace UI {
 /**
  * Main class for string rendering. Manages the cache of pre-rendered strings.
  */
-class IFontHandler1 {
+class IFontHandler {
 public:
-	IFontHandler1() = default;
-	virtual ~IFontHandler1() {
+	IFontHandler() = default;
+	virtual ~IFontHandler() {
 	}
 
 	/// Renders the given text into a set of images. The images are cached in a transient cache,
@@ -52,13 +52,13 @@ public:
 	/// game has changed.
 	virtual void reinitialize_fontset(const std::string& locale) = 0;
 
-	DISALLOW_COPY_AND_ASSIGN(IFontHandler1);
+	DISALLOW_COPY_AND_ASSIGN(IFontHandler);
 };
 
-/// Create a new FontHandler1.
-IFontHandler1* create_fonthandler(ImageCache* image_cache, const std::string& locale);
+/// Create a new FontHandler.
+IFontHandler* create_fonthandler(ImageCache* image_cache, const std::string& locale);
 
-extern IFontHandler1* g_fh1;
+extern IFontHandler* g_fh;
 }
 
 #endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER1_H

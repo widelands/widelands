@@ -17,7 +17,7 @@
  *
  */
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 
 #include <memory>
 
@@ -53,7 +53,7 @@ namespace UI {
 // Utility class to render a rich text string. The returned string is cached in
 // the ImageCache, so repeated calls to render with the same arguments should not
 // be a problem.
-class FontHandler1 : public IFontHandler1 {
+class FontHandler : public IFontHandler {
 private:
 	// A transient cache for the generated rendered texts
 	class RenderCache : public TransientCache<RenderedText> {
@@ -69,7 +69,7 @@ private:
 	};
 
 public:
-	FontHandler1(ImageCache* image_cache, const std::string& locale)
+	FontHandler(ImageCache* image_cache, const std::string& locale)
 	   : texture_cache_(new TextureCache(kTextureCacheSize)),
 	     render_cache_(new RenderCache(kRenderCacheSize)),
 	     fontsets_(),
@@ -77,7 +77,7 @@ public:
 	     rt_renderer_(new RT::Renderer(image_cache, texture_cache_.get(), fontsets_)),
 	     image_cache_(image_cache) {
 	}
-	~FontHandler1() override {
+	~FontHandler() override {
 	}
 
 	// This will render the 'text' with a width restriction of 'w'. If 'w' == 0, no restriction is
@@ -112,10 +112,10 @@ private:
 	ImageCache* const image_cache_;  // not owned
 };
 
-IFontHandler1* create_fonthandler(ImageCache* image_cache, const std::string& locale) {
-	return new FontHandler1(image_cache, locale);
+IFontHandler* create_fonthandler(ImageCache* image_cache, const std::string& locale) {
+	return new FontHandler(image_cache, locale);
 }
 
-IFontHandler1* g_fh1 = nullptr;
+IFontHandler* g_fh = nullptr;
 
 }  // namespace UI

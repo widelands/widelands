@@ -53,7 +53,7 @@
 #include "config.h"
 #include "editor/editorinteractive.h"
 #include "graphic/default_resolution.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "helper.h"
@@ -335,7 +335,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	if (TTF_Init() == -1)
 		throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
 
-	UI::g_fh1 = UI::create_fonthandler(
+	UI::g_fh = UI::create_fonthandler(
 	   &g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
 
 	g_gr->initialize(
@@ -364,9 +364,9 @@ WLApplication::~WLApplication() {
 	shutdown_hardware();
 	shutdown_settings();
 
-	assert(UI::g_fh1);
-	delete UI::g_fh1;
-	UI::g_fh1 = nullptr;
+	assert(UI::g_fh);
+	delete UI::g_fh;
+	UI::g_fh = nullptr;
 
 	TTF_Quit();  // TODO(unknown): not here
 

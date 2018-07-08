@@ -25,7 +25,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/text/bidi.h"
@@ -50,18 +50,18 @@ void replace_entities(std::string* text) {
 }
 
 int text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(
+	return UI::g_fh->render(
 	                   as_editorfont(
 	                      text.substr(
 	                         0, g_gr->max_texture_size_for_font_rendering() / text_height() - 1),
-	                      ptsize - UI::g_fh1->fontset()->size_offset()))
+	                      ptsize - UI::g_fh->fontset()->size_offset()))
 	   ->width();
 }
 
 int text_height(int ptsize, UI::FontSet::Face face) {
-	return UI::g_fh1->render(as_aligned(UI::g_fh1->fontset()->representative_character(),
+	return UI::g_fh->render(as_aligned(UI::g_fh->fontset()->representative_character(),
 	                                    UI::Align::kLeft,
-	                                    ptsize - UI::g_fh1->fontset()->size_offset(),
+	                                    ptsize - UI::g_fh->fontset()->size_offset(),
 	                                    RGBColor(0, 0, 0), face))
 	   ->height();
 }
@@ -243,10 +243,10 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 std::shared_ptr<const UI::RenderedText>
 autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
 	std::shared_ptr<const UI::RenderedText> result =
-	   UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
+	   UI::g_fh->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
-			result = UI::g_fh1->render(
+			result = UI::g_fh->render(
 			   as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
 		}
 	}
@@ -264,7 +264,7 @@ namespace UI {
  * character. Otherwise, mirror if the current fontset is RTL.
  */
 Align mirror_alignment(Align alignment, const std::string& checkme) {
-	bool do_swap_alignment = checkme.empty() ? UI::g_fh1->fontset()->is_rtl() :
+	bool do_swap_alignment = checkme.empty() ? UI::g_fh->fontset()->is_rtl() :
 	                                           i18n::has_rtl_character(checkme.c_str(), 20);
 	if (do_swap_alignment) {
 		switch (alignment) {

@@ -19,7 +19,7 @@
 
 #include "ui_basic/checkbox.h"
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -81,7 +81,7 @@ void Statebox::layout() {
 		}
 		rendered_text_ = label_text_.empty() ?
 		                    nullptr :
-		                    UI::g_fh1->render(as_uifont(label_text_), text_width(get_w(), pic_width));
+		                    UI::g_fh->render(as_uifont(label_text_), text_width(get_w(), pic_width));
 		if (rendered_text_.get()) {
 			w = std::max(rendered_text_->width() + kPadding + pic_width, w);
 			h = std::max(rendered_text_->height(), h);
@@ -147,7 +147,7 @@ void Statebox::draw(RenderTarget& dst) {
 		Vector2i text_anchor(kStateboxSize + kPadding, 0);
 
 		if (rendered_text_.get()) {
-			if (UI::g_fh1->fontset()->is_rtl()) {
+			if (UI::g_fh->fontset()->is_rtl()) {
 				text_anchor.x = 0;
 				image_anchor.x = rendered_text_->width() + kPadding;
 				image_anchor.y = (get_h() - kStateboxSize) / 2;

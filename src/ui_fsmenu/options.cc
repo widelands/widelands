@@ -31,7 +31,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/default_resolution.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
@@ -220,11 +220,11 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 
 	// Buttons
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_);
+	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_);
 	button_box_.add_inf_space();
 	button_box_.add(&apply_);
 	button_box_.add_inf_space();
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &cancel_ : &ok_);
+	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_);
 
 	// Tabs
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
@@ -701,7 +701,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
-	UI::g_fh1->reinitialize_fontset(i18n::get_locale());
+	UI::g_fh->reinitialize_fontset(i18n::get_locale());
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 

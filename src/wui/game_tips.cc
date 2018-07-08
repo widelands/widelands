@@ -22,7 +22,7 @@
 #include <memory>
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -108,7 +108,7 @@ void GameTips::show_tip(int32_t index) {
 	rt.blit(pt, pic_background);
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_game_tip(tips_[index].text), w);
+	   UI::g_fh->render(as_game_tip(tips_[index].text), w);
 	pt = Vector2i((g_gr->get_xres() - rendered_text->width()) / 2,
 	              (g_gr->get_yres() - rendered_text->height()) / 2);
 	rendered_text->draw(rt, pt);

@@ -22,7 +22,7 @@
 #include <boost/bind.hpp>
 
 #include "base/utf8.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -171,7 +171,7 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor) {
 
 	do {
 		--cursor;
-		// TODO(GunChleoc): When switchover to g_fh1 is complete, see if we can go full ICU here.
+		// TODO(GunChleoc): When switchover to g_fh is complete, see if we can go full ICU here.
 	} while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;

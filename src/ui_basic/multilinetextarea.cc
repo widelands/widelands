@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
@@ -85,11 +85,11 @@ void MultilineTextarea::recompute() {
 				text_ = make_richtext();
 			}
 			try {
-				rendered_text_ = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
+				rendered_text_ = UI::g_fh->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
 			} catch (const std::exception& e) {
 				log("Error rendering richtext: %s. Text is:\n%s\n", e.what(), text_.c_str());
 				text_ = make_richtext();
-				rendered_text_ = UI::g_fh1->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
+				rendered_text_ = UI::g_fh->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
 			}
 			height = rendered_text_->height();
 		}

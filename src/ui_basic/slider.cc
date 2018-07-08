@@ -20,7 +20,7 @@
 
 #include <cmath>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -526,7 +526,7 @@ void DiscreteSlider::draw(RenderTarget& dst) {
 
 	for (uint32_t i = 0; i < labels.size(); i++) {
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh1->render(as_condensed(labels[i], UI::Align::kCenter, UI_FONT_SIZE_SMALL - 2));
+		   UI::g_fh->render(as_condensed(labels[i], UI::Align::kCenter, UI_FONT_SIZE_SMALL - 2));
 		rendered_text->draw(
 		   dst, Vector2i(gap_1 + i * gap_n, get_h() - rendered_text->height()), UI::Align::kCenter);
 	}
