@@ -39,6 +39,7 @@ public:
 	}
 
 private:
+	// Container with UI elements to set a player slot's properties
 	struct PlayerEditRow {
 		explicit PlayerEditRow(UI::Box* init_box,
 		                       UI::EditBox* init_name,
@@ -54,11 +55,16 @@ private:
 
 	EditorInteractive& eia();
 
-	void name_changed(int32_t);
+	/// Update player name on map for the given row's player
+	void name_changed(size_t row);
+	/// Update number of player slots available on the map
 	void no_of_players_clicked();
-	void player_tribe_clicked(uint8_t);
-	void set_starting_pos_clicked(uint8_t);
+	/// Select tribe for the given row's player
+	void player_tribe_clicked(size_t row);
+	/// Select starting position for the given row's player
+	void set_starting_pos_clicked(size_t row);
 
+	/// Resize window according to number of rows
 	void layout() override;
 
 	UI::Box box_;

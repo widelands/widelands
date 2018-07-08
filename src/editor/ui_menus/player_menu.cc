@@ -45,6 +45,7 @@ constexpr Widelands::PlayerNumber max_recommended_players = 8;
 class EditorPlayerMenuWarningBox : public UI::Window {
 public:
 	explicit EditorPlayerMenuWarningBox(UI::Panel* parent)
+	/** TRANSLATORS: Window title in the editor when a player has selected more than the recommended number of players */
 	   : Window(parent, "editor_player_menu_warning_box", 0, 0, 500, 220, _("Too Many Players")),
 	     box_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
 	     warning_label_(&box_,
@@ -53,7 +54,7 @@ public:
 	                    300,
 	                    0,
 	                    UI::PanelStyle::kWui,
-	                    /** TRANSLATORS: Info text in editor player menu */
+	                    /** TRANSLATORS: Info text in editor player menu when a player has selected more than the recommended number of players. Choice is made by OK/Abort. */
 	                    _("We do not recommend setting more than 8 players except for testing "
 	                      "purposes. Are you sure that you want more than 8 players?"),
 	                    UI::Align::kLeft,
@@ -214,9 +215,6 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 	layout();
 }
 
-/**
- * Update all
- */
 void EditorPlayerMenu::layout() {
 	assert(!rows_.empty());
 	const Widelands::PlayerNumber nr_players = eia().egbase().map().get_nrplayers();
@@ -272,12 +270,12 @@ void EditorPlayerMenu::no_of_players_clicked() {
 		// Update button states
 		set_starting_pos_clicked(menu.tools()->set_starting_pos.get_current_player());
 	} else {
-		// If removed player was selected switch to the highest player
+		// If a removed player was selected, switch starting pos tool to the highest available player
 		if (old_nr_players >= menu.tools()->set_starting_pos.get_current_player()) {
 			set_starting_pos_clicked(nr_players);
 		}
 
-		// Remove extra players
+		// Hide extra players
 		map->set_nrplayers(nr_players);
 		for (Widelands::PlayerNumber pn = nr_players; pn < old_nr_players; ++pn) {
 			rows_.at(pn)->box->set_visible(false);
@@ -287,38 +285,32 @@ void EditorPlayerMenu::no_of_players_clicked() {
 	layout();
 }
 
-/**
- * Player Tribe Button clicked
- */
-void EditorPlayerMenu::player_tribe_clicked(uint8_t n) {
-	const std::string& tribename = rows_.at(n)->tribe->get_selected();
+void EditorPlayerMenu::player_tribe_clicked(size_t row) {
+	const std::string& tribename = rows_.at(row)->tribe->get_selected();
 	assert(Widelands::tribe_exists(tribename));
 	EditorInteractive& menu = eia();
-	menu.egbase().mutable_map()->set_scenario_player_tribe(n + 1, tribename);
+	menu.egbase().mutable_map()->set_scenario_player_tribe(row + 1, tribename);
 	menu.set_need_save(true);
 }
 
-/**
- * Set Current Start Position button selected
- */
-void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
+void EditorPlayerMenu::set_starting_pos_clicked(size_t row) {
 	EditorInteractive& menu = eia();
 	//  jump to the current node
 	Widelands::Map* map = menu.egbase().mutable_map();
-	if (Widelands::Coords const sp = map->get_starting_pos(n)) {
+	if (Widelands::Coords const sp = map->get_starting_pos(row)) {
 		menu.map_view()->scroll_to_field(sp, MapView::Transition::Smooth);
 	}
 
 	//  select tool set mplayer
 	menu.select_tool(menu.tools()->set_starting_pos, EditorTool::First);
-	menu.tools()->set_starting_pos.set_current_player(n);
+	menu.tools()->set_starting_pos.set_current_player(row);
 
 	//  reselect tool, so everything is in a defined state
 	menu.select_tool(menu.tools()->current(), EditorTool::First);
 
 	// Signal player position states via button states
 	iterate_player_numbers(pn, map->get_nrplayers()) {
-		if (pn == n) {
+		if (pn == row) {
 			rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiPrimary);
 			rows_.at(pn - 1)->position->set_perm_pressed(true);
 		} else {
@@ -329,14 +321,11 @@ void EditorPlayerMenu::set_starting_pos_clicked(uint8_t n) {
 	}
 }
 
-/**
- * Player name has changed
- */
-void EditorPlayerMenu::name_changed(int32_t n) {
+void EditorPlayerMenu::name_changed(size_t row) {
 	//  Player name has been changed.
-	const std::string& text = rows_.at(n)->name->text();
+	const std::string& text = rows_.at(row)->name->text();
 	EditorInteractive& menu = eia();
 	Widelands::Map* map = menu.egbase().mutable_map();
-	map->set_scenario_player_name(n + 1, text);
+	map->set_scenario_player_name(row + 1, text);
 	menu.set_need_save(true);
 }
