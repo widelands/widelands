@@ -516,7 +516,7 @@ LUALIB_API char *luaL_prepbuffsize (luaL_Buffer *B, size_t sz) {
       newbuff = (char *)resizebox(L, -1, newsize);
     else {  /* no buffer yet */
       newbuff = (char *)newbox(L, newsize);
-      memcpy(newbuff, B->b, B->n * sizeof(char));  /* copy original content */
+      memcpy(newbuff, B->b, B->n * sizeof(char));  /* copy original content */ // NOLINT
     }
     B->b = newbuff;
     B->size = newsize;
@@ -541,7 +541,7 @@ LUALIB_API void luaL_addstring (luaL_Buffer *B, const char *s) {
 
 LUALIB_API void luaL_pushresult (luaL_Buffer *B) {
   lua_State *L = B->L;
-  lua_pushlstring(L, B->b, B->n);
+  lua_pushlstring(L, B->b, B->n); // NOLINT
   if (buffonstack(B)) {
     resizebox(L, -2, 0);  /* delete old buffer */
     lua_remove(L, -2);  /* remove its header from the stack */

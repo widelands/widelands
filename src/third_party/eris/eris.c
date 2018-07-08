@@ -2365,7 +2365,7 @@ writer(lua_State *L, const void *p, size_t sz, void *ud) {
       eris_checkstack(L, 1);
       newbuff = (char*)lua_newuserdata(L, newcapacity * sizeof(char));
                                          /* perms reftbl buff path? ... nbuff */
-      memcpy(newbuff, eris_buffer(buff), eris_bufflen(buff));
+      memcpy(newbuff, eris_buffer(buff), eris_bufflen(buff)); // NOLINT
       lua_replace(L, BUFFIDX);                /* perms reftbl nbuff path? ... */
       eris_buffer(buff) = newbuff;
       eris_sizebuffer(buff) = newcapacity;
