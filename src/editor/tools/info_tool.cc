@@ -178,7 +178,7 @@ int32_t EditorInfoTool::handle_click_impl(const Widelands::World& world,
 				buf += as_listitem(
 							(boost::format(_("Workers: %s")) % i18n::localize_list(workernames, i18n::ConcatenateWith::COMMA)).str(), kListFontsize);
 			}
-			if (!workernames.empty()) {
+			if (!shipnames.empty()) {
 				buf += as_listitem(
 							(boost::format(_("Ships: %s")) % i18n::localize_list(shipnames, i18n::ConcatenateWith::COMMA)).str(), kListFontsize);
 			}
