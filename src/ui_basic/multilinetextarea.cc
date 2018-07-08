@@ -142,10 +142,10 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	Align alignment = mirror_alignment(align_, text_);
 	switch (alignment) {
 	case UI::Align::kCenter:
-		anchor = (get_eff_w() - blit_width) / 2;
+		anchor = (get_eff_w() - rendered_text_->width()) / 2;
 		break;
 	case UI::Align::kRight:
-		anchor = get_eff_w() - blit_width - RICHTEXT_MARGIN;
+		anchor = get_eff_w() - rendered_text_->width() - RICHTEXT_MARGIN;
 		break;
 	case UI::Align::kLeft:
 		anchor = RICHTEXT_MARGIN;
