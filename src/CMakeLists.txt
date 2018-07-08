@@ -108,7 +108,6 @@ wl_library(widelands_ball_of_mud
     editor
     graphic
     graphic_fonthandler
-    graphic_fonthandler_legacy
     graphic_text
     graphic_text_constants
     helper

@@ -53,7 +53,6 @@
 #include "config.h"
 #include "editor/editorinteractive.h"
 #include "graphic/default_resolution.h"
-#include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
@@ -338,7 +337,6 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	UI::g_fh1 = UI::create_fonthandler(
 	   &g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
-	UI::g_fh = new UI::FontHandler();
 
 	g_gr->initialize(
 	   config.get_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
@@ -365,10 +363,6 @@ WLApplication::~WLApplication() {
 
 	shutdown_hardware();
 	shutdown_settings();
-
-	assert(UI::g_fh);
-	delete UI::g_fh;
-	UI::g_fh = nullptr;
 
 	assert(UI::g_fh1);
 	delete UI::g_fh1;
@@ -843,10 +837,6 @@ void WLApplication::shutdown_settings() {
 }
 
 void WLApplication::shutdown_hardware() {
-	if (UI::g_fh) {
-		// TODO(unknown): this should really not be needed, but currently is :(
-		UI::g_fh->flush();
-	}
 	delete g_gr;
 	g_gr = nullptr;
 
