@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -107,6 +107,10 @@ public:
 	std::string fix_cross_file(const std::string&) const;
 	std::string canonicalize_name(std::string path) const;
 	bool is_path_absolute(const std::string& path) const;
+
+	/// Returns true if the filename is legal in all operating systems
+	static bool is_legal_filename(const std::string& filename);
+	static std::string illegal_filename_tooltip();
 
 	// Returns the path separator, i.e. \ on windows and / everywhere else.
 	static char file_separator();

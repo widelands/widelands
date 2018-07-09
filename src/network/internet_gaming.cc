@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #include "network/internet_gaming.h"
 
 #include <memory>
+#include <thread>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
@@ -159,7 +160,7 @@ bool InternetGaming::do_login(bool should_relogin) {
 	s.string(clientname_);
 	s.string(build_id());
 	s.string(bool2str(reg_));
-	s.string(authenticator_);
+	s.string(reg_ ? "" : authenticator_);
 	net->send(s);
 
 	// Now let's see, whether the metaserver is answering
@@ -176,8 +177,6 @@ bool InternetGaming::do_login(bool should_relogin) {
 					   "", "", true, _("Users marked with IRC will possibly not react to messages."));
 				}
 
-				// Try to establish a second connection to tell the metaserver about our IPv4 address
-				create_second_connection();
 				return true;
 			} else if (error())
 				return false;
@@ -336,37 +335,6 @@ void InternetGaming::handle_metaserver_communication() {
 	}
 }
 
-void InternetGaming::create_second_connection() {
-	NetAddress addr;
-	net->get_remote_address(&addr);
-	if (!addr.is_ipv6()) {
-		// Primary connection already is IPv4, abort
-		return;
-	}
-
-	if (!NetAddress::resolve_to_v4(&addr, meta_, port_)) {
-		// Could not get the IPv4 address of the metaserver? Strange :-/
-		return;
-	}
-
-	std::unique_ptr<NetClient> tmpNet = NetClient::connect(addr);
-	if (!tmpNet || !tmpNet->is_connected()) {
-		// Connecting by IPv4 doesn't work? Well, nothing to do then
-		return;
-	}
-
-	// Okay, we have a connection. Send the login message and terminate the connection
-	SendPacket s;
-	s.string(IGPCMD_TELL_IP);
-	s.string(boost::lexical_cast<std::string>(kInternetGamingProtocolVersion));
-	s.string(clientname_);
-	s.string(authenticator_);
-	tmpNet->send(s);
-
-	// Close the connection
-	tmpNet->close();
-}
-
 /// Handle one packet received from the metaserver.
 void InternetGaming::handle_packet(RecvPacket& packet) {
 	std::string cmd = packet.string();
@@ -389,7 +357,15 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 
 	// Are we already online?
 	if (state_ == CONNECTING) {
-		if (cmd == IGPCMD_LOGIN) {
+		if (cmd == IGPCMD_PWD_CHALLENGE) {
+			const std::string nonce = packet.string();
+			SendPacket s;
+			s.string(IGPCMD_PWD_CHALLENGE);
+			s.string(crypto::sha1(nonce + authenticator_));
+			net->send(s);
+			return;
+
+		} else if (cmd == IGPCMD_LOGIN) {
 			// Clients request to login was granted
 			const std::string assigned_name = packet.string();
 			if (clientname_ != assigned_name) {
@@ -401,10 +377,11 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			}
 			clientname_ = assigned_name;
 			clientrights_ = packet.string();
-			if (clientrights_ == INTERNET_CLIENT_UNREGISTERED) {
-				// Might happen that we log in with less rights than we wanted to.
+			if (reg_ && clientrights_ == INTERNET_CLIENT_UNREGISTERED) {
+				// Permission downgrade: We logged in with less rights than we wanted to.
 				// Happens when we are already logged in with another client.
 				reg_ = false;
+				authenticator_ = crypto::sha1(clientname_ + authenticator_);
 			}
 			state_ = LOBBY;
 			log("InternetGaming: Client %s logged in.\n", clientname_.c_str());
@@ -412,7 +389,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 
 		} else if (cmd == IGPCMD_ERROR) {
 			std::string errortype = packet.string();
-			if (errortype != "LOGIN" && errortype != "RELOGIN") {
+			if (errortype != IGPCMD_LOGIN && errortype != IGPCMD_PWD_CHALLENGE) {
 				log("InternetGaming: Strange ERROR in connecting state: %s\n", errortype.c_str());
 				throw WLWarning(
 				   _("Mixed up"), _("The metaserver sent a strange ERROR during connection"));
@@ -425,11 +402,15 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 		} else {
 			logout();
 			set_error();
+			log("InternetGaming: Expected a LOGIN, PWD_CHALLENGE or ERROR packet from server, but "
+			    "received "
+			    "command %s. Maybe the metaserver is using a different protocol version?",
+			    cmd.c_str());
 			throw WLWarning(
 			   _("Unexpected packet"),
-			   _("Expected a LOGIN, RELOGIN or REJECTED packet from server, but received command "
-			     "%s. Maybe the metaserver is using a different protocol version ?"),
-			   cmd.c_str());
+			   _("Received an unexpected network packet from the metaserver. The metaserver could be "
+			     "using a different protocol version. If the error persists, try updating your "
+			     "game."));
 		}
 	}
 	try {
@@ -498,7 +479,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				InternetGame* ing = new InternetGame();
 				ing->name = packet.string();
 				ing->build_id = packet.string();
-				ing->connectable = str2bool(packet.string());
+				ing->connectable = (packet.string() == INTERNET_GAME_SETUP);
 				gamelist_.push_back(*ing);
 
 				bool found = false;
@@ -549,8 +530,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				inc.build_id = packet.string();
 				inc.game = packet.string();
 				inc.type = packet.string();
-				inc.points = packet.string();
-				if (inc.build_id == "IRC") {
+				if (inc.type == INTERNET_CLIENT_IRC) {
 					irc.push_back(inc);
 					// No "join" or "left" messages for IRC users
 					continue;
@@ -574,7 +554,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			clientlist_.insert(clientlist_.end(), irc.begin(), irc.end());
 
 			for (InternetClient& client : old) {
-				if (client.name.size() && client.build_id != "IRC") {
+				if (client.name.size() && client.type != INTERNET_CLIENT_IRC) {
 					format_and_add_chat(
 					   "", "", true, (boost::format(_("%s left the lobby")) % client.name).str());
 				}
@@ -589,6 +569,9 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			if (waitcmd_ == IGPCMD_GAME_OPEN) {
 				waitcmd_ = "";
 			}
+			// Get the challenge
+			std::string challenge = packet.string();
+			relay_password_ = crypto::sha1(challenge + authenticator_);
 			// Save the received IP(s), so the client can connect to the game
 			NetAddress::parse_ip(&gameips_.first, packet.string(), kInternetRelayPort);
 			// If the next value is true, a secondary IP follows
@@ -666,7 +649,7 @@ const std::pair<NetAddress, NetAddress>& InternetGaming::ips() {
 }
 
 const std::string InternetGaming::relay_password() {
-	return authenticator_;
+	return relay_password_;
 }
 
 /// called by a client to join the game \arg gamename
@@ -701,7 +684,6 @@ void InternetGaming::open_game() {
 	SendPacket s;
 	s.string(IGPCMD_GAME_OPEN);
 	s.string(gamename_);
-	s.string("1024");  // Used to be maxclients, no longer used.
 	net->send(s);
 	log("InternetGaming: Client opened a game with the name %s.\n", gamename_.c_str());
 
@@ -808,17 +790,9 @@ void InternetGaming::send(const std::string& msg) {
 			   _("Message could not be sent: Was this supposed to be a private message?"));
 			return;
 		}
-		std::string recipient = msg.substr(1, space - 1);
-		for (const InternetClient& client : clientlist_) {
-			if (recipient == client.name && client.build_id == "IRC") {
-				format_and_add_chat(
-				   "", "", true, _("Private messages to IRC users are not supported."));
-				return;
-			}
-		}
 
-		s.string(trimmed);    // message
-		s.string(recipient);  // recipient
+		s.string(trimmed);                   // message
+		s.string(msg.substr(1, space - 1));  // recipient
 
 		format_and_add_chat(clientname_, msg.substr(1, space - 1), false, msg.substr(space + 1));
 

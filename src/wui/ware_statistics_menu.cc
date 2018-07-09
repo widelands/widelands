@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -183,8 +183,7 @@ WareStatisticsMenu::WareStatisticsMenu(InteractivePlayer& parent,
 	            color_map_),
 	         UI::Box::Resizing::kFullSize);
 
-	WuiPlotAreaSlider* slider =
-	   new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45);
+	WuiPlotAreaSlider* slider = new WuiPlotAreaSlider(this, *plot_production_, 0, 0, kPlotWidth, 45);
 	slider->changedto.connect([this](const int32_t timescale) { set_time(timescale); });
 	box->add(slider, UI::Box::Resizing::kFullSize);
 }

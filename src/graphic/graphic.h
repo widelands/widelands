@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,9 +81,7 @@ public:
 		return sdl_window_;
 	}
 
-	int max_texture_size() const {
-		return max_texture_size_;
-	}
+	int max_texture_size_for_font_rendering() const;
 
 	ImageCache& images() const {
 		return *image_cache_.get();

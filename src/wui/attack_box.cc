@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,8 +47,15 @@ AttackBox::AttackBox(UI::Panel* parent,
 uint32_t AttackBox::get_max_attackers() {
 	assert(player_);
 
-	if (upcast(Building, building, map_.get_immovable(*node_coordinates_)))
+	if (upcast(Building, building, map_.get_immovable(*node_coordinates_))) {
+		if (player_->vision(map_.get_index(building->get_position(), map_.get_width())) <= 1) {
+			// Player can't see the buildings door, so it can't be attacked
+			// This is the same check as done later on in send_player_enemyflagaction()
+			return 0;
+		}
+
 		return player_->find_attack_soldiers(building->base_flag());
+	}
 	return 0;
 }
 
@@ -77,9 +84,8 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
                                                   const std::string& text,
                                                   void (AttackBox::*fn)(),
                                                   const std::string& tooltip_text) {
-	std::unique_ptr<UI::Button> button(new UI::Button(&parent, text, 8, 8, 26, 26,
-	                                                  UI::ButtonStyle::kWuiPrimary,
-	                                                  text, tooltip_text));
+	std::unique_ptr<UI::Button> button(new UI::Button(
+	   &parent, text, 8, 8, 26, 26, UI::ButtonStyle::kWuiPrimary, text, tooltip_text));
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
 	parent.add(button.get());
 	return button;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,8 @@ FullscreenWindow::~FullscreenWindow() {
 }
 
 void FullscreenWindow::add_overlay_image(const std::string& filename, Alignment align) {
-	overlays_.push_back(std::unique_ptr<const Overlay>(new Overlay(g_gr->images().get(filename), align)));
+	overlays_.push_back(
+	   std::unique_ptr<const Overlay>(new Overlay(g_gr->images().get(filename), align)));
 }
 
 void FullscreenWindow::clear_overlays() {
@@ -129,7 +130,8 @@ Recti FullscreenWindow::calculate_rect(const Image* image, Alignment align, Tili
 		h = (tiling == Tiling::kHorizontal) ? h : available_height;
 	} else {
 		const float scale =
-		   std::min(1.f, std::max(static_cast<float>(available_width) / image->width(), static_cast<float>(available_height) / image->height()));
+		   std::min(1.f, std::max(static_cast<float>(available_width) / image->width(),
+		                          static_cast<float>(available_height) / image->height()));
 		w = scale * image->width();
 		h = scale * image->height();
 	}

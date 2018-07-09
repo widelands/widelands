@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -164,14 +164,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 }
 
 Building& BuildingDescr::create(EditorGameBase& egbase,
-                                Player& owner,
+                                Player* owner,
                                 Coords const pos,
                                 bool const construct,
                                 bool loading,
                                 Building::FormerBuildings const former_buildings) const {
 	Building& b = construct ? create_constructionsite() : create_object();
 	b.position_ = pos;
-	b.set_owner(&owner);
+	b.set_owner(owner);
 	for (DescriptionIndex idx : former_buildings) {
 		b.old_buildings_.push_back(idx);
 	}
@@ -354,7 +354,7 @@ bool Building::init(EditorGameBase& egbase) {
 	{
 		Flag* flag = dynamic_cast<Flag*>(map.get_immovable(neighb));
 		if (!flag)
-			flag = new Flag(egbase, owner(), neighb);
+			flag = new Flag(egbase, get_owner(), neighb);
 		flag_ = flag;
 		flag->attach_building(egbase, *this);
 	}
@@ -368,13 +368,13 @@ bool Building::init(EditorGameBase& egbase) {
 
 void Building::cleanup(EditorGameBase& egbase) {
 	if (defeating_player_) {
-		Player& defeating_player = egbase.player(defeating_player_);
+		Player* defeating_player = egbase.get_player(defeating_player_);
 		if (descr().get_conquers()) {
-			owner().count_msite_lost();
-			defeating_player.count_msite_defeated();
+			get_owner()->count_msite_lost();
+			defeating_player->count_msite_defeated();
 		} else {
-			owner().count_civil_bld_lost();
-			defeating_player.count_civil_bld_defeated();
+			get_owner()->count_civil_bld_lost();
+			defeating_player->count_civil_bld_defeated();
 		}
 	}
 
@@ -682,7 +682,7 @@ void Building::log_general_info(const EditorGameBase& egbase) {
 
 	molog("leave_time: %i\n", leave_time_);
 
-	molog("leave_queue.size(): %lu\n", static_cast<long unsigned int>(leave_queue_.size()));
+	molog("leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF;
 	molog("leave_allow.get(): %p\n", leave_allow_.get(egbase));
 	FORMAT_WARNINGS_ON;
@@ -725,13 +725,14 @@ void Building::set_seeing(bool see) {
 	if (see == seeing_)
 		return;
 
-	Player& player = owner();
-	const Map& map = player.egbase().map();
+	Player* player = get_owner();
+	const Map& map = player->egbase().map();
 
-	if (see)
-		player.see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
-	else
-		player.unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	if (see) {
+		player->see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	} else {
+		player->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	}
 
 	seeing_ = see;
 }
@@ -776,9 +777,9 @@ void Building::send_message(Game& game,
 	                                         (link_to_building_lifetime ? serial_ : 0)));
 
 	if (throttle_time) {
-		owner().add_message_with_timeout(game, std::move(msg), throttle_time, throttle_radius);
+		get_owner()->add_message_with_timeout(game, std::move(msg), throttle_time, throttle_radius);
 	} else {
-		owner().add_message(game, std::move(msg));
+		get_owner()->add_message(game, std::move(msg));
 	}
 }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,13 +73,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                bool localize_autosave)
    : parent_(parent),
      table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
-     table_(table_box_,
-            0,
-            0,
-            0,
-            0,
-            style,
-            UI::TableRows::kMultiDescending),
+     table_(table_box_, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
      filetype_(filetype),
      localize_autosave_(localize_autosave),
      // Savegame description
@@ -93,7 +87,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                             0,
                             0,
                             0,
-                            style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary : UI::ButtonStyle::kWuiSecondary,
+                            style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                               UI::ButtonStyle::kWuiSecondary,
                             _("Delete"))),
      game_(g) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
@@ -126,10 +121,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		   _("Mode"), (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str());
 	}
 	table_.add_column(0, _("Description"),
-	                  filetype_ == FileType::kReplay ?
-	                     _("Map name (start of replay)") :
-	                     _("The filename that the game was saved under followed by the map’s name, "
-	                       "or the map’s name followed by the last objective achieved."),
+	                  _("The filename that the game was saved under followed by the map’s name, "
+	                    "or the map’s name followed by the last objective achieved."),
 	                  UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
@@ -246,7 +239,8 @@ void LoadOrSaveGame::clicked_delete() {
 	if (filetype_ == FileType::kReplay) {
 		header = no_selections == 1 ?
 		            _("Do you really want to delete this replay?") :
-		            /** TRANSLATORS: Used with multiple replays, 1 replay has a separate string. */
+		            /** TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
+		    DO NOT omit the placeholder in your translation. */
 		            (boost::format(ngettext("Do you really want to delete this %d replay?",
 		                                    "Do you really want to delete these %d replays?",
 		                                    no_selections)) %
@@ -255,7 +249,8 @@ void LoadOrSaveGame::clicked_delete() {
 	} else {
 		header = no_selections == 1 ?
 		            _("Do you really want to delete this game?") :
-		            /** TRANSLATORS: Used with multiple games, 1 game has a separate string. */
+		            /** TRANSLATORS: Used with multiple games, 1 game has a separate string.
+		   DO NOT omit the placeholder in your translation. */
 		            (boost::format(ngettext("Do you really want to delete this %d game?",
 		                                    "Do you really want to delete these %d games?",
 		                                    no_selections)) %
@@ -272,6 +267,7 @@ void LoadOrSaveGame::clicked_delete() {
 		   ngettext("Confirm Deleting File", "Confirm Deleting Files", no_selections), message,
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
+		table_.focus();
 	}
 	if (do_delete) {
 		for (const uint32_t index : selections) {
@@ -296,14 +292,13 @@ void LoadOrSaveGame::clicked_delete() {
 		// Make sure that the game details are updated
 		entry_selected();
 	}
-	// TODO(GunChleoc): When the removal dialog was open, navigation with arrow keys no longer works.
 }
 
 UI::Button* LoadOrSaveGame::delete_button() {
 	return delete_;
 }
 
-void LoadOrSaveGame::fill_table() {
+void LoadOrSaveGame::fill_table(bool show_filenames) {
 
 	clear_selections();
 	table_.clear();
@@ -314,6 +309,9 @@ void LoadOrSaveGame::fill_table() {
 		gamefiles = filter(g_fs->list_directory(kReplayDir), [](const std::string& fn) {
 			return boost::ends_with(fn, kReplayExtension);
 		});
+		// Update description column title for replays
+		table_.set_column_tooltip(2, show_filenames ? _("Filename: Map name (start of replay)") :
+		                                              _("Map name (start of replay)"));
 	} else {
 		gamefiles = g_fs->list_directory(kSaveDir);
 	}
@@ -416,9 +414,9 @@ void LoadOrSaveGame::fill_table() {
 					      .str();
 					gamedata.savedonstring =
 					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-					      month day, year. This is part of a list. */
-					   (boost::format(_("saved on %1% %2%, %3%")) % localize_month(savedate->tm_mon) %
-					    savedate->tm_mday % (1900 + savedate->tm_year))
+					      month (short name) day (number), year (number). This is part of a list. */
+					   (boost::format(_("saved on %1% %2%, %3%")) % savedate->tm_mday %
+					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
 					      .str();
 				}
 			}
@@ -464,8 +462,12 @@ void LoadOrSaveGame::fill_table() {
 				}
 				te.set_string(1, gametypestring);
 				if (filetype_ == FileType::kReplay) {
+					const std::string map_basename =
+					   show_filenames ?
+					      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
+					      gamedata.mapname;
 					te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) %
-					                  gamedata.mapname % gamedata.gametime)
+					                  map_basename % gamedata.gametime)
 					                    .str());
 				} else {
 					te.set_string(

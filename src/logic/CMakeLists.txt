@@ -289,6 +289,7 @@ wl_library(logic
     network
     note_sound
     notifications
+    profile
     random
     scripting_coroutine
     scripting_logic

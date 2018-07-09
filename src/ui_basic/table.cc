@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -132,6 +132,13 @@ void Table<void*>::set_column_title(uint8_t const col, const std::string& title)
 	Column& column = columns_.at(col);
 	assert(column.btn);
 	column.btn->set_title(title);
+}
+
+void Table<void*>::set_column_tooltip(uint8_t col, const std::string& text) {
+	assert(col < columns_.size());
+	Column& column = columns_.at(col);
+	assert(column.btn);
+	column.btn->set_tooltip(text);
 }
 
 /**
@@ -332,6 +339,21 @@ void Table<void*>::draw(RenderTarget& dst) {
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_ESCAPE:
+			cancel();
+			return true;
+
+		case SDLK_TAB:
+			// Let the panel handle the tab key
+			return get_parent()->handle_key(true, code);
+
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			if (selection_ != no_selection_index()) {
+				double_clicked(selection_);
+			}
+			return true;
+
 		case SDLK_a:
 			if (is_multiselect_ && (code.mod & KMOD_CTRL) && !empty()) {
 				multiselect_.clear();
@@ -434,12 +456,20 @@ void Table<void*>::select(const uint32_t i) {
 	selection_ = i;
 	if (is_multiselect_) {
 		multiselect_.insert(selection_);
+		last_multiselect_ = selection_;
 	}
 
 	selected(selection_);
 }
 
-void Table<void*>::multiselect(uint32_t row) {
+/**
+ * If 'force' is true, adds the given 'row' to the selection, ignoring everything else.
+ */
+void Table<void*>::multiselect(uint32_t row, bool force) {
+	if (force) {
+		select(row);
+		return;
+	}
 	if (is_multiselect_) {
 		// Ranged selection with Shift
 		if (SDL_GetModState() & KMOD_SHIFT) {
@@ -532,6 +562,10 @@ void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
 }
 
+void Table<void*>::scroll_to_top() {
+	scrollbar_->set_scrollpos(0);
+}
+
 /**
  * Remove the table entry at the given (zero-based) index.
  */
@@ -547,10 +581,25 @@ void Table<void*>::remove(const uint32_t i) {
 	} else if (selection_ > i && selection_ != no_selection_index()) {
 		selection_--;
 	}
-	if (is_multiselect_ && selection_ != no_selection_index()) {
-		multiselect_.insert(selection_);
+	if (is_multiselect_) {
+		if (selection_ != no_selection_index()) {
+			multiselect_.insert(selection_);
+		}
+		last_multiselect_ = selection_;
 	}
 	layout();
+}
+
+/**
+ * Remove the given table entry if it exists.
+ */
+void Table<void*>::remove_entry(const void* const entry) {
+	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
+		if (entry_records_[i]->entry() == entry) {
+			remove(i);
+			return;
+		}
+	}
 }
 
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {

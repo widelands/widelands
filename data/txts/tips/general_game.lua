@@ -1,3 +1,5 @@
+include "scripting/richtext.lua"
+
 set_textdomain("texts")
 tips = {
    {
@@ -21,7 +23,8 @@ tips = {
       seconds = 6
    },
    {
-      text = _"Any further questions? Our FAQ, the wiki and of course our community forums can be found at www.widelands.org.",
+      -- TRANSLATORS: %s = URL to the Widelands website
+      text = (_"Any further questions? Our FAQ, the wiki and of course our community forums can be found online at %s."):bformat(u("widelands.org")),
       seconds = 6
    },
    {

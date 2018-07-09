@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,7 +118,16 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
-     sb_maxfps_(&box_interface_left_, 0, 0, 0, 0, opt.maxfps, 0, 99, UI::PanelStyle::kFsMenu, _("Maximum FPS:")),
+     sb_maxfps_(&box_interface_left_,
+                0,
+                0,
+                0,
+                0,
+                opt.maxfps,
+                0,
+                99,
+                UI::PanelStyle::kFsMenu,
+                _("Maximum FPS:")),
      translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
 
      // Windows options
@@ -250,6 +259,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_sound_.add(&fx_);
 	box_sound_.add(&message_sound_);
 
+	if (g_sound_handler.is_backend_disabled()) {
+		UI::Textarea* sound_warning = new UI::Textarea(
+		   &box_sound_, 0, 0, _("Sound is disabled due to a problem with the sound driver"));
+		sound_warning->set_style(g_gr->styles().font_style(UI::FontStyle::kWarning));
+		box_sound_.add(sound_warning);
+	}
+
 	// Saving
 	box_saving_.add(&sb_autosave_);
 	box_saving_.add(&sb_rolling_autosave_);
@@ -318,10 +334,11 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Sound options
 	music_.set_state(opt.music);
-	music_.set_enabled(!g_sound_handler.lock_audio_disabling_);
+	music_.set_enabled(!g_sound_handler.is_backend_disabled());
 	fx_.set_state(opt.fx);
-	fx_.set_enabled(!g_sound_handler.lock_audio_disabling_);
+	fx_.set_enabled(!g_sound_handler.is_backend_disabled());
 	message_sound_.set_state(opt.message_sound);
+	message_sound_.set_enabled(!g_sound_handler.is_backend_disabled());
 
 	// Saving options
 	zip_.set_state(opt.zip);

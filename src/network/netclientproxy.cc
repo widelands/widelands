@@ -58,7 +58,7 @@ NetClientProxy::NetClientProxy(const NetAddress& address, const std::string& nam
 	conn_->send("client");
 
 	// Wait 10 seconds for an answer
-	uint32_t endtime = time(nullptr) + 10;
+	time_t endtime = time(nullptr) + 10;
 	while (!NetRelayConnection::Peeker(conn_.get()).cmd()) {
 		if (time(nullptr) > endtime) {
 			// No message received in time

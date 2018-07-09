@@ -285,7 +285,7 @@ wl_library(graphic_text_layout
     text_layout.cc
     text_layout.h
   DEPENDS
-    graphic
+    graphic # TODO(Gunchleoc): For text_width safety only - rewrite that function
     graphic_align
     graphic_surface
     graphic_styles
@@ -332,6 +332,7 @@ wl_library(graphic
     base_i18n
     base_log
     base_macros
+    base_scoped_timer
     build_info
     graphic_align
     graphic_build_texture_atlas

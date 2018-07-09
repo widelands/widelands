@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 by the Widelands Development Team
+ * Copyright (C) 2016-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -85,22 +85,21 @@ GameDetails::GameDetails(Panel* parent, UI::PanelStyle style, Mode mode)
      style_(style),
      mode_(mode),
      padding_(4),
-     name_label_(
-        this,
-        0,
-        0,
-        0,
-        0,
-		  style,
-        "",
-        UI::Align::kLeft,
-        UI::MultilineTextarea::ScrollMode::kNoScrolling),
+     name_label_(this,
+                 0,
+                 0,
+                 0,
+                 0,
+                 style,
+                 "",
+                 UI::Align::kLeft,
+                 UI::MultilineTextarea::ScrollMode::kNoScrolling),
      descr_(this,
             0,
             0,
             0,
             0,
-				style,
+            style,
             "",
             UI::Align::kLeft,
             UI::MultilineTextarea::ScrollMode::kNoScrolling),
@@ -165,6 +164,15 @@ void GameDetails::update(const SavegameData& gamedata) {
 
 			description = (boost::format("%s%s") % description %
 			               as_header_with_content(_("Win Condition:"), gamedata.wincondition, style_))
+			                 .str();
+
+			std::string filename = gamedata.filename;
+			// Remove first directory from filename. This will be the save/ or replays/ folder
+			assert(filename.find('/') != std::string::npos);
+			filename.erase(0, filename.find('/') + 1);
+			assert(!filename.empty());
+			description = (boost::format("%s%s") % description %
+			               as_header_with_content(_("Filename:"), filename, style_))
 			                 .str();
 
 			description = (boost::format("<rt>%s</rt>") % description).str();

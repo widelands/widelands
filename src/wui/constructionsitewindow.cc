@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,9 @@ ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
                                                UI::UniqueWindow::Registry& reg,
                                                Widelands::ConstructionSite& cs,
                                                bool avoid_fastclick)
-   : BuildingWindow(parent, reg, cs, avoid_fastclick), construction_site_(&cs), progress_(nullptr) {
+   : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
+     construction_site_(&cs),
+     progress_(nullptr) {
 	init(avoid_fastclick);
 }
 

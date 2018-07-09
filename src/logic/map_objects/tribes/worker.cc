@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -975,9 +975,13 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
+			int UI_FONT_SIZE_MESSAGE = 12; // NOCOM
+			const int width = g_gr->images().get(rdescr->representative_image())->width();
 			const std::string message =
-			   (boost::format("<rt image=%s><p font-face=serif font-size=14>%s</p></rt>") %
-			    rdescr->representative_image() % _("A geologist found resources."))
+			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
+			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
+			    width % rdescr->representative_image() % UI_FONT_SIZE_MESSAGE %
+			    _("A geologist found resources."))
 			      .str();
 
 			Message::Type message_type = Message::Type::kGeologists;
@@ -994,12 +998,12 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
-			owner().add_message_with_timeout(game,
-			                                 std::unique_ptr<Message>(new Message(
-			                                    message_type, game.get_gametime(), rdescr->descname(),
-			                                    ri.descr().representative_image_filename(),
-			                                    rdescr->descname(), message, position, serial_)),
-			                                 300000, 8);
+			get_owner()->add_message_with_timeout(
+			   game, std::unique_ptr<Message>(
+			            new Message(message_type, game.get_gametime(), rdescr->descname(),
+			                        ri.descr().representative_image_filename(), rdescr->descname(),
+			                        message, position, serial_)),
+			   300000, 8);
 		}
 	}
 
@@ -1049,7 +1053,7 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 	}
 
 	// Update consumption statistic
-	owner().ware_consumed(wareindex, 1);
+	get_owner()->ware_consumed(wareindex, 1);
 
 	ware = fetch_carried_ware(game);
 	ware->remove(game);
@@ -1143,7 +1147,7 @@ void Worker::set_location(PlayerImmovable* const location) {
 			// Interrupt whatever we've been doing.
 			set_economy(nullptr);
 
-			EditorGameBase& egbase = owner().egbase();
+			EditorGameBase& egbase = get_owner()->egbase();
 			if (upcast(Game, game, &egbase)) {
 				send_signal(*game, "location");
 			}
@@ -1165,7 +1169,7 @@ void Worker::set_economy(Economy* const economy) {
 
 	economy_ = economy;
 
-	if (WareInstance* const ware = get_carried_ware(owner().egbase()))
+	if (WareInstance* const ware = get_carried_ware(get_owner()->egbase()))
 		ware->set_economy(economy_);
 	if (supply_)
 		supply_->set_economy(economy_);
@@ -1868,7 +1872,7 @@ void Worker::return_update(Game& game, State& state) {
 		    descr().descname().c_str())
 		      .str();
 
-		owner().add_message(
+		get_owner()->add_message(
 		   game, std::unique_ptr<Message>(new Message(
 		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
 		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
@@ -2397,7 +2401,7 @@ struct FindFlagWithPlayersWarehouse {
 	}
 	bool accept(const BaseImmovable& imm) const {
 		if (upcast(Flag const, flag, &imm))
-			if (&flag->owner() == &owner_)
+			if (flag->get_owner() == &owner_)
 				if (flag->economy().warehouses().size())
 					return true;
 		return false;
@@ -2416,7 +2420,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 	const Map& map = game.map();
 	PlayerImmovable const* location = get_location(game);
 
-	if (location && &location->owner() == &owner()) {
+	if (location && location->get_owner() == get_owner()) {
 		molog("[fugitive]: we are on location\n");
 
 		if (dynamic_cast<Warehouse const*>(location))
@@ -2428,7 +2432,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (&flag->owner() == &owner() && flag->economy().warehouses().size()) {
+		if (flag->get_owner() == get_owner() && flag->economy().warehouses().size()) {
 			set_location(flag);
 			return pop_task(game);
 		}
@@ -2703,11 +2707,11 @@ void Worker::add_sites(Game& game,
 		upcast(Flag, aflag, vu.object);
 		Building* a_building = aflag->get_building();
 		// Assuming that this always succeeds.
-		if (upcast(MilitarySite const, ms, a_building)) {
+		if (a_building->descr().type() == MapObjectType::MILITARYSITE) {
 			// This would be safe even if this assert failed: Own militarysites are always visible.
 			// However: There would be something wrong with FindForeignMilitarySite or associated
 			// code. Hence, let's keep the assert.
-			assert(&ms->owner() != &player);
+			assert(a_building->get_owner() != &player);
 			const Coords buildingpos = a_building->get_positions(game)[0];
 			// Check the visibility: only invisible ones interest the scout.
 			MapIndex mx = map.get_index(buildingpos, map.get_width());
@@ -2999,6 +3003,14 @@ void Worker::draw_inner(const EditorGameBase& game,
 
 	dst->blit_animation(
 	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+
+	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
+		const Vector2f hotspot = descr().ware_hotspot().cast<float>();
+		const Vector2f location(
+		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
+		dst->blit_animation(
+		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
+	}
 }
 
 /**

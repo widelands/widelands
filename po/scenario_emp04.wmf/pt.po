@@ -4,13 +4,14 @@
 # 
 # Translators:
 # zecas <jjorge@free.fr>, 2018
+# GunChleoc, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: zecas <jjorge@free.fr>, 2018\n"
+"Last-Translator: GunChleoc, 2018\n"
 "Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +33,7 @@ msgid ""
 "buildings."
 msgstr ""
 "Desmanchar os todos os pequenos edifícios para obter recursos para fabricar "
-"novos. "
+"novos."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:49
 msgid ""
@@ -44,47 +45,51 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 msgid "Clear all unnecessary roads"
-msgstr ""
+msgstr "Limpar os caminhos desnecessários"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:57
 msgid "Clear Road Network"
-msgstr ""
+msgstr "Melhorar a Rede de Caminhos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:58
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
-msgstr ""
+msgstr "Melhora a rede de caminhos removendo todos os desnecessários."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Find the construction plans for the farms"
-msgstr ""
+msgstr "Procura os planos de construção de quintas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Find Farm Construction Plans"
-msgstr ""
+msgstr "Procura Planos de Construção de Quintas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
+"Recupera os planos de construção das fazendas. Procura-los nas colinas ao "
+"leste das tuas fronteiras."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Constrói pelo menos 3 casas do lenhador e 2 pedreiras"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:75
 msgid "Quarries and Lumberjacks"
-msgstr ""
+msgstr "Pedreiras e Lenhadores"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
 msgstr ""
+"Constrói pelo menos três casas do lenhador e duas pedreiras para renovar a "
+"tua produção de materiais de construção."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Produce fish and rations"
-msgstr ""
+msgstr "Produz peixe e rações"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:84
 msgid "Food Production"
@@ -93,55 +98,61 @@ msgstr "Produção Alimentar"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
 msgstr ""
+"Procura e pesca alguns peixes. Depois, prepara rações para os teus mineiros."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:91
 msgid "Replace the old and ineffective forester’s houses"
-msgstr ""
+msgstr "Renova as velhas e improdutivas casas dos silvicultores."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:93
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "Constrói Duas Novas Casas de Silvicultores"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
 msgstr ""
+"Troca duas casas de silvicultores por novas para melhorar a produtividade."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:100
 msgid "Find the monastery in the north"
-msgstr ""
+msgstr "Procura o monasterial ao norte"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:102
 msgid "Find the Monastery"
-msgstr ""
+msgstr "Procura o Monasterial"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:103
 msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
 msgstr ""
+"Procura o monasterial ao norte para obter melhores técnicas de trabalho do "
+"trigo."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:109
 msgid "Deal with Julia to get the technology"
-msgstr ""
+msgstr "Negocia com Julia para obter as técnicas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:111
 msgid "Diplomacy: Trade or War"
-msgstr ""
+msgstr "Diplomacia : Troca ou Guerra"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:112
 msgid ""
-"Decide: Either collect 35 sheaves of wheat and 15 bottles of wine for the "
+"Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
+"Decide : ou amassas 35 sacos de trigo e 15 ânforas de vinho para a deusa no "
+"teu quartel geral ou conquistas o monasterial."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:118
 msgid "Train at least 3 heroes"
-msgstr ""
+msgstr "Treina pelo menos 3 heróis"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:120
 msgid "Hero Training"
-msgstr ""
+msgstr "Treino de Herói"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
 msgid ""
@@ -294,8 +305,8 @@ msgstr ""
 msgid ""
 "Praise the gods, we have succeeded. We managed all the challenges that were "
 "imposed on us. We even expelled the Barbarians out of our country. However, "
-"this was only one battle won, as we are still only at the brink of war. "
-"Let’s see what the future still holds for us."
+"our victory is only temporary, as this is still just the beginning of the "
+"war. Let’s see what the future still holds for us."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:222
@@ -1211,8 +1222,8 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:700
 msgid ""
 "Ave, Lutius! If you want us to help you, you first have to worship our "
-"goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 bottles of wine "
-"to prepare a worthy sacrifice for her."
+"goddess Vesta. Therefore deliver 35 sheaves of wheat and 15 amphoras of wine"
+" to prepare a worthy sacrifice for her."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:705

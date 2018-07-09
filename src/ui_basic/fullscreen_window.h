@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,13 +108,16 @@ private:
 	/// These overlay images will be blitted in the order they were added and according to the given
 	/// align.
 	struct Overlay {
-		Overlay(const Image* init_image, const FullscreenWindow::Alignment& init_align) : image(init_image), align(init_align) {}
+		Overlay(const Image* init_image, const FullscreenWindow::Alignment& init_align)
+		   : image(init_image), align(init_align) {
+		}
 		const Image* image;
 		const FullscreenWindow::Alignment align;
 	};
 	std::vector<std::unique_ptr<const Overlay>> overlays_;
 
-	/// Images for the edges and the center. Except for the center one, they will be blitted on top of the overlays_.
+	/// Images for the edges and the center. Except for the center one, they will be blitted on top
+	/// of the overlays_.
 	std::unordered_map<FullscreenWindow::Frames, const Image*, FullscreenWindow::FramesHash>
 	   frame_overlays_;
 

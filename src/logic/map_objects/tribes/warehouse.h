@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -253,7 +253,7 @@ private:
 	void init_portdock(EditorGameBase& egbase);
 
 	/// Initializes the container sizes for the owner's tribe.
-	void init_containers(Player& owner);
+	void init_containers(const Player& owner);
 
 	/**
 	 * Plan to produce a certain worker type in this warehouse. This means

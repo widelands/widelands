@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,10 +38,8 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
      economy_(economy),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
-     ware_panel_(
-        new EconomyOptionsPanel(&tabpanel_, can_act, Widelands::wwWARE, economy)),
-     worker_panel_(new EconomyOptionsPanel(
-        &tabpanel_, can_act, Widelands::wwWORKER, economy)) {
+     ware_panel_(new EconomyOptionsPanel(&tabpanel_, can_act, Widelands::wwWARE, economy)),
+     worker_panel_(new EconomyOptionsPanel(&tabpanel_, can_act, Widelands::wwWORKER, economy)) {
 	set_center_panel(&tabpanel_);
 
 	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));

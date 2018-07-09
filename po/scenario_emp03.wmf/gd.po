@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-01 09:32+0000\n"
+"POT-Creation-Date: 2018-02-15 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: GunChleoc, 2017\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -47,6 +47,8 @@ msgid ""
 "Build a quarry close to the abundant rocks to free some building plots and "
 "get some valuable resources."
 msgstr ""
+"Tog cuaraidh faisg air na carraigean pailte ach an saor sinn raointean "
+"togail ’s am faigh sinn stòrasan prìseil."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -67,7 +69,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:74
 msgid "Lower the demand for marble columns to 4"
-msgstr ""
+msgstr "Ìslich an t-iarrtas air colbhan marmoir gu 4"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:76
 msgid "Lower Demand for Marble Columns"
@@ -78,6 +80,9 @@ msgid ""
 "Lower the demand for marble columns in the economy settings to four. This "
 "will help to save some marble for buildings."
 msgstr ""
+"Ìslich an t-iarrtas air colbhan marmoir gu ceithir ann an roghainnean na "
+"h-eaconamaidh. Cuidichidh seo ach an caomhain sinn beagan marmoir airson "
+"togalaichean."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:78
 msgid ""
@@ -97,6 +102,7 @@ msgstr "Raon puirt"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Search for a port space in order to regain access to the sea."
 msgstr ""
+"Lorg raon puirt ach ach am faigh thu inntrigeadh dhan mhuir a-rithist."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Build a port and a shipyard on the Island"
@@ -116,7 +122,7 @@ msgstr "Tog doca gus na longan a dhèanamh air a sheòlas sinn."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:102
 msgid "Produce wheat"
-msgstr ""
+msgstr "Saothraich cruithneachd"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:104
 msgid "Wheat Production"
@@ -126,6 +132,8 @@ msgstr "Saothrachadh cruithneachd"
 msgid ""
 "Produce at least 50 sheaves of wheat to get your wool production started."
 msgstr ""
+"Saothraich 50 sguab arbhair air a char as lugha ach an tòisich thu air "
+"clòimh a shaothrachadh."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:111
 msgid "Produce cloth for building our first ship"
@@ -140,6 +148,9 @@ msgid ""
 "Now turn all the wheat into at least 50 bales of wool and then use the wool "
 "to weave cloth in order to build a ship."
 msgstr ""
+"Nise, dèanaidh sinn 50 rùsg clòimh air a char as lugha dhen chruithneachd "
+"agus cleachdaidh sinn a’ chlòimh an uairsin gus clò fhighe leis an tog sinn "
+"long."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:120
 msgid "Build 2 ports on distant islands"
@@ -149,19 +160,23 @@ msgstr "Tog 2 phort air eileanan fad às"
 #. them
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:123
 msgid "Build two Expedition Ports"
-msgstr ""
+msgstr "Tog dà phort le triallan"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:124
 msgid ""
 "Explore the island in the south. Use an expedition to build a port there. "
 "Afterwards, try to find some mining resources."
 msgstr ""
+"Rùraich an t-eilean gu deas. Cleachd triall gus port a thogail ann. "
+"Feuchaidh sinn ri stòrasan mèinnearachd a lorg an uairsin."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:125
 msgid ""
 "Send a ship northwards to gather some intelligence about the Barbarians. Try"
 " to build a port on the island and found an outpost."
 msgstr ""
+"Cuir long gu tuath gus fiosrachadh air na Tùsanaich a chruinneachadh. Feuch "
+"an tog thu port san eilean sin gus tuineachadh a stèidheachadh ann."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:131
 msgid "Produce gold to send out expeditions"
@@ -175,6 +190,8 @@ msgstr "Saothrachadh òir"
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
+"Saothraich sia ungannan òir air a char as lugha ach an dèan sinn tuineachadh"
+" air na h-eileanan am fagas."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Barbarians"
@@ -186,7 +203,7 @@ msgstr "Cuir ruaig air an nàmhaid"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "End the Barbarians’ existence in this part of the world."
-msgstr ""
+msgstr "Cuir às dha na Tùsanaich sa cheàrn seo dhen t-saoghail."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
 msgid "Explore further and build ports"
@@ -199,7 +216,7 @@ msgstr "Rùraich barrachd eileanan agus lorg raointean puirt"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:152
 msgid ""
 "Discover more land in your vicinity and build as many ports as you can."
-msgstr ""
+msgstr "Lorg barrachd tìr am fagas agus tog nas urrainn dhut de phuirt."
 
 #. TRANSLATORS: Objective header
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:159
@@ -229,6 +246,8 @@ msgid ""
 "Build a training camp, some barracks and an arena or colosseum to train your"
 " soldiers."
 msgstr ""
+"Tog campa oideachaidh, taigh-feachd agus raon spòrs no coileasam gus na "
+"saighdearan agad oideachadh."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:184
 msgid "The Journey Home"
@@ -525,6 +544,10 @@ msgid ""
 "settings to a smaller amount. I think a reserve of four columns might be "
 "sufficient for the moment being."
 msgstr ""
+"Ach seo an trioblaid, ma chleachdas sinn am marmor againn uile airson "
+"colbhan, dh’fhaoidte gun ruith iad oirnn. Mar sin, bu chòir dhuinn uiread "
+"nan colbhan marmoir ìsleachadh ann an roghainnean na h-eaconamaidh. Saoilidh"
+" mi gum foghainn stòras de ceithir colbhan dhuinn aig an àm seo."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:319
 msgid "Amalea Looks Happy"
@@ -588,7 +611,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:348
 msgid "A Step Closer to Getting Home"
-msgstr ""
+msgstr "Ceum nas fhaisge air an taigh"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:349
 msgid "Saledus looks excited…"
@@ -611,7 +634,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:362
 msgid "Amalea’s Wisdom"
-msgstr ""
+msgstr "Gliocas Amalea"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:365
@@ -675,7 +698,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:398
 msgid "Amalea cheers…"
-msgstr ""
+msgstr "Tha Amalea toilichte…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:400
@@ -738,11 +761,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:434
 msgid "Amalea Advises"
-msgstr ""
+msgstr "Tha Amalea a’ toirt comhairle"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:435
 msgid "Amalea looks thoughtful…"
-msgstr ""
+msgstr "Tha Amalea a’ cnuasadh…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
@@ -800,7 +823,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:470
 msgid "Amalea’s Luck"
-msgstr ""
+msgstr "Fortan Amalea"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:471
 msgid "Amalea is really proud of the achievements…"
@@ -823,7 +846,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:482
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Tha Amalea air a dòigh"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:483
 msgid "Amalea is content that we will manage all our challenges"
@@ -848,7 +871,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:494
 msgid "Amalea’s Reminder"
-msgstr ""
+msgstr "Cuimhneachan Amalea"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:495
 msgid "Amalea is shaking her head…"
@@ -874,11 +897,11 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:503
 msgid "But be careful not to waste any bigger building spots."
-msgstr ""
+msgstr "Ach thoir an aire gu bheil na h-ionadan-togail mòra gann."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:509
 msgid "Amalea’s Excited"
-msgstr ""
+msgstr "Chaidh cridhe Amalea a thogail"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:510
 msgid "Amalea is looking forward to the exploration…"
@@ -912,7 +935,7 @@ msgstr ""
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:527
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:536
 msgid "Amalea is clapping her hands…"
-msgstr ""
+msgstr "Tha Amalea a’ bualadh a bois…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:529
@@ -1071,7 +1094,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:607
 msgid "Training Infrastructure is Needed"
-msgstr ""
+msgstr "Tha feum air bun-structar oideachaidh"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
 msgid "Saledus has security concerns"
@@ -1140,7 +1163,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:648
 msgid "Artifact Found"
-msgstr ""
+msgstr "Lorg sinn ball-ealain"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format

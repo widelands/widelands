@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -143,7 +143,7 @@ public:
 	/// Does not perform any sanity checks.
 	/// If former_buildings is not empty this is an enhancing.
 	Building& create(EditorGameBase&,
-	                 Player&,
+	                 Player*,
 	                 Coords,
 	                 bool construct,
 	                 bool loading = false,
@@ -169,9 +169,9 @@ public:
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
+	const EditorGameBase& egbase_;
 
 private:
-	const EditorGameBase& egbase_;
 	bool buildable_;     // the player can build this himself
 	bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;

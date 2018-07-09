@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -88,6 +88,17 @@ std::string richtext_escape(const std::string& given_text) {
 	return text;
 }
 
+/// Bullet list item
+std::string as_listitem(const std::string& txt, UI::FontStyle style) {
+	static boost::format f("<div width=100%%><div><p><font size=%d "
+	                       "color=%s>•</font></p></div><div><p><space gap=6></p></div><div "
+	                       "width=*><p><font size=%d color=%s>%s<vspace "
+	                       "gap=6></font></p></div></div>");
+	const UI::FontStyleInfo& font_style = g_gr->styles().font_style(style);
+	f % font_style.size % font_style.color.hex_value() % font_style.size % font_style.color.hex_value() % txt;
+	return f.str();
+}
+
 std::string as_richtext(const std::string& txt) {
 	static boost::format f("<rt>%s</rt>");
 	f % txt;
@@ -101,7 +112,7 @@ std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style, 
 std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, UI::Align align) {
 	return as_richtext_paragraph(style.as_font_tag(text), align);
 }
-
+// NOCOM use FontStyle instead?
 std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style) {
 	static boost::format f("<rt keep_spaces=1><p>%s</p></rt>");
 	f % style.as_font_tag(text);

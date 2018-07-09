@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -157,7 +157,9 @@ void GameSummaryScreen::fill_data() {
 		te.set_picture(0, player_image, p->get_name());
 		// Team
 		std::string teastr_ =
-		   (boost::format("%|1$u|") % static_cast<unsigned int>(p->team_number())).str();
+		   p->team_number() == 0 ?
+		      "—" :
+		      (boost::format("%|1$u|") % static_cast<unsigned int>(p->team_number())).str();
 		te.set_string(1, teastr_);
 		// Status
 		std::string stat_str;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "economy/workers_queue.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -92,6 +93,13 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const EditorGameBase& egbase)
    : BuildingDescr(init_descname, init_type, table, egbase),
      out_of_resource_productivity_threshold_(100) {
+	if (msgctxt.empty()) {
+		throw Widelands::GameDataError(
+		   "Productionsite '%s' has empty Gettext msgctxt", name().c_str());
+	}
+	// Let's convert this only once, it's cheaper
+	const char* msgctxt_char = msgctxt.c_str();
+
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 
@@ -100,7 +108,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		out_of_resource_title_ = _(items_table->get_string("title"));
 		out_of_resource_heading_ = _(items_table->get_string("heading"));
 		out_of_resource_message_ =
-		   pgettext_expr(msgctxt.c_str(), items_table->get_string("message").c_str());
+		   pgettext_expr(msgctxt_char, items_table->get_string("message").c_str());
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
@@ -189,12 +197,27 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			const std::string program_descname_unlocalized = program_table->get_string("descname");
 			std::string program_descname = _(program_descname_unlocalized);
 			if (program_descname == program_descname_unlocalized) {
-				program_descname = pgettext_expr(msgctxt.c_str(), program_descname_unlocalized.c_str());
+				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
 			}
 			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
 			   program_name, program_descname, program_table->get_table("actions"), egbase, this));
 		} catch (const std::exception& e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
+		}
+	}
+
+	// Verify that any map resource collected is valid
+	if (!hints().collects_ware_from_map().empty()) {
+		if (!(egbase_.tribes().ware_exists(hints().collects_ware_from_map()))) {
+			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
+		}
+		const DescriptionIndex collects_index =
+		   egbase_.tribes().safe_ware_index(hints().collects_ware_from_map());
+		if (!is_output_ware_type(collects_index)) {
+			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
+			                    "listed in the building's output",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
 		}
 	}
 }
@@ -505,7 +528,7 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
 			continue;
 
 		// Okay, space is free and worker is fitting. Let's create him
-		Worker& worker = wdes.create(egbase, owner(), this, get_position());
+		Worker& worker = wdes.create(egbase, get_owner(), this, get_position());
 
 		if (upcast(Game, game, &egbase))
 			worker.start_task_idle(*game, 0, -1);
@@ -779,7 +802,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 				ware.init(game);
 				worker.start_task_dropoff(game, ware);
 			}
-			owner().ware_produced(ware_index);  //  for statistics
+			get_owner()->ware_produced(ware_index);  //  for statistics
 		}
 		assert(ware_type_with_count.second);
 		if (--ware_type_with_count.second == 0)
@@ -796,7 +819,7 @@ bool ProductionSite::get_building_work(Game& game, Worker& worker, bool const su
 			   *owner().tribe().get_worker_descr(worker_type_with_count.first);
 			{
 				Worker& recruit = dynamic_cast<Worker&>(worker_descr.create_object());
-				recruit.set_owner(&worker.owner());
+				recruit.set_owner(worker.get_owner());
 				recruit.set_position(game, worker.get_position());
 				recruit.init(game);
 				recruit.set_location(this);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "wui/building_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
 #include "wui/interactive_player.h"
+#include "wui/seafaring_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/ware_statistics_menu.h"
 
@@ -37,6 +38,7 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
      player_(plr),
      windows_(windows),
      box_(this, 0, 0, UI::Box::Horizontal, 0, 0, 5) {
+	const bool is_seafaring = plr.egbase().mutable_map()->allows_seafaring();
 	add_button("wui/menus/menu_general_stats", "general_stats", _("General statistics"),
 	           &windows_.general_stats);
 	add_button(
@@ -44,8 +46,12 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
 	add_button("wui/menus/menu_building_stats", "building_stats", _("Building statistics"),
 	           &windows_.building_stats);
 	add_button("wui/menus/menu_stock", "stock", _("Stock"), &windows_.stock);
+	if (is_seafaring) {
+		add_button("wui/buildings/start_expedition", "seafaring_stats", _("Seafaring Statistics"),
+		           &windows_.seafaring_stats);
+	}
 	box_.set_pos(Vector2i(10, 10));
-	box_.set_size((34 + 5) * 4, 34);
+	box_.set_size((34 + 5) * (is_seafaring ? 5 : 4), 34);
 	set_inner_size(box_.get_w() + 20, box_.get_h() + 20);
 
 	windows_.general_stats.open_window = [this] {
@@ -58,6 +64,11 @@ GameStatisticsMenu::GameStatisticsMenu(InteractivePlayer& plr,
 		new BuildingStatisticsMenu(player_, windows_.building_stats);
 	};
 	// The stock window is defined in InteractivePlayer because of the keyboard shortcut.
+	if (is_seafaring) {
+		windows_.seafaring_stats.open_window = [this] {
+			new SeafaringStatisticsMenu(player_, windows_.seafaring_stats);
+		};
+	}
 
 	if (get_usedefaultpos())
 		center_to_parent();
@@ -75,10 +86,8 @@ UI::Button* GameStatisticsMenu::add_button(const std::string& image_basename,
 		if (window->window) {
 			button->set_perm_pressed(true);
 		}
-		window->opened.connect(
-		   boost::bind(&UI::Button::set_perm_pressed, button, true));
-		window->closed.connect(
-		   boost::bind(&UI::Button::set_perm_pressed, button, false));
+		window->opened.connect(boost::bind(&UI::Button::set_perm_pressed, button, true));
+		window->closed.connect(boost::bind(&UI::Button::set_perm_pressed, button, false));
 		button->sigclicked.connect(
 		   boost::bind(&UI::UniqueWindow::Registry::toggle, boost::ref(*window)));
 	}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -306,6 +306,11 @@ void InputQueueDisplay::update_siblings(int32_t state) {
 			// Cast failed. Sibling is no InputQueueDisplay
 			continue;
 		}
+		if (display->type_ != Widelands::wwWARE) {
+			// No ware, so there is no radio group
+			continue;
+		}
+		assert(display->priority_radiogroup_ != nullptr);
 		if (display->priority_radiogroup_->get_state() == state) {
 			// Nothing to do for this queue
 			continue;

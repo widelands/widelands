@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,6 +51,7 @@
 #include "wui/game_options_menu.h"
 #include "wui/game_statistics_menu.h"
 #include "wui/general_statistics_menu.h"
+#include "wui/seafaring_statistics_menu.h"
 #include "wui/stock_menu.h"
 #include "wui/tribal_encyclopedia.h"
 #include "wui/ware_statistics_menu.h"
@@ -302,7 +303,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			f->roads = player_field.roads;
 			f->vision = player_field.vision;
 			if (player_field.vision == 1) {
-				f->owner = player_field.owner != 0 ? &gbase.player(player_field.owner) : nullptr;
+				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
 				f->is_border = player_field.border;
 			}
 		}
@@ -459,6 +460,16 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 			}
 			return true;
 
+		case SDLK_e:
+			if (game().map().allows_seafaring()) {
+				if (main_windows_.seafaring_stats.window == nullptr) {
+					new SeafaringStatisticsMenu(*this, main_windows_.seafaring_stats);
+				} else {
+					main_windows_.seafaring_stats.toggle();
+				}
+			}
+			return true;
+
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL))
 				new GameMainMenuSaveGame(*this, main_windows_.savegame);
@@ -481,9 +492,8 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				if (!chat_.window) {
 					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 				}
-				dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 			}
-			return true;
 		default:
 			break;
 		}

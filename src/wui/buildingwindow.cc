@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,17 +48,26 @@ static const char* pic_debug = "images/wui/fieldaction/menu_debug.png";
 BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
                                UI::UniqueWindow::Registry& reg,
                                Widelands::Building& b,
+                               const Widelands::BuildingDescr& descr,
                                bool avoid_fastclick)
    : UI::UniqueWindow(&parent, "building_window", &reg, Width, 0, b.descr().descname()),
      is_dying_(false),
      parent_(&parent),
      building_(&b),
+     building_descr_for_help_(descr),
      building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
      expeditionbtn_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
+}
+
+BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
+                               UI::UniqueWindow::Registry& reg,
+                               Widelands::Building& b,
+                               bool avoid_fastclick)
+   : BuildingWindow(parent, reg, b, b.descr(), avoid_fastclick) {
 }
 
 BuildingWindow::~BuildingWindow() {
@@ -338,7 +347,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 			if (building_in_lambda == nullptr) {
 				return;
 			}
-			new UI::BuildingHelpWindow(igbase(), registry, building_in_lambda->descr(),
+			new UI::BuildingHelpWindow(igbase(), registry, building_descr_for_help_,
 			                           building_in_lambda->owner().tribe(), &parent_->egbase().lua());
 		};
 

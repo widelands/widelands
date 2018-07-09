@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,6 @@ struct InternetClient {
 	std::string build_id;
 	std::string game;
 	std::string type;
-	std::string points;  // Currently unused
 };
 
 /// A simple network game struct
@@ -217,6 +216,9 @@ private:
 	/// data saved for possible relogin
 	std::string authenticator_;
 	bool reg_;
+
+	/// Password for connecting as host to a game on the relay server
+	std::string relay_password_;
 
 	std::string meta_;
 	uint16_t port_;

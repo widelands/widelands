@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # fenris <fenris@folksprak.org>, 2015
@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:35+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"PO-Revision-Date: 2018-04-15 15:43+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Esperanto (http://www.transifex.com/widelands/widelands/language/eo/)\n"
 "MIME-Version: 1.0\n"
@@ -34,10 +34,11 @@ msgid "No Artifacts"
 msgstr "Neniaj artefaktoj"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:55
+#, lua-format
 msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
-"bug report on https://launchpad.net/widelands and specify your Widelands "
-"version and the map you tried to load."
+"bug report on %s and specify your Widelands version and the map you tried to"
+" load."
 msgstr ""
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
@@ -68,18 +69,12 @@ msgstr ""
 msgid "Your team stole an artifact from an enemy."
 msgstr ""
 
-#. TRANSLATORS: This is used to seperate players’ names in a list, e.g.
-#. "Steve, Robert, David"
-#: ../../data/scripting/win_conditions/artifacts.lua:143
-msgid ", "
-msgstr ""
-
-#: ../../data/scripting/win_conditions/artifacts.lua:150
+#: ../../data/scripting/win_conditions/artifacts.lua:145
 msgid "Overview:"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/artifacts.lua:153
-#: ../../data/scripting/win_conditions/artifacts.lua:166
+#: ../../data/scripting/win_conditions/artifacts.lua:148
+#: ../../data/scripting/win_conditions/artifacts.lua:161
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
@@ -87,13 +82,13 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
-#: ../../data/scripting/win_conditions/artifacts.lua:155
+#: ../../data/scripting/win_conditions/artifacts.lua:150
 msgid "%1$s owns %2$s."
 msgstr ""
 
 #. TRANSLATORS: %1$i is the team's number; %2$s is a list of team members
 #. (e.g. "Steve, Robert, David"), %3$s is something like "x artifact(s)"
-#: ../../data/scripting/win_conditions/artifacts.lua:168
+#: ../../data/scripting/win_conditions/artifacts.lua:163
 msgid "Team %1$i (%2$s) owns %3$s."
 msgstr ""
 
@@ -111,29 +106,29 @@ msgstr ""
 msgid "Points"
 msgstr "Poentoj"
 
-#: ../../data/scripting/win_conditions/collectors.lua:109
+#: ../../data/scripting/win_conditions/collectors.lua:126
 #, lua-format
 msgid "Status for %s"
 msgstr "Stato por %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:122
+#: ../../data/scripting/win_conditions/collectors.lua:139
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/collectors.lua:126
+#: ../../data/scripting/win_conditions/collectors.lua:143
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/scripting/win_conditions/collectors.lua:139
+#: ../../data/scripting/win_conditions/collectors.lua:156
 msgid "The game has ended."
 msgstr ""
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:146
+#: ../../data/scripting/win_conditions/collectors.lua:163
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -141,31 +136,31 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:151
+#: ../../data/scripting/win_conditions/collectors.lua:168
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
 msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/collectors.lua:154
+#: ../../data/scripting/win_conditions/collectors.lua:171
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:158
+#: ../../data/scripting/win_conditions/collectors.lua:175
 #, lua-format
 msgid "The game will end in %s."
 msgstr "La ludo finiĝos je %s"
 
-#: ../../data/scripting/win_conditions/collectors.lua:171
+#: ../../data/scripting/win_conditions/collectors.lua:188
 #, lua-format
 msgid "Status for Team %d"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/collectors.lua:173
+#: ../../data/scripting/win_conditions/collectors.lua:190
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"

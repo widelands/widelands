@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,9 +46,10 @@ const uint32_t TrainingSite::training_state_multiplier_ = 12;
   * /data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua
   */
 TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
+                                     const std::string& msgctxt,
                                      const LuaTable& table,
                                      const EditorGameBase& egbase)
-   : ProductionSiteDescr(init_descname, "", MapObjectType::TRAININGSITE, table, egbase),
+   : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::TRAININGSITE, table, egbase),
      num_soldiers_(table.get_int("soldier_capacity")),
      max_stall_(table.get_int("trainer_patience")),
 
@@ -216,7 +217,7 @@ void TrainingSite::SoldierControl::set_soldier_capacity(Quantity const capacity)
  * soldier is actually stationed here, without breaking anything if he isn't.
  */
 void TrainingSite::SoldierControl::drop_soldier(Soldier& soldier) {
-	Game& game = dynamic_cast<Game&>(training_site_->owner().egbase());
+	Game& game = dynamic_cast<Game&>(training_site_->get_owner()->egbase());
 
 	std::vector<Soldier*>::iterator it =
 	   std::find(training_site_->soldiers_.begin(), training_site_->soldiers_.end(), &soldier);
@@ -349,13 +350,13 @@ void TrainingSite::add_worker(Worker& w) {
 		if (std::find(soldiers_.begin(), soldiers_.end(), soldier) == soldiers_.end())
 			soldiers_.push_back(soldier);
 
-		if (upcast(Game, game, &owner().egbase()))
+		if (upcast(Game, game, &get_owner()->egbase()))
 			schedule_act(*game, 100);
 	}
 }
 
 void TrainingSite::remove_worker(Worker& w) {
-	upcast(Game, game, &owner().egbase());
+	upcast(Game, game, &get_owner()->egbase());
 
 	if (upcast(Soldier, soldier, &w)) {
 		std::vector<Soldier*>::iterator const it =

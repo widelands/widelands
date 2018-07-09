@@ -1,4 +1,6 @@
-add_subdirectory(test)
+# TODO(GunChleoc): This unit testing project is currently unmaintained
+# Reactivate in debian/rules too once work resumes on this
+# add_subdirectory(test)
 
 wl_library(graphic_text
   SRCS

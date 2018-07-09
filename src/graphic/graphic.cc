@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -168,6 +168,15 @@ void Graphic::resolution_changed() {
 RenderTarget* Graphic::get_render_target() {
 	render_target_->reset();
 	return render_target_.get();
+}
+
+int Graphic::max_texture_size_for_font_rendering() const {
+// Test with minimum supported size in debug builds.
+#ifndef NDEBUG
+	return kMinimumSizeForTextures;
+#else
+	return max_texture_size_;
+#endif
 }
 
 bool Graphic::fullscreen() {

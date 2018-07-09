@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -95,8 +95,7 @@ EditBox::EditBox(Panel* const parent,
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
-	m_->maxLength =
-	   std::min(static_cast<int>(std::floor(g_gr->max_texture_size() / (m_->style.font.size * m_->font_scale))), std::numeric_limits<int32_t>::max());
+	set_max_length(std::numeric_limits<int32_t>::max());
 
 	set_handle_mouse(true);
 	set_can_focus(true);
@@ -122,7 +121,7 @@ const std::string& EditBox::text() const {
  * Set the current text in the edit box.
  *
  * The text is truncated if it is longer than the maximum length set by
- * \ref setMaxLength().
+ * \ref set_max_length().
  */
 void EditBox::set_text(const std::string& t) {
 	if (t == m_->text)
@@ -144,8 +143,8 @@ void EditBox::set_text(const std::string& t) {
  * its end is cut off to fit into the maximum length.
  */
 void EditBox::set_max_length(int const n) {
-	assert(n > 0);
-	m_->maxLength = std::min(static_cast<int>(std::floor(g_gr->max_texture_size() / (m_->style.font.size * m_->font_scale))), n);
+	m_->maxLength =
+	   std::min(g_gr->max_texture_size_for_font_rendering() / text_height(m_->style.font), n);
 
 	if (m_->text.size() > m_->maxLength) {
 		m_->text.erase(m_->text.begin() + m_->maxLength, m_->text.end());

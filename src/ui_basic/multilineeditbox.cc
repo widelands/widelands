@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -98,7 +98,10 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::TextPanelStyleInfo& 
 	  style(init_style),
      cursor_pos(0),
      lineheight(text_height(style.font)),
-     maxbytes(std::min(g_gr->max_texture_size() / text_height(style.font), 0xffff)),
+     maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
+                          g_gr->max_texture_size_for_font_rendering() /
+                          (text_height(style.font) * text_height(style.font)),
+                       std::numeric_limits<int32_t>::max())),
      ww_valid(false),
 	  ww(style.font.size, style.font.color, o.get_w()),
      owner(o) {
@@ -135,8 +138,7 @@ void MultilineEditbox::set_text(const std::string& text) {
 		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
 	}
 
-	d_->set_cursor_pos(d_->text.size());
-
+	d_->set_cursor_pos(0);
 	d_->update();
 	d_->scroll_cursor_into_view();
 
@@ -200,6 +202,17 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 	while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]))
 		--cursor;
 	return cursor;
+}
+
+/**
+ * The mouse was clicked on this editbox
+*/
+bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
+		focus();
+		return true;
+	}
+	return false;
 }
 
 /**

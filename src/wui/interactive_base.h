@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-#include "wui/chatoverlay.h"
+#include "wui/chat_overlay.h"
 #include "wui/debugconsole.h"
 #include "wui/mapview.h"
 #include "wui/minimap.h"

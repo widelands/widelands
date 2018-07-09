@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,6 +87,10 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		plr_names_[i] = nullptr;
 		plr_set_pos_buts_[i] = nullptr;
 		plr_set_tribes_buts_[i] = nullptr;
+	}
+
+	if (parent.egbase().map().get_nrplayers() < 1) {
+		clicked_add_player();
 	}
 	update();
 

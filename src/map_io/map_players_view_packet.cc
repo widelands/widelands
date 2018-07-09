@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ constexpr uint8_t kCurrentPacketVersionVision = 1;
 constexpr uint8_t kCurrentPacketVersionBorder = 1;
 #define BORDER_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/border_%u"
 
-#define FILENAME_SIZE 48
+#define FILENAME_SIZE 64
 
 enum {
 	UNSEEN_NONE = 0,

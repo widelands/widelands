@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -106,7 +106,7 @@ GameClient::GameClient(const std::pair<NetAddress, NetAddress>& host,
 	if ((!d->net || !d->net->is_connected()) && host.second.is_valid()) {
 		// First IP did not work? Try the second IP
 		if (internet) {
-			d->net = NetClientProxy::connect(host.first, gamename);
+			d->net = NetClientProxy::connect(host.second, gamename);
 		} else {
 			d->net = NetClient::connect(host.second);
 		}

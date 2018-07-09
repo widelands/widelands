@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,6 +60,8 @@ std::string as_richtext(const std::string&);
 std::string as_richtext_paragraph(const std::string& text, UI::FontStyle style, UI::Align align = UI::Align::kLeft);
 std::string as_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style, UI::Align align = UI::Align::kLeft);
 std::string as_editor_richtext_paragraph(const std::string& text, const UI::FontStyleInfo& style);
+
+std::string as_listitem(const std::string&, UI::FontStyle style);
 
 std::string as_game_tip(const std::string&);
 std::string as_message(const std::string& heading, const std::string& body);

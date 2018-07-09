@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -253,9 +253,8 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 				if (!chat_.window) {
 					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 				}
-				dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 			}
-			return true;
 		default:
 			break;
 		}

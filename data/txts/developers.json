@@ -110,7 +110,9 @@
 						"Klaus Halfmann (Hasi50)",
 						"Philipp Klaus Krause (PkK)",
 						"Notabilis",
-						"Jukka Pakarinen"
+						"Jukka Pakarinen",
+						"Evgeny Kapun",
+						"ypopezios"
 					]
 				}
 			]
@@ -146,7 +148,8 @@
 						"Astuur",
 						"Gerrit Familiegrosskopf (kingcreole)",
 						"Florian Angermeier (fraang)",
-						"DragonAtma"
+						"DragonAtma",
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
@@ -209,7 +212,8 @@
 						"wl-zocker",
 						"king of nowhere",
 						"kaputtnik",
-						"Stephan Lutz (hessenfarmer)"
+						"Stephan Lutz (hessenfarmer)",
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
@@ -219,7 +223,7 @@
 			"image": "images/ui_basic/ls_wlmap.png",
 			"entries":[
 				{
-					"subheading": "Barbarian",
+					"subheading": "Barbarians",
 					"members":[
 						"Bastian Rapp",
 						"Alexander Kahl (wolfpac)",
@@ -234,10 +238,16 @@
 					]
 				},
 				{
-					"subheading": "Atlantean",
+					"subheading": "Atlanteans",
 					"members":[
 						"Holger Rapp (SirVer)",
 						"Peter Schwanemann (Nasenbaer)"
+					]
+				},
+				{
+					"subheading": "Frisians",
+					"members":[
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]

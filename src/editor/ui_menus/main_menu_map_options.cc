@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -148,12 +148,14 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	hint_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
-	ok_.set_enabled(false);
 	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
 
 	update();
+	ok_.set_enabled(false);
+
 	name_.focus();
 	center_to_parent();
 	move_to_top();
