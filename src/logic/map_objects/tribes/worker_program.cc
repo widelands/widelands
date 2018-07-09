@@ -721,11 +721,11 @@ createbob
 ^^^^^^^^^
 .. function:: createbob=\<bob_name\> [\<bob_name\> ...]
 
-	:arg string bob_name: The bob type to add to the selection. Specify as many bob
+   :arg string bob_name: The bob type to add to the selection. Specify as many bob
       types as you want.
 
    Adds a bob (usually an animal) to the map at the worker's current location.
-   Randomly select from the list of ``bob_name``s. Example::
+   Randomly select from the list of ``bob_name``. Example::
 
       release = {
          "findspace=size:any radius:3",
