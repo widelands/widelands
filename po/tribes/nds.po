@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-16 18:35+0000\n"
-"PO-Revision-Date: 2018-06-27 10:21+0000\n"
+"POT-Creation-Date: 2018-06-28 06:01+0000\n"
+"PO-Revision-Date: 2018-07-05 18:35+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr "Diene Soldaten hebben dien Slott besett."
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:93
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:41
 msgid "Your castle discovered an aggressor."
-msgstr "Dien Slott hett Feinde to sehn kriggt."
+msgstr "Dien Slott hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:94
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:42
@@ -64,15 +64,15 @@ msgstr "Wahrders-Saal"
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:41
 msgid "Your soldiers have occupied your guardhall."
-msgstr "Diene Soldaten hebben dien'n Wahrders-Saal besett."
+msgstr "Diene Soldaten hebben dienen Wahrders-Saal besett."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:42
 msgid "Your guardhall discovered an aggressor."
-msgstr "Dien Wahrders-Saal hett Feinde to sehn kriggt."
+msgstr "Dien Wahrders-Saal hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:43
 msgid "Your guardhall is under attack."
-msgstr "Feinde griepen dien'n Wahrders-Saal an."
+msgstr "Feinde griepen dienen Wahrders-Saal an."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:44
 msgid "The enemy defeated your soldiers at the guardhall."
@@ -86,7 +86,7 @@ msgstr "Diene Soldaten hebben de Feinde in eenem Wahrders-Saal manntjet."
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Guardhouse"
-msgstr "Lagerhuus"
+msgstr "Wahrders-Stuuv"
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:39
 msgid "Your soldiers have occupied your guardhouse."
@@ -94,7 +94,7 @@ msgstr "Diene Soldaten hebben diene Wahrders-Stuuv besett."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:40
 msgid "Your guardhouse discovered an aggressor."
-msgstr "Diene Wahrders-Stuuv hett Feinde to sehn kriggt."
+msgstr "Diene Wahrders-Stuuv hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhouse/init.lua:41
 msgid "Your guardhouse is under attack."
@@ -119,21 +119,21 @@ msgstr "Toorn"
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:47
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:50
 msgid "Your soldiers have occupied your tower."
-msgstr "Diene Soldaten hebben dien'n Toorn besett."
+msgstr "Diene Soldaten hebben dienen Toorn besett."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:46
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:53
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:48
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:51
 msgid "Your tower discovered an aggressor."
-msgstr "Dien Toorn hett Feinde to sehn kriggt."
+msgstr "Dien Toorn hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:47
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:54
 #: ../../data/tribes/buildings/militarysites/empire/tower/init.lua:49
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:52
 msgid "Your tower is under attack."
-msgstr "Feinde griepen dien'n Toorn an."
+msgstr "Feinde griepen dienen Toorn an."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower/init.lua:48
 #: ../../data/tribes/buildings/militarysites/barbarians/tower/init.lua:55
@@ -153,19 +153,19 @@ msgstr "Diene Soldaten hebben de Feinde in eenem Toorn manntjet."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:7
 msgctxt "atlanteans_building"
 msgid "High Tower"
-msgstr "Toorn"
+msgstr "Groter Toorn"
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:37
 msgid "Your soldiers have occupied your high tower."
-msgstr "Diene Soldaten hebben dien'n Groten Toorn besett."
+msgstr "Diene Soldaten hebben dienen Groten Toorn besett."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:38
 msgid "Your high tower discovered an aggressor."
-msgstr "Dien Grote Toorn hett Feinde to sehn kriggt."
+msgstr "Dien Grote Toorn hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:39
 msgid "Your high tower is under attack."
-msgstr "Feinde griepen dien'n Groten Toorn an."
+msgstr "Feinde griepen dienen Groten Toorn an."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_high/init.lua:40
 msgid "The enemy defeated your soldiers at the high tower."
@@ -179,7 +179,7 @@ msgstr "Diene Soldaten hebben de Feinde in eenem Groten Toorn manntjet."
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Small Tower"
-msgstr "Toorn"
+msgstr "Toorntje"
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:40
 msgid "Your soldiers have occupied your small tower."
@@ -187,7 +187,7 @@ msgstr "Diene Soldaten hebben dien Toorntje besett."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:41
 msgid "Your small tower discovered an aggressor."
-msgstr "Dien Toorntje hett Feinde to sehn kriggt."
+msgstr "Dien Toorntje hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/tower_small/init.lua:42
 msgid "Your small tower is under attack."
@@ -205,7 +205,7 @@ msgstr "Diene Soldaten hebben de Feinde in een Toorntje manntjet."
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:7
 msgctxt "barbarians_building"
 msgid "Barrier"
-msgstr "Dreger"
+msgstr "Uppass"
 
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:45
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:51
@@ -215,7 +215,7 @@ msgstr "Diene Soldaten hebben diene Uppass besett."
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:46
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:52
 msgid "Your barrier discovered an aggressor."
-msgstr "Diene Uppass hett Feinde to sehn kriggt."
+msgstr "Diene Uppass hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/barrier/init.lua:47
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:53
@@ -244,7 +244,7 @@ msgstr "Diene Soldaten hebben dien Kasteel besett."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:50
 msgid "Your citadel discovered an aggressor."
-msgstr "Dien Kasteel hett Feinde to sehn kriggt."
+msgstr "Dien Kasteel hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/citadel/init.lua:51
 msgid "Your citadel is under attack."
@@ -274,7 +274,7 @@ msgstr "Diene Soldaten hebben diene Schanz besett."
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:53
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:51
 msgid "Your fortress discovered an aggressor."
-msgstr "Diene Schanz hett Feinde to sehn kriggt."
+msgstr "Diene Schanz hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/fortress/init.lua:57
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:54
@@ -308,7 +308,7 @@ msgstr "Diene Soldaten hebben diene Wachters-Kamer besett."
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:48
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:49
 msgid "Your sentry discovered an aggressor."
-msgstr "Diene Wachters-Kamer hett Feinde to sehn kriggt."
+msgstr "Diene Wachters-Kamer hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/barbarians/sentry/init.lua:49
 #: ../../data/tribes/buildings/militarysites/empire/sentry/init.lua:50
@@ -335,7 +335,7 @@ msgstr "Toorn"
 #: ../../data/tribes/buildings/militarysites/empire/barrier/init.lua:7
 msgctxt "empire_building"
 msgid "Barrier"
-msgstr "Dreger"
+msgstr "Uppass"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:7
@@ -349,7 +349,7 @@ msgstr "Diene Soldaten hebben dien Wachters-Kamerke besett."
 
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:37
 msgid "Your blockhouse discovered an aggressor."
-msgstr "Dien Wachters-Kamerke hett Feinde to sehn kriggt."
+msgstr "Dien Wachters-Kamerke hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/empire/blockhouse/init.lua:38
 msgid "Your blockhouse is under attack."
@@ -389,7 +389,7 @@ msgstr "Diene Soldaten hebben diene Butenstee besett."
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:43
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:49
 msgid "Your outpost discovered an aggressor."
-msgstr "Diene Butenstee hett Feinde to sehn kriggt."
+msgstr "Diene Butenstee hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/empire/outpost/init.lua:44
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:50
@@ -442,7 +442,7 @@ msgstr "Diene Soldaten hebben dien Wachters-Postje besett."
 
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:47
 msgid "Your sentinel discovered an aggressor."
-msgstr "Dien Wachters-Postje hett Feinde to sehn kriggt."
+msgstr "Dien Wachters-Postje hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:48
 msgid "Your sentinel is under attack."
@@ -470,15 +470,15 @@ msgstr "Holten Toorn"
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:45
 msgid "Your soldiers have occupied your wooden tower."
-msgstr "Diene Soldaten hebben dien'n Holten Toorn besett."
+msgstr "Diene Soldaten hebben dienen Holten Toorn besett."
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:46
 msgid "Your wooden tower discovered an aggressor."
-msgstr "Dien Holten Toorn hett Feinde to sehn kriggt."
+msgstr "Dien Holten Toorn hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:47
 msgid "Your wooden tower is under attack."
-msgstr "Feinde griepen dien'n Holten Toorn an."
+msgstr "Feinde griepen dienen Holten Toorn an."
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:48
 msgid "The enemy defeated your soldiers at the wooden tower."
@@ -496,15 +496,15 @@ msgstr "Groter Holten Toorn"
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:43
 msgid "Your soldiers have occupied your high wooden tower."
-msgstr "Diene Soldaten hebben dien'n Groten Holten Toorn besett."
+msgstr "Diene Soldaten hebben dienen Groten Holten Toorn besett."
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:44
 msgid "Your high wooden tower discovered an aggressor."
-msgstr "Dien Grote Holten Toorn hett Feinde to sehn kriggt."
+msgstr "Dien Grote Holten Toorn hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:45
 msgid "Your high wooden tower is under attack."
-msgstr "Feinde griepen dien'n Groten Holten Toorn an."
+msgstr "Feinde griepen dienen Groten Holten Toorn an."
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/init.lua:46
 msgid "The enemy defeated your soldiers at the high wooden tower."
@@ -532,7 +532,7 @@ msgstr "Huus word plattreten"
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:94
 msgctxt "atlanteans_building"
 msgid "Armor Smithy"
-msgstr "Rüstsmeed"
+msgstr "Panzersmee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start working because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua:143
@@ -573,23 +573,23 @@ msgstr "Rüstsmeed"
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:50
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:48
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:54
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:63
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:51
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:65
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:62
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:62
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:67
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:54
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:57
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:64
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:62
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:65
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:50
 msgid "working"
@@ -611,7 +611,7 @@ msgstr "eenen Goden Schild to smeden"
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Bakery"
-msgstr "Backstuuv"
+msgstr "Backeree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/init.lua:55
@@ -655,7 +655,7 @@ msgstr "Swartwuddels to arnten"
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:87
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:79
 msgid "No Fields"
 msgstr "Keene Meedjes"
 
@@ -666,7 +666,7 @@ msgstr "Keene Meedjes"
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:78
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:77
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:88
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:80
 msgid "Out of Fields"
 msgstr "Hebb keene Medjes mehr"
 
@@ -687,7 +687,7 @@ msgstr "Holtköhl-Branneree"
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/init.lua:51
 #: ../../data/tribes/buildings/productionsites/barbarians/charcoal_kiln/init.lua:55
 #: ../../data/tribes/buildings/productionsites/empire/charcoal_kiln/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/init.lua:60
 msgid "producing coal"
 msgstr "Köhlen to produzeren"
 
@@ -782,7 +782,7 @@ msgstr "De Ader vun düsse Edelflint-Bargwark is leeg. De Mine produzeert af nu 
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Farm"
-msgstr "Bueree"
+msgstr "Buurderee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:61
@@ -804,26 +804,26 @@ msgstr "De Buur dat warkt bi düsse Buurderee hett keen Meedland wo he wat anpla
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Fish Breeder’s House"
-msgstr "Fischtüchters Huus"
+msgstr "Fisstüchteree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding fish because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:64
 msgid "breeding fish"
 msgstr "Fisse to tüchten"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:56
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:61
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:60
 msgid "No Fish"
 msgstr "Keen Fiss"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:62
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:54
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:58
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:55
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:61
 msgid "Out of Fish"
 msgstr "Hebb keene Fiske mehr"
@@ -844,18 +844,18 @@ msgstr "De Fiskeree-Water sünd vull"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Fisher’s House"
-msgstr "Fischers Huus"
+msgstr "Fiskeree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start fishing because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:46
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:52
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:44
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:75
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:47
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:53
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:45
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:76
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:51
 msgid "fishing"
 msgstr "Fisse to fangen"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:58
+#: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:59
 msgctxt "atlanteans_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -867,7 +867,7 @@ msgstr "De Fisker dat warkt bi düsse Fiskeree hett keene Fiske tum Fangen. Du k
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Forester’s House"
-msgstr "Fischers Huus"
+msgstr "Förster-Huus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting trees because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/init.lua:43
@@ -892,7 +892,7 @@ msgstr "Gold to spinnen"
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Gold Mine"
-msgstr "Gold"
+msgstr "Gold-Bargwark"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:58
@@ -939,7 +939,7 @@ msgstr "De Ader vun düsse Gold-Bargwark is leeg. De Mine produzeert af nu veel 
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Horse Farm"
-msgstr "Peerd"
+msgstr "Peertüchteree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start breeding horses because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:53
@@ -951,33 +951,33 @@ msgstr "Peer to tüchten"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Hunter’s House"
-msgstr "Boomümleggers Huus"
+msgstr "Jaggthuus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hunting because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:43
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:54
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:43
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:44
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:44
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:51
 msgid "hunting"
 msgstr "to jagen"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:63
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:52
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:64
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:65
 msgid "No Game"
 msgstr "Keene Deerten"
 
 #. TRANSLATORS: "Game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:65
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:54
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:67
 msgid "Out of Game"
 msgstr "Hebb keene Deerten mehr"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:57
 msgctxt "atlanteans_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -1035,7 +1035,7 @@ msgstr "De Ader vun düsse Iesen-Bargwark is leeg. De Mine produzeert af nu veel
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Mill"
-msgstr "Miller"
+msgstr "Möhlen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding corn because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:65
@@ -1098,7 +1098,7 @@ msgstr "Bomen körttosagen"
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Scout’s House"
-msgstr "Boomümleggers Huus"
+msgstr "Bespejeree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start scouting because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/scouts_house/init.lua:45
@@ -1133,7 +1133,7 @@ msgstr "Smeltwark"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:74
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:75
 msgid "smelting iron"
 msgstr "Iesen to smelten"
 
@@ -1141,7 +1141,7 @@ msgstr "Iesen to smelten"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:84
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:86
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:87
 msgid "smelting gold"
 msgstr "Gold to smelten"
 
@@ -1149,7 +1149,7 @@ msgstr "Gold to smelten"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Smokery"
-msgstr "Rökeree"
+msgstr "Rökelkamer"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking meat because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:68
@@ -1167,13 +1167,13 @@ msgstr "Fisse to rökeln"
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Spider Farm"
-msgstr "Speen Hoff"
+msgstr "Spinnentüchteree"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Toolsmithy"
-msgstr "Rüstsmidt"
+msgstr "Warktüügsmee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a bread paddle because
 #. ...
@@ -1263,7 +1263,7 @@ msgstr "eene Schüppe to maken"
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Weapon Smithy"
-msgstr "Rüstsmeed"
+msgstr "Wapensmee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a light trident
 #. because ...
@@ -1322,7 +1322,7 @@ msgstr "eene Goldene Kluft to sniedern"
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Well"
-msgstr "Soot"
+msgstr "Well"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:59
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:62
@@ -1347,7 +1347,7 @@ msgstr "De Arbeider dat wurkt bi düsse Well het keen Water in de Quell mehr."
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Woodcutter’s House"
-msgstr "Boomümleggers Huus"
+msgstr "Boomslageree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start felling trees because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/woodcutters_house/init.lua:43
@@ -1407,7 +1407,7 @@ msgstr "eene Brede Ext to smeden"
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:7
 msgctxt "barbarians_building"
 msgid "Bakery"
-msgstr "Backstuuv"
+msgstr "Backeree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/init.lua:58
@@ -1472,7 +1472,7 @@ msgstr "deftigs Beer to broen"
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:7
 msgctxt "barbarians_building"
 msgid "Cattle Farm"
-msgstr "Beister Hoff"
+msgstr "Ossentüchteree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start rearing cattle because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/init.lua:53
@@ -1524,7 +1524,7 @@ msgstr "De Ader vun düsse Köhle-Bargwark is leeg. De Mine produzeert af nu vee
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:7
 msgctxt "barbarians_building"
 msgid "Farm"
-msgstr "Bueree"
+msgstr "Buurderee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:69
@@ -1548,9 +1548,9 @@ msgstr "De Buur dat warkt bi düsse Buurderee hett keen Meedland wo he wat anpla
 #: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Fisher’s Hut"
-msgstr "Fischers Kaat"
+msgstr "Fisker-Huus"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/fishers_hut/init.lua:64
 msgctxt "barbarians_building"
 msgid ""
 "The fisher working out of this fisher’s hut can’t find any fish in his work "
@@ -1561,13 +1561,13 @@ msgstr "De Fisker dat warkt bi düsse Fiskeree hett keene Fiske tum Fangen."
 #: ../../data/tribes/buildings/productionsites/barbarians/gamekeepers_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Gamekeeper’s Hut"
-msgstr "Fischers Kaat"
+msgstr "Deertentüchteree"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:7
 msgctxt "barbarians_building"
 msgid "Gold Mine"
-msgstr "Gold"
+msgstr "Gold-Bargwark"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:80
@@ -1627,12 +1627,12 @@ msgstr "De Ader vun düsse Flint-Bargwark is leeg. De Mine produzeert af nu veel
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
 msgctxt "barbarians_building"
 msgid "Helm Smithy"
-msgstr "Rüstsmeed"
+msgstr "Helmsmee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:79
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:104
 msgid "forging a helmet"
 msgstr "eenen Helm to smeden"
 
@@ -1650,10 +1650,10 @@ msgstr "eenen Kriegshelm to smeden"
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Hunter’s Hut"
-msgstr "Fischers Kaat"
+msgstr "Jaggthütt"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:67
+#: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:68
 msgctxt "barbarians_building"
 msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
@@ -1716,7 +1716,7 @@ msgstr "Mörtel to mengen"
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Lumberjack’s Hut"
-msgstr "Boomschlegers Kaat"
+msgstr "Boomhauer-Huus"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/lumberjacks_hut/init.lua:61
 msgctxt "barbarians_building"
@@ -1766,13 +1766,13 @@ msgstr "Besteck to maken"
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:7
 msgctxt "barbarians_building"
 msgid "Micro Brewery"
-msgstr "Broeree"
+msgstr "Lüttje Broeree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:56
 #: ../../data/tribes/buildings/productionsites/empire/brewery/init.lua:54
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:61
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:81
 msgid "brewing beer"
 msgstr "Beer to broen"
 
@@ -1792,23 +1792,23 @@ msgstr "De Flinthauer dat wurkt bi düsse Flinthauerhuus het keene Stenen tum Of
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ranger’s Hut"
-msgstr "Fischers Kaat"
+msgstr "Boomplanteree"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:7
 msgctxt "barbarians_building"
 msgid "Reed Yard"
-msgstr "Reet (riep)"
+msgstr "Reitplanteree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:62
 msgid "planting reed"
 msgstr "Reit to planten"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:61
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:71
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:70
 msgid "harvesting reed"
 msgstr "Reit to arnten"
 
@@ -1823,7 +1823,7 @@ msgstr "De Gaardner dat warkt bi düsse Reitplanteree hett keen Meedland wo he w
 #: ../../data/tribes/buildings/productionsites/barbarians/scouts_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Scout’s Hut"
-msgstr "Boomümleggers Huus"
+msgstr "Bespejer-Huus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:7
@@ -1883,7 +1883,7 @@ msgstr "to spinnen"
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:7
 msgctxt "barbarians_building"
 msgid "Well"
-msgstr "Soot"
+msgstr "Well"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:64
 msgctxt "barbarians_building"
@@ -1894,7 +1894,7 @@ msgstr "De Arbeider dat wurkt bi düsse Well het keen Water in de Quell mehr."
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:7
 msgctxt "barbarians_building"
 msgid "Wood Hardener"
-msgstr "Holt Härtner"
+msgstr "Holtharderee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start hardening wood because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/wood_hardener/init.lua:60
@@ -1905,7 +1905,7 @@ msgstr "Holt to harden"
 #: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:7
 msgctxt "empire_building"
 msgid "Armor Smithy"
-msgstr "Rüstsmeed"
+msgstr "Panzersmee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
@@ -1929,7 +1929,7 @@ msgstr "eenen Goldenen Wapenrock to smeden"
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:7
 msgctxt "empire_building"
 msgid "Bakery"
-msgstr "Backstuuv"
+msgstr "Backeree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/empire/bakery/init.lua:60
@@ -2004,7 +2004,7 @@ msgstr "Langohren to tüchten"
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:7
 msgctxt "empire_building"
 msgid "Farm"
-msgstr "Bueree"
+msgstr "Buurderee"
 
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:79
 msgctxt "empire_building"
@@ -2016,9 +2016,9 @@ msgstr "De Buur dat warkt bi düsse Buurderee hett keen Meedland wo he wat anpla
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:7
 msgctxt "empire_building"
 msgid "Fisher’s House"
-msgstr "Fischers Huus"
+msgstr "Fiskeree"
 
-#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:55
+#: ../../data/tribes/buildings/productionsites/empire/fishers_house/init.lua:56
 msgctxt "empire_building"
 msgid ""
 "The fisher working out of this fisher’s house can’t find any fish in his "
@@ -2029,13 +2029,13 @@ msgstr "De Fisker dat warkt bi düsse Fiskeree hett keene Fiske tum Fangen."
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/init.lua:7
 msgctxt "empire_building"
 msgid "Forester’s House"
-msgstr "Fischers Huus"
+msgstr "Förster-Huus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:7
 msgctxt "empire_building"
 msgid "Gold Mine"
-msgstr "Gold"
+msgstr "Gold-Bargwark"
 
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:78
 msgctxt "empire_building"
@@ -2062,10 +2062,10 @@ msgstr "De Ader vun düsse Gold-Bargwark is leeg. De Mine produzeert af nu veel 
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
 msgctxt "empire_building"
 msgid "Hunter’s House"
-msgstr "Boomümleggers Huus"
+msgstr "Jaggthuus"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:56
+#: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:57
 msgctxt "empire_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -2167,7 +2167,7 @@ msgstr "De Ader vun düsse Marmel-Bargwark is leeg. De Mine produzeert af nu vee
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:7
 msgctxt "empire_building"
 msgid "Mill"
-msgstr "Miller"
+msgstr "Möhlen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:53
@@ -2212,7 +2212,7 @@ msgstr "Saagmöhlen"
 #: ../../data/tribes/buildings/productionsites/empire/scouts_house/init.lua:7
 msgctxt "empire_building"
 msgid "Scout’s House"
-msgstr "Boomümleggers Huus"
+msgstr "Bespejeree"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/init.lua:7
@@ -2259,7 +2259,7 @@ msgstr "Kneipe"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:7
 msgctxt "empire_building"
 msgid "Toolsmithy"
-msgstr "Rüstsmidt"
+msgstr "Warktüügsmee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a basket because ...
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:95
@@ -2296,7 +2296,7 @@ msgstr "De Wienplanter dat warkt bi düsse Wienplanteree hett keen Meedland wo h
 #: ../../data/tribes/buildings/productionsites/empire/weaponsmithy/init.lua:7
 msgctxt "empire_building"
 msgid "Weapon Smithy"
-msgstr "Rüstsmeed"
+msgstr "Wapensmee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because
 #. ...
@@ -2337,7 +2337,7 @@ msgstr "Spinnweelmöhlen"
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:7
 msgctxt "empire_building"
 msgid "Well"
-msgstr "Soot"
+msgstr "Well"
 
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:61
 msgctxt "empire_building"
@@ -2361,15 +2361,15 @@ msgctxt "frisians_building"
 msgid "Aqua Farm"
 msgstr "Fissbueree"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:86
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:87
 msgid "No Ponds"
 msgstr "Keene Polen"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:87
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:88
 msgid "Out of Fish Ponds"
 msgstr "Hebb keene Polen mehr"
 
-#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:88
+#: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:89
 msgctxt "frisians_building"
 msgid ""
 "The fisher working at this aqua farm can’t find any fish ponds in his work "
@@ -2384,21 +2384,21 @@ msgctxt "frisians_building"
 msgid "Large Armor Smithy"
 msgstr "Grote Wapensmee"
 
-#. TRANSLATORS: Completed/Skipped/Did not start forging a curved sword because
+#. TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:74
-msgid "forging a curved sword"
-msgstr "een Krummsweert to smeden"
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:75
+msgid "forging a broadsword"
+msgstr "een Bredes Sweert to smeden"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:90
 msgid "forging a double-edged sword"
 msgstr "een Tweesneidigs Sweert to smeden"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:96
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:105
 msgid "forging a golden helmet"
 msgstr "eenen Goldenen Helm to smeden"
 
@@ -2410,13 +2410,13 @@ msgstr "Lütte Wapensmee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a short sword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:73
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:74
 msgid "forging a short sword"
 msgstr "een Lüttjet Sweert to smeden"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
-#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:89
 msgid "forging a long sword"
 msgstr "een Langes Sweert to smeden"
 
@@ -2427,7 +2427,7 @@ msgid "Bakery"
 msgstr "Backeree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
-#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:62
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:83
 msgid "baking bread"
 msgstr "Brood to backen"
@@ -2450,15 +2450,15 @@ msgctxt "frisians_building"
 msgid "Beekeeper’s House"
 msgstr "Imkeree"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
 msgid "No Flowers"
 msgstr "Keene Blössems"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:62
 msgid "Out of Flowers"
 msgstr "Hebb keene Blössems mehr"
 
-#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:62
+#: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:63
 msgctxt "frisians_building"
 msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
@@ -2529,22 +2529,23 @@ msgid "Clay Pit"
 msgstr "Lehmkuhl"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making clay because ...
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:59
 msgid "making clay"
 msgstr "Lehm to maken"
 
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:77
+#. TRANSLATORS: Short for "No Level Ground" for clay pits
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:75
 msgid "No Ground"
 msgstr "Keen Klei"
 
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:76
 msgid "No Level Ground"
 msgstr "Hebb keen Klei mehr"
 
-#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:79
+#: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:77
 msgctxt "frisians_building"
 msgid ""
-"The brickmaker working at this clay pit can’t find any level ground in his "
+"The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
 msgstr "De Lehmgraver dat warkt bi düsse Lehmkuhl hett keen Klei tum utbuddeln. Überlegg di, of du de Huus plattrieten oder ofbrannen un annerwegens wedde hensetten willt."
@@ -2583,19 +2584,19 @@ msgid "Fruit Collector’s House"
 msgstr "Früchtenpottjeree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:50
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:51
 msgid "gathering berries"
 msgstr "Früchten to sammeln"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:60
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
 msgid "No Bushes"
 msgstr "Keene Busken"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:62
 msgid "Out of Berries"
 msgstr "Hebb keene Busken mehr"
 
-#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:62
+#: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
 msgctxt "frisians_building"
 msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
@@ -2701,7 +2702,7 @@ msgid "Hunter’s House"
 msgstr "Jaggthuus"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
 msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
@@ -2742,7 +2743,7 @@ msgid "Mead Brewery"
 msgstr "Brauhuus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
-#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:72
+#: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:70
 msgid "brewing mead"
 msgstr "Hönnigbeer to broen"
 
@@ -2765,20 +2766,20 @@ msgid "Recycling Center"
 msgstr "Verweerteree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:78
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:80
 msgctxt "frisians_building"
 msgid "recycling fur"
 msgstr "Fell to verweerten"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:91
 msgctxt "frisians_building"
 msgid "recycling iron"
 msgstr "Iesen to verweerten"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:100
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:102
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
 msgstr "Iesen un Gold to verweerten"
@@ -2789,7 +2790,7 @@ msgctxt "frisians_building"
 msgid "Reed Farm"
 msgstr "Reitbuurderee"
 
-#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:81
 msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
@@ -2879,13 +2880,13 @@ msgstr "Sniederee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:72
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:71
 msgid "sewing studded fur garment"
 msgstr "eene Beslaane Fellkluft to naihen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:82
 msgid "sewing golden fur garment"
 msgstr "eene Goldene Fellkluft to naihen"
 
@@ -2989,7 +2990,7 @@ msgstr "Soldaten-Angriff vun Stand 3 to Stand 4 to verbetern"
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Labyrinth"
-msgstr "Biestergoorn"
+msgstr "Dwaalwegen"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:100
@@ -3025,7 +3026,7 @@ msgstr "Soldaten-Utwieken vun Stand 1 to Stand 2 to verbetern"
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:7
 msgctxt "barbarians_building"
 msgid "Battle Arena"
-msgstr "Beister Tüchter"
+msgstr "Slachtenring"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
@@ -3185,25 +3186,25 @@ msgid "upgrading soldier attack from level 3 to level 4"
 msgstr "Soldaten-Angriff vun Stand 3 to Stand 4 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:132
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:131
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr "Soldaten-Angriff vun Stand 4 to Stand 5 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:144
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:143
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr "Soldaten-Angriff vun Stand 5 to Stand 6 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:156
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:155
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr "Soldaten-Verteidigung vun Stand 1 to Stand 2 to verbetern"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:167
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr "Soldaten-Gesundheid vun Stand 1 to Stand 2 to verbetern"
@@ -3260,7 +3261,7 @@ msgstr "Muu"
 #: ../../data/tribes/buildings/warehouses/atlanteans/warehouse/init.lua:7
 msgctxt "atlanteans_building"
 msgid "Warehouse"
-msgstr "Lagerhuus"
+msgstr "Kraamhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/barbarians/headquarters/init.lua:7
@@ -3279,7 +3280,7 @@ msgstr "Muu"
 #: ../../data/tribes/buildings/warehouses/barbarians/warehouse/init.lua:7
 msgctxt "barbarians_building"
 msgid "Warehouse"
-msgstr "Lagerhuus"
+msgstr "Kraamhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/init.lua:7
@@ -3303,7 +3304,7 @@ msgstr "Muu"
 #: ../../data/tribes/buildings/warehouses/empire/warehouse/init.lua:7
 msgctxt "empire_building"
 msgid "Warehouse"
-msgstr "Lagerhuus"
+msgstr "Kraamhuus"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/init.lua:7
@@ -3327,7 +3328,7 @@ msgstr "Kraamhuus"
 #: ../../data/tribes/immovables/ashes/init.lua:42
 msgctxt "immovable"
 msgid "Ashes"
-msgstr "Äsch"
+msgstr "Aske"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/barleyfield_harvested/init.lua:7
@@ -3491,13 +3492,13 @@ msgstr "Eerdjebeei (riep)"
 #: ../../data/tribes/immovables/blackrootfield_harvested/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (harvested)"
-msgstr "Stoppelacker"
+msgstr "Swartwuddels-Acker (arnt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_medium/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (medium)"
-msgstr "Mais Acker (middle)"
+msgstr "Swartwuddels-Acker (middel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_ripe/init.lua:7
@@ -3509,43 +3510,43 @@ msgstr "Swartwuddels-Acker (riep)"
 #: ../../data/tribes/immovables/blackrootfield_small/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (small)"
-msgstr "Mais Acker (lütt)"
+msgstr "Swartwuddels-Acker (lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Blackroot Field (tiny)"
-msgstr "Mais Acker (lüürlütt)"
+msgstr "Swartwuddels-Acker (ganz lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield_harvested/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (harvested)"
-msgstr "Stoppelacker"
+msgstr "Maisacker (arnt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield_medium/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (medium)"
-msgstr "Mais Acker (middle)"
+msgstr "Maisacker (middel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (ripe)"
-msgstr "Mais Acker (lüürlütt)"
+msgstr "Maisacker (riep)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield_small/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (small)"
-msgstr "Mais Acker (lütt)"
+msgstr "Maisacker (lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/cornfield_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Cornfield (tiny)"
-msgstr "Mais Acker (lüürlütt)"
+msgstr "Maisacker (ganz lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/destroyed_building/init.lua:7
@@ -3557,13 +3558,13 @@ msgstr "Verneelts Huus"
 #: ../../data/tribes/immovables/field_harvested/init.lua:7
 msgctxt "immovable"
 msgid "Field (harvested)"
-msgstr "Stoppelacker"
+msgstr "Acker (arnt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/field_medium/init.lua:7
 msgctxt "immovable"
 msgid "Field (medium)"
-msgstr "Acker (middle)"
+msgstr "Acker (middel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/field_ripe/init.lua:7
@@ -3581,7 +3582,7 @@ msgstr "Acker (lütt)"
 #: ../../data/tribes/immovables/field_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Field (tiny)"
-msgstr "Acker (lüürlütt)"
+msgstr "Acker (ganz lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/grapevine_medium/init.lua:7
@@ -3629,25 +3630,25 @@ msgstr "Pool mit Fisken"
 #: ../../data/tribes/immovables/reed_medium/init.lua:7
 msgctxt "immovable"
 msgid "Reed (medium)"
-msgstr "Reet (middel)"
+msgstr "Reit (middel)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_ripe/init.lua:7
 msgctxt "immovable"
 msgid "Reed (ripe)"
-msgstr "Reet (riep)"
+msgstr "Reit (riep)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_small/init.lua:7
 msgctxt "immovable"
 msgid "Reed (small)"
-msgstr "Reet (lütt)"
+msgstr "Reit (lütt)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/reed_tiny/init.lua:7
 msgctxt "immovable"
 msgid "Reed (tiny)"
-msgstr "Reet (lüürlütt)"
+msgstr "Reit (ganz lütt)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi_coal1/init.lua:7
@@ -3716,7 +3717,7 @@ msgstr "Mineraale: Water-Ader"
 #: ../../data/tribes/immovables/shipconstruction_frisians/init.lua:7
 msgctxt "immovable"
 msgid "Ship Under Construction"
-msgstr "Schipp Baustee"
+msgstr "Schipp-Baustee"
 
 #: ../../data/tribes/preload.lua:15 ../../data/tribes/preload.lua:32
 #: ../../data/tribes/preload.lua:49 ../../data/tribes/preload.lua:66
@@ -3909,7 +3910,7 @@ msgstr "Ext"
 #: ../../data/tribes/wares/ax_battle/init.lua:7
 msgctxt "ware"
 msgid "Battle Ax"
-msgstr "Beister Hoff"
+msgstr "Kriegsext"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/ax_broad/init.lua:7
@@ -3981,7 +3982,7 @@ msgstr "Haartholt"
 #: ../../data/tribes/wares/bread_atlanteans/init.lua:7
 msgctxt "atlanteans_ware"
 msgid "Bread"
-msgstr "Broot"
+msgstr "Brood"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_barbarians/init.lua:7
@@ -3993,7 +3994,7 @@ msgstr "Pitta-Brood"
 #: ../../data/tribes/wares/bread_empire/init.lua:7
 msgctxt "empire_ware"
 msgid "Bread"
-msgstr "Broot"
+msgstr "Brood"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_frisians/init.lua:7
@@ -4005,7 +4006,7 @@ msgstr "Brood"
 #: ../../data/tribes/wares/bread_paddle/init.lua:7
 msgctxt "ware"
 msgid "Bread Paddle"
-msgstr "Brootschuuver"
+msgstr "Broodschüppe"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/brick/init.lua:7
@@ -4017,7 +4018,7 @@ msgstr "Backsteen"
 #: ../../data/tribes/wares/buckets/init.lua:7
 msgctxt "ware"
 msgid "Buckets"
-msgstr "Ammel"
+msgstr "Emmers"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/clay/init.lua:7
@@ -4029,7 +4030,7 @@ msgstr "Lehm"
 #: ../../data/tribes/wares/cloth/init.lua:7
 msgctxt "ware"
 msgid "Cloth"
-msgstr "Kattuun"
+msgstr "Stoff"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/coal/init.lua:7
@@ -4071,13 +4072,13 @@ msgstr "Füürtange"
 #: ../../data/tribes/wares/fish/init.lua:7
 msgctxt "ware"
 msgid "Fish"
-msgstr "Fisch"
+msgstr "Fiss"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fishing_net/init.lua:7
 msgctxt "ware"
 msgid "Fishing Net"
-msgstr "Hamm"
+msgstr "Fiskernett"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/fishing_rod/init.lua:7
@@ -4137,7 +4138,7 @@ msgstr "Gold"
 #: ../../data/tribes/wares/gold_ore/init.lua:7
 msgctxt "ware"
 msgid "Gold Ore"
-msgstr "Gold"
+msgstr "Goldkluut"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/gold_thread/init.lua:7
@@ -4209,19 +4210,19 @@ msgstr "Hönnigbrood"
 #: ../../data/tribes/wares/hook_pole/init.lua:7
 msgctxt "ware"
 msgid "Hook Pole"
-msgstr "Hakenstiff"
+msgstr "Staak mit Haken"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hunting_bow/init.lua:7
 msgctxt "ware"
 msgid "Hunting Bow"
-msgstr "Jachtbagen"
+msgstr "Jaggtboog"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hunting_spear/init.lua:7
 msgctxt "ware"
 msgid "Hunting Spear"
-msgstr "Jachtspeet"
+msgstr "Jaggtspeer"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/iron/init.lua:7
@@ -4233,13 +4234,13 @@ msgstr "Iesen"
 #: ../../data/tribes/wares/iron_ore/init.lua:7
 msgctxt "ware"
 msgid "Iron Ore"
-msgstr "Iesen"
+msgstr "Iesenkluut"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/kitchen_tools/init.lua:7
 msgctxt "ware"
 msgid "Kitchen Tools"
-msgstr "Köken Warktüüg"
+msgstr "Besteck"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/log/init.lua:7
@@ -4275,7 +4276,7 @@ msgstr "Mahl"
 #: ../../data/tribes/wares/meat/init.lua:7
 msgctxt "ware"
 msgid "Meat"
-msgstr "Fleesch"
+msgstr "Fleesk"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/milking_tongs/init.lua:7
@@ -4299,7 +4300,7 @@ msgstr "Pickhack"
 #: ../../data/tribes/wares/planks/init.lua:7
 msgctxt "ware"
 msgid "Planks"
-msgstr "Deeln"
+msgstr "Planken"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/quartz/init.lua:7
@@ -4317,7 +4318,7 @@ msgstr "Happ"
 #: ../../data/tribes/wares/saw/init.lua:7
 msgctxt "ware"
 msgid "Saw"
-msgstr "Sage"
+msgstr "Saag"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/scrap_iron/init.lua:7
@@ -4335,13 +4336,13 @@ msgstr "Verschedene Överblievsels"
 #: ../../data/tribes/wares/scythe/init.lua:7
 msgctxt "ware"
 msgid "Scythe"
-msgstr "Seiß"
+msgstr "Sichte"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/shield_advanced/init.lua:7
 msgctxt "ware"
 msgid "Advanced Shield"
-msgstr "Beteres Schild"
+msgstr "Goder Schild"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/shield_steel/init.lua:7
@@ -4359,13 +4360,13 @@ msgstr "Schüppe"
 #: ../../data/tribes/wares/smoked_fish/init.lua:7
 msgctxt "ware"
 msgid "Smoked Fish"
-msgstr "Smoorfisch"
+msgstr "Rökelfiss"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/smoked_meat/init.lua:7
 msgctxt "ware"
 msgid "Smoked Meat"
-msgstr "Smoorfleesch"
+msgstr "Rökelfleesk"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/snack/init.lua:7
@@ -4413,13 +4414,13 @@ msgstr "Spinnensied"
 #: ../../data/tribes/wares/spidercloth/init.lua:7
 msgctxt "ware"
 msgid "Spidercloth"
-msgstr "Speendauk"
+msgstr "Spinnenstoff"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
-#: ../../data/tribes/wares/sword_curved/init.lua:7
+#: ../../data/tribes/wares/sword_broad/init.lua:7
 msgctxt "ware"
-msgid "Curved Sword"
-msgstr "Krummsweert"
+msgid "Broadsword"
+msgstr "Bredes Sweert"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_double/init.lua:7
@@ -4455,7 +4456,7 @@ msgstr "Goldene Kluft"
 #: ../../data/tribes/wares/thatch_reed/init.lua:7
 msgctxt "ware"
 msgid "Thatch Reed"
-msgstr "Reet"
+msgstr "Reit"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/trident_double/init.lua:7
@@ -4497,7 +4498,7 @@ msgstr "Water"
 #: ../../data/tribes/wares/wheat/init.lua:7
 msgctxt "ware"
 msgid "Wheat"
-msgstr "Weeten"
+msgstr "Weit"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/wine/init.lua:7
@@ -4515,13 +4516,13 @@ msgstr "Wulle"
 #: ../../data/tribes/workers/atlanteans/armorsmith/init.lua:39
 msgctxt "atlanteans_worker"
 msgid "Armorsmith"
-msgstr "Rüstsmidt"
+msgstr "Panzersmidd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/baker/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Baker"
-msgstr "Baker"
+msgstr "Backer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/blackroot_farmer/init.lua:32
@@ -4533,13 +4534,13 @@ msgstr "Swartwuddel-Buur"
 #: ../../data/tribes/workers/atlanteans/builder/init.lua:27
 msgctxt "atlanteans_worker"
 msgid "Builder"
-msgstr "Bulüüd"
+msgstr "Baukeerl"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/carrier/init.lua:49
 msgctxt "atlanteans_worker"
 msgid "Carrier"
-msgstr "Dreger"
+msgstr "Lastendrager"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/charcoal_burner/init.lua:17
@@ -4551,19 +4552,19 @@ msgstr "Holtköhlbranner"
 #: ../../data/tribes/workers/atlanteans/farmer/init.lua:32
 msgctxt "atlanteans_worker"
 msgid "Farmer"
-msgstr "Bueree"
+msgstr "Buur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fishbreeder/init.lua:20
 msgctxt "atlanteans_worker"
 msgid "Fish Breeder"
-msgstr "Fischtüchter"
+msgstr "Fisstüchter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/fisher/init.lua:22
 msgctxt "atlanteans_worker"
 msgid "Fisher"
-msgstr "Fischer"
+msgstr "Fisker"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/forester/init.lua:32
@@ -4587,19 +4588,19 @@ msgstr "Peerd"
 #: ../../data/tribes/workers/atlanteans/horsebreeder/init.lua:15
 msgctxt "atlanteans_worker"
 msgid "Horse Breeder"
-msgstr "Fischtüchter"
+msgstr "Peertüchter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/hunter/init.lua:18
 msgctxt "atlanteans_worker"
 msgid "Hunter"
-msgstr "Jachtspeet"
+msgstr "Jäger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/miller/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Miller"
-msgstr "Miller"
+msgstr "Müller"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/miner/init.lua:17
@@ -4629,7 +4630,7 @@ msgstr "Bespejer"
 #: ../../data/tribes/workers/atlanteans/shipwright/init.lua:22
 msgctxt "atlanteans_worker"
 msgid "Shipwright"
-msgstr "Warftarbeider"
+msgstr "Schippebauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/smelter/init.lua:17
@@ -4641,31 +4642,31 @@ msgstr "Smelter"
 #: ../../data/tribes/workers/atlanteans/smoker/init.lua:15
 msgctxt "atlanteans_worker"
 msgid "Smoker"
-msgstr "Rökerer"
+msgstr "Rökeler"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/soldier/init.lua:198
 msgctxt "atlanteans_worker"
 msgid "Soldier"
-msgstr "Suldaat"
+msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Spider Breeder"
-msgstr "Speentüchter"
+msgstr "Spinnentüchter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/stonecutter/init.lua:22
 msgctxt "atlanteans_worker"
 msgid "Stonecutter"
-msgstr "Steenhauer"
+msgstr "Flintslager"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/toolsmith/init.lua:17
 msgctxt "atlanteans_worker"
 msgid "Toolsmith"
-msgstr "Rüstsmidt"
+msgstr "Warktüügsmidd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/atlanteans/trainer/init.lua:17
@@ -4689,13 +4690,13 @@ msgstr "Spinner"
 #: ../../data/tribes/workers/atlanteans/woodcutter/init.lua:22
 msgctxt "atlanteans_worker"
 msgid "Woodcutter"
-msgstr "Boomümlegger"
+msgstr "Boomslager"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/baker/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Baker"
-msgstr "Baker"
+msgstr "Backer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/blacksmith/init.lua:17
@@ -4713,31 +4714,31 @@ msgstr "Meistersmidd"
 #: ../../data/tribes/workers/barbarians/brewer/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Brewer"
-msgstr "Beerbroer"
+msgstr "Broer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/brewer_master/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Master Brewer"
-msgstr "Beister Tüchter"
+msgstr "Meisterbroer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/builder/init.lua:27
 msgctxt "barbarians_worker"
 msgid "Builder"
-msgstr "Bulüüd"
+msgstr "Baukeerl"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/carrier/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Carrier"
-msgstr "Dreger"
+msgstr "Lastendrager"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/cattlebreeder/init.lua:17
 msgctxt "barbarians_worker"
 msgid "Cattle Breeder"
-msgstr "Beister Tüchter"
+msgstr "Ossentüchter"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/charcoal_burner/init.lua:17
@@ -4749,13 +4750,13 @@ msgstr "Holtköhlbranner"
 #: ../../data/tribes/workers/barbarians/farmer/init.lua:32
 msgctxt "barbarians_worker"
 msgid "Farmer"
-msgstr "Bueree"
+msgstr "Buur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/fisher/init.lua:22
 msgctxt "barbarians_worker"
 msgid "Fisher"
-msgstr "Fischer"
+msgstr "Fisker"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/gamekeeper/init.lua:27
@@ -4767,7 +4768,7 @@ msgstr "Deertentüchter"
 #: ../../data/tribes/workers/barbarians/gardener/init.lua:27
 msgctxt "barbarians_worker"
 msgid "Gardener"
-msgstr "Holt Härtner"
+msgstr "Gaardner"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/geologist/init.lua:23
@@ -4785,7 +4786,7 @@ msgstr "Helmsmidd"
 #: ../../data/tribes/workers/barbarians/hunter/init.lua:18
 msgctxt "barbarians_worker"
 msgid "Hunter"
-msgstr "Jachtspeet"
+msgstr "Jäger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/innkeeper/init.lua:17
@@ -4803,7 +4804,7 @@ msgstr "Kalkbranner"
 #: ../../data/tribes/workers/barbarians/lumberjack/init.lua:23
 msgctxt "barbarians_worker"
 msgid "Lumberjack"
-msgstr "Boomschleger"
+msgstr "Boomhauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/miner/init.lua:17
@@ -4851,7 +4852,7 @@ msgstr "Bespejer"
 #: ../../data/tribes/workers/barbarians/shipwright/init.lua:26
 msgctxt "barbarians_worker"
 msgid "Shipwright"
-msgstr "Warftarbeider"
+msgstr "Schippebauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/smelter/init.lua:17
@@ -4863,13 +4864,13 @@ msgstr "Smelter"
 #: ../../data/tribes/workers/barbarians/soldier/init.lua:67
 msgctxt "barbarians_worker"
 msgid "Soldier"
-msgstr "Suldaat"
+msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/stonemason/init.lua:23
 msgctxt "barbarians_worker"
 msgid "Stonemason"
-msgstr "Steenhauer"
+msgstr "Flinthauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/trainer/init.lua:16
@@ -4887,25 +4888,25 @@ msgstr "Spinner"
 #: ../../data/tribes/workers/empire/armorsmith/init.lua:17
 msgctxt "empire_worker"
 msgid "Armorsmith"
-msgstr "Rüstsmidt"
+msgstr "Panzersmidd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/baker/init.lua:17
 msgctxt "empire_worker"
 msgid "Baker"
-msgstr "Baker"
+msgstr "Backer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/brewer/init.lua:17
 msgctxt "empire_worker"
 msgid "Brewer"
-msgstr "Beerbroer"
+msgstr "Broer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/builder/init.lua:27
 msgctxt "empire_worker"
 msgid "Builder"
-msgstr "Bulüüd"
+msgstr "Baukeerl"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/carpenter/init.lua:17
@@ -4917,7 +4918,7 @@ msgstr "Diskler"
 #: ../../data/tribes/workers/empire/carrier/init.lua:18
 msgctxt "empire_worker"
 msgid "Carrier"
-msgstr "Dreger"
+msgstr "Lastendrager"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/charcoal_burner/init.lua:17
@@ -4941,13 +4942,13 @@ msgstr "Langohrtüchter"
 #: ../../data/tribes/workers/empire/farmer/init.lua:32
 msgctxt "empire_worker"
 msgid "Farmer"
-msgstr "Bueree"
+msgstr "Buur"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/fisher/init.lua:22
 msgctxt "empire_worker"
 msgid "Fisher"
-msgstr "Fischer"
+msgstr "Fisker"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/forester/init.lua:32
@@ -4965,7 +4966,7 @@ msgstr "Schattsöker"
 #: ../../data/tribes/workers/empire/hunter/init.lua:18
 msgctxt "empire_worker"
 msgid "Hunter"
-msgstr "Jachtspeet"
+msgstr "Jäger"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/innkeeper/init.lua:17
@@ -4977,13 +4978,13 @@ msgstr "Weert"
 #: ../../data/tribes/workers/empire/lumberjack/init.lua:23
 msgctxt "empire_worker"
 msgid "Lumberjack"
-msgstr "Boomschleger"
+msgstr "Boomhauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/miller/init.lua:17
 msgctxt "empire_worker"
 msgid "Miller"
-msgstr "Miller"
+msgstr "Müller"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/miner/init.lua:17
@@ -5025,7 +5026,7 @@ msgstr "Scheepker"
 #: ../../data/tribes/workers/empire/shipwright/init.lua:26
 msgctxt "empire_worker"
 msgid "Shipwright"
-msgstr "Warftarbeider"
+msgstr "Schippebauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/smelter/init.lua:17
@@ -5037,19 +5038,19 @@ msgstr "Smelter"
 #: ../../data/tribes/workers/empire/soldier/init.lua:67
 msgctxt "empire_worker"
 msgid "Soldier"
-msgstr "Suldaat"
+msgstr "Soldat"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/stonemason/init.lua:23
 msgctxt "empire_worker"
 msgid "Stonemason"
-msgstr "Steenhauer"
+msgstr "Flinthauer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/toolsmith/init.lua:17
 msgctxt "empire_worker"
 msgid "Toolsmith"
-msgstr "Rüstsmidt"
+msgstr "Warktüügsmidd"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/empire/trainer/init.lua:17
@@ -5130,7 +5131,7 @@ msgid "Master Brewer"
 msgstr "Meisterbroer"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/frisians/brickmaker/init.lua:21
+#: ../../data/tribes/workers/frisians/brickmaker/init.lua:16
 msgctxt "frisians_worker"
 msgid "Brickmaker"
 msgstr "Backsteenbranner"
@@ -5152,6 +5153,12 @@ msgstr "Lastendrager"
 msgctxt "frisians_worker"
 msgid "Charcoal Burner"
 msgstr "Holtköhlbranner"
+
+#. TRANSLATORS: This is a worker name used in lists of workers
+#: ../../data/tribes/workers/frisians/claydigger/init.lua:21
+msgctxt "frisians_worker"
+msgid "Clay Digger"
+msgstr "Lehmgraver"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:31
