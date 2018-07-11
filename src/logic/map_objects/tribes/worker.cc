@@ -580,10 +580,13 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 	FindNodeAnd functor;
 	functor.add(FindNodeSize(static_cast<FindNodeSize::Size>(action.iparam2)));
 	if (action.sparam1.size()) {
-		if (action.iparam4)
+		if (action.iparam4) {
+			log("NOCOM fish breeder ");
 			functor.add(FindNodeResourceBreedable(world.get_resource(action.sparam1.c_str())));
-		else
+		} else {
+			log("NOCOM fisher ");
 			functor.add(FindNodeResource(world.get_resource(action.sparam1.c_str())));
+		}
 	}
 
 	if (action.iparam5 > -1)
@@ -593,6 +596,9 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		functor.add(FindNodeSpace(get_location(game)));
 
 	if (!map.find_reachable_fields(area, &list, cstep, functor)) {
+		if (action.sparam1 == "fish") {
+			log("found NO fish at (%d, %d)\n", get_position().x, get_position().y);
+		}
 
 		// This is default note "out of resources" sent to a player
 		FailNotificationType fail_notification_type = FailNotificationType::kDefault;
@@ -631,6 +637,9 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 		pop_task(game);
 		return true;
 	} else {
+		if (action.sparam1 == "fish") {
+			log("FOUND fish at (%d, %d)\n", get_position().x, get_position().y);
+		}
 		if (upcast(ProductionSite, productionsite, get_location(game)))
 			productionsite->unnotify_player();
 	}

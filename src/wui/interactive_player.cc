@@ -37,6 +37,8 @@
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/world/resource_description.h" // NOCOM
+#include "logic/map_objects/world/world.h" // NOCOM
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "profile/profile.h"
@@ -315,6 +317,20 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
 			                    BlendMode::UseAlpha);
 		};
+
+		// Draw resource overlay. NOCOM
+		uint8_t const amount = f->fcoords.field->get_resources_amount();
+		const auto& world = gbase.world();
+		if (amount > 0) {
+			Widelands::ResourceDescription const* rd = world.get_resource(f->fcoords.field->get_resources());
+			if (rd->name() == "fish") {
+				const std::string& immname = rd->editor_image(amount);
+				if (!immname.empty()) {
+					const auto* pic = g_gr->images().get(immname);
+					blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+				}
+			}
+		}
 
 		// Add road building overlays if applicable.
 		if (f->vision > 0) {
