@@ -30,7 +30,7 @@ tribes:new_worker_type {
    },
 
    programs = {
-      chop = {
+      harvest = {
          "findobject=attrib:tree radius:10",
          "walk=object",
          "animate=hacking 10000",
