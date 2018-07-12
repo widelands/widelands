@@ -37,12 +37,22 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/player.h"
+
 namespace Widelands {
 
-#define DIRNAME_TEMPLATE "player/%u/view"
+#define PLAYERDIRNAME_TEMPLATE "player/%u"
+#define DIRNAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/view"
 
 constexpr uint8_t kCurrentPacketVersionUnseenTimes = 1;
 #define UNSEEN_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/unseen_times_%u"
+
+constexpr uint8_t kCurrentPacketVersionImmovableKinds = 2;
+#define NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/node_immovable_kinds_%u"
+#define TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/triangle_immovable_kinds_%u"
+
+constexpr uint8_t kCurrentPacketVersionImmovables = 2;
+#define NODE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/node_immovables_%u"
+#define TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/triangle_immovables_%u"
 
 constexpr uint8_t kCurrentPacketVersionRoads = 2;
 #define ROADS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/roads_%u"
@@ -99,6 +109,13 @@ enum {
 //                /     \ /
 //              bl------br
 
+struct MapObjectData {
+	MapObjectData() : map_object_descr(nullptr) {
+	}
+	const MapObjectDescr* map_object_descr;
+	ConstructionsiteInformation csi;
+};
+
 namespace {
 #define OPEN_INPUT_FILE(filetype, file, filename, filename_template, version)                      \
 	char(filename)[FILENAME_SIZE];                                                                  \
@@ -151,8 +168,118 @@ namespace {
 		   "MapPlayersViewPacket::read: player %u:"                                                  \
 		   "Found %lu trailing bytes in \"%s\"",                                                     \
 		   plnum, static_cast<long unsigned int>((file).get_size() - (file).get_pos()), filename);
+
+// Errors for the Read* functions.
+struct TribeImmovableNonexistent : public FileRead::DataError {
+	explicit TribeImmovableNonexistent(const std::string& Name)
+	   : DataError("immovable type \"%s\" does not seem to be a tribe immovable", Name.c_str()),
+	     name(Name) {
+	}
+
+	std::string name;
+};
+struct WorldImmovableNonexistent : public FileRead::DataError {
+	explicit WorldImmovableNonexistent(char const* const Name)
+	   : DataError("world does not define immovable type \"%s\"", Name), name(Name) {
+	}
+	char const* const name;
+};
+struct BuildingNonexistent : public FileRead::DataError {
+	explicit BuildingNonexistent(char const* const Name)
+	   : DataError("tribes do not define building type \"%s\"", Name), name(Name) {
+	}
+	char const* const name;
+};
+
+// reads an immovable depending on whether it is a tribe or world immovable
+const ImmovableDescr& read_immovable_type(StreamRead* fr, const EditorGameBase& egbase) {
+	uint8_t owner = fr->unsigned_8();
+	char const* const name = fr->c_string();
+	if (owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kWorld)) {
+		DescriptionIndex const index = egbase.world().get_immovable_index(name);
+		if (index == Widelands::INVALID_INDEX)
+			throw WorldImmovableNonexistent(name);
+		return *egbase.world().get_immovable_descr(index);
+	} else {
+		assert(owner == static_cast<uint8_t>(MapObjectDescr::OwnerType::kTribe));
+		DescriptionIndex const index = egbase.tribes().immovable_index(name);
+		if (index == Widelands::INVALID_INDEX)
+			throw TribeImmovableNonexistent(name);
+		return *egbase.tribes().get_immovable_descr(index);
+	}
+}
+
+// Reads a c_string and interprets it as the name of an immovable type.
+//
+// \returns a reference to the building type description.
+//
+// \throws Building_Nonexistent if there is no building type with that name
+const BuildingDescr& read_building_type(StreamRead* fr, const EditorGameBase& egbase) {
+	char const* const name = fr->c_string();
+	DescriptionIndex const index = egbase.tribes().building_index(name);
+	if (!egbase.tribes().building_exists(index)) {
+		throw BuildingNonexistent(name);
+	}
+	return *egbase.tribes().get_building_descr(index);
+}
+
+// Encode a Immovable_Type into 'wr'.
+void write_immovable_type(StreamWrite* wr, const ImmovableDescr& immovable) {
+	wr->unsigned_8(static_cast<uint8_t>(immovable.owner_type()));
+	wr->string(immovable.name());
+}
+
+// Encode a Building_Type into 'wr'.
+void write_building_type(StreamWrite* wr, const BuildingDescr& building) {
+	wr->string(building.name());
+}
+
 }  // namespace
 
+inline static MapObjectData read_unseen_immovable(const EditorGameBase& egbase,
+                                                  uint8_t& immovable_kind,
+                                                  FileRead& immovables_file,
+                                                  uint8_t& version) {
+	MapObjectData m;
+	try {
+		switch (immovable_kind) {
+		case UNSEEN_NONE:  //  The player sees no immovable.
+			m.map_object_descr = nullptr;
+			break;
+		case UNSEEN_TRIBEORWORLD:  //  The player sees a tribe or world immovable.
+			m.map_object_descr = &read_immovable_type(&immovables_file, egbase);
+			break;
+		case UNSEEN_FLAG:  //  The player sees a flag.
+			m.map_object_descr = &g_flag_descr;
+			break;
+		case UNSEEN_BUILDING:  //  The player sees a building.
+			m.map_object_descr = &read_building_type(&immovables_file, egbase);
+			if (version == kCurrentPacketVersionImmovables) {
+				// Read data from immovables file
+				if (immovables_file.unsigned_8() == 1) {  // the building is a constructionsite
+					m.csi.becomes = &read_building_type(&immovables_file, egbase);
+					if (immovables_file.unsigned_8() == 1) {
+						m.csi.was = &read_building_type(&immovables_file, egbase);
+					}
+					m.csi.totaltime = immovables_file.unsigned_32();
+					m.csi.completedtime = immovables_file.unsigned_32();
+				}
+			} else {
+				throw UnhandledVersionError(
+				   "MapPlayersViewPacket", version, kCurrentPacketVersionImmovables);
+			}
+			break;
+		case UNSEEN_PORTDOCK:  // The player sees a port dock
+			m.map_object_descr = &g_portdock_descr;
+			break;
+		default:
+			throw GameDataError("Unknown immovable-kind type %d", immovable_kind);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("unseen immovable: %s", e.what());
+	}
+	return m;
+}
 
 void MapPlayersViewPacket::read(FileSystem& fs,
                                 EditorGameBase& egbase,
@@ -304,11 +431,30 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 		}
 
 		// Read the player's knowledge about all fields
+		OPEN_INPUT_FILE_NEW_VERSION(FileRead, node_immovable_kinds_file,
+		                            node_immovable_kinds_filename, node_immovable_kinds_file_version,
+		                            NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
+		                            kCurrentPacketVersionImmovableKinds);
+
+		OPEN_INPUT_FILE_NEW_VERSION(FileRead, node_immovables_file, node_immovables_filename,
+		                            node_immovables_file_version, NODE_IMMOVABLES_FILENAME_TEMPLATE,
+		                            kCurrentPacketVersionImmovables);
+
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, roads_file, roads_filename, road_file_version,
 		                            ROADS_FILENAME_TEMPLATE, kCurrentPacketVersionRoads);
 
 		OPEN_INPUT_FILE_NEW_VERSION(FileRead, terrains_file, terrains_filename, terrains_file_version,
 		                            TERRAINS_FILENAME_TEMPLATE, kCurrentPacketVersionTerrains);
+
+		OPEN_INPUT_FILE_NEW_VERSION(
+		   FileRead, triangle_immovable_kinds_file, triangle_immovable_kinds_filename,
+		   triangle_immovable_kinds_file_version, TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
+		   kCurrentPacketVersionImmovableKinds);
+
+		OPEN_INPUT_FILE_NEW_VERSION(FileRead, triangle_immovables_file, triangle_immovables_filename,
+		                            triangle_immovables_file_version,
+		                            TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE,
+		                            kCurrentPacketVersionImmovables);
 
 		OPEN_INPUT_FILE(FileRead, owners_file, owners_filename, OWNERS_FILENAME_TEMPLATE,
 		                kCurrentPacketVersionOwners);
@@ -404,6 +550,19 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                    static_cast<long unsigned int>(owners_file.get_pos() - 1),
 						                    f.x, f.y, owner, nr_players);
 					}
+					uint8_t imm_kind = 0;
+					if (node_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
+						imm_kind = node_immovable_kinds_file.unsigned_8();
+					} else {
+						throw UnhandledVersionError("MapPlayersViewPacket - Node Immovable kinds",
+						                            node_immovable_kinds_file_version,
+						                            kCurrentPacketVersionImmovableKinds);
+					}
+					MapObjectData mod = read_unseen_immovable(
+					   egbase, imm_kind, node_immovables_file, node_immovables_file_version);
+					f_player_field.map_object_descr = mod.map_object_descr;
+					f_player_field.constructionsite = mod.csi;
+
 					// Read in whether this field had a border the last time it was seen
 					if (border_file_version == kCurrentPacketVersionBorder) {
 						uint8_t borders = border_file.unsigned_8();
@@ -459,6 +618,22 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						throw UnhandledVersionError("MapPlayersViewPacket - Terrains",
 						                            terrains_file_version, kCurrentPacketVersionTerrains);
 					}
+					uint8_t im_kind = 0;
+					if (triangle_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
+						im_kind = triangle_immovable_kinds_file.unsigned_8();
+					} else {
+						throw UnhandledVersionError("MapPlayersViewPacket - Triangle Immovable kinds",
+						                            triangle_immovable_kinds_file_version,
+						                            kCurrentPacketVersionImmovableKinds);
+					}
+					// We read and ignore the immovable information on the D
+					// triangle. This was done because there were vague plans of
+					// suporting immovables on the triangles instead as on the
+					// nodes.
+					// TODO(sirver): Remove this logic the next time we break
+					// savegame compatibility.
+					read_unseen_immovable(
+					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
 				}
 				if (f_seen | br_seen | r_seen) {
 					//  The player currently sees the R triangle. Therefore his
@@ -474,6 +649,20 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						throw UnhandledVersionError("MapPlayersViewPacket - Terrains",
 						                            terrains_file_version, kCurrentPacketVersionTerrains);
 					}
+					uint8_t im_kind = 0;
+					if (triangle_immovable_kinds_file_version == kCurrentPacketVersionImmovableKinds) {
+						im_kind = triangle_immovable_kinds_file.unsigned_8();
+					} else {
+						throw UnhandledVersionError("MapPlayersViewPacket - Triangle Immovable kinds",
+						                            triangle_immovable_kinds_file_version,
+						                            kCurrentPacketVersionImmovableKinds);
+					}
+					// We read and ignore the immovable information on the D
+					// triangle. This was done because there were vague plans of
+					// suporting immovables on the triangles instead as on the
+					// nodes.
+					read_unseen_immovable(
+					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
 				}
 
 				{  //  edges
@@ -602,14 +791,23 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				player->hidden_fields_.insert(
 				   std::make_pair(hidden_file.unsigned_32(), hidden_file.unsigned_16()));
 			}
+		} else if (hidden_file_version < 0) {
+			// TODO(GunChleoc): Savegame compatibility - remove after Build 20
+			log("MapPlayersViewPacket - No hidden fields to read for Player %d - probably an old save "
+			    "file\n",
+			    plnum);
 		} else {
 			throw UnhandledVersionError("MapPlayersViewPacket - Hidden fields file",
 			                            hidden_file_version, kCurrentPacketVersionHidden);
 		}
 
 		CHECK_TRAILING_BYTES(unseen_times_file, unseen_times_filename);
+		CHECK_TRAILING_BYTES(node_immovable_kinds_file, node_immovable_kinds_filename);
+		CHECK_TRAILING_BYTES(node_immovables_file, node_immovables_filename);
 		CHECK_TRAILING_BYTES(roads_file, roads_filename);
 		CHECK_TRAILING_BYTES(terrains_file, terrains_filename);
+		CHECK_TRAILING_BYTES(triangle_immovable_kinds_file, triangle_immovable_kinds_filename);
+		CHECK_TRAILING_BYTES(triangle_immovables_file, triangle_immovables_filename);
 		CHECK_TRAILING_BYTES(owners_file, owners_filename);
 		CHECK_TRAILING_BYTES(surveys_file, surveys_filename);
 		CHECK_TRAILING_BYTES(survey_amounts_file, survey_amounts_filename);
@@ -617,6 +815,52 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 		CHECK_TRAILING_BYTES(border_file, border_filename);
 		CHECK_TRAILING_BYTES(hidden_file, hidden_filename);
 	}
+}
+
+inline static void write_unseen_immovable(MapObjectData const* map_object_data,
+                                          FileWrite& immovable_kinds_file,
+                                          FileWrite& immovables_file) {
+	MapObjectDescr const* const map_object_descr = map_object_data->map_object_descr;
+	const ConstructionsiteInformation& csi = map_object_data->csi;
+	assert(!Road::is_road_descr(map_object_descr));
+	uint8_t immovable_kind = 255;
+
+	if (!map_object_descr)
+		immovable_kind = UNSEEN_NONE;
+	else if (upcast(ImmovableDescr const, immovable_descr, map_object_descr)) {
+		immovable_kind = UNSEEN_TRIBEORWORLD;
+		write_immovable_type(&immovables_file, *immovable_descr);
+	} else if (map_object_descr->type() == MapObjectType::FLAG)
+		immovable_kind = UNSEEN_FLAG;
+	else if (upcast(BuildingDescr const, building_descr, map_object_descr)) {
+		immovable_kind = UNSEEN_BUILDING;
+		write_building_type(&immovables_file, *building_descr);
+		if (!csi.becomes)
+			immovables_file.unsigned_8(0);
+		else {
+			// the building is a constructionsite
+			immovables_file.unsigned_8(1);
+			write_building_type(&immovables_file, *csi.becomes);
+			if (!csi.was)
+				immovables_file.unsigned_8(0);
+			else {
+				// constructionsite is an enhancement, therefor we write down the enhancement
+				immovables_file.unsigned_8(1);
+				write_building_type(&immovables_file, *csi.was);
+			}
+			immovables_file.unsigned_32(csi.totaltime);
+			immovables_file.unsigned_32(csi.completedtime);
+		}
+	} else if (map_object_descr->type() == MapObjectType::PORTDOCK)
+		immovable_kind = UNSEEN_PORTDOCK;
+	else {
+		// We should never get here.. output some information about the situation.
+		log("\nwidelands_map_players_view_data_packet.cc::write_unseen_immovable(): ");
+		log("%s %s (%s) was not expected.\n", typeid(*map_object_descr).name(),
+		    map_object_descr->name().c_str(), map_object_descr->descname().c_str());
+		NEVER_HERE();
+	}
+	immovable_kinds_file.unsigned_8(immovable_kind);
 }
 
 #define WRITE(file, filename_template, version)                                                    \
@@ -636,8 +880,12 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 	   plnum, nr_players, egbase,
 	   player) if (const Player::Field* const player_fields = player->fields_) {
 		FileWrite unseen_times_file;
+		FileWrite node_immovable_kinds_file;
+		FileWrite node_immovables_file;
 		FileWrite roads_file;
 		FileWrite terrains_file;
+		FileWrite triangle_immovable_kinds_file;
+		FileWrite triangle_immovables_file;
 		FileWrite owners_file;
 		FileWrite surveys_file;
 		FileWrite survey_amounts_file;
@@ -681,6 +929,10 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 						unseen_times_file.unsigned_32(f_player_field.time_node_last_unseen);
 						assert(f_player_field.owner < 0x20);
 						owners_file.unsigned_8(f_player_field.owner);
+						MapObjectData mod;
+						mod.map_object_descr = f_player_field.map_object_descr;
+						mod.csi = f_player_field.constructionsite;
+						write_unseen_immovable(&mod, node_immovable_kinds_file, node_immovables_file);
 
 						// write whether this field had a border the last time it was seen
 						uint8_t borders = 0;
@@ -697,12 +949,20 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					   //  seen it
 					   ((!bl_seen) & (!br_seen) & (f_everseen | bl_everseen | br_everseen)) {
 						terrains_file.unsigned_8(f_player_field.terrains.d);
+						MapObjectData mod;
+						mod.map_object_descr = nullptr;
+						write_unseen_immovable(
+						   &mod, triangle_immovable_kinds_file, triangle_immovables_file);
 					}
 					if
 					   //  the player does not see the R triangle now but has
 					   //  seen it
 					   ((!br_seen) & (!r_seen) & (f_everseen | br_everseen | r_everseen)) {
 						terrains_file.unsigned_8(f_player_field.terrains.r);
+						MapObjectData mod;
+						mod.map_object_descr = nullptr;
+						write_unseen_immovable(
+						   &mod, triangle_immovable_kinds_file, triangle_immovables_file);
 					}
 
 					//  edges
@@ -747,13 +1007,27 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 		char filename[FILENAME_SIZE];
 
 		fs.ensure_directory_exists(
+		   (boost::format(PLAYERDIRNAME_TEMPLATE) % static_cast<unsigned int>(plnum)).str());
+		fs.ensure_directory_exists(
 		   (boost::format(DIRNAME_TEMPLATE) % static_cast<unsigned int>(plnum)).str());
 
 		WRITE(unseen_times_file, UNSEEN_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionUnseenTimes);
 
+		WRITE(node_immovable_kinds_file, NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
+		      kCurrentPacketVersionImmovableKinds);
+
+		WRITE(
+		   node_immovables_file, NODE_IMMOVABLES_FILENAME_TEMPLATE, kCurrentPacketVersionImmovables);
+
 		WRITE(roads_file, ROADS_FILENAME_TEMPLATE, kCurrentPacketVersionRoads);
 
 		WRITE(terrains_file, TERRAINS_FILENAME_TEMPLATE, kCurrentPacketVersionTerrains);
+
+		WRITE(triangle_immovable_kinds_file, TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
+		      kCurrentPacketVersionImmovableKinds);
+
+		WRITE(triangle_immovables_file, TRIANGLE_IMMOVABLES_FILENAME_TEMPLATE,
+		      kCurrentPacketVersionImmovables);
 
 		WRITE(owners_file, OWNERS_FILENAME_TEMPLATE, kCurrentPacketVersionOwners);
 
