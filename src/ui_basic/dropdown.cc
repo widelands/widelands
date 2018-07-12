@@ -199,6 +199,9 @@ void BaseDropdown::layout() {
 	list_->set_pos(Vector2i(new_list_x + list_offset_x_, new_list_y + list_offset_y_));
 
 	// Keep open list on top while dragging
+	// TODO(GunChleoc): It would be better to close the list if any other panel is clicked,
+	// but we'd need a global "clicked" signal in the Panel class for that.
+	// This will imply a complete overhaul of the signal names.
 	if (list_->is_visible()) {
 		list_->move_to_top();
 	}
