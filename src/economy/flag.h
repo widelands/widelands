@@ -74,8 +74,12 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	const FlagDescr& descr() const;
 
-	Flag();                                               /// empty flag for savegame loading
-	Flag(EditorGameBase&, Player* owner, const Coords&);  /// create a new flag
+	/// Empty flag, for unit tests only.
+	Flag();
+
+	/// Create a new flag. Only specify an economy during saveloading.
+	/// Otherwise, a new economy will be created automatically if needed.
+	Flag(EditorGameBase&, Player* owner, const Coords&, Economy* economy = nullptr);
 	~Flag() override;
 
 	void load_finish(EditorGameBase&) override;

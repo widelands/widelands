@@ -44,7 +44,7 @@ const FlagDescr& Flag::descr() const {
 }
 
 /**
- * Create the flag. Initially, it doesn't have any attachments.
+ * A bare flag, used for testing only.
 */
 Flag::Flag()
    : PlayerImmovable(g_flag_descr),
@@ -106,7 +106,7 @@ void Flag::load_finish(EditorGameBase& egbase) {
 /**
  * Create a flag at the given location
 */
-Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords)
+Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, Economy* eco)
    : PlayerImmovable(g_flag_descr),
      building_(nullptr),
      ware_capacity_(8),
@@ -124,17 +124,23 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords)
 	upcast(Game, game, &egbase);
 
 	if (game) {
-		//  we split a road, or a new, standalone flag is created
-		(road ? road->get_economy() : new Economy(*owning_player))->add_flag(*this);
-
-		if (road)
-			road->presplit(*game, coords);
+		if (eco) {
+			// We're saveloading
+			eco->add_flag(*this);
+		} else {
+			//  we split a road, or a new, standalone flag is created
+			(road ? road->get_economy() : owning_player->create_economy())->add_flag(*this);
+			if (road) {
+				road->presplit(*game, coords);
+			}
+		}
 	}
 
 	init(egbase);
 
-	if (road && game)
+	if (!eco && road && game) {
 		road->postsplit(*game, *this);
+	}
 }
 
 void Flag::set_flag_position(Coords coords) {
