@@ -337,6 +337,13 @@ void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& sett
 		loader_ui->set_background(background);
 		loader_ui->step(_("Loading…"));
 		gl.load_game(settings.multiplayer);
+		// Players might have selected a different AI type
+		for (uint8_t i = 0; i < settings.players.size(); ++i) {
+			const PlayerSettings& playersettings = settings.players[i];
+			if (playersettings.state == PlayerSettings::State::kComputer) {
+				get_player(i + 1)->set_ai(playersettings.ai);
+			}
+		}
 	} catch (...) {
 		throw;
 	}
