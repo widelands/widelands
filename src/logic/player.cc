@@ -1430,39 +1430,46 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
 }
 
 /**
- * Write statistics data to the give file
+ * Write statistics data to the given file
  */
 void Player::write_statistics(FileWrite& fw) const {
+	const Tribes& tribes = egbase().tribes();
+	const std::set<DescriptionIndex>& tribe_wares = tribe().wares();
+	const size_t nr_wares = tribe_wares.size();
+
 	// Write produce statistics
-	fw.unsigned_16(current_produced_statistics_.size());
+	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_productions_[0].size());
 
-	for (uint8_t i = 0; i < current_produced_statistics_.size(); ++i) {
-		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
-		fw.unsigned_32(current_produced_statistics_[i]);
-		for (uint32_t j = 0; j < ware_productions_[i].size(); ++j)
-			fw.unsigned_32(ware_productions_[i][j]);
+	for (const DescriptionIndex ware_index : tribe_wares) {
+		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		fw.unsigned_32(current_produced_statistics_[ware_index]);
+		for (uint32_t j = 0; j < ware_productions_[ware_index].size(); ++j) {
+			fw.unsigned_32(ware_productions_[ware_index][j]);
+		}
 	}
 
 	// Write consume statistics
-	fw.unsigned_16(current_consumed_statistics_.size());
+	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_consumptions_[0].size());
 
-	for (uint8_t i = 0; i < current_consumed_statistics_.size(); ++i) {
-		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
-		fw.unsigned_32(current_consumed_statistics_[i]);
-		for (uint32_t j = 0; j < ware_consumptions_[i].size(); ++j)
-			fw.unsigned_32(ware_consumptions_[i][j]);
+	for (const DescriptionIndex ware_index : tribe_wares) {
+		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		fw.unsigned_32(current_consumed_statistics_[ware_index]);
+		for (uint32_t j = 0; j < ware_consumptions_[ware_index].size(); ++j) {
+			fw.unsigned_32(ware_consumptions_[ware_index][j]);
+		}
 	}
 
 	// Write stock statistics
-	fw.unsigned_16(ware_stocks_.size());
+	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_stocks_[0].size());
 
-	for (uint8_t i = 0; i < ware_stocks_.size(); ++i) {
-		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
-		for (uint32_t j = 0; j < ware_stocks_[i].size(); ++j)
-			fw.unsigned_32(ware_stocks_[i][j]);
+	for (const DescriptionIndex ware_index : tribe_wares) {
+		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		for (uint32_t j = 0; j < ware_stocks_[ware_index].size(); ++j) {
+			fw.unsigned_32(ware_stocks_[ware_index][j]);
+		}
 	}
 }
 }
