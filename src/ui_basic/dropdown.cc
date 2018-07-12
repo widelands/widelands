@@ -31,6 +31,7 @@
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"
+#include "ui_basic/window.h"
 
 namespace {
 
@@ -125,6 +126,17 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	list_->clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	set_can_focus(true);
 	set_value();
+
+
+	// Find parent windows so that we can move the list along with them
+	UI::Panel* parent_window_candidate = get_parent();
+	while (parent_window_candidate) {
+		if (upcast(UI::Window, window, parent_window_candidate)) {
+			window->position_changed.connect(boost::bind(&BaseDropdown::layout, this));
+		}
+		parent_window_candidate = parent_window_candidate->get_parent();
+	}
+
 	layout();
 }
 
@@ -161,12 +173,12 @@ void BaseDropdown::layout() {
 	// Update list position. The list is hooked into the highest parent that we can get so that we
 	// can drop down outside the panel. Positioning breaks down with TabPanels, so we exclude them.
 	UI::Panel* parent = get_parent();
-	int new_list_y = get_y() + parent->get_y();
-	int new_list_x = get_x() + parent->get_x();
+	int new_list_x = get_x() + parent->get_x() + parent->get_lborder();
+	int new_list_y = get_y() + parent->get_y() + parent->get_tborder();
 	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
 		parent = parent->get_parent();
-		new_list_y += parent->get_y();
-		new_list_x += parent->get_x();
+		new_list_x += parent->get_x() + parent->get_lborder();
+		new_list_y += parent->get_y() + parent->get_tborder();
 	}
 
 	// Drop up instead of down if it doesn't fit
@@ -185,6 +197,11 @@ void BaseDropdown::layout() {
 	}
 
 	list_->set_pos(Vector2i(new_list_x + list_offset_x_, new_list_y + list_offset_y_));
+
+	// Keep open list on top while dragging
+	if (list_->is_visible()) {
+		list_->move_to_top();
+	}
 }
 
 void BaseDropdown::add(const std::string& name,
