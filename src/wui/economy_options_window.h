@@ -39,8 +39,8 @@ private:
 		TargetWaresDisplay(UI::Panel* const parent,
 		                   int32_t const x,
 		                   int32_t const y,
-								 Widelands::Serial serial,
-							    Widelands::Player* player,
+		                   Widelands::Serial serial,
+		                   Widelands::Player* player,
 		                   Widelands::WareWorker type,
 		                   bool selectable);
 
@@ -59,8 +59,8 @@ private:
 	 */
 	struct EconomyOptionsPanel : UI::Box {
 		EconomyOptionsPanel(UI::Panel* parent,
-								  Widelands::Serial serial,
-								  Widelands::Player* player,
+		                    Widelands::Serial serial,
+		                    Widelands::Player* player,
 		                    bool can_act,
 		                    Widelands::WareWorker type);
 

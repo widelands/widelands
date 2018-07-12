@@ -76,11 +76,13 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 						if (upcast(Flag const, flag, map[value].get_immovable())) {
 							try {
 								assert(flag->get_economy()->owner().player_number() ==
-										 player->player_number());
+								       player->player_number());
 								EconomyDataPacket d(flag->get_economy());
 								d.read(fr);
 							} catch (const GameDataError& e) {
-								throw GameDataError("error reading economy data for flag at map index %d: %s", value, e.what());
+								throw GameDataError(
+								   "error reading economy data for flag at map index %d: %s", value,
+								   e.what());
 							}
 						} else {
 							throw GameDataError("there is no flag at the specified location");
@@ -95,13 +97,14 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 									try {
 										assert(ship->get_economy());
 										assert(ship->get_economy()->owner().player_number() ==
-												 player->player_number());
+										       player->player_number());
 										EconomyDataPacket d(ship->get_economy());
 										d.read(fr);
 										read_this_economy = true;
 										break;
 									} catch (const GameDataError& e) {
-										throw GameDataError("error reading economy data for ship %s: %s", ship->get_shipname().c_str(), e.what());
+										throw GameDataError("error reading economy data for ship %s: %s",
+										                    ship->get_shipname().c_str(), e.what());
 									}
 								}
 							}
@@ -149,7 +152,8 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 			// ships are special and have their own economy (which will not have a
 			// flag), therefore we have to special case them.
 			if (!write_expedition_ship_economy(economy.second.get(), map, &fw)) {
-				throw GameDataError("Player %d: economy %d has no representative", player->player_number(), economy.first);
+				throw GameDataError("Player %d: economy %d has no representative",
+				                    player->player_number(), economy.first);
 			}
 		}
 	}

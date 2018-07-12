@@ -108,7 +108,7 @@ public:
 	};
 
 	explicit Economy(Player&);
-	explicit Economy(Player&, Serial serial); // For saveloading
+	explicit Economy(Player&, Serial serial);  // For saveloading
 	~Economy();
 
 	Serial serial() const {

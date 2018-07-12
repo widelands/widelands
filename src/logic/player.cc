@@ -842,7 +842,6 @@ bool Player::has_economy(Widelands::Serial serial) const {
 	return economies_.count(serial) != 0;
 }
 
-
 /************  Military stuff  **********/
 
 /*

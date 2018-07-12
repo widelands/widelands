@@ -812,7 +812,7 @@ int LuaPlayer::allow_workers(lua_State* L) {
 					break;
 				}
 			}
-			for (const auto& economy: player.economies()) {
+			for (const auto& economy : player.economies()) {
 				for (Warehouse* warehouse : economy.second->warehouses()) {
 					warehouse->enable_spawn(game, worker_types_without_cost_index);
 				}

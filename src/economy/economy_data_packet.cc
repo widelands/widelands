@@ -37,7 +37,9 @@ void EconomyDataPacket::read(FileRead& fr) {
 		if (packet_version == kCurrentPacketVersion) {
 			const Serial saved_serial = fr.unsigned_32();
 			if (eco_->serial_ != saved_serial) {
-				throw GameDataError("Representative flag/ship has economy serial %d, but the data packet has %d", eco_->serial_, saved_serial);
+				throw GameDataError(
+				   "Representative flag/ship has economy serial %d, but the data packet has %d",
+				   eco_->serial_, saved_serial);
 			}
 			assert(Economy::last_economy_serial_ >= eco_->serial_);
 			try {

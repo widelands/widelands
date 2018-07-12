@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
+"POT-Creation-Date: 2018-06-28 06:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -347,16 +347,11 @@ msgstr ""
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
 msgid ""
-"Clay is easy to make: A brickmaker working at a clay pit will simply dig up "
-"some earth and mix it with water. Just make sure that he has plenty of space"
-" for digging around his clay pit. It might be a good idea to build some "
-"sentinels to expand."
+"Clay is easy to make: A clay digger working at a clay pit will simply dig up"
+" some earth and mix it with water. Just make sure that he has plenty of "
+"space for digging around his clay pit. It might be a good idea to build some"
+" sentinels to expand."
 msgstr ""
-"L'argile est facile à fabriquer : un briquetier travaillant dans une fosse "
-"d'argile va simplement creuser de la terre et la mélanger avec de l'eau. "
-"Assurez-vous qu'il a suffisamment d'espace pour creuser autour de sa fosse "
-"d'argile. Ce serait une bonne idée de construire des sentinelles pour "
-"agrandir."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -821,15 +816,12 @@ msgstr ""
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
 msgid ""
-"They learn to attack with three different swords: The long, curved and "
-"double-edged sword. The latter two contain gold, and all of them iron. The "
-"advanced soldiers are taught to use two matching swords at once. This makes "
-"six steps of attack training."
+"They learn to attack with three different swords: The long sword, broadsword"
+" and double-edged sword. The latter two contain gold, and all of them iron. "
+"The advanced soldiers are taught to use two swords at once: They keep their "
+"first double-edged sword, and are given various other swords to wield in "
+"their other hand. This makes six steps of attack training."
 msgstr ""
-"Ils apprennent à attaquer avec trois épées différentes : l'épée longue, "
-"incurvée et à double tranchant. Ces deux derniers contiennent de l'or et du "
-"fer. Les soldats avancés apprennent à utiliser deux épées assorties à la "
-"fois. Cela fait six étapes d'entraînement à l'attaque."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
