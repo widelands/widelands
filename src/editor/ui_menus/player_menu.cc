@@ -45,20 +45,23 @@ constexpr Widelands::PlayerNumber max_recommended_players = 8;
 class EditorPlayerMenuWarningBox : public UI::Window {
 public:
 	explicit EditorPlayerMenuWarningBox(UI::Panel* parent)
-	/** TRANSLATORS: Window title in the editor when a player has selected more than the recommended number of players */
+	   /** TRANSLATORS: Window title in the editor when a player has selected more than the
+	      recommended number of players */
 	   : Window(parent, "editor_player_menu_warning_box", 0, 0, 500, 220, _("Too Many Players")),
 	     box_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * kMargin),
-	     warning_label_(&box_,
-	                    0,
-	                    0,
-	                    300,
-	                    0,
-	                    UI::PanelStyle::kWui,
-	                    /** TRANSLATORS: Info text in editor player menu when a player has selected more than the recommended number of players. Choice is made by OK/Abort. */
-	                    _("We do not recommend setting more than 8 players except for testing "
-	                      "purposes. Are you sure that you want more than 8 players?"),
-	                    UI::Align::kLeft,
-	                    UI::MultilineTextarea::ScrollMode::kNoScrolling),
+	     warning_label_(
+	        &box_,
+	        0,
+	        0,
+	        300,
+	        0,
+	        UI::PanelStyle::kWui,
+	        /** TRANSLATORS: Info text in editor player menu when a player has selected more than the
+	           recommended number of players. Choice is made by OK/Abort. */
+	        _("We do not recommend setting more than 8 players except for testing "
+	          "purposes. Are you sure that you want more than 8 players?"),
+	        UI::Align::kLeft,
+	        UI::MultilineTextarea::ScrollMode::kNoScrolling),
 	     /** TRANSLATORS: Checkbox for: 'We do not recommend setting more than 8 players except for
 	        testing purposes. Are you sure that you want more than 8 players?' */
 	     reminder_choice_(&box_, Vector2i::zero(), _("Do not remind me again")),
@@ -191,9 +194,11 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		   playercolor_image(p - 1, "images/players/player_position_menu.png");
 		assert(player_image);
 
-		UI::Button* plr_position =
-		   new UI::Button(row, "tribe", 0, 0, plr_tribe->get_h(), plr_tribe->get_h(),
-		                  UI::ButtonStyle::kWuiSecondary, player_image);
+		UI::Button* plr_position = new UI::Button(
+		   row, "tribe", 0, 0, plr_tribe->get_h(), plr_tribe->get_h(), UI::ButtonStyle::kWuiSecondary,
+		   /** TRANSLATORS: Button tooltip in the editor for using a player's starting position tool
+		    */
+		   player_image, _("Set this player’s starting position"));
 		plr_position->sigclicked.connect(
 		   boost::bind(&EditorPlayerMenu::set_starting_pos_clicked, boost::ref(*this), p));
 		row->add(plr_position);
