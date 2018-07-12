@@ -80,8 +80,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     style == UI::PanelStyle::kFsMenu ?
                                        UI::ButtonStyle::kFsMenuMenu :
                                        UI::ButtonStyle::kWuiSecondary,
-                                    g_gr->images().get("images/ui_basic/scrollbar_down.png"),
-                                    pgettext("dropdown", "Select Item")) :
+                                    g_gr->images().get("images/ui_basic/scrollbar_down.png")) :
                      nullptr),
      display_button_(&button_box_,
                      "dropdown_label",
@@ -97,6 +96,11 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      label_(label),
      type_(type),
      is_enabled_(true) {
+	if (label.empty()) {
+		set_tooltip(pgettext("dropdown", "Select Item"));
+	} else {
+		set_tooltip(label);
+	}
 
 	// Close whenever another dropdown is opened
 	subscriber_ = Notifications::subscribe<NoteDropdown>([this](const NoteDropdown& note) {
@@ -250,6 +254,9 @@ void BaseDropdown::set_image(const Image* image) {
 void BaseDropdown::set_tooltip(const std::string& text) {
 	tooltip_ = text;
 	display_button_.set_tooltip(tooltip_);
+	if (push_button_) {
+		push_button_->set_tooltip(push_button_->enabled() ? tooltip_ : "");
+	}
 }
 
 void BaseDropdown::set_errored(const std::string& error_message) {
@@ -266,7 +273,7 @@ void BaseDropdown::set_enabled(bool on) {
 	set_can_focus(on);
 	if (push_button_ != nullptr) {
 		push_button_->set_enabled(on);
-		push_button_->set_tooltip(on ? pgettext("dropdown", "Select Item") : "");
+		push_button_->set_tooltip(on ? tooltip_ : "");
 	}
 	display_button_.set_enabled(on);
 	list_->set_visible(false);
