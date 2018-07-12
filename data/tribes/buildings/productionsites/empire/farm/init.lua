@@ -50,25 +50,25 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_wheat",
-            "call=harvest_wheat",
+            "call=plant",
+            "call=harvest",
             "return=skipped"
          }
       },
-      plant_wheat = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
          descname = _"planting wheat",
          actions = {
             "sleep=14000",
-            "worker=plant"
+            "callworker=plant"
          }
       },
-      harvest_wheat = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
          descname = _"harvesting wheat",
          actions = {
             "sleep=4000",
-            "worker=harvest"
+            "callworker=harvest"
          }
       },
    },

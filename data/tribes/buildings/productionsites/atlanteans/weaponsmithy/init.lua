@@ -76,9 +76,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs trident_light",
             "sleep=27000",    -- +7 enlarge
             "consume=iron planks",
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 28000",  -- +7 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_light"
          }
@@ -91,9 +91,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs trident_long",
             "consume=iron coal planks",
             "sleep=47000",  -- +15 enlarge
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 46000",  -- +10 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_long"
          }
@@ -106,9 +106,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs trident_steel",
             "consume=iron:2 coal planks",
             "sleep=50000",  -- +18 enlarge
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 51000",  -- +15 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_steel"
          }
@@ -121,9 +121,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs trident_double",
             "consume=iron coal:2 planks gold",
             "sleep=55000",  -- +23 enlarge
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 51000",  -- +15 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_double"
          }
@@ -136,9 +136,9 @@ tribes:new_productionsite_type {
            "return=skipped unless economy needs trident_heavy_double",
             "consume=iron:2 coal:2 planks gold",
             "sleep=55000",  -- +23 enlarge
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 56000",  -- +20 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=trident_heavy_double"
          }
