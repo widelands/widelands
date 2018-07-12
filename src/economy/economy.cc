@@ -41,14 +41,19 @@
 
 namespace Widelands {
 
-Economy::Economy(Player& player) : owner_(player), request_timerid_(0), has_window_(false) {
+Serial Economy::last_economy_serial_ = 0;
+
+Economy::Economy(Player& player) : Economy(player, last_economy_serial_++) {
+}
+
+Economy::Economy(Player& player, Serial init_serial)
+   : serial_(init_serial), owner_(player), request_timerid_(0), has_window_(false) {
+	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares = player.egbase().tribes().nrwares();
 	DescriptionIndex const nr_workers = player.egbase().tribes().nrworkers();
 	wares_.set_nrwares(nr_wares);
 	workers_.set_nrwares(nr_workers);
-
-	player.add_economy(*this);
 
 	ware_target_quantities_ = new TargetQuantity[nr_wares];
 	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
@@ -69,12 +74,11 @@ Economy::Economy(Player& player) : owner_(player), request_timerid_(0), has_wind
 		worker_target_quantities_[i] = tq;
 	}
 
-	router_ = new Router(boost::bind(&Economy::reset_all_pathfinding_cycles, this));
+	router_.reset(new Router(boost::bind(&Economy::reset_all_pathfinding_cycles, this)));
 }
 
 Economy::~Economy() {
-	Notifications::publish(NoteEconomy{this, this, NoteEconomy::Action::kDeleted});
-	owner_.remove_economy(*this);
+	Notifications::publish(NoteEconomy{serial_, serial_, NoteEconomy::Action::kDeleted});
 
 	if (requests_.size())
 		log("Warning: Economy still has requests left on destruction\n");
@@ -85,8 +89,6 @@ Economy::~Economy() {
 
 	delete[] ware_target_quantities_;
 	delete[] worker_target_quantities_;
-
-	delete router_;
 }
 
 /**
@@ -269,8 +271,9 @@ void Economy::remove_flag(Flag& flag) {
 	do_remove_flag(flag);
 
 	// automatically delete the economy when it becomes empty.
-	if (flags_.empty())
-		delete this;
+	if (flags_.empty()) {
+		owner_.remove_economy(serial_);
+	}
 }
 
 /**
@@ -528,7 +531,7 @@ void Economy::merge(Economy& e) {
 	//  If the options window for e is open, but not the one for this, the user
 	//  should still have an options window after the merge.
 	if (e.has_window() && !has_window()) {
-		Notifications::publish(NoteEconomy{&e, this, NoteEconomy::Action::kMerged});
+		Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
 	}
 
 	for (std::vector<Flag*>::size_type i = e.get_nrflags() + 1; --i;) {
@@ -542,9 +545,7 @@ void Economy::merge(Economy& e) {
 
 	// Remember that the other economy may not have been connected before the merge
 	split_checks_.insert(split_checks_.end(), e.split_checks_.begin(), e.split_checks_.end());
-
-	// implicitly delete the economy
-	delete &e;
+	owner_.remove_economy(e.serial());
 }
 
 /**
@@ -553,21 +554,21 @@ void Economy::merge(Economy& e) {
 void Economy::split(const std::set<OPtr<Flag>>& flags) {
 	assert(!flags.empty());
 
-	Economy& e = *new Economy(owner_);
+	Economy* e = owner_.create_economy();
 
 	for (const DescriptionIndex& ware_index : owner_.tribe().wares()) {
-		e.ware_target_quantities_[ware_index] = ware_target_quantities_[ware_index];
+		e->ware_target_quantities_[ware_index] = ware_target_quantities_[ware_index];
 	}
 
 	for (const DescriptionIndex& worker_index : owner_.tribe().workers()) {
-		e.worker_target_quantities_[worker_index] = worker_target_quantities_[worker_index];
+		e->worker_target_quantities_[worker_index] = worker_target_quantities_[worker_index];
 	}
 
 	for (const OPtr<Flag>& temp_flag : flags) {
 		Flag& flag = *temp_flag.get(owner().egbase());
 		assert(flags_.size() > 1);  // We will not be deleted in remove_flag, right?
 		remove_flag(flag);
-		e.add_flag(flag);
+		e->add_flag(flag);
 	}
 
 	// As long as rebalance commands are tied to specific flags, we
