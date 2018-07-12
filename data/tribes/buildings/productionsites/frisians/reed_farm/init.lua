@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
          descname = _"planting reed",
          actions = {
             "sleep=18000",
-            "worker=plantreed"
+            "callworker=plantreed"
          }
       },
       harvest_reed = {
@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting reed",
          actions = {
             "sleep=5000",
-            "worker=harvestreed"
+            "callworker=harvestreed"
          }
       },
    },
