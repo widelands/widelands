@@ -85,7 +85,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	// now we update some of them
-	uint32_t best_target = std::numeric_limits<uint32_t>::max();
+	Widelands::Serial best_target = Widelands::kInvalidSerial;
 	uint8_t best_score = 0;
 	uint32_t count = 0;
 	// sites that were either conquered or destroyed
@@ -463,7 +463,7 @@ bool DefaultAI::check_enemy_sites(uint32_t const gametime) {
 	}
 
 	// if coordinates hash is not set
-	if (best_target == std::numeric_limits<uint32_t>::max()) {
+	if (best_target == Widelands::kInvalidSerial) {
 		return false;
 	}
 
