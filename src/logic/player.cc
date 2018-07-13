@@ -22,6 +22,7 @@
 #include <cassert>
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 #include <boost/signals2.hpp>
@@ -1348,25 +1349,45 @@ void Player::read_remaining_shipnames(FileRead& fr, uint16_t packet_version) {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr) {
+void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	uint16_t nr_wares = fr.unsigned_16();
-	uint16_t nr_entries = fr.unsigned_16();
+	size_t nr_entries = fr.unsigned_16();
+
+	// Stats are saved as a single string to reduce number of hard disk write operations
+	const auto parse_stats = [nr_entries](std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index, const std::string& stats_string, const std::string& description) {
+		if (!stats_string.empty()) {
+			std::vector<std::string> stats_vector;
+			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
+			if (stats_vector.size() != nr_entries) {
+				throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got %" PRIuS, description.c_str(), nr_entries, stats_vector.size());
+			}
+			for (size_t j = 0; j < nr_entries; ++j) {
+				stats->at(ware_index)[j] = static_cast<unsigned int>(atoi(stats_vector.at(j).c_str()));
+			}
+		} else if (nr_entries > 0) {
+			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0", description.c_str(), nr_entries);
+		}
+	};
 
 	for (uint32_t i = 0; i < current_produced_statistics_.size(); ++i)
 		ware_productions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		std::string name = fr.c_string();
-		DescriptionIndex idx = egbase().tribes().ware_index(name);
+		const std::string name = fr.c_string();
+		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u statistics: unknown ware name %s", player_number(), name.c_str());
 			continue;
 		}
 
 		current_produced_statistics_[idx] = fr.unsigned_32();
-
-		for (uint32_t j = 0; j < nr_entries; ++j)
-			ware_productions_[idx][j] = fr.unsigned_32();
+		if (packet_version < 22) {
+			for (uint32_t j = 0; j < nr_entries; ++j) {
+				ware_productions_[idx][j] = fr.unsigned_32();
+			}
+		} else {
+			parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
+		}
 	}
 
 	// Read consumption statistics
@@ -1377,8 +1398,8 @@ void Player::read_statistics(FileRead& fr) {
 		ware_consumptions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		std::string name = fr.c_string();
-		DescriptionIndex idx = egbase().tribes().ware_index(name);
+		const std::string name = fr.c_string();
+		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u consumption statistics: unknown ware name %s", player_number(),
 			    name.c_str());
@@ -1386,9 +1407,14 @@ void Player::read_statistics(FileRead& fr) {
 		}
 
 		current_consumed_statistics_[idx] = fr.unsigned_32();
-
-		for (uint32_t j = 0; j < nr_entries; ++j)
-			ware_consumptions_[idx][j] = fr.unsigned_32();
+		// TODO(GunChleoc): Get rid of this savegame compatibility code after build 21
+		if (packet_version < 22) {
+			for (uint32_t j = 0; j < nr_entries; ++j) {
+				ware_consumptions_[idx][j] = fr.unsigned_32();
+			}
+		} else {
+			parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
+		}
 	}
 
 	// Read stock statistics
@@ -1399,15 +1425,20 @@ void Player::read_statistics(FileRead& fr) {
 		ware_stocks_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		std::string name = fr.c_string();
-		DescriptionIndex idx = egbase().tribes().ware_index(name);
+		const std::string name = fr.c_string();
+		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());
 			continue;
 		}
 
-		for (uint32_t j = 0; j < nr_entries; ++j)
-			ware_stocks_[idx][j] = fr.unsigned_32();
+		if (packet_version < 22) {
+			for (uint32_t j = 0; j < nr_entries; ++j) {
+				ware_stocks_[idx][j] = fr.unsigned_32();
+			}
+		} else {
+			parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
+		}
 	}
 
 	// All statistics should have the same size
@@ -1433,6 +1464,18 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
  * Write statistics data to the given file
  */
 void Player::write_statistics(FileWrite& fw) const {
+	// Save stats as a single string to reduce number of hard disk write operations
+	const auto write_stats = [&fw](const std::vector<std::vector<uint32_t>>& stats, const DescriptionIndex ware_index) {
+		std::ostringstream oss("");
+		if (!stats[ware_index].empty()) {
+			for (uint32_t i = 0; i < stats[ware_index].size() - 1; ++i) {
+				oss << stats[ware_index][i] << "|";
+			}
+			oss << stats[ware_index][stats[ware_index].size() - 1];
+		}
+		fw.c_string(oss.str());
+	};
+
 	const Tribes& tribes = egbase().tribes();
 	const std::set<DescriptionIndex>& tribe_wares = tribe().wares();
 	const size_t nr_wares = tribe_wares.size();
@@ -1444,9 +1487,7 @@ void Player::write_statistics(FileWrite& fw) const {
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());
 		fw.unsigned_32(current_produced_statistics_[ware_index]);
-		for (uint32_t j = 0; j < ware_productions_[ware_index].size(); ++j) {
-			fw.unsigned_32(ware_productions_[ware_index][j]);
-		}
+		write_stats(ware_productions_, ware_index);
 	}
 
 	// Write consume statistics
@@ -1456,9 +1497,7 @@ void Player::write_statistics(FileWrite& fw) const {
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());
 		fw.unsigned_32(current_consumed_statistics_[ware_index]);
-		for (uint32_t j = 0; j < ware_consumptions_[ware_index].size(); ++j) {
-			fw.unsigned_32(ware_consumptions_[ware_index][j]);
-		}
+		write_stats(ware_consumptions_, ware_index);
 	}
 
 	// Write stock statistics
@@ -1467,9 +1506,7 @@ void Player::write_statistics(FileWrite& fw) const {
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());
-		for (uint32_t j = 0; j < ware_stocks_[ware_index].size(); ++j) {
-			fw.unsigned_32(ware_stocks_[ware_index][j]);
-		}
+		write_stats(ware_stocks_, ware_index);
 	}
 }
 }
