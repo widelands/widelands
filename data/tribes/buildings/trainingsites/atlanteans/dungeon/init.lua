@@ -155,16 +155,16 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "check_soldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
          }
       },
       upgrade_soldier_attack_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier attack 0",
+            "checksoldier=soldier attack 0",
             "sleep=30000",
-            "check_soldier=soldier attack 0",
+            "checksoldier=soldier attack 0",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_long",
             "train=soldier attack 0 1"
          }
@@ -173,9 +173,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 1 to level 2"),
          actions = {
-            "check_soldier=soldier attack 1",
+            "checksoldier=soldier attack 1",
             "sleep=30000",
-            "check_soldier=soldier attack 1",
+            "checksoldier=soldier attack 1",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_steel",
             "train=soldier attack 1 2"
          }
@@ -184,9 +184,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 2 to level 3"),
          actions = {
-            "check_soldier=soldier attack 2",
+            "checksoldier=soldier attack 2",
             "sleep=30000",
-            "check_soldier=soldier attack 2",
+            "checksoldier=soldier attack 2",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_double",
             "train=soldier attack 2 3"
          }
@@ -195,9 +195,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("atlanteans_building", "upgrading soldier attack from level 3 to level 4"),
          actions = {
-            "check_soldier=soldier attack 3",
+            "checksoldier=soldier attack 3",
             "sleep=30000",
-            "check_soldier=soldier attack 3",
+            "checksoldier=soldier attack 3",
             "consume=atlanteans_bread smoked_fish,smoked_meat trident_heavy_double",
             "train=soldier attack 3 4"
          }
