@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-16 18:35+0000\n"
-"PO-Revision-Date: 2018-06-25 17:24+0000\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-07 12:00+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +107,7 @@ msgstr "Du kriggst Punkten för dürabele Waren in diene Kraamhusen. De Speler m
 
 #: ../../data/scripting/win_conditions/collectors.lua:23
 msgid "Points"
-msgstr "Pünkt"
+msgstr "Punkten"
 
 #: ../../data/scripting/win_conditions/collectors.lua:126
 #, lua-format
@@ -123,8 +123,8 @@ msgstr "%1$s (%2$i P) × %3$i = %4$i P"
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] "Alltosamen: %i Pünkt"
-msgstr[1] "Alltosamen: %i Pünkte"
+msgstr[0] "All tosamen: %i Punkt"
+msgstr[1] "All tosamen: %i Punkten"
 
 #: ../../data/scripting/win_conditions/collectors.lua:156
 msgid "The game has ended."
@@ -172,7 +172,7 @@ msgstr[1] "Ergebnis vun de Klottje: %i Punkten"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
-msgstr "Eenzigster König"
+msgstr "Dwingelant"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:17
 msgid "The tribe or team that can defeat all others wins the game!"
@@ -188,15 +188,15 @@ msgstr "Dat is een Speel sünner Enn un Örders."
 
 #: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
 msgid "Endless Game (no fog)"
-msgstr "Ewich Speel (ihle Daak)"
+msgstr "Ewich Speel (sünner Kriegsnevel)"
 
 #: ../../data/scripting/win_conditions/endless_game_fogless.lua:16
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr "Dat is een Speel sünner Enn, Örders un Kriegsnevel."
+msgstr "Dat is een Speel sünner Enn, Upgaven un Kriegsnevel."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:17
 msgid "Territorial Lord"
-msgstr "Landkönig"
+msgstr "Gewestensammler"
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:20
 msgid ""
@@ -209,13 +209,13 @@ msgstr "All de Spelers oder Klottjes versöken, tominnst de halvig Kaart intoneh
 #: ../../data/scripting/win_conditions/territorial_time.lua:30
 #, lua-format
 msgid "Team %i"
-msgstr "Mannschop %i"
+msgstr "Klottje %i"
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:157
 #: ../../data/scripting/win_conditions/territorial_time.lua:205
 #, lua-format
 msgid "%s owns more than half of the map’s area."
-msgstr "%s besitt miehr as de half Land."
+msgstr "%s hett mehr as de halve Kaart innohmen."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:158
 #: ../../data/scripting/win_conditions/territorial_time.lua:206
@@ -240,7 +240,7 @@ msgstr[1] "Beholl't noch %i Menüten un du winnst dat Speel."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:20
 msgid "Territorial Time"
-msgstr "Land König (op Tied)"
+msgstr "Gewestenloper"
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:23
 msgid ""
@@ -277,7 +277,7 @@ msgstr[1] "Dat Speel is in %i Menüten um."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:4
 msgid "Congratulations!"
-msgstr "Proost!"
+msgstr "Glückwunsk!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:5
 msgid "You have won this game!"
@@ -320,18 +320,18 @@ msgstr "Speler-Översicht:"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:16
 msgid "Wood Gnome"
-msgstr "Holtmännche"
+msgstr "Holtlöper"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:19
 msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
-msgstr "De Holtlöper mag geern grote Walden, du sullt also mehr Bomen up dien Gewest hebben as de annern Spelers. De Speel düürt 4 Stünnen; dann winnt de Speeler mit de meeste Bomen dat Speel."
+msgstr "De Holtlöper mag geern grote Walden, du sallst also mehr Bomen up dien Gewest hebben as de annern Spelers. De Speel düürt 4 Stünnen; dann winnt de Speeler mit de meeste Bomen dat Speel."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:22
 msgid "Trees owned"
-msgstr "Boome in Besitt"
+msgstr "Tahl vun Bomen"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:96
 #: ../../data/scripting/win_conditions/wood_gnome.lua:148
@@ -340,12 +340,12 @@ msgstr "Boome in Besitt"
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i Boom"
-msgstr[1] "%i Boome"
+msgstr[1] "%i Bomen"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:99
 msgid "%1$s has %2$s at the moment."
-msgstr "%1$s hat juest %2$s."
+msgstr "%1$s hett jüüst %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:150
