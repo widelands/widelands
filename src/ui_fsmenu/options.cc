@@ -208,7 +208,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      // Game options
      auto_roadbuild_mode_(
         &box_game_, Vector2i::zero(), _("Start building road after placing a flag")),
-     show_workarea_preview_(&box_game_, Vector2i::zero(), _("Show buildings area preview")),
      transparent_chat_(
         &box_game_, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
 
@@ -275,7 +274,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Game
 	box_game_.add(&auto_roadbuild_mode_);
-	box_game_.add(&show_workarea_preview_);
 	box_game_.add(&transparent_chat_);
 	box_game_.add(&single_watchwin_);
 
@@ -347,7 +345,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Game options
 	auto_roadbuild_mode_.set_state(opt.auto_roadbuild_mode);
-	show_workarea_preview_.set_state(opt.show_warea);
 	transparent_chat_.set_state(opt.transparent_chat);
 	single_watchwin_.set_state(opt.single_watchwin);
 
@@ -590,7 +587,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 
 	// Game options
 	os_.auto_roadbuild_mode = auto_roadbuild_mode_.get_state();
-	os_.show_warea = show_workarea_preview_.get_state();
 	os_.transparent_chat = transparent_chat_.get_state();
 	os_.single_watchwin = single_watchwin_.get_state();
 
@@ -651,7 +647,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 
 	// Game options
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
-	opt.show_warea = opt_section_.get_bool("workareapreview", true);
 	opt.transparent_chat = opt_section_.get_bool("transparent_chat", true);
 	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
 
@@ -693,7 +688,6 @@ void OptionsCtrl::save_options() {
 
 	// Game options
 	opt_section_.set_bool("auto_roadbuild_mode", opt.auto_roadbuild_mode);
-	opt_section_.set_bool("workareapreview", opt.show_warea);
 	opt_section_.set_bool("transparent_chat", opt.transparent_chat);
 	opt_section_.set_bool("single_watchwin", opt.single_watchwin);
 

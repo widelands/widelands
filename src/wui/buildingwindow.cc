@@ -480,7 +480,7 @@ void BuildingWindow::show_workarea() {
 	if (workarea_info->empty()) {
 		return;
 	}
-	igbase()->show_work_area(*workarea_info, building_position_);
+	igbase()->show_workarea(*workarea_info, building_position_);
 	showing_workarea_ = true;
 
 	configure_workarea_button();
@@ -491,7 +491,7 @@ void BuildingWindow::show_workarea() {
  */
 void BuildingWindow::hide_workarea() {
 	if (showing_workarea_) {
-		igbase()->hide_work_area(building_position_);
+		igbase()->hide_workarea(building_position_);
 		showing_workarea_ = false;
 		configure_workarea_button();
 	}
