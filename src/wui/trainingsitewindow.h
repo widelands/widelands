@@ -31,10 +31,11 @@ struct TrainingSiteWindow : public ProductionSiteWindow {
 	TrainingSiteWindow(InteractiveGameBase& parent,
 	                   UI::UniqueWindow::Registry& reg,
 	                   Widelands::TrainingSite&,
-	                   bool avoid_fastclick);
+	                   bool avoid_fastclick,
+					   bool workarea_preview_wanted);
 
 private:
-	void init(bool avoid_fastclick) override;
+	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 	Widelands::OPtr<Widelands::TrainingSite> training_site_;
 

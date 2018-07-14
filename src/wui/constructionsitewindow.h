@@ -31,12 +31,13 @@ struct ConstructionSiteWindow : public BuildingWindow {
 	ConstructionSiteWindow(InteractiveGameBase& parent,
 	                       UI::UniqueWindow::Registry& reg,
 	                       Widelands::ConstructionSite&,
-	                       bool avoid_fastclick);
+	                       bool avoid_fastclick,
+						   bool workarea_preview_wanted);
 
 	void think() override;
 
 protected:
-	void init(bool avoid_fastclick) override;
+	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 private:
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;

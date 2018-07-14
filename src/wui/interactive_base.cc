@@ -202,6 +202,10 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 	return nullptr;
 }
 
+bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords) const {
+	return workarea_previews_.count(coords) == 1;
+}
+
 UniqueWindowHandler& InteractiveBase::unique_windows() {
 	return *unique_window_handler_;
 }

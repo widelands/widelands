@@ -69,7 +69,7 @@ public:
 	void think() override;
 
 protected:
-	virtual void init(bool avoid_fastclick);
+	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);
 	void die() override;
 
 	UI::TabPanel* get_tabs() {
@@ -129,6 +129,7 @@ private:
 
 	bool showing_workarea_;
 	bool avoid_fastclick_;
+	bool is_warping_;
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>

@@ -227,6 +227,9 @@ protected:
 		return road_building_overlays_;
 	}
 
+	/// Returns true if there is a workarea preview being shown at the given coordinates
+	bool has_workarea_preview(const Widelands::Coords& coords) const;
+
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
 	void resize_chat_overlay();

@@ -30,10 +30,11 @@ struct MilitarySiteWindow : public BuildingWindow {
 	MilitarySiteWindow(InteractiveGameBase& parent,
 	                   UI::UniqueWindow::Registry& reg,
 	                   Widelands::MilitarySite&,
-	                   bool avoid_fastclick);
+	                   bool avoid_fastclick,
+					   bool workarea_preview_wanted);
 
 private:
-	void init(bool avoid_fastclick) override;
+	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 	Widelands::OPtr<Widelands::MilitarySite> military_site_;
 

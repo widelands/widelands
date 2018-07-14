@@ -58,6 +58,7 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
      building_position_(b.get_position()),
      showing_workarea_(false),
      avoid_fastclick_(avoid_fastclick),
+	 is_warping_(false),
      expeditionbtn_(nullptr) {
 	buildingnotes_subscriber_ = Notifications::subscribe<Widelands::NoteBuilding>(
 	   [this](const Widelands::NoteBuilding& note) { on_building_note(note); });
@@ -71,7 +72,9 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 }
 
 BuildingWindow::~BuildingWindow() {
-	hide_workarea();
+	if (!is_warping_) {
+		hide_workarea();
+	}
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
@@ -80,12 +83,13 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 		// The building's state has changed
 		case Widelands::NoteBuilding::Action::kChanged:
 			if (!is_dying_) {
-				init(true);
+				init(true, showing_workarea_);
 			}
 			break;
 		// The building is no more. Next think() will call die().
 		case Widelands::NoteBuilding::Action::kStartWarp:
 			igbase()->add_wanted_building_window(building_position_, get_pos(), is_minimal());
+			is_warping_ = true;
 			break;
 		default:
 			break;
@@ -93,7 +97,7 @@ void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
 	}
 }
 
-void BuildingWindow::init(bool avoid_fastclick) {
+void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	capscache_player_number_ = 0;
 	capsbuttons_ = nullptr;
 	capscache_ = 0;
@@ -115,13 +119,16 @@ void BuildingWindow::init(bool avoid_fastclick) {
 	set_center_panel(vbox_.get());
 	set_thinks(true);
 	set_fastclick_panel(this);
-	show_workarea();
+	if (workarea_preview_wanted) {
+		show_workarea();
+	} else {
+		hide_workarea();
+	}
 }
 
 // Stop everybody from thinking to avoid segfaults
 void BuildingWindow::die() {
 	is_dying_ = true;
-	hide_workarea();
 	set_thinks(false);
 	vbox_.reset(nullptr);
 	UniqueWindow::die();
@@ -385,8 +392,10 @@ Callback for dismantling request
 void BuildingWindow::act_dismantle() {
 	Widelands::Building* building = building_.get(parent_->egbase());
 	if (SDL_GetModState() & KMOD_CTRL) {
-		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle)
+		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 			igbase()->game().send_player_dismantle(*building);
+			hide_workarea();
+		}
 	} else {
 		show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
 	}

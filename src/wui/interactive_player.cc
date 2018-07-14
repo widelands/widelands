@@ -394,7 +394,7 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(node_and_triangle.node)))
 			if (can_see(building->owner().player_number())) {
-				show_building_window(node_and_triangle.node, false);
+				show_building_window(node_and_triangle.node, false, false);
 				return;
 			}
 
