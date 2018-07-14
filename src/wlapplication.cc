@@ -778,6 +778,7 @@ bool WLApplication::init_settings() {
 	s.get_natural("metaserverport");
 	// Undocumented, checkbox appears on "Watch Replay" screen
 	s.get_bool("display_replay_filenames");
+	s.get_bool("editor_player_menu_warn_too_many_players");
 	// KLUDGE!
 
 	long int last_start = s.get_int("last_start", 0);
