@@ -85,7 +85,6 @@ public:
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,
 	                                bool was_minimal);
-	bool is_building_window_wanted(const Widelands::Coords& coords) const;
 	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords, bool avoid_fastclick, bool workarea_preview_wanted);
 	bool try_show_ship_window();
 	void show_ship_window(Widelands::Ship* ship);
@@ -119,7 +118,7 @@ private:
 		const bool show_workarea;
 	};
 	// Building coordinates, window position, whether the window was minimized
-	std::map<uint32_t, std::unique_ptr<WantedBuildingWindow>> wanted_building_windows_;
+	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 };
 

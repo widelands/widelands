@@ -69,8 +69,8 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 			   if (upcast(
 			          Widelands::Building const, building, game().objects().get_object(note.serial))) {
 				   const Widelands::Coords coords = building->get_position();
-				   // Register the building serial if the window is wanted
-				   if (is_building_window_wanted(coords) == 1) {
+				   // Check whether the window is wanted
+				   if (wanted_building_windows_.count(coords.hash()) == 1) {
 					   const WantedBuildingWindow& wanted_building_window = *wanted_building_windows_.at(coords.hash()).get();
 					   UI::UniqueWindow* building_window = show_building_window(coords, true, wanted_building_window.show_workarea);
 					   building_window->set_pos(wanted_building_window.window_position);
@@ -177,10 +177,7 @@ void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& co
                                                      const Vector2i point,
                                                      bool was_minimal) {
 	wanted_building_windows_.insert(
-	   std::make_pair(coords.hash(), std::unique_ptr<WantedBuildingWindow>(new WantedBuildingWindow(point, was_minimal, has_workarea_preview(coords)))));
-}
-bool InteractiveGameBase::is_building_window_wanted(const Widelands::Coords& coords) const {
-	return wanted_building_windows_.count(coords.hash()) == 1;
+	   std::make_pair(coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(point, was_minimal, has_workarea_preview(coords)))));
 }
 
 UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,
@@ -201,7 +198,7 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
 		};
 		break;
 	case Widelands::MapObjectType::DISMANTLESITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+		registry.open_window = [this, &registry, building, avoid_fastclick] {
 			new DismantleSiteWindow(
 			   *this, registry, *dynamic_cast<Widelands::DismantleSite*>(building), avoid_fastclick);
 		};
