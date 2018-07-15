@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-07-05 20:59+0000\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-12 07:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -142,7 +142,7 @@ msgstr "Stümperiger künstelk Speler"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:96
 msgid "Jan"
-msgstr "Jan"
+msgstr "Jan."
 
 #. * TRANSLATORS: February. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -151,7 +151,7 @@ msgstr "Jan"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:102
 msgid "Feb"
-msgstr "Feb"
+msgstr "Feb."
 
 #. * TRANSLATORS: March. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -160,7 +160,7 @@ msgstr "Feb"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:108
 msgid "Mar"
-msgstr "Mär"
+msgstr "März"
 
 #. * TRANSLATORS: April. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -169,7 +169,7 @@ msgstr "Mär"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:114
 msgid "Apr"
-msgstr "Apr"
+msgstr "Apr."
 
 #. * TRANSLATORS: May. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -196,7 +196,7 @@ msgstr "Jun"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:132
 msgid "Jul"
-msgstr "Jul"
+msgstr "Juli"
 
 #. * TRANSLATORS: August. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -205,7 +205,7 @@ msgstr "Jul"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:138
 msgid "Aug"
-msgstr "Aug"
+msgstr "Aug."
 
 #. * TRANSLATORS: September. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -214,7 +214,7 @@ msgstr "Aug"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:144
 msgid "Sep"
-msgstr "Sep"
+msgstr "Sep."
 
 #. * TRANSLATORS: October. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -223,7 +223,7 @@ msgstr "Sep"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:150
 msgid "Oct"
-msgstr "Okt"
+msgstr "Okt."
 
 #. * TRANSLATORS: November. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -232,7 +232,7 @@ msgstr "Okt"
 #. * TRANSLATORS: http://www.unicode.org/cldr/charts/latest/summary/root.html
 #: ../../src/base/time_string.cc:156
 msgid "Nov"
-msgstr "Nov"
+msgstr "Nov."
 
 #. * TRANSLATORS: December. Keep this to 4 letters maximum.
 #. * TRANSLATORS: Use the "Months - abbreviated - Formatting" definition from
@@ -240,7 +240,7 @@ msgstr "Nov"
 #. * TRANSLATORS: definition if there is one for your language.
 #: ../../src/base/time_string.cc:161
 msgid "Dec"
-msgstr "Dez"
+msgstr "Dez."
 
 #: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:211
 #: ../../src/logic/game.cc:264
@@ -324,7 +324,7 @@ msgstr "Widelands kunn de Datei »%s« nich laden. Dat Formaat is openbaar nich 
 #: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:221
 #: ../../src/logic/game.cc:271
 msgid "Creating players"
-msgstr "Spelers maken…"
+msgstr "Spelers maken"
 
 #: ../../src/editor/editorinteractive.cc:228
 msgid "Unsaved Map"
@@ -337,7 +337,7 @@ msgstr "De Kaart is nich sekert worden. Willt du würrelk ofbreken?"
 #: ../../src/editor/editorinteractive.cc:620
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
-msgstr "Make leege Kaart…"
+msgstr "Maak leege Kaart…"
 
 #. * TRANSLATORS: Default name for new map
 #: ../../src/editor/editorinteractive.cc:624
@@ -806,7 +806,7 @@ msgstr "Kaart maken"
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:534
 msgid "Generating random map…"
-msgstr "Make tofällige Kaart…"
+msgstr "Maak tofällige Kaart…"
 
 #. * TRANSLATORS: Window title. This is shown after a random map has been
 #. created in the
@@ -848,7 +848,7 @@ msgstr "ohne Naam"
 #: ../../src/wui/game_main_menu_save_game.cc:171
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr "Eene Datei mit de Naam »%s« gifft dat al. Overschrieven?"
+msgstr "Eene Datei mit de Naam »%s« gifft 't al. Overschrieven?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:271
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:285
@@ -861,7 +861,7 @@ msgstr "Fehler bi'n Kaart sekern!"
 msgid ""
 "A file with the name ‘%s.tmp’ already exists. You have to remove it "
 "manually."
-msgstr "Eene Datei names »%s.tmp« gifft dat al. Du mutt se sülven wegmaken."
+msgstr "Eene Datei mit de Naam »%s.tmp« gifft 't al. Du mutt se sülven wegmaken."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:328
 msgid ""
@@ -983,13 +983,13 @@ msgstr "Deren"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:65
 msgid "Set port space"
-msgstr "Make Rüümte för Muden fast"
+msgstr "Maak Rüümte för Muden fast"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:66
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the "
 "top-left corner of a generated minimap."
-msgstr "Make de Position fast dat sull de Position (0|0) ween. Dat is de links-boven Eck vun de lütte Kaart."
+msgstr "Maak de Position fast, dat de Position (0|0) ween sall. Dat is de linke boven Eck vun de lütte Kaart."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:38
 msgid "Random Height Options"
@@ -1070,7 +1070,7 @@ msgstr "Disse Bookstaven sünd nich verlövt:"
 
 #: ../../src/logic/editor_game_base.cc:213
 msgid "Loading graphics"
-msgstr "Lade de Biller…"
+msgstr "Lade de Biller"
 
 #. * TRANSLATORS: Win condition for this game has not been set.
 #: ../../src/logic/game.cc:130
@@ -1080,11 +1080,11 @@ msgstr "Nich fastleggt"
 #: ../../src/logic/game.cc:203 ../../src/logic/game.cc:255
 #: ../../src/logic/game.cc:325 ../../src/logic/game.cc:353
 msgid "Preloading map"
-msgstr "Lade de Kaart vör…"
+msgstr "Lade de Kaart vör"
 
 #: ../../src/logic/game.cc:209 ../../src/logic/game.cc:261
 msgid "Loading world"
-msgstr "Lade de Welt…"
+msgstr "Lade de Welt"
 
 #: ../../src/logic/game.cc:231 ../../src/logic/game.cc:299
 msgid "Loading map…"
@@ -1097,7 +1097,7 @@ msgstr "Lade…"
 
 #: ../../src/logic/game.cc:433
 msgid "Creating player infrastructure"
-msgstr "Make de Kraam för de Spelers…"
+msgstr "Maak de Kraam för de Spelers"
 
 #: ../../src/logic/game.cc:444 ../../src/logic/player.cc:221
 msgid "Missing starting position"
@@ -1262,7 +1262,7 @@ msgstr "%1$i×%2$s"
 #: ../../src/logic/map_objects/tribes/production_program.cc:393
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr "de Huus hett düsse Waren: %s"
+msgstr "dat Huus hett düsse Waren: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/map_objects/tribes/production_program.cc:419
@@ -1299,19 +1299,19 @@ msgstr "de Arbeiders bruken keene Erfahrung"
 #: ../../src/logic/map_objects/tribes/production_program.cc:900
 #, c-format
 msgid "Did not start %1$s because %2$s"
-msgstr "Hett nich %1$s begunnen, wiel %2$s"
+msgstr "Hett nich begunnen, %1$s , denn %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:547
 #, c-format
 msgid "Completed %1$s because %2$s"
-msgstr "Hett %1$s klaarmaakt, wiel %2$s"
+msgstr "Hett %1$s daankregen, denn %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
 #: ../../src/logic/map_objects/tribes/production_program.cc:552
 #, c-format
 msgid "Skipped %1$s because %2$s"
-msgstr "Hett %1$s översprungen, wiel %2$s"
+msgstr "Hett %1$s översprungen, denn %2$s"
 
 #: ../../src/logic/map_objects/tribes/production_program.cc:747
 msgid "No use for ships on this map!"
@@ -1325,8 +1325,8 @@ msgstr "Up düsse Kaart bruukt man keene Schippen!"
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
-msgstr[0] "dat an %s hapert"
-msgstr[1] "dat an %s hapert"
+msgstr[0] "'t hapert an %s"
+msgstr[1] "'t hapert an %s"
 
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
@@ -1521,14 +1521,14 @@ msgstr "Diene Wirtschaft hett een neies Kraamhuus kregen."
 msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr "sall de Mineraal %s ofboen, wat in düsse Welt nich gifft; dat Volk verdraggt sich nich mit de Welt"
+msgstr "sall de Mineraal %s ofboen, wat 't in düsse Welt nich gifft; dat Volk verdraggt sich nich mit de Welt"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:218
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
-msgstr "sall de Mineraal %s tüchten, wat in düsse Welt nich gifft; dat Volk verdraggt sich nich mit de Welt"
+msgstr "sall de Mineraal %s tüchten, wat 't in düsse Welt nich gifft; dat Volk verdraggt sich nich mit de Welt"
 
 #: ../../src/logic/map_objects/tribes/worker.cc:984
 msgid "A geologist found resources."
@@ -1537,7 +1537,7 @@ msgstr "Een Schattsöker hett Mineraale funnen."
 #: ../../src/logic/map_objects/tribes/worker.cc:1871
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
-msgstr "Dien %s kann keenen Weg tom Oort finnen un word woll doodgahn."
+msgstr "Dien %s kann keenen Weg tum Oort finnen un word woll doodgahn."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1877
 #: ../../src/wui/productionsitewindow.cc:99
@@ -1554,12 +1554,12 @@ msgstr "Fehlgahner Arbeider!"
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:70
 msgid "arable"
-msgstr "Tom Bebauen"
+msgstr "Tum Bauen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:80
 msgid "navigable"
-msgstr "Tom Befahren"
+msgstr "Tum Seilen"
 
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
 #: ../../src/logic/map_objects/world/terrain_description.cc:85
@@ -1761,7 +1761,7 @@ msgstr "Kunn de Server nich anschalten!"
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
-msgstr "Widelands kunn eenen Server nich anschalten.\nWahrschienelk bedrifft een annerer Prozess al eenen Server up unser Port."
+msgstr "Widelands kunn eenen Server nich anschalten.\nWahrschienelk bedrifft een annerer Prozess al eenen Server up uns' Port."
 
 #: ../../src/network/gamehost.cc:1526
 #, c-format
@@ -1900,7 +1900,7 @@ msgstr "Fehler bi'n Umwanneln"
 #: ../../src/network/internet_gaming.cc:869
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
-msgstr "Ick weet nich, of »%s« wahr oder falsk heten sall…"
+msgstr "Ick weet nich, of »%s« wahr oder falsk heten sall"
 
 #: ../../src/network/internet_gaming.cc:886
 msgid "unknown"
@@ -2023,11 +2023,11 @@ msgstr "Hebb een unerwachtn LAUNCH-Befehl vun de Server kregen."
 
 #: ../../src/network/network_gaming_messages.cc:137
 msgid "Server sent a player update for a player that does not exist."
-msgstr "De Server hett een Speler-Vernejen för een Speler, wat't nich gifft, schickt."
+msgstr "De Server hett een Speler-Vernejen för een Speler, wat 't nich gifft, schickt."
 
 #: ../../src/network/network_gaming_messages.cc:139
 msgid "Server sent a user update for a user that does not exist."
-msgstr "De Server hett een Benutzer-Vernejen för een Benutzer, wat't nich gifft, schickt."
+msgstr "De Server hett een Benutzer-Vernejen för een Benutzer, wat 't nich gifft, schickt."
 
 #: ../../src/network/network_gaming_messages.cc:140
 msgid "Server uses a different protocol version"
@@ -2080,7 +2080,7 @@ msgstr "De Gast will eene Datei kriegen ofschoonst keene paraat is."
 
 #: ../../src/network/network_gaming_messages.cc:157
 msgid "Client requests file part that does not exist."
-msgstr "De Gast will een Stückje vun de Datei kriegen, wat nich gifft."
+msgstr "De Gast will een Stückje vun de Datei kriegen, wat 't nich gifft."
 
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
@@ -2989,7 +2989,7 @@ msgstr "Huus ofbrannen?"
 
 #: ../../src/wui/actionconfirm.cc:175
 msgid "Do you really want to destroy this building?"
-msgstr "Willt du düsse Huus würrelk ofbrannen?"
+msgstr "Willt du düsses Huus würrelk ofbrannen?"
 
 #: ../../src/wui/actionconfirm.cc:219
 msgid "Dismantle building?"
@@ -2997,7 +2997,7 @@ msgstr "Huus plattrieten?"
 
 #: ../../src/wui/actionconfirm.cc:220
 msgid "Do you really want to dismantle this building?"
-msgstr "Willt du düsse Huus würrelk plattrieten?"
+msgstr "Willt du düsses Huus würrelk plattrieten?"
 
 #: ../../src/wui/actionconfirm.cc:265
 msgid "Enhance building?"
@@ -3005,7 +3005,7 @@ msgstr "Huus utbauen?"
 
 #: ../../src/wui/actionconfirm.cc:267 ../../src/wui/actionconfirm.cc:271
 msgid "Do you really want to enhance this building?"
-msgstr "Willt du düsse Huus würrelk utbauen?"
+msgstr "Willt du düsses Huus würrelk utbauen?"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
@@ -3054,7 +3054,7 @@ msgstr "Mehr Soldaten schicken"
 
 #: ../../src/wui/building_statistics_menu.cc:61
 msgid "Building Statistics"
-msgstr "Tahlen över Huusen"
+msgstr "Tahlen över Husen"
 
 #: ../../src/wui/building_statistics_menu.cc:66
 msgid "Owned:"
@@ -3157,7 +3157,7 @@ msgstr "Gifft torügg:"
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:506
 msgid "Hide work area"
-msgstr "Naberskupp verbargen"
+msgstr "Arbeidsgewest verbargen"
 
 #: ../../src/wui/buildingwindow.cc:323 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
@@ -3170,7 +3170,7 @@ msgstr "Hierher springen"
 
 #: ../../src/wui/buildingwindow.cc:509
 msgid "Show work area"
-msgstr "Wies Arbeidsgeweste"
+msgstr "Arbeidsgewest wiesen"
 
 #: ../../src/wui/buildingwindow.cc:542
 msgid "Start an expedition"
@@ -3910,14 +3910,14 @@ msgstr "Kaart-Naam (Anfang vun de Upteken)"
 #. hour:minute
 #: ../../src/wui/load_or_save_game.cc:384
 msgid "Today, %1%:%2%"
-msgstr "Vandaag, %1%:%2%"
+msgstr "Vundaag, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:388
 msgid "saved today at %1%:%2%"
-msgstr "vandaag um %1%:%2% sekert"
+msgstr "vundaag um %1%:%2% sekert"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:

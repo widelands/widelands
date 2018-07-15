@@ -73,9 +73,9 @@ tribes:new_productionsite_type {
             "sleep=5000",  -- penalty for unavailable iron_ore (2x)
             "consume=coal iron_ore",
             "sleep=27000",
-            "play_sound=sound/metal furnace 192",
+            "playsound=sound/metal furnace 192",
             "animate=working 35000",
-            "play_sound=sound/metal ironping 80",
+            "playsound=sound/metal ironping 80",
             "produce=iron"
          }
       },
@@ -87,9 +87,9 @@ tribes:new_productionsite_type {
             "sleep=10000",  -- penalty for unavailable gold_ore
             "consume=coal gold_ore",
             "sleep=22000",
-            "play_sound=sound/metal furnace 192",
+            "playsound=sound/metal furnace 192",
             "animate=working 35000",
-            "play_sound=sound/metal goldping 80",
+            "playsound=sound/metal goldping 80",
             "produce=gold"
          }
       },

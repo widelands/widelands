@@ -71,7 +71,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs spidercloth",
             "sleep=10000",
             "consume=spider_silk",
-            "play_sound=sound/mill weaving 120",
+            "playsound=sound/mill weaving 120",
             "animate=working 20000",
             "sleep=17000",
             "produce=spidercloth"
@@ -85,7 +85,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs tabard",
             "sleep=10000",
             "consume=spider_silk",
-            "play_sound=sound/mill weaving 120",
+            "playsound=sound/mill weaving 120",
             "animate=working 26000",
             "sleep=19000",
             "produce=tabard"
@@ -99,7 +99,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs tabard_golden",
             "consume=spider_silk gold_thread",
             "sleep=15000",
-            "play_sound=sound/mill weaving 120",
+            "playsound=sound/mill weaving 120",
             "animate=working 30000",
             "sleep=15000",
             "produce=tabard_golden"

@@ -3,12 +3,13 @@
 # 
 # Translators:
 # ks k, 2018
+# ks k, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-06-30 20:28+0000\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-07 09:29+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -24,43 +25,43 @@ msgstr "숲 지킴이의 오두막 두곳 짓기"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:25
 msgid "Build a ranger’s hut next to each lumberjack’s hut."
-msgstr "각 사육장의 오두막 옆에 레인저의 오두막을 세우십시오."
+msgstr "나무꾼의 오두막 옆에 각각 숲 지킴이의 오두막을 세우십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:26
 msgid ""
 "Naturally, trees only grow at a slow rate. To make sure you have enough "
 "logs, you have to build rangers."
-msgstr ""
+msgstr "당연히 나무는 느린 속도로 자랍니다. 통나무가 충분하게 확보하려면 숲 지킴이를 만들어야합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:32
 msgid "Expand north-east and build a quarry"
-msgstr ""
+msgstr "북동쪽으로 확장하고 채석장을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:34
 msgid "Expand north-east to the rocks"
-msgstr ""
+msgstr "북동쪽 암석지대를 확장하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:35
 msgid ""
 "Build military buildings (like sentries or barriers) to expand your "
 "territory."
-msgstr ""
+msgstr "영토 확장을 위해 군대 건물 (보초 또는 장벽같은것)을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:36
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr ""
+msgstr "북동쪽 암석지대로 이동하여 채석장을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Start building mines on the mountain"
-msgstr ""
+msgstr "산에 광산을 건설하기 시작하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:43
 msgid "Build coal and iron mines"
-msgstr ""
+msgstr "석탄과 철광석 광산을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:44
 msgid "Build a coal mine and an iron mine."
-msgstr ""
+msgstr "석탄과 철광석 광산을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:45
 msgid ""
@@ -70,7 +71,7 @@ msgid ""
 " will search for ores; otherwise, they would search for water. Then build a "
 "mine for both kinds of resources that they will find, choosing the "
 "appropriate mine to be built:"
-msgstr ""
+msgstr "그러기 위해서는, 산악지대의 동쪽에 있는 산의 측면에 깃발을 세우십시오. 산의 목초지는 아닙니다. 새로운 깃발을 클릭하면 지질학자를 그곳으로 보낼 수 있습니다. 이 깃발이 산 위에 있기 때문에 지질 학자들은 광석을 찾을 것입니다. 그렇지 않으면, 그들은 물을 찾을 것입니다. 그런 다음, 광산을 건설할 할 적절한 장소를 선택하여, 그들이 찾을 두종류의 자원에대한 광산을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:46
 msgid "a bit of coal"
@@ -116,40 +117,40 @@ msgstr "여기는 아무것도 발견되지 않았음"
 msgid ""
 "Mines can only be built on mountain terrain. Suitable places for mines are "
 "displayed as orange mine symbols."
-msgstr ""
+msgstr "광산은 산악 지형에서만 건설할 수 있습니다. 광산에 적합한 장소는 주황색 광산 기호로 표시됩니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:61
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "광부들에게 식량을 제공하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:63
 msgid "Build a hunter’s hut, a gamekeeper’s hut and a tavern"
-msgstr ""
+msgstr "사냥꾼의 오두막, 짐승 키우미의 오두막 및 선술집을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:64
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "일하기 위해서는 광부들에게는 식량이 필요합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:65
 msgid ""
 "A hunter can hunt down animals, while a gamekeeper prevents them from "
 "becoming extinct. The meat is then processed in a tavern into lunches for "
 "your miners."
-msgstr ""
+msgstr "사냥꾼은 동물을 사냥 할 수 있지만 게임 사수는 동물이 사멸하는 것을 막습니다. 그 고기는 선술집에서 광부를위한 점심으로 가공됩니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:65
 msgid ""
 "This is only the first example of a ware which has to be refined before "
 "being used in a secondary building – others will follow."
-msgstr ""
+msgstr "이것은 보조 건물에서 사용되기 전에 반드시 다듬어야 하는 제품의 첫번째 예이며, 다른 것들도 마찬가지입니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:70
 msgid "Bake bread"
-msgstr ""
+msgstr "빵을 굽습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:72
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "우물, 농장, 제과점을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:73
 msgid ""
@@ -157,39 +158,39 @@ msgid ""
 "farms. The wheat of the farms has to be processed with water in a bakery "
 "before it becomes edible. You can obtain water by building a well on a spot "
 "where your geologists have found a water source."
-msgstr ""
+msgstr "다른 종류의 음식을 생산하는 다른 방법은 어부와 농장입니다. 농장의 밀은 먹을 수 있게 되기 전에 빵집에서 물로 가공되어야 합니다. 지질학자들이 수원을 발견한 지점에 우물을 건설하면 물을 얻을 수 있습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:78
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "광산 자원을 정제하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:80
 msgid "Build a smelting works"
-msgstr ""
+msgstr "제련 공장을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:81
 msgid ""
 "The iron ore your miners dig up is not usable yet – it has to be melted into"
 " iron first."
-msgstr ""
+msgstr "광부가 파낸 철광석은 아직 쓸모가 없습니다. 먼저 철분으로 녹여야합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance buildings and build a micro brewery"
-msgstr ""
+msgstr "건물을 보강하고 소형양조장을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr ""
+msgstr "광산과 선술집을 보강하고 소형양조장을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr ""
+msgstr "탄광이나 철광석을 깊은 광산으로 보강하고 주점을 여관으로 보강하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Also build a micro brewery."
-msgstr ""
+msgstr "소형양조장도 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -197,7 +198,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr ""
+msgstr "정상적인 광산은 그 아래에 있는 모든 자원의 약 1/3 파기 할 수 있으며, 제대로 작동하려면 광산을 보강해야합니다. 건물을 보강 시키려면 건물을 선택한 다음 나타나는 창에서 해당 버튼을 클릭하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
@@ -205,7 +206,7 @@ msgid ""
 "become more advanced workers, who are necessary to operate the enhanced "
 "buildings. Do not enhance a building before you have enough advanced workers"
 " to operate the advanced building!"
-msgstr ""
+msgstr "노동자는 성공적인 일을 통해 경험을 쌓습니다. 충분한 경험을 통해 고급 건물을 운영하는데 필요한 고급 직원이 됩니다. 고급 건물을 운영 할 수 있는 고급 인력이 충분하기 전에 건물을 향상시키지 마십시오!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:93
 msgid ""
@@ -213,20 +214,20 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr ""
+msgstr "그런 건물은 보통 그 건물의 기본적인 종류보다 더 큰 요구가 있습니다. 이를테면, 깊은 광산은 식량 대신 간식이 필요합니다. 피타빵과 두 번째 종류의 음식 (고기 또는 생선) 과 맥주에서 간식을 생산하기 위해서는 선술집을 여관으로 향상시켜야합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr ""
+msgstr "더 큰 광산은 조금 더 빨리 작동하고, 더 작은 광산은 더 싼 음식을 필요로합니다. 어느 전략을 선호하는지는 당신에게 달려 있습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:101
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:103
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "목재 경화제 만들기"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:102
 msgid ""
@@ -235,69 +236,69 @@ msgid ""
 "to be refined to blackwood by a wood hardener first. Always remember to "
 "build a wood hardener before you run out of blackwood, as without it you "
 "cannot expand."
-msgstr ""
+msgstr "모든 군대를 포함하여 더 크고 우수한 건물은 더 나은 건축 자재를 필요로 합니다. 그것들은 단순한 통나무만으로는 만들 수 없습니다 통나무는 목재 경화제에 의해 먼저 검은 나무로 정제되어야합니다. 블랙우드가 바닥 나기 전에 목재 경화제를 만드는 것을 잊지 마십시오. 그렇지 않으면 영토확장을 할 수 없습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:108
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "석회 가마와 석탄 경제를 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:110
 msgid ""
 "Build a lime kiln fed by a well, and by a charcoal kiln or by a coal mine"
-msgstr ""
+msgstr "우물이나 숯 가마 또는 탄광을 통해 공급되는 석회 가마를 건설합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:111
 msgid ""
 "Better buildings may also require other improved materials besides "
 "blackwood. One of these is grout, which is produced out of granite, water "
 "and coal by a lime-burner."
-msgstr ""
+msgstr "더 좋은 건물들은 블랙우드 외에 다른 개선된 재료들도 필요로 할 수 있습니다. 그것들 중 하나는 화강암, 물 그리고 석탄으로 만들어진 묶음입니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:112
 msgid ""
 "You can obtain water by building a well upon a water source, which your "
 "geologists can discover when you send them to any flag that is not on a "
 "mountain."
-msgstr ""
+msgstr "산이 아닌 아무런 깃발에 지질학자들을 보내면 그들은 수원을 발견할 수 있습니다. 그런 수원에 우물을 세우면 물을 얻을수 있습니다. "
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:113
 msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr ""
+msgstr "지질학자를 불러 물을 찾게 하려면, 검색할 영역에 있는 깃발을 클릭한 다음 '탐사지역에 지질학자 보내기' 버튼을 클릭하세요."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:114
 msgid ""
 "Coal can be obtained by building a charcoal kiln or a coal mine. Burning "
 "charcoal out of logs is slow. You should only build a charcoal kiln when no "
 "coal is available."
-msgstr ""
+msgstr "석탄은 가마나 탄광을 건설하여 얻을 수 있습니다. 통나무에서 숯을 굽는 것은 속도가 느립니다. 석탄을 사용할수 없을 경우에만 숯 가마를 건설해야 합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:115
 msgid ""
 "Build a lime kiln and a well. Additionally, build either a charcoal kiln or "
 "a coal mine for coal supply."
-msgstr ""
+msgstr "석회 가마와 우물을 건설하고, 석탄 공급을 위해 숯 가마나 석탄 탄광을 건설하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:120
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:122
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:124
 msgid "Build a reed yard"
-msgstr ""
+msgstr "갈대밭 짓기"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:123
 msgid ""
 "The third material necessary for improved buildings is thatch reed, used to "
 "cover roofs. Thatch reed is planted by a gardener around his building, the "
 "reed yard."
-msgstr ""
+msgstr "향상된 건물을 건설하는데 필요한 세번째 재료는 지붕을 덮는 데 사용되는 갈대 초가 지붕입니다. 갈대 초가 지붕은 그의 건물인 갈대밭 주변 정원사가 심습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:134
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "소 농장 짓기"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:132
 msgid ""
@@ -305,49 +306,49 @@ msgid ""
 "enough to transport goods swiftly. Traffic jams are the consequence. Such "
 "roads therefore employ a second carrier: an ox that helps to carry the "
 "wares. This doubles the transport capacity."
-msgstr ""
+msgstr "도로에서 오랫동안 무거운 짐을 싣고 있을 때, 한 운송노동자는 화물을 신속하게 운송할 수 없습니다. 그 결과로 교통 정체가 발생합니다. 따라서 이러한 도로는 제 2의 운송자를 고용해야합니다. 물품을 운반하는 것을 돕는 황소입니다. 이로인해 수송 능력은 두배로 늘어납니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:133
 msgid "Oxen are bred in cattle farms out of wheat and water."
-msgstr ""
+msgstr "소들은 밀과 물을 사용해서 사육됩니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:143
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:155
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:167
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:179
 msgid "The Story Begins"
-msgstr ""
+msgstr "이야기의 시작"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:144
 msgid "Thron sighs…"
-msgstr ""
+msgstr "쓰론의 한숨…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:146
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and "
 "dark."
-msgstr ""
+msgstr "몇달이 지났지만, 우리는 여전히 숲이 오래 되고 어두운 곳에 숨어 있어요."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:149
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
-msgstr ""
+msgstr "나의 전사들은 낮에는 사냥을 하고 밤에는 깨어 있습니다. 고대의 나무들 사이의 먼곳에서 울려 퍼지는 잔인한 도살의 소리가 들립니다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:158
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
+msgstr "여기서 수마일 떨어진 곳에서 알순란을 삼켜버릴듯이 타오르는 불길을 볼 수 있어요."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:161
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
-msgstr ""
+msgstr "어둠 속에서 붉은 빛이 번쩍이고 악몽 속에서도 나를 괴롭히는 전쟁 북 소리에 맞춰 춤을 춥니다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:170
@@ -355,7 +356,7 @@ msgid ""
 "My father’s bones rest peacefully in the ground on which he once ended the "
 "senseless spilling of blood that had arisen amongst us. It pains me that his"
 " peace only endured for one generation."
-msgstr ""
+msgstr "나의 아버지의 뼈는 우리들 사이에서 일어난 무의미한 피의 유출을 끝낸 적이 있었던 땅에서 평온하게 쉬고 있습니다. 그의 평화가 한세대 밖에 지속되지 않은 것이 가슴 아프다고 말했습니다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:173
@@ -364,7 +365,7 @@ msgid ""
 "me in these dark times. He keeps my spirits high and those of my warriors "
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
-msgstr ""
+msgstr "볼드레쓰, 그는 나의 충성스러운 동반자이자 친구는 이 어두운 시기에 나에게 평화와 위안의 원천입니다. 그는 내 영혼을 높게 하고, 나의 전사들을 깨어 있게 하여 탐욕과 절망이 우리 사이의 유대를 파괴하는 것을 막습니다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:182
@@ -372,23 +373,23 @@ msgid ""
 "As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do "
 "wait."
-msgstr ""
+msgstr "아버지가 내게 말씀하신 대로, 적당한 때가 오기 전에 잠들거나 죽지 않으려고 애쓰면서, 싸우고, 거짓말하고 기다려야 할 때가 있습니다. 그래서 나는 정말 기다립니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:188
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:201
 msgid "Thron is Contemplating the War"
-msgstr ""
+msgstr "쓰론은 전쟁을 설명하고 있습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:189
 msgid "Thron is shaking his head…"
-msgstr ""
+msgstr "쓰론이 머리를 흔들고있습니다…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:191
 msgid ""
 "Yet the war goes on. More and more of our brothers and sisters flee the "
 "brutal war raging in the capital beneath the trees."
-msgstr ""
+msgstr "그러나 전쟁은 계속됩니다. 우리 형제 자매 중 점점 더 많은 사람들이 나무 밑의 수도에서 잔인한 전쟁을 피합니다. 그러나 전쟁은 계속되고 있다. 점점 더 많은 형제 자매들이 나무 아래 수도에서 일어난 잔혹한 전쟁에서 벗어나고 있습니다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:194
@@ -398,7 +399,7 @@ msgid ""
 " Yet whenever I close my eyes, I see the fortress my father built consumed "
 "by flames. The Throne Among the Trees, the symbol of unity and peace among "
 "our kin, became the wedge that drives us apart."
-msgstr ""
+msgstr "그들이 우리 친척들의 행동에 대해 이야기하는 것은 듣기 슬픈 일입니다. 저는 잠에서 깨어 있고, 불안하며, 제가 생각했던 것보다 더 피곤한 채 밤을 보냈습니다. 하지만 나는 눈을 감을 때마다 아버지께서 건설하신 성이 화염에 휩싸인것을 봅니다. 우리의 동족 간의 화합과 평화의 상징인 나무들 사이의 왕좌는 우리를 갈라놓는 쐐기가 되었습니다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:204
@@ -410,18 +411,18 @@ msgid ""
 "brothers will ever gain and hold control over the wooden throne, none of the"
 " tribes will be strong enough to subdue the other. There will be no end to "
 "this slaughter, unless… is this it? As father told me?"
-msgstr ""
+msgstr "오늘 나의 사냥꾼들은 숲 속에 숨어서 있던 남자, 여자, 그리고 어린 아이들 무리를 내 앞에 데려왔습니다. 본능에 의해 지배되는 야생 동물에 불과했을 때, 예전처럼 서로 싸우는 부족들에 둘러쌓여 분노하는 전쟁, 증오, 복수에서 도망쳐 숲속에 숨어있던 무리였습니다.내 형제들 중 누구도 나무 왕좌를 차지하지 못할 것이고, 어떤 부족도 다른 부족을 제압할 만큼 강하지 못할 것입니다.이 학살, 끝이 없을겁니다… 지금이 그때입니까? 아버지가 제게 말씀하셨던"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:207
 msgid ""
 "To rise against whoever threatens our very existence, even though it may be "
 "one of your own blood or mind?"
-msgstr ""
+msgstr "우리의 생명을 위협하는 자에게 대항하여 일어서는 것이 여러분의 피와 마음 가운데 하나일 수도 있습니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:213
 msgid "Thron is Considering the Future"
-msgstr ""
+msgstr "쓰론은 미래를 고려하고 있습니다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:216
@@ -444,11 +445,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:224
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "누군가 당신에게 다가옵니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:225
 msgid "An old man says…"
-msgstr ""
+msgstr "노인이 말합니다…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:227
@@ -476,11 +477,11 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:459
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:470
 msgid "The Advisor"
-msgstr ""
+msgstr "조언자"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:237
 msgid "Khantrukh notes…"
-msgstr ""
+msgstr "왕트투크는 주목했습니다…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:239
@@ -502,16 +503,16 @@ msgstr ""
 msgid ""
 "So, in order to replace the trees we chop down, we should build some "
 "ranger’s huts, preferably close to the lumberjack’s huts."
-msgstr ""
+msgstr "그래서 우리가 벤 나무를 대체하기 위해, 숲지킴이 근처에 가급적이면 나무꾼의 오두막을 지어야합니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:251
 msgid "In the Night"
-msgstr ""
+msgstr "밤에"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:252
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:266
 msgid "Thron says…"
-msgstr ""
+msgstr "쓰론이 말합니다…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:254
@@ -530,7 +531,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:265
 msgid "At the Tomb"
-msgstr ""
+msgstr "무덤에서"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:268
@@ -549,11 +550,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:279
 msgid "The Other Day"
-msgstr ""
+msgstr "며칠 전"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:280
 msgid "Thron says thoughtfully…"
-msgstr ""
+msgstr "쓰론은 신중하게 말했습니다…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:282
@@ -573,11 +574,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:290
 msgid "The Oath"
-msgstr ""
+msgstr "맹세"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:291
 msgid "Thron looks furious…"
-msgstr ""
+msgstr "트론은 화가 난 것처럼 보인다…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:293
@@ -602,7 +603,7 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:437
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:448
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "당신의 충성스런 동반자"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:302
 msgid "Brave Boldreth steps to your side…"
@@ -619,7 +620,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:310
 msgid "Khantrukh joins in…"
-msgstr ""
+msgstr "왕트루크가 합류합니다…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:312
@@ -631,7 +632,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:318
 msgid "Boldreth jumps up…"
-msgstr ""
+msgstr "볼드레스가 뛰어오릅니다…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:320
@@ -644,25 +645,25 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:327
 msgid "Khantrukh grumbles…"
-msgstr ""
+msgstr "왕트루크는 투덜거립니다…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:329
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "노인? 무례한 녀석!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:335
 msgid "Khantrukh nods satisfied…"
-msgstr ""
+msgstr "왕트루크는 고개를 끄덕입니다…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:336
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "드디어! 이 바위들은 당분간 지속될것입니다."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
 msgid "Boldreth exclaims…"
-msgstr ""
+msgstr "볼드레스가 소리 칩니다…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:343
@@ -681,7 +682,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:352
 msgid "Boldreth laughs…"
-msgstr ""
+msgstr "볼드레스는 비웃었습니다…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:354
@@ -693,11 +694,11 @@ msgstr ""
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:357
 msgid "It might even be enough to…"
-msgstr ""
+msgstr "그것은 심지어 충분할 수도 있습니다…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:362
 msgid "Khantrukh interrupts…"
-msgstr ""
+msgstr "왕트루크는 방해합니다…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:364
@@ -710,7 +711,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:370
 msgid "Boldreth nods…"
-msgstr ""
+msgstr "볼드레스는 고개를 끄덕였습니다…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:372
@@ -772,11 +773,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:408
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "아름다운 아침"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:409
 msgid "Thron recognizes…"
-msgstr ""
+msgstr "쓰론은 알고 있습니다…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:411
@@ -795,7 +796,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:419
 msgid "Boldreth remarks…"
-msgstr ""
+msgstr "볼드레스는 말한다…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:421
@@ -809,7 +810,7 @@ msgstr ""
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:427
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:478
 msgid "Khantrukh speaks…"
-msgstr ""
+msgstr "왕트루크는 말한다…"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:429
@@ -828,7 +829,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:438
 msgid "Boldreth seems concerned…"
-msgstr ""
+msgstr "볼드레스는 걱정이 되는 것 같다…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:440
@@ -841,11 +842,11 @@ msgstr ""
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:443
 msgid "We need a wood hardener, and we need one now!"
-msgstr ""
+msgstr "우린 목재 경화제가 필요해, 그리고 지금 필요해!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:449
 msgid "Boldreth smiles…"
-msgstr ""
+msgstr "볼드레스는 미소 짓는다…"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:451
@@ -894,7 +895,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:477
 msgid "We Need Oxen!"
-msgstr ""
+msgstr "우리는 황소가 필요합니다!"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:480
@@ -915,13 +916,13 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
 msgid "Mission Complete"
-msgstr ""
+msgstr "임무 완료"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:489
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:504
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:527
 msgid "Thron speaks…"
-msgstr ""
+msgstr "쓰론이 말한다…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:491
@@ -946,7 +947,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid "Victory"
-msgstr ""
+msgstr "승리"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:499
 msgid ""
@@ -956,7 +957,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "보름달의 밤"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:506
@@ -976,11 +977,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Another Cold Day"
-msgstr ""
+msgstr "또 다른 추운 날"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:514
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "쓰론은 걱정스러워 보입니다…"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:516
