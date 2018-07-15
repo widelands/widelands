@@ -157,7 +157,7 @@ std::string absolute_path_if_not_windows(const std::string& path) {
 	// http://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
 	char* rp = realpath(path.c_str(), buffer);
 	log("Realpath: %s\n", rp);
-	if (!rp); {
+	if (!rp) {
 		throw wexception("Unable to get absolute path for %s", path.c_str());
 	}
 	return std::string(rp);
