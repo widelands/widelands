@@ -2,14 +2,16 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# ks k, 2018
+# ks k, 2018
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-08 14:24+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,18 +82,18 @@ msgstr "당신은 보통 하나의 본부을 시작할 겁니다. 이 앞에 푸
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "우리는 나무꾼의 오두막을 위한 좋은 장소를 찾아야 합니다. 더 쉽게 하기 위해 '건물 공간 표시'를 활성화할 수 있습니다. 이 작업은 두가지 방법으로 수행할 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Press the Space bar to toggle them, or"
-msgstr ""
+msgstr "스페이스 바를 눌러 전환하거나,"
 
 #. TRANSLATORS: List item. Has an image of the button next to it.
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr ""
+msgstr "화면 아래쪽에서 '건물 공간 표시' 단추를 클릭합니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -113,7 +115,7 @@ msgstr "건설 공간에 대한 기호들이 켜져 있는 땅을 통해 어떤 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Right-click on this window now and then give it a try."
-msgstr ""
+msgstr "지금 이 창을 마우스 오른쪽 단추로 클릭한 다음 시도해 보십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Lumberjack’s Spot"
@@ -274,14 +276,14 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "건설 현장을 클릭하면, 창이 열립니다. 회색으로 바랜 상품은 아직 없는 용품입니다. 이 건설 현장의 진행도도 볼 수 있습니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
 "To close the window, simply right-click on it. All windows in Widelands can "
 "be closed that way, except the ones with instructions, like this one. Try it"
 " out!"
-msgstr "창을 닫으려면, 그냥 창에 우클릭을 하세요. Widelands의 모든 창은 그런 방식으로 닫을 수 있습니다만, 이와 같은, 설명만 빼고 말입니다. 시도해 보십시오!"
+msgstr "창을 닫으려면, 그냥 창에 우클릭을 하세요. 와이드랜드의 모든 창은 그런 방식으로 닫을 수 있습니다만, 이와 같은, 설명만 빼고 말입니다. 시도해 보십시오!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:167
 msgid "The Lumberjack’s Hut is Done"
@@ -598,14 +600,14 @@ msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "도로를 배치하는 동안 경사면에 신경을 써서 잇점을 활용하십시오. 또한 도로를 더 잘 공유하려면 될수 있데로 도로를 짧게 유지하고 도로 구역에서 가능한 한 많은 깃발을 배치하는 것을 잊지 마십시오."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:315
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "도로를 끝냄과 동시에 Ctrl또는 Shift+Ctrl키를 누르면, 깃발이 자동으로 배치됩니다."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."

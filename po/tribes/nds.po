@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-07-05 18:35+0000\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-12 07:28+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -29,32 +29,32 @@ msgstr "Markt"
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
 msgctxt "atlanteans_building"
 msgid "Castle"
-msgstr "Slott"
+msgstr "Slött"
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:92
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:40
 msgid "Your soldiers have occupied your castle."
-msgstr "Diene Soldaten hebben dien Slott besett."
+msgstr "Diene Soldaten hebben dien Slött besett."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:93
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:41
 msgid "Your castle discovered an aggressor."
-msgstr "Dien Slott hett Feinde to sehn kregen."
+msgstr "Dien Slött hett Feinde to sehn kregen."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:94
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:42
 msgid "Your castle is under attack."
-msgstr "Feinde griepen dien Slott an."
+msgstr "Feinde griepen dien Slött an."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:95
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:43
 msgid "The enemy defeated your soldiers at the castle."
-msgstr "De Feinde hebben diene Soldaten in eenem Slott manntjet."
+msgstr "De Feinde hebben diene Soldaten in eenem Slött manntjet."
 
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:96
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:44
 msgid "Your soldiers defeated the enemy at the castle."
-msgstr "Diene Soldaten hebben de Feinde in eenem Slott manntjet."
+msgstr "Diene Soldaten hebben de Feinde in eenem Slött manntjet."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/guardhall/init.lua:7
@@ -367,7 +367,7 @@ msgstr "Diene Soldaten hebben de Feinde in eenem Wachters-Kamerke manntjet."
 #: ../../data/tribes/buildings/militarysites/empire/castle/init.lua:7
 msgctxt "empire_building"
 msgid "Castle"
-msgstr "Slott"
+msgstr "Slött"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/empire/fortress/init.lua:7
@@ -1377,7 +1377,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomslager dat warkt bi düsse Boomslageree hett keene Bomen tum Osslaan. Überlegg di, of du de Huus plattrieten oder ofbrannen willt, oder bau een Försterhuus."
+msgstr "De Boomslager dat warkt bi düsse Boomslageree hett keene Bomen tum Osslaan. Überlegg di, of du dat Huus plattrieten oder ofbrannen willt, oder bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:7
@@ -1724,7 +1724,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "De Boomhauer dat warkt bi düsse Boomhaueree hett keene Bomen tum Osslaan. Überlegg di, of du de Huus plattrieten oder ofbrannen willt, oder bau een Boomplanteree."
+msgstr "De Boomhauer dat warkt bi düsse Boomhaueree hett keene Bomen tum Osslaan. Überlegg di, of du dat Huus plattrieten oder ofbrannen willt, oder bau een Boomplanteree."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
@@ -2117,7 +2117,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomhauer dat warkt bi düsse Boomhaueree hett keene Bomen tum Osslaan. Überlegg di, of du de Huus plattrieten oder ofbrannen willt, oder bau een Försterhuus."
+msgstr "De Boomhauer dat warkt bi düsse Boomhaueree hett keene Bomen tum Osslaan. Überlegg di, of du dat Huus plattrieten oder ofbrannen willt, oder bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:7
@@ -2189,18 +2189,18 @@ msgstr "Swientjes to tüchten"
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:7
 msgctxt "empire_building"
 msgid "Quarry"
-msgstr "Flintslagerhuus"
+msgstr "Flinthauerhuus"
 
 #. TRANSLATORS: Completed/Skipped/Did not start quarrying marble because ...
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:67
 msgid "quarrying marble"
-msgstr "Flint to slagen"
+msgstr "Marmel to slagen"
 
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:80
 msgctxt "empire_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "De Flintslager dat wurkt bi düsse Flintslagerhuus het keene Stenen tum Ofboen."
+msgstr "De Flinthauer dat wurkt bi düsse Flinthauerhuus het keene Stenen tum Ofboen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/sawmill/init.lua:7
@@ -2376,7 +2376,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "De Fisker dat warkt bi düsse Fissbueree hett keene Polen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Fissbueree all's hett wat se tum Arbeiden bruukt. Oder überlegg di, of du de Huus ofbrannen oder plattrieten willt."
+msgstr "De Fisker dat warkt bi düsse Fissbueree hett keene Polen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Fissbueree all's hett wat se tum Arbeiden bruukt. Oder überlegg di, of du dat Huus ofbrannen oder plattrieten willt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
@@ -2464,7 +2464,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr "De Imker dat warkt bi düsse Imkeree hett keene Felden oder Busken mit Blössems in de Naberskupp. Bau een Buurderee oder Buskenplanteree oder überlegg di, of du de Huus plattrieten oder ofbrannen willt."
+msgstr "De Imker dat warkt bi düsse Imkeree hett keene Felden oder Busken mit Blössems in de Naberskupp. Bau een Buurderee oder Buskenplanteree oder überlegg di, of du dat Huus plattrieten oder ofbrannen willt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:7
@@ -2548,7 +2548,7 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr "De Lehmgraver dat warkt bi düsse Lehmkuhl hett keen Klei tum utbuddeln. Überlegg di, of du de Huus plattrieten oder ofbrannen un annerwegens wedde hensetten willt."
+msgstr "De Lehmgraver dat warkt bi düsse Lehmkuhl hett keen Klei tum utbuddeln. Überlegg di, of du dat Huus plattrieten oder ofbrannen un annerwegens wedde hensetten willt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:7
@@ -2602,7 +2602,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "De Früchtenpottjer dat warkt bi düsse Früchtenpottjeree hett keene Busken mit Früchten in de Naberskupp. Bau een Buskenplanteree oder überlegg di, of du de Huus plattrieten oder ofbrannen willt."
+msgstr "De Früchtenpottjer dat warkt bi düsse Früchtenpottjeree hett keene Busken mit Früchten in de Naberskupp. Bau een Buskenplanteree oder überlegg di, of du dat Huus plattrieten oder ofbrannen willt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:7
@@ -2751,13 +2751,13 @@ msgstr "Hönnigbeer to broen"
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:7
 msgctxt "frisians_building"
 msgid "Quarry"
-msgstr "Flintslagerhuus"
+msgstr "Flinthauerhuus"
 
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:72
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr "De Flintslager dat wurkt bi düsse Flintslagerhuus het keene Stenen tum Ofboen."
+msgstr "De Flinthauer dat wurkt bi düsse Flinthauerhuus het keene Stenen tum Ofboen."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:7
@@ -2941,7 +2941,7 @@ msgid ""
 "The woodcutter working at this woodcutter’s house can’t find any trees in "
 "his work area. You should consider dismantling or destroying the building or"
 " building a forester’s house."
-msgstr "De Boomslager dat warkt bi düsse Boomslageree hett keene Bomen tum Ofslaan. Überlegg di, of du de Huus plattrieten oder ofbrannen willt, oder bau een Försterhuus."
+msgstr "De Boomslager dat warkt bi düsse Boomslageree hett keene Bomen tum Ofslaan. Überlegg di, of du dat Huus plattrieten oder ofbrannen willt, oder bau een Försterhuus."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:84

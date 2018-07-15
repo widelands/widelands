@@ -266,6 +266,7 @@ void Panel::set_size(const int nw, const int nh) {
 void Panel::set_pos(const Vector2i n) {
 	x_ = n.x;
 	y_ = n.y;
+	position_changed();
 }
 
 /**
