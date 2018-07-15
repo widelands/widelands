@@ -44,7 +44,7 @@ const FlagDescr& Flag::descr() const {
 }
 
 /**
- * Create the flag. Initially, it doesn't have any attachments.
+ * A bare flag, used for testing only.
 */
 Flag::Flag()
    : PlayerImmovable(g_flag_descr),
@@ -106,7 +106,7 @@ void Flag::load_finish(EditorGameBase& egbase) {
 /**
  * Create a flag at the given location
 */
-Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords)
+Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, Economy* eco)
    : PlayerImmovable(g_flag_descr),
      building_(nullptr),
      ware_capacity_(8),
@@ -124,17 +124,23 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords)
 	upcast(Game, game, &egbase);
 
 	if (game) {
-		//  we split a road, or a new, standalone flag is created
-		(road ? road->get_economy() : new Economy(*owning_player))->add_flag(*this);
-
-		if (road)
-			road->presplit(*game, coords);
+		if (eco) {
+			// We're saveloading
+			eco->add_flag(*this);
+		} else {
+			//  we split a road, or a new, standalone flag is created
+			(road ? road->get_economy() : owning_player->create_economy())->add_flag(*this);
+			if (road) {
+				road->presplit(*game, coords);
+			}
+		}
 	}
 
 	init(egbase);
 
-	if (road && game)
+	if (!eco && road && game) {
 		road->postsplit(*game, *this);
+	}
 }
 
 void Flag::set_flag_position(Coords coords) {
@@ -504,6 +510,47 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
 	wake_up_capacity_queue(game);
 
 	return ware;
+}
+
+/**
+ * Accelerate potential promotion of roads adjacent to a newly promoted road.
+ */
+void Flag::propagate_promoted_road(Road* const promoted_road) {
+	// Abort if flag has a building attached to it
+	if (building_) {
+		return;
+	}
+
+	// Calculate the sum of the involved wallets' adjusted value
+	int32_t sum = 0;
+	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+		Road* const road = roads_[i];
+		if (road && road != promoted_road) {
+			sum += kRoadMaxWallet + road->wallet() * road->wallet();
+		}
+	}
+
+	// Distribute propagation coins in a smart way
+	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
+		Road* const road = roads_[i];
+		if (road && road->get_roadtype() != RoadType::kBusy) {
+			road->add_to_wallet(0.5 * (kRoadMaxWallet - road->wallet()) *
+			                    (kRoadMaxWallet + road->wallet() * road->wallet()) / sum);
+		}
+	}
+}
+
+/**
+ * Count only those wares which are awaiting to be carried along the same road.
+*/
+uint8_t Flag::count_wares_in_queue(PlayerImmovable& dest) const {
+	uint8_t n = 0;
+	for (int32_t i = 0; i < ware_filled_; ++i) {
+		if (wares_[i].nextstep == &dest) {
+			++n;
+		}
+	}
+	return n;
 }
 
 /**

@@ -2,6 +2,7 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# Benedikt Straub <benedikt-straub@web.de>, 2018
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # GunChleoc, 2014-2015
@@ -9,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
-"PO-Revision-Date: 2018-05-07 10:19+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-07 14:25+0000\n"
+"Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +47,7 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower_high/helptexts.lua:16
 msgctxt "building"
 msgid "Garrisons soldiers to expand your territory."
-msgstr ""
+msgstr "Brengt Soldaten unner, um dien Gewest to vergrotern."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:24
@@ -78,13 +79,13 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr ""
+msgstr "Wenn du nich genoog Soldaten hest, um neie Soldateree-Boen to besetten, kannst du de Tahl vun Soldaten mit de Piel-runner-Knoop minnern. Du kannst ok eenen Soldat anklicken, um hüm wegtostüren."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:16
 msgctxt "building"
 msgid "A new building is being built at this construction site."
-msgstr ""
+msgstr "An düsser Baustee word een neies Huus baut."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16
@@ -93,7 +94,7 @@ msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
 " resources that were used during this building’s construction to your "
 "tribe’s stores."
-msgstr ""
+msgstr "Hier word een Huus plattreten, um eenige Waren torüggtokriegen, de tum Bauen verwendt wurren."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -101,13 +102,13 @@ msgctxt "atlanteans_building"
 msgid ""
 "Forges shields that are used for training soldiers’ defense in the "
 "labyrinth."
-msgstr ""
+msgstr "Smeedt Schilden för de Verteidigung-Öven vun Soldaten in Dwaalwegen."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/bakery/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Bakes bread to feed the scouts and miners and to train soldiers."
-msgstr ""
+msgstr "Backt Brood för de Bargwarkskeerls un Bespejers un för Soldaten bi'm Öven."
 
 #. TRANSLATORS: Lore helptext for a building
 #. TRANSLATORS: Lore author helptext for a building
@@ -115,13 +116,13 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/barracks/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Equips recruits and trains them as soldiers."
-msgstr ""
+msgstr "Rüst Lehrwichter ut un maakt se to Soldaten."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Sows and harvests blackroot."
-msgstr ""
+msgstr "Sait un arntet Swartwuddels."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:26
@@ -129,7 +130,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "The blackroot farmer needs %1% on average to sow and harvest a bundle of "
 "blackroot."
-msgstr ""
+msgstr "De Swartwuddel-Buur bruukt ut un dör %1% um een Bünsel Swartwuddels to saien un to arnten."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/charcoal_kiln/helptexts.lua:16
@@ -138,7 +139,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:13
 msgctxt "building"
 msgid "Burns logs into charcoal."
-msgstr ""
+msgstr "Brannt Holtköhle ut Boomstammen."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/helptexts.lua:16
@@ -163,19 +164,19 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Sows and harvests corn."
-msgstr ""
+msgstr "Sait un arntet Mais."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:26
 msgctxt "atlanteans_building"
 msgid "The farmer needs %1% on average to sow and harvest a sheaf of corn."
-msgstr ""
+msgstr "De Buur bruukt ut un dör %1% um een Bünsel Mais to saien un to arnten."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds fish."
-msgstr ""
+msgstr "Tüchtet Fiske."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
@@ -1657,7 +1658,7 @@ msgstr ""
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
-msgid "A brickmaker arguing with a builder"
+msgid "A clay digger arguing with a builder"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2538,7 +2539,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
-"explained to you how to hold a curved sword."
+"explained to you how to hold a broadsword."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -4988,7 +4989,7 @@ msgstr ""
 #: ../../data/tribes/wares/shovel/helptexts.lua:12
 msgctxt "frisians_ware"
 msgid ""
-"They are used by berry and reed farmers as well as foresters. Brickmakers "
+"They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
 msgstr ""
 
@@ -5095,12 +5096,12 @@ msgid ""
 "spidercloth for their construction."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a ware: Curved Sword
-#: ../../data/tribes/wares/sword_curved/helptexts.lua:4
+#. TRANSLATORS: Helptext for a ware: Broadsword
+#: ../../data/tribes/wares/sword_broad/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"The curved sword is the weapon used by level 2 soldiers. Level 5 soldiers "
-"are equipped with two curved swords."
+"The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
+"equipped with a broadsword and a double-edged sword."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
@@ -5116,7 +5117,7 @@ msgstr ""
 msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
-"equipped with two long swords."
+"equipped with a long and a double-edged sword."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Short sword
@@ -5289,7 +5290,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/baker/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Bakes bread for workers."
-msgstr "Backt Broot vur de Arbeiders."
+msgstr "Backt Brood för de Arbeiders."
 
 #. TRANSLATORS: Helptext for a worker: Blackroot Farmer
 #: ../../data/tribes/workers/atlanteans/blackroot_farmer/helptexts.lua:3
@@ -5325,7 +5326,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds fish."
-msgstr "Tüchtet Fisch."
+msgstr "Tüchtet Fiske."
 
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../data/tribes/workers/atlanteans/fisher/helptexts.lua:3
@@ -5404,7 +5405,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/shipwright/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un boet nei Schipp"
+msgstr "Arbeidet in de Warft un baut neie Schippen."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/atlanteans/smelter/helptexts.lua:3
@@ -5416,7 +5417,7 @@ msgstr ""
 #: ../../data/tribes/workers/atlanteans/smoker/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Smokes meat and fish."
-msgstr "Rökert Fleesch un Fisch."
+msgstr "Rökelt Fleesk un Fisk."
 
 #. TRANSLATORS: Helptext for a worker: Soldier
 #: ../../data/tribes/workers/atlanteans/soldier/helptexts.lua:3
@@ -5541,7 +5542,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/gardener/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Grows thatch reed."
-msgstr "Buet Reet an"
+msgstr "Baut Reit an."
 
 #. TRANSLATORS: Helptext for a worker: Geologist
 #: ../../data/tribes/workers/barbarians/geologist/helptexts.lua:3
@@ -5621,7 +5622,7 @@ msgstr ""
 #: ../../data/tribes/workers/barbarians/shipwright/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un boet nei Schipp"
+msgstr "Arbeidet in de Warft un baut neie Schippen."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/barbarians/smelter/helptexts.lua:3
@@ -5663,7 +5664,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/baker/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Bakes bread for workers."
-msgstr "Backt Broot vur de Arbeiders."
+msgstr "Backt Brood för de Arbeiders."
 
 #. TRANSLATORS: Helptext for a worker: Brewer
 #: ../../data/tribes/workers/empire/brewer/helptexts.lua:3
@@ -5796,7 +5797,7 @@ msgstr ""
 #: ../../data/tribes/workers/empire/shipwright/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un boet nei Schipp"
+msgstr "Arbeidet in de Warft un baut neie Schippen."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/empire/smelter/helptexts.lua:3
@@ -5906,7 +5907,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a worker: Brickmaker
 #: ../../data/tribes/workers/frisians/brickmaker/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Makes clay out of mud and water or bricks out of clay and granite."
+msgid "Burns bricks out of clay and granite."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Builder
@@ -5925,6 +5926,12 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/charcoal_burner/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a worker: Clay Digger
+#: ../../data/tribes/workers/frisians/claydigger/helptexts.lua:3
+msgctxt "frisians_worker"
+msgid "Makes clay out of mud and water."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Farmer

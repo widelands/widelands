@@ -27,6 +27,7 @@
 #include "economy/routing_node.h"
 #include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/walkingdir.h"
 
 namespace Widelands {
 class Building;
@@ -73,8 +74,12 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	const FlagDescr& descr() const;
 
-	Flag();                                               /// empty flag for savegame loading
-	Flag(EditorGameBase&, Player* owner, const Coords&);  /// create a new flag
+	/// Empty flag, for unit tests only.
+	Flag();
+
+	/// Create a new flag. Only specify an economy during saveloading.
+	/// Otherwise, a new economy will be created automatically if needed.
+	Flag(EditorGameBase&, Player* owner, const Coords&, Economy* economy = nullptr);
 	~Flag() override;
 
 	void load_finish(EditorGameBase&) override;
@@ -130,7 +135,9 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool ack_pickup(Game&, Flag& destflag);
 	bool cancel_pickup(Game&, Flag& destflag);
 	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
+	void propagate_promoted_road(Road* promoted_road);
 	Wares get_wares();
+	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
 
 	void call_carrier(Game&, WareInstance&, PlayerImmovable* nextstep);
 	void update_wares(Game&, Flag* other);
@@ -175,7 +182,7 @@ private:
 	int32_t animstart_;
 
 	Building* building_;  ///< attached building (replaces road WALK_NW)
-	Road* roads_[6];      ///< WALK_xx - 1 as index
+	Road* roads_[WalkingDir::LAST_DIRECTION];
 
 	int32_t ware_capacity_;  ///< size of wares_ array
 	int32_t ware_filled_;    ///< number of wares currently on the flag

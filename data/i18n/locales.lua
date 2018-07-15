@@ -267,8 +267,8 @@ return {
 	},
 
 	nds = {
-		name = "Plattdütsch",
-		sort_name = "Plattdutsch",
+		name = "Plattdüütsch",
+		sort_name = "Plattduutsch",
 		font = "default"
 	},
 

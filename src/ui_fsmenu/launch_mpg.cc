@@ -359,6 +359,13 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 	}
 }
 
+void FullscreenMenuLaunchMPG::think() {
+	if (ctrl_) {
+		ctrl_->think();
+	}
+	refresh();
+}
+
 /**
  * update the user interface and take care about the visibility of
  * buttons and text.

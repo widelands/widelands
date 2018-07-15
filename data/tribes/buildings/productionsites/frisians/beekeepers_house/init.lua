@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "sleep=45000",
-            "worker=bees"
+            "callworker=bees"
          }
       },
    },
