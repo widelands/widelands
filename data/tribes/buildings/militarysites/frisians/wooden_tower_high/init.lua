@@ -20,13 +20,13 @@ tribes:new_militarysite_type {
 
    animations = {
       idle = {
-         pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 94},
+         pictures = path.list_files (dirname .. "idle_?.png"),
+         hotspot = {31, 93},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 94},
+         hotspot = {31, 93},
       },
    },
 
