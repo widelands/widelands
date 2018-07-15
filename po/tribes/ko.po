@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-06-28 06:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-08 14:20+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -421,19 +421,19 @@ msgstr "탑"
 #: ../../data/tribes/buildings/militarysites/frisians/fortress/init.lua:7
 msgctxt "frisians_building"
 msgid "Fortress"
-msgstr ""
+msgstr "요새"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:7
 msgctxt "frisians_building"
 msgid "Outpost"
-msgstr ""
+msgstr "감시 초소"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:7
 msgctxt "frisians_building"
 msgid "Sentinel"
-msgstr ""
+msgstr "보초"
 
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:46
 msgid "Your soldiers have occupied your sentinel."
@@ -459,13 +459,13 @@ msgstr ""
 #: ../../data/tribes/buildings/militarysites/frisians/tower/init.lua:7
 msgctxt "frisians_building"
 msgid "Tower"
-msgstr ""
+msgstr "탑"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:7
 msgctxt "frisians_building"
 msgid "Wooden Tower"
-msgstr ""
+msgstr "목재 탑"
 
 #: ../../data/tribes/buildings/militarysites/frisians/wooden_tower/init.lua:45
 msgid "Your soldiers have occupied your wooden tower."
@@ -809,7 +809,7 @@ msgstr "양식업자의 집"
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:42
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:64
 msgid "breeding fish"
-msgstr "물고기 양식을"
+msgstr "물고기 양식"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/init.lua:52
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/init.lua:57
@@ -999,7 +999,7 @@ msgstr "철광"
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:64
 msgid "mining iron"
-msgstr "철 채굴을"
+msgstr "철 채굴"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:74
@@ -2441,7 +2441,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:64
 msgctxt "frisians_building"
 msgid "recruiting soldier"
-msgstr ""
+msgstr "군인을 모병중"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:7
@@ -3987,7 +3987,7 @@ msgstr "빵"
 #: ../../data/tribes/wares/bread_barbarians/init.lua:7
 msgctxt "barbarians_ware"
 msgid "Pitta Bread"
-msgstr "피타 빵"
+msgstr "피타빵"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_empire/init.lua:7
@@ -3999,7 +3999,7 @@ msgstr "빵"
 #: ../../data/tribes/wares/bread_frisians/init.lua:7
 msgctxt "frisians_ware"
 msgid "Bread"
-msgstr ""
+msgstr "빵"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/bread_paddle/init.lua:7
@@ -4173,13 +4173,13 @@ msgstr "망치"
 #: ../../data/tribes/wares/helmet/init.lua:7
 msgctxt "ware"
 msgid "Helmet"
-msgstr ""
+msgstr "투구"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_golden/init.lua:7
 msgctxt "frisians_ware"
 msgid "Golden Helmet"
-msgstr ""
+msgstr "황금 투구"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/helmet_mask/init.lua:7
@@ -4197,13 +4197,13 @@ msgstr "전쟁 투구"
 #: ../../data/tribes/wares/honey/init.lua:7
 msgctxt "ware"
 msgid "Honey"
-msgstr ""
+msgstr "꿀"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/honey_bread/init.lua:7
 msgctxt "frisians_ware"
 msgid "Honey Bread"
-msgstr ""
+msgstr "꿀빵"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/hook_pole/init.lua:7

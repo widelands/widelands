@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
          descname = _"planting barley",
          actions = {
             "sleep=18000",
-            "worker=plant"
+            "callworker=plant"
          }
       },
       harvest_barley = {
@@ -76,7 +76,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting barley",
          actions = {
             "sleep=8000",
-            "worker=harvest",
+            "callworker=harvest",
             "animate=working 40000",
             "produce=barley" --produces 2 barley per field
          }

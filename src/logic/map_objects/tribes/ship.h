@@ -271,13 +271,15 @@ private:
 	std::string shipname_;
 
 	struct Expedition {
+		~Expedition();
+
 		std::vector<Coords> seen_port_buildspaces;
 		bool swimmable[LAST_DIRECTION];
 		bool island_exploration;
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
-		std::unique_ptr<Economy> economy;
+		Economy* economy;  // Owned by Player
 	};
 	std::unique_ptr<Expedition> expedition_;
 
@@ -295,6 +297,7 @@ protected:
 		// Initialize everything to make cppcheck happy.
 		uint32_t lastdock_ = 0U;
 		uint32_t destination_ = 0U;
+		Serial economy_serial_;
 		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;

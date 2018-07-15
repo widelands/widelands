@@ -276,11 +276,11 @@ struct ProductionProgram {
 	/// Parameter semantics:
 	///    program:
 	///       The name of a program defined in the productionsite's main worker.
-	struct ActWorker : public Action {
-		ActWorker(char* parameters,
-		          const std::string& production_program_name,
-		          ProductionSiteDescr*,
-		          const Tribes& tribes);
+	struct ActCallWorker : public Action {
+		ActCallWorker(char* parameters,
+		              const std::string& production_program_name,
+		              ProductionSiteDescr*,
+		              const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;

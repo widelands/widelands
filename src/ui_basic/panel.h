@@ -25,6 +25,7 @@
 #include <string>
 
 #include <SDL_keyboard.h>
+#include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
@@ -86,6 +87,8 @@ public:
 	      int const nh,
 	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
+
+	boost::signals2::signal<void()> position_changed;
 
 	Panel* get_parent() const {
 		return parent_;
