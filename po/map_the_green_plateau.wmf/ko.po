@@ -3,12 +3,13 @@
 # 
 # Translators:
 # ks k, 2018
+# ks k, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-06-30 20:21+0000\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-08 14:37+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -122,7 +123,7 @@ msgstr ""
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:88
 msgid "Erwyn Defeated"
-msgstr ""
+msgstr "에르윈 패배"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:89
 msgid ""
@@ -132,7 +133,7 @@ msgstr ""
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:97
 msgid "Jomo Defeated"
-msgstr ""
+msgstr "조모 패배"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:98
 msgid ""
@@ -142,11 +143,11 @@ msgstr ""
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:102
 msgid "Last Briefing"
-msgstr ""
+msgstr "최종 보고"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:106
 msgid "Victory!"
-msgstr ""
+msgstr "승리!"
 
 #: ../../data/maps/The_Green_Plateau.wmf/scripting/texts.lua:107
 msgid ""

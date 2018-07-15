@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-06-30 20:52+0000\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-08 14:40+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr "리눅스에서는 소스 또는 독립 실행형 바이너리 패키지
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "윈도우즈에서는 설치 폴더에 COPYING.txt라는 파일을 찾을 수 있으며 Widelands 시작 메뉴 항목은 이 파일에 대한 링크를 제공합니다."
+msgstr "윈도우즈에서는 설치 폴더에 COPYING.txt라는 파일을 찾을 수 있으며 와이드랜드 시작 메뉴 항목은 이 파일에 대한 링크를 제공합니다."
 
 #: ../../data/txts/LICENSE.lua:20
 msgid ""
@@ -91,7 +91,7 @@ msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr " 더 자세한 정보와 지원을 원하시면 %1% (웹 사이트, 위키, 질문, 일반적인 지원용 게시판), %2% (Bugtracker), %3% (번역)에서 찾으실 수 있습니다."
+msgstr "더 자세한 정보와 지원을 원하시면 %1% (웹 사이트, 위키, 질문, 일반적인 지원용 게시판), %2% (버그추적기), %3% (번역)에서 찾으실 수 있습니다."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -330,7 +330,7 @@ msgstr "와이드랜드 또는 와이드랜드 편집자를 위해 더 많은 �
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
-msgstr "시작하기"
+msgstr "소개"
 
 #: ../../data/txts/help/common_helptexts.lua:18
 msgid ""
@@ -523,7 +523,7 @@ msgstr ""
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr ""
+msgstr "숲 지킴이와 짐승 키움이의 오두막을 항상 세우십시오. 그러면 통나무나 짐승들이 부족하지 않을 것입니다."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 #: ../../data/txts/tips/frisians.lua:12
@@ -538,7 +538,7 @@ msgstr ""
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "%s에 있는 위키에서 편집자를 위한 일반 도움말과 간단한 자습서를 찾을 수 있습니다."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -655,13 +655,13 @@ msgstr "몇개의 깃발을 세움으로서 짧은 구역으로 길을 나누십
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "더 궁금한 점이 있습니까? FAQ, 위키 및 커뮤니티 포럼은 %s 에서 찾을 수 있습니다."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr ""
+msgstr "특정 물건의 배달을 조정하려면 건물 창에서 우선 순위 버튼을 사용하십시오. Ctrl키를 누른 상태에서 클릭하면 모든 제품이 한번에 조정됩니다."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
@@ -776,4 +776,4 @@ msgstr ""
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "우리 컴퓨터 플레이어는 너무 지루합니까? 저희 웹 사이트 %s 에 방문하여 다른 사람들과 만나 온라인 게임을 즐기십시오."
+msgstr "우리 컴퓨터 플레이어가 너무 지루합니까? 저희 웹 사이트 %s 에 방문하여 다른 사람들과 만나 온라인 게임을 즐기십시오."
