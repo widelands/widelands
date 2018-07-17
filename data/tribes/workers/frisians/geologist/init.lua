@@ -30,15 +30,15 @@ tribes:new_worker_type {
 
    programs = {
       expedition = {
-         "geologist 15 5 search"
+         "repeatsearch=15 5 search"
       },
       search = {
-         "animation hacking 3000",
-         "animation idle 1000",
-         "animation hacking 2000",
-         "animation idle 1000",
-         "animation hacking 3000",
-         "geologist_find"
+         "animate=hacking 3000",
+         "animate=idle 1000",
+         "animate=hacking 2000",
+         "animate=idle 1000",
+         "animate=hacking 3000",
+         "findresources"
       }
    },
 

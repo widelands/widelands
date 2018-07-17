@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
             "sleep=20000",
             "return=skipped unless economy needs clay or site has water",
             "return=failed unless site has water",
-            "worker=dig",
+            "callworker=dig",
             "consume=water",
             "sleep=2000",
             "animate=working 17000",
