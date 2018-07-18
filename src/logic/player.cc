@@ -1480,7 +1480,7 @@ void Player::write_statistics(FileWrite& fw) const {
 			for (uint32_t i = 0; i < stats[ware_index].size() - 1; ++i) {
 				oss << stats[ware_index][i] << "|";
 			}
-			oss << stats[ware_index][stats[ware_index].size() - 1];
+			oss << stats[ware_index][stats[ware_index].rbegin()];
 		}
 		fw.c_string(oss.str());
 	};
