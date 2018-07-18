@@ -579,7 +579,7 @@ public:
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
 
-	void read_statistics(FileRead&);
+	void read_statistics(FileRead&, uint16_t packet_version);
 	void write_statistics(FileWrite&) const;
 	void read_remaining_shipnames(FileRead&, uint16_t packet_version);
 	void write_remaining_shipnames(FileWrite&) const;

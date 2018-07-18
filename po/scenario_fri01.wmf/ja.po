@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-31 10:07+0000\n"
+"POT-Creation-Date: 2018-07-13 13:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -309,12 +309,11 @@ msgstr ""
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
 msgid ""
-"Clay is easy to make: A brickmaker working at a clay pit will simply dig up "
-"some earth and mix it with water. Just make sure that he has plenty of space"
-" for digging around his clay pit. It might be a good idea to build some "
-"sentinels to expand."
+"Clay is easy to make: A clay digger working at a clay pit will simply dig up"
+" some earth and mix it with water. Just make sure that he has plenty of "
+"space for digging around his clay pit. It might be a good idea to build some"
+" sentinels to expand."
 msgstr ""
-"粘土を作るのは簡単ですな。穴掘り小屋で働くレンガ職人が土を掘って、水と混ぜるだけで作れますからな。あとは、小屋のまわりに穴を掘るための場所さえ確保しておけば大丈夫ですな。監視所をいくつか作って領土を広げておくと良いでしょうな。"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -696,12 +695,12 @@ msgstr ""
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
 msgid ""
-"They learn to attack with three different swords: The long, curved and "
-"double-edged sword. The latter two contain gold, and all of them iron. The "
-"advanced soldiers are taught to use two matching swords at once. This makes "
-"six steps of attack training."
+"They learn to attack with three different swords: The long sword, broadsword"
+" and double-edged sword. The latter two contain gold, and all of them iron. "
+"The advanced soldiers are taught to use two swords at once: They keep their "
+"first double-edged sword, and are given various other swords to wield in "
+"their other hand. This makes six steps of attack training."
 msgstr ""
-"攻撃能力の向上には三種の異なる剣を用いる。長剣、曲剣、そして両刃剣だ。３つ全てで鉄を材料として用い、さらに後者２つについては金も用いる。そして、訓練された兵士は同じ武器を二振り使って戦う術を教えられる。これで合計６段階の訓練が行なわれる。"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
