@@ -37,6 +37,10 @@ tribes:new_productionsite_type {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
          hotspot = {105, 111},
       },
+      build = {
+         pictures = path.list_files (dirname .. "build_?.png"),
+         hotspot = {105, 111},
+      },
    },
 
    aihints = {
