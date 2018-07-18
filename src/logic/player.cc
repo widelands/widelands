@@ -1363,18 +1363,23 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	size_t nr_entries = fr.unsigned_16();
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
-	const auto parse_stats = [nr_entries](std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index, const std::string& stats_string, const std::string& description) {
+	const auto parse_stats = [nr_entries](
+	   std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index,
+	   const std::string& stats_string, const std::string& description) {
 		if (!stats_string.empty()) {
 			std::vector<std::string> stats_vector;
 			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
 			if (stats_vector.size() != nr_entries) {
-				throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got %" PRIuS, description.c_str(), nr_entries, stats_vector.size());
+				throw GameDataError("wrong number of %s statistics - expected %" PRIuS
+				                    " but got %" PRIuS,
+				                    description.c_str(), nr_entries, stats_vector.size());
 			}
 			for (size_t j = 0; j < nr_entries; ++j) {
 				stats->at(ware_index)[j] = static_cast<unsigned int>(atoi(stats_vector.at(j).c_str()));
 			}
 		} else if (nr_entries > 0) {
-			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0", description.c_str(), nr_entries);
+			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
+			                    description.c_str(), nr_entries);
 		}
 	};
 
@@ -1474,7 +1479,8 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
  */
 void Player::write_statistics(FileWrite& fw) const {
 	// Save stats as a single string to reduce number of hard disk write operations
-	const auto write_stats = [&fw](const std::vector<std::vector<uint32_t>>& stats, const DescriptionIndex ware_index) {
+	const auto write_stats = [&fw](
+	   const std::vector<std::vector<uint32_t>>& stats, const DescriptionIndex ware_index) {
 		std::ostringstream oss("");
 		if (!stats[ware_index].empty()) {
 			for (uint32_t i = 0; i < stats[ware_index].size() - 1; ++i) {
