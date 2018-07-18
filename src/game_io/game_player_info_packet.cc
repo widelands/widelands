@@ -30,7 +30,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 21;
+constexpr uint16_t kCurrentPacketVersion = 22;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
@@ -59,7 +59,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					player->set_see_all(see_all);
 
 					player->set_ai(fr.c_string());
-					player->read_statistics(fr);
+					player->read_statistics(fr, packet_version);
 					player->read_remaining_shipnames(fr, packet_version);
 
 					player->casualties_ = fr.unsigned_32();
