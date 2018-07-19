@@ -83,13 +83,10 @@ void SaveHandler::roll_save_files(const std::string& filename) {
  * @return true if game should be saved ad next think().
  */
 bool SaveHandler::check_next_tick(Widelands::Game& game, uint32_t realtime) {
-
 	// Perhaps save is due now?
 	if (autosave_interval_in_ms_ <= 0 || next_save_realtime_ > realtime) {
 		return false;  // no autosave or not due, yet
 	}
-
-	next_save_realtime_ = realtime + autosave_interval_in_ms_;
 
 	// check if game is paused (in any way)
 	if (game.game_controller()->is_paused_or_zero_speed()) {
@@ -125,11 +122,17 @@ bool SaveHandler::save_and_handle_error(Widelands::Game& game,
 			g_fs->fs_rename(backup_filename, complete_filename);
 		}
 		// Wait 30 seconds until next save try
-		next_save_realtime_ += 30000;
+		next_save_realtime_ = SDL_GetTicks() + 30000;
 	} else {
 		// if backup file was created, time to remove it
-		if (backup_filename.length() > 0 && g_fs->file_exists(backup_filename))
+		if (backup_filename.length() > 0 && g_fs->file_exists(backup_filename)) {
 			g_fs->fs_unlink(backup_filename);
+		}
+
+		// Count save interval from end of save.
+		// This prevents us from going into endless autosave cycles if the save should take longer
+		// than the autosave interval.
+		next_save_realtime_ = SDL_GetTicks() + autosave_interval_in_ms_;
 	}
 	return result;
 }
@@ -138,12 +141,11 @@ bool SaveHandler::save_and_handle_error(Widelands::Game& game,
  * Check if autosave is needed and allowed or save was requested by user.
  */
 void SaveHandler::think(Widelands::Game& game) {
-
 	if (!allow_saving_ || game.is_replay()) {
 		return;
 	}
 
-	uint32_t realtime = SDL_GetTicks();
+	const uint32_t realtime = SDL_GetTicks();
 	initialize(realtime);
 
 	// Are we saving now?
@@ -185,7 +187,6 @@ void SaveHandler::think(Widelands::Game& game) {
 		log("Autosave: save took %d ms\n", SDL_GetTicks() - realtime);
 		game.get_ibase()->log_message(_("Game saved"));
 		saving_next_tick_ = false;
-
 	} else {
 		saving_next_tick_ = check_next_tick(game, realtime);
 	}
