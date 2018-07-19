@@ -99,10 +99,10 @@ std::string as_message(const std::string& heading, const std::string& body);
  * 'is_first' omits the vertical gap before the line.
  * 'noescape' is needed for error message formatting and does not call richtext_escape. */
 std::string as_heading_with_content(const std::string& header,
-                                   const std::string& content,
-                                   UI::PanelStyle style,
-                                   bool is_first = false,
-                                   bool noescape = false);
+                                    const std::string& content,
+                                    UI::PanelStyle style,
+                                    bool is_first = false,
+                                    bool noescape = false);
 
 /**
  * 'is_first' omits the vertical gap before the line.

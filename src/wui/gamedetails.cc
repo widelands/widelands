@@ -110,8 +110,7 @@ void GameDetails::update(const SavegameData& gamedata) {
 	if (gamedata.errormessage.empty()) {
 		if (gamedata.filename_list.empty()) {
 			name_label_.set_text(
-			   as_richtext(
-			    as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
+			   as_richtext(as_heading_with_content(_("Map Name:"), gamedata.mapname, style_, true)));
 
 			// Show game information
 			std::string description = as_heading_with_content(
@@ -162,16 +161,16 @@ void GameDetails::update(const SavegameData& gamedata) {
 		} else {
 			std::string filename_list = richtext_escape(gamedata.filename_list);
 			boost::replace_all(filename_list, "\n", "<br> • ");
-			name_label_.set_text(as_richtext(
-			                      as_heading_with_content(gamedata.mapname, "", style_, true)));
+			name_label_.set_text(
+			   as_richtext(as_heading_with_content(gamedata.mapname, "", style_, true)));
 
-			descr_.set_text(as_richtext(
-			                 as_heading_with_content("", filename_list, style_, true, true)));
+			descr_.set_text(
+			   as_richtext(as_heading_with_content("", filename_list, style_, true, true)));
 			minimap_icon_.set_visible(false);
 		}
 	} else {
-		name_label_.set_text(
-		   as_richtext(as_heading_with_content(_("Error:"), gamedata.errormessage, style_, true, true)));
+		name_label_.set_text(as_richtext(
+		   as_heading_with_content(_("Error:"), gamedata.errormessage, style_, true, true)));
 	}
 	layout();
 }

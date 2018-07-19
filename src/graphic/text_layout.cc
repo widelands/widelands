@@ -190,10 +190,10 @@ std::string as_message(const std::string& heading, const std::string& body) {
 }
 
 std::string as_heading_with_content(const std::string& header,
-                                   const std::string& content,
-                                   UI::PanelStyle style,
-                                   bool is_first,
-                                   bool noescape) {
+                                    const std::string& content,
+                                    UI::PanelStyle style,
+                                    bool is_first,
+                                    bool noescape) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format(

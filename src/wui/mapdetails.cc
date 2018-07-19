@@ -97,7 +97,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 		name_label_.set_text(
 		   (boost::format("<rt>%s%s</rt>") %
 		    as_heading(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario:") : _("Map:"),
-		              style_, true) %
+		               style_, true) %
 		    as_content(localize_mapname ? mapdata.localized_name : mapdata.name, style_))
 		      .str());
 
