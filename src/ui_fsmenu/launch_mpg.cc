@@ -584,7 +584,7 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
 	infotext += std::string("• ") +
-	            (boost::format(_("Size: %1$u x %2$u")) % map.get_width() % map.get_height()).str() +
+	            (boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str() +
 	            "\n";
 	infotext += std::string("• ") +
 	            (boost::format(ngettext("%u Player", "%u Players", nr_players_)) %
