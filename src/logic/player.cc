@@ -1482,11 +1482,12 @@ void Player::write_statistics(FileWrite& fw) const {
 	const auto write_stats = [&fw](
 	   const std::vector<std::vector<uint32_t>>& stats, const DescriptionIndex ware_index) {
 		std::ostringstream oss("");
-		if (!stats[ware_index].empty()) {
-			for (uint32_t i = 0; i < stats[ware_index].size() - 1; ++i) {
+		const int sizem = stats[ware_index].size() - 1;
+		if (sizem >= 0) {
+			for (int i = 0; i < sizem; ++i) {
 				oss << stats[ware_index][i] << "|";
 			}
-			oss << stats[ware_index][stats[ware_index].rbegin()];
+			oss << stats[ware_index][sizem];
 		}
 		fw.c_string(oss.str());
 	};
