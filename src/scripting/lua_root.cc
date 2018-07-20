@@ -681,7 +681,8 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
+// TODO(GunChleoc): add RST marker
+/*
 	.. method:: new_market_type{table}
 
 		Adds a new market building type. Takes a single argument, a table with
