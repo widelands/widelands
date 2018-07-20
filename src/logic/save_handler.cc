@@ -130,7 +130,8 @@ bool SaveHandler::save_and_handle_error(Widelands::Game& game,
 		}
 
 		// Count save interval from end of save.
-		// This prevents us from going into endless autosave cycles if the save should take longer than the autosave interval.
+		// This prevents us from going into endless autosave cycles if the save should take longer
+		// than the autosave interval.
 		next_save_realtime_ = SDL_GetTicks() + autosave_interval_in_ms_;
 	}
 	return result;
