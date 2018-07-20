@@ -157,7 +157,9 @@ std::string absolute_path_if_not_windows(const std::string& path) {
 	// http://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
 	char* rp = realpath(path.c_str(), buffer);
 	log("Realpath: %s\n", rp);
-	assert(rp);
+	if (!rp) {
+		throw wexception("Unable to get absolute path for %s", path.c_str());
+	}
 	return std::string(rp);
 #else
 	return path;
@@ -935,8 +937,13 @@ void WLApplication::handle_commandline_parameters() {
 		              get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 	}
 	if (!is_absolute_path(datadir_)) {
-		datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
-		                                        FileSystem::file_separator() + datadir_);
+		try {
+			datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
+			                                        FileSystem::file_separator() + datadir_);
+		} catch (const WException& e) {
+			log("Error parsing datadir: %s\n", e.what());
+			exit(1);
+		}
 	}
 	if (commandline_.count("datadir_for_testing")) {
 		datadir_for_testing_ = commandline_["datadir_for_testing"];
