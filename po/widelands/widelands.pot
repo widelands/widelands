@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-17 12:54+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -345,166 +345,171 @@ msgstr ""
 msgid "Random Player"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:43
+#: ../../src/editor/tools/info_tool.cc:46
 msgid "Field Information"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:50
-msgid "Node:"
+#: ../../src/editor/tools/info_tool.cc:54
+msgid "Node"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:53
+#: ../../src/editor/tools/info_tool.cc:56
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: small building plot
-#: ../../src/editor/tools/info_tool.cc:62
+#: ../../src/editor/tools/info_tool.cc:65
 msgid "small"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: medium building plot
-#: ../../src/editor/tools/info_tool.cc:67
+#: ../../src/editor/tools/info_tool.cc:70
 msgid "medium"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: big building plot
-#: ../../src/editor/tools/info_tool.cc:71
+#: ../../src/editor/tools/info_tool.cc:74
 msgid "big"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: space for a flag
-#: ../../src/editor/tools/info_tool.cc:79
+#: ../../src/editor/tools/info_tool.cc:82
 msgid "flag"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: mine building plot
-#: ../../src/editor/tools/info_tool.cc:83
+#: ../../src/editor/tools/info_tool.cc:86
 msgid "mine"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: port space
-#: ../../src/editor/tools/info_tool.cc:87
+#: ../../src/editor/tools/info_tool.cc:90
 msgid "port"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/info_tool.cc:91
+#: ../../src/editor/tools/info_tool.cc:94
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
 msgstr ""
 
 #. * TRANSLATORS: Editor terrain property: units can swim on this terrain (fish, ships)
-#: ../../src/editor/tools/info_tool.cc:95
+#: ../../src/editor/tools/info_tool.cc:98
 msgid "swimmable"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:99
+#: ../../src/editor/tools/info_tool.cc:101
 #, c-format
 msgid "Caps: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:106
+#: ../../src/editor/tools/info_tool.cc:108
 #, c-format
 msgid "Owned by: Player %u"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:110
+#: ../../src/editor/tools/info_tool.cc:112
 msgid "Owned by: —"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:113
-msgid "Has immovable"
-msgstr ""
-
-#: ../../src/editor/tools/info_tool.cc:113
-msgid "No immovable"
-msgstr ""
-
 #: ../../src/editor/tools/info_tool.cc:116
-msgid "Has animals"
+#: ../../src/editor/ui_menus/tool_menu.cc:61
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:89
+#: ../../src/wui/minimap.cc:121
+msgid "Terrain"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:116
-msgid "No animals"
-msgstr ""
-
-#: ../../src/editor/tools/info_tool.cc:120
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:114
-msgid "Terrain:"
-msgstr ""
-
-#: ../../src/editor/tools/info_tool.cc:127
+#: ../../src/editor/tools/info_tool.cc:123
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
 msgstr ""
 
-#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable", "unreachable and
-#. * unwalkable"
-#. * TRANSLATORS: You can also translate this as "Category: %s" or "Property: %s"
-#: ../../src/editor/tools/info_tool.cc:138
+#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable, unreachable and
+#. * unwalkable". You can also translate this as "Category: %s" or "Property: %s"
+#: ../../src/editor/tools/info_tool.cc:133
 #, c-format
 msgid "Is: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:143
+#: ../../src/editor/tools/info_tool.cc:138
 #, c-format
 msgid "Editor Category: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:147
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:118
-msgid "Resources:"
+#. * TRANSLATORS: Heading for immovables and animals in editor info tool
+#: ../../src/editor/tools/info_tool.cc:146
+msgid "Objects"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:155
+#: ../../src/editor/tools/info_tool.cc:149
 #, c-format
-msgid "Resource name: %s"
+msgid "Immovable: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:158
+#: ../../src/editor/tools/info_tool.cc:180
 #, c-format
-msgid "Resource amount: %i"
+msgid "Animals: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:161
-msgid "No resources"
+#: ../../src/editor/tools/info_tool.cc:186
+#, c-format
+msgid "Workers: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:165 ../../src/wui/mapdetails.cc:130
-msgid "Map:"
+#: ../../src/editor/tools/info_tool.cc:192
+#, c-format
+msgid "Ships: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:166
+#: ../../src/editor/tools/info_tool.cc:203
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:49
+#: ../../src/editor/ui_menus/tool_menu.cc:64
+msgid "Resources"
+msgstr ""
+
+#: ../../src/editor/tools/info_tool.cc:205
+msgctxt "resources"
+msgid "%1%x %2%"
+msgstr ""
+
+#: ../../src/editor/tools/info_tool.cc:212 ../../src/ui_fsmenu/launch_mpg.cc:64
+#: ../../src/ui_fsmenu/launch_mpg.cc:147
+#: ../../src/ui_fsmenu/netsetup_lan.cc:122 ../../src/wui/minimap.cc:110
+msgid "Map"
+msgstr ""
+
+#: ../../src/editor/tools/info_tool.cc:214
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:169
-#, c-format
-msgid "Size: %1$ix%2$i"
+#: ../../src/editor/tools/info_tool.cc:216
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:171
+#: ../../src/ui_fsmenu/launch_mpg.cc:587
+msgid "Size: %1% x %2%"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:174
+#: ../../src/editor/tools/info_tool.cc:221
 #, c-format
 msgid "Players: %u"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:177
+#: ../../src/editor/tools/info_tool.cc:224
 msgid "Players: –"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:180
+#: ../../src/editor/tools/info_tool.cc:227
 #, c-format
 msgid "Author: %s"
 msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:181
+#: ../../src/editor/tools/info_tool.cc:229
 #, c-format
-msgid "Descr: %s"
+msgid "Description: %s"
 msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
@@ -635,7 +640,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 #: ../../src/ui_fsmenu/campaign_select.cc:78
 #: ../../src/ui_fsmenu/campaign_select.cc:155
-#: ../../src/ui_fsmenu/campaign_select.cc:384 ../../src/wui/mapdetails.cc:173
+#: ../../src/ui_fsmenu/campaign_select.cc:384 ../../src/wui/mapdetails.cc:144
 msgid "Description:"
 msgstr ""
 
@@ -644,7 +649,7 @@ msgid "Hint (optional):"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:119
-#: ../../src/wui/mapdetails.cc:167
+#: ../../src/wui/mapdetails.cc:138
 msgid "Tags:"
 msgstr ""
 
@@ -674,10 +679,6 @@ msgstr ""
 msgid "Teams"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:171
-msgid "Size: %1% x %2%"
-msgstr ""
-
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:58
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:66
 msgid "Width:"
@@ -692,8 +693,12 @@ msgstr ""
 msgid "Create Map"
 msgstr ""
 
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:114
+msgid "Terrain:"
+msgstr ""
+
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:91
-#: ../../src/wui/gamedetails.cc:159
+#: ../../src/wui/gamedetails.cc:128
 msgid "Players:"
 msgstr ""
 
@@ -734,6 +739,10 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:117
 msgid "Climate:"
+msgstr ""
+
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:118
+msgid "Resources:"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:149
@@ -804,7 +813,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:70
 #: ../../src/wui/game_main_menu_save_game.cc:61
-#: ../../src/wui/gamedetails.cc:176
+#: ../../src/wui/gamedetails.cc:145
 msgid "Filename:"
 msgstr ""
 
@@ -926,11 +935,6 @@ msgstr ""
 msgid "Ctrl + Click on the map to set terrain height"
 msgstr ""
 
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:49
-#: ../../src/editor/ui_menus/tool_menu.cc:64
-msgid "Resources"
-msgstr ""
-
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:61
 msgid "Increase/Decrease amount by:"
 msgstr ""
@@ -960,12 +964,6 @@ msgstr ""
 #: ../../src/editor/ui_menus/tool_menu.cc:60
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:95
 msgid "Random height"
-msgstr ""
-
-#: ../../src/editor/ui_menus/tool_menu.cc:61
-#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:89
-#: ../../src/wui/minimap.cc:121
-msgid "Terrain"
 msgstr ""
 
 #: ../../src/editor/ui_menus/tool_menu.cc:62
@@ -1070,7 +1068,7 @@ msgid "Not set"
 msgstr ""
 
 #: ../../src/logic/game.cc:203 ../../src/logic/game.cc:255
-#: ../../src/logic/game.cc:325 ../../src/logic/game.cc:353
+#: ../../src/logic/game.cc:325 ../../src/logic/game.cc:360
 msgid "Preloading map"
 msgstr ""
 
@@ -1082,20 +1080,20 @@ msgstr ""
 msgid "Loading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:338 ../../src/logic/game.cc:370
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1410
+#: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1417
 msgid "Loading…"
 msgstr ""
 
-#: ../../src/logic/game.cc:433
+#: ../../src/logic/game.cc:440
 msgid "Creating player infrastructure"
 msgstr ""
 
-#: ../../src/logic/game.cc:444 ../../src/logic/player.cc:221
+#: ../../src/logic/game.cc:451 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:452 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1104,11 +1102,11 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:788
+#: ../../src/logic/game.cc:795
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:790
+#: ../../src/logic/game.cc:797
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -1554,7 +1552,7 @@ msgstr ""
 msgid "This objective has no description."
 msgstr ""
 
-#: ../../src/logic/player.cc:1332
+#: ../../src/logic/player.cc:1333
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -1570,15 +1568,15 @@ msgid ""
 "unpause the game and continue watching if you want to."
 msgstr ""
 
-#: ../../src/logic/save_handler.cc:102
+#: ../../src/logic/save_handler.cc:99
 msgid "Saving game…"
 msgstr ""
 
-#: ../../src/logic/save_handler.cc:118
+#: ../../src/logic/save_handler.cc:115
 msgid "Saving failed!"
 msgstr ""
 
-#: ../../src/logic/save_handler.cc:186
+#: ../../src/logic/save_handler.cc:188
 msgid "Game saved"
 msgstr ""
 
@@ -1598,7 +1596,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1302
+#: ../../src/wlapplication.cc:1309
 msgid "Preparing game"
 msgstr ""
 
@@ -2307,7 +2305,7 @@ msgstr ""
 msgid "Tutorial:"
 msgstr ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:383 ../../src/wui/mapdetails.cc:130
+#: ../../src/ui_fsmenu/campaign_select.cc:383 ../../src/wui/mapdetails.cc:101
 msgid "Scenario:"
 msgstr ""
 
@@ -2328,7 +2326,7 @@ msgid_plural "The designers of this scenario"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/ui_fsmenu/campaign_select.cc:414 ../../src/wui/mapdetails.cc:157
+#: ../../src/ui_fsmenu/campaign_select.cc:414 ../../src/wui/mapdetails.cc:128
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] ""
@@ -2470,11 +2468,6 @@ msgstr ""
 msgid "Please select"
 msgstr ""
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:64 ../../src/ui_fsmenu/launch_mpg.cc:147
-#: ../../src/ui_fsmenu/netsetup_lan.cc:122 ../../src/wui/minimap.cc:110
-msgid "Map"
-msgstr ""
-
 #: ../../src/ui_fsmenu/launch_mpg.cc:64
 msgid "Select a map"
 msgstr ""
@@ -2574,11 +2567,6 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:585
 msgid "Map details:"
-msgstr ""
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:587
-#, c-format
-msgid "Size: %1$u x %2$u"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:595
@@ -2919,11 +2907,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1097
+#: ../../src/wlapplication.cc:1104
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1105
+#: ../../src/wlapplication.cc:1112
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2931,7 +2919,7 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1112
+#: ../../src/wlapplication.cc:1119
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2939,11 +2927,11 @@ msgid ""
 "It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1239
+#: ../../src/wlapplication.cc:1246
 msgid "Invalid Address"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1240
+#: ../../src/wlapplication.cc:1247
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
@@ -3592,30 +3580,30 @@ msgstr ""
 msgid "Team Score"
 msgstr ""
 
-#: ../../src/wui/gamedetails.cc:145
+#: ../../src/wui/gamedetails.cc:115
 msgid "Map Name:"
 msgstr ""
 
 #. * TRANSLATORS: The time a replay starts. Shown in the replay loading screen
-#: ../../src/wui/gamedetails.cc:152
+#: ../../src/wui/gamedetails.cc:121
 msgid "Start of Replay:"
 msgstr ""
 
 #. * TRANSLATORS: The current time of a savegame. Shown in the game saving and
 #. loading screens.
-#: ../../src/wui/gamedetails.cc:155
+#: ../../src/wui/gamedetails.cc:124
 msgid "Game Time:"
 msgstr ""
 
-#: ../../src/wui/gamedetails.cc:163
+#: ../../src/wui/gamedetails.cc:132
 msgid "Widelands Version:"
 msgstr ""
 
-#: ../../src/wui/gamedetails.cc:167
+#: ../../src/wui/gamedetails.cc:136
 msgid "Win Condition:"
 msgstr ""
 
-#: ../../src/wui/gamedetails.cc:210
+#: ../../src/wui/gamedetails.cc:175
 msgid "Error:"
 msgstr ""
 
@@ -4052,14 +4040,18 @@ msgstr ""
 msgid "empty"
 msgstr ""
 
-#: ../../src/wui/mapdetails.cc:122
+#: ../../src/wui/mapdetails.cc:93
 msgid "Directory:"
+msgstr ""
+
+#: ../../src/wui/mapdetails.cc:101
+msgid "Map:"
 msgstr ""
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are being
 #. displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:141
+#: ../../src/wui/mapdetails.cc:112
 #, c-format
 msgid "The original name of this map: %s"
 msgstr ""
@@ -4067,13 +4059,13 @@ msgstr ""
 #. * TRANSLATORS: Tooltip in map description when map names are being displayed in
 #. English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:147
+#: ../../src/wui/mapdetails.cc:118
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr ""
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:179
+#: ../../src/wui/mapdetails.cc:150
 msgid "Hint:"
 msgstr ""
 
