@@ -659,9 +659,10 @@ void MapGenerator::create_random_map() {
 	map_.recalc_whole_map(egbase_.world());
 
 	// Care about players and place their start positions
+	map_.set_nrplayers(map_info_.numPlayers);
+	assert(map_info_.numPlayers >= 1);
 	const std::string tribe = map_.get_scenario_player_tribe(1);
 	const std::string ai = map_.get_scenario_player_ai(1);
-	map_.set_nrplayers(map_info_.numPlayers);
 	FindNodeSize functor(FindNodeSize::sizeBig);
 	Coords playerstart(Coords::null());
 
