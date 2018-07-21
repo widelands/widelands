@@ -148,7 +148,7 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	for (; nr_missing_to_draw; --nr_missing_to_draw, point.x += CellWidth + CellSpacing) {
 		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
 		                              Recti(0, 0, icon_->width(), icon_->height()),
-		                              RGBAColor(63, 63, 63, 63));
+		                              RGBAColor(191, 191, 191, 63));
 	}
 
 	if (!show_only_) {
