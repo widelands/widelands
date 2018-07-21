@@ -137,18 +137,11 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, scale, dst);
 		}
 
-		const auto blit_overlay = [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
-			                          pic->width() * scale, pic->height() * scale),
-			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                    BlendMode::UseAlpha);
-		};
-
 		// Draw work area previews.
 		const auto it = work_area_overlays.find(field.fcoords);
 		if (it != work_area_overlays.end()) {
 			const Image* pic = it->second;
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
 
 		// Draw build help.
@@ -164,14 +157,14 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			}
 			const auto* overlay = get_buildhelp_overlay(caps);
 			if (overlay != nullptr) {
-				blit_overlay(overlay->pic, overlay->hotspot);
+				blit_field_overlay(dst, field, overlay->pic, overlay->hotspot, scale);
 			}
 		}
 
 		// Blit the selection marker.
 		if (field.fcoords == get_sel_pos().node) {
 			const Image* pic = get_sel_picture();
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
 	}
 }
