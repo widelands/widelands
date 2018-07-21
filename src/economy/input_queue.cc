@@ -120,6 +120,20 @@ void InputQueue::set_consume_interval(const uint32_t time) {
 	update();
 }
 
+uint32_t InputQueue::get_coming() const {
+	if (request_ == nullptr || !request_->is_open()) {
+		return 0;
+	}
+	return request_->get_num_transfers();
+}
+
+uint32_t InputQueue::get_missing() const {
+	if (request_ == nullptr || !request_->is_open()) {
+		return 0;
+	}
+	return request_->get_open_count();
+}
+
 constexpr uint16_t kCurrentPacketVersion = 3;
 
 void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
