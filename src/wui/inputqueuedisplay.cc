@@ -129,8 +129,9 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	cache_max_fill_ = queue_->get_max_fill();
 
 	uint32_t nr_inputs_to_draw = std::min(queue_->get_filled(), cache_size_);
-	uint32_t nr_missing_to_draw = std::min(queue_->get_missing(), cache_size_ - nr_inputs_to_draw);
-	uint32_t nr_coming_to_draw = cache_size_ - nr_inputs_to_draw - nr_missing_to_draw;
+	uint32_t nr_missing_to_draw = std::max(std::min(queue_->get_missing(), cache_size_ - nr_inputs_to_draw),
+			cache_size_ - cache_max_fill_);
+	uint32_t nr_coming_to_draw = cache_size_ - nr_missing_to_draw - std::min(nr_inputs_to_draw, cache_max_fill_);
 
 	Vector2i point = Vector2i::zero();
 	point.x = Border + (show_only_ ? 0 : CellWidth + CellSpacing);
@@ -148,7 +149,7 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	for (; nr_missing_to_draw; --nr_missing_to_draw, point.x += CellWidth + CellSpacing) {
 		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
 		                              Recti(0, 0, icon_->width(), icon_->height()),
-		                              RGBAColor(191, 191, 191, 63));
+		                              RGBAColor(191, 191, 191, 127));
 	}
 
 	if (!show_only_) {
