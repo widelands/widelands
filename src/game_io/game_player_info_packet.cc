@@ -60,7 +60,7 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 
 					player->set_ai(fr.c_string());
 					player->read_statistics(fr, packet_version);
-					player->read_remaining_shipnames(fr, packet_version);
+					player->read_remaining_shipnames(fr);
 
 					player->casualties_ = fr.unsigned_32();
 					player->kills_ = fr.unsigned_32();
