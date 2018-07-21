@@ -755,7 +755,7 @@ void MapGenerator::create_random_map() {
 		map_.find_fields(Area<FCoords>(map_.get_fcoords(playerstart), 20), &coords, functor);
 
 		// Take the nearest ones
-		uint32_t min_distance = 0;
+		uint32_t min_distance = std::numeric_limits<uint32_t>::max();
 		Coords coords2;
 		for (uint16_t i = 0; i < coords.size(); ++i) {
 			uint32_t test = map_.calc_distance(coords[i], playerstart);
