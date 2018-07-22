@@ -102,17 +102,9 @@ public:
 	virtual Quantity get_filled() const = 0;
 
 	/**
-	 * The amount of missing wares or workers which are currently being transported to this building.
-	 * This might temporarily be larger than get_max_fill() but will
-	 * be smaller than get_max_size().
-	 * @return The amount at this moment.
-	 */
-	uint32_t get_coming() const;
-
-	/**
-	 * The amount of missing wares or workers which are not currently being transported to this building.
-	 * This might temporarily be larger than get_max_fill() but will
-	 * be smaller than get_max_size().
+	 * The amount of missing wares or workers which have been requested but
+	 * are not currently being transported to this building.
+	 * This will never be larger than get_max_fill().
 	 * @return The amount at this moment.
 	 */
 	uint32_t get_missing() const;
