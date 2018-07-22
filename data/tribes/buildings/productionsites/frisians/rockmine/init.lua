@@ -65,14 +65,15 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=45000",
+            "sleep=43000",
             "return=skipped unless economy needs granite",
             "consume=ration",
             "animate=working 20000",
-            "mine=stones 3 50 5 20",
-            "produce=granite",
             "animate=working 20000",
-            "mine=stones 3 50 5 20",
+            "mine=stones 3 50 10 20",
+            "produce=granite",
+            "sleep=2000",
+            "mine=stones 3 50 1 20",
             "produce=granite"
          }
       },

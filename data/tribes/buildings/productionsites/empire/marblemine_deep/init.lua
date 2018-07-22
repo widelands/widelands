@@ -57,15 +57,19 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
          descname = _"mining marble",
          actions = {
-            "sleep=43000",
+            "sleep=40000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=meal wine",
             "animate=working 18000",
-            "mine=stones 2 100 5 2",
-            "produce=marble:2",
             "animate=working 18000",
-            "mine=stones 2 100 5 2",
-            "produce=marble granite:2"
+            "mine=stones 2 100 15 2",
+            "mine=stones 2 100 100 2",
+            "produce=marble granite",
+            "sleep=3000",
+            "mine=stones 2 100 1 2",
+            "mine=stones 2 100 1 2",
+            "mine=stones 2 100 1 2",
+            "produce=marble:2 granite"
          }
       },
    },

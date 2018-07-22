@@ -60,39 +60,47 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=mine_marble",
             "call=mine_granite",
+            "call=mine_marble",
             "return=skipped"
-         }
-      },
-      mine_marble = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-         descname = _"mining marble",
-         actions = {
-            "sleep=20000",
-            "return=skipped unless economy needs marble or economy needs granite",
-            "consume=wine ration",
-            "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=marble:2",
-            "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=marble granite"
          }
       },
       mine_granite = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=20000",
+            "sleep=18000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=ration wine",
             "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=granite marble",
+
             "animate=working 20000",
-            "mine=stones 2 50 5 17",
-            "produce=granite:2"
+            "mine=stones 2 50 20 17",
+            "produce=granite",
+            "sleep=2000",
+            "mine=stones 2 50 1 17",
+            "mine=stones 2 50 1 17",
+            "mine=stones 2 50 1 17",
+            "produce=granite:2 marble"
+         }
+      },
+      mine_marble = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
+         descname = _"mining marble",
+         actions = {
+            "sleep=18000",
+            "return=skipped unless economy needs marble or economy needs granite",
+            "consume=wine ration",
+            "animate=working 20000",
+            "animate=working 20000",
+
+            "mine=stones 2 50 20 17",
+            "produce=marble",
+            "sleep=2000",
+            "mine=stones 2 50 1 17",
+            "mine=stones 2 50 1 17",
+            "mine=stones 2 50 1 17",
+            "produce=marble:2 granite"
          }
       },
    },

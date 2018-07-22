@@ -64,11 +64,11 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 33
             "return=skipped unless economy needs ration",
-            "sleep=10000",
+            "sleep=23000",
             "consume=empire_bread,fish,meat",
             "playsound=sound/empire/taverns ration 100",
-            "animate=working 19000",
-            "sleep=4000",
+            "animate=working 10000",
+         --   "sleep=4000",
             "produce=ration"
          }
       },
@@ -78,11 +78,11 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 40
             "return=skipped unless economy needs meal",
-            "sleep=10000",
+         --   "sleep=10000",
             "consume=empire_bread fish,meat",
             "playsound=sound/empire/taverns meal 100",
             "animate=working 25000",
-            "sleep=5000",
+            "sleep=15000",
             "produce=meal"
          }
       },

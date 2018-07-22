@@ -76,12 +76,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
          descname = _"forging an ax",
          actions = {
-            -- time total: 73
+            -- time total: 57+3,6
             "return=skipped unless economy needs ax",
-            "sleep=36000", -- +10 enlarge
+            "sleep=26000", -- +10 enlarge   -- removed again
             "consume=coal iron",
             "playsound=sound/smiths smith 192",
-            "animate=working 28000",  -- +6 enlarge
+            "animate=working 22000",  -- +6 enlarge  -- removed again
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax"
@@ -91,12 +91,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
          descname = _"forging a sharp ax",
          actions = {
-            -- time total: 76
+            -- time total: 57+3,6
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
-            "sleep=37000", -- +11 enlarge
+            "sleep=26000", -- +11 enlarge     -- removed again
             "playsound=sound/smiths smith 192",
-            "animate=working 30000", -- +8 enlarge
+            "animate=working 22000", -- +8 enlarge -- removed again
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_sharp"
@@ -106,12 +106,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
          descname = _"forging a broad ax",
          actions = {
-            -- time total: 79
+            -- time total: 57+3,6
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
-            "sleep=38000", -- +12 enlarge
+            "sleep=26000", -- +12 enlarge  -- removed again
             "playsound=sound/smiths smith 192",
-            "animate=working 32000", -- +10 enlarge
+            "animate=working 22000", -- +10 enlarge -- removed again
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_broad"

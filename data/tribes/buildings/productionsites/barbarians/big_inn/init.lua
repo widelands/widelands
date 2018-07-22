@@ -84,10 +84,10 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 37
             "return=skipped unless economy needs snack",
-            "sleep=5000",
+   --         "sleep=5000",
             "consume=barbarians_bread fish,meat beer",
             "playsound=sound/barbarians/taverns biginn 100",
-            "sleep=32000",
+            "sleep=37000",
             "produce=snack"
          }
       },
@@ -97,10 +97,10 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 40
             "return=skipped unless economy needs meal",
-            "sleep=5000",
+          --  "sleep=5000",
             "consume=barbarians_bread fish,meat beer_strong",
             "playsound=sound/barbarians/taverns biginn 100",
-            "sleep=35000",
+            "sleep=40000",
             "produce=meal"
          }
       },

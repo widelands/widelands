@@ -73,9 +73,9 @@ tribes:new_productionsite_type {
          descname = _"smoking fish",
          actions = {
             "return=skipped unless economy needs smoked_fish",
-            "sleep=16000",
             "consume=fish:2 log",
             "animate=working 30000",
+            "sleep=16000",
             "produce=smoked_fish:2"
          },
       },

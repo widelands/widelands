@@ -67,13 +67,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start weaving spidercloth because ...
          descname = _"weaving spidercloth",
          actions = {
-            -- total time 47 sec
+            -- total time 40 + 3,6 sec
             "return=skipped unless economy needs spidercloth",
-            "sleep=10000",
+          --  "sleep=10000",
             "consume=spider_silk",
             "playsound=sound/mill weaving 120",
             "animate=working 20000",
-            "sleep=17000",
+            "sleep=20000",
             "produce=spidercloth"
          }
       },
@@ -81,13 +81,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
          descname = _"tailoring a tabard",
          actions = {
-            -- total time 55 sec
+            -- total time 40 + 3,6 sec
             "return=skipped unless economy needs tabard",
-            "sleep=10000",
+        --    "sleep=10000",
             "consume=spider_silk",
             "playsound=sound/mill weaving 120",
-            "animate=working 26000",
-            "sleep=19000",
+            "animate=working 20000",
+            "sleep=20000",
             "produce=tabard"
          }
       },
@@ -95,13 +95,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard because ...
          descname = _"tailoring a golden tabard",
          actions = {
-             -- total time 60 sec
+            -- total time 40 + 3,6 sec
             "return=skipped unless economy needs tabard_golden",
             "consume=spider_silk gold_thread",
-            "sleep=15000",
+            "sleep=10000",
             "playsound=sound/mill weaving 120",
-            "animate=working 30000",
-            "sleep=15000",
+            "animate=working 20000",
+            "sleep=10000",
             "produce=tabard_golden"
          }
       },

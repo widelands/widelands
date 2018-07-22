@@ -94,9 +94,9 @@ tribes:new_productionsite_type {
          descname = _"forging a felling ax",
          actions = {
             "return=skipped unless economy needs felling_ax",
-            "sleep=32000",
             "consume=log iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=felling_ax"
          },
       },
@@ -105,9 +105,9 @@ tribes:new_productionsite_type {
          descname = _"forging a pick",
          actions = {
             "return=skipped unless economy needs pick",
-            "sleep=32000",
             "consume=log iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=pick"
          },
       },
@@ -116,9 +116,9 @@ tribes:new_productionsite_type {
          descname = _"making a scythe",
          actions = {
             "return=skipped unless economy needs scythe",
-            "sleep=32000",
             "consume=log iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=scythe"
          },
       },
@@ -127,9 +127,9 @@ tribes:new_productionsite_type {
          descname = _"making a shovel",
          actions = {
             "return=skipped unless economy needs shovel",
-            "sleep=32000",
             "consume=log iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=shovel"
          },
       },
@@ -138,9 +138,9 @@ tribes:new_productionsite_type {
          descname = _"making a basket",
          actions = {
             "return=skipped unless economy needs basket",
-            "sleep=32000",
             "consume=thatch_reed log",
             "animate=working 35000",
+            "sleep=32000",
             "produce=basket"
          },
       },
@@ -149,9 +149,9 @@ tribes:new_productionsite_type {
          descname = _"making a hunting spear",
          actions = {
             "return=skipped unless economy needs hunting_spear",
-            "sleep=32000",
             "consume=log iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=hunting_spear"
          },
       },
@@ -160,9 +160,9 @@ tribes:new_productionsite_type {
          descname = _"making a fishing net",
          actions = {
             "return=skipped unless economy needs fishing_net",
-            "sleep=32000",
             "consume=thatch_reed:2",
             "animate=working 35000",
+            "sleep=32000",
             "produce=fishing_net"
          },
       },
@@ -171,9 +171,9 @@ tribes:new_productionsite_type {
          descname = _"making a bread paddle",
          actions = {
             "return=skipped unless economy needs bread_paddle",
-            "sleep=32000",
             "consume=log iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=bread_paddle"
          },
       },
@@ -182,9 +182,9 @@ tribes:new_productionsite_type {
          descname = _"making kitchen tools",
          actions = {
             "return=skipped unless economy needs kitchen_tools",
-            "sleep=32000",
             "consume=log iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=kitchen_tools"
          },
       },
@@ -193,9 +193,9 @@ tribes:new_productionsite_type {
          descname = _"making a hammer",
          actions = {
             "return=skipped unless economy needs hammer",
-            "sleep=32000",
             "consume=log iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=hammer"
          },
       },
@@ -204,9 +204,9 @@ tribes:new_productionsite_type {
          descname = _"making fire tongs",
          actions = {
             "return=skipped unless economy needs fire_tongs",
-            "sleep=32000",
             "consume=iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=fire_tongs"
          },
       },
@@ -215,9 +215,9 @@ tribes:new_productionsite_type {
          descname = _"making needles",
          actions = {
             "return=skipped unless economy needs needles",
-            "sleep=32000",
             "consume=iron",
             "animate=working 35000",
+            "sleep=32000",
             "produce=needles:2"
          },
       },

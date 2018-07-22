@@ -73,9 +73,9 @@ tribes:new_productionsite_type {
          descname = _"preparing a ration",
          actions = {
             "return=skipped unless economy needs ration",
-            "sleep=14000",
             "consume=fruit,smoked_fish,smoked_meat",
             "animate=working 19000",
+            "sleep=14000",
             "produce=ration"
          }
       },
@@ -84,9 +84,9 @@ tribes:new_productionsite_type {
          descname = _"preparing a meal",
          actions = {
             "return=skipped unless economy needs meal",
-            "sleep=10000",
             "consume=beer honey_bread smoked_fish,smoked_meat",
             "animate=working 30000",
+            "sleep=10000",
             "produce=meal"
          }
       },

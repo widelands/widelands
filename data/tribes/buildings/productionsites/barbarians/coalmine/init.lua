@@ -65,6 +65,7 @@ tribes:new_productionsite_type {
             "consume=ration",
             "animate=working 20000",
             "mine=coal 2 33 5 17",
+            "mine=coal 2 33 100 17",
             "produce=coal:2"
          }
       },

@@ -57,18 +57,22 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
-            "sleep=45000",
+            "sleep=40000",
             "return=skipped unless economy needs iron_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
             "animate=working 20000",
-            "mine=iron 4 100 5 2",
-            "produce=iron_ore:2",
             "animate=working 20000",
-            "mine=iron 4 100 5 2",
+            "animate=working 20000",
+            "mine=iron 4 100 25 2",
             "produce=iron_ore",
-            "animate=working 20000",
-            "mine=iron 4 100 5 2",
-            "produce=iron_ore:2"
+            "sleep=2500",
+            "mine=iron 4 100 1 2",
+            "mine=iron 4 100 1 2",
+            "mine=iron 4 100 1 2",
+            "produce=iron_ore:3",
+            "sleep=2500",
+            "mine=iron 4 100 1 2",
+            "produce=iron_ore"
          }
       },
    },

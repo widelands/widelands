@@ -82,7 +82,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = _"baking bread",
          actions = {
-            "return=skipped unless economy needs bread_frisians or workers need experience",
+            "return=skipped unless economy needs bread_frisians",
             "sleep=20000",
             "consume=barley water",
             "animate=working 20000",

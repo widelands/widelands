@@ -83,12 +83,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an ax because ...
          descname = _"forging an ax",
          actions = {
-            -- time total: 73
+            -- time total: 57+3,6
             "return=skipped unless economy needs ax",
-            "sleep=36000", -- +10 enlarge
+            "sleep=26000", -- +10 enlarge -- removed again
             "consume=coal iron",
             "playsound=sound/smiths smith 192",
-            "animate=working 28000",  -- +6 enlarge
+            "animate=working 22000",  -- +6 enlarge -- removed again
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax"
@@ -98,12 +98,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a sharp ax because ...
          descname = _"forging a sharp ax",
          actions = {
-            -- time total: 76
+            -- time total: 57+3,6
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
-            "sleep=37000", -- +11 enlarge
+            "sleep=26000", -- +11 enlarge -- removed again
             "playsound=sound/smiths smith 192",
-            "animate=working 30000", -- +8 enlarge
+            "animate=working 22000", -- +8 enlarge -- removed again
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_sharp"
@@ -113,12 +113,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broad ax because ...
          descname = _"forging a broad ax",
          actions = {
-            -- time total: 79
+            -- time total: 57+3,6
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
-            "sleep=38000", -- +12 enlarge
+            "sleep=26000", -- +12 enlarge -- removed again
             "playsound=sound/smiths smith 192",
-            "animate=working 32000", -- +10 enlarge
+            "animate=working 22000", -- +10 enlarge -- removed again
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_broad"
@@ -128,12 +128,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a bronze ax because ...
          descname = _"forging a bronze ax",
          actions = {
-            -- time total: 82
+            -- time total: 57+3,6
             "return=skipped unless economy needs ax_bronze",
             "consume=coal:2 iron:2",
-            "sleep=39000", -- +13 enlarge
+            "sleep=26000", -- +13 enlarge -- removed again
             "playsound=sound/smiths smith 192",
-            "animate=working 34000", -- +12 enlarge
+            "animate=working 22000", -- +12 enlarge -- removed again
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_bronze"
@@ -143,12 +143,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a battle ax because ...
          descname = _"forging a battle ax",
          actions = {
-            -- time total: 87
+            -- time total: 57+3,6
             "return=skipped unless economy needs ax_battle",
             "consume=coal gold iron:2",
-            "sleep=41000", -- +15 enlarge
+            "sleep=26000", -- +15 enlarge -- removed again
             "playsound=sound/smiths smith 192",
-            "animate=working 37000", -- +15 enlarge
+            "animate=working 22000", -- +15 enlarge -- removed again
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_battle"
@@ -158,12 +158,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a warrior’s ax because ...
          descname = _"forging a warrior’s ax",
          actions = {
-            -- time total: 92
+            -- time total: 57+3,6
             "return=skipped unless economy needs ax_warriors",
             "consume=coal:2 gold:2 iron:2",
-            "sleep=43000", -- +17 enlarge
+            "sleep=26000", -- +17 enlarge -- removed again
             "playsound=sound/smiths smith 192",
-            "animate=working 40000", -- +18 enlarge
+            "animate=working 22000", -- +18 enlarge -- removed again
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_warriors"
