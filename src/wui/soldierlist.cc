@@ -436,8 +436,6 @@ void SoldierList::think() {
 	if (upcast(Widelands::MilitarySite, ms, &building_)) {
 		switch (ms->get_soldier_preference()) {
 		case Widelands::SoldierPreference::kRookies:
-			FALLS_THROUGH;
-		case Widelands::SoldierPreference::kNotSet:
 			soldier_preference_.set_state(0);
 			break;
 		case Widelands::SoldierPreference::kHeroes:
