@@ -121,10 +121,11 @@ void InputQueue::set_consume_interval(const uint32_t time) {
 }
 
 uint32_t InputQueue::get_missing() const {
-	if (get_filled() >= max_fill_ || request_ == nullptr || !request_->is_open()) {
+	const auto filled = get_filled();
+	if (filled >= max_fill_ || request_ == nullptr || !request_->is_open()) {
 		return 0;
 	}
-	return max_fill_ - get_filled() - std::min(max_fill_, request_->get_num_transfers());
+	return max_fill_ - filled - std::min(max_fill_, request_->get_num_transfers());
 }
 
 constexpr uint16_t kCurrentPacketVersion = 3;
