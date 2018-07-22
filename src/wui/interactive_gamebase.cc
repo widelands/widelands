@@ -19,6 +19,8 @@
 
 #include "wui/interactive_gamebase.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/macros.h"
