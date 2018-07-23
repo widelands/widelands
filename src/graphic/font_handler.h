@@ -18,8 +18,8 @@
  */
 
 // TODO(unknown): rename
-#ifndef WL_GRAPHIC_FONT_HANDLER1_H
-#define WL_GRAPHIC_FONT_HANDLER1_H
+#ifndef WL_GRAPHIC_FONT_HANDLER_H
+#define WL_GRAPHIC_FONT_HANDLER_H
 
 #include <memory>
 
@@ -61,4 +61,4 @@ IFontHandler* create_fonthandler(ImageCache* image_cache, const std::string& loc
 extern IFontHandler* g_fh;
 }
 
-#endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER1_H
+#endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER_H
