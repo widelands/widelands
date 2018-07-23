@@ -24,21 +24,21 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {27, 65},
+         hotspot = {39, 94},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {27, 66},
+         hotspot = {39, 94},
          fps = 10,
       },
       empty = {
-         pictures = path.list_files (dirname .. "empty_?.png"),
-         hotspot = {27, 48},
+         pictures = path.list_files (dirname .. "empty_??.png"),
+         hotspot = {39, 94},
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {27, 48},
+         hotspot = {39, 72},
       },
    },
 
