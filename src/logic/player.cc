@@ -1338,19 +1338,14 @@ const std::string Player::pick_shipname() {
  *
  * \param fr source stream
  */
-void Player::read_remaining_shipnames(FileRead& fr, uint16_t packet_version) {
+void Player::read_remaining_shipnames(FileRead& fr) {
 	// First get rid of default shipnames
 	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());
 	}
-	// TODO(GunChleoc): Savegame compatibility. Remove after Build 20.
-	if (packet_version >= 21) {
-		ship_name_counter_ = fr.unsigned_32();
-	} else {
-		ship_name_counter_ = ships_.size();
-	}
+	ship_name_counter_ = fr.unsigned_32();
 }
 
 /**

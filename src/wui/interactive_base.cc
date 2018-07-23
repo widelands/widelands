@@ -464,6 +464,25 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 	}
 }
 
+void InteractiveBase::blit_overlay(RenderTarget* dst,
+                                   const Vector2i& position,
+                                   const Image* image,
+                                   const Vector2i& hotspot,
+                                   float scale) {
+	const Recti pixel_perfect_rect =
+	   Recti(position - hotspot * scale, image->width() * scale, image->height() * scale);
+	dst->blitrect_scale(pixel_perfect_rect.cast<float>(), image,
+	                    Recti(0, 0, image->width(), image->height()), 1.f, BlendMode::UseAlpha);
+}
+
+void InteractiveBase::blit_field_overlay(RenderTarget* dst,
+                                         const FieldsToDraw::Field& field,
+                                         const Image* image,
+                                         const Vector2i& hotspot,
+                                         float scale) {
+	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale);
+}
+
 void InteractiveBase::mainview_move() {
 	if (minimap_registry_.window) {
 		minimap_->set_view(map_view_.view_area().rect());

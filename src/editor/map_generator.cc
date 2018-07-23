@@ -659,9 +659,10 @@ void MapGenerator::create_random_map() {
 	map_.recalc_whole_map(egbase_.world());
 
 	// Care about players and place their start positions
+	map_.set_nrplayers(map_info_.numPlayers);
+	assert(map_info_.numPlayers >= 1);
 	const std::string tribe = map_.get_scenario_player_tribe(1);
 	const std::string ai = map_.get_scenario_player_ai(1);
-	map_.set_nrplayers(map_info_.numPlayers);
 	FindNodeSize functor(FindNodeSize::sizeBig);
 	Coords playerstart(Coords::null());
 
@@ -754,7 +755,7 @@ void MapGenerator::create_random_map() {
 		map_.find_fields(Area<FCoords>(map_.get_fcoords(playerstart), 20), &coords, functor);
 
 		// Take the nearest ones
-		uint32_t min_distance = 0;
+		uint32_t min_distance = std::numeric_limits<uint32_t>::max();
 		Coords coords2;
 		for (uint16_t i = 0; i < coords.size(); ++i) {
 			uint32_t test = map_.calc_distance(coords[i], playerstart);
