@@ -129,7 +129,13 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 	cache_max_fill_ = queue_->get_max_fill();
 
 	uint32_t nr_inputs_to_draw = std::min(queue_->get_filled(), cache_size_);
-	uint32_t nr_empty_to_draw = cache_size_ - nr_inputs_to_draw;
+	uint32_t nr_missing_to_draw =
+	   std::min(queue_->get_missing(), cache_max_fill_) + cache_size_ - cache_max_fill_;
+	if (nr_inputs_to_draw > cache_max_fill_) {
+		nr_missing_to_draw -= nr_inputs_to_draw - cache_max_fill_;
+	}
+	uint32_t nr_coming_to_draw = cache_size_ - nr_inputs_to_draw - nr_missing_to_draw;
+	assert(nr_inputs_to_draw + nr_missing_to_draw + nr_coming_to_draw == cache_size_);
 
 	Vector2i point = Vector2i::zero();
 	point.x = Border + (show_only_ ? 0 : CellWidth + CellSpacing);
@@ -139,10 +145,15 @@ void InputQueueDisplay::draw(RenderTarget& dst) {
 		dst.blitrect(Vector2i(point.x, point.y), icon_, Recti(0, 0, icon_->width(), icon_->height()),
 		             BlendMode::UseAlpha);
 	}
-	for (; nr_empty_to_draw; --nr_empty_to_draw, point.x += CellWidth + CellSpacing) {
+	for (; nr_coming_to_draw; --nr_coming_to_draw, point.x += CellWidth + CellSpacing) {
 		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
 		                              Recti(0, 0, icon_->width(), icon_->height()),
-		                              RGBAColor(166, 166, 166, 127));
+		                              RGBAColor(127, 127, 127, 191));
+	}
+	for (; nr_missing_to_draw; --nr_missing_to_draw, point.x += CellWidth + CellSpacing) {
+		dst.blitrect_scale_monochrome(Rectf(point.x, point.y, icon_->width(), icon_->height()), icon_,
+		                              Recti(0, 0, icon_->width(), icon_->height()),
+		                              RGBAColor(191, 191, 191, 127));
 	}
 
 	if (!show_only_) {
