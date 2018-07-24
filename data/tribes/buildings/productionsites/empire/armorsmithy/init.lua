@@ -79,10 +79,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
          descname = _"forging a helmet",
          actions = {
-            -- time total: 67+3,6
+            -- time total: 67 + 3.6
             "return=skipped unless economy needs armor_helmet",
-            "sleep=47000",  
             "consume=iron coal",
+            "sleep=47000",
             "animate=working 20000", 
             "produce=armor_helmet"
          }
@@ -91,11 +91,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor because ...
          descname = _"forging a suit of armor",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs armor",
             "consume=iron coal cloth",
-            "sleep=32000",  
-            "animate=working 45000",  
+            "sleep=32000",
+            "animate=working 45000",
             "produce=armor"
          }
       },
@@ -103,7 +103,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor because ...
          descname = _"forging a suit of chain armor",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_chain",
             "consume=iron:2 coal cloth",
             "sleep=32000", 
@@ -115,11 +115,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor because ...
          descname = _"forging a suit of gilded armor",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs armor_gilded",
             "consume=iron:2 coal:2 cloth gold",
             "sleep=32000",  
-            "animate=working 45000", 
+            "animate=working 45000",
             "produce=armor_gilded"
          }
       },

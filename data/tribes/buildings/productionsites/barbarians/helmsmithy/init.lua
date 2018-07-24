@@ -77,11 +77,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
          descname = _"forging a helmet",
          actions = {
-            -- time total: 67+3,6
+            -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet",
-            "sleep=32000", 
             "consume=coal iron",
-            "animate=working 35000", 
+            "sleep=32000",
+            "animate=working 35000",
             "produce=helmet"
          }
       },
@@ -89,10 +89,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a mask because ...
          descname = _"forging a mask",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs helmet_mask",
             "consume=coal iron:2",
-            "sleep=32000", 
+            "sleep=32000",
             "animate=working 45000",
             "produce=helmet_mask"
          }
@@ -101,11 +101,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a warhelm because ...
          descname = _"forging a warhelm",
          actions = {
-            -- time total: 87+3,6
+            -- time total: 87 + 3.6
             "return=skipped unless economy needs helmet_warhelm",
             "consume=coal gold iron:2",
-            "sleep=32000", 
-            "animate=working 55000", 
+            "sleep=32000",
+            "animate=working 55000",
             "produce=helmet_warhelm"
          }
       },

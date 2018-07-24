@@ -60,19 +60,17 @@ tribes:new_productionsite_type {
             "sleep=40000",
             "return=skipped unless economy needs iron_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
-            "animate=working 20000",
-            "animate=working 20000",
+            "animate=working 60000",
             "mine=iron 4 100 25 2",
             "produce=iron_ore",
+            "sleep=2500",
+            "mine=iron 4 100 1 2",
+            "produce=iron_ore"
             "sleep=2500",
             "mine=iron 4 100 1 2",
             "mine=iron 4 100 1 2",
             "mine=iron 4 100 1 2",
             "produce=iron_ore:3",
-            "sleep=2500",
-            "mine=iron 4 100 1 2",
-            "produce=iron_ore"
          }
       },
    },

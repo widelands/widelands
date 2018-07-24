@@ -60,15 +60,17 @@ tribes:new_productionsite_type {
             "sleep=40000",
             "return=skipped unless economy needs coal",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
-            "animate=working 20000",    
-            "animate=working 20000",
+            "animate=working 60000",
             "mine=coal 4 100 35 2",
+            -- this step has a 35 percent chance to mine 1 coal. 1 coal is 1/7th of the normal yield.
+            -- this results in 5% chance with regard to normal yield (35 divided by 7)
+            -- following cycles of mine will fail (chance of only 1 percent
             "produce=coal",
             "sleep=2500",
+            "mine=coal 4 100 1 2", -- 3 mine commands to have one resource mined for each ware delivered
             "mine=coal 4 100 1 2",
             "mine=coal 4 100 1 2",
-            "mine=coal 4 100 1 2",
+            -- if the last mine command fails due to the second command mined the last ressource max. 2 ressources are lost
             "produce=coal:3",
             "sleep=2500",    
             "mine=coal 4 100 1 2",

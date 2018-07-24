@@ -74,10 +74,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a broadsword because ...
          descname = _"forging a broadsword",
          actions = {
-            -- time total: 82
+            -- time total: 82 + 3.6
             "return=skipped unless economy needs sword_broad",
-            "sleep=39000",
             "consume=coal iron:2 gold",
+            "sleep=39000",
             "playsound=sound/smiths smith 192",
             "animate=working 34000",
             "playsound=sound/smiths sharpening 120",
@@ -89,7 +89,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword because ...
          descname = _"forging a double-edged sword",
          actions = {
-            -- time total: 87
+            -- time total: 87 + 3.6
             "return=skipped unless economy needs sword_double",
             "consume=coal:2 iron:2 gold",
             "sleep=41000",
@@ -104,7 +104,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet because ...
          descname = _"forging a golden helmet",
          actions = {
-            -- time total: 115
+            -- time total: 115 + 3.6
             "return=skipped unless economy needs helmet_golden",
             "consume=coal:2 iron:2 gold",
             "sleep=51000",

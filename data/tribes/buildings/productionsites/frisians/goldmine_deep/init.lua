@@ -64,21 +64,19 @@ tribes:new_productionsite_type {
          descname = _"mining gold",
          actions = {
             "sleep=39800",
-            "return=skipped unless economy needs coal",
+            "return=skipped unless economy needs gold_ore",
             "consume=meal",
-            "animate=working 19000",
-            "animate=working 19000",
-            "animate=working 19000",
+            "animate=working 57000",
             "mine=gold 3 100 50 5",
-            "produce=gold",
+            "produce=gold_ore",
+            "sleep=2000",
+            "mine=gold 3 100 1 5",
+            "produce=gold_ore",
             "sleep=2000",
             "mine=gold 3 100 1 5",
             "mine=gold 3 100 1 5",
-            "produce=gold:2",
-            "sleep=2000",
             "mine=gold 3 100 1 5",
-            "mine=gold 3 100 1 5",
-            "produce=gold:2"
+            "produce=gold_ore:3"
          }
       },
    },

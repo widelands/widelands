@@ -67,7 +67,7 @@ tribes:new_productionsite_type {
             "sleep=45000",
             "return=skipped unless economy needs coal",
             "consume=ration",
-            "animate=working 40000",
+            "animate=working 30000",
             "mine=coal 3 50 5 20",
             "mine=coal 3 50 100 20",
             "produce=coal:2"

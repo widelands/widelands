@@ -95,8 +95,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs felling_ax",
             "consume=log iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=felling_ax"
          },
       },
@@ -106,8 +106,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs pick",
             "consume=log iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=pick"
          },
       },
@@ -117,8 +117,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs scythe",
             "consume=log iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=scythe"
          },
       },
@@ -128,8 +128,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs shovel",
             "consume=log iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=shovel"
          },
       },
@@ -139,8 +139,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs basket",
             "consume=thatch_reed log",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=basket"
          },
       },
@@ -150,8 +150,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs hunting_spear",
             "consume=log iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=hunting_spear"
          },
       },
@@ -161,8 +161,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fishing_net",
             "consume=thatch_reed:2",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=fishing_net"
          },
       },
@@ -172,8 +172,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs bread_paddle",
             "consume=log iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=bread_paddle"
          },
       },
@@ -183,8 +183,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs kitchen_tools",
             "consume=log iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=kitchen_tools"
          },
       },
@@ -194,8 +194,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs hammer",
             "consume=log iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=hammer"
          },
       },
@@ -205,8 +205,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fire_tongs",
             "consume=iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=fire_tongs"
          },
       },
@@ -216,8 +216,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs needles",
             "consume=iron",
-            "animate=working 35000",
             "sleep=32000",
+            "animate=working 35000",
             "produce=needles:2"
          },
       },

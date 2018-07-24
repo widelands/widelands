@@ -73,10 +73,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a short sword because ...
          descname = _"forging a short sword",
          actions = {
-            -- time total: 76
+            -- time total: 76 + 3.6
             "return=skipped unless economy needs sword_short",
-            "sleep=37000",
             "consume=coal iron",
+            "sleep=37000",
             "playsound=sound/smiths smith 192",
             "animate=working 30000",
             "playsound=sound/smiths sharpening 120",
@@ -88,7 +88,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long sword because ...
          descname = _"forging a long sword",
          actions = {
-            -- time total: 79
+            -- time total: 79 + 3.6
             "return=skipped unless economy needs sword_long",
             "consume=coal iron:2",
             "sleep=38000",
@@ -103,10 +103,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
          descname = _"forging a helmet",
          actions = {
-            -- time total: 100
+            -- time total: 100 + 3.6
             "return=skipped unless economy needs helmet",
             "consume=coal iron:2",
             "sleep=50000",
+            "playsound=sound/smiths smith 192",
             "animate=working 50000",
             "produce=helmet"
          },

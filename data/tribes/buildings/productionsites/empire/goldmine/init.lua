@@ -61,9 +61,7 @@ tribes:new_productionsite_type {
             "sleep=43000",
             "return=skipped unless economy needs gold_ore",
             "consume=ration wine",
-            "animate=working 20000",
-
-            "animate=working 20000",
+            "animate=working 40000",
             "mine=gold 2 50 10 17",
             "produce=gold_ore",
             "sleep=2000",

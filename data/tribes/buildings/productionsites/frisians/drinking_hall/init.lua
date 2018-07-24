@@ -74,8 +74,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs ration",
             "consume=fruit,smoked_fish,smoked_meat",
-            "animate=working 19000",
             "sleep=14000",
+            "animate=working 19000",
             "produce=ration"
          }
       },
@@ -85,8 +85,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs meal",
             "consume=beer honey_bread smoked_fish,smoked_meat",
-            "animate=working 30000",
             "sleep=10000",
+            "animate=working 30000",
             "produce=meal"
          }
       },

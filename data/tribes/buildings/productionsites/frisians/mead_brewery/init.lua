@@ -70,8 +70,8 @@ tribes:new_productionsite_type {
          descname = _"brewing mead",
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
-            "sleep=35000",
             "consume=barley water honey",
+            "sleep=35000",
             "animate=working 35000",
             "produce=mead"
          }
@@ -81,8 +81,8 @@ tribes:new_productionsite_type {
          descname = _"brewing beer",
          actions = {
             "return=skipped unless economy needs beer",
-            "sleep=30000",
             "consume=barley water",
+            "sleep=30000",
             "animate=working 30000",
             "produce=beer"
          }

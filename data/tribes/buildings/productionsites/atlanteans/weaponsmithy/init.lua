@@ -72,10 +72,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a light trident because ...
          descname = _"forging a light trident",
          actions = {
-            -- time total: 50+3,6
+            -- time total: 50 + 3.6
             "return=skipped unless economy needs trident_light",
-            "sleep=20000",   
             "consume=iron planks",
+            "sleep=20000",
             "playsound=sound/smiths smith 192",
             "animate=working 21000",  
             "playsound=sound/smiths sharpening 120",
@@ -87,7 +87,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a long trident because ...
          descname = _"forging a long trident",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_long",
             "consume=iron coal planks",
             "sleep=32000",  
@@ -102,7 +102,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a steel trident because ...
          descname = _"forging a steel trident",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_steel",
             "consume=iron:2 coal planks",
             "sleep=32000",  
@@ -117,7 +117,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a double trident because ...
          descname = _"forging a double trident",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs trident_double",
             "consume=iron coal:2 planks gold",
             "sleep=32000",  
@@ -132,7 +132,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy double trident because ...
          descname = _"forging a heavy double trident",
          actions = {
-             -- time total: 77+3,6
+             -- time total: 77 + 3.6
            "return=skipped unless economy needs trident_heavy_double",
             "consume=iron:2 coal:2 planks gold",
             "sleep=32000",  

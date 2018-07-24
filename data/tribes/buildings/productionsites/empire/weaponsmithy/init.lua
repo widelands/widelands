@@ -77,10 +77,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a wooden spear because ...
          descname = _"forging a wooden spear",
          actions = {
-            -- time total: 50+3,6
+            -- time total: 50 + 3.6
             "return=skipped unless economy needs spear_wooden",
-            "sleep=20000", 
             "consume=planks",
+            "sleep=20000",
             "playsound=sound/smiths smith 192",
             "animate=working 21000", 
             "playsound=sound/smiths sharpening 120",
@@ -92,7 +92,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a spear because ...
          descname = _"forging a spear",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs spear",
             "consume=coal iron planks",
             "sleep=32000",  
@@ -107,7 +107,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging an advanced spear because ...
          descname = _"forging an advanced spear",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_advanced",
             "consume=coal iron:2 planks",
             "sleep=32000",  
@@ -122,7 +122,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a heavy spear because ...
          descname = _"forging a heavy spear",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_heavy",
             "consume=coal:2 gold iron planks",
             "sleep=32000", 
@@ -137,12 +137,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start forging a war spear because ...
          descname = _"forging a war spear",
          actions = {
-            -- time total: 77+3,6
+            -- time total: 77 + 3.6
             "return=skipped unless economy needs spear_war",
             "consume=coal:2 gold iron:2 planks",
             "sleep=32000",  
             "playsound=sound/smiths smith 192",
-            "animate=working 36000", 
+            "animate=working 36000",
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=spear_war"
