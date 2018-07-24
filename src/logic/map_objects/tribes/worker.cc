@@ -975,16 +975,6 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			      .str();
 
 			Message::Type message_type = Message::Type::kGeologists;
-			if (rdescr->name() == "coal")
-				message_type = Message::Type::kGeologistsCoal;
-			else if (rdescr->name() == "gold")
-				message_type = Message::Type::kGeologistsGold;
-			else if (rdescr->name() == "stones")
-				message_type = Message::Type::kGeologistsStones;
-			else if (rdescr->name() == "iron")
-				message_type = Message::Type::kGeologistsIron;
-			else if (rdescr->name() == "water")
-				message_type = Message::Type::kGeologistsWater;
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
@@ -992,8 +982,8 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			   game, std::unique_ptr<Message>(
 			            new Message(message_type, game.get_gametime(), rdescr->descname(),
 			                        ri.descr().representative_image_filename(), rdescr->descname(),
-			                        message, position, serial_)),
-			   300000, 8);
+			                        message, position, serial_, rdescr->name().c_str())),
+			   rdescr->timeout_millis(), rdescr->timeout_radius());
 		}
 	}
 

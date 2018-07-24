@@ -36,11 +36,6 @@ struct Message {
 		kAllMessages,
 		kGameLogic,
 		kGeologists,
-		kGeologistsCoal,
-		kGeologistsGold,
-		kGeologistsStones,
-		kGeologistsIron,
-		kGeologistsWater,
 		kScenario,
 		kSeafaring,
 		kEconomy,              // economy
@@ -63,6 +58,8 @@ struct Message {
 	 * \param ser        A MapObject serial. If non null, the message will be deleted once
 	 *                   the object is removed from the game. Defaults to 0
 	 * \param s          The message status. Defaults to Status::New
+	 * \param detail     The extended message type, used for comparisons in
+	 *                   Player::add_message_with_timeout(). Defaults to nullptr
 	 */
 	Message(Message::Type msgtype,
 	        uint32_t sent_time,
@@ -72,8 +69,10 @@ struct Message {
 	        const std::string& init_body,
 	        const Widelands::Coords& c = Coords::null(),
 	        Widelands::Serial ser = 0,
+	        const char* detail = nullptr,
 	        Status s = Status::kNew)
 	   : type_(msgtype),
+	     type_detail_(detail),
 	     title_(init_title),
 	     icon_filename_(init_icon_filename),
 	     icon_(g_gr->images().get(init_icon_filename)),
@@ -87,6 +86,9 @@ struct Message {
 
 	Message::Type type() const {
 		return type_;
+	}
+	const char* type_detail() const {
+		return type_detail_;
 	}
 	uint32_t sent() const {
 		return sent_;
@@ -129,15 +131,13 @@ struct Message {
 		} else if (type_ >= Widelands::Message::Type::kEconomy &&
 		           type_ <= Widelands::Message::Type::kEconomySiteOccupied) {
 			return Widelands::Message::Type::kEconomy;
-		} else if (type_ >= Widelands::Message::Type::kGeologists &&
-		           type_ <= Widelands::Message::Type::kGeologistsWater) {
-			return Widelands::Message::Type::kGeologists;
 		}
 		return type_;
 	}
 
 private:
 	Message::Type type_;
+	const char* type_detail_;
 	const std::string title_;
 	const std::string icon_filename_;
 	const Image* icon_;  // Pointer to icon into picture stack

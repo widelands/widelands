@@ -123,14 +123,14 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 						messages->add_message(std::unique_ptr<Message>(new Message(
 						   static_cast<Message::Type>(s->get_natural("type")), sent, name,
 						   "images/wui/fieldaction/menu_build_flag.png", name, s->get_safe_string("body"),
-						   get_coords("position", extent, Coords::null(), s), serial, status)));
+						   get_coords("position", extent, Coords::null(), s), serial, nullptr, status)));
 					} else {
 
 						messages->add_message(std::unique_ptr<Message>(new Message(
 						   static_cast<Message::Type>(s->get_natural("type")), sent, s->get_name(),
 						   s->get_safe_string("icon"), s->get_safe_string("heading"),
 						   s->get_safe_string("body"), get_coords("position", extent, Coords::null(), s),
-						   serial, status)));
+						   serial, s->get_string("detail"), status)));
 					}
 					previous_message_sent = sent;
 				} catch (const WException& e) {
@@ -182,6 +182,9 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 				const MapObject* mo = egbase.objects().get_object(message.serial());
 				uint32_t fileindex = mos.get_object_file_index_or_zero(mo);
 				s.set_int("serial", fileindex);
+			}
+			if (message.type_detail()) {
+			    s.set_string("detail", message.type_detail());
 			}
 		}
 		fs.ensure_directory_exists(
