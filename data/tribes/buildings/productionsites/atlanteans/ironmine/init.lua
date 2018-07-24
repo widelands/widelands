@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
             "produce=iron_ore",
             "sleep=2500",
             "mine=iron 4 100 1 2",
-            "produce=iron_ore"
+            "produce=iron_ore",
             "sleep=2500",
             "mine=iron 4 100 1 2",
             "mine=iron 4 100 1 2",
