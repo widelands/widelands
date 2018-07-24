@@ -153,9 +153,9 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 67+3,6
             "return=skipped unless economy needs shield_steel",
-            "sleep=32000",  -- +13 enlarge  -- REMOVED AGAIN
+            "sleep=32000", 
             "consume=iron:2 coal:2",
-            "animate=working 35000",  -- +10 enlarge -- REMOVED AGAIN
+            "animate=working 35000", 
             "produce=shield_steel"
          }
       },
@@ -166,8 +166,8 @@ tribes:new_productionsite_type {
             -- time total: 77+3,6
             "return=skipped unless economy needs shield_advanced",
             "consume=iron:2 coal:2 gold",
-            "sleep=32000",  -- +18 enlarge  -- REMOVED AGAIN
-            "animate=working 45000",  -- +15 enlarge   --  REMOVED AGAIN
+            "sleep=32000",  
+            "animate=working 45000", 
             "produce=shield_advanced"
          }
       },

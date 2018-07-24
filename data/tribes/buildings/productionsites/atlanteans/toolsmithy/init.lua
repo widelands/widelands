@@ -84,7 +84,6 @@ tribes:new_productionsite_type {
          descname = _"making a bread paddle",
          actions = {
             "return=skipped unless economy needs bread_paddle",
-        --    "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -97,7 +96,6 @@ tribes:new_productionsite_type {
          descname = _"making a pair of buckets",
          actions = {
             "return=skipped unless economy needs buckets",
-         --   "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -110,7 +108,6 @@ tribes:new_productionsite_type {
          descname = _"making fire tongs",
          actions = {
             "return=skipped unless economy needs fire_tongs",
-       --     "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -123,7 +120,6 @@ tribes:new_productionsite_type {
          descname = _"making a fishing net",
          actions = {
             "return=skipped unless economy needs fishing_net",
-        --    "sleep=5000",
             "consume=spidercloth:2",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -136,7 +132,6 @@ tribes:new_productionsite_type {
          descname = _"making a hammer",
          actions = {
             "return=skipped unless economy needs hammer",
-         --   "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -149,7 +144,6 @@ tribes:new_productionsite_type {
          descname = _"making a hook pole",
          actions = {
             "return=skipped unless economy needs hook_pole",
-        --    "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -162,7 +156,6 @@ tribes:new_productionsite_type {
          descname = _"making a hunting bow",
          actions = {
             "return=skipped unless economy needs hunting_bow",
-     --       "sleep=5000",
             "consume=log spidercloth",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -175,7 +168,6 @@ tribes:new_productionsite_type {
          descname = _"making milking tongs",
          actions = {
             "return=skipped unless economy needs milking_tongs",
-       --     "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -188,7 +180,6 @@ tribes:new_productionsite_type {
          descname = _"making a pick",
          actions = {
             "return=skipped unless economy needs pick",
-       --     "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -201,7 +192,6 @@ tribes:new_productionsite_type {
          descname = _"making a saw",
          actions = {
             "return=skipped unless economy needs saw",
-         --   "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -214,7 +204,6 @@ tribes:new_productionsite_type {
          descname = _"making a scythe",
          actions = {
             "return=skipped unless economy needs scythe",
-           -- "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",
@@ -227,7 +216,6 @@ tribes:new_productionsite_type {
          descname = _"making a shovel",
          actions = {
             "return=skipped unless economy needs shovel",
-         --   "sleep=5000",
             "consume=iron log",
             "sleep=32000",
             "playsound=sound/smiths toolsmith 192",

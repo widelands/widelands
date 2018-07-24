@@ -69,7 +69,6 @@ tribes:new_productionsite_type {
          actions = {
             -- total time 40 + 3,6 sec
             "return=skipped unless economy needs spidercloth",
-          --  "sleep=10000",
             "consume=spider_silk",
             "playsound=sound/mill weaving 120",
             "animate=working 20000",
@@ -83,7 +82,6 @@ tribes:new_productionsite_type {
          actions = {
             -- total time 40 + 3,6 sec
             "return=skipped unless economy needs tabard",
-        --    "sleep=10000",
             "consume=spider_silk",
             "playsound=sound/mill weaving 120",
             "animate=working 20000",

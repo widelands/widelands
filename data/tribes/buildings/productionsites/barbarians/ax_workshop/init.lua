@@ -78,10 +78,10 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 57+3,6
             "return=skipped unless economy needs ax",
-            "sleep=26000", -- +10 enlarge   -- removed again
+            "sleep=26000", 
             "consume=coal iron",
             "playsound=sound/smiths smith 192",
-            "animate=working 22000",  -- +6 enlarge  -- removed again
+            "animate=working 22000", 
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax"
@@ -94,9 +94,9 @@ tribes:new_productionsite_type {
             -- time total: 57+3,6
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
-            "sleep=26000", -- +11 enlarge     -- removed again
+            "sleep=26000", 
             "playsound=sound/smiths smith 192",
-            "animate=working 22000", -- +8 enlarge -- removed again
+            "animate=working 22000",
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_sharp"
@@ -109,9 +109,9 @@ tribes:new_productionsite_type {
             -- time total: 57+3,6
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
-            "sleep=26000", -- +12 enlarge  -- removed again
+            "sleep=26000", 
             "playsound=sound/smiths smith 192",
-            "animate=working 22000", -- +10 enlarge -- removed again
+            "animate=working 22000", 
             "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_broad"
