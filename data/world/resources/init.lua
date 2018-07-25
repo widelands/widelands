@@ -54,7 +54,7 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --        *Mandatory*. Defines the time for which geologists messages for this
 --        resource will be muted within this area after a find, e.g.::
 --
---            timeout_ms = 30000,
+--            timeout_ms = 300000,
 --
 --    **timeout_radius**
 --        *Mandatory*. Defines the radius within which geologists messages for this
@@ -84,7 +84,7 @@ world:new_resource_type{
    descname = _ "Coal",
    max_amount = 20,
    detectable = true,
-   timeout_ms = 30000,
+   timeout_ms = 300000,
    timeout_radius = 8,
    representative_image = pics_dir .. "coal4.png",
    editor_pictures = {
@@ -100,7 +100,7 @@ world:new_resource_type{
    descname = _ "Gold",
    max_amount = 20,
    detectable = true,
-   timeout_ms = 30000,
+   timeout_ms = 300000,
    timeout_radius = 8,
    representative_image = pics_dir .. "gold4.png",
    editor_pictures = {
@@ -116,7 +116,7 @@ world:new_resource_type{
    descname = _ "Iron",
    max_amount = 20,
    detectable = true,
-   timeout_ms = 30000,
+   timeout_ms = 300000,
    timeout_radius = 8,
    representative_image = pics_dir .. "iron4.png",
    editor_pictures = {
@@ -132,7 +132,7 @@ world:new_resource_type{
    descname = _ "Stones",
    max_amount = 20,
    detectable = true,
-   timeout_ms = 30000,
+   timeout_ms = 300000,
    timeout_radius = 8,
    representative_image = pics_dir .. "stones4.png",
    editor_pictures = {
@@ -148,7 +148,7 @@ world:new_resource_type{
    descname = _ "Water",
    max_amount = 50,
    detectable = true,
-   timeout_ms = 30000,
+   timeout_ms = 300000,
    timeout_radius = 8,
    representative_image = pics_dir .. "water4.png",
    editor_pictures = {

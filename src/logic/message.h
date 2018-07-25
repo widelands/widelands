@@ -58,7 +58,7 @@ struct Message {
 	 * \param ser        A MapObject serial. If non null, the message will be deleted once
 	 *                   the object is removed from the game. Defaults to 0
 	 * \param s          The message status. Defaults to Status::New
-	 * \param detail     The extended message type, used for comparisons in
+	 * \param subtype    The extended message type, used for comparisons in
 	 *                   Player::add_message_with_timeout(). Defaults to nullptr
 	 */
 	Message(Message::Type msgtype,

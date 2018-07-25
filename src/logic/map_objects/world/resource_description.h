@@ -51,7 +51,7 @@ public:
 	/// Returns the time for which nearby geologist messages for this resource are muted
 	uint32_t timeout_ms() const;
 
-	/// Returns the radius within which geologist messages for this resource are tenporarily muted
+	/// Returns the radius within which geologist messages for this resource are temporarily muted
 	uint32_t timeout_radius() const;
 
 	/// Returns the maximum amount that can be in a field for this resource.
