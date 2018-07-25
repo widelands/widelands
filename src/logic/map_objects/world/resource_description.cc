@@ -31,7 +31,7 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      detectable_(table.get_bool("detectable")),
-     timeout_millis_(table.get_int("timeout_millis")),
+     timeout_ms_(table.get_int("timeout_ms")),
      timeout_radius_(table.get_int("timeout_radius")),
      max_amount_(table.get_int("max_amount")),
      representative_image_(table.get_string("representative_image")) {
@@ -78,8 +78,8 @@ bool ResourceDescription::detectable() const {
 	return detectable_;
 }
 
-uint32_t ResourceDescription::timeout_millis() const {
-	return timeout_millis_;
+uint32_t ResourceDescription::timeout_ms() const {
+	return timeout_ms_;
 }
 
 uint32_t ResourceDescription::timeout_radius() const {

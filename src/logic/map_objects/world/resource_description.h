@@ -49,7 +49,7 @@ public:
 	bool detectable() const;
 
 	/// Returns the time for which nearby geologist messages for this resource are muted
-	uint32_t timeout_millis() const;
+	uint32_t timeout_ms() const;
 
 	/// Returns the radius within which geologist messages for this resource are tenporarily muted
 	uint32_t timeout_radius() const;
@@ -70,7 +70,7 @@ private:
 	const std::string name_;
 	const std::string descname_;
 	const bool detectable_;
-	const uint32_t timeout_millis_;
+	const uint32_t timeout_ms_;
 	const uint32_t timeout_radius_;
 	const ResourceAmount max_amount_;
 	const std::string representative_image_;

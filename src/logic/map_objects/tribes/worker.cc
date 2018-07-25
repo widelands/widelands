@@ -983,7 +983,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			            new Message(message_type, game.get_gametime(), rdescr->descname(),
 			                        ri.descr().representative_image_filename(), rdescr->descname(),
 			                        message, position, serial_, rdescr->name().c_str())),
-			   rdescr->timeout_millis(), rdescr->timeout_radius());
+			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}
 

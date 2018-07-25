@@ -69,10 +69,10 @@ struct Message {
 	        const std::string& init_body,
 	        const Widelands::Coords& c = Coords::null(),
 	        Widelands::Serial ser = 0,
-	        const char* detail = nullptr,
+	        const char* subtype = nullptr,
 	        Status s = Status::kNew)
 	   : type_(msgtype),
-	     type_detail_(detail),
+	     subtype_(subtype),
 	     title_(init_title),
 	     icon_filename_(init_icon_filename),
 	     icon_(g_gr->images().get(init_icon_filename)),
@@ -87,8 +87,8 @@ struct Message {
 	Message::Type type() const {
 		return type_;
 	}
-	const char* type_detail() const {
-		return type_detail_;
+	const char* subtype() const {
+		return subtype_;
 	}
 	uint32_t sent() const {
 		return sent_;
@@ -137,7 +137,7 @@ struct Message {
 
 private:
 	Message::Type type_;
-	const char* type_detail_;
+	const char* subtype_;
 	const std::string title_;
 	const std::string icon_filename_;
 	const Image* icon_;  // Pointer to icon into picture stack
