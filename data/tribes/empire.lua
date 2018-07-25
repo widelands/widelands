@@ -17,7 +17,7 @@ tribes:new_tribe {
       }
    },
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          "tribes/images/empire/roadt_busy.png",
@@ -26,6 +26,10 @@ tribes:new_tribe {
          "tribes/images/empire/roadt_normal_00.png",
          "tribes/images/empire/roadt_normal_01.png",
          "tribes/images/empire/roadt_normal_02.png",
+      },
+      waterways = {
+         "tribes/images/empire/waterway_0.png",
+         "tribes/images/empire/waterway_1.png",
       },
    },
 
@@ -100,6 +104,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "empire_carrier",
+         "empire_ferry",
          "empire_donkey",
          "empire_donkeybreeder"
       },
@@ -324,6 +329,7 @@ tribes:new_tribe {
    geologist = "empire_geologist",
    soldier = "empire_soldier",
    ship = "empire_ship",
+   ferry = "empire_ferry",
    port = "empire_port",
    barracks = "empire_barracks",
    ironore = "iron_ore",

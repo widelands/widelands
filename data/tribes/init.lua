@@ -214,6 +214,7 @@ print_loading_message("┗━ took", function()
 
    print_loading_message("┃    Workers", function()
       include "tribes/workers/atlanteans/carrier/init.lua"
+      include "tribes/workers/atlanteans/ferry/init.lua"
       include "tribes/workers/atlanteans/armorsmith/init.lua"
       include "tribes/workers/atlanteans/baker/init.lua"
       include "tribes/workers/atlanteans/blackroot_farmer/init.lua"
@@ -245,6 +246,7 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/atlanteans/woodcutter/init.lua"
 
       include "tribes/workers/barbarians/carrier/init.lua"
+      include "tribes/workers/barbarians/ferry/init.lua"
       include "tribes/workers/barbarians/baker/init.lua"
       include "tribes/workers/barbarians/blacksmith_master/init.lua"
       include "tribes/workers/barbarians/blacksmith/init.lua"
@@ -278,6 +280,7 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/barbarians/weaver/init.lua"
 
       include "tribes/workers/empire/carrier/init.lua"
+      include "tribes/workers/empire/ferry/init.lua"
       include "tribes/workers/empire/armorsmith/init.lua"
       include "tribes/workers/empire/baker/init.lua"
       include "tribes/workers/empire/brewer/init.lua"
@@ -312,6 +315,7 @@ print_loading_message("┗━ took", function()
       include "tribes/workers/empire/weaver/init.lua"
 
       include "tribes/workers/frisians/carrier/init.lua"
+      include "tribes/workers/frisians/ferry/init.lua"
       include "tribes/workers/frisians/reindeer/init.lua"
       include "tribes/workers/frisians/builder/init.lua"
       include "tribes/workers/frisians/soldier/init.lua"

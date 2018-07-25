@@ -15,7 +15,7 @@ tribes:new_tribe {
       }
    },
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          "tribes/images/barbarians/roadt_busy.png",
@@ -23,6 +23,10 @@ tribes:new_tribe {
       normal = {
          "tribes/images/barbarians/roadt_normal_00.png",
          "tribes/images/barbarians/roadt_normal_01.png",
+      },
+      waterways = {
+         "tribes/images/barbarians/waterway_0.png",
+         "tribes/images/barbarians/waterway_1.png",
       },
    },
 
@@ -94,6 +98,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "barbarians_carrier",
+         "barbarians_ferry",
          "barbarians_ox",
          "barbarians_cattlebreeder"
       },
@@ -285,6 +290,7 @@ tribes:new_tribe {
    geologist = "barbarians_geologist",
    soldier = "barbarians_soldier",
    ship = "barbarians_ship",
+   ferry = "barbarians_ferry",
    port = "barbarians_port",
    barracks = "barbarians_barracks",
    ironore = "iron_ore",

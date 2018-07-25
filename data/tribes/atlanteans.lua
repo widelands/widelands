@@ -20,7 +20,9 @@ dirname = path.dirname(__file__)
 --
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
 --
---    **roads**: The file paths for the tribes' road textures in 2 subtables ``busy`` and ``normal``
+--    **roads**: The file paths for the tribe's road textures in 2 subtables ``busy`` and ``normal``
+--
+--    **roads**: The file paths for the tribe's waterway textures
 --
 --    **wares_order**: This defines all the wares that this tribe uses and their display order in the user interface. Each subtable defines a column in the user interface.
 --
@@ -44,6 +46,8 @@ dirname = path.dirname(__file__)
 --
 --    **ship**: The internal name of the tribe's ship.
 --
+--    **ferry**: The internal name of the tribe's ferry.
+--
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 tribes:new_tribe {
    name = "atlanteans",
@@ -62,7 +66,7 @@ tribes:new_tribe {
       }
    },
 
-   -- Image file paths for this tribe's road textures
+   -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
          "tribes/images/atlanteans/roadt_busy.png",
@@ -70,6 +74,10 @@ tribes:new_tribe {
       normal = {
          "tribes/images/atlanteans/roadt_normal_00.png",
          "tribes/images/atlanteans/roadt_normal_01.png",
+      },
+      waterways = {
+         "tribes/images/atlanteans/waterway_0.png",
+         "tribes/images/atlanteans/waterway_1.png",
       },
    },
 
@@ -145,6 +153,7 @@ tribes:new_tribe {
       {
          -- Carriers
          "atlanteans_carrier",
+         "atlanteans_ferry",
          "atlanteans_horse",
          "atlanteans_horsebreeder"
       },
@@ -347,6 +356,7 @@ tribes:new_tribe {
    geologist = "atlanteans_geologist",
    soldier = "atlanteans_soldier",
    ship = "atlanteans_ship",
+   ferry = "atlanteans_ferry",
    port = "atlanteans_port",
    barracks = "atlanteans_barracks",
    ironore = "iron_ore",
