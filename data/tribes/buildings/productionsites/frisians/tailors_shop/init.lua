@@ -70,10 +70,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing studded fur garment because ...
          descname = _"sewing studded fur garment",
          actions = {
+            -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_studded",
-            "sleep=45000",
+            "sleep=25000",
             "consume=fur_garment iron",
-            "animate=working 45000",
+            "animate=working 25000",
             "produce=fur_garment_studded"
          },
       },
@@ -81,10 +82,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment because ...
          descname = _"sewing golden fur garment",
          actions = {
+            -- time total: 50 + 3.6
             "return=skipped unless economy needs fur_garment_golden",
-            "sleep=47000",
+            "sleep=25000",
             "consume=fur_garment iron gold",
-            "animate=working 61000",
+            "animate=working 25000",
             "produce=fur_garment_golden"
          },
       },
