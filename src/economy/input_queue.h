@@ -102,6 +102,14 @@ public:
 	virtual Quantity get_filled() const = 0;
 
 	/**
+	 * The amount of missing wares or workers which have been requested
+	 * but are not yet being transported to this building.
+	 * This will never be larger than (get_max_fill()-get_filled()).
+	 * @return The amount at this moment.
+	 */
+	uint32_t get_missing() const;
+
+	/**
 	 * Clear the queue appropriately.
 	 * Implementing classes should call update() at the end to remove the request.
 	 */

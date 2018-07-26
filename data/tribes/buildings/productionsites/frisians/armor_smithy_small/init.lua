@@ -25,16 +25,16 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 87},
+         hotspot = {56, 84},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 63},
+         hotspot = {56, 66},
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 87},
+         hotspot = {56, 84},
          fps = 10,
       },
    },
@@ -77,9 +77,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_short",
             "sleep=37000",
             "consume=coal iron",
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 30000",
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=sword_short"
          },
@@ -92,9 +92,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_long",
             "consume=coal iron:2",
             "sleep=38000",
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 32000",
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=sword_long"
          },

@@ -122,6 +122,9 @@ public:
 
 	void set_height(int height);
 
+	/// Set the number of items to fit in the list
+	void set_max_items(int items);
+
 protected:
 	/// Add an element to the list
 	/// \param name         the display name of the entry

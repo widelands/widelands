@@ -43,25 +43,25 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_reed",
-            "call=harvest_reed",
+            "call=plant",
+            "call=harvest",
             "return=skipped"
          }
       },
-      plant_reed = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting reed because ...
          descname = _"planting reed",
          actions = {
             "sleep=18000", -- orig sleep=20000 but gardener animation was increased by 2sec
-            "worker=plantreed"
+            "callworker=plant"
          }
       },
-      harvest_reed = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting reed because ...
          descname = _"harvesting reed",
          actions = {
             "sleep=5000",
-            "worker=harvestreed"
+            "callworker=harvest"
          }
       },
    },

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-07-06 09:22+0000\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-12 07:27+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr "Nix för ungood, aber dat mutt ick weer plattreten. Düsse Rüümte bruken wi villicht naher. Wenn ick di to langdrahig bün, spööl doch een echtes Speel un finn alls sülvst ut. Anners, finn di bidde mit mi of, ich bün nich mehr de Jungste un Gauste."
+msgstr "Nix för ungood, aber dat mutt ick weer plattreten. Düsse Rüümte bruken wi villicht naher. Wenn ick di to langdrahig bün, spööl doch een echtes Speel un finn alls sülvst ut. Anners, finn di bidde mit mi of, ick bün nich mehr de Jungste un Gauste."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:25
 msgid "Welcome to the Widelands Tutorial!"
@@ -80,7 +80,7 @@ msgstr "För gewöhnelk begünnst du dat Speel mit eenem Raadhuus. Dat is dat gr
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr "Wi mutten eene moje Stee finnen, waar wi de Boomhauer-Huus bauen könen. Um dat lichter to maken könen wi »Wies Rüümte tum Bauen« anknipsen. 't gifft twee Aarden, dat to doon:"
+msgstr "Wi mutten eene moje Stee finnen, waar wi dat Boomhauer-Huus bauen könen. Um dat lichter to maken könen wi »Wies Rüümte tum Bauen« anknipsen. 't gifft twee Aarden, dat to doon:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
@@ -126,7 +126,7 @@ msgid ""
 "road. There is a sweet spot for a lumberjack right next to those trees. I’ll"
 " describe the steps I will take and then ask you to click on the ‘OK’ button"
 " for me to demonstrate."
-msgstr "Recht so. Gliek verklaar ick di all düsse Tekens. Aber laat mi di eerst maal vördoon, wo dat gaht, een Boomhauer-Huus in de Gegend to setten un 't mit eener Straat to verbinnen. Tegen düssen Bomen is eene nüte Stee för eenen Boomhauer. Ick beschriev di, wat ick doon will, un dann sallst du de »Jau«-Knoop anklicken, daarmit ick 't di vörmaak."
+msgstr "Hunnert. Gliek verklaar ick di all düsse Tekens. Aber laat mi di eerst maal vördoon, wo dat gaht, een Boomhauer-Huus in de Gegend to setten un 't mit eener Straat to verbinnen. Tegen düssen Bomen is eene nüte Stee för eenen Boomhauer. Ick beschriev di, wat ick doon will, un dann sallst du de »Jau«-Knoop anklicken, daarmit ick 't di vörmaak."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:72
 msgid "Building the Lumberjack"
@@ -140,13 +140,13 @@ msgid ""
 "medium and small buildings – I am presented with all the medium buildings "
 "that I can build. The lumberjack’s hut is a small building, so I will go on "
 "to select the small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr "Toeerst klick ick de Teken, waar de Boomhauer-Huus entstahn sall, mit de linke Muustaste an. Een Fenster kummt vandag, waar ick tüsken mehren Husen wählen kann. Ick klicke een geles Huus-Teken an – dat heet, daar kann man lütte un middelmatige Husen bauen – worden all de middelmatig Husen, de ick bauen kann, anzeigt. De Boomhauer-Huus is een lüttes Huus, daarum klick ick de Listenwessler för de lütten Husen an. Dann köör ick de Boomhauer-Huus ut."
+msgstr "Toeerst klick ick de Teken, waar dat Boomhauer-Huus entstahn sall, mit de linke Muustaste an. Een Fenster kummt vundag, waar ick tüsken mehren Husen kören kann. Ick klicke een geles Huus-Teken an – dat heet, daar kann man lütte un middelmatige Husen bauen – daarum worden all de middelmatig Husen, de ick bauen kann, anzeigt. Dat Boomhauer-Huus is een lüttes Huus, daarum klick ick de Listenwessler för de lütten Husen an. Dann köör ick dat Boomhauer-Huus ut."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:76
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
-msgstr "Klick de »Jau«-Knoop an, um mi totokieken. Ick maak 't ganz langsaam: Ick klick – dann köör ick de Listenwessler ut – ennelk wähl ick de Huus."
+msgstr "Klick de »Jau«-Knoop an, um mi totokieken. Ick maak 't ganz langsaam: Ick klick – dann köör ick de Listenwessler ut – ennelk köör ick dat Huus."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:93
@@ -159,7 +159,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr "Dat langt noch nich. Ick mutt de Boomhauer-Huus eerst mit de Stratennett verbinnen. Nadeem ick de Baustee anörnt hebb bin ick automatisk klaar tum Stratenbau. Ick mutt also blot de blaue Fahn vor mienem Raadhuus anklicken."
+msgstr "Dat langt noch nich. Ick mutt dat Boomhauer-Huus eerst mit de Stratennett verbinnen. Nadeem ick de Baustee anörnt hebb, bün ick automatisk klaar tum Stratenbau. Ick mutt also blot de blaue Fahn vor mienem Raadhuus anklicken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:96
 msgid ""
@@ -169,7 +169,7 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr "Dat langt noch nich. Ick mutt de Boomhauer-Huus eerst mit de Stratennett verbinnen. Du hest de Instellung »Na de Fahnenbauen Straat bauen« utknipst (dat kannst du ännern, indeem du im Widelands-Höövdmenü »Instellungen« anklickst). Ick hebb de Stratenbau sülven klaarmaakt. Ick segg di naher wo dat gaht. Um de Straat to bauen mutt ick nu blot de blaue Fahn vor mienem Raadhuus anklicken."
+msgstr "Dat langt noch nich. Ick mutt dat Boomhauer-Huus eerst mit de Stratennett verbinnen. Du hest de Instellung »Na de Fahnenbauen Straat bauen« utknipst (dat kannst du ännern, indeem du im Widelands-Höövdmenü »Instellungen« anklickst). Ick hebb de Stratenbau sülven klaarmaakt. Ick segg di naher wo dat gaht. Um de Straat to bauen mutt ick nu blot de blaue Fahn vor mienem Raadhuus anklicken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:104
 msgid "Waiting for the Lumberjack to Go Up"
@@ -230,7 +230,7 @@ msgstr "Up dat Klaarworden vun de Huus wachten"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:135
 msgid "Well done! Let’s wait till the hut is finished."
-msgstr "Leep good! Laat uns wachten bit dat Huus beschickt is."
+msgstr "Hunnert! Laat uns wachten bit dat Huus beschickt is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:136
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:149
@@ -292,7 +292,7 @@ msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr "Super! Dar Boomhauer-Huus is beschickt. Een Boomhauer gaht nu um de Huus to bewohnen un Bomen oftohauen, un uns Boomstamm-Versörgung is eerst maal seker. Nu maken wi mit de Flint weer."
+msgstr "Hunnert! Dat Boomhauer-Huus is beschickt. Een Boomhauer gaht nu um dat Huus to bewohnen un Bomen oftohauen, un uns Boomstamm-Versörgung is eerst maal seker. Nu maken wi mit de Flint weer."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:177
 msgid "Some Rocks Were Found"
@@ -357,7 +357,7 @@ msgstr "Wo du diene Sicht noch bewegen kannst"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:199
 msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
-msgstr "Super! Du kannst de Sicht ok fixer bewegen, indeem du de Muus bruukst:"
+msgstr "Hunnert. Du kannst de Sicht ok fixer bewegen, indeem du de Muus bruukst:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
 msgid ""
@@ -376,7 +376,7 @@ msgstr "Bruuk de Lütte Kaart"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:212
 msgid ""
 "Very good. And now about the minimap. You can open it by clicking on the"
-msgstr "Bannig good. Un nu de Lütte Kaart. Du kannst se openkriegen, indeem du de"
+msgstr "Hunnert. Un nu de Lütte Kaart. Du kannst se openkriegen, indeem du de"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:213
 msgid ""
@@ -440,7 +440,7 @@ msgid ""
 "space were you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr "Pass up, dat de Rüümte tum Bauen to sehn sünd, dann klick de Stee an, waar de dat Huus hebben willt, köör 't ut in de Fenster, wat vandag kummt, un alls is klaar. Villicht is 't nu up rechte Tied, all düsse »Rüümte tum Bauen«-Tekens, de wi vörhen sehn hebben, to verklaren."
+msgstr "Pass up, dat de Rüümte tum Bauen to sehn sünd, dann klick de Stee an, waar de dat Huus hebben willt, köör 't ut in de Fenster, wat vundag kummt, un alls is klaar. Villicht is 't nu up rechte Tied, all düsse »Rüümte tum Bauen«-Tekens, de wi vörhen sehn hebben, to verklaren."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:241
 msgid ""
@@ -477,7 +477,7 @@ msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
-msgstr "Nu versöök 't. De Flinthauerhuus is een lüttjes Huus; wenn du up een Teken för middelmatig oder grote Husen klickst, mutt du eerst de Listenwessler för lütte Husen utkören, um 't to finnen. Probeer 't!"
+msgstr "Nu versöök 't. Dat Flinthauerhuus is een lüttjes Huus; wenn du up een Teken för middelmatig oder grote Husen klickst, mutt du eerst de Listenwessler för lütte Husen utkören, um 't to finnen. Probeer 't!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid "Build a quarry next to the rocks"
@@ -657,33 +657,33 @@ msgid ""
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr "Du hest de Baustee för de Flintslagerhuus, dat wi bauen wullen, openbaar verneelt. Wi bruuken de Flint, also slaa ick vör, dat du dat Speel vun eenem sekerten Speel laadst. Düsse worden glückelkerwies unner de Tied automatisk maakt. Gah torügg  tum Höövdmenü un wähl »Een Speler« → »Speel laden«. Un pass de de anner Maal bidde en bietje beter up."
+msgstr "Du hest de Baustee för dat Flinthauerhuus, dat wi bauen wullen, openbaar verneelt. Wi bruuken de Flint, also slaa ick vör, dat du dat Speel vun eenem sekerten Speel laadst. Düsse worden glückelkerwies unner de Tied automatisk maakt. Gah torügg  tum Höövdmenü un köör »Een Speler« → »Speel laden«. Un pass de de anner Maal bidde en bietje beter up."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:339
 msgid "Build a second quarry"
-msgstr "Bau een tweedes Flintslagerhuus"
+msgstr "Bau een tweedes Flinthauerhuus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:341
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr "Waar mennig Stenen sünd, kannst du noch een Flintslagerhuus bauen. Dann gaht de Flint-Ofbau gauer."
+msgstr "Waar mennig Stenen sünd, kannst du noch een Flinthauerhuus bauen. Dann gaht de Flint-Ofbau gauer."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid ""
 "Build a second quarry near the rocks and connect it to your road network."
-msgstr "Bau een anners Flintslagerhuus dicht bi de Stenen un verbinn 't mit dienen Straten."
+msgstr "Bau een anners Flinthauerhuus dicht bi de Stenen un verbinn 't mit dienen Straten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:345
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:347
 msgid "Build another quarry"
-msgstr "Bau noch een Flintslagerhuus"
+msgstr "Bau noch een Flinthauerhuus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:348
 msgid ""
 "Build a second quarry next to the rocks. Do not forget to connect it to "
 "another flag."
-msgstr "Bau een tweedes Flintslagerhuus tegen de Stenen. Vergeet nich, 't mit eener Fahn to verbinnen."
+msgstr "Bau een tweedes Flinthauerhuus tegen de Stenen. Vergeet nich, 't mit eener Fahn to verbinnen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:349
 msgid ""
@@ -722,7 +722,7 @@ msgstr "Laat mi düsse twee radd för di anknipsen. Vergeet nich: »C« un »S«
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:366
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
-msgstr "Nu weten wi, wat passeert. Laat uns wachten bit beide Flintslagerhusen kumpleet sünd."
+msgstr "Nu weten wi, wat passeert. Laat uns wachten bit beide Flinthauerhusen kumpleet sünd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:373
 msgid "Messages"

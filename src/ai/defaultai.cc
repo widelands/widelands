@@ -5147,7 +5147,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 				if (management_data.f_neuron_pool[53].get_position(i)) {
-					tmp_score += inputs[1];
+					tmp_score += inputs[i];
 				}
 			}
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {

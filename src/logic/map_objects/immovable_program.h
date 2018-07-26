@@ -164,8 +164,8 @@ struct ImmovableProgram {
 	 *    decay-time:
 	 *       Time until construction decays one step if no progress has been made.
 	 */
-	struct ActConstruction : public Action {
-		ActConstruction(char* parameters, ImmovableDescr&);
+	struct ActConstruct : public Action {
+		ActConstruct(char* parameters, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 		Duration buildtime() const {

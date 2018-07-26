@@ -31,12 +31,12 @@ tribes:new_worker_type {
 
    programs = {
       harvest = {
-         "findobject attrib:ripe_bush radius:6",
-         "walk object",
-         "animation gather 8000",
-         "object harvest",
-         "animation idle 1000",
-         "createware fruit",
+         "findobject=attrib:ripe_bush radius:6",
+         "walk=object",
+         "animate=gather 8000",
+         "callobject=harvest",
+         "animate=idle 1000",
+         "createware=fruit",
          "return"
       }
    },
