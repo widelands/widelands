@@ -47,6 +47,7 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
 };
 
+constexpr bool kPendingOnly = true; // ignore non-pending wares
 constexpr int32_t kNotFoundAppropriate = -1; // no ware appropiate for carrying
 constexpr int32_t kDenyDrop = -2; // flag is full and no ware appropiate for swapping
 
@@ -143,7 +144,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void skip_wait_for_capacity(Game&, Worker&);
 	void add_ware(EditorGameBase&, WareInstance&);
 	void init_ware(EditorGameBase&, WareInstance&, PendingWare&);
-	PendingWare* get_pending_ware_for_flag(Flag&);
+	PendingWare* get_ware_for_flag(Flag&, bool pending_only = false);
 	bool cancel_pickup(Game&, Flag& destflag);
 	void ware_departing(Game&);
 	bool allow_ware_from_flag(WareInstance&, Flag&);

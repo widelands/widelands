@@ -403,7 +403,7 @@ void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
  */   
 void Flag::init_ware(EditorGameBase& egbase, WareInstance& ware, PendingWare& pi) {
 	pi.ware = &ware;
-	pi.pending = false;
+	pi.pending = true;
 	pi.nextstep = nullptr;
 	pi.priority = 0;
 
@@ -431,10 +431,10 @@ void Flag::init_ware(EditorGameBase& egbase, WareInstance& ware, PendingWare& pi
  * \note Due to fetch_from_flag() semantics, this function makes no sense
  * for a  building destination.
 */
-Flag::PendingWare* Flag::get_pending_ware_for_flag(Flag& destflag) {
+Flag::PendingWare* Flag::get_ware_for_flag(Flag& destflag, bool const pending_only) {
 	for (int32_t i = 0; i < ware_filled_; ++i) {
 		PendingWare* pw = &wares_[i];
-		if (pw->pending && pw->nextstep == &destflag && 
+		if ((!pending_only || pw->pending) && pw->nextstep == &destflag && 
 			destflag.allow_ware_from_flag(*pw->ware, *this)) {
 			return pw;
 		}
@@ -605,7 +605,7 @@ void Flag::ware_departing(Game& game) {
 			other = &road->get_flag(Road::FlagStart);
 		}
 
-		PendingWare* pw = other->get_pending_ware_for_flag(*this);
+		PendingWare* pw = other->get_ware_for_flag(*this, kPendingOnly);
 		if (pw && road->notify_ware(game, *other)) {
 			pw->pending = false;
 		}

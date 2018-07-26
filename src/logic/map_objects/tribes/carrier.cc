@@ -235,7 +235,7 @@ void Carrier::transport_update(Game& game, State& state) {
 			set_animation(game, descr().get_animation("idle"));
 			schedule_act(game, 20);
 		} else {
-			Flag::PendingWare* pw = otherflag.get_pending_ware_for_flag(flag);
+			Flag::PendingWare* pw = otherflag.get_ware_for_flag(flag, kPendingOnly);
 			if (pw) {
 				pw->pending = false;
 
@@ -331,10 +331,10 @@ int32_t Carrier::find_source_flag(Game& game) {
 	Flag& farflag = road.get_flag(static_cast<Road::FlagId>(near ^ 1));
 
 	Flag::PendingWare* pw;
-	if ((pw = nearflag.get_pending_ware_for_flag(farflag))) {
+	if ((pw = nearflag.get_ware_for_flag(farflag))) {
 		pw->pending = false;
 		return near;
-	} else if ((pw = farflag.get_pending_ware_for_flag(nearflag))) {
+	} else if ((pw = farflag.get_ware_for_flag(nearflag, kPendingOnly))) {
 		pw->pending = false;
 		return near ^ 1;
 	} else {
