@@ -183,8 +183,8 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 				uint32_t fileindex = mos.get_object_file_index_or_zero(mo);
 				s.set_int("serial", fileindex);
 			}
-			if (message.subtype()) {
-			    s.set_string("subtype", message.subtype());
+			if (message.sub_type()) {
+			    s.set_string("subtype", message.sub_type());
 			}
 		}
 		fs.ensure_directory_exists(

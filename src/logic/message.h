@@ -58,7 +58,7 @@ struct Message {
 	 * \param ser        A MapObject serial. If non null, the message will be deleted once
 	 *                   the object is removed from the game. Defaults to 0
 	 * \param s          The message status. Defaults to Status::New
-	 * \param subtype    The extended message type, used for comparisons in
+	 * \param subt       The extended message type, used for comparisons in
 	 *                   Player::add_message_with_timeout(). Defaults to nullptr
 	 */
 	Message(Message::Type msgtype,
@@ -69,10 +69,10 @@ struct Message {
 	        const std::string& init_body,
 	        const Widelands::Coords& c = Coords::null(),
 	        Widelands::Serial ser = 0,
-	        const char* subtype = nullptr,
+	        const char* subt = nullptr,
 	        Status s = Status::kNew)
 	   : type_(msgtype),
-	     subtype_(subtype),
+	     sub_type_(subt),
 	     title_(init_title),
 	     icon_filename_(init_icon_filename),
 	     icon_(g_gr->images().get(init_icon_filename)),
@@ -87,8 +87,8 @@ struct Message {
 	Message::Type type() const {
 		return type_;
 	}
-	const char* subtype() const {
-		return subtype_;
+	const char* sub_type() const {
+		return sub_type_;
 	}
 	uint32_t sent() const {
 		return sent_;
@@ -137,7 +137,7 @@ struct Message {
 
 private:
 	Message::Type type_;
-	const char* subtype_;
+	const char* sub_type_;
 	const std::string title_;
 	const std::string icon_filename_;
 	const Image* icon_;  // Pointer to icon into picture stack
