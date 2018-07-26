@@ -172,6 +172,31 @@ private:
 	char* steps;
 };
 
+struct CmdBuildWaterway : public PlayerCommand {
+	CmdBuildWaterway() : PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {
+	}  // For savegame loading
+	CmdBuildWaterway(uint32_t, int32_t, Path&);
+	explicit CmdBuildWaterway(StreamRead&);
+
+	~CmdBuildWaterway() override;
+
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kBuildWaterway;
+	}
+
+	void execute(Game&) override;
+	void serialize(StreamWrite&) override;
+
+private:
+	Path* path;
+	Coords start;
+	Path::StepVector::size_type nsteps;
+	char* steps;
+};
+
 struct CmdFlagAction : public PlayerCommand {
 	CmdFlagAction() : PlayerCommand(), serial(0) {
 	}  // For savegame loading

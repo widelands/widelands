@@ -671,6 +671,10 @@ void Game::send_player_build_road(int32_t pid, Path& path) {
 	send_player_command(*new CmdBuildRoad(get_gametime(), pid, path));
 }
 
+void Game::send_player_build_waterway(int32_t pid, Path& path) {
+	send_player_command(*new CmdBuildWaterway(get_gametime(), pid, path));
+}
+
 void Game::send_player_flagaction(Flag& flag) {
 	send_player_command(*new CmdFlagAction(get_gametime(), flag.owner().player_number(), flag));
 }

@@ -35,6 +35,7 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "economy/waterway.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_delete_message.h"
@@ -437,7 +438,7 @@ Flag& Player::force_flag(const FCoords& c) {
 		if (upcast(Flag, existing_flag, immovable)) {
 			if (existing_flag->get_owner() == this)
 				return *existing_flag;
-		} else if (!dynamic_cast<Road const*>(immovable))  //  A road is OK.
+		} else if (!dynamic_cast<Road const*>(immovable))  //  A road is OK. A waterway isn't.
 			immovable->remove(egbase());                    //  Make room for the flag.
 	}
 	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(c, 1));
@@ -512,6 +513,69 @@ Road& Player::force_road(const Path& path) {
 		}
 	}
 	return Road::create(egbase(), start, end, path);
+}
+
+Waterway* Player::build_waterway(const Path& path) {
+	if (path.get_nsteps() > tribe_.waterway_max_length()) {
+		log("%i: Refused to build a waterway because it is too long. Permitted length %i, actual length %i.",
+				player_number(), tribe_.waterway_max_length(), path.get_nsteps());
+		return nullptr;
+	}
+
+	const Map& map = egbase().map();
+	FCoords fc = map.get_fcoords(path.get_start());
+	if (upcast(Flag, start, fc.field->get_immovable())) {
+		if (upcast(Flag, end, map.get_immovable(path.get_end()))) {
+			if (start->get_economy() != end->get_economy()) {
+				log("%i: Refused to build a waterway because the flags are in different economies.");
+				return nullptr;
+			}
+
+			//  Verify ownership of the path.
+			const int32_t laststep = path.get_nsteps() - 1;
+			for (int32_t i = 0; i < laststep; ++i) {
+				fc = map.get_neighbour(fc, path[i]);
+
+				if (BaseImmovable* const imm = fc.field->get_immovable())
+					if (imm->get_size() >= BaseImmovable::SMALL) {
+						return nullptr;
+					}
+				if (!map.can_reach_by_water(fc)) {
+					log("%i: building waterway, unswimable\n", player_number());
+					return nullptr;
+				}
+			}
+			return &Waterway::create(egbase(), *start, *end, path);
+		} else
+			log("%i: building waterway, missed end flag\n", player_number());
+	} else
+		log("%i: building waterway, missed start flag\n", player_number());
+
+	return nullptr;
+}
+
+Waterway& Player::force_waterway(const Path& path) {
+	const Map& map = egbase().map();
+	FCoords c = map.get_fcoords(path.get_start());
+	Flag& start = force_flag(c);
+	Flag& end = force_flag(map.get_fcoords(path.get_end()));
+
+	Path::StepVector::size_type const laststep = path.get_nsteps() - 1;
+	for (Path::StepVector::size_type i = 0; i < laststep; ++i) {
+		c = map.get_neighbour(c, path[i]);
+		log("Clearing for waterway at (%i, %i)\n", c.x, c.y);
+
+		//  Make sure that the player owns the area around.
+		dynamic_cast<Game&>(egbase())
+		   .conquer_area_no_building(PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
+
+		if (BaseImmovable* const immovable = c.field->get_immovable()) {
+			assert(immovable != &start);
+			assert(immovable != &end);
+			immovable->remove(egbase());
+		}
+	}
+	return Waterway::create(egbase(), start, end, path);
 }
 
 Building& Player::force_building(Coords const location,
@@ -596,7 +660,7 @@ Building* Player::build(Coords c,
 
 /*
 ===============
-Bulldoze the given road, flag or building.
+Bulldoze the given road, waterway, flag or building.
 ===============
 */
 void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
@@ -640,12 +704,12 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 					if (!flagcopy.get(egbase()))
 						return;
 
-					if (Road* const primary_road = flag->get_road(primary_road_id)) {
-						Flag& primary_start = primary_road->get_flag(Road::FlagStart);
+					if (RoadBase* const primary_road = flag->get_roadbase(primary_road_id)) {
+						Flag& primary_start = primary_road->get_flag(RoadBase::FlagStart);
 						Flag& primary_other =
-						   flag == &primary_start ? primary_road->get_flag(Road::FlagEnd) : primary_start;
+						   flag == &primary_start ? primary_road->get_flag(RoadBase::FlagEnd) : primary_start;
 						primary_road->destroy(egbase());
-						log("destroying road from (%i, %i) going in dir %u\n", flag->get_position().x,
+						log("destroying road/waterway from (%i, %i) going in dir %u\n", flag->get_position().x,
 						    flag->get_position().y, primary_road_id);
 						//  The primary road is gone. Now see if the flag at the other
 						//  end of it is a dead-end.
@@ -658,16 +722,16 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 			// Recursive bulldoze calls may cause flag to disappear
 			if (flagcopy.get(egbase()))
 				flag->destroy(egbase());
-		} else if (upcast(Road, road, immovable)) {
-			Flag& start = road->get_flag(Road::FlagStart);
-			Flag& end = road->get_flag(Road::FlagEnd);
+		} else if (upcast(RoadBase, road, immovable)) {
+			Flag& start = road->get_flag(RoadBase::FlagStart);
+			Flag& end = road->get_flag(RoadBase::FlagEnd);
 
 			road->destroy(egbase());
 			//  Now imm and road are dangling reference/pointer! Do not use!
 
 			if (recurse) {
-				// Destroy all roads between the flags, not just selected
-				while (Road* const r = start.get_road(end))
+				// Destroy all roads and waterways between the flags, not just selected
+				while (RoadBase* const r = start.get_roadbase(end))
 					r->destroy(egbase());
 
 				OPtr<Flag> endcopy = &end;
@@ -1010,7 +1074,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 			if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
-				if (Road::is_road_descr(map_object_descr))
+				if (Road::is_road_descr(map_object_descr) || Waterway::is_waterway_descr(map_object_descr))
 					map_object_descr = nullptr;
 				else if (upcast(Building const, building, base_immovable)) {
 					if (building->get_position() != f)

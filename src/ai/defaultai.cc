@@ -3417,8 +3417,8 @@ bool DefaultAI::dismantle_dead_ends() {
 	const uint16_t stepping = roads.size() / 25 + 1;
 
 	for (uint16_t i = 0; i < roads.size(); i += stepping) {
-		const Flag& roadstartflag = roads[i]->get_flag(Road::FlagStart);
-		const Flag& roadendflag = roads[i]->get_flag(Road::FlagEnd);
+		const Flag& roadstartflag = roads[i]->get_flag(RoadBase::FlagStart);
+		const Flag& roadendflag = roads[i]->get_flag(RoadBase::FlagEnd);
 
 		if (!roadstartflag.get_building() && roadstartflag.is_dead_end()) {
 			game().send_player_bulldoze(*const_cast<Flag*>(&roadstartflag));
@@ -3580,8 +3580,8 @@ bool DefaultAI::improve_roads(uint32_t gametime) {
 // the road can be dismantled
 bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 
-	Flag& roadstartflag = road.get_flag(Road::FlagStart);
-	Flag& roadendflag = road.get_flag(Road::FlagEnd);
+	Flag& roadstartflag = road.get_flag(RoadBase::FlagStart);
+	Flag& roadendflag = road.get_flag(RoadBase::FlagEnd);
 
 	// Collecting full path (from crossing/building to another crossing/building)
 	std::vector<Widelands::Flag*> full_road;
@@ -3605,11 +3605,11 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 				}
 
 				Flag* other_end;
-				if (near_road->get_flag(Road::FlagStart).get_position().hash() ==
+				if (near_road->get_flag(RoadBase::FlagStart).get_position().hash() ==
 				    full_road.back()->get_position().hash()) {
-					other_end = &near_road->get_flag(Road::FlagEnd);
+					other_end = &near_road->get_flag(RoadBase::FlagEnd);
 				} else {
-					other_end = &near_road->get_flag(Road::FlagStart);
+					other_end = &near_road->get_flag(RoadBase::FlagStart);
 				}
 
 				if (other_end->get_position() == full_road[full_road_size - 2]->get_position()) {
@@ -3705,10 +3705,10 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 				continue;
 			}
 
-			Flag* endflag = &near_road->get_flag(Road::FlagStart);
+			Flag* endflag = &near_road->get_flag(RoadBase::FlagStart);
 
 			if (endflag == nf.flag) {
-				endflag = &near_road->get_flag(Road::FlagEnd);
+				endflag = &near_road->get_flag(RoadBase::FlagEnd);
 			}
 
 			// When walking on nearby roads, we do not go too far from start and end of road
@@ -3919,10 +3919,10 @@ bool DefaultAI::create_shortcut_road(const Flag& flag,
 				continue;
 			}
 
-			Flag* endflag = &road->get_flag(Road::FlagStart);
+			Flag* endflag = &road->get_flag(RoadBase::FlagStart);
 
 			if (endflag == nearflags[start_field].flag) {
-				endflag = &road->get_flag(Road::FlagEnd);
+				endflag = &road->get_flag(RoadBase::FlagEnd);
 			}
 
 			const uint32_t endflag_hash = endflag->get_position().hash();

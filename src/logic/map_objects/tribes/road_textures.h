@@ -33,14 +33,17 @@ public:
 	// going into direction 'direction' (which can be any number).
 	const Image& get_normal_texture(const Widelands::Coords& coords, int direction) const;
 	const Image& get_busy_texture(const Widelands::Coords& coords, int direction) const;
+	const Image& get_waterway_texture(const Widelands::Coords& coords, int direction) const;
 
 	// Adds a new road texture.
 	void add_normal_road_texture(const Image* texture);
 	void add_busy_road_texture(const Image* texture);
+	void add_waterway_texture(const Image* texture);
 
 private:
 	std::vector<const Image*> normal_textures_;
 	std::vector<const Image*> busy_textures_;
+	std::vector<const Image*> waterway_textures_;
 };
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_ROAD_TEXTURES_H

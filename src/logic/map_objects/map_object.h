@@ -66,14 +66,17 @@ enum class MapObjectType : uint8_t {
 	WORKER,    // Bob -- Worker
 	CARRIER,   // Bob -- Worker -- Carrier
 	SOLDIER,   // Bob -- Worker -- Soldier
+	FERRY,     // Bob -- Worker -- Ferry
 
 	// everything below is at least a BaseImmovable
 	IMMOVABLE = 30,
 
 	// everything below is at least a PlayerImmovable
-	FLAG = 40,
-	ROAD,
-	PORTDOCK,
+	FLAG = 40, // Flag
+	PORTDOCK,  // Portdock
+	ROADBASE,  // Roadbase
+	ROAD,      // Roadbase -- Road
+	WATERWAY,  // Roadbase -- Waterway
 
 	// everything below is at least a Building
 	BUILDING = 100,    // Building

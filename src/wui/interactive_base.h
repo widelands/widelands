@@ -63,9 +63,9 @@ public:
 
 	// Overlays displayed while a road is under construction.
 	struct RoadBuildingOverlays {
-		// The roads that are displayed while a road is being built. They are not
-		// yet logically in the game, but need to be displayed for the user as
-		// visual guide. The data type is the same as for Field::road.
+		// The roads that are displayed while a road or waterway is being built.
+		// They are not yet logically in the game, but need to be displayed for
+		// the user as visual guide. The data type is the same as for Field::road.
 		std::map<Widelands::Coords, uint8_t> road_previews;
 		std::map<Widelands::Coords, const Image*> steepness_indicators;
 	};
@@ -147,6 +147,19 @@ public:
 	bool append_build_road(Widelands::Coords field);
 	Widelands::Coords get_build_road_start() const;
 	Widelands::Coords get_build_road_end() const;
+
+	bool is_building_waterway() const {
+		return buildwaterway_;
+	}
+	Widelands::CoordPath* get_build_waterway() {
+		return buildwaterway_;
+	}
+	void start_build_waterway(Widelands::Coords start, Widelands::PlayerNumber player);
+	void abort_build_waterway();
+	void finish_build_waterway();
+	bool append_build_waterway(Widelands::Coords field);
+	Widelands::Coords get_build_waterway_start() const;
+	Widelands::Coords get_build_waterway_end() const;
 
 	virtual void cleanup_for_load() {
 	}
@@ -247,11 +260,17 @@ protected:
 		return road_building_overlays_;
 	}
 
+	const RoadBuildingOverlays& waterway_building_overlays() const {
+		return waterway_building_overlays_;
+	}
+
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
 	void resize_chat_overlay();
 	void roadb_add_overlay();
 	void roadb_remove_overlay();
+	void waterwayb_add_overlay();
+	void waterwayb_remove_overlay();
 	void cmd_map_object(const std::vector<std::string>& args);
 	void cmd_lua(const std::vector<std::string>& args);
 
@@ -289,6 +308,7 @@ private:
 	std::map<Widelands::Coords, const WorkareaInfo*> work_area_previews_;
 
 	RoadBuildingOverlays road_building_overlays_;
+	RoadBuildingOverlays waterway_building_overlays_;
 
 	std::unique_ptr<Notifications::Subscriber<GraphicResolutionChanged>>
 	   graphic_resolution_changed_subscriber_;
@@ -301,6 +321,9 @@ private:
 
 	Widelands::CoordPath* buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;
+
+	Widelands::CoordPath* buildwaterway_;
+	Widelands::PlayerNumber waterway_build_player_;
 
 	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;

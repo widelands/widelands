@@ -20,6 +20,8 @@ wl_library(economy
     portdock.h
     request.cc
     request.h
+    roadbase.cc
+    roadbase.h
     road.cc
     road.h
     route.cc
@@ -44,6 +46,8 @@ wl_library(economy
     input_queue.h
     wares_queue.cc
     wares_queue.h
+    waterway.cc
+    waterway.h
     workers_queue.cc
     workers_queue.h
   DEPENDS

@@ -29,7 +29,8 @@ class CarrierDescr : public WorkerDescr {
 public:
 	CarrierDescr(const std::string& init_descname,
 	             const LuaTable& table,
-	             const EditorGameBase& egbase);
+	             const EditorGameBase& egbase,
+	             MapObjectType t = MapObjectType::CARRIER);
 	~CarrierDescr() override {
 	}
 
@@ -65,7 +66,7 @@ struct Carrier : public Worker {
 
 	static Task const taskRoad;
 
-private:
+protected:
 	void find_pending_ware(Game&);
 	int32_t find_closest_flag(Game&);
 

@@ -274,12 +274,16 @@ static int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) 
 }
 
 // Return the valid workers for a Road.
-WaresWorkersMap get_valid_workers_for(const Road& r) {
+WaresWorkersMap get_valid_workers_for(const RoadBase& r) {
 	WaresWorkersMap valid_workers;
-	valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
-
-	if (r.get_roadtype() == RoadType::kBusy)
-		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
+	if (r.get_roadtype() == RoadType::kWaterway) {
+		valid_workers.insert(WorkerAmount(r.owner().tribe().ferry(), 1));
+	}
+	else {
+		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
+		if (r.get_roadtype() == RoadType::kBusy)
+			valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
+	}
 
 	return valid_workers;
 }
@@ -707,6 +711,9 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::CARRIER:
 		// TODO(sirver): not yet implemented
 		return CAST_TO_LUA(Worker);
+	case MapObjectType::FERRY:
+		// TODO(Nordfriese): not yet implemented
+		return CAST_TO_LUA(Worker);
 	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(Soldier);
 
@@ -716,6 +723,10 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::FLAG:
 		return CAST_TO_LUA(Flag);
 	case MapObjectType::ROAD:
+		return CAST_TO_LUA(Road);
+	case MapObjectType::WATERWAY:
+	case MapObjectType::ROADBASE:
+		// TODO(Nordfriese): not yet implemented.
 		return CAST_TO_LUA(Road);
 	case MapObjectType::PORTDOCK:
 		return CAST_TO_LUA(PortDock);
@@ -1777,8 +1788,8 @@ int LuaMapObjectDescription::get_representative_image(lua_State* L) {
 
              * :class:`flag <FlagDescription>`, a flag that can hold
                wares for transport,
-             * :class:`road <RoadDescription>`, a road connecting two
-               flags,
+             * :class:`road <RoadDescription>`, a road or waterway
+               connecting two flags,
              * :class:`portdock <PortdockDescription>`, a 'parking space'
                on water terrain where ships can load/unload wares and
                workers. A portdock is invisible to the player and one is
@@ -3793,6 +3804,7 @@ int LuaMapObject::get_descr(lua_State* L) {
 		return CAST_TO_LUA(ImmovableDescr, LuaImmovableDescription);
 	case MapObjectType::WORKER:
 	case MapObjectType::CARRIER:
+	case MapObjectType::FERRY:
 	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 	case MapObjectType::MAPOBJECT:
@@ -3803,6 +3815,8 @@ int LuaMapObject::get_descr(lua_State* L) {
 	case MapObjectType::SHIP:
 	case MapObjectType::FLAG:
 	case MapObjectType::ROAD:
+	case MapObjectType::WATERWAY:
+	case MapObjectType::ROADBASE:
 	case MapObjectType::PORTDOCK:
 	case MapObjectType::WARE:
 		return CAST_TO_LUA(MapObjectDescr, LuaMapObjectDescription);
@@ -4075,6 +4089,7 @@ int LuaFlag::get_economy(lua_State* L) {
 
       (RO) Array of roads leading to the flag. Directions
       can be tr,r,br,bl,l and tl
+      Note that waterways are currently treated like roads.
 
       :returns: The array of 'direction:road', if any
 */
@@ -4088,9 +4103,9 @@ int LuaFlag::get_roads(lua_State* L) {
 	Flag* f = get(L, egbase);
 
 	for (uint32_t i = 1; i <= 6; i++) {
-		if (f->get_road(i) != nullptr) {
+		if (f->get_roadbase(i) != nullptr) {
 			lua_pushstring(L, directions.at(i - 1));
-			upcasted_map_object_to_lua(L, f->get_road(i));
+			upcasted_map_object_to_lua(L, f->get_roadbase(i));
 			lua_rawset(L, -3);
 		}
 	}
@@ -4243,6 +4258,10 @@ Road
    Child of: :class:`PlayerImmovable`, :class:`HasWorkers`
 
    A road connecting two flags in the economy of this Player.
+   Waterways are currently treated like roads in scripts; however,
+   there are significant differences. You can check whether an
+   instance of Road is a road or waterway through the internal name
+   of this object's :class:`ImmovableDescription`.
 
    More properties are available through this object's
    :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
@@ -4277,7 +4296,7 @@ int LuaRoad::get_length(lua_State* L) {
       (RO) The flag were this road starts
 */
 int LuaRoad::get_start_flag(lua_State* L) {
-	return to_lua<LuaFlag>(L, new LuaFlag(get(L, get_egbase(L))->get_flag(Road::FlagStart)));
+	return to_lua<LuaFlag>(L, new LuaFlag(get(L, get_egbase(L))->get_flag(RoadBase::FlagStart)));
 }
 
 /* RST
@@ -4286,7 +4305,7 @@ int LuaRoad::get_start_flag(lua_State* L) {
       (RO) The flag were this road ends
 */
 int LuaRoad::get_end_flag(lua_State* L) {
-	return to_lua<LuaFlag>(L, new LuaFlag(get(L, get_egbase(L))->get_flag(Road::FlagEnd)));
+	return to_lua<LuaFlag>(L, new LuaFlag(get(L, get_egbase(L))->get_flag(RoadBase::FlagEnd)));
 }
 
 /* RST
@@ -4296,6 +4315,7 @@ int LuaRoad::get_end_flag(lua_State* L) {
 
       * normal
       * busy
+      * waterway
 */
 int LuaRoad::get_road_type(lua_State* L) {
 	switch (get(L, get_egbase(L))->get_roadtype()) {
@@ -4305,6 +4325,9 @@ int LuaRoad::get_road_type(lua_State* L) {
 	case RoadType::kBusy:
 		lua_pushstring(L, "busy");
 		break;
+	case RoadType::kWaterway:
+		lua_pushstring(L, "waterway");
+		break;
 	default:
 		report_error(L, "Unknown Roadtype! This is a bug in widelands!");
 	}
@@ -4313,7 +4336,7 @@ int LuaRoad::get_road_type(lua_State* L) {
 
 // documented in parent class
 int LuaRoad::get_valid_workers(lua_State* L) {
-	Road* road = get(L, get_egbase(L));
+	RoadBase* road = get(L, get_egbase(L));
 	return workers_map_to_lua(L, get_valid_workers_for(*road));
 }
 
@@ -4325,12 +4348,12 @@ int LuaRoad::get_valid_workers(lua_State* L) {
 
 // documented in parent class
 int LuaRoad::get_workers(lua_State* L) {
-	Road* road = get(L, get_egbase(L));
+	RoadBase* road = get(L, get_egbase(L));
 	return do_get_workers(L, *road, get_valid_workers_for(*road));
 }
 
 int LuaRoad::set_workers(lua_State* L) {
-	Road* road = get(L, get_egbase(L));
+	RoadBase* road = get(L, get_egbase(L));
 	return do_set_workers<LuaRoad>(L, road, get_valid_workers_for(*road));
 }
 
@@ -4343,13 +4366,13 @@ int LuaRoad::set_workers(lua_State* L) {
 int LuaRoad::create_new_worker(PlayerImmovable& pi,
                                EditorGameBase& egbase,
                                const WorkerDescr* wdes) {
-	Road& r = static_cast<Road&>(pi);
+	RoadBase& r = static_cast<RoadBase&>(pi);
 
 	if (r.get_workers().size())
 		return -1;  // No space
 
 	// Determine Idle position.
-	Flag& start = r.get_flag(Road::FlagStart);
+	Flag& start = r.get_flag(RoadBase::FlagStart);
 	Coords idle_position = start.get_position();
 	const Path& path = r.get_path();
 	Path::StepVector::size_type idle_index = r.get_idle_index();

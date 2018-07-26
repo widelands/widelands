@@ -31,7 +31,7 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
-#include "economy/road.h"
+#include "economy/roadbase.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
@@ -1477,20 +1477,20 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			return start_task_move(
 			   game, WALK_NW, descr().get_right_walk_anims(does_carry_ware()), true);
 		} else if (upcast(Flag, nextflag, nextstep)) {  //  Flag to Flag
-			Road& road = *flag->get_road(*nextflag);
+			RoadBase& road = *flag->get_roadbase(*nextflag);
 
 			Path path(road.get_path());
 
-			if (nextstep != &road.get_flag(Road::FlagEnd))
+			if (nextstep != &road.get_flag(RoadBase::FlagEnd))
 				path.reverse();
 
 			molog("[transfer]: starting task [movepath] and setting location to road %u\n",
 			      road.serial());
 			start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware()));
 			set_location(&road);
-		} else if (upcast(Road, road, nextstep)) {  //  Flag to Road
-			if (&road->get_flag(Road::FlagStart) != location &&
-			    &road->get_flag(Road::FlagEnd) != location)
+		} else if (upcast(RoadBase, road, nextstep)) {  //  Flag to Road
+			if (&road->get_flag(RoadBase::FlagStart) != location &&
+			    &road->get_flag(RoadBase::FlagEnd) != location)
 				throw wexception(
 				   "MO(%u): [transfer]: nextstep is road, but we are nowhere near", serial());
 
@@ -1501,14 +1501,14 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 		} else
 			throw wexception(
 			   "MO(%u): [transfer]: flag to bad nextstep %u", serial(), nextstep->serial());
-	} else if (upcast(Road, road, location)) {
+	} else if (upcast(RoadBase, road, location)) {
 		// Road to Flag
 		if (nextstep->descr().type() == MapObjectType::FLAG) {
 			const Path& path = road->get_path();
 			int32_t const index =
-			   nextstep == &road->get_flag(Road::FlagStart) ?
+			   nextstep == &road->get_flag(RoadBase::FlagStart) ?
 			      0 :
-			      nextstep == &road->get_flag(Road::FlagEnd) ? path.get_nsteps() : -1;
+			      nextstep == &road->get_flag(RoadBase::FlagEnd) ? path.get_nsteps() : -1;
 
 			if (index >= 0) {
 				if (start_task_movepath(

@@ -18,7 +18,7 @@
  */
 
 #include "economy/flag.h"
-#include "economy/road.h"
+#include "economy/roadbase.h"
 #include "economy/ware_instance.h"
 #include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
@@ -54,6 +54,6 @@ void Flag::draw(uint32_t gametime,
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) {
+void RoadBase::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) {
 }
 }

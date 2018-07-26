@@ -15,6 +15,8 @@ tribes:new_tribe {
       }
    },
 
+   waterway_max_length = 6,
+
    -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
@@ -24,7 +26,7 @@ tribes:new_tribe {
          "tribes/images/barbarians/roadt_normal_00.png",
          "tribes/images/barbarians/roadt_normal_01.png",
       },
-      waterways = {
+      waterway = {
          "tribes/images/barbarians/waterway_0.png",
          "tribes/images/barbarians/waterway_1.png",
       },

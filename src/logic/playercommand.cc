@@ -108,6 +108,7 @@ enum {
 	PLCMD_SHIP_SINK = 29,
 	PLCMD_SHIP_CANCELEXPEDITION = 30,
 	PLCMD_PROPOSE_TRADE = 31,
+	PLCMD_BUILDWATERWAY = 32,
 };
 
 /*** class PlayerCommand ***/
@@ -126,6 +127,8 @@ PlayerCommand* PlayerCommand::deserialize(StreamRead& des) {
 		return new CmdBuildFlag(des);
 	case PLCMD_BUILDROAD:
 		return new CmdBuildRoad(des);
+	case PLCMD_BUILDWATERWAY:
+		return new CmdBuildWaterway(des);
 	case PLCMD_FLAGACTION:
 		return new CmdFlagAction(des);
 	case PLCMD_STARTSTOPBUILDING:
@@ -422,6 +425,90 @@ void CmdBuildRoad::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& m
 void CmdBuildRoad::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
 	// First, write version
 	fw.unsigned_16(kCurrentPacketVersionCmdBuildRoad);
+	// Write base classes
+	PlayerCommand::write(fw, egbase, mos);
+	write_coords_32(&fw, start);
+	fw.unsigned_16(nsteps);
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+		fw.unsigned_8(path ? (*path)[i] : steps[i]);
+}
+
+/*** class Cmd_BuildWaterway ***/
+
+CmdBuildWaterway::CmdBuildWaterway(uint32_t t, int32_t p, Path& pa)
+   : PlayerCommand(t, p),
+     path(&pa),
+     start(pa.get_start()),
+     nsteps(pa.get_nsteps()),
+     steps(nullptr) {
+}
+
+CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
+   : PlayerCommand(0, des.unsigned_8()),
+     // We cannot completely deserialize the path here because we don't have a Map
+     path(nullptr),
+     start(read_coords_32(&des)),
+     nsteps(des.unsigned_16()),
+     steps(new char[nsteps]) {
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
+		steps[i] = des.unsigned_8();
+	}
+}
+
+CmdBuildWaterway::~CmdBuildWaterway() {
+	delete path;
+
+	delete[] steps;
+}
+
+void CmdBuildWaterway::execute(Game& game) {
+	if (path == nullptr) {
+		assert(steps);
+
+		path = new Path(start);
+		for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+			path->append(game.map(), steps[i]);
+	}
+
+	game.get_player(sender())->build_waterway(*path);
+}
+
+void CmdBuildWaterway::serialize(StreamWrite& ser) {
+	ser.unsigned_8(PLCMD_BUILDWATERWAY);
+	ser.unsigned_8(sender());
+	write_coords_32(&ser, start);
+	ser.unsigned_16(nsteps);
+
+	assert(path || steps);
+
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+		ser.unsigned_8(path ? (*path)[i] : steps[i]);
+}
+
+constexpr uint16_t kCurrentPacketVersionCmdBuildWaterway = 1;
+
+void CmdBuildWaterway::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
+	try {
+		const uint16_t packet_version = fr.unsigned_16();
+		if (packet_version == kCurrentPacketVersionCmdBuildWaterway) {
+			PlayerCommand::read(fr, egbase, mol);
+			start = read_coords_32(&fr, egbase.map().extent());
+			nsteps = fr.unsigned_16();
+			path = nullptr;
+			steps = new char[nsteps];
+			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+				steps[i] = fr.unsigned_8();
+		} else {
+			throw UnhandledVersionError(
+			   "CmdBuildWaterway", packet_version, kCurrentPacketVersionCmdBuildWaterway);
+		}
+	} catch (const WException& e) {
+		throw GameDataError("build waterway: %s", e.what());
+	}
+}
+void CmdBuildWaterway::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& mos) {
+	// First, write version
+	fw.unsigned_16(kCurrentPacketVersionCmdBuildWaterway);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
 	write_coords_32(&fw, start);

@@ -25,6 +25,7 @@
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/road.h"
+#include "economy/waterway.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -64,7 +65,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 				Serial const serial = fr.unsigned_32();
 				try {
 					Game& game = dynamic_cast<Game&>(egbase);
-					Road& road = mol.get<Road>(serial);
+					RoadBase& road = mol.get<RoadBase>(serial);
 					if (mol.is_object_loaded(road))
 						throw GameDataError("already loaded");
 					PlayerNumber player_index = fr.unsigned_8();
@@ -73,8 +74,12 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					}
 
 					road.set_owner(egbase.get_player(player_index));
-					road.wallet_ = fr.unsigned_32();
-					road.last_wallet_charge_ = fr.unsigned_32();
+
+					if (Road::is_road_descr(&road.descr())) {
+						dynamic_cast<Road&>(road).wallet_ = fr.unsigned_32();
+						dynamic_cast<Road&>(road).last_wallet_charge_ = fr.unsigned_32();
+					}
+
 					road.type_ = fr.unsigned_32();
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
@@ -135,7 +140,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 						if (fr.unsigned_8()) {
 							(carrier_request =
-							    new Request(road, 0, Road::request_carrier_callback, wwWORKER))
+							    new Request(road, 0, RoadBase::request_carrier_callback, wwWORKER))
 							   ->read(fr, game, mol);
 						} else {
 							carrier_request = nullptr;
@@ -180,7 +185,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 	const Map& map = egbase.map();
 	const Field& fields_end = map[map.max_index()];
 	for (Field const* field = &map[0]; field < &fields_end; ++field)
-		if (upcast(Road const, r, field->get_immovable()))
+		if (upcast(RoadBase const, r, field->get_immovable()))
 			if (!mos.is_object_saved(*r)) {
 				assert(mos.is_object_known(*r));
 
@@ -190,8 +195,10 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				//  Theres only the owner
 				fw.unsigned_8(r->owner().player_number());
 
-				fw.unsigned_32(r->wallet_);
-				fw.unsigned_32(r->last_wallet_charge_);
+				if (upcast(Road const, road, r)) {
+					fw.unsigned_32(road->wallet_);
+					fw.unsigned_32(road->last_wallet_charge_);
+				}
 
 				fw.unsigned_32(r->type_);
 
@@ -217,7 +224,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 
 				fw.unsigned_32(r->carrier_slots_.size());
 
-				for (const Road::CarrierSlot& temp_slot : r->carrier_slots_) {
+				for (const RoadBase::CarrierSlot& temp_slot : r->carrier_slots_) {
 					if (Carrier const* const carrier = temp_slot.carrier.get(egbase)) {
 						assert(mos.is_object_known(*carrier));
 						fw.unsigned_32(mos.get_object_file_index(*carrier));

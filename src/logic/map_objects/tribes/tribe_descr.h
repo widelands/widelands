@@ -104,12 +104,14 @@ public:
 	DescriptionIndex geologist() const;
 	DescriptionIndex soldier() const;
 	DescriptionIndex ship() const;
+	DescriptionIndex ferry() const;
 	DescriptionIndex port() const;
 	DescriptionIndex barracks() const;
 	DescriptionIndex ironore() const;
 	DescriptionIndex rawlog() const;
 	DescriptionIndex refinedlog() const;
 	DescriptionIndex granite() const;
+	uint32_t waterway_max_length() const;
 
 	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
@@ -118,15 +120,17 @@ public:
 	uint32_t flag_animation() const;
 
 	// A vector of all texture images that can be used for drawing a
-	// (normal|busy) road. The images are guaranteed to exist.
+	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	const std::vector<std::string>& normal_road_paths() const;
 	const std::vector<std::string>& busy_road_paths() const;
+	const std::vector<std::string>& waterway_paths() const;
 
-	// Add the corresponding texture for roads.
+	// Add the corresponding texture for roads/waterways.
 	void add_normal_road_texture(const Image* texture);
 	void add_busy_road_texture(const Image* texture);
+	void add_waterway_texture(const Image* texture);
 
-	// The road textures used for drawing roads.
+	// The road textures used for drawing roads and waterways.
 	const RoadTextures& road_textures() const;
 
 	DescriptionIndex get_resource_indicator(const ResourceDescription* const res,
@@ -177,6 +181,7 @@ private:
 	uint32_t flag_animation_id_;
 	std::vector<std::string> normal_road_paths_;
 	std::vector<std::string> busy_road_paths_;
+	std::vector<std::string> waterway_paths_;
 	RoadTextures road_textures_;
 
 	std::vector<DescriptionIndex> buildings_;
@@ -193,12 +198,14 @@ private:
 	DescriptionIndex geologist_;   // This tribe's geologist worker
 	DescriptionIndex soldier_;     // The soldier that this tribe uses
 	DescriptionIndex ship_;        // The ship that this tribe uses
+	DescriptionIndex ferry_;       // The ferry that this tribe uses
 	DescriptionIndex port_;        // The port that this tribe uses
 	DescriptionIndex barracks_;    // The barracks to create soldiers
 	DescriptionIndex ironore_;     // Iron ore
 	DescriptionIndex rawlog_;      // Simple log
 	DescriptionIndex refinedlog_;  // Refined log, e.g. wood or blackwood
 	DescriptionIndex granite_;     // Granite
+	uint32_t waterway_max_length_;
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display

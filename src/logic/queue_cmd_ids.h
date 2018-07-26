@@ -71,7 +71,8 @@ enum class QueueCommandTypes {
 	kEvictWorker,
 
 	kMilitarysiteSetSoldierPreference,
-	kProposeTrade,  // 27
+	kProposeTrade,
+	kBuildWaterway, //28
 
 	kSinkShip = 121,
 	kShipCancelExpedition,

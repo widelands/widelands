@@ -1010,7 +1010,7 @@ public:
 
 	LuaRoad() {
 	}
-	explicit LuaRoad(Widelands::Road& mo) : LuaPlayerImmovable(mo) {
+	explicit LuaRoad(Widelands::RoadBase& mo) : LuaPlayerImmovable(mo) {
 	}
 	explicit LuaRoad(lua_State* L) : LuaPlayerImmovable(L) {
 	}
@@ -1035,7 +1035,7 @@ public:
 	/*
 	 * C Methods
 	 */
-	CASTED_GET(Road)
+	CASTED_GET(RoadBase)
 	static int create_new_worker(Widelands::PlayerImmovable&,
 	                             Widelands::EditorGameBase&,
 	                             const Widelands::WorkerDescr*);

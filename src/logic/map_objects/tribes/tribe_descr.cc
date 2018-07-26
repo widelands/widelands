@@ -86,6 +86,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		};
 		load_roads("normal", &normal_road_paths_);
 		load_roads("busy", &busy_road_paths_);
+		load_roads("waterway", &waterway_paths_);
 
 		items_table = table.get_table("wares_order");
 		wares_order_coords_.resize(tribes_.nrwares());
@@ -175,6 +176,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		carrier2_ = add_special_worker(table.get_string("carrier2"));
 		geologist_ = add_special_worker(table.get_string("geologist"));
 		soldier_ = add_special_worker(table.get_string("soldier"));
+		ferry_ = add_special_worker(table.get_string("ferry"));
+		waterway_max_length_ = table.get_int("waterway_max_length");
 
 		const std::string shipname = table.get_string("ship");
 		try {
@@ -182,7 +185,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		} catch (const WException& e) {
 			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
 		}
-
 		port_ = add_special_building(table.get_string("port"));
 		barracks_ = add_special_building(table.get_string("barracks"));
 
@@ -302,6 +304,10 @@ DescriptionIndex TribeDescr::soldier() const {
 	assert(tribes_.worker_exists(soldier_));
 	return soldier_;
 }
+DescriptionIndex TribeDescr::ferry() const {
+	assert(tribes_.worker_exists(ferry_));
+	return ferry_;
+}
 DescriptionIndex TribeDescr::ship() const {
 	assert(tribes_.ship_exists(ship_));
 	return ship_;
@@ -330,6 +336,9 @@ DescriptionIndex TribeDescr::granite() const {
 	assert(tribes_.ware_exists(granite_));
 	return granite_;
 }
+uint32_t TribeDescr::waterway_max_length() const {
+	return waterway_max_length_;
+}
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {
 	return trainingsites_;
@@ -354,12 +363,20 @@ const std::vector<std::string>& TribeDescr::busy_road_paths() const {
 	return busy_road_paths_;
 }
 
+const std::vector<std::string>& TribeDescr::waterway_paths() const {
+	return waterway_paths_;
+}
+
 void TribeDescr::add_normal_road_texture(const Image* texture) {
 	road_textures_.add_normal_road_texture(texture);
 }
 
 void TribeDescr::add_busy_road_texture(const Image* texture) {
 	road_textures_.add_busy_road_texture(texture);
+}
+
+void TribeDescr::add_waterway_texture(const Image* texture) {
+	road_textures_.add_waterway_texture(texture);
 }
 
 const RoadTextures& TribeDescr::road_textures() const {

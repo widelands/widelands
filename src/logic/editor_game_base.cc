@@ -29,6 +29,7 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "economy/waterway.h"
 #include "graphic/color.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
@@ -174,7 +175,7 @@ void EditorGameBase::inform_players_about_ownership(MapIndex const i,
 }
 void EditorGameBase::inform_players_about_immovable(MapIndex const i,
                                                     MapObjectDescr const* const descr) {
-	if (!Road::is_road_descr(descr))
+	if (!Road::is_road_descr(descr) && !Waterway::is_waterway_descr(descr))
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
 			if (1 < player_field.vision) {
@@ -410,7 +411,8 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t
 	assert(direction == RoadType::kSouthWest || direction == RoadType::kSouthEast ||
 	       direction == RoadType::kEast);
 	assert(roadtype == RoadType::kNone || roadtype == RoadType::kNormal ||
-	       roadtype == RoadType::kBusy || roadtype == RoadType::kWater);
+	       roadtype == RoadType::kBusy || roadtype == RoadType::kWaterway ||
+	       roadtype == RoadType::kWater);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;

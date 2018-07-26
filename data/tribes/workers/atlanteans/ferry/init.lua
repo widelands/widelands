@@ -12,7 +12,7 @@ animations = {
       fps = 7
    }
 }
-add_walking_animations (animations, "sail", dirname, "sail", {37, 38}, 10)
+add_walking_animations (animations, "walk", dirname, "sail", {37, 38}, 10)
 
 tribes:new_carrier_type {
    msgctxt = "atlanteans_worker",

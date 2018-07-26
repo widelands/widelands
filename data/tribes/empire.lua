@@ -27,11 +27,13 @@ tribes:new_tribe {
          "tribes/images/empire/roadt_normal_01.png",
          "tribes/images/empire/roadt_normal_02.png",
       },
-      waterways = {
+      waterway = {
          "tribes/images/empire/waterway_0.png",
          "tribes/images/empire/waterway_1.png",
       },
    },
+
+   waterway_max_length = 4,
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.

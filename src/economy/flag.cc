@@ -24,7 +24,9 @@
 #include "economy/economy.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
+#include "economy/roadbase.h"
 #include "economy/road.h"
+#include "economy/waterway.h"
 #include "economy/ware_instance.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -219,8 +221,13 @@ void Flag::detach_building(EditorGameBase& egbase) {
 /**
  * Call this only from the Road init!
 */
-void Flag::attach_road(int32_t const dir, Road* const road) {
+void Flag::attach_road(int32_t const dir, RoadBase* const road) {
 	assert(!roads_[dir - 1] || roads_[dir - 1] == road);
+
+	if (roads_[dir - 1] != road && Waterway::is_waterway_descr(&road->descr()) && has_waterway()) {
+		log("Refused to attach a waterway to a flag that already has a waterway\n");
+		return;
+	}
 
 	roads_[dir - 1] = road;
 	roads_[dir - 1]->set_economy(get_economy());
@@ -250,17 +257,21 @@ BaseImmovable::PositionList Flag::get_positions(const EditorGameBase&) const {
 */
 void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 	for (int8_t i = 0; i < 6; ++i) {
-		Road* const road = roads_[i];
+		RoadBase* const road = roads_[i];
 		if (!road)
 			continue;
 
-		Flag* f = &road->get_flag(Road::FlagEnd);
+		// Only wares, no workers can use ferries
+		if (Waterway::is_waterway_descr(&road->descr()) && type == wwWORKER)
+		    continue;
+
+		Flag* f = &road->get_flag(RoadBase::FlagEnd);
 		int32_t nb_cost;
 		if (f != this) {
-			nb_cost = road->get_cost(Road::FlagStart);
+			nb_cost = road->get_cost(RoadBase::FlagStart);
 		} else {
-			f = &road->get_flag(Road::FlagStart);
-			nb_cost = road->get_cost(Road::FlagEnd);
+			f = &road->get_flag(RoadBase::FlagStart);
+			nb_cost = road->get_cost(RoadBase::FlagEnd);
 		}
 		if (type == wwWARE) {
 			nb_cost += nb_cost * (get_waitcost() + f->get_waitcost()) / 2;
@@ -282,20 +293,51 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 /**
  * Return the road that leads to the given flag.
 */
-Road* Flag::get_road(Flag& flag) {
+RoadBase* Flag::get_roadbase(Flag& flag) {
 	for (int8_t i = 0; i < 6; ++i)
-		if (Road* const road = roads_[i])
-			if (&road->get_flag(Road::FlagStart) == &flag || &road->get_flag(Road::FlagEnd) == &flag)
+		if (RoadBase* const road = roads_[i])
+			if (&road->get_flag(RoadBase::FlagStart) == &flag || &road->get_flag(RoadBase::FlagEnd) == &flag)
 				return road;
 
 	return nullptr;
+}
+
+Road* Flag::get_road(uint8_t const dir) const {
+	if (get_roadbase(dir) != nullptr && Road::is_road_descr(&get_roadbase(dir)->descr())) {
+	    return dynamic_cast<Road*>(roads_[dir - 1]);
+	}
+	return nullptr;
+}
+Waterway* Flag::get_waterway(uint8_t const dir) const {
+	if (get_roadbase(dir) != nullptr && Waterway::is_waterway_descr(&get_roadbase(dir)->descr())) {
+	    return dynamic_cast<Waterway*>(roads_[dir - 1]);
+	}
+	return nullptr;
+}
+
+/// returns the number of RoadBases connected to the flag
+uint8_t Flag::nr_of_roadbases() const {
+	uint8_t counter = 0;
+	for (uint8_t road_id = 6; road_id; --road_id)
+		if (get_roadbase(road_id) != nullptr)
+			++counter;
+	return counter;
 }
 
 /// returns the number of roads connected to the flag
 uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
 	for (uint8_t road_id = 6; road_id; --road_id)
-		if (get_road(road_id) != nullptr)
+		if (get_roadbase(road_id) != nullptr)
+			++counter;
+	return counter;
+}
+
+/// Returns the number of waterways connected to the flag. This must not be greater than 1.
+uint8_t Flag::nr_of_waterways() const {
+	uint8_t counter = 0;
+	for (uint8_t road_id = 6; road_id; --road_id)
+		if (get_waterway(road_id) != nullptr)
 			++counter;
 	return counter;
 }
@@ -306,8 +348,8 @@ bool Flag::is_dead_end() const {
 	Flag const* first_other_flag = nullptr;
 	for (uint8_t road_id = 6; road_id; --road_id)
 		if (Road* const road = get_road(road_id)) {
-			Flag& start = road->get_flag(Road::FlagStart);
-			Flag& other = this == &start ? road->get_flag(Road::FlagEnd) : start;
+			Flag& start = road->get_flag(RoadBase::FlagStart);
+			Flag& other = this == &start ? road->get_flag(RoadBase::FlagEnd) : start;
 			if (first_other_flag) {
 				if (&other != first_other_flag)
 					return false;
@@ -524,7 +566,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 	// Calculate the sum of the involved wallets' adjusted value
 	int32_t sum = 0;
 	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
-		Road* const road = roads_[i];
+		Road* const road = get_road(i);
 		if (road && road != promoted_road) {
 			sum += kRoadMaxWallet + road->wallet() * road->wallet();
 		}
@@ -532,7 +574,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 
 	// Distribute propagation coins in a smart way
 	for (int8_t i = 0; i < WalkingDir::LAST_DIRECTION; ++i) {
-		Road* const road = roads_[i];
+		Road* const road = get_road(i);
 		if (road && road->get_roadtype() != RoadType::kBusy) {
 			road->add_to_wallet(0.5 * (kRoadMaxWallet - road->wallet()) *
 			                    (kRoadMaxWallet + road->wallet() * road->wallet()) / sum);
@@ -648,18 +690,18 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Road* const road = get_road(dir);
 		Flag* other;
-		Road::FlagId flagid;
+		RoadBase::FlagId flagid;
 
 		if (!road) {
 			continue;
 		}
 
-		if (&road->get_flag(Road::FlagStart) == this) {
-			flagid = Road::FlagStart;
-			other = &road->get_flag(Road::FlagEnd);
+		if (&road->get_flag(RoadBase::FlagStart) == this) {
+			flagid = RoadBase::FlagStart;
+			other = &road->get_flag(RoadBase::FlagEnd);
 		} else {
-			flagid = Road::FlagEnd;
-			other = &road->get_flag(Road::FlagStart);
+			flagid = RoadBase::FlagEnd;
+			other = &road->get_flag(RoadBase::FlagStart);
 		}
 
 		if (other != &nextflag) {

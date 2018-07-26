@@ -194,6 +194,8 @@ wl_library(logic
     map_objects/tribes/constructionsite.h
     map_objects/tribes/dismantlesite.cc
     map_objects/tribes/dismantlesite.h
+    map_objects/tribes/ferry.cc
+    map_objects/tribes/ferry.h
     map_objects/tribes/market.cc
     map_objects/tribes/market.h
     map_objects/tribes/militarysite.cc

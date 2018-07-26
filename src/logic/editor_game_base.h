@@ -159,6 +159,7 @@ public:
 	void inform_players_about_ownership(MapIndex, PlayerNumber);
 	void inform_players_about_immovable(MapIndex, MapObjectDescr const*);
 	void inform_players_about_road(FCoords, MapObjectDescr const*);
+	void inform_players_about_waterway(FCoords, MapObjectDescr const*);
 
 	void unconquer_area(PlayerArea<Area<FCoords>>, PlayerNumber destroying_player = 0);
 	void conquer_area(PlayerArea<Area<FCoords>>, bool conquer_guarded_location = false);

@@ -24,7 +24,7 @@
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
-#include "economy/road.h"
+#include "economy/roadbase.h"
 #include "economy/ware_instance.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -149,20 +149,20 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 	}
 
 	if (route_.get_nrsteps() >= 1)
-		if (upcast(Road const, road, location))
-			if (&road->get_flag(Road::FlagEnd) == &route_.get_flag(game_, 1))
+		if (upcast(RoadBase const, road, location))
+			if (&road->get_flag(RoadBase::FlagEnd) == &route_.get_flag(game_, 1))
 				route_.trim_start(1);
 
 	if (route_.get_nrsteps() >= 1)
-		if (upcast(Road const, road, destination))
-			if (&road->get_flag(Road::FlagEnd) == &route_.get_flag(game_, route_.get_nrsteps() - 1))
+		if (upcast(RoadBase const, road, destination))
+			if (&road->get_flag(RoadBase::FlagEnd) == &route_.get_flag(game_, route_.get_nrsteps() - 1))
 				route_.truncate(route_.get_nrsteps() - 1);
 
 	// Reroute into PortDocks or the associated warehouse when appropriate
 	if (route_.get_nrsteps() >= 1) {
 		Flag& curflag(route_.get_flag(game_, 0));
 		Flag& nextflag(route_.get_flag(game_, 1));
-		if (!curflag.get_road(nextflag)) {
+		if (!curflag.get_roadbase(nextflag)) {
 			upcast(Warehouse, wh, curflag.get_building());
 			assert(wh);
 
@@ -180,7 +180,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 
 		if (ware_ && location == &curflag && route_.get_nrsteps() >= 2) {
 			Flag& nextnextflag(route_.get_flag(game_, 2));
-			if (!nextflag.get_road(nextnextflag)) {
+			if (!nextflag.get_roadbase(nextnextflag)) {
 				upcast(Warehouse, wh, nextflag.get_building());
 				assert(wh);
 

@@ -47,7 +47,9 @@ class Soldier;
 class TrainingSite;
 struct Flag;
 class TribeDescr;
+struct RoadBase;
 struct Road;
+struct Waterway;
 struct AttackController;
 
 /**
@@ -501,6 +503,8 @@ public:
 	Flag* build_flag(const Coords&);   /// Build a flag if it is allowed.
 	Road& force_road(const Path&);
 	Road* build_road(const Path&);  /// Build a road if it is allowed.
+	Waterway& force_waterway(const Path&);
+	Waterway* build_waterway(const Path&);  /// Build a waterway if it is allowed.
 	Building& force_building(Coords, const Building::FormerBuildings&);
 	Building& force_csite(Coords,
 	                      DescriptionIndex,

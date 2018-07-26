@@ -25,11 +25,13 @@ tribes:new_tribe {
          "tribes/images/frisians/roadt_normal_00.png",
          "tribes/images/frisians/roadt_normal_01.png",
       },
-      waterways = {
+      waterway = {
          "tribes/images/frisians/waterway_0.png",
          "tribes/images/frisians/waterway_1.png",
       },
    },
+
+   waterway_max_length = 8,
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
