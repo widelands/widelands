@@ -54,7 +54,6 @@ struct Road : public RoadBase {
 	static bool is_road_descr(MapObjectDescr const*);
 
 	explicit Road();
-	~Road();
 
 	static Road& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 

@@ -31,7 +31,7 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
-#include "economy/roadbase.h"
+#include "economy/road.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"

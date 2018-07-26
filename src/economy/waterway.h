@@ -50,7 +50,6 @@ struct Waterway : public RoadBase {
 	static bool is_waterway_descr(MapObjectDescr const*);
 
 	explicit Waterway();
-	~Waterway();
 
 	static Waterway& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 

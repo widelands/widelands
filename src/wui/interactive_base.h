@@ -61,7 +61,7 @@ public:
 		dfDebug = 4,           ///< general debugging info
 	};
 
-	// Overlays displayed while a road is under construction.
+	// Overlays displayed while a road or waterway is under construction.
 	struct RoadBuildingOverlays {
 		// The roads that are displayed while a road or waterway is being built.
 		// They are not yet logically in the game, but need to be displayed for

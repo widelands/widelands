@@ -691,13 +691,16 @@ void InteractiveBase::finish_build_waterway() {
 	if (buildwaterway_->get_nsteps()) {
 		upcast(Game, game, &egbase());
 
+		// TODO(Nordfriese): Check whether start and end flag are in the same economy,
+		// and whether the path exceeds the tribe-specific maximum length
+
 		// Build the path as requested
 		if (game)
 			game->send_player_build_waterway(waterway_build_player_, *new Widelands::Path(*buildwaterway_));
 		else
 			egbase().get_player(waterway_build_player_)->build_waterway(*new Widelands::Path(*buildwaterway_));
 
-		// Ignore Shift and Ctrl modifiers, because waterways cannot be split
+		// Shift and Ctrl modifiers are ignored, because waterways cannot be split
 	}
 
 	delete buildwaterway_;
@@ -762,6 +765,9 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 		if (map.findpath(buildwaterway_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0)
 			return false;  //  could not find a path
 		buildwaterway_->append(map, path);
+		// TODO(Nordfriese): We should instead refuse to append if the resulting path
+		// would be longer than the tribe-specific limit
+		buildwaterway_->truncate(player.tribe().waterway_max_length());
 	}
 
 	{
@@ -931,6 +937,8 @@ void InteractiveBase::roadb_add_overlay() {
 	}
 }
 
+// TODO(Nordfriese): This should not show overlays for fields we cannot
+// reach because of the tribe-specific waterway length limit
 void InteractiveBase::waterwayb_add_overlay() {
 	assert(buildwaterway_);
 	assert(waterway_building_overlays_.road_previews.empty());
@@ -949,7 +957,6 @@ void InteractiveBase::waterwayb_add_overlay() {
 			dir = Widelands::get_reverse_dir(dir);
 		}
 		int32_t const shift = 2 * (dir - Widelands::WALK_E);
-		//NOCOM what does kNormal here? Replace this with kWaterway?
 		waterway_building_overlays_.road_previews[c] |= (Widelands::RoadType::kNormal << shift);
 	}
 
@@ -963,15 +970,22 @@ void InteractiveBase::waterwayb_add_overlay() {
 		map.get_neighbour(endpos, dir, &neighb);
 		caps = egbase().player(waterway_build_player_).get_buildcaps(neighb);
 
+		// TODO(Nordfriese): Neither check works as intended here.
+		// We need something that succeeds for flags and flagspots but fails for frontiers.
 		if (!(caps & Widelands::MOVECAPS_SWIM))
-			continue;  // need to be able to row there
+			if (!map.can_reach_by_water(neighb))
+				continue;  // need to be able to row there
 
 		//  can't build on robusts
 		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
-			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
-			      (dynamic_cast<const Widelands::Waterway*>(imm) && (caps & Widelands::BUILDCAPS_FLAG))))
+			if (!(dynamic_cast<const Widelands::Flag*>(imm) || (caps & Widelands::BUILDCAPS_FLAG)))
 				continue;
+			// We mustn't connect separate economies with waterways
+			if (upcast(Widelands::PlayerImmovable, target, imm))
+				if (upcast(Widelands::PlayerImmovable, startflag, map.get_immovable(buildwaterway_->get_start())))
+					if (target->get_economy() != startflag->get_economy())
+						continue;
 		}
 
 		if (buildwaterway_->get_index(neighb) >= 0)

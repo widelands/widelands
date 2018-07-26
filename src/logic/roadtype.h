@@ -33,8 +33,7 @@ enum RoadType {
 	kNone = 0,
 	kNormal = 1,
 	kBusy = 2,
-	kWater = 3,
-	kWaterway = 4,
+	kWaterway = 3,
 	kMask = 3,
 
 	kEast = 0,  //  shift values
