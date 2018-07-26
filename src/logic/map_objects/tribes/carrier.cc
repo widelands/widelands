@@ -82,7 +82,7 @@ void Carrier::road_update(Game& game, State& state) {
 		operation_ = find_source_flag(game);
 	}
 
-	if (operation_ > NOP) {
+	if (operation_ > NO_OPERATION) {
 		if (state.ivar1) {
 			state.ivar1 = 0;
 			return start_task_transport(game, operation_);
@@ -119,7 +119,7 @@ void Carrier::road_update(Game& game, State& state) {
  * a ware there, we have to make sure that they do not count on us anymore.
  */
 void Carrier::road_pop(Game& game, State& /* state */) {
-	if (operation_ > NOP && get_location(game)) {
+	if (operation_ > NO_OPERATION && get_location(game)) {
 		Road& road = dynamic_cast<Road&>(*get_location(game));
 		Flag& flag = road.get_flag(static_cast<Road::FlagId>(operation_));
 		Flag& otherflag = road.get_flag(static_cast<Road::FlagId>(operation_ ^ 1));
@@ -203,14 +203,14 @@ void Carrier::transport_update(Game& game, State& state) {
 		int32_t otherware_idx = ware ? flag.find_swappable_ware(*ware, otherflag) :
 										flag.find_pending_ware(otherflag);
 		if (operation_ == WAIT) {
-			if (otherware_idx < -1) {
+			if (otherware_idx < kNotFoundAppropriate) {
 				return start_task_waitforcapacity(game, flag); // join flag's wait queue
 			} else {
 				operation_ = dest ^ 1; // resume transport without joining flag's wait queue
 				set_animation(game, descr().get_animation("idle"));
 				return schedule_act(game, 20);
 			}
-		} else if (otherware_idx < -1) {
+		} else if (otherware_idx < kNotFoundAppropriate) {
 			operation_ = WAIT; // move one node away
 			set_animation(game, descr().get_animation("idle"));
 			return schedule_act(game, 20);
@@ -243,7 +243,7 @@ void Carrier::transport_update(Game& game, State& state) {
 				set_animation(game, descr().get_animation("idle"));
 				schedule_act(game, 20);
 			} else {
-				operation_ = NOP;
+				operation_ = NO_OPERATION;
 				pop_task(game);
 			}
 		}
@@ -308,7 +308,7 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 			send_signal(game, "wakeup");
 			return true;
 		}
-	} else if (operation_ == NOP) {
+	} else if (operation_ == NO_OPERATION) {
 		operation_ = flag;
 		send_signal(game, "ware");
 		return true;
@@ -338,7 +338,7 @@ int32_t Carrier::find_source_flag(Game& game) {
 		pw->pending = false;
 		return near ^ 1;
 	} else {
-		return NOP;
+		return NO_OPERATION;
 	}
 }
 

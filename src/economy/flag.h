@@ -47,6 +47,9 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
 };
 
+constexpr int32_t kNotFoundAppropriate = -1; // no ware appropiate for carrying
+constexpr int32_t kDenyDrop = -2; // flag is full and no ware appropiate for swapping
+
 /**
  * Flag represents a flag as you see it on the map.
  *

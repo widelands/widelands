@@ -472,11 +472,11 @@ bool Flag::cancel_pickup(Game& game, Flag& destflag) {
  * Called by carrier code to find the best among the wares on this flag
  * that are meant for the provided dest.
  * \return index of found ware (carrier will take it)
- * or -1 if not found appropriate (carrier will leave empty-handed)
+ * or kNotFoundAppropriate (carrier will leave empty-handed)
  */
 int32_t Flag::find_pending_ware(PlayerImmovable& dest) {
 	int32_t highest_pri = -1;
-	int32_t best_index = -1;
+	int32_t best_index = kNotFoundAppropriate;
 	bool ware_pended = false;
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {
@@ -510,12 +510,12 @@ int32_t Flag::find_pending_ware(PlayerImmovable& dest) {
 
 /**
  * Like find_pending_ware() above, but for carriers who have a ware to drop on this flag.
- * \return same as find_pending_ware() above, plus -2 if denied drop (carrier will wait)
+ * \return same as find_pending_ware() above, plus kDenyDrop (carrier will wait)
  */
 int32_t Flag::find_swappable_ware(WareInstance& ware, Flag& destflag) {
 	DescriptionIndex const descr_index = ware.descr_index();
 	int32_t highest_pri = -1;
-	int32_t best_index = -1;
+	int32_t best_index = kNotFoundAppropriate;
 	bool has_same_ware = false;
 	bool has_allowed = false;
 	bool ware_pended = false;
@@ -553,11 +553,11 @@ int32_t Flag::find_swappable_ware(WareInstance& ware, Flag& destflag) {
 		}
 	}
 
-	if (best_index > -1) {
-		return (ware_filled_ > ware_capacity_ - 3 || has_allowed) ? best_index : -1;
+	if (best_index > kNotFoundAppropriate) {
+		return (ware_filled_ > ware_capacity_ - 3 || has_allowed) ? best_index : kNotFoundAppropriate;
 	} else {
 		return (ware_filled_ < ware_capacity_ - 2 ||
-			(ware_filled_ < ware_capacity_ && !has_same_ware)) ? -1 : -2;
+			(ware_filled_ < ware_capacity_ && !has_same_ware)) ? kNotFoundAppropriate : kDenyDrop;
 	}
 }
 
@@ -586,7 +586,7 @@ WareInstance* Flag::fetch_pending_ware(Game& game, int32_t best_index) {
 void Flag::ware_departing(Game& game) {
 	// Wake up one sleeper from the capacity queue.
 	while (!capacity_wait_.empty()) {
-		Worker* const w = capacity_wait_[0].get(game);
+		Worker* const w = capacity_wait_[0].get(game); // NOCOM consider using a deque
 		capacity_wait_.erase(capacity_wait_.begin());
 		if (w && w->wakeup_flag_capacity(game, *this)) {
 			return;

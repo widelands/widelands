@@ -50,7 +50,7 @@ struct Carrier : public Worker {
 	MO_DESCR(CarrierDescr)
 
 	explicit Carrier(const CarrierDescr& carrier_descr)
-	   : Worker(carrier_descr), operation_(NOP) {
+	   : Worker(carrier_descr), operation_(NO_OPERATION) {
 	}
 	~Carrier() override {
 	}
@@ -82,7 +82,7 @@ private:
 	// This should be an enum, but this clutters the code with too many casts
 	static const int32_t INIT = -3; // ready to undertake or resume operations
 	static const int32_t WAIT = -2; // waiting for flag capacity
-	static const int32_t NOP = -1; // idling
+	static const int32_t NO_OPERATION = -1; // idling
 	static const int32_t START_FLAG = 0; // serving start flag of road
 	static const int32_t END_FLAG = 1; // serving end flag of road
 	int32_t operation_;
