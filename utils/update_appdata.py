@@ -142,7 +142,7 @@ dest_file.close()
 
 print('Done!')
 
-from subprocess import call, CalledProcessError, Popen, PIPE
+from subprocess import call, Popen, PIPE
 
 # Validata Appdata
 call(['appstreamcli', 'validate', appdata_filepath])
