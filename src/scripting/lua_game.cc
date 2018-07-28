@@ -329,6 +329,7 @@ int LuaPlayer::send_message(lua_State* L) {
 	Coords c = Coords::null();
 	Message::Status st = Message::Status::kNew;
 	bool popup = false;
+	std::string sub_type = "";
 
 	Game& game = get_game(L);
 	Player& plr = get(L, game);
@@ -373,11 +374,18 @@ int LuaPlayer::send_message(lua_State* L) {
 				heading = s;
 			}
 		}
+		lua_getfield(L, 4, "sub_type");
+		if (!lua_isnil(L, -1)) {
+			const std::string s = luaL_checkstring(L, -1);
+			if (!s.empty()) {
+				sub_type = s;
+			}
+		}
 	}
 
 	MessageId const message = plr.add_message(
 	   game, std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(),
-	                                              title, icon, heading, body, c, 0, nullptr, st)),
+	                                              title, icon, heading, body, c, 0, sub_type, st)),
 	   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));

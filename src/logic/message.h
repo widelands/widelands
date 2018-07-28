@@ -59,7 +59,7 @@ struct Message {
 	 *                   the object is removed from the game. Defaults to 0
 	 * \param s          The message status. Defaults to Status::New
 	 * \param subt       The extended message type, used for comparisons in
-	 *                   Player::add_message_with_timeout(). Defaults to nullptr
+	 *                   Player::add_message_with_timeout(). Defaults to ""
 	 */
 	Message(Message::Type msgtype,
 	        uint32_t sent_time,
