@@ -332,8 +332,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Draw work area previews.
 		{
-			const auto it = work_area_overlays.find(f->fcoords);
-			if (it != work_area_overlays.end()) {
+			const auto it = workarea_overlays.find(f->fcoords);
+			if (it != workarea_overlays.end()) {
 				blit_field_overlay(dst, *f, it->second,
 				                   Vector2i(it->second->width() / 2, it->second->height() / 2), scale);
 			}
