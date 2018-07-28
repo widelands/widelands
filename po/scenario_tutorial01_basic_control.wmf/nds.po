@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-06 14:22+0000\n"
-"PO-Revision-Date: 2018-07-12 07:27+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-21 08:56+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -31,11 +31,11 @@ msgstr "Nix för ungood, aber dat mutt ick weer plattreten. Düsse Rüümte bruk
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:25
 msgid "Welcome to the Widelands Tutorial!"
-msgstr "Willkommen bi de Widelands-Inföhren!"
+msgstr "Willkomen bi de Widelands-Inföhren!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:27
 msgid "Welcome to Widelands!"
-msgstr "Willkommen in Widelands!"
+msgstr "Willkomen in Widelands!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:28
 msgid ""
@@ -477,7 +477,7 @@ msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
-msgstr "Nu versöök 't. Dat Flinthauerhuus is een lüttjes Huus; wenn du up een Teken för middelmatig oder grote Husen klickst, mutt du eerst de Listenwessler för lütte Husen utkören, um 't to finnen. Probeer 't!"
+msgstr "Nu versöök 't. Dat Flinthauerhuus is een lüttes Huus; wenn du up een Teken för middelmatig oder grote Husen klickst, mutt du eerst de Listenwessler för lütte Husen utkören, um 't to finnen. Probeer 't!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid "Build a quarry next to the rocks"
