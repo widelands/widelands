@@ -493,6 +493,7 @@ Tribes
 const char LuaTribes::className[] = "Tribes";
 const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_carrier_type),
+   METHOD(LuaTribes, new_ferry_type),
    METHOD(LuaTribes, new_constructionsite_type),
    METHOD(LuaTribes, new_dismantlesite_type),
    METHOD(LuaTribes, new_immovable_type),
@@ -791,6 +792,29 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
 		egbase.mutable_tribes()->add_carrier_type(table, egbase);
+	} catch (std::exception& e) {
+		report_error(L, "%s", e.what());
+	}
+	return 0;
+}
+
+/* RST
+	.. method:: new_ferry_type{table}
+
+		Adds a new ferry worker type. Takes a single argument, a table with
+		the descriptions. See the files in tribes/ for usage examples.
+
+		:returns: :const:`nil`
+*/
+int LuaTribes::new_ferry_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_ferry_type(table, egbase);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

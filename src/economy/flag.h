@@ -118,11 +118,11 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool has_road() const {
 		return nr_of_roads() > 0;
 	}
-	RoadBase* get_roadbase(uint8_t const dir) const {
+	RoadBase* get_roadbase(uint8_t dir) const {
 		return roads_[dir - 1];
 	}
-	Road* get_road(uint8_t const dir) const;
-	Waterway* get_waterway(uint8_t const dir) const;
+	Road* get_road(uint8_t dir) const;
+	Waterway* get_waterway(uint8_t dir) const;
 	uint8_t nr_of_roadbases() const;
 	uint8_t nr_of_roads() const;
 	uint8_t nr_of_waterways() const;

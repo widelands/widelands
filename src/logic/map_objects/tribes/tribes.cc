@@ -114,6 +114,13 @@ void Tribes::add_carrier_type(const LuaTable& table, const EditorGameBase& egbas
 	   table, egbase));
 }
 
+void Tribes::add_ferry_type(const LuaTable& table, const EditorGameBase& egbase) {
+	i18n::Textdomain td("tribes");
+	workers_->add(new FerryDescr(
+	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
+	   table, egbase));
+}
+
 void Tribes::add_soldier_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
 	workers_->add(new SoldierDescr(

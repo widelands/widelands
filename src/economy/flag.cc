@@ -25,8 +25,8 @@
 #include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/road.h"
-#include "economy/waterway.h"
 #include "economy/ware_instance.h"
+#include "economy/waterway.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/map_object.h"
@@ -197,7 +197,7 @@ void Flag::attach_building(EditorGameBase& egbase, Building& building) {
 
 	const Map& map = egbase.map();
 	egbase.set_road(
-	   map.get_fcoords(map.tl_n(position_)), RoadType::kSouthEast,
+	   map.get_fcoords(map.tl_n(position_)), WALK_SE,
 	   building_->get_size() == BaseImmovable::SMALL ? RoadType::kNormal : RoadType::kBusy);
 
 	building.set_economy(get_economy());
@@ -212,7 +212,7 @@ void Flag::detach_building(EditorGameBase& egbase) {
 	building_->set_economy(nullptr);
 
 	const Map& map = egbase.map();
-	egbase.set_road(map.get_fcoords(map.tl_n(position_)), RoadType::kSouthEast, RoadType::kNone);
+	egbase.set_road(map.get_fcoords(map.tl_n(position_)), WALK_SE, RoadType::kNone);
 
 	building_ = nullptr;
 }

@@ -27,6 +27,7 @@
 
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/roadtype.h"
 #include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "sound/note_sound.h"
@@ -59,15 +60,6 @@ public:
 		dfShowCensus = 1,      ///< show census report on buildings
 		dfShowStatistics = 2,  ///< show statistics report on buildings
 		dfDebug = 4,           ///< general debugging info
-	};
-
-	// Overlays displayed while a road or waterway is under construction.
-	struct RoadBuildingOverlays {
-		// The roads that are displayed while a road or waterway is being built.
-		// They are not yet logically in the game, but need to be displayed for
-		// the user as visual guide. The data type is the same as for Field::road.
-		std::map<Widelands::Coords, uint8_t> road_previews;
-		std::map<Widelands::Coords, const Image*> steepness_indicators;
 	};
 
 	/// A build help overlay, i.e. small, big, mine, port ...
@@ -255,6 +247,12 @@ protected:
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.
 	const BuildhelpOverlay* get_buildhelp_overlay(Widelands::NodeCaps caps) const;
+
+	// Overlays displayed while a road or waterway is under construction.
+	struct RoadBuildingOverlays {
+		std::map<Widelands::Coords, Widelands::RoadInfo> road_previews;
+		std::map<Widelands::Coords, const Image*> steepness_indicators;
+	};
 
 	const RoadBuildingOverlays& road_building_overlays() const {
 		return road_building_overlays_;

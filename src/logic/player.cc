@@ -53,6 +53,7 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
+#include "logic/roadtype.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "wui/interactive_player.h"
@@ -527,7 +528,7 @@ Waterway* Player::build_waterway(const Path& path) {
 	if (upcast(Flag, start, fc.field->get_immovable())) {
 		if (upcast(Flag, end, map.get_immovable(path.get_end()))) {
 			if (start->get_economy() != end->get_economy()) {
-				log("%i: Refused to build a waterway because the flags are in different economies.");
+				log("%i: Refused to build a waterway because the flags are in different economies.", player_number());
 				return nullptr;
 			}
 
@@ -1033,7 +1034,9 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 
 	{  // discover everything (above the ground) in this field
 		field.terrains = f.field->get_terrains();
-		field.roads = f.field->get_roads();
+		field.r_e = f.field->get_road(WALK_E);
+		field.r_se = f.field->get_road(WALK_SE);
+		field.r_sw = f.field->get_road(WALK_SW);
 		field.owner = f.field->get_owned_by();
 
 		// Check if this node is part of a border
@@ -1096,8 +1099,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		Field& tr_field = fields_[tr.field - &first_map_field];
 		if (tr_field.vision <= 1) {
 			tr_field.terrains.d = tr.field->terrain_d();
-			tr_field.roads &= ~(RoadType::kMask << RoadType::kSouthWest);
-			tr_field.roads |= RoadType::kMask << RoadType::kSouthWest & tr.field->get_roads();
+			tr_field.r_sw = tr.field->get_road(WALK_SW);
 			tr_field.owner = tr.field->get_owned_by();
 		}
 	}
@@ -1106,8 +1108,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		Field& tl_field = fields_[tl.field - &first_map_field];
 		if (tl_field.vision <= 1) {
 			tl_field.terrains = tl.field->get_terrains();
-			tl_field.roads &= ~(RoadType::kMask << RoadType::kSouthEast);
-			tl_field.roads |= RoadType::kMask << RoadType::kSouthEast & tl.field->get_roads();
+			tl_field.r_se = tl.field->get_road(WALK_SE);
 			tl_field.owner = tl.field->get_owned_by();
 		}
 	}
@@ -1116,8 +1117,7 @@ void Player::rediscover_node(const Map& map, const FCoords& f) {
 		Field& l_field = fields_[l.field - &first_map_field];
 		if (l_field.vision <= 1) {
 			l_field.terrains.r = l.field->terrain_r();
-			l_field.roads &= ~(RoadType::kMask << RoadType::kEast);
-			l_field.roads |= RoadType::kMask << RoadType::kEast & l.field->get_roads();
+			l_field.r_e = l.field->get_road(WALK_E);
 			l_field.owner = l.field->get_owned_by();
 		}
 	}

@@ -662,6 +662,8 @@ std::string to_string(const MapObjectType type) {
 		return "worker";
 	case MapObjectType::CARRIER:
 		return "carrier";
+	case MapObjectType::FERRY:
+		return "ferry";
 	case MapObjectType::SOLDIER:
 		return "soldier";
 	case MapObjectType::WARE:
@@ -676,6 +678,10 @@ std::string to_string(const MapObjectType type) {
 		return "flag";
 	case MapObjectType::ROAD:
 		return "road";
+	case MapObjectType::WATERWAY:
+		return "waterway";
+	case MapObjectType::ROADBASE:
+		return "roadbase";
 	case MapObjectType::PORTDOCK:
 		return "portdock";
 	case MapObjectType::BUILDING:

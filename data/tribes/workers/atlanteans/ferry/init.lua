@@ -14,7 +14,7 @@ animations = {
 }
 add_walking_animations (animations, "walk", dirname, "sail", {37, 38}, 10)
 
-tribes:new_carrier_type {
+tribes:new_ferry_type {
    msgctxt = "atlanteans_worker",
    name = "atlanteans_ferry",
    -- TRANSLATORS: This is a worker name used in lists of workers

@@ -20,26 +20,22 @@
 #ifndef WL_LOGIC_ROADTYPE_H
 #define WL_LOGIC_ROADTYPE_H
 
+#include "logic/map_objects/walkingdir.h"
+
 namespace Widelands {
 
-// TODO(SirVer): This are two enums in one. They do not have a true logical
-// connection.
-//
-// The first 5 enums define what kind of roads this are, the other three in
-// which direction they point for a field. Still, the first few are needed for
-// the drawing code to keep around what kind of road it should draw. I guess
-// that is the reason why it was combined in the first place. Still it is ugly.
-enum RoadType {
+enum RoadType : uint8_t {
 	kNone = 0,
 	kNormal = 1,
 	kBusy = 2,
 	kWaterway = 3,
-	kMask = 3,
-
-	kEast = 0,  //  shift values
-	kSouthEast = 2,
-	kSouthWest = 4,
 };
+
+struct RoadInfo {
+	RoadType type;
+	uint8_t dir;
+};
+
 }
 
 #endif  // end of include guard: WL_LOGIC_ROADTYPE_H

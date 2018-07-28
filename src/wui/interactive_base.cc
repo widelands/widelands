@@ -767,7 +767,8 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 		buildwaterway_->append(map, path);
 		// TODO(Nordfriese): We should instead refuse to append if the resulting path
 		// would be longer than the tribe-specific limit
-		buildwaterway_->truncate(player.tribe().waterway_max_length());
+		if (buildwaterway_->get_nsteps() > player.tribe().waterway_max_length())
+			buildwaterway_->truncate(player.tribe().waterway_max_length());
 	}
 
 	{
@@ -886,8 +887,10 @@ void InteractiveBase::roadb_add_overlay() {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
-		int32_t const shift = 2 * (dir - Widelands::WALK_E);
-		road_building_overlays_.road_previews[c] |= (Widelands::RoadType::kNormal << shift);
+		Widelands::RoadInfo info;
+		info.type = Widelands::RoadType::kNormal;
+		info.dir = dir;
+		road_building_overlays_.road_previews[c] = info;
 	}
 
 	// build hints
@@ -956,8 +959,10 @@ void InteractiveBase::waterwayb_add_overlay() {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
-		int32_t const shift = 2 * (dir - Widelands::WALK_E);
-		waterway_building_overlays_.road_previews[c] |= (Widelands::RoadType::kNormal << shift);
+		Widelands::RoadInfo info;
+		info.type = Widelands::RoadType::kWaterway;
+		info.dir = dir;
+		waterway_building_overlays_.road_previews[c] = info;
 	}
 
 	// build hints

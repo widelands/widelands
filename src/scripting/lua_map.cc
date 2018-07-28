@@ -680,6 +680,8 @@ int upcasted_map_object_descr_to_lua(lua_State* L, const MapObjectDescr* const d
 			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 		case MapObjectType::CARRIER:
 			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
+		case MapObjectType::FERRY:
+			return CAST_TO_LUA(WorkerDescr, LuaWorkerDescription);
 		case MapObjectType::SOLDIER:
 			return CAST_TO_LUA(SoldierDescr, LuaSoldierDescription);
 		case MapObjectType::IMMOVABLE:

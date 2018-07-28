@@ -182,7 +182,7 @@ void Carrier::transport_update(Game& game, State& state) {
 		// A sanity check is necessary, in case the building has been destroyed
 		PlayerImmovable* const next = ware.get_next_move_step(game);
 
-		if (next && next != &flag && &next->base_flag() == &flag ) 
+		if (next && next != &flag && &next->base_flag() == &flag ) {
 			if (Road::is_road_descr(&road.descr())) {
 				Road& r = dynamic_cast<Road&>(road);
 				// pay some coins before entering the building,
@@ -190,6 +190,7 @@ void Carrier::transport_update(Game& game, State& state) {
 				r.pay_for_building();
 				enter_building(game, state);
 			}
+		}
 
 		// If the flag is overloaded we are allowed to drop wares as
 		// long as we can pick another up. Otherwise we have to wait.

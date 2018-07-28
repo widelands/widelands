@@ -220,7 +220,9 @@ public:
 		Field()
 		   : military_influence(0),
 		     vision(0),
-		     roads(0),
+		     r_e(0),
+		     r_se(0),
+		     r_sw(0),
 		     owner(0),
 		     time_node_last_unseen(0),
 		     map_object_descr(nullptr),
@@ -299,7 +301,14 @@ public:
 		 */
 		Widelands::Field::Terrains terrains;
 
-		uint8_t roads;
+		/**
+		 * The road types of the 3 edges, as far as this player knows.
+		 * Each value is only valid when this player has seen this node
+		 * or the node to the the edge leads up to.
+		 */
+		uint8_t r_e;
+		uint8_t r_se;
+		uint8_t r_sw;
 
 		/**
 		 * The owner of this node, as far as this player knows.
@@ -321,7 +330,7 @@ public:
 		/// Only valid when this player has seen this node or the node to the
 		/// east.
 		uint8_t road_e() const {
-			return roads & RoadType::kMask;
+			return r_e;
 		}
 
 		/// Whether there is a road between this node and the node to the
@@ -329,7 +338,7 @@ public:
 		/// Only valid when this player has seen this node or the node to the
 		/// southeast.
 		uint8_t road_se() const {
-			return roads >> RoadType::kSouthEast & RoadType::kMask;
+			return r_se;
 		}
 
 		/// Whether there is a road between this node and the node to the
@@ -337,7 +346,7 @@ public:
 		/// Only valid when this player has seen this node or the node to the
 		/// southwest.
 		uint8_t road_sw() const {
-			return roads >> RoadType::kSouthWest & RoadType::kMask;
+			return r_sw;
 		}
 
 		/**

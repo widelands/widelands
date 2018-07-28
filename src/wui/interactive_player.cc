@@ -39,6 +39,7 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
+#include "logic/roadtype.h"
 #include "profile/profile.h"
 #include "ui_basic/unique_window.h"
 #include "wui/building_statistics_menu.h"
@@ -301,7 +302,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		// Adjust this field for visibility for this player.
 		if (!plr.see_all()) {
 			f->brightness = adjusted_field_brightness(f->fcoords, gametime, player_field);
-			f->roads = player_field.roads;
+			f->road_e = player_field.r_e;
+			f->road_se = player_field.r_se;
+			f->road_sw = player_field.r_sw;
 			f->vision = player_field.vision;
 			if (player_field.vision == 1) {
 				f->owner = player_field.owner != 0 ? gbase.get_player(player_field.owner) : nullptr;
@@ -313,13 +316,39 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Add road building overlays if applicable.
 		if (f->vision > 0) {
-			const auto itb = road_building.road_previews.find(f->fcoords);
-			if (itb != road_building.road_previews.end()) {
-				f->roads |= itb->second;
+			const auto rinfo = road_building.road_previews.find(f->fcoords);
+			if (rinfo != road_building.road_previews.end()) {
+				switch (rinfo->second.dir) {
+					case Widelands::WALK_E:
+						f->road_e = rinfo->second.type;
+						break;
+					case Widelands::WALK_SE:
+						f->road_se = rinfo->second.type;
+						break;
+					case Widelands::WALK_SW:
+						f->road_sw = rinfo->second.type;
+						break;
+					default:
+						throw wexception("Attempt to set road-building overlay for invalid direction %i",
+								rinfo->second.dir);
+				}
 			}
-			const auto itw = waterway_building.road_previews.find(f->fcoords);
-			if (itw != waterway_building.road_previews.end()) {
-				f->roads |= itw->second;
+			const auto winfo = waterway_building.road_previews.find(f->fcoords);
+			if (winfo != waterway_building.road_previews.end()) {
+				switch (winfo->second.dir) {
+					case Widelands::WALK_E:
+						f->road_e = winfo->second.type;
+						break;
+					case Widelands::WALK_SE:
+						f->road_se = winfo->second.type;
+						break;
+					case Widelands::WALK_SW:
+						f->road_sw = winfo->second.type;
+						break;
+					default:
+						throw wexception("Attempt to set waterway-building overlay for invalid direction %i",
+								winfo->second.dir);
+				}
 			}
 
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
