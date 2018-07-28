@@ -974,15 +974,13 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			    _("A geologist found resources."))
 			      .str();
 
-			Message::Type message_type = Message::Type::kGeologists;
-
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			get_owner()->add_message_with_timeout(
 			   game, std::unique_ptr<Message>(
-			            new Message(message_type, game.get_gametime(), rdescr->descname(),
+			            new Message(Message::Type::kGeologists, game.get_gametime(), rdescr->descname(),
 			                        ri.descr().representative_image_filename(), rdescr->descname(),
-			                        message, position, serial_, rdescr->name().c_str())),
+			                        message, position, serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}

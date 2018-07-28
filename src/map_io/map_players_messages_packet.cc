@@ -130,7 +130,7 @@ void MapPlayersMessagesPacket::read(FileSystem& fs,
 						   static_cast<Message::Type>(s->get_natural("type")), sent, s->get_name(),
 						   s->get_safe_string("icon"), s->get_safe_string("heading"),
 						   s->get_safe_string("body"), get_coords("position", extent, Coords::null(), s),
-						   serial, s->get_string("subtype"), status)));
+						   serial, std::string(s->get_string("subtype", "")), status)));
 					}
 					previous_message_sent = sent;
 				} catch (const WException& e) {
@@ -183,9 +183,7 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 				uint32_t fileindex = mos.get_object_file_index_or_zero(mo);
 				s.set_int("serial", fileindex);
 			}
-			if (message.sub_type()) {
-			    s.set_string("subtype", message.sub_type());
-			}
+		    s.set_string("subtype", message.sub_type().c_str());
 		}
 		fs.ensure_directory_exists(
 		   (boost::format(kPlayerDirnameTemplate) % static_cast<unsigned int>(p)).str());
