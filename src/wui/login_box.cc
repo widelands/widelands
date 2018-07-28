@@ -20,7 +20,7 @@
 #include "wui/login_box.h"
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
@@ -48,12 +48,12 @@ LoginBox::LoginBox(Panel& parent)
 
 	UI::Button* loginbtn = new UI::Button(
 	   this, "login",
-	   UI::g_fh1->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
-	                                    (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
+	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
+	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
 	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
 	UI::Button* cancelbtn =
-	   new UI::Button(this, "cancel", UI::g_fh1->fontset()->is_rtl() ?
+	   new UI::Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ?
 	                                     (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
 	                                     (get_inner_w() / 2 - 200) / 2,
 	                  loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));

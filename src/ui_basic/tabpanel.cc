@@ -19,7 +19,7 @@
 
 #include "ui_basic/tabpanel.h"
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -62,7 +62,7 @@ Tab::Tab(TabPanel* const tab_parent,
      tooltip(tooltip_text),
      panel(contents) {
 	if (!init_title.empty()) {
-		rendered_title = UI::g_fh1->render(as_uifont(init_title));
+		rendered_title = UI::g_fh->render(as_uifont(init_title));
 		set_size(std::max(kTabPanelButtonHeight, rendered_title->width() + 2 * kTabPanelTextMargin),
 		         kTabPanelButtonHeight);
 	}

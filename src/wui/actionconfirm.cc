@@ -23,7 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/economy.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -135,7 +135,6 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
 	   main_box, 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,
 	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	textarea->force_new_renderer();
 
 	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
 	                                   g_gr->images().get("images/wui/menu_okay.png"));
@@ -147,10 +146,10 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	button_box->add(
-	   UI::g_fh1->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kFillSpace);
+	   UI::g_fh->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kFillSpace);
 	button_box->add_space(2 * padding);
 	button_box->add(
-	   UI::g_fh1->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
+	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	main_box->add(textarea);
 	main_box->add_space(1.5 * padding);
 	main_box->add(button_box, UI::Box::Resizing::kFullSize);
