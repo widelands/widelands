@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-06 14:22+0000\n"
-"PO-Revision-Date: 2018-07-12 07:28+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-22 16:09+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -761,7 +761,7 @@ msgstr "Blinkerflint oftoboen"
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:110
 msgid "mining diamonds"
-msgstr "Edelflint oftoboen"
+msgstr "Edelstenen oftoboen"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:129
 msgid "No Crystal"
@@ -1766,7 +1766,7 @@ msgstr "Besteck to maken"
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:7
 msgctxt "barbarians_building"
 msgid "Micro Brewery"
-msgstr "Lüttje Broeree"
+msgstr "Lütte Broeree"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/init.lua:56
@@ -2109,7 +2109,7 @@ msgstr "De Ader vun düsse Iesen-Bargwark is leeg. De Mine produzeert af nu veel
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
 msgctxt "empire_building"
 msgid "Lumberjack’s House"
-msgstr "Boomslageree"
+msgstr "Boomhaueree"
 
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:54
 msgctxt "empire_building"
@@ -2359,7 +2359,7 @@ msgstr "Wien to maken"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:7
 msgctxt "frisians_building"
 msgid "Aqua Farm"
-msgstr "Fissbueree"
+msgstr "Fissbuurderee"
 
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/init.lua:87
 msgid "No Ponds"
@@ -2376,7 +2376,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "De Fisker dat warkt bi düsse Fissbueree hett keene Polen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Fissbueree all's hett wat se tum Arbeiden bruukt. Oder überlegg di, of du dat Huus ofbrannen oder plattrieten willt."
+msgstr "De Fisker dat warkt bi düsse Fissbuurderee hett keene Polen mehr. Bidde pass up dat eene Lehmkuhl in de Naberskupp arbeidt un de Fissbuurderee all's hett wat se tum Arbeiden bruukt. Oder überlegg di, of du dat Huus ofbrannen oder plattrieten willt."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
@@ -2412,7 +2412,7 @@ msgstr "Lütte Wapensmee"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:74
 msgid "forging a short sword"
-msgstr "een Lüttjet Sweert to smeden"
+msgstr "een Lüttes Sweert to smeden"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
@@ -2614,7 +2614,7 @@ msgstr "Weertskupp"
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:7
 msgctxt "frisians_building"
 msgid "Farm"
-msgstr "Bueree"
+msgstr "Buurderee"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:68
@@ -3618,7 +3618,7 @@ msgstr "Dröge Pool"
 #: ../../data/tribes/immovables/pond_growing/init.lua:7
 msgctxt "immovable"
 msgid "Pond With Fish Spawn"
-msgstr "Pool mit lüttjen Fisken"
+msgstr "Pool mit lütten Fisken"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/pond_mature/init.lua:7
@@ -4054,7 +4054,7 @@ msgstr "Maismehl"
 #: ../../data/tribes/wares/diamond/init.lua:7
 msgctxt "ware"
 msgid "Diamond"
-msgstr "Edelflint"
+msgstr "Edelsteen"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/felling_ax/init.lua:7
@@ -4438,7 +4438,7 @@ msgstr "Langes Sweert"
 #: ../../data/tribes/wares/sword_short/init.lua:7
 msgctxt "ware"
 msgid "Short Sword"
-msgstr "Lüttjet Sweert"
+msgstr "Lüttes Sweert"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/tabard/init.lua:7

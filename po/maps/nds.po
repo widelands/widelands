@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-06 14:22+0000\n"
-"PO-Revision-Date: 2018-07-07 14:25+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-21 08:57+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -249,7 +249,7 @@ msgstr "Ieskolle Begrötens"
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aber hör Ankuft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkommen…"
+msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aber hör Ankuft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -308,14 +308,14 @@ msgid ""
 "latitude; farming thrives, berries are abundant, and fish plentiful. The "
 "small human population of this place never knew famine. You warlording "
 "bastards just couldn’t leave this little paradise in peace, could you?"
-msgstr "Tüsken Sweeden un Finnland liggt de Halligsee. Düsse wunnermoje Stee is nich Land of Water, sünnern beides. Binnen een paar hunnert Kilometers liggen nich minner as 50.000 Inseln un Eilannen, de meesten lüttjer as een Demath. Dat Klima is recht mild; de Ackers blömen, Beren gifft 't im Övermaat, Fiske sünd riekelk daar. De minnen Lüü, de hier wohnen, hebben hör Leven nich hungert. Ji striedsüchtigen Bastards kunnen düsses lüttje Paradies eenfach nich in Ruh laten, nich wahr?"
+msgstr "Tüsken Sweeden un Finnland liggt de Halligsee. Düsse wunnermoje Stee is nich Land of Water, sünnern beides. Binnen een paar hunnert Kilometers liggen nich minner as 50.000 Inseln un Eilannen, de meesten lütter as een Demath. Dat Klima is recht mild; de Ackers blömen, Beren gifft 't im Övermaat, Fiske sünd riekelk daar. De minnen Lüü, de hier wohnen, hebben hör Leven nich hungert. Ji striedsüchtigen Bastards kunnen düsses lütte Paradies eenfach nich in Ruh laten, nich wahr?"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:11
 msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "Up düssen lüttjen Insels gifft 't kuum Rüümte för grote Husen. Daar sallst du daarher grote Husen bauen. Mitunner bruukst du grote Soldateree-Boen, um de anner Insel to faten to kriegen. Künstelk Spelers könen hier nich good spölen."
+msgstr "Up düssen lütten Insels gifft 't kuum Rüümte för grote Husen. Daar sallst du daarher grote Husen bauen. Mitunner bruukst du grote Soldateree-Boen, um de anner Insel to faten to kriegen. Künstelk Spelers könen hier nich good spölen."
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
@@ -662,7 +662,7 @@ msgstr ""
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
-msgstr "Dat Binannerkommen"
+msgstr "Dat Binannerkomen"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:10
 msgid ""
@@ -916,7 +916,7 @@ msgstr "Twee Swetten"
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:10
 msgid "A multiplayer battle map on a small circle-shaped island."
-msgstr "Eene Kriegs-Kaart för mennig Spelers up eener lüttjen runden Insel."
+msgstr "Eene Kriegs-Kaart för mennig Spelers up eener lütten runden Insel."
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:8
 msgid "Volcanic Winter"

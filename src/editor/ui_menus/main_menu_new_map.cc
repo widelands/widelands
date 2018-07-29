@@ -28,7 +28,7 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "editor/editorinteractive.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/image.h"
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
@@ -118,7 +118,7 @@ MainMenuNewMap::MainMenuNewMap(EditorInteractive& parent)
 
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewMap::clicked_create_map, this));
-	if (UI::g_fh1->fontset()->is_rtl()) {
+	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);
 	} else {

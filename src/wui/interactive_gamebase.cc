@@ -24,7 +24,7 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -129,7 +129,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		}
 
 		if (!game_speed.empty()) {
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(game_speed);
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(game_speed);
 			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
 		}
 	}

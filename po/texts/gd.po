@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
-"PO-Revision-Date: 2018-04-06 16:28+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-20 08:35+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -199,11 +199,11 @@ msgid "Widelands Translators"
 msgstr "Eadar-theangadairean aig Widelands"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
+msgid "Atlanteans"
 msgstr "Na h-Atlantaich"
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
+msgid "Barbarians"
 msgstr "Na Tùsanaich"
 
 #: ../../data/txts/developers.lua:3
@@ -247,8 +247,8 @@ msgid "FreeBSD"
 msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
-msgid "Frisian"
-msgstr ""
+msgid "Frisians"
+msgstr "Na Frìoslannaich"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -617,7 +617,7 @@ msgstr "Feumaidh tu gaireal airson breigichean; cuaraidh no mèinn cloiche airso
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr ""
+msgstr "Tog taigh planntair-choille an-còmhnaidh ach nach ruith am fiodh ort."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

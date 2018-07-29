@@ -23,7 +23,7 @@
 #include <list>
 #include <memory>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "logic/map_objects/bob.h"

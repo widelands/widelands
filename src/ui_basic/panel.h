@@ -32,7 +32,7 @@
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/align.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/panel_styles.h"
 
 class RenderTarget;

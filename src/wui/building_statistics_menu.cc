@@ -25,7 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "logic/map_objects/tribes/militarysite.h"
 #include "logic/map_objects/tribes/productionsite.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -84,7 +84,7 @@ BuildingStatisticsMenu::BuildingStatisticsMenu(InteractivePlayer& parent,
         0,
         1,
         UI::PanelStyle::kWui,
-        kLabelFontSize - UI::g_fh1->fontset()->size_offset()),  // We need consistent height here
+        kLabelFontSize - UI::g_fh->fontset()->size_offset()),  // We need consistent height here
      unproductive_label2_(
         &unproductive_box_,
         /** TRANSLATORS: This is the second part of productivity with input field */
