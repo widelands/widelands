@@ -72,9 +72,9 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 }
 
 BuildingWindow::~BuildingWindow() {
-	if (!is_warping_) {
-		hide_workarea();
-	}
+    if (showing_workarea_) { // same as hide_workarea() but leave tooltip alone
+        igbase()->hide_workarea(building_position_);
+    }
 }
 
 void BuildingWindow::on_building_note(const Widelands::NoteBuilding& note) {
