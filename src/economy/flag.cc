@@ -389,7 +389,7 @@ void Flag::skip_wait_for_capacity(Game&, Worker& w) {
 /**
  * Adds given ware to this flag.
  * Please check has_capacity() or better has_capacity_for_ware() before.
- */   
+ */
 void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
 	assert(ware_filled_ < ware_capacity_);
 	init_ware(egbase, ware, wares_[ware_filled_++]);
@@ -400,7 +400,7 @@ void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
 
 /**
  * Properly assigns given ware instance to given pending ware.
- */   
+ */
 void Flag::init_ware(EditorGameBase& egbase, WareInstance& ware, PendingWare& pi) {
 	pi.ware = &ware;
 	pi.pending = true;
@@ -434,7 +434,7 @@ void Flag::init_ware(EditorGameBase& egbase, WareInstance& ware, PendingWare& pi
 Flag::PendingWare* Flag::get_ware_for_flag(Flag& destflag, bool const pending_only) {
 	for (int32_t i = 0; i < ware_filled_; ++i) {
 		PendingWare* pw = &wares_[i];
-		if ((!pending_only || pw->pending) && pw->nextstep == &destflag && 
+		if ((!pending_only || pw->pending) && pw->nextstep == &destflag &&
 			destflag.allow_ware_from_flag(*pw->ware, *this)) {
 			return pw;
 		}
@@ -609,7 +609,7 @@ void Flag::ware_departing(Game& game) {
 		if (pw && road->notify_ware(game, *other)) {
 			pw->pending = false;
 		}
-	}	
+	}
 }
 
 /**
@@ -834,7 +834,7 @@ bool Flag::update_ware_from_flag(Game& game, PendingWare& pw1, Road& road, Flag&
 	}
 
 	// ask road for carrier on low congestion-risk
-	if (ware_filled_ < ware_capacity_ - 2 || 
+	if (ware_filled_ < ware_capacity_ - 2 ||
 		(!has_same_ware && (ware_filled_ < ware_capacity_ || has_swappable))) {
 		if (road.notify_ware(game, flag)) {
 			pw1.pending = false;
