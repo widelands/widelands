@@ -22,6 +22,7 @@
 #include "base/macros.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
+#include "economy/fleet.h"
 #include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -45,7 +46,7 @@ bool Waterway::is_waterway_descr(MapObjectDescr const* const descr) {
  * Most of the actual work is done in init.
  */
 Waterway::Waterway()
-   : RoadBase(g_waterway_descr, RoadType::kWaterway, 1, 0) {
+   : RoadBase(g_waterway_descr, RoadType::kWaterway), ferry_(nullptr) {
 }
 
 /**
@@ -65,6 +66,48 @@ Waterway& Waterway::create(EditorGameBase& egbase, Flag& start, Flag& end, const
 	waterway.init(egbase);
 
 	return waterway;
+}
+
+void Waterway::link_into_flags(EditorGameBase& egbase) {
+	RoadBase::link_into_flags(egbase);
+	if (upcast(Game, game, &egbase))
+		request_ferry();
+}
+
+bool Waterway::notify_ware(Game& game, FlagId const flagid) {
+	if (ferry_)
+		if (ferry_->notify_ware(game, flagid))
+			return true;
+	return false;
+}
+
+void Waterway::remove_worker(Worker& w) {
+	if (ferry_ != &w)
+		return;
+
+	ferry_ = nullptr;
+	request_ferry();
+
+	PlayerImmovable::remove_worker(w);
+}
+
+void Waterway::request_ferry() {
+	Fleet* fleet = new Fleet(get_owner());
+	fleet->request_ferry(this);
+	fleet->init(get_owner()->egbase());
+}
+
+void Waterway::request_ferry_callback(Game& game, Ferry* f) {
+	ferry_ = f;
+	ferry_->set_employer(this);
+	ferry_->set_economy(game, get_economy());
+	ferry_->start_task_road(game);
+}
+
+void Waterway::assign_carrier(Carrier& c, uint8_t ignored_param) {
+	ferry_->set_location(nullptr);
+	ferry_->set_employer(nullptr);
+	ferry_ = &dynamic_cast<Ferry&>(c);
 }
 
 }  // namespace Widelands

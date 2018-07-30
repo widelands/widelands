@@ -20,10 +20,10 @@
 #ifndef WL_ECONOMY_ROADBASE_H
 #define WL_ECONOMY_ROADBASE_H
 
-#include <cstdarg>
 #include <vector>
 
 #include "base/macros.h"
+#include "base/wexception.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/path.h"
 #include "logic/roadtype.h"
@@ -54,10 +54,6 @@ private:
  * exceptions: placement of carriers if the path's length is odd, splitting
  * a RoadBase when a flag is inserted.
  *
- * Every RoadBase has one or more Carriers attached to it. Carriers are attached
- * when they arrive via the callback function passed to the request. The
- * callback then calls assign_carrier which incorporates this carrier on this
- * RoadBase.
  */
 struct RoadBase : public PlayerImmovable {
 	friend class MapRoaddataPacket;  // For saving
@@ -65,19 +61,7 @@ struct RoadBase : public PlayerImmovable {
 
 	enum FlagId { FlagStart = 0, FlagEnd = 1 };
 
-    // A CarrierSlot can store a carrier.
-    // Type is 1 for ordinary carrier, 2 for second carrier, 0 for ferry.
-	struct CarrierSlot {
-		CarrierSlot();
-
-		OPtr<Carrier> carrier;
-		Request* carrier_request;
-		uint8_t carrier_type;
-	};
-
-	// The varargs is a list of uint8_t specifying carrier types
-	RoadBase(const RoadBaseDescr& d, RoadType type, uint8_t nb_carriers, ...);
-	~RoadBase() override;
+	RoadBase(const RoadBaseDescr& d, RoadType type);
 
 	Flag& get_flag(FlagId const flag) const {
 		return *flags_[flag];
@@ -103,10 +87,13 @@ struct RoadBase : public PlayerImmovable {
 		return idle_index_;
 	}
 
-	bool notify_ware(Game& game, FlagId flagid);
+	virtual bool notify_ware(Game& game, FlagId flagid) {
+		throw wexception("RoadBase::notify_ware() was called"); // NOCOM remove
+	}
 
-	void remove_worker(Worker&) override;
-	void assign_carrier(Carrier&, uint8_t);
+	virtual void assign_carrier(Carrier& carrier, uint8_t param) {
+		throw wexception("RoadBase::assign_carrier() was called"); // NOCOM remove
+	}
 
 protected:
 	bool init(EditorGameBase&) override;
@@ -123,13 +110,7 @@ protected:
 	void mark_map(EditorGameBase&);
 	void unmark_map(EditorGameBase&);
 
-	void link_into_flags(EditorGameBase&);
-
-	void request_carrier(CarrierSlot&);
-	static void
-	request_carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
-
-	uint8_t carriers_count() const;
+	virtual void link_into_flags(EditorGameBase&);
 
 	Flag* flags_[2];      ///< start and end flag
 	int32_t flagidx_[2];  ///< index of this road in the flag's road array
@@ -141,9 +122,6 @@ protected:
 	uint32_t idle_index_;  ///< index into path where carriers should idle
 
 	uint8_t type_;        ///< RoadType
-
-	using SlotVector = std::vector<CarrierSlot>;
-	SlotVector carrier_slots_;
 };
 }
 

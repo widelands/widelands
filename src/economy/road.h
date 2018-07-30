@@ -46,7 +46,12 @@ private:
 // https://stackoverflow.com/questions/40690260/undefined-reference-error-for-static-constexpr-member
 constexpr int32_t kRoadAnimalPrice = 600;
 constexpr int32_t kRoadMaxWallet = static_cast<int32_t>(2.5 * kRoadAnimalPrice);
-
+/**
+ * Every Road has one or more Carriers attached to it. Carriers are attached
+ * when they arrive via the callback function passed to the request. The
+ * callback then calls assign_carrier which incorporates this carrier on this
+ * Road.
+ */
 struct Road : public RoadBase {
 	friend class MapRoaddataPacket;  // For saving
 	friend class MapRoadPacket;      // For init()
@@ -54,8 +59,18 @@ struct Road : public RoadBase {
 	static bool is_road_descr(MapObjectDescr const*);
 
 	explicit Road();
+	~Road() override;
 
 	static Road& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
+
+    // A CarrierSlot can store a carrier.
+	struct CarrierSlot {
+		CarrierSlot();
+
+		OPtr<Carrier> carrier;
+		Request* carrier_request;
+		bool second_carrier;
+	};
 
 	void presplit(Game&, Coords split);
 	void postsplit(Game&, Flag&);
@@ -67,15 +82,34 @@ struct Road : public RoadBase {
 	void pay_for_road(Game& game, uint8_t wares_count);
 	void pay_for_building();
 
+	void set_economy(Economy*) override;
+
+	bool notify_ware(Game& game, FlagId flagid) override;
+
+	void remove_worker(Worker&) override;
+	void assign_carrier(Carrier&, uint8_t) override;
+
 	void log_general_info(const EditorGameBase&) override;
 
 private:
+	void cleanup(EditorGameBase&) override;
+	void link_into_flags(EditorGameBase&) override;
+
 	/// Counter that is incremented when a ware does not get a carrier for this
 	/// road immediately and decremented over time.
 	int32_t wallet_;
 
 	/// holds the gametime when wallet_ was last charged
 	uint32_t last_wallet_charge_;
+
+	void request_carrier(CarrierSlot&);
+	static void
+	request_carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
+
+	uint8_t carriers_count() const;
+
+	using SlotVector = std::vector<CarrierSlot>;
+	SlotVector carrier_slots_;
 };
 }
 

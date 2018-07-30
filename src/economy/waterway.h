@@ -53,6 +53,19 @@ struct Waterway : public RoadBase {
 
 	static Waterway& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 
+	bool notify_ware(Game& game, FlagId flagid);
+
+	void remove_worker(Worker&);
+	void assign_carrier(Carrier&, uint8_t);
+
+	void request_ferry_callback(Game&, Ferry*);
+
+private:
+	void link_into_flags(EditorGameBase&);
+
+	void request_ferry();
+
+	Ferry* ferry_;
 };
 }
 

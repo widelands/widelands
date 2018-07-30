@@ -27,11 +27,10 @@ tribes:new_tribe {
       },
       waterway = {
          "tribes/images/frisians/waterway_0.png",
-         "tribes/images/frisians/waterway_1.png",
       },
    },
 
-   waterway_max_length = 8,
+   waterway_max_length = 6,
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
@@ -269,6 +268,7 @@ tribes:new_tribe {
       "frisians_barracks",
       "frisians_weaving_mill",
       "frisians_shipyard",
+      "frisians_ferry_yard",
 
       -- Big
       "frisians_reindeer_farm",

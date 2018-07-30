@@ -79,11 +79,10 @@ tribes:new_tribe {
       },
       waterway = {
          "tribes/images/atlanteans/waterway_0.png",
-         "tribes/images/atlanteans/waterway_1.png",
       },
    },
 
-   waterway_max_length = 8,
+   waterway_max_length = 6,
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
@@ -260,6 +259,7 @@ tribes:new_tribe {
       "atlanteans_weaponsmithy",
       "atlanteans_armorsmithy",
       "atlanteans_shipyard",
+      "atlanteans_ferry_yard",
       "atlanteans_barracks",
 
       -- Big

@@ -140,21 +140,25 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 						if (fr.unsigned_8()) {
 							(carrier_request =
-							    new Request(road, 0, RoadBase::request_carrier_callback, wwWORKER))
+							    new Request(road, 0, Road::request_carrier_callback, wwWORKER))
 							   ->read(fr, game, mol);
 						} else {
 							carrier_request = nullptr;
 						}
+						// using uint8_t instead of bool for savegame compatibility
 						uint8_t const carrier_type = fr.unsigned_32();
 
-						if (i < road.carrier_slots_.size() &&
-						    road.carrier_slots_[i].carrier_type == carrier_type) {
-							assert(!road.carrier_slots_[i].carrier.get(egbase));
+						if (Road::is_road_descr(&road.descr())) {
+							Road& r = dynamic_cast<Road&>(road);
+							if (i < r.carrier_slots_.size() &&
+								r.carrier_slots_[i].second_carrier == (carrier_type > 1)) {
+								assert(!r.carrier_slots_[i].carrier.get(egbase));
 
-							road.carrier_slots_[i].carrier = carrier;
-							if (carrier || carrier_request) {
-								delete road.carrier_slots_[i].carrier_request;
-								road.carrier_slots_[i].carrier_request = carrier_request;
+								r.carrier_slots_[i].carrier = carrier;
+								if (carrier || carrier_request) {
+									delete r.carrier_slots_[i].carrier_request;
+									r.carrier_slots_[i].carrier_request = carrier_request;
+								}
 							}
 						} else {
 							delete carrier_request;
@@ -222,23 +226,32 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 
 				fw.unsigned_32(r->idle_index_);  //  TODO(unknown): do not save this
 
-				fw.unsigned_32(r->carrier_slots_.size());
+				if (upcast(Road const, road, r)) {
+					fw.unsigned_32(road->carrier_slots_.size());
 
-				for (const RoadBase::CarrierSlot& temp_slot : r->carrier_slots_) {
-					if (Carrier const* const carrier = temp_slot.carrier.get(egbase)) {
-						assert(mos.is_object_known(*carrier));
-						fw.unsigned_32(mos.get_object_file_index(*carrier));
-					} else {
-						fw.unsigned_32(0);
-					}
+					for (const Road::CarrierSlot& temp_slot : road->carrier_slots_) {
+						if (Carrier const* const carrier = temp_slot.carrier.get(egbase)) {
+							assert(mos.is_object_known(*carrier));
+							fw.unsigned_32(mos.get_object_file_index(*carrier));
+						} else {
+							fw.unsigned_32(0);
+						}
 
-					if (temp_slot.carrier_request) {
-						fw.unsigned_8(1);
-						temp_slot.carrier_request->write(fw, dynamic_cast<Game&>(egbase), mos);
-					} else {
-						fw.unsigned_8(0);
+						if (temp_slot.carrier_request) {
+							fw.unsigned_8(1);
+							temp_slot.carrier_request->write(fw, dynamic_cast<Game&>(egbase), mos);
+						} else {
+							fw.unsigned_8(0);
+						}
+						// using uint8_t instead of bool for savegame compatibility
+						fw.unsigned_32(temp_slot.second_carrier ? 2 : 1 );
 					}
-					fw.unsigned_32(temp_slot.carrier_type);
+				}
+				else if (upcast(Waterway const, ww, r)) {
+					fw.unsigned_32(mos.get_object_file_index(*ww->ferry_));
+				}
+				else {
+					NEVER_HERE();
 				}
 				mos.mark_object_as_saved(*r);
 			}

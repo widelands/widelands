@@ -913,6 +913,20 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
 }
 
 /**
+ * buildferry
+ *
+ * Creates a new instance of the ferry the worker's
+ * tribe uses and adds it to the appropriate fleet.
+ *
+ */
+bool Worker::run_buildferry(Game& game, State& state, const Action& action) {
+	game.create_ferry(get_position(), owner_);
+	++state.ivar1;
+	schedule_act(game, 10);
+	return true;
+}
+
+/**
  * Simply remove the currently selected object - make no fuss about it.
  */
 bool Worker::run_removeobject(Game& game, State& state, const Action&) {

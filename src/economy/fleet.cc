@@ -26,9 +26,11 @@
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/routing_node.h"
+#include "economy/waterway.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
+#include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/mapastar.h"
@@ -52,7 +54,7 @@ const FleetDescr& Fleet::descr() const {
 /**
  * Fleets are initialized empty.
  *
- * Intended use: @ref Ship and @ref PortDock, when created, create a new @ref Fleet
+ * Intended use: @ref Ferry, @ref Ship and @ref PortDock, when created, create a new @ref Fleet
  * instance, then add themselves \em before calling the \ref init function.
  * The Fleet takes care of merging with existing fleets, if any.
  */
@@ -64,7 +66,7 @@ Fleet::Fleet(Player* player) : MapObject(&g_fleet_descr), act_pending_(false) {
  * Whether the fleet is in fact useful for transporting goods.
  */
 bool Fleet::active() const {
-	return !ships_.empty() && !ports_.empty();
+	return !ships_.empty() && !ferries_.empty() && !ports_.empty() && !pending_ferry_requests_.empty();
 }
 
 /**
@@ -97,7 +99,7 @@ void Fleet::set_economy(Economy* e) {
 bool Fleet::init(EditorGameBase& egbase) {
 	MapObject::init(egbase);
 
-	if (ships_.empty() && ports_.empty()) {
+	if (ships_.empty() && ports_.empty() && ferries_.empty() && pending_ferry_requests_.empty()) {
 		molog("Empty fleet initialized; disband immediately\n");
 		remove(egbase);
 		return false;
@@ -201,6 +203,20 @@ bool Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 		Ship* ship = other->ships_.back();
 		other->ships_.pop_back();
 		add_ship(ship);
+	}
+
+	while (!other->ferries_.empty()) {
+		Ferry* ferry = other->ferries_.back();
+		other->ferries_.pop_back();
+		add_ferry(ferry);
+	}
+
+	while (!other->pending_ferry_requests_.empty()) {
+		Waterway* ww = other->pending_ferry_requests_.back();
+		other->pending_ferry_requests_.pop_back();
+		// TODO(Nordfriese): We should store the gametime when a request is
+		// issued, so this can be inserted correctly
+		pending_ferry_requests_.push_back(ww);
 	}
 
 	uint32_t old_nrports = ports_.size();
@@ -400,7 +416,7 @@ void Fleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 	}
 
 	if (ships_.empty()) {
-		if (ports_.empty()) {
+		if (ports_.empty() && ferries_.empty() && pending_ferry_requests_.empty()) {
 			remove(egbase);
 		} else {
 			Flag& base = ports_[0]->base_flag();
@@ -411,6 +427,30 @@ void Fleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 					Economy::check_split(base, ports_[i]->base_flag());
 			}
 		}
+	}
+}
+
+void Fleet::add_ferry(Ferry* ferry) {
+	ferries_.push_back(ferry);
+	ferry->set_fleet(this);
+}
+
+void Fleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
+	std::vector<Ferry*>::iterator it = std::find(ferries_.begin(), ferries_.end(), ferry);
+	if (it != ferries_.end()) {
+		*it = ferries_.back();
+		ferries_.pop_back();
+	}
+	ferry->set_fleet(nullptr);
+	if (upcast(Game, game, &egbase))
+		ferry->set_economy(*game, nullptr);
+
+	if (ferry->get_employer()) {
+		update(egbase);
+	}
+
+	if (ferries_.empty() && ports_.empty() && ships_.empty() && pending_ferry_requests_.empty()) {
+		remove(egbase);
 	}
 }
 
@@ -558,7 +598,7 @@ void Fleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 			Economy::check_split(ports_[0]->base_flag(), port->base_flag());
 	}
 
-	if (ships_.empty() && ports_.empty()) {
+	if (ships_.empty() && ports_.empty() && ferries_.empty() && pending_ferry_requests_.empty()) {
 		remove(egbase);
 	} else if (is_a(Game, &egbase)) {
 		// Some ship perhaps lose their destination now, so new a destination must be appointed (if
@@ -628,6 +668,16 @@ void Fleet::update(EditorGameBase& egbase) {
 }
 
 /**
+ * Adds a request for a ferry. The request will be fulfilled as soon as possible
+ * in the next call to act(). When a ferry is found, it will be passed to the
+ * waterway's callback function.
+ * Multiple requests will be treated first come first served.
+ */
+void Fleet::request_ferry(Waterway* waterway) {
+	pending_ferry_requests_.push_back(waterway);
+}
+
+/**
  * Act callback updates ship scheduling. All decisions about where transport ships
  * are supposed to go are made via this function.
  *
@@ -646,6 +696,35 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	}
 
 	molog("Fleet::act\n");
+
+	std::vector<Ferry*> idle_ferries;
+	for (Ferry* f : ferries_)
+		if (!f->get_employer())
+			idle_ferries.push_back(f);
+	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
+		Waterway* ww = pending_ferry_requests_[0];
+
+		Ferry* ferry = nullptr;
+		uint32_t dist = 0;
+		for (Ferry* f : idle_ferries) {
+			// decide how far this ferry is from the waterway
+			// TODO(Nordfriese): We should use the actual distance-by-water here,
+			// this is a dirty approximation that is grossly wrong in many cases.
+			uint32_t d = get_owner()->egbase().map().calc_distance(
+					f->get_position(), ww->base_flag().get_position());
+
+			if (!ferry || d < dist) {
+				ferry = f;
+				dist = d;
+			}
+		}
+		assert(ferry);
+
+		idle_ferries.erase(std::find(idle_ferries.begin(), idle_ferries.end(), ferry));
+		pending_ferry_requests_.erase(pending_ferry_requests_.begin());
+
+		ww->request_ferry_callback(game, ferry);
+	}
 
 	// we need to calculate what ship is to be send to which port
 	// for this we will have temporary data structure with format

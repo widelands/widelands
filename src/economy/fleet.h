@@ -33,6 +33,8 @@ struct Flag;
 class PortDock;
 struct RoutingNodeNeighbour;
 struct Ship;
+struct Ferry;
+struct Waterway;
 
 class FleetDescr : public MapObjectDescr {
 public:
@@ -47,7 +49,7 @@ private:
 };
 
 /**
- * Manage all ships and ports of a player that are connected
+ * Manage all ferries, ships and ports of a player that are connected
  * by ocean.
  *
  * That is, two ports belong to the same fleet if - and only if - ships can
@@ -57,8 +59,8 @@ private:
  *
  * @paragraph Lifetime
  *
- * Fleet objects are created on-the-fly by @ref Ship and @ref PortDock,
- * and destroy themselves when they become empty.
+ * Fleet objects are created on-the-fly by @ref Ship, @ref Ferry,
+ * @ref PortDock and @ref Waterway, and destroy themselves when they become empty.
  *
  * The intention is for fleet objects to merge automatically and separate
  * again in reaction to changes in the map. However, this may not work
@@ -92,6 +94,8 @@ struct Fleet : MapObject {
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
 	void add_port(EditorGameBase& egbase, PortDock* port);
 	void remove_port(EditorGameBase& egbase, PortDock* port);
+	void add_ferry(Ferry* ferry);
+	void remove_ferry(EditorGameBase& egbase, Ferry* ferry);
 	bool has_ports();
 
 	void log_general_info(const EditorGameBase&) override;
@@ -100,9 +104,12 @@ struct Fleet : MapObject {
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
 	uint32_t count_ships();
+	uint32_t count_ferries();
 	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port);
 	uint32_t count_ports();
 	bool get_act_pending();
+
+	void request_ferry(Waterway* waterway);
 
 protected:
 	void act(Game&, uint32_t data) override;
@@ -119,9 +126,12 @@ private:
 	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
 	std::vector<Ship*> ships_;
+	std::vector<Ferry*> ferries_;
 	std::vector<PortDock*> ports_;
 
 	bool act_pending_;
+
+	std::vector<Waterway*> pending_ferry_requests_;
 
 	/**
 	 * Store all pairs shortest paths between port docks
@@ -142,6 +152,7 @@ protected:
 
 	private:
 		std::vector<uint32_t> ships_;
+		std::vector<uint32_t> ferries_;
 		std::vector<uint32_t> ports_;
 	};
 

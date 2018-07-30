@@ -40,7 +40,14 @@ tribes:new_worker_type {
          "construct",
          "animate=work 5000",
          "return"
-      }
+      },
+      buildferry = {
+         -- NOCOM: we must replace this fishy hack with a proper attribute to use only swimable places
+         "findspace=size:any radius:4 resource:fish",
+         "walk=coords",
+         "buildferry",
+         "return"
+      },
    },
 
    animations = animations,

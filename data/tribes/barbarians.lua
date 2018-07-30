@@ -15,8 +15,6 @@ tribes:new_tribe {
       }
    },
 
-   waterway_max_length = 6,
-
    -- Image file paths for this tribe's road and waterway textures
    roads = {
       busy = {
@@ -28,9 +26,10 @@ tribes:new_tribe {
       },
       waterway = {
          "tribes/images/barbarians/waterway_0.png",
-         "tribes/images/barbarians/waterway_1.png",
       },
    },
+
+   waterway_max_length = 5,
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
@@ -212,6 +211,7 @@ tribes:new_tribe {
       "barbarians_warmill",
       "barbarians_ax_workshop",
       "barbarians_shipyard",
+      "barbarians_ferry_yard",
       "barbarians_barracks",
 
       -- Big

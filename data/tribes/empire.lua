@@ -29,11 +29,10 @@ tribes:new_tribe {
       },
       waterway = {
          "tribes/images/empire/waterway_0.png",
-         "tribes/images/empire/waterway_1.png",
       },
    },
 
-   waterway_max_length = 4,
+   waterway_max_length = 5,
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
@@ -215,6 +214,7 @@ tribes:new_tribe {
       "empire_toolsmithy",
       "empire_armorsmithy",
       "empire_shipyard",
+      "empire_ferry_yard",
       "empire_barracks",
 
       -- Big
