@@ -39,23 +39,23 @@ tribes:new_productionsite_type {
       work = {
          descname = "working",
          actions = {
-            "call=plant_wheat",
-            "call=harvest_wheat",
+            "call=plant",
+            "call=harvest",
             "return=skipped"
          }
       },
-      plant_wheat = {
+      plant = {
          descname = "planting wheat",
          actions = {
             "sleep=14000",
-            "worker=harvest"
+            "callworker=plant"
          }
       },
-      harvest_wheat = {
+      harvest = {
          descname = "harvesting wheat",
          actions = {
             "sleep=4000",
-            "worker=harvest"
+            "callworker=harvest"
          }
       },
    },
