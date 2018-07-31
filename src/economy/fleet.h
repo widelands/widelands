@@ -126,12 +126,11 @@ private:
 	const PortPath& portpath_bidir(uint32_t i, uint32_t j, bool& reverse) const;
 
 	std::vector<Ship*> ships_;
-	std::vector<Ferry*> ferries_;
 	std::vector<PortDock*> ports_;
+	std::vector<Ferry*> ferries_;
+	std::vector<Waterway*> pending_ferry_requests_;
 
 	bool act_pending_;
-
-	std::vector<Waterway*> pending_ferry_requests_;
 
 	/**
 	 * Store all pairs shortest paths between port docks

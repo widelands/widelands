@@ -99,14 +99,13 @@ void Waterway::request_ferry() {
 
 void Waterway::request_ferry_callback(Game& game, Ferry* f) {
 	ferry_ = f;
-	ferry_->set_employer(this);
+	ferry_->set_location(this);
 	ferry_->set_economy(game, get_economy());
 	ferry_->start_task_road(game);
 }
 
-void Waterway::assign_carrier(Carrier& c, uint8_t ignored_param) {
+void Waterway::assign_carrier(Carrier& c, uint8_t) {
 	ferry_->set_location(nullptr);
-	ferry_->set_employer(nullptr);
 	ferry_ = &dynamic_cast<Ferry&>(c);
 }
 

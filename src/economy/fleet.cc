@@ -63,17 +63,19 @@ Fleet::Fleet(Player* player) : MapObject(&g_fleet_descr), act_pending_(false) {
 }
 
 /**
- * Whether the fleet is in fact useful for transporting goods.
+ * Whether the fleet is in fact useful for transporting goods. This is the case if
+ * there is a ship AND a port, OR if we have a ferry AND a request for a ferry.
  */
 bool Fleet::active() const {
-	return !ships_.empty() && !ferries_.empty() && !ports_.empty();
+	return (!ferries_.empty() && !pending_ferry_requests_.empty()) ||
+			(!ships_.empty() && !ports_.empty());
 }
 
 /**
  * Inform the Fleet about the change of @ref Economy of one of the docks.
  *
  * Note that we always associate ourselves with the economy of the first dock.
- * Waterways do NOT share our economy!
+ * Ferries and waterways do NOT necessarily share our economy!
  */
 void Fleet::set_economy(Economy* e) {
 	if (!ships_.empty()) {
@@ -242,8 +244,7 @@ bool Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 		other->pending_ferry_requests_.pop_back();
 		// TODO(Nordfriese): We should store the gametime when a request is
 		// issued, so this can be inserted correctly
-		pending_ferry_requests_.push_back(ww);
-		ww->set_fleet(this);
+		request_ferry(ww);
 	}
 
 	uint32_t old_nrports = ports_.size();
@@ -479,13 +480,24 @@ void Fleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
 	}
 	ferry->set_fleet(nullptr);
 
-	if (ferry->get_employer()) {
+	if (ferry->get_location(egbase)) {
 		update(egbase);
 	}
 
 	if (ferries_.empty() && ports_.empty() && ships_.empty() && pending_ferry_requests_.empty()) {
 		remove(egbase);
 	}
+}
+
+/**
+ * Adds a request for a ferry. The request will be fulfilled as soon as possible
+ * in the next call to act(). When a ferry is found, it will be passed to the
+ * waterway's callback function.
+ * Multiple requests will be treated first come first served.
+ */
+void Fleet::request_ferry(Waterway* waterway) {
+	pending_ferry_requests_.push_back(waterway);
+	waterway->set_fleet(this);
 }
 
 struct StepEvalFindPorts {
@@ -702,18 +714,6 @@ void Fleet::update(EditorGameBase& egbase) {
 }
 
 /**
- * Adds a request for a ferry. The request will be fulfilled as soon as possible
- * in the next call to act(). When a ferry is found, it will be passed to the
- * waterway's callback function.
- * Multiple requests will be treated first come first served.
- */
-void Fleet::request_ferry(Waterway* waterway) {
-	pending_ferry_requests_.push_back(waterway);
-	waterway->set_fleet(this);
-	act_pending_ = true;
-}
-
-/**
  * Act callback updates ship scheduling. All decisions about where transport ships
  * are supposed to go are made via this function.
  *
@@ -735,7 +735,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 
 	std::vector<Ferry*> idle_ferries;
 	for (Ferry* f : ferries_)
-		if (!f->get_employer())
+		if (!f->get_location(game))
 			idle_ferries.push_back(f);
 	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
 		Waterway* ww = pending_ferry_requests_[0];

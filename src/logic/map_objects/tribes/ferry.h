@@ -66,20 +66,12 @@ struct Ferry : public Carrier {
 	void init_auto_task(Game& game) override;
 	void start_task_unemployed(Game&);
 
-	Waterway* get_employer() const {
-		return employer_;
-	}
-	// should be called only by Waterway and Fleet
-	void set_employer(Waterway* ww);
-
 private:
 	friend struct Fleet;
 	Fleet* fleet_;
 
 	bool init_fleet();
 	void set_fleet(Fleet* fleet);
-
-	Waterway* employer_;
 
 	static const Task taskUnemployed;
 	void unemployed_update(Game&, State&);

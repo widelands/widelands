@@ -215,6 +215,13 @@ void RoadBase::cleanup(EditorGameBase& egbase) {
 	PlayerImmovable::cleanup(egbase);
 }
 
+void RoadBase::assign_carrier(Carrier&, uint8_t) {
+}
+
+bool RoadBase::notify_ware(Game&, FlagId) {
+	return false;
+}
+
 /**
  * Workers' economies are fixed by PlayerImmovable, but we need to handle
  * any requests ourselves.

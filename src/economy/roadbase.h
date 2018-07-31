@@ -87,13 +87,9 @@ struct RoadBase : public PlayerImmovable {
 		return idle_index_;
 	}
 
-	virtual bool notify_ware(Game& game, FlagId flagid) {
-		throw wexception("RoadBase::notify_ware() was called"); // NOCOM remove
-	}
+	virtual bool notify_ware(Game&, FlagId);
 
-	virtual void assign_carrier(Carrier& carrier, uint8_t param) {
-		throw wexception("RoadBase::assign_carrier() was called"); // NOCOM remove
-	}
+	virtual void assign_carrier(Carrier&, uint8_t);
 
 protected:
 	bool init(EditorGameBase&) override;

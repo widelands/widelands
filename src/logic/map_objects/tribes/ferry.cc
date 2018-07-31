@@ -36,7 +36,7 @@ uint32_t FerryDescr::movecaps() const {
 }
 
 Ferry::Ferry(const FerryDescr& ferry_descr)
-   : Carrier(ferry_descr), employer_(nullptr) {
+   : Carrier(ferry_descr) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {
@@ -101,11 +101,6 @@ Fleet* Ferry::get_fleet() const {
 
 void Ferry::set_fleet(Fleet* fleet) {
 	fleet_ = fleet;
-}
-
-void Ferry::set_employer(Waterway* ww) {
-	employer_ = ww;
-	start_task_road(dynamic_cast<Game&>(get_owner()->egbase()));
 }
 
 bool Ferry::init_fleet() {
