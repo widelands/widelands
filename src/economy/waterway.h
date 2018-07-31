@@ -29,6 +29,7 @@
 
 namespace Widelands {
 struct Ferry;
+struct Fleet;
 class Request;
 
 class WaterwayDescr : public RoadBaseDescr {
@@ -60,12 +61,18 @@ struct Waterway : public RoadBase {
 
 	void request_ferry_callback(Game&, Ferry*);
 
+	Fleet* get_fleet() const;
+
 private:
+	friend struct Fleet;
+	void set_fleet(Fleet* fleet);
+
 	void link_into_flags(EditorGameBase&);
 
 	void request_ferry();
 
 	Ferry* ferry_;
+	Fleet* fleet_;
 };
 }
 

@@ -153,6 +153,7 @@ protected:
 	private:
 		std::vector<uint32_t> ships_;
 		std::vector<uint32_t> ferries_;
+		std::vector<uint32_t> pending_ferry_requests_;
 		std::vector<uint32_t> ports_;
 	};
 

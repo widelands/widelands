@@ -57,10 +57,8 @@ void Ferry::unemployed_update(Game& game, State& state) {
 		return pop_task(game);
 	}
 
-	const Map& map = game.map();
 	bool move = false;
-	PlayerImmovable const* location = get_location(game);
-	if (location) {
+	if (get_position().field->get_immovable()) {
 		molog("[unemployed]: we are on location\n");
 		move = true;
 	}
@@ -74,9 +72,10 @@ void Ferry::unemployed_update(Game& game, State& state) {
 		throw wexception("This ferry is not on the field where it is!");
 
 	if (move) {
-		if (start_task_movepath(game, game.random_location(get_position(), 2), 4,
-				descr().get_right_walk_anims(does_carry_ware())))
-			return;
+		for (uint8_t i = 0; i < 4; i++)
+			if (start_task_movepath(game, game.random_location(get_position(), 2), 4,
+					descr().get_right_walk_anims(does_carry_ware())))
+				return;
 		molog("[unemployed]: no suitable locations to row to found!\n");
 		return start_task_idle(game, descr().get_animation("idle"), 50);
 	}
@@ -94,6 +93,10 @@ void Ferry::init_auto_task(Game& game) {
 void Ferry::set_economy(Game& game, Economy* e) {
 	if (WareInstance* ware = get_carried_ware(game))
 		ware->set_economy(e);
+}
+
+Fleet* Ferry::get_fleet() const {
+	return fleet_;
 }
 
 void Ferry::set_fleet(Fleet* fleet) {

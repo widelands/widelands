@@ -302,13 +302,13 @@ RoadBase* Flag::get_roadbase(Flag& flag) {
 }
 
 Road* Flag::get_road(uint8_t const dir) const {
-	if (get_roadbase(dir) != nullptr && Road::is_road_descr(&get_roadbase(dir)->descr())) {
+	if (get_roadbase(dir - 1) != nullptr && Road::is_road_descr(&get_roadbase(dir - 1)->descr())) {
 	    return dynamic_cast<Road*>(roads_[dir - 1]);
 	}
 	return nullptr;
 }
 Waterway* Flag::get_waterway(uint8_t const dir) const {
-	if (get_roadbase(dir) != nullptr && Waterway::is_waterway_descr(&get_roadbase(dir)->descr())) {
+	if (get_roadbase(dir - 1) != nullptr && Waterway::is_waterway_descr(&get_roadbase(dir - 1)->descr())) {
 	    return dynamic_cast<Waterway*>(roads_[dir - 1]);
 	}
 	return nullptr;
@@ -346,7 +346,7 @@ bool Flag::is_dead_end() const {
 		return false;
 	Flag const* first_other_flag = nullptr;
 	for (uint8_t road_id = 6; road_id; --road_id)
-		if (Road* const road = get_road(road_id)) {
+		if (RoadBase* const road = get_roadbase(road_id)) {
 			Flag& start = road->get_flag(RoadBase::FlagStart);
 			Flag& other = this == &start ? road->get_flag(RoadBase::FlagEnd) : start;
 			if (first_other_flag) {
@@ -687,7 +687,7 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 	const Flag& nextflag = dynamic_cast<const Flag&>(*nextstep);
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
-		Road* const road = get_road(dir);
+		RoadBase* const road = get_roadbase(dir);
 		Flag* other;
 		RoadBase::FlagId flagid;
 

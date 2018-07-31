@@ -46,7 +46,7 @@ bool Waterway::is_waterway_descr(MapObjectDescr const* const descr) {
  * Most of the actual work is done in init.
  */
 Waterway::Waterway()
-   : RoadBase(g_waterway_descr, RoadType::kWaterway), ferry_(nullptr) {
+   : RoadBase(g_waterway_descr, RoadType::kWaterway), ferry_(nullptr), fleet_(nullptr) {
 }
 
 /**
@@ -108,6 +108,14 @@ void Waterway::assign_carrier(Carrier& c, uint8_t ignored_param) {
 	ferry_->set_location(nullptr);
 	ferry_->set_employer(nullptr);
 	ferry_ = &dynamic_cast<Ferry&>(c);
+}
+
+Fleet* Waterway::get_fleet() const {
+	return fleet_;
+}
+
+void Waterway::set_fleet(Fleet* fleet) {
+	fleet_ = fleet;
 }
 
 }  // namespace Widelands
