@@ -180,7 +180,7 @@ void Carrier::transport_update(Game& game, State& state) {
 		// walk directly into said building
 		// A sanity check is necessary, in case the building has been destroyed
 
-		PlayerImmovable* next = ware->get_next_move_step(game);
+		PlayerImmovable* const next = ware->get_next_move_step(game);
 		if (next && next != &flag && &next->base_flag() == &flag) {
 			// pay some coins before entering the building,
 			// to compensate for the time to be spent in its street-segment

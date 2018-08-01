@@ -523,7 +523,9 @@ int32_t Flag::find_swappable_ware(WareInstance& ware, Flag& destflag) {
 	for (int32_t i = 0; i < ware_filled_; ++i) {
 		PendingWare& pw = wares_[i];
 		if (pw.nextstep != &destflag) {
-			if (pw.ware->descr_index() == descr_index) has_same_ware = true;
+			if (pw.ware->descr_index() == descr_index) {
+				has_same_ware = true;
+			}
 			continue;
 		}
 
@@ -799,7 +801,7 @@ bool Flag::allow_ware_from_flag(WareInstance& ware, Flag& flag) {
 			return false;
 		}
 	}
-	return (ware_filled_ < ware_capacity_ || has_swappable) ? true : false;
+	return ware_filled_ < ware_capacity_ || has_swappable;
 }
 
 /**
