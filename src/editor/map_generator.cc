@@ -28,6 +28,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/map_gen.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
@@ -661,7 +662,7 @@ void MapGenerator::create_random_map() {
 	// Care about players and place their start positions
 	map_.set_nrplayers(map_info_.numPlayers);
 	assert(map_info_.numPlayers >= 1);
-	const std::string tribe = map_.get_scenario_player_tribe(1);
+	const std::string tribe = get_all_tribenames().front();
 	const std::string ai = map_.get_scenario_player_ai(1);
 	FindNodeSize functor(FindNodeSize::sizeBig);
 	Coords playerstart(Coords::null());
