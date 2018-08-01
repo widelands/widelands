@@ -57,29 +57,36 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
          descname = _"mining coal",
          actions = {
-            "sleep=40000",
+            -- time total: 105 + 7 x 3.6
+            "sleep=35000",
             "return=skipped unless economy needs coal",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 60000",
-            "mine=coal 4 100 35 2",
-            -- this step has a 35 percent chance to mine 1 coal. 1 coal is 1/7th of the normal yield.
-            -- this results in 5% chance with regard to normal yield (35 divided by 7)
-            -- following cycles of mine will fail (chance of only 1 percent
+            -- after having the food the miners are working 7 times 
+            -- each cycle lasts 10 seconds for mining and producing coal
+            -- and 3.6 seconds to deliver the coal to the flag
+            -- calling the subroutine "mine_produce" has the effect
+            -- that even when depleted the mine has 7 working cycles 
+            -- as no call cycle is skipped due to a failed mine command
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+         },
+      },
+      mine_produce = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
+         descname = _"mining and producing",
+         actions = {
+            "animate=working 10000",
+            "mine=coal 4 100 5 2",
             "produce=coal",
-            "sleep=2500",
-            "mine=coal 4 100 1 2", -- 3 mine commands to have one resource mined for each ware delivered
-            "mine=coal 4 100 1 2",
-            "mine=coal 4 100 1 2",
-            -- if the last mine command fails due to the second command mined the last ressource max. 2 ressources are lost
-            "produce=coal:3",
-            "sleep=2500",    
-            "mine=coal 4 100 1 2",
-            "mine=coal 4 100 1 2",
-            "mine=coal 4 100 1 2",
-            "produce=coal:3"
          }
       },
    },
+
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Coal",

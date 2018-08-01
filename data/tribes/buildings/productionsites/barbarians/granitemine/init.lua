@@ -61,10 +61,17 @@ tribes:new_productionsite_type {
             "sleep=20000",
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "animate=working 20000",
-            "mine=stones 2 100 5 17",
-            "mine=stones 2 100 100 17",
-            "produce=granite:2"
+            "call=mine_produce",
+            "call=mine_produce",
+         }
+      },
+      mine_produce = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
+         descname = _"mining and producing",
+         actions = {
+            "animate=working 10000",
+            "mine=stones 2 100 5 2",
+            "produce=granite",
          }
       },
    },

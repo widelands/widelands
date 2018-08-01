@@ -72,14 +72,10 @@ tribes:new_productionsite_type {
             "sleep=18000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=ration wine",
-            "animate=working 40000",
-            "mine=stones 2 50 15 17",
-            "produce=granite",
-            "sleep=2000",
-            "mine=stones 2 50 1 17",
-            "mine=stones 2 50 1 17",
-            "mine=stones 2 50 1 17",
-            "produce=granite:2 marble"
+            "call=mine_produce_granite",
+            "call=mine_produce_granite",
+            "call=mine_produce_marble",
+            "call=mine_produce_granite",
          }
       },
       mine_marble = {
@@ -89,14 +85,28 @@ tribes:new_productionsite_type {
             "sleep=18000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=wine ration",
-            "animate=working 40000",
-            "mine=stones 2 50 15 17",
+            "call=mine_produce_marble",
+            "call=mine_produce_marble",
+            "call=mine_produce_granite",
+            "call=mine_produce_marble",
+         }
+      },
+      mine_produce_granite = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
+         descname = _"mining and producing",
+         actions = {
+            "animate=working 10500",
+            "mine=stones 2 50 5 17",
+            "produce=granite",
+         }
+      },
+      mine_produce_marble = {
+         -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
+         descname = _"mining and producing",
+         actions = {
+            "animate=working 10500",
+            "mine=stones 2 50 5 17",
             "produce=marble",
-            "sleep=2000",
-            "mine=stones 2 50 1 17",
-            "mine=stones 2 50 1 17",
-            "mine=stones 2 50 1 17",
-            "produce=marble:2 granite"
          }
       },
    },
