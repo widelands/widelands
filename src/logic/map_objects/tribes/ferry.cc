@@ -21,6 +21,8 @@
 
 #include "economy/fleet.h"
 #include "economy/waterway.h"
+#include "logic/map_objects/checkstep.h"
+#include "logic/path.h"
 #include "logic/player.h"
 
 namespace Widelands {
@@ -36,7 +38,7 @@ uint32_t FerryDescr::movecaps() const {
 }
 
 Ferry::Ferry(const FerryDescr& ferry_descr)
-   : Carrier(ferry_descr) {
+   : Carrier(ferry_descr), row_path_(nullptr) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {
@@ -49,6 +51,7 @@ const Bob::Task Ferry::taskUnemployed = {
 
 void Ferry::start_task_unemployed(Game& game) {
 	push_task(game, taskUnemployed);
+	top_state().ivar1 = 0;
 }
 
 void Ferry::unemployed_update(Game& game, State& state) {
@@ -81,12 +84,64 @@ void Ferry::unemployed_update(Game& game, State& state) {
 	}
 
 	// ferries are a bit unresponsive, long delay
-	return start_task_idle(game, descr().get_animation("idle"), 300);
+	return start_task_idle(game, descr().get_animation("idle"), 900);
+}
+
+const Bob::Task Ferry::taskRow = {
+   "row", static_cast<Bob::Ptr>(&Ferry::row_update), nullptr, nullptr, true};
+
+void Ferry::start_task_row(Game& game, Waterway* ww) {
+	push_task(game, taskRow);
+	top_state().ivar1 = 0;
+	if (row_path_)
+		delete row_path_;
+	row_path_ = new Path();
+	// Find a way to the middle of the waterway
+	map.findpath(get_position(), CoordsPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()],
+			0, *row_path_, CheckStepDefault(MOVECAPS_SWIM));
+}
+
+void Ferry::row_update(Game& game, State& state) {
+	if (!row_path_)
+		return pop_task(game);
+
+	const Map& map = game.map();
+
+	const std::string& signal = get_signal();
+	if (signal.size()) {
+		if (signal == "road" || signal == "fail" || signal == "row" || signal == "wakeup") {
+			molog("[row]: Got signal '%s' -> recalculate\n", signal.c_str());
+			signal_handled();
+		} else if (signal == "blocked") {
+			molog("[row]: Blocked by a battle\n");
+			signal_handled();
+			return start_task_idle(game, descr().get_animation("idle"), 900);
+		} else {
+			molog("[row]: Cancel due to signal '%s'\n", signal.c_str());
+			return pop_task(game);
+		}
+	}
+
+	if (row_path_->get_start() != get_position()) {
+		throw wexception("A ferry got lost while looking for its waterway!");
+	}
+	if (row_path_->get_nsteps() == 1) {
+		// reached destination
+		Waterway* ww = dynamic_cast<Waterway> map.get_immovable(row_path_->get_end());
+		delete row_path_;
+		row_path_ = nullptr;
+		set_location(ww);
+		pop_task(game);
+		return start_task_road(game);
+	}
+	Direction dir = (*row_path_)[0];
+	row_path_->trim_start(1);
+	return start_task_move(game, dir, descr().get_right_walk_anims(does_carry_ware()), false);
 }
 
 void Ferry::init_auto_task(Game& game) {
 	set_location(nullptr);
-	molog("init_auto_task: row around and find waiting position\n");
+	molog("init_auto_task: wait for employment\n");
 	return start_task_unemployed(game);
 }
 

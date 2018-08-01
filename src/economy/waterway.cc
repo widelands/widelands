@@ -99,9 +99,9 @@ void Waterway::request_ferry() {
 
 void Waterway::request_ferry_callback(Game& game, Ferry* f) {
 	ferry_ = f;
-	ferry_->set_location(this);
 	ferry_->set_economy(game, get_economy());
-	ferry_->start_task_road(game);
+	ferry_->set_location(this);
+	ferry_->start_task_row(game, this);
 }
 
 void Waterway::assign_carrier(Carrier& c, uint8_t) {

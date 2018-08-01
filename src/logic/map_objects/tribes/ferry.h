@@ -27,6 +27,7 @@ namespace Widelands {
 
 struct Fleet;
 struct Waterway;
+struct Path;
 
 class FerryDescr : public CarrierDescr {
 public:
@@ -65,16 +66,25 @@ struct Ferry : public Carrier {
 
 	void init_auto_task(Game& game) override;
 	void start_task_unemployed(Game&);
+	void start_task_row(Game&, Waterway*);
+
+	bool unemployed(Game& game) {
+		return !row_path_ && !get_location(game);
+	}
 
 private:
 	friend struct Fleet;
 	Fleet* fleet_;
 
+	Path* row_path_;
+
 	bool init_fleet();
 	void set_fleet(Fleet* fleet);
 
 	static const Task taskUnemployed;
+	static const Task taskRow;
 	void unemployed_update(Game&, State&);
+	void row_update(Game&, State&);
 };
 }
 

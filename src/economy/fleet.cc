@@ -735,7 +735,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 
 	std::vector<Ferry*> idle_ferries;
 	for (Ferry* f : ferries_)
-		if (!f->get_location(game))
+		if (f->unemployed(game))
 			idle_ferries.push_back(f);
 	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
 		Waterway* ww = pending_ferry_requests_[0];
