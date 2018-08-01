@@ -390,13 +390,13 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	if (!res || !amount) {
 		auto list = resource_indicators_.find("");
 		if (list == resource_indicators_.end() || list->second.empty())
-			throw GameDataError("This tribe has no indicator for no resources!");
+			throw GameDataError("Tribe '%s' has no indicator for no resources!", descname_.c_str());
 		return list->second.begin()->second;
 	}
 
 	auto list = resource_indicators_.find(res->name());
 	if (list == resource_indicators_.end() || list->second.empty())
-		throw GameDataError("This tribe has no indicators for resource %s!", res->name().c_str());
+		throw GameDataError("Tribe '%s' has no indicators for resource '%s'!", descname_.c_str(), res->name().c_str());
 
 	uint32_t lowest = 0;
 	for (ResourceIndicatorList::const_iterator it = list->second.begin(); it != list->second.end(); it++) {
@@ -408,8 +408,8 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 
 	if (lowest < amount) {
 		throw GameDataError(
-				"This tribe has no indicators for amount %i of resource %s (highest possible amount is %i)!",
-				amount, res->name().c_str(), lowest);
+				"Tribe '%s' has no indicators for amount %i of resource '%s' (highest possible amount is %i)!",
+				descname_.c_str(), amount, res->name().c_str(), lowest);
 	}
 
 	return list->second.find(lowest)->second;
