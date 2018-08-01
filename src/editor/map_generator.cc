@@ -662,7 +662,6 @@ void MapGenerator::create_random_map() {
 	// Care about players and place their start positions
 	map_.set_nrplayers(map_info_.numPlayers);
 	assert(map_info_.numPlayers >= 1);
-	const std::string tribe = get_all_tribenames().front();
 	const std::string ai = map_.get_scenario_player_ai(1);
 	FindNodeSize functor(FindNodeSize::sizeBig);
 	Coords playerstart(Coords::null());
@@ -715,6 +714,7 @@ void MapGenerator::create_random_map() {
 	for (PlayerNumber n = 1; n <= map_info_.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario
 		map_.set_scenario_player_name(n, _("Random Player"));
+		const std::string tribe = get_all_tribenames()[rng.rand() % get_all_tribenames().size()];
 		map_.set_scenario_player_tribe(n, tribe);
 		map_.set_scenario_player_ai(n, ai);
 		map_.set_scenario_player_closeable(n, false);
