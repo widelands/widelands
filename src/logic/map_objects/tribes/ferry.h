@@ -76,7 +76,7 @@ private:
 	friend struct Fleet;
 	Fleet* fleet_;
 
-	Path* row_path_;
+	CoordPath* row_path_;
 
 	bool init_fleet();
 	void set_fleet(Fleet* fleet);

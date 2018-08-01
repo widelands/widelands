@@ -93,12 +93,15 @@ const Bob::Task Ferry::taskRow = {
 void Ferry::start_task_row(Game& game, Waterway* ww) {
 	push_task(game, taskRow);
 	top_state().ivar1 = 0;
+	const Map& map = game.map();
 	if (row_path_)
 		delete row_path_;
-	row_path_ = new Path();
+	Path* p = new Path();
 	// Find a way to the middle of the waterway
-	map.findpath(get_position(), CoordsPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()],
-			0, *row_path_, CheckStepDefault(MOVECAPS_SWIM));
+	map.findpath(get_position(), CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()],
+			0, *p, CheckStepDefault(MOVECAPS_SWIM));
+	row_path_ = new CoordPath(map, p);
+	delete p;
 }
 
 void Ferry::row_update(Game& game, State& state) {
@@ -127,7 +130,7 @@ void Ferry::row_update(Game& game, State& state) {
 	}
 	if (row_path_->get_nsteps() == 1) {
 		// reached destination
-		Waterway* ww = dynamic_cast<Waterway> map.get_immovable(row_path_->get_end());
+		Waterway* ww = dynamic_cast<Waterway>(map.get_immovable(row_path_->get_end()));
 		delete row_path_;
 		row_path_ = nullptr;
 		set_location(ww);
