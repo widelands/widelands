@@ -26,7 +26,7 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/align.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
@@ -38,7 +38,7 @@ namespace {
 int base_height(int button_dimension) {
 	return std::max(
 	   button_dimension,
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
+	   UI::g_fh->render(as_uifont(UI::g_fh->fontset()->representative_character()))->height() + 2);
 }
 
 }  // namespace

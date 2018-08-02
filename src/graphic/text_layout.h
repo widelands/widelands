@@ -24,7 +24,7 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/image.h"
 #include "graphic/panel_styles.h"
 #include "graphic/text/font_set.h"

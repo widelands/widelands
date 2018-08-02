@@ -5,7 +5,7 @@
 -- -------
 --
 -- TODO(sirver, trading): Add useful documentation here
-dirname = path.dirname(__file__)
+dirname = "test/maps/market_trading.wmf/" .. path.dirname(__file__)
 
 tribes:new_market_type {
    msgctxt = "barbarians_building",
