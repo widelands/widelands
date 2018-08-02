@@ -99,7 +99,6 @@ void Waterway::request_ferry() {
 
 void Waterway::request_ferry_callback(Game& game, Ferry* f) {
 	ferry_ = f;
-	ferry_->set_economy(game, get_economy());
 	ferry_->set_location(this);
 	ferry_->start_task_row(game, this);
 }

@@ -54,10 +54,15 @@ void Ferry::start_task_unemployed(Game& game) {
 	top_state().ivar1 = 0;
 }
 
-void Ferry::unemployed_update(Game& game, State& state) {
+void Ferry::unemployed_update(Game& game, State&) {
 	if (get_signal().size()) {
 		molog("[unemployed]: interrupted by signal '%s'\n", get_signal().c_str());
-		return pop_task(game);
+		pop_task(game);
+		if (get_signal() == "row") {
+			push_task(game, taskRow);
+			top_state().ivar1 = 0;
+		}
+		return;
 	}
 
 	bool move = false;
@@ -91,20 +96,21 @@ const Bob::Task Ferry::taskRow = {
    "row", static_cast<Bob::Ptr>(&Ferry::row_update), nullptr, nullptr, true};
 
 void Ferry::start_task_row(Game& game, Waterway* ww) {
-	push_task(game, taskRow);
-	top_state().ivar1 = 0;
 	const Map& map = game.map();
 	if (row_path_)
 		delete row_path_;
+
 	Path* p = new Path();
 	// Find a way to the middle of the waterway
 	map.findpath(get_position(), CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()],
 			0, *p, CheckStepDefault(MOVECAPS_SWIM));
-	row_path_ = new CoordPath(map, p);
+	row_path_ = new CoordPath(map, *p);
 	delete p;
+
+	send_signal(game, "row");
 }
 
-void Ferry::row_update(Game& game, State& state) {
+void Ferry::row_update(Game& game, State&) {
 	if (!row_path_)
 		return pop_task(game);
 
@@ -130,10 +136,10 @@ void Ferry::row_update(Game& game, State& state) {
 	}
 	if (row_path_->get_nsteps() == 1) {
 		// reached destination
-		Waterway* ww = dynamic_cast<Waterway>(map.get_immovable(row_path_->get_end()));
+		Waterway& ww = dynamic_cast<Waterway&>(*map.get_immovable(row_path_->get_end()));
 		delete row_path_;
 		row_path_ = nullptr;
-		set_location(ww);
+		set_location(&ww);
 		pop_task(game);
 		return start_task_road(game);
 	}
