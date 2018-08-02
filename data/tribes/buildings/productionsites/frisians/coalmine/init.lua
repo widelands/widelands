@@ -69,6 +69,7 @@ tribes:new_productionsite_type {
             "consume=ration",
             "call=mine_produce",
             "call=mine_produce",
+            "return=skipped"
          }
       },
       mine_produce = {
