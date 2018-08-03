@@ -38,12 +38,16 @@ uint32_t FerryDescr::movecaps() const {
 }
 
 Ferry::Ferry(const FerryDescr& ferry_descr)
-   : Carrier(ferry_descr), row_path_(nullptr) {
+   : Carrier(ferry_descr), destination_(nullptr) {
 }
 
 bool Ferry::init(EditorGameBase& egbase) {
 	Carrier::init(egbase);
 	return init_fleet();
+}
+
+bool Ferry::unemployed(Game& game) const {
+	return !destination_ && !get_location(game);
 }
 
 const Bob::Task Ferry::taskUnemployed = {
@@ -96,22 +100,15 @@ const Bob::Task Ferry::taskRow = {
    "row", static_cast<Bob::Ptr>(&Ferry::row_update), nullptr, nullptr, true};
 
 void Ferry::start_task_row(Game& game, Waterway* ww) {
-	const Map& map = game.map();
-	if (row_path_)
-		delete row_path_;
-
-	Path* p = new Path();
-	// Find a way to the middle of the waterway
-	map.findpath(get_position(), CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()],
-			0, *p, CheckStepDefault(MOVECAPS_SWIM));
-	row_path_ = new CoordPath(map, *p);
-	delete p;
-
+	if (destination_)
+		delete destination_;
+	// our new destination is the middle of the waterway
+	destination_ = CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()];
 	send_signal(game, "row");
 }
 
 void Ferry::row_update(Game& game, State&) {
-	if (!row_path_)
+	if (!destination_)
 		return pop_task(game);
 
 	const Map& map = game.map();
@@ -131,21 +128,25 @@ void Ferry::row_update(Game& game, State&) {
 		}
 	}
 
-	if (row_path_->get_start() != get_position()) {
-		throw wexception("A ferry got lost while looking for its waterway!");
-	}
-	if (row_path_->get_nsteps() == 1) {
+	if (get_position() == destination_) {
 		// reached destination
-		Waterway& ww = dynamic_cast<Waterway&>(*map.get_immovable(row_path_->get_end()));
-		delete row_path_;
-		row_path_ = nullptr;
-		set_location(&ww);
+		if (BaseImmovable* imm = map.get_immovable(destination_)) {
+			if (upcast(Waterway, ww, imm)) {
+				delete destination_;
+				destination_ = nullptr;
+				set_location(&ww);
+				pop_task(game);
+				return start_task_road(game);
+			}
+		}
+		// if we get here, the waterway was destroyed and we didn't notice
+		molog("[row]: Reached the destination but it is no longer there\n");
+		delete destination_;
+		destination_ = nullptr;
 		pop_task(game);
-		return start_task_road(game);
+		return;
 	}
-	Direction dir = (*row_path_)[0];
-	row_path_->trim_start(1);
-	return start_task_move(game, dir, descr().get_right_walk_anims(does_carry_ware()), false);
+	return start_task_movepath(game, *destination_, 0, descr().get_right_walk_anims(does_carry_ware()));
 }
 
 void Ferry::init_auto_task(Game& game) {

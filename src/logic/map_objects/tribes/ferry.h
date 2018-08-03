@@ -27,7 +27,7 @@ namespace Widelands {
 
 struct Fleet;
 struct Waterway;
-struct CoordPath;
+struct Coords;
 
 class FerryDescr : public CarrierDescr {
 public:
@@ -68,15 +68,13 @@ struct Ferry : public Carrier {
 	void start_task_unemployed(Game&);
 	void start_task_row(Game&, Waterway*);
 
-	bool unemployed(Game& game) {
-		return !row_path_ && !get_location(game);
-	}
+	bool unemployed(Game& game) const;
 
 private:
 	friend struct Fleet;
 	Fleet* fleet_;
 
-	CoordPath* row_path_;
+	Coords* destination_;
 
 	bool init_fleet();
 	void set_fleet(Fleet* fleet);
