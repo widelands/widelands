@@ -103,7 +103,7 @@ void Ferry::start_task_row(Game& game, Waterway* ww) {
 	if (destination_)
 		delete destination_;
 	// our new destination is the middle of the waterway
-	destination_ = CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()];
+	destination_ = &(CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()]);
 	send_signal(game, "row");
 }
 
@@ -128,13 +128,13 @@ void Ferry::row_update(Game& game, State&) {
 		}
 	}
 
-	if (get_position() == destination_) {
+	if (get_position() == *destination_) {
 		// reached destination
-		if (BaseImmovable* imm = map.get_immovable(destination_)) {
+		if (BaseImmovable* imm = map.get_immovable(*destination_)) {
 			if (upcast(Waterway, ww, imm)) {
 				delete destination_;
 				destination_ = nullptr;
-				set_location(&ww);
+				set_location(ww);
 				pop_task(game);
 				return start_task_road(game);
 			}
@@ -146,7 +146,11 @@ void Ferry::row_update(Game& game, State&) {
 		pop_task(game);
 		return;
 	}
-	return start_task_movepath(game, *destination_, 0, descr().get_right_walk_anims(does_carry_ware()));
+	if (start_task_movepath(game, *destination_, 0, descr().get_right_walk_anims(does_carry_ware())))
+		return;
+	molog("[row]: Can't find path to waterway for some reason!\n");
+	// try again later
+	return schedule_act(game, 900);
 }
 
 void Ferry::init_auto_task(Game& game) {
