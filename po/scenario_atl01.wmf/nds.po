@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-27 17:00+0000\n"
+"POT-Creation-Date: 2018-07-28 07:19+0000\n"
+"PO-Revision-Date: 2018-07-29 07:49+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -177,34 +177,34 @@ msgid ""
 "The ores have to be smelted at a smelting works before they can be used. The"
 " refined materials are then used in the weapon smithy, the armor smithy and "
 "the toolsmithy."
-msgstr ""
+msgstr "De Kluten mutten eerst in eenem Smeltwark smulten worden, ehr man se bruken kann. De baren Metallen worden dann in de Wapensmee, Panzersmee un Warktüügsmee bruukt."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
 "Build a mine of each type. Make sure to send geologists to the mountain "
 "first."
-msgstr ""
+msgstr "Bau vun elkeen Aard een Bargwark. Stüür aber eerst Schattsökers tum Barg."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:90
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Bau een Smeltwark"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:91
 msgid "Build an armor smithy and a weapon smithy"
-msgstr ""
+msgstr "Bau eene Panzersmee un eene Wapensmee"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:92
 msgid "Build a toolsmithy"
-msgstr ""
+msgstr "Bau eene Warktüügsmee"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:98
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:102
 msgid "Build a barracks"
-msgstr ""
+msgstr "Bau eene Kasern"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:100
 msgid "Recruiting new soldiers"
-msgstr ""
+msgstr "Neie Soldaten anhüren"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:101
 msgid ""
@@ -212,15 +212,15 @@ msgid ""
 "we need to deliver light tridents and tabards to the barracks. Recruits will"
 " arrive from the warehouse and receive one of each and some basic training "
 "to become a soldier."
-msgstr ""
+msgstr "Nu dat wi Wapen smeden könen, könen wi neie Soldaten anhüren. Daarto mutten wi Lütte Dreespitzen un Kluften to de Kasern levern. Lehrwichter komen vun eenem Kraamhuus un kriegen eens vun jede un eene Inföhren tum Fechten, un so worden se Soldaten."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:108
 msgid "Build training sites for soldiers"
-msgstr ""
+msgstr "Bau Övens-Boen för Soldaten"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:110
 msgid "Soldier Training Sites"
-msgstr ""
+msgstr "Övens-Boen för Soldaten"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:111
 msgid ""
@@ -228,19 +228,19 @@ msgid ""
 "dungeon trains attack – the major attribute of the Atlanteans – and the "
 "labyrinth trains evasion, health and defense. The items produced by the "
 "industry are used to train better soldiers in the two training sites."
-msgstr ""
+msgstr "As all Völker könen de Atlantinger hör Soldaten utbilden: Gefahrelke Gangen lehren Angriff – daar sünd se baldadig in – un Dwaalwegen lehren Utwieken, Gesundheid un Verteidigung. De twee Övens-Boen bruken tum Lehren vun Soldaten de Waren, de vun de Metall-Wirtschaft produzeert worden."
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:112
 msgid "Build a dungeon and a labyrinth"
-msgstr ""
+msgstr "Bau Gefahrelke Gangen un Dwaalwegen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:118
 msgid "Build a warehouse and a horse farm"
-msgstr ""
+msgstr "Bau een Kraamhuus un eene Peertüchteree"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Warehouse and Horse Farm"
-msgstr ""
+msgstr "Kraamhuus un Peertüchteree"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:121
 msgid ""
@@ -252,19 +252,19 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:122
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Bau een Kraamhuus"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:123
 msgid "Build a horse farm"
-msgstr ""
+msgstr "Bau eene Peertüchteree"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:129
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "Bau 3 Schippen, um vun de Insel uttorieten"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Escape From the Island"
-msgstr ""
+msgstr "Flücht vun de Insel"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:132
 msgid ""
@@ -275,7 +275,7 @@ msgstr ""
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:133
 msgid "Build a shipyard close to the lake to start building ships"
-msgstr ""
+msgstr "Bau eene Warft dicht bi de Meer, um Schippen to bauen"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:144
 msgid "Proud to the Death"
