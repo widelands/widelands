@@ -103,7 +103,7 @@ void Ferry::start_task_row(Game& game, Waterway* ww) {
 	if (destination_)
 		delete destination_;
 	// our new destination is the middle of the waterway
-	destination_ = &(CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()]);
+	destination_ = new Coords(CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()]);
 	send_signal(game, "row");
 }
 

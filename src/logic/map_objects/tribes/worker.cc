@@ -919,7 +919,7 @@ bool Worker::run_createbob(Game& game, State& state, const Action& action) {
  * tribe uses and adds it to the appropriate fleet.
  *
  */
-bool Worker::run_buildferry(Game& game, State& state, const Action& action) {
+bool Worker::run_buildferry(Game& game, State& state, const Action&) {
 	game.create_ferry(get_position(), owner_);
 	++state.ivar1;
 	schedule_act(game, 10);
