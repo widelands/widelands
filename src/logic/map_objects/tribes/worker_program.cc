@@ -345,6 +345,7 @@ findspace
       * ``big``: Big building plots only.
       * ``mine``: Mining plots only.
       * ``port``: Port spaces only.
+      * ``swim``: Anything on the coast
 
    :arg int radius: Search for map fields within the given radius around the worker.
 
@@ -435,7 +436,8 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 			} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
 			                 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
 			                 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-			                 {"port", FindNodeSize::sizePort},   {nullptr, 0}};
+			                 {"port", FindNodeSize::sizePort},   {"swim", FindNodeSize::sizeSwim},
+			                 {nullptr, 0}};
 
 			int32_t index;
 
@@ -767,7 +769,7 @@ buildferry
          "return"
       }
 */
-void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std::string>& cmd) {
+void WorkerProgram::parse_buildferry(Worker::Action* act, const std::vector<std::string>&) {
 	act->function = &Worker::run_buildferry;
 }
 

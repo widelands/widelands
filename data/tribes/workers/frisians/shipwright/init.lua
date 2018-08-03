@@ -42,8 +42,7 @@ tribes:new_worker_type {
          "return"
       },
       buildferry = {
-         -- NOCOM: we must replace this fishy hack with a proper attribute to use only swimable places
-         "findspace=size:any radius:4 resource:fish",
+         "findspace=size:swim radius:4",
          "walk=coords",
          "buildferry",
          "return"

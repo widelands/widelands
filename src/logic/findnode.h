@@ -130,6 +130,7 @@ struct FindNodeSize {
 		sizeBig,
 		sizeMine,  //  can build a mine on this field
 		sizePort,  //  can build a port on this field
+		sizeSwim,  //  swimming things can be on this field
 	};
 
 	explicit FindNodeSize(Size init_size) : size(init_size) {

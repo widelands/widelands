@@ -13,6 +13,7 @@ animations = {
    }
 }
 add_walking_animations (animations, "walk", dirname, "sail", {37, 38}, 10)
+add_walking_animations (animations, "walkload", dirname, "sail", {37, 38}, 10)
 
 tribes:new_ferry_type {
    msgctxt = "barbarians_worker",
