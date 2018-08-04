@@ -72,6 +72,7 @@ tribes:new_productionsite_type {
             "call=mine_produce",
             "call=mine_produce",
             "return=skipped"
+         }
       },
       mine_produce = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...

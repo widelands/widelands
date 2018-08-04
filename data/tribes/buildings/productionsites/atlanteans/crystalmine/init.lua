@@ -73,12 +73,12 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs granite",
             "sleep=40000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "call=mine_produce_granite",
-            "call=mine_produce_granite",
-            "call=mine_produce_granite",
-            "call=mine_produce_quartz",
-            "call=mine_produce_granite",
-            "call=mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_quartz",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
             "return=skipped"
          }
       },
@@ -89,12 +89,12 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs quartz",
             "sleep=30000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "call=mine_produce_quartz",
-            "call=mine_produce_granite",
-            "call=mine_produce_granite",
-            "call=mine_produce_granite",
-            "call=mine_produce_quartz",
-            "call=mine_produce_quartz",
+            "call=a_mine_produce_quartz",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_quartz",
+            "call=a_mine_produce_quartz",
             "return=skipped"
          }
       },
@@ -105,13 +105,13 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs diamond",
             "sleep=40000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "call=mine_produce_diamond",
-            "call=mine_produce_granite",
-            "call=mine_produce_diamond",
+            "call=a_mine_produce_diamond",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_diamond",
             "return=skipped"
          }
       },
-      mine_produce_granite = {
+      a_mine_produce_granite = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
          descname = _"mining and producing",
          actions = {
@@ -120,7 +120,7 @@ tribes:new_productionsite_type {
             "produce=granite",
          }
       },
-      mine_produce_quartz = {
+      a_mine_produce_quartz = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
          descname = _"mining and producing",
          actions = {
@@ -129,7 +129,7 @@ tribes:new_productionsite_type {
             "produce=quartz",
          }
       },
-      mine_produce_diamond = {
+      a_mine_produce_diamond = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
          descname = _"mining and producing",
          actions = {

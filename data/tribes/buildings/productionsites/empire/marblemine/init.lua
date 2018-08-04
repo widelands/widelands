@@ -72,10 +72,10 @@ tribes:new_productionsite_type {
             "sleep=18000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=ration wine",
-            "call=mine_produce_granite",
-            "call=mine_produce_granite",
-            "call=mine_produce_marble",
-            "call=mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_marble",
+            "call=a_mine_produce_granite",
             "return=skipped"
          }
       },
@@ -86,14 +86,14 @@ tribes:new_productionsite_type {
             "sleep=18000",
             "return=skipped unless economy needs marble or economy needs granite",
             "consume=wine ration",
-            "call=mine_produce_marble",
-            "call=mine_produce_marble",
-            "call=mine_produce_granite",
-            "call=mine_produce_marble",
+            "call=a_mine_produce_marble",
+            "call=a_mine_produce_marble",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_marble",
             "return=skipped"
          }
       },
-      mine_produce_granite = {
+      a_mine_produce_granite = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
          descname = _"mining and producing",
          actions = {
@@ -102,7 +102,7 @@ tribes:new_productionsite_type {
             "produce=granite",
          }
       },
-      mine_produce_marble = {
+      a_mine_produce_marble = {
          -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
          descname = _"mining and producing",
          actions = {
