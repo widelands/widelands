@@ -674,7 +674,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		uint32_t const max_capacity = s->descr().get_capacity();
 		
 		float best_score = 0;
-		uint16_t best_pi; // best port's index
+		uint16_t best_pi = -1; // best port's index
 
 		for (uint16_t pi = 0; pi < ports_.size(); ++pi) {
 			PortDock* p = ports_[pi];
