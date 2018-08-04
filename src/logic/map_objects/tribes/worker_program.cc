@@ -761,7 +761,7 @@ buildferry
    Randomly select from the list of ``bob_name``. Example::
 
       release = {
-         "findspace=size:any radius:4 movecaps:swim",
+         "findspace=size:swim radius:4",
          "walk=coords",
          "animate=work 2000",
          "buildferry",

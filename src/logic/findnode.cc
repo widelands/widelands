@@ -55,7 +55,7 @@ bool FindNodeCaps::accept(const Map&, const FCoords& coord) const {
 	return true;
 }
 
-bool FindNodeSize::accept(const Map&, const FCoords& coord) const {
+bool FindNodeSize::accept(const Map& map, const FCoords& coord) const {
 	if (BaseImmovable const* const immovable = coord.field->get_immovable())
 		if (immovable->get_size() > BaseImmovable::NONE)
 			return false;
@@ -75,7 +75,7 @@ bool FindNodeSize::accept(const Map&, const FCoords& coord) const {
 	case sizeBig:
 		return (nodecaps & BUILDCAPS_SIZEMASK) >= BUILDCAPS_BIG;
 	case sizeSwim:
-		return nodecaps & MOVECAPS_SWIM;
+		return map.can_reach_by_water(coord);
 	case sizeAny:
 		return true;
 	}
