@@ -63,7 +63,6 @@ Road::~Road() {
 	for (CarrierSlot& slot : carrier_slots_) {
 		delete slot.carrier_request;
 	}
-	RoadBase::cleanup();
 }
 
 /**

@@ -107,15 +107,17 @@ void RoadBase::mark_map(EditorGameBase& egbase) {
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			const Direction dir = get_reverse_dir(path_[steps - 1]);
-			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
-				egbase.set_road(curf, dir, type_);
+			Direction const rdir = 2 * (dir - WALK_E);
+			if (rdir == WALK_SW || rdir == WALK_SE || rdir == WALK_E)
+				egbase.set_road(curf, rdir, type_);
 		}
 
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
-			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
-				egbase.set_road(curf, dir, type_);
+			Direction const rdir = 2 * (dir - WALK_E);
+			if (rdir == WALK_SW || rdir == WALK_SE || rdir == WALK_E)
+				egbase.set_road(curf, rdir, type_);
 			map.get_neighbour(curf, dir, &curf);
 		}
 	}
@@ -136,15 +138,17 @@ void RoadBase::unmark_map(EditorGameBase& egbase) {
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			const Direction dir = get_reverse_dir(path_[steps - 1]);
-			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
-				egbase.set_road(curf, dir, RoadType::kNone);
+			Direction const rdir = 2 * (dir - WALK_E);
+			if (rdir == WALK_SW || rdir == WALK_SE || rdir == WALK_E)
+				egbase.set_road(curf, rdir, RoadType::kNone);
 		}
 
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
-			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
-				egbase.set_road(curf, dir, RoadType::kNone);
+			Direction const rdir = 2 * (dir - WALK_E);
+			if (rdir == WALK_SW || rdir == WALK_SE || rdir == WALK_E)
+				egbase.set_road(curf, rdir, RoadType::kNone);
 			map.get_neighbour(curf, dir, &curf);
 		}
 	}
