@@ -588,7 +588,7 @@ WareInstance* Flag::fetch_pending_ware(Game& game, int32_t best_index) {
 void Flag::ware_departing(Game& game) {
 	// Wake up one sleeper from the capacity queue.
 	while (!capacity_wait_.empty()) {
-		Worker* const w = capacity_wait_[0].get(game); // NOCOM consider using a deque
+		Worker* const w = capacity_wait_.front().get(game);
 		capacity_wait_.erase(capacity_wait_.begin());
 		if (w && w->wakeup_flag_capacity(game, *this)) {
 			return;

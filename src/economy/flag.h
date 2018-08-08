@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_FLAG_H
 #define WL_ECONOMY_FLAG_H
 
+#include <deque>
 #include <list>
 #include <vector>
 
@@ -201,7 +202,7 @@ private:
 	/// the given flag
 	Flag* always_call_for_flag_;
 
-	using CapacityWaitQueue = std::vector<OPtr<Worker>>;
+	using CapacityWaitQueue = std::deque<OPtr<Worker>>;
 	CapacityWaitQueue capacity_wait_;  ///< workers waiting for capacity
 
 	using FlagJobs = std::list<FlagJob>;
