@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-13 13:47+0000\n"
-"PO-Revision-Date: 2018-07-13 13:49+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-20 07:36+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -362,170 +362,175 @@ msgstr "マップ %s を読み込んでいます"
 msgid "Random Player"
 msgstr "ランダムプレイヤー"
 
-#: ../../src/editor/tools/info_tool.cc:43
+#: ../../src/editor/tools/info_tool.cc:46
 msgid "Field Information"
 msgstr "フィールド情報"
 
-#: ../../src/editor/tools/info_tool.cc:50
-msgid "Node:"
-msgstr "ノード: "
+#: ../../src/editor/tools/info_tool.cc:54
+msgid "Node"
+msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:53
+#: ../../src/editor/tools/info_tool.cc:56
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
 msgstr "座標: (%1$i, %2$i)"
 
 #. * TRANSLATORS: Editor terrain property: small building plot
-#: ../../src/editor/tools/info_tool.cc:62
+#: ../../src/editor/tools/info_tool.cc:65
 msgid "small"
 msgstr "小"
 
 #. * TRANSLATORS: Editor terrain property: medium building plot
-#: ../../src/editor/tools/info_tool.cc:67
+#: ../../src/editor/tools/info_tool.cc:70
 msgid "medium"
 msgstr "中"
 
 #. * TRANSLATORS: Editor terrain property: big building plot
-#: ../../src/editor/tools/info_tool.cc:71
+#: ../../src/editor/tools/info_tool.cc:74
 msgid "big"
 msgstr "大"
 
 #. * TRANSLATORS: Editor terrain property: space for a flag
-#: ../../src/editor/tools/info_tool.cc:79
+#: ../../src/editor/tools/info_tool.cc:82
 msgid "flag"
 msgstr "旗"
 
 #. * TRANSLATORS: Editor terrain property: mine building plot
-#: ../../src/editor/tools/info_tool.cc:83
+#: ../../src/editor/tools/info_tool.cc:86
 msgid "mine"
 msgstr "鉱山"
 
 #. * TRANSLATORS: Editor terrain property: port space
-#: ../../src/editor/tools/info_tool.cc:87
+#: ../../src/editor/tools/info_tool.cc:90
 msgid "port"
 msgstr "港"
 
 #. * TRANSLATORS: Editor terrain property: units can walk on this terrain
 #. * TRANSLATORS: This is a terrain type tooltip in the editor
-#: ../../src/editor/tools/info_tool.cc:91
+#: ../../src/editor/tools/info_tool.cc:94
 #: ../../src/logic/map_objects/world/terrain_description.cc:75
 msgid "walkable"
 msgstr "歩行可能"
 
 #. * TRANSLATORS: Editor terrain property: units can swim on this terrain
 #. (fish, ships)
-#: ../../src/editor/tools/info_tool.cc:95
+#: ../../src/editor/tools/info_tool.cc:98
 msgid "swimmable"
 msgstr "泳ぎ可能"
 
-#: ../../src/editor/tools/info_tool.cc:99
+#: ../../src/editor/tools/info_tool.cc:101
 #, c-format
 msgid "Caps: %s"
 msgstr "ノードフラグ: %s"
 
-#: ../../src/editor/tools/info_tool.cc:106
+#: ../../src/editor/tools/info_tool.cc:108
 #, c-format
 msgid "Owned by: Player %u"
 msgstr "所有者: プレイヤー %u"
 
-#: ../../src/editor/tools/info_tool.cc:110
+#: ../../src/editor/tools/info_tool.cc:112
 msgid "Owned by: —"
 msgstr "所有者: —"
 
-#: ../../src/editor/tools/info_tool.cc:113
-msgid "Has immovable"
-msgstr "障害物有り"
-
-#: ../../src/editor/tools/info_tool.cc:113
-msgid "No immovable"
-msgstr "障害物無し"
-
 #: ../../src/editor/tools/info_tool.cc:116
-msgid "Has animals"
-msgstr "動物有り"
+#: ../../src/editor/ui_menus/tool_menu.cc:61
+#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:89
+#: ../../src/wui/minimap.cc:121
+msgid "Terrain"
+msgstr "地形"
 
-#: ../../src/editor/tools/info_tool.cc:116
-msgid "No animals"
-msgstr "動物無し"
-
-#: ../../src/editor/tools/info_tool.cc:120
-#: ../../src/editor/ui_menus/main_menu_new_map.cc:114
-msgid "Terrain:"
-msgstr "地形: "
-
-#: ../../src/editor/tools/info_tool.cc:127
+#: ../../src/editor/tools/info_tool.cc:123
 #, c-format
 msgctxt "terrain_name"
 msgid "Name: %s"
 msgstr "名称: %s"
 
-#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable",
-#. "unreachable and
-#. * unwalkable"
-#. * TRANSLATORS: You can also translate this as "Category: %s" or "Property:
+#. * TRANSLATORS: "Is" is a list of terrain properties, e.g. "arable,
+#. unreachable and
+#. * unwalkable". You can also translate this as "Category: %s" or "Property:
 #. %s"
-#: ../../src/editor/tools/info_tool.cc:138
+#: ../../src/editor/tools/info_tool.cc:133
 #, c-format
 msgid "Is: %s"
 msgstr "性質: %s"
 
-#: ../../src/editor/tools/info_tool.cc:143
+#: ../../src/editor/tools/info_tool.cc:138
 #, c-format
 msgid "Editor Category: %s"
 msgstr "エディタカテゴリー: %s"
 
-#: ../../src/editor/tools/info_tool.cc:147
-#: ../../src/editor/ui_menus/main_menu_random_map.cc:118
-msgid "Resources:"
-msgstr "資源: "
+#. * TRANSLATORS: Heading for immovables and animals in editor info tool
+#: ../../src/editor/tools/info_tool.cc:146
+msgid "Objects"
+msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:155
+#: ../../src/editor/tools/info_tool.cc:149
 #, c-format
-msgid "Resource name: %s"
-msgstr "資源名: %s"
+msgid "Immovable: %s"
+msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:158
+#: ../../src/editor/tools/info_tool.cc:180
 #, c-format
-msgid "Resource amount: %i"
-msgstr "資源量: %i"
+msgid "Animals: %s"
+msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:161
-msgid "No resources"
-msgstr "資源なし"
+#: ../../src/editor/tools/info_tool.cc:186
+#, c-format
+msgid "Workers: %s"
+msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:165 ../../src/wui/mapdetails.cc:130
-msgid "Map:"
-msgstr "マップ: "
+#: ../../src/editor/tools/info_tool.cc:192
+#, c-format
+msgid "Ships: %s"
+msgstr ""
 
-#: ../../src/editor/tools/info_tool.cc:166
+#: ../../src/editor/tools/info_tool.cc:203
+#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:49
+#: ../../src/editor/ui_menus/tool_menu.cc:64
+msgid "Resources"
+msgstr "資源"
+
+#: ../../src/editor/tools/info_tool.cc:205
+msgctxt "resources"
+msgid "%1%x %2%"
+msgstr ""
+
+#: ../../src/editor/tools/info_tool.cc:212
+#: ../../src/ui_fsmenu/launch_mpg.cc:64 ../../src/ui_fsmenu/launch_mpg.cc:147
+#: ../../src/ui_fsmenu/netsetup_lan.cc:122 ../../src/wui/minimap.cc:110
+msgid "Map"
+msgstr "マップ"
+
+#: ../../src/editor/tools/info_tool.cc:214
 #, c-format
 msgctxt "map_name"
 msgid "Name: %s"
 msgstr "名称: %s"
 
-#: ../../src/editor/tools/info_tool.cc:169
-#, c-format
-msgid "Size: %1$ix%2$i"
-msgstr "サイズ: %1$ix%2$i"
+#: ../../src/editor/tools/info_tool.cc:216
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:171
+#: ../../src/ui_fsmenu/launch_mpg.cc:587
+msgid "Size: %1% x %2%"
+msgstr "サイズ: %1% x %2%"
 
-#: ../../src/editor/tools/info_tool.cc:174
+#: ../../src/editor/tools/info_tool.cc:221
 #, c-format
 msgid "Players: %u"
 msgstr "プレイヤー数: %u"
 
-#: ../../src/editor/tools/info_tool.cc:177
+#: ../../src/editor/tools/info_tool.cc:224
 msgid "Players: –"
 msgstr "プレイヤー数: –"
 
-#: ../../src/editor/tools/info_tool.cc:180
+#: ../../src/editor/tools/info_tool.cc:227
 #, c-format
 msgid "Author: %s"
 msgstr "作者: %s"
 
-#: ../../src/editor/tools/info_tool.cc:181
+#: ../../src/editor/tools/info_tool.cc:229
 #, c-format
-msgid "Descr: %s"
-msgstr "説明: %s"
+msgid "Description: %s"
+msgstr ""
 
 #. * TRANSLATORS: %s are the currently selected items in an editor tool
 #: ../../src/editor/ui_menus/categorized_item_selection_menu.h:189
@@ -657,7 +662,7 @@ msgstr "作者: "
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:108
 #: ../../src/ui_fsmenu/campaign_select.cc:78
 #: ../../src/ui_fsmenu/campaign_select.cc:155
-#: ../../src/ui_fsmenu/campaign_select.cc:384 ../../src/wui/mapdetails.cc:173
+#: ../../src/ui_fsmenu/campaign_select.cc:384 ../../src/wui/mapdetails.cc:144
 msgid "Description:"
 msgstr "説明: "
 
@@ -666,7 +671,7 @@ msgid "Hint (optional):"
 msgstr "ヒント (オプション): "
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:119
-#: ../../src/wui/mapdetails.cc:167
+#: ../../src/wui/mapdetails.cc:138
 msgid "Tags:"
 msgstr "タグ: "
 
@@ -695,10 +700,6 @@ msgstr "タグ"
 msgid "Teams"
 msgstr "チーム"
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:171
-msgid "Size: %1% x %2%"
-msgstr "サイズ: %1% x %2%"
-
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:58
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:66
 msgid "Width:"
@@ -713,8 +714,12 @@ msgstr "縦: "
 msgid "Create Map"
 msgstr "マップ作成"
 
+#: ../../src/editor/ui_menus/main_menu_new_map.cc:114
+msgid "Terrain:"
+msgstr "地形: "
+
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:91
-#: ../../src/wui/gamedetails.cc:159
+#: ../../src/wui/gamedetails.cc:128
 msgid "Players:"
 msgstr "人数: "
 
@@ -759,6 +764,10 @@ msgstr "高"
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:117
 msgid "Climate:"
 msgstr "気候: "
+
+#: ../../src/editor/ui_menus/main_menu_random_map.cc:118
+msgid "Resources:"
+msgstr "資源: "
 
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:149
 msgid "Water:"
@@ -831,7 +840,7 @@ msgstr "ディレクトリ作成"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:70
 #: ../../src/wui/game_main_menu_save_game.cc:61
-#: ../../src/wui/gamedetails.cc:176
+#: ../../src/wui/gamedetails.cc:145
 msgid "Filename:"
 msgstr "ファイル名: "
 
@@ -957,11 +966,6 @@ msgstr "クリックすると選んだ地形の高さを増やし、Shift+クリ
 msgid "Ctrl + Click on the map to set terrain height"
 msgstr "Ctrl+クリックすると高さを指定値に設定します"
 
-#: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:49
-#: ../../src/editor/ui_menus/tool_menu.cc:64
-msgid "Resources"
-msgstr "資源"
-
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:61
 msgid "Increase/Decrease amount by:"
 msgstr "資源量の増減値: "
@@ -992,12 +996,6 @@ msgstr "高さの変更"
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:95
 msgid "Random height"
 msgstr "高さをランダムに設定する"
-
-#: ../../src/editor/ui_menus/tool_menu.cc:61
-#: ../../src/editor/ui_menus/tool_set_terrain_options_menu.cc:89
-#: ../../src/wui/minimap.cc:121
-msgid "Terrain"
-msgstr "地形"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:62
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
@@ -1102,7 +1100,7 @@ msgid "Not set"
 msgstr "設定なし"
 
 #: ../../src/logic/game.cc:203 ../../src/logic/game.cc:255
-#: ../../src/logic/game.cc:325 ../../src/logic/game.cc:353
+#: ../../src/logic/game.cc:325 ../../src/logic/game.cc:360
 msgid "Preloading map"
 msgstr "マップを事前読込中"
 
@@ -1114,31 +1112,31 @@ msgstr "ワールドを読込中"
 msgid "Loading map…"
 msgstr "マップを読込中……"
 
-#: ../../src/logic/game.cc:338 ../../src/logic/game.cc:370
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1410
+#: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1417
 msgid "Loading…"
 msgstr "読込中……"
 
-#: ../../src/logic/game.cc:433
+#: ../../src/logic/game.cc:440
 msgid "Creating player infrastructure"
 msgstr "プレイヤーのベース情報を構成中"
 
-#: ../../src/logic/game.cc:444 ../../src/logic/player.cc:221
+#: ../../src/logic/game.cc:451 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr "開始位置が見つかりません"
 
-#: ../../src/logic/game.cc:445 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:452 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "プレイヤー %u の開始位置が存在しないため、Widelandsはゲームを開始できませんでした。\nWidelandsエディタ上で手動で開始位置を追加すれば、問題を解決できます。"
 
-#: ../../src/logic/game.cc:788
+#: ../../src/logic/game.cc:795
 msgid "Trade Offer"
 msgstr "トレードの提案"
 
-#: ../../src/logic/game.cc:790
+#: ../../src/logic/game.cc:797
 msgid "This market has received a new trade offer."
 msgstr "このマーケットは新たなトレードの提案を受け取りました。"
 
@@ -1595,7 +1593,7 @@ msgstr "歩行不能"
 msgid "This objective has no description."
 msgstr "この目的には説明がありません。"
 
-#: ../../src/logic/player.cc:1332
+#: ../../src/logic/player.cc:1333
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -1611,15 +1609,15 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "リプレイの終わりに達したため、ゲームを一時停止しています。もし続きを見たいのであれば、手動で一時停止を解除してください。"
 
-#: ../../src/logic/save_handler.cc:102
+#: ../../src/logic/save_handler.cc:99
 msgid "Saving game…"
 msgstr "ゲームを保存中…"
 
-#: ../../src/logic/save_handler.cc:118
+#: ../../src/logic/save_handler.cc:115
 msgid "Saving failed!"
 msgstr "保存に失敗！"
 
-#: ../../src/logic/save_handler.cc:186
+#: ../../src/logic/save_handler.cc:188
 msgid "Game saved"
 msgstr "ゲームを保存"
 
@@ -1640,7 +1638,7 @@ msgid ""
 msgstr "Widelandsは指定されたアドレスへの接続を確立できませんでした。指定されたポートでWidelandsが動いていないか、サーバがシャットダウンされていることが想定されます。"
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1302
+#: ../../src/wlapplication.cc:1309
 msgid "Preparing game"
 msgstr "ゲーム準備中"
 
@@ -2351,7 +2349,7 @@ msgstr "#"
 msgid "Tutorial:"
 msgstr "チュートリアル: "
 
-#: ../../src/ui_fsmenu/campaign_select.cc:383 ../../src/wui/mapdetails.cc:130
+#: ../../src/ui_fsmenu/campaign_select.cc:383 ../../src/wui/mapdetails.cc:101
 msgid "Scenario:"
 msgstr "シナリオ: "
 
@@ -2370,7 +2368,7 @@ msgid "The designer of this scenario"
 msgid_plural "The designers of this scenario"
 msgstr[0] "このシナリオのデザイナ"
 
-#: ../../src/ui_fsmenu/campaign_select.cc:414 ../../src/wui/mapdetails.cc:157
+#: ../../src/ui_fsmenu/campaign_select.cc:414 ../../src/wui/mapdetails.cc:128
 msgid "Author:"
 msgid_plural "Authors:"
 msgstr[0] "著者: "
@@ -2514,11 +2512,6 @@ msgstr "マップ「%s」が読み込めないので、有効な勝利条件を�
 msgid "Please select"
 msgstr "選択してください"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:64 ../../src/ui_fsmenu/launch_mpg.cc:147
-#: ../../src/ui_fsmenu/netsetup_lan.cc:122 ../../src/wui/minimap.cc:110
-msgid "Map"
-msgstr "マップ"
-
 #: ../../src/ui_fsmenu/launch_mpg.cc:64
 msgid "Select a map"
 msgstr "マップを選択します"
@@ -2614,11 +2607,6 @@ msgstr "閉鎖"
 #: ../../src/ui_fsmenu/launch_mpg.cc:585
 msgid "Map details:"
 msgstr "マップ詳細: "
-
-#: ../../src/ui_fsmenu/launch_mpg.cc:587
-#, c-format
-msgid "Size: %1$u x %2$u"
-msgstr "サイズ: %1$u x %2$u"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:595
 msgid "Scenario mode selected"
@@ -2959,11 +2947,11 @@ msgstr "キャンペーン"
 msgid "Load Game"
 msgstr "ゲーム読込"
 
-#: ../../src/wlapplication.cc:1097
+#: ../../src/wlapplication.cc:1104
 msgid "Game data error"
 msgstr "ゲームデータエラー"
 
-#: ../../src/wlapplication.cc:1105
+#: ../../src/wlapplication.cc:1112
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2971,18 +2959,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Widelandsの改善のため、問題の報告をお願いします。関連するメッセージは標準出力（Windowsでは stdout.txt）にも表示されているでしょう。Widelandsのバージョンは %1$s (%2$s) です。"
 
-#: ../../src/wlapplication.cc:1112
+#: ../../src/wlapplication.cc:1119
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "以下の情報を報告に含めてください。\n\nWidelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 
-#: ../../src/wlapplication.cc:1239
+#: ../../src/wlapplication.cc:1246
 msgid "Invalid Address"
 msgstr "無効なアドレス"
 
-#: ../../src/wlapplication.cc:1240
+#: ../../src/wlapplication.cc:1247
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "入力されたホスト名もしくはアドレスは無効であり、接続できません。"
 
@@ -3637,30 +3625,30 @@ msgstr "スコア"
 msgid "Team Score"
 msgstr "チームスコア"
 
-#: ../../src/wui/gamedetails.cc:145
+#: ../../src/wui/gamedetails.cc:115
 msgid "Map Name:"
 msgstr "マップ名: "
 
 #. * TRANSLATORS: The time a replay starts. Shown in the replay loading screen
-#: ../../src/wui/gamedetails.cc:152
+#: ../../src/wui/gamedetails.cc:121
 msgid "Start of Replay:"
 msgstr "リプレイを開始: "
 
 #. * TRANSLATORS: The current time of a savegame. Shown in the game saving and
 #. loading screens.
-#: ../../src/wui/gamedetails.cc:155
+#: ../../src/wui/gamedetails.cc:124
 msgid "Game Time:"
 msgstr "プレイ時間:"
 
-#: ../../src/wui/gamedetails.cc:163
+#: ../../src/wui/gamedetails.cc:132
 msgid "Widelands Version:"
 msgstr "Widelandsバージョン: "
 
-#: ../../src/wui/gamedetails.cc:167
+#: ../../src/wui/gamedetails.cc:136
 msgid "Win Condition:"
 msgstr "勝利条件: "
 
-#: ../../src/wui/gamedetails.cc:210
+#: ../../src/wui/gamedetails.cc:175
 msgid "Error:"
 msgstr "エラー: "
 
@@ -4108,15 +4096,19 @@ msgstr "上位ディレクトリ"
 msgid "empty"
 msgstr "空ディレクトリ"
 
-#: ../../src/wui/mapdetails.cc:122
+#: ../../src/wui/mapdetails.cc:93
 msgid "Directory:"
 msgstr "ディレクトリ: "
+
+#: ../../src/wui/mapdetails.cc:101
+msgid "Map:"
+msgstr "マップ: "
 
 #. * TRANSLATORS: Tooltip in map description when translated map names are
 #. being
 #. displayed.
 #. * TRANSLATORS: %s is the English name of the map.
-#: ../../src/wui/mapdetails.cc:141
+#: ../../src/wui/mapdetails.cc:112
 #, c-format
 msgid "The original name of this map: %s"
 msgstr "マップのオリジナル名: %s"
@@ -4125,13 +4117,13 @@ msgstr "マップのオリジナル名: %s"
 #. displayed in
 #. English.
 #. * TRANSLATORS: %s is the localized name of the map.
-#: ../../src/wui/mapdetails.cc:147
+#: ../../src/wui/mapdetails.cc:118
 #, c-format
 msgid "The name of this map in your language: %s"
 msgstr "あなたの言語でのマップ名: %s"
 
 #. * TRANSLATORS: Map hint header when selecting a map.
-#: ../../src/wui/mapdetails.cc:179
+#: ../../src/wui/mapdetails.cc:150
 msgid "Hint:"
 msgstr "ヒント: "
 
