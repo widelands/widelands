@@ -422,7 +422,7 @@ Load/save support
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 1;
+constexpr uint8_t kCurrentPacketVersion = 2;
 
 Carrier::Loader::Loader() {
 }
