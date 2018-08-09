@@ -12,7 +12,7 @@ field_mill = map:get_field(18, 184)
 place_building_in_region(p3, "empire_mill", {field_mill})
 
 field_warehouse = map:get_field(21, 186)
-place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}, wares = {wheat = 200}})
+place_building_in_region(p3, "empire_temple_of_vesta", {field_warehouse}, {workers = {empire_carrier = 0, empire_recruit = 0}, wares = {wheat = 200}, soldiers = {[{0,0,0,0}] = 3}})
 
    r1 = p3:place_road(field_warehouse.immovable.flag, "l", "tl", true)
    r2 = p3:place_road(field_mill.immovable.flag, "tr", "r", true)
@@ -66,15 +66,15 @@ place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 23)})
 place_building_in_region(p1, "empire_fishers_house", {map:get_field(12, 43)})
 
 -- Place well
-place_building_in_region(p1, "empire_well2", sf:region(15))
-place_building_in_region(p1, "empire_well2", sf:region(15))
+place_building_in_region(p1, "empire_well1", sf:region(15))
+place_building_in_region(p1, "empire_well1", sf:region(15))
 
 -- Place lumberjacks
-place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
-place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
-place_building_in_region(p1, "empire_lumberjacks_house2", sf:region(10))
-place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 10)})
-place_building_in_region(p1, "empire_foresters_house2", {map:get_field(19, 18)})
+place_building_in_region(p1, "empire_lumberjacks_house1", sf:region(10))
+place_building_in_region(p1, "empire_lumberjacks_house1", sf:region(10))
+place_building_in_region(p1, "empire_lumberjacks_house1", sf:region(10))
+place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 10)})
+place_building_in_region(p1, "empire_foresters_house1", {map:get_field(19, 18)})
 
 -- Mines
 place_building_in_region(p1, "empire_ironmine", {map:get_field(33, 14)})
@@ -246,3 +246,7 @@ prefilled_buildings(p2,
    }
    }
 )
+
+p1.team = 1
+p2.team = 2
+p3.team = 2

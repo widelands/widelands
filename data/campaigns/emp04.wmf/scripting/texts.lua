@@ -312,13 +312,16 @@ amalea_2 = {
    title=_"Amalea has Bad News",
    body= amalea3(_"Amalea recommends…",
       -- TRANSLATORS: Amalea
-      _([[Brother, I'm really worried that I have to deliver bad news again. As you can see, our farms aren’t producing anything and we can’t dismantle them. The only option is to destroy them.]])
+      _([[Brother, I'm really worried that I have to deliver bad news again. As you can see, our farms aren’t producing anything and we can’t dismantle them.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[This situation was caused by the sad fact that our people lost the instructions on how to construct and operate farms. Therefore they have zero productivity and the constructors don’t know how to dismantle them either.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[So, we urgently need to recover the plans regarding the construction and operation of farms. One older constructor told me that they might have been concealed in a cave in the hills east of our border.]]))
+      _([[So, we urgently need to recover the plans regarding the construction and operation of farms. One older constructor told me that they might have been concealed in a cave in the hills east of our border.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[Until we have found the plans the only option for our farms is to dismantle them.]]))
       .. new_objectives(obj_find_farm_plans),
    posy=1,
    h=500,
@@ -347,7 +350,7 @@ amalea_4 = {
       _([[Praise the gods, Lutius! We have found the plans on how to build and operate farms.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Now we can start building farms to produce the beer which our miners need so desperately.]])
+      _([[Now we can start building farms to produce the beer which our miners need so desperately. Furthermore the plans have enabled us to upgrade our old farms to get to work again.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[But I’m afraid that this problem hasn’t been the last in our economy.]])),

@@ -9,14 +9,12 @@ print_loading_message("Loading campaign-specific tribe units", function()
    --    Empire Mission 4
    -- ===================================
    include "map:scripting/tribes/brewery1.lua"
+   include "map:scripting/tribes/farm2.lua"
    include "map:scripting/tribes/farm1.lua"
-   include "map:scripting/tribes/foresters_house2.lua"
    include "map:scripting/tribes/foresters_house1.lua"
-   include "map:scripting/tribes/lumberjacks_house2.lua"
    include "map:scripting/tribes/lumberjacks_house1.lua"
    include "map:scripting/tribes/mill1.lua"
    include "map:scripting/tribes/trainingcamp1.lua"
-   include "map:scripting/tribes/well2.lua"
    include "map:scripting/tribes/well1.lua"
    include "map:scripting/tribes/temple_of_vesta.lua"
 end)
@@ -33,12 +31,12 @@ tribes:add_custom_building {
 
 tribes:add_custom_building {
    tribename = "empire",
-   buildingname = "empire_foresters_house2",
+   buildingname = "empire_foresters_house1",
 }
 
 tribes:add_custom_building {
    tribename = "empire",
-   buildingname = "empire_lumberjacks_house2",
+   buildingname = "empire_lumberjacks_house1",
 }
 
 tribes:add_custom_building {
@@ -53,7 +51,7 @@ tribes:add_custom_building {
 
 tribes:add_custom_building {
    tribename = "empire",
-   buildingname = "empire_well2",
+   buildingname = "empire_well1",
 }
 
 tribes:add_custom_building {

@@ -13,7 +13,7 @@ function dismantle()
    local o = add_campaign_objective(obj_dismantle_buildings)
    local buildmessage = false
    sleep(5000)
-   while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house2", "empire_well2"}) > 0 do
+   while count_buildings(p1, {"empire_fishers_house", "empire_quarry", "empire_lumberjacks_house1", "empire_well1"}) > 0 do
       if mv.windows.field_action and mv.windows.field_action.tabs.small and not buildmessage then
          campaign_message_box(amalea_19)
          buildmessage = true
@@ -22,7 +22,7 @@ function dismantle()
    end
    sleep(2000)
    p1:allow_buildings("all")
-   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum"}
+   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
    o.done = true
 
    campaign_message_box(amalea_3)
@@ -63,7 +63,7 @@ function farm_plans()
    end
 
    o.done = true
-   p1:allow_buildings{"empire_farm"}
+   p1:allow_buildings{"empire_farm", "empire_farm2"}
    run (wheat_chain)
 end
 
@@ -121,7 +121,7 @@ function no_trees()
          end
       end
    end
-   if #p1:get_buildings("empire_foresters_house2") > 0 then
+   if #p1:get_buildings("empire_foresters_house1") > 0 then
       local o = add_campaign_objective(obj_replace_foresters)
       campaign_message_box(amalea_7)
       while #p1:get_buildings("empire_foresters_house") < 2 do sleep(3249) end
@@ -411,25 +411,25 @@ function wheat_chain()
    scroll_to_map_pixel(prior_center)
 
    local hq = p1:get_buildings("empire_headquarters")
-   local wh = p3:get_buildings("empire_temple_of_vesta")
-   while not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do sleep(4000) end
+   while hq and not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do sleep(4000) end
    if p3.defeated then
       o1.done = true
       julia_conquered = true
-      p1:allow_buildings{"empire_mill", "empire_brewery"}
+      p1:allow_buildings{"empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2"}
       campaign_message_box(saledus_2)
       campaign_message_box(julia_2)
       campaign_message_box(amalea_11)
       campaign_message_box(saledus_4)
    else
       o1.done = true
-      wh[1]:set_workers("empire_carrier", 0)
-      wh[1]:set_workers("empire_recruit", 0)
+      local wh = p3:get_buildings("empire_temple_of_vesta")
+      --wh[1]:set_workers("empire_carrier", 0)
+      --wh[1]:set_workers("empire_recruit", 0)
       local wheat = hq[1]:get_wares("wheat") - 35
       local wine = hq[1]:get_wares("wine") - 15
       hq[1]:set_wares("wheat", wheat)
       hq[1]:set_wares("wine", wine)
-      p1:allow_buildings{"empire_mill", "empire_brewery"}
+      p1:allow_buildings{"empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2"}
       campaign_message_box(julia_1)
 
       --remove all workers from p3 to avoid having them wandering around
@@ -437,6 +437,7 @@ function wheat_chain()
       field_mill.immovable:set_workers("empire_miller", 0)
       wh[1]:set_workers("empire_carrier", 0)
       wh[1]:set_workers("empire_recruit", 0)
+      wh[1]:set_soldiers({0,0,0,0}, 0)
       field_well.immovable:set_workers("empire_carrier", 0)
       r1:set_workers("empire_carrier", 0)
       r2:set_workers("empire_carrier", 0)
@@ -455,7 +456,6 @@ function wheat_chain()
       connected_road(p1, field_mill.immovable.flag, "tr, r", true)
       connected_road(p1, field_mill.immovable.flag, "l, tl, tr", true)
       connected_road(p1, field_mill.immovable.flag, "br, r", true)
-
 
       campaign_message_box(amalea_12)
       campaign_message_box(saledus_3)
@@ -485,19 +485,18 @@ function karma()
             "empire_armorsmithy",
             "empire_barracks"
          }
-         local most = 1
-         local selc = 0
+         local cand = {}
          for idx,site in ipairs(bld) do
-            if #p1:get_buildings(site) > most then
-               most = #p1:get_buildings(site)
+            if #p1:get_buildings(site) > 1 then
                local build = p1:get_buildings(site)
-               selc = build[1]
+               table.insert(cand, build)
             end
          end
-         if selc ~= 0 then
-            local fields = selc.fields
+         if #cand > 0 then
+            local i = (count * 1237) % #cand
+            local fields = cand[i].fields
             local prior_center = scroll_to_field(fields[1])
-            selc:destroy()
+            cand[i]:destroy()
             campaign_message_box(amalea_16)
             scroll_to_map_pixel(prior_center)
          end
@@ -505,12 +504,14 @@ function karma()
    else
       for count = 0, 10 do
          sleep(1500000)
-         local hq = p1:get_buildings("empire_headquarters")
-         local beer = hq[1]:get_wares("beer") + 20
-         local wine = hq[1]:get_wares("wine") + 10
-         hq[1]:set_wares("beer", beer)
-         hq[1]:set_wares("wine", wine)
-         campaign_message_box(amalea_17)
+         local hq = p1:get_buildings("empire_temple_of_vesta")
+         if hq then
+            local beer = hq[1]:get_wares("beer") + 20
+            local wine = hq[1]:get_wares("wine") + 10
+            hq[1]:set_wares("beer", beer)
+            hq[1]:set_wares("wine", wine)
+            campaign_message_box(amalea_17)
+         end
       end
    end
 end
