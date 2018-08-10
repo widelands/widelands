@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-28 07:19+0000\n"
+"POT-Creation-Date: 2018-08-03 06:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -795,23 +795,23 @@ msgstr ""
 msgid "Aquatic"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:72
+#: ../../data/world/resources/init.lua:84
 msgid "Coal"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:86
+#: ../../data/world/resources/init.lua:100
 msgid "Gold"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:100
+#: ../../data/world/resources/init.lua:116
 msgid "Iron"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:114
+#: ../../data/world/resources/init.lua:132
 msgid "Stones"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:128
+#: ../../data/world/resources/init.lua:148
 #: ../../data/world/terrains/init.lua:451
 #: ../../data/world/terrains/init.lua:760
 #: ../../data/world/terrains/init.lua:1056
@@ -819,7 +819,7 @@ msgstr ""
 msgid "Water"
 msgstr ""
 
-#: ../../data/world/resources/init.lua:142
+#: ../../data/world/resources/init.lua:164
 msgid "Fish"
 msgstr ""
 

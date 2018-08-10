@@ -542,7 +542,8 @@ void Road::postsplit(Game& game, Flag& flag) {
  * Try to pick up a ware from the given flag.
  * \return true if a carrier has been sent on its way, false otherwise.
  */
-bool Road::notify_ware(Game& game, FlagId const flagid) {
+bool Road::notify_ware(Game& game, Flag& flag) {
+	FlagId flagid = &flag == flags_[Road::FlagEnd] ? Road::FlagEnd : Road::FlagStart;
 	// Iterate over all carriers and try to find one which will take the ware
 	for (CarrierSlot& slot : carrier_slots_) {
 		if (Carrier* const carrier = slot.carrier.get(game)) {
@@ -633,6 +634,6 @@ void Road::pay_for_building() {
 
 void Road::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
-	molog("wallet_: %i\n", wallet_);
+	molog("wallet: %i\n", wallet_);
 }
 }  // namespace Widelands
