@@ -72,8 +72,9 @@ BuildingWindow::BuildingWindow(InteractiveGameBase& parent,
 }
 
 BuildingWindow::~BuildingWindow() {
-    if (showing_workarea_) { // same as hide_workarea() but leave tooltip alone
-        igbase()->hide_workarea(building_position_);
+    if (!is_warping_) {
+		// Accessing the toggle_workarea_ button can cause segfaults, so we leave it alone
+        hide_workarea(false);
     }
 }
 
@@ -122,7 +123,7 @@ void BuildingWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	if (workarea_preview_wanted) {
 		show_workarea();
 	} else {
-		hide_workarea();
+		hide_workarea(true);
 	}
 }
 
@@ -315,7 +316,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		if (!wa_info->empty()) {
 			toggle_workarea_ = new UI::Button(
 			   capsbuttons, "workarea", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-			   g_gr->images().get("images/wui/overlays/workarea123.png"), _("Hide work area"));
+			   g_gr->images().get("images/wui/overlays/workarea123.png"));
 			toggle_workarea_->sigclicked.connect(
 			   boost::bind(&BuildingWindow::toggle_workarea, boost::ref(*this)));
 
@@ -394,7 +395,7 @@ void BuildingWindow::act_dismantle() {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		if (building->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 			igbase()->game().send_player_dismantle(*building);
-			hide_workarea();
+			hide_workarea(true);
 		}
 	} else {
 		show_dismantle_confirm(dynamic_cast<InteractivePlayer&>(*igbase()), *building);
@@ -496,12 +497,16 @@ void BuildingWindow::show_workarea() {
 }
 
 /**
- * Hide the workarea from view.
+ * Hide the workarea from view. Also configures whe toggle_workarea_ button if 'configure_button'  is 'true'.
  */
-void BuildingWindow::hide_workarea() {
-	if (showing_workarea_) {
-		igbase()->hide_workarea(building_position_);
-		showing_workarea_ = false;
+void BuildingWindow::hide_workarea(bool configure_button) {
+	if (!showing_workarea_) {
+		return;  // already hidden, nothing to be done
+	}
+
+	igbase()->hide_workarea(building_position_);
+	showing_workarea_ = false;
+	if (configure_button) {
 		configure_workarea_button();
 	}
 }
@@ -523,7 +528,7 @@ void BuildingWindow::configure_workarea_button() {
 
 void BuildingWindow::toggle_workarea() {
 	if (showing_workarea_) {
-		hide_workarea();
+		hide_workarea(true);
 	} else {
 		show_workarea();
 	}

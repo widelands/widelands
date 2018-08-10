@@ -80,7 +80,7 @@ protected:
 	void act_dismantle();
 	void act_debug();
 	void show_workarea();
-	void hide_workarea();
+	void hide_workarea(bool configure_button);
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
