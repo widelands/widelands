@@ -1,16 +1,16 @@
-# Automatically created by Widelands bzr8485[frisians] (Release)
+# Automatically created by Widelands bzr8766[widelands] (Release)
 
 [global]
 packet_version="2"
 
 [player_1]
-name="Reebaud"
+name=_"Reebaud"
 tribe="frisians"
 ai=
 closeable="false"
 
 [player_2]
-name="Maukor"
+name=_"Maukor"
 tribe="frisians"
 ai=
 closeable="false"
