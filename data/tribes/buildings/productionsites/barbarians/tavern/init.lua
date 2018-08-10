@@ -60,11 +60,13 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
-            "sleep=14000",
+             -- time total: 33
+            "sleep=5000",
             "return=skipped unless economy needs ration",
             "consume=barbarians_bread,fish,meat",
             "playsound=sound/barbarians/taverns tavern 100",
-            "animate=working 19000",
+            "animate=working 18000",
+            "sleep=10000",
             "produce=ration"
          },
       },

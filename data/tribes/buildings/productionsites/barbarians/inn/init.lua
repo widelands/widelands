@@ -84,8 +84,8 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs snack",
             "consume=barbarians_bread fish,meat beer",
             "playsound=sound/barbarians/taverns inn 100",
-            "animate=working 22000",
-            "sleep=15000",
+            "animate=working 27000",
+            "sleep=10000",
             "produce=snack"
          }
       },
