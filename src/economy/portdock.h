@@ -85,8 +85,8 @@ public:
 		return fleet_;
 	}
 	PortDock* get_dock(Flag& flag) const;
-	bool get_need_ship() const {
-		return need_ship_ || expedition_ready_;
+	uint32_t get_need_ship() const {
+		return waiting_.size() + (expedition_ready_ ? 16 : 0);
 	}
 
 	void set_economy(Economy*) override;

@@ -717,7 +717,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 				route_length = s->calculate_sea_route(game, *p);
 			}
 
-			float score = (items_count + 1) * (items_count + std::min(max_capacity, p->count_waiting()));
+			float score = (items_count + 1) * (items_count + std::min(max_capacity, p->get_need_ship()));
 			score = score * (1 - route_length / (score + route_length));
 			if (score > best_score) {
 				best_score = score;
