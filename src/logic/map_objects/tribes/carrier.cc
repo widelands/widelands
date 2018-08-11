@@ -421,7 +421,9 @@ Load/save support
 
 ==============================
 */
-
+// Increasing the version number will break the test suite,
+// so we need to provide savegame compatibility here.
+// Compatibility is not needed for map loading.
 constexpr uint8_t kCurrentPacketVersion = 2;
 
 Carrier::Loader::Loader() {
@@ -433,9 +435,14 @@ void Carrier::Loader::load(FileRead& fr) {
 	try {
 
 		uint8_t packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersion) {
 			Carrier& carrier = get<Carrier>();
 			carrier.operation_ = fr.signed_32();
+			if (packet_version == 1) {
+				if (carrier.operation_ == NO_OPERATION) {
+					carrier.operation_ == INIT;
+				}
+			}
 		} else {
 			throw UnhandledVersionError("Carrier", packet_version, kCurrentPacketVersion);
 		}
