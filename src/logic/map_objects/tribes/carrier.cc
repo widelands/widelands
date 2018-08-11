@@ -440,7 +440,7 @@ void Carrier::Loader::load(FileRead& fr) {
 			carrier.operation_ = fr.signed_32();
 			if (packet_version == 1) {
 				if (carrier.operation_ == NO_OPERATION) {
-					carrier.operation_ == INIT;
+					carrier.operation_ = INIT;
 				}
 			}
 		} else {
