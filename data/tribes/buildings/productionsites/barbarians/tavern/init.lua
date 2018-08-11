@@ -61,8 +61,8 @@ tribes:new_productionsite_type {
          descname = _"preparing a ration",
          actions = {
              -- time total: 33
-            "sleep=5000",
             "return=skipped unless economy needs ration",
+            "sleep=5000",
             "consume=barbarians_bread,fish,meat",
             "playsound=sound/barbarians/taverns tavern 100",
             "animate=working 18000",

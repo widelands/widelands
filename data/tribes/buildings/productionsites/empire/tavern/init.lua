@@ -56,8 +56,8 @@ tribes:new_productionsite_type {
          descname = _"preparing a ration",
          actions = {
             -- time total: 33
-            "sleep=5000",
             "return=skipped unless economy needs ration",
+            "sleep=5000",
             "consume=empire_bread,fish,meat",
             "playsound=sound/empire/taverns ration 100",
             "animate=working 18000",
