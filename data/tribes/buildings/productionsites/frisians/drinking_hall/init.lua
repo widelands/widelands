@@ -72,10 +72,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
+            -- time total: 33
             "return=skipped unless economy needs ration",
             "consume=fruit,smoked_fish,smoked_meat",
-            "sleep=14000",
-            "animate=working 19000",
+            "sleep=5000",
+            "animate=working 18000",
+            "sleep=10000",
             "produce=ration"
          }
       },
@@ -83,10 +85,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
          descname = _"preparing a meal",
          actions = {
+            --time total: 40
             "return=skipped unless economy needs meal",
             "consume=beer honey_bread smoked_fish,smoked_meat",
-            "sleep=10000",
             "animate=working 30000",
+            "sleep=10000",
             "produce=meal"
          }
       },

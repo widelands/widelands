@@ -73,7 +73,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _"preparing only one ration",
          actions = {
-            --time total: 49.5
+            -- time total: 49.5
             "return=skipped unless economy needs ration",
             "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",
             "sleep=5000",
@@ -87,7 +87,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
          descname = _"preparing rations",
          actions = {
-            --time total: 66
+            -- time total: 66
             "return=skipped unless economy needs ration",
             "consume=fruit,bread_frisians smoked_fish,smoked_meat",
             "sleep=5000",
