@@ -108,47 +108,55 @@ void RoadBase::mark_map(EditorGameBase& egbase) {
 		if (steps > 0) {
 			const Direction dir = get_reverse_dir(path_[steps - 1]);
 			Direction const rdir = 2 * (dir - WALK_E);
-			if (rdir == WALK_SW || rdir == WALK_SE || rdir == WALK_E)
-				egbase.set_road(curf, rdir, type_);
+			molog("[mark_map] Leading HERE (%i): dir=%i, rdir=%i\n", steps, dir, rdir); // NOCOM remove
+
+			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
+				egbase.set_road(curf, dir, type_);
 		}
 
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
 			Direction const rdir = 2 * (dir - WALK_E);
-			if (rdir == WALK_SW || rdir == WALK_SE || rdir == WALK_E)
-				egbase.set_road(curf, rdir, type_);
+			molog("[mark_map] Leading AWAY (%i): dir=%i, rdir=%i\n", steps, dir, rdir); // NOCOM remove
+
+			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
+				egbase.set_road(curf, dir, type_);
+
 			map.get_neighbour(curf, dir, &curf);
 		}
 	}
 }
 
 /**
- * Remove road markings from the map
+ * Remove road/waterway markings from the map
  */
 void RoadBase::unmark_map(EditorGameBase& egbase) {
 	const Map& map = egbase.map();
-	FCoords curf = map.get_fcoords(path_.get_start());
+	FCoords curf(path_.get_start(), &map[path_.get_start()]);
 
 	const Path::StepVector::size_type nr_steps = path_.get_nsteps();
 	for (Path::StepVector::size_type steps = 0; steps < nr_steps + 1; ++steps) {
 		if (steps > 0 && steps < path_.get_nsteps())
-			set_position(egbase, curf);
+			unset_position(egbase, curf);
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			const Direction dir = get_reverse_dir(path_[steps - 1]);
 			Direction const rdir = 2 * (dir - WALK_E);
-			if (rdir == WALK_SW || rdir == WALK_SE || rdir == WALK_E)
-				egbase.set_road(curf, rdir, RoadType::kNone);
+
+			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
+				egbase.set_road(curf, dir, RoadType::kNone);
 		}
 
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
 			Direction const rdir = 2 * (dir - WALK_E);
-			if (rdir == WALK_SW || rdir == WALK_SE || rdir == WALK_E)
-				egbase.set_road(curf, rdir, RoadType::kNone);
+
+			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
+				egbase.set_road(curf, dir, RoadType::kNone);
+
 			map.get_neighbour(curf, dir, &curf);
 		}
 	}
