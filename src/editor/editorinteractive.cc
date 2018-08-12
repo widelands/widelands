@@ -180,7 +180,7 @@ void EditorInteractive::load(const std::string& filename) {
 	loader_ui.step(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		egbase().add_player(
-		   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
+		   p, 0, map->get_scenario_player_tribe(p).empty() ? Widelands::get_all_tribenames().front() : map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
 	}
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
