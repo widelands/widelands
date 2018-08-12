@@ -228,9 +228,9 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 		}
 	}
 
-	// starting an expedition? if yes, find a port and order it to start an expedition
+	// starting an expedition? if yes, find a port and order it to start an expedition NOCOM
 	if (ports_count > 0 && expeditions_in_progress == 0 && expeditions_in_prep == 0 &&
-	    persistent_data->no_more_expeditions == kFalse && ship_free && basic_economy_established) {
+	    persistent_data->no_more_expeditions == kFalse && ship_free && basic_economy_established && expedition_ship_ == kNoShip) {
 
 		// we need to find a port
 		for (const WarehouseSiteObserver& wh_obs : warehousesites) {
@@ -367,6 +367,14 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
  */
 void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
 	PlayerNumber const pn = player_->player_number();
+
+	// NOCOM
+	if (expedition_ship_ != so.ship->serial() && expedition_ship_ != kNoShip) {
+		printf ("%d: WARNING: ship %s in expedition, but is second ship in expedition that is not supported, cancelling the expedition\n",
+		pn, so.ship->get_shipname().c_str());
+		game().send_player_cancel_expedition_ship(*so.ship);
+		return;
+	}
 
 	// consistency check
 	assert(expedition_ship_ == so.ship->serial() || expedition_ship_ == kNoShip);
