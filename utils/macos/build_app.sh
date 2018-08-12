@@ -62,6 +62,7 @@ function MakeAppPackage {
    CFBundleDisplayName = Widelands;
    CFBundleIdentifier = "org.widelands.wl";
    CFBundleVersion = "$WLVERSION";
+   CFBundleShortVersionString = "$WLVERSION";
    CFBundleInfoDictionaryVersion = "6.0";
    CFBundlePackageType = APPL;
    CFBundleSignature = wdld;
