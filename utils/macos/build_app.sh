@@ -2,9 +2,33 @@
 
 set -e
 
-if [ "$#" == "0" ] || [ -z "$2" ]; then
-   echo "Usage: $0 <gcc|clang> <bzr_repo_directory>"
+if [ "$1" == "gcc" ]; then
+   C_COMPILER="gcc-7"
+   CXX_COMPILER="g++-7"
+   COMPILER=$(gcc-7 --version | grep "GCC")
+elif [ "$1" == "clang" ]; then
+   C_COMPILER="clang"
+   CXX_COMPILER="clang++"
+   COMPILER=$(clang --version | grep "clang")
+else
+   echo "Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
    exit 1
+fi
+
+if [ "$2" == "debug" ]; then
+   TYPE="Debug"
+elif [ "$2" == "release" ]; then
+   TYPE="Release"
+else
+   echo "Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
+   exit 1
+fi
+
+if [ -z "$3" ]; then
+   echo "Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
+   exit 1
+else
+   SOURCE_DIR=$3
 fi
 
 # Check if the SDK for the minimum build target is available.
@@ -17,21 +41,9 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
 fi
 
-if [ "$1" == "gcc" ]; then
-   C_COMPILER="gcc-7"
-   CXX_COMPILER="g++-7"
-elif [ "$1" == "clang" ]; then
-   C_COMPILER="clang"
-   CXX_COMPILER="clang++"
-else
-   echo "Usage: $0 <gcc|clang> <bzr_repo_directory>"
-   exit 1
-fi
-
-SOURCE_DIR=$2
 REVISION=`bzr revno $SOURCE_DIR`
 DESTINATION="WidelandsRelease"
-TYPE="Release"
+
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
 else
@@ -44,7 +56,7 @@ echo "   Version:     $WLVERSION"
 echo "   Destination: $DESTINATION"
 echo "   Type:        $TYPE"
 echo "   macOS:       $OSX_MIN_VERSION"
-echo "   Compiler:    $1"
+echo "   Compiler:    $COMPILER"
 echo ""
 
 function MakeDMG {
@@ -58,7 +70,11 @@ function MakeDMG {
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
    echo "Creating DMG ..."
-   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
+   if [ "$TYPE" == "Release"]; then
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
+   elif [ "$TYPE" == "Debug" ]; then
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION_$TYPE.dmg"
+   fi
 }
 
 function CopyLibrary {
