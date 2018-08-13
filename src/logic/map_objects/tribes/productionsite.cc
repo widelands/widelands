@@ -899,7 +899,7 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
 	SkippedPrograms::const_iterator i = skipped_programs_.find(program_name);
 	if (i != skipped_programs_.end()) {
 		uint32_t const gametime = game.get_gametime();
-		uint32_t const earliest_allowed_start_time = i->second + 10000;
+		uint32_t const earliest_allowed_start_time = i->second + 500;
 		if (gametime + tdelta < earliest_allowed_start_time)
 			tdelta = earliest_allowed_start_time - gametime;
 	}
