@@ -148,7 +148,7 @@ void Ferry::row_update(Game& game, State&) {
 	}
 	if (start_task_movepath(game, *destination_, 0, descr().get_right_walk_anims(does_carry_ware())))
 		return;
-	molog("[row]: Can't find path to waterway for some reason!\n");
+	molog("[row]: Can't find path to the waterway for some reason!\n");
 	// try again later
 	return schedule_act(game, 900);
 }
@@ -176,8 +176,8 @@ bool Ferry::init_fleet() {
 	assert(get_owner() != nullptr);
 	Fleet* fleet = new Fleet(get_owner());
 	fleet->add_ferry(this);
-	return fleet->init(get_owner()->egbase());
 	// fleet calls the set_fleet function appropriately
+	return fleet->init(get_owner()->egbase());
 }
 
 /**
@@ -185,5 +185,13 @@ bool Ferry::init_fleet() {
  */
 Bob& FerryDescr::create_object() const {
 	return *new Ferry(*this);
+}
+
+const Bob::Task* Ferry::Loader::get_task(const std::string& name) {
+	if (name == "unemployed")
+		return &taskUnemployed;
+	if (name == "row")
+		return &taskRow;
+	return Worker::Loader::get_task(name);
 }
 }

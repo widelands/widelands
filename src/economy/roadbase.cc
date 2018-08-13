@@ -107,9 +107,6 @@ void RoadBase::mark_map(EditorGameBase& egbase) {
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			const Direction dir = get_reverse_dir(path_[steps - 1]);
-			Direction const rdir = 2 * (dir - WALK_E);
-			molog("[mark_map] Leading HERE (%i): dir=%i, rdir=%i\n", steps, dir, rdir); // NOCOM remove
-
 			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
 				egbase.set_road(curf, dir, type_);
 		}
@@ -117,9 +114,6 @@ void RoadBase::mark_map(EditorGameBase& egbase) {
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
-			Direction const rdir = 2 * (dir - WALK_E);
-			molog("[mark_map] Leading AWAY (%i): dir=%i, rdir=%i\n", steps, dir, rdir); // NOCOM remove
-
 			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
 				egbase.set_road(curf, dir, type_);
 
@@ -143,8 +137,6 @@ void RoadBase::unmark_map(EditorGameBase& egbase) {
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			const Direction dir = get_reverse_dir(path_[steps - 1]);
-			Direction const rdir = 2 * (dir - WALK_E);
-
 			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
 				egbase.set_road(curf, dir, RoadType::kNone);
 		}
@@ -152,8 +144,6 @@ void RoadBase::unmark_map(EditorGameBase& egbase) {
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
-			Direction const rdir = 2 * (dir - WALK_E);
-
 			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
 				egbase.set_road(curf, dir, RoadType::kNone);
 

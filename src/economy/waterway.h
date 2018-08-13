@@ -45,8 +45,8 @@ private:
 };
 
 struct Waterway : public RoadBase {
-	friend class MapRoaddataPacket;  // For saving
-	friend class MapRoadPacket;      // For init()
+	friend class MapWaterwaydataPacket;  // For saving
+	friend class MapWaterwayPacket;      // For init()
 
 	static bool is_waterway_descr(MapObjectDescr const*);
 

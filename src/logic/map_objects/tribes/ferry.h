@@ -83,6 +83,15 @@ private:
 	static const Task taskRow;
 	void unemployed_update(Game&, State&);
 	void row_update(Game&, State&);
+
+protected:
+	struct Loader : public Worker::Loader {
+	public:
+		Loader() {
+		}
+	protected:
+		const Task* get_task(const std::string& name) override;
+	};
 };
 }
 

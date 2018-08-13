@@ -54,6 +54,9 @@ struct MapObjectSaver {
 	uint32_t get_nr_roads() const {
 		return nr_roads_;
 	}
+	uint32_t get_nr_waterways() const {
+		return nr_waterways_;
+	}
 	uint32_t get_nr_flags() const {
 		return nr_flags_;
 	}
@@ -93,6 +96,7 @@ private:
 
 	MapObjectRecordMap objects_;
 	uint32_t nr_roads_;
+	uint32_t nr_waterways_;
 	uint32_t nr_flags_;
 	uint32_t nr_buildings_;
 	uint32_t nr_bobs_;

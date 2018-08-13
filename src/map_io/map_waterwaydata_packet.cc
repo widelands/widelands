@@ -17,20 +17,20 @@
  *
  */
 
-#include "map_io/map_roaddata_packet.h"
+#include "map_io/map_waterwaydata_packet.h"
 
 #include <map>
 
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "economy/request.h"
-#include "economy/road.h"
+#include "economy/fleet.h"
+#include "economy/waterway.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map.h"
-#include "logic/map_objects/tribes/carrier.h"
+#include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
@@ -39,9 +39,9 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 1;
 
-void MapRoaddataPacket::read(FileSystem& fs,
+void MapWaterwaydataPacket::read(FileSystem& fs,
                              EditorGameBase& egbase,
                              bool const skip,
                              MapObjectLoader& mol) {
@@ -50,7 +50,7 @@ void MapRoaddataPacket::read(FileSystem& fs,
 
 	FileRead fr;
 	try {
-		fr.open(fs, "binary/road_data");
+		fr.open(fs, "binary/waterway_data");
 	} catch (...) {
 		return;
 	}
@@ -64,22 +64,19 @@ void MapRoaddataPacket::read(FileSystem& fs,
 				Serial const serial = fr.unsigned_32();
 				try {
 					Game& game = dynamic_cast<Game&>(egbase);
-					Road& road = mol.get<Road>(serial);
-					if (mol.is_object_loaded(road))
+					Waterway& ww = mol.get<Waterway>(serial);
+					if (mol.is_object_loaded(ww))
 						throw GameDataError("already loaded");
 					PlayerNumber player_index = fr.unsigned_8();
 					if (!(0 < player_index && player_index <= nr_players)) {
 						throw GameDataError("Invalid player number: %i.", player_index);
 					}
 
-					road.set_owner(egbase.get_player(player_index));
-					road.wallet_ = fr.unsigned_32();
-					road.last_wallet_charge_ = fr.unsigned_32();
-					road.type_ = fr.unsigned_32();
+					ww.set_owner(egbase.get_player(player_index));
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
 						try {
-							road.flags_[0] = &mol.get<Flag>(flag_0_serial);
+							ww.flags_[0] = &mol.get<Flag>(flag_0_serial);
 						} catch (const WException& e) {
 							throw GameDataError("flag 0 (%u): %s", flag_0_serial, e.what());
 						}
@@ -87,92 +84,69 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					{
 						uint32_t const flag_1_serial = fr.unsigned_32();
 						try {
-							road.flags_[1] = &mol.get<Flag>(flag_1_serial);
+							ww.flags_[1] = &mol.get<Flag>(flag_1_serial);
 						} catch (const WException& e) {
 							throw GameDataError("flag 1 (%u): %s", flag_1_serial, e.what());
 						}
 					}
-					road.flagidx_[0] = fr.unsigned_32();
-					road.flagidx_[1] = fr.unsigned_32();
+					ww.flagidx_[0] = fr.unsigned_32();
+					ww.flagidx_[1] = fr.unsigned_32();
 
-					road.cost_[0] = fr.unsigned_32();
-					road.cost_[1] = fr.unsigned_32();
+					ww.cost_[0] = fr.unsigned_32();
+					ww.cost_[1] = fr.unsigned_32();
 					Path::StepVector::size_type const nr_steps = fr.unsigned_16();
 					if (!nr_steps)
 						throw GameDataError("nr_steps = 0");
-					Path p(road.flags_[0]->get_position());
+					Path p(ww.flags_[0]->get_position());
 					for (Path::StepVector::size_type i = nr_steps; i; --i)
 						try {
 							p.append(map, read_direction_8(&fr));
 						} catch (const WException& e) {
 							throw GameDataError("step #%" PRIuS ": %s", nr_steps - i, e.what());
 						}
-					road.set_path(egbase, p);
+					ww.set_path(egbase, p);
 
-					//  Now that all rudimentary data is set, init this road. Then
+					//  Now that all rudimentary data is set, init this waterway. Then
 					//  overwrite the initialization values.
-					road.link_into_flags(game);
+					ww.link_into_flags(game);
 
-					road.idle_index_ = fr.unsigned_32();
+					ww.idle_index_ = fr.unsigned_32();
 
-					uint32_t const count = fr.unsigned_32();
-					if (!count)
-						throw GameDataError("no carrier slot");
-
-					for (uint32_t i = 0; i < count; ++i) {
-						Carrier* carrier = nullptr;
-						Request* carrier_request = nullptr;
-
-						if (uint32_t const carrier_serial = fr.unsigned_32())
-							try {
-								carrier = &mol.get<Carrier>(carrier_serial);
-							} catch (const WException& e) {
-								throw GameDataError("carrier (%u): %s", carrier_serial, e.what());
-							}
-						else {
-							carrier = nullptr;
+					uint32_t fleet_serial = fr.unsigned_32();
+					uint32_t ferry_serial = fr.unsigned_32();
+					if (fleet_serial > 0) {
+						try {
+							ww.fleet_ = &mol.get<Fleet>(fleet_serial);
+						} catch (const WException& e) {
+							throw GameDataError("fleet (%u): %s", fleet_serial, e.what());
 						}
-
-						if (fr.unsigned_8()) {
-							(carrier_request =
-							    new Request(road, 0, Road::request_carrier_callback, wwWORKER))
-							   ->read(fr, game, mol);
-						} else {
-							carrier_request = nullptr;
+					} else {
+						ww.fleet_ = nullptr;
+					}
+					if (ferry_serial > 0) {
+						try {
+							ww.ferry_ = &mol.get<Ferry>(ferry_serial);
+						} catch (const WException& e) {
+							throw GameDataError("ferry (%u): %s", ferry_serial, e.what());
 						}
-						bool const carrier_type = fr.unsigned_32() == 2;
-
-						if (i < road.carrier_slots_.size() &&
-						    road.carrier_slots_[i].second_carrier == carrier_type) {
-							assert(!road.carrier_slots_[i].carrier.get(egbase));
-
-							road.carrier_slots_[i].carrier = carrier;
-							if (carrier || carrier_request) {
-								delete road.carrier_slots_[i].carrier_request;
-								road.carrier_slots_[i].carrier_request = carrier_request;
-							}
-						} else {
-							delete carrier_request;
-							if (carrier) {
-								carrier->reset_tasks(dynamic_cast<Game&>(egbase));
-							}
-						}
+					} else {
+						ww.ferry_ = nullptr;
 					}
 
-					mol.mark_object_as_loaded(road);
+					mol.mark_object_as_loaded(ww);
 				} catch (const WException& e) {
-					throw GameDataError("road %u: %s", serial, e.what());
+					throw GameDataError("waterway %u: %s", serial, e.what());
 				}
 			}
 		} else {
-			throw UnhandledVersionError("MapRoaddataPacket", packet_version, kCurrentPacketVersion);
+			throw UnhandledVersionError("MapWaterwaydataPacket", packet_version, kCurrentPacketVersion);
 		}
 	} catch (const WException& e) {
-		throw GameDataError("roaddata: %s", e.what());
+		throw GameDataError("waterwaydata: %s", e.what());
 	}
 }
 
-void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos) {
+void MapWaterwaydataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver& mos) {
 	FileWrite fw;
 
 	fw.unsigned_16(kCurrentPacketVersion);
@@ -180,7 +154,7 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 	const Map& map = egbase.map();
 	const Field& fields_end = map[map.max_index()];
 	for (Field const* field = &map[0]; field < &fields_end; ++field)
-		if (upcast(Road const, r, field->get_immovable()))
+		if (upcast(Waterway const, r, field->get_immovable()))
 			if (!mos.is_object_saved(*r)) {
 				assert(mos.is_object_known(*r));
 
@@ -189,11 +163,6 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				//  First, write PlayerImmovable Stuff
 				//  Theres only the owner
 				fw.unsigned_8(r->owner().player_number());
-
-				fw.unsigned_32(r->wallet_);
-				fw.unsigned_32(r->last_wallet_charge_);
-
-				fw.unsigned_32(r->type_);
 
 				//  serial of flags
 				assert(mos.is_object_known(*r->flags_[0]));
@@ -215,27 +184,12 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 
 				fw.unsigned_32(r->idle_index_);  //  TODO(unknown): do not save this
 
-				fw.unsigned_32(r->carrier_slots_.size());
+				fw.unsigned_32(r->fleet_ ? mos.get_object_file_index(*r->fleet_) : 0);
+				fw.unsigned_32(r->ferry_ ? mos.get_object_file_index(*r->ferry_) : 0);
 
-				for (const Road::CarrierSlot& temp_slot : r->carrier_slots_) {
-					if (Carrier const* const carrier = temp_slot.carrier.get(egbase)) {
-						assert(mos.is_object_known(*carrier));
-						fw.unsigned_32(mos.get_object_file_index(*carrier));
-					} else {
-						fw.unsigned_32(0);
-					}
-
-					if (temp_slot.carrier_request) {
-						fw.unsigned_8(1);
-						temp_slot.carrier_request->write(fw, dynamic_cast<Game&>(egbase), mos);
-					} else {
-						fw.unsigned_8(0);
-					}
-					fw.unsigned_32(temp_slot.second_carrier ? 2 : 1);
-				}
 				mos.mark_object_as_saved(*r);
 			}
 
-	fw.write(fs, "binary/road_data");
+	fw.write(fs, "binary/waterway_data");
 }
 }
