@@ -2,9 +2,9 @@
 
 set -e
 
-if [ "$#" == "0" ]; then
-	echo "Usage: $0 <bzr_repo_directory>"
-	exit 1
+if [ "$#" == "0" ] || [ -z "$2" ]; then
+   echo "Usage: $0 <gcc|clang> <bzr_repo_directory>"
+   exit 1
 fi
 
 # Check if the SDK for the minimum build target is available.
@@ -17,7 +17,18 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
 fi
 
-SOURCE_DIR=$1
+if [ "$1" == "gcc" ]; then
+   C_COMPILER="gcc-7"
+   CXX_COMPILER="g++-7"
+elif [ "$1" == "clang" ]; then
+   C_COMPILER="clang"
+   CXX_COMPILER="clang++"
+else
+   echo "Usage: $0 <gcc|clang> <bzr_repo_directory>"
+   exit 1
+fi
+
+SOURCE_DIR=$2
 REVISION=`bzr revno $SOURCE_DIR`
 DESTINATION="WidelandsRelease"
 TYPE="Release"
@@ -33,6 +44,7 @@ echo "   Version:     $WLVERSION"
 echo "   Destination: $DESTINATION"
 echo "   Type:        $TYPE"
 echo "   macOS:       $OSX_MIN_VERSION"
+echo "   Compiler:    $1"
 echo ""
 
 function MakeDMG {
@@ -125,8 +137,8 @@ function BuildWidelands() {
    export ICU_ROOT="$(brew --prefix icu4c)"
 
    cmake $SOURCE_DIR -G Ninja \
-      -DCMAKE_C_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/gcc-7" \
-      -DCMAKE_CXX_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/g++-7" \
+      -DCMAKE_C_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/$C_COMPILER" \
+      -DCMAKE_CXX_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/$CXX_COMPILER" \
       -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="$OSX_MIN_VERSION" \
       -DCMAKE_OSX_SYSROOT:PATH="$SDK_DIRECTORY" \
       -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
