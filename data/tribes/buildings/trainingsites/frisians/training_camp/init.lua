@@ -87,8 +87,7 @@ tribes:new_trainingsite_type {
       min_level = 0,
       max_level = 0,
       food = {
-         {"bread_frisians"},
-         {"beer"},
+         {"bread_frisians", "beer"},
          {"smoked_fish", "smoked_meat"},
       },
       weapons = {
@@ -99,8 +98,7 @@ tribes:new_trainingsite_type {
       min_level = 0,
       max_level = 0,
       food = {
-         {"bread_frisians"},
-         {"beer"},
+         {"bread_frisians", "beer"},
          {"smoked_fish", "smoked_meat"},
       },
       weapons = {
