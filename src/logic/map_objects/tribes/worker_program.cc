@@ -754,7 +754,7 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 
 /* RST
 buildferry
-^^^^^^^^^
+^^^^^^^^^^
 .. function:: buildferry
 
    Adds a bob (usually an animal) to the map at the worker's current location.

@@ -87,6 +87,9 @@ struct RoadBase : public PlayerImmovable {
 		return idle_index_;
 	}
 
+	void presplit(Game&, Coords split);
+	virtual void postsplit(Game&, Flag&);
+
 	virtual bool notify_ware(Game&, FlagId);
 
 	virtual void assign_carrier(Carrier&, uint8_t);

@@ -320,7 +320,7 @@ void FieldActionWindow::add_buttons_auto() {
 			if (can_act) {
 				add_button(buildbox, "build_road", pic_buildroad, &FieldActionWindow::act_buildroad,
 				           _("Build road"));
-				if (map_.can_reach_by_water(node_) && !flag->has_waterway()) {
+				if (map_.can_reach_by_water(node_) && map_.get_waterway_max_length() >= 2) {
 					add_button(buildbox, "build_waterway", pic_buildwaterway, &FieldActionWindow::act_buildwaterway,
 						       _("Build waterway"));
 	           }

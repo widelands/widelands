@@ -121,7 +121,7 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, 
 
 	set_flag_position(coords);
 
-	upcast(Road, road, egbase.map().get_immovable(coords));
+	upcast(RoadBase, road, egbase.map().get_immovable(coords));
 	upcast(Game, game, &egbase);
 
 	if (game) {
@@ -223,11 +223,6 @@ void Flag::detach_building(EditorGameBase& egbase) {
 void Flag::attach_road(int32_t const dir, RoadBase* const road) {
 	assert(!roads_[dir - 1] || roads_[dir - 1] == road);
 
-	if (roads_[dir - 1] != road && Waterway::is_waterway_descr(&road->descr()) && has_waterway()) {
-		log("Refused to attach a waterway to a flag that already has a waterway\n");
-		return;
-	}
-
 	roads_[dir - 1] = road;
 	roads_[dir - 1]->set_economy(get_economy());
 }
@@ -297,18 +292,17 @@ RoadBase* Flag::get_roadbase(Flag& flag) {
 		if (RoadBase* const road = roads_[i])
 			if (&road->get_flag(RoadBase::FlagStart) == &flag || &road->get_flag(RoadBase::FlagEnd) == &flag)
 				return road;
-
 	return nullptr;
 }
 
 Road* Flag::get_road(uint8_t const dir) const {
-	if (get_roadbase(dir - 1) != nullptr && Road::is_road_descr(&get_roadbase(dir - 1)->descr())) {
+	if (roads_[dir - 1] && Road::is_road_descr(&roads_[dir - 1]->descr())) {
 	    return dynamic_cast<Road*>(roads_[dir - 1]);
 	}
 	return nullptr;
 }
 Waterway* Flag::get_waterway(uint8_t const dir) const {
-	if (get_roadbase(dir - 1) != nullptr && Waterway::is_waterway_descr(&get_roadbase(dir - 1)->descr())) {
+	if (roads_[dir - 1] && Waterway::is_waterway_descr(&roads_[dir - 1]->descr())) {
 	    return dynamic_cast<Waterway*>(roads_[dir - 1]);
 	}
 	return nullptr;

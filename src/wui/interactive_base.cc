@@ -692,7 +692,7 @@ void InteractiveBase::finish_build_waterway() {
 		upcast(Game, game, &egbase());
 
 		// TODO(Nordfriese): Check whether start and end flag are in the same economy,
-		// and whether the path exceeds the tribe-specific maximum length
+		// and whether the path exceeds the map-specific maximum length
 
 		// Build the path as requested
 		if (game)
@@ -767,8 +767,8 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 		buildwaterway_->append(map, path);
 		// TODO(Nordfriese): We should instead refuse to append if the resulting path
 		// would be longer than the tribe-specific limit
-		if (buildwaterway_->get_nsteps() > player.tribe().waterway_max_length())
-			buildwaterway_->truncate(player.tribe().waterway_max_length());
+		if (buildwaterway_->get_nsteps() > map.get_waterway_max_length())
+			buildwaterway_->truncate(map.get_waterway_max_length());
 	}
 
 	{
@@ -941,7 +941,7 @@ void InteractiveBase::roadb_add_overlay() {
 }
 
 // TODO(Nordfriese): This should not show overlays for fields we cannot
-// reach because of the tribe-specific waterway length limit
+// reach because of the map-specific waterway length limit
 void InteractiveBase::waterwayb_add_overlay() {
 	assert(buildwaterway_);
 	assert(waterway_building_overlays_.road_previews.empty());

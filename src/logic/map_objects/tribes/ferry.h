@@ -47,8 +47,8 @@ private:
 };
 
 /**
- * Ferry is a very special worker that rows along waterways.
- * It works exactly like a worker, except that it swims.
+ * A ferry is a very special worker that rows along waterways.
+ * It works exactly like a carrier, except that it swims.
  */
 struct Ferry : public Carrier {
 	friend struct MapBobdataPacket;
@@ -63,6 +63,9 @@ struct Ferry : public Carrier {
 	void set_economy(Game&, Economy* e);
 
 	Fleet* get_fleet() const;
+
+	Waterway* get_destination(Game& game) const;
+	void set_destination(Game& game, Waterway* ww);
 
 	void init_auto_task(Game& game) override;
 	void start_task_unemployed(Game&);
@@ -85,13 +88,19 @@ private:
 	void row_update(Game&, State&);
 
 protected:
-	struct Loader : public Worker::Loader {
+	struct Loader : public Carrier::Loader {
 	public:
 		Loader() {
 		}
+		void load(FileRead&) override;
 	protected:
 		const Task* get_task(const std::string& name) override;
 	};
+
+	Loader* create_loader() override;
+
+public:
+	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
 }
 

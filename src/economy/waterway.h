@@ -54,6 +54,8 @@ struct Waterway : public RoadBase {
 
 	static Waterway& create(EditorGameBase&, Flag& start, Flag& end, const Path&);
 
+	void postsplit(Game&, Flag&) override;
+
 	bool notify_ware(Game& game, FlagId flagid);
 
 	void remove_worker(Worker&);
@@ -62,6 +64,9 @@ struct Waterway : public RoadBase {
 	void request_ferry_callback(Game&, Ferry*);
 
 	Fleet* get_fleet() const;
+
+protected:
+	void cleanup(EditorGameBase&) override;
 
 private:
 	friend struct Fleet;

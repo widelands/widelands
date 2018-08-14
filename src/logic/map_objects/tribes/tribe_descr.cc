@@ -177,7 +177,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		geologist_ = add_special_worker(table.get_string("geologist"));
 		soldier_ = add_special_worker(table.get_string("soldier"));
 		ferry_ = add_special_worker(table.get_string("ferry"));
-		waterway_max_length_ = table.get_int("waterway_max_length");
 
 		const std::string shipname = table.get_string("ship");
 		try {
@@ -335,9 +334,6 @@ DescriptionIndex TribeDescr::refinedlog() const {
 DescriptionIndex TribeDescr::granite() const {
 	assert(tribes_.ware_exists(granite_));
 	return granite_;
-}
-uint32_t TribeDescr::waterway_max_length() const {
-	return waterway_max_length_;
 }
 
 const std::vector<DescriptionIndex>& TribeDescr::trainingsites() const {

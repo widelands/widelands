@@ -212,6 +212,18 @@ void RoadBase::cleanup(EditorGameBase& egbase) {
 	PlayerImmovable::cleanup(egbase);
 }
 
+/**
+ * A flag has been placed that splits this road. This function is called before
+ * the new flag initializes. We remove markings to avoid interference with the
+ * flag.
+ */
+void RoadBase::presplit(Game& game, Coords) {
+	unmark_map(game);
+}
+
+void RoadBase::postsplit(Game&, Flag&) {
+}
+
 void RoadBase::assign_carrier(Carrier&, uint8_t) {
 }
 

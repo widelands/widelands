@@ -21,6 +21,7 @@
 
 #include "economy/fleet.h"
 #include "economy/waterway.h"
+#include "logic/game_data_error.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/path.h"
 #include "logic/player.h"
@@ -143,8 +144,7 @@ void Ferry::row_update(Game& game, State&) {
 		molog("[row]: Reached the destination but it is no longer there\n");
 		delete destination_;
 		destination_ = nullptr;
-		pop_task(game);
-		return;
+		return pop_task(game);
 	}
 	if (start_task_movepath(game, *destination_, 0, descr().get_right_walk_anims(does_carry_ware())))
 		return;
@@ -180,6 +180,21 @@ bool Ferry::init_fleet() {
 	return fleet->init(get_owner()->egbase());
 }
 
+Waterway* Ferry::get_destination(Game& game) const {
+	return dynamic_cast<Waterway*>(game.map().get_immovable(*destination_));
+}
+
+void Ferry::set_destination(Game& game, Waterway* ww) {
+	destination_ = nullptr;
+	set_location(nullptr);
+	if (ww) {
+		start_task_row(game, ww);
+	}
+	else {
+		send_signal(game, "cancel");
+	}
+}
+
 /**
  * Create a new ferry
  */
@@ -187,11 +202,55 @@ Bob& FerryDescr::create_object() const {
 	return *new Ferry(*this);
 }
 
+/*
+ * Load/save support
+ */
+
+constexpr uint8_t kCurrentPacketVersion = 1;
+
 const Bob::Task* Ferry::Loader::get_task(const std::string& name) {
 	if (name == "unemployed")
 		return &taskUnemployed;
 	if (name == "row")
 		return &taskRow;
-	return Worker::Loader::get_task(name);
+	return Carrier::Loader::get_task(name);
 }
+
+void Ferry::Loader::load(FileRead& fr) {
+	Carrier::Loader::load(fr);
+	try {
+		uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
+			Ferry& ferry = get<Ferry>();
+			if (fr.unsigned_8()) {
+				int16_t dest_x = fr.signed_16();
+				int16_t dest_y = fr.signed_16();
+				ferry.destination_ = new Coords(dest_x, dest_y);
+			}
+			else {
+				ferry.destination_ = nullptr;
+			}
+		} else {
+			throw UnhandledVersionError("Ferry", packet_version, kCurrentPacketVersion);
+		}
+	} catch (const WException& e) {
+		throw wexception("loading ferry: %s", e.what());
+	}
+}
+
+void Ferry::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
+	Carrier::do_save(egbase, mos, fw);
+
+	fw.unsigned_8(kCurrentPacketVersion);
+	fw.unsigned_8(destination_ ? 1 : 0);
+	if (destination_) {
+		fw.signed_16(destination_->x);
+		fw.signed_16(destination_->y);
+	}
+}
+
+Ferry::Loader* Ferry::create_loader() {
+	return new Loader;
+}
+
 }

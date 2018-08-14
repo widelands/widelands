@@ -500,6 +500,30 @@ void Fleet::request_ferry(Waterway* waterway) {
 	waterway->set_fleet(this);
 }
 
+void Fleet::cancel_ferry_request(Game& game, Waterway* waterway) {
+	for (Ferry* ferry : ferries_) {
+		if (ferry->get_destination(game) == waterway) {
+			ferry->set_destination(game, nullptr);
+			return;
+		}
+	}
+	pending_ferry_requests_.erase(std::find(pending_ferry_requests_.begin(), pending_ferry_requests_.end(), waterway));
+}
+
+void Fleet::rerout_ferry_request(Game& game, Waterway* oldww, Waterway* newww) {
+	for (Ferry* ferry : ferries_) {
+		if (ferry->get_destination(game) == oldww) {
+			ferry->set_destination(game, newww);
+			return;
+		}
+	}
+	const auto iterator = std::find(pending_ferry_requests_.begin(), pending_ferry_requests_.end(), oldww);
+	if (iterator == pending_ferry_requests_.end())
+		return;
+	pending_ferry_requests_.insert(iterator, newww);
+	pending_ferry_requests_.erase(iterator);
+}
+
 struct StepEvalFindPorts {
 	struct Target {
 		uint32_t idx;

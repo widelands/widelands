@@ -473,6 +473,9 @@ public:
 	// Visible for testing.
 	void set_size(uint32_t w, uint32_t h);
 
+	uint32_t get_waterway_max_length() const;
+	void set_waterway_max_length(uint32_t max_length);
+
 private:
 	void recalc_border(const FCoords&);
 	void recalc_brightness(const FCoords&);
@@ -526,6 +529,8 @@ private:
 
 	PortSpacesSet port_spaces_;
 	bool allows_seafaring_;
+
+	uint32_t waterway_max_length_;
 
 	Objectives objectives_;
 

@@ -91,6 +91,7 @@ public:
 	int get_width(lua_State*);
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
+	int get_waterway_max_length(lua_State*);
 
 	/*
 	 * Lua methods
@@ -100,6 +101,7 @@ public:
 	int recalculate(lua_State*);
 	int recalculate_seafaring(lua_State*);
 	int set_port_space(lua_State*);
+	int set_waterway_max_length(lua_State*);
 
 	/*
 	 * C methods
@@ -133,7 +135,6 @@ public:
 	int get_carrier(lua_State*);
 	int get_carrier2(lua_State*);
 	int get_ferry(lua_State*);
-	int get_waterway_max_length(lua_State*);
 	int get_descname(lua_State*);
 	int get_immovables(lua_State*);
 	int get_geologist(lua_State*);

@@ -72,8 +72,7 @@ struct Road : public RoadBase {
 		bool second_carrier;
 	};
 
-	void presplit(Game&, Coords split);
-	void postsplit(Game&, Flag&);
+	void postsplit(Game&, Flag&) override;
 
 	void update_wallet_chargetime(Game& game);
 	void charge_wallet(Game& game);

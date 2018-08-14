@@ -71,7 +71,9 @@ Map::Map()
      width_(0),
      height_(0),
      pathfieldmgr_(new PathfieldManager),
-     allows_seafaring_(false) {
+     allows_seafaring_(false),
+     // NOCOM: This is for testing only. Set to 0 when this is handled by map loading.
+     waterway_max_length_(6) {
 }
 
 Map::~Map() {
@@ -401,6 +403,19 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 	memset(fields_.get(), 0, sizeof(Field) * w * h);
 
 	pathfieldmgr_->set_size(w * h);
+}
+
+/*
+ * Getter and setter for the highest permitted length of a waterway on this map.
+ * A value of 0 or 1 means no waterways can be built.
+ * A value of -1 means there is no length restriction.
+ */
+uint32_t Map::get_waterway_max_length() const {
+	return waterway_max_length_;
+}
+
+void Map::set_waterway_max_length(uint32_t max_length) {
+	waterway_max_length_ = max_length;
 }
 
 /*

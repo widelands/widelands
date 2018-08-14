@@ -111,7 +111,6 @@ public:
 	DescriptionIndex rawlog() const;
 	DescriptionIndex refinedlog() const;
 	DescriptionIndex granite() const;
-	uint32_t waterway_max_length() const;
 
 	const std::vector<DescriptionIndex>& trainingsites() const;
 	const std::vector<DescriptionIndex>& worker_types_without_cost() const;
@@ -205,7 +204,6 @@ private:
 	DescriptionIndex rawlog_;      // Simple log
 	DescriptionIndex refinedlog_;  // Refined log, e.g. wood or blackwood
 	DescriptionIndex granite_;     // Granite
-	uint32_t waterway_max_length_;
 	std::vector<DescriptionIndex> worker_types_without_cost_;
 	std::vector<DescriptionIndex> trainingsites_;
 	// Order and positioning of wares in the warehouse display

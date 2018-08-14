@@ -439,7 +439,7 @@ Flag& Player::force_flag(const FCoords& c) {
 		if (upcast(Flag, existing_flag, immovable)) {
 			if (existing_flag->get_owner() == this)
 				return *existing_flag;
-		} else if (!dynamic_cast<Road const*>(immovable))  //  A road is OK. A waterway isn't.
+		} else if (!dynamic_cast<RoadBase const*>(immovable))  //  A road or waterway is OK
 			immovable->remove(egbase());                    //  Make room for the flag.
 	}
 	MapRegion<Area<FCoords>> mr(map, Area<FCoords>(c, 1));
@@ -517,13 +517,14 @@ Road& Player::force_road(const Path& path) {
 }
 
 Waterway* Player::build_waterway(const Path& path) {
-	if (path.get_nsteps() > tribe_.waterway_max_length()) {
+	const Map& map = egbase().map();
+
+	if (path.get_nsteps() > map.get_waterway_max_length()) {
 		log("%i: Refused to build a waterway because it is too long. Permitted length %i, actual length %i.",
-				player_number(), tribe_.waterway_max_length(), path.get_nsteps());
+				player_number(), map.get_waterway_max_length(), path.get_nsteps());
 		return nullptr;
 	}
 
-	const Map& map = egbase().map();
 	FCoords fc = map.get_fcoords(path.get_start());
 	if (upcast(Flag, start, fc.field->get_immovable())) {
 		if (upcast(Flag, end, map.get_immovable(path.get_end()))) {
