@@ -2,6 +2,8 @@
 
 set -e
 
+USAGE="Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
+
 if [ "$1" == "gcc" ]; then
    C_COMPILER="gcc-7"
    CXX_COMPILER="g++-7"
@@ -11,7 +13,7 @@ elif [ "$1" == "clang" ]; then
    CXX_COMPILER="clang++"
    COMPILER=$(clang --version | grep "clang")
 else
-   echo "Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
+   echo $USAGE
    exit 1
 fi
 
@@ -20,15 +22,25 @@ if [ "$2" == "debug" ]; then
 elif [ "$2" == "release" ]; then
    TYPE="Release"
 else
-   echo "Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
+   echo $USAGE
    exit 1
 fi
 
 if [ -z "$3" ]; then
-   echo "Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
+   echo $USAGE
    exit 1
 else
    SOURCE_DIR=$3
+fi
+
+# This is necessary to avoid linking errors when compiling with Clang in debug
+if [ "$1" == "clang" ] && [ "$2" == "debug" ]; then
+   ASANLIB=$(echo "int main(void){return 0;}" | xcrun clang -fsanitize=address -xc -o/dev/null -v - 2>&1 |   tr ' ' '\n' | grep libclang_rt.asan_osx_dynamic.dylib)
+   mkdir "@rpath"
+   ln -fs "$ASANLIB" "@rpath/"
+elif [ "$1" == "gcc" ] && [ "$2" == "debug" ]; then
+   echo "debug is currently only support with clang"
+   exit 1
 fi
 
 # Check if the SDK for the minimum build target is available.
@@ -73,7 +85,7 @@ function MakeDMG {
    if [ "$TYPE" == "Release" ]; then
       hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
    elif [ "$TYPE" == "Debug" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION_$TYPE.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_${WLVERSION}_${TYPE}.dmg"
    fi
 }
 
