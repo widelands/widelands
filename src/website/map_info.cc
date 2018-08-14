@@ -36,6 +36,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
+#include "sound/sound_handler.h"
 
 using namespace Widelands;
 
@@ -50,8 +51,30 @@ void initialize() {
 	g_fs = new LayeredFileSystem();
 	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
 
+	// We don't really need graphics or sound here, but we will get error messages
+	// when they aren't initialized
 	g_gr = new Graphic();
 	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
+
+	g_sound_handler.init();
+	g_sound_handler.nosound_ = true;
+}
+
+// Cleanup before program end
+void cleanup() {
+	g_sound_handler.shutdown();
+
+	if (g_gr) {
+		delete g_gr;
+		g_gr = nullptr;
+	}
+
+	if (g_fs) {
+		delete g_fs;
+		g_fs = nullptr;
+	}
+
+	SDL_Quit();
 }
 
 }  // namespace
@@ -142,9 +165,12 @@ int main(int argc, char** argv) {
 			write_string("}\n");
 			fw.write(*in_out_filesystem, (map_file + ".json").c_str());
 		}
+		egbase.cleanup_objects();
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
+		cleanup();
 		return 1;
 	}
+	cleanup();
 	return 0;
 }
