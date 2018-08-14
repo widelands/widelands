@@ -36,48 +36,9 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
-#include "sound/sound_handler.h"
+#include "website/website_common.h"
 
 using namespace Widelands;
-
-namespace {
-
-// Setup the static objects Widelands needs to operate and initializes systems.
-void initialize() {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
-	}
-
-	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
-
-	// We don't really need graphics or sound here, but we will get error messages
-	// when they aren't initialized
-	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
-
-	g_sound_handler.init();
-	g_sound_handler.nosound_ = true;
-}
-
-// Cleanup before program end
-void cleanup() {
-	g_sound_handler.shutdown();
-
-	if (g_gr) {
-		delete g_gr;
-		g_gr = nullptr;
-	}
-
-	if (g_fs) {
-		delete g_fs;
-		g_fs = nullptr;
-	}
-
-	SDL_Quit();
-}
-
-}  // namespace
 
 int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
