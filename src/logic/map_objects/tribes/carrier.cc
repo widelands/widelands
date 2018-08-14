@@ -421,7 +421,6 @@ Load/save support
 
 ==============================
 */
-
 constexpr uint8_t kCurrentPacketVersion = 2;
 
 Carrier::Loader::Loader() {
@@ -431,7 +430,6 @@ void Carrier::Loader::load(FileRead& fr) {
 	Worker::Loader::load(fr);
 
 	try {
-
 		uint8_t packet_version = fr.unsigned_8();
 		if (packet_version == kCurrentPacketVersion) {
 			Carrier& carrier = get<Carrier>();

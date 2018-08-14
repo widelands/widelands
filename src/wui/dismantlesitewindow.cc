@@ -28,14 +28,14 @@ DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
                                          Widelands::DismantleSite& ds,
                                          bool avoid_fastclick)
    : BuildingWindow(parent, reg, ds, avoid_fastclick), dismantle_site_(&ds), progress_(nullptr) {
-	init(avoid_fastclick);
+	init(avoid_fastclick, false);
 }
 
-void DismantleSiteWindow::init(bool avoid_fastclick) {
+void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(igbase()->egbase());
 	assert(dismantle_site != nullptr);
 
-	BuildingWindow::init(avoid_fastclick);
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
