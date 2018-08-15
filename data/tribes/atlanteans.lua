@@ -48,8 +48,6 @@ dirname = path.dirname(__file__)
 --
 --    **ferry**: The internal name of the tribe's ferry.
 --
---    **waterway_max_length**: The longest distance this tribe's ferry can travel.
---
 --    **port**: The internal name of the tribe's port building. This unit needs to be defined in the ``buildings`` table too.
 tribes:new_tribe {
    name = "atlanteans",
@@ -81,8 +79,6 @@ tribes:new_tribe {
          "tribes/images/atlanteans/waterway_0.png",
       },
    },
-
-   waterway_max_length = 6,
 
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.

@@ -32,8 +32,6 @@ tribes:new_tribe {
       },
    },
 
-   waterway_max_length = 5,
-
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
    -- Each subtable is a column in the wares windows.

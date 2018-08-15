@@ -587,7 +587,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					const MapObjectDescr* map_object_descr;
 					if (const BaseImmovable* base_immovable = f.field->get_immovable()) {
 						map_object_descr = &base_immovable->descr();
-						if (Road::is_road_descr(map_object_descr))
+						if (Road::is_road_descr(map_object_descr) || Waterway::is_waterway_descr(map_object_descr))
 							map_object_descr = nullptr;
 						else if (upcast(Building const, building, base_immovable))
 							if (building->get_position() != f)
@@ -665,7 +665,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 
 				{  //  edges
 					if (f_seen | bl_seen) {
-						f_player_field.r_sw = 0;
+						f_player_field.r_sw = f.field->get_road(WALK_SW);
 					} else if (f_everseen | bl_everseen) {
 						//  The player has seen the SouthWest edge but does not see
 						//  it now. Load his information about this edge from file.
@@ -677,7 +677,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						}
 					}
 					if (f_seen | br_seen) {
-						f_player_field.r_se = 0;
+						f_player_field.r_se = f.field->get_road(WALK_SE);
 					} else if (f_everseen | br_everseen) {
 						//  The player has seen the SouthEast edge but does not see
 						//  it now. Load his information about this edge from file.
@@ -689,7 +689,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						}
 					}
 					if (f_seen | r_seen) {
-						f_player_field.r_e = 0;
+						f_player_field.r_e = f.field->get_road(WALK_E);
 					} else if (f_everseen | r_everseen) {
 						//  The player has seen the      East edge but does not see
 						//  it now. Load his information about this edge from file.
@@ -817,7 +817,7 @@ inline static void write_unseen_immovable(MapObjectData const* map_object_data,
                                           FileWrite& immovables_file) {
 	MapObjectDescr const* const map_object_descr = map_object_data->map_object_descr;
 	const ConstructionsiteInformation& csi = map_object_data->csi;
-	assert(!Road::is_road_descr(map_object_descr));
+	assert(!Road::is_road_descr(map_object_descr) && !Waterway::is_waterway_descr(map_object_descr));
 	uint8_t immovable_kind = 255;
 
 	if (!map_object_descr)

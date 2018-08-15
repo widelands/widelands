@@ -847,14 +847,8 @@ void show_field_action(InteractiveBase* const ibase,
 		// if user clicked on the same field again, build a flag
 		if (target == ibase->get_build_waterway_end()) {
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
-			bool flag = target != ibase->get_build_waterway_start() &&
-					(player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG);
-			if (flag)
-				if (upcast(Widelands::PlayerImmovable, x, map.get_immovable(target)))
-					if (upcast(Widelands::PlayerImmovable, y, map.get_immovable(ibase->get_build_waterway_start())))
-						if (x->get_economy() != y->get_economy())
-							flag = false;
-			w.add_buttons_waterway(flag);
+			w.add_buttons_waterway(target != ibase->get_build_waterway_start() &&
+					(player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG));
 			w.init();
 			return;
 		}
@@ -871,17 +865,16 @@ void show_field_action(InteractiveBase* const ibase,
 		// a waterway, so it's required to be in the same economy as the starting point
 		if (upcast(const Widelands::PlayerImmovable, i, map.get_immovable(target))) {
 			bool finish = false;
-			upcast(Widelands::Flag, start, map.get_immovable(ibase->get_build_waterway_start()));
 			if (upcast(const Widelands::Flag, flag, i)) {
-				finish = flag->get_economy() == start->get_economy();
-			} else if (upcast(const Widelands::Road, road, i)) {
-				if (road->get_economy() == start->get_economy() &&
-						(player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG)) {
+				finish = true;
+			} else if (upcast(const Widelands::RoadBase, road, i)) {
+				if (player->get_buildcaps(target) & Widelands::BUILDCAPS_FLAG) {
 					upcast(Game, game, &player->egbase());
 					game->send_player_build_flag(player->player_number(), target);
 					finish = true;
 				}
 			}
+
 			if (finish) {
 				ibase->finish_build_waterway();
 				// We are done, so we close the window.

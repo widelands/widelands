@@ -56,18 +56,17 @@ const Bob::Task Ferry::taskUnemployed = {
 
 void Ferry::start_task_unemployed(Game& game) {
 	push_task(game, taskUnemployed);
-	top_state().ivar1 = 0;
 }
 
 void Ferry::unemployed_update(Game& game, State&) {
 	if (get_signal().size()) {
 		molog("[unemployed]: interrupted by signal '%s'\n", get_signal().c_str());
-		pop_task(game);
 		if (get_signal() == "row") {
+			signal_handled();
+			pop_task(game);
 			push_task(game, taskRow);
-			top_state().ivar1 = 0;
+			return schedule_act(game, 10);
 		}
-		return;
 	}
 
 	bool move = false;
@@ -75,14 +74,10 @@ void Ferry::unemployed_update(Game& game, State&) {
 		molog("[unemployed]: we are on location\n");
 		move = true;
 	}
-	else if (Bob* b = get_position().field->get_first_bob()) {
-		if (b->get_next_bob()) {
-			molog("[unemployed]: we are on other bob\n");
-			move = true;
-		}
+	else if (get_position().field->get_first_bob()->get_next_bob()) {
+		molog("[unemployed]: we are on other bob\n");
+		move = true;
 	}
-	else
-		throw wexception("This ferry is not on the field where it is!");
 
 	if (move) {
 		for (uint8_t i = 0; i < 4; i++)
@@ -93,8 +88,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 		return start_task_idle(game, descr().get_animation("idle"), 50);
 	}
 
-	// ferries are a bit unresponsive, long delay
-	return start_task_idle(game, descr().get_animation("idle"), 900);
+	return start_task_idle(game, descr().get_animation("idle"), 50);
 }
 
 const Bob::Task Ferry::taskRow = {
@@ -150,7 +144,7 @@ void Ferry::row_update(Game& game, State&) {
 		return;
 	molog("[row]: Can't find path to the waterway for some reason!\n");
 	// try again later
-	return schedule_act(game, 900);
+	return schedule_act(game, 50);
 }
 
 void Ferry::init_auto_task(Game& game) {

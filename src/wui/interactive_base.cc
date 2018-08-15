@@ -691,8 +691,7 @@ void InteractiveBase::finish_build_waterway() {
 	if (buildwaterway_->get_nsteps()) {
 		upcast(Game, game, &egbase());
 
-		// TODO(Nordfriese): Check whether start and end flag are in the same economy,
-		// and whether the path exceeds the map-specific maximum length
+		// TODO(Nordfriese): Check whether the path exceeds the map-specific maximum length
 
 		// Build the path as requested
 		if (game)
@@ -700,7 +699,34 @@ void InteractiveBase::finish_build_waterway() {
 		else
 			egbase().get_player(waterway_build_player_)->build_waterway(*new Widelands::Path(*buildwaterway_));
 
-		// Shift and Ctrl modifiers are ignored, because waterways cannot be split
+		if (allow_user_input() && (SDL_GetModState() & KMOD_CTRL)) {
+			//  place flags
+			const Map& map = egbase().map();
+			const std::vector<Coords>& c_vector = buildwaterway_->get_coords();
+			std::vector<Coords>::const_iterator const first = c_vector.begin() + 2;
+			std::vector<Coords>::const_iterator const last = c_vector.end() - 2;
+
+			if (SDL_GetModState() & KMOD_SHIFT) {
+				for //  start to end
+					(std::vector<Coords>::const_iterator it = first;
+					 it <= last;
+					 ++it)
+					if (game)
+						game->send_player_build_flag(waterway_build_player_, map.get_fcoords(*it));
+					else
+						egbase().get_player(waterway_build_player_)->build_flag(map.get_fcoords(*it));
+
+			} else {
+				for //  end to start
+					(std::vector<Coords>::const_iterator it = last;
+					 first <= it;
+					 --it)
+					if (game)
+						game->send_player_build_flag(waterway_build_player_, map.get_fcoords(*it));
+					else
+						egbase().get_player(waterway_build_player_)->build_flag(map.get_fcoords(*it));
+			}
+		}
 	}
 
 	delete buildwaterway_;

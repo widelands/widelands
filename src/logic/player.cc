@@ -528,11 +528,6 @@ Waterway* Player::build_waterway(const Path& path) {
 	FCoords fc = map.get_fcoords(path.get_start());
 	if (upcast(Flag, start, fc.field->get_immovable())) {
 		if (upcast(Flag, end, map.get_immovable(path.get_end()))) {
-			if (start->get_economy() != end->get_economy()) {
-				log("%i: Refused to build a waterway because the flags are in different economies.", player_number());
-				return nullptr;
-			}
-
 			//  Verify ownership of the path.
 			const int32_t laststep = path.get_nsteps() - 1;
 			for (int32_t i = 0; i < laststep; ++i) {
