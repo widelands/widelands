@@ -167,7 +167,10 @@ function BuildWidelands() {
    export SDL2MIXERDIR="$(brew --prefix sdl2_mixer)"
    export SDL2TTFDIR="$(brew --prefix sdl2_ttf)"
    export BOOST_ROOT="$(brew --prefix boost)"
-   export ICU_ROOT="$(brew --prefix icu4c)"
+   
+   # Not needed for CMake 3.12 or above
+   # see cmake --help-policy CMP0074
+   #export ICU_ROOT="$(brew --prefix icu4c)"
 
    cmake $SOURCE_DIR -G Ninja \
       -DCMAKE_C_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/$C_COMPILER" \
