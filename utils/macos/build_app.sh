@@ -154,7 +154,7 @@ EOF
 }
 
 function BuildWidelands() {
-   PREFIX_PATH="$(brew --prefix libpng)"
+   PREFIX_PATH=";$(brew --prefix gettext)"
    PREFIX_PATH+=";$(brew --prefix jpeg)"
    PREFIX_PATH+=";$(brew --prefix libpng)"
    PREFIX_PATH+=";$(brew --prefix python)"
@@ -162,6 +162,7 @@ function BuildWidelands() {
    PREFIX_PATH+=";/usr/local"
    PREFIX_PATH+=";/usr/local/Homebrew"
 
+   export PATH="/usr/local/opt/gettext/bin:$PATH"
    export SDL2DIR="$(brew --prefix sdl2)"
    export SDL2IMAGEDIR="$(brew --prefix sdl2_image)"
    export SDL2MIXERDIR="$(brew --prefix sdl2_mixer)"
