@@ -30,11 +30,12 @@ struct ProductionSiteWindow : public BuildingWindow {
 	ProductionSiteWindow(InteractiveGameBase& parent,
 	                     UI::UniqueWindow::Registry& reg,
 	                     Widelands::ProductionSite&,
-	                     bool avoid_fastclick);
+	                     bool avoid_fastclick,
+	                     bool workarea_preview_wanted);
 
 protected:
 	void think() override;
-	void init(bool avoid_fastclick) override;
+	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 	void evict_worker();
 
 private:
