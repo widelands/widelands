@@ -3,44 +3,49 @@
 set -e
 
 USAGE="Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
-
-if [ "$1" == "gcc" ]; then
-   C_COMPILER="gcc-7"
-   CXX_COMPILER="g++-7"
-   COMPILER=$(gcc-7 --version | grep "GCC")
-elif [ "$1" == "clang" ]; then
-   C_COMPILER="clang"
-   CXX_COMPILER="clang++"
-   COMPILER=$(clang --version | grep "clang")
-else
-   echo $USAGE
-   exit 1
-fi
-
-if [ "$2" == "debug" ]; then
-   TYPE="Debug"
-elif [ "$2" == "release" ]; then
-   TYPE="Release"
-else
-   echo $USAGE
-   exit 1
-fi
+USE_ASAN="OFF"
 
 if [ -z "$3" ]; then
    echo $USAGE
    exit 1
 else
    SOURCE_DIR=$3
-fi
-
-# This is necessary to avoid linking errors when compiling with Clang in debug
-if [ "$1" == "clang" ] && [ "$2" == "debug" ]; then
-   ASANLIB=$(echo "int main(void){return 0;}" | xcrun clang -fsanitize=address -xc -o/dev/null -v - 2>&1 |   tr ' ' '\n' | grep libclang_rt.asan_osx_dynamic.dylib)
-   mkdir "@rpath"
-   ln -fs "$ASANLIB" "@rpath/"
-elif [ "$1" == "gcc" ] && [ "$2" == "debug" ]; then
-   echo "debug is currently only support with clang"
-   exit 1
+   case "$2" in
+   debug|Debug)
+      TYPE="Debug"
+      if [ "$1" == "clang" ]; then
+         USE_ASAN="ON"
+         # Necessary to avoid linking errors later on
+         ASANLIB=$(echo "int main(void){return 0;}" | xcrun clang -fsanitize=address \
+         -xc -o/dev/null -v - 2>&1 |   tr ' ' '\n' | grep libclang_rt.asan_osx_dynamic.dylib)
+         mkdir -p "@rpath"
+         ln -fs "$ASANLIB" "@rpath/"
+      fi
+      ;;
+   release|Release)
+      TYPE="Release"
+      ;;
+   *)
+      echo $USAGE
+      exit 1
+      ;;
+   esac
+   case "$1" in
+   clang)
+      C_COMPILER="clang"
+      CXX_COMPILER="clang++"
+      COMPILER=$(clang --version | grep "clang")
+      ;;
+   gcc)
+      C_COMPILER="gcc-7"
+      CXX_COMPILER="g++-7"
+      COMPILER=$(gcc-7 --version | grep "GCC")
+      ;;
+   *)
+      echo $USAGE
+      exit 1
+      ;;
+   esac
 fi
 
 # Check if the SDK for the minimum build target is available.
@@ -174,7 +179,8 @@ function BuildWidelands() {
       -DCMAKE_BUILD_TYPE:STRING="$TYPE" \
       -DGLEW_INCLUDE_DIR:PATH="$(brew --prefix glew)/include" \
       -DGLEW_LIBRARY:PATH="$(brew --prefix glew)/lib/libGLEW.dylib" \
-      -DCMAKE_PREFIX_PATH:PATH="${PREFIX_PATH}"
+      -DCMAKE_PREFIX_PATH:PATH="${PREFIX_PATH}" \
+      -DOPTION_ASAN="$USE_ASAN"
    ninja
 
    echo "Done building."
