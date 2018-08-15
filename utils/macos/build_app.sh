@@ -5,11 +5,7 @@ set -e
 USAGE="Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
 USE_ASAN="OFF"
 
-if [ -z "$3" ]; then
-   echo $USAGE
-   exit 1
-else
-   SOURCE_DIR=$3
+if [ ! -z "$3" ]; then
    case "$2" in
    debug|Debug)
       TYPE="Debug"
@@ -46,6 +42,14 @@ else
       exit 1
       ;;
    esac
+   if [ ! -z $(type -p ccache) ]; then
+      C_COMPILER="$(brew --prefix ccache)/libexec/$C_COMPILER"
+      CXX_COMPILER="$(brew --prefix ccache)/libexec/$CXX_COMPILER"
+   fi
+   SOURCE_DIR=$3
+else
+   echo $USAGE
+   exit 1
 fi
 
 # Check if the SDK for the minimum build target is available.
@@ -161,8 +165,8 @@ function BuildWidelands() {
    PREFIX_PATH+=";$(brew --prefix zlib)"
    PREFIX_PATH+=";/usr/local"
    PREFIX_PATH+=";/usr/local/Homebrew"
-
-   export PATH="/usr/local/opt/gettext/bin:$PATH"
+   
+   export PATH="$(brew --prefix gettext)/bin:$PATH"
    export SDL2DIR="$(brew --prefix sdl2)"
    export SDL2IMAGEDIR="$(brew --prefix sdl2_image)"
    export SDL2MIXERDIR="$(brew --prefix sdl2_mixer)"
@@ -174,8 +178,8 @@ function BuildWidelands() {
    #export ICU_ROOT="$(brew --prefix icu4c)"
 
    cmake $SOURCE_DIR -G Ninja \
-      -DCMAKE_C_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/$C_COMPILER" \
-      -DCMAKE_CXX_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/$CXX_COMPILER" \
+      -DCMAKE_C_COMPILER:FILEPATH="$C_COMPILER" \
+      -DCMAKE_CXX_COMPILER:FILEPATH="$CXX_COMPILER" \
       -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="$OSX_MIN_VERSION" \
       -DCMAKE_OSX_SYSROOT:PATH="$SDK_DIRECTORY" \
       -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
