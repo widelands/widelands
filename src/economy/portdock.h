@@ -113,6 +113,8 @@ public:
 	void add_shippingitem(Game&, Worker&);
 	void update_shippingitem(Game&, Worker&);
 
+	void shipping_item_arrived(Game&, ShippingItem&);
+	void shipping_item_returned(Game&, ShippingItem&);
 	void ship_arrived(Game&, Ship&);
 
 	void log_general_info(const EditorGameBase&) override;

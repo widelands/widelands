@@ -34,6 +34,7 @@
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/warehouse.h"
+#include "logic/path.h"
 #include "logic/player.h"
 #include "logic/widelands_geometry_io.h"
 #include "map_io/map_object_loader.h"
@@ -302,18 +303,27 @@ void PortDock::update_shippingitem(Game& game, std::vector<ShippingItem>::iterat
 }
 
 /**
- * A ship has arrived at the dock. Clear all items designated for this dock,
- * and load the ship.
+ * Receive shipping item from unloading ship.
+ * Called by ship code.
+ */
+void PortDock::shipping_item_arrived(Game& game, ShippingItem& si) {
+	si.set_location(game, warehouse_);
+	si.end_shipping(game);
+}
+
+/**
+ * Receive shipping item from departing ship.
+ * Called by ship code.
+ */
+void PortDock::shipping_item_returned(Game& game, ShippingItem& si) {
+	si.set_location(game, this);
+	waiting_.push_back(si);
+}
+
+/**
+ * A ship has arrived at the dock. Load it.
  */
 void PortDock::ship_arrived(Game& game, Ship& ship) {
-	std::vector<ShippingItem> items_brought_by_ship;
-	ship.withdraw_items(game, *this, items_brought_by_ship);
-
-	for (ShippingItem& shipping_item : items_brought_by_ship) {
-		shipping_item.set_location(game, warehouse_);
-		shipping_item.end_shipping(game);
-	}
-
 	if (expedition_ready_) {
 		assert(expedition_bootstrap_ != nullptr);
 
@@ -337,34 +347,71 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
 			cancel_expedition(game);
-			return fleet_->update(game);
+			fleet_->update(game);
+			return;
 		}
 	}
 
-	if (ship.get_nritems() < ship.descr().get_capacity() && !waiting_.empty()) {
-		uint32_t nrload =
-		   std::min<uint32_t>(waiting_.size(), ship.descr().get_capacity() - ship.get_nritems());
+	// decide where the arrived ship will go next
+	PortDock* next_port = fleet_->find_next_dest(game, ship, this);
+	if (!next_port) {
+		return; // no need to go anywhere
+	}
 
-		while (nrload--) {
-			// Check if the item has still a valid destination
-			if (waiting_.back().get_destination(game)) {
-				// Destination is valid, so we load the item onto the ship
-				ship.add_item(game, waiting_.back());
+	ship.set_destination(game, *next_port);
+	// unload any wares/workers onboard the departing ship which are not favored by next dest
+	ship.unload_unfit_items(game, *this, *next_port);
+
+	// then load the remaining capacity of the departing ship with relevant items
+	uint32_t rest_capacity = ship.descr().get_capacity() - ship.get_nritems();
+
+	// firstly load the items which go to chosen dest, while also checking for items with invalid dest
+	uint32_t dst = 0;
+	for (ShippingItem& si : waiting_) {
+		PortDock* itemdest = si.get_destination(game);
+		if (itemdest) { // valid dest
+			if (rest_capacity == 0) {
+				waiting_[dst++] = si; // keep the item here
 			} else {
-				// The item has no valid destination anymore, so we just carry it
-				// back in the warehouse
-				waiting_.back().set_location(game, warehouse_);
-				waiting_.back().end_shipping(game);
+				if (itemdest == next_port) { // the item goes to chosen dest
+					ship.add_item(game, si); // load it
+					--rest_capacity;
+				} else { // different dest
+					waiting_[dst++] = si; // keep it here for now
+				}
 			}
-			waiting_.pop_back();
-		}
-
-		if (waiting_.empty()) {
-			set_need_ship(game, false);
+		} else { // invalid dest
+			// carry the item back in the warehouse
+			si.set_location(game, warehouse_);
+			si.end_shipping(game);
 		}
 	}
+	waiting_.resize(dst);
 
-	fleet_->update(game);
+	if (rest_capacity > 0) { // there is still capacity
+		// load any items favored by the chosen dest
+		dst = 0;
+		for (ShippingItem& si : waiting_) {
+			if (rest_capacity == 0) {
+				waiting_[dst++] = si; // keep the item here
+			} else {
+				if (fleet_->is_path_favourable(*this, *next_port, *si.get_destination(game))) {
+					ship.add_item(game, si);
+					--rest_capacity;
+				} else { // item is not favored by the chosen dest
+					// spare it from getting trapped inside the wrong ship
+					waiting_[dst++] = si;
+				}
+			}
+		}
+		waiting_.resize(dst);
+	}
+
+	if (waiting_.empty()) {
+		set_need_ship(game, false);
+	} else {
+		fleet_->update(game);
+	}
 }
 
 void PortDock::set_need_ship(Game& game, bool need) {

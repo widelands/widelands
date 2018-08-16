@@ -306,6 +306,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 		molog("ship_update: Arrived at dock %u\n", dst->serial());
 		lastdock_ = dst;
 		destination_ = nullptr;
+		withdraw_items(game, *dst);
 		dst->ship_arrived(game, *this);
 		start_task_idle(game, descr().main_animation(), 250);
 		Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
@@ -745,14 +746,33 @@ void Ship::add_item(Game& game, const ShippingItem& item) {
 	items_.back().set_location(game, this);
 }
 
-void Ship::withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& items) {
+/**
+ * Unload all items designated for given dock or for no dock.
+ */
+void Ship::withdraw_items(Game& game, PortDock& pd) {
 	uint32_t dst = 0;
-	for (uint32_t src = 0; src < items_.size(); ++src) {
-		PortDock* destination = items_[src].get_destination(game);
-		if (!destination || destination == &pd) {
-			items.push_back(items_[src]);
+	for (ShippingItem& si : items_) {
+		PortDock* itemdest = si.get_destination(game);
+		if (!itemdest || itemdest == &pd) {
+			pd.shipping_item_arrived(game, si);
 		} else {
-			items_[dst++] = items_[src];
+			items_[dst++] = si;
+		}
+	}
+	items_.resize(dst);
+}
+
+/**
+ * Unload all items not favored by given next dest.
+ * Assert all items for current portdock have already been unloaded.
+ */
+void Ship::unload_unfit_items(Game& game, PortDock& here, PortDock& nextdest) {
+	uint32_t dst = 0;
+	for (ShippingItem& si : items_) {
+		if (fleet_->is_path_favourable(here, nextdest, *si.get_destination(game))) {
+			items_[dst++] = si;
+		} else {
+			here.shipping_item_returned(game, si);
 		}
 	}
 	items_.resize(dst);

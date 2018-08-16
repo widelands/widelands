@@ -152,6 +152,8 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
+	bool is_path_favourable(PortDock& start, PortDock& middle, PortDock& finish);
+	PortDock* find_next_dest(Game&, Ship&, PortDock* const cur_port);
 };
 
 }  // namespace Widelands

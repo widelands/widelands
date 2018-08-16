@@ -126,8 +126,9 @@ struct Ship : Bob {
 		return items_[idx];
 	}
 
-	void withdraw_items(Game& game, PortDock& pd, std::vector<ShippingItem>& items);
-	void add_item(Game&, const ShippingItem& item);
+	void add_item(Game&, const ShippingItem&);
+	void withdraw_items(Game&, PortDock&);
+	void unload_unfit_items(Game&, PortDock& here, PortDock& nextdest);
 
 	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
 	// kExpeditionPortspaceFound or kExpeditionColonizing in the first states, the owning player of

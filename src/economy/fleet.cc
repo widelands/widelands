@@ -647,23 +647,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 
 	molog("Fleet::act\n");
 
-	// We need to calculate what ship is to be sent to which port,
-	// so we will score all pairs: idle ship : port.
-	// For the score of each pair, we consider:
-	// - count of wares onboard that ship for that port
-	// - count of wares waiting at that port
-	// - distance between that ship and that port
-
-	// At the end we must know if the request of any port for a ship
-	// is still unsatisfied, to schedule new run of this function.
-	// This list holds all waiting ports and we remove every port where we send a ship.
-	std::list<uint16_t> waiting_ports;
-	for (uint16_t pi = 0; pi < ports_.size(); ++pi) {
-		if (ports_[pi]->get_need_ship()) {
-			waiting_ports.push_back(pi);
-		}
-	}
-
+	// For each idle ship, we need to calculate to which port to send it.
 	for (Ship* s : ships_) {
 		if (s->get_destination(game)) {
 			continue; // has already destination
@@ -671,79 +655,136 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		if (s->get_ship_state() != Ship::ShipStates::kTransport) {
 			continue;  // in expedition obviously
 		}
-		uint32_t const max_capacity = s->descr().get_capacity();
-		
-		float best_score = 0;
-		uint16_t best_pi = -1; // best port's index
 
-		for (uint16_t pi = 0; pi < ports_.size(); ++pi) {
-			PortDock* p = ports_[pi];
-			if (!p->get_need_ship() && !s->get_nritems()) {
-				continue; // empty ship to empty port
-			}
-			
-			uint16_t items_count = 0;
-			for (uint16_t i = 0; i < s->get_nritems(); ++i) {
-				PortDock* dst = s->items_[i].get_destination(game);
-				if (p == dst) {
-					++items_count;
-				}
-			}
-
-			// here we get distance ship->port
-			// possibilities are:
-			// - we are in port and it is the same as target port
-			// - we are in other port, then we use get_dock() function to fetch precalculated path
-			// - if above fails, we calculate path "manually"
-			int16_t route_length = -1;
-
-			PortDock* current_portdock = get_dock(game, s->get_position());
-			if (current_portdock) {  // we try to use precalculated paths of game
-
-				if (current_portdock == p) {
-					// we are in the same portdock
-					route_length = 0;
-				} else {
-					// we are in a different portdock
-					Path tmp_path;
-					if (get_path(*current_portdock, *p, tmp_path)) {
-						route_length = tmp_path.get_nsteps();
-					}
-				}
-			}
-
-			if (route_length == -1) {
-				// most probably the ship is not in a portdock (should not happen frequently)
-				route_length = s->calculate_sea_route(game, *p);
-			}
-
-			float score = (items_count + 1) * (items_count + std::min(max_capacity, p->get_need_ship()));
-			score = score * (1 - route_length / (score + route_length));
-			if (score > best_score) {
-				best_score = score;
-				best_pi = pi;
-			}
-		}
-
-		if (best_score <= 0) {
+		PortDock* cur_port = get_dock(game, s->get_position());
+		PortDock* next_port = find_next_dest(game, *s, cur_port);
+		if (!next_port) {
 			continue; // no need to move this ship
 		}
 
 		// now actual setting destination for ship
-		PortDock* best_port = ports_[best_pi];
-		s->set_destination(game, *best_port);
+		s->set_destination(game, *next_port);
 		molog("... ship %u sent to port %u, wares onboard: %2d, the port is asking for a ship: %s\n",
-		      s->serial(), best_port->serial(), s->get_nritems(), best_port->get_need_ship() ? "yes" : "no");
-
-		waiting_ports.remove(best_pi); // remove the port from waiting_ports. see right below
+		      s->serial(), next_port->serial(), s->get_nritems(), next_port->get_need_ship() ? "yes" : "no");
 	}
 
-	if (!waiting_ports.empty()) {
-		molog("... there are %" PRIuS " ports requesting ship(s) we cannot satisfy yet\n",
-		      waiting_ports.size());
+	// check for remaining waiting ports, to reschedule update
+	uint16_t waiting_ports = ports_.size();
+	for (PortDock* p : ports_) {
+		if (!p->get_need_ship()) {
+			--waiting_ports;
+			continue;
+		}
+
+		for (Ship* s : ships_) {
+			if (s->get_destination(game) == p) {
+				--waiting_ports;
+				break;
+			}
+		}
+	}
+
+	if (waiting_ports > 0) {
+		molog("... there are %u ports requesting ship(s) we cannot satisfy yet\n", waiting_ports);
 		schedule_act(game, 5000);  // retry next time
 		act_pending_ = true;
 	}
+}
+
+/**
+ * For the given three consecutive ports, decide if their path is favourable or not.
+ * \return true/false for yes/no
+ */
+bool Fleet::is_path_favourable(PortDock& start, PortDock& middle, PortDock& finish) {
+	if (&middle != &finish) {
+		Path path_start_to_finish;
+		Path path_middle_to_finish;
+
+		assert(get_path(start, finish, path_start_to_finish));
+		if (get_path(middle, finish, path_middle_to_finish)) {
+			if (path_middle_to_finish.get_nsteps() > path_start_to_finish.get_nsteps()) {
+				return false;
+			}
+		}
+	}
+	return true; // default
+}
+
+/**
+ * For the given ship, go through all ports of this fleet
+ * and find the one with the best score.
+ * \return that port
+ */
+PortDock* Fleet::find_next_dest(Game& game, Ship& ship, PortDock* const cur_port) {
+	uint32_t const max_capacity = ship.descr().get_capacity();
+	PortDock* best_port = nullptr;
+	float best_score = 0;
+
+	for (PortDock* p : ports_) {
+		if (!ship.get_nritems() && !p->get_need_ship()) {
+			continue; // empty ship to empty port
+		}
+
+		float score = 0;
+		WareInstance* ware;
+		Worker* worker;
+
+		// score for wares/workers onboard that ship for that port
+		for (uint16_t i = 0; i < ship.get_nritems(); ++i) {
+			ShippingItem& si = ship.items_[i];
+			if (si.get_destination(game) == p) {
+				si.get(game, &ware, &worker);
+				if (ware) {
+					score += 1; // TODO: increase by ware's importance
+				} else { // worker
+					score += 4;
+				}
+			}
+		}
+
+		if (cur_port) { // we are in a port
+			// score for wares/workers waiting at that port
+			for (uint16_t i = 0; i < cur_port->count_waiting(); ++i) {
+				ShippingItem& si = cur_port->waiting_[i];
+				if (si.get_destination(game) == p) {
+					si.get(game, &ware, &worker);
+					if (ware) {
+						score += 1; // TODO: increase by ware's importance
+					} else { // worker
+						score += 4;
+					}
+				}
+			}
+		}
+
+		// here we get distance ship->port
+		int16_t route_length = -1;
+
+		if (cur_port) { // we are in a port
+			if (p == cur_port) { // same port
+				route_length = 0;
+			} else { // different port, try to use precalculated path
+				Path tmp_path;
+				if (get_path(*cur_port, *p, tmp_path)) {
+					route_length = tmp_path.get_nsteps();
+				}
+			}
+		}
+
+		if (route_length == -1) { // above failed, so we calculate path "manually"
+			// most probably the ship is not in a port (should not happen frequently)
+			route_length = ship.calculate_sea_route(game, *p);
+		}
+
+		score = (score + 1) * (score + std::min(max_capacity, p->get_need_ship()));
+		score = score * (1 - route_length / (score + route_length));
+		if (score > best_score) {
+			best_score = score;
+			best_port = p;
+		}
+	}
+
+	return best_port;
 }
 
 void Fleet::log_general_info(const EditorGameBase& egbase) {
