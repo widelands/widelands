@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-20 08:46+0000\n"
+"POT-Creation-Date: 2018-07-28 07:19+0000\n"
+"PO-Revision-Date: 2018-07-29 15:02+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -421,7 +421,7 @@ msgstr "Mar a gheibh thu taic"
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr ""
+msgstr "Gu nàdarra, cha bhi e furasta gach uile rud a dh’innis mi dhut a chur an cuimhne. Mar eisimpleir, ’s dòcha gu bheil thu a’ faighneachd dhìot fhèin, “Carson a dh’fheumas mi greimeagan airson saighdearan fhaighinn?”"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:209
 msgid ""
@@ -429,83 +429,83 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr ""
+msgstr "Nuair a bhios tu air cluich gu tric, bidh cuimhne agad air a h-uile càil. Ach gu ruige sin no mur eil thu cinnteach a thaobh feumalachdan is comasan do threubha agus ciamar a tha na togalaichean is an luchd-obrach aige ag obair, nì thu rannsachadh air sin ann an cobhair is leabhar-eòlais an treubha am broinn a’ gheama gun duilgheadas."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 msgid ""
 "This encyclopedia can be accessed via the help button at the bottom right."
-msgstr ""
+msgstr "Gheibh thu greim air an leabhar-eòlais le putan na cobharach taobh deas aig a’ bhonn."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 msgid "Please open the in-game help, and I’ll explain its contents to you."
-msgstr ""
+msgstr "Fosgail cobhair a’ gheama agus mìnichidh mi a susbaint dhut."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "Open the in-game help window"
-msgstr ""
+msgstr "Fosgail uinneag na cobharach"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid ""
 "The encyclopedia window contains the in-game help and an encyclopedia of the"
 " tribe you’re currently playing."
-msgstr ""
+msgstr "Ann an uinneag an leabhair-eòlais, gheibh thu cobhair choitcheann leis a’ gheama agus leabhar-eòlais an treubha a tha thu a’ cluich an-dràsta."
 
 #. TRANSLATORS: "it" refers to the encyclopedia window
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:220
 msgid "Open it. You can access it via the button at the bottom of the screen."
-msgstr ""
+msgstr "Fosgail i. Gheibh thu greim oirre leis a’ phutan aig bonn na sgrìn."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:221
 msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr ""
+msgstr "Air neo inntrig gu dìreach i leis an iuchair “F1”."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "Encyclopedia details"
-msgstr ""
+msgstr "Mion-fhiosrachadh an leabhair-eòlais"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:229
 msgid "The Encyclopedia Categories"
-msgstr ""
+msgstr "Roinnean-seòrsa an leabhair-eòlais"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid "The encyclopedia has five tabs:"
-msgstr ""
+msgstr "Tha còig tabaichean aig an leabhar-eòlais:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:231
 msgid ""
 "The ‘General’ tab contains information about all the basic interface "
 "controls for Widelands. Furthermore, you can find tips that are relevant for"
 " your tribe there."
-msgstr ""
+msgstr "Air an taba “Coitcheann”, gheibh thu fiosrachadh mu stiùireadh bunasach na h-eadar-aghaidh aig Widelands. A bharrachd air sin, gheibh thu gliocasan a tha iomchaidh dhan treubh ann."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr ""
+msgstr "Seallaidh an taba “Batharan” fiosrachadh mu na batharan a dh’fheumas do threubh, a’ gabhail a-steach teacsa cobharach goirid, liosta dhe na togalaichean a shaothraicheas gach bathair, na batharan eile a dh’fheumas tu gus a dhèanamh agus càite an dèid am bathar a chaitheamh."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr ""
+msgstr "Seallaidh an taba “Luchd-obrach” fiosrachadh mu luchd-obrach do threubha air an aon dòigh sa chì thu airson nam batharan air an dàrna taba."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:234
 msgid ""
 "The ‘Buldings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "Air an taba “Togalaichean”, gheibh thu am fiosrachadh a dh’fheumas tu air togalaichean do threubha."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:235
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "Mu dheireadh thall, seallaidh an taba “Nithean do-ghluasad” fiosrachadh mu nithean do-ghluasad sònraichte a chuireas luchd-obrach do threubha air a’ mhapa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:236
 msgid "Now use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Nise, cleachd an leabhar-eòlais airson faighinn a-mach dè dh’fheumas tu gus saighdearan ùra a chruthachadh."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid ""
@@ -513,58 +513,58 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "Bidh saighdear feumach air sleagh fiodha agus clogaid – ’s urrainn dhut rannsachadh deireadh air thoiseach o seo a-mach feuch an lorg thu na batharan is na togalaichean a dh’fheumas tu airson nan nithean iomchaidh a thoirt dhan taigh-feachd far an dèid an saighdear a thrusadh. Nuair a bhios tu deiseil, cha leig thu leas ach uinneag an leabhair-eòlais a dhùnadh."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "Dèan rannsachadh air na batharan a dh’fheumas tu airson saighdearan a thrusadh"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:244
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr ""
+msgstr "Tagh an taba “Batharan” ar uinneag an leabhair-eòlais."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "Dèan rannsachadh air na dh’fheumas tu airson clogaid a shaothrachadh is air na dh’fheumas tu airson sleagh fiodha a shaothrachadh."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "Ma thogras tu, dèan rannsachadh eile air feumalachdan nam batharan fhèin a tha thu air rannsachadh."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:247
 msgid "Close the encyclopedia window when you are done."
-msgstr ""
+msgstr "Dùin uinneag an leabhar-eòlais nuair a bhios tu deiseil."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:252
 msgid "You closed the encyclopedia!"
-msgstr ""
+msgstr "Dhùin thu an leabhar-eòlais!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr ""
+msgstr "Tha thu air uinneag an leabhair-eòlais a dhùnadh ach cha do mhothaich mi gun robh thu a’ feuchainn ri faighinn a-mach dè na batharan a dh’fheumas tu airson saighdear a thrusadh. Am fosgail thu a-rithist i airson sin a dhèanamh?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:263
 msgid "Open the encyclopedia window again"
-msgstr ""
+msgstr "Fosgail uinneag an leabhair-eòlais a-rithist"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:265
 msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Dhùin thu uinneag an leabhair-eòlais gun rannsachadh sam bith. Ma tha thu eòlach air a h-uile rud mar-thà, tha thu làn di-beathte an t-oideachadh seo fhàgail uair sam bith."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr ""
+msgstr "Mur eil, feuch am fosgail thu uinneag an leabhair-eòlais a-rithist agus gun tagh thu an dàrna taba."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid "Priority Settings"

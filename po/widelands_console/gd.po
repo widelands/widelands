@@ -6,13 +6,13 @@
 # GunChleoc, 2016-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2016
-# GunChleoc, 2013-2016
+# GunChleoc, 2013-2016,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-05 17:07+0000\n"
-"PO-Revision-Date: 2018-05-05 17:10+0000\n"
+"POT-Creation-Date: 2018-07-28 07:19+0000\n"
+"PO-Revision-Date: 2018-07-29 14:17+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr "Sgrìobhaidh --<ainm-na-roghainn>=luach thairis air roghainn\nsam bith s
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr ""
+msgstr "                           An aire: Thèid an luach ùr a sgrìobhadh dhan fhaidhle config"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""
@@ -105,13 +105,13 @@ msgstr " --rolling_autosave=[...]  Cleachd an uiread de dh'fhaidhlichean seo air
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserver=[...]        Dèan ceangal ri meata-fhrithealaiche eile\n                           airson geama eadar-lìn."
 
 #: ../../src/wlapplication_messages.cc:84
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserverport=[...]    Àireamh puirt a’ mheata-fhrithealaiche\n                           airson geama eadar-lìn."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid "Sound options:"
@@ -208,7 +208,7 @@ msgstr " --yres=[...]              Àirde na h-uinneige ann am piogsailean."
 
 #: ../../src/wlapplication_messages.cc:135
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr ""
+msgstr " --maxfps=[5 ...]          Reat as motha nam frèamaichean lèirsinneach sa gheama."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
