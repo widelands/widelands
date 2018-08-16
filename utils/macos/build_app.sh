@@ -7,6 +7,16 @@ if [ "$#" == "0" ]; then
 	exit 1
 fi
 
+# Check if the SDK for the minimum build target is available.
+# If not, use the one for the installed macOS Version
+OSX_MIN_VERSION="10.7"
+SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_MIN_VERSION.sdk"
+if [ ! -d "$SDK_DIRECTORY" ]; then
+   OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
+   OSX_MIN_VERSION=$OSX_VERSION
+   SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
+fi
+
 SOURCE_DIR=$1
 REVISION=`bzr revno $SOURCE_DIR`
 DESTINATION="WidelandsRelease"
@@ -22,6 +32,7 @@ echo "   Source:      $SOURCE_DIR"
 echo "   Version:     $WLVERSION"
 echo "   Destination: $DESTINATION"
 echo "   Type:        $TYPE"
+echo "   macOS:       $OSX_MIN_VERSION"
 echo ""
 
 function MakeDMG {
@@ -62,6 +73,7 @@ function MakeAppPackage {
    CFBundleDisplayName = Widelands;
    CFBundleIdentifier = "org.widelands.wl";
    CFBundleVersion = "$WLVERSION";
+   CFBundleShortVersionString = "$WLVERSION";
    CFBundleInfoDictionaryVersion = "6.0";
    CFBundlePackageType = APPL;
    CFBundleSignature = wdld;
@@ -92,8 +104,8 @@ EOF
    CopyLibrary $(brew --prefix libvorbis)/lib/libvorbisfile.dylib
 
    $SOURCE_DIR/utils/macos/fix_dependencies.py \
-      $DESTINATION/Widelands.app/Contents/MacOS/widelands \
-      $DESTINATION/Widelands.app/Contents/MacOS/*.dylib
+   $DESTINATION/Widelands.app/Contents/MacOS/widelands \
+   $DESTINATION/Widelands.app/Contents/MacOS/*.dylib
 }
 
 function BuildWidelands() {
@@ -113,10 +125,10 @@ function BuildWidelands() {
    export ICU_ROOT="$(brew --prefix icu4c)"
 
    cmake $SOURCE_DIR -G Ninja \
-      -DCMAKE_C_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/gcc-6" \
-      -DCMAKE_CXX_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/g++-6" \
-      -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="10.7" \
-      -DCMAKE_OSX_SYSROOT:PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk" \
+      -DCMAKE_C_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/gcc-7" \
+      -DCMAKE_CXX_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/g++-7" \
+      -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="$OSX_MIN_VERSION" \
+      -DCMAKE_OSX_SYSROOT:PATH="$SDK_DIRECTORY" \
       -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
       -DCMAKE_OSX_ARCHITECTURES:STRING="x86_64" \
       -DCMAKE_BUILD_TYPE:STRING="$TYPE" \

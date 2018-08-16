@@ -92,7 +92,6 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     show_workarea_preview_(global_s.get_bool("workareapreview", true)),
      buildhelp_(false),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
@@ -203,6 +202,10 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 	return nullptr;
 }
 
+bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords) const {
+	return workarea_previews_.count(coords) == 1;
+}
+
 UniqueWindowHandler& InteractiveBase::unique_windows() {
 	return *unique_window_handler_;
 }
@@ -298,14 +301,14 @@ void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated
-void InteractiveBase::show_work_area(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
-	work_area_previews_[coords] = &workarea_info;
+void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
+	workarea_previews_[coords] = &workarea_info;
 }
 
 std::map<Coords, const Image*>
-InteractiveBase::get_work_area_overlays(const Widelands::Map& map) const {
+InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
 	std::map<Coords, const Image*> result;
-	for (const auto& pair : work_area_previews_) {
+	for (const auto& pair : workarea_previews_) {
 		const Coords& coords = pair.first;
 		const WorkareaInfo* workarea_info = pair.second;
 		WorkareaInfo::size_type wa_index;
@@ -343,8 +346,8 @@ InteractiveBase::get_work_area_overlays(const Widelands::Map& map) const {
 	return result;
 }
 
-void InteractiveBase::hide_work_area(const Widelands::Coords& coords) {
-	work_area_previews_.erase(coords);
+void InteractiveBase::hide_workarea(const Widelands::Coords& coords) {
+	workarea_previews_.erase(coords);
 }
 
 /**
