@@ -291,7 +291,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
 	const auto& road_building = road_building_overlays();
 	const auto& waterway_building = waterway_building_overlays();
-	const std::map<Widelands::Coords, const Image*> work_area_overlays = get_work_area_overlays(map);
+	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		auto* f = fields_to_draw->mutable_field(idx);
@@ -366,8 +366,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Draw work area previews.
 		{
-			const auto it = work_area_overlays.find(f->fcoords);
-			if (it != work_area_overlays.end()) {
+			const auto it = workarea_overlays.find(f->fcoords);
+			if (it != workarea_overlays.end()) {
 				blit_field_overlay(dst, *f, it->second,
 				                   Vector2i(it->second->width() / 2, it->second->height() / 2), scale);
 			}
@@ -430,7 +430,7 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(node_and_triangle.node)))
 			if (can_see(building->owner().player_number())) {
-				show_building_window(node_and_triangle.node, false);
+				show_building_window(node_and_triangle.node, false, false);
 				return;
 			}
 

@@ -121,7 +121,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	const uint32_t gametime = the_game.get_gametime();
 
 	const auto text_to_draw = get_text_to_draw();
-	const std::map<Widelands::Coords, const Image*> work_area_overlays = get_work_area_overlays(map);
+	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
@@ -138,8 +138,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		}
 
 		// Draw work area previews.
-		const auto it = work_area_overlays.find(field.fcoords);
-		if (it != work_area_overlays.end()) {
+		const auto it = workarea_overlays.find(field.fcoords);
+		if (it != workarea_overlays.end()) {
 			const Image* pic = it->second;
 			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
@@ -203,7 +203,7 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
 void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
 	if (is_a(Widelands::Building, egbase().map().get_immovable(node_and_triangle.node))) {
-		show_building_window(node_and_triangle.node, false);
+		show_building_window(node_and_triangle.node, false, false);
 		return;
 	}
 

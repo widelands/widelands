@@ -205,24 +205,6 @@ void Road::assign_carrier(Carrier& c, uint8_t slot) {
 }
 
 /**
- * Try to pick up a ware from the given flag.
- * \return true if a carrier has been sent on its way, false otherwise.
- */
-bool Road::notify_ware(Game& game, FlagId const flagid) {
-	// Iterate over all carriers and try to find one which will take the ware
-	for (CarrierSlot& slot : carrier_slots_) {
-		if (Carrier* const carrier = slot.carrier.get(game)) {
-			if (carrier->notify_ware(game, flagid)) {
-				// The carrier took the ware, so we're done
-				return true;
-			}
-		}
-	}
-	// No carrier took the ware
-	return false;
-}
-
-/**
  * The flag that splits this road has been initialized. Perform the actual
  * splitting.
  *
@@ -353,6 +335,25 @@ void Road::postsplit(Game& game, Flag& flag) {
 }
 
 /**
+ * Try to pick up a ware from the given flag.
+ * \return true if a carrier has been sent on its way, false otherwise.
+ */
+bool Road::notify_ware(Game& game, Flag& flag) {
+	FlagId flagid = &flag == flags_[RoadBase::FlagEnd] ? RoadBase::FlagEnd : RoadBase::FlagStart;
+	// Iterate over all carriers and try to find one which will take the ware
+	for (CarrierSlot& slot : carrier_slots_) {
+		if (Carrier* const carrier = slot.carrier.get(game)) {
+			if (carrier->notify_ware(game, flagid)) {
+				// The carrier took the ware, so we're done
+				return true;
+			}
+		}
+	}
+	// No carrier took the ware
+	return false;
+}
+
+/**
  * Update last_wallet_charge_ with the current gametime.
  */
 void Road::update_wallet_chargetime(Game& game) {
@@ -429,6 +430,6 @@ void Road::pay_for_building() {
 
 void Road::log_general_info(const EditorGameBase& egbase) {
 	PlayerImmovable::log_general_info(egbase);
-	molog("wallet_: %i\n", wallet_);
+	molog("wallet: %i\n", wallet_);
 }
 }  // namespace Widelands

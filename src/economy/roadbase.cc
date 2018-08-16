@@ -227,7 +227,7 @@ void RoadBase::postsplit(Game&, Flag&) {
 void RoadBase::assign_carrier(Carrier&, uint8_t) {
 }
 
-bool RoadBase::notify_ware(Game&, FlagId) {
+bool RoadBase::notify_ware(Game&, Flag&) {
 	return false;
 }
 

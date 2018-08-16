@@ -682,14 +682,15 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 	return 0;
 }
 
-/* RST
-	.. method:: new_market_type{table}
+// TODO(GunChleoc): add RST marker
+/*
+   .. method:: new_market_type{table}
 
-		Adds a new market building type. Takes a single argument, a table with
-		the descriptions. See :ref:`lua_tribes_buildings_markets` for detailed
-		documentation.
+      Adds a new market building type. Takes a single argument, a table with
+      the descriptions. See :ref:`lua_tribes_buildings_markets` for detailed
+      documentation.
 
-		:returns: :const:`0`
+      :returns: :const:`0`
 */
 int LuaTribes::new_market_type(lua_State* L) {
 	if (lua_gettop(L) != 2) {

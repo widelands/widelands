@@ -340,23 +340,7 @@ void GameMessageMenu::selected(uint32_t const t) {
 				   game.get_gametime(), player.player_number(), id));
 			}
 			centerviewbtn_->set_enabled(message->position());
-
-			// TODO(GunChleoc): Programming by exception is ugly, but we need try/catch here for
-			// saveloading.
-			// Revisit this when we delete the old font renderer.
-			try {
-				message_body.force_new_renderer();
-				message_body.set_text(as_message(message->heading(), message->body()));
-			} catch (const std::exception& e) {
-				log("Game Message Menu: falling back to old font renderer:\n%s\n%s\n",
-				    message->body().c_str(), e.what());
-				message_body.force_new_renderer(false);
-				message_body.set_text(
-				   (boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>%s<br></p>"
-				                  "<p font-size=8> <br></p></rt>%s") %
-				    message->heading() % message->body())
-				      .str());
-			}
+			message_body.set_text(as_message(message->heading(), message->body()));
 			update_archive_button_tooltip();
 			return;
 		}
@@ -498,11 +482,6 @@ void GameMessageMenu::filter_messages(Widelands::Message::Type const msgtype) {
 	case Widelands::Message::Type::kNoMessages:
 	case Widelands::Message::Type::kAllMessages:
 	case Widelands::Message::Type::kGameLogic:
-	case Widelands::Message::Type::kGeologistsCoal:
-	case Widelands::Message::Type::kGeologistsGold:
-	case Widelands::Message::Type::kGeologistsStones:
-	case Widelands::Message::Type::kGeologistsIron:
-	case Widelands::Message::Type::kGeologistsWater:
 	case Widelands::Message::Type::kEconomySiteOccupied:
 	case Widelands::Message::Type::kWarfareSiteDefeated:
 	case Widelands::Message::Type::kWarfareSiteLost:
@@ -592,11 +571,6 @@ std::string GameMessageMenu::display_message_type_icon(const Widelands::Message&
 		return "images/ui_basic/menu_help.png";
 	case Widelands::Message::Type::kNoMessages:
 	case Widelands::Message::Type::kAllMessages:
-	case Widelands::Message::Type::kGeologistsCoal:
-	case Widelands::Message::Type::kGeologistsGold:
-	case Widelands::Message::Type::kGeologistsStones:
-	case Widelands::Message::Type::kGeologistsIron:
-	case Widelands::Message::Type::kGeologistsWater:
 	case Widelands::Message::Type::kEconomySiteOccupied:
 	case Widelands::Message::Type::kWarfareSiteDefeated:
 	case Widelands::Message::Type::kWarfareSiteLost:

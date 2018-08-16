@@ -56,7 +56,7 @@ struct Waterway : public RoadBase {
 
 	void postsplit(Game&, Flag&) override;
 
-	bool notify_ware(Game& game, FlagId flagid);
+	bool notify_ware(Game& game, Flag& flag);
 
 	void remove_worker(Worker&);
 	void assign_carrier(Carrier&, uint8_t);

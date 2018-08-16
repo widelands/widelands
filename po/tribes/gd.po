@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-06-28 06:07+0000\n"
+"POT-Creation-Date: 2018-07-28 07:19+0000\n"
+"PO-Revision-Date: 2018-07-28 07:23+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -19,12 +19,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: gd\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/markets/barbarians/market/init.lua:14
-msgctxt "barbarians_building"
-msgid "Market"
-msgstr "Margaid"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
@@ -580,12 +574,12 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:51
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:64
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:59
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:70
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:62
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:49
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:57
@@ -655,7 +649,7 @@ msgstr "freumhagan a bhuain"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:87
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:79
 msgid "No Fields"
 msgstr "Dìth achaidh"
@@ -666,7 +660,7 @@ msgstr "Dìth achaidh"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:78
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:77
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:88
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:92
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:80
 msgid "Out of Fields"
 msgstr "Chan eil achadh ann"
@@ -1134,7 +1128,7 @@ msgstr "Ceàrdach leaghadair"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:80
 msgid "smelting iron"
 msgstr "iarann a leaghadh"
 
@@ -1142,7 +1136,7 @@ msgstr "iarann a leaghadh"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:84
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:87
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:92
 msgid "smelting gold"
 msgstr "òr a leaghadh"
 
@@ -2389,7 +2383,7 @@ msgstr "Ceàrdach armachd mhòr"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:75
 msgid "forging a broadsword"
-msgstr ""
+msgstr "claidheamh-leathann a dhèanamh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword
 #. because ...
@@ -2498,7 +2492,7 @@ msgstr "piocaid a dhèanamh"
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
 msgid "making needles"
-msgstr ""
+msgstr "snàthadan a dhèanamh"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:7
@@ -2549,7 +2543,7 @@ msgid ""
 "The clay digger working at this clay pit can’t find any level ground in his "
 "work area. Consider dismantling this clay pit and rebuilding it somewhere "
 "else."
-msgstr ""
+msgstr "Cha do lorg an digear-criadha a tha ag obair aig an t-sùil-chriadha seo talamh rèidh taobh a-staigh an raoin-obrach. Bu chòir dhut an sùil-chriadha seo a thoirt às a chèile ’s tè ùr a thogail am baideigin eile."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:7
@@ -2618,16 +2612,16 @@ msgid "Farm"
 msgstr "Tuathanas"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:68
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:72
 msgid "planting barley"
 msgstr "eòrna a chur"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:76
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:80
 msgid "harvesting barley"
 msgstr "eòrna a bhuain"
 
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:93
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -2767,20 +2761,20 @@ msgid "Recycling Center"
 msgstr "Ionad ath-chuairteachaidh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:85
 msgctxt "frisians_building"
 msgid "recycling fur"
 msgstr "bian ath-chuairteachadh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:96
 msgctxt "frisians_building"
 msgid "recycling iron"
 msgstr "iarann ath-chuairteachadh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:107
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
 msgstr "iarann ’s òr ath-chuairteachadh"
@@ -2796,7 +2790,7 @@ msgctxt "frisians_building"
 msgid ""
 "The reed farmer working at this reed farm has no cleared soil to plant his "
 "seeds."
-msgstr ""
+msgstr "Chan eil tìr fosgailte ann ach an cuireadh an tuathanach-cuilce a tha ag obair aig an tuathanas-cuilce seo sìol."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:7
@@ -3475,19 +3469,19 @@ msgstr "Preas ràmh-dhroighinn (abaich)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:13
 msgid "Strawberries (tiny)"
-msgstr ""
+msgstr "Sùbhan-làir (beag bìodach)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:37
 msgid "Strawberries (small)"
-msgstr ""
+msgstr "Sùbhan-làir (beag)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:61
 msgid "Strawberries (medium)"
-msgstr ""
+msgstr "Sùbhan-làir (meadhanach)"
 
 #: ../../data/tribes/immovables/berry_bushes/strawberry/init.lua:85
 msgid "Strawberries (ripe)"
-msgstr ""
+msgstr "Sùbhan-làir (abaich)"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/blackrootfield_harvested/init.lua:7
@@ -4421,7 +4415,7 @@ msgstr "Sìoda"
 #: ../../data/tribes/wares/sword_broad/init.lua:7
 msgctxt "ware"
 msgid "Broadsword"
-msgstr ""
+msgstr "Claidheamh-leathann"
 
 #. TRANSLATORS: This is a ware name used in lists of wares
 #: ../../data/tribes/wares/sword_double/init.lua:7
@@ -5159,7 +5153,7 @@ msgstr "Loisgeadair fiodha"
 #: ../../data/tribes/workers/frisians/claydigger/init.lua:21
 msgctxt "frisians_worker"
 msgid "Clay Digger"
-msgstr ""
+msgstr "Digear-criadha"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/frisians/farmer/init.lua:31

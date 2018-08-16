@@ -24,7 +24,6 @@
 
 #include "graphic/align.h"
 #include "graphic/color.h"
-#include "graphic/richtext.h"
 #include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
@@ -65,20 +64,7 @@ struct MultilineTextarea : public Panel {
 		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
 	}
 
-	void set_color(RGBColor fg) {
-		color_ = fg;
-	}
-
-	// Most MultilineTextareas that contain richtext markup still use the old
-	// font renderer, but some are already switched over the the new font
-	// renderer. The markup is incompatible, so we need to be able to tell the
-	// MultilineTextarea which one to use. MultilineTextareas without markup
-	// automatically use the new font renderer.
-	// TODO(GunChleoc): Remove this function once the switchover to the new font
-	// renderer is complete.
-	void force_new_renderer(bool force = true) {
-		force_new_renderer_ = force;
-	}
+	void set_color(RGBColor fg);
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
@@ -103,12 +89,9 @@ private:
 	std::string make_richtext();
 
 	std::string text_;
+	std::shared_ptr<const UI::RenderedText> rendered_text_;
 	RGBColor color_;
 	const Align align_;
-
-	bool force_new_renderer_;
-	bool use_old_renderer_;
-	RichText rt;
 
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;

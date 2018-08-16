@@ -83,7 +83,7 @@ struct Road : public RoadBase {
 
 	void set_economy(Economy*) override;
 
-	bool notify_ware(Game& game, FlagId flagid) override;
+	bool notify_ware(Game& game, Flag& flag) override;
 
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t) override;
@@ -94,8 +94,8 @@ private:
 	void cleanup(EditorGameBase&) override;
 	void link_into_flags(EditorGameBase&) override;
 
-	/// Counter that is incremented when a ware does not get a carrier for this
-	/// road immediately and decremented over time.
+	/// Counter that is incremented for every ware served by this road
+	/// according to the delay of service and decremented over time.
 	int32_t wallet_;
 
 	/// holds the gametime when wallet_ was last charged

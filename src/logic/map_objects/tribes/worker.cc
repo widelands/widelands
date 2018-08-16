@@ -988,26 +988,14 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			    _("A geologist found resources."))
 			      .str();
 
-			Message::Type message_type = Message::Type::kGeologists;
-			if (rdescr->name() == "coal")
-				message_type = Message::Type::kGeologistsCoal;
-			else if (rdescr->name() == "gold")
-				message_type = Message::Type::kGeologistsGold;
-			else if (rdescr->name() == "stones")
-				message_type = Message::Type::kGeologistsStones;
-			else if (rdescr->name() == "iron")
-				message_type = Message::Type::kGeologistsIron;
-			else if (rdescr->name() == "water")
-				message_type = Message::Type::kGeologistsWater;
-
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			get_owner()->add_message_with_timeout(
 			   game, std::unique_ptr<Message>(
-			            new Message(message_type, game.get_gametime(), rdescr->descname(),
-			                        ri.descr().representative_image_filename(), rdescr->descname(),
-			                        message, position, serial_)),
-			   300000, 8);
+			            new Message(Message::Type::kGeologists, game.get_gametime(),
+			                        rdescr->descname(), ri.descr().representative_image_filename(),
+			                        rdescr->descname(), message, position, serial_, rdescr->name())),
+			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}
 
@@ -1844,12 +1832,11 @@ void Worker::return_update(Game& game, State& state) {
 		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
 			if (flag->get_building() == location) {
-				if (state.ivar1 && flag->has_capacity()) {
-					if (WareInstance* const ware = fetch_carried_ware(game)) {
-						flag->add_ware(game, *ware);
-						set_animation(game, descr().get_animation("idle"));
-						return schedule_act(game, 20);  //  rest a while
-					}
+				WareInstance* const ware = get_carried_ware(game);
+				if (state.ivar1 && ware && flag->has_capacity_for_ware(*ware)) {
+					flag->add_ware(game, *fetch_carried_ware(game));
+					set_animation(game, descr().get_animation("idle"));
+					return schedule_act(game, 20);  //  rest a while
 				}
 
 				// Don't try to enter building if it is a dismantle site
@@ -2082,15 +2069,18 @@ void Worker::dropoff_update(Game& game, State&) {
 	if (ware) {
 		// We're in the building, walk onto the flag
 		if (upcast(Building, building, location)) {
-			if (start_task_waitforcapacity(game, building->base_flag()))
-				return;
-
-			return start_task_leavebuilding(game, false);  //  exit throttle
+			Flag& baseflag = building->base_flag();
+			if (baseflag.has_capacity_for_ware(*ware)) {
+				start_task_leavebuilding(game, false);  //  exit throttle
+			} else {
+				start_task_waitforcapacity(game, baseflag);
+			}
+			return;
 		}
 
 		// We're on the flag, drop the ware and pause a little
 		if (upcast(Flag, flag, location)) {
-			if (flag->has_capacity()) {
+			if (flag->has_capacity_for_ware(*ware)) {
 				flag->add_ware(game, *fetch_carried_ware(game));
 
 				set_animation(game, descr().get_animation("idle"));
@@ -2170,9 +2160,11 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 
 		// The ware has decided that it doesn't want to go to us after all
 		// In order to return to the warehouse, we're switching to State_DropOff
+		Flag& flag = dynamic_cast<Flag&>(*location);
 		if (WareInstance* const ware =
-		       dynamic_cast<Flag&>(*location).fetch_pending_ware(game, employer)) {
+		       flag.fetch_pending_ware(game, flag.find_pending_ware(employer))) {
 			set_carried_ware(game, ware);
+			flag.ware_departing(game);
 		}
 
 		set_animation(game, descr().get_animation("idle"));
@@ -2235,24 +2227,15 @@ const Bob::Task Worker::taskWaitforcapacity = {
    static_cast<Bob::Ptr>(&Worker::waitforcapacity_pop), true};
 
 /**
- * Checks the capacity of the flag.
- *
- * If there is none, a wait task is pushed, and the worker is added to the
- * flag's wait queue. The function returns true in this case.
- * If the flag still has capacity, the function returns false and doesn't
- * act at all.
+ * Pushes a wait task and
+ * adds the worker to the flag's wait queue.
  */
-bool Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
-	if (flag.has_capacity())
-		return false;
-
+void Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
 	push_task(game, taskWaitforcapacity);
 
 	top_state().objvar1 = &flag;
 
 	flag.wait_for_capacity(game, *this);
-
-	return true;
 }
 
 void Worker::waitforcapacity_update(Game& game, State&) {

@@ -74,11 +74,9 @@ void Waterway::link_into_flags(EditorGameBase& egbase) {
 		request_ferry();
 }
 
-bool Waterway::notify_ware(Game& game, FlagId const flagid) {
-	if (ferry_)
-		if (ferry_->notify_ware(game, flagid))
-			return true;
-	return false;
+bool Waterway::notify_ware(Game& game, Flag& flag) {
+	return ferry_ && ferry_->notify_ware(game,
+			&flag == flags_[RoadBase::FlagEnd] ? RoadBase::FlagEnd : RoadBase::FlagStart);
 }
 
 void Waterway::remove_worker(Worker& w) {

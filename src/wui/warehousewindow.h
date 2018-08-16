@@ -30,10 +30,11 @@ struct WarehouseWindow : public BuildingWindow {
 	WarehouseWindow(InteractiveGameBase& parent,
 	                UI::UniqueWindow::Registry& reg,
 	                Widelands::Warehouse&,
-	                bool avoid_fastclick);
+	                bool avoid_fastclick,
+	                bool workarea_preview_wanted);
 
 private:
-	void init(bool avoid_fastclick) override;
+	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 	Widelands::OPtr<Widelands::Warehouse> warehouse_;
 
