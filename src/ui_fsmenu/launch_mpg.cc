@@ -105,7 +105,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      padding_(4),
      indent_(10),
      label_height_(20),
-     right_column_x_(get_w() * 37 / 50),
+     right_column_x_(get_w() * 57 / 80),
 
      // Buttons
      change_map_or_save_(this,
@@ -130,17 +130,17 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      // Text labels
      mapname_(this, right_column_x_, get_h() * 3 / 20, std::string()),
      clients_(this,
-              // (get_w() * 57 / 80) is the width of the MultiPlayerSetupGroup
-              get_w() / 50,
+              // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
+              get_w() * 3 / 80,
               get_h() / 10,
-              (get_w() * 57 / 80) / 3,
+              get_w() * 19 / 80,
               get_h() / 10,
               _("Clients"),
               UI::Align::kCenter),
      players_(this,
-              get_w() / 50 + (get_w() * 57 / 80) * 6 / 15,
+              get_w() /4,
               get_h() / 10,
-              (get_w() * 57 / 80) * 9 / 15,
+              get_w() * 9 / 20,
               get_h() / 10,
               _("Players"),
               UI::Align::kCenter),
@@ -155,13 +155,13 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                right_column_x_,
                get_h() * 2 / 10,
                butw_,
-               get_h() * 23 / 80 - 2 * label_height_,
+               get_h() * 23 / 80 - 1.6 * label_height_,
                UI::PanelStyle::kFsMenu),
      client_info_(this,
                   right_column_x_,
                   get_h() * 13 / 20 - 2 * label_height_,
                   butw_,
-                  2 * label_height_,
+                  get_h(),
                   UI::PanelStyle::kFsMenu),
      help_(nullptr),
 
@@ -185,12 +185,14 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	players_.set_color(RGBColor(0, 255, 0));
 	map_.set_fontsize(fs_);
 	map_.set_color(RGBColor(0, 255, 0));
+	wincondition_type_.set_color(RGBColor(0, 255, 0));
 
 	mapname_.set_text(_("(no map)"));
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
 
 	mpsg_ = new MultiPlayerSetupGroup(
-	   this, get_w() / 50, change_map_or_save_.get_y(), get_w() * 57 / 80, get_h(), settings, buth_);
+	   this, get_w() * 3 / 80, change_map_or_save_.get_y(), get_w() * 53 / 80,
+	   get_h() * 17 / 30 - change_map_or_save_.get_y(), settings, buth_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -205,7 +207,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	suggested_teams_box_ =
 	   new UI::SuggestedTeamsBox(this, right_column_x_, 0, UI::Box::Vertical, padding_, indent_,
 	                             get_w() - right_column_x_, 4 * label_height_);
-}
+ }
 
 FullscreenMenuLaunchMPG::~FullscreenMenuLaunchMPG() {
 	delete mpsg_;
@@ -223,8 +225,9 @@ void FullscreenMenuLaunchMPG::layout() {
  */
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
-	chat_ = new GameChatPanel(this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80,
-	                          get_h() * 3 / 10, chat, UI::PanelStyle::kFsMenu);
+	chat_ = new GameChatPanel(this, get_w() * 3/ 80,
+			get_h() * 17 / 30 + 0.5 * label_height_, get_w() * 53 / 80,
+			get_h() * 11 / 30, chat, UI::PanelStyle::kFsMenu);
 }
 
 /**
