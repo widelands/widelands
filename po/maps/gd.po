@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 18:25+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-07-28 07:19+0000\n"
+"PO-Revision-Date: 2018-07-29 14:35+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -130,15 +130,15 @@ msgstr "Nuair a chaill an dia earbsa sna h-Atlantaich is e air an t-eilean aca a
 
 #: ../../data/campaigns/campaigns.conf:52
 msgid "From Water to Ice"
-msgstr ""
+msgstr "On uisge dhan deigh"
 
 #: ../../data/campaigns/campaigns.conf:54
 msgid "Frisians"
-msgstr ""
+msgstr "Frìoslannaich"
 
 #: ../../data/campaigns/campaigns.conf:56
 msgid "For advanced players. Introduces the Frisians"
-msgstr ""
+msgstr "Do chluicheadairean adhartach. Bheir e eòlas air na Frìoslannaich dhut."
 
 #: ../../data/campaigns/campaigns.conf:57
 msgid ""
@@ -148,7 +148,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "’S e dùbhlan gun fhaochadh a th’ ann a bhith a’ faighinn beòlshlaint on chuan agus tha sin fìor do shluagh oirthir Cuan Tuathach nam Frìoslannach gu h-àraidh. Nach e a bha san tuil-ruadh mu dheireadh, seo am fear as miosa ann an cuimhne nan daoine, ach dùbhlan àbhaisteach eile ro na Frìoslannaich – no an e samhla o na diathan a bh’ ann gun robh aig treubh a bha dìreach air a thuineachadh an-seo ri dachaigh gu tur ùr a shireadh?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -180,11 +180,11 @@ msgstr "Cò shaoileadh?"
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "An tuil-ruadh"
 
 #: ../../data/campaigns/campaigns.conf:134
 msgid "Colder than Ice"
-msgstr ""
+msgstr "Nas fhuaire na an deigh"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -231,23 +231,23 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "Sa bhliadhna 1362, bhris an tuile as miosa a-riamh a-steach air beatha sìtheil muinntir nan Eileanan Frìoslannach a Tuath: Sin tuile Naoimh Mharcellus. Nach e ach tuile àbhaisteach eile a th’ ann no an e samhla o na diathan a th’ ann nach eil coimhearsnachd nam Frìoslannach ga h-iarraidh air eilean Langeness?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Chaidh an cnàmh-sgeul seo a shuidheachadh ann an co-theacsa eachdraidheil ach chan e ach faoinsgeul a th’ ann."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Fàilte reòite"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Ràinig Reebaud ’s a threubh an taobh tuath. Co-dhiù, chan eil fàilte bhlàth romhpa air an steip reòite is na monaidhean sneachdach…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

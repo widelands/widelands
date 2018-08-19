@@ -36,7 +36,7 @@
  * that can be upgraded like a Fortress, and will have a bigger
  * workarea then.
  *
- * See LuaBuildingDescription::get_workarea_radius, InteractiveBase::show_work_area
+ * See LuaBuildingDescription::get_workarea_radius, InteractiveBase::show_workarea
  */
 
 // TODO(Hasi50): We could just use a unit8 as base for the map? We should
