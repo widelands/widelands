@@ -899,7 +899,7 @@ void ProductionSite::program_start(Game& game, const std::string& program_name) 
 	SkippedPrograms::const_iterator i = skipped_programs_.find(program_name);
 	if (i != skipped_programs_.end()) {
 		uint32_t const gametime = game.get_gametime();
-		uint32_t const earliest_allowed_start_time = i->second + 500;
+		uint32_t const earliest_allowed_start_time = i->second + 10000;
 		if (gametime + tdelta < earliest_allowed_start_time)
 			tdelta = earliest_allowed_start_time - gametime;
 	}
@@ -920,7 +920,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	stack_.pop_back();
 	if (!stack_.empty())
 		top_state().phase = result;
-
+	
 	switch (result) {
 	case Failed:
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
@@ -929,12 +929,14 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 8 / 10;
 		break;
 	case Completed:
-		skipped_programs_.erase(program_name);
-		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
-		statistics_.push_back(true);
-		train_workers(game);
-		crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
-		calc_statistics();
+		if (program_name.compare("work") != 0) {
+			skipped_programs_.erase(program_name);
+			statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
+			statistics_.push_back(true);
+			train_workers(game);
+			crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
+			calc_statistics();
+		}
 		break;
 	case Skipped:
 		skipped_programs_[program_name] = game.get_gametime();
