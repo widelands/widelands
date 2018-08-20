@@ -740,7 +740,6 @@ bool WLApplication::init_settings() {
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
 	// Undocumented on command line, appears in game options
-	s.get_bool("workareapreview");
 	s.get_bool("nozip");
 	s.get_bool("snap_windows_only_when_overlapping");
 	s.get_bool("dock_windows_to_edges");

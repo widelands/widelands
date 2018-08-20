@@ -104,7 +104,7 @@ void MultilineTextarea::recompute() {
 		scrollbar_.set_steps(height - get_h());
 
 		if (scrollmode_ == ScrollMode::kScrollLog || scrollmode_ == ScrollMode::kScrollLogForced) {
-			if (scrollbar_.get_scrollpos() >= scrollbar_.get_steps() - 1) {
+			if (scrollbar_.get_scrollpos() < scrollbar_.get_steps() - 1) {
 				scrollbar_.set_scrollpos(height - get_h());
 			}
 		}

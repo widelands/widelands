@@ -368,6 +368,17 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
 void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
 	PlayerNumber const pn = player_->player_number();
 
+	// There is theoretical possibility that we have more than one ship in expedition mode,
+	// and this one is not the one listed in expedition_ship_ variable, so we quit expedition of this
+	// one
+	if (expedition_ship_ != so.ship->serial() && expedition_ship_ != kNoShip) {
+		log("%d: WARNING: ship %s in expedition, but we have more then one in expedition mode and "
+		    "this is not supported, cancelling the expedition\n",
+		    pn, so.ship->get_shipname().c_str());
+		game().send_player_cancel_expedition_ship(*so.ship);
+		return;
+	}
+
 	// consistency check
 	assert(expedition_ship_ == so.ship->serial() || expedition_ship_ == kNoShip);
 	uint32_t expedition_time = gametime - persistent_data->expedition_start_time;

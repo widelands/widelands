@@ -246,6 +246,7 @@ void DismantleConfirm::ok() {
 	if (building && iaplayer().can_act(building->owner().player_number()) &&
 	    (building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
 		game.send_player_dismantle(*todismantle);
+		iaplayer().hide_workarea(building->get_position());
 	}
 
 	die();
