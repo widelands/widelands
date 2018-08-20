@@ -929,8 +929,8 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 8 / 10;
 		break;
 	case Completed:
+		skipped_programs_.erase(program_name);
 		if (program_name.compare("work") != 0) {
-			skipped_programs_.erase(program_name);
 			statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
 			statistics_.push_back(true);
 			train_workers(game);
