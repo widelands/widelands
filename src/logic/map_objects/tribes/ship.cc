@@ -305,11 +305,14 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 	if (position.field->get_immovable() == dst) {
 		molog("ship_update: Arrived at dock %u\n", dst->serial());
 		lastdock_ = dst;
-		destination_ = nullptr;
 		withdraw_items(game, *dst);
-		dst->ship_arrived(game, *this);
-		start_task_idle(game, descr().main_animation(), 250);
-		Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
+		dst->ship_arrived(game, *this); // this should call set_destination
+		dst = get_destination(game);
+		if (dst) {
+			start_task_movetodock(game, *dst);
+		} else {
+			start_task_idle(game, descr().main_animation(), 250);
+		}
 		return true;
 	}
 
@@ -728,14 +731,16 @@ void Ship::set_economy(Game& game, Economy* e) {
 
 /**
  * Enter a new destination port for the ship.
- *
- * @note This is supposed to be called only from the scheduling code of @ref Fleet.
+ * Call this after un/loading the ship, for proper logging.
  */
-void Ship::set_destination(Game& game, PortDock& pd) {
-	molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n", pd.serial(),
-	      items_.size());
-	destination_ = &pd;
-	send_signal(game, "wakeup");
+void Ship::set_destination(PortDock* pd) {
+	destination_ = pd;
+	if (pd) {
+		molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n", pd->serial(),
+			  items_.size());
+	} else {
+		molog("set_destination / none\n");
+	}
 	Notifications::publish(NoteShip(this, NoteShip::Action::kDestinationChanged));
 }
 

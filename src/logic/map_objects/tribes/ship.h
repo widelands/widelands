@@ -104,7 +104,7 @@ struct Ship : Bob {
 		return economy_;
 	}
 	void set_economy(Game&, Economy* e);
-	void set_destination(Game&, PortDock&);
+	void set_destination(PortDock*);
 
 	void init_auto_task(Game&) override;
 

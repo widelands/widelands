@@ -321,7 +321,7 @@ void PortDock::shipping_item_returned(Game& game, ShippingItem& si) {
 }
 
 /**
- * A ship has arrived at the dock. Load it.
+ * A ship has arrived at the dock. Set its next destination and load it accordingly.
  */
 void PortDock::ship_arrived(Game& game, Ship& ship) {
 	if (expedition_ready_) {
@@ -355,10 +355,10 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	// decide where the arrived ship will go next
 	PortDock* next_port = fleet_->find_next_dest(game, ship, this);
 	if (!next_port) {
-		return; // no need to go anywhere
+		ship.set_destination(next_port);
+		return; // no need to load anything
 	}
 
-	ship.set_destination(game, *next_port);
 	// unload any wares/workers onboard the departing ship which are not favored by next dest
 	ship.unload_unfit_items(game, *this, *next_port);
 
@@ -406,24 +406,19 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 		waiting_.resize(dst);
 	}
+	ship.set_destination(next_port);
 
-	if (waiting_.empty()) {
-		set_need_ship(game, false);
-	} else {
-		fleet_->update(game);
-	}
+	set_need_ship(game, !waiting_.empty());
 }
 
 void PortDock::set_need_ship(Game& game, bool need) {
-	molog("set_need_ship(%s)\n", need ? "true" : "false");
-
-	if (need == need_ship_)
+	if (need == need_ship_) {
 		return;
+	}
 
 	need_ship_ = need;
-
-	if (fleet_) {
-		molog("... trigger fleet update\n");
+	if (need && fleet_) {
+		molog("trigger fleet update\n");
 		fleet_->update(game);
 	}
 }

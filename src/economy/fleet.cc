@@ -656,16 +656,8 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 			continue;  // in expedition obviously
 		}
 
-		PortDock* cur_port = get_dock(game, s->get_position());
-		PortDock* next_port = find_next_dest(game, *s, cur_port);
-		if (!next_port) {
-			continue; // no need to move this ship
-		}
-
-		// now actual setting destination for ship
-		s->set_destination(game, *next_port);
-		molog("... ship %u sent to port %u, wares onboard: %2d, the port is asking for a ship: %s\n",
-		      s->serial(), next_port->serial(), s->get_nritems(), next_port->get_need_ship() ? "yes" : "no");
+		s->set_destination(find_next_dest(game, *s, nullptr));
+		s->send_signal(game, "wakeup");
 	}
 
 	// check for remaining waiting ports, to reschedule update
@@ -721,8 +713,8 @@ PortDock* Fleet::find_next_dest(Game& game, Ship& ship, PortDock* const cur_port
 	float best_score = 0;
 
 	for (PortDock* p : ports_) {
-		if (!ship.get_nritems() && !p->get_need_ship()) {
-			continue; // empty ship to empty port
+		if (p == cur_port) {
+			continue; // same port
 		}
 
 		float score = 0;
@@ -757,17 +749,17 @@ PortDock* Fleet::find_next_dest(Game& game, Ship& ship, PortDock* const cur_port
 			}
 		}
 
+		if (score == 0 && !p->get_need_ship()) {
+			continue; // empty ship to empty port
+		}
+
 		// here we get distance ship->port
 		int16_t route_length = -1;
 
 		if (cur_port) { // we are in a port
-			if (p == cur_port) { // same port
-				route_length = 0;
-			} else { // different port, try to use precalculated path
-				Path tmp_path;
-				if (get_path(*cur_port, *p, tmp_path)) {
-					route_length = tmp_path.get_nsteps();
-				}
+			Path tmp_path;
+			if (get_path(*cur_port, *p, tmp_path)) { // try to use precalculated path
+				route_length = tmp_path.get_nsteps();
 			}
 		}
 
