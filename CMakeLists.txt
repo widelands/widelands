@@ -79,8 +79,9 @@ if (APPLE OR WIN32 OR
   endif()
 endif()
 
-# Disable no symbols warning on macOS
-if (APPLE)
+# Disable no symbols warning on macOS, but only on versions where this is
+# supported. It is not supported on OS X 10.7 (DARWIN_MAJOR_VERSION == 11).
+if (APPLE AND ${DARWIN_MAJOR_VERSION} GREATER 11)
     SET(CMAKE_C_ARCHIVE_CREATE   "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
     SET(CMAKE_CXX_ARCHIVE_CREATE "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
     SET(CMAKE_C_ARCHIVE_FINISH   "<CMAKE_RANLIB> -no_warning_for_no_symbols -c <TARGET>")
