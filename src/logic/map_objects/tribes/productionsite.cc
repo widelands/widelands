@@ -920,7 +920,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 	stack_.pop_back();
 	if (!stack_.empty())
 		top_state().phase = result;
-	
+
 	switch (result) {
 	case Failed:
 		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
