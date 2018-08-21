@@ -930,19 +930,18 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		break;
 	case Completed:
 		skipped_programs_.erase(program_name);
-		if (program_name.compare(program_name.size()-4,4,"work") != 0) {
-			statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
-			statistics_.push_back(true);
-			train_workers(game);
-			crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
-			calc_statistics();
-		}
+		statistics_.erase(statistics_.begin(), statistics_.begin() + 1);
+		statistics_.push_back(true);
+		train_workers(game);
+		crude_percent_ = crude_percent_ * 8 / 10 + 1000000 * 2 / 10;
+		calc_statistics();
 		break;
 	case Skipped:
 		skipped_programs_[program_name] = game.get_gametime();
 		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
 	case None:
+		skipped_programs_.erase(program_name);
 		break;
 	}
 
