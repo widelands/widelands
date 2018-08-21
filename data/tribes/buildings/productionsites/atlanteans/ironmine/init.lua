@@ -58,9 +58,10 @@ tribes:new_productionsite_type {
          descname = _"mining iron",
          actions = {
             -- time total: 105 + 5 x 3.6
-            "sleep=35000",
+            "sleep=5000",
             "return=skipped unless economy needs iron_ore",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "sleep=30000",
             "call=mine_produce",
             "call=mine_produce",
             "call=mine_produce",
