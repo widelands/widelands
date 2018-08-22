@@ -2,7 +2,7 @@
 
 set -e
 
-USAGE="Usage: $0 <clang|gcc> <debug|release> <bzr_repo_directory>"
+USAGE="Usage: $0 <clang|gcc|gcc6> <debug|release> <bzr_repo_directory>"
 USE_ASAN="OFF"
 
 if [ ! -z "$3" ]; then
@@ -36,6 +36,12 @@ if [ ! -z "$3" ]; then
       C_COMPILER="gcc-7"
       CXX_COMPILER="g++-7"
       COMPILER=$(gcc-7 --version | grep "GCC")
+      ;;
+   gcc6)
+      # Used for the nightly builds.
+      C_COMPILER="gcc-6"
+      CXX_COMPILER="g++-6"
+      COMPILER=$(gcc-6 --version | grep -i "GCC")
       ;;
    *)
       echo $USAGE
@@ -173,9 +179,11 @@ function BuildWidelands() {
    export SDL2TTFDIR="$(brew --prefix sdl2_ttf)"
    export BOOST_ROOT="$(brew --prefix boost)"
    
-   # Not needed for CMake 3.12 or above
-   # see cmake --help-policy CMP0074
-   #export ICU_ROOT="$(brew --prefix icu4c)"
+   # Not needed for CMake 3.12 or above, see cmake --help-policy CMP0074.
+   # However Mac OS X nighlies cannot upgrade to a newer cmake version than
+   # 3.9.4 since nothing newer compiles on Mac OS X 10.7 which is used to build
+   # the nightlies.
+   export ICU_ROOT="$(brew --prefix icu4c)"
 
    cmake $SOURCE_DIR -G Ninja \
       -DCMAKE_C_COMPILER:FILEPATH="$C_COMPILER" \
