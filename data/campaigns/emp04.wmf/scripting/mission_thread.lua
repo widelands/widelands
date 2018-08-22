@@ -22,7 +22,7 @@ function dismantle()
    end
    sleep(2000)
    p1:allow_buildings("all")
-   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
+   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2","empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
    o.done = true
 
    campaign_message_box(amalea_3)
@@ -411,10 +411,14 @@ function wheat_chain()
    scroll_to_map_pixel(prior_center)
 
    local hq = p1:get_buildings("empire_headquarters")
-   while hq and not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do sleep(4000) end
+   while hq and not ((hq[1]:get_wares("wheat") > 34 and hq[1]:get_wares("wine") > 14) or p3.defeated) do 
+      sleep(4000)
+      hq = p1:get_buildings("empire_headquarters")
+   end
    if p3.defeated then
       o1.done = true
       julia_conquered = true
+      p1:forbid_buildings{"empire_mill1", "empire_brewery1"}
       p1:allow_buildings{"empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2"}
       campaign_message_box(saledus_2)
       campaign_message_box(julia_2)
@@ -429,6 +433,7 @@ function wheat_chain()
       local wine = hq[1]:get_wares("wine") - 15
       hq[1]:set_wares("wheat", wheat)
       hq[1]:set_wares("wine", wine)
+      p1:forbid_buildings{"empire_mill1", "empire_brewery1"}
       p1:allow_buildings{"empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2"}
       campaign_message_box(julia_1)
 
@@ -466,15 +471,18 @@ end
 
 -- our actions have an effect positively or negatively
 function karma()
+   -- bad karma for 10 times every 20 minutes a medium building where at least 2 of this type exist will be destroyed
    if julia_conquered then
-      for count = 0, 10 do
+      for count = 1, 11 do
          sleep(1200000)
          bld = {
             "empire_stonemasons_house",
             "empire_sawmill",
             "empire_mill",
+            "empire_mill2",
             "empire_bakery",
             "empire_brewery",
+            "empire_brewery2",
             "empire_vineyard",
             "empire_winery",
             "empire_tavern",
@@ -489,18 +497,21 @@ function karma()
          for idx,site in ipairs(bld) do
             if #p1:get_buildings(site) > 1 then
                local build = p1:get_buildings(site)
-               table.insert(cand, build)
+               for idx,p in ipairs(build) do
+                  table.insert(cand, p)
+               end
             end
          end
-         if #cand > 0 then
-            local i = (count * 1237) % #cand
-            local fields = cand[i].fields
-            local prior_center = scroll_to_field(fields[1])
+         if #cand > 1 then
+            local i = (count * 1237) % (#cand) + 1
+            local field = cand[i].fields
+            local prior_center = scroll_to_field(field[1])
             cand[i]:destroy()
             campaign_message_box(amalea_16)
             scroll_to_map_pixel(prior_center)
          end
       end
+   -- good karma for 10 times every 25 minutes the player will be gifted with 20 beer and 10 wine
    else
       for count = 0, 10 do
          sleep(1500000)

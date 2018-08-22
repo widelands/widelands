@@ -8,11 +8,13 @@ print_loading_message("Loading campaign-specific tribe units", function()
    -- ===================================
    --    Empire Mission 4
    -- ===================================
+   include "map:scripting/tribes/brewery2.lua"
    include "map:scripting/tribes/brewery1.lua"
    include "map:scripting/tribes/farm2.lua"
    include "map:scripting/tribes/farm1.lua"
    include "map:scripting/tribes/foresters_house1.lua"
    include "map:scripting/tribes/lumberjacks_house1.lua"
+   include "map:scripting/tribes/mill2.lua"
    include "map:scripting/tribes/mill1.lua"
    include "map:scripting/tribes/trainingcamp1.lua"
    include "map:scripting/tribes/well1.lua"

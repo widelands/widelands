@@ -25,7 +25,6 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-
    },
 
    working_positions = {
