@@ -386,7 +386,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			}
 			format_and_add_chat("", "", true, _("Our forums can be found at:"));
 			format_and_add_chat("", "", true, "https://wl.widelands.org/forum/");
-			format_and_add_chat("", "", true, _("Please report bugs at:"));
+			format_and_add_chat("", "", true, _("For reporting bugs, visit:"));
 			format_and_add_chat("", "", true, "https://wl.widelands.org/wiki/ReportingBugs/");
 			state_ = LOBBY;
 			log("InternetGaming: Client %s logged in.\n", clientname_.c_str());
