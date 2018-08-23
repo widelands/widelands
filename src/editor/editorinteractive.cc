@@ -372,6 +372,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 	}
+	// TODO(GunChleoc): If we ever implement an infrastructure tool, the building texts will need to be blitted here.
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).

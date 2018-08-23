@@ -608,24 +608,6 @@ void Building::draw(uint32_t gametime,
 	   point_on_dst, scale, anim_, gametime - animstart_, get_owner()->get_playercolor());
 
 	//  door animation?
-
-	//  overlay strings (draw when enabled)
-	draw_info(draw_text, point_on_dst, scale, dst);
-}
-
-/*
-===============
-Draw overlay help strings when enabled.
-===============
-*/
-void Building::draw_info(const TextToDraw draw_text,
-                         const Vector2f& point_on_dst,
-                         const float scale,
-                         RenderTarget* dst) {
-	const std::string statistics_string =
-	   (draw_text & TextToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
-	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
-	             scale, dst);
 }
 
 int32_t

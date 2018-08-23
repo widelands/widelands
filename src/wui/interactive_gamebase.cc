@@ -137,6 +137,33 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 	}
 }
 
+
+void InteractiveGameBase::draw_mapobject_infotext(RenderTarget* dst, const Vector2i& init_position, float scale, Widelands::Building* building, const TextToDraw text_to_draw) {
+	if (text_to_draw == TextToDraw::kNone) {
+		return;
+	}
+	const std::string statistics_string =
+	   (text_to_draw & TextToDraw::kStatistics) ? building->info_string(Widelands::Building::InfoStringFormat::kStatistics) : "";
+
+	const int font_size = scale * UI_FONT_SIZE_SMALL;
+
+	// We always render this so we can have a stable position for the statistics string.
+	std::shared_ptr<const UI::RenderedText> rendered_census =
+	   UI::g_fh->render(as_condensed(building->info_string(Widelands::Building::InfoStringFormat::kCensus), UI::Align::kCenter, font_size), 120 * scale);
+	Vector2i position = init_position - Vector2i(0, 48) * scale;
+	if (text_to_draw & TextToDraw::kCensus) {
+		rendered_census->draw(*dst, position, UI::Align::kCenter);
+	}
+
+	if (text_to_draw & TextToDraw::kStatistics && !statistics_string.empty()) {
+		std::shared_ptr<const UI::RenderedText> rendered_statistics =
+		   UI::g_fh->render(as_condensed(statistics_string, UI::Align::kCenter, font_size));
+		position.y += rendered_census->height() + text_height(font_size) / 4;
+		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
+	}
+}
+
+
 /**
  * Called for every game after loading (from a savegame or just from a map
  * during single/multiplayer/scenario).

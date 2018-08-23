@@ -99,6 +99,7 @@ public:
 	void start() override;
 
 protected:
+	void draw_mapobject_infotext(RenderTarget* dst, const Vector2i& init_position, float scale, Widelands::Building* building, const TextToDraw text_to_draw);
 	void draw_overlay(RenderTarget&) override;
 
 	GameMainMenuWindows main_windows_;

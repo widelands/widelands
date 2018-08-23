@@ -359,8 +359,5 @@ void ConstructionSite::draw(uint32_t gametime,
 	}
 
 	info_.draw(point_on_dst, scale, player_color, dst);
-
-	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
 }
 }
