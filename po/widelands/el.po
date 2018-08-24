@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-10 07:21+0000\n"
-"PO-Revision-Date: 2018-08-13 15:39+0000\n"
-"Last-Translator: erimitis\n"
+"POT-Creation-Date: 2018-08-19 11:47+0000\n"
+"PO-Revision-Date: 2018-08-19 11:49+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,7 @@ msgstr[1] "Νέοι Στόχοι"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12
-#: ../../data/scripting/richtext.lua:533 ../../src/base/i18n.cc:333
+#: ../../data/scripting/richtext.lua:533 ../../src/base/i18n.cc:335
 #, c-format
 msgid "%1$s & %2$s"
 msgstr "%1$s & %2$s"
@@ -43,7 +43,7 @@ msgstr "%1$s & %2$s"
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14
-#: ../../data/scripting/richtext.lua:535 ../../src/base/i18n.cc:337
+#: ../../data/scripting/richtext.lua:535 ../../src/base/i18n.cc:339
 #, c-format
 msgid "%1$s or %2$s"
 msgstr "%1$s ή %2$s"
@@ -55,7 +55,7 @@ msgstr "%1$s ή %2$s"
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21
 #: ../../data/scripting/richtext.lua:537 ../../data/scripting/richtext.lua:542
-#: ../../src/base/i18n.cc:341 ../../src/base/i18n.cc:350
+#: ../../src/base/i18n.cc:343 ../../src/base/i18n.cc:352
 #, c-format
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
@@ -63,7 +63,7 @@ msgstr "%1$s, %2$s"
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18
-#: ../../data/scripting/richtext.lua:539 ../../src/base/i18n.cc:345
+#: ../../data/scripting/richtext.lua:539 ../../src/base/i18n.cc:347
 #, c-format
 msgid "%1$s and %2$s"
 msgstr "%1$s και %2$s"
@@ -303,7 +303,7 @@ msgid "Redo"
 msgstr "Επανάληψη"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:342 ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/buildingwindow.cc:350 ../../src/wui/interactive_player.cc:208
 msgid "Help"
 msgstr "Βοήθεια"
 
@@ -1115,7 +1115,7 @@ msgid "Loading map…"
 msgstr "Φόρτωση χάρτη σε εξέλιξη…"
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1407
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1406
 msgid "Loading…"
 msgstr "Φόρτωση σε εξέλιξη…"
 
@@ -1564,8 +1564,8 @@ msgid "Your %s can't find a way home and will likely die."
 msgstr "Ο %s σας δεν μπορεί να βρει δρόμο γυρισμού και πιθανόν θα πεθάνει."
 
 #: ../../src/logic/map_objects/tribes/worker.cc:1854
-#: ../../src/wui/productionsitewindow.cc:99
-#: ../../src/wui/productionsitewindow.cc:124
+#: ../../src/wui/productionsitewindow.cc:100
+#: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Εργάτης"
@@ -1649,7 +1649,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1299
+#: ../../src/wlapplication.cc:1298
 msgid "Preparing game"
 msgstr "Προετοιμασία παιχνιδιού"
 
@@ -2466,7 +2466,7 @@ msgid "Version"
 msgstr "Έκδοση"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:147
-#: ../../src/ui_fsmenu/options.cc:234
+#: ../../src/ui_fsmenu/options.cc:233
 msgid "Game"
 msgstr "Παιχνίδι"
 
@@ -2887,68 +2887,64 @@ msgstr ""
 msgid "Start building road after placing a flag"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:211
-msgid "Show buildings area preview"
-msgstr "Εμφάνιση προεπισκόπησης έκτασης κτιρίων"
-
-#: ../../src/ui_fsmenu/options.cc:213
+#: ../../src/ui_fsmenu/options.cc:212
 msgid "Show in-game chat with transparent background"
 msgstr "Προβολή της ενσωματωμένης στο παιχνίδι συνομιλίας σε διαφανές φόντο"
 
 #. * TRANSLATORS: A watchwindow is a window where you keep watching an object
 #. or a map region,
 #. * TRANSLATORS: and it also lets you jump to it on the map.
-#: ../../src/ui_fsmenu/options.cc:217
+#: ../../src/ui_fsmenu/options.cc:216
 msgid "Use single watchwindow mode"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:230
+#: ../../src/ui_fsmenu/options.cc:229
 msgid "Interface"
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:231
+#: ../../src/ui_fsmenu/options.cc:230
 msgid "Windows"
 msgstr "Παράθυρα"
 
-#: ../../src/ui_fsmenu/options.cc:232
+#: ../../src/ui_fsmenu/options.cc:231
 msgid "Sound"
 msgstr "Ήχος"
 
-#: ../../src/ui_fsmenu/options.cc:233
+#: ../../src/ui_fsmenu/options.cc:232
 msgid "Saving"
 msgstr "Αποθήκευση"
 
-#: ../../src/ui_fsmenu/options.cc:264
+#: ../../src/ui_fsmenu/options.cc:263
 #: ../../src/wui/game_options_sound_menu.cc:85
 msgid "Sound is disabled due to a problem with the sound driver"
 msgstr "Ο ήχος είναι απενεργοποιημένος λόγω προβλήματος με τον οδηγό ήχου"
 
 #. * TRANSLATORS: Options: Save game automatically every:
-#: ../../src/ui_fsmenu/options.cc:289
+#: ../../src/ui_fsmenu/options.cc:287
 msgid "Off"
 msgstr "Ανενεργό"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
-#: ../../src/ui_fsmenu/options.cc:315 ../../src/ui_fsmenu/options.cc:324
+#: ../../src/ui_fsmenu/options.cc:313 ../../src/ui_fsmenu/options.cc:322
 msgid "%1% x %2%"
 msgstr "%1% x %2%"
 
-#: ../../src/ui_fsmenu/options.cc:429
+#: ../../src/ui_fsmenu/options.cc:426
 msgid "Try system language"
 msgstr "Δοκιμή γλώσσας συστήματος"
 
 #. * TRANSLATORS: %s = language name
-#: ../../src/ui_fsmenu/options.cc:528
+#: ../../src/ui_fsmenu/options.cc:525
 #, c-format
 msgid "The translation into %s is complete."
 msgstr ""
 
 #. * TRANSLATORS: %1% = language name, %2% = percentage
-#: ../../src/ui_fsmenu/options.cc:531
+#: ../../src/ui_fsmenu/options.cc:528
 msgid "The translation into %1% is %2%%% complete."
 msgstr ""
 
-#: ../../src/ui_fsmenu/options.cc:545
+#: ../../src/ui_fsmenu/options.cc:542
 #, c-format
 msgid "If you wish to help us translate, please visit %s"
 msgstr ""
@@ -2965,11 +2961,11 @@ msgstr "Εκστρατείες"
 msgid "Load Game"
 msgstr "Φόρτωση παιχνιδιού"
 
-#: ../../src/wlapplication.cc:1094
+#: ../../src/wlapplication.cc:1093
 msgid "Game data error"
 msgstr "Σφάλμα δεδομένων παιχνιδιού"
 
-#: ../../src/wlapplication.cc:1102
+#: ../../src/wlapplication.cc:1101
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2977,18 +2973,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1109
+#: ../../src/wlapplication.cc:1108
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1236
+#: ../../src/wlapplication.cc:1235
 msgid "Invalid Address"
 msgstr "Μη Έγκυρη Διεύθυνση"
 
-#: ../../src/wlapplication.cc:1237
+#: ../../src/wlapplication.cc:1236
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
@@ -3008,35 +3004,35 @@ msgstr "Αποσυναρμολόγηση κτιρίου;"
 msgid "Do you really want to dismantle this building?"
 msgstr "Θέλετε σίγουρα να αποσυναρμολογήσετε αυτό το κτίριο;"
 
-#: ../../src/wui/actionconfirm.cc:264
+#: ../../src/wui/actionconfirm.cc:265
 msgid "Enhance building?"
 msgstr "Αναβάθμιση κτιρίου;"
 
-#: ../../src/wui/actionconfirm.cc:266 ../../src/wui/actionconfirm.cc:270
+#: ../../src/wui/actionconfirm.cc:267 ../../src/wui/actionconfirm.cc:271
 msgid "Do you really want to enhance this building?"
 msgstr "Θέλετε σίγουρα αναβάθμιση αυτού του κτιρίου;"
 
 #. * TRANSLATORS: Warning message when player wants to enhance a military
 #. building
-#: ../../src/wui/actionconfirm.cc:268
+#: ../../src/wui/actionconfirm.cc:269
 msgid "Be careful if the enemy is near!"
 msgstr ""
 
-#: ../../src/wui/actionconfirm.cc:310
+#: ../../src/wui/actionconfirm.cc:311
 msgid "Sink the ship?"
 msgstr "Βύθιση του πλοίου;"
 
 #. * TRANSLATORS: %s is a ship name
-#: ../../src/wui/actionconfirm.cc:312
+#: ../../src/wui/actionconfirm.cc:313
 #, c-format
 msgid "Do you really want to sink %s?"
 msgstr "Θέλετε σίγουρα να βυθίσετε το %s;"
 
-#: ../../src/wui/actionconfirm.cc:348
+#: ../../src/wui/actionconfirm.cc:349
 msgid "Cancel expedition?"
 msgstr "Ακύρωση αποστολής;"
 
-#: ../../src/wui/actionconfirm.cc:349
+#: ../../src/wui/actionconfirm.cc:350
 msgid "Do you really want to cancel the active expedition?"
 msgstr "Θέλετε σίγουρα να ακυρώσετε τη διενεργούμενη αποστολή;"
 
@@ -3124,7 +3120,7 @@ msgstr "Λιμάνια"
 #: ../../src/wui/building_statistics_menu.cc:712
 #: ../../src/wui/building_statistics_menu.cc:738
 #: ../../src/wui/building_statistics_menu.cc:740
-#: ../../src/wui/productionsitewindow.cc:176
+#: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr ""
 
@@ -3134,62 +3130,62 @@ msgid "Lacking Soldiers:"
 msgstr ""
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:227
+#: ../../src/wui/buildingwindow.cc:235
 msgid "Continue"
 msgstr "Συνέχεια"
 
 #. * TRANSLATORS: Stop/Continue toggle button for production sites.
-#: ../../src/wui/buildingwindow.cc:229
+#: ../../src/wui/buildingwindow.cc:237
 msgid "Stop"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:250
+#: ../../src/wui/buildingwindow.cc:258
 #, c-format
 msgid "Enhance to %s"
 msgstr "Αναβάθμιση σε %s"
 
-#: ../../src/wui/buildingwindow.cc:251 ../../src/wui/fieldaction.cc:98
+#: ../../src/wui/buildingwindow.cc:259 ../../src/wui/fieldaction.cc:98
 msgid "Construction costs:"
 msgstr "Δαπάνες κατασκευής:"
 
-#: ../../src/wui/buildingwindow.cc:268
+#: ../../src/wui/buildingwindow.cc:276
 msgid "Destroy"
 msgstr "Καταστροφή"
 
-#: ../../src/wui/buildingwindow.cc:283
+#: ../../src/wui/buildingwindow.cc:291
 msgid "Dismantle"
 msgstr "Αποσυναρμολόγηση"
 
-#: ../../src/wui/buildingwindow.cc:283
+#: ../../src/wui/buildingwindow.cc:291
 msgid "Returns:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:506
-msgid "Hide work area"
-msgstr "Απόκρυψη περιοχής εργασίας"
-
-#: ../../src/wui/buildingwindow.cc:323 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:331 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Εμφάνιση Παραθύρου Αποσφαλμάτωσης"
 
-#: ../../src/wui/buildingwindow.cc:330
+#: ../../src/wui/buildingwindow.cc:338
 msgid "Center view on this"
 msgstr "Κεντράρισμα προβολής σε αυτό"
 
-#: ../../src/wui/buildingwindow.cc:509
+#: ../../src/wui/buildingwindow.cc:521
+msgid "Hide work area"
+msgstr "Απόκρυψη περιοχής εργασίας"
+
+#: ../../src/wui/buildingwindow.cc:524
 msgid "Show work area"
 msgstr "Εμφάνιση περιοχής εργασίας"
 
-#: ../../src/wui/buildingwindow.cc:542
+#: ../../src/wui/buildingwindow.cc:557
 msgid "Start an expedition"
 msgstr "Έναρξη αποστολής"
 
-#: ../../src/wui/buildingwindow.cc:546
+#: ../../src/wui/buildingwindow.cc:561
 msgid "Cancel the expedition"
 msgstr "Ακύρωση της αποστολής"
 
-#: ../../src/wui/constructionsitewindow.cc:59
+#: ../../src/wui/constructionsitewindow.cc:60
 #: ../../src/wui/dismantlesitewindow.cc:54
 msgid "Building materials"
 msgstr "Οικοδομικά υλικά"
@@ -3200,14 +3196,14 @@ msgstr "Επιλογές οικονομίας"
 
 #: ../../src/wui/economy_options_window.cc:47
 #: ../../src/wui/general_statistics_menu.cc:154
-#: ../../src/wui/productionsitewindow.cc:87
-#: ../../src/wui/warehousewindow.cc:189
+#: ../../src/wui/productionsitewindow.cc:88
+#: ../../src/wui/warehousewindow.cc:190
 msgid "Wares"
 msgstr "Υλικά"
 
 #: ../../src/wui/economy_options_window.cc:48
 #: ../../src/wui/general_statistics_menu.cc:145
-#: ../../src/wui/warehousewindow.cc:193
+#: ../../src/wui/warehousewindow.cc:194
 msgid "Workers"
 msgstr "Εργάτες"
 
@@ -3732,12 +3728,12 @@ msgstr "Μείωση αριθμού υλικών που θέλετε να απο
 msgid "Increase the number of wares you want to be stored here."
 msgstr "Αύξηση αριθμού υλικών που θέλετε να αποθηκεύονται εδώ."
 
-#: ../../src/wui/interactive_gamebase.cc:52
+#: ../../src/wui/interactive_gamebase.cc:54
 msgid "PAUSE"
 msgstr "ΠΑΥΣΗ"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:123
+#: ../../src/wui/interactive_gamebase.cc:128
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
@@ -4177,7 +4173,7 @@ msgstr "Το μέγεθος του χάρτη (πλάτος x ύψος)"
 msgid "Map Name"
 msgstr "Όνομα Χάρτη"
 
-#: ../../src/wui/militarysitewindow.cc:41
+#: ../../src/wui/militarysitewindow.cc:42
 msgid "Soldiers"
 msgstr "Στρατιώτες"
 
@@ -4317,23 +4313,23 @@ msgstr "λεπτά"
 msgid "game"
 msgstr "παιχνίδι"
 
-#: ../../src/wui/productionsitewindow.cc:100
+#: ../../src/wui/productionsitewindow.cc:101
 msgid "Exp"
 msgstr "Εμπ"
 
-#: ../../src/wui/productionsitewindow.cc:101
+#: ../../src/wui/productionsitewindow.cc:102
 msgid "Next Level"
 msgstr "Επόμενο Επίπεδο"
 
-#: ../../src/wui/productionsitewindow.cc:113
+#: ../../src/wui/productionsitewindow.cc:114
 msgid "Terminate the employment of the selected worker"
 msgstr "Τερματισμός απασχόλησης του επιλεγμένου εργάτη"
 
-#: ../../src/wui/productionsitewindow.cc:189
+#: ../../src/wui/productionsitewindow.cc:190
 msgid "(coming)"
 msgstr "(έρχεται)"
 
-#: ../../src/wui/productionsitewindow.cc:189
+#: ../../src/wui/productionsitewindow.cc:190
 msgid "(vacant)"
 msgstr ""
 
@@ -4533,7 +4529,7 @@ msgstr "Υλικά εντός αποθηκών"
 msgid "Workers in warehouses"
 msgstr "Εργάτες εντός αποθηκών"
 
-#: ../../src/wui/trainingsitewindow.cc:45
+#: ../../src/wui/trainingsitewindow.cc:47
 msgid "Soldiers in training"
 msgstr "Στρατιώτες υπό εκπαίδευση"
 
@@ -4569,15 +4565,15 @@ msgstr "Μη αποθήκευση επιλεγμένων υλικών εδώ"
 msgid "Remove selected wares from here"
 msgstr "Αφαίρεση επιλεγμένων υλικών από εδώ"
 
-#: ../../src/wui/warehousewindow.cc:198
+#: ../../src/wui/warehousewindow.cc:199
 msgid "Wares waiting to be shipped"
 msgstr "Υλικά σε αναμονή φόρτωσης"
 
-#: ../../src/wui/warehousewindow.cc:201
+#: ../../src/wui/warehousewindow.cc:202
 msgid "Workers waiting to embark"
 msgstr "Εργάτες σε αναμονή επιβίβασης"
 
-#: ../../src/wui/warehousewindow.cc:205
+#: ../../src/wui/warehousewindow.cc:206
 msgid "Expedition"
 msgstr "Αποστολή"
 
