@@ -40,7 +40,8 @@ Create the window and its panels, add it to the registry.
 ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
                                            UI::UniqueWindow::Registry& reg,
                                            Widelands::ProductionSite& ps,
-                                           bool avoid_fastclick)
+                                           bool avoid_fastclick,
+                                           bool workarea_preview_wanted)
    : BuildingWindow(parent, reg, ps, avoid_fastclick),
      production_site_(&ps),
      worker_table_(nullptr),
@@ -64,14 +65,14 @@ ProductionSiteWindow::ProductionSiteWindow(InteractiveGameBase& parent,
 			   }
 		   }
 		});
-	init(avoid_fastclick);
+	init(avoid_fastclick, workarea_preview_wanted);
 }
 
-void ProductionSiteWindow::init(bool avoid_fastclick) {
+void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	Widelands::ProductionSite* production_site = production_site_.get(igbase()->egbase());
 	assert(production_site != nullptr);
 
-	BuildingWindow::init(avoid_fastclick);
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	const std::vector<Widelands::InputQueue*>& inputqueues = production_site->inputqueues();
 
 	if (inputqueues.size()) {

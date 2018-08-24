@@ -118,8 +118,8 @@ for line in input_file:
 
 input_file.close()
 
-dest_filepath = base_path + '/debian/widelands.appdata.xml'
-dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
+appdata_filepath = base_path + '/debian/widelands.appdata.xml'
+dest_file = codecs.open(appdata_filepath, encoding='utf-8', mode='w')
 dest_file.write(appdata)
 dest_file.close()
 
@@ -135,12 +135,22 @@ for line in input_file:
 
 input_file.close()
 
-dest_filepath = base_path + '/debian/org.widelands.widelands.desktop'
-dest_file = codecs.open(dest_filepath, encoding='utf-8', mode='w')
+desktop_filepath = base_path + '/debian/org.widelands.widelands.desktop'
+dest_file = codecs.open(desktop_filepath, encoding='utf-8', mode='w')
 dest_file.write(desktop)
 dest_file.close()
 
 print('Done!')
 
-from subprocess import call
-call(['appstreamcli', 'validate', base_path + '/debian/widelands.appdata.xml'])
+from subprocess import call, Popen, PIPE
+
+# Validata Appdata
+call(['appstreamcli', 'validate', appdata_filepath])
+
+# Validate desktop file. We don't get return codes, so we have to parse it
+process = Popen(['desktop-file-validate', desktop_filepath],
+                stderr=PIPE, stdout=PIPE, stdin=PIPE)
+desktop_result = process.communicate()
+if desktop_result[0] != '':
+    print(desktop_result[0])
+    sys.exit(1)

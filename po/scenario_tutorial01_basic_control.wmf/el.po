@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-28 02:02+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-08-10 07:21+0000\n"
+"PO-Revision-Date: 2018-08-13 15:59+0000\n"
 "Last-Translator: erimitis\n"
 "Language-Team: Greek (http://www.transifex.com/widelands/widelands/language/el/)\n"
 "MIME-Version: 1.0\n"
@@ -153,7 +153,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:93
 msgid "Building a Connecting Road"
-msgstr ""
+msgstr "Κατασκευή Συνδετικού Δρόμου"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:85
 msgid ""
@@ -211,7 +211,7 @@ msgstr "Φτιάξτε μια σημαία για μοίρασμα του δρό
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:125
 msgid "Build a Flag on the Road"
-msgstr ""
+msgstr "Τοποθέτηση μιας Σημαίας στον Δρόμο"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:126
 msgid ""
@@ -228,11 +228,11 @@ msgstr "Φτιάξτε τώρα μια μπλε σημαία στη μέση τ�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:132
 msgid "Waiting For the Hut to be Finished"
-msgstr ""
+msgstr "Αναμονή Ολοκλήρωσης Καλύβας"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:135
 msgid "Well done! Let’s wait till the hut is finished."
-msgstr ""
+msgstr "Μπράβο! Ας περιμένουμε ώσπου να ολοκληρωθεί η καλύβα."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:136
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:149
@@ -244,7 +244,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:143
 msgid "Waiting for the Hut to be Finished"
-msgstr ""
+msgstr "Αναμονή Ολοκλήρωσης Καλύβας"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:146
 msgid ""
@@ -261,7 +261,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 msgid "Now we only have to wait till the hut is finished."
-msgstr ""
+msgstr "Τώρα δεν έχουμε παρά να περιμένουμε ώσπου να ολοκληρωθεί η καλύβα."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:155
 msgid "The Construction Site"
@@ -269,7 +269,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid "Let's see the progress"
-msgstr ""
+msgstr "Ας δούμε την πρόοδο"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:158
 msgid ""
@@ -298,7 +298,7 @@ msgstr "Έξοχα, η καλύβα του υλοτόμου έγινε. Ένας
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:177
 msgid "Some Rocks Were Found"
-msgstr ""
+msgstr "Βρέθηκαν μερικά Βράχια"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Getting a Quarry Up"
@@ -401,7 +401,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
 msgid "Learn to use the minimap"
-msgstr ""
+msgstr "Εκμάθηση χρήσης του μικροχάρτη"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:221
 msgid ""
@@ -429,7 +429,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "How to Build a Quarry"
-msgstr ""
+msgstr "Τρόπος Κατασκευής Λατομείου"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
 msgid ""
@@ -453,20 +453,20 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Everything can be built on the green house symbol."
-msgstr ""
+msgstr "Όλα μπορούν να κτιστούν στο πράσινο σύμβολο σπιτιού."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr ""
+msgstr "Όλα εκτός των μεγάλων κτιρίων μπορούν να κτιστούν σε ένα κίτρινο σύμβολο σπιτιού."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "Red building symbols can only hold small buildings and flags."
-msgstr ""
+msgstr "Τα κόκκινα σύμβολα κτιρίων μπορούν να δεχτούν μόνο μικρά κτίρια και σημαίες."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:245
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr ""
+msgstr "Και τέλος, το κίτρινο σύμβολο σημαίας επιτρέπει μόνο σημαίες."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:246
 msgid ""
@@ -483,11 +483,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid "Build a quarry next to the rocks"
-msgstr ""
+msgstr "Φτιάξτε ένα λατομείο δίπλα στα βράχια"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:252
 msgid "Build a Quarry"
-msgstr ""
+msgstr "Φτιάξτε ένα Λατομείο"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:253
 msgid ""
@@ -513,7 +513,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:290
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:298
 msgid "Road Building"
-msgstr ""
+msgstr "Κατασκευή Δρόμων"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:264
 msgid ""
@@ -526,7 +526,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:279
 msgid "the road building symbol."
-msgstr ""
+msgstr "το σύμβολο κατασκευής δρόμων."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:266
 msgid ""
@@ -537,7 +537,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:267
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:281
 msgid "the abort symbol."
-msgstr ""
+msgstr "το σύμβολο ματαίωσης."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:268
 msgid ""
@@ -696,7 +696,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:356
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
 msgid "Census and Statistics"
-msgstr ""
+msgstr "Απογραφή και Στατιστικά"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:358
 msgid ""
@@ -728,7 +728,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:373
 msgid "Messages"
-msgstr ""
+msgstr "Μηνύματα"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:374
 msgid "Introducing Messages"
@@ -810,7 +810,7 @@ msgstr ""
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
 msgid "Closing Windows"
-msgstr ""
+msgstr "Κλείσιμο Παραθύρων"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:400
 msgid ""
@@ -1038,10 +1038,10 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Νέος Στόχος"
+msgstr[1] "Νέοι Στόχοι"
