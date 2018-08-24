@@ -106,7 +106,7 @@ function clear_roads()
    end
    if not p1.defeated then
       o.done = true
-      ampaign_message_box(amalea_6)
+      campaign_message_box(amalea_6)
    end
 end
 
