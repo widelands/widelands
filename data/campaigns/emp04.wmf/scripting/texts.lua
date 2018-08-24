@@ -454,7 +454,7 @@ amalea_11 = {
    title=_"Amalea Looks Sad",
    body= amalea1(_"Amalea is really sad…",
       -- TRANSLATORS: Amalea
-      _([[I’m not sure if that was the right thing to do. Yes, we have obtained the plans, but we will never know if and how Vesta and her priestesses could have helped us against the Barbarians.]])
+      _([[I’m not sure if that was the right thing to do. Yes, we have obtained the plans. But although we are now able to build and upgrade our mills and breweries with the improved technology, we will never know if and how Vesta and her priestesses could have helped us against the Barbarians.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
       _([[Furthermore, we will have to live with the guilt of destroying a temple of an Empire goddess on our souls.]])),
@@ -465,7 +465,10 @@ amalea_12 = {
    title=_"Amalea is Very Content",
    body= amalea2(_"Amalea claps her hands…",
       -- TRANSLATORS: Amalea
-      _([[Well done. Now we are able to build more efficient buildings to refine our wheat. And, best of all, we have a new ally who just provided us with lots of water, flour and beer. Now I really think that nothing can prevent us from getting stronger and conquering back our homeland.]])),
+      _([[Well done. Now we are able to build more efficient buildings to refine our wheat. Furthermore the plans enable us to upgrade our current mill and brewery with the improved technology.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[And, best of all, we have a new ally who just provided us with lots of water, flour and beer. Now I really think that nothing can prevent us from getting stronger and conquering back our homeland.]])),
    posy=1,
 }
 
@@ -555,6 +558,32 @@ amalea_20 = {
    posy=1,
 }
 
+amalea_21 = {
+   title=_"Defeated!",
+   body= amalea2(_"Amalea reports our defeat…",
+      -- TRANSLATORS: Amalea
+      _([[Oh no Lutius, I don't know how this could have happened, but the Barbarians have sacked our headquarters. So we have lost this battle and our empire!]])),
+   posy=1,
+}
+
+amalea_22 = {
+   title=_"Amalea has Bad News",
+   body= amalea2(_"Amalea reports our headquarters lost…",
+      -- TRANSLATORS: Amalea
+      _([[Oh no Lutius, I don't know how this could have happened, but the Barbarians have destroyed our headquarters. So we can't deliver the wares to Julia anymore.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Amalea
+      _([[Now we need to try to fulfil our duties without their technology. But this will not be an easy task at all.]])),
+   posy=1,
+}
+
+amalea_23 = {
+   title=_"Defeated!",
+   body= amalea2(_"Amalea reports our defeat…",
+      -- TRANSLATORS: Amalea
+      _([[Oh no Lutius, I don't know how this could have happened, but the Barbarians have destroyed our last warehouse. So we have lost this battle and our empire!]])),
+   posy=1,
+}
 
 -- Saledus
 
