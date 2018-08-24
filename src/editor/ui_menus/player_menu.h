@@ -70,8 +70,6 @@ private:
 	UI::Box box_;
 	UI::Dropdown<uintptr_t> no_of_players_;
 	std::vector<std::unique_ptr<PlayerEditRow>> rows_;
-
-	const std::string default_tribe_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_PLAYER_MENU_H
