@@ -307,7 +307,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				for (Widelands::Bob* bob = f->fcoords.field->get_first_bob(); bob;
 					 bob = bob->get_next_bob()) {
 					bob->draw(gbase, f->rendertarget_pixel, scale, dst);
-					mapobjects_to_draw_text_for.push_back(std::make_pair(f->rendertarget_pixel.cast<int>(), bob));
+					mapobjects_to_draw_text_for.push_back(std::make_pair(bob->calc_drawpos(gbase, f->rendertarget_pixel, scale).cast<int>(), bob));
 				}
 			} else if (f->vision == 1) {
 				// We never show census or statistics for objects in the fog.

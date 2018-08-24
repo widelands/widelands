@@ -138,7 +138,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 		     bob = bob->get_next_bob()) {
 			bob->draw(the_game, field.rendertarget_pixel, scale, dst);
-			mapobjects_to_draw_text_for.push_back(std::make_pair(field.rendertarget_pixel.cast<int>(), bob));
+			mapobjects_to_draw_text_for.push_back(std::make_pair(bob->calc_drawpos(the_game, field.rendertarget_pixel, scale).cast<int>(), bob));
 		}
 
 		// Draw work area previews.
