@@ -63,7 +63,7 @@ void draw_mapobject_infotext(RenderTarget* dst, const Vector2i& init_position, f
 	}
 
 	const std::string statistics_string = (text_to_draw & TextToDraw::kStatistics) ? mapobject->info_string(Widelands::MapObject::InfoStringType::kStatistics) : "";
-	if (statistics_string.empty()) {
+	if (census_string.empty() && statistics_string.empty()) {
 		// Nothing to do
 		return;
 	}
