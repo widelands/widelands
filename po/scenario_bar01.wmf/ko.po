@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-10 07:21+0000\n"
-"PO-Revision-Date: 2018-08-19 07:31+0000\n"
+"POT-Creation-Date: 2018-08-19 11:47+0000\n"
+"PO-Revision-Date: 2018-08-22 02:37+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -891,7 +891,7 @@ msgstr "칸트루크는 안심했다…"
 msgid ""
 "Wonderful! Our roofs are not dripping anymore, and we have all the material "
 "we need for, well, whichever monumental building we see fit!"
-msgstr ""
+msgstr "훌륭하오! 이제 더이상 우리의 지붕은 물방울이 떨어지지 않게되었소. 음, 우리는 어떠한 기념비적인 건물에 필요한 재료를 모두 가지게 되었소!"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:477
 msgid "We Need Oxen!"
@@ -904,7 +904,7 @@ msgid ""
 "overwhelming. Our poor carriers are no longer able to transport the goods as"
 " fast as we need them to. I suggest we give them some support by breeding "
 "oxen."
-msgstr ""
+msgstr "우리의 영역은 점점 커지고있고 도로의 수송량은 압도적으로 증가하고 있소. 우리의 불쌍한 운송인들은 더 이상 우리의 수요를 맞출 만큼 물건을 빨리 운송하지 못하오. 그래서 나는 우리가 황소를 사육함으로서 그들에게 약간의 지원을 제공할것을 제안하오."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:483
@@ -912,7 +912,7 @@ msgid ""
 "They are amazing animals: The ox is as swift as a human being while being "
 "much stronger and very frugal: all we need is wheat and water to breed them "
 "and they will do their work on the roads loyally and reliably."
-msgstr ""
+msgstr "그들은 놀라운 동물들이오. 소는 인간만큼 빠르고 훨씬 강하며 알뜰합니다. 우리에게 필요한것은 밀과 물을 주어 기르면, 그들은 길에서 충성스럽고 믿을수있게 그들의 일을 할것이오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:488
 msgid "Mission Complete"
@@ -938,12 +938,12 @@ msgid ""
 " through these dark days. Yet before I could speak any words of gratitude or"
 " encouragement, one of my warriors ran into the inn. He had been far out in "
 "the forest for the past days and I could see how weary he was."
-msgstr ""
+msgstr "내가 주위를 둘러보니, 충직한 얼굴을 보았고, 내가 그들을 이 어두운 날들을 통해 인도할수 있었소. 아직 내가 감사하거나 격려하는 말을 하기 전인데, 내 전사 중 한 명이 여관에 달려들었소.  (번역확인)그는 지난 몇일동안 숲속 멀리 있었고, 그가 얼마나 피곤했는지 알수있었소."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:497
 msgid "The news he brought changed everything…"
-msgstr ""
+msgstr "그가 가져온 소식은 모든 것을 바꿨소…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:498
 msgid "Victory"
@@ -953,7 +953,7 @@ msgstr "승리"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr ""
+msgstr "당신은 이 임무를 완수했습니다. 원한다면 계속 할수있고, 그렇지 않으면 다음 임무로 이동하십시오."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
 msgid "One Full Moon Night"
@@ -964,7 +964,7 @@ msgstr "보름달의 밤"
 msgid ""
 "One night, when the moon shone brightly, I climbed to the peak of "
 "Kal’mavrath."
-msgstr ""
+msgstr "보름달이 밝게 빛나는 어느 날 밤, 나는 칼'마브라쓰산 정상까지 올라갔다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:509
@@ -973,7 +973,7 @@ msgid ""
 "distance. It is incredible with how much passion my brethren fight this war."
 " I fear the moment I will see Al’thunran again – will there be anything but "
 "ashes and wasted ruins left of our once beautiful capital when we get there?"
-msgstr ""
+msgstr "내가 지평선을 바라봤을때, 멀리서 나는 여전히 피비린내나는 진홍빛 깜박거림을 보았다. 내 형제들이 이 전쟁에 얼마나 열정을 가지고 싸우는지 나는 믿을 수 없다. 나는 알'쑨란을 다시보게될 순간이 두렵소. –  (번역확인)우리가 거기에 도착했을 때, 우리의 아름다운 수도는 유골과 폐허가 남아있을 것인가?"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:513
 msgid "Another Cold Day"
@@ -989,14 +989,14 @@ msgid ""
 "The winter is upon us. Many of us are suffering from the cold, yet we must "
 "endure. The day we may return cannot be far anymore – it must not be far "
 "anymore."
-msgstr ""
+msgstr "겨울이 다가오고있소. 많은 사람들이 추위에 시달릴것이오. 그러나 우리는 견뎌내여하오. 우리가 돌아갈 날이 머지 않았소 – 더는 멀지 않을것이오."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:519
 msgid ""
 "I prayed that it might get warmer again, as I prayed that the war would "
 "finally come to an end."
-msgstr ""
+msgstr "나는 다시 따뜻해지도록 빌었고 그리고 마침내 전쟁이 끝나기를 빌었소."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:522
@@ -1005,21 +1005,21 @@ msgstr "지금까지는 그 어느 쪽의 소원도 이루어지고 있지 않�
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:526
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "우리에게 우호적인 마을이 우리와 합류를 했습니다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:529
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
-msgstr ""
+msgstr "우리에게 우호적이고 생산적인 사람들이 사는 마을을 발견했습니다. 그들은 우리의 풍요로움과, 기술력과 군사력에 좋은 느낌을 받았다고 합니다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:532
 msgid ""
 "They have lived simply, yet blithely, from hunting and farming. They have "
 "not been involved in any conflict so far, and are not ready for fighting."
-msgstr ""
+msgstr "그들은 사냥과 농사를 통해 소박하고 행복하게 살아왔소. 그들은 지금까지 어떠한 충돌에도 관여하지 않았고, 싸울 준비도 되어있지않았소."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:535
