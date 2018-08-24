@@ -28,7 +28,17 @@ tribes:add_custom_building {
 
 tribes:add_custom_building {
    tribename = "empire",
+   buildingname = "empire_brewery2",
+}
+
+tribes:add_custom_building {
+   tribename = "empire",
    buildingname = "empire_farm1",
+}
+
+tribes:add_custom_building {
+   tribename = "empire",
+   buildingname = "empire_farm2",
 }
 
 tribes:add_custom_building {
@@ -44,6 +54,11 @@ tribes:add_custom_building {
 tribes:add_custom_building {
    tribename = "empire",
    buildingname = "empire_mill1",
+}
+
+tribes:add_custom_building {
+   tribename = "empire",
+   buildingname = "empire_mill2",
 }
 
 tribes:add_custom_building {

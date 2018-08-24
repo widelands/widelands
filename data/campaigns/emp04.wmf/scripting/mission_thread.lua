@@ -22,7 +22,7 @@ function dismantle()
    end
    sleep(2000)
    p1:allow_buildings("all")
-   p1:forbid_buildings{"empire_farm", "empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2","empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
+   p1:forbid_buildings{"empire_farm", "empire_farm2", "empire_mill", "empire_brewery", "empire_mill2", "empire_brewery2","empire_trainingcamp", "empire_colosseum", "empire_lumberjacks_house1", "empire_well1", "empire_foresters_house1"}
    o.done = true
 
    campaign_message_box(amalea_3)
