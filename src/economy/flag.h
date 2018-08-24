@@ -26,7 +26,6 @@
 
 #include "base/macros.h"
 #include "economy/routing_node.h"
-#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/walkingdir.h"
 
@@ -170,7 +169,6 @@ protected:
 	void cleanup(EditorGameBase&) override;
 
 	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
 	          const Vector2f& point_on_dst,
 	          float scale,
 	          RenderTarget* dst) override;

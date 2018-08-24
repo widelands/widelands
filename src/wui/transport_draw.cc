@@ -27,7 +27,6 @@
 namespace Widelands {
 
 void Flag::draw(uint32_t gametime,
-                const TextToDraw,
                 const Vector2f& point_on_dst,
                 float scale,
                 RenderTarget* dst) {
@@ -54,6 +53,6 @@ void Flag::draw(uint32_t gametime,
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) {
+void Road::draw(uint32_t, const Vector2f&, float, RenderTarget*) {
 }
 }

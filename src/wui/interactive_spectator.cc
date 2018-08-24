@@ -122,7 +122,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 	const auto text_to_draw = get_text_to_draw();
 	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
-	std::vector<std::pair<Vector2i, Widelands::Building*>> buildings_to_draw_text_for;
+	std::vector<std::pair<Vector2i, Widelands::MapObject*>> mapobjects_to_draw_text_for;
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
@@ -131,15 +131,14 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
-			imm->draw(gametime, text_to_draw, field.rendertarget_pixel, scale, dst);
-			if (upcast(Widelands::Building, building, imm)) {
-				buildings_to_draw_text_for.push_back(std::make_pair(field.rendertarget_pixel.cast<int>(), building));
-			}
+			imm->draw(gametime, field.rendertarget_pixel, scale, dst);
+			mapobjects_to_draw_text_for.push_back(std::make_pair(field.rendertarget_pixel.cast<int>(), imm));
 		}
 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 		     bob = bob->get_next_bob()) {
-			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, scale, dst);
+			bob->draw(the_game, field.rendertarget_pixel, scale, dst);
+			mapobjects_to_draw_text_for.push_back(std::make_pair(field.rendertarget_pixel.cast<int>(), bob));
 		}
 
 		// Draw work area previews.
@@ -173,18 +172,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 		}
 	}
 
-	// NOCOM we need to do ships and playerimmovables as well -> currently function do_draw_info
-	// NOCOM Blit building texts.
-	// Rendering text is expensive, so let's just do it for only a few sizes.
-	// The formula is a bit fancy to avoid too much text overlap.
-	const float scale_for_text = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
-	if (scale_for_text < 1.f) {
-		return;
-	}
-
-	for (const auto& draw_my_text : buildings_to_draw_text_for) {
-		draw_mapobject_infotext(dst, draw_my_text.first, scale_for_text, draw_my_text.second, text_to_draw);
-	}
+	// Blit census & Statistics.
+	draw_mapobject_infotexts(dst, scale, mapobjects_to_draw_text_for, text_to_draw, nullptr);
 }
 
 /**
