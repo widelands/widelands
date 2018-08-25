@@ -449,8 +449,6 @@ function wheat_chain()
    else
       o1.done = true
       local wh = p3:get_buildings("empire_temple_of_vesta")
-      --wh[1]:set_workers("empire_carrier", 0)
-      --wh[1]:set_workers("empire_recruit", 0)
       local wheat = hq[1]:get_wares("wheat") - 35
       local wine = hq[1]:get_wares("wine") - 15
       hq[1]:set_wares("wheat", wheat)
