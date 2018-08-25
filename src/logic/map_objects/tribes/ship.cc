@@ -981,7 +981,7 @@ std::string Ship::info_string(const MapObject::InfoStringType& format) {
 	std::string result;
 	switch (format) {
 	case MapObject::InfoStringType::kCensus:
-		result = descr().descname();
+		result = shipname_;
 		break;
 	case MapObject::InfoStringType::kStatistics: {
 		switch (ship_state_) {
