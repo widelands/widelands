@@ -663,7 +663,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	// check for remaining waiting ports, to reschedule update
 	uint16_t waiting_ports = ports_.size();
 	for (PortDock* p : ports_) {
-		if (!p->get_need_ship()) {
+		if (p->get_need_ship() == 0) {
 			--waiting_ports;
 			continue;
 		}
@@ -708,7 +708,7 @@ bool Fleet::is_path_favourable(PortDock& start, PortDock& middle, PortDock& fini
  * \return that port
  */
 PortDock* Fleet::find_next_dest(Game& game, Ship& ship, PortDock* const cur_port) {
-	uint32_t const max_capacity = ship.descr().get_capacity();
+	// uint32_t const max_capacity = ship.descr().get_capacity();
 	PortDock* best_port = nullptr;
 	float best_score = 0;
 
@@ -749,7 +749,7 @@ PortDock* Fleet::find_next_dest(Game& game, Ship& ship, PortDock* const cur_port
 			}
 		}
 
-		if (score == 0 && !p->get_need_ship()) {
+		if (score == 0 && p->get_need_ship() == 0) {
 			continue; // empty ship to empty port
 		}
 
@@ -768,7 +768,7 @@ PortDock* Fleet::find_next_dest(Game& game, Ship& ship, PortDock* const cur_port
 			route_length = ship.calculate_sea_route(game, *p);
 		}
 
-		score = (score + 1) * (score + std::min(max_capacity, p->get_need_ship()));
+		score = (score + 1) * (score + p->get_need_ship());
 		score = score * (1 - route_length / (score + route_length));
 		if (score > best_score) {
 			best_score = score;

@@ -85,9 +85,7 @@ public:
 		return fleet_;
 	}
 	PortDock* get_dock(Flag& flag) const;
-	uint32_t get_need_ship() const {
-		return waiting_.size() + (expedition_ready_ ? 20 : 0);
-	}
+	uint32_t get_need_ship() const;
 
 	void set_economy(Economy*) override;
 
@@ -115,6 +113,7 @@ public:
 
 	void shipping_item_arrived(Game&, ShippingItem&);
 	void shipping_item_returned(Game&, ShippingItem&);
+	void ship_coming(bool affirmative);
 	void ship_arrived(Game&, Ship&);
 
 	void log_general_info(const EditorGameBase&) override;
@@ -148,7 +147,7 @@ private:
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
 	std::vector<ShippingItem> waiting_;
-	bool need_ship_;
+	uint8_t ships_coming_;
 	bool expedition_ready_;
 
 	std::unique_ptr<ExpeditionBootstrap> expedition_bootstrap_;

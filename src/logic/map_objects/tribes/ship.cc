@@ -738,6 +738,7 @@ void Ship::set_destination(PortDock* pd) {
 	if (pd) {
 		molog("set_destination / sending to portdock %u (carrying %" PRIuS " items)\n", pd->serial(),
 			  items_.size());
+		pd->ship_coming(true);
 	} else {
 		molog("set_destination / none\n");
 	}
@@ -994,8 +995,12 @@ void Ship::exp_cancel(Game& game) {
 /// @note only called via player command
 void Ship::sink_ship(Game& game) {
 	// Running colonization has the highest priority + a sink request is only valid once
-	if (!state_is_sinkable())
+	if (!state_is_sinkable()) {
 		return;
+	}
+	if (destination_.is_set()) {
+		destination_.get(game)->ship_coming(false);
+	}
 	ship_state_ = ShipStates::kSinkRequest;
 	// Make sure the ship is active and close possible open windows
 	ship_wakeup(game);
