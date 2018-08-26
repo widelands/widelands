@@ -5,6 +5,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
   <name>Widelands</name>
+  <icon type="stock">widelands</icon>
   <summary>A real-time build-up strategy game</summary>
   <summary xml:lang="ar">لعبة بناء إستراتيجية في الوقت الحقيقي</summary>
   <summary xml:lang="bg">Стратегическа игра за изграждане на цивилизация в реално време</summary>
