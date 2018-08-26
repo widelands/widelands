@@ -182,7 +182,8 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 							g_gr->images().get("images/ui_fsmenu/random.png"), false,
 							_("The tribe will be selected at random"));
 		}
-		plr_tribe->select(Widelands::tribe_exists(map.get_scenario_player_tribe(p)) ? map.get_scenario_player_tribe(p) :
+
+		plr_tribe->select((p < map.get_nrplayers() && Widelands::tribe_exists(map.get_scenario_player_tribe(p))) ? map.get_scenario_player_tribe(p) :
 		                                                                   "");
 		plr_tribe->selected.connect(
 		   boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
