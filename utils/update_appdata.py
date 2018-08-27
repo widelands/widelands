@@ -59,6 +59,7 @@ print('- Reading source from JSON:')
 english_source_file = open(english_source_filename, 'r')
 english_source = json.load(english_source_file)
 
+name_en = english_source['name']
 tagline_en = english_source['tagline']
 descriptions_en = english_source['description']
 generic_name_en = english_source['category']
@@ -66,6 +67,7 @@ generic_name_en = english_source['category']
 english_source_file.close()
 
 # For appdata.xml
+names = '  <name>' + name_en + '</name>\n'
 summaries = '  <summary>' + tagline_en + '</summary>\n'
 descriptions = '  <description>\n'
 for description in descriptions_en:
@@ -102,6 +104,8 @@ for translation_filename in translation_files:
             # .desktop
             generic_names += 'GenericName[' + \
                 lang_code + ']=' + generic_name + '\n'
+        if translation.has_key('name') and translation['name'] != name_en:  # appdata.xml
+            names += "  <name xml:lang=\"" + lang_code + "\">" + translation['name'] +'</name>\n'
         if translation['description'] != descriptions_en:  # appdata.xml
             for description in translation['description']:
                 descriptions += "    <p xml:lang=\"" + lang_code + "\">\n"
@@ -116,7 +120,7 @@ appdata = ''
 
 for line in input_file:
     if line.strip() == 'SUMMARY_DESCRIPTION_HOOK':
-        appdata += summaries + descriptions
+        appdata += names + summaries + descriptions
     elif line.strip() == 'LANGUAGES_HOOK':
         for langcode in langcodes:
             appdata += '    <lang>' + langcode + '</lang>\n'
