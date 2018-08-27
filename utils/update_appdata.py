@@ -12,7 +12,7 @@ import sys
 # ../debian/widelands.appdata.xml.stub
 # That file contains a SUMMARY_DESCRIPTION_HOOK where the translatable information
 # is inserted.
-# A language list is inserted into LANGUAGES_HOOK
+# A language list and textdomain info is inserted into LANGUAGES_HOOK
 #
 # The output is written to ../debian/widelands.appdata.xml
 #
@@ -53,6 +53,16 @@ english_source_filename = os.path.normpath(
 if (not os.path.isfile(english_source_filename)):
     print('Error: File ' + english_source_filename + ' not found.')
     sys.exit(1)
+
+print('- Reading textdomains:')
+
+textdomain_path = os.path.normpath(
+    base_path + '/po')
+textdomains = []
+textdomain_path_contents = os.listdir(textdomain_path)
+for textdomain in textdomain_path_contents:
+    if os.path.isdir(os.path.normpath(textdomain_path + "/" + textdomain)):
+        textdomains.append(textdomain)
 
 print('- Reading source from JSON:')
 
@@ -130,8 +140,12 @@ for line in input_file:
     if line.strip() == 'SUMMARY_DESCRIPTION_HOOK':
         appdata += names + summaries + descriptions
     elif line.strip() == 'LANGUAGES_HOOK':
+        appdata += '  <languages>\n'
         for langcode in langcodes:
             appdata += '    <lang>' + langcode + '</lang>\n'
+        appdata += '  </languages>\n'
+        for textdomain in textdomains:
+            appdata += '  <translation type="gettext">' + textdomain + '</translation>\n'
     else:
         appdata += line
 
