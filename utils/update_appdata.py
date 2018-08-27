@@ -12,6 +12,8 @@ import sys
 # ../debian/widelands.appdata.xml.stub
 # That file contains a SUMMARY_DESCRIPTION_HOOK where the translatable information
 # is inserted.
+# A language list is inserted into LANGUAGES_HOOK
+#
 # The output is written to ../debian/widelands.appdata.xml
 #
 # All non-translatable content for ../debian/org.widelands.widelands.desktop is taken from
@@ -79,6 +81,7 @@ print('- Reading translations from JSON:')
 
 # Each language's translations live in a separate file, so we list the dir
 translation_files = sorted(os.listdir(translations_path), key=str.lower)
+langcodes = []
 
 for translation_filename in translation_files:
     # Only json files, and not the template file please
@@ -87,6 +90,7 @@ for translation_filename in translation_files:
             translations_path + '/' + translation_filename, 'r')
         translation = json.load(translation_file)
         lang_code = translation_filename[:-5]
+        langcodes.append(lang_code)
         tagline = translation['tagline']
         if tagline != tagline_en:
             summaries += "  <summary xml:lang=\"" + lang_code + \
@@ -111,10 +115,13 @@ input_file = open(appdata_input_filename, 'r')
 appdata = ''
 
 for line in input_file:
-    if line.strip() != 'SUMMARY_DESCRIPTION_HOOK':
-        appdata += line
-    else:
+    if line.strip() == 'SUMMARY_DESCRIPTION_HOOK':
         appdata += summaries + descriptions
+    elif line.strip() == 'LANGUAGES_HOOK':
+        for langcode in langcodes:
+            appdata += '    <lang>' + langcode + '</lang>\n'
+    else:
+        appdata += line
 
 input_file.close()
 

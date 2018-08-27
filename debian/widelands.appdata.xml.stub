@@ -53,6 +53,9 @@
     <release date="2002-09-03" version="Build 2"/>
     <release date="2002-08-27" version="Build 1"/>
   </releases>
+  <languages>
+    LANGUAGES_HOOK
+  </languages>
   <url type="bugtracker">https://bugs.launchpad.net/widelands</url>
   <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>
   <url type="help">https://wl.widelands.org/wiki/Game%20Manual/</url>
