@@ -303,9 +303,15 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 
 	FCoords position = map.get_fcoords(get_position());
 	if (position.field->get_immovable() == dst) {
-		molog("ship_update: Arrived at dock %u\n", dst->serial());
-		lastdock_ = dst;
-		withdraw_items(game, *dst);
+		if (lastdock_ != dst) {
+			molog("ship_update: Arrived at dock %u\n", dst->serial());
+			lastdock_ = dst;
+		}
+		if (withdraw_items(game, *dst)) {
+			schedule_act(game, 1500);
+			return true;
+		}
+
 		dst->ship_arrived(game, *this); // this should call set_destination
 		dst = get_destination(game);
 		if (dst) {
@@ -753,19 +759,26 @@ void Ship::add_item(Game& game, const ShippingItem& item) {
 }
 
 /**
- * Unload all items designated for given dock or for no dock.
+ * Unload one item designated for given dock or for no dock.
+ * \return true if item unloaded.
  */
-void Ship::withdraw_items(Game& game, PortDock& pd) {
+bool Ship::withdraw_items(Game& game, PortDock& pd) {
+	bool unloaded = false;
 	uint32_t dst = 0;
 	for (ShippingItem& si : items_) {
-		PortDock* itemdest = si.get_destination(game);
-		if (!itemdest || itemdest == &pd) {
-			pd.shipping_item_arrived(game, si);
-		} else {
-			items_[dst++] = si;
+		if (!unloaded) {
+			PortDock* itemdest = si.get_destination(game);
+			if (!itemdest || itemdest == &pd) {
+				pd.shipping_item_arrived(game, si);
+				unloaded = true;
+				continue;
+			}
 		}
+
+		items_[dst++] = si;
 	}
 	items_.resize(dst);
+	return unloaded;
 }
 
 /**

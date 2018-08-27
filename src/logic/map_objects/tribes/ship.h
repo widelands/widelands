@@ -127,7 +127,7 @@ struct Ship : Bob {
 	}
 
 	void add_item(Game&, const ShippingItem&);
-	void withdraw_items(Game&, PortDock&);
+	bool withdraw_items(Game&, PortDock&);
 	void unload_unfit_items(Game&, PortDock& here, PortDock& nextdest);
 
 	// A ship with task expedition can be in four states: kExpeditionWaiting, kExpeditionScouting,
