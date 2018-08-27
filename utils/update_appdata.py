@@ -63,6 +63,7 @@ name_en = english_source['name']
 tagline_en = english_source['tagline']
 descriptions_en = english_source['description']
 generic_name_en = english_source['category']
+desktop_name_en = english_source['name']
 
 english_source_file.close()
 
@@ -76,6 +77,7 @@ for description in descriptions_en:
     descriptions += '    </p>\n'
 
 # For .desktop
+desktop_names = 'Name=' + desktop_name_en + '\n'
 generic_names = 'GenericName=' + generic_name_en + '\n'
 comments = 'Comment=' + tagline_en + '\n'
 
@@ -104,6 +106,12 @@ for translation_filename in translation_files:
             # .desktop
             generic_names += 'GenericName[' + \
                 lang_code + ']=' + generic_name + '\n'
+        if translation.has_key('name'):
+            desktop_name = translation['name']
+            if desktop_name != desktop_name_en:
+                # .desktop
+                desktop_names += 'Name[' + \
+                    lang_code + ']=' + desktop_name + '\n'
         if translation.has_key('name') and translation['name'] != name_en:  # appdata.xml
             names += "  <name xml:lang=\"" + lang_code + "\">" + translation['name'] +'</name>\n'
         if translation['description'] != descriptions_en:  # appdata.xml
@@ -142,7 +150,7 @@ for line in input_file:
     if line.strip() != 'GENERIC_NAME_COMMENT_HOOK':
         desktop += line
     else:
-        desktop += generic_names + comments
+        desktop += desktop_names + generic_names + comments
 
 input_file.close()
 
