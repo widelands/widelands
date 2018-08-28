@@ -46,7 +46,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	const std::string& font_face = "serif";
 	std::string message = "<p><font color=33ff33 size=9>";
 
-	std::string sanitized = sanitize_message(chat_message);
+	std::string sanitized = richtext_escape(chat_message.msg);
 
 	// time calculation
 	char ts[13];
@@ -98,50 +98,4 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 
 	// return the formated message
 	return message + "</font><br></p>";
-}
-
-std::string sanitize_message(const ChatMessage& chat_message) {
-	// Escape richtext characters
-	// The goal of this code is two-fold:
-	//  1. Assuming an honest game host, we want to prevent the ability of
-	//     clients to use richtext.
-	//  2. Assuming a malicious host or meta server, we want to reduce the
-	//     likelihood that a bug in the richtext renderer can be exploited,
-	//     by restricting the set of allowed richtext commands.
-	//     Most notably, images are not allowed in richtext at all.
-	//
-	// Note that we do want host and meta server to send some richtext code,
-	// as the ability to send formatted commands is nice for the usability
-	// of meta server so we're treading a bit of a fine line here.
-
-	if (chat_message.playern >= 0) {
-		return richtext_escape(chat_message.msg);
-	}
-
-	std::string sanitized;
-	for (std::string::size_type pos = 0; pos < chat_message.msg.size(); ++pos) {
-		if (chat_message.msg[pos] == '<') {
-			static const std::string good1 = "</p><p";
-			static const std::string good2 = "<br>";
-			if (!chat_message.msg.compare(pos, good1.size(), good1)) {
-				// TODO(MiroslavR): The logic here seems flawed.
-				std::string::size_type nextclose = chat_message.msg.find('>', pos + good1.size());
-				if (nextclose != std::string::npos &&
-				    (nextclose == pos + good1.size() || chat_message.msg[pos + good1.size()] == ' ')) {
-					sanitized += good1;
-					pos += good1.size() - 1;
-					continue;
-				}
-			} else if (!chat_message.msg.compare(pos, good2.size(), good2)) {
-				sanitized += good2;
-				pos += good2.size() - 1;
-				continue;
-			}
-
-			sanitized += "&lt;";
-		} else {
-			sanitized += chat_message.msg[pos];
-		}
-	}
-	return sanitized;
 }
