@@ -4,8 +4,8 @@
   <id>org.widelands.widelands.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
-  <name>Widelands</name>
   <icon type="stock">widelands</icon>
+  <name>Widelands</name>
   <summary>A real-time build-up strategy game</summary>
   <summary xml:lang="ar">لعبة بناء إستراتيجية في الوقت الحقيقي</summary>
   <summary xml:lang="bg">Стратегическа игра за изграждане на цивилизация в реално време</summary>
@@ -259,8 +259,6 @@
       <caption>Map Selection Screen</caption>
     </screenshot>
   </screenshots>
-  <url type="homepage">https://wl.widelands.org/</url>
-  <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <releases>
     <release date="2016-11-11" version="Build 19"/>
     <release date="2014-02-22" version="Build 18"/>
@@ -283,10 +281,103 @@
     <release date="2002-09-03" version="Build 2"/>
     <release date="2002-08-27" version="Build 1"/>
   </releases>
+  <languages>
+    <lang>ar</lang>
+    <lang>ast</lang>
+    <lang>bg</lang>
+    <lang>br</lang>
+    <lang>ca</lang>
+    <lang>cs</lang>
+    <lang>da</lang>
+    <lang>de</lang>
+    <lang>el</lang>
+    <lang>en_CA</lang>
+    <lang>en_GB</lang>
+    <lang>en_US</lang>
+    <lang>eo</lang>
+    <lang>es</lang>
+    <lang>et</lang>
+    <lang>eu</lang>
+    <lang>fa</lang>
+    <lang>fi</lang>
+    <lang>fr</lang>
+    <lang>fy</lang>
+    <lang>ga</lang>
+    <lang>gd</lang>
+    <lang>gl</lang>
+    <lang>he</lang>
+    <lang>hi</lang>
+    <lang>hr</lang>
+    <lang>hu</lang>
+    <lang>ia</lang>
+    <lang>id</lang>
+    <lang>ig</lang>
+    <lang>it</lang>
+    <lang>ja</lang>
+    <lang>jv</lang>
+    <lang>ka</lang>
+    <lang>ko</lang>
+    <lang>krl</lang>
+    <lang>la</lang>
+    <lang>lt</lang>
+    <lang>mr</lang>
+    <lang>ms</lang>
+    <lang>my</lang>
+    <lang>nb</lang>
+    <lang>nds</lang>
+    <lang>nl</lang>
+    <lang>nn</lang>
+    <lang>oc</lang>
+    <lang>pl</lang>
+    <lang>pt</lang>
+    <lang>pt_BR</lang>
+    <lang>ro</lang>
+    <lang>ru</lang>
+    <lang>rw</lang>
+    <lang>si</lang>
+    <lang>sk</lang>
+    <lang>sl</lang>
+    <lang>sr</lang>
+    <lang>sv</lang>
+    <lang>tr</lang>
+    <lang>uk</lang>
+    <lang>vi</lang>
+    <lang>zh_CN</lang>
+    <lang>zh_TW</lang>
+  </languages>
+  <translation type="gettext">win_conditions</translation>
+  <translation type="gettext">scenario_dummy.wmf</translation>
+  <translation type="gettext">mp_scenario_island_hopping.wmf</translation>
+  <translation type="gettext">scenario_bar01.wmf</translation>
+  <translation type="gettext">maps</translation>
+  <translation type="gettext">scenario_emp03.wmf</translation>
+  <translation type="gettext">widelands</translation>
+  <translation type="gettext">scenario_tutorial03_seafaring.wmf</translation>
+  <translation type="gettext">tribes</translation>
+  <translation type="gettext">scenario_emp04.wmf</translation>
+  <translation type="gettext">scenario_emp02.wmf</translation>
+  <translation type="gettext">texts</translation>
+  <translation type="gettext">scenario_tutorial01_basic_control.wmf</translation>
+  <translation type="gettext">scenario_fri02.wmf</translation>
+  <translation type="gettext">scenario_tutorial04_economy.wmf</translation>
+  <translation type="gettext">tribes_encyclopedia</translation>
+  <translation type="gettext">scenario_bar02.wmf</translation>
+  <translation type="gettext">world</translation>
+  <translation type="gettext">scenario_emp01.wmf</translation>
+  <translation type="gettext">scenario_atl01.wmf</translation>
+  <translation type="gettext">widelands_console</translation>
+  <translation type="gettext">scenario_fri01.wmf</translation>
+  <translation type="gettext">widelands_editor</translation>
+  <translation type="gettext">scenario_tutorial02_warfare.wmf</translation>
+  <translation type="gettext">mp_scenario_smugglers.wmf</translation>
+  <translation type="gettext">map_the_green_plateau.wmf</translation>
+  <url type="homepage">https://wl.widelands.org/</url>
   <url type="bugtracker">https://bugs.launchpad.net/widelands</url>
   <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>
   <url type="help">https://wl.widelands.org/wiki/Game%20Manual/</url>
+  <url type="translate">https://wl.widelands.org/wiki/TranslatingWidelands/</url>
   <developer_name>The Widelands Development Team</developer_name>
+  <update_contact>widelands-dev_at_lists.launchpad.net</update_contact>
   <content_rating type="oars-1.0">
     <content_attribute id="violence-cartoon">moderate</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
