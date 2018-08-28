@@ -23,7 +23,7 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/map_objects/tribes/building.h"
@@ -380,8 +380,8 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 
 	// We don't want translators to translate this twice, so it's a bit involved.
 	int w =
-	   UI::g_fh1->render(as_uifont(
-	                        (boost::format("%s ")  // We need some extra space to fix bug 724169
+	   UI::g_fh->render(
+	              as_uifont((boost::format("%s ")  // We need some extra space to fix bug 724169
 	                         % (boost::format(
 	                               /** TRANSLATORS: Health, Attack, Defense, Evade */
 	                               _("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u")) %
@@ -389,7 +389,7 @@ SoldierList::SoldierList(UI::Panel& parent, InteractiveGameBase& igb, Widelands:
 	                           .str()))
 	      ->width();
 	uint32_t maxtextwidth =
-	   std::max(w, UI::g_fh1->render(as_uifont(_("Click soldier to send away")))->width());
+	   std::max(w, UI::g_fh->render(as_uifont(_("Click soldier to send away")))->width());
 	set_min_desired_breadth(maxtextwidth + 4);
 
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);

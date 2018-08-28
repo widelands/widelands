@@ -257,7 +257,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
 
 FieldActionWindow::~FieldActionWindow() {
 	if (showing_workarea_preview_)
-		ibase().hide_work_area(node_);
+		ibase().hide_workarea(node_);
 	ibase().set_sel_freeze(false);
 	delete attack_box_;
 }
@@ -684,16 +684,16 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 
 void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
 	if (showing_workarea_preview_) {
-		ibase().hide_work_area(node_);
+		ibase().hide_workarea(node_);
 		showing_workarea_preview_ = false;
 	}
 }
 
 void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex idx) {
-	if (ibase().show_workarea_preview_ && !showing_workarea_preview_) {
+	if (!showing_workarea_preview_) {
 		const WorkareaInfo& workarea_info =
 		   player_->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->workarea_info();
-		ibase().show_work_area(workarea_info, node_);
+		ibase().show_workarea(workarea_info, node_);
 		showing_workarea_preview_ = true;
 	}
 }

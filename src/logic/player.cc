@@ -357,6 +357,7 @@ MessageId Player::add_message_with_timeout(Game& game,
 	Coords const position = message->position();
 	for (const auto& tmp_message : messages()) {
 		if (tmp_message.second->type() == message->type() &&
+		    tmp_message.second->sub_type() == message->sub_type() &&
 		    gametime < tmp_message.second->sent() + timeout &&
 		    map.calc_distance(tmp_message.second->position(), position) <= radius) {
 			return MessageId::null();

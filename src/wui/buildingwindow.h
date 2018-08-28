@@ -69,7 +69,7 @@ public:
 	void think() override;
 
 protected:
-	virtual void init(bool avoid_fastclick);
+	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);
 	void die() override;
 
 	UI::TabPanel* get_tabs() {
@@ -80,7 +80,7 @@ protected:
 	void act_dismantle();
 	void act_debug();
 	void show_workarea();
-	void hide_workarea();
+	void hide_workarea(bool configure_button);
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
@@ -129,6 +129,8 @@ private:
 
 	bool showing_workarea_;
 	bool avoid_fastclick_;
+	// The building is being transformed from a contructionsite to a finished building etc.
+	bool is_warping_;
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>

@@ -50,7 +50,6 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
 	editbox.activate_history(true);
-	chatbox.force_new_renderer(true);
 
 	set_handle_mouse(true);
 	set_can_focus(true);
