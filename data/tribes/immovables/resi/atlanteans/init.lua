@@ -16,8 +16,9 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/none.png" },
-         hotspot = { 7, 10 },
+         pictures = {dirname .. "png/none.png"},
+         hotspot = {10, 36},
+         scale = 4,
       },
    }
 }
@@ -38,8 +39,10 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/water.png" },
-         hotspot = { 7, 10 },
+         pictures = path.list_files(dirname .. "png/water_?.png"),
+         hotspot = {10, 36},
+         scale = 4,
+         fps = 4,
       },
    }
 }
@@ -60,8 +63,10 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/coal_1.png" },
-         hotspot = { 7, 10 },
+         pictures = path.list_files(dirname .. "png/coal_1_?.png"),
+         hotspot = {10, 36},
+         scale = 4,
+         fps = 4,
       },
    }
 }
@@ -82,8 +87,10 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/gold_1.png" },
-         hotspot = { 7, 10 },
+         pictures = path.list_files(dirname .. "png/gold_1_?.png"),
+         hotspot = {10, 36},
+         scale = 4,
+         fps = 4,
       },
    }
 }
@@ -104,8 +111,10 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/iron_1.png" },
-         hotspot = { 7, 10 },
+         pictures = path.list_files(dirname .. "png/iron_1_?.png"),
+         hotspot = {10, 36},
+         scale = 4,
+         fps = 4,
       },
    }
 }
@@ -126,8 +135,10 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/stones_1.png" },
-         hotspot = { 7, 10 },
+         pictures = path.list_files(dirname .. "png/stones_1_?.png"),
+         hotspot = {10, 36},
+         scale = 4,
+         fps = 4,
       },
    }
 }
@@ -148,8 +159,10 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/coal_2.png" },
-         hotspot = { 7, 10 },
+         pictures = path.list_files(dirname .. "png/coal_2_?.png"),
+         hotspot = {10, 36},
+         scale = 4,
+         fps = 4,
       },
    }
 }
@@ -170,8 +183,10 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/gold_2.png" },
-         hotspot = { 7, 10 },
+         pictures = path.list_files(dirname .. "png/gold_2_?.png"),
+         hotspot = {10, 36},
+         scale = 4,
+         fps = 4,
       },
    }
 }
@@ -192,8 +207,10 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/iron_2.png" },
-         hotspot = { 7, 10 },
+         pictures = path.list_files(dirname .. "png/iron_2_?.png"),
+         hotspot = {10, 36},
+         scale = 4,
+         fps = 4,
       },
    }
 }
@@ -214,8 +231,10 @@ tribes:new_immovable_type {
 
    animations = {
       idle = {
-         pictures = { dirname .. "png/stones_2.png" },
-         hotspot = { 7, 10 },
+         pictures = path.list_files(dirname .. "png/stones_2_?.png"),
+         hotspot = {10, 36},
+         scale = 4,
+         fps = 4,
       },
    }
 }
