@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-28 07:19+0000\n"
-"PO-Revision-Date: 2018-07-28 07:23+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-08-10 07:21+0000\n"
+"PO-Revision-Date: 2018-08-15 16:14+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -421,25 +421,25 @@ msgstr "요새"
 #: ../../data/tribes/buildings/militarysites/frisians/outpost/init.lua:7
 msgctxt "frisians_building"
 msgid "Outpost"
-msgstr "감시 초소"
+msgstr "전선 기지"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:7
 msgctxt "frisians_building"
 msgid "Sentinel"
-msgstr "보초"
+msgstr "감시 초소(바뀜)"
 
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:46
 msgid "Your soldiers have occupied your sentinel."
-msgstr ""
+msgstr "병사들이 감시초소에 들어갔습니다"
 
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:47
 msgid "Your sentinel discovered an aggressor."
-msgstr ""
+msgstr "감시초소가 침략자를 발견했습니다"
 
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:48
 msgid "Your sentinel is under attack."
-msgstr ""
+msgstr "감시초소가 공격을 받고 있습니다."
 
 #: ../../data/tribes/buildings/militarysites/frisians/sentinel/init.lua:49
 msgid "The enemy defeated your soldiers at the sentinel."
@@ -1717,7 +1717,7 @@ msgid ""
 "The lumberjack working at this lumberjack’s hut can’t find any trees in his "
 "work area. You should consider dismantling or destroying the building or "
 "building a ranger’s hut."
-msgstr "나무꾼의 오두막에서 일하는 나무꾼은 작업 영역 내에 어떤 나무도 찾을 수 없습니다. 건물을 해체 또는 파괴하거나 삼림 관리원의 집을 건설하는 것을 고려하십시오."
+msgstr "나무꾼의 오두막에서 일하는 나무꾼은 작업 영역 내에 어떤 나무도 찾을 수 없습니다. 건물을 해체 또는 파괴하거나 숲 지키미의 집을 건설하는 것을 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:7
@@ -1785,7 +1785,7 @@ msgstr "채석장의 석공은 작업 영역 내에 어떤 바위도 찾을 수 
 #: ../../data/tribes/buildings/productionsites/barbarians/rangers_hut/init.lua:7
 msgctxt "barbarians_building"
 msgid "Ranger’s Hut"
-msgstr "삼림 관리원의 오두막"
+msgstr "숲 지킴이의 오두막"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:7
@@ -2756,26 +2756,26 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:7
 msgctxt "frisians_building"
 msgid "Recycling Center"
-msgstr ""
+msgstr "재활용 시설"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:85
 msgctxt "frisians_building"
 msgid "recycling fur"
-msgstr ""
+msgstr "재활용 모피"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:96
 msgctxt "frisians_building"
 msgid "recycling iron"
-msgstr ""
+msgstr "재활용 철"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:107
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
-msgstr ""
+msgstr "재활용 철과 금"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:7
@@ -4827,7 +4827,7 @@ msgstr "황소"
 #: ../../data/tribes/workers/barbarians/ranger/init.lua:32
 msgctxt "barbarians_worker"
 msgid "Ranger"
-msgstr "삼림 관리원"
+msgstr "숲 지킴이"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
 #: ../../data/tribes/workers/barbarians/recruit/init.lua:17

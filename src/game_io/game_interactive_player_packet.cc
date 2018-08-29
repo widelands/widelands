@@ -59,7 +59,11 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				if (player_number > max)
 					throw GameDataError("The game has no players!");
 			}
-			Vector2f center_map_pixel(fr.float_32(), fr.float_32());
+
+			Vector2f center_map_pixel = Vector2f::zero();
+			center_map_pixel.x = fr.float_32();
+			center_map_pixel.y = fr.float_32();
+
 			uint32_t const display_flags = fr.unsigned_32();
 
 			if (InteractiveBase* const ibase = game.get_ibase()) {
