@@ -4,7 +4,6 @@
   <id>org.widelands.widelands.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0</project_license>
-  <icon type="stock">widelands</icon>
   <name>Widelands</name>
   <summary>A real-time build-up strategy game</summary>
   <summary xml:lang="ar">لعبة بناء إستراتيجية في الوقت الحقيقي</summary>
