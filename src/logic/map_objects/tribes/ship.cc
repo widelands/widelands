@@ -308,7 +308,7 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 			lastdock_ = dst;
 		}
 		if (withdraw_items(game, *dst)) {
-			schedule_act(game, 1500);
+			schedule_act(game, kShipInterval);
 			return true;
 		}
 
@@ -494,7 +494,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			}
 
 			if (totalprob == 0) {
-				start_task_idle(game, descr().main_animation(), 1500);
+				start_task_idle(game, descr().main_animation(), kShipInterval);
 				return;
 			}
 
@@ -506,13 +506,13 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			}
 
 			if (dir == 0 || dir > LAST_DIRECTION) {
-				start_task_idle(game, descr().main_animation(), 1500);
+				start_task_idle(game, descr().main_animation(), kShipInterval);
 				return;
 			}
 
 			FCoords neighbour = map.get_neighbour(position, dir);
 			if (!(neighbour.field->nodecaps() & MOVECAPS_SWIM)) {
-				start_task_idle(game, descr().main_animation(), 1500);
+				start_task_idle(game, descr().main_animation(), kShipInterval);
 				return;
 			}
 
@@ -552,7 +552,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						             pgettext("ship", "Waiting"), _("Island Circumnavigated"),
 						             _("An expedition ship sailed around its island without any events."),
 						             "images/wui/ship/ship_explore_island_cw.png");
-						return start_task_idle(game, descr().main_animation(), 1500);
+						return start_task_idle(game, descr().main_animation(), kShipInterval);
 					}
 				}
 				// The ship is supposed to follow the coast as close as possible, therefore the check
@@ -595,7 +595,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 				    shipname_.c_str());
 				set_ship_state_and_notify(
 				   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
-				start_task_idle(game, descr().main_animation(), 1500);
+				start_task_idle(game, descr().main_animation(), kShipInterval);
 				return;
 			}
 		} else {  // scouting towards a specific direction
@@ -608,7 +608,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			// coast reached
 			set_ship_state_and_notify(
 			   ShipStates::kExpeditionWaiting, NoteShip::Action::kWaitingForCommand);
-			start_task_idle(game, descr().main_animation(), 1500);
+			start_task_idle(game, descr().main_animation(), kShipInterval);
 			// Send a message to the player, that a new coast was reached
 			send_message(game,
 			             /** TRANSLATORS: A ship has discovered land */
@@ -702,7 +702,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 			}
 
 			expedition_.reset(nullptr);
-			return start_task_idle(game, descr().main_animation(), 1500);
+			return start_task_idle(game, descr().main_animation(), kShipInterval);
 		}
 	}
 		FALLS_THROUGH;
@@ -711,7 +711,7 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	case ShipStates::kSinkRequest:
 	case ShipStates::kSinkAnimation: {
 		// wait for input
-		start_task_idle(game, descr().main_animation(), 1500);
+		start_task_idle(game, descr().main_animation(), kShipInterval);
 		return;
 	}
 	}
@@ -850,7 +850,7 @@ void Ship::start_task_movetodock(Game& game, PortDock& pd) {
 		// I (tiborb) failed to invoke this situation when testing so
 		// I am not sure if following line behaves allright
 		get_fleet()->update(game);
-		start_task_idle(game, descr().main_animation(), 5000);
+		start_task_idle(game, descr().main_animation(), kFleetInterval);
 	}
 }
 

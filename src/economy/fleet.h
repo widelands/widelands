@@ -46,6 +46,8 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FleetDescr);
 };
 
+constexpr int32_t kFleetInterval = 5000;
+
 /**
  * Manage all ships and ports of a player that are connected
  * by ocean.

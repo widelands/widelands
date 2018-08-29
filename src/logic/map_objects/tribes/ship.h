@@ -78,6 +78,8 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(ShipDescr);
 };
 
+constexpr int32_t kShipInterval = 1500;
+
 /**
  * Ships belong to a player and to an economy. The usually are in a (unique)
  * fleet for a player, but only if they are on standard duty. Exploration ships

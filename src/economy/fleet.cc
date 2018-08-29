@@ -628,8 +628,7 @@ void Fleet::update(EditorGameBase& egbase) {
 }
 
 /**
- * Act callback updates ship scheduling. All decisions about where transport ships
- * are supposed to go are made via this function.
+ * Act callback updates ship scheduling of idle ships.
  *
  * @note Do not call this directly; instead, trigger it via @ref update
  */
@@ -640,27 +639,14 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		// If we are here, most likely act() was called by a port with waiting wares or
 		// with an expedition ready, although there are still no ships.
 		// We can't handle it now, so we reschedule the act()
-		schedule_act(game, 5000);  // retry in the next time
+		schedule_act(game, kFleetInterval);  // retry in the next time
 		act_pending_ = true;
 		return;
 	}
 
 	molog("Fleet::act\n");
 
-	// For each idle ship, we need to calculate to which port to send it.
-	for (Ship* s : ships_) {
-		if (s->get_destination(game)) {
-			continue; // has already destination
-		}
-		if (s->get_ship_state() != Ship::ShipStates::kTransport) {
-			continue;  // in expedition obviously
-		}
-
-		s->set_destination(find_next_dest(game, *s, nullptr));
-		s->send_signal(game, "wakeup");
-	}
-
-	// check for remaining waiting ports, to reschedule update
+	// For each waiting port, try to find idle ships and send to it the closest one.
 	uint16_t waiting_ports = ports_.size();
 	for (PortDock* p : ports_) {
 		if (p->get_need_ship() == 0) {
@@ -668,17 +654,59 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 			continue;
 		}
 
+		Ship* closest_ship = nullptr;
+		float shortest_dist = 10000;
+		bool waiting = true;
+
 		for (Ship* s : ships_) {
-			if (s->get_destination(game) == p) {
-				--waiting_ports;
-				break;
+			if (s->get_destination(game)) {
+				if (s->get_destination(game) == p) {
+					waiting = false;
+					--waiting_ports;
+					break;
+				}
+				continue; // has already destination
 			}
+			if (s->get_ship_state() != Ship::ShipStates::kTransport) {
+				continue; // in expedition obviously
+			}
+
+			// here we get distance ship->port
+			int16_t route_length = 10000;
+
+			PortDock* cur_port = get_dock(game, s->get_position());
+			if (cur_port) { // we are in a port
+				if (cur_port == p) { // same port
+					route_length = 0;
+				} else { // different port
+					Path tmp_path;
+					if (get_path(*cur_port, *p, tmp_path)) { // try to use precalculated path
+						route_length = tmp_path.get_nsteps();
+					}
+				}
+			}
+
+			if (route_length == 10000) { // above failed, so we calculate path "manually"
+				// most probably the ship is not in a port (should not happen frequently)
+				route_length = s->calculate_sea_route(game, *p);
+			}
+
+			if (route_length < shortest_dist) {
+				shortest_dist = route_length;
+				closest_ship = s;
+			}
+		}
+
+		if (waiting && closest_ship) {
+			--waiting_ports;
+			closest_ship->set_destination(p);
+			closest_ship->send_signal(game, "wakeup");
 		}
 	}
 
 	if (waiting_ports > 0) {
 		molog("... there are %u ports requesting ship(s) we cannot satisfy yet\n", waiting_ports);
-		schedule_act(game, 5000);  // retry next time
+		schedule_act(game, kFleetInterval);  // retry next time
 		act_pending_ = true;
 	}
 }
@@ -706,6 +734,9 @@ bool Fleet::is_path_favourable(PortDock& start, PortDock& middle, PortDock& fini
  * For the given ship, go through all ports of this fleet
  * and find the one with the best score.
  * \return that port
+ *
+ * @note cur_port is never nullptr (we are always in a port),
+ * but that is kept in case the design changes in the future
  */
 PortDock* Fleet::find_next_dest(Game& game, Ship& ship, PortDock* const cur_port) {
 	// uint32_t const max_capacity = ship.descr().get_capacity();
