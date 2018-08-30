@@ -241,6 +241,10 @@ const std::set<DescriptionIndex>& TribeDescr::immovables() const {
 	return immovables_;
 }
 
+const ResourceIndicatorSet& resource_indicators() const {
+	return resource_indicators_;
+}
+
 bool TribeDescr::has_building(const DescriptionIndex& index) const {
 	return std::find(buildings_.begin(), buildings_.end(), index) != buildings_.end();
 }
