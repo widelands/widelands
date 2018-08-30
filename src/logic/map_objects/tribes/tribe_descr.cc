@@ -240,8 +240,7 @@ const std::set<DescriptionIndex>& TribeDescr::workers() const {
 const std::set<DescriptionIndex>& TribeDescr::immovables() const {
 	return immovables_;
 }
-
-const ResourceIndicatorSet& resource_indicators() const {
+const ResourceIndicatorSet& TribeDescr::resource_indicators() const {
 	return resource_indicators_;
 }
 
