@@ -691,10 +691,13 @@ void InteractiveBase::finish_build_waterway() {
 
 	waterwayb_remove_overlay();
 
-	if (buildwaterway_->get_nsteps()) {
+	const size_t length = buildwaterway_->get_nsteps();
+	if (length > egbase().map().get_waterway_max_length()) {
+		log("Refusing to finish waterway building: length is %i but limit is %i\n",
+					length, egbase().map().get_waterway_max_length());
+	}
+	else if (length) {
 		upcast(Game, game, &egbase());
-
-		// TODO(Nordfriese): Check whether the path exceeds the map-specific maximum length
 
 		// Build the path as requested
 		if (game)
@@ -794,10 +797,6 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 		if (map.findpath(buildwaterway_->get_end(), field, 0, path, cstep, Map::fpBidiCost) < 0)
 			return false;  //  could not find a path
 		buildwaterway_->append(map, path);
-		// TODO(Nordfriese): We should instead refuse to append if the resulting path
-		// would be longer than the map-specific limit
-		if (buildwaterway_->get_nsteps() > map.get_waterway_max_length())
-			buildwaterway_->truncate(map.get_waterway_max_length());
 	}
 
 	{
@@ -817,6 +816,9 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 		buildwaterway_->truncate(0);
 		buildwaterway_->append(map, path);
 	}
+
+	if (buildwaterway_->get_nsteps() > map.get_waterway_max_length())
+		buildwaterway_->truncate(map.get_waterway_max_length());
 
 	waterwayb_remove_overlay();
 	waterwayb_add_overlay();

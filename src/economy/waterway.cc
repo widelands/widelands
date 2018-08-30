@@ -80,11 +80,15 @@ bool Waterway::notify_ware(Game& game, Flag& flag) {
 }
 
 void Waterway::remove_worker(Worker& w) {
-	if (ferry_ != &w)
-		return;
+	if (ferry_ == &w) {
+		ferry_ = nullptr;
 
-	ferry_ = nullptr;
-	request_ferry();
+		// TODO(Nordfriese): We do not issue a new request because this causes a
+		// segfault if this is called because this waterway is being destroyed.
+		// We should somehow check whether we need to issue a new request or not.
+
+		// request_ferry();
+	}
 
 	PlayerImmovable::remove_worker(w);
 }

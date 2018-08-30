@@ -175,6 +175,8 @@ bool Ferry::init_fleet() {
 }
 
 Waterway* Ferry::get_destination(Game& game) const {
+	if (!destination_)
+		return nullptr;
 	return dynamic_cast<Waterway*>(game.map().get_immovable(*destination_));
 }
 

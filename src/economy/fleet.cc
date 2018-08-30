@@ -30,6 +30,7 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
+#include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/ferry.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/map_objects/tribes/warehouse.h"
@@ -312,7 +313,6 @@ void Fleet::cleanup(EditorGameBase& egbase) {
 	while (!pending_ferry_requests_.empty()) {
 		pending_ferry_requests_.back()->set_fleet(nullptr);
 		pending_ferry_requests_.pop_back();
-		// TODO(Nordfriese): Should we notify the waterway that it should issue a new request?
 	}
 
 	MapObject::cleanup(egbase);
@@ -765,13 +765,14 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		Waterway* ww = pending_ferry_requests_[0];
 
 		Ferry* ferry = nullptr;
-		uint32_t dist = 0;
+		int32_t dist = 0;
 		for (Ferry* f : idle_ferries) {
 			// decide how far this ferry is from the waterway
-			// TODO(Nordfriese): We should use the actual distance-by-water here,
-			// this is a dirty approximation that is grossly wrong in many cases.
-			uint32_t d = get_owner()->egbase().map().calc_distance(
-					f->get_position(), ww->base_flag().get_position());
+			int32_t d = get_owner()->egbase().map().findpath(
+					f->get_position(), ww->base_flag().get_position(),
+					0, *new Path(), CheckStepDefault(MOVECAPS_SWIM));
+			if (d < 0)
+				continue;
 
 			if (!ferry || d < dist) {
 				ferry = f;
@@ -781,7 +782,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		assert(ferry);
 
 		idle_ferries.erase(std::find(idle_ferries.begin(), idle_ferries.end(), ferry));
-		pending_ferry_requests_.erase(pending_ferry_requests_.begin());
+		pending_ferry_requests_.erase(std::find(pending_ferry_requests_.begin(), pending_ferry_requests_.end(), ww));
 
 		ww->request_ferry_callback(game, ferry);
 	}

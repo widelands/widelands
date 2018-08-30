@@ -72,8 +72,7 @@ Map::Map()
      height_(0),
      pathfieldmgr_(new PathfieldManager),
      allows_seafaring_(false),
-     // NOCOM: This is for testing only. Set to 0 when this is handled by map loading.
-     waterway_max_length_(6) {
+     waterway_max_length_(0) {
 }
 
 Map::~Map() {
