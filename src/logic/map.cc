@@ -31,8 +31,7 @@
 #include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
-#include "economy/road.h"
-#include "economy/waterway.h"
+#include "economy/roadbase.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/findimmovable.h"
@@ -1031,9 +1030,9 @@ NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool con
 	// if we are interested in the maximum theoretically available NodeCaps, this is not run
 	if (consider_mobs) {
 		//  3) General buildability check: if a "robust" MapObject is on this node
-		//  we cannot build anything on it. Exception: we can build flags on roads.
+		//  we cannot build anything on it. Exception: we can build flags on roads and waterways.
 		if (BaseImmovable* const imm = get_immovable(f))
-			if (!dynamic_cast<Road const*>(imm) && imm->get_size() >= BaseImmovable::SMALL) {
+			if (!dynamic_cast<RoadBase const*>(imm) && imm->get_size() >= BaseImmovable::SMALL) {
 				// 3b) [OVERRIDE] check for "unwalkable" MapObjects
 				if (!imm->get_passable())
 					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
@@ -1045,15 +1044,10 @@ NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool con
 	//  We can build flags on anything that's walkable and buildable, with some
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
-		//  4b) Flags cannot be used to split waterways
-		//  4c) Flags must be at least 2 edges apart
-		if (consider_mobs) {
-			if (find_immovables(Area<FCoords>(f, 1), nullptr, FindImmovableType(MapObjectType::FLAG)))
-				return static_cast<NodeCaps>(caps);
-			if (BaseImmovable* const imm = get_immovable(f))
-				if (dynamic_cast<Waterway const*>(imm))
-					return static_cast<NodeCaps>(caps);
-		}
+		//  4b) Flags must be at least 2 edges apart
+		if (consider_mobs &&
+		    find_immovables(Area<FCoords>(f, 1), nullptr, FindImmovableType(MapObjectType::FLAG)))
+			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
 	return static_cast<NodeCaps>(caps);

@@ -4,16 +4,12 @@ animations = {
    idle = {
       pictures = path.list_files (dirname .. "idle_??.png"),
       hotspot = {20, 36},
-      fps = 10
-   },
-   sinking = {
-      pictures = path.list_files (dirname .. "sinking_??.png"),
-      hotspot = {22, 35},
-      fps = 7
+      fps = 10,
+      scale = 4,
    }
 }
-add_walking_animations (animations, "walk", dirname, "sail", {37, 38}, 10)
-add_walking_animations (animations, "walkload", dirname, "sail", {37, 38}, 10)
+add_walking_animations (animations, "walk", dirname, "sail", {37, 38}, 10, 4)
+add_walking_animations (animations, "walkload", dirname, "sail", {37, 38}, 10, 4)
 
 tribes:new_ferry_type {
    msgctxt = "frisians_worker",
@@ -24,6 +20,5 @@ tribes:new_ferry_type {
    icon = dirname .. "menu.png",
    vision_range = 2,
 
-   ware_hotspot = {0, 20},
    animations = animations,
 }

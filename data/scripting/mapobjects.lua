@@ -21,7 +21,7 @@ end
 
 
 -- RST
--- .. function:: add_walking_animations(table, animationname, dirname, basename, hotspot, fps)
+-- .. function:: add_walking_animations(table, animationname, dirname, basename, hotspot, fps, scale)
 --
 --    Adds 6 walk or sail animations - one for each walking direction - to 'table'.
 --
@@ -31,13 +31,30 @@ end
 --    :arg basename: The basename of the animation files. The filenames of the animation files need to have the format ``<basename>_(e|ne|se|sw|w|nw)_\d+.png``
 --    :arg hotspot: The hotspot coordinates for blitting, e.g. ``{ 2, 20 }``.
 --    :arg fps: Frames per second. Only use this if the animation has more than 1 frame, and if you need to deviate from the default frame rate.
-function add_walking_animations(table, animationname, dirname, basename, hotspot, fps)
-   if (fps ~= nil) then
+function add_walking_animations(table, animationname, dirname, basename, hotspot, fps, scale)
+   if (fps ~= nil and scale ~= nil) then
       for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
          table[animationname .. "_" .. dir] = {
             pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
             hotspot = hotspot,
             fps = fps,
+            scale = scale,
+         }
+      end
+   elseif (fps ~= nil) then
+      for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+         table[animationname .. "_" .. dir] = {
+            pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
+            hotspot = hotspot,
+            fps = fps,
+         }
+      end
+   elseif (scale ~= nil) then
+      for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
+         table[animationname .. "_" .. dir] = {
+            pictures = path.list_files(dirname .. basename .. "_" .. dir ..  "_??.png"),
+            hotspot = hotspot,
+            scale = scale,
          }
       end
    else
