@@ -81,6 +81,7 @@ bool Waterway::notify_ware(Game& game, Flag& flag) {
 
 void Waterway::remove_worker(Worker& w) {
 	if (ferry_ == &w) {
+		ferry_->set_location(nullptr);
 		ferry_ = nullptr;
 
 		// TODO(Nordfriese): We do not issue a new request because this causes a
