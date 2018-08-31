@@ -425,11 +425,13 @@ void WLApplication::run() {
 			throw;
 		}
 	} else {
-		g_sound_handler.start_music("intro");
+		if (g_options.pull_section("global").get_bool("show_splashscreen", true)) {
+			g_sound_handler.start_music("intro");
 
-		{
-			FullscreenMenuIntro intro;
-			intro.run<FullscreenMenuBase::MenuTarget>();
+			{
+				FullscreenMenuIntro intro;
+				intro.run<FullscreenMenuBase::MenuTarget>();
+			}
 		}
 
 		g_sound_handler.change_music("menu", 1000);
