@@ -55,6 +55,8 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+#include "map_io/map_waterway_packet.h"
+#include "map_io/map_waterwaydata_packet.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "map_io/world_legacy_lookup_table.h"
 
@@ -247,6 +249,13 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
+		log("Reading Waterway Data ... ");
+		{
+			MapWaterwayPacket p;
+			p.read(*fs_, egbase, is_game, *mol_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
 		log("Reading Building Data ... ");
 		{
 			MapBuildingPacket p;
@@ -265,6 +274,13 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		log("Reading Roaddata Data ... ");
 		{
 			MapRoaddataPacket p;
+			p.read(*fs_, egbase, is_game, *mol_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
+		log("Reading Waterwaydata Data ... ");
+		{
+			MapWaterwaydataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());

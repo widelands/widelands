@@ -56,8 +56,6 @@ private:
  *
  */
 struct RoadBase : public PlayerImmovable {
-	friend class MapRoaddataPacket;  // For saving
-	friend class MapRoadPacket;      // For init()
 
 	enum FlagId { FlagStart = 0, FlagEnd = 1 };
 

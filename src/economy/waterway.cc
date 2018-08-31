@@ -81,7 +81,6 @@ bool Waterway::notify_ware(Game& game, Flag& flag) {
 
 void Waterway::remove_worker(Worker& w) {
 	if (ferry_ == &w) {
-		ferry_->set_location(nullptr);
 		ferry_ = nullptr;
 
 		// TODO(Nordfriese): We do not issue a new request because this causes a
@@ -216,7 +215,7 @@ void Waterway::cleanup(EditorGameBase& egbase) {
 		if (ferry_) {
 			ferry_->set_destination(*game, nullptr);
 		}
-		else {
+		else if (fleet_) {
 			fleet_->cancel_ferry_request(*game, this);
 		}
 	}

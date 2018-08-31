@@ -47,10 +47,6 @@ bool Ferry::init(EditorGameBase& egbase) {
 	return init_fleet();
 }
 
-bool Ferry::unemployed(Game& game) const {
-	return !destination_ && !get_location(game);
-}
-
 const Bob::Task Ferry::taskUnemployed = {
    "unemployed", static_cast<Bob::Ptr>(&Ferry::unemployed_update), nullptr, nullptr, true};
 
@@ -89,6 +85,10 @@ void Ferry::unemployed_update(Game& game, State&) {
 	}
 
 	return start_task_idle(game, descr().get_animation("idle"), 50);
+}
+
+bool Ferry::unemployed() {
+	return top_state().task == &taskUnemployed;
 }
 
 const Bob::Task Ferry::taskRow = {

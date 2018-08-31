@@ -71,7 +71,7 @@ struct Ferry : public Carrier {
 	void start_task_unemployed(Game&);
 	void start_task_row(Game&, Waterway*);
 
-	bool unemployed(Game& game) const;
+	bool unemployed();
 
 private:
 	friend struct Fleet;

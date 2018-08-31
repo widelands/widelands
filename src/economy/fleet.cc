@@ -244,7 +244,7 @@ bool Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 		Waterway* ww = other->pending_ferry_requests_.back();
 		other->pending_ferry_requests_.pop_back();
 		// TODO(Nordfriese): We should store the gametime when a request is
-		// issued, so this can be inserted correctly
+		// issued, so this can be inserted correctly. Just in case.
 		request_ferry(ww);
 	}
 
@@ -759,7 +759,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 
 	std::vector<Ferry*> idle_ferries;
 	for (Ferry* f : ferries_)
-		if (f->unemployed(game))
+		if (f->unemployed())
 			idle_ferries.push_back(f);
 	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
 		Waterway* ww = pending_ferry_requests_[0];
@@ -1040,6 +1040,8 @@ void Fleet::Loader::load(FileRead& fr) {
 	pending_ferry_requests_.resize(nrww);
 	for (uint32_t i = 0; i < nrww; ++i)
 		pending_ferry_requests_[i] = fr.unsigned_32();
+
+	log("********** NOCOM ********** Fleet::Loader::load(): we have %i ferries and %i requests\n", nrferries, nrww);
 
 }
 

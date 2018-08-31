@@ -861,8 +861,7 @@ void show_field_action(InteractiveBase* const ibase,
 			return;
 		}
 
-		// Did he click on a flag or a road where a flag can be built? We're building
-		// a waterway, so it's required to be in the same economy as the starting point
+		// Did he click on a flag or a road where a flag can be built?
 		if (upcast(const Widelands::PlayerImmovable, i, map.get_immovable(target))) {
 			bool finish = false;
 			if (upcast(const Widelands::Flag, flag, i)) {
