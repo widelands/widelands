@@ -1041,8 +1041,6 @@ void Fleet::Loader::load(FileRead& fr) {
 	for (uint32_t i = 0; i < nrww; ++i)
 		pending_ferry_requests_[i] = fr.unsigned_32();
 
-	log("********** NOCOM ********** Fleet::Loader::load(): we have %i ferries and %i requests\n", nrferries, nrww);
-
 }
 
 void Fleet::Loader::load_pointers() {

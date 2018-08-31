@@ -177,10 +177,13 @@ void EditorInteractive::load(const std::string& filename) {
 	load_all_tribes(&egbase(), &loader_ui);
 
 	// Create the players. TODO(SirVer): this must be managed better
+	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
 	loader_ui.step(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
-		egbase().add_player(
-		   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
+		if (!map->get_scenario_player_tribe(p).empty()) {
+			egbase().add_player(
+			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
+		}
 	}
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);

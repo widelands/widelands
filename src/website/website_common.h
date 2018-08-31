@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,16 +13,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
 
-#ifndef WL_WUI_CHAT_MSG_LAYOUT_H
-#define WL_WUI_CHAT_MSG_LAYOUT_H
+#ifndef WL_WEBSITE_WEBSITE_COMMON_H
+#define WL_WEBSITE_WEBSITE_COMMON_H
 
-#include "chat/chat.h"
+// Setup the static objects Widelands needs to operate and initializes systems.
+void initialize();
 
-// Formats 'chat_message' as richtext.
-std::string format_as_richtext(const ChatMessage& chat_message);
+// Cleanup before program end
+void cleanup();
 
-#endif  // end of include guard: WL_WUI_CHAT_MSG_LAYOUT_H
+#endif  // end of include guard: WL_WEBSITE_WEBSITE_COMMON_H
