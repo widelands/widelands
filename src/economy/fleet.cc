@@ -109,6 +109,8 @@ bool Fleet::init(EditorGameBase& egbase) {
 		return false;
 	}
 
+	log("NOCOM: Fleet %u: new fleet initialized.\n", serial_);
+
 	return find_other_fleet(egbase);
 }
 
@@ -183,6 +185,7 @@ bool Fleet::find_other_fleet(EditorGameBase& egbase) {
 						log("Found a waterway with no fleet!\n");
 					}
 					if (ww->get_fleet() != this && ww->get_owner() == get_owner()) {
+						log("NOCOM: Fleet %u: merging with fleet %u (ww).\n", serial_, ww->get_fleet()->serial_);
 						return ww->get_fleet()->merge(egbase, this);
 					}
 				}
@@ -191,23 +194,28 @@ bool Fleet::find_other_fleet(EditorGameBase& egbase) {
 
 		for (Bob* bob = cur.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
 			MapObjectType type = bob->descr().type();
-			if (type != MapObjectType::SHIP && type != MapObjectType::FERRY)
-				continue;
-
-			if (upcast(Ship, ship, bob)) {
-				if (ship->get_fleet() != nullptr && ship->get_fleet() != this &&
-				    ship->get_owner() == get_owner()) {
-					return ship->get_fleet()->merge(egbase, this);
+			if (type == MapObjectType::SHIP) {
+				if (upcast(Ship, ship, bob)) {
+					if (ship->get_fleet() != nullptr && ship->get_fleet() != this &&
+						ship->get_owner() == get_owner()) {
+						return ship->get_fleet()->merge(egbase, this);
+					}
 				}
 			}
-			else if (upcast(Ferry, ferry, bob)) {
-				if (ferry->get_fleet() != nullptr && ferry->get_fleet() != this &&
-				    ferry->get_owner() == get_owner()) {
-					return ferry->get_fleet()->merge(egbase, this);
+			else if (type == MapObjectType::FERRY) {
+				if (upcast(Ferry, ferry, bob)) {
+					if (ferry->get_fleet() != nullptr && ferry->get_fleet() != this &&
+						ferry->get_owner() == get_owner()) {
+						log("NOCOM: Fleet %u: merging with fleet %u (fy).\n", serial_, ferry->get_fleet()->serial_);
+						return ferry->get_fleet()->merge(egbase, this);
+					}
 				}
 			}
 		}
 	}
+
+	log("NOCOM: Fleet %u: found no fleet to merge with!\n", serial_);
+
 	if (active()) {
 		update(egbase);
 		return true;
@@ -265,6 +273,8 @@ bool Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 	if (!ships_.empty() && !ports_.empty())
 		check_merge_economy();
 
+	log("NOCOM: Fleet %u: merge with fleet %u complete!\n", serial_, other->serial_);
+
 	other->ports_.clear();
 	other->portpaths_.clear();
 	other->remove(egbase);
@@ -288,6 +298,7 @@ void Fleet::check_merge_economy() {
 }
 
 void Fleet::cleanup(EditorGameBase& egbase) {
+	log("NOCOM: Fleet %u: deleting!\n", serial_);
 	while (!ports_.empty()) {
 		PortDock* pd = ports_.back();
 		ports_.pop_back();
@@ -744,6 +755,8 @@ void Fleet::update(EditorGameBase& egbase) {
  * @note Do not call this directly; instead, trigger it via @ref update
  */
 void Fleet::act(Game& game, uint32_t /* data */) {
+	log("NOCOM: Fleet %u: act() called: Found %i ferries and %i waterway requests\n", serial_,
+			ferries_.size(), pending_ferry_requests_.size());
 	act_pending_ = false;
 
 	if (!active()) {
@@ -761,6 +774,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	for (Ferry* f : ferries_)
 		if (f->unemployed())
 			idle_ferries.push_back(f);
+	log("NOCOM: Fleet %u: act() acting: %i ferries are unemployed\n", serial_, idle_ferries.size());
 	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
 		Waterway* ww = pending_ferry_requests_[0];
 
@@ -995,9 +1009,10 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		waiting_ports.remove(best_port);
 	}
 
-	if (!waiting_ports.empty()) {
-		molog("... there are %" PRIuS " ports requesting ship(s) we cannot satisfy yet\n",
-		      waiting_ports.size());
+	if (!waiting_ports.empty() || !pending_ferry_requests_.empty()) {
+		molog("... there are %" PRIuS " ports requesting ship(s) and %" PRIuS
+				" waterways requesting a ferry we cannot satisfy yet\n",
+				waiting_ports.size(), pending_ferry_requests_.size());
 		schedule_act(game, 5000);  // retry next time
 		act_pending_ = true;
 	}
@@ -1060,11 +1075,6 @@ void Fleet::Loader::load_pointers() {
 		fleet.ports_.push_back(&mol().get<PortDock>(temp_port));
 		fleet.ports_.back()->set_fleet(&fleet);
 	}
-
-	fleet.portpaths_.resize((fleet.ports_.size() * (fleet.ports_.size() - 1)) / 2);
-
-	fleet.act_pending_ = save_act_pending;
-
 	for (const uint32_t& temp_ferry : ferries_) {
 		fleet.ferries_.push_back(&mol().get<Ferry>(temp_ferry));
 		fleet.ferries_.back()->set_fleet(&fleet);
@@ -1073,6 +1083,10 @@ void Fleet::Loader::load_pointers() {
 		fleet.pending_ferry_requests_.push_back(&mol().get<Waterway>(temp_ww));
 		fleet.pending_ferry_requests_.back()->set_fleet(&fleet);
 	}
+
+	fleet.portpaths_.resize((fleet.ports_.size() * (fleet.ports_.size() - 1)) / 2);
+
+	fleet.act_pending_ = save_act_pending;
 }
 
 void Fleet::Loader::load_finish() {

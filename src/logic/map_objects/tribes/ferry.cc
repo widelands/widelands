@@ -88,7 +88,14 @@ void Ferry::unemployed_update(Game& game, State&) {
 }
 
 bool Ferry::unemployed() {
-	return top_state().task == &taskUnemployed;
+	/*log("Ferry %u: Querying unemployed: Destination is (%ix%i), task is %s\n", serial_,
+			destination_ ? destination_->x : -1, destination_ ? destination_->y : -1,
+			get_state() ? top_state().task->name : "(nullptr)");
+	return top_state().task == &taskUnemployed;*/
+	log("Ferry %u: Querying unemployed: Destination is (%ix%i), topmost task is %s, has unemployed %s\n", serial_,
+			destination_ ? destination_->x : -1, destination_ ? destination_->y : -1,
+			get_state() ? top_state().task->name : "(nullptr)", get_state(taskUnemployed) ? "TRUE" : "FALSE");
+	return get_state(taskUnemployed);
 }
 
 const Bob::Task Ferry::taskRow = {
