@@ -17,7 +17,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/none.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
@@ -39,7 +39,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/water.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
@@ -61,7 +61,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/coal_1.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
@@ -83,7 +83,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/gold_1.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
@@ -105,7 +105,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/iron_1.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
@@ -127,7 +127,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/stones_1.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
@@ -149,7 +149,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/coal_2.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
@@ -171,7 +171,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/gold_2.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
@@ -193,7 +193,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/iron_2.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
@@ -215,7 +215,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = { dirname .. "pics/stones_2.png" },
-         hotspot = {8, 19},
+         hotspot = {8, 22},
       },
    }
 }
