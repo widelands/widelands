@@ -46,11 +46,11 @@ end
 --    :arg text: comment of the image.
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies_resi(resource, items, text)
+function dependencies_resi(tribename, resource, items, text)
    if not text then
       text = ""
    end
-   local items_with_resouce = { "tribes/immovables/" .. resource  .. "/idle_00.png" }
+   local items_with_resouce = { "tribes/immovables/resi/" .. tribename .. "/png/".. resource  .. "_0.png" }
    for count, item in pairs(items) do
       table.insert(items_with_resouce, item.icon_name)
    end
@@ -301,8 +301,8 @@ function building_help_dependencies_production(tribe, building_description)
          elseif(resi_name == "quartz") then resi_name = "stones"
          elseif(resi_name == "marble") then resi_name = "stones"
          elseif(resi_name == "gold_ore") then resi_name = "gold" end
-         result = result .. dependencies_resi(
-            "resi_"..resi_name.."2",
+         result = result .. dependencies_resi(tribe.name,
+            resi_name.."_2",
             {building_description, ware_description},
             ware_description.descname
          )
