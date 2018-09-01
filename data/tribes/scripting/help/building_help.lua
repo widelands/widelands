@@ -1,5 +1,3 @@
--- TODO(GunChleoc): get resi_00.png from C++
-
 include "tribes/scripting/help/format_help.lua"
 
 -- RST
@@ -50,7 +48,7 @@ function dependencies_resi(tribename, resource, items, text)
    if not text then
       text = ""
    end
-   local items_with_resouce = { "tribes/immovables/resi/" .. tribename .. "/png/".. resource  .. "_0.png" }
+   local items_with_resouce = { "tribes/immovables/resi/" .. tribename .. "/pics/".. resource  .. ".png" }
    for count, item in pairs(items) do
       table.insert(items_with_resouce, item.icon_name)
    end
@@ -302,7 +300,7 @@ function building_help_dependencies_production(tribe, building_description)
          elseif(resi_name == "marble") then resi_name = "stones"
          elseif(resi_name == "gold_ore") then resi_name = "gold" end
          result = result .. dependencies_resi(tribe.name,
-            resi_name.."_2",
+            resi_name,
             {building_description, ware_description},
             ware_description.descname
          )
