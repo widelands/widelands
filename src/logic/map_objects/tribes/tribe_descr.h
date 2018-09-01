@@ -49,11 +49,11 @@ class BuildingDescr;
 struct Event;
 
 /*
-Resource indicators:
-A ResiSet maps the resource name to a ResiList.
-A ResiList maps resource amounts to the DescrIndex of an immovable this player uses.
-Special case: The ResiList mapped to "" contains resis that will be used in locations
-without resources. If it has several entries, result is arbitrary.
+ * Resource indicators:
+ * A ResourceIndicatorSet maps the resource name to a ResourceIndicatorList.
+ * A ResourceIndicatorList maps resource amounts to the DescriptionIndex of an immovable this player uses.
+ * Special case: The ResourceIndicatorList mapped to "" contains resis that will be used in locations
+ * without resources. If it has several entries, result is arbitrary.
 */
 using ResourceIndicatorList = std::map<uint32_t, DescriptionIndex>;
 using ResourceIndicatorSet = std::map<std::string, ResourceIndicatorList>;
