@@ -44,85 +44,6 @@ namespace {
 
 /*
  ==========================================================
- SPECIALIZED FILEWRITE
- ==========================================================
- */
-
-// Defines some convenience writing functions for the JSON format
-class JSONFileWrite : public FileWrite {
-public:
-	JSONFileWrite() : FileWrite(), level_(0) {
-	}
-
-	void write_string(const std::string& s, bool use_indent = false) {
-		std::string writeme = s;
-		if (use_indent) {
-			for (int i = 0; i < level_; ++i) {
-				writeme = (boost::format("   %s") % writeme).str();
-			}
-		}
-		data(writeme.c_str(), writeme.size());
-	}
-	void write_key(const std::string& key) {
-		write_string((boost::format("\"%s\":\n") % key).str(), true);
-	}
-	void write_value_string(const std::string& quoted_value) {
-		write_string((boost::format("\"%s\"") % quoted_value).str(), true);
-	}
-	void write_key_value(const std::string& key, const std::string& quoted_value) {
-		write_string((boost::format("\"%s\": %s") % key % quoted_value).str(), true);
-	}
-	void write_key_value_string(const std::string& key, const std::string& value) {
-		std::string quoted_value = value;
-		boost::replace_all(quoted_value, "\"", "\\\"");
-		write_key_value(key, "\"" + value + "\"");
-	}
-	void write_key_value_int(const std::string& key, const int value) {
-		write_key_value(key, boost::lexical_cast<std::string>(value));
-	}
-	void open_brace() {
-		write_string("{\n", true);
-		++level_;
-	}
-	// JSON hates a final comma. This defaults to having NO comma.
-	void close_brace(bool precede_newline = false, int current = 0, int total = 0) {
-		--level_;
-		if (precede_newline) {
-			write_string("\n");
-		}
-		if (current < total - 1) {
-			write_string("},\n", true);
-		} else {
-			write_string("}", true);
-		}
-	}
-	void open_array(const std::string& name) {
-		write_string((boost::format("\"%s\":[\n") % name).str(), true);
-		++level_;
-	}
-	// JSON hates a final comma. This defaults to having NO comma.
-	void close_array(int current = 0, int total = 0) {
-		--level_;
-		write_string("\n");
-		if (current < total - 1) {
-			write_string("],\n", true);
-		} else {
-			write_string("]\n", true);
-		}
-	}
-	// JSON hates a final comma. This defaults to having a comma.
-	void close_element(int current = -2, int total = 0) {
-		if (current < total - 1) {
-			write_string(",\n");
-		}
-	}
-
-private:
-	int level_;
-};
-
-/*
- ==========================================================
  BUILDINGS
  ==========================================================
  */
@@ -333,22 +254,17 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* 
  ==========================================================
  */
 
-void add_tribe_info(const Widelands::TribeBasicInfo& tribe_info, JSONFileWrite* fw) {
-	fw->write_key_value_string("name", tribe_info.name);
-	fw->close_element();
-	fw->write_key_value_string("descname", tribe_info.descname);
-	fw->close_element();
-	fw->write_key_value_string("author", tribe_info.author);
-	fw->close_element();
-	fw->write_key_value_string("tooltip", tribe_info.tooltip);
-	fw->close_element();
-	fw->write_key_value_string("icon", tribe_info.icon);
+void add_tribe_info(const Widelands::TribeBasicInfo& tribe_info, JSON::Element* json_tribe) {
+	json_tribe->add_string("name", tribe_info.name);
+	json_tribe->add_string("descname", tribe_info.descname);
+	json_tribe->add_string("author", tribe_info.author);
+	json_tribe->add_string("tooltip", tribe_info.tooltip);
+	json_tribe->add_string("icon", tribe_info.icon);
 }
 
 void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
-	JSONFileWrite fw;
-	fw.open_brace();          // Main
-	fw.open_array("tribes");  // Tribes
+	std::unique_ptr<JSON::Element> json(new JSON::Element());
+	JSON::Array* json_tribes_array = json->add_array("tribes");
 
 	/// Tribes
 	egbase.mutable_tribes()->postload();  // Make sure that all values have been set.
@@ -360,28 +276,22 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 		log("\n\n=========================\nWriting tribe: %s\n=========================\n",
 		    tribe_info.name.c_str());
 
-		fw.open_brace();  // TribeDescr
-		add_tribe_info(tribe_info, &fw);
-		fw.close_brace(true, tribe_index, tribeinfos.size());  // TribeDescr
+		// Main file
+		JSON::Object* json_tribe = json_tribes_array->add_object();
+		add_tribe_info(tribe_info, json_tribe);
 
 		// These go in separate files
-
-		JSONFileWrite fw_tribe;
-		fw_tribe.open_brace();  // TribeDescr
-		add_tribe_info(tribe_info, &fw_tribe);
-		fw_tribe.close_brace(true);  // TribeDescr
-		fw_tribe.write(
-		   *out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str().c_str());
+		std::unique_ptr<JSON::Object> json_tribe_for_file(new JSON::Object());
+		add_tribe_info(tribe_info, json_tribe_for_file.get());
+		json_tribe_for_file->write_to_file(*out_filesystem, (boost::format("tribe_%s.json") % tribe_info.name).str().c_str());
 
 		const TribeDescr& tribe = *tribes.get_tribe_descr(tribes.tribe_index(tribe_info.name));
-
 		write_buildings(tribe, egbase, out_filesystem);
 		write_wares(tribe, egbase, out_filesystem);
 		write_workers(tribe, egbase, out_filesystem);
 	}
-	fw.close_array();  // Tribes
-	fw.close_brace();  // Main
-	fw.write(*out_filesystem, "tribes.json");
+
+	json->write_to_file(*out_filesystem, "tribes.json");
 }
 
 }  // namespace

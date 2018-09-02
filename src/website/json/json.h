@@ -77,6 +77,9 @@ protected:
 	explicit Object(const std::string key, int level);
 
 public:
+	// Constructor for root node
+	explicit Object() : JSON::Element("", 0) {
+	}
 	std::string as_string() const override;
 };
 
