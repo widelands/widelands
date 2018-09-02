@@ -17,6 +17,7 @@
  *
  */
 
+#include "io/filewrite.h"
 #include "website/json/json.h"
 
 // ########################## JSON Element #############################
@@ -44,15 +45,21 @@ void Element::add_double(const std::string& key, double value) {
 void Element::add_int(const std::string& key, int value) {
 	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Int(value))));
 }
-void Element::add_null(const std::string& key) {
-	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Null())));
+void Element::add_empty(const std::string& key) {
+	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Empty())));
 }
 void Element::add_string(const std::string& key, const std::string& value) {
 	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::String(value))));
 }
 
+void Element::write_to_file(FileSystem& fs, const std::string& filename) const {
+	FileWrite file_writer;
+	file_writer.text(as_string());
+	file_writer.write(fs, filename);
+}
+
 std::string Element::as_string() const {
-	return "{\n" + children_as_string() + "}";
+	return "{\n" + children_as_string() + "}\n";
 }
 
 std::string Element::values_as_string(const std::string& tabs) const {
@@ -60,11 +67,13 @@ std::string Element::values_as_string(const std::string& tabs) const {
 	if (!values_.empty()) {
 		for (size_t i = 0; i < values_.size() - 1; ++i) {
 			const auto& element = values_.at(i);
+			const std::string element_as_string = element.second->as_string();
 			result +=
-			   tabs + tab_ + key_to_string(element.first) + element.second->as_string() + ",\n";
+			   tabs + tab_ + key_to_string(element.first, element_as_string.empty()) + element_as_string + ",\n";
 		}
 		const auto& element = values_.at(values_.size() - 1);
-		result += tabs + tab_ + key_to_string(element.first) + element.second->as_string() +
+		const std::string element_as_string = element.second->as_string();
+		result += tabs + tab_ + key_to_string(element.first, element_as_string.empty()) + element_as_string +
 		          (children_.empty() ? "\n" : ",\n");
 	}
 	return result;
@@ -81,8 +90,8 @@ std::string Element::children_as_string() const {
 	return result;
 }
 
-std::string Element::key_to_string(const std::string& value) {
-	return "\"" + value + "\": ";
+std::string Element::key_to_string(const std::string& value, bool value_is_empty) {
+	return "\"" + value + (value_is_empty ? "\"" : "\": ");
 }
 
 // ########################## JSON Object #############################
@@ -116,7 +125,7 @@ std::string Array::as_string() const {
 		tabs += tab_;
 	}
 
-	result += tabs + "\"" + key_ + "\":[\n";
+	result += tabs + key_to_string(key_) + "[\n";
 	result += values_as_string(tabs);
 	result += children_as_string();
 	result += tabs + "]";

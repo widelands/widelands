@@ -44,15 +44,16 @@ private:
 	const double double_value;
 };
 
+struct Empty : Value {
+	Empty() = default;
+	std::string as_string() const override;
+};
+
 struct Int : Value {
 	explicit Int(int value);
 	std::string as_string() const override;
 private:
 	const int int_value;
-};
-
-struct Null : Value {
-	std::string as_string() const override;
 };
 
 struct String : Value {

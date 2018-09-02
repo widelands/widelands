@@ -4,4 +4,7 @@ wl_library(json
     json.h
     value.cc
     value.h
+  DEPENDS
+    io_fileread
+    io_filesystem
 )

@@ -44,8 +44,8 @@ std::string Int::as_string() const {
 	return strs.str();
 }
 
-std::string Null::as_string() const {
-	return "null";
+std::string Empty::as_string() const {
+	return "";
 }
 
 String::String(std::string value) : string_value(value) {}

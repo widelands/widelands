@@ -1,3 +1,5 @@
+add_subdirectory(json)
+
 wl_library(website_common
   SRCS
     website_common.cc
@@ -38,6 +40,7 @@ wl_binary(wl_map_object_info
     graphic
     io_fileread
     io_filesystem
+    json
     logic
     logic_tribe_basic_info
     website_common

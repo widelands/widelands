@@ -25,6 +25,7 @@
 #include <string>
 #include <vector>
 
+#include "io/filesystem/filesystem.h"
 #include "website/json/value.h"
 
 namespace JSON {
@@ -48,8 +49,10 @@ public:
 	void add_bool(const std::string& key, bool value);
 	void add_double(const std::string& key, double value);
 	void add_int(const std::string& key, int value);
-	void add_null(const std::string& key);
+	void add_empty(const std::string& key);
 	void add_string(const std::string& key, const std::string& value);
+
+	void write_to_file(FileSystem& fs, const std::string& filename) const;
 
 	virtual std::string as_string() const;
 
@@ -58,7 +61,7 @@ protected:
 
 	std::string values_as_string(const std::string& tabs) const;
 	std::string children_as_string() const;
-	static std::string key_to_string(const std::string& value);
+	static std::string key_to_string(const std::string& value, bool value_is_empty = false);
 
 	const int level_;
 	std::vector<std::unique_ptr<JSON::Element>> children_;
