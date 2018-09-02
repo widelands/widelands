@@ -41,6 +41,10 @@ std::string Int::as_string() const {
 	return boost::lexical_cast<std::string>(int_value);
 }
 
+std::string Null::as_string() const {
+	return "null";
+}
+
 String::String(std::string value) : string_value(value) {}
 std::string String::as_string() const {
 	return "\"" + string_value + "\"";

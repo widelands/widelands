@@ -40,9 +40,9 @@ public:
 	explicit Element() : JSON::Element(0) {
 	}
 
-	template <typename ChildType> ChildType* add_child() {
-		children_.push_back(std::unique_ptr<ChildType>(new ChildType(level_ + 1)));
-		return dynamic_cast<ChildType*>(children_.back().get());
+	template <typename ObjectType> ObjectType* add_object() {
+		objects_.push_back(std::unique_ptr<ObjectType>(new ObjectType(level_ + 1)));
+		return dynamic_cast<ObjectType*>(objects_.back().get());
 	}
 
 	virtual std::string as_string() const;
@@ -54,7 +54,7 @@ protected:
 	std::string key_to_string(const std::string& value) const;
 
 	const int level_;
-	std::vector<std::unique_ptr<JSON::Element>> children_;
+	std::vector<std::unique_ptr<JSON::Element>> objects_;
 };
 
 class Object : public Element {
@@ -68,6 +68,7 @@ public:
 	void add_bool(const std::string& key, bool value);
 	void add_double(const std::string& key, double value);
 	void add_int(const std::string& key, int value);
+	void add_null(const std::string& key);
 	void add_string(const std::string& key, const std::string& value);
 	std::string as_string() const override;
 

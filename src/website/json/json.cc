@@ -30,11 +30,11 @@ std::string Element::as_string() const {
 
 std::string Element::children_as_string() const {
 	std::string result = "";
-	if (!children_.empty()) {
-		for (size_t i = 0; i < children_.size() - 1; ++i) {
-			result += children_.at(i)->as_string() + ",\n";
+	if (!objects_.empty()) {
+		for (size_t i = 0; i < objects_.size() - 1; ++i) {
+			result += objects_.at(i)->as_string() + ",\n";
 		}
-		result += children_.at(children_.size() - 1)->as_string() + "\n";
+		result += objects_.at(objects_.size() - 1)->as_string() + "\n";
 	}
 	return result;
 }
@@ -58,6 +58,9 @@ void Object::add_double(const std::string& key, double value) {
 void Object::add_int(const std::string& key, int value) {
 	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Int(value))));
 }
+void Object::add_null(const std::string& key) {
+	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Null())));
+}
 void Object::add_string(const std::string& key, const std::string& value) {
 	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::String(value))));
 }
@@ -80,7 +83,7 @@ std::string Object::as_string() const {
 		}
 		const auto& element = values_.at(values_.size() - 1);
 		result += tabs + tab_ + key_to_string(element.first) + element.second->as_string() +
-		          (children_.empty() ? "\n" : ",\n");
+		          (objects_.empty() ? "\n" : ",\n");
 	}
 
 	result += children_as_string();

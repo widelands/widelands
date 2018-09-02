@@ -51,6 +51,10 @@ private:
 	const int int_value;
 };
 
+struct Null : Value {
+	std::string as_string() const override;
+};
+
 struct String : Value {
 	explicit String(std::string value);
 	std::string as_string() const override;
