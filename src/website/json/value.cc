@@ -19,7 +19,7 @@
 
 #include "website/json/value.h"
 
-#include <boost/lexical_cast.hpp>
+#include <sstream>
 
 namespace JSON {
 
@@ -32,13 +32,16 @@ std::string Boolean::as_string() const {
 Double::Double(double value) : double_value(value) {
 }
 std::string Double::as_string() const {
-	// NOCOM this turns 0.815 into 0.81499999999999995, so we need something better
-	return boost::lexical_cast<std::string>(double_value);
+	std::ostringstream strs;
+	strs << double_value;
+	return strs.str();
 }
 
 Int::Int(int value) : int_value(value) {}
 std::string Int::as_string() const {
-	return boost::lexical_cast<std::string>(int_value);
+	std::ostringstream strs;
+	strs << int_value;
+	return strs.str();
 }
 
 std::string Null::as_string() const {
