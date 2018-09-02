@@ -25,6 +25,8 @@
 #include <string>
 #include <vector>
 
+#include "website/json/value.h"
+
 namespace JSON {
 
 class Element {
@@ -63,13 +65,14 @@ protected:
 	explicit Object(int level);
 
 public:
-	void add_value(const std::string& key, const std::string& value);
+	void add_bool(const std::string& key, bool value);
+	void add_double(const std::string& key, double value);
+	void add_int(const std::string& key, int value);
+	void add_string(const std::string& key, const std::string& value);
 	std::string as_string() const override;
 
 private:
-	std::string value_to_string(const std::string& value) const;
-
-	std::vector<std::pair<std::string, std::string>> values_;
+	std::vector<std::pair<std::string, std::unique_ptr<JSON::Value>>> values_;
 };
 }  // namespace JSON
 #endif  // end of include guard: WL_WEBSITE_JSON_JSON_H

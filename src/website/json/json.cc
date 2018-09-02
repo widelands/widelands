@@ -48,9 +48,20 @@ std::string Element::key_to_string(const std::string& value) const {
 Object::Object(int level) : JSON::Element(level) {
 }
 
-void Object::add_value(const std::string& key, const std::string& value) {
-	values_.push_back(std::make_pair(key, value));
+void Object::add_bool(const std::string& key, bool value) {
+	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Boolean(value))));
 }
+
+void Object::add_double(const std::string& key, double value) {
+	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Double(value))));
+}
+void Object::add_int(const std::string& key, int value) {
+	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::Int(value))));
+}
+void Object::add_string(const std::string& key, const std::string& value) {
+	values_.push_back(std::make_pair(key, std::unique_ptr<JSON::Value>(new JSON::String(value))));
+}
+
 
 std::string Object::as_string() const {
 	std::string result = "";
@@ -65,10 +76,10 @@ std::string Object::as_string() const {
 		for (size_t i = 0; i < values_.size() - 1; ++i) {
 			const auto& element = values_.at(i);
 			result +=
-			   tabs + tab_ + key_to_string(element.first) + value_to_string(element.second) + ",\n";
+			   tabs + tab_ + key_to_string(element.first) + element.second->as_string() + ",\n";
 		}
 		const auto& element = values_.at(values_.size() - 1);
-		result += tabs + tab_ + key_to_string(element.first) + value_to_string(element.second) +
+		result += tabs + tab_ + key_to_string(element.first) + element.second->as_string() +
 		          (children_.empty() ? "\n" : ",\n");
 	}
 
@@ -78,7 +89,4 @@ std::string Object::as_string() const {
 	return result;
 }
 
-std::string Object::value_to_string(const std::string& value) const {
-	return "\"" + value + "\"";
-}
 }  // namespace JSON
