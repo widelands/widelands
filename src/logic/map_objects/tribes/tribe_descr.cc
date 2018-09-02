@@ -404,12 +404,12 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	}
 
 	uint32_t lowest = 0;
-	for (ResourceIndicatorList::const_iterator it = list->second.begin(); it != list->second.end(); it++) {
-		if (it->first < amount) {
+	for (const auto& resi : list->second) {
+		if (resi.first < amount) {
 			continue;
 		}
-		else if (lowest < amount || it->first < lowest) {
-			lowest = it->first;
+		else if (lowest < amount || resi.first < lowest) {
+			lowest = resi.first;
 		}
 	}
 

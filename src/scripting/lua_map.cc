@@ -1506,12 +1506,12 @@ int LuaTribeDescription::get_resource_indicators(lua_State* L) {
 	const TribeDescr& tribe = *get();
 	lua_newtable(L);
 	const ResourceIndicatorSet resis = tribe.resource_indicators();
-	for (ResourceIndicatorSet::const_iterator i = resis.begin(); i != resis.end(); i++) {
-		lua_pushstring(L, i->first);
+	for (const auto& resilist : resis) {
+		lua_pushstring(L, resilist.first);
 		lua_newtable(L);
-		for (ResourceIndicatorList::const_iterator it = i->second.begin(); it != i->second.end(); it++) {
-			lua_pushinteger(L, it->first);
-			lua_pushstring(L, tribe.get_immovable_descr(it->second)->name());
+		for (const auto& resi : resilist.second) {
+			lua_pushinteger(L, resi.first);
+			lua_pushstring(L, tribe.get_immovable_descr(resi.second)->name());
 			lua_settable(L, -3);
 		}
 		lua_settable(L, -3);
