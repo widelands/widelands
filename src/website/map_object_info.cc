@@ -253,22 +253,16 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 
 void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
 	log("\n===============\nWriting wares:\n===============\n");
-	JSONFileWrite fw;
-	fw.open_brace();  // Main
 
-	fw.open_array("wares");  // Wares
-	size_t counter = 0;
-	const size_t no_of_wares = tribe.wares().size();
+	std::unique_ptr<JSON::Element> json(new JSON::Element());
+	JSON::Array* json_wares_array = json->add_array("wares");
 	for (DescriptionIndex ware_index : tribe.wares()) {
 		const WareDescr& ware = *tribe.get_ware_descr(ware_index);
 		log(" %s", ware.name().c_str());
-		fw.open_brace();
-		fw.write_key_value_string("name", ware.name());
-		fw.close_element();
-		fw.write_key_value_string("descname", ware.descname());
-		fw.close_element();
-		fw.write_key_value_string("icon", ware.icon_filename());
-		fw.close_element();
+		JSON::Object* json_ware = json_wares_array->add_object();
+		json_ware->add_string("name", ware.name());
+		json_ware->add_string("descname", ware.descname());
+		json_ware->add_string("icon", ware.icon_filename());
 
 		// Helptext
 		try {
@@ -279,17 +273,13 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
 			cr->push_arg(ware.helptext_script());
 			cr->resume();
 			const std::string help_text = cr->pop_string();
-			fw.write_key_value_string("helptext", help_text);
+			json_ware->add_string("helptext", help_text);
 		} catch (LuaError& err) {
-			fw.write_key_value_string("helptext", err.what());
+			json_ware->add_string("helptext", err.what());
 		}
-		fw.close_brace(true, counter, no_of_wares);  // Ware
-		++counter;
 	}
-	fw.close_array();  // Wares
 
-	fw.close_brace();  // Main
-	fw.write(*out_filesystem, (boost::format("%s_wares.json") % tribe.name()).str().c_str());
+	json->write_to_file(*out_filesystem, (boost::format("%s_wares.json") % tribe.name()).str().c_str());
 	log("\n");
 }
 
@@ -301,22 +291,16 @@ void write_wares(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* ou
 
 void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* out_filesystem) {
 	log("\n================\nWriting workers:\n================\n");
-	JSONFileWrite fw;
-	fw.open_brace();  // Main
 
-	fw.open_array("workers");  // Workers
-	size_t counter = 0;
-	const size_t no_of_workers = tribe.workers().size();
+	std::unique_ptr<JSON::Element> json(new JSON::Element());
+	JSON::Array* json_workers_array = json->add_array("workers");
 	for (DescriptionIndex worker_index : tribe.workers()) {
 		const WorkerDescr& worker = *tribe.get_worker_descr(worker_index);
 		log(" %s", worker.name().c_str());
-		fw.open_brace();
-		fw.write_key_value_string("name", worker.name());
-		fw.close_element();
-		fw.write_key_value_string("descname", worker.descname());
-		fw.close_element();
-		fw.write_key_value_string("icon", worker.icon_filename());
-		fw.close_element();
+		JSON::Object* json_worker = json_workers_array->add_object();
+		json_worker->add_string("name", worker.name());
+		json_worker->add_string("descname", worker.descname());
+		json_worker->add_string("icon", worker.icon_filename());
 
 		// Helptext
 		try {
@@ -326,28 +310,20 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* 
 			cr->push_arg(worker.helptext_script());
 			cr->resume();
 			const std::string help_text = cr->pop_string();
-			fw.write_key_value_string("helptext", help_text);
+			json_worker->add_string("helptext", help_text);
 		} catch (LuaError& err) {
-			fw.write_key_value_string("helptext", err.what());
+			json_worker->add_string("helptext", err.what());
 		}
 
 		if (worker.becomes() != INVALID_INDEX) {
-			fw.close_element();
 			const WorkerDescr& becomes = *tribe.get_worker_descr(worker.becomes());
-			fw.write_key("becomes");
-			fw.open_brace();
-			fw.write_key_value_string("name", becomes.name());
-			fw.close_element();
-			fw.write_key_value_int("experience", worker.get_needed_experience());
-			fw.close_brace(true);
+			JSON::Object* json_becomes = json_worker->add_object("becomes");
+			json_becomes->add_string("name", becomes.name());
+			json_becomes->add_int("experience", worker.get_needed_experience());
 		}
-		fw.close_brace(true, counter, no_of_workers);  // Worker
-		++counter;
 	}
-	fw.close_array();  // Workers
 
-	fw.close_brace();  // Main
-	fw.write(*out_filesystem, (boost::format("%s_workers.json") % tribe.name()).str().c_str());
+	json->write_to_file(*out_filesystem, (boost::format("%s_workers.json") % tribe.name()).str().c_str());
 	log("\n");
 }
 

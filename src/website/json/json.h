@@ -36,15 +36,15 @@ class Object;
 class Element {
 protected:
 	// Constructor for child node
-	explicit Element(int level) : level_(level) {
+	explicit Element(const std::string key, int level) : key_(key), level_(level) {
 	}
 
 public:
 	// Constructor for root node
-	explicit Element() : JSON::Element(0) {
+	explicit Element() : JSON::Element("", 0) {
 	}
 
-	JSON::Object* add_object();
+	JSON::Object* add_object(const std::string& key = "");
 	JSON::Array* add_array(const std::string& key);
 	void add_bool(const std::string& key, bool value);
 	void add_double(const std::string& key, double value);
@@ -63,6 +63,7 @@ protected:
 	std::string children_as_string() const;
 	static std::string key_to_string(const std::string& value, bool value_is_empty = false);
 
+	std::string key_;
 	const int level_;
 	std::vector<std::unique_ptr<JSON::Element>> children_;
 	std::vector<std::pair<std::string, std::unique_ptr<JSON::Value>>> values_;
@@ -73,7 +74,7 @@ class Object : public Element {
 
 protected:
 	// Constructor for child node
-	explicit Object(int level);
+	explicit Object(const std::string key, int level);
 
 public:
 	std::string as_string() const override;
@@ -87,9 +88,6 @@ protected:
 
 public:
 	std::string as_string() const override;
-
-private:
-	std::string key_;
 };
 }  // namespace JSON
 #endif  // end of include guard: WL_WEBSITE_JSON_JSON_H

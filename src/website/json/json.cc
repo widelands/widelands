@@ -25,8 +25,8 @@
 namespace JSON {
 const std::string JSON::Element::tab_ = "   ";
 
-JSON::Object* Element::add_object() {
-	children_.push_back(std::unique_ptr<JSON::Object>(new JSON::Object(level_ + 1)));
+JSON::Object* Element::add_object(const std::string& key) {
+	children_.push_back(std::unique_ptr<JSON::Object>(new JSON::Object(key, level_ + 1)));
 	return dynamic_cast<JSON::Object*>(children_.back().get());
 }
 
@@ -96,7 +96,7 @@ std::string Element::key_to_string(const std::string& value, bool value_is_empty
 
 // ########################## JSON Object #############################
 
-Object::Object(int level) : JSON::Element(level) {
+Object::Object(const std::string key, int level) : JSON::Element(key, level) {
 }
 
 std::string Object::as_string() const {
@@ -106,7 +106,7 @@ std::string Object::as_string() const {
 		tabs += tab_;
 	}
 
-	result += tabs + "{\n";
+	result += tabs + (key_.empty() ? "" : key_to_string(key_)) + "{\n";
 	result += values_as_string(tabs);
 	result += children_as_string();
 	result += tabs + "}";
@@ -115,7 +115,7 @@ std::string Object::as_string() const {
 
 // ########################## JSON Array #############################
 
-Array::Array(const std::string key, int level) : JSON::Element(level), key_(key) {
+Array::Array(const std::string key, int level) : JSON::Element(key, level) {
 }
 
 std::string Array::as_string() const {
