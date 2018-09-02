@@ -48,11 +48,20 @@ function dependencies_resi(tribename, resource, items, text)
    if not text then
       text = ""
    end
-   local items_with_resouce = { "tribes/immovables/resi/" .. tribename .. "/pics/".. resource  .. ".png" }
-   for count, item in pairs(items) do
-      table.insert(items_with_resouce, item.icon_name)
+   local tribe_descr = wl.Game():get_tribe_description(tribename)
+   local resi
+   local am = 0
+   for amount,name in pairs(tribe_descr.resource_indicators[resource]) do
+      if amount > am then
+         resi = name
+         amount = am
+      end
    end
-   return dependencies_basic(items_with_resouce, text)
+   local items_with_resource = { wl.Game():get_immovable_description(resi).representative_image }
+   for count, item in pairs(items) do
+      table.insert(items_with_resource, item.icon_name)
+   end
+   return dependencies_basic(items_with_resource, text)
 end
 
 

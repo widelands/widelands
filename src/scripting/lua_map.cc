@@ -1386,6 +1386,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
    PROP_RO(LuaTribeDescription, immovables),
+   PROP_RO(LuaTribeDescription, resource_indicators),
    PROP_RO(LuaTribeDescription, name),
    PROP_RO(LuaTribeDescription, port),
    PROP_RO(LuaTribeDescription, ship),
@@ -1490,6 +1491,29 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 		lua_pushinteger(L, ++counter);
 		to_lua<LuaImmovableDescription>(
 		   L, new LuaImmovableDescription(tribe.get_immovable_descr(immovable)));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: resource_indicators
+
+      (RO) the table `resource_indicators` as defined in the tribe's `tribename.lua`.
+      See `data/tribes/atlanteans.lua` for more information on the table structure.
+*/
+int LuaTribeDescription::get_resource_indicators(lua_State* L) {
+	const TribeDescr& tribe = *get();
+	lua_newtable(L);
+	const ResourceIndicatorSet resis = tribe.resource_indicators();
+	for (ResourceIndicatorSet::const_iterator i = resis.begin(); i != resis.end(); i++) {
+		lua_pushstring(L, i->first);
+		lua_newtable(L);
+		for (ResourceIndicatorList::const_iterator it = i->second.begin(); it != i->second.end(); it++) {
+			lua_pushinteger(L, it->first);
+			lua_pushstring(L, tribe.get_immovable_descr(it->second)->name());
+			lua_settable(L, -3);
+		}
 		lua_settable(L, -3);
 	}
 	return 1;

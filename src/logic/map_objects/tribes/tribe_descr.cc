@@ -392,14 +392,16 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
                                                     const ResourceAmount amount) const {
 	if (!res || !amount) {
 		auto list = resource_indicators_.find("");
-		if (list == resource_indicators_.end() || list->second.empty())
+		if (list == resource_indicators_.end() || list->second.empty()) {
 			throw GameDataError("Tribe '%s' has no indicator for no resources!", descname_.c_str());
+		}
 		return list->second.begin()->second;
 	}
 
 	auto list = resource_indicators_.find(res->name());
-	if (list == resource_indicators_.end() || list->second.empty())
+	if (list == resource_indicators_.end() || list->second.empty()) {
 		throw GameDataError("Tribe '%s' has no indicators for resource '%s'!", descname_.c_str(), res->name().c_str());
+	}
 
 	uint32_t lowest = 0;
 	for (ResourceIndicatorList::const_iterator it = list->second.begin(); it != list->second.end(); it++) {
