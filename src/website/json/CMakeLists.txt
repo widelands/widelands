@@ -4,6 +4,4 @@ wl_library(json
     json.h
     value.cc
     value.h
-  DEPENDS
-    base_log
 )

@@ -29,6 +29,9 @@
 
 namespace JSON {
 
+class Array;
+class Object;
+
 class Element {
 protected:
 	// Constructor for child node
@@ -40,21 +43,26 @@ public:
 	explicit Element() : JSON::Element(0) {
 	}
 
-	template <typename ObjectType> ObjectType* add_object() {
-		objects_.push_back(std::unique_ptr<ObjectType>(new ObjectType(level_ + 1)));
-		return dynamic_cast<ObjectType*>(objects_.back().get());
-	}
+	JSON::Object* add_object();
+	JSON::Array* add_array(const std::string& key);
+	void add_bool(const std::string& key, bool value);
+	void add_double(const std::string& key, double value);
+	void add_int(const std::string& key, int value);
+	void add_null(const std::string& key);
+	void add_string(const std::string& key, const std::string& value);
 
 	virtual std::string as_string() const;
 
 protected:
 	static const std::string tab_;
 
+	std::string values_as_string(const std::string& tabs) const;
 	std::string children_as_string() const;
-	std::string key_to_string(const std::string& value) const;
+	static std::string key_to_string(const std::string& value);
 
 	const int level_;
-	std::vector<std::unique_ptr<JSON::Element>> objects_;
+	std::vector<std::unique_ptr<JSON::Element>> children_;
+	std::vector<std::pair<std::string, std::unique_ptr<JSON::Value>>> values_;
 };
 
 class Object : public Element {
@@ -65,15 +73,20 @@ protected:
 	explicit Object(int level);
 
 public:
-	void add_bool(const std::string& key, bool value);
-	void add_double(const std::string& key, double value);
-	void add_int(const std::string& key, int value);
-	void add_null(const std::string& key);
-	void add_string(const std::string& key, const std::string& value);
+	std::string as_string() const override;
+};
+
+class Array : public Element {
+	friend class JSON::Element;
+protected:
+	// Constructor for child node
+	explicit Array(const std::string key, int level);
+
+public:
 	std::string as_string() const override;
 
 private:
-	std::vector<std::pair<std::string, std::unique_ptr<JSON::Value>>> values_;
+	std::string key_;
 };
 }  // namespace JSON
 #endif  // end of include guard: WL_WEBSITE_JSON_JSON_H
