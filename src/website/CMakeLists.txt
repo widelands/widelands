@@ -25,6 +25,7 @@ wl_binary(wl_map_info
     graphic_surface
     io_fileread
     io_filesystem
+    json
     logic
     map_io_map_loader
     website_common
