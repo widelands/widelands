@@ -307,12 +307,12 @@ bool Ship::ship_update_transport(Game& game, Bob::State& state) {
 			molog("ship_update: Arrived at dock %u\n", dst->serial());
 			lastdock_ = dst;
 		}
-		if (withdraw_items(game, *dst)) {
+		if (withdraw_item(game, *dst)) {
 			schedule_act(game, kShipInterval);
 			return true;
 		}
 
-		dst->ship_arrived(game, *this); // this should call set_destination
+		dst->ship_arrived(game, *this); // This will also set the destination
 		dst = get_destination(game);
 		if (dst) {
 			start_task_movetodock(game, *dst);
@@ -737,7 +737,7 @@ void Ship::set_economy(Game& game, Economy* e) {
 
 /**
  * Enter a new destination port for the ship.
- * Call this after un/loading the ship, for proper logging.
+ * Call this after (un)loading the ship, for proper logging.
  */
 void Ship::set_destination(PortDock* pd) {
 	destination_ = pd;
@@ -762,19 +762,18 @@ void Ship::add_item(Game& game, const ShippingItem& item) {
  * Unload one item designated for given dock or for no dock.
  * \return true if item unloaded.
  */
-bool Ship::withdraw_items(Game& game, PortDock& pd) {
+bool Ship::withdraw_item(Game& game, PortDock& pd) {
 	bool unloaded = false;
-	uint32_t dst = 0;
+	size_t dst = 0;
 	for (ShippingItem& si : items_) {
 		if (!unloaded) {
-			PortDock* itemdest = si.get_destination(game);
+			const PortDock* itemdest = si.get_destination(game);
 			if (!itemdest || itemdest == &pd) {
 				pd.shipping_item_arrived(game, si);
 				unloaded = true;
 				continue;
 			}
 		}
-
 		items_[dst++] = si;
 	}
 	items_.resize(dst);
@@ -785,8 +784,8 @@ bool Ship::withdraw_items(Game& game, PortDock& pd) {
  * Unload all items not favored by given next dest.
  * Assert all items for current portdock have already been unloaded.
  */
-void Ship::unload_unfit_items(Game& game, PortDock& here, PortDock& nextdest) {
-	uint32_t dst = 0;
+void Ship::unload_unfit_items(Game& game, PortDock& here, const PortDock& nextdest) {
+	size_t dst = 0;
 	for (ShippingItem& si : items_) {
 		if (fleet_->is_path_favourable(here, nextdest, *si.get_destination(game))) {
 			items_[dst++] = si;
@@ -874,10 +873,10 @@ void Ship::start_task_expedition(Game& game) {
 
 	set_economy(game, expedition_->economy);
 
-	for (int i = items_.size() - 1; i >= 0; --i) {
+	for (const ShippingItem& si : items_) {
 		WareInstance* ware;
 		Worker* worker;
-		items_.at(i).get(game, &ware, &worker);
+		si.get(game, &ware, &worker);
 		if (worker) {
 			worker->reset_tasks(game);
 			worker->start_task_idle(game, 0, -1);

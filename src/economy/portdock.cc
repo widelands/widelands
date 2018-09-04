@@ -252,7 +252,7 @@ void PortDock::add_shippingitem(Game& game, WareInstance& ware) {
  * its route.
  */
 void PortDock::update_shippingitem(Game& game, WareInstance& ware) {
-	for (std::vector<ShippingItem>::iterator item_iter = waiting_.begin();
+	for (auto item_iter = waiting_.begin();
 	     item_iter != waiting_.end(); ++item_iter) {
 
 		if (item_iter->object_.serial() == ware.serial()) {
@@ -276,7 +276,7 @@ void PortDock::add_shippingitem(Game& game, Worker& worker) {
  * updated its route.
  */
 void PortDock::update_shippingitem(Game& game, Worker& worker) {
-	for (std::vector<ShippingItem>::iterator item_iter = waiting_.begin();
+	for (auto item_iter = waiting_.begin();
 	     item_iter != waiting_.end(); ++item_iter) {
 
 		if (item_iter->object_.serial() == worker.serial()) {
@@ -286,10 +286,10 @@ void PortDock::update_shippingitem(Game& game, Worker& worker) {
 	}
 }
 
-void PortDock::update_shippingitem(Game& game, std::vector<ShippingItem>::iterator it) {
+void PortDock::update_shippingitem(Game& game, std::list<ShippingItem>::iterator it) {
 	it->update_destination(game, *this);
 
-	PortDock* dst = it->get_destination(game);
+	const PortDock* dst = it->get_destination(game);
 	assert(dst != this);
 
 	// Destination might have vanished or be in another economy altogether.
@@ -324,13 +324,17 @@ void PortDock::shipping_item_returned(Game& game, ShippingItem& si) {
 }
 
 /**
- * A ship changed destination and is now coming at the dock. Increase counter for need_ship.
+ * A ship changed destination and is now coming to the dock. Increase counter for need_ship.
  */
 void PortDock::ship_coming(bool affirmative) {
 	if (affirmative) {
 		++ships_coming_;
 	} else {
-		ships_coming_ = std::max(0, ships_coming_ - 1); // max used for compatibility with old savegames
+		// Max used for compatibility with old savegames
+		// NOCOM We should shift the savegame compatibility into PortDock::Loader::load it at all possible.
+		// Increment kCurrentPacketVersion and write separate loading code for both versions.
+		// Which case is for compatibility, and which case is the actual case that we want now?
+		ships_coming_ = std::max(0, ships_coming_ - 1);
 	}
 }
 
@@ -369,62 +373,60 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
-	// decide where the arrived ship will go next
-	PortDock* next_port = fleet_->find_next_dest(game, ship, this);
+	// Decide where the arrived ship will go next
+	PortDock* next_port = fleet_->find_next_dest(game, ship, *this);
 	if (!next_port) {
 		ship.set_destination(next_port);
 		return; // no need to load anything
 	}
 
-	// unload any wares/workers onboard the departing ship which are not favored by next dest
+	// Unload any wares/workers onboard the departing ship which are not favored by next dest
 	ship.unload_unfit_items(game, *this, *next_port);
 
-	// then load the remaining capacity of the departing ship with relevant items
-	uint32_t rest_capacity = ship.descr().get_capacity() - ship.get_nritems();
+	// Then load the remaining capacity of the departing ship with relevant items
+	uint32_t remaining_capacity = ship.descr().get_capacity() - ship.get_nritems();
 
-	// firstly load the items which go to chosen dest, while also checking for items with invalid dest
-	uint32_t dst = 0;
-	for (ShippingItem& si : waiting_) {
-		PortDock* itemdest = si.get_destination(game);
+	// Firstly load the items which go to chosen destination, while also checking for items with invalid destination
+	// NOCOM I made this change for performance reasons - please double-check that I didn't accidentally change the semantics.
+	auto si_it = waiting_.begin();
+	while (si_it != waiting_.end()) {
+		const PortDock* itemdest = si_it->get_destination(game);
 		if (itemdest) { // valid dest
-			if (rest_capacity == 0) {
-				waiting_[dst++] = si; // keep the item here
+			if (remaining_capacity == 0) {
+				++si_it; // keep the item here
 			} else {
-				if (itemdest == next_port) { // the item goes to chosen dest
-					ship.add_item(game, si); // load it
-					--rest_capacity;
-				} else { // different dest
-					waiting_[dst++] = si; // keep it here for now
+				if (itemdest == next_port) { // the item goes to chosen destination
+					ship.add_item(game, *si_it); // load it
+					si_it = waiting_.erase(si_it);
+					--remaining_capacity;
+				} else { // different destination
+					++si_it; // keep it here for now
 				}
 			}
-		} else { // invalid dest
-			// carry the item back in the warehouse
-			si.set_location(game, warehouse_);
-			si.end_shipping(game);
+		} else { // invalid destination
+			// carry the item back into the warehouse
+			si_it->set_location(game, warehouse_);
+			si_it->end_shipping(game);
+			++si_it;
 		}
 	}
-	waiting_.resize(dst);
 
-	if (rest_capacity > 0) { // there is still capacity
-		// load any items favored by the chosen dest
-		dst = 0;
-		for (ShippingItem& si : waiting_) {
-			if (rest_capacity == 0) {
-				waiting_[dst++] = si; // keep the item here
-			} else {
-				if (fleet_->is_path_favourable(*this, *next_port, *si.get_destination(game))) {
-					ship.add_item(game, si);
-					--rest_capacity;
-				} else { // item is not favored by the chosen dest
-					// spare it from getting trapped inside the wrong ship
-					waiting_[dst++] = si;
-				}
+	if (remaining_capacity > 0) { // there is still capacity
+		// Load any items favored by the chosen destination
+		si_it =  waiting_.begin();
+		while (si_it != waiting_.end() && remaining_capacity > 0) {
+			assert(si_it->get_destination(game) != nullptr);
+			if (fleet_->is_path_favourable(*this, *next_port, *si_it->get_destination(game))) {
+				ship.add_item(game, *si_it);
+				si_it = waiting_.erase(si_it);
+				--remaining_capacity;
+			} else { // item is not favored by the chosen destination
+				// spare it from getting trapped inside the wrong ship
+				++si_it;
 			}
 		}
-		waiting_.resize(dst);
 	}
 	ship.set_destination(next_port);
-
 	set_need_ship(game, !waiting_.empty());
 }
 
@@ -461,7 +463,7 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 /**
  * Return the number of wares or workers waiting at the dock.
  */
-uint32_t PortDock::count_waiting() {
+uint32_t PortDock::count_waiting() const {
 	return waiting_.size();
 }
 
@@ -553,10 +555,10 @@ void PortDock::Loader::load_pointers() {
 	PortDock& pd = get<PortDock>();
 	pd.warehouse_ = &mol().get<Warehouse>(warehouse_);
 
-	pd.waiting_.resize(waiting_.size());
 	for (uint32_t i = 0; i < waiting_.size(); ++i) {
-		pd.waiting_[i] = waiting_[i].get(mol());
+		pd.waiting_.push_back(waiting_[i].get(mol()));
 	}
+	assert(pd.waiting_.size() == waiting_.size());
 }
 
 void PortDock::Loader::load_finish() {

@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_PORTDOCK_H
 #define WL_ECONOMY_PORTDOCK_H
 
+#include <list>
 #include <memory>
 
 #include "base/macros.h"
@@ -119,7 +120,7 @@ public:
 	void log_general_info(const EditorGameBase&) override;
 
 	uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex);
-	uint32_t count_waiting();
+	uint32_t count_waiting() const;
 
 	// Returns true if a expedition is started or ready to be send out.
 	bool expedition_started();
@@ -140,13 +141,13 @@ private:
 
 	void init_fleet(EditorGameBase& egbase);
 	void set_fleet(Fleet* fleet);
-	void update_shippingitem(Game&, std::vector<ShippingItem>::iterator);
+	void update_shippingitem(Game&, std::list<ShippingItem>::iterator);
 	void set_need_ship(Game&, bool need);
 
 	Fleet* fleet_;
 	Warehouse* warehouse_;
 	PositionList dockpoints_;
-	std::vector<ShippingItem> waiting_;
+	std::list<ShippingItem> waiting_;
 	uint8_t ships_coming_;
 	bool expedition_ready_;
 

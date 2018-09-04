@@ -300,7 +300,7 @@ const Fleet::PortPath& Fleet::portpath_bidir(uint32_t i, uint32_t j, bool& rever
  *
  * @return true if successful, or false if the docks are not actually part of the fleet.
  */
-bool Fleet::get_path(PortDock& start, PortDock& end, Path& path) {
+bool Fleet::get_path(const PortDock& start, const PortDock& end, Path& path) {
 	uint32_t startidx = std::find(ports_.begin(), ports_.end(), &start) - ports_.begin();
 	uint32_t endidx = std::find(ports_.begin(), ports_.end(), &end) - ports_.begin();
 
@@ -655,7 +655,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		}
 
 		Ship* closest_ship = nullptr;
-		float shortest_dist = 10000;
+		uint32_t shortest_dist = kRouteNotCalculated;
 		bool waiting = true;
 
 		for (Ship* s : ships_) {
@@ -665,29 +665,32 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 					--waiting_ports;
 					break;
 				}
-				continue; // has already destination
+				continue; // The ship already has a destination
 			}
 			if (s->get_ship_state() != Ship::ShipStates::kTransport) {
-				continue; // in expedition obviously
+				continue; // Ship is not available, e.g. in expedition
 			}
 
-			// here we get distance ship->port
-			int16_t route_length = 10000;
+			// Here we get distance ship->port
+			uint32_t route_length = kRouteNotCalculated;
 
-			PortDock* cur_port = get_dock(game, s->get_position());
-			if (cur_port) { // we are in a port
-				if (cur_port == p) { // same port
-					route_length = 0;
-				} else { // different port
-					Path tmp_path;
-					if (get_path(*cur_port, *p, tmp_path)) { // try to use precalculated path
-						route_length = tmp_path.get_nsteps();
+			// Get precalculated distance for ships available at ports
+			{
+				PortDock* cur_port = get_dock(game, s->get_position());
+				if (cur_port) { // Ship is at a port
+					if (cur_port == p) { // Same port
+						route_length = 0;
+					} else { // Different port
+						Path precalculated_path;
+						if (get_path(*cur_port, *p, precalculated_path)) {
+							route_length = precalculated_path.get_nsteps();
+						}
 					}
 				}
 			}
 
-			if (route_length == 10000) { // above failed, so we calculate path "manually"
-				// most probably the ship is not in a port (should not happen frequently)
+			// Get distance for ships available but not at a port (should not happen frequently)
+			if (route_length == kRouteNotCalculated) {
 				route_length = s->calculate_sea_route(game, *p);
 			}
 
@@ -713,14 +716,17 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 
 /**
  * For the given three consecutive ports, decide if their path is favourable or not.
- * \return true/false for yes/no
+ * \return true if the path from start to finish >= the path from middle to finish
  */
-bool Fleet::is_path_favourable(PortDock& start, PortDock& middle, PortDock& finish) {
+bool Fleet::is_path_favourable(const PortDock& start, const PortDock& middle, const PortDock& finish) {
 	if (&middle != &finish) {
 		Path path_start_to_finish;
 		Path path_middle_to_finish;
-
+#ifndef NDEBUG
 		assert(get_path(start, finish, path_start_to_finish));
+#else
+		get_path(start, finish, path_start_to_finish);
+#endif
 		if (get_path(middle, finish, path_middle_to_finish)) {
 			if (path_middle_to_finish.get_nsteps() > path_start_to_finish.get_nsteps()) {
 				return false;
@@ -734,73 +740,66 @@ bool Fleet::is_path_favourable(PortDock& start, PortDock& middle, PortDock& fini
  * For the given ship, go through all ports of this fleet
  * and find the one with the best score.
  * \return that port
- *
- * @note cur_port is never nullptr (we are always in a port),
- * but that is kept in case the design changes in the future
  */
-PortDock* Fleet::find_next_dest(Game& game, Ship& ship, PortDock* const cur_port) {
-	// uint32_t const max_capacity = ship.descr().get_capacity();
+PortDock* Fleet::find_next_dest(Game& game, const Ship& ship, const PortDock& from_port) {
 	PortDock* best_port = nullptr;
-	float best_score = 0;
+	float best_score = 0.0f;
 
 	for (PortDock* p : ports_) {
-		if (p == cur_port) {
+		if (p == &from_port) {
 			continue; // same port
 		}
 
-		float score = 0;
+		float score = 0.0f;
 		WareInstance* ware;
 		Worker* worker;
 
-		// score for wares/workers onboard that ship for that port
-		for (uint16_t i = 0; i < ship.get_nritems(); ++i) {
-			ShippingItem& si = ship.items_[i];
+		// Score for wares/workers onboard that ship for that port
+		for (const ShippingItem& si : ship.items_) {
 			if (si.get_destination(game) == p) {
 				si.get(game, &ware, &worker);
 				if (ware) {
-					score += 1; // TODO: increase by ware's importance
+					score += 1; // TODO(ypopezios): increase by ware's importance
 				} else { // worker
 					score += 4;
 				}
 			}
 		}
 
-		if (cur_port) { // we are in a port
-			// score for wares/workers waiting at that port
-			for (uint16_t i = 0; i < cur_port->count_waiting(); ++i) {
-				ShippingItem& si = cur_port->waiting_[i];
-				if (si.get_destination(game) == p) {
-					si.get(game, &ware, &worker);
-					if (ware) {
-						score += 1; // TODO: increase by ware's importance
-					} else { // worker
-						score += 4;
-					}
+		// Score for wares/workers waiting at that port
+		for (const ShippingItem& si : from_port.waiting_) {
+			if (si.get_destination(game) == p) {
+				si.get(game, &ware, &worker);
+				if (ware) {
+					score += 1; // TODO(ypopezios): increase by ware's importance
+				} else { // worker
+					score += 4;
 				}
 			}
 		}
 
-		if (score == 0 && p->get_need_ship() == 0) {
+		if (score == 0.0f && p->get_need_ship() == 0) {
 			continue; // empty ship to empty port
 		}
 
-		// here we get distance ship->port
-		int16_t route_length = -1;
+		// Here we get distance ship->port
+		uint32_t route_length = kRouteNotCalculated;
 
-		if (cur_port) { // we are in a port
-			Path tmp_path;
-			if (get_path(*cur_port, *p, tmp_path)) { // try to use precalculated path
-				route_length = tmp_path.get_nsteps();
+		// Get precalculated distance if the ship is at a port
+		{
+			Path precalculated_path;
+			if (get_path(from_port, *p, precalculated_path)) { // try to use precalculated path
+				route_length = precalculated_path.get_nsteps();
 			}
 		}
 
-		if (route_length == -1) { // above failed, so we calculate path "manually"
-			// most probably the ship is not in a port (should not happen frequently)
+		// Get distance for when the ship is not at a port (should not happen frequently)
+		if (route_length == kRouteNotCalculated) {
 			route_length = ship.calculate_sea_route(game, *p);
 		}
 
-		score = (score + 1) * (score + p->get_need_ship());
-		score = score * (1 - route_length / (score + route_length));
+		score = (score + 1.0f) * (score + p->get_need_ship());
+		score = score * (1.0f - route_length / (score + route_length));
 		if (score > best_score) {
 			best_score = score;
 			best_port = p;

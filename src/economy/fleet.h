@@ -47,6 +47,7 @@ private:
 };
 
 constexpr int32_t kFleetInterval = 5000;
+constexpr uint32_t kRouteNotCalculated = std::numeric_limits<uint32_t>::max();
 
 /**
  * Manage all ships and ports of a player that are connected
@@ -98,7 +99,7 @@ struct Fleet : MapObject {
 
 	void log_general_info(const EditorGameBase&) override;
 
-	bool get_path(PortDock& start, PortDock& end, Path& path);
+	bool get_path(const PortDock& start, const PortDock& end, Path& path);
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
 	uint32_t count_ships();
@@ -154,8 +155,8 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 
 	static MapObject::Loader* load(EditorGameBase&, MapObjectLoader&, FileRead&);
-	bool is_path_favourable(PortDock& start, PortDock& middle, PortDock& finish);
-	PortDock* find_next_dest(Game&, Ship&, PortDock* const cur_port);
+	bool is_path_favourable(const PortDock& start, const PortDock& middle, const PortDock& finish);
+	PortDock* find_next_dest(Game&, const Ship&, const PortDock& from_port);
 };
 
 }  // namespace Widelands
