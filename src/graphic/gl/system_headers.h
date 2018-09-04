@@ -36,16 +36,7 @@
 
 #ifdef USE_GLBINDING
 #include <glbinding/Binding.h>
-#include <glbinding/glbinding.h>
-#include <glbinding/FunctionCall.h>
-#include <glbinding/CallbackMask.h>
 #include <glbinding/gl/gl.h>
-
-#include <glbinding-aux/ContextInfo.h>
-#include <glbinding-aux/Meta.h>
-#include <glbinding-aux/types_to_string.h>
-#include <glbinding-aux/ValidVersions.h>
-#include <glbinding-aux/debug.h>
 // This fakes that most other gl bindings define gl functions in the public namespace.
 CLANG_DIAG_OFF("-Wheader-hygiene")
 using namespace gl;
