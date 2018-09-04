@@ -36,6 +36,8 @@
 
 #ifdef USE_GLBINDING
 #include <glbinding/Binding.h>
+#include <glbinding/ProcAddress.h>
+#include <glbinding/glbinding.h>
 #include <glbinding/gl/gl.h>
 // This fakes that most other gl bindings define gl functions in the public namespace.
 CLANG_DIAG_OFF("-Wheader-hygiene")
