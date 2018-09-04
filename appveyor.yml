@@ -21,8 +21,8 @@ install:
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
   - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-glbinding-2.1.4-1-any.pkg.tar.xz\""
-    # Downgrade Boost, because they changed the crypto API include path
-   - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-boost-1.66.0-2-any.pkg.tar.xz\""
+  # Downgrade Boost, because they changed the crypto API include path
+  - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-boost-1.66.0-2-any.pkg.tar.xz\""
 
 shallow_clone: true
 
