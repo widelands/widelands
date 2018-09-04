@@ -165,7 +165,7 @@ public:
 	explicit ProductionSite(const ProductionSiteDescr& descr);
 	~ProductionSite() override;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	bool is_stopped() const {
 		return is_stopped_;

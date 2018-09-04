@@ -739,7 +739,7 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 	return true;
 }
 
-void ProductionSite::log_general_info(const EditorGameBase& egbase) {
+void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	molog("is_stopped: %u\n", is_stopped_);

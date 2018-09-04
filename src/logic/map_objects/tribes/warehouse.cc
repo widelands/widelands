@@ -1337,17 +1337,16 @@ InputQueue& Warehouse::inputqueue(DescriptionIndex index, WareWorker type) {
 	return portdock_->expedition_bootstrap()->inputqueue(index, type);
 }
 
-void Warehouse::log_general_info(const EditorGameBase& egbase) {
+void Warehouse::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	if (descr().get_isport()) {
-		PortDock* pd_tmp = portdock_;
-		if (pd_tmp) {
-			molog("Port dock: %u\n", pd_tmp->serial());
-			molog("port needs ship: %s\n", (pd_tmp->get_need_ship()) ? "true" : "false");
-			molog("wares and workers waiting: %u\n", pd_tmp->count_waiting());
-			molog("exped. in progr.: %s\n", (pd_tmp->expedition_started()) ? "true" : "false");
-			Fleet* fleet = pd_tmp->get_fleet();
+		if (portdock_) {
+			molog("Port dock: %u\n", portdock_->serial());
+			molog("port needs ship: %s\n", (portdock_->get_need_ship()) ? "true" : "false");
+			molog("wares and workers waiting: %u\n", portdock_->count_waiting());
+			molog("exped. in progr.: %s\n", (portdock_->expedition_started()) ? "true" : "false");
+			Fleet* fleet = portdock_->get_fleet();
 			if (fleet) {
 				molog("* fleet: %u\n", fleet->serial());
 				molog("  ships: %u, ports: %u\n", fleet->count_ships(), fleet->count_ports());

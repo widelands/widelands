@@ -967,7 +967,7 @@ void Flag::flag_job_request_callback(
 	flag.molog("BUG: flag_job_request_callback: worker not found in list\n");
 }
 
-void Flag::log_general_info(const Widelands::EditorGameBase& egbase) {
+void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 	molog("Flag at %i,%i\n", position_.x, position_.y);
 
 	Widelands::PlayerImmovable::log_general_info(egbase);

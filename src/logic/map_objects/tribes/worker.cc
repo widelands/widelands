@@ -1051,7 +1051,7 @@ Worker::~Worker() {
 }
 
 /// Log basic information.
-void Worker::log_general_info(const EditorGameBase& egbase) {
+void Worker::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
