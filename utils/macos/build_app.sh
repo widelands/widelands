@@ -2,9 +2,60 @@
 
 set -e
 
-if [ "$#" == "0" ]; then
-	echo "Usage: $0 <bzr_repo_directory>"
-	exit 1
+USAGE="Usage: $0 <clang|gcc|gcc6> <debug|release> <bzr_repo_directory>"
+USE_ASAN="OFF"
+
+if [ ! -z "$3" ]; then
+   case "$2" in
+   debug|Debug)
+      TYPE="Debug"
+      if [ "$1" == "clang" ]; then
+         USE_ASAN="ON"
+         # Necessary to avoid linking errors later on
+         ASANLIB=$(echo "int main(void){return 0;}" | xcrun clang -fsanitize=address \
+         -xc -o/dev/null -v - 2>&1 |   tr ' ' '\n' | grep libclang_rt.asan_osx_dynamic.dylib)
+         mkdir -p "@rpath"
+         ln -fs "$ASANLIB" "@rpath/"
+      fi
+      ;;
+   release|Release)
+      TYPE="Release"
+      ;;
+   *)
+      echo $USAGE
+      exit 1
+      ;;
+   esac
+   case "$1" in
+   clang)
+      C_COMPILER="clang"
+      CXX_COMPILER="clang++"
+      COMPILER=$(clang --version | grep "clang")
+      ;;
+   gcc)
+      C_COMPILER="gcc-7"
+      CXX_COMPILER="g++-7"
+      COMPILER=$(gcc-7 --version | grep "GCC")
+      ;;
+   gcc6)
+      # Used for the nightly builds.
+      C_COMPILER="gcc-6"
+      CXX_COMPILER="g++-6"
+      COMPILER=$(gcc-6 --version | grep -i "GCC")
+      ;;
+   *)
+      echo $USAGE
+      exit 1
+      ;;
+   esac
+   if [ ! -z $(type -p ccache) ]; then
+      C_COMPILER="$(brew --prefix ccache)/libexec/$C_COMPILER"
+      CXX_COMPILER="$(brew --prefix ccache)/libexec/$CXX_COMPILER"
+   fi
+   SOURCE_DIR=$3
+else
+   echo $USAGE
+   exit 1
 fi
 
 # Check if the SDK for the minimum build target is available.
@@ -17,10 +68,9 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
 fi
 
-SOURCE_DIR=$1
 REVISION=`bzr revno $SOURCE_DIR`
 DESTINATION="WidelandsRelease"
-TYPE="Release"
+
 if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
    WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
 else
@@ -33,6 +83,7 @@ echo "   Version:     $WLVERSION"
 echo "   Destination: $DESTINATION"
 echo "   Type:        $TYPE"
 echo "   macOS:       $OSX_MIN_VERSION"
+echo "   Compiler:    $COMPILER"
 echo ""
 
 function MakeDMG {
@@ -46,7 +97,11 @@ function MakeDMG {
    cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
 
    echo "Creating DMG ..."
-   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
+   if [ "$TYPE" == "Release" ]; then
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
+   elif [ "$TYPE" == "Debug" ]; then
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_${WLVERSION}_${TYPE}.dmg"
+   fi
 }
 
 function CopyLibrary {
@@ -109,24 +164,30 @@ EOF
 }
 
 function BuildWidelands() {
-   PREFIX_PATH="$(brew --prefix libpng)"
+   PREFIX_PATH=";$(brew --prefix gettext)"
    PREFIX_PATH+=";$(brew --prefix jpeg)"
    PREFIX_PATH+=";$(brew --prefix libpng)"
    PREFIX_PATH+=";$(brew --prefix python)"
    PREFIX_PATH+=";$(brew --prefix zlib)"
    PREFIX_PATH+=";/usr/local"
    PREFIX_PATH+=";/usr/local/Homebrew"
-
+   
+   export PATH="$(brew --prefix gettext)/bin:$PATH"
    export SDL2DIR="$(brew --prefix sdl2)"
    export SDL2IMAGEDIR="$(brew --prefix sdl2_image)"
    export SDL2MIXERDIR="$(brew --prefix sdl2_mixer)"
    export SDL2TTFDIR="$(brew --prefix sdl2_ttf)"
    export BOOST_ROOT="$(brew --prefix boost)"
+   
+   # Not needed for CMake 3.12 or above, see cmake --help-policy CMP0074.
+   # However Mac OS X nighlies cannot upgrade to a newer cmake version than
+   # 3.9.4 since nothing newer compiles on Mac OS X 10.7 which is used to build
+   # the nightlies.
    export ICU_ROOT="$(brew --prefix icu4c)"
 
    cmake $SOURCE_DIR -G Ninja \
-      -DCMAKE_C_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/gcc-7" \
-      -DCMAKE_CXX_COMPILER:FILEPATH="$(brew --prefix ccache)/libexec/g++-7" \
+      -DCMAKE_C_COMPILER:FILEPATH="$C_COMPILER" \
+      -DCMAKE_CXX_COMPILER:FILEPATH="$CXX_COMPILER" \
       -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="$OSX_MIN_VERSION" \
       -DCMAKE_OSX_SYSROOT:PATH="$SDK_DIRECTORY" \
       -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
@@ -134,7 +195,8 @@ function BuildWidelands() {
       -DCMAKE_BUILD_TYPE:STRING="$TYPE" \
       -DGLEW_INCLUDE_DIR:PATH="$(brew --prefix glew)/include" \
       -DGLEW_LIBRARY:PATH="$(brew --prefix glew)/lib/libGLEW.dylib" \
-      -DCMAKE_PREFIX_PATH:PATH="${PREFIX_PATH}"
+      -DCMAKE_PREFIX_PATH:PATH="${PREFIX_PATH}" \
+      -DOPTION_ASAN="$USE_ASAN"
    ninja
 
    echo "Done building."
