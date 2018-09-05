@@ -48,6 +48,7 @@ SDL_GLContext initialize(
 	SDL_GL_MakeCurrent(sdl_window, gl_context);
 
 #ifdef USE_GLBINDING
+#  ifndef GLBINDING3
 	glbinding::Binding::initialize();
 
 	// The undocumented command line argument --debug_gl_trace will set
@@ -56,8 +57,8 @@ SDL_GLContext initialize(
 	// is built using -DOPTION_USE_GLBINDING:BOOL=ON. It is a NoOp for GLEW.
 	if (trace == Trace::kYes) {
 		setCallbackMaskExcept(
-		   glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
-		   {"glGetError"});
+			glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
+			{"glGetError"});
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
 			log("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
@@ -80,6 +81,43 @@ SDL_GLContext initialize(
 			// }
 		});
 	}
+#  else
+	const glbinding::GetProcAddress get_proc_address = [](const char *name) {
+		return reinterpret_cast<glbinding::ProcAddress>(SDL_GL_GetProcAddress(name));
+		};
+	glbinding::Binding::initialize(get_proc_address, true);
+
+	// The undocumented command line argument --debug_gl_trace will set
+	// Trace::kYes. This will log every OpenGL call that is made, together with
+	// arguments, return values and glError status. This requires that Widelands
+	// is built using -DOPTION_USE_GLBINDING:BOOL=ON. It is a NoOp for GLEW.
+	if (trace == Trace::kYes) {
+		glbinding::setCallbackMaskExcept(
+			glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
+			{"glGetError"});
+		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
+			log("%s(", call.function->name());
+			for (size_t i = 0; i < call.parameters.size(); ++i) {
+				log("%s", call.parameters[i].get());
+				if (i < call.parameters.size() - 1)
+					log(", ");
+			}
+			log(")");
+			if (call.returnValue) {
+				log(" -> %s", call.returnValue.get());
+			}
+			const auto error = glGetError();
+			log(" [%s]\n", gl_error_to_string(error));
+			// The next few lines will terminate Widelands if there was any OpenGL
+			// error. This is useful for super aggressive debugging, but probably
+			// not for regular builds. Comment it in if you need to understand
+			// OpenGL problems.
+			// if (error != GL_NO_ERROR) {
+			// std::raise(SIGINT);
+			// }
+		});
+	}
+#  endif
 #else
 	// See graphic/gl/system_headers.h for an explanation of the next line.
 	glewExperimental = GL_TRUE;
