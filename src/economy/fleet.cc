@@ -568,7 +568,7 @@ void Fleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 	}
 }
 
-bool Fleet::has_ports() {
+bool Fleet::has_ports() const {
 	return !ports_.empty();
 }
 
