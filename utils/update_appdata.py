@@ -12,6 +12,8 @@ import sys
 # ../debian/widelands.appdata.xml.stub
 # That file contains a SUMMARY_DESCRIPTION_HOOK where the translatable information
 # is inserted.
+# A language list and textdomain info is inserted into LANGUAGES_HOOK
+#
 # The output is written to ../debian/widelands.appdata.xml
 #
 # All non-translatable content for ../debian/org.widelands.widelands.desktop is taken from
@@ -52,18 +54,31 @@ if (not os.path.isfile(english_source_filename)):
     print('Error: File ' + english_source_filename + ' not found.')
     sys.exit(1)
 
+print('- Reading textdomains:')
+
+textdomain_path = os.path.normpath(
+    base_path + '/po')
+textdomains = []
+textdomain_path_contents = os.listdir(textdomain_path)
+for textdomain in textdomain_path_contents:
+    if os.path.isdir(os.path.normpath(textdomain_path + '/' + textdomain)):
+        textdomains.append(textdomain)
+
 print('- Reading source from JSON:')
 
 english_source_file = open(english_source_filename, 'r')
 english_source = json.load(english_source_file)
 
+name_en = english_source['name']
 tagline_en = english_source['tagline']
 descriptions_en = english_source['description']
 generic_name_en = english_source['category']
+desktop_name_en = english_source['name']
 
 english_source_file.close()
 
 # For appdata.xml
+names = '  <name>' + name_en + '</name>\n'
 summaries = '  <summary>' + tagline_en + '</summary>\n'
 descriptions = '  <description>\n'
 for description in descriptions_en:
@@ -72,6 +87,7 @@ for description in descriptions_en:
     descriptions += '    </p>\n'
 
 # For .desktop
+desktop_names = 'Name=' + desktop_name_en + '\n'
 generic_names = 'GenericName=' + generic_name_en + '\n'
 comments = 'Comment=' + tagline_en + '\n'
 
@@ -79,6 +95,7 @@ print('- Reading translations from JSON:')
 
 # Each language's translations live in a separate file, so we list the dir
 translation_files = sorted(os.listdir(translations_path), key=str.lower)
+langcodes = []
 
 for translation_filename in translation_files:
     # Only json files, and not the template file please
@@ -87,6 +104,7 @@ for translation_filename in translation_files:
             translations_path + '/' + translation_filename, 'r')
         translation = json.load(translation_file)
         lang_code = translation_filename[:-5]
+        langcodes.append(lang_code)
         tagline = translation['tagline']
         if tagline != tagline_en:
             summaries += "  <summary xml:lang=\"" + lang_code + \
@@ -98,6 +116,16 @@ for translation_filename in translation_files:
             # .desktop
             generic_names += 'GenericName[' + \
                 lang_code + ']=' + generic_name + '\n'
+        if translation.has_key('name'):
+            desktop_name = translation['name']
+            if desktop_name != desktop_name_en:
+                # .desktop
+                desktop_names += 'Name[' + \
+                    lang_code + ']=' + desktop_name + '\n'
+        # appdata.xml
+        if translation.has_key('name') and translation['name'] != name_en:
+            names += "  <name xml:lang=\"" + lang_code + \
+                "\">" + translation['name'] + '</name>\n'
         if translation['description'] != descriptions_en:  # appdata.xml
             for description in translation['description']:
                 descriptions += "    <p xml:lang=\"" + lang_code + "\">\n"
@@ -111,10 +139,17 @@ input_file = open(appdata_input_filename, 'r')
 appdata = ''
 
 for line in input_file:
-    if line.strip() != 'SUMMARY_DESCRIPTION_HOOK':
-        appdata += line
+    if line.strip() == 'SUMMARY_DESCRIPTION_HOOK':
+        appdata += names + summaries + descriptions
+    elif line.strip() == 'LANGUAGES_HOOK':
+        appdata += '  <languages>\n'
+        for langcode in langcodes:
+            appdata += '    <lang>' + langcode + '</lang>\n'
+        appdata += '  </languages>\n'
+        for textdomain in textdomains:
+            appdata += '  <translation type="gettext">' + textdomain + '</translation>\n'
     else:
-        appdata += summaries + descriptions
+        appdata += line
 
 input_file.close()
 
@@ -131,7 +166,7 @@ for line in input_file:
     if line.strip() != 'GENERIC_NAME_COMMENT_HOOK':
         desktop += line
     else:
-        desktop += generic_names + comments
+        desktop += desktop_names + generic_names + comments
 
 input_file.close()
 
