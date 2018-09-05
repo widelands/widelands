@@ -94,8 +94,7 @@ tribes:new_productionsite_type {
          }
       },
       a_mine_produce_granite = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
-         descname = _"mining and producing",
+         descname = _"mining granite",
          actions = {
             "animate=working 10500",
             "mine=stones 2 50 5 17",
@@ -103,8 +102,7 @@ tribes:new_productionsite_type {
          }
       },
       a_mine_produce_marble = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
-         descname = _"mining and producing",
+         descname = _"mining marble",
          actions = {
             "animate=working 10500",
             "mine=stones 2 50 5 17",

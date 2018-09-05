@@ -68,8 +68,7 @@ tribes:new_productionsite_type {
          }
       },
       mine_produce = {
-         -- TRANSLATORS: Completed/Skipped/Did not start mining and producing because ...
-         descname = _"mining and producing",
+         descname = _"mining gold",
          actions = {
             "animate=working 21000",
             "mine=gold 2 50 5 17",
