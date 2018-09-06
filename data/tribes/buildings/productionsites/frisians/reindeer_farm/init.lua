@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
             "call=make_fur",
             "call=recruit_deer",
             "call=make_fur_meat",
-            "return=skipped",
+            "return=no_stats",
          }
       },
       recruit_deer = {

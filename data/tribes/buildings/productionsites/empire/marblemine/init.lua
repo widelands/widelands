@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=mine_marble",
             "call=mine_granite",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       mine_marble = {

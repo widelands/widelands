@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
             "call=produce_ration",
             "call=produce_snack",
             "call=produce_meal",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ration = {

@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
             "call=produce_helmet",
             "call=produce_helmet_mask",
             "call=produce_helmet_warhelm",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_helmet = {

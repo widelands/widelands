@@ -63,7 +63,7 @@ tribes:new_productionsite_type {
             "call=mine_granite",
             "call=mine_quartz",
             "call=mine_diamond",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       mine_granite = {

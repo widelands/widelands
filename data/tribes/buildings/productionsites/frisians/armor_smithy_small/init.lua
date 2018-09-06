@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
             "call=produce_s2",
             "call=produce_h",
             "call=produce_s2",
-            "return=skipped",
+            "return=no_stats",
          },
       },
       produce_s1 = {

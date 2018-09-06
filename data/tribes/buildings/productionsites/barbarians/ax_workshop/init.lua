@@ -69,7 +69,7 @@ tribes:new_productionsite_type {
             "call=produce_ax",
             "call=produce_ax_sharp",
             "call=produce_ax_broad",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ax = {
