@@ -122,7 +122,7 @@ void sdl_logging_func(void* userdata,
 bool g_verbose = false;
 
 #ifdef _WIN32
-// Start with nullptr so that we won't initialize an empty file in the logging directory
+// Start with nullptr so that we won't initialize an empty file in the program's directory
 std::unique_ptr<WindowsLogger> logger(nullptr);
 
 // Set the logging dir to the given homedir
