@@ -129,8 +129,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
                     24,
                     _("Number of players"),
                     UI::DropdownType::kTextual,
-                    UI::PanelStyle::kWui),
-     default_tribe_(Widelands::get_all_tribenames().front()) {
+                    UI::PanelStyle::kWui) {
 	box_.set_size(100, 100);  // Prevent assert failures
 	box_.add(&no_of_players_, UI::Box::Resizing::kFullSize);
 	box_.add_space(2 * kMargin);
@@ -146,7 +145,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		mutable_map->set_scenario_player_closeable(1, false);
 		/** TRANSLATORS: Default player name, e.g. Player 1 */
 		mutable_map->set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
-		mutable_map->set_scenario_player_tribe(1, default_tribe_);
+		mutable_map->set_scenario_player_tribe(1, "");
 		eia().set_need_save(true);
 	}
 
@@ -179,11 +178,15 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 				plr_tribe->add(_(tribeinfo.descname), tribeinfo.name,
 				               g_gr->images().get(tribeinfo.icon), false, tribeinfo.tooltip);
 			}
+			plr_tribe->add(pgettext("tribe", "Random"), "",
+			               g_gr->images().get("images/ui_fsmenu/random.png"), false,
+			               _("The tribe will be selected at random"));
 		}
-		const std::string player_scenario_tribe =
-		   map_has_player ? map.get_scenario_player_tribe(p) : default_tribe_;
-		plr_tribe->select(Widelands::tribe_exists(player_scenario_tribe) ? player_scenario_tribe :
-		                                                                   default_tribe_);
+
+		plr_tribe->select(
+		   (p < map.get_nrplayers() && Widelands::tribe_exists(map.get_scenario_player_tribe(p))) ?
+		      map.get_scenario_player_tribe(p) :
+		      "");
 		plr_tribe->selected.connect(
 		   boost::bind(&EditorPlayerMenu::player_tribe_clicked, boost::ref(*this), p - 1));
 		row->add(plr_tribe);
@@ -268,7 +271,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 			rows_.at(pn - 1)->name->set_text(name);
 
 			const std::string& tribename = rows_.at(pn - 1)->tribe->get_selected();
-			assert(Widelands::tribe_exists(tribename));
+			assert(tribename.empty() || Widelands::tribe_exists(tribename));
 			map->set_scenario_player_tribe(pn, tribename);
 			rows_.at(pn - 1)->box->set_visible(true);
 		}
@@ -292,7 +295,7 @@ void EditorPlayerMenu::no_of_players_clicked() {
 
 void EditorPlayerMenu::player_tribe_clicked(size_t row) {
 	const std::string& tribename = rows_.at(row)->tribe->get_selected();
-	assert(Widelands::tribe_exists(tribename));
+	assert(tribename.empty() || Widelands::tribe_exists(tribename));
 	EditorInteractive& menu = eia();
 	menu.egbase().mutable_map()->set_scenario_player_tribe(row + 1, tribename);
 	menu.set_need_save(true);

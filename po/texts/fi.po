@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-15 17:36+0000\n"
+"POT-Creation-Date: 2018-08-24 06:54+0000\n"
+"PO-Revision-Date: 2018-08-28 17:38+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -202,11 +202,11 @@ msgid "Widelands Translators"
 msgstr "Kääntäjät"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
-msgstr "Atlantislainen"
+msgid "Atlanteans"
+msgstr "Atlantislaiset"
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
+msgid "Barbarians"
 msgstr "Barbaarit"
 
 #: ../../data/txts/developers.lua:3
@@ -250,8 +250,8 @@ msgid "FreeBSD"
 msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
-msgid "Frisian"
-msgstr ""
+msgid "Frisians"
+msgstr "Vapaamieliset"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -616,7 +616,7 @@ msgid ""
 "To produce bricks, you need granite; to produce granite, you need a quarry "
 "or rock mine; to build those, you need bricks. Take care not to get "
 "deadlocked!"
-msgstr ""
+msgstr "Tuottaaksesi tiiliä, tarvitset graniittia; tuottaaksesi graniittia, tarvitset kivilouhoksen tai kivikaivoksen; rakentaaksesi ne, tarvitset tiiliä. Pidä huoli ettet jumiudu umpikujaan!"
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."

@@ -24,7 +24,6 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "config.h"
@@ -36,57 +35,11 @@
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/world.h"
-#include "sound/sound_handler.h"
+#include "website/website_common.h"
 
 using namespace Widelands;
 
 namespace {
-
-/*
- ==========================================================
- SETUP
- ==========================================================
- */
-
-// Setup the static objects Widelands needs to operate and initializes systems.
-std::unique_ptr<FileSystem> initialize(const std::string& output_path) {
-	i18n::set_locale("en");
-
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
-	}
-
-	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
-
-	std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
-
-	// We don't really need graphics or sound here, but we will get error messages
-	// when they aren't initialized
-	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
-
-	g_sound_handler.init();
-	g_sound_handler.nosound_ = true;
-	return out_filesystem;
-}
-
-// Cleanup before program end
-void cleanup() {
-	g_sound_handler.shutdown();
-
-	if (g_gr) {
-		delete g_gr;
-		g_gr = nullptr;
-	}
-
-	if (g_fs) {
-		delete g_fs;
-		g_fs = nullptr;
-	}
-
-	SDL_Quit();
-}
 
 /*
  ==========================================================
@@ -530,7 +483,8 @@ int main(int argc, char** argv) {
 	const std::string output_path = argv[argc - 1];
 
 	try {
-		std::unique_ptr<FileSystem> out_filesystem = initialize(output_path);
+		initialize();
+		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		EditorGameBase egbase(nullptr);
 		write_tribes(egbase, out_filesystem.get());
 	} catch (std::exception& e) {
