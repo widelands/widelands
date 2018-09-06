@@ -98,13 +98,13 @@ SDL_GLContext initialize(
 		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
 			log("%s(", call.function->name());
 			for (size_t i = 0; i < call.parameters.size(); ++i) {
-				log("%s", call.parameters[i].get());
+				log("%p", call.parameters[i].get());
 				if (i < call.parameters.size() - 1)
 					log(", ");
 			}
 			log(")");
 			if (call.returnValue) {
-				log(" -> %s", call.returnValue.get());
+				log(" -> %p", call.returnValue.get());
 			}
 			const auto error = glGetError();
 			log(" [%s]\n", gl_error_to_string(error));
