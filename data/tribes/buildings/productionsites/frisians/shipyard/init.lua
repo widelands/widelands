@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
       ship_preparation = {
          descname = _"working",
          actions = {
-            "sleep=20000",
+            "sleep=35000",
             -- no working animation yet
          }
       },
