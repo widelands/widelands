@@ -32,11 +32,13 @@
 #include <cassert>
 #include <cstring>
 #include <map>
+#include <memory>
 #include <stdexcept>
 #include <string>
 
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
+#include <SDL_surface.h>
 
 #include "base/vector.h"
 
@@ -66,6 +68,8 @@ struct InputCallback {
 	bool (*textinput)(const std::string& text);
 	bool (*mouse_wheel)(uint32_t which, int32_t x, int32_t y);
 };
+
+enum class MouseCursorState { normal, clicked };
 
 /// You know main functions, of course. This is the main struct.
 ///
@@ -117,10 +121,10 @@ struct InputCallback {
 ///
 /// \par The mouse cursor
 ///
-/// SDL can handle a mouse cursor on its own, but only in black and white. That
-/// is not sufficient.
-///
-/// So Widelands must paint its own cursor and hide the system cursor.
+/// Mouse cursor is handled by SDL if possible. If SDL cursor can't be created,
+/// Widelands hides the system cursor and paints its own sursor (paiting its
+/// own cursor was the only method in the past as old SDL supported only b&w
+/// cursors).
 ///
 /// Ordinarily, relative coordinates break down when the cursor leaves the
 /// window. This means we have to grab the mouse, then relative coords are
@@ -176,6 +180,11 @@ struct WLApplication {
 	void set_mouse_lock(const bool locked) {
 		mouse_locked_ = locked;
 	}
+
+	bool is_sdl_mouse_cursor_used() const {
+		return !sdl_cursors.empty();
+	}
+
 	// @}
 
 	// Refresh the graphics settings with the latest options.
@@ -253,6 +262,9 @@ private:
 	/// used to cancel the resulting SDL_MouseMotionEvent.
 	Vector2i mouse_compensate_warp_;
 
+	/// SDL cursors if available (otherwise, an empty map)
+	std::map<MouseCursorState, std::shared_ptr<SDL_Cursor>> sdl_cursors;
+
 	/// true if an external entity wants us to quit
 	bool should_die_;
 
@@ -274,6 +286,7 @@ private:
 	static WLApplication* the_singleton;
 
 	void handle_mousebutton(SDL_Event&, InputCallback const*);
+	void update_sdl_mouse_cursor();
 };
 
 #endif  // end of include guard: WL_WLAPPLICATION_H

@@ -147,8 +147,10 @@ int Panel::do_run() {
 		forefather = forefather->parent_;
 	}
 
-	default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
-	default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
+	if (!app->is_sdl_mouse_cursor_used()) {
+		default_cursor_ = g_gr->images().get("images/ui_basic/cursor.png");
+		default_cursor_click_ = g_gr->images().get("images/ui_basic/cursor_click.png");
+	}
 
 	// Loop
 	running_ = true;
@@ -192,8 +194,10 @@ int Panel::do_run() {
 		if (start_time >= next_draw_time) {
 			RenderTarget& rt = *g_gr->get_render_target();
 			forefather->do_draw(rt);
-			rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
-			        app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
+			if (!app->is_sdl_mouse_cursor_used()) {
+				rt.blit((app->get_mouse_position() - Vector2i(3, 7)),
+					app->is_mouse_pressed() ? default_cursor_click_ : default_cursor_);
+			}
 
 			if (is_modal()) {
 				do_tooltip();
