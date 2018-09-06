@@ -35,6 +35,8 @@ function farm_plans()
    local f = map:get_field(47, 10)
    local farmclick = false
    local count = 0
+   local o1 = add_campaign_objective(obj_click_farmbuilding)
+   o1.done = true
    while not (farmclick or p1.defeated) do
       if mv.windows.building_window and not mv.windows.building_window.buttons.dismantle and not mv.windows.building_window.tabs.wares and mv.windows.building_window.tabs.workers then
          farmclick = true
@@ -42,10 +44,12 @@ function farm_plans()
       count = count + 1
       if count == 1201 then
          campaign_message_box(amalea_18)
+         o1.done = false
       end
       sleep(500)
    end
 
+   o1.done = true
    if not p1.defeated then
       campaign_message_box(amalea_2)
       local o = add_campaign_objective(obj_find_farm_plans)

@@ -59,6 +59,15 @@ obj_clear_roads = {
    ),
 }
 
+obj_click_farmbuilding = {
+   name = "click_farm_building",
+   title=_"Click on one of the farms",
+   number = 1,
+   body = objective_text(_"Open the Building Window of a Farm",
+      li(_[[Click on a farm building to open it's building window. This will allow to analyze the building.]])
+   ),
+}
+
 obj_find_farm_plans = {
    name = "find_farm_construction_plans",
    title=_"Find the construction plans for the farms",
@@ -532,8 +541,10 @@ amalea_18 = {
       _([[Look Lutius, I have just analyzed our economy somewhat further. I think there might be a problem with our farms. They don’t show any productivity although there is enough space to plant wheat.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[I think we should have a deeper look into the issue and open the building window of one of them.]])),
+      _([[I think we should have a deeper look into the issue and open the building window of one of them.]]))
+      .. new_objectives(obj_click_farmbuilding),
    posy=1,
+   h=500,
 }
 
 amalea_19 = {
