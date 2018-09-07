@@ -917,6 +917,20 @@ void Game::sample_statistics() {
 				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
 	}
 
+
+	// Trigger any scenario hooks
+	for (const std::string hook_name : scenario_hooks_) {
+		std::unique_ptr<LuaTable> hook = lua().get_hook(hook_name);
+		if (hook) {
+			iterate_players_existing(p, nr_plrs, *this, plr) {
+				std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("hook_function"));
+				cr->resume();
+			}
+		} else {
+			throw LuaError((boost::format("Hook %s has been added in a Lua script, but it has no function\n") % hook_name).str());
+		}
+	}
+
 	//  Number of workers / wares / casualties / kills.
 	iterate_players_existing(p, nr_plrs, *this, plr) {
 		uint32_t wostock = 0;
@@ -963,19 +977,6 @@ void Game::sample_statistics() {
 				cr->resume();
 				custom_statistic[p - 1] = cr->pop_uint32();
 			}
-		}
-	}
-
-	// Trigger any scenario hooks
-	for (const std::string hook_name : scenario_hooks_) {
-		std::unique_ptr<LuaTable> hook = lua().get_hook(hook_name);
-		if (hook) {
-			iterate_players_existing(p, nr_plrs, *this, plr) {
-				std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("hook_function"));
-				cr->resume();
-			}
-		} else {
-			throw LuaError((boost::format("Hook %s has been added in a Lua script, but it has no function\n") % hook_name).str());
 		}
 	}
 

@@ -17,19 +17,6 @@ map = game.map
 
 points_to_win = 2000
 
-route_descrs = {
-   { value = 2, send = map:get_field(35, 52):region(2), recv = map:get_field(96, 77):region(2) },
-   { value = 2, send = map:get_field(98, 55):region(2), recv = map:get_field(34, 76):region(2) },
-
-   { value = 3, send = map:get_field(64, 57):region(2), recv = map:get_field(78, 73):region(2) },
-   { value = 3, send = map:get_field(77, 58):region(2), recv = map:get_field(65, 72):region(2) },
-
-   { value = 2, send = map:get_field(62, 93):region(2), recv = map:get_field(78, 34):region(2) },
-   { value = 2, send = map:get_field(80, 95):region(2), recv = map:get_field(63, 29):region(2) },
-   { value = 2, send = map:get_field(18, 66):region(2), recv = map:get_field(121, 61):region(2) },
-   { value = 2, send = map:get_field(124, 72):region(2), recv = map:get_field(19, 57):region(2) }
-}
-
 -- =================
 -- Global Variables
 -- =================
@@ -137,6 +124,18 @@ function initialize()
    for idx,descr in ipairs(route_descrs) do
       run(wait_for_established_route, descr)
    end
+
+   wl.Game():add_scenario_hook("smuggling")
+   -- Instantiate scenario hook
+   hooks.smuggling = {
+      hook_function = function()
+         print("Scenario hook was triggered")
+         for idx, route_descr in ipairs(route_descrs) do
+            do_smuggling(route_descr)
+         end
+         return
+      end,
+   }
 end
 
 setup_statistics_hook()
