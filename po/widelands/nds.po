@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-31 10:50+0000\n"
+"POT-Creation-Date: 2018-09-01 06:47+0000\n"
+"PO-Revision-Date: 2018-09-01 18:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -321,26 +321,26 @@ msgid ""
 "incompatible."
 msgstr "Widelands kunn de Datei »%s« nich laden. Dat Formaat is openbaar nich verdragelk."
 
-#: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:221
+#: ../../src/editor/editorinteractive.cc:181 ../../src/logic/game.cc:221
 #: ../../src/logic/game.cc:271
 msgid "Creating players"
 msgstr "Spelers maken"
 
-#: ../../src/editor/editorinteractive.cc:228
+#: ../../src/editor/editorinteractive.cc:231
 msgid "Unsaved Map"
 msgstr "Nich gesekerte Kaart"
 
-#: ../../src/editor/editorinteractive.cc:229
+#: ../../src/editor/editorinteractive.cc:232
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "De Kaart is nich sekert worden. Willt du würrelk ofbreken?"
 
-#: ../../src/editor/editorinteractive.cc:611
+#: ../../src/editor/editorinteractive.cc:614
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr "Maak leege Kaart…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:615
+#: ../../src/editor/editorinteractive.cc:618
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -349,7 +349,7 @@ msgid "No Name"
 msgstr "Keen Naam"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:618
+#: ../../src/editor/editorinteractive.cc:621
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -357,7 +357,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Nüms"
 
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:628
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Lade Kaart “%s”…"
@@ -921,8 +921,8 @@ msgid "Number of players"
 msgstr "Tahl vun Speelers"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:148
-#: ../../src/editor/ui_menus/player_menu.cc:266
+#: ../../src/editor/ui_menus/player_menu.cc:147
+#: ../../src/editor/ui_menus/player_menu.cc:269
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:70
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:102
@@ -933,15 +933,27 @@ msgstr "Tahl vun Speelers"
 msgid "Player %u"
 msgstr "Speler %u"
 
-#: ../../src/editor/ui_menus/player_menu.cc:174
+#: ../../src/editor/ui_menus/player_menu.cc:173
 #: ../../src/ui_fsmenu/campaign_select.cc:102
 #: ../../src/wui/multiplayersetupgroup.cc:206
 msgid "Tribe"
 msgstr "Volk"
 
+#: ../../src/editor/ui_menus/player_menu.cc:181
+#: ../../src/wui/multiplayersetupgroup.cc:459
+#: ../../src/wui/playerdescrgroup.cc:169
+msgctxt "tribe"
+msgid "Random"
+msgstr "Tofällig"
+
+#: ../../src/editor/ui_menus/player_menu.cc:183
+#: ../../src/wui/multiplayersetupgroup.cc:461
+msgid "The tribe will be selected at random"
+msgstr "Dat Volk word tofällig utköört"
+
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
-#: ../../src/editor/ui_menus/player_menu.cc:201
+#: ../../src/editor/ui_menus/player_menu.cc:204
 msgid "Set this player’s starting position"
 msgstr "Anfangs-Position för düssen Speler fastleggen"
 
@@ -1827,111 +1839,124 @@ msgstr "Hebb mi mit de Metaserver verbunnen!"
 msgid "Something went wrong: %s"
 msgstr "Da is wat fehlslaan: %s"
 
-#: ../../src/network/internet_gaming.cc:373
+#: ../../src/network/internet_gaming.cc:370
+msgid "Welcome to the Widelands Metaserver!"
+msgstr "Willkomen bi de Widelands-Metaserver!"
+
+#: ../../src/network/internet_gaming.cc:374
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "Du büst as »%s« anmellt worden, wiel de wiskt Naam is vörmarkt oder al bruukt."
 
-#: ../../src/network/internet_gaming.cc:395
+#: ../../src/network/internet_gaming.cc:387
+msgid "Our forums can be found at:"
+msgstr "Uns' Forums finnst du unner:"
+
+#: ../../src/network/internet_gaming.cc:389
+msgid "For reporting bugs, visit:"
+msgstr "Um Fehler to mellen, besöök:"
+
+#: ../../src/network/internet_gaming.cc:400
 msgid "Mixed up"
 msgstr "Dörnannerkleit"
 
-#: ../../src/network/internet_gaming.cc:395
+#: ../../src/network/internet_gaming.cc:400
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "De Metaserver hett een sünnerbaaren FEHLER wiel de Verbinnen schickt"
 
-#: ../../src/network/internet_gaming.cc:410
+#: ../../src/network/internet_gaming.cc:415
 msgid "Unexpected packet"
 msgstr "Unverwachts Paket"
 
-#: ../../src/network/internet_gaming.cc:411
+#: ../../src/network/internet_gaming.cc:416
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "Hebb een unverwachts Internett-Paket vun de Metaserver kregen. De Metaserver bruukt villicht eene annere Versioon vun dem Protokoll. Wenn de Fehler wiederhen uptreddt, versöök din Speel tu upfrisken."
 
-#: ../../src/network/internet_gaming.cc:423
+#: ../../src/network/internet_gaming.cc:428
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "ACHTUNG: Hebb een %s-Befehl kregen ofschoonst wi nich in'n CONNECTING-Tostand sünd."
 
-#: ../../src/network/internet_gaming.cc:434
+#: ../../src/network/internet_gaming.cc:439
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Server-Tiet is %d Sekünn verschuven."
 msgstr[1] "Server-Tiet is %d Sekünnen verschuven."
 
-#: ../../src/network/internet_gaming.cc:458
+#: ../../src/network/internet_gaming.cc:463
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Ungültige Snack-Narichten-Aard »%s«."
 
-#: ../../src/network/internet_gaming.cc:458
+#: ../../src/network/internet_gaming.cc:463
 msgid "Invalid message type"
 msgstr "Ungültige Narichten-Aard"
 
-#: ../../src/network/internet_gaming.cc:496
+#: ../../src/network/internet_gaming.cc:501
 #, c-format
 msgid "The game %s is now available"
 msgstr "Dat Speel %s is nu paraat"
 
-#: ../../src/network/internet_gaming.cc:506
+#: ../../src/network/internet_gaming.cc:511
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Dat Speel %s is nu dicht"
 
-#: ../../src/network/internet_gaming.cc:552
+#: ../../src/network/internet_gaming.cc:557
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s is in de Deel komen"
 
-#: ../../src/network/internet_gaming.cc:559
+#: ../../src/network/internet_gaming.cc:564
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s hett de Deel verlaten"
 
-#: ../../src/network/internet_gaming.cc:614
+#: ../../src/network/internet_gaming.cc:619
 msgid "Chat message could not be sent."
 msgstr "De Snack-Naricht kunn nich schickt werden."
 
-#: ../../src/network/internet_gaming.cc:628
+#: ../../src/network/internet_gaming.cc:633
 #, c-format
 msgid "ERROR: %s"
 msgstr "FEHLER: %s"
 
-#: ../../src/network/internet_gaming.cc:638
+#: ../../src/network/internet_gaming.cc:643
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Hebb een unbekannten Befehl vun dem Metaserver kregen: %s"
 
-#: ../../src/network/internet_gaming.cc:764
+#: ../../src/network/internet_gaming.cc:769
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "De Naricht kunn nich schickt werden, wiel du nich mit de Metaserver verbunnen büst!"
 
-#: ../../src/network/internet_gaming.cc:783
-#: ../../src/network/internet_gaming.cc:790
+#: ../../src/network/internet_gaming.cc:788
+#: ../../src/network/internet_gaming.cc:795
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Da Naricht kunn nich schickt werden: Sull dat eene persöönlike Naricht sein?"
 
-#: ../../src/network/internet_gaming.cc:866
+#: ../../src/network/internet_gaming.cc:871
 msgid "Conversion error"
 msgstr "Fehler bi'n Umwanneln"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:869
+#: ../../src/network/internet_gaming.cc:874
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Ick weet nich, of »%s« wahr oder falsk heten sall"
 
-#: ../../src/network/internet_gaming.cc:886
-msgid "unknown"
-msgstr "unbekannt"
+#: ../../src/network/internet_gaming.cc:892
+msgctxt "chat_sender"
+msgid "Unknown"
+msgstr "Unbekannt"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #, c-format
@@ -4232,16 +4257,6 @@ msgstr "Minske"
 #, c-format
 msgid "Shared in Player %u"
 msgstr "Mit Speler %u deelt"
-
-#: ../../src/wui/multiplayersetupgroup.cc:459
-#: ../../src/wui/playerdescrgroup.cc:169
-msgctxt "tribe"
-msgid "Random"
-msgstr "Tofällig"
-
-#: ../../src/wui/multiplayersetupgroup.cc:461
-msgid "The tribe will be selected at random"
-msgstr "Dat Volk word tofällig utköört"
 
 #: ../../src/wui/multiplayersetupgroup.cc:505
 #: ../../src/wui/playerdescrgroup.cc:179
