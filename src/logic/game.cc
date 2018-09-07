@@ -847,6 +847,10 @@ void Game::cancel_trade(int trade_id) {
 	trade_agreements_.erase(trade_id);
 }
 
+void Game::add_scenario_hook(const std::string& hook_name) {
+	scenario_hooks_.insert(hook_name);
+}
+
 LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
@@ -949,14 +953,29 @@ void Game::sample_statistics() {
 
 	// If there is a hook function defined to sample special statistics in this
 	// game, call the corresponding Lua function
-	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
-	if (hook) {
-		hook->do_not_warn_about_unaccessed_keys();
-		iterate_players_existing(p, nr_plrs, *this, plr) {
-			std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
-			cr->push_arg(plr);
-			cr->resume();
-			custom_statistic[p - 1] = cr->pop_uint32();
+	{
+		std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
+		if (hook) {
+			hook->do_not_warn_about_unaccessed_keys();
+			iterate_players_existing(p, nr_plrs, *this, plr) {
+				std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
+				cr->push_arg(plr);
+				cr->resume();
+				custom_statistic[p - 1] = cr->pop_uint32();
+			}
+		}
+	}
+
+	// Trigger any scenario hooks
+	for (const std::string hook_name : scenario_hooks_) {
+		std::unique_ptr<LuaTable> hook = lua().get_hook(hook_name);
+		if (hook) {
+			iterate_players_existing(p, nr_plrs, *this, plr) {
+				std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("hook_function"));
+				cr->resume();
+			}
+		} else {
+			throw LuaError((boost::format("Hook %s has been added in a Lua script, but it has no function\n") % hook_name).str());
 		}
 	}
 

@@ -81,7 +81,7 @@ Game
 */
 const char LuaGame::className[] = "Game";
 const MethodType<LuaGame> LuaGame::Methods[] = {
-   METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), {nullptr, nullptr},
+   METHOD(LuaGame, launch_coroutine), METHOD(LuaGame, save), METHOD(LuaGame, add_scenario_hook), {nullptr, nullptr},
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time),      PROP_RW(LuaGame, desired_speed),
@@ -223,6 +223,21 @@ int LuaGame::save(lua_State* L) {
 
 	return 0;
 }
+
+/* RST
+   .. method:: add_scenario_hook(hook_name)
+
+      Add a named scenario hook to the game, to be run at the statistics interval.
+
+      :arg name: name of the scenario hook to be added.
+      :type name: :class:`string`
+      :returns: :const:`nil`
+*/
+int LuaGame::add_scenario_hook(lua_State* L) {
+	get_game(L).add_scenario_hook(luaL_checkstring(L, 2));
+	return 0;
+}
+
 
 /*
  ==========================================================
