@@ -53,13 +53,22 @@ function ware_help_producers_string(tribe, ware_description)
          -- TRANSLATORS: Ware Encyclopedia: A building producing a ware
          result = result .. h2(_"Producer")
          result = result .. dependencies({building, ware_description}, building.descname)
-
+         local producing_programs = {}
          if (building.is_mine) then
-            -- TODO(GunChleoc): Mine programs don't all have their producers and consumers in the same program any more, so we can't display correct information here
-            result = result .. h3(_"Calculation needed")
+            -- Find out which programs in the building produce this ware for the mines we skip the real production and take a "dummy" program
+            
+            for j, program_name in ipairs(building.production_programs) do
+               for ware, amount in pairs(building:produced_wares(program_name)) do
+                  local consumes = building:consumed_wares_workers(program_name)
+                  if (ware_description.name == ware and #consumes > 0) then
+                     table.insert(producing_programs, program_name)
+                  end
+               end
+            end
+
          else
             -- Find out which programs in the building produce this ware
-            local producing_programs = {}
+            --local producing_programs = {}
             for j, program_name in ipairs(building.production_programs) do
                for ware, amount in pairs(building:produced_wares(program_name)) do
                   if (ware_description.name == ware) then
@@ -67,6 +76,7 @@ function ware_help_producers_string(tribe, ware_description)
                   end
                end
             end
+         end
 
             -- Now collect all wares produced by the filtered programs
             local produced_wares_strings = {}
@@ -102,7 +112,6 @@ function ware_help_producers_string(tribe, ware_description)
             end
          end
       end
-   end
    return result
 end
 

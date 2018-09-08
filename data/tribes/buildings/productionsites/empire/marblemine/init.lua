@@ -109,6 +109,22 @@ tribes:new_productionsite_type {
             "produce=marble",
          }
       },
+      encyclopedia_granite = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration wine",
+            "produce=granite:3 marble",
+         }
+      },
+      encyclopedia_marble = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=wine ration",
+            "produce=marble:3 granite",
+         }
+      },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource

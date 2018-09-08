@@ -135,6 +135,30 @@ tribes:new_productionsite_type {
             "produce=diamond",
          }
       },
+      encyclopedia_granite = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=granite:5 quartz",
+         }
+      },
+      encyclopedia_quartz = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=quartz:3 granite:3",
+         }
+      },
+      encyclopedia_diamond = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=diamond:2 granite",
+         }
+      },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource

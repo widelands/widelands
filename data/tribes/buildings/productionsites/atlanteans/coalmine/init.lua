@@ -86,6 +86,14 @@ tribes:new_productionsite_type {
             "produce=coal",
          }
       },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=coal:7",
+         }
+      },
    },
 
    out_of_resource_notification = {

@@ -76,6 +76,14 @@ tribes:new_productionsite_type {
             "produce=coal",
          }
       },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=beer meal",
+            "produce=coal:5",
+         }
+      },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource

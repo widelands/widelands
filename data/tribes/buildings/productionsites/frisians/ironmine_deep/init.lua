@@ -85,6 +85,14 @@ tribes:new_productionsite_type {
             "produce=iron_ore",
          }
       },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=meal",
+            "produce=iron_ore:7",
+         }
+      },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource

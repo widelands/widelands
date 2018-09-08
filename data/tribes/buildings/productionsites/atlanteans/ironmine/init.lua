@@ -78,6 +78,14 @@ tribes:new_productionsite_type {
             "produce=iron_ore",
          }
       },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=iron_ore:5",
+         }
+      },
    },
 
    out_of_resource_notification = {

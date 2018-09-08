@@ -75,6 +75,14 @@ tribes:new_productionsite_type {
             "produce=gold_ore",
          }
       },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration wine",
+            "produce=gold_ore:2",
+         }
+      },
    },
    out_of_resource_notification = {
       -- Translators: Short for "Out of ..." for a resource
