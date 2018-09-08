@@ -242,7 +242,7 @@ public:
 	void read_statistics(FileRead&);
 	void write_statistics(FileWrite&);
 
-	void sample_statistics();
+	void sample_statistics_and_run_scenario_hooks();
 
 	const std::string& get_win_condition_displayname() {
 		return win_condition_displayname_;

@@ -431,6 +431,8 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 	assert(loader_ui != nullptr);
 
 	replay_ = replay;
+	scenario_hooks_.clear();
+
 	postload();
 
 	if (start_game_type != Loaded) {
@@ -858,7 +860,7 @@ LuaGameInterface& Game::lua() {
 /**
  * Sample global statistics for the game.
  */
-void Game::sample_statistics() {
+void Game::sample_statistics_and_run_scenario_hooks() {
 	// Update general stats
 	PlayerNumber const nr_plrs = map().get_nrplayers();
 	std::vector<uint32_t> land_size;
@@ -890,6 +892,19 @@ void Game::sample_statistics() {
 	nr_production_sites.resize(nr_plrs);
 	custom_statistic.resize(nr_plrs);
 
+	// Trigger any scenario hooks
+	for (const std::string hook_name : scenario_hooks_) {
+		std::unique_ptr<LuaTable> hook = lua().get_hook(hook_name);
+		if (hook) {
+			iterate_players_existing(p, nr_plrs, *this, plr) {
+				std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("hook_function"));
+				cr->resume();
+			}
+		} else {
+			throw LuaError((boost::format("Hook %s has been added in a Lua script, but it has no function\n") % hook_name).str());
+		}
+	}
+
 	//  We walk the map, to gain all needed information.
 	const Map& themap = map();
 	Extent const extent = themap.extent();
@@ -915,20 +930,6 @@ void Game::sample_statistics() {
 			if (upcast(Soldier const, s, b))
 				miltary_strength[s->owner().player_number() - 1] +=
 				   s->get_level(TrainingAttribute::kTotal) + 1;  //  So that level 0 also counts.
-	}
-
-
-	// Trigger any scenario hooks
-	for (const std::string hook_name : scenario_hooks_) {
-		std::unique_ptr<LuaTable> hook = lua().get_hook(hook_name);
-		if (hook) {
-			iterate_players_existing(p, nr_plrs, *this, plr) {
-				std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("hook_function"));
-				cr->resume();
-			}
-		} else {
-			throw LuaError((boost::format("Hook %s has been added in a Lua script, but it has no function\n") % hook_name).str());
-		}
 	}
 
 	//  Number of workers / wares / casualties / kills.

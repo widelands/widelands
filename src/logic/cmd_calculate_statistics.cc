@@ -27,7 +27,7 @@
 namespace Widelands {
 
 void CmdCalculateStatistics::execute(Game& game) {
-	game.sample_statistics();
+	game.sample_statistics_and_run_scenario_hooks();
 	game.enqueue_command(new CmdCalculateStatistics(game.get_gametime() + kStatisticsSampleTime));
 }
 
