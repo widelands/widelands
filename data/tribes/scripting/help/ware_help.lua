@@ -54,49 +54,53 @@ function ware_help_producers_string(tribe, ware_description)
          result = result .. h2(_"Producer")
          result = result .. dependencies({building, ware_description}, building.descname)
 
-         -- Find out which programs in the building produce this ware
-         local producing_programs = {}
-         for j, program_name in ipairs(building.production_programs) do
-            for ware, amount in pairs(building:produced_wares(program_name)) do
-               if (ware_description.name == ware) then
-                  table.insert(producing_programs, program_name)
+         if (building.is_mine) then
+            -- TODO(GunChleoc): Mine programs don't all have their producers and consumers in the same program any more, so we can't display correct information here
+            result = result .. h3(_"Calculation needed")
+         else
+            -- Find out which programs in the building produce this ware
+            local producing_programs = {}
+            for j, program_name in ipairs(building.production_programs) do
+               for ware, amount in pairs(building:produced_wares(program_name)) do
+                  if (ware_description.name == ware) then
+                     table.insert(producing_programs, program_name)
+                  end
+               end
+            end
+
+            -- Now collect all wares produced by the filtered programs
+            local produced_wares_strings = {}
+            local produced_wares_counters = {}
+            for j, program_name in ipairs(producing_programs) do
+               local produced_wares_amount = {}
+               produced_wares_counters[program_name] = 0
+               for ware, amount in pairs(building:produced_wares(program_name)) do
+                  if (produced_wares_amount[ware] == nil) then
+                     produced_wares_amount[ware] = 0
+                  end
+                  produced_wares_amount[ware] = produced_wares_amount[ware] + amount
+                  produced_wares_counters[program_name] = produced_wares_counters[program_name] + amount
+               end
+               local produced_wares_string = ""
+               for ware, amount in pairs(produced_wares_amount) do
+               local ware_descr = wl.Game():get_ware_description(ware)
+                  produced_wares_string = produced_wares_string
+                     .. help_ware_amount_line(ware_descr, amount)
+               end
+               produced_wares_strings[program_name] = produced_wares_string
+            end
+
+            -- Now collect the consumed wares for each filtered program and print the program info
+            for j, program_name in ipairs(producing_programs) do
+               result = result .. help_consumed_wares_workers(tribe, building, program_name)
+               if (produced_wares_counters[program_name] > 0) then
+                  result = result
+                     -- TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
+                     .. h3(ngettext("Ware produced:", "Wares produced:", produced_wares_counters[program_name]))
+                     .. produced_wares_strings[program_name]
                end
             end
          end
-
-         -- Now collect all wares produced by the filtered programs
-         local produced_wares_strings = {}
-         local produced_wares_counters = {}
-         for j, program_name in ipairs(producing_programs) do
-            local produced_wares_amount = {}
-            produced_wares_counters[program_name] = 0
-            for ware, amount in pairs(building:produced_wares(program_name)) do
-               if (produced_wares_amount[ware] == nil) then
-                  produced_wares_amount[ware] = 0
-               end
-               produced_wares_amount[ware] = produced_wares_amount[ware] + amount
-               produced_wares_counters[program_name] = produced_wares_counters[program_name] + amount
-            end
-            local produced_wares_string = ""
-            for ware, amount in pairs(produced_wares_amount) do
-            local ware_descr = wl.Game():get_ware_description(ware)
-               produced_wares_string = produced_wares_string
-                  .. help_ware_amount_line(ware_descr, amount)
-            end
-            produced_wares_strings[program_name] = produced_wares_string
-         end
-
-         -- Now collect the consumed wares for each filtered program and print the program info
-         for j, program_name in ipairs(producing_programs) do
-            result = result .. help_consumed_wares_workers(tribe, building, program_name)
-            if (produced_wares_counters[program_name] > 0) then
-               result = result
-                  -- TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-                  .. h3(ngettext("Ware produced:", "Wares produced:", produced_wares_counters[program_name]))
-                  .. produced_wares_strings[program_name]
-            end
-         end
-
       end
    end
    return result
