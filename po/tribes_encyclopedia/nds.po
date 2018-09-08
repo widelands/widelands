@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-31 07:08+0000\n"
+"POT-Creation-Date: 2018-09-01 06:47+0000\n"
+"PO-Revision-Date: 2018-09-01 18:31+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -3755,7 +3755,7 @@ msgstr "Angriff"
 #. TRANSLATORS: Points are 4 digit numbers.
 #: ../../data/tribes/scripting/help/worker_help.lua:178
 msgid "A random value between %1% and %2% points is added to each attack."
-msgstr ""
+msgstr "Een tofälliger Weert tüsken %1% un %2% Punkten word to elkeen Angriff daartodaan."
 
 #: ../../data/tribes/scripting/help/worker_help.lua:185
 msgid "Defense"
