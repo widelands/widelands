@@ -64,7 +64,7 @@ obj_click_farmbuilding = {
    title=_"Click on one of the farms",
    number = 1,
    body = objective_text(_"Open the Building Window of a Farm",
-      li(_[[Click on a farm building to open it's building window. This will allow to analyze the building.]])
+      li(_[[Click on a farm building to open its building window. This will let you analyze the building.]])
    ),
 }
 
