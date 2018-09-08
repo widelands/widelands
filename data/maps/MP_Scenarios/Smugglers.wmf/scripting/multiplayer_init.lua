@@ -144,15 +144,7 @@ function initialize()
       run(wait_for_established_route, descr)
    end
 
-   wl.Game():add_scenario_hook("smuggling")
-   -- Instantiate scenario hook
-   hooks.smuggling = {
-      hook_function = function()
-         print("NOCOM Scenario hook was triggered")
-         do_smuggling()
-         return
-      end,
-   }
+   do_smuggling()
 end
 
 setup_statistics_hook()
