@@ -147,30 +147,24 @@ function do_smuggling()
                -- Warp the next available ware, going round robin
                local empty_warehouse_guard = #wares
                local warp_index = last_ware_index
-               local ware_to_warp = nil
                while empty_warehouse_guard > 0 do
                   -- Index shift, because Lua tables start counting at 1
-                  local candidate = wares[warp_index + 1]
-                  if send_whf.immovable:get_wares(candidate) > 0 then
-                     ware_to_warp = candidate
+                  local ware_to_warp = wares[warp_index + 1]
+                  if send_whf.immovable:get_wares(ware_to_warp) > 0 then
+                     print("NOCOM Route " .. idx .. " (" .. send_whf.x .. ", " .. send_whf.y .. ") warping ware " .. ware_to_warp ..  ": " .. send_plr.name .. " -> " .. recv_plr.name)
+                     send_whf.immovable:set_wares(ware_to_warp, send_whf.immovable:get_wares(ware_to_warp) - 1)
+                     recv_whf.immovable:set_wares(
+                        ware_to_warp, recv_whf.immovable:get_wares(ware_to_warp) + 1
+                     )
+                     points[recv_plr.team] = points[recv_plr.team] + route_descr.value
                      break
                   end
                   warp_index = (warp_index + 1) % #wares;
                   empty_warehouse_guard = empty_warehouse_guard - 1
                end
-               if ware_to_warp ~= nil then
-               print("NOCOM Route " .. idx .. " (" .. send_whf.x .. ", " .. send_whf.y .. ") warping ware " .. ware_to_warp ..  ": " .. send_plr.name .. " -> " .. recv_plr.name)
-                  send_whf.immovable:set_wares(ware_to_warp, send_whf.immovable:get_wares(ware_to_warp) - 1)
-                  recv_whf.immovable:set_wares(
-                     ware_to_warp, recv_whf.immovable:get_wares(ware_to_warp) + 1
-                  )
-                  points[recv_plr.team] = points[recv_plr.team] + route_descr.value
-               end
                -- Next round robin index
                last_ware_index = (last_ware_index + 1) % #wares;
             end
-         else
-            print("NOCOM route " .. idx .. " has not been established")
          end
       end
    end
