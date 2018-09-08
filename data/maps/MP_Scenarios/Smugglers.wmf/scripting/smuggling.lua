@@ -97,7 +97,7 @@ function do_game_over()
    game_over_done = true
 end
 
-function do_smuggling(route_descr)
+function do_smuggling()
    if points[1] >= points_to_win or
       points[2] >= points_to_win
    then
@@ -105,75 +105,74 @@ function do_smuggling(route_descr)
       return
    end
 
-   if (route_descr.sending_warehouse == nil or route_descr.receiving_warehouse == nil) then
-      -- Route hasn't been established yet - do nothing
-      print("NOCOM nothing to smuggle")
-      return
-   end
+   for idx, route_descr in ipairs(route_descrs) do
+      if (route_descr.sending_warehouse ~= nil and route_descr.receiving_warehouse ~= nil) then
+         print("NOCOM do smuggling for route " .. idx)
 
-   print("NOCOM do smuggling")
+         local send_plr = route_descr.sending_warehouse.owner
+         local recv_plr = route_descr.receiving_warehouse.owner
+         local send_whf = route_descr.sending_warehouse.fields[1]
+         local recv_whf = route_descr.receiving_warehouse.fields[1]
 
-   local send_plr = route_descr.sending_warehouse.owner
-   local recv_plr = route_descr.receiving_warehouse.owner
-   local send_whf = route_descr.sending_warehouse.fields[1]
-   local recv_whf = route_descr.receiving_warehouse.fields[1]
+         -- Ensure that the warehouses are still there and owned by the same player
+         if not send_whf.immovable or
+            send_whf.immovable.descr.type_name ~= "warehouse" or
+            send_whf.immovable.owner ~= send_plr or
+            not recv_whf.immovable or
+            recv_whf.immovable.descr.type_name ~= "warehouse" or
+            recv_whf.immovable.owner ~= recv_plr
+         then
+            send_to_all(smuggling_route_broken:bformat(
+               (ngettext("%i point", "%i points", route_descr.value)):format(route_descr.value), recv_plr.name, send_plr.name)
+            )
+            run(wait_for_established_route, route_descr)
+         else
+            -- Collect ware types that both sending and receiving player can use
+            local wares = {}
+            for idx,ware in pairs(send_plr.tribe.wares) do
+               if recv_plr.tribe:has_ware(ware.name) then
+                  table.insert(wares, ware.name)
+               end
+            end
+            -- If the tribes don't have any wares in common, nothing can be smuggled
+            -- This should not happen, but let's have a safeguard anyway.
+            if #wares < 1 then
+               do_game_over()
+               return
+            end
+            -- We start counting at 0 so that we can use the modulo (%) operator
+            -- for going round robin
+            local last_ware_index = 0;
 
-   -- Ensure that the warehouses are still there and owned by the same player
-   if not send_whf.immovable or
-      send_whf.immovable.descr.type_name ~= "warehouse" or
-      send_whf.immovable.owner ~= send_plr or
-      not recv_whf.immovable or
-      recv_whf.immovable.descr.type_name ~= "warehouse" or
-      recv_whf.immovable.owner ~= recv_plr
-   then
-      send_to_all(smuggling_route_broken:bformat(
-         (ngettext("%i point", "%i points", route_descr.value)):format(route_descr.value), recv_plr.name, send_plr.name)
-      )
-      run(wait_for_established_route, route_descr)
-      return
-   end
-
-   -- Collect ware types that both sending and receiving player can use
-   local wares = {}
-   for idx,ware in pairs(send_plr.tribe.wares) do
-      if recv_plr.tribe:has_ware(ware.name) then
-         table.insert(wares, ware.name)
+            -- Warp the next available ware, going round robin
+            local empty_warehouse_guard = #wares
+            local warp_index = last_ware_index
+            local ware_to_warp = nil
+            while empty_warehouse_guard > 0 do
+               -- Index shift, because Lua tables start counting at 1
+               local candidate = wares[warp_index + 1]
+               if send_whf.immovable:get_wares(candidate) > 0 then
+                  ware_to_warp = candidate
+                  break
+               end
+               warp_index = (warp_index + 1) % #wares;
+               empty_warehouse_guard = empty_warehouse_guard - 1
+            end
+            if ware_to_warp ~= nil then
+            print("NOCOM " .. " " .. send_whf.x .. ", " .. send_whf.y .. " warping ware " .. ware_to_warp ..  ": " .. send_plr.name .. " -> " .. recv_plr.name)
+               send_whf.immovable:set_wares(ware_to_warp, send_whf.immovable:get_wares(ware_to_warp) - 1)
+               recv_whf.immovable:set_wares(
+                  ware_to_warp, recv_whf.immovable:get_wares(ware_to_warp) + 1
+               )
+               points[recv_plr.team] = points[recv_plr.team] + route_descr.value
+            end
+            -- Next round robin index
+            last_ware_index = (last_ware_index + 1) % #wares;
+         end
+      else
+         print("NOCOM route " .. idx .. " has not been established")
       end
    end
-   -- If the tribes don't have any wares in common, nothing can be smuggled
-   -- This should not happen, but let's have a safeguard anyway.
-   if #wares < 1 then
-      do_game_over()
-      return
-   end
-   -- We start counting at 0 so that we can use the modulo (%) operator
-   -- for going round robin
-   local last_ware_index = 0;
-
-   -- Warp the next available ware, going round robin
-   local empty_warehouse_guard = #wares
-   local warp_index = last_ware_index
-   local ware_to_warp = nil
-   while empty_warehouse_guard > 0 do
-      -- Index shift, because Lua tables start counting at 1
-      local candidate = wares[warp_index + 1]
-      if send_whf.immovable:get_wares(candidate) > 0 then
-         ware_to_warp = candidate
-         break
-      end
-      warp_index = (warp_index + 1) % #wares;
-      empty_warehouse_guard = empty_warehouse_guard - 1
-   end
-   if ware_to_warp ~= nil then
-   print("NOCOM " .. " " .. send_whf.x .. ", " .. send_whf.y .. " warping ware " .. ware_to_warp ..  ": " .. send_plr.name .. " -> " .. recv_plr.name)
-      send_whf.immovable:set_wares(ware_to_warp, send_whf.immovable:get_wares(ware_to_warp) - 1)
-      recv_whf.immovable:set_wares(
-         ware_to_warp, recv_whf.immovable:get_wares(ware_to_warp) + 1
-      )
-      points[recv_plr.team] = points[recv_plr.team] + route_descr.value
-   end
-   -- Next round robin index
-   last_ware_index = (last_ware_index + 1) % #wares;
 end
 
 function wait_for_established_route(route_descr)

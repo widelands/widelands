@@ -129,10 +129,8 @@ function initialize()
    -- Instantiate scenario hook
    hooks.smuggling = {
       hook_function = function()
-         print("Scenario hook was triggered")
-         for idx, route_descr in ipairs(route_descrs) do
-            do_smuggling(route_descr)
-         end
+         print("NOCOM Scenario hook was triggered")
+         do_smuggling()
          return
       end,
    }
