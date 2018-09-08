@@ -28,11 +28,30 @@ include "map:scripting/smuggling.lua"
 -- ================
 -- Initializations
 -- ================
+
+-- If the tribes don't have any wares in common, nothing can be smuggled
+-- This should not happen, but let's have a safeguard anyway.
+function check_ware_compatiblity(player1, player2)
+   local has_compatible_ware = false
+   for idx,ware in pairs(player1.tribe.wares) do
+      if player2.tribe:has_ware(ware.name) then
+         has_compatible_ware = true
+         break
+      end
+   end
+   if not has_compatible_ware then
+      do_game_over()
+      return
+   end
+end
+
 function assign_teams()
    game.players[1].team = 1
    game.players[2].team = 1
    game.players[3].team = 2
    game.players[4].team = 2
+   check_ware_compatiblity(game.players[1], game.players[2])
+   check_ware_compatiblity(game.players[3], game.players[4])
 end
 
 function place_headquarters()

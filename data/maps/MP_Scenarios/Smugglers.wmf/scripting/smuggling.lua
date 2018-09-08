@@ -11,14 +11,16 @@ route_descrs = {
       send = map:get_field(35, 52):region(2),
       recv = map:get_field(96, 77):region(2),
       sending_warehouse = nil,
-      receiving_warehouse = nil
+      receiving_warehouse = nil,
+      wares = {}
    },
    {
       value = 2,
       send = map:get_field(98, 55):region(2),
       recv = map:get_field(34, 76):region(2),
       sending_warehouse = nil,
-      receiving_warehouse = nil
+      receiving_warehouse = nil,
+      wares = {}
    },
 
    {
@@ -26,14 +28,16 @@ route_descrs = {
       send = map:get_field(64, 57):region(2),
       recv = map:get_field(78, 73):region(2),
       sending_warehouse = nil,
-      receiving_warehouse = nil
+      receiving_warehouse = nil,
+      wares = {}
    },
    {
       value = 3,
       send = map:get_field(77, 58):region(2),
       recv = map:get_field(65, 72):region(2),
       sending_warehouse = nil,
-      receiving_warehouse = nil
+      receiving_warehouse = nil,
+      wares = {}
    },
 
    {
@@ -41,28 +45,32 @@ route_descrs = {
       send = map:get_field(62, 93):region(2),
       recv = map:get_field(78, 34):region(2),
       sending_warehouse = nil,
-      receiving_warehouse = nil
+      receiving_warehouse = nil,
+      wares = {}
    },
    {
       value = 2,
       send = map:get_field(80, 95):region(2),
       recv = map:get_field(63, 29):region(2),
       sending_warehouse = nil,
-      receiving_warehouse = nil
+      receiving_warehouse = nil,
+      wares = {}
    },
    {
       value = 2,
       send = map:get_field(18, 66):region(2),
       recv = map:get_field(121, 61):region(2),
       sending_warehouse = nil,
-      receiving_warehouse = nil
+      receiving_warehouse = nil,
+      wares = {}
    },
    {
       value = 2,
       send = map:get_field(124, 72):region(2),
       recv = map:get_field(19, 57):region(2),
       sending_warehouse = nil,
-      receiving_warehouse = nil
+      receiving_warehouse = nil,
+      wares = {}
    }
 }
 
@@ -127,19 +135,9 @@ function do_smuggling()
             )
             run(wait_for_established_route, route_descr)
          else
-            -- Collect ware types that both sending and receiving player can use
-            local wares = {}
-            for idx,ware in pairs(send_plr.tribe.wares) do
-               if recv_plr.tribe:has_ware(ware.name) then
-                  table.insert(wares, ware.name)
-               end
-            end
-            -- If the tribes don't have any wares in common, nothing can be smuggled
-            -- This should not happen, but let's have a safeguard anyway.
-            if #wares < 1 then
-               do_game_over()
-               return
-            end
+            -- Only use ware types that both sending and receiving player can use
+            local wares = route_descr.wares
+
             -- We start counting at 0 so that we can use the modulo (%) operator
             -- for going round robin
             local last_ware_index = 0;
@@ -159,7 +157,7 @@ function do_smuggling()
                empty_warehouse_guard = empty_warehouse_guard - 1
             end
             if ware_to_warp ~= nil then
-            print("NOCOM " .. " " .. send_whf.x .. ", " .. send_whf.y .. " warping ware " .. ware_to_warp ..  ": " .. send_plr.name .. " -> " .. recv_plr.name)
+            print("NOCOM Route " .. idx .. " (" .. send_whf.x .. ", " .. send_whf.y .. ") warping ware " .. ware_to_warp ..  ": " .. send_plr.name .. " -> " .. recv_plr.name)
                send_whf.immovable:set_wares(ware_to_warp, send_whf.immovable:get_wares(ware_to_warp) - 1)
                recv_whf.immovable:set_wares(
                   ware_to_warp, recv_whf.immovable:get_wares(ware_to_warp) + 1
@@ -179,6 +177,7 @@ function wait_for_established_route(route_descr)
    local receiving_wh, sending_wh
    route_descr.sending_warehouse = nil
    route_descr.receiving_warehouse = nil
+   route_descr.wares = {}
 
    while 1 do
       receiving_wh = find_warehouse(route_descr.recv)
@@ -186,6 +185,13 @@ function wait_for_established_route(route_descr)
       if receiving_wh and sending_wh and receiving_wh.owner.team == sending_wh.owner.team then
          route_descr.sending_warehouse = sending_wh
          route_descr.receiving_warehouse = receiving_wh
+
+         -- Collect ware types that both sending and receiving player can use
+         for idx,ware in pairs(sending_wh.owner.tribe.wares) do
+            if receiving_wh.owner.tribe:has_ware(ware.name) then
+               table.insert(route_descr.wares, ware.name)
+            end
+         end
          break
       end
       sleep(7138)
