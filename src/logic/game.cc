@@ -431,8 +431,6 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 	assert(loader_ui != nullptr);
 
 	replay_ = replay;
-	scenario_hooks_.clear();
-
 	postload();
 
 	if (start_game_type != Loaded) {
@@ -849,10 +847,6 @@ void Game::cancel_trade(int trade_id) {
 	trade_agreements_.erase(trade_id);
 }
 
-void Game::add_scenario_hook(const std::string& hook_name) {
-	scenario_hooks_.insert(hook_name);
-}
-
 LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
@@ -860,7 +854,7 @@ LuaGameInterface& Game::lua() {
 /**
  * Sample global statistics for the game.
  */
-void Game::sample_statistics_and_run_scenario_hooks() {
+void Game::sample_statistics() {
 	// Update general stats
 	PlayerNumber const nr_plrs = map().get_nrplayers();
 	std::vector<uint32_t> land_size;
@@ -891,19 +885,6 @@ void Game::sample_statistics_and_run_scenario_hooks() {
 	productivity.resize(nr_plrs);
 	nr_production_sites.resize(nr_plrs);
 	custom_statistic.resize(nr_plrs);
-
-	// Trigger any scenario hooks
-	for (const std::string hook_name : scenario_hooks_) {
-		std::unique_ptr<LuaTable> hook = lua().get_hook(hook_name);
-		if (hook) {
-			iterate_players_existing(p, nr_plrs, *this, plr) {
-				std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("hook_function"));
-				cr->resume();
-			}
-		} else {
-			throw LuaError((boost::format("Hook %s has been added in a Lua script, but it has no function\n") % hook_name).str());
-		}
-	}
 
 	//  We walk the map, to gain all needed information.
 	const Map& themap = map();
@@ -968,16 +949,14 @@ void Game::sample_statistics_and_run_scenario_hooks() {
 
 	// If there is a hook function defined to sample special statistics in this
 	// game, call the corresponding Lua function
-	{
-		std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
-		if (hook) {
-			hook->do_not_warn_about_unaccessed_keys();
-			iterate_players_existing(p, nr_plrs, *this, plr) {
-				std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
-				cr->push_arg(plr);
-				cr->resume();
-				custom_statistic[p - 1] = cr->pop_uint32();
-			}
+	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
+	if (hook) {
+		hook->do_not_warn_about_unaccessed_keys();
+		iterate_players_existing(p, nr_plrs, *this, plr) {
+			std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
+			cr->push_arg(plr);
+			cr->resume();
+			custom_statistic[p - 1] = cr->pop_uint32();
 		}
 	}
 

@@ -242,7 +242,7 @@ public:
 	void read_statistics(FileRead&);
 	void write_statistics(FileWrite&);
 
-	void sample_statistics_and_run_scenario_hooks();
+	void sample_statistics();
 
 	const std::string& get_win_condition_displayname() {
 		return win_condition_displayname_;
@@ -268,8 +268,6 @@ public:
 	int propose_trade(const Trade& trade);
 	void accept_trade(int trade_id);
 	void cancel_trade(int trade_id);
-
-	void add_scenario_hook(const std::string& hook_name);
 
 private:
 	void sync_reset();
@@ -338,8 +336,6 @@ private:
 	int next_trade_agreement_id_ = 1;
 	// Maps from trade agreement id to the agreement.
 	std::map<int, TradeAgreement> trade_agreements_;
-
-	std::set<std::string> scenario_hooks_;
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;

@@ -26,24 +26,15 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 4;
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 void GameClassPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/game_class");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			game.gametime_ = fr.unsigned_32();
-			if (packet_version == kCurrentPacketVersion) {
-				const uint8_t no_of_hooks = fr.unsigned_8();
-				game.scenario_hooks_.clear();
-				for (uint8_t i = 0; i < no_of_hooks; ++i) {
-					const std::string hook_name = fr.c_string();
-					log("NOCOM loading hook: %s\n", hook_name.c_str());
-					game.add_scenario_hook(hook_name);
-				}
-			}
 		} else {
 			throw UnhandledVersionError("GameClassPacket", packet_version, kCurrentPacketVersion);
 		}
@@ -71,13 +62,6 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	fw.unsigned_32(game.gametime_);
 
 	// TODO(sirver,trading): save/load trade_agreements and related data.
-
-	// Write scenario statistics hooks
-	fw.unsigned_8(game.scenario_hooks_.size());
-	for (const std::string& hook_name : game.scenario_hooks_) {
-		log("NOCOM saving hook: %s\n", hook_name.c_str());
-		fw.c_string(hook_name.c_str());
-	}
 
 	// We do not care for players, since they were set
 	// on game initialization to match Map::scenario_player_[names|tribes]

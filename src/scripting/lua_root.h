@@ -65,7 +65,6 @@ public:
 	 */
 	int launch_coroutine(lua_State*);
 	int save(lua_State*);
-	int add_scenario_hook(lua_State* L);
 
 	/*
 	 * C methods
