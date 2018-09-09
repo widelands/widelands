@@ -58,7 +58,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=20000",
             "call=ship",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       ship = {
