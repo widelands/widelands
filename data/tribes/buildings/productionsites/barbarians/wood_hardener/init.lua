@@ -28,7 +28,7 @@ tribes:new_productionsite_type {
          hotspot = { 52, 64 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 52, 64 },
       },
       unoccupied = {
