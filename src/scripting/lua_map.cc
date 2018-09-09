@@ -3568,16 +3568,16 @@ void LuaEconomy::__persist(lua_State* L) {
 	const Widelands::Economy* economy = get();
 	const Widelands::Player& player = economy->owner();
 	PERS_UINT32("player", player.player_number());
-	PERS_UINT32("economy", player.get_economy_number(economy));
+	PERS_UINT32("economy", economy->serial());
 }
 
 void LuaEconomy::__unpersist(lua_State* L) {
 	Widelands::PlayerNumber player_number;
-	size_t economy_number;
+	Widelands::Serial economy_serial;
 	UNPERS_UINT32("player", player_number);
-	UNPERS_UINT32("economy", economy_number);
+	UNPERS_UINT32("economy", economy_serial);
 	const Widelands::Player& player = get_egbase(L).player(player_number);
-	set_economy_pointer(player.get_economy_by_number(economy_number));
+	set_economy_pointer(player.get_economy(economy_serial));
 }
 
 /* RST

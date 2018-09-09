@@ -54,7 +54,6 @@
 #include "editor/editorinteractive.h"
 #include "graphic/default_resolution.h"
 #include "graphic/font_handler.h"
-#include "graphic/font_handler1.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "helper.h"
@@ -157,7 +156,9 @@ std::string absolute_path_if_not_windows(const std::string& path) {
 	// http://pubs.opengroup.org/onlinepubs/009695399/functions/realpath.html
 	char* rp = realpath(path.c_str(), buffer);
 	log("Realpath: %s\n", rp);
-	assert(rp);
+	if (!rp) {
+		throw wexception("Unable to get absolute path for %s", path.c_str());
+	}
 	return std::string(rp);
 #else
 	return path;
@@ -336,9 +337,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	if (TTF_Init() == -1)
 		throw wexception("True Type library did not initialize: %s\n", TTF_GetError());
 
-	UI::g_fh1 = UI::create_fonthandler(
+	UI::g_fh = UI::create_fonthandler(
 	   &g_gr->images(), i18n::get_locale());  // This will create the fontset, so loading it first.
-	UI::g_fh = new UI::FontHandler();
 
 	g_gr->initialize(
 	   config.get_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
@@ -369,10 +369,6 @@ WLApplication::~WLApplication() {
 	assert(UI::g_fh);
 	delete UI::g_fh;
 	UI::g_fh = nullptr;
-
-	assert(UI::g_fh1);
-	delete UI::g_fh1;
-	UI::g_fh1 = nullptr;
 
 	TTF_Quit();  // TODO(unknown): not here
 
@@ -744,7 +740,6 @@ bool WLApplication::init_settings() {
 	s.get_bool("single_watchwin");
 	s.get_bool("auto_roadbuild_mode");
 	// Undocumented on command line, appears in game options
-	s.get_bool("workareapreview");
 	s.get_bool("nozip");
 	s.get_bool("snap_windows_only_when_overlapping");
 	s.get_bool("dock_windows_to_edges");
@@ -779,6 +774,7 @@ bool WLApplication::init_settings() {
 	s.get_natural("metaserverport");
 	// Undocumented, checkbox appears on "Watch Replay" screen
 	s.get_bool("display_replay_filenames");
+	s.get_bool("editor_player_menu_warn_too_many_players");
 	// KLUDGE!
 
 	long int last_start = s.get_int("last_start", 0);
@@ -843,10 +839,6 @@ void WLApplication::shutdown_settings() {
 }
 
 void WLApplication::shutdown_hardware() {
-	if (UI::g_fh) {
-		// TODO(unknown): this should really not be needed, but currently is :(
-		UI::g_fh->flush();
-	}
 	delete g_gr;
 	g_gr = nullptr;
 
@@ -935,8 +927,13 @@ void WLApplication::handle_commandline_parameters() {
 		              get_executable_directory() + FileSystem::file_separator() + INSTALL_DATADIR;
 	}
 	if (!is_absolute_path(datadir_)) {
-		datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
-		                                        FileSystem::file_separator() + datadir_);
+		try {
+			datadir_ = absolute_path_if_not_windows(FileSystem::get_working_directory() +
+			                                        FileSystem::file_separator() + datadir_);
+		} catch (const WException& e) {
+			log("Error parsing datadir: %s\n", e.what());
+			exit(1);
+		}
 	}
 	if (commandline_.count("datadir_for_testing")) {
 		datadir_for_testing_ = commandline_["datadir_for_testing"];

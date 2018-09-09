@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-06-30 20:52+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-21 14:56+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr "리눅스에서는 소스 또는 독립 실행형 바이너리 패키지
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
-msgstr "윈도우즈에서는 설치 폴더에 COPYING.txt라는 파일을 찾을 수 있으며 Widelands 시작 메뉴 항목은 이 파일에 대한 링크를 제공합니다."
+msgstr "윈도우즈에서는 설치 폴더에 COPYING.txt라는 파일을 찾을 수 있으며 와이드랜드 시작 메뉴 항목은 이 파일에 대한 링크를 제공합니다."
 
 #: ../../data/txts/LICENSE.lua:20
 msgid ""
@@ -91,7 +91,7 @@ msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr " 더 자세한 정보와 지원을 원하시면 %1% (웹 사이트, 위키, 질문, 일반적인 지원용 게시판), %2% (Bugtracker), %3% (번역)에서 찾으실 수 있습니다."
+msgstr "더 자세한 정보와 지원을 원하시면 %1% (웹 사이트, 위키, 질문, 일반적인 지원용 게시판), %2% (버그추적기), %3% (번역)에서 찾으실 수 있습니다."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -330,7 +330,7 @@ msgstr "와이드랜드 또는 와이드랜드 편집자를 위해 더 많은 �
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
-msgstr "시작하기"
+msgstr "소개"
 
 #: ../../data/txts/help/common_helptexts.lua:18
 msgid ""
@@ -338,7 +338,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "와이드랜드는 혼자놀기 캠페인과 여럿놀기 모드를 갖춘 무료 오픈 소스 실시간 전략 게임입니다. 이 게임은 세틀러 2에 의해 영감을 받았지만 훨씬 더 다양하고 깊이 있습니다. 그러나 놀기 가능한 자습서를 통해 쉽게 시작할수 있습니다."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -347,7 +347,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "이 게임은 작은 땅에서 약간의 자원이 게임을 시작합니다. 이것들을 이용하여 수천 명의 주민이 있는 제국을 만들게됩니다. 이 목표를 향해 나아가는 길에 경제 기반 시설을 구축하고, 주위의 땅을 탐험하고, 경쟁 부족과 맞서야 할 것입니다."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -451,7 +451,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:17
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "하나 이상의 클라이언트에 연결되었습니다('클라이언트 설정'참조)."
 
 #: ../../data/txts/help/multiplayer_help.lua:18
 msgid ""
@@ -466,7 +466,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Closed."
-msgstr ""
+msgstr "닫혀짐."
 
 #: ../../data/txts/help/multiplayer_help.lua:21
 msgid ""
@@ -484,7 +484,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid "Map details"
-msgstr ""
+msgstr "지도 세부 정보"
 
 #: ../../data/txts/help/multiplayer_help.lua:25
 msgid ""
@@ -523,7 +523,7 @@ msgstr ""
 msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or game."
-msgstr ""
+msgstr "숲 지킴이와 짐승 키움이의 오두막을 항상 세우십시오. 그러면 통나무나 짐승들이 부족하지 않을 것입니다."
 
 #: ../../data/txts/tips/barbarians.lua:12 ../../data/txts/tips/empire.lua:12
 #: ../../data/txts/tips/frisians.lua:12
@@ -538,7 +538,7 @@ msgstr ""
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr ""
+msgstr "%s에 있는 위키에서 편집자를 위한 일반 도움말과 간단한 자습서를 찾을 수 있습니다."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
@@ -655,13 +655,13 @@ msgstr "몇개의 깃발을 세움으로서 짧은 구역으로 길을 나누십
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr ""
+msgstr "더 궁금한 점이 있습니까? FAQ, 위키 및 커뮤니티 포럼은 %s 에서 찾을 수 있습니다."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr ""
+msgstr "특정 물건의 배달을 조정하려면 건물 창에서 우선 순위 버튼을 사용하십시오. Ctrl키를 누른 상태에서 클릭하면 모든 제품이 한번에 조정됩니다."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
@@ -762,7 +762,7 @@ msgstr ""
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one "
 "player."
-msgstr ""
+msgstr "채팅 메시지가 시작될 때 '@name'을 사용하여 한 명에게만 메시지를 보냅니다."
 
 #: ../../data/txts/tips/multiplayer.lua:16
 msgid ""
@@ -776,4 +776,4 @@ msgstr ""
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "우리 컴퓨터 플레이어는 너무 지루합니까? 저희 웹 사이트 %s 에 방문하여 다른 사람들과 만나 온라인 게임을 즐기십시오."
+msgstr "우리 컴퓨터 플레이어가 너무 지루합니까? 저희 웹 사이트 %s 에 방문하여 다른 사람들과 만나 온라인 게임을 즐기십시오."

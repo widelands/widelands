@@ -30,7 +30,7 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -318,7 +318,7 @@ void LoadOrSaveGame::fill_table(bool show_filenames) {
 	Widelands::GamePreloadPacket gpdp;
 
 	for (const std::string& gamefilename : gamefiles) {
-		if (gamefilename == g_fs->fix_cross_file("save/campvis")) {
+		if (gamefilename == kCampVisFile || gamefilename == g_fs->fix_cross_file(kCampVisFile)) {
 			continue;
 		}
 

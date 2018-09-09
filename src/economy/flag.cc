@@ -44,8 +44,8 @@ const FlagDescr& Flag::descr() const {
 }
 
 /**
- * Create the flag. Initially, it doesn't have any attachments.
-*/
+ * A bare flag, used for testing only.
+ */
 Flag::Flag()
    : PlayerImmovable(g_flag_descr),
      animstart_(0),
@@ -54,28 +54,34 @@ Flag::Flag()
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
-	for (uint32_t i = 0; i < 6; ++i)
+	for (uint32_t i = 0; i < 6; ++i) {
 		roads_[i] = nullptr;
+	}
 }
 
 /**
- * Shouldn't be necessary to do anything, since die() always calls
- * cleanup() first.
-*/
+ * Shouldn't be necessary to do anything,
+ * since die() always calls cleanup() first.
+ */
 Flag::~Flag() {
-	if (ware_filled_)
+	if (ware_filled_) {
 		log("Flag: ouch! wares left\n");
+	}
 	delete[] wares_;
 
-	if (building_)
+	if (building_) {
 		log("Flag: ouch! building left\n");
+	}
 
-	if (flag_jobs_.size())
+	if (flag_jobs_.size()) {
 		log("Flag: ouch! flagjobs left\n");
+	}
 
-	for (int32_t i = 0; i < 6; ++i)
-		if (roads_[i])
+	for (int32_t i = 0; i < 6; ++i) {
+		if (roads_[i]) {
 			log("Flag: ouch! road left\n");
+		}
+	}
 }
 
 void Flag::load_finish(EditorGameBase& egbase) {
@@ -104,17 +110,18 @@ void Flag::load_finish(EditorGameBase& egbase) {
 }
 
 /**
- * Create a flag at the given location
-*/
-Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords)
+ * Creates a flag at the given location.
+ */
+Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, Economy* eco)
    : PlayerImmovable(g_flag_descr),
      building_(nullptr),
      ware_capacity_(8),
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
      always_call_for_flag_(nullptr) {
-	for (uint32_t i = 0; i < 6; ++i)
+	for (uint32_t i = 0; i < 6; ++i) {
 		roads_[i] = nullptr;
+	}
 
 	set_owner(owning_player);
 
@@ -124,17 +131,23 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords)
 	upcast(Game, game, &egbase);
 
 	if (game) {
-		//  we split a road, or a new, standalone flag is created
-		(road ? road->get_economy() : new Economy(*owning_player))->add_flag(*this);
-
-		if (road)
-			road->presplit(*game, coords);
+		if (eco) {
+			// We're saveloading
+			eco->add_flag(*this);
+		} else {
+			//  we split a road, or a new, standalone flag is created
+			(road ? road->get_economy() : owning_player->create_economy())->add_flag(*this);
+			if (road) {
+				road->presplit(*game, coords);
+			}
+		}
 	}
 
 	init(egbase);
 
-	if (road && game)
+	if (!eco && road && game) {
 		road->postsplit(*game, *this);
+	}
 }
 
 void Flag::set_flag_position(Coords coords) {
@@ -155,34 +168,38 @@ Flag& Flag::base_flag() {
 
 /**
  * Call this only from Economy code!
-*/
+ */
 void Flag::set_economy(Economy* const e) {
 	Economy* const old = get_economy();
 
-	if (old == e)
+	if (old == e) {
 		return;
+	}
 
 	PlayerImmovable::set_economy(e);
 
-	for (int32_t i = 0; i < ware_filled_; ++i)
+	for (int32_t i = 0; i < ware_filled_; ++i) {
 		wares_[i].ware->set_economy(e);
+	}
 
-	if (building_)
+	if (building_) {
 		building_->set_economy(e);
+	}
 
 	for (const FlagJob& temp_job : flag_jobs_) {
 		temp_job.request->set_economy(e);
 	}
 
 	for (int8_t i = 0; i < 6; ++i) {
-		if (roads_[i])
+		if (roads_[i]) {
 			roads_[i]->set_economy(e);
+		}
 	}
 }
 
 /**
  * Call this only from the Building init!
-*/
+ */
 void Flag::attach_building(EditorGameBase& egbase, Building& building) {
 	assert(!building_ || building_ == &building);
 
@@ -198,7 +215,7 @@ void Flag::attach_building(EditorGameBase& egbase, Building& building) {
 
 /**
  * Call this only from the Building cleanup!
-*/
+ */
 void Flag::detach_building(EditorGameBase& egbase) {
 	assert(building_);
 
@@ -212,7 +229,7 @@ void Flag::detach_building(EditorGameBase& egbase) {
 
 /**
  * Call this only from the Road init!
-*/
+ */
 void Flag::attach_road(int32_t const dir, Road* const road) {
 	assert(!roads_[dir - 1] || roads_[dir - 1] == road);
 
@@ -222,7 +239,7 @@ void Flag::attach_road(int32_t const dir, Road* const road) {
 
 /**
  * Call this only from the Road init!
-*/
+ */
 void Flag::detach_road(int32_t const dir) {
 	assert(roads_[dir - 1]);
 
@@ -231,8 +248,8 @@ void Flag::detach_road(int32_t const dir) {
 }
 
 /**
- * Return all positions we occupy on the map. For a Flag, this is only one
-*/
+ * \return all positions we occupy on the map. For a Flag, this is only one.
+ */
 BaseImmovable::PositionList Flag::get_positions(const EditorGameBase&) const {
 	PositionList rv;
 	rv.push_back(position_);
@@ -240,13 +257,14 @@ BaseImmovable::PositionList Flag::get_positions(const EditorGameBase&) const {
 }
 
 /**
- * Return neighbouring flags.
-*/
+ * \return neighbouring flags.
+ */
 void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 	for (int8_t i = 0; i < 6; ++i) {
 		Road* const road = roads_[i];
-		if (!road)
+		if (!road) {
 			continue;
+		}
 
 		Flag* f = &road->get_flag(Road::FlagEnd);
 		int32_t nb_cost;
@@ -274,46 +292,76 @@ void Flag::get_neighbours(WareWorker type, RoutingNodeNeighbours& neighbours) {
 }
 
 /**
- * Return the road that leads to the given flag.
-*/
+ * \return the road that leads to the given flag.
+ */
 Road* Flag::get_road(Flag& flag) {
-	for (int8_t i = 0; i < 6; ++i)
-		if (Road* const road = roads_[i])
-			if (&road->get_flag(Road::FlagStart) == &flag || &road->get_flag(Road::FlagEnd) == &flag)
+	for (int8_t i = 0; i < 6; ++i) {
+		if (Road* const road = roads_[i]) {
+			if (&road->get_flag(Road::FlagStart) == &flag || &road->get_flag(Road::FlagEnd) == &flag) {
 				return road;
-
+			}
+		}
+	}
 	return nullptr;
 }
 
-/// returns the number of roads connected to the flag
+/// \return the number of roads connected to the flag.
 uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
-	for (uint8_t road_id = 6; road_id; --road_id)
-		if (get_road(road_id) != nullptr)
+	for (uint8_t road_id = 6; road_id; --road_id) {
+		if (get_road(road_id) != nullptr) {
 			++counter;
+		}
+	}
 	return counter;
 }
 
 bool Flag::is_dead_end() const {
-	if (get_building())
+	if (get_building()) {
 		return false;
+	}
 	Flag const* first_other_flag = nullptr;
-	for (uint8_t road_id = 6; road_id; --road_id)
+	for (uint8_t road_id = 6; road_id; --road_id) {
 		if (Road* const road = get_road(road_id)) {
 			Flag& start = road->get_flag(Road::FlagStart);
 			Flag& other = this == &start ? road->get_flag(Road::FlagEnd) : start;
 			if (first_other_flag) {
 				if (&other != first_other_flag)
 					return false;
-			} else
+			} else {
 				first_other_flag = &other;
+			}
 		}
+	}
 	return true;
 }
 
 /**
- * Returns true if the flag can hold more wares.
-*/
+ * Called by workers wanting to drop a ware to their building's flag.
+ * \return true/allow on low congestion-risk.
+ */
+bool Flag::has_capacity_for_ware(WareInstance& ware) const {
+	// avoid iteration for the easy cases
+	if (ware_filled_ < ware_capacity_ - 2) {
+		return true;  // more than two free slots, allow
+	}
+	if (ware_filled_ >= ware_capacity_) {
+		return false;  // all slots filled, no room
+	}
+
+	DescriptionIndex const descr_index = ware.descr_index();
+	for (int i = 0; i < ware_filled_; ++i) {
+		if (wares_[i].ware->descr_index() == descr_index) {
+			return false;  // ware of this type already present, leave room for other types
+		}
+	}
+	return true;  // ware of this type not present, allow
+}
+
+/**
+ * \return true/allow if the flag can hold more wares of any type.
+ * has_capacity_for_ware() also checks ware's type to prevent congestion.
+ */
 bool Flag::has_capacity() const {
 	return (ware_filled_ < ware_capacity_);
 }
@@ -338,53 +386,61 @@ void Flag::skip_wait_for_capacity(Game&, Worker& w) {
 		capacity_wait_.erase(it);
 }
 
+/**
+ * Adds given ware to this flag.
+ * Please check has_capacity() or better has_capacity_for_ware() before.
+ */
 void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
-
 	assert(ware_filled_ < ware_capacity_);
+	init_ware(egbase, ware, wares_[ware_filled_++]);
+	if (upcast(Game, game, &egbase)) {
+		ware.update(*game);  //  will call call_carrier() if necessary
+	}
+}
 
-	PendingWare& pi = wares_[ware_filled_++];
+/**
+ * Properly assigns given ware instance to given pending ware.
+ */
+void Flag::init_ware(EditorGameBase& egbase, WareInstance& ware, PendingWare& pi) {
 	pi.ware = &ware;
-	pi.pending = false;
+	pi.pending = true;
 	pi.nextstep = nullptr;
 	pi.priority = 0;
 
 	Transfer* trans = ware.get_transfer();
 	if (trans) {
 		uint32_t trans_steps = trans->get_steps_left();
-		if (trans_steps < 3)
+		if (trans_steps < 3) {
 			pi.priority = 2;
-		else if (trans_steps == 3)
+		} else if (trans_steps == 3) {
 			pi.priority = 1;
+		}
 
 		Request* req = trans->get_request();
-		if (req)
+		if (req) {
 			pi.priority = pi.priority + req->get_transfer_priority();
+		}
 	}
 
 	ware.set_location(egbase, this);
-
-	if (upcast(Game, game, &egbase))
-		ware.update(*game);  //  will call call_carrier() if necessary
 }
 
 /**
- * \return true if an ware is currently waiting for a carrier to the given Flag.
+ * \return a ware currently waiting for a carrier to the given destflag.
  *
  * \note Due to fetch_from_flag() semantics, this function makes no sense
  * for a  building destination.
 */
-bool Flag::has_pending_ware(Game&, Flag& dest) {
+Flag::PendingWare* Flag::get_ware_for_flag(Flag& destflag, bool const pending_only) {
 	for (int32_t i = 0; i < ware_filled_; ++i) {
-		if (!wares_[i].pending)
-			continue;
-
-		if (wares_[i].nextstep != &dest)
-			continue;
-
-		return true;
+		PendingWare* pw = &wares_[i];
+		if ((!pending_only || pw->pending) && pw->nextstep == &destflag &&
+		    destflag.allow_ware_from_flag(*pw->ware, *this)) {
+			return pw;
+		}
 	}
 
-	return false;
+	return nullptr;
 }
 
 /**
@@ -394,103 +450,127 @@ bool Flag::has_pending_ware(Game&, Flag& dest) {
 #define MAX_TRANSFER_PRIORITY 16
 
 /**
- * Called by carrier code to indicate that the carrier is moving to pick up an
- * ware. Ware with highest transfer priority is chosen.
- * \return true if an ware is actually waiting for the carrier.
- */
-bool Flag::ack_pickup(Game&, Flag& destflag) {
-	int32_t highest_pri = -1;
-	int32_t i_pri = -1;
-
-	for (int32_t i = 0; i < ware_filled_; ++i) {
-		if (!wares_[i].pending)
-			continue;
-
-		if (wares_[i].nextstep != &destflag)
-			continue;
-
-		if (wares_[i].priority > highest_pri) {
-			highest_pri = wares_[i].priority;
-			i_pri = i;
-
-			// Increase ware priority, it matters only if the ware has to wait.
-			if (wares_[i].priority < MAX_TRANSFER_PRIORITY)
-				wares_[i].priority++;
-		}
-	}
-
-	if (i_pri >= 0) {
-		wares_[i_pri].pending = false;
-		return true;
-	}
-
-	return false;
-}
-/**
  * Called by the carriercode when the carrier is called away from his job
  * but has acknowledged a ware before. This ware is then freed again
- * to be picked by another carrier. Returns true if an ware was indeed
- * made pending again
+ * to be picked by another carrier. Returns true if a ware was indeed
+ * made pending again.
  */
 bool Flag::cancel_pickup(Game& game, Flag& destflag) {
-	int32_t lowest_prio = MAX_TRANSFER_PRIORITY + 1;
-	int32_t i_pri = -1;
-
 	for (int32_t i = 0; i < ware_filled_; ++i) {
-		if (wares_[i].pending)
-			continue;
-
-		if (wares_[i].nextstep != &destflag)
-			continue;
-
-		if (wares_[i].priority < lowest_prio) {
-			lowest_prio = wares_[i].priority;
-			i_pri = i;
+		PendingWare& pw = wares_[i];
+		if (!pw.pending && pw.nextstep == &destflag) {
+			pw.pending = true;
+			pw.ware->update(game);  //  will call call_carrier() if necessary
+			return true;
 		}
-	}
-
-	if (i_pri >= 0) {
-		wares_[i_pri].pending = true;
-		wares_[i_pri].ware->update(game);  //  will call call_carrier() if necessary
-		return true;
 	}
 
 	return false;
 }
 
 /**
- * Wake one sleeper from the capacity queue.
-*/
-void Flag::wake_up_capacity_queue(Game& game) {
-	while (!capacity_wait_.empty()) {
-		Worker* const w = capacity_wait_[0].get(game);
-		capacity_wait_.erase(capacity_wait_.begin());
-		if (w && w->wakeup_flag_capacity(game, *this))
-			break;
+ * Called by carrier code to find the best among the wares on this flag
+ * that are meant for the provided dest.
+ * \return index of found ware (carrier will take it)
+ * or kNotFoundAppropriate (carrier will leave empty-handed)
+ */
+int32_t Flag::find_pending_ware(PlayerImmovable& dest) {
+	int32_t highest_pri = -1;
+	int32_t best_index = kNotFoundAppropriate;
+	bool ware_pended = false;
+
+	for (int32_t i = 0; i < ware_filled_; ++i) {
+		PendingWare& pw = wares_[i];
+		if (pw.nextstep != &dest) {
+			continue;
+		}
+
+		if (pw.priority < MAX_TRANSFER_PRIORITY) {
+			pw.priority++;
+		}
+		// Release promised pickup, in case we find a preferable ware
+		if (!ware_pended && !pw.pending) {
+			ware_pended = pw.pending = true;
+		}
+
+		// If dest is flag, we exclude wares that can stress it
+		if (&dest != building_ && !dynamic_cast<Flag&>(dest).allow_ware_from_flag(*pw.ware, *this)) {
+			continue;
+		}
+
+		if (pw.priority > highest_pri) {
+			highest_pri = pw.priority;
+			best_index = i;
+		}
+	}
+
+	return best_index;
+}
+
+/**
+ * Like find_pending_ware() above, but for carriers who have a ware to drop on this flag.
+ * \return same as find_pending_ware() above, plus kDenyDrop (carrier will wait)
+ */
+int32_t Flag::find_swappable_ware(WareInstance& ware, Flag& destflag) {
+	DescriptionIndex const descr_index = ware.descr_index();
+	int32_t highest_pri = -1;
+	int32_t best_index = kNotFoundAppropriate;
+	bool has_same_ware = false;
+	bool has_allowed = false;
+	bool ware_pended = false;
+
+	for (int32_t i = 0; i < ware_filled_; ++i) {
+		PendingWare& pw = wares_[i];
+		if (pw.nextstep != &destflag) {
+			if (pw.ware->descr_index() == descr_index) {
+				has_same_ware = true;
+			}
+			continue;
+		}
+
+		if (pw.priority < MAX_TRANSFER_PRIORITY) {
+			pw.priority++;
+		}
+		// Release promised pickup, in case we find a preferable ware
+		if (!ware_pended && !pw.pending) {
+			ware_pended = pw.pending = true;
+		}
+
+		// We prefer to retrieve wares that won't stress the destflag
+		if (destflag.allow_ware_from_flag(*pw.ware, *this)) {
+			if (!has_allowed) {
+				has_allowed = true;
+				highest_pri = -1;
+			}
+		} else {
+			if (has_allowed) {
+				continue;
+			}
+		}
+
+		if (pw.priority > highest_pri) {
+			highest_pri = pw.priority;
+			best_index = i;
+		}
+	}
+
+	if (best_index > kNotFoundAppropriate) {
+		return (ware_filled_ > ware_capacity_ - 3 || has_allowed) ? best_index : kNotFoundAppropriate;
+	} else {
+		return (ware_filled_ < ware_capacity_ - 2 ||
+		        (ware_filled_ < ware_capacity_ && !has_same_ware)) ?
+		          kNotFoundAppropriate :
+		          kDenyDrop;
 	}
 }
 
 /**
- * Called by carrier code to retrieve one of the wares on the flag that is meant
- * for that carrier.
- *
- * This function may return 0 even if \ref ack_pickup() has already been
- * called successfully.
-*/
-WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
-	int32_t best_index = -1;
-
-	for (int32_t i = 0; i < ware_filled_; ++i) {
-		if (wares_[i].nextstep != &dest)
-			continue;
-
-		// We prefer to retrieve wares that have already been acked
-		if (best_index < 0 || !wares_[i].pending)
-			best_index = i;
-	}
-
-	if (best_index < 0)
+ * Called by carrier code to retrieve a ware found by the previous methods.
+ */
+WareInstance* Flag::fetch_pending_ware(Game& game, int32_t best_index) {
+	if (best_index < 0) {
 		return nullptr;
+	}
 
 	// move the other wares up the list and return this one
 	WareInstance* const ware = wares_[best_index].ware;
@@ -499,11 +579,40 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
 	        sizeof(wares_[0]) * (ware_filled_ - best_index));
 
 	ware->set_location(game, nullptr);
-
-	// wake up capacity wait queue
-	wake_up_capacity_queue(game);
-
 	return ware;
+}
+
+/**
+ * Called by carrier code to notify waiting carriers
+ * which may be interested in the new state of this flag.
+ */
+void Flag::ware_departing(Game& game) {
+	// Wake up one sleeper from the capacity queue.
+	while (!capacity_wait_.empty()) {
+		Worker* const w = capacity_wait_.front().get(game);
+		capacity_wait_.erase(capacity_wait_.begin());
+		if (w && w->wakeup_flag_capacity(game, *this)) {
+			return;
+		}
+	}
+
+	// Consider pending wares of neighboring flags.
+	for (int32_t dir = 1; dir <= WalkingDir::LAST_DIRECTION; ++dir) {
+		Road* const road = get_road(dir);
+		if (!road) {
+			continue;
+		}
+
+		Flag* other = &road->get_flag(Road::FlagEnd);
+		if (other == this) {
+			other = &road->get_flag(Road::FlagStart);
+		}
+
+		PendingWare* pw = other->get_ware_for_flag(*this, kPendingOnly);
+		if (pw && road->notify_ware(game, *other)) {
+			pw->pending = false;
+		}
+	}
 }
 
 /**
@@ -536,7 +645,7 @@ void Flag::propagate_promoted_road(Road* const promoted_road) {
 
 /**
  * Count only those wares which are awaiting to be carried along the same road.
-*/
+ */
 uint8_t Flag::count_wares_in_queue(PlayerImmovable& dest) const {
 	uint8_t n = 0;
 	for (int32_t i = 0; i < ware_filled_; ++i) {
@@ -548,14 +657,15 @@ uint8_t Flag::count_wares_in_queue(PlayerImmovable& dest) const {
 }
 
 /**
- * Return a List of all the wares currently on this Flag. Do not rely
- * the result value to stay valid and do not change them
+ * Return a List of all the wares currently on this Flag.
+ * Do not rely the result value to stay valid and do not change them.
  */
 Flag::Wares Flag::get_wares() {
 	Wares rv;
 
-	for (int32_t i = 0; i < ware_filled_; ++i)
+	for (int32_t i = 0; i < ware_filled_; ++i) {
 		rv.push_back(wares_[i].ware);
+	}
 
 	return rv;
 }
@@ -563,17 +673,19 @@ Flag::Wares Flag::get_wares() {
 /**
  * Force a removal of the given ware from this flag.
  * Called by \ref WareInstance::cleanup()
-*/
+ */
 void Flag::remove_ware(EditorGameBase& egbase, WareInstance* const ware) {
 	for (int32_t i = 0; i < ware_filled_; ++i) {
-		if (wares_[i].ware != ware)
+		if (wares_[i].ware != ware) {
 			continue;
+		}
 
 		--ware_filled_;
 		memmove(&wares_[i], &wares_[i + 1], sizeof(wares_[0]) * (ware_filled_ - i));
 
-		if (upcast(Game, game, &egbase))
-			wake_up_capacity_queue(*game);
+		if (upcast(Game, game, &egbase)) {
+			ware_departing(*game);
+		}
 
 		return;
 	}
@@ -594,15 +706,16 @@ void Flag::remove_ware(EditorGameBase& egbase, WareInstance* const ware) {
  * This behaviour is overridden by always_call_for_step_, which is set by
  * update_wares() to ensure that new carriers are called when roads are
  * split, for example.
-*/
+ */
 void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const nextstep) {
 	PendingWare* pi = nullptr;
 	int32_t i = 0;
 
 	// Find the PendingWare entry
 	for (; i < ware_filled_; ++i) {
-		if (wares_[i].ware != &ware)
+		if (wares_[i].ware != &ware) {
 			continue;
+		}
 
 		pi = &wares_[i];
 		break;
@@ -618,8 +731,9 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 	}
 
 	// Find out whether we need to do anything
-	if (pi->nextstep == nextstep && pi->nextstep != always_call_for_flag_)
+	if (pi->nextstep == nextstep && pi->nextstep != always_call_for_flag_) {
 		return;  // no update needed
+	}
 
 	pi->nextstep = nextstep;
 	pi->pending = false;
@@ -641,27 +755,20 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Road* const road = get_road(dir);
-		Flag* other;
-		Road::FlagId flagid;
-
 		if (!road) {
 			continue;
 		}
 
-		if (&road->get_flag(Road::FlagStart) == this) {
-			flagid = Road::FlagStart;
-			other = &road->get_flag(Road::FlagEnd);
-		} else {
-			flagid = Road::FlagEnd;
+		Flag* other = &road->get_flag(Road::FlagEnd);
+		if (other == this) {
 			other = &road->get_flag(Road::FlagStart);
 		}
-
 		if (other != &nextflag) {
 			continue;
 		}
 
 		// Yes, this is the road we want; inform it
-		if (road->notify_ware(game, flagid)) {
+		if (other->update_ware_from_flag(game, wares_[i], *road, *this)) {
 			return;
 		}
 
@@ -675,6 +782,72 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 }
 
 /**
+ * Called by neighboring flags, before agreeing for a carrier
+ * to take one of their wares heading to this flag.
+ * \return true/allow on low congestion-risk.
+ */
+bool Flag::allow_ware_from_flag(WareInstance& ware, Flag& flag) {
+	// avoid iteration for the easy cases
+	if (ware_filled_ < ware_capacity_ - 2) {
+		return true;
+	}
+
+	DescriptionIndex const descr_index = ware.descr_index();
+	bool has_swappable = false;
+	for (int i = 0; i < ware_filled_; ++i) {
+		PendingWare& pw = wares_[i];
+		if (pw.pending && pw.nextstep == &flag) {
+			has_swappable = true;
+		} else if (pw.ware->descr_index() == descr_index) {
+			return false;
+		}
+	}
+	return ware_filled_ < ware_capacity_ || has_swappable;
+}
+
+/**
+ * Called when a ware is trying to reach this flag through the provided road,
+ * having just arrived to the provided flag.
+ * Swaps pending wares if possible. Otherwise,
+ * asks road for carrier on low congestion-risk.
+ * \return false if the ware is not immediately served.
+ */
+bool Flag::update_ware_from_flag(Game& game, PendingWare& pw1, Road& road, Flag& flag) {
+	WareInstance& w1 = *pw1.ware;
+	DescriptionIndex const w1_descr_index = w1.descr_index();
+	bool has_same_ware = false;
+	bool has_swappable = false;
+	for (int i = 0; i < ware_filled_; ++i) {
+		PendingWare& pw2 = wares_[i];
+		WareInstance& w2 = *pw2.ware;
+		if (w2.descr_index() == w1_descr_index) {
+			if (pw2.nextstep == &flag) {
+				// swap pending wares remotely
+				init_ware(game, w1, pw2);
+				flag.init_ware(game, w2, pw1);
+				w1.update(game);
+				w2.update(game);
+				return true;
+			}
+
+			has_same_ware = true;
+		} else if (pw2.pending && pw2.nextstep == &flag) {
+			has_swappable = true;
+		}
+	}
+
+	// ask road for carrier on low congestion-risk
+	if (ware_filled_ < ware_capacity_ - 2 ||
+	    (!has_same_ware && (ware_filled_ < ware_capacity_ || has_swappable))) {
+		if (road.notify_ware(game, flag)) {
+			pw1.pending = false;
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
  * Called whenever a road gets broken or split.
  * Make sure all wares on this flag are rerouted if necessary.
  *
@@ -683,12 +856,13 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
  * move unnecessarily. Fixing this could potentially be very expensive and
  * fragile.
  * A similar thing can happen when a road is split.
-*/
+ */
 void Flag::update_wares(Game& game, Flag* const other) {
 	always_call_for_flag_ = other;
 
-	for (int32_t i = 0; i < ware_filled_; ++i)
+	for (int32_t i = 0; i < ware_filled_; ++i) {
 		wares_[i].ware->update(game);
+	}
 
 	always_call_for_flag_ = nullptr;
 }
@@ -704,7 +878,7 @@ bool Flag::init(EditorGameBase& egbase) {
 
 /**
  * Detach building and free roads.
-*/
+ */
 void Flag::cleanup(EditorGameBase& egbase) {
 	while (!flag_jobs_.empty()) {
 		delete flag_jobs_.begin()->request;
@@ -730,8 +904,9 @@ void Flag::cleanup(EditorGameBase& egbase) {
 		}
 	}
 
-	if (Economy* e = get_economy())
+	if (Economy* e = get_economy()) {
 		e->remove_flag(*this);
+	}
 
 	unset_position(egbase, position_);
 
@@ -744,7 +919,7 @@ void Flag::cleanup(EditorGameBase& egbase) {
  * \note This is needed in addition to the call to building_->remove() in
  * \ref Flag::cleanup(). This function is needed to ensure a fire is created
  * when a player removes a flag.
-*/
+ */
 void Flag::destroy(EditorGameBase& egbase) {
 	if (building_) {
 		building_->destroy(egbase);
@@ -755,9 +930,9 @@ void Flag::destroy(EditorGameBase& egbase) {
 }
 
 /**
- * Add a new flag job to request the worker with the given ID, and to execute
- * the given program once it's completed.
-*/
+ * Add a new flag job to request the worker with the given ID,
+ * and to execute the given program once it's completed.
+ */
 void Flag::add_flag_job(Game&, DescriptionIndex const workerware, const std::string& programname) {
 	FlagJob j;
 
@@ -770,7 +945,7 @@ void Flag::add_flag_job(Game&, DescriptionIndex const workerware, const std::str
 /**
  * This function is called when one of the flag job workers arrives on
  * the flag. Give him his job.
-*/
+ */
 void Flag::flag_job_request_callback(
    Game& game, Request& rq, DescriptionIndex, Worker* const w, PlayerImmovable& target) {
 	Flag& flag = dynamic_cast<Flag&>(target);

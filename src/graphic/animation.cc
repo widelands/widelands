@@ -118,7 +118,7 @@ private:
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
 
 	// name of sound effect that will be played at frame 0.
-	// TODO(sirver): this should be done using play_sound in a program instead of
+	// TODO(sirver): this should be done using playsound in a program instead of
 	// binding it to the animation.
 	std::string sound_effect_;
 	bool play_once_;

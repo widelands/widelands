@@ -289,7 +289,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
 	const auto& road_building = road_building_overlays();
-	const std::map<Widelands::Coords, const Image*> work_area_overlays = get_work_area_overlays(map);
+	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		auto* f = fields_to_draw->mutable_field(idx);
@@ -309,12 +309,6 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 
 		const float scale = 1.f / given_map_view->view().zoom;
-		const auto blit_overlay = [dst, f, scale](const Image* pic, const Vector2i& hotspot) {
-			dst->blitrect_scale(Rectf(f->rendertarget_pixel - hotspot.cast<float>() * scale,
-			                          pic->width() * scale, pic->height() * scale),
-			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                    BlendMode::UseAlpha);
-		};
 
 		// Add road building overlays if applicable.
 		if (f->vision > 0) {
@@ -338,9 +332,10 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 		// Draw work area previews.
 		{
-			const auto it = work_area_overlays.find(f->fcoords);
-			if (it != work_area_overlays.end()) {
-				blit_overlay(it->second, Vector2i(it->second->width() / 2, it->second->height() / 2));
+			const auto it = workarea_overlays.find(f->fcoords);
+			if (it != workarea_overlays.end()) {
+				blit_field_overlay(dst, *f, it->second,
+				                   Vector2i(it->second->width() / 2, it->second->height() / 2), scale);
 			}
 		}
 
@@ -349,22 +344,23 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			if (buildhelp()) {
 				const auto* overlay = get_buildhelp_overlay(plr.get_buildcaps(f->fcoords));
 				if (overlay != nullptr) {
-					blit_overlay(overlay->pic, overlay->hotspot);
+					blit_field_overlay(dst, *f, overlay->pic, overlay->hotspot, scale);
 				}
 			}
 
 			// Blit the selection marker.
 			if (f->fcoords == get_sel_pos().node) {
 				const Image* pic = get_sel_picture();
-				blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+				blit_field_overlay(dst, *f, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
 
 			// Draw road building slopes.
 			{
 				const auto it = road_building.steepness_indicators.find(f->fcoords);
 				if (it != road_building.steepness_indicators.end()) {
-					blit_overlay(
-					   it->second, Vector2i(it->second->width() / 2, it->second->height() / 2));
+					blit_field_overlay(dst, *f, it->second,
+					                   Vector2i(it->second->width() / 2, it->second->height() / 2),
+					                   scale);
 				}
 			}
 		}
@@ -394,7 +390,7 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(node_and_triangle.node)))
 			if (can_see(building->owner().player_number())) {
-				show_building_window(node_and_triangle.node, false);
+				show_building_window(node_and_triangle.node, false, false);
 				return;
 			}
 

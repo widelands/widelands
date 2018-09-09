@@ -367,6 +367,7 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 
 		} else if (cmd == IGPCMD_LOGIN) {
 			// Clients request to login was granted
+			format_and_add_chat("", "", true, _("Welcome to the Widelands Metaserver!"));
 			const std::string assigned_name = packet.string();
 			if (clientname_ != assigned_name) {
 				format_and_add_chat(
@@ -383,6 +384,10 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 				reg_ = false;
 				authenticator_ = crypto::sha1(clientname_ + authenticator_);
 			}
+			format_and_add_chat("", "", true, _("Our forums can be found at:"));
+			format_and_add_chat("", "", true, "https://wl.widelands.org/forum/");
+			format_and_add_chat("", "", true, _("For reporting bugs, visit:"));
+			format_and_add_chat("", "", true, "https://wl.widelands.org/wiki/ReportingBugs/");
 			state_ = LOBBY;
 			log("InternetGaming: Client %s logged in.\n", clientname_.c_str());
 			return;
@@ -883,7 +888,8 @@ void InternetGaming::format_and_add_chat(const std::string& from,
                                          const std::string& msg) {
 	ChatMessage c(msg);
 	if (!system && from.empty()) {
-		std::string unkown_string = (boost::format("<%s>") % _("unknown")).str();
+		std::string unkown_string =
+		   (boost::format("<%s>") % pgettext("chat_sender", "Unknown")).str();
 		c.sender = unkown_string;
 	} else {
 		c.sender = from;

@@ -26,7 +26,7 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -332,7 +332,7 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	              info_color_for_ware(id));
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_waresinfo(info_for_ware(id)));
+	   UI::g_fh->render(as_waresinfo(info_for_ware(id)));
 	rendered_text->draw(dst, Vector2i(p.x + w - rendered_text->width() - 1,
 	                                  p.y + WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 -
 	                                     rendered_text->height()));

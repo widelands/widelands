@@ -29,10 +29,10 @@ tribes:new_worker_type {
 
    programs = {
       bees = {
-         "findobject attrib:flowering radius:5",
-         "walk object",
-         "animation beeswarm 10000",
-         "createware honey",
+         "findobject=attrib:flowering radius:5",
+         "walk=object",
+         "animate=beeswarm 10000",
+         "createware=honey",
          "return"
       }
    },

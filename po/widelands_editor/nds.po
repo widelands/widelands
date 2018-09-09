@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-07-04 17:55+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-21 08:38+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -125,14 +125,14 @@ msgstr "Maakt Dingen vun de Kaart weg oder minnert Kaart-Elementen um de »Verho
 #: ../../data/scripting/editor/editor_controls.lua:45
 msgctxt "hotkey"
 msgid "Shift + Click"
-msgstr "Klick an un drücke dorbi de Umschalt-Tast"
+msgstr "Klick an un drücke daar de Umschalt-Tast bi"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
 #: ../../data/scripting/editor/editor_controls.lua:47
 msgctxt "hotkey"
 msgid "Ctrl + Click"
-msgstr "Klick an un drücke dorbi de Strg-Tast"
+msgstr "Klick an un drücke daar de Strg-Tast bi"
 
 #: ../../data/scripting/editor/editor_controls.lua:47
 msgid "Set map elements to the value selected by ‘Set Value’"

@@ -5,25 +5,20 @@
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
 # Nora Ghaoui, 2016
+# Rick van der Zwet <info@rickvanderzwet.nl>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-06-28 06:07+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-08-24 06:54+0000\n"
+"PO-Revision-Date: 2018-08-27 14:23+0000\n"
+"Last-Translator: Rick van der Zwet <info@rickvanderzwet.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. TRANSLATORS: This is a building name used in lists of buildings
-#: ../../data/tribes/buildings/markets/barbarians/market/init.lua:14
-msgctxt "barbarians_building"
-msgid "Market"
-msgstr ""
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/init.lua:53
@@ -579,12 +574,12 @@ msgstr "Harnassmederij"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:51
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:64
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:59
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:63
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:70
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:62
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:49
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:57
@@ -654,7 +649,7 @@ msgstr "helmkruid oogsten"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:77
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:76
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:87
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:91
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:79
 msgid "No Fields"
 msgstr "Geen Velden"
@@ -665,7 +660,7 @@ msgstr "Geen Velden"
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:71
 #: ../../data/tribes/buildings/productionsites/empire/farm/init.lua:78
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:77
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:88
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:92
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:80
 msgid "Out of Fields"
 msgstr "Geen Velden meer"
@@ -1133,7 +1128,7 @@ msgstr "Hoogoven"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:66
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:70
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:71
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:75
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:80
 msgid "smelting iron"
 msgstr "ijzer smelten"
 
@@ -1141,7 +1136,7 @@ msgstr "ijzer smelten"
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:84
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:87
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:92
 msgid "smelting gold"
 msgstr "goud smelten"
 
@@ -2424,7 +2419,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:7
 msgctxt "frisians_building"
 msgid "Bakery"
-msgstr ""
+msgstr "Bakkerij"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:62
@@ -2436,7 +2431,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:7
 msgctxt "frisians_building"
 msgid "Barracks"
-msgstr ""
+msgstr "Barakken"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:64
@@ -2452,7 +2447,7 @@ msgstr ""
 
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:61
 msgid "No Flowers"
-msgstr ""
+msgstr "Geen Bloemen"
 
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:62
 msgid "Out of Flowers"
@@ -2481,7 +2476,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:7
 msgctxt "frisians_building"
 msgid "Blacksmithy"
-msgstr ""
+msgstr "Smederij"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a felling ax because
 #. ...
@@ -2503,7 +2498,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/brewery/init.lua:7
 msgctxt "frisians_building"
 msgid "Brewery"
-msgstr ""
+msgstr "Brouwerij"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/init.lua:7
@@ -2554,7 +2549,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:7
 msgctxt "frisians_building"
 msgid "Coal Mine"
-msgstr ""
+msgstr "Kolenmijn"
 
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:81
 msgctxt "frisians_building"
@@ -2617,16 +2612,16 @@ msgid "Farm"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:68
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:72
 msgid "planting barley"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:76
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:80
 msgid "harvesting barley"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:93
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
@@ -2766,20 +2761,20 @@ msgid "Recycling Center"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:85
 msgctxt "frisians_building"
 msgid "recycling fur"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:96
 msgctxt "frisians_building"
 msgid "recycling iron"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:102
+#: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:107
 msgctxt "frisians_building"
 msgid "recycling iron and gold"
 msgstr ""
@@ -2958,7 +2953,7 @@ msgstr "Kerker"
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:95
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:114
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:112
 msgid "sleeping"
 msgstr "slapen"
 
@@ -3216,31 +3211,31 @@ msgid "Training Camp"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:122
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:134
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:132
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:146
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:144
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:158
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:156
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:169
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:167
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr ""

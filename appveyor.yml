@@ -20,6 +20,9 @@ install:
   - cmd: "bash --login -c \"pacman -Su --noconfirm\""
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
+  - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-glbinding-2.1.4-1-any.pkg.tar.xz\""
+  # Downgrade Boost, because they changed the crypto API include path
+  - cmd: "bash --login -c \"pacman --noconfirm -U http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-boost-1.66.0-2-any.pkg.tar.xz\""
 
 shallow_clone: true
 
@@ -32,7 +35,7 @@ build_script:
   - cmd: md build
   - cmd: cd build
   - cmd: echo %APPVEYOR_BUILD_VERSION%_%CONFIGURATION%_%PLATFORM% > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
-  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON  -DOPTION_ASAN=OFF %APPVEYOR_BUILD_FOLDER%"
+  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF %APPVEYOR_BUILD_FOLDER%"
   # Appveyor does not provide enough memory to build/link thex64 debug build in parallel (Oct 2016)
   # TODO(Tino): Optimize WL build scripts to use less memory/no cyclic dependencies
   - cmd: "IF \"%PLATFORM%\" == \"x64\" (IF \"%CONFIGURATION%\" == \"Debug\" (ninja -j 1) ELSE (ninja)) ELSE (ninja)"

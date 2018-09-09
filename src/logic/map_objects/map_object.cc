@@ -29,7 +29,7 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -484,7 +484,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 
 	// We always render this so we can have a stable position for the statistics string.
 	std::shared_ptr<const UI::RenderedText> rendered_census =
-	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
+	   UI::g_fh->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if (draw_text & TextToDraw::kCensus) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
@@ -492,7 +492,7 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 
 	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
-		   UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size));
+		   UI::g_fh->render(as_condensed(statictics, UI::Align::kCenter, font_size));
 		position.y += rendered_census->height() + text_height(font_size) / 4;
 		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
 	}
@@ -587,6 +587,7 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("header is %u, expected %u", header, HeaderMapObject);
 
 		uint8_t const packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
 		if (packet_version < 1 || packet_version > kCurrentPacketVersionMapObject) {
 			throw UnhandledVersionError("MapObject", packet_version, kCurrentPacketVersionMapObject);
 		}

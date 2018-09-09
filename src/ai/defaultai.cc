@@ -5147,7 +5147,7 @@ BuildingNecessity DefaultAI::check_building_necessity(BuildingObserver& bo,
 			int16_t tmp_score = 0;
 			for (uint8_t i = 0; i < kFNeuronBitSize; ++i) {
 				if (management_data.f_neuron_pool[53].get_position(i)) {
-					tmp_score += inputs[1];
+					tmp_score += inputs[i];
 				}
 			}
 			if (site_needed_for_economy == BasicEconomyBuildingStatus::kEncouraged) {
@@ -6565,8 +6565,7 @@ void DefaultAI::review_wares_targets(uint32_t const gametime) {
 			assert(new_target > 1);
 
 			game().send_player_command(*new Widelands::CmdSetWareTargetQuantity(
-			   gametime, player_number(), player_->get_economy_number(&observer->economy), id,
-			   new_target));
+			   gametime, player_number(), observer->economy.serial(), id, new_target));
 		}
 	}
 }
