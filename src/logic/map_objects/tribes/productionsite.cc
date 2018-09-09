@@ -941,6 +941,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
 	case None:
+		skipped_programs_.erase(program_name);
 		break;
 	}
 

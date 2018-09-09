@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"POT-Creation-Date: 2018-09-01 06:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -20,116 +20,130 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle the unproductive buildings"
-msgstr ""
+msgstr "Riet de unnützen Husen platt"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid "Dismantle Buildings"
-msgstr ""
+msgstr "Riet Huen platt"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:48
 msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
+"Riet all unnützen lütten Husen platt, um Materialien för neie Husen to "
+"kriegen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:49
 msgid ""
 "Remember to check the messages and the building statistics for unproductive "
 "buildings."
 msgstr ""
+"Vergeet nich, in de Narichten un Tahlen över Husen natokieken, um unnütze "
+"Husen to finnen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 msgid "Clear all unnecessary roads"
-msgstr ""
+msgstr "Maak all unnützen Straten weg"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:57
 msgid "Clear Road Network"
-msgstr ""
+msgstr "Stratennett uprümen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:58
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
 msgstr ""
+"Rüüm düsses Kuddelmuddel vun eenem Stratennett up, indeem du all unnützen "
+"Straten wegdoost."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Find the construction plans for the farms"
-msgstr ""
+msgstr "Finn de Bauplaan för Buurdereen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Find Farm Construction Plans"
-msgstr ""
+msgstr "Finn Tekens för Buurdereen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
+"Krieg de Bauplanen för Buurdereen torügg. Söök daarna in de Höchten achter "
+"de oostelken Grenz."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Bau tominnst 3 Boomhauereen un 2 Flintslagerhusen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:75
 msgid "Quarries and Lumberjacks"
-msgstr ""
+msgstr "Flintslagerhusen un Boomhauereen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
 msgstr ""
+"Bau tominnst dree Boomhauereen un twee Flintslagerhusen, um de Versörgung "
+"mit Baumaterialien weer torechttomaken."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Produce fish and rations"
-msgstr ""
+msgstr "Produzeer Fiss un Happen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:84
 msgid "Food Production"
-msgstr ""
+msgstr "Spiesen-Versörgung"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
-msgstr ""
+msgstr "Finn un fang Fisse. Produzeer dann Happen för de Bargwarkskeerls."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:91
 msgid "Replace the old and ineffective forester’s houses"
-msgstr ""
+msgstr "Verneei de ollen, unnützen Förster-Husen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:93
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "Bau twee neie Förster-Husen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
-msgstr ""
+msgstr "Wessel de twee Förster-Husen dör neie ut, um de Wöörde to verhogen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:100
 msgid "Find the monastery in the north"
-msgstr ""
+msgstr "Finn dat Klooster im Noorden"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:102
 msgid "Find the Monastery"
-msgstr ""
+msgstr "Finn dat Klooster"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:103
 msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
 msgstr ""
+"Finn dat Klooster im Noorden, um betere Technik för diene Weit-Versörgung to"
+" kriegen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:109
 msgid "Deal with Julia to get the technology"
-msgstr ""
+msgstr "Hannel mit Julia, um de Technik to kriegen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:111
 msgid "Diplomacy: Trade or War"
-msgstr ""
+msgstr "Hannel oder Krieg?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:112
 msgid ""
 "Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
+"Reselveer: Of sammelst du 35 Ähren Weit un 15 Potten Wien för de Gottheid in"
+" dienem Raadhuus, of du manntjest dat Klooster."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:118
 msgid "Train at least 3 heroes"

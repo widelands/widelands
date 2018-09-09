@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-19 11:47+0000\n"
-"PO-Revision-Date: 2018-08-19 11:49+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-09-01 06:47+0000\n"
+"PO-Revision-Date: 2018-09-01 10:41+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -322,26 +322,26 @@ msgid ""
 "incompatible."
 msgstr "Widelands не успя да зареди файла „%s“. Форматът на файла изглежда несъвместим."
 
-#: ../../src/editor/editorinteractive.cc:180 ../../src/logic/game.cc:221
+#: ../../src/editor/editorinteractive.cc:181 ../../src/logic/game.cc:221
 #: ../../src/logic/game.cc:271
 msgid "Creating players"
 msgstr "Създаване на играчи"
 
-#: ../../src/editor/editorinteractive.cc:228
+#: ../../src/editor/editorinteractive.cc:231
 msgid "Unsaved Map"
 msgstr "Незапазена карта"
 
-#: ../../src/editor/editorinteractive.cc:229
+#: ../../src/editor/editorinteractive.cc:232
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Картата не е запазена, сигурни ли сте, че искате да излезете?"
 
-#: ../../src/editor/editorinteractive.cc:611
+#: ../../src/editor/editorinteractive.cc:614
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr "Създаване на празна карта…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:615
+#: ../../src/editor/editorinteractive.cc:618
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -350,7 +350,7 @@ msgid "No Name"
 msgstr "Без име"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:618
+#: ../../src/editor/editorinteractive.cc:621
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -358,7 +358,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Неизвестен"
 
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:628
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Зареждане на картата „%s“…"
@@ -514,7 +514,7 @@ msgstr "Име: %s"
 
 #: ../../src/editor/tools/info_tool.cc:215
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:171
-#: ../../src/ui_fsmenu/launch_mpg.cc:587
+#: ../../src/ui_fsmenu/launch_mpg.cc:589
 msgid "Size: %1% x %2%"
 msgstr "Размер: %1% х %2%"
 
@@ -687,7 +687,7 @@ msgid "Suggested Teams:"
 msgstr "Препоръчани отбори:"
 
 #: ../../src/editor/ui_menus/main_menu_map_options.cc:136
-#: ../../src/ui_fsmenu/launch_mpg.cc:590
+#: ../../src/ui_fsmenu/launch_mpg.cc:592
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
@@ -922,27 +922,39 @@ msgid "Number of players"
 msgstr "Брой играчи"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
-#: ../../src/editor/ui_menus/player_menu.cc:148
-#: ../../src/editor/ui_menus/player_menu.cc:266
+#: ../../src/editor/ui_menus/player_menu.cc:147
+#: ../../src/editor/ui_menus/player_menu.cc:269
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:70
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:102
-#: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:507
+#: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:509
 #: ../../src/wui/multiplayersetupgroup.cc:135
 #: ../../src/wui/multiplayersetupgroup.cc:189
 #, c-format
 msgid "Player %u"
 msgstr "Играч %u"
 
-#: ../../src/editor/ui_menus/player_menu.cc:174
+#: ../../src/editor/ui_menus/player_menu.cc:173
 #: ../../src/ui_fsmenu/campaign_select.cc:102
 #: ../../src/wui/multiplayersetupgroup.cc:206
 msgid "Tribe"
 msgstr "Племе"
 
+#: ../../src/editor/ui_menus/player_menu.cc:181
+#: ../../src/wui/multiplayersetupgroup.cc:459
+#: ../../src/wui/playerdescrgroup.cc:169
+msgctxt "tribe"
+msgid "Random"
+msgstr "Случайно"
+
+#: ../../src/editor/ui_menus/player_menu.cc:183
+#: ../../src/wui/multiplayersetupgroup.cc:461
+msgid "The tribe will be selected at random"
+msgstr "Племето ще бъде избрано на случаен принцип"
+
 #. * TRANSLATORS: Button tooltip in the editor for using a player's starting
 #. position tool
-#: ../../src/editor/ui_menus/player_menu.cc:201
+#: ../../src/editor/ui_menus/player_menu.cc:204
 msgid "Set this player’s starting position"
 msgstr "Задаване на началната позиция на този играч"
 
@@ -1828,111 +1840,124 @@ msgstr "Успешно повторно свързване с мета сърв�
 msgid "Something went wrong: %s"
 msgstr "Има някаква грешка: %s"
 
-#: ../../src/network/internet_gaming.cc:373
+#: ../../src/network/internet_gaming.cc:370
+msgid "Welcome to the Widelands Metaserver!"
+msgstr "Добре дошли в мета-сървъра на Widelands!"
+
+#: ../../src/network/internet_gaming.cc:374
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "Системата Ви вписа като „%s“, тъй като желаното от Вас име е вече заето или запазено."
 
-#: ../../src/network/internet_gaming.cc:395
+#: ../../src/network/internet_gaming.cc:387
+msgid "Our forums can be found at:"
+msgstr "Можете да намерите форума ни на адрес:"
+
+#: ../../src/network/internet_gaming.cc:389
+msgid "For reporting bugs, visit:"
+msgstr "За докладване на проблеми посетете:"
+
+#: ../../src/network/internet_gaming.cc:400
 msgid "Mixed up"
 msgstr "Разбъркано"
 
-#: ../../src/network/internet_gaming.cc:395
+#: ../../src/network/internet_gaming.cc:400
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Мета сървърът изпрати странен пакет ERROR (грешка) по време на свързването"
 
-#: ../../src/network/internet_gaming.cc:410
+#: ../../src/network/internet_gaming.cc:415
 msgid "Unexpected packet"
 msgstr "Неочакван пакет"
 
-#: ../../src/network/internet_gaming.cc:411
+#: ../../src/network/internet_gaming.cc:416
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "Получен е неочакван мрежов пакет от мета-сървъра. Възможно е той да използва различна версия на протокола. Ако тази грешка се повтори, опитайте да обновите играта."
 
-#: ../../src/network/internet_gaming.cc:423
+#: ../../src/network/internet_gaming.cc:428
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "ВНИМАНИЕ: Беше получена команда %s , въпреки, че не сме в състояние CONNECTING (свързване)."
 
-#: ../../src/network/internet_gaming.cc:434
+#: ../../src/network/internet_gaming.cc:439
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Разминаването със сървърното време е %d секунда."
 msgstr[1] "Разминаването със сървърното време е %d секунди."
 
-#: ../../src/network/internet_gaming.cc:458
+#: ../../src/network/internet_gaming.cc:463
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Грешен тип на чат съобщение „%s“."
 
-#: ../../src/network/internet_gaming.cc:458
+#: ../../src/network/internet_gaming.cc:463
 msgid "Invalid message type"
 msgstr "Грешен тип съобщение"
 
-#: ../../src/network/internet_gaming.cc:496
+#: ../../src/network/internet_gaming.cc:501
 #, c-format
 msgid "The game %s is now available"
 msgstr "Играта %s вече е достъпна"
 
-#: ../../src/network/internet_gaming.cc:506
+#: ../../src/network/internet_gaming.cc:511
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Играта %s беше затворена"
 
-#: ../../src/network/internet_gaming.cc:552
+#: ../../src/network/internet_gaming.cc:557
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s се присъедини към стаята"
 
-#: ../../src/network/internet_gaming.cc:559
+#: ../../src/network/internet_gaming.cc:564
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s напусна стаята"
 
-#: ../../src/network/internet_gaming.cc:614
+#: ../../src/network/internet_gaming.cc:619
 msgid "Chat message could not be sent."
 msgstr "Чат съобщението не може да бъде изпратено."
 
-#: ../../src/network/internet_gaming.cc:628
+#: ../../src/network/internet_gaming.cc:633
 #, c-format
 msgid "ERROR: %s"
 msgstr "ГРЕШКА: %s"
 
-#: ../../src/network/internet_gaming.cc:638
+#: ../../src/network/internet_gaming.cc:643
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Получена е непозната команда от мета сървъра: %s"
 
-#: ../../src/network/internet_gaming.cc:764
+#: ../../src/network/internet_gaming.cc:769
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Съобщението не може да бъде изпратено: Не сте свързани с мета сървъра!"
 
-#: ../../src/network/internet_gaming.cc:783
-#: ../../src/network/internet_gaming.cc:790
+#: ../../src/network/internet_gaming.cc:788
+#: ../../src/network/internet_gaming.cc:795
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Съобщението не може да бъде изпратено: Трябваше ли да бъде тайно съобщение?"
 
-#: ../../src/network/internet_gaming.cc:866
+#: ../../src/network/internet_gaming.cc:871
 msgid "Conversion error"
 msgstr "Грешка при превръщането"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:869
+#: ../../src/network/internet_gaming.cc:874
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Не може да бъде установена вярната стойност за „%s“"
 
-#: ../../src/network/internet_gaming.cc:886
-msgid "unknown"
-msgstr "неизвестно"
+#: ../../src/network/internet_gaming.cc:892
+msgctxt "chat_sender"
+msgid "Unknown"
+msgstr "Неизвестен"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #, c-format
@@ -2210,7 +2235,7 @@ msgid "Select Item"
 msgstr "Изберете"
 
 #: ../../src/ui_basic/dropdown.cc:262 ../../src/ui_basic/dropdown.cc:264
-#: ../../src/ui_fsmenu/launch_mpg.cc:434
+#: ../../src/ui_fsmenu/launch_mpg.cc:436
 msgid "Error"
 msgstr "Грешка"
 
@@ -2563,34 +2588,34 @@ msgid "Type of game"
 msgstr "Тип на играта"
 
 #. * TRANSLATORS: This is a heading for a help window
-#: ../../src/ui_fsmenu/launch_mpg.cc:174 ../../src/ui_fsmenu/launch_mpg.cc:619
+#: ../../src/ui_fsmenu/launch_mpg.cc:174 ../../src/ui_fsmenu/launch_mpg.cc:621
 msgid "Multiplayer Game Setup"
 msgstr "Настройка на мрежова игра"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:189 ../../src/ui_fsmenu/launch_spg.cc:208
+#: ../../src/ui_fsmenu/launch_mpg.cc:190 ../../src/ui_fsmenu/launch_spg.cc:208
 msgid "(no map)"
 msgstr "(няма карта)"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:190
+#: ../../src/ui_fsmenu/launch_mpg.cc:191
 msgid "The host has not yet selected a map or saved game."
 msgstr "Сървърът още не е избрал карта или запазена игра."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:327
+#: ../../src/ui_fsmenu/launch_mpg.cc:329
 msgid "Saved Game is Directory"
 msgstr "Запазената игра е папка"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:328
+#: ../../src/ui_fsmenu/launch_mpg.cc:330
 msgid ""
 "WARNING:\n"
 "The saved game you selected is a directory. This happens if you set the option ‘nozip’ to true or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directory structures to the clients, please select another saved game or zip the directories’ content."
 msgstr "ВНИМАНИЕ:\nИзбраната запазена игра е папка. Това става, ако зададете стойността на опцията ‘nozip’ на „вярно“ или ако ръчно сте разархивирали запазената игра.\nWidelands не може да изпраща папки до клиентите. Моля, изберете друга запазена игра или архивирайте съдържанието на папките."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:345 ../../src/ui_fsmenu/launch_spg.cc:177
+#: ../../src/ui_fsmenu/launch_mpg.cc:347 ../../src/ui_fsmenu/launch_spg.cc:177
 msgid "File not found"
 msgstr "Файлът липсва"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:346 ../../src/ui_fsmenu/launch_spg.cc:178
+#: ../../src/ui_fsmenu/launch_mpg.cc:348 ../../src/ui_fsmenu/launch_spg.cc:178
 #, c-format
 msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
@@ -2598,39 +2623,39 @@ msgid ""
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
 msgstr "Widelands опита да започне игра с файл, който не може да бъде открит на посочения път.\nФайлът беше: %s\nАко това се случи в мрежова игра, сървърът може да е избрал файл, който Вие нямате. Обикновено, такъв файл трябва да Ви бъде изпратен от сървъра, но може би прехвърлянето не е било завършено!?!"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:382
+#: ../../src/ui_fsmenu/launch_mpg.cc:384
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr "Избраният файл не може да бъде намерен. Ако не Ви е изпратен автоматично, моля, пишете на сървъра за този проблем."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:413
+#: ../../src/ui_fsmenu/launch_mpg.cc:415
 #, c-format
 msgid "You are Player %i."
 msgstr "Вие сте играч %i."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:414
+#: ../../src/ui_fsmenu/launch_mpg.cc:416
 msgid "You are a spectator."
 msgstr "Вие сте наблюдател."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:436
+#: ../../src/ui_fsmenu/launch_mpg.cc:438
 #, c-format
 msgid "Unable to load the win condition script file '%s'."
 msgstr "Скриптът „%s“ с условие за победа не може да бъде зареден."
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:489
+#: ../../src/ui_fsmenu/launch_mpg.cc:491
 msgid "Saved players are:"
 msgstr "Запазените играчи са:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:509
+#: ../../src/ui_fsmenu/launch_mpg.cc:511
 msgid "closed"
 msgstr "затворено"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:585
+#: ../../src/ui_fsmenu/launch_mpg.cc:587
 msgid "Map details:"
 msgstr "Подр. за картата:"
 
-#: ../../src/ui_fsmenu/launch_mpg.cc:595
+#: ../../src/ui_fsmenu/launch_mpg.cc:597
 msgid "Scenario mode selected"
 msgstr "Избран е режим „сценарий“"
 
@@ -4233,16 +4258,6 @@ msgstr "Човек"
 #, c-format
 msgid "Shared in Player %u"
 msgstr "Споделена в играч %u"
-
-#: ../../src/wui/multiplayersetupgroup.cc:459
-#: ../../src/wui/playerdescrgroup.cc:169
-msgctxt "tribe"
-msgid "Random"
-msgstr "Случайно"
-
-#: ../../src/wui/multiplayersetupgroup.cc:461
-msgid "The tribe will be selected at random"
-msgstr "Племето ще бъде избрано на случаен принцип"
 
 #: ../../src/wui/multiplayersetupgroup.cc:505
 #: ../../src/wui/playerdescrgroup.cc:179

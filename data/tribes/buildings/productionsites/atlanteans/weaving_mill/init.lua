@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
             "call=produce_spidercloth",
             "call=produce_tabard",
             "call=produce_tabard_golden",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_spidercloth = {
