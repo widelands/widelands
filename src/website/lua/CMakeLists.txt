@@ -1,0 +1,10 @@
+wl_library(lua_tree
+  SRCS
+    lua_tree.cc
+    lua_tree.h
+    value.cc
+    value.h
+  DEPENDS
+    io_fileread
+    io_filesystem
+)
