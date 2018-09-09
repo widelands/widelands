@@ -175,6 +175,8 @@ wl_library(wui
     encyclopedia_window.h
     fieldaction.cc
     fieldaction.h
+    game_client_disconnected.cc
+    game_client_disconnected.h
     game_debug_ui.cc
     game_debug_ui.h
     game_statistics_menu.cc
