@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_UTILS_LUA_VALUE_H
-#define WL_UTILS_LUA_VALUE_H
+#ifndef WL_WEBSITE_LUA_VALUE_H
+#define WL_WEBSITE_LUA_VALUE_H
 
 #include <string>
 
@@ -72,4 +72,4 @@ private:
 
 
 }  // namespace LuaTree
-#endif  // end of include guard: WL_UTILS_LUA_VALUE_H
+#endif  // end of include guard: WL_WEBSITE_LUA_VALUE_H

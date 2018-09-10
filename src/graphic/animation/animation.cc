@@ -19,11 +19,13 @@
 
 #include "graphic/animation/animation.h"
 
+#include <memory>
+
 #include "base/vector.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_table.h"
-#include "sound/sound_handler.h"
 #include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 
 namespace {
 

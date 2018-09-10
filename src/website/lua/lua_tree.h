@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_UTILS_LUA_LUA_TREE_H
-#define WL_UTILS_LUA_LUA_TREE_H
+#ifndef WL_WEBSITE_LUA_LUA_TREE_H
+#define WL_WEBSITE_LUA_LUA_TREE_H
 
 #include <cassert>
 #include <memory>
@@ -26,7 +26,7 @@
 #include <vector>
 
 #include "io/filesystem/filesystem.h"
-#include "utils/lua/value.h"
+#include "website/lua/value.h"
 
 namespace LuaTree {
 
@@ -85,4 +85,4 @@ public:
 };
 
 }  // namespace LuaTree
-#endif  // end of include guard: WL_UTILS_LUA_LUA_TREE_H
+#endif  // end of include guard: WL_WEBSITE_LUA_LUA_TREE_H

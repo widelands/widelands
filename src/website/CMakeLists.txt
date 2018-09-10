@@ -1,3 +1,5 @@
+add_subdirectory(lua)
+
 wl_library(website_common
   SRCS
     website_common.cc
@@ -9,6 +11,23 @@ wl_library(website_common
     graphic
     io_filesystem
     sound
+)
+
+wl_binary(wl_create_spritesheet
+  SRCS
+    create_spritesheet.cc
+  DEPENDS
+    base_log
+    base_macros
+    graphic
+    graphic_animation
+    graphic_image_io
+    graphic_surface
+    io_filesystem
+    logic
+    logic_constants
+    lua_tree
+    website_common
 )
 
 
