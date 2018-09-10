@@ -90,7 +90,7 @@ tribes:new_productionsite_type {
             "call=a_mine_produce_marble",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_marble",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       a_mine_produce_granite = {

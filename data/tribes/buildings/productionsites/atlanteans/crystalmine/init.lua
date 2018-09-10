@@ -79,7 +79,7 @@ tribes:new_productionsite_type {
             "call=a_mine_produce_quartz",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_granite",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       mine_quartz = {
@@ -95,7 +95,7 @@ tribes:new_productionsite_type {
             "call=a_mine_produce_granite",
             "call=a_mine_produce_quartz",
             "call=a_mine_produce_quartz",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       mine_diamond = {
@@ -108,7 +108,7 @@ tribes:new_productionsite_type {
             "call=a_mine_produce_diamond",
             "call=a_mine_produce_granite",
             "call=a_mine_produce_diamond",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       a_mine_produce_granite = {
