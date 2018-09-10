@@ -29,6 +29,7 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/wexception.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/editor_game_base.h"

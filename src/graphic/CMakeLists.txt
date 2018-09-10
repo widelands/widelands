@@ -1,3 +1,4 @@
+add_subdirectory(animation)
 add_subdirectory(text)
 
 # TODO(sirver): Separate this directory into a base directory and one
@@ -300,10 +301,7 @@ wl_library(graphic_wordwrap
 
 wl_library(graphic
   SRCS
-    animation.cc
-    animation.h
     default_resolution.h
-    diranimations.h
     graphic.cc
     graphic.h
     style_manager.cc
@@ -320,23 +318,20 @@ wl_library(graphic
     base_scoped_timer
     build_info
     graphic_align
+    graphic_animation
     graphic_build_texture_atlas
     graphic_color
     graphic_draw_programs
     graphic_gl_utils
     graphic_image_cache
     graphic_image_io
-    graphic_playercolor
     graphic_render_queue
     graphic_styles
     graphic_surface
     graphic_text_layout
     io_filesystem
     io_stream
-    logic_constants
-    note_sound
     notifications
     scripting_lua_interface
     scripting_lua_table
-    sound
 )

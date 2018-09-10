@@ -17,12 +17,10 @@
  *
  */
 
-#ifndef WL_GRAPHIC_ANIMATION_H
-#define WL_GRAPHIC_ANIMATION_H
+#ifndef WL_GRAPHIC_ANIMATION_ANIMATION_H
+#define WL_GRAPHIC_ANIMATION_ANIMATION_H
 
-#include <cstring>
-#include <map>
-#include <memory>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -31,15 +29,13 @@
 #include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
+#include "graphic/color.h"
+#include "graphic/image.h"
 #include "graphic/surface.h"
+#include "scripting/lua_table.h"
 
-class Image;
-class LuaTable;
-class Surface;
-struct RGBColor;
-
-/// FRAME_LENGTH is the default animation speed
-constexpr int FRAME_LENGTH = 250;
+/// The default animation speed
+constexpr int kFrameLength = 250;
 
 /**
  * Representation of an Animation in the game. An animation is a looping set of
@@ -103,33 +99,4 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
 };
 
-/**
-* The animation manager manages a list of all active animations.
-*/
-class AnimationManager {
-public:
-	/**
-	 * Loads an animation, graphics sound and everything from a Lua table.
-	 *
-	 * The Lua table must contain a table 'pictures' with image paths and a 'hotspot' table.
-	 *
-	 * Optional parameters in the Lua table are 'fps' and 'sound_effect'.
-	*/
-	uint32_t load(const LuaTable& table);
-
-	/// Returns the animation with the given ID or throws an exception if it is
-	/// unknown.
-	const Animation& get_animation(uint32_t id) const;
-
-	/// Returns the representative image, using the given player color.
-	/// If this image has been generated before, it is pulled from the cache using
-	/// the clr argument that was used previously.
-	const Image* get_representative_image(uint32_t id, const RGBColor* clr = nullptr);
-
-private:
-	std::vector<std::unique_ptr<Animation>> animations_;
-	std::map<std::pair<uint32_t, const RGBColor*>, std::unique_ptr<const Image>>
-	   representative_images_;
-};
-
-#endif  // end of include guard: WL_GRAPHIC_ANIMATION_H
+#endif  // end of include guard: WL_GRAPHIC_ANIMATION_ANIMATION_H

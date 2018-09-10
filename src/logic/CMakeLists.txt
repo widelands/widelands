@@ -267,6 +267,7 @@ wl_library(logic
     economy
     game_io
     graphic
+    graphic_animation
     graphic_color
     graphic_fonthandler
     graphic_image_io

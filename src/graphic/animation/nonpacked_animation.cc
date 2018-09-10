@@ -17,25 +17,21 @@
  *
  */
 
-#include "graphic/animation.h"
+#include "graphic/animation/nonpacked_animation.h"
 
 #include <cassert>
 #include <cstdio>
 #include <limits>
 #include <memory>
-#include <set>
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/format.hpp>
 
-#include "base/i18n.h"
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
-#include "graphic/image_cache.h"
 #include "graphic/playercolor.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -56,73 +52,7 @@ void get_point(const LuaTable& table, Vector2i* p) {
 	p->x = pts[0];
 	p->y = pts[1];
 }
-
-/**
- * Implements the Animation interface for an animation that is unpacked on disk, that
- * is every frame and every pc color frame is an singular file on disk.
- */
-class NonPackedAnimation : public Animation {
-public:
-	struct MipMapEntry {
-		explicit MipMapEntry(const float scale, const LuaTable& table);
-
-		bool hasplrclrs;
-		std::vector<std::string> image_files;
-		std::vector<std::string> pc_mask_image_files;
-
-		std::vector<const Image*> frames;
-		std::vector<const Image*> pcmasks;
-	};
-
-	~NonPackedAnimation() override {
-	}
-	explicit NonPackedAnimation(const LuaTable& table);
-
-	// Implements Animation.
-	float height() const override;
-	Rectf source_rectangle(int percent_from_bottom, float scale) const override;
-	Rectf destination_rectangle(const Vector2f& position,
-	                            const Rectf& source_rect,
-	                            float scale) const override;
-	uint16_t nr_frames() const override;
-	uint32_t frametime() const override;
-	const Image* representative_image(const RGBColor* clr) const override;
-	const std::string& representative_image_filename() const override;
-	virtual void blit(uint32_t time,
-	                  const Rectf& source_rect,
-	                  const Rectf& destination_rect,
-	                  const RGBColor* clr,
-	                  Surface* target, float scale) const override;
-	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
-
-private:
-	float find_best_scale(float scale) const;
-
-	// Loads the graphics if they are not yet loaded.
-	void ensure_graphics_are_loaded() const;
-
-	// Load the needed graphics from disk.
-	void load_graphics();
-
-	uint32_t current_frame(uint32_t time) const;
-
-	uint32_t frametime_;
-	uint16_t nr_frames_;
-
-	Vector2i hotspot_;
-
-	struct MipMapCompare {
-	  bool operator() (const float lhs, const float rhs) const
-	  {return lhs > rhs;}
-	};
-	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
-
-	// name of sound effect that will be played at frame 0.
-	// TODO(sirver): this should be done using playsound in a program instead of
-	// binding it to the animation.
-	std::string sound_effect_;
-	bool play_once_;
-};
+}  // namespace
 
 NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& table) : hasplrclrs(false) {
 	if (scale <= 0.0f) {
@@ -153,7 +83,7 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& 
 }
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : frametime_(FRAME_LENGTH), hotspot_(Vector2i::zero()), play_once_(false) {
+   : frametime_(kFrameLength), hotspot_(Vector2i::zero()), play_once_(false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
@@ -375,54 +305,4 @@ void NonPackedAnimation::blit(uint32_t time,
 	}
 	// TODO(GunChleoc): Stereo position would be nice.
 	trigger_sound(time, 128);
-}
-
-}  // namespace
-
-/*
-==============================================================================
-
-DirAnimations IMPLEMENTAION
-
-==============================================================================
-*/
-
-DirAnimations::DirAnimations(
-   uint32_t dir1, uint32_t dir2, uint32_t dir3, uint32_t dir4, uint32_t dir5, uint32_t dir6) {
-	animations_[0] = dir1;
-	animations_[1] = dir2;
-	animations_[2] = dir3;
-	animations_[3] = dir4;
-	animations_[4] = dir5;
-	animations_[5] = dir6;
-}
-
-/*
-==============================================================================
-
-AnimationManager IMPLEMENTATION
-
-==============================================================================
-*/
-
-uint32_t AnimationManager::load(const LuaTable& table) {
-	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table)));
-	return animations_.size();
-}
-
-const Animation& AnimationManager::get_animation(uint32_t id) const {
-	if (!id || id > animations_.size())
-		throw wexception("Requested unknown animation with id: %i", id);
-
-	return *animations_[id - 1];
-}
-
-const Image* AnimationManager::get_representative_image(uint32_t id, const RGBColor* clr) {
-	const auto hash = std::make_pair(id, clr);
-	if (representative_images_.count(hash) != 1) {
-		representative_images_.insert(std::make_pair(
-		   hash, std::unique_ptr<const Image>(
-		            std::move(g_gr->animations().get_animation(id).representative_image(clr)))));
-	}
-	return representative_images_.at(hash).get();
 }

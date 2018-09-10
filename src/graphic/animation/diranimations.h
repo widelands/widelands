@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef WL_GRAPHIC_DIRANIMATIONS_H
-#define WL_GRAPHIC_DIRANIMATIONS_H
+#ifndef WL_GRAPHIC_ANIMATION_DIRANIMATIONS_H
+#define WL_GRAPHIC_ANIMATION_DIRANIMATIONS_H
 
 #include <string>
 
@@ -54,4 +54,4 @@ private:
 	uint32_t animations_[6];
 };
 
-#endif  // end of include guard: WL_GRAPHIC_DIRANIMATIONS_H
+#endif  // end of include guard: WL_GRAPHIC_ANIMATION_DIRANIMATIONS_H

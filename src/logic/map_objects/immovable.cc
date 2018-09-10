@@ -30,6 +30,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "config.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"

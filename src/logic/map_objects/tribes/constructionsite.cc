@@ -27,7 +27,8 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
@@ -51,16 +52,16 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const size_t nr_frames = anim.nr_frames();
 	const uint32_t cur_frame = totaltime ? completedtime * nr_frames / totaltime : 0;
-	uint32_t anim_time = cur_frame * FRAME_LENGTH;
+	uint32_t anim_time = cur_frame * kFrameLength;
 
 	if (cur_frame) {  //  not the first pic
 		// Draw the complete prev pic , so we won't run into trouble if images have different sizes
-		dst->blit_animation(point_on_dst, scale, anim_idx, anim_time - FRAME_LENGTH, player_color);
+		dst->blit_animation(point_on_dst, scale, anim_idx, anim_time - kFrameLength, player_color);
 	} else if (was) {
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
 		dst->blit_animation(point_on_dst, scale, was->get_unoccupied_animation(),
-		                    anim_time - FRAME_LENGTH, player_color);
+		                    anim_time - kFrameLength, player_color);
 	}
 	// Now blit a segment of the current construction phase from the bottom.
 	int percent = 100 * completedtime * nr_frames;

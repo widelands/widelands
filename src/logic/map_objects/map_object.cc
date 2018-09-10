@@ -29,6 +29,7 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"

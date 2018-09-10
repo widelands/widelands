@@ -32,6 +32,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/animation/diranimations.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
@@ -43,7 +44,6 @@
 
 class FileRead;
 class RenderTarget;
-struct DirAnimations;
 
 namespace Widelands {
 

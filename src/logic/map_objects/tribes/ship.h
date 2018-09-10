@@ -25,7 +25,7 @@
 
 #include "base/macros.h"
 #include "economy/shippingitem.h"
-#include "graphic/diranimations.h"
+#include "graphic/animation/diranimations.h"
 #include "logic/map_objects/bob.h"
 
 namespace Widelands {

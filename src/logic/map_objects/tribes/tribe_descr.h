@@ -25,7 +25,6 @@
 #include <vector>
 
 #include "base/macros.h"
-#include "graphic/animation.h"
 #include "logic/description_maintainer.h"
 #include "logic/editor_game_base.h"
 #include "logic/map_objects/immovable.h"

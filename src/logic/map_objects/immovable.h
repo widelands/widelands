@@ -24,7 +24,6 @@
 #include <unordered_map>
 
 #include "base/macros.h"
-#include "graphic/animation.h"
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/map_object.h"

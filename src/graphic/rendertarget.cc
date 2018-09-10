@@ -20,7 +20,7 @@
 #include "graphic/rendertarget.h"
 
 #include "base/macros.h"
-#include "graphic/animation.h"
+#include "graphic/animation/animation_manager.h"
 #include "graphic/graphic.h"
 #include "graphic/surface.h"
 #include "graphic/text_layout.h"
