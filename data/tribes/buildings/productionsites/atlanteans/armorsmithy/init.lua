@@ -144,7 +144,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_shield_steel",
             "call=produce_shield_advanced",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_shield_steel = {

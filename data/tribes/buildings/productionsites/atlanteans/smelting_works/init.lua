@@ -58,7 +58,7 @@ tribes:new_productionsite_type {
             "call=smelt_iron",
             "call=smelt_gold",
             "call=smelt_iron",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       smelt_iron = {

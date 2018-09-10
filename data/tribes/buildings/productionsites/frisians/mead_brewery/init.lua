@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
             "call=brew_mead",
             "call=brew_beer",
             "call=brew_mead",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       brew_mead = {

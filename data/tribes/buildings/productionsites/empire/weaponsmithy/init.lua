@@ -70,7 +70,7 @@ tribes:new_productionsite_type {
             "call=produce_spear_advanced",
             "call=produce_spear_heavy",
             "call=produce_spear_war",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_spear_wooden = {

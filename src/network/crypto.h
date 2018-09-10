@@ -22,6 +22,8 @@
 
 #include <string>
 
+#include "boost/version.hpp"
+
 namespace crypto {
 
 /**

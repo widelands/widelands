@@ -72,7 +72,7 @@ tribes:new_productionsite_type {
             "call=produce_armor_chain",
             "call=produce_armor_gilded",
             "call=produce_armor_helmet",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_armor_helmet = {

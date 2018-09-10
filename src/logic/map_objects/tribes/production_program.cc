@@ -467,9 +467,11 @@ ProductionProgram::ActReturn::ActReturn(char* parameters,
 			result_ = Completed;
 		else if (match(parameters, "skipped"))
 			result_ = Skipped;
+		else if (match(parameters, "no_stats"))
+			result_ = None;
 		else
-			throw GameDataError(
-			   "expected %s but found \"%s\"", "{\"failed\"|\"completed\"|\"skipped\"}", parameters);
+			throw GameDataError("expected %s but found \"%s\"",
+			                    "{\"failed\"|\"completed\"|\"skipped\"|\"no_stats\"}", parameters);
 
 		if (skip(parameters)) {
 			if (match_force_skip(parameters, "when")) {

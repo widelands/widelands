@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_malus",
             "call=produce_bonus",
-            "return=skipped"
+            "return=no_stats"
          },
       },
       produce_malus = {

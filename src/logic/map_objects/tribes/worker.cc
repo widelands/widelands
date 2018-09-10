@@ -1052,7 +1052,7 @@ Worker::~Worker() {
 }
 
 /// Log basic information.
-void Worker::log_general_info(const EditorGameBase& egbase) {
+void Worker::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
@@ -2934,21 +2934,7 @@ void Worker::scout_update(Game& game, State& state) {
 
 	const Map& map = game.map();
 
-	if (scouts_worklist.empty()) {
-		// This routine assumes that scouts_worklist is not empty. There is one exception:
-		// First call to this routine after loading an old savegame. The least-invasive
-		// way to acquire old savegame compatibility was to simply ask the scout to go home early,
-		// under this special situation. Anybody reading this,
-		// TODO(kxq): Please remove this code block (and compatibility_2017 code from load routine)
-		// once Build 20 is out. Thanks.
-		log("Warning: sending scout home. Assuming the game was just started, from savegame, in "
-		    "compatibility mode.\n");
-		pop_task(game);
-		schedule_act(game, 10);
-		return;
-	}
-
-	bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0;
+	const bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0;
 
 	// do not pop; this function is called many times per run.
 	struct PlaceToScout scoutat = scouts_worklist.back();
@@ -3017,12 +3003,8 @@ Worker::Loader::Loader() : location_(0), carried_ware_(0) {
 void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
 	try {
-		uint8_t packet_version = fr.unsigned_8();
-		// TODO(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) after B20
-		// TODO(kxq): Also remove the code fragment from Worker::scout_update with compatibility_2017
-		// in comment.
-		bool compatibility_2017 = 2 == packet_version;
-		if (packet_version == kCurrentPacketVersion || compatibility_2017) {
+		const uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 
 			Worker& worker = get<Worker>();
 			location_ = fr.unsigned_32();
@@ -3033,14 +3015,7 @@ void Worker::Loader::load(FileRead& fr) {
 				worker.transfer_ = new Transfer(dynamic_cast<Game&>(egbase()), worker);
 				worker.transfer_->read(fr, transfer_);
 			}
-			unsigned veclen;
-			// TODO(kxq): Remove compatibility_2017 associated code from here and above,
-			// after build 20 has been released.
-			if (compatibility_2017) {
-				veclen = 0;
-			} else {
-				veclen = fr.unsigned_8();
-			}
+			const unsigned veclen = fr.unsigned_8();
 			for (unsigned q = 0; q < veclen; q++) {
 				if (fr.unsigned_8()) {
 					const PlaceToScout gsw;
