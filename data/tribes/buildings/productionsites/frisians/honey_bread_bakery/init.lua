@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
             "call=bake_honey",
             "call=bake_normal",
             "call=bake_honey",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       bake_honey = {

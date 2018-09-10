@@ -76,7 +76,7 @@ tribes:new_productionsite_type {
             "call=produce_ax_bronze",
             "call=produce_ax_battle",
             "call=produce_ax_warriors",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ax = {

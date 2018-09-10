@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-06 14:22+0000\n"
-"PO-Revision-Date: 2018-07-12 07:27+0000\n"
+"POT-Creation-Date: 2018-08-24 06:54+0000\n"
+"PO-Revision-Date: 2018-08-27 11:40+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -74,16 +74,16 @@ msgstr "Bau een Förster-Huus, um de Walden up de Insel to wahren."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:63
 msgid "Build a quarry"
-msgstr "Bau een Flinthauerhuus"
+msgstr "Bau een Flintslagerhuus"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:65
 msgid "Quarry"
-msgstr "Flinthauerhuus"
+msgstr "Flintslagerhuus"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:66
 msgid ""
 "Build a quarry in the south to cut some granite and marble out of the rocks."
-msgstr "Bau een Flinthauerhuus im Süden, um Flint un Marmel vun de Stenen oftoboen."
+msgstr "Bau een Flintslagerhuus im Süden, um Flint un Marmel vun de Stenen oftoboen."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:67
 msgid "These might be used for future buildings."
@@ -370,7 +370,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr "Mienheer, wi könen bold een eerstes Slött bauen. Dat Flinthauerhuus im Süden arbeidt siet vundaag un versörgt uns vun nu an mit Flint un mojen Marmel."
+msgstr "Mienheer, wi könen bold een eerstes Slött bauen. Dat Flintslagerhuus im Süden arbeidt siet vundaag un versörgt uns vun nu an mit Flint un mojen Marmel."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:218
