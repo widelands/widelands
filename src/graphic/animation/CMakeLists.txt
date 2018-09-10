@@ -1,5 +1,6 @@
 wl_library(graphic_animation
   SRCS
+    animation.cc
     animation.h
     animation_manager.cc
     animation_manager.h

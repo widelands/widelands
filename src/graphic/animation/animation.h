@@ -48,13 +48,15 @@ constexpr int kFrameLength = 250;
  */
 class Animation {
 public:
-	Animation() {
-	}
+	explicit Animation(const LuaTable& table);
 	virtual ~Animation() {
 	}
 
 	/// The height of this animation.
 	virtual float height() const = 0;
+	const Vector2i& hotspot() const;
+
+	uint32_t current_frame(uint32_t time) const;
 
 	/// The size of the animation source images in pixels. Use 'percent_from_bottom' to crop the
 	/// animation.
@@ -71,7 +73,7 @@ public:
 	virtual uint16_t nr_frames() const = 0;
 
 	/// The number of milliseconds each frame will be displayed.
-	virtual uint32_t frametime() const = 0;
+	uint32_t frametime() const;
 
 	/// An image of the first frame, blended with the given player color.
 	/// The 'clr' is the player color used for blending - the parameter can be
@@ -93,10 +95,19 @@ public:
 	                  Surface* target, float scale) const = 0;
 
 	/// Play the sound effect associated with this animation at the given time.
-	virtual void trigger_sound(uint32_t time, uint32_t stereo_position) const = 0;
+	void trigger_sound(uint32_t time, uint32_t stereo_position) const;
+
+protected:
+	uint32_t frametime_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
+
+	Vector2i hotspot_ = Vector2i::zero();
+	const bool play_once_;
+
+	// Name of sound effect that will be played at frame 0.
+	std::string sound_effect_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_ANIMATION_H

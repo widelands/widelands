@@ -36,25 +36,12 @@
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_table.h"
-#include "sound/note_sound.h"
-#include "sound/sound_handler.h"
 
 namespace {
-
 const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
+} // namespace
 
-// Parses an array { 12, 23 } into a point.
-void get_point(const LuaTable& table, Vector2i* p) {
-	std::vector<int> pts = table.array_entries<int>();
-	if (pts.size() != 2) {
-		throw wexception("Expected 2 entries, but got %" PRIuS ".", pts.size());
-	}
-	p->x = pts[0];
-	p->y = pts[1];
-}
-}  // namespace
-
-NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& table) : hasplrclrs(false) {
+NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table) : hasplrclrs(false) {
 	if (scale <= 0.0f) {
 		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
 	}
@@ -83,25 +70,9 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& 
 }
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : frametime_(kFrameLength), hotspot_(Vector2i::zero()), play_once_(false) {
+   : Animation(table) {
 	try {
-		// Sound
-		if (table.has_key("sound_effect")) {
-			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
-
-			const std::string name = sound_effects->get_string("name");
-			const std::string directory = sound_effects->get_string("directory");
-			sound_effect_ = directory + g_fs->file_separator() + name;
-			g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
-		}
-
-		// Repetition
-		if (table.has_key("play_once")) {
-			play_once_ = table.get_bool("play_once");
-		}
-
 		// Images
-		get_point(*table.get_table("hotspot"), &hotspot_);
 
 		if (table.has_key("mipmap")) {
 			std::unique_ptr<LuaTable> mipmaps_table = table.get_table("mipmap");
@@ -222,10 +193,6 @@ uint16_t NonPackedAnimation::nr_frames() const {
 	return nr_frames_;
 }
 
-uint32_t NonPackedAnimation::frametime() const {
-	return frametime_;
-}
-
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
 	std::vector<std::string> images = mipmap.image_files;
@@ -247,26 +214,6 @@ const std::string& NonPackedAnimation::representative_image_filename() const {
 	return mipmaps_.at(1.0f)->image_files[0];
 }
 
-uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
-	if (nr_frames() > 1) {
-		return (play_once_ && time / frametime_ > static_cast<uint32_t>(nr_frames() - 1)) ?
-		          static_cast<uint32_t>(nr_frames() - 1) :
-		          time / frametime_ % nr_frames();
-	}
-	return 0;
-}
-
-void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) const {
-	if (sound_effect_.empty()) {
-		return;
-	}
-
-	const uint32_t framenumber = current_frame(time);
-
-	if (framenumber == 0) {
-		Notifications::publish(NoteSound(sound_effect_, stereo_position, 1));
-	}
-}
 
 Rectf NonPackedAnimation::source_rectangle(const int percent_from_bottom, float scale) const {
 	ensure_graphics_are_loaded();
@@ -281,8 +228,8 @@ Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
 	ensure_graphics_are_loaded();
 	const float best_scale = find_best_scale(scale);
 	// Using floor + ceil for pixel perfect positioning
-	return Rectf(std::floor(position.x - hotspot_.x * scale - source_rect.x),
-	             std::floor(position.y - hotspot_.y * scale - source_rect.y),
+	return Rectf(std::floor(position.x - hotspot().x * scale - source_rect.x),
+	             std::floor(position.y - hotspot().y * scale - source_rect.y),
 	             std::ceil(source_rect.w * scale / best_scale), std::ceil(source_rect.h * scale / best_scale));
 }
 

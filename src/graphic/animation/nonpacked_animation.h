@@ -39,17 +39,6 @@
  */
 class NonPackedAnimation : public Animation {
 public:
-	struct MipMapEntry {
-		explicit MipMapEntry(float scale, const LuaTable& table);
-
-		bool hasplrclrs;
-		std::vector<std::string> image_files;
-		std::vector<std::string> pc_mask_image_files;
-
-		std::vector<const Image*> frames;
-		std::vector<const Image*> pcmasks;
-	};
-
 	~NonPackedAnimation() override {
 	}
 	explicit NonPackedAnimation(const LuaTable& table);
@@ -61,7 +50,7 @@ public:
 	                            const Rectf& source_rect,
 	                            float scale) const override;
 	uint16_t nr_frames() const override;
-	uint32_t frametime() const override;
+
 	const Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
@@ -69,7 +58,6 @@ public:
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
 	                  Surface* target, float scale) const override;
-	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
 
 private:
 	float find_best_scale(float scale) const;
@@ -80,12 +68,16 @@ private:
 	// Load the needed graphics from disk.
 	void load_graphics();
 
-	uint32_t current_frame(uint32_t time) const;
+	struct MipMapEntry {
+		explicit MipMapEntry(float scale, const LuaTable& table);
 
-	uint32_t frametime_;
-	uint16_t nr_frames_;
+		bool hasplrclrs;
+		std::vector<std::string> image_files;
+		std::vector<std::string> pc_mask_image_files;
 
-	Vector2i hotspot_;
+		std::vector<const Image*> frames;
+		std::vector<const Image*> pcmasks;
+	};
 
 	struct MipMapCompare {
 	  bool operator() (const float lhs, const float rhs) const
@@ -93,11 +85,7 @@ private:
 	};
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
 
-	// name of sound effect that will be played at frame 0.
-	// TODO(sirver): this should be done using playsound in a program instead of
-	// binding it to the animation.
-	std::string sound_effect_;
-	bool play_once_;
+	uint16_t nr_frames_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H
