@@ -27,8 +27,6 @@
 
 namespace {
 
-const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
-
 // Parses an array { 12, 23 } into a point.
 void get_point(const LuaTable& table, Vector2i* p) {
 	std::vector<int> pts = table.array_entries<int>();
@@ -41,7 +39,7 @@ void get_point(const LuaTable& table, Vector2i* p) {
 
 } // namespace
 
-Animation::Animation(const LuaTable& table) : frametime_(kFrameLength), hotspot_(Vector2i::zero()), play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false) {
+Animation::Animation(const LuaTable& table, Animation::Type type) : frametime_(kFrameLength), type_(type), hotspot_(Vector2i::zero()), play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
@@ -56,6 +54,10 @@ Animation::Animation(const LuaTable& table) : frametime_(kFrameLength), hotspot_
 	} catch (const LuaError& e) {
 		throw wexception("Error in animation table: %s", e.what());
 	}
+}
+
+Animation::Type Animation::type() const {
+	return type_;
 }
 
 uint32_t Animation::frametime() const {

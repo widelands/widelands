@@ -45,6 +45,7 @@ public:
 
 	// Implements Animation.
 	float height() const override;
+	float width() const override;
 	Rectf source_rectangle(int percent_from_bottom, float scale) const override;
 	Rectf destination_rectangle(const Vector2f& position,
 	                            const Rectf& source_rect,
@@ -58,6 +59,9 @@ public:
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
 	                  Surface* target, float scale) const override;
+
+	std::vector<const Image*> images(float scale) const override;
+	std::vector<const Image*> pc_masks(float scale) const override;
 
 private:
 	float find_best_scale(float scale) const;

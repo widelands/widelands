@@ -70,7 +70,7 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table)
 }
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : Animation(table) {
+   : Animation(table, Animation::Type::kNonPacked) {
 	try {
 		// Images
 
@@ -189,8 +189,23 @@ float NonPackedAnimation::height() const {
 	return mipmaps_.at(1.0f)->frames.at(0)->height();
 }
 
+float NonPackedAnimation::width() const {
+	ensure_graphics_are_loaded();
+	return mipmaps_.at(1.0f)->frames.at(0)->width();
+}
+
 uint16_t NonPackedAnimation::nr_frames() const {
 	return nr_frames_;
+}
+
+std::vector<const Image*> NonPackedAnimation::images(float scale) const {
+	ensure_graphics_are_loaded();
+	return mipmaps_.at(scale)->frames;
+}
+
+std::vector<const Image*> NonPackedAnimation::pc_masks(float scale) const {
+	ensure_graphics_are_loaded();
+	return mipmaps_.at(scale)->pcmasks;
 }
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
