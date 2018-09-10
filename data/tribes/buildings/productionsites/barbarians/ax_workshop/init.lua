@@ -69,7 +69,7 @@ tribes:new_productionsite_type {
             "call=produce_ax",
             "call=produce_ax_sharp",
             "call=produce_ax_broad",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ax = {
@@ -80,9 +80,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax",
             "sleep=36000", -- +10 enlarge
             "consume=coal iron",
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 28000",  -- +6 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax"
          }
@@ -95,9 +95,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax_sharp",
             "consume=coal iron:2",
             "sleep=37000", -- +11 enlarge
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 30000", -- +8 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_sharp"
          }
@@ -110,9 +110,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ax_broad",
             "consume=coal:2 iron:2",
             "sleep=38000", -- +12 enlarge
-            "play_sound=sound/smiths smith 192",
+            "playsound=sound/smiths smith 192",
             "animate=working 32000", -- +10 enlarge
-            "play_sound=sound/smiths sharpening 120",
+            "playsound=sound/smiths sharpening 120",
             "sleep=9000",
             "produce=ax_broad"
          }

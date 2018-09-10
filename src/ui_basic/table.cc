@@ -21,7 +21,7 @@
 
 #include <boost/bind.hpp>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
@@ -132,6 +132,13 @@ void Table<void*>::set_column_title(uint8_t const col, const std::string& title)
 	Column& column = columns_.at(col);
 	assert(column.btn);
 	column.btn->set_title(title);
+}
+
+void Table<void*>::set_column_tooltip(uint8_t col, const std::string& text) {
+	assert(col < columns_.size());
+	Column& column = columns_.at(col);
+	assert(column.btn);
+	column.btn->set_tooltip(text);
 }
 
 /**
@@ -294,7 +301,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
+			   UI::g_fh->render(as_uifont(richtext_escape(entry_string)));
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
 			// this always on, e.g. for mixed language savegame filenames.
@@ -452,7 +459,14 @@ void Table<void*>::select(const uint32_t i) {
 	selected(selection_);
 }
 
-void Table<void*>::multiselect(uint32_t row) {
+/**
+ * If 'force' is true, adds the given 'row' to the selection, ignoring everything else.
+ */
+void Table<void*>::multiselect(uint32_t row, bool force) {
+	if (force) {
+		select(row);
+		return;
+	}
 	if (is_multiselect_) {
 		// Ranged selection with Shift
 		if (SDL_GetModState() & KMOD_SHIFT) {

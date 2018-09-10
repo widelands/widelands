@@ -80,7 +80,7 @@ return {
          gold = 3,
          sword_short = 1,
          sword_long = 3,
-         sword_curved = 7,
+         sword_broad = 7,
          sword_double = 10,
          helmet = 3,
          helmet_golden = 6,
@@ -89,7 +89,7 @@ return {
          fur_garment_golden = 6,
       },
       frisians_order = {
-         "gold", "sword_short", "sword_long", "sword_curved", "sword_double",
+         "gold", "sword_short", "sword_long", "sword_broad", "sword_double",
          "helmet", "helmet_golden", "fur_garment", "fur_garment_studded", "fur_garment_golden"
       },
 

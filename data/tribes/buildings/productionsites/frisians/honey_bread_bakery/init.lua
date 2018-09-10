@@ -12,8 +12,8 @@ tribes:new_productionsite_type {
    enhancement_cost = {
       brick = 3,
       log = 3,
-      granite = 2,
-      thatch_reed = 4
+      granite = 1,
+      thatch_reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 2,
@@ -25,12 +25,12 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 94},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 94},
          fps = 10,
       },
       unoccupied = {
@@ -64,7 +64,7 @@ tribes:new_productionsite_type {
             "call=bake_honey",
             "call=bake_normal",
             "call=bake_honey",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       bake_honey = {

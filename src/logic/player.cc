@@ -22,6 +22,7 @@
 #include <cassert>
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 #include <boost/signals2.hpp>
@@ -356,6 +357,7 @@ MessageId Player::add_message_with_timeout(Game& game,
 	Coords const position = message->position();
 	for (const auto& tmp_message : messages()) {
 		if (tmp_message.second->type() == message->type() &&
+		    tmp_message.second->sub_type() == message->sub_type() &&
 		    gametime < tmp_message.second->sent() + timeout &&
 		    map.calc_distance(tmp_message.second->position(), position) <= radius) {
 			return MessageId::null();
@@ -798,36 +800,48 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
 /*
  * Economy stuff below
  */
-void Player::add_economy(Economy& economy) {
-	if (!has_economy(economy))
-		economies_.push_back(&economy);
+Economy* Player::create_economy() {
+	std::unique_ptr<Economy> eco(new Economy(*this));
+	const Serial serial = eco->serial();
+
+	assert(economies_.count(serial) == 0);
+	economies_.emplace(std::make_pair(serial, std::move(eco)));
+	assert(economies_.at(serial)->serial() == serial);
+	assert(economies_.count(serial) == 1);
+
+	return get_economy(serial);
 }
 
-void Player::remove_economy(Economy& economy) {
-	for (std::vector<Economy*>::iterator economy_iter = economies_.begin();
-	     economy_iter != economies_.end(); ++economy_iter)
-		if (*economy_iter == &economy) {
-			economies_.erase(economy_iter);
-			return;
-		}
+Economy* Player::create_economy(Serial serial) {
+	std::unique_ptr<Economy> eco(new Economy(*this, serial));
+
+	assert(economies_.count(serial) == 0);
+	economies_.emplace(std::make_pair(serial, std::move(eco)));
+	assert(economies_.at(serial)->serial() == serial);
+	assert(economies_.count(serial) == 1);
+
+	return get_economy(serial);
 }
 
-bool Player::has_economy(Economy& economy) const {
-	for (Economy* temp_economy : economies_) {
-		if (temp_economy == &economy) {
-			return true;
-		}
+void Player::remove_economy(Serial serial) {
+	assert(has_economy(serial));
+	economies_.erase(economies_.find(serial));
+	assert(!has_economy(serial));
+}
+
+const std::map<Serial, std::unique_ptr<Economy>>& Player::economies() const {
+	return economies_;
+}
+
+Economy* Player::get_economy(Widelands::Serial serial) const {
+	if (economies_.count(serial) == 0) {
+		return nullptr;
 	}
-	return false;
+	return economies_.at(serial).get();
 }
 
-Player::Economies::size_type Player::get_economy_number(Economy const* const economy) const {
-	Economies::const_iterator const economies_end = economies_.end(),
-	                                economies_begin = economies_.begin();
-	for (Economies::const_iterator it = economies_begin; it != economies_end; ++it)
-		if (*it == economy)
-			return it - economies_begin;
-	NEVER_HERE();
+bool Player::has_economy(Widelands::Serial serial) const {
+	return economies_.count(serial) != 0;
 }
 
 /************  Military stuff  **********/
@@ -1156,11 +1170,8 @@ void Player::sample_statistics() {
 	// Calculate stocks
 	std::vector<uint32_t> stocks(egbase().tribes().nrwares());
 
-	const uint32_t nrecos = get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i) {
-		const std::vector<Widelands::Warehouse*>& warehouses = get_economy_by_number(i)->warehouses();
-
-		for (Widelands::Warehouse* warehouse : warehouses) {
+	for (const auto& economy : economies()) {
+		for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
 			const Widelands::WareList& wares = warehouse->get_wares();
 			for (size_t id = 0; id < stocks.size(); ++id) {
 				stocks[id] += wares.stock(DescriptionIndex(id));
@@ -1328,19 +1339,14 @@ const std::string Player::pick_shipname() {
  *
  * \param fr source stream
  */
-void Player::read_remaining_shipnames(FileRead& fr, uint16_t packet_version) {
+void Player::read_remaining_shipnames(FileRead& fr) {
 	// First get rid of default shipnames
 	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());
 	}
-	// TODO(GunChleoc): Savegame compatibility. Remove after Build 20.
-	if (packet_version >= 21) {
-		ship_name_counter_ = fr.unsigned_32();
-	} else {
-		ship_name_counter_ = ships_.size();
-	}
+	ship_name_counter_ = fr.unsigned_32();
 }
 
 /**
@@ -1348,25 +1354,50 @@ void Player::read_remaining_shipnames(FileRead& fr, uint16_t packet_version) {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr) {
+void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	uint16_t nr_wares = fr.unsigned_16();
-	uint16_t nr_entries = fr.unsigned_16();
+	size_t nr_entries = fr.unsigned_16();
+
+	// Stats are saved as a single string to reduce number of hard disk write operations
+	const auto parse_stats = [nr_entries](
+	   std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index,
+	   const std::string& stats_string, const std::string& description) {
+		if (!stats_string.empty()) {
+			std::vector<std::string> stats_vector;
+			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
+			if (stats_vector.size() != nr_entries) {
+				throw GameDataError("wrong number of %s statistics - expected %" PRIuS
+				                    " but got %" PRIuS,
+				                    description.c_str(), nr_entries, stats_vector.size());
+			}
+			for (size_t j = 0; j < nr_entries; ++j) {
+				stats->at(ware_index)[j] = static_cast<unsigned int>(atoi(stats_vector.at(j).c_str()));
+			}
+		} else if (nr_entries > 0) {
+			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
+			                    description.c_str(), nr_entries);
+		}
+	};
 
 	for (uint32_t i = 0; i < current_produced_statistics_.size(); ++i)
 		ware_productions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		std::string name = fr.c_string();
-		DescriptionIndex idx = egbase().tribes().ware_index(name);
+		const std::string name = fr.c_string();
+		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u statistics: unknown ware name %s", player_number(), name.c_str());
 			continue;
 		}
 
 		current_produced_statistics_[idx] = fr.unsigned_32();
-
-		for (uint32_t j = 0; j < nr_entries; ++j)
-			ware_productions_[idx][j] = fr.unsigned_32();
+		if (packet_version < 22) {
+			for (uint32_t j = 0; j < nr_entries; ++j) {
+				ware_productions_[idx][j] = fr.unsigned_32();
+			}
+		} else {
+			parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
+		}
 	}
 
 	// Read consumption statistics
@@ -1377,8 +1408,8 @@ void Player::read_statistics(FileRead& fr) {
 		ware_consumptions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		std::string name = fr.c_string();
-		DescriptionIndex idx = egbase().tribes().ware_index(name);
+		const std::string name = fr.c_string();
+		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u consumption statistics: unknown ware name %s", player_number(),
 			    name.c_str());
@@ -1386,9 +1417,14 @@ void Player::read_statistics(FileRead& fr) {
 		}
 
 		current_consumed_statistics_[idx] = fr.unsigned_32();
-
-		for (uint32_t j = 0; j < nr_entries; ++j)
-			ware_consumptions_[idx][j] = fr.unsigned_32();
+		// TODO(GunChleoc): Get rid of this savegame compatibility code after build 21
+		if (packet_version < 22) {
+			for (uint32_t j = 0; j < nr_entries; ++j) {
+				ware_consumptions_[idx][j] = fr.unsigned_32();
+			}
+		} else {
+			parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
+		}
 	}
 
 	// Read stock statistics
@@ -1399,15 +1435,20 @@ void Player::read_statistics(FileRead& fr) {
 		ware_stocks_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		std::string name = fr.c_string();
-		DescriptionIndex idx = egbase().tribes().ware_index(name);
+		const std::string name = fr.c_string();
+		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());
 			continue;
 		}
 
-		for (uint32_t j = 0; j < nr_entries; ++j)
-			ware_stocks_[idx][j] = fr.unsigned_32();
+		if (packet_version < 22) {
+			for (uint32_t j = 0; j < nr_entries; ++j) {
+				ware_stocks_[idx][j] = fr.unsigned_32();
+			}
+		} else {
+			parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
+		}
 	}
 
 	// All statistics should have the same size
@@ -1430,39 +1471,54 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
 }
 
 /**
- * Write statistics data to the give file
+ * Write statistics data to the given file
  */
 void Player::write_statistics(FileWrite& fw) const {
+	// Save stats as a single string to reduce number of hard disk write operations
+	const auto write_stats = [&fw](
+	   const std::vector<std::vector<uint32_t>>& stats, const DescriptionIndex ware_index) {
+		std::ostringstream oss("");
+		const int sizem = stats[ware_index].size() - 1;
+		if (sizem >= 0) {
+			for (int i = 0; i < sizem; ++i) {
+				oss << stats[ware_index][i] << "|";
+			}
+			oss << stats[ware_index][sizem];
+		}
+		fw.c_string(oss.str());
+	};
+
+	const Tribes& tribes = egbase().tribes();
+	const std::set<DescriptionIndex>& tribe_wares = tribe().wares();
+	const size_t nr_wares = tribe_wares.size();
+
 	// Write produce statistics
-	fw.unsigned_16(current_produced_statistics_.size());
+	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_productions_[0].size());
 
-	for (uint8_t i = 0; i < current_produced_statistics_.size(); ++i) {
-		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
-		fw.unsigned_32(current_produced_statistics_[i]);
-		for (uint32_t j = 0; j < ware_productions_[i].size(); ++j)
-			fw.unsigned_32(ware_productions_[i][j]);
+	for (const DescriptionIndex ware_index : tribe_wares) {
+		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		fw.unsigned_32(current_produced_statistics_[ware_index]);
+		write_stats(ware_productions_, ware_index);
 	}
 
 	// Write consume statistics
-	fw.unsigned_16(current_consumed_statistics_.size());
+	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_consumptions_[0].size());
 
-	for (uint8_t i = 0; i < current_consumed_statistics_.size(); ++i) {
-		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
-		fw.unsigned_32(current_consumed_statistics_[i]);
-		for (uint32_t j = 0; j < ware_consumptions_[i].size(); ++j)
-			fw.unsigned_32(ware_consumptions_[i][j]);
+	for (const DescriptionIndex ware_index : tribe_wares) {
+		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		fw.unsigned_32(current_consumed_statistics_[ware_index]);
+		write_stats(ware_consumptions_, ware_index);
 	}
 
 	// Write stock statistics
-	fw.unsigned_16(ware_stocks_.size());
+	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_stocks_[0].size());
 
-	for (uint8_t i = 0; i < ware_stocks_.size(); ++i) {
-		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
-		for (uint32_t j = 0; j < ware_stocks_[i].size(); ++j)
-			fw.unsigned_32(ware_stocks_[i][j]);
+	for (const DescriptionIndex ware_index : tribe_wares) {
+		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		write_stats(ware_stocks_, ware_index);
 	}
 }
 }

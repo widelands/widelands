@@ -55,7 +55,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_ration",
             "call=produce_meal",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ration = {
@@ -66,7 +66,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs ration",
             "sleep=10000",
             "consume=empire_bread,fish,meat",
-            "play_sound=sound/empire/taverns ration 100",
+            "playsound=sound/empire/taverns ration 100",
             "animate=working 19000",
             "sleep=4000",
             "produce=ration"
@@ -80,7 +80,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs meal",
             "sleep=10000",
             "consume=empire_bread fish,meat",
-            "play_sound=sound/empire/taverns meal 100",
+            "playsound=sound/empire/taverns meal 100",
             "animate=working 25000",
             "sleep=5000",
             "produce=meal"

@@ -68,7 +68,8 @@ return {
              frisians_brewer = 1,
              frisians_builder = 10,
              frisians_charcoal_burner = 1,
-             frisians_brickmaker = 4,
+             frisians_claydigger = 2,
+             frisians_brickmaker,
              frisians_carrier = 40,
              frisians_reed_farmer = 2,
              frisians_berry_farmer = 1,
@@ -109,9 +110,9 @@ return {
 
       place_building_in_region(player, "frisians_brick_kiln", sf:region(11), {
          inputs = {
-            clay = 8,
-            granite = 8,
-            coal = 4
+            clay = 6,
+            granite = 3,
+            coal = 3
          }
       })
 

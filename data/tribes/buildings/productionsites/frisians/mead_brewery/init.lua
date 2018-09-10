@@ -13,24 +13,22 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 2,
       log = 1,
-      thatch_reed = 3
+      thatch_reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 2,
-      granite = 1,
-      log = 1,
-      thatch_reed = 1
+      granite = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 94},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 94},
          fps = 10,
       },
       unoccupied = {
@@ -64,7 +62,7 @@ tribes:new_productionsite_type {
             "call=brew_mead",
             "call=brew_beer",
             "call=brew_mead",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       brew_mead = {

@@ -10,7 +10,7 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-      brick = 2,
+      brick = 1,
       log = 1,
       thatch_reed = 1
    },
@@ -22,17 +22,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {42, 65},
+         hotspot = {49, 87},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {42, 65},
+         hotspot = {49, 65},
       }
    },
 
    aihints = {
-      graniteproducer = true
+      collects_ware_from_map = "granite"
    },
 
    working_positions = {
@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
             "call=mine_stone",
-            "return=skipped"
+            "return=no_stats"
          },
       },
       mine_stone = {
@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
          actions = {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
-            "worker=cut_granite",
+            "callworker=cut_granite",
             "sleep=25000"
          }
       },

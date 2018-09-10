@@ -12,13 +12,12 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 3,
-      granite = 2,
+      granite = 1,
       log = 2,
       thatch_reed = 2
    },
    return_on_dismantle = {
       brick = 2,
-      granite = 1,
       log = 1,
       thatch_reed = 1
    },
@@ -36,7 +35,7 @@ tribes:new_productionsite_type {
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 66},
       },
    },
 

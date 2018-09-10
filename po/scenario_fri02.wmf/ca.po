@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-18 18:10+0000\n"
+"POT-Creation-Date: 2018-07-13 13:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Juanjo, 2018\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -32,8 +32,8 @@ msgid ""
 "kiln, and houses for a woodcutter and a forester."
 msgstr ""
 "Construïu una pedrera, una masoveria de juncs, una fossa de fang, un pou, un"
-" kiln de carbó vegetal, un altre kiln de maons i cases per un llenyataire i "
-"un guarda forestal."
+" kiln de carbó, un altre kiln de maons i cases per un llenyataire i un "
+"guarda forestal."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:35
 msgid "Expand to the south"
@@ -302,10 +302,10 @@ msgid ""
 "couldn’t copy."
 msgstr ""
 "Començarem construint els edificis bàsics. No hi ha muntanyes a prop d'on en"
-" puguem treure carbó. Hauríem de construir un kiln de carbó vegetal per "
-"cremar troncs i obtenir-ne carbó de llenya. Millorarem els kilns amb argila "
-"per evitar consumir massa fusta. Els nostres veïns ens envejaven per aquesta"
-" tècnica que no van ser saber copiar."
+" puguem treure carbó. Hauríem de construir un kiln de carbó per cremar "
+"troncs i obtenir-ne carbó de llenya. Millorarem els kilns amb argila per "
+"evitar consumir massa fusta. Els nostres veïns ens envejaven per aquesta "
+"tècnica que no van ser saber copiar."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:142
 msgid "Go South"
@@ -455,6 +455,9 @@ msgid ""
 "garments to equip new soldiers. Who knows whether we will have to fight "
 "eventually?"
 msgstr ""
+"Tenim una granja de rens? Si no, n'haurem de construir una ara. Necessitem "
+"més rens pels camins més atrafegats i per cosir vestits de pell per equipar "
+"els soldats. Qui sap si haurem de lluitar en algun moment."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:197
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:207
@@ -486,6 +489,10 @@ msgid ""
 "fish in these ponds. He will only need lots of water for the ponds, and "
 "fruit to feed the fish."
 msgstr ""
+"Afortunadament, un dels nostres pescadors ha pensat una solució. Les fosses "
+"d'argila deixen enormes forats al terra; un pescador els podria omplir amb "
+"aigua i fer-hi créixer peixos. Només li caldran molta aigua per als estanys "
+"i fruita per alimentar els peixos."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:208
 msgid "We have fish again"
@@ -498,6 +505,9 @@ msgid ""
 "now. However, the miners tell me that the resources are already low, and the"
 " mines may run completely empty soon."
 msgstr ""
+"Ben fet. Hem construït una granja aqüícola i la producció minera és estable."
+" No obstant, els miners em diuen que continua havent-hi escassedat de "
+"recursos i que les mines poden exhaurir-se aviat."
 
 #. TRANSLATORS: Hauke – Aqua Farms 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:213
@@ -506,6 +516,10 @@ msgid ""
 "times longer – ten times if it is a deep mine – to produce ores or coal. You"
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
+"Les mines encara en produiran, però costarà vint vegades més, deu més si es "
+"tracta d'una mina profunda, aconseguir minerals o carbó. Probablement voleu "
+"preparar-vos per l'increment de la demanda de menjar i del temps que es "
+"necessitarà per obtenir minerals i carbó."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:216
 msgid "Recruiting"
@@ -521,6 +535,9 @@ msgid ""
 "You are right – we should build more berry farms, collector’s houses and "
 "taverns as well as a drinking hall, and advanced bakeries and breweries."
 msgstr ""
+"Teniu raó: hauríem de construir més masoveries de baies, cases de "
+"recol·lectors de fruita, tavernes i una sala de begudes, així com fleques "
+"avançades i cerveseries."
 
 #. TRANSLATORS: Reebaud – Aqua Farms 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:222
@@ -594,6 +611,9 @@ msgid ""
 "Empire, demand to know who you are and what business you have in these "
 "lands!"
 msgstr ""
+"Forasters! Jo, Murilius, procònsol de les terres del nord, província de "
+"l'Imperi, us demano que expliqueu qui sou i quins assumptes teniu en "
+"aquestes terres!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:251
@@ -603,6 +623,9 @@ msgid ""
 "lives in peace. We do not seek trouble, but we aren’t afraid to fight, "
 "either."
 msgstr ""
+"Salutacions, representant de l'Imperi! Sóc en Reebaud, el cabdill d'aquesta "
+"tribu. Només volem assentar-nos i construir la nostra llar aquí per viure en"
+" pau. No busquem problemes, però tampoc tenim por de lluitar."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -612,6 +635,8 @@ msgid ""
 "inhospitable, hostile tribe of barbarians in the vicinity of this very "
 "outpost of the Empire."
 msgstr ""
+"En aquest cas, Reebaud, us he d'informar de la presència d'una tribu hostil "
+"de bàrbars prop d'aquest post avançat de l'Imperi."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:260
@@ -620,6 +645,8 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
+"Si voleu viure pacíficament en aquestes terres, no teniu altra opció que "
+"assistir a l'Imperi i expulsar-los d'aquestes terres."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:266
@@ -629,6 +656,10 @@ msgid ""
 "warehouse. Fill it with the required gifts to hand them over. I permit you "
 "to give us these wares:"
 msgstr ""
+"A més a més, com a senyal de les vostres bones intencions, demanem un tribut"
+" a l'Imperi. Com ja haureu comprovat, us he proporcionat un magatzem. "
+"Ompliu-lo amb els presents que heu d'entregar. Heu d'entregar-nos aquests "
+"béns:"
 
 #. TRANSLATORS: Murilius – Supply Murilius 6. A list of wares.
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:269
@@ -637,6 +668,9 @@ msgid ""
 "water, 40 rations, 10 meals, 30 lumps of coal, 40 lumps of iron ore, 20 iron"
 " ingots, 20 lumps of gold ore, and 10 gold bars."
 msgstr ""
+"30 troncs, 40 blocs de granit, 30 peixos, 30 gerres de cervesa, 150 poals "
+"d'aigua, 40 racions, 10 àpats, 30 unitats de carbó, 20 lingots de ferro, 20 "
+"unitats de mineral d'or i 10 lingots d'or."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:275
@@ -646,6 +680,10 @@ msgid ""
 "afford to spare that many wares to aid him. I propose that we destroy that "
 "ugly warehouse and let him fight his own battles."
 msgstr ""
+"Cabdill Reebaud – les exigències d'aquest arrogant procònsol de l'Imperi són"
+" indignants. Ens tracta com si fóssim els seus servents. I no ens podem "
+"permetre entregar-l'hi tants béns per ajudar-lo. Proposo que destruïm el "
+"magatzem i el deixem lluitar les seves batalles tot sol."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:281
@@ -655,6 +693,10 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Si no podeu entregar aquests béns, l'Imperi us tractarà com a enemics. I per"
+" evitar que malgasteu el valuós metall, us prohibeixo expandir el territori "
+"des d'ara fins que ens feu arribar el que se us ha demanat. Incompliu "
+"l'ordre i l'Imperi us tractarà com a enemics."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:284
@@ -665,6 +707,10 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Haureu de lluitar amb els bàrbars si preteneu viure aquí; ben segur heu vist"
+" que lluitar contra ells al costat de l'Imperi serà més fàcil que fer-ho "
+"sols. I tampoc voleu l'Imperi com a enemic. Veureu que les meves paraules "
+"són ben certes un cop hi hàgiu pensat una mica."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:291
@@ -673,6 +719,9 @@ msgid ""
 "our territory when all we want is to build a new home, and threaten us with "
 "war if we refuse to be his slaves?"
 msgstr ""
+"És l'atrocitat més gran de totes. Com s'atreveix a ordenar-nos que no "
+"expandim el nostre territori quan l'únic que volem és viure en una nova "
+"llar, i ens amenaça amb la guerra si ens neguem a ser els seus esclaus?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:294
@@ -683,6 +732,12 @@ msgid ""
 "would buy us some time. As for expansion – I wonder how strictly he can "
 "possibly control us…"
 msgstr ""
+"M'agradaria dir que l'ataquéssim ara mateix, però em temo que no som prou "
+"forts per mantenir les nostres posicions en una batalla contra ell. Haurem "
+"de donar-nos pressa en l'entrenament dels soldats mentre fingim estar "
+"preparant els béns que vol que li entreguem. Així tindrem una mica de temps."
+" I pel que fa a l'expansió del territori, no sé fins quin punt és capaç de "
+"controlar-nos…"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:298
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:308
@@ -736,6 +791,8 @@ msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
+"En Murilius ha deixat clar que no ens deixarà sol. Temo que haguéssim de "
+"derrotar-lo i destruir la seva colònia si volem una mica de pau."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:323
@@ -744,6 +801,9 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the barbarians as well."
 msgstr ""
+"El clan bàrbar que ha mencionat també és una amenaça. No vull compartir "
+"aquestes terres amb ningú: compartir només condueix a conflictes i batalles,"
+" com ja vam veure fa uns anys. Cal que també derrotem els bàrbars."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:327
 msgid "The Empire is Grateful"
@@ -762,6 +822,8 @@ msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
 msgstr ""
+"Forasters! Veig que heu mantingut la vostra paraula. L'Imperi recompensa els"
+" seus amics. Així que us recompensaré amb l'amistat de l'Imperi!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
@@ -773,6 +835,10 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Ara permeteu que us ajudi en la conquesta dels bàrbars, que han viscut "
+"resguardats en una vall al nord-oest. Heu d'expandir-vos fins a la fi de les"
+" muntanyes del nord que voregen aquest post avançat; allí hi trobareu els "
+"bàrbars… ataqueu-los! Nosaltres contrarestarem els atacs enemics."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:338
 msgid "The Reward For Your Service"
@@ -802,6 +868,10 @@ msgid ""
 " the Capital will demand from you, and of course, who shall be king of your "
 "tribe."
 msgstr ""
+"Proposo que un enviat vagi a la capital, per saber les novetats polítiques. "
+"Allí rebreu instruccions pel vostre clan del senat. També haureu d'esbrinar "
+"quins tributs demana la capital, i com no, qui ha de ser nomenat rei del "
+"vostre clan."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:348
 msgid "Another Enemy"
@@ -819,6 +889,10 @@ msgid ""
 "be servants of this Empire, and take away my leadership? And does the "
 "hypocrite dare call this a reward?"
 msgstr ""
+"L'he entès bé? Després de tot el que hem fet per ell, de tots els soldats "
+"que han donat les seves vides, vol que siguem servents de l'Imperi i que "
+"renunciï al meu lideratge? I l'hipòcrita s'atreveix a dir-ne d'això una "
+"recompensa?"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:354
@@ -827,6 +901,9 @@ msgid ""
 "burn down his entire colony, and kill every single person in his realm. He "
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
+"Castigarem aquest autoproclamat procònsol per la seva traïció! Cremaré la "
+"colònia sencera i mataré totes les persones del regne. Lamentarà haver "
+"insultat el nostre clan!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:358
 msgid "Victory"

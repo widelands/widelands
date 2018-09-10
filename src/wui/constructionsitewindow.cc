@@ -29,18 +29,19 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
                                                UI::UniqueWindow::Registry& reg,
                                                Widelands::ConstructionSite& cs,
-                                               bool avoid_fastclick)
+                                               bool avoid_fastclick,
+                                               bool workarea_preview_wanted)
    : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
      construction_site_(&cs),
      progress_(nullptr) {
-	init(avoid_fastclick);
+	init(avoid_fastclick, workarea_preview_wanted);
 }
 
-void ConstructionSiteWindow::init(bool avoid_fastclick) {
+void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
 	assert(construction_site != nullptr);
 
-	BuildingWindow::init(avoid_fastclick);
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
@@ -54,7 +55,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick) {
 	// Add the wares queue
 	for (uint32_t i = 0; i < construction_site->get_nrwaresqueues(); ++i)
 		box.add(new InputQueueDisplay(
-		   &box, 0, 0, *igbase(), *construction_site, construction_site->get_waresqueue(i)));
+		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_waresqueue(i)));
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 

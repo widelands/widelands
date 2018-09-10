@@ -333,19 +333,24 @@ int LuaEditorGameBase::get_terrain_description(lua_State* L) {
    Each value in the table (including all subtables) is uniquely identified by a key_key.
    The key_key is used as key in all the map.
    For the topmost table of size x, the key_keys are called '_0' through '_x-1'.
-   For a subtable of size z at key_key '_y', the subtable's key_keys are called '_y_0' through '_y_z-1'.
+   For a subtable of size z at key_key '_y', the subtable's key_keys are called '_y_0' through
+   '_y_z-1'.
    If a table is an array, the map 'keys' will contain no mappings for the array's key_keys.
 */
-static void save_table_recursively(lua_State* L, std::string depth, std::map<std::string, const char*> *data,
-std::map<std::string, const char*> *keys, std::map<std::string, const char*> *type, std::map<std::string, uint32_t> *size) {
+static void save_table_recursively(lua_State* L,
+                                   const std::string& depth,
+                                   std::map<std::string, const char*>* data,
+                                   std::map<std::string, const char*>* keys,
+                                   std::map<std::string, const char*>* type,
+                                   std::map<std::string, uint32_t>* size) {
 	lua_pushnil(L);
 	uint32_t i = 0;
 	while (lua_next(L, -2) != 0) {
-		std::string key_key = depth + "_" + std::to_string(i);
+		const std::string key_key = depth + "_" + std::to_string(i);
 
 		// check the value's type
 		const char* type_name = lua_typename(L, lua_type(L, -1));
-		std::string t = std::string(type_name);
+		const std::string t = std::string(type_name);
 
 		(*type)[key_key] = type_name;
 
@@ -357,7 +362,9 @@ std::map<std::string, const char*> *keys, std::map<std::string, const char*> *ty
 		} else if (t == "table") {
 			save_table_recursively(L, depth + "_" + std::to_string(i), data, keys, type, size);
 		} else {
-			report_error(L, "A campaign data value may be a string, integer, boolean, or table; but not a %s!", type_name);
+			report_error(
+			   L, "A campaign data value may be a string, integer, boolean, or table; but not a %s!",
+			   type_name);
 		}
 
 		++i;
@@ -377,7 +384,7 @@ std::map<std::string, const char*> *keys, std::map<std::string, const char*> *ty
 			// otherwise, this is a normal array, so all is well
 		} else {
 			report_error(L, "A campaign data key may be a string or integer; but not a %s!",
-					lua_typename(L, lua_type(L, -1)));
+			             lua_typename(L, lua_type(L, -1)));
 		}
 	}
 	(*size)[depth] = i;
@@ -407,7 +414,8 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 	boost::trim(dir);
 	g_fs->ensure_directory_exists(dir);
 
-	std::string complete_filename = dir + g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	std::string complete_filename =
+	   dir + g_fs->file_separator() + scenario_name + kCampaignDataExtension;
 	boost::trim(complete_filename);
 
 	std::map<std::string, const char*> data;
@@ -419,19 +427,19 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 
 	Profile profile;
 	Section& data_section = profile.create_section("data");
-	for (const auto &p : data) {
+	for (const auto& p : data) {
 		data_section.set_string(p.first.c_str(), p.second);
 	}
 	Section& keys_section = profile.create_section("keys");
-	for (const auto &p : keys) {
+	for (const auto& p : keys) {
 		keys_section.set_string(p.first.c_str(), p.second);
 	}
 	Section& type_section = profile.create_section("type");
-	for (const auto &p : type) {
+	for (const auto& p : type) {
 		type_section.set_string(p.first.c_str(), p.second);
 	}
 	Section& size_section = profile.create_section("size");
-	for (const auto &p : size) {
+	for (const auto& p : size) {
 		size_section.set_natural(p.first.c_str(), p.second);
 	}
 
@@ -445,29 +453,29 @@ int LuaEditorGameBase::save_campaign_data(lua_State* L) {
    This function reads the campaign data file and re-creates the table the data was created from.
    This function is recursive so subtables to any depth can be created.
    For information on section structure and key_keys, see the comment for save_table_recursively().
-   This function first newly creates the table to write data to, and the number of items in the table is read.
-   For each item, the unique key_key is created. If the 'keys' section doesn't contain an entry for that key_key,
+   This function first newly creates the table to write data to, and the number of items in the
+   table is read.
+   For each item, the unique key_key is created. If the 'keys' section doesn't contain an entry for
+   that key_key,
    it must be because this table is supposed to be an array. Then the data type is checked
    and the key-value pair is written to the table as the correct type.
 */
-static void push_table_recursively(lua_State* L, std::string depth, Section* data_section, Section* keys_section,
-Section* type_section, Section* size_section) {
+static void push_table_recursively(lua_State* L,
+                                   const std::string& depth,
+                                   Section* data_section,
+                                   Section* keys_section,
+                                   Section* type_section,
+                                   Section* size_section) {
 	const uint32_t size = size_section->get_natural(depth.c_str());
 	lua_newtable(L);
 	for (uint32_t i = 0; i < size; i++) {
-		std::string key_key_str(depth + '_' + std::to_string(i));
+		const std::string key_key_str(depth + '_' + std::to_string(i));
 		const char* key_key = key_key_str.c_str();
-
-		log("Checking whether a key for '%s' (data type is %s) exists ... ",
-				key_key, type_section->get_string(key_key)); // NOCOM remove this log
 		if (keys_section->has_val(key_key)) {
-			// this is a table
-			log("YES, the key is called '%s'.\n", keys_section->get_string(key_key)); // NOCOM remove this log
+			// This is a table
 			lua_pushstring(L, keys_section->get_string(key_key));
-		}
-		else {
-			// this must be an array
-			log("NO, [%i] will be used as key.\n", i + 1); // NOCOM remove this log
+		} else {
+			// This must be an array
 			lua_pushinteger(L, i + 1);
 		}
 
@@ -482,12 +490,12 @@ Section* type_section, Section* size_section) {
 			lua_pushstring(L, data_section->get_string(key_key));
 		} else if (type == "table") {
 			// creates a new (sub-)table at the stacktop, populated with its own key-value-pairs
-			push_table_recursively(L, depth + "_" + std::to_string(i),
-					data_section, keys_section, type_section, size_section);
+			push_table_recursively(L, depth + "_" + std::to_string(i), data_section, keys_section,
+			                       type_section, size_section);
 		} else {
 			// this code should not be reached unless the user manually edited the .wcd file
-			log("Illegal data type %s in campaign data file, setting key %s to nil\n",
-					type.c_str(), luaL_checkstring(L, -1));
+			log("Illegal data type %s in campaign data file, setting key %s to nil\n", type.c_str(),
+			    luaL_checkstring(L, -1));
 			lua_pushnil(L);
 		}
 		lua_settable(L, -3);
@@ -511,7 +519,7 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	const std::string scenario_name = luaL_checkstring(L, 3);
 
 	std::string complete_filename = kCampaignDataDir + g_fs->file_separator() + campaign_name +
-			g_fs->file_separator() + scenario_name + kCampaignDataExtension;
+	                                g_fs->file_separator() + scenario_name + kCampaignDataExtension;
 	boost::trim(complete_filename);
 
 	Profile profile;
@@ -520,11 +528,11 @@ int LuaEditorGameBase::read_campaign_data(lua_State* L) {
 	Section* keys_section = profile.get_section("keys");
 	Section* type_section = profile.get_section("type");
 	Section* size_section = profile.get_section("size");
-	if (data_section == nullptr || keys_section == nullptr || type_section == nullptr || size_section == nullptr) {
+	if (data_section == nullptr || keys_section == nullptr || type_section == nullptr ||
+	    size_section == nullptr) {
 		log("Unable to read campaign data file, returning nil\n");
 		lua_pushnil(L);
-	}
-	else {
+	} else {
 		push_table_recursively(L, "", data_section, keys_section, type_section, size_section);
 	}
 
@@ -867,8 +875,8 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 	const DescriptionIndex worker = player.tribe().worker_index(workername);
 
 	uint32_t nworkers = 0;
-	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		nworkers += player.get_economy_by_number(i)->stock_worker(worker);
+	for (const auto& economy : player.economies()) {
+		nworkers += economy.second->stock_worker(worker);
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
@@ -893,8 +901,8 @@ int LuaPlayerBase::get_wares(lua_State* L) {
 	const DescriptionIndex ware = egbase.tribes().ware_index(warename);
 
 	uint32_t nwares = 0;
-	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		nwares += player.get_economy_by_number(i)->stock_ware(ware);
+	for (const auto& economy : player.economies()) {
+		nwares += economy.second->stock_ware(ware);
 	}
 	lua_pushuint32(L, nwares);
 	return 1;

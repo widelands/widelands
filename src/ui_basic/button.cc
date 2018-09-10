@@ -19,7 +19,7 @@
 
 #include "ui_basic/button.h"
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
@@ -58,8 +58,7 @@ Button::Button  //  Common constructor
      time_nextact_(0),
      title_(title_text),
      title_image_(title_image),
-     background_style_(g_gr->styles().button_style(init_style)),
-     clr_down_(229, 161, 2) {
+     background_style_(g_gr->styles().button_style(init_style)) {
 	set_thinks(false);
 	set_can_focus(true);
 }
@@ -364,6 +363,10 @@ void Button::set_disable_style(UI::ButtonDisableStyle input_style) {
 void Button::set_perm_pressed(bool pressed) {
 	set_visual_state(pressed ? UI::Button::VisualState::kPermpressed :
 	                           UI::Button::VisualState::kRaised);
+}
+
+void Button::set_background_style(UI::ButtonStyle bstyle) {
+	background_style_ = g_gr->styles().button_style(bstyle);
 }
 
 void Button::toggle() {

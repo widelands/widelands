@@ -76,7 +76,7 @@ tribes:new_productionsite_type {
             "call=produce_saw",
             "call=produce_scythe",
             "call=produce_shovel",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_bread_paddle = {
@@ -87,7 +87,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=bread_paddle"
          }
@@ -100,7 +100,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=buckets"
          }
@@ -113,7 +113,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=fire_tongs"
          }
@@ -126,7 +126,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=spidercloth:2",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=fishing_net"
          }
@@ -139,7 +139,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=hammer"
          }
@@ -152,7 +152,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=hook_pole"
          }
@@ -165,7 +165,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=log spidercloth",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=hunting_bow"
          }
@@ -178,7 +178,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=milking_tongs"
          }
@@ -191,7 +191,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=pick"
          }
@@ -204,7 +204,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=saw"
          }
@@ -217,7 +217,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=scythe"
          }
@@ -230,7 +230,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=iron log",
             "sleep=27000",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=shovel"
          }

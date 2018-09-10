@@ -13,28 +13,27 @@ tribes:new_productionsite_type {
       brick = 1,
       granite = 2,
       log = 2,
-      thatch_reed = 2
+      thatch_reed = 1
    },
    return_on_dismantle_on_enhanced = {
       granite = 1,
-      log = 1,
-      thatch_reed = 1
+      log = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 90},
+         hotspot = {56, 94},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 90},
+         hotspot = {56, 94},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 83},
       },
    },
 
@@ -64,7 +63,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=weave_studded",
             "call=weave_gold",
-            "return=skipped",
+            "return=no_stats",
          },
       },
       weave_studded = {

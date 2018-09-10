@@ -169,9 +169,9 @@ public:
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
+	const EditorGameBase& egbase_;
 
 private:
-	const EditorGameBase& egbase_;
 	bool buildable_;     // the player can build this himself
 	bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;
@@ -282,7 +282,7 @@ public:
 		return old_buildings_;
 	}
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {

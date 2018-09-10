@@ -81,9 +81,7 @@ public:
 		return sdl_window_;
 	}
 
-	int max_texture_size() const {
-		return max_texture_size_;
-	}
+	int max_texture_size_for_font_rendering() const;
 
 	ImageCache& images() const {
 		return *image_cache_.get();

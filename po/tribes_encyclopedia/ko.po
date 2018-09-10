@@ -3,15 +3,17 @@
 # 
 # Translators:
 # GunChleoc, 2018
+# GunChleoc, 2018
+# ks k, 2017
 # ks k, 2017
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
-"PO-Revision-Date: 2018-05-07 10:19+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-21 14:51+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +95,7 @@ msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
 " resources that were used during this building’s construction to your "
 "tribe’s stores."
-msgstr ""
+msgstr "해당 해체 현장에서 건물이 해체되고 있으며, 이전 당신 부족의 창고에서 나와 건물 건설에 사용되었던 자원의 일부를 되돌려 받을 예정입니다."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -548,7 +550,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
 "material that feeds their furnaces."
-msgstr ""
+msgstr "옛날 옛적에, 야만인들은 난로에 땔 검은 물질을 위해 산비탈을 뒤지는 법을 배웠습니다."
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:6
@@ -558,7 +560,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
-msgstr ""
+msgstr "목재도 가정집 불에 사용되어 당신을 따뜻하게 할 수 있지만, 철과 금을 가지고 작업할 때는 석탄 이외에 방법이 없습니다."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:22
@@ -685,7 +687,7 @@ msgstr "'부드럽고 탄력이 있지.<br> 그리고 세월과 날씨에도 영
 msgctxt "barbarians_building"
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
-msgstr "야만인 전통 노래,<br> '지하의 우리 보물들' 로부터 인용."
+msgstr "야만인 전통 노래,<br> ‘지하의 우리 보물들’ 로부터 인용."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:18
@@ -745,7 +747,7 @@ msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
 "loner – gave, when he was asked to remain seated on an emergency meeting at "
 "Stonford in the year of the great flood."
-msgstr ""
+msgstr "???이 문구는 광부 림버트 - 후에 외톨이 림버트로 알려진 - 가, 대홍수가 났던 해에 스톤포드의 긴급 회의에서 계속 자리에 남아있을 건지 물어봤을때의 대답에서 나왔다."
 
 #. TRANSLATORS: Lore author helptext for a granite mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:12
@@ -753,7 +755,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The same man had all the 244 granite blocks ready only a week later, and "
 "they still fortify the city’s levee."
-msgstr ""
+msgstr "이 남자는 딱 일주일 뒤에 244개의 화강암 블럭을 준비했고, 그들은 도시의 제방을 더 튼튼하게 보수했다."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:18
@@ -1155,7 +1157,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "찻'카루스의 치세 21년째의 대가뭄 뒤 첫 비가 내렸을 때 음유시인 시구르드가 쓴 노래"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
@@ -1656,7 +1658,7 @@ msgstr ""
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
-msgid "A brickmaker arguing with a builder"
+msgid "A clay digger arguing with a builder"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2536,7 +2538,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
-"explained to you how to hold a curved sword."
+"explained to you how to hold a broadsword."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2731,10 +2733,6 @@ msgstr ""
 msgid "This reed has just been planted."
 msgstr ""
 
-#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
-#. script probably want to lose the blank space here.
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
 #: ../../data/tribes/immovables/resi_coal1/helptexts.lua:3
@@ -3922,6 +3920,8 @@ msgid ""
 "inns to prepare meals."
 msgstr "오직 이 맥주만이 전투 경기장의 군인들에게 허용됩니다. 누군가는 야만인의 모든 힘이 이 맥주에서 비롯된다고 말합니다. 군인의 회피 레벨을 0에서 1 그리고 2로 훈련하는데 도움이 됩니다. 고도 맥주는 또한 큰 여관에서 식사를 준비하는데 사용됩니다."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -4352,7 +4352,7 @@ msgid ""
 "Gold ore is mined in a gold mine. Smelted in a smelting works, it turns into"
 " gold which is used as a precious building material and to produce weapons "
 "and armor."
-msgstr ""
+msgstr "금광석은 금광에서 채굴합니다. 제련소에서 제련되면, 금으로 변해 귀중한 건설 재료와 무기와 갑옷 생산에 사용됩니다."
 
 #. TRANSLATORS: Helptext for a ware: Gold Thread
 #: ../../data/tribes/wares/gold_thread/helptexts.lua:4
@@ -4978,7 +4978,7 @@ msgstr "그러므로 숲 관리인과 포도 농부가 그것들을 사용합니
 #: ../../data/tribes/wares/shovel/helptexts.lua:12
 msgctxt "frisians_ware"
 msgid ""
-"They are used by berry and reed farmers as well as foresters. Brickmakers "
+"They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
 msgstr ""
 
@@ -5085,12 +5085,12 @@ msgid ""
 "spidercloth for their construction."
 msgstr "거미천은 직조 공장에서 거미실을 이용해 만듭니다. 도구 제작소와 조선소에서 사용합니다. 또한 몇몇 더욱 발달된 건물 건설에 거미천이 필요합니다."
 
-#. TRANSLATORS: Helptext for a ware: Curved Sword
-#: ../../data/tribes/wares/sword_curved/helptexts.lua:4
+#. TRANSLATORS: Helptext for a ware: Broadsword
+#: ../../data/tribes/wares/sword_broad/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"The curved sword is the weapon used by level 2 soldiers. Level 5 soldiers "
-"are equipped with two curved swords."
+"The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
+"equipped with a broadsword and a double-edged sword."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
@@ -5106,7 +5106,7 @@ msgstr ""
 msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
-"equipped with two long swords."
+"equipped with a long and a double-edged sword."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Short sword
@@ -5460,10 +5460,10 @@ msgstr "나무를 벱니다."
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "광부, 군인, 정찰병들을 위해 피타 빵을 굽습니다."
 
-#. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
+#. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #: ../../data/tribes/workers/barbarians/blacksmith/helptexts.lua:3
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
@@ -5896,7 +5896,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a worker: Brickmaker
 #: ../../data/tribes/workers/frisians/brickmaker/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Makes clay out of mud and water or bricks out of clay and granite."
+msgid "Burns bricks out of clay and granite."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Builder
@@ -5915,6 +5915,12 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/charcoal_burner/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a worker: Clay Digger
+#: ../../data/tribes/workers/frisians/claydigger/helptexts.lua:3
+msgctxt "frisians_worker"
+msgid "Makes clay out of mud and water."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Farmer

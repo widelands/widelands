@@ -7,7 +7,6 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
-   enhancement = "empire_foresters_house2",
 
    buildcost = {
       log = 1,
@@ -39,7 +38,7 @@ tribes:new_productionsite_type {
          descname = "planting trees",
          actions = {
             "sleep=66000",
-            "worker=plant"
+            "callworker=plant"
          }
       },
    },

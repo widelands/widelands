@@ -11,31 +11,35 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 3,
-      granite = 2,
+      granite = 1,
       log = 2,
-      thatch_reed = 4
+      thatch_reed = 3
    },
    return_on_dismantle = {
       brick = 2,
       granite = 1,
       log = 1,
-      thatch_reed = 2
+      thatch_reed = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {105, 132},
+         hotspot = {105, 138},
          fps = 10,
       },
       working = {
-         pictures = path.list_files (dirname .. "working_???.png"),
-         hotspot = {105, 132},
-         fps = 15,
+         pictures = path.list_files (dirname .. "working_??.png"),
+         hotspot = {105, 138},
+         fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {105, 108},
+         hotspot = {105, 111},
+      },
+      build = {
+         pictures = path.list_files (dirname .. "build_?.png"),
+         hotspot = {105, 111},
       },
    },
 
@@ -60,24 +64,24 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_barley",
             "call=harvest_barley",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       plant_barley = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
          descname = _"planting barley",
          actions = {
-            "sleep=70000",
-            "worker=plant"
+            "sleep=18000",
+            "callworker=plant"
          }
       },
       harvest_barley = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
          descname = _"harvesting barley",
          actions = {
-            "sleep=20000",
-            "worker=harvest",
-            "animate=working 148500",
+            "sleep=8000",
+            "callworker=harvest",
+            "animate=working 40000",
             "produce=barley" --produces 2 barley per field
          }
       },

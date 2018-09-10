@@ -10,26 +10,25 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-      brick = 3,
-      granite = 1,
+      brick = 2,
+      --granite = 1,
       log = 1,
       thatch_reed = 1
    },
    return_on_dismantle = {
       brick = 1,
-      granite = 1,
       log = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 89},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 66},
       },
    },
 
@@ -55,7 +54,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_reed",
             "call=harvest_reed",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       plant_reed = {
@@ -63,7 +62,7 @@ tribes:new_productionsite_type {
          descname = _"planting reed",
          actions = {
             "sleep=18000",
-            "worker=plantreed"
+            "callworker=plantreed"
          }
       },
       harvest_reed = {
@@ -71,7 +70,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting reed",
          actions = {
             "sleep=5000",
-            "worker=harvestreed"
+            "callworker=harvestreed"
          }
       },
    },

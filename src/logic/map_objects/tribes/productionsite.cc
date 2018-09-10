@@ -206,6 +206,21 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
+
+	// Verify that any map resource collected is valid
+	if (!hints().collects_ware_from_map().empty()) {
+		if (!(egbase_.tribes().ware_exists(hints().collects_ware_from_map()))) {
+			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
+		}
+		const DescriptionIndex collects_index =
+		   egbase_.tribes().safe_ware_index(hints().collects_ware_from_map());
+		if (!is_output_ware_type(collects_index)) {
+			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
+			                    "listed in the building's output",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
+		}
+	}
 }
 
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
@@ -724,7 +739,7 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 	return true;
 }
 
-void ProductionSite::log_general_info(const EditorGameBase& egbase) {
+void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	molog("is_stopped: %u\n", is_stopped_);
@@ -926,6 +941,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
 	case None:
+		skipped_programs_.erase(program_name);
 		break;
 	}
 

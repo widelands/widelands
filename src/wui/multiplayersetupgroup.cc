@@ -502,6 +502,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		const PlayerSettings& player_setting = settings.players[id_];
 		if (settings.scenario) {
 			init_dropdown_.set_label(_("Scenario"));
+			init_dropdown_.set_tooltip(_("Start type is set via the scenario"));
 		} else if (settings.savegame) {
 			/** Translators: This is a game type */
 			init_dropdown_.set_label(_("Saved Game"));
@@ -627,16 +628,16 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
      settings_(settings),
      npsb(new NetworkPlayerSettingsBackend(settings_)),
      clientbox(this, 0, 0, UI::Box::Vertical),
-     playerbox(this, 0, 0, UI::Box::Vertical, w * 9 / 15, h, kPadding),
+     playerbox(this, 0, 0, UI::Box::Vertical, w * 36 / 53, h, kPadding),
      buth_(buth) {
-	clientbox.set_size(w / 3, h);
+	clientbox.set_size(w * 16 / 53, h);
 	clientbox.set_scrolling(true);
 
 	add(&clientbox, UI::Box::Resizing::kExpandBoth);
 	add(&playerbox);
 
 	// Playerbox
-	playerbox.set_size(w * 9 / 15, h);
+	playerbox.set_size(w * 36 / 53, h);
 	playerbox.add_space(0);
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {

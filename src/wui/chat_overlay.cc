@@ -24,7 +24,7 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "chat/chat.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/rt_errors.h"
 #include "profile/profile.h"
@@ -169,11 +169,11 @@ void ChatOverlay::draw(RenderTarget& dst) {
 
 	std::shared_ptr<const UI::RenderedText> im(nullptr);
 	try {
-		im = UI::g_fh1->render(m->all_text_, get_w());
+		im = UI::g_fh->render(m->all_text_, get_w());
 	} catch (RT::WidthTooSmall&) {
 		// Oops, maybe one long word? We render again, not limiting the width, but
 		// render everything in one single line.
-		im = UI::g_fh1->render(m->all_text_);
+		im = UI::g_fh->render(m->all_text_);
 	}
 	assert(im != nullptr);
 

@@ -22,7 +22,7 @@
 #include <boost/bind.hpp>
 
 #include "base/utf8.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -97,7 +97,10 @@ MultilineEditbox::Data::Data(MultilineEditbox& o, const UI::PanelStyleInfo* styl
      background_style(style),
      cursor_pos(0),
      lineheight(text_height()),
-     maxbytes(std::min(g_gr->max_texture_size() / UI_FONT_SIZE_SMALL, 0xffff)),
+     maxbytes(std::min(g_gr->max_texture_size_for_font_rendering() *
+                          g_gr->max_texture_size_for_font_rendering() /
+                          (text_height() * text_height()),
+                       std::numeric_limits<int32_t>::max())),
      ww_valid(false),
      owner(o) {
 	scrollbar.moved.connect(boost::bind(&MultilineEditbox::scrollpos_changed, &o, _1));
@@ -133,8 +136,7 @@ void MultilineEditbox::set_text(const std::string& text) {
 		d_->erase_bytes(d_->prev_char(d_->text.size()), d_->text.size());
 	}
 
-	d_->set_cursor_pos(d_->text.size());
-
+	d_->set_cursor_pos(0);
 	d_->update();
 	d_->scroll_cursor_into_view();
 
@@ -169,7 +171,7 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor) {
 
 	do {
 		--cursor;
-		// TODO(GunChleoc): When switchover to g_fh1 is complete, see if we can go full ICU here.
+		// TODO(GunChleoc): See if we can go full ICU here.
 	} while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;

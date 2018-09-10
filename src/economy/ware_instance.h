@@ -93,7 +93,7 @@ public:
 		return transfer_;
 	}
 
-	void log_general_info(const EditorGameBase& egbase) override;
+	void log_general_info(const EditorGameBase& egbase) const override;
 
 private:
 	ObjectPointer location_;

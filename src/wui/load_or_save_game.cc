@@ -30,7 +30,7 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
@@ -120,10 +120,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		   _("Mode"), (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str());
 	}
 	table_.add_column(0, _("Description"),
-	                  filetype_ == FileType::kReplay ?
-	                     _("Map name (start of replay)") :
-	                     _("The filename that the game was saved under followed by the map’s name, "
-	                       "or the map’s name followed by the last objective achieved."),
+	                  _("The filename that the game was saved under followed by the map’s name, "
+	                    "or the map’s name followed by the last objective achieved."),
 	                  UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
@@ -299,7 +297,7 @@ UI::Button* LoadOrSaveGame::delete_button() {
 	return delete_;
 }
 
-void LoadOrSaveGame::fill_table() {
+void LoadOrSaveGame::fill_table(bool show_filenames) {
 
 	clear_selections();
 	table_.clear();
@@ -310,6 +308,9 @@ void LoadOrSaveGame::fill_table() {
 		gamefiles = filter(g_fs->list_directory(kReplayDir), [](const std::string& fn) {
 			return boost::ends_with(fn, kReplayExtension);
 		});
+		// Update description column title for replays
+		table_.set_column_tooltip(2, show_filenames ? _("Filename: Map name (start of replay)") :
+		                                              _("Map name (start of replay)"));
 	} else {
 		gamefiles = g_fs->list_directory(kSaveDir);
 	}
@@ -317,7 +318,7 @@ void LoadOrSaveGame::fill_table() {
 	Widelands::GamePreloadPacket gpdp;
 
 	for (const std::string& gamefilename : gamefiles) {
-		if (gamefilename == g_fs->fix_cross_file("save/campvis")) {
+		if (gamefilename == kCampVisFile || gamefilename == g_fs->fix_cross_file(kCampVisFile)) {
 			continue;
 		}
 
@@ -460,8 +461,12 @@ void LoadOrSaveGame::fill_table() {
 				}
 				te.set_string(1, gametypestring);
 				if (filetype_ == FileType::kReplay) {
+					const std::string map_basename =
+					   show_filenames ?
+					      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
+					      gamedata.mapname;
 					te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) %
-					                  gamedata.mapname % gamedata.gametime)
+					                  map_basename % gamedata.gametime)
 					                    .str());
 				} else {
 					te.set_string(

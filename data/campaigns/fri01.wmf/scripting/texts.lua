@@ -114,7 +114,8 @@ obj_escape = {
    title=_"Escape from the floods",
    number = 1,
    body = objective_text(_"Flee from the Floods",
-      li(_[[Build a port, a weaving mill and a shipyard, then start an expedition to flee before the storm flood drowns the island.]])
+      li(_[[Build a port, a weaving mill and a shipyard, then start an expedition to flee before the storm flood drowns the island.]]) ..
+      li_arrow(_[[You can build the port either on the easternmost tip of the island or in the place where the enemy’s headquarters stood.]])
    ),
 }
 
@@ -163,7 +164,7 @@ intro_4 = {
       _([[Our wood and reed supplies are ensured. Now, we must take care of our brick supply. Bricks are burned in a brick kiln out of granite and clay, so we first need to produce those. On the mainland, we used to cut granite out of rocks, but I don’t see any here. Perhaps these hills contain enough stones to mine some granite.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 4
-      _([[Clay is easy to make: A brickmaker working at a clay pit will simply dig up some earth and mix it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
+      _([[Clay is easy to make: A clay digger working at a clay pit will simply dig up some earth and mix it with water. Just make sure that he has plenty of space for digging around his clay pit. It might be a good idea to build some sentinels to expand.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 4
       _([[To burn bricks, the brick kiln needs a fire. We need to use coal as fuel. Build a coal mine to make sure we don’t run out. No coal means no bricks, no bricks means no mines, no mines mean no coal… you can see the problem.]])
@@ -321,7 +322,7 @@ training_2 = {
       _([[Soldiers are trained in two steps in defense and health. They get fur garments studded with iron and also gold to cushion blows; and helmets forged from iron, and gold as well, to lengthen their life in battle.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 2
-      _([[They learn to attack with three different swords: The long, curved and double-edged sword. The latter two contain gold, and all of them iron. The advanced soldiers are taught to use two matching swords at once. This makes six steps of attack training.]])
+      _([[They learn to attack with three different swords: The long sword, broadsword and double-edged sword. The latter two contain gold, and all of them iron. The advanced soldiers are taught to use two swords at once: They keep their first double-edged sword, and are given various other swords to wield in their other hand. This makes six steps of attack training.]])
        .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – train soldiers 2
       _([[We do not train soldiers to evade attacks; a true warrior can block his opponent’s blows with a skillful twist of the sword instead of jumping away like a coward.]])),
@@ -398,7 +399,7 @@ rising_water_4 = {
    title =_ "Storm Flood",
    body=hauke(_"The island is flooding!",
       -- TRANSLATORS: Hauke – rising water
-      _([[Despair not, I did espy some hope! The easternmost tip of the island seems well suited to build a port on. If we manage to construct a ship, and fill it with all we need to build a new settlement, we may be able to escape.]])
+      _([[Despair not, I did espy some hope! The easternmost tip of the island, as well as the space where the fiends’ headquarters stood, seems well suited to build a port on. If we manage to construct a ship, and fill it with all we need to build a new settlement, we may be able to escape.]])
      .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – rising water
       _([[The storm flood seems to be coming from the west. If we hurry, we will just make it! We only need to build a port and a shipyard – oh, and a weaving mill to weave the durable cloth, which is made from reed and fur, for the sails. Then we can launch an expedition from the port. Pray to the gods and make haste!]]))

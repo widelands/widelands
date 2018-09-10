@@ -11,7 +11,7 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 2,
-      log = 2,
+      log = 1,
       thatch_reed = 1
    },
    return_on_dismantle = {
@@ -22,16 +22,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 72},
+         hotspot = {49, 88},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 66},
       },
    },
 
    aihints = {
+      collects_ware_from_map = "fish",
       prohibited_till = 760,
       requires_supporters = true
    },
@@ -55,7 +56,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=breed_fish",
             "call=fish_pond",
-            "return=skipped",
+            "return=no_stats",
          },
       },
       breed_fish = {
@@ -66,7 +67,7 @@ tribes:new_productionsite_type {
             "sleep=23000",
             "return=failed unless site has water:3",
             "return=failed unless site has fruit",
-            "worker=breed_in_pond",
+            "callworker=breed_in_pond",
             "consume=fruit water:3",
          },
       },
@@ -76,7 +77,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fish",
             "sleep=9000",
-            "worker=fish_in_pond",
+            "callworker=fish_in_pond",
          },
       },
    },

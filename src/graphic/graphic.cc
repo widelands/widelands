@@ -85,6 +85,8 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	                    window_mode_width_, window_mode_height_, SDL_WINDOW_OPENGL);
 
 	GLint max;
+	// LeakSanitizer reports a memory leak which is triggered somewhere in this function call,
+	// probably coming from the gaphics drivers
 	gl_context_ = Gl::initialize(
 	   trace_gl == TraceGl::kYes ? Gl::Trace::kYes : Gl::Trace::kNo, sdl_window_, &max);
 
@@ -169,6 +171,15 @@ void Graphic::resolution_changed() {
 RenderTarget* Graphic::get_render_target() {
 	render_target_->reset();
 	return render_target_.get();
+}
+
+int Graphic::max_texture_size_for_font_rendering() const {
+// Test with minimum supported size in debug builds.
+#ifndef NDEBUG
+	return kMinimumSizeForTextures;
+#else
+	return max_texture_size_;
+#endif
 }
 
 bool Graphic::fullscreen() {

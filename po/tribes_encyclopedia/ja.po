@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-11 05:42+0000\n"
-"PO-Revision-Date: 2018-05-12 03:26+0000\n"
-"Last-Translator: tamanegi\n"
+"POT-Creation-Date: 2018-07-13 13:47+0000\n"
+"PO-Revision-Date: 2018-06-28 06:08+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1393,7 +1393,7 @@ msgctxt "frisians_building"
 msgid ""
 "Of course I could still forge short and long swords, but it is beneath my "
 "honor to bother with such basic equipment now."
-msgstr ""
+msgstr "当然、打とうと思えば今でも小剣や長剣を打つことはできる。しかし、今の私にはそのような普通の装備を打つことに意義を感じられない。"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
@@ -1407,7 +1407,7 @@ msgstr "最高級のヘルムと武器以外を打つことを拒んだ熟練鍛
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:16
 msgctxt "building"
 msgid "Produces advanced weapons and golden helmets for the soldiers."
-msgstr ""
+msgstr "兵士のために優れた武器とゴールデンヘルムを生産します。"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:6
@@ -1427,7 +1427,7 @@ msgstr "兵士の訓練への自身の影響力を指摘した鍛冶師の言葉
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/helptexts.lua:16
 msgctxt "building"
 msgid "Produces basic weapons and helmets for the soldiers."
-msgstr ""
+msgstr "兵士のための普通の武器やヘルムを生産します。"
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:3
@@ -1603,7 +1603,7 @@ msgctxt "frisians_building"
 msgid ""
 "If there is not enough coal, only the most foolish of leaders would deprive "
 "his brick kilns of it first."
-msgstr ""
+msgstr "石炭が足りないからって真っ先にレンガ焼窯から石炭を取り上げるとか、最低レベルにアホなリーダーじゃないとできないよな。"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:8
@@ -1655,8 +1655,8 @@ msgstr "「俺の力無しで家を建てられるとでも思っているのか
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
-msgid "A brickmaker arguing with a builder"
-msgstr "建築者と口論中のレンガ職人"
+msgid "A clay digger arguing with a builder"
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:16
@@ -2535,8 +2535,8 @@ msgstr "訓練場で最大レベルまで訓練された兵士だけを訓練し
 msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
-"explained to you how to hold a curved sword."
-msgstr "静かにしろ、注意深く聞け、そして俺が曲剣の持ち方を教える前に自分を刺そうとするのは止めるんだ。"
+"explained to you how to hold a broadsword."
+msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:16
@@ -4977,9 +4977,9 @@ msgstr "そのため、植樹番やブドウ農夫に利用されます。シャ
 #: ../../data/tribes/wares/shovel/helptexts.lua:12
 msgctxt "frisians_ware"
 msgid ""
-"They are used by berry and reed farmers as well as foresters. Brickmakers "
+"They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
-msgstr "そのため、ベリー農家やカヤ農夫、そして植樹番はこれを道具としています。また、レンガ職人も固い地面から泥を掘り出す際にシャベルを使います。"
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../data/tribes/wares/smoked_fish/helptexts.lua:4
@@ -5084,13 +5084,13 @@ msgid ""
 "spidercloth for their construction."
 msgstr "蜘蛛布は織物工房で蜘蛛糸から作られ、道具工房や造船所で利用されます。また、高度な用途を持つ建物の建築の際にも必要となるでしょう。"
 
-#. TRANSLATORS: Helptext for a ware: Curved Sword
-#: ../../data/tribes/wares/sword_curved/helptexts.lua:4
+#. TRANSLATORS: Helptext for a ware: Broadsword
+#: ../../data/tribes/wares/sword_broad/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"The curved sword is the weapon used by level 2 soldiers. Level 5 soldiers "
-"are equipped with two curved swords."
-msgstr "曲剣は攻撃レベル２の兵士が用います。また、攻撃レベル５の兵士は曲剣を二本装備します。"
+"The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
+"equipped with a broadsword and a double-edged sword."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
 #: ../../data/tribes/wares/sword_double/helptexts.lua:4
@@ -5105,8 +5105,8 @@ msgstr "両刃剣は攻撃レベル３の兵士が使います。また、攻撃
 msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
-"equipped with two long swords."
-msgstr "長剣は攻撃レベル１の兵士の扱う武器です。また、攻撃レベル４の兵士は二本の長剣を操ります。"
+"equipped with a long and a double-edged sword."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Short sword
 #: ../../data/tribes/wares/sword_short/helptexts.lua:4
@@ -5895,8 +5895,8 @@ msgstr "ビールやミードを醸造します。"
 #. TRANSLATORS: Helptext for a worker: Brickmaker
 #: ../../data/tribes/workers/frisians/brickmaker/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Makes clay out of mud and water or bricks out of clay and granite."
-msgstr "泥と水から粘土を作ったり、花崗岩と粘土からレンガを焼いたりします。"
+msgid "Burns bricks out of clay and granite."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/frisians/builder/helptexts.lua:3
@@ -5915,6 +5915,12 @@ msgstr "道に沿って物を運びます。"
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
 msgstr "丸太と粘土を燃やして炭を作ります。"
+
+#. TRANSLATORS: Helptext for a worker: Clay Digger
+#: ../../data/tribes/workers/frisians/claydigger/helptexts.lua:3
+msgctxt "frisians_worker"
+msgid "Makes clay out of mud and water."
+msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/frisians/farmer/helptexts.lua:3

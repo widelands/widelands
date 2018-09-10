@@ -35,26 +35,26 @@ tribes:new_worker_type {
 
    programs = {
       fish = {
-         "findspace size:any radius:8 resource:fish",
-         "walk coords",
-         "mine fish 1",
-         "animation fishing 3000",
-         "createware fish",
+         "findspace=size:any radius:8 resource:fish",
+         "walk=coords",
+         "mine=fish 1",
+         "animate=fishing 3000",
+         "createware=fish",
          "return"
       },
       fish_in_pond = {
-         "findobject attrib:pond_mature radius:8",
-         "walk object",
-         "animation fishing 3000",
-         "object fall_dry",
-         "createware fish",
+         "findobject=attrib:pond_mature radius:8",
+         "walk=object",
+         "animate=fishing 3000",
+         "callobject=fall_dry",
+         "createware=fish",
          "return"
       },
       breed_in_pond = {
-         "findobject attrib:pond_dry radius:8",
-         "walk object",
-         "animation release 2000",
-         "object with_fish",
+         "findobject=attrib:pond_dry radius:8",
+         "walk=object",
+         "animate=release 2000",
+         "callobject=with_fish",
          "return"
       }
    },

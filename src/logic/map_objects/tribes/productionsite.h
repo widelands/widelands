@@ -147,7 +147,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::WorkersNeedExperience;
 	friend struct ProductionProgram::ActCall;
-	friend struct ProductionProgram::ActWorker;
+	friend struct ProductionProgram::ActCallWorker;
 	friend struct ProductionProgram::ActSleep;
 	friend struct ProductionProgram::ActCheckMap;
 	friend struct ProductionProgram::ActAnimate;
@@ -165,7 +165,7 @@ public:
 	explicit ProductionSite(const ProductionSiteDescr& descr);
 	~ProductionSite() override;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	bool is_stopped() const {
 		return is_stopped_;

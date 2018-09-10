@@ -25,7 +25,7 @@
 #include "base/i18n.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "map_io/widelands_map_loader.h"
@@ -58,8 +58,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
      directory_info_(this, padding_, get_inner_h() - 2 * buth_ - 4 * padding_),
      ok_(this,
          "ok",
-         UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :
-                                          get_inner_w() / 2 + padding_,
+         UI::g_fh->fontset()->is_rtl() ? get_inner_w() / 2 - butw_ - padding_ :
+                                         get_inner_w() / 2 + padding_,
          get_inner_h() - padding_ - buth_,
          butw_,
          buth_,
@@ -67,8 +67,8 @@ MainMenuLoadOrSaveMap::MainMenuLoadOrSaveMap(EditorInteractive& parent,
          _("OK")),
      cancel_(this,
              "cancel",
-             UI::g_fh1->fontset()->is_rtl() ? get_inner_w() / 2 + padding_ :
-                                              get_inner_w() / 2 - butw_ - padding_,
+             UI::g_fh->fontset()->is_rtl() ? get_inner_w() / 2 + padding_ :
+                                             get_inner_w() / 2 - butw_ - padding_,
              get_inner_h() - padding_ - buth_,
              butw_,
              buth_,

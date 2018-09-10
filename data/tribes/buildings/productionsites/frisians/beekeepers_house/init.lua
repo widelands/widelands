@@ -22,16 +22,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 70},
+         hotspot = {49, 92},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 70},
+         hotspot = {49, 69},
       },
    },
 
    aihints = {
+      collects_ware_from_map = "honey",
       prohibited_till = 620,
       requires_supporters = true
    },
@@ -50,7 +51,7 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "sleep=45000",
-            "worker=bees"
+            "callworker=bees"
          }
       },
    },
