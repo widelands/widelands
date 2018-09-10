@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-07 10:13+0000\n"
+"POT-Creation-Date: 2018-09-10 06:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -529,6 +529,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:42
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:64
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:82
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
@@ -546,6 +547,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:81
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
@@ -555,6 +557,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:43
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:81
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:50
@@ -575,6 +578,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:57
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:62
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:65
