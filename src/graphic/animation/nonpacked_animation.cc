@@ -73,7 +73,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
    : Animation(table, Animation::Type::kNonPacked) {
 	try {
 		// Images
-
 		if (table.has_key("mipmap")) {
 			std::unique_ptr<LuaTable> mipmaps_table = table.get_table("mipmap");
 			for (const int key : mipmaps_table->keys<int>()) {
@@ -94,14 +93,11 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		}
 
 		// Frames
-		if (table.has_key("fps")) {
-			if (nr_frames_ == 1) {
-				throw wexception(
-					"Animation with one picture %s must not have 'fps'", mipmaps_.begin()->second->image_files[0].c_str());
-			}
-			frametime_ = 1000 / get_positive_int(table, "fps");
-		}
 		nr_frames_ = mipmaps_.begin()->second->image_files.size();
+		if (nr_frames_ == 1 && frametime() != kFrameLength) {
+			throw wexception(
+				"Animation with one picture %s must not have 'fps'", mipmaps_.begin()->second->image_files[0].c_str());
+		}
 
 		// Perform some checks to make sure that the data is complete and consistent
 		const bool should_have_playercolor = mipmaps_.begin()->second->hasplrclrs;
@@ -124,6 +120,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	} catch (const LuaError& e) {
 		throw wexception("Error in animation table: %s", e.what());
 	}
+	assert(nr_frames_ > 0);
 }
 
 float NonPackedAnimation::find_best_scale(float scale) const {
@@ -192,10 +189,6 @@ float NonPackedAnimation::height() const {
 float NonPackedAnimation::width() const {
 	ensure_graphics_are_loaded();
 	return mipmaps_.at(1.0f)->frames.at(0)->width();
-}
-
-uint16_t NonPackedAnimation::nr_frames() const {
-	return nr_frames_;
 }
 
 std::vector<const Image*> NonPackedAnimation::images(float scale) const {

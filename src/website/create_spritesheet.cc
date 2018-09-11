@@ -17,6 +17,7 @@
  *
  */
 
+#include <cassert>
 #include <memory>
 #include <vector>
 
@@ -167,7 +168,8 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 
 	if (animation.nr_frames() > 1) {
 		uint32_t frametime = animation.frametime();
-		if (nr_frames > 0 && animation_name != "build" && frametime != kFrameLength && frametime > 0) {
+		assert(frametime > 0);
+		if (nr_frames > 1 && animation_name != "build" && frametime != kFrameLength) {
 			lua_animation->add_int("fps", 1000 / frametime);
 		}
 	}

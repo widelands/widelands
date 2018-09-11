@@ -79,10 +79,10 @@ public:
 	virtual Rectf
 	destination_rectangle(const Vector2f& position, const Rectf& source_rect, float scale) const = 0;
 
-	/// The number of animation frames of this animation.
-	virtual uint16_t nr_frames() const = 0;
+	/// The number of animation frames of this animation. Returns a positive integer.
+	uint16_t nr_frames() const;
 
-	/// The number of milliseconds each frame will be displayed.
+	/// The number of milliseconds each frame will be displayed. Returns a positive integer.
 	uint32_t frametime() const;
 
 	/// An image of the first frame, blended with the given player color.
@@ -115,13 +115,14 @@ public:
 	void trigger_sound(uint32_t time, uint32_t stereo_position) const;
 
 protected:
-	uint32_t frametime_;
+	uint16_t nr_frames_;
 
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
 
 	Animation::Type type_;
 	Vector2i hotspot_ = Vector2i::zero();
+	const uint32_t frametime_;
 	const bool play_once_;
 
 	// Name of sound effect that will be played at frame 0.

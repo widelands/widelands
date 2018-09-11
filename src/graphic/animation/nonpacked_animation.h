@@ -50,7 +50,6 @@ public:
 	Rectf destination_rectangle(const Vector2f& position,
 	                            const Rectf& source_rect,
 	                            float scale) const override;
-	uint16_t nr_frames() const override;
 
 	const Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
@@ -89,7 +88,6 @@ private:
 	};
 	std::map<float, std::unique_ptr<MipMapEntry>, MipMapCompare> mipmaps_;
 
-	uint16_t nr_frames_;
 };
 
 #endif  // end of include guard: WL_GRAPHIC_ANIMATION_NONPACKED_ANIMATION_H

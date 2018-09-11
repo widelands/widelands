@@ -19,6 +19,7 @@
 
 #include "graphic/animation/animation.h"
 
+#include <cassert>
 #include <memory>
 
 #include "base/vector.h"
@@ -41,7 +42,11 @@ void get_point(const LuaTable& table, Vector2i* p) {
 
 } // namespace
 
-Animation::Animation(const LuaTable& table, Animation::Type type) : frametime_(kFrameLength), type_(type), hotspot_(Vector2i::zero()), play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false) {
+Animation::Animation(const LuaTable& table, Animation::Type type) :
+	type_(type),
+	hotspot_(Vector2i::zero()),
+	frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
+	play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
@@ -56,13 +61,20 @@ Animation::Animation(const LuaTable& table, Animation::Type type) : frametime_(k
 	} catch (const LuaError& e) {
 		throw wexception("Error in animation table: %s", e.what());
 	}
+	assert(frametime_ > 0);
 }
 
 Animation::Type Animation::type() const {
 	return type_;
 }
 
+uint16_t Animation::nr_frames() const {
+	assert(nr_frames_ > 0);
+	return nr_frames_;
+}
+
 uint32_t Animation::frametime() const {
+	assert(frametime_ > 0);
 	return frametime_;
 }
 
