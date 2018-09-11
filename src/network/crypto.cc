@@ -1,9 +1,9 @@
 #include "network/crypto.h"
 
 #if BOOST_VERSION > 106700
-#include "boost/uuid/detail/sha1.hpp"
+#include <boost/uuid/detail/sha1.hpp>
 #else
-#include "boost/uuid/sha1.hpp"
+#include <boost/uuid/sha1.hpp>
 #endif
 
 namespace crypto {

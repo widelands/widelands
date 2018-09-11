@@ -41,9 +41,9 @@
 // testing for the presence of glbinding.h to determine whether we have a glbinding version newer
 // then 2.1.4
 #ifdef __has_include
-#if __has_include(<glbinding / glbinding.h>)
-#include <glbinding/glbinding.h>
+#if __has_include("glbinding/glbinding.h")
 #include <glbinding/ProcAddress.h>
+#include <glbinding/glbinding.h>
 #define GLBINDING3
 #endif
 #endif
