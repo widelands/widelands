@@ -173,13 +173,13 @@ function building_help_general_string(tribe, building_description)
    local result = h2(_"Lore")
    local lore_text = building_helptext_lore()
    if type(lore_text) == "table" then
-      result = result .. li_image(building_description.representative_image, lore_text[1])
+      result = result .. li_object(building_description.name, lore_text[1])
       for k,v in ipairs({table.unpack(lore_text, 2)}) do
          result = result .. p(v)
       end
    else
     result = result ..
-      li_image(building_description.representative_image, lore_text)
+      li_object(building_description.name, lore_text)
    end
 
    local lore_author = building_helptext_lore_author()

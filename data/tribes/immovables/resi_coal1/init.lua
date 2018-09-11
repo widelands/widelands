@@ -6,6 +6,7 @@ tribes:new_immovable_type {
    -- TRANSLATORS: This is a resource name used in lists of resources
    descname = pgettext("immovable", "Resources: Coal Vein"),
    helptext_script = dirname .. "helptexts.lua",
+   icon = dirname .. "idle_00.png",
    attributes = { "resi" },
    programs = {
       program = {

@@ -478,14 +478,16 @@ Attributes
 ^^^^^^^^^^
 
 * **src**: The path to the image, relative to the ``data`` directory.
+* **object**: Show the representative image of a map object
 * **ref**: To be implemented
 * **color**: Player color for the image as a hex value
-* **width**: Width of the image as a pixel amount. The corresponding height will be matched automatically.
+* **width**: Width of the image as a pixel amount. The corresponding height will be matched automatically. Not supported for map objects.
 
 :ref:`Return to tag index<rt_tags>`
 		*/
 		TagConstraint tc;
 		tc.allowed_attrs.insert("src");
+		tc.allowed_attrs.insert("object");
 		tc.allowed_attrs.insert("ref");
 		tc.allowed_attrs.insert("color");
 		tc.allowed_attrs.insert("width");

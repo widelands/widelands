@@ -765,12 +765,10 @@ void Building::send_message(Game& game,
                             bool link_to_building_lifetime,
                             uint32_t throttle_time,
                             uint32_t throttle_radius) {
-	const std::string& img = descr().representative_image_filename();
-	const int width = descr().representative_image()->width();
 	const std::string rt_description =
-	   (boost::format("<div padding_r=10><p><img width=%d src=%s color=%s></p></div>"
+	   (boost::format("<div padding_r=10><p><img object=%s color=%s></p></div>"
 	                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-	    width % img % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
+	    descr().name() % owner().get_playercolor().hex_value() % UI_FONT_SIZE_MESSAGE % description)
 	      .str();
 
 	std::unique_ptr<Message> msg(new Message(msgtype, game.get_gametime(), title, icon_filename,

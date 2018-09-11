@@ -979,7 +979,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			get_owner()->add_message_with_timeout(
 			   game, std::unique_ptr<Message>(
 			            new Message(Message::Type::kGeologists, game.get_gametime(),
-			                        rdescr->descname(), ri.descr().representative_image_filename(),
+			                        rdescr->descname(), ri.descr().icon_filename(),
 			                        rdescr->descname(), message, position, serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}

@@ -323,6 +323,12 @@ uint32_t AnimationManager::load(const LuaTable& table) {
 	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table)));
 	return animations_.size();
 }
+uint32_t AnimationManager::load(const std::string& map_object_name, const LuaTable& table) {
+	animations_.push_back(std::unique_ptr<Animation>(new NonPackedAnimation(table)));
+	const size_t result = animations_.size();
+	representative_animations_by_map_object_name_.insert(std::make_pair(map_object_name, result));
+	return result;
+}
 
 const Animation& AnimationManager::get_animation(uint32_t id) const {
 	if (!id || id > animations_.size())
@@ -339,4 +345,12 @@ const Image* AnimationManager::get_representative_image(uint32_t id, const RGBCo
 		            std::move(g_gr->animations().get_animation(id).representative_image(clr)))));
 	}
 	return representative_images_.at(hash).get();
+}
+
+const Image* AnimationManager::get_representative_image(const std::string& map_object_name, const RGBColor* clr) {
+	if (representative_animations_by_map_object_name_.count(map_object_name) != 1) {
+		log("Warning: %s has no animation assigned for its representative image, or it's not a known map object\n", map_object_name.c_str());
+		return new Texture(0, 0);
+	}
+	return get_representative_image(representative_animations_by_map_object_name_.at(map_object_name), clr);
 }

@@ -234,12 +234,18 @@ MapObjectDescr::MapObjectDescr(const MapObjectType init_type,
 	if (table.has_key("animations")) {
 		std::unique_ptr<LuaTable> anims(table.get_table("animations"));
 		for (const std::string& animation : anims->keys<std::string>()) {
-			add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+			if (animation == "idle") {
+				add_animation(animation, g_gr->animations().load(init_name, *anims->get_table(animation)));
+			} else {
+				add_animation(animation, g_gr->animations().load(*anims->get_table(animation)));
+			}
 		}
 		if (!is_animation_known("idle")) {
 			throw GameDataError(
 			   "Map object %s has animations but no idle animation", init_name.c_str());
 		}
+
+		assert(g_gr->animations().get_representative_image(name())->width() > 0);
 		representative_image_filename_ =
 		   g_gr->animations().get_animation(get_animation("idle")).representative_image_filename();
 	}
@@ -321,6 +327,7 @@ const Image* MapObjectDescr::representative_image(const RGBColor* player_color) 
 	}
 	return nullptr;
 }
+
 const std::string& MapObjectDescr::representative_image_filename() const {
 	return representative_image_filename_;
 }
