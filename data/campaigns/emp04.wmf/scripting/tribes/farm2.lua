@@ -1,49 +1,42 @@
-dirname = path.dirname(__file__)
+dirname = "tribes/buildings/productionsites/empire/farm/"
 
 tribes:new_productionsite_type {
-   msgctxt = "atlanteans_building",
-   name = "atlanteans_farm",
+   msgctxt = "empire_building",
+   name = "empire_farm2",
    -- TRANSLATORS: This is a building name used in lists of buildings
-   descname = pgettext("atlanteans_building", "Farm"),
+   descname = pgettext("empire_building", "Farm"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "big",
 
-   buildcost = {
-      log = 3,
-      granite = 2,
-      planks = 2,
-      spidercloth = 1
+   enhancement_cost = {
+      planks = 1,
+      marble = 1,
+      marble_column = 2
    },
-   return_on_dismantle = {
-      log = 1,
+   return_on_dismantle_on_enhanced = {
+      planks = 1,
       granite = 1,
-      planks = 1
+      marble = 1,
+      marble_column = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 74, 60 },
+         hotspot = { 82, 74 },
       },
    },
 
    aihints = {
-      space_consumer = true,
-      basic_amount = 1,
-       -- Farm needs spidercloth to be built and spidercloth needs corn for production
-       -- -> farm should be built ASAP!
-      prohibited_till = 250,
-      very_weak_ai_limit = 1,
-      weak_ai_limit = 3
    },
 
    working_positions = {
-      atlanteans_farmer = 1
+      empire_farmer = 1
    },
 
    outputs = {
-      "corn"
+      "wheat"
    },
 
    programs = {
@@ -53,20 +46,20 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant",
             "call=harvest",
-            "return=no_stats"
+            "return=skipped"
          }
       },
       plant = {
-         -- TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
-         descname = _"planting corn",
+         -- TRANSLATORS: Completed/Skipped/Did not start planting wheat because ...
+         descname = _"planting wheat",
          actions = {
             "sleep=14000",
             "callworker=plant"
          }
       },
       harvest = {
-         -- TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
-         descname = _"harvesting corn",
+         -- TRANSLATORS: Completed/Skipped/Did not start harvesting wheat because ...
+         descname = _"harvesting wheat",
          actions = {
             "sleep=4000",
             "callworker=harvest"
@@ -77,7 +70,7 @@ tribes:new_productionsite_type {
       -- Translators: Short for "Out of ..." for a resource
       title = _"No Fields",
       heading = _"Out of Fields",
-      message = pgettext("atlanteans_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
+      message = pgettext("empire_building", "The farmer working at this farm has no cleared soil to plant his seeds."),
       productivity_threshold = 30
    },
 }

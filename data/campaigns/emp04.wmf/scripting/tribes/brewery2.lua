@@ -2,23 +2,20 @@ dirname = "tribes/buildings/productionsites/empire/brewery/"
 
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
-   name = "empire_brewery1",
+   name = "empire_brewery2",
+   -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Brewery"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "empire_brewery2",
 
-   buildcost = {
-      log = 1,
-      planks = 2,
-      granite = 2
-   },
-   return_on_dismantle = {
+   enhancement_cost = {
       planks = 1,
       granite = 1
    },
-
+   return_on_dismantle_on_enhanced = {
+      planks = 0,
+   },
 
    animations = {
       idle = {
@@ -32,7 +29,9 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-
+      prohibited_till = 790,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {
@@ -40,7 +39,7 @@ tribes:new_productionsite_type {
    },
 
    inputs = {
-      { name = "water", amount = 3 },
+      { name = "water", amount = 7 },
       { name = "wheat", amount = 7 }
    },
    outputs = {
@@ -49,11 +48,12 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         descname = "brewing beer",
+         -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
+         descname = _"brewing beer",
          actions = {
             "sleep=30000",
             "return=skipped unless economy needs beer",
-            "consume=water:3 wheat",
+            "consume=water wheat",
             "playsound=sound/empire beerbubble 180",
             "animate=working 30000",
             "produce=beer"

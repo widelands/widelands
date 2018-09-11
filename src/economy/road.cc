@@ -632,7 +632,7 @@ void Road::pay_for_building() {
 	// Don't bother with checks here, since the next ware will cause them anyway
 }
 
-void Road::log_general_info(const EditorGameBase& egbase) {
+void Road::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 	molog("wallet: %i\n", wallet_);
 }

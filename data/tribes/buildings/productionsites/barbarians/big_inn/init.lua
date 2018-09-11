@@ -62,7 +62,7 @@ tribes:new_productionsite_type {
             "call=produce_ration",
             "call=produce_snack",
             "call=produce_meal",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ration = {
@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
             "sleep=23000",
             "consume=barbarians_bread,fish,meat",
             "playsound=sound/barbarians/taverns tavern 100",
-            "sleep=10000",
+            "animate=working 10000",
             "produce=ration"
          }
       },
@@ -87,7 +87,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=barbarians_bread fish,meat beer",
             "playsound=sound/barbarians/taverns biginn 100",
-            "sleep=32000",
+            "animate=working 32000",
             "produce=snack"
          }
       },
@@ -100,7 +100,7 @@ tribes:new_productionsite_type {
             "sleep=5000",
             "consume=barbarians_bread fish,meat beer_strong",
             "playsound=sound/barbarians/taverns biginn 100",
-            "sleep=35000",
+            "animate=working 35000",
             "produce=meal"
          }
       },
