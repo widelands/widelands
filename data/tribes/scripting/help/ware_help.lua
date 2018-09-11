@@ -55,8 +55,8 @@ function ware_help_producers_string(tribe, ware_description)
          result = result .. dependencies({building, ware_description}, building.descname)
          local producing_programs = {}
          if (building.is_mine) then
-            -- Find out which programs in the building produce this ware for the mines we skip the real production and take a "dummy" program
-            
+            -- Find out which programs in the building produce this ware for the mines we skip the real production and take a dummy "encyclopedia" program
+            -- TODO(GunChleoc): Reimplement production programs as a proper tree, so that we can get rid of this hack and of the special case for mines.
             for j, program_name in ipairs(building.production_programs) do
                for ware, amount in pairs(building:produced_wares(program_name)) do
                   local consumes = building:consumed_wares_workers(program_name)
@@ -65,10 +65,8 @@ function ware_help_producers_string(tribe, ware_description)
                   end
                end
             end
-
          else
             -- Find out which programs in the building produce this ware
-            --local producing_programs = {}
             for j, program_name in ipairs(building.production_programs) do
                for ware, amount in pairs(building:produced_wares(program_name)) do
                   if (ware_description.name == ware) then
