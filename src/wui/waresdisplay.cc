@@ -386,13 +386,16 @@ WaresDisplay::~WaresDisplay() {
 }
 
 const char* unit_suffixes[] = {
-	"",
-	/** TRANSLATORS: This is a suffix for large numbers (5k = 5,000) */
-	_("k"),
-	/** TRANSLATORS: This is a suffix for large numbers (5M = 5,000,000) */
-	_("M"),
-	/** TRANSLATORS: This is a suffix for large numbers (5G = 5,000,000,000) */
-	_("G")
+	"%1%",
+	/** TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000). */
+	/** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
+	_("%1%k"),
+	/** TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000). */
+	/** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
+	_("%1%M"),
+	/** TRANSLATORS: This is a large number with a suffix (e.g. 5G = 5,000,000,000). */
+	/** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
+	_("%1%G")
 };
 static std::string get_amount_string(uint32_t amount) {
 	uint8_t size = 0;
@@ -400,8 +403,7 @@ static std::string get_amount_string(uint32_t amount) {
 		amount /= 1000;
 		size++;
 	}
-	/** TRANSLATORS: the first placeholder is a number and the second one a size suffix, e.g. 50 k */
-	return (boost::format(_("%1%%2%")) % amount % unit_suffixes[size]).str();
+	return (boost::format(unit_suffixes[size]) % amount).str();
 }
 
 std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
