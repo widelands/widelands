@@ -193,7 +193,7 @@ void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
-	if (Widelands::PortDock* pd = warehouse->get_portdock()) {
+	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 		get_tabs()->add("dock_wares", g_gr->images().get(pic_tab_dock_wares),
 		                create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 		                _("Wares waiting to be shipped"));

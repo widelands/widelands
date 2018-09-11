@@ -49,7 +49,7 @@ tribes:new_productionsite_type {
             "call=mine_granite",
             "call=mine_granite",
             "call=mine_marble", -- This will find marble 2 out of 7 times
-            "return=skipped"
+            "return=no_stats"
          }
       },
       mine_granite = {
