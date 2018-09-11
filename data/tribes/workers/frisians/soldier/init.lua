@@ -1,73 +1,236 @@
 dirname = path.dirname (__file__)
 
+-- Quick overview: We use 4 sets of animations here.
+-- The default set is for soldiers with no helmet and one sword.
+-- The set prefixed "h" is for soldiers with a helmet and one sword.
+-- The set prefixed "s" is for soldiers with no helmet and two swords.
+-- The set prefixed "sh" is for soldiers with a Helmet and two swords.
 animations = {
    idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
+      pictures = path.list_files (dirname .. "h_idle_??.png"),
       hotspot = {9, 25},
       fps = 10
    },
    atk_ok_e = {
-      pictures = path.list_files (dirname .. "atk_ok_w_??.png"),
+      pictures = path.list_files (dirname .. "h_atk_ok_w_??.png"),
       hotspot = { 5, 26 },
       fps = 10
    },
    atk_fail_e = {
-      pictures = path.list_files (dirname .. "atk_fail_w_??.png"),
+      pictures = path.list_files (dirname .. "h_atk_fail_w_??.png"),
       hotspot = { 5, 26 },
       fps = 10
    },
    atk_ok_w = {
-      pictures = path.list_files (dirname .. "atk_ok_e_??.png"),
+      pictures = path.list_files (dirname .. "h_atk_ok_e_??.png"),
       hotspot = { 23, 26 },
       fps = 10
    },
    atk_fail_w = {
-      pictures = path.list_files (dirname .. "atk_fail_e_??.png"),
+      pictures = path.list_files (dirname .. "h_atk_fail_e_??.png"),
       hotspot = { 23, 26 },
       fps = 10
    },
    eva_ok_e = {
-      pictures = path.list_files (dirname .. "eva_ok_w_??.png"),
+      pictures = path.list_files (dirname .. "h_eva_ok_w_??.png"),
       hotspot = { 5, 26 },
       fps = 10
    },
    eva_fail_e = {
-      pictures = path.list_files (dirname .. "eva_fail_w_??.png"),
+      pictures = path.list_files (dirname .. "h_eva_fail_w_??.png"),
       hotspot = { 5, 26 },
       fps = 10
    },
    eva_ok_w = {
-      pictures = path.list_files (dirname .. "eva_ok_e_??.png"),
+      pictures = path.list_files (dirname .. "h_eva_ok_e_??.png"),
       hotspot = { 11, 26 },
       fps = 10
    },
    eva_fail_w = {
-      pictures = path.list_files (dirname .. "eva_fail_e_??.png"),
+      pictures = path.list_files (dirname .. "h_eva_fail_e_??.png"),
       hotspot = { 12, 26 },
       fps = 10
    },
-   die_w_alt = {
-      pictures = path.list_files (dirname .. "die_f_w_??.png"),
-      hotspot = { 5, 26 },
-      fps = 10
-   },
-   die_e_alt = {
-      pictures = path.list_files (dirname .. "die_f_e_??.png"),
-      hotspot = { 20, 26 },
-      fps = 10
-   },
    die_w = {
-      pictures = path.list_files (dirname .. "die_b_w_??.png"),
+      pictures = path.list_files (dirname .. "h_die_w_??.png"),
       hotspot = { 22, 27 },
       fps = 10
    },
    die_e = {
-      pictures = path.list_files (dirname .. "die_b_e_??.png"),
+      pictures = path.list_files (dirname .. "h_die_e_??.png"),
+      hotspot = { 13, 26 },
+      fps = 10
+   },
+   h_idle = {
+      pictures = path.list_files (dirname .. "h_idle_??.png"),
+      hotspot = {9, 25},
+      fps = 10
+   },
+   h_atk_ok_e = {
+      pictures = path.list_files (dirname .. "h_atk_ok_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   h_atk_fail_e = {
+      pictures = path.list_files (dirname .. "h_atk_fail_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   h_atk_ok_w = {
+      pictures = path.list_files (dirname .. "h_atk_ok_e_??.png"),
+      hotspot = { 23, 26 },
+      fps = 10
+   },
+   h_atk_fail_w = {
+      pictures = path.list_files (dirname .. "h_atk_fail_e_??.png"),
+      hotspot = { 23, 26 },
+      fps = 10
+   },
+   h_eva_ok_e = {
+      pictures = path.list_files (dirname .. "h_eva_ok_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   h_eva_fail_e = {
+      pictures = path.list_files (dirname .. "h_eva_fail_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   h_eva_ok_w = {
+      pictures = path.list_files (dirname .. "h_eva_ok_e_??.png"),
+      hotspot = { 11, 26 },
+      fps = 10
+   },
+   h_eva_fail_w = {
+      pictures = path.list_files (dirname .. "h_eva_fail_e_??.png"),
+      hotspot = { 12, 26 },
+      fps = 10
+   },
+   h_die_w = {
+      pictures = path.list_files (dirname .. "h_die_w_??.png"),
+      hotspot = { 22, 27 },
+      fps = 10
+   },
+   h_die_e = {
+      pictures = path.list_files (dirname .. "h_die_e_??.png"),
+      hotspot = { 13, 26 },
+      fps = 10
+   },
+   sh_idle = {
+      pictures = path.list_files (dirname .. "h_idle_??.png"),
+      hotspot = {9, 25},
+      fps = 10
+   },
+   sh_atk_ok_e = {
+      pictures = path.list_files (dirname .. "h_atk_ok_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   sh_atk_fail_e = {
+      pictures = path.list_files (dirname .. "h_atk_fail_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   sh_atk_ok_w = {
+      pictures = path.list_files (dirname .. "h_atk_ok_e_??.png"),
+      hotspot = { 23, 26 },
+      fps = 10
+   },
+   sh_atk_fail_w = {
+      pictures = path.list_files (dirname .. "h_atk_fail_e_??.png"),
+      hotspot = { 23, 26 },
+      fps = 10
+   },
+   sh_eva_ok_e = {
+      pictures = path.list_files (dirname .. "h_eva_ok_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   sh_eva_fail_e = {
+      pictures = path.list_files (dirname .. "h_eva_fail_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   sh_eva_ok_w = {
+      pictures = path.list_files (dirname .. "h_eva_ok_e_??.png"),
+      hotspot = { 11, 26 },
+      fps = 10
+   },
+   sh_eva_fail_w = {
+      pictures = path.list_files (dirname .. "h_eva_fail_e_??.png"),
+      hotspot = { 12, 26 },
+      fps = 10
+   },
+   sh_die_w = {
+      pictures = path.list_files (dirname .. "h_die_w_??.png"),
+      hotspot = { 22, 27 },
+      fps = 10
+   },
+   sh_die_e = {
+      pictures = path.list_files (dirname .. "h_die_e_??.png"),
+      hotspot = { 13, 26 },
+      fps = 10
+   },
+   s_idle = {
+      pictures = path.list_files (dirname .. "h_idle_??.png"),
+      hotspot = {9, 25},
+      fps = 10
+   },
+   s_atk_ok_e = {
+      pictures = path.list_files (dirname .. "h_atk_ok_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   s_atk_fail_e = {
+      pictures = path.list_files (dirname .. "h_atk_fail_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   s_atk_ok_w = {
+      pictures = path.list_files (dirname .. "h_atk_ok_e_??.png"),
+      hotspot = { 23, 26 },
+      fps = 10
+   },
+   s_atk_fail_w = {
+      pictures = path.list_files (dirname .. "h_atk_fail_e_??.png"),
+      hotspot = { 23, 26 },
+      fps = 10
+   },
+   s_eva_ok_e = {
+      pictures = path.list_files (dirname .. "h_eva_ok_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   s_eva_fail_e = {
+      pictures = path.list_files (dirname .. "h_eva_fail_w_??.png"),
+      hotspot = { 5, 26 },
+      fps = 10
+   },
+   s_eva_ok_w = {
+      pictures = path.list_files (dirname .. "h_eva_ok_e_??.png"),
+      hotspot = { 11, 26 },
+      fps = 10
+   },
+   s_eva_fail_w = {
+      pictures = path.list_files (dirname .. "h_eva_fail_e_??.png"),
+      hotspot = { 12, 26 },
+      fps = 10
+   },
+   s_die_w = {
+      pictures = path.list_files (dirname .. "h_die_w_??.png"),
+      hotspot = { 22, 27 },
+      fps = 10
+   },
+   s_die_e = {
+      pictures = path.list_files (dirname .. "h_die_e_??.png"),
       hotspot = { 13, 26 },
       fps = 10
    },
 }
-add_walking_animations (animations, "walk", dirname, "walk", {10, 25}, 15)
+add_walking_animations (animations, "walk", dirname, "h_walk", {10, 25}, 15)
+add_walking_animations (animations, "s_walk", dirname, "h_walk", {10, 25}, 15)
+add_walking_animations (animations, "h_walk", dirname, "h_walk", {10, 25}, 15)
+add_walking_animations (animations, "sh_walk", dirname, "h_walk", {10, 25}, 15)
 
 tribes:new_soldier_type {
    msgctxt = "frisians_worker",
@@ -111,35 +274,717 @@ tribes:new_soldier_type {
 
    -- Random animations for battle
    attack_success_w = {
-      "atk_ok_w",
+      h_atk_ok_w = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_atk_ok_w = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      atk_ok_w = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_atk_ok_w = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
    },
    attack_success_e = {
-      "atk_ok_e",
+      h_atk_ok_e = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_atk_ok_e = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      atk_ok_e = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_atk_ok_e = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
    },
    attack_failure_w = {
-      "atk_fail_w",
+      h_atk_fail_w = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_atk_fail_w = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      atk_fail_w = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_atk_fail_w = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
    },
    attack_failure_e = {
-      "atk_fail_e",
-   },
-   evade_success_w = {
-      "eva_ok_w",
-   },
-   evade_success_e = {
-      "eva_ok_e",
+      h_atk_fail_e = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_atk_fail_e = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      atk_fail_e = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_atk_fail_e = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
    },
    evade_failure_w = {
-      "eva_fail_w",
+      h_eva_fail_w = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_eva_fail_w = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      eva_fail_w = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_eva_fail_w = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
    },
    evade_failure_e = {
-      "eva_fail_e",
+      h_eva_fail_e = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_eva_fail_e = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      eva_fail_e = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_eva_fail_e = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+   },
+   evade_success_w = {
+      h_eva_ok_w = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_eva_ok_w = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      eva_ok_w = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_eva_ok_w = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+   },
+   evade_success_e = {
+      h_eva_ok_e = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_eva_ok_e = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      eva_ok_e = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_eva_ok_e = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
    },
    die_w = {
-      "die_w",
-      "die_w_alt",
+      h_die_w = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_die_w = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      die_w = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_die_w = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
    },
    die_e = {
-      "die_e",
-      "die_e_alt",
+      h_die_e = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_die_e = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      die_e = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_die_e = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+   },
+   idle = {
+      h_idle = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_idle = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      idle = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_idle = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+   },
+   walk_sw = {
+      h_walk_sw = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_walk_sw = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      walk_sw = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_walk_sw = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+   },
+   walk_nw = {
+      walk_nw = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_walk_nw = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      walk_nw = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_walk_nw = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+   },
+   walk_w = {
+      h_walk_w = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_walk_w = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      walk_w = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_walk_w = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+   },
+   walk_se = {
+      h_walk_se = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_walk_se = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      walk_se = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_walk_se = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+   },
+   walk_ne = {
+      h_walk_ne = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_walk_ne = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      walk_ne = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_walk_ne = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+   },
+   walk_e = {
+      h_walk_e = {
+         min_health = 1,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 3,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      sh_walk_e = {
+         min_health = 1,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 2,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      walk_e = {
+         min_health = 0,
+         min_attack = 0,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
+      s_walk_e = {
+         min_health = 0,
+         min_attack = 4,
+         min_defense = 0,
+         min_evade = 0,
+         max_health = 0,
+         max_attack = 6,
+         max_defense = 2,
+         max_evade = 0,
+      },
    },
 }

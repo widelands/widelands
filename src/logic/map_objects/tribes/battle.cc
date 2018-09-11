@@ -216,7 +216,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 
 		what_anim = this_soldier_is == 1 ? "evade_success_e" : "evade_success_w";
 		return soldier.start_task_idle(
-		   game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 10);
+		   game, soldier.descr().get_rand_anim(game, what_anim.c_str(), &soldier), 10);
 	}
 	if (bothReadyToFight) {
 		//  Our opponent is waiting for us to fight.
@@ -278,7 +278,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 		}
 	}
 	molog("[battle] Starting animation %s for soldier %d\n", what_anim.c_str(), soldier.serial());
-	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), 1000);
+	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim.c_str(), &soldier), 1000);
 }
 
 void Battle::calculate_round(Game& game) {

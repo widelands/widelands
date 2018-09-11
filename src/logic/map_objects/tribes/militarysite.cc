@@ -830,7 +830,7 @@ void MilitarySite::reinit_after_conqueration(Game& game) {
 	clear_requirements();
 	conquer_area(game);
 	update_soldier_request();
-	start_animation(game, descr().get_animation("idle"));
+	start_animation(game, descr().get_animation("idle", this));
 
 	// feature request 1247384 in launchpad bugs: Conquered buildings tend to
 	// be in a hostile area; typically players want heroes there.

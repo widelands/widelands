@@ -37,6 +37,21 @@ namespace Widelands {
 class EditorGameBase;
 class Battle;
 
+struct SoldierLevelRange {
+	SoldierLevelRange(std::unique_ptr<LuaTable>);
+	bool matches(uint32_t health, uint32_t attack, uint32_t defense, uint32_t evade) const;
+	
+	uint32_t min_health;
+	uint32_t min_attack;
+	uint32_t min_defense;
+	uint32_t min_evade;
+	uint32_t max_health;
+	uint32_t max_attack;
+	uint32_t max_defense;
+	uint32_t max_evade;
+};
+using SoldierAnimationsList = std::map<std::string, SoldierLevelRange>;
+
 class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
@@ -104,7 +119,10 @@ public:
 		return evade_.images[level];
 	}
 
-	uint32_t get_rand_anim(Game& game, const char* const name) const;
+	uint32_t get_rand_anim(Game& game, const char* const name, const Soldier* soldier) const;
+
+	const DirAnimations& get_right_walk_anims(bool const ware, const Worker* w = nullptr) const override;
+	uint32_t get_animation(char const* const anim, const MapObject* mo = nullptr) const override;
 
 protected:
 	Bob& create_object() const override;
@@ -127,20 +145,30 @@ private:
 	BattleAttribute evade_;
 
 	// Battle animation names
-	std::vector<std::string> attack_success_w_name_;
-	std::vector<std::string> attack_failure_w_name_;
-	std::vector<std::string> evade_success_w_name_;
-	std::vector<std::string> evade_failure_w_name_;
-	std::vector<std::string> die_w_name_;
+	SoldierAnimationsList attack_success_w_name_;
+	SoldierAnimationsList attack_failure_w_name_;
+	SoldierAnimationsList evade_success_w_name_;
+	SoldierAnimationsList evade_failure_w_name_;
+	SoldierAnimationsList die_w_name_;
 
-	std::vector<std::string> attack_success_e_name_;
-	std::vector<std::string> attack_failure_e_name_;
-	std::vector<std::string> evade_success_e_name_;
-	std::vector<std::string> evade_failure_e_name_;
-	std::vector<std::string> die_e_name_;
+	SoldierAnimationsList attack_success_e_name_;
+	SoldierAnimationsList attack_failure_e_name_;
+	SoldierAnimationsList evade_success_e_name_;
+	SoldierAnimationsList evade_failure_e_name_;
+	SoldierAnimationsList die_e_name_;
+
+	// We can have per-level walking and idle anims
+	// NOTE: I expect no soldier will ever agree to carry a ware, so we don't provide animations for that
+	SoldierAnimationsList idle_name_;
+	SoldierAnimationsList walk_ne_name_;
+	SoldierAnimationsList walk_e_name_;
+	SoldierAnimationsList walk_se_name_;
+	SoldierAnimationsList walk_sw_name_;
+	SoldierAnimationsList walk_w_name_;
+	SoldierAnimationsList walk_nw_name_;
 
 	// Reads list of animation names from the table and pushes them into result.
-	void add_battle_animation(std::unique_ptr<LuaTable> table, std::vector<std::string>* result);
+	void add_battle_animation(std::unique_ptr<LuaTable> table, SoldierAnimationsList* result);
 
 	DISALLOW_COPY_AND_ASSIGN(SoldierDescr);
 };
