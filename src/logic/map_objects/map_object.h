@@ -305,7 +305,7 @@ public:
 	void set_logsink(LogSink*);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(const EditorGameBase&);
+	virtual void log_general_info(const EditorGameBase&) const;
 
 	Player* get_owner() const {
 		return owner_;

@@ -12,8 +12,8 @@ if [ -d "../utils" ]; then
 fi
 
 # Double-check that we're in the correct directory.
-if [ ! -f "utils/buildcat.py" -o ! -f "utils/remove_lf_in_translations.py" ]; then
-  echo "Unable to find 'utils/buildcat.py' or 'utils/remove_lf_in_translations.py'."
+if [ ! -f "utils/buildcat.py" ]; then
+  echo "Unable to find 'utils/buildcat.py'."
   echo "Make sure you start this script from Widelands' base or utils directory.";
   exit 1;
 fi

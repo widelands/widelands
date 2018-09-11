@@ -4594,7 +4594,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 
 	if (is_a(Game, &egbase)) {
-		PortDock* pd = get(L, egbase)->get_portdock();
+		const PortDock* pd = get(L, egbase)->get_portdock();
 		if (pd) {
 			if (pd->expedition_started()) {
 				return 1;
@@ -4957,7 +4957,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		PortDock* pd = wh->get_portdock();
+		const PortDock* pd = wh->get_portdock();
 		if (!pd) {
 			return 0;
 		}
@@ -4988,7 +4988,7 @@ int LuaWarehouse::cancel_expedition(lua_State* L) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		PortDock* pd = wh->get_portdock();
+		const PortDock* pd = wh->get_portdock();
 		if (!pd) {
 			return 0;
 		}

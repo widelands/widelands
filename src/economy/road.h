@@ -88,7 +88,7 @@ struct Road : public RoadBase {
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t) override;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 private:
 	void cleanup(EditorGameBase&) override;

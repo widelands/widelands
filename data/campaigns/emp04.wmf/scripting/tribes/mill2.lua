@@ -2,22 +2,22 @@ dirname = "tribes/buildings/productionsites/empire/mill/"
 
 tribes:new_productionsite_type {
    msgctxt = "empire_building",
-   name = "empire_mill1",
+   name = "empire_mill2",
+   -- TRANSLATORS: This is a building name used in lists of buildings
    descname = pgettext("empire_building", "Mill"),
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "medium",
-   enhancement = "empire_mill2",
 
-   buildcost = {
-      log = 3,
-      granite = 3,
+   enhancement_cost = {
+      log = 1,
+      granite = 1,
       marble = 1
    },
-   return_on_dismantle = {
-      log = 1,
-      granite = 2,
-      marble = 1
+   return_on_dismantle_on_enhanced = {
+      log = 0,
+      granite = 0,
+      marble = 0
    },
 
    animations = {
@@ -48,11 +48,12 @@ tribes:new_productionsite_type {
 
    programs = {
       work = {
-         descname = "grinding wheat",
+         -- TRANSLATORS: Completed/Skipped/Did not start grinding wheat because ...
+         descname = _"grinding wheat",
          actions = {
             "sleep=5000",
             "return=skipped unless economy needs flour",
-            "consume=wheat:2",
+            "consume=wheat",
             "playsound=sound/mill mill_turning 240",
             "animate=working 10000",
             "produce=flour"
