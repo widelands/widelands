@@ -79,6 +79,11 @@ bool SoldierLevelRange::matches(uint32_t health, uint32_t attack, uint32_t defen
 			evade >= min_evade && evade <= max_evade);
 }
 
+bool SoldierLevelRange::matches(const Soldier* soldier) const {
+	return matches(soldier->get_health_level(), soldier->get_attack_level(),
+			soldier->get_defense_level(), soldier->get_evade_level());
+}
+
 SoldierDescr::SoldierDescr(const std::string& init_descname,
                            const LuaTable& table,
                            const EditorGameBase& egbase)
@@ -181,8 +186,7 @@ uint32_t SoldierDescr::get_rand_anim(Game& game, const char* const animation_nam
 	assert(!animations->empty());
 	uint32_t nr_animations = 0;
 	for (const std::pair<std::string, SoldierLevelRange>& pair : *animations) {
-		if (pair.second.matches(soldier->get_health_level(), soldier->get_attack_level(),
-				soldier->get_defense_level(), soldier->get_evade_level())) {
+		if (pair.second.matches(soldier)) {
 			nr_animations++;
 		}
 	}
@@ -191,8 +195,7 @@ uint32_t SoldierDescr::get_rand_anim(Game& game, const char* const animation_nam
 	}
 	uint32_t i = game.logic_rand() % nr_animations;
 	for (const std::pair<std::string, SoldierLevelRange>& pair : *animations) {
-		if (pair.second.matches(soldier->get_health_level(), soldier->get_attack_level(),
-				soldier->get_defense_level(), soldier->get_evade_level())) {
+		if (pair.second.matches(soldier)) {
 			if (i == 0) {
 				run = pair.first;
 				break;
@@ -202,85 +205,77 @@ uint32_t SoldierDescr::get_rand_anim(Game& game, const char* const animation_nam
 	}
 
 	if (!is_animation_known(run)) {
-		log("Missing animation '%s' for soldier %s. Reverting to idle.\n", run.c_str(),
-		    name().c_str());
+		log("Missing animation '%s' for soldier %s. Reverting to idle.\n", run.c_str(), name().c_str());
 		run = "idle";
 	}
 	return get_animation(run.c_str(), soldier);
 }
 
 uint32_t SoldierDescr::get_animation(char const* const anim, const MapObject* mo) const {
-	if (strcmp(anim, "idle") != 0)
+	if (strcmp(anim, "idle") != 0) {
+		// We only need to check for a level-dependent idle animation.
+		// The walking anims can also be level-dependent,
+		// but that is taken care of by get_right_walk_anims().
 		return WorkerDescr::get_animation(anim, mo);
-	if (const Soldier* soldier = dynamic_cast<const Soldier*>(mo)) {
-		for (const std::pair<std::string, SoldierLevelRange>& pair : idle_name_) {
-			if (pair.second.matches(soldier->get_health_level(), soldier->get_attack_level(),
-					soldier->get_defense_level(), soldier->get_evade_level())) {
-				if (strcmp(pair.first.c_str(), "idle") == 0) {
-					// so we don't end up in an endless loop if the idle anim is called idle
-					return WorkerDescr::get_animation(pair.first.c_str(), mo);
-				}
-				return get_animation(pair.first.c_str(), mo);
-			}
-		}
-		throw GameDataError("This soldier does not have an idle animation for this training level!");
 	}
-	log("WARNING: SoldierDescr::get_animation() called for a %s. Please report as a bug.\n",
-			mo ? mo->descr().name().c_str() : "<nullptr>");	
-	return WorkerDescr::get_animation(anim, mo);
+	const Soldier* soldier = dynamic_cast<const Soldier*>(mo);
+	assert(soldier);
+	for (const std::pair<std::string, SoldierLevelRange>& pair : idle_name_) {
+		if (pair.second.matches(soldier)) {
+			if (strcmp(pair.first.c_str(), "idle") == 0) {
+				// Use the parent method here, so we don't end up in
+				// an endless loop if the idle anim is called "idle"
+				return WorkerDescr::get_animation(pair.first.c_str(), mo);
+			}
+			return get_animation(pair.first.c_str(), mo);
+		}
+	}
+	throw GameDataError("This soldier does not have an idle animation for this training level!");
 }
 
 const DirAnimations& SoldierDescr::get_right_walk_anims(bool const ware, const Worker* worker) const {
-	if (const Soldier* soldier = dynamic_cast<const Soldier*>(worker)) {
-		DirAnimations* anim = new DirAnimations();
-		for (const std::pair<std::string, SoldierLevelRange>& pair : walk_ne_name_) {
-			if (pair.second.matches(soldier->get_health_level(), soldier->get_attack_level(),
-					soldier->get_defense_level(), soldier->get_evade_level())) {
-				anim->set_animation(WALK_NE, get_animation(pair.first.c_str(), worker));
-				break;
-			}
-		}
-		for (const std::pair<std::string, SoldierLevelRange>& pair : walk_e_name_) {
-			if (pair.second.matches(soldier->get_health_level(), soldier->get_attack_level(),
-					soldier->get_defense_level(), soldier->get_evade_level())) {
-				anim->set_animation(WALK_E, get_animation(pair.first.c_str(), worker));
-				break;
-			}
-		}
-		for (const std::pair<std::string, SoldierLevelRange>& pair : walk_se_name_) {
-			if (pair.second.matches(soldier->get_health_level(), soldier->get_attack_level(),
-					soldier->get_defense_level(), soldier->get_evade_level())) {
-				anim->set_animation(WALK_SE, get_animation(pair.first.c_str(), worker));
-				break;
-			}
-		}
-		for (const std::pair<std::string, SoldierLevelRange>& pair : walk_sw_name_) {
-			if (pair.second.matches(soldier->get_health_level(), soldier->get_attack_level(),
-					soldier->get_defense_level(), soldier->get_evade_level())) {
-				anim->set_animation(WALK_SW, get_animation(pair.first.c_str(), worker));
-				break;
-			}
-		}
-		for (const std::pair<std::string, SoldierLevelRange>& pair : walk_w_name_) {
-			if (pair.second.matches(soldier->get_health_level(), soldier->get_attack_level(),
-					soldier->get_defense_level(), soldier->get_evade_level())) {
-				anim->set_animation(WALK_W, get_animation(pair.first.c_str(), worker));
-				break;
-			}
-		}
-		for (const std::pair<std::string, SoldierLevelRange>& pair : walk_nw_name_) {
-			if (pair.second.matches(soldier->get_health_level(), soldier->get_attack_level(),
-					soldier->get_defense_level(), soldier->get_evade_level())) {
-				anim->set_animation(WALK_NW, get_animation(pair.first.c_str(), worker));
-				break;
-			}
-		}
+	const Soldier* soldier = dynamic_cast<const Soldier*>(worker);
+	assert(soldier);
+	DirAnimations* anim = new DirAnimations();
 
-		return *anim;
+	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_ne_name_) {
+		if (pair.second.matches(soldier)) {
+			anim->set_animation(WALK_NE, get_animation(pair.first.c_str(), worker));
+			break;
+		}
 	}
-	log("WARNING: SoldierDescr::get_right_walk_anims() called for a %s. Please report as a bug.\n",
-			worker ? worker->descr().name().c_str() : "nullptr");
-	return WorkerDescr::get_right_walk_anims(ware, worker);
+	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_e_name_) {
+		if (pair.second.matches(soldier)) {
+			anim->set_animation(WALK_E, get_animation(pair.first.c_str(), worker));
+			break;
+		}
+	}
+	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_se_name_) {
+		if (pair.second.matches(soldier)) {
+			anim->set_animation(WALK_SE, get_animation(pair.first.c_str(), worker));
+			break;
+		}
+	}
+	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_sw_name_) {
+		if (pair.second.matches(soldier)) {
+			anim->set_animation(WALK_SW, get_animation(pair.first.c_str(), worker));
+			break;
+		}
+	}
+	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_w_name_) {
+		if (pair.second.matches(soldier)) {
+			anim->set_animation(WALK_W, get_animation(pair.first.c_str(), worker));
+			break;
+		}
+	}
+	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_nw_name_) {
+		if (pair.second.matches(soldier)) {
+			anim->set_animation(WALK_NW, get_animation(pair.first.c_str(), worker));
+			break;
+		}
+	}
+
+	return *anim;
 }
 
 /**
