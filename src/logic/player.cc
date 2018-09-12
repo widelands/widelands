@@ -743,8 +743,10 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
-		// Register whether the window was open
-		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
+		if (index_of_new_building != INVALID_INDEX) {
+			// For enhancing, register whether the window was open
+			Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
+		}
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
