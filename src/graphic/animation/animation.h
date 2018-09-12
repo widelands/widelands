@@ -48,18 +48,11 @@ constexpr int kFrameLength = 250;
  */
 class Animation {
 public:
-	enum class Type {
-		kUndefined,
-		kNonPacked,
-		kSpritesheet,
-	};
+	static const std::set<float> kSupportedScales;
 
-	explicit Animation(const LuaTable& table, Animation::Type type);
+	explicit Animation(const LuaTable& table);
 	virtual ~Animation() {
 	}
-
-	/// Animation type for safety in create_spritemap
-	Animation::Type type() const;
 
 	/// The height of this animation.
 	virtual float height() const = 0;
@@ -110,6 +103,7 @@ public:
 	/// We need to expose these for the packed animation,
 	/// so that the create_spritemap utility can use them
 	virtual std::vector<const Image*> pc_masks(float scale) const = 0;
+	virtual std::set<float> available_scales() const = 0;
 
 	/// Play the sound effect associated with this animation at the given time.
 	void trigger_sound(uint32_t time, uint32_t stereo_position) const;
@@ -120,7 +114,6 @@ protected:
 private:
 	DISALLOW_COPY_AND_ASSIGN(Animation);
 
-	Animation::Type type_;
 	Vector2i hotspot_ = Vector2i::zero();
 	const uint32_t frametime_;
 	const bool play_once_;

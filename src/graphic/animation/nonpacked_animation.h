@@ -61,6 +61,7 @@ public:
 
 	std::vector<const Image*> images(float scale) const override;
 	std::vector<const Image*> pc_masks(float scale) const override;
+	std::set<float> available_scales() const override;
 
 private:
 	float find_best_scale(float scale) const;

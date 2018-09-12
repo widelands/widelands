@@ -42,8 +42,9 @@ void get_point(const LuaTable& table, Vector2i* p) {
 
 } // namespace
 
-Animation::Animation(const LuaTable& table, Animation::Type type) :
-	type_(type),
+const std::set<float> Animation::kSupportedScales { 0.5, 1, 2, 4};
+
+Animation::Animation(const LuaTable& table) :
 	hotspot_(Vector2i::zero()),
 	frametime_(table.has_key("fps") ? (1000 / get_positive_int(table, "fps")) : kFrameLength),
 	play_once_(table.has_key("play_once") ? table.get_bool("play_once") : false) {
@@ -62,10 +63,6 @@ Animation::Animation(const LuaTable& table, Animation::Type type) :
 		throw wexception("Error in animation table: %s", e.what());
 	}
 	assert(frametime_ > 0);
-}
-
-Animation::Type Animation::type() const {
-	return type_;
 }
 
 uint16_t Animation::nr_frames() const {

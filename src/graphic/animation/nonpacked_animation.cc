@@ -37,10 +37,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "scripting/lua_table.h"
 
-namespace {
-const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
-} // namespace
-
 NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table) : hasplrclrs(false) {
 	if (scale <= 0.0f) {
 		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
@@ -70,7 +66,7 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table)
 }
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : Animation(table, Animation::Type::kNonPacked) {
+   : Animation(table) {
 	try {
 		// Images
 		if (table.has_key("mipmap")) {
@@ -199,6 +195,16 @@ std::vector<const Image*> NonPackedAnimation::images(float scale) const {
 std::vector<const Image*> NonPackedAnimation::pc_masks(float scale) const {
 	ensure_graphics_are_loaded();
 	return mipmaps_.at(scale)->pcmasks;
+}
+
+std::set<float> NonPackedAnimation::available_scales() const  {
+	std::set<float> result;
+	for (float scale : kSupportedScales) {
+		if (mipmaps_.count(scale) == 1) {
+			result.insert(scale);
+		}
+	}
+	return result;
 }
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {

@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <SDL.h>
+#include <boost/format.hpp>
 
 #include "base/log.h"
 #include "base/macros.h"
@@ -51,8 +52,9 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	const Widelands::Tribes& tribes = egbase.tribes();
 	const Widelands::World& world = egbase.world();
 	log("==========================================\n");
-	const Widelands::MapObjectDescr* descr = nullptr;
 
+	// Get the map object
+	const Widelands::MapObjectDescr* descr = nullptr;
 	if (tribes.building_exists(tribes.building_index(map_object_name))) {
 		descr = tribes.get_building_descr(tribes.building_index(map_object_name));
 	} else if (tribes.ware_exists(tribes.ware_index(map_object_name))) {
@@ -73,6 +75,7 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 	}
 	assert(descr->name() == map_object_name);
 
+	// Validate the animation
 	if (!descr->is_animation_known(animation_name)) {
 		log("ABORTING. Unknown animation '%s' for '%s'\n", animation_name.c_str(),
 		    descr->name().c_str());
@@ -81,22 +84,13 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 
 	const Animation& animation =
 	   g_gr->animations().get_animation(descr->get_animation(animation_name));
-	if (animation.type() != Animation::Type::kNonPacked) {
-		log("ABORTING. Animation '%s' for '%s' is working from a spritesheet already. Please double-check its init.lua file.\n",
-			 animation_name.c_str(),
-		    descr->name().c_str());
-		return;
-	}
 
 	const int nr_frames = animation.nr_frames();
 
-	std::vector<const Image*> images = animation.images(1.0f);
-	log("PARSING '%s' animation for '%s'. It has %d pictures.\n", animation_name.c_str(),
-	    descr->name().c_str(), nr_frames);
-
 	// Only create spritesheet if animation has more than 1 frame.
 	if (nr_frames < 2) {
-		log("ABORTING. Animation has less than 2 images and doesn't need a spritesheet.\n");
+		log("ABORTING. Animation '%s' for '%s' has less than 2 images and doesn't need a spritesheet.\n", animation_name.c_str(),
+			descr->name().c_str());
 		return;
 	}
 
@@ -123,48 +117,17 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		log("Wrote spritesheet to %s/%s\n", out_filesystem->get_basename().c_str(), filename.c_str());
 	};
 
-	// Create texture
-	const int w = animation.width();
-	const int h = animation.height();
-	const int columns = floor(sqrt(nr_frames));
-	int rows = 1;
-	while (rows * columns < nr_frames) {
-		++rows;
-	}
-	const int spritesheet_width = columns * w;
-	const int spritesheet_height = rows * h;
-
-	if (spritesheet_width > kMinimumSizeForTextures || spritesheet_height > kMinimumSizeForTextures) {
-		egbase.cleanup_objects();
-		throw wexception("Unable to create spritesheet; either the width (%d) or the height (%d) are bigger than the minimum supported texture size (%d)", spritesheet_width, spritesheet_height, kMinimumSizeForTextures);
-	}
-
-	// NOCOM support mipmaps
-	write_spritesheet(images, animation_name + ".png", w, h, columns, spritesheet_width, spritesheet_height);
-	std::vector<const Image*> pc_masks = animation.pc_masks(1.0f);
-	if (!pc_masks.empty()) {
-		write_spritesheet(pc_masks, animation_name + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
-	}
-
-	// Now write the Lua file
+	// Add global paramaters for this animation to Lua
 	std::unique_ptr<LuaTree::Element> lua_object(new LuaTree::Element());
 	LuaTree::Object* lua_animation = lua_object->add_object(animation_name);
-	lua_animation->add_raw("spritesheet", "path.dirname(__file__) .. \"" + animation_name + ".png\"");
-	// NOCOM get rid - we will add these to the map objects
-	lua_animation->add_raw("representative_image", "path.dirname(__file__) .. \"" +
-							   std::string(g_fs->fs_filename(animation.representative_image_filename().c_str())) + "\"");
+	lua_animation->add_int("frames", nr_frames);
 
-
-	lua_animation->add_int("frames", animation.nr_frames());
-
-	LuaTree::Object* lua_table = lua_animation->add_object("dimension");
-	lua_table->add_int("", animation.width());
-	lua_table->add_int("", animation.height());
-
-	lua_table = lua_animation->add_object("hotspot");
+	LuaTree::Object* lua_table = lua_animation->add_object("hotspot");
 	const Vector2i& hotspot = animation.hotspot();
 	lua_table->add_int("", hotspot.x);
 	lua_table->add_int("", hotspot.y);
+
+	LuaTree::Object* lua_mipmap = lua_animation->add_object("mipmap");
 
 	if (animation.nr_frames() > 1) {
 		uint32_t frametime = animation.frametime();
@@ -174,6 +137,45 @@ void write_spritesheet(Widelands::EditorGameBase& egbase,
 		}
 	}
 
+	log("WRITING '%s' animation for '%s'. It has %d pictures and %" PRIuS "scales.\n", animation_name.c_str(),
+		descr->name().c_str(), nr_frames, animation.available_scales().size());
+
+	// Create image files and add Lua code for each scale
+	for (const float scale : animation.available_scales()) {
+		std::vector<const Image*> images = animation.images(scale);
+
+		// Get parameters at this scale
+		const int w = animation.width() * scale;
+		const int h = animation.height() * scale;
+		const int columns = floor(sqrt(nr_frames));
+		int rows = 1;
+		while (rows * columns < nr_frames) {
+			++rows;
+		}
+		const int spritesheet_width = columns * w;
+		const int spritesheet_height = rows * h;
+
+		if (spritesheet_width > kMinimumSizeForTextures || spritesheet_height > kMinimumSizeForTextures) {
+			egbase.cleanup_objects();
+			throw wexception("Unable to create spritesheet; either the width (%d) or the height (%d) are bigger than the minimum supported texture size (%d)", spritesheet_width, spritesheet_height, kMinimumSizeForTextures);
+		}
+
+		// Write spritesheet for animation and player colors
+		const std::string filename_base = (boost::format("%s_%d") % animation_name % scale).str();
+		write_spritesheet(images, filename_base + ".png", w, h, columns, spritesheet_width, spritesheet_height);
+		std::vector<const Image*> pc_masks = animation.pc_masks(scale);
+		if (!pc_masks.empty()) {
+			write_spritesheet(pc_masks, filename_base + "_pc.png", w, h, columns, spritesheet_width, spritesheet_height);
+		}
+
+		// Lua parameters at this scale
+		lua_table = lua_mipmap->add_object();
+		lua_table->add_double("scale", scale);
+		lua_table->add_raw("spritesheet", "path.dirname(__file__) .. \"" + filename_base + ".png\"");
+		lua_table = lua_table->add_object("dimension");
+		lua_table->add_int("", w);
+		lua_table->add_int("", h);
+	}
 	log("LUA CODE:\n%s\n", lua_animation->as_string().c_str());
 	log("Done!\n");
 }
