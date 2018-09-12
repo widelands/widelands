@@ -95,17 +95,17 @@ struct Fleet : MapObject {
 	void remove_ship(EditorGameBase& egbase, Ship* ship);
 	void add_port(EditorGameBase& egbase, PortDock* port);
 	void remove_port(EditorGameBase& egbase, PortDock* port);
-	bool has_ports();
+	bool has_ports() const;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	bool get_path(const PortDock& start, const PortDock& end, Path& path);
 	void add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neighbours);
 
-	uint32_t count_ships();
-	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port);
-	uint32_t count_ports();
-	bool get_act_pending();
+	uint32_t count_ships() const;
+	uint32_t count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const;
+	uint32_t count_ports() const;
+	bool get_act_pending() const;
 
 protected:
 	void act(Game&, uint32_t data) override;

@@ -77,7 +77,7 @@ tribes:new_productionsite_type {
             "call=smelt_mixed",
             "call=smelt_iron",
             "call=make_fur",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       make_fur = {
@@ -96,9 +96,9 @@ tribes:new_productionsite_type {
          descname = pgettext("frisians_building", "recycling iron"),
          actions = {
             "return=skipped unless economy needs iron",
-            "sleep=40000",
             "consume=scrap_iron:2 coal",
             "animate=working_metal 40000",
+            "sleep=40000",
             "produce=iron:2"
          }
       },
@@ -107,9 +107,9 @@ tribes:new_productionsite_type {
          descname = pgettext("frisians_building", "recycling iron and gold"),
          actions = {
             "return=skipped unless economy needs iron or economy needs gold",
-            "sleep=40000",
             "consume=scrap_metal_mixed:2 coal",
             "animate=working_metal 40000",
+            "sleep=40000",
             "produce=iron gold"
          }
       },

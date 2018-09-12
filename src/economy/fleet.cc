@@ -324,11 +324,11 @@ bool Fleet::get_path(const PortDock& start, const PortDock& end, Path& path) {
 	return true;
 }
 
-uint32_t Fleet::count_ships() {
+uint32_t Fleet::count_ships() const {
 	return ships_.size();
 }
 
-uint32_t Fleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port) {
+uint32_t Fleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const {
 	uint32_t ships_on_way = 0;
 	for (uint16_t s = 0; s < ships_.size(); s += 1) {
 		if (ships_[s]->get_destination(egbase) == port) {
@@ -339,10 +339,10 @@ uint32_t Fleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port)
 	return ships_on_way;
 }
 
-uint32_t Fleet::count_ports() {
+uint32_t Fleet::count_ports() const {
 	return ports_.size();
 }
-bool Fleet::get_act_pending() {
+bool Fleet::get_act_pending() const {
 	return act_pending_;
 }
 
@@ -568,7 +568,7 @@ void Fleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 	}
 }
 
-bool Fleet::has_ports() {
+bool Fleet::has_ports() const {
 	return !ports_.empty();
 }
 
@@ -809,7 +809,7 @@ PortDock* Fleet::find_next_dest(Game& game, const Ship& ship, const PortDock& fr
 	return best_port;
 }
 
-void Fleet::log_general_info(const EditorGameBase& egbase) {
+void Fleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
 	molog("%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());

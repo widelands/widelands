@@ -1069,7 +1069,7 @@ void Ship::draw(const EditorGameBase& egbase,
 	             scale, dst);
 }
 
-void Ship::log_general_info(const EditorGameBase& egbase) {
+void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	molog("Ship belongs to fleet: %u\n destination: %s\n lastdock: %s\n",
