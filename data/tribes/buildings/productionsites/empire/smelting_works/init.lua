@@ -71,9 +71,8 @@ tribes:new_productionsite_type {
          descname = _"smelting iron",
          actions = {
             "return=skipped unless economy needs iron",
-            "sleep=5000",  -- penalty for unavailable iron_ore (2x)
             "consume=iron_ore coal",
-            "sleep=20000",
+            "sleep=25000",
             "playsound=sound/metal fizzle 150",
             "animate=working 35000",
             "playsound=sound/metal ironping 80",
@@ -85,9 +84,8 @@ tribes:new_productionsite_type {
          descname = _"smelting gold",
          actions = {
             "return=skipped unless economy needs gold",
-            "sleep=10000",  -- penalty for unavailable gold_ore
             "consume=gold_ore coal",
-            "sleep=15000",
+            "sleep=25000",
             "playsound=sound/metal fizzle 150",
             "animate=working 35000",
             "playsound=sound/metal goldping 80",
