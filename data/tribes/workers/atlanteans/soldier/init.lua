@@ -73,6 +73,17 @@ animations = {
 }
 add_walking_animations(animations, "walk", dirname, "walk", {20, 34}, 10)
 
+l_all = {
+   min_health = 0,
+   min_attack = 0,
+   min_defense = 0,
+   min_evade = 0,
+   max_health = 1,
+   max_attack = 4,
+   max_defense = 2,
+   max_evade = 2,
+}
+
 -- RST
 -- .. function:: new_soldier_type{table}
 --
@@ -180,16 +191,40 @@ add_walking_animations(animations, "walk", dirname, "walk", {20, 34}, 10)
 --       * evade_failure_e
 --       * die_w
 --       * die_e
+--      As well as custom walking and idle animations
+--       * idle
+--       * walk_ne
+--       * walk_e
+--       * walk_se
+--       * walk_sw
+--       * walk_w
+--       * walk_nw
 --
 --    The engine then picks within the listed animations at random.
 --    The lists look like this::
 --
 --       die_w = {
---          "die_w_0",
---          "die_w_1",
+--          die_w_0 = {…},
+--          die_w_1 = {…},
 --       },
 --
 --    With "die_w_0" and "die_w_1" being members of the "animations" table.
+--    Each animation name is mapped to a table with the following entries:
+--     * min_health
+--     * min_attack
+--     * min_defense
+--     * min_evade
+--     * max_health
+--     * max_attack
+--     * max_defense
+--     * max_evade
+--    Each animation will be used only for soldiers whose current training matches these limitations.
+--
+--    NOTE: You must make sure that each animation type has at least one member for every possible
+--    combination of training levels. Furthermore, there must be one and only one walk animation of
+--    each type and idle animation for each level combination.
+--    ANOTHER NOTE: The animations table has to contain animations named "idle" and "walk_*", but you
+--    decide whether they will actually be used (by assigning them (or not) to a table below).
 
 tribes:new_soldier_type {
    msgctxt = "atlanteans_worker",
@@ -234,207 +269,54 @@ tribes:new_soldier_type {
    -- Random animations for battle
    -- TODO(GunChleoc): Make more animations to use the random function
    attack_success_w = {
-      atk_ok_w = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      atk_ok_w = l_all,
    },
    attack_success_e = {
-      atk_ok_e = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      atk_ok_e = l_all,
    },
    attack_failure_w = {
-      atk_fail_w = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      atk_fail_w = l_all,
    },
    attack_failure_e = {
-      atk_fail_e = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      atk_fail_e = l_all,
    },
    evade_success_w = {
-      eva_ok_w = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      eva_ok_w = l_all,
    },
    evade_success_e = {
-      eva_ok_e = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      eva_ok_e = l_all,
    },
    evade_failure_w = {
-      eva_fail_w = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      eva_fail_w = l_all,
    },
    evade_failure_e = {
-      eva_fail_e = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      eva_fail_e = l_all,
    },
    die_w = {
-      die_w = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      die_w = l_all,
    },
    die_e = {
-      die_e = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      die_e = l_all,
    },
    idle = {
-      idle = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      idle = l_all,
    },
    walk_e = {
-      walk_e = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      walk_e = l_all,
    },
    walk_nw = {
-      walk_nw = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      walk_nw = l_all,
    },
    walk_sw = {
-      walk_sw = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      walk_sw = l_all,
    },
    walk_se = {
-      walk_se = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      walk_se = l_all,
    },
    walk_ne = {
-      walk_ne = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      walk_ne = l_all,
    },
    walk_w = {
-      walk_w = {
-         min_health = 0,
-         min_attack = 0,
-         min_defense = 0,
-         min_evade = 0,
-         max_health = 1,
-         max_attack = 4,
-         max_defense = 2,
-         max_evade = 2,
-      },
+      walk_w = l_all,
    },
 }
