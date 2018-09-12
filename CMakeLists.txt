@@ -79,6 +79,17 @@ if (APPLE OR WIN32 OR
   endif()
 endif()
 
+# Disable no symbols warning on macOS, but only on versions where this is
+# supported. It is not supported on OS X 10.7 (DARWIN_MAJOR_VERSION == 11).
+if (APPLE)
+    if (${DARWIN_MAJOR_VERSION} GREATER 11)
+        SET(CMAKE_C_ARCHIVE_CREATE   "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
+        SET(CMAKE_CXX_ARCHIVE_CREATE "<CMAKE_AR> Scr <TARGET> <LINK_FLAGS> <OBJECTS>")
+        SET(CMAKE_C_ARCHIVE_FINISH   "<CMAKE_RANLIB> -no_warning_for_no_symbols -c <TARGET>")
+        SET(CMAKE_CXX_ARCHIVE_FINISH "<CMAKE_RANLIB> -no_warning_for_no_symbols -c <TARGET>")
+    endif()
+endif()
+
 # TODO(sirver): One day, this should be enabled. Then we have no more cycles in our dependencies....
 # set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 
@@ -289,6 +300,7 @@ install(
     data/images
     data/scripting
     data/shaders
+    data/templates
     data/tribes
     data/txts
     data/world

@@ -13,7 +13,7 @@ tribes:new_productionsite_type {
       brick = 2,
       granite = 2,
       log = 1,
-      thatch_reed = 3
+      thatch_reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 1,
@@ -24,17 +24,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 94},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 94},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 83},
       },
    },
 
@@ -65,17 +65,19 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_ration",
             "call=produce_meal",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_ration = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a ration because ...
          descname = _"preparing a ration",
          actions = {
+            -- time total: 33
             "return=skipped unless economy needs ration",
-            "sleep=14000",
+            "sleep=5000",
             "consume=fruit,smoked_fish,smoked_meat",
-            "animate=working 19000",
+            "animate=working 18000",
+            "sleep=10000",
             "produce=ration"
          }
       },
@@ -83,10 +85,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
          descname = _"preparing a meal",
          actions = {
+            --time total: 40
             "return=skipped unless economy needs meal",
-            "sleep=10000",
             "consume=beer honey_bread smoked_fish,smoked_meat",
             "animate=working 30000",
+            "sleep=10000",
             "produce=meal"
          }
       },

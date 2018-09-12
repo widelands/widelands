@@ -39,13 +39,11 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/tabpanel.h"
 
 class FileRead;
 class RenderTarget;
 struct DirAnimations;
-namespace UI {
-struct TabPanel;
-}
 
 namespace Widelands {
 
@@ -263,7 +261,7 @@ public:
 
 	/**
 	 * Is called right before the object will be removed from
-	 * the game. No conncetion is handled in this class.
+	 * the game. No connection is handled in this class.
 	 *
 	 * param serial : the object serial (cannot use param comment as this is a callback)
 	 */
@@ -304,7 +302,7 @@ public:
 	void set_logsink(LogSink*);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(const EditorGameBase&);
+	virtual void log_general_info(const EditorGameBase&) const;
 
 	Player* get_owner() const {
 		return owner_;

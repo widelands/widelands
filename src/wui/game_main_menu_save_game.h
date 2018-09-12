@@ -54,6 +54,8 @@ private:
 
 	/// Update buttons and table selection state
 	void edit_box_changed();
+	/// Resets the savegame's name in the editbox. If savegame name didn't change, die().
+	void reset_editbox_or_die(const std::string& current_filename);
 
 	/// Called when the OK button is clicked or the Return key pressed in the edit box.
 	void ok();
@@ -77,9 +79,7 @@ private:
 	UI::Button cancel_, ok_;
 
 	std::string curdir_;
-	std::string parentdir_;
-	std::string filename_;
-	bool overwrite_;
+	const std::string illegal_filename_tooltip_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_MAIN_MENU_SAVE_GAME_H

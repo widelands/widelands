@@ -24,16 +24,21 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 83},
+         hotspot = {56, 80},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 61},
+         hotspot = {56, 66},
       },
-      working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 83},
+      working_iron = {
+         pictures = path.list_files (dirname .. "working_iron_??.png"),
+         hotspot = {56, 80},
+         fps = 10,
+      },
+      working_gold = {
+         pictures = path.list_files (dirname .. "working_gold_??.png"),
+         hotspot = {56, 80},
          fps = 10,
       },
    },
@@ -66,7 +71,8 @@ tribes:new_productionsite_type {
          actions = {
             "call=smelt_iron",
             "call=smelt_gold",
-            "return=skipped",
+            "call=smelt_iron",
+            "return=no_stats",
          },
       },
       smelt_iron = {
@@ -74,10 +80,9 @@ tribes:new_productionsite_type {
          descname = _"smelting iron",
          actions = {
             "return=skipped unless economy needs iron",
-            "sleep=5000",
             "consume=coal iron_ore",
-            "sleep=22000",
-            "animate=working 35000",
+            "sleep=27000",
+            "animate=working_iron 35000",
             "produce=iron"
          },
       },
@@ -86,10 +91,9 @@ tribes:new_productionsite_type {
          descname = _"smelting gold",
          actions = {
             "return=skipped unless economy needs gold",
-            "sleep=10000",
             "consume=coal gold_ore",
-            "sleep=17000",
-            "animate=working 35000",
+            "sleep=27000",
+            "animate=working_gold 35000",
             "produce=gold"
          },
       },

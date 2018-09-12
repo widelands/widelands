@@ -35,6 +35,7 @@
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -93,6 +94,13 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const EditorGameBase& egbase)
    : BuildingDescr(init_descname, init_type, table, egbase),
      out_of_resource_productivity_threshold_(100) {
+	if (msgctxt.empty()) {
+		throw Widelands::GameDataError(
+		   "Productionsite '%s' has empty Gettext msgctxt", name().c_str());
+	}
+	// Let's convert this only once, it's cheaper
+	const char* msgctxt_char = msgctxt.c_str();
+
 	i18n::Textdomain td("tribes");
 	std::unique_ptr<LuaTable> items_table;
 
@@ -101,7 +109,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 		out_of_resource_title_ = _(items_table->get_string("title"));
 		out_of_resource_heading_ = _(items_table->get_string("heading"));
 		out_of_resource_message_ =
-		   pgettext_expr(msgctxt.c_str(), items_table->get_string("message").c_str());
+		   pgettext_expr(msgctxt_char, items_table->get_string("message").c_str());
 		if (items_table->has_key("productivity_threshold")) {
 			out_of_resource_productivity_threshold_ = items_table->get_int("productivity_threshold");
 		}
@@ -190,12 +198,27 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			const std::string program_descname_unlocalized = program_table->get_string("descname");
 			std::string program_descname = _(program_descname_unlocalized);
 			if (program_descname == program_descname_unlocalized) {
-				program_descname = pgettext_expr(msgctxt.c_str(), program_descname_unlocalized.c_str());
+				program_descname = pgettext_expr(msgctxt_char, program_descname_unlocalized.c_str());
 			}
 			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
 			   program_name, program_descname, program_table->get_table("actions"), egbase, this));
 		} catch (const std::exception& e) {
 			throw wexception("program %s: %s", program_name.c_str(), e.what());
+		}
+	}
+
+	// Verify that any map resource collected is valid
+	if (!hints().collects_ware_from_map().empty()) {
+		if (!(egbase_.tribes().ware_exists(hints().collects_ware_from_map()))) {
+			throw GameDataError("ai_hints for building %s collects nonexistent ware %s from map",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
+		}
+		const DescriptionIndex collects_index =
+		   egbase_.tribes().safe_ware_index(hints().collects_ware_from_map());
+		if (!is_output_ware_type(collects_index)) {
+			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
+			                    "listed in the building's output",
+			                    name().c_str(), hints().collects_ware_from_map().c_str());
 		}
 	}
 }
@@ -716,7 +739,7 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 	return true;
 }
 
-void ProductionSite::log_general_info(const EditorGameBase& egbase) {
+void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	molog("is_stopped: %u\n", is_stopped_);
@@ -918,6 +941,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
 	case None:
+		skipped_programs_.erase(program_name);
 		break;
 	}
 

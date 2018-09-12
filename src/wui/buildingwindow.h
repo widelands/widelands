@@ -27,6 +27,7 @@
 #include "logic/map_objects/tribes/building.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
@@ -68,7 +69,7 @@ public:
 	void think() override;
 
 protected:
-	virtual void init(bool avoid_fastclick);
+	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);
 	void die() override;
 
 	UI::TabPanel* get_tabs() {
@@ -79,7 +80,7 @@ protected:
 	void act_dismantle();
 	void act_debug();
 	void show_workarea();
-	void hide_workarea();
+	void hide_workarea(bool configure_button);
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
@@ -87,8 +88,10 @@ protected:
 	void act_enhance(Widelands::DescriptionIndex);
 	void clicked_goto();
 
-	void
-	create_input_queue_panel(UI::Box*, Widelands::Building&, Widelands::InputQueue*, bool = false);
+	void create_input_queue_panel(UI::Box*,
+	                              Widelands::Building&,
+	                              const Widelands::InputQueue&,
+	                              bool = false);
 
 	bool is_dying_;
 
@@ -128,6 +131,8 @@ private:
 
 	bool showing_workarea_;
 	bool avoid_fastclick_;
+	// The building is being transformed from a contructionsite to a finished building etc.
+	bool is_warping_;
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>

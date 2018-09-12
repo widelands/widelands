@@ -29,11 +29,14 @@
 
 namespace UI {
 
-FileViewPanel::FileViewPanel(Panel* parent, const Image* background, TabPanel::Type border_type)
-   : TabPanel(parent, background, border_type),
+FileViewPanel::FileViewPanel(Panel* parent,
+                             UI::PanelStyle scrollbar_style,
+                             TabPanelStyle background_style)
+   : TabPanel(parent, background_style),
      padding_(5),
      contents_width_(0),
-     contents_height_(0) {
+     contents_height_(0),
+     style_(scrollbar_style) {
 	layout();
 }
 
@@ -53,15 +56,7 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 	size_t index = boxes_.size() - 1;
 
 	UI::MultilineTextarea* textarea =
-	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0);
-	try {
-		textarea->force_new_renderer();
-		textarea->set_text(content);
-	} catch (const std::exception& e) {
-		log("Fileview: falling back to OLD font renderer: %s\n", e.what());
-		textarea->force_new_renderer(false);
-		textarea->set_text(content);
-	}
+	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, style_, content);
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(std::move(textarea)));
 	add((boost::format("about_%" PRIuS) % index).str(), title, boxes_.at(index).get(), "");
@@ -84,10 +79,10 @@ void FileViewPanel::layout() {
 	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 
 	// If there is a border, we have less space for the contents
-	contents_width_ = std::max(
-	   0, border_type_ == TabPanel::Type::kNoBorder ? get_w() - padding_ : get_w() - 2 * padding_);
+	contents_width_ =
+	   std::max(0, style_ == UI::PanelStyle::kFsMenu ? get_w() - padding_ : get_w() - 2 * padding_);
 
-	contents_height_ = std::max(0, border_type_ == TabPanel::Type::kNoBorder ?
+	contents_height_ = std::max(0, style_ == UI::PanelStyle::kFsMenu ?
 	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
 	                                  get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight);
 

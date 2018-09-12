@@ -214,7 +214,7 @@ public:
 	// Will throw an exception otherwise.
 	InputQueue& inputqueue(DescriptionIndex, WareWorker) override;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 private:
 	class SoldierControl : public Widelands::SoldierControl {

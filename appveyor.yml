@@ -32,7 +32,7 @@ build_script:
   - cmd: md build
   - cmd: cd build
   - cmd: echo %APPVEYOR_BUILD_VERSION%_%CONFIGURATION%_%PLATFORM% > %APPVEYOR_BUILD_FOLDER%\WL_RELEASE
-  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON  -DOPTION_ASAN=OFF %APPVEYOR_BUILD_FOLDER%"
+  - cmd: "cmake -G \"Ninja\" -DCMAKE_BUILD_TYPE=%CONFIGURATION% -DOPTION_USE_GLBINDING=ON -DOPTION_BUILD_WEBSITE_TOOLS=OFF -DOPTION_ASAN=OFF %APPVEYOR_BUILD_FOLDER%"
   # Appveyor does not provide enough memory to build/link thex64 debug build in parallel (Oct 2016)
   # TODO(Tino): Optimize WL build scripts to use less memory/no cyclic dependencies
   - cmd: "IF \"%PLATFORM%\" == \"x64\" (IF \"%CONFIGURATION%\" == \"Debug\" (ninja -j 1) ELSE (ninja)) ELSE (ninja)"

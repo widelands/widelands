@@ -10,29 +10,29 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-      log = 2,
-      granite = 1,
+      log = 1,
+      granite = 2,
       brick = 1
    },
    return_on_dismantle = {
-      log = 1,
+      granite = 1,
       brick = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_?.png"),
-         hotspot = {22, 39},
+         hotspot = {23, 41},
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {22, 39},
+         hotspot = {23, 41},
          fps = 10,
       },
    },
 
    aihints = {
-      mines_water = true,
+      collects_ware_from_map = "water",
       basic_amount = 1
    },
 

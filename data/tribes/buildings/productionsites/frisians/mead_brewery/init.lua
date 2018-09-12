@@ -13,24 +13,22 @@ tribes:new_productionsite_type {
       brick = 3,
       granite = 2,
       log = 1,
-      thatch_reed = 3
+      thatch_reed = 1
    },
    return_on_dismantle_on_enhanced = {
       brick = 2,
-      granite = 1,
-      log = 1,
-      thatch_reed = 1
+      granite = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 94},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 94},
          fps = 10,
       },
       unoccupied = {
@@ -64,7 +62,7 @@ tribes:new_productionsite_type {
             "call=brew_mead",
             "call=brew_beer",
             "call=brew_mead",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       brew_mead = {
@@ -72,8 +70,8 @@ tribes:new_productionsite_type {
          descname = _"brewing mead",
          actions = {
             "return=skipped unless economy needs mead or workers need experience",
-            "sleep=35000",
             "consume=barley water honey",
+            "sleep=35000",
             "animate=working 35000",
             "produce=mead"
          }
@@ -82,9 +80,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start brewing beer because ...
          descname = _"brewing beer",
          actions = {
-            "return=skipped unless economy needs beer or workers need experience",
-            "sleep=30000",
+            "return=skipped unless economy needs beer",
             "consume=barley water",
+            "sleep=30000",
             "animate=working 30000",
             "produce=beer"
          }

@@ -40,7 +40,6 @@
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
@@ -338,6 +337,13 @@ void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& sett
 		loader_ui->set_background(background);
 		loader_ui->step(_("Loading…"));
 		gl.load_game(settings.multiplayer);
+		// Players might have selected a different AI type
+		for (uint8_t i = 0; i < settings.players.size(); ++i) {
+			const PlayerSettings& playersettings = settings.players[i];
+			if (playersettings.state == PlayerSettings::State::kComputer) {
+				get_player(i + 1)->set_ai(playersettings.ai);
+			}
+		}
 	} catch (...) {
 		throw;
 	}
@@ -912,17 +918,16 @@ void Game::sample_statistics() {
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
-		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
-			Economy* const eco = plr->get_economy_by_number(j);
+		for (const auto& economy : plr->economies()) {
 			const TribeDescr& tribe = plr->tribe();
 
 			for (const DescriptionIndex& ware_index : tribe.wares()) {
-				wastock += eco->stock_ware(ware_index);
+				wastock += economy.second->stock_ware(ware_index);
 			}
 
 			for (const DescriptionIndex& worker_index : tribe.workers()) {
 				if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-					wostock += eco->stock_worker(worker_index);
+					wostock += economy.second->stock_worker(worker_index);
 				}
 			}
 		}

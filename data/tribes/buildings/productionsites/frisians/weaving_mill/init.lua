@@ -14,29 +14,29 @@ tribes:new_productionsite_type {
       brick = 4,
       granite = 2,
       log = 3,
-      thatch_reed = 3
+      thatch_reed = 2
    },
    return_on_dismantle = {
       brick = 2,
       granite = 1,
-      log = 2,
+      log = 1,
       thatch_reed = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 91},
+         hotspot = {56, 89},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 91},
+         hotspot = {56, 89},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 66},
       },
    },
 

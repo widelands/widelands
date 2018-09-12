@@ -36,25 +36,9 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
+#include "website/website_common.h"
 
 using namespace Widelands;
-
-namespace {
-
-// Setup the static objects Widelands needs to operate and initializes systems.
-void initialize() {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
-	}
-
-	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
-
-	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
-}
-
-}  // namespace
 
 int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
@@ -142,9 +126,12 @@ int main(int argc, char** argv) {
 			write_string("}\n");
 			fw.write(*in_out_filesystem, (map_file + ".json").c_str());
 		}
+		egbase.cleanup_objects();
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
+		cleanup();
 		return 1;
 	}
+	cleanup();
 	return 0;
 }

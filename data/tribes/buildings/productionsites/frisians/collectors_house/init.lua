@@ -10,7 +10,7 @@ tribes:new_productionsite_type {
    size = "small",
 
    buildcost = {
-      brick = 2,
+      brick = 1,
       log = 2,
       thatch_reed = 1
    },
@@ -22,16 +22,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 76},
+         hotspot = {49, 89},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 67},
       },
    },
 
    aihints = {
+      collects_ware_from_map = "fruit",
       prohibited_till = 470,
       requires_supporters = true
    },
@@ -50,7 +51,7 @@ tribes:new_productionsite_type {
          descname = _"gathering berries",
          actions = {
             "sleep=21000",
-            "worker=harvest",
+            "callworker=harvest",
          }
       },
    },

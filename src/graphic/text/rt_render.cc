@@ -264,12 +264,7 @@ protected:
 	/// Throws a TextureTooBig exception if the given dimensions would be bigger than the graphics
 	/// can handle
 	void check_size(int check_w, int check_h) {
-// Test for minimum supported size in debug builds.
-#ifndef NDEBUG
-		const int maximum_size = kMinimumSizeForTextures;
-#else
-		const int maximum_size = g_gr->max_texture_size();
-#endif
+		const int maximum_size = g_gr->max_texture_size_for_font_rendering();
 		if (check_w > maximum_size || check_h > maximum_size) {
 			const std::string error_message =
 			   (boost::format("Texture (%d, %d) too big! Maximum size is %d.") % check_w % check_h %
@@ -1448,6 +1443,9 @@ public:
 			uint8_t p = a["padding"].get_int();
 			padding.left = padding.top = padding.right = padding.bottom = p;
 		}
+		// TODO(GunChleoc): padding_l and padding_r don't seem to produce balanced results.
+		// We ran into that with the game tips,
+		// using "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>" there.
 		if (a.has("padding_r"))
 			padding.right = a["padding_r"].get_int();
 		if (a.has("padding_b"))

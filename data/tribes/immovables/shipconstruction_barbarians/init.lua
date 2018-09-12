@@ -10,7 +10,7 @@ tribes:new_immovable_type {
    attributes = { "shipconstruction" },
    programs = {
       program = {
-         "construction=idle 5000 210000",
+         "construct=idle 5000 210000",
          "transform=bob tribe:barbarians_ship",
       }
    },

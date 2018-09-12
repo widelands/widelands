@@ -25,7 +25,6 @@
 
 #include <boost/signals2.hpp>
 
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
@@ -60,8 +59,7 @@ protected:
 	/// dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
-	/// \param background         the background image for this dropdown
-	/// \param button_background  the background image all buttons in this dropdown
+	/// \param style              the style used for buttons and background
 	BaseDropdown(Panel* parent,
 	             int32_t x,
 	             int32_t y,
@@ -70,8 +68,7 @@ protected:
 	             int button_dimension,
 	             const std::string& label,
 	             const DropdownType type,
-	             const Image* background,
-	             const Image* button_background);
+	             PanelStyle style);
 	~BaseDropdown() override;
 
 public:
@@ -124,6 +121,9 @@ public:
 	bool handle_key(bool down, SDL_Keysym code) override;
 
 	void set_height(int height);
+
+	/// Set the number of items to fit in the list
+	void set_max_items(int items);
 
 protected:
 	/// Add an element to the list
@@ -206,9 +206,7 @@ public:
 	/// dropdowns, this is both the width and the height of the button.
 	/// \param label              a label to prefix to the selected entry on the display button.
 	/// \param type               whether this is a textual or pictorial dropdown
-	/// \param background         the background image for this dropdown
-	/// \param button_background  the background image all buttons in this dropdown
-	///
+	/// \param style              the style used for buttons and background
 	/// Text conventions: Title Case for all elements
 	Dropdown(Panel* parent,
 	         int32_t x,
@@ -217,19 +215,9 @@ public:
 	         uint32_t list_h,
 	         int button_dimension,
 	         const std::string& label,
-	         const DropdownType type = DropdownType::kTextual,
-	         const Image* background = g_gr->images().get("images/ui_basic/but1.png"),
-	         const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"))
-	   : BaseDropdown(parent,
-	                  x,
-	                  y,
-	                  list_w,
-	                  list_h,
-	                  button_dimension,
-	                  label,
-	                  type,
-	                  background,
-	                  button_background) {
+	         const DropdownType type,
+	         PanelStyle style)
+	   : BaseDropdown(parent, x, y, list_w, list_h, button_dimension, label, type, style) {
 	}
 	~Dropdown() {
 		entry_cache_.clear();

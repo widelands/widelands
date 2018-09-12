@@ -24,17 +24,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 90},
+         hotspot = {56, 94},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 90},
+         hotspot = {56, 94},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 73},
       },
    },
 
@@ -58,10 +58,11 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start sewing fur garment because ...
          descname = _"sewing fur garment",
          actions = {
+            -- time total: 40 + 3.6
             "sleep=20000",
             "return=skipped unless economy needs fur_garment or workers need experience",
             "consume=fur:2",
-            "animate=working 25000",
+            "animate=working 20000",
             "produce=fur_garment"
          },
       },

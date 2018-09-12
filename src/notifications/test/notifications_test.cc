@@ -23,6 +23,7 @@
 #define BOOST_TEST_MODULE Notifications
 #include <boost/test/unit_test.hpp>
 
+#include "base/log.h"
 #include "base/macros.h"
 #include "notifications/notifications.h"
 
@@ -41,6 +42,10 @@ struct SimpleNote {
 BOOST_AUTO_TEST_SUITE(NotificationsTestSuite)
 
 BOOST_AUTO_TEST_CASE(SimpleTest) {
+#ifdef _WIN32
+	set_logging_dir();
+#endif
+
 	std::vector<SimpleNote> received1;
 	auto subscriber1 = Notifications::subscribe<SimpleNote>(
 	   [&received1](const SimpleNote& got) { received1.push_back(got); });

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"POT-Creation-Date: 2018-06-28 06:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Romanian (https://www.transifex.com/widelands/teams/35159/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -128,6 +128,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
 msgstr ""
 
@@ -169,8 +170,8 @@ msgstr ""
 msgid ""
 "Train a soldier to the highest possible level. Soldiers are trained in "
 "training camps and training arenas. We will need a gold mine, a tailor’s "
-"shop to sew better armor, and a large armor smithy for better weapons and "
-"helmets."
+"shop to sew sturdier garments, and a large armor smithy for better weapons "
+"and helmets."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
@@ -240,7 +241,7 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
 msgid ""
-"I have asked one of my advisors to oversee the construction of our "
+"I have asked Hauke, one of my advisors to oversee the construction of our "
 "settlement."
 msgstr ""
 
@@ -251,8 +252,8 @@ msgstr ""
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
 msgid ""
-"Greetings, Chieftain Reebaud! I am Hauke, your First Advisor. I will start "
-"with the colonization of the island straight away."
+"Greetings, Chieftain Reebaud! I will start with the colonization of the "
+"island straight away."
 msgstr ""
 
 #. TRANSLATORS: Hauke – Introduction 3
@@ -297,10 +298,10 @@ msgstr ""
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
 msgid ""
-"Clay is easy to make: A brickmaker working at a clay pit will simply dig up "
-"some earth and mix it with water. Just make sure that he has plenty of space"
-" for digging around his clay pit. It might be a good idea to build some "
-"sentinels to expand."
+"Clay is easy to make: A clay digger working at a clay pit will simply dig up"
+" some earth and mix it with water. Just make sure that he has plenty of "
+"space for digging around his clay pit. It might be a good idea to build some"
+" sentinels to expand."
 msgstr ""
 
 #. TRANSLATORS: Hauke – Introduction 4
@@ -350,7 +351,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for thatch reed in "
-"the constructionsite window."
+"the construction site window."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
@@ -392,14 +393,14 @@ msgid ""
 "I noticed we are running out of bricks. This slows down construction of our "
 "buildings a lot, since we need so many bricks. We should really start to "
 "construct another brick kiln, and assign it the highest priority for bricks "
-"in the constructionsite window so as to resolve the shortage as soon as "
+"in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
-"constructionsite window."
+"construction site window."
 msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
@@ -538,10 +539,6 @@ msgid ""
 "all honorable warriors."
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
-msgid "Build a recruitment center"
-msgstr ""
-
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
 msgid ""
@@ -663,10 +660,11 @@ msgstr ""
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
 msgid ""
-"They learn to attack with three different swords: The long, curved and "
-"double-edged sword. The latter two contain gold, and all of them iron. The "
-"advanced soldiers are taught to use two matching swords at once. This makes "
-"six steps of attack training."
+"They learn to attack with three different swords: The long sword, broadsword"
+" and double-edged sword. The latter two contain gold, and all of them iron. "
+"The advanced soldiers are taught to use two swords at once: They keep their "
+"first double-edged sword, and are given various other swords to wield in "
+"their other hand. This makes six steps of attack training."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – train soldiers 2
@@ -684,11 +682,11 @@ msgstr ""
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
 msgid ""
-"We will need a tailor’s shop to sew better armor, and another sewing room to"
-" keep producing normal fur garments. Also, enhance the small armor smithy to"
-" produce better weapons and helmets, and build a new small one so we will "
-"still get basic weapons. We need at least one gold mine now, because the "
-"best weapons and armor use gold."
+"We will need a tailor’s shop to sew more protective garments, and another "
+"sewing room to keep producing normal fur garments. Also, you should enhance "
+"the small armor smithy to produce better weapons and helmets, and build a "
+"new small one so we will still get basic weapons. We need at least one gold "
+"mine now, because the best weapons and armor use gold."
 msgstr ""
 
 #. TRANSLATORS: Hauke – train soldiers 3
@@ -774,8 +772,8 @@ msgstr ""
 msgid ""
 "The scouts informed me that the enemy can’t build towers. We could build a "
 "fortress, which is the building that will push the border as far east as "
-"possible in one go. The enemies can only see it if they build a fortress "
-"right at the border."
+"possible in one go. The enemy will only be able to see it if they build a "
+"fortress right at the border."
 msgstr ""
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2

@@ -13,7 +13,7 @@ tribes:new_productionsite_type {
    buildcost = {
       brick = 3,
       log = 2,
-      thatch_reed = 3
+      thatch_reed = 2
    },
    return_on_dismantle = {
       brick = 2,
@@ -24,17 +24,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 92},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 92},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 69},
       },
    },
 

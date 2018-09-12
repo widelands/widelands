@@ -27,7 +27,6 @@
 #include <stdint.h>
 
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -182,7 +181,7 @@ PROGRAM task
 
 Follow the steps of a configuration-defined program.
 ivar1 is the next action to be performed.
-ivar2 is used to store description indices selected by plant/setbobdescription
+ivar2 is used to store description indices selected by plant
 objvar1 is used to store objects found by findobject
 coords is used to store target coordinates found by findspace
 

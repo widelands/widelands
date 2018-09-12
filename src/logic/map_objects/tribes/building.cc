@@ -32,7 +32,6 @@
 #include "economy/flag.h"
 #include "economy/input_queue.h"
 #include "economy/request.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"
@@ -670,7 +669,7 @@ void Building::set_priority(int32_t const type,
 	}
 }
 
-void Building::log_general_info(const EditorGameBase& egbase) {
+void Building::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 
 	molog("position: (%i, %i)\n", position_.x, position_.y);

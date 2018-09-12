@@ -134,19 +134,21 @@ Military Sites
 Production Sites
 ----------------
 
-**graniteproducer**
-    The building will produce the ``granite`` ware, e.g.::
+**collects_ware_from_map**
+    The building will generate this ware from the map, e.g. a well mining the ``water`` ware,
+    or the hunter returning from the hunt with the ``meat`` ware. The same ware needs also to be listed as the first one of the building's outputs, e.g.::
 
-        graniteproducer = true,
+        aihints = {
+            collects_ware_from_map = "meat"
+        },
 
-    The AI expects exactly one such building type.
+        outputs = {
+            "meat",
+            "fur"
+        },
 
-**logproducer**
-    The building will produce the ``log`` ware, e.g.::
-
-        logproducer = true,
-
-    The AI expects exactly one such building type.
+    **Note:** The AI expects exactly one such building type for each of the following wares:
+    ``fish`` (fisher), ``granite`` (quarry), ``log`` (lumberjack/woodcutter), ``meat`` (hunter), ``water`` (well).
 
 **mines**
     The building will mine to obtain the given ware, e.g.::
@@ -157,13 +159,6 @@ Production Sites
     The percentage that a mine will mine of its resource before it needs enhancing, e.g.::
 
         mines_percent = 60,
-
-**mines_water**
-    The building will mine to obtain the ``water`` ware, e.g.::
-
-        mines_water = true,
-
-    **Note:** The AI expects exactly one such building type.
 
 **needs_water**
     The building needs to be placed near a body of water, e.g.::
@@ -224,11 +219,7 @@ Production Sites
 
 BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
    : mines_(table->has_key("mines") ? table->get_string("mines") : ""),
-     log_producer_(table->has_key("logproducer") ? table->get_bool("logproducer") : false),
-     granite_producer_(table->has_key("graniteproducer") ? table->get_bool("graniteproducer") :
-                                                           false),
      needs_water_(table->has_key("needs_water") ? table->get_bool("needs_water") : false),
-     mines_water_(table->has_key("mines_water") ? table->get_bool("mines_water") : false),
      recruitment_(table->has_key("recruitment") ? table->get_bool("recruitment") : false),
      space_consumer_(table->has_key("space_consumer") ? table->get_bool("space_consumer") : false),
      expansion_(table->has_key("expansion") ? table->get_bool("expansion") : false),
@@ -236,6 +227,9 @@ BuildingHints::BuildingHints(std::unique_ptr<LuaTable> table)
      mountain_conqueror_(
         table->has_key("mountain_conqueror") ? table->get_bool("mountain_conqueror") : false),
      shipyard_(table->has_key("shipyard") ? table->get_bool("shipyard") : false),
+     collects_ware_from_map_(table->has_key("collects_ware_from_map") ?
+                                table->get_string("collects_ware_from_map") :
+                                ""),
      prohibited_till_(table->has_key("prohibited_till") ? table->get_int("prohibited_till") : 0),
      basic_amount_(table->has_key("basic_amount") ? table->get_int("basic_amount") : 0),
      // 10 days default

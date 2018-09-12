@@ -27,7 +27,6 @@
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
 
@@ -45,10 +44,6 @@ class FullscreenMenuLaunchGame : public FullscreenMenuBase {
 public:
 	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
 	~FullscreenMenuLaunchGame() override;
-
-	void think() override;
-
-	virtual void refresh() = 0;
 
 protected:
 	void clicked_ok() override;

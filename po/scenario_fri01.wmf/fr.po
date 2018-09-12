@@ -4,14 +4,14 @@
 # 
 # Translators:
 # zecas <jjorge@free.fr>, 2018
-# balkh mogaehild <balkhmogaehild@protonmail.com>, 2018
+# Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"POT-Creation-Date: 2018-06-28 06:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: balkh mogaehild <balkhmogaehild@protonmail.com>, 2018\n"
+"Last-Translator: Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -147,6 +147,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Start recruiting soldiers"
 msgstr "Commencer à recruter des soldats"
 
@@ -189,14 +190,9 @@ msgstr "Entraînement des Soldats"
 msgid ""
 "Train a soldier to the highest possible level. Soldiers are trained in "
 "training camps and training arenas. We will need a gold mine, a tailor’s "
-"shop to sew better armor, and a large armor smithy for better weapons and "
-"helmets."
+"shop to sew sturdier garments, and a large armor smithy for better weapons "
+"and helmets."
 msgstr ""
-"Entraîner un soldat au plus haut niveau possible. Les soldats sont entraînés"
-" dans des camps d'entraînement et des arènes d'entraînement. Nous aurons "
-"besoin d'une mine d'or, d'un atelier de tailleur pour coudre de meilleures "
-"armures et d'une grande forge pour de meilleures armes et de meilleurs "
-"casques."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the enemy!"
@@ -276,11 +272,9 @@ msgstr ""
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:141
 msgid ""
-"I have asked one of my advisors to oversee the construction of our "
+"I have asked Hauke, one of my advisors to oversee the construction of our "
 "settlement."
 msgstr ""
-"J'ai demandé à l'un de mes conseillers de superviser la construction de "
-"notre colonie."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:145
 msgid "The first buildings"
@@ -289,11 +283,9 @@ msgstr "Les premiers bâtiments"
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:147
 msgid ""
-"Greetings, Chieftain Reebaud! I am Hauke, your First Advisor. I will start "
-"with the colonization of the island straight away."
+"Greetings, Chieftain Reebaud! I will start with the colonization of the "
+"island straight away."
 msgstr ""
-"Salutations, chef de tribu Reebaud ! Je suis Hauke, votre premier "
-"conseiller. Je commencerai tout de suite par la colonisation de l'île."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:150
@@ -355,16 +347,11 @@ msgstr ""
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:166
 msgid ""
-"Clay is easy to make: A brickmaker working at a clay pit will simply dig up "
-"some earth and mix it with water. Just make sure that he has plenty of space"
-" for digging around his clay pit. It might be a good idea to build some "
-"sentinels to expand."
+"Clay is easy to make: A clay digger working at a clay pit will simply dig up"
+" some earth and mix it with water. Just make sure that he has plenty of "
+"space for digging around his clay pit. It might be a good idea to build some"
+" sentinels to expand."
 msgstr ""
-"L'argile est facile à fabriquer : un briquetier travaillant dans une fosse "
-"d'argile va simplement creuser de la terre et la mélanger avec de l'eau. "
-"Assurez-vous qu'il a suffisamment d'espace pour creuser autour de sa fosse "
-"d'argile. Ce serait une bonne idée de construire des sentinelles pour "
-"agrandir."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:169
@@ -429,10 +416,8 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:188
 msgid ""
 "You should assign the new reed farm the highest priority for thatch reed in "
-"the constructionsite window."
+"the construction site window."
 msgstr ""
-"Vous devriez assigner à la nouvelle roselière la plus haute priorité au "
-"roseau de chaume dans la fenêtre du chantier."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:191
 msgid "Clay Shortages"
@@ -482,22 +467,15 @@ msgid ""
 "I noticed we are running out of bricks. This slows down construction of our "
 "buildings a lot, since we need so many bricks. We should really start to "
 "construct another brick kiln, and assign it the highest priority for bricks "
-"in the constructionsite window so as to resolve the shortage as soon as "
+"in the construction site window so as to resolve the shortage as soon as "
 "possible."
 msgstr ""
-"J'ai remarqué que nous manquons de briques. Cela ralentit beaucoup la "
-"construction de nos bâtiments, car nous avons besoin de beaucoup de briques."
-" Nous devrions vraiment commencer à construire une autre briqueterie et "
-"donner la plus haute priorité aux briques dans la fenêtre du chantier afin "
-"de résoudre la pénurie le plus rapidement possible."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
 msgid ""
 "You should assign the new brick kiln the highest priority for bricks in the "
-"constructionsite window."
+"construction site window."
 msgstr ""
-"Vous devriez assigner à la nouvelle briqueterie la priorité la plus élevée "
-"pour les briques dans la fenêtre du chantier."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:207
 msgid "Warehouses"
@@ -682,10 +660,6 @@ msgstr ""
 "courte et d'un vêtement de fourrure, l'uniforme de tous les guerriers "
 "honorables."
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
-msgid "Build a recruitment center"
-msgstr "Construire un centre de recrutement"
-
 #. TRANSLATORS: Hauke – recruit 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:266
 msgid ""
@@ -842,15 +816,12 @@ msgstr ""
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:324
 msgid ""
-"They learn to attack with three different swords: The long, curved and "
-"double-edged sword. The latter two contain gold, and all of them iron. The "
-"advanced soldiers are taught to use two matching swords at once. This makes "
-"six steps of attack training."
+"They learn to attack with three different swords: The long sword, broadsword"
+" and double-edged sword. The latter two contain gold, and all of them iron. "
+"The advanced soldiers are taught to use two swords at once: They keep their "
+"first double-edged sword, and are given various other swords to wield in "
+"their other hand. This makes six steps of attack training."
 msgstr ""
-"Ils apprennent à attaquer avec trois épées différentes : l'épée longue, "
-"incurvée et à double tranchant. Ces deux derniers contiennent de l'or et du "
-"fer. Les soldats avancés apprennent à utiliser deux épées assorties à la "
-"fois. Cela fait six étapes d'entraînement à l'attaque."
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:327
@@ -870,18 +841,12 @@ msgstr "Planification d'un centre de formation"
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:333
 msgid ""
-"We will need a tailor’s shop to sew better armor, and another sewing room to"
-" keep producing normal fur garments. Also, enhance the small armor smithy to"
-" produce better weapons and helmets, and build a new small one so we will "
-"still get basic weapons. We need at least one gold mine now, because the "
-"best weapons and armor use gold."
+"We will need a tailor’s shop to sew more protective garments, and another "
+"sewing room to keep producing normal fur garments. Also, you should enhance "
+"the small armor smithy to produce better weapons and helmets, and build a "
+"new small one so we will still get basic weapons. We need at least one gold "
+"mine now, because the best weapons and armor use gold."
 msgstr ""
-"Nous aurons besoin d'un atelier de tailleur pour mieux coudre les armures et"
-" d'une autre salle de couture pour continuer à produire des vêtements de "
-"fourrure normaux. En outre, améliorer la petite forge d'armure pour produire"
-" de meilleures armes et casques, et en construire une nouvelle pour que nous"
-" ayons toujours des armes de base. Nous avons besoin d'au moins une mine "
-"d'or maintenant, parce que les meilleures armes et armures utilisent l'or."
 
 #. TRANSLATORS: Hauke – train soldiers 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:336
@@ -991,14 +956,9 @@ msgstr ""
 msgid ""
 "The scouts informed me that the enemy can’t build towers. We could build a "
 "fortress, which is the building that will push the border as far east as "
-"possible in one go. The enemies can only see it if they build a fortress "
-"right at the border."
+"possible in one go. The enemy will only be able to see it if they build a "
+"fortress right at the border."
 msgstr ""
-"Les éclaireurs m'ont informé que l'ennemi ne peut pas construire de tours. "
-"Nous pourrions construire une forteresse, c'est-à-dire le bâtiment qui "
-"repoussera la frontière le plus à l'est possible d'un seul coup. Les ennemis"
-" ne peuvent le voir que s'ils construisent une forteresse juste à la "
-"frontière."
 
 #. TRANSLATORS: Reebaud – beware of early attacks 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:377

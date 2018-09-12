@@ -11,29 +11,27 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 1,
-      granite = 1,
       log = 1,
       thatch_reed = 1
    },
    return_on_dismantle = {
-      brick = 1,
-      granite = 1
+      brick = 1
    },
 
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 84},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 84},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 63},
       },
    },
 
@@ -45,7 +43,7 @@ tribes:new_productionsite_type {
    },
 
    working_positions = {
-      frisians_brickmaker = 1
+      frisians_claydigger = 1
    },
 
    inputs = {
@@ -61,9 +59,9 @@ tribes:new_productionsite_type {
          descname = _"making clay",
          actions = {
             "sleep=20000",
-            "return=skipped unless economy needs clay",
+            "return=skipped unless economy needs clay or site has water",
             "return=failed unless site has water",
-            "worker=dig",
+            "callworker=dig",
             "consume=water",
             "sleep=2000",
             "animate=working 17000",
@@ -73,10 +71,10 @@ tribes:new_productionsite_type {
       },
    },
    out_of_resource_notification = {
-      -- Translators: Short for "Out of Earth" for clay pits
+      -- TRANSLATORS: Short for "No Level Ground" for clay pits
       title = _"No Ground",
       heading = _"No Level Ground",
-      message = pgettext ("frisians_building", "The brickmaker working at this clay pit can’t find any level ground in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
+      message = pgettext ("frisians_building", "The clay digger working at this clay pit can’t find any level ground in his work area. Consider dismantling this clay pit and rebuilding it somewhere else."),
       productivity_threshold = 33
    },
 }

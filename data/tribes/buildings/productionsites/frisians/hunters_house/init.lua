@@ -11,7 +11,6 @@ tribes:new_productionsite_type {
 
    buildcost = {
       brick = 1,
-      granite = 1,
       log = 1,
       thatch_reed = 1
    },
@@ -23,16 +22,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 70},
+         hotspot = {49, 86},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 70},
+         hotspot = {49, 64},
       },
    },
 
    aihints = {
+      collects_ware_from_map = "meat",
       prohibited_till = 480
    },
 
@@ -41,7 +41,8 @@ tribes:new_productionsite_type {
    },
 
    outputs = {
-      "meat"
+      "meat",
+      "fur"
    },
 
    programs = {
@@ -50,7 +51,12 @@ tribes:new_productionsite_type {
          descname = _"hunting",
          actions = {
             "sleep=35000",
-            "worker=hunt"
+            "callworker=hunt",
+            "sleep=35000",
+            "callworker=hunt",
+            "sleep=35000",
+            "callworker=hunt",
+            "produce=fur"
          }
       },
    },

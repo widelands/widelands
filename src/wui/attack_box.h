@@ -23,7 +23,7 @@
 #include <list>
 #include <memory>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "logic/map_objects/bob.h"
@@ -61,7 +61,6 @@ private:
 	                                                 uint32_t min,
 	                                                 uint32_t max,
 	                                                 uint32_t initial,
-	                                                 char const* picname,
 	                                                 char const* hint);
 	// TODO(GunChleoc): This should also return a unique_ptr
 	UI::Textarea& add_text(UI::Box& parent,
