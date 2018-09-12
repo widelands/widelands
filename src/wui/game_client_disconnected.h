@@ -44,6 +44,7 @@ struct GameClientDisconnected : public UI::UniqueWindow {
 private:
 	void clicked_continue();
 	void clicked_exit_game();
+	void exit_game_aborted(UI::Panel*);
 
 	void set_ai(const std::string& ai);
 

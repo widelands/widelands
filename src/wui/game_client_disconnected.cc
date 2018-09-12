@@ -26,7 +26,7 @@
 #include "ai/defaultai.h"
 #include "base/i18n.h"
 #include "network/gamehost.h"
-#include "ui_basic/messagebox.h"
+#include "wui/game_exit_confirm_box.h"
 #include "wui/interactive_gamebase.h"
 
 namespace {
@@ -35,37 +35,6 @@ constexpr int32_t width = 256;
 constexpr int32_t margin = 10;
 constexpr int32_t vspacing = 5;
 constexpr uint32_t vgap = 3;
-
-/**
- * Small helper class for a "Really exit game?" message box.
- */
-class GameClientDisconnectedExitConfirmBox : public UI::WLMessageBox {
-public:
-	// TODO(GunChleoc): Arabic: Buttons need more height for Arabic
-	GameClientDisconnectedExitConfirmBox(GameClientDisconnected* gcd, InteractiveGameBase* gb)
-	   : UI::WLMessageBox(gcd->get_parent(),
-	                      /** TRANSLATORS: Window label when "Exit game" has been pressed */
-	                      _("Exit Game Confirmation"),
-	                      _("Are you sure you wish to exit this game?"),
-	                      MBoxType::kOkCancel),
-	     igb_(gb), gcd_(gcd) {
-	}
-
-	void clicked_ok() override {
-		igb_->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-	}
-
-	void clicked_back() override {
-		cancel();
-		die();
-		// Make parent window visible again so player can use another option
-		gcd_->set_visible(true);
-	}
-
-private:
-	InteractiveGameBase* igb_;
-	GameClientDisconnected* gcd_;
-};
 
 } // end anonymous namespace
 
@@ -182,9 +151,20 @@ void GameClientDisconnected::clicked_exit_game() {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		igb_->end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
-		new GameClientDisconnectedExitConfirmBox(this, igb_);
+		GameExitConfirmBox *gecb = new GameExitConfirmBox(*get_parent(), *igb_);
+		gecb->cancel.connect(
+			boost::bind(&GameClientDisconnected::exit_game_aborted,
+							boost::ref(*this), gecb));
+
 		set_visible(false);
 	}
+}
+
+void GameClientDisconnected::exit_game_aborted(Panel *dialog) {
+	// Make parent window visible again so player can use another option
+	set_visible(true);
+	// Make panel (that is: the dialog box) invisible to avoid both being visible for a moment
+	dialog->set_visible(false);
 }
 
 void GameClientDisconnected::set_ai(const std::string& ai) {
