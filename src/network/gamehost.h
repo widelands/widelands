@@ -160,8 +160,6 @@ private:
 	GameHostImpl* d;
 	bool internet_;
 	bool forced_pause_;
-
-	UI::UniqueWindow::Registry client_disconnected_;
 };
 
 #endif  // end of include guard: WL_NETWORK_GAMEHOST_H

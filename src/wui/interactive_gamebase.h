@@ -95,6 +95,8 @@ public:
 	}
 
 	void show_game_summary();
+	/// For the game host. Show a window and ask the host player what to do with the tribe of the leaving client.
+	bool show_game_client_disconnected();
 	void postload() override;
 	void start() override;
 
@@ -107,6 +109,7 @@ protected:
 	PlayerType playertype_;
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
+	UI::UniqueWindow::Registry client_disconnected_;
 	UI::Button* toggle_buildhelp_;
 	UI::Button* reset_zoom_;
 

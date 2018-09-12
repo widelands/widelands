@@ -63,7 +63,6 @@
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launch_mpg.h"
 #include "wlapplication.h"
-#include "wui/game_client_disconnected.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
@@ -2291,17 +2290,13 @@ void GameHost::disconnect_client(uint32_t const number,
 	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" && d->game != nullptr) {
 		// And the client hasn't lost/won yet ...
 		if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kUndefined) {
-			// And the window isn't visible yet ...
-			if (!client_disconnected_.window) {
-				// Show a window and ask the host player what to do with the tribe of the leaving client
-
+			// If not shown yet, show a window and ask the host player what to do with the tribe of the leaving client
+			if (!d->game->get_igbase()->show_game_client_disconnected()) {
+				// And the window isn't visible yet ...
 				if (!forced_pause()) {
 					force_pause();
 				}
-
 				WLApplication::emergency_save(*d->game);
-
-				new GameClientDisconnected(d->game->get_ipl(), client_disconnected_, this);
 			}
 		// Client was active but is a winner of the game: Replace with normal AI
 		} else if (d->settings.users.at(client.usernum).result
