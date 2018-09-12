@@ -126,7 +126,7 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 		if (wh_obs.bo->is(BuildingAttribute::kPort)) {
 			ports_count += 1;
-			if (Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
+			if (const Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
 				if (pd->expedition_started()) {
 					expeditions_in_prep += 1;
 				}
