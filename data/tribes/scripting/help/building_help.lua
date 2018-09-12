@@ -54,7 +54,7 @@ function dependencies_resi(tribename, resource, items, text)
    for amount,name in pairs(tribe_descr.resource_indicators[resource]) do
       if amount > am then
          resi = name
-         amount = am
+         am = amount
       end
    end
    local items_with_resource = { wl.Game():get_immovable_description(resi).representative_image }
