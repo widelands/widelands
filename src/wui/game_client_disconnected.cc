@@ -31,10 +31,10 @@
 
 namespace {
 
-const int32_t width = 256;
-const int32_t margin = 10;
-const int32_t vspacing = 5;
-const uint32_t vgap = 3;
+constexpr int32_t width = 256;
+constexpr int32_t margin = 10;
+constexpr int32_t vspacing = 5;
+constexpr uint32_t vgap = 3;
 
 /**
  * Small helper class for a "Really exit game?" message box.
@@ -99,16 +99,15 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 			/** TRANSLATORS: Button text */
 			_("Continue game"),
 			/** TRANSLATORS: Button tooltip */
-			_("Continue game with...")),
+			_("Continue game with selected AI")),
 		type_dropdown_(&box_h_,
 			width - 50, // x
 			0, // y
 			60, // width of selection box
 			800, // height of selection box, shrinks automatically
 			35, // width/height of button
-			/** TRANSLATORS: Dropdown tooltip to select the AI difficulty,
-				entries have the form "Replace with Normal AI" */
-			_("Continue game and"),
+			/** TRANSLATORS: Dropdown tooltip to select the AI difficulty */
+			_("Select AI to continue game with"),
 			UI::DropdownType::kPictorial,
 			UI::PanelStyle::kWui),
 		exit_game_(&box_,
@@ -138,6 +137,8 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 
 	// Add all AI types
 	for (const auto* impl : ComputerPlayer::get_implementations()) {
+		/** TRANSLATORS: Parameter is the pretty/descriptive name of the AI that will be used
+			as replacement for a disconnected player */
 		type_dropdown_.add((boost::format(_("Replace with %s")) % impl->descname).str(),
 							impl->name.c_str(),
 							g_gr->images().get(impl->icon_filename), false,
@@ -147,8 +148,9 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 	// Set default mode to normal AI
 	type_dropdown_.select(DefaultAI::normal_impl.name.c_str());
 
-	if (get_usedefaultpos())
+	if (get_usedefaultpos()) {
 		center_to_parent();
+	}
 }
 
 void GameClientDisconnected::die() {
@@ -192,6 +194,6 @@ void GameClientDisconnected::set_ai(const std::string& ai) {
 				|| !igb_->game().get_player(i + 1)->get_ai().empty()) {
 			continue;
 		}
-		host_->start_ai_for(i, ai);
+		host_->replace_client_with_ai(i, ai);
 	}
 }

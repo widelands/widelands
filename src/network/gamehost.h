@@ -80,7 +80,7 @@ struct GameHost : public GameController {
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared);
 	void switch_to_player(uint32_t user, uint8_t number);
 	void set_win_condition_script(const std::string& wc);
-	void start_ai_for(uint8_t playernumber, const std::string& ai);
+	void replace_client_with_ai(uint8_t playernumber, const std::string& ai);
 
 	// just visible stuff for the select mapmenu
 	void set_multiplayer_game_settings();

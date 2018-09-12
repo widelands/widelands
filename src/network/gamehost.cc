@@ -561,7 +561,7 @@ void GameHost::init_computer_player(Widelands::PlayerNumber p) {
 	                                ->instantiate(*d->game, p));
 }
 
-void GameHost::start_ai_for(uint8_t playernumber, const std::string& ai) {
+void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& ai) {
 	assert(d->game->get_player(playernumber + 1)->get_ai().empty());
 	assert(d->game->get_player(playernumber + 1)->get_ai()
 			== d->settings.players.at(playernumber).ai);
@@ -2290,9 +2290,10 @@ void GameHost::disconnect_client(uint32_t const number,
 	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" && d->game != nullptr) {
 		// And the client hasn't lost/won yet ...
 		if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kUndefined) {
-			// If not shown yet, show a window and ask the host player what to do with the tribe of the leaving client
-			if (!d->game->get_igbase()->show_game_client_disconnected()) {
-				// And the window isn't visible yet ...
+			// If not shown yet, show a window and ask the host player what to do
+			// with the tribe of the leaving client
+			if (d->game->get_igbase()->show_game_client_disconnected()) {
+				// Window has just been opened, pause game and create a save game
 				if (!forced_pause()) {
 					force_pause();
 				}
@@ -2301,14 +2302,14 @@ void GameHost::disconnect_client(uint32_t const number,
 		// Client was active but is a winner of the game: Replace with normal AI
 		} else if (d->settings.users.at(client.usernum).result
 						== Widelands::PlayerEndResult::kWon) {
-			start_ai_for(client.playernum, DefaultAI::normal_impl.name);
+			replace_client_with_ai(client.playernum, DefaultAI::normal_impl.name);
 		// Client was active but has lost or gave up: Replace with empty AI
 		} else {
 			assert(d->settings.users.at(client.usernum).result
 							== Widelands::PlayerEndResult::kLost
 					|| d->settings.users.at(client.usernum).result
 							== Widelands::PlayerEndResult::kResigned);
-			start_ai_for(client.playernum, "empty");
+			replace_client_with_ai(client.playernum, "empty");
 		}
 	}
 
