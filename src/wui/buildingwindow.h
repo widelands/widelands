@@ -88,8 +88,10 @@ protected:
 	void act_enhance(Widelands::DescriptionIndex);
 	void clicked_goto();
 
-	void
-	create_input_queue_panel(UI::Box*, Widelands::Building&, Widelands::InputQueue*, bool = false);
+	void create_input_queue_panel(UI::Box*,
+	                              Widelands::Building&,
+	                              const Widelands::InputQueue&,
+	                              bool = false);
 
 	bool is_dying_;
 

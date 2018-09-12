@@ -28,4 +28,14 @@ void log(const char*, ...) PRINTF_FORMAT(1, 2);
 
 extern bool g_verbose;
 
+#ifdef _WIN32
+/** Set the directory that stdout.txt shall be written to.
+ *  This should be the same dir where widelands writes its config file. Returns true on success.
+ */
+bool set_logging_dir(const std::string& homedir);
+// Set the directory that stdout.txt shall be written to to the directory the program is started
+// from. Use this only for test cases.
+void set_logging_dir();
+#endif
+
 #endif  // end of include guard: WL_BASE_LOG_H

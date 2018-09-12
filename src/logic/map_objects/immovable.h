@@ -357,7 +357,7 @@ struct PlayerImmovable : public BaseImmovable {
 		return workers_;
 	}
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	/**
 	 * These functions are called when a ware or worker arrives at

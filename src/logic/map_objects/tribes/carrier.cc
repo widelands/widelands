@@ -406,7 +406,7 @@ bool Carrier::start_task_walktoflag(Game& game, int32_t const flag, bool const o
 	return start_task_movepath(game, path, idx, descr().get_right_walk_anims(does_carry_ware()));
 }
 
-void Carrier::log_general_info(const Widelands::EditorGameBase& egbase) {
+void Carrier::log_general_info(const Widelands::EditorGameBase& egbase) const {
 	molog("Carrier at %i,%i\n", get_position().x, get_position().y);
 
 	Worker::log_general_info(egbase);
