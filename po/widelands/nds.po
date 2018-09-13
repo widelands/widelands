@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-01 06:47+0000\n"
-"PO-Revision-Date: 2018-09-01 18:29+0000\n"
+"POT-Creation-Date: 2018-09-10 06:56+0000\n"
+"PO-Revision-Date: 2018-09-10 10:07+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1082,7 +1082,7 @@ msgstr "Upstünds Grött: %u"
 #: ../../src/io/filesystem/filesystem.cc:197
 msgctxt "illegal_filename_characters"
 msgid "blank space"
-msgstr "leege Bookstaav"
+msgstr "leeg"
 
 #. * TRANSLATORS: Tooltip entry for characters in illegal filenames.
 #. *  %s is a list of illegal characters
@@ -1130,7 +1130,7 @@ msgid "Loading map…"
 msgstr "Lade de Kaart…"
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1406
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1419
 msgid "Loading…"
 msgstr "Lade…"
 
@@ -1290,9 +1290,9 @@ msgstr "de Wirtschaft bruukt de Arbeider »%s« nich"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:387
 #: ../../src/logic/map_objects/tribes/production_program.cc:413
-#: ../../src/logic/map_objects/tribes/production_program.cc:876
-#: ../../src/logic/map_objects/tribes/production_program.cc:982
-#: ../../src/logic/map_objects/tribes/production_program.cc:1064
+#: ../../src/logic/map_objects/tribes/production_program.cc:878
+#: ../../src/logic/map_objects/tribes/production_program.cc:984
+#: ../../src/logic/map_objects/tribes/production_program.cc:1066
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$i×%2$s"
@@ -1334,25 +1334,25 @@ msgstr "de Arbeiders bruken keene Erfahrung"
 #. * TRANSLATORS: on a development build if you can, and let us know if there
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
-#: ../../src/logic/map_objects/tribes/production_program.cc:542
-#: ../../src/logic/map_objects/tribes/production_program.cc:900
+#: ../../src/logic/map_objects/tribes/production_program.cc:544
+#: ../../src/logic/map_objects/tribes/production_program.cc:902
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Hett nich begunnen, %1$s, denn %2$s"
 
 #. * TRANSLATORS: "Completed working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:547
+#: ../../src/logic/map_objects/tribes/production_program.cc:549
 #, c-format
 msgid "Completed %1$s because %2$s"
 msgstr "Hett %1$s daankregen, denn %2$s"
 
 #. * TRANSLATORS: "Skipped working because the economy needs the ware ‘%s’"
-#: ../../src/logic/map_objects/tribes/production_program.cc:552
+#: ../../src/logic/map_objects/tribes/production_program.cc:554
 #, c-format
 msgid "Skipped %1$s because %2$s"
 msgstr "Hett %1$s översprungen, denn %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:747
+#: ../../src/logic/map_objects/tribes/production_program.cc:749
 msgid "No use for ships on this map!"
 msgstr "Up düsse Kaart bruukt man keene Schippen!"
 
@@ -1360,7 +1360,7 @@ msgstr "Up düsse Kaart bruukt man keene Schippen!"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:886
+#: ../../src/logic/map_objects/tribes/production_program.cc:888
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1370,7 +1370,7 @@ msgstr[1] "dat hapert an %s"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:993
+#: ../../src/logic/map_objects/tribes/production_program.cc:995
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1380,19 +1380,19 @@ msgstr[1] "%s sünd produzeert worden"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1075
+#: ../../src/logic/map_objects/tribes/production_program.cc:1077
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "%s is anhüürt worden"
 msgstr[1] "%s sünd anhüürt worden"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1282
+#: ../../src/logic/map_objects/tribes/production_program.cc:1284
 msgid "No soldier to train!"
 msgstr "Keen Soldat tum utbilden!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1291
-#: ../../src/logic/map_objects/tribes/production_program.cc:1369
+#: ../../src/logic/map_objects/tribes/production_program.cc:1293
+#: ../../src/logic/map_objects/tribes/production_program.cc:1371
 msgid "No soldier found for this training level!"
 msgstr "Keen Soldat för düsse Lehre is funden worden!"
 
@@ -1418,7 +1418,7 @@ msgstr "(stoppt)"
 msgid "%i%%"
 msgstr "%i%%"
 
-#: ../../src/logic/map_objects/tribes/productionsite.cc:968
+#: ../../src/logic/map_objects/tribes/productionsite.cc:969
 msgid "Can’t find any more resources!"
 msgstr "Kann keene Mineraale mehr finnen!"
 
@@ -1664,7 +1664,7 @@ msgid ""
 msgstr "Widelands kunn keene Verbindung mit de angeven Adress maken. Of keen Widelands-Server leep an de angeven Port of de Server weer utknipst as du di verbinnen wullst."
 
 #: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
-#: ../../src/wlapplication.cc:1298
+#: ../../src/wlapplication.cc:1311
 msgid "Preparing game"
 msgstr "Speel word torechtmaakt"
 
@@ -2191,7 +2191,7 @@ msgstr "Widelands kunn de stedenwies Nett nich bruken. Wahrschienelk bedrifft ee
 #. console
 #: ../../src/profile/profile.cc:45
 msgid "true"
-msgstr "wahr"
+msgstr "jau"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2212,7 +2212,7 @@ msgstr "an"
 #. console
 #: ../../src/profile/profile.cc:58
 msgid "false"
-msgstr "falsk"
+msgstr "nee"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2780,7 +2780,7 @@ msgstr "LAN / IP stracks"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:66
 msgid "Show login dialog"
-msgstr "Fenster förs Anmellen anzeigen"
+msgstr "Fenster förs Anmellen wiesen"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:94
 #: ../../src/ui_fsmenu/netsetup_lan.cc:119 ../../src/wui/login_box.cc:63
@@ -2989,11 +2989,11 @@ msgstr "Rutfödderungs-Riegen"
 msgid "Load Game"
 msgstr "Speel laden"
 
-#: ../../src/wlapplication.cc:1093
+#: ../../src/wlapplication.cc:1106
 msgid "Game data error"
 msgstr "Fehler mit de Speel-Daten"
 
-#: ../../src/wlapplication.cc:1101
+#: ../../src/wlapplication.cc:1114
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3001,18 +3001,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Bidde melle düsses Probleem, daarmit wi Widelands beter maken könen. Du finnst mehr Narichten över dat Probleem in de Normaal-Utgaav (unner Windows is dat stdout.txt). Du bruukst Versioon %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1108
+#: ../../src/wlapplication.cc:1121
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Bidde melle ok düsse Informatioon.\n\nWidelands versöcht, dat Speel to sekern, wenn een Fehler bi'm Spölen uptreddt. Mennigmaal – nich immer – kannst du dat laden un wiederspölen."
 
-#: ../../src/wlapplication.cc:1235
+#: ../../src/wlapplication.cc:1248
 msgid "Invalid Address"
 msgstr "Adress ungültig"
 
-#: ../../src/wlapplication.cc:1236
+#: ../../src/wlapplication.cc:1249
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "De angeven Weerts-Naam oder Adress is ungültig, daar kann man nich mit verbinnen."
 
@@ -3301,7 +3301,7 @@ msgstr "Tahlen över Husen wiesen oder verbargen"
 
 #: ../../src/wui/fieldaction.cc:363
 msgid "Toggle building label display"
-msgstr "Naamen vun Husen wiesen oder verbargen"
+msgstr "Namen vun Husen wiesen oder verbargen"
 
 #: ../../src/wui/fieldaction.cc:373 ../../src/wui/watchwindow.cc:54
 msgid "Watch"
@@ -3736,23 +3736,23 @@ msgstr "Verlorene freedsame Husen"
 msgid "Military"
 msgstr "Soldateree"
 
-#: ../../src/wui/inputqueuedisplay.cc:196
+#: ../../src/wui/inputqueuedisplay.cc:195
 msgid "Highest priority"
 msgstr "Hoogste Wichtigkeid"
 
-#: ../../src/wui/inputqueuedisplay.cc:199
+#: ../../src/wui/inputqueuedisplay.cc:198
 msgid "Normal priority"
 msgstr "Normaale Wichtigkeid"
 
-#: ../../src/wui/inputqueuedisplay.cc:202
+#: ../../src/wui/inputqueuedisplay.cc:201
 msgid "Lowest priority"
 msgstr "Leegste Wichtigkeid"
 
-#: ../../src/wui/inputqueuedisplay.cc:247
+#: ../../src/wui/inputqueuedisplay.cc:246
 msgid "Decrease the number of wares you want to be stored here."
 msgstr "Minner de Tahl vun Waren wat du hier verwahren willt."
 
-#: ../../src/wui/inputqueuedisplay.cc:255
+#: ../../src/wui/inputqueuedisplay.cc:254
 msgid "Increase the number of wares you want to be stored here."
 msgstr "Verhoog de Tahl vun Waren wat du hier verwahren willt."
 
