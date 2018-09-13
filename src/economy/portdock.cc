@@ -387,7 +387,6 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	uint32_t remaining_capacity = ship.descr().get_capacity() - ship.get_nritems();
 
 	// Firstly load the items which go to chosen destination, while also checking for items with invalid destination
-	// NOCOM I made this change for performance reasons - please double-check that I didn't accidentally change the semantics.
 	auto si_it = waiting_.begin();
 	while (si_it != waiting_.end()) {
 		const PortDock* itemdest = si_it->get_destination(game);
@@ -407,7 +406,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 			// carry the item back into the warehouse
 			si_it->set_location(game, warehouse_);
 			si_it->end_shipping(game);
-			++si_it;
+			si_it = waiting_.erase(si_it);
 		}
 	}
 
