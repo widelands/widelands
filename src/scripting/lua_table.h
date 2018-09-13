@@ -27,7 +27,9 @@
 
 #include <boost/lexical_cast.hpp>
 
+#include "base/macros.h"
 #include "base/vector.h"
+#include "base/wexception.h"
 #include "scripting/lua.h"
 #include "scripting/lua_coroutine.h"
 #include "scripting/lua_errors.h"
