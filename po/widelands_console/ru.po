@@ -5,14 +5,15 @@
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
 # Anton Khabarov <2233009@gmail.com>, 2016
 # Yuriy Sokolov <lention@mail.ru>, 2015
+# Алексей Баринов <leha.bar.ru@gmail.com>, 2018
 # Олег Шевченко <olegrock@gmail.com>, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-05 17:07+0000\n"
-"PO-Revision-Date: 2018-05-05 17:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-09-10 06:56+0000\n"
+"PO-Revision-Date: 2018-09-10 21:13+0000\n"
+"Last-Translator: Алексей Баринов <leha.bar.ru@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgstr "--<config-entry-name>=значение перезаписывает на
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr ""
+msgstr "Примечание: Новое значение будет записано в файл конфигурации"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""
@@ -273,4 +274,4 @@ msgid ""
 "        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr ""
+msgstr "Сообщения об ошибках? Предложения? Проверьте веб-сайт проекта:\n https://wl.widelands.org/\n\nНадеюсь, вам понравится эта игра!"

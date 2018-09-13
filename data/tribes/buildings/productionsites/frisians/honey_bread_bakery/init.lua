@@ -72,8 +72,8 @@ tribes:new_productionsite_type {
          descname = _"baking honey bread",
          actions = {
             "return=skipped unless economy needs honey_bread or workers need experience",
-            "sleep=35000",
             "consume=barley water honey",
+            "sleep=35000",
             "animate=working 35000",
             "produce=honey_bread"
          }
@@ -82,9 +82,9 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start baking bread because ...
          descname = _"baking bread",
          actions = {
-            "return=skipped unless economy needs bread_frisians or workers need experience",
-            "sleep=20000",
+            "return=skipped unless economy needs bread_frisians",
             "consume=barley water",
+            "sleep=20000",
             "animate=working 20000",
             "produce=bread_frisians"
          }

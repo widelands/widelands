@@ -71,20 +71,15 @@ tribes:new_productionsite_type {
          descname = _"mining granite",
          actions = {
             "return=skipped unless economy needs granite",
-            "sleep=45000",
+            "sleep=40000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=quartz"
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_quartz",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "return=no_stats"
          }
       },
       mine_quartz = {
@@ -92,17 +87,15 @@ tribes:new_productionsite_type {
          descname = _"mining quartz",
          actions = {
             "return=skipped unless economy needs quartz",
-            "sleep=45000",
+            "sleep=30000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite quartz",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite:2",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=quartz:2"
+            "call=a_mine_produce_quartz",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_quartz",
+            "call=a_mine_produce_quartz",
+            "return=no_stats"
          }
       },
       mine_diamond = {
@@ -110,17 +103,60 @@ tribes:new_productionsite_type {
          descname = _"mining diamonds",
          actions = {
             "return=skipped unless economy needs diamond",
-            "sleep=45000",
+            "sleep=40000",
             "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
-            "animate=working 20000",
+            "call=a_mine_produce_diamond",
+            "call=a_mine_produce_granite",
+            "call=a_mine_produce_diamond",
+            "return=no_stats"
+         }
+      },
+      a_mine_produce_granite = {
+         descname = _"mining granite",
+         actions = {
+            "animate=working 15000",
+            "mine=stones 4 100 5 2",
+            "produce=granite",
+         }
+      },
+      a_mine_produce_quartz = {
+         descname = _"mining quartz",
+         actions = {
+            "animate=working 10000",
+            "mine=stones 4 100 5 2",
+            "produce=quartz",
+         }
+      },
+      a_mine_produce_diamond = {
+         descname = _"mining diamonds",
+         actions = {
+            "animate=working 25000",
             "mine=stones 4 100 5 2",
             "produce=diamond",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=diamond",
-            "animate=working 20000",
-            "mine=stones 4 100 5 2",
-            "produce=granite"
+         }
+      },
+      encyclopedia_granite = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=granite:5 quartz",
+         }
+      },
+      encyclopedia_quartz = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=quartz:3 granite:3",
+         }
+      },
+      encyclopedia_diamond = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=smoked_fish,smoked_meat:2 atlanteans_bread:2",
+            "produce=diamond:2 granite",
          }
       },
    },
