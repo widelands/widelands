@@ -331,9 +331,8 @@ void PortDock::ship_coming(bool affirmative) {
 		++ships_coming_;
 	} else {
 		// Max used for compatibility with old savegames
-		// NOCOM We should shift the savegame compatibility into PortDock::Loader::load it at all possible.
-		// Increment kCurrentPacketVersion and write separate loading code for both versions.
-		// Which case is for compatibility, and which case is the actual case that we want now?
+		// TODO(GunChleoc): savegame compatibility. When we remove support for packet version 3, change this line to:
+		// --ships_coming_;
 		ships_coming_ = std::max(0, ships_coming_ - 1);
 	}
 }
@@ -515,7 +514,7 @@ void PortDock::log_general_info(const EditorGameBase& egbase) const {
 	}
 }
 
-constexpr uint8_t kCurrentPacketVersion = 3;
+constexpr uint8_t kCurrentPacketVersion = 4;
 
 PortDock::Loader::Loader() : warehouse_(0) {
 }
@@ -582,8 +581,9 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 	try {
 		// The header has been peeled away by the caller
 
+		// TODO(GunChleoc): Packet version 3 has some savegame compatibility code in PortDock::ship_coming
 		uint8_t const packet_version = fr.unsigned_8();
-		if (packet_version == kCurrentPacketVersion) {
+		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr);
 		} else {
