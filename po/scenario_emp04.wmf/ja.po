@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 05:57+0000\n"
+"POT-Creation-Date: 2018-09-10 06:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -52,17 +52,17 @@ msgstr "不要な道を消去し、道ネットワークの混沌を解消する
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "いずれかの農場をクリックしましょう"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "農場のウィンドウを開きましょう"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
-msgstr ""
+msgstr "農場をクリックし、ウィンドウを開きましょう。そうすれば建物の状態を分析できます。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find the construction plans for the farms"
@@ -506,7 +506,7 @@ msgstr "アマリアが助言します…"
 msgid ""
 "Brother, I'm really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
-msgstr ""
+msgstr "兄さん、残念だけど、またとても悪い知らせがあるの。見ての通り、私たちの農場は何も生産していない上、解体することもできないみたいなの。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:327
@@ -531,7 +531,7 @@ msgstr ""
 msgid ""
 "Until we have found the plans, the only option for our farms is to dismantle"
 " them."
-msgstr ""
+msgstr "その指南書か何かを見つけるまで、私たちには農場を破壊することしかできないわ。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
@@ -586,6 +586,7 @@ msgid ""
 " desperately. Furthermore, the plans have enabled us to upgrade our old "
 "farms to get to work again."
 msgstr ""
+"これで農場を建設して、鉱夫達がどうしても欲しがっているビールが生産できるわ。それに、指南書が見つかったから、古い農場を拡張して生産活動を再開することもできそうだわ。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
@@ -794,6 +795,7 @@ msgid ""
 "breweries with the improved technology, we will never know if and how Vesta "
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
+"本当にこれで良かったのかしら。ええ、たしかに技術は手にいれたわ。これで製粉所や醸造所を建設したり拡張したりはできる。でも、野蛮人に立ち向かうに当たって、ヴェスタと尼僧達が私たちに力を貸してくれることもないでしょうね。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:469
@@ -817,6 +819,7 @@ msgid ""
 "wheat. Furthermore, the plans enable us to upgrade our current mill and "
 "brewery with the improved technology."
 msgstr ""
+"やったわ。これで小麦の加工に関する進んだ技術を手にいれられたわ。それに、既存の製粉所や醸造所を拡張して生産性を上げることもできるようになったわ。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:480
@@ -824,7 +827,7 @@ msgid ""
 "And, best of all, we have a new ally who just provided us with lots of "
 "water, flour and beer. Now I really think that nothing can prevent us from "
 "getting stronger and taking back our homeland."
-msgstr ""
+msgstr "それにも増して嬉しいことに、心強い味方が水、小麦粉、ビールを提供してくれたわ。後は、力を付け、故郷を完全に取り戻すだけね。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:485
 msgid "Amalea is Satisfied"
@@ -1008,23 +1011,23 @@ msgstr "そのためには、行き止まり(道が一方向だけに伸びた�
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:573
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:592
 msgid "Defeated!"
-msgstr ""
+msgstr "敗北！"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:593
 msgid "Amalea reports our defeat…"
-msgstr ""
+msgstr "アマリアが我々の敗北を報告します……"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:576
 msgid ""
 "Oh no Lutius, I don't know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
-msgstr ""
+msgstr "ああ、ルティウス、どうしてこんなことに。野蛮人が私たちの本拠地を破壊してしまったわ。私たちも帝国も、これでおしまいよ！"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
 msgid "Amalea reports our headquarters lost…"
-msgstr ""
+msgstr "アマリアが我々の本拠地の陥落を報告します……"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:584
@@ -1032,14 +1035,14 @@ msgid ""
 "Oh no Lutius, I don't know how this could have happened, but the Barbarians "
 "have destroyed our headquarters. So, we can't deliver the wares to Julia "
 "anymore."
-msgstr ""
+msgstr "ああ、ルティウス、どうしてこんなことに。野蛮人が私たちの本拠地を破壊してしまったわ。これでもうジュリアに物資を届けることはできないわ……"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:587
 msgid ""
 "Now we need to try to fulfil our duties without their technology. But this "
 "will not be an easy task at all."
-msgstr ""
+msgstr "これで、彼らの技術無しでやるしかなくなってしまったわ。簡単にはいかないでしょうね。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:595
@@ -1047,7 +1050,7 @@ msgid ""
 "Oh no Lutius, I don't know how this could have happened, but the Barbarians "
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
-msgstr ""
+msgstr "ああ、ルティウス、どうしてこんなことに。野蛮人が私たちの最後の倉庫を破壊してしまったわ。私たちも帝国も、これでおしまいよ！"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:603
 msgid "Saledus looks very relaxed…"
@@ -1118,6 +1121,7 @@ msgid ""
 "deals with the Barbarians, so, we better keep our soldiers in a good mood "
 "and train them adequately."
 msgstr ""
+"ルティウス様、もっと容易に設計図を得る方法はありましたが、私としても結果としては良い取引であったと認めざるを得ません。いずれにせよ、野蛮人とはこのような取引はできないでしょう、ですから、兵士の士気を高め、適切な訓練をつけてあげるべきでしょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:639
 msgid "Pride"
@@ -1131,6 +1135,7 @@ msgid ""
 "make any deals with the Barbarians either, so, we better keep our soldiers "
 "in good mood and train them adequately."
 msgstr ""
+"ルティウス様、我々が神々の機嫌を損ねてしまったことは間違いないでしょう。しかし今は戦時中、手段に問題があろうと、結果が伴えば許されるものです。いずれにせよ、野蛮人とは取引のようなことはできないでしょう、ですから、兵士の士気を高め、適切な訓練をつけてあげるべきでしょう。"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:649
 msgid "Saledus asks for a stronger army…"

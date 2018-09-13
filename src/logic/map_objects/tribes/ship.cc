@@ -697,13 +697,15 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 		FALLS_THROUGH;
 	case ShipStates::kExpeditionWaiting:
-	case ShipStates::kExpeditionPortspaceFound:
-	case ShipStates::kSinkRequest:
-	case ShipStates::kSinkAnimation: {
+	case ShipStates::kExpeditionPortspaceFound: {
 		// wait for input
 		start_task_idle(game, descr().main_animation(), 1500);
 		return;
 	}
+		FALLS_THROUGH;
+	case ShipStates::kSinkRequest:
+	case ShipStates::kSinkAnimation:
+		break;
 	}
 	NEVER_HERE();
 }
