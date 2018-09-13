@@ -9,83 +9,83 @@ animations = {
    -- normal
    idle = {
       pictures = path.list_files (dirname .. "rookie/idle_??.png"),
-      hotspot = {7, 23},
+      hotspot = {20, 24},
       fps = 10
    },
    atk_ok_1_e = {
       pictures = path.list_files (dirname .. "rookie/atk_ok_1_w_??.png"),
-      hotspot = {20, 23},
+      hotspot = {20, 24},
       fps = 10
    },
    atk_fail_1_e = {
       pictures = path.list_files (dirname .. "rookie/atk_fail_1_w_??.png"),
-      hotspot = {20, 22},
+      hotspot = {20, 23},
       fps = 10
    },
    atk_ok_1_w = {
       pictures = path.list_files (dirname .. "rookie/atk_ok_1_e_??.png"),
-      hotspot = {2, 21},
+      hotspot = {2, 22},
       fps = 10
    },
    atk_fail_1_w = {
       pictures = path.list_files (dirname .. "rookie/atk_fail_1_e_??.png"),
-      hotspot = {2, 21},
+      hotspot = {2, 22},
       fps = 10
    },
    atk_ok_2_e = {
       pictures = path.list_files (dirname .. "rookie/atk_ok_2_w_??.png"),
-      hotspot = {20, 22},
+      hotspot = {20, 23},
       fps = 10
    },
    atk_fail_2_e = {
       pictures = path.list_files (dirname .. "rookie/atk_fail_2_w_??.png"),
-      hotspot = {20, 22},
+      hotspot = {20, 23},
       fps = 10
    },
    atk_ok_2_w = {
       pictures = path.list_files (dirname .. "rookie/atk_ok_2_e_??.png"),
-      hotspot = {2, 22},
+      hotspot = {2, 23},
       fps = 10
    },
    atk_fail_2_w = {
       pictures = path.list_files (dirname .. "rookie/atk_fail_2_e_??.png"),
-      hotspot = {2, 22},
+      hotspot = {2, 23},
       fps = 10
    },
    eva_ok_e = {
       pictures = path.list_files (dirname .. "rookie/eva_ok_w_??.png"),
-      hotspot = {8, 22},
+      hotspot = {8, 23},
       fps = 10
    },
    eva_fail_e = {
       pictures = path.list_files (dirname .. "rookie/eva_fail_w_??.png"),
-      hotspot = {9, 22},
+      hotspot = {9, 23},
       fps = 10
    },
    eva_ok_w = {
       pictures = path.list_files (dirname .. "rookie/eva_ok_e_??.png"),
-      hotspot = {2, 21},
+      hotspot = {2, 22},
       fps = 10
    },
    eva_fail_w = {
       pictures = path.list_files (dirname .. "rookie/eva_fail_e_??.png"),
-      hotspot = {2, 21},
+      hotspot = {2, 22},
       fps = 10
    },
    die_w = {
       pictures = path.list_files (dirname .. "rookie/die_w_??.png"),
-      hotspot = {18, 24},
+      hotspot = {18, 25},
       fps = 10
    },
    die_e = {
       pictures = path.list_files (dirname .. "rookie/die_e_??.png"),
-      hotspot = {9, 22},
+      hotspot = {9, 23},
       fps = 10
    },
    -- health upgrade only
    h_idle = {
       pictures = path.list_files (dirname .. "helm/idle_??.png"),
-      hotspot = {7, 25},
+      hotspot = {20, 25},
       fps = 10
    },
    h_atk_ok_1_e = {
@@ -148,22 +148,22 @@ animations = {
       hotspot = {2, 24},
       fps = 10
    },
-   h_die_1_w = {
+   h_die_f_w = {
       pictures = path.list_files (dirname .. "helm/die_f_w_??.png"),
       hotspot = {2, 24},
       fps = 10
    },
-   h_die_1_e = {
+   h_die_f_e = {
       pictures = path.list_files (dirname .. "helm/die_f_e_??.png"),
       hotspot = {16, 24},
       fps = 10
    },
-   h_die_2_w = {
+   h_die_b_w = {
       pictures = path.list_files (dirname .. "helm/die_b_w_??.png"),
       hotspot = {18, 24},
       fps = 10
    },
-   h_die_2_e = {
+   h_die_b_e = {
       pictures = path.list_files (dirname .. "helm/die_b_e_??.png"),
       hotspot = {9, 24},
       fps = 10
@@ -171,7 +171,7 @@ animations = {
    -- health and attack upgrade
    sh_idle = {
       pictures = path.list_files (dirname .. "hero/idle_??.png"),
-      hotspot = {8, 25},
+      hotspot = {20, 25},
       fps = 10
    },
    sh_atk_ok_1_e = {
@@ -247,7 +247,7 @@ animations = {
    -- sword upgrade only
    s_idle = {
       pictures = path.list_files (dirname .. "sword/idle_??.png"),
-      hotspot = {8, 23},
+      hotspot = {20, 25},
       fps = 10
    },
    s_atk_ok_1_e = {
@@ -310,22 +310,22 @@ animations = {
       hotspot = {3, 23},
       fps = 10
    },
-   s_die_1_w = {
+   s_die_f_w = {
       pictures = path.list_files (dirname .. "sword/die_f_w_??.png"),
       hotspot = {2, 21},
       fps = 10
    },
-   s_die_1_e = {
+   s_die_f_e = {
       pictures = path.list_files (dirname .. "sword/die_f_e_??.png"),
       hotspot = {16, 22},
       fps = 10
    },
-   s_die_2_w = {
+   s_die_b_w = {
       pictures = path.list_files (dirname .. "sword/die_b_w_??.png"),
       hotspot = {20, 25},
       fps = 10
    },
-   s_die_2_e = {
+   s_die_b_e = {
       pictures = path.list_files (dirname .. "sword/die_b_e_??.png"),
       hotspot = {10, 23},
       fps = 10
@@ -484,20 +484,20 @@ tribes:new_soldier_type {
       s_eva_ok_e = l_s,
    },
    die_w = {
-      h_die_1_w = l_h,
-      h_die_2_w = l_h,
+      h_die_f_w = l_h,
+      h_die_b_w = l_h,
       sh_die_w = l_sh,
       die_w = l__,
-      s_die_1_w = l_s,
-      s_die_2_w = l_s,
+      s_die_f_w = l_s,
+      s_die_b_w = l_s,
    },
    die_e = {
-      h_die_1_e = l_h,
-      h_die_2_e = l_h,
+      h_die_f_e = l_h,
+      h_die_b_e = l_h,
       sh_die_e = l_sh,
       die_e = l__,
-      s_die_1_e = l_s,
-      s_die_2_e = l_s,
+      s_die_f_e = l_s,
+      s_die_b_e = l_s,
    },
    -- level-dependent walking and idle animations
    idle = {
