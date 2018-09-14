@@ -20,12 +20,7 @@ p1_start = map.player_slots[1].starting_field
 initial_soldiers = 20
 campaign_data = game:read_campaign_data("frisians", "fri01")
 if not campaign_data then
-   campaign_message_box({
-      title = _"Warning",
-      body = p(_[[You appear not to have completed the previous mission. You may still play this scenario, but you will be at a disadvantage. I recommend that you complete the previous scenario first and then restart this mission.]]),
-      w = 450,
-      h = 150,
-   })
+   campaign_message_box(campaign_data_warning)
    campaign_data = {}
    -- If he wants to cheat, let him, but give him a hard time
    initial_soldiers = 5

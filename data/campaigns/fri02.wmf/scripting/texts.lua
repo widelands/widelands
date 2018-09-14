@@ -107,6 +107,13 @@ obj_defeat_both = {
 -- Texts to the user
 -- ==================
 
+campaign_data_warning = {
+   title = _"Warning",
+   body = p(_[[You appear not to have completed the previous mission. You may still play this scenario, but you will be at a disadvantage. I recommend that you complete the previous scenario first and then restart this mission.]]),
+   w = 450,
+   h = 150,
+}
+
 intro_1 = {
    title =_ "Welcome Back!",
    body=reebaud(_"A new home",
@@ -293,6 +300,29 @@ supply_murilius_9 = {
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Supply Murilius 9
       _([[I’d like to say we should attack him right now, but I fear we aren’t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time. As for expansion – I wonder how strictly he can possibly control us…]])),
+}
+
+expansion_hint_1 = {
+   title = _"Hint",
+   body = p(_[[If you destroy one of your military buildings, you will receive a hint how to cheat Murilius’s prohibition on expansion.]]),
+   w = 450,
+   h = 150,
+}
+
+expansion_hint_2 = {
+   title = _"Hint",
+   body = (
+      -- TRANSLATORS: A poem, verse 1
+      li(_[[How many sites where soldiers stay,]]) ..
+      -- TRANSLATORS: A poem, verse 2
+      li(_[[How many sites where thou hold’st sway,]]) ..
+      -- TRANSLATORS: A poem, verse 3
+      li(_[[Though not their whereabouts sees he]]) ..
+      -- TRANSLATORS: A poem, verse 4
+      li(_[[Who’s ordering around here thee!]])
+   ),
+   w = 450,
+   h = 150,
 }
 
 supply_murilius_destroy = {

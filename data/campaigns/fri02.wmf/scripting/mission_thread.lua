@@ -101,46 +101,23 @@ function expand_south()
    sleep(2000)
    campaign_message_box(supply_murilius_9)
    set_objective_done(o)
-   campaign_message_box({
-      title = _"Hint",
-      body = p(_[[If you destroy one of your warehouses, you will receive a hint how to cheat Murilius’s prohibition on expansion.]]),
-      w = 450,
-      h = 150,
-   })
+   campaign_message_box(expansion_hint_1)
 
    o = add_campaign_objective(obj_supply_murilius)
    local choice = ""
    local milbld = count_military_buildings_p1()
-   local warehouses = #p1:get_buildings("frisians_warehouse")
+   local hint_revealed = false
    while choice == "" do
       sleep(791)
-      if warehouses ~= nil then
-         local w = #p1:get_buildings("frisians_warehouse")
-         if w > warehouses then
-            warehouses = w
-         elseif w < warehouses then
-            campaign_message_box({
-               title = _"Hint",
-               body = (
-                  -- TRANSLATORS: A poem, verse 1
-                  li(_[[How many sites where soldiers stay,]]) ..
-                  -- TRANSLATORS: A poem, verse 2
-                  li(_[[How many sites where thou hold’st sway,]]) ..
-                  -- TRANSLATORS: A poem, verse 3
-                  li(_[[Though not their whereabouts sees he]]) ..
-                  -- TRANSLATORS: A poem, verse 4
-                  li(_[[Who’s ordering around here thee!]])
-               ),
-               w = 450,
-               h = 150,
-            })
-            warehouses = nil
-         end
+      local m = count_military_buildings_p1()
+      if (not hint_revealed) and m < milbld then
+         campaign_message_box(expansion_hint_2)
+         hint_revealed = true
       end
 
       if #(p1:get_buildings("frisians_warehouse_empire")) < 1 then
          choice = "destroy"
-      elseif count_military_buildings_p1() > milbld then
+      elseif m > milbld then
          -- It *is* permitted to destroy/dismantle a military building and build a new one elsewhere
          choice = "military"
       else
