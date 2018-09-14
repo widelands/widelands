@@ -35,7 +35,6 @@ wl_library(scripting_lua_table
     lua_table.cc
     lua_table.h
   DEPENDS
-    base_exceptions
     base_log
     base_geometry
     base_macros
