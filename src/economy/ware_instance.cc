@@ -502,7 +502,7 @@ PlayerImmovable* WareInstance::get_next_move_step(Game& game) {
 	return transfer_ ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) : nullptr;
 }
 
-void WareInstance::log_general_info(const EditorGameBase& egbase) {
+void WareInstance::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
 	molog("Ware: %s\n", descr().name().c_str());

@@ -268,7 +268,7 @@ public:
 	                  RenderTarget* dst) const;
 
 	// For debug
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// default tasks
 	void reset_tasks(Game&);

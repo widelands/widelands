@@ -138,7 +138,7 @@ public:
 	}
 
 	// debug
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// worker-specific tasks
 	void start_task_transfer(Game&, Transfer*);

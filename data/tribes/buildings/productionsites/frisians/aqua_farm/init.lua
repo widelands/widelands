@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=breed_fish",
             "call=fish_pond",
-            "return=skipped",
+            "return=no_stats",
          },
       },
       breed_fish = {

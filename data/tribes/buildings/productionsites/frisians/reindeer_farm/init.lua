@@ -25,17 +25,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {118, 101},
+         hotspot = {103, 101},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {118, 101},
+         hotspot = {103, 101},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {118, 74},
+         hotspot = {103, 74},
       },
    },
 
@@ -68,7 +68,7 @@ tribes:new_productionsite_type {
             "call=make_fur",
             "call=recruit_deer",
             "call=make_fur_meat",
-            "return=skipped",
+            "return=no_stats",
          }
       },
       recruit_deer = {

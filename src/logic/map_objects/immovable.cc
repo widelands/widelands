@@ -1348,7 +1348,7 @@ void PlayerImmovable::receive_worker(Game&, Worker& worker) {
 /**
  * Dump general information
  */
-void PlayerImmovable::log_general_info(const EditorGameBase& egbase) {
+void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 	BaseImmovable::log_general_info(egbase);
 
 	FORMAT_WARNINGS_OFF;

@@ -508,7 +508,7 @@ void MapObject::set_logsink(LogSink* const sink) {
 	logsink_ = sink;
 }
 
-void MapObject::log_general_info(const EditorGameBase&) {
+void MapObject::log_general_info(const EditorGameBase&) const {
 }
 
 /**

@@ -280,7 +280,7 @@ public:
 		return old_buildings_;
 	}
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {
