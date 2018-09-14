@@ -5,14 +5,14 @@
 # GunChleoc, 2018
 # GunChleoc, 2018
 # ks k, 2017
-# ks k, 2017
+# ks k, 2017-2018
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-21 14:51+0000\n"
+"POT-Creation-Date: 2018-09-12 15:51+0000\n"
+"PO-Revision-Date: 2018-09-13 08:47+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -1442,7 +1442,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "빵 굽는 이"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:13
@@ -2735,6 +2735,10 @@ msgstr ""
 
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
+#. script probably want to lose the blank space here.
 #: ../../data/tribes/immovables/resi_coal1/helptexts.lua:3
 #: ../../data/tribes/immovables/resi_coal2/helptexts.lua:3
 #: ../../data/tribes/immovables/resi_gold1/helptexts.lua:3
@@ -3674,14 +3678,14 @@ msgid "Producer"
 msgstr "생산 주체"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "생산된 용품:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:167
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "소비 주체"
@@ -3920,8 +3924,6 @@ msgid ""
 "inns to prepare meals."
 msgstr "오직 이 맥주만이 전투 경기장의 군인들에게 허용됩니다. 누군가는 야만인의 모든 힘이 이 맥주에서 비롯된다고 말합니다. 군인의 회피 레벨을 0에서 1 그리고 2로 훈련하는데 도움이 됩니다. 고도 맥주는 또한 큰 여관에서 식사를 준비하는데 사용됩니다."
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -5462,8 +5464,8 @@ msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
 msgstr "광부, 군인, 정찰병들을 위해 피타 빵을 굽습니다."
 
-#. TRANSLATORS: Helptext for a worker: Blacksmith
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
+#. TRANSLATORS: Helptext for a worker: Blacksmith
 #: ../../data/tribes/workers/barbarians/blacksmith/helptexts.lua:3
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"

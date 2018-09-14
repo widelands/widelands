@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-15 09:25+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-09-10 06:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: GunChleoc, 2017\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -101,8 +101,7 @@ msgstr "Raon puirt"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:87
 msgid "Search for a port space in order to regain access to the sea."
-msgstr ""
-"Lorg raon puirt ach ach am faigh thu inntrigeadh dhan mhuir a-rithist."
+msgstr "Lorg raon puirt ach am faigh thu inntrigeadh dhan mhuir a-rithist."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:93
 msgid "Build a port and a shipyard on the Island"

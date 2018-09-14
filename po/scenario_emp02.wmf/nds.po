@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-27 11:40+0000\n"
+"POT-Creation-Date: 2018-09-12 15:51+0000\n"
+"PO-Revision-Date: 2018-09-12 16:21+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -463,7 +463,7 @@ msgstr "Sieg"
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:266
 msgid ""
 "Today is a proud day. We have fought for our new home and risen victorious."
-msgstr "Vundaag is een stolter Dag. Wi hebben för uns neie Heimaad kämpt, un wi hebben siegt."
+msgstr "Vandaag is een stolter Dag. Wi hebben för uns neie Heimaad kämpt, un wi hebben siegt."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:269
@@ -496,7 +496,7 @@ msgstr "Eene Naricht"
 msgid ""
 "Today a pigeon landed on our island. It brought a message which fills me "
 "with dark thoughts and brings back my fears."
-msgstr "Vundaag is een Breevduuv up uns Insel lannt. Se hett eene Naricht brocht, de mien Geest mit dunkeln Gedanken füllt un miene Angsten torügg brengt."
+msgstr "Vandaag is eene Breevduuv up uns Insel lannt. Se hett eene Naricht brocht, de mien Geest mit dunkeln Gedanken füllt un miene Angsten torügg brengt."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:289
