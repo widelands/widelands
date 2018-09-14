@@ -233,7 +233,7 @@ uint32_t SoldierDescr::get_animation(char const* const anim, const MapObject* mo
 	throw GameDataError("This soldier does not have an idle animation for this training level!");
 }
 
-const DirAnimations& SoldierDescr::get_right_walk_anims(bool const ware, const Worker* worker) const {
+const DirAnimations& SoldierDescr::get_right_walk_anims(bool const, const Worker* worker) const {
 	const Soldier* soldier = dynamic_cast<const Soldier*>(worker);
 	assert(soldier);
 	DirAnimations* anim = new DirAnimations();
