@@ -8,11 +8,15 @@ local see_empire = nil
 
 local all_fields = {}
 local mountains = {}
+local useful_fields = {}
 for x=0,map.width - 1 do
    for y=0,map.height - 1 do
       local field = map:get_field(x, y)
       if field.terd:find("mountain") ~= nil then
          table.insert(mountains, field)
+      end
+      if field.has_caps("small") or field.has_caps("mine") then
+         table.insert(useful_fields, field)
       end
       table.insert(all_fields, field)
    end
@@ -97,12 +101,43 @@ function expand_south()
    sleep(2000)
    campaign_message_box(supply_murilius_9)
    set_objective_done(o)
+   campaign_message_box({
+      title = _"Hint",
+      body = p(_[[If you destroy one of your warehouses, you will receive a hint how to cheat Murilius’s prohibition on expansion.]]),
+      w = 450,
+      h = 150,
+   })
 
    o = add_campaign_objective(obj_supply_murilius)
    local choice = ""
    local milbld = count_military_buildings_p1()
+   local warehouses = #p1:get_buildings("frisians_warehouse")
    while choice == "" do
-      sleep(2791)
+      sleep(791)
+      if warehouses ~= nil then
+         local w = #p1:get_buildings("frisians_warehouse")
+         if w > warehouses then
+            warehouses = w
+         elseif w < warehouses then
+            campaign_message_box({
+               title = _"Hint",
+               body = (
+                  -- TRANSLATORS: A poem, verse 1
+                  li(_[[How many sites where soldiers stay,]]) ..
+                  -- TRANSLATORS: A poem, verse 2
+                  li(_[[How many sites where thou hold’st sway,]]) ..
+                  -- TRANSLATORS: A poem, verse 3
+                  li(_[[Though not their whereabouts sees he]]) ..
+                  -- TRANSLATORS: A poem, verse 4
+                  li(_[[Who’s ordering around here thee!]])
+               ),
+               w = 450,
+               h = 150,
+            })
+            warehouses = nil
+         end
+      end
+
       if #(p1:get_buildings("frisians_warehouse_empire")) < 1 then
          choice = "destroy"
       elseif count_military_buildings_p1() > milbld then
@@ -222,6 +257,8 @@ function supply_murilius()
    -- If the barbarians already defeated Murilius – well done
    -- Otherwise, Murilius provokes Reebaud into ordering the player to conquer his entire colony
    -- (merely defeating the Empire isn’t enough)
+   -- We don't bother to check water, walkable-only and other useless terrains.
+   -- That would be really too much to ask from our poor player, now wouldn't it?
    if not p2.defeated then
       campaign_message_box(defeat_murilius_1)
       campaign_message_box(defeat_murilius_2)
@@ -230,7 +267,7 @@ function supply_murilius()
       local def = false
       while not def do
          def = true
-         for idx,field in ipairs(all_fields) do
+         for idx,field in ipairs(useful_fields) do
             if field.owner == p2 then
                def = false
                break

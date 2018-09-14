@@ -90,7 +90,8 @@ obj_defeat_murilius = {
    title=_"Defeat Murilius!",
    number = 1,
    body = objective_text(_"Defeat the Arrogant Outpost of the Empire",
-      li(_[[The only way to put an end to the Empire’s desire to steal our liberty is to destroy this outpost once and for all. Conquer its entire land.]])
+      li(_[[The only way to put an end to the Empire’s desire to steal our liberty is to destroy this outpost once and for all. Conquer its entire land.]]) ..
+      li_arrow(_[[Conquer every single field that still belongs to Murilius.]])
    ),
 }
 obj_defeat_both = {
@@ -247,8 +248,8 @@ supply_murilius_3 = {
 supply_murilius_4 = {
    title =_ "We Are Not Alone",
    body=reebaud(_"Strangers",
-      -- TRANSLATORS: Reebaud – Supply Murilius 4
-      _([[Greetings, representative of the Empire! I am Reebaud, the chieftain of this tribe. All we want is to settle down here, build our home and live our lives in peace. We do not seek trouble, but we aren’t afraid to fight, either.]])),
+      -- TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional frisian greeting, nothing more.
+      _([[Peace, representative of the Empire! I am Reebaud, the chieftain of this tribe. All we want is to settle down here, build our home and live our lives in peace. We do not seek trouble, but we aren’t afraid to fight, either.]])),
 }
 supply_murilius_5 = {
    title =_ "We Are Not Alone",

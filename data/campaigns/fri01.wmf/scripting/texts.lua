@@ -129,8 +129,8 @@ intro_1 = {
       -- TRANSLATORS: Reebaud – Introduction 1
       _([[Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of this pristine island.]])
       .. paragraphdivider() ..
-      -- TRANSLATORS: Reebaud – Introduction 1
-      _([[My tribe and I have just arrived from the mainland. There were fights with the Danes in the North, the Vikings in the East… So, I decided to lead my tribe away to start a quiet, peaceful life on this untouched island.]])),
+      -- TRANSLATORS: Reebaud – Introduction 1. The "Schauenburger" and "Holsteiner" are dukedoms.
+      _([[My tribe and I have just arrived from the mainland. There were fights with the Danes in the North, the Schauenburgians and Holsteiners in the East and South… So I decided to lead my tribe away to start a quiet, peaceful life on this untouched island.]])),
 }
 intro_2 = {
    title =_ "Introduction",
@@ -139,13 +139,13 @@ intro_2 = {
       _([[This is as good a place as any to start building our new home. First of all, we must ensure a stable supply of basic building materials.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Introduction 2
-      _([[I have asked Hauke, one of my advisors to oversee the construction of our settlement.]])),
+      _([[I have asked Hauke, one of my advisors, to oversee the construction of our settlement.]])),
 }
 intro_3 = {
    title =_ "Introduction",
    body=hauke(_"The first buildings",
-      -- TRANSLATORS: Hauke – Introduction 3
-      _([[Greetings, Chieftain Reebaud! I will start with the colonization of the island straight away.]])
+      -- TRANSLATORS: Hauke – Introduction 3. "Peace" is the traditional frisian greeting
+      _([[Peace, Chieftain Reebaud! I will start with the colonization of the island straight away.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Introduction 3
       _([[Like all Frisians, we build our houses mainly with bricks. We improve them by adding some logs and granite. The roofs are thatched with reed, naturally. Nothing is better suited to keep the rain out.]])
@@ -404,6 +404,12 @@ rising_water_4 = {
       -- TRANSLATORS: Hauke – rising water
       _([[The storm flood seems to be coming from the west. If we hurry, we will just make it! We only need to build a port and a shipyard – oh, and a weaving mill to weave the durable cloth, which is made from reed and fur, for the sails. Then we can launch an expedition from the port. Pray to the gods and make haste!]]))
       .. new_objectives(obj_escape),
+}
+rising_water_5 = {
+   title =_ "Don’t Forget the Soldiers",
+   body=reebaud(_"Soldiers to the port!",
+      -- TRANSLATORS: Reebaud – rising water
+      _([[I almost forgot in this haste – whereever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to 20 soldiers on our ship, if they don’t mind being all crammed up together. Let’s send some to the port when it’s completed, so they can embark when we set sails!]])),
 }
 
 victory_1 = {

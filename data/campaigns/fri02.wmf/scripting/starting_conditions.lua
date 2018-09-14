@@ -61,7 +61,43 @@ port1:set_workers {
    frisians_reindeer = 1,
    frisians_charcoal_burner = 3
 }
-port1:set_soldiers({0,0,0,0}, 25)
+
+local trained = 0
+for descr,n in pairs(campaign_data) do
+   if descr == "000" then
+      untrained = n
+   else
+      trained = trained + n
+   end
+end
+if trained > initial_soldiers then
+   -- We have more soldiers than allowed, so pick 25 at random
+   local remaining = initial_soldiers
+   repeat
+      local key1 = math.random(0, 2)
+      local key2 = math.random(0, 6)
+      local key3 = math.random(0, 2)
+      for descr,n in pairs(campaign_data) do
+         if descr == (key1 .. key2 .. key3) and n > 0 then
+            if n > remaining then
+               port1:set_soldiers({key1, key2, key3, 0}, n)
+               remaining = remaining - n
+            else
+               port1:set_soldiers({key1, key2, key3, 0}, remaining)
+               remaining = 0
+            end
+            table.remove(soldiers, descr)
+            break
+         end
+      end
+   until remaining == 0
+else
+   -- We have less than 25 soldiers, so take them all plus some new ones
+   for descr,n in pairs(campaign_data) do
+      port1:set_soldiers(descr, n)
+   end
+   port1:set_soldiers({0,0,0,0}, initial_soldiers - trained)
+end
 
 -- =======================================================================
 --                                 Player 2
