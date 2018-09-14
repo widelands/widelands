@@ -41,7 +41,7 @@ struct SoldierLevelRange {
 	SoldierLevelRange(std::unique_ptr<LuaTable>);
 	bool matches(const Soldier* soldier) const;
 	bool matches(uint32_t health, uint32_t attack, uint32_t defense, uint32_t evade) const;
-	
+
 	uint32_t min_health;
 	uint32_t min_attack;
 	uint32_t min_defense;
