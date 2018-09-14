@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 06:56+0000\n"
-"PO-Revision-Date: 2018-09-10 10:07+0000\n"
+"POT-Creation-Date: 2018-09-12 15:51+0000\n"
+"PO-Revision-Date: 2018-09-12 16:21+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1387,12 +1387,12 @@ msgid_plural "Recruited %s"
 msgstr[0] "%s is anhüürt worden"
 msgstr[1] "%s sünd anhüürt worden"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1284
+#: ../../src/logic/map_objects/tribes/production_program.cc:1285
 msgid "No soldier to train!"
 msgstr "Keen Soldat tum utbilden!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1293
-#: ../../src/logic/map_objects/tribes/production_program.cc:1371
+#: ../../src/logic/map_objects/tribes/production_program.cc:1294
+#: ../../src/logic/map_objects/tribes/production_program.cc:1372
 msgid "No soldier found for this training level!"
 msgstr "Keen Soldat för düsse Lehre is funden worden!"
 
@@ -1476,22 +1476,22 @@ msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "De Waren kunnen nich utladen werden, de Söök is nu to Enne gahn."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:853
+#: ../../src/logic/map_objects/tribes/ship.cc:855
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Söök"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:853
+#: ../../src/logic/map_objects/tribes/ship.cc:855
 msgid "Expedition Ready"
 msgstr "Söke torecht"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:854
+#: ../../src/logic/map_objects/tribes/ship.cc:856
 msgid "An expedition ship is waiting for your commands."
 msgstr "Een Schipp up Söke wacht för dien Gebodd."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:993
+#: ../../src/logic/map_objects/tribes/ship.cc:995
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1500,7 +1500,7 @@ msgstr "Up Schipperee"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:997
+#: ../../src/logic/map_objects/tribes/ship.cc:999
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Idle"
@@ -1508,7 +1508,7 @@ msgstr "Leeg"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1002
+#: ../../src/logic/map_objects/tribes/ship.cc:1004
 #: ../../src/wui/seafaring_statistics_menu.cc:219
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1516,14 +1516,14 @@ msgstr "Wachten"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1006
+#: ../../src/logic/map_objects/tribes/ship.cc:1008
 #: ../../src/wui/seafaring_statistics_menu.cc:221
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Söcht"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1010
+#: ../../src/logic/map_objects/tribes/ship.cc:1012
 #: ../../src/wui/seafaring_statistics_menu.cc:223
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1532,7 +1532,7 @@ msgstr "Rüüme för Muden funnen"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1015
+#: ../../src/logic/map_objects/tribes/ship.cc:1017
 #: ../../src/wui/seafaring_statistics_menu.cc:225
 msgctxt "ship_state"
 msgid "Founding a Colony"
@@ -1562,23 +1562,23 @@ msgid ""
 "compatible with world"
 msgstr "sall de Mineraal %s ofboen, wat 't in düsse Welt nich gifft; dat Volk verdraggt sich nich mit de Welt"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:218
+#: ../../src/logic/map_objects/tribes/worker.cc:219
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "sall de Mineraal %s tüchten, wat 't in düsse Welt nich gifft; dat Volk verdraggt sich nich mit de Welt"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:974
+#: ../../src/logic/map_objects/tribes/worker.cc:975
 msgid "A geologist found resources."
 msgstr "Een Schattsöker hett Mineraale funnen."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1848
+#: ../../src/logic/map_objects/tribes/worker.cc:1849
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Dien %s kann keenen Weg tum Oort finnen un word woll doodgahn."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1854
+#: ../../src/logic/map_objects/tribes/worker.cc:1855
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1586,7 +1586,7 @@ msgid_plural "Workers"
 msgstr[0] "Arbeider"
 msgstr[1] "Arbeiders"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1855
+#: ../../src/logic/map_objects/tribes/worker.cc:1856
 msgid "Worker got lost!"
 msgstr "Fehlgahner Arbeider!"
 
@@ -3943,14 +3943,14 @@ msgstr "Kaart-Naam (Anfang vun de Upteken)"
 #. hour:minute
 #: ../../src/wui/load_or_save_game.cc:384
 msgid "Today, %1%:%2%"
-msgstr "Vundaag, %1%:%2%"
+msgstr "Vandaag, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
 #: ../../src/wui/load_or_save_game.cc:388
 msgid "saved today at %1%:%2%"
-msgstr "vundaag um %1%:%2% sekert"
+msgstr "vandaag um %1%:%2% sekert"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
@@ -4594,6 +4594,28 @@ msgstr "Arbeiders de up een Schipp wachten"
 #: ../../src/wui/warehousewindow.cc:206
 msgid "Expedition"
 msgstr "Söök"
+
+#. * TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000).
+#. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
+#. whitespace.
+#: ../../src/wui/waresdisplay.cc:392
+msgid "%1%k"
+msgstr "%1%k"
+
+#. * TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000).
+#. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
+#. whitespace.
+#: ../../src/wui/waresdisplay.cc:395
+msgid "%1%M"
+msgstr "%1%M"
+
+#. * TRANSLATORS: This is a large number with a suffix (e.g. 5G =
+#. 5,000,000,000).
+#. * TRANSLATORS: Space is limited, use only 1 letter for the suffix and no
+#. whitespace.
+#: ../../src/wui/waresdisplay.cc:398
+msgid "%1%G"
+msgstr "%1%G"
 
 #: ../../src/wui/watchwindow.cc:62
 msgid "Follow"

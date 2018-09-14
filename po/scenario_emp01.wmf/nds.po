@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-27 11:40+0000\n"
+"POT-Creation-Date: 2018-09-12 15:51+0000\n"
+"PO-Revision-Date: 2018-09-12 16:21+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -370,7 +370,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr "Mienheer, wi könen bold een eerstes Slött bauen. Dat Flintslagerhuus im Süden arbeidt siet vundaag un versörgt uns vun nu an mit Flint un mojen Marmel."
+msgstr "Mienheer, wi könen bold een eerstes Slött bauen. Dat Flintslagerhuus im Süden arbeidt siet vandaag un versörgt uns vun nu an mit Flint un mojen Marmel."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:218
@@ -387,7 +387,7 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr "Ick hebb vundaag höört, dat uns Schipp weer klaar is. Miene Lüü laden upstünds alls in uns nei pleistert Schipp un hopen, dat 't uns nu beter deent as lestes Maal."
+msgstr "Ick hebb vandaag höört, dat uns Schipp weer klaar is. Miene Lüü laden upstünds alls in uns nei pleistert Schipp un hopen, dat 't uns nu beter deent as lestes Maal."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:229
