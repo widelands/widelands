@@ -68,15 +68,15 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 			/** TRANSLATORS: Button text */
 			_("Continue game"),
 			/** TRANSLATORS: Button tooltip */
-			_("Continue game with selected AI")),
+			_("Replace the disconnected player with the selected AI and continue playing")),
 		type_dropdown_(&box_h_,
 			width - 50, // x
 			0, // y
 			60, // width of selection box
 			800, // height of selection box, shrinks automatically
 			35, // width/height of button
-			/** TRANSLATORS: Dropdown tooltip to select the AI difficulty */
-			_("Select AI to continue game with"),
+			/** TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player has disconnected from a game */
+			_("AI for the disconnected player"),
 			UI::DropdownType::kPictorial,
 			UI::PanelStyle::kWui),
 		exit_game_(&box_,
@@ -106,12 +106,11 @@ GameClientDisconnected::GameClientDisconnected(InteractiveGameBase* gb,
 
 	// Add all AI types
 	for (const auto* impl : ComputerPlayer::get_implementations()) {
-		/** TRANSLATORS: Parameter is the pretty/descriptive name of the AI that will be used
-			as replacement for a disconnected player */
-		type_dropdown_.add((boost::format(_("Replace with %s")) % impl->descname).str(),
-							impl->name.c_str(),
+		type_dropdown_.add(impl->descname,
+							impl->name,
 							g_gr->images().get(impl->icon_filename), false,
-							(boost::format(_("Replace with %s")) % impl->descname).str());
+							/** TRANSLATORS: Dropdown selection. Parameter is the name of the AI that will be used as replacement for a disconnected player */
+							(boost::format(_("Replace player with %s")) % impl->descname).str());
 	}
 
 	// Set default mode to normal AI
