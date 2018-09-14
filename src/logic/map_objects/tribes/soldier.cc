@@ -1546,7 +1546,7 @@ void Soldier::send_space_signals(Game& game) {
 	}
 }
 
-void Soldier::log_general_info(const EditorGameBase& egbase) {
+void Soldier::log_general_info(const EditorGameBase& egbase) const {
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");
 	molog("Levels: %d/%d/%d/%d\n", health_level_, attack_level_, defense_level_, evade_level_);

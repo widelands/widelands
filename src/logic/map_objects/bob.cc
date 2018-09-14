@@ -902,7 +902,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 }
 
 /// Give debug information.
-void Bob::log_general_info(const EditorGameBase& egbase) {
+void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF;
 	molog("Owner: %p\n", owner_);
 	FORMAT_WARNINGS_ON;
