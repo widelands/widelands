@@ -386,44 +386,35 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	uint32_t remaining_capacity = ship.descr().get_capacity() - ship.get_nritems();
 
 	// Firstly load the items which go to chosen destination, while also checking for items with invalid destination
-	auto si_it = waiting_.begin();
-	while (si_it != waiting_.end()) {
+	for (auto si_it = waiting_.begin(); si_it != waiting_.end(); ++si_it) {
 		const PortDock* itemdest = si_it->get_destination(game);
-		if (itemdest) { // valid dest
-			if (remaining_capacity == 0) {
-				++si_it; // keep the item here
-			} else {
-				if (itemdest == next_port) { // the item goes to chosen destination
-					ship.add_item(game, *si_it); // load it
-					si_it = waiting_.erase(si_it);
-					--remaining_capacity;
-				} else { // different destination
-					++si_it; // keep it here for now
-				}
+		if (itemdest) {
+			// Valid destination. Only load the item if it matches the ship's destination and the ship still has room for it
+			if (remaining_capacity >= 0 && itemdest == next_port) {
+				ship.add_item(game, *si_it); // load it
+				si_it = waiting_.erase(si_it);
+				--remaining_capacity;
 			}
-		} else { // invalid destination
-			// carry the item back into the warehouse
+		} else {
+			// Invalid destination. Carry the item back into the warehouse
 			si_it->set_location(game, warehouse_);
 			si_it->end_shipping(game);
 			si_it = waiting_.erase(si_it);
 		}
 	}
 
-	if (remaining_capacity > 0) { // there is still capacity
-		// Load any items favored by the chosen destination
-		si_it =  waiting_.begin();
-		while (si_it != waiting_.end() && remaining_capacity > 0) {
+	if (remaining_capacity > 0) {
+		// There is still come capacity left. Load any items favored by the chosen destination on the ship.
+		for (auto si_it = waiting_.begin(); si_it != waiting_.end() && remaining_capacity > 0; ++si_it) {
 			assert(si_it->get_destination(game) != nullptr);
 			if (fleet_->is_path_favourable(*this, *next_port, *si_it->get_destination(game))) {
 				ship.add_item(game, *si_it);
 				si_it = waiting_.erase(si_it);
 				--remaining_capacity;
-			} else { // item is not favored by the chosen destination
-				// spare it from getting trapped inside the wrong ship
-				++si_it;
 			}
 		}
 	}
+
 	ship.set_destination(next_port);
 	set_need_ship(game, !waiting_.empty());
 }
