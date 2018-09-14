@@ -330,10 +330,7 @@ void PortDock::ship_coming(bool affirmative) {
 	if (affirmative) {
 		++ships_coming_;
 	} else {
-		// Max used for compatibility with old savegames
-		// TODO(GunChleoc): savegame compatibility. When we remove support for packet version 3, change this line to:
-		// --ships_coming_;
-		ships_coming_ = std::max(0, ships_coming_ - 1);
+		--ships_coming_;
 	}
 }
 
@@ -390,7 +387,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		const PortDock* itemdest = si_it->get_destination(game);
 		if (itemdest) {
 			// Valid destination. Only load the item if it matches the ship's destination and the ship still has room for it
-			if (remaining_capacity >= 0 && itemdest == next_port) {
+			if (remaining_capacity > 0 && itemdest == next_port) {
 				ship.add_item(game, *si_it); // load it
 				si_it = waiting_.erase(si_it);
 				--remaining_capacity;
@@ -510,7 +507,7 @@ constexpr uint8_t kCurrentPacketVersion = 4;
 PortDock::Loader::Loader() : warehouse_(0) {
 }
 
-void PortDock::Loader::load(FileRead& fr) {
+void PortDock::Loader::load(FileRead& fr, uint8_t packet_version) {
 	PlayerImmovable::Loader::load(fr);
 
 	PortDock& pd = get<PortDock>();
@@ -525,6 +522,17 @@ void PortDock::Loader::load(FileRead& fr) {
 	}
 
 	pd.ships_coming_ = fr.unsigned_8();
+
+	// TODO(GunChleoc): Savegame compatibility Build 20
+	if (packet_version < 4) {
+		pd.ships_coming_ = 0;
+		for (const Serial ship_serial : pd.owner().ships()) {
+			Ship* ship = dynamic_cast<Ship*>(egbase().objects().get_object(ship_serial));
+			if (ship->get_destination(egbase())->serial() == pd.serial()) {
+				++pd.ships_coming_;
+			}
+		}
+	}
 
 	waiting_.resize(fr.unsigned_32());
 	for (ShippingItem::Loader& shipping_loader : waiting_) {
@@ -572,11 +580,11 @@ MapObject::Loader* PortDock::load(EditorGameBase& egbase, MapObjectLoader& mol, 
 	try {
 		// The header has been peeled away by the caller
 
-		// TODO(GunChleoc): Packet version 3 has some savegame compatibility code in PortDock::ship_coming
+		// TODO(GunChleoc): Savegame compatibility Build 20
 		uint8_t const packet_version = fr.unsigned_8();
 		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
 			loader->init(egbase, mol, *new PortDock(nullptr));
-			loader->load(fr);
+			loader->load(fr, packet_version);
 		} else {
 			throw UnhandledVersionError("PortDock", packet_version, kCurrentPacketVersion);
 		}

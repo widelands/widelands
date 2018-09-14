@@ -159,7 +159,7 @@ protected:
 	public:
 		Loader();
 
-		void load(FileRead&);
+		void load(FileRead&, uint8_t packet_version);
 		void load_pointers() override;
 		void load_finish() override;
 
