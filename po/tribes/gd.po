@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-28 07:19+0000\n"
-"PO-Revision-Date: 2018-07-28 07:23+0000\n"
+"POT-Creation-Date: 2018-09-10 06:56+0000\n"
+"PO-Revision-Date: 2018-09-10 12:41+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -537,6 +537,7 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:42
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:64
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:82
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
@@ -554,6 +555,7 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:81
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
@@ -563,6 +565,7 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:43
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:81
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:50
@@ -583,6 +586,7 @@ msgstr "Ceàrdach armachd"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:57
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:62
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:65
@@ -2371,7 +2375,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr "Chan urrainn dhan iasgair a tha ag obair aig an tuathanas-uisge seo poll-èisg a lorg  taobh a-staigh an raoin-obrach tuilleadh. Dèan cinnteach gu bheil sùil-chriadha faisg air agus gu bheil an tuathanas-uisge a’ faighinn nam batharan uile a dh’fheumas e no thoir às a chèile no mill e."
+msgstr "Chan urrainn dhan iasgair a tha ag obair aig an tuathanas-uisge seo poll-èisg a lorg taobh a-staigh an raoin-obrach tuilleadh. Dèan cinnteach gu bheil sùil-chriadha faisg air agus gu bheil an tuathanas-uisge a’ faighinn nam batharan uile a dh’fheumas e no thoir às a chèile no mill e."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
@@ -2953,7 +2957,7 @@ msgstr "Toll-dubh"
 #: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:95
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:114
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:112
 msgid "sleeping"
 msgstr "cadal"
 
@@ -3211,31 +3215,31 @@ msgid "Training Camp"
 msgstr "Campa oideachaidh"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:122
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:120
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr "ionnsaigh saighdeir àrdachadh o leibheil 0 gu leibheil 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:134
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:132
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr "ionnsaigh saighdeir àrdachadh o leibheil 1 gu leibheil 2"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:146
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:144
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr "ionnsaigh saighdeir àrdachadh o leibheil 2 gu leibheil 3"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:158
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:156
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 0 to level 1"
 msgstr "slàinte saighdeir àrdachadh o leibheil 0 gu leibheil 1"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:169
+#: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:167
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 0 to level 1"
 msgstr "dìon saighdeir àrdachadh o leibheil 0 gu leibheil 1"
@@ -4634,7 +4638,7 @@ msgid "Smelter"
 msgstr "Leaghadair"
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/smoker/init.lua:15
+#: ../../data/tribes/workers/atlanteans/smoker/init.lua:16
 msgctxt "atlanteans_worker"
 msgid "Smoker"
 msgstr "Toitear"

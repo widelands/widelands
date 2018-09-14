@@ -124,7 +124,7 @@ struct Road : public PlayerImmovable {
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 protected:
 	bool init(EditorGameBase&) override;
