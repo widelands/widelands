@@ -222,12 +222,9 @@ uint32_t SoldierDescr::get_animation(char const* const anim, const MapObject* mo
 	assert(soldier);
 	for (const std::pair<std::string, SoldierLevelRange>& pair : idle_name_) {
 		if (pair.second.matches(soldier)) {
-			if (strcmp(pair.first.c_str(), "idle") == 0) {
-				// Use the parent method here, so we don't end up in
-				// an endless loop if the idle anim is called "idle"
-				return WorkerDescr::get_animation(pair.first.c_str(), mo);
-			}
-			return get_animation(pair.first.c_str(), mo);
+			// Use the parent method here, so we don't end up in
+			// an endless loop if the idle anim is called "idle"
+			return WorkerDescr::get_animation(pair.first.c_str(), mo);
 		}
 	}
 	throw GameDataError("This soldier does not have an idle animation for this training level!");
