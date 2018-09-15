@@ -299,30 +299,29 @@ supply_murilius_9 = {
       _([[This is the greatest outrage of all. How dare he order us to stop expanding our territory when all we want is to build a new home, and threaten us with war if we refuse to be his slaves?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Supply Murilius 9
-      _([[I’d like to say we should attack him right now, but I fear we aren’t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time. As for expansion – I wonder how strictly he can possibly control us…]])),
+      _([[I’d like to say we should attack him right now, but I fear we aren’t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time. As for expansion – I wonder how strictly he can possibly control us. Perhaps we should send a scout to spy on him…]])),
 }
 
-expansion_hint_1 = {
-   title = _"Hint",
-   body = p(_[[If you destroy one of your military buildings, you will receive a hint how to cheat Murilius’s prohibition on expansion.]]),
-   w = 450,
-   h = 150,
-}
-
-expansion_hint_2 = {
-   title = _"Hint",
-   body = (
-      -- TRANSLATORS: A poem, verse 1
-      li(_[[How many sites where soldiers stay,]]) ..
-      -- TRANSLATORS: A poem, verse 2
-      li(_[[How many sites where thou hold’st sway,]]) ..
-      -- TRANSLATORS: A poem, verse 3
-      li(_[[Though not their whereabouts sees he]]) ..
-      -- TRANSLATORS: A poem, verse 4
-      li(_[[Who’s ordering around here thee!]])
-   ),
-   w = 450,
-   h = 150,
+expansion_hint = {
+   title =_ "The Scout Discovered Something",
+   body=hauke(_"Our scout returned",
+      -- TRANSLATORS: Hauke – Expansion hint
+      _([[Chieftain Reebaud! Our scout just returned. He has found a poem in the strange tongue this Proconsule speaks. With some difficulty, I have translated it into our language. If I did not mistranslate, it runs as follows:]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
+      space(10) .. (_([[How many sites where soldiers stay,]]))
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
+      space(10) .. (_([[How many sites where thou hold’st sway,]]))
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
+      space(10) .. (_([[Though not their whereabouts sees he]]))
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
+      space(10) .. (_([[Who’s ordering around here thee!]]))
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint
+      _([[I don’t know what it means, but I’m sure it’s important. Perhaps you can make some sense of it.]])),
 }
 
 supply_murilius_destroy = {

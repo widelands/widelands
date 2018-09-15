@@ -17,6 +17,8 @@ p3 = game.players[3] -- Kru-Gu’Lhar – determined enemy
 map = game.map
 p1_start = map.player_slots[1].starting_field
 
+include "map:scripting/texts.lua"
+
 initial_soldiers = 20
 campaign_data = game:read_campaign_data("frisians", "fri01")
 if not campaign_data then
@@ -26,5 +28,4 @@ if not campaign_data then
    initial_soldiers = 5
 end
 
-include "map:scripting/texts.lua"
 include "map:scripting/mission_thread.lua"

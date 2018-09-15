@@ -15,7 +15,7 @@ for x=0,map.width - 1 do
       if field.terd:find("mountain") ~= nil then
          table.insert(mountains, field)
       end
-      if field.has_caps("small") or field.has_caps("mine") then
+      if field:has_caps("small") or field:has_caps("mine") then
          table.insert(useful_fields, field)
       end
       table.insert(all_fields, field)
@@ -101,23 +101,47 @@ function expand_south()
    sleep(2000)
    campaign_message_box(supply_murilius_9)
    set_objective_done(o)
-   campaign_message_box(expansion_hint_1)
 
    o = add_campaign_objective(obj_supply_murilius)
    local choice = ""
    local milbld = count_military_buildings_p1()
    local hint_revealed = false
+   local scout = nil
    while choice == "" do
       sleep(791)
-      local m = count_military_buildings_p1()
-      if (not hint_revealed) and m < milbld then
-         campaign_message_box(expansion_hint_2)
-         hint_revealed = true
+      if (not hint_revealed) and (not scout) then
+         -- let's see if a scout is spying in Murilius's terrain
+         for i,house in pairs(p1:get_buildings("frisians_scouts_house")) do
+            for j,field in pairs(house.fields[1]:region(17)) do -- the scout has a radius of 15
+               for k,bob in pairs(field.bobs) do
+                  if bob.name == "frisians_scout" and
+                        field.owner == p2 and
+                        field.brn.owner == p2 and
+                        field.bln.owner == p2 and
+                        field.trn.owner == p2 and
+                        field.tln.owner == p2 and
+                        field.rn.owner == p2 and
+                        field.ln.owner == p2 then
+                     scout = bob
+                     break
+                  end
+               end
+               if scout then break end
+            end
+            if scout then break end
+         end
+      elseif (not hint_revealed) and scout then
+         local house = map:get_immovable(scout.field)
+         if house and house.name == "frisians_scouts_house" then
+            campaign_message_box(expansion_hint)
+            hint_revealed = true
+            scout = nil
+         end
       end
 
       if #(p1:get_buildings("frisians_warehouse_empire")) < 1 then
          choice = "destroy"
-      elseif m > milbld then
+      elseif count_military_buildings_p1() > milbld then
          -- It *is* permitted to destroy/dismantle a military building and build a new one elsewhere
          choice = "military"
       else
