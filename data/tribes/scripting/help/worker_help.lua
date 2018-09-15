@@ -97,15 +97,37 @@ end
 --
 function worker_help_employers_string(worker_description)
    local result = ""
-   local employers = worker_description.employers;
 
-   if (#employers > 0) then
+   if (#worker_description.employers > 0) then
       -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can work
       -- TRANSLATORS: You can also translate this as 'workplace(s)'
-      result = result .. h2(ngettext("Works at", "Works at", #employers))
+      result = result .. h2(ngettext("Works at", "Works at", #worker_description.employers))
       for i, building in ipairs(worker_description.employers) do
          result = result .. dependencies({worker_description, building}, building.descname)
       end
+      building = worker_description.employers[1]
+         if #building.working_positions > 1 and worker_description.descname == building.working_positions[2].descname and worker_description.descname ~= building.working_positions[1].descname then
+            for i, build in ipairs(building.working_positions[1].employers) do
+               if not build.working_positions[2] then
+                  -- TRANSLATORS: this text should describe that a more expereinced worker can be a substitute for a less experienced worker
+                  result = result .. dependencies({worker_description, build}, build.descname .. _" (instead of " .. build.working_positions[1].descname .. ")")
+               end
+            end
+         elseif #building.working_positions > 2 and worker_description.descname == building.working_positions[3].descname then
+            for i, build in ipairs(building.working_positions[1].employers) do
+               if #build.working_positions > 1 and not build.working_positions[3] then
+                  -- TRANSLATORS: This text should describe that a level 3 worker can be a substitute for a level 2 worker or a level 1 worker
+                  result = result .. dependencies({worker_description, build}, build.descname .. _" (instead of " .. build.working_positions[2].descname .. " or " .. build.working_positions[1].descname .. ")")
+               end
+            end
+            for i, build in ipairs(building.working_positions[1].employers) do
+               if not build.working_positions[2] then
+                  -- TRANSLATORS: this text should describe that a more expereinced worker can be a substitute for a less experienced worker
+                  result = result .. dependencies({worker_description, build}, build.descname .. _" (instead of " .. build.working_positions[1].descname .. ")")
+               end
+            end
+         end
+      -- end
    end
    return result
 end
