@@ -172,7 +172,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier health 1 2",
-            "produce=scrap_iron:2"
+            "produce=scrap_iron"
          }
       },
    },
