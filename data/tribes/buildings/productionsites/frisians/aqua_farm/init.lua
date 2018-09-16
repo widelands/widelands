@@ -65,8 +65,7 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped unless economy needs fish",
             "sleep=23000",
-            "return=failed unless site has water:3",
-            "return=failed unless site has fruit",
+            "return=failed unless site has water:3 and site has fruit",
             "callworker=breed_in_pond",
             "consume=fruit water:3",
          },

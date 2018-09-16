@@ -59,7 +59,7 @@ tribes:new_productionsite_type {
          descname = _"making clay",
          actions = {
             "sleep=20000",
-            "return=skipped unless economy needs clay or site has water",
+            "return=skipped unless economy needs clay or economy needs fish",
             "return=failed unless site has water",
             "callworker=dig",
             "consume=water",

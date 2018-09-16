@@ -95,10 +95,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
          descname = pgettext("frisians_building", "recycling iron"),
          actions = {
-            "return=skipped unless economy needs iron",
+            "return=skipped unless site has scrap_iron:2",
+            "sleep=40000",
             "consume=scrap_iron:2 coal",
             "animate=working_metal 40000",
-            "sleep=40000",
             "produce=iron:2"
          }
       },
@@ -106,10 +106,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold because ...
          descname = pgettext("frisians_building", "recycling iron and gold"),
          actions = {
-            "return=skipped unless economy needs iron or economy needs gold",
+            "return=skipped unless site has scrap_metal_mixed:2",
+            "sleep=40000",
             "consume=scrap_metal_mixed:2 coal",
             "animate=working_metal 40000",
-            "sleep=40000",
             "produce=iron gold"
          }
       },
