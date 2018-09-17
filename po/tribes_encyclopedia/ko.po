@@ -5,14 +5,14 @@
 # GunChleoc, 2018
 # GunChleoc, 2018
 # ks k, 2017
-# ks k, 2017
+# ks k, 2017-2018
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-06 14:22+0000\n"
-"PO-Revision-Date: 2018-07-08 14:33+0000\n"
+"POT-Creation-Date: 2018-09-12 15:51+0000\n"
+"PO-Revision-Date: 2018-09-13 08:47+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -1442,7 +1442,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "빵 굽는 이"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:13
@@ -3678,14 +3678,14 @@ msgid "Producer"
 msgstr "생산 주체"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "생산된 용품:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:167
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "소비 주체"

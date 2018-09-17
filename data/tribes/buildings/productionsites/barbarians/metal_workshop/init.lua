@@ -86,7 +86,7 @@ tribes:new_productionsite_type {
             "call=produce_pick",
             "call=produce_scythe",
             "call=produce_shovel",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_bread_paddle = {

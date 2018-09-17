@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_FLAG_H
 #define WL_ECONOMY_FLAG_H
 
+#include <deque>
 #include <list>
 #include <vector>
 
@@ -47,12 +48,16 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
 };
 
+constexpr bool kPendingOnly = true;           // ignore non-pending wares
+constexpr int32_t kNotFoundAppropriate = -1;  // no ware appropiate for carrying
+constexpr int32_t kDenyDrop = -2;             // flag is full and no ware appropiate for swapping
+
 /**
- * Flag represents a flag, obviously.
+ * Flag represents a flag as you see it on the map.
+ *
  * A flag itself doesn't do much. However, it can have up to 6 roads attached
  * to it. Instead of the WALK_NW road, it can also have a building attached to
- * it.
- * Flags also have a store of up to 8 wares.
+ * it. Flags also have a store of up to 8 wares.
  *
  * You can also assign an arbitrary number of "jobs" for a flag.
  * A job consists of a request for a worker, and the name of a program that the
@@ -121,7 +126,15 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	bool is_dead_end() const;
 
+	struct PendingWare {
+		WareInstance* ware;              ///< the ware itself
+		bool pending;                    ///< if the ware is pending
+		int32_t priority;                ///< carrier prefers the ware with highest priority
+		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
+	};
+
 	bool has_capacity() const;
+	bool has_capacity_for_ware(WareInstance&) const;
 	uint32_t total_capacity() {
 		return ware_capacity_;
 	}
@@ -131,10 +144,14 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void wait_for_capacity(Game&, Worker&);
 	void skip_wait_for_capacity(Game&, Worker&);
 	void add_ware(EditorGameBase&, WareInstance&);
-	bool has_pending_ware(Game&, Flag& destflag);
-	bool ack_pickup(Game&, Flag& destflag);
+	void init_ware(EditorGameBase&, WareInstance&, PendingWare&);
+	PendingWare* get_ware_for_flag(Flag&, bool pending_only = false);
 	bool cancel_pickup(Game&, Flag& destflag);
-	WareInstance* fetch_pending_ware(Game&, PlayerImmovable& dest);
+	void ware_departing(Game&);
+	bool allow_ware_from_flag(WareInstance&, Flag&);
+	int32_t find_swappable_ware(WareInstance&, Flag&);
+	int32_t find_pending_ware(PlayerImmovable&);
+	WareInstance* fetch_pending_ware(Game&, int32_t);
 	void propagate_promoted_road(Road* promoted_road);
 	Wares get_wares();
 	uint8_t count_wares_in_queue(PlayerImmovable& dest) const;
@@ -146,7 +163,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void add_flag_job(Game&, DescriptionIndex workerware, const std::string& programname);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 protected:
 	bool init(EditorGameBase&) override;
@@ -158,20 +175,13 @@ protected:
 	          float scale,
 	          RenderTarget* dst) override;
 
-	void wake_up_capacity_queue(Game&);
-
 	static void
 	flag_job_request_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
 	void set_flag_position(Coords coords);
 
 private:
-	struct PendingWare {
-		WareInstance* ware;              ///< the ware itself
-		bool pending;                    ///< if the ware is pending
-		int32_t priority;                ///< carrier prefers the ware with highest priority
-		OPtr<PlayerImmovable> nextstep;  ///< next step that this ware is sent to
-	};
+	bool update_ware_from_flag(Game&, PendingWare&, Road&, Flag&);
 
 	struct FlagJob {
 		Request* request;
@@ -192,7 +202,7 @@ private:
 	/// the given flag
 	Flag* always_call_for_flag_;
 
-	using CapacityWaitQueue = std::vector<OPtr<Worker>>;
+	using CapacityWaitQueue = std::deque<OPtr<Worker>>;
 	CapacityWaitQueue capacity_wait_;  ///< workers waiting for capacity
 
 	using FlagJobs = std::list<FlagJob>;

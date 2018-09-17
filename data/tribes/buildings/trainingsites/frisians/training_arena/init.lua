@@ -27,21 +27,22 @@ tribes:new_trainingsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {101, 73},
+         hotspot = {114, 124},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {101, 73},
+         hotspot = {114, 124},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {101, 67},
+         hotspot = {114, 98},
       },
    },
 
    aihints = {
+      trainingsites_max_percent = 40,
       prohibited_till = 1500,
       very_weak_ai_limit = 0,
       weak_ai_limit = 1

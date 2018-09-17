@@ -86,10 +86,8 @@ public:
 		return egbase_;
 	}
 
-	// TODO(sirver): This should be private.
-	bool show_workarea_preview_;
-	void show_work_area(const WorkareaInfo& workarea_info, Widelands::Coords coords);
-	void hide_work_area(const Widelands::Coords& coords);
+	void show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords);
+	void hide_workarea(const Widelands::Coords& coords);
 
 	//  point of view for drawing
 	virtual Widelands::Player* get_player() const = 0;
@@ -196,6 +194,24 @@ protected:
 	void mainview_move();
 
 	void draw_overlay(RenderTarget&) override;
+	/**
+	 * Will blit the 'image' on the given 'pos', offset by 'hotspot' and scaled according to the
+	 * given zoom 'scale'.
+	 * */
+	void blit_overlay(RenderTarget* dst,
+	                  const Vector2i& pos,
+	                  const Image* image,
+	                  const Vector2i& hotspot,
+	                  float scale);
+	/**
+	 * Will blit the 'image' on the given 'field', offset by 'hotspot' and scaled according to the
+	 * given zoom 'scale'.
+	 * */
+	void blit_field_overlay(RenderTarget* dst,
+	                        const FieldsToDraw::Field& field,
+	                        const Image* image,
+	                        const Vector2i& hotspot,
+	                        float scale);
 
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
@@ -218,8 +234,7 @@ protected:
 	TextToDraw get_text_to_draw() const;
 
 	// Returns the current overlays for the work area previews.
-	std::map<Widelands::Coords, const Image*>
-	get_work_area_overlays(const Widelands::Map& map) const;
+	std::map<Widelands::Coords, const Image*> get_workarea_overlays(const Widelands::Map& map) const;
 
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.
@@ -228,6 +243,9 @@ protected:
 	const RoadBuildingOverlays& road_building_overlays() const {
 		return road_building_overlays_;
 	}
+
+	/// Returns true if there is a workarea preview being shown at the given coordinates
+	bool has_workarea_preview(const Widelands::Coords& coords) const;
 
 private:
 	int32_t stereo_position(Widelands::Coords position_map);
@@ -268,7 +286,7 @@ private:
 
 	// The currently enabled work area previews. They are keyed by the
 	// coordinate that the building that shows the work area is positioned.
-	std::map<Widelands::Coords, const WorkareaInfo*> work_area_previews_;
+	std::map<Widelands::Coords, const WorkareaInfo*> workarea_previews_;
 
 	RoadBuildingOverlays road_building_overlays_;
 

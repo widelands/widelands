@@ -22,12 +22,12 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {42, 65},
+         hotspot = {49, 87},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {42, 65},
+         hotspot = {49, 65},
       }
    },
 
@@ -51,7 +51,7 @@ tribes:new_productionsite_type {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
             "call=mine_stone",
-            "return=skipped"
+            "return=no_stats"
          },
       },
       mine_stone = {

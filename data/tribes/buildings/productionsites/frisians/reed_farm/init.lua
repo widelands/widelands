@@ -23,12 +23,12 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 89},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 64},
+         hotspot = {49, 66},
       },
    },
 
@@ -54,7 +54,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_reed",
             "call=harvest_reed",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       plant_reed = {

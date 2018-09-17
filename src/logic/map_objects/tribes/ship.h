@@ -35,10 +35,11 @@ struct Fleet;
 class PortDock;
 
 // This can't be part of the Ship class because of forward declaration in game.h
+// Keep the order of entries for savegame compatibility.
 enum class IslandExploreDirection {
-	kCounterClockwise = 0,  // This comes first for savegame compatibility (used to be = 0)
-	kClockwise = 1,
-	kNotSet
+	kNotSet,
+	kCounterClockwise,
+	kClockwise,
 };
 
 struct NoteShip {
@@ -116,7 +117,7 @@ struct Ship : Bob {
 
 	uint32_t calculate_sea_route(Game& game, PortDock& pd, Path* finalpath = nullptr) const;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	uint32_t get_nritems() const {
 		return items_.size();
@@ -195,7 +196,7 @@ struct Ship : Bob {
 	}
 
 	// whether the ship's expedition is in state "island-exploration" (circular movement)
-	bool is_exploring_island() {
+	bool is_exploring_island() const {
 		return expedition_->island_exploration;
 	}
 

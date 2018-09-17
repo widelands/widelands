@@ -138,7 +138,7 @@ public:
 	}
 
 	// debug
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// worker-specific tasks
 	void start_task_transfer(Game&, Transfer*);
@@ -163,7 +163,7 @@ public:
 	void start_task_releaserecruit(Game&, Worker&);
 	void start_task_fetchfromflag(Game&);
 
-	bool start_task_waitforcapacity(Game&, Flag&);
+	void start_task_waitforcapacity(Game&, Flag&);
 	void start_task_leavebuilding(Game&, bool changelocation);
 	void start_task_fugitive(Game&);
 

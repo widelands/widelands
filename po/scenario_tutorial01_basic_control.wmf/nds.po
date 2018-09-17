@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-06 14:22+0000\n"
-"PO-Revision-Date: 2018-07-12 07:27+0000\n"
+"POT-Creation-Date: 2018-08-24 06:54+0000\n"
+"PO-Revision-Date: 2018-08-27 11:44+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -31,11 +31,11 @@ msgstr "Nix för ungood, aber dat mutt ick weer plattreten. Düsse Rüümte bruk
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:25
 msgid "Welcome to the Widelands Tutorial!"
-msgstr "Willkommen bi de Widelands-Inföhren!"
+msgstr "Willkomen bi de Widelands-Inföhren!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:27
 msgid "Welcome to Widelands!"
-msgstr "Willkommen in Widelands!"
+msgstr "Willkomen in Widelands!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:28
 msgid ""
@@ -300,7 +300,7 @@ msgstr "Enige Stenen sünd funnen worden"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Getting a Quarry Up"
-msgstr "Een Flinthauerhuus bauen"
+msgstr "Een Flintslagerhuus bauen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid ""
@@ -308,7 +308,7 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr "Flint kann in Flint-Bargwarken ofboot worden, aber 't is lichter, een Flinthauerhuus tegen enigen Stenen to bauen. Handigwies is een Bült daarvun jüüst im Westen (links) vun dienem Raadhuus. Nu lehr ick di, wo dat gaht, dat du diene Sicht daarhen beweegst."
+msgstr "Flint kann in Flint-Bargwarken ofboot worden, aber 't is lichter, een Flintslagerhuus tegen enigen Stenen to bauen. Handigwies is een Bült daarvun jüüst im Westen (links) vun dienem Raadhuus. Nu lehr ick di, wo dat gaht, dat du diene Sicht daarhen beweegst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:181
 msgid ""
@@ -419,20 +419,20 @@ msgstr "Sluut de Lütt Kaart, wenn du klaar tum Wiedermaken büst, indeem du des
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:228
 msgid "Onward to the Quarry"
-msgstr "Nu dat Flinthauerhuus"
+msgstr "Nu dat Flintslagerhuus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:229
 msgid "Great. Now about that quarry…"
-msgstr "Hunnert. Nu düsses Flinthauerhuus…"
+msgstr "Hunnert. Nu düsses Flintslagerhuus…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "How to Build a Quarry"
-msgstr "Wo dat gaht, een Flinthauerhuus to bauen"
+msgstr "Wo dat gaht, een Flintslagerhuus to bauen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr "Bau een Flinthauerhuus tegen düssen Stenen hier. Weetst du noch, wo ick dat vörhen daan hebb?"
+msgstr "Bau een Flintslagerhuus tegen düssen Stenen hier. Weetst du noch, wo ick dat vörhen daan hebb?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
@@ -477,34 +477,34 @@ msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
-msgstr "Nu versöök 't. Dat Flinthauerhuus is een lüttjes Huus; wenn du up een Teken för middelmatig oder grote Husen klickst, mutt du eerst de Listenwessler för lütte Husen utkören, um 't to finnen. Probeer 't!"
+msgstr "Nu versöök 't. Dat Flintslagerhuus is een lüttes Huus; wenn du up een Teken för middelmatig oder grote Husen klickst, mutt du eerst de Listenwessler för lütte Husen utkören, um 't to finnen. Probeer 't!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid "Build a quarry next to the rocks"
-msgstr "Bau een Flinthauerhuus tegen de Stenen"
+msgstr "Bau een Flintslagerhuus tegen de Stenen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:252
 msgid "Build a Quarry"
-msgstr "Bau een Flinthauerhuus"
+msgstr "Bau een Flintslagerhuus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:253
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr "Enige Stenen sünd westelk vun dienem Raadhuus. Bau stuuv daartegen een Flinthauerhuus."
+msgstr "Enige Stenen sünd westelk vun dienem Raadhuus. Bau stuuv daartegen een Flintslagerhuus."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:254
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press Space for that)."
-msgstr "Dat Flinthauerhuus is as de Boomhauer-Huus een lüttes Huus. Du kannst 't also up elkeen Feld bauen, dat een rodes, geles oder grönes Huus-Teken hett wenn de Tekens för Rüümte tum Bauen wesen worden (drück daarför de Taste mit de lege Bookstaav)."
+msgstr "Dat Flintslagerhuus is as de Boomhauer-Huus een lüttes Huus. Du kannst 't also up elkeen Feld bauen, dat een rodes, geles oder grönes Huus-Teken hett wenn de Tekens för Rüümte tum Bauen wesen worden (drück daarför de Taste mit de lege Bookstaav)."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:255
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr "Klick eenfach een of anner Huus-Teken tegen de Stenen an, köör de Listenwessler för de lütten Husen ut un klick dann de Flinthauerhuus-Teken an."
+msgstr "Klick eenfach een of anner Huus-Teken tegen de Stenen an, köör de Listenwessler för de lütten Husen ut un klick dann de Flintslagerhuus-Teken an."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:262
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
@@ -543,7 +543,7 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr "Un nu de Straat. Vergeet nich: wi sünd al klaar tum Stratenbauen, wiel du jüüst de Flinthauerhuus beschickt hest. Du kannst de Straat een Feld up eenmaal verlangern, indeem du mennigmaal mit de linken Muustaste up een benaberts Feld klickst. So kannst du de Verloop vun de Straat akkeraat fastleggen. Dat gaht so:"
+msgstr "Un nu de Straat. Vergeet nich: wi sünd al klaar tum Stratenbauen, wiel du jüüst de Flintslagerhuus beschickt hest. Du kannst de Straat een Feld up eenmaal verlangern, indeem du mennigmaal mit de linken Muustaste up een benaberts Feld klickst. So kannst du de Verloop vun de Straat akkeraat fastleggen. Dat gaht so:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid ""
@@ -609,11 +609,11 @@ msgstr "Wenn du bi'm Daankriegen vun eener Straat de Strg-Taste oder de Umschalt
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."
-msgstr "Nu bau bidde de Straat vun de Flinthauerhuus tu dienem Raadhuus weer up."
+msgstr "Nu bau bidde de Straat vun de Flintslagerhuus tu dienem Raadhuus weer up."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:310
 msgid "Connect the quarry to the headquarters"
-msgstr "Verbinn de Flinthauerhuus un dat Raadhuus"
+msgstr "Verbinn dat Flintslagerhuus un dat Raadhuus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:312
 msgid "Connect Your Construction Site"
@@ -631,11 +631,11 @@ msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
-msgstr "Um eene neie Straat to bauen, klick de Fahn vör diener Baustee an, klick dat »Straten bauen«-Teken an un klick dann de Fahn vör dienem Raadhuus an. Wacht bit de Flinthauerhuus kumpleet is."
+msgstr "Um eene neie Straat to bauen, klick de Fahn vör diener Baustee an, klick dat »Straten bauen«-Teken an un klick dann de Fahn vör dienem Raadhuus an. Wacht bit dat Flintslagerhuus kumpleet is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "Quarry not Connected"
-msgstr "Flinthauerhuus nich verbunnen"
+msgstr "Flintslagerhuus nich verbunnen"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:322
 msgid ""
@@ -657,33 +657,33 @@ msgid ""
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr "Du hest de Baustee för dat Flinthauerhuus, dat wi bauen wullen, openbaar verneelt. Wi bruuken de Flint, also slaa ick vör, dat du dat Speel vun eenem sekerten Speel laadst. Düsse worden glückelkerwies unner de Tied automatisk maakt. Gah torügg  tum Höövdmenü un köör »Een Speler« → »Speel laden«. Un pass de de anner Maal bidde en bietje beter up."
+msgstr "Du hest de Baustee för dat Flintslagerhuus, dat wi bauen wullen, openbaar verneelt. Wi bruuken de Flint, also slaa ick vör, dat du dat Speel vun eenem sekerten Speel laadst. Düsse worden glückelkerwies unner de Tied automatisk maakt. Gah torügg  tum Höövdmenü un köör »Een Speler« → »Speel laden«. Un pass de de anner Maal bidde en bietje beter up."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:339
 msgid "Build a second quarry"
-msgstr "Bau een tweedes Flinthauerhuus"
+msgstr "Bau een twedes Flintslagerhuus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:341
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr "Waar mennig Stenen sünd, kannst du noch een Flinthauerhuus bauen. Dann gaht de Flint-Ofbau gauer."
+msgstr "Waar mennig Stenen sünd, kannst du noch een Flintslagerhuus bauen. Dann gaht de Flint-Ofbau gauer."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid ""
 "Build a second quarry near the rocks and connect it to your road network."
-msgstr "Bau een anners Flinthauerhuus dicht bi de Stenen un verbinn 't mit dienen Straten."
+msgstr "Bau noch een Flintslagerhuus dicht bi de Stenen un verbinn 't mit dienen Straten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:345
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:347
 msgid "Build another quarry"
-msgstr "Bau noch een Flinthauerhuus"
+msgstr "Bau noch een Flintslagerhuus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:348
 msgid ""
 "Build a second quarry next to the rocks. Do not forget to connect it to "
 "another flag."
-msgstr "Bau een tweedes Flinthauerhuus tegen de Stenen. Vergeet nich, 't mit eener Fahn to verbinnen."
+msgstr "Bau een twedes Flintslagerhuus tegen de Stenen. Vergeet nich, 't mit eener Fahn to verbinnen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:349
 msgid ""
@@ -722,7 +722,7 @@ msgstr "Laat mi düsse twee radd för di anknipsen. Vergeet nich: »C« un »S«
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:366
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
-msgstr "Nu weten wi, wat passeert. Laat uns wachten bit beide Flinthauerhusen kumpleet sünd."
+msgstr "Nu weten wi, wat passeert. Laat uns wachten bit beide Flintslagerhusen kumpleet sünd."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:373
 msgid "Messages"
@@ -848,7 +848,7 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr "Hunnert! Laat uns nu sehn, för wat Narichten in eenem echten Speel good sünd, inverstahn? Ick graps nu all Stenen vun de bedurelk Flinthauers in de Flinthauerhusen of. Beide schicken dann eene Naricht, dat se in hör Naberskuppen keene Stenen mehr finnen könen, wenn se weer arbeiden willen."
+msgstr "Hunnert! Laat uns nu sehn, för wat Narichten in eenem echten Speel good sünd, inverstahn? Ick graps nu all Stenen vun de bedurelk Flintslagers in de Flintslagerhusen of. Beide schicken dann eene Naricht, dat se in hör Naberskuppen keene Stenen mehr finnen könen, wenn se weer arbeiden willen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:427
 msgid "Messages Arrived!"
@@ -860,49 +860,49 @@ msgid ""
 "has changed appearance? You can destroy the quarries now as they are no "
 "longer of any use and just blocking space. To do so, there are two "
 "possibilities:"
-msgstr "Du hest een paar Narichten kregen. Hest du spitzkregen, wo sük de Knoop an de unnern Rand vum Bildschirm verännert hett? Du kannst de Flinthauerhusen nu ofrieten, denn se sünd nu unnütz un Stah-in-de-Wegen. 't gifft twee Aarden, dat to doon:"
+msgstr "Du hest een paar Narichten kregen. Hest du spitzkregen, wo sük de Knoop an de unnern Rand vum Bildschirm verännert hett? Du kannst de Flintslagerhusen nu ofrieten, denn se sünd nu unnütz un Stah-in-de-Wegen. 't gifft twee Aarden, dat to doon:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Du kannst dat Flinthauerhuus ofbrannen: Dat is de gauest Aard, de Rüümte freeitomaken. De Arbeider verlett dat Huus, aber de Waren gahn fleiten."
+msgstr "Du kannst dat Flintslagerhuus ofbrannen: Dat is de gauest Aard, de Rüümte freeitomaken. De Arbeider verlett dat Huus, aber de Waren gahn fleiten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:431
 msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "Dat Flinthauerhuus plattrieten: Een Baukeerl kummt vum Raadhuus, um dat Flinthauerhuus stückwies platttorieten. So kriggst du een paar vun de Materialien torügg, de tum Bauen verwendt wurren."
+msgstr "Dat Flintslagerhuus plattrieten: Een Baukeerl kummt vum Raadhuus, um dat Flintslagerhuus stückwies platttorieten. So kriggst du een paar vun de Materialien torügg, de tum Bauen verwendt wurren."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
 msgid "Destroy the two quarries"
-msgstr "Riet beide Flinthauerhusen of"
+msgstr "Riet beide Flintslagerhusen of"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
-msgstr "Uns Flinthauerhusen sünd nu unnütz, du kannst se ofrieten un de Rüümte naher weer bruuken."
+msgstr "Uns' Flintslagerhusen sünd nu unnütz, du kannst se ofrieten un de Rüümte naher weer bruuken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
-msgstr "'t gifft twee Aarden, een Huus oftorieten: Ofbrannen un Plattrieten. Probeer beide an dienen Flinthauerhusen ut."
+msgstr "'t gifft twee Aarden, een Huus oftorieten: Ofbrannen un Plattrieten. Probeer beide an dienen Flintslagerhusen ut."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Du kannst dat Flinthauerhuus ofbrannen: Dat is de gauest Aard, de Rüümte freeitomaken. De Arbeider verlett dat Huus, aber de Waren gahn fleiten."
+msgstr "Du kannst dat Flintslagerhuus ofbrannen: Dat is de gauest Aard, de Rüümte freeitomaken. De Arbeider verlett dat Huus, aber de Waren gahn fleiten."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr "Dat Flinthauerhuus plattrieten: Een Baukeerl kummt vum Raadhuus, um dat Flinthauerhuus stückwies platttorieten. So kriggst du een paar vun de Materialien torügg, de tum Bauen verwendt wurren."
+msgstr "Dat Flintslagerhuus plattrieten: Een Baukeerl kummt vum Raadhuus, um dat Flintslagerhuus stückwies platttorieten. So kriggst du een paar vun de Materialien torügg, de tum Bauen verwendt wurren."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
 msgid "Expanding Your Territory!"

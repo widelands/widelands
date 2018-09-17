@@ -27,17 +27,17 @@ tribes:new_trainingsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {59, 73},
+         hotspot = {56, 91},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {59, 73},
+         hotspot = {56, 91},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {59, 62},
+         hotspot = {56, 69},
       },
    },
 
@@ -87,8 +87,7 @@ tribes:new_trainingsite_type {
       min_level = 0,
       max_level = 0,
       food = {
-         {"bread_frisians"},
-         {"beer"},
+         {"bread_frisians", "beer"},
          {"smoked_fish", "smoked_meat"},
       },
       weapons = {
@@ -99,8 +98,7 @@ tribes:new_trainingsite_type {
       min_level = 0,
       max_level = 0,
       food = {
-         {"bread_frisians"},
-         {"beer"},
+         {"bread_frisians", "beer"},
          {"smoked_fish", "smoked_meat"},
       },
       weapons = {

@@ -61,7 +61,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant",
             "call=harvest",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       plant = {

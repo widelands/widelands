@@ -357,6 +357,7 @@ MessageId Player::add_message_with_timeout(Game& game,
 	Coords const position = message->position();
 	for (const auto& tmp_message : messages()) {
 		if (tmp_message.second->type() == message->type() &&
+		    tmp_message.second->sub_type() == message->sub_type() &&
 		    gametime < tmp_message.second->sent() + timeout &&
 		    map.calc_distance(tmp_message.second->position(), position) <= radius) {
 			return MessageId::null();
@@ -742,8 +743,10 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
-		// Register whether the window was open
-		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
+		if (index_of_new_building != INVALID_INDEX) {
+			// For enhancing, register whether the window was open
+			Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
+		}
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
@@ -1338,19 +1341,14 @@ const std::string Player::pick_shipname() {
  *
  * \param fr source stream
  */
-void Player::read_remaining_shipnames(FileRead& fr, uint16_t packet_version) {
+void Player::read_remaining_shipnames(FileRead& fr) {
 	// First get rid of default shipnames
 	remaining_shipnames_.clear();
 	const uint16_t count = fr.unsigned_16();
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());
 	}
-	// TODO(GunChleoc): Savegame compatibility. Remove after Build 20.
-	if (packet_version >= 21) {
-		ship_name_counter_ = fr.unsigned_32();
-	} else {
-		ship_name_counter_ = ships_.size();
-	}
+	ship_name_counter_ = fr.unsigned_32();
 }
 
 /**

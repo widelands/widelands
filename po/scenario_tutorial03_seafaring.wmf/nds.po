@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-06 14:22+0000\n"
-"PO-Revision-Date: 2018-07-12 07:19+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-22 16:08+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Inföhren över Seefahrt"
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr "Willkommen torügg. In düsse Inföhren lehrst du de wichtigsten Dingen över Seefahrt, also Schippen, Muden un Söken."
+msgstr "Willkomen torügg. In düsse Inföhren lehrst du de wichtigsten Dingen över Seefahrt, also Schippen, Muden un Söken."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:23
 msgid ""
@@ -142,7 +142,7 @@ msgstr "Muden baust du as annere Husen, aber se sünd blot up de blauen Rüümte
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr "Muden sünd ok Kraamhusen, aber du sallst nich mehr bauen, as du bruukst: se sünd bannig düür un kösten Blinkerflint, Edelflint un Gold."
+msgstr "Muden sünd ok Kraamhusen, aber du sallst nich mehr bauen, as du bruukst: se sünd bannig düür un kösten Blinkerflint, Edelstenen un Gold."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96

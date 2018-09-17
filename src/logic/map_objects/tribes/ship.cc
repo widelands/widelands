@@ -697,13 +697,15 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 		FALLS_THROUGH;
 	case ShipStates::kExpeditionWaiting:
-	case ShipStates::kExpeditionPortspaceFound:
-	case ShipStates::kSinkRequest:
-	case ShipStates::kSinkAnimation: {
+	case ShipStates::kExpeditionPortspaceFound: {
 		// wait for input
 		start_task_idle(game, descr().main_animation(), 1500);
 		return;
 	}
+		FALLS_THROUGH;
+	case ShipStates::kSinkRequest:
+	case ShipStates::kSinkAnimation:
+		break;
 	}
 	NEVER_HERE();
 }
@@ -1027,7 +1029,7 @@ void Ship::draw(const EditorGameBase& egbase,
 	             scale, dst);
 }
 
-void Ship::log_general_info(const EditorGameBase& egbase) {
+void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	molog("Ship belongs to fleet: %u\n destination: %s\n lastdock: %s\n",
@@ -1110,7 +1112,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 7;
+constexpr uint8_t kCurrentPacketVersion = 8;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")

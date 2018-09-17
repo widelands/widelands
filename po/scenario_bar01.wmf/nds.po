@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-06 14:22+0000\n"
-"PO-Revision-Date: 2018-07-08 11:47+0000\n"
+"POT-Creation-Date: 2018-08-24 06:54+0000\n"
+"PO-Revision-Date: 2018-08-27 11:39+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgstr "Bau Soldateree-Boen (to 'n Bispööl Wachters-Kamers un Uppassen), um di
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:36
 msgid "Get to the rocks north-east from you and build a quarry there."
-msgstr "Lang to de Stenen im Noordoosten hen un bau daar een Flinthauerhuus."
+msgstr "Lang to de Stenen im Noordoosten hen un bau daar een Flintslagerhuus."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:41
 msgid "Start building mines on the mountain"
@@ -175,11 +175,11 @@ msgstr "De Iesenkluut, wat diene Bargwarkskeerls ofboen, kann nich bruukt worden
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:86
 msgid "Enhance buildings and build a micro brewery"
-msgstr "Bau Husen ut un bau eene Lüttje Broeree"
+msgstr "Bau Husen ut un bau eene Lütte Broeree"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:88
 msgid "Enhance a mine and the tavern, and build a micro brewery."
-msgstr "Bau een Bargwark und de Kneipe ut un bau eene Lüttje Broeree."
+msgstr "Bau een Bargwark und de Kneipe ut un bau eene Lütte Broeree."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:89
 msgid ""
@@ -189,7 +189,7 @@ msgstr "Bau dat Köhle-Bargwark oder dat Iesen-Bargwark to eenem Deepen Bargwark
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Also build a micro brewery."
-msgstr "Bau ok eene Lüttje Broeree."
+msgstr "Bau ok eene Lütte Broeree."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:91
 msgid ""
@@ -265,7 +265,7 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "Daarmit een Schattsöker Water söcht, klick eene Fahn an, de in de Kuntrei staht, waar he söken sall, un klick dann de Knoop »Enn Schattsöker soll düsse Stee unnersöken« an."
+msgstr "Daarmit een Schattsöker Water söcht, klick eene Fahn an, de in de Kuntrei staht, waar he söken sall, un klick dann de Knoop »Enn Schattsöker sall düsse Stee unnersöken« an."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:114
 msgid ""

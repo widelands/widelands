@@ -56,15 +56,7 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 	size_t index = boxes_.size() - 1;
 
 	UI::MultilineTextarea* textarea =
-	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, style_);
-	try {
-		textarea->force_new_renderer();
-		textarea->set_text(content);
-	} catch (const std::exception& e) {
-		log("Fileview: falling back to OLD font renderer: %s\n", e.what());
-		textarea->force_new_renderer(false);
-		textarea->set_text(content);
-	}
+	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, style_, content);
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(std::move(textarea)));
 	add((boost::format("about_%" PRIuS) % index).str(), title, boxes_.at(index).get(), "");
