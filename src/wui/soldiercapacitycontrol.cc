@@ -112,12 +112,17 @@ void SoldierCapacityControl::change_soldier_capacity(int delta) {
 }
 
 void SoldierCapacityControl::click_decrease() {
-	// using int16_t because int32_t could cause over-/underflows
-	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) ? std::numeric_limits<int16_t>::min() : -1);
+	const SoldierControl* soldiers = building_.soldier_control();
+	assert(soldiers);
+	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) ?
+			soldiers->min_soldier_capacity() - soldiers->soldier_capacity() : -1);
 }
 
 void SoldierCapacityControl::click_increase() {
-	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) ? std::numeric_limits<int16_t>::max() : 1);
+	const SoldierControl* soldiers = building_.soldier_control();
+	assert(soldiers);
+	change_soldier_capacity((SDL_GetModState() & KMOD_CTRL) ?
+			soldiers->max_soldier_capacity() - soldiers->soldier_capacity() : 1);
 }
 
 UI::Panel* create_soldier_capacity_control(UI::Panel& parent,
