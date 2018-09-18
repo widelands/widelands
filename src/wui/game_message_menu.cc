@@ -413,6 +413,10 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 				break;
 			}
 			FALLS_THROUGH;
+		case SDLK_TAB:
+			// tab is not used for any function in game message menu, however we need to catch it here,
+			// to avoid ending up in a endless loop as list will reassign tab to it's parent = this...
+			return true;
 		default:
 			break;  // not handled
 		}
