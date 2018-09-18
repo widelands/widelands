@@ -22,10 +22,7 @@
 
 ;Version String
 #define Name "Widelands"
-#define VerName "Widelands Build19"
-#define VerNumber "0.19.0.1"
 #define Copyright "Widelands Development Team 2001-2018"
-#define SetupFileName "Widelands-Build19-win64"
 
 ;General String
 #define Publisher "Widelands Development Team"
@@ -44,8 +41,7 @@
 
 [Setup]
 AppName={#Name}
-AppVerName={#VerName}
-AppVersion={#VerNumber}
+AppVersion={#Version}
 AppPublisher={#Publisher}
 AppPublisherURL={#URL}
 AppSupportURL={#URL}
@@ -61,15 +57,13 @@ SetupIconFile=..\WL.ico
 Compression=lzma/ultra
 SolidCompression=true
 VersionInfoCompany={#Publisher}
-VersionInfoDescription={#VerName} Setup
 ShowLanguageDialog=yes
 WizardImageFile=.\WL.bmp
 WizardSmallImageFile=.\WLsmall.bmp
 UninstallDisplayIcon={app}\unins000.exe
-UninstallDisplayName={#VerName}
 VersionInfoCopyright={#Publisher}
 InternalCompressLevel=max
-AppID={#Version}
+AppId={#Version}
 AppCopyright={#Copyright}
 ChangesAssociations=yes
 PrivilegesRequired=lowest
