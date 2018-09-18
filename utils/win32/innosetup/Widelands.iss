@@ -52,7 +52,6 @@ AllowNoIcons=true
 LicenseFile=..\..\..\COPYING
 InfoAfterFile=..\..\..\ChangeLog
 OutputDir=..\..\..\..\
-OutputBaseFilename={#SetupFileName}
 SetupIconFile=..\WL.ico
 Compression=lzma/ultra
 SolidCompression=true
