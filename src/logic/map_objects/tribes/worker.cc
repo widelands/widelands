@@ -959,7 +959,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 
 		const ResourceDescription* const rdescr = world.get_resource(position.field->get_resources());
 		const TribeDescr& t = owner().tribe();
-		const Immovable& ri = game.create_immovable(
+		game.create_immovable(
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
@@ -980,7 +980,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			get_owner()->add_message_with_timeout(
 			   game, std::unique_ptr<Message>(
 			            new Message(Message::Type::kGeologists, game.get_gametime(),
-			                        rdescr->descname(), ri.descr().representative_image_filename(),
+			                        rdescr->descname(), rdescr->representative_image(),
 			                        rdescr->descname(), message, position, serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
