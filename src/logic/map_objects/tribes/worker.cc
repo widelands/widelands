@@ -959,11 +959,11 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 
 		const ResourceDescription* const rdescr = world.get_resource(position.field->get_resources());
 		const TribeDescr& t = owner().tribe();
-		game.create_immovable(
+		const Immovable& ri = game.create_immovable(
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
-		   MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
+		   MapObjectDescr::OwnerType::kTribe, get_owner());
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
@@ -971,7 +971,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			const std::string message =
 			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
 			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-			    width % rdescr->representative_image() % UI_FONT_SIZE_MESSAGE %
+			    width % ri.descr().representative_image_filename() % UI_FONT_SIZE_MESSAGE %
 			    _("A geologist found resources."))
 			      .str();
 
