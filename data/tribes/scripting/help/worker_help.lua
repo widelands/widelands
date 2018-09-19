@@ -99,7 +99,7 @@ function worker_help_employers_string(worker_description)
    local result = ""
 
    if (#worker_description.employers > 0) then
-      -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can work
+      -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker is needed to work at
       -- TRANSLATORS: You can also translate this as 'workplace(s)'
       result = result .. h2(ngettext("Works at", "Works at", #worker_description.employers))
       for i, building in ipairs(worker_description.employers) do
@@ -107,23 +107,24 @@ function worker_help_employers_string(worker_description)
       end
       building = worker_description.employers[1]
          if #building.working_positions > 1 and worker_description.name == building.working_positions[2].name and worker_description.name ~= building.working_positions[1].name then
+            -- Translators: Worker Encyclopedia: A list of buildings where a worker may work instead of a less experienced worker
+            result = result .. h3(ngettext("May replace lower skill workers at", "May replace lower skill workers at", #building.working_positions[1].employers))
             for i, build in ipairs(building.working_positions[1].employers) do
                if not build.working_positions[2] then
-                  -- TRANSLATORS: this text should describe that a more expereinced worker can be a substitute for a less experienced worker
-                  result = result .. dependencies({worker_description, build}, build.descname .. _" (instead of " .. build.working_positions[1].descname .. ")")
+                  result = result .. dependencies({worker_description, build}, build.descname)
                end
             end
          elseif #building.working_positions > 2 and worker_description.name == building.working_positions[3].name then
+            -- Translators: Worker Encyclopedia: A list of buildings where a worker may work instead of a less experienced worker
+            result = result .. h3(ngettext("May replace lower skill workers at", "May replace lower skill workers at", #building.working_positions[1].employers))
             for i, build in ipairs(building.working_positions[1].employers) do
                if #build.working_positions > 1 and not build.working_positions[3] then
-                  -- TRANSLATORS: This text should describe that a level 3 worker can be a substitute for a level 2 worker or a level 1 worker
-                  result = result .. dependencies({worker_description, build}, build.descname .. _" (instead of " .. build.working_positions[2].descname .. " or " .. build.working_positions[1].descname .. ")")
+                  result = result .. dependencies({worker_description, build}, build.descname)
                end
             end
             for i, build in ipairs(building.working_positions[1].employers) do
                if not build.working_positions[2] then
-                  -- TRANSLATORS: this text should describe that a more experienced worker can be a substitute for a less experienced worker
-                  result = result .. dependencies({worker_description, build}, build.descname .. _" (instead of " .. build.working_positions[1].descname .. ")")
+                  result = result .. dependencies({worker_description, build}, build.descname)
                end
             end
          end
