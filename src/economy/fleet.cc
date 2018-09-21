@@ -712,6 +712,36 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		schedule_act(game, kFleetInterval);  // retry next time
 		act_pending_ = true;
 	}
+
+	// Deal with edge-case of losing destination before reaching it
+	for (Ship* s : ships_) {
+		if (s->get_destination(game)) {
+			continue; // The ship has a destination
+		}
+		if (s->get_ship_state() != Ship::ShipStates::kTransport) {
+			continue; // Ship is not available, e.g. in expedition
+		}
+		if (s->items_.empty()) {
+			continue; // No pending wares/workers
+		}
+
+		// Send ship to the closest port
+		PortDock* closest_port = nullptr;
+		uint32_t shortest_dist = kRouteNotCalculated;
+
+		for (PortDock* p : ports_) {
+			uint32_t route_length = s->calculate_sea_route(game, *p);
+			if (route_length < shortest_dist) {
+				shortest_dist = route_length;
+				closest_port = p;
+			}
+		}
+
+		if (closest_port) {
+			s->set_destination(closest_port);
+			s->send_signal(game, "wakeup");
+		}
+	}
 }
 
 /**
