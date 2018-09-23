@@ -238,7 +238,7 @@ public:
 	}
 	PositionList get_positions(const EditorGameBase&) const override;
 
-	std::string info_string(const MapObject::InfoStringType& format) override;
+	std::string info_string(const MapObject::InfoStringType format) override;
 
 	// Return the overlay string that is displayed on the map view when enabled
 	// by the player.

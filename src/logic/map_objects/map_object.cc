@@ -539,7 +539,7 @@ void MapObject::set_reserved_by_worker(bool reserve) {
 	reserved_by_worker_ = reserve;
 }
 
-std::string MapObject::info_string(const InfoStringType&) {
+std::string MapObject::info_string(const InfoStringType) {
 	return "";
 }
 

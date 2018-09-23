@@ -244,7 +244,7 @@ public:
 		return nullptr;
 	}
 
-	std::string info_string(const MapObject::InfoStringType& format) override;
+	std::string info_string(const MapObject::InfoStringType format) override;
 
 protected:
 	// The building type that created this immovable, if any.

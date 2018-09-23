@@ -457,7 +457,7 @@ void Building::destroy(EditorGameBase& egbase) {
 	}
 }
 
-std::string Building::info_string(const MapObject::InfoStringType& format) {
+std::string Building::info_string(const MapObject::InfoStringType format) {
 	std::string result;
 	switch (format) {
 	case MapObject::InfoStringType::kCensus:

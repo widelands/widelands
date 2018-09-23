@@ -517,7 +517,7 @@ void Immovable::set_action_data(ImmovableActionData* data) {
 	action_data_.reset(data);
 }
 
-std::string Immovable::info_string(const MapObject::InfoStringType& format) {
+std::string Immovable::info_string(const MapObject::InfoStringType format) {
 	std::string result;
 	switch (format) {
 	case MapObject::InfoStringType::kCensus:

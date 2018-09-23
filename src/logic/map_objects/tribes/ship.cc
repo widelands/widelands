@@ -978,7 +978,7 @@ void Ship::sink_ship(Game& game) {
 	ship_wakeup(game);
 }
 
-std::string Ship::info_string(const MapObject::InfoStringType& format) {
+std::string Ship::info_string(const MapObject::InfoStringType format) {
 	// Show ship name and current activity
 	std::string result;
 	switch (format) {
