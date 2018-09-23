@@ -408,11 +408,11 @@ bool GameMessageMenu::handle_key(bool down, SDL_Keysym code) {
 			archive_or_restore();
 			return true;
 		case SDLK_TAB:
-			// trigger some default handling here to avoid an endless loop 
-			// (if not handled here then handling is passed down to the table 'list', 
+			// trigger some default handling here to avoid an endless loop
+			// (if not handled here then handling is passed down to the table 'list',
 			// but tables pass tab key handling back to their parents)
-			return UI::Panel::handle_key(down, code); 
- 		case SDL_SCANCODE_KP_PERIOD:
+			return UI::Panel::handle_key(down, code);
+		case SDL_SCANCODE_KP_PERIOD:
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM) {
 				break;
