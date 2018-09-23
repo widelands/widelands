@@ -47,6 +47,7 @@ public:
 		int32_t yres;
 		bool fullscreen;
 		bool inputgrab;
+		bool splashscreen;
 		uint32_t maxfps;
 
 		// Windows options
@@ -132,6 +133,7 @@ private:
 	UI::Dropdown<uintptr_t> resolution_dropdown_;
 	UI::Checkbox fullscreen_;
 	UI::Checkbox inputgrab_;
+	UI::Checkbox splashscreen_;
 	UI::SpinBox sb_maxfps_;
 	UI::MultilineTextarea translation_info_;
 
