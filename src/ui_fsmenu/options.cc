@@ -119,7 +119,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
      inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
-     splashscreen_(&box_interface_left_, Vector2i::zero(), _("Show Splashscreen"), "", 0),
      sb_maxfps_(&box_interface_left_,
                 0,
                 0,
@@ -245,7 +244,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_interface_left_.add(&resolution_dropdown_);
 	box_interface_left_.add(&fullscreen_);
 	box_interface_left_.add(&inputgrab_);
-	box_interface_left_.add(&splashscreen_);
 	box_interface_left_.add(&sb_maxfps_);
 
 	// Windows
@@ -326,7 +324,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	fullscreen_.set_state(opt.fullscreen);
 	inputgrab_.set_state(opt.inputgrab);
-	splashscreen_.set_state(opt.splashscreen);
 
 	// Windows options
 	snap_win_overlap_only_.set_state(opt.snap_win_overlap_only);
@@ -394,7 +391,6 @@ void FullscreenMenuOptions::layout() {
 
 	fullscreen_.set_desired_size(column_width, fullscreen_.get_h());
 	inputgrab_.set_desired_size(column_width, inputgrab_.get_h());
-	splashscreen_.set_desired_size(column_width, splashscreen_.get_h());
 	sb_maxfps_.set_unit_width(column_width / 2);
 	sb_maxfps_.set_desired_size(column_width, sb_maxfps_.get_h());
 
@@ -568,7 +564,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 	}
 	os_.fullscreen = fullscreen_.get_state();
 	os_.inputgrab = inputgrab_.get_state();
-	os_.splashscreen = splashscreen_.get_state();
 	os_.maxfps = sb_maxfps_.get_value();
 
 	// Windows options
@@ -629,7 +624,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 	opt.yres = opt_section_.get_int("yres", DEFAULT_RESOLUTION_H);
 	opt.fullscreen = opt_section_.get_bool("fullscreen", false);
 	opt.inputgrab = opt_section_.get_bool("inputgrab", false);
-	opt.splashscreen = opt_section_.get_bool("show_splashscreen", false);
 	opt.maxfps = opt_section_.get_int("maxfps", 25);
 
 	// Windows options
@@ -671,7 +665,6 @@ void OptionsCtrl::save_options() {
 	opt_section_.set_int("yres", opt.yres);
 	opt_section_.set_bool("fullscreen", opt.fullscreen);
 	opt_section_.set_bool("inputgrab", opt.inputgrab);
-	opt_section_.set_bool("show_splashscreen", opt.splashscreen);
 	opt_section_.set_int("maxfps", opt.maxfps);
 
 	// Windows options
