@@ -928,9 +928,10 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	if (logic_rand_as_double(&game) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
 		MapObjectDescr::OwnerType owner_type = descr.owner_type();
+		Player* owner = immovable.get_owner();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 		game.create_immovable_with_name(
-		   f, type_name, owner_type, nullptr /* owner */, nullptr /* former_building_descr */);
+		   f, type_name, owner_type, owner, nullptr /* former_building_descr */);
 	} else {
 		immovable.program_step(game);
 	}
