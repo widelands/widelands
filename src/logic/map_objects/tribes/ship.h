@@ -230,7 +230,7 @@ struct Ship : Bob {
 
 	void exp_cancel(Game&);
 	void sink_ship(Game&);
-	std::string info_string(const MapObject::InfoStringType format) override;
+	std::string info_string(MapObject::InfoStringType format) override;
 
 private:
 	friend struct Fleet;

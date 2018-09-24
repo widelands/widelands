@@ -343,7 +343,7 @@ public:
 	/**
 	 * Returns a census, statistics or tooltip string to be shown for this object on the map
 	 */
-	virtual std::string info_string(const InfoStringType);
+	virtual std::string info_string(InfoStringType);
 
 	/**
 	 * Static load functions of derived classes will return a pointer to
