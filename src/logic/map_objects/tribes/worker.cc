@@ -963,7 +963,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
-		   MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
+		   MapObjectDescr::OwnerType::kTribe, get_owner());
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
@@ -971,7 +971,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			const std::string message =
 			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
 			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-			    width % rdescr->representative_image() % UI_FONT_SIZE_MESSAGE %
+			    width % ri.descr().representative_image_filename() % UI_FONT_SIZE_MESSAGE %
 			    _("A geologist found resources."))
 			      .str();
 
@@ -980,7 +980,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			get_owner()->add_message_with_timeout(
 			   game, std::unique_ptr<Message>(
 			            new Message(Message::Type::kGeologists, game.get_gametime(),
-			                        rdescr->descname(), ri.descr().representative_image_filename(),
+			                        rdescr->descname(), rdescr->representative_image(),
 			                        rdescr->descname(), message, position, serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
