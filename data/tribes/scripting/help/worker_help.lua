@@ -99,36 +99,29 @@ function worker_help_employers_string(worker_description)
    local result = ""
 
    if (#worker_description.employers > 0) then
+      local normal = {}
+      local additional = {}
       -- TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker is needed to work at
       -- TRANSLATORS: You can also translate this as 'workplace(s)'
       result = result .. h2(ngettext("Works at", "Works at", #worker_description.employers))
       for i, building in ipairs(worker_description.employers) do
          result = result .. dependencies({worker_description, building}, building.descname)
+         normal[building.descname] = true
       end
       building = worker_description.employers[1]
-         if #building.working_positions > 1 and worker_description.name == building.working_positions[2].name and worker_description.name ~= building.working_positions[1].name then
-            -- Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
-            result = result .. h3(_"Can also replace a less experienced worker at")
+         if #building.working_positions > 1 and worker_description.name ~= building.working_positions[1].name then
             for i, build in ipairs(building.working_positions[1].employers) do
-               if not build.working_positions[2] then
-                  result = result .. dependencies({worker_description, build}, build.descname)
+               if not normal[build.descname] then
+                  table.insert(additional, build)
                end
             end
-         elseif #building.working_positions > 2 and worker_description.name == building.working_positions[3].name then
             -- Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
-            result = result .. h3(_"Can also replace a less experienced worker at")
-            for i, build in ipairs(building.working_positions[1].employers) do
-               if #build.working_positions > 1 and not build.working_positions[3] then
-                  result = result .. dependencies({worker_description, build}, build.descname)
-               end
-            end
-            for i, build in ipairs(building.working_positions[1].employers) do
-               if not build.working_positions[2] then
-                  result = result .. dependencies({worker_description, build}, build.descname)
-               end
+            -- TRANSLATORS: You can also translate this as 'additional workplace(s)'
+            result = result .. h3(ngettext("Can also work at", "Can also work at", #additional))
+            for i, build in ipairs(additional) do
+               result = result .. dependencies({worker_description, build}, build.descname)
             end
          end
-      -- end
    end
    return result
 end
