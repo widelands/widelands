@@ -107,16 +107,16 @@ function worker_help_employers_string(worker_description)
       end
       building = worker_description.employers[1]
          if #building.working_positions > 1 and worker_description.name == building.working_positions[2].name and worker_description.name ~= building.working_positions[1].name then
-            -- Translators: Worker Encyclopedia: A list of buildings where a worker may work instead of a less experienced worker
-            result = result .. h3(ngettext("May replace lower skill workers at", "May replace lower skill workers at", #building.working_positions[1].employers))
+            -- Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
+            result = result .. h3(_"Can also replace a less experienced worker at")
             for i, build in ipairs(building.working_positions[1].employers) do
                if not build.working_positions[2] then
                   result = result .. dependencies({worker_description, build}, build.descname)
                end
             end
          elseif #building.working_positions > 2 and worker_description.name == building.working_positions[3].name then
-            -- Translators: Worker Encyclopedia: A list of buildings where a worker may work instead of a less experienced worker
-            result = result .. h3(ngettext("May replace lower skill workers at", "May replace lower skill workers at", #building.working_positions[1].employers))
+            -- Translators: Worker Encyclopedia: Heading above a list of buildings where a worker may work instead of a less experienced worker
+            result = result .. h3(_"Can also replace a less experienced worker at")
             for i, build in ipairs(building.working_positions[1].employers) do
                if #build.working_positions > 1 and not build.working_positions[3] then
                   result = result .. dependencies({worker_description, build}, build.descname)
