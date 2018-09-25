@@ -299,14 +299,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		if (draw_immovables_) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
-				imm->draw(gametime, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
+				imm->draw(gametime, field.rendertarget_pixel, scale, &dst);
 			}
 		}
 
 		if (draw_bobs_) {
 			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 			     bob = bob->get_next_bob()) {
-				bob->draw(ebase, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
+				bob->draw(ebase, field.rendertarget_pixel, scale, &dst);
 			}
 		}
 
@@ -375,6 +375,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 	}
+	// TODO(GunChleoc): If we ever implement an infrastructure tool, the building texts will need to
+	// be blitted here.
 }
 
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
