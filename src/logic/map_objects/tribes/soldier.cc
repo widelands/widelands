@@ -212,14 +212,13 @@ uint32_t SoldierDescr::get_rand_anim(Game& game, const char* const animation_nam
 }
 
 uint32_t SoldierDescr::get_animation(char const* const anim, const MapObject* mo) const {
-	if (strcmp(anim, "idle") != 0) {
+	const Soldier* soldier = dynamic_cast<const Soldier*>(mo);
+	if (!soldier || strcmp(anim, "idle") != 0) {
 		// We only need to check for a level-dependent idle animation.
 		// The walking anims can also be level-dependent,
 		// but that is taken care of by get_right_walk_anims().
 		return WorkerDescr::get_animation(anim, mo);
 	}
-	const Soldier* soldier = dynamic_cast<const Soldier*>(mo);
-	assert(soldier);
 	for (const std::pair<std::string, SoldierLevelRange>& pair : idle_name_) {
 		if (pair.second.matches(soldier)) {
 			// Use the parent method here, so we don't end up in
@@ -230,9 +229,11 @@ uint32_t SoldierDescr::get_animation(char const* const anim, const MapObject* mo
 	throw GameDataError("This soldier does not have an idle animation for this training level!");
 }
 
-const DirAnimations& SoldierDescr::get_right_walk_anims(bool const, const Worker* worker) const {
+const DirAnimations& SoldierDescr::get_right_walk_anims(bool const ware, const Worker* worker) const {
 	const Soldier* soldier = dynamic_cast<const Soldier*>(worker);
-	assert(soldier);
+	if (!soldier) {
+		return WorkerDescr::get_right_walk_anims(ware, worker);
+	}
 	DirAnimations* anim = new DirAnimations();
 
 	for (const std::pair<std::string, SoldierLevelRange>& pair : walk_ne_name_) {
