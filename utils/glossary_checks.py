@@ -512,7 +512,7 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
                     hit.term, hit.translation, hit.source, hit.target, hit.po_file, hit.location)
                 locale_result = locale_result + row
                 counter = counter + 1
-        dest_filepath = output_path + '/glossary_check_' + locale + '.csv'
+        dest_filepath = output_path + '/' + locale + '/glossary_check.csv'
         with open(dest_filepath, 'wt') as dest_file:
             dest_file.write(locale_result)
         # Uncomment this line to print a statistic of the number of hits for each locale
@@ -547,7 +547,7 @@ def main():
 
         input_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '../po'))
-        output_path = make_path(os.path.dirname(__file__), '../po_validation')
+        output_path = make_path(os.path.dirname(__file__), '../po_validation/translators')
         result = check_translations_with_glossary(
             input_path, output_path, glossary_file, locale)
         print('Current time: %s' % time.ctime())
