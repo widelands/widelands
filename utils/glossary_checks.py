@@ -512,8 +512,8 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
                     hit.term, hit.translation, hit.source, hit.target, hit.po_file, hit.location)
                 locale_result = locale_result + row
                 counter = counter + 1
-        dest_filepath = output_path + '/' + locale + '/glossary_check.csv'
-        with open(dest_filepath, 'wt') as dest_file:
+        dest_filepath = make_path(output_path + '/' + locale)
+        with open(dest_filepath + '/glossary_check.csv', 'wt') as dest_file:
             dest_file.write(locale_result)
         # Uncomment this line to print a statistic of the number of hits for each locale
         # print("%s\t%d"%(locale, counter))
