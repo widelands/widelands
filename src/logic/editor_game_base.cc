@@ -42,6 +42,7 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
+#include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
@@ -198,6 +199,20 @@ void EditorGameBase::postload() {
 	// Postload tribes
 	assert(tribes_);
 	tribes_->postload();
+
+	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
+		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
+		for (DescriptionIndex j = 0; j < world_->get_nr_resources(); j++) {
+			const ResourceDescription* res = world_->get_resource(j);
+			if (res->detectable()) {
+				// This function will throw an exception if this tribe doesn't
+				// have a high enough resource indicator for this resource
+				tribe->get_resource_indicator(res, res->max_amount());
+			}
+		}
+		// For the "none" indicator
+		tribe->get_resource_indicator(nullptr, 0);
+	}
 
 	// TODO(unknown): postload players? (maybe)
 }

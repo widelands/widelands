@@ -29,6 +29,31 @@ tribes:new_tribe {
       },
    },
 
+   resource_indicators = {
+      [""] = {
+         [0] = "empire_resi_none",
+      },
+      coal = {
+         [10] = "empire_resi_coal_1",
+         [20] = "empire_resi_coal_2",
+      },
+      iron = {
+         [10] = "empire_resi_iron_1",
+         [20] = "empire_resi_iron_2",
+      },
+      gold = {
+         [10] = "empire_resi_gold_1",
+         [20] = "empire_resi_gold_2",
+      },
+      stones = {
+         [10] = "empire_resi_stones_1",
+         [20] = "empire_resi_stones_2",
+      },
+      water = {
+         [100] = "empire_resi_water",
+      },
+   },
+
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
    -- Each subtable is a column in the wares windows.
@@ -163,16 +188,16 @@ tribes:new_tribe {
       "grapevine_small",
       "grapevine_medium",
       "grapevine_ripe",
-      "resi_coal1",
-      "resi_coal2",
-      "resi_gold1",
-      "resi_gold2",
-      "resi_iron1",
-      "resi_iron2",
-      "resi_none",
-      "resi_water1",
-      "resi_stones1",
-      "resi_stones2",
+      "empire_resi_none",
+      "empire_resi_water",
+      "empire_resi_coal_1",
+      "empire_resi_iron_1",
+      "empire_resi_gold_1",
+      "empire_resi_stones_1",
+      "empire_resi_coal_2",
+      "empire_resi_iron_2",
+      "empire_resi_gold_2",
+      "empire_resi_stones_2",
       "empire_shipconstruction",
    },
 
