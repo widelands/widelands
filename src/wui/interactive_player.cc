@@ -85,41 +85,18 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
 	return brightness / 255.;
 }
 
-void draw_immovables_for_visible_field(const Widelands::EditorGameBase& egbase,
-                                       const FieldsToDraw::Field& field,
-                                       const float scale,
-                                       const TextToDraw text_to_draw,
-                                       const Widelands::Player& player,
-                                       RenderTarget* dst) {
-	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
+// Draws immovable if the field matches its actual position and returns true if the immovable was
+// drawn there.
+bool draw_immovable_for_visible_field(const Widelands::EditorGameBase& egbase,
+                                      const FieldsToDraw::Field& field,
+                                      const float scale,
+                                      Widelands::BaseImmovable* const imm,
+                                      RenderTarget* dst) {
 	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
-		TextToDraw draw_text_for_this_immovable = text_to_draw;
-		const Widelands::Player* owner = imm->get_owner();
-		if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
-			draw_text_for_this_immovable =
-			   static_cast<TextToDraw>(draw_text_for_this_immovable & ~TextToDraw::kStatistics);
-		}
-		imm->draw(
-		   egbase.get_gametime(), draw_text_for_this_immovable, field.rendertarget_pixel, scale, dst);
+		imm->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
+		return true;
 	}
-}
-
-void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
-                                 const FieldsToDraw::Field& field,
-                                 const float scale,
-                                 const TextToDraw text_to_draw,
-                                 const Widelands::Player& player,
-                                 RenderTarget* dst) {
-	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
-	     bob = bob->get_next_bob()) {
-		TextToDraw draw_text_for_this_bob = text_to_draw;
-		const Widelands::Player* owner = bob->get_owner();
-		if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
-			draw_text_for_this_bob =
-			   static_cast<TextToDraw>(draw_text_for_this_bob & ~TextToDraw::kStatistics);
-		}
-		bob->draw(egbase, draw_text_for_this_bob, field.rendertarget_pixel, scale, dst);
-	}
+	return false;
 }
 
 void draw_immovables_for_formerly_visible_field(const FieldsToDraw::Field& field,
@@ -290,6 +267,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
 	const auto& road_building = road_building_overlays();
 	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
+	std::vector<std::pair<Vector2i, Widelands::MapObject*>> mapobjects_to_draw_text_for;
+	const auto text_to_draw = get_text_to_draw();
+	const float scale = 1.f / given_map_view->view().zoom;
 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		auto* f = fields_to_draw->mutable_field(idx);
@@ -308,8 +288,6 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 		}
 
-		const float scale = 1.f / given_map_view->view().zoom;
-
 		// Add road building overlays if applicable.
 		if (f->vision > 0) {
 			const auto it = road_building.road_previews.find(f->fcoords);
@@ -321,9 +299,18 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 
 			// Render stuff that belongs to the node.
 			if (f->vision > 1) {
-				const auto text_to_draw = get_text_to_draw();
-				draw_immovables_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
-				draw_bobs_for_visible_field(gbase, *f, scale, text_to_draw, plr, dst);
+				Widelands::BaseImmovable* imm = f->fcoords.field->get_immovable();
+				if (draw_immovable_for_visible_field(gbase, *f, scale, imm, dst)) {
+					mapobjects_to_draw_text_for.push_back(
+					   std::make_pair(f->rendertarget_pixel.cast<int>(), imm));
+				}
+
+				for (Widelands::Bob* bob = f->fcoords.field->get_first_bob(); bob;
+				     bob = bob->get_next_bob()) {
+					bob->draw(gbase, f->rendertarget_pixel, scale, dst);
+					mapobjects_to_draw_text_for.push_back(std::make_pair(
+					   bob->calc_drawpos(gbase, f->rendertarget_pixel, scale).cast<int>(), bob));
+				}
 			} else if (f->vision == 1) {
 				// We never show census or statistics for objects in the fog.
 				draw_immovables_for_formerly_visible_field(*f, player_field, scale, dst);
@@ -365,6 +352,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 			}
 		}
 	}
+	// Blit census & Statistics.
+	draw_mapobject_infotexts(dst, scale, mapobjects_to_draw_text_for, text_to_draw, &plr);
 }
 
 void InteractivePlayer::popup_message(Widelands::MessageId const id,
