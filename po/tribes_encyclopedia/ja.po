@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-13 13:47+0000\n"
-"PO-Revision-Date: 2018-06-28 06:08+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-09-14 06:11+0000\n"
+"PO-Revision-Date: 2018-09-16 06:14+0000\n"
+"Last-Translator: tamanegi\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1656,7 +1656,7 @@ msgstr "「俺の力無しで家を建てられるとでも思っているのか
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A clay digger arguing with a builder"
-msgstr ""
+msgstr "建築者と口論中の粘土掘削人"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:16
@@ -2536,7 +2536,7 @@ msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
 "explained to you how to hold a broadsword."
-msgstr ""
+msgstr "静かにしろ、注意深く聞け、それから自分を刺したくなかったら余計なことをするな。それではこれから俺が幅広剣の持ち方を教えるぞ。"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:16
@@ -3675,14 +3675,14 @@ msgid "Producer"
 msgstr "生産者"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "生産元："
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:167
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "消費者"
@@ -4384,8 +4384,8 @@ msgstr "野蛮人は採石場や花崗岩鉱で花崗岩のブロックを生産
 msgctxt "frisians_ware"
 msgid ""
 "The Frisians produce granite blocks in quarries and rock mines. They can be "
-"refined by a brick burner."
-msgstr "フリジア人は採石場や岩石鉱で花崗岩のブロックを生産します。花崗岩はレンガ職人によって改良されます。"
+"refined in a brick kiln."
+msgstr "フリジア人は採石場や岩石鉱で花崗岩のブロックを生産します。切り出された花崗岩はレンガ焼窯で加工されます。"
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:12
@@ -4979,7 +4979,7 @@ msgctxt "frisians_ware"
 msgid ""
 "They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
-msgstr ""
+msgstr "そのため、ベリー農家やカヤ農夫、そして植樹番はこれを道具としています。また、粘土掘削人も固い地面から泥を掘り出す際にシャベルを使います。"
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../data/tribes/wares/smoked_fish/helptexts.lua:4
@@ -5090,7 +5090,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
 "equipped with a broadsword and a double-edged sword."
-msgstr ""
+msgstr "幅広剣は攻撃レベル２の兵士が用います。また、攻撃レベル５の兵士は両刃剣と曲剣を一本ずつ装備します。"
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
 #: ../../data/tribes/wares/sword_double/helptexts.lua:4
@@ -5106,7 +5106,7 @@ msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
 "equipped with a long and a double-edged sword."
-msgstr ""
+msgstr "長剣は攻撃レベル１の兵士の扱う武器です。また、攻撃レベル４の兵士は両刃剣と長剣を一本ずつ使います。"
 
 #. TRANSLATORS: Helptext for a ware: Short sword
 #: ../../data/tribes/wares/sword_short/helptexts.lua:4
@@ -5896,7 +5896,7 @@ msgstr "ビールやミードを醸造します。"
 #: ../../data/tribes/workers/frisians/brickmaker/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Burns bricks out of clay and granite."
-msgstr ""
+msgstr "花崗岩と粘土からレンガを焼きます。"
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/frisians/builder/helptexts.lua:3
@@ -5920,7 +5920,7 @@ msgstr "丸太と粘土を燃やして炭を作ります。"
 #: ../../data/tribes/workers/frisians/claydigger/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Makes clay out of mud and water."
-msgstr ""
+msgstr "泥と水から粘土を作ります。"
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/frisians/farmer/helptexts.lua:3

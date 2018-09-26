@@ -68,9 +68,14 @@ void SaveHandler::roll_save_files(const std::string& filename) {
 		const std::string filename_next =
 		   create_file_name(kSaveDir, (boost::format("%s_%02d") % filename % rolls).str());
 		if (g_fs->file_exists(filename_next)) {
-			g_fs->fs_rename(
-			   filename_next, filename_previous);  // e.g. wl_autosave_08 -> wl_autosave_09
-			log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
+			try {
+				g_fs->fs_rename(
+				   filename_next, filename_previous);  // e.g. wl_autosave_08 -> wl_autosave_09
+				log("Autosave: Rolled %s to %s\n", filename_next.c_str(), filename_previous.c_str());
+			} catch (const std::exception& e) {
+				log("Autosave: Unable to rename file %s to %s: %s\n", filename_previous.c_str(),
+				    filename_next.c_str(), e.what());
+			}
 		}
 		filename_previous = filename_next;
 		rolls--;
@@ -167,7 +172,7 @@ void SaveHandler::think(Widelands::Game& game) {
 		}
 
 		// Saving now
-		const std::string complete_filename = create_file_name(kSaveDir, filename);
+		std::string complete_filename = create_file_name(kSaveDir, filename);
 		std::string backup_filename;
 
 		// always overwrite a file
@@ -177,7 +182,34 @@ void SaveHandler::think(Widelands::Game& game) {
 			if (g_fs->file_exists(backup_filename)) {
 				g_fs->fs_unlink(backup_filename);
 			}
-			g_fs->fs_rename(complete_filename, backup_filename);
+			if (save_requested_) {
+				// Exceptions (e.g. no file permissions) will be handled in UI
+				g_fs->fs_rename(complete_filename, backup_filename);
+			} else {
+				// We're autosaving, try to handle file permissions issues
+				try {
+					g_fs->fs_rename(complete_filename, backup_filename);
+				} catch (const std::exception& e) {
+					log("Autosave: Unable to rename file %s to %s: %s\n", complete_filename.c_str(),
+					    backup_filename.c_str(), e.what());
+					// See if we can find a file that doesn't exist and save to that
+					int current_autosave = 0;
+					do {
+						filename = create_file_name(
+						   kSaveDir,
+						   (boost::format("%s_0%d") % autosave_filename_ % (++current_autosave)).str());
+					} while (current_autosave < 9 && g_fs->file_exists(filename));
+					complete_filename = filename;
+					log("Autosave: saving as %s instead\n", complete_filename.c_str());
+					try {
+						g_fs->fs_rename(complete_filename, backup_filename);
+					} catch (const std::exception&) {
+						log("Autosave failed, skipping this interval\n");
+						saving_next_tick_ = check_next_tick(game, realtime);
+						return;
+					}
+				}
+			}
 		}
 
 		if (!save_and_handle_error(game, complete_filename, backup_filename)) {

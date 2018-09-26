@@ -223,8 +223,6 @@ public:
 	using FormerBuildings = std::vector<DescriptionIndex>;
 
 public:
-	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
-
 	explicit Building(const BuildingDescr&);
 
 	void load_finish(EditorGameBase&) override;
@@ -240,7 +238,7 @@ public:
 	}
 	PositionList get_positions(const EditorGameBase&) const override;
 
-	std::string info_string(const InfoStringFormat& format);
+	std::string info_string(MapObject::InfoStringType format) override;
 
 	// Return the overlay string that is displayed on the map view when enabled
 	// by the player.
@@ -335,13 +333,8 @@ protected:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          float scale,
-	          RenderTarget* dst) override;
 	void
-	draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 	void set_seeing(bool see);
 	void set_attack_target(AttackTarget* new_attack_target);
