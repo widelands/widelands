@@ -666,6 +666,9 @@ function building_help_crew_string(tribe, building_description)
          end
       end
 
+      worker_description = building_description.working_positions[1]
+      becomes_description = worker_description.becomes
+
       if (becomes_description) then
          result = result .. help_worker_experience(worker_description, becomes_description)
       end
