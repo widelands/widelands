@@ -27,6 +27,7 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "sound/sound_handler.h"
+#include "wui/game_exit_confirm_box.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
 #include "wui/unique_window_handler.h"
@@ -35,30 +36,6 @@
 #define margin 10
 #define vspacing 5
 #define vgap 3
-
-class GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
-public:
-	// TODO(GunChleoc): Arabic: Buttons need more height for Arabic
-	GameOptionsMenuExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
-	   : UI::WLMessageBox(&parent,
-	                      /** TRANSLATORS: Window label when "Exit game" has been pressed */
-	                      _("Exit Game Confirmation"),
-	                      _("Are you sure you wish to exit this game?"),
-	                      MBoxType::kOkCancel),
-	     igb_(gb) {
-	}
-
-	void clicked_ok() override {
-		igb_.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-	}
-
-	void clicked_back() override {
-		die();
-	}
-
-private:
-	InteractiveGameBase& igb_;
-};
 
 GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
                                  UI::UniqueWindow::Registry& registry,
@@ -137,7 +114,7 @@ void GameOptionsMenu::clicked_exit_game() {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		igb_.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
-		new GameOptionsMenuExitConfirmBox(*get_parent(), igb_);
+		new GameExitConfirmBox(*get_parent(), igb_);
 		die();
 	}
 }

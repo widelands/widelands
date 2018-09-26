@@ -26,6 +26,31 @@ tribes:new_tribe {
       },
    },
 
+   resource_indicators = {
+      [""] = {
+         [0] = "barbarians_resi_none",
+      },
+      coal = {
+         [10] = "barbarians_resi_coal_1",
+         [20] = "barbarians_resi_coal_2",
+      },
+      iron = {
+         [10] = "barbarians_resi_iron_1",
+         [20] = "barbarians_resi_iron_2",
+      },
+      gold = {
+         [10] = "barbarians_resi_gold_1",
+         [20] = "barbarians_resi_gold_2",
+      },
+      stones = {
+         [10] = "barbarians_resi_stones_1",
+         [20] = "barbarians_resi_stones_2",
+      },
+      water = {
+         [100] = "barbarians_resi_water",
+      },
+   },
+
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
    -- Each subtable is a column in the wares windows.
@@ -155,16 +180,16 @@ tribes:new_tribe {
       "reed_small",
       "reed_medium",
       "reed_ripe",
-      "resi_coal1",
-      "resi_coal2",
-      "resi_gold1",
-      "resi_gold2",
-      "resi_iron1",
-      "resi_iron2",
-      "resi_none",
-      "resi_water1",
-      "resi_stones1",
-      "resi_stones2",
+      "barbarians_resi_none",
+      "barbarians_resi_water",
+      "barbarians_resi_coal_1",
+      "barbarians_resi_iron_1",
+      "barbarians_resi_gold_1",
+      "barbarians_resi_stones_1",
+      "barbarians_resi_coal_2",
+      "barbarians_resi_iron_2",
+      "barbarians_resi_gold_2",
+      "barbarians_resi_stones_2",
       "barbarians_shipconstruction",
    },
 

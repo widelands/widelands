@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-28 07:19+0000\n"
-"PO-Revision-Date: 2018-07-29 13:54+0000\n"
+"POT-Creation-Date: 2018-09-10 06:56+0000\n"
+"PO-Revision-Date: 2018-09-10 15:01+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -323,7 +323,7 @@ msgstr "Mennig Eilannen"
 
 #: ../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
-msgstr ""
+msgstr "Well word de echte König vun so bannig völen Eilannen?"
 
 #: ../../data/maps/Calvisson.wmf/elemental:8
 msgid "Calvisson"
@@ -334,7 +334,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr ""
+msgstr "'t is düll, sük in düsse mojen Gegend ut eener Spoor an de annern daaltolaten. Aber de Wegen, düsse groten Geweste to umfaten, sünd lang un vull mit Bogen, un 't is licht, in dat Land vun eenem frömden Volk to ströpen."
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
@@ -345,7 +345,7 @@ msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr ""
+msgstr "Is dat eene bannig wunnerlike Kuntrei, de de Natuur daar schafft hett, oder de Erfindung vun eenem dördreihten (un Speele-süchtigen) Gott? Wo ok immer: düsser komiske Slachtenring wacht up neien Stried tüsken twee Feinden."
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:8
 msgid "Comet Island"
