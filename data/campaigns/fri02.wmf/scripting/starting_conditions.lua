@@ -68,6 +68,7 @@ for descr,n in pairs(campaign_data) do
       trained = trained + n
    end
 end
+local soldiers = {}
 if trained > takeover_soldiers then
    -- We have more soldiers than allowed, so pick 10 at random
    local remaining = takeover_soldiers
@@ -76,27 +77,34 @@ if trained > takeover_soldiers then
       local key2 = math.random(0, 6)
       local key3 = math.random(0, 2)
       for descr,n in pairs(campaign_data) do
-         if descr == (key1 .. key2 .. key3) and n > 0 then
+         if descr == (key1 .. key2 .. key3) and n > 0 and not (key1 == 0 and key2 == 0 and key3 == 0) then
             if n < remaining then
-               port1:set_soldiers({key1, key2, key3, 0}, n)
+               soldiers[{key1, key2, key3, 0}] = n
                remaining = remaining - n
             else
-               port1:set_soldiers({key1, key2, key3, 0}, remaining)
+               soldiers[{key1, key2, key3, 0}] = remaining
                remaining = 0
             end
-            soldiers[descr] = nil
+            campaign_data[descr] = nil
             break
          end
       end
    until remaining == 0
-   port1:set_soldiers({0, 0, 0, 0}, total_soldiers - takeover_soldiers)
+   soldiers[{0, 0, 0, 0}] = total_soldiers - takeover_soldiers
 else
    -- We have less than 10 soldiers, so take them all plus some new ones
-   for descr,n in pairs(campaign_data) do
-      port1:set_soldiers(descr, n)
+   for h=0,2 do
+      for a=0,6 do
+         for d=0,2 do
+            if not (h == 0 and a == 0 and d == 0) and campaign_data[h .. a .. d] and campaign_data[h .. a .. d] > 0 then
+               soldiers[{h, a, d, 0}] = campaign_data[h .. a .. d]
+            end
+         end
+      end
    end
-   port1:set_soldiers({0,0,0,0}, total_soldiers - trained)
+   soldiers[{0, 0, 0, 0}] = total_soldiers - trained
 end
+port1:set_soldiers(soldiers)
 
 -- =======================================================================
 --                                 Player 2
