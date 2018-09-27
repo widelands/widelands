@@ -196,3 +196,94 @@ function find_winner(all_player_points, plrs)
    end
    return result
 end
+
+
+-- RST
+-- .. function:: rank_players(all_player_points, plrs)
+--
+--    Rank the players and teams according to the highest points
+--
+--    :arg all_player_points:    A table of ``playernumber = points`` entries for all players
+--    :arg plrs:                 A table of all Player objects
+--
+--    :returns: A table with ranked player and team points, sorted by points descending. Example::
+--
+--      {
+--         -- A player without team
+--         {
+--            team = 0,
+--            points = 1000,
+--            players = {
+--               { "number" = 5, "points" = 1000 }
+--            }
+--         },
+--         -- This team has a draw with player 5
+--         {
+--            team = 1,
+--            points = 1000,
+--            players = {
+--               { "number" = 2, "points" = 500 }
+--               { "number" = 3, "points" = 400 }
+--               { "number" = 4, "points" = 100 }
+--         },
+--         -- Another player without team
+--         {
+--            team = 0,
+--            points = 800,
+--            players = {
+--               { "number" = 1, "points" = 800 }
+--            }
+--         },
+--      }
+--
+function rank_players(all_player_points, plrs)
+   local ranked_players_and_teams = {}
+   local team_points = {}
+
+   -- Add points for players without teams and calculate team points
+   for idx, player in ipairs(plrs) do
+      local player_points = all_player_points[player.number]
+      local team = player.team
+      if team == 0 then
+         -- Player without team - add it directly
+         local team_table = {
+            team = 0,
+            points = player_points,
+            players = {
+               { number = player.number, points = player_points }
+            }
+         }
+         table.insert(ranked_players_and_teams, team_table)
+      else
+         -- Team player - add to team points
+         if not team_points[team] then
+            team_points[team] = 0
+         end
+         team_points[team] = team_points[team] + player_points
+      end
+   end
+
+   -- Add points for teams and their players
+   for team, points in pairs(team_points) do
+      local team_table = {
+         team = team,
+         points = points,
+         players = {}
+      }
+      for idx, player in ipairs(plrs) do
+         if player.team == team then
+            table.insert(team_table.players, { number = player.number, points = all_player_points[player.number] })
+         end
+      end
+      table.insert(ranked_players_and_teams, team_table)
+   end
+
+   -- Sort the players by points descending
+   for ids, team in pairs(ranked_players_and_teams) do
+      table.sort(team.players, function(a,b) return a["points"] > b["points"] end)
+   end
+
+   -- Sort the teams by points descending
+   table.sort(ranked_players_and_teams, function(a,b) return a["points"] > b["points"] end)
+   return ranked_players_and_teams
+end

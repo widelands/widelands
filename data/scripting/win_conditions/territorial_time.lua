@@ -45,99 +45,90 @@ return {
       -- variables to track the maximum 4 hours of gametime
       local remaining_max_time = 4 * 60 * 60 -- 4 hours
 
-      -- these variables will be used once a player or team owns more than half
-      -- of the map's area
-      local currentcandidate = "" -- Name of Team or Player
-      local candidateisteam = false
-      local remaining_time = 10 -- (dummy) -- time in secs, if == 0 -> victory
+      -- These variables will be used once a player or team owns more than half
+      -- of the map's area, to display the name of winning team/player.
+      -- TODO(GunChleoc): We want to be able to list multiple winners in case of a draw.
+      local last_winning_team = -1
+      local last_winning_player = -1
 
-      -- Find all valid teams
-      local teamnumbers = {} -- array with team numbers
-      for idx,p in ipairs(plrs) do
-         local team = p.team
-         if team > 0 then
-            local found = false
-            for idy,t in ipairs(teamnumbers) do
-               if t == team then
-                  found = true
-                  break
-               end
-            end
-            if not found then
-               table.insert(teamnumbers, team)
-            end
-         end
+      -- Used to keep track of when the winner changes
+      local winning_players = {}
+      local winning_teams = {}
+      for idx,plr in ipairs(plrs) do
+         winning_players[plr.number] = false
+         winning_teams[plr.team] = false
       end
+
+      -- Remaining time for victory by > 50% territory. Default value is also used to calculate whether to send a report to players.
+      local remaining_time = 10 -- (dummy) -- time in secs, if == 0 -> victory
 
       local all_player_points = {}
 
       local function _calc_points()
-         local teampoints = {}     -- points of teams
          local points = {} -- tracking points of teams and players without teams
-         local maxplayerpoints = 0 -- the highest points of a player without team
-         local maxpointsplayer = 0 -- the player
-         local foundcandidate = false
+         local territory_was_kept = false
 
          all_player_points = count_owned_fields_for_all_players(fields, plrs)
+         local ranked_players = rank_players(all_player_points, plrs)
 
-         for idx, pl in ipairs(plrs) do
-            local team = pl.team
-            if team == 0 then
-               if maxplayerpoints < all_player_points[pl.number] then
-                  maxplayerpoints = all_player_points[pl.number]
-                  maxpointsplayer = pl
-               end
-               points[#points + 1] = { pl.name, all_player_points[pl.number] }
-            else
-               if not teampoints[team] then -- init the value
-                  teampoints[team] = 0
-               end
-               teampoints[team] = teampoints[team] + all_player_points[pl.number]
-            end
+         -- Check if we have a winner. The table was sorted, so we can simply grab the first entry.
+         local winning_points = -1
+         if ranked_players[1].points > ( #fields / 2 ) then
+            winning_points = ranked_players[1].points
          end
 
-         if maxplayerpoints > ( #fields / 2 ) then
-            -- player owns more than half of the map's area
-            foundcandidate = true
-            if candidateisteam == false and currentcandidate == maxpointsplayer.name then
-               remaining_time = remaining_time - 30
-            else
-               currentcandidate = maxpointsplayer.name
-               candidateisteam = false
-               remaining_time = 20 * 60 -- 20 minutes
-            end
-         end
-         for idx, t in ipairs(teamnumbers) do
-            if teampoints[t] > ( #fields / 2 ) then
-               -- this team owns more than half of the map's area
-               foundcandidate = true
-               if candidateisteam == true and currentcandidate == team_str:format(t) then
-                  remaining_time = remaining_time - 30
+         -- Calculate which team or player is the current winner, and whether the winner has changed
+         for tidx, teaminfo in ipairs(ranked_players) do
+            local is_winner = teaminfo.points == winning_points
+            if teaminfo.team ~= 0 then
+               points[#points + 1] = { team_str:format(teaminfo.team), teaminfo.points }
+               if is_winner then
+                  print("NOCOM Winner is team " .. teaminfo.team .. " with " .. teaminfo.points .. " points")
+                  territory_was_kept = winning_teams[teaminfo.team]
+                  winning_teams[teaminfo.team] = true
+                  last_winning_team = teaminfo.team
+                  last_winning_player = -1
                else
-                  currentcandidate = team_str:format(t)
-                  candidateisteam = true
-                  remaining_time = 20 * 60 -- 20 minutes
+                  winning_teams[teaminfo.team] = false
                end
             end
-            points[#points + 1] = { team_str:format(t), teampoints[t] }
+
+            for pidx, playerinfo in ipairs(teaminfo.players) do
+               if teaminfo.points ~= playerinfo.points then
+                  winning_players[playerinfo.number] = false
+               elseif is_winner and teaminfo.team == 0 then
+                  print("NOCOM Winner is player " .. playerinfo.number .. " with " .. playerinfo.points .. " points")
+                  territory_was_kept = winning_players[playerinfo.number]
+                  winning_players[playerinfo.number] = true
+                  last_winning_player = playerinfo.number
+                  last_winning_team = -1
+               else
+                  winning_players[playerinfo.number] = false
+               end
+               if teaminfo.team == 0 and plrs[playerinfo.number] ~= nil then
+                  points[#points + 1] = { plrs[playerinfo.number].name, playerinfo.points }
+               end
+            end
          end
-         if not foundcandidate then
+
+         -- Set the remaining time according to whether the winner is still the same
+         if territory_was_kept then
+            -- Still the same winner
+            remaining_time = remaining_time - 30
+            print("NOCOM Territory was kept by " .. last_winning_team .. " - " .. last_winning_player .. ". Remaining time: " .. remaining_time)
+         elseif winning_points == -1 then
+            -- No winner. This value is used to calculate whether to send a report to players.
             remaining_time = 10
+         else
+            -- Winner changed
+            remaining_time = 20 * 60 -- 20 minutes
+            print("NOCOM NEW aqcuisition by " .. last_winning_team .. " - " .. last_winning_player .. ". Remaining time: " .. remaining_time)
          end
          return points
       end
 
       local function _percent(part, whole)
          return (part * 100) / whole
-      end
-
-      -- Helper function to get the points that the leader has
-      local function _maxpoints(points)
-         local max = 0
-         for i=1,#points do
-            if points[i][2] > max then max = points[i][2] end
-         end
-         return max
       end
 
       -- Helper function that returns a string containing the current
@@ -169,7 +160,13 @@ return {
 
       local function _send_state(points)
          set_textdomain("win_conditions")
-         local msg1 = p(_"%s owns more than half of the map’s area."):format(currentcandidate)
+         local winner_name = "Error"
+         if last_winning_team >= 0 then
+            winner_name = team_str:format(last_winning_team)
+         elseif last_winning_player >= 0 then
+            winner_name = plrs[last_winning_player].name
+         end
+         local msg1 = p(_"%s owns more than half of the map’s area."):format(winner_name)
          msg1 = msg1 .. p(ngettext("You’ve still got %i minute to prevent a victory.",
                    "You’ve still got %i minutes to prevent a victory.",
                    remaining_time // 60))
@@ -185,9 +182,9 @@ return {
 
          for idx, pl in ipairs(plrs) do
             local msg = ""
-            if remaining_time < remaining_max_time and _maxpoints(points) > ( #fields / 2 ) then
-               if candidateisteam and currentcandidate == team_str:format(pl.team)
-                  or not candidateisteam and currentcandidate == pl.name then
+            if remaining_time < remaining_max_time and
+               (last_winning_team >= 0 or last_winning_player >= 0) then
+               if last_winning_team == pl.team or last_winning_player == pl.number then
                   msg = msg .. msg2 .. vspace(8)
                else
                   msg = msg .. msg1 .. vspace(8)
@@ -242,7 +239,6 @@ return {
       end
 
       local points = _calc_points()
-      table.sort(points, function(a,b) return a[2] > b[2] end)
 
       -- Game has ended
       for idx, pl in ipairs(plrs) do

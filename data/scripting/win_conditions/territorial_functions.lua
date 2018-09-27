@@ -11,7 +11,7 @@ function get_buildable_fields()
          end
       end
    end
-   print("Found " .. #fields .. " buildable fields")
+   print("NOCOM Found " .. #fields .. " buildable fields")
    return fields
 end
 
@@ -24,14 +24,14 @@ function count_owned_fields_for_all_players(fields, plrs)
 
    for idx,f in ipairs(fields) do
       -- check if field is owned by a player
-      local o = f.owner
-      if o then
-         local n = o.number
-         if owned_fields[n] == nil then
+      local owner = f.owner
+      if owner then
+         local owner_number = owner.number
+         if owned_fields[owner_number] == nil then
             -- In case player was defeated and lost all their warehouses, make sure they don't count
-            owned_fields[n] = -1
-         elseif owned_fields[n] >= 0 then
-            owned_fields[n] = owned_fields[n] + 1
+            owned_fields[owner_number] = -1
+         elseif owned_fields[owner_number] >= 0 then
+            owned_fields[owner_number] = owned_fields[owner_number] + 1
          end
       end
    end
