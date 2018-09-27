@@ -20,6 +20,7 @@
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
+#include <cstdlib>
 
 #include <SDL.h>
 
@@ -177,17 +178,30 @@ SDL_GLContext initialize(
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
 	log("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
-	const char* const shading_language_version = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
-	if (!strcmp(shading_language_version, "(null)")) {
+	// TODO(GunChleoc): Localize the on-screen error messages
+	// Exit if we can't detect the shading language version
+	const char* const shading_language_version_string = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
+	if (!strcmp(shading_language_version_string, "(null)")) {
 		log("ERROR: Unable to detect the shading language version!\n");
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
 								 "OpenGL Error",
-								 "Unable to detect the shading language version, because there is an unknown problem with reading the information from the graphics driver.",
+								 "Widelands won’t work because we were unable to detect the shading language version – there is an unknown problem with reading the information from the graphics driver.",
 								 NULL);
 		exit(1);
 	}
 
-	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version);
+	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+
+	// Exit if the shading language version is too old
+	const double shading_language_version = atof(shading_language_version_string);
+	if (shading_language_version < 1.20) {
+		log("ERROR: Shading language version is too old!\n");
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+								 "OpenGL Error",
+								 "Widelands won’t work because your graphics driver is too old.",
+								 NULL);
+		exit(1);
+	}
 
 	glDrawBuffer(GL_BACK);
 
