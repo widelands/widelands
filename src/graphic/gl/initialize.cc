@@ -177,8 +177,17 @@ SDL_GLContext initialize(
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
 	log("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
-	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n",
-	    reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+	const char* const shading_language_version = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
+	if (!strcmp(shading_language_version, "(null)")) {
+		log("ERROR: Unable to detect the shading language version!\n");
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
+								 "OpenGL Error",
+								 "Unable to detect the shading language version, because there is an unknown problem with reading the information from the graphics driver.",
+								 NULL);
+		exit(1);
+	}
+
+	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version);
 
 	glDrawBuffer(GL_BACK);
 
