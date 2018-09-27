@@ -102,7 +102,7 @@ function worker_help_employers_string(worker_description)
       local normal = {}
       local additional = {}
 
-      if (#worker_description.employers == 1 then
+      if #worker_description.employers == 1 then
          -- TRANSLATORS: Worker Encyclopedia: A list with 1 building where a worker is needed to work at
          -- TRANSLATORS: You can also translate this as 'workplace'
          result = result .. h2(pgettext("workerhelp_one_building", "Works at"))
