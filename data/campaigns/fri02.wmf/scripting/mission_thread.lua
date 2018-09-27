@@ -113,7 +113,7 @@ function expand_south()
          for i,house in pairs(p1:get_buildings("frisians_scouts_house")) do
             for j,field in pairs(house.fields[1]:region(17)) do -- the scout has a radius of 15
                for k,bob in pairs(field.bobs) do
-                  if bob.name == "frisians_scout" and
+                  if bob.descr.name == "frisians_scout" and
                         field.owner == p2 and
                         field.brn.owner == p2 and
                         field.bln.owner == p2 and
@@ -130,8 +130,7 @@ function expand_south()
             if scout then break end
          end
       elseif (not hint_revealed) and scout then
-         local house = map:get_immovable(scout.field)
-         if house and house.name == "frisians_scouts_house" then
+         if scout.field.immovable and scout.field.immovable.descr.name == "frisians_scouts_house" then
             campaign_message_box(expansion_hint)
             hint_revealed = true
             scout = nil
@@ -308,7 +307,7 @@ function mission_thread()
    place_building_in_region(p3, "barbarians_metal_workshop", p1_start:region(7))
    place_building_in_region(p3, "barbarians_well", p1_start:region(7))
    place_building_in_region(p3, "barbarians_rangers_hut", p1_start:region(7))
-   reveal_concentric(p1, p1_start, 9, true, 100)
+   reveal_concentric(p1, p1_start, 10, true, 100)
    scroll_to_field(p1_start)
    campaign_message_box(intro_2)
    include "map:scripting/starting_conditions.lua"
