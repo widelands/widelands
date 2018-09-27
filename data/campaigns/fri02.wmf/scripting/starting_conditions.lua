@@ -64,39 +64,38 @@ port1:set_workers {
 
 local trained = 0
 for descr,n in pairs(campaign_data) do
-   if descr == "000" then
-      untrained = n
-   else
+   if descr ~= "000" then
       trained = trained + n
    end
 end
-if trained > initial_soldiers then
-   -- We have more soldiers than allowed, so pick 25 at random
-   local remaining = initial_soldiers
+if trained > takeover_soldiers then
+   -- We have more soldiers than allowed, so pick 10 at random
+   local remaining = takeover_soldiers
    repeat
       local key1 = math.random(0, 2)
       local key2 = math.random(0, 6)
       local key3 = math.random(0, 2)
       for descr,n in pairs(campaign_data) do
          if descr == (key1 .. key2 .. key3) and n > 0 then
-            if n > remaining then
+            if n < remaining then
                port1:set_soldiers({key1, key2, key3, 0}, n)
                remaining = remaining - n
             else
                port1:set_soldiers({key1, key2, key3, 0}, remaining)
                remaining = 0
             end
-            table.remove(soldiers, descr)
+            soldiers[descr] = nil
             break
          end
       end
    until remaining == 0
+   port1:set_soldiers({0, 0, 0, 0}, total_soldiers - takeover_soldiers)
 else
-   -- We have less than 25 soldiers, so take them all plus some new ones
+   -- We have less than 10 soldiers, so take them all plus some new ones
    for descr,n in pairs(campaign_data) do
       port1:set_soldiers(descr, n)
    end
-   port1:set_soldiers({0,0,0,0}, initial_soldiers - trained)
+   port1:set_soldiers({0,0,0,0}, total_soldiers - trained)
 end
 
 -- =======================================================================

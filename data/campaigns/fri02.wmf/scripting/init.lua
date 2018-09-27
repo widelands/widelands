@@ -19,13 +19,15 @@ p1_start = map.player_slots[1].starting_field
 
 include "map:scripting/texts.lua"
 
-initial_soldiers = 20
+takeover_soldiers = 10
+total_soldiers = 25
 campaign_data = game:read_campaign_data("frisians", "fri01")
 if not campaign_data then
    campaign_message_box(campaign_data_warning)
    campaign_data = {}
    -- If he wants to cheat, let him, but give him a hard time
-   initial_soldiers = 5
+   total_soldiers = 5
+   takeover_soldiers = 0
 end
 
 include "map:scripting/mission_thread.lua"

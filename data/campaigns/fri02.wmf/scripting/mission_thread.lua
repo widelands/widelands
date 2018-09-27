@@ -1,4 +1,3 @@
-include "scripting/messages.lua"
 include "scripting/field_animations.lua"
 
 local done_mining = false

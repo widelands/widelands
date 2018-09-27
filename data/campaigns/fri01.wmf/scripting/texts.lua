@@ -409,7 +409,7 @@ rising_water_5 = {
    title =_ "Don’t Forget the Soldiers",
    body=reebaud(_"Soldiers to the port!",
       -- TRANSLATORS: Reebaud – rising water
-      _([[I almost forgot in this haste – whereever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to 20 soldiers on our ship, if they don’t mind being all crammed up together. Let’s send some to the port when it’s completed, so they can embark when we set sails!]])),
+      _([[I almost forgot in this haste – whereever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to 10 soldiers on our ship, if they don’t mind being all crammed up together. Let’s send some to the port when it’s completed, so they can embark when we set sails!]])),
 }
 
 victory_1 = {
