@@ -102,6 +102,13 @@ public:
 	void start() override;
 
 protected:
+	/// Draws census and statistics on screen for the listed mapobjects
+	void draw_mapobject_infotexts(
+	   RenderTarget* dst,
+	   float scale,
+	   const std::vector<std::pair<Vector2i, Widelands::MapObject*>>& mapobjects_to_draw_text_for,
+	   const TextToDraw text_to_draw,
+	   const Widelands::Player* plr) const;
 	void draw_overlay(RenderTarget&) override;
 
 	GameMainMenuWindows main_windows_;
