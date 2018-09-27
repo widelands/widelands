@@ -330,7 +330,7 @@ amalea_2 = {
       _([[So, we urgently need to recover the plans regarding the construction and operation of farms. One older constructor told me that they might have been concealed in a cave in the hills east of our border.]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Amalea
-      _([[Until we have found the plans, the only option for our farms is to dismantle them.]]))
+      _([[Until we have found the plans, the only option for our farms is to destroy them.]]))
       .. new_objectives(obj_find_farm_plans),
    posy=1,
    h=500,

@@ -87,7 +87,7 @@ def detect_bzr_revision():
             nick = run_bzr('nick')
         except OSError:
             return None
-    return 'bzr%s[%s] ' % (revno, nick)
+    return 'bzr%s[%s]' % (revno, nick)
 
 
 def detect_revision():
