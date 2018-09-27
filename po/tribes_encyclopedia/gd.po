@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-28 07:19+0000\n"
-"PO-Revision-Date: 2018-07-31 07:34+0000\n"
+"POT-Creation-Date: 2018-09-10 06:56+0000\n"
+"PO-Revision-Date: 2018-09-10 12:37+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1561,7 +1561,7 @@ msgstr "Cha dèan ach iarann gobha!"
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "Irritated chieftain during a metal shortage"
-msgstr "Ceannard feargach nuair a bha a’ mheatailt gann."
+msgstr "Ceannard feargach nuair a bha a’ mheatailt gann"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:13
@@ -2738,6 +2738,10 @@ msgstr "Tha an cuilceach seo abaich."
 msgid "This reed has just been planted."
 msgstr "Tha an cuilceach seo air a chur."
 
+#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
+#. script probably want to lose the blank space here.
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
 #: ../../data/tribes/immovables/resi_coal1/helptexts.lua:3
@@ -3949,8 +3953,6 @@ msgid ""
 "inns to prepare meals."
 msgstr "Cha ghabh na saighdearan ann an raon catha ach ris an leann seo. Tha cuid ag ràdh gu bheil neart slàn nan Tùsanach san leann seo. Cuidichidh e ach an oidich thu teàrnadh nan saighdearan o leibheil 0 gu 1 gu 2. Cleachdaidh na taighean-seinnse leann làidir cuideachd gus miasan ullachadh."
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -5491,8 +5493,8 @@ msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a worker: Blacksmith
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
+#. TRANSLATORS: Helptext for a worker: Blacksmith
 #: ../../data/tribes/workers/barbarians/blacksmith/helptexts.lua:3
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"

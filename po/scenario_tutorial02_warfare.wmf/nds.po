@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-21 08:37+0000\n"
+"POT-Creation-Date: 2018-09-14 06:11+0000\n"
+"PO-Revision-Date: 2018-09-09 10:52+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -208,13 +208,13 @@ msgstr "Keene roden Punkten bedüddt, dat de Soldat nich utbildt wurr. He hett S
 msgid ""
 "With every successful training step, your soldier becomes stronger. This is "
 "indicated by a red dot. This soldier is on level 1 in evade training."
-msgstr "Mit elkeen Öven-Stapp word de Soldat machtiger. Dat word mit eenem roden Punkt anzeigt. Düsse Soldat hett Stand 1 bi'm Utwieken-Öven."
+msgstr "Mit elkeen Öven-Stapp word de Soldat machtiger. Dat word mit eenem roden Punkt wesen. Düsse Soldat hett Stand 1 bi'm Utwieken-Öven."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:97
 msgid ""
 "When your soldier has reached the highest possible level (in this case level"
 " 2), this is indicated by a white background color."
-msgstr "Wenn dien Soldat de höchste Stand hett (hier 2), word dat mit eenem witten Achtergrund anzeigt."
+msgstr "Wenn dien Soldat de höchste Stand hett (hier 2), word dat mit eenem witten Achtergrund wesen."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:103
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:105
