@@ -44,7 +44,7 @@ def detect_debian_version():
 def detect_git_revision():
     try:
         git_revnum = subprocess.Popen(
-            'git rev-parse --short HEAD',stdout=subprocess.PIPE).stdout.read().rstrip()
+            'git rev-parse --short HEAD',stdout=subprocess.PIPE,cwd=base_path).stdout.read().rstrip()
         if git_revnum:
             return 'unofficial-git-%s' % git_revnum
     except:
@@ -66,8 +66,12 @@ def check_for_explicit_version():
 
 def detect_bzr_revision():
     if __has_bzrlib:
-        b = BzrDir.open(base_path).open_branch()
-        revno, nick = b.revno(), b.nick
+        try:
+            b = BzrDir.open(base_path).open_branch()
+            revno, nick = b.revno(), b.nick
+            return 'bzr%s[%s]' % (revno, nick)
+        except:
+            return None 
     else:
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
@@ -77,9 +81,11 @@ def detect_bzr_revision():
             ).stdout.read().strip().decode('utf-8')
             revno = run_bzr('revno')
             nick = run_bzr('nick')
+            return 'bzr%s[%s]' % (revno, nick)
         except OSError:
             return None
-    return 'bzr%s[%s]' % (revno, nick)
+    return None
+    
 
 
 def detect_revision():
