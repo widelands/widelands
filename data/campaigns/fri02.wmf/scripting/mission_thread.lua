@@ -103,6 +103,7 @@ function expand_south()
 
    o = add_campaign_objective(obj_supply_murilius)
    local choice = ""
+   sleep(30000) -- give the player some time to account for nearly completed buildings
    local milbld = count_military_buildings_p1()
    local hint_revealed = false
    local scout = nil
