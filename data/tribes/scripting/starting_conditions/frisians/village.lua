@@ -79,7 +79,6 @@ return {
          frisians_woodcutter = 3,
          frisians_beekeeper = 1,
          frisians_miner = 4,
-         frisians_miner_master = 2,
          frisians_forester = 2,
          frisians_stonemason = 2,
          frisians_reindeer = 5,
