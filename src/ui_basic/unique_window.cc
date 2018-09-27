@@ -37,14 +37,15 @@ void UniqueWindow::Registry::create() {
 	if (!window) {
 		open_window();
 	} else {
-		if (window->is_minimal())
+		if (window->is_minimal()) {
 			window->restore();
+		}
 		window->move_to_top();
 	}
 }
 
 /**
- * Destroys the window, if it eixsts.
+ * Destroys the window, if it exists.
 */
 void UniqueWindow::Registry::destroy() {
 	if (window) {

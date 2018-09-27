@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-07-04 13:36+0000\n"
+"POT-Creation-Date: 2018-08-24 06:54+0000\n"
+"PO-Revision-Date: 2018-08-28 15:50+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -798,23 +798,23 @@ msgstr "Wilde Deerten"
 msgid "Aquatic"
 msgstr "Waterdeerten"
 
-#: ../../data/world/resources/init.lua:72
+#: ../../data/world/resources/init.lua:84
 msgid "Coal"
 msgstr "Köhle"
 
-#: ../../data/world/resources/init.lua:86
+#: ../../data/world/resources/init.lua:100
 msgid "Gold"
 msgstr "Gold"
 
-#: ../../data/world/resources/init.lua:100
+#: ../../data/world/resources/init.lua:116
 msgid "Iron"
 msgstr "Iesen"
 
-#: ../../data/world/resources/init.lua:114
+#: ../../data/world/resources/init.lua:132
 msgid "Stones"
 msgstr "Stenen"
 
-#: ../../data/world/resources/init.lua:128
+#: ../../data/world/resources/init.lua:148
 #: ../../data/world/terrains/init.lua:451
 #: ../../data/world/terrains/init.lua:760
 #: ../../data/world/terrains/init.lua:1056
@@ -822,7 +822,7 @@ msgstr "Stenen"
 msgid "Water"
 msgstr "Water"
 
-#: ../../data/world/resources/init.lua:142
+#: ../../data/world/resources/init.lua:164
 msgid "Fish"
 msgstr "Fiss"
 
@@ -1052,11 +1052,11 @@ msgstr "Fröstklei 3"
 
 #: ../../data/world/terrains/init.lua:842
 msgid "Tundra Taiga"
-msgstr "Fröstsneei"
+msgstr "Iessneei"
 
 #: ../../data/world/terrains/init.lua:858
 msgid "Taiga"
-msgstr "Sneei"
+msgstr "Fröstsneei"
 
 #: ../../data/world/terrains/init.lua:990
 msgid "Ice"

@@ -25,6 +25,7 @@
 #include <unordered_map>
 
 #include "base/macros.h"
+#include "economy/economy.h"
 #include "graphic/color.h"
 #include "graphic/playercolor.h"
 #include "logic/editor_game_base.h"
@@ -40,7 +41,6 @@
 class Node;
 namespace Widelands {
 
-class Economy;
 struct Path;
 struct PlayerImmovable;
 class Soldier;
@@ -515,18 +515,12 @@ public:
 	void enhance_building(Building*, DescriptionIndex index_of_new_building);
 	void dismantle_building(Building*);
 
-	// Economy stuff
-	void add_economy(Economy&);
-	void remove_economy(Economy&);
-	bool has_economy(Economy&) const;
-	using Economies = std::vector<Economy*>;
-	Economies::size_type get_economy_number(Economy const*) const;
-	Economy* get_economy_by_number(Economies::size_type const i) const {
-		return economies_[i];
-	}
-	uint32_t get_nr_economies() const {
-		return economies_.size();
-	}
+	Economy* create_economy();
+	Economy* create_economy(Serial serial);  // For saveloading only
+	void remove_economy(Serial serial);
+	const std::map<Serial, std::unique_ptr<Economy>>& economies() const;
+	Economy* get_economy(Widelands::Serial serial) const;
+	bool has_economy(Widelands::Serial serial) const;
 
 	uint32_t get_current_produced_statistics(uint8_t);
 
@@ -585,9 +579,9 @@ public:
 
 	std::vector<uint32_t> const* get_ware_stock_statistics(DescriptionIndex const) const;
 
-	void read_statistics(FileRead&);
+	void read_statistics(FileRead&, uint16_t packet_version);
 	void write_statistics(FileWrite&) const;
-	void read_remaining_shipnames(FileRead&, uint16_t packet_version);
+	void read_remaining_shipnames(FileRead&);
 	void write_remaining_shipnames(FileWrite&) const;
 	void sample_statistics();
 	void ware_produced(DescriptionIndex);
@@ -644,7 +638,7 @@ private:
 	Field* fields_;
 	std::vector<bool> allowed_worker_types_;
 	std::vector<bool> allowed_building_types_;
-	Economies economies_;
+	std::map<Serial, std::unique_ptr<Economy>> economies_;
 	std::set<Serial> ships_;
 	std::string name_;  // Player name
 	std::string ai_;    /**< Name of preferred AI implementation */

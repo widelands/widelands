@@ -113,7 +113,7 @@ struct Road : public PlayerImmovable {
 	void presplit(Game&, Coords split);
 	void postsplit(Game&, Flag&);
 
-	bool notify_ware(Game& game, FlagId flagid);
+	bool notify_ware(Game& game, Flag& flag);
 	void update_wallet_chargetime(Game& game);
 	void charge_wallet(Game& game);
 	int32_t wallet() const;
@@ -124,17 +124,14 @@ struct Road : public PlayerImmovable {
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          float scale,
-	          RenderTarget* dst) override;
+	void
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 private:
 	void set_path(EditorGameBase&, const Path&);
@@ -151,8 +148,8 @@ private:
 	uint8_t carriers_count() const;
 
 private:
-	/// Counter that is incremented when a ware does not get a carrier for this
-	/// road immediately and decremented over time.
+	/// Counter that is incremented for every ware served by this road
+	/// according to the delay of service and decremented over time.
 	int32_t wallet_;
 
 	/// holds the gametime when wallet_ was last charged

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-28 06:01+0000\n"
-"PO-Revision-Date: 2018-07-06 13:44+0000\n"
+"POT-Creation-Date: 2018-07-20 07:33+0000\n"
+"PO-Revision-Date: 2018-07-22 16:08+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -50,14 +50,14 @@ msgid ""
 " finish a castle at the end of the first island, you are granted a second "
 "headquarters on a second island, which will contain all wares from your "
 "first headquarters."
-msgstr "Insel-Jumpen is een Speel im Atlantisken Bruuk. De Regels sünd eenfach: Du begünnst mit eenem Raadhuus up eener Insel. Wenn du am Enne vun de eersten Insel een Slott baust, kriggst du een neies Raadhuus up eener tweeden Insel, un 't hett all Waren vum eersten Raadhuus."
+msgstr "Insel-Jumpen is een Speel im Atlantisken Bruuk. De Regels sünd eenfach: Du begünnst mit eenem Raadhuus up eener Insel. Wenn du am Enne vun de eersten Insel een Slött baust, kriggst du een neies Raadhuus up eener tweeden Insel, un 't hett all Waren vum eersten Raadhuus."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:16
 msgid ""
 "If you finish a castle in the target area on the second island, you will get"
 " a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
-msgstr "Wenn du een Slott in de Enn-Gewest vun de tweeden Insel baust, kriggst du een dardes Raadhuus up de darde Insel. Du mutt in de Midde vun de darden Insel een Slott bauen un 20 Menüten behollen, um to winnen."
+msgstr "Wenn du een Slött in de Enn-Gewest vun de tweeden Insel baust, kriggst du een dardes Raadhuus up de darde Insel. Du mutt in de Midde vun de darden Insel een Slött bauen un 20 Menüten behollen, um to winnen."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:21
 msgid ""
@@ -76,7 +76,7 @@ msgstr "De eerste Insel hett nix as Stenen un Bomen, de tweede nix as Felden un 
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:27
 msgid "Finally, be careful not to waste your quartz and diamonds."
-msgstr "Un pass up dienen Blinkerflint un Edelflint up. Verklüngel se nich."
+msgstr "Un pass up dienen Blinkerflint un Edelstenen up. Verklüngel se nich."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:29
 msgid "Finish Rewards"

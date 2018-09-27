@@ -126,7 +126,7 @@ bool DefaultAI::marine_main_decisions(const uint32_t gametime) {
 	for (const WarehouseSiteObserver& wh_obs : warehousesites) {
 		if (wh_obs.bo->is(BuildingAttribute::kPort)) {
 			ports_count += 1;
-			if (Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
+			if (const Widelands::PortDock* pd = wh_obs.site->get_portdock()) {
 				if (pd->expedition_started()) {
 					expeditions_in_prep += 1;
 				}
@@ -367,6 +367,17 @@ bool DefaultAI::check_ships(uint32_t const gametime) {
  */
 void DefaultAI::check_ship_in_expedition(ShipObserver& so, uint32_t const gametime) {
 	PlayerNumber const pn = player_->player_number();
+
+	// There is theoretical possibility that we have more than one ship in expedition mode,
+	// and this one is not the one listed in expedition_ship_ variable, so we quit expedition of this
+	// one
+	if (expedition_ship_ != so.ship->serial() && expedition_ship_ != kNoShip) {
+		log("%d: WARNING: ship %s in expedition, but we have more then one in expedition mode and "
+		    "this is not supported, cancelling the expedition\n",
+		    pn, so.ship->get_shipname().c_str());
+		game().send_player_cancel_expedition_ship(*so.ship);
+		return;
+	}
 
 	// consistency check
 	assert(expedition_ship_ == so.ship->serial() || expedition_ship_ == kNoShip);

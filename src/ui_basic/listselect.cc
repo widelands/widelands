@@ -25,7 +25,7 @@
 
 #include "base/log.h"
 #include "graphic/align.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -296,7 +296,7 @@ void BaseListselect::layout() {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		for (size_t i = 0; i < entry_records_.size(); ++i) {
 			const EntryRecord& er = *entry_records_[i];
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
 			   as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
 			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 			int difference = rendered_text->width() + picw + 8 - get_eff_w();
@@ -342,7 +342,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh1->render(as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
+		   UI::g_fh->render(as_uifont(richtext_escape(er.name), UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG));
 
 		int lineheight = std::max(get_lineheight(), rendered_text->height());
 
@@ -379,7 +379,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Vector2i(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
 			                  y + (get_lineheight() - er.pic->height()) / 2),
 			         er.pic);
 		}
@@ -391,7 +391,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Shift for image width
-		if (!UI::g_fh1->fontset()->is_rtl()) {
+		if (!UI::g_fh->fontset()->is_rtl()) {
 			point.x += picw;
 		}
 

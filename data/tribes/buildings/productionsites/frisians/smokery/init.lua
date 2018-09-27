@@ -23,17 +23,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 82},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 82},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 66},
       },
    },
 
@@ -65,7 +65,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=smoke_meat",
             "call=smoke_fish",
-            "return=skipped"
+            "return=no_stats"
          },
       },
       smoke_fish = {
@@ -73,8 +73,8 @@ tribes:new_productionsite_type {
          descname = _"smoking fish",
          actions = {
             "return=skipped unless economy needs smoked_fish",
-            "sleep=16000",
             "consume=fish:2 log",
+            "sleep=16000",
             "animate=working 30000",
             "produce=smoked_fish:2"
          },
@@ -85,8 +85,8 @@ tribes:new_productionsite_type {
          actions = {
             "return=skipped when site has fish:2 and economy needs smoked_fish",
             "return=skipped unless economy needs smoked_meat",
-            "sleep=16000",
             "consume=meat:2 log",
+            "sleep=16000",
             "animate=working 30000",
             "produce=smoked_meat:2"
          },

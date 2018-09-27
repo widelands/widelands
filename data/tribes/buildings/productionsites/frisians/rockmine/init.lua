@@ -25,21 +25,21 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {27, 65},
+         hotspot = {38, 94},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {27, 66},
+         hotspot = {38, 94},
          fps = 10,
       },
       empty = {
-         pictures = path.list_files (dirname .. "empty_?.png"),
-         hotspot = {27, 48},
+         pictures = path.list_files (dirname .. "empty_??.png"),
+         hotspot = {38, 94},
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {27, 48},
+         hotspot = {38, 72},
       },
    },
 
@@ -65,15 +65,29 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=45000",
+            "sleep=5000",
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "animate=working 20000",
+            "sleep=38000",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         }
+      },
+      mine_produce = {
+         descname = _"mining granite",
+         actions = {
+            "animate=working 21000",
             "mine=stones 3 50 5 20",
             "produce=granite",
-            "animate=working 20000",
-            "mine=stones 3 50 5 20",
-            "produce=granite"
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration",
+            "produce=granite:2",
          }
       },
    },

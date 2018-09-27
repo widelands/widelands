@@ -37,7 +37,7 @@
 namespace Widelands {
 
 namespace {
-constexpr uint32_t kCurrentPacketVersion = 3;
+constexpr uint32_t kCurrentPacketVersion = 4;
 
 // Write all .lua files that exist in the given 'path' in 'map_fs' to the 'target_fs'.
 void write_lua_dir(FileSystem& target_fs, FileSystem* map_fs, const std::string& path) {

@@ -875,8 +875,8 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 	const DescriptionIndex worker = player.tribe().worker_index(workername);
 
 	uint32_t nworkers = 0;
-	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		nworkers += player.get_economy_by_number(i)->stock_worker(worker);
+	for (const auto& economy : player.economies()) {
+		nworkers += economy.second->stock_worker(worker);
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
@@ -901,8 +901,8 @@ int LuaPlayerBase::get_wares(lua_State* L) {
 	const DescriptionIndex ware = egbase.tribes().ware_index(warename);
 
 	uint32_t nwares = 0;
-	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		nwares += player.get_economy_by_number(i)->stock_ware(ware);
+	for (const auto& economy : player.economies()) {
+		nwares += economy.second->stock_ware(ware);
 	}
 	lua_pushuint32(L, nwares);
 	return 1;

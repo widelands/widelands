@@ -24,7 +24,7 @@
 #include <memory>
 #include <string>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "network/network_player_settings_backend.h"

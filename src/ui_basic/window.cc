@@ -22,7 +22,7 @@
 #include <SDL_keycode.h>
 
 #include "base/log.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"

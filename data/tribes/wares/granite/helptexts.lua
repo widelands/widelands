@@ -7,7 +7,7 @@ function ware_helptext(tribe)
       -- TRANSLATORS: Helptext for a ware: Granite
       barbarians = pgettext("barbarians_ware", "The Barbarians produce granite blocks in quarries and granite mines."),
       -- TRANSLATORS: Helptext for a ware: Granite
-      frisians = pgettext("frisians_ware", "The Frisians produce granite blocks in quarries and rock mines. They can be refined by a brick burner."),
+      frisians = pgettext("frisians_ware", "The Frisians produce granite blocks in quarries and rock mines. They can be refined in a brick kiln."),
       -- TRANSLATORS: Helptext for a ware: Granite
       empire = pgettext("empire_ware", "The Empire produces granite blocks in quarries and marble mines.")
    }

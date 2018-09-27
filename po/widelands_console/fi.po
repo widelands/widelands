@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-05 17:07+0000\n"
-"PO-Revision-Date: 2018-05-05 17:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-08-24 06:54+0000\n"
+"PO-Revision-Date: 2018-08-28 17:26+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,7 +41,7 @@ msgstr " --<asetuksen-nimi>=arvo Ylikirjoittaa asetustiedoston asetuksen"
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr ""
+msgstr "                      Huom: Uusi arvo kirjoitetaan asetustiedostoon"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""
@@ -105,13 +105,13 @@ msgstr " --rolling_autosave=[...]\n                      Käytä näin montaa ti
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserver=[...]\n                      Ota yhteys toiseen verkkopelin metapalvelimeen. "
 
 #: ../../src/wlapplication_messages.cc:84
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserverport=[...]\n                      Portin numero verkkopelin metapalvelimeen."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid "Sound options:"
@@ -208,7 +208,7 @@ msgstr " --yres=[...]         Ikkunan korkeus pikseleinä."
 
 #: ../../src/wlapplication_messages.cc:135
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr ""
+msgstr " --maxfps=[5 ...]     Pelin suurin optinen kuvataajuus."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
