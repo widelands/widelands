@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-12 15:51+0000\n"
-"PO-Revision-Date: 2018-09-13 08:40+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-24 15:27+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -1212,7 +1212,7 @@ msgstr "빵 주걱 제작을"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:96
 msgid "making a pair of buckets"
-msgstr "한 쌍의 양동이 제작을"
+msgstr "양동이 한쌍 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
@@ -1220,14 +1220,14 @@ msgstr "한 쌍의 양동이 제작을"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:119
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:204
 msgid "making fire tongs"
-msgstr "부젓가락 제작을"
+msgstr "부젓가락 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:120
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
 msgid "making a fishing net"
-msgstr "어부 그물 제작을"
+msgstr "물고기 그물 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:132
@@ -1235,37 +1235,37 @@ msgstr "어부 그물 제작을"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:143
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:193
 msgid "making a hammer"
-msgstr "망치 제작을"
+msgstr "망치 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:144
 msgid "making a hook pole"
-msgstr "갈고리 장대 제작을"
+msgstr "갈고리 장대 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:156
 msgid "making a hunting bow"
-msgstr "사냥용 활 제작을"
+msgstr "사냥 활 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:168
 msgid "making milking tongs"
-msgstr "착유 집게 제작을"
+msgstr "착유 집게 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:180
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:178
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
 msgid "making a pick"
-msgstr "곡괭이 제작을"
+msgstr "곡괭이 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:192
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:191
 msgid "making a saw"
-msgstr "톱 제작을"
+msgstr "톱 만들고 있음"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:204
@@ -2629,7 +2629,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "이 열매 거두는 이의 집에서 일하는 이는 그의 일터에서는 딸기 덤불을 찾지 못했습니다. 다른 딸기 심는 집을 짓거나 이 건물을 해체하거나 파괴하는 것을 생각해보십시요."
+msgstr "이 열매 거두는 이의 집에서 일하는 이는 그의 일터에서는 딸기 덤불을 찾지 못했습니다. 다른 딸기 심는 집을 짓거나 이 건물을 해체하거나 파괴하는 것을 생각해보십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:7
@@ -3678,64 +3678,94 @@ msgid "Reed (tiny)"
 msgstr "갈대 (새싹)"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_coal1/init.lua:7
-msgctxt "immovable"
-msgid "Resources: Coal Vein"
-msgstr "자원: 석탄 광맥"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_coal2/init.lua:7
-msgctxt "immovable"
-msgid "Resources: Main Coal Vein"
-msgstr "자원: 중앙 석탄 광맥"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_gold1/init.lua:7
-msgctxt "immovable"
-msgid "Resources: Gold Vein"
-msgstr "자원: 금 광맥"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_gold2/init.lua:7
-msgctxt "immovable"
-msgid "Resources: Main Gold Vein"
-msgstr "자원: 중앙 금 광맥"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_iron1/init.lua:7
-msgctxt "immovable"
-msgid "Resources: Iron Vein"
-msgstr "자원: 철 광맥"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_iron2/init.lua:7
-msgctxt "immovable"
-msgid "Resources: Main Iron Vein"
-msgstr "자원: 중앙 철 광맥"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_none/init.lua:7
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:7
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:7
+#: ../../data/tribes/immovables/resi/empire/init.lua:7
+#: ../../data/tribes/immovables/resi/frisians/init.lua:7
 msgctxt "immovable"
 msgid "Resources: None"
 msgstr "자원: 없음"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_stones1/init.lua:7
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:29
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:29
+#: ../../data/tribes/immovables/resi/empire/init.lua:29
+#: ../../data/tribes/immovables/resi/frisians/init.lua:29
+msgctxt "immovable"
+msgid "Resources: Water Vein"
+msgstr "자원: 수맥"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:52
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:51
+#: ../../data/tribes/immovables/resi/empire/init.lua:51
+#: ../../data/tribes/immovables/resi/frisians/init.lua:52
+msgctxt "immovable"
+msgid "Resources: Coal Vein"
+msgstr "자원: 석탄 광맥"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:75
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:73
+#: ../../data/tribes/immovables/resi/empire/init.lua:73
+#: ../../data/tribes/immovables/resi/frisians/init.lua:75
+msgctxt "immovable"
+msgid "Resources: Gold Vein"
+msgstr "자원: 금 광맥"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:98
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:95
+#: ../../data/tribes/immovables/resi/empire/init.lua:95
+#: ../../data/tribes/immovables/resi/frisians/init.lua:98
+msgctxt "immovable"
+msgid "Resources: Iron Vein"
+msgstr "자원: 철 광맥"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:121
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:117
+#: ../../data/tribes/immovables/resi/empire/init.lua:117
+#: ../../data/tribes/immovables/resi/frisians/init.lua:121
 msgctxt "immovable"
 msgid "Resources: Some Stones"
 msgstr "자원:  약간의 석재"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_stones2/init.lua:7
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:144
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:139
+#: ../../data/tribes/immovables/resi/empire/init.lua:139
+#: ../../data/tribes/immovables/resi/frisians/init.lua:144
+msgctxt "immovable"
+msgid "Resources: Main Coal Vein"
+msgstr "자원: 중앙 석탄 광맥"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:167
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:161
+#: ../../data/tribes/immovables/resi/empire/init.lua:161
+#: ../../data/tribes/immovables/resi/frisians/init.lua:167
+msgctxt "immovable"
+msgid "Resources: Main Gold Vein"
+msgstr "자원: 중앙 금 광맥"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:190
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:183
+#: ../../data/tribes/immovables/resi/empire/init.lua:183
+#: ../../data/tribes/immovables/resi/frisians/init.lua:190
+msgctxt "immovable"
+msgid "Resources: Main Iron Vein"
+msgstr "자원: 중앙 철 광맥"
+
+#. TRANSLATORS: This is a resource name used in lists of resources
+#: ../../data/tribes/immovables/resi/atlanteans/init.lua:213
+#: ../../data/tribes/immovables/resi/barbarians/init.lua:205
+#: ../../data/tribes/immovables/resi/empire/init.lua:205
+#: ../../data/tribes/immovables/resi/frisians/init.lua:213
 msgctxt "immovable"
 msgid "Resources: A Lot of Stones"
 msgstr "자원: 많은 석재"
-
-#. TRANSLATORS: This is a resource name used in lists of resources
-#: ../../data/tribes/immovables/resi_water1/init.lua:7
-msgctxt "immovable"
-msgid "Resources: Water Vein"
-msgstr "자원: 수맥"
 
 #. TRANSLATORS: This is an immovable name used in lists of immovables
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/init.lua:7

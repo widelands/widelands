@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-12 15:51+0000\n"
-"PO-Revision-Date: 2018-09-12 15:53+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-17 09:29+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -561,7 +561,7 @@ msgid "Error!"
 msgstr "오류!"
 
 #: ../../src/editor/ui_menus/main_menu.cc:43
-#: ../../src/wui/game_options_menu.cc:66
+#: ../../src/wui/game_options_menu.cc:43
 msgid "Main Menu"
 msgstr "주 메뉴"
 
@@ -925,7 +925,7 @@ msgstr "플레이어 수"
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:70
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:102
-#: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:509
+#: ../../src/network/gamehost.cc:1607 ../../src/ui_fsmenu/launch_mpg.cc:509
 #: ../../src/wui/multiplayersetupgroup.cc:135
 #: ../../src/wui/multiplayersetupgroup.cc:189
 #, c-format
@@ -1106,7 +1106,7 @@ msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr "다음 문자는 허용되지 않습니다."
 
-#: ../../src/logic/editor_game_base.cc:213
+#: ../../src/logic/editor_game_base.cc:228
 msgid "Loading graphics"
 msgstr "그래픽 불러오는 중"
 
@@ -1609,7 +1609,7 @@ msgstr "통행 불가능"
 msgid "This objective has no description."
 msgstr "이 목표는 설명이 없습니다."
 
-#: ../../src/logic/player.cc:1334
+#: ../../src/logic/player.cc:1336
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -1653,7 +1653,7 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands 가 주어진 주소에 연결할 수 없습니다. 가정된 포트에서 Widelands 서버가 실행 중이지 않거나 연결할 때 서버가 종료되었을것입니다."
 
-#: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
+#: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:641
 #: ../../src/wlapplication.cc:1311
 msgid "Preparing game"
 msgstr "게임 준비중"
@@ -1678,130 +1678,130 @@ msgstr "%s 자동 저장 게임이 생성됩니다."
 msgid "Disconnected from Host"
 msgstr "호스트로부터의 접속 중단"
 
-#: ../../src/network/gamehost.cc:257
+#: ../../src/network/gamehost.cc:258
 msgid "Available host commands are:"
 msgstr "가능한 호스트 명령들:"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:259
+#: ../../src/network/gamehost.cc:260
 msgid "/help  -  Shows this help"
 msgstr "/help  - 도움말 보기"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:261
+#: ../../src/network/gamehost.cc:262
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr "/announce <msg> - 알림 메시지 보내기 (시스템 채팅)"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:263
+#: ../../src/network/gamehost.cc:264
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr "/warn <name> <reason> - 유저 <name> 에게 <reason> 을 이유로 경고하기"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:265
+#: ../../src/network/gamehost.cc:266
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr "/kick <name> <reason> - 유저 <name> 을 <reason> 을 이유로 쫓아내기"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:267
+#: ../../src/network/gamehost.cc:268
 msgid "/forcePause            -  Force the game to pause."
 msgstr "/forcePause - 게임을 강제로 일시정지"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:269
+#: ../../src/network/gamehost.cc:270
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr "/endForcedPause - 게임을 원래 속도로 복구하기"
 
-#: ../../src/network/gamehost.cc:276
+#: ../../src/network/gamehost.cc:277
 msgid "Wrong use, should be: /announce <message>"
 msgstr "잘못된 명령, 사용법: /announce <message>"
 
-#: ../../src/network/gamehost.cc:287
+#: ../../src/network/gamehost.cc:288
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "잘못된 명령, 사용법: /warn <name> <reason>"
 
-#: ../../src/network/gamehost.cc:291 ../../src/network/gamehost.cc:314
+#: ../../src/network/gamehost.cc:292 ../../src/network/gamehost.cc:315
 #, c-format
 msgid "The client %s could not be found."
 msgstr "클라이언트 %s 를 찾을 수 없습니다."
 
-#: ../../src/network/gamehost.cc:302
+#: ../../src/network/gamehost.cc:303
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "잘못된 명령, 사용법: /kick <name> <reason>"
 
-#: ../../src/network/gamehost.cc:312
+#: ../../src/network/gamehost.cc:313
 msgid "You can not kick yourself!"
 msgstr "당신은 스스로를 쫓아낼 수 없어요!"
 
-#: ../../src/network/gamehost.cc:318
+#: ../../src/network/gamehost.cc:319
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr "%s를 정말 쫓아내길 원하십니까?"
 
-#: ../../src/network/gamehost.cc:320
+#: ../../src/network/gamehost.cc:321
 #, c-format
 msgid "The stated reason was: %s"
 msgstr "진술된 이유 : %s"
 
-#: ../../src/network/gamehost.cc:321
+#: ../../src/network/gamehost.cc:322
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "알고 싶다면, 입력: /ack_kick %s"
 
-#: ../../src/network/gamehost.cc:329
+#: ../../src/network/gamehost.cc:330
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr "추방이 취소됨: 이름이 주어지지 않음!"
 
-#: ../../src/network/gamehost.cc:331
+#: ../../src/network/gamehost.cc:332
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "잘못된 명령, 사용법: /ack_kick <name>"
 
-#: ../../src/network/gamehost.cc:337
+#: ../../src/network/gamehost.cc:338
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr "추방이 취소됨: 잘못된 이름이 주어짐!"
 
-#: ../../src/network/gamehost.cc:346
+#: ../../src/network/gamehost.cc:347
 msgid "Pause was already forced - game should be paused."
 msgstr "일시정지가 이미 강제되었습니다 - 게임은 일시정지되어야 합니다."
 
-#: ../../src/network/gamehost.cc:356
+#: ../../src/network/gamehost.cc:357
 msgid "There is no forced pause - nothing to end."
 msgstr "강제된 일시정지가 없습니다 - 끝이 없습니다."
 
-#: ../../src/network/gamehost.cc:365
+#: ../../src/network/gamehost.cc:366
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "잘못된 명령입니다! 명령 목록을 위해 /help 를 입력하세요."
 
-#: ../../src/network/gamehost.cc:494
+#: ../../src/network/gamehost.cc:495
 msgid "Failed to host the server!"
 msgstr "서버를 주최하지 못 했습니다."
 
-#: ../../src/network/gamehost.cc:495
+#: ../../src/network/gamehost.cc:496
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
 msgstr "와이드랜드가 서버 주최를 시작할 수 없습니다.\n이런 일은 일어나서는 안 됩니다. 당신이 할 수있는 일이 거의 없을 것입니다. 버그를 보고하여 주십시요."
 
-#: ../../src/network/gamehost.cc:503
+#: ../../src/network/gamehost.cc:504
 msgid "Failed to start the server!"
 msgstr "서버를 시작하는데 실패했습니다!"
 
-#: ../../src/network/gamehost.cc:504
+#: ../../src/network/gamehost.cc:505
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
 msgstr "Widelands는 서버를 시작할 수 없습니다.\n아마도 우리 포트에서 다른 프로세스가 서버를 기동하고 있습니다."
 
-#: ../../src/network/gamehost.cc:1526
+#: ../../src/network/gamehost.cc:1544
 #, c-format
 msgid "Computer %u"
 msgstr "컴퓨터 %u"
 
-#: ../../src/network/gamehost.cc:1583 ../../src/wui/game_summary.cc:102
+#: ../../src/network/gamehost.cc:1601 ../../src/wui/game_summary.cc:102
 msgid "Player"
 msgstr "플레이어"
 
-#: ../../src/network/gamehost.cc:1732
+#: ../../src/network/gamehost.cc:1750
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2046,118 +2046,123 @@ msgstr "%1$s 가 게임을 떠났습니다 (%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
+msgid "%1$s has been replaced with %2$s"
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:132
+#, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "알 수 없는 유저가 게임을 떠났습니다 (%s)"
 
-#: ../../src/network/network_gaming_messages.cc:133
+#: ../../src/network/network_gaming_messages.cc:134
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "운영되는 게임이 없음에도 서버가 SYNCREQUEST를 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:134
+#: ../../src/network/network_gaming_messages.cc:135
 msgid "Received a PLAYERCOMMAND even though no game is running."
 msgstr "운영되는 게임이 없음에도 PLAYERCOMMAND를 수신했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:135
+#: ../../src/network/network_gaming_messages.cc:136
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "기대치 않게 서버로부터 LAUNCH 커맨드를 수신했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:137
+#: ../../src/network/network_gaming_messages.cc:138
 msgid "Server sent a player update for a player that does not exist."
 msgstr "서버가 존재하지 않는 플레이어의 갱신 내용을 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:139
+#: ../../src/network/network_gaming_messages.cc:140
 msgid "Server sent a user update for a user that does not exist."
 msgstr "서버가 존재하지 않는 유저의 갱신 내용을 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:140
+#: ../../src/network/network_gaming_messages.cc:141
 msgid "Server uses a different protocol version"
 msgstr "서버가 다른 프로토콜 버전을 사용합니다"
 
-#: ../../src/network/network_gaming_messages.cc:141
+#: ../../src/network/network_gaming_messages.cc:142
 #, c-format
 msgid "Received command number %s, which is not allowed in this state."
 msgstr "지금 상태에서 허용되지 않는 명령 숫자 %s 를 수신했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:144
+#: ../../src/network/network_gaming_messages.cc:145
 msgid "Client reports time to host that is running backwards."
 msgstr "클라이언트가 호스트에게 이전에 운영된 시간을 보고합니다."
 
-#: ../../src/network/network_gaming_messages.cc:146
+#: ../../src/network/network_gaming_messages.cc:147
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "클라이언트가 호스트에게 허용된 게임 시간을 초과한 것을 지적합니다."
 
-#: ../../src/network/network_gaming_messages.cc:147
+#: ../../src/network/network_gaming_messages.cc:148
 msgid "Client did not submit sync report in time."
 msgstr "클라이언트가 제 시간에 동기화 보고서를 제출하지 않았습니다."
 
-#: ../../src/network/network_gaming_messages.cc:148
+#: ../../src/network/network_gaming_messages.cc:149
 msgid "The game has already started."
 msgstr "게임이 이미 시작되었습니다."
 
-#: ../../src/network/network_gaming_messages.cc:149
+#: ../../src/network/network_gaming_messages.cc:150
 msgid "Client has no access to other player’s settings."
 msgstr "클라이언트는 다른 플레이어의 세팅에 대한 권한이 없습니다."
 
-#: ../../src/network/network_gaming_messages.cc:150
+#: ../../src/network/network_gaming_messages.cc:151
 msgid "Client has no access to server settings."
 msgstr "클라이언트는 서버 세팅에 대한 권한이 없습니다."
 
-#: ../../src/network/network_gaming_messages.cc:152
+#: ../../src/network/network_gaming_messages.cc:153
 msgid "Client sent TIME command even though game is not running."
 msgstr "게임이 운영되지 않음에도 클라이언트가 TIME 커맨드를 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:153
+#: ../../src/network/network_gaming_messages.cc:154
 msgid "Client sent a PLAYERCOMMAND for another player."
 msgstr "클라이언트가 다른 플레이어에게 PLAYERCOMMAND를 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:154
+#: ../../src/network/network_gaming_messages.cc:155
 msgid "Client sent unexpected synchronization report."
 msgstr "클라이언트가 예상치 못한 동기화 보고서를 전송했습니다."
 
-#: ../../src/network/network_gaming_messages.cc:156
+#: ../../src/network/network_gaming_messages.cc:157
 msgid "Client requests file although none is available to send."
 msgstr "클라이언트가 아무도 전송이 불가능한 파일을 요청합니다."
 
-#: ../../src/network/network_gaming_messages.cc:157
+#: ../../src/network/network_gaming_messages.cc:158
 msgid "Client requests file part that does not exist."
 msgstr "클라이언트가 존재하지 않는 파일을 요청합니다."
 
-#: ../../src/network/network_gaming_messages.cc:158
+#: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "호스트가 플레이어 %s 를 로비로 보냈습니다!"
 
-#: ../../src/network/network_gaming_messages.cc:160
+#: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
 msgstr "경고: %1$s 가 사용하는 버전: %2$s, 호스트가 사용하는 버전: %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:161
+#: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s 가 게임에 참여했습니다"
 
-#: ../../src/network/network_gaming_messages.cc:162
+#: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
 msgstr "%1$s 가 %2$s 에게 파일을 전송하기 시작했습니다!"
 
-#: ../../src/network/network_gaming_messages.cc:163
+#: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
 msgstr "%1$s 가 %2$s 에게 파일 전송을 완료했습니다"
 
-#: ../../src/network/network_gaming_messages.cc:164
+#: ../../src/network/network_gaming_messages.cc:165
 #, c-format
 msgid "Sending part %1$s of file %2$s to %3$s"
 msgstr "파일 %2$s 의 부분 %1$s 을 %3$s 에게 전송하는 중"
 
-#: ../../src/network/network_gaming_messages.cc:165
+#: ../../src/network/network_gaming_messages.cc:166
 #, c-format
 msgid "The player ‘%s’ was defeated and became a spectator."
 msgstr "플레이어 '%s' 가 패배했고 관전자가 되었습니다."
 
-#: ../../src/network/network_gaming_messages.cc:166
+#: ../../src/network/network_gaming_messages.cc:167
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
 msgstr "클라이언트 %1$s 는 %2$s 이상으로 대응하지 못합니다."
@@ -3323,15 +3328,66 @@ msgstr "채팅"
 msgid "Script console"
 msgstr "스크립트 콘솔"
 
+#. * TRANSLATORS: Window label
+#: ../../src/wui/game_client_disconnected.cc:50
+msgid "Client got disconnected"
+msgstr ""
+
+#: ../../src/wui/game_client_disconnected.cc:61
+msgid ""
+"A player disconnected from the game. An automatic save game has been "
+"created. Do you want to continue playing?"
+msgstr ""
+
+#. * TRANSLATORS: Button text
+#: ../../src/wui/game_client_disconnected.cc:73
+msgid "Continue game"
+msgstr ""
+
+#. * TRANSLATORS: Button tooltip
+#: ../../src/wui/game_client_disconnected.cc:75
+msgid ""
+"Replace the disconnected player with the selected AI and continue playing"
+msgstr ""
+
+#. * TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player
+#. has
+#. disconnected from a game
+#: ../../src/wui/game_client_disconnected.cc:84
+msgid "AI for the disconnected player"
+msgstr ""
+
+#. * TRANSLATORS: Button tooltip
+#: ../../src/wui/game_client_disconnected.cc:96
+#: ../../src/wui/game_options_menu.cc:76 ../../src/wui/game_summary.cc:93
+msgid "Exit Game"
+msgstr "게임 종료"
+
+#. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
+#. will be used as replacement for a disconnected player
+#: ../../src/wui/game_client_disconnected.cc:117
+#, c-format
+msgid "Replace player with %s"
+msgstr ""
+
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
 #: ../../src/wui/game_debug_ui.cc:211
 msgid "Debug Field"
 msgstr "디버그 필드"
 
+#. * TRANSLATORS: Window label when "Exit game" has been pressed
+#: ../../src/wui/game_exit_confirm_box.cc:28
+msgid "Exit Game Confirmation"
+msgstr "게임 종료 확인"
+
+#: ../../src/wui/game_exit_confirm_box.cc:29
+msgid "Are you sure you wish to exit this game?"
+msgstr "정말 해당 게임을 종료합니까?"
+
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:50
-#: ../../src/wui/game_options_menu.cc:89
+#: ../../src/wui/game_options_menu.cc:66
 msgid "Save Game"
 msgstr "게임 저장"
 
@@ -3522,29 +3578,15 @@ msgstr "삭제: %s"
 msgid "Objectives"
 msgstr "목표"
 
-#. * TRANSLATORS: Window label when "Exit game" has been pressed
-#: ../../src/wui/game_options_menu.cc:45
-msgid "Exit Game Confirmation"
-msgstr "게임 종료 확인"
-
-#: ../../src/wui/game_options_menu.cc:46
-msgid "Are you sure you wish to exit this game?"
-msgstr "정말 해당 게임을 종료합니까?"
-
-#: ../../src/wui/game_options_menu.cc:77
+#: ../../src/wui/game_options_menu.cc:54
 #: ../../src/wui/game_options_sound_menu.cc:27
 msgid "Sound Options"
 msgstr "소리 옵션"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:79
+#: ../../src/wui/game_options_menu.cc:56
 msgid "Set sound effect and music options"
 msgstr "소리 효과와 음악 옵션 설정"
-
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:93
-msgid "Exit Game"
-msgstr "게임 종료"
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music volume"
@@ -3737,12 +3779,12 @@ msgstr "저장하고 싶은 용품의 숫자를 감소시킵니다."
 msgid "Increase the number of wares you want to be stored here."
 msgstr "저장하고 싶은 용품의 숫자를 증가시킵니다."
 
-#: ../../src/wui/interactive_gamebase.cc:54
+#: ../../src/wui/interactive_gamebase.cc:56
 msgid "PAUSE"
 msgstr "일시정지"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:128
+#: ../../src/wui/interactive_gamebase.cc:130
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"

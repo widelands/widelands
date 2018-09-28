@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 06:56+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -440,7 +440,7 @@ msgid ""
 "our homeland again. But on the other hand, I have the impression that "
 "something went deeply wrong here."
 msgstr ""
-"ええ、ルティウス！たしかに故郷に帰れたはとっても嬉しいわ。でも、何かここの様子がおかしいようにも感じるの、何かが根本的におかしくなっているような…"
+"ええ、ルティウス！たしかに故郷に帰れたことはとっても嬉しいわ。でも、何かここの様子がおかしいようにも感じるの、何かが根本的におかしくなっているような…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:300

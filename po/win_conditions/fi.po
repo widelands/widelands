@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-15 15:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-21 17:14+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -143,15 +143,15 @@ msgstr[1] "%i minuutin"
 #: ../../data/scripting/win_conditions/collectors.lua:168
 msgid "%1% hour and %2%"
 msgid_plural "%1% hours and %2%"
-msgstr[0] "%1% t and %2%"
-msgstr[1] "%1% t and %2%"
+msgstr[0] "%1% tunnin ja %2%"
+msgstr[1] "%1% tunnin ja %2%"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
 #: ../../data/scripting/win_conditions/collectors.lua:171
 msgid "%1% hour"
 msgid_plural "%1% hours"
-msgstr[0] "%1% tunti"
-msgstr[1] "%1% tuntia"
+msgstr[0] "%1% tunnin"
+msgstr[1] "%1% tunnin"
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:175
