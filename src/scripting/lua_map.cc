@@ -6270,7 +6270,7 @@ int LuaField::get_owner(lua_State* L) {
 /* RST
    .. attribute:: is_buildable
 
-      Returns :const:`true` if a flag or building could be built on this field,
+      (RO) Returns :const:`true` if a flag or building could be built on this field,
       independently of whether anybody currently owns this field.
 */
 int LuaField::get_is_buildable(lua_State* L) {
