@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 05:57+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: GunChleoc, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/widelands/teams/35159/ca/)\n"
@@ -59,17 +59,19 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "Feu clic en una de les masoveries."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Obriu la finestra de construcció de la masoveria"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
+"Cliqueu una masoveria per obrir-ne la seva finestra de construcció. Això us "
+"permetrà analitzar l'edifici."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find the construction plans for the farms"
@@ -576,6 +578,9 @@ msgid ""
 "Brother, I'm really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Germà, estic preocupat perquè us he de donar males notícies un altre cop. "
+"Tal com podeu veure, les nostres masoveries no produeixen gens de blat i no "
+"les podem desmantellar."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:327
@@ -604,7 +609,7 @@ msgstr ""
 msgid ""
 "Until we have found the plans, the only option for our farms is to dismantle"
 " them."
-msgstr ""
+msgstr "Fins que trobem els plànols, l'única opció és desmantellar-les."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
@@ -667,6 +672,9 @@ msgid ""
 " desperately. Furthermore, the plans have enabled us to upgrade our old "
 "farms to get to work again."
 msgstr ""
+"Ja podem construir masoveries de blat per produir la cervesa que necessiten "
+"els miners desesperadament. A més a més, els plànols ens permetran reformar "
+"les granges velles per fer que funcionin de nou."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
@@ -913,6 +921,10 @@ msgid ""
 "breweries with the improved technology, we will never know if and how Vesta "
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
+"No estic segur de si ho hem fet de la manera correcta. Sí, hem obtingut els "
+"plànols. Però encara que ara podrem construir molins i cerveseries amb una "
+"tecnologia millorada, mai sabrem si Vesta i les seves sacerdotesses ens "
+"haurien ajudat contra els bàrbars i com ho haurien fet."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:469
@@ -938,6 +950,9 @@ msgid ""
 "wheat. Furthermore, the plans enable us to upgrade our current mill and "
 "brewery with the improved technology."
 msgstr ""
+"Ben fet. Ara podrem construir edificis més eficients per refinar el blat. A "
+"més a més, els plànols ens permetran reformar els molins i cerveseries amb "
+"unes tècniques millors."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:480
@@ -946,6 +961,9 @@ msgid ""
 "water, flour and beer. Now I really think that nothing can prevent us from "
 "getting stronger and taking back our homeland."
 msgstr ""
+"I, el millor de tot, tenim un nou aliat que ens proveirà amb molta aigua, "
+"farina i cervesa. Crec que ja res pot impedir que ens enfortim i recuperem "
+"la nostra terra."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:485
 msgid "Amalea is Satisfied"
@@ -1164,12 +1182,12 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:573
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:592
 msgid "Defeated!"
-msgstr ""
+msgstr "Derrotats!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:593
 msgid "Amalea reports our defeat…"
-msgstr ""
+msgstr "L'Amalea informa de la derrota…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:576
@@ -1177,10 +1195,12 @@ msgid ""
 "Oh no Lutius, I don't know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
+"Oh! No, Lutius! No sé com ha pogut passar, però els bàrbars han saquejat el "
+"quarter general. Hem perdut la batalla i el nostre imperi!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
 msgid "Amalea reports our headquarters lost…"
-msgstr ""
+msgstr "L'Amalea informa de la pèrdua del quarter general…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:584
@@ -1189,6 +1209,8 @@ msgid ""
 "have destroyed our headquarters. So, we can't deliver the wares to Julia "
 "anymore."
 msgstr ""
+"Oh! No, Lutius! No sé com ha pogut passar, però els bàrbars han destruït el "
+"quarter general. No podrem entregar més béns a la Júlia."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:587
@@ -1196,6 +1218,8 @@ msgid ""
 "Now we need to try to fulfil our duties without their technology. But this "
 "will not be an easy task at all."
 msgstr ""
+"Hem de complir les nostres tasques sense la seva tecnologia. No serà fàcil "
+"fer-ho."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:595
@@ -1204,6 +1228,8 @@ msgid ""
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
+"Oh! No, Lutius! No sé com ha pogut passar, però els bàrbars han destruït el "
+"nostre últim magatzem. Hem perdut la batalla i el nostre imperi!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:603
 msgid "Saledus looks very relaxed…"
@@ -1280,6 +1306,10 @@ msgid ""
 "deals with the Barbarians, so, we better keep our soldiers in a good mood "
 "and train them adequately."
 msgstr ""
+"Senyor, admeto que s'ha provat que és un bon tracte, encara que podríem "
+"haver obtingut els plans molt més aviat. De totes maneres, no podrem fer més"
+" tractes amb els bàrbars, així que millor que els soldats estiguin de bon "
+"humor i que els entrenem adequadament."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:639
 msgid "Pride"
@@ -1293,6 +1323,10 @@ msgid ""
 "make any deals with the Barbarians either, so, we better keep our soldiers "
 "in good mood and train them adequately."
 msgstr ""
+"Senyor, admeto que probablement ens hem buscat el ressentiment dels déus, "
+"però en temps de guerra, el fi sovint justifica els mitjans. I tampoc serem "
+"capaços de fer tractes amb els bàrbars, així que millor que els soldats "
+"estiguin de bon humor i que els entrenem adequadament."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:649
 msgid "Saledus asks for a stronger army…"
