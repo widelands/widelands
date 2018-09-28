@@ -33,84 +33,26 @@ return {
 
       -- Configure how long the winner has to hold on to the territory
       local time_to_keep_territory = 20 * 60 -- 20 minutes
-      local remaining_time = time_to_keep_territory -- time in secs, if == 0 -> victory
+      -- time in secs, if == 0 -> victory
+      territory_points.remaining_time = time_to_keep_territory
 
       -- Get all valueable fields of the map
       local fields = get_buildable_fields()
 
-      -- Remember current points for reports
-      local all_player_points = {}
-      local somebody_is_winning = false
+      local function _send_state(points)
+         set_textdomain("win_conditions")
 
-      -- These variables will be used once a player or team owns more than half
-      -- of the map's area
-      local no_winner = {}
-      no_winner["type"] = "none"
-      local winner = no_winner
-
-      local function _calc_points()
-         local last_winner = winner
-         all_player_points = count_owned_fields_for_all_players(fields, plrs)
-         winner = find_winner(all_player_points, plrs)
-
-         -- Check if we are (still) winning
-         if winner["points"] > ( #fields / 2 ) then
-            -- Calculate whether territory was kept or the winner changed. Make sure that the player still exists.
-            if winner["type"] == last_winner["type"] and winner["winner"] == last_winner["winner"] then
-               remaining_time = remaining_time - 30
+         for idx, player in ipairs(plrs) do
+            local msg = ""
+            if territory_points.last_winning_team == player.team or territory_points.last_winning_player == player.number then
+               msg = msg .. winning_status_header() .. vspace(8)
             else
-               remaining_time = time_to_keep_territory
+               msg = msg .. losing_status_header(plrs) .. vspace(8)
             end
-            last_winner = winner
-            somebody_is_winning = true
-         else
-            -- Nobody is currently winning
-            last_winner = no_winner
-            remaining_time = time_to_keep_territory
-            somebody_is_winning = false
+            msg = msg .. vspace(8) .. game_status.body .. territory_status(points, fields, "has")
+         send_message(player, game_status.title, msg, {popup = true})
          end
       end
-
-      local function _send_state()
-         local remaining_minutes = math.max(0, math.floor(remaining_time / 60))
-
-         -- Player might have been defeated since the last time the winner was checked
-         if remaining_minutes > 0 and plrs[winner["winner"]] then
-            set_textdomain("win_conditions")
-            local candidate = plrs[winner["winner"]].name
-            if winner["type"] == "team" then
-               candidate = (_"Team %i"):format(winner["winner"])
-            end
-
-            local msg1 = p(_"%s owns more than half of the map’s area."):format(candidate)
-            msg1 = msg1 .. p(ngettext("You’ve still got %i minute to prevent a victory.",
-                      "You’ve still got %i minutes to prevent a victory.",
-                      remaining_minutes))
-                  :format(remaining_minutes)
-
-            local msg2 = p(_"You own more than half of the map’s area.")
-            msg2 = msg2 .. p(ngettext("Keep it for %i more minute to win the game.",
-                      "Keep it for %i more minutes to win the game.",
-                      remaining_minutes))
-                  :format(remaining_minutes)
-            for idx, player in ipairs(plrs) do
-               if winner["type"] == "team" and winner["winner"] == player.team
-                  or winner["type"] == "player" and winner["winner"] == player.number then
-                  send_message(player, game_status.title, msg2, {popup = true})
-               else
-                  send_message(player, game_status.title, msg1, {popup = true})
-               end
-            end
-         end
-      end
-
-      -- Start a new coroutine that checks for defeated players
-      run(function()
-         while remaining_time ~= 0 do
-            sleep(5000)
-            check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
-         end
-      end)
 
       -- here is the main loop!!!
       while true do
@@ -118,33 +60,17 @@ return {
          sleep(30000)
 
          -- Check if a player or team is a candidate and update variables
-         _calc_points()
+         calculate_territory_points(fields, plrs, wc_descname, wc_version)
 
          -- Do this stuff, if the game is over
-         if remaining_time == 0 then
-            -- For formatting the winner's name
-            local candidate = plrs[winner["winner"]].name
-            if winner["type"] == "team" then
-               candidate = (_"Team %i"):format(winner["winner"])
-            end
-
-            for idx, plr in ipairs(plrs) do
-               plr.see_all = 1
-               if winner["type"] == "team" and winner["winner"] == plr.team
-                  or winner["type"] == "player" and winner["winner"] == plr.number then
-                  plr:send_message(won_game_over.title, won_game_over.body .. p(_"You own more than half of the map’s area."))
-                  wl.game.report_result(plr, 1, make_extra_data(plr, wc_descname, wc_version, {score=all_player_points[plr.number]}))
-               else
-                  plr:send_message(lost_game_over.title, lost_game_over.body .. p(_"%s owns more than half of the map’s area."):format(candidate))
-                  wl.game.report_result(plr, 0, make_extra_data(plr, wc_descname, wc_version, {score=all_player_points[plr.number]}))
-               end
-            end
+         if territory_points.remaining_time == 0 then
+            territory_game_over(fields, plrs, wc_descname, wc_version)
             break
          end
 
          -- If there is a candidate, check whether we have to send an update
-         if somebody_is_winning and remaining_time >= 0 and remaining_time % 300 == 0 then
-            _send_state()
+         if (territory_points.last_winning_team >= 0 or territory_points.last_winning_player >= 0) and territory_points.remaining_time >= 0 and territory_points.remaining_time % 300 == 0 then
+            _send_state(territory_points.points)
          end
       end
    end
