@@ -39,7 +39,7 @@ return {
       -- Get all valueable fields of the map
       local fields = get_buildable_fields()
 
-      local function _send_state(points)
+      local function _send_state()
          set_textdomain("win_conditions")
 
          for idx, player in ipairs(plrs) do
@@ -49,7 +49,7 @@ return {
             else
                msg = msg .. losing_status_header(plrs) .. vspace(8)
             end
-            msg = msg .. vspace(8) .. game_status.body .. territory_status(points, fields, "has")
+            msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
          send_message(player, game_status.title, msg, {popup = true})
          end
       end
@@ -70,7 +70,7 @@ return {
 
          -- If there is a candidate, check whether we have to send an update
          if (territory_points.last_winning_team >= 0 or territory_points.last_winning_player >= 0) and territory_points.remaining_time >= 0 and territory_points.remaining_time % 300 == 0 then
-            _send_state(territory_points.points)
+            _send_state()
          end
       end
    end

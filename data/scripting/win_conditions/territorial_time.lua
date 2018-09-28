@@ -43,7 +43,7 @@ return {
       -- variables to track the maximum 4 hours of gametime
       local remaining_max_time = 4 * 60 * 60 -- 4 hours
 
-      local function _send_state(points)
+      local function _send_state()
          set_textdomain("win_conditions")
 
          local remaining_max_minutes = remaining_max_time // 60
@@ -67,7 +67,7 @@ return {
                             remaining_max_minutes))
                   :format(remaining_max_minutes))
             end
-            msg = msg .. vspace(8) .. game_status.body .. territory_status(points, fields, "has")
+            msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
             send_message(player, game_status.title, msg, {popup = true})
          end
       end
@@ -92,7 +92,7 @@ return {
          if ((remaining_max_time < (30 * 60) and remaining_max_time % (5 * 60) == 0)
                or remaining_max_time % (30 * 60) == 0)
                or territory_points.remaining_time % 300 == 0 then
-            _send_state(territory_points.points)
+            _send_state()
          end
       end
 
