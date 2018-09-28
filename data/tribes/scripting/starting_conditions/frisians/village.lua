@@ -55,7 +55,7 @@ return {
          bread_paddle = 2,
          kitchen_tools = 2,
          felling_ax = 3,
-         needles = 1,
+         needles = 2,
          basket = 2,
          pick = 5,
          shovel = 5,
@@ -82,7 +82,6 @@ return {
          frisians_forester = 2,
          frisians_stonemason = 2,
          frisians_reindeer = 5,
-         frisians_seamstress_master = 1,
       },
       soldiers = {
          [{0,0,0,0}] = 5,
