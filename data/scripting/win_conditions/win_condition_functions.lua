@@ -154,35 +154,37 @@ end
 --    :arg all_player_points:    A table of ``playernumber = points`` entries for all players
 --    :arg plrs:                 A table of all Player objects
 --
---    :returns: A table with ranked player and team points, sorted by points descending. Example::
+--    :returns: A table with ranked player and team points, sorted by points descending. Example:
 --
---      {
---         -- A player without team
---         {
---            team = 0,
---            points = 1000,
---            players = {
---               { "number" = 5, "points" = 1000 }
---            }
---         },
---         -- This team has a draw with player 5
---         {
---            team = 1,
---            points = 1000,
---            players = {
---               { "number" = 2, "points" = 500 }
---               { "number" = 3, "points" = 400 }
---               { "number" = 4, "points" = 100 }
---         },
---         -- Another player without team
---         {
---            team = 0,
---            points = 800,
---            players = {
---               { "number" = 1, "points" = 800 }
---            }
---         },
---      }
+--    .. code-block:: lua
+--
+--       {
+--          -- A player without team
+--          {
+--             team = 0,
+--             points = 1000,
+--             players = {
+--                { "number" = 5, "points" = 1000 }
+--             }
+--          },
+--          -- This team has a draw with player 5
+--          {
+--             team = 1,
+--             points = 1000,
+--             players = {
+--                { "number" = 2, "points" = 500 }
+--                { "number" = 3, "points" = 400 }
+--                { "number" = 4, "points" = 100 }
+--          },
+--          -- Another player without team
+--          {
+--             team = 0,
+--             points = 800,
+--             players = {
+--                { "number" = 1, "points" = 800 }
+--             }
+--          },
+--       }
 --
 function rank_players(all_player_points, plrs)
    local ranked_players_and_teams = {}
