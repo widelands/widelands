@@ -191,7 +191,8 @@ l_all = {
 --       * evade_failure_e
 --       * die_w
 --       * die_e
---      As well as custom walking and idle animations
+--
+--      As well as custom walking and idle animations:
 --       * idle
 --       * walk_ne
 --       * walk_e
