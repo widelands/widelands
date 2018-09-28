@@ -44,9 +44,10 @@ def detect_debian_version():
 def detect_git_revision():
     try:
         git_revnum = subprocess.Popen(
-            'git rev-parse --short HEAD',stdout=subprocess.PIPE,cwd=base_path).stdout.read().rstrip()
+            'git rev-parse --short HEAD',stdout=subprocess.PIPE,cwd=base_path
+			).stdout.read().rstrip().decode('utf-8')
         if git_revnum:
-            return 'unofficial-git-%s' % git_revnum
+            return 'unofficial-git-{}'.format(git_revnum)
     except:
         pass
     return None
