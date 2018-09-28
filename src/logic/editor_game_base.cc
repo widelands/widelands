@@ -540,9 +540,9 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 		change_field_owner(mr.location(), player_area.player_number);
 	} while (mr.advance(map()));
 
-	//  This must reach one step beyond the conquered area to adjust the borders
+	//  This must reach two steps beyond the conquered area to adjust the borders
 	//  of neighbour players.
-	++player_area.radius;
+	player_area.radius += 2;
 	map_.recalc_for_field_area(world(), player_area);
 }
 
@@ -616,7 +616,7 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 		}
 	} while (mr.advance(map()));
 
-	// This must reach one step beyond the conquered area to adjust the borders
+	// This must reach two steps beyond the conquered area to adjust the borders
 	// of neighbour players.
 	player_area.radius += 2;
 	map_.recalc_for_field_area(world(), player_area);
