@@ -90,7 +90,7 @@ function expand_south()
    end
    scroll_to_field(wh.fields[1])
    sleep(3000)
-   p2:forbid_buildings {"empire_fortress", "empire_castle", "empire_barrier", "empire_blockhouse", "empire_tower"}
+   p2:forbid_buildings {"empire_fortress", "empire_castle", "empire_blockhouse", "empire_tower"}
    p3:forbid_buildings {"barbarians_citadel", "barbarians_tower"}
    campaign_message_box(supply_murilius_6)
    campaign_message_box(supply_murilius_7)
@@ -102,15 +102,24 @@ function expand_south()
    set_objective_done(o)
 
    o = add_campaign_objective(obj_supply_murilius)
+   local o_s = add_campaign_objective(obj_scout)
+   local o_p = nil
    local choice = ""
    sleep(30000) -- give the player some time to account for nearly completed buildings
    local milbld = count_military_buildings_p1()
-   local hint_revealed = false
    local scout = nil
    while choice == "" do
       sleep(791)
-      if (not hint_revealed) and (not scout) then
-         -- let's see if a scout is spying in Murilius's terrain
+
+      local milsites = count_military_buildings_p1()
+      if o_p and milsites < milbld then
+         -- the player has dismantled a militarysite, so we assume he understood the poem
+         set_objective_done(o_p)
+         o_p = nil
+      end
+
+      if o_s and not scout then
+         -- let's see if a scout is spying in Murilius's territory
          for i,house in pairs(p1:get_buildings("frisians_scouts_house")) do
             for j,field in pairs(house.fields[1]:region(17)) do -- the scout has a radius of 15
                for k,bob in pairs(field.bobs) do
@@ -130,17 +139,19 @@ function expand_south()
             end
             if scout then break end
          end
-      elseif (not hint_revealed) and scout then
+      elseif o_s and scout then
          if scout.field.immovable and scout.field.immovable.descr.name == "frisians_scouts_house" then
+            set_objective_done(o_s)
             campaign_message_box(expansion_hint)
-            hint_revealed = true
+            o_p = add_campaign_objective(obj_poem)
+            o_s = nil
             scout = nil
          end
       end
 
       if #(p1:get_buildings("frisians_warehouse_empire")) < 1 then
          choice = "destroy"
-      elseif count_military_buildings_p1() > milbld then
+      elseif milsites > milbld then
          -- It *is* permitted to destroy/dismantle a military building and build a new one elsewhere
          choice = "military"
       else
@@ -160,6 +171,13 @@ function expand_south()
             choice = "supply"
          end
       end
+   end
+   -- We don’t need the scout/poem objectives anymore
+   if o_s then
+      set_objective_done(o_s)
+   end
+   if o_p then
+      set_objective_done(o_p)
    end
    set_objective_done(o)
    p2:allow_buildings("all")
@@ -310,6 +328,7 @@ function mission_thread()
    place_building_in_region(p3, "barbarians_rangers_hut", p1_start:region(7))
    reveal_concentric(p1, p1_start, 10, true, 100)
    scroll_to_field(p1_start)
+   sleep(2000)
    campaign_message_box(intro_2)
    include "map:scripting/starting_conditions.lua"
    sleep(5000)

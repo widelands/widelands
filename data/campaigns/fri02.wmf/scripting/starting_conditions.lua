@@ -200,7 +200,7 @@ hq2:set_workers {
    empire_weaponsmith = 1,
    empire_geologist = 2
 }
-hq2:set_soldiers({4,4,0,2}, 30)
+hq2:set_soldiers({4,4,0,2}, 40)
 
 -- =======================================================================
 --                                 Player 3
@@ -292,4 +292,4 @@ hq3:set_workers {
    barbarians_blacksmith_master = 1,
    barbarians_helmsmith = 1
 }
-hq3:set_soldiers({3,5,0,2}, 40)
+hq3:set_soldiers({3,5,0,2}, 50)

@@ -77,6 +77,25 @@ obj_supply_murilius = {
       p(_([[Otherwise, just destroy the warehouse and risk having Murilius as an enemy. He forbade you to expand your territory until the wares have been handed over.]]))
    ),
 }
+obj_scout = {
+   name = "scout",
+   title=_"Spy on Murilius",
+   number = 1,
+   body = objective_text(_"Send a Scout to Spy on the Empire",
+      li(_[[Build a scout’s house near the border to discover the Empire’s secrets.]])
+   ),
+}
+obj_poem = {
+   name = "poem",
+   title=_"Decipher the poem",
+   number = 1,
+   body = objective_text(_"Understand the Poem the Scout has Found in the Empire",
+      p(_([[How many sites where soldiers stay,]])) ..
+      p(_([[How many sites where thou hold’st sway,]])) ..
+      p(_([[Though not their whereabouts sees he]])) ..
+      p(_([[Who’s ordering around here thee!]]))
+   ),
+}
 obj_defeat_barbarians = {
    name = "defeat_barbarians",
    title=_"Defeat the Barbarians!",
@@ -299,7 +318,11 @@ supply_murilius_9 = {
       _([[This is the greatest outrage of all. How dare he order us to stop expanding our territory when all we want is to build a new home, and threaten us with war if we refuse to be his slaves?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Supply Murilius 9
-      _([[I’d like to say we should attack him right now, but I fear we aren’t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time. As for expansion – I wonder how strictly he can possibly control us. Perhaps we should send a scout to spy on him…]])),
+      _([[I’d like to say we should attack him right now, but I fear we aren’t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Reebaud – Supply Murilius 9
+      _([[As for expansion – I wonder how strictly he can possibly control us. Perhaps we should send a scout to spy on him…]]))
+      .. new_objectives(obj_scout),
 }
 
 expansion_hint = {
@@ -321,7 +344,8 @@ expansion_hint = {
       space(10) .. (_([[Who’s ordering around here thee!]]))
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Expansion hint
-      _([[I don’t know what it means, but I’m sure it’s important. Perhaps you can make some sense of it.]])),
+      _([[I don’t know what it means, but I’m sure it’s important. Perhaps you can make some sense of it.]]))
+      .. new_objectives(obj_poem),
 }
 
 supply_murilius_destroy = {
