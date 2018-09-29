@@ -58,6 +58,7 @@ return {
             barbarians_geologist = 4,
             barbarians_lumberjack = 2,
             barbarians_miner = 4,
+            barbarians_miner_master = 4,
             barbarians_ranger = 1,
             barbarians_stonemason = 2,
             barbarians_trainer = 3,

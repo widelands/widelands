@@ -26,7 +26,6 @@
 
 #include "base/macros.h"
 #include "economy/routing_node.h"
-#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/walkingdir.h"
 
@@ -163,17 +162,14 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void add_flag_job(Game&, DescriptionIndex workerware, const std::string& programname);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          float scale,
-	          RenderTarget* dst) override;
+	void
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 	static void
 	flag_job_request_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);

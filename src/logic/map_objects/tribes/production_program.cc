@@ -467,9 +467,11 @@ ProductionProgram::ActReturn::ActReturn(char* parameters,
 			result_ = Completed;
 		else if (match(parameters, "skipped"))
 			result_ = Skipped;
+		else if (match(parameters, "no_stats"))
+			result_ = None;
 		else
-			throw GameDataError(
-			   "expected %s but found \"%s\"", "{\"failed\"|\"completed\"|\"skipped\"}", parameters);
+			throw GameDataError("expected %s but found \"%s\"",
+			                    "{\"failed\"|\"completed\"|\"skipped\"|\"no_stats\"}", parameters);
 
 		if (skip(parameters)) {
 			if (match_force_skip(parameters, "when")) {
@@ -1161,10 +1163,11 @@ void ProductionProgram::ActMine::execute(Game& game, ProductionSite& ps) const {
 			totalstart += start_amount;
 			totalchance += 8 * amount;
 
-			//  Add penalty for fields that are running out
+			// Add penalty for fields that are running out
+			// Except for totally depleted fields or wrong ressource fields
+			// if we already know there is no ressource (left) we won't mine there
 			if (amount == 0)
-				// we already know it's completely empty, so punish is less
-				totalchance += 1;
+				totalchance += 0;
 			else if (amount <= 2)
 				totalchance += 6;
 			else if (amount <= 4)

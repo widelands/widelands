@@ -117,7 +117,7 @@ struct Ship : Bob {
 
 	uint32_t calculate_sea_route(Game& game, PortDock& pd, Path* finalpath = nullptr) const;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	uint32_t get_nritems() const {
 		return items_.size();
@@ -196,7 +196,7 @@ struct Ship : Bob {
 	}
 
 	// whether the ship's expedition is in state "island-exploration" (circular movement)
-	bool is_exploring_island() {
+	bool is_exploring_island() const {
 		return expedition_->island_exploration;
 	}
 
@@ -230,13 +230,7 @@ struct Ship : Bob {
 
 	void exp_cancel(Game&);
 	void sink_ship(Game&);
-
-protected:
-	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
-	          const Vector2f& field_on_dst,
-	          float scale,
-	          RenderTarget* dst) const override;
+	std::string info_string(MapObject::InfoStringType format) override;
 
 private:
 	friend struct Fleet;

@@ -739,7 +739,7 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 	return true;
 }
 
-void ProductionSite::log_general_info(const EditorGameBase& egbase) {
+void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	molog("is_stopped: %u\n", is_stopped_);
@@ -941,6 +941,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
 	case None:
+		skipped_programs_.erase(program_name);
 		break;
 	}
 

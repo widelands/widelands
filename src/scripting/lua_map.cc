@@ -1386,6 +1386,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
    PROP_RO(LuaTribeDescription, immovables),
+   PROP_RO(LuaTribeDescription, resource_indicators),
    PROP_RO(LuaTribeDescription, name),
    PROP_RO(LuaTribeDescription, port),
    PROP_RO(LuaTribeDescription, ship),
@@ -1490,6 +1491,29 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 		lua_pushinteger(L, ++counter);
 		to_lua<LuaImmovableDescription>(
 		   L, new LuaImmovableDescription(tribe.get_immovable_descr(immovable)));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: resource_indicators
+
+      (RO) the table `resource_indicators` as defined in the tribe's `tribename.lua`.
+      See `data/tribes/atlanteans.lua` for more information on the table structure.
+*/
+int LuaTribeDescription::get_resource_indicators(lua_State* L) {
+	const TribeDescr& tribe = *get();
+	lua_newtable(L);
+	const ResourceIndicatorSet resis = tribe.resource_indicators();
+	for (const auto& resilist : resis) {
+		lua_pushstring(L, resilist.first);
+		lua_newtable(L);
+		for (const auto& resi : resilist.second) {
+			lua_pushinteger(L, resi.first);
+			lua_pushstring(L, tribe.get_immovable_descr(resi.second)->name());
+			lua_settable(L, -3);
+		}
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -4569,7 +4593,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 
 	if (is_a(Game, &egbase)) {
-		PortDock* pd = get(L, egbase)->get_portdock();
+		const PortDock* pd = get(L, egbase)->get_portdock();
 		if (pd) {
 			if (pd->expedition_started()) {
 				return 1;
@@ -4932,7 +4956,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		PortDock* pd = wh->get_portdock();
+		const PortDock* pd = wh->get_portdock();
 		if (!pd) {
 			return 0;
 		}
@@ -4963,7 +4987,7 @@ int LuaWarehouse::cancel_expedition(lua_State* L) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		PortDock* pd = wh->get_portdock();
+		const PortDock* pd = wh->get_portdock();
 		if (!pd) {
 			return 0;
 		}

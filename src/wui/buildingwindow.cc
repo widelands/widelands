@@ -204,7 +204,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 	if (can_act) {
 		// Check if this is a port building and if yes show expedition button
 		if (upcast(Widelands::Warehouse const, warehouse, building)) {
-			if (Widelands::PortDock* pd = warehouse->get_portdock()) {
+			if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 				expeditionbtn_ = new UI::Button(
 				   capsbuttons, "start_or_cancel_expedition", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
 				   g_gr->images().get("images/wui/buildings/start_expedition.png"));
@@ -537,7 +537,7 @@ void BuildingWindow::toggle_workarea() {
 
 void BuildingWindow::create_input_queue_panel(UI::Box* const box,
                                               Widelands::Building& b,
-                                              Widelands::InputQueue* const iq,
+                                              const Widelands::InputQueue& iq,
                                               bool show_only) {
 	// The *max* width should be larger than the default width
 	box->add(new InputQueueDisplay(box, 0, 0, *igbase(), b, iq, show_only));

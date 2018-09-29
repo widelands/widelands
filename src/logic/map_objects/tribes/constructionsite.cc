@@ -337,7 +337,6 @@ Draw the construction site.
 ===============
 */
 void ConstructionSite::draw(uint32_t gametime,
-                            TextToDraw draw_text,
                             const Vector2f& point_on_dst,
                             float scale,
                             RenderTarget* dst) {
@@ -359,8 +358,5 @@ void ConstructionSite::draw(uint32_t gametime,
 	}
 
 	info_.draw(point_on_dst, scale, player_color, dst);
-
-	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
 }
 }
