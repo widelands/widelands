@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 05:57+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Hahn <giggeler53@gmail.com>, 2018\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -61,17 +61,19 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "Klicke einen Bauernhof an"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Öffne das Gebäudefenster eines Bauernhofs"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
+"Klicke einen Bauernhof an, um sein Gebäudefenster zu öffnen. Das wird dir "
+"die Analyse des Gebäudes ermöglichen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find the construction plans for the farms"
@@ -585,6 +587,9 @@ msgid ""
 "Brother, I'm really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Bruder, ich mag es nicht, dir schon wieder schlechte Nachrichten zu bringen."
+" Wie du sehen kannst, stellen unsere Bauernhöfe nichts her und wir können "
+"sie nicht abreißen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:327
@@ -616,6 +621,8 @@ msgid ""
 "Until we have found the plans, the only option for our farms is to dismantle"
 " them."
 msgstr ""
+"Bis wir die Pläne gefunden haben, haben wir lediglich die Möglichkeit, "
+"unsere Bauernhöfe zu zerstören."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
@@ -679,6 +686,9 @@ msgid ""
 " desperately. Furthermore, the plans have enabled us to upgrade our old "
 "farms to get to work again."
 msgstr ""
+"Nun können wir Bauernhöfe bauen und das Bier brauen, das unsere Bergleute so"
+" verzweifelt benötigen. Die Pläne haben es uns auch ermöglicht, unsere alten"
+" Bauernhöfe auszubauen, um sie wieder arbeitsfähig zu machen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
@@ -934,6 +944,11 @@ msgid ""
 "breweries with the improved technology, we will never know if and how Vesta "
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
+"Ich bin mir nicht sicher, ob wir das Richtige getan haben. Ja, wir haben die"
+" Pläne erhalten. Aber obwohl wir nun in der Lage sind, unsere Mühlen und "
+"Brauereien mit der verbesserten Technologie zu bauen und aufzurüsten, werden"
+" wir nie wissen, ob und wie Vesta und ihre Priesterinnen uns gegen die "
+"Barbaren hätten helfen können."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:469
@@ -959,6 +974,9 @@ msgid ""
 "wheat. Furthermore, the plans enable us to upgrade our current mill and "
 "brewery with the improved technology."
 msgstr ""
+"Gut gemacht. Jetzt sind wir in der Lage, effizientere Gebäude zu bauen, um "
+"unseren Weizen zu verarbeiten. Weiterhin ermöglichen uns die Pläne, unsere "
+"gegenwärtigen Mühlen und Brauereien mit der neuen Technologie aufzurüsten."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:480
@@ -967,6 +985,10 @@ msgid ""
 "water, flour and beer. Now I really think that nothing can prevent us from "
 "getting stronger and taking back our homeland."
 msgstr ""
+"Und das Beste ist, dass wir einen neuen Verbündeten haben, der uns soeben "
+"eine Menge Wasser, Mehl und Bier zur Verfügung gestellt hat. Nun glaube ich "
+"wirklich, dass uns nichts daran hindern kann, stärker zu werden und unsere "
+"Heimat zurückzuerobern."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:485
 msgid "Amalea is Satisfied"
@@ -1189,12 +1211,12 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:573
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:592
 msgid "Defeated!"
-msgstr ""
+msgstr "Besiegt!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:593
 msgid "Amalea reports our defeat…"
-msgstr ""
+msgstr "Amalea meldet unsere Niederlage …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:576
@@ -1202,10 +1224,13 @@ msgid ""
 "Oh no Lutius, I don't know how this could have happened, but the Barbarians "
 "have sacked our headquarters. So, we have lost this battle and our empire!"
 msgstr ""
+"Oh nein Lutius, ich weiß nicht, wie das geschehen konnte, aber die Barbaren "
+"haben unser Hauptquartier überrannt. Nun haben wir diese Schlacht und unser "
+"Imperium verloren!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
 msgid "Amalea reports our headquarters lost…"
-msgstr ""
+msgstr "Amalea meldet den Verlust unseres Hauptquartiers …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:584
@@ -1214,6 +1239,9 @@ msgid ""
 "have destroyed our headquarters. So, we can't deliver the wares to Julia "
 "anymore."
 msgstr ""
+"Oh nein Lutius, ich weiß nicht, wie das geschehen konnte, aber die Barbaren "
+"haben unser Hauptquartier zerstört. Nun können wir die Waren nicht mehr an "
+"Julia liefern."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:587
@@ -1221,6 +1249,8 @@ msgid ""
 "Now we need to try to fulfil our duties without their technology. But this "
 "will not be an easy task at all."
 msgstr ""
+"Nun müssen wir versuchen, all unsere Aufgaben ohne ihre Technologie zu "
+"erfüllen. Aber das wird keine leichte Aufgabe sein."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:595
@@ -1229,6 +1259,9 @@ msgid ""
 "have destroyed our last warehouse. So, we have lost this battle and our "
 "empire!"
 msgstr ""
+"Oh nein Lutius, ich weiß nicht, wie das geschehen konnte, aber die Barbaren "
+"haben unser letztes Lagerhaus zerstört. Nun haben wir diese Schlacht und "
+"unser Imperium verloren!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:603
 msgid "Saledus looks very relaxed…"
@@ -1305,6 +1338,10 @@ msgid ""
 "deals with the Barbarians, so, we better keep our soldiers in a good mood "
 "and train them adequately."
 msgstr ""
+"Herr, ich gebe zu, dass sich das als guter Handel erwiesen hat, auch wenn "
+"wir die Pläne wesentlich früher hätten haben können. Wie dem auch sei, wir "
+"werden kaum mit den Barbaren verhandeln können, daher sollten wir unsere "
+"Soldaten besser in guter Stimmung halten und sie angemessen trainieren."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:639
 msgid "Pride"
@@ -1318,6 +1355,11 @@ msgid ""
 "make any deals with the Barbarians either, so, we better keep our soldiers "
 "in good mood and train them adequately."
 msgstr ""
+"Herr, ich gebe zu, dass wir sehr wahrscheinlich den Zorn der Götter auf uns "
+"gezogen haben, aber in Kriegszeiten heiligt der Zweck manchmal die Mittel. "
+"Und da wir nicht mit den Barbaren werden verhandeln können, sollten wir "
+"unsere Soldaten besser in guter Stimmung halten und sie angemessen "
+"trainieren."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:649
 msgid "Saledus asks for a stronger army…"

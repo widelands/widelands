@@ -137,10 +137,11 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 		totalres += amount;
 		totalchance += 8 * amount;
 
-		// Add penalty for fields that are running out
+		//  Add penalty for fields that are running out
+		//  Except for totally depleted fields or wrong ressource fields
+		//  if we already know there is no ressource (left) we won't mine there
 		if (amount == 0)
-			// we already know it's completely empty, so punish is less
-			totalchance += 1;
+			totalchance += 0;
 		else if (amount <= 2)
 			totalchance += 6;
 		else if (amount <= 4)
@@ -962,15 +963,14 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
-		   MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
+		   MapObjectDescr::OwnerType::kTribe, get_owner());
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
-			const int width = g_gr->images().get(rdescr->representative_image())->width();
 			const std::string message =
-			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
+			   (boost::format("<div padding_r=10><p><img object=%s></p></div>"
 			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-			    width % rdescr->representative_image() % UI_FONT_SIZE_MESSAGE %
+			    ri.descr().name() % UI_FONT_SIZE_MESSAGE %
 			    _("A geologist found resources."))
 			      .str();
 
@@ -979,7 +979,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			get_owner()->add_message_with_timeout(
 			   game, std::unique_ptr<Message>(
 			            new Message(Message::Type::kGeologists, game.get_gametime(),
-			                        rdescr->descname(), ri.descr().icon_filename(),
+			                        rdescr->descname(), rdescr->representative_image(),
 			                        rdescr->descname(), message, position, serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
@@ -2976,7 +2976,6 @@ void Worker::draw_inner(const EditorGameBase& game,
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw(const EditorGameBase& egbase,
-                  const TextToDraw&,
                   const Vector2f& field_on_dst,
                   const float scale,
                   RenderTarget* dst) const {

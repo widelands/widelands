@@ -42,6 +42,7 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
+      trainingsites_max_percent = 40,
       prohibited_till = 1500,
       very_weak_ai_limit = 0,
       weak_ai_limit = 1
@@ -171,7 +172,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier health 1", -- Because the soldier can be expelled by the player
             "consume=helmet_golden honey_bread,mead smoked_fish,smoked_meat",
             "train=soldier health 1 2",
-            "produce=scrap_iron:2"
+            "produce=scrap_iron"
          }
       },
    },

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-27 11:40+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 14:13+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgid ""
 "What has become of our Empire? I really ask this question – why did my king "
 "forbid me from fighting against that monstrous Barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
-msgstr "Wat is blot ut uns Latiensken Riek worden? Dat fraag ick würrelk – waarum hett min König mi unnerseggt, mit düssem verfuterten Willen Volk to fechten, dat sük eerst as Fründ upspöölt hett, um miene Soldaten dann um Middernacht antogriepen?"
+msgstr "Wat is blot ut uns Latiensken Riek worden? Dat fraag ick würrelk – waarum hett min König mi unnerseggt, mit deesem verfuterten Willen Volk to fechten, dat sük eerst as Fründ upspöölt hett, um miene Soldaten dann um Middernacht antogriepen?"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:83
@@ -127,7 +127,7 @@ msgid ""
 "He did not want new land and did not want our land, but he told me that THIS"
 " forest was their land – and it would stay theirs until the spirits took the"
 " last man of his folk!"
-msgstr "Aber in de fievde Nacht, as wi daar wassen, hebben se uns um nix angrepen. Ick hebb umbi hunnert gode Lüü verloren, un ick wurr inspunnen un to hör Anföhrer versleept. He hett mi mit Verachtung befohlen, düsses Land bit to ewige Dagen to verlaten. He will, see he, keen neies un ok nich uns Land, aber düsse Wald sall SIEN Land blieven – sien Land blieven, bit de Geister de leste Mann in sienem Volk halen!"
+msgstr "Aber in de fievde Nacht, as wi daar wassen, hebben se uns um nix angrepen. Ick hebb umbi hunnert gode Lüü verloren, un ick wurr inspunnen un to hör Anföhrer versleept. He hett mi mit Verachtung befohlen, deeses Land bit to ewige Dagen to verlaten. He will, see he, keen neies un ok nich uns Land, aber deese Wald sall SIEN Land blieven – sien Land blieven, bit de Geister de leste Mann in sienem Volk halen!"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:89
@@ -136,7 +136,7 @@ msgid ""
 "furious at the Barbarians, yet forbade any attack on these tribes. He "
 "believed that our army was too weak to survive in a war against the "
 "Barbarians."
-msgstr "Dree Weken naher was ick torügg in Freemilt, um mit de König to spreken. He was güünsk över de Willen Lüü, versee mir aber, düsse Völker antogriepen. He meende, uns Soldateree is to swack, düsse Willen Lüü im Krieg to manntjen."
+msgstr "Dree Weken naher was ick torügg in Freemilt, um mit de König to spreken. He was güünsk över de Willen Lüü, versee mir aber, deese Völker antogriepen. He meende, uns Soldateree is to swack, deese Willen Lüü im Krieg to manntjen."
 
 #. TRANSLATORS: Lutius - Diary. Gulf of Perl is a place name.
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:92
@@ -145,7 +145,7 @@ msgid ""
 "these Barbarians. So, I left Fremil by boat to find a new world and a new "
 "life for myself, somewhere in the south. Now I am sailing on the Gulf of "
 "Perl with my family, some of my friends and a few of my best warriors."
-msgstr "Ick wuss nich, wo ick mien Schann ohne eene Slacht tegen de Willen Lüü liekmaken kann. Also hebb ick Freemilt up eenem Schipp verlaten, um eene neie Heimaad un een neies Leven to finnen, enerwaar im Süden. Upstünds seil ick in de Parrelsbucht mit mien Familie, enigen Frünnen un een paar vun mienen besten Soldaten."
+msgstr "Ick wuss nich, wo ick mien Schann ohne eene Slacht tegen de Willen Lüü liekmaken kann. Also hebb ick Freemilt up eenem Schipp verlaten, um eene neie Heimaad un een neies Leven to finnen, enerwaar im Süden. Upstünds seil ick in de Parrelsbucht mit mien Familie, eenigen Frünnen un een paar vun mienen besten Soldaten."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:98
 msgid "The Rough Sea"
@@ -165,7 +165,7 @@ msgstr "In de Parrelsbucht to seilen was een groter Fehler. De See is tegen uns 
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank"
 " the Gods if we survive this black night with our lives."
-msgstr "Uns Schipp is heel un dall in de Dutt un vull mit Lecks. Wi mutten de Gotten Loff un Dank seggen, wenn wi düsse swarte Nacht överleven."
+msgstr "Uns Schipp is heel un dall in de Dutt un vull mit Lecks. Wi mutten de Gotten Loff un Dank seggen, wenn wi deese swarte Nacht överleven."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:110
 msgid "Survivors"
@@ -190,11 +190,11 @@ msgid ""
 "It really seems as if we have landed under the only palm trees existing in "
 "this far-away sandy desert. I fear we won’t find the help we need to get our"
 " ship repaired in good time."
-msgstr "Wi sünd woll unner de eenzigsten Palmen in de ganze frömde sandige Wüüst lannt. Ick bün bange, dat wi hier nich de Hülp finnen könen, de wi bruken,  um dat Schipp tiedig to repareren."
+msgstr "Wi sünd woll unner de eenzigsten Palmen in de ganze frömde sandige Wüüst lannt. Ick bün bange, dat wi hier nich de Hülp finnen könen, de wi bruken, um dat Schipp tiedig to repareren."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:125
 msgid "A Foreboding"
-msgstr "Een banges Vorgeföhl"
+msgstr "Een banges Vörgeföhl"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:126
 msgid "Saledus looks around nervously…"
@@ -206,7 +206,7 @@ msgid ""
 "Sire, I fear we are not safe in this foreign land. Who knows what terrible "
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
-msgstr "Mienheer, mi is bang, dat wi in düssem frömden Land nich seker sünd. Well weet, wat för grieselke Deerten achtern de Wald in de gewaltige Wüüst leven? Wat wenn düsse Beesten de Wald betreden un uns angriepen willen?"
+msgstr "Mienheer, mi is bang, dat wi in deesem frömden Land nich seker sünd. Well weet, wat för grieselke Deerten achtern de Wald in de gewaltige Wüüst leven? Wat wenn deese Beesten de Wald betreden un uns angriepen willen?"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:131
@@ -319,7 +319,7 @@ msgstr "De Saagmöhlen is beschickt, wi könen nu Planken ut de de Boomstammen v
 msgid ""
 "But the bad news is that our lumberjacks harvest at an incredible speed. "
 "There are almost no trees left on this island."
-msgstr "Aber de lepe Naricht is, dat uns Boomhauers unbannig gau bi'm Arnten sünd. Up de Insel stahn haast keene Bomen mehr."
+msgstr "Aber de lepe Naricht is, dat uns Boomhauers unbannig gau bi’m Arnten sünd. Up de Insel stahn haast keene Bomen mehr."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:191
@@ -327,7 +327,7 @@ msgid ""
 "These trees provide shelter from the sandstorms that sweep in from the "
 "desert, and shade on the hot days, and they are the home of many gentle "
 "animals. We shouldn’t leave this island a complete desert."
-msgstr "De Bomen schütten uns vun de Sandstörmen vun de Wüüst un geven uns an heten Dagen Scharr, un mennig levelk Deerten wohnen daar. Wi sallen düsse Insel nich kumpleet tur Wüüst maken."
+msgstr "De Bomen schütten uns vun de Sandstörmen vun de Wüüst un geven uns an heten Dagen Scharr, un mennig levelk Deerten wohnen daar. Wi sallen deese Insel nich kumpleet tur Wüüst maken."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:194
@@ -354,7 +354,7 @@ msgstr "Mienheer, ick hebb över de Stenen an de Südküste vun de Insel nadenkt
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
-msgstr "Uns Schipp to repareren düürt sowieso enige Weken, un wat wi nu arnten, kann de Grundlage för grote, machtige Husen in eenem annern Land sien."
+msgstr "Uns Schipp to repareren düürt sowieso eenige Weken, un wat wi nu arnten, kann de Grundlage för grote, machtige Husen in eenem annern Land sien."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:212
 msgid "A Step Forward"
@@ -370,7 +370,7 @@ msgid ""
 "Sire, today we got a lot closer to our first castle. The quarry to the south"
 " began its work today and will soon provide us with granite and beautiful "
 "marble."
-msgstr "Mienheer, wi könen bold een eerstes Slött bauen. Dat Flintslagerhuus im Süden arbeidt siet vundaag un versörgt uns vun nu an mit Flint un mojen Marmel."
+msgstr "Mienheer, wi könen bold een eerstes Slött bauen. Dat Flintslagerhuus im Süden arbeidt siet vandaag un versörgt uns vun nu an mit Flint un mojen Marmel."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:218
@@ -387,14 +387,14 @@ msgid ""
 "Today I got the message that our ship is completely repaired. At the moment,"
 " my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
-msgstr "Ick hebb vundaag höört, dat uns Schipp weer klaar is. Miene Lüü laden upstünds alls in uns nei pleistert Schipp un hopen, dat 't uns nu beter deent as lestes Maal."
+msgstr "Ick hebb vandaag höört, dat uns Schipp weer klaar is. Miene Lüü laden upstünds alls in uns nei pleistert Schipp un hopen, dat 't uns nu beter deent as lestes Maal."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:229
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
-msgstr "Vunnacht is uns leste Nacht up düsse Insel. Mörgen froh verlaten wi se un söken na eener neien Stee för uns Exil."
+msgstr "Vunnacht is uns leste Nacht up deese Insel. Mörgen froh verlaten wi se un söken na eener neien Stee för uns Exil."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:232
@@ -409,7 +409,7 @@ msgstr "Sieg"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "Du hest düsse Rutfödderung ofsloten.  Wenn du willt, kannst du wiederspölen, anners de token Rutfödderung anfangen."
+msgstr "Du hest deese Rutfödderung ofsloten. Wenn du willt, kannst du wiederspölen, anners de token Rutfödderung anfangen."
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:239
 msgid "Safe Peninsula"
@@ -424,7 +424,7 @@ msgstr "Saledus spreckt:"
 msgid ""
 "Sire, you have made this peninsula a very secure place. Now it’s time to "
 "move on!"
-msgstr "Mienheer, düsse Uthamm is nu bannig seker. Nu maak aber wieder!"
+msgstr "Mienheer, deese Uthamm is nu bannig seker. Nu maak aber wieder!"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format

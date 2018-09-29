@@ -1,5 +1,3 @@
--- TODO(GunChleoc): get resi_00.png from C++
-
 include "tribes/scripting/help/format_help.lua"
 
 -- RST
@@ -46,15 +44,24 @@ end
 --    :arg text: comment of the image.
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies_resi(resource, items, text)
+function dependencies_resi(tribename, resource, items, text)
    if not text then
       text = ""
    end
-   local items_with_resouce = { "tribes/immovables/" .. resource  .. "/idle_00.png" }
-   for count, item in pairs(items) do
-      table.insert(items_with_resouce, item.icon_name)
+   local tribe_descr = wl.Game():get_tribe_description(tribename)
+   local resi
+   local am = 0
+   for amount,name in pairs(tribe_descr.resource_indicators[resource]) do
+      if amount > am then
+         resi = name
+         am = amount
+      end
    end
-   return dependencies_basic(items_with_resouce, text)
+   local items_with_resource = { wl.Game():get_immovable_description(resi).representative_image }
+   for count, item in pairs(items) do
+      table.insert(items_with_resource, item.icon_name)
+   end
+   return dependencies_basic(items_with_resource, text)
 end
 
 
@@ -301,8 +308,8 @@ function building_help_dependencies_production(tribe, building_description)
          elseif(resi_name == "quartz") then resi_name = "stones"
          elseif(resi_name == "marble") then resi_name = "stones"
          elseif(resi_name == "gold_ore") then resi_name = "gold" end
-         result = result .. dependencies_resi(
-            "resi_"..resi_name.."2",
+         result = result .. dependencies_resi(tribe.name,
+            resi_name,
             {building_description, ware_description},
             ware_description.descname
          )
@@ -658,6 +665,9 @@ function building_help_crew_string(tribe, building_description)
             result = result .. h3(ngettext("Worker uses:","Workers use:", number_of_workers)) .. tool_string
          end
       end
+
+      worker_description = building_description.working_positions[1]
+      becomes_description = worker_description.becomes
 
       if (becomes_description) then
          result = result .. help_worker_experience(worker_description, becomes_description)

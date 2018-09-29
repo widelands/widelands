@@ -95,10 +95,20 @@ public:
 	}
 
 	void show_game_summary();
+	/// For the game host. Show a window and ask the host player what to do with the tribe of the
+	/// leaving client.
+	bool show_game_client_disconnected();
 	void postload() override;
 	void start() override;
 
 protected:
+	/// Draws census and statistics on screen for the listed mapobjects
+	void draw_mapobject_infotexts(
+	   RenderTarget* dst,
+	   float scale,
+	   const std::vector<std::pair<Vector2i, Widelands::MapObject*>>& mapobjects_to_draw_text_for,
+	   const TextToDraw text_to_draw,
+	   const Widelands::Player* plr) const;
 	void draw_overlay(RenderTarget&) override;
 
 	GameMainMenuWindows main_windows_;
@@ -107,6 +117,7 @@ protected:
 	PlayerType playertype_;
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
+	UI::UniqueWindow::Registry client_disconnected_;
 	UI::Button* toggle_buildhelp_;
 	UI::Button* reset_zoom_;
 
