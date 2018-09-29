@@ -3003,7 +3003,7 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
 };
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
    PROP_RO(LuaWorkerDescription, becomes),           PROP_RO(LuaWorkerDescription, buildcost),
-   PROP_RO(LuaWorkerDescription, employers),         PROP_RO(LuaWorkerDescription, is_buildable),
+   PROP_RO(LuaWorkerDescription, employers),         PROP_RO(LuaWorkerDescription, buildable),
    PROP_RO(LuaWorkerDescription, needed_experience), {nullptr, nullptr, nullptr},
 };
 
@@ -3079,12 +3079,11 @@ int LuaWorkerDescription::get_employers(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: is_buildable
+   .. attribute:: buildable
 
       (RO) returns true if this worker is buildable
 */
-// TODO(GunChleoc): Rename to "buildable" for consistency
-int LuaWorkerDescription::get_is_buildable(lua_State* L) {
+int LuaWorkerDescription::get_buildable(lua_State* L) {
 	lua_pushboolean(L, get()->is_buildable());
 	return 1;
 }
