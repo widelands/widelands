@@ -29,7 +29,6 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -464,40 +463,6 @@ void MapObject::cleanup(EditorGameBase& egbase) {
 	egbase.objects().remove(*this);
 }
 
-void MapObject::do_draw_info(const TextToDraw& draw_text,
-                             const std::string& census,
-                             const std::string& statictics,
-                             const Vector2f& field_on_dst,
-                             float scale,
-                             RenderTarget* dst) const {
-	if (draw_text == TextToDraw::kNone) {
-		return;
-	}
-
-	// Rendering text is expensive, so let's just do it for only a few sizes.
-	// The forumla is a bit fancy to avoid too much text overlap.
-	scale = std::round(2.f * (scale > 1.f ? std::sqrt(scale) : std::pow(scale, 2.f))) / 2.f;
-	if (scale < 1.f) {
-		return;
-	}
-	const int font_size = scale * UI_FONT_SIZE_SMALL;
-
-	// We always render this so we can have a stable position for the statistics string.
-	std::shared_ptr<const UI::RenderedText> rendered_census =
-	   UI::g_fh->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
-	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
-	if (draw_text & TextToDraw::kCensus) {
-		rendered_census->draw(*dst, position, UI::Align::kCenter);
-	}
-
-	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
-		std::shared_ptr<const UI::RenderedText> rendered_statistics =
-		   UI::g_fh->render(as_condensed(statictics, UI::Align::kCenter, font_size));
-		position.y += rendered_census->height() + text_height(font_size) / 4;
-		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
-	}
-}
-
 const Image* MapObject::representative_image() const {
 	return descr().representative_image(get_owner() ? &get_owner()->get_playercolor() : nullptr);
 }
@@ -538,7 +503,7 @@ void MapObject::set_logsink(LogSink* const sink) {
 	logsink_ = sink;
 }
 
-void MapObject::log_general_info(const EditorGameBase&) {
+void MapObject::log_general_info(const EditorGameBase&) const {
 }
 
 /**
@@ -567,6 +532,10 @@ bool MapObject::is_reserved_by_worker() const {
 
 void MapObject::set_reserved_by_worker(bool reserve) {
 	reserved_by_worker_ = reserve;
+}
+
+std::string MapObject::info_string(const InfoStringType) {
+	return "";
 }
 
 constexpr uint8_t kCurrentPacketVersionMapObject = 2;

@@ -21,6 +21,9 @@
 
 #include <boost/test/unit_test.hpp>
 
+#ifdef _WIN32
+#include "base/log.h"
+#endif
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -51,6 +54,9 @@ struct TestingFlag : public Flag {
 /*************************************************************************/
 struct WlTestFixture {
 	WlTestFixture() {
+#ifdef _WIN32
+		set_logging_dir();
+#endif
 		g_fs = new LayeredFileSystem();
 	}
 	~WlTestFixture() {

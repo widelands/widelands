@@ -82,7 +82,7 @@ void ProductionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_want
 
 		for (uint32_t i = 0; i < inputqueues.size(); ++i) {
 			prod_box->add(
-			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, inputqueues[i]));
+			   new InputQueueDisplay(prod_box, 0, 0, *igbase(), *production_site, *inputqueues[i]));
 		}
 
 		get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), prod_box, _("Wares"));

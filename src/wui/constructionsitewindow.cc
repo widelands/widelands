@@ -55,7 +55,7 @@ void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wa
 	// Add the wares queue
 	for (uint32_t i = 0; i < construction_site->get_nrwaresqueues(); ++i)
 		box.add(new InputQueueDisplay(
-		   &box, 0, 0, *igbase(), *construction_site, construction_site->get_waresqueue(i)));
+		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_waresqueue(i)));
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 

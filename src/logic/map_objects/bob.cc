@@ -758,7 +758,6 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const TextToDraw&,
                const Vector2f& field_on_dst,
                const float scale,
                RenderTarget* dst) const {
@@ -902,7 +901,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 }
 
 /// Give debug information.
-void Bob::log_general_info(const EditorGameBase& egbase) {
+void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF;
 	molog("Owner: %p\n", owner_);
 	FORMAT_WARNINGS_ON;

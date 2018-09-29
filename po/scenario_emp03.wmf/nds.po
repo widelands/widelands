@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-01 06:47+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -52,7 +52,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
-msgstr "Bau eene Boomhaueree, eene Saagmöhlen un een Steenbickerhuus."
+msgstr "Bau eene Boomhaueree, eene Saagmöhlen un een Steenbickerhuus"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:67
 msgid "Lumberjack, Sawmill and Stonemason"
@@ -113,7 +113,7 @@ msgstr "Schippen-Wirtschaft"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:96
 msgid "Build a port to set sail from this island."
-msgstr "Bau eene Muu, um vun düssee Insel to seilen."
+msgstr "Bau eene Muu, um vun deeser Insel to seilen."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:97
 msgid "Build a shipyard to produce the ships to sail on."
@@ -200,7 +200,7 @@ msgstr "Manntje de Feind"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "End the Barbarians’ existence in this part of the world."
 msgstr ""
-"De Willen Lüü sall 't in düsse Deel vun de Welt nich mehr geven. Kümmer di "
+"De Willen Lüü sall 't in deese Deel vun de Welt nich mehr geven. Kümmer di "
 "drum."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:149
@@ -287,7 +287,7 @@ msgid ""
 "height of our brave ship and the winds drove us into unsafe waters."
 msgstr ""
 "Neptun sülvst was tegen uns un hett uns weer in eenen dunkeln, depen Storm "
-"dreven. Düsses Maal was 't noch slimmer as lestes Maal. De Wellen weren twee"
+"dreven. Deeses Maal was 't noch slimmer as lestes Maal. De Wellen weren twee"
 " maal so hoog as uns' dapperes Schipp un de Wind hett uns in unsekeres Water"
 " dreven."
 
@@ -299,7 +299,7 @@ msgid ""
 "with barely more than our lives."
 msgstr ""
 "Uns' Schipp is leep ramponeert. De Mast is över Boord gahn un sw Rump löppt "
-"vull mit Water. Wi sünd blied, wenn wi düsse swarte Nacht mit nix mehr as "
+"vull mit Water. Wi sünd blied, wenn wi deese swarte Nacht mit nix mehr as "
 "uns' Leven överstahn."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:208
@@ -706,8 +706,8 @@ msgstr "Amalee' sinnt…"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
-"they had to use up all our remaining gold for building the port. Now we "
-"don’t have any gold left."
+"they have to use all our remaining gold for building the port. So, we won’t "
+"have any gold left after our port is build."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -1063,8 +1063,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
-"Du hest düsse Rutfödderung ofsloten.  Wenn du willt, kannst du wiederspölen,"
-" anners de token Rutfödderung anfangen."
+"Du hest deese Rutfödderung ofsloten. Wenn du willt, kannst du wiederspölen, "
+"anners de token Rutfödderung anfangen."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:634

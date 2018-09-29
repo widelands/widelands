@@ -851,7 +851,7 @@ int LuaPlayer::switchplayer(lua_State* L) {
 /* RST
    .. method:: produced_wares_count(what)
 
-      Returns count of wares produced byt the player up to now.
+      Returns count of wares produced by the player up to now.
       'what' can be either an "all" or single ware name or an array of names. If single
       ware name is given, integer is returned, otherwise the table is returned.
 */

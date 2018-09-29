@@ -44,18 +44,7 @@
 #include "sound/sound_handler.h"
 
 namespace {
-
 const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
-
-// Parses an array { 12, 23 } into a point.
-void get_point(const LuaTable& table, Vector2i* p) {
-	std::vector<int> pts = table.array_entries<int>();
-	if (pts.size() != 2) {
-		throw wexception("Expected 2 entries, but got %" PRIuS ".", pts.size());
-	}
-	p->x = pts[0];
-	p->y = pts[1];
-}
 
 /**
  * Implements the Animation interface for an animation that is unpacked on disk, that
@@ -129,6 +118,8 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& 
 		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
 	}
 
+	// NOCOM Build animations are broken
+
 	// TODO(GunChleoc): We want to rename these from "pictures" to "files", because we'll have spritesheets etc. in the future, and this naming will be clearer.
 	// We don't want to convert them in bulk right now though - it will take care of itself as we convert to mipmaps.
 	image_files = (table.has_key("files") ? table.get_table("files") : table.get_table("pictures"))->array_entries<std::string>();
@@ -153,7 +144,7 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& 
 }
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : frametime_(FRAME_LENGTH), hotspot_(Vector2i::zero()), play_once_(false) {
+   : frametime_(FRAME_LENGTH), hotspot_(table.get_vector<std::string, int>("hotspot")), play_once_(false) {
 	try {
 		// Sound
 		if (table.has_key("sound_effect")) {
@@ -169,9 +160,6 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		if (table.has_key("play_once")) {
 			play_once_ = table.get_bool("play_once");
 		}
-
-		// Images
-		get_point(*table.get_table("hotspot"), &hotspot_);
 
 		if (table.has_key("mipmap")) {
 			std::unique_ptr<LuaTable> mipmaps_table = table.get_table("mipmap");

@@ -209,7 +209,6 @@ public:
 
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
 	          const Vector2f& point_on_dst,
 	          float scale,
 	          RenderTarget* dst) const override;
@@ -258,7 +257,7 @@ public:
 	void heal(uint32_t);
 	void damage(uint32_t);  /// Damage quantity of health points
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	bool is_on_battlefield();
 	bool is_attacking_player(Game&, Player&);
