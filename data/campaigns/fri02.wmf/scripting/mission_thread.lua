@@ -102,8 +102,8 @@ function expand_south()
    set_objective_done(o)
 
    o = add_campaign_objective(obj_supply_murilius)
-   local o_s = add_campaign_objective(obj_scout)
-   local o_p = nil
+   local o_scout = add_campaign_objective(obj_scout)
+   local o_poem = nil
    local choice = ""
    sleep(30000) -- give the player some time to account for nearly completed buildings
    local milbld = count_military_buildings_p1()
@@ -112,13 +112,13 @@ function expand_south()
       sleep(791)
 
       local milsites = count_military_buildings_p1()
-      if o_p and milsites < milbld then
+      if o_poem and milsites < milbld then
          -- the player has dismantled a militarysite, so we assume he understood the poem
-         set_objective_done(o_p)
-         o_p = nil
+         set_objective_done(o_poem)
+         o_poem = nil
       end
 
-      if o_s and not scout then
+      if o_scout and not scout then
          -- let's see if a scout is spying in Murilius's territory
          for i,house in pairs(p1:get_buildings("frisians_scouts_house")) do
             for j,field in pairs(house.fields[1]:region(17)) do -- the scout has a radius of 15
@@ -139,12 +139,12 @@ function expand_south()
             end
             if scout then break end
          end
-      elseif o_s and scout then
+      elseif o_scout and scout then
          if scout.field.immovable and scout.field.immovable.descr.name == "frisians_scouts_house" then
-            set_objective_done(o_s)
+            set_objective_done(o_scout)
             campaign_message_box(expansion_hint)
-            o_p = add_campaign_objective(obj_poem)
-            o_s = nil
+            o_poem = add_campaign_objective(obj_poem)
+            o_scout = nil
             scout = nil
          end
       end
@@ -173,11 +173,11 @@ function expand_south()
       end
    end
    -- We don’t need the scout/poem objectives anymore
-   if o_s then
-      set_objective_done(o_s)
+   if o_scout then
+      set_objective_done(o_scout)
    end
-   if o_p then
-      set_objective_done(o_p)
+   if o_poem then
+      set_objective_done(o_poem)
    end
    set_objective_done(o)
    p2:allow_buildings("all")

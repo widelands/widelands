@@ -274,8 +274,8 @@ supply_murilius_3 = {
 supply_murilius_4 = {
    title =_ "We Are Not Alone",
    body=reebaud(_"Strangers",
-      -- TRANSLATORS: Reebaud – Supply Murilius 4. "Peace" is the traditional frisian greeting, nothing more.
-      _([[Peace, representative of the Empire! I am Reebaud, the chieftain of this tribe. All we want is to settle down here, build our home and live our lives in peace. We do not seek trouble, but we aren’t afraid to fight, either.]])),
+      -- TRANSLATORS: Reebaud – Supply Murilius 4
+      _([[Greetings, representative of the Empire! I am Reebaud, the chieftain of this tribe. All we want is to settle down here, build our home and live our lives in peace. We do not seek trouble, but we aren’t afraid to fight, either.]])),
 }
 supply_murilius_5 = {
    title =_ "We Are Not Alone",
@@ -329,7 +329,7 @@ expansion_hint = {
    title =_ "The Scout Discovered Something",
    body=hauke(_"Our scout returned",
       -- TRANSLATORS: Hauke – Expansion hint
-      _([[Chieftain Reebaud! Our scout just returned. He has found a poem in the strange tongue this Proconsule speaks. With some difficulty, I have translated it into our language. If I did not mistranslate, it runs as follows:]])
+      _([[Chieftain Reebaud! Our scout just returned. He has found a poem in the strange tongue this Proconsul speaks. With some difficulty, I have translated it into our language. If I did not mistranslate, it runs as follows:]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
       space(10) .. (_([[How many sites where soldiers stay,]]))
