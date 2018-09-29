@@ -72,7 +72,6 @@ public:
 	uint16_t nr_frames() const override;
 	uint32_t frametime() const override;
 	const Image* representative_image(const RGBColor* clr) const override;
-	const std::string& representative_image_filename() const override;
 	virtual void blit(uint32_t time,
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
@@ -107,7 +106,7 @@ private:
 };
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : representative_frame_(table.has_key("representative_frame") ? table.get_int("representative_frame") : 0), frametime_(FRAME_LENGTH), hasplrclrs_(false), scale_(1), play_once_(false) {
+   : Animation(table.has_key("representative_frame") ? table.get_int("representative_frame") : 0), frametime_(FRAME_LENGTH), hasplrclrs_(false), scale_(1), play_once_(false) {
 	try {
 		get_point(*table.get_table("hotspot"), &hotspot_);
 
@@ -233,11 +232,6 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	rv->blit(
 	   Rectf(0.f, 0.f, w / scale_, h / scale_), *image, Rectf(0.f, 0.f, w, h), 1., BlendMode::Copy);
 	return rv;
-}
-
-// TODO(GunChleoc): This is only here for the font renderers.
-const std::string& NonPackedAnimation::representative_image_filename() const {
-	return image_files_[0];
 }
 
 uint32_t NonPackedAnimation::current_frame(uint32_t time) const {

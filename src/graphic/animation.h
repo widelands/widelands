@@ -52,7 +52,7 @@ constexpr int FRAME_LENGTH = 250;
  */
 class Animation {
 public:
-	Animation() {
+	Animation(int representative_frame) : representative_frame_(representative_frame) {
 	}
 	virtual ~Animation() {
 	}
@@ -81,8 +81,6 @@ public:
 	/// The 'clr' is the player color used for blending - the parameter can be
 	/// 'nullptr', in which case the neutral image will be returned.
 	virtual const Image* representative_image(const RGBColor* clr) const = 0;
-	/// The filename of the image used for the first frame, without player color.
-	virtual const std::string& representative_image_filename() const = 0;
 
 	/// Blit the animation frame that should be displayed at the given time index
 	/// into the given 'destination_rect'.
