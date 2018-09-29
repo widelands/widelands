@@ -3,14 +3,16 @@
 # 
 # Translators:
 # GunChleoc, 2018
+# GunChleoc, 2018
 # ks k, 2017
+# ks k, 2017-2018
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
-"PO-Revision-Date: 2018-05-07 10:19+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-17 09:29+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -93,7 +95,7 @@ msgid ""
 "A building is being dismantled at this dismantle site, returning some of the"
 " resources that were used during this building’s construction to your "
 "tribe’s stores."
-msgstr ""
+msgstr "해당 해체 현장에서 건물이 해체되고 있으며, 이전 당신 부족의 창고에서 나와 건물 건설에 사용되었던 자원의 일부를 되돌려 받을 예정입니다."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/armorsmithy/helptexts.lua:16
@@ -548,7 +550,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Ages ago, the Barbarians learned to delve into mountainsides for that black "
 "material that feeds their furnaces."
-msgstr ""
+msgstr "옛날 옛적에, 야만인들은 난로에 땔 검은 물질을 위해 산비탈을 뒤지는 법을 배웠습니다."
 
 #. TRANSLATORS: Lore helptext for a coal mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:6
@@ -558,7 +560,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
-msgstr ""
+msgstr "목재도 가정집 불에 사용되어 당신을 따뜻하게 할 수 있지만, 철과 금을 가지고 작업할 때는 석탄 이외에 방법이 없습니다."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:22
@@ -685,7 +687,7 @@ msgstr "'부드럽고 탄력이 있지.<br> 그리고 세월과 날씨에도 영
 msgctxt "barbarians_building"
 msgid ""
 "Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song."
-msgstr "야만인 전통 노래,<br> '지하의 우리 보물들' 로부터 인용."
+msgstr "야만인 전통 노래,<br> ‘지하의 우리 보물들’ 로부터 인용."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/helptexts.lua:18
@@ -745,7 +747,7 @@ msgid ""
 "This phrase was the reply Rimbert the miner – later known as Rimbert the "
 "loner – gave, when he was asked to remain seated on an emergency meeting at "
 "Stonford in the year of the great flood."
-msgstr ""
+msgstr "???이 문구는 광부 림버트 - 후에 외톨이 림버트로 알려진 - 가, 대홍수가 났던 해에 스톤포드의 긴급 회의에서 계속 자리에 남아있을 건지 물어봤을때의 대답에서 나왔다."
 
 #. TRANSLATORS: Lore author helptext for a granite mine building, part 2
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:12
@@ -753,7 +755,7 @@ msgctxt "barbarians_building"
 msgid ""
 "The same man had all the 244 granite blocks ready only a week later, and "
 "they still fortify the city’s levee."
-msgstr ""
+msgstr "이 남자는 딱 일주일 뒤에 244개의 화강암 블럭을 준비했고, 그들은 도시의 제방을 더 튼튼하게 보수했다."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:18
@@ -1155,7 +1157,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Song written by Sigurd the Bard when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
-msgstr ""
+msgstr "찻'카루스의 치세 21년째의 대가뭄 뒤 첫 비가 내렸을 때 음유시인 시구르드가 쓴 노래"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/well/helptexts.lua:23
@@ -1440,7 +1442,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A baker"
-msgstr ""
+msgstr "빵 굽는 이"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/helptexts.lua:13
@@ -1656,7 +1658,7 @@ msgstr ""
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
-msgid "A brickmaker arguing with a builder"
+msgid "A clay digger arguing with a builder"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2536,7 +2538,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
-"explained to you how to hold a curved sword."
+"explained to you how to hold a broadsword."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2731,142 +2733,6 @@ msgstr ""
 msgid "This reed has just been planted."
 msgstr ""
 
-#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
-#. script probably want to lose the blank space here.
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
-#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
-#. script probably want to lose the blank space here.
-#: ../../data/tribes/immovables/resi_coal1/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_coal2/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_gold1/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_gold2/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_iron1/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_iron2/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:8
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:13
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:3
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:8
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:13
-#: ../../data/tribes/scripting/help/immovable_help.lua:34
-#: ../../data/tribes/scripting/help/ware_help.lua:31
-#, lua-format
-msgctxt "sentence_separator"
-msgid "%s %s"
-msgstr "%s %s"
-
-#. TRANSLATORS: Helptext for a resource: Coal
-#: ../../data/tribes/immovables/resi_coal1/helptexts.lua:5
-#: ../../data/tribes/immovables/resi_coal2/helptexts.lua:5
-msgid "Coal veins contain coal that can be dug up by coal mines."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: Coal
-#: ../../data/tribes/immovables/resi_coal1/helptexts.lua:7
-msgid "There is only a little bit of coal here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: Coal
-#: ../../data/tribes/immovables/resi_coal2/helptexts.lua:7
-msgid "There is a lot of coal here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: Gold
-#: ../../data/tribes/immovables/resi_gold1/helptexts.lua:5
-#: ../../data/tribes/immovables/resi_gold2/helptexts.lua:5
-msgid "Gold veins contain gold ore that can be dug up by gold mines."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: Gold
-#: ../../data/tribes/immovables/resi_gold1/helptexts.lua:7
-msgid "There is only a little bit of gold here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: Gold
-#: ../../data/tribes/immovables/resi_gold2/helptexts.lua:7
-msgid "There is a lot of gold here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: Iron
-#: ../../data/tribes/immovables/resi_iron1/helptexts.lua:5
-#: ../../data/tribes/immovables/resi_iron2/helptexts.lua:5
-msgid "Iron veins contain iron ore that can be dug up by iron mines."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: Iron
-#: ../../data/tribes/immovables/resi_iron1/helptexts.lua:7
-msgid "There is only a little bit of iron here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: Iron
-#: ../../data/tribes/immovables/resi_iron2/helptexts.lua:7
-msgid "There is a lot of iron here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: No resources
-#: ../../data/tribes/immovables/resi_none/helptexts.lua:4
-msgid "There are no resources in the ground here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Atlantean resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:5
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:5
-msgid ""
-"Precious stones are used in the construction of big buildings. They can be "
-"dug up by a crystal mine. You will also get granite from the mine."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Atlantean resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:7
-msgid "There are only a few precious stones here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a Barbarian resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:10
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:10
-msgid ""
-"Granite is a basic building material and can be dug up by a granite mine."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a Barbarian resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:12
-msgid "There is only a little bit of granite here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Empire resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:15
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:15
-msgid ""
-"Marble is a basic building material and can be dug up by a marble mine. You "
-"will also get granite from the mine."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Empire resource: Stones
-#: ../../data/tribes/immovables/resi_stones1/helptexts.lua:17
-msgid "There is only a little bit of marble here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Atlantean resource: Stones
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:7
-msgid "There are many precious stones here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a Barbarian resource: Stones
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:12
-msgid "There is a lot of granite here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for an Empire resource: Stones
-#: ../../data/tribes/immovables/resi_stones2/helptexts.lua:17
-msgid "There is a lot of marble here."
-msgstr ""
-
-#. TRANSLATORS: Helptext for a resource: Water
-#: ../../data/tribes/immovables/resi_water1/helptexts.lua:4
-msgid "There is water in the ground here that can be pulled up by a well."
-msgstr ""
-
 #. TRANSLATORS: Helptext for a ship construction site.
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/helptexts.lua:4
 #: ../../data/tribes/immovables/shipconstruction_barbarians/helptexts.lua:4
@@ -2875,229 +2741,229 @@ msgstr ""
 msgid "A ship is being constructed at this site."
 msgstr ""
 
-#: ../../data/tribes/scripting/help/building_help.lua:86
+#: ../../data/tribes/scripting/help/building_help.lua:93
 #: ../../data/tribes/scripting/help/format_help.lua:232
 #, lua-format
 msgid "%s and"
 msgstr "%s 그리고"
 
-#: ../../data/tribes/scripting/help/building_help.lua:100
+#: ../../data/tribes/scripting/help/building_help.lua:107
 msgid "Food:"
 msgstr "음식:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:150
+#: ../../data/tribes/scripting/help/building_help.lua:157
 msgid "Equipment:"
 msgstr "장비:"
 
 #. TRANSLATORS: Heading for a flavour text in the building help.
-#: ../../data/tribes/scripting/help/building_help.lua:173
+#: ../../data/tribes/scripting/help/building_help.lua:180
 msgid "Lore"
 msgstr "이야기"
 
-#: ../../data/tribes/scripting/help/building_help.lua:194
+#: ../../data/tribes/scripting/help/building_help.lua:201
 #: ../../data/tribes/scripting/help/init.lua:59
 #: ../../data/tribes/scripting/help/tips.lua:49
 msgid "General"
 msgstr "일반"
 
-#: ../../data/tribes/scripting/help/building_help.lua:195
+#: ../../data/tribes/scripting/help/building_help.lua:202
 msgid "Purpose:"
 msgstr "목적:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:223
-#: ../../data/tribes/scripting/help/building_help.lua:456
+#: ../../data/tribes/scripting/help/building_help.lua:230
+#: ../../data/tribes/scripting/help/building_help.lua:463
 msgid "Note:"
 msgstr "참고:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:228
+#: ../../data/tribes/scripting/help/building_help.lua:235
 msgid "Work area radius:"
 msgstr "작업 영역 범위:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:232
-#: ../../data/tribes/scripting/help/building_help.lua:237
+#: ../../data/tribes/scripting/help/building_help.lua:239
+#: ../../data/tribes/scripting/help/building_help.lua:244
 msgid "Healing:"
 msgstr "치료:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:233
-#: ../../data/tribes/scripting/help/building_help.lua:238
+#: ../../data/tribes/scripting/help/building_help.lua:240
+#: ../../data/tribes/scripting/help/building_help.lua:245
 #, lua-format
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] "주둔하는 군인들은 초당 %d 체력을 회복합니다."
 
-#: ../../data/tribes/scripting/help/building_help.lua:234
-#: ../../data/tribes/scripting/help/building_help.lua:240
+#: ../../data/tribes/scripting/help/building_help.lua:241
+#: ../../data/tribes/scripting/help/building_help.lua:247
 msgid "Conquer range:"
 msgstr "정복 범위:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:239
-#: ../../data/tribes/scripting/help/building_help.lua:243
+#: ../../data/tribes/scripting/help/building_help.lua:246
+#: ../../data/tribes/scripting/help/building_help.lua:250
 msgid "Capacity:"
 msgstr "주둔 수:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:245
+#: ../../data/tribes/scripting/help/building_help.lua:252
 msgid "Vision range:"
 msgstr "시야 범위:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:270
+#: ../../data/tribes/scripting/help/building_help.lua:277
 msgid "%1$s from: %2$s"
 msgstr "%1$s 로부터: %2$s"
 
 #. TRANSLATORS: Heading in the building help for wares that a building accepts
 #. (e.g. wheat for a mill).
-#: ../../data/tribes/scripting/help/building_help.lua:277
+#: ../../data/tribes/scripting/help/building_help.lua:284
 msgid "Incoming:"
 msgstr "투입:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:281
+#: ../../data/tribes/scripting/help/building_help.lua:288
 msgid "Collects:"
 msgstr "수집:"
 
 #. TRANSLATORS: This is a verb (The miner mines)
-#: ../../data/tribes/scripting/help/building_help.lua:293
+#: ../../data/tribes/scripting/help/building_help.lua:300
 msgid "Mines:"
 msgstr "채굴:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:313
+#: ../../data/tribes/scripting/help/building_help.lua:320
 msgid "Produces:"
 msgstr "생산:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:355
+#: ../../data/tribes/scripting/help/building_help.lua:362
 msgid "Outgoing:"
 msgstr "산출:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:357
+#: ../../data/tribes/scripting/help/building_help.lua:364
 msgid "None"
 msgstr "없음"
 
-#: ../../data/tribes/scripting/help/building_help.lua:358
+#: ../../data/tribes/scripting/help/building_help.lua:365
 msgid "Dependencies"
 msgstr "종속 관계"
 
-#: ../../data/tribes/scripting/help/building_help.lua:374
+#: ../../data/tribes/scripting/help/building_help.lua:381
 msgid "Health Training"
 msgstr "체력 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:375
+#: ../../data/tribes/scripting/help/building_help.lua:382
 msgid "Trains ‘Health’ from %1% up to %2%"
 msgstr "'체력'을 %1% 에서 %2% 로 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:377
-#: ../../data/tribes/scripting/help/building_help.lua:391
-#: ../../data/tribes/scripting/help/building_help.lua:403
-#: ../../data/tribes/scripting/help/building_help.lua:416
+#: ../../data/tribes/scripting/help/building_help.lua:384
+#: ../../data/tribes/scripting/help/building_help.lua:398
+#: ../../data/tribes/scripting/help/building_help.lua:410
+#: ../../data/tribes/scripting/help/building_help.lua:423
 msgid "Soldiers:"
 msgstr "군인:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:387
+#: ../../data/tribes/scripting/help/building_help.lua:394
 msgid "Attack Training"
 msgstr "공격 훈련"
 
 #. TRANSLATORS: %1$s = Health, Evade, Attack or Defense. %2$s and %3$s are
 #. numbers.
-#: ../../data/tribes/scripting/help/building_help.lua:389
+#: ../../data/tribes/scripting/help/building_help.lua:396
 msgid "Trains ‘Attack’ from %1% up to %2%"
 msgstr "'공격'을 %1% 에서 %2% 로 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:400
+#: ../../data/tribes/scripting/help/building_help.lua:407
 msgid "Defense Training"
 msgstr "방어 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:401
+#: ../../data/tribes/scripting/help/building_help.lua:408
 msgid "Trains ‘Defense’ from %1% up to %2%"
 msgstr "'방어'를 %1% 에서 %2% 로 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:413
+#: ../../data/tribes/scripting/help/building_help.lua:420
 msgid "Evade Training"
 msgstr "회피 훈련"
 
-#: ../../data/tribes/scripting/help/building_help.lua:414
+#: ../../data/tribes/scripting/help/building_help.lua:421
 msgid "Trains ‘Evade’ from %1% up to %2%"
 msgstr "'회피'를 %1% 에서 %2% 로 훈련"
 
 #. TRANSLATORS: This is the header for the "Building" section in the building
 #. help, containing size info, buildcost etc.
-#: ../../data/tribes/scripting/help/building_help.lua:441
+#: ../../data/tribes/scripting/help/building_help.lua:448
 msgid "Building"
 msgstr "건설"
 
-#: ../../data/tribes/scripting/help/building_help.lua:457
+#: ../../data/tribes/scripting/help/building_help.lua:464
 msgid ""
 "This building can either be built directly or obtained by enhancing another "
 "building."
 msgstr "이 건물은 직접적으로 건설거나 다른 건물을 향상시켜 얻을 수 있습니다."
 
-#: ../../data/tribes/scripting/help/building_help.lua:463
+#: ../../data/tribes/scripting/help/building_help.lua:470
 msgid "Direct build cost:"
 msgstr "직접 건설 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:465
+#: ../../data/tribes/scripting/help/building_help.lua:472
 #: ../../data/tribes/scripting/help/immovable_help.lua:50
 msgid "Build cost:"
 msgstr "건설 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:476
+#: ../../data/tribes/scripting/help/building_help.lua:483
 msgid "Or enhanced from:"
 msgstr "또는 향상 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:478
+#: ../../data/tribes/scripting/help/building_help.lua:485
 msgid "Enhanced from:"
 msgstr "향상 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:487
+#: ../../data/tribes/scripting/help/building_help.lua:494
 msgid "Cumulative cost:"
 msgstr "누적 비용:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:532
-#: ../../data/tribes/scripting/help/building_help.lua:581
+#: ../../data/tribes/scripting/help/building_help.lua:539
+#: ../../data/tribes/scripting/help/building_help.lua:588
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../../data/tribes/scripting/help/building_help.lua:537
+#: ../../data/tribes/scripting/help/building_help.lua:544
 msgid "If built directly, dismantle yields:"
 msgstr "직접 건설시, 해체 수익:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:542
+#: ../../data/tribes/scripting/help/building_help.lua:549
 msgid "If enhanced, dismantle yields:"
 msgstr "향상시, 해체 수익:"
 
 #. TRANSLATORS: This is a heading for the resources that you will get back
 #. when you dismantle a building of this type. What dismantling will give you.
-#: ../../data/tribes/scripting/help/building_help.lua:545
-#: ../../data/tribes/scripting/help/building_help.lua:586
+#: ../../data/tribes/scripting/help/building_help.lua:552
+#: ../../data/tribes/scripting/help/building_help.lua:593
 msgid "Dismantle yields:"
 msgstr "해체 수익:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:595
+#: ../../data/tribes/scripting/help/building_help.lua:602
 msgid "Can be enhanced to:"
 msgstr "향상 가능한 건물:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:625
+#: ../../data/tribes/scripting/help/building_help.lua:632
 msgid "Crew required:"
 msgstr "필요한 일꾼:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:625
+#: ../../data/tribes/scripting/help/building_help.lua:632
 #: ../../data/tribes/scripting/help/init.lua:92
 msgid "Workers"
 msgstr "일꾼"
 
 #. TRANSLATORS: %s is a worker name, e.g. "Chief Miner" or "Brewer".
-#: ../../data/tribes/scripting/help/building_help.lua:647
+#: ../../data/tribes/scripting/help/building_help.lua:654
 #, lua-format
 msgid "%s or better"
 msgstr "%s 또는 그 이상"
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool workers use
-#: ../../data/tribes/scripting/help/building_help.lua:658
+#: ../../data/tribes/scripting/help/building_help.lua:665
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] "사용 도구:"
 
-#: ../../data/tribes/scripting/help/building_help.lua:680
+#: ../../data/tribes/scripting/help/building_help.lua:687
 msgid "Production"
 msgstr "생산"
 
-#: ../../data/tribes/scripting/help/building_help.lua:681
+#: ../../data/tribes/scripting/help/building_help.lua:688
 msgid "Performance:"
 msgstr "성능:"
 
@@ -3606,6 +3472,15 @@ msgstr "계산 필요"
 msgid "%1% and %2%"
 msgstr "%1% %2%"
 
+#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
+#. script probably want to lose the blank space here.
+#: ../../data/tribes/scripting/help/immovable_help.lua:34
+#: ../../data/tribes/scripting/help/ware_help.lua:31
+#, lua-format
+msgctxt "sentence_separator"
+msgid "%s %s"
+msgstr "%s %s"
+
 #: ../../data/tribes/scripting/help/immovable_help.lua:48
 msgid "Requirements"
 msgstr ""
@@ -3676,14 +3551,14 @@ msgid "Producer"
 msgstr "생산 주체"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "생산된 용품:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:167
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "소비 주체"
@@ -3922,6 +3797,8 @@ msgid ""
 "inns to prepare meals."
 msgstr "오직 이 맥주만이 전투 경기장의 군인들에게 허용됩니다. 누군가는 야만인의 모든 힘이 이 맥주에서 비롯된다고 말합니다. 군인의 회피 레벨을 0에서 1 그리고 2로 훈련하는데 도움이 됩니다. 고도 맥주는 또한 큰 여관에서 식사를 준비하는데 사용됩니다."
 
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -4352,7 +4229,7 @@ msgid ""
 "Gold ore is mined in a gold mine. Smelted in a smelting works, it turns into"
 " gold which is used as a precious building material and to produce weapons "
 "and armor."
-msgstr ""
+msgstr "금광석은 금광에서 채굴합니다. 제련소에서 제련되면, 금으로 변해 귀중한 건설 재료와 무기와 갑옷 생산에 사용됩니다."
 
 #. TRANSLATORS: Helptext for a ware: Gold Thread
 #: ../../data/tribes/wares/gold_thread/helptexts.lua:4
@@ -4385,7 +4262,7 @@ msgstr "야만인들은 채석장과 화강암광에서 화강암 블럭을 생�
 msgctxt "frisians_ware"
 msgid ""
 "The Frisians produce granite blocks in quarries and rock mines. They can be "
-"refined by a brick burner."
+"refined in a brick kiln."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Granite
@@ -4978,7 +4855,7 @@ msgstr "그러므로 숲 관리인과 포도 농부가 그것들을 사용합니
 #: ../../data/tribes/wares/shovel/helptexts.lua:12
 msgctxt "frisians_ware"
 msgid ""
-"They are used by berry and reed farmers as well as foresters. Brickmakers "
+"They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
 msgstr ""
 
@@ -5085,12 +4962,12 @@ msgid ""
 "spidercloth for their construction."
 msgstr "거미천은 직조 공장에서 거미실을 이용해 만듭니다. 도구 제작소와 조선소에서 사용합니다. 또한 몇몇 더욱 발달된 건물 건설에 거미천이 필요합니다."
 
-#. TRANSLATORS: Helptext for a ware: Curved Sword
-#: ../../data/tribes/wares/sword_curved/helptexts.lua:4
+#. TRANSLATORS: Helptext for a ware: Broadsword
+#: ../../data/tribes/wares/sword_broad/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"The curved sword is the weapon used by level 2 soldiers. Level 5 soldiers "
-"are equipped with two curved swords."
+"The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
+"equipped with a broadsword and a double-edged sword."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
@@ -5106,7 +4983,7 @@ msgstr ""
 msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
-"equipped with two long swords."
+"equipped with a long and a double-edged sword."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Short sword
@@ -5460,10 +5337,10 @@ msgstr "나무를 벱니다."
 #: ../../data/tribes/workers/barbarians/baker/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
-msgstr ""
+msgstr "광부, 군인, 정찰병들을 위해 피타 빵을 굽습니다."
 
-#. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #. TRANSLATORS: Helptext for a worker: Blacksmith
+#. TRANSLATORS: Helptext for a worker: Master Blacksmith
 #: ../../data/tribes/workers/barbarians/blacksmith/helptexts.lua:3
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"
@@ -5896,7 +5773,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a worker: Brickmaker
 #: ../../data/tribes/workers/frisians/brickmaker/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Makes clay out of mud and water or bricks out of clay and granite."
+msgid "Burns bricks out of clay and granite."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Builder
@@ -5915,6 +5792,12 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/charcoal_burner/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a worker: Clay Digger
+#: ../../data/tribes/workers/frisians/claydigger/helptexts.lua:3
+msgctxt "frisians_worker"
+msgid "Makes clay out of mud and water."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Farmer

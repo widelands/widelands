@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
-"PO-Revision-Date: 2018-05-08 12:22+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2018-09-14 06:11+0000\n"
+"PO-Revision-Date: 2018-09-14 12:48+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1671,8 +1671,8 @@ msgstr "Glaubst du, dass du ohne meine Hilfe ein Haus bauen kannst?"
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
-msgid "A brickmaker arguing with a builder"
-msgstr "Ein Ziegler im Streit mit einem Bauarbeiter"
+msgid "A clay digger arguing with a builder"
+msgstr "Ein Lehmgräber im Streit mit einem Bauarbeiter"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:16
@@ -2552,8 +2552,8 @@ msgstr "Bildet nur Krieger aus, die im Ausbildungslager bereits die höchste Stu
 msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
-"explained to you how to hold a curved sword."
-msgstr "Bleib einfach ruhig, hör genau zu, und versuche, dich nicht selbst zu erstechen, bis ich dir erklärt habe, wie du ein gebogenes Schwert hältst."
+"explained to you how to hold a broadsword."
+msgstr "Bleib einfach ruhig, hör genau zu, und versuche, dich nicht selbst zu erstechen, bis ich dir erklärt habe, wie du ein Breitschwert hältst."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:16
@@ -3694,7 +3694,7 @@ msgid "Producer"
 msgstr "Produzent"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "Produzierte Ware:"
@@ -3702,7 +3702,7 @@ msgstr[1] "Produzierte Waren:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:167
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "Verbraucher"
@@ -4409,8 +4409,8 @@ msgstr "Die Barbaren produzieren Steinblöcke in Steinbrüchen und Granitminen."
 msgctxt "frisians_ware"
 msgid ""
 "The Frisians produce granite blocks in quarries and rock mines. They can be "
-"refined by a brick burner."
-msgstr "Die Friesen produzieren Steinblöcke in Steinbrüchen und Felsminen. Sie können von einem Ziegler verfeinert werden."
+"refined in a brick kiln."
+msgstr "Die Friesen produzieren Steinblöcke in Steinbrüchen und Felsminen. Sie können in einer Ziegelei verfeinert werden."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:12
@@ -5002,9 +5002,9 @@ msgstr "Daher werden sie vom Förster und vom Winzer benötigt. Sie werden vom W
 #: ../../data/tribes/wares/shovel/helptexts.lua:12
 msgctxt "frisians_ware"
 msgid ""
-"They are used by berry and reed farmers as well as foresters. Brickmakers "
+"They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
-msgstr "Sie werden von Beerenzüchtern und Reetbauern sowie Förstern benutzt. Ziegler brauchen sie auch, um Tonerde aus dem harten Boden zu graben."
+msgstr "Schaufeln werden von Beerenzüchtern und Reetbauern sowie Förstern benutzt. Lehmgräber brauchen sie auch, um Tonerde aus dem harten Boden zu graben."
 
 #. TRANSLATORS: Helptext for a ware: Smoked Fish
 #: ../../data/tribes/wares/smoked_fish/helptexts.lua:4
@@ -5109,13 +5109,13 @@ msgid ""
 "spidercloth for their construction."
 msgstr "Spinnenstoff wird aus Spinnenseide in einer Weberei hergestellt. Er wird vom Werkzeugmacher und der Werft verwendet. Einige fortgeschrittenere Gebäude brauchen ebenfalls Spinnenstoff für den Bau."
 
-#. TRANSLATORS: Helptext for a ware: Curved Sword
-#: ../../data/tribes/wares/sword_curved/helptexts.lua:4
+#. TRANSLATORS: Helptext for a ware: Broadsword
+#: ../../data/tribes/wares/sword_broad/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"The curved sword is the weapon used by level 2 soldiers. Level 5 soldiers "
-"are equipped with two curved swords."
-msgstr "Das gebogene Schwert ist die Waffe, die Krieger der Angriffsstufe 2 tragen. Für die Angriffsstufe 5 werden sie mit zwei gebogenen Schwertern ausgestattet."
+"The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
+"equipped with a broadsword and a double-edged sword."
+msgstr "Das Breitschwert ist die Waffe, die Krieger der Angriffsstufe 2 tragen. Krieger der Angriffsstufe 5 werden mit einem Breitschwert und einem zweischneidigen Schwert ausgestattet."
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
 #: ../../data/tribes/wares/sword_double/helptexts.lua:4
@@ -5130,8 +5130,8 @@ msgstr "Das zweischneidige Schwert ist die Waffe, die Krieger der Angriffsstufe 
 msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
-"equipped with two long swords."
-msgstr "Das Langschwert ist die Waffe, die Krieger der Angriffsstufe 1 tragen. Für die Angriffsstufe 4 werden sie mit zwei Langschwertern ausgestattet."
+"equipped with a long and a double-edged sword."
+msgstr "Das Langschwert ist die Waffe, die Krieger der Angriffsstufe 1 tragen. Krieger der Angriffsstufe 4 werden mit einem Langschwert und einem zweischneidigen Schwert ausgestattet."
 
 #. TRANSLATORS: Helptext for a ware: Short sword
 #: ../../data/tribes/wares/sword_short/helptexts.lua:4
@@ -5920,8 +5920,8 @@ msgstr "Braut Bier und Met."
 #. TRANSLATORS: Helptext for a worker: Brickmaker
 #: ../../data/tribes/workers/frisians/brickmaker/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Makes clay out of mud and water or bricks out of clay and granite."
-msgstr "Macht Lehm aus Tonerde und Wasser oder Ziegel aus Lehm und Stein."
+msgid "Burns bricks out of clay and granite."
+msgstr "Brennt Ziegel aus Lehm und Stein."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/frisians/builder/helptexts.lua:3
@@ -5940,6 +5940,12 @@ msgstr "Transportiert Waren auf den Straßen."
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
 msgstr "Brennt Stämme in Lehmöfen zu Kohle."
+
+#. TRANSLATORS: Helptext for a worker: Clay Digger
+#: ../../data/tribes/workers/frisians/claydigger/helptexts.lua:3
+msgctxt "frisians_worker"
+msgid "Makes clay out of mud and water."
+msgstr "Macht Lehm aus Tonerde und Wasser."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/frisians/farmer/helptexts.lua:3

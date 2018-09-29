@@ -21,7 +21,7 @@
 
 #include <boost/bind.hpp>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
@@ -300,7 +300,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 				curx += curw;
 				continue;
 			}
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
 			   as_uifont(richtext_escape(entry_string), UI_FONT_SIZE_SMALL, er.get_color()));
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want

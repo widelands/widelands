@@ -145,6 +145,8 @@ void init_locale() {
 		lang = getenv("LANGUAGE");
 		if (lang != nullptr) {
 			env_locale = lang;
+		} else {  // Finall fallback in case we cannot find out anything (#1784495)
+			env_locale = "en";
 		}
 	}
 	locale = "C";

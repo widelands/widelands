@@ -43,6 +43,12 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(RoadDescr);
 };
 
+// C++11 allows static constexpr members in the compiler, but the linker can't handle it.
+// So, we don't have these in the class.
+// https://stackoverflow.com/questions/40690260/undefined-reference-error-for-static-constexpr-member
+constexpr int32_t kRoadAnimalPrice = 600;
+constexpr int32_t kRoadMaxWallet = static_cast<int32_t>(2.5 * kRoadAnimalPrice);
+
 /**
  * Road is a special object which connects two flags.
  * The Road itself is never rendered; however, the appropriate Field::roads are
@@ -107,22 +113,25 @@ struct Road : public PlayerImmovable {
 	void presplit(Game&, Coords split);
 	void postsplit(Game&, Flag&);
 
-	bool notify_ware(Game& game, FlagId flagid);
+	bool notify_ware(Game& game, Flag& flag);
+	void update_wallet_chargetime(Game& game);
+	void charge_wallet(Game& game);
+	int32_t wallet() const;
+	void add_to_wallet(int32_t sum);
+	void pay_for_road(Game& game, uint8_t wares_count);
+	void pay_for_building();
 
 	void remove_worker(Worker&) override;
 	void assign_carrier(Carrier&, uint8_t);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          float scale,
-	          RenderTarget* dst) override;
+	void
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 private:
 	void set_path(EditorGameBase&, const Path&);
@@ -136,13 +145,15 @@ private:
 	static void
 	request_carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
 
-private:
-	/// Counter that is incremented when a ware does not get a carrier for this
-	/// road immediately and decremented over time.
-	uint32_t busyness_;
+	uint8_t carriers_count() const;
 
-	/// holds the gametime when busyness_ was last updated
-	uint32_t busyness_last_update_;
+private:
+	/// Counter that is incremented for every ware served by this road
+	/// according to the delay of service and decremented over time.
+	int32_t wallet_;
+
+	/// holds the gametime when wallet_ was last charged
+	uint32_t last_wallet_charge_;
 
 	uint8_t type_;        ///< RoadType, 2 bits used
 	Flag* flags_[2];      ///< start and end flag

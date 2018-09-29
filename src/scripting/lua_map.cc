@@ -1386,6 +1386,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
    PROP_RO(LuaTribeDescription, immovables),
+   PROP_RO(LuaTribeDescription, resource_indicators),
    PROP_RO(LuaTribeDescription, name),
    PROP_RO(LuaTribeDescription, port),
    PROP_RO(LuaTribeDescription, ship),
@@ -1490,6 +1491,29 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 		lua_pushinteger(L, ++counter);
 		to_lua<LuaImmovableDescription>(
 		   L, new LuaImmovableDescription(tribe.get_immovable_descr(immovable)));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: resource_indicators
+
+      (RO) the table `resource_indicators` as defined in the tribe's `tribename.lua`.
+      See `data/tribes/atlanteans.lua` for more information on the table structure.
+*/
+int LuaTribeDescription::get_resource_indicators(lua_State* L) {
+	const TribeDescr& tribe = *get();
+	lua_newtable(L);
+	const ResourceIndicatorSet resis = tribe.resource_indicators();
+	for (const auto& resilist : resis) {
+		lua_pushstring(L, resilist.first);
+		lua_newtable(L);
+		for (const auto& resi : resilist.second) {
+			lua_pushinteger(L, resi.first);
+			lua_pushstring(L, tribe.get_immovable_descr(resi.second)->name());
+			lua_settable(L, -3);
+		}
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -3568,22 +3592,26 @@ void LuaEconomy::__persist(lua_State* L) {
 	const Widelands::Economy* economy = get();
 	const Widelands::Player& player = economy->owner();
 	PERS_UINT32("player", player.player_number());
-	PERS_UINT32("economy", player.get_economy_number(economy));
+	PERS_UINT32("economy", economy->serial());
 }
 
 void LuaEconomy::__unpersist(lua_State* L) {
 	Widelands::PlayerNumber player_number;
-	size_t economy_number;
+	Widelands::Serial economy_serial;
 	UNPERS_UINT32("player", player_number);
-	UNPERS_UINT32("economy", economy_number);
+	UNPERS_UINT32("economy", economy_serial);
 	const Widelands::Player& player = get_egbase(L).player(player_number);
-	set_economy_pointer(player.get_economy_by_number(economy_number));
+	set_economy_pointer(player.get_economy(economy_serial));
 }
 
 /* RST
    .. method:: ware_target_quantity(warename)
 
       Returns the amount of the given ware that should be kept in stock for this economy.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you use this function.
 
       :arg warename: the name of the ware.
       :type warename: :class:`string`
@@ -3605,6 +3633,10 @@ int LuaEconomy::ware_target_quantity(lua_State* L) {
 
       Returns the amount of the given worker that should be kept in stock for this economy.
 
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you use this function.
+
       :arg workername: the name of the worker.
       :type workername: :class:`string`
 */
@@ -3624,6 +3656,10 @@ int LuaEconomy::worker_target_quantity(lua_State* L) {
    .. method:: set_ware_target_quantity(warename)
 
       Sets the amount of the given ware type that should be kept in stock for this economy.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you use this function.
 
       :arg warename: the name of the ware type.
       :type warename: :class:`string`
@@ -3650,6 +3686,10 @@ int LuaEconomy::set_ware_target_quantity(lua_State* L) {
    .. method:: set_worker_target_quantity(workername)
 
       Sets the amount of the given worker type that should be kept in stock for this economy.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you use this function.
 
       :arg workername: the name of the worker type.
       :type workername: :class:`string`
@@ -4042,6 +4082,10 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
    .. attribute:: economy
 
       (RO) Returns the economy that this flag belongs to.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you call another function on the resulting economy object.
 
       :returns: The :class:`Economy` associated with the flag.
 */
@@ -4549,7 +4593,7 @@ int LuaWarehouse::get_expedition_in_progress(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 
 	if (is_a(Game, &egbase)) {
-		PortDock* pd = get(L, egbase)->get_portdock();
+		const PortDock* pd = get(L, egbase)->get_portdock();
 		if (pd) {
 			if (pd->expedition_started()) {
 				return 1;
@@ -4912,7 +4956,7 @@ int LuaWarehouse::start_expedition(lua_State* L) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		PortDock* pd = wh->get_portdock();
+		const PortDock* pd = wh->get_portdock();
 		if (!pd) {
 			return 0;
 		}
@@ -4943,7 +4987,7 @@ int LuaWarehouse::cancel_expedition(lua_State* L) {
 	}
 
 	if (upcast(Game, game, &egbase)) {
-		PortDock* pd = wh->get_portdock();
+		const PortDock* pd = wh->get_portdock();
 		if (!pd) {
 			return 0;
 		}

@@ -25,7 +25,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/text/bidi.h"
@@ -50,19 +50,18 @@ void replace_entities(std::string* text) {
 }
 
 int text_width(const std::string& text, int ptsize) {
-	return UI::g_fh1->render(
-	                   as_editorfont(
-	                      text.substr(
-	                         0, g_gr->max_texture_size_for_font_rendering() / text_height() - 1),
-	                      ptsize - UI::g_fh1->fontset()->size_offset()))
+	return UI::g_fh->render(
+	                  as_editorfont(
+	                     text.substr(
+	                        0, g_gr->max_texture_size_for_font_rendering() / text_height() - 1),
+	                     ptsize - UI::g_fh->fontset()->size_offset()))
 	   ->width();
 }
 
 int text_height(int ptsize, UI::FontSet::Face face) {
-	return UI::g_fh1->render(as_aligned(UI::g_fh1->fontset()->representative_character(),
-	                                    UI::Align::kLeft,
-	                                    ptsize - UI::g_fh1->fontset()->size_offset(),
-	                                    RGBColor(0, 0, 0), face))
+	return UI::g_fh->render(as_aligned(UI::g_fh->fontset()->representative_character(),
+	                                   UI::Align::kLeft, ptsize - UI::g_fh->fontset()->size_offset(),
+	                                   RGBColor(0, 0, 0), face))
 	   ->height();
 }
 
@@ -76,9 +75,7 @@ std::string richtext_escape(const std::string& given_text) {
 
 std::string as_game_tip(const std::string& txt) {
 	static boost::format f(
-	   "<rt padding_l=48 padding_t=28 padding_r=48 padding_b=28>"
-	   "<p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
-
+	   "<rt><p align=center><font color=21211b face=serif size=16>%s</font></p></rt>");
 	f % txt;
 	return f.str();
 }
@@ -189,7 +186,31 @@ std::string as_message(const std::string& heading, const std::string& body) {
 	      .str());
 }
 
-std::string as_header(const std::string& txt, UI::PanelStyle style, bool is_first) {
+std::string as_heading_with_content(const std::string& header,
+                                    const std::string& content,
+                                    UI::PanelStyle style,
+                                    bool is_first,
+                                    bool noescape) {
+	switch (style) {
+	case UI::PanelStyle::kFsMenu:
+		return (boost::format(
+		           "<p><font size=%i bold=1 shadow=1>%s%s <font color=D1D1D1>%s</font></font></p>") %
+		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") %
+		        (noescape ? header : richtext_escape(header)) %
+		        (noescape ? content : richtext_escape(content)))
+		   .str();
+	case UI::PanelStyle::kWui:
+		return (boost::format(
+		           "<p><font size=%i>%s<font bold=1 color=D1D1D1>%s</font> %s</font></p>") %
+		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") %
+		        (noescape ? header : richtext_escape(header)) %
+		        (noescape ? content : richtext_escape(content)))
+		   .str();
+	}
+	NEVER_HERE();
+}
+
+std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_first) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
 		return (boost::format("<p><font size=%i bold=1 shadow=1>%s%s</font></p>") %
@@ -206,8 +227,7 @@ std::string as_header(const std::string& txt, UI::PanelStyle style, bool is_firs
 std::string as_content(const std::string& txt, UI::PanelStyle style) {
 	switch (style) {
 	case UI::PanelStyle::kFsMenu:
-		return (boost::format(
-		           "<p><font size=%i bold=1 color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
+		return (boost::format("<p><font size=%i color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
 		        UI_FONT_SIZE_SMALL % richtext_escape(txt))
 		   .str();
 	case UI::PanelStyle::kWui:
@@ -221,10 +241,10 @@ std::string as_content(const std::string& txt, UI::PanelStyle style) {
 std::shared_ptr<const UI::RenderedText>
 autofit_ui_text(const std::string& text, int width, RGBColor color, int fontsize) {
 	std::shared_ptr<const UI::RenderedText> result =
-	   UI::g_fh1->render(as_uifont(richtext_escape(text), fontsize, color));
+	   UI::g_fh->render(as_uifont(richtext_escape(text), fontsize, color));
 	if (width > 0) {  // Autofit
 		for (; result->width() > width && fontsize >= kMinimumFontSize; --fontsize) {
-			result = UI::g_fh1->render(
+			result = UI::g_fh->render(
 			   as_condensed(richtext_escape(text), UI::Align::kLeft, fontsize, color));
 		}
 	}
@@ -242,7 +262,7 @@ namespace UI {
  * character. Otherwise, mirror if the current fontset is RTL.
  */
 Align mirror_alignment(Align alignment, const std::string& checkme) {
-	bool do_swap_alignment = checkme.empty() ? UI::g_fh1->fontset()->is_rtl() :
+	bool do_swap_alignment = checkme.empty() ? UI::g_fh->fontset()->is_rtl() :
 	                                           i18n::has_rtl_character(checkme.c_str(), 20);
 	if (do_swap_alignment) {
 		switch (alignment) {

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-07 10:16+0000\n"
-"PO-Revision-Date: 2018-05-07 10:19+0000\n"
+"POT-Creation-Date: 2018-09-14 06:11+0000\n"
+"PO-Revision-Date: 2018-09-14 06:13+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Persian (http://www.transifex.com/widelands/widelands/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fa\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/militarysites/atlanteans/castle/helptexts.lua:19
@@ -466,6 +466,7 @@ msgstr ""
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
+msgstr[1] ""
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 msgctxt "barbarians_building"
@@ -1653,7 +1654,7 @@ msgstr ""
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
-msgid "A brickmaker arguing with a builder"
+msgid "A clay digger arguing with a builder"
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2416,6 +2417,7 @@ msgstr ""
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/helptexts.lua:26
@@ -2533,7 +2535,7 @@ msgstr ""
 msgctxt "frisians_building"
 msgid ""
 "Just be quiet, listen carefully, and do try not to stab yourself until I’ve "
-"explained to you how to hold a curved sword."
+"explained to you how to hold a broadsword."
 msgstr ""
 
 #. TRANSLATORS: Purpose helptext for a building
@@ -2921,6 +2923,7 @@ msgstr ""
 msgid "Garrisoned soldiers heal %d health point per second."
 msgid_plural "Garrisoned soldiers heal %d health points per second."
 msgstr[0] ""
+msgstr[1] ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:234
 #: ../../data/tribes/scripting/help/building_help.lua:240
@@ -3089,6 +3092,7 @@ msgstr ""
 msgid "Worker uses:"
 msgid_plural "Workers use:"
 msgstr[0] ""
+msgstr[1] ""
 
 #: ../../data/tribes/scripting/help/building_help.lua:680
 msgid "Production"
@@ -3673,23 +3677,26 @@ msgid "Producer"
 msgstr ""
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:167
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: Worker Encyclopedia: Workers recruited by a productionsite
 #: ../../data/tribes/scripting/help/worker_help.lua:79
 msgid "Worker recruited:"
 msgid_plural "Workers recruited:"
 msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: Worker Encyclopedia: A list of buildings where a worker can
 #. work
@@ -3698,6 +3705,7 @@ msgstr[0] ""
 msgid "Works at"
 msgid_plural "Works at"
 msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: Tribal Encyclopedia: Heading for which tool a worker uses
 #: ../../data/tribes/scripting/help/worker_help.lua:144
@@ -3724,6 +3732,7 @@ msgstr ""
 msgid "Increased by %1% point for each level."
 msgid_plural "Increased by %1% points for each level."
 msgstr[0] ""
+msgstr[1] ""
 
 #. TRANSLATORS: Soldier health / attack defense / evade level
 #: ../../data/tribes/scripting/help/worker_help.lua:173
@@ -3733,6 +3742,7 @@ msgstr[0] ""
 msgid "The maximum level is %1%."
 msgid_plural "The maximum level is %1%."
 msgstr[0] ""
+msgstr[1] ""
 
 #: ../../data/tribes/scripting/help/worker_help.lua:175
 msgid "Attack"
@@ -4382,7 +4392,7 @@ msgstr ""
 msgctxt "frisians_ware"
 msgid ""
 "The Frisians produce granite blocks in quarries and rock mines. They can be "
-"refined by a brick burner."
+"refined in a brick kiln."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Granite
@@ -4975,7 +4985,7 @@ msgstr ""
 #: ../../data/tribes/wares/shovel/helptexts.lua:12
 msgctxt "frisians_ware"
 msgid ""
-"They are used by berry and reed farmers as well as foresters. Brickmakers "
+"They are used by berry and reed farmers as well as foresters. Clay diggers "
 "also need them to dig mud out of hard soil."
 msgstr ""
 
@@ -5082,12 +5092,12 @@ msgid ""
 "spidercloth for their construction."
 msgstr ""
 
-#. TRANSLATORS: Helptext for a ware: Curved Sword
-#: ../../data/tribes/wares/sword_curved/helptexts.lua:4
+#. TRANSLATORS: Helptext for a ware: Broadsword
+#: ../../data/tribes/wares/sword_broad/helptexts.lua:4
 msgctxt "frisians_ware"
 msgid ""
-"The curved sword is the weapon used by level 2 soldiers. Level 5 soldiers "
-"are equipped with two curved swords."
+"The broadsword is the weapon used by level 2 soldiers. Level 5 soldiers are "
+"equipped with a broadsword and a double-edged sword."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Double-edged Sword
@@ -5103,7 +5113,7 @@ msgstr ""
 msgctxt "frisians_ware"
 msgid ""
 "The long sword is the weapon used by level 1 soldiers. Level 4 soldiers are "
-"equipped with two long swords."
+"equipped with a long and a double-edged sword."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a ware: Short sword
@@ -5893,7 +5903,7 @@ msgstr ""
 #. TRANSLATORS: Helptext for a worker: Brickmaker
 #: ../../data/tribes/workers/frisians/brickmaker/helptexts.lua:3
 msgctxt "frisians_worker"
-msgid "Makes clay out of mud and water or bricks out of clay and granite."
+msgid "Burns bricks out of clay and granite."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Builder
@@ -5912,6 +5922,12 @@ msgstr ""
 #: ../../data/tribes/workers/frisians/charcoal_burner/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Burns logs and clay to produce coal."
+msgstr ""
+
+#. TRANSLATORS: Helptext for a worker: Clay Digger
+#: ../../data/tribes/workers/frisians/claydigger/helptexts.lua:3
+msgctxt "frisians_worker"
+msgid "Makes clay out of mud and water."
 msgstr ""
 
 #. TRANSLATORS: Helptext for a worker: Farmer

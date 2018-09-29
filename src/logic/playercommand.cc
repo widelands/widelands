@@ -199,7 +199,7 @@ void PlayerCommand::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 void PlayerCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version >= 2 && packet_version <= kCurrentPacketVersionPlayerCommand) {
+		if (packet_version == kCurrentPacketVersionPlayerCommand) {
 			GameLogicCommand::read(fr, egbase, mol);
 			sender_ = fr.unsigned_8();
 			if (!egbase.get_player(sender_))
@@ -1140,16 +1140,14 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 void CmdSetInputMaxFill::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdSetInputMaxFill) {
+		if (packet_version == kCurrentPacketVersionCmdSetInputMaxFill) {
 			PlayerCommand::read(fr, egbase, mol);
 			serial_ = get_object_serial_or_zero<Building>(fr.unsigned_32(), mol);
 			index_ = fr.signed_32();
-			if (packet_version > 1) {
-				if (fr.unsigned_8() == 0) {
-					type_ = wwWARE;
-				} else {
-					type_ = wwWORKER;
-				}
+			if (fr.unsigned_8() == 0) {
+				type_ = wwWARE;
+			} else {
+				type_ = wwWORKER;
 			}
 			max_fill_ = fr.unsigned_32();
 		} else {
@@ -1229,9 +1227,8 @@ CmdSetWareTargetQuantity::CmdSetWareTargetQuantity(const uint32_t init_duetime,
 
 void CmdSetWareTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (economy() < player->get_nr_economies() && game.tribes().ware_exists(ware_type())) {
-		player->get_economy_by_number(economy())->set_ware_target_quantity(
-		   ware_type(), permanent_, duetime());
+	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
+		player->get_economy(economy())->set_ware_target_quantity(ware_type(), permanent_, duetime());
 	}
 }
 
@@ -1280,10 +1277,9 @@ CmdResetWareTargetQuantity::CmdResetWareTargetQuantity(const uint32_t init_dueti
 void CmdResetWareTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	const TribeDescr& tribe = player->tribe();
-	if (economy() < player->get_nr_economies() && game.tribes().ware_exists(ware_type())) {
+	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
 		const int count = tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
-		player->get_economy_by_number(economy())->set_ware_target_quantity(
-		   ware_type(), count, duetime());
+		player->get_economy(economy())->set_ware_target_quantity(ware_type(), count, duetime());
 	}
 }
 
@@ -1328,8 +1324,8 @@ CmdSetWorkerTargetQuantity::CmdSetWorkerTargetQuantity(const uint32_t init_dueti
 
 void CmdSetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
-	if (economy() < player->get_nr_economies() && game.tribes().worker_exists(ware_type())) {
-		player->get_economy_by_number(economy())->set_worker_target_quantity(
+	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
+		player->get_economy(economy())->set_worker_target_quantity(
 		   ware_type(), permanent_, duetime());
 	}
 }
@@ -1379,10 +1375,9 @@ CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity(const uint32_t init_d
 void CmdResetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	const TribeDescr& tribe = player->tribe();
-	if (economy() < player->get_nr_economies() && game.tribes().ware_exists(ware_type())) {
+	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
 		const int count = tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
-		player->get_economy_by_number(economy())->set_worker_target_quantity(
-		   ware_type(), count, duetime());
+		player->get_economy(economy())->set_worker_target_quantity(ware_type(), count, duetime());
 	}
 }
 

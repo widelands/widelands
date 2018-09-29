@@ -54,7 +54,7 @@ return {
              bread_paddle = 2,
              kitchen_tools = 2,
              felling_ax = 3,
-             needles = 2,
+             needles = 1,
              basket = 2,
              pick = 5,
              shovel = 5,
@@ -85,6 +85,7 @@ return {
              frisians_stonemason = 2,
              frisians_reindeer = 5,
              frisians_trainer = 4,
+             frisians_seamstress_master = 1,
          },
          -- Max health: 2, Max attack: 6, Max defense: 2, Max evade: 0
          soldiers = {
@@ -110,9 +111,9 @@ return {
 
       place_building_in_region(player, "frisians_brick_kiln", sf:region(11), {
          inputs = {
-            clay = 8,
-            granite = 8,
-            coal = 4
+            clay = 6,
+            granite = 3,
+            coal = 3
          }
       })
 

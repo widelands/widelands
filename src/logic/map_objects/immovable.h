@@ -26,7 +26,6 @@
 #include "base/macros.h"
 #include "graphic/animation.h"
 #include "logic/map_objects/buildcost.h"
-#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
@@ -97,16 +96,13 @@ struct BaseImmovable : public MapObject {
 	virtual PositionList get_positions(const EditorGameBase&) const = 0;
 
 	// Draw this immovable onto 'dst' choosing the frame appropriate for
-	// 'gametime'. 'draw_text' decides if census and statistics are written too.
+	// 'gametime'.
 	// The 'coords_to_draw' are passed one to give objects that occupy multiple
 	// fields a way to only draw themselves once. The 'point_on_dst' determines
 	// the point for the hotspot of the animation and 'scale' determines how big
 	// the immovable will be plotted.
-	virtual void draw(uint32_t gametime,
-	                  TextToDraw draw_text,
-	                  const Vector2f& point_on_dst,
-	                  float scale,
-	                  RenderTarget* dst) = 0;
+	virtual void
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) = 0;
 
 	static int32_t string_to_size(const std::string& size);
 	static std::string size_to_string(int32_t size);
@@ -176,7 +172,7 @@ protected:
 	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
-	/// \see ActConstruction
+	/// \see ActConstruct
 	Buildcost buildcost_;
 
 	std::string species_;
@@ -227,11 +223,8 @@ public:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          float scale,
-	          RenderTarget* dst) override;
+	void
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 	void switch_program(Game& game, const std::string& programname);
 	bool construct_ware(Game& game, DescriptionIndex index);
@@ -247,6 +240,8 @@ public:
 		return nullptr;
 	}
 
+	std::string info_string(MapObject::InfoStringType format) override;
+
 protected:
 	// The building type that created this immovable, if any.
 	const BuildingDescr* former_building_descr_;
@@ -261,7 +256,7 @@ protected:
 
 /* GCC 4.0 has problems with friend declarations: It doesn't allow
  * substructures of friend classes private access but we rely on this behaviour
- * for ImmovableProgram::ActConstruction. As a dirty workaround, we make the
+ * for ImmovableProgram::ActConstruct. As a dirty workaround, we make the
  * following variables public for this versions but keep the protected for
  * other GCC versions.
  * See the related bug lp:688832.
@@ -314,7 +309,6 @@ private:
 
 	void increment_program_pointer();
 	void draw_construction(uint32_t gametime,
-	                       TextToDraw draw_text,
 	                       const Vector2f& point_on_dst,
 	                       float scale,
 	                       RenderTarget* dst);
@@ -357,7 +351,7 @@ struct PlayerImmovable : public BaseImmovable {
 		return workers_;
 	}
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	/**
 	 * These functions are called when a ware or worker arrives at

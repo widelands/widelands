@@ -25,17 +25,21 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {105, 132},
+         hotspot = {105, 138},
          fps = 10,
       },
       working = {
-         pictures = path.list_files (dirname .. "working_???.png"),
-         hotspot = {105, 132},
-         fps = 15,
+         pictures = path.list_files (dirname .. "working_??.png"),
+         hotspot = {105, 138},
+         fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {105, 108},
+         hotspot = {105, 111},
+      },
+      build = {
+         pictures = path.list_files (dirname .. "build_?.png"),
+         hotspot = {105, 111},
       },
    },
 
@@ -60,7 +64,7 @@ tribes:new_productionsite_type {
          actions = {
             "call=plant_barley",
             "call=harvest_barley",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       plant_barley = {
@@ -68,7 +72,7 @@ tribes:new_productionsite_type {
          descname = _"planting barley",
          actions = {
             "sleep=18000",
-            "worker=plant"
+            "callworker=plant"
          }
       },
       harvest_barley = {
@@ -76,7 +80,7 @@ tribes:new_productionsite_type {
          descname = _"harvesting barley",
          actions = {
             "sleep=8000",
-            "worker=harvest",
+            "callworker=harvest",
             "animate=working 40000",
             "produce=barley" --produces 2 barley per field
          }
