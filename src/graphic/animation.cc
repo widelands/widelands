@@ -107,7 +107,7 @@ private:
 };
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : frametime_(FRAME_LENGTH), hasplrclrs_(false), scale_(1), play_once_(false) {
+   : representative_frame_(table.has_key("representative_frame") ? table.get_int("representative_frame") : 0), frametime_(FRAME_LENGTH), hasplrclrs_(false), scale_(1), play_once_(false) {
 	try {
 		get_point(*table.get_table("hotspot"), &hotspot_);
 
@@ -154,6 +154,10 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 				                 "this animation is %s",
 				                 static_cast<double>(scale_), image_files_[0].c_str());
 			}
+		}
+
+		if (representative_frame_ < 0 || static_cast<unsigned int>(representative_frame_) > image_files_.size() - 1) {
+			throw wexception("Animation has %d as its representative frame, but the frame indices available are 0 - %" PRIuS, representative_frame_, image_files_.size() - 1);
 		}
 
 		assert(!image_files_.empty());
@@ -220,8 +224,8 @@ uint32_t NonPackedAnimation::frametime() const {
 
 const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const {
 	assert(!image_files_.empty());
-	const Image* image = (hasplrclrs_ && clr) ? playercolor_image(*clr, image_files_[0]) :
-	                                            g_gr->images().get(image_files_[0]);
+	const Image* image = (hasplrclrs_ && clr) ? playercolor_image(*clr, image_files_[representative_frame_]) :
+	                                            g_gr->images().get(image_files_[representative_frame_]);
 
 	const int w = image->width();
 	const int h = image->height();

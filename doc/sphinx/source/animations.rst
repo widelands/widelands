@@ -15,6 +15,7 @@ Animations are defined as Lua tables. All map objects have a mandatory ``idle`` 
             directory = "sound/foo",
             name = "bar",
          },
+         representative_frame = 3,
       },
       working = ...
    }
@@ -40,6 +41,8 @@ Let's have a detailed look at the ``idle`` animation:
 **sound_effect**
    *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play them in sequence.
 
+**representative_frame**
+   *Optional*. Choose the animation frame that will be displayed in messages and in the encyclopedia as a representative image. Default is 0.
 
 Directional Animations
 ----------------------
