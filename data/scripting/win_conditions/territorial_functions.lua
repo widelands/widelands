@@ -148,9 +148,7 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
       end
 
       for pidx, playerinfo in ipairs(teaminfo.players) do
-         if teaminfo.points ~= playerinfo.points then
-            winning_players[playerinfo.number] = nil
-         elseif is_winner and teaminfo.team == 0 then
+         if is_winner and teaminfo.team == 0 and teaminfo.points == playerinfo.points then
             print("NOCOM Winner is player " .. playerinfo.number .. " with " .. playerinfo.points .. " points")
             territory_was_kept = winning_players[playerinfo.number] ~= nil
             winning_players[playerinfo.number] = true
