@@ -83,6 +83,7 @@ world:new_immovable_type{
    name = "palm_date_desert_old",
    descname = _ "Date Palm (Old)",
    species = _ "Date Palm",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_palm",
    size = "small",
    attributes = { "tree" },

@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "spruce_summer_old",
    descname = _ "Spruce (Old)",
    species = _ "Spruce",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_coniferous",
    size = "small",
    attributes = { "tree" },

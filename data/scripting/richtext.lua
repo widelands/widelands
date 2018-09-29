@@ -489,7 +489,7 @@ end
 
 function img_object(name, attributes)
    if attributes then
-      return "<img object=" .. name .." " .. attributes .. ">"
+      return "<img object=" .. name .. " " .. attributes .. ">"
    else
       return "<img object=" .. name .. ">"
    end

@@ -80,6 +80,7 @@ world:new_immovable_type{
    name = "oak_summer_old",
    descname = _ "Oak (Old)",
    species = _ "Oak",
+   icon = dirname .. "old/idle_0.png",
    editor_category = "trees_deciduous",
    size = "small",
    attributes = { "tree" },
