@@ -3083,6 +3083,7 @@ int LuaWorkerDescription::get_employers(lua_State* L) {
 
       (RO) returns true if this worker is buildable
 */
+// TODO(GunChleoc): Rename to "buildable" for consistency
 int LuaWorkerDescription::get_is_buildable(lua_State* L) {
 	lua_pushboolean(L, get()->is_buildable());
 	return 1;
@@ -5940,7 +5941,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, initial_resource_amount),
    PROP_RO(LuaField, claimers),
    PROP_RO(LuaField, owner),
-   PROP_RO(LuaField, is_buildable),
+   PROP_RO(LuaField, buildable),
    {nullptr, nullptr, nullptr},
 };
 
@@ -6268,12 +6269,12 @@ int LuaField::get_owner(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: is_buildable
+   .. attribute:: buildable
 
       (RO) Returns :const:`true` if a flag or building could be built on this field,
       independently of whether anybody currently owns this field.
 */
-int LuaField::get_is_buildable(lua_State* L) {
+int LuaField::get_buildable(lua_State* L) {
 	const NodeCaps caps = fcoords(L).field->nodecaps();
 	const bool is_buildable = (caps & BUILDCAPS_FLAG)
 			|| (caps & BUILDCAPS_SMALL)

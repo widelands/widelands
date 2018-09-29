@@ -26,7 +26,7 @@ function get_buildable_fields()
    for x=0, map.width-1 do
       for y=0, map.height-1 do
          local f = map:get_field(x,y)
-         if f.is_buildable then
+         if f.buildable then
             table.insert(fields, f)
          end
       end
