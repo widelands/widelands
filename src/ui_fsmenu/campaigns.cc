@@ -31,7 +31,6 @@
 #include "scripting/lua_interface.h"
 
 namespace {
-// NOCOM Call fix_cross_file on kCampVisFileLegacy and kCampVisFile
 const std::string kCampVisFileLegacy = "save/campvis";
 }
 
