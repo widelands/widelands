@@ -57,7 +57,7 @@ function dependencies_resi(tribename, resource, items, text)
          am = amount
       end
    end
-   local items_with_resource = { wl.Game():get_immovable_description(resi).representative_image }
+   local items_with_resource = { wl.Game():get_immovable_description(resi).icon_name }
    for count, item in pairs(items) do
       table.insert(items_with_resource, item.icon_name)
    end
