@@ -221,13 +221,17 @@ void Window::move_inside_parent() {
 }
 
 /**
- * Move the window so that it is centered wrt the parent.
-*/
+ * Move the window so that it is centered inside the parent.
+ *
+ * Do nothing if window has no parent.
+ */
 void Window::center_to_parent() {
-	Panel& parent = *get_parent();
+	Panel* parent = get_parent();
 
-	set_pos(Vector2i((static_cast<int32_t>(parent.get_inner_w()) - get_w()) / 2,
-	                 (static_cast<int32_t>(parent.get_inner_h()) - get_h()) / 2));
+    if (parent) {
+        set_pos(Vector2i((static_cast<int32_t>(parent->get_inner_w()) - get_w()) / 2,
+                         (static_cast<int32_t>(parent->get_inner_h()) - get_h()) / 2));
+    }
 }
 
 /**
