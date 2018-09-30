@@ -172,6 +172,7 @@ void GameClient::run() {
 
 	try {
 		UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/progress.png");
+        d->modal = loader_ui;
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
@@ -204,7 +205,7 @@ void GameClient::run() {
 		d->lasttimestamp = game.get_gametime();
 		d->lasttimestamp_realtime = SDL_GetTicks();
 
-		d->modal = game.get_ibase();
+        d->modal = igb;
 		game.run(loader_ui, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 		                                           Widelands::Game::NewMPScenario :
 		                                           Widelands::Game::NewNonScenario,
@@ -217,7 +218,6 @@ void GameClient::run() {
 		d->modal = nullptr;
 		d->game = nullptr;
 	} catch (...) {
-		d->modal = nullptr;
 		WLApplication::emergency_save(game);
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
@@ -225,6 +225,7 @@ void GameClient::run() {
 		if (internet_) {
 			InternetGaming::ref().logout("CLIENT_CRASHED");
 		}
+        d->modal = nullptr;
 		throw;
 	}
 }
