@@ -396,6 +396,7 @@ void Fleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 		ship->set_economy(*game, nullptr);
 
 	if (ship->get_destination(egbase)) {
+		ship->get_destination(egbase)->ship_coming(false);
 		update(egbase);
 	}
 

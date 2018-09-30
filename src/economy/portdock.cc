@@ -369,6 +369,16 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
+	// Check for items with invalid destination
+	for (auto si_it = waiting_.begin(); si_it != waiting_.end(); ++si_it) {
+		if (!si_it->get_destination(game)) {
+			// Invalid destination. Carry the item back into the warehouse
+			si_it->set_location(game, warehouse_);
+			si_it->end_shipping(game);
+			si_it = waiting_.erase(si_it);
+		}
+	}
+
 	// Decide where the arrived ship will go next
 	PortDock* next_port = fleet_->find_next_dest(game, ship, *this);
 	if (!next_port) {
@@ -384,19 +394,11 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 
 	// Firstly load the items which go to chosen destination, while also checking for items with invalid destination
 	for (auto si_it = waiting_.begin(); si_it != waiting_.end(); ++si_it) {
-		const PortDock* itemdest = si_it->get_destination(game);
-		if (itemdest) {
-			// Valid destination. Only load the item if it matches the ship's destination and the ship still has room for it
-			if (remaining_capacity > 0 && itemdest == next_port) {
-				ship.add_item(game, *si_it); // load it
-				si_it = waiting_.erase(si_it);
-				--remaining_capacity;
-			}
-		} else {
-			// Invalid destination. Carry the item back into the warehouse
-			si_it->set_location(game, warehouse_);
-			si_it->end_shipping(game);
+		// Only load the item if it matches the ship's destination and the ship still has room for it
+		if (remaining_capacity > 0 && si_it->get_destination(game) == next_port) {
+			ship.add_item(game, *si_it); // load it
 			si_it = waiting_.erase(si_it);
+			--remaining_capacity;
 		}
 	}
 

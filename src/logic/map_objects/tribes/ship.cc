@@ -1012,9 +1012,6 @@ void Ship::sink_ship(Game& game) {
 	if (!state_is_sinkable()) {
 		return;
 	}
-	if (destination_.is_set()) {
-		destination_.get(game)->ship_coming(false);
-	}
 	ship_state_ = ShipStates::kSinkRequest;
 	// Make sure the ship is active and close possible open windows
 	ship_wakeup(game);
