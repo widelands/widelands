@@ -118,8 +118,6 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& 
 		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
 	}
 
-	// NOCOM Build animations are broken
-
 	// TODO(GunChleoc): We want to rename these from "pictures" to "files", because we'll have spritesheets etc. in the future, and this naming will be clearer.
 	// We don't want to convert them in bulk right now though - it will take care of itself as we convert to mipmaps.
 	image_files = (table.has_key("files") ? table.get_table("files") : table.get_table("pictures"))->array_entries<std::string>();
@@ -339,8 +337,8 @@ Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
 	ensure_graphics_are_loaded();
 	const float best_scale = find_best_scale(scale);
 	// Using floor + ceil for pixel perfect positioning
-	return Rectf(std::floor(position.x - hotspot_.x * scale - source_rect.x),
-	             std::floor(position.y - hotspot_.y * scale - source_rect.y),
+	return Rectf(std::floor(position.x - (hotspot_.x - source_rect.x / best_scale) * scale),
+	             std::floor(position.y - (hotspot_.y - source_rect.y / best_scale) * scale),
 	             std::ceil(source_rect.w * scale / best_scale), std::ceil(source_rect.h * scale / best_scale));
 }
 
