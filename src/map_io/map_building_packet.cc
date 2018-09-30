@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 
 #include "base/macros.h"
 #include "economy/request.h"
-#include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -33,7 +32,6 @@
 #include "logic/player.h"
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
-#include "wui/interactive_base.h"
 
 namespace Widelands {
 
@@ -56,11 +54,10 @@ void MapBuildingPacket::read(FileSystem& fs,
 	} catch (...) {
 		return;
 	}
-	InteractiveBase& ibase = *egbase.get_ibase();
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
-			Map& map = egbase.map();
+			const Map& map = egbase.map();
 			uint16_t const width = map.get_width();
 			uint16_t const height = map.get_height();
 			FCoords c;
@@ -101,9 +98,6 @@ void MapBuildingPacket::read(FileSystem& fs,
 
 							mol.register_object<Building>(serial, *building);
 							read_priorities(*building, fr);
-
-							//  Reference the players tribe if in editor.
-							ibase.reference_player_tribe(p, &tribe);
 						} else
 							throw GameDataError("player %u does not exist", p);
 					}

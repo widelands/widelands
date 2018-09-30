@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -133,7 +133,7 @@ static int L_dirname(lua_State* L) {
 .. function:: list_files(filename_template)
 
    Lists the full path for all files that fit the template pattern.
-   Use ? as placeholders for numbers, e.g. 'directory/idle_??.png' will list
+   Use ? as placeholders for numbers, e.g. 'directory/idle\_??.png' will list
    'directory/idle_00.png', 'directory/idle_01.png' etc, and
    'directory/idle.png' will just list 'directory/idle.png'.
 
@@ -143,7 +143,7 @@ static int L_dirname(lua_State* L) {
    :returns: An :class:`array` of file paths in lexicographical order.
 */
 static int L_list_files(lua_State* L) {
-	std::string filename_template = luaL_checkstring(L, 1);
+	const std::string filename_template = luaL_checkstring(L, 1);
 
 	NumberGlob glob(filename_template);
 	std::string filename;
@@ -161,10 +161,46 @@ static int L_list_files(lua_State* L) {
 	return 1;
 }
 
-const static struct luaL_Reg path[] = {{"basename", &L_basename},
-                                       {"dirname", &L_dirname},
-                                       {"list_files", &L_list_files},
-                                       {nullptr, nullptr}};
+/* RST
+.. function:: list_directory(filename)
+
+   Returns all file names contained in the given directory.
+
+   :type filename: class:`string`
+   :arg filename: The directory to read.
+
+   :returns: An :class:`array` of file names.
+*/
+static int L_list_directory(lua_State* L) {
+	lua_newtable(L);
+	int idx = 1;
+	for (const std::string& filename : g_fs->list_directory(luaL_checkstring(L, 1))) {
+		lua_pushint32(L, idx++);
+		lua_pushstring(L, filename);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+.. function:: is_directory(filename)
+
+   Checks whether the given filename points to a directory.
+
+   :type filename: class:`string`
+   :arg filename: The filename to check.
+
+   :returns: ``true`` if the given path is a directory.
+*/
+static int L_is_directory(lua_State* L) {
+	lua_pushboolean(L, g_fs->is_directory(luaL_checkstring(L, -1)));
+	return 1;
+}
+
+const static struct luaL_Reg path[] = {
+   {"basename", &L_basename},         {"dirname", &L_dirname},
+   {"list_files", &L_list_files},     {"list_directory", &L_list_directory},
+   {"is_directory", &L_is_directory}, {nullptr, nullptr}};
 
 void luaopen_path(lua_State* L) {
 	luaL_newlib(L, path);

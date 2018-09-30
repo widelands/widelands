@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,16 +31,14 @@
  */
 class MapDetails : public UI::Panel {
 public:
-	enum class Style { kFsMenu, kWui };
-
-	MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, Style style);
+	MapDetails(UI::Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style);
 
 	void clear();
 	void update(const MapData& mapdata, bool localize_mapname);
 
 private:
 	void layout() override;
-	const Style style_;
+	const UI::PanelStyle style_;
 	const int padding_;
 
 	UI::Box main_box_;

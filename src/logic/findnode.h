@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ private:
 		int refcount;
 	};
 	template <typename T> struct Capsule : public BaseCapsule {
-		Capsule(const T& init_op) : op(init_op) {
+		explicit Capsule(const T& init_op) : op(init_op) {
 		}
 		bool accept(const Map& map, const FCoords& coord) const override {
 			return op.accept(map, coord);
@@ -65,7 +65,7 @@ private:
 	BaseCapsule* capsule;
 
 public:
-	FindNode(const FindNode& o) {
+	explicit FindNode(const FindNode& o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -91,7 +91,7 @@ public:
 };
 
 struct FindNodeCaps {
-	FindNodeCaps(uint8_t init_mincaps) : mincaps(init_mincaps) {
+	explicit FindNodeCaps(uint8_t init_mincaps) : mincaps(init_mincaps) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
@@ -132,7 +132,7 @@ struct FindNodeSize {
 		sizePort,  //  can build a port on this field
 	};
 
-	FindNodeSize(Size init_size) : size(init_size) {
+	explicit FindNodeSize(Size init_size) : size(init_size) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
@@ -145,7 +145,7 @@ private:
 struct FindNodeImmovableSize {
 	enum { sizeNone = 1 << 0, sizeSmall = 1 << 1, sizeMedium = 1 << 2, sizeBig = 1 << 3 };
 
-	FindNodeImmovableSize(uint32_t init_sizes) : sizes(init_sizes) {
+	explicit FindNodeImmovableSize(uint32_t init_sizes) : sizes(init_sizes) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
@@ -156,7 +156,7 @@ private:
 
 /// Accepts a node if it has an immovable with a given attribute.
 struct FindNodeImmovableAttribute {
-	FindNodeImmovableAttribute(uint32_t attrib) : attribute(attrib) {
+	explicit FindNodeImmovableAttribute(uint32_t attrib) : attribute(attrib) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
@@ -167,7 +167,7 @@ private:
 
 /// Accepts a node if it has at least one of the given resource.
 struct FindNodeResource {
-	FindNodeResource(DescriptionIndex res) : resource(res) {
+	explicit FindNodeResource(DescriptionIndex res) : resource(res) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;
@@ -179,7 +179,8 @@ private:
 /// Accepts a node if it has the given resource type and remaining capacity.
 /// If 'br' == AnimalBreedable::kAnimalFull, only accepts the node if it is full
 struct FindNodeResourceBreedable {
-	FindNodeResourceBreedable(DescriptionIndex res, AnimalBreedable br = AnimalBreedable::kDefault)
+	explicit FindNodeResourceBreedable(DescriptionIndex res,
+	                                   AnimalBreedable br = AnimalBreedable::kDefault)
 	   : resource(res), strictness(br) {
 	}
 
@@ -193,7 +194,7 @@ private:
 /// Accepts a node if it is a shore node in the sense that it is walkable
 /// and has at least one neighbouring field that is swimmable
 struct FindNodeShore {
-	FindNodeShore(uint16_t f = 1) : min_fields(f) {
+	explicit FindNodeShore(uint16_t f = 1) : min_fields(f) {
 	}
 
 	bool accept(const Map&, const FCoords&) const;

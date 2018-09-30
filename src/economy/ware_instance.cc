@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ namespace Widelands {
 // TODO(unknown): This maybe shouldn't be here.
 struct IdleWareSupply : public Supply {
 	explicit IdleWareSupply(WareInstance&);
-	virtual ~IdleWareSupply();
+	~IdleWareSupply() override;
 
 	void set_economy(Economy*);
 
@@ -309,8 +309,9 @@ void WareInstance::update(Game& game) {
 
 	// Update whether we have a Supply or not
 	if (!transfer_ || !transfer_->get_request()) {
-		if (!supply_)
+		if (!supply_) {
 			supply_ = new IdleWareSupply(*this);
+		}
 	} else {
 		delete supply_;
 		supply_ = nullptr;
@@ -501,7 +502,7 @@ PlayerImmovable* WareInstance::get_next_move_step(Game& game) {
 	return transfer_ ? dynamic_cast<PlayerImmovable*>(transfer_nextstep_.get(game)) : nullptr;
 }
 
-void WareInstance::log_general_info(const EditorGameBase& egbase) {
+void WareInstance::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
 	molog("Ware: %s\n", descr().name().c_str());
@@ -517,9 +518,6 @@ Load/save support
 */
 
 constexpr uint8_t kCurrentPacketVersion = 2;
-
-WareInstance::Loader::Loader() : location_(0), transfer_nextstep_(0) {
-}
 
 void WareInstance::Loader::load(FileRead& fr) {
 	MapObject::Loader::load(fr);

@@ -33,7 +33,9 @@ tribes:new_productionsite_type {
       basic_amount = 1,
        -- Farm needs spidercloth to be built and spidercloth needs corn for production
        -- -> farm should be built ASAP!
-      prohibited_till = 200
+      prohibited_till = 250,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
    },
 
    working_positions = {
@@ -49,25 +51,25 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_corn",
-            "call=harvest_corn",
-            "return=skipped"
+            "call=plant",
+            "call=harvest",
+            "return=no_stats"
          }
       },
-      plant_corn = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting corn because ...
          descname = _"planting corn",
          actions = {
             "sleep=14000",
-            "worker=plant"
+            "callworker=plant"
          }
       },
-      harvest_corn = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting corn because ...
          descname = _"harvesting corn",
          actions = {
             "sleep=4000",
-            "worker=harvest"
+            "callworker=harvest"
          }
       },
    },

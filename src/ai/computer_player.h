@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,14 @@
 #include <string>
 #include <vector>
 
+#include <boost/algorithm/string/predicate.hpp>
+
 #include "base/macros.h"
 #include "logic/widelands.h"
+
+// We need to use a string prefix in the game setup screens to identify the AIs, so we make sure
+// that the AI names don't contain the separator that's used to parse the strings there.
+#define AI_NAME_SEPARATOR "|"
 
 namespace Widelands {
 class Game;
@@ -61,6 +67,17 @@ struct ComputerPlayer {
 		std::string descname;
 		std::string icon_filename;
 		Type type;
+		explicit Implementation(std::string init_name,
+		                        std::string init_descname,
+		                        std::string init_icon_filename,
+		                        Type init_type)
+		   : name(init_name),
+		     descname(init_descname),
+		     icon_filename(init_icon_filename),
+		     type(init_type) {
+			assert(!boost::contains(name, AI_NAME_SEPARATOR));
+		}
+
 		virtual ~Implementation() {
 		}
 		virtual ComputerPlayer* instantiate(Widelands::Game&, Widelands::PlayerNumber) const = 0;

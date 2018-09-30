@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include "base/macros.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
@@ -158,13 +157,13 @@ void do_draw_minimap(Texture* texture,
 	const Widelands::Map& map = egbase.map();
 	const uint16_t surface_h = texture->height();
 	const uint16_t surface_w = texture->width();
-	const int32_t mapwidth = egbase.get_map().get_width();
+	const int32_t mapwidth = map.get_width();
 
 	for (uint32_t y = 0; y < surface_h; ++y) {
-		Widelands::FCoords f(
+		Widelands::Coords coords(
 		   Widelands::Coords(top_left.x, top_left.y + ((layers & MiniMapLayer::Zoom2) ? y / 2 : y)));
-		map.normalize_coords(f);
-		f.field = &map[f];
+		map.normalize_coords(coords);
+		Widelands::FCoords f = map.get_fcoords(coords);
 		Widelands::MapIndex i = Widelands::Map::get_index(f, mapwidth);
 		for (uint32_t x = 0; x < surface_w; ++x) {
 			if (x % 2 || !(layers & MiniMapLayer::Zoom2)) {

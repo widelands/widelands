@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include <stdint.h>
 
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -182,7 +181,7 @@ PROGRAM task
 
 Follow the steps of a configuration-defined program.
 ivar1 is the next action to be performed.
-ivar2 is used to store description indices selected by plant/setbobdescription
+ivar2 is used to store description indices selected by plant
 objvar1 is used to store objects found by findobject
 coords is used to store target coordinates found by findspace
 
@@ -299,20 +298,21 @@ MapObject::Loader* Critter::load(EditorGameBase& egbase,
 		uint8_t const packet_version = fr.unsigned_8();
 		// Supporting older versions for map loading
 		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
-			const std::string owner = fr.c_string();
+			const std::string critter_owner = fr.c_string();
 			std::string critter_name = fr.c_string();
 			const CritterDescr* descr = nullptr;
 
-			if (owner == "world") {
+			if (critter_owner == "world") {
 				critter_name = lookup_table.lookup_critter(critter_name);
 				descr = egbase.world().get_critter_descr(critter_name);
 			} else {
 				throw GameDataError(
-				   "Tribes don't have critters %s/%s", owner.c_str(), critter_name.c_str());
+				   "Tribes don't have critters %s/%s", critter_owner.c_str(), critter_name.c_str());
 			}
 
 			if (!descr)
-				throw GameDataError("undefined critter %s/%s", owner.c_str(), critter_name.c_str());
+				throw GameDataError(
+				   "undefined critter %s/%s", critter_owner.c_str(), critter_name.c_str());
 
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
@@ -330,10 +330,10 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderCritter);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	const std::string owner = descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
-	                             "" :  // Tribes don't have critters
-	                             "world";
-	fw.c_string(owner);
+	const std::string save_owner = descr().get_owner_type() == MapObjectDescr::OwnerType::kTribe ?
+	                                  "" :  // Tribes don't have critters
+	                                  "world";
+	fw.c_string(save_owner);
 	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);

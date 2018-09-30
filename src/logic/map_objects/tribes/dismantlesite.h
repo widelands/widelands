@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,8 +68,8 @@ public:
 	explicit DismantleSite(const DismantleSiteDescr& descr);
 	explicit DismantleSite(const DismantleSiteDescr& descr,
 	                       EditorGameBase&,
-	                       Coords const,
-	                       Player&,
+	                       const Coords&,
+	                       Player*,
 	                       bool,
 	                       Building::FormerBuildings& former_buildings);
 
@@ -87,11 +87,8 @@ protected:
 		return DISMANTLESITE_STEP_TIME;
 	}
 
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          float scale,
-	          RenderTarget* dst) override;
+	void
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 };
 }
 

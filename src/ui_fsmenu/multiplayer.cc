@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,10 @@
 
 #include "base/i18n.h"
 #include "graphic/text_constants.h"
+#include "network/crypto.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
+#include "random/random.h"
 #include "ui_basic/messagebox.h"
 #include "wui/login_box.h"
 
@@ -33,24 +35,11 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
      title(this, 0, 0, _("Choose game type"), UI::Align::kCenter),
 
      // Buttons
-     metaserver(&vbox_,
-                "metaserver",
-                0,
-                0,
-                butw_,
-                buth_,
-                g_gr->images().get(button_background_),
-                _("Internet game")),
+     metaserver(
+        &vbox_, "metaserver", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Internet game")),
      showloginbox(nullptr),
-     lan(&vbox_,
-         "lan",
-         0,
-         0,
-         butw_,
-         buth_,
-         g_gr->images().get(button_background_),
-         _("LAN / Direct IP")),
-     back(&vbox_, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Back")) {
+     lan(&vbox_, "lan", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("LAN / Direct IP")),
+     back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
 	metaserver.sigclicked.connect(
 	   boost::bind(&FullscreenMenuMultiPlayer::internet_login, boost::ref(*this)));
 
@@ -72,9 +61,9 @@ FullscreenMenuMultiPlayer::FullscreenMenuMultiPlayer()
 	Section& s = g_options.pull_section("global");
 	auto_log_ = s.get_bool("auto_log", false);
 	if (auto_log_) {
-		showloginbox = new UI::Button(
-		   this, "login_dialog", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but1.png"),
-		   g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
+		showloginbox =
+		   new UI::Button(this, "login_dialog", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary,
+		                  g_gr->images().get("images/ui_basic/continue.png"), _("Show login dialog"));
 		showloginbox->sigclicked.connect(
 		   boost::bind(&FullscreenMenuMultiPlayer::show_internet_login, boost::ref(*this)));
 	}
@@ -103,13 +92,28 @@ void FullscreenMenuMultiPlayer::internet_login() {
 	Section& s = g_options.pull_section("global");
 	if (auto_log_) {
 		nickname_ = s.get_string("nickname", _("nobody"));
-		password_ = s.get_string("password", "nobody");
+		password_ = s.get_string("password_sha1", "nobody");
 		register_ = s.get_bool("registered", false);
 	} else {
 		LoginBox lb(*this);
 		if (lb.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
 			nickname_ = lb.get_nickname();
-			password_ = lb.get_password();
+			/// NOTE: The password is only stored (in memory and on disk) and transmitted (over the
+			/// network
+			/// to the metaserver) as cryptographic hash. This does NOT mean that the password is
+			/// stored
+			/// securely on the local disk. While the password should be secure while transmitted to
+			/// the
+			/// metaserver (no-one can use the transmitted data to log in as the user) this is not the
+			/// case
+			/// for local storage. The stored hash of the password makes it hard to look at the
+			/// configuration
+			/// file and figure out the plaintext password to, e.g., log in on the forum. However, the
+			/// stored hash can be copied to another system and used to log in as the user on the
+			/// metaserver.
+			// Further note: SHA-1 is considered broken and shouldn't be used anymore. But since the
+			// passwords on the server are protected by SHA-1 we have to use it here, too
+			password_ = crypto::sha1(lb.get_password());
 			register_ = lb.registered();
 
 			s.set_bool("registered", lb.registered());
@@ -121,8 +125,10 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 	// Try to connect to the metaserver
 	const std::string& meta = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
-	InternetGaming::ref().login(nickname_, password_, register_, meta, port);
+	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
+	std::string auth = register_ ? password_ : s.get_string("uuid");
+	assert(!auth.empty());
+	InternetGaming::ref().login(nickname_, auth, register_, meta, port);
 
 	// Check whether metaserver send some data
 	if (InternetGaming::ref().logged_in())
@@ -135,7 +141,7 @@ void FullscreenMenuMultiPlayer::internet_login() {
 
 		// Reset InternetGaming and passwort and show internet login again
 		InternetGaming::ref().reset();
-		s.set_string("password", "");
+		s.set_string("password_sha1", "");
 		show_internet_login();
 	}
 }

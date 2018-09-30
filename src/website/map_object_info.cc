@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 by the Widelands Development Team
+ * Copyright (C) 2016-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
 #include "config.h"
@@ -33,59 +32,14 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/world/world.h"
-#include "sound/sound_handler.h"
+#include "website/website_common.h"
 
 using namespace Widelands;
 
 namespace {
-
-/*
- ==========================================================
- SETUP
- ==========================================================
- */
-
-// Setup the static objects Widelands needs to operate and initializes systems.
-std::unique_ptr<FileSystem> initialize(const std::string& output_path) {
-	i18n::set_locale("en");
-
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
-	}
-
-	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
-
-	std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
-
-	// We don't really need graphics or sound here, but we will get error messages
-	// when they aren't initialized
-	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
-
-	g_sound_handler.init();
-	g_sound_handler.nosound_ = true;
-	return out_filesystem;
-}
-
-// Cleanup before program end
-void cleanup() {
-	g_sound_handler.shutdown();
-
-	if (g_gr) {
-		delete g_gr;
-		g_gr = nullptr;
-	}
-
-	if (g_fs) {
-		delete g_fs;
-		g_fs = nullptr;
-	}
-
-	SDL_Quit();
-}
 
 /*
  ==========================================================
@@ -301,6 +255,9 @@ void write_buildings(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem
 		case MapObjectType::WAREHOUSE:
 			fw.write_key_value_string("type", "warehouse");
 			break;
+		case MapObjectType::MARKET:
+			fw.write_key_value_string("type", "market");
+			break;
 		case MapObjectType::MILITARYSITE:
 			fw.write_key_value_string("type", "militarysite");
 			break;
@@ -458,7 +415,7 @@ void write_workers(const TribeDescr& tribe, EditorGameBase& egbase, FileSystem* 
  ==========================================================
  */
 
-void add_tribe_info(const TribeBasicInfo& tribe_info, JSONFileWrite* fw) {
+void add_tribe_info(const Widelands::TribeBasicInfo& tribe_info, JSONFileWrite* fw) {
 	fw->write_key_value_string("name", tribe_info.name);
 	fw->close_element();
 	fw->write_key_value_string("descname", tribe_info.descname);
@@ -479,9 +436,9 @@ void write_tribes(EditorGameBase& egbase, FileSystem* out_filesystem) {
 	egbase.mutable_tribes()->postload();  // Make sure that all values have been set.
 	const Tribes& tribes = egbase.tribes();
 
-	std::vector<TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
+	std::vector<Widelands::TribeBasicInfo> tribeinfos = Widelands::get_all_tribeinfos();
 	for (size_t tribe_index = 0; tribe_index < tribeinfos.size(); ++tribe_index) {
-		const TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
+		const Widelands::TribeBasicInfo& tribe_info = tribeinfos[tribe_index];
 		log("\n\n=========================\nWriting tribe: %s\n=========================\n",
 		    tribe_info.name.c_str());
 
@@ -526,7 +483,8 @@ int main(int argc, char** argv) {
 	const std::string output_path = argv[argc - 1];
 
 	try {
-		std::unique_ptr<FileSystem> out_filesystem = initialize(output_path);
+		initialize();
+		std::unique_ptr<FileSystem> out_filesystem(&FileSystem::create(output_path));
 		EditorGameBase egbase(nullptr);
 		write_tribes(egbase, out_filesystem.get());
 	} catch (std::exception& e) {

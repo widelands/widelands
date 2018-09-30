@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ void read_objective_data(FileSystem& fs, EditorGameBase& egbase) {
 				char const* const name = s->get_name();
 				try {
 					std::unique_ptr<Objective> objective(new Objective(name));
-					Map::Objectives* objectives = egbase.map().mutable_objectives();
+					Map::Objectives* objectives = egbase.mutable_map()->mutable_objectives();
 					if (objectives->count(name)) {
 						throw GameDataError("duplicated");
 					}

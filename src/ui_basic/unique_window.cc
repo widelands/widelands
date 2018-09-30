@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,14 +37,15 @@ void UniqueWindow::Registry::create() {
 	if (!window) {
 		open_window();
 	} else {
-		if (window->is_minimal())
+		if (window->is_minimal()) {
 			window->restore();
+		}
 		window->move_to_top();
 	}
 }
 
 /**
- * Destroys the window, if it eixsts.
+ * Destroys the window, if it exists.
 */
 void UniqueWindow::Registry::destroy() {
 	if (window) {
@@ -71,21 +72,6 @@ UniqueWindow::Registry::~Registry() {
 	delete window;
 }
 
-void UniqueWindow::Registry::assign_toggle_button(UI::Button* button) {
-	assert(!on_create);
-	assert(!on_delete);
-	on_create = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kPermpressed);
-	on_delete = boost::bind(&UI::Button::set_style, button, UI::Button::Style::kRaised);
-	if (window) {
-		button->set_style(UI::Button::Style::kPermpressed);
-	}
-}
-
-void UniqueWindow::Registry::unassign_toggle_button() {
-	on_create = 0;
-	on_delete = 0;
-}
-
 /**
  * Register, position according to the registry information.
 */
@@ -104,9 +90,7 @@ UniqueWindow::UniqueWindow(Panel* const parent,
 			set_pos(Vector2i(registry_->x, registry_->y));
 			usedefaultpos_ = false;
 		}
-		if (registry_->on_create) {
-			registry_->on_create();
-		}
+		registry_->opened();
 	}
 }
 
@@ -122,9 +106,7 @@ UniqueWindow::~UniqueWindow() {
 		registry_->y = get_y();
 		registry_->valid_pos = true;
 
-		if (registry_->on_delete) {
-			registry_->on_delete();
-		}
+		registry_->closed();
 	}
 }
 }

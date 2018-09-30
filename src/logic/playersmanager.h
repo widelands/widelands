@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,7 +73,7 @@ public:
 		assert(n <= kMaxPlayers);
 		return players_[n - 1];
 	}
-	Player& player(int32_t n) const {
+	const Player& player(int32_t n) const {
 		assert(1 <= n);
 		assert(n <= kMaxPlayers);
 		return *players_[n - 1];

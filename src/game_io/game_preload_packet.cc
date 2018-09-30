@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 
 #include "base/time_string.h"
 #include "build_info.h"
-#include "graphic/graphic.h"
 #include "graphic/image_io.h"
 #include "graphic/minimap_renderer.h"
 #include "logic/game.h"
@@ -46,9 +45,11 @@ namespace Widelands {
 constexpr uint16_t kCurrentPacketVersion = 6;
 constexpr const char* kMinimapFilename = "minimap.png";
 
+// Win condition localization can come from the 'widelands' or 'win_conditions' textdomain.
 std::string GamePreloadPacket::get_localized_win_condition() const {
+	const std::string result = _(win_condition_);
 	i18n::Textdomain td("win_conditions");
-	return _(win_condition_);
+	return _(result);
 }
 
 void GamePreloadPacket::read(FileSystem& fs, Game&, MapObjectLoader* const) {
@@ -84,7 +85,7 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	Profile prof;
 	Section& s = prof.create_section("global");
 
-	InteractivePlayer const* const ipl = game.get_ipl();
+	InteractivePlayer* const ipl = game.get_ipl();
 
 	s.set_int("packet_version", kCurrentPacketVersion);
 
@@ -120,13 +121,13 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 	}
 
 	std::unique_ptr<::StreamWrite> sw(fs.open_stream_write(kMinimapFilename));
-	if (sw.get() != nullptr) {
+	if (sw != nullptr) {
 		const MiniMapLayer layers =
 		   MiniMapLayer::Owner | MiniMapLayer::Building | MiniMapLayer::Terrain;
 		std::unique_ptr<Texture> texture;
 		if (ipl != nullptr) {  // Player
-			texture = draw_minimap(
-			   game, &ipl->player(), ipl->view_area().rect(), MiniMapType::kStaticViewWindow, layers);
+			texture = draw_minimap(game, &ipl->player(), ipl->map_view()->view_area().rect(),
+			                       MiniMapType::kStaticViewWindow, layers);
 		} else {  // Observer
 			texture = draw_minimap(game, nullptr, Rectf(), MiniMapType::kStaticMap, layers);
 		}

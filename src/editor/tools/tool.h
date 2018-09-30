@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,15 +24,12 @@
 
 #include "base/macros.h"
 #include "editor/tools/action_args.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
+#include "logic/editor_game_base.h"
+#include "logic/map_objects/world/world.h"
 #include "logic/widelands_geometry.h"
 
 class EditorInteractive;
-namespace Widelands {
-class Map;
-class World;
-}
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:
@@ -99,6 +96,14 @@ public:
 		return 0;
 	}  // non unduable tools don't need to implement this.
 	virtual const Image* get_sel_impl() const = 0;
+
+	// Gives the tool the chance to modify the nodecaps to change what will be
+	// displayed as build help.
+	virtual Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                                   const Widelands::EditorGameBase&) {
+		return fcoords.field->nodecaps();
+	}
+
 	virtual bool operates_on_triangles() const {
 		return false;
 	}

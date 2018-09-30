@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,8 @@
 
 #include <functional>
 
+#include <boost/signals2.hpp>
+
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
 
@@ -41,11 +43,10 @@ struct UniqueWindow : public Window {
 		// closed.
 		std::function<void()> open_window;
 
-		// Called when the window opens.
-		std::function<void()> on_create;
-
-		// Called when the window is deleted (i.e. closed).
-		std::function<void()> on_delete;
+		// Triggered when the window opens
+		boost::signals2::signal<void()> opened;
+		// Triggered when the window closes
+		boost::signals2::signal<void()> closed;
 
 		void create();
 		void destroy();
@@ -60,15 +61,6 @@ struct UniqueWindow : public Window {
 		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {
 		}
 		~Registry();
-
-		/// The 'button' will be permpressed or not depending on whether this window is
-		/// open (on_create/on_delete callback function hooks).
-		/// This can be assigned only once.
-		void assign_toggle_button(UI::Button* button);
-
-		/// Remove the callback as a safeguard in case somewhere else in the
-		/// code someone would overwrite our hooks.
-		void unassign_toggle_button();
 	};
 
 	UniqueWindow(Panel* parent,

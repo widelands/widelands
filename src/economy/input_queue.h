@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,6 +102,14 @@ public:
 	virtual Quantity get_filled() const = 0;
 
 	/**
+	 * The amount of missing wares or workers which have been requested
+	 * but are not yet being transported to this building.
+	 * This will never be larger than (get_max_fill()-get_filled()).
+	 * @return The amount at this moment.
+	 */
+	uint32_t get_missing() const;
+
+	/**
 	 * Clear the queue appropriately.
 	 * Implementing classes should call update() at the end to remove the request.
 	 */
@@ -167,7 +175,7 @@ public:
 	 * Returns the player owning the building containing this queue.
 	 * @return A reference to the owning player.
 	 */
-	Player& owner() const {
+	const Player& owner() const {
 		return owner_.owner();
 	}
 
@@ -196,6 +204,14 @@ protected:
 	 * @param type Whether wares or workers are stored in this queue.
 	*/
 	InputQueue(PlayerImmovable& owner, DescriptionIndex index, uint8_t max_size, WareWorker type);
+
+	/**
+	 * Returns the mutable player owning the building containing this queue.
+	 * @return A pointer to the owning player.
+	 */
+	Player* get_owner() const {
+		return owner_.get_owner();
+	}
 
 	/**
 	 * Called when an item arrives at the owning building.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,10 +62,6 @@ public:
 	///  and should not be configurable.
 	DescriptionIndex default_target_quantity(const std::string& tribename) const;
 
-	std::string helptext_script() const {
-		return helptext_script_;
-	}
-
 	bool has_demand_check(const std::string& tribename) const;
 
 	/// Called when a demand check for this ware type is encountered during
@@ -91,8 +87,6 @@ private:
 
 	std::set<DescriptionIndex> consumers_;  // Buildings that consume this ware
 	std::set<DescriptionIndex> producers_;  // Buildings that produce this ware
-
-	std::string helptext_script_;  // The path and filename to the ware's helptext script
 	DISALLOW_COPY_AND_ASSIGN(WareDescr);
 };
 }

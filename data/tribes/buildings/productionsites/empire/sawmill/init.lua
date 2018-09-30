@@ -32,8 +32,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       basic_amount = 2,
-      prohibited_till = 250,
-      very_weak_ai_limit = 1,
+      very_weak_ai_limit = 2,
       weak_ai_limit = 2
    },
 
@@ -56,7 +55,7 @@ tribes:new_productionsite_type {
             "sleep=16500", -- Much faster than barbarians' wood hardener
             "return=skipped unless economy needs planks",
             "consume=log:2",
-            "play_sound=sound/sawmill sawmill 180",
+            "playsound=sound/sawmill sawmill 180",
             "animate=working 20000", -- Much faster than barbarians' wood hardener
             "produce=planks"
          }

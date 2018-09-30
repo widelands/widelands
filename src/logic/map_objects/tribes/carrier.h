@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include "logic/map_objects/tribes/worker.h"
 
 namespace Widelands {
+class PendingWare;
 
 class CarrierDescr : public WorkerDescr {
 public:
@@ -33,16 +34,10 @@ public:
 	~CarrierDescr() override {
 	}
 
-	Vector2i get_ware_hotspot() const {
-		return ware_hotspot_;
-	}
-
 protected:
 	Bob& create_object() const override;
 
 private:
-	Vector2i ware_hotspot_;
-
 	DISALLOW_COPY_AND_ASSIGN(CarrierDescr);
 };
 
@@ -55,9 +50,9 @@ struct Carrier : public Worker {
 	MO_DESCR(CarrierDescr)
 
 	explicit Carrier(const CarrierDescr& carrier_descr)
-	   : Worker(carrier_descr), promised_pickup_to_(NOONE) {
+	   : Worker(carrier_descr), operation_(NO_OPERATION) {
 	}
-	virtual ~Carrier() {
+	~Carrier() override {
 	}
 
 	bool notify_ware(Game&, int32_t flag);
@@ -67,18 +62,12 @@ struct Carrier : public Worker {
 	void start_task_transport(Game&, int32_t fromflag);
 	bool start_task_walktoflag(Game&, int32_t flag, bool offset = false);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	static Task const taskRoad;
 
-protected:
-	void draw_inner(const EditorGameBase& game,
-	                const Vector2f& point_on_dst,
-	                const float scale,
-	                RenderTarget* dst) const override;
-
 private:
-	void find_pending_ware(Game&);
+	int32_t find_source_flag(Game&);
 	int32_t find_closest_flag(Game&);
 
 	// internal task stuff
@@ -89,17 +78,14 @@ private:
 	static Task const taskTransport;
 
 	void deliver_to_building(Game&, State&);
-	void pickup_from_flag(Game&, State&);
-	void drop_ware(Game&, State&);
-	void enter_building(Game&, State&);
-	bool swap_or_wait(Game&, State&);
 
-	/// -1: no ware acked; 0/1: acked ware for start/end flag of road
 	// This should be an enum, but this clutters the code with too many casts
-	static const int32_t NOONE = -1;
-	static const int32_t START_FLAG = 0;
-	static const int32_t END_FLAG = 1;
-	int32_t promised_pickup_to_;
+	static const int32_t INIT = -3;          // ready to undertake or resume operations
+	static const int32_t WAIT = -2;          // waiting for flag capacity
+	static const int32_t NO_OPERATION = -1;  // idling
+	static const int32_t START_FLAG = 0;     // serving start flag of road
+	static const int32_t END_FLAG = 1;       // serving end flag of road
+	int32_t operation_;
 
 	// saving and loading
 protected:

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@
  */
 FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
 
      // Main Title
      title_(this, get_w() / 2, tabley_ / 3, _("Choose a campaign"), UI::Align::kCenter),
@@ -53,21 +53,24 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
                   right_column_x_ + indent_,
                   get_y_from_preceding(label_campname_) + padding_,
                   get_right_column_w(right_column_x_) - indent_,
-                  label_height_),
+                  label_height_,
+                  UI::PanelStyle::kFsMenu),
 
      label_tribename_(this, right_column_x_, get_y_from_preceding(ta_campname_) + 2 * padding_),
      ta_tribename_(this,
                    right_column_x_ + indent_,
                    get_y_from_preceding(label_tribename_) + padding_,
                    get_right_column_w(right_column_x_ + indent_),
-                   label_height_),
+                   label_height_,
+                   UI::PanelStyle::kFsMenu),
 
      label_difficulty_(this, right_column_x_, get_y_from_preceding(ta_tribename_) + 2 * padding_),
      ta_difficulty_(this,
                     right_column_x_ + indent_,
                     get_y_from_preceding(label_difficulty_) + padding_,
                     get_right_column_w(right_column_x_ + indent_),
-                    2 * label_height_ - padding_),
+                    2 * label_height_ - padding_,
+                    UI::PanelStyle::kFsMenu),
 
      label_description_(this,
                         right_column_x_,
@@ -77,7 +80,8 @@ FullscreenMenuCampaignSelect::FullscreenMenuCampaignSelect()
                      right_column_x_ + indent_,
                      get_y_from_preceding(label_description_) + padding_,
                      get_right_column_w(right_column_x_ + indent_),
-                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_) {
+                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_,
+                     UI::PanelStyle::kFsMenu) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
 	back_.set_tooltip(_("Return to the main menu"));
 	ok_.set_tooltip(_("Play this campaign"));
@@ -265,7 +269,7 @@ bool FullscreenMenuCampaignSelect::compare_difficulty(uint32_t rowa, uint32_t ro
  */
 FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutorial)
    : FullscreenMenuLoadMapOrGame(),
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
 
      // Main title
      title_(this,
@@ -278,6 +282,7 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
                get_y_from_preceding(title_) + 6 * padding_,
                get_w() * 2 / 3,
                4 * label_height_,
+               UI::PanelStyle::kFsMenu,
                "",
                UI::Align::kCenter),
 
@@ -287,21 +292,24 @@ FullscreenMenuCampaignMapSelect::FullscreenMenuCampaignMapSelect(bool is_tutoria
                  right_column_x_ + indent_,
                  get_y_from_preceding(label_mapname_) + padding_,
                  get_right_column_w(right_column_x_ + indent_),
-                 label_height_),
+                 label_height_,
+                 UI::PanelStyle::kFsMenu),
 
      label_author_(this, right_column_x_, get_y_from_preceding(ta_mapname_) + 2 * padding_),
      ta_author_(this,
                 right_column_x_ + indent_,
                 get_y_from_preceding(label_author_) + padding_,
                 get_right_column_w(right_column_x_ + indent_),
-                2 * label_height_),
+                2 * label_height_,
+                UI::PanelStyle::kFsMenu),
 
      label_description_(this, right_column_x_, get_y_from_preceding(ta_author_) + padding_),
      ta_description_(this,
                      right_column_x_ + indent_,
                      get_y_from_preceding(label_description_) + padding_,
                      get_right_column_w(right_column_x_ + indent_),
-                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_),
+                     buty_ - get_y_from_preceding(label_description_) - 4 * padding_,
+                     UI::PanelStyle::kFsMenu),
 
      is_tutorial_(is_tutorial) {
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
@@ -424,10 +432,10 @@ void FullscreenMenuCampaignMapSelect::entry_selected() {
  */
 void FullscreenMenuCampaignMapSelect::fill_table() {
 	// read in the campaign config
-	Profile* prof;
+	std::unique_ptr<Profile> prof;
 	std::string campsection;
 	if (is_tutorial_) {
-		prof = new Profile("campaigns/tutorials.conf", nullptr, "maps");
+		prof.reset(new Profile("campaigns/tutorials.conf", nullptr, "maps"));
 
 		// Set subtitle of the page
 		const std::string subtitle1 = _("Pick a tutorial from the list, then hit \"OK\".");
@@ -439,7 +447,7 @@ void FullscreenMenuCampaignMapSelect::fill_table() {
 		campsection = "tutorials";
 
 	} else {
-		prof = new Profile("campaigns/campaigns.conf", nullptr, "maps");
+		prof.reset(new Profile("campaigns/campaigns.conf", nullptr, "maps"));
 
 		Section& global_s = prof->get_safe_section("global");
 

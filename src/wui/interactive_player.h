@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,13 +27,7 @@
 #include "logic/message_id.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
 #include "wui/interactive_gamebase.h"
-
-namespace UI {
-struct MultilineTextarea;
-struct Textarea;
-}
 
 /**
  * This is the interactive player. this one is
@@ -51,12 +45,13 @@ public:
 	bool can_see(Widelands::PlayerNumber) const override;
 	bool can_act(Widelands::PlayerNumber) const override;
 	Widelands::PlayerNumber player_number() const override;
+	void draw_map_view(MapView* given_map_view, RenderTarget* dst) override;
 
-	void node_action() override;
+	void node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
-	Widelands::Player& player() const {
+	const Widelands::Player& player() const {
 		return game().player(player_number_);
 	}
 	Widelands::Player* get_player() const override {
@@ -70,13 +65,13 @@ public:
 	// For load
 	void cleanup_for_load() override;
 	void think() override;
+	void draw(RenderTarget& dst) override;
 
 	void set_flag_to_connect(const Widelands::Coords& location) {
 		flag_to_connect_ = location;
 	}
 
 	void popup_message(Widelands::MessageId, const Widelands::Message&);
-	int32_t calculate_buildcaps(const Widelands::FCoords& c) override;
 
 private:
 	void cmdSwitchPlayer(const std::vector<std::string>& args);

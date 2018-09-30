@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,9 +108,6 @@ public:
 		return return_enhanced_;
 	}
 
-	std::string helptext_script() const {
-		return helptext_script_;
-	}
 	int32_t get_size() const {
 		return size_;
 	}
@@ -146,7 +143,7 @@ public:
 	/// Does not perform any sanity checks.
 	/// If former_buildings is not empty this is an enhancing.
 	Building& create(EditorGameBase&,
-	                 Player&,
+	                 Player*,
 	                 Coords,
 	                 bool construct,
 	                 bool loading = false,
@@ -155,26 +152,33 @@ public:
 	virtual uint32_t get_conquers() const;
 	virtual uint32_t vision_range() const;
 
+	const WorkareaInfo& workarea_info() const {
+		return workarea_info_;
+	}
+
+	// TODO(sirver): This should not be public. It is mutated by other classes
+	// in many places.
 	WorkareaInfo workarea_info_;
 
 	bool suitability(const Map&, const FCoords&) const;
 	const BuildingHints& hints() const;
 	void set_hints_trainingsites_max_percent(int percent);
 
+	uint32_t get_unoccupied_animation() const;
+
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
+	const EditorGameBase& egbase_;
 
 private:
-	const EditorGameBase& egbase_;
 	bool buildable_;     // the player can build this himself
 	bool destructible_;  // the player can destruct this himself
 	Buildcost buildcost_;
-	Buildcost return_dismantle_;   // Returned wares on dismantle
-	Buildcost enhance_cost_;       // cost for enhancing
-	Buildcost return_enhanced_;    // Returned ware for dismantling an enhanced building
-	std::string helptext_script_;  // The path and filename to the building's helptext script
-	int32_t size_;                 // size of the building
+	Buildcost return_dismantle_;  // Returned wares on dismantle
+	Buildcost enhance_cost_;      // cost for enhancing
+	Buildcost return_enhanced_;   // Returned ware for dismantling an enhanced building
+	int32_t size_;                // size of the building
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
@@ -194,7 +198,7 @@ struct NoteBuilding {
 
 	Serial serial;
 
-	enum class Action { kChanged, kDeleted, kStartWarp, kFinishWarp, kWorkersChanged };
+	enum class Action { kChanged, kStartWarp, kFinishWarp, kWorkersChanged };
 	const Action action;
 
 	NoteBuilding(Serial init_serial, const Action& init_action)
@@ -219,8 +223,6 @@ public:
 	using FormerBuildings = std::vector<DescriptionIndex>;
 
 public:
-	enum class InfoStringFormat { kCensus, kStatistics, kTooltip };
-
 	explicit Building(const BuildingDescr&);
 
 	void load_finish(EditorGameBase&) override;
@@ -236,7 +238,7 @@ public:
 	}
 	PositionList get_positions(const EditorGameBase&) const override;
 
-	std::string info_string(const InfoStringFormat& format);
+	std::string info_string(MapObject::InfoStringType format) override;
 
 	// Return the overlay string that is displayed on the map view when enabled
 	// by the player.
@@ -278,7 +280,7 @@ public:
 		return old_buildings_;
 	}
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {
@@ -331,13 +333,8 @@ protected:
 	void cleanup(EditorGameBase&) override;
 	void act(Game&, uint32_t data) override;
 
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          float scale,
-	          RenderTarget* dst) override;
 	void
-	draw_info(TextToDraw draw_text, const Vector2f& point_on_dst, float scale, RenderTarget* dst);
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 	void set_seeing(bool see);
 	void set_attack_target(AttackTarget* new_attack_target);

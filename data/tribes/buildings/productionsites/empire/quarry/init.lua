@@ -25,9 +25,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      graniteproducer = true,
-      forced_after = 240,
-      prohibited_till = 240
+      collects_ware_from_map = "granite"
    },
 
    working_positions = {
@@ -51,7 +49,7 @@ tribes:new_productionsite_type {
             "call=mine_granite",
             "call=mine_granite",
             "call=mine_marble", -- This will find marble 2 out of 7 times
-            "return=skipped"
+            "return=no_stats"
          }
       },
       mine_granite = {
@@ -60,7 +58,7 @@ tribes:new_productionsite_type {
          actions = {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
-            "worker=cut_granite",
+            "callworker=cut_granite",
             "sleep=25000"
          }
       },
@@ -70,7 +68,7 @@ tribes:new_productionsite_type {
          actions = {
            -- This order is on purpose so that the productivity
            -- drops fast once all rocks are gone.
-            "worker=cut_marble",
+            "callworker=cut_marble",
             "sleep=25000"
          }
       },

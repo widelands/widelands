@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,9 +48,11 @@ using std::setiosflags;
 
 namespace {
 
+// Do not change the contents of this struct, segfaults will ensue.
 struct S2MapDescrHeader {
-	char name[20];  // We need fixed char arrays rather than strings here. Otherwise, this will
-	                // segfault.
+	char magic[10];  // "WORLD_V1.0"
+	char name[20];   // We need fixed char arrays rather than strings here. Otherwise, this will
+	                 // segfault.
 	int16_t w;
 	int16_t h;
 	int8_t uses_world;  // 0 = green, 1 =black, 2 = winter
@@ -390,7 +392,7 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 
 	map_.recalc_whole_map(egbase.world());
 
-	postload_fix_conversion(egbase);
+	postload_set_port_spaces(egbase.world());
 
 	set_state(STATE_LOADED);
 
@@ -471,8 +473,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 		for (int16_t x = 0; x < mapwidth; ++x, ++f, ++pc) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
-			if (c & 0x40)
-				map_.set_port_space(Widelands::Coords(x, y), true);
+			if (c & 0x40) {
+				port_spaces_to_set_.insert(Widelands::Coords(x, y));
+			}
 			f->set_terrain_d(terrain_converter.lookup(worldtype_, c & 0x1f));
 		}
 
@@ -488,8 +491,9 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 			uint8_t c = *pc;
 			// Harbour buildspace & textures - Information taken from:
 			// http://bazaar.launchpad.net/~xaser/s25rttr/s25edit/view/head:/WLD_reference.txt
-			if (c & 0x40)
-				map_.set_port_space(Widelands::Coords(x, y), true);
+			if (c & 0x40) {
+				port_spaces_to_set_.insert(Widelands::Coords(x, y));
+			}
 			f->set_terrain_r(terrain_converter.lookup(worldtype_, c & 0x1f));
 		}
 
@@ -1039,41 +1043,27 @@ void S2MapLoader::load_s2mf(Widelands::EditorGameBase& egbase) {
 	}
 }
 
-/// Try to fix data, which is incompatible between S2 and Widelands
-void S2MapLoader::postload_fix_conversion(Widelands::EditorGameBase& egbase) {
-
-	/*
-	 * 1: Try to fix port spaces
-	 */
-	const Widelands::Map::PortSpacesSet ports(map_.get_port_spaces());
-	const Widelands::World& world = egbase.world();
-
-	// Check if port spaces are valid
-	for (const Widelands::Coords& c : ports) {
-		Widelands::FCoords fc = map_.get_fcoords(c);
-		Widelands::NodeCaps nc = map_.get_max_nodecaps(world, fc);
-		if ((nc & Widelands::BUILDCAPS_SIZEMASK) != Widelands::BUILDCAPS_BIG ||
-		    map_.find_portdock(fc).empty()) {
-			log("Invalid port build space: ");
-			map_.set_port_space(c, false);
-
-			bool fixed = false;
+/// Try to fix data which is incompatible between S2 and Widelands.
+/// This is only the port space locations.
+void S2MapLoader::postload_set_port_spaces(const Widelands::World& world) {
+	// Set port spaces near desired locations if possible
+	for (const Widelands::Coords& coords : port_spaces_to_set_) {
+		bool was_set = map_.set_port_space(world, coords, true);
+		const Widelands::FCoords fc = map_.get_fcoords(coords);
+		if (!was_set) {
+			// Try to set a port space at alternative location
 			Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
 			   map_, Widelands::Area<Widelands::FCoords>(fc, 3));
 			do {
-				// Check whether the maximum theoretical possible NodeCap of the field is big + port
-				Widelands::NodeCaps nc2 =
-				   map_.get_max_nodecaps(world, const_cast<Widelands::FCoords&>(mr.location()));
-				if ((nc2 & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG &&
-				    (!map_.find_portdock(mr.location()).empty())) {
-					map_.set_port_space(Widelands::Coords(mr.location().x, mr.location().y), true);
-					fixed = true;
-				}
-			} while (mr.advance(map_) && !fixed);
-			if (!fixed) {
-				log("FAILED! No alternative port buildspace for (%i, %i) found!\n", fc.x, fc.y);
-			} else
-				log("Fixed!\n");
+				was_set = map_.set_port_space(
+				   world, Widelands::Coords(mr.location().x, mr.location().y), true);
+			} while (!was_set && mr.advance(map_));
+		}
+		if (!was_set) {
+			log("FAILED! No port buildspace for (%i, %i) found!\n", fc.x, fc.y);
+		} else {
+			log("SUCCESS! Port buildspace set for (%i, %i) \n", fc.x, fc.y);
 		}
 	}
+	map_.recalculate_allows_seafaring();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@ ShippingItem::ShippingItem(WareInstance& ware) : object_(&ware) {
 ShippingItem::ShippingItem(Worker& worker) : object_(&worker) {
 }
 
-void ShippingItem::get(EditorGameBase& game, WareInstance** ware, Worker** worker) const {
+void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const {
 	if (ware) {
 		*ware = nullptr;
 	}
@@ -127,19 +127,6 @@ void ShippingItem::update_destination(Game& game, PortDock& pd) {
 	}
 
 	destination_dock_ = dynamic_cast<PortDock*>(next);
-}
-
-void ShippingItem::schedule_update(Game& game, int32_t delay) {
-	WareInstance* ware;
-	Worker* worker;
-	get(game, &ware, &worker);
-
-	if (ware) {
-		ware->schedule_act(game, delay);
-	}
-	if (worker) {
-		worker->send_signal(game, "wakeup");
-	}
 }
 
 /**

@@ -45,7 +45,9 @@ tribes:new_productionsite_type {
 
    aihints = {
       basic_amount = 2,
-      prohibited_till = 400
+      prohibited_till = 400,
+      weak_ai_limit = 2,
+      very_weak_ai_limit = 1
    },
 
    working_positions = {
@@ -84,7 +86,7 @@ tribes:new_productionsite_type {
             "call=produce_pick",
             "call=produce_scythe",
             "call=produce_shovel",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       produce_bread_paddle = {
@@ -94,7 +96,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs bread_paddle",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=bread_paddle"
          }
@@ -106,7 +108,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs felling_ax",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=felling_ax"
          }
@@ -118,7 +120,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs fire_tongs",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=fire_tongs"
          }
@@ -130,7 +132,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs fishing_rod",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=fishing_rod"
          }
@@ -142,7 +144,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs hammer",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=hammer"
          }
@@ -154,7 +156,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs hunting_spear",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=hunting_spear"
          }
@@ -166,7 +168,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs kitchen_tools",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=kitchen_tools"
          }
@@ -178,7 +180,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs pick",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=pick"
          }
@@ -190,7 +192,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs scythe",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=scythe"
          }
@@ -202,7 +204,7 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs shovel",
             "sleep=32000",
             "consume=iron log",
-            "play_sound=sound/smiths toolsmith 192",
+            "playsound=sound/smiths toolsmith 192",
             "animate=working 35000",
             "produce=shovel"
          }

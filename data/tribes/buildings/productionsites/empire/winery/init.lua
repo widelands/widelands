@@ -33,7 +33,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 600,
+      prohibited_till = 560,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2,
       basic_amount = 1
@@ -58,7 +58,7 @@ tribes:new_productionsite_type {
             -- Grapes are only needed for wine, so no need to check if wine is needed
             "sleep=30000",
             "consume=grape:2",
-            "play_sound=sound/empire winebubble 180",
+            "playsound=sound/empire winebubble 180",
             "animate=working 30000",
             "produce=wine"
          }

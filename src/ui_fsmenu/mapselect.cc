@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,9 +26,9 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
+#include "graphic/font_handler.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "map_io/widelands_map_loader.h"
@@ -44,20 +44,21 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
    : FullscreenMenuLoadMapOrGame(),
      checkbox_space_(25),
      // Less padding for big fonts; space is tight.
-     checkbox_padding_(UI::g_fh1->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
+     checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
 
      // Main title
      title_(this, 0, 0, _("Choose a map"), UI::Align::kCenter),
      checkboxes_(this, 0, 0, UI::Box::Vertical, 0, 0, 2 * padding_),
-     table_(this, tablex_, tabley_, tablew_, tableh_),
+     table_(this, tablex_, tabley_, tablew_, tableh_, UI::PanelStyle::kFsMenu),
      map_details_(this,
                   right_column_x_,
                   tabley_,
                   get_right_column_w(right_column_x_),
                   tableh_ - buth_ - 4 * padding_,
-                  MapDetails::Style::kFsMenu),
+                  UI::PanelStyle::kFsMenu),
 
-     basedir_("maps"),
+     scenario_types_(settings->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO),
+     basedir_(kMapsDir),
      settings_(settings),
      ctrl_(ctrl),
      has_translated_mapname_(false) {
@@ -114,8 +115,6 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	add_tag_checkbox(hbox, "3teams", localize_tag("3teams"));
 	add_tag_checkbox(hbox, "4teams", localize_tag("4teams"));
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);
-
-	scenario_types_ = settings_->settings().multiplayer ? Map::MP_SCENARIO : Map::SP_SCENARIO;
 
 	table_.focus();
 	fill_table();
@@ -184,7 +183,7 @@ void FullscreenMenuMapSelect::clicked_ok() {
 
 bool FullscreenMenuMapSelect::set_has_selection() {
 	bool has_selection = table_.has_selection();
-	ok_.set_enabled(has_selection);
+	ok_.set_enabled(has_selection && maps_data_.at(table_.get_selected()).nrplayers > 0);
 
 	if (!has_selection) {
 		map_details_.clear();

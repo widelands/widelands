@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,6 @@
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -390,6 +389,10 @@ void Bob::idle_update(Game& game, State& state) {
 	state.ivar1 = 0;
 }
 
+bool Bob::is_idle() {
+	return get_state(taskIdle);
+}
+
 /**
  * Move along a predefined path.
  * \par ivar1 the step number.
@@ -464,7 +467,7 @@ struct BlockedTracker {
 
 	Game& game_;
 	Bob& bob_;
-	Map& map_;
+	const Map& map_;
 	Coords finaldest_;
 	Cache nodes_;
 	int nrblocked_;
@@ -475,13 +478,13 @@ struct CheckStepBlocked {
 	explicit CheckStepBlocked(BlockedTracker& tracker) : tracker_(tracker) {
 	}
 
-	bool allowed(Map&, FCoords, FCoords end, int32_t, CheckStep::StepId) const {
+	bool allowed(const Map&, FCoords, FCoords end, int32_t, CheckStep::StepId) const {
 		if (end == tracker_.finaldest_)
 			return true;
 
 		return !tracker_.is_blocked(end);
 	}
-	bool reachable_dest(Map&, FCoords) const {
+	bool reachable_dest(const Map&, FCoords) const {
 		return true;
 	}
 
@@ -519,7 +522,7 @@ bool Bob::start_task_movepath(Game& game,
 	if (forceall)
 		tracker.disabled_ = true;
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	if (map.findpath(position_, dest, persist, path, cstep) < 0) {
 		if (!tracker.nrblocked_)
 			return false;
@@ -634,8 +637,7 @@ void Bob::movepath_update(Game& game, State& state) {
 	// Using probability of 1/8 and pausing it for 5, 10 or 15 seconds
 	if (game.logic_rand() % 8 == 0) {
 		if (is_a(Ship, this)) {
-			Map& map = game.map();
-			const uint32_t ships_count = map.find_bobs(
+			const uint32_t ships_count = game.map().find_bobs(
 			   Widelands::Area<Widelands::FCoords>(get_position(), 0), nullptr, FindBobShip());
 			assert(ships_count > 0);
 			if (ships_count > 1) {
@@ -694,7 +696,7 @@ void Bob::move_update(Game& game, State&) {
 Vector2f Bob::calc_drawpos(const EditorGameBase& game,
                            const Vector2f& field_on_dst,
                            const float scale) const {
-	const Map& map = game.get_map();
+	const Map& map = game.map();
 	const FCoords end = position_;
 	FCoords start;
 	Vector2f spos = field_on_dst;
@@ -756,7 +758,6 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const TextToDraw&,
                const Vector2f& field_on_dst,
                const float scale,
                RenderTarget* dst) const {
@@ -764,11 +765,11 @@ void Bob::draw(const EditorGameBase& egbase,
 		return;
 	}
 
-	auto* const owner = get_owner();
+	auto* const bob_owner = get_owner();
 	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
-	if (owner != nullptr) {
-		dst->blit_animation(
-		   point_on_dst, scale, anim_, egbase.get_gametime() - animstart_, owner->get_playercolor());
+	if (bob_owner != nullptr) {
+		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_,
+		                    bob_owner->get_playercolor());
 	} else {
 		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_);
 	}
@@ -793,7 +794,7 @@ void Bob::set_animation(EditorGameBase& egbase, uint32_t const anim) {
 int32_t Bob::start_walk(Game& game, WalkingDir const dir, uint32_t const a, bool const force) {
 	FCoords newnode;
 
-	Map& map = game.map();
+	const Map& map = game.map();
 	map.get_neighbour(position_, dir, &newnode);
 
 	// Move capability check
@@ -900,7 +901,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 }
 
 /// Give debug information.
-void Bob::log_general_info(const EditorGameBase& egbase) {
+void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF;
 	molog("Owner: %p\n", owner_);
 	FORMAT_WARNINGS_ON;
@@ -916,11 +917,10 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 
 	molog("Signal: %s\n", signal_.c_str());
 
-	molog("Stack size: %lu\n", static_cast<long unsigned int>(stack_.size()));
+	molog("Stack size: %" PRIuS "\n", stack_.size());
 
 	for (size_t i = 0; i < stack_.size(); ++i) {
-		molog("Stack dump %lu/%lu\n", static_cast<long unsigned int>(i + 1),
-		      static_cast<long unsigned int>(stack_.size()));
+		molog("Stack dump %" PRIuS "/%" PRIuS "\n", i + 1, stack_.size());
 
 		molog("* task->name: %s\n", stack_[i].task->name);
 
@@ -943,8 +943,7 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 		FORMAT_WARNINGS_ON;
 		if (stack_[i].path) {
 			const Path& path = *stack_[i].path;
-			Path::StepVector::size_type nr_steps = path.get_nsteps();
-			molog("** Path length: %lu\n", static_cast<long unsigned int>(nr_steps));
+			molog("** Path length: %" PRIuS "\n", path.get_nsteps());
 			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
 			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
 			// Printing all coordinates of the path

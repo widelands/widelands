@@ -28,8 +28,10 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 600,
-      space_consumer = true
+      prohibited_till = 550,
+      space_consumer = true,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 2
    },
 
    working_positions = {
@@ -45,25 +47,25 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_blackroot",
-            "call=harvest_blackroot",
-            "return=skipped"
+            "call=plant",
+            "call=harvest",
+            "return=no_stats"
          }
       },
-      plant_blackroot = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting blackroot because ...
          descname = _"planting blackroot",
          actions = {
             "sleep=20000",
-            "worker=plant"
+            "callworker=plant"
          }
       },
-      harvest_blackroot = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting blackroot because ...
          descname = _"harvesting blackroot",
          actions = {
             "sleep=5000",
-            "worker=harvest"
+            "callworker=harvest"
          }
       },
    },

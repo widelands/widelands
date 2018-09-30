@@ -29,7 +29,11 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      basic_amount = 1
+      basic_amount = 1,
+      prohibited_till = 490,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
+
    },
 
    working_positions = {
@@ -45,25 +49,25 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start working because ...
          descname = _"working",
          actions = {
-            "call=plant_vine",
-            "call=harvest_vine",
-            "return=skipped"
+            "call=plant",
+            "call=harvest",
+            "return=no_stats"
          }
       },
-      plant_vine = {
+      plant = {
          -- TRANSLATORS: Completed/Skipped/Did not start planting grapevines because ...
          descname = _"planting grapevines",
          actions = {
             "sleep=20000",
-            "worker=plantvine"
+            "callworker=plant"
          }
       },
-      harvest_vine = {
+      harvest = {
          -- TRANSLATORS: Completed/Skipped/Did not start harvesting grapevines because ...
          descname = _"harvesting grapes",
          actions = {
             "sleep=5000",
-            "worker=harvestvine"
+            "callworker=harvest"
          }
       },
    },

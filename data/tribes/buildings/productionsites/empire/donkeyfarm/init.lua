@@ -31,7 +31,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      recruitment = true
+      recruitment = true,
+      prohibited_till = 610
    },
 
    working_positions = {
@@ -54,7 +55,7 @@ tribes:new_productionsite_type {
             "sleep=15000",
             "return=skipped unless economy needs empire_donkey",
             "consume=wheat water",
-            "play_sound=sound/farm donkey 192",
+            "playsound=sound/farm donkey 192",
             "animate=working 15000", -- Feeding cute little baby donkeys ;)
             "recruit=empire_donkey"
          }

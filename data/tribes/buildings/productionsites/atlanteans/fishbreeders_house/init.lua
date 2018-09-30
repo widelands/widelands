@@ -27,9 +27,9 @@ tribes:new_productionsite_type {
 
    aihints = {
       needs_water = true,
-      renews_map_resource = "fish",
-      prohibited_till = 700,
-      forced_after = 900
+      supports_production_of = { "fish" },
+      prohibited_till = 560,
+      forced_after = 890
    },
 
    working_positions = {
@@ -42,7 +42,7 @@ tribes:new_productionsite_type {
          descname = _"breeding fish",
          actions = {
             "sleep=24000",
-            "worker=breed"
+            "callworker=breed"
          }
       },
    },

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,7 @@ class Request;
 struct Route;
 struct Router;
 struct Supply;
+class Economy;
 
 struct NoteEconomy {
 	CAN_BE_SENT_AS_NOTE(NoteId::Economy)
@@ -55,15 +56,11 @@ struct NoteEconomy {
 	// When 2 economies have been merged, this is the economy number that has
 	// been removed, while the other one is the number of the resulting economy.
 	// For all other messages old_economy == new_economy.
-	size_t old_economy;
-	size_t new_economy;
+	Widelands::Serial old_economy;
+	Widelands::Serial new_economy;
 
 	enum class Action { kMerged, kDeleted };
 	const Action action;
-
-	NoteEconomy(size_t init_old, size_t init_new, const Action& init_action)
-	   : old_economy(init_old), new_economy(init_new), action(init_action) {
-	}
 };
 
 /**
@@ -111,7 +108,12 @@ public:
 	};
 
 	explicit Economy(Player&);
+	explicit Economy(Player&, Serial serial);  // For saveloading
 	~Economy();
+
+	Serial serial() const {
+		return serial_;
+	}
 
 	Player& owner() const {
 		return owner_;
@@ -212,6 +214,9 @@ public:
 		start_request_timer();
 	}
 
+protected:
+	static Serial last_economy_serial_;
+
 private:
 	// This structs is to store distance from supply to request(or), but to allow unambiguous
 	// sorting if distances are the same, we use also serial number of provider and type of provider
@@ -254,6 +259,8 @@ private:
 	/*************/
 	using RequestList = std::vector<Request*>;
 
+	const Serial serial_;
+
 	Player& owner_;
 
 	using Flags = std::vector<Flag*>;
@@ -267,7 +274,7 @@ private:
 
 	TargetQuantity* ware_target_quantities_;
 	TargetQuantity* worker_target_quantities_;
-	Router* router_;
+	std::unique_ptr<Router> router_;
 
 	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;
 	std::vector<SplitPair> split_checks_;

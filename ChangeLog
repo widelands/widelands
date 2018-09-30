@@ -1,8 +1,11 @@
-## Post Build 19 until bzr8352
+## Post Build 19 until bzr8630
 
 ### Animations, Icons and Overlays
 
   - Implemented scaling support for animations
+  - New graphics for field selectors and field action tabs
+  - Special field selector for road building mode
+  - Added missing call to get_rand_anim when a soldier is dying
 
 
 ### Sounds and Music
@@ -12,25 +15,30 @@
     Woodcutter, Sawmill, Stonecutter, Goldspinner.
   - Modified smithies sounds to dimmer versions; added tree-falling sounds,
     substituted Timber shouting with tree-falling.
-  - New music tracks: "Silkweaver's Song", "Hypathia's Theme" and "We Work in
-    the Vineyards".
+  - New music tracks: "Silkweaver's Song", "Hypathia's Theme", "We Work in
+    the Vineyards" and "Running out of Coal"
   - Allocate 32 mixing channels instead of the default 8.
 
 
 ### Tutorials and Campaigns
 
-  - Tweaked timings in tutorials and scenarios.
+  - 2 new missions for the Empire campaign
+  - 2 new missions for the new Frisians tribe
+  - Tweaked timings in tutorials and scenarios
   - Changes and additions to Lua methods and objects:
     - New method player:get_produced_wares_count()
     - New object LuaMap  -> LuaEconomy.
-    - Added option to Lua function player:hide_fields to mark them as unexplored.
+    - Added option to Lua function player:hide_fields to mark them as unexplored
+    - New scripting functions for random and concentric revealing/hiding of fields
   - Remove unused parameters of message_box_objective.
-  - Fixed bug #1656192: Economy tutorial assumes window is open.
+  - Removed unused parameter 'req_suitability' from function
+    place_building_in_region in infrastructure.lua
+  - Added capability to add custom scenario buildings
+  - Fixed bug #1639514: Barbarian campaign, scenario 2: yellow brother bails out
+  - Fixed bug #1656192: Economy tutorial assumes window is open
   - Fixed bug #1670065: Random tree growth can block building sites needed to
-    progress in scenario.
-  - Fixed bug #1688655: lua func "place_building_in_region" not work for mines.
-    Removed unused parameter 'req_suitability' from function
-    place_building_in_region in infrastructure.lua.
+                        progress in scenario
+  - Fixed bug #1688655: lua func "place_building_in_region" not work for mines
 
 
 ### Maps
@@ -41,6 +49,10 @@
     Rendez-vous maps.
   - Increased maximum number of players from 8 to 16, to be used for testing
     purposes.
+  - Minor fixes to Last Bastion map where a player's expansion could become
+    completely blocked across the sea
+  - Fixed bug in Crossing the Horizon map where an artifact couldn't be
+    conquered by a player
 
 
 ### Saveloading
@@ -48,48 +60,92 @@
   - Old scenario save games will no longer work due to changes to the map
     scrolling functions.
   - Savehandler: Avoid reading config more than once per game
+  - Corrupt zip files now appear as "incompatible" on game loading/saving
+    screens. This fixes stack-buffer-overflows.
+
 
 ### AI
 
-  - Improved ship exploration decisions for AI.
-  - AI also continues exploring when the last port is lost to prevent crashes.
+  - The AI now uses a genetic algorithm. The genetic parameters are trained and
+    then kept in .wai files.
+  - New command line switch --ai_training: Dumps new AI files in home folder and
+    uses higher mutation ratios
+  - New command line switch --auto_speed: Activates auto-speed in multiplayer games
+  - Various refactorings of AI hints
+  - Multiple changes to the logic
+  - Improvements to training sites
+  - Add support for productionsites that are also supporting site to the AI.
+    One productionsite can now support multiple wares/productionsites.
+  - Allow resetting of teams via LUA during game
+  - Improved selection of which fields to build something on
   - AI now calculates military strength based on the actual init.lua files
     rather than hard-coding the values. This also removes the tribe name
     restriction for modders.
+  - When considering a quarry, the AI makes sure there is at least one rock in
+    the vicinity
+  - Improved ship exploration decisions for AI.
+  - AI now considers whether possible sea direction leads to unknown territories
+  - AI also continues exploring when the last port is lost to prevent crashes.
+  - Prohibit seafaring buildings for AI on non-seafaring maps. AI can still
+    handle ships and shipyards that already exist when a map does not allow
+    seafaring at the moment.
+  - AI now scans entire map for portspaces
+  - Fixed bug #1724073: AI crashes when some AI slots are empty
 
 
 ### Gameplay
 
-  - Improvements to various production sites' logic
-  - New "Barracks" (casern) building for recruiting soldiers. Solders are no
+  - New Frisian tribe
+  - New "Village" starting condition
+  - New "Barracks" (casern) building for recruiting soldiers. Soldiers are no
     longer created by warehouses. Production sites can now have workers as input
     to consume.
+  - Started implementing new "Market" building with a Barbarian prototype.
+    Not functional yet.
+  - Balancing: Halved needed experience for Barbarian brewer and blacksmith
+  - Balancing: Buffed Barbarian and Empire soldiers
+  - Balancing: Added more trainers to headquarters at game start
+  - Balancing: Removed meat default target quantity for Barbarians and Atlanteans
+  - Balancing: Lowered productivity threshold for lumberjacks to 60%.
+  - Balancing: Depleted Atlantean crystal (and iron) mines work slightly better
+    when depleted
+  - Balancing: Improvements to various production sites' logic
+  - The worker program "plant" no longer takes "tribe:" as a parameter;
+    immovables are now identified via their attributes only, and both world and
+    tribe immovables are searched. As a side effect, tribe immovables can now
+    have terrain affinity.
+  - Forester/Ranger now prefers good soil, and is thus more efficient
+  - Make the scout aware of nearby military sites. The scout now switches
+    between random walking and doing an excursion to enemy military sites
   - When a Fish Breeder's fishing grounds are full, display a special tooltip
-    instead of sending an "Out of Resources" message.
+    instead of sending an "Out of Resources" message
   - When a warehouse is destroyed, the maximum number of fleeing units is now
-    limited to 500 per unit type.
+    limited to 500 per unit type
   - Only cancel expedition if there is a reachable portdock. Show a warning
     message to owner.
-  - Shifted ware hotspot definition from WorkerDescr to CarrierDescr.
+  - Shifted ware hotspot definition from WorkerDescr to CarrierDescr
   - Fixed bug for Wood Gnome in which a destroyed player would gain infinite
     points. Also, no longer calculate score for a defeated player.
   - Fixed a bug where higher-level workers wouldn't occupy lower-level workers'
-    working position slots in productionsites.
+    working position slots in productionsites
   - The port now conquers every location where its military influence is higher
     than the influence of other players. This fixes a segfault when all
     potential portdock fields are owned by another player, but there is a
     portdock location available where the player owning the port has highest
     influence.
   - Fixed bug in collectors script where a broken message was sent after the
-    game ended.
-  - Fixed bug #1643209: No-cost workers are not removed correctly
-  - Fixed bug #1639444: Workers with wares inside ships can crash the game
-  - Fixed bug #1656671: Wares are not always transported to construction site.
-  - Fixed bug #1637386: Militarysites warn about allies.
+    game ended
   - Fixed bug  #963799: shortsighted shipwright (ship in pond)
-  - Fixed bug  #1611323: ships can be built in non-floating spaces (shipyard)
-  - Fixed bug #1658456: Imperials: Soldier target quantity not changeable
+  - Fixed bug #1611323: ships can be built in non-floating spaces (shipyard)
+  - Fixed bug #1636966: Segfault in battle
+  - Fixed bug #1637386: Militarysites warn about allies
+  - Fixed bug #1639444: Workers with wares inside ships can crash the game
+  - Fixed bug #1643209: No-cost workers are not removed correctly
   - Fixed bug #1643284: Ships of a fleet can have the same name
+  - Fixed bug #1656671: Wares are not always transported to construction site
+  - Fixed bug #1658456: Imperials: Soldier target quantity not changeable
+  - Fixed bug #1749586: Fish breeder can't breed fish if the game is loaded
+                        after all fish is caught
 
 
 ### User Interface
@@ -98,7 +154,7 @@
     to in-/decrease, and CTRL+0 to reset. This also removes 0 as a possible
     landmark number.
   - All map transitions like jumping in messages and in the buildings menu are
-    now animated.
+    now animated. New commandline option "animate_map_panning".
   - Moved smooth animation of cursor and MapView from Lua into C++. This fixes
     the transitions in tutorials, which were broken when zoomed.
   - Show census information on destroyed building with the former building's
@@ -121,23 +177,35 @@
   - Fullscreen background images are now tiled rather than stretched.
   - Stopped fullscreen toggle from flickering.
   - The following menus now relayout themselves when fullscreen mode is toggled:
-    main, multiplayer, single player, about, map selection, options.
+    main, multiplayer, single player, about, map selection, options, load game,
+    save game.
+  - For multiplayer game setup, use dropdowns instead of buttons to select
+    player options
   - Improved scrollbar and table header layout.
+  - Remove buttons from economy options window for spectators
+  - Improvements to StoryMessageBox, keyboard navigation and UI focusing
+  - Updating all ware priorities of a building when CTRL is pressed while clicking
+  - Sorting IRC users behind the players in the lobby
   - Replaced get_key_state with SDL_GetModState() to fix keyboard mappings.
   - Actionconfirm now uses Box layout and resizes according to text size.
   - Display loading times on the console while loading the tribes.
   - Simplified the UI::Align enum and various alignment-related cleanup and
     fixes.
   - Replaced booleans in UI::Box::add() with enum classes for better readability
-  - Fixed bug #1635808: Display of worker in training sites is not updated.
+  - Converted all text to new font renderer. Formatting functions for the new
+    renderer live in data/scripting/richtext.lua
+  - A more principled fix to dangling object pointers in the UI using Optr<>
   - Fixed bug #1191295: Seafaring: builder not listed in expedition list in port
-  - Fixed bug #1658489: Expedition tab in Port window messed up some times
-  - Fixed bug #1653460: UI::Panel::get_inner_h() const: Assertion `tborder_ +
-    bborder_ <= h_' failed
+  - Fixed bug #1635808: Display of worker in training sites is not updated.
   - Fixed bug #1653254: Action window of Road stays open under some
-    circumstances
-  - Fixed bug #1687043: Memory leak in Multilineeditbox
+                        circumstances
+  - Fixed bug #1653460: UI::Panel::get_inner_h() const: Assertion `tborder_ +
+                        bborder_ <= h_' failed
+  - Fixed bug #1658489: Expedition tab in Port window messed up some times
   - Fixed bug #1644553: Crash when buildhelp icon is clicked twice
+  - Fixed bug #1687043: Memory leak in Multilineeditbox
+  - Fixed bug #1695701: Crash when a militarysite window is open while the
+                        enemy conquers it by sending a notification.
 
 
 ### Internationalization
@@ -151,7 +219,14 @@
   - Added a Python script to do automated glossary checks for translations. It
     enlists the help of Hunspell and 'misuses' the Transifex note field in order
     to reduce noise.
-  - Fixed various string issues and added some translators' comments.
+  - Implemented glossary generation for the Transifex glossary with help from
+    the Translate Toolkit (http://toolkit.translatehouse.org/).
+  - Show translation stats next to the language selection menu and invite
+    translators if a translation is incomplete, with the help of the Translate
+    Toolkit. New utils script "update_translation_stats.py" that will write
+    translation statistics to data/i18n/translation_stats.conf and is called
+    on every translation pull.
+  - Fixed various string issues and added some translators' comments
 
 
 ### Help and Documentation
@@ -159,17 +234,29 @@
   - Convert editor/game tips to Lua and display them in the in-editor/in-game
     help. Added new tips.
   - Restructured, enhanced and added to the Lua scripting reference for Tribes.
+  - Added/Improved documentation for animations, worker programs, worker
+    helptexts, AI hints, World units and the Richtext system
+  - Added immovables to in-game help
   - Fixed some wrong indentation for the documentation in the website.
   - Added toptopple sound documentation in .ods spreadsheet format (LibreCalc)
     into 'doc' folder
+  - Fixed and improved documentation for LuaMapObjectDescription::get_type_name.
+  - More cross-linking between map object classes and their description objects.
+  - Fixed some miscellaneous bugs in the LuaMap documentation.
+  - Use mathjax for latex in docs instead of imgmath
+  - Enable building documentation with warnings as errors on Travis
 
 
 ### Editor
 
   - Overhauled the selection menu for critters to give them categories
   - Added an option "items per row" and rearranged the terrains and immovables
+  - Display of bobs, immovables and resources can now be toggled individually
+  - Fixed drag and drop
+  - Removed dead code for make infrastructure tool that was never finished
   - Fixed bug #1627537: Release mouse button does not work when placing things
-    and mouse gets under a window
+                        and mouse gets under a window
+  - Fixed bug 1738641#: Resources can be replaced only once in editor
 
 
 ### Graphics Engine
@@ -177,29 +264,84 @@
   - Renamed "sub" tag to "div" in new font renderer.
   - The new font renderer now sets the width properly and supports player color
     for images. Added width property to img tag
-  - Buildings and ships now send their messages with the new font renderer.
+  - The new font renderer now creates a set of textures that will be blitted
+    separately by the new class RenderedText. This avoids issues with texture
+    sizes exceeding the maximum size supported by graphics drivers when
+    MultilineTextareas get arbitrarily long.
+  - Fixed incorrect layout of divs with width=fill when the previous div is
+    wider than 50%
+  - Fixed superfluous space characters at beginning and end of lines
+  - Implemented text floating around images
   - Messages try to render with the new font renderer first, then fall back to
     the old font renderer for layouting messages that haven't been converted yet
     (and from savegames).
   - All images with player color now receive their color by a common
     playercolor_image function. Available player colors are kept in an array.
+  - Replaced raw pointers in the font renderer with shared_ptr
   - Split graphics into multiple Cmake libraries.
+  - Got rid of EdgeOverlayManager and FieldOverlayManager and shifted their
+    functionality to local draw() functions in individual classes. Gave the
+    Interactive* classes their own draw() functions.
+  - Refactored Tcoords, Fcoords and TriangleIndex
+  - Fixed bug #1674243: Assign owners to neighbors in Player::rediscover_node.
+                        The lack of owners was causing crashes with the road
+                        program, which no longer knew which texture to pick.
+  - Fixed bug #1711816: Black terrains on fullscreen switch.
 
 
-### Other Issues
+### Networking
+
+  - Replaced SDL-Net with Boost.Asio
+  - Added IPv6 support
+  - Implemented a relay server. Opening a router port is no longer necessary
+    for the host of internet games
+  - Improved the online login code by adding semi-constant user ids that are
+    valid for 12 hours, allowing to reclaim a username after a disconnect
+  - Increasing password security by no longer storing and transmitting it in
+    plaintext
+  - Fixed bug #1691335: Multiplayer client crashes when the host hasn't selected
+                        a map yet
+
+### Build System
 
   - Windows builds now have a unique app id for every build. This allows
     parallel installation of several versions.
   - Modernized how Mac OS X releases are done.
+  - Added support for gcc7.
+  - Removed "redundant-decls" flag for Windows builds due to conflict between
+    SDL and MinGW.
+  - New Macro FALLS_THROUGH; for use in switch statements.
+  - Let Travis build each commit on MacOS in addition to our Linux builds. Note
+    that the regression test suite is only run for Linux.
+  - Allow compiling with AddressSanitizer, and choosing between gcc and clang on
+    the first compile.
+  - Deactivated the rich text testing project, as it's currently unmaintained.
+  - Moved website related binaries to base dir in compile.sh
+
+
+### Other Issues
+
   - Moved utils/fix_lua_tabs.py to utils/fix_formatting.py and added calls to
     clang-format and pyformat.
   - Fixed a series of compiler warnings for clang and Windows.
   - The ProductionSiteDescr constructor still contained some checks from the
     time when they used to inherit from MilitarysiteDescr. Removed this obsolete
     code and made working_positions and programs mandatory.
-  - Moved website related binaries to base dir in compile.sh
   - Used the Notification system to reduce some code interdependency.
   - Various code cleanups to make the code more readable.
+  - Fixed diverse crashes and memory leaks with the help of AddressSanitizer
+  - Diverse refactorings to use composition over inheritance and to get rid of
+    multiple inheritance
+  - Replaced SyncCallback through a std::function<void()>.
+  - More widespread use of smart pointers
+  - Detangled MapView and InteractiveBase.
+  - Cleaned up map handling in EditorGameBase
+  - Removed some dead code and reduced dependency cycles
+  - Options screen now saves immediately so that the changes are persistent even
+    if Widelands crashes afterwards.
+  - Added 2 new functions to Lua interface: list_directory and is_directory
+  - Split new function cleanup_portspaces() from allows_seafaring(), and
+    refactored port spaces checks.
   - Fixed bug #1648178: Fatal Exception: Bad Cast
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,6 +28,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/map_gen.h"
 #include "logic/map_objects/world/world.h"
 #include "scripting/lua_interface.h"
@@ -51,7 +52,7 @@ MapGenerator::MapGenerator(Map& map, const UniqueRandomMapInfo& mapInfo, EditorG
 }
 
 void MapGenerator::generate_bobs(std::unique_ptr<uint32_t[]> const* random_bobs,
-                                 Coords const fc,
+                                 const Coords& fc,
                                  RNG& rng,
                                  MapGenAreaInfo::MapGenTerrainType const terrType) {
 	//  Figure out which bob area is due here...
@@ -194,7 +195,7 @@ void MapGenerator::generate_resources(uint32_t const* const random1,
 /// (map specific info).
 ///
 /// \returns A map height value corresponding to elevation.
-uint8_t MapGenerator::make_node_elevation(double const elevation, Coords const c) {
+uint8_t MapGenerator::make_node_elevation(double const elevation, const Coords& c) {
 	int32_t const water_h = map_gen_info_->get_water_shallow_height();
 	int32_t const mount_h = map_gen_info_->get_mountain_foot_height();
 	int32_t const summit_h = map_gen_info_->get_summit_height();
@@ -659,11 +660,11 @@ void MapGenerator::create_random_map() {
 	map_.recalc_whole_map(egbase_.world());
 
 	// Care about players and place their start positions
-	const std::string tribe = map_.get_scenario_player_tribe(1);
-	const std::string ai = map_.get_scenario_player_ai(1);
 	map_.set_nrplayers(map_info_.numPlayers);
+	assert(map_info_.numPlayers >= 1);
+	const std::string ai = map_.get_scenario_player_ai(1);
 	FindNodeSize functor(FindNodeSize::sizeBig);
-	Coords playerstart(-1, -1);
+	Coords playerstart(Coords::null());
 
 	// Build a basic structure how player start positions are placed
 	uint8_t line[3];
@@ -713,7 +714,7 @@ void MapGenerator::create_random_map() {
 	for (PlayerNumber n = 1; n <= map_info_.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario
 		map_.set_scenario_player_name(n, _("Random Player"));
-		map_.set_scenario_player_tribe(n, tribe);
+		map_.set_scenario_player_tribe(n, "");
 		map_.set_scenario_player_ai(n, ai);
 		map_.set_scenario_player_closeable(n, false);
 
@@ -754,7 +755,7 @@ void MapGenerator::create_random_map() {
 		map_.find_fields(Area<FCoords>(map_.get_fcoords(playerstart), 20), &coords, functor);
 
 		// Take the nearest ones
-		uint32_t min_distance = 0;
+		uint32_t min_distance = std::numeric_limits<uint32_t>::max();
 		Coords coords2;
 		for (uint16_t i = 0; i < coords.size(); ++i) {
 			uint32_t test = map_.calc_distance(coords[i], playerstart);
@@ -783,7 +784,7 @@ void MapGenerator::create_random_map() {
 
 			log("WARNING: Player %u has no starting position - illegal coordinates (%d, %d).\n", n,
 			    coords2.x, coords2.y);
-			coords2 = Coords(-1, -1);
+			coords2 = Coords::null();
 		}
 
 		// Finally set the found starting position

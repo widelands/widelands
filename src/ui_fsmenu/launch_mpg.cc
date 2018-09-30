@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "logic/game_settings.h"
 #include "logic/map.h"
 #include "logic/map_objects/map_object.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
@@ -42,7 +43,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 #include "wui/multiplayersetupgroup.h"
 
 /// Simple user interaction window for selecting either map, save or cancel
@@ -58,24 +59,24 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		uint32_t space = y;
 		uint32_t butw = get_inner_w() - 2 * space;
 		uint32_t buth = (get_inner_h() - 2 * space) / 5;
-		UI::Button* btn = new UI::Button(this, "map", space, y, butw, buth,
-		                                 g_gr->images().get("images/ui_basic/but0.png"), _("Map"),
-		                                 _("Select a map"));
+		UI::Button* btn =
+		   new UI::Button(this, "map", space, y, butw, buth, UI::ButtonStyle::kFsMenuSecondary,
+		                  _("Map"), _("Select a map"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kNormalGame));
 
 		btn = new UI::Button(this, "saved_game", space, y + buth + space, butw, buth,
-		                     g_gr->images().get("images/ui_basic/but0.png"),
+		                     UI::ButtonStyle::kFsMenuSecondary,
 		                     /** Translators: This is a button to select a savegame */
 		                     _("Saved Game"), _("Select a saved game"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kScenarioGame));
 
-		btn = new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2,
-		                     buth, g_gr->images().get("images/ui_basic/but1.png"), _("Cancel"),
-		                     _("Cancel selection"));
+		btn =
+		   new UI::Button(this, "cancel", space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
+		                  UI::ButtonStyle::kFsMenuSecondary, _("Cancel"), _("Cancel selection"));
 		btn->sigclicked.connect(boost::bind(&MapOrSaveSelectionWindow::pressedButton,
 		                                    boost::ref(*this),
 		                                    FullscreenMenuBase::MenuTarget::kBack));
@@ -104,7 +105,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
      padding_(4),
      indent_(10),
      label_height_(20),
-     right_column_x_(get_w() * 37 / 50),
+     right_column_x_(get_w() * 57 / 80),
 
      // Buttons
      change_map_or_save_(this,
@@ -113,7 +114,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                          get_h() * 3 / 20,
                          buth_,
                          buth_,
-                         g_gr->images().get("images/ui_basic/but1.png"),
+                         UI::ButtonStyle::kFsMenuSecondary,
                          g_gr->images().get("images/wui/menus/menu_toggle_minimap.png"),
                          _("Change map or saved game")),
      help_button_(this,
@@ -122,24 +123,24 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                   get_h() / 100,
                   buth_,
                   buth_,
-                  g_gr->images().get("images/ui_basic/but1.png"),
+                  UI::ButtonStyle::kFsMenuSecondary,
                   g_gr->images().get("images/ui_basic/menu_help.png"),
                   _("Show the help window")),
 
      // Text labels
      mapname_(this, right_column_x_, get_h() * 3 / 20, std::string()),
      clients_(this,
-              // (get_w() * 57 / 80) is the width of the MultiPlayerSetupGroup
-              get_w() / 50,
+              // the width of the MultiPlayerSetupGroup is (get_w() * 53 / 80)
+              get_w() * 3 / 80,
               get_h() / 10,
-              (get_w() * 57 / 80) / 3,
+              get_w() * 19 / 80,
               get_h() / 10,
               _("Clients"),
               UI::Align::kCenter),
      players_(this,
-              get_w() / 50 + (get_w() * 57 / 80) * 6 / 15,
+              get_w() / 4,
               get_h() / 10,
-              (get_w() * 57 / 80) * 9 / 15,
+              get_w() * 9 / 20,
               get_h() / 10,
               _("Players"),
               UI::Align::kCenter),
@@ -150,10 +151,18 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                         _("Type of game"),
                         UI::Align::kCenter),
 
-     map_info_(
-        this, right_column_x_, get_h() * 2 / 10, butw_, get_h() * 23 / 80 - 2 * label_height_),
-     client_info_(
-        this, right_column_x_, get_h() * 13 / 20 - 2 * label_height_, butw_, 2 * label_height_),
+     map_info_(this,
+               right_column_x_,
+               get_h() * 2 / 10,
+               butw_,
+               get_h() * 23 / 80 - 1.6 * label_height_,
+               UI::PanelStyle::kFsMenu),
+     client_info_(this,
+                  right_column_x_,
+                  get_h() * 13 / 20 - 2 * label_height_,
+                  butw_,
+                  get_h(),
+                  UI::PanelStyle::kFsMenu),
      help_(nullptr),
 
      // Variables and objects used in the menu
@@ -176,12 +185,14 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 	players_.set_color(RGBColor(0, 255, 0));
 	map_.set_fontsize(fs_);
 	map_.set_color(RGBColor(0, 255, 0));
+	wincondition_type_.set_color(RGBColor(0, 255, 0));
 
 	mapname_.set_text(_("(no map)"));
 	map_info_.set_text(_("The host has not yet selected a map or saved game."));
 
 	mpsg_ = new MultiPlayerSetupGroup(
-	   this, get_w() / 50, get_h() / 8, get_w() * 57 / 80, get_h(), settings, butw_, buth_);
+	   this, get_w() * 3 / 80, change_map_or_save_.get_y(), get_w() * 53 / 80,
+	   get_h() * 17 / 30 - change_map_or_save_.get_y(), settings, buth_);
 
 	// If we are the host, open the map or save selection menu at startup
 	if (settings_->settings().usernum == 0 && settings_->settings().mapname.empty()) {
@@ -214,8 +225,8 @@ void FullscreenMenuLaunchMPG::layout() {
  */
 void FullscreenMenuLaunchMPG::set_chat_provider(ChatProvider& chat) {
 	delete chat_;
-	chat_ = new GameChatPanel(
-	   this, get_w() / 50, get_h() * 13 / 20, get_w() * 57 / 80, get_h() * 3 / 10, chat);
+	chat_ = new GameChatPanel(this, get_w() * 3 / 80, get_h() * 17 / 30 + 0.5 * label_height_,
+	                          get_w() * 53 / 80, get_h() * 11 / 30, chat, UI::PanelStyle::kFsMenu);
 }
 
 /**
@@ -287,7 +298,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		return;
 
 	Widelands::Game game;  // The place all data is saved to.
-	FullscreenMenuLoadGame lsgm(game, settings_, ctrl_);
+	FullscreenMenuLoadGame lsgm(game, settings_);
 	FullscreenMenuBase::MenuTarget code = lsgm.run<FullscreenMenuBase::MenuTarget>();
 
 	if (code == FullscreenMenuBase::MenuTarget::kBack) {
@@ -315,7 +326,7 @@ void FullscreenMenuLaunchMPG::select_saved_game() {
 		if (g_fs->is_directory(filename)) {
 			// Send a warning
 			UI::WLMessageBox warning(
-			   this, _("Saved game is directory"),
+			   this, _("Saved Game is Directory"),
 			   _("WARNING:\n"
 			     "The saved game you selected is a directory."
 			     " This happens if you set the option ‘nozip’ to "
@@ -350,11 +361,20 @@ void FullscreenMenuLaunchMPG::clicked_ok() {
 	}
 }
 
+void FullscreenMenuLaunchMPG::think() {
+	if (ctrl_) {
+		ctrl_->think();
+	}
+	refresh();
+}
+
 /**
  * update the user interface and take care about the visibility of
  * buttons and text.
  */
 void FullscreenMenuLaunchMPG::refresh() {
+	// TODO(GunChleoc): Investigate what we can handle with NoteGameSettings. Maybe we can get rid of
+	// refresh() and thus think().
 	const GameSettings& settings = settings_->settings();
 
 	if (settings.mapfilename != filename_proof_) {
@@ -425,8 +445,6 @@ void FullscreenMenuLaunchMPG::refresh() {
 		}
 		win_condition_dropdown_.set_enabled(false);
 	}
-	// Update the multi player setup group
-	mpsg_->refresh();
 }
 
 /**
@@ -443,16 +461,21 @@ void FullscreenMenuLaunchMPG::set_scenario_values() {
 	map.set_filename(settings.mapfilename);
 	ml->preload_map(true);
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
+	if (settings.players.size() != nrplayers) {
+		// Due to asynchronous notifications, the client can crash when an update is missing and the
+		// number of players is wrong.
+		return;
+	}
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		settings_->set_player_tribe(i, map.get_scenario_player_tribe(i + 1));
 		settings_->set_player_closeable(i, map.get_scenario_player_closeable(i + 1));
 		std::string ai(map.get_scenario_player_ai(i + 1));
 		if (!ai.empty()) {
-			settings_->set_player_state(i, PlayerSettings::stateComputer);
+			settings_->set_player_state(i, PlayerSettings::State::kComputer);
 			settings_->set_player_ai(i, ai);
-		} else if (settings.players.at(i).state != PlayerSettings::stateHuman &&
-		           settings.players.at(i).state != PlayerSettings::stateOpen) {
-			settings_->set_player_state(i, PlayerSettings::stateOpen);
+		} else if (settings.players.at(i).state != PlayerSettings::State::kHuman &&
+		           settings.players.at(i).state != PlayerSettings::State::kOpen) {
+			settings_->set_player_state(i, PlayerSettings::State::kOpen);
 		}
 	}
 }
@@ -470,22 +493,26 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 	std::string player_save_tribe[kMaxPlayers];
 	std::string player_save_ai[kMaxPlayers];
 
-	uint8_t i = 1;
-	for (; i <= nr_players_; ++i) {
-		infotext += "\n* ";
-		Section& s =
-		   prof.get_safe_section((boost::format("player_%u") % static_cast<unsigned int>(i)).str());
-		player_save_name[i - 1] = s.get_string("name");
-		player_save_tribe[i - 1] = s.get_string("tribe");
-		player_save_ai[i - 1] = s.get_string("ai");
+	for (uint8_t i = 1; i <= nr_players_; ++i) {
+		Section* s =
+		   prof.get_section((boost::format("player_%u") % static_cast<unsigned int>(i)).str());
+		if (s == nullptr) {
+			// Due to asynchronous notifications, the client can crash on savegame change when number
+			// of players goes down. So, we abort if the section does not exist to prevent crashes.
+			return;
+		}
+		player_save_name[i - 1] = s->get_string("name");
+		player_save_tribe[i - 1] = s->get_string("tribe");
+		player_save_ai[i - 1] = s->get_string("ai");
 
+		infotext += "\n* ";
 		infotext += (boost::format(_("Player %u")) % static_cast<unsigned int>(i)).str();
 		if (player_save_tribe[i - 1].empty()) {
 			std::string closed_string = (boost::format("<%s>") % _("closed")).str();
 			infotext += ":\n    ";
 			infotext += closed_string;
 			// Close the player
-			settings_->set_player_state(i - 1, PlayerSettings::stateClosed);
+			settings_->set_player_state(i - 1, PlayerSettings::State::kClosed);
 			continue;  // if tribe is empty, the player does not exist
 		}
 
@@ -495,10 +522,10 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 
 		if (player_save_ai[i - 1].empty()) {
 			// Assure that player is open
-			if (settings_->settings().players.at(i - 1).state != PlayerSettings::stateHuman)
-				settings_->set_player_state(i - 1, PlayerSettings::stateOpen);
+			if (settings_->settings().players.at(i - 1).state != PlayerSettings::State::kHuman)
+				settings_->set_player_state(i - 1, PlayerSettings::State::kOpen);
 		} else {
-			settings_->set_player_state(i - 1, PlayerSettings::stateComputer);
+			settings_->set_player_state(i - 1, PlayerSettings::State::kComputer);
 			settings_->set_player_ai(i - 1, player_save_ai[i - 1]);
 		}
 
@@ -506,7 +533,7 @@ void FullscreenMenuLaunchMPG::load_previous_playerdata() {
 		settings_->set_player_tribe(i - 1, player_save_tribe[i - 1]);
 
 		// get translated tribename
-		for (const TribeBasicInfo& tribeinfo : settings_->settings().tribes) {
+		for (const Widelands::TribeBasicInfo& tribeinfo : settings_->settings().tribes) {
 			if (tribeinfo.name == player_save_tribe[i - 1]) {
 				i18n::Textdomain td("tribes");  // for translated initialisation
 				player_save_tribe[i - 1] = _(tribeinfo.descname);
@@ -559,11 +586,13 @@ void FullscreenMenuLaunchMPG::load_map_info() {
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
 	infotext += std::string("• ") +
-	            (boost::format(_("Size: %1$u x %2$u")) % map.get_width() % map.get_height()).str() +
+	            (boost::format(_("Size: %1% x %2%")) % map.get_width() % map.get_height()).str() +
 	            "\n";
-	infotext +=
-	   std::string("• ") +
-	   (boost::format(ngettext("%u Player", "%u Players", nr_players_)) % nr_players_).str() + "\n";
+	infotext += std::string("• ") +
+	            (boost::format(ngettext("%u Player", "%u Players", nr_players_)) %
+	             static_cast<unsigned int>(nr_players_))
+	               .str() +
+	            "\n";
 	if (settings_->settings().scenario)
 		infotext += std::string("• ") + (boost::format(_("Scenario mode selected"))).str() + "\n";
 	infotext += "\n";

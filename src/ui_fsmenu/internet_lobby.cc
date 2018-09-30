@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,11 +27,23 @@
 #include "base/macros.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
+#include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
+#include "random/random.h"
 #include "ui_basic/messagebox.h"
+
+namespace {
+
+// Constants for convert_clienttype() / compare_clienttype()
+const uint8_t kClientUnregistered = 0;
+const uint8_t kClientRegistered = 1;
+const uint8_t kClientSuperuser = 2;
+// 3 was INTERNET_CLIENT_BOT which is not used
+const uint8_t kClientIRC = 4;
+}
 
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                                                          char const* const pwd,
@@ -59,7 +71,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                get_h() * 55 / 100,
                butw_,
                buth_,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
      hostgame_(this,
                "host_game",
@@ -67,7 +79,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                get_h() * 81 / 100,
                butw_,
                buth_,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
      back_(this,
            "back",
@@ -75,22 +87,18 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
            get_h() * 90 / 100,
            butw_,
            buth_,
-           g_gr->images().get("images/ui_basic/but0.png"),
+           UI::ButtonStyle::kFsMenuSecondary,
            _("Back")),
 
      // Edit boxes
-     edit_servername_(this,
-                      get_w() * 17 / 25,
-                      get_h() * 68 / 100,
-                      butw_,
-                      buth_,
-                      2,
-                      g_gr->images().get("images/ui_basic/but2.png"),
-                      fs_),
+     edit_servername_(
+        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, UI::PanelStyle::kFsMenu, fs_),
 
      // List
-     clientsonline_list_(this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10),
-     opengames_list_(this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20),
+     clientsonline_list_(
+        this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10, UI::PanelStyle::kFsMenu),
+     opengames_list_(
+        this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20, UI::PanelStyle::kFsMenu),
 
      // The chat UI
      chat(this,
@@ -98,7 +106,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
           get_h() * 51 / 100,
           lisw_,
           get_h() * 44 / 100,
-          InternetGaming::ref()),
+          InternetGaming::ref(),
+          UI::PanelStyle::kFsMenu),
 
      // Login information
      nickname_(nick),
@@ -191,9 +200,10 @@ void FullscreenMenuInternetLobby::clicked_ok() {
 void FullscreenMenuInternetLobby::connect_to_metaserver() {
 	Section& s = g_options.pull_section("global");
 	const std::string& metaserver = s.get_string("metaserver", INTERNET_GAMING_METASERVER.c_str());
-	uint32_t port = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
-
-	InternetGaming::ref().login(nickname_, password_, is_registered_, metaserver, port);
+	uint32_t port = s.get_natural("metaserverport", kInternetGamingPort);
+	std::string auth = is_registered_ ? password_ : s.get_string("uuid");
+	assert(!auth.empty());
+	InternetGaming::ref().login(nickname_, auth, is_registered_, metaserver, port);
 }
 
 /// fills the server list
@@ -229,13 +239,13 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 
 uint8_t FullscreenMenuInternetLobby::convert_clienttype(const std::string& type) {
 	if (type == INTERNET_CLIENT_REGISTERED)
-		return 1;
+		return kClientRegistered;
 	if (type == INTERNET_CLIENT_SUPERUSER)
-		return 2;
-	if (type == INTERNET_CLIENT_BOT)
-		return 3;
+		return kClientSuperuser;
+	if (type == INTERNET_CLIENT_IRC)
+		return kClientIRC;
 	// if (type == INTERNET_CLIENT_UNREGISTERED)
-	return 0;
+	return kClientUnregistered;
 }
 
 /**
@@ -261,20 +271,22 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {
-			case 0:  // UNREGISTERED
+			case kClientUnregistered:
 				pic = g_gr->images().get("images/wui/overlays/roadb_red.png");
 				er.set_picture(0, pic);
 				break;
-			case 1:  // REGISTERED
+			case kClientRegistered:
 				pic = g_gr->images().get("images/wui/overlays/roadb_yellow.png");
 				er.set_picture(0, pic);
 				break;
-			case 2:  // SUPERUSER
-			case 3:  // BOT
+			case kClientSuperuser:
 				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;
+			case kClientIRC:
+				// No icon for IRC users
+				continue;
 			default:
 				continue;
 			}
@@ -349,30 +361,40 @@ void FullscreenMenuInternetLobby::change_servername() {
 	}
 }
 
+bool FullscreenMenuInternetLobby::wait_for_ip() {
+	// Wait until the metaserver provided us with an IP address
+	uint32_t const secs = time(nullptr);
+	while (!InternetGaming::ref().ips().first.is_valid()) {
+		InternetGaming::ref().handle_metaserver_communication();
+		// give some time for the answer + for a relogin, if a problem occurs.
+		if ((kInternetGamingTimeout * 5 / 3) < time(nullptr) - secs) {
+			// Show a popup warning message
+			const std::string warning(
+			   _("Widelands was unable to get the IP address of the server in time. "
+			     "There seems to be a network problem, either on your side or on the side "
+			     "of the server.\n"));
+			UI::WLMessageBox mmb(this, _("Connection Timed Out"), warning,
+			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
+			mmb.run<UI::Panel::Returncodes>();
+			InternetGaming::ref().set_error();
+			return false;
+		}
+	}
+	return true;
+}
+
 /// called when the 'join game' button was clicked
 void FullscreenMenuInternetLobby::clicked_joingame() {
 	if (opengames_list_.has_selection()) {
 		InternetGaming::ref().join_game(opengames_list_.get_selected().name);
 
-		uint32_t const secs = time(nullptr);
-		while (!InternetGaming::ref().ips().first.is_valid()) {
-			InternetGaming::ref().handle_metaserver_communication();
-			// give some time for the answer + for a relogin, if a problem occurs.
-			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(nullptr) - secs) {
-				// Show a popup warning message
-				const std::string warning(
-				   _("Widelands was unable to get the IP address of the server in time.\n"
-				     "There seems to be a network problem, either on your side or on the side\n"
-				     "of the server.\n"));
-				UI::WLMessageBox mmb(this, _("Connection timed out"), warning,
-				                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
-				mmb.run<UI::Panel::Returncodes>();
-				return InternetGaming::ref().set_error();
-			}
+		if (!wait_for_ip()) {
+			return;
 		}
 		const std::pair<NetAddress, NetAddress>& ips = InternetGaming::ref().ips();
 
-		GameClient netgame(ips, InternetGaming::ref().get_local_clientname(), true);
+		GameClient netgame(ips, InternetGaming::ref().get_local_clientname(), true,
+		                   opengames_list_.get_selected().name);
 		netgame.run();
 	} else
 		throw wexception("No server selected! That should not happen!");
@@ -396,6 +418,16 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 
 	// Start the game
 	try {
+
+		// Tell the metaserver about it
+		InternetGaming::ref().open_game();
+
+		// Wait for his response with the IPs of the relay server
+		if (!wait_for_ip()) {
+			return;
+		}
+
+		// Start our relay host
 		GameHost netgame(InternetGaming::ref().get_local_clientname(), true);
 		netgame.run();
 	} catch (...) {

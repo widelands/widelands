@@ -28,7 +28,7 @@ tribes:new_productionsite_type {
          hotspot = { 52, 64 },
       },
       working = {
-         pictures = path.list_files(dirname .. "idle_??.png"), -- TODO(GunChleoc): No animation yet.
+         pictures = path.list_files(dirname .. "working_??.png"),
          hotspot = { 52, 64 },
       },
       unoccupied = {
@@ -39,7 +39,6 @@ tribes:new_productionsite_type {
 
    aihints = {
       basic_amount = 1,
-      prohibited_till = 250,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
@@ -63,7 +62,7 @@ tribes:new_productionsite_type {
             "sleep=43000",
             "return=skipped unless economy needs blackwood",
             "consume=log:2",
-            "play_sound=sound/barbarians blackwood 80",
+            "playsound=sound/barbarians blackwood 80",
             "animate=working 24000",
             "produce=blackwood"
          }

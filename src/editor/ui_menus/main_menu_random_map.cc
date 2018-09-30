@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,8 +31,7 @@
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
-#include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
+#include "graphic/font_handler.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
@@ -63,9 +62,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
             0,
             0,
             0,
+            UI::PanelStyle::kWui,
             _("Width:"),
             UI::SpinBox::Units::kNone,
-            g_gr->images().get("images/ui_basic/but1.png"),
             UI::SpinBox::Type::kValueList),
      height_(&box_,
              0,
@@ -75,9 +74,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
              0,
              0,
              0,
+             UI::PanelStyle::kWui,
              _("Height:"),
              UI::SpinBox::Units::kNone,
-             g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kValueList),
      max_players_(2),
      players_(&box_,
@@ -88,9 +87,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
               2,
               1,
               max_players_,
+              UI::PanelStyle::kWui,
               _("Players:"),
               UI::SpinBox::Units::kNone,
-              g_gr->images().get("images/ui_basic/but1.png"),
               UI::SpinBox::Type::kSmall),
      // World + Resources
      world_descriptions_({
@@ -123,7 +122,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
             0,
             box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()),
             label_height_,
-            g_gr->images().get("images/ui_basic/but1.png"),
+            UI::ButtonStyle::kWuiSecondary,
             world_descriptions_[current_world_].descname),
      resources_(&resources_box_,
                 "resources",
@@ -131,7 +130,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                 0,
                 box_width_ - 2 * margin_ - std::max(world_label_.get_w(), resources_label_.get_w()),
                 label_height_,
-                g_gr->images().get("images/ui_basic/but1.png"),
+                UI::ButtonStyle::kWuiSecondary,
                 resource_amounts_[resource_amount_].c_str()),
      // Terrain
      waterval_(20),
@@ -146,9 +145,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
             waterval_,
             0,
             60,
+            UI::PanelStyle::kWui,
             _("Water:"),
             UI::SpinBox::Units::kPercent,
-            g_gr->images().get("images/ui_basic/but1.png"),
             UI::SpinBox::Type::kSmall,
             5),
      land_(&box_,
@@ -159,9 +158,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
            landval_,
            0,
            100,
+           UI::PanelStyle::kWui,
            _("Land:"),
            UI::SpinBox::Units::kPercent,
-           g_gr->images().get("images/ui_basic/but1.png"),
            UI::SpinBox::Type::kSmall,
            5),
      wasteland_(&box_,
@@ -172,9 +171,9 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                 wastelandval_,
                 0,
                 70,
+                UI::PanelStyle::kWui,
                 _("Wasteland:"),
                 UI::SpinBox::Units::kPercent,
-                g_gr->images().get("images/ui_basic/but1.png"),
                 UI::SpinBox::Type::kSmall,
                 5),
      mountains_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
@@ -189,14 +188,14 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
      island_mode_(&box_, Vector2i::zero(), _("Island mode")),
      // Geeky stuff
      map_number_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
-     map_number_label_(&map_number_box_, 0, 0, _("Random Number:")),
+     map_number_label_(&map_number_box_, 0, 0, _("Random number:")),
      map_number_edit_(&map_number_box_,
                       0,
                       0,
                       box_width_ - 2 * margin_ - map_number_label_.get_w(),
                       0,
                       2,
-                      g_gr->images().get("images/ui_basic/but1.png")),
+                      UI::PanelStyle::kWui),
      map_id_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      map_id_label_(&map_id_box_, 0, 0, _("Map ID:")),
      map_id_edit_(&map_id_box_,
@@ -205,7 +204,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                   box_width_ - 2 * margin_ - map_id_label_.get_w(),
                   0,
                   2,
-                  g_gr->images().get("images/ui_basic/but1.png")),
+                  UI::PanelStyle::kWui),
      // Buttons
      button_box_(&box_, 0, 0, UI::Box::Horizontal, 0, 0, margin_),
      ok_button_(&button_box_,
@@ -214,7 +213,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                 0,
                 box_width_ / 2 - margin_,
                 0,
-                g_gr->images().get("images/ui_basic/but5.png"),
+                UI::ButtonStyle::kWuiPrimary,
                 _("Generate Map")),
      cancel_button_(&button_box_,
                     "generate_map",
@@ -222,7 +221,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
                     0,
                     box_width_ / 2 - margin_,
                     0,
-                    g_gr->images().get("images/ui_basic/but1.png"),
+                    UI::ButtonStyle::kWuiSecondary,
                     _("Cancel")) {
 	int32_t box_height = 0;
 
@@ -231,8 +230,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	width_.set_value_list(Widelands::kMapDimensions);
 	height_.set_value_list(Widelands::kMapDimensions);
 	{
-		const Widelands::Map& map = parent.egbase().map();
-		Widelands::Extent const map_extent = map.extent();
+		Widelands::Extent const map_extent = parent.egbase().map().extent();
 		width_.set_value(find_dimension_index(map_extent.w));
 		height_.set_value(find_dimension_index(map_extent.h));
 	}
@@ -380,7 +378,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	// ---------- "Generate Map" button ----------
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
-	if (UI::g_fh1->fontset()->is_rtl()) {
+	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);
 	} else {
@@ -512,7 +510,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	cancel_button_.set_enabled(false);
 	EditorInteractive& eia = dynamic_cast<EditorInteractive&>(*get_parent());
 	Widelands::EditorGameBase& egbase = eia.egbase();
-	Widelands::Map& map = egbase.map();
+	Widelands::Map* map = egbase.mutable_map();
 	UI::ProgressWindow loader_ui;
 
 	eia.cleanup_for_load();
@@ -528,8 +526,8 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	      << "Resources = " << resources_.get_title() << "\n"
 	      << "ID = " << map_id_edit_.text() << "\n";
 
-	MapGenerator gen(map, map_info, egbase);
-	map.create_empty_map(
+	MapGenerator gen(*map, map_info, egbase);
+	map->create_empty_map(
 	   egbase.world(), map_info.w, map_info.h, 0, _("No Name"),
 	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")),
 	   sstrm.str().c_str());
@@ -564,7 +562,7 @@ void MainMenuNewRandomMap::clicked_create_map() {
 	egbase.postload();
 	egbase.load_graphics(loader_ui);
 
-	map.recalc_whole_map(egbase.world());
+	map->recalc_whole_map(egbase.world());
 	eia.map_changed(EditorInteractive::MapWas::kReplaced);
 	UI::WLMessageBox mbox(
 	   &eia,

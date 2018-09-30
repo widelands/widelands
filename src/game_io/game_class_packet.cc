@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,6 +60,8 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	// EDITOR GAME CLASS
 	// Write gametime
 	fw.unsigned_32(game.gametime_);
+
+	// TODO(sirver,trading): save/load trade_agreements and related data.
 
 	// We do not care for players, since they were set
 	// on game initialization to match Map::scenario_player_[names|tribes]

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
-#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -42,23 +41,23 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
 
      // Left column content
      label_opengames_(&left_column_, 0, 0, _("List of games in your local network:")),
-     table_(&left_column_, 0, 0, 0, 0),
+     table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
 
      // Right column content
      label_playername_(&right_column_, 0, 0, _("Your nickname:")),
      playername_(
-        &right_column_, 0, 0, 0, labelh_, 2, g_gr->images().get("images/ui_basic/but2.png")),
+        &right_column_, 0, 0, 0, labelh_, 2, UI::PanelStyle::kFsMenu),
      label_hostname_(&right_column_, 0, 0, _("Host to connect:")),
 
      host_box_(&right_column_, 0, 0, UI::Box::Horizontal),
-     hostname_(&host_box_, 0, 0, 0, labelh_, 2, g_gr->images().get("images/ui_basic/but2.png")),
+     hostname_(&host_box_, 0, 0, 0, labelh_, 2, UI::PanelStyle::kFsMenu),
      loadlasthost_(&host_box_,
                    "load_previous_host",
                    0,
                    0,
                    labelh_,
                    labelh_,
-                   g_gr->images().get("images/ui_basic/but1.png"),
+                   UI::ButtonStyle::kFsMenuSecondary,
                    g_gr->images().get("images/ui_fsmenu/menu_load_game.png"),
                    _("Load previous host")),
 
@@ -69,7 +68,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                0,
                0,
                0,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
      hostgame_(&right_column_,
                "host_game",
@@ -77,7 +76,7 @@ FullscreenMenuNetSetupLAN::FullscreenMenuNetSetupLAN()
                0,
                0,
                0,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Host a new game")) {
 
 	ok_.set_visible(false);  // We have 2 starting buttons, so we need a different layout here.
@@ -175,9 +174,9 @@ bool FullscreenMenuNetSetupLAN::get_host_address(NetAddress* addr) {
 	}
 
 	// The user probably entered a hostname on his own. Try to resolve it
-	if (NetAddress::resolve_to_v6(addr, host, WIDELANDS_PORT))
+	if (NetAddress::resolve_to_v6(addr, host, kWidelandsLanPort))
 		return true;
-	if (NetAddress::resolve_to_v4(addr, host, WIDELANDS_PORT))
+	if (NetAddress::resolve_to_v4(addr, host, kWidelandsLanPort))
 		return true;
 	return false;
 }
@@ -219,8 +218,8 @@ void FullscreenMenuNetSetupLAN::update_game_info(
 	case LAN_GAME_CLOSED:
 		er.set_string(2, _("Closed"));
 		break;
-	/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 	default:
+		/** TRANSLATORS: The state of a LAN game can be open, closed or unknown */
 		er.set_string(2, pgettext("game_state", "Unknown"));
 		break;
 	};

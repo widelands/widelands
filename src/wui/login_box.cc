@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@
 #include "wui/login_box.h"
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
@@ -33,13 +33,12 @@ LoginBox::LoginBox(Panel& parent)
 
 	ta_nickname = new UI::Textarea(this, margin, margin, _("Nickname:"));
 	ta_password = new UI::Textarea(this, margin, 40, _("Password:"));
-	eb_nickname = new UI::EditBox(
-	   this, 150, margin, 330, 20, 2, g_gr->images().get("images/ui_basic/but2.png"));
-	eb_password =
-	   new UI::EditBox(this, 150, 40, 330, 20, 2, g_gr->images().get("images/ui_basic/but2.png"));
+	eb_nickname = new UI::EditBox(this, 150, margin, 330, 20, 2, UI::PanelStyle::kWui);
+	eb_password = new UI::EditBox(this, 150, 40, 330, 20, 2, UI::PanelStyle::kWui);
 
-	pwd_warning = new UI::MultilineTextarea(
-	   this, margin, 65, 505, 50, _("WARNING: Password will be shown and saved readable!"));
+	pwd_warning =
+	   new UI::MultilineTextarea(this, margin, 65, 505, 50, UI::PanelStyle::kWui,
+	                             _("WARNING: Password will be shown and saved readable!"));
 
 	cb_register = new UI::Checkbox(this, Vector2i(margin, 110), _("Log in to a registered account"),
 	                               "", get_inner_w() - 2 * margin);
@@ -47,23 +46,21 @@ LoginBox::LoginBox(Panel& parent)
 	                               _("Automatically use this login information from now on."), "",
 	                               get_inner_w() - 2 * margin);
 
-	UI::Button* loginbtn =
-	   new UI::Button(this, "login", UI::g_fh1->fontset()->is_rtl() ?
-	                                    (get_inner_w() / 2 - 200) / 2 :
-	                                    (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
-	                  get_inner_h() - 20 - margin, 200, 20,
-	                  g_gr->images().get("images/ui_basic/but5.png"), _("Login"));
+	UI::Button* loginbtn = new UI::Button(
+	   this, "login",
+	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 :
+	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
+	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
-	UI::Button* cancelbtn = new UI::Button(
-	   this, "cancel",
-	   UI::g_fh1->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
-	                                    (get_inner_w() / 2 - 200) / 2,
-	   loginbtn->get_y(), 200, 20, g_gr->images().get("images/ui_basic/but1.png"), _("Cancel"));
+	UI::Button* cancelbtn =
+	   new UI::Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ?
+	                                     (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
+	                                     (get_inner_w() / 2 - 200) / 2,
+	                  loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 
 	Section& s = g_options.pull_section("global");
 	eb_nickname->set_text(s.get_string("nickname", _("nobody")));
-	eb_password->set_text(s.get_string("password", ""));
 	cb_register->set_state(s.get_bool("registered", false));
 	eb_nickname->focus();
 }

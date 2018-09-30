@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/color.h"
-#include "graphic/graphic.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
@@ -51,9 +50,9 @@ struct BaseListselect : public Panel {
 	               int32_t y,
 	               uint32_t w,
 	               uint32_t h,
-	               const Image* button_background,
+	               PanelStyle style,
 	               ListselectLayout selection_mode = ListselectLayout::kPlain);
-	~BaseListselect();
+	~BaseListselect() override;
 
 	boost::signals2::signal<void(uint32_t)> selected;
 	boost::signals2::signal<void(uint32_t)> clicked;
@@ -61,21 +60,23 @@ struct BaseListselect : public Panel {
 
 	void clear();
 	void sort(const uint32_t Begin = 0, uint32_t End = std::numeric_limits<uint32_t>::max());
+	/**
+	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
+	 */
 	void add(const std::string& name,
 	         uint32_t value,
 	         const Image* pic = nullptr,
 	         const bool select_this = false,
 	         const std::string& tooltip_text = std::string());
+	/**
+	 * Text conventions: Title Case for the 'name', Sentence case for the 'tooltip_text'
+	 */
 	void add_front(const std::string& name,
 	               const Image* pic = nullptr,
 	               const bool select_this = false,
 	               const std::string& tooltip_text = std::string());
 	void remove(uint32_t);
 	void remove(const char* name);
-
-	void switch_entries(uint32_t, uint32_t);
-
-	void set_entry_color(uint32_t, const RGBColor&);
 
 	uint32_t size() const {
 		return entry_records_.size();
@@ -101,15 +102,10 @@ struct BaseListselect : public Panel {
 	bool has_selection() const;
 
 	uint32_t get_selected() const;
-	void remove_selected();
 
 	const std::string& get_selected_name() const;
 	const std::string& get_selected_tooltip() const;
 	const Image* get_selected_image() const;
-
-	void set_background(const Image* background) {
-		background_ = background;
-	}
 
 	///  Return the total height (text + spacing) occupied by a single line.
 	int get_lineheight() const;
@@ -136,8 +132,6 @@ private:
 
 	struct EntryRecord {
 		uint32_t entry_;
-		bool use_clr;
-		RGBColor clr;
 		const Image* pic;
 		std::string name;
 		std::string tooltip;
@@ -154,7 +148,7 @@ private:
 	uint32_t last_selection_;  // for double clicks
 	ListselectLayout selection_mode_;
 	const Image* check_pic_;
-	const Image* background_;
+	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
 	std::string current_tooltip_;
 };
 
@@ -164,9 +158,9 @@ template <typename Entry> struct Listselect : public BaseListselect {
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
-	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	           UI::PanelStyle style,
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
-	   : BaseListselect(parent, x, y, w, h, button_background, selection_mode) {
+	   : BaseListselect(parent, x, y, w, h, style, selection_mode) {
 	}
 
 	void add(const std::string& name,
@@ -194,10 +188,6 @@ template <typename Entry> struct Listselect : public BaseListselect {
 		return entry_cache_[BaseListselect::get_selected()];
 	}
 
-	void set_background(const Image* background) {
-		BaseListselect::set_background(background);
-	}
-
 private:
 	std::deque<Entry> entry_cache_;
 };
@@ -217,9 +207,9 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 	           int32_t y,
 	           uint32_t w,
 	           uint32_t h,
-	           const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
+	           UI::PanelStyle style,
 	           ListselectLayout selection_mode = ListselectLayout::kPlain)
-	   : Base(parent, x, y, w, h, button_background, selection_mode) {
+	   : Base(parent, x, y, w, h, style, selection_mode) {
 	}
 
 	void add(const std::string& name,
@@ -243,10 +233,6 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 
 	Entry& get_selected() const {
 		return *Base::get_selected();
-	}
-
-	void set_background(const Image* background) {
-		*Base::set_background(background);
 	}
 };
 }

@@ -26,9 +26,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      logproducer = true,
-      forced_after = 180,
-      prohibited_till = 180
+      collects_ware_from_map = "log"
    },
 
    working_positions = {
@@ -45,7 +43,7 @@ tribes:new_productionsite_type {
          descname = _"felling trees",
          actions = {
             "sleep=30000", -- Barbarian lumberjack sleeps 25000
-            "worker=chop"
+            "callworker=harvest"
          }
       },
    },

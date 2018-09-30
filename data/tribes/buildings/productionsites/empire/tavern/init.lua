@@ -34,7 +34,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       basic_amount = 1,
-      prohibited_till = 300
+      prohibited_till = 570
    },
 
    working_positions = {
@@ -56,11 +56,12 @@ tribes:new_productionsite_type {
          descname = _"preparing a ration",
          actions = {
             -- time total: 33
-            "sleep=14000",
             "return=skipped unless economy needs ration",
+            "sleep=5000",
             "consume=empire_bread,fish,meat",
-            "play_sound=sound/empire/taverns ration 100",
-            "animate=working 19000",
+            "playsound=sound/empire/taverns ration 100",
+            "animate=working 18000",
+            "sleep=10000",
             "produce=ration"
          }
       },

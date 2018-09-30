@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,6 +78,8 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 		return *new CmdEvictWorker();
 	case QueueCommandTypes::kMilitarysiteSetSoldierPreference:
 		return *new CmdMilitarySiteSetSoldierPreference();
+	case QueueCommandTypes::kProposeTrade:
+		return *new CmdProposeTrade();
 	case QueueCommandTypes::kSinkShip:
 		return *new CmdShipSink();
 	case QueueCommandTypes::kShipCancelExpedition:

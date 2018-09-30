@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/dropdown.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
 
@@ -44,11 +43,7 @@ class LuaInterface;
 class FullscreenMenuLaunchGame : public FullscreenMenuBase {
 public:
 	FullscreenMenuLaunchGame(GameSettingsProvider*, GameController*);
-	~FullscreenMenuLaunchGame();
-
-	void think() override;
-
-	virtual void refresh() = 0;
+	~FullscreenMenuLaunchGame() override;
 
 protected:
 	void clicked_ok() override;

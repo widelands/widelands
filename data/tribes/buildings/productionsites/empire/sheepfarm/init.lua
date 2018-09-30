@@ -31,7 +31,9 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 300
+      prohibited_till = 380,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
    },
 
    working_positions = {
@@ -54,7 +56,7 @@ tribes:new_productionsite_type {
             "sleep=25000",
             "return=skipped unless economy needs wool",
             "consume=water wheat",
-            "play_sound=sound/farm sheep 192",
+            "playsound=sound/farm sheep 192",
             "animate=working 30000",
             "produce=wool"
          }

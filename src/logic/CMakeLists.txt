@@ -1,3 +1,13 @@
+wl_library(logic_exceptions
+  SRCS
+    game_data_error.cc
+    game_data_error.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+)
+
+
 wl_library(logic_widelands_geometry
   SRCS
     widelands_geometry.cc
@@ -11,8 +21,9 @@ wl_library(logic_game_settings
     player_end_result.h
   DEPENDS
     io_filesystem
-    logic
     logic_constants
+    logic_tribe_basic_info
+    notifications
     scripting_lua_interface
     scripting_lua_table
 )
@@ -24,8 +35,9 @@ wl_library(logic_single_player_game_settings
   DEPENDS
     ai
     base_exceptions
-    logic
+    base_i18n
     logic_game_settings
+    logic_tribe_basic_info
 )
 
 wl_library(logic_game_controller
@@ -52,16 +64,33 @@ wl_library(logic_campaign_visibility
   DEPENDS
     base_exceptions
     io_filesystem
+    logic_filesystem_constants
     profile
 )
 
 wl_library(logic_constants
   SRCS
-    constants.h
-    constants.cc
+    widelands.cc
     widelands.h
   DEPENDS
     base_macros
+)
+
+wl_library(logic_filesystem_constants
+  SRCS
+    filesystem_constants.h
+    filesystem_constants.cc
+)
+wl_library(logic_tribe_basic_info
+  SRCS
+    map_objects/tribes/tribe_basic_info.cc
+    map_objects/tribes/tribe_basic_info.h
+  DEPENDS
+    base_i18n
+    logic_exceptions
+    scripting_lua_table
+    scripting_lua_interface
+
 )
 
 wl_library(logic
@@ -94,14 +123,12 @@ wl_library(logic
     findimmovable.h
     findnode.cc
     findnode.h
-    game_data_error.cc
-    game_data_error.h
     game.cc
     game.h
-    map_revision.cc
-    map_revision.h
     map.cc
     map.h
+    map_revision.cc
+    map_revision.h
     mapastar.cc
     mapastar.h
     mapdifferenceregion.cc
@@ -113,18 +140,18 @@ wl_library(logic
     mapregion.h
     maptriangleregion.cc
     maptriangleregion.h
+    message.h
     message_id.h
     message_queue.h
-    message.h
     nodecaps.h
     objective.h
     path.cc
     path.h
     pathfield.cc
     pathfield.h
-    player_area.h
     player.cc
     player.h
+    player_area.h
     playercommand.cc
     playercommand.h
     playersmanager.cc
@@ -137,6 +164,8 @@ wl_library(logic
     roadtype.h
     save_handler.cc
     save_handler.h
+    see_unsee_node.h
+    trade_agreement.h
     widelands_geometry_io.cc
     widelands_geometry_io.h
     map_objects/bob.cc
@@ -145,7 +174,6 @@ wl_library(logic
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
-    map_objects/draw_text.h
     map_objects/immovable.cc
     map_objects/immovable.h
     map_objects/immovable_program.h
@@ -165,6 +193,8 @@ wl_library(logic
     map_objects/tribes/constructionsite.h
     map_objects/tribes/dismantlesite.cc
     map_objects/tribes/dismantlesite.h
+    map_objects/tribes/market.cc
+    map_objects/tribes/market.h
     map_objects/tribes/militarysite.cc
     map_objects/tribes/militarysite.h
     map_objects/tribes/partially_finished_building.cc
@@ -186,8 +216,6 @@ wl_library(logic
     map_objects/tribes/training_attribute.h
     map_objects/tribes/trainingsite.cc
     map_objects/tribes/trainingsite.h
-    map_objects/tribes/tribe_basic_info.cc
-    map_objects/tribes/tribe_basic_info.h
     map_objects/tribes/tribe_descr.cc
     map_objects/tribes/tribe_descr.h
     map_objects/tribes/tribes.cc
@@ -236,11 +264,9 @@ wl_library(logic
     base_time_string
     build_info
     economy
-    editor
     game_io
     graphic
     graphic_color
-    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
@@ -251,14 +277,18 @@ wl_library(logic
     io_filesystem
     io_stream
     logic_constants
+    logic_exceptions
+    logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_tribe_basic_info
     logic_widelands_geometry
     map_io
     map_io_map_loader
     network
     note_sound
     notifications
+    profile
     random
     scripting_coroutine
     scripting_logic

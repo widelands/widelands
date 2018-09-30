@@ -38,7 +38,7 @@ tribes:new_productionsite_type {
    aihints = {
       mines = "iron",
       mines_percent = 50,
-      prohibited_till = 900
+      prohibited_till = 1000
    },
 
    working_positions = {
@@ -58,15 +58,30 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
-            "sleep=45000",
+            "sleep=5000",
             "return=skipped unless economy needs iron_ore",
             "consume=ration beer",
-            "animate=working 20000",
+            "sleep=38000",
+            "call=mine_produce",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         }
+      },
+      mine_produce = {
+         descname = _"mining iron",
+         actions = {
+            "animate=working 14000",
             "mine=iron 2 50 5 17",
             "produce=iron_ore",
-            "animate=working 20000",
-            "mine=iron 2 50 5 17",
-            "produce=iron_ore:2"
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration beer",
+            "produce=iron_ore:3",
          }
       },
    },

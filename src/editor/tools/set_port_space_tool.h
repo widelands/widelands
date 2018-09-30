@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,12 +46,14 @@ public:
 	const Image* get_sel_impl() const override {
 		return g_gr->images().get(FSEL_EUPS_FILENAME);
 	}
+	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                           const Widelands::EditorGameBase& egbase) override;
 };
 
 /// Sets a buildspace for ports.
 class EditorSetPortSpaceTool : public EditorTool {
 public:
-	EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
+	explicit EditorSetPortSpaceTool(EditorUnsetPortSpaceTool&);
 
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,
@@ -68,8 +70,8 @@ public:
 	const Image* get_sel_impl() const override {
 		return g_gr->images().get(FSEL_ESPS_FILENAME);
 	}
+	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                           const Widelands::EditorGameBase& egbase) override;
 };
-
-int32_t editor_tool_set_port_space_callback(const Widelands::FCoords& c, const Widelands::Map& map);
 
 #endif  // end of include guard: WL_EDITOR_TOOLS_SET_PORT_SPACE_TOOL_H

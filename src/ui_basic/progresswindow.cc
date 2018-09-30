@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #endif
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/font_set.h"
@@ -99,7 +99,7 @@ void ProgressWindow::step(const std::string& description) {
 
 	rt.fill_rect(label_rectangle_, PROGRESS_FONT_COLOR_BG);
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
+	   UI::g_fh->render(as_uifont(description, UI_FONT_SIZE_SMALL, PROGRESS_FONT_COLOR_FG));
 	UI::center_vertically(rendered_text->height(), &label_center_);
 	rendered_text->draw(rt, label_center_, UI::Align::kCenter);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2016 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,20 +39,19 @@ private:
 		TargetWaresDisplay(UI::Panel* const parent,
 		                   int32_t const x,
 		                   int32_t const y,
-		                   const Widelands::TribeDescr& tribe,
+		                   Widelands::Serial serial,
+		                   Widelands::Player* player,
 		                   Widelands::WareWorker type,
-		                   bool selectable,
-		                   size_t economy_number,
-		                   Widelands::Player& owner);
+		                   bool selectable);
 
-		void set_economy_number(size_t economy_number);
+		void set_economy(Widelands::Serial serial);
 
 	protected:
 		std::string info_for_ware(Widelands::DescriptionIndex const ware) override;
 
 	private:
-		size_t economy_number_;
-		Widelands::Player& owner_;
+		Widelands::Serial serial_;
+		Widelands::Player* player_;
 	};
 
 	/**
@@ -60,19 +59,19 @@ private:
 	 */
 	struct EconomyOptionsPanel : UI::Box {
 		EconomyOptionsPanel(UI::Panel* parent,
+		                    Widelands::Serial serial,
+		                    Widelands::Player* player,
 		                    bool can_act,
-		                    Widelands::WareWorker type,
-		                    size_t economy_number,
-		                    Widelands::Player& owner);
+		                    Widelands::WareWorker type);
 
-		void set_economy_number(size_t economy_number);
+		void set_economy(Widelands::Serial serial);
 		void change_target(int amount);
 		void reset_target();
 
 	private:
+		Widelands::Serial serial_;
+		Widelands::Player* player_;
 		Widelands::WareWorker type_;
-		size_t economy_number_;
-		Widelands::Player& owner_;
 		bool can_act_;
 		TargetWaresDisplay display_;
 	};
@@ -80,8 +79,8 @@ private:
 	/// Actions performed when a NoteEconomyWindow is received.
 	void on_economy_note(const Widelands::NoteEconomy& note);
 
-	size_t economy_number_;
-	Widelands::Player& owner_;
+	Widelands::Serial serial_;
+	Widelands::Player* player_;
 	UI::TabPanel tabpanel_;
 	EconomyOptionsPanel* ware_panel_;
 	EconomyOptionsPanel* worker_panel_;

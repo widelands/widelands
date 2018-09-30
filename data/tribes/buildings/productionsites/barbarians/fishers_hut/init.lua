@@ -32,8 +32,11 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
+      collects_ware_from_map = "fish",
       needs_water = true,
-      prohibited_till = 900
+      prohibited_till = 490,
+      very_weak_ai_limit = 1,
+      weak_ai_limit = 3
    },
 
    working_positions = {
@@ -50,7 +53,7 @@ tribes:new_productionsite_type {
          descname = _"fishing",
          actions = {
             "sleep=18000",
-            "worker=fish"
+            "callworker=fish"
          }
       },
    },

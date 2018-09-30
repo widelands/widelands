@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,8 +24,8 @@
 
 namespace Widelands {
 
-/*
- * stores data that are needed for AI
+/**
+ * Stores and loads data that are needed for AI.
  */
 struct GamePlayerAiPersistentPacket : public GameDataPacket {
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;

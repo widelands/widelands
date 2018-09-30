@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@
 
 struct MapObjectDebugPanel : public UI::Panel, public Widelands::MapObject::LogSink {
 	MapObjectDebugPanel(UI::Panel& parent, const Widelands::EditorGameBase&, Widelands::MapObject&);
-	~MapObjectDebugPanel();
+	~MapObjectDebugPanel() override;
 
 	void log(const std::string& str) override;
 
@@ -67,9 +67,9 @@ MapObjectDebugPanel::MapObjectDebugPanel(UI::Panel& parent,
           0,
           350,
           200,
+          UI::PanelStyle::kWui,
           "",
           UI::Align::kLeft,
-          g_gr->images().get("images/ui_basic/but1.png"),
           UI::MultilineTextarea::ScrollMode::kScrollLog) {
 	obj.set_logsink(this);
 }
@@ -139,7 +139,7 @@ MapObjectDebugWindow::MapObjectDebugWindow(InteractiveBase& parent, Widelands::M
    : UI::Window(&parent, "map_object_debug", 0, 0, 100, 100, ""),
      log_general_info_(true),
      object_(&obj),
-     tabs_(this, g_gr->images().get("images/ui_basic/but4.png")) {
+     tabs_(this, UI::TabPanelStyle::kWuiLight) {
 	serial_ = obj.serial();
 	set_title(std::to_string(serial_));
 
@@ -198,7 +198,7 @@ struct FieldDebugWindow : public UI::Window {
 	void open_bob(uint32_t);
 
 private:
-	Widelands::Map& map_;
+	const Widelands::Map& map_;
 	Widelands::FCoords const coords_;
 
 	UI::MultilineTextarea ui_field_;
@@ -213,12 +213,11 @@ FieldDebugWindow::FieldDebugWindow(InteractiveBase& parent, Widelands::Coords co
      coords_(map_.get_fcoords(coords)),
 
      //  setup child panels
-     ui_field_(this, 0, 0, 300, 280, ""),
+     ui_field_(this, 0, 0, 300, 280, UI::PanelStyle::kWui, ""),
 
-     ui_immovable_(
-        this, "immovable", 0, 280, 300, 24, g_gr->images().get("images/ui_basic/but4.png"), ""),
+     ui_immovable_(this, "immovable", 0, 280, 300, 24, UI::ButtonStyle::kWuiMenu, ""),
 
-     ui_bobs_(this, 0, 304, 300, 96) {
+     ui_bobs_(this, 0, 304, 300, 96, UI::PanelStyle::kWui) {
 	ui_immovable_.sigclicked.connect(boost::bind(&FieldDebugWindow::open_immovable, this));
 
 	assert(0 <= coords_.x);
@@ -282,7 +281,7 @@ void FieldDebugWindow::think() {
 		str += (boost::format("  vision: %u\n") % vision).str();
 		{
 			Widelands::Time const time_last_surveyed =
-			   player_field.time_triangle_last_surveyed[Widelands::TCoords<>::D];
+			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::D)];
 
 			if (time_last_surveyed != Widelands::never()) {
 				str += (boost::format("  D triangle last surveyed at %u: amount %u\n") %
@@ -294,7 +293,7 @@ void FieldDebugWindow::think() {
 		}
 		{
 			Widelands::Time const time_last_surveyed =
-			   player_field.time_triangle_last_surveyed[Widelands::TCoords<>::R];
+			   player_field.time_triangle_last_surveyed[static_cast<int>(Widelands::TriangleIndex::R)];
 
 			if (time_last_surveyed != Widelands::never()) {
 				str += (boost::format("  R triangle last surveyed at %u: amount %u\n") %
@@ -310,10 +309,9 @@ void FieldDebugWindow::think() {
 			break;
 		case 1: {
 			std::string animation_name = "(no animation)";
-			if (player_field.map_object_descr[Widelands::TCoords<>::None]) {
+			if (player_field.map_object_descr) {
 				animation_name = "(seen an animation)";
 			}
-
 			str += (boost::format("  last seen at %u:\n"
 			                      "    owner: %u\n"
 			                      "    immovable animation:\n%s\n"

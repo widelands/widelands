@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
@@ -7,13 +7,14 @@
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
+# Олег Шевченко <olegrock@gmail.com>, 2018
 # Федор <Lunar-energy@ya.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-02-19 19:34+0000\n"
-"PO-Revision-Date: 2017-02-22 12:42+0000\n"
+"POT-Creation-Date: 2018-01-30 12:53+0000\n"
+"PO-Revision-Date: 2018-02-01 08:13+0000\n"
 "Last-Translator: Олег Шевченко <olegrock@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -417,15 +418,15 @@ msgid ""
 "buildings there. There is also another island where you can build a port."
 msgstr "На этой карте нечего бояться, здесь нет врага.\nКак всегда, вы сможете продолжить играть и понаблюдать, как корабли доставляют товары на остров, где вы строите различные здания. Есть также другой остров, где можно построить порт."
 
-#: ../../data/scripting/format_scenario.lua:36
+#: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
 msgstr "“%s”"
 
-#: ../../data/scripting/format_scenario.lua:84
+#: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Новая задача"
-msgstr[1] "Новых задач"
-msgstr[2] "Новых задач"
-msgstr[3] "Новые задачи"
+msgstr[0] "Новое задание"
+msgstr[1] "Новые задания"
+msgstr[2] "Новые задания"
+msgstr[3] "Новые задания"

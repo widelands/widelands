@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,13 +72,16 @@ constexpr uint8_t kCurrentPacketVersionSurveyAmounts = 2;
 constexpr uint8_t kCurrentPacketVersionSurveyTimes = 1;
 #define SURVEY_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/survey_times_%u"
 
+constexpr uint8_t kCurrentPacketVersionHidden = 1;
+#define HIDDEN_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/hidden_%u"
+
 constexpr uint8_t kCurrentPacketVersionVision = 1;
 #define VISION_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/vision_%u"
 
 constexpr uint8_t kCurrentPacketVersionBorder = 1;
 #define BORDER_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/border_%u"
 
-#define FILENAME_SIZE 48
+#define FILENAME_SIZE 64
 
 enum {
 	UNSEEN_NONE = 0,
@@ -292,7 +295,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 	const uint16_t mapheight = map.get_height();
 	Field& first_field = map[0];
 	const PlayerNumber nr_players = map.get_nrplayers();
-	iterate_players_existing_const(plnum, nr_players, egbase, player) {
+	iterate_players_existing(plnum, nr_players, egbase, player) {
 		Player::Field* const player_fields = player->fields_;
 		uint32_t const gametime = egbase.get_gametime();
 
@@ -351,7 +354,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 									map_object_descr = nullptr;
 						} else
 							map_object_descr = nullptr;
-						f_player_field.map_object_descr[TCoords<>::None] = map_object_descr;
+						f_player_field.map_object_descr = map_object_descr;
 					}
 
 					{  //  triangles
@@ -466,9 +469,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 		OPEN_INPUT_FILE(FileRead, survey_times_file, survey_times_filename,
 		                SURVEY_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyTimes);
 
-		OPEN_INPUT_FILE_NEW_VERSION_SILENT(FileRead, border_file, border_filename,
-		                                   border_file_version, BORDER_FILENAME_TEMPLATE,
-		                                   kCurrentPacketVersionBorder);
+		OPEN_INPUT_FILE_NEW_VERSION(FileRead, border_file, border_filename, border_file_version,
+		                            BORDER_FILENAME_TEMPLATE, kCurrentPacketVersionBorder);
+
+		OPEN_INPUT_FILE_NEW_VERSION_SILENT(FileRead, hidden_file, hidden_filename,
+		                                   hidden_file_version, HIDDEN_FILENAME_TEMPLATE,
+		                                   kCurrentPacketVersionHidden);
 
 		for (FCoords first_in_row(Coords(0, 0), &first_field); first_in_row.y < mapheight;
 		     ++first_in_row.y, first_in_row.field += mapwidth) {
@@ -554,7 +560,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					}
 					MapObjectData mod = read_unseen_immovable(
 					   egbase, imm_kind, node_immovables_file, node_immovables_file_version);
-					f_player_field.map_object_descr[TCoords<>::None] = mod.map_object_descr;
+					f_player_field.map_object_descr = mod.map_object_descr;
 					f_player_field.constructionsite = mod.csi;
 
 					// Read in whether this field had a border the last time it was seen
@@ -593,7 +599,7 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 								map_object_descr = nullptr;
 					} else
 						map_object_descr = nullptr;
-					f_player_field.map_object_descr[TCoords<>::None] = map_object_descr;
+					f_player_field.map_object_descr = map_object_descr;
 					break;
 				}
 
@@ -603,7 +609,6 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 					//  information about the triangle has not been saved. Fill in
 					//  the information from the game state.
 					f_player_field.terrains.d = f.field->terrain_d();
-					f_player_field.map_object_descr[TCoords<>::D] = nullptr;
 				} else if (f_everseen | bl_everseen | br_everseen) {
 					//  The player has seen the D triangle but does not see it now.
 					//  Load his information about the triangle from file.
@@ -621,16 +626,20 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                            triangle_immovable_kinds_file_version,
 						                            kCurrentPacketVersionImmovableKinds);
 					}
-					MapObjectData mod = read_unseen_immovable(
+					// We read and ignore the immovable information on the D
+					// triangle. This was done because there were vague plans of
+					// suporting immovables on the triangles instead as on the
+					// nodes.
+					// TODO(sirver): Remove this logic the next time we break
+					// savegame compatibility.
+					read_unseen_immovable(
 					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
-					f_player_field.map_object_descr[TCoords<>::D] = mod.map_object_descr;
 				}
 				if (f_seen | br_seen | r_seen) {
 					//  The player currently sees the R triangle. Therefore his
 					//  information about the triangle has not been saved. Fill in
 					//  the information from the game state.
 					f_player_field.terrains.r = f.field->terrain_r();
-					f_player_field.map_object_descr[TCoords<>::R] = nullptr;
 				} else if (f_everseen | br_everseen | r_everseen) {
 					//  The player has seen the R triangle but does not see it now.
 					//  Load his information about the triangle from file.
@@ -648,9 +657,12 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 						                            triangle_immovable_kinds_file_version,
 						                            kCurrentPacketVersionImmovableKinds);
 					}
-					MapObjectData mod = read_unseen_immovable(
+					// We read and ignore the immovable information on the D
+					// triangle. This was done because there were vague plans of
+					// suporting immovables on the triangles instead as on the
+					// nodes.
+					read_unseen_immovable(
 					   egbase, im_kind, triangle_immovables_file, triangle_immovables_file_version);
-					f_player_field.map_object_descr[TCoords<>::R] = mod.map_object_descr;
 				}
 
 				{  //  edges
@@ -716,7 +728,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							                            kCurrentPacketVersionSurveyAmounts);
 						}
 						try {
-							f_player_field.time_triangle_last_surveyed[TCoords<>::D] =
+							f_player_field
+							   .time_triangle_last_surveyed[static_cast<int>(TriangleIndex::D)] =
 							   survey_times_file.unsigned_32();
 						} catch (const FileRead::FileBoundaryExceeded&) {
 							throw GameDataError(
@@ -750,7 +763,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 							                            kCurrentPacketVersionSurveyAmounts);
 						}
 						try {
-							f_player_field.time_triangle_last_surveyed[TCoords<>::R] =
+							f_player_field
+							   .time_triangle_last_surveyed[static_cast<int>(TriangleIndex::R)] =
 							   survey_times_file.unsigned_32();
 						} catch (const FileRead::FileBoundaryExceeded&) {
 							throw GameDataError(
@@ -769,6 +783,24 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 				}
 			} while (r.x);
 		}
+
+		// Read the number of explicitly hidden fields and then loop through them
+		if (hidden_file_version == kCurrentPacketVersionHidden) {
+			const uint32_t no_of_hidden_fields = hidden_file.unsigned_32();
+			for (uint32_t i = 0; i < no_of_hidden_fields; ++i) {
+				player->hidden_fields_.insert(
+				   std::make_pair(hidden_file.unsigned_32(), hidden_file.unsigned_16()));
+			}
+		} else if (hidden_file_version < 0) {
+			// TODO(GunChleoc): Savegame compatibility - remove after Build 20
+			log("MapPlayersViewPacket - No hidden fields to read for Player %d - probably an old save "
+			    "file\n",
+			    plnum);
+		} else {
+			throw UnhandledVersionError("MapPlayersViewPacket - Hidden fields file",
+			                            hidden_file_version, kCurrentPacketVersionHidden);
+		}
+
 		CHECK_TRAILING_BYTES(unseen_times_file, unseen_times_filename);
 		CHECK_TRAILING_BYTES(node_immovable_kinds_file, node_immovable_kinds_filename);
 		CHECK_TRAILING_BYTES(node_immovables_file, node_immovables_filename);
@@ -780,6 +812,8 @@ void MapPlayersViewPacket::read(FileSystem& fs,
 		CHECK_TRAILING_BYTES(surveys_file, surveys_filename);
 		CHECK_TRAILING_BYTES(survey_amounts_file, survey_amounts_filename);
 		CHECK_TRAILING_BYTES(survey_times_file, survey_times_filename);
+		CHECK_TRAILING_BYTES(border_file, border_filename);
+		CHECK_TRAILING_BYTES(hidden_file, hidden_filename);
 	}
 }
 
@@ -856,6 +890,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 		FileWrite surveys_file;
 		FileWrite survey_amounts_file;
 		FileWrite survey_times_file;
+		FileWrite hidden_file;
 		FileWrite vision_file;
 		FileWrite border_file;
 		for (FCoords first_in_row(Coords(0, 0), &first_field); first_in_row.y < mapheight;
@@ -895,7 +930,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 						assert(f_player_field.owner < 0x20);
 						owners_file.unsigned_8(f_player_field.owner);
 						MapObjectData mod;
-						mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::None];
+						mod.map_object_descr = f_player_field.map_object_descr;
 						mod.csi = f_player_field.constructionsite;
 						write_unseen_immovable(&mod, node_immovable_kinds_file, node_immovables_file);
 
@@ -912,37 +947,37 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					if
 					   //  the player does not see the D triangle now but has
 					   //  seen it
-					   (!bl_seen & !br_seen & (f_everseen | bl_everseen | br_everseen)) {
+					   ((!bl_seen) & (!br_seen) & (f_everseen | bl_everseen | br_everseen)) {
 						terrains_file.unsigned_8(f_player_field.terrains.d);
 						MapObjectData mod;
-						mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::D];
+						mod.map_object_descr = nullptr;
 						write_unseen_immovable(
 						   &mod, triangle_immovable_kinds_file, triangle_immovables_file);
 					}
 					if
 					   //  the player does not see the R triangle now but has
 					   //  seen it
-					   (!br_seen & !r_seen & (f_everseen | br_everseen | r_everseen)) {
+					   ((!br_seen) & (!r_seen) & (f_everseen | br_everseen | r_everseen)) {
 						terrains_file.unsigned_8(f_player_field.terrains.r);
 						MapObjectData mod;
-						mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::R];
+						mod.map_object_descr = nullptr;
 						write_unseen_immovable(
 						   &mod, triangle_immovable_kinds_file, triangle_immovables_file);
 					}
 
 					//  edges
-					if (!bl_seen && (f_everseen || bl_everseen))
+					if ((!bl_seen) && (f_everseen || bl_everseen))
 						roads_file.unsigned_8(f_player_field.road_sw());
-					if (!br_seen && (f_everseen || br_everseen))
+					if ((!br_seen) && (f_everseen || br_everseen))
 						roads_file.unsigned_8(f_player_field.road_se());
-					if (!r_seen && (f_everseen || r_everseen))
+					if ((!r_seen) && (f_everseen || r_everseen))
 						roads_file.unsigned_8(f_player_field.road_e());
 				}
 
 				//  geologic survey
 				if (f_everseen & bl_everseen & br_everseen) {
 					const uint32_t time_last_surveyed =
-					   f_player_field.time_triangle_last_surveyed[TCoords<>::D];
+					   f_player_field.time_triangle_last_surveyed[static_cast<int>(TriangleIndex::D)];
 					const uint8_t has_info = time_last_surveyed != 0xffffffff;
 					surveys_file.unsigned_8(has_info);
 					if (has_info) {
@@ -952,7 +987,7 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 				}
 				if (f_everseen & br_everseen & r_everseen) {
 					const uint32_t time_last_surveyed =
-					   f_player_field.time_triangle_last_surveyed[TCoords<>::R];
+					   f_player_field.time_triangle_last_surveyed[static_cast<int>(TriangleIndex::R)];
 					const uint8_t has_info = time_last_surveyed != 0xffffffff;
 					surveys_file.unsigned_8(has_info);
 					if (has_info) {
@@ -961,6 +996,12 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 					}
 				}
 			} while (r.x);
+		}
+		// Write the number of explicitly hidden fields and then loop through them
+		hidden_file.unsigned_32(player->hidden_fields_.size());
+		for (const auto& hidden : player->hidden_fields_) {
+			hidden_file.unsigned_32(hidden.first);
+			hidden_file.unsigned_16(hidden.second);
 		}
 
 		char filename[FILENAME_SIZE];
@@ -996,6 +1037,8 @@ void MapPlayersViewPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 		   survey_amounts_file, SURVEY_AMOUNTS_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyAmounts);
 
 		WRITE(survey_times_file, SURVEY_TIMES_FILENAME_TEMPLATE, kCurrentPacketVersionSurveyTimes);
+
+		WRITE(hidden_file, HIDDEN_FILENAME_TEMPLATE, kCurrentPacketVersionHidden);
 
 		WRITE(vision_file, VISION_FILENAME_TEMPLATE, kCurrentPacketVersionVision);
 

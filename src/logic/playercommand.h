@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -153,7 +153,7 @@ struct CmdBuildRoad : public PlayerCommand {
 	CmdBuildRoad(uint32_t, int32_t, Path&);
 	explicit CmdBuildRoad(StreamRead&);
 
-	virtual ~CmdBuildRoad();
+	~CmdBuildRoad() override;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -543,7 +543,7 @@ struct CmdChangeTargetQuantity : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 protected:
-	uint32_t economy() const {
+	Serial economy() const {
 		return economy_;
 	}
 	DescriptionIndex ware_type() const {
@@ -551,7 +551,7 @@ protected:
 	}
 
 private:
-	uint32_t economy_;
+	Serial economy_;
 	DescriptionIndex ware_type_;
 };
 
@@ -845,6 +845,28 @@ private:
 	bool isworker_;
 	DescriptionIndex ware_;
 	Warehouse::StockPolicy policy_;
+};
+
+struct CmdProposeTrade : PlayerCommand {
+	CmdProposeTrade(uint32_t time, PlayerNumber pn, const Trade& trade);
+
+	QueueCommandTypes id() const override {
+		return QueueCommandTypes::kProposeTrade;
+	}
+
+	void execute(Game& game) override;
+
+	// Network (de-)serialization
+	explicit CmdProposeTrade(StreamRead& des);
+	void serialize(StreamWrite& ser) override;
+
+	// Savegame functions
+	CmdProposeTrade();
+	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
+	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
+
+private:
+	Trade trade_;
 };
 }
 

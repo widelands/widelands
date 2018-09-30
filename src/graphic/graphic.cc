@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,7 +59,10 @@ void set_icon(SDL_Window* sdl_window) {
 
 }  // namespace
 
-Graphic::Graphic() : image_cache_(new ImageCache()), animation_manager_(new AnimationManager()) {
+Graphic::Graphic()
+   : image_cache_(new ImageCache()),
+     animation_manager_(new AnimationManager()),
+     style_manager_(new StyleManager()) {
 }
 
 /**
@@ -82,6 +85,8 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	                    window_mode_width_, window_mode_height_, SDL_WINDOW_OPENGL);
 
 	GLint max;
+	// LeakSanitizer reports a memory leak which is triggered somewhere in this function call,
+	// probably coming from the gaphics drivers
 	gl_context_ = Gl::initialize(
 	   trace_gl == TraceGl::kYes ? Gl::Trace::kYes : Gl::Trace::kNo, sdl_window_, &max);
 
@@ -112,6 +117,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 	auto texture_atlases = build_texture_atlas(max_texture_size_, &textures_in_atlas);
 	image_cache_->fill_with_texture_atlases(
 	   std::move(texture_atlases), std::move(textures_in_atlas));
+	styles().init();
 }
 
 Graphic::~Graphic() {
@@ -165,6 +171,15 @@ void Graphic::resolution_changed() {
 RenderTarget* Graphic::get_render_target() {
 	render_target_->reset();
 	return render_target_.get();
+}
+
+int Graphic::max_texture_size_for_font_rendering() const {
+// Test with minimum supported size in debug builds.
+#ifndef NDEBUG
+	return kMinimumSizeForTextures;
+#else
+	return max_texture_size_;
+#endif
 }
 
 bool Graphic::fullscreen() {

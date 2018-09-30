@@ -8,6 +8,7 @@ tribes:new_warehouse_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "port",
+   needs_seafaring = true,
 
    buildcost = {
       log = 3,
@@ -41,7 +42,7 @@ tribes:new_warehouse_type {
    },
 
    aihints = {
-      prohibited_till = 900
+      prohibited_till = 1000
    },
 
    conquers = 5,

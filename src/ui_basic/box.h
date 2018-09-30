@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -66,10 +66,14 @@ struct Box : public Panel {
 
 	void set_min_desired_breadth(uint32_t min);
 	void set_inner_spacing(uint32_t size);
+	/// Sets the maximum dimensions and calls set_desired_size()
+	void set_max_size(int w, int h);
 
 protected:
 	void layout() override;
 	void update_desired_size() override;
+	bool handle_mousewheel(uint32_t which, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_Keysym code) override;
 
 private:
 	void get_item_desired_size(uint32_t idx, int* depth, int* breadth);

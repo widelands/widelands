@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,16 +84,11 @@ public:
 	explicit EditorGameBase(LuaInterface* lua);
 	virtual ~EditorGameBase();
 
-	void set_map(Map*);
-	// TODO(sirver): this should just be const Map& map() and Map* mutable_map().
-	Map& map() const {
-		return *map_;
-	}
-	Map* get_map() {
+	const Map& map() const {
 		return map_;
 	}
-	Map& get_map() const {
-		return *map_;
+	Map* mutable_map() {
+		return &map_;
 	}
 	const ObjectManager& objects() const {
 		return objects_;
@@ -113,7 +108,7 @@ public:
 	                   const std::string& name,
 	                   TeamNumber team = 0);
 	Player* get_player(int32_t n) const;
-	Player& player(int32_t n) const;
+	const Player& player(int32_t n) const;
 	virtual Player* get_safe_player(PlayerNumber);
 
 	// loading stuff
@@ -258,7 +253,7 @@ private:
 	std::unique_ptr<World> world_;
 	std::unique_ptr<Tribes> tribes_;
 	std::unique_ptr<InteractiveBase> ibase_;
-	Map* map_;
+	Map map_;
 
 	DISALLOW_COPY_AND_ASSIGN(EditorGameBase);
 };

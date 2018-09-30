@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 
 #include "base/i18n.h"
 #include "build_info.h"
-#include "graphic/graphic.h"
 
 FullscreenMenuMain::FullscreenMenuMain()
    : FullscreenMenuMainMenu(),
@@ -35,7 +34,7 @@ FullscreenMenuMain::FullscreenMenuMain()
                   0,
                   butw_,
                   buth_,
-                  g_gr->images().get(button_background_),
+                  UI::ButtonStyle::kFsMenuMenu,
                   _("Play Tutorial")),
      singleplayer(&vbox_,
                   "single_player",
@@ -43,50 +42,15 @@ FullscreenMenuMain::FullscreenMenuMain()
                   0,
                   butw_,
                   buth_,
-                  g_gr->images().get(button_background_),
+                  UI::ButtonStyle::kFsMenuMenu,
                   _("Single Player")),
-     multiplayer(&vbox_,
-                 "multi_player",
-                 0,
-                 0,
-                 butw_,
-                 buth_,
-                 g_gr->images().get(button_background_),
-                 _("Multiplayer")),
-     replay(&vbox_,
-            "replay",
-            0,
-            0,
-            butw_,
-            buth_,
-            g_gr->images().get(button_background_),
-            _("Watch Replay")),
-     editor(
-        &vbox_, "editor", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Editor")),
-     options(&vbox_,
-             "options",
-             0,
-             0,
-             butw_,
-             buth_,
-             g_gr->images().get(button_background_),
-             _("Options")),
-     about(&vbox_,
-           "about",
-           0,
-           0,
-           butw_,
-           buth_,
-           g_gr->images().get(button_background_),
-           _("About Widelands")),
-     exit(&vbox_,
-          "exit",
-          0,
-          0,
-          butw_,
-          buth_,
-          g_gr->images().get(button_background_),
-          _("Exit Widelands")),
+     multiplayer(
+        &vbox_, "multi_player", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Multiplayer")),
+     replay(&vbox_, "replay", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Watch Replay")),
+     editor(&vbox_, "editor", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Editor")),
+     options(&vbox_, "options", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Options")),
+     about(&vbox_, "about", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("About Widelands")),
+     exit(&vbox_, "exit", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Exit Widelands")),
 
      // Textlabels
      version(

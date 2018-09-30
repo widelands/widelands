@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,10 @@
 #include "editor/tools/tool.h"
 #include "logic/mapregion.h"
 #include "logic/widelands.h"
+
+Widelands::NodeCaps resource_tools_nodecaps(const Widelands::FCoords& fcoords,
+                                            const Widelands::EditorGameBase& egbase,
+                                            Widelands::DescriptionIndex resource);
 
 ///  Decreases the resources of a node by a value.
 struct EditorSetResourcesTool : public EditorTool {
@@ -48,6 +52,11 @@ struct EditorSetResourcesTool : public EditorTool {
 
 	const Image* get_sel_impl() const override {
 		return g_gr->images().get("images/wui/editor/fsel_editor_set_resources.png");
+	}
+
+	Widelands::NodeCaps nodecaps_for_buildhelp(const Widelands::FCoords& fcoords,
+	                                           const Widelands::EditorGameBase& egbase) override {
+		return resource_tools_nodecaps(fcoords, egbase, cur_res_);
 	}
 
 	Widelands::ResourceAmount get_set_to() const {

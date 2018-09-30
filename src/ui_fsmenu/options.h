@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,6 +54,7 @@ public:
 		bool dock_windows_to_edges;
 		int32_t panel_snap_distance;
 		int32_t border_snap_distance;
+		bool animate_map_panning;
 
 		// Sound options
 		bool music;
@@ -68,7 +69,6 @@ public:
 
 		// Game options
 		bool auto_roadbuild_mode;
-		bool show_warea;
 		bool transparent_chat;
 		bool single_watchwin;
 
@@ -103,6 +103,7 @@ private:
 
 	// Fills the language selection list
 	void add_languages_to_list(const std::string& current_locale);
+	void update_language_stats(bool include_system_lang);
 
 	// Saves the options and reloads the active tab
 	void clicked_apply();
@@ -111,8 +112,6 @@ private:
 	uint32_t butw_;
 	uint32_t buth_;
 	uint32_t hmargin_;
-	uint32_t tab_panel_width_;
-	uint32_t column_width_;
 	uint32_t tab_panel_y_;
 
 	UI::Textarea title_;
@@ -122,6 +121,7 @@ private:
 	// UI elements
 	UI::TabPanel tabs_;
 	UI::Box box_interface_;
+	UI::Box box_interface_left_;
 	UI::Box box_windows_;
 	UI::Box box_sound_;
 	UI::Box box_saving_;
@@ -133,10 +133,12 @@ private:
 	UI::Checkbox fullscreen_;
 	UI::Checkbox inputgrab_;
 	UI::SpinBox sb_maxfps_;
+	UI::MultilineTextarea translation_info_;
 
 	// Windows options
 	UI::Checkbox snap_win_overlap_only_;
 	UI::Checkbox dock_windows_to_edges_;
+	UI::Checkbox animate_map_panning_;
 	UI::SpinBox sb_dis_panel_;
 	UI::SpinBox sb_dis_border_;
 
@@ -153,7 +155,6 @@ private:
 
 	// Game options
 	UI::Checkbox auto_roadbuild_mode_;
-	UI::Checkbox show_workarea_preview_;
 	UI::Checkbox transparent_chat_;
 	UI::Checkbox single_watchwin_;
 
@@ -168,6 +169,18 @@ private:
 
 	/// All supported screen resolutions.
 	std::vector<ScreenResolution> resolutions_;
+
+	// Data model for the entries in the language selection list.
+	struct LanguageEntry {
+		LanguageEntry(const std::string& init_localename, const std::string& init_descname)
+		   : localename(init_localename), descname(init_descname) {
+		}
+		LanguageEntry() : LanguageEntry("", "") {
+		}
+		std::string localename;  // ISO code for the locale
+		std::string descname;    // Native language name
+	};
+	std::map<std::string, LanguageEntry> language_entries_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_OPTIONS_H

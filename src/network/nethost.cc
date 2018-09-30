@@ -127,7 +127,7 @@ bool NetHost::try_accept(ConnectionId* new_id) {
 	return true;
 }
 
-bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
+std::unique_ptr<RecvPacket> NetHost::try_receive(const ConnectionId id) {
 	// Always read all available data into buffers
 	uint8_t buffer[kNetworkBufferSize];
 
@@ -161,33 +161,43 @@ bool NetHost::try_receive(const ConnectionId id, RecvPacket* packet) {
 
 	// Now check whether there is data for the requested client
 	if (!is_connected(id))
-		return false;
+		return std::unique_ptr<RecvPacket>();
 
 	// Try to get one packet from the deserializer
-	return clients_.at(id).deserializer.write_packet(packet);
+	std::unique_ptr<RecvPacket> packet(new RecvPacket);
+	if (clients_.at(id).deserializer.write_packet(packet.get())) {
+		return packet;
+	} else {
+		return std::unique_ptr<RecvPacket>();
+	}
 }
 
 void NetHost::send(const ConnectionId id, const SendPacket& packet) {
 	boost::system::error_code ec;
 	if (is_connected(id)) {
-#ifdef NDEBUG
-		boost::asio::write(
-		   clients_.at(id).socket, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-#else
 		size_t written = boost::asio::write(
 		   clients_.at(id).socket, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-#endif
 
-		// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
-		// If it doesn't, set the socket to blocking before writing
-		// If it does, remove this comment after build 20
-		assert(ec != boost::asio::error::would_block);
-		assert(written == packet.get_size() || ec);
+		if (ec == boost::asio::error::would_block) {
+			throw wexception("[NetHost] Socket connected to relay would block when writing");
+		}
 		if (ec) {
 			log("[NetHost] Error when sending to a client, closing connection: %s.\n",
 			    ec.message().c_str());
 			close(id);
+			return;
 		}
+		if (written < packet.get_size()) {
+			throw wexception("[NetHost] Unable to send complete packet to relay (only %" PRIuS
+			                 " bytes of %" PRIuS ")",
+			                 written, packet.get_size());
+		}
+	}
+}
+
+void NetHost::send(const std::vector<ConnectionId>& ids, const SendPacket& packet) {
+	for (ConnectionId id : ids) {
+		send(id, packet);
 	}
 }
 

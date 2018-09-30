@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "base/i18n.h"
 #include "base/warning.h"
 #include "base/wexception.h"
-#include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 #include "logic/game.h"
 #include "logic/game_controller.h"
@@ -53,23 +52,11 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              butw_,
                              get_h() - get_h() * 4 / 10 - buth_,
                              buth_,
-                             ""),
-     ok_(this,
-         "ok",
-         0,
-         0,
-         butw_,
-         buth_,
-         g_gr->images().get("images/ui_basic/but2.png"),
-         _("Start game")),
-     back_(this,
-           "back",
-           0,
-           0,
-           butw_,
-           buth_,
-           g_gr->images().get("images/ui_basic/but0.png"),
-           _("Back")),
+                             "",
+                             UI::DropdownType::kTextual,
+                             UI::PanelStyle::kFsMenu),
+     ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
+     back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
      title_(this, get_w() / 2, get_h() / 25, "", UI::Align::kCenter),
      // Variables and objects used in the menu
@@ -89,13 +76,6 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 
 FullscreenMenuLaunchGame::~FullscreenMenuLaunchGame() {
 	delete lua_;
-}
-
-void FullscreenMenuLaunchGame::think() {
-	if (ctrl_)
-		ctrl_->think();
-
-	refresh();
 }
 
 bool FullscreenMenuLaunchGame::init_win_condition_label() {
@@ -167,7 +147,7 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 					                            t->get_string("description"));
 				}
 			} catch (LuaTableKeyError& e) {
-				log("LaunchSPG: Error loading win condition: %s %s\n", win_condition_script.c_str(),
+				log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
 				    e.what());
 			}
 		}
@@ -177,9 +157,8 @@ void FullscreenMenuLaunchGame::load_win_conditions(const std::set<std::string>& 
 		                    "could not be loaded.")) %
 		    settings_->settings().mapfilename)
 		      .str();
-		win_condition_dropdown_.set_label(_("Error"));
-		win_condition_dropdown_.set_tooltip(error_message);
-		log("LaunchSPG: Exception: %s %s\n", error_message.c_str(), e.what());
+		win_condition_dropdown_.set_errored(error_message);
+		log("Launch Game: Exception: %s %s\n", error_message.c_str(), e.what());
 	}
 }
 
@@ -202,8 +181,8 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 			}
 		}
 	} catch (LuaTableKeyError& e) {
-		log(
-		   "LaunchSPG: Error loading win condition: %s %s\n", win_condition_script.c_str(), e.what());
+		log("Launch Game: Error loading win condition: %s %s\n", win_condition_script.c_str(),
+		    e.what());
 	}
 	if (!is_usable) {
 		t.reset(nullptr);

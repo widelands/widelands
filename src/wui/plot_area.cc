@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -176,7 +176,7 @@ void draw_value(const std::string& value,
                 const RGBColor& color,
                 const Vector2i& pos,
                 RenderTarget& dst) {
-	std::shared_ptr<const UI::RenderedText> tick = UI::g_fh1->render(ytick_text_style(value, color));
+	std::shared_ptr<const UI::RenderedText> tick = UI::g_fh->render(ytick_text_style(value, color));
 	Vector2i point(pos);  // Un-const this
 	UI::center_vertically(tick->height(), &point);
 	tick->draw(dst, point, UI::Align::kRight);
@@ -184,12 +184,12 @@ void draw_value(const std::string& value,
 
 uint32_t calc_plot_x_max_ticks(int32_t plot_width) {
 	// Render a number with 3 digits (maximal length which should appear)
-	return plot_width / UI::g_fh1->render(ytick_text_style(" -888 ", kAxisLineColor))->width();
+	return plot_width / UI::g_fh->render(ytick_text_style(" -888 ", kAxisLineColor))->width();
 }
 
 int calc_slider_label_width(const std::string& label) {
 	// Font size and style as used by DiscreteSlider
-	return UI::g_fh1->render(as_condensed(label, UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))->width();
+	return UI::g_fh->render(as_condensed(label, UI::Align::kLeft, UI_FONT_SIZE_SMALL - 2))->width();
 }
 
 /**
@@ -260,11 +260,13 @@ void draw_diagram(uint32_t time_ms,
 
 		// The space at the end is intentional to have the tick centered
 		// over the number, not to the left
-		std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh1->render(
-		   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
-		Vector2i pos(posx, inner_h - kSpaceBottom + 10);
-		UI::center_vertically(xtick->height(), &pos);
-		xtick->draw(dst, pos, UI::Align::kCenter);
+		if (how_many_ticks != 0) {
+			std::shared_ptr<const UI::RenderedText> xtick = UI::g_fh->render(
+			   xtick_text_style((boost::format("-%u ") % (max_x / how_many_ticks * i)).str()));
+			Vector2i pos(posx, inner_h - kSpaceBottom + 10);
+			UI::center_vertically(xtick->height(), &pos);
+			xtick->draw(dst, pos, UI::Align::kCenter);
+		}
 
 		posx -= sub;
 	}
@@ -280,7 +282,7 @@ void draw_diagram(uint32_t time_ms,
 
 	//  print the used unit
 	std::shared_ptr<const UI::RenderedText> xtick =
-	   UI::g_fh1->render(xtick_text_style(get_generic_unit_name(unit)));
+	   UI::g_fh->render(xtick_text_style(get_generic_unit_name(unit)));
 	Vector2i pos(2, kSpacing + 2);
 	UI::center_vertically(xtick->height(), &pos);
 	xtick->draw(dst, pos);
@@ -471,8 +473,9 @@ void WuiPlotArea::draw_plot(RenderTarget& dst,
 	//  plot the pixels
 	for (uint32_t plot = 0; plot < plotdata_.size(); ++plot) {
 		if (plotdata_[plot].showplot) {
-			draw_plot_line(dst, (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data :
-			                                                         plotdata_[plot].absolute_data,
+			draw_plot_line(dst,
+			               (plotmode_ == Plotmode::kRelative) ? plotdata_[plot].relative_data.get() :
+			                                                    plotdata_[plot].absolute_data,
 			               highest_scale, sub_, plotdata_[plot].plotcolor, yoffset);
 		}
 	}
@@ -535,8 +538,8 @@ void WuiPlotArea::register_plot_data(uint32_t const id,
 		plotdata_.resize(id + 1);
 
 	plotdata_[id].absolute_data = data;
-	plotdata_[id].relative_data =
-	   new std::vector<uint32_t>();  // Will be filled in the update() function.
+	plotdata_[id].relative_data.reset(
+	   new std::vector<uint32_t>());  // Will be filled in the update() function.
 	plotdata_[id].showplot = false;
 	plotdata_[id].plotcolor = color;
 

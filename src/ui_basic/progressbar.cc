@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 
 #include <boost/format.hpp>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
 
@@ -89,7 +89,7 @@ void ProgressBar::draw(RenderTarget& dst) {
 	                                   UI_FONT_CLR_BRIGHT.hex_value() % floorf(fraction * 100.f))
 	                                     .str();
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_uifont(progress_text));
+	   UI::g_fh->render(as_uifont(progress_text));
 	Vector2i pos(get_w() / 2, get_h() / 2);
 	UI::center_vertically(rendered_text->height(), &pos);
 	rendered_text->draw(dst, pos, UI::Align::kCenter);

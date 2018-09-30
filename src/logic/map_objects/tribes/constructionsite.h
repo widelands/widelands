@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,13 @@ class WaresQueue;
 struct ConstructionsiteInformation {
 	ConstructionsiteInformation() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {
 	}
+
+	/// Draw the partly finished constructionsite
+	void draw(const Vector2f& point_on_dst,
+	          float scale,
+	          const RGBColor& player_color,
+	          RenderTarget* dst) const;
+
 	const BuildingDescr*
 	   becomes;  // Also works as a marker telling whether there is a construction site.
 	const BuildingDescr* was;  // only valid if "becomes" is an enhanced building.
@@ -113,11 +120,8 @@ protected:
 
 	static void wares_queue_callback(Game&, InputQueue*, DescriptionIndex, Worker*, void* data);
 
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          float scale,
-	          RenderTarget* dst) override;
+	void
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 private:
 	int32_t fetchfromflag_;  // # of wares to fetch from flag

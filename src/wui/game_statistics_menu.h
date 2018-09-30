@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,10 +47,6 @@ private:
 	InteractivePlayer& player_;
 	InteractivePlayer::GameMainMenuWindows& windows_;
 	UI::Box box_;
-
-	// These get collected by add_button
-	// so we can call unassign_toggle_button on them in the destructor.
-	std::vector<UI::UniqueWindow::Registry> registries_;
 };
 
 #endif  // end of include guard: WL_WUI_GAME_STATISTICS_MENU_H

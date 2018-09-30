@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,6 @@
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
 #include "editor/tools/place_immovable_tool.h"
-#include "graphic/graphic.h"
 #include "logic/map.h"
 #include "logic/map_objects/world/world.h"
 #include "ui_basic/box.h"
@@ -54,7 +53,7 @@ EditorToolPlaceImmovableOptionsMenu::EditorToolPlaceImmovableOptionsMenu(
 	multi_select_menu_.reset(
 	   new CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>(
 	      this, world.editor_immovable_categories(), world.immovables(),
-	      [this](UI::Panel* cb_parent, const ImmovableDescr& immovable_descr) {
+	      [](UI::Panel* cb_parent, const ImmovableDescr& immovable_descr) {
 		      return create_immovable_checkbox(cb_parent, immovable_descr);
 		   },
 	      [this] { select_correct_tool(); }, &tool));

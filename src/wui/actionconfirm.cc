@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 
 #include "base/macros.h"
 #include "economy/economy.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/ship.h"
@@ -132,27 +132,24 @@ ActionConfirm::ActionConfirm(InteractivePlayer& parent,
 	UI::Box* main_box = new UI::Box(this, padding, padding, UI::Box::Vertical);
 	UI::Box* button_box = new UI::Box(main_box, 0, 0, UI::Box::Horizontal);
 
-	UI::MultilineTextarea* textarea =
-	   new UI::MultilineTextarea(main_box, 0, 0, 200, 74, message, UI::Align::kCenter,
-	                             g_gr->images().get("images/ui_basic/but1.png"),
-	                             UI::MultilineTextarea::ScrollMode::kNoScrolling);
-	textarea->force_new_renderer();
+	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
+	   main_box, 0, 0, 200, 74, UI::PanelStyle::kWui, message, UI::Align::kCenter,
+	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
-	UI::Button* okbtn =
-	   new UI::Button(button_box, "ok", 0, 0, 80, 34, g_gr->images().get("images/ui_basic/but4.png"),
-	                  g_gr->images().get("images/wui/menu_okay.png"));
+	UI::Button* okbtn = new UI::Button(button_box, "ok", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
+	                                   g_gr->images().get("images/wui/menu_okay.png"));
 	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
-	UI::Button* cancelbtn = new UI::Button(button_box, "abort", 0, 0, 80, 34,
-	                                       g_gr->images().get("images/ui_basic/but4.png"),
-	                                       g_gr->images().get("images/wui/menu_abort.png"));
+	UI::Button* cancelbtn =
+	   new UI::Button(button_box, "abort", 0, 0, 80, 34, UI::ButtonStyle::kWuiMenu,
+	                  g_gr->images().get("images/wui/menu_abort.png"));
 	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	button_box->add(
-	   UI::g_fh1->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kFillSpace);
+	   UI::g_fh->fontset()->is_rtl() ? okbtn : cancelbtn, UI::Box::Resizing::kFillSpace);
 	button_box->add_space(2 * padding);
 	button_box->add(
-	   UI::g_fh1->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
+	   UI::g_fh->fontset()->is_rtl() ? cancelbtn : okbtn, UI::Box::Resizing::kFillSpace);
 	main_box->add(textarea);
 	main_box->add_space(1.5 * padding);
 	main_box->add(button_box, UI::Box::Resizing::kFullSize);
@@ -249,6 +246,7 @@ void DismantleConfirm::ok() {
 	if (building && iaplayer().can_act(building->owner().player_number()) &&
 	    (building->get_playercaps() & Widelands::Building::PCap_Dismantle)) {
 		game.send_player_dismantle(*todismantle);
+		iaplayer().hide_workarea(building->get_position());
 	}
 
 	die();

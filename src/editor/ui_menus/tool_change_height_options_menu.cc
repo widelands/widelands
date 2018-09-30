@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include "editor/editorinteractive.h"
 #include "editor/tools/increase_height_tool.h"
 #include "editor/tools/set_height_tool.h"
-#include "graphic/graphic.h"
 #include "logic/widelands_geometry.h"
 
 EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
@@ -44,9 +43,9 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
                 increase_tool_.get_change_by(),
                 1,
                 MAX_FIELD_HEIGHT_DIFF,
-                _("Increase/Decrease Value:"),
+                UI::PanelStyle::kWui,
+                _("Increase/Decrease height by:"),
                 UI::SpinBox::Units::kNone,
-                g_gr->images().get("images/ui_basic/but1.png"),
                 UI::SpinBox::Type::kSmall),
      set_to_(&box_,
              0,
@@ -56,9 +55,9 @@ EditorToolChangeHeightOptionsMenu::EditorToolChangeHeightOptionsMenu(
              increase_tool_.set_tool().get_interval().min,
              0,
              MAX_FIELD_HEIGHT,
-             _("Set Value:"),
+             UI::PanelStyle::kWui,
+             _("Set height to:"),
              UI::SpinBox::Units::kNone,
-             g_gr->images().get("images/ui_basic/but1.png"),
              UI::SpinBox::Type::kSmall) {
 	change_by_.set_tooltip(
 	   /** TRANSLATORS: Editor change height access keys. **/

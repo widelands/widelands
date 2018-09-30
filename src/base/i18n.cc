@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -145,6 +145,8 @@ void init_locale() {
 		lang = getenv("LANGUAGE");
 		if (lang != nullptr) {
 			env_locale = lang;
+		} else {  // Finall fallback in case we cannot find out anything (#1784495)
+			env_locale = "en";
 		}
 	}
 	locale = "C";

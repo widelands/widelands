@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ private:
 	BaseCapsule* capsule;
 
 public:
-	FindImmovable(const FindImmovable& o) {
+	explicit FindImmovable(const FindImmovable& o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -138,6 +138,13 @@ struct FindImmovableAttackTarget {
 
 	bool accept(const BaseImmovable&) const;
 };
+struct FindForeignMilitarysite {
+	explicit FindForeignMilitarysite(const Player& init_player) : player(init_player) {
+	}
+	bool accept(const BaseImmovable&) const;
+	const Player& player;
+};
+
 struct FindImmovableByDescr {
 	explicit FindImmovableByDescr(const ImmovableDescr& init_descr) : descr(init_descr) {
 	}

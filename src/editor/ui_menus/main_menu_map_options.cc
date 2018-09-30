@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,12 +26,11 @@
 
 #include "base/i18n.h"
 #include "editor/editorinteractive.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "logic/map.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilineeditbox.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "wui/map_tags.h"
 
@@ -52,38 +51,33 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
      max_w_(get_inner_w() - 2 * padding_),
      ok_(this,
          "ok",
-         UI::g_fh1->fontset()->is_rtl() ? padding_ : butw_ + 2 * padding_,
+         UI::g_fh->fontset()->is_rtl() ? padding_ : butw_ + 2 * padding_,
          get_inner_h() - padding_ - labelh_,
          butw_,
          labelh_,
-         g_gr->images().get("images/ui_basic/but5.png"),
+         UI::ButtonStyle::kWuiPrimary,
          _("OK")),
      cancel_(this,
              "cancel",
-             UI::g_fh1->fontset()->is_rtl() ? butw_ + 2 * padding_ : padding_,
+             UI::g_fh->fontset()->is_rtl() ? butw_ + 2 * padding_ : padding_,
              get_inner_h() - padding_ - labelh_,
              butw_,
              labelh_,
-             g_gr->images().get("images/ui_basic/but1.png"),
+             UI::ButtonStyle::kWuiSecondary,
              _("Cancel")),
      tab_box_(this, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
-     tabs_(&tab_box_, nullptr),
+     tabs_(&tab_box_, UI::TabPanelStyle::kWuiLight),
 
      main_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      tags_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
      teams_box_(&tabs_, padding_, padding_, UI::Box::Vertical, max_w_, get_inner_h(), 0),
 
-     name_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
-     author_(&main_box_, 0, 0, max_w_, 0, 2, g_gr->images().get("images/ui_basic/but1.png")),
+     name_(&main_box_, 0, 0, max_w_, 0, 2, UI::PanelStyle::kWui),
+     author_(&main_box_, 0, 0, max_w_, 0, 2, UI::PanelStyle::kWui),
      size_(&main_box_, 0, 0, max_w_ - indent_, labelh_, ""),
 
-     teams_list_(&teams_box_,
-                 0,
-                 0,
-                 max_w_,
-                 60,
-                 g_gr->images().get("images/ui_basic/but1.png"),
-                 UI::ListselectLayout::kShowCheck),
+     teams_list_(
+        &teams_box_, 0, 0, max_w_, 60, UI::PanelStyle::kWui, UI::ListselectLayout::kShowCheck),
 
      modal_(modal) {
 
@@ -98,15 +92,12 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 
 	// We need less space for the hint and the description, but it should at least have 1 line
 	// height.
-	hint_ =
-	   new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3),
-	                            "", g_gr->images().get("images/ui_basic/but1.png"),
-	                            g_gr->images().get("images/ui_basic/but1.png"));
-	descr_ = new UI::MultilineEditbox(&main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), "",
-	                                  g_gr->images().get("images/ui_basic/but1.png"),
-	                                  g_gr->images().get("images/ui_basic/but1.png"));
+	hint_ = new UI::MultilineEditbox(
+	   &main_box_, 0, 0, max_w_, std::max(labelh_, remaining_space * 1 / 3), UI::PanelStyle::kWui);
+	descr_ = new UI::MultilineEditbox(
+	   &main_box_, 0, 0, max_w_, remaining_space - hint_->get_h(), UI::PanelStyle::kWui);
 
-	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map Name:")));
+	main_box_.add(new UI::Textarea(&main_box_, 0, 0, max_w_, labelh_, _("Map name:")));
 	main_box_.add(&name_);
 	main_box_.add_space(indent_);
 
@@ -156,12 +147,14 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	name_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	hint_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
-	ok_.set_enabled(false);
 	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
 
 	update();
+	ok_.set_enabled(false);
+
 	name_.focus();
 	center_to_parent();
 	move_to_top();
@@ -193,16 +186,16 @@ void MainMenuMapOptions::changed() {
 }
 
 void MainMenuMapOptions::clicked_ok() {
-	eia().egbase().map().set_name(name_.text());
-	eia().egbase().map().set_author(author_.text());
+	eia().egbase().mutable_map()->set_name(name_.text());
+	eia().egbase().mutable_map()->set_author(author_.text());
 	g_options.pull_section("global").set_string("realname", author_.text());
-	eia().egbase().map().set_description(descr_->get_text());
-	eia().egbase().map().set_hint(hint_->get_text());
+	eia().egbase().mutable_map()->set_description(descr_->get_text());
+	eia().egbase().mutable_map()->set_hint(hint_->get_text());
 
-	eia().egbase().map().clear_tags();
+	eia().egbase().mutable_map()->clear_tags();
 	for (const auto& tag : tags_checkboxes_) {
 		if (tag.second->get_state()) {
-			eia().egbase().map().add_tag(tag.first);
+			eia().egbase().mutable_map()->add_tag(tag.first);
 		}
 	}
 

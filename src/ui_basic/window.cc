@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,10 @@
 #include <SDL_keycode.h>
 
 #include "base/log.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
@@ -87,11 +88,11 @@ Window::Window(Panel* const parent,
      drag_start_win_y_(0),
      drag_start_mouse_x_(0),
      drag_start_mouse_y_(0),
-     pic_lborder_(g_gr->images().get("images/wui/window_left.png")),
-     pic_rborder_(g_gr->images().get("images/wui/window_right.png")),
-     pic_top_(g_gr->images().get("images/wui/window_top.png")),
-     pic_bottom_(g_gr->images().get("images/wui/window_bottom.png")),
-     pic_background_(g_gr->images().get("images/wui/window_background.png")),
+     pic_lborder_(g_gr->images().get(kTemplateDir + "wui/left.png")),
+     pic_rborder_(g_gr->images().get(kTemplateDir + "wui/right.png")),
+     pic_top_(g_gr->images().get(kTemplateDir + "wui/top.png")),
+     pic_bottom_(g_gr->images().get(kTemplateDir + "wui/bottom.png")),
+     pic_background_(g_gr->images().get(kTemplateDir + "wui/background.png")),
      center_panel_(nullptr),
      fastclick_panel_(nullptr) {
 	set_title(title);
@@ -243,8 +244,9 @@ void Window::draw(RenderTarget& dst) {
  * Redraw the window frame
  */
 void Window::draw_border(RenderTarget& dst) {
-	assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS);
-	assert(HZ_B_MIDDLE_PIXMAP_LEN > 0);
+	static_assert(HZ_B_CORNER_PIXMAP_LEN >= VT_B_PIXMAP_THICKNESS,
+	              "HZ_B_CORNER_PIXMAP_LEN < VT_B_PIXMAP_THICKNESS");
+	static_assert(HZ_B_MIDDLE_PIXMAP_LEN > 0, "HZ_B_MIDDLE_PIXMAP_LEN <= 0");
 
 	const int32_t hz_bar_end = get_w() - HZ_B_CORNER_PIXMAP_LEN;
 	const int32_t hz_bar_end_minus_middle = hz_bar_end - HZ_B_MIDDLE_PIXMAP_LEN;
@@ -396,6 +398,12 @@ bool Window::handle_mouserelease(const uint8_t btn, int32_t, int32_t) {
 // our parent to be rendered
 bool Window::handle_tooltip() {
 	UI::Panel::handle_tooltip();
+	return true;
+}
+
+bool Window::handle_mousewheel(uint32_t, int32_t, int32_t) {
+	// Mouse wheel events should not propagate to objects below us, so we claim
+	// that they have been handled.
 	return true;
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,8 @@ enum class QueueCommandTypes {
 
 	kEvictWorker,
 
-	kMilitarysiteSetSoldierPreference,  // 26
+	kMilitarysiteSetSoldierPreference,
+	kProposeTrade,  // 27
 
 	kSinkShip = 121,
 	kShipCancelExpedition,

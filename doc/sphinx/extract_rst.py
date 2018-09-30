@@ -13,6 +13,8 @@ import sys
 # These files are known to have rst comments; cpp files
 # Meaning: (src_file, file_name_to_generate_rst)
 cpp_pairs = (
+    ('src/ai/ai_hints.cc', 'autogen_ai_hints.rst'),
+    ('src/graphic/text/rt_parse.cc', 'autogen_rt_tags.rst'),
     ('src/scripting/lua_root.cc', 'autogen_wl.rst'),
     ('src/scripting/lua_bases.cc', 'autogen_wl_bases.rst'),
     ('src/scripting/lua_editor.cc', 'autogen_wl_editor.rst'),
@@ -20,6 +22,8 @@ cpp_pairs = (
     ('src/scripting/lua_game.cc', 'autogen_wl_game.rst'),
     ('src/scripting/lua_ui.cc', 'autogen_wl_ui.rst'),
     ('src/scripting/lua_globals.cc', 'autogen_globals.rst'),
+    ('src/scripting/lua_path.cc', 'autogen_path.rst'),
+    ('src/logic/map_objects/tribes/worker_program.cc', 'autogen_tribes_worker_programs.rst'),
 )
 
 # These directories are scanned without knowing which file
@@ -30,7 +34,7 @@ cpp_pairs = (
 lua_dirs = (
     ('data/scripting', '', 'auxiliary'),
     ('data/scripting/win_conditions', '', 'auxiliary'),
-    ('data/scripting/editor', '', 'lua_world'),
+    ('data/scripting/editor', '', 'lua_world_other'),
     ('data/tribes', '', 'lua_tribes_defining'),
     ('data/tribes/scripting', '', 'lua_tribes_other'),
     ('data/tribes/scripting/mapobject_info', '', 'lua_tribes_other'),
@@ -43,6 +47,8 @@ lua_dirs = (
      'trainingsite', 'lua_tribes_buildings'),
     ('data/tribes/buildings/warehouses/atlanteans/headquarters',
      'warehouse', 'lua_tribes_buildings'),
+#    ('data/tribes/buildings/markets/barbarians/market',
+#     'market', 'lua_tribes_buildings'),
     ('data/tribes/buildings/partially_finished/constructionsite',
      'constructionsite', 'lua_tribes_buildings'),
     ('data/tribes/buildings/partially_finished/dismantlesite',
@@ -53,10 +59,21 @@ lua_dirs = (
      'ships', 'lua_tribes_units'),
      ('data/tribes/wares/armor',
      'wares', 'lua_tribes_units'),
+     ('data/tribes/workers/atlanteans/armorsmith',
+     'basic_workers', 'lua_tribes_workers'),
      ('data/tribes/workers/atlanteans/carrier',
      'carriers', 'lua_tribes_workers'),
      ('data/tribes/workers/atlanteans/soldier',
      'soldiers', 'lua_tribes_workers'),
+     ('data/world', '', 'lua_world_defining'),
+     ('data/world/critters/badger',
+     'critters', 'lua_world_units'),
+     ('data/world/immovables/bush1',
+     'immovables', 'lua_world_units'),
+     ('data/world/resources',
+     'resources', 'lua_world_units'),
+     ('data/world/terrains',
+     'terrains', 'lua_world_units'),
 )
 
 

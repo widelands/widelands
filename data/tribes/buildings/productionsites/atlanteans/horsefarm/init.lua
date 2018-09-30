@@ -31,7 +31,8 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      recruitment = true
+      recruitment = true,
+      prohibited_till = 610
    },
 
    working_positions = {
@@ -54,7 +55,7 @@ tribes:new_productionsite_type {
             "sleep=15000",
             "return=skipped unless economy needs atlanteans_horse",
             "consume=corn water",
-            "play_sound=sound/farm horse 192",
+            "playsound=sound/farm horse 192",
             "animate=working 15000", -- Feeding cute little foals ;)
             "recruit=atlanteans_horse"
          }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,8 @@
 #include "logic/map_objects/tribes/building.h"
 #include "notifications/notifications.h"
 #include "ui_basic/button.h"
+#include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
-#include "wui/field_overlay_manager.h"
 #include "wui/interactive_gamebase.h"
 #include "wui/waresdisplay.h"
 
@@ -44,16 +44,22 @@ struct BuildingWindow : public UI::UniqueWindow {
 		Width = 4 * 34  //  4 normally sized buttons
 	};
 
+protected:
+	// This constructor allows setting a building description for the help button independent of the
+	// base building
+	BuildingWindow(InteractiveGameBase& parent,
+	               UI::UniqueWindow::Registry& reg,
+	               Widelands::Building&,
+	               const Widelands::BuildingDescr&,
+	               bool avoid_fastclick);
+
+public:
 	BuildingWindow(InteractiveGameBase& parent,
 	               UI::UniqueWindow::Registry& reg,
 	               Widelands::Building&,
 	               bool avoid_fastclick);
 
-	virtual ~BuildingWindow();
-
-	Widelands::Building& building() {
-		return building_;
-	}
+	~BuildingWindow() override;
 
 	InteractiveGameBase* igbase() const {
 		return parent_;
@@ -63,7 +69,7 @@ struct BuildingWindow : public UI::UniqueWindow {
 	void think() override;
 
 protected:
-	virtual void init(bool avoid_fastclick);
+	virtual void init(bool avoid_fastclick, bool workarea_preview_wanted);
 	void die() override;
 
 	UI::TabPanel* get_tabs() {
@@ -74,7 +80,7 @@ protected:
 	void act_dismantle();
 	void act_debug();
 	void show_workarea();
-	void hide_workarea();
+	void hide_workarea(bool configure_button);
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
@@ -82,18 +88,34 @@ protected:
 	void act_enhance(Widelands::DescriptionIndex);
 	void clicked_goto();
 
-	void
-	create_input_queue_panel(UI::Box*, Widelands::Building&, Widelands::InputQueue*, bool = false);
-
-	virtual void create_capsbuttons(UI::Box* buttons);
+	void create_input_queue_panel(UI::Box*,
+	                              Widelands::Building&,
+	                              const Widelands::InputQueue&,
+	                              bool = false);
 
 	bool is_dying_;
 
 private:
-	InteractiveGameBase* parent_;
-	/// Actions performed when a NoteBuilding is received.
+	void create_capsbuttons(UI::Box* buttons, Widelands::Building* building);
+
+	// Actions performed when a NoteBuilding is received.
 	void on_building_note(const Widelands::NoteBuilding& note);
-	Widelands::Building& building_;
+
+	// For ports only.
+	void update_expedition_button(bool expedition_was_canceled);
+
+	InteractiveGameBase* parent_;
+
+	// The building that this window belongs to
+	Widelands::OPtr<Widelands::Building> building_;
+
+	// The building description that will be used for the help button
+	const Widelands::BuildingDescr& building_descr_for_help_;
+
+	// We require this to unregister overlays when we are closed. Since the
+	// building might have been destroyed by then we have to keep a copy of its
+	// position around.
+	const Widelands::Coords building_position_;
 
 	std::unique_ptr<UI::Box> vbox_;
 
@@ -107,11 +129,10 @@ private:
 	Widelands::PlayerNumber capscache_player_number_;
 	bool caps_setup_;
 
-	FieldOverlayManager::OverlayId workarea_overlay_id_;
+	bool showing_workarea_;
 	bool avoid_fastclick_;
-
-	// For ports only.
-	void update_expedition_button(bool expedition_was_canceled);
+	// The building is being transformed from a contructionsite to a finished building etc.
+	bool is_warping_;
 
 	UI::Button* expeditionbtn_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteExpeditionCanceled>>

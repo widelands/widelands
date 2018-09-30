@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "scripting/lua_coroutine.h"
@@ -41,13 +40,6 @@ namespace {
 constexpr int kPadding = 5;
 constexpr int kTabHeight = 35;
 
-const std::string heading(const std::string& text) {
-	return ((boost::format("<rt><p font-size=18 font-weight=bold font-color=D1D1D1>"
-	                       "%s<br></p><p font-size=8> <br></p></rt>") %
-	         text)
-	           .str());
-}
-
 }  // namespace
 
 namespace UI {
@@ -57,7 +49,7 @@ EncyclopediaWindow::EncyclopediaWindow(InteractiveBase& parent,
                                        LuaInterface* const lua)
    : UI::UniqueWindow(&parent, "encyclopedia", &registry, WINDOW_WIDTH, WINDOW_HEIGHT, ""),
      lua_(lua),
-     tabs_(this, nullptr) {
+     tabs_(this, UI::TabPanelStyle::kWuiLight) {
 }
 
 void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable> table) {
@@ -85,14 +77,16 @@ void EncyclopediaWindow::init(InteractiveBase& parent, std::unique_ptr<LuaTable>
 
 			lists_.insert(std::make_pair(
 			   tab_name, std::unique_ptr<UI::Listselect<EncyclopediaEntry>>(
-			                new UI::Listselect<EncyclopediaEntry>(
-			                   boxes_.at(tab_name).get(), 0, 0, contents_width, contents_height))));
+			                new UI::Listselect<EncyclopediaEntry>(boxes_.at(tab_name).get(), 0, 0,
+			                                                      contents_width, contents_height,
+			                                                      UI::PanelStyle::kWui))));
 			lists_.at(tab_name)
 			   ->selected.connect(boost::bind(&EncyclopediaWindow::entry_selected, this, tab_name));
 
 			contents_.insert(std::make_pair(
-			   tab_name, std::unique_ptr<UI::MultilineTextarea>(new UI::MultilineTextarea(
-			                boxes_.at(tab_name).get(), 0, 0, contents_width, contents_height))));
+			   tab_name, std::unique_ptr<UI::MultilineTextarea>(
+			                new UI::MultilineTextarea(boxes_.at(tab_name).get(), 0, 0, contents_width,
+			                                          contents_height, UI::PanelStyle::kWui))));
 
 			boxes_.at(tab_name)->add(lists_.at(tab_name).get());
 			boxes_.at(tab_name)->add_space(kPadding);
@@ -173,9 +167,8 @@ void EncyclopediaWindow::entry_selected(const std::string& tab_name) {
 			cr->resume();
 			table = cr->pop_table();
 		}
-		contents_.at(tab_name)->set_text(
-		   (boost::format("%s%s") % heading(table->get_string("title")) % table->get_string("text"))
-		      .str());
+		contents_.at(tab_name)
+		   ->set_text(as_message(table->get_string("title"), table->get_string("text")));
 	} catch (LuaError& err) {
 		contents_.at(tab_name)->set_text(err.what());
 	}

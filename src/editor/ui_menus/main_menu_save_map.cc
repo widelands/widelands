@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,10 +33,10 @@
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_map_options.h"
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
-#include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/messagebox.h"
@@ -57,7 +57,7 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                      tabley_ + tableh_ + 3 * padding_ - 1,
                      get_inner_w() - right_column_x_ - padding_,
                      buth_,
-                     g_gr->images().get("images/ui_basic/but1.png"),
+                     UI::ButtonStyle::kWuiSecondary,
                      _("Make Directory")),
      edit_options_(this,
                    "edit_options",
@@ -65,10 +65,10 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
                    tabley_ + tableh_ - buth_,
                    get_inner_w() - right_column_x_ - padding_,
                    buth_,
-                   g_gr->images().get("images/ui_basic/but5.png"),
+                   UI::ButtonStyle::kWuiPrimary,
                    _("Map Options")),
-     editbox_label_(
-        this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")) {
+     editbox_label_(this, padding_, tabley_ + tableh_ + 3 * padding_, butw_, buth_, _("Filename:")),
+     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
 	set_current_directory(curdir_);
 
 	// Make room for edit_options_ button
@@ -77,18 +77,23 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
 	table_.selected.connect(boost::bind(&MainMenuSaveMap::clicked_item, boost::ref(*this)));
 	table_.double_clicked.connect(
 	   boost::bind(&MainMenuSaveMap::double_clicked_item, boost::ref(*this)));
+	table_.cancel.connect(boost::bind(&MainMenuSaveMap::die, this));
+	table_.set_can_focus(true);
 
-	editbox_ =
-	   new UI::EditBox(this, editbox_label_.get_x() + editbox_label_.get_w() + padding_,
-	                   editbox_label_.get_y(), tablew_ - editbox_label_.get_w() - padding_ + 1,
-	                   buth_, 2, g_gr->images().get("images/ui_basic/but1.png"));
-
+	editbox_ = new UI::EditBox(
+	   this, editbox_label_.get_x() + editbox_label_.get_w() + padding_, editbox_label_.get_y(),
+	   tablew_ - editbox_label_.get_w() - padding_ + 1, buth_, 2, UI::PanelStyle::kWui);
 	editbox_->set_text(parent.egbase().map().get_name());
+
 	editbox_->changed.connect(boost::bind(&MainMenuSaveMap::edit_box_changed, this));
 	edit_box_changed();
+	editbox_->ok.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
+	editbox_->cancel.connect(boost::bind(
+	   &MainMenuSaveMap::reset_editbox_or_die, boost::ref(*this), parent.egbase().map().get_name()));
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuSaveMap::clicked_ok, boost::ref(*this)));
 	cancel_.sigclicked.connect(boost::bind(&MainMenuSaveMap::die, boost::ref(*this)));
+
 	make_directory_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMap::clicked_make_directory, boost::ref(*this)));
 	edit_options_.sigclicked.connect(
@@ -129,15 +134,17 @@ void MainMenuSaveMap::clicked_ok() {
 		set_current_directory(complete_filename);
 		fill_table();
 	} else {  //  Ok, save this map
-		Widelands::Map& map = eia().egbase().map();
-		if (map.get_name() == _("No Name")) {
+		Widelands::Map* map = eia().egbase().mutable_map();
+		if (map->get_name() == _("No Name")) {
 			std::string::size_type const filename_size = filename.size();
-			map.set_name(4 <= filename_size && boost::iends_with(filename, WLMF_SUFFIX) ?
-			                filename.substr(0, filename_size - 4) :
-			                filename);
+			map->set_name(4 <= filename_size && boost::iends_with(filename, kWidelandsMapExtension) ?
+			                 filename.substr(0, filename_size - 4) :
+			                 filename);
 		}
 		if (save_map(filename, !g_options.pull_section("global").get_bool("nozip", false))) {
 			die();
+		} else {
+			table_.focus();
 		}
 	}
 }
@@ -213,14 +220,24 @@ void MainMenuSaveMap::double_clicked_item() {
  */
 void MainMenuSaveMap::edit_box_changed() {
 	// Prevent the user from creating nonsense file names, like e.g. ".." or "...".
-	ok_.set_enabled(LayeredFileSystem::is_legal_filename(editbox_->text()));
+	const bool is_legal_filename = FileSystem::is_legal_filename(editbox_->text());
+	ok_.set_enabled(is_legal_filename);
+	editbox_->set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
+}
+
+void MainMenuSaveMap::reset_editbox_or_die(const std::string& current_filename) {
+	if (editbox_->text() == current_filename) {
+		die();
+	} else {
+		editbox_->set_text(current_filename);
+	}
 }
 
 void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 	curdir_ = filename;
-	/** TRANSLATORS: The folder that a file will be saved to. */
 	directory_info_.set_text(
-	   (boost::format(_("Current Directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
+	   /** TRANSLATORS: The folder that a file will be saved to. */
+	   (boost::format(_("Current directory: %s")) % (_("My Maps") + curdir_.substr(basedir_.size())))
 	      .str());
 }
 
@@ -239,8 +256,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	boost::trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, WLMF_SUFFIX))
-		filename += WLMF_SUFFIX;
+	if (!boost::iends_with(filename, kWidelandsMapExtension))
+		filename += kWidelandsMapExtension;
 
 	//  Append directory name.
 	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
@@ -251,8 +268,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
 		    FileSystem::fs_filename(filename.c_str()))
 		      .str();
-		UI::WLMessageBox mbox(
-		   &eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
+		UI::WLMessageBox mbox(this, _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
 			return false;
 	}
@@ -272,23 +288,24 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	}
 
 	Widelands::EditorGameBase& egbase = eia().egbase();
-	Widelands::Map& map = egbase.map();
+	Widelands::Map* map = egbase.mutable_map();
 
 	{  // fs scope
 		std::unique_ptr<FileSystem> fs(
 		   g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
 
 		// Recompute seafaring tag
-		if (map.allows_seafaring()) {
-			map.add_tag("seafaring");
+		map->cleanup_port_spaces(egbase.world());
+		if (map->allows_seafaring()) {
+			map->add_tag("seafaring");
 		} else {
-			map.delete_tag("seafaring");
+			map->delete_tag("seafaring");
 		}
 
-		if (map.has_artifacts()) {
-			map.add_tag("artifacts");
+		if (map->has_artifacts()) {
+			map->add_tag("artifacts");
 		} else {
-			map.delete_tag("artifacts");
+			map->delete_tag("artifacts");
 		}
 
 		try {
@@ -297,14 +314,14 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			delete wms;
 			// Reset filesystem to avoid file locks on saves
 			fs.reset();
-			map.reset_filesystem();
+			map->reset_filesystem();
 			eia().set_need_save(false);
 			g_fs->fs_unlink(complete_filename);
 			g_fs->fs_rename(tmp_name, complete_filename);
 			// Also change fs, as we assign it to the map below
 			fs.reset(g_fs->make_sub_file_system(complete_filename));
 			// Set the filesystem of the map to the current save file / directory
-			map.swap_filesystem(fs);
+			map->swap_filesystem(fs);
 			// DONT use fs as of here, its garbage now!
 
 		} catch (const std::exception& e) {

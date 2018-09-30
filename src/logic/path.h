@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -112,7 +112,7 @@ struct CoordPath {
 		return path_;
 	}
 
-	int32_t get_index(Coords field) const;
+	int32_t get_index(const Coords& field) const;
 
 	void reverse();
 	void truncate(const std::vector<char>::size_type after);

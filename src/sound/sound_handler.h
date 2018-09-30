@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2017 by the Widelands Development Team
+ * Copyright (C) 2005-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,7 +84,7 @@ extern class SoundHandler g_sound_handler;
  * \par Sound effects
  *
  * Buildings and workers can use sound effects in their programs. To do so, use
- * e.g. "play_sound blacksmith_hammer" in the appropriate conf file. The conf file
+ * e.g. "playsound blacksmith_hammer" in the appropriate conf file. The conf file
  * parser will then load one or more audio files for 'hammering blacksmith'
  * from the building's/worker's configuration directory and store them in an
  * FXset for later access, similar to the way music is stored in songsets.
@@ -176,6 +176,7 @@ public:
 	void shutdown();
 	void read_config();
 	void load_system_sounds();
+	bool is_backend_disabled() const;
 
 	void load_fx_if_needed(const std::string& dir,
 	                       const std::string& basename,
@@ -220,18 +221,18 @@ public:
 	// TODO(unknown): This is ugly. Find a better way to do it
 	bool nosound_;
 
-	/** Can disable_music_ and disable_fx_ be changed?
-	 * true = they mustn't be changed (e.g. because hardware is missing)
-	 * false = can be changed at user request
-	*/
-	bool lock_audio_disabling_;
-
 private:
 	// Prints an error and disables the sound system.
 	void initialization_error(const std::string& msg);
 
 	void load_one_fx(const std::string& path, const std::string& fx_name);
 	bool play_or_not(const std::string& fx_name, int32_t stereo_position, uint8_t priority);
+
+	/** Can sounds be played?
+	 * true = they mustn't be played (e.g. because hardware is missing)
+	 * false = can be played
+	*/
+	bool is_backend_disabled_;
 
 	/// Whether to disable background music
 	bool disable_music_;

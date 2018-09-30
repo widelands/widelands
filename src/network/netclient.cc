@@ -51,7 +51,7 @@ void NetClient::close() {
 	socket_.close(ec);
 }
 
-bool NetClient::try_receive(RecvPacket* packet) {
+std::unique_ptr<RecvPacket> NetClient::try_receive() {
 	if (is_connected()) {
 		// If we are connected, try to receive some data
 
@@ -72,7 +72,12 @@ bool NetClient::try_receive(RecvPacket* packet) {
 		}
 	}
 	// Try to get one packet from the deserializer
-	return deserializer_.write_packet(packet);
+	std::unique_ptr<RecvPacket> packet(new RecvPacket);
+	if (deserializer_.write_packet(packet.get())) {
+		return packet;
+	} else {
+		return std::unique_ptr<RecvPacket>();
+	}
 }
 
 void NetClient::send(const SendPacket& packet) {
@@ -81,21 +86,21 @@ void NetClient::send(const SendPacket& packet) {
 	}
 
 	boost::system::error_code ec;
-#ifdef NDEBUG
-	boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-#else
 	size_t written =
 	   boost::asio::write(socket_, boost::asio::buffer(packet.get_data(), packet.get_size()), ec);
-#endif
 
-	// TODO(Notabilis): This one is an assertion of mine, I am not sure if it will hold
-	// If it doesn't, set the socket to blocking before writing
-	// If it does, remove this comment after build 20
-	assert(ec != boost::asio::error::would_block);
-	assert(written == packet.get_size() || ec);
+	if (ec == boost::asio::error::would_block) {
+		throw wexception("[NetClient] Socket connected to relay would block when writing");
+	}
 	if (ec) {
 		log("[NetClient] Error when trying to send some data: %s.\n", ec.message().c_str());
 		close();
+		return;
+	}
+	if (written < packet.get_size()) {
+		throw wexception("[NetClient] Unable to send complete packet to relay (only %" PRIuS
+		                 " bytes of %" PRIuS ")",
+		                 written, packet.get_size());
 	}
 }
 

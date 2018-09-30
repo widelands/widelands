@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "ui_fsmenu/singleplayer.h"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "graphic/text_constants.h"
 
 FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
@@ -30,31 +29,12 @@ FullscreenMenuSinglePlayer::FullscreenMenuSinglePlayer()
      title(this, 0, 0, _("Single Player"), UI::Align::kCenter),
 
      // Buttons
-     new_game(&vbox_,
-              "new_game",
-              0,
-              0,
-              butw_,
-              buth_,
-              g_gr->images().get(button_background_),
-              _("New Game")),
-     campaign(&vbox_,
-              "campaigns",
-              0,
-              0,
-              butw_,
-              buth_,
-              g_gr->images().get(button_background_),
-              _("Campaigns")),
-     load_game(&vbox_,
-               "load_game",
-               0,
-               0,
-               butw_,
-               buth_,
-               g_gr->images().get(button_background_),
-               _("Load Game")),
-     back(&vbox_, "back", 0, 0, butw_, buth_, g_gr->images().get(button_background_), _("Back")) {
+     new_game(&vbox_, "new_game", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("New Game")),
+     campaign(
+        &vbox_, "campaigns", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Campaigns")),
+     load_game(
+        &vbox_, "load_game", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Load Game")),
+     back(&vbox_, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuMenu, _("Back")) {
 	new_game.sigclicked.connect(
 	   boost::bind(&FullscreenMenuSinglePlayer::end_modal<FullscreenMenuBase::MenuTarget>,
 	               boost::ref(*this), FullscreenMenuBase::MenuTarget::kNewGame));

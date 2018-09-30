@@ -27,11 +27,11 @@ tribes:new_worker_type {
 
    programs = {
       hunt = {
-         "findobject type:bob radius:13 attrib:eatable",
-         "walk object",
-         "animation idle 1500",
-         "object remove",
-         "createware meat",
+         "findobject=type:bob radius:13 attrib:eatable",
+         "walk=object",
+         "animate=idle 1500",
+         "removeobject",
+         "createware=meat",
          "return"
       }
    },

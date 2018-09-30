@@ -40,7 +40,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       mines = "iron",
-      prohibited_till =900,
+      prohibited_till = 1000,
       mines_percent = 30
    },
 
@@ -60,9 +60,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
          descname = _"mining iron",
          actions = {
-            "sleep=45000",
+            "sleep=5000",
             "return=skipped unless economy needs iron_ore",
             "consume=ration",
+            "sleep=40000",
             "animate=working 20000",
             "mine=iron 2 33 5 17",
             "produce=iron_ore"

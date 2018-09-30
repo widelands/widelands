@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,18 +46,6 @@ namespace Widelands {
 class WareDescr;
 class WorkerDescr;
 
-/// Returns a string vector with the names of all tribes.
-std::vector<std::string> get_all_tribenames();
-
-/// Returns a vector with the basic info for all tribes.
-std::vector<TribeBasicInfo> get_all_tribeinfos();
-
-/// Returns the basic preload info for a tribe.
-TribeBasicInfo get_tribeinfo(const std::string& tribename);
-
-/// Returns whether this tribe is listed in tribes/preload.lua.
-bool tribe_exists(const std::string& tribename);
-
 class Tribes {
 public:
 	Tribes();
@@ -82,6 +70,9 @@ public:
 	/// Adds this building type to the tribe description.
 	void add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase);
 
+	/// Adds this building type to the tribe description.
+	void add_market_type(const LuaTable& table, const EditorGameBase& egbase);
+
 	/// Adds this immovable type to the tribe description.
 	void add_immovable_type(const LuaTable& table);
 
@@ -103,12 +94,16 @@ public:
 	/// Adds a specific tribe's configuration.
 	void add_tribe(const LuaTable& table, const EditorGameBase& egbase);
 
+	void add_custom_building(const LuaTable& table);
+
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
 	size_t nrwares() const;
 	size_t nrworkers() const;
 
+	bool ware_exists(const std::string& warename) const;
 	bool ware_exists(const DescriptionIndex& index) const;
+	bool worker_exists(const std::string& workername) const;
 	bool worker_exists(const DescriptionIndex& index) const;
 	bool building_exists(const std::string& buildingname) const;
 	bool building_exists(const DescriptionIndex& index) const;
@@ -149,6 +144,8 @@ public:
 	void postload();
 
 private:
+	void postload_calculate_trainingsites_proportions();
+
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;
 	std::unique_ptr<DescriptionMaintainer<ShipDescr>> ships_;

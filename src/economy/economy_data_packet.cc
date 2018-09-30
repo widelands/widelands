@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 #include "map_io/map_object_loader.h"
 #include "map_io/map_object_saver.h"
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 namespace Widelands {
 
@@ -35,6 +35,13 @@ void EconomyDataPacket::read(FileRead& fr) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version == kCurrentPacketVersion) {
+			const Serial saved_serial = fr.unsigned_32();
+			if (eco_->serial_ != saved_serial) {
+				throw GameDataError(
+				   "Representative flag/ship has economy serial %d, but the data packet has %d",
+				   eco_->serial_, saved_serial);
+			}
+			assert(Economy::last_economy_serial_ >= eco_->serial_);
 			try {
 				const TribeDescr& tribe = eco_->owner().tribe();
 				while (Time const last_modified = fr.unsigned_32()) {
@@ -94,6 +101,11 @@ void EconomyDataPacket::read(FileRead& fr) {
 
 void EconomyDataPacket::write(FileWrite& fw) {
 	fw.unsigned_16(kCurrentPacketVersion);
+
+	// We save the serial number for sanity checks
+	fw.unsigned_32(eco_->serial());
+
+	// Requests etc.
 	const TribeDescr& tribe = eco_->owner().tribe();
 	for (const DescriptionIndex& ware_index : tribe.wares()) {
 		const Economy::TargetQuantity& tq = eco_->ware_target_quantities_[ware_index];

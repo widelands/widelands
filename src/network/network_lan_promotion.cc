@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,10 @@
 #ifndef _WIN32
 #include <ifaddrs.h>
 #endif
+
+#include <memory>
+
+#include <boost/lexical_cast.hpp>
 
 #include "base/i18n.h"
 #include "base/log.h"
@@ -347,11 +351,17 @@ void LanBase::start_socket(boost::asio::ip::udp::socket* socket,
 
 void LanBase::report_network_error() {
 	// No socket open? Sorry, but we can't continue this way
+	const std::vector<std::string> ports_list(
+	   {boost::lexical_cast<std::string>(kWidelandsLanDiscoveryPort),
+	    boost::lexical_cast<std::string>(kWidelandsLanPromotionPort),
+	    boost::lexical_cast<std::string>(kWidelandsLanPort)});
+
 	throw WLWarning(_("Failed to use the local network!"),
+	                /** TRANSLATORS: %s is a list of alternative ports with "or" */
 	                _("Widelands was unable to use the local network. "
-	                  "Maybe some other process is already running a server on port %d, %d or %d "
+	                  "Maybe some other process is already running a server on port %s"
 	                  "or your network setup is broken."),
-	                WIDELANDS_LAN_DISCOVERY_PORT, WIDELANDS_LAN_PROMOTION_PORT, WIDELANDS_PORT);
+	                i18n::localize_list(ports_list, i18n::ConcatenateWith::OR).c_str());
 }
 
 void LanBase::close_socket(boost::asio::ip::udp::socket* socket) {
@@ -367,12 +377,12 @@ void LanBase::close_socket(boost::asio::ip::udp::socket* socket) {
 
 /*** class LanGamePromoter ***/
 
-LanGamePromoter::LanGamePromoter() : LanBase(WIDELANDS_LAN_PROMOTION_PORT) {
+LanGamePromoter::LanGamePromoter() : LanBase(kWidelandsLanPromotionPort) {
 
 	needupdate = true;
 
 	memset(&gameinfo, 0, sizeof(gameinfo));
-	strcpy(gameinfo.magic, "GAME");
+	strncpy(gameinfo.magic, "GAME", sizeof(gameinfo.magic));
 
 	gameinfo.version = LAN_PROMOTION_PROTOCOL_VERSION;
 	gameinfo.state = LAN_GAME_OPEN;
@@ -386,14 +396,14 @@ LanGamePromoter::~LanGamePromoter() {
 	gameinfo.state = LAN_GAME_CLOSED;
 
 	// Don't care about errors at this point
-	broadcast(&gameinfo, sizeof(gameinfo), WIDELANDS_LAN_DISCOVERY_PORT);
+	broadcast(&gameinfo, sizeof(gameinfo), kWidelandsLanDiscoveryPort);
 }
 
 void LanGamePromoter::run() {
 	if (needupdate) {
 		needupdate = false;
 
-		if (!broadcast(&gameinfo, sizeof(gameinfo), WIDELANDS_LAN_DISCOVERY_PORT)) {
+		if (!broadcast(&gameinfo, sizeof(gameinfo), kWidelandsLanDiscoveryPort)) {
 			report_network_error();
 		}
 	}
@@ -423,7 +433,7 @@ void LanGamePromoter::set_map(char const* map) {
 
 /*** class LanGameFinder ***/
 
-LanGameFinder::LanGameFinder() : LanBase(WIDELANDS_LAN_DISCOVERY_PORT), callback(nullptr) {
+LanGameFinder::LanGameFinder() : LanBase(kWidelandsLanDiscoveryPort), callback(nullptr) {
 
 	reset();
 }
@@ -436,7 +446,7 @@ void LanGameFinder::reset() {
 	strncpy(magic, "QUERY", 8);
 	magic[6] = LAN_PROMOTION_PROTOCOL_VERSION;
 
-	if (!broadcast(magic, 8, WIDELANDS_LAN_PROMOTION_PORT))
+	if (!broadcast(magic, 8, kWidelandsLanPromotionPort))
 		report_network_error();
 }
 
@@ -445,44 +455,46 @@ void LanGameFinder::run() {
 		NetGameInfo info;
 		NetAddress addr;
 
-		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info)))
+		if (receive(&info, sizeof(info), &addr) < static_cast<int32_t>(sizeof(info))) {
 			continue;
+		}
 
 		log("Received %s packet from %s\n", info.magic, addr.ip.to_string().c_str());
 
-		if (strncmp(info.magic, "GAME", 6))
+		if (strncmp(info.magic, "GAME", 6) || info.version != LAN_PROMOTION_PROTOCOL_VERSION) {
 			continue;
+		}
 
-		if (info.version != LAN_PROMOTION_PROTOCOL_VERSION)
+		// Make sure that the callback function has been set before we do any callbacks
+		if (!callback) {
 			continue;
+		}
 
 		//  if the game already is in the list, update the information
 		//  otherwise just append it to the list
 		bool was_in_list = false;
-		for (NetOpenGame* opengame : opengames) {
+		for (const auto& opengame : opengames) {
 			if (0 == strncmp(opengame->info.hostname, info.hostname, 128)) {
 				opengame->info = info;
 				if (!opengame->address.is_ipv6() && addr.is_ipv6()) {
 					opengame->address.ip = addr.ip;
 				}
-				callback(GameUpdated, opengame, userdata);
+				callback(GameUpdated, opengame.get(), userdata);
 				was_in_list = true;
 				break;
 			}
 		}
 
 		if (!was_in_list) {
-			opengames.push_back(new NetOpenGame);
-			addr.port = WIDELANDS_PORT;
-			opengames.back()->address = addr;
-			opengames.back()->info = info;
-			callback(GameOpened, opengames.back(), userdata);
+			addr.port = kWidelandsLanPort;
+			opengames.push_back(std::unique_ptr<NetOpenGame>(new NetOpenGame(addr, info)));
+			callback(GameOpened, opengames.back().get(), userdata);
 			break;
 		}
 	}
 }
 
-void LanGameFinder::set_callback(void (*const cb)(int32_t, NetOpenGame const*, void*),
+void LanGameFinder::set_callback(void (*const cb)(int32_t, const NetOpenGame* const, void*),
                                  void* const ud) {
 	callback = cb;
 	userdata = ud;

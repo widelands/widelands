@@ -31,7 +31,7 @@ tribes:new_productionsite_type {
    },
 
    aihints = {
-      prohibited_till = 600,
+      prohibited_till = 790,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
@@ -56,7 +56,7 @@ tribes:new_productionsite_type {
             "sleep=30000",
             "return=skipped unless economy needs beer",
             "consume=water wheat",
-            "play_sound=sound/empire beerbubble 180",
+            "playsound=sound/empire beerbubble 180",
             "animate=working 30000",
             "produce=beer"
          }

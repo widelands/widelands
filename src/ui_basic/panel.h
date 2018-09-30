@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,13 +25,15 @@
 #include <string>
 
 #include <SDL_keyboard.h>
+#include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/align.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
+#include "graphic/panel_styles.h"
 
 class RenderTarget;
 class Image;
@@ -85,6 +87,8 @@ public:
 	      int const nh,
 	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
+
+	boost::signals2::signal<void()> position_changed;
 
 	Panel* get_parent() const {
 		return parent_;
@@ -310,7 +314,12 @@ protected:
 	static void play_new_chat_member();
 	static void play_new_chat_message();
 
-	static bool draw_tooltip(RenderTarget&, const std::string& text);
+	static bool draw_tooltip(const std::string& text);
+	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);
+	void draw_background(RenderTarget& dst, Recti rect, const UI::PanelStyleInfo&);
+
+	static const Image* default_cursor_;
+	static const Image* default_cursor_click_;
 
 private:
 	bool handles_mouse() const {
@@ -377,8 +386,6 @@ private:
 	static Panel* mousegrab_;
 	static Panel* mousein_;
 	static bool allow_user_input_;
-	static const Image* default_cursor_;
-	static const Image* default_cursor_click_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };

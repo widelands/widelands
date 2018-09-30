@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,6 @@
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
@@ -67,13 +66,13 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr) : PartiallyFinish
 
 DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              EditorGameBase& egbase,
-                             Coords const c,
-                             Player& plr,
+                             const Coords& c,
+                             Player* plr,
                              bool loading,
                              Building::FormerBuildings& former_buildings)
    : PartiallyFinishedBuilding(gdescr) {
 	position_ = c;
-	set_owner(&plr);
+	set_owner(plr);
 
 	assert(!former_buildings.empty());
 	for (DescriptionIndex former_idx : former_buildings) {
@@ -184,7 +183,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 			wq.set_max_size(wq.get_max_size() - 1);
 
 			// Update statistics
-			owner().ware_produced(wq.get_index());
+			get_owner()->ware_produced(wq.get_index());
 
 			const WareDescr& wd = *owner().tribe().get_ware_descr(wq.get_index());
 			WareInstance& ware = *new WareInstance(wq.get_index(), &wd);
@@ -218,7 +217,6 @@ Draw it.
 ===============
 */
 void DismantleSite::draw(uint32_t gametime,
-                         const TextToDraw draw_text,
                          const Vector2f& point_on_dst,
                          float scale,
                          RenderTarget* dst) {
@@ -229,12 +227,7 @@ void DismantleSite::draw(uint32_t gametime,
 	dst->blit_animation(point_on_dst, scale, anim_, tanim, player_color);
 
 	// Blit bottom part of the animation according to dismantle progress
-	const uint32_t anim_idx =
-	   building_->get_animation(building_->is_animation_known("unoccupied") ? "unoccupied" : "idle");
-	dst->blit_animation(
-	   point_on_dst, scale, anim_idx, tanim, player_color, 100 - ((get_built_per64k() * 100) >> 16));
-
-	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
+	dst->blit_animation(point_on_dst, scale, building_->get_unoccupied_animation(), tanim,
+	                    player_color, 100 - ((get_built_per64k() * 100) >> 16));
 }
 }

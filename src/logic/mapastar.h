@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -158,7 +158,7 @@ template <typename StepEval> bool MapAStar<StepEval>::step(FCoords& cur, int32_t
 	// avoid bias by using different orders when pathfinding
 	static const int8_t order1[] = {WALK_NW, WALK_NE, WALK_E, WALK_SE, WALK_SW, WALK_W};
 	static const int8_t order2[] = {WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E, WALK_NE};
-	int8_t const* direction = (cur.x + cur.y) & 1 ? order1 : order2;
+	int8_t const* direction = ((cur.x + cur.y) & 1) ? order1 : order2;
 
 	// Check all the 6 neighbours
 	for (uint32_t i = 6; i; i--, direction++) {

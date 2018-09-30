@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 #include <list>
 #include <memory>
 
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "logic/map_objects/bob.h"
@@ -61,7 +61,6 @@ private:
 	                                                 uint32_t min,
 	                                                 uint32_t max,
 	                                                 uint32_t initial,
-	                                                 char const* picname,
 	                                                 char const* hint);
 	// TODO(GunChleoc): This should also return a unique_ptr
 	UI::Textarea& add_text(UI::Box& parent,
@@ -80,7 +79,7 @@ private:
 
 private:
 	Widelands::Player* player_;
-	Widelands::Map* map_;
+	const Widelands::Map& map_;
 	Widelands::FCoords* node_coordinates_;
 
 	std::unique_ptr<UI::Slider> soldiers_slider_;

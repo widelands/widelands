@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
 # Любомир Василев, 2015-2016
-# Любомир Василев, 2016-2017
+# Любомир Василев, 2016-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-19 06:24+0000\n"
+"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"PO-Revision-Date: 2018-03-26 10:42+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "От края към началото"
 
@@ -31,7 +31,7 @@ msgid ""
 msgstr "След като акостират на тайнствен остров близо до Атлантида, останалите атландци се борят да си създадат нов дом."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:67
+#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "Място, което да наречем дом"
 
@@ -42,7 +42,7 @@ msgid ""
 msgstr "В този сценарий ще бъдат представени по-големите производствени сгради, както и мините."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:72
+#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "Това е нашата земя"
 
@@ -128,31 +128,69 @@ msgid ""
 "time, but at a high cost: her humanity and soul."
 msgstr "Когато богът на атландците загубил вяра в тях и потопил острова им, борбата на една жена за справедливост и втори шанс за хората ѝ ще стане основа за легенди. Повеждайки атландците към ново бъдеще в нова част на света, Юндлина станала най-силният човек за времето си, но на огромна цена: човечността и душата ѝ."
 
-#: ../../data/campaigns/campaigns.conf:78
+#: ../../data/campaigns/campaigns.conf:52
+msgid "From Water to Ice"
+msgstr "От вода към лед"
+
+#: ../../data/campaigns/campaigns.conf:54
+msgid "Frisians"
+msgstr "Фризийци"
+
+#: ../../data/campaigns/campaigns.conf:56
+msgid "For advanced players. Introduces the Frisians"
+msgstr "За напреднали играчи. Представя фризийците"
+
+#: ../../data/campaigns/campaigns.conf:57
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "Животът, зависим от океана, е винаги труден, а още по-труден е той за жителите на брега на фризийската част от Северно море. Последният бурен прилив беше най-унищожителният в историята на човека, но дали това е още един пример за трудностите, с които трябва да се сблъскват фризийците, или знак от боговете, че тъкмо заселилото се племе трябва отново да си търси нов дом?"
+
+#: ../../data/campaigns/campaigns.conf:86
+#: ../../data/campaigns/campaigns.conf:111
+#: ../../data/campaigns/campaigns.conf:123
+#: ../../data/campaigns/campaigns.conf:139
+#: ../../data/campaigns/dummy.wmf/elemental:8
+msgid "Not yet implemented"
+msgstr "Все още не е завършено"
+
+#: ../../data/campaigns/campaigns.conf:91
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
 msgstr "Оковите на Малак' Мор"
 
-#: ../../data/campaigns/campaigns.conf:83
+#: ../../data/campaigns/campaigns.conf:96
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
 msgstr "Преден пост на изгнанието"
 
-#: ../../data/campaigns/campaigns.conf:88
+#: ../../data/campaigns/campaigns.conf:101
 msgid "Neptune’s Revenge"
 msgstr "Отмъщението на Нептун"
 
-#: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
-msgid "Not yet implemented"
-msgstr "Все още не е завършено"
+#: ../../data/campaigns/campaigns.conf:106
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Изненада!"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/campaigns.conf:129
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "Великият бурен прилив"
+
+#: ../../data/campaigns/campaigns.conf:134
+msgid "Colder than Ice"
+msgstr "По-студено от лед"
+
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Никой"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "Съжаляваме, но тази карта още не е завършена."
 
@@ -178,6 +216,38 @@ msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
 msgstr "Пътувайки към дома, за да защитят империята, екипажът на Луций бил изненадан от волята на боговете."
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr "След като се завръщат у дома, Луций и хората му откриват, че икономиката се е сринала. Премахването на ограничаващите фактори в икономиката е най-важната задача за възвръщането на славата на империята."
+
+#: ../../data/campaigns/fri01.wmf/elemental:10
+msgid ""
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
+"is not wanted here?"
+msgstr "През 1362 мирът и спокойствието на жителите на северните Фризийски острови били нарушени от най-големия бурен прилив в историята на човека: Наводнението на св. Маркел. Това поредната буря ли е, или знак от боговете, че фризийската общност на остров Лангенес е нежелана?"
+
+#: ../../data/campaigns/fri01.wmf/elemental:11
+msgid ""
+"This scenario is set in a historical context, but most of the story line is "
+"fiction."
+msgstr "Този сценарий е в историческа атмосфера, но по-голямата част от сюжета е измислена."
+
+#: ../../data/campaigns/fri02.wmf/elemental:8
+msgid "An Icy Welcome"
+msgstr "Ледено посрещане"
+
+#: ../../data/campaigns/fri02.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe have arrived in the North. But their arrival between "
+"the frozen steppes and the snow-covered mountains is less than welcome…"
+msgstr "Ребауд и премето му пристигнаха в севера. Но мястото между замръзналите степи и покритите със сняг планини не е гостоприемно…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -311,11 +381,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Дълго след като един метеор се разбил в две планини, живота в кратера му процъфтява. Сега две племена се борят за богатите ресурси."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Пресичане на хоризонта"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Съберете екипажа на кораба си и отплавайте към хоризонта."
 

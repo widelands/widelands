@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,6 @@
 #include "boost/format.hpp"
 
 #include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "logic/description_maintainer.h"
 #include "logic/map_objects/world/editor_category.h"
@@ -83,19 +82,17 @@ CategorizedItemSelectionMenu<DescriptionType, ToolType>::CategorizedItemSelectio
      descriptions_(descriptions),
      select_correct_tool_(select_correct_tool),
      protect_against_recursive_select_(false),
-     tab_panel_(this, g_gr->images().get("images/wui/window_background_dark.png")),
+     tab_panel_(this, UI::TabPanelStyle::kWuiLight),
      current_selection_names_(this,
                               0,
                               0,
                               20,
                               20,
+                              UI::PanelStyle::kWui,
                               "",
                               UI::Align::kCenter,
-                              g_gr->images().get("images/ui_basic/but1.png"),
                               UI::MultilineTextarea::ScrollMode::kNoScrolling),
      tool_(tool) {
-	current_selection_names_.set_background(
-	   g_gr->images().get("images/wui/window_background_dark.png"));
 	add(&tab_panel_);
 
 	for (uint32_t category_index = 0; category_index < categories.size(); ++category_index) {

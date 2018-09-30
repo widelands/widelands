@@ -39,7 +39,7 @@ tribes:new_productionsite_type {
 
    aihints = {
       mines = "stones",
-      prohibited_till = 900
+      prohibited_till = 600
    },
 
    working_positions = {
@@ -58,12 +58,29 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
          descname = _"mining granite",
          actions = {
-            "sleep=20000",
+            "sleep=5000",
             "return=skipped unless economy needs granite",
             "consume=ration",
-            "animate=working 20000",
-            "mine=stones 2 100 5 17",
-            "produce=granite:2"
+            "sleep=15000",
+            "call=mine_produce",
+            "call=mine_produce",
+            "return=no_stats"
+         }
+      },
+      mine_produce = {
+         descname = _"mining granite",
+         actions = {
+            "animate=working 10000",
+            "mine=stones 2 100 5 2",
+            "produce=granite",
+         }
+      },
+      encyclopedia = {
+         -- just a dummy program to fix encyclopedia
+         descname = "encyclopedia",
+         actions = {
+            "consume=ration",
+            "produce=granite:2",
          }
       },
    },

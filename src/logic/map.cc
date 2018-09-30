@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,13 +32,13 @@
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "editor/tools/increase_resources_tool.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/filesystem_constants.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
 #include "logic/map_objects/checkstep.h"
 #include "logic/map_objects/tribes/soldier.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
@@ -69,7 +69,8 @@ Map::Map()
      scenario_types_(NO_SCENARIO),
      width_(0),
      height_(0),
-     pathfieldmgr_(new PathfieldManager) {
+     pathfieldmgr_(new PathfieldManager),
+     allows_seafaring_(false) {
 }
 
 Map::~Map() {
@@ -156,6 +157,7 @@ void Map::recalc_whole_map(const World& world) {
 			f = get_fcoords(Coords(x, y));
 			recalc_nodecaps_pass2(world, f);
 		}
+	recalculate_allows_seafaring();
 }
 
 void Map::recalc_default_resources(const World& world) {
@@ -277,6 +279,7 @@ void Map::cleanup() {
 	objectives_.clear();
 
 	port_spaces_.clear();
+	allows_seafaring_ = false;
 
 	// TODO(meitis): should be done here ... but WidelandsMapLoader::preload_map calls
 	// this cleanup AFTER assigning filesystem_ in WidelandsMapLoader::WidelandsMapLoader
@@ -301,15 +304,7 @@ void Map::create_empty_map(const World& world,
 	set_name(name);
 	set_author(author);
 	set_description(description);
-	set_nrplayers(1);
-	// Set first tribe found as the "basic" tribe
-	// <undefined> (as set before) is useless and will lead to a
-	// crash -> Widelands will search for tribe "<undefined>"
-	set_scenario_player_tribe(1, Widelands::get_all_tribenames()[0]);
-	set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
-	set_scenario_player_ai(1, "");
-	set_scenario_player_closeable(1, false);
-
+	set_nrplayers(0);
 	{
 		Field::Terrains default_terrains;
 		default_terrains.d = default_terrain;
@@ -345,7 +340,7 @@ void Map::set_origin(const Coords& new_origin) {
 	// NOTE because of the triangle design, we have to take special care about cases
 	// NOTE where y is changed by an odd number
 	bool yisodd = (new_origin.y % 2) != 0;
-	for (FCoords c(Coords(0, 0)); c.y < height_; ++c.y) {
+	for (Coords c(Coords(0, 0)); c.y < height_; ++c.y) {
 		bool cyisodd = (c.y % 2) != 0;
 		for (c.x = 0; c.x < width_; ++c.x) {
 			Coords temp;
@@ -358,7 +353,9 @@ void Map::set_origin(const Coords& new_origin) {
 		}
 	}
 	// Now that we restructured the fields, we just overwrite the old order
-	fields_.reset(new_field_order.release());
+	for (decltype(width_) ind = 0; ind < width_ * height_; ind++) {
+		fields_[ind] = new_field_order[ind];
+	}
 
 	//  Inform immovables and bobs about their new coordinates.
 	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y)
@@ -488,7 +485,7 @@ void Map::set_nrplayers(PlayerNumber const nrplayers) {
 		return;
 	}
 
-	starting_pos_.resize(nrplayers, Coords(-1, -1));
+	starting_pos_.resize(nrplayers, Coords::null());
 	scenario_tribes_.resize(nrplayers);
 	scenario_ais_.resize(nrplayers);
 	scenario_closeables_.resize(nrplayers);
@@ -545,7 +542,7 @@ void Map::delete_tag(const std::string& tag) {
 	}
 }
 
-NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) {
+NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) const {
 	NodeCaps caps = calc_nodecaps_pass1(world, fc, false);
 	caps = calc_nodecaps_pass2(world, fc, false, caps);
 	return caps;
@@ -565,7 +562,9 @@ Functor is of the form: functor(Map*, FCoords)
 ===============
 */
 template <typename functorT>
-void Map::find_reachable(const Area<FCoords>& area, const CheckStep& checkstep, functorT& functor) {
+void Map::find_reachable(const Area<FCoords>& area,
+                         const CheckStep& checkstep,
+                         functorT& functor) const {
 	std::vector<Coords> queue;
 	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
 
@@ -654,8 +653,9 @@ the list.
 Returns the number of objects found.
 ===============
 */
-uint32_t
-Map::find_bobs(Area<FCoords> const area, std::vector<Bob*>* const list, const FindBob& functor) {
+uint32_t Map::find_bobs(Area<FCoords> const area,
+                        std::vector<Bob*>* const list,
+                        const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
 
 	find(area, cb);
@@ -678,7 +678,7 @@ Returns the number of objects found.
 uint32_t Map::find_reachable_bobs(Area<FCoords> const area,
                                   std::vector<Bob*>* const list,
                                   const CheckStep& checkstep,
-                                  const FindBob& functor) {
+                                  const FindBob& functor) const {
 	FindBobsCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
@@ -731,7 +731,7 @@ If list is not 0, found immovables are stored in list.
 */
 uint32_t Map::find_immovables(Area<FCoords> const area,
                               std::vector<ImmovableFound>* const list,
-                              const FindImmovable& functor) {
+                              const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
 
 	find(area, cb);
@@ -752,7 +752,7 @@ Returns the number of immovables we found.
 uint32_t Map::find_reachable_immovables(Area<FCoords> const area,
                                         std::vector<ImmovableFound>* const list,
                                         const CheckStep& checkstep,
-                                        const FindImmovable& functor) {
+                                        const FindImmovable& functor) const {
 	FindImmovablesCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
@@ -770,7 +770,7 @@ uint32_t Map::find_reachable_immovables(Area<FCoords> const area,
 uint32_t Map::find_reachable_immovables_unique(const Area<FCoords> area,
                                                std::vector<BaseImmovable*>& list,
                                                const CheckStep& checkstep,
-                                               const FindImmovable& functor) {
+                                               const FindImmovable& functor) const {
 	std::vector<ImmovableFound> duplist;
 	FindImmovablesCallback cb(&duplist, find_immovable_always_true());
 
@@ -823,8 +823,9 @@ Returns the number of matching fields.
 Note that list can be 0.
 ===============
 */
-uint32_t
-Map::find_fields(Area<FCoords> const area, std::vector<Coords>* list, const FindNode& functor) {
+uint32_t Map::find_fields(Area<FCoords> const area,
+                          std::vector<Coords>* list,
+                          const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
 
 	find(area, cb);
@@ -844,7 +845,7 @@ Note that list can be 0.
 uint32_t Map::find_reachable_fields(Area<FCoords> const area,
                                     std::vector<Coords>* list,
                                     const CheckStep& checkstep,
-                                    const FindNode& functor) {
+                                    const FindNode& functor) const {
 	FindNodesCallback cb(list, functor);
 
 	find_reachable(area, checkstep, cb);
@@ -932,7 +933,7 @@ void Map::recalc_nodecaps_pass1(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass1(world, f, true);
 }
 
-NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) {
+NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) const {
 	uint8_t caps = CAPS_NONE;
 
 	// 1a) Get all the neighbours to make life easier
@@ -1053,7 +1054,7 @@ void Map::recalc_nodecaps_pass2(const World& world, const FCoords& f) {
 NodeCaps Map::calc_nodecaps_pass2(const World& world,
                                   const FCoords& f,
                                   bool consider_mobs,
-                                  NodeCaps initcaps) {
+                                  NodeCaps initcaps) const {
 	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
 
 	// NOTE  This dependency on the bottom-right neighbour is the reason
@@ -1161,7 +1162,7 @@ int Map::calc_buildsize(const World& world,
                         bool avoidnature,
                         bool* ismine,
                         bool consider_mobs,
-                        NodeCaps initcaps) {
+                        NodeCaps initcaps) const {
 	if (consider_mobs) {
 		if (!(f.field->get_caps() & MOVECAPS_WALK))
 			return BaseImmovable::NONE;
@@ -1235,7 +1236,7 @@ int Map::calc_buildsize(const World& world,
  * The array \p dirs must have length \p length, where \p length is
  * the length of the cycle.
  */
-bool Map::is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) {
+bool Map::is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const {
 	FCoords f = start;
 	bool prev_walkable = start.field->get_caps() & MOVECAPS_WALK;
 	uint32_t alternations = 0;
@@ -1299,18 +1300,32 @@ std::vector<Coords> Map::find_portdock(const Coords& c) const {
 	return portdock;
 }
 
+bool Map::is_port_space_allowed(const World& world, const FCoords& fc) const {
+	return (get_max_nodecaps(world, fc) & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG &&
+	       !find_portdock(fc).empty();
+}
+
 /// \returns true, if Coordinates are in port space list
 bool Map::is_port_space(const Coords& c) const {
 	return port_spaces_.count(c);
 }
 
-/// Set or unset a space as port space
-void Map::set_port_space(Coords c, bool allowed) {
-	if (allowed) {
-		port_spaces_.insert(c);
+bool Map::set_port_space(
+   const World& world, const Coords& c, bool set, bool force, bool recalculate_seafaring) {
+	bool success = false;
+	if (set) {
+		success = force || is_port_space_allowed(world, get_fcoords(c));
+		if (success) {
+			port_spaces_.insert(c);
+		}
 	} else {
 		port_spaces_.erase(c);
+		success = true;
 	}
+	if (recalculate_seafaring) {
+		recalculate_allows_seafaring();
+	}
+	return success;
 }
 
 /**
@@ -1551,15 +1566,15 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 	std::string lower_filename = filename;
 	boost::algorithm::to_lower(lower_filename);
 
-	if (boost::algorithm::ends_with(lower_filename, WLMF_SUFFIX)) {
+	if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
 		try {
 			result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
 		} catch (...) {
 			//  If this fails, it is an illegal file.
 			//  TODO(unknown): catchall hides real errors! Replace with more specific code
 		}
-	} else if (boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX) ||
-	           boost::algorithm::ends_with(lower_filename, S2MF_SUFFIX2)) {
+	} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
+	           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
 		result.reset(new S2MapLoader(filename, *this));
 	}
 	return result;
@@ -1595,7 +1610,8 @@ int32_t Map::findpath(Coords instart,
                       int32_t const persist,
                       Path& path,
                       const CheckStep& checkstep,
-                      uint32_t const flags) {
+                      uint32_t const flags,
+                      uint32_t const caps_sensitivity) const {
 	FCoords start;
 	FCoords end;
 	int32_t upper_cost_limit;
@@ -1678,6 +1694,15 @@ int32_t Map::findpath(Coords instart,
 			cost = curpf->real_cost + ((flags & fpBidiCost) ? calc_bidi_cost(cur, *direction) :
 			                                                  calc_cost(cur, *direction));
 
+			// If required (indicated by caps_sensitivity) we increase the path costs
+			// if the path is just crossing a field with building capabilities
+			if (caps_sensitivity > 0) {
+				int32_t buildcaps_score = neighb.field->get_caps() & BUILDCAPS_SIZEMASK;
+				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_MINE) ? 1 : 0;
+				buildcaps_score += (neighb.field->get_caps() & BUILDCAPS_PORT) ? 9 : 0;
+				cost += buildcaps_score * caps_sensitivity;
+			}
+
 			if (neighbpf.cycle != pathfields->cycle) {
 				// add to open list
 				neighbpf.cycle = pathfields->cycle;
@@ -1733,64 +1758,63 @@ bool Map::can_reach_by_water(const Coords& field) const {
 
 int32_t
 Map::change_terrain(const World& world, TCoords<FCoords> const c, DescriptionIndex const terrain) {
-	c.field->set_terrain(c.t, terrain);
+	c.node.field->set_terrain(c.t, terrain);
 
 	// remove invalid resources if necessary
 	// check vertex to which the triangle belongs
-	if (!is_resource_valid(world, c, c.field->get_resources())) {
-		clear_resources(c);
+	if (!is_resource_valid(world, c.node, c.node.field->get_resources())) {
+		clear_resources(c.node);
 	}
 
 	// always check south-east vertex
-	Widelands::FCoords f_se(c, c.field);
+	Widelands::FCoords f_se(c.node);
 	get_neighbour(f_se, Widelands::WALK_SE, &f_se);
 	if (!is_resource_valid(world, f_se, f_se.field->get_resources())) {
 		clear_resources(f_se);
 	}
 
 	// check south-west vertex if d-Triangle is changed, check east vertex if r-Triangle is changed
-	Widelands::FCoords f_sw_e(c, c.field);
-	get_neighbour(
-	   f_sw_e, c.t == TCoords<FCoords>::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
+	Widelands::FCoords f_sw_e(c.node);
+	get_neighbour(f_sw_e, c.t == TriangleIndex::D ? Widelands::WALK_SW : Widelands::WALK_E, &f_sw_e);
 	if (!is_resource_valid(world, f_sw_e, f_sw_e.field->get_resources())) {
 		clear_resources(f_sw_e);
 	}
 
-	Notifications::publish(NoteFieldTerrainChanged{c, static_cast<MapIndex>(c.field - &fields_[0])});
+	Notifications::publish(
+	   NoteFieldTerrainChanged{c.node, static_cast<MapIndex>(c.node.field - &fields_[0])});
 
 	// Changing the terrain can affect ports, which can be up to 3 fields away.
 	constexpr int kPotentiallyAffectedNeighbors = 3;
-	recalc_for_field_area(world, Area<FCoords>(c, kPotentiallyAffectedNeighbors));
+	recalc_for_field_area(world, Area<FCoords>(c.node, kPotentiallyAffectedNeighbors));
 	return kPotentiallyAffectedNeighbors;
 }
 
 bool Map::is_resource_valid(const Widelands::World& world,
-                            const TCoords<Widelands::FCoords>& c,
-                            DescriptionIndex curres) {
+                            const Widelands::FCoords& c,
+                            DescriptionIndex curres) const {
 	if (curres == Widelands::kNoResource)
 		return true;
 
-	Widelands::FCoords f(c, c.field);
 	Widelands::FCoords f1;
 
 	int32_t count = 0;
 
 	//  this field
-	count += world.terrain_descr(f.field->terrain_r()).is_resource_valid(curres);
-	count += world.terrain_descr(f.field->terrain_d()).is_resource_valid(curres);
+	count += world.terrain_descr(c.field->terrain_r()).is_resource_valid(curres);
+	count += world.terrain_descr(c.field->terrain_d()).is_resource_valid(curres);
 
 	//  If one of the neighbours is impassable, count its resource stronger.
 	//  top left neigbour
-	get_neighbour(f, Widelands::WALK_NW, &f1);
+	get_neighbour(c, Widelands::WALK_NW, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
 	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
 
 	//  top right neigbour
-	get_neighbour(f, Widelands::WALK_NE, &f1);
+	get_neighbour(c, Widelands::WALK_NE, &f1);
 	count += world.terrain_descr(f1.field->terrain_d()).is_resource_valid(curres);
 
 	//  left neighbour
-	get_neighbour(f, Widelands::WALK_W, &f1);
+	get_neighbour(c, Widelands::WALK_W, &f1);
 	count += world.terrain_descr(f1.field->terrain_r()).is_resource_valid(curres);
 
 	return count > 1;
@@ -1812,14 +1836,9 @@ void Map::initialize_resources(const FCoords& c,
 	if (resource_type == Widelands::kNoResource) {
 		amount = 0;
 	}
-	const auto note = NoteFieldResourceChanged{
-	   c, c.field->resources, c.field->initial_res_amount, c.field->res_amount,
-	};
-
 	c.field->resources = resource_type;
 	c.field->initial_res_amount = amount;
 	c.field->res_amount = amount;
-	Notifications::publish(note);
 }
 
 void Map::set_resources(const FCoords& c, ResourceAmount amount) {
@@ -1827,11 +1846,7 @@ void Map::set_resources(const FCoords& c, ResourceAmount amount) {
 	if (c.field->resources == Widelands::kNoResource) {
 		return;
 	}
-	const auto note = NoteFieldResourceChanged{
-	   c, c.field->resources, c.field->initial_res_amount, c.field->res_amount,
-	};
 	c.field->res_amount = amount;
-	Notifications::publish(note);
 }
 
 void Map::clear_resources(const FCoords& c) {
@@ -1955,58 +1970,73 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t& area) {
 			check_neighbour_heights(n[i], area);
 }
 
-/*
-===========
-Map::allows_seafaring()
+bool Map::allows_seafaring() const {
+	return allows_seafaring_;
+}
 
-This function checks if there are two ports that are reachable
-for each other - then the map is seafaring.
-=============
-*/
-bool Map::allows_seafaring() {
-	Map::PortSpacesSet port_spaces = get_port_spaces();
-	std::vector<Coords> portdocks;
-	std::set<Coords> swim_coords;
+// This check can become very expensive, so we only recalculate this on relevant map changes.
+void Map::recalculate_allows_seafaring() {
 
-	for (const Coords& c : port_spaces) {
-		std::queue<Coords> q_positions;
-		std::set<Coords> visited_positions;
+	// There need to be at least 2 port spaces for seafaring to make sense
+	if (get_port_spaces().size() < 2) {
+		allows_seafaring_ = false;
+		return;
+	}
+
+	std::set<Coords> reachable_from_previous_ports;
+
+	for (const Coords& c : get_port_spaces()) {
+		std::queue<Coords> positions_to_check;
+		std::set<Coords> reachable_from_current_port;
 		FCoords fc = get_fcoords(c);
-		portdocks = find_portdock(fc);
 
-		/* remove the port space if it is not longer valid port space */
-		if ((fc.field->get_caps() & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG || portdocks.empty()) {
-			set_port_space(c, false);
-			continue;
+		// Get portdock slots for this port
+		for (const Coords& portdock : find_portdock(fc)) {
+			reachable_from_current_port.insert(portdock);
+			positions_to_check.push(portdock);
 		}
 
-		for (const Coords& portdock : portdocks) {
-			visited_positions.insert(portdock);
-			q_positions.push(portdock);
-		}
+		// Pick up all positions that can be reached from the current port
+		while (!positions_to_check.empty()) {
+			// Take a copy, because we'll pop it
+			const Coords current_position = positions_to_check.front();
+			positions_to_check.pop();
 
-		while (!q_positions.empty()) {
-			const Coords& swim_coord = q_positions.front();
-			q_positions.pop();
+			// Found one
+			if (reachable_from_previous_ports.count(current_position) > 0) {
+				allows_seafaring_ = true;
+				return;
+			}
+
+			// Adding the neighbors to the list
 			for (uint8_t i = 1; i <= 6; ++i) {
 				FCoords neighbour;
-				get_neighbour(get_fcoords(swim_coord), i, &neighbour);
+				get_neighbour(get_fcoords(current_position), i, &neighbour);
 				if ((neighbour.field->get_caps() & (MOVECAPS_SWIM | MOVECAPS_WALK)) == MOVECAPS_SWIM) {
-					if (visited_positions.count(neighbour) == 0) {
-						visited_positions.insert(neighbour);
-						q_positions.push(neighbour);
+					if (reachable_from_current_port.count(neighbour) == 0) {
+						reachable_from_current_port.insert(neighbour);
+						positions_to_check.push(neighbour);
 					}
 				}
 			}
 		}
 
-		for (const Coords& swim_coord : visited_positions)
-			if (swim_coords.count(swim_coord) == 0)
-				swim_coords.insert(swim_coord);
-			else
-				return true;
+		// Couldn't connect to another port, so we add our reachable nodes to the list
+		for (const Coords& reachable_coord : reachable_from_current_port) {
+			reachable_from_previous_ports.insert(reachable_coord);
+		}
 	}
-	return false;
+	allows_seafaring_ = false;
+}
+
+void Map::cleanup_port_spaces(const World& world) {
+	for (const Coords& c : get_port_spaces()) {
+		if (!is_port_space_allowed(world, get_fcoords(c))) {
+			set_port_space(world, c, false);
+			continue;
+		}
+	}
+	recalculate_allows_seafaring();
 }
 
 bool Map::has_artifacts() {

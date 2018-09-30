@@ -28,8 +28,9 @@ tribes:new_productionsite_type {
 
    aihints = {
       space_consumer = true,
-      renews_map_resource = "log",
-      prohibited_till = 200
+      supports_production_of = { "log" },
+      very_weak_ai_limit = 2,
+      weak_ai_limit = 4
    },
 
    working_positions = {
@@ -42,7 +43,7 @@ tribes:new_productionsite_type {
          descname = _"planting trees",
          actions = {
             "sleep=11000",
-            "worker=plant"
+            "callworker=plant"
          }
       },
    },

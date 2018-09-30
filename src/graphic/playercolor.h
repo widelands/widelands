@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 by the Widelands Development Team
+ * Copyright (C) 2016-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,6 +47,19 @@ const RGBColor kPlayerColors[kMaxPlayers] = {
    RGBColor(148, 56, 0),     // brown
    RGBColor(96, 0, 84),      // dark purple
    RGBColor(144, 144, 144),  // light gray
+};
+
+// Hard coded team colors
+const RGBColor kTeamColors[kMaxPlayers / 2 + 1] = {
+   RGBColor(100, 100, 100),  // No team
+   RGBColor(2, 2, 198),      // blue
+   RGBColor(255, 41, 0),     // red
+   RGBColor(255, 232, 0),    // yellow
+   RGBColor(59, 223, 3),     // green
+   RGBColor(57, 57, 57),     // black/dark gray
+   RGBColor(255, 172, 0),    // orange
+   RGBColor(215, 0, 218),    // purple
+   RGBColor(255, 255, 255),  // white
 };
 
 /// Looks for a player color mask image, and if it finds one,

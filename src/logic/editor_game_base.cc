@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,6 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/color.h"
-#include "graphic/graphic.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -43,6 +42,7 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
+#include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
@@ -67,15 +67,12 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
    : gametime_(0),
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
-     ibase_(nullptr),
-     map_(nullptr) {
+     ibase_(nullptr) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 }
 
 EditorGameBase::~EditorGameBase() {
-	delete map_;
-	delete player_manager_.release();
 }
 
 void EditorGameBase::think() {
@@ -163,7 +160,7 @@ Player* EditorGameBase::get_player(const int32_t n) const {
 	return player_manager_->get_player(n);
 }
 
-Player& EditorGameBase::player(const int32_t n) const {
+const Player& EditorGameBase::player(const int32_t n) const {
 	return player_manager_->player(n);
 }
 
@@ -182,22 +179,9 @@ void EditorGameBase::inform_players_about_immovable(MapIndex const i,
 		iterate_players_existing_const(plnum, kMaxPlayers, *this, p) {
 			Player::Field& player_field = p->fields_[i];
 			if (1 < player_field.vision) {
-				player_field.map_object_descr[TCoords<>::None] = descr;
+				player_field.map_object_descr = descr;
 			}
 		}
-}
-
-/**
- * Replaces the current map with the given one. Ownership of the map is transferred
- * to the EditorGameBase object.
- */
-void EditorGameBase::set_map(Map* const new_map) {
-	assert(new_map != map_);
-	assert(new_map);
-
-	delete map_;
-
-	map_ = new_map;
 }
 
 void EditorGameBase::allocate_player_maps() {
@@ -215,6 +199,20 @@ void EditorGameBase::postload() {
 	// Postload tribes
 	assert(tribes_);
 	tribes_->postload();
+
+	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
+		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
+		for (DescriptionIndex j = 0; j < world_->get_nr_resources(); j++) {
+			const ResourceDescription* res = world_->get_resource(j);
+			if (res->detectable()) {
+				// This function will throw an exception if this tribe doesn't
+				// have a high enough resource indicator for this resource
+				tribe->get_resource_indicator(res, res->max_amount());
+			}
+		}
+		// For the "none" indicator
+		tribe->get_resource_indicator(nullptr, 0);
+	}
 
 	// TODO(unknown): postload players? (maybe)
 }
@@ -241,8 +239,8 @@ Building& EditorGameBase::warp_building(const Coords& c,
                                         PlayerNumber const owner,
                                         DescriptionIndex const idx,
                                         Building::FormerBuildings former_buildings) {
-	Player& plr = player(owner);
-	const TribeDescr& tribe = plr.tribe();
+	Player* plr = get_player(owner);
+	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(*this, plr, c, false, true, former_buildings);
 }
 
@@ -258,8 +256,8 @@ Building& EditorGameBase::warp_constructionsite(const Coords& c,
                                                 DescriptionIndex idx,
                                                 bool loading,
                                                 Building::FormerBuildings former_buildings) {
-	Player& plr = player(owner);
-	const TribeDescr& tribe = plr.tribe();
+	Player* plr = get_player(owner);
+	const TribeDescr& tribe = plr->tribe();
 	return tribe.get_building_descr(idx)->create(*this, plr, c, true, loading, former_buildings);
 }
 
@@ -272,15 +270,15 @@ Building& EditorGameBase::warp_dismantlesite(const Coords& c,
                                              PlayerNumber const owner,
                                              bool loading,
                                              Building::FormerBuildings former_buildings) {
-	Player& plr = player(owner);
-	const TribeDescr& tribe = plr.tribe();
+	Player* plr = get_player(owner);
+	const TribeDescr& tribe = plr->tribe();
 
 	BuildingDescr const* const descr =
 	   tribe.get_building_descr(tribe.safe_building_index("dismantlesite"));
 
 	upcast(const DismantleSiteDescr, ds_descr, descr);
 
-	return *new DismantleSite(*ds_descr, *this, c, *get_player(owner), loading, former_buildings);
+	return *new DismantleSite(*ds_descr, *this, c, plr, loading, former_buildings);
 }
 
 /**
@@ -412,8 +410,7 @@ void EditorGameBase::cleanup_for_load() {
 
 	player_manager_->cleanup();
 
-	if (map_)
-		map_->cleanup();
+	map_.cleanup();
 }
 
 void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t const roadtype) {
@@ -485,19 +482,6 @@ void EditorGameBase::unconquer_area(PlayerArea<Area<FCoords>> player_area,
 
 	//  step 1: unconquer area of this building
 	do_conquer_area(player_area, false, destroying_player);
-
-	//  step 5: deal with player immovables in the lost area
-	//  Players are not allowed to have their immovables on their borders.
-	//  Therefore the area must be enlarged before calling
-	//  cleanup_playerimmovables_area, so that those new border locations are
-	//  covered.
-	// TODO(SirVer): In the editor, no buildings should burn down when a military
-	// building is removed. Check this again though
-	if (is_a(Game, this)) {
-		++player_area.radius;
-		player_area.player_number = destroying_player;
-		cleanup_playerimmovables_area(player_area);
-	}
 }
 
 /// This conquers a given area because of a new (military) building that is set
@@ -514,13 +498,6 @@ void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(player_area.player_number <= map().get_nrplayers());
 
 	do_conquer_area(player_area, true, 0, conquer_guarded_location);
-
-	//  Players are not allowed to have their immovables on their borders.
-	//  Therefore the area must be enlarged before calling
-	//  cleanup_playerimmovables_area, so that those new border locations are
-	//  covered.
-	++player_area.radius;
-	cleanup_playerimmovables_area(player_area);
 }
 
 void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const new_owner) {
@@ -563,10 +540,10 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 		change_field_owner(mr.location(), player_area.player_number);
 	} while (mr.advance(map()));
 
-	//  This must reach one step beyond the conquered area to adjust the borders
+	//  This must reach two steps beyond the conquered area to adjust the borders
 	//  of neighbour players.
-	++player_area.radius;
-	map().recalc_for_field_area(world(), player_area);
+	player_area.radius += 2;
+	map_.recalc_for_field_area(world(), player_area);
 }
 
 /// Conquers the given area for that player; does the actual work.
@@ -593,7 +570,7 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(preferred_player <= map().get_nrplayers());
 	assert(preferred_player != player_area.player_number);
 	assert(!conquer || !preferred_player);
-	Player& conquering_player = player(player_area.player_number);
+	Player* conquering_player = get_player(player_area.player_number);
 	MapRegion<Area<FCoords>> mr(map(), player_area);
 	do {
 		MapIndex const index = mr.location().field - &first_field;
@@ -603,14 +580,14 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 		PlayerNumber const owner = mr.location().field->get_owned_by();
 		if (conquer) {
 			//  adds the influence
-			MilitaryInfluence new_influence_modified = conquering_player.military_influence(index) +=
+			MilitaryInfluence new_influence_modified = conquering_player->military_influence(index) +=
 			   influence;
 			if (owner && !conquer_guarded_location_by_superior_influence)
 				new_influence_modified = 1;
 			if (!owner || player(owner).military_influence(index) < new_influence_modified) {
 				change_field_owner(mr.location(), player_area.player_number);
 			}
-		} else if (!(conquering_player.military_influence(index) -= influence) &&
+		} else if (!(conquering_player->military_influence(index) -= influence) &&
 		           owner == player_area.player_number) {
 			//  The player completely lost influence over the location, which he
 			//  owned. Now we must see if some other player has influence and if
@@ -639,24 +616,34 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 		}
 	} while (mr.advance(map()));
 
-	// This must reach one step beyond the conquered area to adjust the borders
+	// This must reach two steps beyond the conquered area to adjust the borders
 	// of neighbour players.
-	++player_area.radius;
-	map().recalc_for_field_area(world(), player_area);
+	player_area.radius += 2;
+	map_.recalc_for_field_area(world(), player_area);
+
+	//  Deal with player immovables in the lost area
+	//  Players are not allowed to have their immovables on their borders.
+	//  Therefore the area must be enlarged before calling
+	//  cleanup_playerimmovables_area, so that those new border locations are
+	//  covered.
+	// TODO(SirVer): In the editor, no buildings should burn down when a military
+	// building is removed. Check this again though
+	if (is_a(Game, this)) {
+		cleanup_playerimmovables_area(player_area);
+	}
 }
 
 /// Makes sure that buildings cannot exist outside their owner's territory.
 void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> const area) {
 	std::vector<ImmovableFound> immovables;
 	std::vector<PlayerImmovable*> burnlist;
-	Map& m = map();
 
 	//  find all immovables that need fixing
-	m.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
+	map_.find_immovables(area, &immovables, FindImmovablePlayerImmovable());
 
 	for (const ImmovableFound& temp_imm : immovables) {
 		upcast(PlayerImmovable, imm, temp_imm.object);
-		if (!m[temp_imm.coords].is_interior(imm->owner().player_number())) {
+		if (!map_[temp_imm.coords].is_interior(imm->owner().player_number())) {
 			if (std::find(burnlist.begin(), burnlist.end(), imm) == burnlist.end()) {
 				burnlist.push_back(imm);
 			}

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -118,7 +118,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 		x -= map_end_screen_x;
 	while (y >= map_end_screen_y)
 		y -= map_end_screen_y;
-	NodeAndTriangle<> result;
+	Coords result_node;
 
 	const uint16_t col_number = x / (kTriangleWidth / 2);
 	uint16_t row_number = y / kTriangleHeight, next_row_number;
@@ -172,10 +172,13 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 		}
 		if (upper_screen_dx * upper_screen_dx + upper_screen_dy * upper_screen_dy <
 		    lower_screen_dx * lower_screen_dx + lower_screen_dy * lower_screen_dy)
-			result.node = Coords(upper_x, row_number);
+			result_node = Coords(upper_x, row_number);
 		else
-			result.node = Coords(lower_x, next_row_number);
+			result_node = Coords(lower_x, next_row_number);
 	}
+
+	// This will be overwritten in all cases below.
+	TCoords<> result_triangle(Coords::null(), TriangleIndex::D);
 
 	//  Find out which of the 4 possible triangles (x, y) is in.
 	if (slash) {
@@ -190,15 +193,15 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 		assert(pdx > 0);
 		if (pdy * kTriangleWidth > ldy * pdx) {
 			//  (x, y) is in the upper triangle.
-			result.triangle = TCoords<>(
-			   Coords(left_col, (row_number == 0 ? mapheight : row_number) - 1), TCoords<>::D);
+			result_triangle = TCoords<>(
+			   Coords(left_col, (row_number == 0 ? mapheight : row_number) - 1), TriangleIndex::D);
 		} else {
 			Y_a = screen_y_base - map[Coords(left_col, next_row_number)].get_height() * kHeightFactor;
 			ldy = Y_b - Y_a;
 			if (pdy * (kTriangleWidth / 2) > ldy * pdx) {
 				//  (x, y) is in the second triangle.
-				result.triangle = TCoords<>(
-				   Coords((right_col == 0 ? mapwidth : right_col) - 1, row_number), TCoords<>::R);
+				result_triangle = TCoords<>(
+				   Coords((right_col == 0 ? mapwidth : right_col) - 1, row_number), TriangleIndex::R);
 			} else {
 				Y_b = screen_y_base -
 				      map[Coords(left_col + 1 == mapwidth ? 0 : left_col + 1, next_row_number)]
@@ -209,10 +212,10 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 				pdx = (col_number + 2) * (kTriangleWidth / 2) - x;
 				if (pdy * kTriangleWidth > ldy * pdx) {
 					//  (x, y) is in the third triangle.
-					result.triangle = TCoords<>(Coords(right_col, row_number), TCoords<>::D);
+					result_triangle = TCoords<>(Coords(right_col, row_number), TriangleIndex::D);
 				} else {
 					//  (x, y) is in the lower triangle.
-					result.triangle = TCoords<>(Coords(left_col, next_row_number), TCoords<>::R);
+					result_triangle = TCoords<>(Coords(left_col, next_row_number), TriangleIndex::R);
 				}
 			}
 		}
@@ -228,8 +231,8 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 		assert(pdx > 0);
 		if (pdy * kTriangleWidth > ldy * pdx) {
 			//  (x, y) is in the upper triangle.
-			result.triangle = TCoords<>(
-			   Coords(right_col, (row_number == 0 ? mapheight : row_number) - 1), TCoords<>::D);
+			result_triangle = TCoords<>(
+			   Coords(right_col, (row_number == 0 ? mapheight : row_number) - 1), TriangleIndex::D);
 		} else {
 			Y_b = screen_y_base - map[Coords(right_col, next_row_number)].get_height() * kHeightFactor;
 			ldy = Y_b - Y_a;
@@ -237,7 +240,7 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 			pdx = (col_number + 1) * (kTriangleWidth / 2) - x;
 			if (pdy * (kTriangleWidth / 2) > ldy * pdx) {
 				//  (x, y) is in the second triangle.
-				result.triangle = TCoords<>(Coords(left_col, row_number), TCoords<>::R);
+				result_triangle = TCoords<>(Coords(left_col, row_number), TriangleIndex::R);
 			} else {
 				Y_a = screen_y_base -
 				      map[Coords((right_col == 0 ? mapwidth : right_col) - 1, next_row_number)]
@@ -246,18 +249,18 @@ MapviewPixelFunctions::calc_node_and_triangle(const Map& map, uint32_t x, uint32
 				ldy = Y_b - Y_a;
 				if (pdy * kTriangleWidth > ldy * pdx) {
 					//  (x, y) is in the third triangle.
-					result.triangle = TCoords<>(Coords(left_col, row_number), TCoords<>::D);
+					result_triangle = TCoords<>(Coords(left_col, row_number), TriangleIndex::D);
 				} else {
 					//  (x, y) is in the lower triangle.
-					result.triangle =
+					result_triangle =
 					   TCoords<>(Coords((right_col == 0 ? mapwidth : right_col) - 1, next_row_number),
-					             TCoords<>::R);
+					             TriangleIndex::R);
 				}
 			}
 		}
 	}
-
-	return result;
+	assert(result_triangle.node != Coords::null());
+	return NodeAndTriangle<>{result_node, result_triangle};
 }
 
 /**

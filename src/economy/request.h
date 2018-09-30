@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -123,6 +123,7 @@ public:
 	//  callbacks for WareInstance/Worker code
 	void transfer_finish(Game&, Transfer&);
 	void transfer_fail(Game&, Transfer&);
+	void cancel_transfer(uint32_t idx);
 
 	void set_requirements(const Requirements& r) {
 		requirements_ = r;
@@ -133,11 +134,6 @@ public:
 
 private:
 	int32_t get_base_required_time(EditorGameBase&, uint32_t nr) const;
-
-public:
-	void cancel_transfer(uint32_t idx);
-
-private:
 	void remove_transfer(uint32_t idx);
 	uint32_t find_transfer(Transfer&);
 

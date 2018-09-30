@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
 
 #include "base/log.h"
 #include "graphic/color.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
@@ -42,7 +42,7 @@ WordWrap::WordWrap(int fontsize, const RGBColor& color, uint32_t gwrapwidth)
    : draw_caret_(false),
      fontsize_(fontsize),
      color_(color),
-     font_(RT::load_font(UI::g_fh1->fontset()->sans_bold(), fontsize_)) {
+     font_(RT::load_font(UI::g_fh->fontset()->sans_bold(), fontsize_)) {
 	wrapwidth_ = gwrapwidth;
 
 	if (wrapwidth_ < std::numeric_limits<uint32_t>::max()) {
@@ -312,8 +312,8 @@ void WordWrap::draw(RenderTarget& dst, Vector2i where, Align align, uint32_t car
 			point.x += wrapwidth_ - kLineMargin;
 		}
 
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
-		   as_editorfont(lines_[line].text, fontsize_ - UI::g_fh1->fontset()->size_offset(), color_));
+		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
+		   as_editorfont(lines_[line].text, fontsize_ - UI::g_fh->fontset()->size_offset(), color_));
 		UI::correct_for_align(alignment, rendered_text->width(), &point);
 		rendered_text->draw(dst, point);
 

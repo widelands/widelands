@@ -23,8 +23,6 @@ wl_library(editor
     tools/increase_resources_tool.h
     tools/info_tool.cc
     tools/info_tool.h
-    tools/make_infrastructure_tool.cc
-    tools/make_infrastructure_tool.h
     tools/multi_select.h
     tools/noise_height_tool.cc
     tools/noise_height_tool.h
@@ -96,20 +94,23 @@ wl_library(editor
     graphic_fonthandler
     graphic_playercolor
     graphic_surface
+    graphic_text_layout
     io_filesystem
     logic
     logic_constants
+    logic_filesystem_constants
+    logic_tribe_basic_info
     logic_widelands_geometry
     map_io
     map_io_map_loader
     notifications
+    profile
     random
     scripting_coroutine
     scripting_lua_interface
     scripting_lua_table
     ui_basic
     wui
-    wui_common
-    wui_field_overlay_manager
+    wui_common_mapdetails
     wui_mapview_pixelfunctions
 )

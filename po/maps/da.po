@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016
-# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2017
+# Joe Hansen <joedalton2@yahoo.dk>, 2009,2015-2018
 # Ole Laursen <ole.laursen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-18 21:30+0000\n"
-"PO-Revision-Date: 2017-05-18 21:32+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-03-30 06:58+0000\n"
+"PO-Revision-Date: 2018-04-02 20:13+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish (http://www.transifex.com/widelands/widelands/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "Fra nemesis til genesis"
 
@@ -31,7 +31,7 @@ msgid ""
 msgstr "Efter landgang på en mystisk ø tæt på Atlantis kæmper de tilbageværende atlantere for at skabe sig et nyt hjem."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:67
+#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "Et sted vi kan kalde hjem"
 
@@ -42,7 +42,7 @@ msgid ""
 msgstr "I dette scenarie vil bygninger med højere produktion, inklusive minedrift, blive introduceret."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:72
+#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "Dette land er vores land"
 
@@ -128,31 +128,69 @@ msgid ""
 "time, but at a high cost: her humanity and soul."
 msgstr "Da deres gud mistede troen på atlanterne og lod deres ø forsvinde i havet, blev en kvindes kamp for retfærdighed og en ekstra chance for hendes folk en legende. Som anfører for de resterende atlantere førte hun dem til en ny fremtid i en ny del af verden, Jundlina blev det mægtigste menneske i hendes tid, men til en høj pris: hendes menneskelighed og sjæl."
 
-#: ../../data/campaigns/campaigns.conf:78
+#: ../../data/campaigns/campaigns.conf:52
+msgid "From Water to Ice"
+msgstr "Fra vand til is"
+
+#: ../../data/campaigns/campaigns.conf:54
+msgid "Frisians"
+msgstr "Friserne"
+
+#: ../../data/campaigns/campaigns.conf:56
+msgid "For advanced players. Introduces the Frisians"
+msgstr "For avancerede spillere. Introducerer friserne"
+
+#: ../../data/campaigns/campaigns.conf:57
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr ""
+
+#: ../../data/campaigns/campaigns.conf:86
+#: ../../data/campaigns/campaigns.conf:111
+#: ../../data/campaigns/campaigns.conf:123
+#: ../../data/campaigns/campaigns.conf:139
+#: ../../data/campaigns/dummy.wmf/elemental:8
+msgid "Not yet implemented"
+msgstr "Endnu ikke implementeret"
+
+#: ../../data/campaigns/campaigns.conf:91
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
 msgstr "Malac' Mors bredder"
 
-#: ../../data/campaigns/campaigns.conf:83
+#: ../../data/campaigns/campaigns.conf:96
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
 msgstr "En forpost for eksil"
 
-#: ../../data/campaigns/campaigns.conf:88
+#: ../../data/campaigns/campaigns.conf:101
 msgid "Neptune’s Revenge"
+msgstr "Neptuns hævn"
+
+#: ../../data/campaigns/campaigns.conf:106
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
 msgstr ""
 
-#: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
-msgid "Not yet implemented"
-msgstr "Endnu ikke implementeret"
+#: ../../data/campaigns/campaigns.conf:129
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr ""
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/campaigns.conf:134
+msgid "Colder than Ice"
+msgstr ""
+
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Ingen"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "Beklager, dette kort er endnu ikke implementeret."
 
@@ -177,6 +215,38 @@ msgstr "Endelig blev skibet repareret, så Lutius og hans folk kunne genoptage m
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
+msgstr "På deres vej hjem for at forsvære Imperiet, blev Lutiusbesætningen overrasket af gudernes vilje."
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:10
+msgid ""
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
+"is not wanted here?"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:11
+msgid ""
+"This scenario is set in a historical context, but most of the story line is "
+"fiction."
+msgstr ""
+
+#: ../../data/campaigns/fri02.wmf/elemental:8
+msgid "An Icy Welcome"
+msgstr ""
+
+#: ../../data/campaigns/fri02.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe have arrived in the North. But their arrival between "
+"the frozen steppes and the snow-covered mountains is less than welcome…"
 msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
@@ -311,11 +381,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Lang tid efter at en meteor styrtede ned i et par bjerge, blomstrer livet nu i krateret. To stammer bekæmper nu hinanden for at få fat på disse ressourcer."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Krydser horisonten"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Bemand dit skib og sejl ud mod horisonten."
 

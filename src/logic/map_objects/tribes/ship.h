@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2017 by the Widelands Development Team
+ * Copyright (C) 2010-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,35 +35,23 @@ struct Fleet;
 class PortDock;
 
 // This can't be part of the Ship class because of forward declaration in game.h
+// Keep the order of entries for savegame compatibility.
 enum class IslandExploreDirection {
-	kCounterClockwise = 0,  // This comes first for savegame compatibility (used to be = 0)
-	kClockwise = 1,
-	kNotSet
+	kNotSet,
+	kCounterClockwise,
+	kClockwise,
 };
 
-struct NoteShipMessage {
-	CAN_BE_SENT_AS_NOTE(NoteId::ShipMessage)
+struct NoteShip {
+	CAN_BE_SENT_AS_NOTE(NoteId::Ship)
 
 	Ship* ship;
 
-	enum class Message { kLost, kGained, kWaitingForCommand };
-	Message message;
+	enum class Action { kDestinationChanged, kWaitingForCommand, kNoPortLeft, kLost, kGained };
+	Action action;
 
-	NoteShipMessage(Ship* const init_ship, const Message& init_message)
-	   : ship(init_ship), message(init_message) {
-	}
-};
-
-struct NoteShipWindow {
-	CAN_BE_SENT_AS_NOTE(NoteId::ShipWindow)
-
-	Serial serial;
-
-	enum class Action { kRefresh, kClose, kNoPortLeft };
-	const Action action;
-
-	NoteShipWindow(Serial init_serial, const Action& init_action)
-	   : serial(init_serial), action(init_action) {
+	NoteShip(Ship* const init_ship, const Action& init_action)
+	   : ship(init_ship), action(init_action) {
 	}
 };
 
@@ -99,7 +87,7 @@ struct Ship : Bob {
 	MO_DESCR(ShipDescr)
 
 	explicit Ship(const ShipDescr& descr);
-	virtual ~Ship();
+	~Ship() override;
 
 	// Returns the fleet the ship is a part of.
 	Fleet* get_fleet() const;
@@ -129,7 +117,7 @@ struct Ship : Bob {
 
 	uint32_t calculate_sea_route(Game& game, PortDock& pd, Path* finalpath = nullptr) const;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	uint32_t get_nritems() const {
 		return items_.size();
@@ -208,7 +196,7 @@ struct Ship : Bob {
 	}
 
 	// whether the ship's expedition is in state "island-exploration" (circular movement)
-	bool is_exploring_island() {
+	bool is_exploring_island() const {
 		return expedition_->island_exploration;
 	}
 
@@ -242,13 +230,7 @@ struct Ship : Bob {
 
 	void exp_cancel(Game&);
 	void sink_ship(Game&);
-
-protected:
-	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
-	          const Vector2f& field_on_dst,
-	          float scale,
-	          RenderTarget* dst) const override;
+	std::string info_string(MapObject::InfoStringType format) override;
 
 private:
 	friend struct Fleet;
@@ -263,6 +245,8 @@ private:
 	bool ship_update_transport(Game&, State&);
 	void ship_update_expedition(Game&, State&);
 	void ship_update_idle(Game&, State&);
+	/// Set the ship's state to 'state' and if the ship state has changed, publish a notification.
+	void set_ship_state_and_notify(ShipStates state, NoteShip::Action action);
 
 	bool init_fleet(EditorGameBase&);
 	void set_fleet(Fleet* fleet);
@@ -282,13 +266,15 @@ private:
 	std::string shipname_;
 
 	struct Expedition {
+		~Expedition();
+
 		std::vector<Coords> seen_port_buildspaces;
 		bool swimmable[LAST_DIRECTION];
 		bool island_exploration;
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
-		std::unique_ptr<Economy> economy;
+		Economy* economy;  // Owned by Player
 	};
 	std::unique_ptr<Expedition> expedition_;
 
@@ -306,6 +292,7 @@ protected:
 		// Initialize everything to make cppcheck happy.
 		uint32_t lastdock_ = 0U;
 		uint32_t destination_ = 0U;
+		Serial economy_serial_;
 		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;

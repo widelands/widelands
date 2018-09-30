@@ -63,8 +63,10 @@ return {
             barbarians_lime_burner = 1,
             barbarians_lumberjack = 3,
             barbarians_miner = 4,
+            barbarians_miner_master = 4,
             barbarians_ranger = 1,
             barbarians_stonemason = 2,
+            barbarians_trainer = 4,
             barbarians_ox = 5,
          },
          -- Max health: 3, Max attack: 5, Max defense: 0, Max evade: 2

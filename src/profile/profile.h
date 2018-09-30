@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -196,7 +196,10 @@ public:
 	void read(const char* const filename,
 	          const char* const global_section = nullptr,
 	          FileSystem& = *g_fs);
-	void write(const char* const filename, bool used_only = true, FileSystem& = *g_fs);
+	void write(const char* const filename,
+	           bool used_only = true,
+	           FileSystem& = *g_fs,
+	           const char* const comment = nullptr);
 
 	Section* get_section(const std::string& name);
 	Section& get_safe_section(const std::string& name);

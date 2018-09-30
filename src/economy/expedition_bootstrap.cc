@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -127,7 +127,7 @@ void ExpeditionBootstrap::cleanup(EditorGameBase& /* egbase */) {
 InputQueue& ExpeditionBootstrap::inputqueue(DescriptionIndex index, WareWorker type) const {
 	for (const std::unique_ptr<InputQueue>& iq : queues_) {
 		if (iq->get_index() == index && iq->get_type() == type) {
-			return *iq.get();
+			return *iq;
 		}
 	}
 	NEVER_HERE();
@@ -206,19 +206,11 @@ void ExpeditionBootstrap::load(
    Warehouse& warehouse, FileRead& fr, Game& game, MapObjectLoader& mol, uint16_t packet_version) {
 
 	static const uint16_t kCurrentPacketVersion = 7;
-
 	assert(queues_.empty());
 	// Load worker queues
 	std::vector<WorkersQueue*> wqs;
 	try {
-		if (packet_version <= 6) {
-			// This code is actually quite broken/inflexible but it should work
-			// If we are here, use the old loader for build 19 packets
-			const uint8_t num_workers = fr.unsigned_8();
-			WorkersQueue* wq = new WorkersQueue(warehouse, warehouse.owner().tribe().builder(), 1);
-			wq->load_for_expedition(fr, game, mol, num_workers);
-			wqs.push_back(wq);
-		} else if (packet_version >= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			uint8_t num_queues = fr.unsigned_8();
 			for (uint8_t i = 0; i < num_queues; ++i) {
 				WorkersQueue* wq = new WorkersQueue(warehouse, INVALID_INDEX, 0);

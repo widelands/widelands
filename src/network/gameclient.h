@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/player_end_result.h"
-#include "network/netclient.h"
+#include "network/netclient_interface.h"
 
 struct GameClientImpl;
 
@@ -39,9 +39,10 @@ struct GameClientImpl;
 struct GameClient : public GameController, public GameSettingsProvider, public ChatProvider {
 	GameClient(const std::pair<NetAddress, NetAddress>& host,
 	           const std::string& playername,
-	           bool internet = false);
+	           bool internet = false,
+	           const std::string& gamename = "");
 
-	virtual ~GameClient();
+	~GameClient() override;
 
 	void run();
 
@@ -84,13 +85,13 @@ struct GameClient : public GameController, public GameSettingsProvider, public C
 	virtual void set_player_tribe(uint8_t number,
 	                              const std::string& tribe,
 	                              bool const random_tribe = false) override;
-	void set_player_init(uint8_t number, uint8_t index) override;
+	void set_player_init(uint8_t number, uint8_t initialization_index) override;
 	void set_player_name(uint8_t number, const std::string& name) override;
 	void set_player(uint8_t number, const PlayerSettings& ps) override;
 	void set_player_number(uint8_t number) override;
 	void set_player_team(uint8_t number, Widelands::TeamNumber team) override;
 	void set_player_closeable(uint8_t number, bool closeable) override;
-	void set_player_shared(uint8_t number, uint8_t shared) override;
+	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared) override;
 	void set_win_condition_script(const std::string&) override;
 	std::string get_win_condition_script() override;
 

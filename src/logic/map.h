@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,6 +36,7 @@
 #include "logic/map_revision.h"
 #include "logic/objective.h"
 #include "logic/widelands_geometry.h"
+#include "logic/widelands.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 #include "random/random.h"
@@ -53,12 +54,6 @@ struct BaseImmovable;
 struct MapGenerator;
 struct PathfieldManager;
 
-#define WLMF_SUFFIX ".wmf"
-#define S2MF_SUFFIX ".swd"
-#define S2MF_SUFFIX2 ".wld"
-
-#define S2MF_MAGIC "WORLD_V1.0"
-
 // Global list of available map dimensions.
 const std::vector<int32_t> kMapDimensions = {64,  80,  96,  112, 128, 144, 160, 176, 192, 208,
                                              224, 240, 256, 272, 288, 304, 320, 336, 352, 368,
@@ -72,16 +67,6 @@ struct NoteFieldTerrainChanged {
 
 	FCoords fc;
 	MapIndex map_index;
-};
-
-/// Send when the resource of a field is changed.
-struct NoteFieldResourceChanged {
-	CAN_BE_SENT_AS_NOTE(NoteId::FieldResourceTypeChanged)
-
-	FCoords fc;
-	DescriptionIndex old_resource;
-	ResourceAmount old_initial_amount;
-	ResourceAmount old_amount;
 };
 
 struct ImmovableFound {
@@ -115,7 +100,7 @@ struct FindBobAlwaysTrue : public FindBob {
 	bool accept(Bob*) const override {
 		return true;
 	}
-	virtual ~FindBobAlwaysTrue() {
+	~FindBobAlwaysTrue() override {
 	}  // make gcc shut up
 };
 
@@ -148,9 +133,6 @@ public:
 
 	using PortSpacesSet = std::set<Coords>;
 	using Objectives = std::map<std::string, std::unique_ptr<Objective>>;
-	using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
-	using SuggestedTeamLineup =
-	   std::vector<SuggestedTeam>;  // Recommended teams to play against each other
 
 	enum {  // flags for findpath()
 
@@ -164,7 +146,7 @@ public:
 	enum { NO_SCENARIO = 0, SP_SCENARIO = 1, MP_SCENARIO = 2 };
 
 	Map();
-	virtual ~Map();
+	~Map() override;
 
 	/// Returns the correct initialized loader for the given mapfile
 	std::unique_ptr<MapLoader> get_correct_loader(const std::string& filename);
@@ -181,7 +163,7 @@ public:
 	    const std::string& description = _("No description defined"));
 
 	void recalc_whole_map(const World& world);
-	virtual void recalc_for_field_area(const World& world, Area<FCoords>);
+	void recalc_for_field_area(const World& world, Area<FCoords>);
 
 	/***
 	 * Ensures that resources match their adjacent terrains.
@@ -286,33 +268,35 @@ public:
 	void set_scenario_player_ai(PlayerNumber, const std::string&);
 	void set_scenario_player_closeable(PlayerNumber, bool);
 
-	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
-	NodeCaps get_max_nodecaps(const World& world, const FCoords&);
+	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, immovables etc.)
+	NodeCaps get_max_nodecaps(const World& world, const FCoords&) const;
 
 	BaseImmovable* get_immovable(const Coords&) const;
 	uint32_t find_bobs(const Area<FCoords>,
 	                   std::vector<Bob*>* list,
-	                   const FindBob& functor = FindBobAlwaysTrue());
+	                   const FindBob& functor = FindBobAlwaysTrue()) const;
 	uint32_t find_reachable_bobs(const Area<FCoords>,
 	                             std::vector<Bob*>* list,
 	                             const CheckStep&,
-	                             const FindBob& functor = FindBobAlwaysTrue());
+	                             const FindBob& functor = FindBobAlwaysTrue()) const;
 	uint32_t find_immovables(const Area<FCoords>,
 	                         std::vector<ImmovableFound>* list,
-	                         const FindImmovable& = find_immovable_always_true());
+	                         const FindImmovable& = find_immovable_always_true()) const;
 	uint32_t find_reachable_immovables(const Area<FCoords>,
 	                                   std::vector<ImmovableFound>* list,
 	                                   const CheckStep&,
-	                                   const FindImmovable& = find_immovable_always_true());
-	uint32_t find_reachable_immovables_unique(const Area<FCoords>,
-	                                          std::vector<BaseImmovable*>& list,
-	                                          const CheckStep&,
-	                                          const FindImmovable& = find_immovable_always_true());
-	uint32_t find_fields(const Area<FCoords>, std::vector<Coords>* list, const FindNode& functor);
+	                                   const FindImmovable& = find_immovable_always_true()) const;
+	uint32_t
+	find_reachable_immovables_unique(const Area<FCoords>,
+	                                 std::vector<BaseImmovable*>& list,
+	                                 const CheckStep&,
+	                                 const FindImmovable& = find_immovable_always_true()) const;
+	uint32_t
+	find_fields(const Area<FCoords>, std::vector<Coords>* list, const FindNode& functor) const;
 	uint32_t find_reachable_fields(const Area<FCoords>,
 	                               std::vector<Coords>* list,
 	                               const CheckStep&,
-	                               const FindNode&);
+	                               const FindNode&) const;
 
 	// Field logic
 	static MapIndex get_index(const Coords&, int16_t width);
@@ -370,7 +354,8 @@ public:
 	                 const int32_t persist,
 	                 Path&,
 	                 const CheckStep&,
-	                 const uint32_t flags = 0);
+	                 const uint32_t flags = 0,
+	                 const uint32_t caps_sensitivity = 0) const;
 
 	/**
 	 * We can reach a field by water either if it has MOVECAPS_SWIM or if it has
@@ -423,7 +408,8 @@ public:
 	/***
 	 * Changes the given triangle's terrain. This happens in the editor and might
 	 * happen in the game too if some kind of land increasement is implemented (like
-	 * drying swamps). The nodecaps need to be recalculated
+	 * drying swamps). The nodecaps need to be recalculated. If terrain was changed from
+	 * or to water, we need to recalculate_allows_seafaring too, depending on the situation.
 	 *
 	 * @return the radius of changes.
 	 */
@@ -435,8 +421,8 @@ public:
 	 * To qualify as valid, resources need to be surrounded by at least two matching terrains.
 	 */
 	bool is_resource_valid(const Widelands::World& world,
-	                       const Widelands::TCoords<Widelands::FCoords>& c,
-	                       DescriptionIndex curres);
+	                       const Widelands::FCoords& c,
+	                       DescriptionIndex curres) const;
 
 	// The objectives that are defined in this map if it is a scenario.
 	const Objectives& objectives() const {
@@ -452,23 +438,63 @@ public:
 	/// Translate the whole map so that the given point becomes the new origin.
 	void set_origin(const Coords&);
 
-	/// Port space specific functions
+	// Port space specific functions
+
+	/// Checks whether the maximum theoretical possible NodeCap of the field is big,
+	/// and there is room for a port space
+	bool is_port_space_allowed(const World& world, const FCoords& fc) const;
 	bool is_port_space(const Coords& c) const;
-	void set_port_space(Coords c, bool allowed);
+
+	/// If 'set', set the space at 'c' as port space, otherwise unset.
+	/// 'force' sets the port space even if it isn't viable, and is to be used for map loading only.
+	/// Returns whether the port space was set/unset successfully.
+	bool set_port_space(const World& world,
+	                    const Widelands::Coords& c,
+	                    bool set,
+	                    bool force = false,
+	                    bool recalculate_seafaring = false);
 	const PortSpacesSet& get_port_spaces() const {
 		return port_spaces_;
 	}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
-	bool allows_seafaring();
+
+	/// Return true if there are at least 2 port spaces that can be reached from each other by water
+	bool allows_seafaring() const;
+	/// Calculate whether there are at least 2 port spaces that can be reached from each other by
+	/// water and set the allows_seafaring property
+	void recalculate_allows_seafaring();
+	/// Remove all port spaces that are not valid (Buildcap < big or not enough space for a
+	/// portdock).
+	void cleanup_port_spaces(const World& world);
 
 	/// Checks whether there are any artifacts on the map
 	bool has_artifacts();
 
-protected:  /// These functions are needed in Testclasses
+	// Visible for testing.
 	void set_size(uint32_t w, uint32_t h);
 
 private:
 	void recalc_border(const FCoords&);
+	void recalc_brightness(const FCoords&);
+	void recalc_nodecaps_pass1(const World& world, const FCoords&);
+	void recalc_nodecaps_pass2(const World& world, const FCoords& f);
+	NodeCaps
+	calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true) const;
+	NodeCaps calc_nodecaps_pass2(const World& world,
+	                             const FCoords&,
+	                             bool consider_mobs = true,
+	                             NodeCaps initcaps = CAPS_NONE) const;
+	void check_neighbour_heights(FCoords, uint32_t& radius);
+	int calc_buildsize(const World& world,
+	                   const FCoords& f,
+	                   bool avoidnature,
+	                   bool* ismine = nullptr,
+	                   bool consider_mobs = true,
+	                   NodeCaps initcaps = CAPS_NONE) const;
+	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs) const;
+	template <typename functorT>
+	void find_reachable(const Area<FCoords>&, const CheckStep&, functorT&) const;
+	template <typename functorT> void find(const Area<FCoords>&, functorT&) const;
 
 	/// # of players this map supports (!= Game's number of players!)
 	PlayerNumber nrplayers_;
@@ -499,27 +525,9 @@ private:
 	std::unique_ptr<FileSystem> filesystem_;
 
 	PortSpacesSet port_spaces_;
-	Objectives objectives_;
+	bool allows_seafaring_;
 
-	void recalc_brightness(const FCoords&);
-	void recalc_nodecaps_pass1(const World& world, const FCoords&);
-	void recalc_nodecaps_pass2(const World& world, const FCoords& f);
-	NodeCaps calc_nodecaps_pass1(const World& world, const FCoords&, bool consider_mobs = true);
-	NodeCaps calc_nodecaps_pass2(const World& world,
-	                             const FCoords&,
-	                             bool consider_mobs = true,
-	                             NodeCaps initcaps = CAPS_NONE);
-	void check_neighbour_heights(FCoords, uint32_t& radius);
-	int calc_buildsize(const World& world,
-	                   const FCoords& f,
-	                   bool avoidnature,
-	                   bool* ismine = nullptr,
-	                   bool consider_mobs = true,
-	                   NodeCaps initcaps = CAPS_NONE);
-	bool is_cycle_connected(const FCoords& start, uint32_t length, const WalkingDir* dirs);
-	template <typename functorT>
-	void find_reachable(const Area<FCoords>&, const CheckStep&, functorT&);
-	template <typename functorT> void find(const Area<FCoords>&, functorT&) const;
+	Objectives objectives_;
 
 	MapVersion map_version_;
 };

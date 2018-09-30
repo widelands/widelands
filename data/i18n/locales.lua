@@ -128,6 +128,12 @@ return {
       font = "default"
    },
 
+   fy = {
+      name = "Frysk",
+      sort_name = "Frysk",
+      font = "default"
+   },
+
    ga = {
       name = "Gaeilge",
       sort_name = "Gaeilge",
@@ -179,6 +185,12 @@ return {
    id = {
       name = "Bahasa Indonesia",
       sort_name = "Indonesia",
+      font = "default"
+   },
+
+   ig = {
+      name = "Igbo",
+      sort_name = "Igbo",
       font = "default"
    },
 
@@ -255,8 +267,8 @@ return {
    },
 
    nds = {
-      name = "Plattdütsch",
-      sort_name = "Plattdutsch",
+      name = "Plattdüütsch",
+      sort_name = "Plattduutsch",
       font = "default"
    },
 

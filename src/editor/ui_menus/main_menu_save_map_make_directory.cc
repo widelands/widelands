@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,7 @@
 #include "editor/ui_menus/main_menu_save_map_make_directory.h"
 
 #include "base/i18n.h"
-#include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
+#include "graphic/font_handler.h"
 #include "io/filesystem/layered_filesystem.h"
 
 MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const parent,
@@ -39,29 +38,24 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
            get_inner_h() - 3 * padding_ - buth_,
            padding_ / 2),
      label_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, buth_, _("Enter Directory Name:")),
-     edit_(&vbox_,
-           0,
-           0,
-           get_inner_w() - 2 * padding_,
-           0,
-           4,
-           g_gr->images().get("images/ui_basic/but1.png")),
+     edit_(&vbox_, 0, 0, get_inner_w() - 2 * padding_, 0, 4, UI::PanelStyle::kWui),
      ok_button_(this,
                 "ok",
-                UI::g_fh1->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
+                UI::g_fh->fontset()->is_rtl() ? padding_ : get_inner_w() - butw_ - padding_,
                 get_inner_h() - padding_ - buth_,
                 butw_,
                 buth_,
-                g_gr->images().get("images/ui_basic/but5.png"),
+                UI::ButtonStyle::kWuiPrimary,
                 _("OK")),
      cancel_button_(this,
                     "cancel",
-                    UI::g_fh1->fontset()->is_rtl() ? get_inner_w() - butw_ - padding_ : padding_,
+                    UI::g_fh->fontset()->is_rtl() ? get_inner_w() - butw_ - padding_ : padding_,
                     get_inner_h() - padding_ - buth_,
                     butw_,
                     buth_,
-                    g_gr->images().get("images/ui_basic/but1.png"),
-                    _("Cancel")) {
+                    UI::ButtonStyle::kWuiSecondary,
+                    _("Cancel")),
+     illegal_filename_tooltip_(FileSystem::illegal_filename_tooltip()) {
 
 	vbox_.add(&label_);
 	vbox_.add_space(padding_);
@@ -73,7 +67,7 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
 	ok_button_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
 	               boost::ref(*this), UI::Panel::Returncodes::kOk));
-	ok_button_.set_enabled(false);
+	ok_button_.set_enabled(!dirname_.empty());
 	cancel_button_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
 	               boost::ref(*this), UI::Panel::Returncodes::kBack));
@@ -87,6 +81,8 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
 void MainMenuSaveMapMakeDirectory::edit_changed() {
 	const std::string& text = edit_.text();
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
-	ok_button_.set_enabled(LayeredFileSystem::is_legal_filename(text));
+	const bool is_legal_filename = FileSystem::is_legal_filename(text);
+	ok_button_.set_enabled(is_legal_filename);
+	edit_.set_tooltip(is_legal_filename ? "" : illegal_filename_tooltip_);
 	dirname_ = text;
 }

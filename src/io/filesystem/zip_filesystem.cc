@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -217,8 +217,14 @@ bool ZipFilesystem::file_exists(const std::string& path) {
 	assert(path_in.size());
 
 	for (;;) {
-		unzGetCurrentFileInfo(zip_file_->read_handle(), &file_info, filename_inzip,
-		                      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+		const int32_t success =
+		   unzGetCurrentFileInfo(zip_file_->read_handle(), &file_info, filename_inzip,
+		                         sizeof(filename_inzip), nullptr, 0, nullptr, 0);
+
+		// Handle corrupt files
+		if (success != UNZ_OK) {
+			return false;
+		}
 
 		std::string complete_filename = zip_file_->strip_basename(filename_inzip);
 
@@ -498,10 +504,10 @@ ZipFilesystem::ZipStreamRead::~ZipStreamRead() {
 size_t ZipFilesystem::ZipStreamRead::data(void* read_data, size_t bufsize) {
 	int copied = unzReadCurrentFile(zip_file_->read_handle(), read_data, bufsize);
 	if (copied < 0) {
-		throw new DataError("Failed to read from zip file %s", zip_file_->path().c_str());
+		throw DataError("Failed to read from zip file %s", zip_file_->path().c_str());
 	}
 	if (copied == 0) {
-		throw new DataError("End of file reaced while reading zip %s", zip_file_->path().c_str());
+		throw DataError("End of file reached while reading zip %s", zip_file_->path().c_str());
 	}
 	return copied;
 }

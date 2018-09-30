@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011
-# Juanjo, 2015-2017
+# Juanjo, 2015-2018
 # Juanjo, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-05-19 07:45+0000\n"
-"PO-Revision-Date: 2017-05-20 20:21+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-04-06 16:24+0000\n"
+"PO-Revision-Date: 2018-04-07 14:53+0000\n"
 "Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "De la Nèmesi al Gènesi"
 
@@ -31,7 +32,7 @@ msgid ""
 msgstr "Després d'arribar a una estranya illa propera a l'Atlàntida, els atlants supervivents lluiten per formar una nova llar."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:67
+#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "Un lloc al qual dir llar"
 
@@ -42,7 +43,7 @@ msgid ""
 msgstr "En aquest escenari, es presentaran els edificis de producció elevada, incloent-hi la mineria."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:72
+#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "Aquesta terra és la nostra terra"
 
@@ -128,31 +129,69 @@ msgid ""
 "time, but at a high cost: her humanity and soul."
 msgstr "Quan el seu déu va perdre la fe en els atlants i va afonar la seva illa, la lluita d'una dona per demanar justícia i una segona oportunitat per a la seva gent es va convertir en llegenda. Liderant els atlants que quedaven vius, els va conduir a una nova part del món. La Jundlina es convertí en l'ésser humà més poderós del seu temps, però a un cost molt alt: la seva humanitat i ànima."
 
-#: ../../data/campaigns/campaigns.conf:78
+#: ../../data/campaigns/campaigns.conf:52
+msgid "From Water to Ice"
+msgstr "De l'aigua al gel"
+
+#: ../../data/campaigns/campaigns.conf:54
+msgid "Frisians"
+msgstr "Frisons"
+
+#: ../../data/campaigns/campaigns.conf:56
+msgid "For advanced players. Introduces the Frisians"
+msgstr "Per a jugadors avançats: presenta els frisons."
+
+#: ../../data/campaigns/campaigns.conf:57
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "Viure de l'oceà és una lluita constant. I més pels habitants frisons de la costa del Mar del Nord. Va ser l'última tempesta i inundació, la més devastadora de la memòria dels humans, només un altre exemple de les dificultats que els frisons han d'afrontar o un signe dels déus que aquesta tribu ha de buscar un altre lloc per viure?"
+
+#: ../../data/campaigns/campaigns.conf:86
+#: ../../data/campaigns/campaigns.conf:111
+#: ../../data/campaigns/campaigns.conf:123
+#: ../../data/campaigns/campaigns.conf:139
+#: ../../data/campaigns/dummy.wmf/elemental:8
+msgid "Not yet implemented"
+msgstr "Encara no s'ha implementat"
+
+#: ../../data/campaigns/campaigns.conf:91
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
 msgstr "Les costes de Malac' Mor"
 
-#: ../../data/campaigns/campaigns.conf:83
+#: ../../data/campaigns/campaigns.conf:96
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
 msgstr "Un post avançat per l'exili"
 
-#: ../../data/campaigns/campaigns.conf:88
+#: ../../data/campaigns/campaigns.conf:101
 msgid "Neptune’s Revenge"
 msgstr "La revenja de Neptú"
 
-#: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
-msgid "Not yet implemented"
-msgstr "Encara no s'ha implementat"
+#: ../../data/campaigns/campaigns.conf:106
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Sorpresa, sorpresa!"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/campaigns.conf:129
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "La gran inundació"
+
+#: ../../data/campaigns/campaigns.conf:134
+msgid "Colder than Ice"
+msgstr "Més fred que el gel"
+
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Ningú"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "Aquest mapa encara no s'ha implementat."
 
@@ -177,7 +216,39 @@ msgstr "Finalment, s'ha acabat de reparar el vaixell. Així que en Lutius i la s
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr "Durant el seu camí a casa per defensar l'imperi, els déus i els seus desitjos van sorprendre la tripulació d'en Lutius "
+msgstr "Durant el seu camí a casa per defensar l'imperi, els déus i els seus desitjos van sorprendre la tripulació d'en Lutius."
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr "Després de retornar a casa, en Lutius i el seu grup es troben amb una economia desastrosa. Caldrà resoldre tots els embussaments dels béns per reinstaurar la glòria de l'imperi."
+
+#: ../../data/campaigns/fri01.wmf/elemental:10
+msgid ""
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
+"is not wanted here?"
+msgstr "El 1.362, la tranquil·la i pacífica vida dels habitants frisons de les illes del nord va ser interrompuda per les tempestes i inundacions més grans que recorden els humans: la inundació de Sant Marcellus. És només una tempesta ordinària o un senyal dels déus dient que la comunitat frisona de l'illa de Langeness no és benvinguda?"
+
+#: ../../data/campaigns/fri01.wmf/elemental:11
+msgid ""
+"This scenario is set in a historical context, but most of the story line is "
+"fiction."
+msgstr "Aquest escenari presenta un context històric, però la major part de la línia argumental és ficció."
+
+#: ../../data/campaigns/fri02.wmf/elemental:8
+msgid "An Icy Welcome"
+msgstr "Una benvinguda glacial"
+
+#: ../../data/campaigns/fri02.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe have arrived in the North. But their arrival between "
+"the frozen steppes and the snow-covered mountains is less than welcome…"
+msgstr "En Reebaud i la seva tribu han arribat al nord. Però la seva arribada entre estepes gèlides i les muntanyes cobertes de neu no ha sigut ben acollida…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -225,7 +296,7 @@ msgstr "En aquest tutorial, aprendreu quines opcions us ofereix el Widelands per
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
-msgstr "El mar dels Arxipèlags"
+msgstr "El mar dels arxipèlags"
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:10
 msgid ""
@@ -311,11 +382,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Molt després que un meteorit xoqués contra un parell de muntanyes, la vida al cràter floreix. Dos clans lluiten ara pels preuats recursos."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Creuant l'horitzó"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Tripuleu l'embarcació i navegueu fins a l'horitzó."
 
@@ -597,13 +668,13 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr "Només un petit turó al centre de l'illa connecta quatre tribus enfrontades. Dirigiu el vostre exèrcit cap al turó i construïu-hi una fortalesa com a signe de la vostra superioritat!"
+msgstr "Només un petit turó al centre de l'illa connecta quatre tribus enfrontades. Dirigiu el vostre exèrcit cap al turó i construïu-hi edificis militars per conquerir-lo i mostrar la vostra superioritat!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr "Al centre només hi ha lloc per una fortalesa. Es pot trobar aigua en qualsevol lloc, així que no cal enviar-hi els geòlegs."
+msgstr "Al centre només hi ha lloc per un edifici militar gran. Es pot trobar aigua en qualsevol lloc, així que no cal enviar-hi els geòlegs."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"

@@ -1,3 +1,5 @@
+.. _productionsite_programs:
+
 Productionsite Program Reference
 ================================
 Productionsites can have programs that will be executed by the game engine. Each productionsite must have a program named ``work``, which will be started automatically when the productionsite is created in the game, and then repeated until the productionsite is destroyed.
@@ -64,7 +66,7 @@ A program's actions consist of a sequence of commands. A command is written as `
          "return=skipped unless economy needs snack",
          "sleep=5000",
          "consume=barbarians_bread fish,meat beer",
-         "play_sound=sound/barbarians/taverns inn 100",
+         "playsound=sound/barbarians/taverns inn 100",
          "animate=working 22000",
          "sleep=10000",
          "produce=snack"
@@ -74,20 +76,22 @@ A program's actions consist of a sequence of commands. A command is written as `
 
 The different command types and the parameters that they take are explained below.
 
+.. highlight:: default
 
 Command Types
 ^^^^^^^^^^^^^
 - `return`_
 - `call`_
-- `worker`_
+- `callworker`_
 - `sleep`_
 - `animate`_
 - `consume`_
 - `produce`_
 - `mine`_
-- `check_soldier`_
+- `checksoldier`_
+- `checkmap`_
 - `train`_
-- `play_sound`_
+- `playsound`_
 
 
 return
@@ -165,8 +169,8 @@ Parameter semantics:
 ``failure_handling_directive``
     If omitted, the value ``Ignore`` is used for ``failure_handling_method``.
 
-worker
-------
+callworker
+----------
 Calls a program of the productionsite's main worker.
 
 Parameter syntax::
@@ -268,17 +272,25 @@ is the percentage chance that a worker is gaining experience on failure - this
 is to guarantee that you can eventually extend a mine, even though it was
 exhausted for a while already.
 
-check_soldier
--------------
+checksoldier
+------------
 Returns failure unless there are a specified amount of soldiers with specified level of specified properties. This command type is subject to change.
+
+checkmap
+--------
+Checks the map for properties. At the moment, only 'seafaring' is available as parameter.
+
+Parameter syntax::
+
+  parameters ::= seafaring
 
 train
 -----
 Increases the level of a specified property of a soldier. No further documentation available.
 
-play_sound
-----------
-Plays a soundFX.
+playsound
+---------
+Plays a sound effect.
 
 Parameter syntax::
 

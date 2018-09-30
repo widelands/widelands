@@ -33,7 +33,6 @@ tribes:new_productionsite_type {
 
    aihints = {
       basic_amount = 1,
-      prohibited_till = 400,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
    },
@@ -57,7 +56,7 @@ tribes:new_productionsite_type {
             "sleep=50000",
             "return=skipped unless economy needs marble_column",
             "consume=marble:2",
-            "play_sound=sound/stonecutting stonemason 192",
+            "playsound=sound/stonecutting stonemason 192",
             "animate=working 32000",
             "produce=marble_column"
          }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,25 +36,9 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
+#include "website/website_common.h"
 
 using namespace Widelands;
-
-namespace {
-
-// Setup the static objects Widelands needs to operate and initializes systems.
-void initialize() {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
-	}
-
-	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
-
-	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
-}
-
-}  // namespace
 
 int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
@@ -75,9 +59,8 @@ int main(int argc, char** argv) {
 		FileSystem* in_out_filesystem = &FileSystem::create(map_dir);
 		g_fs->add_file_system(in_out_filesystem);
 
-		Map* map = new Map();
 		EditorGameBase egbase(nullptr);
-		egbase.set_map(map);
+		auto* map = egbase.mutable_map();
 		std::unique_ptr<Widelands::MapLoader> ml(map->get_correct_loader(map_file));
 
 		if (!ml) {
@@ -143,9 +126,12 @@ int main(int argc, char** argv) {
 			write_string("}\n");
 			fw.write(*in_out_filesystem, (map_file + ".json").c_str());
 		}
+		egbase.cleanup_objects();
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
+		cleanup();
 		return 1;
 	}
+	cleanup();
 	return 0;
 }

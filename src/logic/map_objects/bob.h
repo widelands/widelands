@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,6 @@
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
-#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/map_object.h"
 #include "logic/map_objects/walkingdir.h"
 #include "logic/widelands_geometry.h"
@@ -263,14 +262,11 @@ public:
 	// the field associated with this bob (if it is walking, that is its
 	// starting field) in pixel space of 'dst' (including scale). The 'scale' is
 	// required to draw the bob in the right size.
-	virtual void draw(const EditorGameBase&,
-	                  const TextToDraw& draw_text,
-	                  const Vector2f& field_on_dst,
-	                  float scale,
-	                  RenderTarget* dst) const;
+	virtual void
+	draw(const EditorGameBase&, const Vector2f& field_on_dst, float scale, RenderTarget* dst) const;
 
 	// For debug
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// default tasks
 	void reset_tasks(Game&);
@@ -278,6 +274,7 @@ public:
 	// TODO(feature-Hasi50): correct (?) Send a signal that may switch to some other \ref Task
 	void send_signal(Game&, char const*);
 	void start_task_idle(Game&, uint32_t anim, int32_t timeout);
+	bool is_idle();
 
 	/// This can fail (and return false). Therefore the caller must check the
 	/// result and find something else for the bob to do. Otherwise there will
@@ -350,7 +347,7 @@ public:
 
 protected:
 	explicit Bob(const BobDescr& descr);
-	virtual ~Bob();
+	~Bob() override;
 
 private:
 	void do_act(Game&);

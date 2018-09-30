@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,19 +74,6 @@ RealFSImpl::RealFSImpl(const std::string& Directory) : directory_(Directory) {
  */
 bool RealFSImpl::is_writable() const {
 	// Should be checked here (ondisk state can change)
-	return true;
-}
-
-/// returns true, if the file is writeable
-bool RealFSImpl::file_is_writeable(const std::string& path) {
-	std::string fullname;
-	fullname = canonicalize_name(path);
-
-	// we call fopen with "a" == append to be sure nothing gets overwritten
-	FILE* const f = fopen(fullname.c_str(), "a");
-	if (!f)
-		return false;
-	fclose(f);
 	return true;
 }
 
@@ -455,7 +442,7 @@ struct RealFSStreamRead : public StreamRead {
 			throw wexception("could not open %s for reading", fname.c_str());
 	}
 
-	~RealFSStreamRead() {
+	~RealFSStreamRead() override {
 		fclose(file_);
 	}
 
@@ -493,7 +480,7 @@ struct RealFSStreamWrite : public StreamWrite {
 			throw wexception("could not open %s for writing", fname.c_str());
 	}
 
-	~RealFSStreamWrite() {
+	~RealFSStreamWrite() override {
 		fclose(file_);
 	}
 

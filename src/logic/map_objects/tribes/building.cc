@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,6 @@
 #include "economy/flag.h"
 #include "economy/input_queue.h"
 #include "economy/request.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/filesystem.h"
@@ -69,11 +68,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
      enhanced_building_(false),
      hints_(table.get_table("aihints")),
      vision_range_(0) {
+	if (helptext_script().empty()) {
+		throw GameDataError("Building %s has no helptext script", name().c_str());
+	}
 	if (!is_animation_known("idle")) {
-		throw GameDataError("Building %s has no idle animation", table.get_string("name").c_str());
+		throw GameDataError("Building %s has no idle animation", name().c_str());
 	}
 	if (icon_filename().empty()) {
-		throw GameDataError("Building %s needs a menu icon", table.get_string("name").c_str());
+		throw GameDataError("Building %s needs a menu icon", name().c_str());
 	}
 
 	i18n::Textdomain td("tribes");
@@ -155,8 +157,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		}
 	}
 
-	helptext_script_ = table.get_string("helptext_script");
-
 	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
 
 	if (table.has_key("vision_range")) {
@@ -165,14 +165,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 }
 
 Building& BuildingDescr::create(EditorGameBase& egbase,
-                                Player& owner,
+                                Player* owner,
                                 Coords const pos,
                                 bool const construct,
                                 bool loading,
                                 Building::FormerBuildings const former_buildings) const {
 	Building& b = construct ? create_constructionsite() : create_object();
 	b.position_ = pos;
-	b.set_owner(&owner);
+	b.set_owner(owner);
 	for (DescriptionIndex idx : former_buildings) {
 		b.old_buildings_.push_back(idx);
 	}
@@ -195,6 +195,10 @@ const BuildingHints& BuildingDescr::hints() const {
 
 void BuildingDescr::set_hints_trainingsites_max_percent(int percent) {
 	hints_.set_trainingsites_max_percent(percent);
+}
+
+uint32_t BuildingDescr::get_unoccupied_animation() const {
+	return get_animation(is_animation_known("unoccupied") ? "unoccupied" : "idle");
 }
 
 /**
@@ -329,7 +333,7 @@ bool Building::init(EditorGameBase& egbase) {
 	PlayerImmovable::init(egbase);
 
 	// Set the building onto the map
-	Map& map = egbase.map();
+	const Map& map = egbase.map();
 	Coords neighb;
 
 	set_position(egbase, position_);
@@ -351,16 +355,13 @@ bool Building::init(EditorGameBase& egbase) {
 	{
 		Flag* flag = dynamic_cast<Flag*>(map.get_immovable(neighb));
 		if (!flag)
-			flag = new Flag(egbase, owner(), neighb);
+			flag = new Flag(egbase, get_owner(), neighb);
 		flag_ = flag;
 		flag->attach_building(egbase, *this);
 	}
 
 	// Start the animation
-	if (descr().is_animation_known("unoccupied"))
-		start_animation(egbase, descr().get_animation("unoccupied"));
-	else
-		start_animation(egbase, descr().get_animation("idle"));
+	start_animation(egbase, descr().get_unoccupied_animation());
 
 	leave_time_ = egbase.get_gametime();
 	return true;
@@ -368,13 +369,13 @@ bool Building::init(EditorGameBase& egbase) {
 
 void Building::cleanup(EditorGameBase& egbase) {
 	if (defeating_player_) {
-		Player& defeating_player = egbase.player(defeating_player_);
+		Player* defeating_player = egbase.get_player(defeating_player_);
 		if (descr().get_conquers()) {
-			owner().count_msite_lost();
-			defeating_player.count_msite_defeated();
+			get_owner()->count_msite_lost();
+			defeating_player->count_msite_defeated();
 		} else {
-			owner().count_civil_bld_lost();
-			defeating_player.count_civil_bld_defeated();
+			get_owner()->count_civil_bld_lost();
+			defeating_player->count_civil_bld_defeated();
 		}
 	}
 
@@ -385,7 +386,7 @@ void Building::cleanup(EditorGameBase& egbase) {
 	unset_position(egbase, position_);
 
 	if (get_size() == BIG) {
-		Map& map = egbase.map();
+		const Map& map = egbase.map();
 		Coords neighb;
 
 		map.get_ln(position_, &neighb);
@@ -421,7 +422,7 @@ BaseImmovable::PositionList Building::get_positions(const EditorGameBase& egbase
 
 	rv.push_back(position_);
 	if (get_size() == BIG) {
-		Map& map = egbase.map();
+		const Map& map = egbase.map();
 		Coords neighb;
 
 		map.get_ln(position_, &neighb);
@@ -443,7 +444,6 @@ applicable.
 ===============
 */
 void Building::destroy(EditorGameBase& egbase) {
-	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kDeleted));
 	const bool fire = burn_on_destroy();
 	const Coords pos = position_;
 	Player* building_owner = get_owner();
@@ -457,20 +457,20 @@ void Building::destroy(EditorGameBase& egbase) {
 	}
 }
 
-std::string Building::info_string(const InfoStringFormat& format) {
+std::string Building::info_string(const MapObject::InfoStringType format) {
 	std::string result;
 	switch (format) {
-	case InfoStringFormat::kCensus:
+	case MapObject::InfoStringType::kCensus:
 		if (upcast(ConstructionSite const, constructionsite, this)) {
 			result = constructionsite->building().descname();
 		} else {
 			result = descr().descname();
 		}
 		break;
-	case InfoStringFormat::kStatistics:
+	case MapObject::InfoStringType::kStatistics:
 		result = update_and_get_statistics_string();
 		break;
-	case InfoStringFormat::kTooltip:
+	case MapObject::InfoStringType::kTooltip:
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
@@ -600,7 +600,6 @@ bool Building::fetch_from_flag(Game&) {
 }
 
 void Building::draw(uint32_t gametime,
-                    const TextToDraw draw_text,
                     const Vector2f& point_on_dst,
                     const float scale,
                     RenderTarget* dst) {
@@ -608,24 +607,6 @@ void Building::draw(uint32_t gametime,
 	   point_on_dst, scale, anim_, gametime - animstart_, get_owner()->get_playercolor());
 
 	//  door animation?
-
-	//  overlay strings (draw when enabled)
-	draw_info(draw_text, point_on_dst, scale, dst);
-}
-
-/*
-===============
-Draw overlay help strings when enabled.
-===============
-*/
-void Building::draw_info(const TextToDraw draw_text,
-                         const Vector2f& point_on_dst,
-                         const float scale,
-                         RenderTarget* dst) {
-	const std::string statistics_string =
-	   (draw_text & TextToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
-	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
-	             scale, dst);
 }
 
 int32_t
@@ -669,7 +650,7 @@ void Building::set_priority(int32_t const type,
 	}
 }
 
-void Building::log_general_info(const EditorGameBase& egbase) {
+void Building::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 
 	molog("position: (%i, %i)\n", position_.x, position_.y);
@@ -683,7 +664,7 @@ void Building::log_general_info(const EditorGameBase& egbase) {
 
 	molog("leave_time: %i\n", leave_time_);
 
-	molog("leave_queue.size(): %lu\n", static_cast<long unsigned int>(leave_queue_.size()));
+	molog("leave_queue.size(): %" PRIuS "\n", leave_queue_.size());
 	FORMAT_WARNINGS_OFF;
 	molog("leave_allow.get(): %p\n", leave_allow_.get(egbase));
 	FORMAT_WARNINGS_ON;
@@ -726,13 +707,14 @@ void Building::set_seeing(bool see) {
 	if (see == seeing_)
 		return;
 
-	Player& player = owner();
-	Map& map = player.egbase().map();
+	Player* player = get_owner();
+	const Map& map = player->egbase().map();
 
-	if (see)
-		player.see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
-	else
-		player.unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	if (see) {
+		player->see_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	} else {
+		player->unsee_area(Area<FCoords>(map.get_fcoords(get_position()), descr().vision_range()));
+	}
 
 	seeing_ = see;
 }
@@ -777,9 +759,9 @@ void Building::send_message(Game& game,
 	                                         (link_to_building_lifetime ? serial_ : 0)));
 
 	if (throttle_time) {
-		owner().add_message_with_timeout(game, std::move(msg), throttle_time, throttle_radius);
+		get_owner()->add_message_with_timeout(game, std::move(msg), throttle_time, throttle_radius);
 	} else {
-		owner().add_message(game, std::move(msg));
+		get_owner()->add_message(game, std::move(msg));
 	}
 }
 }

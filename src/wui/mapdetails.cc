@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,8 +27,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
+#include "graphic/font_handler.h"
 #include "graphic/text_constants.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_controller.h"
@@ -38,37 +37,8 @@
 #include "ui_basic/scrollbar.h"
 #include "wui/map_tags.h"
 
-namespace {
-std::string as_header(const std::string& txt, MapDetails::Style style, bool is_first = false) {
-	switch (style) {
-	case MapDetails::Style::kFsMenu:
-		return (boost::format("<p><font size=%i bold=1 shadow=1>%s%s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=9>") % richtext_escape(txt))
-		   .str();
-	case MapDetails::Style::kWui:
-		return (boost::format("<p><font size=%i bold=1 color=D1D1D1>%s%s</font></p>") %
-		        UI_FONT_SIZE_SMALL % (is_first ? "" : "<vspace gap=6>") % richtext_escape(txt))
-		   .str();
-	}
-	NEVER_HERE();
-}
-std::string as_content(const std::string& txt, MapDetails::Style style) {
-	switch (style) {
-	case MapDetails::Style::kFsMenu:
-		return (boost::format(
-		           "<p><font size=%i bold=1 color=D1D1D1 shadow=1><vspace gap=2>%s</font></p>") %
-		        UI_FONT_SIZE_SMALL % richtext_escape(txt))
-		   .str();
-	case MapDetails::Style::kWui:
-		return (boost::format("<p><font size=%i><vspace gap=2>%s</font></p>") %
-		        (UI_FONT_SIZE_SMALL - 2) % richtext_escape(txt))
-		   .str();
-	}
-	NEVER_HERE();
-}
-}  // namespace
-
-MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, Style style)
+MapDetails::MapDetails(
+   Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, UI::PanelStyle style)
    : UI::Panel(parent, x, y, w, h),
 
      style_(style),
@@ -79,15 +49,13 @@ MapDetails::MapDetails(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h
                  0,
                  UI::Scrollbar::kSize,
                  0,
+                 style,
                  "",
                  UI::Align::kLeft,
-                 g_gr->images().get("images/ui_basic/but3.png"),
                  UI::MultilineTextarea::ScrollMode::kNoScrolling),
-     descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, ""),
+     descr_(&main_box_, 0, 0, UI::Scrollbar::kSize, 0, style, ""),
      suggested_teams_box_(
         new UI::SuggestedTeamsBox(this, 0, 0, UI::Box::Vertical, padding_, 0, w)) {
-	name_label_.force_new_renderer();
-	descr_.force_new_renderer();
 
 	main_box_.add(&name_label_);
 	main_box_.add_space(padding_);
@@ -120,7 +88,7 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
 		name_label_.set_text((boost::format("<rt>%s%s</rt>") %
-		                      as_header(_("Directory:"), style_, true) %
+		                      as_heading(_("Directory:"), style_, true) %
 		                      as_content(mapdata.localized_name, style_))
 		                        .str());
 		main_box_.set_size(main_box_.get_w(), get_h());
@@ -128,8 +96,8 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	} else {  // Show map information
 		name_label_.set_text(
 		   (boost::format("<rt>%s%s</rt>") %
-		    as_header(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario:") : _("Map:"),
-		              style_, true) %
+		    as_heading(mapdata.maptype == MapData::MapType::kScenario ? _("Scenario:") : _("Map:"),
+		               style_, true) %
 		    as_content(localize_mapname ? mapdata.localized_name : mapdata.name, style_))
 		      .str());
 
@@ -149,11 +117,13 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 				     mapdata.localized_name)
 				       .str());
 			}
+		} else {
+			name_label_.set_tooltip("");
 		}
 
 		// Show map information
 		std::string description =
-		   as_header(ngettext("Author:", "Authors:", mapdata.authors.get_number()), style_);
+		   as_heading(ngettext("Author:", "Authors:", mapdata.authors.get_number()), style_);
 		description =
 		   (boost::format("%s%s") % description % as_content(mapdata.authors.get_names(), style_))
 		      .str();
@@ -163,25 +133,24 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 			tags.push_back(localize_tag(tag));
 		}
 		std::sort(tags.begin(), tags.end());
-		description = (boost::format("%s%s") % description % as_header(_("Tags:"), style_)).str();
+		description = (boost::format("%s%s") % description % as_heading(_("Tags:"), style_)).str();
 		description = (boost::format("%s%s") % description %
 		               as_content(i18n::localize_list(tags, i18n::ConcatenateWith::COMMA), style_))
 		                 .str();
 
 		description =
-		   (boost::format("%s%s") % description % as_header(_("Description:"), style_)).str();
+		   (boost::format("%s%s") % description % as_heading(_("Description:"), style_)).str();
 		description =
 		   (boost::format("%s%s") % description % as_content(mapdata.description, style_)).str();
 
 		if (!mapdata.hint.empty()) {
 			/** TRANSLATORS: Map hint header when selecting a map. */
-			description = (boost::format("%s%s") % description % as_header(_("Hint:"), style_)).str();
+			description = (boost::format("%s%s") % description % as_heading(_("Hint:"), style_)).str();
 			description =
 			   (boost::format("%s%s") % description % as_content(mapdata.hint, style_)).str();
 		}
 
-		description = (boost::format("<rt>%s</rt>") % description).str();
-		descr_.set_text(description);
+		descr_.set_text(as_richtext(description));
 
 		// Show / hide suggested teams
 		if (mapdata.suggested_teams.empty()) {

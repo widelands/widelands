@@ -175,7 +175,7 @@ def load_hunspell_locales(locale):
     hunspell_locales['ro'].append(HunspellLocale('ro_RO'))
     hunspell_locales['ru'].append(HunspellLocale('ru_RU'))
     hunspell_locales['rw'].append(HunspellLocale('rw_RW'))
-    hunspell_locales['si'].append(HunspellLocale('si_LK'))
+    hunspell_locales['si'].append(HunspellLocale('si'))
     hunspell_locales['sk'].append(HunspellLocale('sk_SK'))
     hunspell_locales['sl'].append(HunspellLocale('sl_SI'))
     hunspell_locales['sr'].append(HunspellLocale('sr_RS'))
@@ -512,8 +512,8 @@ def check_translations_with_glossary(input_path, output_path, glossary_file, onl
                     hit.term, hit.translation, hit.source, hit.target, hit.po_file, hit.location)
                 locale_result = locale_result + row
                 counter = counter + 1
-        dest_filepath = output_path + '/glossary_check_' + locale + '.csv'
-        with open(dest_filepath, 'wt') as dest_file:
+        dest_filepath = make_path(output_path, locale)
+        with open(dest_filepath + '/glossary_check.csv', 'wt') as dest_file:
             dest_file.write(locale_result)
         # Uncomment this line to print a statistic of the number of hits for each locale
         # print("%s\t%d"%(locale, counter))
@@ -547,7 +547,8 @@ def main():
 
         input_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '../po'))
-        output_path = make_path(os.path.dirname(__file__), '../po_validation')
+        output_path = make_path(os.path.dirname(
+            __file__), '../po_validation/translators')
         result = check_translations_with_glossary(
             input_path, output_path, glossary_file, locale)
         print('Current time: %s' % time.ctime())

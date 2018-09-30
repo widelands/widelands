@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,15 +21,13 @@
 
 #include <boost/bind.hpp>
 
-#include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "graphic/texture.h"
-#include "ui_basic/button.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/scrollbar.h"
 
@@ -47,16 +45,17 @@ Table<void*>::Table(Panel* const parent,
                     int32_t y,
                     uint32_t w,
                     uint32_t h,
-                    const Image* button_background,
+                    PanelStyle style,
                     TableRows rowtype)
    : Panel(parent, x, y, w, h),
      total_width_(0),
      headerheight_(text_height() + 4),
      lineheight_(text_height()),
-     button_background_(button_background),
+     button_style_(style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuMenu :
+                                                      UI::ButtonStyle::kWuiSecondary),
      scrollbar_(nullptr),
      scrollbar_filler_button_(
-        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_background, "")),
+        new Button(this, "", 0, 0, Scrollbar::kSize, headerheight_, button_style_, "")),
      scrollpos_(0),
      selection_(no_selection_index()),
      last_multiselect_(no_selection_index()),
@@ -71,7 +70,7 @@ Table<void*>::Table(Panel* const parent,
 	set_can_focus(true);
 	scrollbar_filler_button_->set_visible(false);
 	scrollbar_ = new Scrollbar(this, get_w() - Scrollbar::kSize, headerheight_, Scrollbar::kSize,
-	                           get_h() - headerheight_, button_background);
+	                           get_h() - headerheight_, style);
 	scrollbar_->moved.connect(boost::bind(&Table::set_scrollpos, this, _1));
 	scrollbar_->set_steps(1);
 	scrollbar_->set_singlestepsize(lineheight_);
@@ -113,8 +112,8 @@ void Table<void*>::add_column(uint32_t const width,
 		Column c;
 		// All columns have a title button that is clickable for sorting.
 		// The title text can be empty.
-		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_background_,
-		                   title, tooltip_string);
+		c.btn = new Button(this, title, complete_width, 0, width, headerheight_, button_style_, title,
+		                   tooltip_string);
 		c.btn->sigclicked.connect(
 		   boost::bind(&Table::header_button_clicked, boost::ref(*this), columns_.size()));
 		c.width = width;
@@ -133,6 +132,13 @@ void Table<void*>::set_column_title(uint8_t const col, const std::string& title)
 	Column& column = columns_.at(col);
 	assert(column.btn);
 	column.btn->set_title(title);
+}
+
+void Table<void*>::set_column_tooltip(uint8_t col, const std::string& text) {
+	assert(col < columns_.size());
+	Column& column = columns_.at(col);
+	assert(column.btn);
+	column.btn->set_tooltip(text);
 }
 
 /**
@@ -295,7 +301,7 @@ void Table<void*>::draw(RenderTarget& dst) {
 				continue;
 			}
 			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh1->render(as_uifont(richtext_escape(entry_string)));
+			   UI::g_fh->render(as_uifont(richtext_escape(entry_string)));
 
 			// Fix text alignment for BiDi languages if the entry contains an RTL character. We want
 			// this always on, e.g. for mixed language savegame filenames.
@@ -330,6 +336,21 @@ void Table<void*>::draw(RenderTarget& dst) {
 bool Table<void*>::handle_key(bool down, SDL_Keysym code) {
 	if (down) {
 		switch (code.sym) {
+		case SDLK_ESCAPE:
+			cancel();
+			return true;
+
+		case SDLK_TAB:
+			// Let the panel handle the tab key
+			return get_parent()->handle_key(true, code);
+
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			if (selection_ != no_selection_index()) {
+				double_clicked(selection_);
+			}
+			return true;
+
 		case SDLK_a:
 			if (is_multiselect_ && (code.mod & KMOD_CTRL) && !empty()) {
 				multiselect_.clear();
@@ -416,25 +437,8 @@ void Table<void*>::move_selection(const int32_t offset) {
 		new_selection = entry_records_.size() - 1;
 
 	multiselect(new_selection);
-
 	// Scroll to newly selected entry
-	if (scrollbar_) {
-		// Keep an unselected item above or below
-		int32_t scroll_item = new_selection + offset;
-		if (scroll_item < 0)
-			scroll_item = 0;
-		if (scroll_item > static_cast<int32_t>(entry_records_.size())) {
-			scroll_item = entry_records_.size();
-		}
-
-		// Ensure scroll_item is visible
-		if (static_cast<int32_t>(scroll_item * get_lineheight()) < scrollpos_) {
-			scrollbar_->set_scrollpos(scroll_item * get_lineheight());
-		} else if (static_cast<int32_t>((scroll_item + 1) * get_lineheight() - get_inner_h()) >
-		           scrollpos_) {
-			scrollbar_->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
-		}
-	}
+	scroll_to_item(new_selection + offset);
 }
 
 /**
@@ -443,18 +447,26 @@ void Table<void*>::move_selection(const int32_t offset) {
  * Args: i  the entry to select
  */
 void Table<void*>::select(const uint32_t i) {
-	if (empty() || selection_ == i || i == no_selection_index())
+	if (empty() || i == no_selection_index())
 		return;
 
 	selection_ = i;
 	if (is_multiselect_) {
 		multiselect_.insert(selection_);
+		last_multiselect_ = selection_;
 	}
 
 	selected(selection_);
 }
 
-void Table<void*>::multiselect(uint32_t row) {
+/**
+ * If 'force' is true, adds the given 'row' to the selection, ignoring everything else.
+ */
+void Table<void*>::multiselect(uint32_t row, bool force) {
+	if (force) {
+		select(row);
+		return;
+	}
 	if (is_multiselect_) {
 		// Ranged selection with Shift
 		if (SDL_GetModState() & KMOD_SHIFT) {
@@ -481,6 +493,25 @@ void Table<void*>::multiselect(uint32_t row) {
 		last_multiselect_ = row;
 	} else {
 		select(row);
+	}
+}
+
+// Scroll to the given item. Out of range items will be corrected automatically.
+void Table<void*>::scroll_to_item(int32_t item) {
+	if (scrollbar_) {
+		// Correct out of range items
+		if (item < 0) {
+			item = 0;
+		} else if (item >= static_cast<int32_t>(entry_records_.size())) {
+			item = entry_records_.size() - 1;
+		}
+
+		// Ensure item is visible
+		if (static_cast<int32_t>(item * get_lineheight()) < scrollpos_) {
+			scrollbar_->set_scrollpos(item * get_lineheight());
+		} else if (static_cast<int32_t>((item + 2) * get_lineheight() - get_inner_h()) > scrollpos_) {
+			scrollbar_->set_scrollpos((item + 3) * get_lineheight() - get_inner_h());
+		}
 	}
 }
 
@@ -528,6 +559,10 @@ void Table<void*>::set_scrollpos(int32_t const i) {
 	scrollpos_ = i;
 }
 
+void Table<void*>::scroll_to_top() {
+	scrollbar_->set_scrollpos(0);
+}
+
 /**
  * Remove the table entry at the given (zero-based) index.
  */
@@ -543,10 +578,25 @@ void Table<void*>::remove(const uint32_t i) {
 	} else if (selection_ > i && selection_ != no_selection_index()) {
 		selection_--;
 	}
-	if (is_multiselect_ && selection_ != no_selection_index()) {
-		multiselect_.insert(selection_);
+	if (is_multiselect_) {
+		if (selection_ != no_selection_index()) {
+			multiselect_.insert(selection_);
+		}
+		last_multiselect_ = selection_;
 	}
 	layout();
+}
+
+/**
+ * Remove the given table entry if it exists.
+ */
+void Table<void*>::remove_entry(const void* const entry) {
+	for (uint32_t i = 0; i < entry_records_.size(); ++i) {
+		if (entry_records_[i]->entry() == entry) {
+			remove(i);
+			return;
+		}
+	}
 }
 
 bool Table<void*>::sort_helper(uint32_t a, uint32_t b) {

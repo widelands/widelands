@@ -1,15 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# ks k, 2017
+# ks k, 2017
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-06-09 16:49+0000\n"
-"PO-Revision-Date: 2017-06-11 07:37+0000\n"
-"Last-Translator: TaeMin An <kavern02@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-08 14:43+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,9 +20,9 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
-msgstr "신벌에서 창세기로"
+msgstr "천벌에서 신세기까지"
 
 #: ../../data/campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -29,7 +31,7 @@ msgid ""
 msgstr "아틀란티스에 가까운 신비로운 섬에 상륙한 후에, 남아있는 아틀란티스인들은 스스로를 위한 새로운 집을 만들려 노력합니다."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:67
+#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "고향을 부르는 곳"
 
@@ -40,7 +42,7 @@ msgid ""
 msgstr "이번 시나리오에서는, 채굴을 포함해서 더 높은 생산 건물을 소개할 것입니다."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:72
+#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "이 땅은 우리 땅"
 
@@ -77,7 +79,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "찻'카루스가 죽었을 때, 그는 늙은 남자였고, 세 명의 강하고 야망에 찬 아들들의 아버지였고, 고대의 숲에 대해 기꺼이 저항을 다짐한 어떤 적들과도 겨룰 수 있는 군대의 사령관이였습니다. 비록 그의 영광스러운 치세의 끝에, 찻'카루스는 그의 맏아들인, 쓰론을, 부족의 사령관을 이어받는 자리에 선택했습니다만 - 그의 두 동생들에게는 만족스럽지 못한 결정이었습니다. 늙은 사령관은 알고 있었습니다. 그의 아버지가 쓰론을 임명했을 때, 그는 나무들 사이의 왕좌의 고향으로 알려진, 알'툰란의 수도에 있었고, 그의 군대를 아버지의 시신을 묻었던 높은 언덕으로 물렸습니다. 거기서 그는 신들과 그의 아버지의 영혼에 대고 그가 질서를 재정립하기 위해 돌아올 것을 맹세했습니다. 그의 동생들이 쓰론과 그가 알'툰란의 경계를 지키기 위해 남긴 소수의 군대들에 대항하는 맹목적인 전쟁에 정신을 쏟을 동안, 젊은 사령관은 야망이 넘치는 동생들을 다시 결속하고 통일된 깃발 아래서 부족이 다시 한번 진군할 수 있게 하는 방법을 찾고 있습니다."
+msgstr "찻'카루스가 죽었을 때, 그는 노인이었고, 강하고 야심찬 세 아들들의 아버지 였고, 고대의 숲에 대해 기꺼이 저항을 다짐한 어떤 적들과도 겨룰 수 있는 군대의 사령관이였습니다. 비록 그의 영광스러운 치세의 끝에, 찻'카루스는 그의 맏아들인, 쓰론을, 부족의 사령관을 이어받는 자리에 선택했습니다만 - 그의 두 동생들에게는 만족스럽지 못한 결정이었습니다. 늙은 사령관은 알고 있었습니다. 그의 아버지가 쓰론을 임명했을 때, 그는 나무들 사이의 왕좌의 고향으로 알려진, 알'툰란의 수도에 있었고, 그의 군대를 아버지의 시신을 묻었던 높은 언덕으로 물렸습니다. 거기서 그는 신들과 그의 아버지의 영혼에 대고 그가 질서를 재정립하기 위해 돌아올 것을 맹세했습니다. 그의 동생들이 쓰론과 그가 알'툰란의 경계를 지키기 위해 남긴 소수의 군대들에 대항하는 맹목적인 전쟁에 정신을 쏟을 동안, 젊은 사령관은 야망이 넘치는 동생들을 다시 결속하고 통일된 깃발 아래서 부족이 다시 한번 진군할 수 있게 하는 방법을 찾고 있습니다."
 
 #: ../../data/campaigns/campaigns.conf:35
 msgid "The Months of Exile"
@@ -126,31 +128,69 @@ msgid ""
 "time, but at a high cost: her humanity and soul."
 msgstr "그들의 신이 아틀란티스인들에 대한 믿음을 버리고 섬을 가라앉혔을 때, 한 여자의 정의와 그녀의 사람들을 위한 두번째 기회에 대한 몸부림은 전설의 일부가 될 것입니다. 살아남은 아틀란티스인들을 새로운 세계의 일부에 있는 새로운 미래로 이끌면서, 준들리나는 그녀 시대의 가장 강력한 인간이 되었습니다만, 비싼 대가를 치뤘습니다: 그녀의 인간성과 영혼을."
 
-#: ../../data/campaigns/campaigns.conf:78
+#: ../../data/campaigns/campaigns.conf:52
+msgid "From Water to Ice"
+msgstr "물에서 얼음으로"
+
+#: ../../data/campaigns/campaigns.conf:54
+msgid "Frisians"
+msgstr "프리지아인"
+
+#: ../../data/campaigns/campaigns.conf:56
+msgid "For advanced players. Introduces the Frisians"
+msgstr "고급 선수들을 위해서. 프리지아인을 소개합니다."
+
+#: ../../data/campaigns/campaigns.conf:57
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr ""
+
+#: ../../data/campaigns/campaigns.conf:86
+#: ../../data/campaigns/campaigns.conf:111
+#: ../../data/campaigns/campaigns.conf:123
+#: ../../data/campaigns/campaigns.conf:139
+#: ../../data/campaigns/dummy.wmf/elemental:8
+msgid "Not yet implemented"
+msgstr "아직 구현되지 않았음"
+
+#: ../../data/campaigns/campaigns.conf:91
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
 msgstr "말락'모르에서의 좌초"
 
-#: ../../data/campaigns/campaigns.conf:83
+#: ../../data/campaigns/campaigns.conf:96
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
 msgstr "망명을 위한 전초기지"
 
-#: ../../data/campaigns/campaigns.conf:88
+#: ../../data/campaigns/campaigns.conf:101
 msgid "Neptune’s Revenge"
-msgstr "넵튠의 복수"
+msgstr "해왕성의 복수"
 
-#: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
-msgid "Not yet implemented"
-msgstr "아직 구현되지 않았음"
+#: ../../data/campaigns/campaigns.conf:106
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "놀람, 놀라움!"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/campaigns.conf:129
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "폭풍 홍수"
+
+#: ../../data/campaigns/campaigns.conf:134
+msgid "Colder than Ice"
+msgstr "얼음보다 차갑다"
+
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "아무도 없음"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "죄송하지만, 이 지도는 아직 구현되지 않았습니다."
 
@@ -176,6 +216,38 @@ msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
 msgstr "제국을 방어하기 위해 고향으로 돌아가는 길에서, 루티우스의 부하들은 신들의 의지에 놀랐습니다."
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:10
+msgid ""
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
+"is not wanted here?"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/elemental:11
+msgid ""
+"This scenario is set in a historical context, but most of the story line is "
+"fiction."
+msgstr ""
+
+#: ../../data/campaigns/fri02.wmf/elemental:8
+msgid "An Icy Welcome"
+msgstr "싸늘한 환영식"
+
+#: ../../data/campaigns/fri02.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe have arrived in the North. But their arrival between "
+"the frozen steppes and the snow-covered mountains is less than welcome…"
+msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -241,15 +313,15 @@ msgid ""
 "Large plots are rare on those small islands. Prioritize construction of "
 "large buildings on them. Sometimes you will need big military buildings to "
 "expand all the way to the next island. The AI will perform poorly."
-msgstr "이 작은 섬들에는 큰 건설 터가 희귀합니다. 큰 건물들을 건설하는 것을 우선시하십시오. 때때로 다른 섬으로 향하는 길을 확장할 대형 군사 건물들이 필요할 것입니다. AI는 거지같이 활약합니다."
+msgstr "이 작은 섬들에는 큰 건설 터가 부족합니다. 큰 건물을 먼저 지으십시오. 때때로 다른 섬으로 향하는 길을 확장할 대형 군사 건물들이 필요할 것입니다. AI는 거지같이 활약합니다."
 
 #: ../../data/maps/Atoll.wmf/elemental:8
 msgid "Atoll"
-msgstr "환초"
+msgstr "고리모양 산호섬"
 
 #: ../../data/maps/Atoll.wmf/elemental:10
 msgid "Who will be the real king of the big atoll?"
-msgstr "누가 큰 환초의 진정한 왕이 되겠습니까?"
+msgstr "누가 거대한 고리모양 산호섬의 진정한 왕이 되겠습니까?"
 
 #: ../../data/maps/Calvisson.wmf/elemental:8
 msgid "Calvisson"
@@ -264,7 +336,7 @@ msgstr "이 갈라진 시골의 아름다움에 정착하는 것은 하나의 �
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
-msgstr "체크메이트"
+msgstr "진퇴양난"
 
 #: ../../data/maps/Checkmate.wmf/elemental:10
 msgid ""
@@ -309,11 +381,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "유성우가 한 쌍의 산맥에 떨어지고 오랜 후에, 삶이 분화구에서 깨어납니다. 두 부족은 이제 풍부한 자원을 두고 싸웁니다."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "지평선을 가로질러"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "선박에 사람들을 태우고 지평선으로 항해하십시오."
 
@@ -326,11 +398,11 @@ msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
-msgstr ""
+msgstr "4곳의 부족이 가장 가까운 이웃과 믿음을 초월한 재물을 약속할 금광산에 먼저 도착하기위해 고심합니다. 하지만 남은 두곳이 자원을 현명하게 공유 할 수 있겠습니까?"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
-msgstr ""
+msgstr "돌로미티(백운암)"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:10
 msgid ""
@@ -339,7 +411,7 @@ msgid ""
 "reasonable reconstruction of the area delimited by Cortina d’Ampezzo in the "
 "north-east and Canazei in the south-west. If you have to be pitted in a duel"
 " to the death against your enemies, it may as well be in a beautiful place."
-msgstr ""
+msgstr "알프스의 보석인 돌로미티 산맥은 그 원래의 아름다움을 위해 2009년 유네스코 세계 유산으로 지정되었습니다. 이 지도는 북동쪽의 코르티나 담페초(Cortina d'Ampezzo)와 남서쪽의 카나제이(Canazei)로 구분된 지역을 충실하게 재현한 것입니다. 원수에 대한 죽음의 결투를 해야한다면, 그곳은 아름다운 장소에 있을 수도 있습니다."
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:11
 msgid ""
@@ -347,54 +419,54 @@ msgid ""
 "vertical. Use the little building space that you have wisely. A fortress at "
 "the mouth of a narrow mountain pass can be a formidable obstacle to an enemy"
 " army. Use the terrain to your advantage."
-msgstr ""
+msgstr "산에는 평지가 많이 있습니다. 불행히도 대부분은 수직벽입니다. 현명하게 가지고 있는 작은 건물 공간을 사용하십시오. 좁은 산길의 입구에있는 요새는 적군에게 막대한 장애물이 될 수 있습니다. 당신 진형의 지형에대한 잇점을 잘 활용하십시오."
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:8
 msgid "Elven Forests"
-msgstr ""
+msgstr "요정의 숲"
 
 #: ../../data/maps/Elven_Forests.wmf/elemental:10
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
-msgstr ""
+msgstr "숨 막힐듯 아름다운 이 에메랄드 땅은 여러 부족들이 그땅을 차지하기 위한 시도로 이끌고 있습니다."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
-msgstr ""
+msgstr "유대감"
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:10
 msgid ""
 "Ships are your best fellows. Starting positions are similar, so the map "
 "should be fair."
-msgstr ""
+msgstr "배는 가장 친한 동료입니다. 출발점은 비슷하기 때문에 지도는 공정해야합니다."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:11
 msgid ""
 "This is a somewhat technical map, and it is best suited for two or three "
 "human players. Coal is hard to find – consider making some. There is gold "
 "near the starting point – do you see it?"
-msgstr ""
+msgstr "다소 기술적인 지도이며 2~3 명의 인간 선수에게 가장 적합합니다. 석탄은 찾기 어려울 것입니다. 출발점 인근에는 금이 있습니다. 당신은 그것을 보았습니까?"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:8
 msgid "Finnish Lakes"
-msgstr ""
+msgstr "핀란드 호수"
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:10
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr ""
+msgstr "이것은 아름다운 호수, 강, 고대 숲과 산이 있는 핀란드의 땅입니다. 이 땅을 통과하는 길을 찾아내는 것은 당신에게 달려있습니다."
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
 "Yellow player has a much easier starting position than the other two; this "
 "map is suited for 1v2."
-msgstr ""
+msgstr "노란색 선수는 다른 두 선수보다 훨씬 쉽고 유리한 시작 위치를 가집니다. 이 지도는 1대2에 적합합니다."
 
 #: ../../data/maps/Firegames.wmf/elemental:8
 msgid "Firegames"
-msgstr ""
+msgstr "화력전"
 
 #: ../../data/maps/Firegames.wmf/elemental:10
 msgid ""
@@ -402,47 +474,47 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr ""
+msgstr "이것은 신들의 시험인가 다른 누군가의 사악한 계획인가? 당신과 당신 부족은 불과 용암에 둘러쌓인 섬에서 깨어난것인가요? 지금까지는 당신 부족만 있는것처럼 보이지만, 반대 종족을 만난다면 어떤 일이 일어날지 아무도 모를까요?"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"
-msgstr ""
+msgstr "4곳의 성"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:10
 msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands…"
-msgstr ""
+msgstr "강력한 요새에서 잘 보호 받고, 권력에 굶주린 네곳의 군벌들이 땅을 지배하기위한 계획을 세워두었습니다…"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:8
 msgid "Four Mountains"
-msgstr ""
+msgstr "4곳의 산"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:10
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe?"
-msgstr ""
+msgstr "각 부족은 4개의 거대한 산으로 둘러싸여 있습니다. 누가 먼저 그들을 정복하고 자신의 부족을 위해 자원을 차지 하시겠습니까?"
 
 #: ../../data/maps/Four_Mountains.wmf/elemental:11
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr ""
+msgstr "I: 물은 강가에서 발견 될 수있다. II: 눈사람은 추가 수원을 표시합니다. III: 각 산에는 하나의 자원 만 있습니다."
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
-msgstr ""
+msgstr "보름달"
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:10
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
+msgstr "그것이 최후의 태양 지점이든, 달의 병이든, 이 종족들은 그들의 마지막 시련으로 향해 움직입니다."
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
 msgid "Glacier Lake"
-msgstr ""
+msgstr "빙하 호수"
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:10
 msgid ""
@@ -451,80 +523,80 @@ msgid ""
 "tribe, but a few months ago another tribe came over the mountains and "
 "settled down. And you are sure that there is only enough space for one "
 "tribe."
-msgstr ""
+msgstr "당신의 부족이 아름답고 외로운 빙하 호수에 오랫동안 살고 있었습니다. 아무도 당신 부족을 방해하지 않았고 자원은 당신의 부족 전체에 충분했지만, 몇 달 전즘 다른 부족이 산에 와서 정착하기 시작했습니다. 당신 부족은 그곳은 두부족이 공존하기 어렵다고 확신하였습니다."
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:8
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "황금 반도"
 
 #: ../../data/maps/Golden_Peninsula.wmf/elemental:10
 msgid "Two empires race for the treasures of a legendary peninsula…"
-msgstr ""
+msgstr "두 제국은 전설적인 반도의 보물을 놓고 쟁탈전을 합니다…"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:8
 msgid "Ice wars"
-msgstr ""
+msgstr "얼음 전쟁"
 
 #: ../../data/maps/Ice_wars.wmf/elemental:10
 msgid "Autumn became winter. Some things are frozen, but not the war."
-msgstr ""
+msgstr "가을은 곳 겨울이 되었습니다. 어떤 것들은 꽁꽁 얼어 있지만 전쟁은 얼지 않습니다."
 
 #: ../../data/maps/Ice_wars.wmf/elemental:11
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:11
 msgid "Start positions are clockwise"
-msgstr ""
+msgstr "시작 위치는 시계 방향입니다"
 
 #: ../../data/maps/Impact.wmf/elemental:8
 msgid "Impact"
-msgstr ""
+msgstr "충돌"
 
 #: ../../data/maps/Impact.wmf/elemental:10
 msgid ""
 "After an impact of an asteroid and the following harsh winter, three isles "
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
-msgstr ""
+msgstr "소행성 충돌과 혹독한 겨울 후 지나면 세 개의 섬이 얼음과 돌로 연결되어 세 종족이 평화롭게 공존하게됩니다."
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:8
 msgid "Islands at War"
-msgstr ""
+msgstr "섬들의 전쟁"
 
 #: ../../data/maps/Islands_at_War.wmf/elemental:10
 msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr ""
+msgstr "수세기 동안 이웃 섬의 다른 부족과 평화롭게 살았습니다. 이 평화는 이제 끝난 것 같습니다. 이웃부족이 정복을 시작했습니다."
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
 msgid "Kings and Queens"
-msgstr ""
+msgstr "왕과 여왕"
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:10
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr ""
+msgstr "오래된 전설에 따르면 번영의 시대에 번영했던 7개의 왕국이 언젠가 파괴적인 전쟁으로 몰락하게 될것이라고 전해지고 있습니다. 최근에 배신이 너무 많았는데 예언이 이루어지고 있는것 아닙니까?"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "평온한 호수"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:10
 msgid ""
 "This lake, deep in the most ancient forests, has long been known for its "
 "beauty and idyllic peace. However, its sanctity has been disturbed now, as "
 "two hostile tribes have arrived at its shores…"
-msgstr ""
+msgstr "가장 오래된 고대의 숲 깊은곳에 있는 이 호수는 아름답고 신성하고 소박하고 평화로우며 서정적으로 알려져 있습니다. 그러나 적대적인 두부족이 해안에 도착한 지금, 그 신성함은 방해 받고있습니다."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:8
 msgid "Last Bastion"
-msgstr ""
+msgstr "최후의 요새"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:9
 msgid "Another Barbarian – edited by king_of_nowhere"
-msgstr ""
+msgstr "또다른 야만족 - king_of_nowhere 가 편집 함"
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:10
 msgid ""
@@ -537,25 +609,25 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "변덕스러운 신들은 우리의 기도에 응답하지 않았습니다. 살인적인 태양빛은 증가하여 지구를 수천배로 뜨겁게 했고, 빙하를 녹였으며, 사람들이 더욱 깊은곳으로 피신할수밖에 없게 하였습니다. 그러나 지금 웅장한 산맥이 함유된 마지막 땅의 폐허에서 살아남은 두 부족이 대피하고 있습니다. 비록 신들이 자비를 배풀어 기후가 다시 차가워졌음에도 물은 계속해서 상승하고 있습니다. 황금이 많은 가장 높은 산맥과 한 부족만이 겨우 충분하게 살 정도의 공간인 마지막 안전한 장소는 두개의 마주보는 길로 이어집니다. 그러나 반드시 알고 계셔야 합니다… 이 최후의 주거 공간은 살기엔 척박하고 협소한 곳이기도 합니다."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "목재 공급품에 신경써야 한다는 것을 잊지 마십시오. 상당히 필요하게 될 것입니다."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
-msgstr ""
+msgstr "마지막 생존자"
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:10
 msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
-msgstr ""
+msgstr "삭막한 지역에서 지배를 위해 싸우고 있는 4개의 부족. 자원은 지도 전체에 흩어져 있습니다."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "섬들을 순례"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:9
 msgid ""
@@ -563,49 +635,49 @@ msgid ""
 " where two or more groups try to reach the center island as fast as "
 "possible, to be the first erecting a castle on the top of the central "
 "mountain."
-msgstr ""
+msgstr "아틀란티스 문화의 특별한 시합은 두 개 이상의 단체가 중앙 산 꼭대기에 성을 짓기 위해 가능한 한 빨리 중심 섬에 도착해야하는 이른바 '섬들을 순례'입니다."
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:9
 msgid "Smugglers"
-msgstr ""
+msgstr "밀수업자"
 
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/elemental:11
 msgid ""
 "Your well established smuggling routes suddenly got busy: two other tribes "
 "have appeared and now a rivalry among smugglers has started. Which team will"
 " be the first to smuggle a certain number of wares?"
-msgstr ""
+msgstr "당신의 잘 정립 된 밀수 경로가 갑자기 바빴습니다. 다른 두 부족이 나타나서 이제는 밀수꾼들 간의 경쟁이 시작되었습니다. 어느 단체가 먼저 특정 수의 상품을 밀수 할 수 있을까요?"
 
 #: ../../data/maps/Mystical_Maze.wmf/elemental:8
 msgid "Mystical Maze"
-msgstr ""
+msgstr "신비한 미로"
 
 #: ../../data/maps/Mystical_Maze.wmf/elemental:10
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
-msgstr ""
+msgstr "하늘에 두 가지 큰 질문이 있습니다: 누가 이 믿을 수 없을만큼 큰 미로를 만들었으며 그 안에는 무엇을 발견 할 수 있습니까?"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
-msgstr ""
+msgstr "조우"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:10
 msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr ""
+msgstr "지도의 중심에 있는 작은 언덕만이 4 개의 경쟁 부족을 연결합니다. 당장이 군대를 이 언덕으로 이끌고 와서, 당신의 우월감의 상징으로 거대한 거점을 건설하십시오!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
+msgstr "중심에는 오직 하나의 요새를 지을만한 공간 밖에 없습니다. 물은 어디에서나 발견 할 수 있으므로 지질학자를 보낼 필요가 없습니다. "
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
-msgstr ""
+msgstr "강 원정대"
 
 #: ../../data/maps/River_Explorers.wmf/elemental:10
 msgid ""
@@ -614,21 +686,21 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr ""
+msgstr "각 플레이어는 확장에 있어 서로 다른 장애물을 가지고 있고 항상 그것을 극복 할 수있는 방법에는 여러 가지가 있습니다. 인공 지능은 하나의 배를 건설하지 않고서도 여기에서 패배 할 수 있지만, 선수들은 항구와 조선소를 최우선 순위로 삼는 것이 좋습니다 - 원정대는 보편적으로 유용하며 종종 금광상으로 가는 가장 빠른 길입니다. "
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
-msgstr ""
+msgstr "강의 땅"
 
 #: ../../data/maps/Riverlands.wmf/elemental:10
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr ""
+msgstr "번역확인???:다양한 풍경들로 가득한 신비한 땅, 한 줌의 거대한 강들에 의해 모든 것이 교차됩니다."
 
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:8
 msgid "The Ancient Sun of Fire"
-msgstr ""
+msgstr "고대의 불의 태양"
 
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:10
 msgid ""
@@ -640,7 +712,7 @@ msgstr ""
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"
-msgstr ""
+msgstr "늪 섬"
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:10
 msgid ""
@@ -651,7 +723,7 @@ msgstr ""
 
 #: ../../data/maps/Swamp_Monks.wmf/elemental:8
 msgid "Swamp Monks"
-msgstr ""
+msgstr "늪의 수도자"
 
 #: ../../data/maps/Swamp_Monks.wmf/elemental:10
 msgid ""
@@ -661,7 +733,7 @@ msgstr ""
 
 #: ../../data/maps/The_Big_Lake.wmf/elemental:8
 msgid "The Big Lake"
-msgstr ""
+msgstr "큰 호수"
 
 #: ../../data/maps/The_Big_Lake.wmf/elemental:10
 msgid ""
@@ -675,7 +747,7 @@ msgstr ""
 
 #: ../../data/maps/The_Far_North.wmf/elemental:8
 msgid "The Far North"
-msgstr ""
+msgstr "북쪽 끝"
 
 #: ../../data/maps/The_Far_North.wmf/elemental:10
 msgid ""
@@ -694,7 +766,7 @@ msgstr ""
 
 #: ../../data/maps/The_Green_Plateau.wmf/elemental:8
 msgid "The Green Plateau"
-msgstr ""
+msgstr "녹색 고원"
 
 #: ../../data/maps/The_Green_Plateau.wmf/elemental:10
 msgid ""
@@ -706,7 +778,7 @@ msgstr ""
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:8
 msgid "The Long Way"
-msgstr ""
+msgstr "긴 길"
 
 #: ../../data/maps/The_Long_Way.wmf/elemental:10
 msgid ""
@@ -716,7 +788,7 @@ msgstr ""
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:8
 msgid "The Nile"
-msgstr ""
+msgstr "나일강"
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:10
 msgid ""
@@ -732,7 +804,7 @@ msgstr ""
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
-msgstr ""
+msgstr "오아시스 삼각 지대"
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:10
 msgid ""
@@ -743,7 +815,7 @@ msgstr ""
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
-msgstr ""
+msgstr "산을 지나는 길"
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:10
 msgid ""
@@ -753,7 +825,7 @@ msgstr ""
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
-msgstr ""
+msgstr "해동"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:10
 msgid ""
@@ -766,7 +838,7 @@ msgstr ""
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:8
 msgid "Three Warriors"
-msgstr ""
+msgstr "3인의 전사"
 
 #: ../../data/maps/Three_Warriors.wmf/elemental:10
 msgid ""
@@ -780,7 +852,7 @@ msgstr ""
 
 #: ../../data/maps/Together_We're_Strong.wmf/elemental:8
 msgid "Together We’re Strong"
-msgstr ""
+msgstr "함께한 우리는 강하다"
 
 #: ../../data/maps/Together_We're_Strong.wmf/elemental:10
 msgid ""
@@ -797,7 +869,7 @@ msgstr ""
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:8
 msgid "Trident of Fire"
-msgstr ""
+msgstr "불의 삼지창"
 
 #: ../../data/maps/Trident_of_Fire.wmf/elemental:10
 msgid ""
@@ -809,7 +881,7 @@ msgstr ""
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:8
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "쌍둥이 늪"
 
 #: ../../data/maps/Twin_Lagoons_v2.wmf/elemental:10
 msgid ""
@@ -828,7 +900,7 @@ msgstr ""
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"
-msgstr ""
+msgstr "반짝이는 물결"
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:10
 msgid ""
@@ -838,7 +910,7 @@ msgstr ""
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:8
 msgid "Two Frontiers"
-msgstr ""
+msgstr "두 국경"
 
 #: ../../data/maps/Two_Frontiers.wmf/elemental:10
 msgid "A multiplayer battle map on a small circle-shaped island."
@@ -846,7 +918,7 @@ msgstr ""
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:8
 msgid "Volcanic Winter"
-msgstr ""
+msgstr "화산의 겨울"
 
 #: ../../data/maps/Volcanic_Winter.wmf/elemental:10
 msgid ""
@@ -858,7 +930,7 @@ msgstr ""
 
 #: ../../data/maps/Wideworld.wmf/elemental:8
 msgid "Wide World"
-msgstr ""
+msgstr "넓은 세상"
 
 #: ../../data/maps/Wideworld.wmf/elemental:10
 msgid ""
@@ -868,7 +940,7 @@ msgstr ""
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"
-msgstr ""
+msgstr "들소 계곡"
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:10
 msgid ""

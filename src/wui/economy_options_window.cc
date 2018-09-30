@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,13 +36,12 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
                                            Widelands::Economy* economy,
                                            bool can_act)
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
-     economy_number_(economy->owner().get_economy_number(economy)),
-     owner_(economy->owner()),
-     tabpanel_(this, g_gr->images().get("images/ui_basic/but1.png")),
-     ware_panel_(
-        new EconomyOptionsPanel(&tabpanel_, can_act, Widelands::wwWARE, economy_number_, owner_)),
-     worker_panel_(new EconomyOptionsPanel(
-        &tabpanel_, can_act, Widelands::wwWORKER, economy_number_, owner_)) {
+     serial_(economy->serial()),
+     player_(&economy->owner()),
+     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
+     ware_panel_(new EconomyOptionsPanel(&tabpanel_, serial_, player_, can_act, Widelands::wwWARE)),
+     worker_panel_(
+        new EconomyOptionsPanel(&tabpanel_, serial_, player_, can_act, Widelands::wwWORKER)) {
 	set_center_panel(&tabpanel_);
 
 	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
@@ -53,24 +52,29 @@ EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
 }
 
 EconomyOptionsWindow::~EconomyOptionsWindow() {
-	owner_.get_economy_by_number(economy_number_)->set_has_window(false);
+	Widelands::Economy* economy = player_->get_economy(serial_);
+	if (economy != nullptr) {
+		economy->set_has_window(false);
+	}
 }
 
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
-	if (note.old_economy == economy_number_) {
+	if (note.old_economy == serial_) {
 		switch (note.action) {
-		case Widelands::NoteEconomy::Action::kMerged:
-			economy_number_ = note.new_economy;
-			ware_panel_->set_economy_number(note.new_economy);
-			worker_panel_->set_economy_number(note.new_economy);
-			owner_.get_economy_by_number(economy_number_)->set_has_window(true);
+		case Widelands::NoteEconomy::Action::kMerged: {
+			serial_ = note.new_economy;
+			Widelands::Economy* economy = player_->get_economy(serial_);
+			if (economy == nullptr) {
+				die();
+				return;
+			}
+			economy->set_has_window(true);
+			ware_panel_->set_economy(note.new_economy);
+			worker_panel_->set_economy(note.new_economy);
 			move_to_top();
-			break;
+		} break;
 		case Widelands::NoteEconomy::Action::kDeleted:
 			// Make sure that the panels stop thinking first.
-			ware_panel_->die();
-			worker_panel_->die();
-			owner_.get_economy_by_number(economy_number_)->set_has_window(false);
 			die();
 			break;
 		}
@@ -80,15 +84,14 @@ void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
 EconomyOptionsWindow::TargetWaresDisplay::TargetWaresDisplay(UI::Panel* const parent,
                                                              int32_t const x,
                                                              int32_t const y,
-                                                             const Widelands::TribeDescr& tribe,
+                                                             Widelands::Serial serial,
+                                                             Widelands::Player* player,
                                                              Widelands::WareWorker type,
-                                                             bool selectable,
-                                                             size_t economy_number,
-                                                             Widelands::Player& owner)
-   : AbstractWaresDisplay(parent, x, y, tribe, type, selectable),
-     economy_number_(economy_number),
-     owner_(owner) {
-	const Widelands::TribeDescr& owner_tribe = owner_.tribe();
+                                                             bool selectable)
+   : AbstractWaresDisplay(parent, x, y, player->tribe(), type, selectable),
+     serial_(serial),
+     player_(player) {
+	const Widelands::TribeDescr& owner_tribe = player->tribe();
 	if (type == Widelands::wwWORKER) {
 		for (const Widelands::DescriptionIndex& worker_index : owner_tribe.workers()) {
 			const Widelands::WorkerDescr* worker_descr = owner_tribe.get_worker_descr(worker_index);
@@ -106,84 +109,92 @@ EconomyOptionsWindow::TargetWaresDisplay::TargetWaresDisplay(UI::Panel* const pa
 	}
 }
 
-void EconomyOptionsWindow::TargetWaresDisplay::set_economy_number(size_t economy_number) {
-	economy_number_ = economy_number;
+void EconomyOptionsWindow::TargetWaresDisplay::set_economy(Widelands::Serial serial) {
+	serial_ = serial;
 }
 
 std::string
 EconomyOptionsWindow::TargetWaresDisplay::info_for_ware(Widelands::DescriptionIndex const ware) {
-	Widelands::Economy& economy = *owner_.get_economy_by_number(economy_number_);
+	Widelands::Economy* economy = player_->get_economy(serial_);
+	if (economy == nullptr) {
+		die();
+		return *(new std::string());
+	}
 	return boost::lexical_cast<std::string>(get_type() == Widelands::wwWORKER ?
-	                                           economy.worker_target_quantity(ware).permanent :
-	                                           economy.ware_target_quantity(ware).permanent);
+	                                           economy->worker_target_quantity(ware).permanent :
+	                                           economy->ware_target_quantity(ware).permanent);
 }
 
 /**
  * Wraps the wares/workers display together with some buttons
  */
 EconomyOptionsWindow::EconomyOptionsPanel::EconomyOptionsPanel(UI::Panel* parent,
+                                                               Widelands::Serial serial,
+                                                               Widelands::Player* player,
                                                                bool can_act,
-                                                               Widelands::WareWorker type,
-                                                               size_t economy_number,
-                                                               Widelands::Player& owner)
+                                                               Widelands::WareWorker type)
    : UI::Box(parent, 0, 0, UI::Box::Vertical),
+     serial_(serial),
+     player_(player),
      type_(type),
-     economy_number_(economy_number),
-     owner_(owner),
      can_act_(can_act),
-     display_(this, 0, 0, owner.tribe(), type_, can_act_, economy_number, owner) {
+     display_(this, 0, 0, serial_, player_, type_, can_act_) {
 	add(&display_, UI::Box::Resizing::kFullSize);
 
+	if (!can_act_) {
+		return;
+	}
 	UI::Box* buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 	add(buttons);
 
-	UI::Button* b =
-	   new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
-	                  g_gr->images().get("images/ui_basic/but4.png"), "-", _("Decrease target"));
-	b->set_enabled(can_act_);
+	UI::Button* b = new UI::Button(buttons, "decrease_target", 0, 0, 34, 34,
+	                               UI::ButtonStyle::kWuiMenu, "-", _("Decrease target"));
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, -1));
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
 
-	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34,
-	                   g_gr->images().get("images/ui_basic/but4.png"), "+", _("Increase target"));
-	b->set_enabled(can_act_);
+	b = new UI::Button(buttons, "increase_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "+",
+	                   _("Increase target"));
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::change_target, this, 1));
 	buttons->add(b);
 	b->set_repeating(true);
 	buttons->add_space(8);
 
-	b = new UI::Button(buttons, "reset_target", 0, 0, 34, 34,
-	                   g_gr->images().get("images/ui_basic/but4.png"), "R", _("Reset to default"));
-	b->set_enabled(can_act_);
+	b = new UI::Button(
+	   buttons, "reset_target", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu, "R", _("Reset to default"));
 	b->sigclicked.connect(boost::bind(&EconomyOptionsPanel::reset_target, this));
 	buttons->add(b);
 }
 
-void EconomyOptionsWindow::EconomyOptionsPanel::set_economy_number(size_t economy_number) {
-	economy_number_ = economy_number;
-	display_.set_economy_number(economy_number);
+void EconomyOptionsWindow::EconomyOptionsPanel::set_economy(Widelands::Serial serial) {
+	serial_ = serial;
+	display_.set_economy(serial);
 }
 
 void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int amount) {
-	Widelands::Economy& economy = *owner_.get_economy_by_number(economy_number_);
-	Widelands::Game& game = dynamic_cast<Widelands::Game&>(owner_.egbase());
+	Widelands::Economy* economy = player_->get_economy(serial_);
+	if (economy == nullptr) {
+		die();
+		return;
+	}
+	Widelands::Game& game = dynamic_cast<Widelands::Game&>(player_->egbase());
 	const bool is_wares = type_ == Widelands::wwWARE;
-	const auto& items = is_wares ? owner_.tribe().wares() : owner_.tribe().workers();
+	const auto& items = is_wares ? player_->tribe().wares() : player_->tribe().workers();
 	for (const Widelands::DescriptionIndex& index : items) {
 		if (display_.ware_selected(index)) {
-			const Widelands::Economy::TargetQuantity& tq =
-			   is_wares ? economy.ware_target_quantity(index) : economy.worker_target_quantity(index);
+			const Widelands::Economy::TargetQuantity& tq = is_wares ?
+			                                                  economy->ware_target_quantity(index) :
+			                                                  economy->worker_target_quantity(index);
 			// Don't allow negative new amount.
 			if (amount >= 0 || -amount <= static_cast<int>(tq.permanent)) {
 				if (is_wares) {
 					game.send_player_command(*new Widelands::CmdSetWareTargetQuantity(
-					   game.get_gametime(), owner_.player_number(), economy_number_, index,
+					   game.get_gametime(), player_->player_number(), serial_, index,
 					   tq.permanent + amount));
 				} else {
 					game.send_player_command(*new Widelands::CmdSetWorkerTargetQuantity(
-					   game.get_gametime(), owner_.player_number(), economy_number_, index,
+					   game.get_gametime(), player_->player_number(), serial_, index,
 					   tq.permanent + amount));
 				}
 			}
@@ -192,17 +203,17 @@ void EconomyOptionsWindow::EconomyOptionsPanel::change_target(int amount) {
 }
 
 void EconomyOptionsWindow::EconomyOptionsPanel::reset_target() {
-	Widelands::Game& game = dynamic_cast<Widelands::Game&>(owner_.egbase());
+	Widelands::Game& game = dynamic_cast<Widelands::Game&>(player_->egbase());
 	const bool is_wares = type_ == Widelands::wwWARE;
-	const auto& items = is_wares ? owner_.tribe().wares() : owner_.tribe().workers();
+	const auto& items = is_wares ? player_->tribe().wares() : player_->tribe().workers();
 	for (const Widelands::DescriptionIndex& index : items) {
 		if (display_.ware_selected(index)) {
 			if (is_wares) {
 				game.send_player_command(*new Widelands::CmdResetWareTargetQuantity(
-				   game.get_gametime(), owner_.player_number(), economy_number_, index));
+				   game.get_gametime(), player_->player_number(), serial_, index));
 			} else {
 				game.send_player_command(*new Widelands::CmdResetWorkerTargetQuantity(
-				   game.get_gametime(), owner_.player_number(), economy_number_, index));
+				   game.get_gametime(), player_->player_number(), serial_, index));
 			}
 		}
 	}

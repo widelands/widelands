@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2018 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -110,10 +110,10 @@ struct Field {
 	void set_terrains(const Terrains& i) {
 		terrains = i;
 	}
-	void set_terrain(const TCoords<FCoords>::TriangleIndex& t, DescriptionIndex const i)
+	void set_terrain(const TriangleIndex& t, DescriptionIndex const i)
 
 	{
-		if (t == TCoords<FCoords>::D)
+		if (t == TriangleIndex::D)
 			set_terrain_d(i);
 		else
 			set_terrain_r(i);
