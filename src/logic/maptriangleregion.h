@@ -121,6 +121,13 @@ private:
 	CoordsType left_;
 	TCoords<CoordsType> location_;
 };
+
+// Forward declarations of template instantiations
+template<> MapTriangleRegion<>::MapTriangleRegion(const Map& map, Area<TCoords<>> area);
+template<> bool MapTriangleRegion<>::advance(const Map& map);
+
+template<> MapTriangleRegion<TCoords<FCoords>>::MapTriangleRegion(const Map& map, Area<TCoords<FCoords>> area);
+template<> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map);
 }
 
 #endif  // end of include guard: WL_LOGIC_MAPTRIANGLEREGION_H

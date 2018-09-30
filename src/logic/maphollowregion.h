@@ -72,6 +72,10 @@ private:
 	uint32_t rowpos_;                     // # of fields we have returned in this row
 	typename AreaType::CoordsType left_;  //  left-most node of current row
 };
+
+// Forward declarations of template instantiations
+template<> MapHollowRegion<Area<>>::MapHollowRegion(const Map& map, const HollowArea<Area<>>& hollow_area);
+template <> bool MapHollowRegion<Area<>>::advance(const Map& map);
 }
 
 #endif  // end of include guard: WL_LOGIC_MAPHOLLOWREGION_H
