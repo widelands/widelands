@@ -327,8 +327,9 @@ void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) 
 Rectf NonPackedAnimation::source_rectangle(const int percent_from_bottom, float scale) const {
 	ensure_graphics_are_loaded();
 	const Image* first_frame = mipmaps_.at(find_best_scale(scale))->frames.at(0);
-	float h = percent_from_bottom * first_frame->height() / 100;
-	return Rectf(0.f, first_frame->height() - h, first_frame->width(), h);
+	const float h = percent_from_bottom * first_frame->height() / 100;
+	// Using floor for pixel perfect positioning
+	return Rectf(0.f, std::floor(first_frame->height() - h), first_frame->width(), h);
 }
 
 Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
@@ -336,10 +337,9 @@ Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
                                                 const float scale) const {
 	ensure_graphics_are_loaded();
 	const float best_scale = find_best_scale(scale);
-	// Using floor + ceil for pixel perfect positioning
-	return Rectf(std::floor(position.x - (hotspot_.x - source_rect.x / best_scale) * scale),
-	             std::floor(position.y - (hotspot_.y - source_rect.y / best_scale) * scale),
-	             std::ceil(source_rect.w * scale / best_scale), std::ceil(source_rect.h * scale / best_scale));
+	return Rectf(position.x - (hotspot_.x - source_rect.x / best_scale) * scale,
+	             position.y - (hotspot_.y - source_rect.y / best_scale) * scale,
+	             source_rect.w * scale / best_scale, source_rect.h * scale / best_scale);
 }
 
 void NonPackedAnimation::blit(uint32_t time,
