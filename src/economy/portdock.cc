@@ -369,7 +369,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
-	// Check for items with invalid destination
+	// Check for items with invalid destination. TODO: Prevent invalid destinations
 	for (auto si_it = waiting_.begin(); si_it != waiting_.end(); ++si_it) {
 		if (!si_it->get_destination(game)) {
 			// Invalid destination. Carry the item back into the warehouse
@@ -392,25 +392,21 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 	// Then load the remaining capacity of the departing ship with relevant items
 	uint32_t remaining_capacity = ship.descr().get_capacity() - ship.get_nritems();
 
-	// Firstly load the items which go to chosen destination, while also checking for items with invalid destination
-	for (auto si_it = waiting_.begin(); si_it != waiting_.end(); ++si_it) {
-		// Only load the item if it matches the ship's destination and the ship still has room for it
-		if (remaining_capacity > 0 && si_it->get_destination(game) == next_port) {
-			ship.add_item(game, *si_it); // load it
+	// Firstly load the wares/workers which go to chosen destination
+	for (auto si_it = waiting_.begin(); si_it != waiting_.end() && remaining_capacity > 0; ++si_it) {
+		if (si_it->get_destination(game) == next_port) {
+			ship.add_item(game, *si_it);
 			si_it = waiting_.erase(si_it);
 			--remaining_capacity;
 		}
 	}
 
-	if (remaining_capacity > 0) {
-		// There is still come capacity left. Load any items favored by the chosen destination on the ship.
-		for (auto si_it = waiting_.begin(); si_it != waiting_.end() && remaining_capacity > 0; ++si_it) {
-			assert(si_it->get_destination(game) != nullptr);
-			if (fleet_->is_path_favourable(*this, *next_port, *si_it->get_destination(game))) {
-				ship.add_item(game, *si_it);
-				si_it = waiting_.erase(si_it);
-				--remaining_capacity;
-			}
+	// Then load any wares/workers favored by the chosen destination
+	for (auto si_it = waiting_.begin(); si_it != waiting_.end() && remaining_capacity > 0; ++si_it) {
+		if (fleet_->is_path_favourable(*this, *next_port, *si_it->get_destination(game))) {
+			ship.add_item(game, *si_it);
+			si_it = waiting_.erase(si_it);
+			--remaining_capacity;
 		}
 	}
 
