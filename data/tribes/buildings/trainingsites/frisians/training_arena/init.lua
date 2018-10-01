@@ -123,7 +123,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier attack 3",
             "animate=working 22800",
             "checksoldier=soldier attack 3", -- Because the soldier can be expelled by the player
-            "consume=sword_long honey_bread mead:2 smoked_fish,smoked_meat",
+            "consume=sword_long honey_bread mead smoked_fish,smoked_meat",
             "train=soldier attack 3 4"
          }
       },
@@ -134,7 +134,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier attack 4",
             "animate=working 15600",
             "checksoldier=soldier attack 4", -- Because the soldier can be expelled by the player
-            "consume=sword_broad honey_bread mead:2 smoked_fish,smoked_meat",
+            "consume=sword_broad honey_bread mead smoked_fish,smoked_meat",
             "train=soldier attack 4 5",
             "produce=scrap_iron:2"
          }
@@ -146,7 +146,7 @@ tribes:new_trainingsite_type {
             "checksoldier=soldier attack 5",
             "animate=working 15600",
             "checksoldier=soldier attack 5", -- Because the soldier can be expelled by the player
-            "consume=sword_double honey_bread mead:2 smoked_fish,smoked_meat",
+            "consume=sword_double honey_bread mead smoked_fish,smoked_meat",
             "train=soldier attack 5 6",
             "produce=scrap_iron scrap_metal_mixed"
          }
