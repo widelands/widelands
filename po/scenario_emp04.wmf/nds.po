@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 05:57+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -53,16 +53,16 @@ msgstr "Stratennett uprümen"
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:58
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
 msgstr ""
-"Rüüm düsses Kuddelmuddel vun eenem Stratennett up, indeem du all unnützen "
+"Rüüm deeses Kuddelmuddel vun eenem Stratennett up, indeem du all unnützen "
 "Straten wegdoost."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "Klick up elkeen Buurderee"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Maak dat Huus-Fenster vun eener Buurderee open"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
@@ -88,7 +88,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr "Bau tominnst 3 Boomhauereen un 2 Flintslagerhusen."
+msgstr "Bau tominnst 3 Boomhauereen un 2 Flintslagerhusen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:84
 msgid "Quarries and Lumberjacks"
@@ -149,7 +149,7 @@ msgstr "Hannel mit Julia, um de Technik to kriegen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:120
 msgid "Diplomacy: Trade or War"
-msgstr "Hannel oder Krieg?"
+msgstr "Hannel oder Krieg"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
 msgid ""
@@ -161,11 +161,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Train at least 3 heroes"
-msgstr ""
+msgstr "Bild tominnst 3 Helden ut"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:129
 msgid "Hero Training"
-msgstr ""
+msgstr "Helden utbilden"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:130
 msgid ""
@@ -174,11 +174,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid "Produce at least 10 tools"
-msgstr ""
+msgstr "Produzeer tominnst 10 Warktügen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:138
 msgid "Tool Production"
-msgstr ""
+msgstr "Warktügen produzeren"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:139
 msgid "Produce at least ten tools to improve your economy."

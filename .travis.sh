@@ -30,18 +30,17 @@ cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_ASAN="OFF"
 if [ "$BUILD_TYPE" == "Debug" ]; then
 
    # Build the documentation. Any warning is an error.
-   # TODO: GunChleoc: Currently broken
-   #if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-   #  sudo pip install sphinx
-   #fi
-   #if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-   #  pip2 install sphinx
-   #fi
-   #pushd ../doc/sphinx
-   #mkdir source/_static
-   #./extract_rst.py
-   #sphinx-build -W -b json -d build/doctrees source build/json
-   #popd
+   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+     sudo pip install sphinx
+   fi
+   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+     pip2 install sphinx
+   fi
+   pushd ../doc/sphinx
+   mkdir source/_static
+   ./extract_rst.py
+   sphinx-build -W -b json -d build/doctrees source build/json
+   popd
 
    # Run the codecheck test suite.
    pushd ../cmake/codecheck

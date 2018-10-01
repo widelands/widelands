@@ -6,6 +6,7 @@
 # Alexander Bikmeyev <bikmeyev@gmail.com>, 2016
 # Anton Khabarov <2233009@gmail.com>, 2015-2016
 # GunChleoc, 2016
+# Viktor S <awsswa59@gmail.com>, 2018
 # Алексей Баринов <leha.bar.ru@gmail.com>, 2018
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 06:56+0000\n"
-"PO-Revision-Date: 2018-09-10 21:28+0000\n"
-"Last-Translator: Алексей Баринов <leha.bar.ru@gmail.com>\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 13:54+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -415,17 +416,17 @@ msgstr "Для того чтобы наши шахты заработали, н�
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:205
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Энциклопедия"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
 msgid "How to get help"
-msgstr ""
+msgstr "Как получить помощь"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:208
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr ""
+msgstr "Конечно, трудно запомнить все мои замечания и советы. Например, вы можете спросить себя: \"Зачем нам нужны пайки, чтобы получать солдат?\""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:209
 msgid ""
@@ -433,83 +434,83 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr ""
+msgstr "Когда вы много играете, вы будете знать все это наизусть. Но до тех пор, или если вы не уверены в своих потребностях и способностях вашего племени и о том, как работают его здания и рабочие, вы можете легко найти его в нашей специальной игре и энциклопедии, связанной с племенем."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 msgid ""
 "This encyclopedia can be accessed via the help button at the bottom right."
-msgstr ""
+msgstr "Энциклопедия доступна через кнопку справки в правом нижнем углу."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 msgid "Please open the in-game help, and I’ll explain its contents to you."
-msgstr ""
+msgstr "Пожалуйста, откройте внутри игровую помощь, и я объясню вам ее содержание."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "Open the in-game help window"
-msgstr ""
+msgstr "Откройте окно помощи в игре"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid ""
 "The encyclopedia window contains the in-game help and an encyclopedia of the"
 " tribe you’re currently playing."
-msgstr ""
+msgstr "Окно энциклопедии содержит интерактивную помощь и энциклопедию племени, за которое вы сейчас играете."
 
 #. TRANSLATORS: "it" refers to the encyclopedia window
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:220
 msgid "Open it. You can access it via the button at the bottom of the screen."
-msgstr ""
+msgstr "Открой это. Вы можете получить к нему доступ через кнопку в нижней части экрана."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:221
 msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr ""
+msgstr "Кроме того, вы можете получить к нему прямой доступ с помощью клавиши «F1»."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "Encyclopedia details"
-msgstr ""
+msgstr "Подробности Энциклопедии"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:229
 msgid "The Encyclopedia Categories"
-msgstr ""
+msgstr "Категории Энциклопедии"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid "The encyclopedia has five tabs:"
-msgstr ""
+msgstr "В энциклопедии есть пять вкладок:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:231
 msgid ""
 "The ‘General’ tab contains information about all the basic interface "
 "controls for Widelands. Furthermore, you can find tips that are relevant for"
 " your tribe there."
-msgstr ""
+msgstr "Вкладка \"Общее\" содержит информацию обо всех основных элементах интерфейса интерфейса Widelands. Кроме того, вы можете найти советы, которые важны для вашего племени."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr ""
+msgstr "На вкладке \"Товары\" отображается информация о товарах, которые нужны вашему племени, включая короткий текст справки, список зданий, которые производят каждый товар, необходимые товары для производства и где товар потребляется."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr ""
+msgstr "На вкладке \"Работники\" отображается информация о работниках вашего племени аналогично товарам на второй вкладке."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:234
 msgid ""
-"The ‘Buldings’ tab contains all the necessary information about the "
+"The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "Вкладка \"Строения\" содержит всю необходимую информацию о зданиях вашего племени."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:235
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "Наконец, на вкладке «Недвижимость» отображается информация о конкретной недвижимости, которую могут разместить ваши племена на карте."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:236
 msgid "Now use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Теперь используйте энциклопедию, чтобы узнать, как создавать новых солдат."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid ""
@@ -517,58 +518,58 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "Солдату нужно деревянное копье и шлем - выходит, надо найти товары и здания, необходимые для снабжения своих казарм и вербовки солдат. Когда вы закончите, просто закройте окно энциклопедии."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "Посмотрите, какие товары нужны для вербовки солдат"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:244
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr ""
+msgstr "Выберите вкладку \"Товары\" в окне энциклопедии."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "Посмотрите, что нужно для изготовления шлема и что нужно для изготовления деревянного копья."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "Если вы хотите, вы можете еще раз посмотреть, что необходимо для производства товаров, которые вы только что искали."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:247
 msgid "Close the encyclopedia window when you are done."
-msgstr ""
+msgstr "Закройте окно энциклопедии, когда закончите."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:252
 msgid "You closed the encyclopedia!"
-msgstr ""
+msgstr "Вы закрыли энциклопедию"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr ""
+msgstr "Вы закрыли окно энциклопедии, но я не заметил, что вы пытались выяснить, какие товары нужны для вербовки солдата. Не могли бы вы снова открыть его и сделать это?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:263
 msgid "Open the encyclopedia window again"
-msgstr ""
+msgstr "Откройте окно энциклопедии еще раз"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:265
 msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Вы закрыли окно энциклопедии без поиска необходимой нам информации. Если вы уже все знаете, не стесняйтесь закрыть этот учебник в любое время."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr ""
+msgstr "В противном случае, пожалуйста откройте окно энциклопедии и выберете вторую вкладку."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid "Priority Settings"
@@ -628,7 +629,7 @@ msgstr "Щелкните на ней."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:297
 msgid "Open the ware statistics window"
-msgstr ""
+msgstr "Откройте окно статистики товаров."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:299
 msgid "Open the ‘Ware statistics’ window, accessed via the statistics menu."
@@ -650,7 +651,7 @@ msgstr "третьей вкладке (\"Состояние экономики\"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:313
 msgid "Switch to the third tab in the ware statistics menu window"
-msgstr ""
+msgstr "Переключитесь на третью вкладку в окне \"Статистика товаров\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:315
 msgid ""
@@ -676,7 +677,7 @@ msgstr "Щёлкните последнюю вкладку и я продолж�
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:330
 msgid "Switch to the last tab in the ware statistics menu window"
-msgstr ""
+msgstr "Переключитесь на последнюю вкладку окна \"Статистика товаров\"."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:332
 msgid ""
@@ -707,7 +708,7 @@ msgstr "Закройте это окно, когда закончите."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:347
 msgid "Close the ware statistics window"
-msgstr ""
+msgstr "Закройте окно статистики товаров"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:349
 msgid ""
@@ -733,7 +734,7 @@ msgstr "Вы закрыли окно \"Статистика товаров\", н
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:386
 msgid "Open the ware statistics window again"
-msgstr ""
+msgstr "Откройте окно \"Статистика товаров\" снова."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:368
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:388
@@ -783,7 +784,7 @@ msgstr "Откройте это окно"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:406
 msgid "Open the ‘Configure economy’ window"
-msgstr ""
+msgstr "Откройте окно ‘Настройка экономики’"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:408
 msgid "Open the ‘Configure economy’ window."
@@ -857,7 +858,7 @@ msgstr "Задайте целевое количество мраморных к
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 msgid "Produce 20 marble columns"
-msgstr ""
+msgstr "Произведите 20 мраморных колонн."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:436
 msgid ""
@@ -916,7 +917,7 @@ msgstr "Каждый склад имеет четыре кнопки для ус
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "Доставьте все 20 мраморных колонн на склад возле линии фронта."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:453
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
@@ -935,7 +936,7 @@ msgstr "Затем, чтобы переместить мраморные кол�
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:457
 msgid "Bring 20 marble columns to the front line"
-msgstr ""
+msgstr "Доставьте 20 мраморных колонн к линии фронта."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:459
 msgid ""

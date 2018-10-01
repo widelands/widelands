@@ -8,13 +8,14 @@
 # David D, 2018
 # zecas <jjorge@free.fr>, 2018
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 05:57+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -581,6 +582,9 @@ msgid ""
 "Brother, I'm really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Frère, je suis inquiet de devoir à nouveau délivrer de mauvaises nouvelles. "
+"Comme tu peux le voir, nos fermes ne produisent plus et nous ne pouvons les "
+"démanteler."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:327

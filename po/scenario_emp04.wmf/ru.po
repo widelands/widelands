@@ -5,13 +5,15 @@
 # Translators:
 # Олег Шевченко <olegrock@gmail.com>, 2018
 # GunChleoc, 2018
+# Anton Khabarov <2233009@gmail.com>, 2018
+# Viktor S <awsswa59@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 05:57+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: GunChleoc, 2018\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>, 2018\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,17 +59,19 @@ msgstr "Уберите хаос из дорожной сети, удалив в�
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "Кликните на одной из ферм"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Откройте окно строительства фермы"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
+"Кликните на стройплощадке фермы, чтобы открыть окно строительства. Это "
+"позволит вам проанализировать процесс стройки."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find the construction plans for the farms"
@@ -570,6 +574,8 @@ msgid ""
 "Brother, I'm really worried that I have to deliver bad news again. As you "
 "can see, our farms aren’t producing anything and we can’t dismantle them."
 msgstr ""
+"Брат, мне очень жаль, что я вынужден приносить плохие новости. Но как ты "
+"видишь, наши фермы ничего не производят и мы не можем разобрать их."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:327
@@ -599,6 +605,8 @@ msgid ""
 "Until we have found the plans, the only option for our farms is to dismantle"
 " them."
 msgstr ""
+"Пока мы не найдем другой выход, единственно правильное решение для наших "
+"ферм - уничтожить их"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
@@ -663,6 +671,8 @@ msgid ""
 " desperately. Furthermore, the plans have enabled us to upgrade our old "
 "farms to get to work again."
 msgstr ""
+"Теперь мы можем начать строить фермы, чтобы затем варить пиво для жаждущих "
+"шахтеров. Кроме того, теперь мы можем улучшить наши старые фермы."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:365
@@ -908,6 +918,10 @@ msgid ""
 "breweries with the improved technology, we will never know if and how Vesta "
 "and her priestesses could have helped us against the Barbarians."
 msgstr ""
+"Я не уверена, что это нужно было делать.. Да, мы получили планы но, хотя мы "
+"теперь можем строить и модернизировать наши мельницы и пивоварни с помощью "
+"улучшенной технологии, мы никогда не узнаем, помогли ли нам Веста и ее жрицы"
+" в борьбе против варваров."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:469
@@ -1195,7 +1209,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:623
 msgid "Easy Victory"
-msgstr ""
+msgstr "Легкая победа"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:624
 msgid "Saledus is cheering proudly…"
@@ -1267,7 +1281,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:664
 msgid "Training is Needed"
-msgstr ""
+msgstr "Требуется тренировка"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:665
 msgid "Saledus still has security concerns…"
@@ -1313,7 +1327,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:688
 msgid "We Just Need Another Hero"
-msgstr ""
+msgstr "Нам просто нужен еще один герой"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:689
 msgid "Saledus is in a good mood…"
@@ -1364,7 +1378,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:714
 msgid "Victory is Ours"
-msgstr ""
+msgstr "Победа за нами"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:715
 msgid "Saledus is cheering loudly…"
@@ -1423,7 +1437,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:748
 msgid "May The Gods Bless You"
-msgstr ""
+msgstr "Пусть боги хранят вас"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:749
 msgid "Vesta is blessing us…"
@@ -1440,7 +1454,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:756
 msgid "Damned"
-msgstr ""
+msgstr "Проклятый"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:757
 msgid "Vesta is cursing us…"
@@ -1457,7 +1471,7 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"

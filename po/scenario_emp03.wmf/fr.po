@@ -6,14 +6,14 @@
 # Jaypad <ju-ju@nataju.fr>, 2017
 # Renaud Bouchard, 2017
 # zecas <jjorge@free.fr>, 2017
-# balkh mogaehild <balkhmogaehild@protonmail.com>, 2017
+# Balkhmogaehild <balkhmogaehild@protonmail.com>, 2017
 # GunChleoc, 2017
 # David D, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: David D, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -814,12 +814,12 @@ msgstr "Amalea semble pensive..."
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
-"they had to use up all our remaining gold for building the port. Now we "
-"don’t have any gold left."
+"they have to use all our remaining gold for building the port. So, we won’t "
+"have any gold left after our port is build."
 msgstr ""
 "Salve Lutius. En discutant avec nos braves ouvriers, ils m'ont dit qu'ils "
-"avaient dû utiliser tout l'or restant dans la construction du port. A "
-"l'heure actuelle, nous n'avons plus de lingots."
+"avaient dû utiliser tout l'or restant dans la construction du port. C'est "
+"pourquoi nous n'auront plus d'or après que notre port soit construit."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440

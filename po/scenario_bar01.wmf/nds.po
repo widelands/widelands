@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-27 11:39+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 14:11+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -265,7 +265,7 @@ msgid ""
 "In order to call a geologist to search for water, click on a flag in the "
 "area that you want him to search and then on the button labeled ‘Send "
 "geologist to explore site’."
-msgstr "Daarmit een Schattsöker Water söcht, klick eene Fahn an, de in de Kuntrei staht, waar he söken sall, un klick dann de Knoop »Enn Schattsöker sall düsse Stee unnersöken« an."
+msgstr "Daarmit een Schattsöker Water söcht, klick eene Fahn an, de in de Kuntrei staht, waar he söken sall, un klick dann de Knoop »Enn Schattsöker sall deese Stee unnersöken« an."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:114
 msgid ""
@@ -658,7 +658,7 @@ msgstr "Kantruusk nickkoppt tofree…"
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:336
 msgid "At last! These rocks should last for a while."
-msgstr "Uplest! Düsse Stenen langen enige Tied."
+msgstr "Uplest! Deese Stenen langen eenige Tied."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:341
 msgid "Boldreth exclaims…"
@@ -952,7 +952,7 @@ msgstr "Sieg"
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
-msgstr "Du hest düsse Rutfödderung ofsloten.  Wenn du willt, kannst du wiederspölen, anners de token Rutfödderung anfangen."
+msgstr "Du hest deese Rutfödderung ofsloten. Wenn du willt, kannst du wiederspölen, anners de token Rutfödderung anfangen."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:503
 msgid "One Full Moon Night"

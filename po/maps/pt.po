@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-16 13:59+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-26 06:00+0000\n"
 "Last-Translator: Rui <xymarior@yandex.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -133,15 +133,15 @@ msgstr "Quando o Deus perdeu a fé nos Atlantas e submergiu-lhes a ilha, uma val
 
 #: ../../data/campaigns/campaigns.conf:52
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Da Água ao Gelo"
 
 #: ../../data/campaigns/campaigns.conf:54
 msgid "Frisians"
-msgstr ""
+msgstr "Frísios"
 
 #: ../../data/campaigns/campaigns.conf:56
 msgid "For advanced players. Introduces the Frisians"
-msgstr ""
+msgstr "Para jogadores experientes. Introduz os Frísios."
 
 #: ../../data/campaigns/campaigns.conf:57
 msgid ""
@@ -151,7 +151,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Viver no oceano é uma luta constante, e ainda mais para os habitantes da costa norte do mar Frísio. Foi a última tempestade, a mais devastadora da história humana. Nada mais do que mais um exemplo do que os Frísios têm de enfrentar – ou um sinal dos deuses de que a tribo que assentou aqui tem de encontrar outro local?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -183,7 +183,7 @@ msgstr "Surpresa, Surpresa!"
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "A Grande Tempestade de Inundação"
 
 #: ../../data/campaigns/campaigns.conf:134
 msgid "Colder than Ice"
@@ -204,7 +204,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Depois de perder uma importante batalha contra os Bárbaros que resultou na perda de grande parte do território do Império, Lutius deixou Fremil para começar uma nova vida. Mas o destino quis que o seu navio entrasse numa forte tempestade que quase o destruiu. Só com muita sorte consegue encalhar já o muito danificado navio uma praia deserta e salvar a sua gente. Por ora!"
+msgstr "Depois de perder uma importante batalha contra os Bárbaros que resultou na perda de grande parte do território do Império, Lutius deixou Fremil para começar uma nova vida. Mas o destino quis que o seu navio entrasse numa forte tempestade que quase o destruiu. Só com muita sorte consegue encalhar o já muito danificado navio uma praia deserta e salvar o seu povo. Por agora!"
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -240,7 +240,7 @@ msgstr ""
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Este cenário decorre num contexto histórico, mas a maioria da descrição é ficção."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
@@ -294,7 +294,7 @@ msgstr "Economia"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr "Neste tutorial, vai aprender as possibilidades que o Widelands oferece para ajustar a sua economia. Só é aconselhado aos jogadores com alguma experiencia."
+msgstr "Neste tutorial, vais aprender as possibilidades que o Widelands oferece para ajustar a tua economia. Só é aconselhado aos jogadores com alguma experiência."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -616,7 +616,7 @@ msgstr ""
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr ""
+msgstr "Não te esqueças dos fornecimentos de madeira, irás precisar deles."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"
@@ -626,7 +626,7 @@ msgstr "Últimos Sobreviventes"
 msgid ""
 "Four tribes fighting for dominance in a stark area. Resources are scattered "
 "all over the map."
-msgstr ""
+msgstr "Quatro tribos a lutar pelo domínio numa área dura. Os recursos estão espalhados por todo o mapa."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/elemental:7
 msgid "Island Hopping"
@@ -797,13 +797,13 @@ msgstr "O Nilo"
 msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
-msgstr ""
+msgstr "O rio forneceu desde sempre alimentos e comunicação. Desta vez, os impérios irão lutar pelo controlo desta terra."
 
 #: ../../data/maps/The_Nile_v2.wmf/elemental:11
 msgid ""
 "Use the river wisely. Your opponents will do the same. You will find the "
 "main ore resources deep in the desert."
-msgstr ""
+msgstr "Usa o rio com sensatez. Os teus oponentes irão fazer o mesmo. Irás encontrar os recursos de minério principais no deserto profundo."
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
@@ -899,7 +899,7 @@ msgstr ""
 msgid ""
 "Defend your transport lines, or use ships to bypass the opponent. Then "
 "remove all enemy activity."
-msgstr ""
+msgstr "Defende as tuas linhas de transporte ou usa os barcos para contornar o oponente. Então remove toda a atividade do inimigo."
 
 #: ../../data/maps/Twinkling_Waves.wmf/elemental:8
 msgid "Twinkling Waves"
@@ -939,7 +939,7 @@ msgstr "Vasto Mundo"
 msgid ""
 "The world is not enough! If you want to win, you have to send some ships. "
 "But remember: your opponents are very close to you."
-msgstr "O mundo não chega! Se quiser ganhar, vai ter de enviar alguns navios. Mas lembre-se : os advers'arios estão perto."
+msgstr "O mundo não chega! Se quiseres ganhar, vais ter de enviar alguns navios. Mas lembra-te: os adversários estão por perto."
 
 #: ../../data/maps/Wisent_Valley.wmf/elemental:8
 msgid "Wisent Valley"

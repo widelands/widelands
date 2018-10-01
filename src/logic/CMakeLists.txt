@@ -174,7 +174,6 @@ wl_library(logic
     map_objects/buildcost.h
     map_objects/checkstep.cc
     map_objects/checkstep.h
-    map_objects/draw_text.h
     map_objects/immovable.cc
     map_objects/immovable.h
     map_objects/immovable_program.h
@@ -268,7 +267,6 @@ wl_library(logic
     game_io
     graphic
     graphic_color
-    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     graphic_surface
