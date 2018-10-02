@@ -1,7 +1,7 @@
 project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
-cmake_policy(SET CMP0054 NEW)
+cmake_policy(VERSION 3.11...3.12)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
