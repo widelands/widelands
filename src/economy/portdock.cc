@@ -369,7 +369,7 @@ void PortDock::ship_arrived(Game& game, Ship& ship) {
 		}
 	}
 
-	// Check for items with invalid destination. TODO: Prevent invalid destinations
+	// Check for items with invalid destination. TODO(ypopezios): Prevent invalid destinations
 	for (auto si_it = waiting_.begin(); si_it != waiting_.end(); ++si_it) {
 		if (!si_it->get_destination(game)) {
 			// Invalid destination. Carry the item back into the warehouse
