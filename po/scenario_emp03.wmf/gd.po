@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: GunChleoc, 2017\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -1183,11 +1183,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:587
 msgid "Unpleasant Discoveries"
-msgstr ""
+msgstr "Lorgan mì-chàilear"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:588
 msgid "Saledus looks very worried…"
-msgstr ""
+msgstr "Tha dragh mòr air Saledus…"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:590
@@ -1196,14 +1196,16 @@ msgid ""
 "somewhat worried that we will have to fight against them before we are ready"
 " to do so."
 msgstr ""
+"A thighearna, lorg sinn fuigheall dùin is baile Thùsanaich. Tha mi an "
+"amharas gum bi againn ri sabaid ’nan aghaidh mus bi sinn ullamh airson sin."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:596
 msgid "Train Faster, Train Harder"
-msgstr ""
+msgstr "Oidich nas luaithe, oidich nas dèine"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:597
 msgid "Saledus is demanding some discipline"
-msgstr ""
+msgstr "Tha Saledus a’ smachdachadh"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:599
@@ -1212,12 +1214,18 @@ msgid ""
 "should increase our efforts to train them to the highest level and to train "
 "more of them."
 msgstr ""
+"A thighearna, tha na togalaichean uile againn a dh’fheumas sinn airson na "
+"saighdearan againn oideachadh ach bu chòir dhuinn an oideachadh againn a "
+"neartachadh ach an ruig iad an rang as àirde ’s ach am faigh sinn barrachd "
+"dhiubh."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:601
 msgid ""
 "We need a lot of food, a lot of iron and a lot of gold to do so. So, we have"
 " lots of challenges to cope with."
 msgstr ""
+"Feumaidh sinn mòran bìdh, iarainn is òir airson sin a dhèanamh. Mar sin, tha"
+" iomadh dùbhlan romhainn."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:607
 msgid "Training Infrastructure is Needed"
@@ -1225,7 +1233,7 @@ msgstr "Tha feum air bun-structar oideachaidh"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:608
 msgid "Saledus has security concerns"
-msgstr ""
+msgstr "Tha dragh air Saledus mun tèarainteachd"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:610
@@ -1234,6 +1242,10 @@ msgid ""
 " important to increase the number of our soldiers as fast as we can. And we "
 "should train them well to improve their fighting abilities."
 msgstr ""
+"A thighearna, feumaidh sinn barrachd dhaoine a thogail dhan arm mhòr againn."
+" Tha e cudromach gun cuir sinn ris na saighdearan againn cho luath ’s a "
+"ghabhas. Agus bu chòir dhuinn an oideachadh ach am bi iad nas comasaiche air"
+" a’ bhlàr."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:612
 msgid ""
@@ -1241,10 +1253,13 @@ msgid ""
 "limited space available. We need some barracks, a training camp and an arena"
 " or a colosseum."
 msgstr ""
+"Uime sin, feumaidh sinn bun-structar oideachaidh slàn a thogail ged nach eil"
+" mòran àite ri fhaighinn. Bidh sinn feumach air taigh-feachd, campa "
+"oideachaidh agus raon spòrs no coileasam."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:620
 msgid "Time to get Home Again"
-msgstr ""
+msgstr "Thàinig an t-àm airson tilleadh dhachaigh"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:623
@@ -1253,12 +1268,17 @@ msgid ""
 " were put in front of us. But my heart is still with our home. We shall set "
 "sail as soon as possible to help defend the Empire from the Barbarian tribe."
 msgstr ""
+"Shoirbhich leinn, a chàirdean! Seas sinn an aghaidh nan dùbhlan uile a bha "
+"romhainn. Ach tha an cianalas orm. Bheir sinn an cuan oirnn cho luath ’s a "
+"ghabhas ach an dìonamaid ar n-Impireachd an aghaidh treubh nan Tùsanach."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:625
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Tha thu air am misean seo a choileanadh. Faodaidh tu leantainn air adhart a "
+"chluiche ma thogras tu no gluasad air adhart dhan ath-mhisean."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:634

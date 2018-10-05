@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -256,7 +256,7 @@ msgid ""
 "tribe away to start a quiet, peaceful life on this untouched island."
 msgstr ""
 "Mien Volk un ick sünd jüüst vum Fastland ankomen. Wi mussen mit de Däänen im"
-" Noorden kampen, mit de Wikingers im Oosten… ick hebb besluten, mien Volk "
+" Noorden kampen, mit de Wikingers im Oosten … ick hebb besluten, mien Volk "
 "wiedertoföhren un up deese braken Hallig een ruhiges, freedsames Leven "
 "antofangen."
 
@@ -372,7 +372,7 @@ msgstr ""
 "Um Backstenen to brannen bruukt de Backsteenbranneree een Füür. Daar bruuken"
 " wi Köhle för. Bau een Köhle-Bargwark, daarmit wi genoog hebben. Sünner "
 "Köhle gifft 't keene Backstenen, sünner Backstenen keene Bargwarken, sünner "
-"Bargwarken keene Köhle… du süchst dat Probleem."
+"Bargwarken keene Köhle … du süchst dat Probleem."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:173
@@ -415,7 +415,7 @@ msgid ""
 " shortage should be a priority."
 msgstr ""
 "Ick hebb markt, dat wi siet einiger Tied keen Reit mehr hebben. Uns' Husen "
-"bruken daar woll Bülten von. Wi sallen noch een oder twee Reitbuurderee "
+"bruken daar woll Bülten vun. Wi sallen noch een oder twee Reitbuurderee "
 "bauen. Wi bruken Reit ok, um Fiskernette un anners Warktüüg to produzeren; "
 "um dat mutten wi deese Unnerversörgung so fix as mögelk behelpen."
 
@@ -520,7 +520,7 @@ msgstr "Smachtige Bargwarkskeerls"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:216
 msgid "The miners are protesting…"
-msgstr "De Bargwarkskeerls mucken up…"
+msgstr "De Bargwarkskeerls mucken up …"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:218
@@ -1097,7 +1097,7 @@ msgid ""
 msgstr ""
 "Du hest deese Rutfödderung ofsloten. Du kannst nu de token Rutfödderung "
 "anfangen un uns helpen, eene neie Heimaad uptobauen, wied weg vun de "
-"haatsken Macht vun de falsken Gott…"
+"haatsken Macht vun de falsken Gott …"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -97,7 +97,7 @@ msgstr ""
 "Bau eene Fissbuurderee, um Fisse to produzeren. De Fissbuurderee bruukt de "
 "Speden vun eener Lehmkuhl in de Naberskupp, um se as Polen to bruken, waar "
 "se Fisse in tüchten kann. Blot een Fisker, de vun eener Fissbuurderee warkt,"
-" kann in düssen Polen fisken."
+" kann in deesen Polen fisken."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:60
 msgid "Decide whether you want to cooperate with the Empire"
@@ -241,8 +241,8 @@ msgid ""
 "were on the sea, tossed about by envious storms… it must have been months."
 msgstr ""
 "Ick hebb anfangen to gloven, de Fahrt gaht nooit to Enn. Ick hebb keene "
-"Ahnung, wo lange wi up de See weren, dörschüddelt vun missgünstigen Störms… "
-"'t mutten Maanten wesen sien."
+"Ahnung, wo lange wi up de See weren, dörschüddelt vun missgünstigen Störms …"
+" 't mutten Maanten wesen sien."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:116
@@ -280,7 +280,7 @@ msgid ""
 "beautiful."
 msgstr ""
 "Deeser Oort sücht wööst un kahl ut, seggen miene Kameraden, aber ick finn, "
-"'t is… mooi."
+"'t is … mooi."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:134
@@ -390,7 +390,7 @@ msgid ""
 msgstr ""
 "Ick hebb een paar gode Wapen in uns' Kraamhusen sehn. Villicht kann man se "
 "in Metall torüggsmelten? Aber dat is eene lepe Upmakeree vun de goden "
-"Sweerten…"
+"Sweerten …"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:172
 msgid "New metal"
@@ -601,7 +601,7 @@ msgstr "Frömden"
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:236
 msgid "…does anyone understand what he is saying?"
-msgstr "…verstaht een of anner wat he seggt?"
+msgstr "… verstaht een of anner, wat he seggt?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
@@ -699,6 +699,10 @@ msgid ""
 "expand your territory from this moment on until you have given us your gift."
 " Fail to obey, and the Empire shall treat you like enemies."
 msgstr ""
+"Wenn ji uns deese Waren nich geevt, sall dat Riek ji as Feinde behanneln. Un"
+" daamit ji  jo dürabeles Metall nich verklüngelt, versegg ick ji vun nu of "
+"an, jo Gewest to vergrotern, bit ji uns jo Gaav geven hebbt. Dood dat nich, "
+"un dat Riek sall ji as Feinde behanneln."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:284
@@ -709,6 +713,11 @@ msgid ""
 "though you are, I do believe you will realize the truth of my words after "
 "some consideration."
 msgstr ""
+"Ji muttst tegen deese Willen kämpen, wenn ji in deese Kuntrei leven wullt; "
+"ji köönt wiss sehn, dat 't lichter is, tosammen mit de Riek tegen se to "
+"fechten as alleen? Un ji wullt dat Riek würrelk nich as jo Feind. Woll sünd "
+"ji Wille Lüü, aber ick bün wiss, dat ji verstaht, dat ick Klookheid segg, "
+"nadeem ji daar een bietje över nadacht hebbt."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:291
@@ -717,6 +726,10 @@ msgid ""
 "our territory when all we want is to build a new home, and threaten us with "
 "war if we refuse to be his slaves?"
 msgstr ""
+"Dat is de gröttste Frechheid vun allen. Wo kann he dat wagen, uns to "
+"befehlen, uns' Gewest nich wieder to vergrotern, wenn wi nix wullen as eene "
+"neie Heimaad upbauen, un uns mit Krieg drohen, wenn wi nich siene Sklaven "
+"wesen wullen?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:294
@@ -727,6 +740,12 @@ msgid ""
 "would buy us some time. As for expansion – I wonder how strictly he can "
 "possibly control us…"
 msgstr ""
+"Am Leevsten will ick seggen, dat wi hüm gliek stracks angriepen, aber ick "
+"bün bange, dat wi noch nich stark genoog sünd, um hüm in eener Slacht to "
+"begegen. Wi sallen uns' Soldaten fixer utbilden as wi so doon, as of wi "
+"siene sobenöömte Gaav sammeln. Dat gifft uns wat Tied. Un wat dat vergrotern"
+" vun uns' Gewest anbelangt – ick fraag mi, wo akkeraat he uns wull "
+"kuntrolleren kann …"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:298
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:308
@@ -780,6 +799,9 @@ msgid ""
 "Murilius has made it quite clear that he won’t leave us alone. I fear we "
 "must defeat him and destroy his colony if we ever want to have peace here."
 msgstr ""
+"Murilius hett klaar maakt, dat he uns nich alleen laten will. Ick gloov, wi "
+"mutten hüm manntjen un sien Dörp ofbrannen, wenn wi hier jemaals Free hebben"
+" wullen."
 
 #. TRANSLATORS: Reebaud – defeat both enemies
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:323
@@ -788,6 +810,9 @@ msgid ""
 "this land with anyone, as sharing only leads to conflicts and battles, as we"
 " saw in our old home. We must defeat the barbarians as well."
 msgstr ""
+"Dat Wille Volk, waar he vun sproken hett, is ok eene Gefahr. Ick will deeses"
+" Land mit nüms delen, wiel Delen blot to Stried un Kriegen föhrt, as wie in "
+"uns' oller Heimaad sehn hebben. Wi mutten ok de Willen Lüü manntjen."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:327
 msgid "The Empire is Grateful"
@@ -806,6 +831,8 @@ msgid ""
 "Strangers! I see you have kept your word. The Empire rewards its friends, "
 "therefore I shall reward you with the friendship of the Empire!"
 msgstr ""
+"Frömde! Ick seh, ji hebbt jo Woord hollt. Dat Riek belohnt siene Frünnen, "
+"daarum belohn ick ji mit de Fründskupp vum Riek!"
 
 #. TRANSLATORS: Murilius – Supplied Murilius. Murilius’s plan is to use the
 #. player as cannon fodder, while he himself only attacks when he has no
@@ -817,6 +844,11 @@ msgid ""
 "end of the mountains enclosing this outpost; you will find the barbarians "
 "there – attack them! We will fend off attacks launched by the enemy."
 msgstr ""
+"Nu verlööv ick ji, uns to helpen, de Willen Lüü to manntjen, wat in eenem "
+"schuligen Daal noordwestelk vun uns leven. Ick kumdeer ji, vergrotert jo "
+"Gewest langs de noordelken Enn vun de Kedd vun Bargen, wat deese Butenstee "
+"insluten; daar finnt ji de Willen Lüü – griept se an! Wi verteidigen tegen "
+"all Angriffen, wat de Feind begünnt."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:338
 msgid "The Reward For Your Service"
@@ -834,6 +866,8 @@ msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
+"Ji hebbt dat good daan, Frömde! As ick ji vörhen seggt hebb, sallt ji mit de"
+" Fründskupp vum Riek belohnt worden!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:345
@@ -844,6 +878,11 @@ msgid ""
 " the Capital will demand from you, and of course, who shall be king of your "
 "tribe."
 msgstr ""
+"Ick slaag vör, ji fangt daarmit an, Legaden tur Höövdstadt to schicken, um "
+"de neeisten politisken Dingen uttofinnen. Wenn ji daar sied, köönt ji "
+"Instruksjes för jo Volk vum Senaat kriegen. Un ji mutten rutfinnen, wat för "
+"eenen Toll de Höövdstadt vun ji hebben will, un natürelk, well König vun jo "
+"Volk wesen sall."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:348
 msgid "Another Enemy"
@@ -861,6 +900,10 @@ msgid ""
 "be servants of this Empire, and take away my leadership? And does the "
 "hypocrite dare call this a reward?"
 msgstr ""
+"Hebb ick hüm recht verstahn? Na allem, wat wi för hüm daan hebben, nadeem so"
+" völe vun mienen Soldaten hör Leven för siene Saak geven hebben, will he uns"
+" as de Bedeenten vun deesem Riek hebben, un miene Leiderskupp wegnehmen? Un "
+"deeser Fliemstrieker waagt 't, dat eenen Lohn to nömen?"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:354
@@ -869,6 +912,10 @@ msgid ""
 "burn down his entire colony, and kill every single person in his realm. He "
 "will be very sorry indeed for insulting our tribe thus."
 msgstr ""
+"Wi sallen deesen heersken Prokonsul för sienen Verraad bestrafen! Ick will "
+"sien kumpletes Dörp daalbrannen un elk un een Minsk in sienem Gewest "
+"doodmaken. 't sall hüm würrelk leep unbannig leeddoon, uns' Volk so kränkt "
+"to hebben."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:358
 msgid "Victory"
@@ -884,6 +931,9 @@ msgid ""
 "We have defeated all our enemies! Now no other tribe will ever dare settle "
 "here again. We are safe, and we can finally live our lives in peace."
 msgstr ""
+"Wi hebben all uns' Feinde manntjet! Nu kann keen anneres Volk 't jemaals "
+"wagen, sük hier daaltolaten. Wi sünd seker un könen uplest uns' Levens in "
+"Ruh un Free leven."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:362
 msgid "Congratulations"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-25 14:27+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-10-04 08:39+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -598,7 +598,7 @@ msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr "Een Grotes Huus kannst du allerwegens daar bauen, waar du een middelmatigs Huus bauen kannst un keen Hinner un keene nich tum Bebauen gadelke Landskupp in de West, Noordwest un Noordoost is."
+msgstr "Een grotes Huus kannst du allerwegens daar bauen, waar du een middelmatigs Huus bauen kannst un keen Hinner un keene nich tum Bauen gadelke Landskupp in de West, Noordwest un Noordoost is."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -653,7 +653,7 @@ msgstr "Deel diene Straten in körte Delen up, indeem du Fahnen baust. Dann word
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr "Noch Fragem? Uns' FAQ, de Wiki un natürelk uns' Gemeenskupp-Forums könen im Internett unner %s funnen worden."
+msgstr "Noch Fragen? Uns' FAQ, de Wiki un natürelk uns' Gemeenskupp-Forums könen im Internett unner %s funnen worden."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
