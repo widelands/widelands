@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-25 14:19+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-09-30 10:51+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -423,7 +423,7 @@ msgstr "Nu dat Flintslagerhuus"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:229
 msgid "Great. Now about that quarry…"
-msgstr "Hunnert. Nu deeses Flintslagerhuus…"
+msgstr "Hunnert. Nu deeses Flintslagerhuus …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "How to Build a Quarry"
@@ -737,7 +737,7 @@ msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
-msgstr "Moin, ick bün 't weer! Nu hebb ick di eene Naricht schickt. Widelands schickt di Narichten, um di vun Vörfallen vun Belang weten to laten: Wenn een Bargwark leeg is, dien Volk angrepen word, Soldateree-Boen innohmen oder verloren worden, Mineraale funnen worden…"
+msgstr "Moin, ick bün 't weer! Nu hebb ick di eene Naricht schickt. Widelands schickt di Narichten, um di vun Vörfallen vun Belang weten to laten: Wenn een Bargwark leeg is, dien Volk angrepen word, Soldateree-Boen innohmen oder verloren worden, Mineraale funnen worden …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""

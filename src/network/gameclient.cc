@@ -584,7 +584,6 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		// New map was set, so we clean up the buffer of a previously requested file
 		if (file_)
 			delete file_;
-		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 		break;
 	}
 
@@ -763,8 +762,11 @@ void GameClient::handle_packet(RecvPacket& packet) {
 
 	case NETCMD_SETTING_ALLPLAYERS: {
 		d->settings.players.resize(packet.unsigned_8());
-		for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 			receive_one_player(i, packet);
+		}
+		// Map changes are finished here
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 		break;
 	}
 	case NETCMD_SETTING_PLAYER: {

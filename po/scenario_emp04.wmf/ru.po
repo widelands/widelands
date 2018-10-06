@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Viktor S <awsswa59@gmail.com>, 2018\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
@@ -602,11 +602,11 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:333
 msgid ""
-"Until we have found the plans, the only option for our farms is to dismantle"
-" them."
+"Until we have found the plans, the only option for our farms is to destroy "
+"them."
 msgstr ""
-"Пока мы не найдем другой выход, единственно правильное решение для наших "
-"ферм - уничтожить их"
+"Пока мы не найдем другой выход, единственный вариант для наших ферм - "
+"уничтожить их."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
@@ -992,7 +992,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:501
 msgid "Amalea has Some Advice"
-msgstr ""
+msgstr "У Амалии есть некоторые советы"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:502
 msgid "Amalea is providing economic advice…"
@@ -1015,11 +1015,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:514
 msgid "Amalea is in a Good Mood"
-msgstr ""
+msgstr "Амалия в хорошем настроении"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:515
 msgid "Amalea is celebrating success…"
-msgstr ""
+msgstr "Амалия празднует успех ..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:517
@@ -1030,11 +1030,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:522
 msgid "Amalea Looks Thoughtful"
-msgstr ""
+msgstr "Амалия выглядит задумчиво"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:523
 msgid "Amalea is sorrowful…"
-msgstr ""
+msgstr "Амалия печальна ..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:525
@@ -1046,7 +1046,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:530
 msgid "Amalea is Positively Surprised"
-msgstr ""
+msgstr "Амалия позитивно удивлена"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:531
 msgid "Amalea is celebrating a happy event…"
@@ -1062,7 +1062,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:538
 msgid "Amalea Analyzes the Economy"
-msgstr ""
+msgstr "Амалия анализирует экономику"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:539
 msgid "Amalea reminds Lutius of the farms…"
@@ -1085,7 +1085,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:551
 msgid "Amalea’s Restrictions"
-msgstr ""
+msgstr "Амалии ограничена"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:552
 msgid "Amalea restricts the building possibilities…"
@@ -1404,7 +1404,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:725
 msgid "Saledus is alerted…"
-msgstr ""
+msgstr "Саледус предупрежден ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:727
@@ -1458,7 +1458,7 @@ msgstr "Проклятый"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:757
 msgid "Vesta is cursing us…"
-msgstr ""
+msgstr "Веста проклинает нас ..."
 
 #. TRANSLATORS: Julia - priestess of the goddess Vesta
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:759

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-21 14:56+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-10-04 04:32+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -360,7 +360,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "와이드랜드는 당신이 하는 모든 게임을 두 개의 파일로 기록합니다. 하나는 확장자가 .wrpl.wgf이고 초기 상태를 저장 합니다. 다른 파일에는 .wrpl 확장자가 있으며, 도로를 건설하거나 적을 공격하는 등 모든 플레이어가 실행한 모든 명령이 포함되어 있습니다. 파일 이름의 앞부분은 당신이 게임을 시작한 시간을 나타냅니다."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -441,7 +441,7 @@ msgstr ""
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
-msgstr ""
+msgstr "놀사람 설정"
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
@@ -545,7 +545,7 @@ msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Ctrl 키를 누르면서 클릭하면 여러 동물 유형을 선택할 수 있습니다. 그런 다음 지도를 클릭하면 선택한 동물 유형 중 하나의 것이 배치됩니다."
 
 #: ../../data/txts/tips/editor.lua:15
 msgid ""
@@ -586,7 +586,7 @@ msgstr ""
 #: ../../data/txts/tips/editor.lua:39
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr ""
+msgstr "물이나 물고기 자원을 설정하지 않으면 기본량으로 설정되어 사용됩니다."
 
 #: ../../data/txts/tips/editor.lua:43
 msgid ""
@@ -768,7 +768,7 @@ msgstr "채팅 메시지가 시작될 때 '@name'을 사용하여 한 명에게�
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "만약 게임이 중단되어도, 걱정하지 마십시오! 게임은 자동으로 저장되므로 나중에 다시 불러올 수 있습니다."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7
