@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-18 18:10+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: tamanegi, 2018\n"
 "Language-Team: Japanese (https://www.transifex.com/widelands/teams/35159/ja/)\n"
@@ -686,10 +686,10 @@ msgstr "アマリアは考え込んだ様子です…"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
-"they had to use up all our remaining gold for building the port. Now we "
-"don’t have any gold left."
+"they have to use all our remaining gold for building the port. So, we won’t "
+"have any gold left after our port is build."
 msgstr ""
-"ねぇルティウス、さっき建築者の皆と話したのだけど、港の建築に備蓄していた全ての金が必要だったらしいの。だから、もう金の在庫は何も残っていないわ。"
+"ねぇルティウス、さっき建築者の皆と話したのだけど、港の建築には備蓄していた全ての金を使うしかないらしいの。港ができる頃には、金の在庫はなくなってしまうということね。"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440

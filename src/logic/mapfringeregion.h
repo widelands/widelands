@@ -77,6 +77,10 @@ private:
 	typename AreaType::RadiusType remaining_in_phase_;
 	uint8_t phase_;
 };
+
+// Forward declarations of template instantiations
+template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map);
+template <> bool MapFringeRegion<Area<>>::advance(const Map& map);
 }
 
 #endif  // end of include guard: WL_LOGIC_MAPFRINGEREGION_H

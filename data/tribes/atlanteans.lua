@@ -22,6 +22,8 @@ dirname = path.dirname(__file__)
 --
 --    **roads**: The file paths for the tribes' road textures in 2 subtables ``busy`` and ``normal``
 --
+--    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
+--
 --    **wares_order**: This defines all the wares that this tribe uses and their display order in the user interface. Each subtable defines a column in the user interface.
 --
 --    **workers_order**:  This defines all the workers that this tribe uses and their display order in the user interface. Each subtable defines a column in the user interface.
@@ -70,6 +72,31 @@ tribes:new_tribe {
       normal = {
          "tribes/images/atlanteans/roadt_normal_00.png",
          "tribes/images/atlanteans/roadt_normal_01.png",
+      },
+   },
+
+   resource_indicators = {
+      [""] = {
+         [0] = "atlanteans_resi_none",
+      },
+      coal = {
+         [10] = "atlanteans_resi_coal_1",
+         [20] = "atlanteans_resi_coal_2",
+      },
+      iron = {
+         [10] = "atlanteans_resi_iron_1",
+         [20] = "atlanteans_resi_iron_2",
+      },
+      gold = {
+         [10] = "atlanteans_resi_gold_1",
+         [20] = "atlanteans_resi_gold_2",
+      },
+      stones = {
+         [10] = "atlanteans_resi_stones_1",
+         [20] = "atlanteans_resi_stones_2",
+      },
+      water = {
+         [100] = "atlanteans_resi_water",
       },
    },
 
@@ -205,16 +232,16 @@ tribes:new_tribe {
       "cornfield_ripe",
       "cornfield_harvested",
       "destroyed_building",
-      "resi_coal1",
-      "resi_coal2",
-      "resi_gold1",
-      "resi_gold2",
-      "resi_iron1",
-      "resi_iron2",
-      "resi_none",
-      "resi_water1",
-      "resi_stones1",
-      "resi_stones2",
+      "atlanteans_resi_none",
+      "atlanteans_resi_water",
+      "atlanteans_resi_coal_1",
+      "atlanteans_resi_iron_1",
+      "atlanteans_resi_gold_1",
+      "atlanteans_resi_stones_1",
+      "atlanteans_resi_coal_2",
+      "atlanteans_resi_iron_2",
+      "atlanteans_resi_gold_2",
+      "atlanteans_resi_stones_2",
       "atlanteans_shipconstruction",
    },
 
