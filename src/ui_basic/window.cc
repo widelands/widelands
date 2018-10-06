@@ -227,7 +227,7 @@ void Window::move_inside_parent() {
  */
 void Window::center_to_parent() {
     Panel* parent = get_parent();
- 
+
     assert(parent);
     set_pos(Vector2i((static_cast<int32_t>(parent->get_inner_w()) - get_w()) / 2,
                      (static_cast<int32_t>(parent->get_inner_h()) - get_h()) / 2));
