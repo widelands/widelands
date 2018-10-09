@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-12 15:51+0000\n"
-"PO-Revision-Date: 2018-09-12 15:53+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-17 09:29+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -562,7 +562,7 @@ msgid "Error!"
 msgstr "Mearachd!"
 
 #: ../../src/editor/ui_menus/main_menu.cc:43
-#: ../../src/wui/game_options_menu.cc:66
+#: ../../src/wui/game_options_menu.cc:43
 msgid "Main Menu"
 msgstr "Am prìomh chlàr-taice"
 
@@ -929,7 +929,7 @@ msgstr "Àireamh de chluicheadairean"
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:70
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:102
-#: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:509
+#: ../../src/network/gamehost.cc:1607 ../../src/ui_fsmenu/launch_mpg.cc:509
 #: ../../src/wui/multiplayersetupgroup.cc:135
 #: ../../src/wui/multiplayersetupgroup.cc:189
 #, c-format
@@ -1110,7 +1110,7 @@ msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr "Seo na caractaran nach eil ceadaichte:"
 
-#: ../../src/logic/editor_game_base.cc:213
+#: ../../src/logic/editor_game_base.cc:228
 msgid "Loading graphics"
 msgstr "A’ luchdadh na grafaigeachd"
 
@@ -1640,7 +1640,7 @@ msgstr "do-choiseach"
 msgid "This objective has no description."
 msgstr "Chan eil tuairisgeul aig an amas seo."
 
-#: ../../src/logic/player.cc:1334
+#: ../../src/logic/player.cc:1336
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -1684,7 +1684,7 @@ msgid ""
 " you tried to connect."
 msgstr "Cha deach le Widelands ceangal a dhèanamh ris an t-seòladh shònraichte. Cha robh frithealaiche Widelands a’ ruith aig a’ phort sin air neo chaidh am frithealaiche a dhùnadh sìos fhad ’s a bha thu a’ feuchainn ri ceangal."
 
-#: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
+#: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:641
 #: ../../src/wlapplication.cc:1311
 msgid "Preparing game"
 msgstr "Ag ullachadh a’ gheama"
@@ -1709,130 +1709,130 @@ msgstr "%s Thèid an geama a shàbhaladh gu fèin-obrachail."
 msgid "Disconnected from Host"
 msgstr "Chaidh an ceangal dhan òstair a bhriseadh"
 
-#: ../../src/network/gamehost.cc:257
+#: ../../src/network/gamehost.cc:258
 msgid "Available host commands are:"
 msgstr "Seo àitheantan an òstair a bhios ri làimh:"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:259
+#: ../../src/network/gamehost.cc:260
 msgid "/help  -  Shows this help"
 msgstr "/help - seall a’ chobhair seo"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:261
+#: ../../src/network/gamehost.cc:262
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr "/announce <teachdaireachd> - Cuir teachdaireachd na cabadaich mar bhrath (cabadaich an t-siostaim)"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:263
+#: ../../src/network/gamehost.cc:264
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr "/warn <ainm> <adhbhar> - Thoir rabhadh dhan chleachdaiche <ainm> air <adhbhar>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:265
+#: ../../src/network/gamehost.cc:266
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr "/kick <ainm> <adhbhar>  -  Thoir a’ bhròg dhan chluicheadair <ainm> air <adhbhar>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:267
+#: ../../src/network/gamehost.cc:268
 msgid "/forcePause            -  Force the game to pause."
 msgstr "/forcePause            -  Thoir air a’ gheama stad."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:269
+#: ../../src/network/gamehost.cc:270
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr "/endForcedPause        -  Aisigidh seo luaths àbhaisteach a’ gheama."
 
-#: ../../src/network/gamehost.cc:276
+#: ../../src/network/gamehost.cc:277
 msgid "Wrong use, should be: /announce <message>"
 msgstr "Na cleachd mar sin e, bu chòir dha bith: /announce <teachdaireachd>"
 
-#: ../../src/network/gamehost.cc:287
+#: ../../src/network/gamehost.cc:288
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "Na cleachd mar sin e, bu chòir dha bith: /warn <ainm> <adhbhar>"
 
-#: ../../src/network/gamehost.cc:291 ../../src/network/gamehost.cc:314
+#: ../../src/network/gamehost.cc:292 ../../src/network/gamehost.cc:315
 #, c-format
 msgid "The client %s could not be found."
 msgstr "Cha deach an cliant %s a lorg."
 
-#: ../../src/network/gamehost.cc:302
+#: ../../src/network/gamehost.cc:303
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "Na cleachd mar sin e, bu chòir dha bith: /kick <ainm> <adhbhar>"
 
-#: ../../src/network/gamehost.cc:312
+#: ../../src/network/gamehost.cc:313
 msgid "You can not kick yourself!"
 msgstr "Chan urrainn dhut a’ bhròg a thoirt dhut fhèin!"
 
-#: ../../src/network/gamehost.cc:318
+#: ../../src/network/gamehost.cc:319
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr "A bheil thu cinnteach gu bheil thu airson a’ bhròg a thoirt dha %s?"
 
-#: ../../src/network/gamehost.cc:320
+#: ../../src/network/gamehost.cc:321
 #, c-format
 msgid "The stated reason was: %s"
 msgstr "Seo an t-adhbhar a chuireadh seachad: %s"
 
-#: ../../src/network/gamehost.cc:321
+#: ../../src/network/gamehost.cc:322
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "Ma tha, sgrìobh: /ack_kick %s"
 
-#: ../../src/network/gamehost.cc:329
+#: ../../src/network/gamehost.cc:330
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr "Chaidh sgur de dhearbhadh a’ bhròig: cha deach ainm a thoirt seachad!"
 
-#: ../../src/network/gamehost.cc:331
+#: ../../src/network/gamehost.cc:332
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "Na cleachd mar sin e, bu chòir dha bith: /ack_kick <ainm>"
 
-#: ../../src/network/gamehost.cc:337
+#: ../../src/network/gamehost.cc:338
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr "Chaidh sgur de dhearbhadh a’ bhròig: cha deach an t-ainm ceart a thoirt seachad!"
 
-#: ../../src/network/gamehost.cc:346
+#: ../../src/network/gamehost.cc:347
 msgid "Pause was already forced - game should be paused."
 msgstr "Chaidh toirt air a’ gheama stad mar-thà is bu chòir e bhith ’na stad."
 
-#: ../../src/network/gamehost.cc:356
+#: ../../src/network/gamehost.cc:357
 msgid "There is no forced pause - nothing to end."
 msgstr "Cha deach toirt air a’ gheama stad on nach eil dad ri stad ann."
 
-#: ../../src/network/gamehost.cc:365
+#: ../../src/network/gamehost.cc:366
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Àithne mhì-dhligheach! Sgrìobh /help airson liosta dhe na h-àitheantan."
 
-#: ../../src/network/gamehost.cc:494
+#: ../../src/network/gamehost.cc:495
 msgid "Failed to host the server!"
 msgstr "Cha b’ urrainn dhuinn am frithealaiche òstadh!"
 
-#: ../../src/network/gamehost.cc:495
+#: ../../src/network/gamehost.cc:496
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
 msgstr "Cha b’ urrainn dha Widelands tòiseachadh air frithealaiche òstadh.\nCha bu chòir seo tachairt agus cha chreid sinn gur urrainn dhut fhèin seo a chàradh. An dèan thu aithris air buga?"
 
-#: ../../src/network/gamehost.cc:503
+#: ../../src/network/gamehost.cc:504
 msgid "Failed to start the server!"
 msgstr "Cha b’ urrainn dhuinn am frithealaiche a cur gu dol!"
 
-#: ../../src/network/gamehost.cc:504
+#: ../../src/network/gamehost.cc:505
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
 msgstr "Cha b’ urrainn dha Widelands frithealaiche a cur gu dol.\n’S dòcha gu bheil pròiseas eile a’ ruith frithealaiche air a’ phort againn mar-thà."
 
-#: ../../src/network/gamehost.cc:1526
+#: ../../src/network/gamehost.cc:1544
 #, c-format
 msgid "Computer %u"
 msgstr "Coimpiutair %u"
 
-#: ../../src/network/gamehost.cc:1583 ../../src/wui/game_summary.cc:102
+#: ../../src/network/gamehost.cc:1601 ../../src/wui/game_summary.cc:102
 msgid "Player"
 msgstr "Cluicheadair"
 
-#: ../../src/network/gamehost.cc:1732
+#: ../../src/network/gamehost.cc:1750
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2083,118 +2083,123 @@ msgstr "Dh’fhàg %1$s an geama (%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
+msgid "%1$s has been replaced with %2$s"
+msgstr ""
+
+#: ../../src/network/network_gaming_messages.cc:132
+#, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "Dh’fhàg cleachdaiche neo-aithnichte an geama (%s)"
 
-#: ../../src/network/network_gaming_messages.cc:133
+#: ../../src/network/network_gaming_messages.cc:134
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "Chuir am frithealaiche SYNCREQUEST ged nach eil geama ’ga ruith."
 
-#: ../../src/network/network_gaming_messages.cc:134
+#: ../../src/network/network_gaming_messages.cc:135
 msgid "Received a PLAYERCOMMAND even though no game is running."
 msgstr "Fhuaras PLAYERCOMMAND ged nach eil geama ’ga ruith."
 
-#: ../../src/network/network_gaming_messages.cc:135
+#: ../../src/network/network_gaming_messages.cc:136
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Fhuaras àithne LAUNCH on fhrithealaiche air nach robh dùil."
 
-#: ../../src/network/network_gaming_messages.cc:137
+#: ../../src/network/network_gaming_messages.cc:138
 msgid "Server sent a player update for a player that does not exist."
 msgstr "Chuir am frithealaiche ùrachadh cluicheadair airson cluicheadair nach eil ann."
 
-#: ../../src/network/network_gaming_messages.cc:139
+#: ../../src/network/network_gaming_messages.cc:140
 msgid "Server sent a user update for a user that does not exist."
 msgstr "Chuir am frithealaiche ùrachadh cleachdaiche airson cleachdaiche nach eil ann."
 
-#: ../../src/network/network_gaming_messages.cc:140
+#: ../../src/network/network_gaming_messages.cc:141
 msgid "Server uses a different protocol version"
 msgstr "Tha am frithealaiche a’ chleachdadh tionndadh eile dhen phròtacal"
 
-#: ../../src/network/network_gaming_messages.cc:141
+#: ../../src/network/network_gaming_messages.cc:142
 #, c-format
 msgid "Received command number %s, which is not allowed in this state."
 msgstr "Fhuaras an àithne àireamh %s nach eil ceadaichte san staid seo."
 
-#: ../../src/network/network_gaming_messages.cc:144
+#: ../../src/network/network_gaming_messages.cc:145
 msgid "Client reports time to host that is running backwards."
 msgstr "Tha an cliant ag aithris àm dhan òstair a tha a’ ruith on dheireadh dhan toiseach."
 
-#: ../../src/network/network_gaming_messages.cc:146
+#: ../../src/network/network_gaming_messages.cc:147
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Tha an cliant a’ cumail a’ dol thar àm a’ gheama a cheadaich an òstair."
 
-#: ../../src/network/network_gaming_messages.cc:147
+#: ../../src/network/network_gaming_messages.cc:148
 msgid "Client did not submit sync report in time."
 msgstr "Cha do chuir an cliant aithris sioncronachaidh ann ri àm."
 
-#: ../../src/network/network_gaming_messages.cc:148
+#: ../../src/network/network_gaming_messages.cc:149
 msgid "The game has already started."
 msgstr "Tha an geama air a thòiseachadh mar-thà."
 
-#: ../../src/network/network_gaming_messages.cc:149
+#: ../../src/network/network_gaming_messages.cc:150
 msgid "Client has no access to other player’s settings."
 msgstr "Chan eil inntrigeadh aig a’ chliant do roghainnean a’ chluicheadair eile."
 
-#: ../../src/network/network_gaming_messages.cc:150
+#: ../../src/network/network_gaming_messages.cc:151
 msgid "Client has no access to server settings."
 msgstr "Chan eil inntrigeadh aig a’ chliant do roghainnean an fhrithealaiche."
 
-#: ../../src/network/network_gaming_messages.cc:152
+#: ../../src/network/network_gaming_messages.cc:153
 msgid "Client sent TIME command even though game is not running."
 msgstr "Chuir an cliant àithne TIME ged nach eil geama ’ga ruith."
 
-#: ../../src/network/network_gaming_messages.cc:153
+#: ../../src/network/network_gaming_messages.cc:154
 msgid "Client sent a PLAYERCOMMAND for another player."
 msgstr "Chuir an cliant àithne cluicheadair airson cluicheadair eile."
 
-#: ../../src/network/network_gaming_messages.cc:154
+#: ../../src/network/network_gaming_messages.cc:155
 msgid "Client sent unexpected synchronization report."
 msgstr "Chuir an cliant aithris sioncronachaidh air nach robh dùil."
 
-#: ../../src/network/network_gaming_messages.cc:156
+#: ../../src/network/network_gaming_messages.cc:157
 msgid "Client requests file although none is available to send."
 msgstr "Tha an cliant ag iarraidh faidhle ged nach eil fear ri chur ri làimh."
 
-#: ../../src/network/network_gaming_messages.cc:157
+#: ../../src/network/network_gaming_messages.cc:158
 msgid "Client requests file part that does not exist."
 msgstr "Tha an cliant ag iarraidh faidhle nach eil ann."
 
-#: ../../src/network/network_gaming_messages.cc:158
+#: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "Chuir an òstair an cluicheadair %s dhan lobaidh!"
 
-#: ../../src/network/network_gaming_messages.cc:160
+#: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
 msgstr "RABHADH: tha %1$s a’ chleachdadh an tionndaidh: %2$s fhad ’s a tha an t-òstair a’ chleachdadh an tionndaidh: %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:161
+#: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "%s has joined the game"
 msgstr "Thàinig %s a-steach dhan gheama"
 
-#: ../../src/network/network_gaming_messages.cc:162
+#: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
 msgstr "Thòisich sinn air am faidhle %1$s a chur gu %2$s!"
 
-#: ../../src/network/network_gaming_messages.cc:163
+#: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
 msgstr "Tha sinn air an fhaidhle %1$s a chur gu %2$s"
 
-#: ../../src/network/network_gaming_messages.cc:164
+#: ../../src/network/network_gaming_messages.cc:165
 #, c-format
 msgid "Sending part %1$s of file %2$s to %3$s"
 msgstr "A’ cur pàirt %1$s dhen fhaidhle %2$s gu %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:165
+#: ../../src/network/network_gaming_messages.cc:166
 #, c-format
 msgid "The player ‘%s’ was defeated and became a spectator."
 msgstr "Chaidh ruaig a chur air cluicheadair “%s” is chaidh e ’na amharc."
 
-#: ../../src/network/network_gaming_messages.cc:166
+#: ../../src/network/network_gaming_messages.cc:167
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
 msgstr "Cha do fhreagair an cliant %1$s fad barrachd air %2$s."
@@ -3375,15 +3380,66 @@ msgstr "Cabadaich"
 msgid "Script console"
 msgstr "Consoil sgriobt"
 
+#. * TRANSLATORS: Window label
+#: ../../src/wui/game_client_disconnected.cc:50
+msgid "Client got disconnected"
+msgstr ""
+
+#: ../../src/wui/game_client_disconnected.cc:61
+msgid ""
+"A player disconnected from the game. An automatic save game has been "
+"created. Do you want to continue playing?"
+msgstr ""
+
+#. * TRANSLATORS: Button text
+#: ../../src/wui/game_client_disconnected.cc:73
+msgid "Continue game"
+msgstr ""
+
+#. * TRANSLATORS: Button tooltip
+#: ../../src/wui/game_client_disconnected.cc:75
+msgid ""
+"Replace the disconnected player with the selected AI and continue playing"
+msgstr ""
+
+#. * TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player
+#. has
+#. disconnected from a game
+#: ../../src/wui/game_client_disconnected.cc:84
+msgid "AI for the disconnected player"
+msgstr ""
+
+#. * TRANSLATORS: Button tooltip
+#: ../../src/wui/game_client_disconnected.cc:96
+#: ../../src/wui/game_options_menu.cc:76 ../../src/wui/game_summary.cc:93
+msgid "Exit Game"
+msgstr "Fàg an geama"
+
+#. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
+#. will be used as replacement for a disconnected player
+#: ../../src/wui/game_client_disconnected.cc:117
+#, c-format
+msgid "Replace player with %s"
+msgstr ""
+
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
 #: ../../src/wui/game_debug_ui.cc:211
 msgid "Debug Field"
 msgstr "Dì-bhugaich an raon"
 
+#. * TRANSLATORS: Window label when "Exit game" has been pressed
+#: ../../src/wui/game_exit_confirm_box.cc:28
+msgid "Exit Game Confirmation"
+msgstr "Dearbh an fhàgail"
+
+#: ../../src/wui/game_exit_confirm_box.cc:29
+msgid "Are you sure you wish to exit this game?"
+msgstr "A bheil thu cinnteach gu bheil thu airson an geama seo fhàgail?"
+
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:50
-#: ../../src/wui/game_options_menu.cc:89
+#: ../../src/wui/game_options_menu.cc:66
 msgid "Save Game"
 msgstr "Sàbhail an geama"
 
@@ -3580,29 +3636,15 @@ msgstr "Del: %s"
 msgid "Objectives"
 msgstr "Amasan"
 
-#. * TRANSLATORS: Window label when "Exit game" has been pressed
-#: ../../src/wui/game_options_menu.cc:45
-msgid "Exit Game Confirmation"
-msgstr "Dearbh an fhàgail"
-
-#: ../../src/wui/game_options_menu.cc:46
-msgid "Are you sure you wish to exit this game?"
-msgstr "A bheil thu cinnteach gu bheil thu airson an geama seo fhàgail?"
-
-#: ../../src/wui/game_options_menu.cc:77
+#: ../../src/wui/game_options_menu.cc:54
 #: ../../src/wui/game_options_sound_menu.cc:27
 msgid "Sound Options"
 msgstr "Roghainnean fuaime"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:79
+#: ../../src/wui/game_options_menu.cc:56
 msgid "Set sound effect and music options"
 msgstr "Suidhich roghainnean na fuaime ’s a’ chiùil"
-
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:93
-msgid "Exit Game"
-msgstr "Fàg an geama"
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music volume"
@@ -3795,12 +3837,12 @@ msgstr "Lùghdaich an uiread de bhathar a tha thu airson glèidheadh an-seo."
 msgid "Increase the number of wares you want to be stored here."
 msgstr "Meudaich an uiread de bhathar a tha thu airson glèidheadh an-seo."
 
-#: ../../src/wui/interactive_gamebase.cc:54
+#: ../../src/wui/interactive_gamebase.cc:56
 msgid "PAUSE"
 msgstr "’NA STAD"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:128
+#: ../../src/wui/interactive_gamebase.cc:130
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"

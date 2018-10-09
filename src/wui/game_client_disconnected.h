@@ -26,8 +26,8 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/unique_window.h"
 
-class GameHost;
 class InteractiveGameBase;
+struct GameHost;
 
 /**
  * Dialog that offers to replace a player with an AI or exit the game.

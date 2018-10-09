@@ -105,7 +105,7 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 67 + 3.6
             "return=skipped unless economy needs helmet",
-            "consume=coal iron:2",
+            "consume=coal iron",
             "sleep=30000",
             "playsound=sound/smiths smith 192",
             "animate=working 37000",

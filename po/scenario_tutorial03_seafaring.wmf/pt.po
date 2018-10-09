@@ -3,14 +3,15 @@
 # 
 # Translators:
 # GunChleoc, 2015-2016,2018
+# Rui <xymarior@yandex.com>, 2018
 # zecas <jjorge@free.fr>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 13:04+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 02:05+0000\n"
+"Last-Translator: Rui <xymarior@yandex.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,13 +31,13 @@ msgstr "Tutorial de Navegação"
 msgid ""
 "Welcome back. In this tutorial, you are going to learn the most important "
 "things about seafaring, that is ships, ports, and expedition."
-msgstr "Olá. Neste tutorial, vamos aprender o mais importante na navegação, isto é navios, portos e expedições."
+msgstr "Olá. Neste tutorial, vamos aprender o mais importante na navegação, isto é, sobre navios, portos e expedições."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:23
 msgid ""
 "But let me first give you an overview about your territory: here in the "
 "south, you have a whole economy with almost everything you need."
-msgstr "Mas deixe-me primeiro dar-lhe uma visão do território : aqui no sul, tem uma economia com quase tudo a que precisa."
+msgstr "Mas deixe-me primeiro dar-lhe uma visão do território: aqui no sul, tem uma economia com quase tudo a que precisa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:31
 msgid "The Northern Part"
@@ -86,11 +87,11 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:54
 msgid "Building ports"
-msgstr ""
+msgstr "Construir portos"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:56
 msgid "How to build a port"
-msgstr ""
+msgstr "Como construir um porto"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:57
 msgid ""
@@ -126,7 +127,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:67
 msgid "You always need a port when you want to transport wares with a ship."
-msgstr ""
+msgstr "Necessitas de um porto quando queres transportar mercadorias num navio."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:68
 msgid "Build a port next to your castle, on the blue port space icon."
@@ -148,39 +149,39 @@ msgstr ""
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
 msgid "Constructing ships"
-msgstr ""
+msgstr "Construindo navios"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:78
 msgid "Let’s build ships"
-msgstr ""
+msgstr "Vamos construir navios"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:79
 msgid "Great. Your port has just been finished. Now we need some ships."
-msgstr ""
+msgstr "Fantástico. O porto já está construído. Agora precisamos de alguns navios."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:80
 msgid ""
 "Ships are constructed in a shipyard by a shipwright. We have to build one "
 "somewhere close to the shore."
-msgstr ""
+msgstr "Os navios são construídos num estaleiro naval por um construtor naval. Temos de construir um algures perto da costa."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:81
 msgid "Build a shipyard close to the coast. It is a medium building."
-msgstr ""
+msgstr "Constrói um estaleiro naval perto da costa. É um edifício médio."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:85
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:87
 msgid "Build a shipyard"
-msgstr ""
+msgstr "Constrói um estaleiro naval"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:88
 msgid "Ships are produced in a shipyard."
-msgstr ""
+msgstr "Os navios são construídos num estaleiro naval."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:89
 msgid ""
 "Build a shipyard close to the shore of the southern part of your territory."
-msgstr ""
+msgstr "Constrói um estaleiro naval perto da costa a sul do teu território."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:90
 msgid ""

@@ -225,9 +225,8 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 		return pgettext("ship_state", "Founding a Colony");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		return "All";  // The user shouldn't see this, so we don't localize
-	default:
-		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 const Image*
@@ -254,8 +253,6 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
-	default:
-		NEVER_HERE();
 	}
 	return g_gr->images().get(filename);
 }
@@ -418,7 +415,7 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;
-		/* no break */
+			FALLS_THROUGH;
 		default:
 			break;  // not handled
 		}

@@ -89,8 +89,8 @@ tribes:new_productionsite_type {
          actions = {
             -- time total: 66
             "return=skipped unless economy needs ration",
-            "sleep=5000",
             "consume=fruit,bread_frisians smoked_fish,smoked_meat",
+            "sleep=5000",
             "animate=working 51000",
             "sleep=10000",
             "produce=ration:2"

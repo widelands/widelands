@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-22 16:08+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 14:09+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr "15 Menüten"
 #. TRANSLATORS: number + resource name, e.g. '1x Log'
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "%1$dx %2$s"
-msgstr "%1$i×%2$s"
+msgstr "%1$d× %2$s"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/multiplayer_init.lua:212
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:7
@@ -41,7 +41,7 @@ msgstr "Regels"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr "Willkomen bi'm Insel-Jumpen"
+msgstr "Willkomen bi’m Insel-Jumpen"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:9
 msgid ""
@@ -128,7 +128,7 @@ msgstr "%1$s hett as veerder de %2$i. Insel to faten kriggt."
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:48
 msgid "The reward for this feat amounts to:"
-msgstr "De Lohn för düsse Leistung is:"
+msgstr "De Lohn för deese Leistung is:"
 
 #: ../../data/maps/MP_Scenarios/Island_Hopping.wmf/scripting/texts.lua:51
 #, lua-format

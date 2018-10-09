@@ -3,7 +3,7 @@
 # 
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2016
+# Anton Khabarov <2233009@gmail.com>, 2016,2018
 # Viktor S <awsswa59@gmail.com>, 2018
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Алексей Баринов <leha.bar.ru@gmail.com>, 2018
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-12 15:51+0000\n"
-"PO-Revision-Date: 2018-09-13 12:18+0000\n"
-"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 13:16+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -275,4 +275,4 @@ msgid ""
 "        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Сообщения об ошибках? Предложения? Проверьте веб-сайт проекта:\n https://wl.widelands.org/\n\nНадеюсь, вам понравится эта игра!"
+msgstr "Сообщения об ошибках? Предложения? Зайдите на веб-сайт проекта:\n https://wl.widelands.org/\n\nНадеюсь, вам понравится эта игра!"
