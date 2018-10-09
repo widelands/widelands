@@ -181,11 +181,11 @@ SDL_GLContext initialize(
 	// TODO(GunChleoc): Localize the on-screen error messages
 	// Exit if we can't detect the shading language version
 	const char* const shading_language_version_string = reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
-	if (!strcmp(shading_language_version_string, "(null)")) {
+	if (strcmp(shading_language_version_string, "(null)") == 0) {
 		log("ERROR: Unable to detect the shading language version!\n");
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
 								 "OpenGL Error",
-								 "Widelands won’t work because we were unable to detect the shading language version – there is an unknown problem with reading the information from the graphics driver.",
+								 "Widelands won’t work because we were unable to detect the shading language version -- there is an unknown problem with reading the information from the graphics driver.",
 								 NULL);
 		exit(1);
 	}
@@ -198,7 +198,7 @@ SDL_GLContext initialize(
 		log("ERROR: Shading language version is too old!\n");
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
 								 "OpenGL Error",
-								 "Widelands won’t work because your graphics driver is too old.",
+								 "Widelands won’t work because your graphics driver is too old -- version 1.20 or newer is required.",
 								 NULL);
 		exit(1);
 	}
