@@ -6,6 +6,7 @@
   <project_license>GPL-2.0</project_license>
   <icon type="stock">widelands</icon>
   <name>Widelands</name>
+  <name xml:lang="ko">와이드랜드</name>
   <summary>A real-time build-up strategy game</summary>
   <summary xml:lang="ar">لعبة بناء إستراتيجية في الوقت الحقيقي</summary>
   <summary xml:lang="bg">Стратегическа игра за изграждане на цивилизация в реално време</summary>
@@ -153,10 +154,10 @@
       Widelandsのシングルプレイモードであるキャンペーンでは、各部族の物語とWidelands世界における彼らの奮闘が語られることでしょう。それも楽しい体験となるでしょうが、ネットワーク越しにトモダチと協力して新たな帝国を作り上げること、もしくはその相手を戦場の塵とするべく戦うこと、それこそがWidelandsの本当の醍醐味です。また、それら他のプレイヤー相手とのゲームに加えて、AIとのプレイも可能です。
     </p>
     <p xml:lang="ko">
-      당신은 작은 일족의 섭정입니다. 당신의 임무는 성장하는 정착지를 건설하는 것입니다. 당신의 일족 모든 일원은 성장을 위한 더 많은 자원을 생산하기 위해 자신의 역할을 다할 것입니다.
+      당신은 작은 부족의 지도자입니다. 당신의 임무는 정착지를 키우는것입니다. 당신의 부족 모든 일원은 이 키움을 위해 더 많은 자원을 생산하려고 자신들의 역할을 다할 것입니다.
     </p>
     <p xml:lang="ko">
-      Widelands는 부족들의 이야기와 그들의 투쟁에 대한 캠페인 모드를 제공합니다. 하지만, 당신이 인터넷이나 LAN을 통해 친구와 새로운 제국을 함께 만들거나 또는 서로를 짓눌러 버릴 때, 비로소 진정한 정착이 시작됩니다. Widelands는 당신과 맞설 인공 지능 또한 제공합니다.
+      와이드랜드는 부족들의 이야기와 와이드랜드 세계에서 그들의 투쟁에 대한 캠페인이 포함된 혼자 놀기 모드를 제공합니다. 하지만, 당신이 인터넷이나 랜을 통해 친구와 함께 새로운 제국을 만들거나 또는 서로 싸울때 비로소 진정한 정착이 시작됩니다. 또한 와이드랜드는 당신과 맞설수있는 인공 지능도 제공합니다.
     </p>
     <p xml:lang="la">
       Tu es princeps de parva gens. Pensum tuum est coloniam excolere. Unusquisque homines gentis tuis opes augere auxilient.
@@ -345,32 +346,32 @@
     <lang>zh_CN</lang>
     <lang>zh_TW</lang>
   </languages>
-  <translation type="gettext">tribes</translation>
-  <translation type="gettext">widelands_editor</translation>
   <translation type="gettext">win_conditions</translation>
-  <translation type="gettext">mp_scenario_smugglers.wmf</translation>
-  <translation type="gettext">mp_scenario_island_hopping.wmf</translation>
-  <translation type="gettext">maps</translation>
-  <translation type="gettext">scenario_atl01.wmf</translation>
   <translation type="gettext">scenario_dummy.wmf</translation>
+  <translation type="gettext">mp_scenario_island_hopping.wmf</translation>
   <translation type="gettext">scenario_bar01.wmf</translation>
-  <translation type="gettext">scenario_bar02.wmf</translation>
-  <translation type="gettext">scenario_emp02.wmf</translation>
-  <translation type="gettext">widelands</translation>
-  <translation type="gettext">scenario_emp04.wmf</translation>
-  <translation type="gettext">scenario_fri01.wmf</translation>
+  <translation type="gettext">maps</translation>
   <translation type="gettext">scenario_emp03.wmf</translation>
+  <translation type="gettext">widelands</translation>
+  <translation type="gettext">scenario_tutorial03_seafaring.wmf</translation>
+  <translation type="gettext">tribes</translation>
+  <translation type="gettext">scenario_emp04.wmf</translation>
+  <translation type="gettext">scenario_emp02.wmf</translation>
   <translation type="gettext">texts</translation>
-  <translation type="gettext">scenario_emp01.wmf</translation>
   <translation type="gettext">scenario_tutorial01_basic_control.wmf</translation>
   <translation type="gettext">scenario_fri02.wmf</translation>
-  <translation type="gettext">scenario_tutorial02_warfare.wmf</translation>
-  <translation type="gettext">map_the_green_plateau.wmf</translation>
-  <translation type="gettext">widelands_console</translation>
   <translation type="gettext">scenario_tutorial04_economy.wmf</translation>
   <translation type="gettext">tribes_encyclopedia</translation>
-  <translation type="gettext">scenario_tutorial03_seafaring.wmf</translation>
+  <translation type="gettext">scenario_bar02.wmf</translation>
   <translation type="gettext">world</translation>
+  <translation type="gettext">scenario_emp01.wmf</translation>
+  <translation type="gettext">scenario_atl01.wmf</translation>
+  <translation type="gettext">widelands_console</translation>
+  <translation type="gettext">scenario_fri01.wmf</translation>
+  <translation type="gettext">widelands_editor</translation>
+  <translation type="gettext">scenario_tutorial02_warfare.wmf</translation>
+  <translation type="gettext">mp_scenario_smugglers.wmf</translation>
+  <translation type="gettext">map_the_green_plateau.wmf</translation>
   <url type="homepage">https://wl.widelands.org/</url>
   <url type="bugtracker">https://bugs.launchpad.net/widelands</url>
   <url type="donation">https://wl.widelands.org/wiki/The%20Widelands%20Project/</url>

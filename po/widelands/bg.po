@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-12 15:51+0000\n"
-"PO-Revision-Date: 2018-09-13 07:23+0000\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-17 12:11+0000\n"
 "Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -562,7 +562,7 @@ msgid "Error!"
 msgstr "Грешка!"
 
 #: ../../src/editor/ui_menus/main_menu.cc:43
-#: ../../src/wui/game_options_menu.cc:66
+#: ../../src/wui/game_options_menu.cc:43
 msgid "Main Menu"
 msgstr "Главно меню"
 
@@ -927,7 +927,7 @@ msgstr "Брой играчи"
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:70
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:102
-#: ../../src/network/gamehost.cc:1589 ../../src/ui_fsmenu/launch_mpg.cc:509
+#: ../../src/network/gamehost.cc:1607 ../../src/ui_fsmenu/launch_mpg.cc:509
 #: ../../src/wui/multiplayersetupgroup.cc:135
 #: ../../src/wui/multiplayersetupgroup.cc:189
 #, c-format
@@ -1108,7 +1108,7 @@ msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr "Следните знаци са непозволени:"
 
-#: ../../src/logic/editor_game_base.cc:213
+#: ../../src/logic/editor_game_base.cc:228
 msgid "Loading graphics"
 msgstr "Зареждане на графиките"
 
@@ -1620,7 +1620,7 @@ msgstr "непроходимо"
 msgid "This objective has no description."
 msgstr "Тази задача няма описание."
 
-#: ../../src/logic/player.cc:1334
+#: ../../src/logic/player.cc:1336
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -1664,7 +1664,7 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands не може да установи връзка с посочения адрес. Или там няма сървър на Widelands, работещ на очаквания порт, или сървърът е бил спрян докато сте се свързвали."
 
-#: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:623
+#: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:641
 #: ../../src/wlapplication.cc:1311
 msgid "Preparing game"
 msgstr "Подготовка на играта"
@@ -1689,130 +1689,130 @@ msgstr "%s Играта ще бъде запазена автоматично."
 msgid "Disconnected from Host"
 msgstr "Изключен от сървъра"
 
-#: ../../src/network/gamehost.cc:257
+#: ../../src/network/gamehost.cc:258
 msgid "Available host commands are:"
 msgstr "Наличните команди са:"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:259
+#: ../../src/network/gamehost.cc:260
 msgid "/help  -  Shows this help"
 msgstr "/help  –  Показва това съобщение"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:261
+#: ../../src/network/gamehost.cc:262
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr "/announce <съобщ.>  –  Изпраща чат съобщение като обявление (системен чат)"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:263
+#: ../../src/network/gamehost.cc:264
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr "/warn <име> <причина>  –  Предупреждава потребителя <име> поради <причина>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:265
+#: ../../src/network/gamehost.cc:266
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr "/kick <име> <причина>  –  Изритва потребителя <име> поради <причина>"
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:267
+#: ../../src/network/gamehost.cc:268
 msgid "/forcePause            -  Force the game to pause."
 msgstr "/forcePause            –  Спира насилствено играта на пауза."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/gamehost.cc:269
+#: ../../src/network/gamehost.cc:270
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr "/endForcedPause        –  Връща играта на нормална скорост."
 
-#: ../../src/network/gamehost.cc:276
+#: ../../src/network/gamehost.cc:277
 msgid "Wrong use, should be: /announce <message>"
 msgstr "Грешна употреба. Ползва се така: /announce <съобщение>"
 
-#: ../../src/network/gamehost.cc:287
+#: ../../src/network/gamehost.cc:288
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "Грешна употреба. Ползва се така: /warn <име> <причина>"
 
-#: ../../src/network/gamehost.cc:291 ../../src/network/gamehost.cc:314
+#: ../../src/network/gamehost.cc:292 ../../src/network/gamehost.cc:315
 #, c-format
 msgid "The client %s could not be found."
 msgstr "Клиентът %s не може да бъде открит."
 
-#: ../../src/network/gamehost.cc:302
+#: ../../src/network/gamehost.cc:303
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "Грешна употреба. Ползва се така: /kick <име> <причина>"
 
-#: ../../src/network/gamehost.cc:312
+#: ../../src/network/gamehost.cc:313
 msgid "You can not kick yourself!"
 msgstr "Не можете да изритате себе си!"
 
-#: ../../src/network/gamehost.cc:318
+#: ../../src/network/gamehost.cc:319
 #, c-format
 msgid "Are you sure you want to kick %s?"
 msgstr "Сигурни ли сте, че искате да изритате %s?"
 
-#: ../../src/network/gamehost.cc:320
+#: ../../src/network/gamehost.cc:321
 #, c-format
 msgid "The stated reason was: %s"
 msgstr "Посочената причина е: %s"
 
-#: ../../src/network/gamehost.cc:321
+#: ../../src/network/gamehost.cc:322
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "Ако сте сигурни, въведете: /ack_kick %s"
 
-#: ../../src/network/gamehost.cc:329
+#: ../../src/network/gamehost.cc:330
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr "Потвърждението на изритването е отменено: Не е посочено име!"
 
-#: ../../src/network/gamehost.cc:331
+#: ../../src/network/gamehost.cc:332
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "Грешна употреба. Ползва се така: /ack_kick <име>"
 
-#: ../../src/network/gamehost.cc:337
+#: ../../src/network/gamehost.cc:338
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr "Потвърждението на изритването е отменено: Посочено е грешно име!"
 
-#: ../../src/network/gamehost.cc:346
+#: ../../src/network/gamehost.cc:347
 msgid "Pause was already forced - game should be paused."
 msgstr "Играта вече беше насилена в пауза – би трябвало да е на пауза."
 
-#: ../../src/network/gamehost.cc:356
+#: ../../src/network/gamehost.cc:357
 msgid "There is no forced pause - nothing to end."
 msgstr "Играта не е в насилена пауза – няма какво да бъде отменено."
 
-#: ../../src/network/gamehost.cc:365
+#: ../../src/network/gamehost.cc:366
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Грешна команда! Въведете /help за списък на всички команди."
 
-#: ../../src/network/gamehost.cc:494
+#: ../../src/network/gamehost.cc:495
 msgid "Failed to host the server!"
 msgstr "Сървърът не успя да се стартира!"
 
-#: ../../src/network/gamehost.cc:495
+#: ../../src/network/gamehost.cc:496
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
 msgstr "Widelands не може да стартира сървър.\nТова не бива да се случва и най-вероятно няма какво да направите по въпроса. Моля, докладвайте проблема."
 
-#: ../../src/network/gamehost.cc:503
+#: ../../src/network/gamehost.cc:504
 msgid "Failed to start the server!"
 msgstr "Сървърът не успя да се стартира!"
 
-#: ../../src/network/gamehost.cc:504
+#: ../../src/network/gamehost.cc:505
 msgid ""
 "Widelands could not start a server.\n"
 "Probably some other process is already running a server on our port."
 msgstr "Widelands не може да пусне сървър.\nВъзможно е някой друг процес да използва нашия порт."
 
-#: ../../src/network/gamehost.cc:1526
+#: ../../src/network/gamehost.cc:1544
 #, c-format
 msgid "Computer %u"
 msgstr "Компютър %u"
 
-#: ../../src/network/gamehost.cc:1583 ../../src/wui/game_summary.cc:102
+#: ../../src/network/gamehost.cc:1601 ../../src/wui/game_summary.cc:102
 msgid "Player"
 msgstr "Играч"
 
-#: ../../src/network/gamehost.cc:1732
+#: ../../src/network/gamehost.cc:1750
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2059,118 +2059,123 @@ msgstr "%1$s напусна играта (%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
+msgid "%1$s has been replaced with %2$s"
+msgstr "%1$s беше заменен(а) с %2$s"
+
+#: ../../src/network/network_gaming_messages.cc:132
+#, c-format
 msgid "Unknown user has left the game (%s)"
 msgstr "Непознат потребител напусна играта (%s)"
 
-#: ../../src/network/network_gaming_messages.cc:133
+#: ../../src/network/network_gaming_messages.cc:134
 msgid "Server sent a SYNCREQUEST even though no game is running."
 msgstr "Сървърът изпрати SYNCREQUEST (заявка за синхронизиране), въпреки че в момента не протича игра."
 
-#: ../../src/network/network_gaming_messages.cc:134
+#: ../../src/network/network_gaming_messages.cc:135
 msgid "Received a PLAYERCOMMAND even though no game is running."
 msgstr "Беше получена команда PLAYERCOMMAND (команда за играч), въпреки че в момента не протича игра."
 
-#: ../../src/network/network_gaming_messages.cc:135
+#: ../../src/network/network_gaming_messages.cc:136
 msgid "Unexpectedly received LAUNCH command from server."
 msgstr "Беше получена неочаквана команда LAUNCH (стартиране) от сървъра."
 
-#: ../../src/network/network_gaming_messages.cc:137
+#: ../../src/network/network_gaming_messages.cc:138
 msgid "Server sent a player update for a player that does not exist."
 msgstr "Сървърът изпрати актуализация на данните за играч, който не съществува."
 
-#: ../../src/network/network_gaming_messages.cc:139
+#: ../../src/network/network_gaming_messages.cc:140
 msgid "Server sent a user update for a user that does not exist."
 msgstr "Сървърът изпрати актуализация на данните за потребител, който не съществува."
 
-#: ../../src/network/network_gaming_messages.cc:140
+#: ../../src/network/network_gaming_messages.cc:141
 msgid "Server uses a different protocol version"
 msgstr "Сървърът използва различна версия на протокола"
 
-#: ../../src/network/network_gaming_messages.cc:141
+#: ../../src/network/network_gaming_messages.cc:142
 #, c-format
 msgid "Received command number %s, which is not allowed in this state."
 msgstr "Получена е команда номер %s, която не е позволена в този режим."
 
-#: ../../src/network/network_gaming_messages.cc:144
+#: ../../src/network/network_gaming_messages.cc:145
 msgid "Client reports time to host that is running backwards."
 msgstr "Клиентът докладва време, вървящо на обратно, на сървъра."
 
-#: ../../src/network/network_gaming_messages.cc:146
+#: ../../src/network/network_gaming_messages.cc:147
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr "Клиентът симулира времето на играта извън това, което е позволено от сървъра."
 
-#: ../../src/network/network_gaming_messages.cc:147
+#: ../../src/network/network_gaming_messages.cc:148
 msgid "Client did not submit sync report in time."
 msgstr "Клиентът не подаде доклада за синхронизиране навреме."
 
-#: ../../src/network/network_gaming_messages.cc:148
+#: ../../src/network/network_gaming_messages.cc:149
 msgid "The game has already started."
 msgstr "Играта вече е започнала."
 
-#: ../../src/network/network_gaming_messages.cc:149
+#: ../../src/network/network_gaming_messages.cc:150
 msgid "Client has no access to other player’s settings."
 msgstr "Клиентът няма достъп до настройките на другите играчи."
 
-#: ../../src/network/network_gaming_messages.cc:150
+#: ../../src/network/network_gaming_messages.cc:151
 msgid "Client has no access to server settings."
 msgstr "Клиентът няма достъп до сървърните настройки."
 
-#: ../../src/network/network_gaming_messages.cc:152
+#: ../../src/network/network_gaming_messages.cc:153
 msgid "Client sent TIME command even though game is not running."
 msgstr "Клиентът изпрати команда TIME (време), въпреки че в момента не протича игра."
 
-#: ../../src/network/network_gaming_messages.cc:153
+#: ../../src/network/network_gaming_messages.cc:154
 msgid "Client sent a PLAYERCOMMAND for another player."
 msgstr "Клиентът изпрати команда PLAYERCOMMAND (команда за играч) за друг играч."
 
-#: ../../src/network/network_gaming_messages.cc:154
+#: ../../src/network/network_gaming_messages.cc:155
 msgid "Client sent unexpected synchronization report."
 msgstr "Клиентът изпрати неочакван доклад за синхронизиране."
 
-#: ../../src/network/network_gaming_messages.cc:156
+#: ../../src/network/network_gaming_messages.cc:157
 msgid "Client requests file although none is available to send."
 msgstr "Клиентът поиска файл, въпреки че няма такъв наличен за изпращане."
 
-#: ../../src/network/network_gaming_messages.cc:157
+#: ../../src/network/network_gaming_messages.cc:158
 msgid "Client requests file part that does not exist."
 msgstr "Клиентът поиска част от файл, която не съществува."
 
-#: ../../src/network/network_gaming_messages.cc:158
+#: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Host sent player %s to the lobby!"
 msgstr "Сървърът изпрати играча %s в стаята!"
 
-#: ../../src/network/network_gaming_messages.cc:160
+#: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
 msgstr "ВНИМАНИЕ: %1$s използва версия: %2$s, а сървърът – версия: %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:161
+#: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "%s has joined the game"
 msgstr "%s се присъедини към играта"
 
-#: ../../src/network/network_gaming_messages.cc:162
+#: ../../src/network/network_gaming_messages.cc:163
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
 msgstr "Започнато е изпращане на файла %1$s до %2$s!"
 
-#: ../../src/network/network_gaming_messages.cc:163
+#: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
 msgstr "Изпращането на файла %1$s да %2$s е завършено"
 
-#: ../../src/network/network_gaming_messages.cc:164
+#: ../../src/network/network_gaming_messages.cc:165
 #, c-format
 msgid "Sending part %1$s of file %2$s to %3$s"
 msgstr "Изпращане на част %1$s от файла %2$s до %3$s"
 
-#: ../../src/network/network_gaming_messages.cc:165
+#: ../../src/network/network_gaming_messages.cc:166
 #, c-format
 msgid "The player ‘%s’ was defeated and became a spectator."
 msgstr "Играчът „%s“ беше победен и стана наблюдател."
 
-#: ../../src/network/network_gaming_messages.cc:166
+#: ../../src/network/network_gaming_messages.cc:167
 #, c-format
 msgid "Client %1$s did not answer for more than %2$s."
 msgstr "Клиентът %1$s не отговори повече от %2$s."
@@ -3341,15 +3346,66 @@ msgstr "Чат"
 msgid "Script console"
 msgstr "Конзола за скрипт"
 
+#. * TRANSLATORS: Window label
+#: ../../src/wui/game_client_disconnected.cc:50
+msgid "Client got disconnected"
+msgstr "Клиентът се разкачи"
+
+#: ../../src/wui/game_client_disconnected.cc:61
+msgid ""
+"A player disconnected from the game. An automatic save game has been "
+"created. Do you want to continue playing?"
+msgstr "Някой от играчите се разкачи от играта. Играта беше запазена автоматично. Искате ли да продължите да играете?"
+
+#. * TRANSLATORS: Button text
+#: ../../src/wui/game_client_disconnected.cc:73
+msgid "Continue game"
+msgstr "Продължаване на играта"
+
+#. * TRANSLATORS: Button tooltip
+#: ../../src/wui/game_client_disconnected.cc:75
+msgid ""
+"Replace the disconnected player with the selected AI and continue playing"
+msgstr "Замяна на разкачения играч с избрания ИИ и продължаване на играта"
+
+#. * TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player
+#. has
+#. disconnected from a game
+#: ../../src/wui/game_client_disconnected.cc:84
+msgid "AI for the disconnected player"
+msgstr "ИИ за разкачилия се играч"
+
+#. * TRANSLATORS: Button tooltip
+#: ../../src/wui/game_client_disconnected.cc:96
+#: ../../src/wui/game_options_menu.cc:76 ../../src/wui/game_summary.cc:93
+msgid "Exit Game"
+msgstr "Изход от играта"
+
+#. * TRANSLATORS: Dropdown selection. Parameter is the name of the AI that
+#. will be used as replacement for a disconnected player
+#: ../../src/wui/game_client_disconnected.cc:117
+#, c-format
+msgid "Replace player with %s"
+msgstr "Замяна на играча с %s"
+
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
 #: ../../src/wui/game_debug_ui.cc:211
 msgid "Debug Field"
 msgstr "Поле за отстраняване на грешки"
 
+#. * TRANSLATORS: Window label when "Exit game" has been pressed
+#: ../../src/wui/game_exit_confirm_box.cc:28
+msgid "Exit Game Confirmation"
+msgstr "Потвърждение за изход от играта"
+
+#: ../../src/wui/game_exit_confirm_box.cc:29
+msgid "Are you sure you wish to exit this game?"
+msgstr "Сигурни ли сте, че искате да излезете от тази игра?"
+
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_main_menu_save_game.cc:50
-#: ../../src/wui/game_options_menu.cc:89
+#: ../../src/wui/game_options_menu.cc:66
 msgid "Save Game"
 msgstr "Запазване на играта"
 
@@ -3542,29 +3598,15 @@ msgstr "Del: %s"
 msgid "Objectives"
 msgstr "Задачи"
 
-#. * TRANSLATORS: Window label when "Exit game" has been pressed
-#: ../../src/wui/game_options_menu.cc:45
-msgid "Exit Game Confirmation"
-msgstr "Потвърждение за изход от играта"
-
-#: ../../src/wui/game_options_menu.cc:46
-msgid "Are you sure you wish to exit this game?"
-msgstr "Сигурни ли сте, че искате да излезете от тази игра?"
-
-#: ../../src/wui/game_options_menu.cc:77
+#: ../../src/wui/game_options_menu.cc:54
 #: ../../src/wui/game_options_sound_menu.cc:27
 msgid "Sound Options"
 msgstr "Настройки на звука"
 
 #. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:79
+#: ../../src/wui/game_options_menu.cc:56
 msgid "Set sound effect and music options"
 msgstr "Задаване на настройките на музиката и звуковите ефекти"
-
-#. * TRANSLATORS: Button tooltip
-#: ../../src/wui/game_options_menu.cc:99 ../../src/wui/game_summary.cc:93
-msgid "Exit Game"
-msgstr "Изход от играта"
 
 #: ../../src/wui/game_options_sound_menu.cc:35
 msgid "Music volume"
@@ -3757,12 +3799,12 @@ msgstr "Намаляване на количеството стоки, коит�
 msgid "Increase the number of wares you want to be stored here."
 msgstr "Увеличаване на количеството стоки, които да бъдат складирани тук."
 
-#: ../../src/wui/interactive_gamebase.cc:54
+#: ../../src/wui/interactive_gamebase.cc:56
 msgid "PAUSE"
 msgstr "ПАУЗА"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:128
+#: ../../src/wui/interactive_gamebase.cc:130
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"

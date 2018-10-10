@@ -77,6 +77,25 @@ obj_supply_murilius = {
       p(_([[Otherwise, just destroy the warehouse and risk having Murilius as an enemy. He forbade you to expand your territory until the wares have been handed over.]]))
    ),
 }
+obj_scout = {
+   name = "scout",
+   title=_"Spy on Murilius",
+   number = 1,
+   body = objective_text(_"Send a Scout to Spy on the Empire",
+      li(_[[Build a scout’s house near the border to discover the Empire’s secrets.]])
+   ),
+}
+obj_poem = {
+   name = "poem",
+   title=_"Decipher the poem",
+   number = 1,
+   body = objective_text(_"Understand the Poem the Scout has Found in the Empire",
+      p(_([[How many sites where soldiers stay,]])) ..
+      p(_([[How many sites where thou hold’st sway,]])) ..
+      p(_([[Though not their whereabouts sees he]])) ..
+      p(_([[Who’s ordering around here thee!]]))
+   ),
+}
 obj_defeat_barbarians = {
    name = "defeat_barbarians",
    title=_"Defeat the Barbarians!",
@@ -90,7 +109,8 @@ obj_defeat_murilius = {
    title=_"Defeat Murilius!",
    number = 1,
    body = objective_text(_"Defeat the Arrogant Outpost of the Empire",
-      li(_[[The only way to put an end to the Empire’s desire to steal our liberty is to destroy this outpost once and for all. Conquer its entire land.]])
+      li(_[[The only way to put an end to the Empire’s desire to steal our liberty is to destroy this outpost once and for all. Conquer its entire land.]]) ..
+      li_arrow(_[[Conquer every single field that still belongs to Murilius.]])
    ),
 }
 obj_defeat_both = {
@@ -105,6 +125,13 @@ obj_defeat_both = {
 -- ==================
 -- Texts to the user
 -- ==================
+
+campaign_data_warning = {
+   title = _"Warning",
+   body = p(_[[You appear not to have completed the previous mission. You may still play this scenario, but you will be at a disadvantage. I recommend that you complete the previous scenario first and then restart this mission.]]),
+   w = 450,
+   h = 150,
+}
 
 intro_1 = {
    title =_ "Welcome Back!",
@@ -291,7 +318,34 @@ supply_murilius_9 = {
       _([[This is the greatest outrage of all. How dare he order us to stop expanding our territory when all we want is to build a new home, and threaten us with war if we refuse to be his slaves?]])
       .. paragraphdivider() ..
       -- TRANSLATORS: Reebaud – Supply Murilius 9
-      _([[I’d like to say we should attack him right now, but I fear we aren’t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time. As for expansion – I wonder how strictly he can possibly control us…]])),
+      _([[I’d like to say we should attack him right now, but I fear we aren’t strong enough yet to hold our own against him in battle. We should hurry our soldier training while pretending to be gathering his so-called gift. That would buy us some time.]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Reebaud – Supply Murilius 9
+      _([[As for expansion – I wonder how strictly he can possibly control us. Perhaps we should send a scout to spy on him…]]))
+      .. new_objectives(obj_scout),
+}
+
+expansion_hint = {
+   title =_ "The Scout Discovered Something",
+   body=hauke(_"Our scout returned",
+      -- TRANSLATORS: Hauke – Expansion hint
+      _([[Chieftain Reebaud! Our scout just returned. He has found a poem in the strange tongue this Proconsul speaks. With some difficulty, I have translated it into our language. If I did not mistranslate, it runs as follows:]])
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
+      space(10) .. (_([[How many sites where soldiers stay,]]))
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
+      space(10) .. (_([[How many sites where thou hold’st sway,]]))
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
+      space(10) .. (_([[Though not their whereabouts sees he]]))
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
+      space(10) .. (_([[Who’s ordering around here thee!]]))
+      .. paragraphdivider() ..
+      -- TRANSLATORS: Hauke – Expansion hint
+      _([[I don’t know what it means, but I’m sure it’s important. Perhaps you can make some sense of it.]]))
+      .. new_objectives(obj_poem),
 }
 
 supply_murilius_destroy = {

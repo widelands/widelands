@@ -201,6 +201,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 					break;
 				}
 			}
+			break;
 		default:
 			// Do nothing
 			break;
