@@ -385,7 +385,7 @@ WaresDisplay::~WaresDisplay() {
 	remove_all_warelists();
 }
 
-const char* unit_suffixes[] = {
+static const char* unit_suffixes[] = {
    "%1%",
    /** TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */

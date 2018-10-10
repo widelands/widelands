@@ -4,8 +4,9 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2007
-# Anton Khabarov <2233009@gmail.com>, 2015-2016
+# Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
 # GunChleoc, 2016
+# Viktor S <awsswa59@gmail.com>, 2018
 # Алексей Баринов <leha.bar.ru@gmail.com>, 2018
 # Олег Шевченко <olegrock@gmail.com>, 2017
 # Олег Шевченко <olegrock@gmail.com>, 2018
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 06:56+0000\n"
-"PO-Revision-Date: 2018-09-10 21:23+0000\n"
-"Last-Translator: Алексей Баринов <leha.bar.ru@gmail.com>\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 13:54+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,29 +97,29 @@ msgstr "Еда для ваших шахтеров"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:75
 msgid "Build a tavern to produce some food to sustain our miners."
-msgstr ""
+msgstr "Постройте таверну для производства пайков, чтобы поддержать наших шахтеров."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:76
 msgid ""
 "Of course this means you will need more resources for preparing this food – "
 "like fish, meat or bread."
-msgstr ""
+msgstr "Конечно, это означает, что вам понадобится больше ресурсов для приготовления этих пайков – например, рыбы, мяса или хлеба."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:77
 msgid ""
 "To provide these foodstuffs, you can build a fisher’s house, a hunter’s "
 "house, a farm, a mill and a bakery."
-msgstr ""
+msgstr "Чтобы обеспечить эти продукты питания, вы можете построить Домик Рыболова, Домик Охотника, ферму, мельницу и пекарню."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:78
 msgid ""
 "Build a brewery and a winery to supply the miners with some good and strong "
 "drinks."
-msgstr "Постройте пивоварню и винодельню, чтобы снабдить шахтеров хорошими и крепкими напитками."
+msgstr "Постройте пивоварню и винодельню, чтобы снабдить шахтеров крепкими напитками."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:79
 msgid "Maybe you will also need a piggery, a vineyard and some wells."
-msgstr "Возможно, вам также понадобятся свиноферма, виноградник и колодцы."
+msgstr "Возможно, вам также понадобятся свиноферма, виноградник и несколько колодцев."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:80
 msgid ""
@@ -139,11 +140,11 @@ msgstr "Защитите восточную границу"
 msgid ""
 "Build stronger military buildings, such as an outpost, a barrier or a tower,"
 " on the eastern frontier."
-msgstr ""
+msgstr "Постройте более функциональные военные здания, такие как Застава, Форпост или Башня, на восточной границе."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:90
 msgid "Build a tower to watch deep inside the enemy territory."
-msgstr ""
+msgstr "Постройте башню, чтобы иметь возможность заглянуть вглубь вражеской территории."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:96
 msgid "Destroy the Barbarian tribe"
@@ -168,7 +169,7 @@ msgid ""
 "Build a fortress on the peninsula (near where the Barbarian headquarters "
 "stood before). Finally, this will avoid new settlements of other tribes in "
 "that region."
-msgstr ""
+msgstr "Постройте крепость на полуострове (рядом с местом, где стоял штаб Варваров). Наконец, Это позволит избежать новых поселений других племен в этом регионе."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:109
 msgid "A New Island"
@@ -383,7 +384,7 @@ msgid ""
 "more comfortable life, but the people working in the mines are unhappy with "
 "the current situation. They have to do hard work and have no time for making"
 " their own food."
-msgstr ""
+msgstr "Это, конечно, была хорошая идея - построить шахты, которые позволят нам устроить комфортную жизнь, но люди, работающие в шахтах, недовольны текущей ситуацией. Они должны выполнять свою тяжелую работу и у них совсем нет времени на то, чтобы готовить себе еду."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:220
@@ -446,7 +447,7 @@ msgstr "Сначала, я был наивен и надеялся, что он�
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:248
 msgid "Anyway, we must build stronger military buildings as soon as possible."
-msgstr ""
+msgstr "Так или иначе, мы должны построить более серьезные военные здания как можно скорее."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:253
 msgid "Command to Attack"

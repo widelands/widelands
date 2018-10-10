@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-01 06:47+0000\n"
-"PO-Revision-Date: 2018-09-06 20:51+0000\n"
+"POT-Creation-Date: 2018-09-12 15:51+0000\n"
+"PO-Revision-Date: 2018-09-13 06:11+0000\n"
 "Last-Translator: tbcrew <light@twobeers.net>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -542,6 +542,7 @@ msgstr "Fucina di armature"
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/quarry/init.lua:42
 #: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:64
+#: ../../data/tribes/buildings/productionsites/atlanteans/shipyard/init.lua:82
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:56
 #: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:58
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/init.lua:53
@@ -559,6 +560,7 @@ msgstr "Fucina di armature"
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/reed_yard/init.lua:44
 #: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/barbarians/shipyard/init.lua:81
 #: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/warmill/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:50
@@ -568,6 +570,7 @@ msgstr "Fucina di armature"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/quarry/init.lua:43
 #: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:63
+#: ../../data/tribes/buildings/productionsites/empire/shipyard/init.lua:81
 #: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:61
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/vineyard/init.lua:50
@@ -588,6 +591,7 @@ msgstr "Fucina di armature"
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/init.lua:53
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/init.lua:63
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:57
+#: ../../data/tribes/buildings/productionsites/frisians/shipyard/init.lua:75
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:64
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:62
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:65
@@ -699,39 +703,47 @@ msgstr "Miniera di carbone"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining coal because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:58
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:82
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:73
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:75
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:75
 #: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:72
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:72
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:77
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:81
 msgid "mining coal"
 msgstr "estrarre del carbone"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:74
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:76
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:73
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:86
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:101
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:90
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:90
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:95
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:99
 msgid "No Coal"
 msgstr "Carbone esaurito"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:75
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:78
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:76
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:74
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:87
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:102
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:94
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:91
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:100
 msgid "Main Coal Vein Exhausted"
 msgstr "Vena principale di carbone esaurita"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:104
 msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -746,32 +758,39 @@ msgstr "Miniera di cristallo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining granite because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:71
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:115
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:59
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:71
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:97
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:66
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:78
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:81
 msgid "mining granite"
 msgstr "estrarre granito"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining quartz because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:87
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:123
 msgid "mining quartz"
 msgstr "estrarre del quarzo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining diamonds because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:110
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:103
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:131
 msgid "mining diamonds"
 msgstr "estrarre dei diamanti"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:129
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:165
 msgid "No Crystal"
 msgstr "Cristallo esaurito"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:130
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:166
 msgid "Main Crystal Vein Exhausted"
 msgstr "Vena principale di cristallo esaurita"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:132
+#: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
@@ -896,39 +915,45 @@ msgstr "Miniera d'oro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining gold because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:58
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:71
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:75
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:74
 #: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:71
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:70
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:79
 msgid "mining gold"
 msgstr "sta estraendo oro"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:74
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:76
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:73
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:89
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:92
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:89
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:88
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:97
 msgid "No Gold"
 msgstr "Oro esaurito"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:75
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:78
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:77
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:76
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:74
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:80
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:90
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:94
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:90
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:98
 msgid "Main Gold Vein Exhausted"
 msgstr "Vena principale d'oro esaurita"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:92
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -992,39 +1017,45 @@ msgstr "Miniera di ferro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining iron because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:58
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:74
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:61
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:75
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:60
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:75
 #: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:59
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:72
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:57
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:71
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:66
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:64
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:81
 msgid "mining iron"
 msgstr "sta estraendo ferro"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:74
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:79
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:75
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:73
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:79
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:93
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:93
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:90
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:99
 msgid "No Iron"
 msgstr "Ferro esaurito"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:78
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:75
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:78
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:80
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:76
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:74
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:80
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:81
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:76
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:94
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:94
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:90
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:100
 msgid "Main Iron Vein Exhausted"
 msgstr "Vena principale di ferro esaurita"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:80
+#: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:96
 msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1138,10 +1169,10 @@ msgid "smelting iron"
 msgstr "fondendo del ferro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smelting gold because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:80
-#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:84
-#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:85
-#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:92
+#: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/smelting_works/init.lua:83
+#: ../../data/tribes/buildings/productionsites/empire/smelting_works/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:91
 msgid "smelting gold"
 msgstr "fondendo dell'oro"
 
@@ -1158,7 +1189,7 @@ msgid "smoking meat"
 msgstr "sta affumicando della carne"
 
 #. TRANSLATORS: Completed/Skipped/Did not start smoking fish because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:82
+#: ../../data/tribes/buildings/productionsites/atlanteans/smokery/init.lua:80
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/init.lua:73
 msgid "smoking fish"
 msgstr "sta affumicando del pesce"
@@ -1186,12 +1217,12 @@ msgstr "sta producendo una pala per il pane"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pair of buckets
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:97
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:96
 msgid "making a pair of buckets"
 msgstr "sta producendo una coppia di secchi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:110
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:118
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:119
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:204
@@ -1200,13 +1231,13 @@ msgstr "sta producendo delle pinze per il fuoco"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:123
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:120
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
 msgid "making a fishing net"
 msgstr "sta producendo una rete da pesca"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:136
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:132
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:142
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:143
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:193
@@ -1214,37 +1245,37 @@ msgid "making a hammer"
 msgstr "sta producendo un martello"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:149
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:144
 msgid "making a hook pole"
 msgstr "sta producendo un palo uncinato"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:162
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:156
 msgid "making a hunting bow"
 msgstr "sta producendo un arco da caccia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:175
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:168
 msgid "making milking tongs"
 msgstr "sta producendo delle pinze da mungitura"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:188
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:180
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:178
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
 msgid "making a pick"
 msgstr "sta producendo un piccone"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:201
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:192
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:191
 msgid "making a saw"
 msgstr "sta producendo una sega"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:214
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:204
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:190
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:203
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:116
@@ -1252,7 +1283,7 @@ msgid "making a scythe"
 msgstr "sta producendo una falce"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a shovel because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:227
+#: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:216
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:202
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:215
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:127
@@ -1308,13 +1339,13 @@ msgid "weaving spidercloth"
 msgstr "tessendo della stoffa di ragno"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a tabard because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:82
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:81
 msgid "tailoring a tabard"
 msgstr "sta cucendo un tabarro"
 
 #. TRANSLATORS: Completed/Skipped/Did not start tailoring a golden tabard
 #. because ...
-#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:96
+#: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:94
 msgid "tailoring a golden tabard"
 msgstr "sta cucendo un tabarro dorato"
 
@@ -1444,15 +1475,15 @@ msgid "preparing a ration"
 msgstr "sta preparando una razione"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a snack because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:84
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:81
 msgid "preparing a snack"
 msgstr "preparando uno spuntino"
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing a meal because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:96
+#: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:97
 #: ../../data/tribes/buildings/productionsites/empire/inn/init.lua:77
-#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:84
+#: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:86
 msgid "preparing a meal"
 msgstr "sta preparando un pasto"
 
@@ -1492,8 +1523,8 @@ msgctxt "barbarians_building"
 msgid "Coal Mine"
 msgstr "Miniera di carbone"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine/init.lua:94
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:96
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1512,7 +1543,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Coal Mine"
 msgstr "Miniera di carbone più profonda"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/init.lua:96
 msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1569,8 +1600,8 @@ msgctxt "barbarians_building"
 msgid "Gold Mine"
 msgstr "Miniera d'oro"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine/init.lua:78
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:96
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1589,7 +1620,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Gold Mine"
 msgstr "Miniera d'oro più profonda"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:79
+#: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/init.lua:95
 msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1603,19 +1634,19 @@ msgctxt "barbarians_building"
 msgid "Granite Mine"
 msgstr "Miniera di granito"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:72
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:82
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:83
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:96
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:99
 msgid "No Granite"
 msgstr "Granito esaurito"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:73
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:83
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:84
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:90
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:97
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:100
 msgid "Main Granite Vein Exhausted"
 msgstr "Vena principale di granito esaurita"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:75
+#: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:92
 msgctxt "barbarians_building"
 msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
@@ -1631,7 +1662,7 @@ msgstr "Fucina di elmi"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a helmet because ...
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:78
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:79
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:80
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:104
 msgid "forging a helmet"
 msgstr "sta forgiando un elmo"
@@ -1673,8 +1704,8 @@ msgctxt "barbarians_building"
 msgid "Iron Mine"
 msgstr "Miniera di ferro"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:77
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:80
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine/init.lua:78
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:96
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1693,7 +1724,7 @@ msgctxt "barbarians_building"
 msgid "Deeper Iron Mine"
 msgstr "Miniera di ferro più profonda"
 
-#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:82
+#: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/init.lua:96
 msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1909,19 +1940,19 @@ msgstr "Fucina di armature"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:91
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:92
 msgid "forging a suit of armor"
 msgstr "forgiando un'armatura"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of chain armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:103
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:104
 msgid "forging a suit of chain armor"
 msgstr "sta forgiando un'armatura a catena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a suit of gilded armor
 #. because ...
-#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:115
+#: ../../data/tribes/buildings/productionsites/empire/armorsmithy/init.lua:116
 msgid "forging a suit of gilded armor"
 msgstr "forgiando un'armatura dorata"
 
@@ -1967,7 +1998,7 @@ msgctxt "empire_building"
 msgid "Coal Mine"
 msgstr "Miniera di carbone"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/coalmine/init.lua:93
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -1980,7 +2011,7 @@ msgctxt "empire_building"
 msgid "Deep Coal Mine"
 msgstr "Miniera di carbone profonda"
 
-#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:93
 msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2037,7 +2068,7 @@ msgctxt "empire_building"
 msgid "Gold Mine"
 msgstr "Miniera d'oro"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/goldmine/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2050,7 +2081,7 @@ msgctxt "empire_building"
 msgid "Deep Gold Mine"
 msgstr "Profonda miniera d'oro"
 
-#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:91
 msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2084,7 +2115,7 @@ msgctxt "empire_building"
 msgid "Iron Mine"
 msgstr "Miniera di ferro"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:78
+#: ../../data/tribes/buildings/productionsites/empire/ironmine/init.lua:93
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2097,7 +2128,7 @@ msgctxt "empire_building"
 msgid "Deep Iron Mine"
 msgstr "Miniera di ferro profonda"
 
-#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:76
+#: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:92
 msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2126,22 +2157,25 @@ msgid "Marble Mine"
 msgstr "Miniera di marmo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start mining marble because ...
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:70
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:84
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:105
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:58
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:72
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:80
 msgid "mining marble"
 msgstr "estraendo del marmo"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:101
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:74
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:131
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:98
 msgid "No Marble"
 msgstr "Niente marmo"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:102
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:75
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:132
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:99
 msgid "Main Marble Vein Exhausted"
 msgstr "Vena principale di marmo esaurita"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:104
+#: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:134
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -2155,7 +2189,7 @@ msgctxt "empire_building"
 msgid "Deep Marble Mine"
 msgstr "Miniera di marmo profonda"
 
-#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:77
+#: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:101
 msgctxt "empire_building"
 msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
@@ -2376,7 +2410,7 @@ msgid ""
 "area. Please make sure there is a working clay pit nearby and the aqua farm "
 "is supplied with all needed wares, or consider dismantling or destroying "
 "this building."
-msgstr ""
+msgstr "Il pescatore che lavora in questo allevamento ittico non trova nessun pesce negli stagni della sua area di lavoro. Per favore verifica che ci sia una cava di argilla attiva nelle vicinanze e che l'allevamento ittico sia rifornita di tutti i materiali necessari, o considera la possibilità di smantellare o distruggere questo edificio."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:7
@@ -2388,19 +2422,19 @@ msgstr "Fucina di armature grande"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:75
 msgid "forging a broadsword"
-msgstr "forgiare uno spadone"
+msgstr "sta forgiando uno spadone"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a double-edged sword
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:90
 msgid "forging a double-edged sword"
-msgstr "forgiare una spada a doppio taglio"
+msgstr "sta forgiando una spada a doppio taglio"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a golden helmet
 #. because ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/init.lua:105
 msgid "forging a golden helmet"
-msgstr "forgiare un elmo d'oro"
+msgstr "sta forgiando un elmo d'oro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:7
@@ -2412,13 +2446,13 @@ msgstr "Fucina di armature piccola"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:74
 msgid "forging a short sword"
-msgstr "forgiare una spada corta"
+msgstr "sta forgiando una spada corta"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a long sword because
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_small/init.lua:89
 msgid "forging a long sword"
-msgstr "forgiare una spada lunga"
+msgstr "sta forgiando una spada lunga"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:7
@@ -2430,7 +2464,7 @@ msgstr "Forno"
 #: ../../data/tribes/buildings/productionsites/frisians/bakery/init.lua:62
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:83
 msgid "baking bread"
-msgstr "produrre del pane"
+msgstr "sta producendo del pane"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:7
@@ -2442,7 +2476,7 @@ msgstr "Caserma"
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/init.lua:64
 msgctxt "frisians_building"
 msgid "recruiting soldier"
-msgstr "reclutare un soldato"
+msgstr "sta reclutando un soldato"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/init.lua:7
@@ -2464,7 +2498,7 @@ msgid ""
 "The beekeeper working at this beekeepers’s house can’t find any flowering "
 "fields or bushes in his work area. You should consider building another farm"
 " or berry farm nearby, or dismantling or destroying this building."
-msgstr ""
+msgstr "L'apicoltore che lavora in questo apiario non riesce a trovare nessun campo di fiori o cespuglio nella sua area di lavoro. Dovresti prendere in considerazione la possibilità di costruire un'altra fattoria o una fattoria di bacche nelle vicinanze, o smantellare o distruggere questo edificio."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/init.lua:7
@@ -2487,12 +2521,12 @@ msgstr "Fabbro"
 #. ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:94
 msgid "forging a felling ax"
-msgstr ""
+msgstr "sta forgiando un'ascia da boscaiolo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start forging a pick because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:105
 msgid "forging a pick"
-msgstr ""
+msgstr "sta forgiando un piccone"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making needles because ...
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:215
@@ -2536,11 +2570,11 @@ msgstr "produrre argilla"
 #. TRANSLATORS: Short for "No Level Ground" for clay pits
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:75
 msgid "No Ground"
-msgstr ""
+msgstr "Non c'è terreno"
 
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:76
 msgid "No Level Ground"
-msgstr ""
+msgstr "Non c'è terreno pianeggiante"
 
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/init.lua:77
 msgctxt "frisians_building"
@@ -2556,7 +2590,7 @@ msgctxt "frisians_building"
 msgid "Coal Mine"
 msgstr "Miniera di carbone"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:81
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:98
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2569,7 +2603,7 @@ msgctxt "frisians_building"
 msgid "Deep Coal Mine"
 msgstr "Miniera di carbone profonda"
 
-#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:89
+#: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:102
 msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2586,15 +2620,15 @@ msgstr "Casa del raccoglitore di frutta"
 #. TRANSLATORS: Completed/Skipped/Did not start gathering berries because ...
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:51
 msgid "gathering berries"
-msgstr ""
+msgstr "sta raccogliendo bacche"
 
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:61
 msgid "No Bushes"
-msgstr ""
+msgstr "Nessun cespuglio"
 
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:62
 msgid "Out of Berries"
-msgstr ""
+msgstr "Le bacche sono esaurite"
 
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:63
 msgctxt "frisians_building"
@@ -2614,29 +2648,29 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:7
 msgctxt "frisians_building"
 msgid "Farm"
-msgstr ""
+msgstr "Fattoria"
 
 #. TRANSLATORS: Completed/Skipped/Did not start planting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:72
 msgid "planting barley"
-msgstr ""
+msgstr "sta piantando dell'orzo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start harvesting barley because ...
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:80
 msgid "harvesting barley"
-msgstr ""
+msgstr "sta raccogliendo dell'orzo"
 
 #: ../../data/tribes/buildings/productionsites/frisians/farm/init.lua:93
 msgctxt "frisians_building"
 msgid ""
 "The farmer working at this farm has no cleared soil to plant his seeds."
-msgstr ""
+msgstr "Il contadino che lavoro in questa fattoria non ha terreno libero dove piantare i suoi semi."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Casa del pescatore"
 
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/init.lua:62
 msgctxt "frisians_building"
@@ -2649,57 +2683,57 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa della guardia forestale"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/init.lua:7
 msgctxt "frisians_building"
 msgid "Furnace"
-msgstr ""
+msgstr "Fornace"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:7
 msgctxt "frisians_building"
 msgid "Gold Mine"
-msgstr ""
+msgstr "Miniera d'oro"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:83
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera d'oro è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:7
 msgctxt "frisians_building"
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "Miniera d'oro profonda"
 
-#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:100
 msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera d'oro è esaurita. La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:7
 msgctxt "frisians_building"
 msgid "Honey Bread Bakery"
-msgstr ""
+msgstr "Panificio di pane al miele"
 
 #. TRANSLATORS: Completed/Skipped/Did not start baking honey bread because ...
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:72
 msgid "baking honey bread"
-msgstr ""
+msgstr "sta producendo pane al miele"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:7
 msgctxt "frisians_building"
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Casa del cacciatore"
 
 #. TRANSLATORS: "game" means animals that you can hunt
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
@@ -2707,63 +2741,63 @@ msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "
 "work area."
-msgstr ""
+msgstr "Il cacciatore al lavoro in questa casa del cacciatore non trova nessuna selvaggina nella sua area di lavoro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:7
 msgctxt "frisians_building"
 msgid "Iron Mine"
-msgstr ""
+msgstr "Miniera di ferro"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:83
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di ferro è esaurita.  La produttività sarà estremamente scarsa. Dovresti prendere in considerazione l'idea di potenziarla, smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:7
 msgctxt "frisians_building"
 msgid "Deep Iron Mine"
-msgstr ""
+msgstr "Miniera di ferro profonda"
 
-#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:83
+#: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:102
 msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr ""
+msgstr "La vena principale di questa miniera di ferro è esaurita.  La produttività sarà estremamente scarsa. Questa miniera non può essere migliorata ulteriormente, quindi dovresti prendere in considerazione l'idea di smantellarla o distruggerla."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:7
 msgctxt "frisians_building"
 msgid "Mead Brewery"
-msgstr ""
+msgstr "Birrificio di idromele"
 
 #. TRANSLATORS: Completed/Skipped/Did not start brewing mead because ...
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:70
 msgid "brewing mead"
-msgstr ""
+msgstr "producendo dell'idromele"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:7
 msgctxt "frisians_building"
 msgid "Quarry"
-msgstr ""
+msgstr "Cava"
 
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/init.lua:72
 msgctxt "frisians_building"
 msgid ""
 "The stonemason working at this quarry can’t find any rocks in his work area."
-msgstr ""
+msgstr "Il tagliapietre al lavoro in questa cava non ha nessuna pietra nella sua area di lavoro"
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:7
 msgctxt "frisians_building"
 msgid "Recycling Center"
-msgstr ""
+msgstr "Centro di riciclaggio"
 
 #. TRANSLATORS: Completed/Skipped/Did not start recycling fur because ...
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/init.lua:85
@@ -2822,7 +2856,7 @@ msgctxt "frisians_building"
 msgid "Rock Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:85
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:99
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2835,7 +2869,7 @@ msgctxt "frisians_building"
 msgid "Deep Rock Mine"
 msgstr ""
 
-#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:86
+#: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:102
 msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
@@ -2886,7 +2920,7 @@ msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start sewing golden fur garment
 #. because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:82
+#: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/init.lua:83
 msgid "sewing golden fur garment"
 msgstr ""
 
@@ -2903,7 +2937,7 @@ msgid "preparing only one ration"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
-#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:86
+#: ../../data/tribes/buildings/productionsites/frisians/tavern/init.lua:88
 msgid "preparing rations"
 msgstr ""
 
@@ -2950,38 +2984,38 @@ msgid "Dungeon"
 msgstr "Segrete"
 
 #. TRANSLATORS: Completed/Skipped/Did not start sleeping because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:155
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:156
 #: ../../data/tribes/buildings/trainingsites/atlanteans/labyrinth/init.lua:92
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:81
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:82
 #: ../../data/tribes/buildings/trainingsites/barbarians/trainingcamp/init.lua:101
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:72
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:66
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:67
 #: ../../data/tribes/buildings/trainingsites/empire/trainingcamp/init.lua:95
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:112
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:113
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/init.lua:112
 msgid "sleeping"
 msgstr "sta dormendo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:163
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:164
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:174
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:175
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:185
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:186
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 2 to level 3"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:196
+#: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua:197
 msgctxt "atlanteans_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
@@ -3029,13 +3063,13 @@ msgid "Battle Arena"
 msgstr "Arena di battaglia"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:89
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:90
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:101
+#: ../../data/tribes/buildings/trainingsites/barbarians/battlearena/init.lua:102
 msgctxt "barbarians_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
@@ -3102,7 +3136,7 @@ msgstr "Arena"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
 #: ../../data/tribes/buildings/trainingsites/empire/arena/init.lua:80
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:74
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:75
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 0 to level 1"
 msgstr ""
@@ -3114,7 +3148,7 @@ msgid "Colosseum"
 msgstr "Colosseo"
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:85
+#: ../../data/tribes/buildings/trainingsites/empire/colosseum/init.lua:86
 msgctxt "empire_building"
 msgid "upgrading soldier evade from level 1 to level 2"
 msgstr ""
@@ -3180,31 +3214,31 @@ msgid "Training Arena"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:120
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:121
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 3 to level 4"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:131
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:132
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 4 to level 5"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:143
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:144
 msgctxt "frisians_building"
 msgid "upgrading soldier attack from level 5 to level 6"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:155
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:156
 msgctxt "frisians_building"
 msgid "upgrading soldier defense from level 1 to level 2"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
-#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:167
+#: ../../data/tribes/buildings/trainingsites/frisians/training_arena/init.lua:168
 msgctxt "frisians_building"
 msgid "upgrading soldier health from level 1 to level 2"
 msgstr ""

@@ -69,6 +69,10 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
    OSX_MIN_VERSION=$OSX_VERSION
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
+   if [ ! -d "$SDK_DIRECTORY" ]; then
+      # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
+      SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+   fi
 fi
 
 REVISION=`bzr revno $SOURCE_DIR`

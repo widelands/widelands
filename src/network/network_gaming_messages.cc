@@ -128,6 +128,7 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["MALFORMED_COMMANDS"] = _("Client sent malformed commands: %s");
 	ngmessages["SOMETHING_WRONG"] = _("Something went wrong: %s");
 	ngmessages["CLIENT_X_LEFT_GAME"] = _("%1$s has left the game (%2$s)");
+	ngmessages["CLIENT_X_REPLACED_WITH"] = _("%1$s has been replaced with %2$s");
 	ngmessages["UNKNOWN_LEFT_GAME"] = _("Unknown user has left the game (%s)");
 	ngmessages["SYNCREQUEST_WO_GAME"] =
 	   _("Server sent a SYNCREQUEST even though no game is running.");

@@ -40,8 +40,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
                          const EditorGameBase& egbase)
    : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
      ware_hotspot_(table.has_key("ware_hotspot") ?
-                      Vector2i(table.get_table("ware_hotspot")->get_int(1),
-                               table.get_table("ware_hotspot")->get_int(2)) :
+                      table.get_vector<std::string, int>("ware_hotspot") :
                       Vector2i(0, 15)),
      default_target_quantity_(table.has_key("default_target_quantity") ?
                                  table.get_int("default_target_quantity") :

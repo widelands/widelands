@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-20 21:12+0000\n"
+"POT-Creation-Date: 2018-09-14 06:11+0000\n"
+"PO-Revision-Date: 2018-09-14 12:48+0000\n"
 "Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -2749,6 +2749,10 @@ msgstr "Dieser Reet wurde eben erst angepflanzt."
 
 #. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
 #. script probably want to lose the blank space here.
+#. TRANSLATORS: Note helptext for a building
+#. TRANSLATORS: Performance helptext for a building
+#. TRANSLATORS: Put 2 sentences one after the other. Languages using Chinese
+#. script probably want to lose the blank space here.
 #: ../../data/tribes/immovables/resi_coal1/helptexts.lua:3
 #: ../../data/tribes/immovables/resi_coal2/helptexts.lua:3
 #: ../../data/tribes/immovables/resi_gold1/helptexts.lua:3
@@ -3690,7 +3694,7 @@ msgid "Producer"
 msgstr "Produzent"
 
 #. TRANSLATORS: Ware Encyclopedia: Wares produced by a productionsite
-#: ../../data/tribes/scripting/help/ware_help.lua:95
+#: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
 msgstr[0] "Produzierte Ware:"
@@ -3698,7 +3702,7 @@ msgstr[1] "Produzierte Waren:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
 #. consume a ware
-#: ../../data/tribes/scripting/help/ware_help.lua:156
+#: ../../data/tribes/scripting/help/ware_help.lua:167
 msgid "Consumer"
 msgid_plural "Consumers"
 msgstr[0] "Verbraucher"
@@ -3942,8 +3946,6 @@ msgid ""
 "inns to prepare meals."
 msgstr "Nur dieses Bier ist gut genug für die Krieger in der Arena. Man sagt, die ganze Kraft der Barbaren liege darin. Starkbier hilft den Kriegern, ihre Ausweichfertigkeiten von Stufe 0 bis zur Stufe 2 zu trainieren. Starkbier wird außerdem in Gaststätten für das Zubereiten von Mahlzeiten benötigt."
 
-#. TRANSLATORS: Note helptext for a building
-#. TRANSLATORS: Performance helptext for a building
 #. TRANSLATORS: Helptext for a ware: Blackroot
 #: ../../data/tribes/wares/blackroot/helptexts.lua:4
 msgctxt "atlanteans_ware"
@@ -4407,8 +4409,8 @@ msgstr "Die Barbaren produzieren Steinblöcke in Steinbrüchen und Granitminen."
 msgctxt "frisians_ware"
 msgid ""
 "The Frisians produce granite blocks in quarries and rock mines. They can be "
-"refined by a brick burner."
-msgstr "Die Friesen produzieren Steinblöcke in Steinbrüchen und Felsminen. Sie können von einem Ziegler verfeinert werden."
+"refined in a brick kiln."
+msgstr "Die Friesen produzieren Steinblöcke in Steinbrüchen und Felsminen. Sie können in einer Ziegelei verfeinert werden."
 
 #. TRANSLATORS: Helptext for a ware: Granite
 #: ../../data/tribes/wares/granite/helptexts.lua:12
@@ -5484,8 +5486,8 @@ msgctxt "barbarians_worker"
 msgid "Bakes pitta bread for the miners, soldiers and scouts."
 msgstr "Bäckt Fladenbrot für Bergleute, Krieger und Kundschafter."
 
-#. TRANSLATORS: Helptext for a worker: Blacksmith
 #. TRANSLATORS: Helptext for a worker: Master Blacksmith
+#. TRANSLATORS: Helptext for a worker: Blacksmith
 #: ../../data/tribes/workers/barbarians/blacksmith/helptexts.lua:3
 #: ../../data/tribes/workers/barbarians/blacksmith_master/helptexts.lua:3
 msgctxt "barbarians_worker"

@@ -3,7 +3,8 @@
 # 
 # Translators:
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2016
+# Anton Khabarov <2233009@gmail.com>, 2016,2018
+# Viktor S <awsswa59@gmail.com>, 2018
 # Yuriy Sokolov <lention@mail.ru>, 2015
 # Алексей Баринов <leha.bar.ru@gmail.com>, 2018
 # Олег Шевченко <olegrock@gmail.com>, 2017-2018
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 06:56+0000\n"
-"PO-Revision-Date: 2018-09-10 21:13+0000\n"
-"Last-Translator: Алексей Баринов <leha.bar.ru@gmail.com>\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 13:16+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,13 +106,13 @@ msgstr "--rolling_autosave=[...]\nИспользовать это множест
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserver=[...]\n                      Подключитесь к другому серверу для интернет игры."
 
 #: ../../src/wlapplication_messages.cc:84
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserverport=[...]\n                      Номер порта у сервера для интернет игры."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid "Sound options:"
@@ -208,7 +209,7 @@ msgstr " --yres=[...]         Высота окна в пикселях."
 
 #: ../../src/wlapplication_messages.cc:135
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr ""
+msgstr " --maxfps=[5 ...]     Максимально кадров в секунду \"FPS\" в игре."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -274,4 +275,4 @@ msgid ""
 "        https://wl.widelands.org/\n"
 "\n"
 "Hope you enjoy this game!"
-msgstr "Сообщения об ошибках? Предложения? Проверьте веб-сайт проекта:\n https://wl.widelands.org/\n\nНадеюсь, вам понравится эта игра!"
+msgstr "Сообщения об ошибках? Предложения? Зайдите на веб-сайт проекта:\n https://wl.widelands.org/\n\nНадеюсь, вам понравится эта игра!"

@@ -8,6 +8,7 @@
 # millimarg, 2015
 # Mirian Margiani <mirian.margiani@gmail.com>, 2014
 # Peter Schwanemann <nasenbaer_peter@sourceforge.net>, 2007
+# Stephan Lutz <stephan-lutz@gmx.de>, 2018
 # Tino Miegel <tino.miegel@gmail.com>, 2016
 # Elisabeth Jäger, 2015-2016
 # wl-zocker, 2015-2016
@@ -15,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-18 15:27+0000\n"
+"POT-Creation-Date: 2018-09-14 06:11+0000\n"
+"PO-Revision-Date: 2018-08-03 14:31+0000\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -207,7 +208,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Nach der Niederlage in einer wichtigen Schlacht gegen die Barbaren, welche zum Verlust eines großen Teils der Reiches führte, verließ Lutius Fremil, um ein neues Leben zu beginnen. Aber sein Unglück verschlägt ihn mit seinem Schiff in einen starken Sturm, welcher es beinahe zerstört. Nur mit viel Glück schafft er es, sein leckes Schiff an einen unbekannten Wüstenstrand zu lenken, um seine Leute zu retten. Vorerst."
+msgstr "Nach der Niederlage in einer wichtigen Schlacht gegen die Barbaren, welche zum Verlust eines großen Teils des Reiches führte, verließ Lutius Fremil, um ein neues Leben zu beginnen. Aber sein Unglück verschlägt ihn mit seinem Schiff in einen starken Sturm, welcher es beinahe zerstört. Nur mit viel Glück schafft er es, sein leckes Schiff an einen unbekannten Wüstenstrand zu lenken, um seine Leute zu retten. Vorerst."
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
