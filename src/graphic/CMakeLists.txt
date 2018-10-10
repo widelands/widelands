@@ -104,8 +104,10 @@ wl_library(graphic_gl_utils
   DEPENDS
     base_exceptions
     base_geometry
+    base_i18n
     base_log
     base_macros
+    graphic_text
     io_fileread
     io_filesystem
 )

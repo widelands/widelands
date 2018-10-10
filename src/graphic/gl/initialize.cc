@@ -20,11 +20,14 @@
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
+#include <cstdlib>
 
 #include <SDL.h>
 
+#include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/gl/utils.h"
+#include "graphic/text/bidi.h"
 
 namespace Gl {
 
@@ -177,8 +180,42 @@ SDL_GLContext initialize(
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
 	log("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
-	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n",
-	    reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+	// Show a basic SDL window with an error message, and log it too, then exit 1. Since font support does not exist for all languages, we show both the original and a localized text.
+	auto show_opengl_error_and_exit = [] (const std::string& message, const std::string& localized_message) {
+		std::string display_message = localized_message;
+		if (i18n::has_rtl_character(display_message.c_str())) {
+			display_message = i18n::line2bidi(i18n::make_ligatures(display_message.c_str()).c_str());
+		}
+		display_message = (message == display_message) ? message : display_message + "\n\n" + message;
+
+		/** TRANSLATORS: Error message printed to console/command line/log file */
+		log(_("ERROR: %s\n"), display_message.c_str());
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error", display_message.c_str(), NULL);
+		exit(1);
+	};
+
+	// Exit if we can't detect the shading language version
+	const char* const shading_language_version_string =
+	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
+	if (strcmp(shading_language_version_string, "(null)") == 0) {
+		show_opengl_error_and_exit("Widelands won't work because we were unable to detect the shading "
+								   "language version.\nThere is an unknown problem with reading the "
+								   "information from the graphics driver.",
+								   /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font support is limited here, so do not use advanced typography **/
+								   _("Widelands won't work because we were unable to detect the shading "
+									 "language version.\nThere is an unknown problem with reading the "
+									 "information from the graphics driver."));
+	}
+
+	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+
+	// Exit if the shading language version is too old
+	const double shading_language_version = atof(shading_language_version_string);
+	if (shading_language_version < 1.20) {
+		show_opengl_error_and_exit("Widelands won’t work because your graphics driver is too old.\nThe Shading language needs to be version 1.20 or newer.",
+								   /** TRANSLATORS: Basic error message when we can't handle the graphics driver. Font support is limited here, so do not use advanced typography **/
+								   _("Widelands won’t work because your graphics driver is too old.\nThe shading language needs to be version 1.20 or newer."));
+	}
 
 	glDrawBuffer(GL_BACK);
 
