@@ -4,14 +4,16 @@ cmake_minimum_required (VERSION 2.8.7)
 
 # This policy is not known to versions prior 3.1 and would result in errors, 
 # if set on such systems. This can be removed when cmake_minimum_required is set
-# to 3.1 or newer
+# to 3.1 or newer by using:
+# cmake_policy(VERSION 3.1)
 if(POLICY CMP0054)
    cmake_policy(SET CMP0054 NEW)
 endif(POLICY CMP0054)
 
 # This policy is not known to versions prior 3.11 and would result in errors, 
 # if set on such systems. This can be removed when cmake_minimum_required is set
-# to 3.11 or newer
+# to 3.11 or newer  by using:
+# cmake_policy(VERSION 3.11)
 if(POLICY CMP0072)
    cmake_policy(SET CMP0072 NEW)
 endif(POLICY CMP0072)
