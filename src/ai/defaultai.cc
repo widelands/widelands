@@ -3593,6 +3593,7 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	uint16_t road_length = road.get_path().get_nsteps();
 
 	for (int j = 0; j < 2; ++j) {
+		std::set<Widelands::Serial> visited_flags;
 		bool new_road_found = true;
 		while (new_road_found && full_road.back()->nr_of_roads() <= 2 &&
 		       full_road.back()->get_building() == nullptr) {
@@ -3616,10 +3617,16 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 				if (other_end->get_position() == full_road[full_road_size - 2]->get_position()) {
 					continue;
 				}
-				full_road.push_back(other_end);
-				road_length += near_road->get_path().get_nsteps();
-				new_road_found = true;
-				break;
+
+				// Do not visit the same flag twice
+				if (visited_flags.count(other_end->serial()) == 0) {
+					// We have found a new flag to add to the road
+					full_road.push_back(other_end);
+					road_length += near_road->get_path().get_nsteps();
+					new_road_found = true;
+					visited_flags.insert(other_end->serial());
+					break;
+				}
 			}
 		}
 		// we walked to one end, now let revert the concent of full_road and repeat in opposite
