@@ -138,9 +138,9 @@ if(OPTION_ASAN)
   set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 else()
   message(STATUS "Not using AddressSanitizer.")
-  set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL -lGLU -lGLEW -lglut")
 endif(OPTION_ASAN)
 
+# This is set to avoid linker errors when using GLVND-libs on Linux
 if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
    set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL -lGLU -lGLEW -lglut")
 endif()
