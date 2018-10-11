@@ -1,7 +1,7 @@
 project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
-cmake_policy(VERSION 3.9.2)
+cmake_policy(VERSION 3.11)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
@@ -138,7 +138,12 @@ if(OPTION_ASAN)
   set (CMAKE_EXE_LINKER_FLAGS "-fsanitize=address" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 else()
   message(STATUS "Not using AddressSanitizer.")
+  set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL -lGLU -lGLEW -lglut")
 endif(OPTION_ASAN)
+
+if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
+   set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL -lGLU -lGLEW -lglut")
+endif()
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Weverything")
