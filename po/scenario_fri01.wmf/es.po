@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-14 06:11+0000\n"
+"POT-Creation-Date: 2018-10-05 07:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Spanish (https://www.transifex.com/widelands/teams/35159/es/)\n"
 "MIME-Version: 1.0\n"
@@ -851,28 +851,45 @@ msgid ""
 "make haste!"
 msgstr ""
 
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:409
+msgid "Don’t Forget the Soldiers"
+msgstr ""
+
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
+msgid "Soldiers to the port!"
+msgstr ""
+
+#. TRANSLATORS: Reebaud – rising water
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
+msgid ""
+"I almost forgot in this haste – whereever we will land, we’ll need soldiers "
+"to secure and expand our new colony. There’s space for up to 10 soldiers on "
+"our ship, if they don’t mind being all crammed up together. Let’s send some "
+"to the port when it’s completed, so they can embark when we set sail!"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:416
 msgid "Victory"
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid "We escaped!"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:419
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
 msgid "Congratulations"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:416
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"

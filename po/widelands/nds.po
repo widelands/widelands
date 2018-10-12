@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: 2018-10-01 11:05+0000\n"
+"POT-Creation-Date: 2018-10-05 07:05+0000\n"
+"PO-Revision-Date: 2018-10-11 14:44+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -1476,22 +1476,22 @@ msgid "Unloading of wares failed, expedition is cancelled now."
 msgstr "De Waren kunnen nich utladen werden, de Söök is nu to Enne gahn."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:855
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Söök"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:855
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgid "Expedition Ready"
 msgstr "Söke torecht"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:856
+#: ../../src/logic/map_objects/tribes/ship.cc:855
 msgid "An expedition ship is waiting for your commands."
 msgstr "Een Schipp up Söke wacht för dien Gebodd."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:993
+#: ../../src/logic/map_objects/tribes/ship.cc:992
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1500,7 +1500,7 @@ msgstr "Up Schipperee"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:997
+#: ../../src/logic/map_objects/tribes/ship.cc:996
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Idle"
@@ -1508,7 +1508,7 @@ msgstr "Leeg"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1002
+#: ../../src/logic/map_objects/tribes/ship.cc:1001
 #: ../../src/wui/seafaring_statistics_menu.cc:219
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1516,14 +1516,14 @@ msgstr "Wachten"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1006
+#: ../../src/logic/map_objects/tribes/ship.cc:1005
 #: ../../src/wui/seafaring_statistics_menu.cc:221
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Söcht"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1010
+#: ../../src/logic/map_objects/tribes/ship.cc:1009
 #: ../../src/wui/seafaring_statistics_menu.cc:223
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1532,7 +1532,7 @@ msgstr "Rüüme för Muden funnen"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1015
+#: ../../src/logic/map_objects/tribes/ship.cc:1014
 #: ../../src/wui/seafaring_statistics_menu.cc:225
 msgctxt "ship_state"
 msgid "Founding a Colony"
@@ -1790,7 +1790,7 @@ msgstr "Kunn de Server nich berieten!"
 msgid ""
 "Widelands could not start hosting a server.\n"
 "This should not happen and there is most likely nothing you can do about it. Please report a bug."
-msgstr "Widelands kunn nich begünnen, eenen Server tu berieten.\nDat dürt nich passeren un du kannst wahrschienelk nix daran ännern. Bidde vermeld eenen Bug."
+msgstr "Widelands kunn nich begünnen, eenen Server tu berieten.\nDat dürt nich passeren un du kannst wahrschienelk nix daran ännern. Bidde mell deesen Fehler."
 
 #: ../../src/network/gamehost.cc:504
 msgid "Failed to start the server!"
@@ -3286,7 +3286,7 @@ msgstr "Wirtschafts-Instellungen"
 
 #: ../../src/wui/fieldaction.cc:328
 msgid "Send geologist to explore site"
-msgstr "Enn Schattsöker sall deese Stee unnersöken"
+msgstr "Een Schattsöker sall deese Stee unnersöken"
 
 #: ../../src/wui/fieldaction.cc:343
 msgid "Place a flag"
@@ -3471,17 +3471,17 @@ msgstr "Hierher springen"
 #: ../../src/wui/game_message_menu.cc:554
 #: ../../src/wui/seafaring_statistics_menu.cc:101
 #: ../../src/wui/seafaring_statistics_menu.cc:132
-#: ../../src/wui/seafaring_statistics_menu.cc:504
-#: ../../src/wui/seafaring_statistics_menu.cc:513
-#: ../../src/wui/seafaring_statistics_menu.cc:517
-#: ../../src/wui/seafaring_statistics_menu.cc:522
-#: ../../src/wui/seafaring_statistics_menu.cc:526
-#: ../../src/wui/seafaring_statistics_menu.cc:531
+#: ../../src/wui/seafaring_statistics_menu.cc:501
+#: ../../src/wui/seafaring_statistics_menu.cc:510
+#: ../../src/wui/seafaring_statistics_menu.cc:514
+#: ../../src/wui/seafaring_statistics_menu.cc:519
+#: ../../src/wui/seafaring_statistics_menu.cc:523
+#: ../../src/wui/seafaring_statistics_menu.cc:528
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (Handigtaste: %2%)"
 
 #: ../../src/wui/game_message_menu.cc:528
-#: ../../src/wui/seafaring_statistics_menu.cc:506
+#: ../../src/wui/seafaring_statistics_menu.cc:503
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
@@ -3497,13 +3497,13 @@ msgid "Show geologists' messages only"
 msgstr "Blot Narichten vun Schattsökers wiesen"
 
 #: ../../src/wui/game_message_menu.cc:540
-#: ../../src/wui/seafaring_statistics_menu.cc:515
+#: ../../src/wui/seafaring_statistics_menu.cc:512
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
 #: ../../src/wui/game_message_menu.cc:544
-#: ../../src/wui/seafaring_statistics_menu.cc:520
+#: ../../src/wui/seafaring_statistics_menu.cc:517
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
@@ -3514,7 +3514,7 @@ msgid "Show economy messages only"
 msgstr "Blot Wirtschafts-Narichten wiesen"
 
 #: ../../src/wui/game_message_menu.cc:548
-#: ../../src/wui/seafaring_statistics_menu.cc:524
+#: ../../src/wui/seafaring_statistics_menu.cc:521
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
@@ -3525,7 +3525,7 @@ msgid "Show seafaring messages only"
 msgstr "Blot Seefahrt-Narichten wiesen"
 
 #: ../../src/wui/game_message_menu.cc:552
-#: ../../src/wui/seafaring_statistics_menu.cc:528
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
@@ -3536,7 +3536,7 @@ msgid "Show warfare messages only"
 msgstr "Blot Soldateree-Narichten wiesen"
 
 #: ../../src/wui/game_message_menu.cc:556
-#: ../../src/wui/seafaring_statistics_menu.cc:534
+#: ../../src/wui/seafaring_statistics_menu.cc:531
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
@@ -4450,32 +4450,32 @@ msgid "Status"
 msgstr "Tostand"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:506
+#: ../../src/wui/seafaring_statistics_menu.cc:503
 msgid "Show all ships"
 msgstr "All Schippen wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:515
+#: ../../src/wui/seafaring_statistics_menu.cc:512
 msgid "Show idle ships"
 msgstr "Lege Schippen wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:519
+#: ../../src/wui/seafaring_statistics_menu.cc:516
 msgid "Show ships shipping wares and workers"
 msgstr "Schippen mit Waren un Arbeiders wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:524
+#: ../../src/wui/seafaring_statistics_menu.cc:521
 msgid "Show waiting expeditions"
 msgstr "Söken bi’m Wachten wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:528
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgid "Show scouting expeditions"
 msgstr "Söken bi’m Utförsken wiesen"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:533
+#: ../../src/wui/seafaring_statistics_menu.cc:530
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "Wies Söken wat Rüümte för Muden funnen hebben oder een Dörp upsetten"
 

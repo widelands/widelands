@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: 2018-10-04 08:39+0000\n"
+"POT-Creation-Date: 2018-10-05 07:05+0000\n"
+"PO-Revision-Date: 2018-10-11 14:44+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -336,7 +336,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "Widelands is een frejes, quellopens taktisk Speel in Echt-Tied mit Rutfödderungen för eenen Speler oder för mennig Spelers. Dat Speel is vun Settlers II anreegt, hett aber unbannig vööl mehr Ofwesseln un Deepde. Aber dör de Inföhrens tum Spölen kann man doch leep licht mit Widelands bekennt worden."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -345,7 +345,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "In deesem Speel fangst du mit eenem lütten Deel Land an, waar du leep minn Materialien un Mineraale hest. Daarmit baust du een Riek mit dusenden Inwohners up. Up dienem Weg daarhen baust du eene starke Wirtschaft up, förskst dat Land um di rum ut un kämpst tegen tegenstriedige Völker."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -358,7 +358,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands nimmt elkeen Speel, wat du spöölst, in twee Dateien up. Eene daarvun hett eenen Naam, de up .wrpl.wgf ennt, un een sekerts Speel vum Anfang hett. De Naam vun de anner Datei ennt up .wrpl; daarin sünd all Befehlen, de Spelers geven hebben, to 'n Bispööl eene Straat to bauen oder eenen Feind antogriepen. De Rest vum Naam vun de Datei seggt di, wann dat Speel anfangen hett."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -368,7 +368,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "Im Höövdmenü kannst du »Upteken ankieken« utkören, um een Speel, wat du maal spöölt hest, nipp un nau antokieken. Aber Achtung! Elkeen Ännerung in de Speeldaten oder Widelands sülvst, ok heel lütte, könen daarför sörgen, dat dat Upteken nich mehr mit de Speel verdragelk is un sük »verschufft«. Dat is jüüst so, as wenn twee Spelers bi'm Spölen övr 't Internett verschedene Widelands-Versionen bruken un sük dann de Spelen verschuven."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -377,7 +377,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Uptekens sünd bannig nüttelk, um Fehlers in de Logik vum Speel to finnen, daarum sünd se as Anhang för Fehler-Berichten good. De Upteken-Dateien worden unner Linux un Mac OS X in de List »%s« sekert. Unner Windows sünd se in de List »replays« unner de List, waar Widelands sekert is."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
@@ -734,7 +734,7 @@ msgstr "Strg+0"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr "Vergroter oder verkleen de Sicht mit de Muusraad oder %1%. Drück %2%, um dat Vergrotern torüggtosetten."
+msgstr "Maak de Sicht mit de Muusraad oder %1% groter oder lütter. Drück %2%, um dat Vergrotern torüggtosetten."
 
 #: ../../data/txts/tips/general_game.lua:75
 msgid ""
