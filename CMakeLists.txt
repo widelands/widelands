@@ -16,8 +16,7 @@ endif(POLICY CMP0054)
 # to 3.11 or newer  by using:
 # cmake_policy(VERSION 3.11)
 if(POLICY CMP0072)
-   # TODO(stonerl): Set this policy to NEW after BUILD 21 has been released
-   cmake_policy(SET CMP0072 OLD)
+   cmake_policy(SET CMP0072 NEW)
 endif(POLICY CMP0072)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
