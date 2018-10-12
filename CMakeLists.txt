@@ -1,6 +1,7 @@
 project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
+cmake_policy(VERSION 2.8.7)
 
 # This policy is not known to versions prior 3.1 and would result in errors, 
 # if set on such systems. This can be removed when cmake_minimum_required is set
@@ -15,7 +16,8 @@ endif(POLICY CMP0054)
 # to 3.11 or newer  by using:
 # cmake_policy(VERSION 3.11)
 if(POLICY CMP0072)
-   cmake_policy(SET CMP0072 NEW)
+   # TODO(stonerl): Set this policy to NEW after BUILD 21 has been released
+   cmake_policy(SET CMP0072 OLD)
 endif(POLICY CMP0072)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
@@ -157,7 +159,7 @@ endif(OPTION_ASAN)
 
 # This is set to avoid linker errors when using GLVND-libs on Linux
 if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
-   set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL -lGLU -lGLEW -lglut")
+   set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL")
    message(STATUS "Adding linker flags for GLVND.")
 endif()
 
