@@ -105,9 +105,10 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		SDL_DisplayMode disp_mode;
 		SDL_GetWindowDisplayMode(sdl_window_, &disp_mode);
 		log("**** GRAPHICS REPORT ****\n"
+		#ifdef WL_USE_GLVND
+		    " VIDEO DRIVER GLVND %s\n"
+		#else
 		    " VIDEO DRIVER %s\n"
-		#ifdef OpenGL_GL_PREFERENCE
-		    " Using GLVND\n"
 		#endif
 		    " pixel fmt %u\n"
 		    " size %d %d\n"
