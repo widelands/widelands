@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-25 14:15+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-09-30 10:51+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -363,7 +363,7 @@ msgstr "Spiesen för de Bargwarkskeerls"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:212
 msgid "Amalea enters…"
-msgstr "Amalee' kummt herin…"
+msgstr "Amalee' kummt herin …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:214
@@ -384,7 +384,7 @@ msgstr "'t is nett un natürelk klook, Bargwarken to bauen, un 't maakt uns Leve
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr "Du sallst hör dörhelpen. Ick weet nich nupp un nau, wat wi bruuken… aber ick raad an:"
+msgstr "Du sallst hör dörhelpen. Ick weet nich nupp un nau, wat wi bruuken … aber ick raad an:"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:225
 msgid "Our New Tavern"
@@ -485,7 +485,7 @@ msgstr "De Tied vergaht"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:278
 msgid "7 days later…"
-msgstr "7 Dagen naher…"
+msgstr "7 Dagen naher …"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:282
 msgid "A Message"
@@ -505,7 +505,7 @@ msgid ""
 "that the Empire is at war with the Barbarians. They were attacked from the "
 "north by the tribe that I was forbidden to attack. It is clear to me what I "
 "must do…"
-msgstr "'t was eene Naricht för mi, de mi daarum anging, dat ick na Freemilt torügg koom. Dat Latienske Riek is im Krieg mit de Willen Lüü. Se sünd vun Noorden angrepen worden, vun de Volk, wat ick nich angriepen dürde. Ick weet, wat ick doon mutt…"
+msgstr "'t was eene Naricht för mi, de mi daarum anging, dat ick na Freemilt torügg koom. Dat Latienske Riek is im Krieg mit de Willen Lüü. Se sünd vun Noorden angrepen worden, vun de Volk, wat ick nich angriepen dürde. Ick weet, wat ick doon mutt …"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:291
 msgid ""

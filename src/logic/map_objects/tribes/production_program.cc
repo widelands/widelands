@@ -583,7 +583,6 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 		while (!reached_end) {
 			skip(parameters);
 			match_force_skip(parameters, "on");
-			log("found \"on \": parameters = \"%s\"\n", parameters);
 
 			ProgramResult result_to_set_method_for;
 			if (match_force_skip(parameters, "failure")) {
@@ -616,9 +615,6 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 				                    "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}", parameters);
 			handling_methods_[result_to_set_method_for - 1] = handling_method;
 			reached_end = !*parameters;
-			log("read handling method for result %u: %u, parameters = \"%s\", "
-			    "reached_end = %u\n",
-			    result_to_set_method_for, handling_method, parameters, reached_end);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("call: %s", e.what());
