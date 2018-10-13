@@ -107,7 +107,7 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		log("**** GRAPHICS REPORT ****\n"
 		    " VIDEO DRIVER %s\n"
 		#ifdef OpenGL_GL_PREFERENCE
-			" Using GLVND\n"
+		    " Using GLVND\n"
 		#endif
 		    " pixel fmt %u\n"
 		    " size %d %d\n"
