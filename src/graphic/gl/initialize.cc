@@ -192,10 +192,12 @@ SDL_GLContext initialize(
 		exit(1);
 	}
 
-	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+	log("Graphics: OpenGL: ShadingLanguage: \"%s\"", shading_language_version_string);
 
 	// Exit if the shading language version is too old
 	const double shading_language_version = atof(shading_language_version_string);
+	log(" (%.2f)\n", shading_language_version);
+
 	if (shading_language_version < 1.20) {
 		log("ERROR: Shading language version is too old!\n");
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
