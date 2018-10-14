@@ -185,8 +185,8 @@ SDL_GLContext initialize(
 	if (strcmp(shading_language_version_string, "(null)") == 0) {
 		log("ERROR: Unable to detect the shading language version!\n");
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
-		                         "Widelands won’t work because we were unable to detect the shading "
-		                         "language version -- there is an unknown problem with reading the "
+		                         "Widelands won't work because we were unable to detect the shading "
+		                         "language version.\nThere is an unknown problem with reading the "
 		                         "information from the graphics driver.",
 		                         NULL);
 		exit(1);
@@ -201,8 +201,8 @@ SDL_GLContext initialize(
 	if (shading_language_version < 1.20) {
 		log("ERROR: Shading language version is too old!\n");
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
-		                         "Widelands won’t work because your graphics driver is too old -- "
-		                         "version 1.20 or newer is required.",
+		                         "Widelands won’t work because your graphics driver is too old.\nThe "
+		                         "Shading language needs to be version 1.20 or newer.",
 		                         NULL);
 		exit(1);
 	}
