@@ -158,7 +158,7 @@ endif(OPTION_ASAN)
 
 # This is set to avoid linker errors when using GLVND-libs on Linux
 if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
-   set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL -lGLU -lGLEW")
+   set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL")
    add_compile_definitions(WL_USE_GLVND)
    message(STATUS "Adding linker flags for GLVND.")
 endif()
