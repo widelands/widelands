@@ -184,7 +184,7 @@ EditorPlayerMenu::EditorPlayerMenu(EditorInteractive& parent, UI::UniqueWindow::
 		}
 
 		plr_tribe->select(
-		   (p < map.get_nrplayers() && Widelands::tribe_exists(map.get_scenario_player_tribe(p))) ?
+		   (p <= map.get_nrplayers() && Widelands::tribe_exists(map.get_scenario_player_tribe(p))) ?
 		      map.get_scenario_player_tribe(p) :
 		      "");
 		plr_tribe->selected.connect(
