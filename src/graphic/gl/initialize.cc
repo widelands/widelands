@@ -195,17 +195,18 @@ SDL_GLContext initialize(
 	log("Graphics: OpenGL: ShadingLanguage: \"%s\"", shading_language_version_string);
 
 	// Exit if the shading language version is too old
-	/* NOCOM(GunChleoc): Commenting this out as a hotfix for https://bugs.launchpad.net/widelands/+bug/1797792
+	/* NOCOM(GunChleoc): Commenting this out as a hotfix for
+	https://bugs.launchpad.net/widelands/+bug/1797792
 	const double shading_language_version = atof(shading_language_version_string);
 	log(" (%.2f)\n", shading_language_version);
 
 	if (shading_language_version < 1.20) {
-		log("ERROR: Shading language version is too old!\n");
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
-		                         "Widelands won’t work because your graphics driver is too old.\nThe "
-		                         "Shading language needs to be version 1.20 or newer.",
-		                         NULL);
-		exit(1);
+	   log("ERROR: Shading language version is too old!\n");
+	   SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
+	                            "Widelands won’t work because your graphics driver is too old.\nThe "
+	                            "Shading language needs to be version 1.20 or newer.",
+	                            NULL);
+	   exit(1);
 	}
 	*/
 
