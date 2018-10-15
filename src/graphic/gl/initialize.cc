@@ -195,6 +195,7 @@ SDL_GLContext initialize(
 	log("Graphics: OpenGL: ShadingLanguage: \"%s\"", shading_language_version_string);
 
 	// Exit if the shading language version is too old
+	/* NOCOM(GunChleoc): Commenting this out as a hotfix for https://bugs.launchpad.net/widelands/+bug/1797792
 	const double shading_language_version = atof(shading_language_version_string);
 	log(" (%.2f)\n", shading_language_version);
 
@@ -206,6 +207,7 @@ SDL_GLContext initialize(
 		                         NULL);
 		exit(1);
 	}
+	*/
 
 	glDrawBuffer(GL_BACK);
 
