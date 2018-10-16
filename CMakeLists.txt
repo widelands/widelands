@@ -22,16 +22,19 @@ if(POLICY CMP0072)
    #
    #TODO(stonerl): Check on later Ubuntu releases whether workaround this is
    # still needed or not.
+   message(STATUS "${CMAKE_SYSTEM_NAME}")
    if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
        find_program(LSB_RELEASE_EXEC lsb_release)
        execute_process(COMMAND ${LSB_RELEASE_EXEC} -is
            OUTPUT_VARIABLE LSB_RELEASE_ID_SHORT
            OUTPUT_STRIP_TRAILING_WHITESPACE
        )
+       message(STATUS "${LSB_RELEASE_ID_SHORT}")
        execute_process(COMMAND ${LSB_RELEASE_EXEC} -cs
            OUTPUT_VARIABLE RELEASE_CODENAME
            OUTPUT_STRIP_TRAILING_WHITESPACE
        )
+       message(STATUS "${RELEASE_CODENAME}")
    endif()
 
    if (LSB_RELEASE_ID_SHORT STREQUAL "Ubuntu" AND
@@ -40,7 +43,7 @@ if(POLICY CMP0072)
    )
        cmake_policy(SET CMP0072 OLD)
    endif()
-
+    cmake_policy(SET CMP0172 OLD)
 endif(POLICY CMP0072)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
