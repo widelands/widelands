@@ -258,7 +258,11 @@ void Fleet::cleanup(EditorGameBase& egbase) {
 	portpaths_.clear();
 
 	while (!ships_.empty()) {
-		ships_.back()->set_fleet(nullptr);
+		Ship* ship = ships_.back();
+		// Check if the ship still exists to avoid heap-use-after-free when ship has already been deleted while processing EditorGameBase::cleanup_objects()
+		if (egbase.objects().object_still_available(ship)) {
+			ship->set_fleet(nullptr);
+		}
 		ships_.pop_back();
 	}
 
