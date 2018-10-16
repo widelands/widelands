@@ -31,7 +31,6 @@ function get_buildable_fields()
          end
       end
    end
-   print("NOCOM Found " .. #fields .. " buildable fields")
    return fields
 end
 
@@ -137,7 +136,6 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
       if teaminfo.team ~= 0 then
          points[#points + 1] = { team_str:format(teaminfo.team), teaminfo.points }
          if is_winner then
-            print("NOCOM Winner is team " .. teaminfo.team .. " with " .. teaminfo.points .. " points")
             territory_was_kept = winning_teams[teaminfo.team] ~= nil
             winning_teams[teaminfo.team] = true
             territory_points.last_winning_team = teaminfo.team
@@ -149,7 +147,6 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
 
       for pidx, playerinfo in ipairs(teaminfo.players) do
          if is_winner and teaminfo.team == 0 and teaminfo.points == playerinfo.points then
-            print("NOCOM Winner is player " .. playerinfo.number .. " with " .. playerinfo.points .. " points")
             territory_was_kept = winning_players[playerinfo.number] ~= nil
             winning_players[playerinfo.number] = true
             territory_points.last_winning_player = playerinfo.number
@@ -167,14 +164,12 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
    if territory_was_kept then
       -- Still the same winner
       territory_points.remaining_time = territory_points.remaining_time - 30
-      print("NOCOM Territory was kept by " .. territory_points.last_winning_team .. " - " .. territory_points.last_winning_player .. ". Remaining time: " .. territory_points.remaining_time)
    elseif winning_points == -1 then
       -- No winner. This value is used to calculate whether to send a report to players.
       territory_points.remaining_time = 10
    else
       -- Winner changed
       territory_points.remaining_time = 20 * 60 -- 20 minutes
-      print("NOCOM NEW aqcuisition by " .. territory_points.last_winning_team .. " - " .. territory_points.last_winning_player .. ". Remaining time: " .. territory_points.remaining_time)
    end
    territory_points.points = points
 end
