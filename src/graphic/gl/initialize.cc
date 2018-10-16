@@ -192,8 +192,8 @@ SDL_GLContext initialize(
 		if (major_shading_language_version < 1 || (major_shading_language_version == 1 && minor_shading_language_version < 20)) {
 			log("ERROR: Shading language version is too old!\n");
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
-									 "Widelands won’t work because your graphics driver is too old.\nThe "
-									 "Shading language needs to be version 1.20 or newer.",
+									 "Widelands won’t work because your graphics driver is too old.\n"
+									 "The shading language needs to be version 1.20 or newer.",
 									 NULL);
 			exit(1);
 		}
