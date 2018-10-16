@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-26 06:00+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-10-04 10:51+0000\n"
 "Last-Translator: Rui <xymarior@yandex.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -218,14 +218,14 @@ msgstr "Finalmente o navio fora reparado! Lutius e o seu povo pode novamente lan
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr "A caminho do regresso para defender o Império, a equipagem do Lutius foi surpreendida pelos deuses."
+msgstr "A caminho do regresso para defender o Império, a equipa do Lutius foi surpreendida pelos deuses."
 
 #: ../../data/campaigns/emp04.wmf/elemental:10
 msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr ""
+msgstr "Após regressar a casa, Lutius e a sua equipa são confrontados com uma economia despedaçada. Resolver os problemas da economia será da máxima importância para restabelecer a glória do império."
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -234,7 +234,7 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "Em 1932, a vida sossegada e pacífica dos habitantes das Ilhas Frísias do Norte foi interrompida para uma das maiores cheias da história: as cheias de Saint Marcellus. É realmente nada mais do que outra tempestade ou um sinal dos Deuses que a comunidade Frísia na ilha de Langeness não é bem-vinda aqui?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
@@ -250,7 +250,7 @@ msgstr "Umas Boas-Vindas Geladas"
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud  e a sua tribo chegaram ao norte. Mas a sua chegada entre as estepes congeladas e as montanhas cobertas de neve é menos do que bem-vinda…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

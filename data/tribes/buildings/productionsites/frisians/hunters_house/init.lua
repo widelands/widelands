@@ -56,6 +56,10 @@ tribes:new_productionsite_type {
             "callworker=hunt",
             "sleep=35000",
             "callworker=hunt",
+            "sleep=35000",
+            "callworker=hunt",
+            "sleep=35000",
+            "callworker=hunt",
             "produce=fur"
          }
       },

@@ -2,6 +2,7 @@
 Version=1.0
 Type=Application
 Name=Widelands
+Name[ko]=와이드랜드
 GenericName=Strategy Game
 GenericName[ar]=لعبه إستراتيجية
 GenericName[bg]=Стратегическа игра

@@ -4,14 +4,16 @@
 # Translators:
 # GunChleoc, 2018
 # GunChleoc, 2018
+# ks k, 2018
+# ks k, 2018
 # TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-14 06:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-10-03 19:04+0000\n"
+"Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -482,7 +484,7 @@ msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr "‘물자’탭은 짧은 도움말 글자, 각 물자들을 생산하는 건물 목록, 그것을 생산하는 필요한 물자, 물자가 소비되는곳등을 포함하여 부족이 필요로 하는 물자에 관한 정보를 표시합니다."
+msgstr "‘물자’ 탭은 짧은 도움말 글자, 각 물자들을 생산하는 건물 목록, 그것을 생산하는 필요한 물자, 물자가 소비되는곳등을 포함하여 부족이 필요로 하는 물자에 관한 정보를 표시합니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid ""
@@ -494,7 +496,7 @@ msgstr "‘일꾼’ 탭에는 두 번째 탭에 있는 도구와 비슷한 방�
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "‘건물’ 탭에는 부족 건물에 대한 필요한 모든 정보가 들어있습니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:235
 msgid ""
