@@ -18,11 +18,10 @@ endif(POLICY CMP0054)
 if(POLICY CMP0072)
    cmake_policy(SET CMP0072 NEW)
 
-   # On Ubuntu 18.10 uwe need to set this to OLD since it currently does not
-   # compile using the default compiler, GCC 8.2, on this system. Only Clang is
-   # able to compile at the moment.
+   # On Ubuntu 18.10 we need to set this policy to OLD when GCC is used.
    #
-   #TODO(stonerl): Check for later releases whether this is needed or not 
+   #TODO(stonerl): Check on later Ubuntu releases whether workaround this is
+   # still needed or not.
    if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
        find_program(LSB_RELEASE_EXEC lsb_release)
        execute_process(COMMAND ${LSB_RELEASE_EXEC} -is
@@ -34,11 +33,14 @@ if(POLICY CMP0072)
            OUTPUT_STRIP_TRAILING_WHITESPACE
        )
    endif()
-   
-   if (LSB_RELEASE_ID_SHORT STREQUAL "Ubuntu" AND RELEASE_CODENAME STREQUAL "cosmic")
+
+   if (LSB_RELEASE_ID_SHORT STREQUAL "Ubuntu" AND
+       RELEASE_CODENAME STREQUAL "cosmic" AND
+       CMAKE_CXX_COMPILER_ID STREQUAL "GNU"
+   )
        cmake_policy(SET CMP0072 OLD)
    endif()
-   
+
 endif(POLICY CMP0072)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
