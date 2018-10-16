@@ -3,7 +3,7 @@ project (widelands)
 cmake_minimum_required (VERSION 2.8.7)
 cmake_policy(VERSION 2.8.7)
 
-# This policy is not known to versions prior 3.1 and would result in errors, 
+# This policy is not known to versions prior 3.1 and would result in errors,
 # if set on such systems. This can be removed when cmake_minimum_required is set
 # to 3.1 or newer by using:
 # cmake_policy(VERSION 3.1)
@@ -11,12 +11,36 @@ if(POLICY CMP0054)
    cmake_policy(SET CMP0054 NEW)
 endif(POLICY CMP0054)
 
-# This policy is not known to versions prior 3.11 and would result in errors, 
+# This policy is not known to versions prior 3.11 and would result in errors,
 # if set on such systems. This can be removed when cmake_minimum_required is set
 # to 3.11 or newer  by using:
 # cmake_policy(VERSION 3.11)
 if(POLICY CMP0072)
    cmake_policy(SET CMP0072 NEW)
+
+   # On Ubuntu 18.10 we need to set this policy to OLD when GCC is used.
+   #
+   #TODO(stonerl): Check on later Ubuntu releases whether workaround this is
+   # still needed or not.
+   if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+       find_program(LSB_RELEASE_EXEC lsb_release)
+       execute_process(COMMAND ${LSB_RELEASE_EXEC} -is
+           OUTPUT_VARIABLE LSB_RELEASE_ID_SHORT
+           OUTPUT_STRIP_TRAILING_WHITESPACE
+       )
+       execute_process(COMMAND ${LSB_RELEASE_EXEC} -cs
+           OUTPUT_VARIABLE RELEASE_CODENAME
+           OUTPUT_STRIP_TRAILING_WHITESPACE
+       )
+   endif()
+
+   if (LSB_RELEASE_ID_SHORT STREQUAL "Ubuntu" AND
+       RELEASE_CODENAME STREQUAL "cosmic" AND
+       CMAKE_CXX_COMPILER_ID STREQUAL "GNU"
+   )
+       cmake_policy(SET CMP0072 OLD)
+   endif()
+
 endif(POLICY CMP0072)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
