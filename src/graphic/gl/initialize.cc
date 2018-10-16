@@ -24,6 +24,7 @@
 
 #include <SDL.h>
 #include <boost/algorithm/string.hpp>
+#include <boost/regex.hpp>
 
 #include "base/macros.h"
 #include "graphic/gl/utils.h"
@@ -198,14 +199,28 @@ SDL_GLContext initialize(
 			exit(1);
 		}
 	} else {
-		// Exit because we couldn't detect the shading language version, so there must be a problem communicating with the graphics adapter.
-		log("ERROR: Unable to detect the shading language version!\n");
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
-		                         "Widelands won't work because we were unable to detect the shading "
-		                         "language version.\nThere is an unknown problem with reading the "
-		                         "information from the graphics driver.",
-		                         NULL);
-		exit(1);
+		// We don't have a minor version. Ensure that the string to compare is a valid integer before conversion
+		boost::regex re("\\d+");
+		if (boost::regex_match(shading_language_version_string, re)) {
+			const int major_shading_language_version = atoi(shading_language_version_string);
+			if (major_shading_language_version < 2) {
+				log("ERROR: Shading language version is too old!\n");
+				SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
+										 "Widelands won’t work because your graphics driver is too old.\n"
+										 "The shading language needs to be version 1.20 or newer.",
+										 NULL);
+				exit(1);
+			}
+		} else {
+			// Exit because we couldn't detect the shading language version, so there must be a problem communicating with the graphics adapter.
+			log("ERROR: Unable to detect the shading language version!\n");
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
+									 "Widelands won't work because we were unable to detect the shading "
+									 "language version.\nThere is an unknown problem with reading the "
+									 "information from the graphics driver.",
+									 NULL);
+			exit(1);
+		}
 	}
 
 	glDrawBuffer(GL_BACK);
