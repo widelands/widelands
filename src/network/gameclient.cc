@@ -793,7 +793,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		break;
 	}
 	case NETCMD_WIN_CONDITION: {
-		d->settings.win_condition_script = packet.string();
+		d->settings.win_condition_script = g_fs->FileSystem::fix_cross_file(packet.string());
 		break;
 	}
 

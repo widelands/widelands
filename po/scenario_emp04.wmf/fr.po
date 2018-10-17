@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"POT-Creation-Date: 2018-10-05 07:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -61,17 +61,19 @@ msgstr "Épurez le réseau routier chaotique en enlevant les routes inutiles."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "Cliquez sur une des fermes"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Ouvrez la fenêtre de construction d'une ferme"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
+"Cliquez sur un bâtiment de ferme pour ouvrir sa fenêtre de construction. "
+"Ceci vous permettra d'analyser le bâtiment."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find the construction plans for the farms"
@@ -614,6 +616,8 @@ msgid ""
 "Until we have found the plans, the only option for our farms is to destroy "
 "them."
 msgstr ""
+"Jusqu'à ce que nous trouvions les plans, la seule options pour nos fermes "
+"est de les détruire."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
@@ -1178,12 +1182,12 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:573
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:592
 msgid "Defeated!"
-msgstr ""
+msgstr "Vaincu !"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:593
 msgid "Amalea reports our defeat…"
-msgstr ""
+msgstr "Amalea rapporte notre défaite..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:576
@@ -1194,7 +1198,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:582
 msgid "Amalea reports our headquarters lost…"
-msgstr ""
+msgstr "Amalea rapporte la perte de nos quartiers-généraux..."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:584

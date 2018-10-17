@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -890,7 +890,7 @@ msgstr ""
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:70
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:102
-#: ../../src/network/gamehost.cc:1607 ../../src/ui_fsmenu/launch_mpg.cc:509
+#: ../../src/network/gamehost.cc:1609 ../../src/ui_fsmenu/launch_mpg.cc:509
 #: ../../src/wui/multiplayersetupgroup.cc:135
 #: ../../src/wui/multiplayersetupgroup.cc:189
 #, c-format
@@ -1093,7 +1093,7 @@ msgid "Loading map…"
 msgstr ""
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1419
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1421
 msgid "Loading…"
 msgstr ""
 
@@ -1607,8 +1607,8 @@ msgid ""
 "you tried to connect."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:641
-#: ../../src/wlapplication.cc:1311
+#: ../../src/network/gameclient.cc:185 ../../src/network/gamehost.cc:641
+#: ../../src/wlapplication.cc:1313
 msgid "Preparing game"
 msgstr ""
 
@@ -1623,12 +1623,12 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/gameclient.cc:939
+#: ../../src/network/gameclient.cc:942
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:943
+#: ../../src/network/gameclient.cc:946
 msgid "Disconnected from Host"
 msgstr ""
 
@@ -1747,16 +1747,16 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1544
+#: ../../src/network/gamehost.cc:1546
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1601 ../../src/wui/game_summary.cc:102
+#: ../../src/network/gamehost.cc:1603 ../../src/wui/game_summary.cc:102
 msgid "Player"
 msgstr ""
 
-#: ../../src/network/gamehost.cc:1750
+#: ../../src/network/gamehost.cc:1752
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2933,11 +2933,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1106
+#: ../../src/wlapplication.cc:1108
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1114
+#: ../../src/wlapplication.cc:1116
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2945,7 +2945,7 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1121
+#: ../../src/wlapplication.cc:1123
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2953,11 +2953,11 @@ msgid ""
 "It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1248
+#: ../../src/wlapplication.cc:1250
 msgid "Invalid Address"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1249
+#: ../../src/wlapplication.cc:1251
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
