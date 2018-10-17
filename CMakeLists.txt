@@ -30,6 +30,7 @@ if(POLICY CMP0072)
       cmake_policy(SET CMP0072 OLD)
     endif()
   endif()
+  message(FATAL_ERROR "${DISTRO_NAME}")
 endif(POLICY CMP0072)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
