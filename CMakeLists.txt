@@ -26,17 +26,10 @@ if(POLICY CMP0072)
   # still needed or not.
   if (CMAKE_SYSTEM MATCHES "Linux")
     distro_name (DISTRO_NAME)
-    if (DISTRO_NAME MATCHES "Ubuntu")
-      system_info()
+    if (DISTRO_NAME MATCHES "Cosmic" AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      cmake_policy(SET CMP0072 OLD)
     endif()
   endif()
-
-  if (LSB_RELEASE_ID_SHORT STREQUAL "Ubuntu" AND
-       RELEASE_CODENAME STREQUAL "cosmic" AND
-       CMAKE_CXX_COMPILER_ID STREQUAL "GNU"
-  )
-  endif()
-  cmake_policy(SET CMP0172 OLD)
 endif(POLICY CMP0072)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
