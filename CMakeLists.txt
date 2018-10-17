@@ -26,7 +26,7 @@ if(POLICY CMP0072)
   # still needed or not.
   if (CMAKE_SYSTEM MATCHES "Linux")
     distro_name (DISTRO_NAME)
-    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Ubuntu 18.10")
+    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic")
         AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       cmake_policy(SET CMP0072 OLD)
     endif()
