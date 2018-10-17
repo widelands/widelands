@@ -21,7 +21,7 @@ if(POLICY CMP0072)
   cmake_policy(SET CMP0072 NEW)
 
   # On Ubuntu 18.10 we need to set this policy to OLD when GCC is used.
-  # Also teh DISTRO_NAME is different on the build-servers.
+  # Also the DISTRO_NAME is different on the build-servers.
   #TODO(stonerl): Check on later Ubuntu releases whether workaround this is
   # still needed or not.
   if (CMAKE_SYSTEM MATCHES "Linux")
