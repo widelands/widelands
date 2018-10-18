@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: GunChleoc, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/widelands/teams/35159/cs/)\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:47
 msgid "Build your first outpost"
@@ -741,8 +741,8 @@ msgstr "Amalea vypadá zamyšleně…"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
-"they had to use up all our remaining gold for building the port. Now we "
-"don’t have any gold left."
+"they have to use all our remaining gold for building the port. So, we won’t "
+"have any gold left after our port is build."
 msgstr ""
 
 #. TRANSLATORS: Amalea
@@ -1138,6 +1138,7 @@ msgid_plural "We still need to discover %d pieces of our shrine."
 msgstr[0] "Stále musíme ještě najít %d část naší relikvie."
 msgstr[1] "Stále musíme ještě najít %d části naší relikvie."
 msgstr[2] "Stále musíme ještě najít %d částí naší relikvie."
+msgstr[3] "Stále musíme ještě najít %d částí naší relikvie."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:645
@@ -1163,3 +1164,4 @@ msgid_plural "New Objectives"
 msgstr[0] "Nový úkol"
 msgstr[1] "Nové úkoly"
 msgstr[2] "Nových úkolů"
+msgstr[3] "Nových úkolů"

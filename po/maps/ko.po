@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-06 14:22+0000\n"
-"PO-Revision-Date: 2018-07-08 14:43+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-10-03 19:00+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -50,7 +50,7 @@ msgstr "이 땅은 우리 땅"
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
-msgstr "이 튜토리얼은 군사 건물과 훈련 건물을 다루는 법을 설명하고 전투를 소개할 것입니다."
+msgstr "이 자습서는 군사 건물과 훈련 건물을 다루는 법을 설명하고 전투를 소개할 것입니다."
 
 #: ../../data/campaigns/campaigns.conf:27
 msgid "The Second Empire"
@@ -105,7 +105,7 @@ msgid ""
 "March his unprepared army was attacked by 100 Barbarian footmen and was "
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
-msgstr "6개월 전에, 루티우스는 - 제국의 젊은 장군 - 제국이 지배하는 땅으로 야만인 부족들이 가로질러 오고 있는 북부의 숲 지대 너머 국경으로 150명의 군대와 함께 파견되었습니다. 그의 임무는 제국의 땅을 방어하는 것이었습니다. 처음에는, 모든 것이 평화로웠습니다. 그는 심지어 몇몇 야만인 아이들과 이야기를 나우었고 평화로운 삶 - 이 뒤떨어진 사람들과 나란히 있는 - 에 대해 생각했습니다. 그는 더욱 안전해질 거라 믿었고 그의 군대는 잠재적인 적에 대한 관심을 끄기 시작했습니다. 그래서는 안됐습니다. 3월의 어느 밤 그의 준비되지 않은 군대는 100명의 야만인 보병들에게 공격받았고 완전히 전멸했습니다. 간신히 몸만 빠져나와서 그와 한 줌의 군인들만이 살아남았습니다."
+msgstr "6개월 전에, 제국의 젊은 장군인 루티우스는 제국이 지배하는 땅으로 야만인 부족들이 가로질러 오고 있는 북부의 숲 지대 너머 국경으로 150명의 군대와 함께 파견되었습니다. 그의 임무는 제국의 땅을 방어하는 것이었습니다. 처음에는, 모든 것이 평화로웠습니다. 그는 심지어 몇몇 야만인 아이들과 이야기를 나우었고 평화로운 삶 - 이 뒤떨어진 사람들과 나란히 있는 - 에 대해 생각했습니다. 그는 더욱 안전해질 거라 믿었고 그의 군대는 잠재적인 적에 대한 관심을 끄기 시작했습니다. 그래서는 안됐습니다. 3월의 어느 밤 그의 준비되지 않은 군대는 100명의 야만인 보병들에게 공격받았고 완전히 전멸했습니다. 간신히 몸만 빠져나와서 그와 한 줌의 군인들만이 살아남았습니다."
 
 #: ../../data/campaigns/campaigns.conf:43
 msgid "The Run for the Fire"
@@ -138,7 +138,7 @@ msgstr "프리지아인"
 
 #: ../../data/campaigns/campaigns.conf:56
 msgid "For advanced players. Introduces the Frisians"
-msgstr "고급 선수들을 위해서. 프리지아인을 소개합니다."
+msgstr "고수들을 위해서. 프리지아인을 소개합니다."
 
 #: ../../data/campaigns/campaigns.conf:57
 msgid ""
@@ -148,7 +148,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "바다를 떠나 사는것은 끊임없는 고통입니다. 심지어 프리스티아 북쪽 해안 주민들에게는 더욱 그렇습니다. 사람들의 기억에서 가장 파괴적인 마지막으로 몰아친 매우 세차게 부는 비바람으로 인한 홍수가 그들이 직면해야 하는 어려움에 대한 잇다르는 본보기에 불과했던 걸까요? 아니면 이제 막 이곳에 정착했던 부족이 완전히 새로운 고향을 찾으라는 신의 뜻이 일까요?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -161,16 +161,16 @@ msgstr "아직 구현되지 않았음"
 #: ../../data/campaigns/campaigns.conf:91
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
-msgstr "말락'모르에서의 좌초"
+msgstr "마라크'모르에서의 좌초"
 
 #: ../../data/campaigns/campaigns.conf:96
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
-msgstr "망명을 위한 전초기지"
+msgstr "추방자의 개척지"
 
 #: ../../data/campaigns/campaigns.conf:101
 msgid "Neptune’s Revenge"
-msgstr "해왕성의 복수"
+msgstr "해왕성의 앙값음"
 
 #: ../../data/campaigns/campaigns.conf:106
 #: ../../data/campaigns/emp04.wmf/elemental:8
@@ -180,11 +180,11 @@ msgstr "놀람, 놀라움!"
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr "폭풍 홍수"
+msgstr "거대한 비바람 홍수"
 
 #: ../../data/campaigns/campaigns.conf:134
 msgid "Colder than Ice"
-msgstr "얼음보다 차갑다"
+msgstr "얼음보다 차가운"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -222,7 +222,7 @@ msgid ""
 "After returning home, Lutius and his crew are faced with an economy in "
 "shambles. Resolving the bottlenecks in the economy will be of utmost "
 "importance to reinstate the glory of the empire."
-msgstr ""
+msgstr "고향으로 돌아온 후 루티우스와 선원들은 난장판이 된 경제 상황에 직면한다. 경제의 병목현상을 해결하는 것은 제국의 영광을 되찾는 데 가장 중요한 역할을 할 것이다."
 
 #: ../../data/campaigns/fri01.wmf/elemental:10
 msgid ""
@@ -258,7 +258,7 @@ msgstr "기본 조작"
 msgid ""
 "In this tutorial, you will learn how to navigate in Widelands and how to "
 "build buildings and roads."
-msgstr "이번 튜토리얼에서, 당신은 어떻게 Widelands 를 탐사하고 건물과 도로를 건설하는지 배울 것입니다."
+msgstr "이번 자습서에서, 당신은 어떻게 와이드랜드를 탐사하고 건물과 도로를 건설하는지 배울 것입니다."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:19
@@ -269,7 +269,7 @@ msgstr "전투"
 msgid ""
 "In this tutorial, you will be taught the secrets of warfare: how to create "
 "soldiers, how to train them and how to lead them in battle."
-msgstr "이번 튜토리얼에서, 당신은 전투의 비밀에 대해 배울 것입니다: 어떻게 군인을 만들고, 훈련하고, 전투로 이끌지에 대해서."
+msgstr "이번 자습서에서는 전투의 비밀에 대해 배울 것입니다: 어떻게 군인을 만들고, 훈련하고, 전투로 이끌지에 대해서."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:23
@@ -280,7 +280,7 @@ msgstr "항해"
 msgid ""
 "In this tutorial, you will get to know seafaring, which is how to handle "
 "ships and ports."
-msgstr "이번 튜토리얼에서, 당신은 어떻게 선박과 항구를 다룰지에 대한, 항해에 대해 알게 될 것입니다."
+msgstr "이번 자습서에서는 당신은 어떻게 선박과 항구를 다룰지에 대한, 항해에 대해 알게 될 것입니다."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:27
@@ -291,7 +291,7 @@ msgstr "경제"
 msgid ""
 "In this tutorial, you will learn what option Widelands offers to adjust your"
 " economy. Recommended for players with some experience."
-msgstr "이번 튜토리얼에서, 당신은 Widelands가 제공할 당신의 경제에 적용할 옵션이 무엇이 있는지 배울 것입니다. 경험이 있는 플레이어에게 추천합니다."
+msgstr "이번 자습서에서는 당신이 와이드랜드가 제공할 당신의 경제에 적용할 옵션이 무엇이 있는지 배울 것입니다. 경험이 있는 플레이어에게 추천합니다."
 
 #: ../../data/maps/Archipelago_Sea.wmf/elemental:8
 msgid "Archipelago Sea"
@@ -656,11 +656,11 @@ msgstr "신비한 미로"
 msgid ""
 "There are two big questions in the air: Who created this unbelievably big "
 "maze, and what can be found inside?"
-msgstr "하늘에 두 가지 큰 질문이 있습니다: 누가 이 믿을 수 없을만큼 큰 미로를 만들었으며 그 안에는 무엇을 발견 할 수 있습니까?"
+msgstr "떠도는 소문에 두 가지 큰 의문이 있습니다: 도대체 누가 이 믿을 수 없을 만큼 큰 미로를 만들었던가? 그리고 그 안에는 무엇이 있는것인가?"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:8
 msgid "Rendez-Vous"
-msgstr "조우"
+msgstr "만나야하는 곳"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:10
 msgid ""
@@ -690,13 +690,13 @@ msgstr "각 플레이어는 확장에 있어 서로 다른 장애물을 가지�
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
-msgstr "강의 땅"
+msgstr "강가의 땅들"
 
 #: ../../data/maps/Riverlands.wmf/elemental:10
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr "번역확인???:다양한 풍경들로 가득한 신비한 땅, 한 줌의 거대한 강들에 의해 모든 것이 교차됩니다."
+msgstr "다양한 풍경들로 가득한 신비한 땅들, 한줌의 큰 강이 모든 땅들을 가로질러 흐릅니다."
 
 #: ../../data/maps/Sun_of_Fire.wmf/elemental:8
 msgid "The Ancient Sun of Fire"
@@ -712,7 +712,7 @@ msgstr ""
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:8
 msgid "Swamp Island"
-msgstr "늪 섬"
+msgstr "늪지대 섬"
 
 #: ../../data/maps/Swamp_Island.wmf/elemental:10
 msgid ""

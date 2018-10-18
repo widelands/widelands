@@ -60,7 +60,7 @@ tribes:new_productionsite_type {
             "call=smoke_fish",
             "call=smoke_meat",
             "call=smoke_fish",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       smoke_meat = {
@@ -68,12 +68,10 @@ tribes:new_productionsite_type {
          descname = _"smoking meat",
          actions = {
             -- time total: 60
-            "return=skipped when site has fish and economy needs smoked_fish and not economy needs smoked_meat",
             "return=skipped unless economy needs smoked_meat",
-            "sleep=10000",
             "consume=meat:2 log",
             "animate=working 30000",
-            "sleep=20000",
+            "sleep=30000",
             "produce=smoked_meat:2"
          }
       },
@@ -82,12 +80,10 @@ tribes:new_productionsite_type {
          descname = _"smoking fish",
          actions = {
             -- time total: 60
-            "return=skipped when site has meat and economy needs smoked_meat and not economy needs smoked_fish",
             "return=skipped unless economy needs smoked_fish",
-            "sleep=10000",
             "consume=fish:2 log",
             "animate=working 30000",
-            "sleep=20000",
+            "sleep=30000",
             "produce=smoked_fish:2"
          }
       },

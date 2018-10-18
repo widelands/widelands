@@ -20,8 +20,11 @@
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
+#include <cstdlib>
 
 #include <SDL.h>
+#include <boost/algorithm/string.hpp>
+#include <boost/regex.hpp>
 
 #include "base/macros.h"
 #include "graphic/gl/utils.h"
@@ -48,6 +51,7 @@ SDL_GLContext initialize(
 	SDL_GL_MakeCurrent(sdl_window, gl_context);
 
 #ifdef USE_GLBINDING
+#ifndef GLBINDING3
 	glbinding::Binding::initialize();
 
 	// The undocumented command line argument --debug_gl_trace will set
@@ -80,6 +84,47 @@ SDL_GLContext initialize(
 			// }
 		});
 	}
+#else
+	const glbinding::GetProcAddress get_proc_address = [](const char* name) {
+		return reinterpret_cast<glbinding::ProcAddress>(SDL_GL_GetProcAddress(name));
+	};
+	glbinding::Binding::initialize(get_proc_address, true);
+
+	// The undocumented command line argument --debug_gl_trace will set
+	// Trace::kYes. This will log every OpenGL call that is made, together with
+	// arguments, return values and glError status. This requires that Widelands
+	// is built using -DOPTION_USE_GLBINDING:BOOL=ON. It is a NoOp for GLEW.
+	if (trace == Trace::kYes) {
+		glbinding::setCallbackMaskExcept(
+		   glbinding::CallbackMask::After | glbinding::CallbackMask::ParametersAndReturnValue,
+		   {"glGetError"});
+		glbinding::setAfterCallback([](const glbinding::FunctionCall& call) {
+			log("%s(", call.function->name());
+			for (size_t i = 0; i < call.parameters.size(); ++i) {
+				FORMAT_WARNINGS_OFF;
+				log("%p", call.parameters[i].get());
+				FORMAT_WARNINGS_ON;
+				if (i < call.parameters.size() - 1)
+					log(", ");
+			}
+			log(")");
+			if (call.returnValue) {
+				FORMAT_WARNINGS_OFF;
+				log(" -> %p", call.returnValue.get());
+				FORMAT_WARNINGS_ON;
+			}
+			const auto error = glGetError();
+			log(" [%s]\n", gl_error_to_string(error));
+			// The next few lines will terminate Widelands if there was any OpenGL
+			// error. This is useful for super aggressive debugging, but probably
+			// not for regular builds. Comment it in if you need to understand
+			// OpenGL problems.
+			// if (error != GL_NO_ERROR) {
+			// std::raise(SIGINT);
+			// }
+		});
+	}
+#endif
 #else
 	// See graphic/gl/system_headers.h for an explanation of the next line.
 	glewExperimental = GL_TRUE;
@@ -135,8 +180,57 @@ SDL_GLContext initialize(
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
 	log("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
-	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n",
-	    reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+	const char* const shading_language_version_string =
+	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
+	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+
+	std::vector<std::string> shading_language_version_vector;
+	boost::split(
+	   shading_language_version_vector, shading_language_version_string, boost::is_any_of("."));
+	if (shading_language_version_vector.size() >= 2) {
+		// The shading language version has been detected properly. Exit if the shading language
+		// version is too old.
+		const int major_shading_language_version =
+		   atoi(shading_language_version_vector.front().c_str());
+		const int minor_shading_language_version =
+		   atoi(shading_language_version_vector.at(1).c_str());
+		if (major_shading_language_version < 1 ||
+		    (major_shading_language_version == 1 && minor_shading_language_version < 20)) {
+			log("ERROR: Shading language version is too old!\n");
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
+			                         "Widelands won’t work because your graphics driver is too old.\n"
+			                         "The shading language needs to be version 1.20 or newer.",
+			                         NULL);
+			exit(1);
+		}
+	} else {
+		// We don't have a minor version. Ensure that the string to compare is a valid integer before
+		// conversion
+		boost::regex re("\\d+");
+		if (boost::regex_match(shading_language_version_string, re)) {
+			const int major_shading_language_version = atoi(shading_language_version_string);
+			if (major_shading_language_version < 2) {
+				log("ERROR: Shading language version is too old!\n");
+				SDL_ShowSimpleMessageBox(
+				   SDL_MESSAGEBOX_ERROR, "OpenGL Error",
+				   "Widelands won’t work because your graphics driver is too old.\n"
+				   "The shading language needs to be version 1.20 or newer.",
+				   NULL);
+				exit(1);
+			}
+		} else {
+			// Exit because we couldn't detect the shading language version, so there must be a problem
+			// communicating with the graphics adapter.
+			log("ERROR: Unable to detect the shading language version!\n");
+			SDL_ShowSimpleMessageBox(
+			   SDL_MESSAGEBOX_ERROR, "OpenGL Error",
+			   "Widelands won't work because we were unable to detect the shading "
+			   "language version.\nThere is an unknown problem with reading the "
+			   "information from the graphics driver.",
+			   NULL);
+			exit(1);
+		}
+	}
 
 	glDrawBuffer(GL_BACK);
 

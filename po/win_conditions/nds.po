@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-22 18:39+0000\n"
+"POT-Creation-Date: 2018-10-05 07:05+0000\n"
+"PO-Revision-Date: 2018-10-11 14:45+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr "Düsse Kaart hett keene Künstelk Schatten. Dat sall nich passeren. Bidde schriev eenen Bug-Bericht över %s un geev diene Versioon vun Widelands un de Naam vun de Kaart, dat de laden wullst, an."
+msgstr "Deese Kaart hett keene Künstelk Schatten. Dat sall nich passeren. Bidde schriev eenen Fehler-Bericht unner %s un geev diene Versioon vun Widelands un de Naam vun de Kaart, dat de laden wullst, an."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
@@ -52,7 +52,7 @@ msgstr "Künstelk Schatten funnen"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:63
 msgid "Your team found a new artifact."
-msgstr "Dien Klottje hett een'n neien Künstelk Schatten funnen."
+msgstr "Dien Klottje hett een’n neien Künstelk Schatten funnen."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:67
@@ -61,7 +61,7 @@ msgstr "Künstelk Schatten verloren"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:68
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr "Een Künstelk Schatten, dat to diene Klottje hööde, is vun Feinden klaut wurr."
+msgstr "Een Künstelk Schatten, dat to diene Klottje hööde, is vun Feinden klaut worden."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:72
@@ -203,7 +203,7 @@ msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
-msgstr "All de Spelers oder Klottjes versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett düsse Gewest för tominnst 20 Menüten winnt dat Speel."
+msgstr "All de Spelers oder Klottjes versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett deese Gewest för tominnst 20 Menüten winnt dat Speel."
 
 #: ../../data/scripting/win_conditions/territorial_lord.lua:155
 #: ../../data/scripting/win_conditions/territorial_time.lua:30
@@ -235,8 +235,8 @@ msgstr "Du hest tominnst de halve Kaart innohmen."
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] "Beholl't noch %i Menüüt un du winnst dat Speel. "
-msgstr[1] "Beholl't noch %i Menüten un du winnst dat Speel."
+msgstr[0] "Beholl’t noch %i Menüüt un du winnst dat Speel."
+msgstr[1] "Beholl’t noch %i Menüten un du winnst dat Speel."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:20
 msgid "Territorial Time"
@@ -248,7 +248,7 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
-msgstr "All de Spelers oder Klottjes versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett düsse Gewest för tominnst 20 Menüten winnt dat Speel. Wenn dat Speel na 4 Stünnen noch löppt, winnt de Speler oder Klottje mit de grootste Gewest."
+msgstr "All de Spelers oder Klottjes versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett deese Gewest för tominnst 20 Menüten winnt dat Speel. Wenn dat Speel na 4 Stünnen noch löppt, winnt de Speler oder Klottje mit de grootste Gewest."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:28
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -256,7 +256,7 @@ msgstr "%1$s hett %2$3.0f %% vun de Kaart (%3$i vun %4$i)."
 
 #: ../../data/scripting/win_conditions/territorial_time.lua:29
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s harr %2$3.0f %% vun de Kaart (%3$i vun %4$i)"
+msgstr "%1$s harr %2$3.0f %% vun de Kaart (%3$i vun %4$i)."
 
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
 #. for x more minute(s) to win the game."
@@ -303,7 +303,7 @@ msgstr "Du hest dat Speel wunnen!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:19
 msgid "You lost"
-msgstr "Du hest verloren."
+msgstr "Du hest verloren"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:20
 msgid "You’ve lost this game!"

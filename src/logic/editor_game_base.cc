@@ -42,6 +42,7 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/map_objects/world/critter.h"
+#include "logic/map_objects/world/resource_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
@@ -198,6 +199,20 @@ void EditorGameBase::postload() {
 	// Postload tribes
 	assert(tribes_);
 	tribes_->postload();
+
+	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
+		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
+		for (DescriptionIndex j = 0; j < world_->get_nr_resources(); j++) {
+			const ResourceDescription* res = world_->get_resource(j);
+			if (res->detectable()) {
+				// This function will throw an exception if this tribe doesn't
+				// have a high enough resource indicator for this resource
+				tribe->get_resource_indicator(res, res->max_amount());
+			}
+		}
+		// For the "none" indicator
+		tribe->get_resource_indicator(nullptr, 0);
+	}
 
 	// TODO(unknown): postload players? (maybe)
 }
@@ -467,19 +482,6 @@ void EditorGameBase::unconquer_area(PlayerArea<Area<FCoords>> player_area,
 
 	//  step 1: unconquer area of this building
 	do_conquer_area(player_area, false, destroying_player);
-
-	//  step 5: deal with player immovables in the lost area
-	//  Players are not allowed to have their immovables on their borders.
-	//  Therefore the area must be enlarged before calling
-	//  cleanup_playerimmovables_area, so that those new border locations are
-	//  covered.
-	// TODO(SirVer): In the editor, no buildings should burn down when a military
-	// building is removed. Check this again though
-	if (is_a(Game, this)) {
-		++player_area.radius;
-		player_area.player_number = destroying_player;
-		cleanup_playerimmovables_area(player_area);
-	}
 }
 
 /// This conquers a given area because of a new (military) building that is set
@@ -496,13 +498,6 @@ void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(player_area.player_number <= map().get_nrplayers());
 
 	do_conquer_area(player_area, true, 0, conquer_guarded_location);
-
-	//  Players are not allowed to have their immovables on their borders.
-	//  Therefore the area must be enlarged before calling
-	//  cleanup_playerimmovables_area, so that those new border locations are
-	//  covered.
-	++player_area.radius;
-	cleanup_playerimmovables_area(player_area);
 }
 
 void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const new_owner) {
@@ -545,9 +540,9 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 		change_field_owner(mr.location(), player_area.player_number);
 	} while (mr.advance(map()));
 
-	//  This must reach one step beyond the conquered area to adjust the borders
+	//  This must reach two steps beyond the conquered area to adjust the borders
 	//  of neighbour players.
-	++player_area.radius;
+	player_area.radius += 2;
 	map_.recalc_for_field_area(world(), player_area);
 }
 
@@ -621,10 +616,21 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 		}
 	} while (mr.advance(map()));
 
-	// This must reach one step beyond the conquered area to adjust the borders
+	// This must reach two steps beyond the conquered area to adjust the borders
 	// of neighbour players.
-	++player_area.radius;
+	player_area.radius += 2;
 	map_.recalc_for_field_area(world(), player_area);
+
+	//  Deal with player immovables in the lost area
+	//  Players are not allowed to have their immovables on their borders.
+	//  Therefore the area must be enlarged before calling
+	//  cleanup_playerimmovables_area, so that those new border locations are
+	//  covered.
+	// TODO(SirVer): In the editor, no buildings should burn down when a military
+	// building is removed. Check this again though
+	if (is_a(Game, this)) {
+		cleanup_playerimmovables_area(player_area);
+	}
 }
 
 /// Makes sure that buildings cannot exist outside their owner's territory.

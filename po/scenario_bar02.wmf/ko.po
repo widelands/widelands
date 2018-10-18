@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-28 15:19+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-10-03 19:02+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -400,7 +400,7 @@ msgid ""
 "men. Now that he has fled, their hunger has caused some of his younger "
 "followers to desert. This group holds a strong fortification on the main "
 "ring."
-msgstr "뿐만아니라, 그의 도망은 우리에게 큰 이익을 가져다 주었다. 일년내내, 카리타쓰는 전쟁에만 집착한 나머지 식량 조차 충분히 신경쓰지 않았었다. 이젠 그가 도망친후, 한동안 굶주림이 이어졌고 그의 일부 젊은 추종자들이 사막으로 내몰리고 모반까지 야기했다. 결국 이들은 일선의 강력한 방어 시설까지 점령해버렸다."
+msgstr "뿐만아니라, 그의 도망은 우리에게 큰 이익을 가져다 주었다. 일년내내, 카리타쓰는 전쟁에만 집착한 나머지 식량 조차 충분히 신경쓰지 않았었다. 이젠 그가 도망친후, 한동안 굶주림에 허덕이다 일부 젊은 추종자들이 탈영병이 되버렸다. 결국 그들은 일부의 강력한 방어 시설까지 점령해버렸다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:228
@@ -465,7 +465,7 @@ msgid ""
 "settlement. He has instructed us to build a tower, to have a greater visual "
 "range over the area around our hall to protect our people from sudden "
 "attacks."
-msgstr "쓰론은 우리 영지의 북동쪽에있는 눈속에서 흔적을 발견했다고 말해줬소. 그는 우리에게 탑을 세우라고 지시했소. 우리의 동료들을 공습으로부터 지키기위한 본부의 주변의 범위를 넘어서 넓은 감시범위를 확보하기위해서요."
+msgstr "쓰론은 우리 영지의 북동쪽에 있는 눈속에서 흔적을 발견했다고 말해줬소. 그는 우리에게 탑을 세우라고 지시했소. 우리의 동료들을 공습으로부터 지키기위한 본부의 주변의 범위를 넘어서 넓은 감시범위를 확보하기위해서요."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:268
 msgid "Further Exploration"
@@ -481,7 +481,7 @@ msgid ""
 "his fears: the forests are deep, and the frontier to Al’thunran is near. I "
 "am sure that there are a thousand greater dangers out there than the unknown"
 " tracks."
-msgstr ""
+msgstr "쓰론이 명령한 첫번째 방어시설이 막 완성되었소. 바로 지금도, 그는 새로운 거주지의 벽 내부에 살고있는 그들에게 신뢰와 확신을 가져다주도록 하도록 애를 쓰고있소. 새로운 거주지는 ‘온둔’이라는 이름을 가졌고, 이 이름은 오래된 혀에서 ‘기다리는 사람들’이라는 뜻이오. 그러나 쓰론은 아직도 만족하지 못하고있소. 그리고 나는 그가 무엇을 두려워하는지 알고있소. 그것은 숲은 깊고 알'쑨란의 국경과 가깝기 때문이오. 나는 미지의 흔적보다 훨씬 더 큰 수많은 위험이 있다고 확신하오."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:274
@@ -490,7 +490,7 @@ msgid ""
 "set up more guards and scouts to observe the frontier and keep an eye on the"
 " raging wars on our doorstep. THEN we will be prepared once trouble seeks to"
 " capture our woods."
-msgstr ""
+msgstr "우리 본부 주변의 더 많은 지역을 바라 볼수있도록 우리는 더 멀리 탐사를 해야하고 국경을 감시하기위해 더 많은 경비대와 정찰대를 운영하고 국경밖의 격렬한 전쟁을 계속 지켜보아야 하오. 그런다음 언젠가 한번의 소요사태로 우리의 숲을 탈환하기위해 우리는 준비되어질것이오."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:280
 msgid "Mountains Found"
@@ -504,7 +504,7 @@ msgid ""
 "luck this will open up a new chance for rearming our men, because as far as "
 "I remember, most of the mountains west of Al’thunran hold coal and some "
 "metal ores."
-msgstr ""
+msgstr "방금 순찰대장과 이야기를 했소그는 우리 영토의 북동쪽과 동쪽에 산을 발견했다고 나에게 말했소. 운이 좋으면 이것은 우리 병력을 재무장하기위한 새로운 기회가 열릴것이오. 알'툰란의 서쪽 산 대부분은 석탄과 여러 금속광물을 보유하고 있을거란거를 기억하오."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:289
 msgid "Mining Economy Completed"
@@ -516,7 +516,7 @@ msgid ""
 "I just got informed that our mining economy has started its work. This news "
 "brought a smile to my face – even if the hardest part is still waiting to be"
 " done, now that our smiths will give their best to further ease our lives."
-msgstr ""
+msgstr "방금 채굴 공급 체제가 갖춰지고 그일을 시작했다는 소식을 들었소. 이 소식이 나를 기쁘게 했소. 가장 어려운 부분은 여전히 마무리 되지않아지만, 이제 우리 대장장이들은 우리의 삶을 더 편하게 해줄것이오."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:297
 msgid "Fortress Needed"
@@ -531,7 +531,7 @@ msgid ""
 "are quite hard to control, and so it seems to me like we have only one "
 "chance to secure the mountains from enemy hands: we must build a fortress to"
 " the east of the mountains!"
-msgstr ""
+msgstr "나는 볼드레쓰와 3개의 산 주변지역을 탐험했다. 중요 전략적 문제중 하나는 2곳의 큰 통로가 존재하는것이다. 산을 중심으로 북쪽 통로와 남쪽 통로이다. 이 통로들은 방어하기 어려울것이다. 그리고  적들의 손에서 산을 보호하기위해서는 우리에겐 오직 한번의 기회가 있는것처럼 보인다. 우리는 산의 동쪽에 요새를 지어야만 한다."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:306
 msgid "Fortress Completed"
@@ -544,7 +544,7 @@ msgid ""
 "settlement should be safe for now. For the future, we might think on "
 "building some more fortifications like barriers and towers at the passages, "
 "but for now we can take a deep breath."
-msgstr ""
+msgstr "드디어, 요새가 완공되었다. 이젠 우리의 거주지 입구는 안전해 질것이다. 앞으로는, 장벽이나 감시탑을 같은 방어시설을 더 지어야 할지도 모른다. 그러나 당분간은 겨우 한숨정도는 쉴수있게 된것같다."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:314
 msgid "Enhanced Economy and Training"
@@ -556,7 +556,7 @@ msgid ""
 "Our mining economy seems to work fine, that is already good news! Anyway, "
 "there are still a lot of men and women waiting in our hall to get a task, so"
 " they can help our soldiers to prepare for the war to come."
-msgstr ""
+msgstr "우리 채굴 공급 체제가 잘 작동하는것 같소. 좋은 소식이오. 어쨌거나 아직도 우리 본부는 일을 기다리고 있는 사람들이 많이 있소. 그러므로 다가올 전쟁을 준비하기위해 그들이 우리 군인들을 도울수 있을것이오."
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:320
@@ -568,7 +568,7 @@ msgid ""
 "processing economy. But that’s still not everything – most of our soldiers "
 "are quite young and neither have a good weapon nor are they well trained. We"
 " should build up training sites to prepare them for their future tasks."
-msgstr ""
+msgstr "지질학자들이 대량으로 매장되어있는 철광석, 석탄, 금광석을 발견했소. 광부들의 숙련도가 더 좋아지면 광산을 향상시켜야 하오.더많은 광산, 우리는 사람들에게 항상 충분한 식량을 공급하는 더 큰 식량공급 기반시설, 한층 더 많은 가공 공급 체제를 건설해야하오. 그러나 그것들은 여전히 아무것도 없소. 대부분의 군인들은 매우 어리고 좋은 무기도 없거나 훈련을 잘받지도 못했소. 그러나 아직도 여전히 우리 군인 대부분이 경험이 없는 신병들이고, 좋은 무기도없고, 잘 훈련 된 것도 아니오. 앞으로 다가올 사태를 준비하기위해 훈련소를 지어야 하오."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:329
@@ -577,7 +577,7 @@ msgid ""
 "behind. In none of all the ruins could I find any man or woman of the normal"
 " folk, and so I just may hope that they fled from this cruel battleground "
 "and started a better life somewhere else."
-msgstr ""
+msgstr "내 형제들과 군사들은 죽고 불과 파괴를 남겼다. 어떠한 폐허에서도 평범한 사람들은 찾을수도 없었다. 나는 다만 그들이 이 잔학한 전장에서 달아나 다른곳에서 더 나은 삶을 시작하길 바랄뿐이다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:332
@@ -588,7 +588,7 @@ msgid ""
 "would ever be able to set my feet there again. Now the old town is back in "
 "my hands, and I will not hesitate to rebuild it with all the strength my "
 "people have. I can’t wait to see it again in its old beauty."
-msgstr ""
+msgstr "내가 기억속 아름다움은 그 아름다움은 남아있지 않았다. 단지 오래된 수도는 폐허로만 남아있었다. 나는 슬펐지만 한편으로는 안심이 되었다. 나는 알'쑨란의 오래된 아름다움을 다시 볼수있을거라고 생각하지 않았다. 몇달전까지만해도 내가 이곳에 다시 올수있을지 의문이었다. 이제 오래된 마을은 내손으로 들어왔고 내 동료들이 가질수있는 모든 힘으로 재건하는데 망설이지 않을것이다. 나는 그것의 오래된 아름다움을 다시 보고싶어 견딜수 없다."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid "Victory"
@@ -598,7 +598,7 @@ msgstr "승리"
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "야만인 자습서 캠페인의 마지막 임무를 완료했습니다.원한다면 계속해서 플레이 할 수 있으며, 그렇지 않으면 다음 캠페인으로 넘어갈 수 있습니다."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Military Assault"
@@ -610,7 +610,7 @@ msgid ""
 "So be it, the generals are out and about arranging my troops, and Boldreth "
 "himself will lead the first strike. I will ride by his side, to free "
 "Al’thunran of this war and return peace to our capital."
-msgstr ""
+msgstr "그렇다면, 장군들은 군사를 준비 하고 있다. 그리고 볼드레쓰 자신은 첫 공습을 주도할것이다. 나도 그와 함께 나올것이다. 이 전쟁으로부터 알'쑨란을 해방시키고 우리의 수도에 평화를 돌려주기위해다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:345
@@ -619,7 +619,7 @@ msgid ""
 "assault. By dusk, I will celebrate my victory in the wooden halls of the "
 "warlord and sacrifice a newborn lamb in the honor of my father, whose eyes "
 "are set upon me today."
-msgstr ""
+msgstr "[번역확인]내일 아침, 나무들위로 젊은 태양이 뜰때, 나는 공격 명령을 내릴것이다. 해질녁, 나는 장군들의 목조회관에서 승리를 축하할것이고, 오늘 눈이 나를 공격하는 내아버지의 영광속에 갓 태어난 양을 제물로 바칠것이다."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:348
@@ -640,7 +640,7 @@ msgid ""
 "Chieftain, remember the poor carriers: Our roads get longer and longer and "
 "the burden on their shoulders never gets lighter. We should breed more oxen "
 "to make their work lighter and our transportation more efficient."
-msgstr ""
+msgstr "족장, 불쌍한 운송일꾼들을 기억하시오. 우리의 길이 점점 더 길어지면 그들의 어깨에 놓일 부담은 결코 가벼워지지 않을것이오. 우리는 더 많은 황소를 키워야하오. 그들의 일을 더 가볍고 우리의 운송을 더 효율적으로 하기위해서요."
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format

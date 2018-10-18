@@ -22,7 +22,7 @@
 #include <cstdio>
 #include <utility>
 
-#include <boost/lexical_cast.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
@@ -385,12 +385,32 @@ WaresDisplay::~WaresDisplay() {
 	remove_all_warelists();
 }
 
+static const char* unit_suffixes[] = {
+   "%1%",
+   /** TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000). */
+   /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
+   _("%1%k"),
+   /** TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000). */
+   /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
+   _("%1%M"),
+   /** TRANSLATORS: This is a large number with a suffix (e.g. 5G = 5,000,000,000). */
+   /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
+   _("%1%G")};
+static std::string get_amount_string(uint32_t amount) {
+	uint8_t size = 0;
+	while (amount >= (size ? 1000 : 10000)) {
+		amount /= 1000;
+		size++;
+	}
+	return (boost::format(unit_suffixes[size]) % amount).str();
+}
+
 std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
 	int totalstock = 0;
 	for (const Widelands::WareList* warelist : warelists_) {
 		totalstock += warelist->stock(ware);
 	}
-	return boost::lexical_cast<std::string>(totalstock);
+	return get_amount_string(totalstock);
 }
 
 /*
@@ -420,8 +440,7 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 				       "<div width=26 background=454545><p align=center><img src=\"" +
 				       tribe.get_ware_descr(c->first)->icon_filename() +
 				       "\"></p></div><div width=26 background=000000><p><font size=9>" +
-				       boost::lexical_cast<std::string>(static_cast<int32_t>(c->second)) +
-				       "</font></p></div></p></div>";
+				       get_amount_string(c->second) + "</font></p></div></p></div>";
 			}
 	return ret;
 }

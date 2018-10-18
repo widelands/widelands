@@ -138,7 +138,7 @@ public:
 	}
 
 	// debug
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// worker-specific tasks
 	void start_task_transfer(Game&, Transfer*);
@@ -182,7 +182,6 @@ protected:
 	                        const float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
 	          const Vector2f& field_on_dst,
 	          float scale,
 	          RenderTarget* dst) const override;

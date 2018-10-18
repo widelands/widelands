@@ -5,14 +5,15 @@
 # GunChleoc, 2016
 # GunChleoc, 2015
 # GunChleoc, 2015
+# Rui <xymarior@yandex.com>, 2018
 # zecas <jjorge@free.fr>, 2016,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-05-05 17:07+0000\n"
-"PO-Revision-Date: 2018-05-05 17:10+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-26 05:33+0000\n"
+"Last-Translator: Rui <xymarior@yandex.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgstr " --<config-entry-name>=valor  sobrescreve qualquer definição \n       
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr ""
+msgstr "                      Nota: o novo valor será gravado no ficheiro de configuração"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""
@@ -104,13 +105,13 @@ msgstr " --rolling_autosave=[...]\nUtilizar esta quantia de ficheiros para rodar
 msgid ""
 " --metaserver=[...]\n"
 "                      Connect to a different metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserver=[...]\n                      Conectar a um metaservidor diferente para jogos pela Internet."
 
 #: ../../src/wlapplication_messages.cc:84
 msgid ""
 " --metaserverport=[...]\n"
 "                      Port number of the metaserver for internet gaming."
-msgstr ""
+msgstr " --metaserverport=[...]\n                      Número da porta do metaservidor para jogos pela Internet."
 
 #: ../../src/wlapplication_messages.cc:89
 msgid "Sound options:"
@@ -118,15 +119,15 @@ msgstr "Opções de som:"
 
 #: ../../src/wlapplication_messages.cc:90
 msgid " --nosound            Starts the game with sound disabled."
-msgstr " --nosound            Inicia o jogo com o som desactivado."
+msgstr " --nosound            Inicia o jogo com o som desativado."
 
 #: ../../src/wlapplication_messages.cc:91
 msgid " --disable_fx         Disable sound effects."
-msgstr " --disable_fx         Desactiva os efeitos sonoros."
+msgstr " --disable_fx         Desativa os efeitos sonoros."
 
 #: ../../src/wlapplication_messages.cc:92
 msgid " --disable_music      Disable music."
-msgstr " --disable_music      Desactiva a música."
+msgstr " --disable_music      Desativa a música."
 
 #: ../../src/wlapplication_messages.cc:94
 msgid " --nozip              Do not save files as binary zip archives."
@@ -207,7 +208,7 @@ msgstr " --yres=[...]         Altura da janela em pixel."
 
 #: ../../src/wlapplication_messages.cc:135
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr ""
+msgstr " --maxfps=[5 ...]     Taxa máxima de fotogramas por segundo (FPS) do jogo."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -261,7 +262,7 @@ msgstr " --snap_windows_only_when_overlapping=[yes|no]\n                      Ap
 
 #: ../../src/wlapplication_messages.cc:168
 msgid " --verbose            Enable verbose debug messages"
-msgstr " --verbose            Activa mensagens de depuração verbosas"
+msgstr " --verbose            Ativa mensagens de depuração"
 
 #: ../../src/wlapplication_messages.cc:169
 msgid " --help               Show this help"

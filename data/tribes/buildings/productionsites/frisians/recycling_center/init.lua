@@ -77,7 +77,7 @@ tribes:new_productionsite_type {
             "call=smelt_mixed",
             "call=smelt_iron",
             "call=make_fur",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       make_fur = {
@@ -95,7 +95,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
          descname = pgettext("frisians_building", "recycling iron"),
          actions = {
-            "return=skipped unless economy needs iron",
+            "return=skipped unless economy needs iron or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "sleep=40000",
             "consume=scrap_iron:2 coal",
             "animate=working_metal 40000",
@@ -106,7 +106,7 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold because ...
          descname = pgettext("frisians_building", "recycling iron and gold"),
          actions = {
-            "return=skipped unless economy needs iron or economy needs gold",
+            "return=skipped unless economy needs iron or economy needs gold or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "sleep=40000",
             "consume=scrap_metal_mixed:2 coal",
             "animate=working_metal 40000",

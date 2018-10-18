@@ -58,6 +58,9 @@ else
    exit 1
 fi
 
+# We asume CMake 3.x is used and check for the minor version
+CMAKE_VERSION=$(cmake --version | grep -Eo '3.*' | cut -d . -f 2)
+
 # Check if the SDK for the minimum build target is available.
 # If not, use the one for the installed macOS Version
 OSX_MIN_VERSION="10.7"
@@ -66,6 +69,10 @@ if [ ! -d "$SDK_DIRECTORY" ]; then
    OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
    OSX_MIN_VERSION=$OSX_VERSION
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
+   if [ ! -d "$SDK_DIRECTORY" ]; then
+      # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
+      SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+   fi
 fi
 
 REVISION=`bzr revno $SOURCE_DIR`
@@ -183,7 +190,9 @@ function BuildWidelands() {
    # However Mac OS X nighlies cannot upgrade to a newer cmake version than
    # 3.9.4 since nothing newer compiles on Mac OS X 10.7 which is used to build
    # the nightlies.
-   export ICU_ROOT="$(brew --prefix icu4c)"
+   if [ "$CMAKE_VERSION" -lt "12" ]; then
+      export ICU_ROOT="$(brew --prefix icu4c)"
+   fi
 
    cmake $SOURCE_DIR -G Ninja \
       -DCMAKE_C_COMPILER:FILEPATH="$C_COMPILER" \
