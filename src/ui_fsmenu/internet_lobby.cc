@@ -362,23 +362,19 @@ void FullscreenMenuInternetLobby::change_servername() {
 }
 
 bool FullscreenMenuInternetLobby::wait_for_ip() {
-	// Wait until the metaserver provided us with an IP address
-	uint32_t const secs = time(nullptr);
-	while (!InternetGaming::ref().ips().first.is_valid()) {
-		InternetGaming::ref().handle_metaserver_communication();
-		// give some time for the answer + for a relogin, if a problem occurs.
-		if ((kInternetGamingTimeout * 5 / 3) < time(nullptr) - secs) {
+	if (!InternetGaming::ref().wait_for_ips()) {
+		// Only display a message box if a network error occurred
+		if (InternetGaming::ref().error()) {
 			// Show a popup warning message
 			const std::string warning(
 			   _("Widelands was unable to get the IP address of the server in time. "
-			     "There seems to be a network problem, either on your side or on the side "
-			     "of the server.\n"));
+				 "There seems to be a network problem, either on your side or on the side "
+				 "of the server.\n"));
 			UI::WLMessageBox mmb(this, _("Connection Timed Out"), warning,
-			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
+								 UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
-			InternetGaming::ref().set_error();
-			return false;
 		}
+		return false;
 	}
 	return true;
 }
@@ -422,8 +418,9 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		// Tell the metaserver about it
 		InternetGaming::ref().open_game();
 
-		// Wait for his response with the IPs of the relay server
+		// Wait for the response with the IPs of the relay server
 		if (!wait_for_ip()) {
+			InternetGaming::ref().set_error();
 			return;
 		}
 
