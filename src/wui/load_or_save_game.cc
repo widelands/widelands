@@ -349,7 +349,7 @@ void LoadOrSaveGame::fill_table(bool show_filenames) {
 					if (gamedata.gametype == GameController::GameType::kSingleplayer) {
 						continue;
 					}
-				} else if (gamedata.gametype > GameController::GameType::kSingleplayer) {
+				} else if ((gamedata.gametype != GameController::GameType::kSingleplayer) && (gamedata.gametype != GameController::GameType::kReplay)) {
 					continue;
 				}
 			}
