@@ -369,25 +369,33 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 	WaresWorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
 		DescriptionIndex i = tribe.worker_index(w->descr().name());
-		if (!c_workers.count(i))
+		if (!valid_workers.count(i)) {
+			// Ignore workers that will be consumed as inputs
+			continue;
+		}
+		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
-		else
+		} else {
 			c_workers[i] += 1;
-		if (!setpoints.count(std::make_pair(i, Widelands::WareWorker::wwWORKER)))
+		}
+		if (!setpoints.count(std::make_pair(i, Widelands::WareWorker::wwWORKER))) {
 			setpoints.insert(std::make_pair(std::make_pair(i, Widelands::WareWorker::wwWORKER), 0));
+		}
 	}
 
 	// The idea is to change as little as possible
 	for (const auto& sp : setpoints) {
 		const Widelands::DescriptionIndex& index = sp.first.first;
 		const WorkerDescr* wdes = tribe.get_worker_descr(index);
-		if (sp.second != 0 && !valid_workers.count(index))
+		if (sp.second != 0 && !valid_workers.count(index)) {
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
+		}
 
 		Widelands::Quantity cur = 0;
 		WaresWorkersMap::iterator i = c_workers.find(index);
-		if (i != c_workers.end())
+		if (i != c_workers.end()) {
 			cur = i->second;
+		}
 
 		int d = sp.second - cur;
 		if (d < 0) {
@@ -401,9 +409,11 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 				}
 			}
 		} else if (d > 0) {
-			for (; d; --d)
-				if (T::create_new_worker(*pi, egbase, wdes))
+			for (; d; --d) {
+				if (T::create_new_worker(*pi, egbase, wdes)) {
 					report_error(L, "No space left for this worker");
+				}
+			}
 		}
 	}
 	return 0;
