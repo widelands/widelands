@@ -55,7 +55,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
      load_or_save_(
-        &info_box_, igbase().game(), LoadOrSaveGame::FileType::kGame, UI::PanelStyle::kWui, false),
+        &info_box_, igbase().game(), LoadOrSaveGame::FileType::kShowAll, UI::PanelStyle::kWui, false),
 
      filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
      filename_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),

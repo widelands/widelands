@@ -341,11 +341,7 @@ void LoadOrSaveGame::fill_table(bool show_filenames) {
 			gamedata.gametype = gpdp.get_gametype();
 
 			if (filetype_ != FileType::kReplay) {
-				if (filetype_ == FileType::kGame) {
-					if (gamedata.gametype == GameController::GameType::kReplay) {
-						continue;
-					}
-				} else if (filetype_ == FileType::kGameMultiPlayer) {
+				if (filetype_ == FileType::kGameMultiPlayer) {
 					if (gamedata.gametype == GameController::GameType::kSingleplayer) {
 						continue;
 					}
