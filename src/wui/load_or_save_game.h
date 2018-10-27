@@ -35,7 +35,7 @@ class LoadOrSaveGame {
 
 protected:
 	/// Choose which type of files to show
-	enum class FileType { kReplay, kGame, kGameMultiPlayer, kGameSinglePlayer };
+	enum class FileType { kShowAll, kGameMultiPlayer, kGameSinglePlayer, kReplay };
 
 	/// A table of savegame/replay files and a game details panel.
 	LoadOrSaveGame(UI::Panel* parent,

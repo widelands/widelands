@@ -7,14 +7,14 @@
 # GunChleoc, 2014-2016
 # GunChleoc, 2014
 # Rui <xymarior@yandex.com>, 2018
-# zecas <jjorge@free.fr>, 2016-2017
+# zecas <jjorge@free.fr>, 2016-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: 2018-10-04 10:51+0000\n"
-"Last-Translator: Rui <xymarior@yandex.com>\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
+"PO-Revision-Date: 2018-10-18 20:17+0000\n"
+"Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -503,7 +503,7 @@ msgstr "Cada tribo está cercada por quatro estranhas serras. Quem vai conquist�
 msgid ""
 "I: Water can be found along the river. II: Snowmen mark additional water "
 "sources. III: Each mountain contains only one resource."
-msgstr ""
+msgstr "I: Pode-se encontrar água ao longo do rio. II: O homem das neves marca recursos adicionais de água. III: cada montanha contém apenas um recurso."
 
 #: ../../data/maps/Full_Moon_v2.wmf/elemental:8
 msgid "Full Moon"
@@ -513,7 +513,7 @@ msgstr "Lua Cheia"
 msgid ""
 "Whether it is the latest solstice, or lunar illness, something moves these "
 "tribes towards their final ordeal."
-msgstr ""
+msgstr "Seja o último solstício ou enfermidade lunar, algo move estas tribos para a última prova."
 
 #: ../../data/maps/Glacier_Lake_v2.wmf/elemental:8
 msgid "Glacier Lake"
@@ -580,7 +580,7 @@ msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages"
 " in prosperity, will someday collapse into a devastating war. Has your "
 "latest betrayal been one too many and will the prophecy come true?"
-msgstr ""
+msgstr "Uma lenda antiga diz que estes sete reinos, que floresceram durante décadas em prosperidade, irão um dia colapsar numa guerra devastadora. A tua última traição foi demasiado e a profecia será verdadeira?"
 
 #: ../../data/maps/Lake_of_Tranquility.wmf/elemental:8
 msgid "Lake of Tranquility"
@@ -612,7 +612,7 @@ msgid ""
 "range where the amount of gold and the space to live merely suffice for one "
 "tribe – only two opposite paths lead. But remember, be careful… this last "
 "living space is also a hard and small place to live."
-msgstr ""
+msgstr "Os Deuses nos seus caprichos não corresponderam às nossas orações. Em vez disso, o sol ficou mil vezes mais quente e aqueceu a Terra, derreteu os glaciares e os povos engolidos por água profundas. Mas agora - do alto destas majestosas montanhas, no últimos dos pedaços de terra - duas tribos sobreviventes encontraram um refúgio. Apesar dos Deuses terem sido misericordiosos tornando o clima mais fresco, a água continua a subir. A partir deste último lugar seguro – na mais alta montanha onde a quantidade de ouro e o espaço para viver só é suficiente para uma tribo – só restam dois caminhos distintos. Mas lembra-te, sê cuidadoso… este último lugar é pequeno e difícil de viver."
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
@@ -670,13 +670,13 @@ msgid ""
 "Only a small hill in the centre of the map connects these four competing "
 "tribes. Lead your army to this hill right away and build a giant stronghold "
 "as a sign of your superiority!"
-msgstr ""
+msgstr "Só uma pequena colina no centro do mapa liga estas quatro tribos em competição. Lidera o teu exército na conquista desta colina e ergue nela uma fortaleza gigantesca como símbolo da tua superioridade!"
 
 #: ../../data/maps/Rendez-Vous.wmf/elemental:11
 msgid ""
 "There is space for only one stronghold in the centre. Water can be found "
 "everywhere, so there is no need to send out geologists."
-msgstr ""
+msgstr "Só há espaço para uma fortaleza no meio. A água pode ser encontrada em qualquer lado, portanto não é preciso enviar geólogos."
 
 #: ../../data/maps/River_Explorers.wmf/elemental:8
 msgid "River Explorers"
@@ -807,14 +807,14 @@ msgstr "Usa o rio com sensatez. Os teus oponentes irão fazer o mesmo. Irás enc
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:8
 msgid "The Oasis Triangle"
-msgstr "O Triângulo da Oásis"
+msgstr "O Triângulo do Oásis"
 
 #: ../../data/maps/The_Oasis_Triangle.wmf/elemental:10
 msgid ""
 "There is something mystical like a gray atmosphere around these three oases,"
 " which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
-msgstr "Há aqui qualquer coisa de místico nestas três oásis envoltas numa neblina cerrada, os quais ainda ninguém  descobriu. Serás porventura o primeiro? Mas toma cuidado que andam outros também a procurá-los!"
+msgstr "Há aqui qualquer coisa de místico nestes três oásis envoltos numa neblina cerrada, os quais ainda ninguém descobriu. Serás porventura o primeiro? Mas toma cuidado que andam outros também a procurá-los!"
 
 #: ../../data/maps/The_Pass_Through_the_Mountains.wmf/elemental:8
 msgid "The Pass Through the Mountains"
