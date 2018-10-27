@@ -55,14 +55,14 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 	set_can_focus(true);
 
 	chat_message_subscriber_ =
-	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(); });
+	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(true); });
 	recalculate();
 }
 
 /**
  * Updates the chat message area.
  */
-void GameChatPanel::recalculate() {
+void GameChatPanel::recalculate(bool has_new_message) {
 	const std::vector<ChatMessage> msgs = chat_.get_messages();
 
 	size_t msgs_size = msgs.size();
@@ -74,19 +74,17 @@ void GameChatPanel::recalculate() {
 
 	chatbox.set_text(str);
 
-	if (chat_message_counter < msgs_size) {  // are there new messages?
-		if (!chat_.sound_off()) {             // play a sound, if needed
-			for (size_t i = chat_message_counter; i < msgs_size; ++i) {
-				if (msgs[i].sender.empty()) {
-					continue;  // System message. Don't play a sound
-				}
+	// Play a sound if there is a new non-system message
+	if (!chat_.sound_off() && has_new_message) {
+		for (size_t i = chat_message_counter; i < msgs_size; ++i) {
+			if (!msgs[i].sender.empty()) {
 				// Got a message that is no system message. Beep
 				play_new_chat_message();
 				break;
 			}
 		}
-		chat_message_counter = msgs_size;
 	}
+	chat_message_counter = msgs_size;
 }
 
 /**

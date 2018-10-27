@@ -1472,7 +1472,6 @@ void GameHost::write_setting_map(SendPacket& packet) {
 	packet.string(d->settings.mapfilename);
 	packet.unsigned_8(d->settings.savegame ? 1 : 0);
 	packet.unsigned_8(d->settings.scenario ? 1 : 0);
-	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
@@ -1491,8 +1490,11 @@ void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
 
 void GameHost::write_setting_all_players(SendPacket& packet) {
 	packet.unsigned_8(d->settings.players.size());
-	for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 		write_setting_player(packet, i);
+	}
+	// Map changes are finished here
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 void GameHost::write_setting_user(SendPacket& packet, uint32_t const number) {

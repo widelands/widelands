@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-07-20 07:33+0000\n"
-"PO-Revision-Date: 2018-07-21 14:56+0000\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
+"PO-Revision-Date: 2018-10-23 14:36+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -360,7 +360,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "와이드랜드는 당신이 하는 모든 게임을 두 개의 파일로 기록합니다. 하나는 확장자가 .wrpl.wgf이고 초기 상태를 저장 합니다. 다른 파일에는 .wrpl 확장자가 있으며, 도로를 건설하거나 적을 공격하는 등 모든 플레이어가 실행한 모든 명령이 포함되어 있습니다. 파일 이름의 앞부분은 당신이 게임을 시작한 시간을 나타냅니다."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -370,7 +370,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "메인 메뉴의 게임 다시보기 옵션을 사용하면 이전에 재생한 게임을 정확하게 재구성하여 볼 수 있습니다. 그러나 게임 데이터 파일이나 와이드랜드 실행 파일의 작은 변경으로 인해 재생이 호환되지 않아 '동기화되지 않음'이 발생할 수 있습니다. 이는 플레이어 중 한 명이 다른 버전의 게임을 사용하는 경우 네트워크 게임이 동기화 해제 문제를 겪는 것과 유사합니다."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -379,7 +379,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "다시보기는 게임 논리에서 버그를 찾는 데 매우 유용한 도구이므로 버그 보고서에 첨부 파일로 유용 할 수 있습니다. 재생 파일은 리눅스 및 Mac OS X의 %s 디렉토리에 저장됩니다. 윈도우즈에서는 와이드랜드 설치의 'replays'하위 디렉토리에 있습니다."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
@@ -425,29 +425,29 @@ msgstr "클라이언트 설정"
 msgid ""
 "On the left side is a list of all clients including you. You can set your "
 "role with the button following your nickname. Available roles are:"
-msgstr ""
+msgstr "왼쪽에 당신을 포함한 모든 클라이언트 목록이 있습니다. 대화명에 따라 단추를 사용하여 역할을 설정할 수 있습니다. 사용 가능한 역할은 다음과 같습니다:"
 
 #: ../../data/txts/help/multiplayer_help.lua:12
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr ""
+msgstr "깃발의 색깔을 가진 선수. 둘 이상의 클라이언트가 동일한 색상을 선택한 경우, 플레이어에 대한 제어권을 공유합니다 ( '공유된 왕국 모드')."
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr ""
+msgstr "관전자 모드, 모든 것을 볼 수 있지만 플레이어를 제어 할 수 없음을 의미합니다."
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
-msgstr ""
+msgstr "놀사람 설정"
 
 #: ../../data/txts/help/multiplayer_help.lua:16
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr ""
+msgstr "가운데에는 플레이어의 설정이 있습니다. 게임을 시작하려면 각 플레이어는 다음 중 하나 여야합니다.:"
 
 #: ../../data/txts/help/multiplayer_help.lua:17
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -458,11 +458,11 @@ msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse"
 " hover texts indicate the strength of the currently selected computer "
 "player)."
-msgstr ""
+msgstr "컴퓨터 플레이어에 연결됨(그림의 얼굴 뿐만 아니라 마우스를 가리키면 현재 선택된 컴퓨터 플레이어의 힘을 나타냅니다.)"
 
 #: ../../data/txts/help/multiplayer_help.lua:19
 msgid "Set as shared in starting position for another player."
-msgstr ""
+msgstr "다른 플레이어의 시작 위치를 공유로 설정합니다."
 
 #: ../../data/txts/help/multiplayer_help.lua:20
 msgid "Closed."
@@ -545,7 +545,7 @@ msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr ""
+msgstr "Ctrl 키를 누르면서 클릭하면 여러 동물 유형을 선택할 수 있습니다. 그런 다음 지도를 클릭하면 선택한 동물 유형 중 하나의 것이 배치됩니다."
 
 #: ../../data/txts/tips/editor.lua:15
 msgid ""
@@ -586,7 +586,7 @@ msgstr ""
 #: ../../data/txts/tips/editor.lua:39
 msgid ""
 "If you do not set water and fish resources, a default amount will be used."
-msgstr ""
+msgstr "물이나 물고기 자원을 설정하지 않으면 기본량으로 설정되어 사용됩니다."
 
 #: ../../data/txts/tips/editor.lua:43
 msgid ""
@@ -768,7 +768,7 @@ msgstr "채팅 메시지가 시작될 때 '@name'을 사용하여 한 명에게�
 msgid ""
 "If the game should crash, don't worry! The game will be saved automatically "
 "so that you can reload it afterwards."
-msgstr ""
+msgstr "만약 게임이 중단되어도, 걱정하지 마십시오! 게임은 자동으로 저장되므로 나중에 다시 불러올 수 있습니다."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/singleplayer.lua:7

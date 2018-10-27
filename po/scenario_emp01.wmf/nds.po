@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-25 14:13+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-09-30 10:51+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -198,7 +198,7 @@ msgstr "Een banges Vörgeföhl"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:126
 msgid "Saledus looks around nervously…"
-msgstr "Saledus kiekt nervöös um sük…"
+msgstr "Saledus kiekt nervöös um sük …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:128
@@ -230,7 +230,7 @@ msgstr "Eerst maal seker"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Saledus speaks with a sigh of relief…"
-msgstr "Saledus spreckt mit Verlichtern…"
+msgstr "Saledus spreckt mit Verlichtern …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:144
@@ -254,7 +254,7 @@ msgstr "De junge Amalee'"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:153
 msgid "Amalea smiles…"
-msgstr "Amalee' is munter…"
+msgstr "Amalee' is munter …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:155
@@ -278,7 +278,7 @@ msgstr "Keener kann betwiefeln, dat wi Holt bruken, um dat Schipp to repareren. 
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:168
 msgid "Amalea recommends…"
-msgstr "Amalee' rekumdeert…"
+msgstr "Amalee' rekumdeert …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:170
@@ -300,12 +300,12 @@ msgstr "Leider sünd Boomstammen unnütz, um dat Schipp to repareren – wi mutt
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:180
 msgid "Amalea comes in…"
-msgstr "Amalee' kummt in…"
+msgstr "Amalee' kummt in …"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:182
 msgid "I’ve got two important things to talk about… First the good news:"
-msgstr "Ick will mit di över twee wichtige Dingen reden… eerst maal de gode Naricht:"
+msgstr "Ick will mit di över twee wichtige Dingen reden … eerst maal de gode Naricht:"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:185
@@ -340,7 +340,7 @@ msgstr "Över de Tokunft nadenken"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:201
 msgid "Saledus notes…"
-msgstr "Saledus bemarkt…"
+msgstr "Saledus bemarkt …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:203
@@ -362,7 +362,7 @@ msgstr "Een Stapp vöran"
 
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "Saledus looks excited…"
-msgstr "Saledus juchheit…"
+msgstr "Saledus juchheit …"
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp01.wmf/scripting/texts.lua:215

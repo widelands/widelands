@@ -551,3 +551,10 @@ function test_descr:test_needed_experience()
    assert_equal(19, egbase:get_worker_description("barbarians_miner").needed_experience)
    assert_equal(28, egbase:get_worker_description("barbarians_miner_chief").needed_experience)
 end
+
+
+function test_descr:test_worker_buildable()
+   assert_equal(true, egbase:get_worker_description("barbarians_carrier").buildable)
+   assert_equal(true, egbase:get_worker_description("barbarians_miner").buildable)
+   assert_equal(false, egbase:get_worker_description("barbarians_miner_chief").buildable)
+end

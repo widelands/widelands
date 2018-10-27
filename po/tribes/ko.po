@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-24 15:27+0000\n"
+"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"PO-Revision-Date: 2018-10-02 03:59+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -734,14 +734,14 @@ msgstr "석탄 없음"
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/init.lua:96
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:100
 msgid "Main Coal Vein Exhausted"
-msgstr "주 석탄 광맥 고갈됨"
+msgstr "알짜 석탄 광맥 고갈됨"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/coalmine/init.lua:104
 msgctxt "atlanteans_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "석탄 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
+msgstr "석탄 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:7
@@ -781,14 +781,14 @@ msgstr "수정 없음"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:166
 msgid "Main Crystal Vein Exhausted"
-msgstr "주 광물 광맥 고갈됨"
+msgstr "알짜 광물 광맥 고갈됨"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/crystalmine/init.lua:168
 msgctxt "atlanteans_building"
 msgid ""
 "This crystal mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider dismantling or destroying it."
-msgstr "수정 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
+msgstr "수정 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/init.lua:7
@@ -944,14 +944,14 @@ msgstr "금 없음"
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/init.lua:81
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:98
 msgid "Main Gold Vein Exhausted"
-msgstr "주 금 광산맥 고갈"
+msgstr "알짜 금 광산맥 고갈"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/goldmine/init.lua:92
 msgctxt "atlanteans_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "금 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
+msgstr "금 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/horsefarm/init.lua:7
@@ -1046,14 +1046,14 @@ msgstr "철 없음"
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/init.lua:81
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:100
 msgid "Main Iron Vein Exhausted"
-msgstr "주 철 광산맥 고갈"
+msgstr "알짜 철 광산맥 고갈"
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/init.lua:96
 msgctxt "atlanteans_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider dismantling or destroying it."
-msgstr "철 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
+msgstr "철 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:7
@@ -1212,7 +1212,7 @@ msgstr "빵 주걱 제작을"
 #. because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:96
 msgid "making a pair of buckets"
-msgstr "양동이 한쌍 만들고 있음"
+msgstr "한 쌍의 양동이 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making fire tongs because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:108
@@ -1220,14 +1220,14 @@ msgstr "양동이 한쌍 만들고 있음"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:119
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:204
 msgid "making fire tongs"
-msgstr "부젓가락 만들고 있음"
+msgstr "부젓가락 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a fishing net because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:120
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:160
 msgid "making a fishing net"
-msgstr "물고기 그물 만들고 있음"
+msgstr "어부 그물 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hammer because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:132
@@ -1235,37 +1235,37 @@ msgstr "물고기 그물 만들고 있음"
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:143
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/init.lua:193
 msgid "making a hammer"
-msgstr "망치 만들고 있음"
+msgstr "망치 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hook pole because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:144
 msgid "making a hook pole"
-msgstr "갈고리 장대 만들고 있음"
+msgstr "갈고리 장대 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a hunting bow because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:156
 msgid "making a hunting bow"
-msgstr "사냥 활 만들고 있음"
+msgstr "사냥용 활 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making milking tongs because
 #. ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:168
 msgid "making milking tongs"
-msgstr "착유 집게 만들고 있음"
+msgstr "착유 집게 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a pick because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:180
 #: ../../data/tribes/buildings/productionsites/barbarians/metal_workshop/init.lua:178
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:179
 msgid "making a pick"
-msgstr "곡괭이 만들고 있음"
+msgstr "곡괭이 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a saw because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:192
 #: ../../data/tribes/buildings/productionsites/empire/toolsmithy/init.lua:191
 msgid "making a saw"
-msgstr "톱 만들고 있음"
+msgstr "톱 제작을"
 
 #. TRANSLATORS: Completed/Skipped/Did not start making a scythe because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:204
@@ -1522,7 +1522,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "석탄 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "석탄 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deep/init.lua:7
@@ -1542,7 +1542,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "석탄 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "석탄 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:7
@@ -1599,7 +1599,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "금 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴, 해체를 고려하십시오."
+msgstr "금 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴, 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deep/init.lua:7
@@ -1619,7 +1619,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "금 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "금 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:7
@@ -1637,7 +1637,7 @@ msgstr "화강암 없음"
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/init.lua:97
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:100
 msgid "Main Granite Vein Exhausted"
-msgstr "주 화강암 광산맥 고갈"
+msgstr "알짜 화강암 광산맥 고갈"
 
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/init.lua:92
 msgctxt "barbarians_building"
@@ -1645,7 +1645,7 @@ msgid ""
 "This granite mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "화강암 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "화강암 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/helmsmithy/init.lua:7
@@ -1703,7 +1703,7 @@ msgctxt "barbarians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "철 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "철 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deep/init.lua:7
@@ -1723,7 +1723,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "철 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "철 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/lime_kiln/init.lua:7
@@ -1996,7 +1996,7 @@ msgctxt "empire_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "석탄 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "석탄 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/coalmine_deep/init.lua:7
@@ -2010,7 +2010,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "석탄 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "석탄 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/donkeyfarm/init.lua:7
@@ -2066,7 +2066,7 @@ msgctxt "empire_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "금 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "금 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/goldmine_deep/init.lua:7
@@ -2080,7 +2080,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "금 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "금 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:7
@@ -2113,7 +2113,7 @@ msgctxt "empire_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "철 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "철 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/ironmine_deep/init.lua:7
@@ -2127,7 +2127,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "철 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "철 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/lumberjacks_house/init.lua:7
@@ -2166,7 +2166,7 @@ msgstr "대리석 없음"
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:132
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:99
 msgid "Main Marble Vein Exhausted"
-msgstr "주 대리석 광산맥 고갈"
+msgstr "알짜 대리석 광산맥 고갈"
 
 #: ../../data/tribes/buildings/productionsites/empire/marblemine/init.lua:134
 msgctxt "empire_building"
@@ -2174,7 +2174,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. You should consider enhancing, dismantling or "
 "destroying it."
-msgstr "대리석 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "대리석 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/marblemine_deep/init.lua:7
@@ -2188,7 +2188,7 @@ msgid ""
 "This marble mine’s main vein is exhausted. Expect strongly diminished "
 "returns on investment. This mine can’t be enhanced any further, so you "
 "should consider dismantling or destroying it."
-msgstr "대리석 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "대리석 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/empire/mill/init.lua:7
@@ -2588,7 +2588,7 @@ msgctxt "frisians_building"
 msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "석탄 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "석탄 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/init.lua:7
@@ -2602,7 +2602,7 @@ msgid ""
 "This coal mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "석탄 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "석탄 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/init.lua:7
@@ -2629,7 +2629,7 @@ msgid ""
 "The fruit collector working at this fruit collector’s house can’t find any "
 "berry bushes in his work area. You should consider building another berry "
 "farm, or dismantling or destroying this building."
-msgstr "이 열매 거두는 이의 집에서 일하는 이는 그의 일터에서는 딸기 덤불을 찾지 못했습니다. 다른 딸기 심는 집을 짓거나 이 건물을 해체하거나 파괴하는 것을 생각해보십시오."
+msgstr "이 열매 거두는 이의 집에서 일하는 이는 그의 일터에서는 딸기 덤불을 찾지 못했습니다. 다른 딸기 심는 집을 짓거나 이 건물을 해체하거나 파괴하는 것을 생각해보십시요."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/init.lua:7
@@ -2695,7 +2695,7 @@ msgctxt "frisians_building"
 msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "금 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "금 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/init.lua:7
@@ -2709,7 +2709,7 @@ msgid ""
 "This gold mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "금 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "금 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/init.lua:7
@@ -2747,7 +2747,7 @@ msgctxt "frisians_building"
 msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "철 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "철 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/init.lua:7
@@ -2761,7 +2761,7 @@ msgid ""
 "This iron mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "철 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "철 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/init.lua:7
@@ -2854,7 +2854,7 @@ msgctxt "frisians_building"
 msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. You should consider enhancing, dismantling or destroying it."
-msgstr "암석 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
+msgstr "암석 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 향상, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/init.lua:7
@@ -2868,7 +2868,7 @@ msgid ""
 "This rock mine’s main vein is exhausted. Expect strongly diminished returns "
 "on investment. This mine can’t be enhanced any further, so you should "
 "consider dismantling or destroying it."
-msgstr "암석 광산의 주 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
+msgstr "암석 광산의 알짜 광맥이 고갈되었습니다. 산출물이 크게 감소될 것이라 예상됩니다. 이 광산은 더 이상 향상이 안되므로, 파괴 또는 해체를 고려하십시오."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/init.lua:7
@@ -3738,7 +3738,7 @@ msgstr "자원:  약간의 석재"
 #: ../../data/tribes/immovables/resi/frisians/init.lua:144
 msgctxt "immovable"
 msgid "Resources: Main Coal Vein"
-msgstr "자원: 중앙 석탄 광맥"
+msgstr "자원: 알짜 석탄 광맥"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:167
@@ -3747,7 +3747,7 @@ msgstr "자원: 중앙 석탄 광맥"
 #: ../../data/tribes/immovables/resi/frisians/init.lua:167
 msgctxt "immovable"
 msgid "Resources: Main Gold Vein"
-msgstr "자원: 중앙 금 광맥"
+msgstr "자원: 알짜 금 광맥"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:190
@@ -3756,7 +3756,7 @@ msgstr "자원: 중앙 금 광맥"
 #: ../../data/tribes/immovables/resi/frisians/init.lua:190
 msgctxt "immovable"
 msgid "Resources: Main Iron Vein"
-msgstr "자원: 중앙 철 광맥"
+msgstr "자원: 알짜 철 광맥"
 
 #. TRANSLATORS: This is a resource name used in lists of resources
 #: ../../data/tribes/immovables/resi/atlanteans/init.lua:213

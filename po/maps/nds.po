@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-26 14:47+0000\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
+"PO-Revision-Date: 2018-10-14 13:52+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -194,7 +194,7 @@ msgstr "Nüms"
 
 #: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
-msgstr "Spietelk as dat is, deese Kaart is noch nich schreven."
+msgstr "Deese Kaart is leider noch nich schreven."
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -249,7 +249,7 @@ msgstr "Ieskolle Begrötens"
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aber hör Ankuft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen…"
+msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aber hör Ankuft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
