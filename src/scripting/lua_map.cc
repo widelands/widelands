@@ -5035,11 +5035,14 @@ const MethodType<LuaProductionSite> LuaProductionSite::Methods[] = {
    METHOD(LuaProductionSite, get_inputs),
    METHOD(LuaProductionSite, get_workers),
    METHOD(LuaProductionSite, set_workers),
+   METHOD(LuaProductionSite, toggle_start_stop),
+
    {nullptr, nullptr},
 };
 const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
    PROP_RO(LuaProductionSite, valid_workers),
    PROP_RO(LuaProductionSite, valid_inputs),
+   PROP_RO(LuaProductionSite, is_stopped),
    {nullptr, nullptr, nullptr},
 };
 
@@ -5073,6 +5076,20 @@ int LuaProductionSite::get_valid_inputs(lua_State* L) {
 int LuaProductionSite::get_valid_workers(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	return workers_map_to_lua(L, get_valid_workers_for(*ps));
+}
+
+/* RST
+   .. attribute:: is_stopped
+
+      (RO) Returns whether this productionsite is currently active or stopped
+
+      :returns: true if the productionsite has been started,
+         false if it has been stopped.
+*/
+int LuaProductionSite::get_is_stopped(lua_State* L) {
+	ProductionSite* ps = get(L, get_egbase(L));
+	lua_pushboolean(L, ps->is_stopped());
+	return 1;
 }
 
 /*
@@ -5170,6 +5187,19 @@ int LuaProductionSite::get_workers(lua_State* L) {
 int LuaProductionSite::set_workers(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	return do_set_workers<LuaProductionSite>(L, ps, get_valid_workers_for(*ps));
+}
+
+/* RST
+   .. method:: toggle_start_stop()
+
+      If :any:`ProductionSite.is_stopped`, sends a command to start this productionsite.
+      Otherwise, sends a command to stop this productionsite.
+*/
+int LuaProductionSite::toggle_start_stop(lua_State* L) {
+	Game& game = get_game(L);
+	ProductionSite* ps = get(L, game);
+	game.send_player_start_stop_building(*ps);
+	return 1;
 }
 
 /*

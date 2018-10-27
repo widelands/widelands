@@ -17,20 +17,37 @@ run(function()
       end
    end
 
-   sleep(8000)
+   sleep(1000)
 
    local b = p1:place_building("barbarians_barracks", map:get_field(25, 25), false, true)
+   sleep(1000)
 
+   -- Test start/stop and ensure that the building is stopped
+   local building_was_stopped = b.is_stopped
+
+   b:toggle_start_stop()
+   sleep(1000)
+   assert_equal(not building_was_stopped, b.is_stopped)
+
+   b:toggle_start_stop()
+   sleep(1000)
+   assert_equal(building_was_stopped, b.is_stopped)
+
+   if not b.is_stopped then
+      b:toggle_start_stop()
+      sleep(1000)
+   end
+
+   -- Now test filling the queues and workers
    assert_all_queues_are_empty(b)
 
    b:set_inputs(b.valid_inputs)
    b:set_workers(b.valid_workers)
 
-   sleep(18000)
    assert_all_queues_are_full(b)
 
    stable_save(game, "inputqueues")
-   sleep(8000)
+   sleep(1000)
 
    assert_all_queues_are_full(b)
 
