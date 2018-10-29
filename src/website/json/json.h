@@ -36,7 +36,7 @@ class Object;
 class Element {
 protected:
 	// Constructor for child node
-	explicit Element(const std::string key, int level) : key_(key), level_(level) {
+	explicit Element(const std::string& key, int level) : key_(key), level_(level) {
 	}
 
 public:
@@ -74,7 +74,7 @@ class Object : public Element {
 
 protected:
 	// Constructor for child node
-	explicit Object(const std::string key, int level);
+	explicit Object(const std::string& key, int level);
 
 public:
 	// Constructor for root node
@@ -87,7 +87,7 @@ class Array : public Element {
 	friend class JSON::Element;
 protected:
 	// Constructor for child node
-	explicit Array(const std::string key, int level);
+	explicit Array(const std::string& key, int level);
 
 public:
 	std::string as_string() const override;

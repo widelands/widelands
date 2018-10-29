@@ -17,8 +17,11 @@
  *
  */
 
-#include "io/filewrite.h"
 #include "website/json/json.h"
+
+#include <memory>
+
+#include "io/filewrite.h"
 
 // ########################## JSON Element #############################
 
@@ -96,7 +99,7 @@ std::string Element::key_to_string(const std::string& value, bool value_is_empty
 
 // ########################## JSON Object #############################
 
-Object::Object(const std::string key, int level) : JSON::Element(key, level) {
+Object::Object(const std::string& key, int level) : JSON::Element(key, level) {
 }
 
 std::string Object::as_string() const {
@@ -115,7 +118,7 @@ std::string Object::as_string() const {
 
 // ########################## JSON Array #############################
 
-Array::Array(const std::string key, int level) : JSON::Element(key, level) {
+Array::Array(const std::string& key, int level) : JSON::Element(key, level) {
 }
 
 std::string Array::as_string() const {
