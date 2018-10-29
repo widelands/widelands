@@ -37,7 +37,7 @@ namespace Widelands {
 WorkerDescr::WorkerDescr(const std::string& init_descname,
                          MapObjectType init_type,
                          const LuaTable& table,
-                         const EditorGameBase& egbase)
+                         EditorGameBase& egbase)
    : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
      ware_hotspot_(table.has_key("ware_hotspot") ?
                       table.get_vector<std::string, int>("ware_hotspot") :
@@ -50,7 +50,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
      // other key must be there too. So, we cross the checks to trigger an exception if this is
      // violated.
      becomes_(table.has_key("experience") ?
-                 egbase.tribes().safe_worker_index(table.get_string("becomes")) :
+                 egbase.mutable_tribes()->load_worker(table.get_string("becomes")) :
                  INVALID_INDEX),
      needed_experience_(table.has_key("becomes") ? table.get_int("experience") : INVALID_INDEX),
      egbase_(egbase) {
@@ -110,7 +110,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 					throw wexception("this program has already been declared");
 
 				programs_[program_name] = std::unique_ptr<WorkerProgram>(
-				   new WorkerProgram(program_name, *this, egbase_.tribes()));
+				   new WorkerProgram(program_name, *this, *egbase.mutable_tribes()));
 				programs_[program_name]->parse(*programs_table->get_table(program_name));
 			} catch (const std::exception& e) {
 				throw wexception("program %s: %s", program_name.c_str(), e.what());
@@ -121,7 +121,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 
 WorkerDescr::WorkerDescr(const std::string& init_descname,
                          const LuaTable& table,
-                         const EditorGameBase& egbase)
+                         EditorGameBase& egbase)
    : WorkerDescr(init_descname, MapObjectType::WORKER, table, egbase) {
 }
 

@@ -34,12 +34,12 @@ namespace Widelands {
 Buildcost::Buildcost() : std::map<DescriptionIndex, uint8_t>() {
 }
 
-Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes)
+Buildcost::Buildcost(std::unique_ptr<LuaTable> table, Tribes& tribes)
    : std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {
 		int32_t value = INVALID_INDEX;
 		try {
-			DescriptionIndex const idx = tribes.safe_ware_index(warename);
+			DescriptionIndex const idx = tribes.load_ware(warename);
 			if (count(idx)) {
 				throw GameDataError(
 				   "A buildcost item of this ware type has already been defined: %s", warename.c_str());

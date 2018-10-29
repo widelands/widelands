@@ -23,129 +23,23 @@
 
 #include "base/wexception.h"
 #include "graphic/graphic.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/market.h"
 #include "logic/map_objects/tribes/tribe_basic_info.h"
 
 namespace Widelands {
-Tribes::Tribes()
+Tribes::Tribes(LuaInterface* lua)
    : buildings_(new DescriptionMaintainer<BuildingDescr>()),
      immovables_(new DescriptionMaintainer<ImmovableDescr>()),
      ships_(new DescriptionMaintainer<ShipDescr>()),
      wares_(new DescriptionMaintainer<WareDescr>()),
      workers_(new DescriptionMaintainer<WorkerDescr>()),
-     tribes_(new DescriptionMaintainer<TribeDescr>()) {
+     tribes_(new DescriptionMaintainer<TribeDescr>()),
+     lua_(lua) {
 }
 
-void Tribes::add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	buildings_->add(new ConstructionSiteDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
-}
-
-void Tribes::add_dismantlesite_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	buildings_->add(new DismantleSiteDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
-}
-
-void Tribes::add_militarysite_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	buildings_->add(new MilitarySiteDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
-}
-
-void Tribes::add_productionsite_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	const std::string msgctxt = table.get_string("msgctxt");
-	buildings_->add(
-	   new ProductionSiteDescr(pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
-	                           msgctxt, table, egbase));
-}
-
-void Tribes::add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	const std::string msgctxt = table.get_string("msgctxt");
-	buildings_->add(
-	   new TrainingSiteDescr(pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
-	                         msgctxt, table, egbase));
-}
-
-void Tribes::add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	buildings_->add(new WarehouseDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
-}
-
-void Tribes::add_market_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	buildings_->add(new MarketDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
-}
-
-void Tribes::add_immovable_type(const LuaTable& table) {
-	i18n::Textdomain td("tribes");
-	immovables_->add(new ImmovableDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, *this));
-}
-
-void Tribes::add_ship_type(const LuaTable& table) {
-	i18n::Textdomain td("tribes");
-	ships_->add(new ShipDescr(_(table.get_string("descname")), table));
-}
-
-void Tribes::add_ware_type(const LuaTable& table) {
-	i18n::Textdomain td("tribes");
-	wares_->add(new WareDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table));
-}
-
-void Tribes::add_carrier_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	workers_->add(new CarrierDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
-}
-
-void Tribes::add_soldier_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	workers_->add(new SoldierDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
-}
-
-void Tribes::add_worker_type(const LuaTable& table, const EditorGameBase& egbase) {
-	i18n::Textdomain td("tribes");
-	workers_->add(new WorkerDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
-}
-
-void Tribes::add_tribe(const LuaTable& table, const EditorGameBase& egbase) {
-	const std::string name = table.get_string("name");
-	if (Widelands::tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), egbase.tribes()));
-	} else {
-		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
-	}
-}
-
-void Tribes::add_custom_building(const LuaTable& table) {
-	const std::string tribename = table.get_string("tribename");
-	if (Widelands::tribe_exists(tribename)) {
-		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
-		const std::string buildingname = table.get_string("buildingname");
-		descr->add_building(buildingname);
-	} else {
-		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
-	}
+Tribes::~Tribes() {
 }
 
 size_t Tribes::nrbuildings() const {
@@ -167,19 +61,19 @@ size_t Tribes::nrworkers() const {
 bool Tribes::ware_exists(const std::string& warename) const {
 	return wares_->exists(warename) != nullptr;
 }
-bool Tribes::ware_exists(const DescriptionIndex& index) const {
+bool Tribes::ware_exists(DescriptionIndex index) const {
 	return wares_->get_mutable(index) != nullptr;
 }
 bool Tribes::worker_exists(const std::string& workername) const {
 	return workers_->exists(workername) != nullptr;
 }
-bool Tribes::worker_exists(const DescriptionIndex& index) const {
+bool Tribes::worker_exists(DescriptionIndex index) const {
 	return workers_->get_mutable(index) != nullptr;
 }
 bool Tribes::building_exists(const std::string& buildingname) const {
 	return buildings_->exists(buildingname) != nullptr;
 }
-bool Tribes::building_exists(const DescriptionIndex& index) const {
+bool Tribes::building_exists(DescriptionIndex index) const {
 	return buildings_->get_mutable(index) != nullptr;
 }
 bool Tribes::immovable_exists(DescriptionIndex index) const {
@@ -292,13 +186,198 @@ const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }
 
-void Tribes::set_ware_type_has_demand_check(const DescriptionIndex& wareindex,
+void Tribes::set_ware_type_has_demand_check(DescriptionIndex wareindex,
                                             const std::string& tribename) const {
 	wares_->get_mutable(wareindex)->set_has_demand_check(tribename);
 }
 
-void Tribes::set_worker_type_has_demand_check(const DescriptionIndex& workerindex) const {
+void Tribes::set_worker_type_has_demand_check(DescriptionIndex workerindex) const {
 	workers_->get_mutable(workerindex)->set_has_demand_check();
+}
+
+// ************************ Loading *************************
+
+void Tribes::register_object(const LuaTable& table) {
+    const std::string name(table.get_string("name"));
+    const std::string script_path(table.get_string("script"));
+    if (registered_tribe_objects_.count(name) == 1) {
+        throw GameDataError("Tribes::register_object: Attempt to register object\n   name: '%s'\n   script: '%s'\nbut the object already exists", name.c_str(), script_path.c_str());
+    }
+    if (!g_fs->file_exists(script_path)) {
+        throw GameDataError("Tribes::register_object: Attempt to register object\n   name: '%s'\n   script: '%s'\nbut the script file does not exist", name.c_str(), script_path.c_str());
+    }
+    registered_tribe_objects_.insert(std::make_pair(name, script_path));
+}
+
+void Tribes::add_tribe_object_type(const LuaTable& table, EditorGameBase& egbase, MapObjectType type) {
+    const std::string object_name(table.get_string("name"));
+    const std::string object_descname(table.get_string("descname"));
+    const std::string msgctxt(table.get_string("msgctxt"));
+
+    // Register as in progress
+    tribe_objects_being_loaded_.insert(object_name);
+
+    // Add
+    i18n::Textdomain td("tribes");
+    switch (type) {
+    case MapObjectType::CARRIER:
+        workers_->add(new CarrierDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table, egbase));
+        break;
+    case MapObjectType::CONSTRUCTIONSITE:
+        buildings_->add(new ConstructionSiteDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table, egbase));
+        break;
+    case MapObjectType::DISMANTLESITE:
+        buildings_->add(new DismantleSiteDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table, egbase));
+        break;
+    case MapObjectType::IMMOVABLE:
+        immovables_->add(new ImmovableDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table, *this));
+        break;
+    case MapObjectType::MARKET:
+        buildings_->add(new MarketDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table, egbase));
+        break;
+    case MapObjectType::MILITARYSITE:
+        buildings_->add(new MilitarySiteDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table, egbase));
+        break;
+    case MapObjectType::PRODUCTIONSITE:
+        buildings_->add(
+           new ProductionSiteDescr(pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+                                   msgctxt, table, egbase));
+        break;
+    case MapObjectType::SHIP:
+        ships_->add(new ShipDescr(_(object_descname), table));
+        break;
+    case MapObjectType::SOLDIER:
+        workers_->add(new SoldierDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table, egbase));
+        break;
+    case MapObjectType::TRAININGSITE:
+        buildings_->add(
+           new TrainingSiteDescr(pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+                                 msgctxt, table, egbase));
+        break;
+    case MapObjectType::WARE:
+        wares_->add(new WareDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table));
+        break;
+    case MapObjectType::WAREHOUSE:
+        buildings_->add(new WarehouseDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table, egbase));
+        break;
+    case MapObjectType::WORKER:
+        workers_->add(new WorkerDescr(
+           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
+           table, egbase));
+        break;
+    default:
+        NEVER_HERE();
+    }
+
+    // Update status
+    loaded_tribe_objects_.insert(object_name);
+
+    // Mark as done
+    tribe_objects_being_loaded_.erase(tribe_objects_being_loaded_.find(object_name));
+}
+
+void Tribes::add_tribe(const LuaTable& table) {
+	const std::string name = table.get_string("name");
+	if (Widelands::tribe_exists(name)) {
+		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), *this));
+	} else {
+		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
+	}
+}
+
+void Tribes::add_custom_building(const LuaTable& table) {
+    // NOCOM decide what to do with these
+	const std::string tribename = table.get_string("tribename");
+	if (Widelands::tribe_exists(tribename)) {
+		TribeDescr* descr = tribes_->get_mutable(tribe_index(tribename));
+        const std::string object_name(table.get_string("buildingname"));
+		descr->add_building(object_name, *this);
+	} else {
+		throw GameDataError("The tribe '%s'' has no preload file.", tribename.c_str());
+	}
+}
+
+void Tribes::load_object(const std::string& object_name) {
+    // Nothing to do if it's already loaded
+    if (loaded_tribe_objects_.count(object_name) == 1) {
+        return;
+    }
+
+    // Make sure that we have it
+    if (registered_tribe_objects_.count(object_name) != 1) {
+        throw GameDataError("Tribes::load_object: Object '%s' was not registered", object_name.c_str());
+    }
+
+    // Protect against circular dependencies
+    if (tribe_objects_being_loaded_.count(object_name) == 1) {
+        throw GameDataError("Tribes::load_object: Object '%s' is already being loaded", object_name.c_str());
+    }
+
+    // Load it
+    lua_->run_script(registered_tribe_objects_.at(object_name));
+}
+
+DescriptionIndex Tribes::load_building(const std::string& buildingname) {
+    try {
+        load_object(buildingname);
+    } catch (WException& e) {
+        throw GameDataError("Error while loading building type '%s': %s", buildingname.c_str(), e.what());
+    }
+    return safe_building_index(buildingname);
+}
+
+DescriptionIndex Tribes::load_immovable(const std::string& immovablename) {
+    try {
+        load_object(immovablename);
+    } catch (WException& e) {
+        throw GameDataError("Error while loading immovable type '%s': %s", immovablename.c_str(), e.what());
+    }
+    return safe_immovable_index(immovablename);
+}
+
+DescriptionIndex Tribes::load_ship(const std::string& shipname) {
+    try {
+        load_object(shipname);
+    } catch (WException& e) {
+        throw GameDataError("Error while loading ship type '%s': %s", shipname.c_str(), e.what());
+    }
+    return safe_ship_index(shipname);
+}
+
+DescriptionIndex Tribes::load_ware(const std::string& warename) {
+    try {
+        load_object(warename);
+    } catch (WException& e) {
+        throw GameDataError("Error while loading ware type '%s': %s", warename.c_str(), e.what());
+    }
+    return safe_ware_index(warename);
+}
+
+DescriptionIndex Tribes::load_worker(const std::string& workername) {
+    try {
+        load_object(workername);
+    } catch (WException& e) {
+        throw GameDataError("Error while loading worker type '%s': %s", workername.c_str(), e.what());
+    }
+    return safe_worker_index(workername);
 }
 
 void Tribes::load_graphics() {

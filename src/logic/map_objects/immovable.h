@@ -127,7 +127,7 @@ public:
 	/// World immovable
 	ImmovableDescr(const std::string& init_descname, const LuaTable&, const World& world);
 	/// Tribes immovable
-	ImmovableDescr(const std::string& init_descname, const LuaTable&, const Tribes& tribes);
+	ImmovableDescr(const std::string& init_descname, const LuaTable&, Tribes& tribes);
 	~ImmovableDescr() override;
 
 	int32_t get_size() const {

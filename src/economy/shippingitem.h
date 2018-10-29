@@ -32,7 +32,6 @@ class Economy;
 class Game;
 class MapObjectLoader;
 struct MapObjectSaver;
-class MapObject;
 class PortDock;
 class WareInstance;
 class Worker;

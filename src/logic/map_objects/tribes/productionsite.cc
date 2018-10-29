@@ -91,7 +91,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          MapObjectType init_type,
                                          const LuaTable& table,
-                                         const EditorGameBase& egbase)
+                                         EditorGameBase& egbase)
    : BuildingDescr(init_descname, init_type, table, egbase),
      out_of_resource_productivity_threshold_(100) {
 	if (msgctxt.empty()) {
@@ -214,7 +214,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			                    name().c_str(), hints().collects_ware_from_map().c_str());
 		}
 		const DescriptionIndex collects_index =
-		   egbase_.tribes().safe_ware_index(hints().collects_ware_from_map());
+		   egbase.mutable_tribes()->load_ware(hints().collects_ware_from_map());
 		if (!is_output_ware_type(collects_index)) {
 			throw GameDataError("ai_hints for building %s collects ware %s from map, but it's not "
 			                    "listed in the building's output",
@@ -226,7 +226,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          const LuaTable& table,
-                                         const EditorGameBase& egbase)
+                                         EditorGameBase& egbase)
    : ProductionSiteDescr(init_descname, msgctxt, MapObjectType::PRODUCTIONSITE, table, egbase) {
 }
 

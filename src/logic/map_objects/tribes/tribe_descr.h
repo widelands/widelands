@@ -27,7 +27,6 @@
 #include "base/macros.h"
 #include "graphic/animation.h"
 #include "logic/description_maintainer.h"
-#include "logic/editor_game_base.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/building.h"
 #include "logic/map_objects/tribes/road_textures.h"
@@ -39,14 +38,12 @@
 
 namespace Widelands {
 
-class EditorGameBase;
 class ResourceDescription;
 class WareDescr;
 class Warehouse;
 class WorkerDescr;
 class World;
 class BuildingDescr;
-struct Event;
 
 /*
  * Resource indicators:
@@ -72,7 +69,7 @@ class TribeDescr {
 public:
 	TribeDescr(const LuaTable& table,
 	           const Widelands::TribeBasicInfo& info,
-	           const Tribes& init_tribes);
+	           Tribes& tribes);
 
 	const std::string& name() const;
 	const std::string& descname() const;
@@ -172,15 +169,15 @@ public:
 		return ship_names_;
 	}
 
-	void add_building(const std::string& buildingname);
+	void add_building(const std::string& buildingname, Tribes& tribes);
 
 private:
 	// Helper function for adding a special worker type (carriers etc.)
-	DescriptionIndex add_special_worker(const std::string& workername);
+	DescriptionIndex add_special_worker(const std::string& workername, Tribes& tribes);
 	// Helper function for adding a special building type (port etc.)
-	DescriptionIndex add_special_building(const std::string& buildingname);
+	DescriptionIndex add_special_building(const std::string& buildingname, Tribes& tribes);
 	// Helper function to identify special wares across tribes (iron ore etc.)
-	DescriptionIndex add_special_ware(const std::string& warename);
+	DescriptionIndex add_special_ware(const std::string& warename, Tribes& tribes);
 
 	const std::string name_;
 	const std::string descname_;

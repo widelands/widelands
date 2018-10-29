@@ -50,7 +50,7 @@ class WarehouseDescr : public BuildingDescr {
 public:
 	WarehouseDescr(const std::string& init_descname,
 	               const LuaTable& t,
-	               const EditorGameBase& egbase);
+	               EditorGameBase& egbase);
 	~WarehouseDescr() override {
 	}
 

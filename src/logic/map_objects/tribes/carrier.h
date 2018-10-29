@@ -30,7 +30,7 @@ class CarrierDescr : public WorkerDescr {
 public:
 	CarrierDescr(const std::string& init_descname,
 	             const LuaTable& table,
-	             const EditorGameBase& egbase);
+	             EditorGameBase& egbase);
 	~CarrierDescr() override {
 	}
 

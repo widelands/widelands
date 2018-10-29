@@ -33,7 +33,6 @@ class Economy;
 class EditorGameBase;
 class Game;
 struct IdleWareSupply;
-class MapObject;
 struct PlayerImmovable;
 struct Transfer;
 

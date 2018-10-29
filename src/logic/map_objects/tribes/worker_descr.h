@@ -48,8 +48,8 @@ public:
 	WorkerDescr(const std::string& init_descname,
 	            MapObjectType type,
 	            const LuaTable& table,
-	            const EditorGameBase& egbase);
-	WorkerDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
+	            EditorGameBase& egbase);
+	WorkerDescr(const std::string& init_descname, const LuaTable& t, EditorGameBase& egbase);
 	~WorkerDescr() override;
 
 	Bob& create_object() const override;

@@ -40,7 +40,7 @@ struct WorkerProgram : public BobProgramBase {
 	using ParseWorkerProgramFn = void (WorkerProgram::*)(Worker::Action*,
 	                                                     const std::vector<std::string>&);
 
-	WorkerProgram(const std::string& name, const WorkerDescr& worker, const Tribes& tribes)
+	WorkerProgram(const std::string& name, const WorkerDescr& worker, Tribes& tribes)
 	   : name_(name), worker_(worker), tribes_(tribes) {
 	}
 	~WorkerProgram() override {
@@ -94,7 +94,7 @@ private:
 
 	const std::string name_;
 	const WorkerDescr& worker_;
-	const Tribes& tribes_;
+	Tribes& tribes_;
 	Actions actions_;
 	static ParseMap const parsemap_[];
 	DISALLOW_COPY_AND_ASSIGN(WorkerProgram);

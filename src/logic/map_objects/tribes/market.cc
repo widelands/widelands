@@ -29,7 +29,7 @@ namespace Widelands {
 
 MarketDescr::MarketDescr(const std::string& init_descname,
                          const LuaTable& table,
-                         const EditorGameBase& egbase)
+                         EditorGameBase& egbase)
    : BuildingDescr(init_descname, MapObjectType::MARKET, table, egbase) {
 	i18n::Textdomain td("tribes");
 

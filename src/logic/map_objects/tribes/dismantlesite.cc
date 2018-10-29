@@ -44,7 +44,7 @@ namespace Widelands {
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
-                                       const EditorGameBase& egbase)
+                                       EditorGameBase& egbase)
    : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, egbase) {
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE);  // Yep, this is correct.
 }

@@ -66,7 +66,7 @@ public:
 	BuildingDescr(const std::string& init_descname,
 	              MapObjectType type,
 	              const LuaTable& t,
-	              const EditorGameBase& egbase);
+	              EditorGameBase& egbase);
 	~BuildingDescr() override {
 	}
 

@@ -56,7 +56,7 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
-                             const EditorGameBase& egbase)
+                             EditorGameBase& egbase)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
      egbase_(egbase),
      buildable_(false),
@@ -114,7 +114,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		if (enh == name()) {
 			throw wexception("enhancement to same type");
 		}
-		DescriptionIndex const en_i = egbase_.tribes().building_index(enh);
+		DescriptionIndex const en_i = egbase.mutable_tribes()->load_building(enh);
 		if (egbase_.tribes().building_exists(en_i)) {
 			enhancement_ = en_i;
 
@@ -136,8 +136,8 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	if (table.has_key("buildcost")) {
 		buildable_ = true;
 		try {
-			buildcost_ = Buildcost(table.get_table("buildcost"), egbase_.tribes());
-			return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
+			buildcost_ = Buildcost(table.get_table("buildcost"), *egbase.mutable_tribes());
+			return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), *egbase.mutable_tribes());
 		} catch (const WException& e) {
 			throw wexception(
 			   "A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
@@ -147,9 +147,9 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	if (table.has_key("enhancement_cost")) {
 		enhanced_building_ = true;
 		try {
-			enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
+			enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), *egbase.mutable_tribes());
 			return_enhanced_ =
-			   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
+			   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), *egbase.mutable_tribes());
 		} catch (const WException& e) {
 			throw wexception("An enhanced building must define \"enhancement_cost\""
 			                 "and \"return_on_dismantle_on_enhanced\": %s",

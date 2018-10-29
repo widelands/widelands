@@ -241,11 +241,17 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 			                    ware, ware);
 		}
 
-		if (group.first.size() && ware_index <= group.first.begin()->first)
+        if (group.first.size() && ware_index <= group.first.begin()->first) {
+            // NOCOM We should not care about order here, that's ridiculous
+            log("wrong order of ware types within group: ware type %s appears "
+			                    "after ware type %s (fix order!)",
+                ware,
+                tribes.get_ware_descr(group.first.begin()->first)->name().c_str());
 			throw GameDataError("wrong order of ware types within group: ware type %s appears "
 			                    "after ware type %s (fix order!)",
 			                    ware,
 			                    tribes.get_ware_descr(group.first.begin()->first)->name().c_str());
+        }
 		last_insert_pos = group.first.insert(last_insert_pos, std::make_pair(ware_index, type));
 		*parameters = terminator;
 		switch (terminator) {
@@ -919,7 +925,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 
 ProductionProgram::ActProduce::ActProduce(char* parameters,
                                           const ProductionSiteDescr& descr,
-                                          const Tribes& tribes) {
+                                          Tribes& tribes) {
 	try {
 		for (bool more = true; more; ++parameters) {
 			produced_wares_.resize(produced_wares_.size() + 1);
@@ -950,7 +956,7 @@ ProductionProgram::ActProduce::ActProduce(char* parameters,
 		item_end:
 			more = *parameters != '\0';
 			*parameters = '\0';
-			if (!descr.is_output_ware_type(item.first = tribes.safe_ware_index(ware)))
+			if (!descr.is_output_ware_type(item.first = tribes.load_ware(ware)))
 				throw GameDataError("%s is not declared as an output (\"%s\" was not "
 				                    "found in the \"outputs\" table)",
 				                    ware, ware);
@@ -1002,7 +1008,7 @@ bool ProductionProgram::ActProduce::get_building_work(Game& game,
 
 ProductionProgram::ActRecruit::ActRecruit(char* parameters,
                                           const ProductionSiteDescr& descr,
-                                          const Tribes& tribes) {
+                                          Tribes& tribes) {
 	try {
 		for (bool more = true; more; ++parameters) {
 			recruited_workers_.resize(recruited_workers_.size() + 1);
@@ -1033,7 +1039,7 @@ ProductionProgram::ActRecruit::ActRecruit(char* parameters,
 		item_end:
 			more = *parameters != '\0';
 			*parameters = '\0';
-			if (!descr.is_output_worker_type(item.first = tribes.safe_worker_index(worker)))
+			if (!descr.is_output_worker_type(item.first = tribes.load_worker(worker)))
 				throw GameDataError("%s is not declared as an output (\"%s\" was not "
 				                    "found in the \"outputs\" table)",
 				                    worker, worker);
@@ -1601,7 +1607,7 @@ void ProductionProgram::ActConstruct::building_work_failed(Game& game,
 ProductionProgram::ProductionProgram(const std::string& init_name,
                                      const std::string& init_descname,
                                      std::unique_ptr<LuaTable> actions_table,
-                                     const EditorGameBase& egbase,
+                                     EditorGameBase& egbase,
                                      ProductionSiteDescr* building)
    : name_(init_name), descname_(init_descname) {
 
@@ -1633,10 +1639,10 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			   new ActConsume(arguments.get(), *building, egbase.tribes())));
 		} else if (boost::iequals(parts[0], "produce")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActProduce(arguments.get(), *building, egbase.tribes())));
+			   new ActProduce(arguments.get(), *building, *egbase.mutable_tribes())));
 		} else if (boost::iequals(parts[0], "recruit")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActRecruit(arguments.get(), *building, egbase.tribes())));
+			   new ActRecruit(arguments.get(), *building, *egbase.mutable_tribes())));
 		} else if (boost::iequals(parts[0], "callworker")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActCallWorker(arguments.get(), name(), building, egbase.tribes())));

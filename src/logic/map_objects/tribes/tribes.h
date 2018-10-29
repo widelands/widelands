@@ -20,12 +20,14 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBES_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_TRIBES_H
 
+#include <list>
 #include <memory>
 
 #include "base/macros.h"
 #include "graphic/texture.h"
 #include "logic/description_maintainer.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/map_object_type.h"
 #include "logic/map_objects/tribes/carrier.h"
 #include "logic/map_objects/tribes/constructionsite.h"
 #include "logic/map_objects/tribes/dismantlesite.h"
@@ -48,53 +50,8 @@ class WorkerDescr;
 
 class Tribes {
 public:
-	Tribes();
-	~Tribes() {
-	}
-
-	/// Adds this building type to the tribe description.
-	void add_constructionsite_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds this building type to the tribe description.
-	void add_dismantlesite_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds this building type to the tribe description.
-	void add_militarysite_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds this building type to the tribe description.
-	void add_productionsite_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds this building type to the tribe description.
-	void add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds this building type to the tribe description.
-	void add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds this building type to the tribe description.
-	void add_market_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds this immovable type to the tribe description.
-	void add_immovable_type(const LuaTable& table);
-
-	/// Adds this ship type to the tribe description.
-	void add_ship_type(const LuaTable& table);
-
-	/// Adds this ware type to the tribe description.
-	void add_ware_type(const LuaTable& table);
-
-	/// Adds this worker type to the tribe description.
-	void add_carrier_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds this worker type to the tribe description.
-	void add_soldier_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds this worker type to the tribe description.
-	void add_worker_type(const LuaTable& table, const EditorGameBase& egbase);
-
-	/// Adds a specific tribe's configuration.
-	void add_tribe(const LuaTable& table, const EditorGameBase& egbase);
-
-	void add_custom_building(const LuaTable& table);
+	Tribes(LuaInterface* lua);
+	~Tribes();
 
 	size_t nrbuildings() const;
 	size_t nrtribes() const;
@@ -102,11 +59,11 @@ public:
 	size_t nrworkers() const;
 
 	bool ware_exists(const std::string& warename) const;
-	bool ware_exists(const DescriptionIndex& index) const;
+	bool ware_exists(DescriptionIndex index) const;
 	bool worker_exists(const std::string& workername) const;
-	bool worker_exists(const DescriptionIndex& index) const;
+	bool worker_exists(DescriptionIndex index) const;
 	bool building_exists(const std::string& buildingname) const;
-	bool building_exists(const DescriptionIndex& index) const;
+	bool building_exists(DescriptionIndex index) const;
 	bool immovable_exists(DescriptionIndex index) const;
 	bool ship_exists(DescriptionIndex index) const;
 	bool tribe_exists(DescriptionIndex index) const;
@@ -133,9 +90,34 @@ public:
 	const WorkerDescr* get_worker_descr(DescriptionIndex worker_index) const;
 	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
 
-	void set_ware_type_has_demand_check(const DescriptionIndex& ware_index,
+	void set_ware_type_has_demand_check(DescriptionIndex ware_index,
 	                                    const std::string& tribename) const;
-	void set_worker_type_has_demand_check(const DescriptionIndex& worker_index) const;
+	void set_worker_type_has_demand_check(DescriptionIndex worker_index) const;
+
+    // ************************ Loading *************************
+
+    /// Map a map object's name to its init script so that we can load it when we want it.
+    void register_object(const LuaTable& table);
+
+    /// Add a tribe object type to the tribes.
+    void add_tribe_object_type(const LuaTable& table, EditorGameBase& egbase, MapObjectType type);
+
+    /// Adds a specific tribe's configuration.
+    void add_tribe(const LuaTable& table);
+
+    /// Adds a custom scenario building.
+    void add_custom_building(const LuaTable& table);
+
+    /// Load a building that has been registered previously with 'register_object'
+    DescriptionIndex load_building(const std::string& buildingname);
+    /// Load an immovable that has been registered previously with 'register_object'
+    DescriptionIndex load_immovable(const std::string& immovablename);
+    /// Load a ship that has been registered previously with 'register_object'
+    DescriptionIndex load_ship(const std::string& shipname);
+    /// Load a ware that has been registered previously with 'register_object'
+    DescriptionIndex load_ware(const std::string& warename);
+    /// Load a worker that has been registered previously with 'register_object'
+    DescriptionIndex load_worker(const std::string& workername);
 
 	/// Load tribes' graphics
 	void load_graphics();
@@ -144,6 +126,9 @@ public:
 	void postload();
 
 private:
+    /// Load the map object type for the given 'object_name' that has been registered previously with 'register_object'
+    void load_object(const std::string& object_name);
+
 	void postload_calculate_trainingsites_proportions();
 
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
@@ -152,6 +137,15 @@ private:
 	std::unique_ptr<DescriptionMaintainer<WareDescr>> wares_;
 	std::unique_ptr<DescriptionMaintainer<WorkerDescr>> workers_;
 	std::unique_ptr<DescriptionMaintainer<TribeDescr>> tribes_;
+
+    /// A list of all available map object types as <name, init script path>
+    std::map<std::string, std::string> registered_tribe_objects_;
+    /// A list of object types currently being loaded, to avoid circular dependencies
+    std::set<std::string> tribe_objects_being_loaded_;
+    /// List of the tribe objects that have already been loaded
+    std::set<std::string> loaded_tribe_objects_;
+
+    LuaInterface* lua_; // Not owned
 
 	DISALLOW_COPY_AND_ASSIGN(Tribes);
 };

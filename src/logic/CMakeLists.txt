@@ -93,6 +93,16 @@ wl_library(logic_tribe_basic_info
 
 )
 
+wl_library(logic_map_object_type
+  SRCS
+    map_objects/map_object_type.cc
+    map_objects/map_object_type.h
+  DEPENDS
+    base_exceptions
+    base_macros
+)
+
+
 wl_library(logic
   SRCS
     ai_dna_handler.cc
@@ -281,6 +291,7 @@ wl_library(logic
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_map_object_type
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

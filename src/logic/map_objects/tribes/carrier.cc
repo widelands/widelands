@@ -463,7 +463,7 @@ void Carrier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 
 CarrierDescr::CarrierDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const EditorGameBase& egbase)
+                           EditorGameBase& egbase)
    : WorkerDescr(init_descname, MapObjectType::CARRIER, table, egbase) {
 }
 

@@ -25,7 +25,6 @@
 #include "base/time_string.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
-#include "logic/map_objects/map_object.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"

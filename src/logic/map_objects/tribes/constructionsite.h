@@ -72,7 +72,7 @@ class ConstructionSiteDescr : public BuildingDescr {
 public:
 	ConstructionSiteDescr(const std::string& init_descname,
 	                      const LuaTable& t,
-	                      const EditorGameBase& egbase);
+	                      EditorGameBase& egbase);
 	~ConstructionSiteDescr() override {
 	}
 

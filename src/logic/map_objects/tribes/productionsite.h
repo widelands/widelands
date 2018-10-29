@@ -63,11 +63,11 @@ public:
 	                    const std::string& msgctxt,
 	                    MapObjectType type,
 	                    const LuaTable& t,
-	                    const EditorGameBase& egbase);
+	                    EditorGameBase& egbase);
 	ProductionSiteDescr(const std::string& init_descname,
 	                    const std::string& msgctxt,
 	                    const LuaTable& t,
-	                    const EditorGameBase& egbase);
+	                    EditorGameBase& egbase);
 
 	Building& create_object() const override;
 

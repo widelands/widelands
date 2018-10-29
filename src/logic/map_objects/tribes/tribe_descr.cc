@@ -28,11 +28,10 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "graphic/graphic.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "logic/editor_game_base.h"
-#include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/tribes/carrier.h"
@@ -57,10 +56,15 @@ namespace Widelands {
   */
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
-                       const Tribes& init_tribes)
-   : name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
+                       Tribes& tribes)
+   : name_(table.get_string("name")), descname_(info.descname), tribes_(tribes) {
+    log("┏━ Loading %s:\n", name_.c_str());
+
+    ScopedTimer timer("┗━ took: %ums");
 
 	try {
+        log("┃    Frontiers, flags and roads: ");
+
 		initializations_ = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
@@ -87,8 +91,23 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("normal", &normal_road_paths_);
 		load_roads("busy", &busy_road_paths_);
 
+        log("%ums\n", timer.ms_since_last_query());
+        log("┃    Ships: ");
+
+        const std::string shipname(table.get_string("ship"));
+		try {
+			ship_ = tribes.load_ship(shipname);
+		} catch (const WException& e) {
+			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
+		}
+        ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
+
+
+        log("%ums\n", timer.ms_since_last_query());
+        log("┃    Wares: ");
+
 		items_table = table.get_table("wares_order");
-		wares_order_coords_.resize(tribes_.nrwares());
+
 		int columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
@@ -96,13 +115,17 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			   items_table->get_table(key)->array_entries<std::string>();
 			for (size_t rowindex = 0; rowindex < warenames.size(); ++rowindex) {
 				try {
-					DescriptionIndex wareindex = tribes_.safe_ware_index(warenames[rowindex]);
+					DescriptionIndex wareindex = tribes.load_ware(warenames[rowindex]);
 					if (has_ware(wareindex)) {
 						throw GameDataError(
 						   "Duplicate definition of ware '%s'", warenames[rowindex].c_str());
 					}
 					wares_.insert(wareindex);
 					column.push_back(wareindex);
+                    // NOCOM make this a map?
+                    if (wares_order_coords_.size() < wareindex + 1U) {
+                        wares_order_coords_.resize(wareindex + 1U);
+                    }
 					wares_order_coords_[wareindex] = std::make_pair(columnindex, rowindex);
 				} catch (const WException& e) {
 					throw GameDataError(
@@ -115,8 +138,47 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 		}
 
+        ironore_ = add_special_ware(table.get_string("ironore"), tribes);
+		rawlog_ = add_special_ware(table.get_string("rawlog"), tribes);
+		refinedlog_ = add_special_ware(table.get_string("refinedlog"), tribes);
+		granite_ = add_special_ware(table.get_string("granite"), tribes);
+
+        log("%ums\n", timer.ms_since_last_query());
+        log("┃    Immovables: ");
+
+		for (const std::string& immovablename :
+		     table.get_table("immovables")->array_entries<std::string>()) {
+			try {
+				DescriptionIndex index = tribes.load_immovable(immovablename);
+				if (immovables_.count(index) == 1) {
+					throw GameDataError("Duplicate definition of immovable '%s'", immovablename.c_str());
+				}
+				immovables_.insert(index);
+			} catch (const WException& e) {
+				throw GameDataError(
+				   "Failed adding immovable '%s': %s", immovablename.c_str(), e.what());
+			}
+		}
+
+		items_table = table.get_table("resource_indicators");
+		for (std::string resource : items_table->keys<std::string>()) {
+			ResourceIndicatorList resis;
+			std::unique_ptr<LuaTable> tbl = items_table->get_table(resource);
+			const std::set<int> keys = tbl->keys<int>();
+			for (int upper_limit : keys) {
+				resis[upper_limit] = tribes.load_immovable(tbl->get_string(upper_limit));
+			}
+			if (resis.empty()) {
+				throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
+			}
+			resource_indicators_[resource] = resis;
+		};
+
+
+        log("%ums\n", timer.ms_since_last_query());
+        log("┃    Workers: ");
+
 		items_table = table.get_table("workers_order");
-		workers_order_coords_.resize(tribes_.nrworkers());
 		columnindex = 0;
 		for (const int key : items_table->keys<int>()) {
 			std::vector<DescriptionIndex> column;
@@ -124,13 +186,17 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			   items_table->get_table(key)->array_entries<std::string>();
 			for (size_t rowindex = 0; rowindex < workernames.size(); ++rowindex) {
 				try {
-					DescriptionIndex workerindex = tribes_.safe_worker_index(workernames[rowindex]);
+					DescriptionIndex workerindex = tribes.load_worker(workernames[rowindex]);
 					if (has_worker(workerindex)) {
 						throw GameDataError(
 						   "Duplicate definition of worker '%s'", workernames[rowindex].c_str());
 					}
 					workers_.insert(workerindex);
 					column.push_back(workerindex);
+                    // NOCOM make this a map?
+                    if (workers_order_coords_.size() < workerindex + 1U) {
+                        workers_order_coords_.resize(workerindex + 1U);
+                    }
 					workers_order_coords_[workerindex] = std::make_pair(columnindex, rowindex);
 
 					const WorkerDescr& worker_descr = *tribes_.get_worker_descr(workerindex);
@@ -148,63 +214,25 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 		}
 
-		for (const std::string& immovablename :
-		     table.get_table("immovables")->array_entries<std::string>()) {
-			try {
-				DescriptionIndex index = tribes_.safe_immovable_index(immovablename);
-				if (immovables_.count(index) == 1) {
-					throw GameDataError("Duplicate definition of immovable '%s'", immovablename.c_str());
-				}
-				immovables_.insert(index);
-			} catch (const WException& e) {
-				throw GameDataError(
-				   "Failed adding immovable '%s': %s", immovablename.c_str(), e.what());
-			}
-		}
+        builder_ = add_special_worker(table.get_string("builder"), tribes);
+		carrier_ = add_special_worker(table.get_string("carrier"), tribes);
+		carrier2_ = add_special_worker(table.get_string("carrier2"), tribes);
+		geologist_ = add_special_worker(table.get_string("geologist"), tribes);
+		soldier_ = add_special_worker(table.get_string("soldier"), tribes);
 
-		items_table = table.get_table("resource_indicators");
-		for (std::string resource : items_table->keys<std::string>()) {
-			ResourceIndicatorList resis;
-			std::unique_ptr<LuaTable> tbl = items_table->get_table(resource);
-			const std::set<int> keys = tbl->keys<int>();
-			for (int upper_limit : keys) {
-				resis[upper_limit] = tribes_.safe_immovable_index(tbl->get_string(upper_limit));
-			}
-			if (resis.empty()) {
-				throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
-			}
-			resource_indicators_[resource] = resis;
-		};
 
-		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
+        log("%ums\n", timer.ms_since_last_query());
+        log("┃    Buildings: ");
 
 		for (const std::string& buildingname :
 		     table.get_table("buildings")->array_entries<std::string>()) {
-			add_building(buildingname);
+			add_building(buildingname, tribes);
 		}
 
-		// Special types
-		builder_ = add_special_worker(table.get_string("builder"));
-		carrier_ = add_special_worker(table.get_string("carrier"));
-		carrier2_ = add_special_worker(table.get_string("carrier2"));
-		geologist_ = add_special_worker(table.get_string("geologist"));
-		soldier_ = add_special_worker(table.get_string("soldier"));
+		port_ = add_special_building(table.get_string("port"), tribes);
+		barracks_ = add_special_building(table.get_string("barracks"), tribes);
 
-		const std::string shipname = table.get_string("ship");
-		try {
-			ship_ = tribes_.safe_ship_index(shipname);
-		} catch (const WException& e) {
-			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
-		}
-
-		port_ = add_special_building(table.get_string("port"));
-		barracks_ = add_special_building(table.get_string("barracks"));
-
-		ironore_ = add_special_ware(table.get_string("ironore"));
-		rawlog_ = add_special_ware(table.get_string("rawlog"));
-		refinedlog_ = add_special_ware(table.get_string("refinedlog"));
-		granite_ = add_special_ware(table.get_string("granite"));
-
+        log("%ums\n", timer.ms_since_last_query());
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
 	}
@@ -454,9 +482,9 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 	}
 }
 
-void TribeDescr::add_building(const std::string& buildingname) {
+void TribeDescr::add_building(const std::string& buildingname, Tribes& tribes) {
 	try {
-		DescriptionIndex index = tribes_.safe_building_index(buildingname);
+		DescriptionIndex index = tribes.load_building(buildingname);
 		if (has_building(index)) {
 			throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 		}
@@ -487,9 +515,9 @@ void TribeDescr::add_building(const std::string& buildingname) {
   * Helper functions
   */
 
-DescriptionIndex TribeDescr::add_special_worker(const std::string& workername) {
+DescriptionIndex TribeDescr::add_special_worker(const std::string& workername, Tribes& tribes) {
 	try {
-		DescriptionIndex worker = tribes_.safe_worker_index(workername);
+		DescriptionIndex worker = tribes.load_worker(workername);
 		if (!has_worker(worker)) {
 			throw GameDataError("This tribe doesn't have the worker '%s'", workername.c_str());
 		}
@@ -499,9 +527,9 @@ DescriptionIndex TribeDescr::add_special_worker(const std::string& workername) {
 	}
 }
 
-DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname) {
+DescriptionIndex TribeDescr::add_special_building(const std::string& buildingname, Tribes& tribes) {
 	try {
-		DescriptionIndex building = tribes_.safe_building_index(buildingname);
+		DescriptionIndex building = tribes.load_building(buildingname);
 		if (!has_building(building)) {
 			throw GameDataError("This tribe doesn't have the building '%s'", buildingname.c_str());
 		}
@@ -511,9 +539,9 @@ DescriptionIndex TribeDescr::add_special_building(const std::string& buildingnam
 		   "Failed adding special building '%s': %s", buildingname.c_str(), e.what());
 	}
 }
-DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
+DescriptionIndex TribeDescr::add_special_ware(const std::string& warename, Tribes& tribes) {
 	try {
-		DescriptionIndex ware = tribes_.safe_ware_index(warename);
+		DescriptionIndex ware = tribes.load_ware(warename);
 		if (!has_ware(ware)) {
 			throw GameDataError("This tribe doesn't have the ware '%s'", warename.c_str());
 		}
