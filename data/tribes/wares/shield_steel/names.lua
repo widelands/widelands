@@ -1,0 +1,3 @@
+names = {
+   "shield_steel"
+}

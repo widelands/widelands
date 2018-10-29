@@ -1,0 +1,3 @@
+names = {
+   "spider_silk"
+}

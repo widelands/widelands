@@ -1,0 +1,3 @@
+names = {
+   "spear_wooden"
+}

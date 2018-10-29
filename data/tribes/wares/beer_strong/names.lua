@@ -1,0 +1,3 @@
+names = {
+   "beer_strong"
+}

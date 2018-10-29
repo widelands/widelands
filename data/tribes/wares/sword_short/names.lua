@@ -1,0 +1,3 @@
+names = {
+   "sword_short"
+}

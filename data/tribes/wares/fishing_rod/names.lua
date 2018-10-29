@@ -1,0 +1,3 @@
+names = {
+   "fishing_rod"
+}

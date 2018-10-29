@@ -1,0 +1,3 @@
+names = {
+   "destroyed_building"
+}

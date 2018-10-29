@@ -1,0 +1,3 @@
+names = {
+   "fur_garment"
+}

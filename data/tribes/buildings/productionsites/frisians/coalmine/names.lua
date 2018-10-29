@@ -1,0 +1,3 @@
+names = {
+   "frisians_coalmine"
+}

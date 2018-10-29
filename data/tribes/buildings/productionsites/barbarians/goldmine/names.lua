@@ -1,0 +1,3 @@
+names = {
+   "barbarians_goldmine"
+}

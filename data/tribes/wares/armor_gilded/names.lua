@@ -1,0 +1,3 @@
+names = {
+   "armor_gilded"
+}

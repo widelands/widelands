@@ -1,0 +1,3 @@
+names = {
+   "gold_thread"
+}

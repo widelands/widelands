@@ -1,0 +1,3 @@
+names = {
+   "smoked_fish"
+}
