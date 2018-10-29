@@ -1858,10 +1858,13 @@ void LuaImmovableDescription::__unpersist(lua_State* L) {
 	UNPERS_STRING("name", name);
 	const World& world = get_egbase(L).world();
 	DescriptionIndex idx = world.get_immovable_index(name);
-	if (idx == INVALID_INDEX) {
-		throw LuaError((boost::format("Immovable '%s' doesn't exist.") % name).str());
-	}
-	set_description_pointer(world.get_immovable_descr(idx));
+	if (idx != INVALID_INDEX) {
+        set_description_pointer(world.get_immovable_descr(idx));
+    } else {
+        const Tribes& tribes = get_egbase(L).tribes();
+        idx = tribes.safe_immovable_index(name);
+        set_description_pointer(tribes.get_immovable_descr(idx));
+    }
 }
 
 /* RST
