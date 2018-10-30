@@ -206,7 +206,7 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 	uint8_t count = 1;
 	uint8_t count_max = 0;
 	for (;;) {
-		char const* ware = parameters;
+		char const* wareworker = parameters;
 		while (*parameters && *parameters != ',' && *parameters != ':' && *parameters != ' ')
 			++parameters;
 		char const terminator = *parameters;
@@ -215,15 +215,15 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 		// Try as ware
 		WareWorker type = wwWARE;
 		const BillOfMaterials* input_list = &input_wares;
-		DescriptionIndex ware_index = tribes.ware_index(ware);
+		DescriptionIndex ware_index = tribes.ware_index(wareworker);
 		if (!tribes.ware_exists(ware_index)) {
-			ware_index = tribes.worker_index(ware);
+			ware_index = tribes.worker_index(wareworker);
 			if (tribes.worker_exists(ware_index)) {
 				// It is a worker
 				type = wwWORKER;
 				input_list = &input_workers;
 			} else {
-				throw GameDataError("Unknown ware or worker type \"%s\"", ware);
+				throw GameDataError("Unknown ware or worker type \"%s\"", wareworker);
 			}
 		}
 
@@ -238,21 +238,15 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 		if (!found) {
 			throw GameDataError("%s is not declared as an input (\"%s=<count>\" was not "
 			                    "found in the [inputs] section)",
-			                    ware, ware);
+			                    wareworker, wareworker);
 		}
 
-        if (group.first.size() && ware_index <= group.first.begin()->first) {
-            // NOCOM We should not care about order here, that's ridiculous
-            log("wrong order of ware types within group: ware type %s appears "
-			                    "after ware type %s (fix order!)",
-                ware,
-                tribes.get_ware_descr(group.first.begin()->first)->name().c_str());
-			throw GameDataError("wrong order of ware types within group: ware type %s appears "
-			                    "after ware type %s (fix order!)",
-			                    ware,
-			                    tribes.get_ware_descr(group.first.begin()->first)->name().c_str());
+        std::pair<DescriptionIndex, WareWorker> type_to_insert = std::make_pair(ware_index, type);
+        if (group.first.count(type_to_insert) == 1) {
+            throw GameDataError("attempt to insert ware/worker type '%s' into group twice", wareworker);
         }
-		last_insert_pos = group.first.insert(last_insert_pos, std::make_pair(ware_index, type));
+
+		last_insert_pos = group.first.insert(last_insert_pos, type_to_insert);
 		*parameters = terminator;
 		switch (terminator) {
 		case ':': {
