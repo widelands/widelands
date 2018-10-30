@@ -216,6 +216,8 @@ void Carrier::transport_update(Game& game, State& state) {
 			return schedule_act(game, 20);
 		}
 
+		WareInstance* otherware = flag.fetch_pending_ware(game, otherware_idx);
+
 		if (ware) {
 			const bool ware_astray = (ware->get_next_move_step(game) == nullptr);
 			// Drop our ware
@@ -224,10 +226,9 @@ void Carrier::transport_update(Game& game, State& state) {
 			// anything else we should carry, we might pick it up again immediately, so check again
 			if (ware_astray && otherware_idx == kNotFoundAppropriate) {
 				otherware_idx = flag.find_pending_ware(otherflag);
+				otherware = flag.fetch_pending_ware(game, otherware_idx);
 			}
 		}
-
-		WareInstance* otherware = flag.fetch_pending_ware(game, otherware_idx);
 
 		// Pick up new load, if any
 		if (otherware) {
