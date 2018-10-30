@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: 2018-10-11 14:44+0000\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
+"PO-Revision-Date: 2018-10-21 19:21+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Paket, dat du 
 
 #: ../../data/txts/LICENSE.lua:22
 msgid "This game comes as-is and without any warranty."
-msgstr "Deeses Speel is wat es is un hett överhoopt keene Garantie."
+msgstr "Deeses Speel is wat 't is un hett överhoopt keene Garantie."
 
 #: ../../data/txts/LICENSE.lua:23
 msgid ""
@@ -543,7 +543,7 @@ msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr "Du kannst mehr Aarden vun Deerten utkören, indeem du bi’m Utkören Strg drückst. Wenn du dann de Kaart anklickst, wird eens vun de utköörten Deerten sett."
+msgstr "Du kannst mehr Aarden vun Deerten utkören, indeem du bi’m Utkören Strg drückst. Wenn du dann de Kaart anklickst, word eens vun de utköörten Deerten sett."
 
 #: ../../data/txts/tips/editor.lua:15
 msgid ""

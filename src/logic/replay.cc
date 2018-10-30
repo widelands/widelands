@@ -23,6 +23,7 @@
 #include "base/md5.h"
 #include "base/wexception.h"
 #include "game_io/game_loader.h"
+#include "game_io/game_preload_packet.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
@@ -82,6 +83,9 @@ ReplayReader::ReplayReader(Game& game, const std::string& filename) {
 
 	{
 		GameLoader gl(filename + kSavegameExtension, game);
+		Widelands::GamePreloadPacket gpdp;
+		gl.preload_game(gpdp);
+		game.set_win_condition_displayname(gpdp.get_win_condition());
 		gl.load_game();
 	}
 

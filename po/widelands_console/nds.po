@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-25 14:31+0000\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
+"PO-Revision-Date: 2018-10-21 12:32+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr " --language=[de_DE|sv_SE|...]\n                      De Spraak tum bruke
 msgid ""
 " --write_syncstreams=[true|false]\n"
 "                      Create syncstream dump files to help debug network games."
-msgstr ""
+msgstr " --write_syncstreams=[jau|nee]\n                      Schriev Sync-Stream-Dateien för Internett-Spelen,\n                      um Verschievens unnersöken to könen"
 
 #: ../../src/wlapplication_messages.cc:77
 msgid " --autosave=[...]     Automatically save each n minutes"
@@ -141,7 +141,7 @@ msgid ""
 " --ai_training        Enables AI training mode. See\n"
 "                      https://wl.widelands.org/wiki/Ai%20Training/\n"
 "                      for a full description of the AI training logic."
-msgstr ""
+msgstr " --ai_training        Dateien vun künstelken Spelers schrieven. Kiek bidde\n                      https://wl.widelands.org/wiki/Ai%20Training/\n                      an, um to sehen, wo dat gaht, de künstelken Spelers to verbetern."
 
 #: ../../src/wlapplication_messages.cc:104
 msgid ""
@@ -149,23 +149,23 @@ msgid ""
 "                      adjusting the game speed automatically,\n"
 "                      depending on FPS. Useful in conjunction with\n"
 "                      --ai_training."
-msgstr ""
+msgstr " --auto_speed         Sett de Gauheid vum Speel in Spelen övers\n                      Internett so, dat 't good tur FPS-Tahl passt.\n                      Bruuk dat blot mit --ai_training."
 
 #: ../../src/wlapplication_messages.cc:109
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr ""
+msgstr " --scenario=DATEINAAM Stracks de Kaart DATEINAAM as Rutfödderung starten."
 
 #: ../../src/wlapplication_messages.cc:112
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr ""
+msgstr " --loadgame=DATEINAAM Stracks dat sekerte Speel DATEINAAM laden."
 
 #: ../../src/wlapplication_messages.cc:113
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
-msgstr ""
+msgstr " --script=DATEINAAM   Bruukt dat angeven Lua-Skript na de Begünn.\n                      Verloovt blot mit --scenario, --loadgame oder --editor."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -192,19 +192,19 @@ msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
-msgstr ""
+msgstr " --fullscreen=[jau|nee]\n                      Of de hele Bildschirm bruukt worden sall."
 
 #: ../../src/wlapplication_messages.cc:133
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr " --xres=[...]         Fenster-Breddt in Bildtüttels."
 
 #: ../../src/wlapplication_messages.cc:134
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr " --yres=[...] Fenster-Höcht in Bildtüttels."
 
 #: ../../src/wlapplication_messages.cc:135
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
-msgstr ""
+msgstr " --maxfps=[5 ...]     Hoogste Tahl vun tekenten Fensters pro Sekünne."
 
 #. * TRANSLATORS: You may translate true/false, also as on/off or yes/no, but
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
@@ -212,7 +212,7 @@ msgstr ""
 #. textdomain
 #: ../../src/wlapplication_messages.cc:140
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "Instellungen för de Fenster-Verwaltung im Speel:"
 
 #: ../../src/wlapplication_messages.cc:141
 msgid ""

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-17 09:59+0000\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
+"PO-Revision-Date: 2018-10-14 13:52+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "Noch nich schreven"
 
 #: ../../data/campaigns/dummy.wmf/scripting/init.lua:12
 msgid "Sorry, this map is not yet implemented."
-msgstr "Spietelk as dat is, deese Kaart is noch nich schreven."
+msgstr "Deese Kaart is leider noch nich schreven."
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
