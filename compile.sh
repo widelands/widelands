@@ -199,7 +199,8 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
       cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN
     fi
 
-    $buildtool
+    $buildtool -j "$(nproc --ignore=1)"
+
     return 0
   }
 
