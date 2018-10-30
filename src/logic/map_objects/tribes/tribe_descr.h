@@ -163,7 +163,7 @@ public:
 		return workers_order_coords_;
 	}
 
-	void resize_ware_orders(size_t maxLength);
+	void resize_ware_orders(size_t max_length);
 
 	const std::vector<std::string>& get_ship_names() const {
 		return ship_names_;

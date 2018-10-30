@@ -122,7 +122,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 					}
 					wares_.insert(wareindex);
 					column.push_back(wareindex);
-                    // NOCOM make this a map?
                     if (wares_order_coords_.size() < wareindex + 1U) {
                         wares_order_coords_.resize(wareindex + 1U);
                     }
@@ -193,7 +192,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 					}
 					workers_.insert(workerindex);
 					column.push_back(workerindex);
-                    // NOCOM make this a map?
                     if (workers_order_coords_.size() < workerindex + 1U) {
                         workers_order_coords_.resize(workerindex + 1U);
                     }
@@ -450,36 +448,41 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	return list->second.find(lowest)->second;
 }
 
-void TribeDescr::resize_ware_orders(size_t maxLength) {
-	bool need_resize = false;
+void TribeDescr::resize_ware_orders(size_t max_length) {
+    auto do_resize = [](WaresOrder* order, WaresOrderCoords* order_coords, size_t max) {
 
-	// Check if we actually need to resize.
-	for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
-		if (it->size() > maxLength) {
-			need_resize = true;
-		}
-	}
+        bool need_resize = false;
 
-	// Build new smaller wares_order.
-	if (need_resize) {
-		WaresOrder new_wares_order;
-		for (WaresOrder::iterator it = wares_order_.begin(); it != wares_order_.end(); ++it) {
-			new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
-			for (std::vector<Widelands::DescriptionIndex>::iterator it2 = it->begin();
-			     it2 != it->end(); ++it2) {
-				if (new_wares_order.rbegin()->size() >= maxLength) {
-					new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
-				}
-				new_wares_order.rbegin()->push_back(*it2);
-				wares_order_coords_[*it2].first = new_wares_order.size() - 1;
-				wares_order_coords_[*it2].second = new_wares_order.rbegin()->size() - 1;
-			}
-		}
+        // Check if we actually need to resize.
+        for (WaresOrder::iterator it = order->begin(); it != order->end(); ++it) {
+            if (it->size() > max) {
+                need_resize = true;
+            }
+        }
 
-		// Remove old array.
-		wares_order_.clear();
-		wares_order_ = new_wares_order;
-	}
+        // Build new smaller wares_order.
+        if (need_resize) {
+            WaresOrder new_wares_order;
+            for (WaresOrder::iterator it = order->begin(); it != order->end(); ++it) {
+                new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
+                for (std::vector<Widelands::DescriptionIndex>::iterator it2 = it->begin();
+                     it2 != it->end(); ++it2) {
+                    if (new_wares_order.rbegin()->size() >= max) {
+                        new_wares_order.push_back(std::vector<Widelands::DescriptionIndex>());
+                    }
+                    new_wares_order.rbegin()->push_back(*it2);
+                    order_coords->at(*it2) = std::make_pair(new_wares_order.size() - 1, new_wares_order.rbegin()->size() - 1);
+                }
+            }
+
+            // Remove old array.
+            order->clear();
+            *order = new_wares_order;
+        }
+	};
+
+    do_resize(&wares_order_, &wares_order_coords_, max_length);
+    do_resize(&workers_order_, &workers_order_coords_, max_length);
 }
 
 void TribeDescr::add_building(const std::string& buildingname, Tribes& tribes) {
