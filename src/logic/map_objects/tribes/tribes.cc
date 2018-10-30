@@ -211,8 +211,8 @@ void Tribes::register_object(const LuaTable& table) {
 
 void Tribes::add_tribe_object_type(const LuaTable& table, EditorGameBase& egbase, MapObjectType type) {
     const std::string object_name(table.get_string("name"));
-    const std::string object_descname(table.get_string("descname"));
     const std::string msgctxt(table.get_string("msgctxt"));
+    const std::string object_descname = pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
 
     // Register as in progress
     tribe_objects_being_loaded_.insert(object_name);
@@ -221,67 +221,45 @@ void Tribes::add_tribe_object_type(const LuaTable& table, EditorGameBase& egbase
     i18n::Textdomain td("tribes");
     switch (type) {
     case MapObjectType::CARRIER:
-        workers_->add(new CarrierDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table, egbase));
+        workers_->add(new CarrierDescr(object_descname, table, egbase));
         break;
     case MapObjectType::CONSTRUCTIONSITE:
-        buildings_->add(new ConstructionSiteDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table, egbase));
+        buildings_->add(new ConstructionSiteDescr(object_descname, table, egbase));
         break;
     case MapObjectType::DISMANTLESITE:
-        buildings_->add(new DismantleSiteDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table, egbase));
+        buildings_->add(new DismantleSiteDescr(object_descname, table, egbase));
         break;
     case MapObjectType::IMMOVABLE:
-        immovables_->add(new ImmovableDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table, *this));
+        immovables_->add(new ImmovableDescr(object_descname, table, *this));
         break;
     case MapObjectType::MARKET:
-        buildings_->add(new MarketDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table, egbase));
+        buildings_->add(new MarketDescr(object_descname, table, egbase));
         break;
     case MapObjectType::MILITARYSITE:
-        buildings_->add(new MilitarySiteDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table, egbase));
+        buildings_->add(new MilitarySiteDescr(object_descname, table, egbase));
         break;
     case MapObjectType::PRODUCTIONSITE:
         buildings_->add(
-           new ProductionSiteDescr(pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-                                   msgctxt, table, egbase));
+           new ProductionSiteDescr(object_descname, msgctxt, table, egbase));
         break;
     case MapObjectType::SHIP:
-        ships_->add(new ShipDescr(_(object_descname), table));
+        ships_->add(new ShipDescr(object_descname, table));
         break;
     case MapObjectType::SOLDIER:
-        workers_->add(new SoldierDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table, egbase));
+        workers_->add(new SoldierDescr(object_descname, table, egbase));
         break;
     case MapObjectType::TRAININGSITE:
         buildings_->add(
-           new TrainingSiteDescr(pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-                                 msgctxt, table, egbase));
+           new TrainingSiteDescr(object_descname, msgctxt, table, egbase));
         break;
     case MapObjectType::WARE:
-        wares_->add(new WareDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table));
+        wares_->add(new WareDescr(object_descname, table));
         break;
     case MapObjectType::WAREHOUSE:
-        buildings_->add(new WarehouseDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table, egbase));
+        buildings_->add(new WarehouseDescr(object_descname, table, egbase));
         break;
     case MapObjectType::WORKER:
-        workers_->add(new WorkerDescr(
-           pgettext_expr(msgctxt.c_str(), object_descname.c_str()),
-           table, egbase));
+        workers_->add(new WorkerDescr(object_descname, table, egbase));
         break;
     default:
         NEVER_HERE();
@@ -393,6 +371,7 @@ void Tribes::load_graphics() {
 }
 
 void Tribes::postload() {
+    // NOCOM move this to TribeDescr. A bit less efficient, but needed for flexibility
 	for (DescriptionIndex i = 0; i < buildings_->size(); ++i) {
 		BuildingDescr& building_descr = *buildings_->get_mutable(i);
 
