@@ -56,7 +56,7 @@ namespace Widelands {
   */
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
-                       Tribes& tribes)
+                       Tribes& tribes, const World& world)
    : name_(table.get_string("name")), descname_(info.descname), tribes_(tribes) {
     log("┏━ Loading %s:\n", name_.c_str());
 
@@ -142,6 +142,15 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		refinedlog_ = add_special_ware(table.get_string("refinedlog"), tribes);
 		granite_ = add_special_ware(table.get_string("granite"), tribes);
 
+        // Verify that the preciousness has been set for all of the tribe's wares
+		for (const DescriptionIndex wi : wares()) {
+			if (get_ware_descr(wi)->preciousness(name()) == kInvalidWare) {
+				throw GameDataError("The ware '%s' needs to define a preciousness for tribe '%s'",
+				                    get_ware_descr(wi)->name().c_str(),
+				                    name().c_str());
+			}
+		}
+
         log("%ums\n", timer.ms_since_last_query());
         log("┃    Immovables: ");
 
@@ -172,6 +181,17 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 			resource_indicators_[resource] = resis;
 		};
+
+        // Verify the resource indicators
+        for (DescriptionIndex resource_index = 0; resource_index < world.get_nr_resources(); resource_index++) {
+            const ResourceDescription* res = world.get_resource(resource_index);
+            if (res->detectable()) {
+                // This function will throw an exception if this tribe doesn't have a high enough resource indicator for this resource
+                get_resource_indicator(res, res->max_amount());
+            }
+        }
+        // For the "none" indicator
+        get_resource_indicator(nullptr, 0);
 
 
         log("%ums\n", timer.ms_since_last_query());
@@ -229,6 +249,39 @@ TribeDescr::TribeDescr(const LuaTable& table,
 
 		port_ = add_special_building(table.get_string("port"), tribes);
 		barracks_ = add_special_building(table.get_string("barracks"), tribes);
+
+        // Calculate building properties that have circular dependencies
+        for (DescriptionIndex i : buildings_) {
+            BuildingDescr* building_descr = tribes.get_mutable_building_descr(i);
+
+            // Add consumers and producers to wares.
+            if (upcast(ProductionSiteDescr, de, building_descr)) {
+                for (const auto& ware_amount : de->input_wares()) {
+                    assert(has_ware(ware_amount.first));
+                    tribes.get_mutable_ware_descr(ware_amount.first)->add_consumer(i);
+                }
+                for (const DescriptionIndex& wareindex : de->output_ware_types()) {
+                    assert(has_ware(wareindex));
+                    tribes.get_mutable_ware_descr(wareindex)->add_producer(i);
+                }
+                for (const auto& job : de->working_positions()) {
+                    assert(has_worker(job.first));
+                    tribes.get_mutable_worker_descr(job.first)->add_employer(i);
+                }
+            }
+
+            // Register which buildings buildings can have been enhanced from
+            const DescriptionIndex& enhancement = building_descr->enhancement();
+            assert(has_building(enhancement));
+            tribes.get_mutable_building_descr(enhancement)->set_enhanced_from(i);
+        }
+
+        log("%ums\n", timer.ms_since_last_query());
+        log("┃    Fit UI: ");
+
+        // Resize the configuration of our wares if they won't fit in the current window (12 = info label size).
+        int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
+        resize_ware_orders(number);
 
         log("%ums\n", timer.ms_since_last_query());
 	} catch (const GameDataError& e) {
@@ -553,4 +606,68 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename, Tribe
 		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
 	}
 }
+
+// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
+void TribeDescr::calculate_trainingsites_proportions(Tribes& tribes) {
+    unsigned int trainingsites_without_percent = 0;
+    int used_percent = 0;
+    std::vector<BuildingDescr*> traingsites_with_percent;
+    for (const DescriptionIndex& index : trainingsites()) {
+        BuildingDescr* descr = tribes.get_mutable_building_descr(index);
+        if (descr->hints().trainingsites_max_percent() == 0) {
+            ++trainingsites_without_percent;
+        } else {
+            used_percent += descr->hints().trainingsites_max_percent();
+            traingsites_with_percent.push_back(descr);
+        }
+    }
+
+    log("%s trainingsites: We have used up %d%% on %" PRIuS " sites, there are %d without\n",
+        name().c_str(), used_percent, traingsites_with_percent.size(),
+        trainingsites_without_percent);
+
+    // Adjust used_percent if we don't have at least 5% for each remaining trainingsite
+    const float limit = 100 - trainingsites_without_percent * 5;
+    if (used_percent > limit) {
+        const int deductme = (used_percent - limit) / traingsites_with_percent.size();
+        used_percent = 0;
+        for (BuildingDescr* descr : traingsites_with_percent) {
+            descr->set_hints_trainingsites_max_percent(descr->hints().trainingsites_max_percent() -
+                                                       deductme);
+            used_percent += descr->hints().trainingsites_max_percent();
+        }
+        log("%s trainingsites: Used percent was adjusted to %d%%\n", name().c_str(),
+            used_percent);
+    }
+
+    // Now adjust for trainingsites that didn't have their max_percent set
+    if (trainingsites_without_percent > 0) {
+        int percent_to_use = std::ceil((100 - used_percent) / trainingsites_without_percent);
+        // We sometimes get below 100% in spite of the ceil call above.
+        // A total sum a bit above 100% is fine though, so we increment until it's big enough.
+        while ((used_percent + percent_to_use * trainingsites_without_percent) < 100) {
+            ++percent_to_use;
+        }
+        log("%s trainingsites: Assigning %d%% to each of the remaining %d sites\n",
+            name().c_str(), percent_to_use, trainingsites_without_percent);
+        if (percent_to_use < 1) {
+            throw GameDataError(
+               "%s: Training sites without predefined proportions add up to < 1%% and "
+               "will never be built: %d",
+               name().c_str(), used_percent);
+        }
+        for (const DescriptionIndex& index : trainingsites()) {
+            BuildingDescr* descr = tribes.get_mutable_building_descr(index);
+            if (descr->hints().trainingsites_max_percent() == 0) {
+                descr->set_hints_trainingsites_max_percent(percent_to_use);
+                used_percent += percent_to_use;
+            }
+        }
+    }
+    if (used_percent < 100) {
+        throw GameDataError("%s: Final training sites proportions add up to < 100%%: %d",
+                            name().c_str(), used_percent);
+    }
 }
+
+} // namespace Widelands

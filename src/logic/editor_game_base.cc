@@ -191,33 +191,6 @@ void EditorGameBase::allocate_player_maps() {
 }
 
 /**
- * Load and prepare detailed game data.
- * This happens once just after the host has started the game and before the
- * graphics are loaded.
- */
-void EditorGameBase::postload() {
-	// Postload tribes
-	assert(tribes_);
-	tribes_->postload();
-
-	for (DescriptionIndex i = 0; i < tribes_->nrtribes(); i++) {
-		const TribeDescr* tribe = tribes_->get_tribe_descr(i);
-		for (DescriptionIndex j = 0; j < world_->get_nr_resources(); j++) {
-			const ResourceDescription* res = world_->get_resource(j);
-			if (res->detectable()) {
-				// This function will throw an exception if this tribe doesn't
-				// have a high enough resource indicator for this resource
-				tribe->get_resource_indicator(res, res->max_amount());
-			}
-		}
-		// For the "none" indicator
-		tribe->get_resource_indicator(nullptr, 0);
-	}
-
-	// TODO(unknown): postload players? (maybe)
-}
-
-/**
  * Load all graphics.
  * This function needs to be called once at startup when the graphics system is ready.
  * If the graphics system is to be replaced at runtime, the function must be called after that has

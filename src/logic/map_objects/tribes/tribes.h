@@ -87,7 +87,9 @@ public:
 	const ImmovableDescr* get_immovable_descr(DescriptionIndex immovable_index) const;
 	const ShipDescr* get_ship_descr(DescriptionIndex ship_index) const;
 	const WareDescr* get_ware_descr(DescriptionIndex ware_index) const;
+    WareDescr* get_mutable_ware_descr(DescriptionIndex ware_index) const;
 	const WorkerDescr* get_worker_descr(DescriptionIndex worker_index) const;
+    WorkerDescr* get_mutable_worker_descr(DescriptionIndex worker_index) const;
 	const TribeDescr* get_tribe_descr(DescriptionIndex tribe_index) const;
 
 	void set_ware_type_has_demand_check(DescriptionIndex ware_index,
@@ -121,15 +123,9 @@ public:
 
 	/// Load tribes' graphics
 	void load_graphics();
-
-	/// Complete the Description objects' information with data from other Description objects.
-	void postload();
-
 private:
     /// Load the map object type for the given 'object_name' that has been registered previously with 'register_object'
     void load_object(const std::string& object_name);
-
-	void postload_calculate_trainingsites_proportions();
 
 	std::unique_ptr<DescriptionMaintainer<BuildingDescr>> buildings_;
 	std::unique_ptr<DescriptionMaintainer<ImmovableDescr>> immovables_;

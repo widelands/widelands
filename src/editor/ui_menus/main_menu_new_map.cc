@@ -150,7 +150,6 @@ void MainMenuNewMap::clicked_create_map() {
 	   list_.get_selected(), _("No Name"),
 	   g_options.pull_section("global").get_string("realname", pgettext("author_name", "Unknown")));
 
-	egbase.postload();
 	egbase.load_graphics(loader_ui);
 
 	map->recalc_whole_map(egbase.world());

@@ -113,7 +113,6 @@ public:
 
 	// loading stuff
 	void allocate_player_maps();
-	virtual void postload();
 	void load_graphics(UI::ProgressWindow& loader_ui);
 	virtual void cleanup_for_load();
 

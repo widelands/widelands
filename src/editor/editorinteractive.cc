@@ -632,8 +632,6 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 			}
 		}
 
-		egbase.postload();
-
 		eia.start();
 
 		if (!script_to_run.empty()) {

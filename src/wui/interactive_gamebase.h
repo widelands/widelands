@@ -98,7 +98,7 @@ public:
 	/// For the game host. Show a window and ask the host player what to do with the tribe of the
 	/// leaving client.
 	bool show_game_client_disconnected();
-	void postload() override;
+	void postload();
 	void start() override;
 
 protected:

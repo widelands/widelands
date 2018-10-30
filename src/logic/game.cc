@@ -402,8 +402,7 @@ bool Game::run_load_game(const std::string& filename, const std::string& script_
  * AI and the \ref InteractivePlayer if any).
  */
 void Game::postload() {
-	EditorGameBase::postload();
-	get_ibase()->postload();
+	get_igbase()->postload();
 }
 
 /**

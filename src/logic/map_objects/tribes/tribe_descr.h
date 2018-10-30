@@ -35,6 +35,7 @@
 #include "logic/map_objects/tribes/tribes.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "logic/map_objects/world/world.h"
 
 namespace Widelands {
 
@@ -69,7 +70,7 @@ class TribeDescr {
 public:
 	TribeDescr(const LuaTable& table,
 	           const Widelands::TribeBasicInfo& info,
-	           Tribes& tribes);
+	           Tribes& tribes, const World& world);
 
 	const std::string& name() const;
 	const std::string& descname() const;
@@ -178,6 +179,8 @@ private:
 	DescriptionIndex add_special_building(const std::string& buildingname, Tribes& tribes);
 	// Helper function to identify special wares across tribes (iron ore etc.)
 	DescriptionIndex add_special_ware(const std::string& warename, Tribes& tribes);
+    // Helper function to calculate trainingsites proportions for the AI
+    void calculate_trainingsites_proportions(Tribes& tribes);
 
 	const std::string name_;
 	const std::string descname_;
