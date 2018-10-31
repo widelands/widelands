@@ -1,3 +1,3 @@
-names = {
+return {
    "barbarians_warmill"
 }

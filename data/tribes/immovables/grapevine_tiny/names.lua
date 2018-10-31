@@ -1,3 +1,3 @@
-names = {
+return {
    "grapevine_tiny"
 }

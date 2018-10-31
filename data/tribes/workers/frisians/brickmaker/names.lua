@@ -1,3 +1,3 @@
-names = {
+return {
    "frisians_brickmaker"
 }

@@ -1,3 +1,3 @@
-names = {
+return {
    "hook_pole"
 }

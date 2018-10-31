@@ -1,3 +1,3 @@
-names = {
+return {
    "iron_ore"
 }

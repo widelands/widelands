@@ -1,4 +1,4 @@
-names = {
+return {
    "barbarians_resi_none",
    "barbarians_resi_water",
    "barbarians_resi_coal_1",

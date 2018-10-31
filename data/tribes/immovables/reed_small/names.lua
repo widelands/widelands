@@ -1,3 +1,3 @@
-names = {
+return {
    "reed_small"
 }

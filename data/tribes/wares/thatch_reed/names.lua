@@ -1,3 +1,3 @@
-names = {
+return {
    "thatch_reed"
 }

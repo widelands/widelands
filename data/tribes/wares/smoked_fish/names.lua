@@ -1,3 +1,3 @@
-names = {
+return {
    "smoked_fish"
 }

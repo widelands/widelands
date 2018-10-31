@@ -1,3 +1,3 @@
-names = {
+return {
    "felling_ax"
 }

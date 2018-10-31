@@ -1,3 +1,3 @@
-names = {
+return {
    "atlanteans_fishers_house"
 }

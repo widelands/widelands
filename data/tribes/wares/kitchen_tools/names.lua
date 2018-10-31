@@ -1,3 +1,3 @@
-names = {
+return {
    "kitchen_tools"
 }

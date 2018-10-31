@@ -1,4 +1,4 @@
-names = {
+return {
    "berry_bush_raspberry_tiny",
    "berry_bush_raspberry_small",
    "berry_bush_raspberry_medium",

@@ -1,3 +1,3 @@
-names = {
+return {
    "milking_tongs"
 }

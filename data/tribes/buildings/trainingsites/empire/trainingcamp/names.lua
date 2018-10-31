@@ -1,3 +1,3 @@
-names = {
+return {
    "empire_trainingcamp"
 }
