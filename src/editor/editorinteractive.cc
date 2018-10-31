@@ -54,17 +54,6 @@
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 
-namespace {
-using Widelands::Building;
-
-// Load all tribes from disk.
-void load_all_tribes(Widelands::EditorGameBase* egbase, UI::ProgressWindow* loader_ui) {
-	loader_ui->step(_("Loading tribes"));
-	egbase->tribes();
-}
-
-}  // namespace
-
 EditorInteractive::EditorInteractive(Widelands::EditorGameBase& e)
    : InteractiveBase(e, g_options.pull_section("global")),
      need_save_(false),
@@ -174,20 +163,17 @@ void EditorInteractive::load(const std::string& filename) {
 
 	GameTips editortips(loader_ui, tipstext);
 
-	load_all_tribes(&egbase(), &loader_ui);
-
 	// Create the players. TODO(SirVer): this must be managed better
-	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
-	loader_ui.step(_("Creating players"));
+	// TODO(GunChleoc): Ugly - we only need this for the test suite right now. We can also get rid of loading the tribes when we get rid of this.
 	iterate_player_numbers(p, map->get_nrplayers()) {
 		if (!map->get_scenario_player_tribe(p).empty()) {
+            loader_ui.step((boost::format(_("Creating player %d")) % static_cast<unsigned int>(p)).str());
 			egbase().add_player(
 			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
 		}
 	}
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
-	egbase().load_graphics(loader_ui);
 	map_changed(MapWas::kReplaced);
 }
 
@@ -622,9 +608,9 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				                    /** TRANSLATORS: Map author name when it hasn't been set yet */
 				                    pgettext("author_name", "Unknown")));
 
-				load_all_tribes(&egbase, &loader_ui);
+                loader_ui.step(_("Loading tribes"));
+                egbase.tribes();
 
-				egbase.load_graphics(loader_ui);
 				loader_ui.step(std::string());
 			} else {
 				loader_ui.step((boost::format(_("Loading map “%s”…")) % filename).str());

@@ -37,6 +37,16 @@ Tribes::Tribes(LuaInterface* lua)
      workers_(new DescriptionMaintainer<WorkerDescr>()),
      tribes_(new DescriptionMaintainer<TribeDescr>()),
      lua_(lua) {
+
+    // NOCOM create a test scenario that will load all tribes
+
+    // Register tribe names
+    for (const TribeBasicInfo& tribeinfo : Widelands::get_all_tribeinfos()) {
+        register_object(tribeinfo.name, tribeinfo.script);
+    }
+
+    // Walk tribes directory and register objects
+    register_directory("tribes");
 }
 
 Tribes::~Tribes() {
@@ -203,9 +213,24 @@ void Tribes::set_worker_type_has_demand_check(DescriptionIndex workerindex) cons
 
 // ************************ Loading *************************
 
-void Tribes::register_object(const LuaTable& table) {
-    const std::string name(table.get_string("name"));
-    const std::string script_path(table.get_string("script"));
+// Walk tribes directory and register objects
+void Tribes::register_directory(const std::string& dirname) {
+    FilenameSet files = g_fs->list_directory(dirname);
+    for (const std::string& file : files) {
+        if (g_fs->is_directory(file)) {
+            register_directory(file);
+        } else {
+            if (strcmp(g_fs->fs_filename(file.c_str()), "names.lua") == 0) {
+                std::unique_ptr<LuaTable> names_table = lua_->run_script(file);
+                for (const std::string& object_name : names_table->array_entries<std::string>()) {
+                    register_object(object_name, g_fs->fs_dirname(file) + "init.lua");
+                }
+            }
+        }
+    }
+}
+
+void Tribes::register_object(const std::string& name, const std::string& script_path) {
     if (registered_tribe_objects_.count(name) == 1) {
         throw GameDataError("Tribes::register_object: Attempt to register object\n   name: '%s'\n   script: '%s'\nbut the object already exists", name.c_str(), script_path.c_str());
     }
@@ -215,16 +240,20 @@ void Tribes::register_object(const LuaTable& table) {
     registered_tribe_objects_.insert(std::make_pair(name, script_path));
 }
 
+void Tribes::register_object(const LuaTable& table) {
+    register_object(table.get_string("name"), table.get_string("script"));
+}
+
 void Tribes::add_tribe_object_type(const LuaTable& table, EditorGameBase& egbase, MapObjectType type) {
-    const std::string object_name(table.get_string("name"));
-    const std::string msgctxt(table.get_string("msgctxt"));
-    const std::string object_descname = pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
+    i18n::Textdomain td("tribes");
+    const std::string& object_name = table.get_string("name");
+    const std::string& msgctxt = table.get_string("msgctxt");
+    const std::string& object_descname = pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str());
 
     // Register as in progress
     tribe_objects_being_loaded_.insert(object_name);
 
     // Add
-    i18n::Textdomain td("tribes");
     switch (type) {
     case MapObjectType::CARRIER:
         workers_->add(new CarrierDescr(object_descname, table, egbase));
@@ -278,13 +307,22 @@ void Tribes::add_tribe_object_type(const LuaTable& table, EditorGameBase& egbase
     tribe_objects_being_loaded_.erase(tribe_objects_being_loaded_.find(object_name));
 }
 
-void Tribes::add_tribe(const LuaTable& table) {
+void Tribes::add_tribe(const LuaTable& table, const World& world) {
 	const std::string name = table.get_string("name");
+    // Register as in progress
+    tribe_objects_being_loaded_.insert(name);
+
 	if (Widelands::tribe_exists(name)) {
-		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), *this));
+		tribes_->add(new TribeDescr(table, Widelands::get_tribeinfo(name), *this, world));
 	} else {
-		throw GameDataError("The tribe '%s'' has no preload file.", name.c_str());
+		throw GameDataError("The tribe '%s'' is not listed in data/tribes/preload.lua.", name.c_str());
 	}
+
+    // Update status
+    loaded_tribe_objects_.insert(name);
+
+    // Mark as done
+    tribe_objects_being_loaded_.erase(tribe_objects_being_loaded_.find(name));
 }
 
 void Tribes::add_custom_building(const LuaTable& table) {
@@ -318,6 +356,15 @@ void Tribes::load_object(const std::string& object_name) {
 
     // Load it
     lua_->run_script(registered_tribe_objects_.at(object_name));
+}
+
+DescriptionIndex Tribes::load_tribe(const std::string& tribename) {
+    try {
+        load_object(tribename);
+    } catch (WException& e) {
+        throw GameDataError("Error while loading tribe '%s': %s", tribename.c_str(), e.what());
+    }
+    return safe_tribe_index(tribename);
 }
 
 DescriptionIndex Tribes::load_building(const std::string& buildingname) {
@@ -363,18 +410,6 @@ DescriptionIndex Tribes::load_worker(const std::string& workername) {
         throw GameDataError("Error while loading worker type '%s': %s", workername.c_str(), e.what());
     }
     return safe_worker_index(workername);
-}
-
-void Tribes::load_graphics() {
-	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
-		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
-		for (const std::string& texture_path : tribe->normal_road_paths()) {
-			tribe->add_normal_road_texture(g_gr->images().get(texture_path));
-		}
-		for (const std::string& texture_path : tribe->busy_road_paths()) {
-			tribe->add_busy_road_texture(g_gr->images().get(texture_path));
-		}
-	}
 }
 
 }  // namespace Widelands

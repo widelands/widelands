@@ -7,6 +7,7 @@
 -- This file contains all the units for a tribe.
 
 dirname = path.dirname(__file__)
+tribes = wl.Tribes()
 
 -- RST
 -- .. function:: new_tribe{table}

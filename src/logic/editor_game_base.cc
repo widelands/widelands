@@ -123,13 +123,6 @@ Tribes* EditorGameBase::mutable_tribes() {
 		// to tribes through this method already.
 		ScopedTimer timer("Loading the tribes took %ums");
 		tribes_.reset(new Tribes(lua_.get()));
-
-		try {
-			lua_->run_script("tribes/init.lua");
-		} catch (const WException& e) {
-			log("Could not read tribes information: %s", e.what());
-			throw;
-		}
 	}
 	return tribes_.get();
 }
@@ -188,18 +181,6 @@ void EditorGameBase::allocate_player_maps() {
 	iterate_players_existing(plnum, kMaxPlayers, *this, p) {
 		p->allocate_map();
 	}
-}
-
-/**
- * Load all graphics.
- * This function needs to be called once at startup when the graphics system is ready.
- * If the graphics system is to be replaced at runtime, the function must be called after that has
- * happened.
- */
-void EditorGameBase::load_graphics(UI::ProgressWindow& loader_ui) {
-	assert(tribes_);
-	loader_ui.step(_("Loading graphics"));
-	tribes_->load_graphics();
 }
 
 /**

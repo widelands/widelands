@@ -75,8 +75,10 @@ Player* PlayersManager::add_player(PlayerNumber const player_number,
 			number_of_players_--;
 		}
 	}
+
+    const DescriptionIndex tribe_index = egbase_.mutable_tribes()->load_tribe(tribe);
 	p = new Player(egbase_, player_number, initialization_index,
-	               *egbase_.tribes().get_tribe_descr(egbase_.tribes().tribe_index(tribe)), name);
+	               *egbase_.tribes().get_tribe_descr(tribe_index), name);
 	p->set_team_number(team);
 	if (player_number <= UserSettings::highest_playernum()) {
 		number_of_players_++;

@@ -1,4 +1,5 @@
 dirname = path.dirname(__file__)
+tribes = wl.Tribes()
 
 tribes:new_tribe {
    name = "empire",

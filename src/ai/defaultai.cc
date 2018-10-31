@@ -1533,8 +1533,8 @@ void DefaultAI::update_buildable_field(BuildableField& field) {
 		   map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
 		                       FindImmovableAttribute(tree_attr));
 
-		// Counting bushes nearby
-		int32_t const bush_attr = MapObjectDescr::get_attribute_id("ripe_bush");
+		// Counting bushes nearby. Only the Frisians have this, so we need to create the attribute if it doesn't exist.
+		int32_t const bush_attr = MapObjectDescr::get_attribute_id("ripe_bush", true);
 		field.bushes_nearby =
 		   map.find_immovables(Area<FCoords>(map.get_fcoords(field.coords), kProductionArea), nullptr,
 		                       FindImmovableAttribute(bush_attr));

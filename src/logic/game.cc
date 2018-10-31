@@ -218,9 +218,9 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	}
 
 	// We have to create the players here.
-	loader_ui.step(_("Creating players"));
 	PlayerNumber const nr_players = map().get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
+        loader_ui.step((boost::format(_("Creating player %d")) % static_cast<unsigned int>(p)).str());
 		add_player(p, 0, map().get_scenario_player_tribe(p), map().get_scenario_player_name(p));
 		get_player(p)->set_ai(map().get_scenario_player_ai(p));
 	}
@@ -268,11 +268,11 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 	if (!background.empty()) {
 		loader_ui->set_background(background);
 	}
-	loader_ui->step(_("Creating players"));
 
-	std::vector<PlayerSettings> shared;
+    std::vector<PlayerSettings> shared;
 	std::vector<uint8_t> shared_num;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
+        loader_ui->step((boost::format(_("Creating player %d")) % static_cast<unsigned int>(i + 1)).str());
 		const PlayerSettings& playersettings = settings.players[i];
 
 		if (playersettings.state == PlayerSettings::State::kClosed ||
@@ -436,6 +436,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		PlayerNumber const nr_players = map().get_nrplayers();
 		if (start_game_type == NewNonScenario) {
 			if (loader_ui) {
+                /** TRANSLATORS: All players (plural) */
 				loader_ui->step(_("Creating player infrastructure"));
 			}
 			iterate_players_existing(p, nr_players, *this, plr) {
@@ -513,8 +514,6 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 	}
 
 	sync_reset();
-
-	load_graphics(*loader_ui);
 
 #ifdef _WIN32
 	//  Clear the event queue before starting game because we don't want

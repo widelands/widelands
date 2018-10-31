@@ -778,6 +778,8 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
 	const Tribes& tribes = egbase.tribes();
 
+    // NOCOM use load_building on mutable tribes to allow arbitrary buildings.
+    // NOCOM same for saveloading then!
 	if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
 	}

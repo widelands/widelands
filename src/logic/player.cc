@@ -136,32 +136,20 @@ Player::Player(EditorGameBase& the_egbase,
      civil_blds_lost_(0),
      civil_blds_defeated_(0),
      ship_name_counter_(0),
-     fields_(nullptr),
-     allowed_worker_types_(the_egbase.tribes().nrworkers(), true),
-     allowed_building_types_(the_egbase.tribes().nrbuildings(), true),
-     current_produced_statistics_(the_egbase.tribes().nrwares()),
-     current_consumed_statistics_(the_egbase.tribes().nrwares()),
-     ware_productions_(the_egbase.tribes().nrwares()),
-     ware_consumptions_(the_egbase.tribes().nrwares()),
-     ware_stocks_(the_egbase.tribes().nrwares()) {
+     fields_(nullptr) {
 	set_name(name);
 
-	// Disallow workers that the player's tribe doesn't have.
-	for (size_t worker_index = 0; worker_index < allowed_worker_types_.size(); ++worker_index) {
-		if (!tribe().has_worker(static_cast<DescriptionIndex>(worker_index))) {
-			allowed_worker_types_[worker_index] = false;
-		}
+    init_statistics();
+
+	// Allow workers that the player's tribe has.
+	for (DescriptionIndex worker_index : tribe().workers()) {
+        allow_worker_type(worker_index, true);
 	}
 
-	// Disallow buildings that the player's tribe doesn't have and
-	// that aren't militarysites that the tribe could conquer.
-	for (size_t i = 0; i < allowed_building_types_.size(); ++i) {
-		const DescriptionIndex& building_index = static_cast<DescriptionIndex>(i);
-		const BuildingDescr& descr = *tribe().get_building_descr(building_index);
-		if (!tribe().has_building(building_index) && descr.type() != MapObjectType::MILITARYSITE) {
-			allowed_building_types_[i] = false;
-		}
-	}
+	// Allow buildings that the player's tribe has
+    for (DescriptionIndex building_index : tribe().buildings()) {
+        allow_building_type(building_index, true);
+    }
 
 	// Subscribe to NoteImmovables.
 	immovable_subscriber_ =
@@ -783,10 +771,24 @@ void Player::flagaction(Flag& flag) {
 	}
 }
 
+
+bool Player::is_worker_type_allowed(const DescriptionIndex& i) const {
+    return allowed_worker_types_.count(i) == 1;
+}
+
 void Player::allow_worker_type(DescriptionIndex const i, bool const allow) {
-	assert(i < static_cast<int>(allowed_worker_types_.size()));
-	assert(!allow || tribe().get_worker_descr(i)->is_buildable());
-	allowed_worker_types_[i] = allow;
+    if (allow) {
+        allowed_worker_types_.insert(i);
+    } else {
+        auto denyme = allowed_worker_types_.find(i);
+        if (denyme != allowed_worker_types_.end()) {
+            allowed_worker_types_.erase(denyme);
+        }
+    }
+}
+
+bool Player::is_building_type_allowed(const DescriptionIndex& i) const {
+    return allowed_building_types_.count(i) == 1 || (egbase_.tribes().get_building_descr(i)->type() == MapObjectType::MILITARYSITE && !tribe_.has_building(i));
 }
 
 /*
@@ -795,8 +797,14 @@ void Player::allow_worker_type(DescriptionIndex const i, bool const allow) {
  * Disable or enable a building for a player
  */
 void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
-	assert(i < allowed_building_types_.size());
-	allowed_building_types_[i] = allow;
+    if (allow) {
+        allowed_building_types_.insert(i);
+    } else {
+        auto denyme = allowed_building_types_.find(i);
+        if (denyme != allowed_building_types_.end()) {
+            allowed_building_types_.erase(denyme);
+        }
+    }
 }
 
 /*
@@ -1165,31 +1173,36 @@ void Player::hide_or_reveal_field(const uint32_t gametime,
  * Called by Game::think to sample statistics data in regular intervals.
  */
 void Player::sample_statistics() {
-	assert(ware_productions_.size() == egbase().tribes().nrwares());
-	assert(ware_consumptions_.size() == egbase().tribes().nrwares());
-	assert(ware_stocks_.size() == egbase().tribes().nrwares());
+    assert(current_consumed_statistics_.size() == tribe().wares().size());
+    assert(current_produced_statistics_.size() == tribe().wares().size());
+	assert(ware_productions_.size() == tribe().wares().size());
+	assert(ware_consumptions_.size() == tribe().wares().size());
+	assert(ware_stocks_.size() == tribe().wares().size());
 
 	// Calculate stocks
-	std::vector<uint32_t> stocks(egbase().tribes().nrwares());
+	std::map<DescriptionIndex, Quantity> stocks;
+    for (DescriptionIndex idx : tribe().wares()) {
+        stocks.insert(std::make_pair(idx, 0U));
+    }
 
 	for (const auto& economy : economies()) {
 		for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
 			const Widelands::WareList& wares = warehouse->get_wares();
-			for (size_t id = 0; id < stocks.size(); ++id) {
-				stocks[id] += wares.stock(DescriptionIndex(id));
+            for (DescriptionIndex idx : tribe().wares()) {
+				stocks.at(idx) += wares.stock(idx);
 			}
 		}
 	}
 
 	// Update statistics
-	for (uint32_t i = 0; i < ware_productions_.size(); ++i) {
-		ware_productions_[i].push_back(current_produced_statistics_[i]);
-		current_produced_statistics_[i] = 0;
+    for (DescriptionIndex idx : tribe().wares()) {
+		ware_productions_.at(idx).push_back(current_produced_statistics_.at(idx));
+		current_produced_statistics_.at(idx) = 0;
 
-		ware_consumptions_[i].push_back(current_consumed_statistics_[i]);
-		current_consumed_statistics_[i] = 0;
+		ware_consumptions_.at(idx).push_back(current_consumed_statistics_.at(idx));
+		current_consumed_statistics_.at(idx) = 0;
 
-		ware_stocks_[i].push_back(stocks[i]);
+		ware_stocks_.at(idx).push_back(stocks.at(idx));
 	}
 }
 
@@ -1197,19 +1210,17 @@ void Player::sample_statistics() {
  * A ware was produced. Update the corresponding statistics.
  */
 void Player::ware_produced(DescriptionIndex const wareid) {
-	assert(ware_productions_.size() == egbase().tribes().nrwares());
+    assert(tribe().has_ware(wareid));
 	assert(egbase().tribes().ware_exists(wareid));
-	++current_produced_statistics_[wareid];
+	++current_produced_statistics_.at(wareid);
 }
 
 /**
  * Return count of produced wares for ware index
  */
 uint32_t Player::get_current_produced_statistics(uint8_t const wareid) {
-	assert(wareid < egbase().tribes().nrwares());
-	assert(wareid < ware_productions_.size());
-	assert(wareid < current_produced_statistics_.size());
-	uint32_t sum = current_produced_statistics_[wareid];
+    assert(tribe().has_ware(wareid));
+	uint32_t sum = current_produced_statistics_.at(wareid);
 	for (const auto stat : *get_ware_production_statistics(wareid)) {
 		sum += stat;
 	}
@@ -1224,10 +1235,8 @@ uint32_t Player::get_current_produced_statistics(uint8_t const wareid) {
  * \param count the number of consumed wares
  */
 void Player::ware_consumed(DescriptionIndex const wareid, uint8_t const count) {
-	assert(ware_consumptions_.size() == egbase().tribes().nrwares());
-	assert(egbase().tribes().ware_exists(wareid));
-
-	current_consumed_statistics_[wareid] += count;
+	assert(tribe().has_ware(wareid));
+	current_consumed_statistics_.at(wareid) += count;
 }
 
 /**
@@ -1235,8 +1244,8 @@ void Player::ware_consumed(DescriptionIndex const wareid, uint8_t const count) {
  */
 const std::vector<uint32_t>*
 Player::get_ware_production_statistics(DescriptionIndex const ware) const {
-	assert(ware < static_cast<int>(ware_productions_.size()));
-	return &ware_productions_[ware];
+    assert(tribe().has_ware(ware));
+	return &ware_productions_.at(ware);
 }
 
 /**
@@ -1244,16 +1253,13 @@ Player::get_ware_production_statistics(DescriptionIndex const ware) const {
  */
 const std::vector<uint32_t>*
 Player::get_ware_consumption_statistics(DescriptionIndex const ware) const {
-
-	assert(ware < static_cast<int>(ware_consumptions_.size()));
-
-	return &ware_consumptions_[ware];
+    assert(tribe().has_ware(ware));
+	return &ware_consumptions_.at(ware);
 }
 
 const std::vector<uint32_t>* Player::get_ware_stock_statistics(DescriptionIndex const ware) const {
-	assert(ware < static_cast<int>(ware_stocks_.size()));
-
-	return &ware_stocks_[ware];
+    assert(tribe().has_ware(ware));
+	return &ware_stocks_.at(ware);
 }
 
 const Player::BuildingStatsVector&
@@ -1351,18 +1357,36 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 	ship_name_counter_ = fr.unsigned_32();
 }
 
+void Player::init_statistics() {
+    current_produced_statistics_.clear();
+    current_consumed_statistics_.clear();
+    ware_consumptions_.clear();
+    ware_productions_.clear();
+    ware_stocks_.clear();
+
+    for (DescriptionIndex ware_index : tribe().wares()) {
+        current_produced_statistics_.insert(std::make_pair(ware_index, 0U));
+        current_consumed_statistics_.insert(std::make_pair(ware_index, 0U));
+        ware_consumptions_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
+        ware_productions_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
+        ware_stocks_.insert(std::make_pair(ware_index, std::vector<Quantity>()));
+	}
+}
+
 /**
  * Read statistics data from a file.
  *
  * \param fr source stream
  */
 void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
+    init_statistics();
 	uint16_t nr_wares = fr.unsigned_16();
 	size_t nr_entries = fr.unsigned_16();
+    assert(tribe().wares() >= nr_wares);
 
 	// Stats are saved as a single string to reduce number of hard disk write operations
 	const auto parse_stats = [nr_entries](
-	   std::vector<std::vector<uint32_t>>* stats, const DescriptionIndex ware_index,
+	   StatisticsMap* stats, const DescriptionIndex ware_index,
 	   const std::string& stats_string, const std::string& description) {
 		if (!stats_string.empty()) {
 			std::vector<std::string> stats_vector;
@@ -1381,8 +1405,9 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 		}
 	};
 
-	for (uint32_t i = 0; i < current_produced_statistics_.size(); ++i)
-		ware_productions_[i].resize(nr_entries);
+    for (DescriptionIndex idx: tribe().wares()) {
+		ware_productions_[idx].resize(nr_entries);
+    }
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = fr.c_string();
@@ -1392,10 +1417,10 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 			continue;
 		}
 
-		current_produced_statistics_[idx] = fr.unsigned_32();
+		current_produced_statistics_.insert(std::make_pair(idx, fr.unsigned_32()));
 		if (packet_version < 22) {
 			for (uint32_t j = 0; j < nr_entries; ++j) {
-				ware_productions_[idx][j] = fr.unsigned_32();
+				ware_productions_.at(idx).at(j) = fr.unsigned_32();
 			}
 		} else {
 			parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
@@ -1405,9 +1430,11 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	// Read consumption statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
+    assert(tribe().wares() >= nr_wares);
 
-	for (uint32_t i = 0; i < current_consumed_statistics_.size(); ++i)
-		ware_consumptions_[i].resize(nr_entries);
+    for (DescriptionIndex idx: tribe().wares()) {
+		ware_consumptions_[idx].resize(nr_entries);
+    }
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = fr.c_string();
@@ -1418,11 +1445,11 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 			continue;
 		}
 
-		current_consumed_statistics_[idx] = fr.unsigned_32();
+		current_consumed_statistics_.insert(std::make_pair(idx, fr.unsigned_32()));
 		// TODO(GunChleoc): Get rid of this savegame compatibility code after build 21
 		if (packet_version < 22) {
 			for (uint32_t j = 0; j < nr_entries; ++j) {
-				ware_consumptions_[idx][j] = fr.unsigned_32();
+				ware_consumptions_.at(idx).at(j) = fr.unsigned_32();
 			}
 		} else {
 			parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
@@ -1432,9 +1459,11 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	// Read stock statistics
 	nr_wares = fr.unsigned_16();
 	nr_entries = fr.unsigned_16();
+    assert(tribe().wares() >= nr_wares);
 
-	for (uint32_t i = 0; i < ware_stocks_.size(); ++i)
-		ware_stocks_[i].resize(nr_entries);
+    for (DescriptionIndex idx: tribe().wares()) {
+		ware_stocks_[idx].resize(nr_entries);
+    }
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
 		const std::string name = fr.c_string();
@@ -1446,7 +1475,7 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 
 		if (packet_version < 22) {
 			for (uint32_t j = 0; j < nr_entries; ++j) {
-				ware_stocks_[idx][j] = fr.unsigned_32();
+				ware_stocks_.at(idx).at(j) = fr.unsigned_32();
 			}
 		} else {
 			parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
@@ -1455,10 +1484,10 @@ void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 
 	// All statistics should have the same size
 	assert(ware_productions_.size() == ware_consumptions_.size());
-	assert(ware_productions_[0].size() == ware_consumptions_[0].size());
+	assert(ware_productions_.at(0).size() == ware_consumptions_.at(0).size());
 
 	assert(ware_productions_.size() == ware_stocks_.size());
-	assert(ware_productions_[0].size() == ware_stocks_[0].size());
+	assert(ware_productions_.at(0).size() == ware_stocks_.at(0).size());
 }
 
 /**
@@ -1478,14 +1507,14 @@ void Player::write_remaining_shipnames(FileWrite& fw) const {
 void Player::write_statistics(FileWrite& fw) const {
 	// Save stats as a single string to reduce number of hard disk write operations
 	const auto write_stats = [&fw](
-	   const std::vector<std::vector<uint32_t>>& stats, const DescriptionIndex ware_index) {
+	   const StatisticsMap& stats, const DescriptionIndex ware_index) {
 		std::ostringstream oss("");
-		const int sizem = stats[ware_index].size() - 1;
+		const int sizem = stats.at(ware_index).size() - 1;
 		if (sizem >= 0) {
 			for (int i = 0; i < sizem; ++i) {
-				oss << stats[ware_index][i] << "|";
+				oss << stats.at(ware_index).at(i) << "|";
 			}
-			oss << stats[ware_index][sizem];
+			oss << stats.at(ware_index).at(sizem);
 		}
 		fw.c_string(oss.str());
 	};
@@ -1496,27 +1525,27 @@ void Player::write_statistics(FileWrite& fw) const {
 
 	// Write produce statistics
 	fw.unsigned_16(nr_wares);
-	fw.unsigned_16(ware_productions_[0].size());
+	fw.unsigned_16(ware_productions_.at(0).size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());
-		fw.unsigned_32(current_produced_statistics_[ware_index]);
+		fw.unsigned_32(current_produced_statistics_.at(ware_index));
 		write_stats(ware_productions_, ware_index);
 	}
 
 	// Write consume statistics
 	fw.unsigned_16(nr_wares);
-	fw.unsigned_16(ware_consumptions_[0].size());
+	fw.unsigned_16(ware_consumptions_.at(0).size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());
-		fw.unsigned_32(current_consumed_statistics_[ware_index]);
+		fw.unsigned_32(current_consumed_statistics_.at(ware_index));
 		write_stats(ware_consumptions_, ware_index);
 	}
 
 	// Write stock statistics
 	fw.unsigned_16(nr_wares);
-	fw.unsigned_16(ware_stocks_[0].size());
+	fw.unsigned_16(ware_stocks_.at(0).size());
 
 	for (const DescriptionIndex ware_index : tribe_wares) {
 		fw.c_string(tribes.get_ware_descr(ware_index)->name());

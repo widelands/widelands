@@ -856,7 +856,8 @@ int LuaTribes::new_worker_type(lua_State* L) {
 
 		:returns: :const:`nil`
 */
-// NOCOM documentation
+// NOCOM documentation.
+// NOCOM If it's not needed for custom units (TBD), delete this and the corresponding function in Tribes
 int LuaTribes::register_object(lua_State* L) {
 	if (lua_gettop(L) != 2) {
 		report_error(L, "Takes only one argument.");
@@ -888,7 +889,8 @@ int LuaTribes::new_tribe(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_tribe(table);
+        EditorGameBase& egbase = get_egbase(L);
+		egbase.mutable_tribes()->add_tribe(table, egbase.world());
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

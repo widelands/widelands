@@ -122,6 +122,13 @@ void TribeDescr::load_frontiers_flags_roads(const LuaTable& table) {
     };
     load_roads("normal", &normal_road_paths_);
     load_roads("busy", &busy_road_paths_);
+
+    for (const std::string& texture_path : normal_road_paths()) {
+        add_normal_road_texture(g_gr->images().get(texture_path));
+    }
+    for (const std::string& texture_path : busy_road_paths()) {
+        add_busy_road_texture(g_gr->images().get(texture_path));
+    }
 }
 
 void TribeDescr::load_ships(const LuaTable& table, Tribes& tribes) {
@@ -278,6 +285,7 @@ void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes)
     // Calculate building properties that have circular dependencies
     for (DescriptionIndex i : buildings_) {
         BuildingDescr* building_descr = tribes.get_mutable_building_descr(i);
+        assert(building_descr != nullptr);
 
         // Add consumers and producers to wares.
         if (upcast(ProductionSiteDescr, de, building_descr)) {
@@ -296,9 +304,11 @@ void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes)
         }
 
         // Register which buildings buildings can have been enhanced from
+        // NOCOM shift to BuildingDescr
         const DescriptionIndex& enhancement = building_descr->enhancement();
-        assert(has_building(enhancement));
-        tribes.get_mutable_building_descr(enhancement)->set_enhanced_from(i);
+        if (enhancement != INVALID_INDEX) {
+            tribes.get_mutable_building_descr(enhancement)->set_enhanced_from(i);
+        }
     }
 }
 

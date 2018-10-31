@@ -105,11 +105,13 @@ public:
     void add_tribe_object_type(const LuaTable& table, EditorGameBase& egbase, MapObjectType type);
 
     /// Adds a specific tribe's configuration.
-    void add_tribe(const LuaTable& table);
+    void add_tribe(const LuaTable& table, const World& world);
 
     /// Adds a custom scenario building.
     void add_custom_building(const LuaTable& table);
 
+    /// Load a tribe that has been registered previously with 'register_object'
+    DescriptionIndex load_tribe(const std::string& tribename);
     /// Load a building that has been registered previously with 'register_object'
     DescriptionIndex load_building(const std::string& buildingname);
     /// Load an immovable that has been registered previously with 'register_object'
@@ -120,10 +122,11 @@ public:
     DescriptionIndex load_ware(const std::string& warename);
     /// Load a worker that has been registered previously with 'register_object'
     DescriptionIndex load_worker(const std::string& workername);
-
-	/// Load tribes' graphics
-	void load_graphics();
 private:
+    /// Search a directory for 'names.lua' files and register their 'init.lua' scripts
+    void register_directory (const std::string& dirname);
+    /// Map a map object's name to its init script so that we can load it when we want it.
+    void register_object(const std::string& name, const std::string& script_path);
     /// Load the map object type for the given 'object_name' that has been registered previously with 'register_object'
     void load_object(const std::string& object_name);
 

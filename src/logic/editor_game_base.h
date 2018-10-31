@@ -113,7 +113,6 @@ public:
 
 	// loading stuff
 	void allocate_player_maps();
-	void load_graphics(UI::ProgressWindow& loader_ui);
 	virtual void cleanup_for_load();
 
 	void set_road(const FCoords&, uint8_t direction, uint8_t roadtype);

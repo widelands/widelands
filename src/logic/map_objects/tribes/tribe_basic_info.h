@@ -49,15 +49,17 @@ struct TribeBasicInfo {
 	explicit TribeBasicInfo(std::unique_ptr<LuaTable> table);
 
 	/// Internal name to reference this tribe
-	std::string name;
+	const std::string name;
+    /// Filepath of the tribe's icon
+	const std::string icon;
+    /// Filepath of the tribe's loading script
+	const std::string script;
 	/// Who designed this tribe
 	std::string author;
 	/// Name to present to the user
 	std::string descname;
 	/// Basic information about this tribe
 	std::string tooltip;
-	/// Filepath of the tribe's icon
-	std::string icon;
 
 	std::vector<Initialization> initializations;
 };
