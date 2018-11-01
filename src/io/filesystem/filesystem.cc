@@ -306,7 +306,7 @@ std::string FileSystem::canonicalize_name(std::string path) const {
 	std::list<std::string>::iterator i;
 
 #ifdef _WIN32
-	// remove all slashes with backslashes so following can work.
+	// replace all slashes with backslashes so following can work.
 	for (uint32_t j = 0; j < path.size(); ++j) {
 		if (path[j] == '/')
 			path[j] = '\\';
@@ -463,7 +463,7 @@ bool FileSystem::check_writeable_for_data(char const* const path) {
 		fs.ensure_directory_exists(".widelands");
 		fs.fs_unlink(".widelands");
 		return true;
-	} catch (...) {
+	} catch (const FileError& e) {
 		log("Directory %s is not writeable - next try\n", path);
 	}
 
