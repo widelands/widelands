@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rui <xymarior@yandex.com>, 2018\n"
 "Language-Team: Portuguese (https://www.transifex.com/widelands/teams/35159/pt/)\n"
@@ -195,11 +195,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "Recruit new soldiers"
-msgstr ""
+msgstr "Recrute novos soldados"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:148
 msgid "New Soldier Recruiting"
-msgstr ""
+msgstr "Recrutando Novos Soldados"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:149
 msgid "Recruit at least ten new soldiers in your barracks."
@@ -211,27 +211,27 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:156
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Derrotar os Bárbaros"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:158
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Derrotar o Inimigo"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:159
 msgid "End the Barbarian intrusion into your very own part of the world."
-msgstr ""
+msgstr "Acabe com os Bárbaros nesta sua parte do mundo."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:165
 msgid "Build 2 charcoal kiln"
-msgstr ""
+msgstr "Construa 2 fornos de carvão"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:167
 msgid "Build Two Charcoal Kilns"
-msgstr ""
+msgstr "Construa Dois Fornos de Carvão"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:168
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr ""
+msgstr "Construa dois fornos de carvão para sustentar a indústria do ferro."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:169
 msgid "Remember to ensure a constant log supply for them."
@@ -243,11 +243,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:177
 msgid "Training is Important"
-msgstr ""
+msgstr "O treino é Importante"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:178
 msgid "Train your soldiers hard and train them fast."
-msgstr ""
+msgstr "Treine bem o seus soldados e treino-os depressa."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:179
 msgid "You need to increase your military strength."
@@ -255,7 +255,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:185
 msgid "Build a training camp and enhance the arena"
-msgstr ""
+msgstr "Constrói um campo de treinos e melhora a arena"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:187
 msgid "More Efficient Training Buildings"
@@ -263,18 +263,18 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:188
 msgid "Build a training camp and enhance your arena to a colosseum."
-msgstr ""
+msgstr "Constrói um campo de treinos e transforma a arena em coliseu."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:199
 msgid "Home, Sweet Home"
-msgstr ""
+msgstr "Casa, Querida Cas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:200
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:211
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:219
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:227
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Diário do Lucius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:202
@@ -283,15 +283,18 @@ msgid ""
 " again. I am really looking forward to a walk on our lovely coast and to "
 "hunting in our deep forests."
 msgstr ""
+"Afinal, regressamos a casa. Estou tão contente de ver o nosso lindo país de "
+"novo. Só desejo passear pelas nossas lindas costas e caçar nas nossos "
+"profundas florestas."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:205
 msgid "I expect that Saledus and Amalea are deeply delighted as well."
-msgstr ""
+msgstr "Espero que o Saledus e a Amalea também estejam felizes."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:210
 msgid "Tools, Tools, Tools"
-msgstr ""
+msgstr "Ferramentas, Ferramentas, Ferramentas"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:213
@@ -304,7 +307,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:602
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:648
 msgid "Military Strength"
-msgstr ""
+msgstr "Força Militar"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:221
@@ -315,7 +318,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:226
 msgid "The Battle is Won"
-msgstr ""
+msgstr "A Batalha está Ganhada"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:229
@@ -334,7 +337,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:239
 msgid "Chaos"
-msgstr ""
+msgstr "Caos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:240
 msgid "Lutius is disappointed"

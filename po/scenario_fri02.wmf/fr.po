@@ -5,13 +5,14 @@
 # Translators:
 # Balkhmogaehild <balkhmogaehild@protonmail.com>, 2018
 # Renaud Bouchard, 2018
+# zecas <jjorge@free.fr>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Renaud Bouchard, 2018\n"
+"Last-Translator: zecas <jjorge@free.fr>, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -182,48 +183,50 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Spy on Murilius"
-msgstr ""
+msgstr "Espoin sur Murilius"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:84
 msgid "Send a Scout to Spy on the Empire"
-msgstr ""
+msgstr "Envoie un Éclaireur pour Espionner l'Empire"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:85
 msgid ""
 "Build a scout’s house near the border to discover the Empire’s secrets."
 msgstr ""
+"Construis une maison des éclaireurs près de la frontière pour découvrir les "
+"secrets de l'Empire."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:90
 msgid "Decipher the poem"
-msgstr ""
+msgstr "Déchiffre le poème"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:92
 msgid "Understand the Poem the Scout has Found in the Empire"
-msgstr ""
+msgstr "Comprends le Poème que l'Éclaireur a Trouvé dans l'Empire"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:93
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:335
 msgid "How many sites where soldiers stay,"
-msgstr ""
+msgstr "Combien de lieux où trainent les soldats,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:94
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:338
 msgid "How many sites where thou hold’st sway,"
-msgstr ""
+msgstr "Combien de lieux où ils tiennent bon,"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:95
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:341
 msgid "Though not their whereabouts sees he"
-msgstr ""
+msgstr "Bien que leurs capitaines ne les voient guère"
 
 #. TRANSLATORS: Hauke – Expansion hint. A poem, verse 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:96
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:344
 msgid "Who’s ordering around here thee!"
-msgstr ""
+msgstr "Qui commande ici alors!"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:101
 msgid "Defeat the Barbarians!"
@@ -257,7 +260,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:113
 msgid "Conquer every single field that still belongs to Murilius."
-msgstr ""
+msgstr "Conquiers chaque champ qui appartienne encore à Murilius."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:118
 msgid "Defeat Murilius and the Barbarians!"
@@ -277,7 +280,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:130
 msgid "Warning"
-msgstr ""
+msgstr "Attention"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:131
 msgid ""
@@ -285,6 +288,9 @@ msgid ""
 "this scenario, but you will be at a disadvantage. I recommend that you "
 "complete the previous scenario first and then restart this mission."
 msgstr ""
+"Vous n'avez pas terminé la mission précédente. Vous pouvez jouer ce "
+"scénario, mais vous allez avoir un handicap. Il est recommandé de terminer "
+"la mission précédente et de recommencer celle-ci."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:137
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:146
@@ -814,6 +820,10 @@ msgid ""
 "soldier training while pretending to be gathering his so-called gift. That "
 "would buy us some time."
 msgstr ""
+"J'aimerais dire que nous devrions l'attaquer tout de suite, mais je crains "
+"que nous ne soyons pas encore assez forts pour tenir bon contre lui au "
+"combat. Nous devrions nous dépêcher d'entraîner nos soldats tout en faisant "
+"semblant de recueillir son soi-disant don. Cela nous ferait gagner du temps."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:324
@@ -821,14 +831,16 @@ msgid ""
 "As for expansion – I wonder how strictly he can possibly control us. Perhaps"
 " we should send a scout to spy on him…"
 msgstr ""
+"Quant à l'expansion – je me demande à quel point il peut nous contrôler. "
+"Peut-être que nous devrions l'espionner avec un éclaireur..."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:329
 msgid "The Scout Discovered Something"
-msgstr ""
+msgstr "L'Éclaireur a Fait une Découverte"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:330
 msgid "Our scout returned"
-msgstr ""
+msgstr "Notre éclaireur est revenu"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:332
@@ -838,6 +850,9 @@ msgid ""
 "translated it into our language. If I did not mistranslate, it runs as "
 "follows:"
 msgstr ""
+"Chef Reebaud! Notre éclaireur est revenu. Il a trouvé un poème dans "
+"l'étrange langue que ce Proconsul utilise. Avec quelques difficultés, je "
+"l'ai traduit. Si je ne me suis pas trompé, le voici :"
 
 #. TRANSLATORS: Hauke – Expansion hint
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:347
@@ -845,6 +860,8 @@ msgid ""
 "I don’t know what it means, but I’m sure it’s important. Perhaps you can "
 "make some sense of it."
 msgstr ""
+"Je ne sais pas ce qu'il signifie, mais je suis sûr que c'est important. "
+"Peut-être que nous pouvons y trouver un sens caché."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:352
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:362
