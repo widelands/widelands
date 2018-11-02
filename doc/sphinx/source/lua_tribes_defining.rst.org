@@ -14,11 +14,11 @@ The tribe objects are then defined by the following scripts:
 
 * ``data/tribes/<path>/init.lua``: This file defines the map objects to load
   from its path.
-* ``data/tribes/<path>/names.lua``: This file has to list the names of all
+* ``data/tribes/<path>/register.lua``: This file has to list the names of all
   objects defined in the path's ``init.lua`` file. Only tribe objects that are
   listed in these files will be registered for loading, and the names must match
   with the respective ``init.lua`` file.
-*  See :ref:`defining_tribe_units` for further details.
+* See :ref:`defining_tribe_units` for further details.
 
 .. toctree::
    :maxdepth: 3
