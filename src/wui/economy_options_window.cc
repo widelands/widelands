@@ -22,7 +22,6 @@
 #include <boost/lexical_cast.hpp>
 
 #include "graphic/graphic.h"
-#include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/ware_descr.h"
 #include "logic/map_objects/tribes/worker_descr.h"
 #include "logic/player.h"

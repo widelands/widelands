@@ -14,11 +14,10 @@ wl_library(wui_chat_ui
     base_macros
     chat
     graphic
-    graphic_color
     graphic_fonthandler
+    graphic_playercolor
     graphic_text
     graphic_text_layout
-    logic
     profile
     ui_basic
     wui

@@ -23,9 +23,8 @@
 #include <boost/format.hpp>
 
 #include "chat/chat.h"
-#include "graphic/color.h"
+#include "graphic/playercolor.h"
 #include "graphic/text_layout.h"
-#include "logic/player.h"
 
 namespace {
 

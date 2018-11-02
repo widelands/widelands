@@ -33,7 +33,6 @@
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/critter_program.h"
 #include "logic/map_objects/world/world.h"
 #include "map_io/world_legacy_lookup_table.h"
