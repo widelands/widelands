@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-18 19:24+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-10-28 07:47+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -250,7 +250,7 @@ msgid "Loading tribes"
 msgstr "Lataan heimoja"
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:166
+#: ../../src/wui/interactive_player.cc:143
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Main menu"
 msgstr "Päävalikko"
@@ -270,7 +270,7 @@ msgid "Players"
 msgstr "Pelaajat"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:182
+#: ../../src/wui/interactive_player.cc:159
 #: ../../src/wui/interactive_spectator.cc:72
 msgid "Show building spaces (on/off)"
 msgstr "Näytä rakennusalueet (päälle/pois)"
@@ -288,13 +288,13 @@ msgid "Show resources (on/off)"
 msgstr "Näytä resurssit (päälle/pois)"
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:178
+#: ../../src/wui/interactive_player.cc:155
 #: ../../src/wui/interactive_spectator.cc:68
 msgid "Minimap"
 msgstr "Pienoiskartta"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:184
+#: ../../src/wui/interactive_player.cc:161
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Reset zoom"
 msgstr "Resetoi suurennus"
@@ -308,7 +308,7 @@ msgid "Redo"
 msgstr "Tee uudelleen"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:350 ../../src/wui/interactive_player.cc:208
+#: ../../src/wui/buildingwindow.cc:350 ../../src/wui/interactive_player.cc:185
 msgid "Help"
 msgstr "Ohje"
 
@@ -336,13 +336,13 @@ msgstr "Tallentamaton kartta"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Karttaa ei ole tallennettu. Haluatko poistua?"
 
-#: ../../src/editor/editorinteractive.cc:614
+#: ../../src/editor/editorinteractive.cc:616
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr "Alustan tyhjää karttaa…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:618
+#: ../../src/editor/editorinteractive.cc:620
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -351,7 +351,7 @@ msgid "No Name"
 msgstr "Ei nimeä"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:621
+#: ../../src/editor/editorinteractive.cc:623
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -359,7 +359,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../../src/editor/editorinteractive.cc:628
+#: ../../src/editor/editorinteractive.cc:630
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Lataan karttaa \"%s\"…"
@@ -928,7 +928,7 @@ msgstr "Pelaajien määrä"
 #: ../../src/logic/single_player_game_settings_provider.cc:90
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:70
 #: ../../src/map_io/map_player_names_and_tribes_packet.cc:102
-#: ../../src/network/gamehost.cc:1607 ../../src/ui_fsmenu/launch_mpg.cc:509
+#: ../../src/network/gamehost.cc:1609 ../../src/ui_fsmenu/launch_mpg.cc:509
 #: ../../src/wui/multiplayersetupgroup.cc:135
 #: ../../src/wui/multiplayersetupgroup.cc:189
 #, c-format
@@ -1132,7 +1132,7 @@ msgid "Loading map…"
 msgstr "Lataan karttaa…"
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1419
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1421
 msgid "Loading…"
 msgstr "Lataa…"
 
@@ -1169,7 +1169,7 @@ msgstr "Tallennustiedosto ei ole yhteensopiva tämän Widelands-version kanssa."
 msgid "No description defined"
 msgstr "Kuvausta ei määritelty"
 
-#: ../../src/logic/map_objects/immovable.cc:518
+#: ../../src/logic/map_objects/immovable.cc:535
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
@@ -1292,9 +1292,9 @@ msgstr "talous ei tarvitse työtekijää '%s'"
 #. * TRANSLATORS:    %2$s = "Ox"
 #: ../../src/logic/map_objects/tribes/production_program.cc:387
 #: ../../src/logic/map_objects/tribes/production_program.cc:413
-#: ../../src/logic/map_objects/tribes/production_program.cc:878
-#: ../../src/logic/map_objects/tribes/production_program.cc:984
-#: ../../src/logic/map_objects/tribes/production_program.cc:1066
+#: ../../src/logic/map_objects/tribes/production_program.cc:874
+#: ../../src/logic/map_objects/tribes/production_program.cc:980
+#: ../../src/logic/map_objects/tribes/production_program.cc:1062
 #, c-format
 msgid "%1$ix %2$s"
 msgstr "%1$ix %2$s"
@@ -1303,13 +1303,13 @@ msgstr "%1$ix %2$s"
 #: ../../src/logic/map_objects/tribes/production_program.cc:393
 #, c-format
 msgid "the building has the following wares: %s"
-msgstr "rakennuksella on seuraavat tarvikkeet: %s"
+msgstr "rakennuksella on seuraavat tuotteet: %s"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/map_objects/tribes/production_program.cc:419
 #, c-format
 msgid "the building doesn’t have the following wares: %s"
-msgstr "rakennukselta puuttuvat seuraavat tarvikkeet: %s"
+msgstr "rakennukselta puuttuvat seuraavat tuotteet: %s"
 
 #. * TRANSLATORS: 'Completed/Skipped/Did not start ... because a worker needs
 #. experience'.
@@ -1337,7 +1337,7 @@ msgstr "työntekijät eivät tarvitse kokemusta"
 #. are any issues
 #. * TRANSLATORS: we need to address for your language.
 #: ../../src/logic/map_objects/tribes/production_program.cc:544
-#: ../../src/logic/map_objects/tribes/production_program.cc:902
+#: ../../src/logic/map_objects/tribes/production_program.cc:898
 #, c-format
 msgid "Did not start %1$s because %2$s"
 msgstr "Väliin jätetty %1$s, koska %2$s"
@@ -1354,7 +1354,7 @@ msgstr "%1$s valmistui, koska %2$s"
 msgid "Skipped %1$s because %2$s"
 msgstr "Ohitettu %1$s, koska %2$s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:749
+#: ../../src/logic/map_objects/tribes/production_program.cc:745
 msgid "No use for ships on this map!"
 msgstr "Tällä kartalla laivoille ei ole käyttöä!"
 
@@ -1362,7 +1362,7 @@ msgstr "Tällä kartalla laivoille ei ole käyttöä!"
 #. are missing'
 #. * TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta
 #. bread is missing'
-#: ../../src/logic/map_objects/tribes/production_program.cc:888
+#: ../../src/logic/map_objects/tribes/production_program.cc:884
 #, c-format
 msgid "%s is missing"
 msgid_plural "%s are missing"
@@ -1372,7 +1372,7 @@ msgstr[1] "%s puuttuvat"
 #. * TRANSLATORS: %s is a list of wares. String is fetched according to total
 #. amount of
 #. wares.
-#: ../../src/logic/map_objects/tribes/production_program.cc:995
+#: ../../src/logic/map_objects/tribes/production_program.cc:991
 #, c-format
 msgid "Produced %s"
 msgid_plural "Produced %s"
@@ -1382,19 +1382,19 @@ msgstr[1] "Tuotettu %s"
 #. * TRANSLATORS: %s is a list of workers. String is fetched according to
 #. total amount of
 #. workers.
-#: ../../src/logic/map_objects/tribes/production_program.cc:1077
+#: ../../src/logic/map_objects/tribes/production_program.cc:1073
 #, c-format
 msgid "Recruited %s"
 msgid_plural "Recruited %s"
 msgstr[0] "Rekrytoitu %s"
 msgstr[1] "Rektytoitu %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1285
+#: ../../src/logic/map_objects/tribes/production_program.cc:1281
 msgid "No soldier to train!"
 msgstr "Ei koulutettavia sotilaita!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1294
-#: ../../src/logic/map_objects/tribes/production_program.cc:1372
+#: ../../src/logic/map_objects/tribes/production_program.cc:1290
+#: ../../src/logic/map_objects/tribes/production_program.cc:1368
 msgid "No soldier found for this training level!"
 msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 
@@ -1475,25 +1475,25 @@ msgstr "Satama menetetty!"
 
 #: ../../src/logic/map_objects/tribes/ship.cc:672
 msgid "Unloading of wares failed, expedition is cancelled now."
-msgstr "Kauppatavaroiden purkaminen epäonnistui, retkikunta on nyt peruutettu."
+msgstr "Tuotteiden purkaminen epäonnistui, retkikunta on nyt peruutettu."
 
 #. * TRANSLATORS: Ship expedition ready
-#: ../../src/logic/map_objects/tribes/ship.cc:855
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgctxt "ship"
 msgid "Expedition"
 msgstr "Tutkimusmatka"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:855
+#: ../../src/logic/map_objects/tribes/ship.cc:854
 msgid "Expedition Ready"
 msgstr "Tutkimusmatkailijat valmiina lähtöön"
 
-#: ../../src/logic/map_objects/tribes/ship.cc:856
+#: ../../src/logic/map_objects/tribes/ship.cc:855
 msgid "An expedition ship is waiting for your commands."
 msgstr "Tutkimusmatka-alus odottaa ohjeitasi."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:995
+#: ../../src/logic/map_objects/tribes/ship.cc:992
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1502,7 +1502,7 @@ msgstr "Rahtaa"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:999
+#: ../../src/logic/map_objects/tribes/ship.cc:996
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Idle"
@@ -1510,7 +1510,7 @@ msgstr "Jouten"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1004
+#: ../../src/logic/map_objects/tribes/ship.cc:1001
 #: ../../src/wui/seafaring_statistics_menu.cc:219
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1518,14 +1518,14 @@ msgstr "Odottaa"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1008
+#: ../../src/logic/map_objects/tribes/ship.cc:1005
 #: ../../src/wui/seafaring_statistics_menu.cc:221
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Tutkii"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1012
+#: ../../src/logic/map_objects/tribes/ship.cc:1009
 #: ../../src/wui/seafaring_statistics_menu.cc:223
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1534,14 +1534,14 @@ msgstr "Luonnonsatama löytyi"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1017
+#: ../../src/logic/map_objects/tribes/ship.cc:1014
 #: ../../src/wui/seafaring_statistics_menu.cc:225
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Perustaa siirtokuntaa"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1352
-#: ../../src/logic/map_objects/tribes/soldier.cc:1356
+#: ../../src/logic/map_objects/tribes/soldier.cc:1351
+#: ../../src/logic/map_objects/tribes/soldier.cc:1355
 msgid "Logic error"
 msgstr "Logiikkavirhe"
 
@@ -1637,15 +1637,15 @@ msgid ""
 " unpause the game and continue watching if you want to."
 msgstr "Pelin toisto on loppunut ja peli on keskeytetty. Voit jatkaa peliä ja tarkkailua halutessasi."
 
-#: ../../src/logic/save_handler.cc:99
+#: ../../src/logic/save_handler.cc:104
 msgid "Saving game…"
 msgstr "Peliä tallennetaan…"
 
-#: ../../src/logic/save_handler.cc:115
+#: ../../src/logic/save_handler.cc:120
 msgid "Saving failed!"
 msgstr "Tallentaminen epäonnistui!"
 
-#: ../../src/logic/save_handler.cc:188
+#: ../../src/logic/save_handler.cc:220
 msgid "Game saved"
 msgstr "Peli tallennettu"
 
@@ -1665,8 +1665,8 @@ msgid ""
 " you tried to connect."
 msgstr "Widelands ei kyennyt muodostamaan yhteyttä annettuun osoitteeseen. Joko oletetussa portissa ei ole käynnissä Widelands-palvelinta tai palvelin sulkeutui, kun yritit ottaa yhteyttä."
 
-#: ../../src/network/gameclient.cc:184 ../../src/network/gamehost.cc:641
-#: ../../src/wlapplication.cc:1311
+#: ../../src/network/gameclient.cc:185 ../../src/network/gamehost.cc:641
+#: ../../src/wlapplication.cc:1313
 msgid "Preparing game"
 msgstr "Valmistelen peliä"
 
@@ -1681,12 +1681,12 @@ msgid ""
 msgstr "/me tarkasti saadun tiedoston. Tiedoston avaus epäonnistui, vaikka md5-tarkistus onnistui."
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/gameclient.cc:939
+#: ../../src/network/gameclient.cc:942
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr "%s Automaattinen tallennuspeli aiotaan luoda."
 
-#: ../../src/network/gameclient.cc:943
+#: ../../src/network/gameclient.cc:946
 msgid "Disconnected from Host"
 msgstr "Yhteys palvelimeen katkesi"
 
@@ -1804,16 +1804,16 @@ msgid ""
 "Probably some other process is already running a server on our port."
 msgstr "Widelands ei voinut käynnistää palvelinta.\nMahdollisesti jollakin toisella prosessilla on palvelin käynnissä meidän portissa."
 
-#: ../../src/network/gamehost.cc:1544
+#: ../../src/network/gamehost.cc:1546
 #, c-format
 msgid "Computer %u"
 msgstr "Tietokone %u"
 
-#: ../../src/network/gamehost.cc:1601 ../../src/wui/game_summary.cc:102
+#: ../../src/network/gamehost.cc:1603 ../../src/wui/game_summary.cc:102
 msgid "Player"
 msgstr "Pelaaja"
 
-#: ../../src/network/gamehost.cc:1750
+#: ../../src/network/gamehost.cc:1752
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -1841,179 +1841,172 @@ msgstr "Yhteys meta-pelipalvelimeen palautui!"
 msgid "Something went wrong: %s"
 msgstr "Jotain meni pieleen: %s"
 
-#: ../../src/network/internet_gaming.cc:370
+#: ../../src/network/internet_gaming.cc:378
 msgid "Welcome to the Widelands Metaserver!"
 msgstr "Tervetuloa Widelandsin Metaserverille!"
 
-#: ../../src/network/internet_gaming.cc:374
+#: ../../src/network/internet_gaming.cc:382
 #, c-format
 msgid ""
 "You have been logged in as '%s' since your requested name is already in use "
 "or reserved."
 msgstr "Olet kirjautuneena sisään nimellä '%s', koska ehdottamasi nimi on jo käytössä tai varattu."
 
-#: ../../src/network/internet_gaming.cc:387
+#: ../../src/network/internet_gaming.cc:395
 msgid "Our forums can be found at:"
 msgstr "Meidän keskustelupalstat:"
 
-#: ../../src/network/internet_gaming.cc:389
+#: ../../src/network/internet_gaming.cc:397
 msgid "For reporting bugs, visit:"
 msgstr "Vikojen raporttointi:"
 
-#: ../../src/network/internet_gaming.cc:400
+#: ../../src/network/internet_gaming.cc:412
 msgid "Mixed up"
 msgstr "Seonnut"
 
-#: ../../src/network/internet_gaming.cc:400
+#: ../../src/network/internet_gaming.cc:412
 msgid "The metaserver sent a strange ERROR during connection"
 msgstr "Pelipalvelin lähetti oudon virheen yhteyttä muodostettaessa"
 
-#: ../../src/network/internet_gaming.cc:415
+#: ../../src/network/internet_gaming.cc:426
 msgid "Unexpected packet"
 msgstr "Odottamaton paketti"
 
-#: ../../src/network/internet_gaming.cc:416
+#: ../../src/network/internet_gaming.cc:427
 msgid ""
 "Received an unexpected network packet from the metaserver. The metaserver "
 "could be using a different protocol version. If the error persists, try "
 "updating your game."
 msgstr "Metaserveriltä vastaanotettu odottamaton IP-paketti. Metaserveri saattaa käyttää eri protokollaversiota. Jos virhe toistuu, kokeile pelin päivitystä."
 
-#: ../../src/network/internet_gaming.cc:428
+#: ../../src/network/internet_gaming.cc:439
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr "HUOMIO: Sain paketin %s, vaikka olen CONNECTING-tilassa."
 
-#: ../../src/network/internet_gaming.cc:439
+#: ../../src/network/internet_gaming.cc:450
 #, c-format
 msgid "Server time offset is %d second."
 msgid_plural "Server time offset is %d seconds."
 msgstr[0] "Aikaero palvelimeen on %d sekuntia."
 msgstr[1] "Aikaero palvelimeen on %d sekuntia."
 
-#: ../../src/network/internet_gaming.cc:463
+#: ../../src/network/internet_gaming.cc:465
 #, c-format
 msgid "Invalid chat message type \"%s\"."
 msgstr "Virheellinen viestityyppi  \"%s\"."
 
-#: ../../src/network/internet_gaming.cc:463
+#: ../../src/network/internet_gaming.cc:465
 msgid "Invalid message type"
 msgstr "Virheellinen viestityyppi"
 
-#: ../../src/network/internet_gaming.cc:501
+#: ../../src/network/internet_gaming.cc:503
 #, c-format
 msgid "The game %s is now available"
 msgstr "Peli %s avautui"
 
-#: ../../src/network/internet_gaming.cc:511
+#: ../../src/network/internet_gaming.cc:513
 #, c-format
 msgid "The game %s has been closed"
 msgstr "Peli %s sulkeutui"
 
-#: ../../src/network/internet_gaming.cc:557
+#: ../../src/network/internet_gaming.cc:559
 #, c-format
 msgid "%s joined the lobby"
 msgstr "%s saapui"
 
-#: ../../src/network/internet_gaming.cc:564
+#: ../../src/network/internet_gaming.cc:566
 #, c-format
 msgid "%s left the lobby"
 msgstr "%s poistui"
 
-#: ../../src/network/internet_gaming.cc:619
+#: ../../src/network/internet_gaming.cc:621
 msgid "Chat message could not be sent."
 msgstr "Keskustelu viestiäsi ei voitu lähettää."
 
-#: ../../src/network/internet_gaming.cc:633
+#: ../../src/network/internet_gaming.cc:643
 #, c-format
 msgid "ERROR: %s"
 msgstr "VIRHE: %s"
 
-#: ../../src/network/internet_gaming.cc:643
+#: ../../src/network/internet_gaming.cc:646
+msgid "An unexpected error message has been received about command %1%: %2%"
+msgstr "Odottamaton virheviesti on tullut liittyen komentoon %1%: %2%"
+
+#: ../../src/network/internet_gaming.cc:659
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
 msgstr "Vastaanotettiin tuntematon komento metapalvelimelta: %s"
 
-#: ../../src/network/internet_gaming.cc:769
+#: ../../src/network/internet_gaming.cc:808
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr "Viestin lähetys epäonnistui: Ei yhteyttä palvelimeen!"
 
-#: ../../src/network/internet_gaming.cc:788
-#: ../../src/network/internet_gaming.cc:795
+#: ../../src/network/internet_gaming.cc:827
+#: ../../src/network/internet_gaming.cc:834
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr "Viestinlähetys epäonnistui. Yrititkö lähettää yksityisviestin?"
 
-#: ../../src/network/internet_gaming.cc:871
+#: ../../src/network/internet_gaming.cc:910
 msgid "Conversion error"
 msgstr "Muunnos epäonnistui"
 
 #. * TRANSLATORS: Geeky message from the metaserver
 #. * TRANSLATORS: This message is shown if %s isn't "true" or "false"
-#: ../../src/network/internet_gaming.cc:874
+#: ../../src/network/internet_gaming.cc:913
 #, c-format
 msgid "Unable to determine truth value for \"%s\""
 msgstr "Ei pysty määrittelemään totuutta arvolle \"%s\""
 
-#: ../../src/network/internet_gaming.cc:892
+#: ../../src/network/internet_gaming.cc:931
 msgctxt "chat_sender"
 msgid "Unknown"
 msgstr "Tuntematon"
 
 #: ../../src/network/internet_gaming_messages.cc:43
-#, c-format
-msgid "There is no user with the name %s logged in!"
-msgstr "Käyttäjä %s ei ole kirjautunut!"
+msgid "There is no user with this name logged in."
+msgstr "Kyseisen nimistä käyttäjää ei ole kirjautuneen."
 
 #: ../../src/network/internet_gaming_messages.cc:44
+msgid "The game no longer exists, maybe it has just been closed."
+msgstr "Peli ei ole enää olemassa, ehkä se on jo suljettu."
+
+#: ../../src/network/internet_gaming_messages.cc:45
 msgid "The sent password was incorrect!"
 msgstr "Salasana oli väärä!"
 
-#: ../../src/network/internet_gaming_messages.cc:45
+#: ../../src/network/internet_gaming_messages.cc:46
 msgid "The protocol version you are using is not supported!"
 msgstr "Käyttämääsi protokollan versiota ei tueta!"
 
-#: ../../src/network/internet_gaming_messages.cc:46
+#: ../../src/network/internet_gaming_messages.cc:47
 msgid "You are already logged in!"
 msgstr "Olet jo kirjautuneena!"
 
-#: ../../src/network/internet_gaming_messages.cc:48
+#: ../../src/network/internet_gaming_messages.cc:49
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr "Yhteytesi katkaistiin, koska lähetit ylläpitokomennon ilman ylläpito-oikeuksia. Tämä tapahtuma raportoidaan ylläpidolle."
 
-#: ../../src/network/internet_gaming_messages.cc:51
+#: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
 msgstr "Asiakas katkaisi yhteyden normaalisti."
 
-#: ../../src/network/internet_gaming_messages.cc:52
+#: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
 msgstr "Menetin yhteyden metapalvelimeen."
 
-#: ../../src/network/internet_gaming_messages.cc:53
+#: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
 msgstr "Metapalvelin ei vastaa"
 
-#: ../../src/network/internet_gaming_messages.cc:55
+#: ../../src/network/internet_gaming_messages.cc:56
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr "Yhteytesi meta-pelipalvelimeen katkaistiin, koska et vastannut PING-pyyntöön ajoissa."
-
-#: ../../src/network/internet_gaming_messages.cc:57
-msgid ""
-"The metaserver was unable to connect to your game. Most likely it can’t be "
-"connected to from the internet! Please take a look at "
-"http://wl.widelands.org/wiki/InternetGaming to learn how to set up your "
-"internet connection for hosting a game online."
-msgstr "Meta-pelipalvelin ei voinut liittää sinua peliin. peliin ei saada yhteyttä. Katso lisäohjeita http://wl.widelands.org/wiki/InternetGaming osoitteesta."
-
-#: ../../src/network/internet_gaming_messages.cc:63
-msgid ""
-"You tried to log back in, but the server has no knowledge of your previous "
-"state anymore."
-msgstr "Yritit kirjautua takaisin, mutta palvelin on jo unohtanut viimeisimmän tilasi."
 
 #: ../../src/network/network_gaming_messages.cc:119
 msgid "Client has left the game."
@@ -2505,20 +2498,20 @@ msgstr "Versio"
 msgid "Game"
 msgstr "Peli"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:373
+#: ../../src/ui_fsmenu/internet_lobby.cc:370
 msgid ""
 "Widelands was unable to get the IP address of the server in time. There "
 "seems to be a network problem, either on your side or on the side of the "
 "server.\n"
 msgstr "Widelands ei kyennyt selvittämään palvelimen IP-osoitetta ajoissa. Tämä näyttää verkko-ongelmalta, joko sinun tai palvelimen päässä.\n"
 
-#: ../../src/ui_fsmenu/internet_lobby.cc:376
+#: ../../src/ui_fsmenu/internet_lobby.cc:373
 msgid "Connection Timed Out"
 msgstr "Yhteys Aikakatkaistu"
 
 #. * TRANSLATORS: This is shown for multiplayer games when no host
 #. * TRANSLATORS: server to connect to has been specified yet.
-#: ../../src/ui_fsmenu/internet_lobby.cc:411
+#: ../../src/ui_fsmenu/internet_lobby.cc:407
 msgctxt "server_name"
 msgid "unnamed"
 msgstr "nimetön"
@@ -2996,11 +2989,11 @@ msgstr "Kampanjat"
 msgid "Load Game"
 msgstr "Lataa peli"
 
-#: ../../src/wlapplication.cc:1106
+#: ../../src/wlapplication.cc:1108
 msgid "Game data error"
 msgstr "Pelitietovirhe"
 
-#: ../../src/wlapplication.cc:1114
+#: ../../src/wlapplication.cc:1116
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3008,18 +3001,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Ole hyvä ja raportoi tämä ongelma auttaaksesi meitä parantamaan Widelandsia. Löydät asiaankuuluvat viestit ohjelman standarditulosteesta (stdout.txt tiedosto Windowsissa). Käytät koontiversiota  %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1121
+#: ../../src/wlapplication.cc:1123
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Ole hyvä ja liitä tämä tieto raporttiisi.\n\nWidelands pyrkii tallentamaan pelin automaattisesti virheiden sattuessa. Pelin voi usein – mutta ei aina – ladata ja jatkaa taas pelaamista."
 
-#: ../../src/wlapplication.cc:1248
+#: ../../src/wlapplication.cc:1250
 msgid "Invalid Address"
 msgstr "Virheellinen Osoite"
 
-#: ../../src/wlapplication.cc:1249
+#: ../../src/wlapplication.cc:1251
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Annettu isäntänimi tai osoite on virheellinen, eikä siihen voida ottaa yhteyttä."
 
@@ -3338,7 +3331,7 @@ msgstr "Peruuta tie"
 msgid "Build roads"
 msgstr "Rakenna teitä"
 
-#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:191
+#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:168
 #: ../../src/wui/interactive_spectator.cc:84
 msgid "Chat"
 msgstr "Keskustelu"
@@ -3424,7 +3417,7 @@ msgid "Save Game Error!"
 msgstr "Pelitallennusvirhe!"
 
 #: ../../src/wui/game_message_menu.cc:51
-#: ../../src/wui/game_message_menu.cc:596
+#: ../../src/wui/game_message_menu.cc:601
 msgid "Messages: Inbox"
 msgstr "Saapuneet viestit"
 
@@ -3449,7 +3442,7 @@ msgid "Sent"
 msgstr "Lähetetty"
 
 #: ../../src/wui/game_message_menu.cc:125
-#: ../../src/wui/game_message_menu.cc:599
+#: ../../src/wui/game_message_menu.cc:604
 msgid "Show Archive"
 msgstr "Näytä arkisto"
 
@@ -3465,94 +3458,94 @@ msgid "Center main mapview on location"
 msgstr "Keskitä päänäkymä tähän"
 
 #. * TRANSLATORS: %1% is a tooltip, %2% is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:521
-#: ../../src/wui/game_message_menu.cc:532
+#: ../../src/wui/game_message_menu.cc:526
 #: ../../src/wui/game_message_menu.cc:537
-#: ../../src/wui/game_message_menu.cc:541
-#: ../../src/wui/game_message_menu.cc:545
-#: ../../src/wui/game_message_menu.cc:549
+#: ../../src/wui/game_message_menu.cc:542
+#: ../../src/wui/game_message_menu.cc:546
+#: ../../src/wui/game_message_menu.cc:550
+#: ../../src/wui/game_message_menu.cc:554
 #: ../../src/wui/seafaring_statistics_menu.cc:101
 #: ../../src/wui/seafaring_statistics_menu.cc:132
-#: ../../src/wui/seafaring_statistics_menu.cc:504
-#: ../../src/wui/seafaring_statistics_menu.cc:513
-#: ../../src/wui/seafaring_statistics_menu.cc:517
-#: ../../src/wui/seafaring_statistics_menu.cc:522
-#: ../../src/wui/seafaring_statistics_menu.cc:526
-#: ../../src/wui/seafaring_statistics_menu.cc:531
+#: ../../src/wui/seafaring_statistics_menu.cc:501
+#: ../../src/wui/seafaring_statistics_menu.cc:510
+#: ../../src/wui/seafaring_statistics_menu.cc:514
+#: ../../src/wui/seafaring_statistics_menu.cc:519
+#: ../../src/wui/seafaring_statistics_menu.cc:523
+#: ../../src/wui/seafaring_statistics_menu.cc:528
 msgid "%1% (Hotkey: %2%)"
 msgstr "%1% (Pikanäppäin: %2%)"
 
-#: ../../src/wui/game_message_menu.cc:523
-#: ../../src/wui/seafaring_statistics_menu.cc:506
+#: ../../src/wui/game_message_menu.cc:528
+#: ../../src/wui/seafaring_statistics_menu.cc:503
 msgctxt "hotkey"
 msgid "Alt + 0"
 msgstr "Alt + 0"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:523
+#: ../../src/wui/game_message_menu.cc:528
 msgid "Show all messages"
 msgstr "Näytä kaikki viestit"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:534
+#: ../../src/wui/game_message_menu.cc:539
 msgid "Show geologists' messages only"
 msgstr "Näytä vain geologien viestit"
 
-#: ../../src/wui/game_message_menu.cc:535
-#: ../../src/wui/seafaring_statistics_menu.cc:515
+#: ../../src/wui/game_message_menu.cc:540
+#: ../../src/wui/seafaring_statistics_menu.cc:512
 msgctxt "hotkey"
 msgid "Alt + 1"
 msgstr "Alt + 1"
 
-#: ../../src/wui/game_message_menu.cc:539
-#: ../../src/wui/seafaring_statistics_menu.cc:520
+#: ../../src/wui/game_message_menu.cc:544
+#: ../../src/wui/seafaring_statistics_menu.cc:517
 msgctxt "hotkey"
 msgid "Alt + 2"
 msgstr "Alt + 2"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:539
+#: ../../src/wui/game_message_menu.cc:544
 msgid "Show economy messages only"
 msgstr "Näytä vain talouden viestit"
 
-#: ../../src/wui/game_message_menu.cc:543
-#: ../../src/wui/seafaring_statistics_menu.cc:524
+#: ../../src/wui/game_message_menu.cc:548
+#: ../../src/wui/seafaring_statistics_menu.cc:521
 msgctxt "hotkey"
 msgid "Alt + 3"
 msgstr "Alt + 3"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:543
+#: ../../src/wui/game_message_menu.cc:548
 msgid "Show seafaring messages only"
 msgstr "Näytä vain merenkäynnin viestit"
 
-#: ../../src/wui/game_message_menu.cc:547
-#: ../../src/wui/seafaring_statistics_menu.cc:528
+#: ../../src/wui/game_message_menu.cc:552
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgctxt "hotkey"
 msgid "Alt + 4"
 msgstr "Alt + 4"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:547
+#: ../../src/wui/game_message_menu.cc:552
 msgid "Show warfare messages only"
 msgstr "Näytä vain sotimisen viestit"
 
-#: ../../src/wui/game_message_menu.cc:551
-#: ../../src/wui/seafaring_statistics_menu.cc:534
+#: ../../src/wui/game_message_menu.cc:556
+#: ../../src/wui/seafaring_statistics_menu.cc:531
 msgctxt "hotkey"
 msgid "Alt + 5"
 msgstr "Alt + 5"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:551
+#: ../../src/wui/game_message_menu.cc:556
 msgid "Show scenario messages only"
 msgstr "Näytä vain skenaarion viestit"
 
-#: ../../src/wui/game_message_menu.cc:589
+#: ../../src/wui/game_message_menu.cc:594
 msgid "Messages: Archive"
 msgstr "Viestiarkisto"
 
-#: ../../src/wui/game_message_menu.cc:592
+#: ../../src/wui/game_message_menu.cc:597
 msgid "Show Inbox"
 msgstr "Näytä Inbox"
 
@@ -3560,7 +3553,7 @@ msgstr "Näytä Inbox"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:622
+#: ../../src/wui/game_message_menu.cc:627
 #, c-format
 msgid "Restore the selected %d message"
 msgid_plural "Restore the selected %d messages"
@@ -3568,7 +3561,7 @@ msgstr[0] "Palauta %d valittu viesti"
 msgstr[1] "Palauta %d valitua viestiä"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:628
+#: ../../src/wui/game_message_menu.cc:633
 msgid "Restore selected message"
 msgstr "Palauta valittu viesti"
 
@@ -3576,7 +3569,7 @@ msgstr "Palauta valittu viesti"
 #. for 1
 #. * message.
 #. * DO NOT omit the placeholder in your translation.
-#: ../../src/wui/game_message_menu.cc:638
+#: ../../src/wui/game_message_menu.cc:643
 #, c-format
 msgid "Archive the selected %d message"
 msgid_plural "Archive the selected %d messages"
@@ -3584,18 +3577,18 @@ msgstr[0] "Arkistoi %d valittu viesti"
 msgstr[1] "Arkistoi %d valittua viestiä"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/game_message_menu.cc:644
+#: ../../src/wui/game_message_menu.cc:649
 msgid "Archive selected message"
 msgstr "Arkistoi valittu viesti"
 
 #. * TRANSLATORS: %s is a tooltip, Del is the corresponding hotkey
-#: ../../src/wui/game_message_menu.cc:649
+#: ../../src/wui/game_message_menu.cc:654
 #, c-format
 msgid "Del: %s"
 msgstr "Del: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:201
+#: ../../src/wui/interactive_player.cc:178
 msgid "Objectives"
 msgstr "Tavoitteet"
 
@@ -3794,33 +3787,33 @@ msgstr "Matalin prioriteetti"
 
 #: ../../src/wui/inputqueuedisplay.cc:246
 msgid "Decrease the number of wares you want to be stored here."
-msgstr "Vähennä tänne varastoitavien tavaroiden määrää."
+msgstr "Vähennä tänne varastoitavien tuotteiden määrää."
 
 #: ../../src/wui/inputqueuedisplay.cc:254
 msgid "Increase the number of wares you want to be stored here."
-msgstr "Kasvata tänne varastoitavien tavaroiden määrää."
+msgstr "Kasvata tänne varastoitavien tuotteiden määrää."
 
 #: ../../src/wui/interactive_gamebase.cc:56
 msgid "PAUSE"
 msgstr "PYSÄYTETTY"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:130
+#: ../../src/wui/interactive_gamebase.cc:170
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:170
+#: ../../src/wui/interactive_player.cc:147
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
 msgstr "Tilastot"
 
-#: ../../src/wui/interactive_player.cc:205
-#: ../../src/wui/interactive_player.cc:257
+#: ../../src/wui/interactive_player.cc:182
+#: ../../src/wui/interactive_player.cc:234
 msgid "Messages"
 msgstr "Viestit"
 
-#: ../../src/wui/interactive_player.cc:262
+#: ../../src/wui/interactive_player.cc:239
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -4452,32 +4445,32 @@ msgid "Status"
 msgstr "Tila"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:506
+#: ../../src/wui/seafaring_statistics_menu.cc:503
 msgid "Show all ships"
 msgstr "Näytä kaikki laivat"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:515
+#: ../../src/wui/seafaring_statistics_menu.cc:512
 msgid "Show idle ships"
 msgstr "Näytä jouten olevat laivat"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:519
+#: ../../src/wui/seafaring_statistics_menu.cc:516
 msgid "Show ships shipping wares and workers"
-msgstr "Näytä laivat, jotka rahtaavat tavaroita ja työntekijöitä"
+msgstr "Näytä laivat, jotka rahtaavat tuotteita ja työntekijöitä"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:524
+#: ../../src/wui/seafaring_statistics_menu.cc:521
 msgid "Show waiting expeditions"
 msgstr "Näytä odottavat tutkimusmatkat"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:528
+#: ../../src/wui/seafaring_statistics_menu.cc:525
 msgid "Show scouting expeditions"
 msgstr "Näytä tiedustelevat tutkimusmatkat"
 
 #. * TRANSLATORS: Tooltip in the messages window
-#: ../../src/wui/seafaring_statistics_menu.cc:533
+#: ../../src/wui/seafaring_statistics_menu.cc:530
 msgid "Show expeditions that have found a port space or are founding a colony"
 msgstr "Näytä tutkimusmatkat, jotka ovat löytäneet satamapaikan tai löytämässä  yhdyskunnan"
 
@@ -4629,7 +4622,7 @@ msgstr "Poista valitut tuotteet täältä"
 
 #: ../../src/wui/warehousewindow.cc:199
 msgid "Wares waiting to be shipped"
-msgstr "Laivausta odottavat tavarat"
+msgstr "Laivausta odottavat tuotteet"
 
 #: ../../src/wui/warehousewindow.cc:202
 msgid "Workers waiting to embark"
