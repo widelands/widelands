@@ -777,13 +777,17 @@ int LuaPlayerBase::place_building(lua_State* L) {
 
 	EditorGameBase& egbase = get_egbase(L);
 	const Tribes& tribes = egbase.tribes();
+    Player& player = get(L, egbase);
 
-    // NOCOM use load_building on mutable tribes to allow arbitrary buildings.
-    // NOCOM same for saveloading then!
-	if (!tribes.building_exists(name)) {
+    if (!tribes.building_exists(name)) {
 		report_error(L, "Unknown Building: '%s'", name.c_str());
 	}
-	DescriptionIndex building_index = tribes.building_index(name);
+
+    DescriptionIndex building_index = tribes.building_index(name);
+
+	if (!player.tribe().has_building(building_index)) {
+		report_error(L, "Building: '%s' is not available for Player %d's tribe '%s'", name.c_str(), player.player_number(), player.tribe().name().c_str());
+	}
 
 	BuildingDescr::FormerBuildings former_buildings;
 	find_former_buildings(tribes, building_index, &former_buildings);
@@ -794,12 +798,12 @@ int LuaPlayerBase::place_building(lua_State* L) {
 	Building* b = nullptr;
 	if (force) {
 		if (constructionsite) {
-			b = &get(L, egbase).force_csite(c->coords(), building_index, former_buildings);
+			b = &player.force_csite(c->coords(), building_index, former_buildings);
 		} else {
-			b = &get(L, egbase).force_building(c->coords(), former_buildings);
+			b = &player.force_building(c->coords(), former_buildings);
 		}
 	} else {
-		b = get(L, egbase).build(c->coords(), building_index, constructionsite, former_buildings);
+		b = player.build(c->coords(), building_index, constructionsite, former_buildings);
 	}
 	if (!b)
 		report_error(L, "Couldn't place building!");
