@@ -54,9 +54,9 @@ namespace Widelands {
   * The contents of 'table' are documented in
   * /data/tribes/atlanteans.lua
   */
-TribeDescr::TribeDescr(const LuaTable& table,
-                       const Widelands::TribeBasicInfo& info,
-                       Tribes& tribes, const World& world)
+TribeDescr::TribeDescr(const Widelands::TribeBasicInfo& info,
+                       Tribes& tribes, const World& world,
+                       const LuaTable& table, const LuaTable* scenario_table)
    : name_(table.get_string("name")), descname_(info.descname), tribes_(tribes) {
     log("┏━ Loading %s:\n", name_.c_str());
     ScopedTimer timer("┗━ took: %ums");
@@ -85,13 +85,14 @@ TribeDescr::TribeDescr(const LuaTable& table,
         log("%ums\n", timer.ms_since_last_query());
 
         log("┃    Buildings: ");
-		load_buildings(table, tribes);
+        load_buildings(table, tribes);
+        if (scenario_table != nullptr && scenario_table->has_key("buildings")) {
+            load_buildings(*scenario_table, tribes);
+        }
         log("%ums\n", timer.ms_since_last_query());
 
-        log("┃    Fit UI: ");
-        // Resize the configuration of our wares if they won't fit in the current window (12 = info label size).
-        int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
-        resize_ware_orders(number);
+        log("┃    Finalizing: ");
+        finalize_loading(tribes);
         log("%ums\n", timer.ms_since_last_query());
 	} catch (const GameDataError& e) {
 		throw GameDataError("tribe %s: %s", name_.c_str(), e.what());
@@ -279,36 +280,11 @@ void TribeDescr::load_buildings(const LuaTable& table, Tribes& tribes)
         add_building(buildingname, tribes);
     }
 
-    port_ = add_special_building(table.get_string("port"), tribes);
-    barracks_ = add_special_building(table.get_string("barracks"), tribes);
-
-    // Calculate building properties that have circular dependencies
-    for (DescriptionIndex i : buildings_) {
-        BuildingDescr* building_descr = tribes.get_mutable_building_descr(i);
-        assert(building_descr != nullptr);
-
-        // Add consumers and producers to wares.
-        if (upcast(ProductionSiteDescr, de, building_descr)) {
-            for (const auto& ware_amount : de->input_wares()) {
-                assert(has_ware(ware_amount.first));
-                tribes.get_mutable_ware_descr(ware_amount.first)->add_consumer(i);
-            }
-            for (const DescriptionIndex& wareindex : de->output_ware_types()) {
-                assert(has_ware(wareindex));
-                tribes.get_mutable_ware_descr(wareindex)->add_producer(i);
-            }
-            for (const auto& job : de->working_positions()) {
-                assert(has_worker(job.first));
-                tribes.get_mutable_worker_descr(job.first)->add_employer(i);
-            }
-        }
-
-        // Register which buildings buildings can have been enhanced from
-        // NOCOM shift to BuildingDescr
-        const DescriptionIndex& enhancement = building_descr->enhancement();
-        if (enhancement != INVALID_INDEX) {
-            tribes.get_mutable_building_descr(enhancement)->set_enhanced_from(i);
-        }
+    if (table.has_key("port")) {
+        port_ = add_special_building(table.get_string("port"), tribes);
+    }
+    if (table.has_key("barracks")) {
+        barracks_ = add_special_building(table.get_string("barracks"), tribes);
     }
 }
 
@@ -567,20 +543,28 @@ void TribeDescr::add_building(const std::string& buildingname, Tribes& tribes) {
 		if (has_building(index)) {
 			throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
 		}
-		buildings_.push_back(index);
+        buildings_.push_back(index);
+
+        const BuildingDescr* building_descr = get_building_descr(index);
+
+        // Register at enhanced building
+        const DescriptionIndex& enhancement = building_descr->enhancement();
+        if (enhancement != INVALID_INDEX) {
+            tribes.get_mutable_building_descr(enhancement)->set_enhanced_from(index);
+        }
 
 		// Register trainigsites
-		if (get_building_descr(index)->type() == MapObjectType::TRAININGSITE) {
+		if (building_descr->type() == MapObjectType::TRAININGSITE) {
 			trainingsites_.push_back(index);
 		}
 
 		// Register construction materials
-		for (const auto& build_cost : get_building_descr(index)->buildcost()) {
+		for (const auto& build_cost : building_descr->buildcost()) {
 			if (!is_construction_material(build_cost.first)) {
 				construction_materials_.insert(build_cost.first);
 			}
 		}
-		for (const auto& enhancement_cost : get_building_descr(index)->enhancement_cost()) {
+		for (const auto& enhancement_cost : building_descr->enhancement_cost()) {
 			if (!is_construction_material(enhancement_cost.first)) {
 				construction_materials_.insert(enhancement_cost.first);
 			}
@@ -630,6 +614,43 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename, Tribe
 	}
 }
 
+void TribeDescr::finalize_loading(Tribes& tribes) {
+    if (!has_building(port_)) {
+        throw GameDataError("no special 'port' building");
+    }
+    if (!has_building(barracks_)) {
+        throw GameDataError("no special 'barracks' building");
+    }
+
+    // Calculate building properties that have circular dependencies
+    for (DescriptionIndex i : buildings_) {
+        BuildingDescr* building_descr = tribes.get_mutable_building_descr(i);
+        assert(building_descr != nullptr);
+
+        // Add consumers and producers to wares.
+        if (upcast(ProductionSiteDescr, de, building_descr)) {
+            for (const auto& ware_amount : de->input_wares()) {
+                assert(has_ware(ware_amount.first));
+                tribes.get_mutable_ware_descr(ware_amount.first)->add_consumer(i);
+            }
+            for (const DescriptionIndex& wareindex : de->output_ware_types()) {
+                assert(has_ware(wareindex));
+                tribes.get_mutable_ware_descr(wareindex)->add_producer(i);
+            }
+            for (const auto& job : de->working_positions()) {
+                assert(has_worker(job.first));
+                tribes.get_mutable_worker_descr(job.first)->add_employer(i);
+            }
+        }
+    }
+
+    calculate_trainingsites_proportions(tribes);
+
+    // Resize the configuration of our wares if they won't fit in the current window (12 = info label size).
+    int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
+    resize_ware_orders(number);
+}
+
 // Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
 void TribeDescr::calculate_trainingsites_proportions(Tribes& tribes) {
     unsigned int trainingsites_without_percent = 0;
@@ -645,10 +666,6 @@ void TribeDescr::calculate_trainingsites_proportions(Tribes& tribes) {
         }
     }
 
-    log("%s trainingsites: We have used up %d%% on %" PRIuS " sites, there are %d without\n",
-        name().c_str(), used_percent, traingsites_with_percent.size(),
-        trainingsites_without_percent);
-
     // Adjust used_percent if we don't have at least 5% for each remaining trainingsite
     const float limit = 100 - trainingsites_without_percent * 5;
     if (used_percent > limit) {
@@ -659,8 +676,6 @@ void TribeDescr::calculate_trainingsites_proportions(Tribes& tribes) {
                                                        deductme);
             used_percent += descr->hints().trainingsites_max_percent();
         }
-        log("%s trainingsites: Used percent was adjusted to %d%%\n", name().c_str(),
-            used_percent);
     }
 
     // Now adjust for trainingsites that didn't have their max_percent set
@@ -671,8 +686,6 @@ void TribeDescr::calculate_trainingsites_proportions(Tribes& tribes) {
         while ((used_percent + percent_to_use * trainingsites_without_percent) < 100) {
             ++percent_to_use;
         }
-        log("%s trainingsites: Assigning %d%% to each of the remaining %d sites\n",
-            name().c_str(), percent_to_use, trainingsites_without_percent);
         if (percent_to_use < 1) {
             throw GameDataError(
                "%s: Training sites without predefined proportions add up to < 1%% and "

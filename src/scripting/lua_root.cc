@@ -506,8 +506,6 @@ const MethodType<LuaTribes> LuaTribes::Methods[] = {
    METHOD(LuaTribes, new_ware_type),
    METHOD(LuaTribes, new_warehouse_type),
    METHOD(LuaTribes, new_worker_type),
-   METHOD(LuaTribes, add_custom_building),
-   METHOD(LuaTribes, register_object),
    {0, 0},
 };
 const PropertyType<LuaTribes> LuaTribes::Properties[] = {
@@ -849,31 +847,6 @@ int LuaTribes::new_worker_type(lua_State* L) {
 }
 
 /* RST
-	.. method:: register_object{table}
-
-		Registers a tribe object's init script. Takes a single argument, a table with
-		its name and script path. See the files in tribes/ for usage examples.
-
-		:returns: :const:`nil`
-*/
-// NOCOM documentation.
-// NOCOM If it's not needed for custom units (TBD), delete this and the corresponding function in Tribes
-int LuaTribes::register_object(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->register_object(table);
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-/* RST
 	.. method:: new_tribe{table}
 
 		Adds a new tribe. Takes a single argument, a table with
@@ -891,39 +864,6 @@ int LuaTribes::new_tribe(lua_State* L) {
 		LuaTable table(L);  // Will pop the table eventually.
         EditorGameBase& egbase = get_egbase(L);
 		egbase.mutable_tribes()->add_tribe(table, egbase.world());
-	} catch (std::exception& e) {
-		report_error(L, "%s", e.what());
-	}
-	return 0;
-}
-
-/* RST
-	.. method:: add_custom_building{table}
-
-		Adds a custom building to a tribe, e.g. for use in a scenario.
-		The building must already be known to the tribes and should be defined in
-		the ``map:scripting/tribes/`` directory.
-
-		**Note:** This function *has* to be called from ``map:scripting/tribes/init.lua``.
-
-		The table has the following entries:
-
-		**tribename**
-			*Mandatory*. The name of the tribe that this building will be added to.
-
-		**buildingname**
-			*Mandatory*. The name of the building to be added to the tribe.
-
-		:returns: :const:`0`
-*/
-int LuaTribes::add_custom_building(lua_State* L) {
-	if (lua_gettop(L) != 2) {
-		report_error(L, "Takes only one argument.");
-	}
-
-	try {
-		LuaTable table(L);  // Will pop the table eventually.
-		get_egbase(L).mutable_tribes()->add_custom_building(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}

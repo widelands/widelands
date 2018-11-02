@@ -1405,7 +1405,6 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
 	std::string name;
 	UNPERS_STRING("name", name);
 	const Tribes& tribes = get_egbase(L).tribes();
-    // NOCOM Load
 	DescriptionIndex idx = tribes.safe_tribe_index(name);
 	set_description_pointer(tribes.get_tribe_descr(idx));
 }

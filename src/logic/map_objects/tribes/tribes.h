@@ -98,17 +98,14 @@ public:
 
     // ************************ Loading *************************
 
-    /// Map a map object's name to its init script so that we can load it when we want it.
-    void register_object(const LuaTable& table);
+    /// Define a scenario tribe directory, search it for 'register.lua' files and register their 'init.lua' scripts
+    void register_scenario_tribes(FileSystem* filesystem);
 
     /// Add a tribe object type to the tribes.
     void add_tribe_object_type(const LuaTable& table, EditorGameBase& egbase, MapObjectType type);
 
     /// Adds a specific tribe's configuration.
     void add_tribe(const LuaTable& table, const World& world);
-
-    /// Adds a custom scenario building.
-    void add_custom_building(const LuaTable& table);
 
     /// Load a tribe that has been registered previously with 'register_object'
     DescriptionIndex load_tribe(const std::string& tribename);
@@ -122,11 +119,14 @@ public:
     DescriptionIndex load_ware(const std::string& warename);
     /// Load a worker that has been registered previously with 'register_object'
     DescriptionIndex load_worker(const std::string& workername);
+
 private:
-    /// Search a directory for 'names.lua' files and register their 'init.lua' scripts
-    void register_directory (const std::string& dirname);
+    /// Search a directory for 'register.lua' files and register their 'init.lua' scripts
+    void register_directory(const std::string& dirname, FileSystem* filesystem, bool is_scenario_tribe);
     /// Map a map object's name to its init script so that we can load it when we want it.
     void register_object(const std::string& name, const std::string& script_path);
+    /// Map a scenario map object's name to its init script so that we can load it when we want it.
+    void register_scenario_object(FileSystem* filesystem, const std::string& name, const std::string& script_path);
     /// Load the map object type for the given 'object_name' that has been registered previously with 'register_object'
     void load_object(const std::string& object_name);
 
@@ -139,10 +139,14 @@ private:
 
     /// A list of all available map object types as <name, init script path>
     std::map<std::string, std::string> registered_tribe_objects_;
+    /// A list of all extra or replacement map object types used by a scenario as <name, init script path>
+    std::map<std::string, std::string> registered_scenario_objects_;
     /// A list of object types currently being loaded, to avoid circular dependencies
     std::set<std::string> tribe_objects_being_loaded_;
     /// List of the tribe objects that have already been loaded
     std::set<std::string> loaded_tribe_objects_;
+    /// Custom scenario tribes
+    std::unique_ptr<LuaTable> scenario_tribes_;
 
     LuaInterface* lua_; // Not owned
 

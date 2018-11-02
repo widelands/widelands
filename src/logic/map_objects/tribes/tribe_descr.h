@@ -68,9 +68,10 @@ Two players can choose the same tribe.
 */
 class TribeDescr {
 public:
-	TribeDescr(const LuaTable& table,
-	           const Widelands::TribeBasicInfo& info,
-	           Tribes& tribes, const World& world);
+    TribeDescr(const Widelands::TribeBasicInfo& info,
+	           Tribes& tribes, const World& world,
+               const LuaTable& table,
+               const LuaTable* scenario_table = nullptr);
 
 	const std::string& name() const;
 	const std::string& descname() const;
@@ -187,6 +188,8 @@ private:
 	DescriptionIndex add_special_building(const std::string& buildingname, Tribes& tribes);
 	// Helper function to identify special wares across tribes (iron ore etc.)
 	DescriptionIndex add_special_ware(const std::string& warename, Tribes& tribes);
+    // Make sure that everything is there and that dependencies are calculated
+    void finalize_loading(Tribes& tribes);
     // Helper function to calculate trainingsites proportions for the AI
     void calculate_trainingsites_proportions(Tribes& tribes);
 

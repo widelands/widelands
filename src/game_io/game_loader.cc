@@ -87,11 +87,12 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 	// This has to be loaded after the map packet so that the map's filesystem will exist.
 	// The custom tribe scripts are saved when the map scripting packet is saved, but we need
 	// to load them as early as possible here.
-	if (fs_.file_exists("map/scripting/tribes/init.lua")) {
+    FileSystem* map_fs = game_.map().filesystem();
+	if (map_fs->file_exists("scripting/tribes")) {
 		log("Game: Reading Scenario Tribes ... ");
-		game_.lua().run_script("map:scripting/tribes/init.lua");
+        game_.mutable_tribes()->register_scenario_tribes(map_fs);
 		log("Game: Reading Scenario Tribes took %ums\n", timer.ms_since_last_query());
-	}
+ 	}
 
 	log("Game: Reading Player Info ... ");
 	{
