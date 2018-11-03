@@ -4,8 +4,8 @@ terrain_affinity = {
    -- Temperature is in arbitrary units.
    preferred_temperature = 125,
 
-   -- In percent (1 being very wet).
-   preferred_humidity = 0.65,
+   -- Value between 0 and 1000 (1000 being very wet).
+   preferred_humidity = 650,
 
    -- In percent (1 being very fertile).
    preferred_fertility = 0.6,

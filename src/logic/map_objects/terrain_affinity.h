@@ -47,8 +47,8 @@ public:
 	// Preferred fertility in percent [0, 1].
 	double preferred_fertility() const;
 
-	// Preferred humidity in percent [0, 1].
-	double preferred_humidity() const;
+	// Preferred humidity, ranging from 0 to 1000.
+	int preferred_humidity() const;
 
 	// A value in [0, 1] that defines how well this can deal with non-ideal
 	// situations. Lower means it is less picky, i.e. it can deal better.
@@ -56,7 +56,7 @@ public:
 
 private:
 	double preferred_fertility_;
-	double preferred_humidity_;
+	int preferred_humidity_;
 	double preferred_temperature_;
 	double pickiness_;
 

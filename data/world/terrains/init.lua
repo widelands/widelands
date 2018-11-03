@@ -131,10 +131,10 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --    **humidity**
 --        *Mandatory*. A terrain affinity constant. These are used to model how well
---        trees will grow on this terrain. Humidity is in percent (1 being very wet).
+--        trees will grow on this terrain. Values range from 1 - 1000 (1000 being very wet).
 --        Example::
 --
---            humidity = 0.6,
+--            humidity = 600,
 --
 --    **fertility**
 --        *Mandatory*. A terrain affinity constant. These are used to model how well
@@ -167,7 +167,7 @@ world:new_terrain_type{
    dither_layer = 340,
 
    temperature = 100,
-   humidity = 0.6,
+   humidity = 600,
    fertility = 0.7,
 }
 
@@ -187,7 +187,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/meadow2_00.png" },
    dither_layer = 350,
    temperature = 100,
-   humidity = 0.6,
+   humidity = 600,
    fertility = 0.65,
 
 }
@@ -208,7 +208,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/meadow3_00.png" },
    dither_layer = 350,
    temperature = 105,
-   humidity = 0.55,
+   humidity = 550,
    fertility = 0.8,
 }
 
@@ -228,7 +228,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/meadow4_00.png" },
    dither_layer = 350,
    temperature = 110,
-   humidity = 0.65,
+   humidity = 650,
    fertility = 0.75,
 }
 
@@ -244,7 +244,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/steppe_00.png" },
    dither_layer = 330,
    temperature = 100,
-   humidity = 0.4,
+   humidity = 400,
    fertility = 0.4,
 }
 
@@ -260,7 +260,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/steppe_barren_00.png" },
    dither_layer = 320,
    temperature = 100,
-   humidity = 0.15,
+   humidity = 150,
    fertility = 0.15,
 }
 
@@ -276,7 +276,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain_meadow_00.png" },
    dither_layer = 160,
    temperature = 75,
-   humidity = 0.8,
+   humidity = 800,
    fertility = 0.45,
 }
 
@@ -296,7 +296,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/forested_mountain1_00.png" },
    dither_layer = 71,
    temperature = 50,
-   humidity = 0.75,
+   humidity = 750,
    fertility = 0.5,
 }
 
@@ -316,7 +316,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/forested_mountain2_00.png" },
    dither_layer = 71,
    temperature = 50,
-   humidity = 0.75,
+   humidity = 750,
    fertility = 0.5,
 }
 
@@ -331,7 +331,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain1_00.png" },
    dither_layer = 70,
    temperature = 80,
-   humidity = 0.1,
+   humidity = 100,
    fertility = 0.1,
 }
 
@@ -347,7 +347,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain2_00.png" },
    dither_layer = 70,
    temperature = 80,
-   humidity = 0.1,
+   humidity = 100,
    fertility = 0.1,
 }
 
@@ -363,7 +363,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain3_00.png" },
    dither_layer = 70,
    temperature = 80,
-   humidity = 0.1,
+   humidity = 100,
    fertility = 0.1,
 }
 
@@ -379,7 +379,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/mountain4_00.png" },
    dither_layer = 70,
    temperature = 80,
-   humidity = 0.1,
+   humidity = 100,
    fertility = 0.1,
 }
 
@@ -394,7 +394,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/beach_00.png" },
    dither_layer = 60,
    temperature = 120,
-   humidity = 0.6,
+   humidity = 600,
    fertility = 0.2,
 }
 
@@ -410,7 +410,7 @@ world:new_terrain_type{
    dither_layer = 370,
    fps = 14,
    temperature = 105,
-   humidity = 0.999,
+   humidity = 999,
    fertility = 0.1,
 }
 world:new_terrain_type{
@@ -424,7 +424,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "summer/snow_00.png" },
    dither_layer = 220,
    temperature = 50,
-   humidity = 0.999,
+   humidity = 999,
    fertility = 0.001,
 }
 
@@ -441,7 +441,7 @@ world:new_terrain_type{
    dither_layer = 30,
    fps = 4,
    temperature = 1273.0,
-   humidity = 0.001,
+   humidity = 1,
    fertility = 0.001,
 }
 
@@ -458,7 +458,7 @@ world:new_terrain_type{
    dither_layer = 180,
    fps = 14,
    temperature = 100,
-   humidity = 0.999,
+   humidity = 999,
    fertility = 0.001,
 }
 
@@ -482,7 +482,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/ashes_00.png" },
    dither_layer = 400,
    temperature = 120,
-   humidity = 0.15,
+   humidity = 150,
    fertility = 0.9,
 }
 
@@ -502,7 +502,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/ashes2_00.png" },
    dither_layer = 410,
    temperature = 118,
-   humidity = 0.13,
+   humidity = 130,
    fertility = 0.999,
 }
 
@@ -522,7 +522,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardground1_00.png" },
    dither_layer = 420,
    temperature = 100,
-   humidity = 0.25,
+   humidity = 250,
    fertility = 0.8,
 }
 
@@ -542,7 +542,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardground2_00.png" },
    dither_layer = 370,
    temperature = 95,
-   humidity = 0.15,
+   humidity = 150,
    fertility = 0.85,
 }
 
@@ -562,7 +562,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardground3_00.png" },
    dither_layer = 380,
    temperature = 105,
-   humidity = 0.2,
+   humidity = 200,
    fertility = 0.9,
 }
 
@@ -582,7 +582,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardground4_00.png" },
    dither_layer = 390,
    temperature = 90,
-   humidity = 0.2,
+   humidity = 200,
    fertility = 0.8,
 }
 
@@ -598,7 +598,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/hardlava_00.png" },
    dither_layer = 360,
    temperature = 120,
-   humidity = 0.1,
+   humidity = 100,
    fertility = 0.2,
 }
 
@@ -618,7 +618,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/forested_mountain1_00.png" },
    dither_layer = 81,
    temperature = 110,
-   humidity = 0.15,
+   humidity = 150,
    fertility = 0.95,
 }
 
@@ -637,7 +637,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/forested_mountain2_00.png" },
    dither_layer = 81,
    temperature = 95,
-   humidity = 0.2,
+   humidity = 200,
    fertility = 0.4,
 }
 
@@ -652,7 +652,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/mountain1_00.png" },
    dither_layer = 90,
    temperature = 80,
-   humidity = 0.05,
+   humidity = 50,
    fertility = 0.2,
 }
 
@@ -668,7 +668,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/mountain2_00.png" },
    dither_layer = 90,
    temperature = 80,
-   humidity = 0.05,
+   humidity = 50,
    fertility = 0.2,
 }
 
@@ -684,7 +684,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/mountain3_00.png" },
    dither_layer = 90,
    temperature = 80,
-   humidity = 0.05,
+   humidity = 50,
    fertility = 0.2,
 }
 
@@ -700,7 +700,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/mountain4_00.png" },
    dither_layer = 80,
    temperature = 80,
-   humidity = 0.05,
+   humidity = 50,
    fertility = 0.2,
 }
 
@@ -716,7 +716,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "wasteland/beach_00.png" },
    dither_layer = 50,
    temperature = 60,
-   humidity = 0.4,
+   humidity = 400,
    fertility = 0.2,
 }
 
@@ -733,7 +733,7 @@ world:new_terrain_type{
    dither_layer = 20,
    fps = 7,
    temperature = 1273.0,
-   humidity = 0.001,
+   humidity = 1,
    fertility = 0.001,
 }
 
@@ -750,7 +750,7 @@ world:new_terrain_type{
    dither_layer = 10,
    fps = 7,
    temperature = 1273.0,
-   humidity = 0.001,
+   humidity = 1,
    fertility = 0.001,
 }
 
@@ -767,7 +767,7 @@ world:new_terrain_type{
    dither_layer = 170,
    fps = 14,
    temperature = 100,
-   humidity = 0.999,
+   humidity = 999,
    fertility = 0.001,
 }
 
@@ -792,7 +792,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/tundra_00.png" },
    dither_layer = 230,
    temperature = 50,
-   humidity = 0.85,
+   humidity = 850,
    fertility = 0.45,
 }
 
@@ -812,7 +812,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/tundra2_00.png" },
    dither_layer = 240,
    temperature = 55,
-   humidity = 0.75,
+   humidity = 750,
    fertility = 0.45,
 }
 
@@ -832,7 +832,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/tundra3_00.png" },
    dither_layer = 240,
    temperature = 50,
-   humidity = 0.8,
+   humidity = 800,
    fertility = 0.4,
 }
 
@@ -848,7 +848,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/tundra_taiga_00.png" },
    dither_layer = 230,
    temperature = 40,
-   humidity = 0.75,
+   humidity = 750,
    fertility = 0.4,
 }
 
@@ -864,7 +864,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/taiga_00.png" },
    dither_layer = 250,
    temperature = 35,
-   humidity = 0.75,
+   humidity = 750,
    fertility = 0.3,
 }
 
@@ -880,7 +880,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/snow_00.png" },
    dither_layer = 250,
    temperature = 25,
-   humidity = 0.8,
+   humidity = 800,
    fertility = 0.1,
 }
 
@@ -900,7 +900,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/forested_mountain1_00.png" },
    dither_layer = 101,
    temperature = 35,
-   humidity = 0.7,
+   humidity = 700,
    fertility = 0.4,
 }
 
@@ -919,7 +919,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/forested_mountain2_00.png" },
    dither_layer = 101,
    temperature = 35,
-   humidity = 0.7,
+   humidity = 700,
    fertility = 0.4,
 }
 
@@ -934,7 +934,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/mountain1_00.png" },
    dither_layer = 110,
    temperature = 20,
-   humidity = 0.3,
+   humidity = 300,
    fertility = 0.05,
 }
 
@@ -950,7 +950,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/mountain2_00.png" },
    dither_layer = 110,
    temperature = 20,
-   humidity = 0.3,
+   humidity = 300,
    fertility = 0.05,
 }
 
@@ -966,7 +966,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/mountain3_00.png" },
    dither_layer = 100,
    temperature = 20,
-   humidity = 0.3,
+   humidity = 300,
    fertility = 0.05,
 }
 
@@ -982,7 +982,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/mountain4_00.png" },
    dither_layer = 100,
    temperature = 20,
-   humidity = 0.3,
+   humidity = 300,
    fertility = 0.05,
 }
 world:new_terrain_type{
@@ -996,7 +996,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/ice_00.png" },
    dither_layer = 260,
    temperature = 25,
-   humidity = 0.5,
+   humidity = 500,
    fertility = 0.1,
 }
 
@@ -1012,7 +1012,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "winter/beach_00.png" },
    dither_layer = 40,
    temperature = 60,
-   humidity = 0.5,
+   humidity = 500,
    fertility = 0.1,
 }
 
@@ -1029,7 +1029,7 @@ world:new_terrain_type{
    dither_layer = 210,
    fps = 5,
    temperature = 50,
-   humidity = 0.999,
+   humidity = 999,
    fertility = 0.001,
 }
 
@@ -1046,7 +1046,7 @@ world:new_terrain_type{
    dither_layer = 210,
    fps = 5,
    temperature = 50,
-   humidity = 0.999,
+   humidity = 999,
    fertility = 0.001,
 }
 
@@ -1063,7 +1063,7 @@ world:new_terrain_type{
    dither_layer = 190,
    fps = 8,
    temperature = 50,
-   humidity = 0.999,
+   humidity = 999,
    fertility = 0.001,
 }
 
@@ -1083,7 +1083,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/desert4_00.png" },
    dither_layer = 270,
    temperature = 168,
-   humidity = 0.001,
+   humidity = 1,
    fertility = 0.1,
 }
 
@@ -1098,7 +1098,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/drysoil_00.png" },
    dither_layer = 300,
    temperature = 172,
-   humidity = 0.2,
+   humidity = 200,
    fertility = 0.2,
 }
 world:new_terrain_type{
@@ -1116,7 +1116,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/steppe_00.png" },
    dither_layer = 360,
    temperature = 155,
-   humidity = 0.5,
+   humidity = 500,
    fertility = 0.5,
 }
 
@@ -1136,7 +1136,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/meadow_00.png" },
    dither_layer = 310,
    temperature = 160,
-   humidity = 0.6,
+   humidity = 600,
    fertility = 0.6,
 }
 
@@ -1156,7 +1156,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountainmeadow_00.png" },
    dither_layer = 150,
    temperature = 145,
-   humidity = 0.5,
+   humidity = 500,
    fertility = 0.5,
 }
 
@@ -1176,7 +1176,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/highmountainmeadow_00.png" },
    dither_layer = 150,
    temperature = 140,
-   humidity = 0.4,
+   humidity = 400,
    fertility = 0.4,
 }
 
@@ -1196,7 +1196,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/forested_mountain1_00.png" },
    dither_layer = 71,
    temperature = 141,
-   humidity = 0.5,
+   humidity = 500,
    fertility = 0.5,
 }
 
@@ -1215,7 +1215,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/forested_mountain2_00.png" },
    dither_layer = 141,
    temperature = 120,
-   humidity = 0.5,
+   humidity = 500,
    fertility = 0.5,
 }
 
@@ -1231,7 +1231,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountain1_00.png" },
    dither_layer = 120,
    temperature = 130,
-   humidity = 0.05,
+   humidity = 50,
    fertility = 0.05,
 }
 
@@ -1247,7 +1247,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountain2_00.png" },
    dither_layer = 120,
    temperature = 130,
-   humidity = 0.05,
+   humidity = 50,
    fertility = 0.05,
 }
 
@@ -1263,7 +1263,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountain3_00.png" },
    dither_layer = 130,
    temperature = 130,
-   humidity = 0.05,
+   humidity = 50,
    fertility = 0.05,
 }
 
@@ -1279,7 +1279,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/mountain4_00.png" },
    dither_layer = 140,
    temperature = 130,
-   humidity = 0.05,
+   humidity = 50,
    fertility = 0.05,
 }
 world:new_terrain_type{
@@ -1293,7 +1293,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/desert1_00.png" },
    dither_layer = 290,
    temperature = 167,
-   humidity = 0.001,
+   humidity = 1,
    fertility = 0.001,
 }
 
@@ -1309,7 +1309,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/desert2_00.png" },
    dither_layer = 280,
    temperature = 168,
-   humidity = 0.001,
+   humidity = 1,
    fertility = 0.001,
 }
 
@@ -1325,7 +1325,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/desert3_00.png" },
    dither_layer = 280,
    temperature = 178,
-   humidity = 0.001,
+   humidity = 1,
    fertility = 0.001,
 }
 
@@ -1341,7 +1341,7 @@ world:new_terrain_type{
    textures = { pics_dir .. "desert/beach_00.png" },
    dither_layer = 60,
    temperature = 179,
-   humidity = 0.5,
+   humidity = 500,
    fertility = 0.1,
 }
 
@@ -1358,6 +1358,6 @@ world:new_terrain_type{
    dither_layer = 200,
    fps = 5,
    temperature = 150,
-   humidity = 0.999,
+   humidity = 999,
    fertility = 0.001,
 }

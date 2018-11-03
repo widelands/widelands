@@ -1925,7 +1925,7 @@ int LuaImmovableDescription::get_editor_category(lua_State* L) {
          returns the terrain affinity values for this immovable
 
          (RO) a table containing numbers labeled as pickiness (double), preferred_fertility (double),
-         preferred_humidity (double), and preferred_temperature (uint),
+         preferred_humidity (uint), and preferred_temperature (uint),
          or nil if the immovable has no terrain affinity.
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
@@ -1939,7 +1939,7 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 		lua_pushdouble(L, affinity.preferred_fertility());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_humidity");
-		lua_pushdouble(L, affinity.preferred_humidity());
+		lua_pushinteger(L, affinity.preferred_humidity());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_temperature");
 		lua_pushuint32(L, affinity.preferred_temperature());
@@ -3521,11 +3521,11 @@ int LuaTerrainDescription::get_fertility(lua_State* L) {
 /* RST
    .. attribute:: humidity
 
-         (RO) the :class:`double` humidity value for this terrain
+         (RO) the :class:`uint` humidity value for this terrain
 */
 
 int LuaTerrainDescription::get_humidity(lua_State* L) {
-	lua_pushdouble(L, get()->humidity());
+	lua_pushinteger(L, get()->humidity());
 	return 1;
 }
 

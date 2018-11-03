@@ -117,8 +117,8 @@ public:
 	/// Temperature is in arbitrary units.
 	double temperature() const;
 
-	/// Humidity in percent [0, 1].
-	double humidity() const;
+	/// Humidity, ranging from 0 to 1000.
+	int humidity() const;
 
 	/// Fertility in percent [0, 1].
 	double fertility() const;
@@ -141,7 +141,7 @@ private:
 	int frame_length_;
 	double temperature_;
 	double fertility_;
-	double humidity_;
+	int humidity_;
 	std::vector<std::string> texture_paths_;
 	std::vector<const Image*> textures_;
 	RGBColor minimap_colors_[256];
