@@ -50,15 +50,15 @@ public:
 	// Preferred humidity, ranging from 0 to 1000.
 	int preferred_humidity() const;
 
-	// A value in [0, 1] that defines how well this can deal with non-ideal
+	// A value in [0, 100] that defines how well this can deal with non-ideal
 	// situations. Lower means it is less picky, i.e. it can deal better.
-	double pickiness() const;
+	int pickiness() const;
 
 private:
 	int preferred_fertility_;
 	int preferred_humidity_;
 	int preferred_temperature_;
-	double pickiness_;
+	int pickiness_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainAffinity);
 };

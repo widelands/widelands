@@ -4,7 +4,7 @@ terrain_affinity = {
    preferred_temperature = 120,
    preferred_humidity = 100,
    preferred_fertility = 200,
-   pickiness = 0.5,
+   pickiness = 50,
 }
 
 tribes:new_immovable_type {

@@ -48,9 +48,9 @@ double calculate_probability_to_grow(const TerrainAffinity& affinity,
 	constexpr double kFertilityWeight = 0.5292268046607387;
 	constexpr double kTemperatureWeight = 61.31300863608306;
 
-	const double sigma_humidity = (1. - affinity.pickiness());
-	const double sigma_temperature = (1. - affinity.pickiness());
-	const double sigma_fertility = (1. - affinity.pickiness());
+	const double sigma_humidity = (100 - affinity.pickiness()) / 100;
+	const double sigma_temperature = (100 - affinity.pickiness() / 100);
+	const double sigma_fertility = (100 - affinity.pickiness()) / 100;
 // NOCOM keeping calculations as they were for now - make this all int calculations
 	return exp((-pow2(((affinity.preferred_fertility() - terrain_fertility) / 1000) /
 	                  (kFertilityWeight * sigma_fertility)) -
@@ -67,15 +67,15 @@ TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immov
    : preferred_fertility_(table.get_int("preferred_fertility")),
      preferred_humidity_(table.get_int("preferred_humidity")),
      preferred_temperature_(table.get_int("preferred_temperature")),
-     pickiness_(table.get_double("pickiness")) {
+     pickiness_(table.get_int("pickiness")) {
 	if (!(0 <= preferred_fertility_ && preferred_fertility_ <= 1000)) {
 		throw GameDataError("%s: preferred_fertility is not in [0, 1000].", immovable_name.c_str());
 	}
 	if (!(0 <= preferred_humidity_ && preferred_humidity_ <= 1000)) {
 		throw GameDataError("%s: preferred_humidity is not in [0, 1000].", immovable_name.c_str());
 	}
-	if (!(0 <= pickiness_ && pickiness_ <= 1.)) {
-		throw GameDataError("%s: pickiness is not in [0, 1].", immovable_name.c_str());
+	if (!(0 <= pickiness_ && pickiness_ <= 100)) {
+		throw GameDataError("%s: pickiness is not in [0, 100].", immovable_name.c_str());
 	}
 	if (preferred_temperature_ < 0) {
 		throw GameDataError("%s: preferred_temperature is not possible.", immovable_name.c_str());
@@ -94,7 +94,7 @@ int TerrainAffinity::preferred_humidity() const {
 	return preferred_humidity_;
 }
 
-double TerrainAffinity::pickiness() const {
+int TerrainAffinity::pickiness() const {
 	return pickiness_;
 }
 

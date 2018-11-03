@@ -4,7 +4,7 @@ terrain_affinity = {
    preferred_temperature = 105,
    preferred_humidity = 200,
    preferred_fertility = 900,
-   pickiness = 0.8,
+   pickiness = 80,
 }
 
 world:new_immovable_type{

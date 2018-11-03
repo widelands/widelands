@@ -4,7 +4,7 @@ terrain_affinity = {
    preferred_temperature = 110, -- Temperature is in arbitrary units.
    preferred_humidity = 600,    -- Values between 0 and 1000 (1000 being very wet).
    preferred_fertility = 800,   -- Values between 0 and 1000 (1000 being very fertile).
-   pickiness = 0.2,             -- Lower means it is less picky, i.e. it can deal better.
+   pickiness = 20,             -- Lower means it is less picky, i.e. it can deal better.
 }
 
 tribes:new_immovable_type {
