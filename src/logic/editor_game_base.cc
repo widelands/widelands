@@ -136,7 +136,7 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 	Widelands::MapSaver* wms = new Widelands::MapSaver(*tmp_fs_, *this);
 	wms->save();
 	delete wms;
-	
+
 	// swap map fs
 	std::unique_ptr<FileSystem> mapfs(tmp_fs_->make_sub_file_system("."));
 	map_.swap_filesystem(mapfs);

@@ -272,7 +272,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
 			return false;
 	}
-	
+
 	//  Try deleting file (if it exists). If it fails, give a message and let the player choose a new name.
 	try {
 		g_fs->fs_unlink(complete_filename);
@@ -301,7 +301,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	} else {
 		map->delete_tag("artifacts");
 	}
-	
+
 	//  Try saving.
 	try {
 		std::unique_ptr<FileSystem> fs(
