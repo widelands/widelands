@@ -133,17 +133,22 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		}
 	}
 
+    // We define a building as buildable if it has a "buildcost" table.
+    // A buildable building must also define "return_on_dismantle".
+    // However, we support "return_on_dismantle" without "buildable", because this is used by custom scenario buildings.
+    if (table.has_key("return_on_dismantle")) {
+        return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
+    }
 	if (table.has_key("buildcost")) {
 		buildable_ = true;
-		try {
-			buildcost_ = Buildcost(table.get_table("buildcost"), egbase_.tribes());
-			return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
-		} catch (const WException& e) {
-			throw wexception(
-			   "A buildable building must define \"buildcost\" and \"return_on_dismantle\": %s",
-			   e.what());
-		}
+        if (!table.has_key("return_on_dismantle")) {
+            throw wexception(
+			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"",
+			   name().c_str());
+        }
+		buildcost_ = Buildcost(table.get_table("buildcost"), egbase_.tribes());
 	}
+
 	if (table.has_key("enhancement_cost")) {
 		enhanced_building_ = true;
 		try {
@@ -151,9 +156,9 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			return_enhanced_ =
 			   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
 		} catch (const WException& e) {
-			throw wexception("An enhanced building must define \"enhancement_cost\""
+			throw wexception("The enhanced building '%s' must define \"enhancement_cost\""
 			                 "and \"return_on_dismantle_on_enhanced\": %s",
-			                 e.what());
+			                 name().c_str(), e.what());
 		}
 	}
 
