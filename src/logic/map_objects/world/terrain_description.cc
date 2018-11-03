@@ -106,15 +106,15 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")),
      temperature_(table.get_double("temperature")),
-     fertility_(table.get_double("fertility")),
+     fertility_(table.get_int("fertility")),
      humidity_(table.get_int("humidity")) {
 
 	if (table.has_key("tooltips")) {
 		custom_tooltips_ = table.get_table("tooltips")->array_entries<std::string>();
 	}
 
-	if (!(0 < fertility_ && fertility_ < 1.)) {
-		throw GameDataError("%s: fertility is not in (0, 1).", name_.c_str());
+	if (!(0 < fertility_ && fertility_ < 1000)) {
+		throw GameDataError("%s: fertility is not in (0, 1000).", name_.c_str());
 	}
 	if (!(0 < humidity_ && humidity_ < 1000)) {
 		throw GameDataError("%s: humidity is not in (0, 1000).", name_.c_str());
@@ -252,7 +252,7 @@ int TerrainDescription::humidity() const {
 	return humidity_;
 }
 
-double TerrainDescription::fertility() const {
+int TerrainDescription::fertility() const {
 	return fertility_;
 }
 

@@ -120,8 +120,8 @@ public:
 	/// Humidity, ranging from 0 to 1000.
 	int humidity() const;
 
-	/// Fertility in percent [0, 1].
-	double fertility() const;
+	/// Fertility, ranging from 0 to 1000.
+	int fertility() const;
 
 	/// Additional tooptip entries for the editor
 	const std::vector<std::string>& custom_tooltips() const {
@@ -140,7 +140,7 @@ private:
 	int dither_layer_;
 	int frame_length_;
 	double temperature_;
-	double fertility_;
+	int fertility_;
 	int humidity_;
 	std::vector<std::string> texture_paths_;
 	std::vector<const Image*> textures_;

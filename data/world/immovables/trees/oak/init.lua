@@ -3,7 +3,7 @@ dirname = path.dirname(__file__)
 terrain_affinity = {
    preferred_temperature = 90,
    preferred_humidity = 700,
-   preferred_fertility = 0.5,
+   preferred_fertility = 500,
    pickiness = 0.6,
 }
 

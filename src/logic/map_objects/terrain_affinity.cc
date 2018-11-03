@@ -41,7 +41,7 @@ constexpr double pow2(const double& a) {
 // Calculates the probability to grow for the given affinity and terrain values
 double calculate_probability_to_grow(const TerrainAffinity& affinity,
                                      int terrain_humidity,
-                                     double terrain_fertility,
+                                     int terrain_fertility,
                                      double terrain_temperature) {
 
 	constexpr double kHumidityWeight = 0.500086642549548;
@@ -52,9 +52,9 @@ double calculate_probability_to_grow(const TerrainAffinity& affinity,
 	const double sigma_temperature = (1. - affinity.pickiness());
 	const double sigma_fertility = (1. - affinity.pickiness());
 // NOCOM keeping calculations as they were for now - make this all int calculations
-	return exp((-pow2((affinity.preferred_fertility() - terrain_fertility) /
+	return exp((-pow2(((affinity.preferred_fertility() - terrain_fertility) / 1000) /
 	                  (kFertilityWeight * sigma_fertility)) -
-	            pow2((((affinity.preferred_humidity() - terrain_humidity) / 1000)) /
+	            pow2(((affinity.preferred_humidity() - terrain_humidity) / 1000) /
 	                 (kHumidityWeight * sigma_humidity)) -
 	            pow2((affinity.preferred_temperature() - terrain_temperature) /
 	                 (kTemperatureWeight * sigma_temperature))) /
@@ -64,12 +64,12 @@ double calculate_probability_to_grow(const TerrainAffinity& affinity,
 }  // namespace
 
 TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immovable_name)
-   : preferred_fertility_(table.get_double("preferred_fertility")),
+   : preferred_fertility_(table.get_int("preferred_fertility")),
      preferred_humidity_(table.get_int("preferred_humidity")),
      preferred_temperature_(table.get_double("preferred_temperature")),
      pickiness_(table.get_double("pickiness")) {
-	if (!(0 <= preferred_fertility_ && preferred_fertility_ <= 1.)) {
-		throw GameDataError("%s: preferred_fertility is not in [0, 1].", immovable_name.c_str());
+	if (!(0 <= preferred_fertility_ && preferred_fertility_ <= 1000)) {
+		throw GameDataError("%s: preferred_fertility is not in [0, 1000].", immovable_name.c_str());
 	}
 	if (!(0 <= preferred_humidity_ && preferred_humidity_ <= 1000)) {
 		throw GameDataError("%s: preferred_humidity is not in [0, 1000].", immovable_name.c_str());
@@ -86,7 +86,7 @@ double TerrainAffinity::preferred_temperature() const {
 	return preferred_temperature_;
 }
 
-double TerrainAffinity::preferred_fertility() const {
+int TerrainAffinity::preferred_fertility() const {
 	return preferred_fertility_;
 }
 
@@ -103,15 +103,15 @@ double probability_to_grow(const TerrainAffinity& affinity,
                            const Map& map,
                            const DescriptionMaintainer<TerrainDescription>& terrains) {
 	int terrain_humidity = 0;
-	double terrain_fertility = 0;
+	int terrain_fertility = 0;
 	double terrain_temperature = 0;
 
 	const auto average = [&terrain_humidity, &terrain_fertility, &terrain_temperature,
 	                      &terrains](const int terrain_index) {
 		const TerrainDescription& t = terrains.get(terrain_index);
 		terrain_humidity += t.humidity() / 6;
-		terrain_temperature += t.temperature() / 6.;
-		terrain_fertility += t.fertility() / 6.;
+		terrain_temperature += t.temperature() / 6;
+		terrain_fertility += t.fertility() / 6;
 	};
 
 	average(fcoords.field->terrain_d());

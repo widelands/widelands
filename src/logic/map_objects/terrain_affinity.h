@@ -44,8 +44,8 @@ public:
 	// Preferred temperature is in arbitrary units.
 	double preferred_temperature() const;
 
-	// Preferred fertility in percent [0, 1].
-	double preferred_fertility() const;
+	// Preferred fertility, ranging from 0 to 1000.
+	int preferred_fertility() const;
 
 	// Preferred humidity, ranging from 0 to 1000.
 	int preferred_humidity() const;
@@ -55,7 +55,7 @@ public:
 	double pickiness() const;
 
 private:
-	double preferred_fertility_;
+	int preferred_fertility_;
 	int preferred_humidity_;
 	double preferred_temperature_;
 	double pickiness_;

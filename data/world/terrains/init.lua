@@ -138,10 +138,10 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --
 --    **fertility**
 --        *Mandatory*. A terrain affinity constant. These are used to model how well
---        trees will grow on this terrain. Fertility is in percent (1 being very
+--        trees will grow on this terrain. Values range from 1 - 1000 (1000 being very
 --        fertile). Example::
 --
---            fertility = 0.7,
+--            fertility = 700,
 --
 
 ------------------------
@@ -168,7 +168,7 @@ world:new_terrain_type{
 
    temperature = 100,
    humidity = 600,
-   fertility = 0.7,
+   fertility = 700,
 }
 
 
@@ -188,7 +188,7 @@ world:new_terrain_type{
    dither_layer = 350,
    temperature = 100,
    humidity = 600,
-   fertility = 0.65,
+   fertility = 650,
 
 }
 
@@ -209,7 +209,7 @@ world:new_terrain_type{
    dither_layer = 350,
    temperature = 105,
    humidity = 550,
-   fertility = 0.8,
+   fertility = 800,
 }
 
 
@@ -229,7 +229,7 @@ world:new_terrain_type{
    dither_layer = 350,
    temperature = 110,
    humidity = 650,
-   fertility = 0.75,
+   fertility = 750,
 }
 
 
@@ -245,7 +245,7 @@ world:new_terrain_type{
    dither_layer = 330,
    temperature = 100,
    humidity = 400,
-   fertility = 0.4,
+   fertility = 400,
 }
 
 
@@ -261,7 +261,7 @@ world:new_terrain_type{
    dither_layer = 320,
    temperature = 100,
    humidity = 150,
-   fertility = 0.15,
+   fertility = 150,
 }
 
 
@@ -277,7 +277,7 @@ world:new_terrain_type{
    dither_layer = 160,
    temperature = 75,
    humidity = 800,
-   fertility = 0.45,
+   fertility = 450,
 }
 
 world:new_terrain_type{
@@ -297,7 +297,7 @@ world:new_terrain_type{
    dither_layer = 71,
    temperature = 50,
    humidity = 750,
-   fertility = 0.5,
+   fertility = 500,
 }
 
 world:new_terrain_type{
@@ -317,7 +317,7 @@ world:new_terrain_type{
    dither_layer = 71,
    temperature = 50,
    humidity = 750,
-   fertility = 0.5,
+   fertility = 500,
 }
 
 world:new_terrain_type{
@@ -332,7 +332,7 @@ world:new_terrain_type{
    dither_layer = 70,
    temperature = 80,
    humidity = 100,
-   fertility = 0.1,
+   fertility = 100,
 }
 
 
@@ -348,7 +348,7 @@ world:new_terrain_type{
    dither_layer = 70,
    temperature = 80,
    humidity = 100,
-   fertility = 0.1,
+   fertility = 100,
 }
 
 
@@ -364,7 +364,7 @@ world:new_terrain_type{
    dither_layer = 70,
    temperature = 80,
    humidity = 100,
-   fertility = 0.1,
+   fertility = 100,
 }
 
 
@@ -380,7 +380,7 @@ world:new_terrain_type{
    dither_layer = 70,
    temperature = 80,
    humidity = 100,
-   fertility = 0.1,
+   fertility = 100,
 }
 
 world:new_terrain_type{
@@ -395,7 +395,7 @@ world:new_terrain_type{
    dither_layer = 60,
    temperature = 120,
    humidity = 600,
-   fertility = 0.2,
+   fertility = 200,
 }
 
 world:new_terrain_type{
@@ -411,7 +411,7 @@ world:new_terrain_type{
    fps = 14,
    temperature = 105,
    humidity = 999,
-   fertility = 0.1,
+   fertility = 100,
 }
 world:new_terrain_type{
    name = "summer_snow",
@@ -425,7 +425,7 @@ world:new_terrain_type{
    dither_layer = 220,
    temperature = 50,
    humidity = 999,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -440,9 +440,9 @@ world:new_terrain_type{
    textures = path.list_files(pics_dir .. "summer/lava/lava_??.png"),
    dither_layer = 30,
    fps = 4,
-   temperature = 1273.0,
+   temperature = 1273,
    humidity = 1,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -459,7 +459,7 @@ world:new_terrain_type{
    fps = 14,
    temperature = 100,
    humidity = 999,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 ------------------------
@@ -483,7 +483,7 @@ world:new_terrain_type{
    dither_layer = 400,
    temperature = 120,
    humidity = 150,
-   fertility = 0.9,
+   fertility = 900,
 }
 
 
@@ -503,7 +503,7 @@ world:new_terrain_type{
    dither_layer = 410,
    temperature = 118,
    humidity = 130,
-   fertility = 0.999,
+   fertility = 999,
 }
 
 
@@ -523,7 +523,7 @@ world:new_terrain_type{
    dither_layer = 420,
    temperature = 100,
    humidity = 250,
-   fertility = 0.8,
+   fertility = 800,
 }
 
 
@@ -543,7 +543,7 @@ world:new_terrain_type{
    dither_layer = 370,
    temperature = 95,
    humidity = 150,
-   fertility = 0.85,
+   fertility = 850,
 }
 
 
@@ -563,7 +563,7 @@ world:new_terrain_type{
    dither_layer = 380,
    temperature = 105,
    humidity = 200,
-   fertility = 0.9,
+   fertility = 900,
 }
 
 
@@ -583,7 +583,7 @@ world:new_terrain_type{
    dither_layer = 390,
    temperature = 90,
    humidity = 200,
-   fertility = 0.8,
+   fertility = 800,
 }
 
 
@@ -599,7 +599,7 @@ world:new_terrain_type{
    dither_layer = 360,
    temperature = 120,
    humidity = 100,
-   fertility = 0.2,
+   fertility = 200,
 }
 
 
@@ -619,7 +619,7 @@ world:new_terrain_type{
    dither_layer = 81,
    temperature = 110,
    humidity = 150,
-   fertility = 0.95,
+   fertility = 950,
 }
 
 world:new_terrain_type{
@@ -638,7 +638,7 @@ world:new_terrain_type{
    dither_layer = 81,
    temperature = 95,
    humidity = 200,
-   fertility = 0.4,
+   fertility = 400,
 }
 
 world:new_terrain_type{
@@ -653,7 +653,7 @@ world:new_terrain_type{
    dither_layer = 90,
    temperature = 80,
    humidity = 50,
-   fertility = 0.2,
+   fertility = 200,
 }
 
 
@@ -669,7 +669,7 @@ world:new_terrain_type{
    dither_layer = 90,
    temperature = 80,
    humidity = 50,
-   fertility = 0.2,
+   fertility = 200,
 }
 
 
@@ -685,7 +685,7 @@ world:new_terrain_type{
    dither_layer = 90,
    temperature = 80,
    humidity = 50,
-   fertility = 0.2,
+   fertility = 200,
 }
 
 
@@ -701,7 +701,7 @@ world:new_terrain_type{
    dither_layer = 80,
    temperature = 80,
    humidity = 50,
-   fertility = 0.2,
+   fertility = 200,
 }
 
 
@@ -717,7 +717,7 @@ world:new_terrain_type{
    dither_layer = 50,
    temperature = 60,
    humidity = 400,
-   fertility = 0.2,
+   fertility = 200,
 }
 
 
@@ -732,9 +732,9 @@ world:new_terrain_type{
    textures = path.list_files(pics_dir .. "wasteland/lava_stone1/lava-stone1_??.png"),
    dither_layer = 20,
    fps = 7,
-   temperature = 1273.0,
+   temperature = 1273,
    humidity = 1,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -749,9 +749,9 @@ world:new_terrain_type{
    textures = path.list_files(pics_dir .. "wasteland/lava_stone2/lava-stone2_??.png"),
    dither_layer = 10,
    fps = 7,
-   temperature = 1273.0,
+   temperature = 1273,
    humidity = 1,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -768,7 +768,7 @@ world:new_terrain_type{
    fps = 14,
    temperature = 100,
    humidity = 999,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -793,7 +793,7 @@ world:new_terrain_type{
    dither_layer = 230,
    temperature = 50,
    humidity = 850,
-   fertility = 0.45,
+   fertility = 450,
 }
 
 
@@ -813,7 +813,7 @@ world:new_terrain_type{
    dither_layer = 240,
    temperature = 55,
    humidity = 750,
-   fertility = 0.45,
+   fertility = 450,
 }
 
 
@@ -833,7 +833,7 @@ world:new_terrain_type{
    dither_layer = 240,
    temperature = 50,
    humidity = 800,
-   fertility = 0.4,
+   fertility = 400,
 }
 
 
@@ -849,7 +849,7 @@ world:new_terrain_type{
    dither_layer = 230,
    temperature = 40,
    humidity = 750,
-   fertility = 0.4,
+   fertility = 400,
 }
 
 
@@ -865,7 +865,7 @@ world:new_terrain_type{
    dither_layer = 250,
    temperature = 35,
    humidity = 750,
-   fertility = 0.3,
+   fertility = 300,
 }
 
 
@@ -881,7 +881,7 @@ world:new_terrain_type{
    dither_layer = 250,
    temperature = 25,
    humidity = 800,
-   fertility = 0.1,
+   fertility = 100,
 }
 
 
@@ -901,7 +901,7 @@ world:new_terrain_type{
    dither_layer = 101,
    temperature = 35,
    humidity = 700,
-   fertility = 0.4,
+   fertility = 400,
 }
 
 world:new_terrain_type{
@@ -920,7 +920,7 @@ world:new_terrain_type{
    dither_layer = 101,
    temperature = 35,
    humidity = 700,
-   fertility = 0.4,
+   fertility = 400,
 }
 
 world:new_terrain_type{
@@ -935,7 +935,7 @@ world:new_terrain_type{
    dither_layer = 110,
    temperature = 20,
    humidity = 300,
-   fertility = 0.05,
+   fertility = 50,
 }
 
 
@@ -951,7 +951,7 @@ world:new_terrain_type{
    dither_layer = 110,
    temperature = 20,
    humidity = 300,
-   fertility = 0.05,
+   fertility = 50,
 }
 
 
@@ -967,7 +967,7 @@ world:new_terrain_type{
    dither_layer = 100,
    temperature = 20,
    humidity = 300,
-   fertility = 0.05,
+   fertility = 50,
 }
 
 
@@ -983,7 +983,7 @@ world:new_terrain_type{
    dither_layer = 100,
    temperature = 20,
    humidity = 300,
-   fertility = 0.05,
+   fertility = 50,
 }
 world:new_terrain_type{
    name = "ice",
@@ -997,7 +997,7 @@ world:new_terrain_type{
    dither_layer = 260,
    temperature = 25,
    humidity = 500,
-   fertility = 0.1,
+   fertility = 100,
 }
 
 
@@ -1013,7 +1013,7 @@ world:new_terrain_type{
    dither_layer = 40,
    temperature = 60,
    humidity = 500,
-   fertility = 0.1,
+   fertility = 100,
 }
 
 
@@ -1030,7 +1030,7 @@ world:new_terrain_type{
    fps = 5,
    temperature = 50,
    humidity = 999,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -1047,7 +1047,7 @@ world:new_terrain_type{
    fps = 5,
    temperature = 50,
    humidity = 999,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -1064,7 +1064,7 @@ world:new_terrain_type{
    fps = 8,
    temperature = 50,
    humidity = 999,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -1084,7 +1084,7 @@ world:new_terrain_type{
    dither_layer = 270,
    temperature = 168,
    humidity = 1,
-   fertility = 0.1,
+   fertility = 100,
 }
 
 world:new_terrain_type{
@@ -1099,7 +1099,7 @@ world:new_terrain_type{
    dither_layer = 300,
    temperature = 172,
    humidity = 200,
-   fertility = 0.2,
+   fertility = 200,
 }
 world:new_terrain_type{
    name = "desert_steppe",
@@ -1117,7 +1117,7 @@ world:new_terrain_type{
    dither_layer = 360,
    temperature = 155,
    humidity = 500,
-   fertility = 0.5,
+   fertility = 500,
 }
 
 
@@ -1137,7 +1137,7 @@ world:new_terrain_type{
    dither_layer = 310,
    temperature = 160,
    humidity = 600,
-   fertility = 0.6,
+   fertility = 600,
 }
 
 
@@ -1157,7 +1157,7 @@ world:new_terrain_type{
    dither_layer = 150,
    temperature = 145,
    humidity = 500,
-   fertility = 0.5,
+   fertility = 500,
 }
 
 
@@ -1177,7 +1177,7 @@ world:new_terrain_type{
    dither_layer = 150,
    temperature = 140,
    humidity = 400,
-   fertility = 0.4,
+   fertility = 400,
 }
 
 
@@ -1197,7 +1197,7 @@ world:new_terrain_type{
    dither_layer = 71,
    temperature = 141,
    humidity = 500,
-   fertility = 0.5,
+   fertility = 500,
 }
 
 world:new_terrain_type{
@@ -1216,7 +1216,7 @@ world:new_terrain_type{
    dither_layer = 141,
    temperature = 120,
    humidity = 500,
-   fertility = 0.5,
+   fertility = 500,
 }
 
 
@@ -1232,7 +1232,7 @@ world:new_terrain_type{
    dither_layer = 120,
    temperature = 130,
    humidity = 50,
-   fertility = 0.05,
+   fertility = 50,
 }
 
 
@@ -1248,7 +1248,7 @@ world:new_terrain_type{
    dither_layer = 120,
    temperature = 130,
    humidity = 50,
-   fertility = 0.05,
+   fertility = 50,
 }
 
 
@@ -1264,7 +1264,7 @@ world:new_terrain_type{
    dither_layer = 130,
    temperature = 130,
    humidity = 50,
-   fertility = 0.05,
+   fertility = 50,
 }
 
 
@@ -1280,7 +1280,7 @@ world:new_terrain_type{
    dither_layer = 140,
    temperature = 130,
    humidity = 50,
-   fertility = 0.05,
+   fertility = 50,
 }
 world:new_terrain_type{
    name = "desert1",
@@ -1294,7 +1294,7 @@ world:new_terrain_type{
    dither_layer = 290,
    temperature = 167,
    humidity = 1,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -1310,7 +1310,7 @@ world:new_terrain_type{
    dither_layer = 280,
    temperature = 168,
    humidity = 1,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -1326,7 +1326,7 @@ world:new_terrain_type{
    dither_layer = 280,
    temperature = 178,
    humidity = 1,
-   fertility = 0.001,
+   fertility = 1,
 }
 
 
@@ -1342,7 +1342,7 @@ world:new_terrain_type{
    dither_layer = 60,
    temperature = 179,
    humidity = 500,
-   fertility = 0.1,
+   fertility = 100,
 }
 
 
@@ -1359,5 +1359,5 @@ world:new_terrain_type{
    fps = 5,
    temperature = 150,
    humidity = 999,
-   fertility = 0.001,
+   fertility = 1,
 }
