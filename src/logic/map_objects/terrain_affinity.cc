@@ -34,7 +34,7 @@ namespace Widelands {
 namespace {
 
 constexpr double pow2(const double& a) {
-	return a * a;
+	return static_cast<double>(a) * static_cast<double>(a);
 }
 
 // Helper function for probability_to_grow
@@ -43,22 +43,22 @@ double calculate_probability_to_grow(const TerrainAffinity& affinity,
                                      int terrain_humidity,
                                      int terrain_fertility,
                                      int terrain_temperature) {
+	constexpr double kHumidityWeight = 5.00086642549548;
+	constexpr double kFertilityWeight = 5.292268046607387;
+	constexpr double kTemperatureWeight = 0.6131300863608306;
 
-	constexpr double kHumidityWeight = 0.500086642549548;
-	constexpr double kFertilityWeight = 0.5292268046607387;
-	constexpr double kTemperatureWeight = 61.31300863608306;
+    // Lots of static_cast<double> to force double precision for all compilers to prevent desyncs here
+    // See https://randomascii.wordpress.com/2012/03/21/intermediate-floating-point-precision/
+	const double sigma = 100.0 - affinity.pickiness();
 
-	const double sigma_humidity = (100 - affinity.pickiness()) / 100;
-	const double sigma_temperature = (100 - affinity.pickiness() / 100);
-	const double sigma_fertility = (100 - affinity.pickiness()) / 100;
-// NOCOM keeping calculations as they were for now - make this all int calculations
-	return exp((-pow2(((affinity.preferred_fertility() - terrain_fertility) / 1000) /
-	                  (kFertilityWeight * sigma_fertility)) -
-	            pow2(((affinity.preferred_humidity() - terrain_humidity) / 1000) /
-	                 (kHumidityWeight * sigma_humidity)) -
-	            pow2((affinity.preferred_temperature() - terrain_temperature) /
-	                 (kTemperatureWeight * sigma_temperature))) /
-	           2);
+    const double fertility_value = static_cast<double>(affinity.preferred_fertility() - terrain_fertility) /
+            static_cast<double>(static_cast<double>(kFertilityWeight) * static_cast<double>(sigma));
+    const double humidity_value = static_cast<double>(affinity.preferred_humidity() - terrain_humidity) /
+            static_cast<double>(static_cast<double>(kHumidityWeight) * static_cast<double>(sigma));
+    const double temperature_value = static_cast<double>(affinity.preferred_temperature() - terrain_temperature) /
+            static_cast<double>(static_cast<double>(kTemperatureWeight) * static_cast<double>(sigma));
+
+	return exp(-(pow2(fertility_value) + pow2(humidity_value) + pow2(temperature_value)) / 2.0);
 }
 
 }  // namespace
