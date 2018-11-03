@@ -60,6 +60,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
      egbase_(egbase),
      buildable_(false),
+     can_be_dismantled_(false),
      size_(BaseImmovable::SMALL),
      mine_(false),
      port_(false),
@@ -161,6 +162,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 			                 name().c_str(), e.what());
 		}
 	}
+    can_be_dismantled_ = (return_dismantle_.total() > 0 || return_enhanced_.total() > 0);
 
 	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
 
@@ -315,7 +317,7 @@ uint32_t Building::get_playercaps() const {
 	const BuildingDescr& tmp_descr = descr();
 	if (tmp_descr.is_destructible()) {
 		caps |= PCap_Bulldoze;
-		if (tmp_descr.is_buildable() || tmp_descr.is_enhanced())
+		if (tmp_descr.can_be_dismantled())
 			caps |= PCap_Dismantle;
 	}
 	if (tmp_descr.enhancement() != INVALID_INDEX)
