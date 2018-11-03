@@ -115,7 +115,7 @@ public:
 
 	/// Parameters for terrain affinity of immovables.
 	/// Temperature is in arbitrary units.
-	double temperature() const;
+	int temperature() const;
 
 	/// Humidity, ranging from 0 to 1000.
 	int humidity() const;
@@ -139,7 +139,7 @@ private:
 	int default_resource_amount_;
 	int dither_layer_;
 	int frame_length_;
-	double temperature_;
+	int temperature_;
 	int fertility_;
 	int humidity_;
 	std::vector<std::string> texture_paths_;

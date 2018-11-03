@@ -42,7 +42,7 @@ constexpr double pow2(const double& a) {
 double calculate_probability_to_grow(const TerrainAffinity& affinity,
                                      int terrain_humidity,
                                      int terrain_fertility,
-                                     double terrain_temperature) {
+                                     int terrain_temperature) {
 
 	constexpr double kHumidityWeight = 0.500086642549548;
 	constexpr double kFertilityWeight = 0.5292268046607387;
@@ -66,7 +66,7 @@ double calculate_probability_to_grow(const TerrainAffinity& affinity,
 TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immovable_name)
    : preferred_fertility_(table.get_int("preferred_fertility")),
      preferred_humidity_(table.get_int("preferred_humidity")),
-     preferred_temperature_(table.get_double("preferred_temperature")),
+     preferred_temperature_(table.get_int("preferred_temperature")),
      pickiness_(table.get_double("pickiness")) {
 	if (!(0 <= preferred_fertility_ && preferred_fertility_ <= 1000)) {
 		throw GameDataError("%s: preferred_fertility is not in [0, 1000].", immovable_name.c_str());
@@ -82,7 +82,7 @@ TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immov
 	}
 }
 
-double TerrainAffinity::preferred_temperature() const {
+int TerrainAffinity::preferred_temperature() const {
 	return preferred_temperature_;
 }
 
@@ -104,7 +104,7 @@ double probability_to_grow(const TerrainAffinity& affinity,
                            const DescriptionMaintainer<TerrainDescription>& terrains) {
 	int terrain_humidity = 0;
 	int terrain_fertility = 0;
-	double terrain_temperature = 0;
+	int terrain_temperature = 0;
 
 	const auto average = [&terrain_humidity, &terrain_fertility, &terrain_temperature,
 	                      &terrains](const int terrain_index) {

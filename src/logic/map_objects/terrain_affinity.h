@@ -42,7 +42,7 @@ public:
 	explicit TerrainAffinity(const LuaTable& table, const std::string& immovable_name);
 
 	// Preferred temperature is in arbitrary units.
-	double preferred_temperature() const;
+	int preferred_temperature() const;
 
 	// Preferred fertility, ranging from 0 to 1000.
 	int preferred_fertility() const;
@@ -57,7 +57,7 @@ public:
 private:
 	int preferred_fertility_;
 	int preferred_humidity_;
-	double preferred_temperature_;
+	int preferred_temperature_;
 	double pickiness_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainAffinity);

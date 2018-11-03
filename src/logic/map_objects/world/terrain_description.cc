@@ -105,7 +105,7 @@ TerrainDescription::TerrainDescription(const LuaTable& table, const Widelands::W
      default_resource_index_(world.get_resource(table.get_string("default_resource").c_str())),
      default_resource_amount_(table.get_int("default_resource_amount")),
      dither_layer_(table.get_int("dither_layer")),
-     temperature_(table.get_double("temperature")),
+     temperature_(table.get_int("temperature")),
      fertility_(table.get_int("fertility")),
      humidity_(table.get_int("humidity")) {
 
@@ -244,7 +244,7 @@ int TerrainDescription::dither_layer() const {
 	return dither_layer_;
 }
 
-double TerrainDescription::temperature() const {
+int TerrainDescription::temperature() const {
 	return temperature_;
 }
 
