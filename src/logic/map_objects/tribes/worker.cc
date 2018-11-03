@@ -858,16 +858,16 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Each candidate is weighted by its probability to grow.
 	double total_weight = 0.0;
 	for (const auto& bsii : best_suited_immovables_index) {
-		double weight = std::get<0>(bsii);
-		total_weight += weight * weight;
+		const double weight = std::get<0>(bsii);
+		total_weight += static_cast<double>(weight) * static_cast<double>(weight);
 	}
 
-	double choice = logic_rand_as_double(&game) * total_weight;
+	double choice = logic_rand_as_double(&game) * static_cast<double>(total_weight);
 	for (const auto& bsii : best_suited_immovables_index) {
-		double weight = std::get<0>(bsii);
+		const double weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
 		state.ivar3 = static_cast<int>(std::get<2>(bsii));
-		choice -= weight * weight;
+		choice -= static_cast<double>(weight) * static_cast<double>(weight);
 		if (0 > choice) {
 			break;
 		}

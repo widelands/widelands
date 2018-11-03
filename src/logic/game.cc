@@ -1073,6 +1073,6 @@ void Game::write_statistics(FileWrite& fw) {
 }
 
 double logic_rand_as_double(Game* game) {
-	return static_cast<double>(game->logic_rand()) / std::numeric_limits<uint32_t>::max();
+	return static_cast<double>(static_cast<double>(game->logic_rand())) / static_cast<double>(std::numeric_limits<uint32_t>::max());
 }
 }
