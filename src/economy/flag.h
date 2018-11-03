@@ -48,6 +48,13 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(FlagDescr);
 };
 
+constexpr bool kPendingOnly = true;           // ignore non-pending wares
+constexpr int32_t kNotFoundAppropriate = -1;  // no ware appropiate for carrying
+constexpr int32_t kDenyDrop = -2;             // flag is full and no ware appropiate for swapping
+// TODO(GunChleoc): Dirty hack - sometimes flags have an idle ware with empty destination and a carrier twiddling his thumbs.
+// Bug was introduced in https://bazaar.launchpad.net/~widelands-dev/widelands/trunk/revision/8775
+constexpr int kTriggerPotentiallyFrozenFlagInterval = 60 * 561;
+
 /**
  * Flag represents a flag as you see it on the map.
  *
@@ -149,6 +156,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void log_general_info(const EditorGameBase&) const override;
 
+	void unfreeze_wares(Game& game);
+
 protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -199,6 +208,10 @@ private:
 
 	using FlagJobs = std::list<FlagJob>;
 	FlagJobs flag_jobs_;
+
+	// For forcing flag unfreeze to compensate for routing bug
+	int last_update_;
+	int freeze_counter_;
 };
 
 extern FlagDescr g_flag_descr;

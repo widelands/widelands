@@ -404,6 +404,8 @@ private:
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
 	bool replay_;
+
+	int last_frozen_flag_check_;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

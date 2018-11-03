@@ -53,7 +53,9 @@ Flag::Flag()
      ware_capacity_(8),
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
-     always_call_for_flag_(nullptr) {
+     always_call_for_flag_(nullptr),
+	 last_update_(0),
+	 freeze_counter_(0) {
 	for (uint32_t i = 0; i < 6; ++i) {
 		roads_[i] = nullptr;
 	}
@@ -85,6 +87,7 @@ Flag::~Flag() {
 }
 
 void Flag::load_finish(EditorGameBase& egbase) {
+    last_update_ = egbase.get_gametime();
 	auto should_be_deleted = [&egbase, this](const OPtr<Worker>& r) {
 		Worker& worker = *r.get(egbase);
 		Bob::State const* const state = worker.get_state(Worker::taskWaitforcapacity);
@@ -118,7 +121,9 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, 
      ware_capacity_(8),
      ware_filled_(0),
      wares_(new PendingWare[ware_capacity_]),
-     always_call_for_flag_(nullptr) {
+     always_call_for_flag_(nullptr),
+	 last_update_(egbase.get_gametime()),
+     freeze_counter_(0) {
 	for (uint32_t i = 0; i < 6; ++i) {
 		roads_[i] = nullptr;
 	}
@@ -151,6 +156,7 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, 
 }
 
 void Flag::set_flag_position(Coords coords) {
+    // NOCOM last_update_ = owner().egbase().get_gametime();
 	position_ = coords;
 }
 
@@ -170,6 +176,7 @@ Flag& Flag::base_flag() {
  * Call this only from Economy code!
  */
 void Flag::set_economy(Economy* const e) {
+    // NOCOM last_update_ = owner().egbase().get_gametime();
 	Economy* const old = get_economy();
 
 	if (old == e) {
@@ -201,6 +208,7 @@ void Flag::set_economy(Economy* const e) {
  * Call this only from the Building init!
  */
 void Flag::attach_building(EditorGameBase& egbase, Building& building) {
+	last_update_ = egbase.get_gametime();
 	assert(!building_ || building_ == &building);
 
 	building_ = &building;
@@ -217,6 +225,7 @@ void Flag::attach_building(EditorGameBase& egbase, Building& building) {
  * Call this only from the Building cleanup!
  */
 void Flag::detach_building(EditorGameBase& egbase) {
+	last_update_ = egbase.get_gametime();
 	assert(building_);
 
 	building_->set_economy(nullptr);
@@ -231,6 +240,7 @@ void Flag::detach_building(EditorGameBase& egbase) {
  * Call this only from the Road init!
  */
 void Flag::attach_road(int32_t const dir, Road* const road) {
+    // NOCOM last_update_ = owner().egbase().get_gametime();
 	assert(!roads_[dir - 1] || roads_[dir - 1] == road);
 
 	roads_[dir - 1] = road;
@@ -241,6 +251,7 @@ void Flag::attach_road(int32_t const dir, Road* const road) {
  * Call this only from the Road init!
  */
 void Flag::detach_road(int32_t const dir) {
+    // NOCOM last_update_ = owner().egbase().get_gametime();
 	assert(roads_[dir - 1]);
 
 	roads_[dir - 1]->set_economy(nullptr);
@@ -349,14 +360,16 @@ bool Flag::has_capacity() const {
  *
  * The capacity queue is a simple FIFO queue.
  */
-void Flag::wait_for_capacity(Game&, Worker& bob) {
+void Flag::wait_for_capacity(Game& game, Worker& bob) {
+	last_update_ = game.get_gametime();
 	capacity_wait_.push_back(&bob);
 }
 
 /**
  * Remove the worker from the list of workers waiting for free capacity.
  */
-void Flag::skip_wait_for_capacity(Game&, Worker& w) {
+void Flag::skip_wait_for_capacity(Game& game, Worker& w) {
+	last_update_ = game.get_gametime();
 	CapacityWaitQueue::iterator const it =
 	   std::find(capacity_wait_.begin(), capacity_wait_.end(), &w);
 	if (it != capacity_wait_.end())
@@ -364,7 +377,7 @@ void Flag::skip_wait_for_capacity(Game&, Worker& w) {
 }
 
 void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
-
+	last_update_ = egbase.get_gametime();
 	assert(ware_filled_ < ware_capacity_);
 
 	PendingWare& pi = wares_[ware_filled_++];
@@ -466,6 +479,7 @@ bool Flag::ack_pickup(Game&, Flag& destflag) {
  * or kNotFoundAppropriate (carrier will leave empty-handed)
  */
 bool Flag::cancel_pickup(Game& game, Flag& destflag) {
+	last_update_ = game.get_gametime();
 	int32_t lowest_prio = MAX_TRANSFER_PRIORITY + 1;
 	int32_t i_pri = -1;
 
@@ -514,6 +528,7 @@ void Flag::wake_up_capacity_queue(Game& game) {
  * called successfully.
  */
 WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
+	last_update_ = game.get_gametime();
 	int32_t best_index = -1;
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {
@@ -549,6 +564,8 @@ WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
  * Accelerate potential promotion of roads adjacent to a newly promoted road.
  */
 void Flag::propagate_promoted_road(Road* const promoted_road) {
+    // NOCOM last_update_ = owner().egbase().get_gametime();
+
 	// Abort if flag has a building attached to it
 	if (building_) {
 		return;
@@ -605,6 +622,7 @@ Flag::Wares Flag::get_wares() {
  * Called by \ref WareInstance::cleanup()
  */
 void Flag::remove_ware(EditorGameBase& egbase, WareInstance* const ware) {
+	last_update_ = egbase.get_gametime();
 	for (int32_t i = 0; i < ware_filled_; ++i) {
 		if (wares_[i].ware != ware) {
 			continue;
@@ -638,6 +656,7 @@ void Flag::remove_ware(EditorGameBase& egbase, WareInstance* const ware) {
  * split, for example.
  */
 void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const nextstep) {
+	last_update_ = game.get_gametime();
 	PendingWare* pi = nullptr;
 	int32_t i = 0;
 
@@ -729,6 +748,7 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
  * A similar thing can happen when a road is split.
  */
 void Flag::update_wares(Game& game, Flag* const other) {
+	last_update_ = game.get_gametime();
 	always_call_for_flag_ = other;
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {
@@ -739,6 +759,7 @@ void Flag::update_wares(Game& game, Flag* const other) {
 }
 
 bool Flag::init(EditorGameBase& egbase) {
+	last_update_ = egbase.get_gametime();
 	PlayerImmovable::init(egbase);
 
 	set_position(egbase, position_);
@@ -833,7 +854,8 @@ void Flag::destroy(EditorGameBase& egbase) {
  * Add a new flag job to request the worker with the given ID,
  * and to execute the given program once it's completed.
  */
-void Flag::add_flag_job(Game&, DescriptionIndex const workerware, const std::string& programname) {
+void Flag::add_flag_job(Game& game, DescriptionIndex const workerware, const std::string& programname) {
+  last_update_ = game.get_gametime();
 	FlagJob j;
 
 	j.request = new Request(*this, workerware, Flag::flag_job_request_callback, wwWORKER);
@@ -884,4 +906,28 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 		molog("No wares at flag.\n");
 	}
 }
-}  // namespace Widelands
+
+void Flag::unfreeze_wares(Game& game) {
+	const int gametime = game.get_gametime();
+	if (gametime > last_update_ + kTriggerPotentiallyFrozenFlagInterval) {
+		if (ware_filled_ > 0) {
+			++freeze_counter_;
+		}
+		last_update_ = gametime;
+	} else {
+		freeze_counter_ = 0;
+	}
+	if (freeze_counter_ > 30) {
+		if (ware_filled_ > 0) {
+			throw wexception("Frozen flag at %d, %d", get_position().x, get_position().y);
+			/*
+			for (int32_t i = 0; i < ware_filled_; ++i) {
+				init_ware(game, *wares_[i].ware, wares_[i]);
+				wares_[i].ware->update(game);
+			}
+			*/
+		}
+		freeze_counter_ = 0;
+	}
+}
+} // namespace Widelands
