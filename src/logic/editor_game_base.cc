@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -120,7 +120,7 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 		int suffix;
 		for (suffix = 0; suffix <= 9; suffix++)
 		{
-			complete_filename = filename + "-" + std::to_string(suffix) + ".tmp";
+			complete_filename = filename + "-" + std::to_string(suffix) + kTempFileExtension;
 			if (!g_fs->file_exists(complete_filename))
 			  break;
 		}
