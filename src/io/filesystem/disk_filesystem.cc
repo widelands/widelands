@@ -231,7 +231,7 @@ void RealFSImpl::unlink_file(const std::string& file) {
 	//       on all windows platforms or only with Visual Studio.
 	if (!DeleteFile(fspath.c_str()))
 		throw FileError("RealFSImpl::unlink_file", fspath, std::string("file error (Windows error code ")+std::to_string(GetLastError())+")");
-		// TODO: generate proper system message from GetLastError() via FormatMessage
+		// TODO(Arty): generate proper system message from GetLastError() via FormatMessage
 #endif
 }
 
@@ -272,7 +272,7 @@ void RealFSImpl::unlink_directory(const std::string& file) {
 	//       on all windows platforms or only with Visual Studio.
 	if (!RemoveDirectory(fspath.c_str()))
 		throw FileError("RealFSImpl::unlink_directory", fspath, std::string("file error (Windows error code ")+std::to_string(GetLastError())+")");
-		// TODO: generate proper system message from GetLastError() via FormatMessage
+		// TODO(Arty): generate proper system message from GetLastError() via FormatMessage
 #endif
 }
 
@@ -318,7 +318,7 @@ void RealFSImpl::make_directory(const std::string& dirname) {
 	FileSystemPath fspath(canonicalize_name(dirname));
 	if (fspath.exists_)
 		throw FileError("RealFSImpl::make_directory", fspath, "a file or directory with that name already exists");
-	
+
 #ifndef _WIN32
 	if (!mkdir(fspath.c_str(), 0x1FF) == -1)
 		throw FileError("RealFSImpl::make_directory", fspath, strerror(errno));
@@ -329,7 +329,7 @@ void RealFSImpl::make_directory(const std::string& dirname) {
 	//       on all windows platforms or only with Visual Studio.
 	if (!CreateDirectory(fspath.c_str(), NULL))
 		throw FileError("RealFSImpl::make_directory", fspath, std::string("file error (Windows error code ")+std::to_string(GetLastError())+")");
-		// TODO: generate proper system message from GetLastError() via FormatMessage
+		// TODO(Arty): generate proper system message from GetLastError() via FormatMessage
 #endif
 }
 
