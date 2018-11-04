@@ -29,6 +29,7 @@
 
 #include "base/i18n.h"
 #include "base/macros.h"
+#include "base/time_string.h"
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/ui_menus/main_menu_map_options.h"
@@ -37,6 +38,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filesystem/zip_filesystem.h"
 #include "logic/filesystem_constants.h"
+#include "logic/generic_save_handler.h"
 #include "map_io/map_saver.h"
 #include "map_io/widelands_map_loader.h"
 #include "ui_basic/messagebox.h"
@@ -119,7 +121,8 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
  * Called when the ok button was pressed or a file in list was double clicked.
  */
 void MainMenuSaveMap::clicked_ok() {
-	assert(ok_.enabled());
+	if (!ok_.enabled())
+		return;
 	std::string filename = editbox_->text();
 	std::string complete_filename;
 
@@ -243,15 +246,12 @@ void MainMenuSaveMap::set_current_directory(const std::string& filename) {
 
 /**
  * Save the map in the current directory with
- * the current filename
+ * the given filename
  *
  * returns true if dialog should close, false if it
  * should stay open
  */
 bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
-	//  Make sure that the current directory exists and is writeable.
-	g_fs->ensure_directory_exists(curdir_);
-
 	// Trim it for preceding/trailing whitespaces in user input
 	boost::trim(filename);
 
@@ -273,18 +273,6 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			return false;
 	}
 
-	//  Try deleting file (if it exists). If it fails, give a message and let the player choose a new name.
-	try {
-		g_fs->fs_unlink(complete_filename);
-	} catch (const std::exception& e) {
-		const std::string s =
-		   (boost::format(_("File ‘%s.tmp’ could not be deleted.")) % FileSystem::fs_filename(filename.c_str())).str()
-		   + " " + _("Try saving under a different name!");
-		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
-		mbox.run<UI::Panel::Returncodes>();
-		return false;
-	}
-
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map* map = egbase.mutable_map();
 
@@ -302,22 +290,33 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		map->delete_tag("artifacts");
 	}
 
-	//  Try saving.
-	try {
-		std::unique_ptr<FileSystem> fs(
-		   g_fs->create_sub_file_system(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
-		Widelands::MapSaver* wms = new Widelands::MapSaver(*fs, egbase);
-		wms->save();
-		delete wms;
-		fs.reset();
-	} catch (const std::exception& e) {
-		std::string s = _("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
-		                  "given:\n");
-		s += e.what();
-		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
-		mbox.run<UI::Panel::Returncodes>();
+	// Try saving the map.
+	GenericSaveHandler gsh(
+		[&egbase](FileSystem& fs) {
+			Widelands::MapSaver wms(fs, egbase);
+			wms.save();
+		},
+		complete_filename,
+		binary ? FileSystem::ZIP : FileSystem::DIR
+	);
+	uint32_t error = gsh.save();
+	if (error == GenericSaveHandler::kSuccess ||
+	    error == GenericSaveHandler::kDeletingBackupFailed) {
+			// No need to bother the player if only the temporary backup couldn't be deleted.
+			// Automatic cleanup will try to deal with it later.
+		egbase.get_ibase()->log_message(_("Map saved"));
+		return true;
 	}
 
-	die();
+	std::string msg = gsh.localized_formatted_result_message();
+	UI::WLMessageBox mbox(this, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
+	mbox.run<UI::Panel::Returncodes>();
+
+	// If only the backup failed (likely just because of a file lock),
+	// then leave the dialog open for the player to try with a new filename.
+	if (error == GenericSaveHandler::kBackupFailed)
+	  return false;
+
+	// In the other error cases close the dialog.
 	return true;
 }
