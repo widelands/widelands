@@ -40,6 +40,8 @@ namespace {
 // Monniaux, David (2008): "The pitfalls of verifying floating-point computations",
 // in: ACM Transactions on Programming Languages and Systems 30, 3 (2008) 12.
 //
+// Recommends using heximal float constants, but we'd need to switch to C++17 for that.
+//
 // https://randomascii.wordpress.com/2012/03/21/intermediate-floating-point-precision/
 
 constexpr double pow2(const double& a) {
@@ -52,17 +54,12 @@ inline unsigned int calculate_probability_to_grow(const TerrainAffinity& affinit
                                      int terrain_humidity,
                                      int terrain_fertility,
                                      int terrain_temperature) {
-    // NOCOM rewrite as binary base (2)?
-    // In order to alleviate this, we suggest the use of hexadecimal floating-point constants, which are interpreted exactly.
 	constexpr double kHumidityWeight = 5.00086642549548;
 	constexpr double kFertilityWeight = 5.292268046607387;
 	constexpr double kTemperatureWeight = 0.6131300863608306;
 
     // Avoid division by 0
     assert(affinity.pickiness() < 100);
-
-    // Lots of static_cast<double> to force double precision for all compilers to prevent desyncs here
-    // See https://randomascii.wordpress.com/2012/03/21/intermediate-floating-point-precision/
 	const double sigma = std::floor(100.0 - affinity.pickiness());
 
 	const double result = exp(-(pow2(((affinity.preferred_fertility() - terrain_fertility) /
