@@ -950,7 +950,6 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 		game.create_immovable_with_name(
 		   f, type_name, owner_type, owner, nullptr /* former_building_descr */);
-        log("NOCOM grew immovable %s\n", type_name.c_str());
 	} else {
 		immovable.program_step(game);
 	}
@@ -1052,7 +1051,6 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 		                                                      map, game.world().terrains())) {
 			game.create_immovable_with_name(mr.location(), type_name, descr.owner_type(),
 			                                nullptr /* owner */, nullptr /* former_building_descr */);
-            log("NOCOM seeded immovable %s\n", type_name.c_str());
 		}
 	}
 

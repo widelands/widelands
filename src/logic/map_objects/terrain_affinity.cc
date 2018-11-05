@@ -20,9 +20,7 @@
 #include "logic/map_objects/terrain_affinity.h"
 
 #include <vector>
-#include <iostream> // NOCOM
 
-#include "base/log.h" // NOCOM
 #include "logic/description_maintainer.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
@@ -66,12 +64,8 @@ inline unsigned int calculate_probability_to_grow(const TerrainAffinity& affinit
                                        kFertilityWeight) / sigma) + (pow2(((affinity.preferred_humidity() - terrain_humidity) /
                                                                 kHumidityWeight) / sigma) + pow2(((affinity.preferred_temperature() - terrain_temperature) /
                                                                                        kTemperatureWeight) / sigma))) / 2.0);
-    //log("NOCOM %d\n", result);
-    //std::cout << "Calculated: " << result << std::endl;
 
-    unsigned int scaled_result = static_cast<unsigned int>(std::max(0.0, std::floor(result * static_cast<double>(TerrainAffinity::kPrecisionFactor))));
-    //log("Scaled:    %d\n", scaled_result);
-    return scaled_result;
+    return static_cast<unsigned int>(std::max(0.0, std::floor(result * static_cast<double>(TerrainAffinity::kPrecisionFactor))));
 }
 
 }  // namespace

@@ -858,39 +858,14 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Each candidate is weighted by its probability to grow.
 	int total_weight = 0;
 	for (const auto& bsii : best_suited_immovables_index) {
-        if (std::get<2>(bsii) == MapObjectDescr::OwnerType::kTribe) {
-            log("NOCOM suited: %s\n", owner().tribe().get_immovable_descr(std::get<1>(bsii))->name().c_str());
-        } else {
-            ImmovableDescr const*  test = game.world().get_immovable_descr(std::get<1>(bsii));
-            if (test != nullptr) {
-                log("NOCOM suited: %s\n", test->name().c_str());
-            }
-        }
-
 		const int weight = std::get<0>(bsii);
 		total_weight += static_cast<int>(std::floor(std::sqrt(weight)));
 	}
-
-    log("NOCOM total weight = %d\n", total_weight);
 
 	int choice = game.logic_rand() % total_weight;
 	for (const auto& bsii : best_suited_immovables_index) {
 		const int weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
-        if (std::get<2>(bsii) == MapObjectDescr::OwnerType::kTribe) {
-            log("NOCOM considering %s, choice = %d, weight = %d\n",
-                owner().tribe().get_immovable_descr(state.ivar2)->name().c_str(),
-                choice,
-                weight);
-        } else {
-            ImmovableDescr const*  test = game.world().get_immovable_descr(std::get<1>(bsii));
-            if (test != nullptr) {
-                log("NOCOM considering %s, choice = %d, weight = %d\n",
-                    test->name().c_str(),
-                    choice,
-                    weight);
-            }
-        }
 		state.ivar3 = static_cast<int>(std::get<2>(bsii));
 		choice -= static_cast<int>(std::floor(std::sqrt(weight)));
 		if (0 > choice) {
@@ -901,8 +876,6 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	Immovable& newimm = game.create_immovable(
 	   pos, state.ivar2, static_cast<Widelands::MapObjectDescr::OwnerType>(state.ivar3),
 	   get_owner());
-
-    log("NOCOM planting immovable %s\n", newimm.descr().name().c_str());
 
 	if (action.iparam1 == Action::plantUnlessObject) {
 		state.objvar1 = &newimm;
