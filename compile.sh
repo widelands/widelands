@@ -199,7 +199,11 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
       cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN
     fi
 
-    $buildtool -j "$(nproc --ignore=1)"
+    if [ $(uname) == "Darwin" ]; then
+      $buildtool -j "$(expr $(sysctl -n hw.ncpu) - 1)"
+    else
+      $buildtool -j "$(nproc --ignore=1)"
+    fi
 
     return 0
   }
