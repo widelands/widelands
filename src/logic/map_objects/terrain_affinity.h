@@ -51,7 +51,7 @@ public:
 	// Preferred humidity, ranging from 0 to 1000.
 	int preferred_humidity() const;
 
-	// A value in [0, 100] that defines how well this can deal with non-ideal
+	// A value in [0, 99] that defines how well this can deal with non-ideal
 	// situations. Lower means it is less picky, i.e. it can deal better.
 	int pickiness() const;
 

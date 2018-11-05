@@ -60,10 +60,10 @@ inline unsigned int calculate_probability_to_grow(const TerrainAffinity& affinit
     assert(affinity.pickiness() < 100);
 	const double sigma = std::floor(100.0 - affinity.pickiness());
 
-	const double result = exp(-(pow2(((affinity.preferred_fertility() - terrain_fertility) /
-                                       kFertilityWeight) / sigma) + (pow2(((affinity.preferred_humidity() - terrain_humidity) /
-                                                                kHumidityWeight) / sigma) + pow2(((affinity.preferred_temperature() - terrain_temperature) /
-                                                                                       kTemperatureWeight) / sigma))) / 2.0);
+	const double result = exp(-
+                              (pow2(((affinity.preferred_fertility() - terrain_fertility) / kFertilityWeight) / sigma) +
+                               (pow2(((affinity.preferred_humidity() - terrain_humidity) / kHumidityWeight) / sigma) +
+                                pow2(((affinity.preferred_temperature() - terrain_temperature) / kTemperatureWeight) / sigma))) / 2.0);
 
     return static_cast<unsigned int>(std::max(0.0, std::floor(result * static_cast<double>(TerrainAffinity::kPrecisionFactor))));
 }

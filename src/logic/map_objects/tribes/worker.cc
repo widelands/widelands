@@ -452,7 +452,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
 
 	const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
-	double best = 0;
+	int best = 0;
 	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
 		const ImmovableDescr& immovable_descr = immovables.get(i);
 		if (immovable_descr.has_attribute(attribute_id) && immovable_descr.has_terrain_affinity()) {
