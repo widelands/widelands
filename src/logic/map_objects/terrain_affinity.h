@@ -31,7 +31,6 @@ namespace Widelands {
 
 class Map;
 class TerrainDescription;
-class World;
 struct FCoords;
 
 // Describes the parameters and the pickiness of Immovables towards terrain
@@ -39,6 +38,8 @@ struct FCoords;
 // define this.
 class TerrainAffinity {
 public:
+    static constexpr int kPrecisionFactor = 100000000;
+
 	explicit TerrainAffinity(const LuaTable& table, const std::string& immovable_name);
 
 	// Preferred temperature is in arbitrary units.
@@ -55,23 +56,23 @@ public:
 	int pickiness() const;
 
 private:
-	int preferred_fertility_;
-	int preferred_humidity_;
-	int preferred_temperature_;
-	int pickiness_;
+	const int preferred_fertility_;
+	const int preferred_humidity_;
+	const int preferred_temperature_;
+	const int pickiness_;
 
 	DISALLOW_COPY_AND_ASSIGN(TerrainAffinity);
 };
 
 // Returns a value in [0., 1.] that describes the suitability for the
 // 'immovable_affinity' for 'field'. Higher is better suited.
-double probability_to_grow(const TerrainAffinity& immovable_affinity,
+unsigned int probability_to_grow(const TerrainAffinity& immovable_affinity,
                            const FCoords& fcoords,
                            const Map& map,
                            const DescriptionMaintainer<TerrainDescription>& terrains);
 
 // Probability to grow for a single terrain
-double probability_to_grow(const TerrainAffinity& immovable_affinity,
+unsigned int probability_to_grow(const TerrainAffinity& immovable_affinity,
                            const TerrainDescription& terrain);
 
 }  // namespace Widelands

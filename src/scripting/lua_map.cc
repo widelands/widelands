@@ -2031,7 +2031,7 @@ int LuaImmovableDescription::probability_to_grow(lua_State* L) {
 	if (get()->has_terrain_affinity()) {
 		const TerrainDescription* terrain =
 		   (*get_user_class<LuaMaps::LuaTerrainDescription>(L, 2))->get();
-		lua_pushdouble(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain));
+		lua_pushdouble(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain) / static_cast<double>(Widelands::TerrainAffinity::kPrecisionFactor));
 	} else {
 		lua_pushnil(L);
 	}

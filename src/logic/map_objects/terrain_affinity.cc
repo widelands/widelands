@@ -20,7 +20,9 @@
 #include "logic/map_objects/terrain_affinity.h"
 
 #include <vector>
+#include <iostream> // NOCOM
 
+#include "base/log.h" // NOCOM
 #include "logic/description_maintainer.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
@@ -33,32 +35,46 @@ namespace Widelands {
 
 namespace {
 
+// Literature on cross-platform floating point precision-problems:
+// https://arxiv.org/abs/cs/0701192
+// Monniaux, David (2008): "The pitfalls of verifying floating-point computations",
+// in: ACM Transactions on Programming Languages and Systems 30, 3 (2008) 12.
+//
+// https://randomascii.wordpress.com/2012/03/21/intermediate-floating-point-precision/
+
 constexpr double pow2(const double& a) {
-	return static_cast<double>(a) * static_cast<double>(a);
+	return a * a;
 }
 
 // Helper function for probability_to_grow
 // Calculates the probability to grow for the given affinity and terrain values
-double calculate_probability_to_grow(const TerrainAffinity& affinity,
+inline unsigned int calculate_probability_to_grow(const TerrainAffinity& affinity,
                                      int terrain_humidity,
                                      int terrain_fertility,
                                      int terrain_temperature) {
+    // NOCOM rewrite as binary base (2)?
+    // In order to alleviate this, we suggest the use of hexadecimal floating-point constants, which are interpreted exactly.
 	constexpr double kHumidityWeight = 5.00086642549548;
 	constexpr double kFertilityWeight = 5.292268046607387;
 	constexpr double kTemperatureWeight = 0.6131300863608306;
 
+    // Avoid division by 0
+    assert(affinity.pickiness() < 100);
+
     // Lots of static_cast<double> to force double precision for all compilers to prevent desyncs here
     // See https://randomascii.wordpress.com/2012/03/21/intermediate-floating-point-precision/
-	const double sigma = 100.0 - affinity.pickiness();
+	const double sigma = std::floor(100.0 - affinity.pickiness());
 
-    const double fertility_value = static_cast<double>(affinity.preferred_fertility() - terrain_fertility) /
-            static_cast<double>(static_cast<double>(kFertilityWeight) * static_cast<double>(sigma));
-    const double humidity_value = static_cast<double>(affinity.preferred_humidity() - terrain_humidity) /
-            static_cast<double>(static_cast<double>(kHumidityWeight) * static_cast<double>(sigma));
-    const double temperature_value = static_cast<double>(affinity.preferred_temperature() - terrain_temperature) /
-            static_cast<double>(static_cast<double>(kTemperatureWeight) * static_cast<double>(sigma));
+	const double result = exp(-(pow2(((affinity.preferred_fertility() - terrain_fertility) /
+                                       kFertilityWeight) / sigma) + (pow2(((affinity.preferred_humidity() - terrain_humidity) /
+                                                                kHumidityWeight) / sigma) + pow2(((affinity.preferred_temperature() - terrain_temperature) /
+                                                                                       kTemperatureWeight) / sigma))) / 2.0);
+    //log("NOCOM %d\n", result);
+    //std::cout << "Calculated: " << result << std::endl;
 
-	return exp(-(pow2(fertility_value) + pow2(humidity_value) + pow2(temperature_value)) / 2.0);
+    unsigned int scaled_result = static_cast<unsigned int>(std::max(0.0, std::floor(result * static_cast<double>(TerrainAffinity::kPrecisionFactor))));
+    //log("Scaled:    %d\n", scaled_result);
+    return scaled_result;
 }
 
 }  // namespace
@@ -74,8 +90,8 @@ TerrainAffinity::TerrainAffinity(const LuaTable& table, const std::string& immov
 	if (!(0 <= preferred_humidity_ && preferred_humidity_ <= 1000)) {
 		throw GameDataError("%s: preferred_humidity is not in [0, 1000].", immovable_name.c_str());
 	}
-	if (!(0 <= pickiness_ && pickiness_ <= 100)) {
-		throw GameDataError("%s: pickiness is not in [0, 100].", immovable_name.c_str());
+	if (!(0 <= pickiness_ && pickiness_ < 100)) {
+		throw GameDataError("%s: pickiness is not in [0, 99].", immovable_name.c_str());
 	}
 	if (preferred_temperature_ < 0) {
 		throw GameDataError("%s: preferred_temperature is not possible.", immovable_name.c_str());
@@ -98,7 +114,7 @@ int TerrainAffinity::pickiness() const {
 	return pickiness_;
 }
 
-double probability_to_grow(const TerrainAffinity& affinity,
+unsigned int probability_to_grow(const TerrainAffinity& affinity,
                            const FCoords& fcoords,
                            const Map& map,
                            const DescriptionMaintainer<TerrainDescription>& terrains) {
@@ -109,9 +125,9 @@ double probability_to_grow(const TerrainAffinity& affinity,
 	const auto average = [&terrain_humidity, &terrain_fertility, &terrain_temperature,
 	                      &terrains](const int terrain_index) {
 		const TerrainDescription& t = terrains.get(terrain_index);
-		terrain_humidity += t.humidity() / 6;
-		terrain_temperature += t.temperature() / 6;
-		terrain_fertility += t.fertility() / 6;
+		terrain_humidity += t.humidity();
+		terrain_temperature += t.temperature();
+		terrain_fertility += t.fertility();
 	};
 
 	average(fcoords.field->terrain_d());
@@ -136,10 +152,10 @@ double probability_to_grow(const TerrainAffinity& affinity,
 	}
 
 	return calculate_probability_to_grow(
-	   affinity, terrain_humidity, terrain_fertility, terrain_temperature);
+	   affinity, terrain_humidity / 6, terrain_fertility / 6, terrain_temperature / 6);
 }
 
-double probability_to_grow(const TerrainAffinity& affinity, const TerrainDescription& terrain) {
+unsigned int probability_to_grow(const TerrainAffinity& affinity, const TerrainDescription& terrain) {
 
 	return calculate_probability_to_grow(
 	   affinity, terrain.humidity(), terrain.fertility(), terrain.temperature());

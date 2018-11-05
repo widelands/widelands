@@ -943,13 +943,14 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 	FCoords const f = map.get_fcoords(immovable.get_position());
 	const ImmovableDescr& descr = immovable.descr();
 
-	if (logic_rand_as_double(&game) <
+	if ((game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
 		MapObjectDescr::OwnerType owner_type = descr.owner_type();
 		Player* owner = immovable.get_owner();
 		immovable.remove(game);  //  Now immovable is a dangling reference!
 		game.create_immovable_with_name(
 		   f, type_name, owner_type, owner, nullptr /* former_building_descr */);
+        log("NOCOM grew immovable %s\n", type_name.c_str());
 	} else {
 		immovable.program_step(game);
 	}
@@ -1030,7 +1031,7 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 	FCoords const f = map.get_fcoords(immovable.get_position());
 	const ImmovableDescr& descr = immovable.descr();
 
-	if (logic_rand_as_double(&game) <
+	if ((game.logic_rand() % TerrainAffinity::kPrecisionFactor) <
 	    probability_to_grow(descr.terrain_affinity(), f, map, game.world().terrains())) {
 		// Seed a new tree.
 		MapFringeRegion<> mr(map, Area<>(f, 0));
@@ -1047,10 +1048,11 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 		const FCoords new_location = map.get_fcoords(mr.location());
 		if (!new_location.field->get_immovable() &&
 		    (new_location.field->nodecaps() & MOVECAPS_WALK) &&
-		    logic_rand_as_double(&game) < probability_to_grow(descr.terrain_affinity(), new_location,
+		    (game.logic_rand() % TerrainAffinity::kPrecisionFactor) < probability_to_grow(descr.terrain_affinity(), new_location,
 		                                                      map, game.world().terrains())) {
 			game.create_immovable_with_name(mr.location(), type_name, descr.owner_type(),
 			                                nullptr /* owner */, nullptr /* former_building_descr */);
+            log("NOCOM seeded immovable %s\n", type_name.c_str());
 		}
 	}
 
