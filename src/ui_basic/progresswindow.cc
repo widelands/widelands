@@ -84,7 +84,7 @@ void ProgressWindow::set_background(const std::string& file_name) {
 	clear_overlays();
 	if (!file_name.empty() && g_fs->file_exists(file_name)) {
 		add_overlay_image(
-		   file_name, FullscreenWindow::Alignment(UI::Align::kCenter, UI::Align::kCenter));
+		   file_name, FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
 	} else {
 		add_overlay_image("images/loadscreens/progress.png",
 		                  FullscreenWindow::Alignment(UI::Align::kLeft, UI::Align::kBottom));
