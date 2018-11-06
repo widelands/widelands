@@ -4278,6 +4278,19 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// Barracks
 	if (site.bo->is(BuildingAttribute::kBarracks)) {
+		// If we somehow have more than one barracks we will dismantle current one
+		if (site.bo->total_count() > 1) {
+			log("%2d: We have %d barracks, that is not supported by AI and if caused by AI it is an error; dismantling the barracks at %3dx%3d\n",
+			player_number(), site.bo->total_count(), site.site->get_position().x, site.site->get_position().y);
+			if (connected_to_wh) {
+				game().send_player_dismantle(*site.site);
+			} else {
+				game().send_player_bulldoze(*site.site);
+			}
+			return true;
+		}
+
+
 		assert(site.bo->total_count() == 1);
 		for (auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() > 4) {
