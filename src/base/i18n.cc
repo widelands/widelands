@@ -290,7 +290,7 @@ void set_locale(const std::string& name) {
 		found = alt_str.find(',', 0);
 	}
 	if (leave_while) {
-		setenv("LANG", locale.c_str(), 1);
+		setenv("LC_ALL", locale.c_str(), 1);
 		setenv("LANGUAGE", locale.c_str(), 1);
 	} else {
 		log("No corresponding locale found - trying to set it via LANGUAGE=%s, LANG=%s\n",
