@@ -291,14 +291,25 @@ void set_locale(const std::string& name) {
 	}
 	if (leave_while) {
 		setenv("LC_ALL", locale.c_str(), 1);
+        setenv("LANG", locale.c_str(), 1);
 		setenv("LANGUAGE", locale.c_str(), 1);
 	} else {
-		log("No corresponding locale found - trying to set it via LANGUAGE=%s, LANG=%s\n",
-		    lang.c_str(), lang.c_str());
+		log("No corresponding locale found\n");
+        log(" - Set LANGUAGE, LANG and LC_ALL to '%s'\n",
+		    lang.c_str());
+
 		setenv("LANGUAGE", lang.c_str(), 1);
 		setenv("LANG", lang.c_str(), 1);
-		SETLOCALE(LC_MESSAGES, "");  // set locale according to the env. variables
-		                             // --> see  $ man 3 setlocale
+        setenv("LC_ALL", lang.c_str(), 1);
+
+        try {
+            SETLOCALE(LC_MESSAGES, "en_US.utf8");  // set locale according to the env. variables
+                                         // --> see  $ man 3 setlocale
+            log(" - Set system locale to 'en_US.utf8' to make '%s' accessible to libintl\n", lang.c_str());
+        } catch (std::exception&) {
+            SETLOCALE(LC_MESSAGES, "");  // set locale according to the env. variables
+                                         // --> see  $ man 3 setlocale
+        }
 		// assume that it worked
 		// maybe, do another check with the return value (?)
 		locale = lang;
