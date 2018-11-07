@@ -212,7 +212,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     rm  -f ../wl_map_object_info || true
     rm  -f ../wl_map_info || true
 
-    mv VERSION ../VERSION
+    cp VERSION ../VERSION
     mv src/widelands ../widelands
 
     if [ $BUILD_WEBSITE = "ON" ]; then
@@ -249,7 +249,7 @@ cd build
 $buildtool
 rm  ../VERSION || true
 rm  ../widelands || true
-mv VERSION ../VERSION
+cp VERSION ../VERSION
 mv src/widelands ../widelands
 cd ..
 
