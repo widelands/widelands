@@ -575,7 +575,7 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 			if (it == programs.end())
 				throw GameDataError("the program \"%s\" has not (yet) been declared in %s "
 				                    "(wrong declaration order?)",
-				                    program_name, descr.descname().c_str());
+				                    program_name, descr.name().c_str());
 			program_ = it->second.get();
 		}
 
@@ -663,13 +663,13 @@ ProductionProgram::ActCallWorker::ActCallWorker(char* parameters,
 		for (const auto& area_info : worker_workarea_info) {
 			std::set<std::string>& building_radius_infos = descr->workarea_info_[area_info.first];
 
-			for (const std::string& worker_descname : area_info.second) {
-				std::string description = descr->descname();
+			for (const std::string& worker_name : area_info.second) {
+				std::string description = descr->name();
 				description += ' ';
 				description += production_program_name;
 				description += " worker ";
 				description += main_worker_descr.name();
-				description += worker_descname;
+				description += worker_name;
 				building_radius_infos.insert(description);
 			}
 		}
@@ -1124,8 +1124,8 @@ ProductionProgram::ActMine::ActMine(char* parameters,
 				throw GameDataError("expected %s but found \"%s\"", "percentage", parameters);
 		}
 		std::string description =
-		   (boost::format("%1$s %2$s mine %3$s") % descr->descname() % production_program_name %
-		    world.get_resource(resource_)->descname())
+		   (boost::format("%1$s %2$s mine %3$s") % descr->name() % production_program_name %
+		    world.get_resource(resource_)->name())
 		      .str();
 
 		descr->workarea_info_[distance_].insert(description);

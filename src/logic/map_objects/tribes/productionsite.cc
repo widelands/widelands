@@ -559,7 +559,7 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
  * Intercept remove_worker() calls to unassign our worker, if necessary.
  */
 void ProductionSite::remove_worker(Worker& w) {
-	molog("%s leaving\n", w.descr().descname().c_str());
+	molog("%s leaving\n", w.descr().name().c_str());
 	WorkingPosition* wp = working_positions_;
 
 	for (const auto& temp_wp : descr().working_positions()) {
@@ -657,7 +657,7 @@ void ProductionSite::request_worker_callback(
 			if (current == nuwo)
 				throw wexception(
 				   "Something went wrong! No fitting place for worker %s in %s at (%u, %u) found!",
-				   w->descr().descname().c_str(), psite.descr().descname().c_str(),
+				   w->descr().name().c_str(), psite.descr().name().c_str(),
 				   psite.get_position().x, psite.get_position().y);
 		}
 	}
