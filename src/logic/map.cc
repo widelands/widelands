@@ -32,6 +32,7 @@
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/findimmovable.h"
@@ -1566,16 +1567,18 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 	std::string lower_filename = filename;
 	boost::algorithm::to_lower(lower_filename);
 
-	if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
-		try {
-			result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
-		} catch (...) {
-			//  If this fails, it is an illegal file.
-			//  TODO(unknown): catchall hides real errors! Replace with more specific code
+	try {
+		if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
+				result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
+		} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
+		           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
+			result.reset(new S2MapLoader(filename, *this));
 		}
-	} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
-	           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
-		result.reset(new S2MapLoader(filename, *this));
+	} catch (const FileError& e) {
+		// file might not have existed
+		log("Map::get_correct_loader: File error: %s\n", e.what());
+	} catch (std::exception& e) {
+		log("Map::get_correct_loader: Unknown error: %s\n", e.what());
 	}
 	return result;
 }

@@ -32,6 +32,7 @@
 #include "game_io/game_preload_packet.h"
 #include "graphic/font_handler.h"
 #include "helper.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
@@ -74,6 +75,7 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
      table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
      table_(table_box_, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
      filetype_(filetype),
+     show_filenames_(false),
      localize_autosave_(localize_autosave),
      // Savegame description
      game_details_(
@@ -136,8 +138,12 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 }
 
 const std::string LoadOrSaveGame::filename_list_string() const {
+	return filename_list_string(table_.selections());
+}
+
+const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
 	boost::format message;
-	for (const uint32_t index : table_.selections()) {
+	for (const uint32_t index : selections) {
 		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
 
 		if (gamedata.errormessage.empty()) {
@@ -269,12 +275,60 @@ void LoadOrSaveGame::clicked_delete() {
 		table_.focus();
 	}
 	if (do_delete) {
+		// Failed deletions aren't a serious problem, we just catch the errors
+		// and keep track to notify the player.
+		std::set<uint32_t> failed_selections;
+		bool failed;
 		for (const uint32_t index : selections) {
+			failed = false;
 			const std::string& deleteme = get_filename(index);
-			g_fs->fs_unlink(deleteme);
-			if (filetype_ == FileType::kReplay) {
-				g_fs->fs_unlink(deleteme + kSavegameExtension);
+			try {
+				g_fs->fs_unlink(deleteme);
+			} catch (const FileError& e) {
+				log("player-requested file deletion failed: %s", e.what());
+				failed = true;
 			}
+			if (filetype_ == FileType::kReplay) {
+				try {
+					g_fs->fs_unlink(deleteme + kSavegameExtension);
+					// If at least one of the two relevant files of a replay are successfully deleted
+					// then count it as success. (From the player perspective the replay is gone.)
+					failed = false;
+					// If it was a multiplayer replay, also delete the synchstream.
+					// Do it here, so it's only attempted if replay deletion was successful.
+					if (g_fs->file_exists(deleteme + kSyncstreamExtension)) {
+						g_fs->fs_unlink(deleteme + kSyncstreamExtension);
+					}
+				} catch (const FileError& e) {
+					log("player-requested file deletion failed: %s", e.what());
+				}
+			}
+			if (failed) {
+				failed_selections.insert(index);
+			}
+		}
+		if (!failed_selections.empty()) {
+			// Notify the player.
+			std::string caption = ngettext("Error Deleting File!", "Error Deleting Files!", failed_selections.size());
+			if (filetype_ == FileType::kReplay) {
+				if (selections.size() == 1) {
+					header = _("The replay could not be deleted.");
+				} else {
+					header = ngettext("A replay could not be deleted.", "Some replays could not be deleted.", failed_selections.size());
+				}
+			} else {
+				if (selections.size() == 1) {
+					header = _("The game could not be deleted.");
+				} else {
+					header = ngettext("A game could not be deleted.", "Some games could not be deleted.", failed_selections.size());
+				}
+			}
+			std::string message = (boost::format("%s\n%s") % header % filename_list_string(failed_selections)).str();
+			UI::WLMessageBox msgBox(
+			   parent_->get_parent()->get_parent(),
+				 caption, message,
+			   UI::WLMessageBox::MBoxType::kOk);
+			msgBox.run<UI::Panel::Returncodes>();
 		}
 		fill_table();
 
@@ -297,7 +351,7 @@ UI::Button* LoadOrSaveGame::delete_button() {
 	return delete_;
 }
 
-void LoadOrSaveGame::fill_table(bool show_filenames) {
+void LoadOrSaveGame::fill_table() {
 
 	clear_selections();
 	table_.clear();
@@ -309,8 +363,8 @@ void LoadOrSaveGame::fill_table(bool show_filenames) {
 			return boost::ends_with(fn, kReplayExtension);
 		});
 		// Update description column title for replays
-		table_.set_column_tooltip(2, show_filenames ? _("Filename: Map name (start of replay)") :
-		                                              _("Map name (start of replay)"));
+		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
+		                                               _("Map name (start of replay)"));
 	} else {
 		gamefiles = g_fs->list_directory(kSaveDir);
 	}
@@ -459,7 +513,7 @@ void LoadOrSaveGame::fill_table(bool show_filenames) {
 				te.set_string(1, gametypestring);
 				if (filetype_ == FileType::kReplay) {
 					const std::string map_basename =
-					   show_filenames ?
+					   show_filenames_ ?
 					      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
 					      gamedata.mapname;
 					te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) %
@@ -472,7 +526,7 @@ void LoadOrSaveGame::fill_table(bool show_filenames) {
 			} else {
 				te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
 			}
-		} catch (const WException& e) {
+		} catch (const std::exception& e) {
 			std::string errormessage = e.what();
 			boost::replace_all(errormessage, "\n", "<br>");
 			gamedata.errormessage =
@@ -500,4 +554,10 @@ void LoadOrSaveGame::fill_table(bool show_filenames) {
 	}
 	table_.sort();
 	table_.focus();
+}
+
+void LoadOrSaveGame::set_show_filenames(bool show_filenames) {
+	if (filetype_ != FileType::kReplay)
+		return;
+	show_filenames_ = show_filenames;
 }

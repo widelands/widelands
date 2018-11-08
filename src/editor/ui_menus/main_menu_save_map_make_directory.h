@@ -52,6 +52,7 @@ private:
 	UI::Button cancel_button_;
 	const std::string illegal_filename_tooltip_;
 	void edit_changed();
+	void clicked_ok();
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
