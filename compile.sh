@@ -113,8 +113,8 @@ do
         echo "Call -j/--cores with a number, e.g. '-j $MAXCORES'"
         exit 1
       fi
-      shift # past argument
-      shift # past value
+    shift # past argument
+    shift # past value
     ;;
     -r|--release)
       BUILD_TYPE="Release"
