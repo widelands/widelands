@@ -85,8 +85,10 @@ EditorGameBase::~EditorGameBase() {
  * also resets the map filesystem if it points to the temporary file
  */
 void EditorGameBase::delete_tempfile() {
-	if (!tmp_fs_)
+    if (!tmp_fs_) {
 		return;
+    }
+
 	std::string fs_filename = tmp_fs_->get_basename();
 	std::string mapfs_filename = map_.filesystem()->get_basename();
 	if (mapfs_filename == fs_filename)
@@ -95,7 +97,7 @@ void EditorGameBase::delete_tempfile() {
 	try {
 		g_fs->fs_unlink(fs_filename);
 	} catch (const std::exception& e) {
-		// if file deletion fails then we have an abaondoned file lying around, but otherwise that's unproblematic
+		// if file deletion fails then we have an abandoned file lying around, but otherwise that's unproblematic
 		log("EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n", e.what());
 	}
 }
@@ -133,9 +135,8 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 	tmp_fs_.reset(g_fs->create_sub_file_system(complete_filename, type));
 
 	// save necessary map data (we actually save the whole map)
-	Widelands::MapSaver* wms = new Widelands::MapSaver(*tmp_fs_, *this);
+    std::unique_ptr<Widelands::MapSaver> wms(new Widelands::MapSaver(*tmp_fs_, *this));
 	wms->save();
-	delete wms;
 
 	// swap map fs
 	std::unique_ptr<FileSystem> mapfs(tmp_fs_->make_sub_file_system("."));

@@ -277,8 +277,9 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	try {
 		g_fs->fs_unlink(complete_filename);
 	} catch (const std::exception& e) {
+        log("Unable to delete old map file %s while saving map: %s\n", complete_filename.c_str(), e.what());
 		const std::string s =
-		   (boost::format(_("File ‘%s.tmp’ could not be deleted.")) % FileSystem::fs_filename(filename.c_str())).str()
+		   (boost::format(_("File ‘%’ could not be deleted.")) % FileSystem::fs_filename(filename.c_str())).str()
 		   + " " + _("Try saving under a different name!");
 		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
@@ -306,9 +307,8 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	try {
 		std::unique_ptr<FileSystem> fs(
 		   g_fs->create_sub_file_system(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
-		Widelands::MapSaver* wms = new Widelands::MapSaver(*fs, egbase);
+		std::unique_ptr<Widelands::MapSaver> wms(new Widelands::MapSaver(*fs, egbase));
 		wms->save();
-		delete wms;
 		fs.reset();
 	} catch (const std::exception& e) {
 		std::string s = _("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
