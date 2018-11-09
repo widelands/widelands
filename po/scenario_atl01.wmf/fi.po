@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
-"PO-Revision-Date: 2018-10-29 18:36+0000\n"
+"POT-Creation-Date: 2018-11-02 08:03+0000\n"
+"PO-Revision-Date: 2018-11-03 14:46+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +118,7 @@ msgstr "Rakenna metsästäjän mökki saadaksesi raakaa lihaa"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:64
 msgid "Build a fisher’s house close to water to get raw fish"
-msgstr "Rakenna kalastajan mökki lähelle vettä saadaksesi raakaa kalaa"
+msgstr "Rakenna kalastajatorppa lähelle vettä saadaksesi raakaa kalaa"
 
 #: ../../data/campaigns/atl01.wmf/scripting/texts.lua:65
 msgid ""
