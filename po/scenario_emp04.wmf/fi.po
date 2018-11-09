@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Jukka Pakarinen, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-11-02 08:03+0000\n"
+"PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Jukka Pakarinen, 2018\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -55,31 +56,35 @@ msgstr "Selvitä kaoottinen tieverkko poistamalla tarpeettomat tiet."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Click on one of the farms"
-msgstr ""
+msgstr "Klikkaa jotakin maatilaa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:66
 msgid "Open the Building Window of a Farm"
-msgstr ""
+msgstr "Avaa Maatilan Rakennusruutu"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:67
 msgid ""
 "Click on a farm building to open its building window. This will let you "
 "analyze the building."
 msgstr ""
+"Klikkaa maatilarakennusta avataksesi rakennuusruudun. Tämä antaa sinulle "
+"mahdollisuuden analysoida rakennusta."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find the construction plans for the farms"
-msgstr ""
+msgstr "Etsi maatiloille rakennuspaikat"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:75
 msgid "Find Farm Construction Plans"
-msgstr ""
+msgstr "Etsi Maatilan Rakennuspaikat"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
+"Palauta maatilojen rakennuspaikat. Etsi niitä kukkuloilta aluerajasi "
+"itäpuolelta."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
@@ -186,7 +191,7 @@ msgstr "Tuota ainakin 10 työkalua kehittääksesi talouttasi."
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:140
 msgid ""
 "Remember that you can control the production amount in the economy settings."
-msgstr ""
+msgstr "Muista että voit vaikuttaa tuotantomäärään talouden asetuksia."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "Recruit new soldiers"
@@ -202,74 +207,74 @@ msgstr "Palkkaa ainakin kymmenen sotilasta kasarmiisi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:150
 msgid "Don’t forget to forge weapons and armor for them."
-msgstr ""
+msgstr "Älä unohda takoa heille aseita ja haarniskoja."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:156
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Kukista Barbaarit"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:158
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Kukista Vihollinen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:159
 msgid "End the Barbarian intrusion into your very own part of the world."
-msgstr ""
+msgstr "Estä Barbaarien tunkeutuminen sinun omalle alueelle maailmassa."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:165
 msgid "Build 2 charcoal kiln"
-msgstr ""
+msgstr "Rakenna 2 miilua"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:167
 msgid "Build Two Charcoal Kilns"
-msgstr ""
+msgstr "Rakenna Kaksi Miilua"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:168
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr ""
+msgstr "Rakenna kaksi miilua raudan tuotannon tueksi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:169
 msgid "Remember to ensure a constant log supply for them."
-msgstr ""
+msgstr "Muista varmistaa niille jatkuva kaadettujen puiden toimitus."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:175
 msgid "Increase your military strength by training your soldiers"
-msgstr ""
+msgstr "Kasvata sotilaallista voimaasi kouluttamalla sotilaitasi"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:177
 msgid "Training is Important"
-msgstr ""
+msgstr "Kouluttaminen on Tärkeää"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:178
 msgid "Train your soldiers hard and train them fast."
-msgstr ""
+msgstr "Kouluta sotilaitasi ankarasti ja kouluta ne nopeasti."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:179
 msgid "You need to increase your military strength."
-msgstr ""
+msgstr "Sinun täytyy kasvattaa sotilaallista voimaasi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:185
 msgid "Build a training camp and enhance the arena"
-msgstr ""
+msgstr "Rakenna harjoitusleiri ja laajenna areenaa"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:187
 msgid "More Efficient Training Buildings"
-msgstr ""
+msgstr "Tehokkaammat Harjoitusrakennukset"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:188
 msgid "Build a training camp and enhance your arena to a colosseum."
-msgstr ""
+msgstr "Rakenna harjoitusleiri ja laajenna areenasi colosseumiksi."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:199
 msgid "Home, Sweet Home"
-msgstr ""
+msgstr "Oma Koti Kullan Kallis"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:200
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:211
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:219
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:227
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "Lutiuksen päiväkirja"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:202
@@ -278,15 +283,18 @@ msgid ""
 " again. I am really looking forward to a walk on our lovely coast and to "
 "hunting in our deep forests."
 msgstr ""
+"Viimeinkin, onnistuimme pääsemään kotiin. Olen hyvin iloinen nähdessäni "
+"kauniin maamme taas uudelleen. Odotan innolla, että pääsen kävelylle "
+"rakkaalle rannikollemme ja metsästämään syviin metsiimme."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:205
 msgid "I expect that Saledus and Amalea are deeply delighted as well."
-msgstr ""
+msgstr "Oletan myös Saleduksen ja Amalean olevan syvästi ilahtuneita."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:210
 msgid "Tools, Tools, Tools"
-msgstr ""
+msgstr "Työkaluja, Työkaluja, Työkaluja"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:213
@@ -294,12 +302,14 @@ msgid ""
 "Praise the gods! We just ensured a constant tool supply. Now we should be "
 "able to expand our economy."
 msgstr ""
+"Ylistetyt jumalat! Varmistimme juuri jatkuvan työkalujen toimituksen. Nyt "
+"meidän pitäisi pystyä laajentamaan talouttamme."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:218
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:602
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:648
 msgid "Military Strength"
-msgstr ""
+msgstr "Sotilaallinen Vahvuus"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:221
@@ -307,10 +317,12 @@ msgid ""
 "Thank the gods! Now we have everything prepared to fully train our soldiers."
 " We can increase our military strength at last."
 msgstr ""
+"Kiitos jumalille! Nyt meillä on kaikki valmiina sotilaiden täydelliseen "
+"kouluttamiseen. Voimme viimeinkin kasvattaa sotilaallista vahvuutta."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:226
 msgid "The Battle is Won"
-msgstr ""
+msgstr "Taistelu Voitettiin"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:229
@@ -320,20 +332,26 @@ msgid ""
 "our victory is only temporary, as this is still just the beginning of the "
 "war. Let’s see what the future still holds for us."
 msgstr ""
+"Ylistetyt jumalat, olemme onnistuneet. Selviydyimme kaikissa haasteissa, "
+"jotka kohdistettiin meihin. Me jopa häädimme Barbaarit mailtamme. Silti, "
+"voittomme on vain väliaikaista, koska tämä on vain sodan alku. Saa nähdä "
+"mitä tulevaisuus tuo tullessaa."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Olet selviytynyt tästä komennuksesta. Voit halutessasi jatkaa pelaamista, "
+"tai siirtyä seuraavaan komennukseen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:239
 msgid "Chaos"
-msgstr ""
+msgstr "Kaaos"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:240
 msgid "Lutius is disappointed"
-msgstr ""
+msgstr "Lutius pettyy"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:242
@@ -342,27 +360,30 @@ msgid ""
 "the road network seems to be completely in shambles as well. Who might be "
 "responsible for this chaos?"
 msgstr ""
+"Voi ei! Amalea on oikeassa. Itse asiassa, en näe ollenkaan tuotantoa. Ja "
+"tieverkosto näyttää olevan myös täysin raunioina. Kuka onkaan vastuussa "
+"tästä kaaoksesta?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:247
 msgid "Explanation Needed"
-msgstr ""
+msgstr "Tarvittiin Selitys"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:248
 msgid "Lutius greets the official"
-msgstr ""
+msgstr "Lutius tervehtii virkailijaa"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:250
 msgid "Ave! Who are you and what happened to our beautiful land?"
-msgstr ""
+msgstr "Tervehdys! Kuka olet ja mitä kauniille maallemme tapahtui?"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:255
 msgid "Difficult Times"
-msgstr ""
+msgstr "Vaikeita Aikoja"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:256
 msgid "Lutius accepts the challenge"
-msgstr ""
+msgstr "Lutius hyväksyy haasteen"
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:258
@@ -371,6 +392,9 @@ msgid ""
 "will do our very best to recover from the chaos. But unfortunately, this "
 "seems to be very difficult."
 msgstr ""
+"Pormestari, meidän täytyy kiittää teitä ponnisteluistasi kaupungin "
+"turvaamiseksi. Me teemme parhaamme tämä kaaoksen korjaamiseksi. Mutta "
+"surukseni, se näyttää olevan hyvin vaikeaa. "
 
 #. TRANSLATORS: Lutius
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:261
@@ -378,14 +402,16 @@ msgid ""
 "I am really afraid, because we are completely unprepared should the "
 "Barbarians decide to attack us."
 msgstr ""
+"Olen hyvin peloissani, koska olemme täysin valmistautumattomia, jos "
+"Barbaarit päättäisivät hyökätä tänne."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:269
 msgid "Welcome Back"
-msgstr ""
+msgstr "Tervetuloa Takaisin"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:270
 msgid "A high Fremil official is welcoming you…"
-msgstr ""
+msgstr "Fremilin korkea-arvoinen virkailija toivotta sinut tervetulleeksi…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -394,20 +420,25 @@ msgid ""
 "Ave, Sire! The people and me are so glad to see you returning back home. We "
 "really need some good leadership around here."
 msgstr ""
+"Tervehdys, Herra! Minä ja muut ihmiset olemme hyvin iloisia nähdässämme "
+"sinun palaavan takaisin kotiin. Tarvitsemme tänne toden teolla hyvää "
+"johtajuuta."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:274
 msgid ""
 "As you have already noticed, things have gone terribly wrong around here "
 "since you left."
 msgstr ""
+"Kuten oletkin jo huomannut, asiat ovat menneet kammottavalla tavalla pieleen"
+" sen jälkeen kun lähdit."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:279
 msgid "A Long Story"
-msgstr ""
+msgstr "Pitkä Tarina"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:280
 msgid "The official sighs deeply…"
-msgstr ""
+msgstr "Virkailija huokaa syvään…"
 
 #. TRANSLATORS: Marcus - Mayor of Fremil welcoming Lutius and explaining the
 #. chaos
@@ -418,6 +449,10 @@ msgid ""
 "delegated the authority of running the city to his former secretary and "
 "instated him as his surrogate around here."
 msgstr ""
+"Herra, jos sallit, aloitan aivan alusta. Kuningas jätti Fremilin kauan "
+"sitten taistellakseen Barbaareja vastaa. Siinä määrin kun virka edellytti "
+"häneltä täyttä sitoutumista, hän delegoi kaupungin toimintohen vastuuta "
+"häntä edeltävälle ministerille ja teki hänestä tänne sijaisensa."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:284
 msgid ""
@@ -425,6 +460,9 @@ msgid ""
 "his new power. His selfish instincts were as awful as his complete stupidity"
 " and inability to govern the city."
 msgstr ""
+"Mutta se oli yksi hänen pahimmista päätöksistään. Ministeri sokaistui "
+"hänelle annetusta vallasta. Hänen itsekkäät viettinsä olivat yhtä kauheita "
+"kuin hänen typeryytensä ja kyvyttömyys hallita kaupunkia."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:286
 msgid ""
@@ -432,14 +470,18 @@ msgid ""
 "Afterwards, they elected me as mayor of this city. However, recovering from "
 "the chaos seems to be a task too big for my abilities."
 msgstr ""
+"Hieman myöhemmin, ihmiset huomasivat totuuden ja erottivat tämän täyden "
+"typeryksen. Jälkeenpäin he valitsivat minut tämän kaupungin pormestariksi. "
+"Siitä huolimatta, tästä kaaoksesta toipuminen näyttää olevan aivan liian "
+"suuri tehtävä minun taidoillani. "
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:294
 msgid "Amalea Looks Puzzled"
-msgstr ""
+msgstr "Amalea Näyttää Hämmentyneeltä"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:295
 msgid "Amalea is doubtful…"
-msgstr ""
+msgstr "Amalea on epävarma…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:297
@@ -448,6 +490,9 @@ msgid ""
 "our homeland again. But on the other hand, I have the impression that "
 "something went deeply wrong here."
 msgstr ""
+"Tervehdys, Saledus! Toisaalta olet oikeassa, on todellakin ilahduttavaa "
+"nähdä kotimaa uudestaan. Mutta toisaalta, minulla on sellainen mielikuva, "
+"että jotain täällä meni todella pieleen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:300
@@ -456,14 +501,18 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
+"Tarkastellaampa hieman taloutta. Tuotantoa ei ole juuri ollenkaan. Kuinka "
+"tahansa maatamme on johdettu poissa ollessamme, johti se täydelliseen "
+"kaaokseen. En ole aivan varma miten voimme tämän korjata, mikäli se "
+"yleensäkään on mahdollista."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:305
 msgid "Amalea Investigates"
-msgstr ""
+msgstr "Amalea tutkii"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:306
 msgid "Amalea is nodding thoughtfully…"
-msgstr ""
+msgstr "Amalea nyökkää mietteliäästi…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:308
@@ -474,6 +523,11 @@ msgid ""
 " You can hardly find a grain of dust left in there: no wares, no tools, no "
 "workers and no soldiers either."
 msgstr ""
+"Lutius, minun mielestä tämä on taas kerran erittäin vaikea haaste. Mutta "
+"epäilen, että olemme tuomittu hoitamaan tämän asian. Jos tehdään tilanne "
+"vielä kamalammaksi, törmäsin häijyyn yllätykseen varastoilla: ne kaikki "
+"olivat tyhjiä. Sieltä voi tuskin löytää jyvän jyvää: ei tuoteita, ei "
+"työlaluja, ei työläisiä eikä myöskään sotilaita."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:311
@@ -485,6 +539,12 @@ msgid ""
 "fishermen’s houses and the quarries don’t have any resources near them. The "
 "lumberjacks’ houses and the wells seem also to be inefficient or worn out."
 msgstr ""
+"Aivan ensimmäisenä tarvitsemme rakennusmateriaaleja päästäksemme korjaamaan "
+"pahamaineisen ministerimme virheitä. Luulempa, että meidän kannattaisi "
+"yrittää purkaa tuottamattomat pienet rakennukset. Sikäli kun nyt ymmärrän, "
+"kalamiesten torpilla ja kivilouhoksilla ei ole lähistöllä yhtään resursseja."
+" Puunhakkaajien mökit ja kaivot näyttävät myös olevan tehottomia tai "
+"kuivuneet."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:314
@@ -494,15 +554,20 @@ msgid ""
 "production in all bigger buildings and get the workers some rest until we "
 "have produced some of their input wares."
 msgstr ""
+"Lisäksi, meidän pitäisi rajoittaa syötteitä kaikkiin rakennuksiimme, jotka "
+"kuluttavat rakennusmateriaalejamme kohti nollaa. Tai ehkä voisimme jopa "
+"pysäyttää tuotannon kaikissa suurissa rakennuksissa ja antaa työntekijöiden "
+"hieman levätä ennen kuin olemme tuottaneet heidän tarvitsemiaan "
+"syötetuotteita."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:321
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:581
 msgid "Amalea has Bad News"
-msgstr ""
+msgstr "Amalealla On Huonoja Uutisia"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:322
 msgid "Amalea recommends…"
-msgstr ""
+msgstr "Amalea kehoittaa…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:324
@@ -536,11 +601,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340
 msgid "Amalea Looks Confident"
-msgstr ""
+msgstr "Amalea Näyttää Luottavaiselta"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:341
 msgid "Amalea is more confident"
-msgstr ""
+msgstr "Amalea on luottavaisempi"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:343
@@ -566,11 +631,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:356
 msgid "Amalea is Somewhat Relieved"
-msgstr ""
+msgstr "Amalea On Jossakin Määrin Helpottunut"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:357
 msgid "Amalea is giving a deep sigh…"
-msgstr ""
+msgstr "Amalea huokaa syvään…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:359
@@ -594,11 +659,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:371
 msgid "Amalea has Good News"
-msgstr ""
+msgstr "Amalealla On Hyviä Uutisia"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:372
 msgid "Amalea smiles for the first time in weeks…"
-msgstr ""
+msgstr "Amalea hymyilee ensimmäistä kertaa viikkoihin…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:374
@@ -635,11 +700,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:393
 msgid "Amalea is Pleased"
-msgstr ""
+msgstr "Amalea On Mielissään"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:394
 msgid "Amalea is nodding her head…"
-msgstr ""
+msgstr "Amalea nyökkää päällään…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:396
@@ -655,7 +720,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:405
 msgid "Amalea Shakes Her Head"
-msgstr ""
+msgstr "Amalea Pyörittää Päätään"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:406
 msgid "Amalea is getting fed up with all the problems in this economy…"
@@ -696,11 +761,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:424
 msgid "Amalea Laughs Sarcastically"
-msgstr ""
+msgstr "Amalea Nauraa Sarkastisesti"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:425
 msgid "Amalea is laughing sarcastically…"
-msgstr ""
+msgstr "Amalea nauraa sarkastisesti…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:427
@@ -717,11 +782,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:435
 msgid "Amalea Shrugs"
-msgstr ""
+msgstr "Amalea Kohauttaa Olkiaan"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:436
 msgid "Amalea is getting used to bad news…"
-msgstr ""
+msgstr "Amalea alkaa tottumaan huonoihin uutisiin…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:438
@@ -750,11 +815,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:451
 msgid "Amalea Looks Happy"
-msgstr ""
+msgstr "Amalea Näyttää Iloiselta"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:452
 msgid "Amalea comes in…"
-msgstr ""
+msgstr "Amalea tulee sisään…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:454
@@ -773,11 +838,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:463
 msgid "Amalea Looks Sad"
-msgstr ""
+msgstr "Amalea Näyttää Surulliselta"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:464
 msgid "Amalea is really sad…"
-msgstr ""
+msgstr "Amalea on todella surullinen…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:466
@@ -797,11 +862,11 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:474
 msgid "Amalea is Very Content"
-msgstr ""
+msgstr "Amalea On Erittäin Tyytyväinen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:475
 msgid "Amalea claps her hands…"
-msgstr ""
+msgstr "Amalea läpsäyttää käsiään…"
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:477
@@ -821,7 +886,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:485
 msgid "Amalea is Satisfied"
-msgstr ""
+msgstr "Amelea On Tyytyväinen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:486
 msgid "Amalea is satisfied with the progress…"
@@ -878,7 +943,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:514
 msgid "Amalea is in a Good Mood"
-msgstr ""
+msgstr "Amalea On Hyvällä Tuulella"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:515
 msgid "Amalea is celebrating success…"
@@ -995,7 +1060,7 @@ msgstr ""
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:573
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:592
 msgid "Defeated!"
-msgstr ""
+msgstr "Kukistettu!"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:574
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:593
@@ -1072,7 +1137,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:623
 msgid "Easy Victory"
-msgstr ""
+msgstr "Helppo Voitto"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:624
 msgid "Saledus is cheering proudly…"

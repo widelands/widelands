@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2017-05-15 11:49+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -341,7 +342,7 @@ msgid ""
 msgstr ""
 "Un 't is noch slimmer: All dat Land, wat wi sehn könen, is mit Stenen un "
 "Bomen dichtmüürt. Ick bün bang, dat wi de nödigen Materialien, de wi bruken,"
-" um een neies Schipp to bauen, nich finnen könen."
+" um een nejes Schipp to bauen, nich finnen könen."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:223
@@ -436,7 +437,7 @@ msgid ""
 "comfortable?"
 msgstr ""
 "Dat is wull een goder Stapp vöran, aber ick seh heel minn Rüümte för Husen. "
-"De hele Insel is vull mit Stenen. Wo könen wi jemaals een neies Schipp bauen"
+"De hele Insel is vull mit Stenen. Wo könen wi jemaals een nejes Schipp bauen"
 " oder blot eene eenfache Wirtschaft hebben, um uns' Levens liedsamer to "
 "maken?"
 
@@ -474,12 +475,12 @@ msgid ""
 "our new world. We can use them as soon as there will finally be enough space"
 " for buildings."
 msgstr ""
-"Dat gifft uns daarto wat Flint un Marmel, um uns' neie Welt to bauen. Wi "
+"Dat gifft uns daarto wat Flint un Marmel, um uns' neje Welt to bauen. Wi "
 "könen se bruken, sobold daar ennelk genoog Rüümte för Husen is."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:288
 msgid "Amalea’s New Instructions"
-msgstr "Amalee' gifft neie Anwiesens"
+msgstr "Amalee' gifft neje Anwiesens"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:289
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:363
@@ -568,7 +569,7 @@ msgid ""
 "think of using some planks to build new ships."
 msgstr ""
 "Dat is een verdüllt goder Stapp vöran, um grotere Husen to bauen. Un wi "
-"könen daaröver nadenken, een paar Planken för neie Schippen to bruken."
+"könen daaröver nadenken, een paar Planken för neje Schippen to bruken."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:334
 msgid "We Need a Port"
@@ -805,7 +806,7 @@ msgid ""
 "they have to use all our remaining gold for building the port. So, we won’t "
 "have any gold left after our port is build."
 msgstr ""
-"Salve Lutius. As ick mit uns dappern Baulüü redt hebb, hebben se mi "
+"Salve Lutius. As ick mit uns' dappern Baulüü redt hebb, hebben se mi "
 "vertellt, dat se all dat Gold, wat wi över hetten, bruukt hebben, um de Muu "
 "to bauen. Wi hebben also keen Gold mehr över, wenn de Muu beschickt is."
 
@@ -1290,5 +1291,5 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr[0] "Neje Upgaav"
+msgstr[1] "Neje Upgaven"
