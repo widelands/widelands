@@ -262,6 +262,9 @@ bool ZipFilesystem::is_directory(const std::string& path) {
  * Create a sub filesystem out of this filesystem
  */
 FileSystem* ZipFilesystem::make_sub_file_system(const std::string& path) {
+	if (path == ".") {
+		return new ZipFilesystem(zip_file_, basedir_in_zip_file_);
+	}
 	if (!file_exists(path)) {
 		throw wexception(
 		   "ZipFilesystem::make_sub_file_system: The path '%s' does not exist in zip file '%s'.",
