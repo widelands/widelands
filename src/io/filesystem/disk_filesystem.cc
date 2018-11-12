@@ -294,14 +294,17 @@ void RealFSImpl::ensure_directory_exists(const std::string& dirname) {
 		it = clean_dirname.find('/', it);
 
 		FileSystemPath fspath(canonicalize_name(clean_dirname.substr(0, it)));
-		if (fspath.exists_ && !fspath.is_directory_)
+        if (fspath.exists_ && !fspath.is_directory_) {
 			throw FileTypeError("RealFSImpl::ensure_directory_exists",
 			   fspath, "path is not a directory");
-		if (!fspath.exists_)
+        }
+        if (!fspath.exists_) {
 			make_directory(clean_dirname.substr(0, it));
+        }
 
-		if (it == std::string::npos)
+        if (it == std::string::npos) {
 			break;
+        }
 		++it;
 	}
 }
@@ -382,10 +385,12 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 
 		length = size;
 	} catch (...) {
-		if (file)
+        if (file) {
 			fclose(file);
-		if (data)
+        }
+        if (data) {
 			free(data);
+        }
 		throw;
 	}
 

@@ -274,7 +274,7 @@ FileSystem* ZipFilesystem::make_sub_file_system(const std::string& path) {
 	if (!is_directory(path)) {
 		throw wexception(
 		   "ZipFilesystem::make_sub_file_system: The path '%s' needs to be a directory in zip file '%s'.",
-		   (basedir_in_zip_file_.empty()?path:basedir_in_zip_file_+"/"+path).c_str(),
+		   (basedir_in_zip_file_.empty() ? path : basedir_in_zip_file_ + "/" + path).c_str(),
 		   zip_file_->path().c_str());
 	}
 
