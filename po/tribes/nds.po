@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-25 13:46+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-11-01 16:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -983,7 +983,7 @@ msgstr "to jagen"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:53
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:64
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:53
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:65
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
 msgid "No Game"
 msgstr "Keene Deerten"
 
@@ -991,7 +991,7 @@ msgstr "Keene Deerten"
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/init.lua:55
 #: ../../data/tribes/buildings/productionsites/barbarians/hunters_hut/init.lua:66
 #: ../../data/tribes/buildings/productionsites/empire/hunters_house/init.lua:55
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:67
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:71
 msgid "Out of Game"
 msgstr "Hebb keene Deerten mehr"
 
@@ -1684,7 +1684,7 @@ msgid ""
 "The hunter working out of this hunter’s hut can’t find any game in his work "
 "area. Remember that you can build a gamekeeper’s hut to release more game "
 "into the wild."
-msgstr "De Jäger, de bi deese Jaggthuus warkt, het keene Deerten tum Jagen. Du kannst neie Deerten tüchten, wenn du een Deertentüchteree baust."
+msgstr "De Jäger, de bi deese Jaggthuus warkt, het keene Deerten tum Jagen. Du kannst neje Deerten tüchten, wenn du een Deertentüchteree baust."
 
 #. TRANSLATORS: This is a building name used in lists of buildings
 #: ../../data/tribes/buildings/productionsites/barbarians/inn/init.lua:7
@@ -2730,7 +2730,7 @@ msgid "Hunter’s House"
 msgstr "Jaggthuus"
 
 #. TRANSLATORS: "game" means animals that you can hunt
-#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:69
+#: ../../data/tribes/buildings/productionsites/frisians/hunters_house/init.lua:73
 msgctxt "frisians_building"
 msgid ""
 "The hunter working out of this hunter’s house can’t find any game in his "

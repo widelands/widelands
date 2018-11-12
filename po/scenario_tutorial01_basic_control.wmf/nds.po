@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: 2018-09-30 10:51+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-11-01 16:30+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -248,7 +248,7 @@ msgstr "Up dat Klaarworden vun de Huus wachten"
 msgid ""
 "I wanted to teach you how to build new flags, but it seems you have already "
 "found out on your own. Well done!"
-msgstr "Ick wull di lehren, wo dat Upstellen vun neien Fahnen gaht, aber du hest dat openbaar sülvst utfunnen. Hunnert!"
+msgstr "Ick wull di lehren, wo dat Upstellen vun nejen Fahnen gaht, aber du hest dat openbaar sülvst utfunnen. Hunnert!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:147
 msgid ""
@@ -292,7 +292,7 @@ msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr "Hunnert! Dat Boomhauer-Huus is beschickt. Een Boomhauer gaht nu um dat Huus to bewohnen un Bomen oftohauen, un uns Boomstamm-Versörgung is eerst maal seker. Nu maken wi mit de Flint weer."
+msgstr "Hunnert! Dat Boomhauer-Huus is beschickt. Een Boomhauer gaht nu um dat Huus to bewohnen un Bomen oftohauen, un uns' Boomstamm-Versörgung is eerst maal seker. Nu maken wi mit de Flint weer."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:177
 msgid "Some Rocks Were Found"
@@ -519,7 +519,7 @@ msgid ""
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site. You can enter road building mode for any "
 "flag by left-clicking on a flag and selecting"
-msgstr "Hunnert! Stracks nadeem du dat Huus sett hest, büst du al klaar tum Stratenbauen. De neie Straat begünnt an de Fahn för de neie Baustee. Du kannst mit de Straten-Bauen vun elkeen Fahn anfangen, indeem du eene Fahn mit de linken Muustaste anklickst un"
+msgstr "Hunnert! Stracks nadeem du dat Huus sett hest, büst du al klaar tum Stratenbauen. De neje Straat begünnt an de Fahn för de neje Baustee. Du kannst mit de Straten-Bauen vun elkeen Fahn anfangen, indeem du eene Fahn mit de linken Muustaste anklickst un"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:279
@@ -631,7 +631,7 @@ msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
-msgstr "Um eene neie Straat to bauen, klick de Fahn vör diener Baustee an, klick dat »Straten bauen«-Teken an un klick dann de Fahn vör dienem Raadhuus an. Wacht bit dat Flintslagerhuus kumpleet is."
+msgstr "Um eene neje Straat to bauen, klick de Fahn vör diener Baustee an, klick dat »Straten bauen«-Teken an un klick dann de Fahn vör dienem Raadhuus an. Wacht bit dat Flintslagerhuus kumpleet is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "Quarry not Connected"
@@ -689,7 +689,7 @@ msgstr "Bau een twedes Flintslagerhuus tegen de Stenen. Vergeet nich, 't mit een
 msgid ""
 "You can connect the new road to any flag of your existing road network. You "
 "can create junctions everywhere, not only in front of buildings."
-msgstr "Du kannst de neie Straat mit elkeener Fahn in dienem Stratennett verbinnen. Du kannst överall Krüüzwegen bauen, nich blot vör Husen."
+msgstr "Du kannst de neje Straat mit elkeener Fahn in dienem Stratennett verbinnen. Du kannst överall Krüüzwegen bauen, nich blot vör Husen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:356
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
@@ -745,7 +745,7 @@ msgid ""
 " bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "De Narichtenfenster kann mit de tweeden Knoop vun rechts an de unnern Rand vum Bildschirm open oder to maakt worden. Deeser Knoop sücht anners ut, wenn du neie Narichten hest. Wenn du eene neie Naricht kriggst, höörst du ok eenen Klockslag."
+msgstr "De Narichtenfenster kann mit de tweeden Knoop vun rechts an de unnern Rand vum Bildschirm open oder to maakt worden. Deeser Knoop sücht anners ut, wenn du neje Narichten hest. Wenn du eene neje Naricht kriggst, höörst du ok eenen Klockslag."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -753,7 +753,7 @@ msgid ""
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages: first, select the message"
 " that you wish to archive by clicking on it in the list. Then, click the"
-msgstr "Du hest even twee Narichten. Deese hier, wat du upstünds leest, un eene, wat di över een neies Raadhuus in diener Wirtschaft informeert. Laat mi di lehren, wo dat Wegdoon vun Narichten gaht: Toeerst köörst du de Naricht, wat du wegdoon willt, ut, indeem du se in de Liste anklickst. Dann klick de"
+msgstr "Du hest even twee Narichten. Deese hier, wat du upstünds leest, un eene, wat di över een nejes Raadhuus in diener Wirtschaft informeert. Laat mi di lehren, wo dat Wegdoon vun Narichten gaht: Toeerst köörst du de Naricht, wat du wegdoon willt, ut, indeem du se in de Liste anklickst. Dann klick de"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:379
 msgid "‘Archive selected message’ button to move it into your archive."
@@ -852,7 +852,7 @@ msgstr "Hunnert! Laat uns nu sehn, för wat Narichten in eenem echten Speel good
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:427
 msgid "Messages Arrived!"
-msgstr "Neie Narichten!"
+msgstr "Neje Narichten!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:429
 msgid ""
@@ -915,7 +915,7 @@ msgid ""
 " a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our "
 "territory."
-msgstr "Een Ding will ick di noch verklaren: Dien Gewest vergrotern. De Rüümte um uns Raadhuus, waar wi mit anfangen hebben, gaht d’r nich so hen, eene slichte Wirtschaft to bauen, un wi hebben keene Bargen, wat wi bruuken, um Köhle un Mineraalen oftoboen. Also mutten wi uns Gewest vergrotern."
+msgstr "Een Ding will ick di noch verklaren: Dien Gewest vergrotern. De Rüümte um uns' Raadhuus, waar wi mit anfangen hebben, is jüüst genoog, um eene slichte Wirtschaft to bauen, un wi hebben keene Bargen, wat wi bruuken, um Köhle un Mineraalen oftoboen. Also mutten wi uns' Gewest vergrotern."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:448
 msgid ""
@@ -987,7 +987,7 @@ msgstr "Dien Gewest is nu groter!"
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
-msgstr "Hunnert. Süchst du, dat dien Gewest groter is, siet diene Soldaten dien neien Soldateree-Boo betreden hebben?"
+msgstr "Hunnert. Süchst du, dat dien Gewest groter is, siet diene Soldaten dien nejen Soldateree-Boo betreden hebben?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid ""
@@ -1031,7 +1031,7 @@ msgstr "»Speel verlaten«-Knoop an."
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
-msgstr "Weest bedankt, dat du deese Inföhren spöölt hest. Amüseer di mit Widelands un besöök uns Maal up"
+msgstr "Wees bedankt, dat du deese Inföhren spöölt hest. Amüseer di mit Widelands un besöök uns maal up"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
@@ -1041,5 +1041,5 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr[0] "Neje Upgaav"
+msgstr[1] "Neje Upgaven"

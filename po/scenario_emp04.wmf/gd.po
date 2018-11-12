@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# GunChleoc, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-28 05:45+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2017-12-27 17:17+0000\n"
+"Last-Translator: GunChleoc, 2018\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,35 +21,41 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:45
 msgid "Dismantle the unproductive buildings"
-msgstr ""
+msgstr "Thoir na togalaichean nach eil tarbhach às a chèile"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:47
 msgid "Dismantle Buildings"
-msgstr ""
+msgstr "Thoir togalaichean às a chèile"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:48
 msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
+"Thoir às a chèile a h-uile togalach beag nach eil tarbhach ach am faigh thu "
+"stòrasan airson togalaichean ùra."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:49
 msgid ""
 "Remember to check the messages and the building statistics for unproductive "
 "buildings."
 msgstr ""
+"Cuimhnich gum faigh thu fiosrachadh air togalaichean nach eil tarbhach sna "
+"teachdaireachdan agus air stadastaireachd nan togalach."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 msgid "Clear all unnecessary roads"
-msgstr ""
+msgstr "Thoir air falbh na rathaidean air nach eil feum"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:57
 msgid "Clear Road Network"
-msgstr ""
+msgstr "Sgioblaich lìonra nan rathaidean"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:58
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
 msgstr ""
+"Fuasgail bùrach nan rathaidean is tu a’ toirt air falbh a h-uile rathad air "
+"nach eil feum."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:64
 msgid "Click on one of the farms"
@@ -63,197 +73,216 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:73
 msgid "Find the construction plans for the farms"
-msgstr ""
+msgstr "Lorg na planaichean togail airson tuathanasan"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:75
 msgid "Find Farm Construction Plans"
-msgstr ""
+msgstr "Lorg planaichean togail tuathanais"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:76
 msgid ""
 "Recover the construction plans for the farms. Search for them in the hills "
 "east of your border."
 msgstr ""
+"Faigh greim air na planaichean togail airson tuathanasan. Tha iad am "
+"badeigin sna cnuic gu ear air a’ chrìoch agad."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:82
 msgid "Build at least 3 lumberjack’s houses and 2 quarries"
-msgstr ""
+msgstr "Tog 3 taighean coillteir is 2 chuaraidh air a char as lugha"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:84
 msgid "Quarries and Lumberjacks"
-msgstr ""
+msgstr "Taighean coillteir cuaraidhean"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:85
 msgid ""
 "Build at least three lumberjack’s houses and two quarries to renew your "
 "building material supply chain."
 msgstr ""
+"Tog trì taighean coillteir is dà chuaraidh air a char as lugha ach an lìon "
+"thu na stuthan togail agad."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:91
 msgid "Produce fish and rations"
-msgstr ""
+msgstr "Saothraich èisg is greimeagan"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:93
 msgid "Food Production"
-msgstr ""
+msgstr "Saothrachadh bìdh"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:94
 msgid "Find and catch some fish. Afterwards, produce rations for your miners."
 msgstr ""
+"Lorg is glac èisg. Saothraich greimeagan dha na mèinnearan agad an uairsin."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:100
 msgid "Replace the old and ineffective forester’s houses"
 msgstr ""
+"Tog taighean planntair-choille ùra an àite na seann-fheadhna nach eil "
+"èifeachdach"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:102
 msgid "Build Two New Forester’s Houses"
-msgstr ""
+msgstr "Tog dà thaigh planntair-choille ùr"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:103
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
 msgstr ""
+"Tog taighean planntair-choille ùra an àite na seann-fheadhna airson barrachd"
+" dèanadais."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:109
 msgid "Find the monastery in the north"
-msgstr ""
+msgstr "Lorg am manachainn gu tuath"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:111
 msgid "Find the Monastery"
-msgstr ""
+msgstr "Lorg am manachainn"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:112
 msgid ""
 "Find the monastery in the north to obtain the improved technology for your "
 "wheat production chain."
 msgstr ""
+"Lorg am manachainn gu tuath ach am faigh thu an teicneolas ùr a dh’fheumas "
+"tu airson giullachd na cruithneachd."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:118
 msgid "Deal with Julia to get the technology"
-msgstr ""
+msgstr "Dèilig le Julia ach am faigh thu an teicneolas"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:120
 msgid "Diplomacy: Trade or War"
-msgstr ""
+msgstr "Dioplòmasachd: malart no cogadh"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:121
 msgid ""
 "Decide: Either collect 35 sheaves of wheat and 15 amphoras of wine for the "
 "goddess in your headquarters or conquer the monastery."
 msgstr ""
+"Dèan co-dhùnadh: cruinnich 35 sguab arbhair agus 15 amforaichean de dh’fhìon"
+" sa phrìomh-àras agad airson na ban-dia air neo ceannsaich a’ mhanachainn."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:127
 msgid "Train at least 3 heroes"
-msgstr ""
+msgstr "Oidich co-dhiù 3 seann-ghaisgich"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:129
 msgid "Hero Training"
-msgstr ""
+msgstr "Oideachadh sheann-ghaisgeach"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:130
 msgid ""
 "Use your resources wisely to train at least three fully promoted heroes."
 msgstr ""
+"Cleachd na stòrasan agad gu glic ach an oidich thu co-dhiù trì seann-"
+"ghaisgich aig a bheil gad àrdachadh."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:136
 msgid "Produce at least 10 tools"
-msgstr ""
+msgstr "Dèan 10 acainnean air a char as lugha"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:138
 msgid "Tool Production"
-msgstr ""
+msgstr "Saothrachadh acainnean"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:139
 msgid "Produce at least ten tools to improve your economy."
-msgstr ""
+msgstr "Dèan co-dhiù deich acainnean airson an eaconamaidh agad a leasachadh."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:140
 msgid ""
 "Remember that you can control the production amount in the economy settings."
 msgstr ""
+"Cuimhnich gur urrainn dhut meud an t-saothrachaidh a stiùireadh ann an "
+"roghainnean na h-eaconamaidh."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "Recruit new soldiers"
-msgstr ""
+msgstr "Trus saighdearan ùra"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:148
 msgid "New Soldier Recruiting"
-msgstr ""
+msgstr "Trusadh shaighdearan ùra"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:149
 msgid "Recruit at least ten new soldiers in your barracks."
-msgstr ""
+msgstr "Trus co-dhiù deich saighdearan ùra san taigh-fheachd agad."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:150
 msgid "Don’t forget to forge weapons and armor for them."
-msgstr ""
+msgstr "Cuimhnich gun dèan thu airm is armachd dhaibh."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:156
 msgid "Defeat the Barbarians"
-msgstr ""
+msgstr "Cuir ruaig air na Tùsanaich"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:158
 msgid "Defeat the Enemy"
-msgstr ""
+msgstr "Cuir ruaig air an nàmhaid"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:159
 msgid "End the Barbarian intrusion into your very own part of the world."
 msgstr ""
+"Cuir crìoch air briseadh a-steach nan Tùsanach dhan cheàrn agad fhèin dhen "
+"t-saoghal."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:165
 msgid "Build 2 charcoal kiln"
-msgstr ""
+msgstr "Tog 2 àth-ghuail"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:167
 msgid "Build Two Charcoal Kilns"
-msgstr ""
+msgstr "Tog dà àth-ghuail"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:168
 msgid "Build two charcoal kilns to support the iron industry."
-msgstr ""
+msgstr "Tog dà àth-ghuail airson taic a chur ri gnìomhachas an iarrainn."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:169
 msgid "Remember to ensure a constant log supply for them."
-msgstr ""
+msgstr "Cuimhnich gun solair thu fiodh dhaibh gu cunbhalach."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:175
 msgid "Increase your military strength by training your soldiers"
-msgstr ""
+msgstr "Cuir ri neart an fheachd agad le oideachadh nan saighdearan agad"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:177
 msgid "Training is Important"
-msgstr ""
+msgstr "Tha an t-oideachadh cudromach"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:178
 msgid "Train your soldiers hard and train them fast."
-msgstr ""
+msgstr "Oidich na saighdearan agad gu cruaidh ’s gu luath."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:179
 msgid "You need to increase your military strength."
-msgstr ""
+msgstr "Feumaidh tu am feachd agad a neartachadh."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:185
 msgid "Build a training camp and enhance the arena"
-msgstr ""
+msgstr "Tog campa oideachaidh is leasaich an raon spòrs"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:187
 msgid "More Efficient Training Buildings"
-msgstr ""
+msgstr "Togalaichean oideachaidh nas èifeachdaiche"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:188
 msgid "Build a training camp and enhance your arena to a colosseum."
-msgstr ""
+msgstr "Tog campa oideachaidh is leasaich an raon spòrs agad ’na choileasam."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:199
 msgid "Home, Sweet Home"
-msgstr ""
+msgstr "Thèid mi dhachaigh, hò rò dhachaigh"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:200
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:211
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:219
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:227
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "An leabhar-latha aig Lutius"
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:202
