@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
-"PO-Revision-Date: 2018-11-01 18:58+0000\n"
+"POT-Creation-Date: 2018-11-02 08:03+0000\n"
+"PO-Revision-Date: 2018-11-03 16:42+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -187,20 +187,20 @@ msgstr "Kasvattaa laloja."
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr "Kalastaa rannikolla lähellä kalastajan mökkiä."
+msgstr "Kalastaa rannikolla lähellä kalastajatorppaa."
 
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid ""
 "Build a fish breeder’s house close to the fisher’s house to make sure that "
 "you don’t run out of fish."
-msgstr "Rakenna kalankasvattajan mökki lähelle kalastajan mökkiä varmistaaksesi ettei kalojen saanti tyrehdy."
+msgstr "Rakenna kalankasvattajan mökki lähelle kalastajatorppaa varmistaaksesi ettei kalojen saanti tyrehdy."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr "Kalastajan mökin työskentelyalueella tarvitaan kalaisia vesiä."
+msgstr "Kalastajatorpan työskentelyalueella tarvitaan kalaisia vesiä."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/foresters_house/helptexts.lua:16
@@ -259,7 +259,7 @@ msgstr "Metsästää eläimiä tuottaakseen lihaa."
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/helptexts.lua:21
 msgctxt "atlanteans_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr "Metsästäjän mökki tarvitsee metsästettäviä eläimiä työskentelyalueella."
+msgstr "Metsästäjän mökki tarvitsee työskentelyalueella metsästettäviä eläimiä."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/ironmine/helptexts.lua:16
@@ -1035,7 +1035,7 @@ msgstr "Jos kaikki tarvittavat tuotteet toimitetaan ajallaa, tämä rakennus voi
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr "Leikkaa raakagraniitin paloja lähialueen kivikosta."
+msgstr "Leikkaa raakagraniittia lähialueen kivikosta."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/quarry/helptexts.lua:21
@@ -1231,13 +1231,13 @@ msgstr "Maanviljelijä tarvitsee keskimäärin %1% kylvämiseen ja vehnänipun k
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr "Kalastaa rannikolla lähellä kalastajan mökkiä."
+msgstr "Kalastaa rannikolla lähellä kalastajatorppaa."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/fishers_house/helptexts.lua:21
 msgctxt "empire_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr "Kalastajan mökin työskentelyalueella tarvitaan kalaisia vesiä."
+msgstr "Kalastajatorpan työskentelyalueella tarvitaan kalaisia vesiä."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/foresters_house/helptexts.lua:21
@@ -1317,7 +1317,7 @@ msgstr "Leikkaa graniitti- ja marmorikappaleita lähialueen kivikostai."
 #: ../../data/tribes/buildings/productionsites/empire/quarry/helptexts.lua:21
 msgctxt "empire_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr "Kivilouhos tarvitsee työskentelyalueella kivikon paloiteltavakseen."
+msgstr "Kivilouhos tarvitsee työskentelyalueella paloiteltavan kivikon."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/helptexts.lua:16
@@ -1611,13 +1611,13 @@ msgctxt "frisians_building"
 msgid ""
 "If there is not enough coal, only the most foolish of leaders would deprive "
 "his brick kilns of it first."
-msgstr ""
+msgstr "Hiiltä ei ole tarpeeksi, vain kaikkein hölmöin johtaja poistaisi tiiliuunit ensimmäisenä."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A brickmaker arguing with his chieftain who was doing just that"
-msgstr ""
+msgstr "Tiilentekijä kiistelee päällikkönsä kanssa siitä kuka teki sen"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:13
@@ -1625,34 +1625,34 @@ msgctxt "building"
 msgid ""
 "Burns bricks using granite and clay, and coal as fuel. Bricks are the most "
 "important building material."
-msgstr ""
+msgstr "Polttaa tiiliä käyttäen graniittia, savea ja hiiltä polttoaineena. Tiilet ovat kaikkein tärkeintä rakennusmateriaalia."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/brick_kiln/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The brick kiln needs %s on average to produce two bricks."
-msgstr ""
+msgstr "Tiiliuuni  tarvitsee keskimäärin %s tuottaakseen kaksi tiiltä."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:3
 msgctxt "frisians_building"
 msgid ""
 "No other tribe has ever mastered the art of charcoal burning as we have!"
-msgstr ""
+msgstr "Yksikään muu heimo ei ole koskaan hallinnut puuhiilen tislaustaitoa kuten me!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "The inventor of the Frisian charcoal kiln"
-msgstr ""
+msgstr "Vapaamielisten miilun keksijä"
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/charcoal_kiln/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The charcoal kiln needs %s on average to produce one coal."
-msgstr ""
+msgstr "Miilu tarvitsee keskimäärin %s tuottaakseen yhden hiilen."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:6
@@ -1664,7 +1664,7 @@ msgstr "Luuletko voivasi rakentaa talon ilman minun apua?"
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A clay digger arguing with a builder"
-msgstr ""
+msgstr "Savenkaivaja kiistelee rakentajan kanssa"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/clay_pit/helptexts.lua:16
@@ -1672,7 +1672,7 @@ msgctxt "building"
 msgid ""
 "Digs up mud from the ground and uses water to turn it into clay. Clay is "
 "used to make bricks, reinforce the charcoal kiln and to build ships."
-msgstr ""
+msgstr "Kaivaa mutaa maasta ja käyttää vettä tehdäkseen siitä savea. Savea käytetään tiilien teossa, miilun vahvistamiseen ja laivojen rakentamisessa."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:21
@@ -1681,7 +1681,7 @@ msgctxt "frisians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any coal."
-msgstr ""
+msgstr "Tämä kaivos voi hyödyntää resursseistaa vain %s. Tämän rajapyykin jälkeen hiilen löytämisen onnistumistodennäköisyys on vain 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine/helptexts.lua:26
@@ -1690,7 +1690,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the coal mine can produce two pieces of coal "
 "in %s on average."
-msgstr ""
+msgstr "Jos ruuan toimitus toimii tasaisesti, tämä hiilikaivos voi tuottaa kaksi hiiltä keskimäärin %s."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:21
@@ -1700,7 +1700,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
-msgstr ""
+msgstr "Tämä kaivos hyödyntää kaikki resurssit syvimmälle tasolle asti. Jopa syvimmän tason resurssit hydynnettyään, se voi silti onnistua löytämään hiiltä %s todennäköisyydellä."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/coalmine_deep/helptexts.lua:26
@@ -1709,31 +1709,31 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep coal mine can produce four pieces of "
 "coal in %s on average."
-msgstr ""
+msgstr "Jos ruuan toimitus toimii tasaisesti, keskisyvä hiilikaivos voi tuottaa neljä hiiltä keskimäärin %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "Meat doesn’t grow on bushes. Fruit does."
-msgstr ""
+msgstr "Liha ei kasva pensaissa, mutta hedelmä kasvaa."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A fruit collector advertising his harvest to a landlady"
-msgstr ""
+msgstr "Hedelmätarhuri mainostaa satoaan vuokraemännälle"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:13
 msgctxt "building"
 msgid "Collects berries from nearby bushes."
-msgstr ""
+msgstr "Korjaa marjoja lähialueen pensaista"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:18
 msgctxt "frisians_building"
 msgid "The fruit collector needs bushes full of berries within the work area."
-msgstr ""
+msgstr "Hedelmätarhuri tarvitsee marjoja täynnä olevia pensaita työskentelyalueelleen."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:23
@@ -1748,13 +1748,13 @@ msgctxt "frisians_building"
 msgid ""
 "All I need to be happy is a slice of honey bread with some smoked meat and a"
 " beer."
-msgstr ""
+msgstr "Kaikki mitä tarvitsen ollakseni onnellinen on siivu hunajaleipää savulihalla ja oluen."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A master miner to the landlady"
-msgstr ""
+msgstr "Kaivosmestari vuokraemännälleen"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:16
@@ -1762,7 +1762,7 @@ msgctxt "frisians_building"
 msgid ""
 "Prepares rations for scouts and rations and meals to feed the miners in all "
 "mines."
-msgstr ""
+msgstr "Valmistaa ruoka-annoksia tiedustelijoille ja aterioita kaikentyyppisten kaivosten kaivostyöntekijöiden ruokkimiseksi."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/farm/helptexts.lua:6
@@ -1770,7 +1770,7 @@ msgctxt "frisians_building"
 msgid ""
 "No frost, no heat; no rain, no draught; no rats, no locusts; naught can "
 "destroy my harvest."
-msgstr ""
+msgstr "Ei halla eikä helle; ei sade eikä kuivuun; ei rotat eikä kulkusirkat; mikää ei voi tuhota satoani."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/farm/helptexts.lua:11
@@ -1778,19 +1778,19 @@ msgctxt "frisians_building"
 msgid ""
 "A farmer’s reply when asked by his chieftain why he was planting such a "
 "slow-growing grain."
-msgstr ""
+msgstr "Maanviljelijän vastaus, kun hänen päällikkö kysyi miksi hän istuttaa niin hidaskasvuisia siemeniä."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/farm/helptexts.lua:16
 msgctxt "building"
 msgid "Sows and harvests barley."
-msgstr ""
+msgstr "Kylvää ja korjaa ohraa."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/farm/helptexts.lua:21
 msgctxt "frisians_building"
 msgid "The farm needs free space within the work area to plant seeds."
-msgstr ""
+msgstr "Maanviljelijä tarvitsee työskentelyalueella vapaata maata siemenien istuttamiseen."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:3
@@ -1798,25 +1798,25 @@ msgctxt "frisians_building"
 msgid ""
 "Hunters can’t sell anything on a Friday, but fishers don’t have such "
 "problems."
-msgstr ""
+msgstr "Metsästäjät eivät voi myydä mitään perjantaina, mutta kalastajilla ei ole sellaista ongelmaa."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A hunter admiring a fisher"
-msgstr ""
+msgstr "Metsästäjä ihailee kalastajaa"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:13
 msgctxt "frisians_building"
 msgid "Fishes on the coast near the fisher’s house."
-msgstr ""
+msgstr "Kalastaa rannikolla kalastajatorpan lähellä."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:18
 msgctxt "frisians_building"
 msgid "The fisher’s house needs water full of fish within the work area."
-msgstr ""
+msgstr "Kalastajatorpan työskentelyalueella tarvitaan kalaisia vesiä."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:23
@@ -1831,13 +1831,13 @@ msgctxt "frisians_building"
 msgid ""
 "What can ever be more beautiful than the brilliant sun’s beams shining "
 "through the glistering canopy of leaves?"
-msgstr ""
+msgstr "Mikä olisikaan kauniimpaa kuin lehvästön läpi kimaltelevat kirkkaat auringonsäteet."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A forester explaining his choice of profession"
-msgstr ""
+msgstr "Metsänhoitaja selittää ammatinvalintaansa"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/helptexts.lua:18
@@ -1845,7 +1845,7 @@ msgctxt "frisians_building"
 msgid ""
 "The forester’s house needs free space within the work area to plant the "
 "trees."
-msgstr ""
+msgstr "Metsänhoitajan mökki tarvitsee työskentelyalueella vapaata tilaa puiden istuttamiseen."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/foresters_house/helptexts.lua:23
@@ -1860,19 +1860,19 @@ msgctxt "frisians_building"
 msgid ""
 "Miners get ores from the depths of the hills; but without our work, their "
 "labour is in vain."
-msgstr ""
+msgstr "Kaivostyöläiset saavat malmia kukkuloiden syvyyksistä; mutta ilman meidän apua, työ on turhaa."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "Slogan of the Smelters’ Guild"
-msgstr ""
+msgstr "Sulattajakillan iskulause"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/furnace/helptexts.lua:16
 msgctxt "building"
 msgid "Smelts iron ore and gold ore into iron and gold ingots using coal."
-msgstr ""
+msgstr "Sulattaa rautamalmia ja kultamalmia raudaksi ja kultaharkoiksi käyttäen hiiltä."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:21
@@ -1881,7 +1881,7 @@ msgctxt "frisians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any gold ore."
-msgstr ""
+msgstr "Tämä kaivos hyödyntää vain %s resursseista. Tämän rajapyykin jälkeen kultamalmin löytämisen onnistumistodennäköisyys on vain 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine/helptexts.lua:26
@@ -1890,7 +1890,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the gold mine can produce one piece of gold "
 "ore in %s on average."
-msgstr ""
+msgstr "Jos ruuan toimitus toimii tasaisesti, tämä kultakaivos voi tuottaa yhden kultamalmin keskimäärin %s."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:21
@@ -1900,7 +1900,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
-msgstr ""
+msgstr "Tämä kaivos hyödyntää kaikki resurssit syvimmälle tasolle asti. Jopa syvimmän tason resurssit hydynnettyään, se voi silti onnistua löytämään kultamalmia %s todennäköisyydellä."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/goldmine_deep/helptexts.lua:26
@@ -1909,7 +1909,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep gold mine can produce two pieces of "
 "gold ore in %s on average."
-msgstr ""
+msgstr "Jos ruuan toimitus toimii tasaisesti, tämä keskisyvä kultakaivos voi tuottaa kaksi kultamalmia keskimäärin %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:6
@@ -1917,13 +1917,13 @@ msgctxt "frisians_building"
 msgid ""
 "Rookies will say that vengeance is sweet. Heroes will say that honey bread "
 "is sweeter."
-msgstr ""
+msgstr "Alokkaat sanovat, että kosto on suloista. Ammattisotilaat sanovat, että hunajaleipä on makeaa."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer in conversation with a baker"
-msgstr ""
+msgstr "Kouluttaja keskustellessaa leipurin kanssa"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/honey_bread_bakery/helptexts.lua:16
@@ -1931,13 +1931,13 @@ msgctxt "building"
 msgid ""
 "Bakes honey bread out of barley, water and honey to feed miners in deep "
 "mines and soldiers in advanced training."
-msgstr ""
+msgstr "Leipoo hunajaleipää ohrasta, vedestä ja hunajasta ruokkiakseen keskisyvän kaivoksen käivostyöntekijöitä ja sotilaita edistyneimmässä harjoittelussa."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:21
 msgctxt "frisians_building"
 msgid "The hunter’s house needs animals to hunt within the work area."
-msgstr ""
+msgstr "Metsästäjän mökki tarvitsee työskentelyalueella metsästettäviä eläimiä."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/hunters_house/helptexts.lua:26
@@ -1953,7 +1953,7 @@ msgctxt "frisians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any iron ore."
-msgstr ""
+msgstr "Tämä kaivos voi hyödyntää vain %s resursseista. Tämän rajapyykin jälkeen rautamalmin löytämistodennäköisyys on vain 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine/helptexts.lua:26
@@ -1962,7 +1962,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the iron mine can produce one piece of iron "
 "ore in %s on average."
-msgstr ""
+msgstr "Jos ruuan toimitus toimii tasaisesti, tämä rautakaivos voi tuottaa yhden rautamalmin keskimäärin %s."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:21
@@ -1972,7 +1972,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr ""
+msgstr "Tämä kaivos hyödyntää kaikki resurssit syvimmälle tasolle asti. Jopa syvimmän tason resurssit hydynnettyään, se voi silti onnistua löytämään rautamalmia %s todennäköisyydellä."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/ironmine_deep/helptexts.lua:26
@@ -1981,19 +1981,19 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep iron mine can produce two pieces of "
 "iron ore in %s on average."
-msgstr ""
+msgstr "Jos ruuan toimitus toimii tasaisesti, tämä keskisyvä rautakaivos voi tuottaa kaksi rautamalmia keskimäärin %s."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:6
 msgctxt "frisians_building"
 msgid "If you like beer, you’ve never tasted mead."
-msgstr ""
+msgstr "Jos pidät oluesta, et ole koskaan maistanut simaa."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "Slogan over a mead brewery"
-msgstr ""
+msgstr "Simapanimon iskulause"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/mead_brewery/helptexts.lua:16
@@ -2002,13 +2002,13 @@ msgid ""
 "Brews beer out of barley and water. It also brews mead, which is beer "
 "refined with honey. Mead is consumed by miners in deep mines and by "
 "experienced soldiers."
-msgstr ""
+msgstr "Panee olutta ohrasta ja vedestä. Panee myös simaa, joka on hunajalla jalostettua olutta. Simaa kuluttaa kaivostyöntekijät keskisyvissä kaivoksissa ja myös kokeneet sotilaat."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "When I swing my pick, whole mountains fall before me!"
-msgstr ""
+msgstr "Kun heilautan hakkuani, kokonainen vuori sortuu eteeni."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:8
@@ -2020,13 +2020,13 @@ msgstr "Kivenhakkaaja"
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:13
 msgctxt "frisians_building"
 msgid "Cuts raw pieces of granite out of rocks in the vicinity."
-msgstr ""
+msgstr "Leikkaa raakagraniittia lähialueen kivikosta."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:18
 msgctxt "frisians_building"
 msgid "The quarry needs rocks to cut within the work area."
-msgstr ""
+msgstr "Kivilouhos tarvitsee työskentelyalueella paloiteltavan kivikon."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/quarry/helptexts.lua:23
@@ -2042,13 +2042,13 @@ msgid ""
 "Of course these weapons could be used by other soldiers again without being "
 "smelted down first! The only drawback is that they’d break in two at the "
 "first blow."
-msgstr ""
+msgstr "Toki toiset sotilaat voisivat käyttää näitä aseita uudelleen ilman että ne ensin sultatettaisiin! Ainoa haittapuoli on, että ne hajoaisivat heti kättelyssä."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A smelter explaining the need for recycling to his impatient chieftain"
-msgstr ""
+msgstr "Sulattaja selittää kierrättämisen tarvetta hänen malttamattomalle päälikölleen"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/recycling_center/helptexts.lua:16
@@ -2056,26 +2056,26 @@ msgctxt "frisians_building"
 msgid ""
 "Recycles old armor and weapon parts that have been discarded by training "
 "sites into fur, iron and gold."
-msgstr ""
+msgstr "Kierrättää turkikseksi, raudaksi ja kullaksi ne vanhat haarniskat ja aseiden osat, jotka on hylätty harjoittelupaikoilla."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:6
 msgctxt "frisians_building"
 msgid ""
 "No worse fortune can befall a reed farmer than to see his roof leaking."
-msgstr ""
+msgstr "Huonompaa onnea ei ruokofarmari voisi kohdata kuin nähdä kattonsa vuotavan."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "Anonymous reed farmer"
-msgstr ""
+msgstr "Tuntematon ruokofarmari"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:16
 msgctxt "frisians_building"
 msgid "Cultivates reed that serves three different purposes for the Frisians."
-msgstr ""
+msgstr "Kasvattaa ruoikon, jota tarvitaan kolmeen eri Vapaamielisten tarpeeseen."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reed_farm/helptexts.lua:21
@@ -2084,21 +2084,21 @@ msgid ""
 "Reed is the traditional material for roofing. It is also needed for "
 "producing buckets and fishing nets, and it is woven – together with reindeer"
 " fur – into the cloth used for ships’ sails."
-msgstr ""
+msgstr "Ruoikko on tavanomainen materiaali kattojen tekemiseen. Sitä tarvitaan myös ampärien ja kalaverkkojen tuottamiseen, ja siitä ommellaan – poron turkiksen kanssa – kangasta laivojen purjeiksi."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/helptexts.lua:6
 msgctxt "frisians_building"
 msgid ""
 "Who says a beast of burden cannot be useful for other things than transport?"
-msgstr ""
+msgstr "Kuka sanoo etteikö kuormajuhtia voisi käyttää muussakin kuin kuljetuksessa?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/helptexts.lua:11
 msgctxt "frisians_building"
 msgid ""
 "The reindeer breeder who first proposed using reindeer fur for clothing"
-msgstr ""
+msgstr "Poronhoitaja joka ensimmäisenä ehdotti poron turkin käyttämistä vaatetukseen"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/helptexts.lua:16
@@ -2106,7 +2106,7 @@ msgctxt "frisians_building"
 msgid ""
 "Breeds strong reindeer for adding them to the transportation system. Also "
 "keeps them for their fur, which is turned into armor and cloth."
-msgstr ""
+msgstr "Kasvattaa vahvoja poroja tavaroiden kuljetusavuksi. Pitää niitä myös niiden turkin vuoksi, jotta niistä saisi haarniskoja ja kangasta."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/helptexts.lua:21
@@ -2114,14 +2114,14 @@ msgctxt "frisians_building"
 msgid ""
 "If the supply is steady, the reindeer farm produces one meat after producing"
 " three pieces of fur."
-msgstr ""
+msgstr "Jos toimitus toimii tasaisesti, poronhoitoalue tuottaa yhden lihan kolmen turkiksen tuottamisen jälkeen."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:16
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:16
 msgctxt "building"
 msgid "Digs granite out of the ground in mountain terrain."
-msgstr ""
+msgstr "Kaivaa graniittia maasta vuoristoisessa maastossa."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:21
@@ -2130,7 +2130,7 @@ msgctxt "frisians_building"
 msgid ""
 "This mine exploits only %s of the resource. From there on out, it will only "
 "have a 5%% chance of finding any granite."
-msgstr ""
+msgstr "Tämä kaivos hyödyntää vain %s resursseista. Tämän rajapyykin jälkeen graniitin löytämisen onnistumistodennäköisyys on vain 5%%."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine/helptexts.lua:26
@@ -2139,7 +2139,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the rock mine can produce two blocks of "
 "granite in %s on average."
-msgstr ""
+msgstr "Jos ruuan toimitus toimii tasaisesti, tämä kivikaivos voi tuottaa kaksi graniitinkappaletta keskimäärin %s."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:21
@@ -2149,7 +2149,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "granite."
-msgstr ""
+msgstr "Tämä kaivos hyödyntää kaikki resurssit syvimmälle tasolle asti. Jopa syvimmän tason resurssit hydynnettyään, se voi silti onnistua löytämään graniittia %s todennäköisyydellä."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/rockmine_deep/helptexts.lua:26
@@ -2158,7 +2158,7 @@ msgctxt "frisians_building"
 msgid ""
 "If the food supply is steady, the deep rock mine can produce three blocks of"
 " granite in %s on average."
-msgstr ""
+msgstr "Jos ruuan toimitus toimii tasaisesti, tämä keskisyvä kivikaivos voi tuottaa kolme graniitinkappaletta keskimäärin %s."
 
 #. TRANSLATORS: Lore helptext for a building. Reference to frequent
 #. discussions about good scouting algorithms
@@ -2168,13 +2168,13 @@ msgid ""
 "Everyone has their own ideas on how exactly we should explore the enemy’s "
 "territory… One more ‘improvement’ suggestion and we’ll demand meals instead "
 "of rations!"
-msgstr ""
+msgstr "Jokaisella on omat näkemykset miten meidän tulisi tutkia vihollisen aluetta… Vielä yksi ‘parannus’ ehdotus ja me vaadimme aterioita ruoka-annoksien sijaan."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "The spokesman of the scouts’ labor union"
-msgstr ""
+msgstr "Tiedustelijoiden ammattiyhdistyksen tiedottaja "
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/scouts_house/helptexts.lua:23
@@ -2189,26 +2189,26 @@ msgctxt "frisians_building"
 msgid ""
 "You soldiers think a good sword is everything, but where would you be if you"
 " had no garments?"
-msgstr ""
+msgstr "Sotilaasi ajattelevat hyvän miekkaa olevan kaikki kaikessa, mutta missä olisitkaan, jos sinulla ei olisi vaatteita?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A seamstress scolding a soldier for disrespecting her profession"
-msgstr ""
+msgstr "Ompelija moittii sotilasta parjaamasta hänen ammattiaan"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:13
 msgctxt "building"
 msgid "Sews fur garments out of reindeer fur."
-msgstr ""
+msgstr "Ompelee turkisvaatteen poron turkiksesta."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/sewing_room/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The sewing room needs %s on average to produce one fur garment."
-msgstr ""
+msgstr "Ompeluhuone tarvitsee keskimäärin %s tuottaakseen yhden turkisvaatteen."
 
 #. TRANSLATORS: Lore helptext for a building. "Yard" is a wordplay with the
 #. measurement unit
@@ -2217,7 +2217,7 @@ msgctxt "frisians_building"
 msgid ""
 "This house may be called a shipyard, but my ships are rather longer than one"
 " yard!"
-msgstr ""
+msgstr "Tätä taloa saatetaan sanoa telakaksi, mutta minun laivani ovat pikemminkin jaardia pidempiä!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/shipyard/helptexts.lua:11
@@ -2225,7 +2225,7 @@ msgctxt "frisians_building"
 msgid ""
 "A shipwright who only constructed toy ships after being chid that his ships "
 "were too small"
-msgstr ""
+msgstr "Veneseppä joka rakensi lapsuutensa jälkeen vain leikkiveneitä, jotka olivat liian pieniä."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:3
@@ -2233,13 +2233,13 @@ msgctxt "frisians_building"
 msgid ""
 "Miners and soldiers are so picky… But who am I to complain, as I make my "
 "living from it?"
-msgstr ""
+msgstr "Kaivostyöläiset ja sotilaat ovat niin nirsoja… Mutta mikä minä olen valittamaan, niin pitkään kun saan elantoni siitä?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A smoker explaining his profession"
-msgstr ""
+msgstr "Savustaja esittelee ammatiaan"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:13
@@ -2247,14 +2247,14 @@ msgctxt "building"
 msgid ""
 "Smokes fish and meat using logs. Only smoked meat and fish are good enough "
 "to be eaten by miners and soldiers."
-msgstr ""
+msgstr "Savustaa kalaa ja lihaa käyttäen kaadettuja puita. Vain savuliha ja -kala ovat riittävän hyviä kaivostyöläisten ja sotilaiden syötäväksi."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/smokery/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The smokery needs %s on average to smoke two fish or two meat."
-msgstr ""
+msgstr "Savustamo tarvitsee keskimäärin %s savustaakseen kaksi kalaa tai kaksi lihaa."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/helptexts.lua:6
@@ -2262,31 +2262,31 @@ msgctxt "frisians_building"
 msgid ""
 "Don’t complain if these garments are too heavy – they’re not supposed to be "
 "light but to keep you alive a bit longer!"
-msgstr ""
+msgstr "Älä valita, jos nämä vaatteet ovat liian painavia – niiden ei ole tarkoitus olla keveitä, mutta sen sijaan pitää sinut elossa hiukan pidempään!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer scolding a soldier"
-msgstr ""
+msgstr "Kouluttaja moittii sotilasta"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tailors_shop/helptexts.lua:16
 msgctxt "building"
 msgid "Equips fur garments with iron or gold to produce good armor."
-msgstr ""
+msgstr "Varustaa turkisvaatteita raudalla ja kullalla tuottaakseen hyviä haarniskoita."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "Nothing but fruit all day… Couldn’t you hurry up a bit?"
-msgstr ""
+msgstr "Joka päivä vain hedelmiä eikä mitään muuta… Etkö voisi edes vähän kiirehtiä?"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "Hungry customers in times of a shortage of smoked fish and meat"
-msgstr ""
+msgstr "Nälkäinen asiakas aikana kun savukala ja -liha on vähissä."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/tavern/helptexts.lua:23
@@ -2295,7 +2295,7 @@ msgctxt "frisians_building"
 msgid ""
 "The tavern can produce one ration in %s on average if the supply is steady; "
 "otherwise, it will take 50%% longer."
-msgstr ""
+msgstr "Krouvi voi tuottaa yhden ruoka-annoksen keskimäärin %s, jos toimitukset ovat vakaat; muussa tapauksessa se vie 50%% pidempään. "
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:3
@@ -2303,32 +2303,32 @@ msgctxt "frisians_building"
 msgid ""
 "Reindeer’s fur and roofing reed<br>These items two make up the seed<br>For "
 "ships of wood to chain the gales<br>In sturdy, beautious, blowing sails!"
-msgstr ""
+msgstr "Poron turkis ja kattoruoko<br>Kaksin ne siemenen luovat<br>Laivoihin puisiin kahliutuu myrsky<br>Vankkana, kauniina, pullistuvina purjeina!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A seamstress’ work song"
-msgstr ""
+msgstr "Ompelijan työlaulua"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:13
 msgctxt "building"
 msgid "Sews cloth for ship sails out of reed and reindeer fur."
-msgstr ""
+msgstr "Ompelee kangasta laivoihin ruoikosta ja poron turkista."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/weaving_mill/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The weaving mill needs %s on average to produce one piece of cloth."
-msgstr ""
+msgstr "Kutomo tarvitsee keskimäärin %s tuottaakseen yhden kankaan."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:3
 msgctxt "frisians_building"
 msgid "We love the sea so much that we don’t want to drink it empty!"
-msgstr ""
+msgstr "Rakastamme merta niin paljon ettemme halua juoda sitä tyhjäksi."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:8
@@ -2336,14 +2336,14 @@ msgctxt "frisians_building"
 msgid ""
 "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt "
 "water"
-msgstr ""
+msgstr "Päällikkö Arldorin tiuskaisu, kun häneltä kysyttiin miksi hänen heimonsa ei voi juoda suolavettä."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/well/helptexts.lua:18
 #, lua-format
 msgctxt "frisians_building"
 msgid "The well needs %s on average to produce one bucket of water."
-msgstr ""
+msgstr "Kaivo tarvitsee keskimäärin %s tuottaakseen yhden ämpärillisen vettä."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/helptexts.lua:6
@@ -2351,19 +2351,19 @@ msgctxt "frisians_building"
 msgid ""
 "I cannot see a tree without imagining what it would look like in terms of "
 "furniture."
-msgstr ""
+msgstr "En pysty näkemään puuta ilman, että näkisin miltä se näyttää huonekaluna."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "An over-enthusiastic woodcutter"
-msgstr ""
+msgstr "Yli-innostunut metsuri"
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/woodcutters_house/helptexts.lua:21
 msgctxt "frisians_building"
 msgid "The woodcutter’s house needs trees to fell within the work area."
-msgstr ""
+msgstr "Metsurin mökki tarvitsee työskentelyalueella puita kaadettavaksi."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/atlanteans/dungeon/helptexts.lua:17
@@ -2514,14 +2514,14 @@ msgid ""
 "Now that you have two swords, there’s more of a risk you’ll accidently stab "
 "yourself, but if you got this far, you’ll likely master this challenge as "
 "well."
-msgstr ""
+msgstr "Nyt kun sinulla on kaksi miekkaa, on paljon todennäköisempää, että pistät itseäsi vahingossa, mutta koska olet jo näin pitkällä, luultavasti peittoat tämänkin haasteen."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/helptexts.lua:11
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:11
 msgctxt "frisians_building"
 msgid "A trainer training a soldier"
-msgstr ""
+msgstr "Kouluttaja kouluttaa sotilaan"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/helptexts.lua:16
@@ -2529,7 +2529,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains soldiers in Attack, Defense and Health to the final level. Equips the"
 " soldiers with all necessary weapons and armor parts."
-msgstr ""
+msgstr "Kouluttaa sotilaat ylimmälle tasolle Hyökkäyksessä, Puolustustuksessa ja Terveydessä."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/helptexts.lua:21
@@ -2537,7 +2537,7 @@ msgctxt "frisians_building"
 msgid ""
 "Trains only soldiers who have been trained to the maximum level by the "
 "Training Camp."
-msgstr ""
+msgstr "Kouluttaa vain sotilaita, jotka on koulutettu korkeimmalle tasolle harjoitusleirissä."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_camp/helptexts.lua:6

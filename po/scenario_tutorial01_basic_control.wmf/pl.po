@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2016
+# GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
 # Wesmania <ikk_pl@yahoo.co.uk>, 2015
@@ -12,9 +12,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-11-02 08:03+0000\n"
+"PO-Revision-Date: 2018-11-04 09:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Polish (http://www.transifex.com/widelands/widelands/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -186,7 +186,7 @@ msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr "Teraz przyjrzyj się, jak budowniczy opuszcza kwaterę główną i rusza na plac budowy. Tragarz zajmie pozycję między dwoma flagami i będzie nosił towary między nimi."
+msgstr "Teraz przyjrzyj się, jak budowniczy opuszcza kwaterę główną i ruszą na plac budowy. Tragarz zajmie pozycję między dwoma flagami i będzie nosił towary między nimi."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:114
 msgid "Placing Another Flag"

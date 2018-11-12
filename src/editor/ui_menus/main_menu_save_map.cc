@@ -273,15 +273,17 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 			return false;
 	}
 
-	// save to a tmp file/dir first, rename later
-	// (important to keep script files in the script directory)
-	const std::string tmp_name = complete_filename + ".tmp";
-	if (g_fs->file_exists(tmp_name)) {
-		const std::string s =
-		   (boost::format(
-		       _("A file with the name ‘%s.tmp’ already exists. You have to remove it manually.")) %
-		    FileSystem::fs_filename(filename.c_str()))
-		      .str();
+	//  Try deleting file (if it exists). If it fails, give a message and let the player choose a new
+	//  name.
+	try {
+		g_fs->fs_unlink(complete_filename);
+	} catch (const std::exception& e) {
+		log("Unable to delete old map file %s while saving map: %s\n", complete_filename.c_str(),
+		    e.what());
+		const std::string s = (boost::format(_("File ‘%’ could not be deleted.")) %
+		                       FileSystem::fs_filename(filename.c_str()))
+		                         .str() +
+		                      " " + _("Try saving under a different name!");
 		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 		return false;
@@ -290,51 +292,34 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map* map = egbase.mutable_map();
 
-	{  // fs scope
-		std::unique_ptr<FileSystem> fs(
-		   g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
+	// Recompute seafaring tag
+	map->cleanup_port_spaces(egbase.world());
+	if (map->allows_seafaring()) {
+		map->add_tag("seafaring");
+	} else {
+		map->delete_tag("seafaring");
+	}
 
-		// Recompute seafaring tag
-		map->cleanup_port_spaces(egbase.world());
-		if (map->allows_seafaring()) {
-			map->add_tag("seafaring");
-		} else {
-			map->delete_tag("seafaring");
-		}
+	if (map->has_artifacts()) {
+		map->add_tag("artifacts");
+	} else {
+		map->delete_tag("artifacts");
+	}
 
-		if (map->has_artifacts()) {
-			map->add_tag("artifacts");
-		} else {
-			map->delete_tag("artifacts");
-		}
-
-		try {
-			Widelands::MapSaver* wms = new Widelands::MapSaver(*fs, egbase);
-			wms->save();
-			delete wms;
-			// Reset filesystem to avoid file locks on saves
-			fs.reset();
-			map->reset_filesystem();
-			eia().set_need_save(false);
-			g_fs->fs_unlink(complete_filename);
-			g_fs->fs_rename(tmp_name, complete_filename);
-			// Also change fs, as we assign it to the map below
-			fs.reset(g_fs->make_sub_file_system(complete_filename));
-			// Set the filesystem of the map to the current save file / directory
-			map->swap_filesystem(fs);
-			// DONT use fs as of here, its garbage now!
-
-		} catch (const std::exception& e) {
-			std::string s = _("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
-			                  "given:\n");
-			s += e.what();
-			UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
-			mbox.run<UI::Panel::Returncodes>();
-
-			// cleanup tmp file if it was created
-			g_fs->fs_unlink(tmp_name);
-		}
-	}  // end fs scope, dont use it
+	//  Try saving.
+	try {
+		std::unique_ptr<FileSystem> fs(g_fs->create_sub_file_system(
+		   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
+		std::unique_ptr<Widelands::MapSaver> wms(new Widelands::MapSaver(*fs, egbase));
+		wms->save();
+		fs.reset();
+	} catch (const std::exception& e) {
+		std::string s = _("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
+		                  "given:\n");
+		s += e.what();
+		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+	}
 
 	die();
 	return true;
