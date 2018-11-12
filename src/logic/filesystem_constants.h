@@ -40,7 +40,7 @@ const std::string kS2MapExtension2 = ".wld";
 
 /// Filesystem names for temp files holding static data that needs to be accessible via filesystem
 /// Kept in a separate dir to avoid filesystem conflicts
-const std::string kTempFileDir = "in_progress";
+const std::string kTempFileDir = "temp";
 const std::string kTempFileExtension = ".tmp";
 // We delete (accidentally remaining) temp files older than a week
 constexpr double kTempFilesKeepAroundTime = 7 * 24 * 60 * 60;
