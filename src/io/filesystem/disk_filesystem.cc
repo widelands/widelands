@@ -323,7 +323,7 @@ void RealFSImpl::make_directory(const std::string& dirname) {
 		throw FileError("RealFSImpl::make_directory", fspath, "a file or directory with that name already exists");
 
 #ifndef _WIN32
-	if (!mkdir(fspath.c_str(), 0x1FF) == -1)
+	if (mkdir(fspath.c_str(), 0x1FF) == -1)
 		throw FileError("RealFSImpl::make_directory", fspath, strerror(errno));
 #else
 	// Note: We could possibly replace this with _mkdir()
