@@ -27,7 +27,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/time_string.h"
-#include "base/wexception.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"

@@ -98,7 +98,11 @@ wl_library(logic_generic_save_handler
     generic_save_handler.h
     generic_save_handler.cc
   DEPENDS
+    base_i18n
+    base_log
+    base_time_string
     io_filesystem
+    logic_filesystem_constants
 )
 
 wl_library(logic
