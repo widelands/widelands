@@ -43,24 +43,28 @@ void GenericSaveHandler::clear_errors() {
 }
 
 void GenericSaveHandler::make_backup() {
-	std::string backup_filename_base = dir_ + g_fs->file_separator() + timestring() + "_" + filename_;
+	std::string backup_filename_base =
+	   dir_ + g_fs->file_separator() + timestring() + "_" + filename_;
 	backup_filename_ = backup_filename_base + kTempBackupExtension;
 
-	// If a file with that name already exists, then try a few name modifications.
+	// If a file with that name already exists, then try some name modifications.
 	if (g_fs->file_exists(backup_filename_))
 	{
 		int suffix;
 		for (suffix = 0; suffix <= 9; suffix++)
 		{
-			backup_filename_ = backup_filename_base + "-" + std::to_string(suffix) + kTempBackupExtension;
-			if (!g_fs->file_exists(backup_filename_))
+			backup_filename_ = backup_filename_base + "-" + std::to_string(suffix)
+			   + kTempBackupExtension;
+			if (!g_fs->file_exists(backup_filename_)) {
 			  break;
+			}
 		}
 		if (suffix > 9) {
 			error_ |= kBackupFailed;
-			error_msg_[bitBackupFailed] = (boost::format("GenericSaveHandler::make_backup: %s: "
-			   "for all considered filenames a file already existed (last filename tried was %s)\n")
-				 % complete_filename_.c_str() % backup_filename_).str();
+			error_msg_[bitBackupFailed] =
+			   (boost::format("GenericSaveHandler::make_backup: %s: for all "
+			   "considered filenames a file already existed (last filename tried "
+			   "was %s)\n") % complete_filename_.c_str() % backup_filename_).str();
 			log("%s", error_msg_[bitBackupFailed].c_str());
 			return;
 		}
@@ -83,12 +87,15 @@ void GenericSaveHandler::make_backup() {
 void GenericSaveHandler::save_file() {
 	// Write data to file/dir.
 	try {
-		std::unique_ptr<FileSystem> fs(g_fs->create_sub_file_system(complete_filename_, type_));
+		std::unique_ptr<FileSystem>
+		   fs(g_fs->create_sub_file_system(complete_filename_, type_));
 		do_save_(*fs);
 	} catch (const std::exception& e) {
 		error_ |= kSavingDataFailed;
-		error_msg_[bitSavingDataFailed] = (boost::format("GenericSaveHandler::save_file: "
-		   "data could not be written to file %s: %s\n") % complete_filename_.c_str() % e.what()).str();
+		error_msg_[bitSavingDataFailed] =
+		   (boost::format("GenericSaveHandler::save_file: data could not be "
+		   "written to file %s: %s\n") % complete_filename_.c_str() % e.what()
+		   ).str();
 		log("%s", error_msg_[bitSavingDataFailed].c_str());
 	}
 
@@ -99,8 +106,10 @@ void GenericSaveHandler::save_file() {
 				g_fs->fs_unlink(complete_filename_);
 			} catch (const FileError& e) {
 				error_ |= kCorruptFileLeft;
-				error_msg_[bitCorruptFileLeft] = (boost::format("GenericSaveHandler::save_file: possibly "
-				   "corrupt file %s could not be deleted: %s\n") % complete_filename_.c_str() % e.what()).str();
+				error_msg_[bitCorruptFileLeft] =
+				   (boost::format("GenericSaveHandler::save_file: possibly corrupt "
+				   "file %s could not be deleted: %s\n") % complete_filename_.c_str()
+					 % e.what()).str();
 				log("%s", error_msg_[bitCorruptFileLeft].c_str());
 			}
 		}
@@ -109,7 +118,8 @@ void GenericSaveHandler::save_file() {
 }
 
 uint32_t GenericSaveHandler::save() {
-	try { // everything additionally in one big try block to catch any unexpected errors
+	try {  // everything additionally in one big try block
+	       // to catch any unexpected errors
 		clear_errors();
 
 		//  Make sure that the current directory exists and is writeable.
@@ -117,8 +127,9 @@ uint32_t GenericSaveHandler::save() {
 			g_fs->ensure_directory_exists(dir_);
 		} catch (const FileError& e) {
 			error_ |= kCreatingDirFailed;
-			error_msg_[bitCreatingDirFailed] = (boost::format("GenericSaveHandler::save: "
-			   "directory %s could not be created: %s\n") % dir_.c_str() % e.what()).str();
+			error_msg_[bitCreatingDirFailed] =
+			   (boost::format("GenericSaveHandler::save: directory %s could not be "
+			   "created: %s\n") % dir_.c_str() % e.what()).str();
 			log("%s", error_msg_[bitCreatingDirFailed].c_str());
 			return error_;
 		}
@@ -143,17 +154,20 @@ uint32_t GenericSaveHandler::save() {
 					g_fs->fs_unlink(backup_filename_);
 				} catch (const FileError& e) {
 					error_ |= kDeletingBackupFailed;
-					error_msg_[bitDeletingBackupFailed] = (boost::format("GenericSaveHandler::save: "
-					   "backup file %s could not be deleted: %s\n") % backup_filename_.c_str() % e.what()).str();
+					error_msg_[bitDeletingBackupFailed] =
+					   (boost::format("GenericSaveHandler::save: backup file %s could "
+					   "not be deleted: %s\n") % backup_filename_.c_str() % e.what()
+					   ).str();
 					log("%s", error_msg_[bitDeletingBackupFailed].c_str());
 				}
 
 			} else {
 				if (error_ & kCorruptFileLeft) {
 					error_ |= kRestoringBackupFailed;
-					error_msg_[bitRestoringBackupFailed] = (boost::format("GenericSaveHandler::save: "
-					   "file %s could not be restored from backup %s: file still exists\n")
-						 % complete_filename_.c_str() % backup_filename_.c_str()).str();
+					error_msg_[bitRestoringBackupFailed] =
+					   (boost::format("GenericSaveHandler::save: file %s could not be "
+					   "restored from backup %s: file still exists\n")
+					   % complete_filename_.c_str() % backup_filename_.c_str()).str();
 					log("%s", error_msg_[bitRestoringBackupFailed].c_str());
 				}
 				else {
@@ -162,8 +176,9 @@ uint32_t GenericSaveHandler::save() {
 						g_fs->fs_rename(backup_filename_, complete_filename_);
 					} catch (const FileError& e) {
 						error_ |= kRestoringBackupFailed;
-						error_msg_[bitRestoringBackupFailed] = (boost::format("GenericSaveHandler::save: "
-						   "file %s could not be restored from backup %s: %s\n") % backup_filename_.c_str()
+						error_msg_[bitRestoringBackupFailed] =
+						   (boost::format("GenericSaveHandler::save: file %s could not "
+						   "be restored from backup %s: %s\n") % backup_filename_.c_str()
 						   % backup_filename_.c_str() % e.what()).str();
 						log("%s", error_msg_[bitRestoringBackupFailed].c_str());
 					}
@@ -173,8 +188,9 @@ uint32_t GenericSaveHandler::save() {
 
 	} catch (const std::exception& e) {
 		error_ |= kUnexpectedError;
-		error_msg_[bitUnexpectedError] = (boost::format("GenericSaveHandler::save: "
-		   "unknown error: %s\n") % e.what()).str();
+		error_msg_[bitUnexpectedError] =
+		   (boost::format("GenericSaveHandler::save: unknown error: %s\n")
+		   % e.what()).str();
 		log("%s", error_msg_[bitUnexpectedError].c_str());
 	}
 
@@ -221,31 +237,39 @@ std::string GenericSaveHandler::localized_formatted_result_message() {
 	}
 
 	if (error_ & kCorruptFileLeft) {
-		if (!msg.empty()) msg += "\n";
+		if (!msg.empty()) {
+			msg += "\n";
+		}
 		msg += (boost::format(_("Saved file may be corrupt!"))).str();
 	}
 
 	if (error_ & kRestoringBackupFailed) {
-		if (!msg.empty()) msg += "\n";
+		if (!msg.empty()) {
+			msg += "\n";
+		}
 		msg +=
 		   (boost::format(_("File ‘%s’ could not be restored!"))
 		   % complete_filename_.c_str()).str() + "\n" +
 		   (boost::format(_("Backup file ‘%s’ will be available for some time."))
-			 % backup_filename_.c_str()).str();
+		   % backup_filename_.c_str()).str();
 	}
 
 	if (!backup_filename_.empty() &&
 	    (error_ & kSavingDataFailed) &&
 	    !(error_ & kCorruptFileLeft) &&
 	    !(error_ & kRestoringBackupFailed)) {
-		if (!msg.empty()) msg += "\n";
+		if (!msg.empty()) {
+			msg += "\n";
+		}
 		msg +=
 		   (boost::format(_("File ‘%s’ was restored from backup."))
 		   % complete_filename_.c_str()).str();
 	}
 
 	if (error_ & kUnexpectedError) {
-		if (!msg.empty()) msg += "\n";
+		if (!msg.empty()) {
+			msg += "\n";
+		}
 		msg +=
 		   (boost::format(_("An unexpected error occurred:" ))).str()
 		   + "\n" + error_msg_[bitUnexpectedError];

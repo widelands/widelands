@@ -121,8 +121,9 @@ MainMenuSaveMap::MainMenuSaveMap(EditorInteractive& parent)
  * Called when the ok button was pressed or a file in list was double clicked.
  */
 void MainMenuSaveMap::clicked_ok() {
-	if (!ok_.enabled())
+	if (!ok_.enabled()) {
 		return;
+	}
 	std::string filename = editbox_->text();
 	std::string complete_filename;
 
@@ -302,20 +303,22 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	uint32_t error = gsh.save();
 	if (error == GenericSaveHandler::kSuccess ||
 	    error == GenericSaveHandler::kDeletingBackupFailed) {
-			// No need to bother the player if only the temporary backup couldn't be deleted.
-			// Automatic cleanup will try to deal with it later.
+			// No need to bother the player if only the temporary backup couldn't
+			// be deleted. Automatic cleanup will try to deal with it later.
 		egbase.get_ibase()->log_message(_("Map saved"));
 		return true;
 	}
 
 	std::string msg = gsh.localized_formatted_result_message();
-	UI::WLMessageBox mbox(this, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox mbox(
+	   this, _("Error Saving Map!"), msg, UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
 
 	// If only the backup failed (likely just because of a file lock),
 	// then leave the dialog open for the player to try with a new filename.
-	if (error == GenericSaveHandler::kBackupFailed)
+	if (error == GenericSaveHandler::kBackupFailed) {
 	  return false;
+	}
 
 	// In the other error cases close the dialog.
 	return true;

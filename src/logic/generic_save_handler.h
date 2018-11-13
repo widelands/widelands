@@ -46,25 +46,36 @@ namespace {
  * It stores error codes and error messages.
  * It can also generate an overview message aimed at a human user.
  *
- * The saving routine (what actually writes data to a file system) must be provided.
+ * The saving routine (what actually writes data to a file system)
+ * must be provided.
  */
-// TODO(Arty): Possibly make it more generic, allowing to provide options whether
-// to overwrite, whether to make backups; maybe allow to provide a naming scheme, etc.
+// TODO(Arty): Possibly make it more generic, allowing to provide options
+// whether to overwrite files, whether to make backups, maybe allow
+// to provide a naming scheme, etc.
 class GenericSaveHandler {
 public:
 	// error constants; usable as bit masks
-	static constexpr uint32_t kSuccess = 0;
-	static constexpr uint32_t kCreatingDirFailed = uint32_t(1) << bitCreatingDirFailed;
-	static constexpr uint32_t kBackupFailed = uint32_t(1) << bitBackupFailed;
-	static constexpr uint32_t kSavingDataFailed = uint32_t(1) << bitSavingDataFailed;
-	static constexpr uint32_t kCorruptFileLeft = uint32_t(1) << bitCorruptFileLeft;
-	static constexpr uint32_t kDeletingBackupFailed = uint32_t(1) << bitDeletingBackupFailed;
-	static constexpr uint32_t kRestoringBackupFailed = uint32_t(1) << bitRestoringBackupFailed;
-	static constexpr uint32_t kUnexpectedError = uint32_t(1) << bitUnexpectedError;
-	static constexpr uint32_t kAllErrors = (1 << maxErrors) - 1;
+	static constexpr uint32_t
+	   kSuccess = 0;
+	static constexpr uint32_t
+	   kCreatingDirFailed = uint32_t(1) << bitCreatingDirFailed;
+	static constexpr uint32_t
+	   kBackupFailed = uint32_t(1) << bitBackupFailed;
+	static constexpr uint32_t
+	   kSavingDataFailed = uint32_t(1) << bitSavingDataFailed;
+	static constexpr uint32_t
+	   kCorruptFileLeft = uint32_t(1) << bitCorruptFileLeft;
+	static constexpr uint32_t
+	   kDeletingBackupFailed = uint32_t(1) << bitDeletingBackupFailed;
+	static constexpr uint32_t
+	   kRestoringBackupFailed = uint32_t(1) << bitRestoringBackupFailed;
+	static constexpr uint32_t
+	   kUnexpectedError = uint32_t(1) << bitUnexpectedError;
+	static constexpr uint32_t
+	   kAllErrors = (1 << maxErrors) - 1;
 
 	explicit GenericSaveHandler(
-	   std::function<void(FileSystem&)> do_save, // function which actually saves data to the filesystem
+	   std::function<void(FileSystem&)> do_save,  // function that actually saves data to the filesystem
 	   std::string complete_filename,
 	   FileSystem::Type type)
    : do_save_(do_save),
@@ -76,22 +87,26 @@ public:
 
 	/**
 	 * Tries to save a file.
-	 * If the file already exists, it will be overwritten but a temporary backup is made
-	 * which will be restored if saving fails and deleted otherwise.
+	 *
+	 * If the file already exists, it will be overwritten but a temporary backup
+	 * is made, which will be restored if saving fails and deleted otherwise.
+	 *
 	 * Catches ALL errors.
+	 *
 	 * Error messages for all errors are written to the log but also stored.
 	 * Stores and returns an error code (bit mask of all occurred errors).
 	 */
 	uint32_t save();
 
-	// returns the stored error code (from the last saving operation)
+	// returns the stored error code (of the last saving operation)
 	uint32_t error() { return error_; };
 
-	// Returns the combination of error_messages (of occurred errors) specified by a bit mask.
+	// Returns the combination of error_messages (of occurred errors)
+	// specified by a bit mask.
 	std::string error_message(uint32_t error_mask = kAllErrors);
 
-	// Generates a localized formatted message describing
-	// the result of the saving attempt.
+	// Generates a localized formatted message describing the result of
+	// the last saving attempt.
 	// Aimed to be sufficiently informative for a human user.
 	std::string localized_formatted_result_message();
 

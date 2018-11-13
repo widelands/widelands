@@ -161,7 +161,8 @@ void GameMainMenuSaveGame::ok() {
 	}
 
 	std::string filename = filename_editbox_.text();
-	if (save_game(filename, !g_options.pull_section("global").get_bool("nozip", false))) {
+	if (save_game(filename,
+	              !g_options.pull_section("global").get_bool("nozip", false))) {
 		die();
 	} else {
 		load_or_save_.table_.focus();
@@ -212,21 +213,24 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	boost::trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, kSavegameExtension))
+	if (!boost::iends_with(filename, kSavegameExtension)) {
 		filename += kSavegameExtension;
+	}
 
 	//  Append directory name.
-	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
+	const std::string complete_filename =
+	   curdir_ + g_fs->file_separator() + filename;
 
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->file_exists(complete_filename)) {
 		const std::string s =
-		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?")) %
-		    FileSystem::fs_filename(filename.c_str()))
-		      .str();
-		UI::WLMessageBox mbox(this, _("Error Saving Game!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
-		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
+		   (boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
+		   % FileSystem::fs_filename(filename.c_str())).str();
+		UI::WLMessageBox mbox(this, _("Error Saving Game!"), s,
+		                      UI::WLMessageBox::MBoxType::kOkCancel);
+		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return false;
+		}
 	}
 
 	// Try saving the game.
@@ -242,8 +246,8 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 	uint32_t error = gsh.save();
 	if (error == GenericSaveHandler::kSuccess ||
 	    error == GenericSaveHandler::kDeletingBackupFailed) {
-			// No need to bother the player if only the temporary backup couldn't be deleted.
-			// Automatic cleanup will try to deal with it later.
+			// No need to bother the player if only the temporary backup couldn't be
+			// deleted. Automatic cleanup will try to deal with it later.
 		game.save_handler().set_current_filename(complete_filename);
 		igbase().log_message(_("Game saved"));
 		return true;
@@ -251,13 +255,15 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 
 	// Show player an error message.
 	std::string msg = gsh.localized_formatted_result_message();
-	UI::WLMessageBox mbox(this, _("Error Saving Game!"), msg, UI::WLMessageBox::MBoxType::kOk);
+	UI::WLMessageBox mbox(this, _("Error Saving Game!"), msg,
+	                      UI::WLMessageBox::MBoxType::kOk);
 	mbox.run<UI::Panel::Returncodes>();
 
 	// If only the backup failed (likely just because of a file lock),
 	// then leave the dialog open for the player to try with a new filename.
-	if (error == GenericSaveHandler::kBackupFailed)
+	if (error == GenericSaveHandler::kBackupFailed) {
 	  return false;
+	}
 
 	// In the other error cases close the dialog.
 	igbase().log_message(_("Saving failed!"));

@@ -41,10 +41,13 @@ public:
 	SaveHandler();
 
 	void think(Widelands::Game&);
-	std::string create_file_name(const std::string& dir, const std::string& filename) const;
+	std::string create_file_name(const std::string& dir,
+	                             const std::string& filename) const;
 
-	// saves the game, overwrites file, handles errors
-	bool save_game(Widelands::Game&, const std::string& filename, std::string* error = nullptr);
+	// Saves the game, overwrites file, handles errors
+	bool save_game(Widelands::Game&,
+	               const std::string& filename,
+	               std::string* error_str = nullptr);
 
 	const std::string get_cur_filename() {
 		return current_filename_;
