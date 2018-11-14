@@ -268,12 +268,15 @@ FileSystem* ZipFilesystem::make_sub_file_system(const std::string& path) {
 	if (!file_exists(path)) {
 		throw wexception(
 		   "ZipFilesystem::make_sub_file_system: The path '%s' does not exist in zip file '%s'.",
-		   path.c_str(), zip_file_->path().c_str());
+		   (basedir_in_zip_file_.empty() ? path : basedir_in_zip_file_ + "/" + path).c_str(),
+		   zip_file_->path().c_str());
 	}
 	if (!is_directory(path)) {
-		throw wexception("ZipFilesystem::make_sub_file_system: "
-		                 "The path '%s' needs to be a directory in zip file '%s'.",
-		                 path.c_str(), zip_file_->path().c_str());
+		throw wexception(
+		   "ZipFilesystem::make_sub_file_system: The path '%s' needs to be a directory in zip file "
+		   "'%s'.",
+		   (basedir_in_zip_file_.empty() ? path : basedir_in_zip_file_ + "/" + path).c_str(),
+		   zip_file_->path().c_str());
 	}
 
 	std::string localpath = path;
@@ -291,7 +294,10 @@ FileSystem* ZipFilesystem::make_sub_file_system(const std::string& path) {
 // see Filesystem::create
 FileSystem* ZipFilesystem::create_sub_file_system(const std::string& path, Type const type) {
 	if (file_exists(path)) {
-		throw wexception("ZipFilesystem::create_sub_file_system: Sub file system already exists.");
+		throw wexception(
+		   "ZipFilesystem::create_sub_file_system: Path '%s' already exists in zip file %s.",
+		   (basedir_in_zip_file_.empty() ? path : basedir_in_zip_file_ + "/" + path).c_str(),
+		   zip_file_->path().c_str());
 	}
 
 	if (type != FileSystem::DIR)
