@@ -85,8 +85,10 @@ EditorGameBase::~EditorGameBase() {
  * also resets the map filesystem if it points to the temporary file
  */
 void EditorGameBase::delete_tempfile() {
-	if (!tmp_fs_)
+	if (!tmp_fs_) {
 		return;
+	}
+
 	std::string fs_filename = tmp_fs_->get_basename();
 	std::string mapfs_filename = map_.filesystem()->get_basename();
 	if (mapfs_filename == fs_filename)
@@ -95,7 +97,8 @@ void EditorGameBase::delete_tempfile() {
 	try {
 		g_fs->fs_unlink(fs_filename);
 	} catch (const std::exception& e) {
-		// if file deletion fails then we have an abaondoned file lying around, but otherwise that's unproblematic
+		// if file deletion fails then we have an abandoned file lying around, but otherwise that's
+		// unproblematic
 		log("EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n", e.what());
 	}
 }
@@ -106,7 +109,7 @@ void EditorGameBase::delete_tempfile() {
  * throws an exception if something goes wrong
  */
 void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const type) {
-  // should only be called when a map was already loaded
+	// should only be called when a map was already loaded
 	assert(map_.filesystem());
 
 	g_fs->ensure_directory_exists(kTempFileDir);
@@ -115,17 +118,16 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 	std::string complete_filename = filename + kTempFileExtension;
 
 	// if a file with that name already exists, then try a few name modifications
-	if (g_fs->file_exists(complete_filename))
-	{
+	if (g_fs->file_exists(complete_filename)) {
 		int suffix;
-		for (suffix = 0; suffix <= 9; suffix++)
-		{
+		for (suffix = 0; suffix <= 9; suffix++) {
 			complete_filename = filename + "-" + std::to_string(suffix) + kTempFileExtension;
 			if (!g_fs->file_exists(complete_filename))
-			  break;
+				break;
 		}
 		if (suffix > 9) {
-		  throw wexception("EditorGameBase::create_tempfile_and_save_mapdata(): for all considered filenames a file already existed");
+			throw wexception("EditorGameBase::create_tempfile_and_save_mapdata(): for all considered "
+			                 "filenames a file already existed");
 		}
 	}
 
@@ -133,9 +135,8 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 	tmp_fs_.reset(g_fs->create_sub_file_system(complete_filename, type));
 
 	// save necessary map data (we actually save the whole map)
-	Widelands::MapSaver* wms = new Widelands::MapSaver(*tmp_fs_, *this);
+	std::unique_ptr<Widelands::MapSaver> wms(new Widelands::MapSaver(*tmp_fs_, *this));
 	wms->save();
-	delete wms;
 
 	// swap map fs
 	std::unique_ptr<FileSystem> mapfs(tmp_fs_->make_sub_file_system("."));
@@ -143,9 +144,11 @@ void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const typ
 	mapfs.reset();
 
 	// This is just a convenience hack:
-	// If tmp_fs_ is a zip filesystem then - because of the way zip filesystems are currently implemented -
+	// If tmp_fs_ is a zip filesystem then - because of the way zip filesystems are currently
+	// implemented -
 	// the file is still in zip mode right now, which means that the file isn't finalized yet, i.e.,
-	// not even a valid zip file until zip mode ends. To force ending the zip mode (thus finalizing the file)
+	// not even a valid zip file until zip mode ends. To force ending the zip mode (thus finalizing
+	// the file)
 	// we simply perform a (otherwise useless) filesystem request.
 	// It's not strictly necessary, but this way we get a valid zip file immediately istead of
 	// at some unkown later point (when an unzip operation happens or a filesystem object destructs).

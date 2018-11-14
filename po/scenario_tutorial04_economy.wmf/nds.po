@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: 2018-10-18 12:24+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-11-01 16:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -201,7 +201,7 @@ msgid ""
 "This is enough explanation for now. Now try it out yourself. We want to know"
 " whether we still have taverns, so you have to choose the ‘Medium buildings’"
 " tab. Close the building statistics menu afterwards."
-msgstr "Eerst maal genoog Vertellsel. Probeer 't nu sülvst ut. Wi wollen weten, of wi noch Kneipen hebben, also muttst du de Listenwessler för middelmatige Husen utkören. Maak daarna dat Menü för Tahlen över Husen dicht."
+msgstr "Eerst maal genoog Vertellsel. Probeer 't nu sülvst ut. Wi willen weten, of wi noch Kneipen hebben, also muttst du de Listenwessler för middelmatige Husen utkören. Maak daarna dat Menü för Tahlen över Husen dicht."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid "Look up how many taverns you have"
@@ -301,7 +301,7 @@ msgstr "Dat Bestand-Fenster hett veer Listenwesslers. De eerste (de jüüst utk�
 msgid ""
 "Looking at the rations, there are currently only five in total, probably on "
 "their way to somewhere. Five rations are not much for such a big economy."
-msgstr "Wenn du de Happen ankiekst, süchst du, dat du blot fiev in 't Geheel hest, un se worden woll all jüüst to elkeen Huus brocht. Fiev Happen sünd för eene grote Wirtschaft nich vööl."
+msgstr "Wenn du de Happen ankiekst, süchst du, dat du blot fiev in 't Geheel hest, un se worden wull all jüüst to elkeen Huus brocht. Fiev Happen sünd för eene grote Wirtschaft nich vööl."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:141
 msgid ""
@@ -379,11 +379,11 @@ msgstr "Anners maak 't bidde weer up un köör de darden Listenwessler ut."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:189
 msgid "New taverns"
-msgstr "Neie Kneipen"
+msgstr "Neje Kneipen"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:191
 msgid "We need new taverns"
-msgstr "Wi bruken neie Kneipen"
+msgstr "Wi bruken neje Kneipen"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:192
 msgid ""
@@ -502,7 +502,7 @@ msgstr "Un de Listenwessler »Sekere Dingen« wiest Informationen över de seker
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:236
 msgid "Now use the encyclopedia to find out how to create new soldiers."
-msgstr "Nu slaa na, wo du neie Soldaten kriggst."
+msgstr "Nu slaa na, wo du neje Soldaten kriggst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid ""
@@ -811,7 +811,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "To 'n Bispööl is de End-Tahl för Sichten 1. Wenn du eene Buurderee baust, nimmt een Lastendrager eene Sichte un word een Buur. Dann sünd keene Sichten över, aber de End-Tahl is 1, also maakt diene Warktüügsmee eene neie."
+msgstr "To 'n Bispööl is de End-Tahl för Sichten 1. Wenn du eene Buurderee baust, nimmt een Lastendrager eene Sichte un word een Buur. Dann sünd keene Sichten över, aber de End-Tahl is 1, also maakt diene Warktüügsmee eene neje."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:420
 msgid ""
@@ -862,7 +862,7 @@ msgstr "Mennigmaal bruukst du mennig Waren fix tur glieken Tied – fixer as se 
 msgid ""
 "To be prepared for additional fortifications, you should produce 20 marble "
 "columns."
-msgstr "Rüst di vör neie Befestigungen, indeem du 20 Marmelpieler produzeerst."
+msgstr "Rüst di vör neje Befestigungen, indeem du 20 Marmelpieler produzeerst."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:438
 msgid ""
@@ -977,5 +977,5 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr[0] "Neje Upgaav"
+msgstr[1] "Neje Upgaven"

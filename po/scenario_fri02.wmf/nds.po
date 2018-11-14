@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -296,7 +297,7 @@ msgstr "Willkomen torügg!"
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:147
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:156
 msgid "A new home"
-msgstr "Eene neie Heimaad"
+msgstr "Eene neje Heimaad"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:140
@@ -353,7 +354,7 @@ msgid ""
 "start building our new home here."
 msgstr ""
 "Miene Bespejers hebben keene levigen Beesten mehr in de Naberskupp funnen. "
-"Wi fangen hier an, uns' neie Heimaad to bauen."
+"Wi fangen hier an, uns' neje Heimaad to bauen."
 
 #. TRANSLATORS: Reebaud – Introduction 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:164
@@ -427,14 +428,14 @@ msgid ""
 "And we don’t have any iron left. We must find a way to get some metal for "
 "forging new picks. Unfortunately, I have no idea how to do this."
 msgstr ""
-"Un wi hebben keen Iesen över. Wi mutten eets wat Iesen kriegen, um neie "
+"Un wi hebben keen Iesen över. Wi mutten eets wat Iesen kriegen, um neje "
 "Pickhacken to maken. Aber ick hebb leidergotts keene Idee, wo wi dat doon "
 "könen."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:190
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:209
 msgid "Getting new metal"
-msgstr "Neies Metall kriegen"
+msgstr "Nejes Metall kriegen"
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:192
@@ -458,7 +459,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:199
 msgid "New metal"
-msgstr "Neies Metall"
+msgstr "Nejes Metall"
 
 #. TRANSLATORS: Hauke – Train and recycle 3
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:201
@@ -467,7 +468,7 @@ msgid ""
 "new swords and the old weapons are discarded. These are unfit to use in "
 "battle, so it would not be a waste to smelt down those."
 msgstr ""
-"Nu hebb ick eene Idee: Wenn uns' Soldaten öven, worden se mit neien Sweerten"
+"Nu hebb ick eene Idee: Wenn uns' Soldaten öven, worden se mit nejen Sweerten"
 " utstaffeert un de ollen Wapen wegsmeten. Se könen nich mehr in de Slacht "
 "bruukt worden, 't is also keene Verschwendung, deese to smelten."
 
@@ -525,7 +526,7 @@ msgid ""
 msgstr ""
 "Hebben wi al eene Sneeihirsktüchteree? Wenn nich, sallen wi nun eene bauen. "
 "Wi bruken mehr Sneeihirsken för de övervullen Straten, un wi könen ok "
-"anfangen, Fellkluften för neie Soldaten to naihen. Well weet, of wi nich "
+"anfangen, Fellkluften för neje Soldaten to naihen. Well weet, of wi nich "
 "eenmaal kämpen mutten?"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:224
@@ -727,7 +728,7 @@ msgid ""
 "to give us these wares:"
 msgstr ""
 "Un as Teken för ji goden Willen verlangen wi eene Gaav vun Fründskupp an dat"
-" Riek. As ji wull wiss worden sünd, hebb ick ji een neies Kraamhuus geven. "
+" Riek. As ji wull wiss worden sünd, hebb ick ji een nejes Kraamhuus geven. "
 "Doot daar de nödigen Gaven in, um se an uns to langen. Ick verloov ji, uns "
 "deese Waren to geven:"
 
@@ -779,7 +780,7 @@ msgid ""
 msgstr ""
 "Ji muttst tegen deese Willen kämpen, wenn ji in deese Kuntrei leven wullt; "
 "ji köönt wiss sehn, dat 't lichter is, tosammen mit de Riek tegen se to "
-"fechten as alleen? Un ji wullt dat Riek würrelk nich as jo Feind. Woll sünd "
+"fechten as alleen? Un ji wullt dat Riek würrelk nich as jo Feind. Wull sünd "
 "ji Wille Lüü, aber ick bün wiss, dat ji verstaht, dat ick Klookheid segg, "
 "nadeem ji daar een bietje över nadacht hebbt."
 
@@ -792,7 +793,7 @@ msgid ""
 msgstr ""
 "Dat is de gröttste Frechheid vun allen. Wo kann he dat wagen, uns to "
 "befehlen, uns' Gewest nich wieder to vergrotern, wenn wi nix wullen as eene "
-"neie Heimaad upbauen, un uns mit Krieg drohen, wenn wi nich siene Sklaven "
+"neje Heimaad upbauen, un uns mit Krieg drohen, wenn wi nich siene Sklaven "
 "wesen wullen?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
@@ -1048,5 +1049,5 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr[0] "Neje Upgaav"
+msgstr[1] "Neje Upgaven"

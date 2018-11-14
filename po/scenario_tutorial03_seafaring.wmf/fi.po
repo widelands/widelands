@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-20 17:43+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-10-28 07:43+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgid ""
 "For everything you do on the high seas, you need a port at the shore. Ports "
 "are like headquarters: they can store wares, workers and soldiers. The "
 "soldiers inside will automatically come out when an enemy attacks the port."
-msgstr "Kaikelle mitä teet merten takana, sitä varten tarvitset rataman rannikolle. Satamat ovat päämajoja: niissä voi varastoida tavaroita, työntekijöitä ja sotilaita. Sisällä olevat sotilaat tulevat automaattisesti ulos, kun vihollinen hyökkää saamaan."
+msgstr "Kaikelle mitä teet merten takana, sitä varten tarvitset rataman rannikolle. Satamat ovat päämajoja: niissä voi varastoida tuotteita, työntekijöitä ja sotilaita. Sisällä olevat sotilaat tulevat automaattisesti ulos, kun vihollinen hyökkää saamaan."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:46
 msgid ""
@@ -83,7 +83,7 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr "Vaihtoehtoisesti, satamat tarjoavat mahdollisuuden rahdata tavaroita laivoilla. Kun klikkaat satamaa, joka sinulla jo on, huomaat kaksi lisävälilehteä: ‘Laivausta odottavat tavarat’ ja ‘venekuljetusta odottavat työntekijät.’ He odottavat laivan kuljettavan heidät toiseen satamaan. Tällä hetkellä toinen satamaa puuttuu, koska emme ole rakentaneet toista satamaa. Joten tehdään sellainen!"
+msgstr "Vaihtoehtoisesti, satamat tarjoavat mahdollisuuden rahdata tuotteita laivoilla. Kun klikkaat satamaa, joka sinulla jo on, huomaat kaksi lisävälilehteä: ‘Laivausta odottavat tuotteet’ ja ‘venekuljetusta odottavat työntekijät.’ He odottavat laivan kuljettavan heidät toiseen satamaan. Tällä hetkellä toinen satamaa puuttuu, koska emme ole rakentaneet toista satamaa. Joten tehdään sellainen!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:54
 msgid "Building ports"
@@ -127,7 +127,7 @@ msgstr "Rakenna satama"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:67
 msgid "You always need a port when you want to transport wares with a ship."
-msgstr "Tarvitset aina sataman, kun haluat kuljettaa tavaroita laivalla."
+msgstr "Tarvitset aina sataman, kun haluat kuljettaa tuotteita laivalla."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:68
 msgid "Build a port next to your castle, on the blue port space icon."
@@ -233,7 +233,7 @@ msgstr "Rakenna kaksi laivaa"
 msgid ""
 "Ships are constructed automatically when the shipyard is complete and the "
 "needed wares have been delivered."
-msgstr "Laivat rakennetaan automaattisesti, kun telakka valmistuu ja tarvittavat tavarat on toimitettu."
+msgstr "Laivat rakennetaan automaattisesti, kun telakka valmistuu ja tarvittavat tuotteet on toimitettu."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:108
 msgid "Wait until the shipwright has constructed two ships."
@@ -292,13 +292,13 @@ msgid ""
 "build a port (your goal is to build a port far away from home, so this is "
 "not surprising), and of course you need a builder, too. When everything is "
 "prepared, a ship will come and pick it up."
-msgstr "Tutkimusmatkoja voidaan aloittaa kakista samamista. Silloin kaikki tarvittavat tavarat toimitetaan siihen satamaan. Tavarat ovat täsmälleen ne mitä heimosi tarvitsee rakentaakseen sataman (sinun tavoitteena on rakentaa satama kauas kotoa, mikä ei ole yllättävää) ja toki tarvitset myös rakentajan. Kun kaikki valmistelut on tehty, laiva tulee hakemaan ne."
+msgstr "Tutkimusmatkoja voidaan aloittaa kakista samamista. Silloin kaikki tarvittavat tuotteet toimitetaan siihen satamaan. Tuotteet ovat täsmälleen ne mitä heimosi tarvitsee rakentaakseen sataman (sinun tavoitteena on rakentaa satama kauas kotoa, mikä ei ole yllättävää) ja toki tarvitset myös rakentajan. Kun kaikki valmistelut on tehty, laiva tulee hakemaan ne."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:134
 msgid ""
 "You can check out the needed wares in the fifth tab of your port (it will "
 "appear when you’ve started an expedition)."
-msgstr "Voit tarkistaa tarvittavat tavarat satamasi viidenneltä välilehdeltä (se ilmestyy kun olet aloittanut tutkimusmatkan)."
+msgstr "Voit tarkistaa tarvittavat tuotteet satamasi viidenneltä välilehdeltä (se ilmestyy kun olet aloittanut tutkimusmatkan)."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:135
 msgid "Now try this out. I will tell you later what the next steps are."
@@ -320,7 +320,7 @@ msgstr "Aloita tutkimusmatka."
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr "Tehdäksesi niin, klikkaa 'Aloita Tutkimusmatka' painiketta mistä tahansa satamassa. Tarvittavat tavarat voit nähdä ilmestyvästä uudesta välilehdestä."
+msgstr "Tehdäksesi niin, klikkaa 'Aloita Tutkimusmatka' painiketta mistä tahansa satamassa. Tarvittavat tuotteet voit nähdä ilmestyvästä uudesta välilehdestä."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:148
 msgid "Off to greener pastures"
@@ -337,7 +337,7 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr "Tutkimusmatka-aluksesi on valmis. Se odottaa käskyäsi satamasi edustalla. Se ei enää kuljeta tavaroita. Käytä sen painikkeita lähettääksesi laivasi mihin tahansa kuudesta Widelandsin kartan pääsuunnista. Kun se on saavuttanut rannikkoviivan, voit laittaa sen matkustamaan pitkin rannikkoa, josta se etsii sopivan paikan rantautumiseen."
+msgstr "Tutkimusmatka-aluksesi on valmis. Se odottaa käskyäsi satamasi edustalla. Se ei enää kuljeta tuotteita. Käytä sen painikkeita lähettääksesi laivasi mihin tahansa kuudesta Widelandsin kartan pääsuunnista. Kun se on saavuttanut rannikkoviivan, voit laittaa sen matkustamaan pitkin rannikkoa, josta se etsii sopivan paikan rantautumiseen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid ""
@@ -350,7 +350,7 @@ msgid ""
 "The wares will then be unloaded, and the ship will take up the task of "
 "transporting wares once again. The builder will start his work and build a "
 "port."
-msgstr "Tavarat tullee silloin purkamaan ja laiva ottaa tehtäväkseen tahdata tavaroita taas uudelle. Rakentaja aloittaa työnsä ja rakentaa sataman."
+msgstr "Tuotteet tullaan silloin purkamaan ja laiva ottaa tehtäväkseen rahdata tuotteita taas uudeelle. Rakentaja aloittaa työnsä ja rakentaa sataman."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:155
 msgid ""
@@ -412,7 +412,7 @@ msgid ""
 "On this map, there is no enemy to fear. As always, you can continue playing "
 "and watch how the ships deliver wares to the island when you construct some "
 "buildings there. There is also another island where you can build a port."
-msgstr "Tällä kartalla ei ole vihollisia, joita pelätä. Kuten aina, voit jatkaa pelaamista ja katsoa kuinka laivat toimittavat tavaroita saarelle, kun rakennat sinne joitakin rakennuksia. Siellä on myös toinen saari, jonne voit rakentaa sataman."
+msgstr "Tällä kartalla ei ole vihollisia, joita pelätä. Kuten aina, voit jatkaa pelaamista ja katsoa kuinka laivat toimittavat tuotteita saarelle, kun rakennat sinne joitakin rakennuksia. Siellä on myös toinen saari, jonne voit rakentaa sataman."
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format

@@ -117,6 +117,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	center_to_parent();
 	move_to_top();
 
+	filename_editbox_.focus();
 	pause_game(true);
 	set_thinks(false);
 	layout();

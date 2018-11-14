@@ -188,7 +188,8 @@ FileSystem* RealFSImpl::make_sub_file_system(const std::string& path) {
 FileSystem* RealFSImpl::create_sub_file_system(const std::string& path, Type const fs) {
 	FileSystemPath fspath(canonicalize_name(path));
 	if (fspath.exists_)
-		throw FileError("RealFSImpl::create_sub_file_system", fspath, "path already exists, cannot create new filesystem from it");
+		throw FileError("RealFSImpl::create_sub_file_system", fspath,
+		                "path already exists, cannot create new filesystem from it");
 	if (fs == FileSystem::DIR) {
 		ensure_directory_exists(path);
 		return new RealFSImpl(fspath);
@@ -230,8 +231,10 @@ void RealFSImpl::unlink_file(const std::string& file) {
 	//       but I am not sure if this is available (and works properly)
 	//       on all windows platforms or only with Visual Studio.
 	if (!DeleteFile(fspath.c_str()))
-		throw FileError("RealFSImpl::unlink_file", fspath, std::string("file error (Windows error code ")+std::to_string(GetLastError())+")");
-		// TODO(Arty): generate proper system message from GetLastError() via FormatMessage
+		throw FileError(
+		   "RealFSImpl::unlink_file", fspath,
+		   std::string("file error (Windows error code ") + std::to_string(GetLastError()) + ")");
+// TODO(Arty): generate proper system message from GetLastError() via FormatMessage
 #endif
 }
 
@@ -271,8 +274,10 @@ void RealFSImpl::unlink_directory(const std::string& file) {
 	//       but I am not sure if this is available (and works properly)
 	//       on all windows platforms or only with Visual Studio.
 	if (!RemoveDirectory(fspath.c_str()))
-		throw FileError("RealFSImpl::unlink_directory", fspath, std::string("file error (Windows error code ")+std::to_string(GetLastError())+")");
-		// TODO(Arty): generate proper system message from GetLastError() via FormatMessage
+		throw FileError(
+		   "RealFSImpl::unlink_directory", fspath,
+		   std::string("file error (Windows error code ") + std::to_string(GetLastError()) + ")");
+// TODO(Arty): generate proper system message from GetLastError() via FormatMessage
 #endif
 }
 
@@ -294,14 +299,17 @@ void RealFSImpl::ensure_directory_exists(const std::string& dirname) {
 		it = clean_dirname.find('/', it);
 
 		FileSystemPath fspath(canonicalize_name(clean_dirname.substr(0, it)));
-		if (fspath.exists_ && !fspath.is_directory_)
-			throw FileTypeError("RealFSImpl::ensure_directory_exists",
-			   fspath, "path is not a directory");
-		if (!fspath.exists_)
+		if (fspath.exists_ && !fspath.is_directory_) {
+			throw FileTypeError(
+			   "RealFSImpl::ensure_directory_exists", fspath, "path is not a directory");
+		}
+		if (!fspath.exists_) {
 			make_directory(clean_dirname.substr(0, it));
+		}
 
-		if (it == std::string::npos)
+		if (it == std::string::npos) {
 			break;
+		}
 		++it;
 	}
 }
@@ -317,10 +325,11 @@ void RealFSImpl::ensure_directory_exists(const std::string& dirname) {
 void RealFSImpl::make_directory(const std::string& dirname) {
 	FileSystemPath fspath(canonicalize_name(dirname));
 	if (fspath.exists_)
-		throw FileError("RealFSImpl::make_directory", fspath, "a file or directory with that name already exists");
+		throw FileError(
+		   "RealFSImpl::make_directory", fspath, "a file or directory with that name already exists");
 
 #ifndef _WIN32
-	if (!mkdir(fspath.c_str(), 0x1FF) == -1)
+	if (mkdir(fspath.c_str(), 0x1FF) == -1)
 		throw FileError("RealFSImpl::make_directory", fspath, strerror(errno));
 #else
 	// Note: We could possibly replace this with _mkdir()
@@ -328,8 +337,10 @@ void RealFSImpl::make_directory(const std::string& dirname) {
 	//       but I am not sure if this is available (and works properly)
 	//       on all windows platforms or only with Visual Studio.
 	if (!CreateDirectory(fspath.c_str(), NULL))
-		throw FileError("RealFSImpl::make_directory", fspath, std::string("file error (Windows error code ")+std::to_string(GetLastError())+")");
-		// TODO(Arty): generate proper system message from GetLastError() via FormatMessage
+		throw FileError(
+		   "RealFSImpl::make_directory", fspath,
+		   std::string("file error (Windows error code ") + std::to_string(GetLastError()) + ")");
+// TODO(Arty): generate proper system message from GetLastError() via FormatMessage
 #endif
 }
 
@@ -368,8 +379,10 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 		// allocate a buffer and read the entire file into it
 		data = malloc(size + 1);  //  TODO(unknown): memory leak!
 		if (!data)
-			throw wexception("RealFSImpl::load: memory allocation failed for reading file %s (%s) with size %" PRIuS "",
-			                 fname.c_str(), fullname.c_str(), size);
+			throw wexception(
+			   "RealFSImpl::load: memory allocation failed for reading file %s (%s) with size %" PRIuS
+			   "",
+			   fname.c_str(), fullname.c_str(), size);
 		int result = fread(data, size, 1, file);
 		if (size && (result != 1)) {
 			throw wexception("RealFSImpl::load: read failed for %s (%s) with size %" PRIuS "",
@@ -382,10 +395,12 @@ void* RealFSImpl::load(const std::string& fname, size_t& length) {
 
 		length = size;
 	} catch (...) {
-		if (file)
+		if (file) {
 			fclose(file);
-		if (data)
+		}
+		if (data) {
 			free(data);
+		}
 		throw;
 	}
 
@@ -423,7 +438,8 @@ void RealFSImpl::fs_rename(const std::string& old_name, const std::string& new_n
 	const std::string fullname1 = canonicalize_name(old_name);
 	const std::string fullname2 = canonicalize_name(new_name);
 	if (rename(fullname1.c_str(), fullname2.c_str()) != 0)
-		throw FileError("RealFSImpl::fs_rename", fullname1, std::string("unable to rename file to ") + fullname2 + ", " + strerror(errno));
+		throw FileError("RealFSImpl::fs_rename", fullname1, std::string("unable to rename file to ") +
+		                                                       fullname2 + ", " + strerror(errno));
 }
 
 /*****************************************************************************
@@ -437,7 +453,8 @@ namespace {
 struct RealFSStreamRead : public StreamRead {
 	explicit RealFSStreamRead(const std::string& fname) : file_(fopen(fname.c_str(), "rb")) {
 		if (!file_)
-			throw FileError("RealFSStreamRead::RealFSStreamRead", fname, "could not open file for reading");
+			throw FileError(
+			   "RealFSStreamRead::RealFSStreamRead", fname, "could not open file for reading");
 	}
 
 	~RealFSStreamRead() override {
@@ -475,7 +492,8 @@ struct RealFSStreamWrite : public StreamWrite {
 	explicit RealFSStreamWrite(const std::string& fname) : filename_(fname) {
 		file_ = fopen(fname.c_str(), "wb");
 		if (!file_)
-			throw FileError("RealFSStreamWrite::RealFSStreamWrite", fname, "could not open file for writing");
+			throw FileError(
+			   "RealFSStreamWrite::RealFSStreamWrite", fname, "could not open file for writing");
 	}
 
 	~RealFSStreamWrite() override {
