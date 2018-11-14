@@ -66,9 +66,12 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
 	vbox_.set_size(get_inner_w() - 2 * padding_, get_inner_h() - 3 * padding_ - buth_);
 
 	edit_.set_text(dirname_);
-	edit_.changed.connect(boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
-	edit_.ok.connect(boost::bind(&MainMenuSaveMapMakeDirectory::clicked_ok, this));
-	ok_button_.sigclicked.connect(boost::bind(&MainMenuSaveMapMakeDirectory::clicked_ok, this));
+	edit_.changed.connect(
+	   boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
+	edit_.ok.connect(
+	   boost::bind(&MainMenuSaveMapMakeDirectory::clicked_ok, this));
+	ok_button_.sigclicked.connect(
+	   boost::bind(&MainMenuSaveMapMakeDirectory::clicked_ok, this));
 	ok_button_.set_enabled(!dirname_.empty());
 	cancel_button_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
@@ -84,13 +87,16 @@ void MainMenuSaveMapMakeDirectory::edit_changed() {
 	const std::string& text = edit_.text();
 	// Prevent the user from creating nonsense directory names, like e.g. ".." or "...".
 	const bool is_legal_filename = FileSystem::is_legal_filename(text);
-	// Prevent the user from creating directory names that the game would try to interpret as maps
+	// Prevent the user from creating directory names that the game would
+	// try to interpret as maps
 	const bool has_map_extension =
 		 boost::iends_with(text, kWidelandsMapExtension) ||
 		 boost::iends_with(text, kS2MapExtension1) ||
 		 boost::iends_with(text, kS2MapExtension2);
 	ok_button_.set_enabled(is_legal_filename && !has_map_extension);
-	edit_.set_tooltip(is_legal_filename ? (has_map_extension ? _("This extension is reserved!") : "" ) : illegal_filename_tooltip_);
+	edit_.set_tooltip(is_legal_filename ?
+	   (has_map_extension ? _("This extension is reserved!") : "" ) :
+	   illegal_filename_tooltip_);
 	dirname_ = text;
 }
 

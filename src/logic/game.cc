@@ -79,7 +79,8 @@ Game::SyncWrapper::~SyncWrapper() {
 				g_fs->fs_unlink(dumpfname_);
 			} catch (const FileError& e) {
 				// not really a problem if deletion fails, but we'll log it
-				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+				log("Deleting synchstream file %s failed: %s\n",
+				    dumpfname_.c_str(), e.what());
 			}
 	}
 }

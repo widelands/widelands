@@ -141,7 +141,8 @@ const std::string LoadOrSaveGame::filename_list_string() const {
 	return filename_list_string(table_.selections());
 }
 
-const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
+const std::string
+LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
 	boost::format message;
 	for (const uint32_t index : selections) {
 		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
@@ -291,11 +292,12 @@ void LoadOrSaveGame::clicked_delete() {
 			if (filetype_ == FileType::kReplay) {
 				try {
 					g_fs->fs_unlink(deleteme + kSavegameExtension);
-					// If at least one of the two relevant files of a replay are successfully deleted
-					// then count it as success. (From the player perspective the replay is gone.)
+					// If at least one of the two relevant files of a replay are
+					// successfully deleted then count it as success.
+					// (From the player perspective the replay is gone.)
 					failed = false;
-					// If it was a multiplayer replay, also delete the synchstream.
-					// Do it here, so it's only attempted if replay deletion was successful.
+					// If it was a multiplayer replay, also delete the synchstream. Do
+					// it here, so it's only attempted if replay deletion was successful.
 					if (g_fs->file_exists(deleteme + kSyncstreamExtension)) {
 						g_fs->fs_unlink(deleteme + kSyncstreamExtension);
 					}
@@ -309,21 +311,29 @@ void LoadOrSaveGame::clicked_delete() {
 		}
 		if (!failed_selections.empty()) {
 			// Notify the player.
-			std::string caption = ngettext("Error Deleting File!", "Error Deleting Files!", failed_selections.size());
+			std::string caption = ngettext("Error Deleting File!",
+			   "Error Deleting Files!", failed_selections.size());
 			if (filetype_ == FileType::kReplay) {
 				if (selections.size() == 1) {
 					header = _("The replay could not be deleted.");
 				} else {
-					header = ngettext("A replay could not be deleted.", "Some replays could not be deleted.", failed_selections.size());
+					header =
+					   (boost::format(ngettext("%s replay could not be deleted.",
+					   "%s replays could not be deleted.", failed_selections.size()))
+					   % failed_selections.size()).str();
 				}
 			} else {
 				if (selections.size() == 1) {
 					header = _("The game could not be deleted.");
 				} else {
-					header = ngettext("A game could not be deleted.", "Some games could not be deleted.", failed_selections.size());
+					header =
+					   (boost::format(ngettext("%s game could not be deleted.",
+					   "%s games could not be deleted.", failed_selections.size()))
+					   % failed_selections.size()).str();
 				}
 			}
-			std::string message = (boost::format("%s\n%s") % header % filename_list_string(failed_selections)).str();
+			std::string message = (boost::format("%s\n%s") % header
+			   % filename_list_string(failed_selections)).str();
 			UI::WLMessageBox msgBox(
 			   parent_->get_parent()->get_parent(),
 				 caption, message,
@@ -363,8 +373,9 @@ void LoadOrSaveGame::fill_table() {
 			return boost::ends_with(fn, kReplayExtension);
 		});
 		// Update description column title for replays
-		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
-		                                               _("Map name (start of replay)"));
+		table_.set_column_tooltip(2, show_filenames_ ?
+		   _("Filename: Map name (start of replay)") :
+		   _("Map name (start of replay)"));
 	} else {
 		gamefiles = g_fs->list_directory(kSaveDir);
 	}

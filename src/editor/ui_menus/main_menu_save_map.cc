@@ -161,7 +161,8 @@ void MainMenuSaveMap::clicked_make_directory() {
 		boost::trim(fullname);
 		if (g_fs->file_exists(fullname)) {
 			const std::string s = "A file or directory with that name already exists.";
-			UI::WLMessageBox mbox(this, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+			UI::WLMessageBox mbox(this, _("Error Creating Directory!"), s,
+			                      UI::WLMessageBox::MBoxType::kOk);
 			mbox.run<UI::Panel::Returncodes>();
 		} else {
 			try {
@@ -169,17 +170,21 @@ void MainMenuSaveMap::clicked_make_directory() {
 				//  Create directory.
 				g_fs->make_directory(fullname);
 			} catch (const FileError& e) {
-				log("directory creation failed in MainMenuSaveMap::clicked_make_directory: %s\n", e.what());
+				log("directory creation failed in MainMenuSaveMap::"
+				    "clicked_make_directory: %s\n", e.what());
 				const std::string s =
-				   (boost::format(_("Creating directory ‘%s’ failed.")) % fullname).str();
-				UI::WLMessageBox mbox(this, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+				   (boost::format(_("Creating directory ‘%s’ failed."))
+				   % fullname).str();
+				UI::WLMessageBox mbox(this, _("Error Creating Directory!"), s,
+				                      UI::WLMessageBox::MBoxType::kOk);
 				mbox.run<UI::Panel::Returncodes>();
 			}
 			fill_table();
 		}
 	}
 	table_.focus();
-	// TODO(Arty): In case of successful dir creation we should select the new dir in the table.
+	// TODO(Arty): In case of successful dir creation we should select the
+	// new dir in the table.
 }
 
 void MainMenuSaveMap::clicked_edit_options() {

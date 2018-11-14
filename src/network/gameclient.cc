@@ -623,7 +623,8 @@ void GameClient::handle_packet(RecvPacket& packet) {
 			try {
 				g_fs->fs_rename(path, backup_file_name(path));
 			} catch (const FileError& e) {
-				log("file error in GameClient::handle_packet:case NETCMD_FILE_PART: %s\n", e.what());
+				log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+				    "%s\n", e.what());
 				// TODO(Arty): What now? It just means the next step will fail
 				// or possibly result in some corrupt file
 			}
@@ -718,7 +719,8 @@ void GameClient::handle_packet(RecvPacket& packet) {
 				try {
 					g_fs->fs_unlink(file_->filename);
 				} catch (const FileError& e) {
-					log("file error in GameClient::handle_packet:case NETCMD_FILE_PART: %s\n", e.what());
+					log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+					    "%s\n", e.what());
 				}
 			}
 			// Check file for validity
@@ -745,7 +747,8 @@ void GameClient::handle_packet(RecvPacket& packet) {
 					if (g_fs->file_exists(backup_file_name(file_->filename)))
 						g_fs->fs_rename(backup_file_name(file_->filename), file_->filename);
 				} catch (const FileError& e) {
-					log("file error in GameClient::handle_packet:case NETCMD_FILE_PART: %s\n", e.what());
+					log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+					    "%s\n", e.what());
 				}
 				s.reset();
 				s.unsigned_8(NETCMD_CHAT);
