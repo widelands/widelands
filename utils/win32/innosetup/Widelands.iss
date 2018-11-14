@@ -103,6 +103,8 @@ Source: {#BuildFolder}\data\shaders\*;                                 DestDir: 
 Source: {#BuildFolder}\data\ai\*;                                 DestDir: {app}\data\ai\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#DLLFolder}\glew32.dll;                        DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
 Source: {#DLLFolder}\libopusfile-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
+Source: {#DLLFolder}\libopus-0.dll;                     DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
+Source: {#DLLFolder}\libtermcap-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
 Source: {#DLLFolder}\libgmodule-2.0-0.dll;                        DestDir: {app};            Flags: ignoreversion;                                             Components: "Widelands"
 Source: {#DLLFolder}\libreadline7.dll;                        DestDir: {app};            Flags: ignoreversion;                                                 Components: "Widelands"
 Source: {#DLLFolder}\libicuuc62.dll;                    DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
