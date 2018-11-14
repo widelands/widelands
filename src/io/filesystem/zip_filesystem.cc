@@ -273,8 +273,9 @@ FileSystem* ZipFilesystem::make_sub_file_system(const std::string& path) {
 	}
 	if (!is_directory(path)) {
 		throw wexception(
-		   "ZipFilesystem::make_sub_file_system: The path '%s' needs to be a directory in zip file '%s'.",
-		   (basedir_in_zip_file_.empty()?path:basedir_in_zip_file_+"/"+path).c_str(),
+		   "ZipFilesystem::make_sub_file_system: The path '%s' needs to be a directory in zip file "
+		   "'%s'.",
+		   (basedir_in_zip_file_.empty() ? path : basedir_in_zip_file_ + "/" + path).c_str(),
 		   zip_file_->path().c_str());
 	}
 
@@ -443,9 +444,8 @@ void ZipFilesystem::write(const std::string& fname, void const* const data, int3
 		   "ZipFilesystem::write", complete_filename,
 		   (boost::format("in path '%s'', Error") % zip_file_->path() % strerror(errno)).str());
 	default:
-		throw FileError(
-		   "ZipFilesystem::write", complete_filename,
-		   (boost::format("in path '%s'") % zip_file_->path()).str());
+		throw FileError("ZipFilesystem::write", complete_filename,
+		                (boost::format("in path '%s'") % zip_file_->path()).str());
 	}
 
 	zipCloseFileInZip(zip_file_->write_handle());

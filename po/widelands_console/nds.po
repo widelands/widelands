@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: 2018-10-21 12:32+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-11-01 16:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr " --<config-entry-name>=Weert överschrifft de Instellung vun de Instellu
 
 #: ../../src/wlapplication_messages.cc:46
 msgid "                      Note: New value will be written to config file"
-msgstr "                      Wahrschau: De neie Weert staht dann in de Instellungen-Datei"
+msgstr "                      Wahrschau: De neje Weert staht dann in de Instellungen-Datei"
 
 #: ../../src/wlapplication_messages.cc:48
 msgid ""

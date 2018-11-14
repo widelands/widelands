@@ -173,7 +173,7 @@ void GameClient::run() {
 	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {
-		UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/progress.png");
+		UI::ProgressWindow* loader_ui = new UI::ProgressWindow();
 		d->modal = loader_ui;
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: 2018-10-23 14:36+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-10-26 10:52+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -474,13 +474,13 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr ""
+msgstr "뒤의 세 개는 선수의 ‘유형’ 버튼을 마우스 왼쪽 버튼으로 클릭해야만 호스팅 손님에서 설정할 수 있습니다. 방장 선수는 또한 각 선수(선수가 시작하는 건물, 창고 및 작업자 설정)와 컴퓨터 선수 부족 및 팀의 초기화를 설정할 수 있습니다."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr ""
+msgstr "(관객이 아닌) 선수와 연결된 모든 손님들은 해당 선수에 대한 부족과 팀을 설정할 수 있습니다."
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid "Map details"
@@ -492,20 +492,20 @@ msgid ""
 " side. A button next to the map name allows the host to change to a "
 "different map. Furthermore, the host is able to set a specific win "
 "condition, and finally can start the game as soon as all players are set up."
-msgstr ""
+msgstr "오른쪽에서 선택한 지도 또는 저장 게임에 대한 정보를 볼 수 있습니다. 지도 이름 옆에있는 버튼을 사용하면 방장이 다른 지도로 변경할 수 있습니다. 또한, 방장은 특정 우승 조건을 설정할 수 있으며, 마지막으로 모든 선수가 설정되는 즉시 놀이를 시작할 수 있습니다."
 
 #: ../../data/txts/tips/atlanteans.lua:4
 msgid ""
 "Keep an eye on your fishers and build a fish breeder’s house. After fish "
 "resources are exhausted in their work area, the fish supply cannot be "
 "regenerated."
-msgstr ""
+msgstr "낚시꾼들을 잘 감시하고 어장 집을 지으십시오. 물고기 자원은 일터에서 고갈되면 다시 살릴 수 없습니다."
 
 #: ../../data/txts/tips/atlanteans.lua:8
 msgid ""
 "Always build a forester’s and a woodcutter’s house, so you will not run out "
 "of logs."
-msgstr ""
+msgstr "항상 숲지킴이와 나무꾼의 집을 지어서 통나무가 떨어지지 않도록 하십시오."
 
 #: ../../data/txts/tips/atlanteans.lua:12
 msgid ""

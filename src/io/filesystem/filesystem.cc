@@ -464,7 +464,7 @@ bool FileSystem::check_writeable_for_data(char const* const path) {
 		fs.fs_unlink(".widelands");
 		return true;
 	} catch (const FileError& e) {
-		log("Directory %s is not writeable - next try\n", path);
+		log("Directory %s is not writeable - next try: %s\n", path, e.what());
 	}
 
 	return false;

@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Benedikt Straub <benedikt-straub@web.de>, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +32,7 @@ msgid ""
 "Dismantle all unproductive small buildings to get some resources for new "
 "buildings."
 msgstr ""
-"Riet all unnützen lütten Husen platt, um Materialien för neie Husen to "
+"Riet all unnützen lütten Husen platt, um Materialien för neje Husen to "
 "kriegen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:49
@@ -122,12 +123,12 @@ msgstr "Verneei de ollen, unnützen Förster-Husen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:102
 msgid "Build Two New Forester’s Houses"
-msgstr "Bau twee neie Förster-Husen"
+msgstr "Bau twee neje Förster-Husen"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:103
 msgid ""
 "Replace the two forester’s houses by new ones to increase productivity."
-msgstr "Wessel de twee Förster-Husen dör neie ut, um de Wöörde to verhogen."
+msgstr "Wessel de twee Förster-Husen dör neje ut, um de Wöörde to verhogen."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:109
 msgid "Find the monastery in the north"
@@ -196,15 +197,15 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:146
 msgid "Recruit new soldiers"
-msgstr "Hüür neie Soldaten an"
+msgstr "Hüür neje Soldaten an"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:148
 msgid "New Soldier Recruiting"
-msgstr "Neie Soldaten anhüren"
+msgstr "Neje Soldaten anhüren"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:149
 msgid "Recruit at least ten new soldiers in your barracks."
-msgstr "Hüür tominnst teihn neie Soldaten in diener Kasern an."
+msgstr "Hüür tominnst teihn neje Soldaten in diener Kasern an."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:150
 msgid "Don’t forget to forge weapons and armor for them."
@@ -1376,5 +1377,5 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr[0] "Neje Upgaav"
+msgstr[1] "Neje Upgaven"
