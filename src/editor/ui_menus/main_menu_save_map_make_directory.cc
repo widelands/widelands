@@ -104,7 +104,8 @@ void MainMenuSaveMapMakeDirectory::edit_changed() {
  * Clicked OK button oder pressed Enter in edit box
  */
 void MainMenuSaveMapMakeDirectory::clicked_ok() {
-	if (!ok_button_.enabled())
+	if (!ok_button_.enabled()) {
 		return;
+	}
 	end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kOk);
 }

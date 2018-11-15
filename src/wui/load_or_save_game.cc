@@ -270,7 +270,8 @@ void LoadOrSaveGame::clicked_delete() {
 
 		UI::WLMessageBox confirmationBox(
 		   parent_->get_parent()->get_parent(),
-		   ngettext("Confirm Deleting File", "Confirm Deleting Files", no_selections), message,
+		   no_selections == 1 ? _("Confirm Deleting File") : _("Confirm Deleting Files"),
+		   message,
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
 		table_.focus();
@@ -310,26 +311,25 @@ void LoadOrSaveGame::clicked_delete() {
 			}
 		}
 		if (!failed_selections.empty()) {
+			const uint32_t no_failed = failed_selections.size();
 			// Notify the player.
-			std::string caption = ngettext("Error Deleting File!",
-			   "Error Deleting Files!", failed_selections.size());
+			const std::string caption = (no_failed == 1) ?
+			   _("Error Deleting File!") : _("Error Deleting Files!");
 			if (filetype_ == FileType::kReplay) {
 				if (selections.size() == 1) {
 					header = _("The replay could not be deleted.");
 				} else {
 					header =
-					   (boost::format(ngettext("%s replay could not be deleted.",
-					   "%s replays could not be deleted.", failed_selections.size()))
-					   % failed_selections.size()).str();
+					   (boost::format(ngettext("%d replay could not be deleted.",
+					   "%d replays could not be deleted.", no_failed)) % no_failed).str();
 				}
 			} else {
 				if (selections.size() == 1) {
 					header = _("The game could not be deleted.");
 				} else {
 					header =
-					   (boost::format(ngettext("%s game could not be deleted.",
-					   "%s games could not be deleted.", failed_selections.size()))
-					   % failed_selections.size()).str();
+					   (boost::format(ngettext("%d game could not be deleted.",
+					   "%d games could not be deleted.", no_failed)) % no_failed).str();
 				}
 			}
 			std::string message = (boost::format("%s\n%s") % header
@@ -568,7 +568,8 @@ void LoadOrSaveGame::fill_table() {
 }
 
 void LoadOrSaveGame::set_show_filenames(bool show_filenames) {
-	if (filetype_ != FileType::kReplay)
+	if (filetype_ != FileType::kReplay) {
 		return;
+	}
 	show_filenames_ = show_filenames;
 }
