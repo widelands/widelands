@@ -249,9 +249,9 @@ return {
 	},
 
 	ms = {
-		name = "بهاس ملايو",
+		name = "Bahasa Melayu",
 		sort_name = "Melayu",
-		font = "arabic"
+		font = "default"
 	},
 
 	my = {

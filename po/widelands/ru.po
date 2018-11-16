@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
-"PO-Revision-Date: 2018-10-26 05:30+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-11-09 06:49+0000\n"
+"PO-Revision-Date: 2018-11-13 17:16+0000\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -629,7 +629,7 @@ msgstr "Выбран каталог: %s"
 #: ../../src/ui_basic/messagebox.cc:86 ../../src/ui_fsmenu/helpwindow.cc:51
 #: ../../src/ui_fsmenu/load_map_or_game.cc:36
 #: ../../src/ui_fsmenu/options.cc:88
-#: ../../src/wui/game_main_menu_save_game.cc:66
+#: ../../src/wui/game_main_menu_save_game.cc:69
 #: ../../src/wui/story_message_box.cc:45
 msgid "OK"
 msgstr "OK"
@@ -641,7 +641,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:57
 #: ../../src/ui_basic/messagebox.cc:92 ../../src/ui_fsmenu/launch_mpg.cc:79
 #: ../../src/ui_fsmenu/options.cc:86
-#: ../../src/wui/game_main_menu_save_game.cc:65 ../../src/wui/login_box.cc:59
+#: ../../src/wui/game_main_menu_save_game.cc:68 ../../src/wui/login_box.cc:59
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -853,7 +853,7 @@ msgid "Make Directory"
 msgstr "Создать каталог"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:70
-#: ../../src/wui/game_main_menu_save_game.cc:61
+#: ../../src/wui/game_main_menu_save_game.cc:64
 #: ../../src/wui/gamedetails.cc:143
 msgid "Filename:"
 msgstr "Имя файла:"
@@ -864,7 +864,7 @@ msgid "unnamed"
 msgstr "Без названия"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:268
-#: ../../src/wui/game_main_menu_save_game.cc:171
+#: ../../src/wui/game_main_menu_save_game.cc:175
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Файл с названием «%s» уже существует. Перезаписать?"
@@ -1961,7 +1961,7 @@ msgstr "ОШИБКА: %s"
 
 #: ../../src/network/internet_gaming.cc:646
 msgid "An unexpected error message has been received about command %1%: %2%"
-msgstr ""
+msgstr "Получено непредвиденное сообщение об ошибке о команде %1%: %2%"
 
 #: ../../src/network/internet_gaming.cc:659
 #, c-format
@@ -1995,11 +1995,11 @@ msgstr "Неизвестно"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 msgid "There is no user with this name logged in."
-msgstr ""
+msgstr "Нет имени пользователя с таким именем."
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The game no longer exists, maybe it has just been closed."
-msgstr ""
+msgstr "Игра больше не существует, возможно, она только что была закрыта."
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "The sent password was incorrect!"
@@ -3442,7 +3442,7 @@ msgstr "Вы действительно хотите покинуть эту и�
 msgid "Save Game"
 msgstr "Сохранить игру"
 
-#: ../../src/wui/game_main_menu_save_game.cc:158
+#: ../../src/wui/game_main_menu_save_game.cc:162
 msgid ""
 "Game Saving Error!\n"
 "Saved game file may be corrupt!\n"
@@ -3450,8 +3450,8 @@ msgid ""
 "Reason given:\n"
 msgstr "Ошибка сохранения игры!\nВозможно файл сохранения поврежден!\n\nПричина:\n"
 
-#: ../../src/wui/game_main_menu_save_game.cc:161
-#: ../../src/wui/game_main_menu_save_game.cc:170
+#: ../../src/wui/game_main_menu_save_game.cc:165
+#: ../../src/wui/game_main_menu_save_game.cc:174
 msgid "Save Game Error!"
 msgstr "Ошибка сохранения игры!"
 
@@ -4031,42 +4031,42 @@ msgstr "Имя карты (запуск повтора)"
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:384
+#: ../../src/wui/load_or_save_game.cc:381
 msgid "Today, %1%:%2%"
 msgstr "Сегодня, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:388
+#: ../../src/wui/load_or_save_game.cc:385
 msgid "saved today at %1%:%2%"
 msgstr "сохранена сегодня в %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:401
+#: ../../src/wui/load_or_save_game.cc:398
 msgid "Yesterday, %1%:%2%"
 msgstr "Вчера, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:405
+#: ../../src/wui/load_or_save_game.cc:402
 msgid "saved yesterday at %1%:%2%"
 msgstr "сохранена вчера в %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/load_or_save_game.cc:411
+#: ../../src/wui/load_or_save_game.cc:408
 msgid "%1% %2%, %3%"
 msgstr "%2% %1%, %3%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month (short name) day (number), year (number). This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:417
+#: ../../src/wui/load_or_save_game.cc:414
 msgid "saved on %1% %2%, %3%"
 msgstr "сохранена %2% %1%, %3%"
 
@@ -4075,7 +4075,7 @@ msgstr "сохранена %2% %1%, %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/wui/load_or_save_game.cc:438
+#: ../../src/wui/load_or_save_game.cc:435
 msgid "SP"
 msgstr "SP"
 
@@ -4085,7 +4085,7 @@ msgstr "SP"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:446
+#: ../../src/wui/load_or_save_game.cc:443
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -4095,31 +4095,31 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:454
+#: ../../src/wui/load_or_save_game.cc:451
 msgid "MP (%1%)"
 msgstr "MP (%1%)"
 
-#: ../../src/wui/load_or_save_game.cc:468
+#: ../../src/wui/load_or_save_game.cc:465
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/load_or_save_game.cc:484
+#: ../../src/wui/load_or_save_game.cc:481
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Этот файл имеет неправильный формат и не может быть загружен. Возможно он создан в старой версии Widelands."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wui/load_or_save_game.cc:487
+#: ../../src/wui/load_or_save_game.cc:484
 msgid "Error message:"
 msgstr "Сообщение об ошибке:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/wui/load_or_save_game.cc:498
-#: ../../src/wui/load_or_save_game.cc:500
+#: ../../src/wui/load_or_save_game.cc:495
+#: ../../src/wui/load_or_save_game.cc:497
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Несовместимо: %s"
