@@ -60,7 +60,8 @@ struct MultilineTextarea : public Panel {
 	}
 
 	void set_text(const std::string&);
-	uint32_t get_eff_w() const {
+	// int instead of uint because of overflow situations
+	int32_t get_eff_w() const {
 		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
 	}
 

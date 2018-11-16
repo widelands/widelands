@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-09 06:49+0000\n"
+"POT-Creation-Date: 2018-11-16 06:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -305,21 +305,21 @@ msgstr ""
 msgid "Creating players"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:231
+#: ../../src/editor/editorinteractive.cc:232
 msgid "Unsaved Map"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:232
+#: ../../src/editor/editorinteractive.cc:233
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:616
+#: ../../src/editor/editorinteractive.cc:617
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr ""
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:620
+#: ../../src/editor/editorinteractive.cc:621
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -328,7 +328,7 @@ msgid "No Name"
 msgstr ""
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:623
+#: ../../src/editor/editorinteractive.cc:624
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -336,7 +336,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:630
+#: ../../src/editor/editorinteractive.cc:631
 #, c-format
 msgid "Loading map “%s”…"
 msgstr ""
@@ -829,18 +829,20 @@ msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:271
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:285
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:331
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:287
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:320
 msgid "Error Saving Map!"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:282
-#, c-format
-msgid ""
-"A file with the name ‘%s.tmp’ already exists. You have to remove it manually."
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
+msgid "File ‘%’ could not be deleted."
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:328
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:286
+msgid "Try saving under a different name!"
+msgstr ""
+
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:317
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1070,7 +1072,7 @@ msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr ""
 
-#: ../../src/logic/editor_game_base.cc:228
+#: ../../src/logic/editor_game_base.cc:318
 msgid "Loading graphics"
 msgstr ""
 
@@ -1093,7 +1095,7 @@ msgid "Loading map…"
 msgstr ""
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1421
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1422
 msgid "Loading…"
 msgstr ""
 
@@ -1338,12 +1340,12 @@ msgid_plural "Recruited %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1281
+#: ../../src/logic/map_objects/tribes/production_program.cc:1280
 msgid "No soldier to train!"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1290
-#: ../../src/logic/map_objects/tribes/production_program.cc:1368
+#: ../../src/logic/map_objects/tribes/production_program.cc:1289
+#: ../../src/logic/map_objects/tribes/production_program.cc:1367
 msgid "No soldier found for this training level!"
 msgstr ""
 
@@ -1608,7 +1610,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/network/gameclient.cc:185 ../../src/network/gamehost.cc:641
-#: ../../src/wlapplication.cc:1313
+#: ../../src/wlapplication.cc:1314
 msgid "Preparing game"
 msgstr ""
 
@@ -2926,11 +2928,11 @@ msgstr ""
 msgid "Load Game"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1108
+#: ../../src/wlapplication.cc:1109
 msgid "Game data error"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1116
+#: ../../src/wlapplication.cc:1117
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -2938,7 +2940,7 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1123
+#: ../../src/wlapplication.cc:1124
 msgid ""
 "Please add this information to your report.\n"
 "\n"
@@ -2946,11 +2948,11 @@ msgid ""
 "It is often – though not always – possible to load it and continue playing."
 msgstr ""
 
-#: ../../src/wlapplication.cc:1250
+#: ../../src/wlapplication.cc:1251
 msgid "Invalid Address"
 msgstr ""
 
-#: ../../src/wlapplication.cc:1251
+#: ../../src/wlapplication.cc:1252
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr ""
 
