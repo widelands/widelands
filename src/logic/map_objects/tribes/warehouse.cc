@@ -299,7 +299,7 @@ WarehouseDescr::WarehouseDescr(const std::string& init_descname,
 	heal_per_second_ = table.get_int("heal_per_second");
 	if (table.has_key("conquers")) {
 		conquers_ = table.get_int("conquers");
-		workarea_info_[conquers_].insert(descname() + " conquer");
+		workarea_info_[conquers_].insert(name() + " conquer");
 	}
 }
 
@@ -1072,7 +1072,7 @@ bool Warehouse::can_create_worker(Game&, DescriptionIndex const worker) const {
 			} else
 				throw wexception("worker type %s needs \"%s\" to be built but that is neither "
 				                 "a ware type nor a worker type defined in the tribe %s",
-				                 w_desc.descname().c_str(), input_name.c_str(),
+				                 w_desc.name().c_str(), input_name.c_str(),
 				                 owner().tribe().name().c_str());
 		}
 	}
