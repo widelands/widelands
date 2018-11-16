@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-02 08:03+0000\n"
-"PO-Revision-Date: 2018-11-03 16:42+0000\n"
+"POT-Creation-Date: 2018-11-09 06:49+0000\n"
+"PO-Revision-Date: 2018-11-14 16:47+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -1490,7 +1490,7 @@ msgstr "Varustaa rekrytoituja ja kouluttaa heistä sotilaita."
 #, lua-format
 msgctxt "frisians_building"
 msgid "The barracks needs %s on average to recruit one soldier."
-msgstr "Parakki tarvitsee keskimäärin %s sotilaan rekrytointiin."
+msgstr "Kasarmi tarvitsee keskimäärin %s sotilaan rekrytointiin."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:3
@@ -2581,7 +2581,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Toimii tukikohtana merentakaiselle siirtokunnalle ja kaupalle. Myös varastoi sinun sotilaita, tuotteita ja työkaluja."
+msgstr "Toimii tukikohtana merentakaiselle asutukselle ja kaupalle. Myös varastoi sinun sotilaita, tuotteita ja työkaluja."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/atlanteans/warehouse/helptexts.lua:16
@@ -2614,7 +2614,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Toimii tukikohtana merentakaiselle siirtokunnalle ja kaupalle. Myös varastoi sinun sotilaita, tuotteita ja työkaluja."
+msgstr "Toimii tukikohtana merentakaiselle asutukselle ja kaupalle. Myös varastoi sinun sotilaita, tuotteita ja työkaluja."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters/helptexts.lua:16
@@ -2648,7 +2648,7 @@ msgctxt "empire_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Toimii tukikohtana merentakaiselle siirtokunnalle ja kaupalle. Myös varastoi sinun sotilaita, tuotteita ja työkaluja."
+msgstr "Toimii tukikohtana merentakaiselle asutukselle ja kaupalle. Myös varastoi sinun sotilaita, tuotteita ja työkaluja."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/warehouses/frisians/headquarters/helptexts.lua:16
@@ -2668,7 +2668,7 @@ msgctxt "frisians_building"
 msgid ""
 "Serves as a base for overseas colonization and trade. Also stores your "
 "soldiers, wares and tools."
-msgstr "Toimii tukikohtana merentakaiselle siirtokunnalle ja kaupalle. Myös varastoi sinun sotilaita, tuotteita ja työkaluja."
+msgstr "Toimii tukikohtana merentakaiselle asutukselle ja kaupalle. Myös varastoi sinun sotilaita, tuotteita ja työkaluja."
 
 #. TRANSLATORS: Helptext for a tribe immovable
 #: ../../data/tribes/immovables/ashes/helptexts.lua:4

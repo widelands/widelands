@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Jukka Pakarinen, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-11-09 06:49+0000\n"
+"PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Jukka Pakarinen, 2018\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -20,110 +21,121 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "Rakenna puutalous ja ruokofarmi"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:29
 msgid "Wood Economy"
-msgstr ""
+msgstr "Puutalous"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:30
 msgid ""
 "Build at least one woodcutter’s house and two forester’s houses to start "
 "producing logs, and a reed farm to start growing reed."
 msgstr ""
+"Rakenna ainakin yksi metsurin mökki ja kaksi metsänhoitajan mökkiä "
+"kaadettujen puiden tuotannon aloittamiseksi, ja ruokofarmi ruoikon "
+"kasvattamisen aloittamiseksi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Start producing bricks"
-msgstr ""
+msgstr "Aloita tuottamaan tiiliä"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:37
 msgid "Brick Economy"
-msgstr ""
+msgstr "Tiilitalous"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:38
 msgid ""
 "Build a brick kiln, a coal mine, a rock mine, a clay pit and a well to start"
 " producing bricks."
 msgstr ""
+"Rakenna tiiliuuni, hiilikaivos, kivikaivos, savikaivanto ja kaivo tiilien "
+"tuotannon aloittamiseksi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:43
 msgid "Gather building materials"
-msgstr ""
+msgstr "Kerää rakennusmateriaaleja"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:45
 msgid "Stockpile Building Materials"
-msgstr ""
+msgstr "Varastoi Rakennusmateriaaleja"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:46
 msgid ""
 "Stockpile some building materials in your headquarters. Gather at least:"
-msgstr ""
+msgstr "Varastoi joitakin rakennusmateriaaleja päämajaasi. Kerää ainakin:"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Tukki"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 × Graniitti"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 × Savi"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 × Tiili"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 × Hiili"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
 msgid "30 × Thatch Reed"
-msgstr ""
+msgstr "30 × Kaislanolki"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
 msgid ""
 "Remember that you can set target quantities for most of these wares in your "
 "economy settings."
 msgstr ""
+"Muista että voit asettaa tavoitemäärän useimmille näille tuotteille "
+"talousasetuksistasi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:58
 msgid "Produce food for the miners"
-msgstr ""
+msgstr "Tuottaa ruokaa kaivostyöläisille"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:60
 msgid "Food Economy"
-msgstr ""
+msgstr "Ruokatalous"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:61
 msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
+"Rakenna krouvi, kalastajatorppa, savustamo, marjatarha ja hedelmätarhurin "
+"mökki."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
 msgid "Enhance your food economy"
-msgstr ""
+msgstr "Laajenna ruokatalouttasi"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:68
 msgid "Enhance Food Economy"
-msgstr ""
+msgstr "Laajenna Ruokataloutta"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:69
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
+"Rakenna ainakin kaksi maatilaa, mehiläistarha, (marjatarhan viereen), "
+"leipomo, panimo ja toinen krouvi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build an iron mine and a mining infrastructure"
-msgstr ""
+msgstr "Rakenna rautakaivos ja kaivosinfrastuktuuri"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:76
 msgid "Build Mines and Mining Infrastructure"
-msgstr ""
+msgstr "Rakenna Kaivoksia ja Kaivosinfrastuktuuri"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:77
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
@@ -141,23 +153,23 @@ msgstr "Palkkaa Sotilaita"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:85
 msgid "Build a barracks, a reindeer farm and a sewing room."
-msgstr ""
+msgstr "Rakenna kasarmi, poronhoitoalue ja ompeluhuone."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Discover more of the island"
-msgstr ""
+msgstr "Paljasta lisää saarta"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:92
 msgid "Expand and Discover"
-msgstr ""
+msgstr "Laajenna Ja Paljasta"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:93
 msgid "Expand further and discover more of the island."
-msgstr ""
+msgstr "Laajenna kauemmaksi ja paljasta lisää saarta."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 msgid "Train your soldiers"
-msgstr ""
+msgstr "Kouluta sotilaitasi"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:100
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:310
@@ -167,7 +179,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:353
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:359
 msgid "Training Soldiers"
-msgstr ""
+msgstr "Sotilaiden Kouluttaminen"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:101
 msgid ""
@@ -176,38 +188,46 @@ msgid ""
 "shop to sew sturdier garments, and a large armor smithy for better weapons "
 "and helmets."
 msgstr ""
+"Kouluta sotilas korkemmalle mahdolliselle tasolle. Sotilaita koulutetaan "
+"harjoitusleireillä ja harjoitteluareenoilla. Tarvitselle kultakaivoksen, "
+"räätälin puodin ompelemaan lujia vaatteita ja suuri haarniskapaja paremmille"
+" aseille ja kypärille."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:106
 msgid "Defeat the enemy!"
-msgstr ""
+msgstr "Kukista vihollinen!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:108
 msgid "Defeat the Enemy!"
-msgstr ""
+msgstr "Kukista Vihollinen!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:109
 msgid "Destroy the enemy tribe’s headquarters."
-msgstr ""
+msgstr "Tuhoa vihollisheimon päämaja."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:114
 msgid "Escape from the floods"
-msgstr ""
+msgstr "Pakene tulvalta"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid "Flee from the Floods"
-msgstr ""
+msgstr "Pakene Tulvalta"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
+"Rakenna satama, kutomo ja telakka, minkä jälkeen aloita tutkimusmatka "
+"paetaksesi myrskytulvaa ennen kuin se hukuttaa saaren."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:118
 msgid ""
 "You can build the port either on the easternmost tip of the island or in the"
 " place where the enemy’s headquarters stood."
 msgstr ""
+"Voit rakentaa sataman joko saaren itäisimpään kärkeen tai paikkaan, jossa "
+"vihollisen päämaja sijaitsi."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:127
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:136
@@ -215,11 +235,11 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Introduction"
-msgstr ""
+msgstr "Esittely"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:128
 msgid "Welcome!"
-msgstr ""
+msgstr "Tervetuloa!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:130
@@ -227,6 +247,8 @@ msgid ""
 "Welcome to the beautiful isle of Langeness! I am Reebaud, the chieftain of "
 "this pristine island."
 msgstr ""
+"Terve tuloa kauniille Langenessin saarelle! Olen Reebaud, tämän "
+"koskemattoman saaren päällikkö."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:133
@@ -235,10 +257,14 @@ msgid ""
 "the Danes in the North, the Vikings in the East… So, I decided to lead my "
 "tribe away to start a quiet, peaceful life on this untouched island."
 msgstr ""
+"Heimoni ja minä olemme juuri saapuneet tänne mantereelta. Siellä oli "
+"taisteluja tanskalaisen kanssa pohjoisessa ja idässä viikingit… Päätin siksi"
+" johtaa heimoni pois aloittaaksemme hiljaisen ja rauhallisen elämän tällä "
+"koskemattomalla saarella."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
 msgid "A new home"
-msgstr ""
+msgstr "Uusi koti"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:139
@@ -246,6 +272,8 @@ msgid ""
 "This is as good a place as any to start building our new home. First of all,"
 " we must ensure a stable supply of basic building materials."
 msgstr ""
+"Tämä jos mikä on hyvä paikka aloittaa uuden kodin rakentamiseen. Ensiksi "
+"meidän tulee varmistaa vakaa perusrakennusmateriaalien toimitus."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:142
@@ -253,10 +281,12 @@ msgid ""
 "I have asked Hauke, one of my advisors to oversee the construction of our "
 "settlement."
 msgstr ""
+"Olen pyytänyt Haukea, joka on yksi neuvonantajistani, tarkkailemaan "
+"siirtokuntamme rakentamista."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:146
 msgid "The first buildings"
-msgstr ""
+msgstr "Ensimmäiset rakennukset"
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:148
@@ -264,6 +294,7 @@ msgid ""
 "Greetings, Chieftain Reebaud! I will start with the colonization of the "
 "island straight away."
 msgstr ""
+"Tervehdys, päällikkö Reebaund! Aloitan saaren asuttamisen välittömästi."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:151
@@ -272,6 +303,10 @@ msgid ""
 "by adding some logs and granite. The roofs are thatched with reed, "
 "naturally. Nothing is better suited to keep the rain out."
 msgstr ""
+"Kuten kaikki Vapaamieliset, rakennamme mökkimme pääasiassa tiilistä. "
+"Parantelemme niitä lisäämällä niihin kaadettuja puita ja graniittia. Katot "
+"ovat peitelty kaislanoljilla, luonnollisesti. Mikään ei sovellu sitä "
+"paremmin sateen pitämiseksi ulkona."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:154
@@ -280,6 +315,9 @@ msgid ""
 "grow well on this island; better build at least two houses for foresters and"
 " one for a woodcutter."
 msgstr ""
+"Meidän pitäisi käydä pitämään huolta puutuotannosta. Puut eivät näytä "
+"kasvavan kovin hyvin tällä saarella; parempi rakentaa ainakin kaksi mökkiä "
+"metsänhoitajille ja yksi metsurille."
 
 #. TRANSLATORS: Hauke – Introduction 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:157
@@ -289,10 +327,15 @@ msgid ""
 "Reed is easily cultivated, so the reed farmer doesn’t need anything more to "
 "start growing thatch reed."
 msgstr ""
+"Lisäksi meidän olisi parasta rakentaa pian myös ruokofarmi. Jopa ruokofarmit"
+" tarvitsevat ruoikkoa niiiden rakentamiseksi, meidän täytyy huolehtia ettei "
+"ne lopu ennen kuin voimme kasvattaa sitä itse. Ruoikko kasvaa helposti, "
+"joten ruokofarmari ei tarvitse mitään muuta aloittaakseen kaislanolkien "
+"kasvattamisen."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:162
 msgid "Building our new home"
-msgstr ""
+msgstr "Uuden kotimme rakentaminen"
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:164
@@ -303,6 +346,12 @@ msgid ""
 "rocks, but I don’t see any here. Perhaps these hills contain enough stones "
 "to mine some granite."
 msgstr ""
+"Meidän puu ja ruoikko toimitukset ovat taattuja. Nyt meidän täytyy pitää "
+"huoli meidän tiilien toimituksesta. Tiiliä poltetaan tiiliuunissa "
+"graniitista ja savesta, joten meidän tarvitseen ensin tuottaa niitä. "
+"Mantereella olimme tottuneet leikkaamaan graniittia kivikosta, mutta en näe "
+"täällä yhtään niitä. Ehkäpä nämä kukkulat sisältävät riittävästi kiviä "
+"graniitin kaivamiseksi."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:167
@@ -312,6 +361,11 @@ msgid ""
 "space for digging around his clay pit. It might be a good idea to build some"
 " sentinels to expand."
 msgstr ""
+"Savea on helppo tehdä: Savenkaivaja työskentelee savikaivannossa ja "
+"yksinkertaisesti kaivaa maata sekä sekoittaa siihen vettä. Varmista vain, "
+"että hänellä on riittävästi tilaa savikaivannon ympärillä kaivamiseen. "
+"Saattaa olla hyvä ajatus rakentaa joitakin vahtimökkejä laajentaaksesi "
+"aluetta."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:170
@@ -320,6 +374,10 @@ msgid ""
 "Build a coal mine to make sure we don’t run out. No coal means no bricks, no"
 " bricks means no mines, no mines mean no coal… you can see the problem."
 msgstr ""
+"Polttaaksesi tiiliä, tiiliuuni tarvitsee tulta. Meidän pitää käyttää hiiltä "
+"polttoaineena. Rakenna hiilikaivos varmistaaksesi ettei hiili lopu. Hiilen "
+"loppuminen tarkoittaa tiilien loppumista, ja tiilien loppuminen kaivoksien "
+"loppua, ja kaivoksien loppuminen hiilen loppumista… kai naet tämän ongelman."
 
 #. TRANSLATORS: Hauke – Introduction 4
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:173
@@ -327,10 +385,12 @@ msgid ""
 "Also, build a well – nobody likes to drink salt water, and it is no good for"
 " making clay."
 msgstr ""
+"Rakenna myös kaivo – kukaan ei pidä suolaveden juomisesta, ja se ei myöskään"
+" ole hyvää saven tekemiseen."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:178
 msgid "Our first settlement"
-msgstr ""
+msgstr "Meidän ensimmäinen siirtokunta"
 
 #. TRANSLATORS: Reebaud – Introduction 5
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:180
@@ -342,7 +402,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Reed Shortages"
-msgstr ""
+msgstr "Ruoikosta Pula"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:186
 msgid "Build another reed farm"
@@ -365,11 +425,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:192
 msgid "Clay Shortages"
-msgstr ""
+msgstr "Savesta Pula"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:193
 msgid "Build another clay pit"
-msgstr ""
+msgstr "Rakenna toinen savikaivanto"
 
 #. TRANSLATORS: Hauke – no clay
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:195
@@ -390,11 +450,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Brick Shortages"
-msgstr ""
+msgstr "Tiilestä Pula"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:202
 msgid "Build another brick kiln"
-msgstr ""
+msgstr "Rakenna toinen tiiliuuni"
 
 #. TRANSLATORS: Hauke – no bricks
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:204
@@ -414,11 +474,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:208
 msgid "Warehouses"
-msgstr ""
+msgstr "Varastot"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:209
 msgid "Build a warehouse in the east"
-msgstr ""
+msgstr "Rakenna varasto itään"
 
 #. TRANSLATORS: Hauke – build a warehouse
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:211
@@ -432,11 +492,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:215
 msgid "Hungry Miners"
-msgstr ""
+msgstr "Nälkäiset Kaivostyöläiset"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:216
 msgid "The miners are protesting…"
-msgstr ""
+msgstr "Kaivostyöläiset protestoivat…"
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:218
@@ -464,16 +524,18 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Enhancing the Food Economy"
-msgstr ""
+msgstr "Ruokatalouden Laajentaminen"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:229
 msgid "Feeding the soldiers"
-msgstr ""
+msgstr "Sotilaiden ruokkiminen"
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:231
 msgid "Well done. The miners are satisfied and have started working again."
 msgstr ""
+"Hyvin tehty. Kaivostyöläiset ovat tyytyväisiä ja ovat aloittaneet taas "
+"työskennellä."
 
 #. TRANSLATORS: Hauke – better food
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:234
@@ -504,11 +566,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:245
 msgid "Build a Mining Economy"
-msgstr ""
+msgstr "Rakenna Kaivostalous"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:246
 msgid "Mining economy"
-msgstr ""
+msgstr "Kaivostalous"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:248
@@ -530,7 +592,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:255
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:264
 msgid "Be Prepared"
-msgstr ""
+msgstr "Ole Valmistautunut"
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:258
@@ -538,6 +600,8 @@ msgid ""
 "Our mines are working well. We can now produce all the tools we need, and "
 "some weapons as well."
 msgstr ""
+"Kaivoksemme toimivat hyvin. Voimme nyt tuottaa kaikkia tarvitsemiamme "
+"työkaluja ja myös joitakin aseita."
 
 #. TRANSLATORS: Reebaud – recruit 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:261
@@ -576,17 +640,18 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:277
 msgid "Explore the Island"
-msgstr ""
+msgstr "Tutki Saari"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:278
 msgid "Expanding"
-msgstr ""
+msgstr "Laajentaminen"
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:280
 msgid ""
 "Our barracks has started working, and we are recruiting new soldiers now."
 msgstr ""
+"Kasarmimme on aloittanut toimintansa ja me palkkaamme nyt uusia sotilaita."
 
 #. TRANSLATORS: Reebaud – expand
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:283
@@ -606,13 +671,13 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:297
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemies!"
-msgstr ""
+msgstr "Viholliset!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:292
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:298
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:304
 msgid "Enemy sighted!"
-msgstr ""
+msgstr "Vihollinen havaittu!"
 
 #. TRANSLATORS: Reebaud – enemy sighted
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:294
@@ -656,7 +721,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:320
 msgid "Frisian fighting"
-msgstr ""
+msgstr "Vapaamieliset taistelevat"
 
 #. TRANSLATORS: Reebaud – train soldiers 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:322
@@ -725,7 +790,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:348
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "Sotilaamme ovat vahvoja"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:350
@@ -734,7 +799,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:354
 msgid "Are our soldiers strong enough?"
-msgstr ""
+msgstr "Ovatko sotilaamme riittävän vahvoja?"
 
 #. TRANSLATORS: Hauke – attack enemy 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:356
@@ -747,7 +812,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:360
 msgid "Our soldiers are strong enough"
-msgstr ""
+msgstr "Sotilaamme ovat riittävän vahvoja"
 
 #. TRANSLATORS: Reebaud – attack enemy 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:362
@@ -761,12 +826,12 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Beware!"
-msgstr ""
+msgstr "Ole Varuilla!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:367
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:373
 msgid "Not strong enough"
-msgstr ""
+msgstr "Ei riittävän vahvoja"
 
 #. TRANSLATORS: Hauke – beware of early attacks 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:369
@@ -797,12 +862,12 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:381
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:387
 msgid "Enemy Defeated"
-msgstr ""
+msgstr "Vihollinen Kukistettu"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:382
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:388
 msgid "Enemy defeated!"
-msgstr ""
+msgstr "Vihollinen kukistettu!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:384
@@ -821,12 +886,12 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:393
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:399
 msgid "Storm Flood"
-msgstr ""
+msgstr "Myrskytulva"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:394
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:400
 msgid "The island is flooding!"
-msgstr ""
+msgstr "Saari tulvii!"
 
 #. TRANSLATORS: Reebaud – enemy defeated 3
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:396
@@ -856,11 +921,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:409
 msgid "Don’t Forget the Soldiers"
-msgstr ""
+msgstr "Älä Unohda Sotilaita"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
 msgid "Soldiers to the port!"
-msgstr ""
+msgstr "Sotilaita satamaan!"
 
 #. TRANSLATORS: Reebaud – rising water
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
@@ -873,7 +938,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:416
 msgid "Victory"
-msgstr ""
+msgstr "Voitto"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid "We escaped!"
