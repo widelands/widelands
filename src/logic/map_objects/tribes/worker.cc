@@ -2101,7 +2101,7 @@ void Worker::dropoff_update(Game& game, State&) {
 /// Give the recruit his diploma and say farwell to him.
 void Worker::start_task_releaserecruit(Game& game, Worker& recruit) {
 	push_task(game, taskReleaserecruit);
-	molog("Starting to release %s %u...\n", recruit.descr().descname().c_str(), recruit.serial());
+	molog("Starting to release %s %u...\n", recruit.descr().name().c_str(), recruit.serial());
 	return schedule_act(game, 5000);
 }
 
