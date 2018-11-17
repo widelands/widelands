@@ -299,13 +299,13 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		complete_filename,
 		binary ? FileSystem::ZIP : FileSystem::DIR
 	);
-	uint32_t error = gsh.save();
+	GenericSaveHandler::Error error = gsh.save();
 
 	// If only the temporary backup couldn't be deleted, we still treat it as
 	// success. Automatic cleanup will deal with later. No need to bother the
 	// player with it.
-	if (error == GenericSaveHandler::kSuccess ||
-	    error == GenericSaveHandler::kDeletingBackupFailed) {
+	if (error == GenericSaveHandler::Error::kSuccess ||
+	    error == GenericSaveHandler::Error::kDeletingBackupFailed) {
 		egbase.get_ibase()->log_message(_("Map saved"));
 		return true;
 	}
@@ -317,7 +317,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 
 	// If only the backup failed (likely just because of a file lock),
 	// then leave the dialog open for the player to try with a new filename.
-	if (error == GenericSaveHandler::kBackupFailed) {
+	if (error == GenericSaveHandler::Error::kBackupFailed) {
 	  return false;
 	}
 

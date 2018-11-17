@@ -244,11 +244,13 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 		complete_filename,
 		binary ? FileSystem::ZIP : FileSystem::DIR
 	);
-	uint32_t error = gsh.save();
-	if (error == GenericSaveHandler::kSuccess ||
-	    error == GenericSaveHandler::kDeletingBackupFailed) {
-			// No need to bother the player if only the temporary backup couldn't be
-			// deleted. Automatic cleanup will try to deal with it later.
+	GenericSaveHandler::Error error = gsh.save();
+
+	// If only the temporary backup couldn't be deleted, we still treat it as
+	// success. Automatic cleanup will deal with later. No need to bother the
+	// player with it.
+	if (error == GenericSaveHandler::Error::kSuccess ||
+	    error == GenericSaveHandler::Error::kDeletingBackupFailed) {
 		game.save_handler().set_current_filename(complete_filename);
 		igbase().log_message(_("Game saved"));
 		return true;
@@ -262,7 +264,7 @@ bool GameMainMenuSaveGame::save_game(std::string filename, bool binary) {
 
 	// If only the backup failed (likely just because of a file lock),
 	// then leave the dialog open for the player to try with a new filename.
-	if (error == GenericSaveHandler::kBackupFailed) {
+	if (error == GenericSaveHandler::Error::kBackupFailed) {
 	  return false;
 	}
 

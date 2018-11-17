@@ -262,8 +262,8 @@ bool SaveHandler::save_game(Widelands::Game& game,
 
 	// Ignore it if only the temporary backup wasn't deleted
 	// but save was successfull otherwise
-	if (gsh.error() == GenericSaveHandler::kSuccess ||
-	    gsh.error() == GenericSaveHandler::kDeletingBackupFailed) {
+	if (gsh.error() == GenericSaveHandler::Error::kSuccess ||
+	    gsh.error() == GenericSaveHandler::Error::kDeletingBackupFailed) {
 		return true;
 	}
 

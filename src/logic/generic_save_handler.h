@@ -27,20 +27,6 @@
 
 #include "io/filesystem/filesystem.h"
 
-// just some constants for convenience
-namespace {
-	enum ErrorBitIndex : uint32_t {
-		bitCreatingDirFailed = 0,
-		bitBackupFailed,
-		bitSavingDataFailed,
-		bitCorruptFileLeft,
-		bitDeletingBackupFailed,
-		bitRestoringBackupFailed,
-		bitUnexpectedError,
-		maxErrors
-	};
-}
-
 /**
  * Class that provides handling all errors for generic file saving.
  * It stores error codes and error messages.
@@ -54,25 +40,19 @@ namespace {
 // to provide a naming scheme, etc.
 class GenericSaveHandler {
 public:
-	// error constants; usable as bit masks
-	static constexpr uint32_t
-	   kSuccess = 0;
-	static constexpr uint32_t
-	   kCreatingDirFailed = uint32_t(1) << bitCreatingDirFailed;
-	static constexpr uint32_t
-	   kBackupFailed = uint32_t(1) << bitBackupFailed;
-	static constexpr uint32_t
-	   kSavingDataFailed = uint32_t(1) << bitSavingDataFailed;
-	static constexpr uint32_t
-	   kCorruptFileLeft = uint32_t(1) << bitCorruptFileLeft;
-	static constexpr uint32_t
-	   kDeletingBackupFailed = uint32_t(1) << bitDeletingBackupFailed;
-	static constexpr uint32_t
-	   kRestoringBackupFailed = uint32_t(1) << bitRestoringBackupFailed;
-	static constexpr uint32_t
-	   kUnexpectedError = uint32_t(1) << bitUnexpectedError;
-	static constexpr uint32_t
-	   kAllErrors = (1 << maxErrors) - 1;
+	// error constants; also usable as bit masks
+	enum class Error : uint32_t {
+		kNone                  =   0,
+		kSuccess               =   0,
+		kCreatingDirFailed     =   1,
+		kBackupFailed          =   2,
+		kDeletingBackupFailed  =   4,
+		kSavingDataFailed      =   8,
+		kCorruptFileLeft       =  16,
+		kRestoringBackupFailed =  32,
+		kUnexpectedError       =  64,
+		kAllErrors             = 127
+	};
 
 	explicit GenericSaveHandler(
 	   std::function<void(FileSystem&)> do_save,  // function that actually saves data to the filesystem
@@ -83,7 +63,8 @@ public:
      dir_(FileSystem::fs_dirname(complete_filename.c_str())),
      filename_(FileSystem::fs_filename(complete_filename.c_str())),
      type_(type),
-     error_(kSuccess) {};
+//     error_(Error::kSuccess) {};
+     error_(static_cast<Error>(1132)) {};
 
 	/**
 	 * Tries to save a file.
@@ -96,14 +77,14 @@ public:
 	 * Error messages for all errors are written to the log but also stored.
 	 * Stores and returns an error code (bit mask of all occurred errors).
 	 */
-	uint32_t save();
+	Error save();
 
 	// returns the stored error code (of the last saving operation)
-	uint32_t error() { return error_; };
+	Error error() { return error_; };
 
 	// Returns the combination of error_messages (of occurred errors)
 	// specified by a bit mask.
-	std::string error_message(uint32_t error_mask = kAllErrors);
+	std::string error_message(Error error_mask = Error::kAllErrors);
 
 	// Generates a localized formatted message describing the result of
 	// the last saving attempt.
@@ -120,19 +101,51 @@ private:
 	// Backup filename is automatically generated when saving but is also
 	// stored for generating messages containing backup-related things.
 	std::string backup_filename_;
-	uint32_t error_;
-	std::string error_msg_[maxErrors];
 
-	void clear_errors();
+	Error error_;
+
+	static constexpr uint32_t maxErrors_ = 7;
+	static_assert(
+	   (1ul << maxErrors_) == static_cast<uint32_t>(Error::kAllErrors) + 1,
+	   "value of maxErrors_ doesn't match!");
+	std::string error_msg_[maxErrors_];
+	
+	// Returns the lowest array index of the an error.
+	// Intended for use with single errors to get their array index.
+	uint32_t get_index(Error);
+
+	void clear();
 
 	// Finds a suitable backup filename and tries to rename a file.
 	// Stores an errorcode and error message (if applicable).
 	void make_backup();
 
-	// Saves a file. Assumes file doesn't exist.
+	// Saves a file. Assumes file doesn't exist yet.
 	// Stores an errorcode and error message (if applicable).
 	void save_file();
 };
 
+
+inline constexpr GenericSaveHandler::Error
+operator|(GenericSaveHandler::Error e1, GenericSaveHandler::Error e2) {
+	return static_cast<GenericSaveHandler::Error>
+	   (static_cast<uint32_t>(e1) | static_cast<uint32_t>(e2));
+}
+
+inline constexpr GenericSaveHandler::Error
+operator&(GenericSaveHandler::Error e1, GenericSaveHandler::Error e2) {
+	return static_cast<GenericSaveHandler::Error>
+	   (static_cast<uint32_t>(e1) & static_cast<uint32_t>(e2));
+}
+
+inline GenericSaveHandler::Error&
+operator|=(GenericSaveHandler::Error& e1, GenericSaveHandler::Error e2) {
+	return e1 = e1 | e2;
+}
+
+inline GenericSaveHandler::Error&
+operator&=(GenericSaveHandler::Error& e1, GenericSaveHandler::Error e2) {
+	return e1 = e1 & e2;
+}
 
 #endif  // end of include guard: WL_LOGIC_GENERIC_SAVE_HANDLER_H
