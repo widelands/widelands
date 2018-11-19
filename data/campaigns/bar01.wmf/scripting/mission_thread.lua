@@ -328,6 +328,7 @@ function mission_complete_thread()
 
    message_box_objective(plr, msg_mission_complete)
    plr:reveal_scenario("barbariantut01")
+   p1:reveal_campaign("campsect1")
 end
 
 
