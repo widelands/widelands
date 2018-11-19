@@ -37,6 +37,8 @@
 struct MainMenuSaveMapMakeDirectory : public UI::Window {
 	MainMenuSaveMapMakeDirectory(UI::Panel*, char const*);
 
+	void start() override;
+
 	char const* get_dirname() {
 		return dirname_.c_str();
 	}

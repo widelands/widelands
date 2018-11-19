@@ -70,6 +70,9 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
 	   boost::bind(&MainMenuSaveMapMakeDirectory::edit_changed, this));
 	edit_.ok.connect(
 	   boost::bind(&MainMenuSaveMapMakeDirectory::clicked_ok, this));
+	edit_.cancel.connect(
+	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
+	               boost::ref(*this), UI::Panel::Returncodes::kBack));
 	ok_button_.sigclicked.connect(
 	   boost::bind(&MainMenuSaveMapMakeDirectory::clicked_ok, this));
 	ok_button_.set_enabled(!dirname_.empty());
@@ -77,6 +80,9 @@ MainMenuSaveMapMakeDirectory::MainMenuSaveMapMakeDirectory(UI::Panel* const pare
 	   boost::bind(&MainMenuSaveMapMakeDirectory::end_modal<UI::Panel::Returncodes>,
 	               boost::ref(*this), UI::Panel::Returncodes::kBack));
 	center_to_parent();
+}
+
+void MainMenuSaveMapMakeDirectory::start() {
 	edit_.focus();
 }
 

@@ -155,31 +155,37 @@ void MainMenuSaveMap::clicked_ok() {
 void MainMenuSaveMap::clicked_make_directory() {
 	/** TRANSLATORS: A folder that hasn't been given a name yet */
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
-	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
-		// Trim it for preceding/trailing whitespaces in user input
-		boost::trim(fullname);
-		if (g_fs->file_exists(fullname)) {
-			const std::string s = _("A file or directory with that name already exists.");
-			UI::WLMessageBox mbox(this, _("Error Creating Directory!"), s,
-			                      UI::WLMessageBox::MBoxType::kOk);
-			mbox.run<UI::Panel::Returncodes>();
-		} else {
-			try {
-				g_fs->ensure_directory_exists(curdir_);
-				//  Create directory.
-				g_fs->make_directory(fullname);
-			} catch (const FileError& e) {
-				log("directory creation failed in MainMenuSaveMap::"
-				    "clicked_make_directory: %s\n", e.what());
+	bool open_dialogue = true;
+	while (open_dialogue) {
+		open_dialogue = false;
+		if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
+			// Trim it for preceding/trailing whitespaces in user input
+			boost::trim(fullname);
+			if (g_fs->file_exists(fullname)) {
 				const std::string s =
-				   (boost::format(_("Error while creating directory ‘%s’."))
-				   % fullname).str();
+				   _("A file or directory with that name already exists.");
 				UI::WLMessageBox mbox(this, _("Error Creating Directory!"), s,
 				                      UI::WLMessageBox::MBoxType::kOk);
 				mbox.run<UI::Panel::Returncodes>();
+				open_dialogue = true;
+			} else {
+				try {
+					g_fs->ensure_directory_exists(curdir_);
+					//  Create directory.
+					g_fs->make_directory(fullname);
+				} catch (const FileError& e) {
+					log("directory creation failed in MainMenuSaveMap::"
+					    "clicked_make_directory: %s\n", e.what());
+					const std::string s =
+					   (boost::format(_("Error while creating directory ‘%s’."))
+					   % fullname).str();
+					UI::WLMessageBox mbox(this, _("Error Creating Directory!"), s,
+					                      UI::WLMessageBox::MBoxType::kOk);
+					mbox.run<UI::Panel::Returncodes>();
+				}
+				fill_table();
 			}
-			fill_table();
 		}
 	}
 	table_.focus();
