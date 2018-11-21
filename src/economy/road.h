@@ -28,6 +28,7 @@
 #include "logic/roadtype.h"
 
 namespace Widelands {
+struct Request;
 
 class RoadDescr : public RoadBaseDescr {
 public:
@@ -93,22 +94,9 @@ struct Road : public RoadBase {
 private:
 	void cleanup(EditorGameBase&) override;
 
-	void
-	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
-
 private:
-	void set_path(EditorGameBase&, const Path&);
-
-	void mark_map(EditorGameBase&);
-	void unmark_map(EditorGameBase&);
 
 	void link_into_flags(EditorGameBase&) override;
-
-	void request_carrier(CarrierSlot&);
-	static void
-	request_carrier_callback(Game&, Request&, DescriptionIndex, Worker*, PlayerImmovable&);
-
-	uint8_t carriers_count() const;
 
 private:
 	/// Counter that is incremented for every ware served by this road

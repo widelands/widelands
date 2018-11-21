@@ -86,6 +86,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		};
 		load_roads("normal", &normal_road_paths_);
 		load_roads("busy", &busy_road_paths_);
+		load_roads("waterway", &waterway_paths_);
 
 		items_table = table.get_table("wares_order");
 		wares_order_coords_.resize(tribes_.nrwares());
@@ -189,6 +190,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		carrier2_ = add_special_worker(table.get_string("carrier2"));
 		geologist_ = add_special_worker(table.get_string("geologist"));
 		soldier_ = add_special_worker(table.get_string("soldier"));
+		ferry_ = add_special_worker(table.get_string("ferry"));
 
 		const std::string shipname = table.get_string("ship");
 		try {
@@ -327,6 +329,10 @@ DescriptionIndex TribeDescr::port() const {
 	assert(tribes_.building_exists(port_));
 	return port_;
 }
+DescriptionIndex TribeDescr::ferry() const {
+	assert(tribes_.worker_exists(ferry_));
+	return ferry_;
+}
 DescriptionIndex TribeDescr::barracks() const {
 	assert(tribes_.building_exists(barracks_));
 	return barracks_;
@@ -371,12 +377,20 @@ const std::vector<std::string>& TribeDescr::busy_road_paths() const {
 	return busy_road_paths_;
 }
 
+const std::vector<std::string>& TribeDescr::waterway_paths() const {
+	return waterway_paths_;
+}
+
 void TribeDescr::add_normal_road_texture(const Image* texture) {
 	road_textures_.add_normal_road_texture(texture);
 }
 
 void TribeDescr::add_busy_road_texture(const Image* texture) {
 	road_textures_.add_busy_road_texture(texture);
+}
+
+void TribeDescr::add_waterway_texture(const Image* texture) {
+	road_textures_.add_waterway_texture(texture);
 }
 
 const RoadTextures& TribeDescr::road_textures() const {
