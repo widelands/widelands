@@ -23,8 +23,6 @@
 #include <memory>
 
 #include "base/wexception.h"
-#include "io/fileread.h"
-#include "io/filewrite.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/tribes.h"
@@ -37,32 +35,37 @@ Buildcost::Buildcost() : std::map<DescriptionIndex, uint8_t>() {
 Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes)
    : std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {
-		int32_t value = INVALID_INDEX;
-		try {
-			DescriptionIndex const idx = tribes.safe_ware_index(warename);
-			if (count(idx)) {
-				throw GameDataError(
-				   "A buildcost item of this ware type has already been defined: %s", warename.c_str());
-			}
-			value = table->get_int(warename);
-			const uint8_t ware_count = value;
-			if (ware_count != value) {
-				throw GameDataError("Ware count is out of range 1 .. 255");
-			}
-			insert(std::pair<DescriptionIndex, uint8_t>(idx, ware_count));
-		} catch (const WException& e) {
-			throw GameDataError("[buildcost] \"%s=%d\": %s", warename.c_str(), value, e.what());
+		// Read ware index
+		if (!tribes.ware_exists(warename)) {
+			throw GameDataError("Buildcost: Unknown ware: %s", warename.c_str());
 		}
+		DescriptionIndex const idx = tribes.safe_ware_index(warename);
+		if (count(idx) != 0) {
+			throw GameDataError(
+			   "Buildcost: Ware '%s' is listed twice", warename.c_str());
+		}
+
+		// Read value
+		int32_t value = table->get_int(warename);
+		if (value < 1) {
+			throw GameDataError("Buildcost: Ware count needs to be > 0 in \"%s=%d\".\nEmpty buildcost tables are allowed if you wish to have an amount of 0.", warename.c_str(), value);
+		} else if (value > 255) {
+			throw GameDataError("Buildcost: Ware count needs to be <= 255 0 in \"%s=%d\".", warename.c_str(), value);
+		}
+
+		// Add
+		insert(std::pair<DescriptionIndex, uint8_t>(idx, value));
 	}
 }
 
 /**
  * Compute the total buildcost.
  */
-uint32_t Buildcost::total() const {
-	uint32_t sum = 0;
-	for (const_iterator it = begin(); it != end(); ++it)
+Widelands::Quantity Buildcost::total() const {
+	Widelands::Quantity sum = 0;
+	for (const_iterator it = begin(); it != end(); ++it) {
 		sum += it->second;
+	}
 	return sum;
 }
 
@@ -79,8 +82,9 @@ void Buildcost::load(FileRead& fr, const Widelands::TribeDescr& tribe) {
 
 	for (;;) {
 		std::string name = fr.c_string();
-		if (name.empty())
+		if (name.empty()) {
 			break;
+		}
 
 		DescriptionIndex index = tribe.ware_index(name);
 		if (!tribe.has_ware(index)) {
