@@ -10,10 +10,6 @@ tribes:new_productionsite_type {
    enhancement = "empire_farm2",
 
    return_on_dismantle = {
-      planks = 0,
-      granite = 0,
-      marble = 0,
-      marble_column = 0
    },
 
    animations = {
