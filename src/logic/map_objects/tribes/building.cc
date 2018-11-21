@@ -152,15 +152,13 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 
 	if (table.has_key("enhancement_cost")) {
 		enhanced_building_ = true;
-		try {
-			enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
-			return_enhanced_ =
-			   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
-		} catch (const WException& e) {
-			throw wexception("The enhanced building '%s' must define \"enhancement_cost\""
-			                 "and \"return_on_dismantle_on_enhanced\": %s",
-			                 name().c_str(), e.what());
+		if (!table.has_key("return_on_dismantle_on_enhanced")) {
+			throw wexception("The enhanced building '%s' has an \"enhancement_cost\" but no \"return_on_dismantle_on_enhanced\"",
+			                 name().c_str());
 		}
+		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
+		return_enhanced_ =
+		   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
 	}
     can_be_dismantled_ = (return_dismantle_.total() > 0 || return_enhanced_.total() > 0);
 
