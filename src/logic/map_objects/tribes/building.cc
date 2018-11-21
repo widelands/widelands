@@ -140,6 +140,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	// scenario buildings.
 	if (table.has_key("return_on_dismantle")) {
 		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
+		can_be_dismantled_ = true;
 	}
 	if (table.has_key("buildcost")) {
 		buildable_ = true;
@@ -152,6 +153,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 
 	if (table.has_key("enhancement_cost")) {
 		enhanced_building_ = true;
+		can_be_dismantled_ = true;
 		if (!table.has_key("return_on_dismantle_on_enhanced")) {
 			throw wexception("The enhanced building '%s' has an \"enhancement_cost\" but no \"return_on_dismantle_on_enhanced\"",
 			                 name().c_str());
@@ -160,7 +162,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		return_enhanced_ =
 		   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
 	}
-    can_be_dismantled_ = (return_dismantle_.total() > 0 || return_enhanced_.total() > 0);
 
 	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
 
