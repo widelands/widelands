@@ -134,19 +134,19 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		}
 	}
 
-    // We define a building as buildable if it has a "buildcost" table.
-    // A buildable building must also define "return_on_dismantle".
-    // However, we support "return_on_dismantle" without "buildable", because this is used by custom scenario buildings.
-    if (table.has_key("return_on_dismantle")) {
-        return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
-    }
+	// We define a building as buildable if it has a "buildcost" table.
+	// A buildable building must also define "return_on_dismantle".
+	// However, we support "return_on_dismantle" without "buildable", because this is used by custom
+	// scenario buildings.
+	if (table.has_key("return_on_dismantle")) {
+		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
+	}
 	if (table.has_key("buildcost")) {
 		buildable_ = true;
-        if (!table.has_key("return_on_dismantle")) {
-            throw wexception(
-			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"",
-			   name().c_str());
-        }
+		if (!table.has_key("return_on_dismantle")) {
+			throw wexception(
+			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"", name().c_str());
+		}
 		buildcost_ = Buildcost(table.get_table("buildcost"), egbase_.tribes());
 	}
 
