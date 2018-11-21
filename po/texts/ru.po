@@ -4,10 +4,11 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2015-2016
+# Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
 # Максим Дронь <dronmax@gmail.com>, 2015
 # CupIvan <mail@cupivan.ru>, 2015
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Viktor S <awsswa59@gmail.com>, 2018
+# Yuriy Sokolov <lention@mail.ru>, 2015,2018
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -17,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-06 16:24+0000\n"
-"PO-Revision-Date: 2018-04-06 16:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 13:56+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,14 +91,14 @@ msgstr "В операционной системе MacOS файл с имене�
 
 #: ../../data/txts/LICENSE.lua:22
 msgid "This game comes as-is and without any warranty."
-msgstr ""
+msgstr "Эта игра поставляется как есть и без каких-либо гарантий."
 
 #: ../../data/txts/LICENSE.lua:23
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr ""
+msgstr "Для дополнительной информации и поддержки вы можете связаться с нами: %1% (Веб сайт, Частые вопросы, Форум для вопросов или общая поддержка), %2% (Список ошибок) и %3%(Переводы)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -207,11 +208,11 @@ msgid "Widelands Translators"
 msgstr "Переводчики Widelands"
 
 #: ../../data/txts/developers.lua:3
-msgid "Atlantean"
+msgid "Atlanteans"
 msgstr "Атланты"
 
 #: ../../data/txts/developers.lua:3
-msgid "Barbarian"
+msgid "Barbarians"
 msgstr "Варвары"
 
 #: ../../data/txts/developers.lua:3
@@ -255,8 +256,8 @@ msgid "FreeBSD"
 msgstr "FreeBSD"
 
 #: ../../data/txts/developers.lua:3
-msgid "Frisian"
-msgstr ""
+msgid "Frisians"
+msgstr "Фризы"
 
 #: ../../data/txts/developers.lua:3
 msgid "Graphicians"
@@ -625,7 +626,7 @@ msgstr "Для производства кирпичей вам необходи
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr ""
+msgstr "Если не хотите остаться без брёвен, всегда стройте домик лесника."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

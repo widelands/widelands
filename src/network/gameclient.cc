@@ -171,7 +171,8 @@ void GameClient::run() {
 	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {
-		UI::ProgressWindow* loader_ui = new UI::ProgressWindow("images/loadscreens/progress.png");
+		UI::ProgressWindow* loader_ui = new UI::ProgressWindow();
+		d->modal = loader_ui;
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
@@ -204,7 +205,7 @@ void GameClient::run() {
 		d->lasttimestamp = game.get_gametime();
 		d->lasttimestamp_realtime = SDL_GetTicks();
 
-		d->modal = game.get_ibase();
+		d->modal = igb;
 		game.run(loader_ui, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 		                                           Widelands::Game::NewMPScenario :
 		                                           Widelands::Game::NewNonScenario,
@@ -217,7 +218,6 @@ void GameClient::run() {
 		d->modal = nullptr;
 		d->game = nullptr;
 	} catch (...) {
-		d->modal = nullptr;
 		WLApplication::emergency_save(game);
 		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
@@ -225,6 +225,7 @@ void GameClient::run() {
 		if (internet_) {
 			InternetGaming::ref().logout("CLIENT_CRASHED");
 		}
+		d->modal = nullptr;
 		throw;
 	}
 }
@@ -584,7 +585,6 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		// New map was set, so we clean up the buffer of a previously requested file
 		if (file_)
 			delete file_;
-		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 		break;
 	}
 
@@ -763,8 +763,11 @@ void GameClient::handle_packet(RecvPacket& packet) {
 
 	case NETCMD_SETTING_ALLPLAYERS: {
 		d->settings.players.resize(packet.unsigned_8());
-		for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+		for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 			receive_one_player(i, packet);
+		}
+		// Map changes are finished here
+		Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 		break;
 	}
 	case NETCMD_SETTING_PLAYER: {
@@ -790,7 +793,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		break;
 	}
 	case NETCMD_WIN_CONDITION: {
-		d->settings.win_condition_script = packet.string();
+		d->settings.win_condition_script = g_fs->FileSystem::fix_cross_file(packet.string());
 		break;
 	}
 

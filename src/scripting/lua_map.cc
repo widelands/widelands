@@ -373,25 +373,33 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 	WaresWorkersMap c_workers;
 	for (const Worker* w : pi->get_workers()) {
 		DescriptionIndex i = tribe.worker_index(w->descr().name());
-		if (!c_workers.count(i))
+		if (!valid_workers.count(i)) {
+			// Ignore workers that will be consumed as inputs
+			continue;
+		}
+		if (!c_workers.count(i)) {
 			c_workers.insert(WorkerAmount(i, 1));
-		else
+		} else {
 			c_workers[i] += 1;
-		if (!setpoints.count(std::make_pair(i, Widelands::WareWorker::wwWORKER)))
+		}
+		if (!setpoints.count(std::make_pair(i, Widelands::WareWorker::wwWORKER))) {
 			setpoints.insert(std::make_pair(std::make_pair(i, Widelands::WareWorker::wwWORKER), 0));
+		}
 	}
 
 	// The idea is to change as little as possible
 	for (const auto& sp : setpoints) {
 		const Widelands::DescriptionIndex& index = sp.first.first;
 		const WorkerDescr* wdes = tribe.get_worker_descr(index);
-		if (sp.second != 0 && !valid_workers.count(index))
+		if (sp.second != 0 && !valid_workers.count(index)) {
 			report_error(L, "<%s> can't be employed here!", wdes->name().c_str());
+		}
 
 		Widelands::Quantity cur = 0;
 		WaresWorkersMap::iterator i = c_workers.find(index);
-		if (i != c_workers.end())
+		if (i != c_workers.end()) {
 			cur = i->second;
+		}
 
 		int d = sp.second - cur;
 		if (d < 0) {
@@ -405,9 +413,11 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WaresWorkersMap& val
 				}
 			}
 		} else if (d > 0) {
-			for (; d; --d)
-				if (T::create_new_worker(*pi, egbase, wdes))
+			for (; d; --d) {
+				if (T::create_new_worker(*pi, egbase, wdes)) {
 					report_error(L, "No space left for this worker");
+				}
+			}
 		}
 	}
 	return 0;
@@ -1399,6 +1409,7 @@ const PropertyType<LuaTribeDescription> LuaTribeDescription::Properties[] = {
    PROP_RO(LuaTribeDescription, descname),
    PROP_RO(LuaTribeDescription, geologist),
    PROP_RO(LuaTribeDescription, immovables),
+   PROP_RO(LuaTribeDescription, resource_indicators),
    PROP_RO(LuaTribeDescription, name),
    PROP_RO(LuaTribeDescription, port),
    PROP_RO(LuaTribeDescription, ship),
@@ -1503,6 +1514,29 @@ int LuaTribeDescription::get_immovables(lua_State* L) {
 		lua_pushinteger(L, ++counter);
 		to_lua<LuaImmovableDescription>(
 		   L, new LuaImmovableDescription(tribe.get_immovable_descr(immovable)));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+/* RST
+   .. attribute:: resource_indicators
+
+      (RO) the table `resource_indicators` as defined in the tribe's `tribename.lua`.
+      See `data/tribes/atlanteans.lua` for more information on the table structure.
+*/
+int LuaTribeDescription::get_resource_indicators(lua_State* L) {
+	const TribeDescr& tribe = *get();
+	lua_newtable(L);
+	const ResourceIndicatorSet resis = tribe.resource_indicators();
+	for (const auto& resilist : resis) {
+		lua_pushstring(L, resilist.first);
+		lua_newtable(L);
+		for (const auto& resi : resilist.second) {
+			lua_pushinteger(L, resi.first);
+			lua_pushstring(L, tribe.get_immovable_descr(resi.second)->name());
+			lua_settable(L, -3);
+		}
 		lua_settable(L, -3);
 	}
 	return 1;
@@ -1847,10 +1881,13 @@ void LuaImmovableDescription::__unpersist(lua_State* L) {
 	UNPERS_STRING("name", name);
 	const World& world = get_egbase(L).world();
 	DescriptionIndex idx = world.get_immovable_index(name);
-	if (idx == INVALID_INDEX) {
-		throw LuaError((boost::format("Immovable '%s' doesn't exist.") % name).str());
+	if (idx != INVALID_INDEX) {
+		set_description_pointer(world.get_immovable_descr(idx));
+	} else {
+		const Tribes& tribes = get_egbase(L).tribes();
+		idx = tribes.safe_immovable_index(name);
+		set_description_pointer(tribes.get_immovable_descr(idx));
 	}
-	set_description_pointer(world.get_immovable_descr(idx));
 }
 
 /* RST
@@ -2992,7 +3029,7 @@ const MethodType<LuaWorkerDescription> LuaWorkerDescription::Methods[] = {
 };
 const PropertyType<LuaWorkerDescription> LuaWorkerDescription::Properties[] = {
    PROP_RO(LuaWorkerDescription, becomes),           PROP_RO(LuaWorkerDescription, buildcost),
-   PROP_RO(LuaWorkerDescription, employers),         PROP_RO(LuaWorkerDescription, is_buildable),
+   PROP_RO(LuaWorkerDescription, employers),         PROP_RO(LuaWorkerDescription, buildable),
    PROP_RO(LuaWorkerDescription, needed_experience), {nullptr, nullptr, nullptr},
 };
 
@@ -3068,11 +3105,11 @@ int LuaWorkerDescription::get_employers(lua_State* L) {
 }
 
 /* RST
-   .. attribute:: is_buildable
+   .. attribute:: buildable
 
       (RO) returns true if this worker is buildable
 */
-int LuaWorkerDescription::get_is_buildable(lua_State* L) {
+int LuaWorkerDescription::get_buildable(lua_State* L) {
 	lua_pushboolean(L, get()->is_buildable());
 	return 1;
 }
@@ -5026,11 +5063,14 @@ const MethodType<LuaProductionSite> LuaProductionSite::Methods[] = {
    METHOD(LuaProductionSite, get_inputs),
    METHOD(LuaProductionSite, get_workers),
    METHOD(LuaProductionSite, set_workers),
+   METHOD(LuaProductionSite, toggle_start_stop),
+
    {nullptr, nullptr},
 };
 const PropertyType<LuaProductionSite> LuaProductionSite::Properties[] = {
    PROP_RO(LuaProductionSite, valid_workers),
    PROP_RO(LuaProductionSite, valid_inputs),
+   PROP_RO(LuaProductionSite, is_stopped),
    {nullptr, nullptr, nullptr},
 };
 
@@ -5064,6 +5104,20 @@ int LuaProductionSite::get_valid_inputs(lua_State* L) {
 int LuaProductionSite::get_valid_workers(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	return workers_map_to_lua(L, get_valid_workers_for(*ps));
+}
+
+/* RST
+   .. attribute:: is_stopped
+
+      (RO) Returns whether this productionsite is currently active or stopped
+
+      :returns: true if the productionsite has been started,
+         false if it has been stopped.
+*/
+int LuaProductionSite::get_is_stopped(lua_State* L) {
+	ProductionSite* ps = get(L, get_egbase(L));
+	lua_pushboolean(L, ps->is_stopped());
+	return 1;
 }
 
 /*
@@ -5161,6 +5215,19 @@ int LuaProductionSite::get_workers(lua_State* L) {
 int LuaProductionSite::set_workers(lua_State* L) {
 	ProductionSite* ps = get(L, get_egbase(L));
 	return do_set_workers<LuaProductionSite>(L, ps, get_valid_workers_for(*ps));
+}
+
+/* RST
+   .. method:: toggle_start_stop()
+
+      If :any:`ProductionSite.is_stopped`, sends a command to start this productionsite.
+      Otherwise, sends a command to stop this productionsite.
+*/
+int LuaProductionSite::toggle_start_stop(lua_State* L) {
+	Game& game = get_game(L);
+	ProductionSite* ps = get(L, game);
+	game.send_player_start_stop_building(*ps);
+	return 1;
 }
 
 /*
@@ -5941,6 +6008,7 @@ const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, initial_resource_amount),
    PROP_RO(LuaField, claimers),
    PROP_RO(LuaField, owner),
+   PROP_RO(LuaField, buildable),
    {nullptr, nullptr, nullptr},
 };
 
@@ -6265,6 +6333,21 @@ int LuaField::get_owner(lua_State* L) {
 		return 1;
 	}
 	return 0;
+}
+
+/* RST
+   .. attribute:: buildable
+
+      (RO) Returns :const:`true` if a flag or building could be built on this field,
+      independently of whether anybody currently owns this field.
+*/
+int LuaField::get_buildable(lua_State* L) {
+	const NodeCaps caps = fcoords(L).field->nodecaps();
+	const bool is_buildable = (caps & BUILDCAPS_FLAG) || (caps & BUILDCAPS_SMALL) ||
+	                          (caps & BUILDCAPS_MEDIUM) || (caps & BUILDCAPS_BIG) ||
+	                          (caps & BUILDCAPS_MINE);
+	lua_pushboolean(L, is_buildable);
+	return 1;
 }
 
 /* RST

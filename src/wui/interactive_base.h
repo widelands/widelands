@@ -48,6 +48,16 @@ struct CoordPath;
 class EdgeOverlayManager;
 class UniqueWindowHandler;
 
+enum TextToDraw {
+	kNone = 0,
+	kCensus = 1,
+	kStatistics = 2,
+};
+
+inline TextToDraw operator|(TextToDraw a, TextToDraw b) {
+	return static_cast<TextToDraw>(static_cast<int>(a) | static_cast<int>(b));
+}
+
 /**
  * This is used to represent the code that InteractivePlayer and
  * EditorInteractive share.

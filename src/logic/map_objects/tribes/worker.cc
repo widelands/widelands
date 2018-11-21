@@ -977,7 +977,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
-		   MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
+		   MapObjectDescr::OwnerType::kTribe, get_owner());
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
@@ -985,7 +985,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			const std::string message =
 			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
 			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
-			    width % rdescr->representative_image() % UI_FONT_SIZE_MESSAGE %
+			    width % ri.descr().representative_image_filename() % UI_FONT_SIZE_MESSAGE %
 			    _("A geologist found resources."))
 			      .str();
 
@@ -994,7 +994,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			get_owner()->add_message_with_timeout(
 			   game, std::unique_ptr<Message>(
 			            new Message(Message::Type::kGeologists, game.get_gametime(),
-			                        rdescr->descname(), ri.descr().representative_image_filename(),
+			                        rdescr->descname(), rdescr->representative_image(),
 			                        rdescr->descname(), message, position, serial_, rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
@@ -2115,7 +2115,7 @@ void Worker::dropoff_update(Game& game, State&) {
 /// Give the recruit his diploma and say farwell to him.
 void Worker::start_task_releaserecruit(Game& game, Worker& recruit) {
 	push_task(game, taskReleaserecruit);
-	molog("Starting to release %s %u...\n", recruit.descr().descname().c_str(), recruit.serial());
+	molog("Starting to release %s %u...\n", recruit.descr().name().c_str(), recruit.serial());
 	return schedule_act(game, 5000);
 }
 
@@ -2991,7 +2991,6 @@ void Worker::draw_inner(const EditorGameBase& game,
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw(const EditorGameBase& egbase,
-                  const TextToDraw&,
                   const Vector2f& field_on_dst,
                   const float scale,
                   RenderTarget* dst) const {

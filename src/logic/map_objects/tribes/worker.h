@@ -182,7 +182,6 @@ protected:
 	                        const float scale,
 	                        RenderTarget* dst) const;
 	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
 	          const Vector2f& field_on_dst,
 	          float scale,
 	          RenderTarget* dst) const override;

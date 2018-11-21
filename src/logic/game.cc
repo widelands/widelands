@@ -855,6 +855,13 @@ LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
 
+const std::string& Game::get_win_condition_displayname() const {
+	return win_condition_displayname_;
+}
+void Game::set_win_condition_displayname(const std::string& name) {
+	win_condition_displayname_ = name;
+}
+
 /**
  * Sample global statistics for the game.
  */

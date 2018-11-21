@@ -49,6 +49,18 @@ class BuildingDescr;
 struct Event;
 
 /*
+ * Resource indicators:
+ * A ResourceIndicatorSet maps the resource name to a ResourceIndicatorList.
+ * A ResourceIndicatorList maps resource amounts to the DescriptionIndex of an immovable this player
+ * uses.
+ * Special case: The ResourceIndicatorList mapped to "" contains resis that will be used in
+ * locations
+ * without resources. If it has several entries, result is arbitrary.
+*/
+using ResourceIndicatorList = std::map<uint32_t, DescriptionIndex>;
+using ResourceIndicatorSet = std::map<std::string, ResourceIndicatorList>;
+
+/*
 Tribes
 ------
 
@@ -72,6 +84,7 @@ public:
 	const std::set<DescriptionIndex>& wares() const;
 	const std::set<DescriptionIndex>& workers() const;
 	const std::set<DescriptionIndex>& immovables() const;
+	const ResourceIndicatorSet& resource_indicators() const;
 
 	bool has_building(const DescriptionIndex& index) const;
 	bool has_ware(const DescriptionIndex& index) const;
@@ -188,6 +201,7 @@ private:
 	std::vector<std::string> ship_names_;
 	std::set<DescriptionIndex> workers_;
 	std::set<DescriptionIndex> wares_;
+	ResourceIndicatorSet resource_indicators_;
 	// The wares that are used by construction sites
 	std::set<DescriptionIndex> construction_materials_;
 	// Special units. Some of them are used by the engine, some are only used by the AI.

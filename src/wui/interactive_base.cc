@@ -229,7 +229,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 				     player.is_hostile(*productionsite->get_owner())))
 					return set_tooltip("");
 			}
-			set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
+			set_tooltip(productionsite->info_string(Widelands::MapObject::InfoStringType::kTooltip));
 			return;
 		}
 	set_tooltip("");

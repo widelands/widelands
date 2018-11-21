@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-12 15:51+0000\n"
+"POT-Creation-Date: 2018-11-16 06:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,29 +14,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:109
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:78
 msgid "Wares Smuggled"
 msgstr ""
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:132
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:135
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:33
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:57
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:92
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:101
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:104
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:103
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:136
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:198
 #, lua-format
 msgid "%i point"
 msgid_plural "%i points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:135
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:104
 #: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/texts.lua:8
 msgid "Rules"
 msgstr ""
 
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:98
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:101
-#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:104
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:204
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:207
+#: ../../data/maps/MP_Scenarios/Smugglers.wmf/scripting/smuggling.lua:210
 msgid "Status"
 msgstr ""
 

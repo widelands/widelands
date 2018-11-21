@@ -201,6 +201,7 @@ DefaultAI::DefaultAI(Game& ggame, PlayerNumber const pid, Widelands::AiType cons
 					break;
 				}
 			}
+			break;
 		default:
 			// Do nothing
 			break;
@@ -3583,19 +3584,18 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 	Flag& roadstartflag = road.get_flag(RoadBase::FlagStart);
 	Flag& roadendflag = road.get_flag(RoadBase::FlagEnd);
 
-	// Collecting full path (from crossing/building to another crossing/building)
+	// Calculating full road (from crossing/building to another crossing/building),
+	// this means we calculate vector of all flags of the "full road"
 	std::vector<Widelands::Flag*> full_road;
 	full_road.push_back(&roadstartflag);
 	full_road.push_back(&roadendflag);
 
-	// Making sure it starts with proper flag
 	uint16_t road_length = road.get_path().get_nsteps();
 
 	for (int j = 0; j < 2; ++j) {
 		bool new_road_found = true;
 		while (new_road_found && full_road.back()->nr_of_roads() <= 2 &&
 		       full_road.back()->get_building() == nullptr) {
-			const size_t full_road_size = full_road.size();
 			new_road_found = false;
 			for (uint8_t i = 1; i <= 6; ++i) {
 				Road* const near_road = full_road.back()->get_road(i);
@@ -3612,16 +3612,16 @@ bool DefaultAI::dispensable_road_test(const Widelands::Road& road) {
 					other_end = &near_road->get_flag(RoadBase::FlagStart);
 				}
 
-				if (other_end->get_position() == full_road[full_road_size - 2]->get_position()) {
-					continue;
+				// Have we already the end of road in our full_road?
+				if (std::find(full_road.begin(), full_road.end(), other_end) == full_road.end()) {
+					full_road.push_back(other_end);
+					road_length += near_road->get_path().get_nsteps();
+					new_road_found = true;
+					break;
 				}
-				full_road.push_back(other_end);
-				road_length += near_road->get_path().get_nsteps();
-				new_road_found = true;
-				break;
 			}
 		}
-		// we walked to one end, now let revert the concent of full_road and repeat in opposite
+		// we walked to one end, now let revert the content of full_road and repeat in opposite
 		// direction
 		std::reverse(full_road.begin(), full_road.end());
 	}
@@ -4278,6 +4278,20 @@ bool DefaultAI::check_productionsites(uint32_t gametime) {
 
 	// Barracks
 	if (site.bo->is(BuildingAttribute::kBarracks)) {
+		// If we somehow have more than one barracks we will dismantle current one
+		if (site.bo->total_count() > 1) {
+			log("%2d: We have %d barracks, that is not supported by AI and if caused by AI it is an "
+			    "error; dismantling the barracks at %3dx%3d\n",
+			    player_number(), site.bo->total_count(), site.site->get_position().x,
+			    site.site->get_position().y);
+			if (connected_to_wh) {
+				game().send_player_dismantle(*site.site);
+			} else {
+				game().send_player_bulldoze(*site.site);
+			}
+			return true;
+		}
+
 		assert(site.bo->total_count() == 1);
 		for (auto& queue : site.site->inputqueues()) {
 			if (queue->get_max_fill() > 4) {

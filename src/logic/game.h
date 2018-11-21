@@ -245,9 +245,8 @@ public:
 
 	void sample_statistics();
 
-	const std::string& get_win_condition_displayname() {
-		return win_condition_displayname_;
-	}
+	const std::string& get_win_condition_displayname() const;
+	void set_win_condition_displayname(const std::string& name);
 
 	bool is_replay() const {
 		return replay_;

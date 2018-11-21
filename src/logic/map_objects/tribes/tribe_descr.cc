@@ -86,7 +86,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		};
 		load_roads("normal", &normal_road_paths_);
 		load_roads("busy", &busy_road_paths_);
-		load_roads("waterway", &waterway_paths_);
 
 		items_table = table.get_table("wares_order");
 		wares_order_coords_.resize(tribes_.nrwares());
@@ -163,6 +162,20 @@ TribeDescr::TribeDescr(const LuaTable& table,
 			}
 		}
 
+		items_table = table.get_table("resource_indicators");
+		for (std::string resource : items_table->keys<std::string>()) {
+			ResourceIndicatorList resis;
+			std::unique_ptr<LuaTable> tbl = items_table->get_table(resource);
+			const std::set<int> keys = tbl->keys<int>();
+			for (int upper_limit : keys) {
+				resis[upper_limit] = tribes_.safe_immovable_index(tbl->get_string(upper_limit));
+			}
+			if (resis.empty()) {
+				throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
+			}
+			resource_indicators_[resource] = resis;
+		};
+
 		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 
 		for (const std::string& buildingname :
@@ -176,7 +189,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		carrier2_ = add_special_worker(table.get_string("carrier2"));
 		geologist_ = add_special_worker(table.get_string("geologist"));
 		soldier_ = add_special_worker(table.get_string("soldier"));
-		ferry_ = add_special_worker(table.get_string("ferry"));
 
 		const std::string shipname = table.get_string("ship");
 		try {
@@ -184,6 +196,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		} catch (const WException& e) {
 			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
 		}
+
 		port_ = add_special_building(table.get_string("port"));
 		barracks_ = add_special_building(table.get_string("barracks"));
 
@@ -226,6 +239,9 @@ const std::set<DescriptionIndex>& TribeDescr::workers() const {
 }
 const std::set<DescriptionIndex>& TribeDescr::immovables() const {
 	return immovables_;
+}
+const ResourceIndicatorSet& TribeDescr::resource_indicators() const {
+	return resource_indicators_;
 }
 
 bool TribeDescr::has_building(const DescriptionIndex& index) const {
@@ -303,10 +319,6 @@ DescriptionIndex TribeDescr::soldier() const {
 	assert(tribes_.worker_exists(soldier_));
 	return soldier_;
 }
-DescriptionIndex TribeDescr::ferry() const {
-	assert(tribes_.worker_exists(ferry_));
-	return ferry_;
-}
 DescriptionIndex TribeDescr::ship() const {
 	assert(tribes_.ship_exists(ship_));
 	return ship_;
@@ -359,20 +371,12 @@ const std::vector<std::string>& TribeDescr::busy_road_paths() const {
 	return busy_road_paths_;
 }
 
-const std::vector<std::string>& TribeDescr::waterway_paths() const {
-	return waterway_paths_;
-}
-
 void TribeDescr::add_normal_road_texture(const Image* texture) {
 	road_textures_.add_normal_road_texture(texture);
 }
 
 void TribeDescr::add_busy_road_texture(const Image* texture) {
 	road_textures_.add_busy_road_texture(texture);
-}
-
-void TribeDescr::add_waterway_texture(const Image* texture) {
-	road_textures_.add_waterway_texture(texture);
 }
 
 const RoadTextures& TribeDescr::road_textures() const {
@@ -387,41 +391,35 @@ Find the best matching indicator for the given amount.
 DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* const res,
                                                     const ResourceAmount amount) const {
 	if (!res || !amount) {
-		DescriptionIndex idx = immovable_index("resi_none");
-		if (!has_immovable(idx)) {
-			throw GameDataError("There is no resource indicator for resi_none!");
+		auto list = resource_indicators_.find("");
+		if (list == resource_indicators_.end() || list->second.empty()) {
+			throw GameDataError("Tribe '%s' has no indicator for no resources!", name_.c_str());
 		}
-		return idx;
+		return list->second.begin()->second;
 	}
 
-	int32_t i = 1;
-	int32_t num_indicators = 0;
-	for (;;) {
-		const std::string resi_filename =
-		   (boost::format("resi_%s%i") % res->name().c_str() % i).str();
-		if (!has_immovable(immovable_index(resi_filename))) {
-			break;
+	auto list = resource_indicators_.find(res->name());
+	if (list == resource_indicators_.end() || list->second.empty()) {
+		throw GameDataError(
+		   "Tribe '%s' has no indicators for resource '%s'!", name_.c_str(), res->name().c_str());
+	}
+
+	uint32_t lowest = 0;
+	for (const auto& resi : list->second) {
+		if (resi.first < amount) {
+			continue;
+		} else if (lowest < amount || resi.first < lowest) {
+			lowest = resi.first;
 		}
-		++i;
-		++num_indicators;
 	}
 
-	if (!num_indicators) {
-		throw GameDataError("There is no resource indicator for resource %s", res->name().c_str());
+	if (lowest < amount) {
+		throw GameDataError("Tribe '%s' has no indicators for amount %i of resource '%s' (highest "
+		                    "possible amount is %i)!",
+		                    name_.c_str(), amount, res->name().c_str(), lowest);
 	}
 
-	int32_t bestmatch =
-	   static_cast<int32_t>((static_cast<float>(amount) / res->max_amount()) * num_indicators);
-	if (bestmatch > num_indicators) {
-		throw GameDataError("Amount of %s is %i but max amount is %i", res->name().c_str(),
-		                    static_cast<unsigned int>(amount),
-		                    static_cast<unsigned int>(res->max_amount()));
-	}
-	if (amount < res->max_amount()) {
-		bestmatch += 1;  // Resi start with 1, not 0
-	}
-
-	return immovable_index((boost::format("resi_%s%i") % res->name().c_str() % bestmatch).str());
+	return list->second.find(lowest)->second;
 }
 
 void TribeDescr::resize_ware_orders(size_t maxLength) {

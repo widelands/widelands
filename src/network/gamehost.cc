@@ -31,6 +31,7 @@
 #endif
 
 #include "ai/computer_player.h"
+#include "ai/defaultai.h"
 #include "base/i18n.h"
 #include "base/md5.h"
 #include "base/warning.h"
@@ -560,6 +561,23 @@ void GameHost::init_computer_player(Widelands::PlayerNumber p) {
 	                                ->instantiate(*d->game, p));
 }
 
+void GameHost::replace_client_with_ai(uint8_t playernumber, const std::string& ai) {
+	assert(d->game->get_player(playernumber + 1)->get_ai().empty());
+	assert(d->game->get_player(playernumber + 1)->get_ai() ==
+	       d->settings.players.at(playernumber).ai);
+	// Inform all players about the change
+	// Has to be done at first in this method since the calls later on overwrite players[].name
+	send_system_message_code("CLIENT_X_REPLACED_WITH", d->settings.players.at(playernumber).name,
+	                         ComputerPlayer::get_implementation(ai)->descname);
+	set_player_ai(playernumber, ai, false);
+	d->game->get_player(playernumber + 1)->set_ai(ai);
+	// Activate the ai
+	init_computer_player(playernumber + 1);
+	set_player_state(playernumber, PlayerSettings::State::kComputer);
+	assert(d->game->get_player(playernumber + 1)->get_ai() ==
+	       d->settings.players.at(playernumber).ai);
+}
+
 void GameHost::init_computer_players() {
 	const Widelands::PlayerNumber nr_players = d->game->map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, *d->game) {
@@ -609,7 +627,7 @@ void GameHost::run() {
 
 	try {
 		std::unique_ptr<UI::ProgressWindow> loader_ui;
-		loader_ui.reset(new UI::ProgressWindow("images/loadscreens/progress.png"));
+		loader_ui.reset(new UI::ProgressWindow());
 
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
@@ -1454,7 +1472,6 @@ void GameHost::write_setting_map(SendPacket& packet) {
 	packet.string(d->settings.mapfilename);
 	packet.unsigned_8(d->settings.savegame ? 1 : 0);
 	packet.unsigned_8(d->settings.scenario ? 1 : 0);
-	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
@@ -1473,8 +1490,11 @@ void GameHost::write_setting_player(SendPacket& packet, uint8_t const number) {
 
 void GameHost::write_setting_all_players(SendPacket& packet) {
 	packet.unsigned_8(d->settings.players.size());
-	for (uint8_t i = 0; i < d->settings.players.size(); ++i)
+	for (uint8_t i = 0; i < d->settings.players.size(); ++i) {
 		write_setting_player(packet, i);
+	}
+	// Map changes are finished here
+	Notifications::publish(NoteGameSettings(NoteGameSettings::Action::kMap));
 }
 
 void GameHost::write_setting_user(SendPacket& packet, uint32_t const number) {
@@ -2254,8 +2274,7 @@ void GameHost::disconnect_player_controller(uint8_t const number, const std::str
 	}
 
 	set_player_state(number, PlayerSettings::State::kOpen);
-	if (d->game)
-		init_computer_player(number + 1);
+	// Don't replace player with AI, let host choose what to do
 }
 
 void GameHost::disconnect_client(uint32_t const number,
@@ -2265,6 +2284,32 @@ void GameHost::disconnect_client(uint32_t const number,
 	assert(number < d->clients.size());
 
 	Client& client = d->clients.at(number);
+
+	// If the client is linked to a player and it is the client that closes the connection
+	// and the game has already started ...
+	if (client.playernum != UserSettings::none() && reason != "SERVER_LEFT" && d->game != nullptr) {
+		// And the client hasn't lost/won yet ...
+		if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kUndefined) {
+			// If not shown yet, show a window and ask the host player what to do
+			// with the tribe of the leaving client
+			if (d->game->get_igbase()->show_game_client_disconnected()) {
+				// Window has just been opened, pause game and create a save game
+				if (!forced_pause()) {
+					force_pause();
+				}
+				WLApplication::emergency_save(*d->game);
+			}
+			// Client was active but is a winner of the game: Replace with normal AI
+		} else if (d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kWon) {
+			replace_client_with_ai(client.playernum, DefaultAI::normal_impl.name);
+			// Client was active but has lost or gave up: Replace with empty AI
+		} else {
+			assert(d->settings.users.at(client.usernum).result == Widelands::PlayerEndResult::kLost ||
+			       d->settings.users.at(client.usernum).result ==
+			          Widelands::PlayerEndResult::kResigned);
+			replace_client_with_ai(client.playernum, "empty");
+		}
+	}
 
 	// If the client was completely connected before the disconnect, free the
 	// user settings and send changes to the clients

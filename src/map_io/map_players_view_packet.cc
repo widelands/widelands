@@ -851,8 +851,8 @@ inline static void write_unseen_immovable(MapObjectData const* map_object_data,
 	else {
 		// We should never get here.. output some information about the situation.
 		log("\nwidelands_map_players_view_data_packet.cc::write_unseen_immovable(): ");
-		log("%s %s (%s) was not expected.\n", typeid(*map_object_descr).name(),
-		    map_object_descr->name().c_str(), map_object_descr->descname().c_str());
+		log("%s %s was not expected.\n", typeid(*map_object_descr).name(),
+		    map_object_descr->name().c_str());
 		NEVER_HERE();
 	}
 	immovable_kinds_file.unsigned_8(immovable_kind);
