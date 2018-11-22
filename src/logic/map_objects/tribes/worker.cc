@@ -464,7 +464,7 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 		}
 	}
 	// normalize value to int16 range
-	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) * (best / TerrainAffinity::kPrecisionFactor);
+	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) * (static_cast<double>(best) / TerrainAffinity::kPrecisionFactor);
 
 	if (x_check && (correct_val != cache_entry)) {
 		forester_cache.clear();

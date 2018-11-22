@@ -38,7 +38,7 @@ struct FCoords;
 // define this.
 class TerrainAffinity {
 public:
-    static constexpr int kPrecisionFactor = 100000000;
+    static constexpr int kPrecisionFactor = 1 << 26;
 
 	explicit TerrainAffinity(const LuaTable& table, const std::string& immovable_name);
 
@@ -64,14 +64,19 @@ private:
 	DISALLOW_COPY_AND_ASSIGN(TerrainAffinity);
 };
 
-// Returns a value in [0., 1.] that describes the suitability for the
-// 'immovable_affinity' for 'field'. Higher is better suited.
+/**
+ * Returns a value in [0, TerrainAffinity::kPrecisionFactor] that describes the suitability for the 'immovable_affinity' for all 6 terrains around 'field'.
+ * Higher is better suited, with TerrainAffinity::kPrecisionFactor representing a probability of 1.
+ * */
 unsigned int probability_to_grow(const TerrainAffinity& immovable_affinity,
                            const FCoords& fcoords,
                            const Map& map,
                            const DescriptionMaintainer<TerrainDescription>& terrains);
 
-// Probability to grow for a single terrain
+/**
+ * Returns a value in [0, TerrainAffinity::kPrecisionFactor] that describes the suitability for the 'immovable_affinity' for a single 'terrain'.
+ * Higher is better suited, with TerrainAffinity::kPrecisionFactor representing a probability of 1.
+ * */
 unsigned int probability_to_grow(const TerrainAffinity& immovable_affinity,
                            const TerrainDescription& terrain);
 

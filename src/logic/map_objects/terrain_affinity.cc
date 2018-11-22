@@ -42,7 +42,7 @@ namespace {
 //
 // https://randomascii.wordpress.com/2012/03/21/intermediate-floating-point-precision/
 
-constexpr double pow2(const double& a) {
+constexpr double square(const double& a) {
 	return a * a;
 }
 
@@ -60,10 +60,11 @@ inline unsigned int calculate_probability_to_grow(const TerrainAffinity& affinit
     assert(affinity.pickiness() < 100);
 	const double sigma = std::floor(100.0 - affinity.pickiness());
 
+	// Unlike real numbers, floating point multiplication/division is neither associative nor commutative, so we am forcing the same order of calculation here for all compilers and optimization settings by using extra parentheses.
 	const double result = exp(-
-                              (pow2(((affinity.preferred_fertility() - terrain_fertility) / kFertilityWeight) / sigma) +
-                               (pow2(((affinity.preferred_humidity() - terrain_humidity) / kHumidityWeight) / sigma) +
-                                pow2(((affinity.preferred_temperature() - terrain_temperature) / kTemperatureWeight) / sigma))) / 2.0);
+                              (square(((affinity.preferred_fertility() - terrain_fertility) / kFertilityWeight) / sigma) +
+                               (square(((affinity.preferred_humidity() - terrain_humidity) / kHumidityWeight) / sigma) +
+                                square(((affinity.preferred_temperature() - terrain_temperature) / kTemperatureWeight) / sigma))) / 2.0);
 
     return static_cast<unsigned int>(std::max(0.0, std::floor(result * static_cast<double>(TerrainAffinity::kPrecisionFactor))));
 }
@@ -109,11 +110,12 @@ unsigned int probability_to_grow(const TerrainAffinity& affinity,
                            const FCoords& fcoords,
                            const Map& map,
                            const DescriptionMaintainer<TerrainDescription>& terrains) {
-	int terrain_humidity = 0;
-	int terrain_fertility = 0;
-	int terrain_temperature = 0;
+	// Initialize with 3 to get proper rounding with the integer division in the return statement
+	int terrain_humidity = 3;
+	int terrain_fertility = 3;
+	int terrain_temperature = 3;
 
-	const auto average = [&terrain_humidity, &terrain_fertility, &terrain_temperature,
+	const auto sum_up_values = [&terrain_humidity, &terrain_fertility, &terrain_temperature,
 	                      &terrains](const int terrain_index) {
 		const TerrainDescription& t = terrains.get(terrain_index);
 		terrain_humidity += t.humidity();
@@ -121,25 +123,25 @@ unsigned int probability_to_grow(const TerrainAffinity& affinity,
 		terrain_fertility += t.fertility();
 	};
 
-	average(fcoords.field->terrain_d());
-	average(fcoords.field->terrain_r());
+	sum_up_values(fcoords.field->terrain_d());
+	sum_up_values(fcoords.field->terrain_r());
 	{
 		FCoords tln;
 		map.get_tln(fcoords, &tln);
-		average(tln.field->terrain_d());
-		average(tln.field->terrain_r());
+		sum_up_values(tln.field->terrain_d());
+		sum_up_values(tln.field->terrain_r());
 	}
 
 	{
 		FCoords trn;
 		map.get_trn(fcoords, &trn);
-		average(trn.field->terrain_d());
+		sum_up_values(trn.field->terrain_d());
 	}
 
 	{
 		FCoords ln;
 		map.get_ln(fcoords, &ln);
-		average(ln.field->terrain_r());
+		sum_up_values(ln.field->terrain_r());
 	}
 
 	return calculate_probability_to_grow(
