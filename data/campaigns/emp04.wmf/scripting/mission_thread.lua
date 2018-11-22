@@ -390,6 +390,7 @@ function conquer()
    campaign_message_box(diary_page_4)
 
    p1:reveal_campaign("campsect2")
+   p1:reveal_campaign("campsect3")
    p1:reveal_scenario("empiretut04")
 end
 
