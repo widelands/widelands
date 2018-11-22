@@ -50,7 +50,7 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes)
 		if (value < 1) {
 			throw GameDataError("Buildcost: Ware count needs to be > 0 in \"%s=%d\".\nEmpty buildcost tables are allowed if you wish to have an amount of 0.", warename.c_str(), value);
 		} else if (value > 255) {
-			throw GameDataError("Buildcost: Ware count needs to be <= 255 0 in \"%s=%d\".", warename.c_str(), value);
+			throw GameDataError("Buildcost: Ware count needs to be <= 255 in \"%s=%d\".", warename.c_str(), value);
 		}
 
 		// Add

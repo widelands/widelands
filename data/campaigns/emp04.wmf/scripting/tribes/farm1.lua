@@ -9,9 +9,6 @@ tribes:new_productionsite_type {
    size = "big",
    enhancement = "empire_farm2",
 
-   return_on_dismantle = {
-   },
-
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
