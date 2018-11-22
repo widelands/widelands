@@ -286,7 +286,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				const Widelands::Buildcost wares =
 				   Widelands::DismantleSite::count_returned_wares(building);
 
-				const std::string dismantle_text = wares.empty() ? _("This building will return no wares when it is dismantled.") : _("Dismantle") + "<br><font size=11>" + _("Returns:") +
+				const std::string dismantle_text = wares.empty() ? _("This building will return no wares when it is dismantled.") : std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
 						"</font><br>" + waremap_to_richtext(owner.tribe(), wares);
 
 				UI::Button* dismantlebtn =
