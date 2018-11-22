@@ -99,6 +99,7 @@ void Road::cleanup(EditorGameBase& egbase) {
 
 void Road::link_into_flags(EditorGameBase& egbase) {
 	RoadBase::link_into_flags(egbase);
+	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd]);
 	if (upcast(Game, game, &egbase)) {
 		for (CarrierSlot& slot : carrier_slots_) {
 			if (Carrier* const carrier = slot.carrier.get(*game)) {

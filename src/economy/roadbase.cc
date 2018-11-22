@@ -184,8 +184,6 @@ void RoadBase::link_into_flags(EditorGameBase& egbase) {
 	flags_[FlagEnd]->attach_road(dir, this);
 	flagidx_[FlagEnd] = dir;
 
-	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd]);
-
 	// Mark Fields
 	mark_map(egbase);
 }
