@@ -28,7 +28,7 @@
 #include "logic/roadtype.h"
 
 namespace Widelands {
-struct Request;
+class Request;
 
 class RoadDescr : public RoadBaseDescr {
 public:

@@ -88,13 +88,6 @@ void Ferry::unemployed_update(Game& game, State&) {
 }
 
 bool Ferry::unemployed() {
-	/*log("Ferry %u: Querying unemployed: Destination is (%ix%i), task is %s\n", serial_,
-			destination_ ? destination_->x : -1, destination_ ? destination_->y : -1,
-			get_state() ? top_state().task->name : "(nullptr)");
-	return top_state().task == &taskUnemployed;*/
-	log("Ferry %u: Querying unemployed: Destination is (%ix%i), topmost task is %s, has unemployed %s\n", serial_,
-			destination_ ? destination_->x : -1, destination_ ? destination_->y : -1,
-			get_state() ? top_state().task->name : "(nullptr)", get_state(taskUnemployed) ? "TRUE" : "FALSE");
 	return get_state(taskUnemployed);
 }
 
@@ -102,9 +95,10 @@ const Bob::Task Ferry::taskRow = {
    "row", static_cast<Bob::Ptr>(&Ferry::row_update), nullptr, nullptr, true};
 
 void Ferry::start_task_row(Game& game, Waterway* ww) {
-	if (destination_)
+	if (destination_) {
 		delete destination_;
-	// our new destination is the middle of the waterway
+	}
+	// Our new destination is the middle of the waterway
 	destination_ = new Coords(CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()]);
 	send_signal(game, "row");
 }
@@ -131,24 +125,24 @@ void Ferry::row_update(Game& game, State&) {
 	}
 
 	if (get_position() == *destination_) {
-		// reached destination
-		if (BaseImmovable* imm = map.get_immovable(*destination_)) {
-			if (upcast(Waterway, ww, imm)) {
-				delete destination_;
-				destination_ = nullptr;
-				set_location(ww);
-				pop_task(game);
-				return start_task_road(game);
-			}
+		// Reached destination
+		if (upcast(Waterway, ww, map.get_immovable(*destination_))) {
+			delete destination_;
+			destination_ = nullptr;
+			set_location(ww);
+			ww->assign_carrier(*this, 0);
+			pop_task(game);
+			return start_task_road(game);
 		}
-		// if we get here, the waterway was destroyed and we didn't notice
+		// If we get here, the waterway was destroyed and we didn't notice
 		molog("[row]: Reached the destination but it is no longer there\n");
 		delete destination_;
 		destination_ = nullptr;
 		return pop_task(game);
 	}
-	if (start_task_movepath(game, *destination_, 0, descr().get_right_walk_anims(does_carry_ware())))
+	if (start_task_movepath(game, *destination_, 0, descr().get_right_walk_anims(does_carry_ware()))) {
 		return;
+	}
 	molog("[row]: Can't find path to the waterway for some reason!\n");
 	// try again later
 	return schedule_act(game, 50);

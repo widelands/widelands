@@ -61,8 +61,6 @@ struct Waterway : public RoadBase {
 	void remove_worker(Worker&);
 	void assign_carrier(Carrier&, uint8_t);
 
-	void request_ferry_callback(Game&, Ferry*);
-
 	Fleet* get_fleet() const;
 
 protected:

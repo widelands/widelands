@@ -214,7 +214,7 @@ bool Fleet::find_other_fleet(EditorGameBase& egbase) {
 		}
 	}
 
-	log("NOCOM: Fleet %u: found no fleet to merge with!\n", serial_);
+	log("NOCOM: Fleet %u: found no fleet to merge with.\n", serial_);
 
 	if (active()) {
 		update(egbase);
@@ -273,7 +273,7 @@ bool Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 	if (!ships_.empty() && !ports_.empty())
 		check_merge_economy();
 
-	log("NOCOM: Fleet %u: merge with fleet %u complete!\n", serial_, other->serial_);
+	log("NOCOM: Fleet %u: merge with fleet %u complete.\n", serial_, other->serial_);
 
 	other->ports_.clear();
 	other->portpaths_.clear();
@@ -780,9 +780,11 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	molog("Fleet::act\n");
 
 	std::vector<Ferry*> idle_ferries;
-	for (Ferry* f : ferries_)
-		if (f->unemployed())
+	for (Ferry* f : ferries_) {
+		if (f->unemployed()) {
 			idle_ferries.push_back(f);
+		}
+	}
 	log("NOCOM: Fleet %u: act() acting: %i ferries are unemployed\n", serial_, idle_ferries.size());
 	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
 		Waterway* ww = pending_ferry_requests_[0];
@@ -790,12 +792,13 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		Ferry* ferry = nullptr;
 		int32_t dist = 0;
 		for (Ferry* f : idle_ferries) {
-			// decide how far this ferry is from the waterway
+			// Decide how far this ferry is from the waterway
 			int32_t d = get_owner()->egbase().map().findpath(
 					f->get_position(), ww->base_flag().get_position(),
 					0, *new Path(), CheckStepDefault(MOVECAPS_SWIM));
-			if (d < 0)
+			if (d < 0) {
 				continue;
+			}
 
 			if (!ferry || d < dist) {
 				ferry = f;
@@ -807,7 +810,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		idle_ferries.erase(std::find(idle_ferries.begin(), idle_ferries.end(), ferry));
 		pending_ferry_requests_.erase(std::find(pending_ferry_requests_.begin(), pending_ferry_requests_.end(), ww));
 
-		ww->request_ferry_callback(game, ferry);
+		ferry->start_task_row(game, ww);
 	}
 
 	// we need to calculate what ship is to be send to which port

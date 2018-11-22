@@ -99,14 +99,10 @@ void Waterway::request_ferry() {
 	fleet->init(get_owner()->egbase());
 }
 
-void Waterway::request_ferry_callback(Game& game, Ferry* f) {
-	ferry_ = f;
-	ferry_->set_location(this);
-	ferry_->start_task_row(game, this);
-}
-
 void Waterway::assign_carrier(Carrier& c, uint8_t) {
-	ferry_->set_location(nullptr);
+	if (ferry_) {
+		ferry_->set_location(nullptr);
+	}
 	ferry_ = &dynamic_cast<Ferry&>(c);
 }
 
