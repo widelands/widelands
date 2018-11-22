@@ -82,7 +82,7 @@ struct Road : public RoadBase {
 	void pay_for_road(Game& game, uint8_t wares_count);
 	void pay_for_building();
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	bool notify_ware(Game& game, Flag& flag) override;
 

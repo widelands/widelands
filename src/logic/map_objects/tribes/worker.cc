@@ -1057,7 +1057,8 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 }
 
 Worker::Worker(const WorkerDescr& worker_descr)
-   : Bob(worker_descr), economy_(nullptr), supply_(nullptr), transfer_(nullptr), current_exp_(0) {
+   : Bob(worker_descr), ware_economy_(nullptr), worker_economy_(nullptr),
+   		supply_(nullptr), transfer_(nullptr), current_exp_(0) {
 }
 
 Worker::~Worker() {
@@ -1075,21 +1076,24 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 		FORMAT_WARNINGS_ON;
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
 		FORMAT_WARNINGS_OFF;
-		molog("* Economy: %p\n", loc->get_economy());
+		molog("* WorkerEconomy: %p\n", loc->get_worker_economy());
+		molog("* WareEconomy: %p\n", loc->get_ware_economy());
 		FORMAT_WARNINGS_ON;
 	}
 
 	PlayerImmovable* imm = location_.get(egbase);
 	molog("location: %u\n", imm ? imm->serial() : 0);
 	FORMAT_WARNINGS_OFF;
-	molog("Economy: %p\n", economy_);
+	molog("WorkerEconomy: %p\n", worker_economy_);
+	molog("WareEconomy: %p\n", ware_economy_);
 	molog("transfer: %p\n", transfer_);
 	FORMAT_WARNINGS_ON;
 
 	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog("* carried_ware->get_ware() (id): %i\n", ware->descr_index());
 		FORMAT_WARNINGS_OFF;
-		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
+		molog("* carried_ware->get_ware_economy() (): %p\n", ware->get_ware_economy());
+		molog("* carried_ware->get_worker_economy() (): %p\n", ware->get_worker_economy());
 		FORMAT_WARNINGS_ON;
 	}
 
@@ -1119,26 +1123,34 @@ void Worker::set_location(PlayerImmovable* const location) {
 		old_location->remove_worker(*this);
 	} else {
 		if (!is_shipping()) {
-			assert(!economy_);
+			assert(!ware_economy_);
+			assert(!worker_economy_);
 		}
 	}
 
 	location_ = location;
 
 	if (location) {
-		Economy* const eco = location->get_economy();
+		Economy* const eco_wo = location->get_economy(wwWORKER);
+		Economy* const eco_wa = location->get_economy(wwWARE);
 
-		if (!economy_ || (descr().type() == MapObjectType::SOLDIER)) {
-			set_economy(eco);
-		} else if (economy_ != eco) {
-			throw wexception("Worker::set_location changes economy, but worker is no soldier");
+		if (!worker_economy_ || (descr().type() == MapObjectType::SOLDIER)) {
+			set_economy(eco, wwWORKER);
+		} else if (worker_economy_ != eco_wo) {
+			throw wexception("Worker::set_location changes worker_economy, but worker is no soldier");
+		}
+		if (!ware_economy_ || (descr().type() == MapObjectType::SOLDIER)) {
+			set_economy(eco, wwWARE);
+		} else if (ware_economy_ != eco_wa) {
+			throw wexception("Worker::set_location changes ware_economy, but worker is no soldier");
 		}
 		location->add_worker(*this);
 	} else {
 		if (!is_shipping()) {
 			// Our location has been destroyed, we are now fugitives.
 			// Interrupt whatever we've been doing.
-			set_economy(nullptr);
+			set_ware_economy(nullptr);
+			set_worker_economy(nullptr);
 
 			EditorGameBase& egbase = get_owner()->egbase();
 			if (upcast(Game, game, &egbase)) {
@@ -1153,22 +1165,23 @@ void Worker::set_location(PlayerImmovable* const location) {
  * \li by set_location() when appropriate
  * \li by the current location, when the location's economy changes
  */
-void Worker::set_economy(Economy* const economy) {
-	if (economy == economy_)
+void Worker::set_economy(Economy* const economy, WareWorker type) {
+	Economy old = get_economy(type);
+	if (economy == old)
 		return;
 
-	if (economy_)
-		economy_->remove_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+	if (old)
+		old->remove_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
 
-	economy_ = economy;
+	(type == wwWARE ? ware_economy_ : worker_economy_) = economy;
 
 	if (WareInstance* const ware = get_carried_ware(get_owner()->egbase()))
-		ware->set_economy(economy_);
+		ware->set_economy(economy_, type);
 	if (supply_)
-		supply_->set_economy(economy_);
+		supply_->set_economy(economy_, type);
 
-	if (economy_)
-		economy_->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+	if (Economy* e = get_economy(type))
+		e->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
 }
 
 /**
@@ -1212,7 +1225,8 @@ void Worker::cleanup(EditorGameBase& egbase) {
 	if (get_location(egbase))
 		set_location(nullptr);
 
-	set_economy(nullptr);
+	set_ware_economy(nullptr);
+	set_worker_economy(nullptr);
 
 	Bob::cleanup(egbase);
 }
@@ -1318,8 +1332,8 @@ DescriptionIndex Worker::level(Game& game) {
 	assert(t.has_worker(new_index));
 
 	// Inform the economy, that something has changed
-	economy_->remove_workers(old_index, 1);
-	economy_->add_workers(new_index, 1);
+	worker_economy_->remove_workers(old_index, 1);
+	worker_economy_->add_workers(new_index, 1);
 
 	create_needed_experience(game);
 	return old_index;  //  So that the caller knows what to replace him with.
@@ -1330,7 +1344,7 @@ DescriptionIndex Worker::level(Game& game) {
  */
 void Worker::init_auto_task(Game& game) {
 	if (PlayerImmovable* location = get_location(game)) {
-		if (get_economy()->warehouses().size() || location->descr().type() >= MapObjectType::BUILDING)
+		if (get_economy(wwWORKER)->warehouses().size() || location->descr().type() >= MapObjectType::BUILDING)
 			return start_task_gowarehouse(game);
 
 		set_location(nullptr);
@@ -1587,7 +1601,8 @@ bool Worker::is_shipping() {
 void Worker::shipping_pop(Game& game, State& /* state */) {
 	// Defense against unorderly cleanup via reset_tasks
 	if (!get_location(game)) {
-		set_economy(nullptr);
+		set_ware_economy(nullptr);
+		set_worker_economy(nullptr);
 	}
 }
 
@@ -2002,8 +2017,8 @@ void Worker::gowarehouse_update(Game& game, State& /* state */) {
 	if (location->descr().type() >= MapObjectType::BUILDING)
 		return start_task_leavebuilding(game, true);
 
-	if (!get_economy()->warehouses().size()) {
-		molog("[gowarehouse]: No warehouse left in Economy\n");
+	if (!get_economy(wwWORKER)->warehouses().size()) {
+		molog("[gowarehouse]: No warehouse left in WorkerEconomy\n");
 		return pop_task(game);
 	}
 
@@ -2390,7 +2405,7 @@ struct FindFlagWithPlayersWarehouse {
 	bool accept(const BaseImmovable& imm) const {
 		if (upcast(Flag const, flag, &imm))
 			if (flag->get_owner() == &owner_)
-				if (flag->economy().warehouses().size())
+				if (flag->economy(wwWORKER).warehouses().size())
 					return true;
 		return false;
 	}
@@ -2420,7 +2435,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (flag->get_owner() == get_owner() && flag->economy().warehouses().size()) {
+		if (flag->get_owner() == get_owner() && flag->economy(wwWORKER).warehouses().size()) {
 			set_location(flag);
 			return pop_task(game);
 		}
@@ -3075,7 +3090,8 @@ void Worker::Loader::load_finish() {
 	// not a factor, we do not overwrite the economy they might have set for us
 	// already.
 	if (PlayerImmovable* const location = worker.location_.get(egbase())) {
-		worker.set_economy(location->get_economy());
+		worker.set_economy(location->get_economy(wwWARE), wwWARE);
+		worker.set_economy(location->get_economy(wwWORKER), wwWORKER);
 	}
 }
 

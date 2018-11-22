@@ -70,6 +70,7 @@ Waterway& Waterway::create(EditorGameBase& egbase, Flag& start, Flag& end, const
 
 void Waterway::link_into_flags(EditorGameBase& egbase) {
 	RoadBase::link_into_flags(egbase);
+	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (upcast(Game, game, &egbase))
 		request_ferry();
 }
@@ -207,6 +208,7 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 }
 
 void Waterway::cleanup(EditorGameBase& egbase) {
+	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (upcast(Game, game, &egbase)) {
 		if (ferry_) {
 			ferry_->set_destination(*game, nullptr);

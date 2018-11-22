@@ -60,7 +60,7 @@ struct Ferry : public Carrier {
 	}
 
 	bool init(EditorGameBase&) override;
-	void set_economy(Game&, Economy* e);
+	void set_economy(Game&, Economy*, WareWorker);
 
 	Fleet* get_fleet() const;
 

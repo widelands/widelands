@@ -82,19 +82,19 @@ Change the economy for the wares queues.
 Note that the workers are dealt with in the PlayerImmovable code.
 ===============
 */
-void PartiallyFinishedBuilding::set_economy(Economy* const e) {
-	if (Economy* const old = get_economy()) {
+void PartiallyFinishedBuilding::set_economy(Economy* const e, WareWorker type) {
+	if (Economy* const old = get_economy(type)) {
 		for (WaresQueue* temp_ware : wares_) {
-			temp_ware->remove_from_economy(*old);
+			temp_ware->remove_from_economy(*old, type);
 		}
 	}
-	Building::set_economy(e);
+	Building::set_economy(e, type);
 	if (builder_request_)
-		builder_request_->set_economy(e);
+		builder_request_->set_economy(e, type);
 
 	if (e)
 		for (WaresQueue* temp_ware : wares_) {
-			temp_ware->add_to_economy(*e);
+			temp_ware->add_to_economy(*e, type);
 		}
 }
 

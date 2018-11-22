@@ -74,8 +74,6 @@ struct RoadBase : public PlayerImmovable {
 
 	Flag& base_flag() override;
 
-	void set_economy(Economy*) override;
-
 	int32_t get_cost(FlagId fromflag);
 	const Path& get_path() const {
 		return path_;

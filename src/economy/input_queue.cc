@@ -175,8 +175,8 @@ void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
 			throw UnhandledVersionError("InputQueue", packet_version, kCurrentPacketVersion);
 		}
 		//  Now Economy stuff. We have to add our filled items to the economy.
-		if (owner_.get_economy())
-			add_to_economy(*owner_.get_economy());
+		if (owner_.get_economy(type_))
+			add_to_economy(*owner_.get_economy(type_));
 	} catch (const GameDataError& e) {
 		throw GameDataError("inputqueue: %s", e.what());
 	}

@@ -128,7 +128,7 @@ Bob& ShipDescr::create_object() const {
 }
 
 Ship::Ship(const ShipDescr& gdescr)
-   : Bob(gdescr), fleet_(nullptr), economy_(nullptr), ship_state_(ShipStates::kTransport) {
+   : Bob(gdescr), fleet_(nullptr), ware_economy_(nullptr), worker_economy_(nullptr), ship_state_(ShipStates::kTransport) {
 }
 
 Ship::~Ship() {
@@ -657,7 +657,8 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 						leftover_builder = true;
 						break;  // no more unloading (builder shoud be on position 0)
 					}
-					worker->set_economy(nullptr);
+					worker->set_economy(nullptr, wwWARE);
+					worker->set_economy(nullptr, wwWORKER);
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
@@ -716,13 +717,13 @@ void Ship::set_ship_state_and_notify(ShipStates state, NoteShip::Action action) 
 	}
 }
 
-void Ship::set_economy(Game& game, Economy* e) {
+void Ship::set_economy(Game& game, Economy* e, WareWorker type) {
 	// Do not check here that the economy actually changed, because on loading
 	// we rely that wares really get reassigned our economy.
 
-	economy_ = e;
+	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 	for (ShippingItem& shipping_item : items_) {
-		shipping_item.set_economy(game, e);
+		shipping_item.set_economy(game, e, type);
 	}
 }
 
@@ -827,14 +828,16 @@ void Ship::start_task_expedition(Game& game) {
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->exploration_start = Coords(0, 0);
 	expedition_->island_explore_direction = IslandExploreDirection::kClockwise;
-	expedition_->economy = get_owner()->create_economy();
+	expedition_->ware_economy = get_owner()->create_economy();
+	expedition_->worker_economy = get_owner()->create_economy();
 
 	// We are no longer in any other economy, but instead are an economy of our
 	// own.
 	fleet_->remove_ship(game, this);
 	assert(fleet_ == nullptr);
 
-	set_economy(game, expedition_->economy);
+	set_economy(game, expedition_->ware_economy, wwWARE);
+	set_economy(game, expedition_->worker_economy, wwWORKER);
 
 	for (int i = items_.size() - 1; i >= 0; --i) {
 		WareInstance* ware;
@@ -939,12 +942,14 @@ void Ship::exp_cancel(Game& game) {
 	ship_state_ = ShipStates::kTransport;
 
 	// Bring us back into a fleet and a economy.
-	set_economy(game, nullptr);
+	set_economy(game, nullptr, wwWARE);
+	set_economy(game, nullptr, wwWORKER);
 	init_fleet(game);
 	if (!get_fleet() || !get_fleet()->has_ports()) {
 		// We lost our last reachable port, so we reset the expedition's state
 		ship_state_ = ShipStates::kExpeditionWaiting;
-		set_economy(game, expedition_->economy);
+		set_economy(game, expedition_->ware_economy, wwWARE);
+		set_economy(game, expedition_->worker_economy, wwWORKER);
 
 		worker = nullptr;
 		for (ShippingItem& item : items_) {
@@ -958,7 +963,8 @@ void Ship::exp_cancel(Game& game) {
 		Notifications::publish(NoteShip(this, NoteShip::Action::kNoPortLeft));
 		return;
 	}
-	assert(get_economy() && get_economy() != expedition_->economy);
+	assert(get_economy(wwWARE) && get_economy(wwWARE) != expedition_->ware_economy);
+	assert(get_economy(wwWORKER) && get_economy(wwWORKER) != expedition_->worker_economy);
 
 	send_signal(game, "cancel_expedition");
 
@@ -1096,8 +1102,11 @@ void Ship::send_message(Game& game,
 }
 
 Ship::Expedition::~Expedition() {
-	if (economy) {
-		economy->owner().remove_economy(economy->serial());
+	if (ware_economy) {
+		ware_economy->owner().remove_economy(ware_economy->serial());
+	}
+	if (worker_economy) {
+		worker_economy->owner().remove_economy(worker_economy->serial());
 	}
 }
 
@@ -1109,7 +1118,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 8;
+constexpr uint8_t kCurrentPacketVersion = 9;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
@@ -1121,8 +1130,9 @@ void Ship::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
 
 	// Economy
-	economy_serial_ = fr.unsigned_32();
-
+	ware_economy_serial_ = fr.unsigned_32();
+	worker_economy_serial_ = fr.unsigned_32();
+	
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
 
@@ -1184,10 +1194,16 @@ void Ship::Loader::load_finish() {
 	Ship& ship = get<Ship>();
 
 	// The economy can sometimes be nullptr (e.g. when there are no ports).
-	if (economy_serial_ != kInvalidSerial) {
-		ship.economy_ = ship.get_owner()->get_economy(economy_serial_);
-		if (!ship.economy_) {
-			ship.economy_ = ship.get_owner()->create_economy(economy_serial_);
+	if (ware_economy_serial_ != kInvalidSerial) {
+		ship.ware_economy_ = ship.get_owner()->get_economy(ware_economy_serial_);
+		if (!ship.ware_economy_) {
+			ship.ware_economy_ = ship.get_owner()->create_economy(economy_serial_);
+		}
+	}
+	if (worker_economy_serial_ != kInvalidSerial) {
+		ship.worker_economy_ = ship.get_owner()->get_economy(worker_economy_serial_);
+		if (!ship.worker_economy_) {
+			ship.worker_economy_ = ship.get_owner()->create_economy(worker_economy_serial_);
 		}
 	}
 
@@ -1200,7 +1216,8 @@ void Ship::Loader::load_finish() {
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
 		ship.expedition_.swap(expedition_);
-		ship.expedition_->economy = ship.economy_;
+		ship.expedition_->ware_economy = ship.ware_economy_;
+		ship.expedition_->worker_economy = ship.worker_economy_;
 	} else
 		assert(ship_state_ == ShipStates::kTransport);
 
@@ -1210,7 +1227,8 @@ void Ship::Loader::load_finish() {
 	// economy of all workers we're transporting so that they are in the correct
 	// economy. Also, we might are on an expedition which means that we just now
 	// created the economy of this ship and must inform all wares.
-	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.economy_);
+	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.ware_economy_, wwWARE);
+	ship.set_economy(dynamic_cast<Game&>(egbase()), ship.worker_economy_, wwWORKER);
 	ship.get_owner()->add_ship(ship.serial());
 }
 
@@ -1249,7 +1267,8 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	Bob::save(egbase, mos, fw);
 
 	// The economy can sometimes be nullptr (e.g. when there are no ports).
-	fw.unsigned_32(economy_ != nullptr ? economy_->serial() : kInvalidSerial);
+	fw.unsigned_32(ware_economy_ != nullptr ? ware_economy_->serial() : kInvalidSerial);
+	fw.unsigned_32(worker_economy_ != nullptr ? worker_economy_->serial() : kInvalidSerial);
 
 	// state the ship is in
 	fw.unsigned_8(static_cast<uint8_t>(ship_state_));

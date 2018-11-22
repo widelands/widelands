@@ -863,8 +863,8 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
 /*
  * Economy stuff below
  */
-Economy* Player::create_economy() {
-	std::unique_ptr<Economy> eco(new Economy(*this));
+Economy* Player::create_economy(WareWorker type) {
+	std::unique_ptr<Economy> eco(new Economy(*this, type));
 	const Serial serial = eco->serial();
 
 	assert(economies_.count(serial) == 0);
@@ -875,8 +875,8 @@ Economy* Player::create_economy() {
 	return get_economy(serial);
 }
 
-Economy* Player::create_economy(Serial serial) {
-	std::unique_ptr<Economy> eco(new Economy(*this, serial));
+Economy* Player::create_economy(Serial serial, WareWorker type) {
+	std::unique_ptr<Economy> eco(new Economy(*this, serial, type));
 
 	assert(economies_.count(serial) == 0);
 	economies_.emplace(std::make_pair(serial, std::move(eco)));

@@ -100,10 +100,10 @@ struct Ship : Bob {
 	// the last visited was removed.
 	PortDock* get_lastdock(EditorGameBase& egbase) const;
 
-	Economy* get_economy() const {
-		return economy_;
+	Economy* get_economy(WareWorker type) const {
+		return type == wwWARE ? ware_economy_ : worker_economy_;
 	}
-	void set_economy(Game&, Economy* e);
+	void set_economy(Game&, Economy* e, WareWorker type);
 	void set_destination(Game&, PortDock&);
 
 	void init_auto_task(Game&) override;
@@ -258,7 +258,8 @@ private:
 	                  const std::string& picture);
 
 	Fleet* fleet_;
-	Economy* economy_;
+	Economy* ware_economy_;
+	Economy* worker_economy_;
 	OPtr<PortDock> lastdock_;
 	OPtr<PortDock> destination_;
 	std::vector<ShippingItem> items_;
@@ -274,7 +275,8 @@ private:
 		WalkingDir scouting_direction;
 		Coords exploration_start;
 		IslandExploreDirection island_explore_direction;
-		Economy* economy;  // Owned by Player
+		Economy* ware_economy;  // Owned by Player
+		Economy* worker_economy;
 	};
 	std::unique_ptr<Expedition> expedition_;
 
@@ -292,7 +294,8 @@ protected:
 		// Initialize everything to make cppcheck happy.
 		uint32_t lastdock_ = 0U;
 		uint32_t destination_ = 0U;
-		Serial economy_serial_;
+		Serial ware_economy_serial_;
+		Serial worker_economy_serial_;
 		ShipStates ship_state_ = ShipStates::kTransport;
 		std::string shipname_;
 		std::unique_ptr<Expedition> expedition_;

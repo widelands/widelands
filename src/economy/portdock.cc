@@ -122,22 +122,22 @@ PortDock* PortDock::get_dock(Flag& flag) const {
  * Called by @ref Warehouse::set_economy, and responsible for forwarding the
  * change to @ref Fleet.
  */
-void PortDock::set_economy(Economy* e) {
-	if (e == get_economy())
+void PortDock::set_economy(Economy* e, WareWorker type) {
+	if (e == get_economy(type))
 		return;
 
-	PlayerImmovable::set_economy(e);
+	PlayerImmovable::set_economy(e, type);
 	if (fleet_)
-		fleet_->set_economy(e);
+		fleet_->set_economy(e, type);
 
 	if (upcast(Game, game, &get_owner()->egbase())) {
 		for (ShippingItem& shipping_item : waiting_) {
-			shipping_item.set_economy(*game, e);
+			shipping_item.set_economy(*game, e, type);
 		}
 	}
 
 	if (expedition_bootstrap_)
-		expedition_bootstrap_->set_economy(e);
+		expedition_bootstrap_->set_economy(e, type);
 }
 
 void PortDock::draw(uint32_t, const Vector2f&, float, RenderTarget*) {
@@ -288,7 +288,8 @@ void PortDock::update_shippingitem(Game& game, std::vector<ShippingItem>::iterat
 	assert(dst != this);
 
 	// Destination might have vanished or be in another economy altogether.
-	if (dst && dst->get_economy() == get_economy()) {
+	// TODO(Nordfriese): Should we compare economies for wwWARE *and* or *or* wwWORKER ?
+	if (dst && dst->get_economy(wwWARE) == get_economy(wwWARE)) {
 		set_need_ship(game, true);
 	} else {
 		it->set_location(game, warehouse_);

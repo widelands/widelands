@@ -113,7 +113,7 @@ void Flag::load_finish(EditorGameBase& egbase) {
 /**
  * Creates a flag at the given location.
  */
-Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, Economy* eco)
+Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, Economy* wa_eco, Economy* wo_eco)
    : PlayerImmovable(g_flag_descr),
      building_(nullptr),
      ware_capacity_(8),
@@ -132,21 +132,28 @@ Flag::Flag(EditorGameBase& egbase, Player* owning_player, const Coords& coords, 
 	upcast(Game, game, &egbase);
 
 	if (game) {
-		if (eco) {
+		if (wa_eco) {
 			// We're saveloading
-			eco->add_flag(*this);
+			wa_eco->add_flag(*this);
 		} else {
 			//  we split a road, or a new, standalone flag is created
-			(road ? road->get_economy() : owning_player->create_economy())->add_flag(*this);
-			if (road) {
-				road->presplit(*game, coords);
-			}
+			(road ? road->get_economy(wwWARE) : owning_player->create_economy(wwWARE))->add_flag(*this);
+		}
+		if (wo_eco) {
+			// We're saveloading
+			wo_eco->add_flag(*this);
+		} else {
+			//  we split a road, or a new, standalone flag is created
+			(road ? road->get_economy(wwWORKER) : owning_player->create_economy(wwWORKER))->add_flag(*this);
+		}
+		if (road && !wa_eco && !wo_eco) {
+			road->presplit(*game, coords);
 		}
 	}
 
 	init(egbase);
 
-	if (!eco && road && game) {
+	if (!wa_eco && !wo_eco && road && game) {
 		road->postsplit(*game, *this);
 	}
 }
@@ -170,30 +177,34 @@ Flag& Flag::base_flag() {
 /**
  * Call this only from Economy code!
  */
-void Flag::set_economy(Economy* const e) {
-	Economy* const old = get_economy();
+void Flag::set_economy(Economy* const e, WareWorker type) {
+	Economy* const old = get_economy(type);
 
 	if (old == e) {
 		return;
 	}
 
-	PlayerImmovable::set_economy(e);
+	PlayerImmovable::set_economy(e, type);
 
-	for (int32_t i = 0; i < ware_filled_; ++i) {
-		wares_[i].ware->set_economy(e);
+	if (type == wwWARE) {
+		for (int32_t i = 0; i < ware_filled_; ++i) {
+			wares_[i].ware->set_economy(e);
+		}
 	}
 
 	if (building_) {
-		building_->set_economy(e);
+		building_->set_economy(e, type);
 	}
 
 	for (const FlagJob& temp_job : flag_jobs_) {
-		temp_job.request->set_economy(e);
+		if (temp_job.request->get_economy()->type() == type) {
+			temp_job.request->set_economy(e);
+		}
 	}
 
 	for (int8_t i = 0; i < 6; ++i) {
 		if (roads_[i]) {
-			roads_[i]->set_economy(e);
+			roads_[i]->set_economy(e, type);
 		}
 	}
 }
@@ -211,7 +222,8 @@ void Flag::attach_building(EditorGameBase& egbase, Building& building) {
 	   map.get_fcoords(map.tl_n(position_)), WALK_SE,
 	   building_->get_size() == BaseImmovable::SMALL ? RoadType::kNormal : RoadType::kBusy);
 
-	building.set_economy(get_economy());
+	building.set_economy(get_economy(wwWARE), wwWARE);
+	building.set_economy(get_economy(wwWORKER), wwWORKER);
 }
 
 /**
@@ -220,7 +232,8 @@ void Flag::attach_building(EditorGameBase& egbase, Building& building) {
 void Flag::detach_building(EditorGameBase& egbase) {
 	assert(building_);
 
-	building_->set_economy(nullptr);
+	building_->set_economy(nullptr, wwWARE);
+	building_->set_economy(nullptr, wwWORKER);
 
 	const Map& map = egbase.map();
 	egbase.set_road(map.get_fcoords(map.tl_n(position_)), WALK_SE, RoadType::kNone);
@@ -235,7 +248,8 @@ void Flag::attach_road(int32_t const dir, RoadBase* const road) {
 	assert(!roads_[dir - 1] || roads_[dir - 1] == road);
 
 	roads_[dir - 1] = road;
-	roads_[dir - 1]->set_economy(get_economy());
+	roads_[dir - 1]->set_economy(get_economy(wwWARE), wwWARE);
+	roads_[dir - 1]->set_economy(get_economy(wwWORKER), wwWORKER);
 }
 
 /**
@@ -244,7 +258,8 @@ void Flag::attach_road(int32_t const dir, RoadBase* const road) {
 void Flag::detach_road(int32_t const dir) {
 	assert(roads_[dir - 1]);
 
-	roads_[dir - 1]->set_economy(nullptr);
+	roads_[dir - 1]->set_economy(nullptr, wwWARE);
+	roads_[dir - 1]->set_economy(nullptr, wwWORKER);
 	roads_[dir - 1] = nullptr;
 }
 
@@ -935,7 +950,10 @@ void Flag::cleanup(EditorGameBase& egbase) {
 		}
 	}
 
-	if (Economy* e = get_economy()) {
+	if (Economy* e = get_economy(wwWARE)) {
+		e->remove_flag(*this);
+	}
+	if (Economy* e = get_economy(wwWORKER)) {
 		e->remove_flag(*this);
 	}
 

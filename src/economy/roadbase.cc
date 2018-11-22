@@ -200,8 +200,6 @@ void RoadBase::cleanup(EditorGameBase& egbase) {
 	flags_[FlagStart]->detach_road(flagidx_[FlagStart]);
 	flags_[FlagEnd]->detach_road(flagidx_[FlagEnd]);
 
-	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd]);
-
 	if (upcast(Game, game, &egbase)) {
 		flags_[FlagStart]->update_wares(*game, flags_[FlagEnd]);
 		flags_[FlagEnd]->update_wares(*game, flags_[FlagStart]);
@@ -227,14 +225,6 @@ void RoadBase::assign_carrier(Carrier&, uint8_t) {
 
 bool RoadBase::notify_ware(Game&, Flag&) {
 	return false;
-}
-
-/**
- * Workers' economies are fixed by PlayerImmovable, but we need to handle
- * any requests ourselves.
- */
-void RoadBase::set_economy(Economy* const e) {
-	PlayerImmovable::set_economy(e);
 }
 
 }  // namespace Widelands

@@ -78,10 +78,10 @@ bool Fleet::active() const {
  * Note that we always associate ourselves with the economy of the first dock.
  * Ferries and waterways do NOT necessarily share our economy!
  */
-void Fleet::set_economy(Economy* e) {
+void Fleet::set_economy(Economy* e, WareWorker type) {
 	if (!ships_.empty()) {
 		if (!ports_.empty()) {
-			e = ports_[0]->get_economy();
+			e = ports_[0]->get_economy(type);
 		}
 #ifndef NDEBUG
 		else
@@ -90,7 +90,7 @@ void Fleet::set_economy(Economy* e) {
 
 		if (upcast(Game, game, &get_owner()->egbase())) {
 			for (Ship* temp_ship : ships_) {
-				temp_ship->set_economy(*game, e);
+				temp_ship->set_economy(*game, e, type);
 			}
 		}
 	}
@@ -293,7 +293,8 @@ void Fleet::check_merge_economy() {
 	Flag& base = ports_[0]->base_flag();
 	for (uint32_t i = 1; i < ports_.size(); ++i) {
 		// Note: economy of base flag may of course be changed by the merge!
-		base.get_economy()->check_merge(base, ports_[i]->base_flag());
+		base.get_economy(wwWARE)->check_merge(base, ports_[i]->base_flag(), wwWARE);
+		base.get_economy(wwWORKER)->check_merge(base, ports_[i]->base_flag(), wwWORKER);
 	}
 }
 
@@ -308,7 +309,8 @@ void Fleet::cleanup(EditorGameBase& egbase) {
 			// This is required when, during end-of-game cleanup,
 			// the fleet gets removed before the ports
 			Flag& base = ports_[0]->base_flag();
-			Economy::check_split(base, pd->base_flag());
+			Economy::check_split(base, pd->base_flag(), wwWARE);
+			Economy::check_split(base, pd->base_flag(), wwWORKER);
 		}
 	}
 	portpaths_.clear();
@@ -447,10 +449,14 @@ void Fleet::add_ship(Ship* ship) {
 	ships_.push_back(ship);
 	ship->set_fleet(this);
 	if (upcast(Game, game, &get_owner()->egbase())) {
-		if (ports_.empty())
-			ship->set_economy(*game, nullptr);
-		else
-			ship->set_economy(*game, ports_[0]->get_economy());
+		if (ports_.empty()) {
+			ship->set_economy(*game, nullptr, wwWARE);
+			ship->set_economy(*game, nullptr, wwWORKER);
+		}
+		else {
+			ship->set_economy(*game, ports_[0]->get_economy(wwWARE), wwWARE);
+			ship->set_economy(*game, ports_[0]->get_economy(wwWORKER), wwWORKER);
+		}
 	}
 
 	if (ships_.size() == 1) {
@@ -465,8 +471,10 @@ void Fleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 		ships_.pop_back();
 	}
 	ship->set_fleet(nullptr);
-	if (upcast(Game, game, &egbase))
-		ship->set_economy(*game, nullptr);
+	if (upcast(Game, game, &egbase)) {
+		ship->set_economy(*game, nullptr, wwWARE);
+		ship->set_economy(*game, nullptr, wwWORKER);
+	}
 
 	if (ship->get_destination(egbase)) {
 		update(egbase);
@@ -480,8 +488,10 @@ void Fleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 			for (uint32_t i = 1; i < ports_.size(); ++i) {
 				// since two ports can be connected by land, it is possible that
 				// disconnecting a previous port also disconnects later ports
-				if (base.get_economy() == ports_[i]->base_flag().get_economy())
-					Economy::check_split(base, ports_[i]->base_flag());
+				if (base.get_economy(wwWARE) == ports_[i]->base_flag().get_economy(wwWARE))
+					Economy::check_split(base, ports_[i]->base_flag(), wwWARE);
+				if (base.get_economy(wwWORKER) == ports_[i]->base_flag().get_economy(wwWORKER))
+					Economy::check_split(base, ports_[i]->base_flag(), wwWORKER);
 			}
 		}
 	}
@@ -652,10 +662,13 @@ void Fleet::add_port(EditorGameBase& /* egbase */, PortDock* port) {
 	ports_.push_back(port);
 	port->set_fleet(this);
 	if (ports_.size() == 1) {
-		set_economy(ports_[0]->get_economy());
+		set_economy(ports_[0]->get_economy(wwWARE), wwWARE);
+		set_economy(ports_[0]->get_economy(wwWORKER), wwWORKER);
 	} else {
-		if (!ships_.empty())
-			ports_[0]->get_economy()->check_merge(ports_[0]->base_flag(), port->base_flag());
+		if (!ships_.empty()) {
+			ports_[0]->get_economy(wwWARE)->check_merge(ports_[0]->base_flag(), port->base_flag(), wwWARE);
+			ports_[0]->get_economy(wwWORKER)->check_merge(ports_[0]->base_flag(), port->base_flag(), wwWORKER);
+		}
 	}
 
 	portpaths_.resize((ports_.size() * (ports_.size() - 1)) / 2);
@@ -681,11 +694,15 @@ void Fleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 	port->set_fleet(nullptr);
 
 	if (ports_.empty()) {
-		set_economy(nullptr);
+		set_economy(nullptr, wwWARE);
+		set_economy(nullptr, wwWORKER);
 	} else {
-		set_economy(ports_[0]->get_economy());
-		if (!ships_.empty())
-			Economy::check_split(ports_[0]->base_flag(), port->base_flag());
+		set_economy(ports_[0]->get_economy(wwWARE), wwWARE);
+		set_economy(ports_[0]->get_economy(wwWORKER), wwWORKER);
+		if (!ships_.empty()) {
+			Economy::check_split(ports_[0]->base_flag(), port->base_flag(), wwWARE);
+			Economy::check_split(ports_[0]->base_flag(), port->base_flag(), wwWORKER);
+		}
 	}
 
 	if (ships_.empty() && ports_.empty() && ferries_.empty() && pending_ferry_requests_.empty()) {
@@ -1110,7 +1127,8 @@ void Fleet::Loader::load_finish() {
 		if (!fleet.ships_.empty() || !fleet.ferries_.empty() || !fleet.pending_ferry_requests_.empty())
 			fleet.check_merge_economy();
 
-		fleet.set_economy(fleet.ports_[0]->get_economy());
+		fleet.set_economy(fleet.ports_[0]->get_economy(wwWARE), wwWARE);
+		fleet.set_economy(fleet.ports_[0]->get_economy(wwWORKER), wwWORKER);
 	}
 }
 

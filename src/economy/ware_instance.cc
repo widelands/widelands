@@ -247,13 +247,13 @@ void WareInstance::set_location(EditorGameBase& egbase, MapObject* const locatio
 		Economy* eco = nullptr;
 
 		if (upcast(Flag const, flag, location))
-			eco = flag->get_economy();
+			eco = flag->get_economy(wwWARE);
 		else if (upcast(Worker const, worker, location))
-			eco = worker->get_economy();
+			eco = worker->get_economy(wwWARE);
 		else if (upcast(PortDock const, portdock, location))
-			eco = portdock->get_economy();
+			eco = portdock->get_economy(wwWARE);
 		else if (upcast(Ship const, ship, location))
-			eco = ship->get_economy();
+			eco = ship->get_economy(wwWARE);
 		else
 			throw wexception("WareInstance delivered to bad location %u", location->serial());
 

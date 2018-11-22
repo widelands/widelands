@@ -82,7 +82,7 @@ struct Fleet : MapObject {
 	PortDock* get_dock(Flag& flag) const;
 	PortDock* get_dock(EditorGameBase&, Coords) const;
 	PortDock* get_arbitrary_dock() const;
-	void set_economy(Economy* e);
+	void set_economy(Economy* e, WareWorker);
 
 	bool active() const;
 

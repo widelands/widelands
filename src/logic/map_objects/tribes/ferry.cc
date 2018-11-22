@@ -154,9 +154,9 @@ void Ferry::init_auto_task(Game& game) {
 	return start_task_unemployed(game);
 }
 
-void Ferry::set_economy(Game& game, Economy* e) {
+void Ferry::set_economy(Game& game, Economy* e, WareWorker type) {
 	if (WareInstance* ware = get_carried_ware(game))
-		ware->set_economy(e);
+		ware->set_economy(e, type);
 }
 
 Fleet* Ferry::get_fleet() const {

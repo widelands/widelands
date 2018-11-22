@@ -87,6 +87,8 @@ Road& Road::create(EditorGameBase& egbase, Flag& start, Flag& end, const Path& p
 }
 
 void Road::cleanup(EditorGameBase& egbase) {
+	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
+	Economy::check_split(*flags_[FlagStart], *flags_[FlagEnd], wwWORKER);
 	for (CarrierSlot& slot : carrier_slots_) {
 		delete slot.carrier_request;
 		slot.carrier_request = nullptr;
@@ -99,7 +101,8 @@ void Road::cleanup(EditorGameBase& egbase) {
 
 void Road::link_into_flags(EditorGameBase& egbase) {
 	RoadBase::link_into_flags(egbase);
-	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd]);
+	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
+	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWORKER);
 	if (upcast(Game, game, &egbase)) {
 		for (CarrierSlot& slot : carrier_slots_) {
 			if (Carrier* const carrier = slot.carrier.get(*game)) {
@@ -114,11 +117,13 @@ void Road::link_into_flags(EditorGameBase& egbase) {
 	}
 }
 
-void Road::set_economy(Economy* const e) {
-	RoadBase::set_economy(e);
-	for (CarrierSlot& slot : carrier_slots_) {
-		if (slot.carrier_request) {
-			slot.carrier_request->set_economy(e);
+void Road::set_economy(Economy* const e, WareWorker type) {
+	RoadBase::set_economy(e, type);
+	if (type == wwWORKER) {
+		for (CarrierSlot& slot : carrier_slots_) {
+			if (slot.carrier_request) {
+				slot.carrier_request->set_economy(e);
+			}
 		}
 	}
 }

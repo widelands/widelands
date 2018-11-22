@@ -1245,7 +1245,7 @@ PlayerImmovable IMPLEMENTATION
  * Zero-initialize
 */
 PlayerImmovable::PlayerImmovable(const MapObjectDescr& mo_descr)
-   : BaseImmovable(mo_descr), economy_(nullptr) {
+   : BaseImmovable(mo_descr), ware_economy_(nullptr), worker_economy_(nullptr) {
 }
 
 /**
@@ -1259,14 +1259,14 @@ PlayerImmovable::~PlayerImmovable() {
 /**
  * Change the economy, transfer the workers
 */
-void PlayerImmovable::set_economy(Economy* const e) {
-	if (economy_ == e)
+void PlayerImmovable::set_economy(Economy* const e, WareWorker type) {
+	if (get_economy(type) == e)
 		return;
 
 	for (uint32_t i = 0; i < workers_.size(); ++i)
-		workers_[i]->set_economy(e);
+		workers_[i]->set_economy(e, type);
 
-	economy_ = e;
+	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 }
 
 /**
@@ -1360,7 +1360,8 @@ void PlayerImmovable::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_ON;
 	molog("player_number: %i\n", owner_->player_number());
 	FORMAT_WARNINGS_OFF;
-	molog("economy_: %p\n", economy_);
+	molog("ware_economy_: %p\n", ware_economy_);
+	molog("worker_economy_: %p\n", worker_economy_);
 	FORMAT_WARNINGS_ON;
 }
 

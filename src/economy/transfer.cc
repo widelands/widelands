@@ -116,14 +116,15 @@ PlayerImmovable* Transfer::get_destination(Game& g) {
  * Determine where we should be going from our current location.
  */
 PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& success) {
-	if (!location || !location->get_economy()) {
+	WareWorker type = worker_ ? wwWORKER : wwWARE;
+	if (!location || !location->get_economy(type)) {
 		tlog("no location or economy -> fail\n");
 		success = false;
 		return nullptr;
 	}
 
-	PlayerImmovable* destination = destination_.get(location->get_economy()->owner().egbase());
-	if (!destination || destination->get_economy() != location->get_economy()) {
+	PlayerImmovable* destination = destination_.get(location->get_economy(type)->owner().egbase());
+	if (!destination || destination->get_economy(type) != location->get_economy(type)) {
 		tlog("destination disappeared or economy mismatch -> fail\n");
 		success = false;
 		return nullptr;
@@ -141,9 +142,9 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 		return &locflag == location ? destination : &locflag;
 
 	// Brute force: recalculate the best route every time
-	if (!locflag.get_economy()->find_route(locflag, destflag, &route_, ware_ ? wwWARE : wwWORKER)) {
+	if (!locflag.get_economy(type)->find_route(locflag, destflag, &route_, type)) {
 		tlog("destination appears to have become split from current location -> fail\n");
-		Economy::check_split(locflag, destflag);
+		Economy::check_split(locflag, destflag, type);
 		success = false;
 		return nullptr;
 	}

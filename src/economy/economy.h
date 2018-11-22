@@ -86,6 +86,11 @@ struct NoteEconomy {
  * are \b always in the same economy, but two flags in the same economy are not always
  * connected by roads or the seafaring network - though of course, most code operates
  * on the assumption that they are, with fallbacks for when they aren't.
+ *
+ * Every thing that has economies now has one economy that handles only wares and one that handles
+ * only workers. The reason for this design is that two road networks connected only by ferries
+ * are the same economy from the ware point of view, but separate economies from a worker's point
+ * of view. This fix involves the least amount of code duplication.
  */
 class Economy {
 public:
@@ -107,8 +112,8 @@ public:
 		Time last_modified;
 	};
 
-	explicit Economy(Player&);
-	explicit Economy(Player&, Serial serial);  // For saveloading
+	explicit Economy(Player&, WareWorker);
+	explicit Economy(Player&, Serial serial, WareWorker);  // For saveloading
 	~Economy();
 
 	Serial serial() const {
@@ -119,14 +124,17 @@ public:
 		return owner_;
 	}
 
-	static void check_merge(Flag&, Flag&);
-	static void check_split(Flag&, Flag&);
+	WareWorker type() const {
+		return type_;
+	}
 
-	bool find_route(Flag& start, Flag& end, Route* route, WareWorker type, int32_t cost_cutoff = -1);
+	static void check_merge(Flag&, Flag&, WareWorker);
+	static void check_split(Flag&, Flag&, WareWorker);
+
+	bool find_route(Flag& start, Flag& end, Route* route, int32_t cost_cutoff = -1);
 
 	using WarehouseAcceptFn = boost::function<bool(Warehouse&)>;
 	Warehouse* find_closest_warehouse(Flag& start,
-	                                  WareWorker type = wwWORKER,
 	                                  Route* route = nullptr,
 	                                  uint32_t cost_cutoff = 0,
 	                                  const WarehouseAcceptFn& acceptfn = WarehouseAcceptFn());
@@ -269,6 +277,8 @@ private:
 	WareList workers_;  ///< virtual storage with all workers in this Economy
 	std::vector<Warehouse*> warehouses_;
 
+	WareWorker type_;  ///< whether we are a WareEconomy or a WorkerEconomy
+
 	RequestList requests_;  ///< requests
 	SupplyList supplies_;
 
@@ -277,7 +287,8 @@ private:
 	std::unique_ptr<Router> router_;
 
 	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;
-	std::vector<SplitPair> split_checks_;
+	std::vector<SplitPair> split_checks_ware_;
+	std::vector<SplitPair> split_checks_worker_;
 
 	/**
 	 * ID for the next request balancing timer. Used to throttle

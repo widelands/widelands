@@ -89,7 +89,7 @@ public:
 		return need_ship_ || expedition_ready_;
 	}
 
-	void set_economy(Economy*) override;
+	void set_economy(Economy*, WareWorker) override;
 
 	int32_t get_size() const override;
 	bool get_passable() const override;

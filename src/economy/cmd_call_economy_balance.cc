@@ -34,8 +34,18 @@ CmdCallEconomyBalance::CmdCallEconomyBalance(uint32_t const starttime,
                                              Economy* const economy,
                                              uint32_t const timerid)
    : GameLogicCommand(starttime) {
-	flag_ = economy->get_arbitrary_flag();
+	Flag* flag = economy->get_arbitrary_flag();
+	flag_ = flag;
 	timerid_ = timerid;
+	if (economy == flag->get_economy(wwWARE)) {
+		type_ = wwWARE;
+	}
+	else if (economy == flag->get_economy(wwWORKER)) {
+		type_ = wwWORKER;
+	}
+	else {
+		throw wexception("CmdCallEconomyBalance: This economy is neither a ware_economy nor a worker_economy!");
+	}
 }
 
 /**
@@ -44,10 +54,10 @@ CmdCallEconomyBalance::CmdCallEconomyBalance(uint32_t const starttime,
  */
 void CmdCallEconomyBalance::execute(Game& game) {
 	if (Flag* const flag = flag_.get(game))
-		flag->get_economy()->balance(timerid_);
+		flag->get_economy(type_)->balance(timerid_);
 }
 
-constexpr uint16_t kCurrentPacketVersion = 3;
+constexpr uint16_t kCurrentPacketVersion = 4;
 
 /**
  * Read and write
@@ -61,6 +71,7 @@ void CmdCallEconomyBalance::read(FileRead& fr, EditorGameBase& egbase, MapObject
 			if (serial)
 				flag_ = &mol.get<Flag>(serial);
 			timerid_ = fr.unsigned_32();
+			type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);
@@ -79,5 +90,6 @@ void CmdCallEconomyBalance::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 	else
 		fw.unsigned_32(0);
 	fw.unsigned_32(timerid_);
+	fw.unsigned_8(type_);
 }
 }
