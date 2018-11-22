@@ -1064,7 +1064,7 @@ void WLApplication::mainmenu() {
 			log("\n%s\n%s\n", messagetitle.c_str(), message.c_str());
 
 			UI::WLMessageBox mmb(
-			   &mm, messagetitle, message, UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
+			   &mm, messagetitle, richtext_escape(message), UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
 
 			message.clear();
