@@ -46,6 +46,8 @@ return {
       local function _send_state()
          set_textdomain("win_conditions")
 
+         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+
          local remaining_max_minutes = remaining_max_time // 60
          for idx, player in ipairs(plrs) do
             local msg = ""

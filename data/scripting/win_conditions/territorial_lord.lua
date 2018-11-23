@@ -42,6 +42,8 @@ return {
       local function _send_state()
          set_textdomain("win_conditions")
 
+         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+
          for idx, player in ipairs(plrs) do
             local msg = ""
             if territory_points.last_winning_team == player.team or territory_points.last_winning_player == player.number then
