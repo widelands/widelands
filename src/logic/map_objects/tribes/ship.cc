@@ -828,8 +828,8 @@ void Ship::start_task_expedition(Game& game) {
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->exploration_start = Coords(0, 0);
 	expedition_->island_explore_direction = IslandExploreDirection::kClockwise;
-	expedition_->ware_economy = get_owner()->create_economy();
-	expedition_->worker_economy = get_owner()->create_economy();
+	expedition_->ware_economy = get_owner()->create_economy(wwWARE);
+	expedition_->worker_economy = get_owner()->create_economy(wwWORKER);
 
 	// We are no longer in any other economy, but instead are an economy of our
 	// own.
@@ -1197,13 +1197,13 @@ void Ship::Loader::load_finish() {
 	if (ware_economy_serial_ != kInvalidSerial) {
 		ship.ware_economy_ = ship.get_owner()->get_economy(ware_economy_serial_);
 		if (!ship.ware_economy_) {
-			ship.ware_economy_ = ship.get_owner()->create_economy(economy_serial_);
+			ship.ware_economy_ = ship.get_owner()->create_economy(ware_economy_serial_, wwWARE);
 		}
 	}
 	if (worker_economy_serial_ != kInvalidSerial) {
 		ship.worker_economy_ = ship.get_owner()->get_economy(worker_economy_serial_);
 		if (!ship.worker_economy_) {
-			ship.worker_economy_ = ship.get_owner()->create_economy(worker_economy_serial_);
+			ship.worker_economy_ = ship.get_owner()->create_economy(worker_economy_serial_, wwWORKER);
 		}
 	}
 

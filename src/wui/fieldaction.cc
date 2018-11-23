@@ -623,11 +623,15 @@ void FieldActionWindow::act_buildflag() {
 
 void FieldActionWindow::act_configure_economy() {
 	if (upcast(const Widelands::Flag, flag, node_.field->get_immovable())) {
-		Widelands::Economy* economy = flag->get_economy();
-		if (!economy->has_window()) {
-			bool can_act =
-			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(economy->owner().player_number());
-			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), economy, can_act);
+		Widelands::Economy* ware_economy = flag->get_economy(Widelands::wwWARE);
+		Widelands::Economy* worker_economy = flag->get_economy(Widelands::wwWORKER);
+		if (!ware_economy->has_window() && !worker_economy->has_window()) {
+			bool can_act_ware =
+			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(ware_economy->owner().player_number());
+			bool can_act_worker =
+			   dynamic_cast<InteractiveGameBase&>(ibase()).can_act(worker_economy->owner().player_number());
+			new EconomyOptionsWindow(dynamic_cast<UI::Panel*>(&ibase()), ware_economy,
+					worker_economy, can_act_ware, can_act_worker);
 		}
 	}
 	die();

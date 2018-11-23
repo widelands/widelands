@@ -35,7 +35,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 2;
+constexpr uint16_t kCurrentPacketVersion = 3;
 
 void MapFlagPacket::read(FileSystem& fs,
                          EditorGameBase& egbase,
@@ -63,7 +63,8 @@ void MapFlagPacket::read(FileSystem& fs,
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
 
-				const Serial economy_serial = fr.unsigned_32();
+				const Serial ware_economy_serial = fr.unsigned_32();
+				const Serial worker_economy_serial = fr.unsigned_32();
 
 				Serial const serial = fr.unsigned_32();
 
@@ -98,9 +99,13 @@ void MapFlagPacket::read(FileSystem& fs,
 
 					// Get economy from serial
 					Player* player = egbase.get_player(owner);
-					Economy* economy = player->get_economy(economy_serial);
-					if (!economy) {
-						economy = player->create_economy(economy_serial);
+					Economy* ware_economy = player->get_economy(ware_economy_serial);
+					if (!ware_economy) {
+						ware_economy = player->create_economy(ware_economy_serial, wwWARE);
+					}
+					Economy* worker_economy = player->get_economy(worker_economy_serial);
+					if (!worker_economy) {
+						worker_economy = player->create_economy(worker_economy_serial, wwWORKER);
 					}
 
 					//  Now, create this Flag. Directly create it, do not call
@@ -108,7 +113,7 @@ void MapFlagPacket::read(FileSystem& fs,
 					//  packet. We always create this, no matter what skip is
 					//  since we have to read the data packets. We delete this
 					//  object later again, if it is not wanted.
-					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), player, fc, economy);
+					Flag* flag = new Flag(dynamic_cast<Game&>(egbase), player, fc, ware_economy, worker_economy);
 					mol.register_object<Flag>(serial, *flag);
 
 				} catch (const WException& e) {
@@ -143,7 +148,8 @@ void MapFlagPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver
 
 			fw.unsigned_8(1);
 			fw.unsigned_8(flag->owner().player_number());
-			fw.unsigned_32(flag->economy().serial());
+			fw.unsigned_32(flag->economy(wwWARE).serial());
+			fw.unsigned_32(flag->economy(wwWORKER).serial());
 			fw.unsigned_32(mos.register_object(*flag));
 		} else  //  no existence, no owner
 			fw.unsigned_8(0);

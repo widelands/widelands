@@ -154,35 +154,35 @@ void WarehouseSupply::set_nrworkers(DescriptionIndex const i) {
 
 /// Add and remove our wares and the Supply to the economies as necessary.
 void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
-	if (e == get_economy(type))
+	if (e == (type == wwWARE ? ware_economy_ : worker_economy_))
 		return;
 
-	if (Economy e = get_economy(type)) {
-		e->remove_supply(*this);
+	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
+		ec->remove_supply(*this);
 		if (type == wwWARE) {
 			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i)
 				if (wares_.stock(i))
-					e->remove_wares(i, wares_.stock(i));
+					ec->remove_wares(i, wares_.stock(i));
 		} else {
 			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i)
 				if (workers_.stock(i))
-					e->remove_workers(i, workers_.stock(i));
+					ec->remove_workers(i, workers_.stock(i));
 		}
 	}
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 
-	if (Economy e = get_economy(type)) {
+	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		if (type == wwWARE) {
 			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i)
 				if (wares_.stock(i))
-					e->add_wares(i, wares_.stock(i));
+					ec->add_wares(i, wares_.stock(i));
 		} else {
 			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i)
 				if (workers_.stock(i))
 					e->add_workers(i, workers_.stock(i));
 		}
-		e->add_supply(*this);
+		ec->add_supply(*this);
 	}
 }
 
@@ -794,7 +794,9 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 
 	for (const PlannedWorkers& pw : planned_workers_) {
 		for (Request* req : pw.requests) {
-			req->set_economy(e, type);
+			if (req->get_type() == type) {
+				req->set_economy(e);
+			}
 		}
 	}
 

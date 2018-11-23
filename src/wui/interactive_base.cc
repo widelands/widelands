@@ -1017,11 +1017,6 @@ void InteractiveBase::waterwayb_add_overlay() {
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			if (!(dynamic_cast<const Widelands::Flag*>(imm) || (caps & Widelands::BUILDCAPS_FLAG)))
 				continue;
-			// We mustn't connect separate economies with waterways
-			if (upcast(Widelands::PlayerImmovable, target, imm))
-				if (upcast(Widelands::PlayerImmovable, startflag, map.get_immovable(buildwaterway_->get_start())))
-					if (target->get_economy() != startflag->get_economy())
-						continue;
 		}
 
 		if (buildwaterway_->get_index(neighb) >= 0)

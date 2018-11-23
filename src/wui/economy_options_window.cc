@@ -33,44 +33,53 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 static const char pic_tab_workers[] = "images/wui/buildings/menu_tab_workers.png";
 
 EconomyOptionsWindow::EconomyOptionsWindow(UI::Panel* parent,
-                                           Widelands::Economy* economy,
-                                           bool can_act)
+                                           Widelands::Economy* ware_economy,
+                                           Widelands::Economy* worker_economy,
+                                           bool can_act_ware,
+                                           bool can_act_worker)
    : UI::Window(parent, "economy_options", 0, 0, 0, 0, _("Economy options")),
-     serial_(economy->serial()),
-     player_(&economy->owner()),
+     ware_serial_(ware_economy->serial()),
+     worker_serial_(worker_economy->serial()),
+     player_(&ware_economy->owner()),
      tabpanel_(this, UI::TabPanelStyle::kWuiDark),
-     ware_panel_(new EconomyOptionsPanel(&tabpanel_, serial_, player_, can_act, Widelands::wwWARE)),
+     ware_panel_(new EconomyOptionsPanel(&tabpanel_, ware_serial_, player_, can_act_ware, Widelands::wwWARE)),
      worker_panel_(
-        new EconomyOptionsPanel(&tabpanel_, serial_, player_, can_act, Widelands::wwWORKER)) {
+        new EconomyOptionsPanel(&tabpanel_, worker_serial_, player_, can_act_worker, Widelands::wwWORKER)) {
 	set_center_panel(&tabpanel_);
 
 	tabpanel_.add("wares", g_gr->images().get(pic_tab_wares), ware_panel_, _("Wares"));
 	tabpanel_.add("workers", g_gr->images().get(pic_tab_workers), worker_panel_, _("Workers"));
-	economy->set_has_window(true);
+	ware_economy->set_has_window(true);
+	worker_economy->set_has_window(true);
 	economynotes_subscriber_ = Notifications::subscribe<Widelands::NoteEconomy>(
 	   [this](const Widelands::NoteEconomy& note) { on_economy_note(note); });
 }
 
 EconomyOptionsWindow::~EconomyOptionsWindow() {
-	Widelands::Economy* economy = player_->get_economy(serial_);
-	if (economy != nullptr) {
-		economy->set_has_window(false);
+	Widelands::Economy* e_wa = player_->get_economy(ware_serial_);
+	Widelands::Economy* e_wo = player_->get_economy(worker_serial_);
+	if (e_wa) {
+		e_wa->set_has_window(false);
+	}
+	if (e_wo) {
+		e_wo->set_has_window(false);
 	}
 }
 
 void EconomyOptionsWindow::on_economy_note(const Widelands::NoteEconomy& note) {
-	if (note.old_economy == serial_) {
+	Widelands::Serial* serial = note.old_economy == ware_serial_ ? &ware_serial_ :
+			note.old_economy == worker_serial_ ? &worker_serial_ : nullptr;
+	if (serial) {
 		switch (note.action) {
 		case Widelands::NoteEconomy::Action::kMerged: {
-			serial_ = note.new_economy;
-			Widelands::Economy* economy = player_->get_economy(serial_);
+			*serial = note.new_economy;
+			Widelands::Economy* economy = player_->get_economy(*serial);
 			if (economy == nullptr) {
 				die();
 				return;
 			}
 			economy->set_has_window(true);
-			ware_panel_->set_economy(note.new_economy);
-			worker_panel_->set_economy(note.new_economy);
+			(*serial == ware_serial_ ? ware_panel_ : worker_panel_)->set_economy(note.new_economy);
 			move_to_top();
 		} break;
 		case Widelands::NoteEconomy::Action::kDeleted:
@@ -90,7 +99,8 @@ EconomyOptionsWindow::TargetWaresDisplay::TargetWaresDisplay(UI::Panel* const pa
                                                              bool selectable)
    : AbstractWaresDisplay(parent, x, y, player->tribe(), type, selectable),
      serial_(serial),
-     player_(player) {
+     player_(player),
+     type_(type) {
 	const Widelands::TribeDescr& owner_tribe = player->tribe();
 	if (type == Widelands::wwWORKER) {
 		for (const Widelands::DescriptionIndex& worker_index : owner_tribe.workers()) {

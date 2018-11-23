@@ -31,7 +31,8 @@
 #include "wui/waresdisplay.h"
 
 struct EconomyOptionsWindow : public UI::Window {
-	EconomyOptionsWindow(UI::Panel* parent, Widelands::Economy* economy, bool can_act);
+	EconomyOptionsWindow(UI::Panel* parent, Widelands::Economy* ware_economy,
+			Widelands::Economy* worker_economy, bool can_act_ware, bool can_act_worker);
 	~EconomyOptionsWindow();
 
 private:
@@ -52,6 +53,7 @@ private:
 	private:
 		Widelands::Serial serial_;
 		Widelands::Player* player_;
+		Widelands::WareWorker type_;
 	};
 
 	/**
@@ -79,7 +81,8 @@ private:
 	/// Actions performed when a NoteEconomyWindow is received.
 	void on_economy_note(const Widelands::NoteEconomy& note);
 
-	Widelands::Serial serial_;
+	Widelands::Serial ware_serial_;
+	Widelands::Serial worker_serial_;
 	Widelands::Player* player_;
 	UI::TabPanel tabpanel_;
 	EconomyOptionsPanel* ware_panel_;

@@ -4041,7 +4041,8 @@ const MethodType<LuaPlayerImmovable> LuaPlayerImmovable::Methods[] = {
 };
 const PropertyType<LuaPlayerImmovable> LuaPlayerImmovable::Properties[] = {
    PROP_RO(LuaPlayerImmovable, owner),
-   PROP_RO(LuaPlayerImmovable, debug_economy),
+   PROP_RO(LuaPlayerImmovable, debug_ware_economy),
+   PROP_RO(LuaPlayerImmovable, debug_worker_economy),
    {nullptr, nullptr, nullptr},
 };
 
@@ -4061,8 +4062,12 @@ int LuaPlayerImmovable::get_owner(lua_State* L) {
 }
 
 // UNTESTED, for debug only
-int LuaPlayerImmovable::get_debug_economy(lua_State* L) {
-	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy());
+int LuaPlayerImmovable::get_debug_ware_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWARE));
+	return 1;
+}
+int LuaPlayerImmovable::get_debug_worker_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWORKER));
 	return 1;
 }
 
@@ -4096,7 +4101,8 @@ const MethodType<LuaFlag> LuaFlag::Methods[] = {
    METHOD(LuaFlag, set_wares), METHOD(LuaFlag, get_wares), {nullptr, nullptr},
 };
 const PropertyType<LuaFlag> LuaFlag::Properties[] = {
-   PROP_RO(LuaFlag, economy),
+   PROP_RO(LuaFlag, ware_economy),
+   PROP_RO(LuaFlag, worker_economy),
    PROP_RO(LuaFlag, roads),
    PROP_RO(LuaFlag, building),
    {nullptr, nullptr, nullptr},
@@ -4108,7 +4114,7 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
  ==========================================================
  */
 /* RST
-   .. attribute:: economy
+   .. attribute:: ware_economy
 
       (RO) Returns the economy that this flag belongs to.
 
@@ -4116,11 +4122,27 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
       through placing/deleting roads and flags, you must get a fresh economy
       object every time you call another function on the resulting economy object.
 
-      :returns: The :class:`Economy` associated with the flag.
+      :returns: The :class:`Economy` associated with the flag to handle wares.
 */
-int LuaFlag::get_economy(lua_State* L) {
+int LuaFlag::get_ware_economy(lua_State* L) {
 	const Flag* f = get(L, get_egbase(L));
-	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy()));
+	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy(wwWARE)));
+}
+
+/* RST
+   .. attribute:: worker_economy
+
+      (RO) Returns the economy that this flag belongs to.
+
+      **Warning**: Since economies can disappear when a player merges them
+      through placing/deleting roads and flags, you must get a fresh economy
+      object every time you call another function on the resulting economy object.
+
+      :returns: The :class:`Economy` associated with the flag to handle workers.
+*/
+int LuaFlag::get_worker_economy(lua_State* L) {
+	const Flag* f = get(L, get_egbase(L));
+	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy(wwWORKER)));
 }
 
 /* RST
@@ -5531,7 +5553,8 @@ const MethodType<LuaShip> LuaShip::Methods[] = {
    {nullptr, nullptr},
 };
 const PropertyType<LuaShip> LuaShip::Properties[] = {
-   PROP_RO(LuaShip, debug_economy),      PROP_RO(LuaShip, last_portdock),
+   PROP_RO(LuaShip, debug_ware_economy), PROP_RO(LuaShip, debug_worker_economy),
+   PROP_RO(LuaShip, last_portdock),
    PROP_RO(LuaShip, destination),        PROP_RO(LuaShip, state),
    PROP_RW(LuaShip, scouting_direction), PROP_RW(LuaShip, island_explore_direction),
    PROP_RO(LuaShip, shipname),           {nullptr, nullptr, nullptr},
@@ -5543,8 +5566,12 @@ const PropertyType<LuaShip> LuaShip::Properties[] = {
  ==========================================================
  */
 // UNTESTED, for debug only
-int LuaShip::get_debug_economy(lua_State* L) {
-	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy());
+int LuaShip::get_debug_ware_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWARE));
+	return 1;
+}
+int LuaShip::get_debug_worker_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWORKER));
 	return 1;
 }
 

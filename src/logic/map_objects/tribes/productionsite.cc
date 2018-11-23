@@ -475,18 +475,23 @@ bool ProductionSite::init(EditorGameBase& egbase) {
 void ProductionSite::set_economy(Economy* const e, WareWorker type) {
 	if (Economy* const old = get_economy(type)) {
 		for (InputQueue* ip_queue : input_queues_) {
-			ip_queue->remove_from_economy(*old, type);
+			if (ip_queue->get_type() == type) {
+				ip_queue->remove_from_economy(*old);
+			}
 		}
 	}
 
 	Building::set_economy(e, type);
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		if (Request* const r = working_positions_[--i].worker_request)
-			r->set_economy(e, type);
+			if (r->get_type() == type)
+				r->set_economy(e);
 
 	if (e) {
 		for (InputQueue* ip_queue : input_queues_) {
-			ip_queue->add_to_economy(*e, type);
+			if (ip_queue->get_type() == type) {
+				ip_queue->add_to_economy(*e);
+			}
 		}
 	}
 }

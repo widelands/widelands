@@ -325,8 +325,8 @@ bool TrainingSite::init(EditorGameBase& egbase) {
 void TrainingSite::set_economy(Economy* e, WareWorker type) {
 	ProductionSite::set_economy(e, type);
 
-	if (soldier_request_)
-		soldier_request_->set_economy(e, type);
+	if (soldier_request_ && type == soldier_request_->get_type())
+		soldier_request_->set_economy(e);
 }
 
 /**

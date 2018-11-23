@@ -1057,7 +1057,7 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 }
 
 Worker::Worker(const WorkerDescr& worker_descr)
-   : Bob(worker_descr), ware_economy_(nullptr), worker_economy_(nullptr),
+   : Bob(worker_descr), worker_economy_(nullptr), ware_economy_(nullptr),
    		supply_(nullptr), transfer_(nullptr), current_exp_(0) {
 }
 
@@ -1076,8 +1076,8 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 		FORMAT_WARNINGS_ON;
 		molog("** Owner (plrnr): %i\n", loc->owner().player_number());
 		FORMAT_WARNINGS_OFF;
-		molog("* WorkerEconomy: %p\n", loc->get_worker_economy());
-		molog("* WareEconomy: %p\n", loc->get_ware_economy());
+		molog("* WorkerEconomy: %p\n", loc->get_economy(wwWORKER));
+		molog("* WareEconomy: %p\n", loc->get_economy(wwWARE));
 		FORMAT_WARNINGS_ON;
 	}
 
@@ -1092,8 +1092,7 @@ void Worker::log_general_info(const EditorGameBase& egbase) const {
 	if (upcast(WareInstance, ware, carried_ware_.get(egbase))) {
 		molog("* carried_ware->get_ware() (id): %i\n", ware->descr_index());
 		FORMAT_WARNINGS_OFF;
-		molog("* carried_ware->get_ware_economy() (): %p\n", ware->get_ware_economy());
-		molog("* carried_ware->get_worker_economy() (): %p\n", ware->get_worker_economy());
+		molog("* carried_ware->get_economy() (): %p\n", ware->get_economy());
 		FORMAT_WARNINGS_ON;
 	}
 
@@ -1135,12 +1134,12 @@ void Worker::set_location(PlayerImmovable* const location) {
 		Economy* const eco_wa = location->get_economy(wwWARE);
 
 		if (!worker_economy_ || (descr().type() == MapObjectType::SOLDIER)) {
-			set_economy(eco, wwWORKER);
+			set_economy(eco_wo, wwWORKER);
 		} else if (worker_economy_ != eco_wo) {
 			throw wexception("Worker::set_location changes worker_economy, but worker is no soldier");
 		}
 		if (!ware_economy_ || (descr().type() == MapObjectType::SOLDIER)) {
-			set_economy(eco, wwWARE);
+			set_economy(eco_wa, wwWARE);
 		} else if (ware_economy_ != eco_wa) {
 			throw wexception("Worker::set_location changes ware_economy, but worker is no soldier");
 		}
@@ -1149,8 +1148,8 @@ void Worker::set_location(PlayerImmovable* const location) {
 		if (!is_shipping()) {
 			// Our location has been destroyed, we are now fugitives.
 			// Interrupt whatever we've been doing.
-			set_ware_economy(nullptr);
-			set_worker_economy(nullptr);
+			set_economy(nullptr, wwWARE);
+			set_economy(nullptr, wwWORKER);
 
 			EditorGameBase& egbase = get_owner()->egbase();
 			if (upcast(Game, game, &egbase)) {
@@ -1166,7 +1165,7 @@ void Worker::set_location(PlayerImmovable* const location) {
  * \li by the current location, when the location's economy changes
  */
 void Worker::set_economy(Economy* const economy, WareWorker type) {
-	Economy old = get_economy(type);
+	Economy* old = get_economy(type);
 	if (economy == old)
 		return;
 
@@ -1175,10 +1174,13 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = economy;
 
-	if (WareInstance* const ware = get_carried_ware(get_owner()->egbase()))
-		ware->set_economy(economy_, type);
-	if (supply_)
-		supply_->set_economy(economy_, type);
+	if (type == wwWARE) {
+		if (WareInstance* const ware = get_carried_ware(get_owner()->egbase())) {
+			ware->set_economy(ware_economy_);
+		}
+	}
+	if (supply_ && type == wwWORKER)
+		supply_->set_economy(worker_economy_);
 
 	if (Economy* e = get_economy(type))
 		e->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
@@ -1225,8 +1227,8 @@ void Worker::cleanup(EditorGameBase& egbase) {
 	if (get_location(egbase))
 		set_location(nullptr);
 
-	set_ware_economy(nullptr);
-	set_worker_economy(nullptr);
+	set_economy(nullptr, wwWARE);
+	set_economy(nullptr, wwWORKER);
 
 	Bob::cleanup(egbase);
 }
@@ -1601,8 +1603,8 @@ bool Worker::is_shipping() {
 void Worker::shipping_pop(Game& game, State& /* state */) {
 	// Defense against unorderly cleanup via reset_tasks
 	if (!get_location(game)) {
-		set_ware_economy(nullptr);
-		set_worker_economy(nullptr);
+		set_economy(nullptr, wwWARE);
+		set_economy(nullptr, wwWORKER);
 	}
 }
 

@@ -155,8 +155,11 @@ void Ferry::init_auto_task(Game& game) {
 }
 
 void Ferry::set_economy(Game& game, Economy* e, WareWorker type) {
-	if (WareInstance* ware = get_carried_ware(game))
-		ware->set_economy(e, type);
+	if (type == wwWARE)
+		if (WareInstance* ware = get_carried_ware(game))
+			ware->set_economy(e);
+	// Since ferries are distributed to waterways by fleets instead of economies,
+	// we do not need to maintain our worker economy
 }
 
 Fleet* Ferry::get_fleet() const {

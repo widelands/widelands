@@ -910,7 +910,8 @@ public:
 	 * Properties
 	 */
 	int get_owner(lua_State* L);
-	int get_debug_economy(lua_State* L);
+	int get_debug_ware_economy(lua_State* L);
+	int get_debug_worker_economy(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -993,7 +994,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_economy(lua_State* L);
+	int get_ware_economy(lua_State* L);
+	int get_worker_economy(lua_State* L);
 	int get_roads(lua_State* L);
 	int get_building(lua_State* L);
 	/*
@@ -1343,7 +1345,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_debug_economy(lua_State* L);
+	int get_debug_ware_economy(lua_State* L);
+	int get_debug_worker_economy(lua_State* L);
 	int get_last_portdock(lua_State* L);
 	int get_destination(lua_State* L);
 	int get_state(lua_State* L);

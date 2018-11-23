@@ -34,14 +34,14 @@
 namespace Widelands {
 namespace {
 
-constexpr uint16_t kCurrentPacketVersion = 5;
+constexpr uint16_t kCurrentPacketVersion = 6;
 
 bool write_expedition_ship_economy(Economy* economy, const Map& map, FileWrite* fw) {
 	for (Field const* field = &map[0]; field < &map[map.max_index()]; ++field) {
 		Bob* bob = field->get_first_bob();
 		while (bob) {
 			if (upcast(Ship const, ship, bob)) {
-				if (ship->get_economy() == economy) {
+				if (ship->get_economy(economy->type()) == economy) {
 					// TODO(sirver): the 0xffffffff is ugly and fragile.
 					fw->unsigned_32(0xffffffff);  // Sentinel value.
 					fw->unsigned_32(field - &map[0]);
@@ -71,13 +71,14 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 			iterate_players_existing(p, nr_players, game, player) try {
 				const size_t num_economies = fr.unsigned_32();
 				for (uint32_t i = 0; i < num_economies; ++i) {
+					WareWorker type = fr.unsigned_8() ? wwWORKER : wwWARE;
 					uint32_t value = fr.unsigned_32();
 					if (value < 0xffffffff) {
 						if (upcast(Flag const, flag, map[value].get_immovable())) {
 							try {
-								assert(flag->get_economy()->owner().player_number() ==
+								assert(flag->get_economy(type)->owner().player_number() ==
 								       player->player_number());
-								EconomyDataPacket d(flag->get_economy());
+								EconomyDataPacket d(flag->get_economy(type));
 								d.read(fr);
 							} catch (const GameDataError& e) {
 								throw GameDataError(
@@ -98,7 +99,7 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 										assert(ship->get_economy());
 										assert(ship->get_economy()->owner().player_number() ==
 										       player->player_number());
-										EconomyDataPacket d(ship->get_economy());
+										EconomyDataPacket d(ship->get_economy(type));
 										d.read(fr);
 										read_this_economy = true;
 										break;
@@ -140,6 +141,7 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 		const auto& economies = player->economies();
 		fw.unsigned_32(economies.size());
 		for (const auto& economy : economies) {
+			fw.unsigned_8(economy.second->type());
 			Flag* arbitrary_flag = economy.second->get_arbitrary_flag();
 			if (arbitrary_flag != nullptr) {
 				fw.unsigned_32(map.get_fcoords(arbitrary_flag->get_position()).field - &map[0]);
