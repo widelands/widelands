@@ -37,15 +37,8 @@ CmdCallEconomyBalance::CmdCallEconomyBalance(uint32_t const starttime,
 	Flag* flag = economy->get_arbitrary_flag();
 	flag_ = flag;
 	timerid_ = timerid;
-	if (economy == flag->get_economy(wwWARE)) {
-		type_ = wwWARE;
-	}
-	else if (economy == flag->get_economy(wwWORKER)) {
-		type_ = wwWORKER;
-	}
-	else {
-		throw wexception("CmdCallEconomyBalance: This economy is neither a ware_economy nor a worker_economy!");
-	}
+	type_ = economy->type();
+	assert(flag->get_economy(type_) == economy);
 }
 
 /**
