@@ -856,7 +856,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Randomly pick one of the immovables to be planted.
 
 	// Each candidate is weighted by its probability to grow.
-	int64_t total_weight = 0;
+	int total_weight = 0;
 	for (const auto& bsii : best_suited_immovables_index) {
 		const int weight = std::get<0>(bsii);
 		total_weight += weight;

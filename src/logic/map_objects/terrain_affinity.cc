@@ -60,7 +60,7 @@ inline unsigned int calculate_probability_to_grow(const TerrainAffinity& affinit
     assert(affinity.pickiness() < 100);
 	const double sigma = std::floor(100.0 - affinity.pickiness());
 
-	// Unlike real numbers, floating point multiplication/division is neither associative nor commutative, so we am forcing the same order of calculation here for all compilers and optimization settings by using extra parentheses.
+	// Unlike real numbers, floating point multiplication/division is neither associative nor commutative. Fortunately, execution order is well-defined by the C++ standard.
 	const double result = exp(-
 							  (square((affinity.preferred_fertility() - terrain_fertility) / (kFertilityWeight * sigma)) +
 							   square((affinity.preferred_humidity() - terrain_humidity) / (kHumidityWeight * sigma)) +
