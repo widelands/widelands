@@ -282,14 +282,18 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		}
 
 		if (capscache_ & Widelands::Building::PCap_Dismantle) {
-			const Widelands::Buildcost wares =
-			   Widelands::DismantleSite::count_returned_wares(building);
-			if (!wares.empty()) {
+			if (building->descr().can_be_dismantled()) {
+				const Widelands::Buildcost wares =
+				   Widelands::DismantleSite::count_returned_wares(building);
+
+				const std::string dismantle_text =
+				   (wares.empty() ? _("Dismantle") :
+				                    std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
+				                       "</font><br>" + waremap_to_richtext(owner.tribe(), wares));
+
 				UI::Button* dismantlebtn =
 				   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-				                  g_gr->images().get(pic_dismantle),
-				                  std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
-				                     "</font><br>" + waremap_to_richtext(owner.tribe(), wares));
+				                  g_gr->images().get(pic_dismantle), dismantle_text);
 				dismantlebtn->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
 				capsbuttons->add(dismantlebtn);

@@ -14,7 +14,6 @@ tribes:new_productionsite_type {
       granite = 1
    },
    return_on_dismantle_on_enhanced = {
-      planks = 0,
    },
 
    animations = {
