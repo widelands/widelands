@@ -179,7 +179,7 @@ Flag& Flag::base_flag() {
  */
 void Flag::set_economy(Economy* const e, WareWorker type) {
 	Economy* const old = get_economy(type);
-
+	
 	if (old == e) {
 		return;
 	}

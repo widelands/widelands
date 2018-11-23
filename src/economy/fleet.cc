@@ -109,8 +109,6 @@ bool Fleet::init(EditorGameBase& egbase) {
 		return false;
 	}
 
-	log("NOCOM: Fleet %u: new fleet initialized.\n", serial_);
-
 	return find_other_fleet(egbase);
 }
 
@@ -185,7 +183,6 @@ bool Fleet::find_other_fleet(EditorGameBase& egbase) {
 						log("Found a waterway with no fleet!\n");
 					}
 					if (ww->get_fleet() != this && ww->get_owner() == get_owner()) {
-						log("NOCOM: Fleet %u: merging with fleet %u (ww).\n", serial_, ww->get_fleet()->serial_);
 						return ww->get_fleet()->merge(egbase, this);
 					}
 				}
@@ -206,15 +203,12 @@ bool Fleet::find_other_fleet(EditorGameBase& egbase) {
 				if (upcast(Ferry, ferry, bob)) {
 					if (ferry->get_fleet() != nullptr && ferry->get_fleet() != this &&
 						ferry->get_owner() == get_owner()) {
-						log("NOCOM: Fleet %u: merging with fleet %u (fy).\n", serial_, ferry->get_fleet()->serial_);
 						return ferry->get_fleet()->merge(egbase, this);
 					}
 				}
 			}
 		}
 	}
-
-	log("NOCOM: Fleet %u: found no fleet to merge with.\n", serial_);
 
 	if (active()) {
 		update(egbase);
@@ -273,8 +267,6 @@ bool Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 	if (!ships_.empty() && !ports_.empty())
 		check_merge_economy();
 
-	log("NOCOM: Fleet %u: merge with fleet %u complete.\n", serial_, other->serial_);
-
 	other->ports_.clear();
 	other->portpaths_.clear();
 	other->remove(egbase);
@@ -299,7 +291,6 @@ void Fleet::check_merge_economy() {
 }
 
 void Fleet::cleanup(EditorGameBase& egbase) {
-	log("NOCOM: Fleet %u: deleting!\n", serial_);
 	while (!ports_.empty()) {
 		PortDock* pd = ports_.back();
 		ports_.pop_back();
@@ -781,8 +772,6 @@ void Fleet::update(EditorGameBase& egbase) {
  * @note Do not call this directly; instead, trigger it via @ref update
  */
 void Fleet::act(Game& game, uint32_t /* data */) {
-	log("NOCOM: Fleet %u: act() called: Found %i ferries and %i waterway requests\n", serial_,
-			ferries_.size(), pending_ferry_requests_.size());
 	act_pending_ = false;
 
 	if (!active()) {
@@ -802,7 +791,6 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 			idle_ferries.push_back(f);
 		}
 	}
-	log("NOCOM: Fleet %u: act() acting: %i ferries are unemployed\n", serial_, idle_ferries.size());
 	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
 		Waterway* ww = pending_ferry_requests_[0];
 

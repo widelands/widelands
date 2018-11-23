@@ -142,7 +142,7 @@ PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& 
 		return &locflag == location ? destination : &locflag;
 
 	// Brute force: recalculate the best route every time
-	if (!locflag.get_economy(type)->find_route(locflag, destflag, &route_, type)) {
+	if (!locflag.get_economy(type)->find_route(locflag, destflag, &route_)) {
 		tlog("destination appears to have become split from current location -> fail\n");
 		Economy::check_split(locflag, destflag, type);
 		success = false;
