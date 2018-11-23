@@ -35,18 +35,13 @@ Buildcost::Buildcost() : std::map<DescriptionIndex, uint8_t>() {
 Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes)
    : std::map<DescriptionIndex, uint8_t>() {
 	for (const std::string& warename : table->keys<std::string>()) {
-		// Read ware index
+		// Check ware name
 		if (!tribes.ware_exists(warename)) {
 			throw GameDataError("Buildcost: Unknown ware: %s", warename.c_str());
 		}
-		DescriptionIndex const idx = tribes.safe_ware_index(warename);
-		if (count(idx) != 0) {
-			throw GameDataError(
-			   "Buildcost: Ware '%s' is listed twice", warename.c_str());
-		}
 
 		// Read value
-		int32_t value = table->get_int(warename);
+		const int32_t value = table->get_int(warename);
 		if (value < 1) {
 			throw GameDataError("Buildcost: Ware count needs to be > 0 in \"%s=%d\".\nEmpty buildcost tables are allowed if you wish to have an amount of 0.", warename.c_str(), value);
 		} else if (value > 255) {
@@ -54,7 +49,7 @@ Buildcost::Buildcost(std::unique_ptr<LuaTable> table, const Tribes& tribes)
 		}
 
 		// Add
-		insert(std::pair<DescriptionIndex, uint8_t>(idx, value));
+		insert(std::pair<DescriptionIndex, uint8_t>(tribes.safe_ware_index(warename), value));
 	}
 }
 
