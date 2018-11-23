@@ -220,7 +220,7 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 					      if (canceled.bootstrap == pd->expedition_bootstrap()) {
 						      update_expedition_button(true);
 					      }
-					   });
+				      });
 			}
 		} else if (upcast(const Widelands::ProductionSite, productionsite, building)) {
 			if (!is_a(Widelands::MilitarySite, productionsite)) {
@@ -286,13 +286,15 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 				const Widelands::Buildcost wares =
 				   Widelands::DismantleSite::count_returned_wares(building);
 
-				const std::string dismantle_text = wares.empty() ? _("This building will return no wares when it is dismantled.") : std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") +
-						"</font><br>" + waremap_to_richtext(owner.tribe(), wares);
+				const std::string dismantle_text =
+				   std::string(_("Dismantle")) + "<br><font size=11>" + _("Returns:") + "</font><br>" +
+				   /** TRANSLATORS: Test in tooltip when dismantling a building will return no wares.
+				      Has a header "Returns:" above it. */
+				   (wares.empty() ? _("No wares") : waremap_to_richtext(owner.tribe(), wares));
 
 				UI::Button* dismantlebtn =
 				   new UI::Button(capsbuttons, "dismantle", 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,
-								  g_gr->images().get(pic_dismantle),
-								  dismantle_text);
+				                  g_gr->images().get(pic_dismantle), dismantle_text);
 				dismantlebtn->sigclicked.connect(
 				   boost::bind(&BuildingWindow::act_dismantle, boost::ref(*this)));
 				capsbuttons->add(dismantlebtn);
