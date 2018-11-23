@@ -689,8 +689,9 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 		if (!find_route(
 		       supp.get_position(game)->base_flag(), target_flag, route, best_cost)) {
 			if (!best_route) {
-				// TODO(Nordfriese): This warning often appears even though
-				// the ware in question does get transported ... bug?
+				// TODO(Nordfriese): This warning often appears while set_economy() is called for
+				// something. The routing works on the next try, so this is not a bug.
+				// Should we remove the warning?
 				log("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
 				// To help to debug this a bit:
 				log(" ... ware at: %3dx%3d, requestor at: %3dx%3d! Type is %s, item %s.\n",

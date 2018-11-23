@@ -179,7 +179,7 @@ Flag& Flag::base_flag() {
  */
 void Flag::set_economy(Economy* const e, WareWorker type) {
 	Economy* const old = get_economy(type);
-	
+
 	if (old == e) {
 		return;
 	}
@@ -197,7 +197,7 @@ void Flag::set_economy(Economy* const e, WareWorker type) {
 	}
 
 	for (const FlagJob& temp_job : flag_jobs_) {
-		if (temp_job.request->get_economy()->type() == type) {
+		if (temp_job.request->get_type() == type) {
 			temp_job.request->set_economy(e);
 		}
 	}

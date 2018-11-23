@@ -1260,13 +1260,15 @@ PlayerImmovable::~PlayerImmovable() {
  * Change the economy, transfer the workers
 */
 void PlayerImmovable::set_economy(Economy* const e, WareWorker type) {
-	if (get_economy(type) == e)
+	if (get_economy(type) == e) {
 		return;
-
-	for (uint32_t i = 0; i < workers_.size(); ++i)
-		workers_[i]->set_economy(e, type);
+	}
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
+
+	for (uint32_t i = 0; i < workers_.size(); ++i) {
+		workers_[i]->set_economy(e, type);
+	}
 }
 
 /**
