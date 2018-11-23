@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-02 08:03+0000\n"
-"PO-Revision-Date: 2018-11-04 07:08+0000\n"
+"POT-Creation-Date: 2018-11-16 06:01+0000\n"
+"PO-Revision-Date: 2018-11-20 19:06+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -328,21 +328,21 @@ msgstr "Widelands ei voinut ladata tiedostoa \"%s\": Tiedostomuoto vaikuttaa ep�
 msgid "Creating players"
 msgstr "Luon pelaajia"
 
-#: ../../src/editor/editorinteractive.cc:231
+#: ../../src/editor/editorinteractive.cc:232
 msgid "Unsaved Map"
 msgstr "Tallentamaton kartta"
 
-#: ../../src/editor/editorinteractive.cc:232
+#: ../../src/editor/editorinteractive.cc:233
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Karttaa ei ole tallennettu. Haluatko poistua?"
 
-#: ../../src/editor/editorinteractive.cc:616
+#: ../../src/editor/editorinteractive.cc:617
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr "Alustan tyhjää karttaa…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:620
+#: ../../src/editor/editorinteractive.cc:621
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -351,7 +351,7 @@ msgid "No Name"
 msgstr "Ei nimeä"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:623
+#: ../../src/editor/editorinteractive.cc:624
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -359,7 +359,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../../src/editor/editorinteractive.cc:630
+#: ../../src/editor/editorinteractive.cc:631
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Lataan karttaa \"%s\"…"
@@ -857,25 +857,26 @@ msgid "unnamed"
 msgstr "nimetön"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:268
-#: ../../src/wui/game_main_menu_save_game.cc:174
+#: ../../src/wui/game_main_menu_save_game.cc:175
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Tiedosto '%s' on jo olemassa. Ylikirjoitanko?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:271
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:285
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:331
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:287
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:320
 msgid "Error Saving Map!"
 msgstr "Kartan tallennus epäonnistui!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:282
-#, c-format
-msgid ""
-"A file with the name ‘%s.tmp’ already exists. You have to remove it "
-"manually."
-msgstr "Tiedosto nimeltään \"%s.tmp\" on jo olemassa. Poista se käsin."
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
+msgid "File ‘%’ could not be deleted."
+msgstr "Tiedostoa ‘%’ ei voitu poistaa."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:328
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:286
+msgid "Try saving under a different name!"
+msgstr "Yritä tallentaa toisella nimellä!"
+
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:317
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1109,7 +1110,7 @@ msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr "Seuraavat merkit eivät ole sallittuja:"
 
-#: ../../src/logic/editor_game_base.cc:228
+#: ../../src/logic/editor_game_base.cc:318
 msgid "Loading graphics"
 msgstr "Ladataan grafiikkaa"
 
@@ -1132,7 +1133,7 @@ msgid "Loading map…"
 msgstr "Lataan karttaa…"
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1421
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1422
 msgid "Loading…"
 msgstr "Lataa…"
 
@@ -1389,12 +1390,12 @@ msgid_plural "Recruited %s"
 msgstr[0] "Rekrytoitu %s"
 msgstr[1] "Rektytoitu %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1281
+#: ../../src/logic/map_objects/tribes/production_program.cc:1280
 msgid "No soldier to train!"
 msgstr "Ei koulutettavia sotilaita!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1290
-#: ../../src/logic/map_objects/tribes/production_program.cc:1368
+#: ../../src/logic/map_objects/tribes/production_program.cc:1289
+#: ../../src/logic/map_objects/tribes/production_program.cc:1367
 msgid "No soldier found for this training level!"
 msgstr "Tämän tason harjoitteluun sopivaa sotilasta ei löytynyt!"
 
@@ -1666,7 +1667,7 @@ msgid ""
 msgstr "Widelands ei kyennyt muodostamaan yhteyttä annettuun osoitteeseen. Joko oletetussa portissa ei ole käynnissä Widelands-palvelinta tai palvelin sulkeutui, kun yritit ottaa yhteyttä."
 
 #: ../../src/network/gameclient.cc:185 ../../src/network/gamehost.cc:641
-#: ../../src/wlapplication.cc:1313
+#: ../../src/wlapplication.cc:1314
 msgid "Preparing game"
 msgstr "Valmistelen peliä"
 
@@ -2989,11 +2990,11 @@ msgstr "Kampanjat"
 msgid "Load Game"
 msgstr "Lataa peli"
 
-#: ../../src/wlapplication.cc:1108
+#: ../../src/wlapplication.cc:1109
 msgid "Game data error"
 msgstr "Pelitietovirhe"
 
-#: ../../src/wlapplication.cc:1116
+#: ../../src/wlapplication.cc:1117
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3001,18 +3002,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Ole hyvä ja raportoi tämä ongelma auttaaksesi meitä parantamaan Widelandsia. Löydät asiaankuuluvat viestit ohjelman standarditulosteesta (stdout.txt tiedosto Windowsissa). Käytät koontiversiota  %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1123
+#: ../../src/wlapplication.cc:1124
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Ole hyvä ja liitä tämä tieto raporttiisi.\n\nWidelands pyrkii tallentamaan pelin automaattisesti virheiden sattuessa. Pelin voi usein – mutta ei aina – ladata ja jatkaa taas pelaamista."
 
-#: ../../src/wlapplication.cc:1250
+#: ../../src/wlapplication.cc:1251
 msgid "Invalid Address"
 msgstr "Virheellinen Osoite"
 
-#: ../../src/wlapplication.cc:1251
+#: ../../src/wlapplication.cc:1252
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Annettu isäntänimi tai osoite on virheellinen, eikä siihen voida ottaa yhteyttä."
 
@@ -3403,7 +3404,7 @@ msgstr "Oletko varma että haluat poistua tästä pelistä?"
 msgid "Save Game"
 msgstr "Tallenna peli"
 
-#: ../../src/wui/game_main_menu_save_game.cc:161
+#: ../../src/wui/game_main_menu_save_game.cc:162
 msgid ""
 "Game Saving Error!\n"
 "Saved game file may be corrupt!\n"
@@ -3411,8 +3412,8 @@ msgid ""
 "Reason given:\n"
 msgstr "Peliä tallennettaessa tapahtui virhe!\nTallennettu pelitiedosto saattaa olla viallinen.\n\nSyy:\n"
 
-#: ../../src/wui/game_main_menu_save_game.cc:164
-#: ../../src/wui/game_main_menu_save_game.cc:173
+#: ../../src/wui/game_main_menu_save_game.cc:165
+#: ../../src/wui/game_main_menu_save_game.cc:174
 msgid "Save Game Error!"
 msgstr "Pelitallennusvirhe!"
 

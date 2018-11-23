@@ -15,6 +15,7 @@
 # Raymond Vetter, 2016,2018
 # Stephan Lutz <stephan-lutz@gmx.de>, 2018
 # The Widelands development team <widelands-public@Alists.sf.net>, 2010
+# Tino Miegel <tino.miegel@gmail.com>, 2018
 # Elisabeth Jäger, 2015-2016
 # ‮ <ovvv@web.de>, 2015
 # wl-zocker, 2015-2016
@@ -22,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
-"PO-Revision-Date: 2018-10-29 12:55+0000\n"
-"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
+"POT-Creation-Date: 2018-11-16 06:01+0000\n"
+"PO-Revision-Date: 2018-11-19 10:07+0000\n"
+"Last-Translator: Elisabeth Jäger\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -336,21 +337,21 @@ msgstr "Widelands konnte die Datei „%s“ nicht laden. Das Dateiformat scheint
 msgid "Creating players"
 msgstr "Spieler erstellen"
 
-#: ../../src/editor/editorinteractive.cc:231
+#: ../../src/editor/editorinteractive.cc:232
 msgid "Unsaved Map"
 msgstr "Ungespeicherte Karte"
 
-#: ../../src/editor/editorinteractive.cc:232
+#: ../../src/editor/editorinteractive.cc:233
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Die Karte wurde noch nicht gespeichert. Willst du wirklich aufhören?"
 
-#: ../../src/editor/editorinteractive.cc:616
+#: ../../src/editor/editorinteractive.cc:617
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr "Erstelle leere Karte …"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:620
+#: ../../src/editor/editorinteractive.cc:621
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -359,7 +360,7 @@ msgid "No Name"
 msgstr "Kein Name"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:623
+#: ../../src/editor/editorinteractive.cc:624
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -367,7 +368,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../../src/editor/editorinteractive.cc:630
+#: ../../src/editor/editorinteractive.cc:631
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Lade Karte „%s“ …"
@@ -632,7 +633,7 @@ msgstr "Aktuelles Verzeichnis: %s"
 #: ../../src/ui_basic/messagebox.cc:86 ../../src/ui_fsmenu/helpwindow.cc:51
 #: ../../src/ui_fsmenu/load_map_or_game.cc:36
 #: ../../src/ui_fsmenu/options.cc:88
-#: ../../src/wui/game_main_menu_save_game.cc:66
+#: ../../src/wui/game_main_menu_save_game.cc:69
 #: ../../src/wui/story_message_box.cc:45
 msgid "OK"
 msgstr "OK"
@@ -644,7 +645,7 @@ msgstr "OK"
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:57
 #: ../../src/ui_basic/messagebox.cc:92 ../../src/ui_fsmenu/launch_mpg.cc:79
 #: ../../src/ui_fsmenu/options.cc:86
-#: ../../src/wui/game_main_menu_save_game.cc:65 ../../src/wui/login_box.cc:59
+#: ../../src/wui/game_main_menu_save_game.cc:68 ../../src/wui/login_box.cc:59
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -854,7 +855,7 @@ msgid "Make Directory"
 msgstr "Erstelle Verzeichnis"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:70
-#: ../../src/wui/game_main_menu_save_game.cc:61
+#: ../../src/wui/game_main_menu_save_game.cc:64
 #: ../../src/wui/gamedetails.cc:143
 msgid "Filename:"
 msgstr "Dateiname:"
@@ -865,25 +866,26 @@ msgid "unnamed"
 msgstr "unbenannt"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:268
-#: ../../src/wui/game_main_menu_save_game.cc:171
+#: ../../src/wui/game_main_menu_save_game.cc:175
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Eine Datei mit dem Namen „%s“ existiert bereits. Überschreiben?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:271
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:285
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:331
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:287
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:320
 msgid "Error Saving Map!"
 msgstr "Fehler beim Speichern der Karte!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:282
-#, c-format
-msgid ""
-"A file with the name ‘%s.tmp’ already exists. You have to remove it "
-"manually."
-msgstr "Eine Datei mit dem Namen „%s.tmp“ existiert bereits. Du musst sie manuell entfernen."
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
+msgid "File ‘%’ could not be deleted."
+msgstr "Datei „%“ konnte nicht gelöscht werden."
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:328
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:286
+msgid "Try saving under a different name!"
+msgstr "Versuche es bitte mit einem anderen Speichernamen."
+
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:317
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1117,7 +1119,7 @@ msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr "Die folgenden Zeichen sind nicht erlaubt:"
 
-#: ../../src/logic/editor_game_base.cc:228
+#: ../../src/logic/editor_game_base.cc:318
 msgid "Loading graphics"
 msgstr "Lade Grafiken"
 
@@ -1140,7 +1142,7 @@ msgid "Loading map…"
 msgstr "Lade Karte …"
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1421
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1422
 msgid "Loading…"
 msgstr "Lade …"
 
@@ -1397,12 +1399,12 @@ msgid_plural "Recruited %s"
 msgstr[0] "%s ausgebildet"
 msgstr[1] "%s ausgebildet"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1281
+#: ../../src/logic/map_objects/tribes/production_program.cc:1280
 msgid "No soldier to train!"
 msgstr "Kein Soldat zum Trainieren vorhanden!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1290
-#: ../../src/logic/map_objects/tribes/production_program.cc:1368
+#: ../../src/logic/map_objects/tribes/production_program.cc:1289
+#: ../../src/logic/map_objects/tribes/production_program.cc:1367
 msgid "No soldier found for this training level!"
 msgstr "Kein Soldat für diese Trainingsstufe gefunden!"
 
@@ -1674,7 +1676,7 @@ msgid ""
 msgstr "Widelands konnte keine Verbindung zu der angegebenen Adresse erstellen. Entweder lief kein Widelandsserver am angegebenen Port, oder der Server wurde gerade geschlossen, als du dich anmelden wolltest."
 
 #: ../../src/network/gameclient.cc:185 ../../src/network/gamehost.cc:641
-#: ../../src/wlapplication.cc:1313
+#: ../../src/wlapplication.cc:1314
 msgid "Preparing game"
 msgstr "Das Spiel wird vorbereitet"
 
@@ -2997,11 +2999,11 @@ msgstr "Kampagnen"
 msgid "Load Game"
 msgstr "Spielstand laden"
 
-#: ../../src/wlapplication.cc:1108
+#: ../../src/wlapplication.cc:1109
 msgid "Game data error"
 msgstr "Spieldatenfehler"
 
-#: ../../src/wlapplication.cc:1116
+#: ../../src/wlapplication.cc:1117
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3009,18 +3011,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Bitte melde das aufgetretene Problem, damit Widelands entsprechend verbessert werden kann. Weitere Informationen stehen in der Standardausgabe (stdout.txt unter Windows). Benutzte Build-Version: %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1123
+#: ../../src/wlapplication.cc:1124
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Bitte füge der Meldung diese Informationen bei.\n\nWidelands versucht, einen Spielstand zu schreiben, wenn im Spielverlauf ein Fehler auftrat. Es ist oft – wenn auch nicht immer – möglich, das Spiel wieder zu laden und weiterzuspielen."
 
-#: ../../src/wlapplication.cc:1250
+#: ../../src/wlapplication.cc:1251
 msgid "Invalid Address"
 msgstr "Ungültige Adresse"
 
-#: ../../src/wlapplication.cc:1251
+#: ../../src/wlapplication.cc:1252
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "Der eingegebene Hostname oder die Adresse ist ungültig. Eine Verbindung kann nicht hergestellt werden."
 
@@ -3411,7 +3413,7 @@ msgstr "Möchtest du dieses Spiel wirklich verlassen?"
 msgid "Save Game"
 msgstr "Spiel speichern"
 
-#: ../../src/wui/game_main_menu_save_game.cc:158
+#: ../../src/wui/game_main_menu_save_game.cc:162
 msgid ""
 "Game Saving Error!\n"
 "Saved game file may be corrupt!\n"
@@ -3419,8 +3421,8 @@ msgid ""
 "Reason given:\n"
 msgstr "Speicherfehler!\nDer Spielstand ist eventuell fehlerhaft!\n\nGrund:\n"
 
-#: ../../src/wui/game_main_menu_save_game.cc:161
-#: ../../src/wui/game_main_menu_save_game.cc:170
+#: ../../src/wui/game_main_menu_save_game.cc:165
+#: ../../src/wui/game_main_menu_save_game.cc:174
 msgid "Save Game Error!"
 msgstr "Speicherfehler!"
 
@@ -3986,42 +3988,42 @@ msgstr "Kartenname (Beginn der Aufzeichnung)"
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:384
+#: ../../src/wui/load_or_save_game.cc:381
 msgid "Today, %1%:%2%"
 msgstr "Heute, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:388
+#: ../../src/wui/load_or_save_game.cc:385
 msgid "saved today at %1%:%2%"
 msgstr "Gespeichert heute, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute
-#: ../../src/wui/load_or_save_game.cc:401
+#: ../../src/wui/load_or_save_game.cc:398
 msgid "Yesterday, %1%:%2%"
 msgstr "Gestern, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. hour:minute. This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:405
+#: ../../src/wui/load_or_save_game.cc:402
 msgid "saved yesterday at %1%:%2%"
 msgstr "Gespeichert gestern, %1%:%2%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month day, year
-#: ../../src/wui/load_or_save_game.cc:411
+#: ../../src/wui/load_or_save_game.cc:408
 msgid "%1% %2%, %3%"
 msgstr "%2%. %1% %3%"
 
 #. * TRANSLATORS: Display date for choosing a savegame/replay. Placeholders
 #. are:
 #. month (short name) day (number), year (number). This is part of a list.
-#: ../../src/wui/load_or_save_game.cc:417
+#: ../../src/wui/load_or_save_game.cc:414
 msgid "saved on %1% %2%, %3%"
 msgstr "Gespeichert am %2%. %1% %3%"
 
@@ -4030,7 +4032,7 @@ msgstr "Gespeichert am %2%. %1% %3%"
 #. * TRANSLATORS: A tooltip will explain the abbreviation.
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
-#: ../../src/wui/load_or_save_game.cc:438
+#: ../../src/wui/load_or_save_game.cc:435
 msgid "SP"
 msgstr "ES"
 
@@ -4040,7 +4042,7 @@ msgstr "ES"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:446
+#: ../../src/wui/load_or_save_game.cc:443
 msgid "H (%1%)"
 msgstr "H (%1%)"
 
@@ -4050,31 +4052,31 @@ msgstr "H (%1%)"
 #. * TRANSLATORS: Make sure that this translation is consistent with the
 #. tooltip.
 #. * TRANSLATORS: %1% is the number of players
-#: ../../src/wui/load_or_save_game.cc:454
+#: ../../src/wui/load_or_save_game.cc:451
 msgid "MP (%1%)"
 msgstr "MS (%1%)"
 
-#: ../../src/wui/load_or_save_game.cc:468
+#: ../../src/wui/load_or_save_game.cc:465
 msgctxt "mapname_gametime"
 msgid "%1% (%2%)"
 msgstr "%1% (%2%)"
 
 #. * TRANSLATORS: Error message introduction for when an old savegame can't be
 #. loaded
-#: ../../src/wui/load_or_save_game.cc:484
+#: ../../src/wui/load_or_save_game.cc:481
 msgid ""
 "This file has the wrong format and can’t be loaded. Maybe it was created "
 "with an older version of Widelands."
 msgstr "Die angegebene Datei hat das falsche Format und kann nicht geladen werden. Möglicherweise wurde sie mit einer älteren Version von Widelands erstellt."
 
 #. * TRANSLATORS: This text is on a separate line with an error message below
-#: ../../src/wui/load_or_save_game.cc:487
+#: ../../src/wui/load_or_save_game.cc:484
 msgid "Error message:"
 msgstr "Fehlermeldung:"
 
 #. * TRANSLATORS: Prefix for incompatible files in load game screens
-#: ../../src/wui/load_or_save_game.cc:498
-#: ../../src/wui/load_or_save_game.cc:500
+#: ../../src/wui/load_or_save_game.cc:495
+#: ../../src/wui/load_or_save_game.cc:497
 #, c-format
 msgid "Incompatible: %s"
 msgstr "Inkompatibel: %s"
