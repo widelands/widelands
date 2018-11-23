@@ -689,12 +689,16 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 		if (!find_route(
 		       supp.get_position(game)->base_flag(), target_flag, route, best_cost)) {
 			if (!best_route) {
+				// TODO(Nordfriese): This warning often appears even though
+				// the ware in question does get transported ... bug?
 				log("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
 				// To help to debug this a bit:
-				log(" ... ware at: %3dx%3d, requestor at: %3dx%3d!",
+				log(" ... ware at: %3dx%3d, requestor at: %3dx%3d! Type is %s, item %s.\n",
 				    supp.get_position(game)->base_flag().get_position().x,
 				    supp.get_position(game)->base_flag().get_position().y, target_flag.get_position().x,
-				    target_flag.get_position().y);
+				    target_flag.get_position().y, type_ == wwWARE ? "WARE" : "WORKER",
+				    type_ == wwWARE ? game.tribes().get_ware_descr(req.get_index())->name().c_str() :
+				    		game.tribes().get_worker_descr(req.get_index())->name().c_str());
 			}
 			continue;
 		}
