@@ -59,7 +59,10 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const EditorGameBase& egbase)
    : MapObjectDescr(init_type, table.get_string("name"), init_descname, table),
      egbase_(egbase),
-     buildable_(false),
+     buildable_(table.has_key("buildcost")),
+     can_be_dismantled_(table.has_key("return_on_dismantle") ||
+                        table.has_key("return_on_dismantle_on_enhanced")),
+     destructible_(table.has_key("destructible") ? table.get_bool("destructible") : true),
      size_(BaseImmovable::SMALL),
      mine_(false),
      port_(false),
@@ -106,8 +109,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	}
 
 	// Parse build options
-	destructible_ = table.has_key("destructible") ? table.get_bool("destructible") : true;
-
 	if (table.has_key("enhancement")) {
 		const std::string enh = table.get_string("enhancement");
 
@@ -141,7 +142,6 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		return_dismantle_ = Buildcost(table.get_table("return_on_dismantle"), egbase_.tribes());
 	}
 	if (table.has_key("buildcost")) {
-		buildable_ = true;
 		if (!table.has_key("return_on_dismantle")) {
 			throw wexception(
 			   "The building '%s' has a \"buildcost\" but no \"return_on_dismantle\"", name().c_str());
@@ -151,15 +151,14 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 
 	if (table.has_key("enhancement_cost")) {
 		enhanced_building_ = true;
-		try {
-			enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
-			return_enhanced_ =
-			   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
-		} catch (const WException& e) {
-			throw wexception("The enhanced building '%s' must define \"enhancement_cost\""
-			                 "and \"return_on_dismantle_on_enhanced\": %s",
-			                 name().c_str(), e.what());
+		if (!table.has_key("return_on_dismantle_on_enhanced")) {
+			throw wexception("The enhanced building '%s' has an \"enhancement_cost\" but no "
+			                 "\"return_on_dismantle_on_enhanced\"",
+			                 name().c_str());
 		}
+		enhance_cost_ = Buildcost(table.get_table("enhancement_cost"), egbase_.tribes());
+		return_enhanced_ =
+		   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
 	}
 
 	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
@@ -315,11 +314,13 @@ uint32_t Building::get_playercaps() const {
 	const BuildingDescr& tmp_descr = descr();
 	if (tmp_descr.is_destructible()) {
 		caps |= PCap_Bulldoze;
-		if (tmp_descr.is_buildable() || tmp_descr.is_enhanced())
+		if (tmp_descr.can_be_dismantled()) {
 			caps |= PCap_Dismantle;
+		}
 	}
-	if (tmp_descr.enhancement() != INVALID_INDEX)
+	if (tmp_descr.enhancement() != INVALID_INDEX) {
 		caps |= PCap_Enhancable;
+	}
 	return caps;
 }
 

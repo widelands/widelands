@@ -73,6 +73,9 @@ public:
 	bool is_buildable() const {
 		return buildable_;
 	}
+	bool can_be_dismantled() const {
+		return can_be_dismantled_;
+	}
 	bool is_destructible() const {
 		return destructible_;
 	}
@@ -172,8 +175,9 @@ protected:
 	const EditorGameBase& egbase_;
 
 private:
-	bool buildable_;     // the player can build this himself
-	bool destructible_;  // the player can destruct this himself
+	const bool buildable_;          // the player can build this himself
+	const bool can_be_dismantled_;  // the player can dismantle this building
+	const bool destructible_;       // the player can destruct this himself
 	Buildcost buildcost_;
 	Buildcost return_dismantle_;  // Returned wares on dismantle
 	Buildcost enhance_cost_;      // cost for enhancing

@@ -15,9 +15,6 @@ tribes:new_productionsite_type {
       marble = 1
    },
    return_on_dismantle_on_enhanced = {
-      log = 0,
-      granite = 0,
-      marble = 0
    },
 
    animations = {

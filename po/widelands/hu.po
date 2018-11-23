@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-02 08:03+0000\n"
-"PO-Revision-Date: 2018-11-04 10:47+0000\n"
-"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
+"POT-Creation-Date: 2018-11-16 06:01+0000\n"
+"PO-Revision-Date: 2018-11-16 06:03+0000\n"
+"Last-Translator: GunChleoc\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -327,21 +327,21 @@ msgstr "A Widelands nem tudja betölteni a \"%s\" fájlt. Úgy tűnik a fájl ne
 msgid "Creating players"
 msgstr "Játékosok létrehozása"
 
-#: ../../src/editor/editorinteractive.cc:231
+#: ../../src/editor/editorinteractive.cc:232
 msgid "Unsaved Map"
 msgstr "Nem mentett térkép"
 
-#: ../../src/editor/editorinteractive.cc:232
+#: ../../src/editor/editorinteractive.cc:233
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "A térkép nincs elmentve, biztosan ki akarsz lépni?"
 
-#: ../../src/editor/editorinteractive.cc:616
+#: ../../src/editor/editorinteractive.cc:617
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr "Üres térkép létrehozása…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:620
+#: ../../src/editor/editorinteractive.cc:621
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:138
@@ -350,7 +350,7 @@ msgid "No Name"
 msgstr "Nincs név"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:623
+#: ../../src/editor/editorinteractive.cc:624
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -358,7 +358,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: ../../src/editor/editorinteractive.cc:630
+#: ../../src/editor/editorinteractive.cc:631
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "A(z) „%s” térkép betöltése…"
@@ -856,25 +856,26 @@ msgid "unnamed"
 msgstr "névtelen"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:268
-#: ../../src/wui/game_main_menu_save_game.cc:174
+#: ../../src/wui/game_main_menu_save_game.cc:175
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr "Egy fájl már létezik ezzel a névvel: „%s” Felülírod?"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:271
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:285
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:331
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:287
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:320
 msgid "Error Saving Map!"
 msgstr "Térkép mentés hiba!"
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:282
-#, c-format
-msgid ""
-"A file with the name ‘%s.tmp’ already exists. You have to remove it "
-"manually."
-msgstr "Egy fájl már létezik ezzel a névvel: „%s.tmp”. Manuálisan kell eltávolítanod."
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:283
+msgid "File ‘%’ could not be deleted."
+msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_save_map.cc:328
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:286
+msgid "Try saving under a different name!"
+msgstr ""
+
+#: ../../src/editor/ui_menus/main_menu_save_map.cc:317
 msgid ""
 "Error Saving Map!\n"
 "Saved map file may be corrupt!\n"
@@ -1108,7 +1109,7 @@ msgctxt "illegal_filename_characters"
 msgid "The following characters are not allowed:"
 msgstr "A következő karakterek nem engedélyezettek:"
 
-#: ../../src/logic/editor_game_base.cc:228
+#: ../../src/logic/editor_game_base.cc:318
 msgid "Loading graphics"
 msgstr "Grafika betöltése"
 
@@ -1131,7 +1132,7 @@ msgid "Loading map…"
 msgstr "Térkép betöltése…"
 
 #: ../../src/logic/game.cc:338 ../../src/logic/game.cc:377
-#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1421
+#: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1422
 msgid "Loading…"
 msgstr "Betöltés…"
 
@@ -1388,12 +1389,12 @@ msgid_plural "Recruited %s"
 msgstr[0] "Besorozva: %s"
 msgstr[1] "Besorozva: %s"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1281
+#: ../../src/logic/map_objects/tribes/production_program.cc:1280
 msgid "No soldier to train!"
 msgstr "Nincs kiképezhető katona!"
 
-#: ../../src/logic/map_objects/tribes/production_program.cc:1290
-#: ../../src/logic/map_objects/tribes/production_program.cc:1368
+#: ../../src/logic/map_objects/tribes/production_program.cc:1289
+#: ../../src/logic/map_objects/tribes/production_program.cc:1367
 msgid "No soldier found for this training level!"
 msgstr "Nem található katona ehhez a képzési szinthez!"
 
@@ -1665,7 +1666,7 @@ msgid ""
 msgstr "A Widelands nem tud kapcsolatot létesíteni a megadott címmel. Vagy nem fut Widelands kiszolgáló a feltételezett porton, vagy a kiszolgáló leállt a csatlakozás közben."
 
 #: ../../src/network/gameclient.cc:185 ../../src/network/gamehost.cc:641
-#: ../../src/wlapplication.cc:1313
+#: ../../src/wlapplication.cc:1314
 msgid "Preparing game"
 msgstr "Játék előtötése"
 
@@ -2988,11 +2989,11 @@ msgstr "Hadjáratok"
 msgid "Load Game"
 msgstr "Játék betöltése"
 
-#: ../../src/wlapplication.cc:1108
+#: ../../src/wlapplication.cc:1109
 msgid "Game data error"
 msgstr "Játékadat hiba"
 
-#: ../../src/wlapplication.cc:1116
+#: ../../src/wlapplication.cc:1117
 #, c-format
 msgid ""
 "Please report this problem to help us improve Widelands. You will find "
@@ -3000,18 +3001,18 @@ msgid ""
 "using build %1$s (%2$s)."
 msgstr "Kérlek jelentsd be ezt a hibát, hogy ezzel segítsd a Widelands fejlesztését. A hibával kapcsolatos üzeneteket megtalálod a sztenderd kimeneten (stdout.txt Windowson). Te ezt a verziót használod: %1$s (%2$s)."
 
-#: ../../src/wlapplication.cc:1123
+#: ../../src/wlapplication.cc:1124
 msgid ""
 "Please add this information to your report.\n"
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. It is often – though not always – possible to load it and continue playing."
 msgstr "Kérlek add hozzá ezt is a bejelentéshez.\n\nA Widelands megpróbálja lementeni a játékot mikor hiba történik. Gyakran – de nem mindig – be lehet tölteni ezt a mentést és folytatni játékot."
 
-#: ../../src/wlapplication.cc:1250
+#: ../../src/wlapplication.cc:1251
 msgid "Invalid Address"
 msgstr "Érvénytelen cím"
 
-#: ../../src/wlapplication.cc:1251
+#: ../../src/wlapplication.cc:1252
 msgid "The entered hostname or address is invalid and can’t be connected to."
 msgstr "A megadott gépnév vagy cím érvénytelen, és nem lehet hozzá kapcsolódni."
 
@@ -3402,7 +3403,7 @@ msgstr "Valóban szeretnél kilépni a játékból?"
 msgid "Save Game"
 msgstr "Játék mentése"
 
-#: ../../src/wui/game_main_menu_save_game.cc:161
+#: ../../src/wui/game_main_menu_save_game.cc:162
 msgid ""
 "Game Saving Error!\n"
 "Saved game file may be corrupt!\n"
@@ -3410,8 +3411,8 @@ msgid ""
 "Reason given:\n"
 msgstr "Játék mentési hiba!\nAz elmentett játékfájl lehet hogy sérült!\n\nIndoklás:\n"
 
-#: ../../src/wui/game_main_menu_save_game.cc:164
-#: ../../src/wui/game_main_menu_save_game.cc:173
+#: ../../src/wui/game_main_menu_save_game.cc:165
+#: ../../src/wui/game_main_menu_save_game.cc:174
 msgid "Save Game Error!"
 msgstr "Játék mentési hiba!"
 

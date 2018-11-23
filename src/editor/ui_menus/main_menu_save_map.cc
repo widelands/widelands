@@ -155,15 +155,41 @@ void MainMenuSaveMap::clicked_ok() {
 void MainMenuSaveMap::clicked_make_directory() {
 	/** TRANSLATORS: A folder that hasn't been given a name yet */
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
-	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		g_fs->ensure_directory_exists(curdir_);
-		//  Create directory.
-		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
-		// Trim it for preceding/trailing whitespaces in user input
-		boost::trim(fullname);
-		g_fs->make_directory(fullname);
-		fill_table();
+	bool open_dialogue = true;
+	while (open_dialogue) {
+		open_dialogue = false;
+		if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
+			// Trim it for preceding/trailing whitespaces in user input
+			boost::trim(fullname);
+			if (g_fs->file_exists(fullname)) {
+				const std::string s = _("A file or directory with that name already exists.");
+				UI::WLMessageBox mbox(
+				   this, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+				mbox.run<UI::Panel::Returncodes>();
+				open_dialogue = true;
+			} else {
+				try {
+					g_fs->ensure_directory_exists(curdir_);
+					//  Create directory.
+					g_fs->make_directory(fullname);
+				} catch (const FileError& e) {
+					log("directory creation failed in MainMenuSaveMap::"
+					    "clicked_make_directory: %s\n",
+					    e.what());
+					const std::string s =
+					   (boost::format(_("Error while creating directory ‘%s’.")) % fullname).str();
+					UI::WLMessageBox mbox(
+					   this, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+					mbox.run<UI::Panel::Returncodes>();
+				}
+				fill_table();
+			}
+		}
 	}
+	table_.focus();
+	// TODO(Arty): In case of successful dir creation we should select the
+	// new dir in the table.
 }
 
 void MainMenuSaveMap::clicked_edit_options() {
@@ -256,8 +282,9 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	boost::trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, kWidelandsMapExtension))
+	if (!boost::iends_with(filename, kWidelandsMapExtension)) {
 		filename += kWidelandsMapExtension;
+	}
 
 	//  Append directory name.
 	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
@@ -269,8 +296,9 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		    FileSystem::fs_filename(filename.c_str()))
 		      .str();
 		UI::WLMessageBox mbox(this, _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
-		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
+		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return false;
+		}
 	}
 
 	//  Try deleting file (if it exists). If it fails, give a message and let the player choose a new
@@ -280,7 +308,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	} catch (const std::exception& e) {
 		log("Unable to delete old map file %s while saving map: %s\n", complete_filename.c_str(),
 		    e.what());
-		const std::string s = (boost::format(_("File ‘%’ could not be deleted.")) %
+		const std::string s = (boost::format(_("File ‘%s’ could not be deleted.")) %
 		                       FileSystem::fs_filename(filename.c_str()))
 		                         .str() +
 		                      " " + _("Try saving under a different name!");

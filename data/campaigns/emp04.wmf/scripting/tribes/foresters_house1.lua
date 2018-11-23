@@ -15,7 +15,6 @@ tribes:new_productionsite_type {
    },
 
    return_on_dismantle = {
-      planks = 0,
    },
 
    animations = {
