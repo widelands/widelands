@@ -62,9 +62,9 @@ inline unsigned int calculate_probability_to_grow(const TerrainAffinity& affinit
 
 	// Unlike real numbers, floating point multiplication/division is neither associative nor commutative, so we am forcing the same order of calculation here for all compilers and optimization settings by using extra parentheses.
 	const double result = exp(-
-                              (square(((affinity.preferred_fertility() - terrain_fertility) / kFertilityWeight) / sigma) +
-                               (square(((affinity.preferred_humidity() - terrain_humidity) / kHumidityWeight) / sigma) +
-                                square(((affinity.preferred_temperature() - terrain_temperature) / kTemperatureWeight) / sigma))) / 2.0);
+							  (square((affinity.preferred_fertility() - terrain_fertility) / (kFertilityWeight * sigma)) +
+							   square((affinity.preferred_humidity() - terrain_humidity) / (kHumidityWeight * sigma)) +
+							   square((affinity.preferred_temperature() - terrain_temperature) / (kTemperatureWeight * sigma))) / 2.0);
 
     return static_cast<unsigned int>(std::max(0.0, std::floor(result * static_cast<double>(TerrainAffinity::kPrecisionFactor))));
 }

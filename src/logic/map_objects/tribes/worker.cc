@@ -856,10 +856,10 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Randomly pick one of the immovables to be planted.
 
 	// Each candidate is weighted by its probability to grow.
-	int total_weight = 0;
+	int64_t total_weight = 0;
 	for (const auto& bsii : best_suited_immovables_index) {
 		const int weight = std::get<0>(bsii);
-		total_weight += static_cast<int>(std::floor(std::sqrt(weight)));
+		total_weight += weight;
 	}
 
 	int choice = game.logic_rand() % total_weight;
@@ -867,7 +867,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		const int weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
 		state.ivar3 = static_cast<int>(std::get<2>(bsii));
-		choice -= static_cast<int>(std::floor(std::sqrt(weight)));
+		choice -= weight;
 		if (0 > choice) {
 			break;
 		}
