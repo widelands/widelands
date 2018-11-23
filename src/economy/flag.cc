@@ -498,10 +498,11 @@ bool Flag::cancel_pickup(Game& game, Flag& destflag) {
 */
 void Flag::wake_up_capacity_queue(Game& game) {
 	while (!capacity_wait_.empty()) {
-		Worker* const w = capacity_wait_[0].get(game);
-		capacity_wait_.erase(capacity_wait_.begin());
-		if (w && w->wakeup_flag_capacity(game, *this))
+		Worker* const w = capacity_wait_.front().get(game);
+		capacity_wait_.pop_front();
+		if (w && w->wakeup_flag_capacity(game, *this)) {
 			break;
+		}
 	}
 }
 

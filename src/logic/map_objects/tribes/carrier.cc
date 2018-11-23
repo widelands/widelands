@@ -534,6 +534,7 @@ void Carrier::Loader::load(FileRead& fr) {
 
 	try {
 		const uint8_t packet_version = fr.unsigned_8();
+		// TODO(GunChleoc): Remove savegame compatibility after Build 21.
 		if (packet_version <= kCurrentPacketVersion && packet_version >= 1) {
 			Carrier& carrier = get<Carrier>();
 			carrier.promised_pickup_to_ = fr.signed_32();
