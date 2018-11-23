@@ -25,6 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "base/warning.h"
 #include "base/wexception.h"
 #include "build_info.h"
@@ -32,6 +33,7 @@
 #include "game_io/game_loader.h"
 #include "helper.h"
 #include "io/fileread.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filewrite.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game.h"
@@ -618,7 +620,15 @@ void GameClient::handle_packet(RecvPacket& packet) {
 				}
 			}
 			// Don't overwrite the file, better rename the original one
-			g_fs->fs_rename(path, backup_file_name(path));
+			try {
+				g_fs->fs_rename(path, backup_file_name(path));
+			} catch (const FileError& e) {
+				log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+				    "%s\n",
+				    e.what());
+				// TODO(Arty): What now? It just means the next step will fail
+				// or possibly result in some corrupt file
+			}
 		}
 
 		// Yes we need the file!
@@ -707,7 +717,13 @@ void GameClient::handle_packet(RecvPacket& packet) {
 				s.unsigned_8(NETCMD_CHAT);
 				s.string(_("/me 's file failed md5 checksumming."));
 				d->net->send(s);
-				g_fs->fs_unlink(file_->filename);
+				try {
+					g_fs->fs_unlink(file_->filename);
+				} catch (const FileError& e) {
+					log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+					    "%s\n",
+					    e.what());
+				}
 			}
 			// Check file for validity
 			bool invalid = false;
@@ -727,10 +743,16 @@ void GameClient::handle_packet(RecvPacket& packet) {
 					invalid = true;
 			}
 			if (invalid) {
-				g_fs->fs_unlink(file_->filename);
-				// Restore original file, if there was one before
-				if (g_fs->file_exists(backup_file_name(file_->filename)))
-					g_fs->fs_rename(backup_file_name(file_->filename), file_->filename);
+				try {
+					g_fs->fs_unlink(file_->filename);
+					// Restore original file, if there was one before
+					if (g_fs->file_exists(backup_file_name(file_->filename)))
+						g_fs->fs_rename(backup_file_name(file_->filename), file_->filename);
+				} catch (const FileError& e) {
+					log("file error in GameClient::handle_packet: case NETCMD_FILE_PART: "
+					    "%s\n",
+					    e.what());
+				}
 				s.reset();
 				s.unsigned_8(NETCMD_CHAT);
 				s.string(_("/me checked the received file. Although md5 check summing succeeded, "
