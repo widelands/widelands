@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-02 08:03+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -875,17 +875,17 @@ msgstr ""
 #.
 #. **humidity**
 #. *Mandatory*. A terrain affinity constant. These are used to model how well
-#. trees will grow on this terrain. Humidity is in percent (1 being very wet).
+#. trees will grow on this terrain. Values range from 1 - 1000 (1000 being very wet).
 #. Example::
 #.
-#. humidity = 0.6,
+#. humidity = 600,
 #.
 #. **fertility**
 #. *Mandatory*. A terrain affinity constant. These are used to model how well
-#. trees will grow on this terrain. Fertility is in percent (1 being very
+#. trees will grow on this terrain. Values range from 1 - 1000 (1000 being very
 #. fertile). Example::
 #.
-#. fertility = 0.7,
+#. fertility = 700,
 #.
 #. ----------------------
 #. Former greenland  --

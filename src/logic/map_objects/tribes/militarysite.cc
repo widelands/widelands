@@ -307,7 +307,7 @@ MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
 	heal_per_second_ = table.get_int("heal_per_second");
 
 	if (conquer_radius_ > 0)
-		workarea_info_[conquer_radius_].insert(descname() + " conquer");
+		workarea_info_[conquer_radius_].insert(name() + " conquer");
 	prefers_heroes_at_start_ = table.get_bool("prefer_heroes");
 
 	std::unique_ptr<LuaTable> items_table = table.get_table("messages");
