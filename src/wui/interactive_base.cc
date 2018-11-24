@@ -1023,7 +1023,7 @@ void InteractiveBase::waterwayb_add_overlay() {
 				continue; // exceeds length limit
 			}
 		}
-		
+
 		//  can't build on robusts
 		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
 		bool has_flag = false;

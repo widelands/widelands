@@ -4321,8 +4321,7 @@ Road
    A road connecting two flags in the economy of this Player.
    Waterways are currently treated like roads in scripts; however,
    there are significant differences. You can check whether an
-   instance of Road is a road or waterway through the internal name
-   of this object's :class:`ImmovableDescription`.
+   instance of Road is a road or waterway using `get_road_type()`.
 
    More properties are available through this object's
    :class:`ImmovableDescription`, which you can access via :any:`MapObject.descr`.
