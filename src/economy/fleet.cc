@@ -540,11 +540,11 @@ void Fleet::rerout_ferry_request(Game& game, Waterway* oldww, Waterway* newww) {
 			return;
 		}
 	}
-	const auto iterator = std::find(pending_ferry_requests_.begin(), pending_ferry_requests_.end(), oldww);
-	if (iterator == pending_ferry_requests_.end())
+	const auto& iterator = std::find(pending_ferry_requests_.begin(), pending_ferry_requests_.end(), oldww);
+	if (iterator == pending_ferry_requests_.end()) {
 		return;
-	pending_ferry_requests_.insert(iterator, newww);
-	pending_ferry_requests_.erase(iterator);
+	}
+	pending_ferry_requests_.insert(pending_ferry_requests_.erase(iterator), newww);
 }
 
 struct StepEvalFindPorts {
