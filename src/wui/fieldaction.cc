@@ -858,7 +858,8 @@ void show_field_action(InteractiveBase* const ibase,
 		}
 
 		// append or take away from the waterway
-		if (!ibase->append_build_waterway(target)) {
+		if (!ibase->append_build_waterway(target) || target != ibase->get_build_waterway_end()) {
+			// Player clicked an unsuited field or path exceeds length restriction
 			FieldActionWindow& w = *new FieldActionWindow(ibase, player, registry);
 			w.add_buttons_waterway(false);
 			w.init();

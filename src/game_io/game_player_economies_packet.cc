@@ -96,8 +96,8 @@ void GamePlayerEconomiesPacket::read(FileSystem& fs, Game& game, MapObjectLoader
 								// We are interested only in current player's ships
 								if (ship->get_owner() == player) {
 									try {
-										assert(ship->get_economy());
-										assert(ship->get_economy()->owner().player_number() ==
+										assert(ship->get_economy(type));
+										assert(ship->get_economy(type)->owner().player_number() ==
 										       player->player_number());
 										EconomyDataPacket d(ship->get_economy(type));
 										d.read(fr);

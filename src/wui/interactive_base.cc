@@ -971,8 +971,6 @@ void InteractiveBase::roadb_add_overlay() {
 	}
 }
 
-// TODO(Nordfriese): This should not show overlays for fields we cannot
-// reach because of the map-specific waterway length limit
 void InteractiveBase::waterwayb_add_overlay() {
 	assert(buildwaterway_);
 	assert(waterway_building_overlays_.road_previews.empty());
@@ -1006,21 +1004,37 @@ void InteractiveBase::waterwayb_add_overlay() {
 		map.get_neighbour(endpos, dir, &neighb);
 		caps = egbase().player(waterway_build_player_).get_buildcaps(neighb);
 
-		// TODO(Nordfriese): Neither check works as intended here.
-		// We need something that succeeds for flags and flagspots but fails for frontiers.
-		if (!(caps & Widelands::MOVECAPS_SWIM))
-			if (!map.can_reach_by_water(neighb))
-				continue;  // need to be able to row there
-
-		//  can't build on robusts
-		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
-		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
-			if (!(dynamic_cast<const Widelands::Flag*>(imm) || (caps & Widelands::BUILDCAPS_FLAG)))
-				continue;
+		if (buildwaterway_->get_index(neighb) >= 0 || !neighb.field->is_interior(waterway_build_player_) ||
+				!map.can_reach_by_water(neighb)) {
+			continue;
 		}
 
-		if (buildwaterway_->get_index(neighb) >= 0)
-			continue;  // the waterway can't cross itself
+		{
+			bool next_to = false;
+			Widelands::FCoords nb;
+			for (int32_t d = 1; d <= 6; ++d) {
+				map.get_neighbour(neighb, d, &nb);
+				if (nb != endpos && buildwaterway_->get_index(nb) >= 0) {
+					next_to = true;
+					break;
+				}
+			}
+			if (!next_to && buildwaterway_->get_nsteps() >= map.get_waterway_max_length()) {
+				continue; // exceeds length limit
+			}
+		}
+		
+		//  can't build on robusts
+		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
+		bool has_flag = false;
+		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
+			has_flag = dynamic_cast<const Widelands::Flag*>(imm);
+			if (!(has_flag || (caps & Widelands::BUILDCAPS_FLAG)))
+				continue;
+		}
+		if (!has_flag && !(caps & Widelands::MOVECAPS_SWIM) && !(caps & Widelands::BUILDCAPS_FLAG)) {
+			continue;
+		}
 
 		int32_t slope;
 

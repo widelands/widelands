@@ -19,6 +19,7 @@
 
 #include "logic/map_objects/tribes/ferry.h"
 
+#include "economy/flag.h"
 #include "economy/fleet.h"
 #include "economy/waterway.h"
 #include "logic/game_data_error.h"
@@ -62,6 +63,45 @@ void Ferry::unemployed_update(Game& game, State&) {
 			pop_task(game);
 			push_task(game, taskRow);
 			return schedule_act(game, 10);
+		}
+	}
+
+	if (does_carry_ware()) {
+		if (upcast(Flag, flag, get_position().field->get_immovable())) {
+			// We are on a flag
+			if (flag->has_capacity_for_ware(*get_carried_ware(game))) {
+				molog("[unemployed]: dropping ware here\n");
+				flag->add_ware(game, *fetch_carried_ware(game));
+				return start_task_idle(game, descr().get_animation("idle"), 50);
+			}
+		}
+		molog("[unemployed]: trying to find a flag\n");
+		std::vector<ImmovableFound> flags;
+		if (!game.map().find_reachable_immovables(Area<FCoords>(get_position(), 4),
+				&flags,
+				CheckStepDefault(MOVECAPS_SWIM),
+				FindImmovableType(MapObjectType::FLAG))) {
+			molog("[unemployed]: no flag found at all\n");
+			// Fall through to the selection of a random nearby location
+		}
+		else {
+			for (ImmovableFound& imm : flags) {
+				if (upcast(Flag, flag, imm.object)) {
+					if (flag->get_owner() == get_owner()) {
+						if (flag->has_capacity_for_ware(*get_carried_ware(game))) {
+							molog("[unemployed]: moving to nearby flag\n");
+							if (!start_task_movepath(game, flag->get_position(), -1,
+									descr().get_right_walk_anims(does_carry_ware()))) {
+								molog("[unemployed]: unable to row to reachable flag!\n");
+								return start_task_idle(game, descr().get_animation("idle"), 50);
+							}
+							return;
+						}
+					}
+				}
+			}
+			molog("[unemployed]: no nearby flag has capacity\n");
+			// If no flag with capacity is nearby, fall through to the selection of a random nearby location
 		}
 	}
 

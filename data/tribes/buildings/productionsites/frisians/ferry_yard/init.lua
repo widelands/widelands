@@ -10,26 +10,27 @@ tribes:new_productionsite_type {
    size = "medium",
 
    buildcost = {
-      log = 4,
-      granite = 2
+      brick = 3,
+      granite = 1,
+      log = 3,
+      thatch_reed = 2,
+      cloth = 1
    },
    return_on_dismantle = {
+      brick = 2,
       log = 2,
-      granite = 1
+      thatch_reed = 1
    },
 
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 44, 43 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 44, 43 },
+         pictures = path.list_files (dirname .. "idle_??.png"),
+         hotspot = {56, 87},
+         fps = 10,
       },
       unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 44, 43 },
+         pictures = path.list_files (dirname .. "unoccupied_?.png"),
+         hotspot = {56, 66},
       },
    },
 
@@ -49,7 +50,7 @@ tribes:new_productionsite_type {
          descname = _"working",
          actions = {
             "sleep=20000",
-            "consume=log:4",
+            "consume=log:3",
             "callworker=buildferry"
          }
       },

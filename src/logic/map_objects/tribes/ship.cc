@@ -1132,7 +1132,7 @@ void Ship::Loader::load(FileRead& fr) {
 	// Economy
 	ware_economy_serial_ = fr.unsigned_32();
 	worker_economy_serial_ = fr.unsigned_32();
-	
+
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
 
