@@ -162,6 +162,7 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 	}
 
 	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
+	needs_waterways_ = table.has_key("needs_waterways") ? table.get_bool("needs_waterways") : false;
 
 	if (table.has_key("vision_range")) {
 		vision_range_ = table.get_int("vision_range");

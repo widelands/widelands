@@ -71,8 +71,9 @@ Waterway& Waterway::create(EditorGameBase& egbase, Flag& start, Flag& end, const
 void Waterway::link_into_flags(EditorGameBase& egbase) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
-	if (upcast(Game, game, &egbase))
+	if (upcast(Game, game, &egbase)) {
 		request_ferry();
+	}
 }
 
 bool Waterway::notify_ware(Game& game, Flag& flag) {
@@ -112,6 +113,11 @@ Fleet* Waterway::get_fleet() const {
 }
 
 void Waterway::set_fleet(Fleet* fleet) {
+	if (fleet_) {
+		if (upcast(Game, game, &get_owner()->egbase())) {
+			fleet_->cancel_ferry_request(*game, this);
+		}
+	}
 	fleet_ = fleet;
 }
 
