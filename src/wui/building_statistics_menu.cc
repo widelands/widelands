@@ -242,7 +242,7 @@ void BuildingStatisticsMenu::init(int last_selected_tab) {
 	const Widelands::Player& player = iplayer().player();
 	const TribeDescr& tribe = player.tribe();
 	const bool map_allows_seafaring = iplayer().game().map().allows_seafaring();
-	const bool map_allows_waterways = iplayer().game().map().waterway_max_length() >= 2;
+	const bool map_allows_waterways = iplayer().game().map().get_waterway_max_length() >= 2;
 	std::vector<DescriptionIndex> buildings_to_add[kNoOfBuildingTabs];
 	// Add the player's own tribe's buildings.
 	for (DescriptionIndex index : tribe.buildings()) {
@@ -378,7 +378,7 @@ int BuildingStatisticsMenu::find_tab_for_building(const Widelands::BuildingDescr
 void BuildingStatisticsMenu::update_building_list() {
 	const Widelands::Player& player = iplayer().player();
 	const bool map_allows_seafaring = iplayer().game().map().allows_seafaring();
-	const bool map_allows_waterways = iplayer().game().map().waterway_max_length() >= 2;
+	const bool map_allows_waterways = iplayer().game().map().get_waterway_max_length() >= 2;
 	for (DescriptionIndex index = 0; index < nr_building_types_; ++index) {
 		const bool should_have_this_building =
 		   own_building_is_valid(player, index, map_allows_seafaring, map_allows_waterways) ||

@@ -439,7 +439,7 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
 			if (building_descr->needs_seafaring() && !ibase().egbase().map().allows_seafaring()) {
 				continue;
 			}
-			if (building_descr->needs_waterways() && ibase().egbase().map().waterway_max_length() < 2) {
+			if (building_descr->needs_waterways() && ibase().egbase().map().get_waterway_max_length() < 2) {
 				continue;
 			}
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
