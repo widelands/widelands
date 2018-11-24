@@ -491,11 +491,11 @@ void MapObject::do_draw_info(const TextToDraw& draw_text,
 	std::shared_ptr<const UI::RenderedText> rendered_census =
 	   UI::g_fh->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
-	if (draw_text & TextToDraw::kCensus) {
+	if ((draw_text & TextToDraw::kCensus) != TextToDraw::kNone) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
-	if (draw_text & TextToDraw::kStatistics && !statictics.empty()) {
+	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone && !statictics.empty()) {
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
 		   UI::g_fh->render(as_condensed(statictics, UI::Align::kCenter, font_size));
 		position.y += rendered_census->height() + text_height(font_size) / 4;

@@ -623,7 +623,7 @@ void Building::draw_info(const TextToDraw draw_text,
                          const float scale,
                          RenderTarget* dst) {
 	const std::string statistics_string =
-	   (draw_text & TextToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
+	   ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone) ? info_string(InfoStringFormat::kStatistics) : "";
 	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
 	             scale, dst);
 }
