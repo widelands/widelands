@@ -25,22 +25,10 @@ fi
 # Configure the build
 mkdir build
 cd build
-cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_ASAN="OFF"
 
 if [ "$BUILD_TYPE" == "Debug" ]; then
-
-   # Build the documentation. Any warning is an error.
-   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-     sudo pip install sphinx
-   fi
-   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-     pip2 install sphinx
-   fi
-   pushd ../doc/sphinx
-   mkdir source/_static
-   ./extract_rst.py
-   sphinx-build -W -b json -d build/doctrees source build/json
-   popd
+   # We test translations only on release builds, in order to help with job timeouts
+   cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="OFF" -DOPTION_ASAN="OFF"
 
    # Run the codecheck test suite.
    pushd ../cmake/codecheck
@@ -54,6 +42,22 @@ if [ "$BUILD_TYPE" == "Debug" ]; then
       echo "You have codecheck warnings (see above) Please fix."
       exit 1 # CodeCheck warnings.
    fi
+else
+   cmake .. -DCMAKE_BUILD_TYPE:STRING="$BUILD_TYPE" -DOPTION_BUILD_TRANSLATIONS="ON" -DOPTION_ASAN="OFF"
+
+   # We test the documentation on release builds to make timeouts for debug builds less likely.
+   # Any warning is an error.
+   if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+     sudo pip install sphinx
+   fi
+   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+     pip2 install sphinx
+   fi
+   pushd ../doc/sphinx
+   mkdir source/_static
+   ./extract_rst.py
+   sphinx-build -W -b json -d build/doctrees source build/json
+   popd
 fi
 
 # Do the actual build.
