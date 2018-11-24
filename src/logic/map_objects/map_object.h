@@ -35,6 +35,7 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
+#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
@@ -339,12 +340,6 @@ public:
 	 */
 	void set_reserved_by_worker(bool reserve);
 
-	enum class InfoStringType { kCensus, kStatistics, kTooltip };
-	/**
-	 * Returns a census, statistics or tooltip string to be shown for this object on the map
-	 */
-	virtual std::string info_string(InfoStringType);
-
 	/**
 	 * Static load functions of derived classes will return a pointer to
 	 * a Loader class. The caller needs to call the virtual functions
@@ -410,6 +405,14 @@ protected:
 	virtual bool init(EditorGameBase&);
 
 	virtual void cleanup(EditorGameBase&);
+
+	/// Draws census and statistics on screen
+	void do_draw_info(const TextToDraw& draw_text,
+	                  const std::string& census,
+	                  const std::string& statictics,
+	                  const Vector2f& field_on_dst,
+	                  const float scale,
+	                  RenderTarget* dst) const;
 
 #ifdef _WIN32
 	void molog(char const* fmt, ...) const __attribute__((format(gnu_printf, 2, 3)));

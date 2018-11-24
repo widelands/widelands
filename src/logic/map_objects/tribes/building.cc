@@ -457,20 +457,20 @@ void Building::destroy(EditorGameBase& egbase) {
 	}
 }
 
-std::string Building::info_string(const MapObject::InfoStringType format) {
+std::string Building::info_string(const InfoStringFormat& format) {
 	std::string result;
 	switch (format) {
-	case MapObject::InfoStringType::kCensus:
+	case InfoStringFormat::kCensus:
 		if (upcast(ConstructionSite const, constructionsite, this)) {
 			result = constructionsite->building().descname();
 		} else {
 			result = descr().descname();
 		}
 		break;
-	case MapObject::InfoStringType::kStatistics:
+	case InfoStringFormat::kStatistics:
 		result = update_and_get_statistics_string();
 		break;
-	case MapObject::InfoStringType::kTooltip:
+	case InfoStringFormat::kTooltip:
 		if (upcast(ProductionSite const, productionsite, this)) {
 			result = productionsite->production_result();
 		}
@@ -600,6 +600,7 @@ bool Building::fetch_from_flag(Game&) {
 }
 
 void Building::draw(uint32_t gametime,
+                    const TextToDraw draw_text,
                     const Vector2f& point_on_dst,
                     const float scale,
                     RenderTarget* dst) {
@@ -607,6 +608,24 @@ void Building::draw(uint32_t gametime,
 	   point_on_dst, scale, anim_, gametime - animstart_, get_owner()->get_playercolor());
 
 	//  door animation?
+
+	//  overlay strings (draw when enabled)
+	draw_info(draw_text, point_on_dst, scale, dst);
+}
+
+/*
+===============
+Draw overlay help strings when enabled.
+===============
+*/
+void Building::draw_info(const TextToDraw draw_text,
+                         const Vector2f& point_on_dst,
+                         const float scale,
+                         RenderTarget* dst) {
+	const std::string statistics_string =
+	   (draw_text & TextToDraw::kStatistics) ? info_string(InfoStringFormat::kStatistics) : "";
+	do_draw_info(draw_text, info_string(InfoStringFormat::kCensus), statistics_string, point_on_dst,
+	             scale, dst);
 }
 
 int32_t
