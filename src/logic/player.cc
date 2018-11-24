@@ -1233,10 +1233,12 @@ void Player::sample_statistics() {
 	std::vector<uint32_t> stocks(egbase().tribes().nrwares());
 
 	for (const auto& economy : economies()) {
-		for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
-			const Widelands::WareList& wares = warehouse->get_wares();
-			for (size_t id = 0; id < stocks.size(); ++id) {
-				stocks[id] += wares.stock(DescriptionIndex(id));
+		if (economy.second->type() == wwWARE) {
+			for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
+				const Widelands::WareList& wares = warehouse->get_wares();
+				for (size_t id = 0; id < stocks.size(); ++id) {
+					stocks[id] += wares.stock(DescriptionIndex(id));
+				}
 			}
 		}
 	}

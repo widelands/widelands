@@ -384,12 +384,14 @@ void Economy::set_worker_target_quantity(DescriptionIndex const ware_type,
  * a merger.
 */
 void Economy::add_wares(DescriptionIndex const id, Quantity const count) {
+	assert(type_ == wwWARE);
 	wares_.add(id, count);
 	start_request_timer();
 
 	// TODO(unknown): add to global player inventory?
 }
 void Economy::add_workers(DescriptionIndex const id, Quantity const count) {
+	assert(type_ == wwWORKER);
 	workers_.add(id, count);
 	start_request_timer();
 
@@ -403,6 +405,7 @@ void Economy::add_workers(DescriptionIndex const id, Quantity const count) {
  * a split of the Economy.
 */
 void Economy::remove_wares(DescriptionIndex const id, Quantity const count) {
+	assert(type_ == wwWARE);
 	assert(owner_.egbase().tribes().ware_exists(id));
 	wares_.remove(id, count);
 
@@ -415,6 +418,7 @@ void Economy::remove_wares(DescriptionIndex const id, Quantity const count) {
  * a split of the Economy.
  */
 void Economy::remove_workers(DescriptionIndex const id, Quantity const count) {
+	assert(type_ == wwWORKER);
 	workers_.remove(id, count);
 
 	// TODO(unknown): remove from global player inventory?

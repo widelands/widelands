@@ -76,8 +76,10 @@ void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::W
 	waresdisplay->remove_all_warelists();
 	const Widelands::Player& player = *player_.get_player();
 	for (const auto& economy : player.economies()) {
-		waresdisplay->add_warelist(type == Widelands::wwWARE ? economy.second->get_wares() :
-		                                                       economy.second->get_workers());
+		if (economy.second->type() == type) {
+			waresdisplay->add_warelist(type == Widelands::wwWARE ? economy.second->get_wares() :
+				                                                   economy.second->get_workers());
+		}
 	}
 }
 
@@ -89,9 +91,11 @@ void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
                                             Widelands::WareWorker type) {
 	waresdisplay->remove_all_warelists();
 	for (const auto& economy : player_.player().economies()) {
-		for (const auto* warehouse : economy.second->warehouses()) {
-			waresdisplay->add_warelist(type == Widelands::wwWARE ? warehouse->get_wares() :
-			                                                       warehouse->get_workers());
+		if (economy.second->type() == type) {
+			for (const auto* warehouse : economy.second->warehouses()) {
+				waresdisplay->add_warelist(type == Widelands::wwWARE ? warehouse->get_wares() :
+					                                                   warehouse->get_workers());
+			}
 		}
 	}
 }
