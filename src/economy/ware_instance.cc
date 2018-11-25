@@ -216,6 +216,7 @@ void WareInstance::cleanup(EditorGameBase& egbase) {
  * Ware accounting
 */
 void WareInstance::set_economy(Economy* const e) {
+	assert(!e || e->type() == wwWARE);
 	if (descr_index_ == INVALID_INDEX || economy_ == e)
 		return;
 

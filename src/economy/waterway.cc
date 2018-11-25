@@ -113,11 +113,13 @@ Fleet* Waterway::get_fleet() const {
 }
 
 void Waterway::set_fleet(Fleet* fleet) {
-	if (fleet_) {
+	// TODO(Nordfriese): We should tell our fleet that we no longer need a ferry from it...
+	// but this causes a segfault during end-of-game cleanup
+	/* if (fleet_ && fleet_ != fleet) {
 		if (upcast(Game, game, &get_owner()->egbase())) {
 			fleet_->cancel_ferry_request(*game, this);
 		}
-	}
+	} */
 	fleet_ = fleet;
 }
 

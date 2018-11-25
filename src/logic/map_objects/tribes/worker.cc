@@ -1170,8 +1170,9 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 	if (economy == old)
 		return;
 
-	if (old)
+	if (old && type == wwWORKER) {
 		old->remove_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+	}
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = economy;
 
@@ -1180,11 +1181,14 @@ void Worker::set_economy(Economy* const economy, WareWorker type) {
 			ware->set_economy(ware_economy_);
 		}
 	}
-	if (supply_ && type == wwWORKER)
-		supply_->set_economy(worker_economy_);
-
-	if (Economy* e = get_economy(type))
-		e->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+	else {
+		if (supply_) {
+			supply_->set_economy(worker_economy_);
+		}
+		if (worker_economy_) {
+			worker_economy_->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+		}
+	}
 }
 
 /**

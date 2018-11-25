@@ -316,11 +316,17 @@ void Fleet::cleanup(EditorGameBase& egbase) {
 		ships_.pop_back();
 	}
 	while (!ferries_.empty()) {
-		ferries_.back()->set_fleet(nullptr);
+		Ferry* ferry = ferries_.back();
+		if (egbase.objects().object_still_available(ferry)) {
+			ferry->set_fleet(nullptr);
+		}
 		ferries_.pop_back();
 	}
 	while (!pending_ferry_requests_.empty()) {
-		pending_ferry_requests_.back()->set_fleet(nullptr);
+		Waterway* ww = pending_ferry_requests_.back();
+		if (egbase.objects().object_still_available(ww)) {
+			ww->set_fleet(nullptr);
+		}
 		pending_ferry_requests_.pop_back();
 	}
 
@@ -531,9 +537,11 @@ void Fleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 	const auto& iterator = std::find(pending_ferry_requests_.begin(), pending_ferry_requests_.end(), waterway);
 	if (iterator != pending_ferry_requests_.end()) {
 		pending_ferry_requests_.erase(iterator);
-		if (ships_.empty() && ports_.empty() && ferries_.empty() && pending_ferry_requests_.empty()) {
+		// TODO(Nordfriese): We should disband if we are no longer needed...
+		// but this causes an endless loop during end-of-game cleanup
+		/* if (ships_.empty() && ports_.empty() && ferries_.empty() && pending_ferry_requests_.empty()) {
 			remove(game);
-		}
+		} */
 	}
 }
 
