@@ -60,10 +60,7 @@ License: GPL-2+
 
 Files: data/i18n/fonts/Nakula/*
 Copyright: Nakula Devanagari font © 2006 University of Cambridge. Designed and developed by  IMRC, India. Latin and Cyrillic glyphs from the font Nimbus Roman No9 L Regular, © 1999 (URW)++ Design & Development; Cyrillic glyphs by Valek Filippov © 2001-2002.
-License:
-These fonts are free software; you can redistribute them and/or modify them under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-
-These fonts are distributed in the hope that they will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+License: GPL-2+
 
 Files: data/i18n/fonts/Sinhala/*
 Copyright: 2004,2008 Anuradha Ratnaweera and Harshani Devadithya, 2006 Harshula Jayasuriya, 1994, The Wellcome Trust, London
