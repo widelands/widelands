@@ -28,6 +28,7 @@ widelands (1:19+repack-6widelands1) UNRELEASED; urgency=medium
     - Additional translations for appdata and desktop file.
     - Re-added font entries to copyright file, since we will most likely be using
       the embedded fonts.
+    - Update copyright year from 2013 to 2018.
     - Modified rules to use our embedded fonts and install all binaries.
     - Comment out get-orig-source. We just want to build current trunk
 
