@@ -1927,8 +1927,8 @@ int LuaImmovableDescription::get_editor_category(lua_State* L) {
 
          returns the terrain affinity values for this immovable
 
-         (RO) a table containing numbers labeled as pickiness (double), preferred_fertility (double),
-         preferred_humidity (double), and preferred_temperature (uint),
+         (RO) a table containing numbers labeled as pickiness (uint), preferred_fertility (uint),
+         preferred_humidity (uint), and preferred_temperature (uint),
          or nil if the immovable has no terrain affinity.
 */
 int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
@@ -1936,13 +1936,13 @@ int LuaImmovableDescription::get_terrain_affinity(lua_State* L) {
 		const TerrainAffinity& affinity = get()->terrain_affinity();
 		lua_newtable(L);
 		lua_pushstring(L, "pickiness");
-		lua_pushdouble(L, affinity.pickiness());
+		lua_pushuint32(L, affinity.pickiness());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_fertility");
-		lua_pushdouble(L, affinity.preferred_fertility());
+		lua_pushuint32(L, affinity.preferred_fertility());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_humidity");
-		lua_pushdouble(L, affinity.preferred_humidity());
+		lua_pushuint32(L, affinity.preferred_humidity());
 		lua_settable(L, -3);
 		lua_pushstring(L, "preferred_temperature");
 		lua_pushuint32(L, affinity.preferred_temperature());
@@ -2034,7 +2034,8 @@ int LuaImmovableDescription::probability_to_grow(lua_State* L) {
 	if (get()->has_terrain_affinity()) {
 		const TerrainDescription* terrain =
 		   (*get_user_class<LuaMaps::LuaTerrainDescription>(L, 2))->get();
-		lua_pushdouble(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain));
+		lua_pushdouble(L, Widelands::probability_to_grow(get()->terrain_affinity(), *terrain) /
+		                     static_cast<double>(Widelands::TerrainAffinity::kPrecisionFactor));
 	} else {
 		lua_pushnil(L);
 	}
@@ -3513,22 +3514,22 @@ int LuaTerrainDescription::get_editor_category(lua_State* L) {
 /* RST
    .. attribute:: fertility
 
-         (RO) the :class:`double` fertility value for this terrain
+         (RO) the :class:`uint` fertility value for this terrain
 */
 
 int LuaTerrainDescription::get_fertility(lua_State* L) {
-	lua_pushdouble(L, get()->fertility());
+	lua_pushuint32(L, get()->fertility());
 	return 1;
 }
 
 /* RST
    .. attribute:: humidity
 
-         (RO) the :class:`double` humidity value for this terrain
+         (RO) the :class:`uint` humidity value for this terrain
 */
 
 int LuaTerrainDescription::get_humidity(lua_State* L) {
-	lua_pushdouble(L, get()->humidity());
+	lua_pushuint32(L, get()->humidity());
 	return 1;
 }
 

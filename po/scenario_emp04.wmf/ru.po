@@ -3,16 +3,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Олег Шевченко <olegrock@gmail.com>, 2018
 # GunChleoc, 2018
+# Олег Шевченко <olegrock@gmail.com>, 2018
 # Anton Khabarov <2233009@gmail.com>, 2018
 # Viktor S <awsswa59@gmail.com>, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-11-09 06:49+0000\n"
+"PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Viktor S <awsswa59@gmail.com>, 2018\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -1229,7 +1230,7 @@ msgstr "Легкая победа"
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:624
 msgid "Saledus is cheering proudly…"
-msgstr ""
+msgstr "Саледус радостно приветствует ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:626
@@ -1325,7 +1326,7 @@ msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:677
 msgid "Saledus is happy…"
-msgstr ""
+msgstr "Саледус счастлив ..."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:679
