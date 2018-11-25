@@ -109,7 +109,7 @@ private:
 	   (1ul << maxErrors_) == static_cast<uint32_t>(Error::kAllErrors) + 1,
 	   "value of maxErrors_ doesn't match!");
 	std::string error_msg_[maxErrors_];
-	
+
 	// Returns the lowest array index of the an error.
 	// Intended for use with single errors to get their array index.
 	uint32_t get_index(Error);
