@@ -219,7 +219,8 @@ void Waterway::cleanup(EditorGameBase& egbase) {
 		if (ferry_) {
 			ferry_->set_destination(*game, nullptr);
 		}
-		else if (fleet_) {
+		if (fleet_) {
+			// Always call this, in case the fleet can disband now
 			fleet_->cancel_ferry_request(*game, this);
 		}
 	}

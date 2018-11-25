@@ -452,11 +452,11 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
 
 	const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
-	double best = 0.0;
+	int best = 0;
 	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
 		const ImmovableDescr& immovable_descr = immovables.get(i);
 		if (immovable_descr.has_attribute(attribute_id) && immovable_descr.has_terrain_affinity()) {
-			double probability =
+			int probability =
 			   probability_to_grow(immovable_descr.terrain_affinity(), fpos, map, terrains);
 			if (probability > best) {
 				best = probability;
@@ -464,7 +464,8 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 		}
 	}
 	// normalize value to int16 range
-	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) * best;
+	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) *
+	                            (static_cast<double>(best) / TerrainAffinity::kPrecisionFactor);
 
 	if (x_check && (correct_val != cache_entry)) {
 		forester_cache.clear();
@@ -798,7 +799,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<double, DescriptionIndex, MapObjectDescr::OwnerType>>
+	std::set<std::tuple<int, DescriptionIndex, MapObjectDescr::OwnerType>>
 	   best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
@@ -809,7 +810,7 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
-		double p = 1.;
+		int p = TerrainAffinity::kPrecisionFactor;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
 			   immovable_description.terrain_affinity(), fpos, map, game.world().terrains());
@@ -856,18 +857,18 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Randomly pick one of the immovables to be planted.
 
 	// Each candidate is weighted by its probability to grow.
-	double total_weight = 0.0;
+	int total_weight = 0;
 	for (const auto& bsii : best_suited_immovables_index) {
-		double weight = std::get<0>(bsii);
-		total_weight += weight * weight;
+		const int weight = std::get<0>(bsii);
+		total_weight += weight;
 	}
 
-	double choice = logic_rand_as_double(&game) * total_weight;
+	int choice = game.logic_rand() % total_weight;
 	for (const auto& bsii : best_suited_immovables_index) {
-		double weight = std::get<0>(bsii);
+		const int weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
 		state.ivar3 = static_cast<int>(std::get<2>(bsii));
-		choice -= weight * weight;
+		choice -= weight;
 		if (0 > choice) {
 			break;
 		}

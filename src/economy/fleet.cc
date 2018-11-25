@@ -529,8 +529,12 @@ void Fleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 		}
 	}
 	const auto& iterator = std::find(pending_ferry_requests_.begin(), pending_ferry_requests_.end(), waterway);
-	if (iterator != pending_ferry_requests_.end())
+	if (iterator != pending_ferry_requests_.end()) {
 		pending_ferry_requests_.erase(iterator);
+		if (ships_.empty() && ports_.empty() && ferries_.empty() && pending_ferry_requests_.empty()) {
+			remove(game);
+		}
+	}
 }
 
 void Fleet::rerout_ferry_request(Game& game, Waterway* oldww, Waterway* newww) {

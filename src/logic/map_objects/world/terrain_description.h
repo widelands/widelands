@@ -115,13 +115,13 @@ public:
 
 	/// Parameters for terrain affinity of immovables.
 	/// Temperature is in arbitrary units.
-	double temperature() const;
+	int temperature() const;
 
-	/// Humidity in percent [0, 1].
-	double humidity() const;
+	/// Humidity, ranging from 0 to 1000.
+	int humidity() const;
 
-	/// Fertility in percent [0, 1].
-	double fertility() const;
+	/// Fertility, ranging from 0 to 1000.
+	int fertility() const;
 
 	/// Additional tooptip entries for the editor
 	const std::vector<std::string>& custom_tooltips() const {
@@ -139,9 +139,9 @@ private:
 	int default_resource_amount_;
 	int dither_layer_;
 	int frame_length_;
-	double temperature_;
-	double fertility_;
-	double humidity_;
+	int temperature_;
+	int fertility_;
+	int humidity_;
 	std::vector<std::string> texture_paths_;
 	std::vector<const Image*> textures_;
 	RGBColor minimap_colors_[256];
