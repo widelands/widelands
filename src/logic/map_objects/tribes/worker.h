@@ -94,9 +94,9 @@ public:
 		assert(!location_.is_set());
 		assert(location.serial());
 		assert(worker_economy_);
-		assert(worker_economy_ == location.get_worker_economy());
+		assert(worker_economy_ == location.get_economy(wwWORKER));
 		assert(ware_economy_);
-		assert(ware_economy_ == location.get_ware_economy());
+		assert(ware_economy_ == location.get_economy(wwWARE));
 		location_ = &location;
 	}
 
