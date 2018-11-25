@@ -9,6 +9,7 @@ widelands (1:19+repack-6widelands1) UNRELEASED; urgency=medium
         1.6 doesn't seem to be around anymore and the versionless one
         seems to work across the different distro releases we build for
   * Build with ASAN disabled since parts of the code atm breaks
+  * Various minor typo and whitespace fixes
   * Merged Debian packaging of Widelands 1:19+repack-6. Remaining changes:
     - Revert debhelper/compat level to 9. (Ubuntu 14.04 doesn't have debhelper 10.)
     - Disabled all Debian-patches since applying them might cause conflicts as
