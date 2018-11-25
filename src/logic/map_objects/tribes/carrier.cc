@@ -537,7 +537,8 @@ void Carrier::Loader::load(FileRead& fr) {
 		// TODO(GunChleoc): Remove savegame compatibility after Build 21.
 		if (packet_version <= kCurrentPacketVersion && packet_version >= 1) {
 			Carrier& carrier = get<Carrier>();
-			carrier.promised_pickup_to_ = fr.signed_32();
+			// TODO(GunChleoc): std::min is for savegame compatibility. Remove after Build 21.
+			carrier.promised_pickup_to_ = std::min(NOONE, fr.signed_32());
 		} else {
 			throw UnhandledVersionError("Carrier", packet_version, kCurrentPacketVersion);
 		}
