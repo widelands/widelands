@@ -76,4 +76,4 @@ Comment[zh_TW]=一款即時演變的策略遊戲
 Icon=widelands
 TryExec=widelands
 Exec=widelands
-Categories=Game;StrategyGame;
+Categories=Application;Game;StrategyGame;
