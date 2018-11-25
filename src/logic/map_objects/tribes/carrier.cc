@@ -372,8 +372,9 @@ bool Carrier::notify_ware(Game& game, int32_t const flag) {
 	State& state = top_state();
 
 	// Check if we've already acked something
-	if (promised_pickup_to_ != NOONE)
+	if (promised_pickup_to_ != NOONE) {
 		return false;
+	}
 
 	// If we are currently in a transport.
 	// Explanation:

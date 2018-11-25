@@ -2218,8 +2218,9 @@ const Bob::Task Worker::taskWaitforcapacity = {
  * act at all.
  */
 bool Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
-	if (flag.has_capacity())
+	if (flag.has_capacity()) {
 		return false;
+	}
 
 	push_task(game, taskWaitforcapacity);
 
