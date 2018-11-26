@@ -539,7 +539,7 @@ void Carrier::Loader::load(FileRead& fr) {
 		if (packet_version <= kCurrentPacketVersion && packet_version >= 1) {
 			Carrier& carrier = get<Carrier>();
 			// TODO(GunChleoc): std::min is for savegame compatibility. Remove after Build 21.
-			carrier.promised_pickup_to_ = std::min(NOONE, fr.signed_32());
+			carrier.promised_pickup_to_ = std::min(-1, fr.signed_32());
 		} else {
 			throw UnhandledVersionError("Carrier", packet_version, kCurrentPacketVersion);
 		}
