@@ -131,39 +131,40 @@ void Economy::check_split(Flag& f1, Flag& f2, WareWorker type) {
 	if (!e)
 		return;
 
-	(type == wwWARE ? e->split_checks_ware_ : e->split_checks_worker_).push_back(
-			std::make_pair(OPtr<Flag>(&f1), OPtr<Flag>(&f2)));
+	e->split_checks_.push_back(std::make_pair(OPtr<Flag>(&f1), OPtr<Flag>(&f2)));
 	e->rebalance_supply();  // the real split-checking is done during rebalance
 }
 
 void Economy::check_splits() {
 	EditorGameBase& egbase = owner().egbase();
-	while (split_checks_ware_.size()) {
-		Flag* f1 = split_checks_ware_.back().first.get(egbase);
-		Flag* f2 = split_checks_ware_.back().second.get(egbase);
-		split_checks_ware_.pop_back();
+	while (split_checks_.size()) {
+		Flag* f1 = split_checks_.back().first.get(egbase);
+		Flag* f2 = split_checks_.back().second.get(egbase);
+		split_checks_.pop_back();
 
 		if (!f1 || !f2) {
 			if (!f1 && !f2)
 				continue;
 			if (!f1)
 				f1 = f2;
-			if (f1->get_economy(wwWARE) != this)
+			if (f1->get_economy(type_) != this)
 				continue;
 
 			// Handle the case when two or more roads are removed simultaneously
-			RouteAStar<AStarZeroEstimator> astar(*router_, wwWARE, AStarZeroEstimator());
+			RouteAStar<AStarZeroEstimator> astar(*router_, type_, AStarZeroEstimator());
 			astar.push(*f1);
 			std::set<OPtr<Flag>> reachable;
-			while (RoutingNode* current = astar.step())
+			while (RoutingNode* current = astar.step()) {
 				reachable.insert(&current->base_flag());
-			if (reachable.size() != flags_.size())
+			}
+			if (reachable.size() != flags_.size()) {
 				split(reachable);
+			}
 			continue;
 		}
 
 		// If one (or both) of the flags have already been split off, we do not need to re-check
-		if (f1->get_economy(wwWARE) != this || f2->get_economy(wwWARE) != this)
+		if (f1->get_economy(type_) != this || f2->get_economy(type_) != this)
 			continue;
 
 		// Start an A-star searches from f1 with a heuristic bias towards f2,
@@ -173,7 +174,7 @@ void Economy::check_splits() {
 		// This means that the newly created economy, which contains all the
 		// flags that have been split, is already connected.
 		RouteAStar<AStarEstimator> astar(
-		   *router_, wwWARE, AStarEstimator(*egbase.mutable_map(), *f2));
+		   *router_, type_, AStarEstimator(*egbase.mutable_map(), *f2));
 		astar.push(*f1);
 		std::set<OPtr<Flag>> reachable;
 
@@ -182,57 +183,9 @@ void Economy::check_splits() {
 			if (!current) {
 				split(reachable);
 				break;
-			} else if (current == f2)
+			} else if (current == f2) {
 				break;
-			reachable.insert(&current->base_flag());
-		}
-	}
-	while (split_checks_worker_.size()) {
-		Flag* f1 = split_checks_worker_.back().first.get(egbase);
-		Flag* f2 = split_checks_worker_.back().second.get(egbase);
-		split_checks_worker_.pop_back();
-
-		if (!f1 || !f2) {
-			if (!f1 && !f2)
-				continue;
-			if (!f1)
-				f1 = f2;
-			if (f1->get_economy(wwWORKER) != this)
-				continue;
-
-			// Handle the case when two or more roads are removed simultaneously
-			RouteAStar<AStarZeroEstimator> astar(*router_, wwWORKER, AStarZeroEstimator());
-			astar.push(*f1);
-			std::set<OPtr<Flag>> reachable;
-			while (RoutingNode* current = astar.step())
-				reachable.insert(&current->base_flag());
-			if (reachable.size() != flags_.size())
-				split(reachable);
-			continue;
-		}
-
-		// If one (or both) of the flags have already been split off, we do not need to re-check
-		if (f1->get_economy(wwWORKER) != this || f2->get_economy(wwWORKER) != this)
-			continue;
-
-		// Start an A-star searches from f1 with a heuristic bias towards f2,
-		// because we do not need to do anything if f1 is still connected to f2.
-		// If f2 is not reached by the search, split off all the nodes that have been
-		// reached from f1. These nodes induce a connected subgraph.
-		// This means that the newly created economy, which contains all the
-		// flags that have been split, is already connected.
-		RouteAStar<AStarEstimator> astar(
-		   *router_, wwWORKER, AStarEstimator(*egbase.mutable_map(), *f2));
-		astar.push(*f1);
-		std::set<OPtr<Flag>> reachable;
-
-		for (;;) {
-			RoutingNode* current = astar.step();
-			if (!current) {
-				split(reachable);
-				break;
-			} else if (current == f2)
-				break;
+			}
 			reachable.insert(&current->base_flag());
 		}
 	}
@@ -597,8 +550,7 @@ void Economy::merge(Economy& e) {
 	}
 
 	// Remember that the other economy may not have been connected before the merge
-	split_checks_ware_.insert(split_checks_ware_.end(), e.split_checks_ware_.begin(), e.split_checks_ware_.end());
-	split_checks_worker_.insert(split_checks_worker_.end(), e.split_checks_worker_.begin(), e.split_checks_worker_.end());
+	split_checks_.insert(split_checks_.end(), e.split_checks_.begin(), e.split_checks_.end());
 	owner_.remove_economy(e.serial());
 }
 

@@ -287,8 +287,7 @@ private:
 	std::unique_ptr<Router> router_;
 
 	using SplitPair = std::pair<OPtr<Flag>, OPtr<Flag>>;
-	std::vector<SplitPair> split_checks_ware_;
-	std::vector<SplitPair> split_checks_worker_;
+	std::vector<SplitPair> split_checks_;
 
 	/**
 	 * ID for the next request balancing timer. Used to throttle
