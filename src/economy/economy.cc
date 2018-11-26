@@ -157,6 +157,7 @@ void Economy::check_splits() {
 			while (RoutingNode* current = astar.step()) {
 				reachable.insert(&current->base_flag());
 			}
+			log("NOCOM: %s-Economy %u of player %u: Checked whether to split off economy from Flag %u at %3d×%3d –> can reach %u of %u flags\n", type_ ? "WORKER" : "WARE", serial_, owner_.player_number(), f1->serial(), f1->get_position().x, f1->get_position().y, reachable.size(), flags_.size());
 			if (reachable.size() != flags_.size()) {
 				split(reachable);
 			}
@@ -181,6 +182,7 @@ void Economy::check_splits() {
 		for (;;) {
 			RoutingNode* current = astar.step();
 			if (!current) {
+				log("NOCOM: %s-Economy %u of player %u: Checked whether to split off economy between Flags %u at %3d×%3d and %u at %3d×%3d –> can reach %u of %u flags\n", type_ ? "WORKER" : "WARE", serial_, owner_.player_number(), f1->serial(), f1->get_position().x, f1->get_position().y, f2->serial(), f2->get_position().x, f2->get_position().y, reachable.size(), flags_.size());
 				split(reachable);
 				break;
 			} else if (current == f2) {
@@ -558,6 +560,16 @@ void Economy::merge(Economy& e) {
  * Split the given set of flags off into a new economy.
  */
 void Economy::split(const std::set<OPtr<Flag>>& flags) {
+	// NOCOM {
+	log("NOCOM: Economy %u of player %u: Splitting off %u flags:\n", serial_, owner_.player_number(), flags.size());
+	for (const OPtr<Flag>& f : flags) {
+		Flag* flag = f.get(owner().egbase());
+		log("        · %u at %3d×%3d\n", flag->serial(), flag->get_position().x, flag->get_position().y);
+	}
+	log("    %u flags total:\n", flags_.size());
+	for (Flag* flag : flags_)
+		log("        · %u at %3d×%3d\n", flag->serial(), flag->get_position().x, flag->get_position().y);
+	// } NOCOM
 	assert(!flags.empty());
 
 	Economy* e = owner_.create_economy(type_);
@@ -646,11 +658,12 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 		       supp.get_position(game)->base_flag(), target_flag, route, best_cost)) {
 			if (!best_route) {
 				// TODO(Nordfriese): This warning often appears while set_economy() is called for
-				// something. The routing works on the next try, so this is not a bug.
+				// something. The routing works on the next try, so this is not really a bug.
 				// Should we remove the warning?
-				log("Economy::find_best_supply: Error, COULD NOT FIND A ROUTE!");
+				log("Economy::find_best_supply: %s-Economy %u of player %u: Error, COULD NOT FIND A ROUTE!",
+						type_ ? "WORKER" : "WARE", serial_, owner_.player_number());
 				// To help to debug this a bit:
-				log(" ... ware at: %3dx%3d, requestor at: %3dx%3d! Type is %s, item %s.\n",
+				log(" ... ware at: %3dx%3d, requestor at: %3dx%3d! Item: %s %s.\n",
 				    supp.get_position(game)->base_flag().get_position().x,
 				    supp.get_position(game)->base_flag().get_position().y, target_flag.get_position().x,
 				    target_flag.get_position().y, type_ == wwWARE ? "WARE" : "WORKER",
