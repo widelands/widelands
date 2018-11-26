@@ -56,10 +56,10 @@ struct Waterway : public RoadBase {
 
 	void postsplit(Game&, Flag&) override;
 
-	bool notify_ware(Game& game, Flag& flag);
+	bool notify_ware(Game& game, FlagId flag) override;
 
-	void remove_worker(Worker&);
-	void assign_carrier(Carrier&, uint8_t);
+	void remove_worker(Worker&) override;
+	void assign_carrier(Carrier&, uint8_t) override;
 
 	Fleet* get_fleet() const;
 

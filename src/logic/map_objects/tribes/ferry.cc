@@ -69,7 +69,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 	if (does_carry_ware()) {
 		if (upcast(Flag, flag, get_position().field->get_immovable())) {
 			// We are on a flag
-			if (flag->has_capacity_for_ware(*get_carried_ware(game))) {
+			if (flag->has_capacity()) {
 				molog("[unemployed]: dropping ware here\n");
 				flag->add_ware(game, *fetch_carried_ware(game));
 				return start_task_idle(game, descr().get_animation("idle"), 50);
@@ -88,7 +88,7 @@ void Ferry::unemployed_update(Game& game, State&) {
 			for (ImmovableFound& imm : flags) {
 				if (upcast(Flag, flag, imm.object)) {
 					if (flag->get_owner() == get_owner()) {
-						if (flag->has_capacity_for_ware(*get_carried_ware(game))) {
+						if (flag->has_capacity()) {
 							molog("[unemployed]: moving to nearby flag\n");
 							if (!start_task_movepath(game, flag->get_position(), -1,
 									descr().get_right_walk_anims(does_carry_ware()))) {

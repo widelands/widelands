@@ -85,7 +85,7 @@ struct RoadBase : public PlayerImmovable {
 	void presplit(Game&, Coords split);
 	virtual void postsplit(Game&, Flag&);
 
-	virtual bool notify_ware(Game&, Flag&);
+	virtual bool notify_ware(Game&, FlagId);
 
 	virtual void assign_carrier(Carrier&, uint8_t);
 
