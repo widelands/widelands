@@ -41,11 +41,11 @@ void GenericSaveHandler::clear() {
 	return;
 }
 
-uint32_t GenericSaveHandler::get_index(GenericSaveHandler::Error error) {
-	if (error == Error::kNone) {
+uint32_t GenericSaveHandler::get_index(GenericSaveHandler::Error err) {
+	if (err == Error::kNone) {
 		return maxErrors_;
 	}
-	uint32_t error_uint = static_cast<uint32_t>(error);
+	uint32_t error_uint = static_cast<uint32_t>(err);
 	for (uint32_t index = 0; index < maxErrors_; index++) {
 		if (error_uint & 1) {
 			return index;
