@@ -26,7 +26,7 @@ if(POLICY CMP0072)
     distro_name (DISTRO_NAME)
     # DISTRO_NAME is different on the build-servers.
     if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
-         DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "disco")
+         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "disco")
         AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       cmake_policy(SET CMP0072 OLD)
     endif()
