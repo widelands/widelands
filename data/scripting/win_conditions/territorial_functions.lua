@@ -152,17 +152,20 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
       end
 
       for pidx, playerinfo in ipairs(teaminfo.players) do
-         if is_winner and teaminfo.team == 0 and teaminfo.points == playerinfo.points then
-            territory_was_kept = winning_players[playerinfo.number] ~= nil
-            winning_players[playerinfo.number] = true
-            territory_points.last_winning_player = playerinfo.number
-            territory_points.last_winning_player_name = players[playerinfo.number].name
-            territory_points.last_winning_team = -1
-         else
-            winning_players[playerinfo.number] = nil
-         end
-         if teaminfo.team == 0 and players[playerinfo.number] ~= nil then
-            points[#points + 1] = { players[playerinfo.number].name, playerinfo.points }
+         -- Make sure that player still exists
+         if players[playerinfo.number] ~= nil then
+            if is_winner and teaminfo.team == 0 and teaminfo.points == playerinfo.points then
+               territory_was_kept = winning_players[playerinfo.number] ~= nil
+               winning_players[playerinfo.number] = true
+               territory_points.last_winning_player = playerinfo.number
+               territory_points.last_winning_player_name = players[playerinfo.number].name
+               territory_points.last_winning_team = -1
+            else
+               winning_players[playerinfo.number] = nil
+            end
+            if teaminfo.team == 0 then
+               points[#points + 1] = { players[playerinfo.number].name, playerinfo.points }
+            end
          end
       end
    end
