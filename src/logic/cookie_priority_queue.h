@@ -93,7 +93,7 @@ struct CookiePriorityQueue : CookiePriorityQueueBase<_Type> {
 	using Compare = _Compare;
 	using CookieAccessor = _CookieAccessor;
 
-	CookiePriorityQueue(Widelands::WareWorker type, const Compare& comparator = Compare(),
+	CookiePriorityQueue(Widelands::WareWorker type = Widelands::wwWORKER, const Compare& comparator = Compare(),
 	                    const CookieAccessor& accessor = CookieAccessor());
 	~CookiePriorityQueue();
 
