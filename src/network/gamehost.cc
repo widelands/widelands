@@ -608,8 +608,12 @@ void GameHost::run() {
 	}
 
 	// if this is an internet game, tell the metaserver that the game started
-	if (internet_)
+	if (internet_) {
 		InternetGaming::ref().set_game_playing();
+	} else {
+		// if it is a LAN game, no longer accept new clients
+		dynamic_cast<NetHost*>(d->net.get())->stop_listening();
+	}
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
 		if (d->clients.at(i).playernum == UserSettings::not_connected())
@@ -1939,6 +1943,8 @@ void GameHost::handle_network() {
 	Client peer;
 	assert(d->net != nullptr);
 	while (d->net->try_accept(&peer.sock_id)) {
+		// Should only happen if the game has not be started yet
+		assert(d->game == nullptr);
 		peer.playernum = UserSettings::not_connected();
 		peer.syncreport_arrived = false;
 		peer.desiredspeed = 1000;
