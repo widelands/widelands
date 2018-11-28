@@ -1059,6 +1059,11 @@ void GameHost::set_map(const std::string& mapname,
 	write_setting_map(packet);
 	broadcast(packet);
 
+	// Also broadcast on LAN
+	if (d->promoter) {
+		d->promoter->set_map(mapname.c_str());
+	}
+
 	// Broadcast new player settings
 	packet.reset();
 	packet.unsigned_8(NETCMD_SETTING_ALLPLAYERS);
