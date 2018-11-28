@@ -41,7 +41,6 @@
 #include <unistd.h>
 #endif
 
-#include "base/log.h"
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "io/filesystem/filesystem_exceptions.h"
