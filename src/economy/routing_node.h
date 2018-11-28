@@ -60,33 +60,46 @@ using RoutingNodeNeighbours = std::vector<RoutingNodeNeighbour>;
  */
 struct RoutingNode {
 	struct LessCost {
-		bool operator()(const RoutingNode& a, const RoutingNode& b) const {
-			return a.cost() < b.cost();
+		bool operator()(const RoutingNode& a, const RoutingNode& b, WareWorker type) const {
+			return a.cost(type) < b.cost(type);
 		}
 	};
 	using Queue = CookiePriorityQueue<RoutingNode, LessCost>;
 
-	uint32_t mpf_cycle;
-	Queue::Cookie mpf_cookie;
-	int32_t mpf_realcost;       ///< real cost of getting to this flag
-	RoutingNode* mpf_backlink;  ///< flag where we came from
-	int32_t mpf_estimate;       ///< estimate of cost to destination
+	uint32_t mpf_cycle_ware;
+	Queue::Cookie mpf_cookie_ware;
+	int32_t mpf_realcost_ware;       ///< real cost of getting to this flag
+	RoutingNode* mpf_backlink_ware;  ///< flag where we came from
+	int32_t mpf_estimate_ware;       ///< estimate of cost to destination
+
+	uint32_t mpf_cycle_worker;
+	Queue::Cookie mpf_cookie_worker;
+	int32_t mpf_realcost_worker;       ///< real cost of getting to this flag
+	RoutingNode* mpf_backlink_worker;  ///< flag where we came from
+	int32_t mpf_estimate_worker;       ///< estimate of cost to destination
 
 public:
-	RoutingNode() : mpf_cycle(0), mpf_realcost(0), mpf_backlink(nullptr), mpf_estimate(0) {
+	RoutingNode() : mpf_cycle_ware(0), mpf_realcost_ware(0), mpf_backlink_ware(nullptr), mpf_estimate_ware(0),
+			mpf_cycle_worker(0), mpf_realcost_worker(0), mpf_backlink_worker(nullptr), mpf_estimate_worker(0) {
 	}
 	virtual ~RoutingNode() {
 	}
 
-	void reset_path_finding_cycle() {
-		mpf_cycle = 0;
+	void reset_path_finding_cycle(WareWorker which) {
+		if (which == wwWARE)
+			mpf_cycle_ware = 0;
+		else
+			mpf_cycle_worker = 0;
 	}
 
-	int32_t cost() const {
-		return mpf_realcost + mpf_estimate;
+	int32_t cost(WareWorker which) const {
+		if (which == wwWARE)
+			return mpf_realcost_ware + mpf_estimate_ware;
+		else
+			return mpf_realcost_worker + mpf_estimate_worker;
 	}
-	Queue::Cookie& cookie() {
-		return mpf_cookie;
+	Queue::Cookie& cookie(WareWorker which) {
+		return which == wwWARE ? mpf_cookie_ware : mpf_cookie_worker;
 	}
 
 	virtual Flag& base_flag() = 0;

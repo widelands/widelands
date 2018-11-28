@@ -27,6 +27,7 @@
 #include <stdint.h>
 
 #include "logic/cookie_priority_queue.h"
+#include "logic/map_objects/tribes/wareworker.h"
 
 namespace Widelands {
 
@@ -41,7 +42,7 @@ namespace Widelands {
  */
 struct Pathfield {
 	struct LessCost {
-		bool operator()(const Pathfield& a, const Pathfield& b) const {
+		bool operator()(const Pathfield& a, const Pathfield& b, WareWorker = wwWORKER) const {
 			return a.cost() < b.cost();
 		}
 	};
@@ -54,10 +55,10 @@ struct Pathfield {
 	uint16_t cycle;
 	uint8_t backlink;  //  how we got here (WALK_*)
 
-	int32_t cost() const {
+	int32_t cost(WareWorker = wwWORKER) const {
 		return real_cost + estim_cost;
 	}
-	Queue::Cookie& cookie() {
+	Queue::Cookie& cookie(WareWorker = wwWORKER) {
 		return heap_cookie;
 	}
 };

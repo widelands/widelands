@@ -288,8 +288,7 @@ void PortDock::update_shippingitem(Game& game, std::vector<ShippingItem>::iterat
 	assert(dst != this);
 
 	// Destination might have vanished or be in another economy altogether.
-	// TODO(Nordfriese): Should we compare economies for wwWARE *and* or *or* wwWORKER ?
-	if (dst && dst->get_economy(wwWARE) == get_economy(wwWARE)) {
+	if (dst && dst->get_economy(wwWARE) == get_economy(wwWARE) && dst->get_economy(wwWORKER) == get_economy(wwWORKER)) {
 		set_need_ship(game, true);
 	} else {
 		it->set_location(game, warehouse_);

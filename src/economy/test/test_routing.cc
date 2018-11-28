@@ -89,8 +89,9 @@ void TestingRoutingNode::get_neighbours(WareWorker type, RoutingNodeNeighbours& 
 	}
 }
 bool TestingRoutingNode::all_members_zeroed() {
-	bool integers_zero = !mpf_cycle && !mpf_realcost && !mpf_estimate;
-	bool pointers_zero = (mpf_backlink == nullptr);
+	bool integers_zero = !mpf_cycle_ware && !mpf_realcost_ware && !mpf_estimate_ware && !mpf_cycle_worker &&
+			!mpf_realcost_worker && !mpf_estimate_worker;
+	bool pointers_zero = (mpf_backlink_ware == nullptr) && (mpf_backlink_worker == nullptr);
 
 	return pointers_zero && integers_zero;
 }
@@ -243,11 +244,11 @@ struct SimpleRouterFixture {
 	 * Callback for the incredibly rare case that the \ref Router pathfinding
 	 * cycle wraps around.
 	 */
-	void reset() {
+	void reset(WareWorker type) {
 		if (d0)
-			d0->reset_path_finding_cycle();
+			d0->reset_path_finding_cycle(type);
 		if (d1)
-			d1->reset_path_finding_cycle();
+			d1->reset_path_finding_cycle(type);
 	}
 	TestingRoutingNode* d0;
 	TestingRoutingNode* d1;
@@ -378,7 +379,7 @@ BOOST_FIXTURE_TEST_CASE(router_findroute_connectedNodes_exceptSuccess, SimpleRou
 struct ComplexRouterFixture {
 	using Nodes = std::vector<RoutingNode*>;
 
-	ComplexRouterFixture() : r(boost::bind(&ComplexRouterFixture::reset, this)) {
+	ComplexRouterFixture(WareWorker type) : type_(type), r(boost::bind(&ComplexRouterFixture::reset, this)) {
 		d0 = new TestingRoutingNode();
 		nodes.push_back(d0);
 	}
@@ -477,9 +478,10 @@ struct ComplexRouterFixture {
 	 */
 	void reset() {
 		for (RoutingNode* node : nodes) {
-			node->reset_path_finding_cycle();
+			node->reset_path_finding_cycle(type_);
 		}
 	}
+	WareWorker type_;
 	TestingRoutingNode* d0;
 	Nodes nodes;
 	Router r;
@@ -528,7 +530,7 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 /*                            Distance routing                           */
 /*************************************************************************/
 struct DistanceRoutingFixture : public ComplexRouterFixture {
-	DistanceRoutingFixture() : ComplexRouterFixture() {
+	DistanceRoutingFixture(WareWorker type) : ComplexRouterFixture(type) {
 		// node is connected through a long and a short path
 		// start d1 end
 		start = d0;

@@ -22,12 +22,14 @@
 
 #include "base/log.h"
 #include "logic/map.h"
+#include "logic/map_objects/tribes/wareworker.h"
 #include "logic/pathfield.h"
 
 namespace Widelands {
 
 struct MapAStarBase {
-	explicit MapAStarBase(Map& m) : map(m), pathfields(m.pathfieldmgr_->allocate()) {
+	explicit MapAStarBase(Map& m, WareWorker type = wwWORKER) :
+			map(m), pathfields(m.pathfieldmgr_->allocate()), queue(type) {
 	}
 
 	bool empty() const {

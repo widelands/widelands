@@ -800,7 +800,7 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 		}
 	}
 
-	// TODO(Nordfriese): Why is this here twice? Isn't this superfluous?
+	// Why is this here twice? Isn't this superfluous?
 	if (portdock_)
 		portdock_->set_economy(e, type);
 
