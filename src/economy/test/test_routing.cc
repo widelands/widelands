@@ -244,11 +244,16 @@ struct SimpleRouterFixture {
 	 * Callback for the incredibly rare case that the \ref Router pathfinding
 	 * cycle wraps around.
 	 */
-	void reset(WareWorker type) {
-		if (d0)
-			d0->reset_path_finding_cycle(type);
-		if (d1)
-			d1->reset_path_finding_cycle(type);
+	void reset() {
+		// Is it really necessary to reset both cycles here?
+		if (d0) {
+			d0->reset_path_finding_cycle(wwWARE);
+			d0->reset_path_finding_cycle(wwWORKER);
+		}
+		if (d1) {
+			d1->reset_path_finding_cycle(wwWARE);
+			d1->reset_path_finding_cycle(wwWORKER);
+		}
 	}
 	TestingRoutingNode* d0;
 	TestingRoutingNode* d1;
@@ -379,7 +384,7 @@ BOOST_FIXTURE_TEST_CASE(router_findroute_connectedNodes_exceptSuccess, SimpleRou
 struct ComplexRouterFixture {
 	using Nodes = std::vector<RoutingNode*>;
 
-	ComplexRouterFixture(WareWorker type) : type_(type), r(boost::bind(&ComplexRouterFixture::reset, this)) {
+	ComplexRouterFixture() : r(boost::bind(&ComplexRouterFixture::reset, this)) {
 		d0 = new TestingRoutingNode();
 		nodes.push_back(d0);
 	}
@@ -478,10 +483,11 @@ struct ComplexRouterFixture {
 	 */
 	void reset() {
 		for (RoutingNode* node : nodes) {
-			node->reset_path_finding_cycle(type_);
+			// Is it really necessary to reset both cycles here?
+			node->reset_path_finding_cycle(wwWARE);
+			node->reset_path_finding_cycle(wwWORKER);
 		}
 	}
-	WareWorker type_;
 	TestingRoutingNode* d0;
 	Nodes nodes;
 	Router r;
@@ -530,7 +536,7 @@ BOOST_FIXTURE_TEST_CASE(find_long_route, ComplexRouterFixture) {
 /*                            Distance routing                           */
 /*************************************************************************/
 struct DistanceRoutingFixture : public ComplexRouterFixture {
-	DistanceRoutingFixture(WareWorker type) : ComplexRouterFixture(type) {
+	DistanceRoutingFixture() : ComplexRouterFixture() {
 		// node is connected through a long and a short path
 		// start d1 end
 		start = d0;
