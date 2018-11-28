@@ -613,6 +613,7 @@ void GameHost::run() {
 	} else {
 		// if it is a LAN game, no longer accept new clients
 		dynamic_cast<NetHost*>(d->net.get())->stop_listening();
+		d->promoter.reset();
 	}
 
 	for (uint32_t i = 0; i < d->clients.size(); ++i) {
