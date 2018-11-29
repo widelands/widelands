@@ -1949,7 +1949,7 @@ void GameHost::handle_network() {
 	Client peer;
 	assert(d->net != nullptr);
 	while (d->net->try_accept(&peer.sock_id)) {
-		// Should only happen if the game has not be started yet
+		// Should only happen if the game has not been started yet
 		assert(d->game == nullptr);
 		peer.playernum = UserSettings::not_connected();
 		peer.syncreport_arrived = false;
