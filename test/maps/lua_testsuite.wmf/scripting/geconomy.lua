@@ -15,7 +15,7 @@ function economy_tests:test_ware_target_quantity()
    local sf = map:get_field(10, 10)
    local hq = player1:place_building("barbarians_headquarters", sf, false, true)
    local hq_flag = hq.flag
-   local eco = hq_flag.economy
+   local eco = hq_flag.ware_economy
 
    -- Test illegal parameters
    assert_error("Nonexisting ware",function() eco:ware_target_quantity("foobar") end)
@@ -36,7 +36,7 @@ function economy_tests:test_worker_target_quantity()
    local sf = map:get_field(10, 10)
    local hq = player1:place_building("barbarians_headquarters", sf, false, true)
    local hq_flag = hq.flag
-   local eco = hq_flag.economy
+   local eco = hq_flag.worker_economy
 
    -- Test illegal parameters
    assert_error("Nonexisting worker",function() eco:worker_target_quantity("foobar") end)
