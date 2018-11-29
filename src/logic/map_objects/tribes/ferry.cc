@@ -270,6 +270,7 @@ void Ferry::Loader::load(FileRead& fr) {
 			else {
 				ferry.destination_ = nullptr;
 			}
+			ferry.init_fleet();
 		} else {
 			throw UnhandledVersionError("Ferry", packet_version, kCurrentPacketVersion);
 		}
