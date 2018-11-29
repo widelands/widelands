@@ -407,7 +407,6 @@ void Map::set_size(const uint32_t w, const uint32_t h) {
 /*
  * Getter and setter for the highest permitted length of a waterway on this map.
  * A value of 0 or 1 means no waterways can be built.
- * A value of -1 means there is no length restriction.
  */
 uint32_t Map::get_waterway_max_length() const {
 	return waterway_max_length_;

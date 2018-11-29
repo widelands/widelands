@@ -586,11 +586,13 @@ void Economy::split(const std::set<OPtr<Flag>>& flags) {
 
 /**
  * Make sure the request timer is running.
+ * We can skip this for flagless economies (expedition ships don't need economy balancing…).
  */
 void Economy::start_request_timer(int32_t const delta) {
-	if (upcast(Game, game, &owner_.egbase()))
-		game->cmdqueue().enqueue(
-		   new CmdCallEconomyBalance(game->get_gametime() + delta, this, request_timerid_));
+	if (get_arbitrary_flag())
+		if (upcast(Game, game, &owner_.egbase()))
+			game->cmdqueue().enqueue(
+			   new CmdCallEconomyBalance(game->get_gametime() + delta, this, request_timerid_));
 }
 
 /**
@@ -649,12 +651,12 @@ Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost)
 				log("Economy::find_best_supply: %s-Economy %u of player %u: Error, COULD NOT FIND A ROUTE!",
 						type_ ? "WORKER" : "WARE", serial_, owner_.player_number());
 				// To help to debug this a bit:
-				log(" ... ware at: %3dx%3d, requestor at: %3dx%3d! Item: %s %s.\n",
+				log(" ... ware at: %3dx%3d, requestor at: %3dx%3d! Item: %s.\n",
 				    supp.get_position(game)->base_flag().get_position().x,
 				    supp.get_position(game)->base_flag().get_position().y, target_flag.get_position().x,
-				    target_flag.get_position().y, type_ == wwWARE ? "WARE" : "WORKER",
-				    type_ == wwWARE ? game.tribes().get_ware_descr(req.get_index())->name().c_str() :
-				    		game.tribes().get_worker_descr(req.get_index())->name().c_str());
+				    target_flag.get_position().y, type_ == wwWARE ?
+		    		game.tribes().get_ware_descr(req.get_index())->name().c_str() :
+		    		game.tribes().get_worker_descr(req.get_index())->name().c_str());
 			}
 			continue;
 		}
