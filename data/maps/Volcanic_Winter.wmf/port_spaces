@@ -2,6 +2,7 @@
 
 [global]
 packet_version="1"
+waterway_max_length="4"
 number_of_port_spaces="12"
 
 [port_spaces]

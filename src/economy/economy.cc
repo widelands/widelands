@@ -43,10 +43,10 @@ namespace Widelands {
 
 Serial Economy::last_economy_serial_ = 0;
 
-Economy::Economy(Player& player, WareWorker type) : Economy(player, last_economy_serial_++, type) {
+Economy::Economy(Player& player, WareWorker wwtype) : Economy(player, last_economy_serial_++, wwtype) {
 }
 
-Economy::Economy(Player& player, Serial init_serial, WareWorker type)
+Economy::Economy(Player& player, Serial init_serial, WareWorker wwtype)
    : serial_(init_serial), owner_(player), request_timerid_(0), has_window_(false) {
 	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
@@ -54,7 +54,7 @@ Economy::Economy(Player& player, Serial init_serial, WareWorker type)
 	DescriptionIndex const nr_workers = player.egbase().tribes().nrworkers();
 	wares_.set_nrwares(nr_wares);
 	workers_.set_nrwares(nr_workers);
-	type_ = type;
+	type_ = wwtype;
 
 	ware_target_quantities_ = new TargetQuantity[nr_wares];
 	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
@@ -998,9 +998,10 @@ void Economy::handle_active_supplies(Game& game) {
 		if (supply.has_storage())
 			continue;
 
-		WareWorker type;
+		WareWorker wwtype;
 		DescriptionIndex ware;
-		supply.get_ware_type(type, ware);
+		supply.get_ware_type(wwtype, ware);
+		assert(wwtype == type_);
 
 		bool haveprefer = false;
 		bool havenormal = false;

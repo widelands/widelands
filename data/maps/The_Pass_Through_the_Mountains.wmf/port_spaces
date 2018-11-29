@@ -3,5 +3,6 @@
 [global]
 packet_version="1"
 number_of_port_spaces="0"
+waterway_max_length="10"
 
 [port_spaces]
