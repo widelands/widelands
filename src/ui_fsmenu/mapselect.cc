@@ -101,6 +101,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
 	add_tag_checkbox(hbox, "official", localize_tag("official"));
 	add_tag_checkbox(hbox, "unbalanced", localize_tag("unbalanced"));
 	add_tag_checkbox(hbox, "seafaring", localize_tag("seafaring"));
+	add_tag_checkbox(hbox, "ferries", localize_tag("ferries"));
 	add_tag_checkbox(hbox, "artifacts", localize_tag("artifacts"));
 	add_tag_checkbox(hbox, "scenario", localize_tag("scenario"));
 	checkboxes_.add(hbox, UI::Box::Resizing::kFullSize);

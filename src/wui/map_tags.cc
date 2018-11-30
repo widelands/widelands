@@ -31,6 +31,8 @@ const std::map<std::string, std::string> kMapTags = {
    /** TRANSLATORS: This is a map tag */
    {"seafaring", _("Seafaring")},
    /** TRANSLATORS: This is a map tag */
+   {"ferries", _("Ferries")},
+   /** TRANSLATORS: This is a map tag */
    {"artifacts", _("Artifacts")},
    /** TRANSLATORS: This is a map tag */
    {"scenario", _("Scenario")},

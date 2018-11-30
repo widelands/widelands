@@ -10,7 +10,7 @@ author="Einstein13"
 descr=_"The river has always provided food and communication. This time, eight empires will fight for control over this land."
 hint=_"Use the river wisely. Your opponents will do the same. You will find the main ore resources deep in the desert."
 hint=
-tags="1v1,2teams,3teams,4teams,seafaring,official"
+tags="1v1,2teams,3teams,4teams,ferries,seafaring,official"
 
 [teams00]
 team1="0"
