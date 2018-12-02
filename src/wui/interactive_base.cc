@@ -939,7 +939,7 @@ void InteractiveBase::roadb_add_overlay() {
 		Widelands::BaseImmovable* const imm = map.get_immovable(neighb);
 		if (imm && imm->get_size() >= Widelands::BaseImmovable::SMALL) {
 			if (!(dynamic_cast<const Widelands::Flag*>(imm) ||
-			      (dynamic_cast<const Widelands::Road*>(imm) && (caps & Widelands::BUILDCAPS_FLAG))))
+			      (dynamic_cast<const Widelands::RoadBase*>(imm) && (caps & Widelands::BUILDCAPS_FLAG))))
 				continue;
 		}
 
