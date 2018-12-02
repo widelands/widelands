@@ -31,11 +31,6 @@ enum RoadType : uint8_t {
 	kWaterway = 3,
 };
 
-struct RoadInfo {
-	RoadType type;
-	uint8_t dir;
-};
-
 }
 
 #endif  // end of include guard: WL_LOGIC_ROADTYPE_H

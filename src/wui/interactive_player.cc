@@ -296,36 +296,38 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		if (f->vision > 0) {
 			const auto rinfo = road_building.road_previews.find(f->fcoords);
 			if (rinfo != road_building.road_previews.end()) {
-				switch (rinfo->second.dir) {
-					case Widelands::WALK_E:
-						f->road_e = rinfo->second.type;
-						break;
-					case Widelands::WALK_SE:
-						f->road_se = rinfo->second.type;
-						break;
-					case Widelands::WALK_SW:
-						f->road_sw = rinfo->second.type;
-						break;
-					default:
-						throw wexception("Attempt to set road-building overlay for invalid direction %i",
-								rinfo->second.dir);
+				for (uint8_t dir : rinfo->second) {
+					switch (dir) {
+						case Widelands::WALK_E:
+							f->road_e = Widelands::RoadType::kNormal;
+							break;
+						case Widelands::WALK_SE:
+							f->road_se = Widelands::RoadType::kNormal;
+							break;
+						case Widelands::WALK_SW:
+							f->road_sw = Widelands::RoadType::kNormal;
+							break;
+						default:
+							throw wexception("Attempt to set road-building overlay for invalid direction %i", dir);
+					}
 				}
 			}
 			const auto winfo = waterway_building.road_previews.find(f->fcoords);
 			if (winfo != waterway_building.road_previews.end()) {
-				switch (winfo->second.dir) {
-					case Widelands::WALK_E:
-						f->road_e = winfo->second.type;
-						break;
-					case Widelands::WALK_SE:
-						f->road_se = winfo->second.type;
-						break;
-					case Widelands::WALK_SW:
-						f->road_sw = winfo->second.type;
-						break;
-					default:
-						throw wexception("Attempt to set waterway-building overlay for invalid direction %i",
-								winfo->second.dir);
+				for (uint8_t dir : winfo->second) {
+					switch (dir) {
+						case Widelands::WALK_E:
+							f->road_e = Widelands::RoadType::kWaterway;
+							break;
+						case Widelands::WALK_SE:
+							f->road_se = Widelands::RoadType::kWaterway;
+							break;
+						case Widelands::WALK_SW:
+							f->road_sw = Widelands::RoadType::kWaterway;
+							break;
+						default:
+							throw wexception("Attempt to set waterway-building overlay for invalid direction %i", dir);
+					}
 				}
 			}
 

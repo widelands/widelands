@@ -257,7 +257,7 @@ protected:
 
 	// Overlays displayed while a road or waterway is under construction.
 	struct RoadBuildingOverlays {
-		std::map<Widelands::Coords, Widelands::RoadInfo> road_previews;
+		std::map<Widelands::Coords, std::vector<uint8_t>> road_previews;
 		std::map<Widelands::Coords, const Image*> steepness_indicators;
 	};
 
