@@ -918,7 +918,7 @@ void InteractiveBase::roadb_add_overlay() {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
-		road_building_overlays_.road_previews.try_emplace(c, std::vector<uint8_t>());
+		road_building_overlays_.road_previews.emplace(c, std::vector<uint8_t>());
 		road_building_overlays_.road_previews[c].push_back(dir);
 	}
 
@@ -986,7 +986,7 @@ void InteractiveBase::waterwayb_add_overlay() {
 			map.get_neighbour(c, dir, &c);
 			dir = Widelands::get_reverse_dir(dir);
 		}
-		waterway_building_overlays_.road_previews.try_emplace(c, std::vector<uint8_t>());
+		waterway_building_overlays_.road_previews.emplace(c, std::vector<uint8_t>());
 		waterway_building_overlays_.road_previews[c].push_back(dir);
 	}
 
