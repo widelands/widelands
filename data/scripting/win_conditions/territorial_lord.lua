@@ -42,8 +42,6 @@ return {
       local function _send_state()
          set_textdomain("win_conditions")
 
-         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
-
          for idx, player in ipairs(plrs) do
             local msg = ""
             if territory_points.last_winning_team == player.team or territory_points.last_winning_player == player.number then
@@ -61,12 +59,15 @@ return {
          -- Sleep 30 seconds == STATISTICS_SAMPLE_TIME
          sleep(30000)
 
+         -- A player might have been defeated since the last calculation
+         check_player_defeated(plrs, lost_game.title, lost_game.body)
+
          -- Check if a player or team is a candidate and update variables
-         calculate_territory_points(fields, plrs, wc_descname, wc_version)
+         calculate_territory_points(fields, wl.Game().players)
 
          -- Do this stuff, if the game is over
-         if territory_points.remaining_time == 0 then
-            territory_game_over(fields, plrs, wc_descname, wc_version)
+         if territory_points.remaining_time == 0 or count_factions(plrs) <= 1 then
+            territory_game_over(fields, wl.Game().players, wc_descname, wc_version)
             break
          end
 
