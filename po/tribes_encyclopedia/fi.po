@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-09 06:49+0000\n"
-"PO-Revision-Date: 2018-11-14 16:47+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-24 18:43+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -834,7 +834,7 @@ msgctxt "building"
 msgid ""
 "Prepares rations for scouts and rations and snacks to feed the miners in the"
 " basic and deep mines."
-msgstr "Valmistaa ruoka-annokset tiedustelijoille ja ruoka-annokset sekä välipalat tavallisien ja syvien kaivosten kaivostyöntekijöiden ruokkimiseksi."
+msgstr "Valmistaa ruoka-annokset tiedustelijoille ja ruoka-annokset sekä välipalat tavallisien ja keskisyvien kaivosten kaivostyöntekijöiden ruokkimiseksi."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine/helptexts.lua:3
@@ -1020,7 +1020,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Produces beer of the lower grade. This beer is a vital component of the "
 "snacks that inns and big inns prepare for miners in deep mines."
-msgstr "Tuottaa huonompitasoista olutta. Tämä olut on elintärkeä välipalojen aines , jota majatalot ja isot majatalot tuottavat kaivostyöntekijöille syviin kaivoksiin."
+msgstr "Tuottaa huonompitasoista olutta. Tämä olut on elintärkeä välipalojen aines , jota majatalot ja isot majatalot tuottavat kaivostyöntekijöille keskisyviin kaivoksiin."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/micro_brewery/helptexts.lua:23
@@ -4611,7 +4611,7 @@ msgctxt "empire_ware"
 msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
-msgstr "Kestikievareissa leivästä ja kalasta/lihasta valmistettu kunnon ateria. Pitää syvien kaivosten työläiset hyvissä voimissa."
+msgstr "Kestikievareissa leivästä ja kalasta/lihasta valmistettu kunnon ateria. Pitää keskisyvien kaivosten työläiset hyvissä voimissa."
 
 #. TRANSLATORS: Helptext for a ware: Meal
 #: ../../data/tribes/wares/meal/helptexts.lua:8
@@ -4619,7 +4619,7 @@ msgctxt "frisians_ware"
 msgid ""
 "A meal is made out of honey bread and beer and either smoked fish or meat. "
 "It is consumed by miners in deep mines."
-msgstr "Ateria tehdään hunajaleivästä ja oluesta ja joko savukalasta tai -lihasta. Sitä kuluttaa kaivostyöläiset syvissä kaivoksissa."
+msgstr "Ateria tehdään hunajaleivästä ja oluesta ja joko savukalasta tai -lihasta. Sitä kuluttaa kaivostyöläiset keskisyvissä kaivoksissa."
 
 #. TRANSLATORS: Helptext for a ware: Meat
 #: ../../data/tribes/wares/meat/helptexts.lua:4
@@ -4927,7 +4927,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
-msgstr "Ruoka-annoksta suurempi annos tarjotaan kaivostyöläisille syviin kaivoksiin. Se tuotetaan kestikievarissa tai majatalossa kalasta/lihasta, pitaleivästä ja oluesta."
+msgstr "Ruoka-annoksta suurempi annos tarjotaan kaivostyöläisille keskisyviin kaivoksiin. Se tuotetaan kestikievarissa tai majatalossa kalasta/lihasta, pitaleivästä ja oluesta."
 
 #. TRANSLATORS: Helptext for a ware: Spear
 #: ../../data/tribes/wares/spear/helptexts.lua:4

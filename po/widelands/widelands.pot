@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"POT-Creation-Date: 2018-12-07 16:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -30,7 +30,7 @@ msgstr[1] ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:12 ../../data/scripting/richtext.lua:533
-#: ../../src/base/i18n.cc:335
+#: ../../src/base/i18n.cc:346
 #, c-format
 msgid "%1$s & %2$s"
 msgstr ""
@@ -38,7 +38,7 @@ msgstr ""
 #. * TRANSLATORS: Join the last 2 items on a list with "or".
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:14 ../../data/scripting/richtext.lua:535
-#: ../../src/base/i18n.cc:339
+#: ../../src/base/i18n.cc:350
 #, c-format
 msgid "%1$s or %2$s"
 msgstr ""
@@ -49,8 +49,8 @@ msgstr ""
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:16
 #: ../../data/scripting/formatting.lua:21 ../../data/scripting/richtext.lua:537
-#: ../../data/scripting/richtext.lua:542 ../../src/base/i18n.cc:343
-#: ../../src/base/i18n.cc:352
+#: ../../data/scripting/richtext.lua:542 ../../src/base/i18n.cc:354
+#: ../../src/base/i18n.cc:363
 #, c-format
 msgid "%1$s, %2$s"
 msgstr ""
@@ -58,7 +58,7 @@ msgstr ""
 #. * TRANSLATORS: Concatenate the last 2 items on a list.
 #. * TRANSLATORS: RTL languages might want to change the word order here.
 #: ../../data/scripting/formatting.lua:18 ../../data/scripting/richtext.lua:539
-#: ../../src/base/i18n.cc:347
+#: ../../src/base/i18n.cc:358
 #, c-format
 msgid "%1$s and %2$s"
 msgstr ""
@@ -1528,14 +1528,14 @@ msgid ""
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:219
+#: ../../src/logic/map_objects/tribes/worker.cc:218
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
 
-#: ../../src/logic/map_objects/tribes/worker.cc:976
+#: ../../src/logic/map_objects/tribes/worker.cc:975
 msgid "A geologist found resources."
 msgstr ""
 
