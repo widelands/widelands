@@ -12,6 +12,9 @@ widelands (1:19+repack-6widelands1) UNRELEASED; urgency=medium
   * Various minor typo and whitespace fixes
   * Removed deprecated Applications category from desktop file
   * Updated appdata: enable content_rating
+  * Updated appdata: added icon
+  * Additional translations for appdata and desktop file.
+  * Update copyright year from 2013 to 2018.
   * Merged Debian packaging of Widelands 1:19+repack-6. Remaining changes:
     - Revert debhelper/compat level to 9. (Ubuntu 14.04 doesn't have debhelper 10.)
     - Disabled all Debian-patches since applying them might cause conflicts as
@@ -28,13 +31,10 @@ widelands (1:19+repack-6widelands1) UNRELEASED; urgency=medium
     - Build using embedded minizip since we support older Ubuntu releases where
       the package is not available.
     - .stub-files to make widelands.desktop and appdata localizable.
-    - Additional translations for appdata and desktop file.
     - Re-added font entries to copyright file, since we will most likely be using
       the embedded fonts.
-    - Update copyright year from 2013 to 2018.
     - Modified rules to use our embedded fonts and install all binaries.
     - Comment out get-orig-source. We just want to build current trunk
-
 
  -- Widelands <widelands-dev@lists.launchpad.net>  Sun, 25 Nov 2018 12:06:04 +0100
 
