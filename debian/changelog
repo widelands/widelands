@@ -11,6 +11,7 @@ widelands (1:19+repack-6widelands1) UNRELEASED; urgency=medium
   * Build with ASAN disabled since parts of the code atm breaks
   * Various minor typo and whitespace fixes
   * Removed deprecated Applications category from desktop file
+  * Updated appdata: enable content_rating
   * Merged Debian packaging of Widelands 1:19+repack-6. Remaining changes:
     - Revert debhelper/compat level to 9. (Ubuntu 14.04 doesn't have debhelper 10.)
     - Disabled all Debian-patches since applying them might cause conflicts as
