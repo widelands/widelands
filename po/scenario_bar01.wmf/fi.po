@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-09 06:49+0000\n"
-"PO-Revision-Date: 2018-11-11 15:58+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-24 18:41+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -190,7 +190,7 @@ msgstr "Laajenna kaivosta ja krouvia sekä rakenna pienpanimo."
 msgid ""
 "Enhance the coal mine or the iron mine to a deep mine, and enhance the "
 "tavern to an inn."
-msgstr "Laajenna hiilikaivosta tai rautakaivosta syväksi kaivokseksi sekä laajenna krouvista kestikievariksi."
+msgstr "Laajenna hiilikaivosta tai rautakaivosta keskisyväksi kaivokseksi sekä laajenna krouvista kestikievariksi."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:90
 msgid "Also build a micro brewery."
@@ -202,7 +202,7 @@ msgid ""
 "beneath it; then it must be enhanced to a deep mine in order to keep it "
 "working properly. To enhance a building, choose it and then click the "
 "appropriate button in the appearing window."
-msgstr "Tavallinen kaivos voi kaivaa vain noin kolmanneksen kaikista resursseista, jotka ovat sen alla; siksi se täytyy laajentaa syväksi kaivokseksi, jotta se toimisi kunnolla. Laajentaaksesi rakennusta, valitse se ja sitten klikkaa haluamaasi painiketta avautuvasta ruudusta."
+msgstr "Tavallinen kaivos voi kaivaa vain noin kolmanneksen kaikista resursseista, jotka ovat sen alla; siksi se täytyy laajentaa keskisyväksi kaivokseksi, jotta se toimisi kunnolla. Laajentaaksesi rakennusta, valitse se ja sitten klikkaa haluamaasi painiketta avautuvasta ruudusta."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:92
 msgid ""
@@ -218,14 +218,14 @@ msgid ""
 "building – for instance, deep mines need snacks instead of rations. You will"
 " have to enhance your tavern to an inn in order to produce snacks out of "
 "pitta bread AND a second kind of food (meat or fish) AND beer."
-msgstr "Sellaisilla rakennuksilla on tavallisesti suurempi tarve kuin tavallisisen tyyppisillä rakennuksilla – esimerkiksi, syvät kaivokset tarvitsevat välipaloja ruoka-annoksien sijaan. Sinu tulee laajentaa krouvisi kestikievariksi pystyäksesi tuottamaan välipaloja pitaleivästä JA toisen asteen ruuasta (liha ja kala) JA oluesta."
+msgstr "Sellaisilla rakennuksilla on tavallisesti suurempi tarve kuin tavallisisen tyyppisillä rakennuksilla – esimerkiksi, keskisyvät kaivokset tarvitsevat välipaloja ruoka-annoksien sijaan. Sinu tulee laajentaa krouvisi kestikievariksi pystyäksesi tuottamaan välipaloja pitaleivästä JA toisen asteen ruuasta (liha ja kala) JA oluesta."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:94
 msgid ""
 "You may of course enhance all mines to deep mines instantly given you have "
 "the workers – bigger mines work a bit faster, smaller mines need cheaper "
 "food. It’s up to you which strategy you prefer."
-msgstr "Toki sinä saatat laajentaa kaikki kaivokset syviksi kaivoksiksi heti kun sinulla on tarvittavat työntekijät – suuremmat kaivokset toimivat hieman nopeammin, toisaalta pienemmät kaivokset tarvitsevat halvempaa ruokaa. On sinusta kiinni millaisen strategian valitset."
+msgstr "Toki sinä saatat laajentaa kaikki kaivokset keskisyviksi kaivoksiksi heti kun sinulla on tarvittavat työntekijät – suuremmat kaivokset toimivat hieman nopeammin, toisaalta pienemmät kaivokset tarvitsevat halvempaa ruokaa. On sinusta kiinni millaisen strategian valitset."
 
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:99
 #: ../../data/campaigns/bar01.wmf/scripting/texts.lua:101

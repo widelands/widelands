@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
-"PO-Revision-Date: 2018-11-01 13:18+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-25 11:19+0000\n"
 "Last-Translator: zecas <jjorge@free.fr>\n"
 "Language-Team: Portuguese (http://www.transifex.com/widelands/widelands/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -83,11 +83,11 @@ msgid ""
 "Oh no, look at this: our tavern is burning! In all the hurry, our innkeeper "
 "accidentally dropped a torch. She is fine, but we could not extinguish the "
 "fire in time."
-msgstr ""
+msgstr "Oh não, olha para isto : a nossa taberna está a arder! Na sua pressa, o nosso cozinheiro fez cair uma tocha. Não há feridos, mas não foi conseguimos apagar o incêndio a tempo."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:52
 msgid "Building statistics"
-msgstr ""
+msgstr "Estatísticas dos edifícios"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:54
 msgid "Check out your taverns"
@@ -97,49 +97,49 @@ msgstr "Verifica as tuas tavernas"
 msgid ""
 "At first, we should find out how many taverns we currently have. Widelands "
 "offers you a window where you can easily check this."
-msgstr ""
+msgstr "Primeiro, temos de saber quantas tabernas temos. O Widelands tem uma janela para achar isso facilmente."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:56
 msgid ""
 "First, you will have to open the statistics menu (you can find the "
 "corresponding button at the bottom). We will need this menu several times."
-msgstr ""
+msgstr "Primeiro, tens de abrir o menu das estatísticas (tens um botao em baixo). Vamos precisar deles muitas vezes."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:57
 msgid "Afterwards, choose the ‘Building statistics’."
-msgstr ""
+msgstr "Depois, escolhe as 'Estatísticas de produtividade'."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:58
 msgid "Open the building statistics window."
-msgstr ""
+msgstr "Abre a janela das estatísticas de produtividade"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:59
 msgid "You can also use the hotkey ‘b’."
-msgstr ""
+msgstr "Também podes utilizar o atalho 'b'."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:63
 msgid "Open the building statistics window"
-msgstr ""
+msgstr "Abre a janela das estatísticas de produtividade"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:65
 msgid ""
 "The building statistics window gives you an overview over the buildings you "
 "have."
-msgstr ""
+msgstr "A janela das estatísticas de produtividade dá-te uma visão dos edifícios que tens."
 
 #. TRANSLATORS: "it" refers to the building statistics window
 #. TRANSLATORS: "it" refers to the stock menu window
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:67
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:131
 msgid "Open it. You can access it from the statistics menu."
-msgstr ""
+msgstr "Abre-la. Podes aceder a ela a partir do menu estatísticas."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:68
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:132
 msgid ""
 "The statistics menu is accessed via the second button at the bottom. It "
 "provides several windows that give you information about the game."
-msgstr ""
+msgstr "O menu estatísticas é o segundo botão em baixo ao meio. Tem várias janelas que te dão informações acerca do jogo."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:72
 msgid "Building Statistics"
@@ -930,28 +930,28 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:457
 msgid "Bring 20 marble columns to the front line"
-msgstr ""
+msgstr "Leva 20 colunas de mármore até à fronteira"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:459
 msgid ""
 "To decide where your wares get stored, you can use the preference buttons in"
 " the warehouses."
-msgstr ""
+msgstr "Para decidir onde as tuas mercadorias são guardadas, podes utilizar os botões de preferências nos armazéns."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 msgid "Borders Secured"
-msgstr ""
+msgstr "Fronteiras Seguras"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:469
 msgid "We’re safe now"
-msgstr ""
+msgstr "Estamos agora em segurança"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:470
 msgid ""
 "Great. We now have enough marble columns so that in case of an aggressor, we"
 " can build up our fortifications. But I do not think that that will be "
 "necessary. So far, no enemy has shown up."
-msgstr ""
+msgstr "Bem. Temos agora colunas que cheguem para que, em caso de agressão, construir fortificações. Mas não penso que seja preciso. Por enquanto, nenhum inimigo foi visto."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:471
 msgid ""
@@ -960,7 +960,7 @@ msgid ""
 "understood a few concepts, you mustn’t give up. Try them out in some games, "
 "become familiar with them and experience the possibilities. Then, return to "
 "this tutorial and learn the rest!"
-msgstr ""
+msgstr "Espero conseguir to aprender a controlar a economia no Widelands. Há muitas opções e podem parecer confusas ao princípio. Mesmo se só percebeste alguns conceitos, n~ao deverias abandonar? Experimenta-los noutros jogos, para ver todas as possibilidades. Nesse momento, podes voltar a este tutorial para aprender os restantes!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:473
 msgid ""
@@ -969,7 +969,7 @@ msgid ""
 " know about. I will now search for a quiet place to spend my sunset years. "
 "If you have still questions, the Widelands community will surely help you. "
 "You can find it at:"
-msgstr ""
+msgstr "Isto era o último tutorial que preparei para ti. Agora já tens todo o meu saber. Há sempre segredos escondidos neste mundo que nem eu conheço. Vou agora procurar uma terra calma para viver a minha velhice. Se tiveres mais perguntas, a comunidade Widelands pode certamente te ajudar. Pode a encontrar em :"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
