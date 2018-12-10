@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
 "PO-Revision-Date: 2017-12-27 17:17+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>, 2018\n"
 "Language-Team: Low German (https://www.transifex.com/widelands/teams/35159/nds/)\n"
@@ -338,7 +338,7 @@ msgid ""
 msgstr ""
 "De Gotten wees Pries, wi hebben wunnen. Wi hebben all de Rutföderungen "
 "överwunnen, de vör uns laggen. Wi hebben sogaar de Willen Lüü ur uns' Land "
-"dreven. Aber uns' Sieg is blot för körte Tied, denn dat is eerst de Anfang "
+"dreven. Aver uns' Sieg is blot för körte Tied, denn dat is eerst de Anfang "
 "vum Krieg. Laat uns wachten, wat de Tokunft för uns noch paraat hollt."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:231
@@ -397,7 +397,7 @@ msgid ""
 "seems to be very difficult."
 msgstr ""
 "Börgmester, wi mutten Ji danken för Jo Beswaren, uns' Stadt to schütten. Un "
-"wi wullen uns' Best doon, um dat Döranner to lösen. Aber dat sücht leider "
+"wi wullen uns' Best doon, um dat Döranner to lösen. Aver dat sücht leider "
 "leep slimm ut."
 
 #. TRANSLATORS: Lutius
@@ -486,6 +486,9 @@ msgid ""
 "our homeland again. But on the other hand, I have the impression that "
 "something went deeply wrong here."
 msgstr ""
+"Ave, Saledus! Up de een Kant hets du Recht; 't is würrelk eene Freid, uns' "
+"Heimaadland weertosehn. Aver up de anner Kant hebb ick de Indruck, hier is "
+"wat ganz slimm ut de Spoor lopen."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:300
@@ -494,6 +497,10 @@ msgid ""
 " managed our country while we were absent created utter chaos. I’m not quite"
 " sure how we can fix this, if at all possible."
 msgstr ""
+"Kiek blot de Wirtschaft an. 't gifft haast keene Wöörde. Well ok immer sük "
+"um uns' Land kümmert hett, as wi nich hier weren, hett 't heel un dall in "
+"een Kuddelmuddel verwannelt. Ick weet nich, wo wi dat ofhelpen könen, wenn "
+"dat överhoopt gaht."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:305
 msgid "Amalea Investigates"

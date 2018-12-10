@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-23 08:41+0000\n"
-"PO-Revision-Date: 2018-11-23 12:55+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-12-01 14:33+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -260,7 +260,7 @@ msgstr "Warktügen"
 
 #: ../../src/editor/editorinteractive.cc:86
 msgid "Tool size"
-msgstr "Warktüüg-Grötte"
+msgstr "Warktüüg-Grött"
 
 #: ../../src/editor/editorinteractive.cc:90
 #: ../../src/ui_fsmenu/launch_mpg.cc:145
@@ -306,13 +306,13 @@ msgid "Redo"
 msgstr "Wedderhalen"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:350 ../../src/wui/interactive_player.cc:185
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:185
 msgid "Help"
 msgstr "Hülp"
 
 #: ../../src/editor/editorinteractive.cc:166
 msgid "Unsupported Format"
-msgstr "Nich ünnerstüttets Format"
+msgstr "Formaat word nich unnerstütt"
 
 #: ../../src/editor/editorinteractive.cc:167
 #, c-format
@@ -328,7 +328,7 @@ msgstr "Spelers maken"
 
 #: ../../src/editor/editorinteractive.cc:232
 msgid "Unsaved Map"
-msgstr "Nich gesekerte Kaart"
+msgstr "Nich sekerte Kaart"
 
 #: ../../src/editor/editorinteractive.cc:233
 msgid "The map has not been saved, do you really want to quit?"
@@ -881,7 +881,8 @@ msgid "Error Saving Map!"
 msgstr "Fehler bi’n Kaart sekern!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:311
-msgid "File ‘%’ could not be deleted."
+#, c-format
+msgid "File ‘%s’ could not be deleted."
 msgstr "Kunn de Datei »%s« nich wegdoon."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:314
@@ -982,12 +983,12 @@ msgstr "Instellungen för de Höchten-Tüüg"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:47
 msgid "Increase/Decrease height by:"
-msgstr "Verhoge/Minnere de Höchte um:"
+msgstr "Verhoge/Minnere de Höcht um:"
 
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:59
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:74
 msgid "Set height to:"
-msgstr "Sette de Höchte fast to:"
+msgstr "Sette de Höcht fast to:"
 
 #. * TRANSLATORS: Editor change height access keys. *
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:64
@@ -1000,7 +1001,7 @@ msgstr "Klicke de Kaart tum Verhogen an; drücke daar de Umschalt-Tast bi tum l�
 #: ../../src/editor/ui_menus/tool_change_height_options_menu.cc:67
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:85
 msgid "Ctrl + Click on the map to set terrain height"
-msgstr "Klicke de Kaart an un drücke daar de Strg-Tast bi tum Fastsetten vun de Höchte."
+msgstr "Klicke de Kaart an un drücke daar de Strg-Tast bi tum Fastsetten vun de Höcht."
 
 #: ../../src/editor/ui_menus/tool_change_resources_options_menu.cc:61
 msgid "Increase/Decrease amount by:"
@@ -1026,12 +1027,12 @@ msgstr "Klicke de Kaart tum an un drücke daar de Strg-Tast bi tum Fastsetten vu
 
 #: ../../src/editor/ui_menus/tool_menu.cc:59
 msgid "Change height"
-msgstr "Ännere de Höchte"
+msgstr "Ännere de Höcht"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:60
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:95
 msgid "Random height"
-msgstr "Tofällige Höchte"
+msgstr "Tofällige Höcht"
 
 #: ../../src/editor/ui_menus/tool_menu.cc:62
 #: ../../src/editor/ui_menus/tool_place_immovable_options_menu.cc:51
@@ -1055,15 +1056,15 @@ msgstr "Maak de Position fast, dat de Position (0|0) ween sall. Dat is de linke 
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:38
 msgid "Random Height Options"
-msgstr "Instellungen för de tofällige Höchte"
+msgstr "Instellungen för de tofällige Höcht"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:50
 msgid "Minimum height:"
-msgstr "Lüttste Höchte:"
+msgstr "Lüttste Höcht:"
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:62
 msgid "Maximum height:"
-msgstr "Gröttste Höchte:"
+msgstr "Gröttste Höcht:"
 
 #. * TRANSLATORS: Editor random height access key. *
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:79
@@ -1071,11 +1072,11 @@ msgstr "Gröttste Höchte:"
 msgid ""
 "Click on the map to set terrain height to a random value within the "
 "specified range"
-msgstr "Klick de Kaart an tum Fastmaken vun de Höchte to eene tofällige Tahl in de utköört Intervall."
+msgstr "Klick de Kaart an tum Fastmaken vun de Höcht to eene tofällige Tahl in de utköört Intervall."
 
 #: ../../src/editor/ui_menus/tool_noise_height_options_menu.cc:102
 msgid "Fixed height"
-msgstr "Faste Höchte"
+msgstr "Faste Höcht"
 
 #. * TRANSLATORS: %1% = terrain name, %2% = list of terrain types
 #. * TRANSLATORS: Label: Value.
@@ -1088,7 +1089,7 @@ msgstr "%1%: %2%"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:40
 msgid "Tool Size"
-msgstr "Warktüüg-Grötte"
+msgstr "Warktüüg-Grött"
 
 #: ../../src/editor/ui_menus/toolsize_menu.cc:80
 #, c-format
@@ -1180,7 +1181,7 @@ msgstr "Deese Markt hett een nejes Hannel-Anbott bekomen."
 msgid ""
 "This game was saved using an older version of Widelands and cannot be loaded"
 " anymore, or it's a new version that can't be handled yet."
-msgstr "Deese Speel wurre mit eene oolde Versioon vun Widelands gesekert un kann nich mehr laden, oder dat is eene neje Versioon, mit de Widelands noch nich klaarword."
+msgstr "Deeses Speel is mit eener ollen Versioon vun Widelands sekert worden un kann nich mehr laden, oder dat is eene neje Versioon, wat Widelands noch nich mit klaarword."
 
 #: ../../src/logic/map.h:163
 msgid "No description defined"
@@ -1266,7 +1267,7 @@ msgstr "Du worst angrepen!"
 #: ../../src/logic/map_objects/tribes/production_program.cc:308
 #, c-format
 msgid "the economy needs the ware ‘%s’"
-msgstr "de Wirtschaft bruukt de Ware »%s«"
+msgstr "de Wirtschaft bruukt de Waar »%s«"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. doesn’t need the
@@ -1274,7 +1275,7 @@ msgstr "de Wirtschaft bruukt de Ware »%s«"
 #: ../../src/logic/map_objects/tribes/production_program.cc:317
 #, c-format
 msgid "the economy doesn’t need the ware ‘%s’"
-msgstr "de Wirtschaft bruukt de Ware »%s« nich"
+msgstr "de Wirtschaft bruukt de Waar »%s« nich"
 
 #. * TRANSLATORS: e.g. Completed/Skipped/Did not start ... because the economy
 #. needs the worker
@@ -1588,16 +1589,16 @@ msgid ""
 "compatible with world"
 msgstr "sall de Mineraal %s tüchten, wat 't in deese Welt nich gifft; dat Volk verdraggt sük nich mit de Welt"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:975
+#: ../../src/logic/map_objects/tribes/worker.cc:976
 msgid "A geologist found resources."
 msgstr "Een Schattsöker hett Mineraale funnen."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1849
+#: ../../src/logic/map_objects/tribes/worker.cc:1850
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Dien %s kann keenen Weg tum Oort finnen un word wull doodgahn."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1855
+#: ../../src/logic/map_objects/tribes/worker.cc:1856
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1605,7 +1606,7 @@ msgid_plural "Workers"
 msgstr[0] "Arbeider"
 msgstr[1] "Arbeiders"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1856
+#: ../../src/logic/map_objects/tribes/worker.cc:1857
 msgid "Worker got lost!"
 msgstr "Fehlgahner Arbeider!"
 
@@ -1695,13 +1696,13 @@ msgstr "/me s Datei hett de falske md5-Checksumme."
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
-msgstr "/me hett de Datei kregen un nakeken. De md5-Checksumme is richtig, aber ick kann de Datei nich verwenden."
+msgstr "/me hett de Datei kregen un nakeken. De md5-Checksumme is richtig, aver ick kann de Datei nich verwenden."
 
 #. * TRANSLATORS: %s contains an error message.
 #: ../../src/network/gameclient.cc:964
 #, c-format
 msgid "%s An automatic savegame will be created."
-msgstr "%s Dat Speel word automatisk gesekert."
+msgstr "%s Dat Speel word automatisk sekert."
 
 #: ../../src/network/gameclient.cc:968
 msgid "Disconnected from Host"
@@ -2159,7 +2160,7 @@ msgstr "De Weert hett Speler %s in de Deel schickt!"
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
-msgstr "WAHRSCHAU: %1$s bruukt deese Versioon: %2$s. Aber de Weert bruukt Versioon %3$s."
+msgstr "WAHRSCHAU: %1$s bruukt deese Versioon: %2$s. Aver de Weert bruukt Versioon %3$s."
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
@@ -2208,7 +2209,7 @@ msgstr "Widelands kunn de stedenwies Nett nich bruken. Wahrschienelk bedrifft ee
 #. console
 #: ../../src/profile/profile.cc:45
 msgid "true"
-msgstr "jau"
+msgstr "wahr"
 
 #. * TRANSLATORS: A variant of the commandline parameter "true" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2229,7 +2230,7 @@ msgstr "an"
 #. console
 #: ../../src/profile/profile.cc:58
 msgid "false"
-msgstr "nee"
+msgstr "falsk"
 
 #. * TRANSLATORS: A variant of the commandline parameter "false" value
 #. * TRANSLATORS: Needs to be consistent with the translations in widelands-
@@ -2469,7 +2470,7 @@ msgstr "Naam vun dien Server:"
 #: ../../src/ui_fsmenu/internet_lobby.cc:75
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Join this game"
-msgstr "Bi deese Speel mitmaken"
+msgstr "Bi deesem Speel mitmaken"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:83
 msgid "Open a new game"
@@ -2637,7 +2638,7 @@ msgid ""
 "Widelands tried to start a game with a file that could not be found at the given path.\n"
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that you do not own. Normally, such a file should be sent from the host to you, but perhaps the transfer was not yet finished!?!"
-msgstr "Widelands wull een Speel begünnen, kunn de Datei daarför aber nich an de angeven Padd finnen.\nDe Datei weer: %s\nWenn dat in eenem Internett-Speel passeert, hett de Weert wull eene Datei utköört, wat du nich hest. De Weert sall di eene sülke Datei egentlik schicken, aber se is villicht noch nich ganz överdragen?!"
+msgstr "Widelands wull een Speel begünnen, kunn de Datei daarför aver nich an de angeven Padd finnen.\nDe Datei weer: %s\nWenn dat in eenem Internett-Speel passeert, hett de Weert wull eene Datei utköört, wat du nich hest. De Weert sall di eene sülke Datei egentlik schicken, aver se is villicht noch nich ganz överdragen?!"
 
 #: ../../src/ui_fsmenu/launch_mpg.cc:384
 msgid ""
@@ -3197,7 +3198,7 @@ msgstr "Beschickens-Kösten:"
 msgid "Destroy"
 msgstr "Ofbrannen"
 
-#: ../../src/wui/buildingwindow.cc:291
+#: ../../src/wui/buildingwindow.cc:290 ../../src/wui/buildingwindow.cc:291
 msgid "Dismantle"
 msgstr "Plattrieten"
 
@@ -3205,28 +3206,28 @@ msgstr "Plattrieten"
 msgid "Returns:"
 msgstr "Gifft torügg:"
 
-#: ../../src/wui/buildingwindow.cc:331 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:335 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Unnersöken-Fenster wiesen"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:342
 msgid "Center view on this"
 msgstr "Hierher springen"
 
-#: ../../src/wui/buildingwindow.cc:521
+#: ../../src/wui/buildingwindow.cc:525
 msgid "Hide work area"
 msgstr "Arbeidsgewest verbargen"
 
-#: ../../src/wui/buildingwindow.cc:524
+#: ../../src/wui/buildingwindow.cc:528
 msgid "Show work area"
 msgstr "Arbeidsgewest wiesen"
 
-#: ../../src/wui/buildingwindow.cc:557
+#: ../../src/wui/buildingwindow.cc:561
 msgid "Start an expedition"
 msgstr "Söke anfangen"
 
-#: ../../src/wui/buildingwindow.cc:561
+#: ../../src/wui/buildingwindow.cc:565
 msgid "Cancel the expedition"
 msgstr "Söke ofbreken"
 
@@ -3926,12 +3927,12 @@ msgstr "De Datei-Naam vun de sekert Speel un dann de Naam vun de Kaart, oder de 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:176
 msgid "Delete this replay"
-msgstr "Deese Upteken wegdoon"
+msgstr "Deeses Upteken wegdoon"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected 1 file
 #: ../../src/wui/load_or_save_game.cc:178
 msgid "Delete this game"
-msgstr "Deese Speel wegdoon"
+msgstr "Deeses Speel wegdoon"
 
 #. * TRANSLATORS: Tooltip for the delete button. The user has selected
 #. multiple files
@@ -3954,7 +3955,7 @@ msgstr[1] "%d Dateien utköört:"
 
 #: ../../src/wui/load_or_save_game.cc:246
 msgid "Do you really want to delete this replay?"
-msgstr "Willt du deese Upteken würrelk wegdoon?"
+msgstr "Willt du deeses Upteken würrelk wegdoon?"
 
 #. * TRANSLATORS: Used with multiple replays, 1 replay has a separate string.
 #. DO NOT omit the placeholder in your translation.
@@ -4277,7 +4278,7 @@ msgstr "De Naam vun de Kaart oder Rutfödderung"
 
 #: ../../src/wui/maptable.cc:37
 msgid "Size"
-msgstr "Grötte"
+msgstr "Grött"
 
 #: ../../src/wui/maptable.cc:37
 msgid "The size of the map (Width x Height)"

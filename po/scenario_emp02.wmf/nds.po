@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
-"PO-Revision-Date: 2018-11-01 16:29+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-26 08:46+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -187,7 +187,7 @@ msgid ""
 " Gods to my people and myself. Until now, we have only seen a small part of "
 "this island, but this part alone is already bringing sunlight to my mind. I "
 "feel as if we have found a priceless treasure, a land like paradise."
-msgstr "Uplest! Deese Insel is jüüst recht för uns, eene Gaav vun de Gotten för miene Lüü un mi. Bit nu hebben wi blot eenen lütten Part vun de Insel sehn, aber dat is al genoog för eenen Sünnenupgang in mienem Geest. Wi hebben eenen Schatt funnen, de nich uttometen is, een Land as dat Paradies."
+msgstr "Uplest! Deese Insel is jüüst recht för uns, eene Gaav vun de Gotten för miene Lüü un mi. Bit nu hebben wi blot eenen lütten Part vun de Insel sehn, aver dat is al genoog för eenen Sünnenupgang in mienem Geest. Wi hebben eenen Schatt funnen, de nich uttometen is, een Land as dat Paradies."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:116
@@ -215,14 +215,14 @@ msgid ""
 "But until that day, many years may pass! For now, we must concentrate on the"
 " present, and build a few lumberjack’s houses and a sawmill to produce some "
 "basic building materials."
-msgstr "Aber dat sall noch mennig Jahren of sien! Eerst maal mutten wi uns um de Gegenwart kümmern un een paar Boomhauereen un eene Saagmöhlen bauen, um wichtige Baumaterialien to produzeren."
+msgstr "Aver dat sall noch mennig Jahren of sien! Eerst maal mutten wi uns um de Gegenwart kümmern un een paar Boomhauereen un eene Saagmöhlen bauen, um wichtige Baumaterialien to produzeren."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:130
 msgid ""
 "But we mustn’t forget to preserve this natural bounty. These forests should "
 "last forever, so we really have to build a forester’s house too."
-msgstr "Wi düren aber nich vergeten, de natürelke Mooigheid to bewahren. Deese Walden sallen ewig stahn, also mutten wi absolut ok een Förster-Huus bauen."
+msgstr "Wi düren aver nich vergeten, de natürelke Mooigheid to bewahren. Deese Walden sallen ewig stahn, also mutten wi absolut ok een Förster-Huus bauen."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:135
 msgid "The Rocks"
@@ -281,7 +281,7 @@ msgid ""
 "walked down to the southern shore, I found the remains of another ship. I "
 "don’t know whether these parts are all that is left of that ship. In any "
 "case, these parts do not seem to be old."
-msgstr "Mienheer, ick will nich, dat Ji in Nood komen, aber ick hebb jüüst wat funnen, dat mi schierweg bange is. An de südelken Küst hebb ick een Wrack vun eenem annern Schipp funnen. Ick weet nich, of dat alls is, dat vun de Schipp övrig is. Aber de Delen sehn nich old ut."
+msgstr "Mienheer, ick will nich, dat Ji in Nood komen, aver ick hebb jüüst wat funnen, dat mi schierweg bange is. An de südelken Küst hebb ick een Wrack vun eenem annern Schipp funnen. Ick weet nich, of dat alls is, dat vun de Schipp övrig is. Aver de Delen sehn nich old ut."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:171
@@ -311,7 +311,7 @@ msgid ""
 "Sire, I’ve got good news for you: As I walked to the east, I found a larger "
 "mountain. I am not absolutely sure – a geologist should check if I am right "
 "– but I believe we could mine marble from some places on the mountain."
-msgstr "Mienheer, ick hebb gode Narichten för Ji: As ick na Oosten gahn bün, hebb ick eenen groten Barg funnen. Ick glööv – aber da sall een Schattsöker nakieken – dat wi vun eenigen Steden im Barg Marmel ofboen könen."
+msgstr "Mienheer, ick hebb gode Narichten för Ji: As ick na Oosten gahn bün, hebb ick eenen groten Barg funnen. Ick glööv – aver da sall een Schattsöker nakieken – dat wi vun eenigen Steden im Barg Marmel ofboen könen."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:187
@@ -350,7 +350,7 @@ msgid ""
 "However: for all these bigger buildings, we need better and more elegant "
 "building materials. So you have to build a house for the stonemason, who "
 "will cut columns from marble."
-msgstr "Aber för all de groten Husen bruuken wi betere Baumaterialien. Baut also eerst maal een Huus för eenen Flintslager, de Pielers ut Marmel sniddjet."
+msgstr "Aver för all de groten Husen bruuken wi betere Baumaterialien. Baut also eerst maal een Huus för eenen Flintslager, de Pielers ut Marmel sniddjet."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:206
@@ -377,14 +377,14 @@ msgid ""
 "more comfortable life, but the people working in the mines are unhappy with "
 "the current situation. They have to do hard work and have no time for making"
 " their own food."
-msgstr "'t is nett un natürelk klook, Bargwarken to bauen, un 't maakt uns' Leven liesamer, aber de Bargwarkskeerls sünd jüüst nich tofree. Se mutten sük placken un hebben keene Tied um Spiesen to maken."
+msgstr "'t is nett un natürelk klook, Bargwarken to bauen, un 't maakt uns' Leven liesamer, aver de Bargwarkskeerls sünd jüüst nich tofree. Se mutten sük placken un hebben keene Tied um Spiesen to maken."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:220
 msgid ""
 "What do you think about helping them out? I can’t tell you what we need "
 "exactly… but here are my recommendations:"
-msgstr "Du sallst hör dörhelpen. Ick weet nich nupp un nau, wat wi bruuken … aber ick raad an:"
+msgstr "Du sallst hör dörhelpen. Ick weet nich nupp un nau, wat wi bruuken … aver ick raad an:"
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:225
 msgid "Our New Tavern"
@@ -435,7 +435,7 @@ msgid ""
 "of them saw me, they charged towards me and started attacking me with their "
 "throwing spears. Thanks be to the Gods that I was able to flee and hide "
 "myself, before retreating back to our colony under cover of darkness."
-msgstr "Vörderhand was ick so eenfoldig, to glöven, se wesen villicht freedsam, aber as eener vun hör mi sehn hett, sünd se all to mi henlöpptun hebben Speren na mi smeten. De Gotten Loff un Dank dat ick flüchten un mi versteken kunn, ehr ick im Dunkeln torügg in uns' Dörp gahn kunn."
+msgstr "Vörderhand was ick so eenfoldig, to glöven, se wesen villicht freedsam, aver as eener vun hör mi sehn hett, sünd se all to mi henlöpptun hebben Speren na mi smeten. De Gotten Loff un Dank dat ick flüchten un mi versteken kunn, ehr ick im Dunkeln torügg in uns' Dörp gahn kunn."
 
 #. TRANSLATORS: Lutius - Diary
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:248
@@ -471,7 +471,7 @@ msgid ""
 "There are still a few Barbarians hiding on our island, but I am sure that we"
 " will find them soon. Every Barbarian who doesn’t attack us will be put in a"
 " boat with the other peaceful ones, and sent back to their country."
-msgstr "'t gifft noch een paar Wille Lüü, de sük up uns' Insel versteken, aber wiss finnen wi se bold. All Willen, de uns nich angriepen, setten wi in een Schipp mit de annern freedsamen un schicken se in hör Land torügg."
+msgstr "'t gifft noch een paar Wille Lüü, de sük up uns' Insel versteken, aver wiss finnen wi se bold. All Willen, de uns nich angriepen, setten wi in een Schipp mit de annern freedsamen un schicken se in hör Land torügg."
 
 #: ../../data/campaigns/emp02.wmf/scripting/texts.lua:271
 msgid ""
