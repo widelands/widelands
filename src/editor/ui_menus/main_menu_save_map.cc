@@ -308,7 +308,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	} catch (const std::exception& e) {
 		log("Unable to delete old map file %s while saving map: %s\n", complete_filename.c_str(),
 		    e.what());
-		const std::string s = (boost::format(_("File ‘%’ could not be deleted.")) %
+		const std::string s = (boost::format(_("File ‘%s’ could not be deleted.")) %
 		                       FileSystem::fs_filename(filename.c_str()))
 		                         .str() +
 		                      " " + _("Try saving under a different name!");
