@@ -55,6 +55,6 @@ private:
 	std::vector<UI::Textarea*> vs_labels_;
 	std::vector<Widelands::SuggestedTeamLineup> suggested_teams_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_WUI_SUGGESTED_TEAMS_BOX_H

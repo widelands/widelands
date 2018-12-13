@@ -209,7 +209,7 @@ std::string FileSystem::illegal_filename_tooltip() {
 
 	const std::string illegal(as_listitem(
 	   /** TRANSLATORS: Tooltip entry for characters in illegal filenames.
-	         * %s is a list of illegal characters */
+	    * %s is a list of illegal characters */
 	   (boost::format(pgettext("illegal_filename_characters", "%s anywhere in the filename")) %
 	    richtext_escape(i18n::localize_list(illegal_filename_characters, i18n::ConcatenateWith::OR)))
 	      .str(),
@@ -217,7 +217,7 @@ std::string FileSystem::illegal_filename_tooltip() {
 
 	return (boost::format("%s%s%s") %
 	        /** TRANSLATORS: Tooltip header for characters in illegal filenames.
-	              * This is followed by a list of bullet points */
+	         * This is followed by a list of bullet points */
 	        pgettext("illegal_filename_characters", "The following characters are not allowed:") %
 	        illegal_start % illegal)
 	   .str();

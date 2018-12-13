@@ -132,6 +132,6 @@ private:
 	bool builder_idle_;                 // used to determine whether the builder is idle
 	ConstructionsiteInformation info_;  // asked for by player point of view for the gameview
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_CONSTRUCTIONSITE_H

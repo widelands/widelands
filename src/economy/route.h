@@ -72,6 +72,6 @@ private:
 	int32_t totalcost_;
 	std::vector<OPtr<Flag>> route_;  ///< includes start and end flags
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ROUTE_H

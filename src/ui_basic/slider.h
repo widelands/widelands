@@ -240,6 +240,6 @@ protected:
 private:
 	std::vector<std::string> labels;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_SLIDER_H

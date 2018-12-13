@@ -80,4 +80,4 @@ void CmdCallEconomyBalance::write(FileWrite& fw, EditorGameBase& egbase, MapObje
 		fw.unsigned_32(0);
 	fw.unsigned_32(timerid_);
 }
-}
+}  // namespace Widelands

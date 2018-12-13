@@ -5,7 +5,6 @@
 https://github.com/auriamg/macdylibbundler not doing the job right.
 
 Unfortunately the above tool is not maintained, so we roll our own.
-
 """
 
 import argparse
@@ -95,6 +94,7 @@ def main():
         for (dep_name, dep_path) in all_dependencies.items():
             subprocess.check_call(['/usr/bin/install_name_tool', '-change',
                                    dep_name, '@executable_path/' + p.basename(dep_path), binary])
+
 
 if __name__ == '__main__':
     main()

@@ -378,6 +378,6 @@ private:
 	AttackTarget* attack_target_;      // owned by the base classes, set by 'set_attack_target'.
 	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H

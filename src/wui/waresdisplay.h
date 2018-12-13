@@ -34,7 +34,7 @@ struct Textarea;
 namespace Widelands {
 class TribeDescr;
 struct WareList;
-}
+}  // namespace Widelands
 
 /**
  * Display wares or workers together with some string (typically a number)

@@ -699,4 +699,4 @@ std::string to_string(const MapObjectType type) {
 	}
 	NEVER_HERE();
 }
-}
+}  // namespace Widelands

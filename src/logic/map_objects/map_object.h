@@ -209,7 +209,7 @@ private:
  * potentially set it up by calling basic functions like set_position(), etc.
  * and then call init(). After that, the object is supposed to
  * be fully created.
-*/
+ */
 
 /// If you find a better way to do this that doesn't cost a virtual function
 /// or additional member variable, go ahead
@@ -606,6 +606,6 @@ private:
 	Serial obj_serial;
 	int32_t arg;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H

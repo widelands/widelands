@@ -156,4 +156,4 @@ void MapObjectSaver::detect_unsaved_objects() const {
 	}
 }
 #endif
-}
+}  // namespace Widelands

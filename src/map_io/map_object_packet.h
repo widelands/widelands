@@ -63,6 +63,6 @@ struct MapObjectPacket {
 
 	void write(FileSystem&, EditorGameBase&, MapObjectSaver&);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_PACKET_H

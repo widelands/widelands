@@ -98,4 +98,4 @@ const std::set<DescriptionIndex>& WareDescr::consumers() const {
 const std::set<DescriptionIndex>& WareDescr::producers() const {
 	return producers_;
 }
-}
+}  // namespace Widelands

@@ -27,7 +27,7 @@ namespace Widelands {
 class EditorGameBase;
 class MapObjectLoader;
 struct MapObjectSaver;
-}
+}  // namespace Widelands
 
 #define MAP_DATA_PACKET(Name)                                                                      \
 	namespace Widelands {                                                                           \

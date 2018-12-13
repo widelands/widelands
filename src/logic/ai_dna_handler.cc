@@ -125,4 +125,4 @@ void AiDnaHandler::dump_output(Widelands::Player::AiPersistentState* pd, uint8_t
 
 	prof.write(full_filename.c_str(), false, *g_fs, comment.c_str());
 }
-}
+}  // namespace Widelands

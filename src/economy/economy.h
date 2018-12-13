@@ -293,6 +293,6 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_H

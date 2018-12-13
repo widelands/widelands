@@ -38,6 +38,6 @@ struct MapPlayerNamesAndTribesPacket {
 
 	void pre_read(FileSystem&, Map*, bool skip);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_PLAYER_NAMES_AND_TRIBES_PACKET_H

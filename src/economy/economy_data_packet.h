@@ -43,6 +43,6 @@ public:
 private:
 	Economy* eco_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_DATA_PACKET_H

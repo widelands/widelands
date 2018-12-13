@@ -109,6 +109,6 @@ private:
 	const UniqueRandomMapInfo& map_info_;
 	EditorGameBase& egbase_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_EDITOR_MAP_GENERATOR_H

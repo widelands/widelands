@@ -99,4 +99,4 @@ void CmdLuaCoroutine::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSave
 
 	lgi->write_coroutine(fw, *cr_);
 }
-}
+}  // namespace Widelands

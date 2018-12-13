@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-23 08:41+0000\n"
-"PO-Revision-Date: 2018-11-23 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-29 10:25+0000\n"
+"Last-Translator: tamanegi\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -302,7 +302,7 @@ msgid "Redo"
 msgstr "やり直し"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:350 ../../src/wui/interactive_player.cc:185
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:185
 msgid "Help"
 msgstr "ヘルプ"
 
@@ -851,17 +851,17 @@ msgstr "無名"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:166
 msgid "A file or directory with that name already exists."
-msgstr ""
+msgstr "同じ名前のファイルかディレクトリが既に存在します。"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:168
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:183
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "ディレクトリ作成エラー！"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:181
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "ディレクトリ %s 作成中にエラー"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:295
 #: ../../src/wui/game_main_menu_save_game.cc:175
@@ -876,8 +876,9 @@ msgid "Error Saving Map!"
 msgstr "マップ保存エラー！"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:311
-msgid "File ‘%’ could not be deleted."
-msgstr "ファイル ‘%’ を削除できませんでした。"
+#, c-format
+msgid "File ‘%s’ could not be deleted."
+msgstr "ファイル %s を削除できませんでした。"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:314
 msgid "Try saving under a different name!"
@@ -897,7 +898,7 @@ msgstr "ディレクトリ名を入力してください: "
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:100
 msgid "This extension is reserved!"
-msgstr ""
+msgstr "この拡張子は予約されています！"
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
@@ -1575,23 +1576,23 @@ msgid ""
 "compatible with world"
 msgstr "資源 %s を生産しようとしましたが、このワールドにそれは存在しません。この部族はこのワールドに対応していません。"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:975
+#: ../../src/logic/map_objects/tribes/worker.cc:976
 msgid "A geologist found resources."
 msgstr "地質学者が資源を発見しました。"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1849
+#: ../../src/logic/map_objects/tribes/worker.cc:1850
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "あなたの%sは帰り道を見つけられず、死んでしまったようです。"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1855
+#: ../../src/logic/map_objects/tribes/worker.cc:1856
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "労働者"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1856
+#: ../../src/logic/map_objects/tribes/worker.cc:1857
 msgid "Worker got lost!"
 msgstr "労働者失踪！"
 
@@ -3176,7 +3177,7 @@ msgstr "建設コスト: "
 msgid "Destroy"
 msgstr "破壊"
 
-#: ../../src/wui/buildingwindow.cc:291
+#: ../../src/wui/buildingwindow.cc:290 ../../src/wui/buildingwindow.cc:291
 msgid "Dismantle"
 msgstr "解体"
 
@@ -3184,28 +3185,28 @@ msgstr "解体"
 msgid "Returns:"
 msgstr "回収物資: "
 
-#: ../../src/wui/buildingwindow.cc:331 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:335 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "デバッグウィンドウの表示"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:342
 msgid "Center view on this"
 msgstr "ここに視点移動"
 
-#: ../../src/wui/buildingwindow.cc:521
+#: ../../src/wui/buildingwindow.cc:525
 msgid "Hide work area"
 msgstr "作業エリアを隠す"
 
-#: ../../src/wui/buildingwindow.cc:524
+#: ../../src/wui/buildingwindow.cc:528
 msgid "Show work area"
 msgstr "作業エリアを表示"
 
-#: ../../src/wui/buildingwindow.cc:557
+#: ../../src/wui/buildingwindow.cc:561
 msgid "Start an expedition"
 msgstr "探検を開始"
 
-#: ../../src/wui/buildingwindow.cc:561
+#: ../../src/wui/buildingwindow.cc:565
 msgid "Cancel the expedition"
 msgstr "探検をキャンセル"
 
@@ -3953,39 +3954,39 @@ msgstr[0] "本当にこれら%dのゲームを削除しますか？"
 
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting File"
-msgstr ""
+msgstr "ファイル削除の確認"
 
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting Files"
-msgstr ""
+msgstr "ファイル削除の確認"
 
 #: ../../src/wui/load_or_save_game.cc:315
 msgid "Error Deleting File!"
-msgstr ""
+msgstr "ファイル削除エラー！"
 
 #: ../../src/wui/load_or_save_game.cc:315
 msgid "Error Deleting Files!"
-msgstr ""
+msgstr "ファイル削除エラー！"
 
 #: ../../src/wui/load_or_save_game.cc:318
 msgid "The replay could not be deleted."
-msgstr ""
+msgstr "リプレイを削除できませんでした。"
 
 #: ../../src/wui/load_or_save_game.cc:320
 #, c-format
 msgid "%d replay could not be deleted."
 msgid_plural "%d replays could not be deleted."
-msgstr[0] ""
+msgstr[0] "%d 個のリプレイが削除できませんでした。"
 
 #: ../../src/wui/load_or_save_game.cc:327
 msgid "The game could not be deleted."
-msgstr ""
+msgstr "ゲームファイルを削除できませんでした。"
 
 #: ../../src/wui/load_or_save_game.cc:329
 #, c-format
 msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
-msgstr[0] ""
+msgstr[0] "%d 個のゲームファイルを削除できませんでした。"
 
 #: ../../src/wui/load_or_save_game.cc:374
 msgid "Filename: Map name (start of replay)"

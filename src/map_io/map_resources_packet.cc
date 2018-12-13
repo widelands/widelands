@@ -126,4 +126,4 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 	fw.write(fs, "binary/resource");
 }
-}
+}  // namespace Widelands

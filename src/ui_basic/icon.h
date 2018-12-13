@@ -28,7 +28,7 @@ namespace UI {
 /**
  * A simple icon drawn in the center of the area. If the image is
  * bigger than the icon, the image will be scaled to fit.
-*/
+ */
 struct Icon : public Panel {
 	Icon(Panel* parent, int32_t x, int32_t y, int32_t w, int32_t h, const Image* picture_id);
 
@@ -47,6 +47,6 @@ private:
 	bool draw_frame_;
 	RGBColor framecolor_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_ICON_H

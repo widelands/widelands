@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
-"PO-Revision-Date: 2018-11-01 16:29+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-12-03 08:36+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -120,7 +120,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Widelands is in Grundlagen haast kumpleet un 't maakt mennig Spaaß, 't alleen oder mit mennig Spelers to spölen. Aber up all Felden gifft 't immer wat to doon. Wenn du Interesse hest, mittomaken – of dat is, Biller to malen, Fehler to behelpen, neje Dingen to schrieven, dat Speel in diene Spraak to översetten oder neje Kaarten to maken – mell di up uns' Internett-Sied."
+msgstr "Widelands is in Grundlagen haast kumpleet un 't maakt mennig Spaaß, 't alleen oder mit mennig Spelers to spölen. Aver up all Felden gifft 't immer wat to doon. Wenn du Interesse hest, mittomaken – of dat is, Biller to malen, Fehler to behelpen, neje Dingen to schrieven, dat Speel in diene Spraak to översetten oder neje Kaarten to maken – mell di up uns' Internett-Sied."
 
 #: ../../data/txts/README.lua:16
 msgid "Widelands Help"
@@ -158,7 +158,7 @@ msgstr "Akkerate Instruksjes, wo dat gaht, de Fehler uttolösen, wenn mögelk."
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr "Wat daarbi passeren sull un wat aber passeer is."
+msgstr "Wat daarbi passeren sull un wat aver passeer is."
 
 #: ../../data/txts/README.lua:30
 msgid ""
@@ -336,7 +336,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr "Widelands is een frejes, quellopens taktisk Speel in Echt-Tied mit Rutfödderungen för eenen Speler oder för mennig Spelers. Dat Speel is vun Settlers II anreegt, hett aber unbannig vööl mehr Ofwesseln un Deepde. Aber dör de Inföhrens tum Spölen kann man doch leep licht mit Widelands bekennt worden."
+msgstr "Widelands is een frejes, quellopens taktisk Speel in Echt-Tied mit Rutfödderungen för eenen Speler oder för mennig Spelers. Dat Speel is vun Settlers II anreegt, hett aver unbannig vööl mehr Ofwesseln un Deepde. Aver dör de Inföhrens tum Spölen kann man doch leep licht mit Widelands bekennt worden."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -368,7 +368,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr "Im Höövdmenü kannst du »Upteken ankieken« utkören, um een Speel, wat du maal spöölt hest, nipp un nau antokieken. Aber Achtung! Elkeen Ännerung in de Speeldaten oder Widelands sülvst, ok heel lütte, könen daarför sörgen, dat dat Upteken nich mehr mit de Speel verdragelk is un sük »verschufft«. Dat is jüüst so, as wenn twee Spelers bi'm Spölen övr 't Internett verschedene Widelands-Versionen bruken un sük dann de Spelen verschuven."
+msgstr "Im Höövdmenü kannst du »Upteken ankieken« utkören, um een Speel, wat du maal spöölt hest, nipp un nau antokieken. Aver Achtung! Elkeen Ännerung in de Speeldaten oder Widelands sülvst, ok heel lütte, könen daarför sörgen, dat dat Upteken nich mehr mit de Speel verdragelk is un sük »verschufft«. Dat is jüüst so, as wenn twee Spelers bi'm Spölen övr 't Internett verschedene Widelands-Versionen bruken un sük dann de Spelen verschuven."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -435,7 +435,7 @@ msgstr "De Speler mit de Farv vun de Fahn. Wenn mehr as een Speler desülvige Fa
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "»Tokieker«-Speelaard: Du kannst alles sehn, aber keenen Speler kuntrolleren"
+msgstr "»Tokieker«-Speelaard: Du kannst alles sehn, aver keenen Speler kuntrolleren"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
@@ -528,7 +528,7 @@ msgstr "Bau alltied een Boomplanteree un eene Deertentüchteree, daarmit de Boom
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr "De meesten utbauten Husen bruken künnuge Arbeiders. Bau de Husen eerst dann ut, wenn du de nödigen Arbeiders hest."
+msgstr "De meesten utbauten Husen bruken Arbeiders mit Erfahrung. Bau de Husen eerst dann ut, wenn du de nödigen Arbeiders hest."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:7
@@ -591,7 +591,7 @@ msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr "Du kannst een middelmatigs Huus up elkeen Knütt setten, waar de Schüünte höchstens 1 nach Süüdwest un de Höchten-Unnerscheed to all Knütten bit 2 Felden Ofstand höchstens 2 is."
+msgstr "Du kannst een middelmatigs Huus up elkeen Knütt setten, waar de Schüünte höchstens 1 na Süüdoost un de Höchten-Unnerscheed to all Knütten bit 2 Felden Ofstand höchstens 2 is."
 
 #: ../../data/txts/tips/editor.lua:47
 msgid ""
@@ -606,7 +606,7 @@ msgstr "Bau alltied een Förster-Huus, daarmit de Boomstammen nich nau worden."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr "Dat Latienske Riek bruukt Bülten vun Marmel. Kiek alltied nach Stenen ut."
+msgstr "Dat Latienske Riek bruukt Bülten vun Marmel. Kiek alltied na Stenen ut."
 
 #: ../../data/txts/tips/frisians.lua:4
 msgid ""
@@ -659,7 +659,7 @@ msgstr "Noch Fragen? Uns' FAQ, de Wiki un natürelk uns' Gemeenskupp-Forums kön
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "Bruuk de Wichtigkeids-Knopen in eenem Huus-Fenster, um de Versörgung mit eener wissen Ware fasttoleggen. Drück daarbi de Strg-Tast, um 't för all Waren up eenmaal fasttosetten."
+msgstr "Bruuk de Wichtigkeids-Knopen in eenem Huus-Fenster, um de Versörgung mit eener wissen Waar fasttoleggen. Drück daarbi de Strg-Tast, um 't för all Waren up eenmaal fasttosetten."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
@@ -704,7 +704,7 @@ msgstr "Neje Soldaten worden in eener Kasern anhüürt. Hör Vermögen kann dann
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "'t is gefahrelk, aber wenn de Strg-Tast drückt hollen, as du de Knopen för 't Utbauen, Plattrieten oder Ofbrannen vun eenem Huus bruukst, word de Sekerheids-Fraag weglaten."
+msgstr "'t is gefahrelk, aver wenn de Strg-Tast drückt hollen, as du de Knopen för 't Utbauen, Plattrieten oder Ofbrannen vun eenem Huus bruukst, word de Sekerheids-Fraag weglaten."
 
 #: ../../data/txts/tips/general_game.lua:59
 msgid "Press I to quickly toggle the display of your stock inventory."
@@ -774,4 +774,4 @@ msgstr "Wenn dat Speel maal daalknallt, koom nich in Nood! Dat Speel word automa
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "Sünd uns' künstelken Spelers to dröge? Besöök uns' Internett-Sied up %s un treff anner Spelers, mit de du övers Internett spölen kannst."
+msgstr "Sünd uns' künstelken Spelers to dröge? Besöök uns' Internett-Sied up %s un treff anner Spelers, mit de du över 't Internett spölen kannst."

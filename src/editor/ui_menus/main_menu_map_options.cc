@@ -40,7 +40,7 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 
 /**
  * Create all the buttons etc...
-*/
+ */
 MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
    : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
@@ -163,7 +163,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 /**
  * Updates all UI::Textareas in the UI::Window to represent currently
  * set values
-*/
+ */
 void MainMenuMapOptions::update() {
 	const Widelands::Map& map = eia().egbase().map();
 	author_.set_text(map.get_author());
@@ -180,7 +180,7 @@ void MainMenuMapOptions::update() {
 
 /**
  * Called when one of the editboxes are changed
-*/
+ */
 void MainMenuMapOptions::changed() {
 	ok_.set_enabled(true);
 }
