@@ -76,6 +76,6 @@ private:
 	StreamWrite* cmdlog_;
 	std::string filename_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_REPLAY_H

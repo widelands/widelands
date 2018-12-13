@@ -31,12 +31,12 @@ struct GameChatMenu : public UI::UniqueWindow {
 
 	/**
 	 * Creates a default chat window for multiplayer games
-	*/
+	 */
 	static GameChatMenu* create_chat_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
 
 	/**
 	 * Creates a chat window only for scripting in debug mode
-	*/
+	 */
 	static GameChatMenu*
 	create_script_console(UI::Panel*, UI::UniqueWindow::Registry&, ChatProvider&);
 

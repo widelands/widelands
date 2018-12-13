@@ -29,4 +29,4 @@ MapVersion::MapVersion()
      map_version_minor(0),
      map_version_timestamp(static_cast<uint32_t>(time(nullptr))) {
 }
-}
+}  // namespace Widelands

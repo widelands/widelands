@@ -80,4 +80,4 @@ void MapPlayerPositionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapO
 
 	prof.write("player_position", false, fs);
 }
-}
+}  // namespace Widelands

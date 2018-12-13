@@ -65,4 +65,4 @@ void CmdLuaScript::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 
 	fw.string(script_);
 }
-}
+}  // namespace Widelands

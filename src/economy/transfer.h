@@ -88,6 +88,6 @@ private:
 	Worker* worker_;      ///< non-null iff this is transferring a worker
 	Route route_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_TRANSFER_H

@@ -756,4 +756,4 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 			temp_imm->remove(*this);
 	}
 }
-}
+}  // namespace Widelands

@@ -84,6 +84,6 @@ private:
 	}
 	uint32_t id;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_ID_H

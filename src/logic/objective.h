@@ -85,6 +85,6 @@ private:
 	bool visible_;
 	bool done_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_OBJECTIVE_H

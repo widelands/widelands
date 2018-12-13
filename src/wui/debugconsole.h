@@ -82,6 +82,6 @@ ChatProvider* get_chat_provider();
  * executes a command, while this function writes to the console.
  */
 void write(const std::string& text);
-}
+}  // namespace DebugConsole
 
 #endif  // end of include guard: WL_WUI_DEBUGCONSOLE_H

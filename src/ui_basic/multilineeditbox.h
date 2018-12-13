@@ -57,6 +57,6 @@ private:
 	struct Data;
 	std::unique_ptr<Data> d_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MULTILINEEDITBOX_H

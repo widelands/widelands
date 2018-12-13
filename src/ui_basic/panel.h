@@ -422,6 +422,6 @@ struct NamedPanel : public Panel {
 private:
 	std::string name_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_PANEL_H

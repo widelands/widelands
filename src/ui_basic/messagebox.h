@@ -52,7 +52,7 @@ namespace UI {
  *       not work.
  *
  * Text conventions: Title Case for the 'caption', Sentence case for the 'text'
-*/
+ */
 struct WLMessageBox : public Window {
 	enum class MBoxType { kOk, kOkCancel };
 	WLMessageBox(Panel* parent,
@@ -79,6 +79,6 @@ private:
 	std::unique_ptr<Button> ok_button_, cancel_button_;
 	std::unique_ptr<MultilineTextarea> textarea_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MESSAGEBOX_H

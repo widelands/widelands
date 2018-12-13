@@ -33,7 +33,7 @@ class EditorInteractive;
  * This is the new map selection menu. It offers
  * the user to choose the new world and a few other
  * things like size, world ....
-*/
+ */
 struct MainMenuNewMap : public UI::Window {
 	explicit MainMenuNewMap(EditorInteractive&);
 
