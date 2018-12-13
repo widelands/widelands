@@ -19,7 +19,8 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew install gettext glew icu4c sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
   # brew doesn't add a link by default
   brew link --force gettext
-  brew link --force icu4c
+  # icu4c cannot be forced
+  export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig"
 fi
 
 # Configure the build
