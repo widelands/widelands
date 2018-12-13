@@ -19,8 +19,9 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew install glew sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
   # brew doesn't add a link by default
   brew link --force gettext
-  # icu4c cannot be forced
+  # icu4c and zlib cannot be forced
   export ICU_ROOT="$(brew --prefix icu4c)"
+  export ZLIB_ROOT="$(brew --prefix zlib)"
 fi
 
 # Configure the build
