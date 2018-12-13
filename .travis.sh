@@ -15,7 +15,7 @@ fi
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   # Install osx dependencies
-  # boost, cmake, gettext and icu4c are are preinstalled :)
+  # boost, cmake, gettext and icu4c are preinstalled :)
   brew install glew sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
   # brew doesn't add a link by default
   brew link --force gettext
