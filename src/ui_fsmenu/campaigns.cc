@@ -180,7 +180,10 @@ void Campaigns::update_legacy_campvis() {
 	std::vector<LegacyList> legacy_scenarios;
 
 	legacy_scenarios.push_back(
-	   {{"fri02.wmf", "frisians01"}, {"fri01.wmf", "frisians00"}, {"atl01.wmf", "atlanteans00"}, {"emp04.wmf", "empiretut03"}});
+	   {{"fri02.wmf", "frisians01"}, {"fri01.wmf", "frisians00"}, {"atl01.wmf", "atlanteans00"}});
+
+	legacy_scenarios.push_back(
+	   {{"fri02.wmf", "frisians01"}, {"fri01.wmf", "frisians00"}, {"emp04.wmf", "empiretut03"}});
 
 	legacy_scenarios.push_back({{"atl02.wmf", "atlanteans01"},
 	                            {"atl01.wmf", "atlanteans00"},
