@@ -20,6 +20,8 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   # brew doesn't add a link by default
   brew link --force gettext
   # icu4c cannot be forced
+  export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+  export CPPFLAGS="-I/usr/local/opt/icu4c/include"
   export PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig"
 fi
 
