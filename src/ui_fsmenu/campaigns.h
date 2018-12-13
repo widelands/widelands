@@ -54,7 +54,7 @@ struct CampaignData {
 	const Image* difficulty_image;
 	std::string difficulty_description;
 	std::string description;
-	std::string prerequisite;
+	std::set<std::string> prerequisites;
 	bool visible;
 	std::vector<std::unique_ptr<ScenarioData>> scenarios;
 

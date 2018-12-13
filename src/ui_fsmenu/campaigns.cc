@@ -73,8 +73,13 @@ Campaigns::Campaigns() {
 		campaign_data->tribename =
 		   Widelands::get_tribeinfo(campaign_table->get_string("tribe")).descname;
 		campaign_data->description = _(campaign_table->get_string("description"));
-		campaign_data->prerequisite =
-		   campaign_table->has_key("prerequisite") ? campaign_table->get_string("prerequisite") : "";
+		if (campaign_table->has_key("prerequisites")) {
+			for (const std::string& prerequisite :
+				 campaign_table->get_table("prerequisites")->array_entries<std::string>()) {
+				campaign_data->prerequisites.insert(prerequisite);
+			}
+		}
+
 		campaign_data->visible = false;
 
 		// Collect difficulty information
@@ -115,10 +120,19 @@ Campaigns::Campaigns() {
 
 void Campaigns::update_visibility_info() {
 	for (auto& campaign : campaigns_) {
-		if (campaign->prerequisite.empty() || solved_scenarios_.count(campaign->prerequisite) == 1) {
-			// A campaign is visible if its prerequisites have been fulfilled
+		if (campaign->prerequisites.empty()) {
+			// A campaign is visible if it has no prerequisites
 			campaign->visible = true;
 		} else {
+			// A campaign is visible if one of its prerequisites has been fulfilled
+			for (const std::string prerequisite : campaign->prerequisites) {
+				if (solved_scenarios_.count(prerequisite) == 1) {
+					campaign->visible = true;
+					break;
+				}
+			}
+		}
+		if (!campaign->visible) {
 			// A campaign is also visible if one of its scenarios has been solved
 			for (size_t i = 0; i < campaign->scenarios.size(); ++i) {
 				auto& scenario = campaign->scenarios.at(i);
@@ -152,7 +166,7 @@ void Campaigns::update_visibility_info() {
 /**
  * Handle legacy campvis file
  */
-// TODO(GunChleoc): Remove after Build 21
+// TODO(GunChleoc): Remove after Build 22
 void Campaigns::update_legacy_campvis() {
 	Profile legacy_campvis(kCampVisFileLegacy.c_str());
 	if (legacy_campvis.get_section("campmaps") == nullptr) {
@@ -166,7 +180,7 @@ void Campaigns::update_legacy_campvis() {
 	std::vector<LegacyList> legacy_scenarios;
 
 	legacy_scenarios.push_back(
-	   {{"fri02.wmf", "frisians01"}, {"fri01.wmf", "frisians00"}, {"atl01.wmf", "atlanteans00"}});
+	   {{"fri02.wmf", "frisians01"}, {"fri01.wmf", "frisians00"}, {"atl01.wmf", "atlanteans00"}, {"emp04.wmf", "empiretut03"}});
 
 	legacy_scenarios.push_back({{"atl02.wmf", "atlanteans01"},
 	                            {"atl01.wmf", "atlanteans00"},
