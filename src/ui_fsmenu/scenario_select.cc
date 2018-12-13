@@ -137,7 +137,7 @@ std::string FullscreenMenuScenarioSelect::get_map() {
 }
 
 bool FullscreenMenuScenarioSelect::set_has_selection() {
-	bool has_selection = table_.has_selection();
+	const bool has_selection = table_.has_selection();
 	ok_.set_enabled(has_selection);
 	return has_selection;
 }
@@ -167,7 +167,7 @@ void FullscreenMenuScenarioSelect::entry_selected() {
  * fill the campaign-map list
  */
 void FullscreenMenuScenarioSelect::fill_table() {
-	if (campaign_ == nullptr) {
+	if (is_tutorial_) {
 		// Load the tutorials
 		LuaInterface lua;
 		std::unique_ptr<LuaTable> table(lua.run_script("campaigns/tutorials.lua"));
