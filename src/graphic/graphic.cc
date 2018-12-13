@@ -105,7 +105,11 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		SDL_DisplayMode disp_mode;
 		SDL_GetWindowDisplayMode(sdl_window_, &disp_mode);
 		log("**** GRAPHICS REPORT ****\n"
+#ifdef WL_USE_GLVND
+		    " VIDEO DRIVER GLVND %s\n"
+#else
 		    " VIDEO DRIVER %s\n"
+#endif
 		    " pixel fmt %u\n"
 		    " size %d %d\n"
 		    "**** END GRAPHICS REPORT ****\n",
@@ -133,14 +137,14 @@ Graphic::~Graphic() {
 
 /**
  * Return the screen x resolution
-*/
+ */
 int Graphic::get_xres() {
 	return screen_->width();
 }
 
 /**
  * Return the screen x resolution
-*/
+ */
 int Graphic::get_yres() {
 	return screen_->height();
 }
@@ -167,7 +171,7 @@ void Graphic::resolution_changed() {
 
 /**
  * Return a pointer to the RenderTarget representing the screen
-*/
+ */
 RenderTarget* Graphic::get_render_target() {
 	render_target_->reset();
 	return render_target_.get();
@@ -214,7 +218,7 @@ void Graphic::set_fullscreen(const bool value) {
 
 /**
  * Bring the screen uptodate.
-*/
+ */
 void Graphic::refresh() {
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
@@ -244,7 +248,7 @@ void Graphic::refresh() {
 
 /**
  * Save a screenshot to the given file.
-*/
+ */
 void Graphic::screenshot(const std::string& fname) {
 	screenshot_filename_ = fname;
 }

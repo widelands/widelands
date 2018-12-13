@@ -238,7 +238,7 @@ void Transfer::has_finished() {
 /**
  * Transfer failed for reasons beyond our control.
  * This Transfer object will be deleted.
-*/
+ */
 void Transfer::has_failed() {
 	if (request_) {
 		request_->transfer_fail(game_, *this);
@@ -304,4 +304,4 @@ void Transfer::write(MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_32(mos.get_object_file_index_or_zero(destination_.get(game_)));
 	// not saving route right now, will be recaculated anyway
 }
-}
+}  // namespace Widelands

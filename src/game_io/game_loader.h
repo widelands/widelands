@@ -46,6 +46,6 @@ private:
 	FileSystem& fs_;
 	Game& game_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_GAME_IO_GAME_LOADER_H

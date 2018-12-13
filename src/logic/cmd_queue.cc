@@ -175,4 +175,4 @@ void GameLogicCommand::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoade
 		throw GameDataError("game logic: %s", e.what());
 	}
 }
-}
+}  // namespace Widelands

@@ -25,7 +25,7 @@
 
 /**
  * This places immovables on the map
-*/
+ */
 struct EditorPlaceImmovableTool : public EditorTool, public MultiSelect {
 	explicit EditorPlaceImmovableTool(EditorDeleteImmovableTool& tool) : EditorTool(tool, tool) {
 	}

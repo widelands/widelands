@@ -30,7 +30,7 @@ namespace Widelands {
 class TribeDescr;
 class Objective;
 struct Message;
-}
+}  // namespace Widelands
 
 namespace LuaGame {
 

@@ -70,6 +70,7 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
  * a blank space, because some languages don't use blank spaces.
  */
 std::string join_sentences(const std::string& sentence1, const std::string& sentence2);
-}
+
+}  // namespace i18n
 
 #endif  // end of include guard: WL_BASE_I18N_H

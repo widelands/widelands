@@ -519,6 +519,6 @@ public:
 	   : Base(parent, x, y, w, h, style, rowtype) {
 	}
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_TABLE_H

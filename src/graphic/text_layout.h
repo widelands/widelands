@@ -37,15 +37,15 @@
 void replace_entities(std::string* text);
 
 /**
-  * Returns the exact width of the text rendered as editorfont for the given font size.
-  * This function is inefficient; only call when we need the exact width.
-  */
+ * Returns the exact width of the text rendered as editorfont for the given font size.
+ * This function is inefficient; only call when we need the exact width.
+ */
 int text_width(const std::string& text, int ptsize = UI_FONT_SIZE_SMALL);
 
 /**
-  * Returns the exact height of the text rendered for the given font size and face.
-  * This function is inefficient; only call when we need the exact height.
-  */
+ * Returns the exact height of the text rendered for the given font size and face.
+ * This function is inefficient; only call when we need the exact height.
+ */
 int text_height(int ptsize = UI_FONT_SIZE_SMALL, UI::FontSet::Face face = UI::FontSet::Face::kSans);
 
 /**
@@ -113,11 +113,11 @@ std::string as_heading(const std::string& txt, UI::PanelStyle style, bool is_fir
 std::string as_content(const std::string& txt, UI::PanelStyle style);
 
 /**
-  * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
-  * wide, it will first use the condensed font face and then make the text
-  * smaller until it fits 'width'. The resulting font size will not go below
-  * 'kMinimumFontSize'.
-  */
+ * Render 'text' as ui_font. If 'width' > 0 and the rendered image is too
+ * wide, it will first use the condensed font face and then make the text
+ * smaller until it fits 'width'. The resulting font size will not go below
+ * 'kMinimumFontSize'.
+ */
 std::shared_ptr<const UI::RenderedText> autofit_ui_text(const std::string& text,
                                                         int width = 0,
                                                         RGBColor color = UI_FONT_CLR_FG,

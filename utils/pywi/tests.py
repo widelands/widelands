@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import config
+import animation
 """Tests for various pywi modules."""
 
 import os
@@ -7,9 +9,6 @@ import unittest
 
 source_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.normpath(source_dir + '/../..')
-
-import animation
-import config
 
 
 class TestConfig(unittest.TestCase):

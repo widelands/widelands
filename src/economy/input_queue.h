@@ -69,9 +69,9 @@ public:
 	}
 
 	/**
-	  * Get the maximum amount of wares or workers which should be stored here.
-	  * This is a value which can be influenced by the player with the provided buttons.
-	  * @return The maximum number of wares or workers which should be here.
+	 * Get the maximum amount of wares or workers which should be stored here.
+	 * This is a value which can be influenced by the player with the provided buttons.
+	 * @return The maximum number of wares or workers which should be here.
 	 */
 	Quantity get_max_fill() const {
 		return max_fill_;
@@ -168,7 +168,7 @@ public:
 	 *
 	 * This interval is merely a hint for the Supply/Request balancing code.
 	 * @param i The interval in ms.
-	*/
+	 */
 	void set_consume_interval(uint32_t i);
 
 	/**
@@ -202,7 +202,7 @@ protected:
 	 * @param index The index of the ware or worker that will be stored.
 	 * @param max_size The maximum amount that can be stored.
 	 * @param type Whether wares or workers are stored in this queue.
-	*/
+	 */
 	InputQueue(PlayerImmovable& owner, DescriptionIndex index, uint8_t max_size, WareWorker type);
 
 	/**
@@ -228,7 +228,7 @@ protected:
 	/**
 	 * Updates the request.
 	 * You must call this after every call to set_*().
-	*/
+	 */
 	void update();
 
 	/**
@@ -279,6 +279,6 @@ protected:
 	/// Unspecified data to pass to function.
 	void* callback_data_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_INPUT_QUEUE_H

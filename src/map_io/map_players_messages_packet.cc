@@ -193,4 +193,4 @@ void MapPlayersMessagesPacket::write(FileSystem& fs, EditorGameBase& egbase, Map
 		prof.write(profile_filename.c_str(), false, fs);
 	}
 }
-}
+}  // namespace Widelands

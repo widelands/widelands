@@ -75,7 +75,12 @@ namespace Widelands {
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {
 		if (!syncstreamsave_)
-			g_fs->fs_unlink(dumpfname_);
+			try {
+				g_fs->fs_unlink(dumpfname_);
+			} catch (const FileError& e) {
+				// not really a problem if deletion fails, but we'll log it
+				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+			}
 	}
 }
 
@@ -851,6 +856,13 @@ LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
 
+const std::string& Game::get_win_condition_displayname() const {
+	return win_condition_displayname_;
+}
+void Game::set_win_condition_displayname(const std::string& name) {
+	win_condition_displayname_ = name;
+}
+
 /**
  * Sample global statistics for the game.
  */
@@ -1064,8 +1076,4 @@ void Game::write_statistics(FileWrite& fw) {
 		fw.unsigned_32(general_stats_[p - 1].custom_statistic[j]);
 	}
 }
-
-double logic_rand_as_double(Game* game) {
-	return static_cast<double>(game->logic_rand()) / std::numeric_limits<uint32_t>::max();
-}
-}
+}  // namespace Widelands

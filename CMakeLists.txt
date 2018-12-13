@@ -1,7 +1,37 @@
 project (widelands)
 
 cmake_minimum_required (VERSION 2.8.7)
-cmake_policy(SET CMP0054 NEW)
+cmake_policy(VERSION 2.8.7)
+
+include("${CMAKE_SOURCE_DIR}/cmake/UseSystemInfo.cmake")
+
+# This policy is not known to versions prior 3.1 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.1 or newer by using:
+# cmake_policy(VERSION 3.1)
+if(POLICY CMP0054)
+   cmake_policy(SET CMP0054 NEW)
+endif(POLICY CMP0054)
+
+# This policy is not known to versions prior 3.11 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.11 or newer  by using:
+# cmake_policy(VERSION 3.11)
+if(POLICY CMP0072)
+  cmake_policy(SET CMP0072 NEW)
+
+  # TODO(stonerl): Check on later Ubuntu releases whether this workaround is
+  # still needed or not.
+  if (CMAKE_SYSTEM MATCHES "Linux")
+    distro_name (DISTRO_NAME)
+    # DISTRO_NAME is different on the build-servers.
+    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco")
+        AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      cmake_policy(SET CMP0072 OLD)
+    endif()
+  endif()
+endif(POLICY CMP0072)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
@@ -42,7 +72,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
-  link_libraries(wsock32 ws2_32)
+  link_libraries(wsock32 ws2_32 bcrypt)
 else()
   set (Boost_USE_STATIC_LIBS  OFF)
 endif()
@@ -139,6 +169,13 @@ if(OPTION_ASAN)
 else()
   message(STATUS "Not using AddressSanitizer.")
 endif(OPTION_ASAN)
+
+# This is set to avoid linker errors when using GLVND-libs on Linux
+if("${OpenGL_GL_PREFERENCE}" STREQUAL "GLVND")
+   set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lGL")
+   add_compile_definitions(WL_USE_GLVND)
+   message(STATUS "Adding linker flags for GLVND.")
+endif()
 
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   wl_add_flag(WL_COMPILE_DIAGNOSTICS "-Weverything")

@@ -30,7 +30,7 @@
 /**
  * Decrease the resources of the current field by the given value if
  * there is not already another resource there.
-*/
+ */
 int32_t EditorDecreaseResourcesTool::handle_click_impl(const Widelands::World& world,
                                                        const Widelands::NodeAndTriangle<>& center,
                                                        EditorInteractive& /* parent */,

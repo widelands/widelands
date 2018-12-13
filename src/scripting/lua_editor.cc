@@ -94,4 +94,4 @@ void luaopen_wleditor(lua_State* const L) {
 	add_parent<LuaPlayer, LuaBases::LuaPlayerBase>(L);
 	lua_pop(L, 1);  // Pop the meta table
 }
-}
+}  // namespace LuaEditor

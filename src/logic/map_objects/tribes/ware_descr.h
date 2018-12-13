@@ -45,7 +45,7 @@ class TribeDescr;
 /**
  * Wares can be stored in warehouses. They can be transferred across an
  * Economy. They can be traded.
-*/
+ */
 class WareDescr : public MapObjectDescr {
 public:
 	WareDescr(const std::string& init_descname, const LuaTable& t);
@@ -89,6 +89,6 @@ private:
 	std::set<DescriptionIndex> producers_;  // Buildings that produce this ware
 	DISALLOW_COPY_AND_ASSIGN(WareDescr);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WARE_DESCR_H

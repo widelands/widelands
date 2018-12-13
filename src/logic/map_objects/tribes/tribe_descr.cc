@@ -52,9 +52,9 @@
 namespace Widelands {
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/atlanteans.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/atlanteans.lua
+ */
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
                        const Tribes& init_tribes)
@@ -69,7 +69,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 
 		items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
-		   const std::string& road_type, std::vector<std::string>* images) {
+		                           const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
 			   items_table->get_table(road_type)->array_entries<std::string>();
 			for (const std::string& filename : roads) {
@@ -211,8 +211,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 }
 
 /**
-  * Access functions
-  */
+ * Access functions
+ */
 
 const std::string& TribeDescr::name() const {
 	return name_;
@@ -393,7 +393,7 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	if (!res || !amount) {
 		auto list = resource_indicators_.find("");
 		if (list == resource_indicators_.end() || list->second.empty()) {
-			throw GameDataError("Tribe '%s' has no indicator for no resources!", descname_.c_str());
+			throw GameDataError("Tribe '%s' has no indicator for no resources!", name_.c_str());
 		}
 		return list->second.begin()->second;
 	}
@@ -401,7 +401,7 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	auto list = resource_indicators_.find(res->name());
 	if (list == resource_indicators_.end() || list->second.empty()) {
 		throw GameDataError(
-		   "Tribe '%s' has no indicators for resource '%s'!", descname_.c_str(), res->name().c_str());
+		   "Tribe '%s' has no indicators for resource '%s'!", name_.c_str(), res->name().c_str());
 	}
 
 	uint32_t lowest = 0;
@@ -416,7 +416,7 @@ DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* c
 	if (lowest < amount) {
 		throw GameDataError("Tribe '%s' has no indicators for amount %i of resource '%s' (highest "
 		                    "possible amount is %i)!",
-		                    descname_.c_str(), amount, res->name().c_str(), lowest);
+		                    name_.c_str(), amount, res->name().c_str(), lowest);
 	}
 
 	return list->second.find(lowest)->second;
@@ -484,8 +484,8 @@ void TribeDescr::add_building(const std::string& buildingname) {
 }
 
 /**
-  * Helper functions
-  */
+ * Helper functions
+ */
 
 DescriptionIndex TribeDescr::add_special_worker(const std::string& workername) {
 	try {
@@ -522,4 +522,4 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
 		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
 	}
 }
-}
+}  // namespace Widelands

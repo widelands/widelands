@@ -257,6 +257,7 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 				}
 				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 			}
+			break;
 		default:
 			break;
 		}

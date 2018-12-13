@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-17 10:00+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-30 08:53+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -46,21 +46,21 @@ msgid ""
 "Here in the northern part, you only have a goldmine and a warehouse. While "
 "the miners are supplied well with food, there is no way to transport the "
 "gold ore to our smelting works in the southern part."
-msgstr "Hier im Noorden hest du nix as een Gold-Bargwark un een Kraamhuus. De Bargwarkskeerls kriggen Spiesen satt, aber wi könen de Goldkluten nich to de Smeltwarken im Süden transporteren."
+msgstr "Hier im Noorden hest du nix as een Gold-Bargwark un een Kraamhuus. De Bargwarkskeerls kriggen Spiesen satt, aver wi könen de Goldkluten nich to de Smeltwarken im Süden transporteren."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:34
 msgid ""
 "We have tried to build a road, but the mountain is too wide and too steep. "
 "We therefore have only one possibility: we need to establish a sea lane "
 "between these two parts."
-msgstr "Wi hebben al versöcht, eene Straat to bauen, aber de Barg is to breed un stuuv. 't gifft blot eenen Weg: wi mutten eene Schipp-verbinnung tüsken de beiden Parten anleggen."
+msgstr "Wi hebben al versöcht, eene Straat to bauen, aver de Barg is to breed un stuuv. 't gifft blot eenen Weg: wi mutten eene Schipp-verbinnung tüsken de beiden Parten anleggen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:35
 msgid ""
 "But I don’t want to rush you: you have just arrived here and you would "
 "probably like to have a closer look at your camp. I will also take a short "
 "break and be back soon."
-msgstr "Aber sachte: du büst nett hier ankomen un willt di woll dien Gewest eerst maal in Ruh amkieken. Ick maak eene körte Paus un koom bold torügg."
+msgstr "Aver sachte: du büst nett hier ankomen un willt di wull dien Gewest eerst maal in Ruh amkieken. Ick maak eene körte Paus un koom bold torügg."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:42
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:44
@@ -81,7 +81,7 @@ msgid ""
 "tabs: ‘Wares waiting to be shipped’ and ‘workers waiting to embark.’ They "
 "are waiting for a ship to transport them to another port. Currently, there "
 "are none because we have not yet built a second port. So let’s change this!"
-msgstr "Muden maaken 't aber ok mögelk, Waren mit Schippen to transporteren. Klick eene Muu, de du al hest, an, un du süchst twee neie Listenwesslers: »Waren de up een Schipp wachten« un »Arbeiders de up een Schipp wachten«. Se wachten up een Schipp, wat se to eener annern Muu brengen sall. Upstünds wachtet nix, wiel wi blot eene Muu hebben. Laat uns noch eene bauen!"
+msgstr "Muden maaken 't aver ok mögelk, Waren mit Schippen to transporteren. Klick eene Muu, de du al hest, an, un du süchst twee neje Listenwesslers: »Waren de up een Schipp wachten« un »Arbeiders de up een Schipp wachten«. Se wachten up een Schipp, wat se to eener annern Muu brengen sall. Upstünds wacht nix, wiel wi blot eene Muu hebben. Laat uns noch eene bauen!"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:54
 msgid "Building ports"
@@ -95,7 +95,7 @@ msgstr "Wo dat gaht, eene Muu to bauen"
 msgid ""
 "Ports are big buildings, but they can only be built at special locations: "
 "those marked with the"
-msgstr "Muden sünd grote Husen, könen aber blot an besünnern Steden baut worden: Deese Steden hebben dat"
+msgstr "Muden sünd grote Husen, könen aver blot an besünnern Steden baut worden: Deese Steden hebben dat"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:58
 msgid "blue port space icon."
@@ -106,7 +106,7 @@ msgid ""
 "Port spaces are set by the map designer, so a map will either contain them "
 "or not. They might, however, be hidden under trees or be blocked by "
 "surrounding buildings."
-msgstr "Rüümte för Muden worden vun de Kaarten-Maker fastleggt, eene Kaart hett se also oder even nich. Se könen aber vun Bomen oder Husen in de Naberskupp verdeckt wesen."
+msgstr "Rüümte för Muden worden vun de Kaarten-Maker fastleggt, eene Kaart hett se also oder even nich. Se könen aver vun Bomen oder Husen in de Naberskupp verdeckt wesen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:60
 msgid ""
@@ -136,13 +136,13 @@ msgid ""
 "Ports are built like normal buildings, but are only available on blue port "
 "spaces. Just click on a field with the icon and the building menu "
 "automatically offers you to build a port."
-msgstr "Muden baust du as annere Husen, aber se sünd blot up de blauen Rüümten för Muden paraat. Klick een Feld mit de Teken an un dat Bau-Menü büddt di eene Muu an."
+msgstr "Muden baust du as annere Husen, aver se sünd blot up de blauen Rüümten för Muden paraat. Klick een Feld mit de Teken an un dat Bau-Menü büddt di eene Muu an."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:70
 msgid ""
 "Although ports act as warehouses, you should not build more than necessary: "
 "they cost quartz, diamonds and gold, which makes them quite expensive."
-msgstr "Muden sünd ok Kraamhusen, aber du sallst nich mehr bauen, as du bruukst: se sünd bannig düür un kösten Blinkerflint, Edelstenen un Gold."
+msgstr "Muden sünd ok Kraamhusen, aver du sallst nich mehr bauen, as du bruukst: se sünd bannig düür un kösten Blinkerflint, Edelstenen un Gold."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:76
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:96
@@ -186,7 +186,7 @@ msgid ""
 "The shipyard is a medium building. Although it can be built everywhere on "
 "the map, the shipwright only works when he is close to the water and there "
 "are no trees or roads at the shoreline."
-msgstr "De Warft is een middelmatigs Huus. Se kann up de ganze Kaart baut worden, aber de Schippebauer warkt blot dann, wenn Water in de Naberskupp is un de Küst nich vun Bomen oder Straten verdeckt word."
+msgstr "De Warft is een middelmatigs Huus. Se kann up de ganze Kaart baut worden, aver de Schippebauer warkt blot dann, wenn Water in de Naberskupp is un de Küst nich vun Bomen oder Straten verdeckt word."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:98
 msgid "Waiting for the ships"
@@ -204,7 +204,7 @@ msgid ""
 "The shipwright will take the ware he needs to a free spot at the shoreline "
 "and build a ship there. When the first ship is finished, it will launch onto"
 " the sea, and the shipwright will construct another one."
-msgstr "De Schippebauer nimmt de Ware, de he jüüst bruukt, to eener frejen Stee an de Küst mit un baut daar een Schipp. Wenn dat eerste Schipp kumpleet is, seilt 't tur See, un de Schippebauer baut een neies."
+msgstr "De Schippebauer nimmt de Waar, de he jüüst bruukt, to eener frejen Stee an de Küst mit un baut daar een Schipp. Wenn dat eerste Schipp kumpleet is, seilt 't tur See, un de Schippebauer baut een nejes."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:101
 msgid "We should wait until we have two ships. That should be enough for now."
@@ -247,26 +247,26 @@ msgstr "Keen Iesen"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:117
 msgid "We lack iron"
-msgstr "Uns hapert Iesen"
+msgstr "Iesen hapert"
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:118
 msgid ""
 "The second ship might not be finished yet, but we have an urgent problem."
-msgstr "Dat tweede Schipp is villicht noch nich kumpleet, aber wi hebben een drockes Probleem."
+msgstr "Dat tweede Schipp is villicht noch nich kumpleet, aver wi hebben een drockes Probleem."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:119
 msgid ""
 "As you surely have already noticed, there is no iron in the mountain in the "
 "west. We have plenty of coal and gold ore, but without iron ore, we cannot "
 "produce any tools."
-msgstr "Du hest wiis al sehn, dat in de Bargen im Westen keen Iesen is. Wi hebben bannig Köhle un Goldkluut, aber sünner Iesenkluut könen wi keen Warktüüg produzeren."
+msgstr "Du hest wiis al sehn, dat in de Bargen im Westen keen Iesen is. Wi hebben bannig Köhle un Goldkluut, aver sünner Iesenkluut könen wi keen Warktüüg produzeren."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:120
 msgid ""
 "Although it might take long and be expensive and not without dangers – who "
 "knows what monsters live in the sea? – I see no other possibility: we will "
 "have to undertake an expedition to the unknown seas."
-msgstr "'t kann lang düren un is düür un nich sünner Gefahr – wat för Beesten woll in de See leven? – aber ick weet keene annere Kans: wi müssen eene Söke tur frömden See utrüsten."
+msgstr "'t kann lang düren un is düür un nich sünner Gefahr – wat för Beesten wull in de See leven? – aver ick weet keene annere Kans: wi mutten eene Söke tur frömden See utrüsten."
 
 #. TRANSLATORS: This shall be the beginning of a poem
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:128
@@ -281,7 +281,7 @@ msgstr "Söken"
 msgid ""
 "During an expedition, you send a ship out to discover new islands and maybe "
 "found a colony there."
-msgstr "Up eener Söke schickst du een Schipp, um neie Inseln to finnen un daar villicht een neies Dörp to gründen."
+msgstr "Up eener Söke schickst du een Schipp, um neje Inseln to finnen un daar villicht een nejes Dörp to gründen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:133
 msgid ""
@@ -318,7 +318,7 @@ msgstr "Begünn eene Söke."
 msgid ""
 "To do so, click on the ‘Start Expedition’ button in any port. A new tab "
 "where you can see the needed wares will appear."
-msgstr "Klicken daarto de »Söke anfangen«-Knoop in elkeen Muu an. Een neier Listenwessler mit de nödigen Waren lett sük sehn."
+msgstr "Klicken daarto de »Söke anfangen«-Knoop in elkeen Muu an. Een nejer Listenwessler mit de nödigen Waren lett sük sehn."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:148
 msgid "Off to greener pastures"
@@ -335,7 +335,7 @@ msgid ""
 " ship in any of the six main directions of the Widelands map. When it has "
 "reached a coastline, you can make it travel around the coast, where it will "
 "look for suitable places for landing."
-msgstr "Dien Schipp för de Söke is paraat. Nu wachtet 't vör diene Muu up diene Befehlen. 't transporteert keene Waren mehr. Bruuk de Knopen in de Schipp-Fenster, um dat Schipp in de sess Richtungen vun de Widelands-Kaart to schicken. Wenn 't eene Küst finnt, kannst du 't um de Insel seilen laten, wo 't na Rüümten för Muden utkiekt."
+msgstr "Dien Schipp för de Söke is paraat. Nu wacht 't vör diene Muu up diene Befehlen. 't transporteert keene Waren mehr. Bruuk de Knopen in de Schipp-Fenster, um dat Schipp in de sess Richtungen vun de Widelands-Kaart to schicken. Wenn 't eene Küst finnt, kannst du 't um de Insel seilen laten, wo 't na Rüümten för Muden utkiekt."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:153
 msgid ""
@@ -387,7 +387,7 @@ msgid ""
 "You’ve lead the expedition to a successful end and founded a new colony. "
 "I’ve sent out some geologists – they already report that they’ve found some "
 "iron ore."
-msgstr "Du hest de Söök good klaarmaakt un een neies Dörp gründt. Ick hebb eenen Schattsöker schickt – he hett al Iesenkluut funnen."
+msgstr "Du hest de Söök good klaarmaakt un een nejes Dörp gründt. Ick hebb eenen Schattsöker schickt – he hett al Iesenkluut funnen."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:173
 msgid ""
@@ -403,7 +403,7 @@ msgid ""
 " be attacked by a nearby enemy. While your headquarters has soldiers to "
 "defend it, your newly built port won’t. You should therefore avoid settling "
 "next to an enemy."
-msgstr "Aber pass up: Muden sünd as Raadhusen, se könen vun Feinden angrepen worden. Dien Raadhuus hett Soldaten tum Verdedigen, eene neie Muu aber nich. Daarum sallst du di beter nich stracks tegen eenem Feind daallaten."
+msgstr "Aver pass up: Muden sünd as Raadhusen, se könen vun Feinden angrepen worden. Dien Raadhuus hett Soldaten tum Verdedigen, eene neje Muu aver nich. Daarum sallst du di beter nich stracks tegen eenem Feind daallaten."
 
 #: ../../data/campaigns/tutorial03_seafaring.wmf/scripting/texts.lua:175
 msgid ""
@@ -420,5 +420,5 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr[0] "Neje Upgaav"
+msgstr[1] "Neje Upgaven"

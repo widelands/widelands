@@ -75,7 +75,7 @@ return {
          description = _"Six months ago, Lutius – a young general of the Empire – was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire’s land. At first, everything was calm. He even talked to a few Barbarian children and thought about a peaceful life – side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 Barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived.",
          -- If `prerequisite` is present, the campaign is greyed out by default.
          -- The campaign will become unlocked when the referenced scenario has been solved.
-         prerequisite = "bar02.wmf",
+         prerequisite = "bar01.wmf",
          scenarios = {
             "emp01.wmf",
             "emp02.wmf",
@@ -108,6 +108,7 @@ return {
          difficulty = { level=4, description=_"Introduces the Frisians." },
          -- TRANSLATORS: A long description of a campign
          description = _"Living off the ocean is a constant struggle, and even more so for the inhabitants of the Frisian North Sea shore. Was the last storm flood, the most devastating one in human memory, really nothing more than yet another example for the hardships all Frisians have to face – or a sign from the gods that a tribe that only just settled here must seek out an entirely new home?",
+         -- NOCOM multiple prerequisites - any will unlock it. We want to allow emp04.wmf here too.
          prerequisite = "atl01.wmf",
          scenarios = {
             "fri01.wmf",

@@ -164,4 +164,4 @@ void MapElementalPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObject
 
 	prof.write("elemental", false, fs);
 }
-}
+}  // namespace Widelands

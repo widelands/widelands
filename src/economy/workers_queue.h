@@ -79,6 +79,6 @@ protected:
 	/// The workers currently in the queue
 	std::vector<Worker*> workers_;
 };
-}
+}  // namespace Widelands
 
 #endif  // WL_ECONOMY_WORKERS_QUEUE_H

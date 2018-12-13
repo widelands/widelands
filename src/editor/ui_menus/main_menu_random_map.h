@@ -43,7 +43,7 @@ template <typename T, typename ID> struct IDButton;
  * This is the new map selection menu. It offers
  * the user to choose the new world and a few other
  * things like size, world ....
-*/
+ */
 struct MainMenuNewRandomMap : public UI::Window {
 	explicit MainMenuNewRandomMap(EditorInteractive&);
 

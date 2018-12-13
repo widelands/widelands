@@ -158,7 +158,8 @@ void FullscreenMenuLoadGame::entry_selected() {
 }
 
 void FullscreenMenuLoadGame::fill_table() {
-	load_or_save_.fill_table(showing_filenames_);
+	load_or_save_.set_show_filenames(showing_filenames_);
+	load_or_save_.fill_table();
 }
 
 const std::string& FullscreenMenuLoadGame::filename() const {
