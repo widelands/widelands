@@ -20,6 +20,7 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
 #define WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
 
+// Only declare powers of 2 and adjust the ~ operator below if you add any values to this enum class.
 enum class TextToDraw {
 	kNone = 0,
 	kCensus = 1,
@@ -33,7 +34,10 @@ inline TextToDraw operator&(TextToDraw a, TextToDraw b) {
 	return static_cast<TextToDraw>(static_cast<int>(a) & static_cast<int>(b));
 }
 inline TextToDraw operator~(TextToDraw a) {
-	return static_cast<TextToDraw>(~static_cast<int>(a));
+	const int result = ~static_cast<int>(a);
+	assert(result >= 0);
+	assert(result <= 2);
+	return static_cast<TextToDraw>(result);
 }
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_DRAW_TEXT_H
