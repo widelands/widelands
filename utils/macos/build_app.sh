@@ -58,9 +58,6 @@ else
    exit 1
 fi
 
-# We asume CMake 3.x is used and check for the minor version
-CMAKE_VERSION=$(cmake --version | grep -Eo '3.*' | cut -d . -f 2)
-
 # Check if the SDK for the minimum build target is available.
 # If not, use the one for the installed macOS Version
 OSX_MIN_VERSION="10.7"
@@ -185,14 +182,7 @@ function BuildWidelands() {
    export SDL2MIXERDIR="$(brew --prefix sdl2_mixer)"
    export SDL2TTFDIR="$(brew --prefix sdl2_ttf)"
    export BOOST_ROOT="$(brew --prefix boost)"
-   
-   # Not needed for CMake 3.12 or above, see cmake --help-policy CMP0074.
-   # However Mac OS X nighlies cannot upgrade to a newer cmake version than
-   # 3.9.4 since nothing newer compiles on Mac OS X 10.7 which is used to build
-   # the nightlies.
-   if [ "$CMAKE_VERSION" -lt "12" ]; then
-      export ICU_ROOT="$(brew --prefix icu4c)"
-   fi
+   export ICU_ROOT="$(brew --prefix icu4c)"
 
    cmake $SOURCE_DIR -G Ninja \
       -DCMAKE_C_COMPILER:FILEPATH="$C_COMPILER" \
