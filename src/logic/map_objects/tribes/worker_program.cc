@@ -271,13 +271,20 @@ findobject
 
       cut_granite = {
          "findobject=attrib:rocks radius:6", -- Find rocks on the map within a radius of 6 from your
-          building "walk=object", -- Now walk to those rocks "playsound=sound/atlanteans/cutting stonecutter
-          192", "animate=hacking 12000", "callobject=shrink", "createware=granite", "return"
+         building
+         "walk=object", -- Now walk to those rocks
+         "playsound=sound/atlanteans/cutting stonecutter 192",
+         "animate=hacking 12000",
+         "callobject=shrink",
+         "createware=granite",
+         "return"
       },
 
       hunt = {
          "findobject=type:bob radius:13 attrib:eatable", -- Find an eatable bob (animal) within a
-          radius of 13 from your building "walk=object", -- Walk to where the animal is "animate=idle 1500",
+         radius of 13 from your building
+         "walk=object", -- Walk to where the animal is
+         "animate=idle 1500",
          "removeobject",
          "createware=meat",
          "return"
@@ -363,12 +370,18 @@ findspace
 
       breed = {
          "findspace=size:any radius:7 breed resource:fish", -- Find any field that can have fish in
-          it for adding a fish to it below "walk=coords", "animate=freeing 3000", "breed=fish 1", "return"
+         it for adding a fish to it below
+         "walk=coords",
+         "animate=freeing 3000",
+         "breed=fish 1",
+         "return"
       },
 
       plant = {
          "findspace=size:any radius:5 avoid:field saplingsearches:8", -- Don't get in the way of the
-          farmer's crops when planting trees. Retry 8 times. "walk=coords", "animate=dig 2000",
+         farmer's crops when planting trees. Retry 8 times.
+         "walk=coords",
+         "animate=dig 2000",
          "animate=planting 1000",
          "plant=attrib:tree_sapling",
          "animate=water 2000",
@@ -377,7 +390,10 @@ findspace
 
       plant = {
          "findspace=size:any radius:2 space", -- The farmer will want to walk to this field again
-          later for harvesting his crop "walk coords", "animate=planting 4000", "plant=attrib:seed_wheat",
+         later for harvesting his crop
+         "walk=coords",
+         "animate=planting 4000",
+         "plant=attrib:seed_wheat",
          "animate=planting 4000",
          "return",
       },
@@ -498,8 +514,12 @@ walk
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          "plant=attrib:shipconstruction unless object", -- 2. This will create an object for us if
-          we don't have one yet "playsound=sound/sawmill sawmill 230", "animate=work 500", "construct", -- 1.
-          This will find a space for us if no object has been planted yet "animate=work 5000", "return"
+         we don't have one yet
+         "playsound=sound/sawmill sawmill 230",
+         "animate=work 500", "construct", -- 1. This will find a space for us if no object has been
+         planted yet
+         "animate=work 5000",
+         "return"
       },
 */
 /**
@@ -647,13 +667,18 @@ plant
          "walk=coords",
          "animate=planting 4000",
          "plant=attrib:seed_wheat", -- Plant the tiny field immovable that the worker's tribe knows
-          about "animate=planting 4000", "return",
+         about
+         "animate=planting 4000",
+         "return",
       },
 
       buildship = {
          "walk=object-or-coords",
          "plant=attrib:shipconstruction unless object", -- Only create a shipconstruction if we
-          don't already have one "playsound=sound/sawmill sawmill 230", "animate=work 500", "construct",
+         don't already have one
+         "playsound=sound/sawmill sawmill 230",
+         "animate=work 500",
+         "construct",
          "animate=work 5000",
          "return"
       }
@@ -744,7 +769,9 @@ removeobject
          "walk=object",
          "animate=idle 1000",
          "removeobject", -- The selected eatable map object has been hunted, so remove it from the
-          map "createware=meat", "return"
+         map
+         "createware=meat",
+         "return"
       }
 */
 void WorkerProgram::parse_removeobject(Worker::Action* act, const std::vector<std::string>&) {
@@ -895,9 +922,13 @@ construct
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
          "plant=attrib:shipconstruction unless object", -- 2. This will create an object for us if
-          we don't have one yet "playsound=sound/sawmill sawmill 230", "animate=work 500", "construct", -- 1.
-          Add the current ware to the shipconstruction. This will find a space for us if no shipconstruction
-          object has been planted yet "animate=work 5000", "return"
+         we don't have one yet
+         "playsound=sound/sawmill sawmill 230",
+         "animate=work 500",
+         "construct", -- 1. Add the current ware to the shipconstruction. This will find a space for
+         us if no shipconstruction object has been planted yet
+         "animate=work 5000",
+         "return"
       },
 */
 /**
