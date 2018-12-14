@@ -400,9 +400,9 @@ static void save_table_recursively(lua_State* L,
       Saves information that can be read by other scenarios.
 
       If an array is used, the data will be saved in the correct order. Arrays may not contain nil
-   values. If the table is not an array, all keys have to be strings. Tables may contain subtables
-   of any depth. Cyclic dependencies will cause Widelands to crash. Only tables/arrays, strings,
-   integer numbers and booleans may be used as values.
+      values. If the table is not an array, all keys have to be strings. Tables may contain subtables
+      of any depth. Cyclic dependencies will cause Widelands to crash. Only tables/arrays, strings,
+      integer numbers and booleans may be used as values.
 */
 int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 
