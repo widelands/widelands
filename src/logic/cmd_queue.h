@@ -151,6 +151,6 @@ private:
 	using CommandsContainer = std::vector<std::priority_queue<CmdItem>>;
 	CommandsContainer cmds_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_QUEUE_H

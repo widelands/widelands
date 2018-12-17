@@ -51,8 +51,8 @@ namespace Widelands {
 
 static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 /**
-  * The contents of 'table' are documented in doc/sphinx/source/lua_tribes_buildings.rst.org
-  */
+ * The contents of 'table' are documented in doc/sphinx/source/lua_tribes_buildings.rst.org
+ */
 BuildingDescr::BuildingDescr(const std::string& init_descname,
                              const MapObjectType init_type,
                              const LuaTable& table,
@@ -630,8 +630,8 @@ Building::get_priority(WareWorker type, DescriptionIndex const ware_index, bool 
 }
 
 /**
-* Collect priorities assigned to wares of this building
-* priorities are identified by ware type and index
+ * Collect priorities assigned to wares of this building
+ * priorities are identified by ware type and index
  */
 void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, int32_t>>& p) const {
 	if (ware_priorities_.empty())
@@ -646,7 +646,7 @@ void Building::collect_priorities(std::map<int32_t, std::map<DescriptionIndex, i
 }
 
 /**
-* Set base priority for this building (applies for all wares)
+ * Set base priority for this building (applies for all wares)
  */
 void Building::set_priority(int32_t const type,
                             DescriptionIndex const ware_index,
@@ -770,4 +770,4 @@ void Building::send_message(Game& game,
 		get_owner()->add_message(game, std::move(msg));
 	}
 }
-}
+}  // namespace Widelands

@@ -203,5 +203,5 @@ private:
 	// Minimal number of reachable swimmable fields. 1 is minimum for this to be considered "shore"
 	uint16_t min_fields;
 };
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_FINDNODE_H

@@ -347,6 +347,6 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 	location.y += logic_rand() % s - radius;
 	return location;
 }
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_GAME_H

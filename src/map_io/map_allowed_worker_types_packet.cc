@@ -111,4 +111,4 @@ void MapAllowedWorkerTypesPacket::write(FileSystem& fs, EditorGameBase& egbase, 
 		prof.write("allowed_worker_types", false, fs);
 	}
 }
-}
+}  // namespace Widelands

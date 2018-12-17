@@ -43,6 +43,6 @@ public:
 private:
 	DISALLOW_COPY_AND_ASSIGN(ITransportCostCalculator);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ITRANSPORT_COST_CALCULATOR_H

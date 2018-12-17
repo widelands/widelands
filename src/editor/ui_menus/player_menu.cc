@@ -323,8 +323,8 @@ void EditorPlayerMenu::set_starting_pos_clicked(size_t row) {
 			rows_.at(pn - 1)->position->set_perm_pressed(true);
 		} else {
 			rows_.at(pn - 1)->position->set_background_style(UI::ButtonStyle::kWuiSecondary);
-			rows_.at(pn - 1)
-			   ->position->set_perm_pressed(map->get_starting_pos(pn) != Widelands::Coords::null());
+			rows_.at(pn - 1)->position->set_perm_pressed(map->get_starting_pos(pn) !=
+			                                             Widelands::Coords::null());
 		}
 	}
 }

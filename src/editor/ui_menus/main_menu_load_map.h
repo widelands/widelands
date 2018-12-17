@@ -27,7 +27,7 @@
 
 /**
  * Choose a filename and save your brand new created map
-*/
+ */
 struct MainMenuLoadMap : public MainMenuLoadOrSaveMap {
 	explicit MainMenuLoadMap(EditorInteractive& parent);
 

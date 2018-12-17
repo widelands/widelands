@@ -103,6 +103,6 @@ private:
 	uint32_t nr_portdocks_;
 	uint32_t lastserial_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_SAVER_H

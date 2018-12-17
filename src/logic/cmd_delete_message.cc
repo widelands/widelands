@@ -27,4 +27,4 @@ namespace Widelands {
 void CmdDeleteMessage::execute(Game& game) {
 	game.get_player(player)->get_messages()->delete_message(message);
 }
-}
+}  // namespace Widelands

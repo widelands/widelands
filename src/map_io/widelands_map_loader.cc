@@ -347,4 +347,4 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	return 0;
 }
-}
+}  // namespace Widelands

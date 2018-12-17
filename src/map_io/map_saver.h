@@ -55,6 +55,6 @@ private:
 	FileSystem& fs_;
 	MapObjectSaver* mos_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_SAVER_H

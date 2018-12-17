@@ -164,4 +164,4 @@ std::string TextStream::parse_string() {
 std::string TextStream::remaining_text() {
 	return text_.substr(pos_, end_ - pos_);
 }
-}
+}  // namespace RT

@@ -83,6 +83,6 @@ protected:
 	uint32_t work_completed_;  // how many steps have we done so far?
 	uint32_t work_steps_;      // how many steps (= wares) until we're done?
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PARTIALLY_FINISHED_BUILDING_H

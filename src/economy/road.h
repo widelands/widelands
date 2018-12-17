@@ -168,6 +168,6 @@ private:
 	using SlotVector = std::vector<CarrierSlot>;
 	SlotVector carrier_slots_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ROAD_H

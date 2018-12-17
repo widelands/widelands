@@ -87,17 +87,17 @@ int main(int argc, char** argv) {
 
 			const auto write_string = [&fw](const std::string& s) { fw.data(s.c_str(), s.size()); };
 			const auto write_key_value = [&write_string](
-			   const std::string& key, const std::string& quoted_value) {
+			                                const std::string& key, const std::string& quoted_value) {
 				write_string((boost::format("\"%s\": %s") % key % quoted_value).str());
 			};
 			const auto write_key_value_string = [&write_key_value](
-			   const std::string& key, const std::string& value) {
+			                                       const std::string& key, const std::string& value) {
 				std::string quoted_value = value;
 				boost::replace_all(quoted_value, "\"", "\\\"");
 				write_key_value(key, "\"" + value + "\"");
 			};
 			const auto write_key_value_int = [&write_key_value](
-			   const std::string& key, const int value) {
+			                                    const std::string& key, const int value) {
 				write_key_value(key, boost::lexical_cast<std::string>(value));
 			};
 			write_string("{\n  ");

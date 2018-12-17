@@ -26,7 +26,7 @@
 
 /**
  * Deletes the bob at the given location
-*/
+ */
 int32_t EditorDeleteCritterTool::handle_click_impl(
    const Widelands::World&,
    const Widelands::NodeAndTriangle<Widelands::Coords>& center,

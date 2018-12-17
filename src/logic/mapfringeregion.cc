@@ -102,4 +102,4 @@ template <> bool MapFringeRegion<Area<>>::advance(const Map& map) {
 	}
 	return phase_;
 }
-}
+}  // namespace Widelands

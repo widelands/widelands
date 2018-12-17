@@ -37,6 +37,6 @@ struct MapPortSpacesPacket {
 	//  properly configured EditorGameBase object.
 	void pre_read(FileSystem&, Map*);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_PORT_SPACES_PACKET_H

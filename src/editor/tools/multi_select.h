@@ -32,7 +32,7 @@
  * thing. Like more than one texture, more than one map object
  *
  * This is a helper class, no Editor Tool (might be usable in game too)
-*/
+ */
 struct MultiSelect {
 	MultiSelect() : nr_enabled_(0) {
 	}

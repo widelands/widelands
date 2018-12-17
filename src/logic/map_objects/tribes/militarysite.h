@@ -189,6 +189,6 @@ private:
 	bool soldier_upgrade_try_;  // optimization -- if everybody is zero-level, do not downgrade
 	bool doing_upgrade_request_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_MILITARYSITE_H

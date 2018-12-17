@@ -437,8 +437,9 @@ void RealFSImpl::fs_rename(const std::string& old_name, const std::string& new_n
 	const std::string fullname1 = canonicalize_name(old_name);
 	const std::string fullname2 = canonicalize_name(new_name);
 	if (rename(fullname1.c_str(), fullname2.c_str()) != 0)
-		throw FileError("RealFSImpl::fs_rename", fullname1, std::string("unable to rename file to ") +
-		                                                       fullname2 + ", " + strerror(errno));
+		throw FileError(
+		   "RealFSImpl::fs_rename", fullname1,
+		   std::string("unable to rename file to ") + fullname2 + ", " + strerror(errno));
 }
 
 /*****************************************************************************
@@ -471,7 +472,7 @@ struct RealFSStreamRead : public StreamRead {
 private:
 	FILE* file_;
 };
-}
+}  // namespace
 
 StreamRead* RealFSImpl::open_stream_read(const std::string& fname) {
 	const std::string fullname = canonicalize_name(fname);
@@ -514,7 +515,7 @@ private:
 	std::string filename_;
 	FILE* file_;
 };
-}
+}  // namespace
 
 StreamWrite* RealFSImpl::open_stream_write(const std::string& fname) {
 	const std::string fullname = canonicalize_name(fname);

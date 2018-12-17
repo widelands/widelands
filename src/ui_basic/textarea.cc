@@ -200,4 +200,4 @@ void Textarea::update_desired_size() {
 	}
 	set_desired_size(w, h);
 }
-}
+}  // namespace UI

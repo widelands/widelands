@@ -47,6 +47,6 @@ private:
 	Worker& worker_;
 	Economy* economy_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_IDLEWORKERSUPPLY_H
