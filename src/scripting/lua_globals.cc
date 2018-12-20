@@ -198,7 +198,7 @@ static int L_ngettext(lua_State* L) {
 .. function:: pgettext(msgctxt, msgid)
 
    A wrapper for the pgettext() function, needed for allowing multiple translations of the same
-string according to context.
+   string according to context.
 
    :arg msgctxt: a named context for this string for disambiguation
    :type msgctxt: :class:`string`
@@ -253,7 +253,7 @@ static int L_include(lua_State* L) {
 .. function:: ticks()
 
    Returns an integer value representing the number of milliseconds since the SDL library
-initialized.
+   initialized.
 */
 static int L_ticks(lua_State* L) {
 	lua_pushinteger(L, SDL_GetTicks());
