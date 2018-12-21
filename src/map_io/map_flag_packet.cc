@@ -150,4 +150,4 @@ void MapFlagPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSaver
 
 	fw.write(fs, "binary/flag");
 }
-}
+}  // namespace Widelands

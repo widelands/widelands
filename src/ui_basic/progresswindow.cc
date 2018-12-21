@@ -135,4 +135,4 @@ void ProgressWindow::remove_visualization(IProgressVisualization* instance) {
 		}
 	}
 }
-}
+}  // namespace UI

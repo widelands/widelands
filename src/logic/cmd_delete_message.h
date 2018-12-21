@@ -49,6 +49,6 @@ private:
 	PlayerNumber player;
 	MessageId message;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_DELETE_MESSAGE_H

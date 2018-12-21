@@ -28,7 +28,7 @@
 namespace Widelands {
 class Game;
 class PlayerCommand;
-}
+}  // namespace Widelands
 
 /**
  * A game controller implements the policies surrounding the actual

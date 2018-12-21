@@ -346,9 +346,8 @@ void FieldActionWindow::add_buttons_auto() {
 				add_button(buildbox, "destroy_road", pic_remroad, &FieldActionWindow::act_removeroad,
 				           _("Destroy a road"));
 		}
-	} else if (player_ &&
-	           1 < player_->vision(
-	                  Widelands::Map::get_index(node_, ibase().egbase().map().get_width())))
+	} else if (player_ && 1 < player_->vision(Widelands::Map::get_index(
+	                             node_, ibase().egbase().map().get_width())))
 		add_buttons_attack();
 
 	//  Watch actions, only when game (no use in editor) same for statistics.

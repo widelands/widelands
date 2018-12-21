@@ -101,6 +101,6 @@ private:
 	std::vector<MapObject*> schedule_destroy_;
 	std::vector<Bob*> schedule_act_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_OBJECT_LOADER_H

@@ -142,4 +142,4 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 
 	fw.write(fs, "binary/interactive_player");
 }
-}
+}  // namespace Widelands

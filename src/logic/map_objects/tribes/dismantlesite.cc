@@ -38,9 +38,9 @@
 namespace Widelands {
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
+ */
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
@@ -230,4 +230,4 @@ void DismantleSite::draw(uint32_t gametime,
 	dst->blit_animation(point_on_dst, scale, building_->get_unoccupied_animation(), tanim,
 	                    player_color, 100 - ((get_built_per64k() * 100) >> 16));
 }
-}
+}  // namespace Widelands

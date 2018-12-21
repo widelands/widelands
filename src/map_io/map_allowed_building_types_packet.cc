@@ -119,4 +119,4 @@ void MapAllowedBuildingTypesPacket::write(FileSystem& fs, EditorGameBase& egbase
 
 	prof.write("allowed_building_types", false, fs);
 }
-}
+}  // namespace Widelands

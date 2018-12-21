@@ -120,4 +120,4 @@ void MapVersionPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSa
 
 	prof.write("version", false, fs);
 }
-}
+}  // namespace Widelands

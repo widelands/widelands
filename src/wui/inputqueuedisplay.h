@@ -35,12 +35,12 @@ class InteractiveGameBase;
 namespace UI {
 class Panel;
 struct Radiogroup;
-}
+}  // namespace UI
 
 namespace Widelands {
 class Building;
 class InputQueue;
-}
+}  // namespace Widelands
 
 /**
  * This passive class displays the status of an InputQueue

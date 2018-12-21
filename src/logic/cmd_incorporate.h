@@ -45,6 +45,6 @@ struct CmdIncorporate : public GameLogicCommand {
 private:
 	Worker* worker;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_INCORPORATE_H

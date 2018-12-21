@@ -276,4 +276,4 @@ void ReplayWriter::send_sync(const Md5Checksum& hash) {
 	cmdlog_->data(hash.data, sizeof(hash.data));
 	cmdlog_->flush();
 }
-}
+}  // namespace Widelands

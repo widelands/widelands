@@ -110,4 +110,4 @@ void MapTerrainPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 
 	fw.write(fs, "binary/terrain");
 }
-}
+}  // namespace Widelands

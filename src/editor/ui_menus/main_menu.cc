@@ -38,7 +38,7 @@ inline EditorInteractive& EditorMainMenu::eia() {
 
 /**
  * Create all the buttons etc...
-*/
+ */
 EditorMainMenu::EditorMainMenu(EditorInteractive& parent, UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "main_menu", &registry, 2 * margin + width, 0, _("Main Menu")),
      box_(this, margin, margin, UI::Box::Vertical, width, get_h() - 2 * margin, vspacing),

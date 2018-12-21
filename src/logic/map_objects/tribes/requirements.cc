@@ -220,4 +220,4 @@ static Requirements read_attribute(FileRead& fr, EditorGameBase&, MapObjectLoade
 }
 
 const RequirementsStorage RequireAttribute::storage(requirementIdAttribute, read_attribute);
-}
+}  // namespace Widelands

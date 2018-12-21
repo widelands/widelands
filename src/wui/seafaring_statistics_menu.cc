@@ -100,8 +100,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
                (boost::format(_("%1% (Hotkey: %2%)")) %
                 /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                _("Watch the selected ship") %
-                pgettext("hotkey", "W"))
+                _("Watch the selected ship") % pgettext("hotkey", "W"))
                   .str()),
      openwindowbtn_(
         &navigation_box_,
@@ -131,8 +130,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
                     (boost::format(_("%1% (Hotkey: %2%)")) %
                      /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                     _("Center the map on the selected ship") %
-                     pgettext("hotkey", "G"))
+                     _("Center the map on the selected ship") % pgettext("hotkey", "G"))
                        .str()),
      table_(&main_box_, 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
 
@@ -205,7 +203,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 				   NEVER_HERE();
 			   }
 		   }
-		});
+	   });
 }
 
 const std::string
