@@ -439,7 +439,6 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
  * Draw this soldier. This basically draws him as a worker, but add health points
  */
 void Soldier::draw(const EditorGameBase& game,
-                   const TextToDraw&,
                    const Vector2f& field_on_dst,
                    const float scale,
                    RenderTarget* dst) const {
@@ -524,7 +523,7 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 	dst->fill_rect(energy_complement, complement_color);
 
 	const auto draw_level_image = [icon_size, scale, &draw_position, dst](
-	   const Vector2i& offset, const Image* image) {
+	                                 const Vector2i& offset, const Image* image) {
 		dst->blitrect_scale(
 		   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
 		   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
@@ -1546,7 +1545,7 @@ void Soldier::send_space_signals(Game& game) {
 	}
 }
 
-void Soldier::log_general_info(const EditorGameBase& egbase) {
+void Soldier::log_general_info(const EditorGameBase& egbase) const {
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");
 	molog("Levels: %d/%d/%d/%d\n", health_level_, attack_level_, defense_level_, evade_level_);
@@ -1670,4 +1669,4 @@ void Soldier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(battle_));
 }
-}
+}  // namespace Widelands

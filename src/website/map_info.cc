@@ -36,25 +36,9 @@
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "map_io/widelands_map_loader.h"
+#include "website/website_common.h"
 
 using namespace Widelands;
-
-namespace {
-
-// Setup the static objects Widelands needs to operate and initializes systems.
-void initialize() {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		throw wexception("Unable to initialize SDL: %s", SDL_GetError());
-	}
-
-	g_fs = new LayeredFileSystem();
-	g_fs->add_file_system(&FileSystem::create(INSTALL_DATADIR));
-
-	g_gr = new Graphic();
-	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
-}
-
-}  // namespace
 
 int main(int argc, char** argv) {
 	if (!(2 <= argc && argc <= 3)) {
@@ -103,17 +87,17 @@ int main(int argc, char** argv) {
 
 			const auto write_string = [&fw](const std::string& s) { fw.data(s.c_str(), s.size()); };
 			const auto write_key_value = [&write_string](
-			   const std::string& key, const std::string& quoted_value) {
+			                                const std::string& key, const std::string& quoted_value) {
 				write_string((boost::format("\"%s\": %s") % key % quoted_value).str());
 			};
 			const auto write_key_value_string = [&write_key_value](
-			   const std::string& key, const std::string& value) {
+			                                       const std::string& key, const std::string& value) {
 				std::string quoted_value = value;
 				boost::replace_all(quoted_value, "\"", "\\\"");
 				write_key_value(key, "\"" + value + "\"");
 			};
 			const auto write_key_value_int = [&write_key_value](
-			   const std::string& key, const int value) {
+			                                    const std::string& key, const int value) {
 				write_key_value(key, boost::lexical_cast<std::string>(value));
 			};
 			write_string("{\n  ");
@@ -142,9 +126,12 @@ int main(int argc, char** argv) {
 			write_string("}\n");
 			fw.write(*in_out_filesystem, (map_file + ".json").c_str());
 		}
+		egbase.cleanup_objects();
 	} catch (std::exception& e) {
 		log("Exception: %s.\n", e.what());
+		cleanup();
 		return 1;
 	}
+	cleanup();
 	return 0;
 }

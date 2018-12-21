@@ -15,11 +15,12 @@ fi
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   # Install osx dependencies
-  # boost and cmake are preinstalled :)
-  brew install gettext glew icu4c sdl2 sdl2_image sdl2_mixer sdl2_ttf zlib
+  # boost, cmake, gettext and icu4c are preinstalled :)
+  brew install glew sdl2 sdl2_image sdl2_mixer sdl2_ttf
   # brew doesn't add a link by default
   brew link --force gettext
-  brew link --force icu4c
+  # icu4c cannot be forced
+  export ICU_ROOT="$(brew --prefix icu4c)"
 fi
 
 # Configure the build

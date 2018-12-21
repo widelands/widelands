@@ -26,18 +26,19 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "graphic/align.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "ui_basic/mouse_constants.h"
 #include "ui_basic/tabpanel.h"
+#include "ui_basic/window.h"
 
 namespace {
 
 int base_height(int button_dimension) {
 	return std::max(
 	   button_dimension,
-	   UI::g_fh1->render(as_uifont(UI::g_fh1->fontset()->representative_character()))->height() + 2);
+	   UI::g_fh->render(as_uifont(UI::g_fh->fontset()->representative_character()))->height() + 2);
 }
 
 }  // namespace
@@ -79,8 +80,7 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
                                     style == UI::PanelStyle::kFsMenu ?
                                        UI::ButtonStyle::kFsMenuMenu :
                                        UI::ButtonStyle::kWuiSecondary,
-                                    g_gr->images().get("images/ui_basic/scrollbar_down.png"),
-                                    pgettext("dropdown", "Select Item")) :
+                                    g_gr->images().get("images/ui_basic/scrollbar_down.png")) :
                      nullptr),
      display_button_(&button_box_,
                      "dropdown_label",
@@ -96,6 +96,11 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
      label_(label),
      type_(type),
      is_enabled_(true) {
+	if (label.empty()) {
+		set_tooltip(pgettext("dropdown", "Select Item"));
+	} else {
+		set_tooltip(label);
+	}
 
 	// Close whenever another dropdown is opened
 	subscriber_ = Notifications::subscribe<NoteDropdown>([this](const NoteDropdown& note) {
@@ -125,17 +130,36 @@ BaseDropdown::BaseDropdown(UI::Panel* parent,
 	list_->clicked.connect(boost::bind(&BaseDropdown::toggle_list, this));
 	set_can_focus(true);
 	set_value();
+
+	// Find parent windows so that we can move the list along with them
+	UI::Panel* parent_window_candidate = get_parent();
+	while (parent_window_candidate) {
+		if (upcast(UI::Window, window, parent_window_candidate)) {
+			window->position_changed.connect(boost::bind(&BaseDropdown::layout, this));
+		}
+		parent_window_candidate = parent_window_candidate->get_parent();
+	}
+
 	layout();
 }
 
 BaseDropdown::~BaseDropdown() {
-	// Listselect is already taking care of the cleanup,
-	// so no call to clear() needed here.
+	// The list needs to be able to drop outside of windows, so it won't close with the window.
+	// Deleting here leads to conflict with who gets to delete it, so we hide it instead.
+	// TODO(GunChleoc): Investigate whether we can find a better solution for this
+	if (list_) {
+		list_->clear();
+		list_->set_visible(false);
+	}
 }
 
 void BaseDropdown::set_height(int height) {
 	max_list_height_ = height - base_height(button_dimension_);
 	layout();
+}
+
+void BaseDropdown::set_max_items(int items) {
+	set_height(list_->get_lineheight() * items + base_height(button_dimension_));
 }
 
 void BaseDropdown::layout() {
@@ -152,12 +176,12 @@ void BaseDropdown::layout() {
 	// Update list position. The list is hooked into the highest parent that we can get so that we
 	// can drop down outside the panel. Positioning breaks down with TabPanels, so we exclude them.
 	UI::Panel* parent = get_parent();
-	int new_list_y = get_y() + parent->get_y();
-	int new_list_x = get_x() + parent->get_x();
+	int new_list_x = get_x() + parent->get_x() + parent->get_lborder();
+	int new_list_y = get_y() + parent->get_y() + parent->get_tborder();
 	while (parent->get_parent() && !is_a(UI::TabPanel, parent->get_parent())) {
 		parent = parent->get_parent();
-		new_list_y += parent->get_y();
-		new_list_x += parent->get_x();
+		new_list_x += parent->get_x() + parent->get_lborder();
+		new_list_y += parent->get_y() + parent->get_tborder();
 	}
 
 	// Drop up instead of down if it doesn't fit
@@ -176,6 +200,14 @@ void BaseDropdown::layout() {
 	}
 
 	list_->set_pos(Vector2i(new_list_x + list_offset_x_, new_list_y + list_offset_y_));
+
+	// Keep open list on top while dragging
+	// TODO(GunChleoc): It would be better to close the list if any other panel is clicked,
+	// but we'd need a global "clicked" signal in the Panel class for that.
+	// This will imply a complete overhaul of the signal names.
+	if (list_->is_visible()) {
+		list_->move_to_top();
+	}
 }
 
 void BaseDropdown::add(const std::string& name,
@@ -221,6 +253,9 @@ void BaseDropdown::set_image(const Image* image) {
 void BaseDropdown::set_tooltip(const std::string& text) {
 	tooltip_ = text;
 	display_button_.set_tooltip(tooltip_);
+	if (push_button_) {
+		push_button_->set_tooltip(push_button_->enabled() ? tooltip_ : "");
+	}
 }
 
 void BaseDropdown::set_errored(const std::string& error_message) {
@@ -237,7 +272,7 @@ void BaseDropdown::set_enabled(bool on) {
 	set_can_focus(on);
 	if (push_button_ != nullptr) {
 		push_button_->set_enabled(on);
-		push_button_->set_tooltip(on ? pgettext("dropdown", "Select Item") : "");
+		push_button_->set_tooltip(on ? tooltip_ : "");
 	}
 	display_button_.set_enabled(on);
 	list_->set_visible(false);

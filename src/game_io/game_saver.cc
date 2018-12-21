@@ -101,4 +101,4 @@ void GameSaver::save() {
 	}
 	log("took %ums\n", timer.ms_since_last_query());
 }
-}
+}  // namespace Widelands

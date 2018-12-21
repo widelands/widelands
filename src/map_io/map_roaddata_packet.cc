@@ -73,8 +73,8 @@ void MapRoaddataPacket::read(FileSystem& fs,
 					}
 
 					road.set_owner(egbase.get_player(player_index));
-					road.busyness_ = fr.unsigned_32();
-					road.busyness_last_update_ = fr.unsigned_32();
+					road.wallet_ = fr.unsigned_32();
+					road.last_wallet_charge_ = fr.unsigned_32();
 					road.type_ = fr.unsigned_32();
 					{
 						uint32_t const flag_0_serial = fr.unsigned_32();
@@ -190,8 +190,8 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 				//  Theres only the owner
 				fw.unsigned_8(r->owner().player_number());
 
-				fw.unsigned_32(r->busyness_);
-				fw.unsigned_32(r->busyness_last_update_);
+				fw.unsigned_32(r->wallet_);
+				fw.unsigned_32(r->last_wallet_charge_);
 
 				fw.unsigned_32(r->type_);
 
@@ -238,4 +238,4 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 
 	fw.write(fs, "binary/road_data");
 }
-}
+}  // namespace Widelands

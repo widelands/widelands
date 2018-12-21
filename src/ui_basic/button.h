@@ -145,6 +145,9 @@ public:
 	/// Convenience function. If 'pressed', sets the style to kPermpressed, otherwise to kRaised.
 	void set_perm_pressed(bool pressed);
 
+	/// Change the background style of the button.
+	void set_background_style(UI::ButtonStyle bstyle);
+
 	/// Convenience function. Toggles between raised and permpressed style
 	void toggle();
 
@@ -170,7 +173,6 @@ protected:
 	const Image* title_image_;  //  custom icon on the button
 
 	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
-	RGBColor clr_down_;                           //  color of border while a flat button is "down"
 };
 
 }  // namespace UI

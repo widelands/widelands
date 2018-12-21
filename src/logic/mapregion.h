@@ -77,6 +77,6 @@ private:
 	typename AreaType::RadiusType remaining_in_row_;
 	typename AreaType::RadiusType remaining_rows_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPREGION_H

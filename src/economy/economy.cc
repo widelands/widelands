@@ -41,14 +41,19 @@
 
 namespace Widelands {
 
-Economy::Economy(Player& player) : owner_(player), request_timerid_(0), has_window_(false) {
+Serial Economy::last_economy_serial_ = 0;
+
+Economy::Economy(Player& player) : Economy(player, last_economy_serial_++) {
+}
+
+Economy::Economy(Player& player, Serial init_serial)
+   : serial_(init_serial), owner_(player), request_timerid_(0), has_window_(false) {
+	last_economy_serial_ = std::max(last_economy_serial_, serial_ + 1);
 	const TribeDescr& tribe = player.tribe();
 	DescriptionIndex const nr_wares = player.egbase().tribes().nrwares();
 	DescriptionIndex const nr_workers = player.egbase().tribes().nrworkers();
 	wares_.set_nrwares(nr_wares);
 	workers_.set_nrwares(nr_workers);
-
-	player.add_economy(*this);
 
 	ware_target_quantities_ = new TargetQuantity[nr_wares];
 	for (DescriptionIndex i = 0; i < nr_wares; ++i) {
@@ -69,12 +74,11 @@ Economy::Economy(Player& player) : owner_(player), request_timerid_(0), has_wind
 		worker_target_quantities_[i] = tq;
 	}
 
-	router_ = new Router(boost::bind(&Economy::reset_all_pathfinding_cycles, this));
+	router_.reset(new Router(boost::bind(&Economy::reset_all_pathfinding_cycles, this)));
 }
 
 Economy::~Economy() {
-	Notifications::publish(NoteEconomy{this, this, NoteEconomy::Action::kDeleted});
-	owner_.remove_economy(*this);
+	Notifications::publish(NoteEconomy{serial_, serial_, NoteEconomy::Action::kDeleted});
 
 	if (requests_.size())
 		log("Warning: Economy still has requests left on destruction\n");
@@ -85,8 +89,6 @@ Economy::~Economy() {
 
 	delete[] ware_target_quantities_;
 	delete[] worker_target_quantities_;
-
-	delete router_;
 }
 
 /**
@@ -104,7 +106,7 @@ Flag* Economy::get_arbitrary_flag() {
  * merged.
  * Since we could merge into both directions, we preserve the economy that is
  * currently bigger (should be more efficient).
-*/
+ */
 void Economy::check_merge(Flag& f1, Flag& f2) {
 	Economy* e1 = f1.get_economy();
 	Economy* e2 = f2.get_economy();
@@ -190,7 +192,7 @@ void Economy::check_splits() {
  *
  * This functionality has been moved to Router(). This is currently
  * merely a delegator.
-*/
+ */
 bool Economy::find_route(
    Flag& start, Flag& end, Route* const route, WareWorker const type, int32_t const cost_cutoff) {
 	assert(start.get_economy() == this);
@@ -249,7 +251,7 @@ Warehouse* Economy::find_closest_warehouse(Flag& start,
 /**
  * Add a flag to the flag array.
  * Only call from Flag init and split/merger code!
-*/
+ */
 void Economy::add_flag(Flag& flag) {
 	assert(flag.get_economy() == nullptr);
 
@@ -262,21 +264,22 @@ void Economy::add_flag(Flag& flag) {
 /**
  * Remove a flag from the flag array.
  * Only call from Flag cleanup and split/merger code!
-*/
+ */
 void Economy::remove_flag(Flag& flag) {
 	assert(flag.get_economy() == this);
 
 	do_remove_flag(flag);
 
 	// automatically delete the economy when it becomes empty.
-	if (flags_.empty())
-		delete this;
+	if (flags_.empty()) {
+		owner_.remove_economy(serial_);
+	}
 }
 
 /**
  * Remove the flag, but don't delete the economy automatically.
  * This is called from the merge code.
-*/
+ */
 void Economy::do_remove_flag(Flag& flag) {
 	flag.set_economy(nullptr);
 
@@ -330,7 +333,7 @@ void Economy::set_worker_target_quantity(DescriptionIndex const ware_type,
  * has felled a tree.
  * This is also called when a ware is added to the economy through trade or
  * a merger.
-*/
+ */
 void Economy::add_wares(DescriptionIndex const id, Quantity const count) {
 	wares_.add(id, count);
 	start_request_timer();
@@ -349,7 +352,7 @@ void Economy::add_workers(DescriptionIndex const id, Quantity const count) {
  * eaten or a warehouse has been destroyed.
  * This is also called when a ware is removed from the economy through trade or
  * a split of the Economy.
-*/
+ */
 void Economy::remove_wares(DescriptionIndex const id, Quantity const count) {
 	assert(owner_.egbase().tribes().ware_exists(id));
 	wares_.remove(id, count);
@@ -372,14 +375,14 @@ void Economy::remove_workers(DescriptionIndex const id, Quantity const count) {
  * Add the warehouse to our list of warehouses.
  * This also adds the wares in the warehouse to the economy. However, if wares
  * are added to the warehouse in the future, add_wares() must be called.
-*/
+ */
 void Economy::add_warehouse(Warehouse& wh) {
 	warehouses_.push_back(&wh);
 }
 
 /**
  * Remove the warehouse and its wares from the economy.
-*/
+ */
 void Economy::remove_warehouse(Warehouse& wh) {
 	for (size_t i = 0; i < warehouses_.size(); ++i)
 		if (warehouses_[i] == &wh) {
@@ -397,7 +400,7 @@ void Economy::remove_warehouse(Warehouse& wh) {
 /**
  * Consider the request, try to fulfill it immediately or queue it for later.
  * Important: This must only be called by the \ref Request class.
-*/
+ */
 void Economy::add_request(Request& req) {
 	assert(req.is_open());
 	assert(!has_request(req));
@@ -413,7 +416,7 @@ void Economy::add_request(Request& req) {
 /**
  * \return true if the given Request is registered with the \ref Economy, false
  * otherwise
-*/
+ */
 bool Economy::has_request(Request& req) {
 	return std::find(requests_.begin(), requests_.end(), &req) != requests_.end();
 }
@@ -421,7 +424,7 @@ bool Economy::has_request(Request& req) {
 /**
  * Remove the request from this economy.
  * Important: This must only be called by the \ref Request class.
-*/
+ */
 void Economy::remove_request(Request& req) {
 	RequestList::iterator const it = std::find(requests_.begin(), requests_.end(), &req);
 
@@ -439,7 +442,7 @@ void Economy::remove_request(Request& req) {
 
 /**
  * Add a supply to our list of supplies.
-*/
+ */
 void Economy::add_supply(Supply& supply) {
 	supplies_.add_supply(supply);
 	start_request_timer();
@@ -447,7 +450,7 @@ void Economy::add_supply(Supply& supply) {
 
 /**
  * Remove a supply from our list of supplies.
-*/
+ */
 void Economy::remove_supply(Supply& supply) {
 	supplies_.remove_supply(supply);
 }
@@ -507,7 +510,7 @@ bool Economy::needs_worker(DescriptionIndex const worker_type) const {
  *
  * Also transfer all wares and wares request. Try to resolve the new ware
  * requests if possible.
-*/
+ */
 void Economy::merge(Economy& e) {
 	for (const DescriptionIndex& ware_index : owner_.tribe().wares()) {
 		TargetQuantity other_tq = e.ware_target_quantities_[ware_index];
@@ -528,7 +531,7 @@ void Economy::merge(Economy& e) {
 	//  If the options window for e is open, but not the one for this, the user
 	//  should still have an options window after the merge.
 	if (e.has_window() && !has_window()) {
-		Notifications::publish(NoteEconomy{&e, this, NoteEconomy::Action::kMerged});
+		Notifications::publish(NoteEconomy{e.serial(), serial_, NoteEconomy::Action::kMerged});
 	}
 
 	for (std::vector<Flag*>::size_type i = e.get_nrflags() + 1; --i;) {
@@ -542,9 +545,7 @@ void Economy::merge(Economy& e) {
 
 	// Remember that the other economy may not have been connected before the merge
 	split_checks_.insert(split_checks_.end(), e.split_checks_.begin(), e.split_checks_.end());
-
-	// implicitly delete the economy
-	delete &e;
+	owner_.remove_economy(e.serial());
 }
 
 /**
@@ -553,21 +554,21 @@ void Economy::merge(Economy& e) {
 void Economy::split(const std::set<OPtr<Flag>>& flags) {
 	assert(!flags.empty());
 
-	Economy& e = *new Economy(owner_);
+	Economy* e = owner_.create_economy();
 
 	for (const DescriptionIndex& ware_index : owner_.tribe().wares()) {
-		e.ware_target_quantities_[ware_index] = ware_target_quantities_[ware_index];
+		e->ware_target_quantities_[ware_index] = ware_target_quantities_[ware_index];
 	}
 
 	for (const DescriptionIndex& worker_index : owner_.tribe().workers()) {
-		e.worker_target_quantities_[worker_index] = worker_target_quantities_[worker_index];
+		e->worker_target_quantities_[worker_index] = worker_target_quantities_[worker_index];
 	}
 
 	for (const OPtr<Flag>& temp_flag : flags) {
 		Flag& flag = *temp_flag.get(owner().egbase());
 		assert(flags_.size() > 1);  // We will not be deleted in remove_flag, right?
 		remove_flag(flag);
-		e.add_flag(flag);
+		e->add_flag(flag);
 	}
 
 	// As long as rebalance commands are tied to specific flags, we
@@ -588,7 +589,7 @@ void Economy::start_request_timer(int32_t const delta) {
 /**
  * Find the supply that is best suited to fulfill the given request.
  * \return 0 if no supply is found, the best supply otherwise
-*/
+ */
 Supply* Economy::find_best_supply(Game& game, const Request& req, int32_t& cost) {
 	assert(req.is_open());
 
@@ -679,9 +680,8 @@ struct RequestSupplyPair {
 	};
 };
 
-using RSPairQueue = std::priority_queue<RequestSupplyPair,
-                                        std::vector<RequestSupplyPair>,
-                                        RequestSupplyPair::Compare>;
+using RSPairQueue = std::
+   priority_queue<RequestSupplyPair, std::vector<RequestSupplyPair>, RequestSupplyPair::Compare>;
 
 struct RSPairStruct {
 	RSPairQueue queue;
@@ -694,7 +694,7 @@ struct RSPairStruct {
 
 /**
  * Walk all Requests and find potential transfer candidates.
-*/
+ */
 void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 	// Algorithm can decide that wares are not to be delivered to constructionsite
 	// right now, therefore we need to shcedule next pairing
@@ -1060,7 +1060,7 @@ void Economy::handle_active_supplies(Game& game) {
 /**
  * Balance Requests and Supplies by collecting and weighing pairs, and
  * starting transfers for them.
-*/
+ */
 void Economy::balance(uint32_t const timerid) {
 	if (request_timerid_ != timerid) {
 		return;
@@ -1077,4 +1077,4 @@ void Economy::balance(uint32_t const timerid) {
 
 	handle_active_supplies(game);
 }
-}
+}  // namespace Widelands

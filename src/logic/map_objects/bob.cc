@@ -648,9 +648,8 @@ void Bob::movepath_update(Game& game, State& state) {
 		}
 	}
 
-	bool forcemove =
-	   (state.ivar2 &&
-	    static_cast<Path::StepVector::size_type>(state.ivar1) + 1 == path->get_nsteps());
+	bool forcemove = (state.ivar2 && static_cast<Path::StepVector::size_type>(state.ivar1) + 1 ==
+	                                    path->get_nsteps());
 
 	++state.ivar1;
 	return start_task_move(game, dir, state.diranims, state.ivar2 == 2 ? true : forcemove);
@@ -658,10 +657,10 @@ void Bob::movepath_update(Game& game, State& state) {
 }
 
 /**
-* Move into one direction for one step.
-* \li ivar1: direction
-* \li ivar2: non-zero if the move should be forced
-*/
+ * Move into one direction for one step.
+ * \li ivar1: direction
+ * \li ivar2: non-zero if the move should be forced
+ */
 Bob::Task const Bob::taskMove = {"move", &Bob::move_update, nullptr, nullptr, true};
 
 /**
@@ -758,7 +757,6 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const TextToDraw&,
                const Vector2f& field_on_dst,
                const float scale,
                RenderTarget* dst) const {
@@ -902,7 +900,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 }
 
 /// Give debug information.
-void Bob::log_general_info(const EditorGameBase& egbase) {
+void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF;
 	molog("Owner: %p\n", owner_);
 	FORMAT_WARNINGS_ON;
@@ -1161,4 +1159,4 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 		fw.c_string(state.program ? state.program->get_name() : "");
 	}
 }
-}
+}  // namespace Widelands

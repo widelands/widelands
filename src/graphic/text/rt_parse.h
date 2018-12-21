@@ -125,6 +125,6 @@ private:
 	TagConstraints tag_constraints_;
 	std::unique_ptr<TextStream> text_stream_;
 };
-}
+}  // namespace RT
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_PARSE_H

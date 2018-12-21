@@ -179,16 +179,10 @@ print_loading_message("┗━ took", function()
       include "tribes/immovables/reed_ripe/init.lua"
       include "tribes/immovables/reed_small/init.lua"
       include "tribes/immovables/reed_tiny/init.lua"
-      include "tribes/immovables/resi_coal1/init.lua"
-      include "tribes/immovables/resi_coal2/init.lua"
-      include "tribes/immovables/resi_gold1/init.lua"
-      include "tribes/immovables/resi_gold2/init.lua"
-      include "tribes/immovables/resi_iron1/init.lua"
-      include "tribes/immovables/resi_iron2/init.lua"
-      include "tribes/immovables/resi_none/init.lua"
-      include "tribes/immovables/resi_stones1/init.lua"
-      include "tribes/immovables/resi_stones2/init.lua"
-      include "tribes/immovables/resi_water1/init.lua"
+      include "tribes/immovables/resi/atlanteans/init.lua"
+      include "tribes/immovables/resi/barbarians/init.lua"
+      include "tribes/immovables/resi/empire/init.lua"
+      include "tribes/immovables/resi/frisians/init.lua"
       include "tribes/immovables/shipconstruction_atlanteans/init.lua"
       include "tribes/immovables/shipconstruction_barbarians/init.lua"
       include "tribes/immovables/shipconstruction_empire/init.lua"
@@ -369,13 +363,6 @@ print_loading_message("┗━ took", function()
       include "tribes/buildings/warehouses/frisians/warehouse/init.lua"
    end)
 
-   -- ===================================
-   --    Markets
-   -- ===================================
-
-   print_loading_message("┃    Markets", function()
-      include "tribes/buildings/markets/barbarians/market/init.lua"
-   end)
    -- ===================================
    --    Productionsites
    -- ===================================

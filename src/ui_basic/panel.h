@@ -25,13 +25,14 @@
 #include <string>
 
 #include <SDL_keyboard.h>
+#include <boost/signals2/signal.hpp>
 #include <boost/signals2/trackable.hpp>
 
 #include "base/macros.h"
 #include "base/rect.h"
 #include "base/vector.h"
 #include "graphic/align.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/panel_styles.h"
 
 class RenderTarget;
@@ -86,6 +87,8 @@ public:
 	      int const nh,
 	      const std::string& tooltip_text = std::string());
 	virtual ~Panel();
+
+	boost::signals2::signal<void()> position_changed;
 
 	Panel* get_parent() const {
 		return parent_;
@@ -419,6 +422,6 @@ struct NamedPanel : public Panel {
 private:
 	std::string name_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_PANEL_H

@@ -61,7 +61,7 @@ struct Carrier : public Worker {
 	void start_task_transport(Game&, int32_t fromflag);
 	bool start_task_walktoflag(Game&, int32_t flag, bool offset = false);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	static Task const taskRoad;
 
@@ -106,6 +106,6 @@ protected:
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_CARRIER_H

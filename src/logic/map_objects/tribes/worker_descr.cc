@@ -40,8 +40,7 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
                          const EditorGameBase& egbase)
    : BobDescr(init_descname, init_type, MapObjectDescr::OwnerType::kTribe, table),
      ware_hotspot_(table.has_key("ware_hotspot") ?
-                      Vector2i(table.get_table("ware_hotspot")->get_int(1),
-                               table.get_table("ware_hotspot")->get_int(2)) :
+                      table.get_vector<std::string, int>("ware_hotspot") :
                       Vector2i(0, 15)),
      default_target_quantity_(table.has_key("default_target_quantity") ?
                                  table.get_int("default_target_quantity") :
@@ -69,21 +68,24 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
 			try {
-				if (buildcost_.count(key)) {
-					throw GameDataError(
-					   "a buildcost item of this ware type has already been defined: %s", key.c_str());
-				}
 				if (!tribes.ware_exists(tribes.ware_index(key)) &&
 				    !tribes.worker_exists(tribes.worker_index(key))) {
 					throw GameDataError("\"%s\" has not been defined as a ware/worker type (wrong "
 					                    "declaration order?)",
 					                    key.c_str());
 				}
-				int32_t value = items_table->get_int(key);
-				uint8_t const count = value;
-				if (count != value)
-					throw GameDataError("count is out of range 1 .. 255");
-				buildcost_.insert(std::pair<std::string, uint8_t>(key, count));
+				const int32_t value = items_table->get_int(key);
+				if (value < 1) {
+					throw GameDataError("Buildcost: Ware/Worker count needs to be > 0 in "
+					                    "\"%s=%d\".\nEmpty buildcost tables are allowed if you wish to "
+					                    "have an amount of 0.",
+					                    key.c_str(), value);
+				} else if (value > 255) {
+					throw GameDataError("Buildcost: Ware/Worker count needs to be <= 255 in \"%s=%d\".",
+					                    key.c_str(), value);
+				}
+
+				buildcost_.insert(std::pair<std::string, uint8_t>(key, value));
 			} catch (const WException& e) {
 				throw GameDataError("[buildcost] \"%s\": %s", key.c_str(), e.what());
 			}
@@ -168,7 +170,7 @@ Bob& WorkerDescr::create_object() const {
 }
 
 /**
-* check if worker can be substitute for a requested worker type
+ * check if worker can be substitute for a requested worker type
  */
 bool WorkerDescr::can_act_as(DescriptionIndex const index) const {
 	assert(egbase_.tribes().worker_exists(index));

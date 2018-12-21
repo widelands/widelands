@@ -84,9 +84,9 @@ ProductionSite BUILDING
 */
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua
+ */
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          MapObjectType init_type,
@@ -559,7 +559,7 @@ int ProductionSite::warp_worker(EditorGameBase& egbase, const WorkerDescr& wdes)
  * Intercept remove_worker() calls to unassign our worker, if necessary.
  */
 void ProductionSite::remove_worker(Worker& w) {
-	molog("%s leaving\n", w.descr().descname().c_str());
+	molog("%s leaving\n", w.descr().name().c_str());
 	WorkingPosition* wp = working_positions_;
 
 	for (const auto& temp_wp : descr().working_positions()) {
@@ -657,8 +657,8 @@ void ProductionSite::request_worker_callback(
 			if (current == nuwo)
 				throw wexception(
 				   "Something went wrong! No fitting place for worker %s in %s at (%u, %u) found!",
-				   w->descr().descname().c_str(), psite.descr().descname().c_str(),
-				   psite.get_position().x, psite.get_position().y);
+				   w->descr().name().c_str(), psite.descr().name().c_str(), psite.get_position().x,
+				   psite.get_position().y);
 		}
 	}
 
@@ -739,7 +739,7 @@ bool ProductionSite::fetch_from_flag(Game& game) {
 	return true;
 }
 
-void ProductionSite::log_general_info(const EditorGameBase& egbase) {
+void ProductionSite::log_general_info(const EditorGameBase& egbase) const {
 	Building::log_general_info(egbase);
 
 	molog("is_stopped: %u\n", is_stopped_);
@@ -941,6 +941,7 @@ void ProductionSite::program_end(Game& game, ProgramResult const result) {
 		crude_percent_ = crude_percent_ * 98 / 100;
 		break;
 	case None:
+		skipped_programs_.erase(program_name);
 		break;
 	}
 
@@ -998,4 +999,4 @@ void ProductionSite::set_default_anim(std::string anim) {
 
 	default_anim_ = anim;
 }
-}
+}  // namespace Widelands

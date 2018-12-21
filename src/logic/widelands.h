@@ -84,6 +84,7 @@ inline Duration endless() {
 }
 
 using Serial = uint32_t;  /// Serial number for MapObject.
+constexpr Serial kInvalidSerial = std::numeric_limits<uint32_t>::max();
 
 using Direction = uint8_t;
 

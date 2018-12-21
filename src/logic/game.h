@@ -244,9 +244,8 @@ public:
 
 	void sample_statistics();
 
-	const std::string& get_win_condition_displayname() {
-		return win_condition_displayname_;
-	}
+	const std::string& get_win_condition_displayname() const;
+	void set_win_condition_displayname(const std::string& name);
 
 	bool is_replay() const {
 		return replay_;
@@ -348,9 +347,6 @@ inline Coords Game::random_location(Coords location, uint8_t radius) {
 	location.y += logic_rand() % s - radius;
 	return location;
 }
-
-// Returns a value between [0., 1].
-double logic_rand_as_double(Game* game);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_GAME_H

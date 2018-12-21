@@ -50,7 +50,7 @@ class WareDescr;
 class WorkerDescr;
 class TerrainDescription;
 class TribeDescr;
-}
+}  // namespace Widelands
 
 namespace LuaMaps {
 
@@ -134,6 +134,7 @@ public:
 	int get_carrier2(lua_State*);
 	int get_descname(lua_State*);
 	int get_immovables(lua_State*);
+	int get_resource_indicators(lua_State*);
 	int get_geologist(lua_State*);
 	int get_name(lua_State*);
 	int get_port(lua_State*);
@@ -599,7 +600,7 @@ public:
 	int get_becomes(lua_State*);
 	int get_buildcost(lua_State*);
 	int get_employers(lua_State*);
-	int get_is_buildable(lua_State*);
+	int get_buildable(lua_State*);
 	int get_needed_experience(lua_State*);
 
 	/*
@@ -1154,6 +1155,7 @@ public:
 	 */
 	int get_valid_inputs(lua_State* L);
 	int get_valid_workers(lua_State* L);
+	int get_is_stopped(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -1162,6 +1164,7 @@ public:
 	int get_workers(lua_State* L);
 	int set_inputs(lua_State* L);
 	int set_workers(lua_State* L);
+	int toggle_start_stop(lua_State* L);
 
 	/*
 	 * C Methods
@@ -1412,6 +1415,7 @@ public:
 	int get_initial_resource_amount(lua_State*);
 	int get_claimers(lua_State*);
 	int get_owner(lua_State*);
+	int get_buildable(lua_State*);
 
 	/*
 	 * Lua methods
@@ -1485,6 +1489,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State*,
                                                 bool is_ware);
 void luaopen_wlmap(lua_State*);
 
-}  // namespace LuaMap
+}  // namespace LuaMaps
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_MAP_H

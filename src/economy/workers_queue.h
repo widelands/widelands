@@ -70,14 +70,6 @@ public:
 	 */
 	Worker* extract_worker();
 
-	/**
-	 * Loads the state of this WorkersQueue.
-	 * This method should only be used by ExpeditionBootstrap as compatibility helper when loading
-	 * save games for build 19.
-	 * If we ever drop support for them, remove this method and rework ExpeditionBootstrap::load().
-	 */
-	void load_for_expedition(FileRead&, Game&, MapObjectLoader&, uint8_t);
-
 protected:
 	void read_child(FileRead&, Game&, MapObjectLoader&) override;
 	void write_child(FileWrite&, Game&, MapObjectSaver&) override;
@@ -87,6 +79,6 @@ protected:
 	/// The workers currently in the queue
 	std::vector<Worker*> workers_;
 };
-}
+}  // namespace Widelands
 
 #endif  // WL_ECONOMY_WORKERS_QUEUE_H

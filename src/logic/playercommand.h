@@ -543,7 +543,7 @@ struct CmdChangeTargetQuantity : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 protected:
-	uint32_t economy() const {
+	Serial economy() const {
 		return economy_;
 	}
 	DescriptionIndex ware_type() const {
@@ -551,7 +551,7 @@ protected:
 	}
 
 private:
-	uint32_t economy_;
+	Serial economy_;
 	DescriptionIndex ware_type_;
 };
 
@@ -868,6 +868,6 @@ struct CmdProposeTrade : PlayerCommand {
 private:
 	Trade trade_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

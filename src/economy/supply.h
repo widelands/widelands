@@ -111,6 +111,6 @@ struct Supply : public Trackable {
 	 */
 	virtual Worker& launch_worker(Game&, const Request&) = 0;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_SUPPLY_H

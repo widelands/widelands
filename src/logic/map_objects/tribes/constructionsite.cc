@@ -72,9 +72,9 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 }
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/partially_finished/constructionsite/init.lua
+ */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
@@ -337,7 +337,6 @@ Draw the construction site.
 ===============
 */
 void ConstructionSite::draw(uint32_t gametime,
-                            TextToDraw draw_text,
                             const Vector2f& point_on_dst,
                             float scale,
                             RenderTarget* dst) {
@@ -359,8 +358,5 @@ void ConstructionSite::draw(uint32_t gametime,
 	}
 
 	info_.draw(point_on_dst, scale, player_color, dst);
-
-	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
 }
-}
+}  // namespace Widelands

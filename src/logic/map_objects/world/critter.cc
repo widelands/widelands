@@ -181,7 +181,7 @@ PROGRAM task
 
 Follow the steps of a configuration-defined program.
 ivar1 is the next action to be performed.
-ivar2 is used to store description indices selected by plant/setbobdescription
+ivar2 is used to store description indices selected by plant
 objvar1 is used to store objects found by findobject
 coords is used to store target coordinates found by findspace
 
@@ -338,4 +338,4 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	Bob::save(egbase, mos, fw);
 }
-}
+}  // namespace Widelands

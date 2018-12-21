@@ -30,14 +30,14 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 21;
+constexpr uint16_t kCurrentPacketVersion = 22;
 
 void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 	try {
 		FileRead fr;
 		fr.open(fs, "binary/player_info");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= 19 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			uint32_t const max_players = fr.unsigned_16();
 			for (uint32_t i = 1; i < max_players + 1; ++i) {
 				game.remove_player(i);
@@ -59,8 +59,8 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 					player->set_see_all(see_all);
 
 					player->set_ai(fr.c_string());
-					player->read_statistics(fr);
-					player->read_remaining_shipnames(fr, packet_version);
+					player->read_statistics(fr, packet_version);
+					player->read_remaining_shipnames(fr);
 
 					player->casualties_ = fr.unsigned_32();
 					player->kills_ = fr.unsigned_32();
@@ -72,17 +72,15 @@ void GamePlayerInfoPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
 			}
 
 			// Result screen
-			if (packet_version > 19) {
-				PlayersManager* manager = game.player_manager();
-				const uint8_t no_endstatus = fr.unsigned_8();
-				for (uint8_t i = 0; i < no_endstatus; ++i) {
-					PlayerEndStatus status;
-					status.player = fr.unsigned_8();
-					status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
-					status.time = fr.unsigned_32();
-					status.info = fr.c_string();
-					manager->set_player_end_status(status);
-				}
+			PlayersManager* manager = game.player_manager();
+			const uint8_t no_endstatus = fr.unsigned_8();
+			for (uint8_t i = 0; i < no_endstatus; ++i) {
+				PlayerEndStatus status;
+				status.player = fr.unsigned_8();
+				status.result = static_cast<PlayerEndResult>(fr.unsigned_8());
+				status.time = fr.unsigned_32();
+				status.info = fr.c_string();
+				manager->set_player_end_status(status);
 			}
 
 			game.read_statistics(fr);
@@ -148,4 +146,4 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 
 	fw.write(fs, "binary/player_info");
 }
-}
+}  // namespace Widelands

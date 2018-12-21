@@ -75,7 +75,12 @@ namespace Widelands {
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {
 		if (!syncstreamsave_)
-			g_fs->fs_unlink(dumpfname_);
+			try {
+				g_fs->fs_unlink(dumpfname_);
+			} catch (const FileError& e) {
+				// not really a problem if deletion fails, but we'll log it
+				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+			}
 	}
 }
 
@@ -337,6 +342,13 @@ void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& sett
 		loader_ui->set_background(background);
 		loader_ui->step(_("Loading…"));
 		gl.load_game(settings.multiplayer);
+		// Players might have selected a different AI type
+		for (uint8_t i = 0; i < settings.players.size(); ++i) {
+			const PlayerSettings& playersettings = settings.players[i];
+			if (playersettings.state == PlayerSettings::State::kComputer) {
+				get_player(i + 1)->set_ai(playersettings.ai);
+			}
+		}
 	} catch (...) {
 		throw;
 	}
@@ -844,6 +856,13 @@ LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
 
+const std::string& Game::get_win_condition_displayname() const {
+	return win_condition_displayname_;
+}
+void Game::set_win_condition_displayname(const std::string& name) {
+	win_condition_displayname_ = name;
+}
+
 /**
  * Sample global statistics for the game.
  */
@@ -911,17 +930,16 @@ void Game::sample_statistics() {
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
-		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
-			Economy* const eco = plr->get_economy_by_number(j);
+		for (const auto& economy : plr->economies()) {
 			const TribeDescr& tribe = plr->tribe();
 
 			for (const DescriptionIndex& ware_index : tribe.wares()) {
-				wastock += eco->stock_ware(ware_index);
+				wastock += economy.second->stock_ware(ware_index);
 			}
 
 			for (const DescriptionIndex& worker_index : tribe.workers()) {
 				if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-					wostock += eco->stock_worker(worker_index);
+					wostock += economy.second->stock_worker(worker_index);
 				}
 			}
 		}
@@ -1058,8 +1076,4 @@ void Game::write_statistics(FileWrite& fw) {
 		fw.unsigned_32(general_stats_[p - 1].custom_statistic[j]);
 	}
 }
-
-double logic_rand_as_double(Game* game) {
-	return static_cast<double>(game->logic_rand()) / std::numeric_limits<uint32_t>::max();
-}
-}
+}  // namespace Widelands

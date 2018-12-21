@@ -80,4 +80,4 @@ void write_objective_data(FileSystem& fs, EditorGameBase& egbase) {
 
 	prof.write("objective", false, fs);
 }
-}
+}  // namespace Widelands

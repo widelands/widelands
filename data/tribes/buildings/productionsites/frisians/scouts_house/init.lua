@@ -22,12 +22,12 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {40, 91},
+         hotspot = {49, 82},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {40, 91},
+         hotspot = {49, 73},
       },
    },
 
@@ -48,7 +48,7 @@ tribes:new_productionsite_type {
          actions = {
             "sleep=30000",
             "consume=ration",
-            "worker=scout"
+            "callworker=scout"
          }
       },
    },

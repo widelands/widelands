@@ -35,6 +35,6 @@ public:
 };
 
 void luaopen_path(lua_State*);
-}
+}  // namespace LuaPath
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_PATH_H

@@ -235,6 +235,6 @@ template <typename Entry> struct Listselect<Entry&> : public Listselect<Entry*> 
 		return *Base::get_selected();
 	}
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_LISTSELECT_H

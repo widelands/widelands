@@ -174,15 +174,16 @@ void WarehouseWaresPanel::set_policy(Widelands::Warehouse::StockPolicy newpolicy
 WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent,
                                  UI::UniqueWindow::Registry& reg,
                                  Widelands::Warehouse& wh,
-                                 bool avoid_fastclick)
+                                 bool avoid_fastclick,
+                                 bool workarea_preview_wanted)
    : BuildingWindow(parent, reg, wh, avoid_fastclick), warehouse_(&wh) {
-	init(avoid_fastclick);
+	init(avoid_fastclick, workarea_preview_wanted);
 }
 
-void WarehouseWindow::init(bool avoid_fastclick) {
+void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	Widelands::Warehouse* warehouse = warehouse_.get(igbase()->egbase());
 	assert(warehouse != nullptr);
-	BuildingWindow::init(avoid_fastclick);
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	get_tabs()->add(
 	   "wares", g_gr->images().get(pic_tab_wares),
 	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), *warehouse, Widelands::wwWARE),
@@ -192,7 +193,7 @@ void WarehouseWindow::init(bool avoid_fastclick) {
 	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
-	if (Widelands::PortDock* pd = warehouse->get_portdock()) {
+	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 		get_tabs()->add("dock_wares", g_gr->images().get(pic_tab_dock_wares),
 		                create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 		                _("Wares waiting to be shipped"));

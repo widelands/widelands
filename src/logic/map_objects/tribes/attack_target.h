@@ -66,6 +66,6 @@ public:
 private:
 	DISALLOW_COPY_AND_ASSIGN(AttackTarget);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_ATTACK_TARGET_H

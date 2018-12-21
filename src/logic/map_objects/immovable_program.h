@@ -164,8 +164,8 @@ struct ImmovableProgram {
 	 *    decay-time:
 	 *       Time until construction decays one step if no progress has been made.
 	 */
-	struct ActConstruction : public Action {
-		ActConstruction(char* parameters, ImmovableDescr&);
+	struct ActConstruct : public Action {
+		ActConstruct(char* parameters, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 		Duration buildtime() const {
@@ -229,6 +229,6 @@ struct ImmovableActionData {
 
 	static ImmovableActionData* load(FileRead& fr, Immovable& imm, const std::string& name);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H

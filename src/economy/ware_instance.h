@@ -93,7 +93,7 @@ public:
 		return transfer_;
 	}
 
-	void log_general_info(const EditorGameBase& egbase) override;
+	void log_general_info(const EditorGameBase& egbase) const override;
 
 private:
 	ObjectPointer location_;
@@ -128,6 +128,6 @@ public:
 	static MapObject::Loader*
 	load(EditorGameBase&, MapObjectLoader&, FileRead&, const TribesLegacyLookupTable& lookup_table);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WARE_INSTANCE_H

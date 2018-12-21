@@ -50,6 +50,6 @@ struct CmdLuaCoroutine : public GameLogicCommand {
 private:
 	std::unique_ptr<LuaCoroutine> cr_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_LUACOROUTINE_H

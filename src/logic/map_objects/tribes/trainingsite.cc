@@ -42,9 +42,9 @@ namespace Widelands {
 const uint32_t TrainingSite::training_state_multiplier_ = 12;
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/trainingsites/atlanteans/dungeon/init.lua
+ */
 TrainingSiteDescr::TrainingSiteDescr(const std::string& init_descname,
                                      const std::string& msgctxt,
                                      const LuaTable& table,
@@ -752,4 +752,4 @@ void TrainingSite::training_done() {
 		}
 	}
 }
-}
+}  // namespace Widelands
