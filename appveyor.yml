@@ -21,8 +21,10 @@ install:
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # Installed required libs
-  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
-
+  - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-wget mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
+  # Download and install Boost 1.68 --since 1.69 breaks compiling
+  # https://bugs.launchpad.net/widelands/+bug/1808481
+  - cmd: "bash --login -c \"wget http://repo.msys2.org/mingw/%MINGWSUFFIX%/mingw-w64-%MINGWSUFFIX%-boost-1.68.0-2-any.pkg.tar.xz && pacman --noconfirm -U mingw-w64-%MINGWSUFFIX%-boost-1.68.0-2-any.pkg.tar.xz\""
 shallow_clone: true
 
 branches:
@@ -47,7 +49,8 @@ artifacts:
 
 platform:
   - x64
-  - x86
+# Temporarly, disable x86 builds since they are failing.
+#  - x86
 
 configuration:
   - Release
