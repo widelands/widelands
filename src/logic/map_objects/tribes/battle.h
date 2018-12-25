@@ -124,6 +124,6 @@ private:
 	 */
 	bool last_attack_hits_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BATTLE_H

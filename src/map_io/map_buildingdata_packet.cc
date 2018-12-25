@@ -1219,4 +1219,4 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	}
 	// DONE
 }
-}
+}  // namespace Widelands

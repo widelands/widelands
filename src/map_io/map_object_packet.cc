@@ -164,4 +164,4 @@ void MapObjectPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSav
 
 	fw.write(fs, "binary/mapobjects");
 }
-}
+}  // namespace Widelands

@@ -338,7 +338,7 @@ private:
  *
  * This class will be extended to support ordering of certain wares directly or
  * releasing some wares out of a building
-*/
+ */
 struct Input {
 	Input(const DescriptionIndex& Ware, uint8_t const Max) : ware_(Ware), max_(Max) {
 	}

@@ -559,6 +559,6 @@ private:
 	Buildcost produced_wares_;
 	Buildcost recruited_workers_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTION_PROGRAM_H

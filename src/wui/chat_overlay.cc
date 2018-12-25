@@ -65,7 +65,7 @@ struct ChatOverlay::Impl {
 	        Notifications::subscribe<LogMessage>([this](const LogMessage& note) {
 		        log_messages_.push_back(note);
 		        recompute();
-		     })) {
+	        })) {
 	}
 
 	void recompute();
@@ -134,9 +134,8 @@ void ChatOverlay::Impl::recompute() {
 				           log_messages_[log_idx].msg + "<br></font></p>" + richtext;
 			}
 			log_idx--;
-		} else if (log_idx < 0 ||
-		           (chat_idx >= 0 &&
-		            chat_->get_messages()[chat_idx].time >= log_messages_[log_idx].time)) {
+		} else if (log_idx < 0 || (chat_idx >= 0 && chat_->get_messages()[chat_idx].time >=
+		                                               log_messages_[log_idx].time)) {
 			// Chat message is more recent
 			oldest_ = chat_->get_messages()[chat_idx].time;
 			if (now - oldest_ < CHAT_DISPLAY_TIME) {

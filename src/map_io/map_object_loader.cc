@@ -87,4 +87,4 @@ void MapObjectLoader::load_finish_game(Game& g) {
 		schedule_act_.pop_back();
 	}
 }
-}
+}  // namespace Widelands

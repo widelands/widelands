@@ -21,8 +21,8 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
-#include <unordered_set>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -683,6 +683,6 @@ private:
 void find_former_buildings(const Tribes& tribes,
                            const DescriptionIndex bi,
                            Building::FormerBuildings* former_buildings);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

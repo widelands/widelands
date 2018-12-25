@@ -35,8 +35,8 @@
 #include "logic/map_objects/walkingdir.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
-#include "logic/widelands_geometry.h"
 #include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 #include "random/random.h"
@@ -1161,6 +1161,6 @@ inline void move_r(int16_t const mapwidth, FCoords& f, MapIndex& i) {
 	for (Widelands::FCoords fc = (map).get_fcoords(Widelands::Coords(0, 0));                        \
 	     fc.y < static_cast<int16_t>(extent.h); ++fc.y)                                             \
 		for (fc.x = 0; fc.x < static_cast<int16_t>(extent.w); ++fc.x, ++fc.field)
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_H

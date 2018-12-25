@@ -136,4 +136,4 @@ void GamePreloadPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const)
 		sw->flush();
 	}
 }
-}
+}  // namespace Widelands

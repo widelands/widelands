@@ -1872,4 +1872,4 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
 	// TODO(sirver,trading): Implement this.
 	NEVER_HERE();
 }
-}
+}  // namespace Widelands

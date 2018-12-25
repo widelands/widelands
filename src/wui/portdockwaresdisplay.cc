@@ -26,9 +26,9 @@
 #include "logic/player.h"
 #include "wui/inputqueuedisplay.h"
 
+using Widelands::InputQueue;
 using Widelands::PortDock;
 using Widelands::Warehouse;
-using Widelands::InputQueue;
 
 namespace {
 

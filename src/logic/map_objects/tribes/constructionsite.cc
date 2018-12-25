@@ -72,9 +72,9 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 }
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/partially_finished/constructionsite/init.lua
+ */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
@@ -359,4 +359,4 @@ void ConstructionSite::draw(uint32_t gametime,
 
 	info_.draw(point_on_dst, scale, player_color, dst);
 }
-}
+}  // namespace Widelands

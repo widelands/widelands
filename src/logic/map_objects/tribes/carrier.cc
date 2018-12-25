@@ -56,7 +56,7 @@ void Carrier::start_task_road(Game& game) {
 
 /**
  * Called by Road code when the road is split.
-*/
+ */
 void Carrier::update_task_road(Game& game) {
 	send_signal(game, "road");
 }
@@ -579,4 +579,4 @@ CarrierDescr::CarrierDescr(const std::string& init_descname,
 Bob& CarrierDescr::create_object() const {
 	return *new Carrier(*this);
 }
-}
+}  // namespace Widelands

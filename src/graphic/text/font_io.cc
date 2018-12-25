@@ -60,4 +60,4 @@ IFont* load_font(const std::string& face, int ptsize) {
 
 	return new SdlTtfFont(font, face, ptsize, memory.release());
 }
-}
+}  // namespace RT

@@ -39,6 +39,6 @@ struct SyntaxErrorImpl : public SyntaxError {
 	           .str()) {
 	}
 };
-}
+}  // namespace RT
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_IMPL_H

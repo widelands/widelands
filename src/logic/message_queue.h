@@ -156,14 +156,13 @@ private:
 	uint32_t counts_[3];
 
 	void assert_counts() const {
-		assert(messages_.size() ==
-		       counts_[static_cast<int>(Message::Status::kNew)] +
-		          counts_[static_cast<int>(Message::Status::kRead)] +
-		          counts_[static_cast<int>(Message::Status::kArchived)]);
+		assert(messages_.size() == counts_[static_cast<int>(Message::Status::kNew)] +
+		                              counts_[static_cast<int>(Message::Status::kRead)] +
+		                              counts_[static_cast<int>(Message::Status::kArchived)]);
 	}
 
 	DISALLOW_COPY_AND_ASSIGN(MessageQueue);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_QUEUE_H

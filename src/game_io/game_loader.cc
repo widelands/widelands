@@ -162,4 +162,4 @@ int32_t GameLoader::load_game(bool const multiplayer) {
 
 	return 0;
 }
-}
+}  // namespace Widelands
