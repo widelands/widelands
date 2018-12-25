@@ -54,6 +54,6 @@ private:
 	std::map<MessageId, MessageId> messages_;
 	MessageId counter_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_MESSAGE_SAVER_H

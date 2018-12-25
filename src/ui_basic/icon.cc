@@ -69,4 +69,4 @@ void Icon::draw(RenderTarget& dst) {
 		}
 	}
 }
-}
+}  // namespace UI

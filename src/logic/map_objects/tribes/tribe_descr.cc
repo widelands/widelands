@@ -52,9 +52,9 @@
 namespace Widelands {
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/atlanteans.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/atlanteans.lua
+ */
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
                        const Tribes& init_tribes)
@@ -69,7 +69,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 
 		items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
-		   const std::string& road_type, std::vector<std::string>* images) {
+		                           const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
 			   items_table->get_table(road_type)->array_entries<std::string>();
 			for (const std::string& filename : roads) {
@@ -211,8 +211,8 @@ TribeDescr::TribeDescr(const LuaTable& table,
 }
 
 /**
-  * Access functions
-  */
+ * Access functions
+ */
 
 const std::string& TribeDescr::name() const {
 	return name_;
@@ -484,8 +484,8 @@ void TribeDescr::add_building(const std::string& buildingname) {
 }
 
 /**
-  * Helper functions
-  */
+ * Helper functions
+ */
 
 DescriptionIndex TribeDescr::add_special_worker(const std::string& workername) {
 	try {
@@ -522,4 +522,4 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
 		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
 	}
 }
-}
+}  // namespace Widelands

@@ -40,6 +40,6 @@ struct MapVersion {
 
 	MapVersion();
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_REVISION_H

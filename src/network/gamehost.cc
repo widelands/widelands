@@ -684,9 +684,9 @@ void GameHost::run() {
 		check_hung_clients();
 		init_computer_players();
 		game.run(loader_ui.get(),
-		         d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-		                                Widelands::Game::NewMPScenario :
-		                                Widelands::Game::NewNonScenario,
+		         d->settings.savegame ? Widelands::Game::Loaded :
+		                                d->settings.scenario ? Widelands::Game::NewMPScenario :
+		                                                       Widelands::Game::NewNonScenario,
 		         "", false, "nethost");
 
 		// if this is an internet game, tell the metaserver that the game is done.
@@ -892,9 +892,9 @@ int32_t GameHost::check_client(const std::string& name) {
 }
 
 /**
-* If the host sends a chat message with formation /kick <name> <reason>
-* This function will handle this command and try to kick the user.
-*/
+ * If the host sends a chat message with formation /kick <name> <reason>
+ * This function will handle this command and try to kick the user.
+ */
 void GameHost::kick_user(uint32_t client, const std::string& reason) {
 	disconnect_client(client, "KICKED", true, reason);
 }
@@ -1512,10 +1512,10 @@ void GameHost::write_setting_all_users(SendPacket& packet) {
 }
 
 /**
-* If possible, this function writes the MapTransferInfo to SendPacket & packet
-*
-* \returns true if the data was written, else false
-*/
+ * If possible, this function writes the MapTransferInfo to SendPacket & packet
+ *
+ * \returns true if the data was written, else false
+ */
 bool GameHost::write_map_transfer_info(SendPacket& packet, std::string mapfilename) {
 	// TODO(unknown): not yet able to handle directory type maps / savegames
 	if (g_fs->is_directory(mapfilename)) {

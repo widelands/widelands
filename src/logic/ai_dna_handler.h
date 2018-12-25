@@ -20,8 +20,8 @@
 #ifndef WL_LOGIC_AI_DNA_HANDLER_H
 #define WL_LOGIC_AI_DNA_HANDLER_H
 
-#include <vector>
 #include <stdint.h>
+#include <vector>
 
 #include "logic/player.h"
 
@@ -43,5 +43,5 @@ public:
 	               uint8_t);
 	void dump_output(Widelands::Player::AiPersistentState* pd, uint8_t);
 };
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_AI_DNA_HANDLER_H

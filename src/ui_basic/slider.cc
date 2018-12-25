@@ -547,4 +547,4 @@ void DiscreteSlider::layout() {
 	                h - text_height(UI_FONT_SIZE_SMALL - 2, UI::FontSet::Face::kCondensed) + 2);
 	Panel::layout();
 }
-}
+}  // namespace UI

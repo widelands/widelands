@@ -32,6 +32,6 @@ template <typename AreaType = Area<>> struct PlayerArea : public AreaType {
 	}
 	PlayerNumber player_number;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_AREA_H

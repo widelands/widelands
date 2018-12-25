@@ -20,8 +20,8 @@
 #ifndef WL_BASE_LOG_H
 #define WL_BASE_LOG_H
 
-#include <iostream>
 #include "base/macros.h"
+#include <iostream>
 
 // Print a formatted log messages to stdout on most systems and 'stdout.txt' on windows.
 void log(const char*, ...) PRINTF_FORMAT(1, 2);

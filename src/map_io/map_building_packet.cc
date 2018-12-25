@@ -219,4 +219,4 @@ void MapBuildingPacket::read_priorities(Building& building, FileRead& fr) {
 		}
 	}
 }
-}
+}  // namespace Widelands

@@ -122,6 +122,6 @@ private:
 	Panel* center_panel_;
 	Panel* fastclick_panel_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_WINDOW_H

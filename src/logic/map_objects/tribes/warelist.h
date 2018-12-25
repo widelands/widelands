@@ -69,6 +69,6 @@ struct WareList {
 private:
 	std::vector<Quantity> wares_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WARELIST_H

@@ -159,7 +159,7 @@ void EditBox::set_max_length(uint32_t const n) {
 
 /**
  * The mouse was clicked on this editbox
-*/
+ */
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
@@ -450,4 +450,4 @@ void EditBox::check_caret() {
 			m_->scrolloffset = 0;
 	}
 }
-}
+}  // namespace UI

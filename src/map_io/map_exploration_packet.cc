@@ -97,4 +97,4 @@ void MapExplorationPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObje
 
 	fw.write(fs, "binary/exploration");
 }
-}
+}  // namespace Widelands

@@ -84,4 +84,4 @@ WalkingDir get_backward_dir(WalkingDir dir) {
 	}
 	NEVER_HERE();
 }
-}
+}  // namespace Widelands

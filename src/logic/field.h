@@ -258,6 +258,6 @@ static_assert(sizeof(Field) == sizeof(void*) * 2 + 10, "Field is not tightly pac
 #else
 static_assert(sizeof(Field) <= sizeof(void*) * 2 + 11, "Field is not tightly packed.");
 #endif
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_FIELD_H

@@ -193,4 +193,4 @@ bool FindNodeShore::accept(const Map& map, const FCoords& coords) const {
 
 	return false;
 }
-}
+}  // namespace Widelands

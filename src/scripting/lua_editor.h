@@ -58,6 +58,6 @@ private:
 };
 
 void luaopen_wleditor(lua_State*);
-}
+}  // namespace LuaEditor
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_EDITOR_H

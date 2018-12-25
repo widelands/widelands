@@ -97,6 +97,6 @@ private:
 	uint32_t padding_;
 	uint32_t number_of_paddings_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_SPINBOX_H

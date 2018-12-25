@@ -1734,4 +1734,4 @@ Renderer::render(const std::string& text, uint16_t width, const TagSet& allowed_
 	std::shared_ptr<RenderNode> node(layout(text, width, allowed_tags));
 	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
 }
-}
+}  // namespace RT
