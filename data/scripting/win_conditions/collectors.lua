@@ -147,16 +147,18 @@ return {
       return team_points, descr
    end
 
-
+   -- variable to track the maximum 4 hours of gametime
+   local remaining_max_time = 4 * 60 * 60 -- 4 hours
+   
    -- Send all players the momentary game state
-   local function _send_state(remaining_time, plrs)
+   local function _send_state(remaining_max_time, plrs)
       local msg = vspace(8)
       set_textdomain("win_conditions")
-      if remaining_time <= 0 then
+      if remaining_max_time <= 0 then
          msg = p(_"The game has ended.") .. vspace(8)
       else
-         local h = math.floor(remaining_time / 60)
-         local m = remaining_time % 60
+         local h = math.floor(remaining_max_time / 3600)
+         local m = (remaining_max_time / 60) % 60
          -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
          local time = ""
          if m > 0 then
@@ -239,27 +241,28 @@ return {
       end,
    }
 
-   sleep(1000)
-
-   local remaining_time = 60 * 4
-
-   -- Endless loop
+   -- main loop
    while true do
-      _send_state(remaining_time, plrs)
+      -- Sleep 30 seconds == STATISTICS_SAMPLE_TIME
+      sleep(30000)
+
+      remaining_max_time = remaining_max_time - 30
+      -- A player might have been defeated since the last calculation
+      check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
 
       -- Game ended?
-      if remaining_time <= 0 then
+      if remaining_max_time <= 0 or count_factions(plrs) <= 1 then
+         _send_state(0, plrs)
          _game_over(plrs)
          break
       end
 
-      local runs = 0
-      repeat
-         sleep(5000)
-         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
-         runs = runs + 1
-      until runs >= 120 -- 120 * 5000ms = 600000 ms = 10 minutes
-      remaining_time = remaining_time - 10
+      -- at the beginning send remaining max time message only each 30 minutes
+      -- if only 30 minutes or less are left, send each 5 minutes
+      if ((remaining_max_time < (30 * 60) and remaining_max_time % (5 * 60) == 0)
+            or remaining_max_time % (30 * 60) == 0) then
+         _send_state(remaining_max_time, plrs)
+      end
    end
 end
 }
