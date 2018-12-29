@@ -223,10 +223,14 @@ return {
             lost_or_won = 1
             player:send_message(won_game_over.title, won_game_over.body)
          end
-         if (player.team == 0) then
-            wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[2]}))
+         if (count_factions(plrs) > 1) then
+            if (player.team == 0) then
+               wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[2]}))
+            else
+               wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[3], team_score=info[2]}))
+            end
          else
-            wl.game.report_result(player, lost_or_won, make_extra_data(player, wc_descname, wc_version, {score=info[3], team_score=info[2]}))
+            wl.game.report_result(player, lost_or_won)
          end
       end
    end
@@ -242,20 +246,13 @@ return {
    }
 
    -- main loop
-   while true do
-      -- Sleep 30 seconds == STATISTICS_SAMPLE_TIME
-      sleep(30000)
-
-      remaining_max_time = remaining_max_time - 30
+   while remaining_max_time > 0  and count_factions(plrs) > 1 do
+      -- Sleep 5 seconds
+      sleep(5000)
+      remaining_max_time = remaining_max_time - 5
+      
       -- A player might have been defeated since the last calculation
       check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
-
-      -- Game ended?
-      if remaining_max_time <= 0 or count_factions(plrs) <= 1 then
-         _send_state(0, plrs)
-         _game_over(plrs)
-         break
-      end
 
       -- at the beginning send remaining max time message only each 30 minutes
       -- if only 30 minutes or less are left, send each 5 minutes
@@ -264,5 +261,8 @@ return {
          _send_state(remaining_max_time, plrs)
       end
    end
+   
+   -- Game ended?
+   _game_over(plrs)
 end
 }
