@@ -55,9 +55,9 @@ return {
       end
 
       -- here is the main loop!!!
-      while true do
-         -- Sleep 30 seconds == STATISTICS_SAMPLE_TIME
-         sleep(30000)
+      while count_factions(plrs) > 1 or territory_points.remaining_time > 0 do
+         -- Sleep 5 seconds
+         sleep(5000)
 
          -- A player might have been defeated since the last calculation
          check_player_defeated(plrs, lost_game.title, lost_game.body)
@@ -65,16 +65,13 @@ return {
          -- Check if a player or team is a candidate and update variables
          calculate_territory_points(fields, wl.Game().players)
 
-         -- Do this stuff, if the game is over
-         if territory_points.remaining_time == 0 or count_factions(plrs) <= 1 then
-            territory_game_over(fields, wl.Game().players, wc_descname, wc_version)
-            break
-         end
-
          -- If there is a candidate, check whether we have to send an update
          if (territory_points.last_winning_team >= 0 or territory_points.last_winning_player >= 0) and territory_points.remaining_time >= 0 and territory_points.remaining_time % 300 == 0 then
             _send_state()
          end
       end
+
+      -- Game has ended
+      territory_game_over(fields, wl.Game().players, wc_descname, wc_version)
    end
 }

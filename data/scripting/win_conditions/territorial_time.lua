@@ -27,7 +27,6 @@ local wc_desc = _ (
    "after 4 hours, whichever comes first."
 )
 
-
 return {
    name = wc_name,
    description = wc_desc,
@@ -73,26 +72,24 @@ return {
       end
 
       -- here is the main loop!!!
-      while true do
-         -- Sleep 30 seconds == STATISTICS_SAMPLE_TIME
-         sleep(30000)
+      while remaining_max_time > 0 and count_factions(plrs) > 1 and territory_points.remaining_time > 0 do
+         -- Sleep 5 seconds
+         sleep(5000)
+         remaining_max_time = remaining_max_time - 5
 
-         remaining_max_time = remaining_max_time - 30
          -- A player might have been defeated since the last calculation
          check_player_defeated(plrs, lost_game.title, lost_game.body)
+
          -- Check if a player or team is a candidate and update variables
          -- Returns the names and points for the teams and players without a team
          calculate_territory_points(fields, wl.Game().players)
 
-         -- Game is over, do stuff after loop
-         if territory_points.remaining_time <= 0 or remaining_max_time <= 0 or count_factions(plrs) <= 1 then break end
-
          -- at the beginning send remaining max time message only each 30 minutes
          -- if only 30 minutes or less are left, send each 5 minutes
          -- also check if there is a candidate and we need to send an update
-         if ((remaining_max_time < (30 * 60) and remaining_max_time % (5 * 60) == 0)
+         if (((remaining_max_time < (30 * 60) and remaining_max_time % (5 * 60) == 0)
                or remaining_max_time % (30 * 60) == 0)
-               or territory_points.remaining_time % 300 == 0 then
+               or territory_points.remaining_time % 300 == 0) and remaining_max_time < 0 then
             _send_state()
          end
       end
