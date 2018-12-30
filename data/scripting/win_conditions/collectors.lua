@@ -246,7 +246,7 @@ return {
    }
 
    -- main loop
-   while remaining_max_time > 0  and count_factions(plrs) > 1 do
+   while remaining_max_time > 0 and count_factions(plrs) > 1 do
       -- Sleep 5 seconds
       sleep(5000)
       remaining_max_time = remaining_max_time - 5
