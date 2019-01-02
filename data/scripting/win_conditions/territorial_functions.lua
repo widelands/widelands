@@ -26,7 +26,7 @@ function get_buildable_fields()
    for x=0, map.width-1 do
       for y=0, map.height-1 do
          local f = map:get_field(x,y)
-         if f.buildable or f.immovable then
+         if f.buildable then
             table.insert(fields, f)
          end
       end
@@ -167,7 +167,7 @@ function calculate_territory_points(fields, players)
    -- Set the remaining time according to whether the winner is still the same
    if territory_was_kept then
       -- Still the same winner
-      territory_points.remaining_time = territory_points.remaining_time - 5
+      territory_points.remaining_time = territory_points.remaining_time - 30
    elseif winning_points == -1 then
       -- No winner. This value is used to calculate whether to send a report to players.
       territory_points.remaining_time = 10
