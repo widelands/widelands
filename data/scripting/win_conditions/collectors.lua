@@ -28,7 +28,10 @@ return {
 
    -- set the objective with the game type for all players
    broadcast_objective("win_condition", wc_descname, wc_desc)
-
+   
+   -- set the maximum game time of 4 hours
+   local max_time = 4 * 60
+   
    local game = wl.Game()
    local plrs = wl.Game().players
    local teams = {}
@@ -150,26 +153,7 @@ return {
 
    -- Send all players the momentary game state
    local function _send_state(remaining_time, plrs, show_popup)
-      local msg = vspace(8)
-      set_textdomain("win_conditions")
-      local h = math.floor(remaining_time / 60)
-      local m = remaining_time % 60
-      -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-      local time = ""
-      if m > 0 then
-         time = (ngettext("%i minute", "%i minutes", m)):format(m)
-      end
-      if h > 0 then
-         if m > 0 then
-            -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-            time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h)):bformat(h, time)
-         else
-            -- TRANSLATORS: Context: 'The game will end in 2 hours.'
-            time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
-         end
-      end
-      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-      msg = p(_"The game will end in %s."):format(time) .. vspace(8)
+      local msg = format_remaining_time(remaining_time) .. vspace(8) .. game_status.body
 
       -- Points for players without team
       for idx, plr in ipairs(plrs) do
@@ -186,10 +170,8 @@ return {
             .. h2(ngettext("Team Total: %i point", "Team Total: %i points", points)):format(points)
          msg = msg .. vspace(8) .. message
       end
-
-      for idx, plr in ipairs(plrs) do
-         send_message(plr, game_status.title, msg, {popup = show_popup})
-      end
+      
+      broadcast(plrs, game_status.title, msg, {popup = show_popup})
    end
 
    local function _game_over(plrs)
@@ -239,28 +221,17 @@ return {
       end,
    }
 
-   -- Start a new coroutine that generates status notifications.
-   -- At the beginning send remaining time message only each 30 minutes.
-   -- If only 30 minutes or less are left, send each 5 minutes
-   -- Only popup when 30 minutes are left and break while-loop at 3 hours 55 minutes
+   -- Start a new coroutine that triggers status notifications.
    run(function()
-      local remaining_time = 240 -- 4 hours
-      while game.time <= (235 * 60 * 1000) and count_factions(plrs) > 1 do 
-         local show_popup = false
-         if (game.time < (210 * 60 * 1000)) then -- 3 hours 30 minutes
-            wake_me(game.time + (30 * 60 * 1000)) -- 30 minutes
-            remaining_time = remaining_time - 30
-            if (remaining_time == 30) then show_popup = true end
-         else
-            wake_me(game.time + (300 * 1000)) --5 Minutes
-            remaining_time = remaining_time - 5
-         end
+      local remaining_time = max_time
+      while game.time <= ((max_time - 5) * 60 * 1000) and count_factions(plrs) > 1 do 
+         remaining_time, show_popup = notification_remaining_time(max_time, remaining_time)
          _send_state(remaining_time, plrs, show_popup)
       end
    end)
    
    -- main loop checks for defeated players
-   while game.time < (4 * 60 * 60 * 1000) and count_factions(plrs) > 1 do
+   while game.time < (max_time * 60 * 1000) and count_factions(plrs) > 1 do
       sleep(1000)
       check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
    end

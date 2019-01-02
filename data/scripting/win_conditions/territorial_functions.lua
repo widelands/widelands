@@ -103,7 +103,7 @@ territory_points = {
    -- We record the last winning player name here to prevent crashes with retrieving
    -- the player name when the player was just defeated a few ms ago
    last_winning_player_name = "",
-   remaining_time = 10,
+   remaining_time = 20,
    all_player_points = {},
    points = {}
 }
