@@ -38,7 +38,7 @@ return {
       broadcast_objective("win_condition", wc_descname, wc_desc)
 
       -- Get all valueable fields of the map
-      local fields = get_buildable_fields()
+      local fields = get_valuable_fields()
 
       -- variables to track the maximum 4 hours of gametime
       local remaining_max_time = 4 * 60 * 60 -- 4 hours

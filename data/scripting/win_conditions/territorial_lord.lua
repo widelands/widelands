@@ -37,7 +37,7 @@ return {
       territory_points.remaining_time = time_to_keep_territory
 
       -- Get all valueable fields of the map
-      local fields = get_buildable_fields()
+      local fields = get_valuable_fields()
 
       local function _send_state()
          set_textdomain("win_conditions")

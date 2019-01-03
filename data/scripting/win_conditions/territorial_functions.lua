@@ -14,19 +14,97 @@ local wc_has_territory = _"%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 
 -- RST
--- .. function:: get_buildable_fields()
+-- .. function:: get_valuable_fields()
 --
---    Collects all fields that are buildable
+--    Collects all fields that are valuable
 --
---    :returns: a table with the map's buildable fields
+--    :returns: a table with the map's valuable fields
 --
-function get_buildable_fields()
+function get_valuable_fields()
    local fields = {}
    local map = wl.Game().map
    for x=0, map.width-1 do
       for y=0, map.height-1 do
          local f = map:get_field(x,y)
-         if f.buildable or f.immovable then
+         local add = false
+         if f:has_caps("big") or f:has_caps("medium") or f:has_caps("small") or f.immovable then
+         -- fields with these buildings sites can be added (includes ports)
+         -- immovable can hide building sites and are assumed to be safe to add
+            add = true
+         elseif f:has_caps("walkable") then
+         -- flags & mines need to be evaluated, whether they are reachable
+            for xs=x, x+12 do
+               if (xs >= map.width or add == true) then break end
+               for ys=y, y+12 do
+                  if (ys >= map.height  or add == true)then break end
+                  local fs = map:get_field(xs,ys)
+                  if ((xs <= x + 6) or (ys <= y + 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+                     add = true
+                     break
+                  elseif ((xs <= x + 8) or (ys <= y + 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+                     add = true
+                     break
+                  elseif ((xs <= x + 12) or (ys <= y + 12)) and fs:has_caps("big") then
+                     add = true
+                     break
+                  end
+               end
+            end
+            if add == false then
+               for xs=x, x+12 do
+                  if (xs >= map.width or add == true) then break end
+                  for ys=y, y-12 do
+                     if (ys <= 0 or add == true) then break end
+                     local fs = map:get_field(xs,ys)
+                     if ((xs <= x + 6) or (ys >= y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+                        add = true
+                        break
+                     elseif ((xs <= x + 8) or (ys >= y - 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+                        add = true
+                        break
+                     elseif ((xs <= x + 12) or (ys >= y - 12)) and fs:has_caps("big") then
+                        add = true
+                        break
+                     end
+                  end
+               end
+            end
+            for xs=x, x-12 do
+               if (xs <= 0 or add == true) then break end
+               for ys=y, y+12 do
+                  if (ys >= map.height  or add == true)then break end
+                  local fs = map:get_field(xs,ys)
+                  if ((xs >= x - 6) or (ys <= y + 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+                     add = true
+                     break
+                  elseif ((xs >= x - 8) or (ys <= y + 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+                     add = true
+                     break
+                  elseif ((xs >= x - 12) or (ys <= y + 12)) and fs:has_caps("big") then
+                     add = true
+                     break
+                  end
+               end
+            end
+            for xs=x, x-12 do
+               if (xs <= 0 or add == true) then break end
+               for ys=y, y+12 do
+                  if (ys <= 0 or add == true)then break end
+                  local fs = map:get_field(xs,ys)
+                  if ((xs >= x - 6) or (ys >= y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+                     add = true
+                     break
+                  elseif ((xs >= x - 8) or (ys >= y - 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+                     add = true
+                     break
+                  elseif ((xs >= x - 12) or (ys >= y - 12)) and fs:has_caps("big") then
+                     add = true
+                     break
+                  end
+               end
+            end
+         end
+         if add == true then
             table.insert(fields, f)
          end
       end
