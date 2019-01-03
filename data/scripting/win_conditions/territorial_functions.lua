@@ -69,37 +69,41 @@ function get_valuable_fields()
                   end
                end
             end
-            for xs=x, x-12 do
-               if (xs <= 0 or add == true) then break end
-               for ys=y, y+12 do
-                  if (ys >= map.height  or add == true)then break end
-                  local fs = map:get_field(xs,ys)
-                  if ((xs >= x - 6) or (ys <= y + 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
-                     add = true
-                     break
-                  elseif ((xs >= x - 8) or (ys <= y + 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
-                     add = true
-                     break
-                  elseif ((xs >= x - 12) or (ys <= y + 12)) and fs:has_caps("big") then
-                     add = true
-                     break
+            if add == false then
+               for xs=x, x-12 do
+                  if (xs <= 0 or add == true) then break end
+                  for ys=y, y+12 do
+                     if (ys >= map.height  or add == true)then break end
+                     local fs = map:get_field(xs,ys)
+                     if ((xs >= x - 6) or (ys <= y + 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+                        add = true
+                        break
+                     elseif ((xs >= x - 8) or (ys <= y + 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+                        add = true
+                        break
+                     elseif ((xs >= x - 12) or (ys <= y + 12)) and fs:has_caps("big") then
+                        add = true
+                        break
+                     end
                   end
                end
             end
-            for xs=x, x-12 do
-               if (xs <= 0 or add == true) then break end
-               for ys=y, y+12 do
-                  if (ys <= 0 or add == true)then break end
-                  local fs = map:get_field(xs,ys)
-                  if ((xs >= x - 6) or (ys >= y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
-                     add = true
-                     break
-                  elseif ((xs >= x - 8) or (ys >= y - 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
-                     add = true
-                     break
-                  elseif ((xs >= x - 12) or (ys >= y - 12)) and fs:has_caps("big") then
-                     add = true
-                     break
+            if add == false then
+               for xs=x, x-12 do
+                  if (xs <= 0 or add == true) then break end
+                  for ys=y, y+12 do
+                     if (ys <= 0 or add == true)then break end
+                     local fs = map:get_field(xs,ys)
+                     if ((xs >= x - 6) or (ys >= y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+                        add = true
+                        break
+                     elseif ((xs >= x - 8) or (ys >= y - 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+                        add = true
+                        break
+                     elseif ((xs >= x - 12) or (ys >= y - 12)) and fs:has_caps("big") then
+                        add = true
+                        break
+                     end
                   end
                end
             end
