@@ -27,11 +27,11 @@ function get_valuable_fields()
       for y=0, map.height-1 do
          local f = map:get_field(x,y)
          local add = false
-         if f:has_caps("big") or f:has_caps("medium") or f:has_caps("small") or f.immovable then
+         if f:has_caps("big") or f:has_caps("medium") or f:has_caps("small") then
          -- fields with these buildings sites can be added (includes ports)
          -- immovable can hide building sites and are assumed to be safe to add
             add = true
-         elseif f:has_caps("walkable") then
+         elseif f:has_caps("walkable") or f.immovable then
          -- flags & mines need to be evaluated, whether they are reachable
             for xs=x, x+12 do
                if (xs >= map.width or add == true) then break end
