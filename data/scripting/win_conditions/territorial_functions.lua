@@ -29,14 +29,14 @@ function get_valuable_fields()
          local add = false
          if f:has_caps("big") or f:has_caps("medium") or f:has_caps("small") then
          -- fields with these buildings sites can be added (includes ports)
-         -- immovable can hide building sites and are assumed to be safe to add
             add = true
          elseif f:has_caps("walkable") or f.immovable then
-         -- flags & mines need to be evaluated, whether they are reachable
+         -- flags & mines need to be evaluated, whether they are accessible
+         -- immovables can hide building sites, but may not be accessible
             for xs=x, x+12 do
                if (xs >= map.width or add == true) then break end
                for ys=y, y+12 do
-                  if (ys >= map.height  or add == true)then break end
+                  if (ys >= map.height  or add == true) then break end
                   local fs = map:get_field(xs,ys)
                   if ((xs <= x + 6) or (ys <= y + 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
                      add = true
@@ -73,7 +73,7 @@ function get_valuable_fields()
                for xs=x, x-12 do
                   if (xs <= 0 or add == true) then break end
                   for ys=y, y+12 do
-                     if (ys >= map.height  or add == true)then break end
+                     if (ys >= map.height  or add == true) then break end
                      local fs = map:get_field(xs,ys)
                      if ((xs >= x - 6) or (ys <= y + 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
                         add = true
@@ -92,7 +92,7 @@ function get_valuable_fields()
                for xs=x, x-12 do
                   if (xs <= 0 or add == true) then break end
                   for ys=y, y+12 do
-                     if (ys <= 0 or add == true)then break end
+                     if (ys <= 0 or add == true) then break end
                      local fs = map:get_field(xs,ys)
                      if ((xs >= x - 6) or (ys >= y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
                         add = true
