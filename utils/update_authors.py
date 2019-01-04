@@ -14,16 +14,13 @@ import sys
 # The locale information is written to ../data/i18n/locales.lua.
 
 
-def add_lua_array(values, transl=False):
-    """Adds values to a key.
-
-    The Argument transl is used to keep track of manually added translation
-    marker. Values starting with an underscore are not affectet.
-    """
+def add_lua_array(values):
+    """Creates an array."""
 
     text = '{'
     for value in values:
-        if transl and value.startswith('_'):
+        if value.startswith('_"'):
+            # a translation marker has already been added
             text += value
         else:
             text += '"' + value + '",'
@@ -41,17 +38,26 @@ def add_lua_table_key(key, value=None, **kwrds):
     """
 
     transl = kwrds.get('transl', False)
+    if key == '':
+        print("At least a key must be given!")
+        sys.exit(1)
 
-    if isinstance(value, list):
-        text = key + ' = ' + add_lua_array(value, transl=transl)
-    elif value == None:
-        text = key + ' = '
-    elif transl:
-        text = key + ' = _"' + value + '",'
+    if value == None:
+        # We have only a key, which in general shouldn't be translated
+        return key + ' = '
+    
     else:
-        text = key + ' = "' + value + '",'
+        # A value is present
+        if transl:
+            return key + ' = _"' + value + '",'
+        
+        if isinstance(value, list):
+            # To get translations, apply '_"foo"' manually to the list
+            return key + ' = ' + add_lua_array(value)
+        else:
+            return key + ' = "' + value + '",'
 
-    return text
+    return ''
 
 
 base_path = os.path.abspath(os.path.join(
@@ -190,7 +196,7 @@ for category in developers:
             if 'translate' in subcategory:
                 for m in subcategory['translate']:
                     members.append('_"' + m + '",')
-            lua_string += add_lua_table_key('members', members, transl=True)
+            lua_string += add_lua_table_key('members', members)
             
             lua_string += '},'  # entry
         lua_string += '},'  # entries
