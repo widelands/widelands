@@ -1429,7 +1429,7 @@ void LuaTribeDescription::__unpersist(lua_State* L) {
    .. attribute:: buildings
 
       (RO) an array of :class:`LuaBuildingDescription` with all the buildings that the tribe can
-   use, casted to their appropriate subclasses.
+      use, casted to their appropriate subclasses.
 */
 int LuaTribeDescription::get_buildings(lua_State* L) {
 	const TribeDescr& tribe = *get();
@@ -1492,7 +1492,7 @@ int LuaTribeDescription::get_geologist(lua_State* L) {
    .. attribute:: immovables
 
       (RO) an array of :class:`LuaImmovableDescription` with all the immovables that the tribe can
-   use.
+      use.
 */
 int LuaTribeDescription::get_immovables(lua_State* L) {
 	const TribeDescr& tribe = *get();
@@ -1665,8 +1665,8 @@ MapObjectDescription
    This class contains the properties that are common to all map objects such as buildings or wares.
 
    The dynamic MapObject class corresponding to this class is the base class for all Objects in
-widelands, including immovables and Bobs. This class can't be instantiated directly, but provides
-the base for all others.
+   widelands, including immovables and Bobs. This class can't be instantiated directly, but provides
+   the base for all others.
 */
 const char LuaMapObjectDescription::className[] = "MapObjectDescription";
 const MethodType<LuaMapObjectDescription> LuaMapObjectDescription::Methods[] = {
@@ -1820,7 +1820,7 @@ int LuaMapObjectDescription::get_representative_image(lua_State* L) {
                automatically placed next to each port building.
 
          * **Abstract:** These types are abstract map objects that are used by the engine and are
-   not visible on the map.
+           not visible on the map.
 
            * :class:`battle <BattleDescription>`, holds information
              about two soldiers in a fight,
@@ -1841,8 +1841,8 @@ ImmovableDescription
    Child of: :class:`MapObjectDescription`
 
    A static description of a :class:`base immovable <BaseImmovable>`, so it can be used in help
-files without having to access an actual immovable on the map. See also
-:class:`MapObjectDescription` for more properties.
+   files without having to access an actual immovable on the map. See also
+   :class:`MapObjectDescription` for more properties.
 */
 const char LuaImmovableDescription::className[] = "ImmovableDescription";
 const MethodType<LuaImmovableDescription> LuaImmovableDescription::Methods[] = {
@@ -1907,7 +1907,7 @@ int LuaImmovableDescription::get_buildcost(lua_State* L) {
          the name and descname of the editor category of this immovable
 
          (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
-   none.
+         none.
 */
 int LuaImmovableDescription::get_editor_category(lua_State* L) {
 	const EditorCategory* editor_category = get()->editor_category();
@@ -2154,7 +2154,7 @@ int LuaBuildingDescription::get_enhanced(lua_State* L) {
    .. attribute:: enhanced_from
 
          (RO) returns the building that this was enhanced from, or nil if this isn't an enhanced
-   building.
+         building.
 */
 int LuaBuildingDescription::get_enhanced_from(lua_State* L) {
 	if (get()->is_enhanced()) {
@@ -2280,7 +2280,7 @@ ConstructionSiteDescription
 .. class:: ConstructionSiteDescription
 
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-:class:`BuildingDescription`
+   :class:`BuildingDescription`
 
    A static description of a tribe's constructionsite, so it can be used in help files
    without having to access an actual building on the map.
@@ -2301,7 +2301,7 @@ DismantleSiteDescription
 .. class:: DismantleSiteDescription
 
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-:class:`BuildingDescription`
+   :class:`BuildingDescription`
 
    A static description of a tribe's dismantlesite, so it can be used in help files
    without having to access an actual building on the map.
@@ -2322,7 +2322,7 @@ ProductionSiteDescription
 .. class:: ProductionSiteDescription
 
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-:class:`BuildingDescription`
+   :class:`BuildingDescription`
 
    A static description of a tribe's productionsite, so it can be used in help files
    without having to access an actual building on the map.
@@ -2451,10 +2451,10 @@ int LuaProductionSiteDescription::get_working_positions(lua_State* L) {
    .. attribute:: consumed_wares_workers
 
       :arg program_name: the name of the production program that we want to get the consumed wares
-   for :type tribename: :class:`string`
+         for :type tribename: :class:`string`
 
       (RO) Returns a table of {{ware name}, ware amount} for the wares consumed by this production
-   program. Multiple entries in {ware name} are alternatives (OR logic)).
+      program. Multiple entries in {ware name} are alternatives (OR logic)).
 */
 int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2485,10 +2485,10 @@ int LuaProductionSiteDescription::consumed_wares_workers(lua_State* L) {
    .. attribute:: produced_wares
 
       :arg program_name: the name of the production program that we want to get the produced wares
-   for :type tribename: :class:`string`
+         for :type tribename: :class:`string`
 
          (RO) Returns a table of {ware name, ware amount} for the wares produced by this production
-   program
+         program
 */
 int LuaProductionSiteDescription::produced_wares(lua_State* L) {
 	std::string program_name = luaL_checkstring(L, -1);
@@ -2504,7 +2504,7 @@ int LuaProductionSiteDescription::produced_wares(lua_State* L) {
    .. attribute:: recruited_workers
 
       :arg program_name: the name of the production program that we want to get the recruited
-   workers for :type tribename: :class:`string`
+         workers for :type tribename: :class:`string`
 
          (RO) Returns a table of {worker name, worker amount} for the workers recruited
          by this production program
@@ -2526,7 +2526,7 @@ MilitarySiteDescription
 .. class:: MilitarySiteDescription
 
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-:class:`BuildingDescription`
+   :class:`BuildingDescription`
 
    A static description of a tribe's militarysite, so it can be used in help files
    without having to access an actual building on the map.
@@ -2578,12 +2578,12 @@ TrainingSiteDescription
 .. class:: TrainingSiteDescription
 
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-:class:`BuildingDescription`, :class:`ProductionSiteDescription`
+   :class:`BuildingDescription`, :class:`ProductionSiteDescription`
 
    A static description of a tribe's trainingsite, so it can be used in help files
    without having to access an actual building on the map.
    A training site can train some or all of a soldier's properties (Attack, Defense, Evade and
-Health). See the parent classes for more properties.
+   Health). See the parent classes for more properties.
 */
 const char LuaTrainingSiteDescription::className[] = "TrainingSiteDescription";
 const MethodType<LuaTrainingSiteDescription> LuaTrainingSiteDescription::Methods[] = {
@@ -2850,7 +2850,7 @@ WarehouseDescription
 .. class:: WarehouseDescription
 
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-:class:`BuildingDescription`
+   :class:`BuildingDescription`
 
    A static description of a tribe's warehouse, so it can be used in help files
    without having to access an actual building on the map.
@@ -2891,7 +2891,7 @@ MarketDescription
 .. class:: MarketDescription
 
    Child of: :class:`MapObjectDescription`, :class:`ImmovableDescription`,
-:class:`BuildingDescription`
+   :class:`BuildingDescription`
 
    A static description of a tribe's market, so it can be used in help files
    without having to access an actual building on the map. A Market is used for
@@ -3401,7 +3401,7 @@ int LuaResourceDescription::get_representative_image(lua_State* L) {
       :arg amount: The amount of the resource what we want an overlay image for
 
          (RO) the :class:`string` path to the image representing the specified amount of this
-   resource
+         resource
 */
 int LuaResourceDescription::editor_image(lua_State* L) {
 	if (lua_gettop(L) != 2) {
@@ -3480,7 +3480,7 @@ int LuaTerrainDescription::get_descname(lua_State* L) {
    .. attribute:: get_default_resource
 
          (RO) the :class:`wl.map.ResourceDescription` for the default resource provided by this
-   terrain, or nil if the terrain has no default resource.
+         terrain, or nil if the terrain has no default resource.
 */
 
 int LuaTerrainDescription::get_default_resource(lua_State* L) {
@@ -3510,7 +3510,7 @@ int LuaTerrainDescription::get_default_resource_amount(lua_State* L) {
    .. attribute:: the name and descname of the editor category of this terrain
 
       (RO) a table with "name" and "descname" entries for the editor category, or nil if it has
-   none.
+      none.
 */
 int LuaTerrainDescription::get_editor_category(lua_State* L) {
 	const EditorCategory* editor_category = get()->editor_category();
@@ -3576,7 +3576,7 @@ int LuaTerrainDescription::get_temperature(lua_State* L) {
    .. attribute:: valid_resources
 
          (RO) a list of :class:`wl.map.ResourceDescription` with all valid resources for this
-   terrain.
+         terrain.
 */
 
 int LuaTerrainDescription::get_valid_resources(lua_State* L) {
