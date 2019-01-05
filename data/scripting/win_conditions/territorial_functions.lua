@@ -33,80 +33,7 @@ function get_valuable_fields()
          elseif f:has_caps("walkable") or f.immovable then
          -- flags & mines need to be evaluated, whether they are accessible
          -- immovables can hide building sites, but may not be accessible
-            for xs=x, x+12 do
-               if (xs >= map.width or add == true) then break end
-               for ys=y, y+12 do
-                  if (ys >= map.height  or add == true) then break end
-                  local fs = map:get_field(xs,ys)
-                  if ((xs <= x + 6) or (ys <= y + 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
-                     add = true
-                     break
-                  elseif ((xs <= x + 8) or (ys <= y + 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
-                     add = true
-                     break
-                  elseif ((xs <= x + 12) or (ys <= y + 12)) and fs:has_caps("big") then
-                     add = true
-                     break
-                  end
-               end
-            end
-            if add == false then
-               for xs=x, x+12 do
-                  if (xs >= map.width or add == true) then break end
-                  for ys=y, y-12 do
-                     if (ys <= 0 or add == true) then break end
-                     local fs = map:get_field(xs,ys)
-                     if ((xs <= x + 6) or (ys >= y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
-                        add = true
-                        break
-                     elseif ((xs <= x + 8) or (ys >= y - 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
-                        add = true
-                        break
-                     elseif ((xs <= x + 12) or (ys >= y - 12)) and fs:has_caps("big") then
-                        add = true
-                        break
-                     end
-                  end
-               end
-            end
-            if add == false then
-               for xs=x, x-12 do
-                  if (xs <= 0 or add == true) then break end
-                  for ys=y, y+12 do
-                     if (ys >= map.height  or add == true) then break end
-                     local fs = map:get_field(xs,ys)
-                     if ((xs >= x - 6) or (ys <= y + 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
-                        add = true
-                        break
-                     elseif ((xs >= x - 8) or (ys <= y + 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
-                        add = true
-                        break
-                     elseif ((xs >= x - 12) or (ys <= y + 12)) and fs:has_caps("big") then
-                        add = true
-                        break
-                     end
-                  end
-               end
-            end
-            if add == false then
-               for xs=x, x-12 do
-                  if (xs <= 0 or add == true) then break end
-                  for ys=y, y+12 do
-                     if (ys <= 0 or add == true) then break end
-                     local fs = map:get_field(xs,ys)
-                     if ((xs >= x - 6) or (ys >= y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
-                        add = true
-                        break
-                     elseif ((xs >= x - 8) or (ys >= y - 8)) and (fs:has_caps("medium") or fs:has_caps("big")) then
-                        add = true
-                        break
-                     elseif ((xs >= x - 12) or (ys >= y - 12)) and fs:has_caps("big") then
-                        add = true
-                        break
-                     end
-                  end
-               end
-            end
+            add = evaluate_surrounding_fields(x, y, 12, 12, 10)
          end
          if add == true then
             table.insert(fields, f)
@@ -116,6 +43,132 @@ function get_valuable_fields()
    return fields
 end
 
+-- RST
+-- .. function:: evaluate_surrounding_fields(x, y, max)
+--
+--    Evaluates whether a field is accessible by the surrounding fields 
+--
+--    :arg x: coordinate on the x-axes
+--    :arg y: coordinate on the y-axes
+--    :arg max_x: maximum distance from the starting point on the x-axes
+--    :arg max_y: maximum distance from the starting point on the y-axes
+--    :arg quadrant: which quadrant to calculate: 1, 2, 3, 4 or 10 for all 4
+--
+--    :returns: ``true`` or ``false``
+--
+function evaluate_surrounding_fields(x, y, max_x, max_y, quadrant)
+   local map = wl.Game().map
+   local accessible = false
+   if ((accessible == false) and (quadrant == 1 or quadrant == 10)) then
+      for xs=x, x+max_x do
+         if (xs >= map.width) then
+            accessible = evaluate_surrounding_fields(0, y, (max_x - map.width + x), 12, 1)
+            break
+         end
+         if (accessible == true) then break end
+         for ys=y, y-max_y, -1 do
+            if (ys < 0) then
+               accessible = evaluate_surrounding_fields(x , (map.height - 1), 0, (max_y - y - 1), 1)
+               break
+            end
+            if (accessible == true) then break end
+            local fs = map:get_field(xs,ys)
+            if ((xs <= x + max_x - 6) or (ys >= y - max_y + 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+               accessible = true
+               break
+            elseif ((xs <= x + max_x - 4) or (ys >= y - max_y + 4)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+               accessible = true
+               break
+            elseif ((xs <= x + max_x) or (ys >= y - max_y)) and fs:has_caps("big") then
+               accessible = true
+               break
+            end
+         end
+      end
+   end
+   if ((accessible == false) and (quadrant == 2 or quadrant == 10)) then
+      for xs=x, x-max_x, -1 do
+         if (xs < 0) then
+            accessible = evaluate_surrounding_fields(map.width - 1, y, (max_x - x - 1), 12, 2)
+            break
+         end
+         if (accessible == true) then break end
+         for ys=y, y+max_y do
+            if (ys >= map.height) then
+               accessible = evaluate_surrounding_fields(x , 0, 0, (max_y - map.height + y), 2)
+               break
+            end
+            if (accessible == true) then break end
+            local fs = map:get_field(xs,ys)
+            if ((xs >= x - max_x + 6) or (ys <= y + max_y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+               accessible = true
+               break
+            elseif ((xs >= x - max_x + 4) or (ys <= y + max_y - 4)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+               accessible = true
+               break
+            elseif ((xs >= x - max_x) or (ys <= y + max_y)) and fs:has_caps("big") then
+               accessible = true
+               break
+            end
+         end
+      end
+   end
+   if ((accessible == false) and (quadrant == 3 or quadrant == 10)) then
+      for xs=x, x-max_x, -1 do
+         if (xs < 0) then
+            accessible = evaluate_surrounding_fields(map.width - 1, y, (max_x - x - 1), 12, 3)
+            break
+         end
+         if (accessible == true) then break end
+         for ys=y, y+max_y do
+            if (ys >= map.height) then
+               accessible = evaluate_surrounding_fields(x , 0, 0, (max_y - map.height + y), 3)
+               break
+            end
+            if (accessible == true) then break end
+            local fs = map:get_field(xs,ys)
+            if ((xs >= x - max_x + 6) or (ys <= y + max_y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+               accessible = true
+               break
+            elseif ((xs >= x - max_x + 4) or (ys <= y + max_y - 4)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+               accessible = true
+               break
+            elseif ((xs >= x - max_x) or (ys <= y + max_y)) and fs:has_caps("big") then
+               accessible = true
+               break
+            end
+         end
+      end
+   end
+   if ((accessible == false) and (quadrant == 4 or quadrant == 10)) then
+      for xs=x, x+max_x do
+         if (xs >= map.width) then
+            accessible = evaluate_surrounding_fields(0, y, (max_x - map.width + x), 12, 4)
+            break
+         end
+         if (accessible == true) then break end
+         for ys=y, y+max_y do
+            if (ys >= map.height) then
+               accessible = evaluate_surrounding_fields(x , 0, 0, (max_y - map.height + y), 4)
+               break
+            end
+            if (accessible == true) then break end
+            local fs = map:get_field(xs,ys)
+            if ((xs <= x + max_x - 6) or (ys <= y + max_y - 6)) and (fs:has_caps("small") or fs:has_caps("medium") or fs:has_caps("big")) then
+               accessible = true
+               break
+            elseif ((xs <= x + max_x - 4) or (ys <= y + max_y - 4)) and (fs:has_caps("medium") or fs:has_caps("big")) then
+               accessible = true
+               break
+            elseif ((xs <= x + max_x) or (ys <= y + max_y)) and fs:has_caps("big") then
+               accessible = true
+               break
+            end
+         end
+      end
+   end
+   return accessible
+end
 -- RST
 -- .. function:: count_owned_fields_for_all_players(fields, players)
 --
