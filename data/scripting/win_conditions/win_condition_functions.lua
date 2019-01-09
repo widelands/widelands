@@ -273,11 +273,13 @@ end
 -- RST
 -- .. function:: notification_remaining_time(max_time)
 --
---    calculate the remaining game time for notifications 
---    returns the remaining time and whether the notification should popup
---    to be used when sending status meassages
---    status messages are to be send every 30 minutes and every 5 during the last 30 minutes
---    the message window pops up ever hour 30, 20 & 10 minutes berfore the game ends.
+--    Calculate the remaining game time for notifications.
+--    Should only be called within a coroutine, because the routine gets blocked.
+--    Returns the remaining time and whether the notification should popup.
+--
+--    To be used when sending status messages.
+--    Status messages are to be send every 30 minutes and every 5 during the last 30 minutes,
+--    the message window pops up ever hour, 30, 20 & 10 minutes before the game ends.
 --
 --    :arg max_time:    The time maximum game time in minutes
 function notification_remaining_time(max_time, remaining_time)
