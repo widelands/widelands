@@ -19,7 +19,7 @@ int get_ip_version(const boost::asio::ip::tcp::acceptor& acceptor) {
 		return 6;
 	}
 }
-}
+}  // namespace
 
 NetHost::Client::Client(boost::asio::ip::tcp::socket&& sock)
    : socket(std::move(sock)), deserializer() {

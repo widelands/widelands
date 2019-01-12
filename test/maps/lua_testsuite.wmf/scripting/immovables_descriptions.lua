@@ -75,22 +75,22 @@ function test_descr:test_immovable_terrain_affinity()
    local aff_umbrella_green_mature = egbase:get_immovable_description("umbrella_green_wasteland_mature").terrain_affinity
 
    -- Pickiness
-   assert_near(0.6, aff_alder_sapling["pickiness"], 0.01)
+   assert_equal(60, aff_alder_sapling["pickiness"])
    assert_equal(aff_alder_sapling["pickiness"], aff_alder_old["pickiness"])
-   assert_near(0.6, aff_mushroom_red_pole["pickiness"], 0.01)
-   assert_near(0.8, aff_umbrella_green_mature["pickiness"], 0.01)
+   assert_equal(60, aff_mushroom_red_pole["pickiness"])
+   assert_equal(80, aff_umbrella_green_mature["pickiness"])
 
    -- preferred_fertility
-   assert_near(0.6, aff_alder_sapling["preferred_fertility"], 0.01)
+   assert_equal(600, aff_alder_sapling["preferred_fertility"])
    assert_equal(aff_alder_sapling["preferred_fertility"], aff_alder_old["preferred_fertility"])
-   assert_near(0.85, aff_mushroom_red_pole["preferred_fertility"], 0.01)
-   assert_near(0.85, aff_umbrella_green_mature["preferred_fertility"], 0.01)
+   assert_equal(850, aff_mushroom_red_pole["preferred_fertility"])
+   assert_equal(850, aff_umbrella_green_mature["preferred_fertility"])
 
    -- preferred_humidity
-   assert_near(0.65, aff_alder_sapling["preferred_humidity"], 0.01)
+   assert_equal(650, aff_alder_sapling["preferred_humidity"])
    assert_equal(aff_alder_sapling["preferred_humidity"], aff_alder_old["preferred_humidity"])
-   assert_near(0.35, aff_mushroom_red_pole["preferred_humidity"], 0.01)
-   assert_near(0.2, aff_umbrella_green_mature["preferred_humidity"], 0.01)
+   assert_equal(350, aff_mushroom_red_pole["preferred_humidity"])
+   assert_equal(200, aff_umbrella_green_mature["preferred_humidity"])
 
    -- preferred_temperature
    assert_equal(125, aff_alder_sapling["preferred_temperature"])

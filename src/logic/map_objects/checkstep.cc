@@ -193,4 +193,4 @@ bool CheckStepLimited::allowed(
 bool CheckStepLimited::reachable_dest(const Map&, FCoords) const {
 	return true;
 }
-}
+}  // namespace Widelands

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-12 07:46+0000\n"
-"PO-Revision-Date: 2018-10-24 19:20+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-12-01 14:32+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -79,13 +79,13 @@ msgid ""
 "If you’re low on soldiers to occupy new military sites, use the downward "
 "arrow button to decrease the capacity. You can also click on a soldier to "
 "send him away."
-msgstr "Wenn du nich genoog Soldaten hest, um neie Soldateree-Boen to besetten, kannst du de Tahl vun Soldaten mit de Piel-runner-Knoop minnern. Du kannst ok eenen Soldat anklicken, um hüm wegtostüren."
+msgstr "Wenn du nich genoog Soldaten hest, um neje Soldateree-Boen to besetten, kannst du de Tahl vun Soldaten mit de Piel-runner-Knoop minnern. Du kannst ok eenen Soldat anklicken, um hüm wegtostüren."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/constructionsite/helptexts.lua:16
 msgctxt "building"
 msgid "A new building is being built at this construction site."
-msgstr "An deeser Baustee word een neies Huus baut."
+msgstr "An deeser Baustee word een nejes Huus baut."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/partially_finished/dismantlesite/helptexts.lua:16
@@ -122,7 +122,7 @@ msgstr "Rüst Lehrwichter ut un maakt se to Soldaten."
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Sows and harvests blackroot."
-msgstr "Sait un arntet Swartwuddels."
+msgstr "Sait un arnt Swartwuddels."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/blackroot_farm/helptexts.lua:26
@@ -164,7 +164,7 @@ msgstr "Grafft in Bargen dürabele Stenen ut de Grund."
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:16
 msgctxt "atlanteans_building"
 msgid "Sows and harvests corn."
-msgstr "Sait un arntet Mais."
+msgstr "Sait un arnt Mais."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/farm/helptexts.lua:26
@@ -176,7 +176,7 @@ msgstr "De Buur bruukt dör de Bank %1% um een Bünsel Mais to saien un to arnte
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishbreeders_house/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds fish."
-msgstr "Tüchtet Fiske."
+msgstr "Tücht Fiske."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/fishers_house/helptexts.lua:16
@@ -239,7 +239,7 @@ msgctxt "atlanteans_building"
 msgid ""
 "Breeds the strong Atlantean horses for adding them to the transportation "
 "system."
-msgstr "Tüchtet de stevigen Atlantisken Peer för dat Stratennett."
+msgstr "Tücht de stevigen Atlantisken Peer för dat Stratennett."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/hunters_house/helptexts.lua:16
@@ -314,7 +314,7 @@ msgctxt "building"
 msgid ""
 "Constructs ships that are used for overseas colonization and for trading "
 "between ports."
-msgstr "Baut Schippen, de för tum Hanneln tüsken Muden un tum Gründen vun neien Dörpen bruukt worden."
+msgstr "Baut Schippen, de för tum Hanneln tüsken Muden un tum Gründen vun nejen Dörpen bruukt worden."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/smelting_works/helptexts.lua:16
@@ -336,7 +336,7 @@ msgstr "Rökelt Fleesk un Fiss, um de Bespejers un Bargwarkskeerls to versörgen
 #: ../../data/tribes/buildings/productionsites/atlanteans/spiderfarm/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds spiders for silk."
-msgstr "Tüchtet Spinnen för hör Siede."
+msgstr "Tücht Spinnen för hör Siede."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/helptexts.lua:16
@@ -392,7 +392,7 @@ msgctxt "barbarians_building"
 msgid ""
 "‘A new warrior’s ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
-msgstr "Eene neie Ridderext wiest dat beste in hör Drager – oder dat leepste in hör Maker."
+msgstr "Eene neje Ridderext wiest dat beste in hör Drager – oder dat leepste in hör Maker."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:8
@@ -416,7 +416,7 @@ msgid ""
 "The Barbarian ax workshop is the intermediate production site in a series of"
 " three buildings. It is enhanced from the metal workshop but doesn’t require"
 " additional qualification for the worker."
-msgstr "De Wille Extensmede is dat middelste Huus vun eener Riege vun dree Husen. Eene Metalldreihbank word daarto utbaut, aber de Arbeider bruukt daar keene Erfahrung för."
+msgstr "De Wille Extensmede is dat middelste Huus vun eener Riege vun dree Husen. Eene Metalldreihbank word daarto utbaut, aver de Arbeider bruukt daar keene Erfahrung för."
 
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
 #: ../../data/tribes/buildings/productionsites/barbarians/bakery/helptexts.lua:26
@@ -477,7 +477,7 @@ msgctxt "barbarians_building"
 msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
-msgstr "Dat Smeden düürt för all dree Wapens desülvige Tied, aber de nödigen Materialien sünd verscheden."
+msgstr "Dat Smeden düürt för all dree Wapens desülvige Tied, aver de nödigen Materialien sünd verscheden."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/helptexts.lua:23
@@ -531,7 +531,7 @@ msgstr "Produzeert Beer, um de Bargwarkskeerls manns un tofree to hollen."
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:16
 msgctxt "barbarians_building"
 msgid "Breeds strong oxen for adding them to the transportation system."
-msgstr "Tüchtet stevige Ossen för dat Stratennett."
+msgstr "Tücht stevige Ossen för dat Stratennett."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/cattlefarm/helptexts.lua:26
@@ -560,7 +560,7 @@ msgctxt "barbarians_building"
 msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
-msgstr "Holt is good genoog för eene Heerdstee un um well to warmen, aber wenn man mit Iesen oder Gold arbeiden sall, gaht dat nich sünner Köhl."
+msgstr "Holt is good genoog för eene Heerdstee un um well to warmen, aver wenn man mit Iesen oder Gold arbeiden sall, gaht dat nich sünner Köhl."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine/helptexts.lua:22
@@ -611,7 +611,7 @@ msgstr "Wenn de Spiesen to rechter Tied ankomen, produzeert deeses Bargwark dör
 #: ../../data/tribes/buildings/productionsites/empire/farm/helptexts.lua:16
 msgctxt "building"
 msgid "Sows and harvests wheat."
-msgstr "Sait un arntet Weit."
+msgstr "Sait un arnt Weit."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/helptexts.lua:26
@@ -1135,7 +1135,7 @@ msgctxt "barbarians_building"
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
-msgstr "Dat Smeden düürt för all dree Wapens desülvige Tied, aber de nödigen Materialien sünd all verscheden. De lesten twee Wapen bruken ok Gold."
+msgstr "Dat Smeden düürt för all dree Wapens desülvige Tied, aver de nödigen Materialien sünd all verscheden. De lesten twee Wapen bruken ok Gold."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/weaving_mill/helptexts.lua:16
@@ -1214,7 +1214,7 @@ msgctxt "empire_building"
 msgid ""
 "Breeds cute and helpful donkeys for adding them to the transportation "
 "system."
-msgstr "Tüchtet nüte, godige Langohren för dat Stratennett."
+msgstr "Tücht nüte, godige Langohren för dat Stratennett."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/farm/helptexts.lua:26
@@ -1294,7 +1294,7 @@ msgstr "De Müller bruukt dör de Bank %1% um Weit för eenen Sack Mehl to mahle
 #: ../../data/tribes/buildings/productionsites/empire/piggery/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Breeds pigs for their meat."
-msgstr "Tüchtet Swientjen för hör Fleesk."
+msgstr "Tücht Swientjen för hör Fleesk."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/piggery/helptexts.lua:26
@@ -1318,7 +1318,7 @@ msgstr "Dat Flintslagerhuus bruukt Stenen tum Slaan in de Arbeidsgewest."
 #: ../../data/tribes/buildings/productionsites/empire/sheepfarm/helptexts.lua:16
 msgctxt "empire_building"
 msgid "Keeps sheep for their wool."
-msgstr "Tüchtet Schapen för hör Wull."
+msgstr "Tücht Schapen för hör Wull."
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/empire/stonemasons_house/helptexts.lua:16
@@ -1380,7 +1380,7 @@ msgstr "De Fisker, de Fissbuurdereen upbrocht hett"
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:16
 msgctxt "building"
 msgid "Breeds fish as food for soldiers and miners."
-msgstr "Tüchtet Fisse as Spiesen för Soldaten un Bargwarkskeerls."
+msgstr "Tücht Fisse as Spiesen för Soldaten un Bargwarkskeerls."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/aqua_farm/helptexts.lua:21
@@ -1388,7 +1388,7 @@ msgctxt "building"
 msgid ""
 "The aqua farm needs holes in the ground that were dug by a clay pit’s worker"
 " nearby to use as fishing ponds."
-msgstr "De Fissbuurderee bruukt Speden im Klei, de in de Naberskupp vun de Arbeider vun eener Lehmkuhl graven wurren. In deesen Polen worden de Fisse tüchtet."
+msgstr "De Fissbuurderee bruukt Speden im Klei, de in de Naberskupp vun de Arbeider vun eener Lehmkuhl graven wurren. In deesen Polen worden de Fisse tücht."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:6
@@ -1396,7 +1396,7 @@ msgctxt "frisians_building"
 msgid ""
 "Of course I could still forge short and long swords, but it is beneath my "
 "honor to bother with such basic equipment now."
-msgstr "Natürelk kann ick noch Lütte un Lange Sweerten smeden, aber 't is unner miener Wüürd, mi mit sülk eenfachen Dingen to befaten."
+msgstr "Natürelk kann ick noch Lütte un Lange Sweerten smeden, aver 't is unner miener Wüürd, mi mit sülk eenfachen Dingen to befaten."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/armor_smithy_large/helptexts.lua:11
@@ -1472,7 +1472,7 @@ msgstr ""
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A trainer greeting the new recruits"
-msgstr "Een Mester begrött de neien Lehrwichter"
+msgstr "Een Mester begrött de nejen Lehrwichter"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/barracks/helptexts.lua:13
@@ -1505,7 +1505,7 @@ msgstr "Een Imker minnacht de Beswaar vun eenem Kunn"
 #: ../../data/tribes/buildings/productionsites/frisians/beekeepers_house/helptexts.lua:13
 msgctxt "frisians_building"
 msgid "Keeps bees and lets them swarm over flowering fields to produce honey."
-msgstr "Tüchtet Immen un lett se över flörige Felden swarmen, um Hönnig to produzeren."
+msgstr "Tücht Immen un lett se över flörige Felden swarmen, um Hönnig to produzeren."
 
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
@@ -1521,7 +1521,7 @@ msgctxt "frisians_building"
 msgid ""
 "My bushes may not be as tall as your trees, but I don’t know anybody who "
 "likes to eat bark!"
-msgstr "Miene Busken sünd wull nich so hoog as diene Bomen, aber ick weet nüms, de geern Barken ett!"
+msgstr "Miene Busken sünd wull nich so hoog as diene Bomen, aver ick weet nüms, de geern Barken ett!"
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/berry_farm/helptexts.lua:8
@@ -1565,7 +1565,7 @@ msgstr "Vergrellter Anföhrer in eener Tied, as Metall nau was"
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:13
 msgctxt "building"
 msgid "Forges tools to equip new workers."
-msgstr "Smeedt Warktüüg, ume neie Arbeiders uttostafferen."
+msgstr "Smeedt Warktüüg, ume neje Arbeiders uttostafferen."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/blacksmithy/helptexts.lua:23
@@ -1779,7 +1779,7 @@ msgstr "Wat een Buur seggt, wenn sien Anföhrer hüm fraggt, waarum he een Koorn
 #: ../../data/tribes/buildings/productionsites/frisians/farm/helptexts.lua:16
 msgctxt "building"
 msgid "Sows and harvests barley."
-msgstr "Sait un arntet Garste."
+msgstr "Sait un arnt Garste."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/farm/helptexts.lua:21
@@ -1793,7 +1793,7 @@ msgctxt "frisians_building"
 msgid ""
 "Hunters can’t sell anything on a Friday, but fishers don’t have such "
 "problems."
-msgstr "Jägers könen fredaags nix verkopen, aber Fiskers hebben deeses Probleem nich."
+msgstr "Jägers könen fredaags nix verkopen, aver Fiskers hebben deeses Probleem nich."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/fishers_house/helptexts.lua:8
@@ -2101,7 +2101,7 @@ msgctxt "frisians_building"
 msgid ""
 "Breeds strong reindeer for adding them to the transportation system. Also "
 "keeps them for their fur, which is turned into armor and cloth."
-msgstr "Tüchtet stevige Sneeihirsken för dat Stratennett. Se worden ok för hör Fell tüchtet, wat man för Kluften un Stoff bruukt."
+msgstr "Tücht stevige Sneeihirsken för dat Stratennett. Se worden ok för hör Fell tücht, wat man för Kluften un Stoff bruukt."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/reindeer_farm/helptexts.lua:21
@@ -2509,7 +2509,7 @@ msgid ""
 "Now that you have two swords, there’s more of a risk you’ll accidently stab "
 "yourself, but if you got this far, you’ll likely master this challenge as "
 "well."
-msgstr "Nu dat du twee Sweerten hest, is 't wahrschienelker, dat du di ut Versehn sülvst doodsteckst, aber wenn du al so wied kummen büst, överstahst du deese Rutfödderung wull ok."
+msgstr "Nu dat du twee Sweerten hest, is 't wahrschienelker, dat du di ut Versehn sülvst doodsteckst, aver wenn du al so wied kummen büst, överstahst du deese Rutfödderung wull ok."
 
 #. TRANSLATORS: Lore author helptext for a building
 #: ../../data/tribes/buildings/trainingsites/frisians/training_arena/helptexts.lua:11
@@ -2629,7 +2629,7 @@ msgctxt "empire_building"
 msgid ""
 "Although this ship ran aground, it still serves as accommodation for your "
 "people. It also stores your wares and tools."
-msgstr "Deeses Schipp is blot noch een Wrack, brengt aber doch noch diene Lüü unner un verwahrt diene Waren un anner Kraam."
+msgstr "Deeses Schipp is blot noch een Wrack, brengt aver doch noch diene Lüü unner un verwahrt diene Waren un anner Kraam."
 
 #. TRANSLATORS: Note helptext for a building
 #: ../../data/tribes/buildings/warehouses/empire/headquarters_shipwreck/helptexts.lua:22
@@ -2778,7 +2778,7 @@ msgstr "Wenk:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:235
 msgid "Work area radius:"
-msgstr "Grötte vum Arbeidsgewest:"
+msgstr "Grött vum Arbeidsgewest:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:239
 #: ../../data/tribes/scripting/help/building_help.lua:244
@@ -2796,7 +2796,7 @@ msgstr[1] "Soldaten, de hier unnerbrocht sünd, helen %d Gesundheid-Punkten pro 
 #: ../../data/tribes/scripting/help/building_help.lua:241
 #: ../../data/tribes/scripting/help/building_help.lua:247
 msgid "Conquer range:"
-msgstr "Grötte vum innohmen Gewest:"
+msgstr "Grött vum innohmen Gewest:"
 
 #: ../../data/tribes/scripting/help/building_help.lua:246
 #: ../../data/tribes/scripting/help/building_help.lua:250
@@ -3139,7 +3139,7 @@ msgstr "Narichten wiesen oder verbargen"
 #: ../../data/tribes/scripting/help/controls.lua:60
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
-msgstr "Tum Naslaan övers Volk"
+msgstr "Tum Naslaan över 't Volk"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'i'
 #: ../../data/tribes/scripting/help/controls.lua:62
@@ -3574,7 +3574,7 @@ msgstr "Produzeert vun"
 #: ../../data/tribes/scripting/help/ware_help.lua:107
 msgid "Ware produced:"
 msgid_plural "Wares produced:"
-msgstr[0] "Produzeerte Ware:"
+msgstr[0] "Produzeerte Waar:"
 msgstr[1] "Produzeerte Waren:"
 
 #. TRANSLATORS: Ware Encyclopedia: A list of buildings and / or workers that
@@ -3707,7 +3707,7 @@ msgid ""
 "smithy. In combination with a wooden spear, it is the equipment to fit out "
 "young soldiers. Helmets are also used in training camps – together with food"
 " – to train soldiers from health level 0 to level 1."
-msgstr "Een Helm is de eenfachste Verteidigung vun eenem Soldaten. 't word in de Panzersmee produzeert. Neie Soldaten worden daarmit un mit eener Holtpieke utstaffeert. Helms worden ok in Övens-Lagers – tosammen mit Spiesen – bruukt, um Soldaten vun Gesundheid-Stand 0 up Stand 1 uttobilden."
+msgstr "Een Helm is de eenfachste Verteidigung vun eenem Soldaten. 't word in de Panzersmee produzeert. Neje Soldaten worden daarmit un mit eener Holtpieke utstaffeert. Helms worden ok in Övens-Lagers – tosammen mit Spiesen – bruukt, um Soldaten vun Gesundheid-Stand 0 up Stand 1 uttobilden."
 
 #. TRANSLATORS: Helptext for a ware: Ax
 #: ../../data/tribes/wares/ax/helptexts.lua:4
@@ -3715,7 +3715,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "The ax is the basic weapon of the Barbarians. All young soldiers are "
 "equipped with it."
-msgstr "De Ext is de eenfachste Wapen för de Willen Lüü. Alle neien Soldaten kriegen eene."
+msgstr "De Ext is de eenfachste Wapen för de Willen Lüü. Alle nejen Soldaten kriegen eene."
 
 #. TRANSLATORS: Helptext for a ware: Battle Ax
 #: ../../data/tribes/wares/ax_battle/helptexts.lua:4
@@ -3754,7 +3754,7 @@ msgid ""
 "heavier and sharper than the ordinary ax. It is produced in ax workshops and"
 " war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
-msgstr "Neie Soldaten sünd stolt, wenn se lehren, mit deeser machtigen Wapen to fechten. 't is swarer un scharper as de normaale Ext. 't word in de Extensmede un Oorlogs-Smee produzeert. 't word in Övens-Lagers – tosammen mit Spiesen – bruukt, um Soldaten vun Angriff-Stand 0 up Stand 1 uttobilden."
+msgstr "Neje Soldaten sünd stolt, wenn se lehren, mit deeser machtigen Wapen to fechten. 't is swarer un scharper as de normaale Ext. 't word in de Extensmede un Oorlogs-Smee produzeert. 't word in Övens-Lagers – tosammen mit Spiesen – bruukt, um Soldaten vun Angriff-Stand 0 up Stand 1 uttobilden."
 
 #. TRANSLATORS: Helptext for a ware: Warrior’s Ax
 #: ../../data/tribes/wares/ax_warriors/helptexts.lua:4
@@ -3903,7 +3903,7 @@ msgid ""
 "Bread paddles are produced in the metal workshop like all other tools (but "
 "cease to be produced by the building if it is enhanced to an ax workshop and"
 " war mill)."
-msgstr "Broodschüppen worden as elkeen Warktüüg in de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
+msgstr "Broodschüppen worden as elkeen Warktüüg in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
 
 #. TRANSLATORS: Helptext for a ware: Bread Paddle
 #: ../../data/tribes/wares/bread_paddle/helptexts.lua:10
@@ -4036,7 +4036,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Felling axes are produced in the metal workshop (but cease to be produced by"
 " the building if it is enhanced to an ax workshop and war mill)."
-msgstr "Boomslager-Exten worden in de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
+msgstr "Boomslager-Exten worden in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
 
 #. TRANSLATORS: Helptext for a ware: Felling Ax
 #: ../../data/tribes/wares/felling_ax/helptexts.lua:8
@@ -4075,7 +4075,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Produced by the metal workshop (but they cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr "In de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
+msgstr "In de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
 
 #. TRANSLATORS: Helptext for a ware: Fire Tongs
 #: ../../data/tribes/wares/fire_tongs/helptexts.lua:12
@@ -4142,7 +4142,7 @@ msgid ""
 "They are one of the basic tools produced in a metal workshop (but cease to "
 "be produced by the building if it is enhanced to an ax workshop and war "
 "mill)."
-msgstr "Se worden as elkeen Warktüüg in de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
+msgstr "Se worden as elkeen Warktüüg in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
 
 #. TRANSLATORS: Helptext for a ware: Fishing Rod
 #: ../../data/tribes/wares/fishing_rod/helptexts.lua:8
@@ -4180,7 +4180,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fur can be sewn into garments. They are used as basic armor. All new "
 "soldiers are clothed in a fur garment."
-msgstr "Fell kann in Kluften naiht worden. Dat sünd dann eenfache Wapenrocken. Alle neien Soldaten kriegen eene Fellkluft."
+msgstr "Fell kann in Kluften naiht worden. Dat sünd dann eenfache Wapenrocken. Alle nejen Soldaten kriegen eene Fellkluft."
 
 #. TRANSLATORS: Helptext for a ware: Golden Fur Garment
 #: ../../data/tribes/wares/fur_garment_golden/helptexts.lua:4
@@ -4333,7 +4333,7 @@ msgid ""
 "sure you’ve always got some in reserve! They are one of the basic tools "
 "produced at the metal workshop (but cease to be produced by the building if "
 "it is enhanced to an ax workshop and war mill)."
-msgstr "Schattsökers, Baukeerls, Wapensmidds un Panzersmidds bruken all eenen Klöpper. Pass up, dat du alltied welke över hest! Se worden as elkeen Warktüüg in de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word). "
+msgstr "Schattsökers, Baukeerls, Wapensmidds un Panzersmidds bruken all eenen Klöpper. Pass up, dat du alltied welke över hest! Se worden as elkeen Warktüüg in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word). "
 
 #. TRANSLATORS: Helptext for a ware: Hammer
 #: ../../data/tribes/wares/hammer/helptexts.lua:10
@@ -4431,7 +4431,7 @@ msgctxt "ware"
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal"
 " in one blow. It is only used by hunters."
-msgstr "Deeser Speer is licht genoog tum smieten, aber swaar genoog, um elkeen Deert mit eenem Slag doodtomaken. Blot Jägers bruken 't."
+msgstr "Deeser Speer is licht genoog tum smieten, aver swaar genoog, um elkeen Deert mit eenem Slag doodtomaken. Blot Jägers bruken 't."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:6
@@ -4439,7 +4439,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Hunting spears are produced in the metal workshop (but cease to be produced "
 "by the building if it is enhanced to an ax workshop and war mill)."
-msgstr "Jaggtsperen worden in de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
+msgstr "Jaggtsperen worden in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
 
 #. TRANSLATORS: Helptext for a ware: Hunting Spear
 #: ../../data/tribes/wares/hunting_spear/helptexts.lua:8
@@ -4502,7 +4502,7 @@ msgid ""
 "Kitchen tools are needed for preparing rations, snacks and meals. Be sure to"
 " have a metal workshop to produce this basic tool (but it ceases to be "
 "produced by the building if it is enhanced to an ax workshop and war mill)."
-msgstr "Besteck is nödig, um Happen, Spiesen un Mahltieden torechttomaken. 't word in de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
+msgstr "Besteck is nödig, um Happen, Spiesen un Mahltieden torechttomaken. 't word in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
 
 #. TRANSLATORS: Helptext for a ware: Kitchen Tools
 #: ../../data/tribes/wares/kitchen_tools/helptexts.lua:6
@@ -4687,7 +4687,7 @@ msgid ""
 "Picks are used by stonemasons and miners. They are produced in the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr "Flintslagers un Bargwarkskeerls bruken Pickhacken. Se worden in de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
+msgstr "Flintslagers un Bargwarkskeerls bruken Pickhacken. Se worden in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
 
 #. TRANSLATORS: Helptext for a ware: Pick
 #: ../../data/tribes/wares/pick/helptexts.lua:8
@@ -4793,7 +4793,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Discarded weapons and armor can be recycled in a recycling center to produce"
 " new tools, weapon and armor."
-msgstr "Olle Wapen un Wapenrocken könen in de Verweerteree verweert worden, um neie Wapens, Wapenrocken un Warktüüg to produzeren."
+msgstr "Olle Wapen un Wapenrocken könen in de Verweerteree verweert worden, um neje Wapens, Wapenrocken un Warktüüg to produzeren."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:4
@@ -4819,7 +4819,7 @@ msgctxt "barbarians_ware"
 msgid ""
 "Scythes are produced by the metal workshop (but cease to be produced by the "
 "building if it is enhanced to an ax workshop and war mill)."
-msgstr "Sichten worden in de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
+msgstr "Sichten worden in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word)."
 
 #. TRANSLATORS: Helptext for a ware: Scythe
 #: ../../data/tribes/wares/scythe/helptexts.lua:12
@@ -4865,7 +4865,7 @@ msgid ""
 "Therefore the gardener and the ranger use them. Produced at the metal "
 "workshop (but cease to be produced by the building if it is enhanced to an "
 "ax workshop and war mill)."
-msgstr "De Gaardner un de Boomplanter bruken se also.  Se worden in de Metalldreihbank produzeert (aber nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word). "
+msgstr "De Gaardner un de Boomplanter bruken se also.  Se worden in de Metalldreihbank produzeert (aver nich mehr, wenn dat Huus to eener Extensmede oder Oorlogs-Smee utbaut word). "
 
 #. TRANSLATORS: Helptext for a ware: Shovel
 #: ../../data/tribes/wares/shovel/helptexts.lua:10
@@ -4967,7 +4967,7 @@ msgid ""
 "This wooden spear is the basic weapon in the Empire military system. It is "
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
-msgstr "Deese Holtpieke is de eenfachste Wapen in de Rieks-Soldateree. Se word in de Wapensmee produzeert. Tosammen mit eenem Helm is se de Utrüstung för neie Soldaten."
+msgstr "Deese Holtpieke is de eenfachste Wapen in de Rieks-Soldateree. Se word in de Wapensmee produzeert. Tosammen mit eenem Helm is se de Utrüstung för neje Soldaten."
 
 #. TRANSLATORS: Helptext for a ware: Spider Silk
 #: ../../data/tribes/wares/spider_silk/helptexts.lua:4
@@ -5017,7 +5017,7 @@ msgid ""
 "This is the basic weapon of the Frisian soldiers. Together with a fur "
 "garment, it makes up the equipment of young soldiers. Short swords are "
 "produced by the small armor smithy."
-msgstr "Dat is de eenfachste Wapen för Freeske Soldaten. Tosammen mit eener Fellkluft is se de Utrüstung för neie Soldaten. Lütte Sweerten worden in de Lütte Wapensmee produzeert."
+msgstr "Dat is de eenfachste Wapen för Freeske Soldaten. Tosammen mit eener Fellkluft is se de Utrüstung för neje Soldaten. Lütte Sweerten worden in de Lütte Wapensmee produzeert."
 
 #. TRANSLATORS: Helptext for a ware: Tabard
 #: ../../data/tribes/wares/tabard/helptexts.lua:4
@@ -5025,7 +5025,7 @@ msgctxt "atlanteans_ware"
 msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving mill."
-msgstr "Eene Kluft un een Lütter Dreespitz sünd de Utrüstung för neie Soldaten. Kluften worden in Spinnweelmöhlen produzeert."
+msgstr "Eene Kluft un een Lütter Dreespitz sünd de Utrüstung för neje Soldaten. Kluften worden in Spinnweelmöhlen produzeert."
 
 #. TRANSLATORS: Helptext for a ware: Golden Tabard
 #: ../../data/tribes/wares/tabard_golden/helptexts.lua:4
@@ -5079,7 +5079,7 @@ msgid ""
 "This is the basic weapon of the Atlantean soldiers. Together with a tabard, "
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
-msgstr "Dat is de eenfachste Wapen för Atlantiske Soldaten. Tosammen mit eener Kluft is se de Utrüstung för neie Soldaten. Lütte Dreespitzen worden as all Dreespitzen in de Wapensmee produzeert."
+msgstr "Dat is de eenfachste Wapen för Atlantiske Soldaten. Tosammen mit eener Kluft is se de Utrüstung för neje Soldaten. Lütte Dreespitzen worden as all Dreespitzen in de Wapensmee produzeert."
 
 #. TRANSLATORS: Helptext for a ware: Long Trident
 #: ../../data/tribes/wares/trident_long/helptexts.lua:4
@@ -5186,13 +5186,13 @@ msgstr "Backt Brood för de Arbeiders."
 #: ../../data/tribes/workers/atlanteans/blackroot_farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests blackroot."
-msgstr "Sait un arntet Swartwuddels."
+msgstr "Sait un arnt Swartwuddels."
 
 #. TRANSLATORS: Helptext for a worker: Builder
 #: ../../data/tribes/workers/atlanteans/builder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "Warkt up Bausteden, um neie Husen to beschicken."
+msgstr "Warkt up Bausteden, um neje Husen to beschicken."
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/atlanteans/carrier/helptexts.lua:3
@@ -5210,13 +5210,13 @@ msgstr "Brannt Köhle."
 #: ../../data/tribes/workers/atlanteans/farmer/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Plants and harvests cornfields."
-msgstr "Sait un arntet Mais."
+msgstr "Sait un arnt Mais."
 
 #. TRANSLATORS: Helptext for a worker: Fish Breeder
 #: ../../data/tribes/workers/atlanteans/fishbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds fish."
-msgstr "Tüchtet Fiske."
+msgstr "Tücht Fiske."
 
 #. TRANSLATORS: Helptext for a worker: Fisher
 #: ../../data/tribes/workers/atlanteans/fisher/helptexts.lua:3
@@ -5250,7 +5250,7 @@ msgctxt "atlanteans_worker"
 msgid ""
 "Breeds the strong Atlantean horses for adding them to the transportation "
 "system."
-msgstr "Tüchtet de stevigen Atlantisken Peer för dat Stratennett."
+msgstr "Tücht de stevigen Atlantisken Peer för dat Stratennett."
 
 #. TRANSLATORS: Helptext for a worker: Hunter
 #: ../../data/tribes/workers/atlanteans/hunter/helptexts.lua:3
@@ -5295,7 +5295,7 @@ msgstr "Förskt frömde Geweste ut."
 #: ../../data/tribes/workers/atlanteans/shipwright/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un baut neie Schippen."
+msgstr "Arbeidet in de Warft un baut neje Schippen."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/atlanteans/smelter/helptexts.lua:3
@@ -5319,7 +5319,7 @@ msgstr "Verteidigen un innehmen!"
 #: ../../data/tribes/workers/atlanteans/spiderbreeder/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Breeds spiders for silk."
-msgstr "Tüchtet Spinnen för hör Siede."
+msgstr "Tücht Spinnen för hör Siede."
 
 #. TRANSLATORS: Helptext for a worker: Stonecutter
 #: ../../data/tribes/workers/atlanteans/stonecutter/helptexts.lua:3
@@ -5388,7 +5388,7 @@ msgstr "Produzeert godes Beer, daarmit de Soldaten bi'm Öven stark un tofree s�
 #: ../../data/tribes/workers/barbarians/builder/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "Warkt up Bausteden, um neie Husen to beschicken."
+msgstr "Warkt up Bausteden, um neje Husen to beschicken."
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/barbarians/carrier/helptexts.lua:3
@@ -5400,7 +5400,7 @@ msgstr "Draggt Waren över diene Straten."
 #: ../../data/tribes/workers/barbarians/cattlebreeder/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Breeds strong oxen for adding them to the transportation system."
-msgstr "Tüchtet stevige Ossen för dat Stratennett."
+msgstr "Tücht stevige Ossen för dat Stratennett."
 
 #. TRANSLATORS: Helptext for a worker: Charcoal Burner
 #: ../../data/tribes/workers/barbarians/charcoal_burner/helptexts.lua:3
@@ -5512,7 +5512,7 @@ msgstr "Förskt frömde Geweste ut."
 #: ../../data/tribes/workers/barbarians/shipwright/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un baut neie Schippen."
+msgstr "Arbeidet in de Warft un baut neje Schippen."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/barbarians/smelter/helptexts.lua:3
@@ -5566,7 +5566,7 @@ msgstr "Produzeert Beer."
 #: ../../data/tribes/workers/empire/builder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "Warkt up Bausteden, um neie Husen to beschicken."
+msgstr "Warkt up Bausteden, um neje Husen to beschicken."
 
 #. TRANSLATORS: Helptext for a worker: Carpenter
 #: ../../data/tribes/workers/empire/carpenter/helptexts.lua:3
@@ -5600,7 +5600,7 @@ msgctxt "empire_worker"
 msgid ""
 "Breeds cute and helpful donkeys for adding them to the transportation "
 "system."
-msgstr "Tüchtet nüte, godige Langohren för dat Stratennett."
+msgstr "Tücht nüte, godige Langohren för dat Stratennett."
 
 #. TRANSLATORS: Helptext for a worker: Farmer
 #: ../../data/tribes/workers/empire/farmer/helptexts.lua:3
@@ -5662,7 +5662,7 @@ msgstr "Warkt deep in de Bargwarken, um Köhle, Iesen, Gold oder Marmel oftoboen
 #: ../../data/tribes/workers/empire/pigbreeder/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Breeds pigs."
-msgstr "Tüchtet Swientjen."
+msgstr "Tücht Swientjen."
 
 #. TRANSLATORS: Helptext for a worker: Recruit
 #: ../../data/tribes/workers/empire/recruit/helptexts.lua:3
@@ -5681,13 +5681,13 @@ msgstr "Förskt frömde Geweste ut."
 #: ../../data/tribes/workers/empire/shepherd/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Keeping sheep."
-msgstr "Tüchtet Schapen."
+msgstr "Tücht Schapen."
 
 #. TRANSLATORS: Helptext for a worker: Shipwright
 #: ../../data/tribes/workers/empire/shipwright/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un baut neie Schippen."
+msgstr "Arbeidet in de Warft un baut neje Schippen."
 
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
@@ -5806,7 +5806,7 @@ msgstr "Brannt Backstenen ut Lehm un Flint."
 #: ../../data/tribes/workers/frisians/builder/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Works at construction sites to raise new buildings."
-msgstr "Warkt up Bausteden, um neie Husen to beschicken."
+msgstr "Warkt up Bausteden, um neje Husen to beschicken."
 
 #. TRANSLATORS: Helptext for a worker: Carrier
 #: ../../data/tribes/workers/frisians/carrier/helptexts.lua:3
@@ -5918,7 +5918,7 @@ msgstr "Naiht Wapenrocken ut Fellkluften un Metallen."
 #: ../../data/tribes/workers/frisians/shipwright/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un baut neie Schippen."
+msgstr "Arbeidet in de Warft un baut neje Schippen."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/frisians/smelter/helptexts.lua:3

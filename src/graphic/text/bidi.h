@@ -46,6 +46,6 @@ bool cannot_start_line(const UChar& c);
 bool cannot_end_line(const UChar& c);
 bool is_diacritic(const UChar& c);
 
-}  // namespace UI
+}  // namespace i18n
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_BIDI_H

@@ -6,13 +6,14 @@
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
+# Jonatan Nyberg, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-15 15:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-11-23 08:41+0000\n"
+"PO-Revision-Date: 2018-11-23 16:14+0000\n"
+"Last-Translator: Jonatan Nyberg\n"
 "Language-Team: Swedish (http://www.transifex.com/widelands/widelands/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr ""
+msgstr "Det finns inga artefakter på kartan. Detta bör inte hända. Vänligen lämna in en felrapport på %s och ange din Widelands-version och kartan du försökte läsa in."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
@@ -192,55 +193,58 @@ msgstr "Evigt spel (utan krigsdimma)"
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Det här är ett evigt spel utan regler. Krigsdimman är avaktiverad."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:17
-msgid "Territorial Lord"
-msgstr "Landets härskare"
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:20
-msgid ""
-"Each player or team tries to obtain more than half of the map’s area. The "
-"winner will be the player or the team that is able to keep that area for at "
-"least 20 minutes."
-msgstr "Varje spelare eller lag försöker ta kontroll över mer än hälften av kartområdet. Vinnaren är den spelare eller det lag som lyckas hålla det området i minst 20 minuter."
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:155
-#: ../../data/scripting/win_conditions/territorial_time.lua:30
+#: ../../data/scripting/win_conditions/territorial_functions.lua:12
 #, lua-format
 msgid "Team %i"
 msgstr "Lag %i"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:157
-#: ../../data/scripting/win_conditions/territorial_time.lua:205
-#, lua-format
-msgid "%s owns more than half of the map’s area."
-msgstr "%s äger med än hälften av kartområdet."
+#: ../../data/scripting/win_conditions/territorial_functions.lua:13
+msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s har %2$3.0f%% av landytan (%3$i av %4$i)."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:158
-#: ../../data/scripting/win_conditions/territorial_time.lua:206
-#, lua-format
-msgid "You’ve still got %i minute to prevent a victory."
-msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] "Du har fortfarande %i minut på dig att förhindra en seger."
-msgstr[1] "Du har fortfarande %i minuter på dig att förhindra en seger."
+#: ../../data/scripting/win_conditions/territorial_functions.lua:14
+msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s hade %2$3.0f%% av landytan (%3$i av %4$i)."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:163
-#: ../../data/scripting/win_conditions/territorial_time.lua:212
+#: ../../data/scripting/win_conditions/territorial_functions.lua:228
 msgid "You own more than half of the map’s area."
 msgstr "Du kontrollerar mer än hälften av kartområdet."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:164
-#: ../../data/scripting/win_conditions/territorial_time.lua:213
+#: ../../data/scripting/win_conditions/territorial_functions.lua:229
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] "Behåll det i %i minut till för att vinna spelet."
 msgstr[1] "Behåll det i %i minuter till för att vinna spelet."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:20
+#: ../../data/scripting/win_conditions/territorial_functions.lua:255
+#, lua-format
+msgid "%s owns more than half of the map’s area."
+msgstr "%s äger med än hälften av kartområdet."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:256
+#, lua-format
+msgid "You’ve still got %i minute to prevent a victory."
+msgid_plural "You’ve still got %i minutes to prevent a victory."
+msgstr[0] "Du har fortfarande %i minut på dig att förhindra en seger."
+msgstr[1] "Du har fortfarande %i minuter på dig att förhindra en seger."
+
+#: ../../data/scripting/win_conditions/territorial_lord.lua:18
+msgid "Territorial Lord"
+msgstr "Landets härskare"
+
+#: ../../data/scripting/win_conditions/territorial_lord.lua:21
+msgid ""
+"Each player or team tries to obtain more than half of the map’s area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes."
+msgstr "Varje spelare eller lag försöker ta kontroll över mer än hälften av kartområdet. Vinnaren är den spelare eller det lag som lyckas hålla det området i minst 20 minuter."
+
+#: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
 msgstr "Territorietid"
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:23
+#: ../../data/scripting/win_conditions/territorial_time.lua:24
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -248,24 +252,16 @@ msgid ""
 "whichever comes first."
 msgstr "Varje spelare eller lag försöker ta kontroll över mer än hälften av kartområdet. Vinnaren är den spelare eller det lag som lyckas hålla det området i minst 20 minuter eller den som har största området efter 4 timmar (det som inträffar först)."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:28
-msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s har %2$3.0f%% av landytan (%3$i av %4$i)."
-
-#: ../../data/scripting/win_conditions/territorial_time.lua:29
-msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s hade %2$3.0f%% av landytan (%3$i av %4$i)."
-
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
 #. for x more minute(s) to win the game."
-#: ../../data/scripting/win_conditions/territorial_time.lua:229
+#: ../../data/scripting/win_conditions/territorial_time.lua:60
 #, lua-format
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] "Annars tar spelet slut om %i minut."
 msgstr[1] "Annars tar spelet slut om %i minuter."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:234
+#: ../../data/scripting/win_conditions/territorial_time.lua:65
 #: ../../data/scripting/win_conditions/wood_gnome.lua:92
 #, lua-format
 msgid "The game will end in %i minute."

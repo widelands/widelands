@@ -86,6 +86,6 @@ private:
 	int32_t highestid_;
 	int32_t state_;  //  -1: none
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_RADIOBUTTON_H

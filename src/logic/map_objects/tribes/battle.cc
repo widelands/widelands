@@ -392,4 +392,4 @@ MapObject::Loader* Battle::load(EditorGameBase& egbase, MapObjectLoader& mol, Fi
 
 	return loader.release();
 }
-}
+}  // namespace Widelands

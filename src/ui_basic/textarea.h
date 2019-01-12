@@ -101,6 +101,6 @@ private:
 
 	int fixed_width_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_TEXTAREA_H

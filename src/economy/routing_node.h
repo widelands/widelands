@@ -93,6 +93,6 @@ public:
 	virtual void get_neighbours(WareWorker type, RoutingNodeNeighbours&) = 0;
 	virtual const Coords& get_position() const = 0;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ROUTING_NODE_H

@@ -86,6 +86,8 @@ local winning_teams = {}
 --          last_winning_team = -1,
 --          -- The currently winning player, if any. -1 means that no player is currently winning.
 --          last_winning_player = -1,
+--          -- The name of the currently winning player, if any. Empty means that no player is currently winning.
+--          last_winning_player_name = "",
 --          -- Remaining time in secs for victory by > 50% territory. Default value is also used to calculate whether to send a report to players.
 --          remaining_time = 10,
 --          -- Points by player
@@ -98,6 +100,9 @@ territory_points = {
    -- TODO(GunChleoc): We want to be able to list multiple winners in case of a draw.
    last_winning_team = -1,
    last_winning_player = -1,
+   -- We record the last winning player name here to prevent crashes with retrieving
+   -- the player name when the player was just defeated a few ms ago
+   last_winning_player_name = "",
    remaining_time = 10,
    all_player_points = {},
    points = {}
@@ -114,10 +119,7 @@ territory_points = {
 --    :arg wc_descname: String with the win condition's descname
 --    :arg wc_version: Number with the win condition's descname
 --
-function calculate_territory_points(fields, players, wc_descname, wc_version)
-   -- A player might have been defeated since the last calculation
-   check_player_defeated(players, lost_game.title, lost_game.body, wc_descname, wc_version)
-
+function calculate_territory_points(fields, players)
    local points = {} -- tracking points of teams and players without teams
    local territory_was_kept = false
 
@@ -140,6 +142,7 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
             winning_teams[teaminfo.team] = true
             territory_points.last_winning_team = teaminfo.team
             territory_points.last_winning_player = -1
+            territory_points.last_winning_player_name = ""
          else
             winning_teams[teaminfo.team] = nil
          end
@@ -150,11 +153,12 @@ function calculate_territory_points(fields, players, wc_descname, wc_version)
             territory_was_kept = winning_players[playerinfo.number] ~= nil
             winning_players[playerinfo.number] = true
             territory_points.last_winning_player = playerinfo.number
+            territory_points.last_winning_player_name = players[playerinfo.number].name
             territory_points.last_winning_team = -1
          else
             winning_players[playerinfo.number] = nil
          end
-         if teaminfo.team == 0 and players[playerinfo.number] ~= nil then
+         if teaminfo.team == 0 then
             points[#points + 1] = { players[playerinfo.number].name, playerinfo.points }
          end
       end
@@ -248,7 +252,7 @@ function losing_status_header(players)
    if territory_points.last_winning_team >= 0 then
       winner_name = team_str:format(territory_points.last_winning_team)
    elseif territory_points.last_winning_player >= 0 then
-      winner_name = players[territory_points.last_winning_player].name
+      winner_name = territory_points.last_winning_player_name
    end
    local remaining_minutes = math.max(0, math.floor(territory_points.remaining_time / 60))
 

@@ -30,14 +30,14 @@ namespace {
 int text_width(int available_width, int pic_width) {
 	return available_width > (pic_width + kPadding) ? available_width - pic_width - kPadding : 0;
 }
-}
+}  // namespace
 
 namespace UI {
 /**
  * Stateboxes start out enabled and unchecked.
  * If pic is non-zero, the given picture is used instead of the normal
  * checkbox graphics.
-*/
+ */
 Statebox::Statebox(Panel* const parent,
                    Vector2i const p,
                    const Image* pic,
@@ -126,7 +126,7 @@ void Statebox::set_state(bool const on) {
 
 /**
  * Redraw the entire checkbox
-*/
+ */
 void Statebox::draw(RenderTarget& dst) {
 	if (flags_ & Has_Custom_Picture) {
 		// center picture
@@ -155,9 +155,9 @@ void Statebox::draw(RenderTarget& dst) {
 			rendered_text_->draw(dst, text_anchor);
 		}
 
-		dst.blitrect(
-		   image_anchor, pic_graphics_, Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0),
-		                                      kStateboxSize, kStateboxSize));
+		dst.blitrect(image_anchor, pic_graphics_,
+		             Recti(Vector2i((flags_ & Is_Checked) ? kStateboxSize : 0, 0), kStateboxSize,
+		                   kStateboxSize));
 
 		if (flags_ & Is_Highlighted)
 			dst.draw_rect(
@@ -196,4 +196,4 @@ void Checkbox::clicked() {
 	set_state(!get_state());
 	play_click();
 }
-}
+}  // namespace UI

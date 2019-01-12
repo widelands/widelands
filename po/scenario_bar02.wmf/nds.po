@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-05 07:05+0000\n"
-"PO-Revision-Date: 2018-10-06 09:42+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-11-01 16:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -144,7 +144,7 @@ msgstr "Bau eene Övens-Wirtschaft"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 msgid "Build a barracks to train some basic soldiers."
-msgstr "Bau eene Kasern, um neie Soldaten uttobilden."
+msgstr "Bau eene Kasern, um neje Soldaten uttobilden."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -651,5 +651,5 @@ msgstr "“%s”"
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr[0] "Neje Upgaav"
+msgstr[1] "Neje Upgaven"

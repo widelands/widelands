@@ -25,12 +25,21 @@ if(POLICY CMP0072)
   if (CMAKE_SYSTEM MATCHES "Linux")
     distro_name (DISTRO_NAME)
     # DISTRO_NAME is different on the build-servers.
-    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic")
+    if ((DISTRO_NAME MATCHES "Ubuntu 18.10" OR DISTRO_NAME MATCHES "Cosmic"
+         OR DISTRO_NAME MATCHES "Ubuntu 19.04" OR DISTRO_NAME MATCHES "Disco")
         AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       cmake_policy(SET CMP0072 OLD)
     endif()
   endif()
 endif(POLICY CMP0072)
+
+# This policy is not known to versions prior 3.12 and would result in errors,
+# if set on such systems. This can be removed when cmake_minimum_required is set
+# to 3.12 or newer  by using:
+# cmake_policy(VERSION 3.12)
+if(POLICY CMP0074)
+  cmake_policy(SET CMP0074 NEW)
+endif(POLICY CMP0074)
 
 include("${CMAKE_SOURCE_DIR}/cmake/WlFunctions.cmake")
 
@@ -71,7 +80,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Mod
 
 if (WIN32)
   set (Boost_USE_STATIC_LIBS  ON)
-  link_libraries(wsock32 ws2_32)
+  link_libraries(wsock32 ws2_32 bcrypt)
 else()
   set (Boost_USE_STATIC_LIBS  OFF)
 endif()

@@ -62,7 +62,7 @@ public:
 	 * Create the player structure for the given plnum.
 	 * Note that AI player structures and the InteractivePlayer are created when
 	 * the game starts. Similar for remote players.
-	*/
+	 */
 	Player* add_player(PlayerNumber,
 	                   uint8_t initialization_index,
 	                   const std::string& tribe,
@@ -91,8 +91,8 @@ public:
 	}
 
 	/**
-	* Adds a new player status for a player that left the game.
-	*/
+	 * Adds a new player status for a player that left the game.
+	 */
 	void add_player_end_status(const PlayerEndStatus& status);
 
 	/**
@@ -106,6 +106,6 @@ private:
 	uint8_t number_of_players_;
 	std::vector<PlayerEndStatus> players_end_status_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERSMANAGER_H

@@ -28,7 +28,7 @@ namespace Widelands {
 class Building;
 struct PlayerImmovable;
 struct Ship;
-}
+}  // namespace Widelands
 
 // Building confirm windows
 void show_bulldoze_confirm(InteractivePlayer& player,

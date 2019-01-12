@@ -137,4 +137,4 @@ void Handler::addCommand(const std::string& cmd, const HandlerFn& fun) {
 void Handler::setDefaultCommand(const HandlerFn& fun) {
 	g_console.default_handler = fun;
 }
-}
+}  // namespace DebugConsole

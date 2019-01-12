@@ -34,7 +34,7 @@ inline EditorInteractive& EditorToolsizeMenu::eia() {
 
 /**
  * Create all the buttons etc...
-*/
+ */
 EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),

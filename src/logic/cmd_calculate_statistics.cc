@@ -50,4 +50,4 @@ void CmdCalculateStatistics::write(FileWrite& fw, EditorGameBase& egbase, MapObj
 	fw.unsigned_16(kCurrentPacketVersion);
 	GameLogicCommand::write(fw, egbase, mos);
 }
-}
+}  // namespace Widelands

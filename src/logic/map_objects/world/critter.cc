@@ -338,4 +338,4 @@ void Critter::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 
 	Bob::save(egbase, mos, fw);
 }
-}
+}  // namespace Widelands

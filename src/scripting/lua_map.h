@@ -50,7 +50,7 @@ class WareDescr;
 class WorkerDescr;
 class TerrainDescription;
 class TribeDescr;
-}
+}  // namespace Widelands
 
 namespace LuaMaps {
 
@@ -1155,6 +1155,7 @@ public:
 	 */
 	int get_valid_inputs(lua_State* L);
 	int get_valid_workers(lua_State* L);
+	int get_is_stopped(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -1163,6 +1164,7 @@ public:
 	int get_workers(lua_State* L);
 	int set_inputs(lua_State* L);
 	int set_workers(lua_State* L);
+	int toggle_start_stop(lua_State* L);
 
 	/*
 	 * C Methods
@@ -1487,6 +1489,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State*,
                                                 bool is_ware);
 void luaopen_wlmap(lua_State*);
 
-}  // namespace LuaMap
+}  // namespace LuaMaps
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_MAP_H
