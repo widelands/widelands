@@ -320,6 +320,6 @@ public:
 	                               const TribesLegacyLookupTable& lookup_table,
 	                               uint8_t packet_version);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_H

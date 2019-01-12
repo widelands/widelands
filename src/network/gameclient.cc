@@ -208,11 +208,12 @@ void GameClient::run() {
 		d->lasttimestamp_realtime = SDL_GetTicks();
 
 		d->modal = igb;
-		game.run(loader_ui, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-		                                           Widelands::Game::NewMPScenario :
-		                                           Widelands::Game::NewNonScenario,
-		         "", false,
-		         (boost::format("netclient_%d") % static_cast<int>(d->settings.usernum)).str());
+		game.run(
+		   loader_ui,
+		   d->settings.savegame ?
+		      Widelands::Game::Loaded :
+		      d->settings.scenario ? Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
+		   "", false, (boost::format("netclient_%d") % static_cast<int>(d->settings.usernum)).str());
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_)

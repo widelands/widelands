@@ -390,6 +390,6 @@ protected:
 public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H

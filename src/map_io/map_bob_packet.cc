@@ -94,4 +94,4 @@ void MapBobPacket::read(FileSystem& fs,
 		throw GameDataError("bobs: %s", e.what());
 	}
 }
-}
+}  // namespace Widelands

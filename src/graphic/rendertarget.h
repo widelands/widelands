@@ -45,7 +45,7 @@ class Surface;
  * \ref set_window() with the values stored in previous and prevofs.
  * \note If the sub-window would be empty/invisible, \ref enter_window() returns
  * false and doesn't change the window state at all.
-*/
+ */
 // TODO(sirver): remove window functions and merge with surface once
 // the old richtext renderer is gone.
 class RenderTarget {

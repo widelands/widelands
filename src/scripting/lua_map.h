@@ -50,7 +50,7 @@ class WareDescr;
 class WorkerDescr;
 class TerrainDescription;
 class TribeDescr;
-}
+}  // namespace Widelands
 
 namespace LuaMaps {
 
@@ -1489,6 +1489,6 @@ RequestedWareWorker parse_wares_workers_counted(lua_State*,
                                                 bool is_ware);
 void luaopen_wlmap(lua_State*);
 
-}  // namespace LuaMap
+}  // namespace LuaMaps
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_MAP_H

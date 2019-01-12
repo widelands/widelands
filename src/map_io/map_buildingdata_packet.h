@@ -66,6 +66,6 @@ private:
 	void write_trainingsite(const TrainingSite&, FileWrite&, Game&, MapObjectSaver&);
 	void write_productionsite(const ProductionSite&, FileWrite&, Game&, MapObjectSaver&);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_BUILDINGDATA_PACKET_H

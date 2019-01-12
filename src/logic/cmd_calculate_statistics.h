@@ -41,6 +41,6 @@ struct CmdCalculateStatistics : public GameLogicCommand {
 	}
 	void execute(Game&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_CALCULATE_STATISTICS_H

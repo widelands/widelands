@@ -119,4 +119,4 @@ void IdleWorkerSupply::send_to_storage(Game& game, Warehouse* wh) {
 	t->set_destination(*wh);
 	worker_.start_task_transfer(game, t);
 }
-}
+}  // namespace Widelands

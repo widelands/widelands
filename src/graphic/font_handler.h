@@ -59,6 +59,6 @@ public:
 IFontHandler* create_fonthandler(ImageCache* image_cache, const std::string& locale);
 
 extern IFontHandler* g_fh;
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_GRAPHIC_FONT_HANDLER_H

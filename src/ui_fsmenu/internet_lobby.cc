@@ -43,7 +43,7 @@ const uint8_t kClientRegistered = 1;
 const uint8_t kClientSuperuser = 2;
 // 3 was INTERNET_CLIENT_BOT which is not used
 const uint8_t kClientIRC = 4;
-}
+}  // namespace
 
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                                                          char const* const pwd,

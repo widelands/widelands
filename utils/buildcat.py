@@ -181,7 +181,6 @@ def do_makedirs(dirs):
     """Create subdirectories.
 
     Ignore errors
-
     """
     try:
         os.makedirs(dirs)
@@ -196,7 +195,6 @@ def pot_modify_header(potfile_in, potfile_out, header):
     Returns whether or not the header was successfully modified.
 
     Note: potfile_in and potfile_out must not point to the same file!
-
     """
     class State:
         (start,
@@ -267,7 +265,6 @@ def do_compile(potfile, srcfiles):
     strings.
 
     Merge the results and write out the corresponding pot file.
-
     """
     files = []
     for i in srcfiles:

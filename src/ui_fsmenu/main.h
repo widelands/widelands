@@ -27,7 +27,7 @@
 /**
  * This runs the main menu. There, you can select
  * between different playmodes, exit and so on.
-*/
+ */
 class FullscreenMenuMain : public FullscreenMenuMainMenu {
 public:
 	FullscreenMenuMain();

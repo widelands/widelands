@@ -161,12 +161,12 @@ void md5_process_block(void const* const buffer, uint32_t const len, Md5Ctx* con
 		uint32_t const C_save = C;
 		uint32_t const D_save = D;
 
-/* First round: using the given function, the context and a constant
-the next context is computed.  Because the algorithms processing
-unit is a 32-bit word and it is determined to work on words in
-little endian byte order we perhaps have to change the byte order
-before the computation.  To reduce the work for the next steps
-we store the swapped words in the array CORRECT_WORDS.  */
+		/* First round: using the given function, the context and a constant
+		the next context is computed.  Because the algorithms processing
+		unit is a 32-bit word and it is determined to work on words in
+		little endian byte order we perhaps have to change the byte order
+		before the computation.  To reduce the work for the next steps
+		we store the swapped words in the array CORRECT_WORDS.  */
 
 #define OP(a, b, c, d, s, T)                                                                       \
 	do {                                                                                            \
@@ -177,7 +177,7 @@ we store the swapped words in the array CORRECT_WORDS.  */
 	} while (false)
 
 /* It is unfortunate that C does not provide an operator for
-   cyclic rotation.  Hope the C compiler is smart enough.  */
+	cyclic rotation.  Hope the C compiler is smart enough.  */
 #define CYCLIC(w, s) (w = (w << s) | (w >> (32 - s)))
 
 		/* Before we start, one word to the strange constants.

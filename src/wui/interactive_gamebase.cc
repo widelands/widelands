@@ -130,7 +130,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 		   default:
 			   break;
 		   }
-		});
+	   });
 }
 
 /// \return a pointer to the running \ref Game instance.

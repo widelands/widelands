@@ -38,7 +38,7 @@ class EditorGameBase;
 class Game;
 class Map;
 class MapLoader;
-}
+}  // namespace Widelands
 class Image;
 class RenderTarget;
 class GameController;

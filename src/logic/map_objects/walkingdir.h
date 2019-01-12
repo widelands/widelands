@@ -40,6 +40,6 @@ enum WalkingDir {
 WalkingDir get_cw_neighbour(WalkingDir dir);
 WalkingDir get_ccw_neighbour(WalkingDir dir);
 WalkingDir get_backward_dir(WalkingDir dir);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WALKINGDIR_H

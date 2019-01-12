@@ -78,4 +78,4 @@ void GameClassPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 
 	fw.write(fs, "binary/game_class");
 }
-}
+}  // namespace Widelands

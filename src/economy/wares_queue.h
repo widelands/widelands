@@ -68,6 +68,6 @@ protected:
 	/// Number of items that are currently in the queue
 	Quantity filled_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WARES_QUEUE_H

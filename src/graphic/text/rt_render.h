@@ -83,6 +83,6 @@ private:
 	const UI::FontSets& fontsets_;       // All fontsets
 	RendererStyle renderer_style_;       // Properties that all render nodes need to know about
 };
-}
+}  // namespace RT
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_RENDER_H

@@ -83,4 +83,4 @@ template <> bool MapHollowRegion<Area<>>::advance(const Map& map) {
 
 	return true;
 }
-}
+}  // namespace Widelands

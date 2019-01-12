@@ -400,7 +400,7 @@ void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
  *
  * \note Due to fetch_from_flag() semantics, this function makes no sense
  * for a  building destination.
-*/
+ */
 bool Flag::has_pending_ware(Game&, Flag& dest) {
 	for (int32_t i = 0; i < ware_filled_; ++i) {
 		if (!wares_[i].pending) {
@@ -495,7 +495,7 @@ bool Flag::cancel_pickup(Game& game, Flag& destflag) {
 
 /**
  * Wake one sleeper from the capacity queue.
-*/
+ */
 void Flag::wake_up_capacity_queue(Game& game) {
 	while (!capacity_wait_.empty()) {
 		Worker* const w = capacity_wait_.front().get(game);
@@ -512,7 +512,7 @@ void Flag::wake_up_capacity_queue(Game& game) {
  *
  * This function may return 0 even if \ref ack_pickup() has already been
  * called successfully.
-*/
+ */
 WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
 	int32_t best_index = -1;
 
@@ -855,4 +855,4 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 		molog("No wares at flag.\n");
 	}
 }
-}
+}  // namespace Widelands

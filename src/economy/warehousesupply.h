@@ -75,6 +75,6 @@ private:
 	WareList workers_;  //  we use this to keep the soldiers
 	Warehouse* warehouse_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_WAREHOUSESUPPLY_H

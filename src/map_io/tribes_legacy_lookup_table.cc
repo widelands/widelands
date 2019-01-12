@@ -258,20 +258,19 @@ TribesLegacyLookupTable::TribesLegacyLookupTable()
                           {"resi_none", "empire_resi_none"},
                           {"resi_water1", "empire_resi_water"},
                        }),
-        std::make_pair(
-           "frisians",
-           std::map<std::string, std::string>{
-              {"resi_coal1", "frisians_resi_coal_1"},
-              {"resi_iron1", "frisians_resi_iron_1"},
-              {"resi_gold1", "frisians_resi_gold_1"},
-              {"resi_stones1", "frisians_resi_stones_1"},
-              {"resi_coal2", "frisians_resi_coal_2"},
-              {"resi_iron2", "frisians_resi_iron_2"},
-              {"resi_gold2", "frisians_resi_gold_2"},
-              {"resi_stones2", "frisians_resi_stones_2"},
-              {"resi_none", "frisians_resi_none"},
-              {"resi_water1", "frisians_resi_water"},
-           }),
+        std::make_pair("frisians",
+                       std::map<std::string, std::string>{
+                          {"resi_coal1", "frisians_resi_coal_1"},
+                          {"resi_iron1", "frisians_resi_iron_1"},
+                          {"resi_gold1", "frisians_resi_gold_1"},
+                          {"resi_stones1", "frisians_resi_stones_1"},
+                          {"resi_coal2", "frisians_resi_coal_2"},
+                          {"resi_iron2", "frisians_resi_iron_2"},
+                          {"resi_gold2", "frisians_resi_gold_2"},
+                          {"resi_stones2", "frisians_resi_stones_2"},
+                          {"resi_none", "frisians_resi_none"},
+                          {"resi_water1", "frisians_resi_water"},
+                       }),
      } {
 }
 

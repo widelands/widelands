@@ -97,6 +97,6 @@ private:
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H
