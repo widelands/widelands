@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-12-24 10:06+0000\n"
+"POT-Creation-Date: 2018-12-28 13:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -488,7 +488,7 @@ msgid "Name: %s"
 msgstr ""
 
 #: ../../src/editor/tools/info_tool.cc:215
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:171
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:175
 #: ../../src/ui_fsmenu/launch_mpg.cc:589
 msgid "Size: %1% x %2%"
 msgstr ""
@@ -659,7 +659,7 @@ msgstr ""
 msgid "Suggested Teams:"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:136
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:137
 #: ../../src/ui_fsmenu/launch_mpg.cc:592
 #, c-format
 msgid "%u Player"
@@ -667,15 +667,15 @@ msgid_plural "%u Players"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:141
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:142
 msgid "Main Options"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:143
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:144
 msgid "Tags"
 msgstr ""
 
-#: ../../src/editor/ui_menus/main_menu_map_options.cc:145
+#: ../../src/editor/ui_menus/main_menu_map_options.cc:146
 msgid "Teams"
 msgstr ""
 
@@ -1613,7 +1613,7 @@ msgstr ""
 msgid "Game saved"
 msgstr ""
 
-#: ../../src/map_io/s2map.cc:424
+#: ../../src/map_io/s2map.cc:454
 msgid "Bluebyte Settlers II Map. No comment defined!"
 msgstr ""
 
