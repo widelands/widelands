@@ -138,7 +138,7 @@ Production Sites
 **collects_ware_from_map**
     The building will generate this ware from the map, e.g. a well mining the ``water`` ware,
     or the hunter returning from the hunt with the ``meat`` ware. The same ware needs also to be
-listed as the first one of the building's outputs, e.g.::
+    listed as the first one of the building's outputs, e.g.::
 
         aihints = {
             collects_ware_from_map = "meat"
@@ -151,7 +151,7 @@ listed as the first one of the building's outputs, e.g.::
 
     **Note:** The AI expects exactly one such building type for each of the following wares:
     ``fish`` (fisher), ``granite`` (quarry), ``log`` (lumberjack/woodcutter), ``meat`` (hunter),
-``water`` (well).
+    ``water`` (well).
 
 **mines**
     The building will mine to obtain the given ware, e.g.::
