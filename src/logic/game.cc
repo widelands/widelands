@@ -624,6 +624,7 @@ Md5Checksum Game::get_sync_hash() const {
  */
 uint32_t Game::logic_rand() {
 	uint32_t const result = rng().rand();
+	syncstream().unsigned_8(Syncstream::Random);
 	syncstream().unsigned_32(result);
 	return result;
 }

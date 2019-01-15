@@ -65,7 +65,7 @@ Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)
 	assert(first_soldier->get_owner() != second_soldier->get_owner());
 	{
 		StreamWrite& ss = game.syncstream();
-		ss.unsigned_32(0x00e111ba);  // appears as ba111e00 in a hexdump
+		ss.unsigned_8(Syncstream::Battle);
 		ss.unsigned_32(first_soldier->serial());
 		ss.unsigned_32(second_soldier->serial());
 	}

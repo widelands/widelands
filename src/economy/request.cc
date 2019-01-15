@@ -380,7 +380,7 @@ void Request::start_transfer(Game& game, Supply& supp) {
 	assert(is_open());
 
 	::StreamWrite& ss = game.syncstream();
-	ss.unsigned_32(0x01decafa);  // appears as facade01 in sync stream
+	ss.unsigned_8(Syncstream::StartTransfer);
 	ss.unsigned_32(target().serial());
 	ss.unsigned_32(supp.get_position(game)->serial());
 

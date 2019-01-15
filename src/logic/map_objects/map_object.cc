@@ -49,6 +49,7 @@ CmdDestroyMapObject::CmdDestroyMapObject(uint32_t const t, MapObject& o)
 }
 
 void CmdDestroyMapObject::execute(Game& game) {
+	game.syncstream().unsigned_8(Syncstream::DestroyObject);
 	game.syncstream().unsigned_32(obj_serial);
 
 	if (MapObject* obj = game.objects().get_object(obj_serial))
@@ -94,6 +95,7 @@ CmdAct::CmdAct(uint32_t const t, MapObject& o, int32_t const a)
 }
 
 void CmdAct::execute(Game& game) {
+	game.syncstream().unsigned_8(Syncstream::CmdAct);
 	game.syncstream().unsigned_32(obj_serial);
 
 	if (MapObject* const obj = game.objects().get_object(obj_serial))

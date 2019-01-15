@@ -63,6 +63,20 @@ enum {
 	gs_ending
 };
 
+
+namespace Syncstream {
+	constexpr uint8_t DestroyObject			= 0x03;
+	constexpr uint8_t ProcessRequests		= 0x04;
+	constexpr uint8_t HandleActiveSupplies	= 0x05;
+	constexpr uint8_t StartTransfer			= 0x06;
+	constexpr uint8_t RunQueue				= 0x07;
+	constexpr uint8_t RandomSeed			= 0x08;
+	constexpr uint8_t Random				= 0x09;
+	constexpr uint8_t CmdAct				= 0x0A;
+	constexpr uint8_t Battle				= 0x0B;
+	constexpr uint8_t BobSetPosition		= 0x0C;
+}
+
 class Player;
 class MapLoader;
 class PlayerCommand;
@@ -187,6 +201,8 @@ public:
 
 	void logic_rand_seed(uint32_t const seed) {
 		rng().seed(seed);
+		syncstream().unsigned_8(Syncstream::RandomSeed);
+		syncstream().unsigned_32(seed);
 	}
 
 	StreamWrite& syncstream();
