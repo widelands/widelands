@@ -63,18 +63,49 @@ enum {
 	gs_ending
 };
 
-
+// The entry types that are written to the syncstream
+// The IDs are a number in the higher 4 bits and the length in bytes in the lower 4 bits
 namespace Syncstream {
-	constexpr uint8_t DestroyObject			= 0x03;
-	constexpr uint8_t ProcessRequests		= 0x04;
-	constexpr uint8_t HandleActiveSupplies	= 0x05;
-	constexpr uint8_t StartTransfer			= 0x06;
-	constexpr uint8_t RunQueue				= 0x07;
-	constexpr uint8_t RandomSeed			= 0x08;
-	constexpr uint8_t Random				= 0x09;
-	constexpr uint8_t CmdAct				= 0x0A;
-	constexpr uint8_t Battle				= 0x0B;
-	constexpr uint8_t BobSetPosition		= 0x0C;
+	// game.cc Game::report_desync()
+	// u32 id of desynced user
+	constexpr uint8_t Desync = 0x14;
+	// map_object.cc CmdDestroyMapObject::execute()
+	// u32 object serial
+	constexpr uint8_t DestroyObject = 0x24;
+	// economy.cc Economy::process_requests()
+	// u8 request type
+	// u8 request index
+	// u32 target serial
+	constexpr uint8_t ProcessRequests = 0x36;
+	// economy.cc Economy::handle_active_supplies()
+	// u32 assignments size
+	constexpr uint8_t HandleActiveSupplies = 0x44;
+	// request.cc Request::start_transfer()
+	// u32 target serial
+	// u32 source(?) serial
+	constexpr uint8_t StartTransfer = 0x58;
+	// cmd_queue.cc CmdQueue::run_queue()
+	// u32 duetime
+	// u32 command id
+	constexpr uint8_t RunQueue = 0x68;
+	// game.h Game::logic_rand_seed()
+	// u32 random seed
+	constexpr uint8_t RandomSeed = 0x74;
+	// game.cc Game::logic_rand()
+	// u32 random value
+	constexpr uint8_t Random = 0x84;
+	// map_object.cc CmdAct::execute()
+	// u32 object serial
+	constexpr uint8_t CmdAct = 0x94;
+	// battle.cc Battle::Battle()
+	// u32 first soldier serial
+	// u32 second soldier serial
+	constexpr uint8_t Battle = 0xA8;
+	// bob.cc Bob::set_position()
+	// u32 bob serial
+	// s16 position x
+	// s16 position y
+	constexpr uint8_t BobSetPosition = 0xB8;
 }
 
 class Player;
@@ -206,6 +237,8 @@ public:
 	}
 
 	StreamWrite& syncstream();
+	void report_sync_request();
+	void report_desync(uint32_t playernumber);
 	Md5Checksum get_sync_hash() const;
 
 	void enqueue_command(Command* const);
@@ -295,7 +328,8 @@ private:
 		     target_(target),
 		     counter_(0),
 		     next_diskspacecheck_(0),
-		     syncstreamsave_(false) {
+		     syncstreamsave_(false),
+		     current_excerpt_id_(0) {
 		}
 
 		~SyncWrapper() override;
@@ -320,6 +354,17 @@ private:
 		std::unique_ptr<StreamWrite> dump_;
 		std::string dumpfname_;
 		bool syncstreamsave_;
+		// Use a cyclic buffer for storing parts of the syncstream
+		// Currently used buffer
+		size_t current_excerpt_id_;
+		// (Arbitrary) count of buffers
+		// Syncreports seem to be requested from the network clients every game second so this
+		// buffer should be big enough to store the last 32 seconds of the game actions leading
+		// up to the desync
+		static constexpr size_t kExcerptSize = 32;
+		// Array of byte buffers
+		// std::string is used as a binary buffer here
+		std::string excerpts_buffer_[kExcerptSize];
 	} syncwrapper_;
 
 	GameController* ctrl_;

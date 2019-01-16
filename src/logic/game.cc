@@ -87,6 +87,8 @@ Game::SyncWrapper::~SyncWrapper() {
 void Game::SyncWrapper::start_dump(const std::string& fname) {
 	dumpfname_ = fname + kSyncstreamExtension;
 	dump_.reset(g_fs->open_stream_write(dumpfname_));
+	current_excerpt_id_ = 0;
+	excerpts_buffer_[current_excerpt_id_].clear();
 }
 
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
@@ -114,6 +116,8 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 			log("Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
 			dump_.reset();
 		}
+		assert(current_excerpt_id_ < kExcerptSize);
+		excerpts_buffer_[current_excerpt_id_].append(static_cast<const char*>(sync_data), size);
 	}
 
 	target_.data(sync_data, size);
@@ -600,6 +604,40 @@ void Game::cleanup_for_load() {
  */
 StreamWrite& Game::syncstream() {
 	return syncwrapper_;
+}
+
+/**
+ * Switches to the next part of the syncstream excerpt.
+ */
+void Game::report_sync_request() {
+	syncwrapper_.current_excerpt_id_ = (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	syncwrapper_.excerpts_buffer_[syncwrapper_.current_excerpt_id_].clear();
+}
+
+/**
+ * Triggers writing of syncstream excerpt and adds the playernumber of the desynced player
+ * to the stream.
+ */
+void Game::report_desync(uint32_t playernumber) {
+	std::string filename = syncwrapper_.dumpfname_;
+	filename.replace(filename.length() - kSyncstreamExtension.length(), kSyncstreamExtension.length(), kSyncstreamExcerptExtension);
+	std::unique_ptr<StreamWrite> file(g_fs->open_stream_write(filename));
+	assert(file != nullptr);
+	// Write our buffers to the file. Start with the oldest one
+	const size_t i2 = (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	size_t i = i2;
+	for (;;) {
+		file->text(syncwrapper_.excerpts_buffer_[i]);
+		syncwrapper_.excerpts_buffer_[i].clear();
+		i = (i + 1) % SyncWrapper::kExcerptSize;
+		if (i == i2) {
+			break;
+		}
+	}
+	file->unsigned_8(Syncstream::Desync);
+	file->unsigned_32(playernumber);
+	// Restart buffers
+	syncwrapper_.current_excerpt_id_ = 0;
 }
 
 /**

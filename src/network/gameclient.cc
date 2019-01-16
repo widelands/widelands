@@ -860,6 +860,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		int32_t const time = packet.signed_32();
 		d->time.receive(time);
 		d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
+		d->game->report_sync_request();
 		break;
 	}
 
@@ -891,8 +892,11 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_INFO_DESYNC:
 		log("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
 		    "information for debugging.\n");
-		if (d->game)
+		if (d->game) {
 			d->game->save_syncstream(true);
+			// We don't know our playernumber, just use 0
+			d->game->report_desync(0);
+		}
 		break;
 
 	default:
