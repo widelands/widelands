@@ -32,6 +32,6 @@ struct GameClassPacket : public GameDataPacket {
 	void read(FileSystem&, Game&, MapObjectLoader* = nullptr) override;
 	void write(FileSystem&, Game&, MapObjectSaver* = nullptr) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_GAME_IO_GAME_CLASS_PACKET_H

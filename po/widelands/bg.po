@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-23 08:41+0000\n"
-"PO-Revision-Date: 2018-11-23 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-25 15:03+0000\n"
+"Last-Translator: Любомир Василев\n"
 "Language-Team: Bulgarian (http://www.transifex.com/widelands/widelands/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -307,7 +307,7 @@ msgid "Redo"
 msgstr "Повтаряне"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:350 ../../src/wui/interactive_player.cc:185
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:185
 msgid "Help"
 msgstr "Помощ"
 
@@ -857,17 +857,17 @@ msgstr "без име"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:166
 msgid "A file or directory with that name already exists."
-msgstr ""
+msgstr "Вече съществува файл или папка с това име."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:168
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:183
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "Грешка при създаването на папката!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:181
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "Грешка при създаването на папката „%s“."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:295
 #: ../../src/wui/game_main_menu_save_game.cc:175
@@ -882,8 +882,9 @@ msgid "Error Saving Map!"
 msgstr "Грешка при запазването на картата!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:311
-msgid "File ‘%’ could not be deleted."
-msgstr "Файлът „%“ не може да бъде изтрит."
+#, c-format
+msgid "File ‘%s’ could not be deleted."
+msgstr "Файлът „%s“ не може да бъде изтрит."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:314
 msgid "Try saving under a different name!"
@@ -903,7 +904,7 @@ msgstr "Въведете име на папка:"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:100
 msgid "This extension is reserved!"
-msgstr ""
+msgstr "Това разширение е запазено!"
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
@@ -1589,16 +1590,16 @@ msgid ""
 "compatible with world"
 msgstr "трябва да развъжда ресурс от тип %s, който не е наличен в света; племето не е съвместимо със света"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:975
+#: ../../src/logic/map_objects/tribes/worker.cc:976
 msgid "A geologist found resources."
 msgstr "Геолог откри ресурси."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1849
+#: ../../src/logic/map_objects/tribes/worker.cc:1850
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Вашият/ата/ето %s не може да намери път към дома и най-вероятно ще умре."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1855
+#: ../../src/logic/map_objects/tribes/worker.cc:1856
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1606,7 +1607,7 @@ msgid_plural "Workers"
 msgstr[0] "Работник"
 msgstr[1] "Работници"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1856
+#: ../../src/logic/map_objects/tribes/worker.cc:1857
 msgid "Worker got lost!"
 msgstr "Работник се загуби!"
 
@@ -3198,7 +3199,7 @@ msgstr "Цена за изграждане:"
 msgid "Destroy"
 msgstr "Разрушаване"
 
-#: ../../src/wui/buildingwindow.cc:291
+#: ../../src/wui/buildingwindow.cc:290 ../../src/wui/buildingwindow.cc:291
 msgid "Dismantle"
 msgstr "Демонтиране"
 
@@ -3206,28 +3207,28 @@ msgstr "Демонтиране"
 msgid "Returns:"
 msgstr "Връща:"
 
-#: ../../src/wui/buildingwindow.cc:331 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:335 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Показване на прозореца за отстраняване на грешки"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:342
 msgid "Center view on this"
 msgstr "Центриране на изгледа върху това"
 
-#: ../../src/wui/buildingwindow.cc:521
+#: ../../src/wui/buildingwindow.cc:525
 msgid "Hide work area"
 msgstr "Скриване на работната област"
 
-#: ../../src/wui/buildingwindow.cc:524
+#: ../../src/wui/buildingwindow.cc:528
 msgid "Show work area"
 msgstr "Показване на работната област"
 
-#: ../../src/wui/buildingwindow.cc:557
+#: ../../src/wui/buildingwindow.cc:561
 msgid "Start an expedition"
 msgstr "Започване на експедиция"
 
-#: ../../src/wui/buildingwindow.cc:561
+#: ../../src/wui/buildingwindow.cc:565
 msgid "Cancel the expedition"
 msgstr "Отмяна на експедицията"
 
@@ -3981,41 +3982,41 @@ msgstr[1] "Наистина ли искате да изтриете тези %d 
 
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting File"
-msgstr ""
+msgstr "Потвърждаване на изтриването на файл"
 
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting Files"
-msgstr ""
+msgstr "Потвърждаване на изтриването на файлове"
 
 #: ../../src/wui/load_or_save_game.cc:315
 msgid "Error Deleting File!"
-msgstr ""
+msgstr "Грешка при изтриването на файла!"
 
 #: ../../src/wui/load_or_save_game.cc:315
 msgid "Error Deleting Files!"
-msgstr ""
+msgstr "Грешка при изтриването на файловете!"
 
 #: ../../src/wui/load_or_save_game.cc:318
 msgid "The replay could not be deleted."
-msgstr ""
+msgstr "Повторението не може да бъде изтрито"
 
 #: ../../src/wui/load_or_save_game.cc:320
 #, c-format
 msgid "%d replay could not be deleted."
 msgid_plural "%d replays could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d повторение не може да бъде изтрито."
+msgstr[1] "%d повторения не могат да бъдат изтрити."
 
 #: ../../src/wui/load_or_save_game.cc:327
 msgid "The game could not be deleted."
-msgstr ""
+msgstr "Играта не може да бъде изтрита."
 
 #: ../../src/wui/load_or_save_game.cc:329
 #, c-format
 msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d игра не може да бъде изтрита."
+msgstr[1] "%d игри не могат да бъдат изтрити."
 
 #: ../../src/wui/load_or_save_game.cc:374
 msgid "Filename: Map name (start of replay)"

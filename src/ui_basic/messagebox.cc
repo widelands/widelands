@@ -159,4 +159,4 @@ void WLMessageBox::clicked_back() {
 	if (is_modal())
 		end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 }
-}
+}  // namespace UI

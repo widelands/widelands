@@ -80,4 +80,4 @@ void MapPortSpacesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjec
 	}
 	prof.write("port_spaces", false, fs);
 }
-}
+}  // namespace Widelands

@@ -23,6 +23,6 @@
 namespace Widelands {
 enum ProgramResult { None = 0, Failed = 1, Completed = 2, Skipped = 3 };
 enum ProgramResultHandlingMethod { Fail, Complete, Skip, Continue, Repeat };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PROGRAM_RESULT_H

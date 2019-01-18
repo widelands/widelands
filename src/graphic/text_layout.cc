@@ -50,18 +50,17 @@ void replace_entities(std::string* text) {
 }
 
 int text_width(const std::string& text, int ptsize) {
-	return UI::g_fh->render(
-	                  as_editorfont(
-	                     text.substr(
-	                        0, g_gr->max_texture_size_for_font_rendering() / text_height() - 1),
-	                     ptsize - UI::g_fh->fontset()->size_offset()))
+	return UI::g_fh
+	   ->render(as_editorfont(
+	      text.substr(0, g_gr->max_texture_size_for_font_rendering() / text_height() - 1),
+	      ptsize - UI::g_fh->fontset()->size_offset()))
 	   ->width();
 }
 
 int text_height(int ptsize, UI::FontSet::Face face) {
-	return UI::g_fh->render(as_aligned(UI::g_fh->fontset()->representative_character(),
-	                                   UI::Align::kLeft, ptsize - UI::g_fh->fontset()->size_offset(),
-	                                   RGBColor(0, 0, 0), face))
+	return UI::g_fh
+	   ->render(as_aligned(UI::g_fh->fontset()->representative_character(), UI::Align::kLeft,
+	                       ptsize - UI::g_fh->fontset()->size_offset(), RGBColor(0, 0, 0), face))
 	   ->height();
 }
 

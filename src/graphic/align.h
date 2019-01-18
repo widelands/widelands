@@ -33,5 +33,5 @@ enum class Align {
 	kTop = kLeft,
 	kBottom = kRight,
 };
-}
+}  // namespace UI
 #endif  // end of include guard: WL_GRAPHIC_ALIGN_H

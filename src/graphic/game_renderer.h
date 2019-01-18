@@ -20,8 +20,8 @@
 #ifndef WL_GRAPHIC_GAME_RENDERER_H
 #define WL_GRAPHIC_GAME_RENDERER_H
 
-#include <memory>
 #include <map>
+#include <memory>
 
 #include "base/macros.h"
 #include "base/vector.h"

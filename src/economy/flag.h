@@ -197,6 +197,6 @@ private:
 };
 
 extern FlagDescr g_flag_descr;
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_FLAG_H

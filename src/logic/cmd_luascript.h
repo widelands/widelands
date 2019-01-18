@@ -46,6 +46,6 @@ struct CmdLuaScript : public GameLogicCommand {
 private:
 	std::string script_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_CMD_LUASCRIPT_H

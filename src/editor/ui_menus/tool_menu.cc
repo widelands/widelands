@@ -94,7 +94,7 @@ EditorToolMenu::EditorToolMenu(EditorInteractive& parent, UI::UniqueWindow::Regi
 
 /**
  * Called when the radiogroup changes or is reclicked
-*/
+ */
 void EditorToolMenu::changed_to() {
 	const int32_t n = radioselect_.get_state();
 

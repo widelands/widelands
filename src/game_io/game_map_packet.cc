@@ -65,4 +65,4 @@ void GameMapPacket::write(FileSystem& fs, Game& game, MapObjectSaver* const) {
 	wms_->save();
 	mos_ = wms_->get_map_object_saver();
 }
-}
+}  // namespace Widelands

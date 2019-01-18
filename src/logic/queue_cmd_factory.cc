@@ -116,4 +116,4 @@ GameLogicCommand& QueueCmdFactory::create_correct_queue_command(QueueCommandType
 	}
 	NEVER_HERE();
 }
-}
+}  // namespace Widelands

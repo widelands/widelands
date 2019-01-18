@@ -9,7 +9,6 @@ You will need to have the Translate Toolkit installed:
 http://toolkit.translatehouse.org/
 
 For Debian-based Linux: sudo apt-get install translate-toolkit
-
 """
 
 from collections import defaultdict
@@ -146,6 +145,7 @@ def main():
         print('Something went wrong:')
         traceback.print_exc()
         return 1
+
 
 if __name__ == '__main__':
     sys.exit(main())

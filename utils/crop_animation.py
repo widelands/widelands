@@ -39,7 +39,6 @@ def crop_images(basepath, section):
     The first parameter basepath is the directory in which the conf file
     was.  The second parameter section is a dictionary with contains the
     important contents of the section from the conf file
-
     """
     # two empty lists. The first for the animation pictures
     list = []
@@ -252,7 +251,6 @@ def main():
     """This is the main function.
 
     It calls read_conffile() for every file given to this program
-
     """
     if len(sys.argv) <= 1:
         print 'Usage: ' + sys.argv[0] + ' conf-files'
@@ -263,6 +261,7 @@ def main():
             read_conffile(file)
         else:
             print '*** WARNING ***: ' + file + ' is not a file'
+
 
 if __name__ == '__main__':
     main()

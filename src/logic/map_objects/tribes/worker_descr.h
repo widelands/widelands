@@ -148,6 +148,6 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(WorkerDescr);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_DESCR_H

@@ -106,6 +106,6 @@ protected:
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_CARRIER_H

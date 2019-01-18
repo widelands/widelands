@@ -34,6 +34,6 @@ public:
 	void read(FileSystem&, EditorGameBase&, const WorldLegacyLookupTable& lookup_table);
 	void write(FileSystem&, EditorGameBase&);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_TERRAIN_PACKET_H

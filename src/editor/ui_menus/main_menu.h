@@ -28,7 +28,7 @@ class EditorInteractive;
 
 /**
  * This represents the main menu
-*/
+ */
 struct EditorMainMenu : public UI::UniqueWindow {
 	EditorMainMenu(EditorInteractive&, UI::UniqueWindow::Registry&);
 

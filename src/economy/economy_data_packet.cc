@@ -126,4 +126,4 @@ void EconomyDataPacket::write(FileWrite& fw) {
 	fw.unsigned_32(0);  //  terminator
 	fw.unsigned_32(eco_->request_timerid_);
 }
-}
+}  // namespace Widelands

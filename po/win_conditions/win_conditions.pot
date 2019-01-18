@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"POT-Creation-Date: 2019-01-13 13:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -197,23 +197,23 @@ msgstr ""
 msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:228
+#: ../../data/scripting/win_conditions/territorial_functions.lua:232
 msgid "You own more than half of the map’s area."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:229
+#: ../../data/scripting/win_conditions/territorial_functions.lua:233
 #, lua-format
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:255
+#: ../../data/scripting/win_conditions/territorial_functions.lua:259
 #, lua-format
 msgid "%s owns more than half of the map’s area."
 msgstr ""
 
-#: ../../data/scripting/win_conditions/territorial_functions.lua:256
+#: ../../data/scripting/win_conditions/territorial_functions.lua:260
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."

@@ -40,6 +40,6 @@ enum RoadType {
 	kSouthEast = 2,
 	kSouthWest = 4,
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_ROADTYPE_H

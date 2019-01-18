@@ -55,6 +55,6 @@ private:
 	MapSaver* wms_;
 	WidelandsMapLoader* wml_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_GAME_IO_GAME_MAP_PACKET_H

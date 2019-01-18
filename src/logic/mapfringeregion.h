@@ -81,6 +81,6 @@ private:
 // Forward declarations of template instantiations
 template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map);
 template <> bool MapFringeRegion<Area<>>::advance(const Map& map);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPFRINGEREGION_H
