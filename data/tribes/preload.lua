@@ -23,6 +23,7 @@ return {
          dirname .. "scripting/starting_conditions/barbarians/fortified_village.lua";
          dirname .. "scripting/starting_conditions/barbarians/trading_outpost.lua";
          dirname .. "scripting/starting_conditions/barbarians/village.lua";
+         dirname .. "scripting/starting_conditions/barbarians/cheating.lua";
       }
    },
 
