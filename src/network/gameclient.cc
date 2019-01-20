@@ -894,8 +894,8 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		    "information for debugging.\n");
 		if (d->game) {
 			d->game->save_syncstream(true);
-			// We don't know our playernumber, just use 0
-			d->game->report_desync(0);
+			// We don't know our playernumber, so report as -1
+			d->game->report_desync(-1);
 		}
 		break;
 

@@ -37,6 +37,7 @@
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
@@ -617,12 +618,19 @@ void Game::report_sync_request() {
 /**
  * Triggers writing of syncstream excerpt and adds the playernumber of the desynced player
  * to the stream.
+ * Playernumber should be negative when called by network clients
  */
-void Game::report_desync(uint32_t playernumber) {
+void Game::report_desync(int32_t playernumber) {
 	std::string filename = syncwrapper_.dumpfname_;
 	filename.replace(filename.length() - kSyncstreamExtension.length(), kSyncstreamExtension.length(), kSyncstreamExcerptExtension);
 	std::unique_ptr<StreamWrite> file(g_fs->open_stream_write(filename));
 	assert(file != nullptr);
+	// Write revision, branch and build type of this build to the file
+	file->unsigned_32(build_id().length());
+	file->text(build_id());
+	file->unsigned_32(build_type().length());
+	file->text(build_type());
+	file->signed_32(playernumber);
 	// Write our buffers to the file. Start with the oldest one
 	const size_t i2 = (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
 	size_t i = i2;
@@ -635,7 +643,7 @@ void Game::report_desync(uint32_t playernumber) {
 		}
 	}
 	file->unsigned_8(Syncstream::Desync);
-	file->unsigned_32(playernumber);
+	file->signed_32(playernumber);
 	// Restart buffers
 	syncwrapper_.current_excerpt_id_ = 0;
 }

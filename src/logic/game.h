@@ -67,7 +67,7 @@ enum {
 // The IDs are a number in the higher 4 bits and the length in bytes in the lower 4 bits
 namespace Syncstream {
 	// game.cc Game::report_desync()
-	// u32 id of desynced user
+	// s32 id of desynced user, -1 when written on client
 	constexpr uint8_t Desync = 0x14;
 	// map_object.cc CmdDestroyMapObject::execute()
 	// u32 object serial
@@ -238,7 +238,7 @@ public:
 
 	StreamWrite& syncstream();
 	void report_sync_request();
-	void report_desync(uint32_t playernumber);
+	void report_desync(int32_t playernumber);
 	Md5Checksum get_sync_hash() const;
 
 	void enqueue_command(Command* const);
