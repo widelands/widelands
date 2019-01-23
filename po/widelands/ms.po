@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-23 08:41+0000\n"
-"PO-Revision-Date: 2018-11-23 08:43+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-24 06:23+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -302,7 +302,7 @@ msgid "Redo"
 msgstr "Buat Semula"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:350 ../../src/wui/interactive_player.cc:185
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:185
 msgid "Help"
 msgstr "Bantuan"
 
@@ -876,7 +876,8 @@ msgid "Error Saving Map!"
 msgstr "Ralat Menyimpan Peta!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:311
-msgid "File ‘%’ could not be deleted."
+#, c-format
+msgid "File ‘%s’ could not be deleted."
 msgstr ""
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:314
@@ -1575,23 +1576,23 @@ msgid ""
 "compatible with world"
 msgstr "sepatutnya membiak jenis sumber %s, yang mana tidak wujud di dunia ini; puak tidak serasi dengan dunia ini"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:975
+#: ../../src/logic/map_objects/tribes/worker.cc:976
 msgid "A geologist found resources."
 msgstr "Ahli geologi telah menemui sumber."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1849
+#: ../../src/logic/map_objects/tribes/worker.cc:1850
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "%s anda telah sesat dan berkemungkinan akan mati bila-bila masa."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1855
+#: ../../src/logic/map_objects/tribes/worker.cc:1856
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "Pekerja"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1856
+#: ../../src/logic/map_objects/tribes/worker.cc:1857
 msgid "Worker got lost!"
 msgstr "Pekerja telah sesat!"
 
@@ -3176,7 +3177,7 @@ msgstr "Kos pembinaan:"
 msgid "Destroy"
 msgstr "Musnah"
 
-#: ../../src/wui/buildingwindow.cc:291
+#: ../../src/wui/buildingwindow.cc:290 ../../src/wui/buildingwindow.cc:291
 msgid "Dismantle"
 msgstr "Runtuh"
 
@@ -3184,28 +3185,28 @@ msgstr "Runtuh"
 msgid "Returns:"
 msgstr "Kembali:"
 
-#: ../../src/wui/buildingwindow.cc:331 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:335 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Tunjuk Tetingkap Nyahpepijat"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:342
 msgid "Center view on this"
 msgstr "Tengahkan paparan di sini"
 
-#: ../../src/wui/buildingwindow.cc:521
+#: ../../src/wui/buildingwindow.cc:525
 msgid "Hide work area"
 msgstr "Sembunyi kawasan kerja"
 
-#: ../../src/wui/buildingwindow.cc:524
+#: ../../src/wui/buildingwindow.cc:528
 msgid "Show work area"
 msgstr "Tunjuk kawasan kerja"
 
-#: ../../src/wui/buildingwindow.cc:557
+#: ../../src/wui/buildingwindow.cc:561
 msgid "Start an expedition"
 msgstr "Mulakan sebuah ekspedisi"
 
-#: ../../src/wui/buildingwindow.cc:561
+#: ../../src/wui/buildingwindow.cc:565
 msgid "Cancel the expedition"
 msgstr "Batalkan ekspedisi"
 

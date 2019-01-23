@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-23 08:41+0000\n"
-"PO-Revision-Date: 2018-11-23 08:43+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-24 18:54+0000\n"
+"Last-Translator: Juanjo\n"
 "Language-Team: Catalan (http://www.transifex.com/widelands/widelands/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -304,7 +304,7 @@ msgid "Redo"
 msgstr "Refés"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:350 ../../src/wui/interactive_player.cc:185
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:185
 msgid "Help"
 msgstr "Ajuda"
 
@@ -854,17 +854,17 @@ msgstr "sense nom"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:166
 msgid "A file or directory with that name already exists."
-msgstr ""
+msgstr "Ja existeix un arxiu o una carpeta amb aquest nom."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:168
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:183
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "S'ha produït un error al crear el directori."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:181
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "S'ha produït un error mentre es creava el directori «%s»."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:295
 #: ../../src/wui/game_main_menu_save_game.cc:175
@@ -879,12 +879,13 @@ msgid "Error Saving Map!"
 msgstr "S'ha produït un error mentre es desava el mapa!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:311
-msgid "File ‘%’ could not be deleted."
-msgstr ""
+#, c-format
+msgid "File ‘%s’ could not be deleted."
+msgstr "L'arxiu «%s» no s'ha pogut esborrar."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:314
 msgid "Try saving under a different name!"
-msgstr ""
+msgstr "Proveu desant-ho amb un altre nom."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:345
 msgid ""
@@ -900,7 +901,7 @@ msgstr "Escriviu el nom del directori:"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:100
 msgid "This extension is reserved!"
-msgstr ""
+msgstr "L'extensió està reservada."
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
@@ -1586,16 +1587,16 @@ msgid ""
 "compatible with world"
 msgstr "hauria de criar %s, que no existeix en aquest món; la cultura no és compatible amb aquest món"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:975
+#: ../../src/logic/map_objects/tribes/worker.cc:976
 msgid "A geologist found resources."
 msgstr "Un geòleg ha trobat recursos."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1849
+#: ../../src/logic/map_objects/tribes/worker.cc:1850
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "El vostre %s no pot trobar un camí a casa i és probable que mori."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1855
+#: ../../src/logic/map_objects/tribes/worker.cc:1856
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1603,7 +1604,7 @@ msgid_plural "Workers"
 msgstr[0] "Treballador"
 msgstr[1] "Treballadors"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1856
+#: ../../src/logic/map_objects/tribes/worker.cc:1857
 msgid "Worker got lost!"
 msgstr "El treballador s'ha perdut!"
 
@@ -3195,7 +3196,7 @@ msgstr "Costos de construcció:"
 msgid "Destroy"
 msgstr "Destrueix"
 
-#: ../../src/wui/buildingwindow.cc:291
+#: ../../src/wui/buildingwindow.cc:290 ../../src/wui/buildingwindow.cc:291
 msgid "Dismantle"
 msgstr "Desmantella"
 
@@ -3203,28 +3204,28 @@ msgstr "Desmantella"
 msgid "Returns:"
 msgstr "Retorna:"
 
-#: ../../src/wui/buildingwindow.cc:331 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:335 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Mostra la finestra de depuració"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:342
 msgid "Center view on this"
 msgstr "Centra la vista aquí"
 
-#: ../../src/wui/buildingwindow.cc:521
+#: ../../src/wui/buildingwindow.cc:525
 msgid "Hide work area"
 msgstr "Amaga l'àrea de treball"
 
-#: ../../src/wui/buildingwindow.cc:524
+#: ../../src/wui/buildingwindow.cc:528
 msgid "Show work area"
 msgstr "Mostra l'àrea de treball"
 
-#: ../../src/wui/buildingwindow.cc:557
+#: ../../src/wui/buildingwindow.cc:561
 msgid "Start an expedition"
 msgstr "Comença l'expedició"
 
-#: ../../src/wui/buildingwindow.cc:561
+#: ../../src/wui/buildingwindow.cc:565
 msgid "Cancel the expedition"
 msgstr "Cancel·la l'expedició"
 
@@ -3978,41 +3979,41 @@ msgstr[1] "Voleu esborrar aquestes %d partides?"
 
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting File"
-msgstr ""
+msgstr "Confirmeu l'esborrat de l'arxiu"
 
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting Files"
-msgstr ""
+msgstr "Confirmeu l'esborrat dels arxius"
 
 #: ../../src/wui/load_or_save_game.cc:315
 msgid "Error Deleting File!"
-msgstr ""
+msgstr "S'ha produït un error a l'esborrar l'arxiu."
 
 #: ../../src/wui/load_or_save_game.cc:315
 msgid "Error Deleting Files!"
-msgstr ""
+msgstr "S'ha produït un error esborrant els arxius."
 
 #: ../../src/wui/load_or_save_game.cc:318
 msgid "The replay could not be deleted."
-msgstr ""
+msgstr "No s'ha pogut esborrar la repetició."
 
 #: ../../src/wui/load_or_save_game.cc:320
 #, c-format
 msgid "%d replay could not be deleted."
 msgid_plural "%d replays could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No s'ha pogut esborrar %d repetició."
+msgstr[1] "No s'han pogut esborrar %d repeticions."
 
 #: ../../src/wui/load_or_save_game.cc:327
 msgid "The game could not be deleted."
-msgstr ""
+msgstr "La partida no s'ha pogut esborrar."
 
 #: ../../src/wui/load_or_save_game.cc:329
 #, c-format
 msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "No s'ha pogut esborrar %d partida."
+msgstr[1] "No s'han pogut esborrar %d partides."
 
 #: ../../src/wui/load_or_save_game.cc:374
 msgid "Filename: Map name (start of replay)"

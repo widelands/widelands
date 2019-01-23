@@ -33,7 +33,7 @@
 
 /**
  * Choose a filename and save your brand new created map
-*/
+ */
 struct MainMenuLoadOrSaveMap : public UI::Window {
 	MainMenuLoadOrSaveMap(EditorInteractive& parent,
 	                      int no_of_bottom_rows,

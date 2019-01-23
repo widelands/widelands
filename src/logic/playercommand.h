@@ -868,6 +868,6 @@ struct CmdProposeTrade : PlayerCommand {
 private:
 	Trade trade_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

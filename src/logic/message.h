@@ -148,6 +148,6 @@ private:
 	Widelands::Serial serial_;  // serial to map object
 	Status status_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MESSAGE_H

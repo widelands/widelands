@@ -146,4 +146,4 @@ void GamePlayerInfoPacket::write(FileSystem& fs, Game& game, MapObjectSaver*) {
 
 	fw.write(fs, "binary/player_info");
 }
-}
+}  // namespace Widelands

@@ -198,4 +198,4 @@ void CoordPath::append(const CoordPath& tail) {
 	path_.insert(path_.end(), tail.path_.begin(), tail.path_.end());
 	coords_.insert(coords_.end(), tail.coords_.begin() + 1, tail.coords_.end());
 }
-}
+}  // namespace Widelands

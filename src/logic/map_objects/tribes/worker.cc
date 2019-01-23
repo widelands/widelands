@@ -137,11 +137,10 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 		totalres += amount;
 		totalchance += 8 * amount;
 
-		//  Add penalty for fields that are running out
-		//  Except for totally depleted fields or wrong ressource fields
-		//  if we already know there is no ressource (left) we won't mine there
+		// Add penalty for fields that are running out
 		if (amount == 0)
-			totalchance += 0;
+			// we already know it's completely empty, so punish is less
+			totalchance += 1;
 		else if (amount <= 2)
 			totalchance += 6;
 		else if (amount <= 4)
@@ -805,8 +804,9 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	   const uint32_t attribute_id, const DescriptionIndex index,
-	   const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
+	                                 const uint32_t attribute_id, const DescriptionIndex index,
+	                                 const ImmovableDescr& immovable_description,
+	                                 MapObjectDescr::OwnerType owner_type) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
@@ -979,10 +979,11 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			get_owner()->add_message_with_timeout(
-			   game, std::unique_ptr<Message>(
-			            new Message(Message::Type::kGeologists, game.get_gametime(),
-			                        rdescr->descname(), rdescr->representative_image(),
-			                        rdescr->descname(), message, position, serial_, rdescr->name())),
+			   game,
+			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
+			                                        rdescr->descname(), rdescr->representative_image(),
+			                                        rdescr->descname(), message, position, serial_,
+			                                        rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}
@@ -1820,11 +1821,12 @@ void Worker::return_update(Game& game, State& state) {
 		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
 			if (flag->get_building() == location) {
-				WareInstance* const ware = get_carried_ware(game);
-				if (state.ivar1 && ware && flag->has_capacity_for_ware(*ware)) {
-					flag->add_ware(game, *fetch_carried_ware(game));
-					set_animation(game, descr().get_animation("idle"));
-					return schedule_act(game, 20);  //  rest a while
+				if (state.ivar1 && flag->has_capacity()) {
+					if (WareInstance* const ware = fetch_carried_ware(game)) {
+						flag->add_ware(game, *ware);
+						set_animation(game, descr().get_animation("idle"));
+						return schedule_act(game, 20);  //  rest a while
+					}
 				}
 
 				// Don't try to enter building if it is a dismantle site
@@ -1852,9 +1854,10 @@ void Worker::return_update(Game& game, State& state) {
 		      .str();
 
 		get_owner()->add_message(
-		   game, std::unique_ptr<Message>(new Message(
-		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
-		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
+		   game,
+		   std::unique_ptr<Message>(new Message(Message::Type::kGameLogic, game.get_gametime(),
+		                                        _("Worker"), "images/ui_basic/menu_help.png",
+		                                        _("Worker got lost!"), message, get_position())),
 		   serial_);
 		set_location(nullptr);
 		return pop_task(game);
@@ -2057,18 +2060,16 @@ void Worker::dropoff_update(Game& game, State&) {
 	if (ware) {
 		// We're in the building, walk onto the flag
 		if (upcast(Building, building, location)) {
-			Flag& baseflag = building->base_flag();
-			if (baseflag.has_capacity_for_ware(*ware)) {
-				start_task_leavebuilding(game, false);  //  exit throttle
-			} else {
-				start_task_waitforcapacity(game, baseflag);
+			if (start_task_waitforcapacity(game, building->base_flag())) {
+				return;
 			}
-			return;
+
+			return start_task_leavebuilding(game, false);  //  exit throttle
 		}
 
 		// We're on the flag, drop the ware and pause a little
 		if (upcast(Flag, flag, location)) {
-			if (flag->has_capacity_for_ware(*ware)) {
+			if (flag->has_capacity()) {
 				flag->add_ware(game, *fetch_carried_ware(game));
 
 				set_animation(game, descr().get_animation("idle"));
@@ -2148,11 +2149,9 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 
 		// The ware has decided that it doesn't want to go to us after all
 		// In order to return to the warehouse, we're switching to State_DropOff
-		Flag& flag = dynamic_cast<Flag&>(*location);
 		if (WareInstance* const ware =
-		       flag.fetch_pending_ware(game, flag.find_pending_ware(employer))) {
+		       dynamic_cast<Flag&>(*location).fetch_pending_ware(game, employer)) {
 			set_carried_ware(game, ware);
-			flag.ware_departing(game);
 		}
 
 		set_animation(game, descr().get_animation("idle"));
@@ -2215,15 +2214,25 @@ const Bob::Task Worker::taskWaitforcapacity = {
    static_cast<Bob::Ptr>(&Worker::waitforcapacity_pop), true};
 
 /**
- * Pushes a wait task and
- * adds the worker to the flag's wait queue.
+ * Checks the capacity of the flag.
+ *
+ * If there is none, a wait task is pushed, and the worker is added to the
+ * flag's wait queue. The function returns true in this case.
+ * If the flag still has capacity, the function returns false and doesn't
+ * act at all.
  */
-void Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
+bool Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
+	if (flag.has_capacity()) {
+		return false;
+	}
+
 	push_task(game, taskWaitforcapacity);
 
 	top_state().objvar1 = &flag;
 
 	flag.wait_for_capacity(game, *this);
+
+	return true;
 }
 
 void Worker::waitforcapacity_update(Game& game, State&) {
@@ -3189,4 +3198,4 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 		}
 	}
 }
-}
+}  // namespace Widelands

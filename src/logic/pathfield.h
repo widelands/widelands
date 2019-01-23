@@ -89,6 +89,6 @@ private:
 	uint32_t nrfields_;
 	List list_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PATHFIELD_H

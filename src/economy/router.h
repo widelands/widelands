@@ -52,5 +52,5 @@ private:
 	ResetCycleFn reset_;
 	uint32_t mpf_cycle;  ///< pathfinding cycle, see Flag::mpf_cycle
 };
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_ECONOMY_ROUTER_H

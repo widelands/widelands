@@ -1076,4 +1076,4 @@ void Game::write_statistics(FileWrite& fw) {
 		fw.unsigned_32(general_stats_[p - 1].custom_statistic[j]);
 	}
 }
-}
+}  // namespace Widelands

@@ -205,4 +205,4 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 
 	write_child(fw, game, mos);
 }
-}
+}  // namespace Widelands

@@ -170,7 +170,7 @@ Bob& WorkerDescr::create_object() const {
 }
 
 /**
-* check if worker can be substitute for a requested worker type
+ * check if worker can be substitute for a requested worker type
  */
 bool WorkerDescr::can_act_as(DescriptionIndex const index) const {
 	assert(egbase_.tribes().worker_exists(index));

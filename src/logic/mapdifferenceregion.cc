@@ -42,4 +42,4 @@ template <> bool MapDifferenceRegion<Area<FCoords>>::advance(const Map& map) {
 	}
 	return false;
 }
-}
+}  // namespace Widelands

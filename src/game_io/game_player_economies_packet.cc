@@ -160,4 +160,4 @@ void GamePlayerEconomiesPacket::write(FileSystem& fs, Game& game, MapObjectSaver
 
 	fw.write(fs, "binary/player_economies");
 }
-}
+}  // namespace Widelands

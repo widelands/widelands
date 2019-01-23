@@ -1,16 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# Nora Ghaoui, 2016
 # Nora Ghaoui, 2016
 # Rob Snelders <programming@ertai.nl>, 2006
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-09-15 18:56+0000\n"
-"PO-Revision-Date: 2017-09-21 23:33+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-12-07 16:22+0000\n"
+"PO-Revision-Date: 2018-12-10 18:11+0000\n"
+"Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,7 +89,7 @@ msgstr "Wolf"
 #: ../../data/world/immovables/bush4/init.lua:5
 #: ../../data/world/immovables/bush5/init.lua:5
 msgid "Bush"
-msgstr "Bos"
+msgstr "Struik"
 
 #: ../../data/world/immovables/cactus1/init.lua:5
 #: ../../data/world/immovables/cactus2/init.lua:5
@@ -132,7 +133,7 @@ msgstr "Sneeuwman"
 #: ../../data/world/immovables/mushroom1/init.lua:5
 #: ../../data/world/immovables/mushroom2/init.lua:5
 msgid "Mushroom"
-msgstr "Champignons"
+msgstr "Champignon"
 
 #: ../../data/world/immovables/pebble1/init.lua:5
 #: ../../data/world/immovables/pebble2/init.lua:5
@@ -141,7 +142,7 @@ msgstr "Champignons"
 #: ../../data/world/immovables/pebble5/init.lua:5
 #: ../../data/world/immovables/pebble6/init.lua:5
 msgid "Pebble"
-msgstr "Kiezelsteen"
+msgstr "Kei"
 
 #: ../../data/world/immovables/rocks/blackland_rocks1/init.lua:12
 #: ../../data/world/immovables/rocks/desert_rocks1/init.lua:12
@@ -189,7 +190,7 @@ msgstr "Rotsen 6"
 #: ../../data/world/immovables/ruin4/init.lua:5
 #: ../../data/world/immovables/ruin5/init.lua:5
 msgid "Tombstone"
-msgstr ""
+msgstr "Grafsteen"
 
 #: ../../data/world/immovables/skeleton1/init.lua:5
 #: ../../data/world/immovables/skeleton3/init.lua:5
@@ -396,19 +397,19 @@ msgstr "Lianenboom"
 
 #: ../../data/world/immovables/trees/maple/init.lua:12
 msgid "Maple (Sapling)"
-msgstr "Ahorn (zaailing)"
+msgstr "Esdoorn (zaailing)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:35
 msgid "Maple (Pole)"
-msgstr "Ahorn (opgroeiend)"
+msgstr "Esdoorn (opgroeiend)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:58
 msgid "Maple (Mature)"
-msgstr "Ahorn (volgroeid)"
+msgstr "Esdoorn (volgroeid)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:81
 msgid "Maple (Old)"
-msgstr "Ahorn (oud)"
+msgstr "Esdoorn (oud)"
 
 #: ../../data/world/immovables/trees/maple/init.lua:82
 msgid "Maple"
@@ -787,35 +788,35 @@ msgstr "Ruiglandbomen"
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:278
 msgid "Herbivores"
-msgstr ""
+msgstr "Herbivoren"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:297
 msgid "Carnivores"
-msgstr ""
+msgstr "Carnivoren"
 
 #. TRANSLATORS: A category in the editor for placing animals on the map.
 #: ../../data/world/init.lua:313
 msgid "Aquatic"
-msgstr ""
+msgstr "Waterdier"
 
-#: ../../data/world/resources/init.lua:72
+#: ../../data/world/resources/init.lua:84
 msgid "Coal"
 msgstr "Kolen"
 
-#: ../../data/world/resources/init.lua:86
+#: ../../data/world/resources/init.lua:100
 msgid "Gold"
 msgstr "Goud"
 
-#: ../../data/world/resources/init.lua:100
+#: ../../data/world/resources/init.lua:116
 msgid "Iron"
 msgstr "IJzer"
 
-#: ../../data/world/resources/init.lua:114
+#: ../../data/world/resources/init.lua:132
 msgid "Stones"
 msgstr "Stenen"
 
-#: ../../data/world/resources/init.lua:128
+#: ../../data/world/resources/init.lua:148
 #: ../../data/world/terrains/init.lua:451
 #: ../../data/world/terrains/init.lua:760
 #: ../../data/world/terrains/init.lua:1056
@@ -823,7 +824,7 @@ msgstr "Stenen"
 msgid "Water"
 msgstr "Water"
 
-#: ../../data/world/resources/init.lua:142
+#: ../../data/world/resources/init.lua:164
 msgid "Fish"
 msgstr "Vis"
 
@@ -870,14 +871,16 @@ msgstr "Vis"
 #. temperature = 100,
 #. **humidity**
 #. *Mandatory*. A terrain affinity constant. These are used to model how well
-#. trees will grow on this terrain. Humidity is in percent (1 being very wet).
+#. trees will grow on this terrain. Values range from 1 - 1000 (1000 being
+#. very wet).
 #. Example::
-#. humidity = 0.6,
+#. humidity = 600,
 #. **fertility**
 #. *Mandatory*. A terrain affinity constant. These are used to model how well
-#. trees will grow on this terrain. Fertility is in percent (1 being very
+#. trees will grow on this terrain. Values range from 1 - 1000 (1000 being
+#. very
 #. fertile). Example::
-#. fertility = 0.7,
+#. fertility = 700,
 #. ----------------------
 #. Former greenland  --
 #. ----------------------

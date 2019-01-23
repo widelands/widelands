@@ -260,4 +260,4 @@ template <> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map) {
 	assert(remaining_in_row_ < 10000);  //  Catch wrapping (integer underflow)
 	return true;
 }
-}
+}  // namespace Widelands

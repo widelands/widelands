@@ -1,3 +1,5 @@
+set_textdomain("tribes")
+
 dirname = path.dirname (__file__)
 
 terrain_affinity = {

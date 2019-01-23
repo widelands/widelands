@@ -27,7 +27,7 @@
 
 /**
  * Deletes the immovable at the given location
-*/
+ */
 int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::World&,
                                                      const Widelands::NodeAndTriangle<>& center,
                                                      EditorInteractive& parent,

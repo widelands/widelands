@@ -365,4 +365,4 @@ std::string localize_list(const std::vector<std::string>& items, ConcatenateWith
 	}
 	return result;
 }
-}
+}  // namespace i18n

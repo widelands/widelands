@@ -167,6 +167,6 @@ private:
 
 	Requirements requirements_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_REQUEST_H

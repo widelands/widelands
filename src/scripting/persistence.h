@@ -32,7 +32,7 @@ class MapObjectLoader;
 struct MapObjectSaver;
 class EditorGameBase;
 class Game;
-}
+}  // namespace Widelands
 
 /**
  * This persists the lua object at the stack position
