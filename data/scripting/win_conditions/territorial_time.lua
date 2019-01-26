@@ -68,7 +68,7 @@ return {
                   :format(remaining_max_minutes))
             end
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-            send_message(player, game_status.title, msg, {popup = true})
+            broadcast(plrs, game_status.title, msg, {popup = true})
          end
       end
 
