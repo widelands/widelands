@@ -31,6 +31,7 @@ return {
    name = wc_name,
    description = wc_desc,
    func = function()
+      local game = wl.Game()
       local plrs = wl.Game().players
 
       -- set the objective with the game type for all players
@@ -40,15 +41,15 @@ return {
       local fields = get_buildable_fields()
 
       -- variables to track the maximum 4 hours of gametime
-      local remaining_max_time = 4 * 60 * 60 -- 4 hours
+      local max_time = 4 * 60
 
-      local function _send_state()
+      local _send_state(remaining_time, plrs, show_popup)
          set_textdomain("win_conditions")
 
          local remaining_max_minutes = remaining_max_time // 60
          for idx, player in ipairs(plrs) do
             local msg = ""
-            if territory_points.remaining_time < remaining_max_time and
+            if territory_points.remaining_time < remaining_time and
                (territory_points.last_winning_team >= 0 or territory_points.last_winning_player >= 0) then
                if territory_points.last_winning_team == player.team or territory_points.last_winning_player == player.number then
                   msg = msg .. winning_status_header() .. vspace(8)
@@ -67,30 +68,34 @@ return {
                   :format(remaining_max_minutes))
             end
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-            send_message(player, game_status.title, msg, {popup = true})
+            player:send_message(game_status.title, msg, {popup = show_popup})
          end
       end
 
+      run(function()
+         local remaining_time = max_time
+         while game.time <= ((max_time - 5) * 60 * 1000) and count_factions(plrs) > 1 and territory_points.remaining_time > 0 do
+            remaining_time, show_popup = notification_remaining_time(max_time, remaining_time)
+            _send_state(remaining_time, plrs, show_popup)
+         end
+      end)
+         
       -- here is the main loop!!!
-      while remaining_max_time > 0 and count_factions(plrs) > 1 and territory_points.remaining_time > 0 do
-         -- Sleep 5 seconds
-         sleep(5000)
-         remaining_max_time = remaining_max_time - 5
+      while game.time < (max_time * 60 * 1000) and count_factions(plrs) > 1 and territory_points.remaining_time > 0 do
+         -- Sleep 1 seconds
+         sleep(1000)
 
          -- A player might have been defeated since the last calculation
          check_player_defeated(plrs, lost_game.title, lost_game.body)
 
          -- Check if a player or team is a candidate and update variables
          -- Returns the names and points for the teams and players without a team
-         calculate_territory_points(fields, wl.Game().players)
+         calculate_territory_points(fields, plrs)
 
-         -- at the beginning send remaining max time message only each 30 minutes
-         -- if only 30 minutes or less are left, send each 5 minutes
-         -- also check if there is a candidate and we need to send an update
-         if (((remaining_max_time < (30 * 60) and remaining_max_time % (5 * 60) == 0)
-               or remaining_max_time % (30 * 60) == 0)
-               or territory_points.remaining_time % 300 == 0) and remaining_max_time < 0 then
-            _send_state()
+         -- check if there is a candidate and we need to send an update 
+         -- 20 minutes and 10 minutes before the the time is over
+         if (territory_points.remaining_time % 600 == 0)then
+            _send_state((max_time * 60 * 1000) - game.time, plrs, true)
          end
       end
 
