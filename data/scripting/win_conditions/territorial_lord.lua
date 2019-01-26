@@ -50,7 +50,7 @@ return {
                msg = msg .. losing_status_header(plrs) .. vspace(8)
             end
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-            broadcast(plrs, game_status.title, msg, {popup = true})
+            player:send_message(game_status.title, msg, {popup = true})
          end
       end
 
