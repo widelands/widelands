@@ -1,6 +1,8 @@
 include "scripting/coroutine.lua"
 
 -- RST
+-- .. _ui.lua:
+--
 -- ui.lua
 -- ---------------
 --
