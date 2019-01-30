@@ -43,40 +43,40 @@ return {
       -- variables to track the maximum 4 hours of gametime
       local max_time = 4 * 60
 
-      local _send_state(remaining_time, plrs, show_popup)
+      local function _send_state(remaining_time, plrs, show_popup)
          set_textdomain("win_conditions")
 
-         local remaining_max_minutes = remaining_max_time // 60
+         local remaining_time_minutes = remaining_time // 60
          for idx, player in ipairs(plrs) do
             local msg = ""
             if territory_points.remaining_time < remaining_time and
                (territory_points.last_winning_team >= 0 or territory_points.last_winning_player >= 0) then
                if territory_points.last_winning_team == player.team or territory_points.last_winning_player == player.number then
-                  msg = msg .. winning_status_header() .. vspace(8)
+                  msg = msg .. winning_status_header()
                else
-                  msg = msg .. losing_status_header(plrs) .. vspace(8)
+                  msg = msg .. losing_status_header(plrs)
                end
-               -- TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it for x more minute(s) to win the game."
-               msg = msg .. p((ngettext("Otherwise the game will end in %i minute.",
-                            "Otherwise the game will end in %i minutes.",
-                            remaining_max_minutes))
-                  :format(remaining_max_minutes))
+            elseif remaining_time <= 1200 then
+               territory_points.remaining_time = remaining_time
+               msg = msg .. format_remaining_time(remaining_time_minutes)
             else
-               msg = msg .. p((ngettext("The game will end in %i minute.",
-                            "The game will end in %i minutes.",
-                            remaining_max_minutes))
-                  :format(remaining_max_minutes))
+               msg = msg .. format_remaining_time(remaining_time_minutes)
             end
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
             player:send_message(game_status.title, msg, {popup = show_popup})
          end
       end
 
+      -- Start a new coroutine that triggers status notifications.
       run(function()
          local remaining_time = max_time
+         local msg = ""
          while game.time <= ((max_time - 5) * 60 * 1000) and count_factions(plrs) > 1 and territory_points.remaining_time > 0 do
             remaining_time, show_popup = notification_remaining_time(max_time, remaining_time)
-            _send_state(remaining_time, plrs, show_popup)
+            if territory_points.remaining_time == 1201 then
+               msg = msg .. format_remaining_time(remaining_time) .. vspace(8) .. game_status.body .. territory_status(fields, "has")
+               broadcast(plrs, game_status.title, msg, {popup = show_popup})
+            end
          end
       end)
          
@@ -93,9 +93,13 @@ return {
          calculate_territory_points(fields, plrs)
 
          -- check if there is a candidate and we need to send an update 
-         -- 20 minutes and 10 minutes before the the time is over
-         if (territory_points.remaining_time % 600 == 0)then
-            _send_state((max_time * 60 * 1000) - game.time, plrs, true)
+         if (territory_points.remaining_time % 300 == 0 and territory_points.remaining_time ~= 0) then
+            local remaining_time = (max_time * 60 * 1000 - game.time) // 1000
+            local show_popup = false
+            
+            if territory_points.remaining_time % 600 == 0 then show_popup = true end
+            _send_state(remaining_time, plrs, show_popup)
+
          end
       end
 

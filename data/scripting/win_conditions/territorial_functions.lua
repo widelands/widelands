@@ -103,7 +103,7 @@ territory_points = {
    -- We record the last winning player name here to prevent crashes with retrieving
    -- the player name when the player was just defeated a few ms ago
    last_winning_player_name = "",
-   remaining_time = 10,
+   remaining_time = 1201,
    all_player_points = {},
    points = {}
 }
@@ -170,7 +170,12 @@ function calculate_territory_points(fields, players)
       territory_points.remaining_time = territory_points.remaining_time - 1
    elseif winning_points == -1 then
       -- No winner. This value is used to calculate whether to send a report to players.
-      territory_points.remaining_time = 10
+      if territory_points.remaining_time == 1800 then
+         territory_points.remaining_time = 1201
+      elseif territory_points.remaining_time ~= 1201 then
+         territory_points.remaining_time = 1800
+      end
+      
    else
       -- Winner changed
       territory_points.remaining_time = 20 * 60 -- 20 minutes
