@@ -39,25 +39,30 @@ return {
       -- Get all valueable fields of the map
       local fields = get_buildable_fields()
 
-      local function _send_state()
+      local function _send_state(show_popup)
          set_textdomain("win_conditions")
 
          for idx, player in ipairs(plrs) do
             local msg = ""
-            if territory_points.last_winning_team == player.team or territory_points.last_winning_player == player.number then
-               msg = msg .. winning_status_header() .. vspace(8)
+            if (territory_points.last_winning_team >= 0 or territory_points.last_winning_player >= 0) then
+               if territory_points.last_winning_team == player.team or territory_points.last_winning_player == player.number then
+                  msg = msg .. winning_status_header()
+               else
+                  msg = msg .. losing_status_header(plrs)
+               end
             else
-               msg = msg .. losing_status_header(plrs) .. vspace(8)
+               msg = p(_"Currently no faction owns more than half of the map’s area.")
             end
-            msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-            player:send_message(game_status.title, msg, {popup = true})
+               msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
+               player:send_message(game_status.title, msg, {popup = show_popup})
+            end
          end
       end
 
       -- here is the main loop!!!
       while count_factions(plrs) > 1 or territory_points.remaining_time > 0 do
-         -- Sleep 5 seconds
-         sleep(5000)
+         -- Sleep 1 second
+         sleep(1000)
 
          -- A player might have been defeated since the last calculation
          check_player_defeated(plrs, lost_game.title, lost_game.body)
@@ -66,8 +71,10 @@ return {
          calculate_territory_points(fields, wl.Game().players)
 
          -- If there is a candidate, check whether we have to send an update
-         if (territory_points.last_winning_team >= 0 or territory_points.last_winning_player >= 0) and territory_points.remaining_time >= 0 and territory_points.remaining_time % 300 == 0 then
-            _send_state()
+         if (territory_points.remaining_time % 300 == 0 and territory_points.remaining_time ~= 0) then
+            local show_popup = false
+            if territory_points.remaining_time % 600 == 0 then show_popup = true end
+            _send_state(show_popup)
          end
       end
 
