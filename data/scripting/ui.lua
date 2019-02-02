@@ -1,12 +1,17 @@
 include "scripting/coroutine.lua"
 
 -- RST
+-- .. _ui.lua:
+--
 -- ui.lua
 -- ---------------
 --
 -- This script contains UI related functions like for moving the mouse or the
 -- view or clicking on fields and UI elements.
 --
+-- .. Note::
+--    Do not use any of these functions for multiplayer scenarios or winconditions,
+--    because a game will likely desync then.
 
 -- Sleep until we are done animating.
 function _await_animation()

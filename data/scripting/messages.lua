@@ -17,6 +17,10 @@ include "scripting/ui.lua"
 --    the function waits until the player leaves the building mode
 --    before sending the message
 --
+--    Do not use this with 'popup = true' for multiplayer scenarios or
+--    winconditions, because a game will likely desync then.
+--    Use :meth:`wl.game.Player.send_message <wl.game.Player.send_message>` instead.
+--
 --    :arg player: the recipient of the message
 --    :arg title: the localized title of the message
 --    :type title: :class:`string`
@@ -38,6 +42,10 @@ end
 -- .. function:: send_to_all(text[, heading])
 --
 --    Sends a game status message to all players.
+--
+--    Do not use this for multiplayer scenarios or winconditions, because a
+--    game will likely desync then. Use :meth:`win_condition_functions.broadcast <broadcast>`
+--    instead.
 --
 --    :arg text: the localized body of the message. You can use rt functions here.
 --    :type text: :class:`string`
