@@ -87,7 +87,7 @@ const MethodType<LuaGame> LuaGame::Methods[] = {
 };
 const PropertyType<LuaGame> LuaGame::Properties[] = {
    PROP_RO(LuaGame, real_speed),   PROP_RO(LuaGame, time),      PROP_RW(LuaGame, desired_speed),
-   PROP_RW(LuaGame, allow_saving), {nullptr, nullptr, nullptr},
+   PROP_RW(LuaGame, allow_saving), PROP_RO(LuaGame, type),  {nullptr, nullptr, nullptr},
 };
 
 LuaGame::LuaGame(lua_State* /* L */) {
@@ -160,6 +160,34 @@ int LuaGame::set_allow_saving(lua_State* L) {
 // UNTESTED
 int LuaGame::get_allow_saving(lua_State* L) {
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
+	return 1;
+}
+
+/* RST
+   .. attribute:: type
+
+      (RO) One string out of 'undefined', 'singleplayer', 'netclient', 'nethost', 'replay',
+      describing the type of game that is played.
+*/
+int LuaGame::get_type(lua_State* L) {
+	// enum class GameType : uint8_t { kUndefined = 0, kSingleplayer, kNetClient, kNetHost, kReplay };
+	switch (get_game(L).game_controller()->get_game_type()) {
+		case GameController::GameType::kSingleplayer:
+			lua_pushstring(L, "singleplayer");
+			break;
+		case GameController::GameType::kNetClient:
+			lua_pushstring(L, "netclient");
+			break;
+		case GameController::GameType::kNetHost:
+			lua_pushstring(L, "nethost");
+			break;
+		case GameController::GameType::kReplay:
+			lua_pushstring(L, "replay");
+			break;
+		default:
+			lua_pushstring(L, "undefined");
+			break;
+	}
 	return 1;
 }
 
