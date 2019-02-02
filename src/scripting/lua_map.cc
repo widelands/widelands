@@ -5993,8 +5993,8 @@ Field
 
 const char LuaField::className[] = "Field";
 const MethodType<LuaField> LuaField::Methods[] = {
-   METHOD(LuaField, __eq),     METHOD(LuaField, __tostring), METHOD(LuaField, region),
-   METHOD(LuaField, has_caps), {nullptr, nullptr},
+   METHOD(LuaField, __eq),     METHOD(LuaField, __tostring),   METHOD(LuaField, region),
+   METHOD(LuaField, has_caps), METHOD(LuaField, has_max_caps), {nullptr, nullptr},
 };
 const PropertyType<LuaField> LuaField::Properties[] = {
    PROP_RO(LuaField, __hash),
@@ -6497,6 +6497,49 @@ int LuaField::has_caps(lua_State* L) {
 	return 1;
 }
 
+/* RST
+   .. method:: has_max_caps(capname)
+
+      Returns :const:`true` if the field has this maximum caps (not taking immovables into account) associated
+      with it, otherwise returns false.
+
+      :arg capname: can be either of
+
+      * :const:`small`: Can a small building be build here?
+      * :const:`medium`: Can a medium building be build here?
+      * :const:`big`: Can a big building be build here?
+      * :const:`mine`: Can a mine be build here?
+      * :const:`port`: Can a port be build here?
+      * :const:`flag`: Can a flag be build here?
+      * :const:`walkable`: Is this field passable for walking bobs?
+      * :const:`swimmable`: Is this field passable for swimming bobs?
+*/
+int LuaField::has_max_caps(lua_State* L) {
+	FCoords f = fcoords(L);
+	std::string query = luaL_checkstring(L, 2);
+
+	if (query == "walkable")
+		lua_pushboolean(L, f.field->maxcaps() & MOVECAPS_WALK);
+	else if (query == "swimmable")
+		lua_pushboolean(L, f.field->maxcaps() & MOVECAPS_SWIM);
+	else if (query == "small")
+		lua_pushboolean(L, f.field->maxcaps() & BUILDCAPS_SMALL);
+	else if (query == "medium")
+		lua_pushboolean(L, f.field->maxcaps() & BUILDCAPS_MEDIUM);
+	else if (query == "big")
+		lua_pushboolean(L, (f.field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG);
+	else if (query == "port") {
+		lua_pushboolean(
+		   L, (f.field->maxcaps() & BUILDCAPS_PORT) && get_egbase(L).map().is_port_space(f));
+	} else if (query == "mine")
+		lua_pushboolean(L, f.field->maxcaps() & BUILDCAPS_MINE);
+	else if (query == "flag")
+		lua_pushboolean(L, f.field->maxcaps() & BUILDCAPS_FLAG);
+	else
+		report_error(L, "Unknown caps queried: %s!", query.c_str());
+
+	return 1;
+}
 /*
  ==========================================================
  C METHODS

@@ -544,9 +544,9 @@ void Map::delete_tag(const std::string& tag) {
 }
 
 NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) const {
-	NodeCaps caps = calc_nodecaps_pass1(world, fc, false);
-	caps = calc_nodecaps_pass2(world, fc, false, caps);
-	return caps;
+	NodeCaps max_caps = calc_nodecaps_pass1(world, fc, false);
+	max_caps = calc_nodecaps_pass2(world, fc, false, max_caps);
+	return static_cast<NodeCaps>(max_caps);
 }
 
 /// \returns the immovable at the given coordinate
@@ -932,6 +932,7 @@ above recalc_brightness.
 */
 void Map::recalc_nodecaps_pass1(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass1(world, f, true);
+	f.field->max_caps = calc_nodecaps_pass1(world, f, false);
 }
 
 NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) const {
@@ -1050,6 +1051,7 @@ Important: flag buildability has already been checked in the first pass.
 */
 void Map::recalc_nodecaps_pass2(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass2(world, f, true);
+	f.field->max_caps = calc_nodecaps_pass2(world, f, false, static_cast<NodeCaps>(f.field->max_caps));
 }
 
 NodeCaps Map::calc_nodecaps_pass2(const World& world,

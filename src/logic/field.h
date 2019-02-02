@@ -92,6 +92,9 @@ struct Field {
 	NodeCaps nodecaps() const {
 		return static_cast<NodeCaps>(caps);
 	}
+	NodeCaps maxcaps() const {
+		return static_cast<NodeCaps>(max_caps);
+	}
 	uint16_t get_caps() const {
 		return caps;
 	}
@@ -237,6 +240,7 @@ private:
 	BaseImmovable* immovable = nullptr;
 
 	uint8_t caps = 0U;
+	uint8_t max_caps = 0U;
 	uint8_t roads = 0U;
 
 	Height height = 0U;
