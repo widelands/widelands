@@ -102,9 +102,9 @@ end
 -- .. function:: broadcast(plrs, header, msg[, options])
 --
 --    broadcast a message to all players using
---    :meth:`~wl.game.Player.send_message`. All parameters are passed
+--    :meth:`wl.game.Player.send_message <wl.game.Player.send_message>`. All parameters are passed
 --    literally.
---    Message is delayed while player is in road building mode.
+
 function broadcast(plrs, header, msg, goptions)
    local options = goptions or {}
    for idx, p in ipairs(plrs) do
