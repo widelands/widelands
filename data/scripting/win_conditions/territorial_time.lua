@@ -68,7 +68,7 @@ return {
                   :format(remaining_max_minutes))
             end
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-            send_message(player, game_status.title, msg, {popup = true})
+            player:send_message(game_status.title, msg, {popup = true})
          end
       end
 
@@ -78,13 +78,14 @@ return {
          sleep(30000)
 
          remaining_max_time = remaining_max_time - 30
-
+         -- A player might have been defeated since the last calculation
+         check_player_defeated(plrs, lost_game.title, lost_game.body)
          -- Check if a player or team is a candidate and update variables
          -- Returns the names and points for the teams and players without a team
-         calculate_territory_points(fields, plrs, wc_descname, wc_version)
+         calculate_territory_points(fields, wl.Game().players)
 
          -- Game is over, do stuff after loop
-         if territory_points.remaining_time <= 0 or remaining_max_time <= 0 then break end
+         if territory_points.remaining_time <= 0 or remaining_max_time <= 0 or count_factions(plrs) <= 1 then break end
 
          -- at the beginning send remaining max time message only each 30 minutes
          -- if only 30 minutes or less are left, send each 5 minutes
@@ -97,6 +98,6 @@ return {
       end
 
       -- Game has ended
-      territory_game_over(fields, plrs, wc_descname, wc_version)
+      territory_game_over(fields, wl.Game().players, wc_descname, wc_version)
    end
 }

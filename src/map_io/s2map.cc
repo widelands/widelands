@@ -61,6 +61,29 @@ struct S2MapDescrHeader {
 	char bulk[2290];  // unknown
 } /* size 2352 */;
 
+// Some basic checks to identify obviously invalid headers
+bool is_valid_header(const S2MapDescrHeader& header) {
+	if (strncmp(header.magic, "WORLD_V1.0", 10)) {
+		return false;
+	}
+	if (header.name[19]) {
+		return false;
+	}
+	if (header.w <= 0 || header.h <= 0) {
+		return false;
+	}
+	if (header.uses_world < 0 || header.uses_world > 2) {
+		return false;
+	}
+	if (header.nplayers < 0 || header.nplayers > 7) {
+		return false;
+	}
+	if (header.author[19]) {
+		return false;
+	}
+	return true;
+}
+
 // TODO(unknown): the following bob types appear in S2 maps but are unknown
 //  Somebody who can run Settlers II please check them out
 //  11 (0x0B)
@@ -400,9 +423,11 @@ int32_t S2MapLoader::load_map_complete(Widelands::EditorGameBase& egbase, MapLoa
 }
 
 /**
- * Load informational data of an S2 map
+ * Loads informational data of an S2 map.
+ * Throws exception if data is invalid.
  */
 void S2MapLoader::load_s2mf_header(FileRead& fr) {
+	// no need to check file size: fr.data(..) already throws if the file is too small
 	S2MapDescrHeader header;
 	memcpy(&header, fr.data(sizeof(header)), sizeof(header));
 
@@ -413,6 +438,11 @@ void S2MapLoader::load_s2mf_header(FileRead& fr) {
 	header.w = swap_16(header.w);
 	header.h = swap_16(header.h);
 #endif
+
+	// Check header validity to prevent unexpected crashes later
+	if (!is_valid_header(header)) {
+		throw wexception("invalid S2 file");
+	}
 
 	//  don't really set size, but make the structures valid
 	map_.width_ = header.w;

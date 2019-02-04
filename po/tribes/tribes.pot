@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-12-13 16:47+0000\n"
+"POT-Creation-Date: 2019-02-03 08:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -3332,19 +3332,19 @@ msgctxt "immovable"
 msgid "Barley Field (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:13
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:15
 msgid "Blueberry Bush (tiny)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:37
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:39
 msgid "Blueberry Bush (small)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:61
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:63
 msgid "Blueberry Bush (medium)"
 msgstr ""
 
-#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:85
+#: ../../data/tribes/immovables/berry_bushes/blueberry/init.lua:87
 msgid "Blueberry Bush (ripe)"
 msgstr ""
 
