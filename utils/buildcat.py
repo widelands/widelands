@@ -84,6 +84,7 @@ MAINPOTS = [
         '../../data/tribes/*/*/*/helptexts.lua',
         '../../data/tribes/*/*/*/*/helptexts.lua',
         '../../data/tribes/*/*/*/*/*/helptexts.lua',
+        '../../data/tribes/*/resi/helptexts/*.lua',
     ]),
     ('widelands_editor/widelands_editor', [
         '../../data/scripting/editor/*.lua',

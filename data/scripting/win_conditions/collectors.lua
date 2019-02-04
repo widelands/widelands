@@ -170,7 +170,7 @@ return {
             .. h2(ngettext("Team Total: %i point", "Team Total: %i points", points)):format(points)
          msg = msg .. vspace(8) .. message
       end
-      
+
       broadcast(plrs, game_status.title, msg, {popup = show_popup})
    end
 
