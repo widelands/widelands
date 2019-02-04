@@ -191,9 +191,7 @@ return {
          msg = msg .. vspace(8) .. message
       end
 
-      for idx, plr in ipairs(plrs) do
-         send_message(plr, game_status.title, msg, {popup = true})
-      end
+      broadcast(plrs, game_status.title, msg, {popup = true})
    end
 
    local function _game_over(plrs)
