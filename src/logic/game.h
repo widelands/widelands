@@ -65,6 +65,7 @@ enum {
 
 // The entry types that are written to the syncstream
 // The IDs are a number in the higher 4 bits and the length in bytes in the lower 4 bits
+// Keep this synchronized with utils/syncstream/syncexcerpt-to-text.py
 namespace Syncstream {
 	// game.cc Game::report_desync()
 	// s32 id of desynced user, -1 when written on client

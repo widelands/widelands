@@ -621,8 +621,15 @@ void Game::report_sync_request() {
  * Playernumber should be negative when called by network clients
  */
 void Game::report_desync(int32_t playernumber) {
+	if (syncwrapper_.dumpfname_.empty()) {
+		log("Error: A desync occurred but no filename for the syncstream has been set.")
+		return;
+	}
+	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
 	std::string filename = syncwrapper_.dumpfname_;
-	filename.replace(filename.length() - kSyncstreamExtension.length(), kSyncstreamExtension.length(), kSyncstreamExcerptExtension);
+	assert(syncwrapper_.dumpfname_.length() > kSyncstreamExtension.length());
+	filename.replace(filename.length() - kSyncstreamExtension.length(),
+						kSyncstreamExtension.length(), kSyncstreamExcerptExtension);
 	std::unique_ptr<StreamWrite> file(g_fs->open_stream_write(filename));
 	assert(file != nullptr);
 	// Write revision, branch and build type of this build to the file
@@ -634,14 +641,11 @@ void Game::report_desync(int32_t playernumber) {
 	// Write our buffers to the file. Start with the oldest one
 	const size_t i2 = (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
 	size_t i = i2;
-	for (;;) {
+	do {
 		file->text(syncwrapper_.excerpts_buffer_[i]);
 		syncwrapper_.excerpts_buffer_[i].clear();
 		i = (i + 1) % SyncWrapper::kExcerptSize;
-		if (i == i2) {
-			break;
-		}
-	}
+	} while (i != i2);
 	file->unsigned_8(Syncstream::Desync);
 	file->signed_32(playernumber);
 	// Restart buffers
