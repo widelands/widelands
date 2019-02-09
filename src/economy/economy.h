@@ -91,6 +91,9 @@ class Economy {
 public:
 	friend class EconomyDataPacket;
 
+	// Initialize the global serial on game start
+	static void initialize_serial();
+
 	/// Configurable target quantity for the supply of a ware type in the
 	/// economy.
 	///

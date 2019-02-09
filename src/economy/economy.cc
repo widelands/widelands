@@ -43,6 +43,11 @@ namespace Widelands {
 
 Serial Economy::last_economy_serial_ = 0;
 
+void Economy::initialize_serial() {
+	log("Initializing economy serial\n");
+	last_economy_serial_ = 0;
+}
+
 Economy::Economy(Player& player) : Economy(player, last_economy_serial_++) {
 }
 
