@@ -108,7 +108,7 @@ end
 function broadcast(plrs, header, msg, goptions)
    local options = goptions or {}
    for idx, p in ipairs(plrs) do
-      p:send_message(header, msg, options)
+      send_message(p, header, msg, options)
    end
 end
 
