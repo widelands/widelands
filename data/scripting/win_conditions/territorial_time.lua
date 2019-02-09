@@ -63,7 +63,7 @@ return {
                msg = msg .. format_remaining_time(remaining_time_minutes)
             end
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-            player:send_message(game_status.title, msg, {popup = show_popup})
+            send_message(player, game_status.title, msg, {popup = show_popup})
          end
       end
 
