@@ -46,6 +46,8 @@ def handle_8(f):
 def handle_9(f):
 	print("CmdAct:")
 	print("  Serial:", struct.unpack('<I', f.read(4))[0])
+	# See MapObjectType in map_object.h for decoding the type
+	print("  Actor type:", struct.unpack('<B', f.read(1))[0])
 
 def handle_A(f):
 	print("Battle:")

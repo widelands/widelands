@@ -96,7 +96,8 @@ namespace Syncstream {
 	constexpr uint8_t Random = 0x84;
 	// map_object.cc CmdAct::execute()
 	// u32 object serial
-	constexpr uint8_t CmdAct = 0x94;
+	// u8 object type (see map_object.h MapObjectType)
+	constexpr uint8_t CmdAct = 0x95;
 	// battle.cc Battle::Battle()
 	// u32 first soldier serial
 	// u32 second soldier serial
