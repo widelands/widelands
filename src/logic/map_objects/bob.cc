@@ -893,7 +893,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	// randomly generated movements.
 	if (upcast(Game, game, &egbase)) {
 		StreamWrite& ss = game->syncstream();
-		ss.unsigned_8(Syncstream::BobSetPosition);
+		ss.unsigned_8(SyncEntry::kBobSetPosition);
 		ss.unsigned_32(serial());
 		ss.signed_16(coords.x);
 		ss.signed_16(coords.y);

@@ -622,7 +622,7 @@ void Game::report_sync_request() {
  */
 void Game::report_desync(int32_t playernumber) {
 	if (syncwrapper_.dumpfname_.empty()) {
-		log("Error: A desync occurred but no filename for the syncstream has been set.")
+		log("Error: A desync occurred but no filename for the syncstream has been set.");
 		return;
 	}
 	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
@@ -646,7 +646,7 @@ void Game::report_desync(int32_t playernumber) {
 		syncwrapper_.excerpts_buffer_[i].clear();
 		i = (i + 1) % SyncWrapper::kExcerptSize;
 	} while (i != i2);
-	file->unsigned_8(Syncstream::Desync);
+	file->unsigned_8(SyncEntry::kDesync);
 	file->signed_32(playernumber);
 	// Restart buffers
 	syncwrapper_.current_excerpt_id_ = 0;
@@ -674,7 +674,7 @@ Md5Checksum Game::get_sync_hash() const {
  */
 uint32_t Game::logic_rand() {
 	uint32_t const result = rng().rand();
-	syncstream().unsigned_8(Syncstream::Random);
+	syncstream().unsigned_8(SyncEntry::kRandom);
 	syncstream().unsigned_32(result);
 	return result;
 }

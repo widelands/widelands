@@ -380,7 +380,7 @@ void Request::start_transfer(Game& game, Supply& supp) {
 	assert(is_open());
 
 	::StreamWrite& ss = game.syncstream();
-	ss.unsigned_8(Syncstream::StartTransfer);
+	ss.unsigned_8(SyncEntry::kStartTransfer);
 	ss.unsigned_32(target().serial());
 	ss.unsigned_32(supp.get_position(game)->serial());
 

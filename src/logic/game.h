@@ -66,49 +66,51 @@ enum {
 // The entry types that are written to the syncstream
 // The IDs are a number in the higher 4 bits and the length in bytes in the lower 4 bits
 // Keep this synchronized with utils/syncstream/syncexcerpt-to-text.py
-namespace Syncstream {
+enum SyncEntry : uint8_t {
+	// Used in:
 	// game.cc Game::report_desync()
+	// Parameters:
 	// s32 id of desynced user, -1 when written on client
-	constexpr uint8_t Desync = 0x14;
+	kDesync = 0x14,
 	// map_object.cc CmdDestroyMapObject::execute()
 	// u32 object serial
-	constexpr uint8_t DestroyObject = 0x24;
+	kDestroyObject = 0x24,
 	// economy.cc Economy::process_requests()
 	// u8 request type
 	// u8 request index
 	// u32 target serial
-	constexpr uint8_t ProcessRequests = 0x36;
+	kProcessRequests = 0x36,
 	// economy.cc Economy::handle_active_supplies()
 	// u32 assignments size
-	constexpr uint8_t HandleActiveSupplies = 0x44;
+	kHandleActiveSupplies = 0x44,
 	// request.cc Request::start_transfer()
 	// u32 target serial
 	// u32 source(?) serial
-	constexpr uint8_t StartTransfer = 0x58;
+	kStartTransfer = 0x58,
 	// cmd_queue.cc CmdQueue::run_queue()
 	// u32 duetime
 	// u32 command id
-	constexpr uint8_t RunQueue = 0x68;
+	kRunQueue = 0x68,
 	// game.h Game::logic_rand_seed()
 	// u32 random seed
-	constexpr uint8_t RandomSeed = 0x74;
+	kRandomSeed = 0x74,
 	// game.cc Game::logic_rand()
 	// u32 random value
-	constexpr uint8_t Random = 0x84;
+	kRandom = 0x84,
 	// map_object.cc CmdAct::execute()
 	// u32 object serial
 	// u8 object type (see map_object.h MapObjectType)
-	constexpr uint8_t CmdAct = 0x95;
+	kCmdAct = 0x95,
 	// battle.cc Battle::Battle()
 	// u32 first soldier serial
 	// u32 second soldier serial
-	constexpr uint8_t Battle = 0xA8;
+	kBattle = 0xA8,
 	// bob.cc Bob::set_position()
 	// u32 bob serial
 	// s16 position x
 	// s16 position y
-	constexpr uint8_t BobSetPosition = 0xB8;
-}
+	kBobSetPosition = 0xB8
+};
 
 class Player;
 class MapLoader;
@@ -234,7 +236,7 @@ public:
 
 	void logic_rand_seed(uint32_t const seed) {
 		rng().seed(seed);
-		syncstream().unsigned_8(Syncstream::RandomSeed);
+		syncstream().unsigned_8(SyncEntry::kRandomSeed);
 		syncstream().unsigned_32(seed);
 	}
 

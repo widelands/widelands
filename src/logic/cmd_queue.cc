@@ -114,7 +114,7 @@ void CmdQueue::run_queue(int32_t const interval, uint32_t& game_time_var) {
 
 			if (dynamic_cast<GameLogicCommand*>(&c)) {
 				StreamWrite& ss = game_.syncstream();
-				ss.unsigned_8(Syncstream::RunQueue);
+				ss.unsigned_8(SyncEntry::kRunQueue);
 				ss.unsigned_32(c.duetime());
 				ss.unsigned_32(static_cast<uint32_t>(c.id()));
 			}
