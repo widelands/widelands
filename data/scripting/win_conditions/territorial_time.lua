@@ -82,7 +82,7 @@ return {
          
       -- here is the main loop!!!
       while game.time < (max_time * 60 * 1000) and count_factions(plrs) > 1 and territory_points.remaining_time > 0 do
-         -- Sleep 1 seconds
+         -- Sleep 1 second
          sleep(1000)
 
          -- A player might have been defeated since the last calculation

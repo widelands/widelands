@@ -53,9 +53,8 @@ return {
             else
                msg = p(_"Currently no faction owns more than half of the map’s area.")
             end
-               msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-               player:send_message(game_status.title, msg, {popup = show_popup})
-            end
+            msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
+            player:send_message(game_status.title, msg, {popup = show_popup})
          end
       end
 
