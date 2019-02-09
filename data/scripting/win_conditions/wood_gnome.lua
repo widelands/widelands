@@ -26,7 +26,7 @@ return {
    func = function()
    local plrs = wl.Game().players
    local game = wl.Game()
-   
+
    -- set the maximum game time of 4 hours
    local max_time = 4 * 60
 
@@ -98,7 +98,7 @@ return {
          -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
          msg = msg .. p(_"%1$s has %2$s at the moment."):bformat(plr.name,trees)
       end
-      
+
       broadcast(plrs, game_status.title, msg, {popup = show_popup})
    end
 
@@ -150,18 +150,18 @@ return {
    -- Start a new coroutine that triggers status notifications.
    run(function()
       local remaining_time = max_time
-      while game.time <= ((max_time - 5) * 60 * 1000) and count_factions(plrs) > 1 do 
+      while game.time <= ((max_time - 5) * 60 * 1000) and count_factions(plrs) > 1 do
          remaining_time, show_popup = notification_remaining_time(max_time, remaining_time)
          _send_state(remaining_time, plrs, show_popup)
       end
    end)
-   
+
    -- main loop checks for defeated players
    while game.time < (max_time * 60 * 1000) and count_factions(plrs) > 1 do
       sleep(1000)
       check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
    end
-   
+
    -- Game has ended
    _game_over(plrs)
 

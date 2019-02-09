@@ -250,7 +250,7 @@ function format_remaining_time(remaining_time)
    local m = 60
    local time = ""
    set_textdomain("win_conditions")
-   
+
    if (remaining_time ~= 60) then
       h = math.floor(remaining_time / 60)
       m = remaining_time % 60

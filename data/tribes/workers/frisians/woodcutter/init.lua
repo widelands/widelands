@@ -41,5 +41,6 @@ tribes:new_worker_type {
       }
    },
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }
