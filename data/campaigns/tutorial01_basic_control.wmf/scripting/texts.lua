@@ -237,7 +237,7 @@ order_quarry_recap_how_to_build = {
    title = _"How to Build a Quarry",
    body = (
       p(_[[Build a quarry next to those rocks here. Remember how I did it earlier?]]) ..
-      p(_[[Make sure that you are showing the building spaces, then just click on the space were you want the building to be, choose it from the window that appears, and it is placed. Maybe this is a good time to explain about all those building space symbols we activated earlier.]]) ..
+      p(_[[Make sure that you are showing the building spaces, then just click on the space where you want the building to be, choose it from the window that appears, and it is placed. Maybe this is a good time to explain about all those building space symbols we activated earlier.]]) ..
       p(_[[You can build four things on fields in Widelands: flags, small houses, medium houses and big houses. But not every field can hold everything. The build space symbols ease recognition:]]) ..
       li_image("images/wui/overlays/big.png", _[[Everything can be built on the green house symbol.]]) ..
       li_image("images/wui/overlays/medium.png", _[[Everything except for big buildings can be built on a yellow house symbol.]]) ..

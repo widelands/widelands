@@ -50,7 +50,6 @@ Statebox::Statebox(Panel* const parent,
 	uint16_t h = pic->height();
 	set_desired_size(w, h);
 	set_size(w, h);
-	set_can_focus(true);
 	set_flags(Has_Custom_Picture, true);
 }
 
@@ -98,7 +97,6 @@ void Statebox::layout() {
  * Args: enabled  true if the checkbox should be enabled, false otherwise
  */
 void Statebox::set_enabled(bool const enabled) {
-	set_can_focus(enabled);
 	if (((flags_ & Is_Enabled) > 1) && enabled)
 		return;
 
@@ -177,7 +175,6 @@ void Statebox::handle_mousein(bool const inside) {
  */
 bool Statebox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && (flags_ & Is_Enabled)) {
-		focus();
 		clicked();
 		return true;
 	}
