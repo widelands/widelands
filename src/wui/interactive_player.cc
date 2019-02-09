@@ -90,7 +90,7 @@ TextToDraw filter_text_to_draw(const TextToDraw text_to_draw, const Widelands::M
 	TextToDraw result = text_to_draw;
 	const Widelands::Player* owner = object->get_owner();
 	if (owner != nullptr && !player.see_all() && player.is_hostile(*owner)) {
-		result = result & ~TextToDraw::kStatistics;
+		result = removeFromTextToDraw(result, TextToDraw::kStatistics);
 	}
 	return result;
 }
