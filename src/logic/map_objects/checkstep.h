@@ -191,6 +191,6 @@ private:
 	// The only thing that matters is whether a location is in the set.
 	std::set<Coords> allowed_locations_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_CHECKSTEP_H

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-23 08:41+0000\n"
-"PO-Revision-Date: 2018-11-23 17:07+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-24 08:41+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -307,7 +307,7 @@ msgid "Redo"
 msgstr "Ath-dhèan"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:350 ../../src/wui/interactive_player.cc:185
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:185
 msgid "Help"
 msgstr "Cobhair"
 
@@ -859,17 +859,17 @@ msgstr "gun ainm"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:166
 msgid "A file or directory with that name already exists."
-msgstr ""
+msgstr "Tha faidhle no pasgan ann mu thràth air a bheil an t-ainm seo."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:168
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:183
 msgid "Error Creating Directory!"
-msgstr ""
+msgstr "Mearachd le cruthachadh a’ phasgain!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:181
 #, c-format
 msgid "Error while creating directory ‘%s’."
-msgstr ""
+msgstr "Thachair mearachd nuair a bha sinn a’ cruthachadh a’ phasgain “%s”."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:295
 #: ../../src/wui/game_main_menu_save_game.cc:175
@@ -884,12 +884,13 @@ msgid "Error Saving Map!"
 msgstr "Mearachd le sàbhaladh a’ mhapa!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:311
-msgid "File ‘%’ could not be deleted."
-msgstr ""
+#, c-format
+msgid "File ‘%s’ could not be deleted."
+msgstr "Cha b’ urrainn dhuinn am faidhle “%s” a sguabadh às."
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:314
 msgid "Try saving under a different name!"
-msgstr ""
+msgstr "Feuch an sàbhail thu le ainm eile e!"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:345
 msgid ""
@@ -905,7 +906,7 @@ msgstr "Cuir a-steach ainm a’ phasgain:"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:100
 msgid "This extension is reserved!"
-msgstr ""
+msgstr "Tha an leudachan seo glèidhte!"
 
 #. * TRANSLATORS: Window title in the editor when a player has selected more
 #. than the
@@ -1607,16 +1608,16 @@ msgid ""
 "compatible with world"
 msgstr "bu chòir dha stòras %s a thàrmachadh nach eil air an t-saoghal seo; mar sin chan eil an treubh co-chòrdail ris an t-saoghal seo"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:975
+#: ../../src/logic/map_objects/tribes/worker.cc:976
 msgid "A geologist found resources."
 msgstr "Tha clach-eòlaiche air stòras a lorg."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1849
+#: ../../src/logic/map_objects/tribes/worker.cc:1850
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Chan urrainn dhan %s agad slighe dhachaigh a lorg is feumaidh gum faigh e bàs."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1855
+#: ../../src/logic/map_objects/tribes/worker.cc:1856
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1626,7 +1627,7 @@ msgstr[1] "Luchd-obrach"
 msgstr[2] "Luchd-obrach"
 msgstr[3] "Luchd-obrach"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1856
+#: ../../src/logic/map_objects/tribes/worker.cc:1857
 msgid "Worker got lost!"
 msgstr "Chaidh neach-obrach air chall!"
 
@@ -1883,7 +1884,7 @@ msgstr "Chaidh rudeigin cearr: %s"
 
 #: ../../src/network/internet_gaming.cc:378
 msgid "Welcome to the Widelands Metaserver!"
-msgstr ""
+msgstr "Fàilte dhan mheata-fhrithealaiche aig Widelands!"
 
 #: ../../src/network/internet_gaming.cc:382
 #, c-format
@@ -1894,11 +1895,11 @@ msgstr "Chaidh do chlàradh a-steach mar “%s” on a tha an t-ainm a dh’iarr
 
 #: ../../src/network/internet_gaming.cc:395
 msgid "Our forums can be found at:"
-msgstr ""
+msgstr "Gheibh thu am bòrd-brath againn air:"
 
 #: ../../src/network/internet_gaming.cc:397
 msgid "For reporting bugs, visit:"
-msgstr ""
+msgstr "Airson innse dhuinn mu bhugaichean, tadhail air:"
 
 #: ../../src/network/internet_gaming.cc:412
 msgid "Mixed up"
@@ -1974,7 +1975,7 @@ msgstr "MEARACHD: %s"
 
 #: ../../src/network/internet_gaming.cc:646
 msgid "An unexpected error message has been received about command %1%: %2%"
-msgstr ""
+msgstr "Fhuair sinn teachdaireachd mearachd air nach robh dùil mun àithne %1%: %2%"
 
 #: ../../src/network/internet_gaming.cc:659
 #, c-format
@@ -2008,11 +2009,11 @@ msgstr "Neo-aithnichte"
 
 #: ../../src/network/internet_gaming_messages.cc:43
 msgid "There is no user with this name logged in."
-msgstr ""
+msgstr "Chan eil cleachdaiche air a chlàradh a-steach leis an ainm seo."
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The game no longer exists, maybe it has just been closed."
-msgstr ""
+msgstr "Chan eil an geama ann tuilleadh, dh’fhaoidte gun deach a dhùnadh."
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "The sent password was incorrect!"
@@ -2096,7 +2097,7 @@ msgstr "Dh’fhàg %1$s an geama (%2$s)"
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "%1$s has been replaced with %2$s"
-msgstr ""
+msgstr "Chaidh %2$s a chur an àite %1$s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
@@ -3232,7 +3233,7 @@ msgstr "Cosgais na togail:"
 msgid "Destroy"
 msgstr "Mill"
 
-#: ../../src/wui/buildingwindow.cc:291
+#: ../../src/wui/buildingwindow.cc:290 ../../src/wui/buildingwindow.cc:291
 msgid "Dismantle"
 msgstr "Thoir às a chèile"
 
@@ -3240,28 +3241,28 @@ msgstr "Thoir às a chèile"
 msgid "Returns:"
 msgstr "Toradh:"
 
-#: ../../src/wui/buildingwindow.cc:331 ../../src/wui/fieldaction.cc:367
+#: ../../src/wui/buildingwindow.cc:335 ../../src/wui/fieldaction.cc:367
 #: ../../src/wui/shipwindow.cc:140
 msgid "Show Debug Window"
 msgstr "Seall uinneag dì-bhugachaidh"
 
-#: ../../src/wui/buildingwindow.cc:338
+#: ../../src/wui/buildingwindow.cc:342
 msgid "Center view on this"
 msgstr "Meadhanaich an sealladh air"
 
-#: ../../src/wui/buildingwindow.cc:521
+#: ../../src/wui/buildingwindow.cc:525
 msgid "Hide work area"
 msgstr "Falaich an raon-obrach"
 
-#: ../../src/wui/buildingwindow.cc:524
+#: ../../src/wui/buildingwindow.cc:528
 msgid "Show work area"
 msgstr "Seall an raon-obrach"
 
-#: ../../src/wui/buildingwindow.cc:557
+#: ../../src/wui/buildingwindow.cc:561
 msgid "Start an expedition"
 msgstr "Tòisich air triall"
 
-#: ../../src/wui/buildingwindow.cc:561
+#: ../../src/wui/buildingwindow.cc:565
 msgid "Cancel the expedition"
 msgstr "Sguir dhen triall"
 
@@ -3395,31 +3396,31 @@ msgstr "Consoil sgriobt"
 #. * TRANSLATORS: Window label
 #: ../../src/wui/game_client_disconnected.cc:50
 msgid "Client got disconnected"
-msgstr ""
+msgstr "Chaidh ceangal gu cliant a bhriseadh"
 
 #: ../../src/wui/game_client_disconnected.cc:61
 msgid ""
 "A player disconnected from the game. An automatic save game has been "
 "created. Do you want to continue playing?"
-msgstr ""
+msgstr "Dhì-cheangail cluicheadair on gheama. Chaidh an geama a shàbhaladh gu fèin-obrachail. Am bu toigh leat leantainn air adhart a chluiche?"
 
 #. * TRANSLATORS: Button text
 #: ../../src/wui/game_client_disconnected.cc:73
 msgid "Continue game"
-msgstr ""
+msgstr "Lean air adhart leis a’ gheama"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:75
 msgid ""
 "Replace the disconnected player with the selected AI and continue playing"
-msgstr ""
+msgstr "Cuir an IF a chaidh a thaghadh an àite a’ chluicheadair a dh’fhalbh is lean air adhart a chluiche"
 
 #. * TRANSLATORS: Dropdown tooltip to select the AI difficulty when a player
 #. has
 #. disconnected from a game
 #: ../../src/wui/game_client_disconnected.cc:84
 msgid "AI for the disconnected player"
-msgstr ""
+msgstr "IF dhan chluicheadair a dh’fhalbh"
 
 #. * TRANSLATORS: Button tooltip
 #: ../../src/wui/game_client_disconnected.cc:96
@@ -3432,7 +3433,7 @@ msgstr "Fàg an geama"
 #: ../../src/wui/game_client_disconnected.cc:117
 #, c-format
 msgid "Replace player with %s"
-msgstr ""
+msgstr "Cuir %s an àite a’ chluicheadair"
 
 #. * TRANSLATORS: Title for a window that shows debug information for a field
 #. on the map
@@ -4027,45 +4028,45 @@ msgstr[3] "A bheil thu cinnteach gu bheil thu airson am %d geama seo a sguabadh 
 
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting File"
-msgstr ""
+msgstr "Dearbh sguabadh às an fhaidhle"
 
 #: ../../src/wui/load_or_save_game.cc:272
 msgid "Confirm Deleting Files"
-msgstr ""
+msgstr "Dearbh sguabadh às nam faidhlichean"
 
 #: ../../src/wui/load_or_save_game.cc:315
 msgid "Error Deleting File!"
-msgstr ""
+msgstr "Mearachd le sguabadh às an fhaidhle!"
 
 #: ../../src/wui/load_or_save_game.cc:315
 msgid "Error Deleting Files!"
-msgstr ""
+msgstr "Mearachd le sguabadh às nam faidhlichean!"
 
 #: ../../src/wui/load_or_save_game.cc:318
 msgid "The replay could not be deleted."
-msgstr ""
+msgstr "Cha b’ urrainn dhuinn an ath-cluiche a sguabadh às."
 
 #: ../../src/wui/load_or_save_game.cc:320
 #, c-format
 msgid "%d replay could not be deleted."
 msgid_plural "%d replays could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Tha %d ath-cluiche nach b’ urrainn dhuinn a sguabadh às."
+msgstr[1] "Tha %d ath-cluiche nach b’ urrainn dhuinn a sguabadh às."
+msgstr[2] "Tha %d ath-cluichean nach b’ urrainn dhuinn a sguabadh às."
+msgstr[3] "Tha %d ath-cluiche nach b’ urrainn dhuinn a sguabadh às."
 
 #: ../../src/wui/load_or_save_game.cc:327
 msgid "The game could not be deleted."
-msgstr ""
+msgstr "Cha b’ urrainn dhuinn an geama a sguabadh às."
 
 #: ../../src/wui/load_or_save_game.cc:329
 #, c-format
 msgid "%d game could not be deleted."
 msgid_plural "%d games could not be deleted."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Tha %d gheama nach b’ urrainn dhuinn a sguabadh às."
+msgstr[1] "Tha %d gheama nach b’ urrainn dhuinn a sguabadh às."
+msgstr[2] "Tha %d geamannan nach b’ urrainn dhuinn a sguabadh às."
+msgstr[3] "Tha %d geama nach b’ urrainn dhuinn a sguabadh às."
 
 #: ../../src/wui/load_or_save_game.cc:374
 msgid "Filename: Map name (start of replay)"

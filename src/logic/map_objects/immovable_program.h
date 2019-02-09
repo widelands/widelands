@@ -229,6 +229,6 @@ struct ImmovableActionData {
 
 	static ImmovableActionData* load(FileRead& fr, Immovable& imm, const std::string& name);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H

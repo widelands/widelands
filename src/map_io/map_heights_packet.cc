@@ -67,4 +67,4 @@ void MapHeightsPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectSa
 
 	fw.write(fs, "binary/heights");
 }
-}
+}  // namespace Widelands

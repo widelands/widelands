@@ -63,5 +63,5 @@ private:
 	uint32_t line_, col_;
 	size_t pos_, end_;
 };
-}
+}  // namespace RT
 #endif  // end of include guard: WL_GRAPHIC_TEXT_TEXTSTREAM_H

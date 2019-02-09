@@ -50,7 +50,7 @@ return {
                msg = msg .. losing_status_header(plrs) .. vspace(8)
             end
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-         send_message(player, game_status.title, msg, {popup = true})
+            player:send_message(game_status.title, msg, {popup = true})
          end
       end
 
@@ -59,12 +59,15 @@ return {
          -- Sleep 30 seconds == STATISTICS_SAMPLE_TIME
          sleep(30000)
 
+         -- A player might have been defeated since the last calculation
+         check_player_defeated(plrs, lost_game.title, lost_game.body)
+
          -- Check if a player or team is a candidate and update variables
-         calculate_territory_points(fields, plrs, wc_descname, wc_version)
+         calculate_territory_points(fields, wl.Game().players)
 
          -- Do this stuff, if the game is over
-         if territory_points.remaining_time == 0 then
-            territory_game_over(fields, plrs, wc_descname, wc_version)
+         if territory_points.remaining_time == 0 or count_factions(plrs) <= 1 then
+            territory_game_over(fields, wl.Game().players, wc_descname, wc_version)
             break
          end
 

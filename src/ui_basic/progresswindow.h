@@ -71,6 +71,6 @@ private:
 	void draw(RenderTarget&) override;
 	void update(bool repaint);
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_PROGRESSWINDOW_H

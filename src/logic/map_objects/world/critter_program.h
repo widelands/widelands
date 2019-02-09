@@ -63,6 +63,6 @@ private:
 	std::string name_;
 	std::vector<CritterAction> actions_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_PROGRAM_H

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+from subprocess import call, Popen, PIPE
 import codecs
 import json
 import os.path
@@ -177,7 +178,6 @@ dest_file.close()
 
 print('Done!')
 
-from subprocess import call, Popen, PIPE
 
 # Validata Appdata
 call(['appstreamcli', 'validate', appdata_filepath])

@@ -62,7 +62,7 @@ void WaresQueue::entered(
 #else
    DescriptionIndex, Worker*
 #endif
-   ) {
+) {
 
 	assert(worker == nullptr);  // WaresQueue can't hold workers
 	assert(filled_ < max_size_);
@@ -129,4 +129,4 @@ void WaresQueue::read_child(FileRead& fr, Game&, MapObjectLoader&) {
 		throw GameDataError("waresqueue: %s", e.what());
 	}
 }
-}
+}  // namespace Widelands

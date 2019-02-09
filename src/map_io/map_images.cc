@@ -54,4 +54,4 @@ void save_map_images(FileSystem* new_fs, FileSystem* map_fs) {
 		free(input_data);
 	}
 }
-}
+}  // namespace Widelands

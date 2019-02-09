@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
-"PO-Revision-Date: 2018-11-01 16:29+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-26 14:47+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -543,7 +543,7 @@ msgstr "Panzersmee"
 #: ../../data/tribes/buildings/productionsites/atlanteans/toolsmithy/init.lua:65
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaponsmithy/init.lua:61
 #: ../../data/tribes/buildings/productionsites/atlanteans/weaving_mill/init.lua:58
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:48
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:49
 #: ../../data/tribes/buildings/productionsites/barbarians/ax_workshop/init.lua:67
 #: ../../data/tribes/buildings/productionsites/barbarians/big_inn/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/farm/init.lua:60
@@ -1349,21 +1349,21 @@ msgctxt "atlanteans_building"
 msgid "Well"
 msgstr "Well"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:59
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:62
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:59
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:62
 msgid "No Water"
 msgstr "Keen Water"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:60
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
 #: ../../data/tribes/buildings/productionsites/barbarians/well/init.lua:63
 #: ../../data/tribes/buildings/productionsites/empire/well/init.lua:60
 #: ../../data/tribes/buildings/productionsites/frisians/well/init.lua:63
 msgid "Out of Water"
 msgstr "Hebb keen Water mehr"
 
-#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:61
+#: ../../data/tribes/buildings/productionsites/atlanteans/well/init.lua:62
 msgctxt "atlanteans_building"
 msgid "The carrier working at this well can’t find any water in his well."
 msgstr "De Arbeider, de bi deese Well warkt, het keen Water in de Quell mehr."
@@ -3824,7 +3824,7 @@ msgstr "De Lüü vun de wööste Noordseeküsten! Deeses Volk word noch entwicke
 
 #: ../../data/tribes/scripting/help/init.lua:54
 msgid "Tribal Encyclopedia"
-msgstr "Tum Naslaan övers Volk"
+msgstr "Tum Naslaan över 't Volk"
 
 #: ../../data/tribes/scripting/help/init.lua:59
 msgid "General"

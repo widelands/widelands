@@ -153,6 +153,6 @@ struct HeightInterval {
 
 	uint8_t min, max;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_WIDELANDS_GEOMETRY_H
