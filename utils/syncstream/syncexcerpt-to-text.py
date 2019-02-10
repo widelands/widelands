@@ -4,7 +4,7 @@ import struct
 import sys
 
 # WARNING!!
-# Keep this file in sync with namespace Syncstream in src/logic/game.h
+# Keep this file in sync with the enum SyncEntry in src/logic/game.h
 
 def handle_1(f):
 	print("Desync:")
@@ -74,6 +74,28 @@ handlers = {
 		11: handle_B
 	}
 
+
+if len(sys.argv) != 2:
+	print("Usage: %s filename.wse > outfile.txt\n" % sys.argv[0])
+
+	print("Parses the hex-data in the given Widelands Syncstream Excerpt")
+	print("into human readable form and echos it to stdout.\n")
+
+	print("You should do this with both the *.wse files of the host and")
+	print("the desyncing client. Which player desynced is also reported")
+	print("at the beginning of the output file of the host.")
+	print("Afterwards, the resulting files can be compared with the")
+	print("'diff' command. For correctly syncronized games the resulting")
+	print("files should be the same, but most likely there will be some")
+	print("small differences in the files (e.g., commands that are only")
+	print("executed for one of the players).")
+	print("There probably will be a large block of commands present at")
+	print("the beginning of only one of the files, this is normal and")
+	print("can be ignored.\n")
+
+	print("To find out more about the commands and where in the Widelands")
+	print("code they are used, see the enum SyncEntry in src/logic/game.h")
+	sys.exit(1)
 
 with open(sys.argv[1], "rb") as f:
 	print("Created with %s(%s)"
