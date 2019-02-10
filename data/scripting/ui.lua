@@ -181,8 +181,10 @@ end
 --    Sleeps while player is in roadbuilding mode.
 --
 function wait_for_roadbuilding()
-   _await_animation()
-   while (wl.ui.MapView().is_building_road) do sleep(2000) end
+   if wl.Game().type == "singleplayer" then
+      _await_animation()
+      while (wl.ui.MapView().is_building_road) do sleep(2000) end
+   end
 end
 
 
