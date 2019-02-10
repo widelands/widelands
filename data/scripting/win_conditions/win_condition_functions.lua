@@ -258,7 +258,9 @@ function format_remaining_time(remaining_time)
 
    if ((h > 0) and (m > 0)) then
       -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-      time = (ngettext("%1% hour and %2% minutes", "%1% hours and %2% minutes", h, m)):bformat(h, m)
+      time = (ngettext("%i minute", "%i minutes", h, m)):bformat(m)
+      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+      time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h, m)):bformat(h, time)
    elseif m > 0 then
       -- TRANSLATORS: Context: 'The game will end in 30 minutes.'
       time = (ngettext("%i minute", "%i minutes", m)):format(m)
