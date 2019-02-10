@@ -327,7 +327,7 @@ function mission_complete_thread()
    end
 
    message_box_objective(plr, msg_mission_complete)
-   p1:mark_scenario_as_solved("bar01.wmf")
+   plr:mark_scenario_as_solved("bar01.wmf")
 end
 
 
