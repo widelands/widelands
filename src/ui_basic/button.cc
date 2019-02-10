@@ -60,7 +60,8 @@ Button::Button  //  Common constructor
      title_image_(title_image),
      background_style_(g_gr->styles().button_style(init_style)) {
 	set_thinks(false);
-	set_can_focus(true);
+	// Don't allow focus
+	assert(!get_can_focus());
 }
 
 Button::Button  //  for textual buttons. If h = 0, h will resize according to the font's height.
@@ -142,8 +143,6 @@ void Button::set_title(const std::string& title) {
 void Button::set_enabled(bool const on) {
 	if (enabled_ == on)
 		return;
-
-	set_can_focus(on);
 
 	// disabled buttons should look different...
 	if (on)
@@ -316,7 +315,6 @@ bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 		return false;
 
 	if (enabled_) {
-		focus();
 		grab_mouse(true);
 		pressed_ = true;
 		if (repeating_) {
