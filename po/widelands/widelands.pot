@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-12-28 13:48+0000\n"
+"POT-Creation-Date: 2019-02-09 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Not enough space"
 msgstr ""
 
-#: ../../data/scripting/messages.lua:50 ../../data/scripting/messages.lua:52
+#: ../../data/scripting/messages.lua:58 ../../data/scripting/messages.lua:60
 #: ../../src/wui/game_message_menu.cc:70 ../../src/wui/game_summary.cc:104
 msgid "Status"
 msgstr ""

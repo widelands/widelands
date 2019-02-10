@@ -134,6 +134,7 @@ Game::Game()
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
      replay_(false) {
+	Economy::initialize_serial();
 }
 
 Game::~Game() {

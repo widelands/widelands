@@ -102,9 +102,9 @@ end
 -- .. function:: broadcast(plrs, header, msg[, options])
 --
 --    broadcast a message to all players using
---    :meth:`~wl.game.Player.send_message`. All parameters are passed
+--    :meth:`wl.game.Player.send_message <wl.game.Player.send_message>`. All parameters are passed
 --    literally.
---    Message is delayed while player is in road building mode.
+
 function broadcast(plrs, header, msg, goptions)
    local options = goptions or {}
    for idx, p in ipairs(plrs) do
@@ -236,4 +236,62 @@ function rank_players(all_player_points, plrs)
    -- Sort the teams by points descending
    table.sort(ranked_players_and_teams, function(a,b) return a["points"] > b["points"] end)
    return ranked_players_and_teams
+end
+
+-- RST
+-- .. function:: format_remaining_time(remaining_time)
+--
+--    return a message that contains the remaining game time
+--    to be used when sending status meassages
+--
+--    :arg remaining_time:    The remaining game time in minutes
+function format_remaining_time(remaining_time)
+   local h = 0
+   local m = 60
+   local time = ""
+   set_textdomain("win_conditions")
+
+   if (remaining_time ~= 60) then
+      h = math.floor(remaining_time / 60)
+      m = remaining_time % 60
+   end
+
+   if ((h > 0) and (m > 0)) then
+      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+      time = (ngettext("%1% hour and %2% minutes", "%1% hours and %2% minutes", h, m)):bformat(h, m)
+   elseif m > 0 then
+      -- TRANSLATORS: Context: 'The game will end in 30 minutes.'
+      time = (ngettext("%i minute", "%i minutes", m)):format(m)
+   else
+      -- TRANSLATORS: Context: 'The game will end in 2 hours.'
+      time = (ngettext("%1% hour", "%1% hours", h)):bformat(h)
+   end
+   -- TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
+   return p(_"The game will end in %s."):format(time)
+end
+
+-- RST
+-- .. function:: notification_remaining_time(max_time)
+--
+--    Calculate the remaining game time for notifications.
+--    Should only be called within a coroutine, because the routine gets blocked.
+--    Returns the remaining time and whether the notification should popup.
+--
+--    To be used when sending status messages.
+--    Status messages are to be send every 30 minutes and every 5 during the last 30 minutes,
+--    the message window pops up ever hour, 30, 20 & 10 minutes before the game ends.
+--
+--    :arg max_time:    The time maximum game time in minutes
+function notification_remaining_time(max_time, remaining_time)
+   local show_popup = false
+   if (wl.Game().time < ((max_time - 30) * 60 * 1000)) then --
+      wake_me(wl.Game().time + (30 * 60 * 1000)) -- 30 minutes
+      remaining_time = remaining_time - 30
+      if (remaining_time % 60 == 0) or (remaining_time == 30) then show_popup = true end
+   else
+      wake_me(wl.Game().time + (300 * 1000)) --5 Minutes
+      remaining_time = remaining_time - 5
+      if ((remaining_time ~= 0) and (remaining_time % 10 == 0)) then show_popup = true end
+   end
+   return remaining_time, show_popup
 end

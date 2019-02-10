@@ -14,6 +14,8 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 fi
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+  # Upgrade homebrew
+  brew update && brew upgrade
   # Install osx dependencies
   # boost, cmake, gettext and icu4c are preinstalled :)
   brew install glew sdl2 sdl2_image sdl2_mixer sdl2_ttf
