@@ -155,15 +155,41 @@ void MainMenuSaveMap::clicked_ok() {
 void MainMenuSaveMap::clicked_make_directory() {
 	/** TRANSLATORS: A folder that hasn't been given a name yet */
 	MainMenuSaveMapMakeDirectory md(this, _("unnamed"));
-	if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
-		g_fs->ensure_directory_exists(curdir_);
-		//  Create directory.
-		std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
-		// Trim it for preceding/trailing whitespaces in user input
-		boost::trim(fullname);
-		g_fs->make_directory(fullname);
-		fill_table();
+	bool open_dialogue = true;
+	while (open_dialogue) {
+		open_dialogue = false;
+		if (md.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk) {
+			std::string fullname = curdir_ + g_fs->file_separator() + md.get_dirname();
+			// Trim it for preceding/trailing whitespaces in user input
+			boost::trim(fullname);
+			if (g_fs->file_exists(fullname)) {
+				const std::string s = _("A file or directory with that name already exists.");
+				UI::WLMessageBox mbox(
+				   this, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+				mbox.run<UI::Panel::Returncodes>();
+				open_dialogue = true;
+			} else {
+				try {
+					g_fs->ensure_directory_exists(curdir_);
+					//  Create directory.
+					g_fs->make_directory(fullname);
+				} catch (const FileError& e) {
+					log("directory creation failed in MainMenuSaveMap::"
+					    "clicked_make_directory: %s\n",
+					    e.what());
+					const std::string s =
+					   (boost::format(_("Error while creating directory ‘%s’.")) % fullname).str();
+					UI::WLMessageBox mbox(
+					   this, _("Error Creating Directory!"), s, UI::WLMessageBox::MBoxType::kOk);
+					mbox.run<UI::Panel::Returncodes>();
+				}
+				fill_table();
+			}
+		}
 	}
+	table_.focus();
+	// TODO(Arty): In case of successful dir creation we should select the
+	// new dir in the table.
 }
 
 void MainMenuSaveMap::clicked_edit_options() {
@@ -256,8 +282,9 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	boost::trim(filename);
 
 	//  OK, first check if the extension matches (ignoring case).
-	if (!boost::iends_with(filename, kWidelandsMapExtension))
+	if (!boost::iends_with(filename, kWidelandsMapExtension)) {
 		filename += kWidelandsMapExtension;
+	}
 
 	//  Append directory name.
 	const std::string complete_filename = curdir_ + g_fs->file_separator() + filename;
@@ -269,19 +296,22 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 		    FileSystem::fs_filename(filename.c_str()))
 		      .str();
 		UI::WLMessageBox mbox(this, _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOkCancel);
-		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack)
+		if (mbox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kBack) {
 			return false;
+		}
 	}
 
-	// save to a tmp file/dir first, rename later
-	// (important to keep script files in the script directory)
-	const std::string tmp_name = complete_filename + ".tmp";
-	if (g_fs->file_exists(tmp_name)) {
-		const std::string s =
-		   (boost::format(
-		       _("A file with the name ‘%s.tmp’ already exists. You have to remove it manually.")) %
-		    FileSystem::fs_filename(filename.c_str()))
-		      .str();
+	//  Try deleting file (if it exists). If it fails, give a message and let the player choose a new
+	//  name.
+	try {
+		g_fs->fs_unlink(complete_filename);
+	} catch (const std::exception& e) {
+		log("Unable to delete old map file %s while saving map: %s\n", complete_filename.c_str(),
+		    e.what());
+		const std::string s = (boost::format(_("File ‘%s’ could not be deleted.")) %
+		                       FileSystem::fs_filename(filename.c_str()))
+		                         .str() +
+		                      " " + _("Try saving under a different name!");
 		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
 		mbox.run<UI::Panel::Returncodes>();
 		return false;
@@ -290,51 +320,34 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	Widelands::EditorGameBase& egbase = eia().egbase();
 	Widelands::Map* map = egbase.mutable_map();
 
-	{  // fs scope
-		std::unique_ptr<FileSystem> fs(
-		   g_fs->create_sub_file_system(tmp_name, binary ? FileSystem::ZIP : FileSystem::DIR));
+	// Recompute seafaring tag
+	map->cleanup_port_spaces(egbase.world());
+	if (map->allows_seafaring()) {
+		map->add_tag("seafaring");
+	} else {
+		map->delete_tag("seafaring");
+	}
 
-		// Recompute seafaring tag
-		map->cleanup_port_spaces(egbase.world());
-		if (map->allows_seafaring()) {
-			map->add_tag("seafaring");
-		} else {
-			map->delete_tag("seafaring");
-		}
+	if (map->has_artifacts()) {
+		map->add_tag("artifacts");
+	} else {
+		map->delete_tag("artifacts");
+	}
 
-		if (map->has_artifacts()) {
-			map->add_tag("artifacts");
-		} else {
-			map->delete_tag("artifacts");
-		}
-
-		try {
-			Widelands::MapSaver* wms = new Widelands::MapSaver(*fs, egbase);
-			wms->save();
-			delete wms;
-			// Reset filesystem to avoid file locks on saves
-			fs.reset();
-			map->reset_filesystem();
-			eia().set_need_save(false);
-			g_fs->fs_unlink(complete_filename);
-			g_fs->fs_rename(tmp_name, complete_filename);
-			// Also change fs, as we assign it to the map below
-			fs.reset(g_fs->make_sub_file_system(complete_filename));
-			// Set the filesystem of the map to the current save file / directory
-			map->swap_filesystem(fs);
-			// DONT use fs as of here, its garbage now!
-
-		} catch (const std::exception& e) {
-			std::string s = _("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
-			                  "given:\n");
-			s += e.what();
-			UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
-			mbox.run<UI::Panel::Returncodes>();
-
-			// cleanup tmp file if it was created
-			g_fs->fs_unlink(tmp_name);
-		}
-	}  // end fs scope, dont use it
+	//  Try saving.
+	try {
+		std::unique_ptr<FileSystem> fs(g_fs->create_sub_file_system(
+		   complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
+		std::unique_ptr<Widelands::MapSaver> wms(new Widelands::MapSaver(*fs, egbase));
+		wms->save();
+		fs.reset();
+	} catch (const std::exception& e) {
+		std::string s = _("Error Saving Map!\nSaved map file may be corrupt!\n\nReason "
+		                  "given:\n");
+		s += e.what();
+		UI::WLMessageBox mbox(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::MBoxType::kOk);
+		mbox.run<UI::Panel::Returncodes>();
+	}
 
 	die();
 	return true;

@@ -47,4 +47,4 @@ void Field::set_brightness(int32_t const l,
 		b = 127;
 	brightness = static_cast<int8_t>(b);
 }
-}
+}  // namespace Widelands

@@ -128,6 +128,6 @@ protected:
 };
 
 void luaopen_wlbases(lua_State*);
-}
+}  // namespace LuaBases
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_BASES_H

@@ -89,6 +89,6 @@ private:
 	bool passed_corner_;
 	Direction direction_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPDIFFERENCEREGION_H

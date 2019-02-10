@@ -51,6 +51,6 @@ struct WareRange {
 private:
 	BillOfMaterials::const_iterator const end;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BILL_OF_MATERIALS_H

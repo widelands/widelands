@@ -120,10 +120,10 @@ private:
 };
 
 /** struct MapGenInfo
-  *
-  * This class holds world specific information for the map generator.
-  * This info is usually read from the file "mapgeninfo" of a world.
-  */
+ *
+ * This class holds world specific information for the map generator.
+ * This info is usually read from the file "mapgeninfo" of a world.
+ */
 struct MapGenInfo {
 	MapGenInfo(const LuaTable& table, const World& world);
 

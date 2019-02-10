@@ -44,5 +44,5 @@ struct IRoute {
 	virtual void init(int32_t) = 0;
 	virtual void insert_as_first(RoutingNode* node) = 0;
 };
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_ECONOMY_IROUTE_H

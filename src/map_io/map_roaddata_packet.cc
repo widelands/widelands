@@ -238,4 +238,4 @@ void MapRoaddataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 
 	fw.write(fs, "binary/road_data");
 }
-}
+}  // namespace Widelands

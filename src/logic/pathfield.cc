@@ -61,4 +61,4 @@ void PathfieldManager::clear(const boost::shared_ptr<Pathfields>& pf) {
 		pf->fields[i].cycle = 0;
 	pf->cycle = 1;
 }
-}
+}  // namespace Widelands

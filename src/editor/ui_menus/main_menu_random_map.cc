@@ -399,7 +399,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 
 /**
  * Called, when button get clicked
-*/
+ */
 void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	switch (n) {
 	case ButtonId::kPlayers:  // intended fall-through

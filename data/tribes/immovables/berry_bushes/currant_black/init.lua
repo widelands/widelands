@@ -2,9 +2,9 @@ dirname = path.dirname (__file__)
 
 terrain_affinity = {
    preferred_temperature = 120,
-   preferred_humidity = 0.1,
-   preferred_fertility = 0.2,
-   pickiness = 0.5,
+   preferred_humidity = 100,
+   preferred_fertility = 200,
+   pickiness = 50,
 }
 
 tribes:new_immovable_type {

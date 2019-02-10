@@ -107,6 +107,6 @@ protected:
 	virtual ~SoldierControl() {
 	}
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIERCONTROL_H

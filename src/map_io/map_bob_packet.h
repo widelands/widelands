@@ -44,6 +44,6 @@ private:
 	              const Coords&,
 	              const WorldLegacyLookupTable& lookup_table);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_BOB_PACKET_H

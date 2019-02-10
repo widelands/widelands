@@ -35,7 +35,7 @@ struct EditorSetResourcesTool : public EditorTool {
 
 	/**
 	 * Sets the resources of the current to a fixed value
-	*/
+	 */
 	int32_t handle_click_impl(const Widelands::World& world,
 	                          const Widelands::NodeAndTriangle<>& center,
 	                          EditorInteractive& parent,

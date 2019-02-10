@@ -48,6 +48,6 @@ private:
 	OPtr<Flag> flag_;
 	uint32_t timerid_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_CMD_CALL_ECONOMY_BALANCE_H

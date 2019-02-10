@@ -55,6 +55,6 @@ DEF_ERR(TextureTooBig)
 DEF_ERR(WidthTooSmall)
 
 #undef DEF_ERR
-}
+}  // namespace RT
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_RT_ERRORS_H
