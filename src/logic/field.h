@@ -258,9 +258,9 @@ private:
 
 // Check that Field is tightly packed.
 #ifndef WIN32
-static_assert(sizeof(Field) == sizeof(void*) * 2 + 10, "Field is not tightly packed.");
+static_assert(sizeof(Field) == sizeof(void*) * 2 + 11, "Field is not tightly packed.");
 #else
-static_assert(sizeof(Field) <= sizeof(void*) * 2 + 11, "Field is not tightly packed.");
+static_assert(sizeof(Field) <= sizeof(void*) * 2 + 12, "Field is not tightly packed.");
 #endif
 }  // namespace Widelands
 
