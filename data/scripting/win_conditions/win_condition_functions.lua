@@ -108,7 +108,7 @@ end
 function broadcast(plrs, header, msg, goptions)
    local options = goptions or {}
    for idx, p in ipairs(plrs) do
-      p:send_message(header, msg, options)
+      send_message(p, header, msg, options)
    end
 end
 
@@ -258,8 +258,9 @@ function format_remaining_time(remaining_time)
 
    if ((h > 0) and (m > 0)) then
       -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-      time = (ngettext("%i hour and ", "%i hours and ", h)):bformat(h)
-      time = time .. (ngettext("%i minute", "%i minutes", m)):bformat(m)
+      time = (ngettext("%i minute", "%i minutes", h, m)):bformat(m)
+      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+      time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h, m)):bformat(h, time)
    elseif m > 0 then
       -- TRANSLATORS: Context: 'The game will end in 30 minutes.'
       time = (ngettext("%i minute", "%i minutes", m)):bformat(m)
