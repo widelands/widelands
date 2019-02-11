@@ -173,8 +173,8 @@ void GameClient::run() {
 	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {
-		UI::ProgressWindow* loader_ui = new UI::ProgressWindow();
-		d->modal = loader_ui;
+		std::unique_ptr<UI::ProgressWindow> loader_ui(new UI::ProgressWindow());
+		d->modal = loader_ui.get();
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
@@ -182,7 +182,7 @@ void GameClient::run() {
 			tipstext.push_back(get_players_tribe());
 		} catch (NoTribe) {
 		}
-		GameTips tips(*loader_ui, tipstext);
+		GameTips tips(*loader_ui.get(), tipstext);
 
 		loader_ui->step(_("Preparing game"));
 
@@ -199,9 +199,9 @@ void GameClient::run() {
 		game.set_ibase(igb);
 		igb->set_chat_provider(*this);
 		if (!d->settings.savegame) {  //  new map
-			game.init_newgame(loader_ui, d->settings);
+			game.init_newgame(loader_ui.get(), d->settings);
 		} else {  // savegame
-			game.init_savegame(loader_ui, d->settings);
+			game.init_savegame(loader_ui.get(), d->settings);
 		}
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
@@ -209,7 +209,7 @@ void GameClient::run() {
 
 		d->modal = igb;
 		game.run(
-		   loader_ui,
+		   loader_ui.get(),
 		   d->settings.savegame ?
 		      Widelands::Game::Loaded :
 		      d->settings.scenario ? Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
