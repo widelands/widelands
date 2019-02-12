@@ -153,13 +153,13 @@ function calculate_territory_points(fields, players)
             territory_was_kept = winning_players[playerinfo.number] ~= nil
             winning_players[playerinfo.number] = true
             territory_points.last_winning_player = playerinfo.number
-            territory_points.last_winning_player_name = players[playerinfo.number].name
+            territory_points.last_winning_player_name = playerinfo.name
             territory_points.last_winning_team = -1
          else
             winning_players[playerinfo.number] = nil
          end
          if teaminfo.team == 0 then
-            points[#points + 1] = { players[playerinfo.number].name, playerinfo.points }
+            points[#points + 1] = { playerinfo.name, playerinfo.points }
          end
       end
    end
