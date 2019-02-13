@@ -200,7 +200,7 @@ function rank_players(all_player_points, plrs)
             team = 0,
             points = player_points,
             players = {
-               { number = player.number, points = player_points }
+               { number = player.number, name = player.name, points = player_points }
             }
          }
          table.insert(ranked_players_and_teams, team_table)
@@ -222,7 +222,7 @@ function rank_players(all_player_points, plrs)
       }
       for idx, player in ipairs(plrs) do
          if player.team == team then
-            table.insert(team_table.players, { number = player.number, points = all_player_points[player.number] })
+            table.insert(team_table.players, { number = player.number, name = player.name, points = all_player_points[player.number] })
          end
       end
       table.insert(ranked_players_and_teams, team_table)
@@ -258,7 +258,9 @@ function format_remaining_time(remaining_time)
 
    if ((h > 0) and (m > 0)) then
       -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-      time = (ngettext("%1% hour and %2% minutes", "%1% hours and %2% minutes", h, m)):bformat(h, m)
+      time = (ngettext("%i minute", "%i minutes", h, m)):bformat(m)
+      -- TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+      time = (ngettext("%1% hour and %2%", "%1% hours and %2%", h, m)):bformat(h, time)
    elseif m > 0 then
       -- TRANSLATORS: Context: 'The game will end in 30 minutes.'
       time = (ngettext("%i minute", "%i minutes", m)):format(m)
