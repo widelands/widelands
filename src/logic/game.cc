@@ -37,6 +37,7 @@
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
@@ -87,6 +88,8 @@ Game::SyncWrapper::~SyncWrapper() {
 void Game::SyncWrapper::start_dump(const std::string& fname) {
 	dumpfname_ = fname + kSyncstreamExtension;
 	dump_.reset(g_fs->open_stream_write(dumpfname_));
+	current_excerpt_id_ = 0;
+	excerpts_buffer_[current_excerpt_id_].clear();
 }
 
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
@@ -114,6 +117,8 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 			log("Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
 			dump_.reset();
 		}
+		assert(current_excerpt_id_ < kExcerptSize);
+		excerpts_buffer_[current_excerpt_id_].append(static_cast<const char*>(sync_data), size);
 	}
 
 	target_.data(sync_data, size);
@@ -604,6 +609,52 @@ StreamWrite& Game::syncstream() {
 }
 
 /**
+ * Switches to the next part of the syncstream excerpt.
+ */
+void Game::report_sync_request() {
+	syncwrapper_.current_excerpt_id_ =
+	   (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	syncwrapper_.excerpts_buffer_[syncwrapper_.current_excerpt_id_].clear();
+}
+
+/**
+ * Triggers writing of syncstream excerpt and adds the playernumber of the desynced player
+ * to the stream.
+ * Playernumber should be negative when called by network clients
+ */
+void Game::report_desync(int32_t playernumber) {
+	if (syncwrapper_.dumpfname_.empty()) {
+		log("Error: A desync occurred but no filename for the syncstream has been set.");
+		return;
+	}
+	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
+	std::string filename = syncwrapper_.dumpfname_;
+	assert(syncwrapper_.dumpfname_.length() > kSyncstreamExtension.length());
+	filename.replace(filename.length() - kSyncstreamExtension.length(),
+	                 kSyncstreamExtension.length(), kSyncstreamExcerptExtension);
+	std::unique_ptr<StreamWrite> file(g_fs->open_stream_write(filename));
+	assert(file != nullptr);
+	// Write revision, branch and build type of this build to the file
+	file->unsigned_32(build_id().length());
+	file->text(build_id());
+	file->unsigned_32(build_type().length());
+	file->text(build_type());
+	file->signed_32(playernumber);
+	// Write our buffers to the file. Start with the oldest one
+	const size_t i2 = (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	size_t i = i2;
+	do {
+		file->text(syncwrapper_.excerpts_buffer_[i]);
+		syncwrapper_.excerpts_buffer_[i].clear();
+		i = (i + 1) % SyncWrapper::kExcerptSize;
+	} while (i != i2);
+	file->unsigned_8(SyncEntry::kDesync);
+	file->signed_32(playernumber);
+	// Restart buffers
+	syncwrapper_.current_excerpt_id_ = 0;
+}
+
+/**
  * Calculate the current synchronization checksum and copy
  * it into the given array, without affecting the subsequent
  * checksumming process.
@@ -625,6 +676,7 @@ Md5Checksum Game::get_sync_hash() const {
  */
 uint32_t Game::logic_rand() {
 	uint32_t const result = rng().rand();
+	syncstream().unsigned_8(SyncEntry::kRandom);
 	syncstream().unsigned_32(result);
 	return result;
 }

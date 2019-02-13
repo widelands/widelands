@@ -1875,6 +1875,7 @@ void GameHost::request_sync_reports() {
 	}
 
 	log("[Host]: Requesting sync reports for time %i\n", d->syncreport_time);
+	d->game->report_sync_request();
 
 	SendPacket packet;
 	packet.unsigned_8(NETCMD_SYNCREQUEST);
@@ -1916,6 +1917,8 @@ void GameHost::check_sync_reports() {
 			    i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
 
 			d->game->save_syncstream(true);
+			// Create syncstream excerpt and add faulting player number
+			d->game->report_desync(i);
 
 			SendPacket packet;
 			packet.unsigned_8(NETCMD_INFO_DESYNC);

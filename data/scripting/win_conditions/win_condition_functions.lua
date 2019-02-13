@@ -200,7 +200,7 @@ function rank_players(all_player_points, plrs)
             team = 0,
             points = player_points,
             players = {
-               { number = player.number, points = player_points }
+               { number = player.number, name = player.name, points = player_points }
             }
          }
          table.insert(ranked_players_and_teams, team_table)
@@ -222,7 +222,7 @@ function rank_players(all_player_points, plrs)
       }
       for idx, player in ipairs(plrs) do
          if player.team == team then
-            table.insert(team_table.players, { number = player.number, points = all_player_points[player.number] })
+            table.insert(team_table.players, { number = player.number, name = player.name, points = all_player_points[player.number] })
          end
       end
       table.insert(ranked_players_and_teams, team_table)
