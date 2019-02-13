@@ -81,6 +81,6 @@ private:
 	int16_t history_position_;
 	std::string history_[CHAT_HISTORY_SIZE];
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_EDITBOX_H

@@ -60,4 +60,4 @@ void CmdIncorporate::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 	assert(mos.is_object_known(*worker));
 	fw.unsigned_32(mos.get_object_file_index(*worker));
 }
-}
+}  // namespace Widelands

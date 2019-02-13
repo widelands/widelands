@@ -36,8 +36,9 @@ struct EditorToolPlaceImmovableOptionsMenu : public EditorToolOptionsMenu {
 	virtual ~EditorToolPlaceImmovableOptionsMenu();
 
 private:
-	std::unique_ptr<CategorizedItemSelectionMenu<Widelands::ImmovableDescr,
-	                                             EditorPlaceImmovableTool>> multi_select_menu_;
+	std::unique_ptr<
+	   CategorizedItemSelectionMenu<Widelands::ImmovableDescr, EditorPlaceImmovableTool>>
+	   multi_select_menu_;
 };
 
 #endif  // end of include guard: WL_EDITOR_UI_MENUS_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H

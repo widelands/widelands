@@ -65,6 +65,13 @@ Workers are defined with Lua functions called ``new_<worker_type>_type{table}``.
       on the map in order to do his work, and what that work is, including any
       animations and sounds played.
 
+  **ware_hotspot**
+      *Optional*. The x, y coordinates for adjusting the placement of the
+      ware being carried. The default value is ``{0, 15}``. Increase ``x``
+      to shift the ware to the left and ``y`` to shift it upwards. For example::
+
+          ware_hotspot = { -2, 13 },
+
 .. _lua_tribes_workers_helptexts:
 
 Help Texts

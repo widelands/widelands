@@ -112,4 +112,4 @@ void MapPlayerNamesAndTribesPacket::write(FileSystem& fs, EditorGameBase& egbase
 
 	prof.write("player_names", false, fs);
 }
-}
+}  // namespace Widelands

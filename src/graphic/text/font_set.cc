@@ -251,4 +251,4 @@ FontSet const* FontSets::get_fontset(const std::string& locale) const {
 	assert(fontsets.count(selector) == 1);
 	return fontsets.at(selector).get();
 }
-}
+}  // namespace UI

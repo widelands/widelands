@@ -74,7 +74,7 @@ tribes:new_productionsite_type {
          }
       },
       produce_blackroot_flour = {
-         -- TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
+         -- TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
          descname = _"grinding blackroot",
          actions = {
             -- No check whether we need blackroot_flour because blackroots cannot be used for anything else.

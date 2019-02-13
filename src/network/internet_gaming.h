@@ -107,6 +107,13 @@ struct InternetGaming : public ChatProvider {
 	const std::pair<NetAddress, NetAddress>& ips();
 
 	/**
+	 * Blocks for some time until either the ips() method is able to return the IPs of the relay
+	 * or an error occurred or the timeout is met.
+	 * @return \c True iff ips() can return something.
+	 */
+	bool wait_for_ips();
+
+	/**
 	 * Returns the password required to connect to the relay server as host.
 	 */
 	const std::string relay_password();

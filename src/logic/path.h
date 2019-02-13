@@ -124,6 +124,6 @@ private:
 	StepVector path_;             //  directions
 	std::vector<Coords> coords_;  //  coords_.size() == path_.size() + 1
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PATH_H

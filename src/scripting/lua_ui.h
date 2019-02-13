@@ -235,6 +235,6 @@ public:
 };
 
 void luaopen_wlui(lua_State*);
-}
+}  // namespace LuaUi
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_UI_H

@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
-rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
@@ -26,10 +26,12 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "base/scoped_timer.h"
+#include "base/time_string.h"
 #include "base/wexception.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/color.h"
+#include "logic/filesystem_constants.h"
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -48,6 +50,7 @@ rnrnrn * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/roadtype.h"
+#include "map_io/map_saver.h"
 #include "scripting/logic.h"
 #include "scripting/lua_table.h"
 #include "ui_basic/progresswindow.h"
@@ -67,12 +70,89 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
    : gametime_(0),
      lua_(lua_interface),
      player_manager_(new PlayersManager(*this)),
-     ibase_(nullptr) {
+     ibase_(nullptr),
+     tmp_fs_(nullptr) {
 	if (!lua_)  // TODO(SirVer): this is sooo ugly, I can't say
 		lua_.reset(new LuaEditorInterface(this));
 }
 
 EditorGameBase::~EditorGameBase() {
+	delete_tempfile();
+}
+
+/**
+ * deletes the temporary file/dir
+ * also resets the map filesystem if it points to the temporary file
+ */
+void EditorGameBase::delete_tempfile() {
+	if (!tmp_fs_) {
+		return;
+	}
+
+	std::string fs_filename = tmp_fs_->get_basename();
+	std::string mapfs_filename = map_.filesystem()->get_basename();
+	if (mapfs_filename == fs_filename)
+		map_.reset_filesystem();
+	tmp_fs_.reset();
+	try {
+		g_fs->fs_unlink(fs_filename);
+	} catch (const std::exception& e) {
+		// if file deletion fails then we have an abandoned file lying around, but otherwise that's
+		// unproblematic
+		log("EditorGameBase::delete_tempfile: deleting temporary file/dir failed: %s\n", e.what());
+	}
+}
+
+/**
+ * creates a new file/dir, saves the map data, and reassigns the map filesystem
+ * does not delete the former temp file if one exists
+ * throws an exception if something goes wrong
+ */
+void EditorGameBase::create_tempfile_and_save_mapdata(FileSystem::Type const type) {
+	// should only be called when a map was already loaded
+	assert(map_.filesystem());
+
+	g_fs->ensure_directory_exists(kTempFileDir);
+
+	std::string filename = kTempFileDir + g_fs->file_separator() + timestring() + "_mapdata";
+	std::string complete_filename = filename + kTempFileExtension;
+
+	// if a file with that name already exists, then try a few name modifications
+	if (g_fs->file_exists(complete_filename)) {
+		int suffix;
+		for (suffix = 0; suffix <= 9; suffix++) {
+			complete_filename = filename + "-" + std::to_string(suffix) + kTempFileExtension;
+			if (!g_fs->file_exists(complete_filename))
+				break;
+		}
+		if (suffix > 9) {
+			throw wexception("EditorGameBase::create_tempfile_and_save_mapdata(): for all considered "
+			                 "filenames a file already existed");
+		}
+	}
+
+	// create tmp_fs_
+	tmp_fs_.reset(g_fs->create_sub_file_system(complete_filename, type));
+
+	// save necessary map data (we actually save the whole map)
+	std::unique_ptr<Widelands::MapSaver> wms(new Widelands::MapSaver(*tmp_fs_, *this));
+	wms->save();
+
+	// swap map fs
+	std::unique_ptr<FileSystem> mapfs(tmp_fs_->make_sub_file_system("."));
+	map_.swap_filesystem(mapfs);
+	mapfs.reset();
+
+	// This is just a convenience hack:
+	// If tmp_fs_ is a zip filesystem then - because of the way zip filesystems are currently
+	// implemented -
+	// the file is still in zip mode right now, which means that the file isn't finalized yet, i.e.,
+	// not even a valid zip file until zip mode ends. To force ending the zip mode (thus finalizing
+	// the file)
+	// we simply perform a (otherwise useless) filesystem request.
+	// It's not strictly necessary, but this way we get a valid zip file immediately istead of
+	// at some unkown later point (when an unzip operation happens or a filesystem object destructs).
+	tmp_fs_->file_exists("binary");
 }
 
 void EditorGameBase::think() {
@@ -196,6 +276,16 @@ void EditorGameBase::allocate_player_maps() {
  * graphics are loaded.
  */
 void EditorGameBase::postload() {
+	if (map_.filesystem()) {
+		// save map data to temporary file and reassign map fs
+		try {
+			create_tempfile_and_save_mapdata(FileSystem::ZIP);
+		} catch (const WException& e) {
+			log("EditorGameBase::postload: saving map to temporary file failed: %s", e.what());
+			throw;
+		}
+	}
+
 	// Postload tribes
 	assert(tribes_);
 	tribes_->postload();
@@ -411,6 +501,8 @@ void EditorGameBase::cleanup_for_load() {
 	player_manager_->cleanup();
 
 	map_.cleanup();
+
+	delete_tempfile();
 }
 
 void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t const roadtype) {
@@ -482,19 +574,6 @@ void EditorGameBase::unconquer_area(PlayerArea<Area<FCoords>> player_area,
 
 	//  step 1: unconquer area of this building
 	do_conquer_area(player_area, false, destroying_player);
-
-	//  step 5: deal with player immovables in the lost area
-	//  Players are not allowed to have their immovables on their borders.
-	//  Therefore the area must be enlarged before calling
-	//  cleanup_playerimmovables_area, so that those new border locations are
-	//  covered.
-	// TODO(SirVer): In the editor, no buildings should burn down when a military
-	// building is removed. Check this again though
-	if (is_a(Game, this)) {
-		++player_area.radius;
-		player_area.player_number = destroying_player;
-		cleanup_playerimmovables_area(player_area);
-	}
 }
 
 /// This conquers a given area because of a new (military) building that is set
@@ -511,13 +590,6 @@ void EditorGameBase::conquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(player_area.player_number <= map().get_nrplayers());
 
 	do_conquer_area(player_area, true, 0, conquer_guarded_location);
-
-	//  Players are not allowed to have their immovables on their borders.
-	//  Therefore the area must be enlarged before calling
-	//  cleanup_playerimmovables_area, so that those new border locations are
-	//  covered.
-	++player_area.radius;
-	cleanup_playerimmovables_area(player_area);
 }
 
 void EditorGameBase::change_field_owner(const FCoords& fc, PlayerNumber const new_owner) {
@@ -560,9 +632,9 @@ void EditorGameBase::conquer_area_no_building(PlayerArea<Area<FCoords>> player_a
 		change_field_owner(mr.location(), player_area.player_number);
 	} while (mr.advance(map()));
 
-	//  This must reach one step beyond the conquered area to adjust the borders
+	//  This must reach two steps beyond the conquered area to adjust the borders
 	//  of neighbour players.
-	++player_area.radius;
+	player_area.radius += 2;
 	map_.recalc_for_field_area(world(), player_area);
 }
 
@@ -636,10 +708,21 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 		}
 	} while (mr.advance(map()));
 
-	// This must reach one step beyond the conquered area to adjust the borders
+	// This must reach two steps beyond the conquered area to adjust the borders
 	// of neighbour players.
-	++player_area.radius;
+	player_area.radius += 2;
 	map_.recalc_for_field_area(world(), player_area);
+
+	//  Deal with player immovables in the lost area
+	//  Players are not allowed to have their immovables on their borders.
+	//  Therefore the area must be enlarged before calling
+	//  cleanup_playerimmovables_area, so that those new border locations are
+	//  covered.
+	// TODO(SirVer): In the editor, no buildings should burn down when a military
+	// building is removed. Check this again though
+	if (is_a(Game, this)) {
+		cleanup_playerimmovables_area(player_area);
+	}
 }
 
 /// Makes sure that buildings cannot exist outside their owner's territory.
@@ -673,4 +756,4 @@ void EditorGameBase::cleanup_playerimmovables_area(PlayerArea<Area<FCoords>> con
 			temp_imm->remove(*this);
 	}
 }
-}
+}  // namespace Widelands

@@ -91,6 +91,9 @@ class Economy {
 public:
 	friend class EconomyDataPacket;
 
+	// Initialize the global serial on game start
+	static void initialize_serial();
+
 	/// Configurable target quantity for the supply of a ware type in the
 	/// economy.
 	///
@@ -293,6 +296,6 @@ private:
 
 	DISALLOW_COPY_AND_ASSIGN(Economy);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_H

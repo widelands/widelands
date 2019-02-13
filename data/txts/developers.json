@@ -18,8 +18,8 @@
 			"entries":[
 				{
 					"subheading": "Graphics",
-					"members":[
-						"Chuck Wilder (chuckw)"
+					"translate":[
+						"vacant"
 					]
 				},
 				{
@@ -113,7 +113,9 @@
 						"Jukka Pakarinen",
 						"Evgeny Kapun",
 						"ypopezios",
-						"Toni Förster (stonerl)"
+						"Toni Förster (stonerl)",
+						"Arty",
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
@@ -390,7 +392,9 @@
 					"members":[
 						"Matt Howe (mdhowe)",
 						"Samuel Tilly (eldamar)",
-						"WorldSavior",
+						"WorldSavior"
+					],
+					"translate":[
 						"and many, many more (thank you for everything you've done)"
 					]
 				}

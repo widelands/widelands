@@ -4,11 +4,11 @@
 # Translators:
 # Aleksandr Gladkov <djanticisco@gmail.com>, 2016
 # Alexander Bikmeyev <bikmeyev@freemail.ru>, 2006
-# Anton Khabarov <2233009@gmail.com>, 2015-2016
+# Anton Khabarov <2233009@gmail.com>, 2015-2016,2018
 # Максим Дронь <dronmax@gmail.com>, 2015
 # CupIvan <mail@cupivan.ru>, 2015
 # Viktor S <awsswa59@gmail.com>, 2018
-# Yuriy Sokolov <lention@mail.ru>, 2015
+# Yuriy Sokolov <lention@mail.ru>, 2015,2018
 # Владимир Куряев <istercul@gmail.com>, 2016
 # Денис Шабанов <inactive+Dodolphin@transifex.com>, 2016
 # Олег Шевченко <olegrock@gmail.com>, 2017
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-12 15:51+0000\n"
-"PO-Revision-Date: 2018-09-13 12:24+0000\n"
-"Last-Translator: Viktor S <awsswa59@gmail.com>\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
+"PO-Revision-Date: 2018-09-25 13:56+0000\n"
+"Last-Translator: Anton Khabarov <2233009@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/widelands/widelands/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -98,7 +98,7 @@ msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
 "(Translations)."
-msgstr "За дополнительной информацией и поддержкой вы можете найти нас %1% (Веб сайт, Частые вопросы, Форум для вопросов или общая поддержка), %2% (Список ошибок) и %3%(Переводы)."
+msgstr "Для дополнительной информации и поддержки вы можете связаться с нами: %1% (Веб сайт, Частые вопросы, Форум для вопросов или общая поддержка), %2% (Список ошибок) и %3%(Переводы)."
 
 #: ../../data/txts/README.lua:6
 msgid "Readme"
@@ -626,7 +626,7 @@ msgstr "Для производства кирпичей вам необходи
 
 #: ../../data/txts/tips/frisians.lua:8
 msgid "Always build a forester’s house, so you will not run out of logs."
-msgstr "Всегда строите дом лесника, так что у вас не закончится бревна."
+msgstr "Если не хотите остаться без брёвен, всегда стройте домик лесника."
 
 #: ../../data/txts/tips/general_game.lua:6
 msgid ""

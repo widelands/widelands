@@ -38,10 +38,18 @@ const std::string kWidelandsMapExtension = ".wmf";
 const std::string kS2MapExtension1 = ".swd";
 const std::string kS2MapExtension2 = ".wld";
 
+/// Filesystem names for temp files holding static data that needs to be accessible via filesystem
+/// Kept in a separate dir to avoid filesystem conflicts
+const std::string kTempFileDir = "temp";
+const std::string kTempFileExtension = ".tmp";
+// We delete (accidentally remaining) temp files older than a week
+constexpr double kTempFilesKeepAroundTime = 7 * 24 * 60 * 60;
+
 /// Filesystem names and timeouts for replays
 const std::string kReplayDir = "replays";
 const std::string kReplayExtension = ".wrpl";
 const std::string kSyncstreamExtension = ".wss";
+const std::string kSyncstreamExcerptExtension = ".wse";
 // The time in seconds for how long old replays/syncstreams should be kept
 // around, in seconds. Right now this is 4 weeks.
 constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;

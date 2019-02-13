@@ -52,6 +52,6 @@ private:
 	using Supplies = std::vector<Supply*>;
 	Supplies supplies_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_SUPPLY_LIST_H

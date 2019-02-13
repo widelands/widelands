@@ -108,6 +108,6 @@ private:
 	const Image* pic_plus_;                   ///< right/down
 	const UI::PanelStyleInfo* button_style_;  // Background color and texture. Not owned.
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_SCROLLBAR_H

@@ -54,8 +54,11 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
      main_box_(this, 0, 0, UI::Box::Vertical),
      info_box_(&main_box_, 0, 0, UI::Box::Horizontal),
 
-     load_or_save_(
-        &info_box_, igbase().game(), LoadOrSaveGame::FileType::kGame, UI::PanelStyle::kWui, false),
+     load_or_save_(&info_box_,
+                   igbase().game(),
+                   LoadOrSaveGame::FileType::kShowAll,
+                   UI::PanelStyle::kWui,
+                   false),
 
      filename_box_(load_or_save_.table_box(), 0, 0, UI::Box::Horizontal),
      filename_label_(&filename_box_, 0, 0, 0, 0, _("Filename:"), UI::Align::kLeft),
@@ -112,6 +115,7 @@ GameMainMenuSaveGame::GameMainMenuSaveGame(InteractiveGameBase& parent,
 	center_to_parent();
 	move_to_top();
 
+	filename_editbox_.focus();
 	pause_game(true);
 	set_thinks(false);
 	layout();

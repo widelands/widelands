@@ -95,6 +95,6 @@ private:
 	static Task const taskRoam;
 	static Task const taskProgram;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_H

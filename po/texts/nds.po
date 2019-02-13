@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-28 15:49+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-12-03 08:36+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -43,14 +43,14 @@ msgstr "Copyright 2002 - 2018 vun de Widelands Entwickeln-Klottje."
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
-msgstr "Düsses Speel un siene Quell sünd freei (FOSS); vergünnt unner de GNU General Public License (GPL) V2.0 "
+msgstr "Deeses Speel un siene Quell sünd freei (FOSS); vergünnt unner de GNU General Public License (GPL) V2.0."
 
 #: ../../data/txts/LICENSE.lua:13
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
-msgstr "Du finnst mehr Informationen över FOSS un de GPL up düsse Internett-Sied: %s"
+msgstr "Du finnst mehr Informationen över FOSS un de GPL up deese Internett-Sied: %s"
 
 #: ../../data/txts/LICENSE.lua:15
 msgid ""
@@ -82,7 +82,7 @@ msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Paket, dat du 
 
 #: ../../data/txts/LICENSE.lua:22
 msgid "This game comes as-is and without any warranty."
-msgstr "Düsses Speel is wat es is un hett överhoopt keene Garantie."
+msgstr "Deeses Speel is wat 't is un hett överhoopt keene Garantie."
 
 #: ../../data/txts/LICENSE.lua:23
 msgid ""
@@ -120,7 +120,7 @@ msgid ""
 " in all areas. If you are interested in contributing – be it by making "
 "graphics, fixing bugs or adding new features, translating the game into your"
 " language or creating new maps – get in touch on our homepage."
-msgstr "Widelands is in Grundlagen haast kumpleet un 't maakt mennig Spaaß, 't alleen oder mit mennig Spelers to spölen. Aber up all Felden gifft 't immer wat to doon. Wenn du Interesse hest, mittomaken – of dat is, Biller to malen, Fehler to behelpen, neie Dingen to schrieven, dat Speel in diene Spraak to översetten oder neie Kaarten to maken – mell di up uns Internett-Sied."
+msgstr "Widelands is in Grundlagen haast kumpleet un 't maakt mennig Spaaß, 't alleen oder mit mennig Spelers to spölen. Aver up all Felden gifft 't immer wat to doon. Wenn du Interesse hest, mittomaken – of dat is, Biller to malen, Fehler to behelpen, neje Dingen to schrieven, dat Speel in diene Spraak to översetten oder neje Kaarten to maken – mell di up uns' Internett-Sied."
 
 #: ../../data/txts/README.lua:16
 msgid "Widelands Help"
@@ -144,7 +144,7 @@ msgstr "Fehler kunddoon"
 
 #: ../../data/txts/README.lua:24
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr "Wenn du eenen Fehler finnst, mell dat bidde mit uns Fehlermeller:"
+msgstr "Wenn du eenen Fehler finnst, mell dat bidde mit uns' Fehlermeller:"
 
 #: ../../data/txts/README.lua:26
 msgid "Please provide enough background information. Tell us:"
@@ -158,7 +158,7 @@ msgstr "Akkerate Instruksjes, wo dat gaht, de Fehler uttolösen, wenn mögelk."
 msgid ""
 "What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr "Wat daarbi passeren sull un wat aber passeer is."
+msgstr "Wat daarbi passeren sull un wat aver passeer is."
 
 #: ../../data/txts/README.lua:30
 msgid ""
@@ -171,7 +171,7 @@ msgstr "De Widelands-Versioon dat du bruukst (of de Versioon of de Kenntahl vun 
 msgid ""
 "Please also include which operating system you are running Widelands on as "
 "some bugs can be platform specific."
-msgstr "Bidde segg ok, welkes Bedriev-Systeem du bruukst. Enige Fehler passeren nämlich blot up bestimmte Systemen."
+msgstr "Bidde segg ok, welkes Bedriev-Systeem du bruukst. Eenige Fehler passeren nämlich blot up bestimmte Systemen."
 
 #: ../../data/txts/README.lua:32
 msgid "Which map you were playing when the bug occurred."
@@ -324,7 +324,7 @@ msgid ""
 "If you need more documentation or help for Widelands or the Widelands "
 "Editor, be sure to visit our homepage at %s. You can find online help in our"
 " wiki there."
-msgstr "Wenn du mehr Anwiesens oder Hülp för Widelands oder de Widelands-Bewarker bruukst, kiek di uns Internett-Sied unner %s an. Daar finnst du Hülp in uns Wiki."
+msgstr "Wenn du mehr Anwiesens oder Hülp för Widelands oder de Widelands-Bewarker bruukst, kiek di uns' Internett-Sied unner %s an. Daar finnst du Hülp in uns' Wiki."
 
 #: ../../data/txts/help/common_helptexts.lua:17
 msgid "Introduction"
@@ -336,7 +336,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr ""
+msgstr "Widelands is een frejes, quellopens taktisk Speel in Echt-Tied mit Rutfödderungen för eenen Speler oder för mennig Spelers. Dat Speel is vun Settlers II anreegt, hett aver unbannig vööl mehr Ofwesseln un Deepde. Aver dör de Inföhrens tum Spölen kann man doch leep licht mit Widelands bekennt worden."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -345,7 +345,7 @@ msgid ""
 "inhabitants. On your way towards this goal, you will have to establish an "
 "economic infrastructure, explore the land around you and face rivaling "
 "tribes."
-msgstr ""
+msgstr "In deesem Speel fangst du mit eenem lütten Deel Land an, waar du leep minn Materialien un Mineraale hest. Daarmit baust du een Riek mit dusenden Inwohners up. Up dienem Weg daarhen baust du eene starke Wirtschaft up, förskst dat Land um di rum ut un kämpst tegen tegenstriedige Völker."
 
 #: ../../data/txts/help/common_helptexts.lua:25
 msgid "Replays"
@@ -358,7 +358,7 @@ msgid ""
 ".wrpl extension and contains all commands that were issued by all players, "
 "such as building a road or attacking an enemy. The rest of the filenames "
 "will tell you the time you started the game."
-msgstr ""
+msgstr "Widelands nimmt elkeen Speel, wat du spöölst, in twee Dateien up. Eene daarvun hett eenen Naam, de up .wrpl.wgf ennt, un een sekerts Speel vum Anfang hett. De Naam vun de anner Datei ennt up .wrpl; daarin sünd all Befehlen, de Spelers geven hebben, to 'n Bispööl eene Straat to bauen oder eenen Feind antogriepen. De Rest vum Naam vun de Datei seggt di, wann dat Speel anfangen hett."
 
 #: ../../data/txts/help/common_helptexts.lua:27
 msgid ""
@@ -368,7 +368,7 @@ msgid ""
 " replay to become incompatible and to ‘go out of sync’. This is similar to "
 "how network games will suffer from desynchronization problems if one of the "
 "players has a different version of the game."
-msgstr ""
+msgstr "Im Höövdmenü kannst du »Upteken ankieken« utkören, um een Speel, wat du maal spöölt hest, nipp un nau antokieken. Aver Achtung! Elkeen Ännerung in de Speeldaten oder Widelands sülvst, ok heel lütte, könen daarför sörgen, dat dat Upteken nich mehr mit de Speel verdragelk is un sük »verschufft«. Dat is jüüst so, as wenn twee Spelers bi'm Spölen övr 't Internett verschedene Widelands-Versionen bruken un sük dann de Spelen verschuven."
 
 #: ../../data/txts/help/common_helptexts.lua:28
 #, lua-format
@@ -377,7 +377,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr ""
+msgstr "Uptekens sünd bannig nüttelk, um Fehlers in de Logik vum Speel to finnen, daarum sünd se as Anhang för Fehler-Berichten good. De Upteken-Dateien worden unner Linux un Mac OS X in de List »%s« sekert. Unner Windows sünd se in de List »replays« unner de List, waar Widelands sekert is."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
@@ -391,7 +391,7 @@ msgstr "%s:"
 #: ../../data/txts/help/common_helptexts.lua:42
 msgctxt "hotkey"
 msgid "Space"
-msgstr "Leger Bookstaav"
+msgstr "Lege Tast"
 
 #: ../../data/txts/help/common_helptexts.lua:42
 msgid "Toggle building spaces"
@@ -413,7 +413,7 @@ msgstr "Instellungen för Speel för mennig Spelers"
 
 #: ../../data/txts/help/multiplayer_help.lua:8
 msgid "You are in the multiplayer launch game menu."
-msgstr "Du büst im Menu för dat Begünnen vun eenem Speel för mennig Spelers"
+msgstr "Du büst im Menu för dat Begünnen vun eenem Speel för mennig Spelers."
 
 #: ../../data/txts/help/multiplayer_help.lua:10
 msgid "Client settings"
@@ -429,13 +429,13 @@ msgstr "Linker Hand is eene List vun all Gasten, ok du. Du kannst diene Rull mit
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
-msgstr "De Speler mit de Farv vun de Fahn. Wenn mehr as een Speler desülvige Farv utköört, deelen se de Kuntroll över düssen Speler (Speelaard »Riek in Stücken«)."
+msgstr "De Speler mit de Farv vun de Fahn. Wenn mehr as een Speler desülvige Farv utköört, deelen se de Kuntroll över deesen Speler (Speelaard »Riek in Stücken«)."
 
 #: ../../data/txts/help/multiplayer_help.lua:13
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any "
 "player"
-msgstr "»Tokieker«-Speelaard: Du kannst alles sehn, aber keenen Speler kuntrolleren."
+msgstr "»Tokieker«-Speelaard: Du kannst alles sehn, aver keenen Speler kuntrolleren"
 
 #: ../../data/txts/help/multiplayer_help.lua:15
 msgid "Player settings"
@@ -445,7 +445,7 @@ msgstr "Speler-Instellungen"
 msgid ""
 "In the middle are the settings for the players. To start a game, each player"
 " must be one of the following:"
-msgstr "In de Midde sünd de Instellungen för de Spelers. Um een Speel antofangen mutt för elkeen Speler eens vun düsse Dingen gellen:"
+msgstr "In de Midde sünd de Instellungen för de Spelers. Um een Speel antofangen mutt för elkeen Speler eens vun deese Dingen gellen:"
 
 #: ../../data/txts/help/multiplayer_help.lua:17
 msgid "Connected to one or more clients (see ‘Client settings’)."
@@ -478,7 +478,7 @@ msgstr "De lesten dree könen blot vun de Weert fastleggt worden, indeem he de �
 msgid ""
 "Every client connected to a player (who isn’t a spectator) can set the tribe"
 " and the team for that player."
-msgstr "Elkeen Gast, de mit eenem Speler (de keen Tokieker is) verbunnen is, kann de Volk un Klottje för düssen Speler fastleggen."
+msgstr "Elkeen Gast, de mit eenem Speler (de keen Tokieker is) verbunnen is, kann de Volk un Klottje för deesen Speler fastleggen."
 
 #: ../../data/txts/help/multiplayer_help.lua:24
 msgid "Map details"
@@ -528,7 +528,7 @@ msgstr "Bau alltied een Boomplanteree un eene Deertentüchteree, daarmit de Boom
 msgid ""
 "Most enhanced buildings need experienced workers. Do not enhance a building "
 "unless you have the necessary workers available."
-msgstr "De meesten utbauten Husen bruken künnuge Arbeiders. Bau de Husen eerst dann ut, wenn du de nödigen Arbeiders hest."
+msgstr "De meesten utbauten Husen bruken Arbeiders mit Erfahrung. Bau de Husen eerst dann ut, wenn du de nödigen Arbeiders hest."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/editor.lua:7
@@ -536,20 +536,20 @@ msgstr "De meesten utbauten Husen bruken künnuge Arbeiders. Bau de Husen eerst 
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at %s."
-msgstr "Du finnst allgemeene Hülp för de Bewarker un een körte Inföhren in uns Wiki unner %s."
+msgstr "Du finnst allgemeene Hülp för de Bewarker un een körte Inföhren in uns' Wiki unner %s."
 
 #: ../../data/txts/tips/editor.lua:11
 msgid ""
 "You can select multiple animal types if you hold down Ctrl during selection."
 " If you then click on the map, an instance of one of the selected animal "
 "types will be placed."
-msgstr "Du kannst mehr Aarden vun Deerten utkören, indeem du bi'm Utkören Strg drückst. Wenn du dann de Kaart anklickst, wird eens vun de utköörten Deerten sett."
+msgstr "Du kannst mehr Aarden vun Deerten utkören, indeem du bi’m Utkören Strg drückst. Wenn du dann de Kaart anklickst, word eens vun de utköörten Deerten sett."
 
 #: ../../data/txts/tips/editor.lua:15
 msgid ""
 "Just like with animals, you can also select multiple immovables or ground "
 "textures with Ctrl + mouse click."
-msgstr "As mit Deerten kannst du ok mehr Aarden vun sekeren Dingen oder Landskuppen mit Strg bi'm Klicken utkören."
+msgstr "As mit Deerten kannst du ok mehr Aarden vun sekeren Dingen oder Landskuppen mit Strg bi’m Klicken utkören."
 
 #: ../../data/txts/tips/editor.lua:19
 msgid ""
@@ -573,7 +573,7 @@ msgstr "Mit de Tahlen-Tasten (0-9) kannst du de Warktüüg-Gröte stracks fastse
 msgid ""
 "Space key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
-msgstr "De Taste för de leege Bookstaav warkt as im Speel: Wies an oder verbarg Rüümte tum Bauen."
+msgstr "De lege Tast warkt as im Speel: Wies an oder verbarg Rüümte tum Bauen."
 
 #: ../../data/txts/tips/editor.lua:35
 msgid ""
@@ -591,14 +591,14 @@ msgid ""
 "You can place a medium building on any node where there is a slope no "
 "greater than 1 in the south-east direction and its height difference to all "
 "nodes in a radius of 2 is no greater than 2."
-msgstr "Du kannst een middelmatigs Huus up elkeen Knütt setten, waar de Schüünte höchstens 1 nach Süüdwest un de Höchten-Unnerscheed to all Knütten bit 2 Felden Ofstand höchstens 2 is."
+msgstr "Du kannst een middelmatigs Huus up elkeen Knütt setten, waar de Schüünte höchstens 1 na Süüdoost un de Höchten-Unnerscheed to all Knütten bit 2 Felden Ofstand höchstens 2 is."
 
 #: ../../data/txts/tips/editor.lua:47
 msgid ""
 "You can place a big building on any node where you could place a medium "
 "building if there is no obstacle or non-arable terrain towards the west, "
 "northwest and northeast."
-msgstr "Een Grotes Huus kannst du allerwegens daar bauen, waar du een middelmatigs Huus bauen kannst un keen Hinner un keene nich tum Bebauen gadelke Landskupp in de West, Noordwest un Noordoost is."
+msgstr "Een grotes Huus kannst du allerwegens daar bauen, waar du een middelmatigs Huus bauen kannst un keen Hinner un keene nich tum Bauen gadelke Landskupp in de West, Noordwest un Noordoost is."
 
 #: ../../data/txts/tips/empire.lua:8
 msgid "Always build a forester’s house so you will not run out of logs."
@@ -606,7 +606,7 @@ msgstr "Bau alltied een Förster-Huus, daarmit de Boomstammen nich nau worden."
 
 #: ../../data/txts/tips/empire.lua:16
 msgid "Empire needs a lot of marble. Keep looking for marble resources."
-msgstr "Dat Latienske Riek bruukt Bülten vun Marmel. Kiek alltied nach Stenen ut."
+msgstr "Dat Latienske Riek bruukt Bülten vun Marmel. Kiek alltied na Stenen ut."
 
 #: ../../data/txts/tips/frisians.lua:4
 msgid ""
@@ -653,13 +653,13 @@ msgstr "Deel diene Straten in körte Delen up, indeem du Fahnen baust. Dann word
 msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found online at %s."
-msgstr "Noch Fragem? Uns' FAQ, de Wiki un natürelk uns' Gemeenskupp-Forums könen im Internett unner %s funnen worden."
+msgstr "Noch Fragen? Uns' FAQ, de Wiki un natürelk uns' Gemeenskupp-Forums könen im Internett unner %s funnen worden."
 
 #: ../../data/txts/tips/general_game.lua:31
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "Bruuk de Wichtigkeids-Knopen in eenem Huus-Fenster, um de Versörgung mit eener wissen Ware fasttoleggen. Drück daarbi de Strg-Tast, um 't för all Waren up eenmaal fasttosetten."
+msgstr "Bruuk de Wichtigkeids-Knopen in eenem Huus-Fenster, um de Versörgung mit eener wissen Waar fasttoleggen. Drück daarbi de Strg-Tast, um 't för all Waren up eenmaal fasttosetten."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
@@ -698,13 +698,13 @@ msgstr "Wenn du eene Straat oder Fahn wegdoost un daar de Strg-Tast bi drückt h
 msgid ""
 "New soldiers are recruited in a barracks. Their abilities can then be "
 "improved in training sites."
-msgstr "Neie Soldaten worden in eener Kasern anhüürt. Hör Vermögen kann dann in Övens-Boen verbetert worden."
+msgstr "Neje Soldaten worden in eener Kasern anhüürt. Hör Vermögen kann dann in Övens-Boen verbetert worden."
 
 #: ../../data/txts/tips/general_game.lua:55
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
-msgstr "'t is gefahrelk, aber wenn de Strg-Tast drückt hollen, as du de Knopen för 't Utbauen, Plattrieten oder Ofbrannen vun eenem Huus bruukst, word de Sekerheids-Fraag weglaten."
+msgstr "'t is gefahrelk, aver wenn de Strg-Tast drückt hollen, as du de Knopen för 't Utbauen, Plattrieten oder Ofbrannen vun eenem Huus bruukst, word de Sekerheids-Fraag weglaten."
 
 #: ../../data/txts/tips/general_game.lua:59
 msgid "Press I to quickly toggle the display of your stock inventory."
@@ -720,7 +720,7 @@ msgstr "Eene Wirtschaft umfaat all Husen un Fahnen, de mit Straten verbunnen sü
 msgid ""
 "Some buildings, such as the farm, have a very small work area. If the "
 "building is surrounded with trees or roads, production will stop."
-msgstr "Enige Husen, to 'n Bispööl de Buurderee, hebben een bannig lüttes Arbeidsgewest. Wenn dat Huus mit Bomen oder Straten dichtmüürt is, kann 't nich mehr arbeiden."
+msgstr "Eenige Husen, to 'n Bispööl de Buurderee, hebben een bannig lüttes Arbeidsgewest. Wenn dat Huus mit Bomen oder Straten dichtmüürt is, kann 't nich mehr arbeiden."
 
 #: ../../data/txts/tips/general_game.lua:71
 msgctxt "hotkey"
@@ -734,7 +734,7 @@ msgstr "Strg+0"
 
 #: ../../data/txts/tips/general_game.lua:71
 msgid "Zoom in/out with the mouse wheel or %1%. Press %2% to reset the zoom."
-msgstr "Vergroter oder verkleen de Sicht mit de Muusraad oder %1%. Drück %2%, um dat Vergrotern torüggtosetten."
+msgstr "Maak de Sicht mit de Muusraad oder %1% groter oder lütter. Drück %2%, um dat Vergrotern torüggtosetten."
 
 #: ../../data/txts/tips/general_game.lua:75
 msgid ""
@@ -774,4 +774,4 @@ msgstr "Wenn dat Speel maal daalknallt, koom nich in Nood! Dat Speel word automa
 msgid ""
 "Our computer players are too boring? Visit our website at %s and meet other "
 "players to play online."
-msgstr "Sünd uns' künstelken Spelers to dröge? Besöök uns' Internett-Sied up %s un treff anner Spelers, mit de du övers Internett spölen kannst."
+msgstr "Sünd uns' künstelken Spelers to dröge? Besöök uns' Internett-Sied up %s un treff anner Spelers, mit de du över 't Internett spölen kannst."

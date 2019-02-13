@@ -153,7 +153,7 @@ function worker_help_string(tribe, worker_description)
    local result = h2(_"Purpose") ..
       li_image(worker_description.icon_name, worker_helptext())
 
-   if (worker_description.is_buildable) then
+   if (worker_description.buildable) then
       -- Get the tools for the workers.
       local toolnames = {}
       for j, buildcost in ipairs(worker_description.buildcost) do

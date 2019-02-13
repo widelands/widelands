@@ -49,7 +49,7 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		return false;
 	}
 }
-}
+}  // namespace
 
 bool NetAddress::resolve_to_v4(NetAddress* addr, const std::string& hostname, uint16_t port) {
 	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);

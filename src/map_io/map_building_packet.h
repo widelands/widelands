@@ -41,6 +41,6 @@ protected:
 	void read_priorities(Building&, FileRead&);
 	void write_priorities(const Building&, FileWrite&);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_BUILDING_PACKET_H

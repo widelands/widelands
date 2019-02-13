@@ -9,14 +9,15 @@
 # GunChleoc, 2014
 # Guybrush88 <erpizzo@alice.it>, 2015-2017
 # Luigi Lain <lainluigi86@tiscali.it>, 2016
+# Mirco Scottà <mscotta@libero.it>, 2019
 # Riccardo Di Maio <riccardodimaio11@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-12-28 13:48+0000\n"
+"PO-Revision-Date: 2019-01-05 09:26+0000\n"
+"Last-Translator: Mirco Scottà <mscotta@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/widelands/widelands/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -87,18 +88,18 @@ msgstr "Normalmente inizierai il gioco con un quartier generale. È il grande ed
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "Dobbiamo trovare un bel posto per la capanna del taglialegna. Per rendere questa operazione più semplice, possiamo attivare 'Mostra gli spazi edificabili'. Ci sono due modi per farlo:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Press the Space bar to toggle them, or"
-msgstr ""
+msgstr "Premere la Barra spaziatrice per attivarli, o"
 
 #. TRANSLATORS: List item. Has an image of the button next to it.
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr ""
+msgstr "clicca sul bottone 'Mostra gli spazi edificabili' sulla parte bassa dello schermo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -120,7 +121,7 @@ msgstr "E' più facile capire quali tipi di edifici possono essere costruiti su 
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Right-click on this window now and then give it a try."
-msgstr ""
+msgstr "Clicca ora con il tasto destro su questa finestra e provalo."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Lumberjack’s Spot"
@@ -281,7 +282,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "Se si clicca sul cantiere, si aprirà una finestra. Si possono vedere le merci mancanti in grigio. Si può vedere anche il progresso di questo cantiere."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
@@ -325,7 +326,7 @@ msgstr "Ci sono tre modi per muovere la tua visuale. Il primo è usare le frecce
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid "Click the ‘OK’ button and then move the view using the cursor keys."
-msgstr ""
+msgstr "Clicca sul pulsante 'OK' e poi muovi la visuale usando i tasti cursore."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:186
 msgid "Move your view with the cursor keys"
@@ -370,7 +371,7 @@ msgstr "Eccellente. Adesso esiste un sistema più rapido per muoverti, utilizzan
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
-msgstr "Clicca su un punto qualsiasi della mappa con il tasto desto e mantieni premuto, quindi trascina il mouse ed invece del cursore, sarà la vista a muoversi. Provaci."
+msgstr "Clicca su un punto qualsiasi della mappa con il tasto destro e mantieni premuto, quindi trascina il mouse ed invece del cursore, sarà la vista a muoversi. Provaci."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
 msgid "Move your view with the mouse"
@@ -605,14 +606,14 @@ msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "Considera le pendenze quando posizioni una strada e usale a tuo vantaggio. Inoltre, cerca di fare le strade più corte possibili e ricorda sempre di piazzare più bandiere che puoi lungo la strada per aumentare la velocità di trasporto."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:315
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "Se tieni premuti Ctrl o Shift+Ctrl quando finisci la strada, le bandiere sono collocate automaticamente."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."
@@ -770,14 +771,14 @@ msgstr "pulsante 'Archivia il messaggio selezionato' per spostarlo nell'archivio
 msgid ""
 "Once you have archived a message, another message will be selected "
 "automatically from the list."
-msgstr ""
+msgstr "Una volta che hai archiviato un messaggio, un altro messaggio sarà selezionato automaticamente dalla lista."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:391
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr ""
+msgstr "Puoi anche tenere premuti Ctrl o Shift per selezionare più messaggi o premere Ctrl + A per selezionarli tutti."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:382
 msgid ""
@@ -810,7 +811,7 @@ msgid ""
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically. Keep clicking the ‘Archive selected "
 "message’ button until all messages have been archived and the list is empty."
-msgstr ""
+msgstr "Per farlo, apri la finestra dei messaggi premendo 'n' o cliccando il secondo pulsante partendo da destra in fondo allo schermo. Il messaggio più recente sarà spuntato automaticamente. Continua a cliccare su 'Archivia il messaggio selezionato' finchè tutti i messaggi sono stati archiviati e la lista è vuota."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417

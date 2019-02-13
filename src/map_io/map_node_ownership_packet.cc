@@ -76,4 +76,4 @@ void MapNodeOwnershipPacket::write(FileSystem& fs, EditorGameBase& egbase, MapOb
 
 	fw.write(fs, "binary/node_ownership");
 }
-}
+}  // namespace Widelands

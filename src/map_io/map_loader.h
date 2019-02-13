@@ -64,6 +64,6 @@ protected:
 private:
 	State state_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_MAP_IO_MAP_LOADER_H

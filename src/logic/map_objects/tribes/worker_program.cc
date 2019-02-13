@@ -35,11 +35,11 @@ namespace Widelands {
 Worker Programs
 ===============
 
-Worker programs are defined in the ``programs`` subtable specified in the worker's :ref:`lua_tribes_workers_common`.
-Each worker program is a Lua table in itself and defined as a series of command strings.
-Commands can also have parameters, which are separated from each other by a blank space.
-These parameters can also have values, which are separated from the parameter name by a colon (:). Finally, programs can call other programs.
-The table looks like this::
+Worker programs are defined in the ``programs`` subtable specified in the worker's
+:ref:`lua_tribes_workers_common`. Each worker program is a Lua table in itself and defined as a
+series of command strings. Commands can also have parameters, which are separated from each other by
+a blank space. These parameters can also have values, which are separated from the parameter name by
+a colon (:). Finally, programs can call other programs. The table looks like this::
 
    programs = {
       program_name1 = {
@@ -270,7 +270,8 @@ findobject
    or ``callobject``. Examples::
 
       cut_granite = {
-         "findobject=attrib:rocks radius:6", -- Find rocks on the map within a radius of 6 from your building
+         "findobject=attrib:rocks radius:6", -- Find rocks on the map within a radius of 6 from your
+         building
          "walk=object", -- Now walk to those rocks
          "playsound=sound/atlanteans/cutting stonecutter 192",
          "animate=hacking 12000",
@@ -280,7 +281,8 @@ findobject
       },
 
       hunt = {
-         "findobject=type:bob radius:13 attrib:eatable", -- Find an eatable bob (animal) within a radius of 13 from your building
+         "findobject=type:bob radius:13 attrib:eatable", -- Find an eatable bob (animal) within a
+         radius of 13 from your building
          "walk=object", -- Walk to where the animal is
          "animate=idle 1500",
          "removeobject",
@@ -331,7 +333,8 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 /* RST
 findspace
 ^^^^^^^^^
-.. function:: findspace=size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>] [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space]
+.. function:: findspace=size:\<plot\> radius:\<distance\> [breed] [resource:\<name\>]
+   [avoid:\<immovable_attribute\>] [saplingsearches:\<number\>] [space]
 
    :arg string size: The size or building plot type of the free space.
       The possible values are:
@@ -366,7 +369,8 @@ findspace
    The field can then be used in other commands like ``walk``. Examples::
 
       breed = {
-         "findspace=size:any radius:7 breed resource:fish", -- Find any field that can have fish in it for adding a fish to it below
+         -- Find any field that can have fish in it for adding a fish to it below
+         "findspace=size:any radius:7 breed resource:fish",
          "walk=coords",
          "animate=freeing 3000",
          "breed=fish 1",
@@ -374,7 +378,8 @@ findspace
       },
 
       plant = {
-         "findspace=size:any radius:5 avoid:field saplingsearches:8", -- Don't get in the way of the farmer's crops when planting trees. Retry 8 times.
+         -- Don't get in the way of the farmer's crops when planting trees. Retry 8 times.
+         "findspace=size:any radius:5 avoid:field saplingsearches:8",
          "walk=coords",
          "animate=dig 2000",
          "animate=planting 1000",
@@ -384,8 +389,9 @@ findspace
       },
 
       plant = {
-         "findspace=size:any radius:2 space", -- The farmer will want to walk to this field again later for harvesting his crop
-         "walk coords",
+         -- The farmer will want to walk to this field again later for harvesting his crop
+         "findspace=size:any radius:2 space",
+         "walk=coords",
          "animate=planting 4000",
          "plant=attrib:seed_wheat",
          "animate=planting 4000",
@@ -507,7 +513,8 @@ walk
 
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
-         "plant=attrib:shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
+         -- 2. This will create an object for us if we don't have one yet
+         "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill sawmill 230",
          "animate=work 500",
          "construct", -- 1. This will find a space for us if no object has been planted yet
@@ -659,14 +666,16 @@ plant
          "findspace=size:any radius:2 space",
          "walk=coords",
          "animate=planting 4000",
-         "plant=attrib:seed_wheat", -- Plant the tiny field immovable that the worker's tribe knows about
+         -- Plant the tiny field immovable that the worker's tribe knows about
+         "plant=attrib:seed_wheat",
          "animate=planting 4000",
          "return",
       },
 
       buildship = {
          "walk=object-or-coords",
-         "plant=attrib:shipconstruction unless object", -- Only create a shipconstruction if we don't already have one
+         -- Only create a shipconstruction if we don't already have one
+         "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill sawmill 230",
          "animate=work 500",
          "construct",
@@ -759,7 +768,8 @@ removeobject
          "findobject=type:bob radius:13 attrib:eatable", -- Select an object to remove
          "walk=object",
          "animate=idle 1000",
-         "removeobject", -- The selected eatable map object has been hunted, so remove it from the map
+         -- The selected eatable map object has been hunted, so remove it from the map
+         "removeobject",
          "createware=meat",
          "return"
       }
@@ -822,7 +832,8 @@ findresources
          "animate=idle 2000",
          "playsound=sound/hammering geologist_hammer 192",
          "animate=hacking 3000",
-         "findresources" -- Plant a resource marker at the current location, according to what has been found.
+         -- Plant a resource marker at the current location, according to what has been found.
+         "findresources"
       }
 */
 void WorkerProgram::parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd) {
@@ -910,10 +921,13 @@ construct
 
       buildship = {
          "walk=object-or-coords", -- Walk to coordinates from 1. or to object from 2.
-         "plant=attrib:shipconstruction unless object", -- 2. This will create an object for us if we don't have one yet
+         -- 2. This will create an object for us if we don't have one yet
+         "plant=attrib:shipconstruction unless object",
          "playsound=sound/sawmill sawmill 230",
          "animate=work 500",
-         "construct", -- 1. Add the current ware to the shipconstruction. This will find a space for us if no shipconstruction object has been planted yet
+         -- 1. Add the current ware to the shipconstruction. This will find a space for us if no
+         -- shipconstruction object has been planted yet
+         "construct",
          "animate=work 5000",
          "return"
       },
@@ -930,4 +944,4 @@ void WorkerProgram::parse_construct(Worker::Action* act, const std::vector<std::
 
 	act->function = &Worker::run_construct;
 }
-}
+}  // namespace Widelands

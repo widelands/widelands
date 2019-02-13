@@ -50,4 +50,4 @@ UnhandledVersionError::UnhandledVersionError(const char* packet_name,
 	    packet_name % static_cast<int>(packet_version) % static_cast<int>(current_packet_version))
 	      .str();
 }
-}
+}  // namespace Widelands

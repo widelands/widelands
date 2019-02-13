@@ -31,7 +31,7 @@
 
 /**
  * Create all the buttons etc...
-*/
+ */
 MainMenuLoadMap::MainMenuLoadMap(EditorInteractive& parent)
    : MainMenuLoadOrSaveMap(parent, 2, "load_map_menu", _("Load Map")) {
 	set_current_directory(curdir_);
