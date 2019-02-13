@@ -23,7 +23,7 @@ install:
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
   # copy modified libintl.h to solve an issue with boost 1.69
-  - cmd: "bash --login -c \"cp %APPVEYOR_BUILD_FOLDER%\utils\appveyor\libintl.h %MINGWINCLUDE%""
+  - cmd: "xcopy /y %APPVEYOR_BUILD_FOLDER%\utils\appveyor\libintl.h %MINGWINCLUDE%"
 shallow_clone: true
 
 branches:
