@@ -528,7 +528,7 @@ void Panel::handle_mousein(bool) {
  * \return true if the mouseclick was processed, false otherwise
  */
 bool Panel::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
-	if (btn == SDL_BUTTON_LEFT) {
+	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
 	}
 	return false;

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-09 09:43+0000\n"
+"POT-Creation-Date: 2019-02-11 09:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -227,29 +227,31 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:261
-msgid "%1% hour and %2% minutes"
-msgid_plural "%1% hours and %2% minutes"
-msgstr[0] ""
-msgstr[1] ""
-
 #. TRANSLATORS: Context: 'The game will end in 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:264
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:261
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:266
 #, lua-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] ""
 msgstr[1] ""
 
+#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:263
+msgid "%1% hour and %2%"
+msgid_plural "%1% hours and %2%"
+msgstr[0] ""
+msgstr[1] ""
+
 #. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:267
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:269
 msgid "%1% hour"
 msgid_plural "%1% hours"
 msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/win_condition_functions.lua:270
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:272
 #, lua-format
 msgid "The game will end in %s."
 msgstr ""

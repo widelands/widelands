@@ -183,7 +183,12 @@ void FullscreenMenuNetSetupLAN::game_selected(uint32_t) {
 }
 
 void FullscreenMenuNetSetupLAN::game_doubleclicked(uint32_t) {
-	clicked_joingame();
+	assert(opengames.has_selection());
+	const NetOpenGame* const game = opengames.get_selected();
+	// Only join games that are open
+	if (game->info.state == LAN_GAME_OPEN) {
+		clicked_joingame();
+	}
 }
 
 void FullscreenMenuNetSetupLAN::update_game_info(

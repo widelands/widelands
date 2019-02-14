@@ -50,6 +50,7 @@ CmdDestroyMapObject::CmdDestroyMapObject(uint32_t const t, MapObject& o)
 }
 
 void CmdDestroyMapObject::execute(Game& game) {
+	game.syncstream().unsigned_8(SyncEntry::kDestroyObject);
 	game.syncstream().unsigned_32(obj_serial);
 
 	if (MapObject* obj = game.objects().get_object(obj_serial))
@@ -95,10 +96,15 @@ CmdAct::CmdAct(uint32_t const t, MapObject& o, int32_t const a)
 }
 
 void CmdAct::execute(Game& game) {
+	game.syncstream().unsigned_8(SyncEntry::kCmdAct);
 	game.syncstream().unsigned_32(obj_serial);
 
-	if (MapObject* const obj = game.objects().get_object(obj_serial))
+	if (MapObject* const obj = game.objects().get_object(obj_serial)) {
+		game.syncstream().unsigned_8(static_cast<uint8_t>(obj->descr().type()));
 		obj->act(game, arg);
+	} else {
+		game.syncstream().unsigned_8(static_cast<uint8_t>(MapObjectType::MAPOBJECT));
+	}
 	// the object must queue the next CMD_ACT itself if necessary
 }
 
