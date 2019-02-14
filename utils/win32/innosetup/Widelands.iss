@@ -101,7 +101,6 @@ Source: {#BuildFolder}\data\world\*;                                   DestDir: 
 Source: {#BuildFolder}\data\scripting\*;                               DestDir: {app}\data\scripting\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\shaders\*;                                 DestDir: {app}\data\shaders\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
 Source: {#BuildFolder}\data\ai\*;                                 DestDir: {app}\data\ai\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: "Widelands"
-Source: {#DLLFolder}\libglbinding.dll;                        DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
 Source: {#DLLFolder}\libopusfile-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
 Source: {#DLLFolder}\libopus-0.dll;                     DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
 Source: {#DLLFolder}\libtermcap-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
@@ -112,8 +111,10 @@ Source: {#DLLFolder}\libbz2-1.dll;                      DestDir: {app};         
 Source: {#DLLFolder}\libfreetype-6.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 #if GetEnv("PLATFORM") == "x64"
 Source: {#DLLFolder}\libgcc_s_seh-1.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\libglbinding.dll;                  DestDir: {app};            Flags: ignoreversion;                                                        Components: "Widelands"
 #else
 Source: {#DLLFolder}\libgcc_s_dw2-1.dll;                DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
+Source: {#DLLFolder}\glew32.dll;                        DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 #endif
 Source: {#DLLFolder}\libglib-2.0-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
 Source: {#DLLFolder}\libharfbuzz-0.dll;                 DestDir: {app};            Flags: ignoreversion;                                                       Components: "Widelands"
