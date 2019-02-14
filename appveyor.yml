@@ -22,8 +22,7 @@ install:
   - cmd: "bash --login -c \"pacman -Suuyy --noconfirm\""
   # Installed required libs
   - cmd: "bash --login -c \"pacman --noconfirm -S mingw-w64-%MINGWSUFFIX%-ninja mingw-w64-%MINGWSUFFIX%-boost mingw-w64-%MINGWSUFFIX%-SDL2_ttf mingw-w64-%MINGWSUFFIX%-SDL2_mixer mingw-w64-%MINGWSUFFIX%-SDL2_image mingw-w64-%MINGWSUFFIX%-glbinding\""
-  # copy modified libintl.h to solve an issue with boost 1.69
-  - cmd: "xcopy /y %APPVEYOR_BUILD_FOLDER%\\utils\\appveyor\\libintl.h %MINGWINCLUDE%"
+
 shallow_clone: true
 
 branches:
@@ -31,6 +30,8 @@ branches:
     - _widelands_dev_widelands_trunk
 
 build_script:
+  # copy modified libintl.h to solve an issue with boost 1.69
+  - cmd: xcopy /y %APPVEYOR_BUILD_FOLDER%\utils\appveyor\libintl.h %MINGWINCLUDE%
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
   - cmd: cd build
