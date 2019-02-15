@@ -32,7 +32,7 @@ branches:
 
 build_script:
   # copy modified libintl.h to solve an issue with boost 1.69
-  - cmd: xcopy /y %APPVEYOR_BUILD_FOLDER%\utils\appveyor\libintl.h %MINGWINCLUDE%
+  - cmd: "bash --login -c \"patch %MINGWINCLUDE%\\libintl.h %APPVEYOR_BUILD_FOLDER%\\utils\\appveyor\\libintl.patch\"" 
   - cmd: cd %APPVEYOR_BUILD_FOLDER%
   - cmd: md build
   - cmd: cd build
