@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-11 09:31+0000\n"
+"POT-Creation-Date: 2019-02-15 11:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -221,8 +221,8 @@ msgstr ""
 msgid "Dec"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:217
-#: ../../src/logic/game.cc:270
+#: ../../src/editor/editorinteractive.cc:62 ../../src/logic/game.cc:222
+#: ../../src/logic/game.cc:275
 msgid "Loading tribes"
 msgstr ""
 
@@ -300,8 +300,8 @@ msgid ""
 "incompatible."
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:181 ../../src/logic/game.cc:227
-#: ../../src/logic/game.cc:277
+#: ../../src/editor/editorinteractive.cc:181 ../../src/logic/game.cc:232
+#: ../../src/logic/game.cc:282
 msgid "Creating players"
 msgstr ""
 
@@ -1096,37 +1096,37 @@ msgid "Loading graphics"
 msgstr ""
 
 #. * TRANSLATORS: Win condition for this game has not been set.
-#: ../../src/logic/game.cc:135
+#: ../../src/logic/game.cc:140
 msgid "Not set"
 msgstr ""
 
-#: ../../src/logic/game.cc:209 ../../src/logic/game.cc:261
-#: ../../src/logic/game.cc:331 ../../src/logic/game.cc:366
+#: ../../src/logic/game.cc:214 ../../src/logic/game.cc:266
+#: ../../src/logic/game.cc:336 ../../src/logic/game.cc:371
 msgid "Preloading map"
 msgstr ""
 
-#: ../../src/logic/game.cc:215 ../../src/logic/game.cc:267
+#: ../../src/logic/game.cc:220 ../../src/logic/game.cc:272
 msgid "Loading world"
 msgstr ""
 
-#: ../../src/logic/game.cc:237 ../../src/logic/game.cc:305
+#: ../../src/logic/game.cc:242 ../../src/logic/game.cc:310
 msgid "Loading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:344 ../../src/logic/game.cc:383
+#: ../../src/logic/game.cc:349 ../../src/logic/game.cc:388
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1422
 msgid "Loading…"
 msgstr ""
 
-#: ../../src/logic/game.cc:446
+#: ../../src/logic/game.cc:451
 msgid "Creating player infrastructure"
 msgstr ""
 
-#: ../../src/logic/game.cc:457 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:462 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:458 ../../src/logic/player.cc:223
+#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1135,11 +1135,11 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:801
+#: ../../src/logic/game.cc:853
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:803
+#: ../../src/logic/game.cc:855
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -1644,12 +1644,12 @@ msgid ""
 msgstr ""
 
 #. * TRANSLATORS: %s contains an error message.
-#: ../../src/network/gameclient.cc:965
+#: ../../src/network/gameclient.cc:969
 #, c-format
 msgid "%s An automatic savegame will be created."
 msgstr ""
 
-#: ../../src/network/gameclient.cc:969
+#: ../../src/network/gameclient.cc:973
 msgid "Disconnected from Host"
 msgstr ""
 
