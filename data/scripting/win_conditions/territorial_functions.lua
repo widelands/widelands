@@ -31,29 +31,11 @@ function get_valuable_fields()
          -- fields with these buildings sites can be added (includes ports)
             add = true
          elseif f:has_max_caps("walkable") then
-            local small_radius = f:region(6)
-            for idx, fg in ipairs(small_radius) do
-               if fg:has_max_caps("big") or fg:has_max_caps("medium") or fg:has_max_caps("small") then
+            local radius = f:region(6)
+            for idx, fg in ipairs(radius) do
+               if fg:has_max_caps("big") or fg:has_max_caps("medium") then
                   add = true
                   break
-               end
-            end
-            if add == false then
-               local medium_radius = f:region(8, 6)
-               for idx, fg in ipairs(medium_radius) do
-                  if fg:has_max_caps("big") or fg:has_max_caps("medium") then
-                     add = true
-                     break
-                  end
-               end
-            end
-            if add == false then
-               local big_radius = f:region(10, 8)
-               for idx, fg in ipairs(big_radius) do
-                  if fg:has_max_caps("big")then
-                     add = true
-                     break
-                  end
                end
             end
          end
