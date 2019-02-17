@@ -41,6 +41,8 @@ function get_valuable_fields()
          end
          if add == true then
             table.insert(fields, f)
+         else
+            sleep(50)
          end
       end
    end

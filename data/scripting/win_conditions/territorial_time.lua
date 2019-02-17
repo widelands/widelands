@@ -33,12 +33,18 @@ return {
    description = wc_desc,
    func = function()
       local plrs = wl.Game().players
+      local initial_calculation = false
+      local fields = {}
 
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
 
       -- Get all valueable fields of the map
-      local fields = get_valuable_fields()
+      run(function()
+         fields = get_valuable_fields()
+         initial_calculation = true
+         print("Finished initial calculations.")
+      end)
 
       -- variables to track the maximum 4 hours of gametime
       local remaining_max_time = 4 * 60 * 60 -- 4 hours
@@ -67,7 +73,9 @@ return {
                             remaining_max_minutes))
                   :format(remaining_max_minutes))
             end
-            msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
+            if initial_calculation == true then 
+               msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
+            end
             player:send_message(game_status.title, msg, {popup = true})
          end
       end
@@ -82,7 +90,9 @@ return {
          check_player_defeated(plrs, lost_game.title, lost_game.body)
          -- Check if a player or team is a candidate and update variables
          -- Returns the names and points for the teams and players without a team
-         calculate_territory_points(fields, wl.Game().players)
+         if initial_calculation == true then
+            calculate_territory_points(fields, wl.Game().players)
+         end
 
          -- Game is over, do stuff after loop
          if territory_points.remaining_time <= 0 or remaining_max_time <= 0 or count_factions(plrs) <= 1 then break end
@@ -93,7 +103,7 @@ return {
          if ((remaining_max_time < (30 * 60) and remaining_max_time % (5 * 60) == 0)
                or remaining_max_time % (30 * 60) == 0)
                or territory_points.remaining_time % 300 == 0 then
-            _send_state()
+                  _send_state()
          end
       end
 
