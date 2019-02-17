@@ -37,7 +37,9 @@ return {
       run(function()
          fields = get_valuable_fields()
          initial_calculation = true
-         print("Finished initial calculations.")
+         local elapsed_minutes = math.floor(wl.Game().time / 1000 / 60)
+         local elapsed_seconds = math.floor(wl.Game().time / 1000) % 60
+         print("Finished initial calculations after " .. elapsed_minutes .. " minute(s) and " .. elapsed_seconds .. " second(s).")
       end)
 
       -- Configure how long the winner has to hold on to the territory
