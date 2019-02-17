@@ -39,7 +39,7 @@ function get_valuable_fields()
                fields[index] = fg
             end
          elseif f:has_max_caps("big") then
-            local radius = f:region(12)
+            local radius = f:region(10)
             for idx, fg in ipairs(radius) do
                local index = fg.x * 1000 + fg.y
                fields[index] = fg
