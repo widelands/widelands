@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-03 08:14+0000\n"
+"POT-Creation-Date: 2019-02-15 11:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1056,7 +1056,7 @@ msgstr ""
 msgid "grinding corn"
 msgstr ""
 
-#. TRANSLATORS: Completed/Skipped/Did not start grinding blackrootbecause ...
+#. TRANSLATORS: Completed/Skipped/Did not start grinding blackroot because ...
 #: ../../data/tribes/buildings/productionsites/atlanteans/mill/init.lua:78
 msgid "grinding blackroot"
 msgstr ""
@@ -4536,7 +4536,7 @@ msgid "Builder"
 msgstr ""
 
 #. TRANSLATORS: This is a worker name used in lists of workers
-#: ../../data/tribes/workers/atlanteans/carrier/init.lua:49
+#: ../../data/tribes/workers/atlanteans/carrier/init.lua:41
 msgctxt "atlanteans_worker"
 msgid "Carrier"
 msgstr ""

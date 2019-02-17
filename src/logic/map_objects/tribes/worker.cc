@@ -2651,7 +2651,7 @@ void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
 	}
 }
 
-/** Check if militray sites have becom visible by now.
+/** Check if militray sites have become visible by now.
  *
  * After the pop in prepare_scouts_worklist,
  * the latest entry of scouts_worklist is the next MS to visit (if known)
@@ -2684,7 +2684,7 @@ void Worker::add_sites(Game& game,
                        const Player& player,
                        std::vector<ImmovableFound>& found_sites) {
 
-	// If there are many enemy sites, push a random walk request into queue evry third finding.
+	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
 
 	for (const ImmovableFound& vu : found_sites) {

@@ -24,5 +24,6 @@ tribes:new_worker_type {
       fur_garment = 1
    },
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

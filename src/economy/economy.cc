@@ -43,6 +43,11 @@ namespace Widelands {
 
 Serial Economy::last_economy_serial_ = 0;
 
+void Economy::initialize_serial() {
+	log("Initializing economy serial\n");
+	last_economy_serial_ = 0;
+}
+
 Economy::Economy(Player& player) : Economy(player, last_economy_serial_++) {
 }
 
@@ -706,6 +711,7 @@ void Economy::process_requests(Game& game, RSPairStruct* supply_pairs) {
 		// alerts, so add info to the sync stream here.
 		{
 			::StreamWrite& ss = game.syncstream();
+			ss.unsigned_8(SyncEntry::kProcessRequests);
 			ss.unsigned_8(req.get_type());
 			ss.unsigned_8(req.get_index());
 			ss.unsigned_32(req.target().serial());
@@ -1046,7 +1052,7 @@ void Economy::handle_active_supplies(Game& game) {
 	// to avoid potential future problems caused by the supplies_ changing
 	// under us in some way.
 	::StreamWrite& ss = game.syncstream();
-	ss.unsigned_32(0x02decafa);  // appears as facade02 in sync stream
+	ss.unsigned_8(SyncEntry::kHandleActiveSupplies);
 	ss.unsigned_32(assignments.size());
 
 	for (const auto& temp_assignment : assignments) {

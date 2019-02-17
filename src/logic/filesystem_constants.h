@@ -54,6 +54,7 @@ constexpr double kTempBackupsKeepAroundTime = 24 * 60 * 60;
 const std::string kReplayDir = "replays";
 const std::string kReplayExtension = ".wrpl";
 const std::string kSyncstreamExtension = ".wss";
+const std::string kSyncstreamExcerptExtension = ".wse";
 // The time in seconds for how long old replays/syncstreams should be kept
 // around, in seconds. Right now this is 4 weeks.
 constexpr double kReplayKeepAroundTime = 4 * 7 * 24 * 60 * 60;

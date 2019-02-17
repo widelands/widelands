@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-12-03 08:36+0000\n"
+"POT-Creation-Date: 2019-02-11 09:31+0000\n"
+"PO-Revision-Date: 2019-02-13 19:10+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -437,7 +437,7 @@ msgstr "Bau een Flintslagerhuus tegen deesen Stenen hier. Weetst du noch, wo ick
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
 msgstr "Pass up, dat de Rüümte tum Bauen to sehn sünd, dann klick de Stee an, waar de dat Huus hebben willt, köör 't ut in de Fenster, wat vundag kummt, un alls is klaar. Villicht is 't nu up rechte Tied, all deese »Rüümte tum Bauen«-Tekens, de wi vörhen sehn hebben, to verklaren."
