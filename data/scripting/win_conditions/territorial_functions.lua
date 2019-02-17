@@ -26,20 +26,8 @@ function get_valuable_fields()
    for x=0, map.width-1 do
       for y=0, map.height-1 do
          local f = map:get_field(x,y)
-         if f:has_max_caps("small") then
+         if f:has_max_caps("medium") or f:has_max_caps("big") then
             local radius = f:region(6)
-            for idx, fg in ipairs(radius) do
-               local index = fg.x * 1000 + fg.y
-               fields[index] = fg
-            end
-         elseif f:has_max_caps("medium") then
-            local radius = f:region(8)
-            for idx, fg in ipairs(radius) do
-               local index = fg.x * 1000 + fg.y
-               fields[index] = fg
-            end
-         elseif f:has_max_caps("big") then
-            local radius = f:region(10)
             for idx, fg in ipairs(radius) do
                local index = fg.x * 1000 + fg.y
                fields[index] = fg
