@@ -24,12 +24,30 @@ function get_valuable_fields()
    local fields = {}
    local check = {}
    local map = wl.Game().map
-   local sf = map.player_slots[1].starting_field
-   -- initilaize with the region around the startign field of P1
-   for idx, fg in ipairs(sf:region(9)) do
-      local index = fg.x * 1000 + fg.y
-      fields[index] = fg
-      check[index] = fg
+   local plrs = wl.Game().players
+   for idx, player in ipairs(plrs) do
+      local sf = map.player_slots[idx].starting_field
+   -- initialize the fields table and the check area with the regions around the starting field of each Player
+      for idx, fg in ipairs(sf:region(9)) do
+         local index = fg.x * 1000 + fg.y
+         fields[index] = fg
+         check[index] = fg
+      end
+   end
+   if map.allows_seafaring == true then
+      -- TODO: this check is a little bit consuming, if possible we should read the port spaces from the map
+      for x=0, map.width-1 do
+         for y=0, map.height-1 do
+            local f = map:get_field(x,y)
+            if f:has_max_caps("port") then
+               for idx, fg in ipairs(f:region(5)) do
+                  local index = fg.x * 1000 + fg.y
+                  fields[index] = fg
+                  check[index] = fg
+               end
+            end
+         end
+      end
    end
    local loop = true
    while loop do
@@ -38,31 +56,31 @@ function get_valuable_fields()
       -- checking the check region for buildcaps and add fields that can be conquered
       for idx, f in pairs(check) do 
          if f:has_max_caps("big") then
-            local radius = f:region(10)
+            local radius = f:region(9)
             for idx, fg in ipairs(radius) do
                local index = fg.x * 1000 + fg.y
-               if fields[index] == nil and check[index] == nil then 
-                  -- if new fields are discovered add them to the fields table and mark them for checking next loop
+               if fields[index] == nil and check[index] == nil and fg:has_max_caps("walkable") then 
+                  -- if new buildable fields are discovered, add them to the fields table and mark them for checking next loop
                   new[index] = fg
                   fields[index] = fg
                   loop = true
                end
             end
          elseif f:has_max_caps("medium") then
-            local radius = f:region(8)
+            local radius = f:region(7)
             for idx, fg in ipairs(radius) do
                local index = fg.x * 1000 + fg.y
-               if fields[index] == nil and check[index] == nil then 
+               if fields[index] == nil and check[index] == nil and fg:has_max_caps("walkable") then 
                   new[index] = fg
                   fields[index] = fg
                   loop = true
                end
             end
          elseif f:has_max_caps("small") then
-            local radius = f:region(6)
+            local radius = f:region(5)
             for idx, fg in ipairs(radius) do
                local index = fg.x * 1000 + fg.y
-               if fields[index] == nil and check[index] == nil then 
+               if fields[index] == nil and check[index] == nil and fg:has_max_caps("walkable") then 
                   new[index] = fg
                   fields[index] = fg
                   loop = true
@@ -73,6 +91,7 @@ function get_valuable_fields()
       check = new
    end
    local result = {}
+   -- as our fields table is not continuosly indexed we need to build a properly indexed table
    for idx,f in pairs(fields) do
       table.insert(result, f)
    end
