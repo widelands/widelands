@@ -22,18 +22,55 @@ local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 --
 function get_valuable_fields()
    local fields = {}
+   local check = {}
    local map = wl.Game().map
-   for x=0, map.width-1 do
-      for y=0, map.height-1 do
-         local f = map:get_field(x,y)
-         if f:has_max_caps("medium") or f:has_max_caps("big") then
+   local sf = map.player_slots[1].starting_field
+   -- initilaize with the region around the startign field of P1
+   for idx, fg in ipairs(sf:region(9)) do
+      local index = fg.x * 1000 + fg.y
+      fields[index] = fg
+      check[index] = fg
+   end
+   local loop = true
+   while loop do
+      loop = false
+      local new = {}
+      -- checking the check region for buildcaps and add fields that can be conquered
+      for idx, f in pairs(check) do 
+         if f:has_max_caps("big") then
+            local radius = f:region(10)
+            for idx, fg in ipairs(radius) do
+               local index = fg.x * 1000 + fg.y
+               if fields[index] == nil and check[index] == nil then 
+                  -- if new fields are discovered add them to the fields table and mark them for checking next loop
+                  new[index] = fg
+                  fields[index] = fg
+                  loop = true
+               end
+            end
+         elseif f:has_max_caps("medium") then
+            local radius = f:region(8)
+            for idx, fg in ipairs(radius) do
+               local index = fg.x * 1000 + fg.y
+               if fields[index] == nil and check[index] == nil then 
+                  new[index] = fg
+                  fields[index] = fg
+                  loop = true
+               end
+            end
+         elseif f:has_max_caps("small") then
             local radius = f:region(6)
             for idx, fg in ipairs(radius) do
                local index = fg.x * 1000 + fg.y
-               fields[index] = fg
+               if fields[index] == nil and check[index] == nil then 
+                  new[index] = fg
+                  fields[index] = fg
+                  loop = true
+               end
             end
          end
       end
+      check = new
    end
    local result = {}
    for idx,f in pairs(fields) do
