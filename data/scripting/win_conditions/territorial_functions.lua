@@ -26,27 +26,32 @@ function get_valuable_fields()
    for x=0, map.width-1 do
       for y=0, map.height-1 do
          local f = map:get_field(x,y)
-         local add = false
-         if f:has_max_caps("big") or f:has_max_caps("medium") or f:has_max_caps("small") then
-         -- fields with these buildings sites can be added (includes ports)
-            add = true
-         elseif f:has_max_caps("walkable") then
+         if f:has_max_caps("small") then
             local radius = f:region(6)
             for idx, fg in ipairs(radius) do
-               if fg:has_max_caps("big") or fg:has_max_caps("medium") then
-                  add = true
-                  break
-               end
+               local index = fg.x * 1000 + fg.y
+               fields[index] = fg
             end
-         end
-         if add == true then
-            table.insert(fields, f)
-         else
-            sleep(50)
+         elseif f:has_max_caps("medium") then
+            local radius = f:region(8)
+            for idx, fg in ipairs(radius) do
+               local index = fg.x * 1000 + fg.y
+               fields[index] = fg
+            end
+         elseif f:has_max_caps("big") then
+            local radius = f:region(12)
+            for idx, fg in ipairs(radius) do
+               local index = fg.x * 1000 + fg.y
+               fields[index] = fg
+            end
          end
       end
    end
-   return fields
+   local result = {}
+   for idx,f in pairs(fields) do
+      table.insert(result, f)
+   end
+   return result
 end
 
 -- RST

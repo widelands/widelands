@@ -27,25 +27,17 @@ return {
    description = wc_desc,
    func = function()
       local plrs = wl.Game().players
-      local initial_calculation = false
-      local fields = {}
 
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
-
-      -- Get all valueable fields of the map
-      run(function()
-         fields = get_valuable_fields()
-         initial_calculation = true
-         local elapsed_minutes = math.floor(wl.Game().time / 1000 / 60)
-         local elapsed_seconds = math.floor(wl.Game().time / 1000) % 60
-         print("Finished initial calculations after " .. elapsed_minutes .. " minute(s) and " .. elapsed_seconds .. " second(s).")
-      end)
 
       -- Configure how long the winner has to hold on to the territory
       local time_to_keep_territory = 20 * 60 -- 20 minutes
       -- time in secs, if == 0 -> victory
       territory_points.remaining_time = time_to_keep_territory
+
+      -- Get all valueable fields of the map
+      local fields = get_valuable_fields()
 
       local function _send_state()
          set_textdomain("win_conditions")
@@ -71,9 +63,7 @@ return {
          check_player_defeated(plrs, lost_game.title, lost_game.body)
 
          -- Check if a player or team is a candidate and update variables
-         if initial_calculation == true then
-            calculate_territory_points(fields, wl.Game().players)
-         end
+         calculate_territory_points(fields, wl.Game().players)
 
          -- Do this stuff, if the game is over
          if territory_points.remaining_time == 0 or count_factions(plrs) <= 1 then
