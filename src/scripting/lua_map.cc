@@ -3798,11 +3798,16 @@ void LuaMapObject::__unpersist(lua_State* L) {
  PROPERTIES
  ==========================================================
  */
-// Hash is used to identify a class in a Set
+/* RST
+   .. attribute:: __hash
+
+      (RO) The map object's serial. Used to identify a class in a Set.
+*/
 int LuaMapObject::get___hash(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->serial());
 	return 1;
 }
+
 
 /* RST
    .. attribute:: serial
@@ -6038,10 +6043,13 @@ void LuaField::__unpersist(lua_State* L) {
  PROPERTIES
  ==========================================================
  */
-// Hash is used to identify a class in a Set
+/* RST
+   .. attribute:: __hash
+
+      (RO) The hashed coordinates of the field's position. Used to identify a class in a Set.
+*/
 int LuaField::get___hash(lua_State* L) {
-	const std::string pushme = (boost::format("%i_%i") % coords_.x % coords_.y).str();
-	lua_pushstring(L, pushme.c_str());
+	lua_pushuint32(L, coords_.hash());
 	return 1;
 }
 

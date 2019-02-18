@@ -8,12 +8,12 @@ function field_tests:test_access()
    assert_equal(c.y, 32)
 end
 
-function field_tests:test_access_xistobig()
+function field_tests:test_access_xistoobig()
    assert_error("x should be too big", function()
       map:get_field(64, 23)
    end)
 end
-function field_tests:test_access_yistobig()
+function field_tests:test_access_yistoobig()
    assert_error("y should be too big", function()
       map:get_field(25, 80)
    end)
@@ -23,10 +23,10 @@ function field_tests:test_access_yismissing()
       map:get_field(64)
    end)
 end
-function field_tests:test_access_xisnegativ()
+function field_tests:test_access_xisnegative()
    assert_error("x is negativ", function() map:get_field(-12, 23) end)
 end
-function field_tests:test_access_yisnegativ()
+function field_tests:test_access_yisnegative()
    assert_error("y is negativ", function() map:get_field(25, -12) end)
 end
 function field_tests:test_direct_change_impossible()
@@ -34,7 +34,12 @@ function field_tests:test_direct_change_impossible()
    assert_error("c.y should be read only", function() c.y = 12 end)
 end
 function field_tests:test_hash()
-   assert_equal("25_40", map:get_field(25,40).__hash)
+   assert_equal(1638440, map:get_field(25,40).__hash)
+end
+function field_tests:test_coordinates()
+   local field = map:get_field(25,40);
+   assert_equal(25, field.x)
+   assert_equal(40, field.y)
 end
 
 function field_tests:test_r_neighbour()
