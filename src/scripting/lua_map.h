@@ -88,6 +88,7 @@ public:
 	 */
 	int get_allows_seafaring(lua_State*);
 	int get_number_of_port_spaces(lua_State*);
+	int get_port_spaces(lua_State*);
 	int get_width(lua_State*);
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);

@@ -1160,6 +1160,7 @@ const MethodType<LuaMap> LuaMap::Methods[] = {
 const PropertyType<LuaMap> LuaMap::Properties[] = {
    PROP_RO(LuaMap, allows_seafaring),
    PROP_RO(LuaMap, number_of_port_spaces),
+   PROP_RO(LuaMap, port_spaces),
    PROP_RO(LuaMap, width),
    PROP_RO(LuaMap, height),
    PROP_RO(LuaMap, player_slots),
@@ -1199,6 +1200,31 @@ int LuaMap::get_number_of_port_spaces(lua_State* L) {
 	lua_pushuint32(L, get_egbase(L).map().get_port_spaces().size());
 	return 1;
 }
+
+/* RST
+   .. attribute:: port_spaces
+
+      (RO) A list of coordinates for all port spaces on the map.
+
+      :returns: A table of port space coordinates, like this: ``{{x = 0, y = 2}, {x = 54, y = 23}}``.
+*/
+int LuaMap::get_port_spaces(lua_State* L) {
+	lua_newtable(L);
+	int counter = 0;
+	for (const Coords& space : get_egbase(L).map().get_port_spaces()) {
+		lua_pushinteger(L, ++counter);
+		lua_newtable(L);
+		lua_pushstring(L, "x");
+		lua_pushint32(L, space.x);
+		lua_settable(L, -3);
+		lua_pushstring(L, "y");
+		lua_pushint32(L, space.y);
+		lua_settable(L, -3);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
 /* RST
    .. attribute:: width
 
