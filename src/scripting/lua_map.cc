@@ -6492,15 +6492,17 @@ int LuaField::region(lua_State* L) {
 
       Returns :const:`true` if the field has this caps associated
       with it, otherwise returns false.
+      Note: Immovables will hide the caps. If you want to have the caps
+      without immovables use has_max_caps instead
 
       :arg capname: can be either of
 
-      * :const:`small`: Can a small building be build here?
-      * :const:`medium`: Can a medium building be build here?
-      * :const:`big`: Can a big building be build here?
-      * :const:`mine`: Can a mine be build here?
-      * :const:`port`: Can a port be build here?
-      * :const:`flag`: Can a flag be build here?
+      * :const:`small`: Can a small building be built here?
+      * :const:`medium`: Can a medium building be built here?
+      * :const:`big`: Can a big building be built here?
+      * :const:`mine`: Can a mine be built here?
+      * :const:`port`: Can a port be built here?
+      * :const:`flag`: Can a flag be built here?
       * :const:`walkable`: Is this field passable for walking bobs?
       * :const:`swimmable`: Is this field passable for swimming bobs?
 */
@@ -6539,12 +6541,12 @@ int LuaField::has_caps(lua_State* L) {
 
       :arg capname: can be either of
 
-      * :const:`small`: Can a small building be build here?
-      * :const:`medium`: Can a medium building be build here?
-      * :const:`big`: Can a big building be build here?
-      * :const:`mine`: Can a mine be build here?
-      * :const:`port`: Can a port be build here?
-      * :const:`flag`: Can a flag be build here?
+      * :const:`small`: Can a small building be built here?
+      * :const:`medium`: Can a medium building be built here?
+      * :const:`big`: Can a big building be built here?
+      * :const:`mine`: Can a mine be built here?
+      * :const:`port`: Can a port be built here?
+      * :const:`flag`: Can a flag be built here?
       * :const:`walkable`: Is this field passable for walking bobs?
       * :const:`swimmable`: Is this field passable for swimming bobs?
 */
