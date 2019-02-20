@@ -54,6 +54,7 @@ function get_valuable_fields()
 
       -- Walk the map
       repeat
+         local no_new_fields = true
          local new = {}
          -- checking the check region for buildcaps and add fields that can be conquered
          for idx, f in pairs(check) do
@@ -67,13 +68,14 @@ function get_valuable_fields()
             end
             for idx, fg in ipairs(radius) do
                if fields[fg.__hash] == nil and check[fg.__hash] == nil and fg:has_max_caps("walkable") then
+                  no_new_fields = false
                   new[fg.__hash] = fg
                   fields[fg.__hash] = fg
                end
             end
          end
          check = new
-      until #check == 0
+      until no_new_fields
 
       -- as our fields table is not continuosly indexed we need to build a properly indexed table
       for idx,f in pairs(fields) do
