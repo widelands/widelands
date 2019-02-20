@@ -67,7 +67,7 @@ function get_valuable_fields()
                radius = f:region(5)
             end
             for idx, fg in ipairs(radius) do
-               if fields[fg.__hash] == nil and check[fg.__hash] == nil and fg:has_max_caps("walkable") then
+               if check[fg.__hash] == nil and fields[fg.__hash] == nil and fg:has_max_caps("walkable") then
                   no_new_fields = false
                   new[fg.__hash] = fg
                   fields[fg.__hash] = fg
