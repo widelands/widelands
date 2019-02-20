@@ -23,6 +23,7 @@ local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 function get_valuable_fields()
    local fields = {}
    local check = {}
+   local starttime = ticks()
    local map = wl.Game().map
    local plrs = wl.Game().players
    for idx, player in ipairs(plrs) do
@@ -72,6 +73,7 @@ function get_valuable_fields()
    for idx,f in pairs(fields) do
       table.insert(result, f)
    end
+   print(('Counting valuable fields took: %dms; Counted fields: %d'):format(ticks()-starttime, #result))
    return result
 end
 
