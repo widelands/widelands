@@ -330,60 +330,66 @@ void Map::set_origin(const Coords& new_origin) {
 	assert(0 <= new_origin.y);
 	assert(new_origin.y < height_);
 
+	const size_t field_size = width_ * height_;
+
 	for (uint8_t i = get_nrplayers(); i;) {
 		starting_pos_[--i].reorigin(new_origin, extent());
 	}
 
-	std::unique_ptr<Field[]> new_field_order(new Field[width_ * height_]);
-	memset(new_field_order.get(), 0, sizeof(Field) * width_ * height_);
+	std::unique_ptr<Field[]> new_field_order(new Field[field_size]);
+	memset(new_field_order.get(), 0, sizeof(Field) * field_size);
 
 	// Rearrange The fields
-	// NOTE because of the triangle design, we have to take special care about cases
+	// NOTE because of the triangle design, we have to take special care of cases
 	// NOTE where y is changed by an odd number
 	bool yisodd = (new_origin.y % 2) != 0;
 	for (Coords c(Coords(0, 0)); c.y < height_; ++c.y) {
 		bool cyisodd = (c.y % 2) != 0;
 		for (c.x = 0; c.x < width_; ++c.x) {
 			Coords temp;
-			if (yisodd && cyisodd)
+			if (yisodd && cyisodd) {
 				temp = Coords(c.x + new_origin.x + 1, c.y + new_origin.y);
-			else
+			} else {
 				temp = Coords(c.x + new_origin.x, c.y + new_origin.y);
+			}
 			normalize_coords(temp);
 			new_field_order[get_index(c, width_)] = operator[](temp);
 		}
 	}
 	// Now that we restructured the fields, we just overwrite the old order
-	for (decltype(width_) ind = 0; ind < width_ * height_; ind++) {
+	for (size_t ind = 0; ind < field_size; ind++) {
 		fields_[ind] = new_field_order[ind];
 	}
 
 	//  Inform immovables and bobs about their new coordinates.
-	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y)
+	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y) {
 		for (c.x = 0; c.x < width_; ++c.x, ++c.field) {
 			assert(c.field == &operator[](c));
-			if (upcast(Immovable, immovable, c.field->get_immovable()))
+			if (upcast(Immovable, immovable, c.field->get_immovable())) {
 				immovable->position_ = c;
+			}
 			for (Bob* bob = c.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 				bob->position_.x = c.x;
 				bob->position_.y = c.y;
 				bob->position_.field = c.field;
 			}
 		}
+	}
 
-	// Take care about port spaces
+	// Take care of port spaces
 	PortSpacesSet new_port_spaces;
 	for (PortSpacesSet::iterator it = port_spaces_.begin(); it != port_spaces_.end(); ++it) {
 		Coords temp;
-		if (yisodd && ((it->y % 2) == 0))
+		if (yisodd && ((it->y % 2) == 0)) {
 			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
-		else
+		} else {
 			temp = Coords(it->x - new_origin.x, it->y - new_origin.y);
+		}
 		normalize_coords(temp);
-		log("(%i,%i) -> (%i,%i)\n", it->x, it->y, temp.x, temp.y);
 		new_port_spaces.insert(temp);
 	}
 	port_spaces_ = new_port_spaces;
+	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
 /*
