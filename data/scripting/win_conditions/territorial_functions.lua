@@ -26,6 +26,8 @@ function get_valuable_fields()
    local starttime = ticks()
    local map = wl.Game().map
    local plrs = wl.Game().players
+
+   -- Initialize with starting fields and port spaces
    for idx, player in ipairs(plrs) do
       local sf = map.player_slots[idx].starting_field
    -- initialize the fields table and the check area with the regions around the starting field of each Player
@@ -44,9 +46,9 @@ function get_valuable_fields()
          end
       end
    end
-   local loop = true
-   while loop do
-      loop = false
+
+   -- Walk the map
+   repeat
       local new = {}
       -- checking the check region for buildcaps and add fields that can be conquered
       for idx, f in pairs(check) do
@@ -62,12 +64,12 @@ function get_valuable_fields()
             if fields[fg.__hash] == nil and check[fg.__hash] == nil and fg:has_max_caps("walkable") then
                new[fg.__hash] = fg
                fields[fg.__hash] = fg
-               loop = true
             end
          end
       end
       check = new
-   end
+   until #check == 0
+
    local result = {}
    -- as our fields table is not continuosly indexed we need to build a properly indexed table
    for idx,f in pairs(fields) do
