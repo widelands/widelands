@@ -59,9 +59,9 @@ function get_valuable_fields()
          for idx, f in pairs(check) do
             local radius ={}
             if f:has_max_caps("big") then
-               radius = f:region(9)
+               radius = f:region(9,7)
             elseif f:has_max_caps("medium") then
-               radius = f:region(7)
+               radius = f:region(7,5)
             elseif f:has_max_caps("small") then
                radius = f:region(5)
             end
