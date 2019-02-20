@@ -28,7 +28,6 @@ function get_valuable_fields()
 
       local fields = {}
       local check = {}
-      local starttime = ticks()
       local map = wl.Game().map
       local plrs = wl.Game().players
 
