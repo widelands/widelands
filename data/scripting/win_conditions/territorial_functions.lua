@@ -21,61 +21,67 @@ local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 --    :returns: a table with the map's valuable fields
 --
 function get_valuable_fields()
-   local fields = {}
-   local check = {}
-   local starttime = ticks()
-   local map = wl.Game().map
-   local plrs = wl.Game().players
 
-   -- Initialize with starting fields and port spaces
-   for idx, player in ipairs(plrs) do
-      local sf = map.player_slots[idx].starting_field
-   -- initialize the fields table and the check area with the regions around the starting field of each Player
-      for idx, fg in ipairs(sf:region(9)) do
-         fields[fg.__hash] = fg
-         check[fg.__hash] = fg
-      end
-   end
-   if map.allows_seafaring == true then
-      -- add port spaces to the starting check area
-      for idx, spaces in ipairs(map.port_spaces) do
-         local f = map:get_field(spaces["x"],spaces["y"])
-         for idx, fg in ipairs(f:region(5)) do
+   local result = {}
+
+   print_loading_message("Counting valuable fields took", function()
+
+      local fields = {}
+      local check = {}
+      local starttime = ticks()
+      local map = wl.Game().map
+      local plrs = wl.Game().players
+
+      -- Initialize with starting fields and port spaces
+      for idx, player in ipairs(plrs) do
+         local sf = map.player_slots[idx].starting_field
+      -- initialize the fields table and the check area with the regions around the starting field of each Player
+         for idx, fg in ipairs(sf:region(9)) do
             fields[fg.__hash] = fg
             check[fg.__hash] = fg
          end
       end
-   end
-
-   -- Walk the map
-   repeat
-      local new = {}
-      -- checking the check region for buildcaps and add fields that can be conquered
-      for idx, f in pairs(check) do
-         local radius ={}
-         if f:has_max_caps("big") then
-            radius = f:region(9)
-         elseif f:has_max_caps("medium") then
-            radius = f:region(7)
-         elseif f:has_max_caps("small") then
-            radius = f:region(5)
-         end
-         for idx, fg in ipairs(radius) do
-            if fields[fg.__hash] == nil and check[fg.__hash] == nil and fg:has_max_caps("walkable") then
-               new[fg.__hash] = fg
+      if map.allows_seafaring == true then
+         -- add port spaces to the starting check area
+         for idx, spaces in ipairs(map.port_spaces) do
+            local f = map:get_field(spaces["x"],spaces["y"])
+            for idx, fg in ipairs(f:region(5)) do
                fields[fg.__hash] = fg
+               check[fg.__hash] = fg
             end
          end
       end
-      check = new
-   until #check == 0
 
-   local result = {}
-   -- as our fields table is not continuosly indexed we need to build a properly indexed table
-   for idx,f in pairs(fields) do
-      table.insert(result, f)
-   end
-   print(('Counting valuable fields took: %dms; Counted fields: %d'):format(ticks()-starttime, #result))
+      -- Walk the map
+      repeat
+         local new = {}
+         -- checking the check region for buildcaps and add fields that can be conquered
+         for idx, f in pairs(check) do
+            local radius ={}
+            if f:has_max_caps("big") then
+               radius = f:region(9)
+            elseif f:has_max_caps("medium") then
+               radius = f:region(7)
+            elseif f:has_max_caps("small") then
+               radius = f:region(5)
+            end
+            for idx, fg in ipairs(radius) do
+               if fields[fg.__hash] == nil and check[fg.__hash] == nil and fg:has_max_caps("walkable") then
+                  new[fg.__hash] = fg
+                  fields[fg.__hash] = fg
+               end
+            end
+         end
+         check = new
+      until #check == 0
+
+      -- as our fields table is not continuosly indexed we need to build a properly indexed table
+      for idx,f in pairs(fields) do
+         table.insert(result, f)
+      end
+   end)
+
+   print(('We found %d valuable fields'):format(#result))
    return result
 end
 
