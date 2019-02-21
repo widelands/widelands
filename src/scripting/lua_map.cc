@@ -71,6 +71,35 @@ namespace LuaMaps {
 
 namespace {
 
+// Checks if a field has the desired caps
+bool check_has_caps(lua_State* L, const std::string& query, const FCoords& f, const NodeCaps& caps, const Widelands::Map& map) {
+	if (query == "walkable") {
+		return caps & MOVECAPS_WALK;
+	}
+	if (query == "swimmable") {
+		return caps & MOVECAPS_SWIM;
+	}
+	if (query == "small") {
+		return caps & BUILDCAPS_SMALL;
+	}
+	if (query == "medium") {
+		return caps & BUILDCAPS_MEDIUM;
+	}
+	if (query == "big") {
+		return (caps & BUILDCAPS_BIG) == BUILDCAPS_BIG;
+	}
+	if (query == "port") {
+		return (caps & BUILDCAPS_PORT) && map.is_port_space(f);
+	}
+	if (query == "mine") {
+		return caps & BUILDCAPS_MINE;
+	}
+	if (query == "flag") {
+		return caps & BUILDCAPS_FLAG;
+	}
+	report_error(L, "Unknown caps queried: %s!", query.c_str());
+}
+
 // Pushes a lua table with (name, count) pairs for the given 'ware_amount_container' on the
 // stack. The 'type' needs to be WARE or WORKER. Returns 1.
 int wares_or_workers_map_to_lua(lua_State* L,
@@ -6527,29 +6556,9 @@ int LuaField::region(lua_State* L) {
       * :const:`swimmable`: Is this field passable for swimming bobs?
 */
 int LuaField::has_caps(lua_State* L) {
-	FCoords f = fcoords(L);
+	const FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
-
-	if (query == "walkable")
-		lua_pushboolean(L, f.field->nodecaps() & MOVECAPS_WALK);
-	else if (query == "swimmable")
-		lua_pushboolean(L, f.field->nodecaps() & MOVECAPS_SWIM);
-	else if (query == "small")
-		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_SMALL);
-	else if (query == "medium")
-		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_MEDIUM);
-	else if (query == "big")
-		lua_pushboolean(L, (f.field->nodecaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG);
-	else if (query == "port") {
-		lua_pushboolean(
-		   L, (f.field->nodecaps() & BUILDCAPS_PORT) && get_egbase(L).map().is_port_space(f));
-	} else if (query == "mine")
-		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_MINE);
-	else if (query == "flag")
-		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_FLAG);
-	else
-		report_error(L, "Unknown caps queried: %s!", query.c_str());
-
+	lua_pushboolean(L, check_has_caps(L, query, f, f.field->nodecaps(), get_egbase(L).map()));
 	return 1;
 }
 
@@ -6571,29 +6580,9 @@ int LuaField::has_caps(lua_State* L) {
       * :const:`swimmable`: Is this field passable for swimming bobs?
 */
 int LuaField::has_max_caps(lua_State* L) {
-	FCoords f = fcoords(L);
+	const FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
-
-	if (query == "walkable")
-		lua_pushboolean(L, f.field->maxcaps() & MOVECAPS_WALK);
-	else if (query == "swimmable")
-		lua_pushboolean(L, f.field->maxcaps() & MOVECAPS_SWIM);
-	else if (query == "small")
-		lua_pushboolean(L, f.field->maxcaps() & BUILDCAPS_SMALL);
-	else if (query == "medium")
-		lua_pushboolean(L, f.field->maxcaps() & BUILDCAPS_MEDIUM);
-	else if (query == "big")
-		lua_pushboolean(L, (f.field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG);
-	else if (query == "port") {
-		lua_pushboolean(
-		   L, (f.field->maxcaps() & BUILDCAPS_PORT) && get_egbase(L).map().is_port_space(f));
-	} else if (query == "mine")
-		lua_pushboolean(L, f.field->maxcaps() & BUILDCAPS_MINE);
-	else if (query == "flag")
-		lua_pushboolean(L, f.field->maxcaps() & BUILDCAPS_FLAG);
-	else
-		report_error(L, "Unknown caps queried: %s!", query.c_str());
-
+	lua_pushboolean(L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
 	return 1;
 }
 /*
