@@ -44,6 +44,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
+#include "logic/maphollowregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
 #include "logic/player.h"
@@ -256,12 +257,12 @@ void Map::recalc_default_resources(const World& world) {
 		}
 }
 
-// NOCOM
+
 std::set<FCoords> Map::calculate_valuable_fields() const {
 	std::set<FCoords> result;
 	std::set<FCoords> check;
 
-	ScopedTimer timer("Counting valuable fields took %ums");
+	ScopedTimer timer("Calculating valuable fields took %ums");
 
 	// Add all land coordinates starting from the given field for the given radius
 	const auto add_starting_coords = [this, &result, &check](const Coords& coords, int radius) {
@@ -292,23 +293,27 @@ std::set<FCoords> Map::calculate_valuable_fields() const {
 		// Checking the check region for buildcaps and add fields that can be conquered
 		for (const FCoords& fcoords : check) {
 			int radius = 0;
+			int inner_radius = 1;
 			Field* field = fcoords.field;
 			if ((field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
 				radius = 9;
+				inner_radius = 7;
 			} else if (field->maxcaps() & BUILDCAPS_MEDIUM) {
 				radius = 7;
+				inner_radius = 5;
 			} else if (field->maxcaps() & BUILDCAPS_SMALL) {
 				radius = 5;
 			}
 			if (radius > 0) {
-				MapRegion<Area<FCoords>> mr(*this, Area<FCoords>(fcoords, radius));
+				Widelands::HollowArea<> hollow_area(Widelands::Area<>(fcoords, radius), inner_radius);
+				Widelands::MapHollowRegion<> mr(*this, hollow_area);
 				do {
-					const FCoords& candidate = mr.location();
+					const FCoords& candidate = get_fcoords(mr.location());
 					if ((check.count(candidate) == 0)
 						&& (result.count(candidate) == 0)
 						&& (candidate.field->maxcaps() & MOVECAPS_WALK)) {
-						result.insert(mr.location());
-						new_fields.insert(mr.location());
+						result.insert(candidate);
+						new_fields.insert(candidate);
 					}
 
 				} while (mr.advance(*this));

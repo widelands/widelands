@@ -165,8 +165,7 @@ public:
 	void recalc_whole_map(const World& world);
 	void recalc_for_field_area(const World& world, Area<FCoords>);
 
-	// Returns a list of the fields that could be conquered by a player thoughought a game. Useful for territorial win conditions.
-	// NOCOM
+	/// Calculates and returns a list of the fields that could be conquered by a player thoughought a game. Useful for territorial win conditions.
 	std::set<FCoords> calculate_valuable_fields() const;
 
 	/***
