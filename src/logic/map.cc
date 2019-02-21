@@ -28,6 +28,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
@@ -253,6 +254,73 @@ void Map::recalc_default_resources(const World& world) {
 				initialize_resources(f, res, amount);
 			}
 		}
+}
+
+// NOCOM
+std::set<FCoords> Map::calculate_valuable_fields() const {
+	std::set<FCoords> result;
+	std::set<FCoords> check;
+
+	ScopedTimer timer("Counting valuable fields took %ums");
+
+	// Add all land coordinates starting from the given field for the given radius
+	const auto add_starting_coords = [this, &result, &check](const Coords& coords, int radius) {
+		MapRegion<Area<FCoords>> mr(*this, Area<FCoords>(get_fcoords(coords), radius));
+		do {
+			if (!(mr.location().field->maxcaps() & MOVECAPS_SWIM)) {
+				result.insert(mr.location());
+				check.insert(mr.location());
+			}
+		} while (mr.advance(*this));
+	};
+
+	// Initialize the fields table and the check area with the regions around the starting field of each player
+	for (const Coords& coords : starting_pos_) {
+		add_starting_coords(coords, 9);
+	}
+
+	// Add port spaces to the starting check area
+	if (allows_seafaring()) {
+		for (const Coords& coords : get_port_spaces()) {
+			add_starting_coords(coords, 5);
+		}
+	}
+
+	// Walk the map
+	while (!check.empty()) {
+		std::set<FCoords> new_fields;
+		// Checking the check region for buildcaps and add fields that can be conquered
+		for (const FCoords& fcoords : check) {
+			int radius = 0;
+			Field* field = fcoords.field;
+			if ((field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
+				radius = 9;
+			} else if (field->maxcaps() & BUILDCAPS_MEDIUM) {
+				radius = 7;
+			} else if (field->maxcaps() & BUILDCAPS_SMALL) {
+				radius = 5;
+			}
+			if (radius > 0) {
+				MapRegion<Area<FCoords>> mr(*this, Area<FCoords>(fcoords, radius));
+				do {
+					const FCoords& candidate = mr.location();
+					if ((check.count(candidate) == 0)
+						&& (result.count(candidate) == 0)
+						&& (candidate.field->maxcaps() & MOVECAPS_WALK)) {
+						result.insert(mr.location());
+						new_fields.insert(mr.location());
+					}
+
+				} while (mr.advance(*this));
+			}
+		}
+		check.clear();
+		check = new_fields;
+	}
+
+	log("Found %" PRIuS " valuable fields\n", result.size());
+
+	return result;
 }
 
 /*

@@ -22,6 +22,11 @@ local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 --
 function get_valuable_fields()
 
+   return wl.Game().map.valuable_fields
+
+   -- NOCOM remove the C++ implementation or the code below depending on speed test
+   --[[
+
    local result = {}
 
    print_loading_message("Counting valuable fields took", function()
@@ -84,6 +89,7 @@ function get_valuable_fields()
 
    print(('We found %d valuable fields'):format(#result))
    return result
+   ]]
 end
 
 -- RST

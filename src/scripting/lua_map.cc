@@ -1164,6 +1164,7 @@ const PropertyType<LuaMap> LuaMap::Properties[] = {
    PROP_RO(LuaMap, width),
    PROP_RO(LuaMap, height),
    PROP_RO(LuaMap, player_slots),
+   PROP_RO(LuaMap, valuable_fields),
    {nullptr, nullptr, nullptr},
 };
 
@@ -1260,6 +1261,25 @@ int LuaMap::get_player_slots(lua_State* L) {
 		lua_settable(L, -3);
 	}
 
+	return 1;
+}
+
+
+/* RST
+   .. attribute:: valuable_fields
+
+      (RO) Calculates and returns all fields that a player could build on.
+
+      **Note:** This function is expensive, so call it seldom and in a coroutine.
+*/
+int LuaMap::get_valuable_fields(lua_State* L) {
+	lua_newtable(L);
+	int counter = 0;
+	for (const Widelands::FCoords& fcoords : get_egbase(L).map().calculate_valuable_fields()) {
+		lua_pushinteger(L, ++counter);
+		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fcoords));
+		lua_settable(L, -3);
+	}
 	return 1;
 }
 
