@@ -217,6 +217,15 @@ function field_caps_tests:test_big_field_on_land()
    assert_equal(false, f:has_caps("swimmable"))
    assert_equal(true, f:has_caps("walkable"))
    assert_equal(false, f:has_caps("port"))
+
+   assert_equal(true, f:has_max_caps("small"))
+   assert_equal(true, f:has_max_caps("medium"))
+   assert_equal(true, f:has_max_caps("big"))
+   assert_equal(true, f:has_max_caps("flag"))
+   assert_equal(false, f:has_max_caps("mine"))
+   assert_equal(false, f:has_max_caps("swimmable"))
+   assert_equal(true, f:has_max_caps("walkable"))
+   assert_equal(false, f:has_max_caps("port"))
 end
 function field_caps_tests:test_flag_field_on_land()
    local f = map:get_field(1,53)
@@ -228,6 +237,15 @@ function field_caps_tests:test_flag_field_on_land()
    assert_equal(false, f:has_caps("swimmable"))
    assert_equal(true, f:has_caps("walkable"))
    assert_equal(false, f:has_caps("port"))
+
+   assert_equal(false, f:has_max_caps("small"))
+   assert_equal(false, f:has_max_caps("medium"))
+   assert_equal(false, f:has_max_caps("big"))
+   assert_equal(true, f:has_max_caps("flag"))
+   assert_equal(false, f:has_max_caps("mine"))
+   assert_equal(false, f:has_max_caps("swimmable"))
+   assert_equal(true, f:has_max_caps("walkable"))
+   assert_equal(false, f:has_max_caps("port"))
 end
 function field_caps_tests:test_mine_field()
    local f = map:get_field(63,54)
@@ -239,6 +257,15 @@ function field_caps_tests:test_mine_field()
    assert_equal(false, f:has_caps("swimmable"))
    assert_equal(true, f:has_caps("walkable"))
    assert_equal(false, f:has_caps("port"))
+
+   assert_equal(false, f:has_max_caps("small"))
+   assert_equal(false, f:has_max_caps("medium"))
+   assert_equal(false, f:has_max_caps("big"))
+   assert_equal(true, f:has_max_caps("flag"))
+   assert_equal(true, f:has_max_caps("mine"))
+   assert_equal(false, f:has_max_caps("swimmable"))
+   assert_equal(true, f:has_max_caps("walkable"))
+   assert_equal(false, f:has_max_caps("port"))
 end
 function field_caps_tests:test_field_on_water()
    local f = map:get_field(7,58)
@@ -250,6 +277,15 @@ function field_caps_tests:test_field_on_water()
    assert_equal(true, f:has_caps("swimmable"))
    assert_equal(false, f:has_caps("walkable"))
    assert_equal(false, f:has_caps("port"))
+
+   assert_equal(false, f:has_max_caps("small"))
+   assert_equal(false, f:has_max_caps("medium"))
+   assert_equal(false, f:has_max_caps("big"))
+   assert_equal(false, f:has_max_caps("flag"))
+   assert_equal(false, f:has_max_caps("mine"))
+   assert_equal(true, f:has_max_caps("swimmable"))
+   assert_equal(false, f:has_max_caps("walkable"))
+   assert_equal(false, f:has_max_caps("port"))
 end
 function field_caps_tests:test_port_field()
    local f = map:get_field(9,56)
@@ -261,15 +297,37 @@ function field_caps_tests:test_port_field()
    assert_equal(false, f:has_caps("swimmable"))
    assert_equal(true, f:has_caps("walkable"))
    assert_equal(true, f:has_caps("port"))
+
+   assert_equal(true, f:has_max_caps("small"))
+   assert_equal(true, f:has_max_caps("medium"))
+   assert_equal(true, f:has_max_caps("big"))
+   assert_equal(true, f:has_max_caps("flag"))
+   assert_equal(false, f:has_max_caps("mine"))
+   assert_equal(false, f:has_max_caps("swimmable"))
+   assert_equal(true, f:has_max_caps("walkable"))
+   assert_equal(true, f:has_max_caps("port"))
 end
+
+function field_caps_tests:test_field_with_immovable()
+   local field = map:get_field(1,53)
+   assert_equal(true, field:has_caps("flag"))
+   assert_equal(true, field:has_max_caps("flag"))
+
+   local flag = player1:place_flag(field, true)
+   assert_equal(false, field:has_caps("flag"))
+   assert_equal(true, field:has_max_caps("flag"))
+
+   flag:remove()
+   assert_equal(true, field:has_caps("flag"))
+   assert_equal(true, field:has_max_caps("flag"))
+ end
+
 
 function field_caps_tests:test_wrong_call()
    assert_error("Unknown caps", function()
       map:get_field(7,58):has_caps("blahfasel")
    end)
 end
-
-
 
 -- ===============
 -- owner/claimers
