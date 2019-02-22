@@ -329,6 +329,12 @@ function field_caps_tests:test_wrong_call()
    end)
 end
 
+function field_caps_tests:test_valuable_fields_does_not_crash()
+   local fields = map.valuable_fields
+   assert_equal(false, fields[1] == nil)
+end
+
+
 -- ===============
 -- owner/claimers
 -- ===============
