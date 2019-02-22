@@ -293,7 +293,7 @@ std::set<FCoords> Map::calculate_valuable_fields() const {
 		// Checking the check region for buildcaps and add fields that can be conquered
 		for (const FCoords& fcoords : check) {
 			int radius = 0;
-			int inner_radius = 1;
+			int inner_radius = 2;
 			Field* field = fcoords.field;
 			if ((field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
 				radius = 9;
