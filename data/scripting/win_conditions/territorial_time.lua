@@ -35,7 +35,7 @@ return {
    description = wc_desc,
    init = function()
       -- Get all valuable fields of the map
-      fields = wl.Game().map.valuable_fields
+      fields = wl.Game().map.conquerable_fields
    end,
    func = function()
       local plrs = wl.Game().players

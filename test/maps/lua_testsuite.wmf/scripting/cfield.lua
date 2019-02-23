@@ -329,11 +329,15 @@ function field_caps_tests:test_wrong_call()
    end)
 end
 
-function field_caps_tests:test_valuable_fields_does_not_crash()
-   local fields = map.valuable_fields
+function field_caps_tests:test_conquerable_fields_does_not_crash()
+   local fields = map.conquerable_fields
    assert_equal(false, fields[1] == nil)
 end
 
+function field_caps_tests:test_terrestrial_fields_does_not_crash()
+   local fields = map.terrestrial_fields
+   assert_equal(false, fields[1] == nil)
+end
 
 -- ===============
 -- owner/claimers

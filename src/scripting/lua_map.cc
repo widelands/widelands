@@ -1193,7 +1193,8 @@ const PropertyType<LuaMap> LuaMap::Properties[] = {
    PROP_RO(LuaMap, width),
    PROP_RO(LuaMap, height),
    PROP_RO(LuaMap, player_slots),
-   PROP_RO(LuaMap, valuable_fields),
+   PROP_RO(LuaMap, conquerable_fields),
+   PROP_RO(LuaMap, terrestrial_fields),
    {nullptr, nullptr, nullptr},
 };
 
@@ -1295,16 +1296,33 @@ int LuaMap::get_player_slots(lua_State* L) {
 
 
 /* RST
-   .. attribute:: valuable_fields
+   .. attribute:: conquerable_fields
 
-      (RO) Calculates and returns all fields that a player could build on.
+      (RO) Calculates and returns all reachable fields that a player could build on.
 
-      **Note:** This function is expensive, so call it seldom and in a coroutine.
+      **Note:** This function is expensive, so call it seldom.
 */
-int LuaMap::get_valuable_fields(lua_State* L) {
+int LuaMap::get_conquerable_fields(lua_State* L) {
 	lua_newtable(L);
 	int counter = 0;
-	for (const Widelands::FCoords& fcoords : get_egbase(L).map().calculate_valuable_fields()) {
+	for (const Widelands::FCoords& fcoords : get_egbase(L).map().calculate_all_conquerable_fields()) {
+		lua_pushinteger(L, ++counter);
+		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fcoords));
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+
+/* RST
+   .. attribute:: terrestrial_fields
+
+      (RO) Calculates and returns all fields that are not swimmable.
+*/
+int LuaMap::get_terrestrial_fields(lua_State* L) {
+	lua_newtable(L);
+	int counter = 0;
+	for (const Widelands::FCoords& fcoords : get_egbase(L).map().calculate_all_fields_excluding_caps(MOVECAPS_SWIM)) {
 		lua_pushinteger(L, ++counter);
 		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fcoords));
 		lua_settable(L, -3);

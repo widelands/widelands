@@ -30,18 +30,7 @@ return {
    description = wc_desc,
    init = function()
       -- Get all terrestrial fields of the map
-      local map = wl.Game().map
-      for x=0,map.width-1 do
-         for y=0,map.height-1 do
-            local f = map:get_field(x,y)
-            if f then
-               -- add this field to the list as long as it has not movecaps swim
-               if not f:has_caps("swimmable") then
-                  fields[#fields+1] = f
-               end
-            end
-         end
-      end
+      fields = wl.Game().map.terrestrial_fields
    end,
    func = function()
    local plrs = wl.Game().players

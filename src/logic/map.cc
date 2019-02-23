@@ -258,7 +258,7 @@ void Map::recalc_default_resources(const World& world) {
 }
 
 
-std::set<FCoords> Map::calculate_valuable_fields() const {
+std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 	std::set<FCoords> result;
 	std::set<FCoords> check;
 
@@ -330,6 +330,17 @@ std::set<FCoords> Map::calculate_valuable_fields() const {
 
 	log("Found %" PRIuS " valuable fields\n", result.size());
 
+	return result;
+}
+
+std::set<FCoords> Map::calculate_all_fields_excluding_caps(NodeCaps caps) const {
+	std::set<FCoords> result;
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		Field& field = fields_[i];
+		if (!(field.nodecaps() & caps)) {
+			result.insert(get_fcoords(field));
+		}
+	}
 	return result;
 }
 
