@@ -317,6 +317,12 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
+		// Run separate initialization function if it is there. This prevents a black loading screen when initialization will take a while.
+		if (table->has_key<std::string>("init")) {
+			loader_ui->step(_("Initializing game…"));
+			std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("init");
+			cr->resume();
+		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
 	} else {

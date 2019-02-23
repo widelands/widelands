@@ -20,9 +20,29 @@ local wc_desc = _(
 [[your territory than any other player. The game will end after 4 hours of ]] ..
 [[playing. The one with the most trees at that point will win the game.]])
 local wc_trees_owned = _"Trees owned"
+
+
+-- Table of terrestrial fields
+local fields = {}
+
 return {
    name = wc_name,
    description = wc_desc,
+   init = function()
+      -- Get all terrestrial fields of the map
+      local map = wl.Game().map
+      for x=0,map.width-1 do
+         for y=0,map.height-1 do
+            local f = map:get_field(x,y)
+            if f then
+               -- add this field to the list as long as it has not movecaps swim
+               if not f:has_caps("swimmable") then
+                  fields[#fields+1] = f
+               end
+            end
+         end
+      end
+   end,
    func = function()
    local plrs = wl.Game().players
    local game = wl.Game()
@@ -32,21 +52,6 @@ return {
 
    -- set the objective with the game type for all players
    broadcast_objective("win_condition", wc_descname, wc_desc)
-
-   -- Get all valueable fields of the map
-   local fields = {}
-   local map = wl.Game().map
-   for x=0,map.width-1 do
-      for y=0,map.height-1 do
-         local f = map:get_field(x,y)
-         if f then
-            -- add this field to the list as long as it has not movecaps swim
-            if not f:has_caps("swimmable") then
-               fields[#fields+1] = f
-            end
-         end
-      end
-   end
 
    -- The function to calculate the current points.
    local _last_time_calculated = -100000
