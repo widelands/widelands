@@ -165,7 +165,7 @@ public:
 	void recalc_whole_map(const World& world);
 	void recalc_for_field_area(const World& world, Area<FCoords>);
 
-	/// Calculates and returns a list of the fields that could be conquered by a player thoughought a game. Useful for territorial win conditions.
+	/// Calculates and returns a list of the fields that could be conquered by a player throughout a game. Useful for territorial win conditions.
 	std::set<FCoords> calculate_all_conquerable_fields() const;
 	/// Calculates and returns a list of the fields that do not have the given caps.
 	std::set<FCoords> calculate_all_fields_excluding_caps(NodeCaps caps) const;
