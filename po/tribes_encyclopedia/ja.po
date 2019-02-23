@@ -3,14 +3,14 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
-# tamanegi, 2018
+# tamanegi, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-03 08:14+0000\n"
-"PO-Revision-Date: 2019-02-03 08:20+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-02-15 11:14+0000\n"
+"PO-Revision-Date: 2019-02-22 13:42+0000\n"
+"Last-Translator: tamanegi\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2762,54 +2762,54 @@ msgstr "%s%s"
 #: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:5
 #: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:5
 msgid "Coal veins contain coal that can be dug up by coal mines."
-msgstr ""
+msgstr "石炭鉱脈には石炭が含まれており、炭鉱で採掘できます。"
 
 #. TRANSLATORS: Helptext for a resource: Coal
 #: ../../data/tribes/immovables/resi/helptexts/coal_1.lua:7
 msgid "There is only a little bit of coal here."
-msgstr ""
+msgstr "ここには少量の石炭しかありません。"
 
 #. TRANSLATORS: Helptext for a resource: Coal
 #: ../../data/tribes/immovables/resi/helptexts/coal_2.lua:7
 msgid "There is a lot of coal here."
-msgstr ""
+msgstr "ここには多量の石炭があります。"
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:5
 #: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:5
 msgid "Gold veins contain gold ore that can be dug up by gold mines."
-msgstr ""
+msgstr "金鉱脈には金鉱石が含まれており、金鉱で採掘できます。"
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi/helptexts/gold_1.lua:7
 msgid "There is only a little bit of gold here."
-msgstr ""
+msgstr "ここには少量の金しかありません。"
 
 #. TRANSLATORS: Helptext for a resource: Gold
 #: ../../data/tribes/immovables/resi/helptexts/gold_2.lua:7
 msgid "There is a lot of gold here."
-msgstr ""
+msgstr "ここには多量の金があります。"
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:5
 #: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:5
 msgid "Iron veins contain iron ore that can be dug up by iron mines."
-msgstr ""
+msgstr "鉄鉱脈には鉄鉱石が含まれており、鉄鉱で採掘できます。"
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi/helptexts/iron_1.lua:7
 msgid "There is only a little bit of iron here."
-msgstr ""
+msgstr "ここには少量の鉄しかありません。"
 
 #. TRANSLATORS: Helptext for a resource: Iron
 #: ../../data/tribes/immovables/resi/helptexts/iron_2.lua:7
 msgid "There is a lot of iron here."
-msgstr ""
+msgstr "ここには多量の鉄があります。"
 
 #. TRANSLATORS: Helptext for a resource: No resources
 #: ../../data/tribes/immovables/resi/helptexts/none.lua:4
 msgid "There are no resources in the ground here."
-msgstr ""
+msgstr "ここの地中には何も資源がありません。"
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:5
@@ -2817,26 +2817,26 @@ msgstr ""
 msgid ""
 "Precious stones are used in the construction of big buildings. They can be "
 "dug up by a crystal mine. You will also get granite from the mine."
-msgstr ""
+msgstr "貴重な石は大サイズの建物の建設に使われます。それらの石は水晶鉱で採掘できます。加えて、水晶鉱では花崗岩も採掘されます。"
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:7
 msgid "There are only a few precious stones here."
-msgstr ""
+msgstr "ここには貴重な石は少量しかありません。"
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:10
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:10
 msgid ""
 "Granite is a basic building material and can be dug up by a granite mine."
-msgstr ""
+msgstr "花崗岩は基本的な建築資材であり、花崗岩鉱で採掘できます。"
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #. TRANSLATORS: Helptext for a Frisian resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:12
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:22
 msgid "There is only a little bit of granite here."
-msgstr ""
+msgstr "ここには少量の花崗岩しかありません。"
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:15
@@ -2844,40 +2844,40 @@ msgstr ""
 msgid ""
 "Marble is a basic building material and can be dug up by a marble mine. You "
 "will also get granite from the mine."
-msgstr ""
+msgstr "大理石は基本的な建築資材であり、大理石鉱で採掘できます。加えて、大理石鉱では花崗岩も採掘されます。"
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:17
 msgid "There is only a little bit of marble here."
-msgstr ""
+msgstr "ここには少量の大理石しかありません。"
 
 #. TRANSLATORS: Helptext for a Frisian resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_1.lua:20
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:20
 msgid "Granite is a basic building material and can be dug up by a rock mine."
-msgstr ""
+msgstr "花崗岩は基本的な建築資材であり、岩石鉱で採掘できます。"
 
 #. TRANSLATORS: Helptext for an Atlantean resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:7
 msgid "There are many precious stones here."
-msgstr ""
+msgstr "ここには多量の貴重な石があります。"
 
 #. TRANSLATORS: Helptext for a Barbarian resource: Stones
 #. TRANSLATORS: Helptext for a Frisian resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:12
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:22
 msgid "There is a lot of granite here."
-msgstr ""
+msgstr "ここには多量の花崗岩があります。"
 
 #. TRANSLATORS: Helptext for an Empire resource: Stones
 #: ../../data/tribes/immovables/resi/helptexts/stones_2.lua:17
 msgid "There is a lot of marble here."
-msgstr ""
+msgstr "ここには多量の大理石があります。"
 
 #. TRANSLATORS: Helptext for a resource: Water
 #: ../../data/tribes/immovables/resi/helptexts/water.lua:4
 msgid "There is water in the ground here that can be pulled up by a well."
-msgstr ""
+msgstr "ここの地中には水があり、井戸で汲み上げられます。"
 
 #. TRANSLATORS: Helptext for a ship construction site.
 #: ../../data/tribes/immovables/shipconstruction_atlanteans/helptexts.lua:4

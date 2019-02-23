@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-12-03 08:36+0000\n"
+"POT-Creation-Date: 2019-02-11 09:31+0000\n"
+"PO-Revision-Date: 2019-02-13 19:12+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -313,6 +313,14 @@ msgstr "Windows"
 #: ../../data/txts/developers.lua:3
 msgid "ZetaOS"
 msgstr "ZetaOS"
+
+#: ../../data/txts/developers.lua:3
+msgid "and many, many more (thank you for everything you've done)"
+msgstr "un mennig, mennig Anner ok (weest bedankt för all dat, wat ji daan hebbt)"
+
+#: ../../data/txts/developers.lua:3
+msgid "vacant"
+msgstr "nich besett"
 
 #: ../../data/txts/help/common_helptexts.lua:10
 msgid "Online Help"
