@@ -329,11 +329,12 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 	}
 
 	log("Found %" PRIuS " valuable fields\n", result.size());
-
 	return result;
 }
 
 std::set<FCoords> Map::calculate_all_fields_excluding_caps(NodeCaps caps) const {
+	ScopedTimer timer("Calculating valuable fields took %ums");
+
 	std::set<FCoords> result;
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		Field& field = fields_[i];
@@ -341,6 +342,8 @@ std::set<FCoords> Map::calculate_all_fields_excluding_caps(NodeCaps caps) const 
 			result.insert(get_fcoords(field));
 		}
 	}
+
+	log("Found %" PRIuS " valuable fields\n", result.size());
 	return result;
 }
 
