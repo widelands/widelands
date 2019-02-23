@@ -27,7 +27,9 @@ namespace JSON {
 /// Value types for JSON
 struct Value {
 	Value() = default;
+	virtual ~Value() = default;
 	virtual std::string as_string() const = 0;
+
 };
 
 struct Boolean : Value {
