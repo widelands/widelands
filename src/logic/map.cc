@@ -264,13 +264,18 @@ std::set<FCoords> Map::calculate_valuable_fields() const {
 
 	ScopedTimer timer("Calculating valuable fields took %ums");
 
-	// Add all land coordinates starting from the given field for the given radius
+	// Add outer land coordinates starting from the given field for the given radius
 	const auto add_starting_coords = [this, &result, &check](const Coords& coords, int radius) {
-		MapRegion<Area<FCoords>> mr(*this, Area<FCoords>(get_fcoords(coords), radius));
+		const FCoords& fcoords = get_fcoords(coords);
+		result.insert(fcoords);
+
+		Widelands::HollowArea<> hollow_area(Widelands::Area<>(fcoords, radius), 2);
+		Widelands::MapHollowRegion<> mr(*this, hollow_area);
 		do {
-			if (!(mr.location().field->maxcaps() & MOVECAPS_SWIM)) {
-				result.insert(mr.location());
-				check.insert(mr.location());
+			const FCoords& candidate = get_fcoords(mr.location());
+			if (!(candidate.field->maxcaps() & MOVECAPS_SWIM)) {
+				result.insert(candidate);
+				check.insert(candidate);
 			}
 		} while (mr.advance(*this));
 	};
