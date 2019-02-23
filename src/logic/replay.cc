@@ -229,7 +229,6 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 		GameLoader gl(filename_ + kSavegameExtension, game);
 		gl.load_game();
 	}
-	game.postload();
 	log("Done reloading the game from replay\n");
 
 	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
