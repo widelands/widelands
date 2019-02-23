@@ -63,8 +63,8 @@ public:
 	     dir_(FileSystem::fs_dirname(complete_filename.c_str())),
 	     filename_(FileSystem::fs_filename(complete_filename.c_str())),
 	     type_(type),
-	     //     error_(Error::kSuccess) {};
-	     error_(static_cast<Error>(1132)){};
+	     error_(static_cast<Error>(1132)) {
+	}
 
 	/**
 	 * Tries to save a file.
@@ -82,7 +82,7 @@ public:
 	// returns the stored error code (of the last saving operation)
 	Error error() {
 		return error_;
-	};
+	}
 
 	// Returns the combination of error_messages (of occurred errors)
 	// specified by a bit mask.

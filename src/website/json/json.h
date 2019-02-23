@@ -43,6 +43,7 @@ public:
 	// Constructor for root node
 	explicit Element() : JSON::Element("", 0) {
 	}
+	virtual ~Element() = default;
 
 	JSON::Object* add_object(const std::string& key = "");
 	JSON::Array* add_array(const std::string& key);
