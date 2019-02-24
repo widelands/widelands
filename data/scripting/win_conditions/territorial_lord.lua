@@ -30,23 +30,14 @@ return {
    name = wc_name,
    description = wc_desc,
    init = function()
-      -- TODO(stonerl): This if-clause is only neccessary until saving speed gets improved
-      if wl.Game().map.width <= 256 or wl.Game().map.height <= 256 then
-         -- Get all valuable fields of the map
-         fields = wl.Game().map.conquerable_fields
-      end
+      -- Get all valuable fields of the map
+      fields = wl.Game().map.conquerable_fields
    end,
    func = function()
       local plrs = wl.Game().players
 
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
-
-      -- TODO(stonerl): This if-clause is only neccessary until saving speed gets improved
-      if wl.Game().map.width > 256 or wl.Game().map.height > 256 then
-         -- Get all valuable fields of the map
-         fields = wl.Game().map.conquerable_fields
-      end
 
       -- Configure how long the winner has to hold on to the territory
       local time_to_keep_territory = 20 * 60 -- 20 minutes
