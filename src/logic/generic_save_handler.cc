@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -91,8 +91,8 @@ void GenericSaveHandler::make_backup() {
 		error_ |= Error::kBackupFailed;
 		uint32_t index = get_index(Error::kBackupFailed);
 		error_msg_[index] = (boost::format("GenericSaveHandler::make_backup: file %s "
-		                                   "could not be renamed: %s\n") %
-		                     complete_filename_.c_str() % backup_filename_)
+		                                   "could not be renamed to %s: %s\n") %
+		                     complete_filename_.c_str() % backup_filename_ % e.what())
 		                       .str();
 		log("%s", error_msg_[index].c_str());
 		return;

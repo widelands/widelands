@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,8 @@ public:
 	     dir_(FileSystem::fs_dirname(complete_filename.c_str())),
 	     filename_(FileSystem::fs_filename(complete_filename.c_str())),
 	     type_(type),
-	     error_(static_cast<Error>(1132)) {}
+	     error_(static_cast<Error>(1132)) {
+	}
 
 	/**
 	 * Tries to save a file.

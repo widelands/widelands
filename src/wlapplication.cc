@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1493,8 +1493,8 @@ void WLApplication::cleanup_ai_files() {
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log(
-				   "WLApplication::cleanup_ai_files: File %s couldn't be deleted.\n", filename.c_str());
+				log("WLApplication::cleanup_ai_files: File %s couldn't be deleted: %s\n",
+				    filename.c_str(), e.what());
 			}
 		}
 	}
@@ -1512,8 +1512,8 @@ void WLApplication::cleanup_temp_files() {
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log("WLApplication::cleanup_temp_files: File %s couldn't be deleted.\n",
-				    filename.c_str());
+				log("WLApplication::cleanup_temp_files: File %s couldn't be deleted: %s\n",
+				    filename.c_str(), e.what());
 			}
 		}
 	}
@@ -1531,8 +1531,8 @@ void WLApplication::cleanup_temp_backups(std::string dir) {
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log("WLApplication::cleanup_temp_backups: File %s couldn't be deleted.\n",
-				    filename.c_str());
+				log("WLApplication::cleanup_temp_backups: File %s couldn't be deleted: %s\n",
+				    filename.c_str(), e.what());
 			}
 		}
 	}
