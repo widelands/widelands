@@ -29,8 +29,11 @@ return {
    name = wc_name,
    description = wc_desc,
    init = function()
-      -- Get all terrestrial fields of the map
-      fields = wl.Game().map.terrestrial_fields
+      -- TODO(stonerl): This if-clause is only neccessary until saving speed gets improved
+      if wl.Game().map.width <= 256 or wl.Game().map.height <= 256 then
+         -- Get all terrestrial fields of the map
+         fields = wl.Game().map.terrestrial_fields
+      end
    end,
    func = function()
    local plrs = wl.Game().players
@@ -41,6 +44,12 @@ return {
 
    -- set the objective with the game type for all players
    broadcast_objective("win_condition", wc_descname, wc_desc)
+
+   -- TODO(stonerl): This if-clause is only neccessary until saving speed gets improved
+   if wl.Game().map.width > 256 or wl.Game().map.height > 256 then
+      -- Get all terrestrial fields of the map
+      fields = wl.Game().map.terrestrial_fields
+   end
 
    -- The function to calculate the current points.
    local _last_time_calculated = -100000

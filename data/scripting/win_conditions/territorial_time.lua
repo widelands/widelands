@@ -35,13 +35,22 @@ return {
    description = wc_desc,
    init = function()
       -- Get all valuable fields of the map
-      fields = wl.Game().map.conquerable_fields
+      -- TODO(stonerl): This if-clause is only neccessary until saving speed gets improved
+      if wl.Game().map.width <= 256 or wl.Game().map.height <= 256 then
+         fields = wl.Game().map.conquerable_fields
+      end
    end,
    func = function()
       local plrs = wl.Game().players
 
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
+
+      -- TODO(stonerl): This if-clause is only neccessary until saving speed gets improved
+      if wl.Game().map.width > 256 or wl.Game().map.height > 256 then
+         -- Get all valuable fields of the map
+         fields = wl.Game().map.conquerable_fields
+      end
 
       -- variables to track the maximum 4 hours of gametime
       local remaining_max_time = 4 * 60 * 60 -- 4 hours
