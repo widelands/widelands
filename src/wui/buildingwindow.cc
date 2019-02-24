@@ -356,12 +356,14 @@ void BuildingWindow::create_capsbuttons(UI::Box* capsbuttons, Widelands::Buildin
 		UI::UniqueWindow::Registry& registry =
 		   igbase()->unique_windows().get_registry(building_descr_for_help_.name() + "_help");
 		registry.open_window = [this, &registry] {
-			Widelands::Building* building_in_lambda = building_.get(parent_->egbase());
-			if (building_in_lambda == nullptr) {
-				return;
+			if (parent_ != nullptr) {
+				Widelands::Building* building_in_lambda = building_.get(parent_->egbase());
+				if (building_in_lambda == nullptr) {
+					return;
+				}
+				new UI::BuildingHelpWindow(igbase(), registry, building_descr_for_help_,
+										   building_in_lambda->owner().tribe(), &parent_->egbase().lua());
 			}
-			new UI::BuildingHelpWindow(igbase(), registry, building_descr_for_help_,
-			                           building_in_lambda->owner().tribe(), &parent_->egbase().lua());
 		};
 
 		helpbtn->sigclicked.connect(
