@@ -303,21 +303,23 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 				radius = 5;
 			}
 
-			// Check region and add fields that can be conquered
+			// Check region and add walkable fields
 			if (radius > 0) {
 				hollow_area.reset(new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), inner_radius));
 				map_region.reset(new Widelands::MapHollowRegion<>(*this, *hollow_area));
 				do {
 					fcoords = get_fcoords(map_region->location());
-					if ((result.count(fcoords) == 0)
-						&& (fcoords.field->maxcaps() & MOVECAPS_WALK)) {
+
+					// We do the caps check first, because the comparison is faster than the container check
+					if ((fcoords.field->maxcaps() & MOVECAPS_WALK) &&
+						(result.count(fcoords) == 0)) {
 						result.insert(fcoords);
 						coords_to_check.insert(fcoords);
 					}
 				} while (map_region->advance(*this));
 			}
 
-			// These coordinates are done. We do not keep track of visited coordinates that didn't make the result, because the set insert operations are more expensive than the checks
+			// These coordinates are done. We do not keep track of visited coordinates that didn't make the result, because the container insert operations are more expensive than the checks
 			coords_to_check.erase(coords_it);
 		}
 	};
