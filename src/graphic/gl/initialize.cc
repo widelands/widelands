@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -200,7 +200,7 @@ SDL_GLContext initialize(
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
 			                         "Widelands won’t work because your graphics driver is too old.\n"
 			                         "The shading language needs to be version 1.20 or newer.",
-			                         NULL);
+			                         nullptr);
 			exit(1);
 		}
 	} else {
@@ -215,7 +215,7 @@ SDL_GLContext initialize(
 				   SDL_MESSAGEBOX_ERROR, "OpenGL Error",
 				   "Widelands won’t work because your graphics driver is too old.\n"
 				   "The shading language needs to be version 1.20 or newer.",
-				   NULL);
+				   nullptr);
 				exit(1);
 			}
 		} else {
@@ -227,7 +227,7 @@ SDL_GLContext initialize(
 			   "Widelands won't work because we were unable to detect the shading "
 			   "language version.\nThere is an unknown problem with reading the "
 			   "information from the graphics driver.",
-			   NULL);
+			   nullptr);
 			exit(1);
 		}
 	}
