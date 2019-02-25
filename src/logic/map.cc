@@ -286,22 +286,24 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 
 		// Walk the map
 		while (!coords_to_check.empty()) {
+			// Get some coordinates to check
 			const auto coords_it = coords_to_check.begin();
 			fcoords = *coords_it;
 
-			// Checking the check region for buildcaps and add fields that can be conquered
+			// Get region according to buildcaps
 			radius = 0;
 			int inner_radius = 2;
-			Field* field = fcoords.field;
-			if ((field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
+			if ((fcoords.field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
 				radius = 9;
 				inner_radius = 7;
-			} else if (field->maxcaps() & BUILDCAPS_MEDIUM) {
+			} else if (fcoords.field->maxcaps() & BUILDCAPS_MEDIUM) {
 				radius = 7;
 				inner_radius = 5;
-			} else if (field->maxcaps() & BUILDCAPS_SMALL) {
+			} else if (fcoords.field->maxcaps() & BUILDCAPS_SMALL) {
 				radius = 5;
 			}
+
+			// Check region and add fields that can be conquered
 			if (radius > 0) {
 				hollow_area.reset(new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), inner_radius));
 				map_region.reset(new Widelands::MapHollowRegion<>(*this, *hollow_area));
@@ -314,6 +316,8 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 					}
 				} while (map_region->advance(*this));
 			}
+
+			// These coordinates are done. We do not keep track of visited coordinates that didn't make the result, because the set insert operations are more expensive than the checks
 			coords_to_check.erase(coords_it);
 		}
 	};
