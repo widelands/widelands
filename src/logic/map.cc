@@ -260,44 +260,37 @@ void Map::recalc_default_resources(const World& world) {
 
 std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 	std::set<FCoords> result;
-	std::set<FCoords> check;
+
+	std::set<FCoords> coords_to_check;
 
 	ScopedTimer timer("Calculating valuable fields took %ums");
 
-	// Add outer land coordinates starting from the given field for the given radius
-	const auto add_starting_coords = [this, &result, &check](const Coords& coords, int radius) {
-		const FCoords& fcoords = get_fcoords(coords);
+	// If we don't have the given coordinates yet, walk the map and collect conquerable fields, initialized with the given radius around the coordinates
+	const auto walk_starting_coords = [this, &result, &coords_to_check](const Coords& coords, int radius) {
+		FCoords fcoords = get_fcoords(coords);
+
+		// We already have these coordinates
+		if (result.count(fcoords) == 1) {
+			return;
+		}
+
+		// Add starting field
 		result.insert(fcoords);
 
-		Widelands::HollowArea<> hollow_area(Widelands::Area<>(fcoords, radius), 2);
-		Widelands::MapHollowRegion<> mr(*this, hollow_area);
+		// Add outer land coordinates around the starting field for the given radius
+		std::unique_ptr<Widelands::HollowArea<>> hollow_area(new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), 2));
+		std::unique_ptr<Widelands::MapHollowRegion<>> map_region(new Widelands::MapHollowRegion<>(*this, *hollow_area));
 		do {
-			const FCoords& candidate = get_fcoords(mr.location());
-			if (!(candidate.field->maxcaps() & MOVECAPS_SWIM)) {
-				result.insert(candidate);
-				check.insert(candidate);
-			}
-		} while (mr.advance(*this));
-	};
+			coords_to_check.insert(get_fcoords(map_region->location()));
+		} while (map_region->advance(*this));
 
-	// Initialize the fields table and the check area with the regions around the starting field of each player
-	for (const Coords& coords : starting_pos_) {
-		add_starting_coords(coords, 9);
-	}
+		// Walk the map
+		while (!coords_to_check.empty()) {
+			const auto coords_it = coords_to_check.begin();
+			fcoords = *coords_it;
 
-	// Add port spaces to the starting check area
-	if (allows_seafaring()) {
-		for (const Coords& coords : get_port_spaces()) {
-			add_starting_coords(coords, 5);
-		}
-	}
-
-	// Walk the map
-	while (!check.empty()) {
-		std::set<FCoords> new_fields;
-		// Checking the check region for buildcaps and add fields that can be conquered
-		for (const FCoords& fcoords : check) {
-			int radius = 0;
+			// Checking the check region for buildcaps and add fields that can be conquered
+			radius = 0;
 			int inner_radius = 2;
 			Field* field = fcoords.field;
 			if ((field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
@@ -310,22 +303,31 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 				radius = 5;
 			}
 			if (radius > 0) {
-				Widelands::HollowArea<> hollow_area(Widelands::Area<>(fcoords, radius), inner_radius);
-				Widelands::MapHollowRegion<> mr(*this, hollow_area);
+				hollow_area.reset(new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), inner_radius));
+				map_region.reset(new Widelands::MapHollowRegion<>(*this, *hollow_area));
 				do {
-					const FCoords& candidate = get_fcoords(mr.location());
-					if ((check.count(candidate) == 0)
-						&& (result.count(candidate) == 0)
-						&& (candidate.field->maxcaps() & MOVECAPS_WALK)) {
-						result.insert(candidate);
-						new_fields.insert(candidate);
+					fcoords = get_fcoords(map_region->location());
+					if ((result.count(fcoords) == 0)
+						&& (fcoords.field->maxcaps() & MOVECAPS_WALK)) {
+						result.insert(fcoords);
+						coords_to_check.insert(fcoords);
 					}
-
-				} while (mr.advance(*this));
+				} while (map_region->advance(*this));
 			}
+			coords_to_check.erase(coords_it);
 		}
-		check.clear();
-		check = new_fields;
+	};
+
+	// Walk the map from the starting field of each player
+	for (const Coords& coords : starting_pos_) {
+		walk_starting_coords(coords, 9);
+	}
+
+	// Walk the map from port spaces
+	if (allows_seafaring()) {
+		for (const Coords& coords : get_port_spaces()) {
+			walk_starting_coords(coords, 5);
+		}
 	}
 
 	log("Found %" PRIuS " valuable fields\n", result.size());

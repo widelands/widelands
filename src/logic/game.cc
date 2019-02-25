@@ -326,7 +326,6 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 
 void Game::run_win_condition() {
 	if (!win_condition_script_.empty()) {
-		get_ibase()->log_message(_("Initializing game…"));
 		std::unique_ptr<LuaTable> table(lua().run_script(win_condition_script_));
 		table->do_not_warn_about_unaccessed_keys();
 		// Run separate initialization function if it is there.
