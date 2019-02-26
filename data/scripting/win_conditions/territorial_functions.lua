@@ -14,27 +14,6 @@ local wc_has_territory = _"%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
 local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 
 -- RST
--- .. function:: get_buildable_fields()
---
---    Collects all fields that are buildable
---
---    :returns: a table with the map's buildable fields
---
-function get_buildable_fields()
-   local fields = {}
-   local map = wl.Game().map
-   for x=0, map.width-1 do
-      for y=0, map.height-1 do
-         local f = map:get_field(x,y)
-         if f.buildable then
-            table.insert(fields, f)
-         end
-      end
-   end
-   return fields
-end
-
--- RST
 -- .. function:: count_owned_fields_for_all_players(fields, players)
 --
 --    Counts all owned fields for each player.
@@ -67,11 +46,9 @@ local function count_owned_fields_for_all_players(fields, players)
    return owned_fields
 end
 
-
 -- Used by calculate_territory_points keep track of when the winner changes
 local winning_players = {}
 local winning_teams = {}
-
 
 -- RST
 -- .. data:: territory_points

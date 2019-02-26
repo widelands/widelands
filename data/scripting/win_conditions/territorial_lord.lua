@@ -22,9 +22,17 @@ local wc_desc = _ (
    "area. The winner will be the player or the team that is able to keep " ..
    "that area for at least 20 minutes."
 )
+
+-- Table of fields that are worth conquering
+local fields = {}
+
 return {
    name = wc_name,
    description = wc_desc,
+   init = function()
+      -- Get all valuable fields of the map
+      fields = wl.Game().map.conquerable_fields
+   end,
    func = function()
       local plrs = wl.Game().players
 
@@ -35,9 +43,6 @@ return {
       local time_to_keep_territory = 20 * 60 -- 20 minutes
       -- time in secs, if == 0 -> victory
       territory_points.remaining_time = time_to_keep_territory
-
-      -- Get all valueable fields of the map
-      local fields = get_buildable_fields()
 
       local function _send_state(show_popup)
          set_textdomain("win_conditions")
