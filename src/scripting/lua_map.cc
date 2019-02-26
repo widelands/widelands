@@ -1242,7 +1242,7 @@ int LuaMap::get_number_of_port_spaces(lua_State* L) {
       (RO) A list of coordinates for all port spaces on the map.
 
       :returns: A table of port space coordinates,
-      like this: ``{{x = 0, y = 2}, {x = 54, y = 23}}``.
+        like this: ``{{x = 0, y = 2}, {x = 54, y = 23}}``.
 */
 int LuaMap::get_port_spaces(lua_State* L) {
 	lua_newtable(L);
@@ -6608,6 +6608,7 @@ int LuaField::has_max_caps(lua_State* L) {
 	   L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
 	return 1;
 }
+
 /*
  ==========================================================
  C METHODS
