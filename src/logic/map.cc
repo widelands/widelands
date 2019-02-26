@@ -257,7 +257,6 @@ void Map::recalc_default_resources(const World& world) {
 		}
 }
 
-
 std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 	std::set<FCoords> result;
 
@@ -265,8 +264,10 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 
 	ScopedTimer timer("Calculating valuable fields took %ums");
 
-	// If we don't have the given coordinates yet, walk the map and collect conquerable fields, initialized with the given radius around the coordinates
-	const auto walk_starting_coords = [this, &result, &coords_to_check](const Coords& coords, int radius) {
+	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
+	// initialized with the given radius around the coordinates
+	const auto walk_starting_coords = [this, &result, &coords_to_check](
+	                                     const Coords& coords, int radius) {
 		FCoords fcoords = get_fcoords(coords);
 
 		// We already have these coordinates
@@ -278,8 +279,10 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 		result.insert(fcoords);
 
 		// Add outer land coordinates around the starting field for the given radius
-		std::unique_ptr<Widelands::HollowArea<>> hollow_area(new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), 2));
-		std::unique_ptr<Widelands::MapHollowRegion<>> map_region(new Widelands::MapHollowRegion<>(*this, *hollow_area));
+		std::unique_ptr<Widelands::HollowArea<>> hollow_area(
+		   new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), 2));
+		std::unique_ptr<Widelands::MapHollowRegion<>> map_region(
+		   new Widelands::MapHollowRegion<>(*this, *hollow_area));
 		do {
 			coords_to_check.insert(get_fcoords(map_region->location()));
 		} while (map_region->advance(*this));
@@ -305,21 +308,23 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 
 			// Check region and add walkable fields
 			if (radius > 0) {
-				hollow_area.reset(new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), inner_radius));
+				hollow_area.reset(
+				   new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), inner_radius));
 				map_region.reset(new Widelands::MapHollowRegion<>(*this, *hollow_area));
 				do {
 					fcoords = get_fcoords(map_region->location());
 
-					// We do the caps check first, because the comparison is faster than the container check
-					if ((fcoords.field->maxcaps() & MOVECAPS_WALK) &&
-						(result.count(fcoords) == 0)) {
+					// We do the caps check first, because the comparison is faster than the container
+					// check
+					if ((fcoords.field->maxcaps() & MOVECAPS_WALK) && (result.count(fcoords) == 0)) {
 						result.insert(fcoords);
 						coords_to_check.insert(fcoords);
 					}
 				} while (map_region->advance(*this));
 			}
 
-			// These coordinates are done. We do not keep track of visited coordinates that didn't make the result, because the container insert operations are more expensive than the checks
+			// These coordinates are done. We do not keep track of visited coordinates that didn't make
+			// the result, because the container insert operations are more expensive than the checks
 			coords_to_check.erase(coords_it);
 		}
 	};
@@ -1157,7 +1162,8 @@ Important: flag buildability has already been checked in the first pass.
 */
 void Map::recalc_nodecaps_pass2(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass2(world, f, true);
-	f.field->max_caps = calc_nodecaps_pass2(world, f, false, static_cast<NodeCaps>(f.field->max_caps));
+	f.field->max_caps =
+	   calc_nodecaps_pass2(world, f, false, static_cast<NodeCaps>(f.field->max_caps));
 }
 
 NodeCaps Map::calc_nodecaps_pass2(const World& world,

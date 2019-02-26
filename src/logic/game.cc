@@ -318,7 +318,8 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 		std::unique_ptr<LuaTable> table(lua().run_script(win_condition_script_));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
-		// We run the actual win condition from InteractiveGameBase::start() to prevent a pure black screen while the game is being started - we can display a message there.
+		// We run the actual win condition from InteractiveGameBase::start() to prevent a pure black
+		// screen while the game is being started - we can display a message there.
 	} else {
 		win_condition_displayname_ = "Scenario";
 	}

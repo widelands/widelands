@@ -72,7 +72,11 @@ namespace LuaMaps {
 namespace {
 
 // Checks if a field has the desired caps
-bool check_has_caps(lua_State* L, const std::string& query, const FCoords& f, const NodeCaps& caps, const Widelands::Map& map) {
+bool check_has_caps(lua_State* L,
+                    const std::string& query,
+                    const FCoords& f,
+                    const NodeCaps& caps,
+                    const Widelands::Map& map) {
 	if (query == "walkable") {
 		return caps & MOVECAPS_WALK;
 	}
@@ -1237,7 +1241,8 @@ int LuaMap::get_number_of_port_spaces(lua_State* L) {
 
       (RO) A list of coordinates for all port spaces on the map.
 
-      :returns: A table of port space coordinates, like this: ``{{x = 0, y = 2}, {x = 54, y = 23}}``.
+      :returns: A table of port space coordinates,
+      like this: ``{{x = 0, y = 2}, {x = 54, y = 23}}``.
 */
 int LuaMap::get_port_spaces(lua_State* L) {
 	lua_newtable(L);
@@ -1294,7 +1299,6 @@ int LuaMap::get_player_slots(lua_State* L) {
 	return 1;
 }
 
-
 /* RST
    .. attribute:: conquerable_fields
 
@@ -1305,14 +1309,14 @@ int LuaMap::get_player_slots(lua_State* L) {
 int LuaMap::get_conquerable_fields(lua_State* L) {
 	lua_newtable(L);
 	int counter = 0;
-	for (const Widelands::FCoords& fcoords : get_egbase(L).map().calculate_all_conquerable_fields()) {
+	for (const Widelands::FCoords& fcoords :
+	     get_egbase(L).map().calculate_all_conquerable_fields()) {
 		lua_pushinteger(L, ++counter);
 		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fcoords));
 		lua_settable(L, -3);
 	}
 	return 1;
 }
-
 
 /* RST
    .. attribute:: terrestrial_fields
@@ -1322,7 +1326,8 @@ int LuaMap::get_conquerable_fields(lua_State* L) {
 int LuaMap::get_terrestrial_fields(lua_State* L) {
 	lua_newtable(L);
 	int counter = 0;
-	for (const Widelands::FCoords& fcoords : get_egbase(L).map().calculate_all_fields_excluding_caps(MOVECAPS_SWIM)) {
+	for (const Widelands::FCoords& fcoords :
+	     get_egbase(L).map().calculate_all_fields_excluding_caps(MOVECAPS_SWIM)) {
 		lua_pushinteger(L, ++counter);
 		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fcoords));
 		lua_settable(L, -3);
@@ -3900,7 +3905,6 @@ int LuaMapObject::get___hash(lua_State* L) {
 	lua_pushuint32(L, get(L, get_egbase(L))->serial());
 	return 1;
 }
-
 
 /* RST
    .. attribute:: serial
@@ -6583,8 +6587,8 @@ int LuaField::has_caps(lua_State* L) {
 /* RST
    .. method:: has_max_caps(capname)
 
-      Returns :const:`true` if the field has this maximum caps (not taking immovables into account) associated
-      with it, otherwise returns false.
+      Returns :const:`true` if the field has this maximum caps (not taking immovables into account)
+      associated with it, otherwise returns false.
 
       :arg capname: can be either of
 
@@ -6600,7 +6604,8 @@ int LuaField::has_caps(lua_State* L) {
 int LuaField::has_max_caps(lua_State* L) {
 	const FCoords& f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
-	lua_pushboolean(L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
+	lua_pushboolean(
+	   L, check_has_caps(L, luaL_checkstring(L, 2), f, f.field->maxcaps(), get_egbase(L).map()));
 	return 1;
 }
 /*
