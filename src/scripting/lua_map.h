@@ -88,9 +88,12 @@ public:
 	 */
 	int get_allows_seafaring(lua_State*);
 	int get_number_of_port_spaces(lua_State*);
+	int get_port_spaces(lua_State*);
 	int get_width(lua_State*);
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
+	int get_conquerable_fields(lua_State*);
+	int get_terrestrial_fields(lua_State*);
 
 	/*
 	 * Lua methods
@@ -1424,6 +1427,7 @@ public:
 	int __eq(lua_State* L);
 	int region(lua_State* L);
 	int has_caps(lua_State*);
+	int has_max_caps(lua_State*);
 
 	/*
 	 * C methods
