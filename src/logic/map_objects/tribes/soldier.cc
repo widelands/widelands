@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,8 +63,8 @@ constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 
 SoldierDescr::SoldierDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const Tribes& tribes)
-   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, tribes),
+                           const EditorGameBase& egbase)
+   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, egbase),
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),
@@ -439,7 +439,6 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
  * Draw this soldier. This basically draws him as a worker, but add health points
  */
 void Soldier::draw(const EditorGameBase& game,
-                   const TextToDraw&,
                    const Vector2f& field_on_dst,
                    const float scale,
                    RenderTarget* dst) const {
@@ -524,7 +523,7 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 	dst->fill_rect(energy_complement, complement_color);
 
 	const auto draw_level_image = [icon_size, scale, &draw_position, dst](
-	   const Vector2i& offset, const Image* image) {
+	                                 const Vector2i& offset, const Image* image) {
 		dst->blitrect_scale(
 		   Rectf(draw_position + offset * icon_size * scale, icon_size * scale, icon_size * scale),
 		   image, Recti(0, 0, icon_size, icon_size), 1.f, BlendMode::UseAlpha);
@@ -622,7 +621,7 @@ bool Soldier::can_be_challenged() {
 	if (!battle_) {
 		return true;
 	}
-	return !battle_->locked(dynamic_cast<Game&>(owner().egbase()));
+	return !battle_->locked(dynamic_cast<Game&>(get_owner()->egbase()));
 }
 
 /**
@@ -1345,12 +1344,12 @@ void Soldier::battle_update(Game& game, State&) {
 					    (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no")) %
 					    descr().descname().c_str())
 					      .str();
-					owner().add_message(
+					get_owner()->add_message(
 					   game, std::unique_ptr<Message>(
 					            new Message(Message::Type::kGameLogic, game.get_gametime(),
 					                        descr().descname(), "images/ui_basic/menu_help.png",
 					                        _("Logic error"), messagetext, get_position(), serial_)));
-					opponent.owner().add_message(
+					opponent.get_owner()->add_message(
 					   game, std::unique_ptr<Message>(new Message(
 					            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
 					            "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
@@ -1403,8 +1402,9 @@ void Soldier::start_task_die(Game& game) {
 	// Dead soldier is not owned by a location
 	set_location(nullptr);
 
-	start_task_idle(
-	   game, descr().get_animation(combat_walking_ == CD_COMBAT_W ? "die_w" : "die_e"), 1000);
+	const uint32_t anim =
+	   descr().get_rand_anim(game, combat_walking_ == CD_COMBAT_W ? "die_w" : "die_e");
+	start_task_idle(game, anim, 1000);
 }
 
 void Soldier::die_update(Game& game, State& state) {
@@ -1545,7 +1545,7 @@ void Soldier::send_space_signals(Game& game) {
 	}
 }
 
-void Soldier::log_general_info(const EditorGameBase& egbase) {
+void Soldier::log_general_info(const EditorGameBase& egbase) const {
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");
 	molog("Levels: %d/%d/%d/%d\n", health_level_, attack_level_, defense_level_, evade_level_);
@@ -1669,4 +1669,4 @@ void Soldier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(battle_));
 }
-}
+}  // namespace Widelands

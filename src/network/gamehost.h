@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include "logic/player_end_result.h"
 #include "network/nethost_interface.h"
 #include "network/network.h"
+#include "ui_basic/unique_window.h"
 
 struct ChatMessage;
 struct GameHostImpl;
@@ -39,7 +40,7 @@ struct Client;
  */
 struct GameHost : public GameController {
 	GameHost(const std::string& playername, bool internet = false);
-	virtual ~GameHost();
+	~GameHost() override;
 
 	void run();
 	const std::string& get_local_playername() const;
@@ -78,6 +79,7 @@ struct GameHost : public GameController {
 	void set_player_shared(PlayerSlot number, Widelands::PlayerNumber shared);
 	void switch_to_player(uint32_t user, uint8_t number);
 	void set_win_condition_script(const std::string& wc);
+	void replace_client_with_ai(uint8_t playernumber, const std::string& ai);
 
 	// just visible stuff for the select mapmenu
 	void set_multiplayer_game_settings();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #define WL_NETWORK_NETWORK_LAN_PROMOTION_H
 
 #include <list>
+#include <memory>
 #include <set>
 
 #include "network/network.h"
@@ -41,6 +42,10 @@ struct NetGameInfo {
 };
 
 struct NetOpenGame {
+	NetOpenGame() = default;
+	explicit NetOpenGame(NetAddress init_address, NetGameInfo init_info)
+	   : address(init_address), info(init_info) {
+	}
 	NetAddress address;
 	NetGameInfo info;
 };
@@ -171,12 +176,12 @@ struct LanGameFinder : LanBase {
 	void reset();
 	void run();
 
-	void set_callback(void (*)(int32_t, NetOpenGame const*, void*), void*);
+	void set_callback(void (*)(int32_t, const NetOpenGame* const, void*), void*);
 
 private:
-	std::list<NetOpenGame*> opengames;
+	std::list<std::unique_ptr<NetOpenGame>> opengames;
 
-	void (*callback)(int32_t, NetOpenGame const*, void*);
+	void (*callback)(int32_t, const NetOpenGame* const, void*);
 	void* userdata;
 };
 

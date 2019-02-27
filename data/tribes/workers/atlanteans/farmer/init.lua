@@ -41,21 +41,21 @@ tribes:new_worker_type {
 
    programs = {
       plant = {
-         "findspace size:any radius:2",
-         "walk coords",
-         "animation planting 4000",
-         "plant tribe:cornfield_tiny",
-         "animation planting 4000",
+         "findspace=size:any radius:2",
+         "walk=coords",
+         "animate=planting 4000",
+         "plant=attrib:seed_corn",
+         "animate=planting 4000",
          "return"
       },
       harvest = {
-         "findobject attrib:ripe_corn radius:2",
-         "walk object",
-         "play_sound sound/farm scythe 220",
-         "animation harvesting 10000",
-         "object harvest",
-         "animation gathering 4000",
-         "createware corn",
+         "findobject=attrib:ripe_corn radius:2",
+         "walk=object",
+         "playsound=sound/farm scythe 220",
+         "animate=harvesting 10000",
+         "callobject=harvest",
+         "animate=gathering 4000",
+         "createware=corn",
          "return"
       }
    },

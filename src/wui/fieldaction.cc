@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -147,7 +147,7 @@ public:
 	FieldActionWindow(InteractiveBase* ibase,
 	                  Widelands::Player* plr,
 	                  UI::UniqueWindow::Registry* registry);
-	~FieldActionWindow();
+	~FieldActionWindow() override;
 
 	InteractiveBase& ibase() {
 		return dynamic_cast<InteractiveBase&>(*get_parent());
@@ -213,9 +213,9 @@ static const char* const pic_tab_buildhouse[] = {"images/wui/fieldaction/menu_ta
                                                  "images/wui/fieldaction/menu_tab_buildmedium.png",
                                                  "images/wui/fieldaction/menu_tab_buildbig.png",
                                                  "images/wui/fieldaction/menu_tab_buildport.png"};
-static const std::string tooltip_tab_build[] = {
-   _("Build small building"), _("Build medium building"), _("Build large building"),
-   _("Build port building")};
+static const std::string tooltip_tab_build[] = {_("Build small building"),
+                                                _("Build medium building"), _("Build big building"),
+                                                _("Build port building")};
 static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
 
 static const char* const pic_tab_buildmine = "images/wui/fieldaction/menu_tab_buildmine.png";
@@ -246,7 +246,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
      player_(plr),
      map_(ib->egbase().map()),
      node_(ib->get_sel_pos().node, &map_[ib->get_sel_pos().node]),
-     tabpanel_(this, g_gr->images().get("images/ui_basic/but1.png")),
+     tabpanel_(this, UI::TabPanelStyle::kWuiDark),
      fastclick_(true),
      best_tab_(0),
      showing_workarea_preview_(false),
@@ -257,7 +257,7 @@ FieldActionWindow::FieldActionWindow(InteractiveBase* const ib,
 
 FieldActionWindow::~FieldActionWindow() {
 	if (showing_workarea_preview_)
-		ibase().hide_work_area(node_);
+		ibase().hide_workarea(node_);
 	ibase().set_sel_freeze(false);
 	delete attack_box_;
 }
@@ -346,9 +346,8 @@ void FieldActionWindow::add_buttons_auto() {
 				add_button(buildbox, "destroy_road", pic_remroad, &FieldActionWindow::act_removeroad,
 				           _("Destroy a road"));
 		}
-	} else if (player_ &&
-	           1 < player_->vision(
-	                  Widelands::Map::get_index(node_, ibase().egbase().map().get_width())))
+	} else if (player_ && 1 < player_->vision(Widelands::Map::get_index(
+	                             node_, ibase().egbase().map().get_width())))
 		add_buttons_attack();
 
 	//  Watch actions, only when game (no use in editor) same for statistics.
@@ -416,11 +415,13 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps) {
 		//  Some building types cannot be built (i.e. construction site) and not
 		//  allowed buildings.
 		if (dynamic_cast<const Game*>(&ibase().egbase())) {
-			if (!building_descr->is_buildable() || !player_->is_building_type_allowed(building_index))
+			if (!building_descr->is_buildable() ||
+			    !player_->is_building_type_allowed(building_index)) {
 				continue;
-			if (building_descr->needs_seafaring() &&
-			    ibase().egbase().map().get_port_spaces().size() < 2)
+			}
+			if (building_descr->needs_seafaring() && !ibase().egbase().map().allows_seafaring()) {
 				continue;
+			}
 		} else if (!building_descr->is_buildable() && !building_descr->is_enhanced())
 			continue;
 
@@ -508,9 +509,8 @@ UI::Button& FieldActionWindow::add_button(UI::Box* const box,
                                           void (FieldActionWindow::*fn)(),
                                           const std::string& tooltip_text,
                                           bool repeating) {
-	UI::Button& button =
-	   *new UI::Button(box, name, 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but2.png"),
-	                   g_gr->images().get(picname), tooltip_text);
+	UI::Button& button = *new UI::Button(box, name, 0, 0, 34, 34, UI::ButtonStyle::kWuiPrimary,
+	                                     g_gr->images().get(picname), tooltip_text);
 	button.sigclicked.connect(boost::bind(fn, this));
 	button.set_repeating(repeating);
 	box->add(&button);
@@ -683,16 +683,16 @@ void FieldActionWindow::act_build(Widelands::DescriptionIndex idx) {
 
 void FieldActionWindow::building_icon_mouse_out(Widelands::DescriptionIndex) {
 	if (showing_workarea_preview_) {
-		ibase().hide_work_area(node_);
+		ibase().hide_workarea(node_);
 		showing_workarea_preview_ = false;
 	}
 }
 
 void FieldActionWindow::building_icon_mouse_in(const Widelands::DescriptionIndex idx) {
-	if (ibase().show_workarea_preview_ && !showing_workarea_preview_) {
+	if (!showing_workarea_preview_) {
 		const WorkareaInfo& workarea_info =
 		   player_->tribe().get_building_descr(Widelands::DescriptionIndex(idx))->workarea_info();
-		ibase().show_work_area(workarea_info, node_);
+		ibase().show_workarea(workarea_info, node_);
 		showing_workarea_preview_ = true;
 	}
 }

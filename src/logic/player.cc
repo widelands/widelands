@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,9 @@
 #include <cassert>
 #include <memory>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
 #include <boost/signals2.hpp>
 
 #include "base/i18n.h"
@@ -47,7 +49,7 @@
 #include "logic/map_objects/tribes/soldier.h"
 #include "logic/map_objects/tribes/soldiercontrol.h"
 #include "logic/map_objects/tribes/trainingsite.h"
-#include "logic/map_objects/tribes/tribe_descr.h"
+#include "logic/map_objects/tribes/tribe_basic_info.h"
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
@@ -84,7 +86,7 @@ void terraform_for_building(Widelands::EditorGameBase& egbase,
 		}
 	}
 }
-}
+}  // namespace
 
 namespace Widelands {
 
@@ -133,6 +135,7 @@ Player::Player(EditorGameBase& the_egbase,
      msites_defeated_(0),
      civil_blds_lost_(0),
      civil_blds_defeated_(0),
+     ship_name_counter_(0),
      fields_(nullptr),
      allowed_worker_types_(the_egbase.tribes().nrworkers(), true),
      allowed_building_types_(the_egbase.tribes().nrbuildings(), true),
@@ -167,15 +170,15 @@ Player::Player(EditorGameBase& the_egbase,
 			   if (upcast(Building, building, note.pi))
 				   update_building_statistics(*building, note.ownership);
 		   }
-		});
+	   });
 
 	// Subscribe to NoteFieldTerrainChanged.
 	field_terrain_changed_subscriber_ = Notifications::subscribe<NoteFieldTerrainChanged>(
 	   [this](const NoteFieldTerrainChanged& note) {
 		   if (vision(note.map_index) > 1) {
-			   rediscover_node(egbase().map(), egbase().map()[0], note.fc);
+			   rediscover_node(egbase().map(), note.fc);
 		   }
-		});
+	   });
 
 	// Populating remaining_shipnames vector
 	for (const auto& shipname : tribe_descr.get_ship_names()) {
@@ -190,7 +193,7 @@ Player::~Player() {
 void Player::create_default_infrastructure() {
 	const Map& map = egbase().map();
 	if (map.get_starting_pos(player_number_)) {
-		const TribeBasicInfo::Initialization& initialization =
+		const Widelands::TribeBasicInfo::Initialization& initialization =
 		   tribe().initialization(initialization_index_);
 
 		Game& game = dynamic_cast<Game&>(egbase());
@@ -324,7 +327,7 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 }
 
 MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, bool const popup) {
-	MessageId id = messages().add_message(std::move(new_message));
+	MessageId id = get_messages()->add_message(std::move(new_message));
 	const Message* message = messages()[id];
 
 	// MapObject connection
@@ -354,6 +357,7 @@ MessageId Player::add_message_with_timeout(Game& game,
 	Coords const position = message->position();
 	for (const auto& tmp_message : messages()) {
 		if (tmp_message.second->type() == message->type() &&
+		    tmp_message.second->sub_type() == message->sub_type() &&
 		    gametime < tmp_message.second->sent() + timeout &&
 		    map.calc_distance(tmp_message.second->position(), position) <= radius) {
 			return MessageId::null();
@@ -370,6 +374,19 @@ void Player::message_object_removed(MessageId message_id) const {
 	}
 
 	game->cmdqueue().enqueue(new CmdDeleteMessage(game->get_gametime(), player_number_, message_id));
+}
+
+const std::set<Serial>& Player::ships() const {
+	return ships_;
+}
+void Player::add_ship(Serial ship) {
+	ships_.insert(ship);
+}
+void Player::remove_ship(Serial ship) {
+	auto it = ships_.find(ship);
+	if (it != ships_.end()) {
+		ships_.erase(it);
+	}
 }
 
 /*
@@ -410,7 +427,7 @@ Flag* Player::build_flag(const Coords& c) {
 	int32_t buildcaps = get_buildcaps(egbase().map().get_fcoords(c));
 
 	if (buildcaps & BUILDCAPS_FLAG)
-		return new Flag(egbase(), *this, c);
+		return new Flag(egbase(), this, c);
 	return nullptr;
 }
 
@@ -419,7 +436,7 @@ Flag& Player::force_flag(const FCoords& c) {
 	const Map& map = egbase().map();
 	if (BaseImmovable* const immovable = c.field->get_immovable()) {
 		if (upcast(Flag, existing_flag, immovable)) {
-			if (&existing_flag->owner() == this)
+			if (existing_flag->get_owner() == this)
 				return *existing_flag;
 		} else if (!dynamic_cast<Road const*>(immovable))  //  A road is OK.
 			immovable->remove(egbase());                    //  Make room for the flag.
@@ -433,7 +450,7 @@ Flag& Player::force_flag(const FCoords& c) {
 	//  Make sure that the player owns the area around.
 	egbase().conquer_area_no_building(
 	   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
-	return *new Flag(egbase(), *this, c);
+	return *new Flag(egbase(), this, c);
 }
 
 /*
@@ -486,8 +503,8 @@ Road& Player::force_road(const Path& path) {
 		log("Clearing for road at (%i, %i)\n", c.x, c.y);
 
 		//  Make sure that the player owns the area around.
-		dynamic_cast<Game&>(egbase())
-		   .conquer_area_no_building(PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
+		dynamic_cast<Game&>(egbase()).conquer_area_no_building(
+		   PlayerArea<Area<FCoords>>(player_number(), Area<FCoords>(c, 1)));
 
 		if (BaseImmovable* const immovable = c.field->get_immovable()) {
 			assert(immovable != &start);
@@ -508,7 +525,7 @@ Building& Player::force_building(Coords const location,
 	map.get_brn(map.get_fcoords(location), &flag_loc);
 	force_flag(flag_loc);
 
-	return descr->create(egbase(), *this, map.get_fcoords(location), false, false, former_buildings);
+	return descr->create(egbase(), this, map.get_fcoords(location), false, false, former_buildings);
 }
 
 Building& Player::force_csite(Coords const location,
@@ -574,7 +591,7 @@ Building* Player::build(Coords c,
 	if (constructionsite)
 		return &egbase().warp_constructionsite(c, player_number_, idx, false, former_buildings);
 	else {
-		return &descr->create(egbase(), *this, c, false, false, former_buildings);
+		return &descr->create(egbase(), this, c, false, false, former_buildings);
 	}
 }
 
@@ -669,13 +686,13 @@ void Player::bulldoze(PlayerImmovable& imm, bool const recurse) {
 }
 
 void Player::start_stop_building(PlayerImmovable& imm) {
-	if (&imm.owner() == this)
+	if (imm.get_owner() == this)
 		if (upcast(ProductionSite, productionsite, &imm))
 			productionsite->set_stopped(!productionsite->is_stopped());
 }
 
 void Player::start_or_cancel_expedition(Warehouse& wh) {
-	if (&wh.owner() == this)
+	if (wh.get_owner() == this)
 		if (PortDock* pd = wh.get_portdock()) {
 			if (pd->expedition_started()) {
 				upcast(Game, game, &egbase());
@@ -687,7 +704,7 @@ void Player::start_or_cancel_expedition(Warehouse& wh) {
 
 void Player::military_site_set_soldier_preference(PlayerImmovable& imm,
                                                   SoldierPreference soldier_preference) {
-	if (&imm.owner() == this)
+	if (imm.get_owner() == this)
 		if (upcast(MilitarySite, milsite, &imm))
 			milsite->set_soldier_preference(soldier_preference);
 }
@@ -709,8 +726,9 @@ void Player::dismantle_building(Building* building) {
 }
 void Player::enhance_or_dismantle(Building* building,
                                   DescriptionIndex const index_of_new_building) {
-	if (&building->owner() == this && (index_of_new_building == INVALID_INDEX ||
-	                                   building->descr().enhancement() == index_of_new_building)) {
+	if (building->get_owner() == this &&
+	    (index_of_new_building == INVALID_INDEX ||
+	     building->descr().enhancement() == index_of_new_building)) {
 		Building::FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 
@@ -725,8 +743,10 @@ void Player::enhance_or_dismantle(Building* building,
 			workers = building->get_workers();
 		}
 
-		// Register whether the window was open
-		Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
+		if (index_of_new_building != INVALID_INDEX) {
+			// For enhancing, register whether the window was open
+			Notifications::publish(NoteBuilding(building->serial(), NoteBuilding::Action::kStartWarp));
+		}
 		building->remove(egbase());  //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
 		//  pointer.
@@ -758,7 +778,7 @@ Perform an action on the given flag.
 ===============
 */
 void Player::flagaction(Flag& flag) {
-	if (&flag.owner() == this) {  //  Additional security check.
+	if (flag.get_owner() == this) {  //  Additional security check.
 		flag.add_flag_job(dynamic_cast<Game&>(egbase()), tribe().geologist(), "expedition");
 	}
 }
@@ -782,36 +802,48 @@ void Player::allow_building_type(DescriptionIndex const i, bool const allow) {
 /*
  * Economy stuff below
  */
-void Player::add_economy(Economy& economy) {
-	if (!has_economy(economy))
-		economies_.push_back(&economy);
+Economy* Player::create_economy() {
+	std::unique_ptr<Economy> eco(new Economy(*this));
+	const Serial serial = eco->serial();
+
+	assert(economies_.count(serial) == 0);
+	economies_.emplace(std::make_pair(serial, std::move(eco)));
+	assert(economies_.at(serial)->serial() == serial);
+	assert(economies_.count(serial) == 1);
+
+	return get_economy(serial);
 }
 
-void Player::remove_economy(Economy& economy) {
-	for (std::vector<Economy*>::iterator economy_iter = economies_.begin();
-	     economy_iter != economies_.end(); ++economy_iter)
-		if (*economy_iter == &economy) {
-			economies_.erase(economy_iter);
-			return;
-		}
+Economy* Player::create_economy(Serial serial) {
+	std::unique_ptr<Economy> eco(new Economy(*this, serial));
+
+	assert(economies_.count(serial) == 0);
+	economies_.emplace(std::make_pair(serial, std::move(eco)));
+	assert(economies_.at(serial)->serial() == serial);
+	assert(economies_.count(serial) == 1);
+
+	return get_economy(serial);
 }
 
-bool Player::has_economy(Economy& economy) const {
-	for (Economy* temp_economy : economies_) {
-		if (temp_economy == &economy) {
-			return true;
-		}
+void Player::remove_economy(Serial serial) {
+	assert(has_economy(serial));
+	economies_.erase(economies_.find(serial));
+	assert(!has_economy(serial));
+}
+
+const std::map<Serial, std::unique_ptr<Economy>>& Player::economies() const {
+	return economies_;
+}
+
+Economy* Player::get_economy(Widelands::Serial serial) const {
+	if (economies_.count(serial) == 0) {
+		return nullptr;
 	}
-	return false;
+	return economies_.at(serial).get();
 }
 
-Player::Economies::size_type Player::get_economy_number(Economy const* const economy) const {
-	Economies::const_iterator const economies_end = economies_.end(),
-	                                economies_begin = economies_.begin();
-	for (Economies::const_iterator it = economies_begin; it != economies_end; ++it)
-		if (*it == economy)
-			return it - economies_begin;
-	NEVER_HERE();
+bool Player::has_economy(Widelands::Serial serial) const {
+	return economies_.count(serial) != 0;
 }
 
 /************  Military stuff  **********/
@@ -835,7 +867,7 @@ Forces the drop of given soldier at given house
 ===========
 */
 void Player::drop_soldier(PlayerImmovable& imm, Soldier& soldier) {
-	if (&imm.owner() != this)
+	if (imm.get_owner() != this)
 		return;
 	if (soldier.descr().type() != MapObjectType::SOLDIER)
 		return;
@@ -923,16 +955,15 @@ void Player::enemyflagaction(Flag& flag, PlayerNumber const attacker, uint32_t c
 	}
 }
 
-void Player::rediscover_node(const Map& map,
-                             const Widelands::Field& first_map_field,
-                             const FCoords& f) {
+void Player::rediscover_node(const Map& map, const FCoords& f) {
 
 	assert(0 <= f.x);
 	assert(f.x < map.get_width());
 	assert(0 <= f.y);
 	assert(f.y < map.get_height());
-	assert(&map[0] <= f.field);
-	assert(f.field < &map[0] + map.max_index());
+	const Widelands::Field& first_map_field = map[0];
+	assert(&first_map_field <= f.field);
+	assert(f.field < &first_map_field + map.max_index());
 
 	Field& field = fields_[f.field - &first_map_field];
 
@@ -1031,16 +1062,14 @@ void Player::rediscover_node(const Map& map,
 	}
 }
 
-void Player::see_node(const Map& map,
-                      const Widelands::Field& first_map_field,
-                      const FCoords& f,
-                      Time const gametime,
-                      bool const forward) {
+/// Returns the resulting vision.
+Vision Player::see_node(const Map& map, const FCoords& f, Time const gametime, bool const forward) {
 	assert(0 <= f.x);
 	assert(f.x < map.get_width());
 	assert(0 <= f.y);
 	assert(f.y < map.get_height());
-	assert(&map[0] <= f.field);
+	const Widelands::Field& first_map_field = map[0];
+	assert(&first_map_field <= f.field);
 	assert(f.field < &first_map_field + map.max_index());
 
 	//  If this is not already a forwarded call, we should inform allied players
@@ -1049,31 +1078,34 @@ void Player::see_node(const Map& map,
 		update_team_players();
 	if (!forward && !team_player_.empty()) {
 		for (uint8_t j = 0; j < team_player_.size(); ++j)
-			team_player_[j]->see_node(map, first_map_field, f, gametime, true);
+			team_player_[j]->see_node(map, f, gametime, true);
 	}
 
 	Field& field = fields_[f.field - &first_map_field];
 	assert(fields_ <= &field);
 	assert(&field < fields_ + map.max_index());
-	Vision fvision = field.vision;
-	if (fvision == 0)
-		fvision = 1;
-	if (fvision == 1)
-		rediscover_node(map, first_map_field, f);
-	++fvision;
-	field.vision = fvision;
+
+	if (field.vision == 0) {
+		field.vision = 1;
+	}
+	if (field.vision == 1) {
+		rediscover_node(map, f);
+	}
+	return ++field.vision;
 }
 
 /// If 'mode' = UnseeMode::kUnexplore, fields will be marked as unexplored. Else, player no longer
-/// sees what's currently going on.
-void Player::unsee_node(MapIndex const i,
-                        Time const gametime,
-                        const UnseeNodeMode mode,
-                        bool const forward) {
+/// sees what's currently going on. Returns the vision that this node had before it was hidden.
+Vision Player::unsee_node(MapIndex const i,
+                          Time const gametime,
+                          const SeeUnseeNode mode,
+                          bool const forward) {
 	Field& field = fields_[i];
-	if ((mode == UnseeNodeMode::kUnsee && field.vision <= 1) ||
+	if ((mode == SeeUnseeNode::kUnsee && field.vision <= 1) ||
 	    field.vision < 1)  //  Already does not see this
-		return;
+		return field.vision;
+
+	const Vision original_vision = field.vision;
 
 	//  If this is not already a forwarded call, we should inform allied players
 	//  as well of this change.
@@ -1084,7 +1116,7 @@ void Player::unsee_node(MapIndex const i,
 			team_player_[j]->unsee_node(i, gametime, mode, true);
 	}
 
-	if (mode == UnseeNodeMode::kUnexplore) {
+	if (mode == SeeUnseeNode::kUnexplore) {
 		field.vision = 0;
 	} else {
 		--field.vision;
@@ -1092,6 +1124,40 @@ void Player::unsee_node(MapIndex const i,
 	}
 	if (field.vision < 2) {
 		field.time_node_last_unseen = gametime;
+	}
+	return original_vision;
+}
+
+void Player::hide_or_reveal_field(const uint32_t gametime,
+                                  const Coords& coords,
+                                  SeeUnseeNode mode) {
+	const Map& map = egbase().map();
+	FCoords fcoords = map.get_fcoords(coords);
+	const Widelands::MapIndex index = fcoords.field - &map[0];
+
+	switch (mode) {
+	// Reveal field
+	case SeeUnseeNode::kReveal: {
+		Widelands::Vision new_vision = see_node(map, fcoords, gametime);
+		// If the field was manually hidden, restore the original vision
+		if (hidden_fields_.count(index) == 1) {
+			auto iter = hidden_fields_.find(index);
+			Vision original_vision = iter->second;
+			while (new_vision < original_vision) {
+				new_vision = see_node(map, fcoords, gametime);
+			}
+			hidden_fields_.erase(iter);
+		}
+	} break;
+	// Hide field
+	case SeeUnseeNode::kUnsee:
+	case SeeUnseeNode::kUnexplore: {
+		const Widelands::Vision new_vision = unsee_node(index, gametime, mode);
+		// Remember the original vision so that we can unhide the fields again
+		if (hidden_fields_.count(index) != 1) {
+			hidden_fields_.insert(std::make_pair(index, new_vision));
+		}
+	} break;
 	}
 }
 
@@ -1106,11 +1172,8 @@ void Player::sample_statistics() {
 	// Calculate stocks
 	std::vector<uint32_t> stocks(egbase().tribes().nrwares());
 
-	const uint32_t nrecos = get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i) {
-		const std::vector<Widelands::Warehouse*>& warehouses = get_economy_by_number(i)->warehouses();
-
-		for (Widelands::Warehouse* warehouse : warehouses) {
+	for (const auto& economy : economies()) {
+		for (Widelands::Warehouse* warehouse : economy.second->warehouses()) {
 			const Widelands::WareList& wares = warehouse->get_wares();
 			for (size_t id = 0; id < stocks.size(); ++id) {
 				stocks[id] += wares.stock(DescriptionIndex(id));
@@ -1258,6 +1321,8 @@ const std::string& Player::get_ai() const {
  * Pick random name from remaining names (if any)
  */
 const std::string Player::pick_shipname() {
+	++ship_name_counter_;
+
 	if (!remaining_shipnames_.empty()) {
 		Game& game = dynamic_cast<Game&>(egbase());
 		assert(is_a(Game, &egbase()));
@@ -1268,7 +1333,7 @@ const std::string Player::pick_shipname() {
 		remaining_shipnames_.erase(it);
 		return new_name;
 	}
-	return "Ship";
+	return (boost::format(pgettext("shipname", "Ship %d")) % ship_name_counter_).str();
 }
 
 /**
@@ -1283,6 +1348,7 @@ void Player::read_remaining_shipnames(FileRead& fr) {
 	for (uint16_t i = 0; i < count; ++i) {
 		remaining_shipnames_.insert(fr.string());
 	}
+	ship_name_counter_ = fr.unsigned_32();
 }
 
 /**
@@ -1290,25 +1356,51 @@ void Player::read_remaining_shipnames(FileRead& fr) {
  *
  * \param fr source stream
  */
-void Player::read_statistics(FileRead& fr) {
+void Player::read_statistics(FileRead& fr, const uint16_t packet_version) {
 	uint16_t nr_wares = fr.unsigned_16();
-	uint16_t nr_entries = fr.unsigned_16();
+	size_t nr_entries = fr.unsigned_16();
+
+	// Stats are saved as a single string to reduce number of hard disk write operations
+	const auto parse_stats = [nr_entries](std::vector<std::vector<uint32_t>>* stats,
+	                                      const DescriptionIndex ware_index,
+	                                      const std::string& stats_string,
+	                                      const std::string& description) {
+		if (!stats_string.empty()) {
+			std::vector<std::string> stats_vector;
+			boost::split(stats_vector, stats_string, boost::is_any_of("|"));
+			if (stats_vector.size() != nr_entries) {
+				throw GameDataError("wrong number of %s statistics - expected %" PRIuS
+				                    " but got %" PRIuS,
+				                    description.c_str(), nr_entries, stats_vector.size());
+			}
+			for (size_t j = 0; j < nr_entries; ++j) {
+				stats->at(ware_index)[j] = static_cast<unsigned int>(atoi(stats_vector.at(j).c_str()));
+			}
+		} else if (nr_entries > 0) {
+			throw GameDataError("wrong number of %s statistics - expected %" PRIuS " but got 0",
+			                    description.c_str(), nr_entries);
+		}
+	};
 
 	for (uint32_t i = 0; i < current_produced_statistics_.size(); ++i)
 		ware_productions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		std::string name = fr.c_string();
-		DescriptionIndex idx = egbase().tribes().ware_index(name);
+		const std::string name = fr.c_string();
+		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u statistics: unknown ware name %s", player_number(), name.c_str());
 			continue;
 		}
 
 		current_produced_statistics_[idx] = fr.unsigned_32();
-
-		for (uint32_t j = 0; j < nr_entries; ++j)
-			ware_productions_[idx][j] = fr.unsigned_32();
+		if (packet_version < 22) {
+			for (uint32_t j = 0; j < nr_entries; ++j) {
+				ware_productions_[idx][j] = fr.unsigned_32();
+			}
+		} else {
+			parse_stats(&ware_productions_, idx, fr.c_string(), "produced");
+		}
 	}
 
 	// Read consumption statistics
@@ -1319,8 +1411,8 @@ void Player::read_statistics(FileRead& fr) {
 		ware_consumptions_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		std::string name = fr.c_string();
-		DescriptionIndex idx = egbase().tribes().ware_index(name);
+		const std::string name = fr.c_string();
+		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u consumption statistics: unknown ware name %s", player_number(),
 			    name.c_str());
@@ -1328,9 +1420,14 @@ void Player::read_statistics(FileRead& fr) {
 		}
 
 		current_consumed_statistics_[idx] = fr.unsigned_32();
-
-		for (uint32_t j = 0; j < nr_entries; ++j)
-			ware_consumptions_[idx][j] = fr.unsigned_32();
+		// TODO(GunChleoc): Get rid of this savegame compatibility code after build 21
+		if (packet_version < 22) {
+			for (uint32_t j = 0; j < nr_entries; ++j) {
+				ware_consumptions_[idx][j] = fr.unsigned_32();
+			}
+		} else {
+			parse_stats(&ware_consumptions_, idx, fr.c_string(), "consumed");
+		}
 	}
 
 	// Read stock statistics
@@ -1341,15 +1438,20 @@ void Player::read_statistics(FileRead& fr) {
 		ware_stocks_[i].resize(nr_entries);
 
 	for (uint16_t i = 0; i < nr_wares; ++i) {
-		std::string name = fr.c_string();
-		DescriptionIndex idx = egbase().tribes().ware_index(name);
+		const std::string name = fr.c_string();
+		const DescriptionIndex idx = egbase().tribes().ware_index(name);
 		if (!egbase().tribes().ware_exists(idx)) {
 			log("Player %u stock statistics: unknown ware name %s", player_number(), name.c_str());
 			continue;
 		}
 
-		for (uint32_t j = 0; j < nr_entries; ++j)
-			ware_stocks_[idx][j] = fr.unsigned_32();
+		if (packet_version < 22) {
+			for (uint32_t j = 0; j < nr_entries; ++j) {
+				ware_stocks_[idx][j] = fr.unsigned_32();
+			}
+		} else {
+			parse_stats(&ware_stocks_, idx, fr.c_string(), "stock");
+		}
 	}
 
 	// All statistics should have the same size
@@ -1361,49 +1463,65 @@ void Player::read_statistics(FileRead& fr) {
 }
 
 /**
- * Write remaining ship indexes to the give file
+ * Write remaining ship indexes to the given file
  */
 void Player::write_remaining_shipnames(FileWrite& fw) const {
 	fw.unsigned_16(remaining_shipnames_.size());
 	for (const auto& shipname : remaining_shipnames_) {
 		fw.string(shipname);
 	}
+	fw.unsigned_32(ship_name_counter_);
 }
 
 /**
- * Write statistics data to the give file
+ * Write statistics data to the given file
  */
 void Player::write_statistics(FileWrite& fw) const {
+	// Save stats as a single string to reduce number of hard disk write operations
+	const auto write_stats = [&fw](const std::vector<std::vector<uint32_t>>& stats,
+	                               const DescriptionIndex ware_index) {
+		std::ostringstream oss("");
+		const int sizem = stats[ware_index].size() - 1;
+		if (sizem >= 0) {
+			for (int i = 0; i < sizem; ++i) {
+				oss << stats[ware_index][i] << "|";
+			}
+			oss << stats[ware_index][sizem];
+		}
+		fw.c_string(oss.str());
+	};
+
+	const Tribes& tribes = egbase().tribes();
+	const std::set<DescriptionIndex>& tribe_wares = tribe().wares();
+	const size_t nr_wares = tribe_wares.size();
+
 	// Write produce statistics
-	fw.unsigned_16(current_produced_statistics_.size());
+	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_productions_[0].size());
 
-	for (uint8_t i = 0; i < current_produced_statistics_.size(); ++i) {
-		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
-		fw.unsigned_32(current_produced_statistics_[i]);
-		for (uint32_t j = 0; j < ware_productions_[i].size(); ++j)
-			fw.unsigned_32(ware_productions_[i][j]);
+	for (const DescriptionIndex ware_index : tribe_wares) {
+		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		fw.unsigned_32(current_produced_statistics_[ware_index]);
+		write_stats(ware_productions_, ware_index);
 	}
 
 	// Write consume statistics
-	fw.unsigned_16(current_consumed_statistics_.size());
+	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_consumptions_[0].size());
 
-	for (uint8_t i = 0; i < current_consumed_statistics_.size(); ++i) {
-		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
-		fw.unsigned_32(current_consumed_statistics_[i]);
-		for (uint32_t j = 0; j < ware_consumptions_[i].size(); ++j)
-			fw.unsigned_32(ware_consumptions_[i][j]);
+	for (const DescriptionIndex ware_index : tribe_wares) {
+		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		fw.unsigned_32(current_consumed_statistics_[ware_index]);
+		write_stats(ware_consumptions_, ware_index);
 	}
 
 	// Write stock statistics
-	fw.unsigned_16(ware_stocks_.size());
+	fw.unsigned_16(nr_wares);
 	fw.unsigned_16(ware_stocks_[0].size());
 
-	for (uint8_t i = 0; i < ware_stocks_.size(); ++i) {
-		fw.c_string(egbase().tribes().get_ware_descr(i)->name());
-		for (uint32_t j = 0; j < ware_stocks_[i].size(); ++j)
-			fw.unsigned_32(ware_stocks_[i][j]);
+	for (const DescriptionIndex ware_index : tribe_wares) {
+		fw.c_string(tribes.get_ware_descr(ware_index)->name());
+		write_stats(ware_stocks_, ware_index);
 	}
 }
-}
+}  // namespace Widelands

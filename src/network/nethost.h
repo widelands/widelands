@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,15 +42,20 @@ public:
 	/**
 	 * Closes the server.
 	 */
-	~NetHost();
+	~NetHost() override;
 
 	// Inherited from NetHostInterface
 	bool is_connected(ConnectionId id) const override;
 	void close(ConnectionId id) override;
 	bool try_accept(ConnectionId* new_id) override;
-	bool try_receive(ConnectionId id, RecvPacket* packet) override;
+	std::unique_ptr<RecvPacket> try_receive(ConnectionId id) override;
 	void send(ConnectionId id, const SendPacket& packet) override;
 	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) override;
+
+	/**
+	 * Stops listening for connections.
+	 */
+	void stop_listening();
 
 private:
 	/**
@@ -59,12 +64,6 @@ private:
 	 */
 	// Feel free to make this method public if you need it
 	bool is_listening() const;
-
-	/**
-	 * Stops listening for connections.
-	 */
-	// Feel free to make this method public if you need it
-	void stop_listening();
 
 	/**
 	 * Tries to listen on the given port.

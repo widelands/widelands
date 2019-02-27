@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,17 +35,14 @@
 #include "graphic/color.h"
 #include "graphic/image.h"
 #include "logic/cmd_queue.h"
-#include "logic/map_objects/draw_text.h"
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/tabpanel.h"
 
 class FileRead;
 class RenderTarget;
 struct DirAnimations;
-namespace UI {
-struct TabPanel;
-}
 
 namespace Widelands {
 
@@ -101,7 +98,8 @@ struct MapObjectDescr {
 
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
-	               const std::string& init_descname);
+	               const std::string& init_descname,
+	               const std::string& init_helptext_script);
 	MapObjectDescr(const MapObjectType init_type,
 	               const std::string& init_name,
 	               const std::string& init_descname,
@@ -115,29 +113,19 @@ struct MapObjectDescr {
 		return descname_;
 	}
 
+	const std::string& helptext_script() const {
+		return helptext_script_;
+	}
+
 	// Type of the MapObjectDescr.
 	MapObjectType type() const {
 		return type_;
 	}
 
-	struct AnimationNonexistent {};
-	uint32_t get_animation(char const* const anim) const {
-		std::map<std::string, uint32_t>::const_iterator it = anims_.find(anim);
-		if (it == anims_.end())
-			throw AnimationNonexistent();
-		return it->second;
-	}
-	uint32_t get_animation(const std::string& animname) const {
-		return get_animation(animname.c_str());
-	}
-
-	uint32_t main_animation() const {
-		return !anims_.empty() ? anims_.begin()->second : 0;
-	}
-
+	uint32_t get_animation(char const* const anim) const;
+	uint32_t get_animation(const std::string& animname) const;
+	uint32_t main_animation() const;
 	std::string get_animation_name(uint32_t) const;  ///< needed for save, debug
-	bool has_attribute(uint32_t) const;
-	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
 
 	bool is_animation_known(const std::string& name) const;
 	void add_animation(const std::string& name, uint32_t anim);
@@ -158,6 +146,9 @@ struct MapObjectDescr {
 	/// Returns the image fileneme for the menu image if the MapObject has one, is empty otherwise
 	const std::string& icon_filename() const;
 
+	bool has_attribute(uint32_t) const;
+	static uint32_t get_attribute_id(const std::string& name, bool add_if_not_exists = false);
+
 protected:
 	// Add all the special attributes to the attribute list. Only the 'allowed_special'
 	// attributes are allowed to appear - i.e. resi are fine for immovables.
@@ -176,6 +167,9 @@ private:
 	const MapObjectType type_;    /// Subclasses pick from the enum above
 	std::string const name_;      /// The name for internal reference
 	std::string const descname_;  /// A localized Descriptive name
+	/// The path and filename to the helptext script. Can be empty, but some subtypes like buildings,
+	/// wares and workers require it.
+	const std::string helptext_script_;
 	Attributes attributes_;
 	Anims anims_;
 	static uint32_t dyn_attribhigh_;  ///< highest attribute ID used
@@ -211,10 +205,10 @@ private:
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,
- * potentially set it up by calling basic functions like set_position(),
- * set_owner(), etc. and then call init(). After that, the object is supposed to
+ * potentially set it up by calling basic functions like set_position(), etc.
+ * and then call init(). After that, the object is supposed to
  * be fully created.
-*/
+ */
 
 /// If you find a better way to do this that doesn't cost a virtual function
 /// or additional member variable, go ahead
@@ -266,7 +260,7 @@ public:
 
 	/**
 	 * Is called right before the object will be removed from
-	 * the game. No conncetion is handled in this class.
+	 * the game. No connection is handled in this class.
 	 *
 	 * param serial : the object serial (cannot use param comment as this is a callback)
 	 */
@@ -307,10 +301,15 @@ public:
 	void set_logsink(LogSink*);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(const EditorGameBase&);
+	virtual void log_general_info(const EditorGameBase&) const;
 
 	Player* get_owner() const {
 		return owner_;
+	}
+
+	const Player& owner() const {
+		assert(get_owner());
+		return *owner_;
 	}
 
 	// Header bytes to distinguish between data packages for the different
@@ -330,7 +329,6 @@ public:
 		HeaderFleet = 11,
 	};
 
-public:
 	/**
 	 * Returns whether this immovable was reserved by a worker.
 	 */
@@ -340,6 +338,12 @@ public:
 	 * Change whether this immovable is marked as reserved by a worker.
 	 */
 	void set_reserved_by_worker(bool reserve);
+
+	enum class InfoStringType { kCensus, kStatistics, kTooltip };
+	/**
+	 * Returns a census, statistics or tooltip string to be shown for this object on the map
+	 */
+	virtual std::string info_string(InfoStringType);
 
 	/**
 	 * Static load functions of derived classes will return a pointer to
@@ -406,14 +410,6 @@ protected:
 	virtual bool init(EditorGameBase&);
 
 	virtual void cleanup(EditorGameBase&);
-
-	/// Draws census and statistics on screen
-	void do_draw_info(const TextToDraw& draw_text,
-	                  const std::string& census,
-	                  const std::string& statictics,
-	                  const Vector2f& field_on_dst,
-	                  const float scale,
-	                  RenderTarget* dst) const;
 
 #ifdef _WIN32
 	void molog(char const* fmt, ...) const __attribute__((format(gnu_printf, 2, 3)));
@@ -535,7 +531,7 @@ private:
 };
 
 template <class T> struct OPtr {
-	OPtr(T* const obj = 0) : m(obj) {
+	OPtr(T* const obj = nullptr) : m(obj) {
 	}
 
 	OPtr& operator=(T* const obj) {
@@ -607,6 +603,6 @@ private:
 	Serial obj_serial;
 	int32_t arg;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H

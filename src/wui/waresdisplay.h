@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ struct Textarea;
 namespace Widelands {
 class TribeDescr;
 struct WareList;
-}
+}  // namespace Widelands
 
 /**
  * Display wares or workers together with some string (typically a number)
@@ -51,8 +51,10 @@ public:
 	   const Widelands::TribeDescr&,
 	   Widelands::WareWorker type,
 	   bool selectable,
-	   boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
-	   bool horizontal = false);
+	   CLANG_DIAG_OFF("-Wunknown-pragmas") CLANG_DIAG_OFF("-Wzero-as-null-pointer-constant")
+	      boost::function<void(Widelands::DescriptionIndex, bool)> callback_function = 0,
+	   CLANG_DIAG_ON("-Wzero-as-null-pointer-constant")
+	      CLANG_DIAG_ON("-Wunknown-pragmas") bool horizontal = false);
 
 	bool
 	handle_mousemove(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
@@ -132,7 +134,7 @@ public:
 	             Widelands::WareWorker type,
 	             bool selectable);
 
-	virtual ~WaresDisplay();
+	~WaresDisplay() override;
 
 	void add_warelist(const Widelands::WareList&);
 	void remove_all_warelists();

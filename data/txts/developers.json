@@ -18,8 +18,8 @@
 			"entries":[
 				{
 					"subheading": "Graphics",
-					"members":[
-						"Chuck Wilder (chuckw)"
+					"translate":[
+						"vacant"
 					]
 				},
 				{
@@ -110,7 +110,12 @@
 						"Klaus Halfmann (Hasi50)",
 						"Philipp Klaus Krause (PkK)",
 						"Notabilis",
-						"Jukka Pakarinen"
+						"Jukka Pakarinen",
+						"Evgeny Kapun",
+						"ypopezios",
+						"Toni Förster (stonerl)",
+						"Arty",
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
@@ -146,7 +151,8 @@
 						"Astuur",
 						"Gerrit Familiegrosskopf (kingcreole)",
 						"Florian Angermeier (fraang)",
-						"DragonAtma"
+						"DragonAtma",
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
@@ -180,7 +186,8 @@
 						"Peter Schwanemann (Nasenbaer)",
 						"Stephan",
 						"Adam Piggott (_aD)",
-						"Stanisław Gackowski (Soeb)"
+						"Stanisław Gackowski (Soeb)",
+						"Tada"
 					]
 				}
 			]
@@ -209,7 +216,8 @@
 						"wl-zocker",
 						"king of nowhere",
 						"kaputtnik",
-						"Stephan Lutz (hessenfarmer)"
+						"Stephan Lutz (hessenfarmer)",
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
@@ -219,7 +227,7 @@
 			"image": "images/ui_basic/ls_wlmap.png",
 			"entries":[
 				{
-					"subheading": "Barbarian",
+					"subheading": "Barbarians",
 					"members":[
 						"Bastian Rapp",
 						"Alexander Kahl (wolfpac)",
@@ -234,10 +242,16 @@
 					]
 				},
 				{
-					"subheading": "Atlantean",
+					"subheading": "Atlanteans",
 					"members":[
 						"Holger Rapp (SirVer)",
 						"Peter Schwanemann (Nasenbaer)"
+					]
+				},
+				{
+					"subheading": "Frisians",
+					"members":[
+						"Benedikt Straub (Nordfriese)"
 					]
 				}
 			]
@@ -279,10 +293,12 @@
 				{
 					"subheading": "Mac OS X",
 					"members":[
+						"Holger Rapp (SirVer)",
 						"Philipp Engelhard",
 						"Pierre Salagnac (Tarou)",
 						"Wolf St. Kappesser",
-						"David Allwicher (aber)"
+						"David Allwicher (aber)",
+						"Toni Förster (stonerl)"
 					]
 				},
 				{
@@ -376,6 +392,9 @@
 					"members":[
 						"Matt Howe (mdhowe)",
 						"Samuel Tilly (eldamar)",
+						"WorldSavior"
+					],
+					"translate":[
 						"and many, many more (thank you for everything you've done)"
 					]
 				}

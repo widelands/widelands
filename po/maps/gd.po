@@ -1,16 +1,16 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# GunChleoc, 2015-2017
+# GunChleoc, 2015-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-10-09 18:20+0000\n"
-"PO-Revision-Date: 2017-10-09 19:25+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-09-10 06:56+0000\n"
+"PO-Revision-Date: 2018-09-10 12:39+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #: ../../data/campaigns/atl01.wmf/elemental:9
-#: ../../data/campaigns/campaigns.conf:100
+#: ../../data/campaigns/campaigns.conf:118
 msgid "From Nemesis to Genesis"
 msgstr "On aimhleas dhan ghineachas"
 
@@ -31,7 +31,7 @@ msgid ""
 msgstr "Às dèidh dol air tìr air eilean sonn faisg air Atlantas, tha na h-Atlantaich a tha air am fàgail a’ strì gus dachaigh ùr a stèidheachadh dhaibh fhèin."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
-#: ../../data/campaigns/campaigns.conf:67
+#: ../../data/campaigns/campaigns.conf:76
 msgid "A Place to Call Home"
 msgstr "Dachaigh ùr"
 
@@ -42,7 +42,7 @@ msgid ""
 msgstr "Ionnsaichidh tu mu thogalaichean saothrachaidh nas àirde sa chnàmh-sgeul seo, a’ gabhail a-steach na mèinnearachd."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
-#: ../../data/campaigns/campaigns.conf:72
+#: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
 msgstr "Seo ar dùthaich"
 
@@ -117,7 +117,7 @@ msgstr "Atlantaich"
 
 #: ../../data/campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr "Dùbhlanach. Bheir e eòlas air na h-Atlantaich dhut."
+msgstr "Dùbhlanach. Bheir e eòlas air na h-Atlantaich dhut"
 
 #: ../../data/campaigns/campaigns.conf:48
 msgid ""
@@ -128,31 +128,69 @@ msgid ""
 "time, but at a high cost: her humanity and soul."
 msgstr "Nuair a chaill an dia earbsa sna h-Atlantaich is e air an t-eilean aca a bhàthadh, bhuannaich strì boireannaich airson ceartais ’s cothrom eile dha a muinntir cliù mòr. On a stiùirich i corr nan Atlantach gu beatha ùr ann an tìr san aineolas, dh’fhàs Jundlina nas cumhachdaiche na neach sam bith eile ri a linn ach b’ e daor na phàigh i: a daonnachd ’s a h-anam."
 
-#: ../../data/campaigns/campaigns.conf:78
+#: ../../data/campaigns/campaigns.conf:52
+msgid "From Water to Ice"
+msgstr "On uisge dhan deigh"
+
+#: ../../data/campaigns/campaigns.conf:54
+msgid "Frisians"
+msgstr "Frìoslannaich"
+
+#: ../../data/campaigns/campaigns.conf:56
+msgid "For advanced players. Introduces the Frisians"
+msgstr "Do chluicheadairean adhartach. Bheir e eòlas air na Frìoslannaich dhut"
+
+#: ../../data/campaigns/campaigns.conf:57
+msgid ""
+"Living off the ocean is a constant struggle, and even more so for the "
+"inhabitants of the Frisian North Sea shore. Was the last storm flood, the "
+"most devastating one in human memory, really nothing more than yet another "
+"example for the hardships all Frisians have to face – or a sign from the "
+"gods that a tribe that only just settled here must seek out an entirely new "
+"home?"
+msgstr "’S e dùbhlan gun fhaochadh a th’ ann a bhith a’ faighinn beòlshlaint on chuan agus tha sin fìor do shluagh oirthir Cuan Tuathach nam Frìoslannach gu h-àraidh. Nach e a bha san tuil-ruadh mu dheireadh, seo am fear as miosa ann an cuimhne nan daoine, ach dùbhlan àbhaisteach eile ro na Frìoslannaich – no an e samhla o na diathan a bh’ ann gun robh aig treubh a bha dìreach air a thuineachadh an-seo ri dachaigh gu tur ùr a shireadh?"
+
+#: ../../data/campaigns/campaigns.conf:86
+#: ../../data/campaigns/campaigns.conf:111
+#: ../../data/campaigns/campaigns.conf:123
+#: ../../data/campaigns/campaigns.conf:139
+#: ../../data/campaigns/dummy.wmf/elemental:8
+msgid "Not yet implemented"
+msgstr "Chan eil seo ann fhathast"
+
+#: ../../data/campaigns/campaigns.conf:91
 #: ../../data/campaigns/emp01.wmf/elemental:7
 msgid "The Strands of Malac’ Mor"
 msgstr "Traighean Mhalac’ Mhòir"
 
-#: ../../data/campaigns/campaigns.conf:83
+#: ../../data/campaigns/campaigns.conf:96
 #: ../../data/campaigns/emp02.wmf/elemental:9
 msgid "An Outpost for Exile"
 msgstr "Tuineachadh nam fògarrach"
 
-#: ../../data/campaigns/campaigns.conf:88
+#: ../../data/campaigns/campaigns.conf:101
 msgid "Neptune’s Revenge"
 msgstr "Dìoghail Neaptuin"
 
-#: ../../data/campaigns/campaigns.conf:93
-#: ../../data/campaigns/campaigns.conf:105
-#: ../../data/campaigns/dummy.wmf/elemental:7
-msgid "Not yet implemented"
-msgstr "Chan eil seo ann fhathast"
+#: ../../data/campaigns/campaigns.conf:106
+#: ../../data/campaigns/emp04.wmf/elemental:8
+msgid "Surprise, Surprise!"
+msgstr "Cò shaoileadh?"
 
-#: ../../data/campaigns/dummy.wmf/elemental:9
+#: ../../data/campaigns/campaigns.conf:129
+#: ../../data/campaigns/fri01.wmf/elemental:8
+msgid "The Great Stormflood"
+msgstr "An tuil-ruadh"
+
+#: ../../data/campaigns/campaigns.conf:134
+msgid "Colder than Ice"
+msgstr "Nas fhuaire na an deigh"
+
+#: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
 msgstr "Gun urram"
 
-#: ../../data/campaigns/dummy.wmf/elemental:10
+#: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
 msgstr "Duilich, ach cha deach am mapa seo a phrògramachadh fhathast."
 
@@ -177,7 +215,39 @@ msgstr "Bha an long air a càradh mu dheireadh thall agus lean Lutius ’s a chu
 msgid ""
 "On their way home to defend the Empire, the crew of Lutius was surprised by "
 "the will of the gods."
-msgstr ""
+msgstr "Le toil nan diathan, thàinig cnap-starra eile ann an rathad sgioba Lutius mus do thill iad dhachaigh gus an Impireachd a dhìon."
+
+#: ../../data/campaigns/emp04.wmf/elemental:10
+msgid ""
+"After returning home, Lutius and his crew are faced with an economy in "
+"shambles. Resolving the bottlenecks in the economy will be of utmost "
+"importance to reinstate the glory of the empire."
+msgstr "Às dèid tilleadh dhachaigh, tha dùbhlan ro Lutius agus an sgioba aige on a tha an eaconamaidh gu tur briste. Feumaidh iad na tha cearr air an eaconamaidh a chàradh gu h-èiginneach mus coisinn an impireachd cliù ’s glòir a-rithist."
+
+#: ../../data/campaigns/fri01.wmf/elemental:10
+msgid ""
+"In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian"
+" Islands was disrupted by one of the greatest storm floods in human memory: "
+"Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
+" a sign from the Gods that the Frisian community on the island of Langeness "
+"is not wanted here?"
+msgstr "Sa bhliadhna 1362, bhris an tuile as miosa a-riamh a-steach air beatha sìtheil muinntir nan Eileanan Frìoslannach a Tuath: Sin tuile Naoimh Mharcellus. Nach e ach tuile àbhaisteach eile a th’ ann no an e samhla o na diathan a th’ ann nach eil coimhearsnachd nam Frìoslannach ga h-iarraidh air eilean Langeness?"
+
+#: ../../data/campaigns/fri01.wmf/elemental:11
+msgid ""
+"This scenario is set in a historical context, but most of the story line is "
+"fiction."
+msgstr "Chaidh an cnàmh-sgeul seo a shuidheachadh ann an co-theacsa eachdraidheil ach chan e ach faoinsgeul a th’ ann."
+
+#: ../../data/campaigns/fri02.wmf/elemental:8
+msgid "An Icy Welcome"
+msgstr "Fàilte reòite"
+
+#: ../../data/campaigns/fri02.wmf/elemental:10
+msgid ""
+"Reebaud and his tribe have arrived in the North. But their arrival between "
+"the frozen steppes and the snow-covered mountains is less than welcome…"
+msgstr "Ràinig Reebaud ’s a threubh an taobh tuath. Co-dhiù, chan eil fàilte bhlàth romhpa air an steip reòite is na monaidhean sneachdach…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -311,11 +381,11 @@ msgid ""
 " crater. Two tribes are now fighting for the rich resources."
 msgstr "Tha beartas de bheatha san t-sloc aimsir às dèidh dreag a’ tuiteam air na beanntan. Tha dà threubh a’ dèanamh sabaid an tòir air na stòrasan."
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:8
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
 msgstr "Thairis air an fhàire"
 
-#: ../../data/maps/Crossing_the_Horizon.wmf/elemental:10
+#: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:10
 msgid "Man your ship and sail to the horizon."
 msgstr "Cruinnich sgioba is seòl dhan aineolach."
 
@@ -543,7 +613,7 @@ msgstr "Cha do fhreagair na diathan baogaideach ri ar n-ùrnaighean. Rinn solas 
 
 #: ../../data/maps/Last_Bastion_v2.wmf/elemental:11
 msgid "Don’t forget to take care of your timber supplies, you’ll need them."
-msgstr " Na dìochuimhnich fiodh gu leòr a thoirt leat on a bhios feum agad air."
+msgstr "Na dìochuimhnich fiodh gu leòr a thoirt leat on a bhios feum agad air."
 
 #: ../../data/maps/Last_Survivors.wmf/elemental:8
 msgid "Last Survivors"

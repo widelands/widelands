@@ -29,13 +29,13 @@ wl_library(game_io
     base_time_string
     build_info
     economy
-    graphic
     graphic_image_io
     graphic_minimap_renderer
     io_fileread
     io_filesystem
     logic
     logic_commands
+    logic_exceptions
     logic_game_controller
     logic_map
     logic_map_objects

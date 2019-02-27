@@ -1,3 +1,12 @@
+wl_library(logic_exceptions
+  SRCS
+    game_data_error.cc
+    game_data_error.h
+  DEPENDS
+    base_exceptions
+    base_i18n
+)
+
 wl_library(logic_widelands_geometry
   SRCS
     widelands_geometry.cc
@@ -23,6 +32,7 @@ wl_library(logic_game_settings
   DEPENDS
     io_filesystem
     logic_constants
+    logic_tribe_basic_info
     logic_map_objects
     notifications
     scripting_lua_interface
@@ -36,8 +46,10 @@ wl_library(logic_single_player_game_settings
   DEPENDS
     ai
     base_exceptions
+    base_i18n
     logic_game_settings
     logic_map_objects
+    logic_tribe_basic_info
 )
 
 wl_library(logic_game_controller
@@ -82,6 +94,18 @@ wl_library(logic_filesystem_constants
   SRCS
     filesystem_constants.h
     filesystem_constants.cc
+)
+
+wl_library(logic_generic_save_handler
+  SRCS
+    generic_save_handler.h
+    generic_save_handler.cc
+  DEPENDS
+    base_i18n
+    base_log
+    base_time_string
+    io_filesystem
+    logic_filesystem_constants
 )
 
 wl_library(logic_map
@@ -178,8 +202,6 @@ wl_library(logic
     editor_game_base.h
     game.cc
     game.h
-    game_data_error.cc
-    game_data_error.h
     message.h
     message_id.h
     message_queue.h
@@ -193,8 +215,9 @@ wl_library(logic
     replay.h
     save_handler.cc
     save_handler.h
+    see_unsee_node.h
     trade_agreement.h
-  # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack in game.h.
+  # TODO(sirver): Uses SDL2 only on WIN32 for a dirty hack.
   USES_SDL2
   DEPENDS
     base_exceptions
@@ -208,22 +231,27 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_image_io
     graphic_playercolor
     io_fileread
     io_filesystem
     io_stream
     logic_commands
     logic_constants
+    logic_exceptions
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_generic_save_handler
     logic_map
     logic_map_objects
+    logic_tribe_basic_info
     logic_widelands_geometry
     map_io_map_loader
     network # TODO(GunChleoc): Circular dependency
     note_sound
     notifications
+    profile
     random
     scripting_logic # TODO(GunChleoc): Circular dependency
     scripting_lua_interface

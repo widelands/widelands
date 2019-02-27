@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,11 +31,11 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "logic/editor_game_base.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
-#include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/tribes/program_result.h"
 #include "logic/map_objects/tribes/training_attribute.h"
-#include "logic/map_objects/tribes/wareworker.h"
+#include "logic/widelands.h"
 #include "scripting/lua_table.h"
 
 namespace Widelands {
@@ -45,7 +45,6 @@ class ImmovableDescr;
 class ProductionSiteDescr;
 class ProductionSite;
 class TribeDescr;
-class Tribes;
 class Worker;
 class World;
 
@@ -108,10 +107,11 @@ struct ProductionProgram {
 	///
 	/// Parameter syntax:
 	///    parameters         ::= return_value [condition_part]
-	///    return_value       ::= Failed | Completed | Skipped
+	///    return_value       ::= Failed | Completed | Skipped | None
 	///    Failed             ::= "failed"
 	///    Completed          ::= "completed"
 	///    Skipped            ::= "skipped"
+	///    None               ::= "no_stats"
 	///    condition_part     ::= when_condition | unless_conition
 	///    when_condition     ::= "when" condition {"and" condition}
 	///    unless_condition   ::= "unless" condition {"or" condition}
@@ -127,8 +127,9 @@ struct ProductionProgram {
 	/// Parameter semantics:
 	///    return_value:
 	///       If return_value is Failed or Completed, the productionsite's
-	///       statistics is updated accordingly. If return_value is Skipped, the
-	///       statistics are not affected.
+	///       statistics is updated accordingly. If return_value is Skipped or
+	///       None, the statistics are not affected. But Skipped adds a 10s delay
+	///       before the program is executed again.
 	///    condition:
 	///       A boolean condition that can be evaluated to true or false.
 	///    condition_part:
@@ -154,7 +155,7 @@ struct ProductionProgram {
 	/// is implicitly set to Completed.
 	struct ActReturn : public Action {
 		ActReturn(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
-		virtual ~ActReturn();
+		~ActReturn() override;
 		void execute(Game&, ProductionSite&) const override;
 
 		struct Condition {
@@ -169,7 +170,7 @@ struct ProductionProgram {
 			Negation(char*& parameters, const ProductionSiteDescr& descr, const Tribes& tribes)
 			   : operand(create_condition(parameters, descr, tribes)) {
 			}
-			virtual ~Negation();
+			~Negation() override;
 			bool evaluate(const ProductionSite&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
 			std::string description(const Tribes&) const override;
@@ -236,11 +237,12 @@ struct ProductionProgram {
 	/// Parameter syntax:
 	///    parameters         ::= program {handling_directive}
 	///    handling_directive ::= "on" Result handling_method
-	///    Result             ::= "failure" | "completion" | "skip"
+	///    Result             ::= "failure" | "completion" | "skip" | "no_stats"
 	///    handling_method    ::= Fail | Complete | Skip | Repeat
 	///    Fail               ::= "fail"
 	///    Ignore             ::= "ignore"
 	///    Repeat             ::= "repeat"
+	///    None               ::= "no_stats"
 	/// Parameter semantics:
 	///    program:
 	///       The name of a program defined in the productionsite.
@@ -261,6 +263,9 @@ struct ProductionProgram {
 	///       * If handling_method is Skip, the command skips the calling
 	///         program (with the same effect as executing "return=skipped").
 	///       * If handling_method is "repeat", the command is repeated.
+	///       * If handling_method is None the called program continues normal,
+	///         but no statistics are calculated (with the same effect as
+	///         executing "return=no_stats")
 	struct ActCall : public Action {
 		ActCall(char* parameters, const ProductionSiteDescr&);
 		void execute(Game&, ProductionSite&) const override;
@@ -277,11 +282,11 @@ struct ProductionProgram {
 	/// Parameter semantics:
 	///    program:
 	///       The name of a program defined in the productionsite's main worker.
-	struct ActWorker : public Action {
-		ActWorker(char* parameters,
-		          const std::string& production_program_name,
-		          ProductionSiteDescr*,
-		          const Tribes& tribes);
+	struct ActCallWorker : public Action {
+		ActCallWorker(char* parameters,
+		              const std::string& production_program_name,
+		              ProductionSiteDescr*,
+		              const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 		void building_work_failed(Game&, ProductionSite&, Worker&) const override;
@@ -533,7 +538,7 @@ struct ProductionProgram {
 	ProductionProgram(const std::string& init_name,
 	                  const std::string& init_descname,
 	                  std::unique_ptr<LuaTable> actions_table,
-	                  const Tribes& tribes, const World& world,
+	                  const EditorGameBase& egbase,
 	                  ProductionSiteDescr* building);
 
 	const std::string& name() const;
@@ -554,6 +559,6 @@ private:
 	Buildcost produced_wares_;
 	Buildcost recruited_workers_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_PRODUCTION_PROGRAM_H

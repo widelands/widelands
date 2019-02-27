@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -347,4 +347,4 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	return 0;
 }
-}
+}  // namespace Widelands

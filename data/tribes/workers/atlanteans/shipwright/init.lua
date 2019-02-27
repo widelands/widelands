@@ -31,12 +31,12 @@ tribes:new_worker_type {
 
    programs = {
       buildship = {
-         "walk object-or-coords",
-         "plant tribe:atlanteans_shipconstruction unless object",
-         "play_sound sound/sawmill sawmill 230",
-         "animation idle 500",
+         "walk=object-or-coords",
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill sawmill 230",
+         "animate=idle 500",
          "construct",
-         "animation idle 5000",
+         "animate=idle 5000",
          "return"
       }
    },

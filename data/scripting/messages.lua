@@ -5,6 +5,7 @@
 -- Functions to send messages to the player and to add objectives to campaigns.
 
 include "scripting/coroutine.lua"
+include "scripting/richtext.lua"
 include "scripting/table.lua"
 include "scripting/ui.lua"
 
@@ -14,7 +15,7 @@ include "scripting/ui.lua"
 --    Sends a message to the player.
 --    If the popup parameter is true and the player is in building mode,
 --    the function waits until the player leaves the building mode
---    before sending the message
+--    before sending the message (only in singleplayer)
 --
 --    :arg player: the recipient of the message
 --    :arg title: the localized title of the message
@@ -31,6 +32,28 @@ function send_message(player, title, body, parameters)
    end
    player:send_message(title, body, parameters)
 end
+
+
+-- RST
+-- .. function:: send_to_all(text[, heading])
+--
+--    Sends a game status message to all players.
+--
+--    :arg text: the localized body of the message. You can use rt functions here.
+--    :type text: :class:`string`
+--    :arg heading: the localized title of the message (optional)
+--    :type heading: :class:`string`
+--
+function send_to_all(text, heading)
+   for idx,plr in ipairs(game.players) do
+      if (heading ~= nil and heading ~= "") then
+         send_message(plr, _"Status", text, {popup=true, heading=heading})
+      else
+         send_message(plr, _"Status", text, {popup=true})
+      end
+   end
+end
+
 
 -- RST
 -- .. function:: message_box(player, title, message, parameters)
@@ -51,7 +74,7 @@ function message_box(player, title, body, parameters)
    -- While the message box is shown, the user cannot do anything else anyway.
    local user_input = wl.ui.get_user_input_allowed()
    wl.ui.set_user_input_allowed(true)
-   player:message_box(title, body, parameters)
+   player:message_box(title, rt(body), parameters)
    wl.ui.set_user_input_allowed(user_input)
 end
 
@@ -83,9 +106,9 @@ end
 --
 function add_campaign_objective(objective)
    if objective.obj_name then
-      return wl.Game().players[1]:add_objective(objective.obj_name, objective.obj_title, objective.obj_body)
+      return wl.Game().players[1]:add_objective(objective.obj_name, objective.obj_title, rt(objective.obj_body))
    else
-      return wl.Game().players[1]:add_objective(objective.name, objective.title, objective.body)
+      return wl.Game().players[1]:add_objective(objective.name, objective.title, rt(objective.body))
    end
 end
 
@@ -160,7 +183,7 @@ function message_box_objective(player, message)
       -- message_box takes care of this, but player:message_box does not
       local user_input = wl.ui.get_user_input_allowed()
       wl.ui.set_user_input_allowed(true)
-      player:message_box(message.title, message.body, message)
+      player:message_box(message.title, rt(message.body), message)
       wl.ui.set_user_input_allowed(user_input)
    else
       message_box(plr, message.title, message.body, message)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,7 @@
 #include "base/i18n.h"
 #include "graphic/graphic.h"
 #include "sound/sound_handler.h"
+#include "wui/game_exit_confirm_box.h"
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
 #include "wui/unique_window_handler.h"
@@ -35,30 +36,6 @@
 #define margin 10
 #define vspacing 5
 #define vgap 3
-
-class GameOptionsMenuExitConfirmBox : public UI::WLMessageBox {
-public:
-	// TODO(GunChleoc): Arabic: Buttons need more height for Arabic
-	GameOptionsMenuExitConfirmBox(UI::Panel& parent, InteractiveGameBase& gb)
-	   : UI::WLMessageBox(&parent,
-	                      /** TRANSLATORS: Window label when "Exit game" has been pressed */
-	                      _("Exit Game Confirmation"),
-	                      _("Are you sure you wish to exit this game?"),
-	                      MBoxType::kOkCancel),
-	     igb_(gb) {
-	}
-
-	void clicked_ok() override {
-		igb_.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
-	}
-
-	void clicked_back() override {
-		die();
-	}
-
-private:
-	InteractiveGameBase& igb_;
-};
 
 GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
                                  UI::UniqueWindow::Registry& registry,
@@ -73,7 +50,7 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
             0,
             width,
             0,
-            g_gr->images().get("images/ui_basic/but4.png"),
+            UI::ButtonStyle::kWuiMenu,
             _("Sound Options"),
             /** TRANSLATORS: Button tooltip */
             _("Set sound effect and music options")),
@@ -83,7 +60,7 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
                 0,
                 width,
                 35,
-                g_gr->images().get("images/ui_basic/but4.png"),
+                UI::ButtonStyle::kWuiMenu,
                 g_gr->images().get("images/wui/menus/menu_save_game.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Save Game")),
@@ -93,7 +70,7 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
                 0,
                 width,
                 35,
-                g_gr->images().get("images/ui_basic/but4.png"),
+                UI::ButtonStyle::kWuiMenu,
                 g_gr->images().get("images/wui/menus/menu_exit_game.png"),
                 /** TRANSLATORS: Button tooltip */
                 _("Exit Game")) {
@@ -114,14 +91,18 @@ GameOptionsMenu::GameOptionsMenu(InteractiveGameBase& gb,
 	exit_game_.sigclicked.connect(
 	   boost::bind(&GameOptionsMenu::clicked_exit_game, boost::ref(*this)));
 
-	windows_.sound_options.assign_toggle_button(&sound_);
+	if (windows_.sound_options.window) {
+		sound_.set_perm_pressed(true);
+	}
+	windows_.sound_options.opened.connect(boost::bind(&UI::Button::set_perm_pressed, &sound_, true));
+	windows_.sound_options.closed.connect(
+	   boost::bind(&UI::Button::set_perm_pressed, &sound_, false));
 
 	if (get_usedefaultpos())
 		center_to_parent();
 }
 
 GameOptionsMenu::~GameOptionsMenu() {
-	windows_.sound_options.unassign_toggle_button();
 }
 
 void GameOptionsMenu::clicked_save_game() {
@@ -133,7 +114,7 @@ void GameOptionsMenu::clicked_exit_game() {
 	if (SDL_GetModState() & KMOD_CTRL) {
 		igb_.end_modal<UI::Panel::Returncodes>(UI::Panel::Returncodes::kBack);
 	} else {
-		new GameOptionsMenuExitConfirmBox(*get_parent(), igb_);
+		new GameExitConfirmBox(*get_parent(), igb_);
 		die();
 	}
 }

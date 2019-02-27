@@ -28,7 +28,7 @@ function test_descr:test_get_buildings()
    local tribe = egbase:get_tribe_description("atlanteans")
    assert_equal(42, #tribe.buildings)
    tribe = egbase:get_tribe_description("barbarians")
-   assert_equal(52, #tribe.buildings)
+   assert_equal(51, #tribe.buildings)
    tribe = egbase:get_tribe_description("empire")
    assert_equal(52, #tribe.buildings)
 
@@ -56,11 +56,6 @@ end
 function test_descr:test_get_carrier2()
    local tribe = egbase:get_tribe_description("atlanteans")
    assert_equal("atlanteans_horse", tribe.carrier2)
-end
-
-function test_descr:test_get_headquarters()
-   local tribe = egbase:get_tribe_description("atlanteans")
-   assert_equal("atlanteans_headquarters", tribe.headquarters)
 end
 
 function test_descr:test_get_geologist()

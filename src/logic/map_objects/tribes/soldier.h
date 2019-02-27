@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ class SoldierDescr : public WorkerDescr {
 public:
 	friend class Economy;
 
-	SoldierDescr(const std::string& init_descname, const LuaTable& t, const Tribes& tribes);
+	SoldierDescr(const std::string& init_descname, const LuaTable& t, const EditorGameBase& egbase);
 	~SoldierDescr() override {
 	}
 
@@ -209,7 +209,6 @@ public:
 
 	/// Draw this soldier
 	void draw(const EditorGameBase&,
-	          const TextToDraw& draw_text,
 	          const Vector2f& point_on_dst,
 	          float scale,
 	          RenderTarget* dst) const override;
@@ -258,7 +257,7 @@ public:
 	void heal(uint32_t);
 	void damage(uint32_t);  /// Damage quantity of health points
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	bool is_on_battlefield();
 	bool is_attacking_player(Game&, Player&);
@@ -351,6 +350,6 @@ protected:
 public:
 	void do_save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_SOLDIER_H

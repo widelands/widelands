@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,15 +40,15 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
                                            uint32_t height)
    : Window(
         parent, "help_window", 0, 0, width, height, (boost::format(_("Help: %s")) % caption).str()),
-     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30)) {
+     textarea_(new MultilineTextarea(this, 5, 5, width - 10, height - 30, UI::PanelStyle::kWui)) {
 	int margin = 5;
 
 	// Calculate sizes
 	width = (width == 0) ? g_gr->get_xres() * 3 / 5 : width;
 	height = (height == 0) ? g_gr->get_yres() * 4 / 5 : height;
 
-	Button* btn = new Button(this, "ok", width / 3, 0, width / 3, 0,
-	                         g_gr->images().get("images/ui_basic/but5.png"), _("OK"));
+	Button* btn =
+	   new Button(this, "ok", width / 3, 0, width / 3, 0, UI::ButtonStyle::kWuiPrimary, _("OK"));
 
 	btn->sigclicked.connect(boost::bind(&FullscreenHelpWindow::clicked_ok, boost::ref(*this)));
 	btn->set_pos(Vector2i(btn->get_x(), height - margin - btn->get_h()));

@@ -41,20 +41,20 @@ tribes:new_worker_type {
 
    programs = {
       plant = {
-         "findspace size:any radius:2",
-         "walk coords",
-         "animation planting 4000",
-         "plant tribe:blackrootfield_tiny",
-         "animation planting 4000",
+         "findspace=size:any radius:2",
+         "walk=coords",
+         "animate=planting 4000",
+         "plant=attrib:seed_blackroot",
+         "animate=planting 4000",
          "return"
       },
       harvest = {
-         "findobject attrib:ripe_blackroot radius:2",
-         "walk object",
-         "animation harvesting 10000",
-         "object harvest",
-         "animation gathering 2000",
-         "createware blackroot",
+         "findobject=attrib:ripe_blackroot radius:2",
+         "walk=object",
+         "animate=harvesting 10000",
+         "callobject=harvest",
+         "animate=gathering 2000",
+         "createware=blackroot",
          "return"
       }
    },

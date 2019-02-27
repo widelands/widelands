@@ -35,21 +35,21 @@ tribes:new_worker_type {
    },
 
    programs = {
-      plantreed = {
-         "findspace size:any radius:1",
-         "walk coords",
-         "animation planting 1500",
-         "plant tribe:reed_tiny",
-         "animation planting 1500",
+      plant = {
+         "findspace=size:any radius:1",
+         "walk=coords",
+         "animate=planting 1500",
+         "plant=attrib:seed_reed",
+         "animate=planting 1500",
          "return"
       },
-      harvestreed = {
-         "findobject attrib:ripe_reed radius:1",
-         "walk object",
-         "animation harvesting 12000",
-         "object harvest",
-         "animation harvesting 1",
-         "createware thatch_reed",
+      harvest = {
+         "findobject=attrib:ripe_reed radius:1",
+         "walk=object",
+         "animate=harvesting 12000",
+         "callobject=harvest",
+         "animate=harvesting 1",
+         "createware=thatch_reed",
          "return"
       },
    },

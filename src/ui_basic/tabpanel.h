@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,10 @@ struct Tab : public NamedPanel {
 	friend struct TabPanel;
 
 	/** If title is not empty, this will be a textual tab.
-	 *  In that case, pic will need to be the rendered title */
+	 *  In that case, pic will need to be the rendered title
+	 *
+	 * Text conventions: Title Case for the 'title', Sentence case for the 'gtooltip'
+	 */
 	Tab(TabPanel* parent,
 	    size_t id,
 	    int32_t x,
@@ -83,21 +86,23 @@ private:
  *
  */
 struct TabPanel : public Panel {
-	enum class Type { kNoBorder, kBorder };
 
 	friend struct Tab;
 
-	TabPanel(Panel* parent,
-	         const Image* background,
-	         TabPanel::Type border_type = TabPanel::Type::kNoBorder);
+	TabPanel(Panel* parent, UI::TabPanelStyle style);
 
-	/** Add textual tab */
+	/** Add textual tab
+	 *
+	 * Text conventions: Title Case for the 'title', Sentence case for the 'tooltip'
+	 */
 	uint32_t add(const std::string& name,
 	             const std::string& title,
 	             Panel* panel,
 	             const std::string& tooltip = std::string());
 
-	/** Add pictorial tab */
+	/** Add pictorial tab
+	 * Text conventions: Sentence case for the 'tooltip'
+	 */
 	uint32_t add(const std::string& name,
 	             const Image* pic,
 	             Panel* panel,
@@ -121,7 +126,7 @@ protected:
 	void layout() override;
 	void update_desired_size() override;
 
-	TabPanel::Type border_type_;  ///< whether there will be a border around the panels.
+	UI::TabPanelStyle style_;
 
 private:
 	// Common adding function for textual and pictorial tabs
@@ -145,8 +150,8 @@ private:
 	size_t active_;     ///< index of the currently active tab
 	size_t highlight_;  ///< index of the highlighted button
 
-	const Image* pic_background_;  ///< picture used to draw background
+	const UI::PanelStyleInfo* background_style_;  // Background color and texture. Not owned.
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_TABPANEL_H

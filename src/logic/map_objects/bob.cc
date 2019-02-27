@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,6 @@
 #include "base/wexception.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -649,9 +648,8 @@ void Bob::movepath_update(Game& game, State& state) {
 		}
 	}
 
-	bool forcemove =
-	   (state.ivar2 &&
-	    static_cast<Path::StepVector::size_type>(state.ivar1) + 1 == path->get_nsteps());
+	bool forcemove = (state.ivar2 && static_cast<Path::StepVector::size_type>(state.ivar1) + 1 ==
+	                                    path->get_nsteps());
 
 	++state.ivar1;
 	return start_task_move(game, dir, state.diranims, state.ivar2 == 2 ? true : forcemove);
@@ -659,10 +657,10 @@ void Bob::movepath_update(Game& game, State& state) {
 }
 
 /**
-* Move into one direction for one step.
-* \li ivar1: direction
-* \li ivar2: non-zero if the move should be forced
-*/
+ * Move into one direction for one step.
+ * \li ivar1: direction
+ * \li ivar2: non-zero if the move should be forced
+ */
 Bob::Task const Bob::taskMove = {"move", &Bob::move_update, nullptr, nullptr, true};
 
 /**
@@ -759,7 +757,6 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw(const EditorGameBase& egbase,
-               const TextToDraw&,
                const Vector2f& field_on_dst,
                const float scale,
                RenderTarget* dst) const {
@@ -767,11 +764,11 @@ void Bob::draw(const EditorGameBase& egbase,
 		return;
 	}
 
-	auto* const owner = get_owner();
+	auto* const bob_owner = get_owner();
 	const Vector2f point_on_dst = calc_drawpos(egbase, field_on_dst, scale);
-	if (owner != nullptr) {
-		dst->blit_animation(
-		   point_on_dst, scale, anim_, egbase.get_gametime() - animstart_, owner->get_playercolor());
+	if (bob_owner != nullptr) {
+		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_,
+		                    bob_owner->get_playercolor());
 	} else {
 		dst->blit_animation(point_on_dst, scale, anim_, egbase.get_gametime() - animstart_);
 	}
@@ -896,6 +893,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	// randomly generated movements.
 	if (upcast(Game, game, &egbase)) {
 		StreamWrite& ss = game->syncstream();
+		ss.unsigned_8(SyncEntry::kBobSetPosition);
 		ss.unsigned_32(serial());
 		ss.signed_16(coords.x);
 		ss.signed_16(coords.y);
@@ -903,7 +901,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 }
 
 /// Give debug information.
-void Bob::log_general_info(const EditorGameBase& egbase) {
+void Bob::log_general_info(const EditorGameBase& egbase) const {
 	FORMAT_WARNINGS_OFF;
 	molog("Owner: %p\n", owner_);
 	FORMAT_WARNINGS_ON;
@@ -919,11 +917,10 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 
 	molog("Signal: %s\n", signal_.c_str());
 
-	molog("Stack size: %lu\n", static_cast<long unsigned int>(stack_.size()));
+	molog("Stack size: %" PRIuS "\n", stack_.size());
 
 	for (size_t i = 0; i < stack_.size(); ++i) {
-		molog("Stack dump %lu/%lu\n", static_cast<long unsigned int>(i + 1),
-		      static_cast<long unsigned int>(stack_.size()));
+		molog("Stack dump %" PRIuS "/%" PRIuS "\n", i + 1, stack_.size());
 
 		molog("* task->name: %s\n", stack_[i].task->name);
 
@@ -946,8 +943,7 @@ void Bob::log_general_info(const EditorGameBase& egbase) {
 		FORMAT_WARNINGS_ON;
 		if (stack_[i].path) {
 			const Path& path = *stack_[i].path;
-			Path::StepVector::size_type nr_steps = path.get_nsteps();
-			molog("** Path length: %lu\n", static_cast<long unsigned int>(nr_steps));
+			molog("** Path length: %" PRIuS "\n", path.get_nsteps());
 			molog("** Start: (%i, %i)\n", path.get_start().x, path.get_start().y);
 			molog("** End: (%i, %i)\n", path.get_end().x, path.get_end().y);
 			// Printing all coordinates of the path
@@ -1164,4 +1160,4 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 		fw.c_string(state.program ? state.program->get_name() : "");
 	}
 }
-}
+}  // namespace Widelands

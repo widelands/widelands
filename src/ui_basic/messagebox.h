@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,9 @@ namespace UI {
  * \note this function is named "WLMessageBox" instead of simply "MessageBox"
  *       because else linking on Windows (even with #undef MessageBox) will
  *       not work.
-*/
+ *
+ * Text conventions: Title Case for the 'caption', Sentence case for the 'text'
+ */
 struct WLMessageBox : public Window {
 	enum class MBoxType { kOk, kOkCancel };
 	WLMessageBox(Panel* parent,
@@ -77,6 +79,6 @@ private:
 	std::unique_ptr<Button> ok_button_, cancel_button_;
 	std::unique_ptr<MultilineTextarea> textarea_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MESSAGEBOX_H

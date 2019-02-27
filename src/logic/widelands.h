@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +23,7 @@
 #include <cassert>
 #include <cstddef>
 #include <limits>
+#include <vector>
 
 #include <stdint.h>
 
@@ -83,8 +84,29 @@ inline Duration endless() {
 }
 
 using Serial = uint32_t;  /// Serial number for MapObject.
+constexpr Serial kInvalidSerial = std::numeric_limits<uint32_t>::max();
 
 using Direction = uint8_t;
+
+struct SoldierStrength {
+	uint8_t health, attack, defense, evade;
+	bool operator==(const SoldierStrength& other) const {
+		return health == other.health && attack == other.attack && defense == other.defense &&
+		       evade == other.evade;
+	}
+	bool operator<(const SoldierStrength& other) const {
+		return health < other.health ||
+		       (health == other.health &&
+		        (attack < other.attack ||
+		         (attack == other.attack &&
+		          (defense < other.defense || (defense == other.defense && evade < other.evade)))));
+	}
+};
+
+// For suggested teams info during map preload
+using SuggestedTeam = std::vector<PlayerNumber>;  // Players in a team
+// Recommended teams to play against each other
+using SuggestedTeamLineup = std::vector<SuggestedTeam>;
 
 }  // namespace Widelands
 

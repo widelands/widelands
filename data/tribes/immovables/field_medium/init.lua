@@ -5,8 +5,9 @@ tribes:new_immovable_type {
    name = "field_medium",
    -- TRANSLATORS: This is an immovable name used in lists of immovables
    descname = pgettext("immovable", "Field (medium)"),
+   helptext_script = dirname .. "helptexts.lua",
    size = "small",
-   attributes = { "field" },
+   attributes = { "field", "flowering" },
    programs = {
       program = {
          "animate=idle 50000",
@@ -17,7 +18,7 @@ tribes:new_immovable_type {
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 15, 12 },
+         hotspot = { 31, 23 },
       },
    }
 }

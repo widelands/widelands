@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/portdockwaresdisplay.h"
 #include "wui/waresdisplay.h"
@@ -137,7 +136,7 @@ WarehouseWaresPanel::WarehouseWaresPanel(UI::Panel* parent,
 
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                             \
 	b = new UI::Button(                                                                             \
-	   buttons, #policy, 0, 0, 34, 34, g_gr->images().get("images/ui_basic/but4.png"),              \
+	   buttons, #policy, 0, 0, 34, 34, UI::ButtonStyle::kWuiMenu,                                   \
 	   g_gr->images().get("images/wui/buildings/stock_policy_button_" #policy ".png"), tooltip),    \
 	b->sigclicked.connect(boost::bind(                                                              \
 	   &WarehouseWaresPanel::set_policy, this, Widelands::Warehouse::StockPolicy::k##policyname)),  \
@@ -175,23 +174,26 @@ void WarehouseWaresPanel::set_policy(Widelands::Warehouse::StockPolicy newpolicy
 WarehouseWindow::WarehouseWindow(InteractiveGameBase& parent,
                                  UI::UniqueWindow::Registry& reg,
                                  Widelands::Warehouse& wh,
-                                 bool avoid_fastclick)
-   : BuildingWindow(parent, reg, wh, avoid_fastclick) {
-	init(avoid_fastclick);
+                                 bool avoid_fastclick,
+                                 bool workarea_preview_wanted)
+   : BuildingWindow(parent, reg, wh, avoid_fastclick), warehouse_(&wh) {
+	init(avoid_fastclick, workarea_preview_wanted);
 }
 
-void WarehouseWindow::init(bool avoid_fastclick) {
-	BuildingWindow::init(avoid_fastclick);
+void WarehouseWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
+	Widelands::Warehouse* warehouse = warehouse_.get(igbase()->egbase());
+	assert(warehouse != nullptr);
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	get_tabs()->add(
 	   "wares", g_gr->images().get(pic_tab_wares),
-	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), warehouse(), Widelands::wwWARE),
+	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), *warehouse, Widelands::wwWARE),
 	   _("Wares"));
 	get_tabs()->add(
 	   "workers", g_gr->images().get(pic_tab_workers),
-	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), warehouse(), Widelands::wwWORKER),
+	   new WarehouseWaresPanel(get_tabs(), Width, *igbase(), *warehouse, Widelands::wwWORKER),
 	   _("Workers"));
 
-	if (Widelands::PortDock* pd = warehouse().get_portdock()) {
+	if (const Widelands::PortDock* pd = warehouse->get_portdock()) {
 		get_tabs()->add("dock_wares", g_gr->images().get(pic_tab_dock_wares),
 		                create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 		                _("Wares waiting to be shipped"));
@@ -200,7 +202,7 @@ void WarehouseWindow::init(bool avoid_fastclick) {
 		                _("Workers waiting to embark"));
 		if (pd->expedition_started()) {
 			get_tabs()->add("expedition_wares_queue", g_gr->images().get(pic_tab_expedition),
-			                create_portdock_expedition_display(get_tabs(), warehouse(), *igbase()),
+			                create_portdock_expedition_display(get_tabs(), *warehouse, *igbase()),
 			                _("Expedition"));
 		}
 	}

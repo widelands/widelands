@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,11 +96,8 @@ public:
 
 	Flag& base_flag() override;
 	PositionList get_positions(const EditorGameBase&) const override;
-	void draw(uint32_t gametime,
-	          TextToDraw draw_text,
-	          const Vector2f& point_on_dst,
-	          float scale,
-	          RenderTarget* dst) override;
+	void
+	draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -115,13 +112,13 @@ public:
 
 	void ship_arrived(Game&, Ship&);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
-	uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex);
-	uint32_t count_waiting();
+	uint32_t count_waiting(WareWorker waretype, DescriptionIndex wareindex) const;
+	uint32_t count_waiting() const;
 
 	// Returns true if a expedition is started or ready to be send out.
-	bool expedition_started();
+	bool expedition_started() const;
 
 	// Called when the button in the warehouse window is pressed.
 	void start_expedition();
@@ -129,7 +126,7 @@ public:
 
 	// May return nullptr when there is no expedition ongoing or if the
 	// expedition ship is already underway.
-	ExpeditionBootstrap* expedition_bootstrap();
+	ExpeditionBootstrap* expedition_bootstrap() const;
 
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
 	void expedition_bootstrap_complete(Game& game);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,11 @@
 #include "base/time_string.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "helper.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
-#include "logic/game.h"
 #include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "logic/replay.h"
@@ -69,19 +69,13 @@ map_filename(const std::string& filename, const std::string& mapname, bool local
 LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                                Widelands::Game& g,
                                FileType filetype,
-                               GameDetails::Style style,
+                               UI::PanelStyle style,
                                bool localize_autosave)
    : parent_(parent),
      table_box_(new UI::Box(parent, 0, 0, UI::Box::Vertical)),
-     table_(table_box_,
-            0,
-            0,
-            0,
-            0,
-            g_gr->images().get(style == GameDetails::Style::kFsMenu ? "images/ui_basic/but3.png" :
-                                                                      "images/ui_basic/but1.png"),
-            UI::TableRows::kMultiDescending),
+     table_(table_box_, 0, 0, 0, 0, style, UI::TableRows::kMultiDescending),
      filetype_(filetype),
+     show_filenames_(false),
      localize_autosave_(localize_autosave),
      // Savegame description
      game_details_(
@@ -94,7 +88,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
                             0,
                             0,
                             0,
-                            g_gr->images().get("images/ui_basic/but0.png"),
+                            style == UI::PanelStyle::kFsMenu ? UI::ButtonStyle::kFsMenuSecondary :
+                                                               UI::ButtonStyle::kWuiSecondary,
                             _("Delete"))),
      game_(g) {
 	table_.add_column(130, _("Save Date"), _("The date this game was saved"), UI::Align::kLeft);
@@ -127,10 +122,8 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 		   _("Mode"), (boost::format("%s %s") % mode_tooltip_1 % mode_tooltip_2).str());
 	}
 	table_.add_column(0, _("Description"),
-	                  filetype_ == FileType::kReplay ?
-	                     _("Map name (start of replay)") :
-	                     _("The filename that the game was saved under followed by the map’s name, "
-	                       "or the map’s name followed by the last objective achieved."),
+	                  _("The filename that the game was saved under followed by the map’s name, "
+	                    "or the map’s name followed by the last objective achieved."),
 	                  UI::Align::kLeft, UI::TableColumnType::kFlexible);
 	table_.set_column_compare(
 	   0, boost::bind(&LoadOrSaveGame::compare_date_descending, this, _1, _2));
@@ -145,8 +138,12 @@ LoadOrSaveGame::LoadOrSaveGame(UI::Panel* parent,
 }
 
 const std::string LoadOrSaveGame::filename_list_string() const {
+	return filename_list_string(table_.selections());
+}
+
+const std::string LoadOrSaveGame::filename_list_string(const std::set<uint32_t>& selections) const {
 	boost::format message;
-	for (const uint32_t index : table_.selections()) {
+	for (const uint32_t index : selections) {
 		const SavegameData& gamedata = games_data_[table_.get(table_.get_record(index))];
 
 		if (gamedata.errormessage.empty()) {
@@ -245,18 +242,18 @@ void LoadOrSaveGame::clicked_delete() {
 	const size_t no_selections = selections.size();
 	std::string header = "";
 	if (filetype_ == FileType::kReplay) {
-		header = no_selections == 1 ?
-		            _("Do you really want to delete this replay?") :
-		            /** TRANSLATORS: Used with multiple replays, 1 replay has a separate string. */
+		header = no_selections == 1 ? _("Do you really want to delete this replay?") :
+		                              /** TRANSLATORS: Used with multiple replays, 1 replay has a
+		                      separate string. DO NOT omit the placeholder in your translation. */
 		            (boost::format(ngettext("Do you really want to delete this %d replay?",
 		                                    "Do you really want to delete these %d replays?",
 		                                    no_selections)) %
 		             no_selections)
 		               .str();
 	} else {
-		header = no_selections == 1 ?
-		            _("Do you really want to delete this game?") :
-		            /** TRANSLATORS: Used with multiple games, 1 game has a separate string. */
+		header = no_selections == 1 ? _("Do you really want to delete this game?") :
+		                              /** TRANSLATORS: Used with multiple games, 1 game has a separate
+		                     string. DO NOT omit the placeholder in your translation. */
 		            (boost::format(ngettext("Do you really want to delete this %d game?",
 		                                    "Do you really want to delete these %d games?",
 		                                    no_selections)) %
@@ -270,22 +267,79 @@ void LoadOrSaveGame::clicked_delete() {
 
 		UI::WLMessageBox confirmationBox(
 		   parent_->get_parent()->get_parent(),
-		   ngettext("Confirm deleting file", "Confirm deleting files", no_selections), message,
+		   no_selections == 1 ? _("Confirm Deleting File") : _("Confirm Deleting Files"), message,
 		   UI::WLMessageBox::MBoxType::kOkCancel);
 		do_delete = confirmationBox.run<UI::Panel::Returncodes>() == UI::Panel::Returncodes::kOk;
+		table_.focus();
 	}
 	if (do_delete) {
+		// Failed deletions aren't a serious problem, we just catch the errors
+		// and keep track to notify the player.
+		std::set<uint32_t> failed_selections;
+		bool failed;
 		for (const uint32_t index : selections) {
+			failed = false;
 			const std::string& deleteme = get_filename(index);
-			g_fs->fs_unlink(deleteme);
-			if (filetype_ == FileType::kReplay) {
-				g_fs->fs_unlink(deleteme + kSavegameExtension);
+			try {
+				g_fs->fs_unlink(deleteme);
+			} catch (const FileError& e) {
+				log("player-requested file deletion failed: %s", e.what());
+				failed = true;
 			}
+			if (filetype_ == FileType::kReplay) {
+				try {
+					g_fs->fs_unlink(deleteme + kSavegameExtension);
+					// If at least one of the two relevant files of a replay are
+					// successfully deleted then count it as success.
+					// (From the player perspective the replay is gone.)
+					failed = false;
+					// If it was a multiplayer replay, also delete the synchstream. Do
+					// it here, so it's only attempted if replay deletion was successful.
+					if (g_fs->file_exists(deleteme + kSyncstreamExtension)) {
+						g_fs->fs_unlink(deleteme + kSyncstreamExtension);
+					}
+				} catch (const FileError& e) {
+					log("player-requested file deletion failed: %s", e.what());
+				}
+			}
+			if (failed) {
+				failed_selections.insert(index);
+			}
+		}
+		if (!failed_selections.empty()) {
+			const uint32_t no_failed = failed_selections.size();
+			// Notify the player.
+			const std::string caption =
+			   (no_failed == 1) ? _("Error Deleting File!") : _("Error Deleting Files!");
+			if (filetype_ == FileType::kReplay) {
+				if (selections.size() == 1) {
+					header = _("The replay could not be deleted.");
+				} else {
+					header = (boost::format(ngettext("%d replay could not be deleted.",
+					                                 "%d replays could not be deleted.", no_failed)) %
+					          no_failed)
+					            .str();
+				}
+			} else {
+				if (selections.size() == 1) {
+					header = _("The game could not be deleted.");
+				} else {
+					header = (boost::format(ngettext("%d game could not be deleted.",
+					                                 "%d games could not be deleted.", no_failed)) %
+					          no_failed)
+					            .str();
+				}
+			}
+			std::string message =
+			   (boost::format("%s\n%s") % header % filename_list_string(failed_selections)).str();
+			UI::WLMessageBox msgBox(
+			   parent_->get_parent()->get_parent(), caption, message, UI::WLMessageBox::MBoxType::kOk);
+			msgBox.run<UI::Panel::Returncodes>();
 		}
 		fill_table();
 
 		// Select something meaningful if possible, then scroll to it.
-		const uint32_t selectme = std::max(0U, *selections.begin());
+		const uint32_t selectme = *selections.begin();
 		if (selectme < table_.size() - 1) {
 			table_.select(selectme);
 		} else if (!table_.empty()) {
@@ -297,7 +351,6 @@ void LoadOrSaveGame::clicked_delete() {
 		// Make sure that the game details are updated
 		entry_selected();
 	}
-	// TODO(GunChleoc): When the removal dialog was open, navigation with arrow keys no longer works.
 }
 
 UI::Button* LoadOrSaveGame::delete_button() {
@@ -315,6 +368,9 @@ void LoadOrSaveGame::fill_table() {
 		gamefiles = filter(g_fs->list_directory(kReplayDir), [](const std::string& fn) {
 			return boost::ends_with(fn, kReplayExtension);
 		});
+		// Update description column title for replays
+		table_.set_column_tooltip(2, show_filenames_ ? _("Filename: Map name (start of replay)") :
+		                                               _("Map name (start of replay)"));
 	} else {
 		gamefiles = g_fs->list_directory(kSaveDir);
 	}
@@ -322,7 +378,7 @@ void LoadOrSaveGame::fill_table() {
 	Widelands::GamePreloadPacket gpdp;
 
 	for (const std::string& gamefilename : gamefiles) {
-		if (gamefilename == g_fs->fix_cross_file("save/campvis")) {
+		if (gamefilename == kCampVisFile || gamefilename == g_fs->fix_cross_file(kCampVisFile)) {
 			continue;
 		}
 
@@ -345,15 +401,12 @@ void LoadOrSaveGame::fill_table() {
 			gamedata.gametype = gpdp.get_gametype();
 
 			if (filetype_ != FileType::kReplay) {
-				if (filetype_ == FileType::kGame) {
-					if (gamedata.gametype == GameController::GameType::kReplay) {
-						continue;
-					}
-				} else if (filetype_ == FileType::kGameMultiPlayer) {
+				if (filetype_ == FileType::kGameMultiPlayer) {
 					if (gamedata.gametype == GameController::GameType::kSingleplayer) {
 						continue;
 					}
-				} else if (gamedata.gametype > GameController::GameType::kSingleplayer) {
+				} else if ((gamedata.gametype != GameController::GameType::kSingleplayer) &&
+				           (gamedata.gametype != GameController::GameType::kReplay)) {
 					continue;
 				}
 			}
@@ -412,13 +465,13 @@ void LoadOrSaveGame::fill_table() {
 					gamedata.savedatestring =
 					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
 					      month day, year */
-					   (boost::format(_("%2% %1%, %3%")) % savedate->tm_mday %
-					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
+					   (boost::format(_("%1% %2%, %3%")) % localize_month(savedate->tm_mon) %
+					    savedate->tm_mday % (1900 + savedate->tm_year))
 					      .str();
 					gamedata.savedonstring =
 					   /** TRANSLATORS: Display date for choosing a savegame/replay. Placeholders are:
-					      month day, year. This is part of a list. */
-					   (boost::format(_("saved on %2% %1%, %3%")) % savedate->tm_mday %
+					      month (short name) day (number), year (number). This is part of a list. */
+					   (boost::format(_("saved on %1% %2%, %3%")) % savedate->tm_mday %
 					    localize_month(savedate->tm_mon) % (1900 + savedate->tm_year))
 					      .str();
 				}
@@ -465,8 +518,12 @@ void LoadOrSaveGame::fill_table() {
 				}
 				te.set_string(1, gametypestring);
 				if (filetype_ == FileType::kReplay) {
+					const std::string map_basename =
+					   show_filenames_ ?
+					      map_filename(gamedata.filename, gamedata.mapname, localize_autosave_) :
+					      gamedata.mapname;
 					te.set_string(2, (boost::format(pgettext("mapname_gametime", "%1% (%2%)")) %
-					                  gamedata.mapname % gamedata.gametime)
+					                  map_basename % gamedata.gametime)
 					                    .str());
 				} else {
 					te.set_string(
@@ -475,7 +532,7 @@ void LoadOrSaveGame::fill_table() {
 			} else {
 				te.set_string(1, map_filename(gamedata.filename, gamedata.mapname, localize_autosave_));
 			}
-		} catch (const WException& e) {
+		} catch (const std::exception& e) {
 			std::string errormessage = e.what();
 			boost::replace_all(errormessage, "\n", "<br>");
 			gamedata.errormessage =
@@ -503,4 +560,11 @@ void LoadOrSaveGame::fill_table() {
 	}
 	table_.sort();
 	table_.focus();
+}
+
+void LoadOrSaveGame::set_show_filenames(bool show_filenames) {
+	if (filetype_ != FileType::kReplay) {
+		return;
+	}
+	show_filenames_ = show_filenames;
 }

@@ -20,31 +20,27 @@ local wc_desc = _(
 [[your territory than any other player. The game will end after 4 hours of ]] ..
 [[playing. The one with the most trees at that point will win the game.]])
 local wc_trees_owned = _"Trees owned"
+
+
+-- Table of terrestrial fields
+local fields = {}
+
 return {
    name = wc_name,
    description = wc_desc,
+   init = function()
+      -- Get all terrestrial fields of the map
+      fields = wl.Game().map.terrestrial_fields
+   end,
    func = function()
    local plrs = wl.Game().players
+   local game = wl.Game()
+
+   -- set the maximum game time of 4 hours
+   local max_time = 4 * 60
 
    -- set the objective with the game type for all players
    broadcast_objective("win_condition", wc_descname, wc_desc)
-
-   local remaining_time = 4 * 60 -- 4 hours
-
-   -- Get all valueable fields of the map
-   local fields = {}
-   local map = wl.Game().map
-   for x=0,map.width-1 do
-      for y=0,map.height-1 do
-         local f = map:get_field(x,y)
-         if f then
-            -- add this field to the list as long as it has not movecaps swim
-            if not f:has_caps("swimmable") then
-               fields[#fields+1] = f
-            end
-         end
-      end
-   end
 
    -- The function to calculate the current points.
    local _last_time_calculated = -100000
@@ -86,28 +82,54 @@ return {
       return _plrpoints
    end
 
-   local function _send_state()
-      set_textdomain("win_conditions")
+   local function _send_state(remaining_time, plrs, show_popup)
       local playerpoints = _calc_points()
-      local msg = p(ngettext("The game will end in %i minute.", "The game will end in %i minutes.", remaining_time))
-            :format(remaining_time)
-      msg = msg .. vspace(8) .. game_status.body
+      local msg = format_remaining_time(remaining_time) .. vspace(8) .. game_status.body
+
       for idx,plr in ipairs(plrs) do
          local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number]))
                :format(playerpoints[plr.number])
          -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
          msg = msg .. p(_"%1$s has %2$s at the moment."):bformat(plr.name,trees)
       end
-      broadcast(plrs, game_status.title, msg)
+
+      broadcast(plrs, game_status.title, msg, {popup = show_popup})
    end
 
-   -- Start a new coroutine that checks for defeated players
-   run(function()
-      while remaining_time > 0 do
-         sleep(5000)
-         check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
+   local function _game_over(plrs)
+      local playerpoints = _calc_points()
+      local points = {}
+      for idx,plr in ipairs(plrs) do
+         points[#points + 1] = { plr, playerpoints[plr.number] }
       end
-   end)
+      table.sort(points, function(a,b) return a[2] < b[2] end)
+
+      local msg = vspace(8) .. game_status.body
+      for idx,plr in ipairs(plrs) do
+         msg = msg .. vspace(8)
+         local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number])):format(playerpoints[plr.number])
+         -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
+         msg = msg ..  p(_"%1$s had %2$s."):bformat(plr.name,trees)
+      end
+      msg = msg .. vspace(8)
+      local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
+            :format(playerpoints[points[#points][1].number])
+      -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
+      msg = msg ..  h3(_"The winner is %1$s with %2$s."):bformat(points[#points][1].name, trees)
+
+      local privmsg = ""
+      for i=1,#points-1 do
+         privmsg = lost_game_over.body
+         privmsg = privmsg .. msg
+         points[i][1]:send_message(lost_game_over.title, privmsg)
+         wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
+      end
+      privmsg = won_game_over.body
+      privmsg = privmsg .. msg
+      points[#points][1]:send_message(won_game_over.title, privmsg)
+      wl.game.report_result(points[#points][1], 1,
+         make_extra_data(points[#points][1], wc_descname, wc_version, {score=points[#points][2]}))
+   end
 
    -- Install statistics hook
    hooks.custom_statistic = {
@@ -119,53 +141,23 @@ return {
       end,
    }
 
-   -- main loop
-   while true do
-      sleep(300000) -- 5 Minutes
-      remaining_time = remaining_time - 5
-
-      -- at the beginning send remaining time message only each 30 minutes
-      -- if only 30 minutes or less are left, send each 5 minutes
-      if (remaining_time < 30 or remaining_time % 30 == 0)
-            and remaining_time > 0 then
-         _send_state()
+   -- Start a new coroutine that triggers status notifications.
+   run(function()
+      local remaining_time = max_time
+      while game.time <= ((max_time - 5) * 60 * 1000) and count_factions(plrs) > 1 do
+         remaining_time, show_popup = notification_remaining_time(max_time, remaining_time)
+         _send_state(remaining_time, plrs, show_popup)
       end
+   end)
 
-      if remaining_time <= 0 then break end
+   -- main loop checks for defeated players
+   while game.time < (max_time * 60 * 1000) and count_factions(plrs) > 1 do
+      sleep(1000)
+      check_player_defeated(plrs, lost_game.title, lost_game.body, wc_descname, wc_version)
    end
 
    -- Game has ended
-   local playerpoints = _calc_points()
-   local points = {}
-   for idx,plr in ipairs(plrs) do
-      points[#points + 1] = { plr, playerpoints[plr.number] }
-   end
-   table.sort(points, function(a,b) return a[2] < b[2] end)
+   _game_over(plrs)
 
-   local msg = vspace(8) .. game_status.body
-   for idx,plr in ipairs(plrs) do
-      msg = msg .. vspace(8)
-      local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number])):format(playerpoints[plr.number])
-      -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-      msg = msg ..  p(_"%1$s had %2$s."):bformat(plr.name,trees)
-   end
-   msg = msg .. vspace(8)
-   local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
-         :format(playerpoints[points[#points][1].number])
-   -- TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-   msg = msg ..  h3(_"The winner is %1$s with %2$s."):bformat(points[#points][1].name, trees)
-
-   local privmsg = ""
-   for i=1,#points-1 do
-      privmsg = lost_game_over.body
-      privmsg = privmsg .. msg
-      points[i][1]:send_message(lost_game_over.title, privmsg)
-      wl.game.report_result(points[i][1], 0, make_extra_data(points[i][1], wc_descname, wc_version, {score=points[i][2]}))
-   end
-   privmsg = won_game_over.body
-   privmsg = privmsg .. msg
-   points[#points][1]:send_message(won_game_over.title, privmsg)
-   wl.game.report_result(points[#points][1], 1,
-      make_extra_data(points[#points][1], wc_descname, wc_version, {score=points[#points][2]}))
 end
 }

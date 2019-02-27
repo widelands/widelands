@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #define WL_RANDOM_RANDOM_H
 
 #include <stdint.h>
+#include <string>
 
 extern const uint32_t rng_sbox[256];
 
@@ -43,5 +44,10 @@ private:
 };
 
 #define SIMPLE_RAND(x) (((x) >> 8) ^ rng_sbox[(x)&0xff])
+
+/// Generates a random UUID, looking like "550e8400-e29b-11d4-a716-446655440000".
+/// This does not use logic_rand(), but instead a thread local random number
+/// generator, so do not use in logic code - it will desync.
+std::string generate_random_uuid();
 
 #endif  // end of include guard: WL_RANDOM_RANDOM_H

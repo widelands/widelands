@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,10 +37,10 @@
 #include "base/macros.h"
 #include "base/time_string.h"
 #include "base/warning.h"
+#include "build_info.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_packet.h"
-#include "graphic/graphic.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/filewrite.h"
@@ -60,7 +60,6 @@
 #include "logic/playercommand.h"
 #include "logic/replay.h"
 #include "logic/single_player_game_controller.h"
-#include "logic/widelands.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "scripting/logic.h"
@@ -77,13 +76,20 @@ namespace Widelands {
 Game::SyncWrapper::~SyncWrapper() {
 	if (dump_ != nullptr) {
 		if (!syncstreamsave_)
-			g_fs->fs_unlink(dumpfname_);
+			try {
+				g_fs->fs_unlink(dumpfname_);
+			} catch (const FileError& e) {
+				// not really a problem if deletion fails, but we'll log it
+				log("Deleting synchstream file %s failed: %s\n", dumpfname_.c_str(), e.what());
+			}
 	}
 }
 
 void Game::SyncWrapper::start_dump(const std::string& fname) {
 	dumpfname_ = fname + kSyncstreamExtension;
 	dump_.reset(g_fs->open_stream_write(dumpfname_));
+	current_excerpt_id_ = 0;
+	excerpts_buffer_[current_excerpt_id_].clear();
 }
 
 void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
@@ -111,6 +117,8 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 			log("Writing to syncstream file %s failed. Stop synctream dump.\n", dumpfname_.c_str());
 			dump_.reset();
 		}
+		assert(current_excerpt_id_ < kExcerptSize);
+		excerpts_buffer_[current_excerpt_id_].append(static_cast<const char*>(sync_data), size);
 	}
 
 	target_.data(sync_data, size);
@@ -119,6 +127,7 @@ void Game::SyncWrapper::data(void const* const sync_data, size_t const size) {
 
 Game::Game()
    : EditorGameBase(new LuaGameInterface(this)),
+     forester_cache_(),
      syncwrapper_(*this, synchash_),
      ctrl_(nullptr),
      writereplay_(true),
@@ -130,6 +139,7 @@ Game::Game()
      /** TRANSLATORS: Win condition for this game has not been set. */
      win_condition_displayname_(_("Not set")),
      replay_(false) {
+	Economy::initialize_serial();
 }
 
 Game::~Game() {
@@ -211,6 +221,12 @@ bool Game::run_splayer_scenario_direct(const std::string& mapname,
 	world();
 	loader_ui.step(_("Loading tribes"));
 	tribes();
+
+	// If the scenario has custrom tribe entites, load them.
+	const std::string custom_tribe_script = mapname + "/scripting/tribes/init.lua";
+	if (g_fs->file_exists(custom_tribe_script)) {
+		lua().run_script(custom_tribe_script);
+	}
 
 	// We have to create the players here.
 	loader_ui.step(_("Creating players"));
@@ -298,13 +314,29 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
+		win_condition_script_ = settings.win_condition_script;
+		std::unique_ptr<LuaTable> table(lua().run_script(win_condition_script_));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
-		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
-		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
+		// We run the actual win condition from InteractiveGameBase::start() to prevent a pure black
+		// screen while the game is being started - we can display a message there.
 	} else {
 		win_condition_displayname_ = "Scenario";
+	}
+}
+
+void Game::run_win_condition() {
+	if (!win_condition_script_.empty()) {
+		std::unique_ptr<LuaTable> table(lua().run_script(win_condition_script_));
+		table->do_not_warn_about_unaccessed_keys();
+		// Run separate initialization function if it is there.
+		if (table->has_key<std::string>("init")) {
+			std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("init");
+			cr->resume();
+		}
+		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
+		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
+		win_condition_script_ = "";
 	}
 }
 
@@ -332,6 +364,13 @@ void Game::init_savegame(UI::ProgressWindow* loader_ui, const GameSettings& sett
 		loader_ui->set_background(background);
 		loader_ui->step(_("Loading…"));
 		gl.load_game(settings.multiplayer);
+		// Players might have selected a different AI type
+		for (uint8_t i = 0; i < settings.players.size(); ++i) {
+			const PlayerSettings& playersettings = settings.players[i];
+			if (playersettings.state == PlayerSettings::State::kComputer) {
+				get_player(i + 1)->set_ai(playersettings.ai);
+			}
+		}
 	} catch (...) {
 		throw;
 	}
@@ -446,6 +485,9 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		}
 
 		if (get_ipl()) {
+			// Scroll map to starting position for new games.
+			// Loaded games are handled in GameInteractivePlayerPacket for single player, and in
+			// InteractiveGameBase::start() for multiplayer.
 			get_ipl()->map_view()->scroll_to_field(
 			   map().get_starting_pos(get_ipl()->player_number()), MapView::Transition::Jump);
 		}
@@ -583,6 +625,52 @@ StreamWrite& Game::syncstream() {
 }
 
 /**
+ * Switches to the next part of the syncstream excerpt.
+ */
+void Game::report_sync_request() {
+	syncwrapper_.current_excerpt_id_ =
+	   (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	syncwrapper_.excerpts_buffer_[syncwrapper_.current_excerpt_id_].clear();
+}
+
+/**
+ * Triggers writing of syncstream excerpt and adds the playernumber of the desynced player
+ * to the stream.
+ * Playernumber should be negative when called by network clients
+ */
+void Game::report_desync(int32_t playernumber) {
+	if (syncwrapper_.dumpfname_.empty()) {
+		log("Error: A desync occurred but no filename for the syncstream has been set.");
+		return;
+	}
+	// Replace .wss extension of syncstream file with .wse extension for syncstream extract
+	std::string filename = syncwrapper_.dumpfname_;
+	assert(syncwrapper_.dumpfname_.length() > kSyncstreamExtension.length());
+	filename.replace(filename.length() - kSyncstreamExtension.length(),
+	                 kSyncstreamExtension.length(), kSyncstreamExcerptExtension);
+	std::unique_ptr<StreamWrite> file(g_fs->open_stream_write(filename));
+	assert(file != nullptr);
+	// Write revision, branch and build type of this build to the file
+	file->unsigned_32(build_id().length());
+	file->text(build_id());
+	file->unsigned_32(build_type().length());
+	file->text(build_type());
+	file->signed_32(playernumber);
+	// Write our buffers to the file. Start with the oldest one
+	const size_t i2 = (syncwrapper_.current_excerpt_id_ + 1) % SyncWrapper::kExcerptSize;
+	size_t i = i2;
+	do {
+		file->text(syncwrapper_.excerpts_buffer_[i]);
+		syncwrapper_.excerpts_buffer_[i].clear();
+		i = (i + 1) % SyncWrapper::kExcerptSize;
+	} while (i != i2);
+	file->unsigned_8(SyncEntry::kDesync);
+	file->signed_32(playernumber);
+	// Restart buffers
+	syncwrapper_.current_excerpt_id_ = 0;
+}
+
+/**
  * Calculate the current synchronization checksum and copy
  * it into the given array, without affecting the subsequent
  * checksumming process.
@@ -604,6 +692,7 @@ Md5Checksum Game::get_sync_hash() const {
  */
 uint32_t Game::logic_rand() {
 	uint32_t const result = rng().rand();
+	syncstream().unsigned_8(SyncEntry::kRandom);
 	syncstream().unsigned_32(result);
 	return result;
 }
@@ -836,6 +925,13 @@ LuaGameInterface& Game::lua() {
 	return static_cast<LuaGameInterface&>(EditorGameBase::lua());
 }
 
+const std::string& Game::get_win_condition_displayname() const {
+	return win_condition_displayname_;
+}
+void Game::set_win_condition_displayname(const std::string& name) {
+	win_condition_displayname_ = name;
+}
+
 /**
  * Sample global statistics for the game.
  */
@@ -903,17 +999,16 @@ void Game::sample_statistics() {
 		uint32_t wostock = 0;
 		uint32_t wastock = 0;
 
-		for (uint32_t j = 0; j < plr->get_nr_economies(); ++j) {
-			Economy* const eco = plr->get_economy_by_number(j);
+		for (const auto& economy : plr->economies()) {
 			const TribeDescr& tribe = plr->tribe();
 
 			for (const DescriptionIndex& ware_index : tribe.wares()) {
-				wastock += eco->stock_ware(ware_index);
+				wastock += economy.second->stock_ware(ware_index);
 			}
 
 			for (const DescriptionIndex& worker_index : tribe.workers()) {
 				if (tribe.get_worker_descr(worker_index)->type() != MapObjectType::CARRIER) {
-					wostock += eco->stock_worker(worker_index);
+					wostock += economy.second->stock_worker(worker_index);
 				}
 			}
 		}
@@ -1050,8 +1145,4 @@ void Game::write_statistics(FileWrite& fw) {
 		fw.unsigned_32(general_stats_[p - 1].custom_statistic[j]);
 	}
 }
-
-double logic_rand_as_double(Game* game) {
-	return static_cast<double>(game->logic_rand()) / std::numeric_limits<uint32_t>::max();
-}
-}
+}  // namespace Widelands

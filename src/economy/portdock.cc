@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,7 +48,7 @@ const PortdockDescr& PortDock::descr() const {
 }
 
 PortdockDescr::PortdockDescr(char const* const init_name, char const* const init_descname)
-   : MapObjectDescr(MapObjectType::PORTDOCK, init_name, init_descname) {
+   : MapObjectDescr(MapObjectType::PORTDOCK, init_name, init_descname, "") {
 }
 
 PortDock::PortDock(Warehouse* wh)
@@ -130,7 +130,7 @@ void PortDock::set_economy(Economy* e) {
 	if (fleet_)
 		fleet_->set_economy(e);
 
-	if (upcast(Game, game, &owner().egbase())) {
+	if (upcast(Game, game, &get_owner()->egbase())) {
 		for (ShippingItem& shipping_item : waiting_) {
 			shipping_item.set_economy(*game, e);
 		}
@@ -140,7 +140,7 @@ void PortDock::set_economy(Economy* e) {
 		expedition_bootstrap_->set_economy(e);
 }
 
-void PortDock::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) {
+void PortDock::draw(uint32_t, const Vector2f&, float, RenderTarget*) {
 	// do nothing
 }
 
@@ -160,7 +160,7 @@ bool PortDock::init(EditorGameBase& egbase) {
  * that we merge with a larger fleet when possible.
  */
 void PortDock::init_fleet(EditorGameBase& egbase) {
-	Fleet* fleet = new Fleet(owner());
+	Fleet* fleet = new Fleet(get_owner());
 	fleet->add_port(egbase, this);
 	fleet->init(egbase);
 	// Note: the Fleet calls our set_fleet automatically
@@ -384,10 +384,10 @@ void PortDock::set_need_ship(Game& game, bool need) {
 /**
  * Return the number of wares or workers of the given type that are waiting at the dock.
  */
-uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex) {
+uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex) const {
 	uint32_t count = 0;
 
-	for (ShippingItem& shipping_item : waiting_) {
+	for (const ShippingItem& shipping_item : waiting_) {
 		WareInstance* ware;
 		Worker* worker;
 		shipping_item.get(owner().egbase(), &ware, &worker);
@@ -407,12 +407,12 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 /**
  * Return the number of wares or workers waiting at the dock.
  */
-uint32_t PortDock::count_waiting() {
+uint32_t PortDock::count_waiting() const {
 	return waiting_.size();
 }
 
 /// \returns whether an expedition was started or is even ready
-bool PortDock::expedition_started() {
+bool PortDock::expedition_started() const {
 	return (expedition_bootstrap_ != nullptr) || expedition_ready_;
 }
 
@@ -423,7 +423,7 @@ void PortDock::start_expedition() {
 	expedition_bootstrap_->start();
 }
 
-ExpeditionBootstrap* PortDock::expedition_bootstrap() {
+ExpeditionBootstrap* PortDock::expedition_bootstrap() const {
 	return expedition_bootstrap_.get();
 }
 
@@ -440,7 +440,7 @@ void PortDock::cancel_expedition(Game& game) {
 	expedition_bootstrap_.reset(nullptr);
 }
 
-void PortDock::log_general_info(const EditorGameBase& egbase) {
+void PortDock::log_general_info(const EditorGameBase& egbase) const {
 	PlayerImmovable::log_general_info(egbase);
 
 	if (warehouse_) {
@@ -454,7 +454,7 @@ void PortDock::log_general_info(const EditorGameBase& egbase) {
 		      fleet_ ? fleet_->serial() : 0, need_ship_ ? "true" : "false", waiting_.size());
 	}
 
-	for (ShippingItem& shipping_item : waiting_) {
+	for (const ShippingItem& shipping_item : waiting_) {
 		molog("  IT %u, destination %u\n", shipping_item.object_.serial(),
 		      shipping_item.destination_dock_.serial());
 	}

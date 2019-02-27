@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2017 by the Widelands Development Team
+ * Copyright (C) 2005-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,6 @@
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "graphic/graphic.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -63,10 +62,10 @@ SoundHandler g_sound_handler;
  * time, however, all other information is still unknown, so a real
  * initialization cannot take place.
  * \sa SoundHandler::init()
-*/
+ */
 SoundHandler::SoundHandler()
    : nosound_(false),
-     lock_audio_disabling_(false),
+     is_backend_disabled_(false),
      disable_music_(false),
      disable_fx_(false),
      music_volume_(MIX_MAX_VOLUME),
@@ -84,7 +83,7 @@ SoundHandler::~SoundHandler() {
 /** The real initialization for SoundHandler.
  *
  * \see SoundHandler::SoundHandler()
-*/
+ */
 void SoundHandler::init() {
 	read_config();
 	rng_.seed(SDL_GetTicks());
@@ -100,10 +99,29 @@ void SoundHandler::init() {
 	const uint16_t bufsize = 1024;
 #endif
 
+	SDL_version sdl_version;
+	SDL_GetVersion(&sdl_version);
+	log("**** SOUND REPORT ****\n");
+	log("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+
+	/// SDL 2.0.6 will crash due to upstream bug:
+	/// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
+	if (sdl_version.major == 2 && sdl_version.minor == 0 && sdl_version.patch == 6) {
+		log("Disabled sound due to a bug in SDL 2.0.6\n");
+		nosound_ = true;
+	}
+
+	SDL_MIXER_VERSION(&sdl_version);
+	log("SDL_mixer version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
+	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
+
+	log("**** END SOUND REPORT ****\n");
+
 	if (nosound_) {
 		set_disable_music(true);
 		set_disable_fx(true);
-		lock_audio_disabling_ = true;
+		is_backend_disabled_ = true;
 		return;
 	}
 
@@ -144,7 +162,7 @@ void SoundHandler::initialization_error(const std::string& msg) {
 
 	set_disable_music(true);
 	set_disable_fx(true);
-	lock_audio_disabling_ = true;
+	is_backend_disabled_ = true;
 	return;
 }
 
@@ -214,7 +232,7 @@ void SoundHandler::read_config() {
 /** Load systemwide sound fx into memory.
  * \note This loads only systemwide fx. Worker/building fx will be loaded by
  * their respective conf-file parsers
-*/
+ */
 void SoundHandler::load_system_sounds() {
 	load_fx_if_needed("sound", "click", "click");
 	load_fx_if_needed("sound", "create_construction_site", "create_construction_site");
@@ -223,6 +241,13 @@ void SoundHandler::load_system_sounds() {
 	load_fx_if_needed("sound/military", "site_occupied", "military/site_occupied");
 	load_fx_if_needed("sound", "lobby_chat", "lobby_chat");
 	load_fx_if_needed("sound", "lobby_freshmen", "lobby_freshmen");
+}
+
+/**
+ * Returns 'true' if the playing of sounds is disabled due to sound driver problems.
+ */
+bool SoundHandler::is_backend_disabled() const {
+	return is_backend_disabled_;
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files
@@ -234,7 +259,7 @@ void SoundHandler::load_system_sounds() {
  * \param filename   Name from which filenames will be formed
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
-*/
+ */
 void SoundHandler::load_fx_if_needed(const std::string& dir,
                                      const std::string& basename,
                                      const std::string& fx_name) {
@@ -267,10 +292,11 @@ void SoundHandler::load_fx_if_needed(const std::string& dir,
  * not load the file.
  * \note The complete audio file will be loaded into memory and stays there
  * until the game is finished.
-*/
+ */
 void SoundHandler::load_one_fx(const std::string& path, const std::string& fx_name) {
-	if (nosound_)
+	if (nosound_ || is_backend_disabled_) {
 		return;
+	}
 
 	FileRead fr;
 	if (!fr.try_open(*g_fs, path)) {
@@ -378,11 +404,11 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
  *                         \ref stereo_position
  * \param priority         How important is it that this FX actually gets
  *                         played? (see \ref FXset::priority_)
-*/
+ */
 void SoundHandler::play_fx(const std::string& fx_name,
                            int32_t const stereo_pos,
                            uint8_t const priority) {
-	if (nosound_)
+	if (nosound_ || is_backend_disabled_)
 		return;
 
 	assert(stereo_pos >= -1);
@@ -430,9 +456,9 @@ void SoundHandler::play_fx(const std::string& fx_name,
  * \ref Songset::get_song() is called, i.e. when the song is about to be
  * played. The song will automatically be removed from memory when it has
  * finished playing.
-*/
+ */
 void SoundHandler::register_song(const std::string& dir, const std::string& basename) {
-	if (nosound_)
+	if (nosound_ || is_backend_disabled_)
 		return;
 	assert(g_fs);
 
@@ -459,9 +485,9 @@ void SoundHandler::register_song(const std::string& dir, const std::string& base
  * \note When calling start_music() while music is still fading out from
  * \ref stop_music()
  * or \ref change_music() this function will block until the fadeout is complete
-*/
+ */
 void SoundHandler::start_music(const std::string& songset_name, int32_t fadein_ms) {
-	if (get_disable_music() || nosound_)
+	if (get_disable_music() || nosound_ || is_backend_disabled_)
 		return;
 
 	if (fadein_ms == 0)
@@ -485,7 +511,7 @@ void SoundHandler::start_music(const std::string& songset_name, int32_t fadein_m
 /** Stop playing a songset.
  * \param fadeout_ms Song will fade from 100% to 0% during fadeout_ms
  *                   milliseconds starting from now.
-*/
+ */
 void SoundHandler::stop_music(int32_t fadeout_ms) {
 	if (get_disable_music() || nosound_)
 		return;
@@ -505,7 +531,7 @@ void SoundHandler::stop_music(int32_t fadeout_ms) {
  *                    milliseconds starting from now.
  * If songset_name is empty, another song from the currently active songset will
  * be selected
-*/
+ */
 void SoundHandler::change_music(const std::string& songset_name,
                                 int32_t const fadeout_ms,
                                 int32_t const fadein_ms) {
@@ -543,7 +569,7 @@ int32_t SoundHandler::get_fx_volume() const {
  * get lost otherwise.
  */
 void SoundHandler::set_disable_music(bool const disable) {
-	if (lock_audio_disabling_ || disable_music_ == disable)
+	if (is_backend_disabled_ || disable_music_ == disable)
 		return;
 
 	if (disable) {
@@ -560,9 +586,9 @@ void SoundHandler::set_disable_music(bool const disable) {
 /** Normal set_* function
  * Also, the new value is written back to the config file right away. It might
  * get lost otherwise.
-*/
+ */
 void SoundHandler::set_disable_fx(bool const disable) {
-	if (lock_audio_disabling_)
+	if (is_backend_disabled_)
 		return;
 
 	disable_fx_ = disable;
@@ -578,7 +604,7 @@ void SoundHandler::set_disable_fx(bool const disable) {
  * \param volume The new music volume.
  */
 void SoundHandler::set_music_volume(int32_t volume) {
-	if (!lock_audio_disabling_ && !nosound_) {
+	if (!is_backend_disabled_ && !nosound_) {
 		music_volume_ = volume;
 		Mix_VolumeMusic(volume);
 		g_options.pull_section("global").set_int("music_volume", volume);
@@ -593,7 +619,7 @@ void SoundHandler::set_music_volume(int32_t volume) {
  * \param volume The new music volume.
  */
 void SoundHandler::set_fx_volume(int32_t volume) {
-	if (!lock_audio_disabling_ && !nosound_) {
+	if (!is_backend_disabled_ && !nosound_) {
 		fx_volume_ = volume;
 		Mix_Volume(-1, volume);
 		g_options.pull_section("global").set_int("fx_volume", volume);
@@ -605,7 +631,7 @@ void SoundHandler::set_fx_volume(int32_t volume) {
  * There is a special case for the intro screen's music: only one song will be
  * played. If the user has not clicked the mouse or pressed escape when the song
  * finishes, Widelands will automatically go on to the main menu.
-*/
+ */
 void SoundHandler::music_finished_callback() {
 	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
@@ -626,7 +652,7 @@ void SoundHandler::music_finished_callback() {
 
 /** Callback to notify \ref SoundHandler that a sound effect has finished
  * playing.
-*/
+ */
 void SoundHandler::fx_finished_callback(int32_t const channel) {
 	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 

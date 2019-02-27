@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,14 +39,46 @@
 
 namespace Widelands {
 
+void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
+                                       float scale,
+                                       const RGBColor& player_color,
+                                       RenderTarget* dst) const {
+	// Draw the construction site marker
+	const uint32_t anim_idx = becomes->is_animation_known("build") ?
+	                             becomes->get_animation("build") :
+	                             becomes->get_unoccupied_animation();
+
+	const Animation& anim = g_gr->animations().get_animation(anim_idx);
+	const size_t nr_frames = anim.nr_frames();
+	const uint32_t cur_frame = totaltime ? completedtime * nr_frames / totaltime : 0;
+	uint32_t anim_time = cur_frame * FRAME_LENGTH;
+
+	if (cur_frame) {  //  not the first pic
+		// Draw the complete prev pic , so we won't run into trouble if images have different sizes
+		dst->blit_animation(point_on_dst, scale, anim_idx, anim_time - FRAME_LENGTH, player_color);
+	} else if (was) {
+		//  Is the first picture but there was another building here before,
+		//  get its most fitting picture and draw it instead.
+		dst->blit_animation(point_on_dst, scale, was->get_unoccupied_animation(),
+		                    anim_time - FRAME_LENGTH, player_color);
+	}
+	// Now blit a segment of the current construction phase from the bottom.
+	int percent = 100 * completedtime * nr_frames;
+	if (totaltime) {
+		percent /= totaltime;
+	}
+	percent -= 100 * cur_frame;
+	dst->blit_animation(point_on_dst, scale, anim_idx, anim_time, player_color, percent);
+}
+
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/partially_finished/constructionsite/init.lua
+ */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
-                                             const Tribes& tribes)
-   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes) {
+                                             const EditorGameBase& egbase)
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase) {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
 }
 
@@ -149,15 +181,18 @@ If construction was finished successfully, place the building at our position.
 ===============
 */
 void ConstructionSite::cleanup(EditorGameBase& egbase) {
-	// Register whether the window was open
-	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kStartWarp));
+	if (work_steps_ <= work_completed_) {
+		// If the building is finished, register whether the window was open
+		Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kStartWarp));
+	}
+
 	PartiallyFinishedBuilding::cleanup(egbase);
 
 	if (work_steps_ <= work_completed_) {
 		// Put the real building in place
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
 		old_buildings_.push_back(becomes_idx);
-		Building& b = building_->create(egbase, owner(), position_, false, false, old_buildings_);
+		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
@@ -262,7 +297,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			wq.set_max_size(wq.get_max_size() - 1);
 
 			// Update consumption statistic
-			owner().ware_consumed(wq.get_index(), 1);
+			get_owner()->ware_consumed(wq.get_index(), 1);
 
 			working_ = true;
 			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
@@ -302,7 +337,6 @@ Draw the construction site.
 ===============
 */
 void ConstructionSite::draw(uint32_t gametime,
-                            TextToDraw draw_text,
                             const Vector2f& point_on_dst,
                             float scale,
                             RenderTarget* dst) {
@@ -323,44 +357,6 @@ void ConstructionSite::draw(uint32_t gametime,
 		info_.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
 	}
 
-	uint32_t anim_idx;
-	try {
-		anim_idx = building().get_animation("build");
-	} catch (MapObjectDescr::AnimationNonexistent&) {
-		try {
-			anim_idx = building().get_animation("unoccupied");
-		} catch (MapObjectDescr::AnimationNonexistent) {
-			anim_idx = building().get_animation("idle");
-		}
-	}
-	const Animation& anim = g_gr->animations().get_animation(anim_idx);
-	const size_t nr_frames = anim.nr_frames();
-	const uint32_t cur_frame =
-	   info_.totaltime ? info_.completedtime * nr_frames / info_.totaltime : 0;
-	tanim = cur_frame * FRAME_LENGTH;
-
-	if (cur_frame) {  //  not the first pic
-		// Draw the complete prev pic , so we won't run into trouble if images have different sizes
-		dst->blit_animation(point_on_dst, scale, anim_idx, tanim - FRAME_LENGTH, player_color);
-	} else if (!old_buildings_.empty()) {
-		DescriptionIndex prev_idx = old_buildings_.back();
-		const BuildingDescr* prev_building = owner().tribe().get_building_descr(prev_idx);
-		//  Is the first picture but there was another building here before,
-		//  get its most fitting picture and draw it instead.
-		const uint32_t prev_building_anim_idx = prev_building->get_animation(
-		   prev_building->is_animation_known("unoccupied") ? "unoccupied" : "idle");
-		dst->blit_animation(
-		   point_on_dst, scale, prev_building_anim_idx, tanim - FRAME_LENGTH, player_color);
-	}
-	// Now blit a segment of the current construction phase from the bottom.
-	int percent = 100 * info_.completedtime * nr_frames;
-	if (info_.totaltime) {
-		percent /= info_.totaltime;
-	}
-	percent -= 100 * cur_frame;
-	dst->blit_animation(point_on_dst, scale, anim_idx, tanim, player_color, percent);
-
-	// Draw help strings
-	draw_info(draw_text, point_on_dst, scale, dst);
+	info_.draw(point_on_dst, scale, player_color, dst);
 }
-}
+}  // namespace Widelands

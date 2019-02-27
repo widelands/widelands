@@ -46,6 +46,7 @@ tribes:new_trainingsite_type {
    },
 
    aihints = {
+      trainingsites_max_percent = 25,
       prohibited_till = 900,
       very_weak_ai_limit = 1,
       weak_ai_limit = 2
@@ -81,16 +82,16 @@ tribes:new_trainingsite_type {
          descname = _"sleeping",
          actions = {
             "sleep=5000",
-            "check_soldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
+            "checksoldier=soldier attack 9", -- dummy check to get sleep rated as skipped - else it will change statistics
          }
       },
       upgrade_soldier_evade_0 = {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("barbarians_building", "upgrading soldier evade from level 0 to level 1"),
          actions = {
-            "check_soldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
+            "checksoldier=soldier evade 0", -- Fails when aren't any soldier of level 0 evade
             "sleep=15000",
-            "check_soldier=soldier evade 0", -- Because the soldier can be expelled by the player
+            "checksoldier=soldier evade 0", -- Because the soldier can be expelled by the player
             "consume=barbarians_bread fish,meat beer_strong",
             "animate=working 15000",
             "train=soldier evade 0 1"
@@ -100,9 +101,9 @@ tribes:new_trainingsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start upgrading ... because ...
          descname = pgettext("barbarians_building", "upgrading soldier evade from level 1 to level 2"),
          actions = {
-            "check_soldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
+            "checksoldier=soldier evade 1", -- Fails when aren't any soldier of level 1 evade
             "sleep=15000",
-            "check_soldier=soldier evade 1", -- Because the soldier can be expulsed by the player
+            "checksoldier=soldier evade 1", -- Because the soldier can be expulsed by the player
             "consume=barbarians_bread:2 fish,meat beer_strong",
             "animate=working 15000",
             "train=soldier evade 1 2"

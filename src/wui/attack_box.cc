@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,7 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
-#include "graphic/font_handler1.h"
-#include "graphic/graphic.h"
+#include "graphic/font_handler.h"
 #include "graphic/text/font_set.h"
 #include "graphic/text_constants.h"
 #include "logic/map_objects/tribes/soldier.h"
@@ -49,8 +48,15 @@ AttackBox::AttackBox(UI::Panel* parent,
 uint32_t AttackBox::get_max_attackers() {
 	assert(player_);
 
-	if (upcast(Building, building, map_.get_immovable(*node_coordinates_)))
+	if (upcast(Building, building, map_.get_immovable(*node_coordinates_))) {
+		if (player_->vision(map_.get_index(building->get_position(), map_.get_width())) <= 1) {
+			// Player can't see the buildings door, so it can't be attacked
+			// This is the same check as done later on in send_player_enemyflagaction()
+			return 0;
+		}
+
 		return player_->find_attack_soldiers(building->base_flag());
+	}
 	return 0;
 }
 
@@ -60,10 +66,9 @@ std::unique_ptr<UI::HorizontalSlider> AttackBox::add_slider(UI::Box& parent,
                                                             uint32_t min,
                                                             uint32_t max,
                                                             uint32_t initial,
-                                                            char const* picname,
                                                             char const* hint) {
 	std::unique_ptr<UI::HorizontalSlider> result(new UI::HorizontalSlider(
-	   &parent, 0, 0, width, height, min, max, initial, g_gr->images().get(picname), hint));
+	   &parent, 0, 0, width, height, min, max, initial, UI::SliderStyle::kWuiDark, hint));
 	parent.add(result.get());
 	return result;
 }
@@ -80,9 +85,8 @@ std::unique_ptr<UI::Button> AttackBox::add_button(UI::Box& parent,
                                                   const std::string& text,
                                                   void (AttackBox::*fn)(),
                                                   const std::string& tooltip_text) {
-	std::unique_ptr<UI::Button> button(new UI::Button(&parent, text, 8, 8, 26, 26,
-	                                                  g_gr->images().get("images/ui_basic/but2.png"),
-	                                                  text, tooltip_text));
+	std::unique_ptr<UI::Button> button(new UI::Button(
+	   &parent, text, 8, 8, 26, 26, UI::ButtonStyle::kWuiPrimary, text, tooltip_text));
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));
 	parent.add(button.get());
 	return button;
@@ -114,9 +118,8 @@ void AttackBox::update_attack() {
 	soldiers_slider_->set_enabled(max_attackers > 0);
 	more_soldiers_->set_enabled(max_attackers > soldiers_slider_->get_value());
 	less_soldiers_->set_enabled(soldiers_slider_->get_value() > 0);
-
-	/** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
 	soldiers_text_->set_text(
+	   /** TRANSLATORS: %1% of %2% soldiers. Used in Attack box. */
 	   (boost::format(_("%1% / %2%")) % soldiers_slider_->get_value() % max_attackers).str());
 
 	more_soldiers_->set_title(std::to_string(max_attackers));
@@ -145,8 +148,8 @@ void AttackBox::init() {
 	soldiers_text_.reset(
 	   &add_text(columnbox, attack_string, UI::Align::kCenter, UI_FONT_SIZE_ULTRASMALL));
 
-	soldiers_slider_ = add_slider(columnbox, 100, 10, 0, max_attackers, max_attackers > 0 ? 1 : 0,
-	                              "images/ui_basic/but2.png", _("Number of soldiers"));
+	soldiers_slider_ = add_slider(
+	   columnbox, 100, 10, 0, max_attackers, max_attackers > 0 ? 1 : 0, _("Number of soldiers"));
 
 	soldiers_slider_->changed.connect(boost::bind(&AttackBox::update_attack, this));
 	more_soldiers_ = add_button(linebox, std::to_string(max_attackers),

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,6 @@
 
 #include "graphic/gl/coordinate_conversion.h"
 #include "logic/map_objects/world/terrain_description.h"
-#include "logic/widelands.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -87,8 +86,9 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 	// value of 'offset' to the actual dimension of the 'rect' to get to desired
 	// dimension of the 'rect'
 	const Vector2f br_map = MapviewPixelFunctions::panel_to_map(
-	   viewpoint, zoom, Vector2f(dst->get_rect().w + std::abs(dst->get_offset().x),
-	                             dst->get_rect().h + std::abs(dst->get_offset().y)));
+	   viewpoint, zoom,
+	   Vector2f(dst->get_rect().w + std::abs(dst->get_offset().x),
+	            dst->get_rect().h + std::abs(dst->get_offset().y)));
 	max_fx_ = std::ceil(br_map.x / kTriangleWidth);
 	max_fy_ = std::ceil(br_map.y / kTriangleHeight);
 
@@ -147,8 +147,8 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 
 			f.brightness = field_brightness(f.fcoords);
 
-			Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
-			f.owner = owned_by != 0 ? &egbase.player(owned_by) : nullptr;
+			const Widelands::PlayerNumber owned_by = f.fcoords.field->get_owned_by();
+			f.owner = owned_by != 0 ? egbase.get_player(owned_by) : nullptr;
 			f.is_border = f.fcoords.field->is_border();
 			f.vision = 2;
 			f.roads = f.fcoords.field->get_roads();
