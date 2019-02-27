@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,6 +77,6 @@ private:
 template <>
 MapHollowRegion<Area<>>::MapHollowRegion(const Map& map, const HollowArea<Area<>>& hollow_area);
 template <> bool MapHollowRegion<Area<>>::advance(const Map& map);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPHOLLOWREGION_H

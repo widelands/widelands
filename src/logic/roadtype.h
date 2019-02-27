@@ -31,6 +31,6 @@ enum RoadType : uint8_t {
 	kWaterway = 3,
 };
 
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_ROADTYPE_H

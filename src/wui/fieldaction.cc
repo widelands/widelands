@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -362,9 +362,8 @@ void FieldActionWindow::add_buttons_auto() {
 				add_button(buildbox, "destroy_waterway", pic_remwaterway, &FieldActionWindow::act_removewaterway,
 				           _("Destroy a Waterway"));
 		}
-	} else if (player_ &&
-	           1 < player_->vision(
-	                  Widelands::Map::get_index(node_, ibase().egbase().map().get_width())))
+	} else if (player_ && 1 < player_->vision(Widelands::Map::get_index(
+	                             node_, ibase().egbase().map().get_width())))
 		add_buttons_attack();
 
 	//  Watch actions, only when game (no use in editor) same for statistics.

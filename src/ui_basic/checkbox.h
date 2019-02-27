@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -99,7 +99,7 @@ private:
  * can be either checked (on) or unchecked (off)
  * A checkbox only differs from a Statebox in that clicking on it toggles the
  * state
-*/
+ */
 struct Checkbox : public Statebox {
 
 	/**
@@ -133,6 +133,6 @@ struct Checkbox : public Statebox {
 private:
 	void clicked() override;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_CHECKBOX_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -804,8 +804,9 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	   const uint32_t attribute_id, const DescriptionIndex index,
-	   const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
+	                                 const uint32_t attribute_id, const DescriptionIndex index,
+	                                 const ImmovableDescr& immovable_description,
+	                                 MapObjectDescr::OwnerType owner_type) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
@@ -992,10 +993,11 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
 			get_owner()->add_message_with_timeout(
-			   game, std::unique_ptr<Message>(
-			            new Message(Message::Type::kGeologists, game.get_gametime(),
-			                        rdescr->descname(), rdescr->representative_image(),
-			                        rdescr->descname(), message, position, serial_, rdescr->name())),
+			   game,
+			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
+			                                        rdescr->descname(), rdescr->representative_image(),
+			                                        rdescr->descname(), message, position, serial_,
+			                                        rdescr->name())),
 			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}
@@ -1887,9 +1889,10 @@ void Worker::return_update(Game& game, State& state) {
 		      .str();
 
 		get_owner()->add_message(
-		   game, std::unique_ptr<Message>(new Message(
-		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
-		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
+		   game,
+		   std::unique_ptr<Message>(new Message(Message::Type::kGameLogic, game.get_gametime(),
+		                                        _("Worker"), "images/ui_basic/menu_help.png",
+		                                        _("Worker got lost!"), message, get_position())),
 		   serial_);
 		set_location(nullptr);
 		return pop_task(game);
@@ -2083,9 +2086,18 @@ void Worker::dropoff_update(Game& game, State&) {
 
 	WareInstance* ware = get_carried_ware(game);
 	BaseImmovable* const location = game.map()[get_position()].get_immovable();
+
+	// If the building just got destroyed, pop the task
+	PlayerImmovable* current_location = get_location(game);
+	if (current_location == nullptr) {
+		molog("%s: Unable to dropoff ware in building at (%d,%d) - there is no building there\n",
+		      descr().name().c_str(), get_position().x, get_position().y);
+		return pop_task(game);
+	}
+
 #ifndef NDEBUG
-	Building& ploc = dynamic_cast<Building&>(*get_location(game));
-	assert(&ploc == location || &ploc.base_flag() == location);
+	Building* ploc = dynamic_cast<Building*>(current_location);
+	assert(ploc == location || &ploc->base_flag() == location);
 #endif
 
 	// Deliver the ware
@@ -2683,7 +2695,7 @@ void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
 	}
 }
 
-/** Check if militray sites have becom visible by now.
+/** Check if militray sites have become visible by now.
  *
  * After the pop in prepare_scouts_worklist,
  * the latest entry of scouts_worklist is the next MS to visit (if known)
@@ -2716,7 +2728,7 @@ void Worker::add_sites(Game& game,
                        const Player& player,
                        std::vector<ImmovableFound>& found_sites) {
 
-	// If there are many enemy sites, push a random walk request into queue evry third finding.
+	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
 
 	for (const ImmovableFound& vu : found_sites) {
@@ -3231,4 +3243,4 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 		}
 	}
 }
-}
+}  // namespace Widelands

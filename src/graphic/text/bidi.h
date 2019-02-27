@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,6 +46,6 @@ bool cannot_start_line(const UChar& c);
 bool cannot_end_line(const UChar& c);
 bool is_diacritic(const UChar& c);
 
-}  // namespace UI
+}  // namespace i18n
 
 #endif  // end of include guard: WL_GRAPHIC_TEXT_BIDI_H

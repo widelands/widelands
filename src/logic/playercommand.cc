@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1462,8 +1462,8 @@ CmdResetWorkerTargetQuantity::CmdResetWorkerTargetQuantity(const uint32_t init_d
 void CmdResetWorkerTargetQuantity::execute(Game& game) {
 	Player* player = game.get_player(sender());
 	const TribeDescr& tribe = player->tribe();
-	if (player->has_economy(economy()) && game.tribes().ware_exists(ware_type())) {
-		const int count = tribe.get_ware_descr(ware_type())->default_target_quantity(tribe.name());
+	if (player->has_economy(economy()) && game.tribes().worker_exists(ware_type())) {
+		const int count = tribe.get_worker_descr(ware_type())->default_target_quantity();
 		player->get_economy(economy())->set_worker_target_quantity(ware_type(), count, duetime());
 	}
 }
@@ -1959,4 +1959,4 @@ void CmdProposeTrade::write(FileWrite& /* fw */,
 	// TODO(sirver,trading): Implement this.
 	NEVER_HERE();
 }
-}
+}  // namespace Widelands

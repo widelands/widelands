@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,11 +52,11 @@ LoginBox::LoginBox(Panel& parent)
 	                                   (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2,
 	   get_inner_h() - 20 - margin, 200, 20, UI::ButtonStyle::kWuiPrimary, _("Login"));
 	loginbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_ok, boost::ref(*this)));
-	UI::Button* cancelbtn =
-	   new UI::Button(this, "cancel", UI::g_fh->fontset()->is_rtl() ?
-	                                     (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
-	                                     (get_inner_w() / 2 - 200) / 2,
-	                  loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
+	UI::Button* cancelbtn = new UI::Button(
+	   this, "cancel",
+	   UI::g_fh->fontset()->is_rtl() ? (get_inner_w() / 2 - 200) / 2 + get_inner_w() / 2 :
+	                                   (get_inner_w() / 2 - 200) / 2,
+	   loginbtn->get_y(), 200, 20, UI::ButtonStyle::kWuiSecondary, _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&LoginBox::clicked_back, boost::ref(*this)));
 
 	Section& s = g_options.pull_section("global");

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,7 @@ Battle::Battle(Game& game, Soldier* first_soldier, Soldier* second_soldier)
 	assert(first_soldier->get_owner() != second_soldier->get_owner());
 	{
 		StreamWrite& ss = game.syncstream();
-		ss.unsigned_32(0x00e111ba);  // appears as ba111e00 in a hexdump
+		ss.unsigned_8(SyncEntry::kBattle);
 		ss.unsigned_32(first_soldier->serial());
 		ss.unsigned_32(second_soldier->serial());
 	}
@@ -392,4 +392,4 @@ MapObject::Loader* Battle::load(EditorGameBase& egbase, MapObjectLoader& mol, Fi
 
 	return loader.release();
 }
-}
+}  // namespace Widelands

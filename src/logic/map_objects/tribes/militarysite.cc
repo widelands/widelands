@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -290,9 +290,9 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
 }
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/militarysites/atlanteans/castle/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/militarysites/atlanteans/castle/init.lua
+ */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
                                      const EditorGameBase& egbase)
@@ -979,4 +979,4 @@ void MilitarySite::set_soldier_preference(SoldierPreference p) {
 	soldier_preference_ = p;
 	next_swap_soldiers_time_ = 0;
 }
-}
+}  // namespace Widelands

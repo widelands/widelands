@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,6 +71,6 @@ private:
 	void draw(RenderTarget&) override;
 	void update(bool repaint);
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_PROGRESSWINDOW_H

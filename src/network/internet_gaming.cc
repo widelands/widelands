@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -378,11 +378,11 @@ void InternetGaming::handle_packet(RecvPacket& packet) {
 			format_and_add_chat("", "", true, _("Welcome to the Widelands Metaserver!"));
 			const std::string assigned_name = packet.string();
 			if (clientname_ != assigned_name) {
-				format_and_add_chat(
-				   "", "", true, (boost::format(_("You have been logged in as '%s' since your "
-				                                  "requested name is already in use or reserved.")) %
-				                  assigned_name)
-				                    .str());
+				format_and_add_chat("", "", true,
+				                    (boost::format(_("You have been logged in as '%s' since your "
+				                                     "requested name is already in use or reserved.")) %
+				                     assigned_name)
+				                       .str());
 			}
 			clientname_ = assigned_name;
 			clientrights_ = packet.string();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -173,8 +173,8 @@ void GameClient::run() {
 	game.set_write_syncstream(g_options.pull_section("global").get_bool("write_syncstreams", true));
 
 	try {
-		UI::ProgressWindow* loader_ui = new UI::ProgressWindow();
-		d->modal = loader_ui;
+		std::unique_ptr<UI::ProgressWindow> loader_ui(new UI::ProgressWindow());
+		d->modal = loader_ui.get();
 		std::vector<std::string> tipstext;
 		tipstext.push_back("general_game");
 		tipstext.push_back("multiplayer");
@@ -182,7 +182,7 @@ void GameClient::run() {
 			tipstext.push_back(get_players_tribe());
 		} catch (NoTribe) {
 		}
-		GameTips tips(*loader_ui, tipstext);
+		GameTips tips(*loader_ui.get(), tipstext);
 
 		loader_ui->step(_("Preparing game"));
 
@@ -199,20 +199,21 @@ void GameClient::run() {
 		game.set_ibase(igb);
 		igb->set_chat_provider(*this);
 		if (!d->settings.savegame) {  //  new map
-			game.init_newgame(loader_ui, d->settings);
+			game.init_newgame(loader_ui.get(), d->settings);
 		} else {  // savegame
-			game.init_savegame(loader_ui, d->settings);
+			game.init_savegame(loader_ui.get(), d->settings);
 		}
 		d->time.reset(game.get_gametime());
 		d->lasttimestamp = game.get_gametime();
 		d->lasttimestamp_realtime = SDL_GetTicks();
 
 		d->modal = igb;
-		game.run(loader_ui, d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-		                                           Widelands::Game::NewMPScenario :
-		                                           Widelands::Game::NewNonScenario,
-		         "", false,
-		         (boost::format("netclient_%d") % static_cast<int>(d->settings.usernum)).str());
+		game.run(
+		   loader_ui.get(),
+		   d->settings.savegame ?
+		      Widelands::Game::Loaded :
+		      d->settings.scenario ? Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
+		   "", false, (boost::format("netclient_%d") % static_cast<int>(d->settings.usernum)).str());
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (internet_)
@@ -859,6 +860,7 @@ void GameClient::handle_packet(RecvPacket& packet) {
 		int32_t const time = packet.signed_32();
 		d->time.receive(time);
 		d->game->enqueue_command(new CmdNetCheckSync(time, [this] { sync_report_callback(); }));
+		d->game->report_sync_request();
 		break;
 	}
 
@@ -890,8 +892,11 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	case NETCMD_INFO_DESYNC:
 		log("[Client] received NETCMD_INFO_DESYNC. Trying to salvage some "
 		    "information for debugging.\n");
-		if (d->game)
+		if (d->game) {
 			d->game->save_syncstream(true);
+			// We don't know our playernumber, so report as -1
+			d->game->report_desync(-1);
+		}
 		break;
 
 	default:

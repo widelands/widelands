@@ -79,7 +79,6 @@ pics_dir = path.dirname(__file__) .. "pics/"
 --        *Optional*. Additional custom tooltip entries, e.g.::
 --
 --            tooltips = {
---               -- TRANSLATORS: This is an entry in a terrain tooltip. Try to use 1 word if possible.
 --               _"likes trees",
 --            },
 --

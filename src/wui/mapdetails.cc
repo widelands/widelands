@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,10 +87,10 @@ void MapDetails::update(const MapData& mapdata, bool localize_mapname) {
 	clear();
 	// Show directory information
 	if (mapdata.maptype == MapData::MapType::kDirectory) {
-		name_label_.set_text((boost::format("<rt>%s%s</rt>") %
-		                      as_heading(_("Directory:"), style_, true) %
-		                      as_content(mapdata.localized_name, style_))
-		                        .str());
+		name_label_.set_text(
+		   (boost::format("<rt>%s%s</rt>") % as_heading(_("Directory:"), style_, true) %
+		    as_content(mapdata.localized_name, style_))
+		      .str());
 		main_box_.set_size(main_box_.get_w(), get_h());
 
 	} else {  // Show map information

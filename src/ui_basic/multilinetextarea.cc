@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -159,9 +159,9 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	case UI::Align::kLeft:
 		anchor = RICHTEXT_MARGIN;
 	}
-	rendered_text_->draw(
-	   dst, Vector2i(anchor, 0), Recti(0, scrollbar_.get_scrollpos(), rendered_text_->width(),
-	                                   rendered_text_->height() - scrollbar_.get_scrollpos()));
+	rendered_text_->draw(dst, Vector2i(anchor, 0),
+	                     Recti(0, scrollbar_.get_scrollpos(), rendered_text_->width(),
+	                           rendered_text_->height() - scrollbar_.get_scrollpos()));
 }
 
 bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {

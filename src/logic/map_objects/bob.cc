@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -648,9 +648,8 @@ void Bob::movepath_update(Game& game, State& state) {
 		}
 	}
 
-	bool forcemove =
-	   (state.ivar2 &&
-	    static_cast<Path::StepVector::size_type>(state.ivar1) + 1 == path->get_nsteps());
+	bool forcemove = (state.ivar2 && static_cast<Path::StepVector::size_type>(state.ivar1) + 1 ==
+	                                    path->get_nsteps());
 
 	++state.ivar1;
 	return start_task_move(game, dir, state.diranims, state.ivar2 == 2 ? true : forcemove);
@@ -658,10 +657,10 @@ void Bob::movepath_update(Game& game, State& state) {
 }
 
 /**
-* Move into one direction for one step.
-* \li ivar1: direction
-* \li ivar2: non-zero if the move should be forced
-*/
+ * Move into one direction for one step.
+ * \li ivar1: direction
+ * \li ivar2: non-zero if the move should be forced
+ */
 Bob::Task const Bob::taskMove = {"move", &Bob::move_update, nullptr, nullptr, true};
 
 /**
@@ -894,6 +893,7 @@ void Bob::set_position(EditorGameBase& egbase, const Coords& coords) {
 	// randomly generated movements.
 	if (upcast(Game, game, &egbase)) {
 		StreamWrite& ss = game->syncstream();
+		ss.unsigned_8(SyncEntry::kBobSetPosition);
 		ss.unsigned_32(serial());
 		ss.signed_16(coords.x);
 		ss.signed_16(coords.y);
@@ -1160,4 +1160,4 @@ void Bob::save(EditorGameBase& eg, MapObjectSaver& mos, FileWrite& fw) {
 		fw.c_string(state.program ? state.program->get_name() : "");
 	}
 }
-}
+}  // namespace Widelands

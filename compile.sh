@@ -75,6 +75,8 @@ print_help () {
   }
 
 
+## Get command and options to use in update.sh
+COMMANDLINE="$0 $@"
 
 ## Options to control the build.
 BUILD_WEBSITE="ON"
@@ -294,13 +296,7 @@ if ! [ -f src/wlapplication.cc ] ; then
 fi
 
 bzr pull
-cd build
-$buildtool
-rm  ../VERSION || true
-rm  ../widelands || true
-cp VERSION ../VERSION
-mv src/widelands ../widelands
-cd ..
+$COMMANDLINE
 
 echo " "
 echo "################################################"

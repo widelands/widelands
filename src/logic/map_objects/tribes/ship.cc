@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1036,20 +1036,19 @@ void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	molog("Ship belongs to fleet: %u\n destination: %s\n lastdock: %s\n",
-	      fleet_ ? fleet_->serial() : 0, (destination_.is_set()) ?
-	                                        (boost::format("%u (%d x %d)") % destination_.serial() %
-	                                         destination_.get(egbase)->get_positions(egbase)[0].x %
-	                                         destination_.get(egbase)->get_positions(egbase)[0].y)
-	                                           .str()
-	                                           .c_str() :
-	                                        "-",
-	      (lastdock_.is_set()) ?
-	         (boost::format("%u (%d x %d)") % lastdock_.serial() %
-	          lastdock_.get(egbase)->get_positions(egbase)[0].x %
-	          lastdock_.get(egbase)->get_positions(egbase)[0].y)
-	            .str()
-	            .c_str() :
-	         "-");
+	      fleet_ ? fleet_->serial() : 0,
+	      (destination_.is_set()) ? (boost::format("%u (%d x %d)") % destination_.serial() %
+	                                 destination_.get(egbase)->get_positions(egbase)[0].x %
+	                                 destination_.get(egbase)->get_positions(egbase)[0].y)
+	                                   .str()
+	                                   .c_str() :
+	                                "-",
+	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
+	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
+	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	                                .str()
+	                                .c_str() :
+	                             "-");
 
 	molog("In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
 	      (expedition_) ? "expedition" : "transportation");

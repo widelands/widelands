@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -260,4 +260,4 @@ template <> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map) {
 	assert(remaining_in_row_ < 10000);  //  Catch wrapping (integer underflow)
 	return true;
 }
-}
+}  // namespace Widelands

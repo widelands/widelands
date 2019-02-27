@@ -22,9 +22,17 @@ local wc_desc = _ (
    "area. The winner will be the player or the team that is able to keep " ..
    "that area for at least 20 minutes."
 )
+
+-- Table of fields that are worth conquering
+local fields = {}
+
 return {
    name = wc_name,
    description = wc_desc,
+   init = function()
+      -- Get all valuable fields of the map
+      fields = wl.Game().map.conquerable_fields
+   end,
    func = function()
       local plrs = wl.Game().players
 
@@ -35,9 +43,6 @@ return {
       local time_to_keep_territory = 20 * 60 -- 20 minutes
       -- time in secs, if == 0 -> victory
       territory_points.remaining_time = time_to_keep_territory
-
-      -- Get all valueable fields of the map
-      local fields = get_buildable_fields()
 
       local function _send_state()
          set_textdomain("win_conditions")
@@ -50,7 +55,7 @@ return {
                msg = msg .. losing_status_header(plrs) .. vspace(8)
             end
             msg = msg .. vspace(8) .. game_status.body .. territory_status(fields, "has")
-         send_message(player, game_status.title, msg, {popup = true})
+            player:send_message(game_status.title, msg, {popup = true})
          end
       end
 
@@ -59,12 +64,15 @@ return {
          -- Sleep 30 seconds == STATISTICS_SAMPLE_TIME
          sleep(30000)
 
+         -- A player might have been defeated since the last calculation
+         check_player_defeated(plrs, lost_game.title, lost_game.body)
+
          -- Check if a player or team is a candidate and update variables
-         calculate_territory_points(fields, plrs, wc_descname, wc_version)
+         calculate_territory_points(fields, wl.Game().players)
 
          -- Do this stuff, if the game is over
-         if territory_points.remaining_time == 0 then
-            territory_game_over(fields, plrs, wc_descname, wc_version)
+         if territory_points.remaining_time == 0 or count_factions(plrs) <= 1 then
+            territory_game_over(fields, wl.Game().players, wc_descname, wc_version)
             break
          end
 
