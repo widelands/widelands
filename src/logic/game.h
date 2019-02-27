@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -176,6 +176,10 @@ public:
 	void save_syncstream(bool save);
 	void init_newgame(UI::ProgressWindow* loader_ui, const GameSettings&);
 	void init_savegame(UI::ProgressWindow* loader_ui, const GameSettings&);
+
+	/// Run the win condition that is defined by win_condition_script_
+	void run_win_condition();
+
 	enum StartGameType { NewSPScenario, NewNonScenario, Loaded, NewMPScenario };
 
 	bool run(UI::ProgressWindow* loader_ui,
@@ -403,6 +407,7 @@ private:
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
+	std::string win_condition_script_;
 	bool replay_;
 };
 

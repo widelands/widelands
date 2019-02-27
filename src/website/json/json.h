@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 by the Widelands Development Team
+ * Copyright (C) 2018-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +43,7 @@ public:
 	// Constructor for root node
 	explicit Element() : JSON::Element("", 0) {
 	}
+	virtual ~Element() = default;
 
 	JSON::Object* add_object(const std::string& key = "");
 	JSON::Array* add_array(const std::string& key);
