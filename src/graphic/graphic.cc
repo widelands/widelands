@@ -116,14 +116,14 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		    SDL_GetCurrentVideoDriver(), disp_mode.format, disp_mode.w, disp_mode.h);
 		const int bytes_per_pixel = SDL_BYTESPERPIXEL(disp_mode.format);
 		if (bytes_per_pixel != 4) {
-			log("ERROR: Wrong SDL_BYTESPERPIXEL, expected 4 but got %d\n", bytes_per_pixel);
+			const std::string error_message = (boost::format("SDL should report 4 bytes per pixel, but %d were reported instead.\nPlease check that everything's OK with your graphics driver.") % bytes_per_pixel).str();
+			log("ERROR: %s\n", error_message.c_str());
 			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Video Error",
-			                         (boost::format("SDL should report 4 bytes per pixel, but %d were reported instead.\n\nPlease check that everything's OK with your graphics driver.") % bytes_per_pixel).str().c_str(),
+			                         error_message.c_str(),
 			                         nullptr);
 			exit(1);
 
 		}
-		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
 	}
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
