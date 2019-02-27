@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # abuyop <abuyop@gmail.com>, 2015,2017
@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-04-22 08:28+0000\n"
-"PO-Revision-Date: 2018-04-15 15:43+0000\n"
+"POT-Creation-Date: 2019-02-09 09:43+0000\n"
+"PO-Revision-Date: 2019-02-09 09:44+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Malay (http://www.transifex.com/widelands/widelands/language/ms/)\n"
 "MIME-Version: 1.0\n"
@@ -103,57 +103,28 @@ msgstr "Anda akan mendapat mata bagi barangan berharga di dalam gudang anda. Pem
 msgid "Points"
 msgstr "Mata"
 
-#: ../../data/scripting/win_conditions/collectors.lua:126
+#: ../../data/scripting/win_conditions/collectors.lua:130
 #, lua-format
 msgid "Status for %s"
 msgstr "Satus untuk %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:139
+#: ../../data/scripting/win_conditions/collectors.lua:143
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) x %3$i = %4$i P"
 
-#: ../../data/scripting/win_conditions/collectors.lua:143
+#: ../../data/scripting/win_conditions/collectors.lua:147
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Jumlah: %i mata"
 
-#: ../../data/scripting/win_conditions/collectors.lua:156
-msgid "The game has ended."
-msgstr "Permainan tamat."
-
-#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:163
-#, lua-format
-msgid "%i minute"
-msgid_plural "%i minutes"
-msgstr[0] "%i minit"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:168
-msgid "%1% hour and %2%"
-msgid_plural "%1% hours and %2%"
-msgstr[0] "%1% jam dan %2%"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/collectors.lua:171
-msgid "%1% hour"
-msgid_plural "%1% hours"
-msgstr[0] "%1% jam"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:175
-#, lua-format
-msgid "The game will end in %s."
-msgstr "Permainan akan tamat dalam tempoh %s."
-
-#: ../../data/scripting/win_conditions/collectors.lua:188
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Status bagi Pasukan %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:190
+#: ../../data/scripting/win_conditions/collectors.lua:170
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -183,53 +154,56 @@ msgstr "Permainan Tanpa Penamat (tiada kabus)"
 msgid "This is an endless game without rules. Fog of war is disabled."
 msgstr "Ini merupakan permainan tanpa penamat tanpa peraturan. Kabus perang dilumpuhkan."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:17
+#: ../../data/scripting/win_conditions/territorial_functions.lua:12
+#, lua-format
+msgid "Team %i"
+msgstr "Pasukan %i"
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:13
+msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s memiliki %2$3.0f%% keluasan tanah (%3$i dari %4$i)."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:14
+msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s memiliki %2$3.0f%% keluasan tanah (%3$i dari %4$i)."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:232
+msgid "You own more than half of the map’s area."
+msgstr "Anda menguasai lebih dari separuh kawasan peta."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:233
+#, lua-format
+msgid "Keep it for %i more minute to win the game."
+msgid_plural "Keep it for %i more minutes to win the game."
+msgstr[0] "Kekalkannya lebih dari %i minit lagi untuk memenangi permainan."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:259
+#, lua-format
+msgid "%s owns more than half of the map’s area."
+msgstr "%s menguasai lebih dari separuh kawasan peta."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:260
+#, lua-format
+msgid "You’ve still got %i minute to prevent a victory."
+msgid_plural "You’ve still got %i minutes to prevent a victory."
+msgstr[0] "Anda masih mempunyai %i minit lagi untuk menghalang kemenangan."
+
+#: ../../data/scripting/win_conditions/territorial_lord.lua:18
 msgid "Territorial Lord"
 msgstr "Pemerintah Berwilayah"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:20
+#: ../../data/scripting/win_conditions/territorial_lord.lua:21
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr "Setiap pemain atau pasukan cuba menguasai lebih dari separuh kawasan peta. Pemenang merupakan pemain atau pasukan yang dapat mengekalkan penguasaan kawasan tersebut sekurang-kurangnya 20 minit."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:155
-#: ../../data/scripting/win_conditions/territorial_time.lua:30
-#, lua-format
-msgid "Team %i"
-msgstr "Pasukan %i"
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:157
-#: ../../data/scripting/win_conditions/territorial_time.lua:205
-#, lua-format
-msgid "%s owns more than half of the map’s area."
-msgstr "%s menguasai lebih dari separuh kawasan peta."
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:158
-#: ../../data/scripting/win_conditions/territorial_time.lua:206
-#, lua-format
-msgid "You’ve still got %i minute to prevent a victory."
-msgid_plural "You’ve still got %i minutes to prevent a victory."
-msgstr[0] "Anda masih mempunyai %i minit lagi untuk menghalang kemenangan."
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:163
-#: ../../data/scripting/win_conditions/territorial_time.lua:212
-msgid "You own more than half of the map’s area."
-msgstr "Anda menguasai lebih dari separuh kawasan peta."
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:164
-#: ../../data/scripting/win_conditions/territorial_time.lua:213
-#, lua-format
-msgid "Keep it for %i more minute to win the game."
-msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] "Kekalkannya lebih dari %i minit lagi untuk memenangi permainan."
-
-#: ../../data/scripting/win_conditions/territorial_time.lua:20
+#: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
 msgstr "Masa Wilayah"
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:23
+#: ../../data/scripting/win_conditions/territorial_time.lua:24
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
@@ -237,28 +211,44 @@ msgid ""
 "whichever comes first."
 msgstr "Setiap pemain atau pasukan cuba menguasai lebih dari separuh kawasan peta. Pemenang merupakan pemain atau pasukan yang dapat mengekalkan penguasaan kawasan tersebut sekurang-kurangnya 20 minit, atau sesiapa yang menguasai kawasan paling banyak selepas 4 jam, yang mana salah satu berlaku dahulu."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:28
-msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s memiliki %2$3.0f%% keluasan tanah (%3$i dari %4$i)."
-
-#: ../../data/scripting/win_conditions/territorial_time.lua:29
-msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s memiliki %2$3.0f%% keluasan tanah (%3$i dari %4$i)."
-
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
 #. for x more minute(s) to win the game."
-#: ../../data/scripting/win_conditions/territorial_time.lua:229
+#: ../../data/scripting/win_conditions/territorial_time.lua:60
 #, lua-format
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] "Jika tidak permainan akan tamat dalam tempoh %i minit."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:234
-#: ../../data/scripting/win_conditions/wood_gnome.lua:92
+#: ../../data/scripting/win_conditions/territorial_time.lua:65
 #, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
 msgstr[0] "Permainan akan tamat dalam tempoh %i minit."
+
+#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:261
+msgid "%1% hour and %2% minutes"
+msgid_plural "%1% hours and %2% minutes"
+msgstr[0] ""
+
+#. TRANSLATORS: Context: 'The game will end in 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:264
+#, lua-format
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i minit"
+
+#. TRANSLATORS: Context: 'The game will end in 2 hours.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:267
+msgid "%1% hour"
+msgid_plural "%1% hours"
+msgstr[0] "%1% jam"
+
+#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:270
+#, lua-format
+msgid "The game will end in %s."
+msgstr "Permainan akan tamat dalam tempoh %s."
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:4
 msgid "Congratulations!"
@@ -319,8 +309,8 @@ msgid "Trees owned"
 msgstr "Pokok dimiliki"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:96
-#: ../../data/scripting/win_conditions/wood_gnome.lua:148
-#: ../../data/scripting/win_conditions/wood_gnome.lua:153
+#: ../../data/scripting/win_conditions/wood_gnome.lua:116
+#: ../../data/scripting/win_conditions/wood_gnome.lua:121
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -332,11 +322,11 @@ msgid "%1$s has %2$s at the moment."
 msgstr "%1$s memiliki %2$s pada masa ini."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:150
+#: ../../data/scripting/win_conditions/wood_gnome.lua:118
 msgid "%1$s had %2$s."
 msgstr "%1$s memiliki %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:156
+#: ../../data/scripting/win_conditions/wood_gnome.lua:124
 msgid "The winner is %1$s with %2$s."
 msgstr "Pemenang ialah %1$s dengan sebanyak %2$s."

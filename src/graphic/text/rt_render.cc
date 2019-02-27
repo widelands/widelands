@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -1734,4 +1734,4 @@ Renderer::render(const std::string& text, uint16_t width, const TagSet& allowed_
 	std::shared_ptr<RenderNode> node(layout(text, width, allowed_tags));
 	return std::shared_ptr<const UI::RenderedText>(node->render(texture_cache_));
 }
-}
+}  // namespace RT

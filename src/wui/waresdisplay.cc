@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -385,7 +385,7 @@ WaresDisplay::~WaresDisplay() {
 	remove_all_warelists();
 }
 
-const char* unit_suffixes[] = {
+static const char* unit_suffixes[] = {
    "%1%",
    /** TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000). */
    /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */

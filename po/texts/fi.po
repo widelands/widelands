@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-08-24 06:54+0000\n"
-"PO-Revision-Date: 2018-08-28 17:38+0000\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-10-28 07:34+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -339,7 +339,7 @@ msgid ""
 "campaigns and a multiplayer mode. The game was inspired by Settlers II but "
 "has significantly more variety and depth to it. Still, it is easy to get "
 "started through playable tutorials."
-msgstr "Widelands on ilmainen, vapaan koodin reaaliaikastrategiapeli, jossa on yksinpelikampanjoitasekä mahdollisuus moninpeliin verkossa. Peli ammensi alunperin inspiraatiota Settlers II -pelistä,mutta on sitemmin kehittynyt esikuvaansa monipuolisemmaksi."
+msgstr "Widelands on ilmainen, vapaan koodin reaaliaikastrategiapeli, jossa on yksinpelikampanjoita sekä mahdollisuus moninpeliin verkossa. Peli ammensi alunperin inspiraatiota Settlers II -pelistä, mutta on sitemmin kehittynyt esikuvaansa monipuolisemmaksi."
 
 #: ../../data/txts/help/common_helptexts.lua:19
 msgid ""
@@ -475,7 +475,7 @@ msgid ""
 "‘type’ button of a player. Hosting players can also set the initialization "
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players."
-msgstr "Vain peliä isännöivä taho voi säätää kolmea jälkimmäistä asetusta klikkaamalla pelaajan ‘Tyyppi’ painiketta. Isännöivät palaajat voivat myös asettaa jokaisen pelaajan alkuasetelman (rakennukset, tavarat ja työntekijät, joilla pelaaja aloittaa) ja heimon sekä joukkueen tekoälypelaajille."
+msgstr "Vain peliä isännöivä taho voi säätää kolmea jälkimmäistä asetusta klikkaamalla pelaajan ‘Tyyppi’ painiketta. Isännöivät palaajat voivat myös asettaa jokaisen pelaajan alkuasetelman (rakennukset, tuotteet ja työntekijät, joilla pelaaja aloittaa) ja heimon sekä joukkueen tekoälypelaajille."
 
 #: ../../data/txts/help/multiplayer_help.lua:22
 msgid ""
@@ -648,7 +648,7 @@ msgstr "Kaivokset toimivat vain, jos kaivosmiehet saavat ruokaa."
 msgid ""
 "Split your roads into shorter sections by planting some flags. This will "
 "speed up transportation of your wares."
-msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeuttaa tavaroiden kuljetusta."
+msgstr "Jaa tiesi lyhyempiin pätkiin asettamalla niille lippuja. Tämä nopeuttaa tuotteiden kuljetusta."
 
 #. TRANSLATORS: %s = URL to the Widelands website
 #: ../../data/txts/tips/general_game.lua:27
@@ -662,13 +662,13 @@ msgstr "Kysymyksiä mielessä? Vastauksia voit löytää FAQ sivuilta eli usein 
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware. Pressing Ctrl while clicking will adjust all wares at once."
-msgstr "Käytä rakennusruudun prioriteettipainikkeita säätääksesi tavaran toimituksia. Kaikkia tavaroita voi säätää kerralla, jos Ctrl on pohjassa."
+msgstr "Käytä rakennusruudun prioriteettipainikkeita säätääksesi tavaran toimituksia. Kaikkia tuotteita voi säätää kerralla, jos Ctrl on pohjassa."
 
 #: ../../data/txts/tips/general_game.lua:35
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
-msgstr "Säädä tavaroiden tavoitemäärät varastossa 'Muokkaa taloutta' -valikon avulla. Taloudenmuokkausvalikon löydät minkä tahansa lipun valikosta."
+msgstr "Säädä tavaroiden tavoitemäärät varastossa 'Muuta talouden asetuksia' -valikon avulla. Taloudenmuokkausvalikon löydät minkä tahansa lipun valikosta."
 
 #: ../../data/txts/tips/general_game.lua:39
 msgid ""

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,6 @@ public:
 		int32_t yres;
 		bool fullscreen;
 		bool inputgrab;
-		bool splashscreen;
 		uint32_t maxfps;
 
 		// Windows options
@@ -133,7 +132,6 @@ private:
 	UI::Dropdown<uintptr_t> resolution_dropdown_;
 	UI::Checkbox fullscreen_;
 	UI::Checkbox inputgrab_;
-	UI::Checkbox splashscreen_;
 	UI::SpinBox sb_maxfps_;
 	UI::MultilineTextarea translation_info_;
 

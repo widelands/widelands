@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +19,7 @@
 
 #include "wui/chat_msg_layout.h"
 
+#include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 
 #include "chat/chat.h"
@@ -39,6 +40,13 @@ std::string color(const int16_t playern) {
 	return "999999";
 }
 
+std::string sanitize_message(const std::string& given_text) {
+	std::string result = richtext_escape(given_text);
+	// Preserve br tag
+	boost::replace_all(result, "&lt;br&gt;", "<br>");
+	return result;
+}
+
 }  // namespace
 
 // Returns a richtext string that can be displayed to the user.
@@ -46,7 +54,7 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	const std::string& font_face = "serif";
 	std::string message = "<p><font color=33ff33 size=9>";
 
-	std::string sanitized = richtext_escape(chat_message.msg);
+	const std::string sanitized = sanitize_message(chat_message.msg);
 
 	// time calculation
 	char ts[13];
@@ -57,8 +65,8 @@ std::string format_as_richtext(const ChatMessage& chat_message) {
 	           color(chat_message.playern))
 	             .str();
 
-	std::string sender_escaped = richtext_escape(chat_message.sender);
-	std::string recipient_escaped = richtext_escape(chat_message.recipient);
+	const std::string sender_escaped = richtext_escape(chat_message.sender);
+	const std::string recipient_escaped = richtext_escape(chat_message.recipient);
 
 	if (chat_message.recipient.size() && chat_message.sender.size()) {
 		// Personal message handling

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,8 @@
 #include "logic/map_objects/walkingdir.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
-#include "logic/widelands_geometry.h"
 #include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 #include "random/random.h"
@@ -164,6 +164,12 @@ public:
 
 	void recalc_whole_map(const World& world);
 	void recalc_for_field_area(const World& world, Area<FCoords>);
+
+	/// Calculates and returns a list of the fields that could be conquered by a player throughout a
+	/// game. Useful for territorial win conditions.
+	std::set<FCoords> calculate_all_conquerable_fields() const;
+	/// Calculates and returns a list of the fields that do not have the given caps.
+	std::set<FCoords> calculate_all_fields_excluding_caps(NodeCaps caps) const;
 
 	/***
 	 * Ensures that resources match their adjacent terrains.
@@ -1161,6 +1167,6 @@ inline void move_r(int16_t const mapwidth, FCoords& f, MapIndex& i) {
 	for (Widelands::FCoords fc = (map).get_fcoords(Widelands::Coords(0, 0));                        \
 	     fc.y < static_cast<int16_t>(extent.h); ++fc.y)                                             \
 		for (fc.x = 0; fc.x < static_cast<int16_t>(extent.w); ++fc.x, ++fc.field)
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_H

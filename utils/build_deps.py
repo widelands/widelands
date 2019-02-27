@@ -6,7 +6,6 @@ files are correct.
 
 It relies on the established build rule formatting conventions in the
 code base.
-
 """
 
 from collections import defaultdict
@@ -57,6 +56,7 @@ def print_error(filename, line_index, message):
             message, ANSI_COLORS['reset'])
     print('%s:%s: %s' % (filename, line_index, message))
 
+
 __INCLUDE = re.compile(r'#include "([^"]+)"')
 
 
@@ -96,6 +96,7 @@ def _parse_content(content):
         else:
             opts.append(line)
     return rv
+
 
 __START_TARGET = re.compile(r'\s*(wl_\w+)\s*\(\s*(\w+)')
 
@@ -228,6 +229,7 @@ def main():
             srcdir, t, includes_by_src, owners_of_src)
 
     return has_errors
+
 
 if __name__ == '__main__':
     sys.exit(main())

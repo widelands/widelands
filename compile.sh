@@ -40,9 +40,14 @@ print_help () {
     echo " "
     echo "-a or --no-asan       If in debug mode, switch off the AddressSanitizer."
     echo "                      Release builds are created without AddressSanitizer"
-    echo "                      per default."
+    echo "                      by default."
     echo " "
     echo "Compiler options:"
+    echo " "
+    echo "-j <number> or --cores <number>"
+    echo "                      Set the number of processor cores to use for"
+    echo "                      compiling and linking. Default is to leave 1 core"
+    echo "                      free."
     echo " "
     echo "-r or --release       Create a release build. If this is not set,"
     echo "                      a debug build will be created."
@@ -70,6 +75,8 @@ print_help () {
   }
 
 
+## Get command and options to use in update.sh
+COMMANDLINE="$0 $@"
 
 ## Options to control the build.
 BUILD_WEBSITE="ON"
@@ -77,32 +84,76 @@ BUILD_TRANSLATIONS="ON"
 BUILD_TYPE="Debug"
 USE_ASAN="ON"
 COMPILER="default"
-while [ "$1" != "" ]; do
-  if [ "$1" = "--no-website" -o "$1" = "-w" ]; then
-    BUILD_WEBSITE="OFF"
-  elif [ "$1" = "--release" -o "$1" = "-r" ]; then
-    BUILD_TYPE="Release"
-    USE_ASAN="OFF"
-  elif [ "$1" = "--no-translations" -o "$1" = "-t" ]; then
-    BUILD_TRANSLATIONS="OFF"
-  elif [ "$1" = "--no-asan" -o "$1" = "-a" ]; then
-    USE_ASAN="OFF"
-  elif [ "$1" = "--gcc" ]; then
-    if [ -f /usr/bin/gcc -a /usr/bin/g++ ]; then
-      export CC=/usr/bin/gcc
-      export CXX=/usr/bin/g++
-    fi
-  elif [ "$1" = "--clang" ]; then
-    if [ -f /usr/bin/clang -a /usr/bin/clang++ ]; then
-      export CC=/usr/bin/clang
-      export CXX=/usr/bin/clang++
-    fi
-  elif [ "$1" = "--help" -o "$1" = "-h" ]; then
-    print_help
-    exit 0
-  fi
-  shift
+
+if [ "$(uname)" = "Darwin" ]; then
+  CORES="$(expr $(sysctl -n hw.ncpu) - 1)"
+else
+  CORES="$(nproc --ignore=1)"
+fi
+
+for opt in "$@"
+do
+  case $opt in
+    -a|--no-asan)
+      USE_ASAN="OFF"
+    shift
+    ;;
+    -h|--help)
+      print_help
+      exit 0
+    shift
+    ;;
+    -j|--cores)
+      MAXCORES=$((CORES + 1))
+      if [ "$2" ]; then
+        if [ "$MAXCORES" -ge "$2" ]; then
+          CORES="$2"
+        else
+          echo "Maximum number of supported cores is $MAXCORES."
+          CORES="$MAXCORES"
+        fi
+      else
+        echo "Call -j/--cores with a number, e.g. '-j $MAXCORES'"
+        exit 1
+      fi
+    shift # past argument
+    shift # past value
+    ;;
+    -r|--release)
+      BUILD_TYPE="Release"
+      USE_ASAN="OFF"
+    shift
+    ;;
+    -t|--no-translations)
+      BUILD_TRANSLATIONS="OFF"
+    shift
+    ;;
+    -w|--no-website)
+      BUILD_WEBSITE="OFF"
+    shift
+    ;;
+    --gcc)
+      if [ -f /usr/bin/gcc -a /usr/bin/g++ ]; then
+        export CC=/usr/bin/gcc
+        export CXX=/usr/bin/g++
+      fi
+    shift
+    ;;
+    --clang)
+      if [ -f /usr/bin/clang -a /usr/bin/clang++ ]; then
+        export CC=/usr/bin/clang
+        export CXX=/usr/bin/clang++
+      fi
+    shift
+    ;;
+    *)
+          # unknown option
+    ;;
+  esac
 done
+
+echo "Using ${CORES} core(s)."
+echo ""
 
 if [ $BUILD_WEBSITE = "ON" ]; then
   echo "A complete build will be created."
@@ -199,7 +250,8 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
       cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DOPTION_BUILD_WEBSITE_TOOLS=$BUILD_WEBSITE -DOPTION_BUILD_TRANSLATIONS=$BUILD_TRANSLATIONS -DOPTION_ASAN=$USE_ASAN
     fi
 
-    $buildtool
+    $buildtool -j $CORES
+
     return 0
   }
 
@@ -211,7 +263,7 @@ buildtool="" #Use ninja by default, fall back to make if that is not available.
     rm  -f ../wl_map_object_info || true
     rm  -f ../wl_map_info || true
 
-    mv VERSION ../VERSION
+    cp VERSION ../VERSION
     mv src/widelands ../widelands
 
     if [ $BUILD_WEBSITE = "ON" ]; then
@@ -244,13 +296,7 @@ if ! [ -f src/wlapplication.cc ] ; then
 fi
 
 bzr pull
-cd build
-$buildtool
-rm  ../VERSION || true
-rm  ../widelands || true
-mv VERSION ../VERSION
-mv src/widelands ../widelands
-cd ..
+$COMMANDLINE
 
 echo " "
 echo "################################################"

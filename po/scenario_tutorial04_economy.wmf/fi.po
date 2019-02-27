@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-14 06:11+0000\n"
-"PO-Revision-Date: 2018-09-14 06:13+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-10-28 07:40+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -120,7 +120,7 @@ msgstr "Voit myös käyttää pikanäppäintä ‘b’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:63
 msgid "Open the building statistics window"
-msgstr ""
+msgstr "Avaa rakennustilastot ruutu"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:65
 msgid ""
@@ -208,7 +208,7 @@ msgstr "Tämä selitys riittää tällä erää. Saat kokeilla sitä nyt itse. H
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:86
 msgid "Look up how many taverns you have"
-msgstr ""
+msgstr "Katso kuinka monta krouvia sinulla on"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:88
 msgid "Choose the ‘Medium buildings’ tab in the building statistics window."
@@ -243,7 +243,7 @@ msgstr "Olet sulkenut rakennustilastot ruudun. En huomannut, että vaihdoit kesk
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:107
 msgid "Open the building statistics window again"
-msgstr ""
+msgstr "Avaa rakennustilastot ruutu uudelleen"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:109
 msgid ""
@@ -285,20 +285,20 @@ msgstr "Voit myös käyttää pikanäppäintä ‘i’ (kuten ‘inventory’) p
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:127
 msgid "Open your stock window"
-msgstr ""
+msgstr "Avaa sinun varastoruutu"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:129
 msgid ""
 "The stock menu window gives you an overview over the wares you currently "
 "have."
-msgstr "Varasto valikkoruutu antaa sinulla yleisnäkymän tavaroihin, jotka sinulla on tällä hetkellä."
+msgstr "Varasto valikkoruutu antaa sinulla yleisnäkymän tuotteisiin, jotka sinulla on tällä hetkellä."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:139
 msgid ""
 "The stock menu window has four tabs. The first (and currently selected) one "
 "shows you all your current wares, including those on roads, at flags and "
 "inside buildings waiting for processing."
-msgstr "Varasto valikkoruudussa on neljä välilehteä. Ensimmäinen (joka on tällä hetkellä valittuna) näyttää sinulle kaikki tämän hetkiset tavarat, mukaan lukien ne, jotka ovat teiden lippujen luona ja sisällä rakennuksissa odottamassa prosessointia."
+msgstr "Varasto valikkoruudussa on neljä välilehteä. Ensimmäinen (joka on tällä hetkellä valittuna) näyttää sinulle kaikki tämän hetkiset tuotteet, mukaan lukien ne, jotka ovat teiden lippujen luona ja sisällä rakennuksissa odottamassa prosessointia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:140
 msgid ""
@@ -322,13 +322,13 @@ msgstr "kolmatta välilehteä (‘Tuotteet varastoissa’), jatkan sen jälkeen.
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:148
 msgid "Switch to the third tab in the stock menu window"
-msgstr ""
+msgstr "Vaihda kolmanteen välilehteen varasto valikkoruudussa"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:150
 msgid ""
 "Have a look at the first two tabs in the stock menu window. They show all "
 "the wares and workers you have."
-msgstr "Katso kahta ensimmäistä välilehteä varasti valikkoruudussa. Ne näyttävät kaikki sinulla olevat tavarat ja työntekijät."
+msgstr "Katso kahta ensimmäistä välilehteä varasti valikkoruudussa. Ne näyttävät kaikki sinulla olevat tuotteet ja työntekijät."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:151
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:316
@@ -340,7 +340,7 @@ msgid ""
 "The third tab shows you the wares that are stored in your headquarters, your"
 " warehouses and ports. They are not needed anywhere and are therefore your "
 "reserve."
-msgstr "Kolmas välilehti näyttää sinulle tavarat, jotka on varastoitu päämajaasi, varastoihisi ja satamiisi. Niitä ei tarvita missää ja ovat siksi sinun varmuusvarastoa."
+msgstr "Kolmas välilehti näyttää sinulle tuotteet, jotka on varastoitu päämajaasi, varastoihisi ja satamiisi. Niitä ei tarvita missää ja ovat siksi sinun varmuusvarastoa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:159
 msgid "The fourth tab shows the same thing for workers."
@@ -364,7 +364,7 @@ msgstr "Olet sulkenut varasto valikkoruudun, mutta en ole päässyt vielä selit
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:178
 msgid "Open the stock window again"
-msgstr ""
+msgstr "Avaa varastoruutu uudelleen"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:180
 msgid ""
@@ -403,7 +403,7 @@ msgstr "Rakenna ainakin kaksi krouvia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:197
 msgid "Build new taverns"
-msgstr ""
+msgstr "Rakenna uusia krouveja"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:199
 msgid "To make our mines work, we need rations again – the more, the better."
@@ -411,17 +411,17 @@ msgstr "Saadaksemme kaivoksemme toimimaan, me tarvitsemme jälleen ruoka-annoksi
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:205
 msgid "Encyclopedia"
-msgstr ""
+msgstr "Opas"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:207
 msgid "How to get help"
-msgstr ""
+msgstr "Kuinka saada apua"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:208
 msgid ""
 "Of course, it is difficult to remember all of my remarks and advice. For "
 "example, you might ask yourself: ‘Why do we need rations to get soldiers?’"
-msgstr ""
+msgstr "Toki, on vaikea muistaa kaikki minun kommentit ja neuvot. Saatat esimerkiksi kysyä itseltäsi: ‘Miksi tarvitsemme ruoka-annoksia saadaksemme sotilaita?’"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:209
 msgid ""
@@ -429,83 +429,83 @@ msgid ""
 " then or if you’re unsure about your tribe’s needs and abilities and how its"
 " buildings and workers operate, you can look it up easily in our tribe-"
 "specific in-game help and encyclopedia."
-msgstr ""
+msgstr "Kun olet pelannut paljon, tiedät kaikki nämä asiat sekärangassasi. Mutta ennen sitä, jos olet epävarma heimosi tarpeista ja erityistavaroista ja kuinka sen rakennukset sekä työntekijät operoivat, voit katsoa ne asiat helposti sisäisestä heimokohtaisesta ohjeesta ja oppaasta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:210
 msgid ""
 "This encyclopedia can be accessed via the help button at the bottom right."
-msgstr ""
+msgstr "Pääset oppaaseen alhaalla oikealla olevan ohje kuvakkeen kautta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:211
 msgid "Please open the in-game help, and I’ll explain its contents to you."
-msgstr ""
+msgstr "Ole hyvä ja avaa pelin sisäinen ohje ja selitän sitten sen sisällön sinulle."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:216
 msgid "Open the in-game help window"
-msgstr ""
+msgstr "Avaa pelin sisäinen ohjeruutu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:218
 msgid ""
 "The encyclopedia window contains the in-game help and an encyclopedia of the"
 " tribe you’re currently playing."
-msgstr ""
+msgstr "Opasruutu sisältää pelin sisäinen ohjeet ja oppaan heimollesi, jota olet juuri pelaamassa."
 
 #. TRANSLATORS: "it" refers to the encyclopedia window
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:220
 msgid "Open it. You can access it via the button at the bottom of the screen."
-msgstr ""
+msgstr "Avaa se. Pääset siihen käsiksi ikkunan alareunan kuvakkeesta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:221
 msgid "Alternatively, you can access it directly with the ‘F1’ key."
-msgstr ""
+msgstr "Vaihtoehtoisesti pääset siihen suoraan käsiksi ‘F1’ näppäimellä."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:227
 msgid "Encyclopedia details"
-msgstr ""
+msgstr "Oppaan yksityiskohdat"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:229
 msgid "The Encyclopedia Categories"
-msgstr ""
+msgstr "Oppaan kategoriat"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:230
 msgid "The encyclopedia has five tabs:"
-msgstr ""
+msgstr "Oppaassa on viisi välilehteä:"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:231
 msgid ""
 "The ‘General’ tab contains information about all the basic interface "
 "controls for Widelands. Furthermore, you can find tips that are relevant for"
 " your tribe there."
-msgstr ""
+msgstr "‘Yleistä’ välilehti sisältää kaiken tiedon Widelandsin peruskäyttöliittymän hallinnasta. Sen lisäksi, voit etsiä sieltä vinkkejä, jotka ovat oleellisia heimollesi."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:232
 msgid ""
 "The ‘Wares’ tab shows information about the wares that your tribe needs, "
 "including a short help text, a list of buildings that produce each ware, the"
 " needed wares to produce it and where the ware is consumed."
-msgstr ""
+msgstr "‘Tuotteet’ välilehti näyttää tietoa tavaroista, joita heimosi tarvitsee, mukaan lukien lyhyt ohjeteksti, kunkin tuotteen tuottavat rakennukset, tuotantoon tarvittavat tuotteet ja minne tuote kuluu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:233
 msgid ""
 "The ‘Workers’ tab shows information about your tribe’s workers in a similar "
 "manner to the wares in the second tab."
-msgstr ""
+msgstr "‘Työläiset’ välilehti näyttää tietoja heimosi työläisistä samaan tapaan kuin toisena oleva tuotteet välilehti. "
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:234
 msgid ""
 "The ‘Buildings’ tab contains all the necessary information about the "
 "buildings of your tribe."
-msgstr ""
+msgstr "‘Rakennukset’ välilehti sisältää kaiken tarvittavan tiedon heimosi rakennuksista."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:235
 msgid ""
 "Finally, the ‘Immovables’ tab shows information about the specific "
 "immovables that your tribe’s workers can place on the map."
-msgstr ""
+msgstr "Viimeinen ‘Kiinteät esineet’ välilehti näyttää tietoja niistä kiinteistä esineistä, joita heimosi työläiset voivat sijoittaa kartalle."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:236
 msgid "Now use the encyclopedia to find out how to create new soldiers."
-msgstr ""
+msgstr "Käytä opasta nyt siihen, että opit kuinka uusia sotilaita luodaan."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:237
 msgid ""
@@ -513,58 +513,58 @@ msgid ""
 "search backwards to find the wares and the buildings you need to supply your"
 " barracks where the soldier is recruited. When you are finished, just close "
 "the encyclopedia window."
-msgstr ""
+msgstr "Sotilas tarvitsee puukeihään ja kypärän – tästä eteen päin, joten voit etsiä jälkikäteen tuotteita ja rakennuksia, joita tarvitset kasarmille, jolle sotilas on palkattu. Kun olet valmis, voit sulkea opasruudun."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:242
 msgid "Look up which wares are needed to recruit soldiers"
-msgstr ""
+msgstr "Katso mitä tuotteita tarvitaan sotilaiden palkkaamiseen."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:244
 msgid "Choose the ‘Wares’ tab in the encyclopedia window."
-msgstr ""
+msgstr "Valitse ‘Tuotteet’ välilehti opasruudusta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:245
 msgid ""
 "Look up what is needed to produce a helmet and what is needed to produce a "
 "wooden spear."
-msgstr ""
+msgstr "Katso mitä tarvitaan kypärän tuottamiseksi ja mitä puukeihään tuottamiseksi."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:246
 msgid ""
 "If you want, you may further look up what is needed to produce the wares you"
 " just looked up."
-msgstr ""
+msgstr "Jos haluat, voit katsoa tarkemmin mitä tarvitaan juuri katsomiesi tuotteiden tuottamiseksi."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:247
 msgid "Close the encyclopedia window when you are done."
-msgstr ""
+msgstr "Sulje opasruutu, kun olet valmis."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:252
 msgid "You closed the encyclopedia!"
-msgstr ""
+msgstr "Suljit oppaan!"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:254
 msgid ""
 "You have closed the encyclopedia window, but I didn’t notice that you were "
 "trying to find out which wares are needed to recruit a soldier. Would you "
 "please reopen it and do so?"
-msgstr ""
+msgstr "Olet sulkenut opasruudun, mutta en huomannut, että yrititkö katsoa mitä tuotteita sotilaan palkkamiseen tarvitaan. Avaisitko opasruudun uudelleen?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:263
 msgid "Open the encyclopedia window again"
-msgstr ""
+msgstr "Avaa opasruutu uudelleen"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:265
 msgid ""
 "You closed the encyclopedia window without searching for the information we "
 "need. If you already know everything, please feel free to leave this "
 "tutorial at any time."
-msgstr ""
+msgstr "Suljit opasruudun ilman, että etsit sitä tietoa mitä tarvitsemme. Jos tiedät jo kaiken, voit poistua tästä tutoriaalista milloin tahansa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:266
 msgid ""
 "Otherwise, please reopen the encyclopedia window and choose the second tab."
-msgstr ""
+msgstr "Muussa tapauksessa, avaa opasruutu uudelleen ja valitse toinen välilehti."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:273
 msgid "Priority Settings"
@@ -572,7 +572,7 @@ msgstr "Prioriteettiasetukset"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:275
 msgid "Send the wares where they’re needed"
-msgstr "Tavaroiden lähettäminen niitä tarvitseville"
+msgstr "Tuotteiden lähettäminen niitä tarvitseville"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:276
 msgid ""
@@ -584,7 +584,7 @@ msgid ""
 "At the moment, all mines are supplied with rations. If you want to "
 "prioritize a special mine, you simply have to open its window. In the wares "
 "tab, behind every ware, you can see ‘traffic lights’."
-msgstr "Tällä hetkellä kaikille kaivoksille toimitetaan ruoka-annoksia. Jos haluat priorisoida erityiskaivoksia, sinun täytyy yksinkertaisesti avata sen ruutu. Tavaroiden välilehdellä, jokaisen tavaran takana, voit nähdä ‘liikenne valot’."
+msgstr "Tällä hetkellä kaikille kaivoksille toimitetaan ruoka-annoksia. Jos haluat priorisoida erityiskaivoksia, sinun täytyy yksinkertaisesti avata sen ruutu. Tuotteet välilehdellä, jokaisen tuotteen takana, voit nähdä ‘liikenne valot’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:278
 msgid ""
@@ -592,7 +592,7 @@ msgid ""
 "delivered less frequently. Green means that as many wares as possible should"
 " be delivered to this building, maybe because it produces something "
 "important."
-msgstr "Kun painat punaista pistettä (matala prioriteetti), vastaavaa tavaraa toimitetaan harvemmin. Vihreä tarkoittaa, että niin monta tavaraa kuin mahdollista pitäisi toimittaa kyseiseen rakennukseen, ehkä siksi, koska se tuottaa jotain tärkeää."
+msgstr "Kun painat punaista pistettä (matala prioriteetti), vastaavaa tavaraa toimitetaan harvemmin. Vihreä tarkoittaa, että niin monta tuotetta kuin mahdollista pitäisi toimittaa kyseiseen rakennukseen, ehkä siksi, koska se tuottaa jotain tärkeää."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:279
 msgid ""
@@ -624,7 +624,7 @@ msgstr "Paina sitä."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:297
 msgid "Open the ware statistics window"
-msgstr ""
+msgstr "Avaa tuotetilastot ruutu"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:299
 msgid "Open the ‘Ware statistics’ window, accessed via the statistics menu."
@@ -634,7 +634,7 @@ msgstr "Avaa ‘Tuotetilastot’ ruutu, tilastot valikon kautta."
 msgid ""
 "In this menu window, you can select wares to see how their production or "
 "consumption has changed over time. Try it out with some wares."
-msgstr "Tässä valikkoruudussa, voit valita tavaroita nähdäksesi kuinka niiden tuotanto tai kulutus on edistynyt ajan kuluessa. Kokeile sitä joillakin tavaroilla."
+msgstr "Tässä valikkoruudussa, voit valita tuotteita nähdäksesi kuinka niiden tuotanto tai kulutus on edistynyt ajan kuluessa. Kokeile sitä joillakin tuotteilla."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:307
 msgid "I’ll continue as soon as you click on the"
@@ -646,7 +646,7 @@ msgstr "kolmas välilehti (‘Talouden kunto’)."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:313
 msgid "Switch to the third tab in the ware statistics menu window"
-msgstr ""
+msgstr "Vaihda kolmannelle välilehdelle tuotetilastot valikkoruudussa"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:315
 msgid ""
@@ -672,7 +672,7 @@ msgstr "Valitse viimeinen välilehti, kun minun päitäisi jatkaa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:330
 msgid "Switch to the last tab in the ware statistics menu window"
-msgstr ""
+msgstr "Vaihda viimeiselle välilehdelle tuotetilastot valikkoruudussa"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:332
 msgid ""
@@ -703,13 +703,13 @@ msgstr "Sulje tämä ruutu, kun olet valmis."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:347
 msgid "Close the ware statistics window"
-msgstr ""
+msgstr "Sulje tuotetilastot ruutu"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:349
 msgid ""
 "The stock tab shows you how many wares you have. Compare the information "
 "from the four tabs to understand the correlation."
-msgstr "Varasto välilehti näyttää sinulle kuinka monta tavaraa sinulla on. Vertaile tietoja neljännellä välilehdellä ymmärtääksesi riippuvuussuhteet."
+msgstr "Varasto välilehti näyttää sinulle kuinka monta tuotetta sinulla on. Vertaile tietoja neljännellä välilehdellä ymmärtääksesi riippuvuussuhteet."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:350
 msgid "When you have finished, close the ware statistics window."
@@ -729,7 +729,7 @@ msgstr "Olet sulkenut tuotetilastot valikkoruudun, mutta en ole päässyt vielä
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:386
 msgid "Open the ware statistics window again"
-msgstr ""
+msgstr "Avaa tuotetilastot ruutu uudelleen"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:368
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:388
@@ -760,14 +760,14 @@ msgstr "Talousvalinnat"
 msgid ""
 "I’ve shown you our stock menu window, where you could see which wares are at"
 " the warehouses. You remember?"
-msgstr "Olen näyttänyt sinulle varasto valikkoruudun, josta voit nähdä, mitä tavaroita on varastoissa. Muistatko?"
+msgstr "Olen näyttänyt sinulle varasto valikkoruudun, josta voit nähdä, mitä tuotteita on varastoissa. Muistatko?"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:399
 msgid ""
 "Now I’ll tell you how you can determine how many wares you want to have. The"
 " menu window for this purpose can be accessed via any flag and is called "
 "‘Configure economy’."
-msgstr "Nyt kerron sinulle kuinka voit määritellä kuinka monta tavaraa haluat sinulla olevan. Sitä varten valikkoruutuun voi päästä minkä tahansa lipun kautta ja sitä kutsutaan nimellä ‘Muokkaa taloutta’."
+msgstr "Nyt kerron sinulle kuinka voit määritellä kuinka monta tavaraa haluat sinulla olevan. Sitä varten valikkoruutuun voi päästä minkä tahansa lipun kautta ja sitä kutsutaan nimellä ‘Muuta talouden asetuksia’."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:401
 msgid "This is the icon."
@@ -779,11 +779,11 @@ msgstr "Avaa tämä ruutu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:406
 msgid "Open the ‘Configure economy’ window"
-msgstr ""
+msgstr "Avaa ‘Muuta talouden asetuksia’ ruutu"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:408
 msgid "Open the ‘Configure economy’ window."
-msgstr "Avaa ‘Talouden asetukset’ ruutu."
+msgstr "Avaa ‘Muuta talouden asetuksia’ ruutu."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:409
 msgid "The window can be accessed by clicking on any flag you own."
@@ -814,7 +814,7 @@ msgid ""
 "carrier will take a scythe and become a farmer. Then there will be no "
 "scythes left, but the target quantity is 1, therefore your toolsmith will "
 "start producing another one."
-msgstr "Esimerkiksi: oletusmäärä viikatteille on 1. Jos rakennat maatilan, kantava ottaa viikatteen ja siitä tulee viljelijä. Sen jälkeen siellä ei ole yhtään viikatetta jäljellä, mutta kohdemäärä on 1, joten tuökaluseppäsi käy tuottamaan uutta viikatetta."
+msgstr "Esimerkiksi: oletusmäärä viikatteille on 1. Jos rakennat maatilan, kantava ottaa viikatteen ja siitä tulee maanviljelijä. Sen jälkeen siellä ei ole yhtään viikatetta jäljellä, mutta kohdemäärä on 1, joten tuökaluseppäsi käy tuottamaan uutta viikatetta."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:420
 msgid ""
@@ -830,13 +830,13 @@ msgid ""
 "your resources (in this case: iron) should be turned into or whether you "
 "would like to save your iron and wait until you know what you will need it "
 "for."
-msgstr "Vaihtamalla kohdemäärää, voit siksi päättää mitä tavaroita/työkaluja sinun resurssit (tässä tapauksessa: rauta) pitäisi päyttää tai haluaisitko kenties säästää raudan ja odottaa kunnes tiedät mitä varten tarvitset sitä."
+msgstr "Vaihtamalla kohdemäärää, voit siksi päättää mitä tuotteita/työkaluja sinun resurssit (tässä tapauksessa: rauta) pitäisi päyttää tai haluaisitko kenties säästää raudan ja odottaa kunnes tiedät mitä varten tarvitset sitä."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:429
 msgid ""
 "Only buildings that consume wares care about this setting. Buildings that "
 "produce wares for free (e.g. your farms or wells) will always keep working."
-msgstr "Ainoat rakennukset, jotka kuluttavat tavaroita noudattaa tätä asetusta. Rakennukset, jotka tuottavat tavaroita ilmaiseksi (esim. maatilasi tai kaivosi) tekevät töitä aina."
+msgstr "Ainoat rakennukset, jotka kuluttavat tuotteita, noudattaa tätä asetusta. Rakennukset, jotka tuottavat tavaroita ilmaiseksi (esim. maatilasi tai kaivosi) tekevät töitä aina."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:430
 msgid ""
@@ -853,13 +853,13 @@ msgstr "Aseta kohdemäärä marmoripylväille arvoon 20 ja odota, kun kivenhakka
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:434
 msgid "Produce 20 marble columns"
-msgstr ""
+msgstr "Tuota 20 marmoripylvästä"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:436
 msgid ""
 "Sometimes, you will need many wares at the same time quickly – faster than "
 "they can be produced. In this case, it is good to have enough on reserve."
-msgstr "Joskus saatat tarvita useita tavaroita saman aikaisesti ja nopeasti – nopeammin kuin niitä voidaan tuottaa. Sellaisessa tapauksessa, niitä on hyvä olla riittävästi varmuusvarastossa."
+msgstr "Joskus saatat tarvita useita tuotteita saman aikaisesti ja nopeasti – nopeammin kuin niitä voidaan tuottaa. Sellaisessa tapauksessa, niitä on hyvä olla riittävästi varmuusvarastossa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:437
 msgid ""
@@ -878,7 +878,7 @@ msgid ""
 "To do so, click on any flag and choose ‘Configure economy’. In this menu "
 "window, you can decide how many wares of each type you wish to have in "
 "stock."
-msgstr "Tehdäksesi niin, klikkaa mitä tahansa lippua ja valitse ‘Muuta talouden asetuksia’. Tässä valikkoruudussa voit valita kuinka monta kunkin tyyppistä tavaraa toivot sinulla olevan varastossa."
+msgstr "Tehdäksesi niin, klikkaa mitä tahansa lippua ja valitse ‘Muuta talouden asetuksia’. Tässä valikkoruudussa voit valita kuinka monta kunkin tyyppistä tuotetta toivot sinulla olevan varastossa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:446
 msgid "Warehouse Preferences"
@@ -899,7 +899,7 @@ msgid ""
 "Normally, produced wares are brought to the closest warehouse if they are "
 "not needed elsewhere. In this case, this means our headquarters. But we "
 "would like to have them in the warehouse near our fortresses."
-msgstr "Normaalisti, tuotetut tavarat tuodaan lähimpään varastoon, jos niitä ei tarvita muualla. Tässä tapauksessa se tarkoittaa meidän päämajojamme. Mutta haluaisimme ne varastoon lähelle linnoituksia."
+msgstr "Normaalisti, tuotetut tuotteet tuodaan lähimpään varastoon, jos niitä ei tarvita muualla. Tässä tapauksessa se tarkoittaa meidän päämajojamme. Mutta haluaisimme ne varastoon lähelle linnoituksia."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:451
 msgid ""
@@ -912,7 +912,7 @@ msgstr "Jokaisessa varastossa on neljä painiketta suosimisen asettamiseen. Jos 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:460
 msgid ""
 "Bring all of the 20 marble columns to the warehouse near the front line."
-msgstr ""
+msgstr "Tuo kaikki 20 marmoripylvästä varastoon lähelle etulinjaa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:453
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:461
@@ -931,13 +931,13 @@ msgstr "Sitten sinun täytyy klikata poista painiketta, siirtääksesi marmoripy
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:457
 msgid "Bring 20 marble columns to the front line"
-msgstr ""
+msgstr "Tuo 20 marmoripylvästä etulinjaan"
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:459
 msgid ""
 "To decide where your wares get stored, you can use the preference buttons in"
 " the warehouses."
-msgstr "Vallitaksesi minne tavarasti varastoidaan, sinä voit käyttää suosi painikkeita varastoissa."
+msgstr "Vallitaksesi minne tuotteesi varastoidaan, sinä voit käyttää suosi painikkeita varastoissa."
 
 #: ../../data/campaigns/tutorial04_economy.wmf/scripting/texts.lua:467
 msgid "Borders Secured"

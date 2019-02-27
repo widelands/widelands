@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ bool do_resolve(const boost::asio::ip::tcp& protocol,
 		return false;
 	}
 }
-}
+}  // namespace
 
 bool NetAddress::resolve_to_v4(NetAddress* addr, const std::string& hostname, uint16_t port) {
 	return do_resolve(boost::asio::ip::tcp::v4(), addr, hostname, port);
