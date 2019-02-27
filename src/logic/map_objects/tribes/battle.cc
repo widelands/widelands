@@ -137,7 +137,7 @@ Soldier* Battle::opponent(const Soldier& soldier) const {
 	return other_soldier;
 }
 
-uint32_t Battle::get_pending_damage(const Soldier* for_whom) const {
+unsigned int Battle::get_pending_damage(const Soldier* for_whom) const {
 	if (for_whom == (first_strikes_ ? first_ : second_)) {
 		return damage_;
 	}
@@ -257,12 +257,12 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	molog("[battle] (%u) vs (%u) is %d, first strikes %d, last hit %d\n", soldier.serial(),
 	      opponent(soldier)->serial(), this_soldier_is, first_strikes_, last_attack_hits_);
 
-	bool shorten = false;
+	bool shorten_animation = false;
 	if (this_soldier_is == 1) {
 		if (first_strikes_) {
 			if (last_attack_hits_) {
 				what_anim = "evade_failure_e";
-				shorten = true;
+				shorten_animation = true;
 			} else {
 				what_anim = "evade_success_e";
 			}
@@ -283,7 +283,7 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 		} else {
 			if (last_attack_hits_) {
 				what_anim = "evade_failure_w";
-				shorten = true;
+				shorten_animation = true;
 			} else {
 				what_anim = "evade_success_w";
 			}
@@ -291,9 +291,9 @@ void Battle::get_battle_work(Game& game, Soldier& soldier) {
 	}
 	// If the soldier will die as soon as the animation is complete, don't
 	// show it for the full length to prevent overlooping (bug 1817664)
-	shorten &= damage_ >= soldier.get_current_health();
+	shorten_animation &= damage_ >= soldier.get_current_health();
 	molog("[battle] Starting animation %s for soldier %d\n", what_anim.c_str(), soldier.serial());
-	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), shorten ? 850 : 1000);
+	soldier.start_task_idle(game, soldier.descr().get_rand_anim(game, what_anim.c_str()), shorten_animation ? 850 : 1000);
 }
 
 void Battle::calculate_round(Game& game) {
