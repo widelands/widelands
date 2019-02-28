@@ -53,7 +53,7 @@ const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
 class NonPackedAnimation : public Animation {
 public:
 	struct MipMapEntry {
-		explicit MipMapEntry(const float scale, const LuaTable& table);
+		explicit MipMapEntry(float scale, const LuaTable& table);
 
 		bool hasplrclrs;
 		std::vector<std::string> image_files;
@@ -113,7 +113,7 @@ private:
 	bool play_once_;
 };
 
-NonPackedAnimation::MipMapEntry::MipMapEntry(const float scale, const LuaTable& table) : hasplrclrs(false) {
+NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table) : hasplrclrs(false) {
 	if (scale <= 0.0f) {
 		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
 	}
