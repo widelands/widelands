@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ struct Textarea;
 namespace Widelands {
 class TribeDescr;
 struct WareList;
-}
+}  // namespace Widelands
 
 /**
  * Display wares or workers together with some string (typically a number)

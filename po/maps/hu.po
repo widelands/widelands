@@ -2,7 +2,7 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
-# Balázs Meskó <meskobalazs@gmail.com>, 2016-2017
+# Balázs Meskó <meskobalazs@gmail.com>, 2016-2018
 # GunChleoc, 2016
 # GunChleoc, 2014
 # litoll <litoll@freemail.hu>, 2016
@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 18:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-11-02 08:03+0000\n"
+"PO-Revision-Date: 2018-11-04 10:16+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/widelands/widelands/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +42,7 @@ msgstr "Egy hely, amit otthonnak hívunk"
 msgid ""
 "In this scenario, the higher production buildings including mining will be "
 "introduced."
-msgstr "Ebben a szcenárióban a magasabb szintű termelő épületek kerülnek bemutatásra."
+msgstr "Ebben a küldetésben a magasabb szintű termelő épületek kerülnek bemutatásra."
 
 #: ../../data/campaigns/bar02.wmf/elemental:7
 #: ../../data/campaigns/campaigns.conf:81
@@ -133,15 +133,15 @@ msgstr "Mikor istenük csalódott az atlantisziakban, és szigetüket elsüllyes
 
 #: ../../data/campaigns/campaigns.conf:52
 msgid "From Water to Ice"
-msgstr ""
+msgstr "Vízből tűzbe"
 
 #: ../../data/campaigns/campaigns.conf:54
 msgid "Frisians"
-msgstr ""
+msgstr "Frízek"
 
 #: ../../data/campaigns/campaigns.conf:56
 msgid "For advanced players. Introduces the Frisians"
-msgstr ""
+msgstr "Tapasztalt játékosoknak. Bemutatja a frízeket."
 
 #: ../../data/campaigns/campaigns.conf:57
 msgid ""
@@ -151,7 +151,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Az óceán melletti élet folyamatos küzdelem, és ez még inkább igaz a Jeges-tenger menti fríz lakosok esetén. A legutóbbi vihardagály, amely emberemlékezet óta a legpusztítóbb volt, csak egy példa a nehézségekre, amelyekkel a frízek kénytelenek szembenézni – vagy egy jel az istenektől, hogy a frissen letelepedett törzsnek teljesen új otthont kell keresnie?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -183,11 +183,11 @@ msgstr "Meglepetés, meglepetés!"
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "A nagy vihardagály"
 
 #: ../../data/campaigns/campaigns.conf:134
 msgid "Colder than Ice"
-msgstr ""
+msgstr "Hidegebb mint a jég"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -234,23 +234,23 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "1362-ben, a Északi-Fríz-szigetek lakóinak csendes, békés életét az emberemlékezet legnagyobb vihardagálya zavarta meg: Szent Marcell áradása. Ez valóban csak még egy vihar, vagy jel az istenektől, hogy a fríz közösség már nem kívánatos Langeness szigetén?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "Ez a küldetés történelmi helyzetbe van helyezve, de a történet fikció."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "Egy jeges köszöntés"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud és a törzse megérkeztek Északra. De az érkezésük a fagyott sztyeppék és a hóval borított hegyek között minden csak nem biztató…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

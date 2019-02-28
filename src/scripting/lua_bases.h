@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -128,6 +128,6 @@ protected:
 };
 
 void luaopen_wlbases(lua_State*);
-}
+}  // namespace LuaBases
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_BASES_H

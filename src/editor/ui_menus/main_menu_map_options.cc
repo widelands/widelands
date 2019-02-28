@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ inline EditorInteractive& MainMenuMapOptions::eia() {
 
 /**
  * Create all the buttons etc...
-*/
+ */
 MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
    : UI::Window(&parent, "map_options", 0, 0, 350, parent.get_inner_h() - 80, _("Map Options")),
      padding_(4),
@@ -129,6 +129,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	// TODO(GunChleoc): We need team images in the listselect here,
 	// so map editors will be able to delete entries.
 	// This is waiting for the new RT renderer.
+	// TODO(Notabilis): Add onChanged-code below after this is added
 	teams_list_.add("Not implemented yet.", "", nullptr, false);
 
 	unsigned int nr_players = static_cast<unsigned int>(eia().egbase().map().get_nrplayers());
@@ -148,6 +149,9 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 	author_.changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	descr_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
 	hint_->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	for (const auto& tag : tags_checkboxes_) {
+		tag.second->changed.connect(boost::bind(&MainMenuMapOptions::changed, this));
+	}
 
 	ok_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_ok, boost::ref(*this)));
 	cancel_.sigclicked.connect(boost::bind(&MainMenuMapOptions::clicked_cancel, boost::ref(*this)));
@@ -163,7 +167,7 @@ MainMenuMapOptions::MainMenuMapOptions(EditorInteractive& parent, bool modal)
 /**
  * Updates all UI::Textareas in the UI::Window to represent currently
  * set values
-*/
+ */
 void MainMenuMapOptions::update() {
 	const Widelands::Map& map = eia().egbase().map();
 	author_.set_text(map.get_author());
@@ -180,7 +184,7 @@ void MainMenuMapOptions::update() {
 
 /**
  * Called when one of the editboxes are changed
-*/
+ */
 void MainMenuMapOptions::changed() {
 	ok_.set_enabled(true);
 }

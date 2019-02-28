@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -235,6 +235,6 @@ public:
 };
 
 void luaopen_wlui(lua_State*);
-}
+}  // namespace LuaUi
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_UI_H

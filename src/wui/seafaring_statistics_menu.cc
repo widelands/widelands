@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2018 by the Widelands Development Team
+ * Copyright (C) 2017-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -100,8 +100,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                g_gr->images().get("images/wui/menus/menu_watch_follow.png"),
                (boost::format(_("%1% (Hotkey: %2%)")) %
                 /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                _("Watch the selected ship") %
-                pgettext("hotkey", "W"))
+                _("Watch the selected ship") % pgettext("hotkey", "W"))
                   .str()),
      openwindowbtn_(
         &navigation_box_,
@@ -131,8 +130,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
                     g_gr->images().get("images/wui/ship/menu_ship_goto.png"),
                     (boost::format(_("%1% (Hotkey: %2%)")) %
                      /** TRANSLATORS: Tooltip in the seafaring statistics window */
-                     _("Center the map on the selected ship") %
-                     pgettext("hotkey", "G"))
+                     _("Center the map on the selected ship") % pgettext("hotkey", "G"))
                        .str()),
      table_(&main_box_, 0, 0, get_inner_w() - 2 * kPadding, 100, UI::PanelStyle::kWui) {
 
@@ -205,7 +203,7 @@ SeafaringStatisticsMenu::SeafaringStatisticsMenu(InteractivePlayer& plr,
 				   NEVER_HERE();
 			   }
 		   }
-		});
+	   });
 }
 
 const std::string
@@ -225,9 +223,8 @@ SeafaringStatisticsMenu::status_to_string(SeafaringStatisticsMenu::ShipFilterSta
 		return pgettext("ship_state", "Founding a Colony");
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		return "All";  // The user shouldn't see this, so we don't localize
-	default:
-		NEVER_HERE();
 	}
+	NEVER_HERE();
 }
 
 const Image*
@@ -254,8 +251,6 @@ SeafaringStatisticsMenu::status_to_image(SeafaringStatisticsMenu::ShipFilterStat
 	case SeafaringStatisticsMenu::ShipFilterStatus::kAll:
 		filename = "images/wui/ship/ship_scout_ne.png";
 		break;
-	default:
-		NEVER_HERE();
 	}
 	return g_gr->images().get(filename);
 }
@@ -418,7 +413,7 @@ bool SeafaringStatisticsMenu::handle_key(bool down, SDL_Keysym code) {
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;
-		/* no break */
+			FALLS_THROUGH;
 		default:
 			break;  // not handled
 		}

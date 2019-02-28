@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@ FileViewPanel::FileViewPanel(Panel* parent,
      padding_(5),
      contents_width_(0),
      contents_height_(0),
-     style_(scrollbar_style) {
+     panel_style_(scrollbar_style) {
 	layout();
 }
 
@@ -55,8 +55,8 @@ void FileViewPanel::add_tab(const std::string& lua_script) {
 	   std::unique_ptr<UI::Box>(new UI::Box(this, 0, 0, UI::Box::Vertical, 0, 0, padding_)));
 	size_t index = boxes_.size() - 1;
 
-	UI::MultilineTextarea* textarea =
-	   new UI::MultilineTextarea(boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, style_, content);
+	UI::MultilineTextarea* textarea = new UI::MultilineTextarea(
+	   boxes_.at(index).get(), 0, 0, Scrollbar::kSize, 0, panel_style_, content);
 
 	textviews_.push_back(std::unique_ptr<UI::MultilineTextarea>(std::move(textarea)));
 	add((boost::format("about_%" PRIuS) % index).str(), title, boxes_.at(index).get(), "");
@@ -79,10 +79,10 @@ void FileViewPanel::layout() {
 	assert(get_inner_w() >= 0 && get_inner_h() >= 0);
 
 	// If there is a border, we have less space for the contents
-	contents_width_ =
-	   std::max(0, style_ == UI::PanelStyle::kFsMenu ? get_w() - padding_ : get_w() - 2 * padding_);
+	contents_width_ = std::max(
+	   0, panel_style_ == UI::PanelStyle::kFsMenu ? get_w() - padding_ : get_w() - 2 * padding_);
 
-	contents_height_ = std::max(0, style_ == UI::PanelStyle::kFsMenu ?
+	contents_height_ = std::max(0, panel_style_ == UI::PanelStyle::kFsMenu ?
 	                                  get_inner_h() - 2 * padding_ - UI::kTabPanelButtonHeight :
 	                                  get_inner_h() - 3 * padding_ - UI::kTabPanelButtonHeight);
 

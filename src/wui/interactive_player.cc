@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -405,7 +405,7 @@ void InteractivePlayer::node_action(const Widelands::NodeAndTriangle<>& node_and
  * \li PageUp/PageDown: change game speed
  * \li Pause: pauses the game
  * \li Return: write chat message
-*/
+ */
 bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 	if (down) {
 		switch (code.sym) {
@@ -479,6 +479,7 @@ bool InteractivePlayer::handle_key(bool const down, SDL_Keysym const code) {
 				}
 				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 			}
+			break;
 		default:
 			break;
 		}

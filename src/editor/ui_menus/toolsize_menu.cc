@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ inline EditorInteractive& EditorToolsizeMenu::eia() {
 
 /**
  * Create all the buttons etc...
-*/
+ */
 EditorToolsizeMenu::EditorToolsizeMenu(EditorInteractive& parent,
                                        UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "toolsize_menu", &registry, 250, 50, _("Tool Size")),

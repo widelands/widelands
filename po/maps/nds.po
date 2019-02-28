@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-26 14:47+0000\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-11-26 08:46+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgstr "Vun Nemesis tou Genesis"
 msgid ""
 "After landing on a mysterious island close to Atlantis, the remaining "
 "Atlanteans struggle to make a new home for themselves."
-msgstr "Nadeem se up eener wunnerliken Insel in de Naberskupp vun Atlantis lannden, rackern sük de övern Atlantinger of, sük eene neie Heimaad to bauen."
+msgstr "Nadeem se up eener wunnerliken Insel in de Naberskupp vun Atlantis lannden, rackern sük de övern Atlantinger of, sük eene neje Heimaad to bauen."
 
 #: ../../data/campaigns/bar01.wmf/elemental:8
 #: ../../data/campaigns/campaigns.conf:76
@@ -46,7 +46,7 @@ msgstr "Deese Rutfödderung stellt de hogern Husen un Bargwarks vör."
 #: ../../data/campaigns/bar02.wmf/elemental:7
 #: ../../data/campaigns/campaigns.conf:81
 msgid "This Land is Our Land"
-msgstr "Deeses Land is uns Land"
+msgstr "Deeses Land is uns' Land"
 
 #: ../../data/campaigns/bar02.wmf/elemental:9
 msgid ""
@@ -81,7 +81,7 @@ msgid ""
 "forces he left to secure the borders of Al’thunran, the young warlord seeks "
 "to reunite his ambitious brothers and force the tribes to march once again "
 "under a common banner."
-msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neie Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, wo de Bomen-Throon was, un truck sük mit sienen Soldaten up de Hogen Hövels torügg, wo he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sük siene streevsken Bröörs utsöhnen un de Völker weer unner eenem gemeensamen Fahne marskeren."
+msgstr "As Schatt-Karut stürv, was he een oller Mann, de Vader vun dree machtigen un streevsken Söhnen, un de Kummandant vun Soldaten, de all Feinde manntjen kunnen, de de steenollen Walden angrepen. Uplest vun sien golden Seggen keek Schatt-Karut sien ollsten Sohn, Troon, ut, dat he de neje Kummandant vun sienem Volk wese – een Beslutt, mit wat siene Bröörs nich tofree weren. Dat wuss de olle Kummandant. As sien Vater befohl, verleet Troon de Höövdstadt Alltunraan, wo de Bomen-Throon was, un truck sük mit sienen Soldaten up de Hogen Hövels torügg, wo he de Liek vun sienem Vater begroov. Dann swoor he bi de Gotten un de Geist vun sienem Vater, dat he weerkummt un de Örnung torechtmaakt. As siene Bröörs tegen Troon un de minnen Soldaten, de he tum Schuul för Alltunraan törüggleet, angahn, versöcht de junge Kummandant, dat sük siene streevsken Bröörs utsöhnen un de Völker weer unner eenem gemeensamen Fahne marskeren."
 
 #: ../../data/campaigns/campaigns.conf:35
 msgid "The Months of Exile"
@@ -128,7 +128,7 @@ msgid ""
 " the stuff of legends. Leading the remaining Atlanteans into a new future in"
 " a new part of the World, Jundlina became the most powerful human of her "
 "time, but at a high cost: her humanity and soul."
-msgstr "As ihr Gott sien Gloov in de Atlantinger verloor un ihre Insel överfloodde, wurr de Stried vun eener Froo na Gerechtigheid un eener annern Kans för hör Lüü de Stoff för Sagen. As se de övrigen Atlantinger to eener neien Tokunft in eenem annern Part vun de Welt föhrt, word Jundlin' de machtigste Minsk in hör Tied, aber de Pries was düür: Hör Godigheid un hör Seel."
+msgstr "As ihr Gott sien Gloov in de Atlantinger verloor un ihre Insel överfloodde, wurr de Stried vun eener Froo na Gerechtigheid un eener annern Kans för hör Lüü de Stoff för Sagen. As se de övrigen Atlantinger to eener nejen Tokunft in eenem annern Part vun de Welt föhrt, word Jundlin' de machtigste Minsk in hör Tied, aver de Pries was düür: Hör Godigheid un hör Seel."
 
 #: ../../data/campaigns/campaigns.conf:52
 msgid "From Water to Ice"
@@ -150,7 +150,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr "Vun de See to leven is een unnerratts Halswark, besünners för de Inwohners vun de freesk Noordseeküste. Was de leste Störmflood, de verherendste in de Memoorje vun allen Lüü, würrelk nix as al weer een Bispööl för de Tegenstötten, mit de all Fresen torechtkomen mutten – oder een Teken vun de Gotten, dat een Volk, wat sük even eerst hier daallaten hett, een kumpleet neies Heimaatland utfinnen mutt?"
+msgstr "Vun de See to leven is een unnerratts Halswark, besünners för de Inwohners vun de freesk Noordseeküste. Was de leste Störmflood, de verherendste in de Memoorje vun allen Lüü, würrelk nix as al weer een Bispööl för de Tegenstötten, mit de all Fresen torechtkomen mutten – oder een Teken vun de Gotten, dat een Volk, wat sük even eerst hier daallaten hett, een kumpleet nejes Heimaatland utfinnen mutt?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -194,7 +194,7 @@ msgstr "Nüms"
 
 #: ../../data/campaigns/dummy.wmf/elemental:11
 msgid "Sorry, this map is not yet implemented."
-msgstr "Spietelk as dat is, deese Kaart is noch nich schreven."
+msgstr "Deese Kaart is leider noch nich schreven."
 
 #: ../../data/campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -203,7 +203,7 @@ msgid ""
 "a new life. But his destiny takes his ship into a heavy storm, which nearly "
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on"
 " an unknown desert strand and save his people. For now."
-msgstr "Nadeem he eene wichtige Slacht tegen de Willen Lüü un eenen groten Part vun de Land vun de Latiensken Riek verloren hett, verlett Lutjus Freemilt un begünnt een neies Leven. Aber sien Schipp word vun de Slag in eenen Kohstörm föhrt un haast verneelt. Nix as Glück vergünnt hüm, mit de ramponeerten Schipp up eenen frömden Strand uptolopen un siene Lüü to redden. Vöreerst."
+msgstr "Nadeem he eene wichtige Slacht tegen de Willen Lüü un eenen groten Part vun de Land vun de Latiensken Riek verloren hett, verlett Lutjus Freemilt un begünnt een nejes Leven. Aver sien Schipp word vun de Slag in eenen Kohstörm föhrt un haast verneelt. Nix as Glück vergünnt hüm, mit de ramponeerten Schipp up eenen frömden Strand uptolopen un siene Lüü to redden. Vöreerst."
 
 #: ../../data/campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -211,7 +211,7 @@ msgid ""
 "quest to find a good place for a new beginning. Only a few days later, they "
 "land on a green, Mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
-msgstr "Ennelk is de Schipp weer heel, un Lutjus un siene Lüü versöken wieder, eene gode Stee för eenen neien Anfang to finnen. Blot een paar Dagen naher lannen se up eene gröne Insel in de Latienske See, de hör wie dat Paradies vörkummt. Överglückelk gahn se de neie Heimaat utförsken."
+msgstr "Ennelk is de Schipp weer heel, un Lutjus un siene Lüü versöken wieder, eene gode Stee för eenen nejen Anfang to finnen. Blot een paar Dagen naher lannen se up eene gröne Insel in de Latienske See, de hör wie dat Paradies vörkummt. Överglückelk gahn se de neje Heimaat utförsken."
 
 #: ../../data/campaigns/emp03.wmf/elemental:10
 msgid ""
@@ -239,7 +239,7 @@ msgstr "1362 wurr dat gesette, freedsame Leven vun de Inwohners vun de Noordfree
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr "Deese Rutfödderung is na de Histoorje maakt, aber de Vertellsel un de Logen sünd in 't Geheel utdocht."
+msgstr "Deese Rutfödderung is na de Histoorje maakt, aver de Vertellsel un de Logen sünd in 't Geheel utdocht."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
@@ -249,7 +249,7 @@ msgstr "Ieskolle Begrötens"
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aber hör Ankuft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen…"
+msgstr "Reebaud un sien Volk sünd in de Noord ankomen. Aver hör Ankuft tüsken de fröstigen Meden un de schneeibedeckten Bargen is nich ganz willkomen …"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15
@@ -334,7 +334,7 @@ msgid ""
 "It’s a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it"
 " is easy to err into the land of the foreign clans."
-msgstr "'t is düll, sük in deese mojen Gegend ut eener Spoor an de annern daaltolaten. Aber de Wegen, deese groten Geweste to umfaten, sünd lang un vull mit Bogen, un 't is licht, in dat Land vun eenem frömden Volk to ströpen."
+msgstr "'t is düll, sük in deese mojen Gegend ut eener Spoor an de annern daaltolaten. Aver de Wegen, deese groten Geweste to umfaten, sünd lang un vull mit Bogen, un 't is licht, in dat Land vun eenem frömden Volk to ströpen."
 
 #: ../../data/maps/Checkmate.wmf/elemental:8
 msgid "Checkmate"
@@ -345,7 +345,7 @@ msgid ""
 "Whether just one of nature’s strangest features or the creation of a mad "
 "(and game-hungry) god, this weird battleground awaits two opponents for "
 "another confrontation."
-msgstr "Is dat eene bannig wunnerlike Kuntrei, de de Natuur daar schafft hett, oder de Erfindung vun eenem dördreihten (un Speele-süchtigen) Gott? Wo ok immer: deeser komiske Slachtenring wacht up neien Stried tüsken twee Feinden."
+msgstr "Is dat eene bannig wunnerlike Kuntrei, de de Natuur daar schafft hett, oder de Erfindung vun eenem dördreihten (un Speele-süchtigen) Gott? Wo ok immer: deeser komiske Slachtenring wacht up nejen Stried tüsken twee Feinden."
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:8
 msgid "Comet Island"

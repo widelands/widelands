@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,7 +102,7 @@ GameSummaryScreen::GameSummaryScreen(InteractiveGameBase* parent, UI::UniqueWind
 	players_table_->add_column(150, _("Player"));
 	players_table_->add_column(80, _("Team"), "", UI::Align::kCenter);
 	players_table_->add_column(100, _("Status"), "", UI::Align::kCenter);
-	players_table_->add_column(0, _("Time"), "", UI::Align::kRight, UI::TableColumnType::kFlexible);
+	players_table_->add_column(100, _("Time"), "", UI::Align::kCenter);
 
 	// Prepare Elements
 	title_area_->set_fontsize(UI_FONT_SIZE_BIG);

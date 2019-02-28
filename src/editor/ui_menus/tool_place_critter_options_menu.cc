@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ EditorToolPlaceCritterOptionsMenu::EditorToolPlaceCritterOptionsMenu(
 	      this, world.editor_critter_categories(), world.critters(),
 	      [](UI::Panel* cb_parent, const Widelands::CritterDescr& critter_descr) {
 		      return create_critter_checkbox(cb_parent, critter_descr);
-		   },
+	      },
 	      [this] { select_correct_tool(); }, &tool));
 	set_center_panel(multi_select_menu_.get());
 }
