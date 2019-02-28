@@ -32,7 +32,7 @@ function get_animation_files(prefix)
 end
 
 -- RST
--- .. function:: add_animation(animationtable, animationname, dirname, basename, hotspot, scales[, fps])
+-- .. function:: add_animation(animationtable, animationname, dirname, basename, hotspot [, fps])
 --
 --    Convenience function for adding an animation to `animationtable`.
 --    Supports both simple animations and mipmaps.
@@ -55,7 +55,7 @@ end
 --    :arg fps: Frames per second. Only use this if the animation has more than
 --       1 frame, and if you need to deviate from the default frame rate.
 --    :type fps: :class:`integer`
-function add_animation(animationtable, animationname, dirname, basename, hotspot, scales, fps)
+function add_animation(animationtable, animationname, dirname, basename, hotspot, fps)
    local supported_scales = { 0.5, 1, 2, 4 }
    mipmap = {}
    for scale_idx, current_scale in ipairs(supported_scales) do
@@ -91,7 +91,7 @@ end
 
 
 -- RST
--- .. function:: add_walking_animations(animationtable, animationname, dirname, basename, hotspot, scales[, fps])
+-- .. function:: add_walking_animations(animationtable, animationname, dirname, basename, hotspot [, fps])
 --
 --    Adds 6 walk or sail animations - one for each walking direction - to `animationtable`.
 --    Supports both simple animations and mipmaps.
@@ -115,13 +115,12 @@ end
 --    :arg fps: Frames per second. Only use this if the animation has more than
 --       1 frame, and if you need to deviate from the default frame rate.
 --    :type fps: :class:`integer`
-function add_walking_animations(animationtable, animationname, dirname, basename, hotspot, scales, fps)
-   local supported_scales = { 0.5, 1, 2, 4 }
+function add_walking_animations(animationtable, animationname, dirname, basename, hotspot, fps)
    for idx, dir in ipairs{ "ne", "e", "se", "sw", "w", "nw" } do
       if fps ~= nil then
-         add_animation(animationtable, animationname .. "_" .. dir, dirname, basename .. "_" .. dir, hotspot, scales, fps)
+         add_animation(animationtable, animationname .. "_" .. dir, dirname, basename .. "_" .. dir, hotspot, fps)
       else
-         add_animation(animationtable, animationname .. "_" .. dir, dirname, basename .. "_" .. dir, hotspot, scales)
+         add_animation(animationtable, animationname .. "_" .. dir, dirname, basename .. "_" .. dir, hotspot)
       end
    end
 end

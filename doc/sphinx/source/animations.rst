@@ -211,7 +211,7 @@ Typical building animations are:
 
 Any animation other than the ``build`` and ``idle`` animations are referenced in the building's ``programs`` table via the ``animate`` command. For more information on building programs, see :ref:`productionsite_programs`.
 
-For example, a the animations for a mine could look like this:
+For example, the animations for a mine could look like this:
 
 .. code-block:: lua
 
