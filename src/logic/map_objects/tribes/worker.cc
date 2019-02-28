@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -2051,9 +2051,18 @@ void Worker::dropoff_update(Game& game, State&) {
 
 	WareInstance* ware = get_carried_ware(game);
 	BaseImmovable* const location = game.map()[get_position()].get_immovable();
+
+	// If the building just got destroyed, pop the task
+	PlayerImmovable* current_location = get_location(game);
+	if (current_location == nullptr) {
+		molog("%s: Unable to dropoff ware in building at (%d,%d) - there is no building there\n",
+		      descr().name().c_str(), get_position().x, get_position().y);
+		return pop_task(game);
+	}
+
 #ifndef NDEBUG
-	Building& ploc = dynamic_cast<Building&>(*get_location(game));
-	assert(&ploc == location || &ploc.base_flag() == location);
+	Building* ploc = dynamic_cast<Building*>(current_location);
+	assert(ploc == location || &ploc->base_flag() == location);
 #endif
 
 	// Deliver the ware
