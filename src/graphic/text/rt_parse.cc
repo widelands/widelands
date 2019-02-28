@@ -481,10 +481,12 @@ Attributes
 ^^^^^^^^^^
 
 * **src**: The path to the image, relative to the ``data`` directory.
-* **object**: Show the representative image of a map object
+* **object**: Show the representative image of a map object instead of using ``src``.
 * **ref**: To be implemented
 * **color**: Player color for the image as a hex value
-* **width**: Width of the image as a pixel amount. The corresponding height will be matched automatically. Not supported for map objects.
+* **width**: Width of the image as a pixel amount.
+  The corresponding height will be matched automatically.
+  Not supported in conjunction with the ``object`` parameter.
 
 :ref:`Return to tag index<rt_tags>`
 		*/
