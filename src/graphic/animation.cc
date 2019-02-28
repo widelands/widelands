@@ -44,6 +44,8 @@
 #include "sound/sound_handler.h"
 
 namespace {
+// The mipmap scales supported by the engine.
+// Ensure that this always matches supported_scales in data/scription/mapobjects.lua.
 const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
 
 /**

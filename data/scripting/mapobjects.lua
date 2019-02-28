@@ -31,6 +31,12 @@ function get_animation_files(prefix)
    return animation_files
 end
 
+
+-- The mipmap scales supported by the engine.
+-- Ensure that this always matches kSupportedScales in animations.cc
+local supported_scales = { 0.5, 1, 2, 4 }
+
+
 -- RST
 -- .. function:: add_animation(animationtable, animationname, dirname, basename, hotspot [, fps])
 --
@@ -56,8 +62,10 @@ end
 --       1 frame, and if you need to deviate from the default frame rate.
 --    :type fps: :class:`integer`
 function add_animation(animationtable, animationname, dirname, basename, hotspot, fps)
-   local supported_scales = { 0.5, 1, 2, 4 }
    mipmap = {}
+   if (supported_scales == nil) then
+   print("#################################################")
+   end
    for scale_idx, current_scale in ipairs(supported_scales) do
       local listed_files = get_animation_files(dirname .. basename .. "_" .. current_scale)
       if #listed_files > 0 then
