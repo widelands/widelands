@@ -231,6 +231,7 @@ wl_library(logic
     game_io
     graphic
     graphic_color
+    graphic_fonthandler
     graphic_image_io
     graphic_playercolor
     io_fileread

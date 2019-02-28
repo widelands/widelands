@@ -230,7 +230,13 @@ struct Ship : Bob {
 
 	void exp_cancel(Game&);
 	void sink_ship(Game&);
-	std::string info_string(MapObject::InfoStringType format) override;
+
+protected:
+	void draw(const EditorGameBase&,
+	          const TextToDraw& draw_text,
+	          const Vector2f& field_on_dst,
+	          float scale,
+	          RenderTarget* dst) const override;
 
 private:
 	friend struct Fleet;

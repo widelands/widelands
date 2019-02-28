@@ -439,6 +439,7 @@ Vector2f Soldier::calc_drawpos(const EditorGameBase& game,
  * Draw this soldier. This basically draws him as a worker, but add health points
  */
 void Soldier::draw(const EditorGameBase& game,
+                   const TextToDraw&,
                    const Vector2f& field_on_dst,
                    const float scale,
                    RenderTarget* dst) const {
@@ -505,7 +506,26 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 	                         kSoldierHealthBarWidth * 2 * scale, 5 * scale);
 	dst->fill_rect(energy_outer, RGBColor(255, 255, 255));
 
-	int health_width = 2 * (kSoldierHealthBarWidth - 1) * current_health_ / get_max_health();
+	// Adjust health to current animation tick
+	uint32_t health_to_show = current_health_;
+	if (battle_) {
+		uint32_t pending_damage = battle_->get_pending_damage(this);
+		if (pending_damage > 0) {
+			int32_t timeshift = owner().egbase().get_gametime() - get_animstart();
+			timeshift = std::min(std::max(0, timeshift), 1000);
+
+			pending_damage *= timeshift;
+			pending_damage /= 1000;
+
+			if (pending_damage > health_to_show) {
+				health_to_show = 0;
+			} else {
+				health_to_show -= pending_damage;
+			}
+		}
+	}
+
+	int health_width = 2 * (kSoldierHealthBarWidth - 1) * health_to_show / get_max_health();
 	Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
 	                   health_width * scale, 3 * scale);
 	Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
