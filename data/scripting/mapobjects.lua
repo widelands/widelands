@@ -48,6 +48,7 @@ end
 --    :arg basename: The basename of the animation files. The filenames of the
 --       animation files need to have the format ``<basename>_\d{2,3}.png`` for simple
 --       file animations, and  ``<basename>_<scale>_\d{2,3}.png`` for mipmaps.
+--       Supported scales are ``0.5``, ``1``, ``2`` and ``4``.
 --    :type basename: :class:`string`
 --    :arg hotspot: The hotspot coordinates for blitting, e.g. ``{2, 20}``.
 --    :type hotspot: :class:`table`
@@ -107,6 +108,7 @@ end
 --       animation files need to have the format
 --       ``<basename>_(e|ne|se|sw|w|nw)_\d{2,3}.png`` for simple animations, and
 --       ``<basename>_(e|ne|se|sw|w|nw)_<scale>_\d{2,3}.png`` for mipmaps.
+--       Supported scales are ``0.5``, ``1``, ``2`` and ``4``.
 --    :type basename: :class:`string`
 --    :arg hotspot: The hotspot coordinates for blitting, e.g. ``{2, 20}``.
 --    :type hotspot: :class:`table`
