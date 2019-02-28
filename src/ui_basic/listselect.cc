@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ namespace UI {
  *       y
  *       w       dimensions, in pixels, of the Listselect
  *       h
-*/
+ */
 BaseListselect::BaseListselect(Panel* const parent,
                                const int32_t x,
                                const int32_t y,
@@ -83,14 +83,14 @@ BaseListselect::BaseListselect(Panel* const parent,
 
 /**
  * Free allocated resources
-*/
+ */
 BaseListselect::~BaseListselect() {
 	clear();
 }
 
 /**
  * Remove all entries from the listselect
-*/
+ */
 void BaseListselect::clear() {
 	for (EntryRecord* entry : entry_records_) {
 		delete entry;
@@ -110,7 +110,7 @@ void BaseListselect::clear() {
  * Args: name   name that will be displayed
  * entry  value returned by get_select()
  *       sel    if true, directly select the new entry
-*/
+ */
 void BaseListselect::add(const std::string& name,
                          uint32_t entry,
                          const Image* pic,
@@ -204,7 +204,7 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End) {
 
 /**
  * Scroll to the given position, in pixels.
-*/
+ */
 void BaseListselect::set_scrollpos(const int32_t i) {
 	if (scrollpos_ == uint32_t(i))
 		return;
@@ -537,4 +537,4 @@ void BaseListselect::remove(const char* const str) {
 		}
 	}
 }
-}
+}  // namespace UI

@@ -99,6 +99,7 @@ wl_library(editor
     logic
     logic_constants
     logic_filesystem_constants
+    logic_generic_save_handler
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io

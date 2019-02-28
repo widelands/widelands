@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,21 +68,24 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		items_table = table.get_table("buildcost");
 		for (const std::string& key : items_table->keys<std::string>()) {
 			try {
-				if (buildcost_.count(key)) {
-					throw GameDataError(
-					   "a buildcost item of this ware type has already been defined: %s", key.c_str());
-				}
 				if (!tribes.ware_exists(tribes.ware_index(key)) &&
 				    !tribes.worker_exists(tribes.worker_index(key))) {
 					throw GameDataError("\"%s\" has not been defined as a ware/worker type (wrong "
 					                    "declaration order?)",
 					                    key.c_str());
 				}
-				int32_t value = items_table->get_int(key);
-				uint8_t const count = value;
-				if (count != value)
-					throw GameDataError("count is out of range 1 .. 255");
-				buildcost_.insert(std::pair<std::string, uint8_t>(key, count));
+				const int32_t value = items_table->get_int(key);
+				if (value < 1) {
+					throw GameDataError("Buildcost: Ware/Worker count needs to be > 0 in "
+					                    "\"%s=%d\".\nEmpty buildcost tables are allowed if you wish to "
+					                    "have an amount of 0.",
+					                    key.c_str(), value);
+				} else if (value > 255) {
+					throw GameDataError("Buildcost: Ware/Worker count needs to be <= 255 in \"%s=%d\".",
+					                    key.c_str(), value);
+				}
+
+				buildcost_.insert(std::pair<std::string, uint8_t>(key, value));
 			} catch (const WException& e) {
 				throw GameDataError("[buildcost] \"%s\": %s", key.c_str(), e.what());
 			}
@@ -167,7 +170,7 @@ Bob& WorkerDescr::create_object() const {
 }
 
 /**
-* check if worker can be substitute for a requested worker type
+ * check if worker can be substitute for a requested worker type
  */
 bool WorkerDescr::can_act_as(DescriptionIndex const index) const {
 	assert(egbase_.tribes().worker_exists(index));

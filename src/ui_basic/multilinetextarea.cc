@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,8 @@
 
 namespace UI {
 
-static const uint32_t RICHTEXT_MARGIN = 2;
+// int instead of uint because of overflow situations
+static const int32_t RICHTEXT_MARGIN = 2;
 
 MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const int32_t x,
@@ -141,18 +142,26 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 	int anchor = 0;
 	Align alignment = mirror_alignment(align_, text_);
 	switch (alignment) {
+	// TODO(Arty): We might want to revisit this after the font renderer can handle long strings
+	// without whitespaces differently.
+	// Currently, such long unbreakable strings are silently assumed to fit the line exactly,
+	// which means that rendered_text_->width() might actually be larger than the effective width
+	// of the textarea. If we'd allow the anchor here to become negative in this case, it would
+	// properly position the longest line (just truncated), BUT the positioning of shorter lines
+	// would be off (possibly even outside the textarea, thus invisible) because their positioning
+	// is calculated without regard for overlong lines.
 	case UI::Align::kCenter:
-		anchor = (get_eff_w() - rendered_text_->width()) / 2;
+		anchor = std::max(0, (get_eff_w() - rendered_text_->width()) / 2);
 		break;
 	case UI::Align::kRight:
-		anchor = get_eff_w() - rendered_text_->width() - RICHTEXT_MARGIN;
+		anchor = std::max(0, get_eff_w() - rendered_text_->width() - RICHTEXT_MARGIN);
 		break;
 	case UI::Align::kLeft:
 		anchor = RICHTEXT_MARGIN;
 	}
-	rendered_text_->draw(
-	   dst, Vector2i(anchor, 0), Recti(0, scrollbar_.get_scrollpos(), rendered_text_->width(),
-	                                   rendered_text_->height() - scrollbar_.get_scrollpos()));
+	rendered_text_->draw(dst, Vector2i(anchor, 0),
+	                     Recti(0, scrollbar_.get_scrollpos(), rendered_text_->width(),
+	                           rendered_text_->height() - scrollbar_.get_scrollpos()));
 }
 
 bool MultilineTextarea::handle_mousewheel(uint32_t which, int32_t x, int32_t y) {

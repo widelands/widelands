@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -126,4 +126,4 @@ void EconomyDataPacket::write(FileWrite& fw) {
 	fw.unsigned_32(0);  //  terminator
 	fw.unsigned_32(eco_->request_timerid_);
 }
-}
+}  // namespace Widelands

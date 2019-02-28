@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -542,8 +542,7 @@ void Road::postsplit(Game& game, Flag& flag) {
  * Try to pick up a ware from the given flag.
  * \return true if a carrier has been sent on its way, false otherwise.
  */
-bool Road::notify_ware(Game& game, Flag& flag) {
-	FlagId flagid = &flag == flags_[Road::FlagEnd] ? Road::FlagEnd : Road::FlagStart;
+bool Road::notify_ware(Game& game, FlagId const flagid) {
 	// Iterate over all carriers and try to find one which will take the ware
 	for (CarrierSlot& slot : carrier_slots_) {
 		if (Carrier* const carrier = slot.carrier.get(game)) {

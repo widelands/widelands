@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018
+# Tiago Moreno <tiago.morenohr@hotmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 05:57+0000\n"
+"POT-Creation-Date: 2018-10-12 07:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Leonardo de Araujo Augusto <leonardodearaujoaugusto@gmail.com>, 2018\n"
+"Last-Translator: Tiago Moreno <tiago.morenohr@hotmail.com>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/widelands/teams/35159/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,14 +40,16 @@ msgid ""
 "Remember to check the messages and the building statistics for unproductive "
 "buildings."
 msgstr ""
+"Lembre-se de verificar as Mensagens e as Estatísticas dos Edifícios para "
+"construções improdutivas."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:55
 msgid "Clear all unnecessary roads"
-msgstr ""
+msgstr "Limpe todas as estradas desnecessárias."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:57
 msgid "Clear Road Network"
-msgstr ""
+msgstr "Limpar estrada."
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:58
 msgid "Resolve the chaotic road network by clearing all unnecessary roads."
@@ -519,8 +522,8 @@ msgstr ""
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:333
 msgid ""
-"Until we have found the plans, the only option for our farms is to dismantle"
-" them."
+"Until we have found the plans, the only option for our farms is to destroy "
+"them."
 msgstr ""
 
 #: ../../data/campaigns/emp04.wmf/scripting/texts.lua:340

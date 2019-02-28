@@ -3,16 +3,16 @@
 # 
 # Translators:
 # Adam Piggott, 2016
-# Andi Chandler <andi@gowling.com>, 2017
+# Andi Chandler <andi@gowling.com>, 2017-2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 18:25+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-10-26 05:28+0000\n"
+"PO-Revision-Date: 2018-10-30 12:58+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/widelands/widelands/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -131,15 +131,15 @@ msgstr "When their God lost faith in the Atlanteans and drowned their island, on
 
 #: ../../data/campaigns/campaigns.conf:52
 msgid "From Water to Ice"
-msgstr ""
+msgstr "From Water to Ice"
 
 #: ../../data/campaigns/campaigns.conf:54
 msgid "Frisians"
-msgstr ""
+msgstr "Frisians"
 
 #: ../../data/campaigns/campaigns.conf:56
 msgid "For advanced players. Introduces the Frisians"
-msgstr ""
+msgstr "For advanced players. Introduces the Frisians"
 
 #: ../../data/campaigns/campaigns.conf:57
 msgid ""
@@ -149,7 +149,7 @@ msgid ""
 "example for the hardships all Frisians have to face – or a sign from the "
 "gods that a tribe that only just settled here must seek out an entirely new "
 "home?"
-msgstr ""
+msgstr "Living off the ocean is a constant struggle, and even more so for the inhabitants of the Frisian North Sea shore. Was the last storm flood, the most devastating one in human memory, really nothing more than yet another example for the hardships all Frisians have to face – or a sign from the gods that a tribe that only just settled here must seek out an entirely new home?"
 
 #: ../../data/campaigns/campaigns.conf:86
 #: ../../data/campaigns/campaigns.conf:111
@@ -181,11 +181,11 @@ msgstr "Surprise, Surprise!"
 #: ../../data/campaigns/campaigns.conf:129
 #: ../../data/campaigns/fri01.wmf/elemental:8
 msgid "The Great Stormflood"
-msgstr ""
+msgstr "The Great Stormflood"
 
 #: ../../data/campaigns/campaigns.conf:134
 msgid "Colder than Ice"
-msgstr ""
+msgstr "Colder than Ice"
 
 #: ../../data/campaigns/dummy.wmf/elemental:10
 msgid "Nobody"
@@ -232,23 +232,23 @@ msgid ""
 "Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or"
 " a sign from the Gods that the Frisian community on the island of Langeness "
 "is not wanted here?"
-msgstr ""
+msgstr "In 1362, the quiet, peaceful life of the inhabitants of the Northern Frisian Islands was disrupted by one of the greatest storm floods in human memory: Saint Marcellus’ Flood. Is it really nothing more than yet another storm, or a sign from the Gods that the Frisian community on the island of Langeness is not wanted here?"
 
 #: ../../data/campaigns/fri01.wmf/elemental:11
 msgid ""
 "This scenario is set in a historical context, but most of the story line is "
 "fiction."
-msgstr ""
+msgstr "This scenario is set in a historical context, but most of the story line is fiction."
 
 #: ../../data/campaigns/fri02.wmf/elemental:8
 msgid "An Icy Welcome"
-msgstr ""
+msgstr "An Icy Welcome"
 
 #: ../../data/campaigns/fri02.wmf/elemental:10
 msgid ""
 "Reebaud and his tribe have arrived in the North. But their arrival between "
 "the frozen steppes and the snow-covered mountains is less than welcome…"
-msgstr ""
+msgstr "Reebaud and his tribe have arrived in the North. But their arrival between the frozen steppes and the snow-covered mountains is less than welcome…"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/elemental:8
 #: ../../data/campaigns/tutorials.conf:15

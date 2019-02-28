@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -337,30 +337,7 @@ bool Flag::is_dead_end() const {
 }
 
 /**
- * Called by workers wanting to drop a ware to their building's flag.
- * \return true/allow on low congestion-risk.
- */
-bool Flag::has_capacity_for_ware(WareInstance& ware) const {
-	// avoid iteration for the easy cases
-	if (ware_filled_ < ware_capacity_ - 2) {
-		return true;  // more than two free slots, allow
-	}
-	if (ware_filled_ >= ware_capacity_) {
-		return false;  // all slots filled, no room
-	}
-
-	DescriptionIndex const descr_index = ware.descr_index();
-	for (int i = 0; i < ware_filled_; ++i) {
-		if (wares_[i].ware->descr_index() == descr_index) {
-			return false;  // ware of this type already present, leave room for other types
-		}
-	}
-	return true;  // ware of this type not present, allow
-}
-
-/**
- * \return true/allow if the flag can hold more wares of any type.
- * has_capacity_for_ware() also checks ware's type to prevent congestion.
+ * Returns true if the flag can hold more wares.
  */
 bool Flag::has_capacity() const {
 	return (ware_filled_ < ware_capacity_);
@@ -386,24 +363,13 @@ void Flag::skip_wait_for_capacity(Game&, Worker& w) {
 		capacity_wait_.erase(it);
 }
 
-/**
- * Adds given ware to this flag.
- * Please check has_capacity() or better has_capacity_for_ware() before.
- */
 void Flag::add_ware(EditorGameBase& egbase, WareInstance& ware) {
-	assert(ware_filled_ < ware_capacity_);
-	init_ware(egbase, ware, wares_[ware_filled_++]);
-	if (upcast(Game, game, &egbase)) {
-		ware.update(*game);  //  will call call_carrier() if necessary
-	}
-}
 
-/**
- * Properly assigns given ware instance to given pending ware.
- */
-void Flag::init_ware(EditorGameBase& egbase, WareInstance& ware, PendingWare& pi) {
+	assert(ware_filled_ < ware_capacity_);
+
+	PendingWare& pi = wares_[ware_filled_++];
 	pi.ware = &ware;
-	pi.pending = true;
+	pi.pending = false;
 	pi.nextstep = nullptr;
 	pi.priority = 0;
 
@@ -423,24 +389,32 @@ void Flag::init_ware(EditorGameBase& egbase, WareInstance& ware, PendingWare& pi
 	}
 
 	ware.set_location(egbase, this);
+
+	if (upcast(Game, game, &egbase)) {
+		ware.update(*game);  //  will call call_carrier() if necessary
+	}
 }
 
 /**
- * \return a ware currently waiting for a carrier to the given destflag.
+ * \return true if a ware is currently waiting for a carrier to the given Flag.
  *
  * \note Due to fetch_from_flag() semantics, this function makes no sense
  * for a  building destination.
-*/
-Flag::PendingWare* Flag::get_ware_for_flag(Flag& destflag, bool const pending_only) {
+ */
+bool Flag::has_pending_ware(Game&, Flag& dest) {
 	for (int32_t i = 0; i < ware_filled_; ++i) {
-		PendingWare* pw = &wares_[i];
-		if ((!pending_only || pw->pending) && pw->nextstep == &destflag &&
-		    destflag.allow_ware_from_flag(*pw->ware, *this)) {
-			return pw;
+		if (!wares_[i].pending) {
+			continue;
 		}
+
+		if (wares_[i].nextstep != &dest) {
+			continue;
+		}
+
+		return true;
 	}
 
-	return nullptr;
+	return false;
 }
 
 /**
@@ -450,124 +424,109 @@ Flag::PendingWare* Flag::get_ware_for_flag(Flag& destflag, bool const pending_on
 #define MAX_TRANSFER_PRIORITY 16
 
 /**
- * Called by the carriercode when the carrier is called away from his job
- * but has acknowledged a ware before. This ware is then freed again
- * to be picked by another carrier. Returns true if a ware was indeed
- * made pending again.
+ * Called by carrier code to indicate that the carrier is moving to pick up an
+ * ware. Ware with highest transfer priority is chosen.
+ * \return true if an ware is actually waiting for the carrier.
  */
-bool Flag::cancel_pickup(Game& game, Flag& destflag) {
+bool Flag::ack_pickup(Game&, Flag& destflag) {
+	int32_t highest_pri = -1;
+	int32_t i_pri = -1;
+
 	for (int32_t i = 0; i < ware_filled_; ++i) {
-		PendingWare& pw = wares_[i];
-		if (!pw.pending && pw.nextstep == &destflag) {
-			pw.pending = true;
-			pw.ware->update(game);  //  will call call_carrier() if necessary
-			return true;
+		if (!wares_[i].pending) {
+			continue;
 		}
+
+		if (wares_[i].nextstep != &destflag) {
+			continue;
+		}
+
+		if (wares_[i].priority > highest_pri) {
+			highest_pri = wares_[i].priority;
+			i_pri = i;
+
+			// Increase ware priority, it matters only if the ware has to wait.
+			if (wares_[i].priority < MAX_TRANSFER_PRIORITY) {
+				wares_[i].priority++;
+			}
+		}
+	}
+
+	if (i_pri >= 0) {
+		wares_[i_pri].pending = false;
+		return true;
 	}
 
 	return false;
 }
-
 /**
  * Called by carrier code to find the best among the wares on this flag
  * that are meant for the provided dest.
  * \return index of found ware (carrier will take it)
  * or kNotFoundAppropriate (carrier will leave empty-handed)
  */
-int32_t Flag::find_pending_ware(PlayerImmovable& dest) {
-	int32_t highest_pri = -1;
-	int32_t best_index = kNotFoundAppropriate;
-	bool ware_pended = false;
+bool Flag::cancel_pickup(Game& game, Flag& destflag) {
+	int32_t lowest_prio = MAX_TRANSFER_PRIORITY + 1;
+	int32_t i_pri = -1;
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {
-		PendingWare& pw = wares_[i];
-		if (pw.nextstep != &dest) {
+		if (wares_[i].pending) {
 			continue;
 		}
 
-		if (pw.priority < MAX_TRANSFER_PRIORITY) {
-			pw.priority++;
-		}
-		// Release promised pickup, in case we find a preferable ware
-		if (!ware_pended && !pw.pending) {
-			ware_pended = pw.pending = true;
-		}
-
-		// If dest is flag, we exclude wares that can stress it
-		if (&dest != building_ && !dynamic_cast<Flag&>(dest).allow_ware_from_flag(*pw.ware, *this)) {
+		if (wares_[i].nextstep != &destflag) {
 			continue;
 		}
 
-		if (pw.priority > highest_pri) {
-			highest_pri = pw.priority;
-			best_index = i;
+		if (wares_[i].priority < lowest_prio) {
+			lowest_prio = wares_[i].priority;
+			i_pri = i;
 		}
 	}
 
-	return best_index;
+	if (i_pri >= 0) {
+		wares_[i_pri].pending = true;
+		wares_[i_pri].ware->update(game);  //  will call call_carrier() if necessary
+		return true;
+	}
+
+	return false;
 }
 
 /**
- * Like find_pending_ware() above, but for carriers who have a ware to drop on this flag.
- * \return same as find_pending_ware() above, plus kDenyDrop (carrier will wait)
+ * Wake one sleeper from the capacity queue.
  */
-int32_t Flag::find_swappable_ware(WareInstance& ware, Flag& destflag) {
-	DescriptionIndex const descr_index = ware.descr_index();
-	int32_t highest_pri = -1;
-	int32_t best_index = kNotFoundAppropriate;
-	bool has_same_ware = false;
-	bool has_allowed = false;
-	bool ware_pended = false;
-
-	for (int32_t i = 0; i < ware_filled_; ++i) {
-		PendingWare& pw = wares_[i];
-		if (pw.nextstep != &destflag) {
-			if (pw.ware->descr_index() == descr_index) {
-				has_same_ware = true;
-			}
-			continue;
+void Flag::wake_up_capacity_queue(Game& game) {
+	while (!capacity_wait_.empty()) {
+		Worker* const w = capacity_wait_.front().get(game);
+		capacity_wait_.pop_front();
+		if (w && w->wakeup_flag_capacity(game, *this)) {
+			break;
 		}
-
-		if (pw.priority < MAX_TRANSFER_PRIORITY) {
-			pw.priority++;
-		}
-		// Release promised pickup, in case we find a preferable ware
-		if (!ware_pended && !pw.pending) {
-			ware_pended = pw.pending = true;
-		}
-
-		// We prefer to retrieve wares that won't stress the destflag
-		if (destflag.allow_ware_from_flag(*pw.ware, *this)) {
-			if (!has_allowed) {
-				has_allowed = true;
-				highest_pri = -1;
-			}
-		} else {
-			if (has_allowed) {
-				continue;
-			}
-		}
-
-		if (pw.priority > highest_pri) {
-			highest_pri = pw.priority;
-			best_index = i;
-		}
-	}
-
-	if (best_index > kNotFoundAppropriate) {
-		return (ware_filled_ > ware_capacity_ - 3 || has_allowed) ? best_index : kNotFoundAppropriate;
-	} else {
-		return (ware_filled_ < ware_capacity_ - 2 ||
-		        (ware_filled_ < ware_capacity_ && !has_same_ware)) ?
-		          kNotFoundAppropriate :
-		          kDenyDrop;
 	}
 }
 
 /**
- * Called by carrier code to retrieve a ware found by the previous methods.
+ * Called by carrier code to retrieve one of the wares on the flag that is meant
+ * for that carrier.
+ *
+ * This function may return 0 even if \ref ack_pickup() has already been
+ * called successfully.
  */
-WareInstance* Flag::fetch_pending_ware(Game& game, int32_t best_index) {
+WareInstance* Flag::fetch_pending_ware(Game& game, PlayerImmovable& dest) {
+	int32_t best_index = -1;
+
+	for (int32_t i = 0; i < ware_filled_; ++i) {
+		if (wares_[i].nextstep != &dest) {
+			continue;
+		}
+
+		// We prefer to retrieve wares that have already been acked
+		if (best_index < 0 || !wares_[i].pending) {
+			best_index = i;
+		}
+	}
+
 	if (best_index < 0) {
 		return nullptr;
 	}
@@ -579,40 +538,11 @@ WareInstance* Flag::fetch_pending_ware(Game& game, int32_t best_index) {
 	        sizeof(wares_[0]) * (ware_filled_ - best_index));
 
 	ware->set_location(game, nullptr);
+
+	// wake up capacity wait queue
+	wake_up_capacity_queue(game);
+
 	return ware;
-}
-
-/**
- * Called by carrier code to notify waiting carriers
- * which may be interested in the new state of this flag.
- */
-void Flag::ware_departing(Game& game) {
-	// Wake up one sleeper from the capacity queue.
-	while (!capacity_wait_.empty()) {
-		Worker* const w = capacity_wait_.front().get(game);
-		capacity_wait_.erase(capacity_wait_.begin());
-		if (w && w->wakeup_flag_capacity(game, *this)) {
-			return;
-		}
-	}
-
-	// Consider pending wares of neighboring flags.
-	for (int32_t dir = 1; dir <= WalkingDir::LAST_DIRECTION; ++dir) {
-		Road* const road = get_road(dir);
-		if (!road) {
-			continue;
-		}
-
-		Flag* other = &road->get_flag(Road::FlagEnd);
-		if (other == this) {
-			other = &road->get_flag(Road::FlagStart);
-		}
-
-		PendingWare* pw = other->get_ware_for_flag(*this, kPendingOnly);
-		if (pw && road->notify_ware(game, *other)) {
-			pw->pending = false;
-		}
-	}
 }
 
 /**
@@ -684,7 +614,7 @@ void Flag::remove_ware(EditorGameBase& egbase, WareInstance* const ware) {
 		memmove(&wares_[i], &wares_[i + 1], sizeof(wares_[0]) * (ware_filled_ - i));
 
 		if (upcast(Game, game, &egbase)) {
-			ware_departing(*game);
+			wake_up_capacity_queue(*game);
 		}
 
 		return;
@@ -755,20 +685,27 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 
 	for (int32_t dir = 1; dir <= 6; ++dir) {
 		Road* const road = get_road(dir);
+		Flag* other;
+		Road::FlagId flagid;
+
 		if (!road) {
 			continue;
 		}
 
-		Flag* other = &road->get_flag(Road::FlagEnd);
-		if (other == this) {
+		if (&road->get_flag(Road::FlagStart) == this) {
+			flagid = Road::FlagStart;
+			other = &road->get_flag(Road::FlagEnd);
+		} else {
+			flagid = Road::FlagEnd;
 			other = &road->get_flag(Road::FlagStart);
 		}
+
 		if (other != &nextflag) {
 			continue;
 		}
 
 		// Yes, this is the road we want; inform it
-		if (other->update_ware_from_flag(game, wares_[i], *road, *this)) {
+		if (road->notify_ware(game, flagid)) {
 			return;
 		}
 
@@ -779,72 +716,6 @@ void Flag::call_carrier(Game& game, WareInstance& ware, PlayerImmovable* const n
 	// Nothing found, just let it be picked up by somebody
 	pi->pending = true;
 	return;
-}
-
-/**
- * Called by neighboring flags, before agreeing for a carrier
- * to take one of their wares heading to this flag.
- * \return true/allow on low congestion-risk.
- */
-bool Flag::allow_ware_from_flag(WareInstance& ware, Flag& flag) {
-	// avoid iteration for the easy cases
-	if (ware_filled_ < ware_capacity_ - 2) {
-		return true;
-	}
-
-	DescriptionIndex const descr_index = ware.descr_index();
-	bool has_swappable = false;
-	for (int i = 0; i < ware_filled_; ++i) {
-		PendingWare& pw = wares_[i];
-		if (pw.pending && pw.nextstep == &flag) {
-			has_swappable = true;
-		} else if (pw.ware->descr_index() == descr_index) {
-			return false;
-		}
-	}
-	return ware_filled_ < ware_capacity_ || has_swappable;
-}
-
-/**
- * Called when a ware is trying to reach this flag through the provided road,
- * having just arrived to the provided flag.
- * Swaps pending wares if possible. Otherwise,
- * asks road for carrier on low congestion-risk.
- * \return false if the ware is not immediately served.
- */
-bool Flag::update_ware_from_flag(Game& game, PendingWare& pw1, Road& road, Flag& flag) {
-	WareInstance& w1 = *pw1.ware;
-	DescriptionIndex const w1_descr_index = w1.descr_index();
-	bool has_same_ware = false;
-	bool has_swappable = false;
-	for (int i = 0; i < ware_filled_; ++i) {
-		PendingWare& pw2 = wares_[i];
-		WareInstance& w2 = *pw2.ware;
-		if (w2.descr_index() == w1_descr_index) {
-			if (pw2.nextstep == &flag) {
-				// swap pending wares remotely
-				init_ware(game, w1, pw2);
-				flag.init_ware(game, w2, pw1);
-				w1.update(game);
-				w2.update(game);
-				return true;
-			}
-
-			has_same_ware = true;
-		} else if (pw2.pending && pw2.nextstep == &flag) {
-			has_swappable = true;
-		}
-	}
-
-	// ask road for carrier on low congestion-risk
-	if (ware_filled_ < ware_capacity_ - 2 ||
-	    (!has_same_ware && (ware_filled_ < ware_capacity_ || has_swappable))) {
-		if (road.notify_ware(game, flag)) {
-			pw1.pending = false;
-			return true;
-		}
-	}
-	return false;
 }
 
 /**
@@ -984,4 +855,4 @@ void Flag::log_general_info(const Widelands::EditorGameBase& egbase) const {
 		molog("No wares at flag.\n");
 	}
 }
-}
+}  // namespace Widelands

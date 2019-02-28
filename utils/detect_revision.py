@@ -62,7 +62,6 @@ def check_for_explicit_version():
 
     It then defaults to this version without further trying to find
     which revision we're on
-
     """
     fname = p.join(base_path, 'WL_RELEASE')
     if os.path.exists(fname):
@@ -81,7 +80,7 @@ def detect_bzr_revision():
         # Windows stand alone installer do not come with bzrlib. We try to
         # parse the output of bzr then directly
         try:
-            run_bzr = lambda subcmd: subprocess.Popen(
+            def run_bzr(subcmd): return subprocess.Popen(
                 ['bzr', subcmd], stdout=subprocess.PIPE, cwd=base_path
             ).stdout.read().strip().decode('utf-8')
             revno = run_bzr('revno')
@@ -103,6 +102,7 @@ def detect_revision():
             return rv
 
     return 'REVDETECT-BROKEN-PLEASE-REPORT-THIS'
+
 
 if __name__ == '__main__':
     print(detect_revision())

@@ -22,8 +22,9 @@ tribes:new_worker_type {
       frisians_carrier = 1
    },
 
-   experience = 19,
+   experience = 15,
    becomes = "frisians_brewer_master",
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

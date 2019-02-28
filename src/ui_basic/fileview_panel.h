@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2018 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -47,7 +47,7 @@ private:
 	const int padding_;
 	int contents_width_;
 	int contents_height_;
-	const UI::PanelStyle style_;
+	const UI::PanelStyle panel_style_;
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;

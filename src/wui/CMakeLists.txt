@@ -284,6 +284,7 @@ wl_library(wui
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_generic_save_handler
     logic_tribe_basic_info
     logic_widelands_geometry
     network
