@@ -63,9 +63,6 @@ local supported_scales = { 0.5, 1, 2, 4 }
 --    :type fps: :class:`integer`
 function add_animation(animationtable, animationname, dirname, basename, hotspot, fps)
    mipmap = {}
-   if (supported_scales == nil) then
-   print("#################################################")
-   end
    for scale_idx, current_scale in ipairs(supported_scales) do
       local listed_files = get_animation_files(dirname .. basename .. "_" .. current_scale)
       if #listed_files > 0 then
