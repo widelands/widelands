@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +20,11 @@
 #include "graphic/gl/initialize.h"
 
 #include <csignal>
+#include <cstdlib>
 
 #include <SDL.h>
+#include <boost/algorithm/string.hpp>
+#include <boost/regex.hpp>
 
 #include "base/macros.h"
 #include "graphic/gl/utils.h"
@@ -177,8 +180,57 @@ SDL_GLContext initialize(
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, max_texture_size);
 	log("Graphics: OpenGL: Max texture size: %u\n", *max_texture_size);
 
-	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n",
-	    reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+	const char* const shading_language_version_string =
+	   reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION));
+	log("Graphics: OpenGL: ShadingLanguage: \"%s\"\n", shading_language_version_string);
+
+	std::vector<std::string> shading_language_version_vector;
+	boost::split(
+	   shading_language_version_vector, shading_language_version_string, boost::is_any_of("."));
+	if (shading_language_version_vector.size() >= 2) {
+		// The shading language version has been detected properly. Exit if the shading language
+		// version is too old.
+		const int major_shading_language_version =
+		   atoi(shading_language_version_vector.front().c_str());
+		const int minor_shading_language_version =
+		   atoi(shading_language_version_vector.at(1).c_str());
+		if (major_shading_language_version < 1 ||
+		    (major_shading_language_version == 1 && minor_shading_language_version < 20)) {
+			log("ERROR: Shading language version is too old!\n");
+			SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "OpenGL Error",
+			                         "Widelands won’t work because your graphics driver is too old.\n"
+			                         "The shading language needs to be version 1.20 or newer.",
+			                         nullptr);
+			exit(1);
+		}
+	} else {
+		// We don't have a minor version. Ensure that the string to compare is a valid integer before
+		// conversion
+		boost::regex re("\\d+");
+		if (boost::regex_match(shading_language_version_string, re)) {
+			const int major_shading_language_version = atoi(shading_language_version_string);
+			if (major_shading_language_version < 2) {
+				log("ERROR: Shading language version is too old!\n");
+				SDL_ShowSimpleMessageBox(
+				   SDL_MESSAGEBOX_ERROR, "OpenGL Error",
+				   "Widelands won’t work because your graphics driver is too old.\n"
+				   "The shading language needs to be version 1.20 or newer.",
+				   nullptr);
+				exit(1);
+			}
+		} else {
+			// Exit because we couldn't detect the shading language version, so there must be a problem
+			// communicating with the graphics adapter.
+			log("ERROR: Unable to detect the shading language version!\n");
+			SDL_ShowSimpleMessageBox(
+			   SDL_MESSAGEBOX_ERROR, "OpenGL Error",
+			   "Widelands won't work because we were unable to detect the shading "
+			   "language version.\nThere is an unknown problem with reading the "
+			   "information from the graphics driver.",
+			   nullptr);
+			exit(1);
+		}
+	}
 
 	glDrawBuffer(GL_BACK);
 

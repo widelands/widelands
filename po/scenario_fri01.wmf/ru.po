@@ -2,12 +2,16 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Viktor S <awsswa59@gmail.com>, 2018
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-14 06:11+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-11-24 06:21+0000\n"
+"PO-Revision-Date: 2018-03-24 18:15+0000\n"
+"Last-Translator: Viktor S <awsswa59@gmail.com>, 2018\n"
 "Language-Team: Russian (https://www.transifex.com/widelands/teams/35159/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,11 +21,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:27
 msgid "Build a wood economy and a reed farm"
-msgstr ""
+msgstr "Постройте деревообрабатывающую промышленность и тростниковую ферму"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:29
 msgid "Wood Economy"
-msgstr ""
+msgstr "Деревообрабатывающая промышленность"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:30
 msgid ""
@@ -31,11 +35,11 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:35
 msgid "Start producing bricks"
-msgstr ""
+msgstr "Начать производство кирпичей"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:37
 msgid "Brick Economy"
-msgstr ""
+msgstr "Производство Кирпича"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:38
 msgid ""
@@ -58,27 +62,27 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:47
 msgid "30 × Log"
-msgstr ""
+msgstr "30 × Бревно"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:48
 msgid "30 × Granite"
-msgstr ""
+msgstr "30 × Гранит"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:49
 msgid "10 × Clay"
-msgstr ""
+msgstr "10 × Глина"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:50
 msgid "40 × Brick"
-msgstr ""
+msgstr "40 × Кирпич"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:51
 msgid "20 × Coal"
-msgstr ""
+msgstr "20 × Уголь"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:52
 msgid "30 × Thatch Reed"
-msgstr ""
+msgstr "30 × Тростник"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:53
 msgid ""
@@ -92,7 +96,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:60
 msgid "Food Economy"
-msgstr ""
+msgstr "Продовольственное хозяйство"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:61
 msgid ""
@@ -106,21 +110,23 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:68
 msgid "Enhance Food Economy"
-msgstr ""
+msgstr "Улучшить продовольственное хозяйство"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:69
 msgid ""
 "Build at least two farms, a beekeeper’s house (next to the berry farm), a "
 "bakery, a brewery, and another tavern."
 msgstr ""
+"Постройте как минимум две фермы, дом пчеловода (рядом с ягодной фермой), "
+"пекарню, пивоварню и другую таверну."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:74
 msgid "Build an iron mine and a mining infrastructure"
-msgstr ""
+msgstr "Создайте железную шахту и горнодобывающую инфраструктуру"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:76
 msgid "Build Mines and Mining Infrastructure"
-msgstr ""
+msgstr "Строительство шахт и горнодобывающей инфраструктуры"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:77
 msgid "Build an iron mine, a furnace, a blacksmithy and a small armor smithy."
@@ -130,11 +136,11 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:256
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:265
 msgid "Start recruiting soldiers"
-msgstr ""
+msgstr "Начать нанимать солдат"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:84
 msgid "Recruiting Soldiers"
-msgstr ""
+msgstr "Нанять солдат"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:85
 msgid "Build a barracks, a reindeer farm and a sewing room."
@@ -142,7 +148,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:90
 msgid "Discover more of the island"
-msgstr ""
+msgstr "Узнайте больше о острове"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:92
 msgid "Expand and Discover"
@@ -154,7 +160,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:98
 msgid "Train your soldiers"
-msgstr ""
+msgstr "Тренировать ваших солдат"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:100
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:310
@@ -192,13 +198,15 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:116
 msgid "Flee from the Floods"
-msgstr ""
+msgstr "Бежать от наводнений"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:117
 msgid ""
 "Build a port, a weaving mill and a shipyard, then start an expedition to "
 "flee before the storm flood drowns the island."
 msgstr ""
+"Постройте порт, ткацкую фабрику и верфь, затем отправляйтесь в экспедицию, "
+"чтобы сбежать до того, как наводнение затопит остров."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:118
 msgid ""
@@ -212,11 +220,11 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:161
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:177
 msgid "Introduction"
-msgstr ""
+msgstr "Введение"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:128
 msgid "Welcome!"
-msgstr ""
+msgstr "Добро Пожаловать!"
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:130
@@ -235,7 +243,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:137
 msgid "A new home"
-msgstr ""
+msgstr "Новый дом"
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:139
@@ -339,7 +347,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:185
 msgid "Reed Shortages"
-msgstr ""
+msgstr "Нехватка тростника"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:186
 msgid "Build another reed farm"
@@ -387,7 +395,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:201
 msgid "Brick Shortages"
-msgstr ""
+msgstr "Нехватка кирпича"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:202
 msgid "Build another brick kiln"
@@ -461,7 +469,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:228
 msgid "Enhancing the Food Economy"
-msgstr ""
+msgstr "Усиление продовольственной экономики"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:229
 msgid "Feeding the soldiers"
@@ -505,7 +513,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:246
 msgid "Mining economy"
-msgstr ""
+msgstr "Горнодобывающая промышленность"
 
 #. TRANSLATORS: Reebaud – mining economy
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:248
@@ -603,7 +611,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:297
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:303
 msgid "Enemies!"
-msgstr ""
+msgstr "Враги!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:292
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:298
@@ -722,7 +730,7 @@ msgstr ""
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:348
 msgid "Our soldiers are strong"
-msgstr ""
+msgstr "Наши солдаты сильны"
 
 #. TRANSLATORS: Reebaud – attack enemy 1
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:350
@@ -758,7 +766,7 @@ msgstr ""
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:366
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:372
 msgid "Beware!"
-msgstr ""
+msgstr "Осторожно!"
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:367
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:373
@@ -851,28 +859,45 @@ msgid ""
 "make haste!"
 msgstr ""
 
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:409
+msgid "Don’t Forget the Soldiers"
+msgstr "Не забывайте о солдатах"
+
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:410
-msgid "Victory"
+msgid "Soldiers to the port!"
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:411
+#. TRANSLATORS: Reebaud – rising water
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:412
+msgid ""
+"I almost forgot in this haste – whereever we will land, we’ll need soldiers "
+"to secure and expand our new colony. There’s space for up to 10 soldiers on "
+"our ship, if they don’t mind being all crammed up together. Let’s send some "
+"to the port when it’s completed, so they can embark when we set sail!"
+msgstr ""
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:416
+msgid "Victory"
+msgstr "Победа"
+
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:417
 msgid "We escaped!"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:413
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:419
 msgid ""
 "The gods have answered our prayers. We will escape the island’s drowning, "
 "and I am confident we will be able to build a new home again in a more "
 "peaceful corner of this world!"
 msgstr ""
 
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:414
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:420
 msgid "Congratulations"
 msgstr ""
 
 #. TRANSLATORS: Reebaud – victory
-#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:416
+#: ../../data/campaigns/fri01.wmf/scripting/texts.lua:422
 msgid ""
 "You have completed this mission. You may move on to the next scenario now to"
 " help us build a new home, far from the false God’s vengeful reach…"

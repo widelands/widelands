@@ -15,10 +15,27 @@ local wc_name = "Artifacts"
 local wc_descname = _("Artifacts")
 local wc_version = 1
 local wc_desc = _ "Search for ancient artifacts. Once all of them are found, the team who owns most of them will win the game."
+
+-- Table of all artifacts to conquer
+local artifact_fields = {}
+
 return {
    name = wc_name,
    description = wc_desc,
    map_tags = { "artifacts" }, -- Map tags needed so that this win condition will be available only for suitable maps
+   init = function()
+      -- Find all artifacts
+      local map = wl.Game().map
+      for x=0, map.width-1 do
+         for y=0, map.height-1 do
+            local field = map:get_field(x,y)
+            if field.immovable and field.immovable:has_attribute("artifact") then
+               -- This assumes that the immovable has size small or medium, i.e. only occupies one field
+               table.insert(artifact_fields, map:get_field(x,y))
+            end
+         end
+      end
+   end,
    func = function()
       set_textdomain("win_conditions")
       -- set the objective with the game type for all players
@@ -30,22 +47,6 @@ return {
             return "player" .. plr.number
          else
             return plr.team
-         end
-      end
-
-      local artifact_fields = {}
-      local map = wl.Game().map
-
-      local i = 1
-      -- find all artifacts
-      for x=0, map.width-1 do
-         for y=0, map.height-1 do
-            local field = map:get_field(x,y)
-            if field.immovable and field.immovable:has_attribute("artifact") then
-               -- this assumes that the immovable has size small or medium, i.e. only occupies one field
-               artifact_fields[i] = map:get_field(x,y)
-               i = i + 1
-            end
          end
       end
 

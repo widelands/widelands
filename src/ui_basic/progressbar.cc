@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 namespace UI {
 /**
  * Initialize the progress bar.
-*/
+ */
 ProgressBar::ProgressBar(Panel* const parent,
                          int32_t const x,
                          int32_t const y,
@@ -42,14 +42,14 @@ ProgressBar::ProgressBar(Panel* const parent,
 
 /**
  * Set the current state of progress.
-*/
+ */
 void ProgressBar::set_state(uint32_t state) {
 	state_ = state;
 }
 
 /**
  * Set the maximum state
-*/
+ */
 void ProgressBar::set_total(uint32_t total) {
 	assert(total);
 	total_ = total;
@@ -57,7 +57,7 @@ void ProgressBar::set_total(uint32_t total) {
 
 /**
  * Draw the progressbar.
-*/
+ */
 void ProgressBar::draw(RenderTarget& dst) {
 	assert(0 < get_w());
 	assert(0 < get_h());
@@ -66,9 +66,9 @@ void ProgressBar::draw(RenderTarget& dst) {
 	assert(0 <= fraction);
 	assert(fraction <= 1);
 
-	const RGBColor color = fraction <= 0.33f ? RGBColor(255, 0, 0) : fraction <= 0.67f ?
-	                                           RGBColor(255, 255, 0) :
-	                                           RGBColor(0, 255, 0);
+	const RGBColor color = fraction <= 0.33f ?
+	                          RGBColor(255, 0, 0) :
+	                          fraction <= 0.67f ? RGBColor(255, 255, 0) : RGBColor(0, 255, 0);
 
 	// Draw the actual bar
 	if (orientation_ == Horizontal) {
@@ -94,4 +94,4 @@ void ProgressBar::draw(RenderTarget& dst) {
 	UI::center_vertically(rendered_text->height(), &pos);
 	rendered_text->draw(dst, pos, UI::Align::kCenter);
 }
-}
+}  // namespace UI

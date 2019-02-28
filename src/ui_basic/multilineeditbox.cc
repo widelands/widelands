@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -81,7 +81,7 @@ private:
 
 /**
  * Initialize an editbox that supports multiline strings.
-*/
+ */
 MultilineEditbox::MultilineEditbox(
    Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
    : Panel(parent, x, y, w, h), d_(new Data(*this, g_gr->styles().editbox_style(style))) {
@@ -204,7 +204,7 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 
 /**
  * The mouse was clicked on this editbox
-*/
+ */
 bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();

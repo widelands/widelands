@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,8 @@ Button::Button  //  Common constructor
      title_image_(title_image),
      background_style_(g_gr->styles().button_style(init_style)) {
 	set_thinks(false);
-	set_can_focus(true);
+	// Don't allow focus
+	assert(!get_can_focus());
 }
 
 Button::Button  //  for textual buttons. If h = 0, h will resize according to the font's height.
@@ -114,7 +115,7 @@ Button::~Button() {
 
 /**
  * Sets a new picture for the Button.
-*/
+ */
 void Button::set_pic(const Image* pic) {
 	title_.clear();
 
@@ -126,7 +127,7 @@ void Button::set_pic(const Image* pic) {
 
 /**
  * Set a text title for the Button
-*/
+ */
 void Button::set_title(const std::string& title) {
 	if (title_ == title)
 		return;
@@ -138,12 +139,10 @@ void Button::set_title(const std::string& title) {
 /**
  * Enable/Disable the button (disabled buttons can't be clicked).
  * Buttons are enabled by default
-*/
+ */
 void Button::set_enabled(bool const on) {
 	if (enabled_ == on)
 		return;
-
-	set_can_focus(on);
 
 	// disabled buttons should look different...
 	if (on)
@@ -161,7 +160,7 @@ void Button::set_enabled(bool const on) {
 
 /**
  * Redraw the button
-*/
+ */
 void Button::draw(RenderTarget& dst) {
 	const bool is_flat = (enabled_ && visual_state_ == VisualState::kFlat) ||
 	                     (!enabled_ && static_cast<int>(disable_style_ & ButtonDisableStyle::kFlat));
@@ -293,7 +292,7 @@ void Button::think() {
 
 /**
  * Update highlighted status
-*/
+ */
 void Button::handle_mousein(bool const inside) {
 	bool oldhl = highlighted_;
 
@@ -310,13 +309,12 @@ void Button::handle_mousein(bool const inside) {
 
 /**
  * Update the pressed status of the button
-*/
+ */
 bool Button::handle_mousepress(uint8_t const btn, int32_t, int32_t) {
 	if (btn != SDL_BUTTON_LEFT)
 		return false;
 
 	if (enabled_) {
-		focus();
 		grab_mouse(true);
 		pressed_ = true;
 		if (repeating_) {
@@ -381,4 +379,4 @@ void Button::toggle() {
 		break;  // Do nothing for flat buttons
 	}
 }
-}
+}  // namespace UI

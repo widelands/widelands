@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-2018 by the Widelands Development Team
+ * Copyright (C) 2005-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -231,7 +231,7 @@ private:
 	/** Can sounds be played?
 	 * true = they mustn't be played (e.g. because hardware is missing)
 	 * false = can be played
-	*/
+	 */
 	bool is_backend_disabled_;
 
 	/// Whether to disable background music
@@ -246,7 +246,7 @@ private:
 	/** Whether to play music in random order
 	 * \note Sound effects will \e always be selected at random (inside
 	 * their FXset, of course.
-	*/
+	 */
 	bool random_order_;
 
 	/// A collection of songsets
@@ -264,13 +264,13 @@ private:
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now.
-	*/
+	 */
 	std::string current_songset_;
 
 	/** The random number generator.
 	 * \note The RNG here \e must \e not be the same as the one for the game
 	 * logic!
-	*/
+	 */
 	RNG rng_;
 
 	/// Protects access to active_fx_ between callbacks and main code.

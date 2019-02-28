@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,5 +63,5 @@ private:
 	uint32_t line_, col_;
 	size_t pos_, end_;
 };
-}
+}  // namespace RT
 #endif  // end of include guard: WL_GRAPHIC_TEXT_TEXTSTREAM_H

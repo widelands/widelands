@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2018 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -455,8 +455,8 @@ void DefaultAI::gain_ship(Ship& ship, NewShip type) {
 }
 
 Widelands::IslandExploreDirection DefaultAI::randomExploreDirection() {
-	return game().logic_rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise :
-	                                       Widelands::IslandExploreDirection::kCounterClockwise;
+	return std::rand() % 20 < 10 ? Widelands::IslandExploreDirection::kClockwise :
+	                               Widelands::IslandExploreDirection::kCounterClockwise;
 }
 
 // this is called whenever ship received a notification that requires
@@ -486,7 +486,7 @@ void DefaultAI::expedition_management(ShipObserver& so) {
 		    spot_score);
 
 		// we make a decision based on the score value and random
-		if (game().logic_rand() % 8 < spot_score) {
+		if (std::rand() % 8 < spot_score) {
 			// we build a port here
 			game().send_player_ship_construct_port(*so.ship, so.ship->exp_port_spaces().front());
 			so.last_command_time = gametime;
@@ -579,15 +579,15 @@ bool DefaultAI::attempt_escape(ShipObserver& so) {
 	assert(possible_directions.size() >= new_teritory_directions.size());
 
 	// If only open sea (no unexplored sea) is found, we don't always divert the ship
-	if (new_teritory_directions.empty() && game().logic_rand() % 100 < 80) {
+	if (new_teritory_directions.empty() && std::rand() % 100 < 80) {
 		return false;
 	}
 
 	if (!possible_directions.empty() || !new_teritory_directions.empty()) {
 		const Direction direction =
 		   !new_teritory_directions.empty() ?
-		      new_teritory_directions.at(game().logic_rand() % new_teritory_directions.size()) :
-		      possible_directions.at(game().logic_rand() % possible_directions.size());
+		      new_teritory_directions.at(std::rand() % new_teritory_directions.size()) :
+		      possible_directions.at(std::rand() % possible_directions.size());
 		game().send_player_ship_scouting_direction(*so.ship, static_cast<WalkingDir>(direction));
 
 		log("%d: %s: exploration - breaking for %s sea, dir=%u\n", pn,

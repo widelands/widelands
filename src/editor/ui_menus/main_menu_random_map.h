@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ template <typename T, typename ID> struct IDButton;
  * This is the new map selection menu. It offers
  * the user to choose the new world and a few other
  * things like size, world ....
-*/
+ */
 struct MainMenuNewRandomMap : public UI::Window {
 	explicit MainMenuNewRandomMap(EditorInteractive&);
 

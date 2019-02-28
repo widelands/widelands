@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -105,12 +105,28 @@ void Graphic::initialize(const TraceGl& trace_gl,
 		SDL_DisplayMode disp_mode;
 		SDL_GetWindowDisplayMode(sdl_window_, &disp_mode);
 		log("**** GRAPHICS REPORT ****\n"
+#ifdef WL_USE_GLVND
+		    " VIDEO DRIVER GLVND %s\n"
+#else
 		    " VIDEO DRIVER %s\n"
+#endif
 		    " pixel fmt %u\n"
 		    " size %d %d\n"
 		    "**** END GRAPHICS REPORT ****\n",
 		    SDL_GetCurrentVideoDriver(), disp_mode.format, disp_mode.w, disp_mode.h);
-		assert(SDL_BYTESPERPIXEL(disp_mode.format) == 4);
+		const int bytes_per_pixel = SDL_BYTESPERPIXEL(disp_mode.format);
+		if (bytes_per_pixel != 4) {
+			const std::string error_message =
+			   (boost::format(
+			       "SDL should report 4 bytes per pixel, but %d were reported instead.\nPlease check "
+			       "that everything's OK with your graphics driver.") %
+			    bytes_per_pixel)
+			      .str();
+			log("ERROR: %s\n", error_message.c_str());
+			SDL_ShowSimpleMessageBox(
+			   SDL_MESSAGEBOX_ERROR, "Video Error", error_message.c_str(), nullptr);
+			exit(1);
+		}
 	}
 
 	std::map<std::string, std::unique_ptr<Texture>> textures_in_atlas;
@@ -133,14 +149,14 @@ Graphic::~Graphic() {
 
 /**
  * Return the screen x resolution
-*/
+ */
 int Graphic::get_xres() {
 	return screen_->width();
 }
 
 /**
  * Return the screen x resolution
-*/
+ */
 int Graphic::get_yres() {
 	return screen_->height();
 }
@@ -167,7 +183,7 @@ void Graphic::resolution_changed() {
 
 /**
  * Return a pointer to the RenderTarget representing the screen
-*/
+ */
 RenderTarget* Graphic::get_render_target() {
 	render_target_->reset();
 	return render_target_.get();
@@ -214,7 +230,7 @@ void Graphic::set_fullscreen(const bool value) {
 
 /**
  * Bring the screen uptodate.
-*/
+ */
 void Graphic::refresh() {
 	RenderQueue::instance().draw(screen_->width(), screen_->height());
 
@@ -244,7 +260,7 @@ void Graphic::refresh() {
 
 /**
  * Save a screenshot to the given file.
-*/
+ */
 void Graphic::screenshot(const std::string& fname) {
 	screenshot_filename_ = fname;
 }

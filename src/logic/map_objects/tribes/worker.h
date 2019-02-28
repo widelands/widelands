@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -163,7 +163,7 @@ public:
 	void start_task_releaserecruit(Game&, Worker&);
 	void start_task_fetchfromflag(Game&);
 
-	void start_task_waitforcapacity(Game&, Flag&);
+	bool start_task_waitforcapacity(Game&, Flag&);
 	void start_task_leavebuilding(Game&, bool changelocation);
 	void start_task_fugitive(Game&);
 
@@ -320,6 +320,6 @@ public:
 	                               const TribesLegacyLookupTable& lookup_table,
 	                               uint8_t packet_version);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_H
