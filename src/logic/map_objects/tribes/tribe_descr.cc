@@ -64,7 +64,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		initializations_ = info.initializations;
 
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
-		frontier_animation_id_ = g_gr->animations().load(name_ + std::string("frontier"),*items_table->get_table("frontier"));
+		frontier_animation_id_ = g_gr->animations().load(name_ + std::string("frontier"), *items_table->get_table("frontier"));
 		flag_animation_id_ = g_gr->animations().load(name_ + std::string("flag"), *items_table->get_table("flag"));
 
 		items_table = table.get_table("roads");
