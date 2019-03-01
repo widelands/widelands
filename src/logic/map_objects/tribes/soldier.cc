@@ -63,8 +63,8 @@ constexpr int kRetreatWhenHealthDropsBelowThisPercentage = 50;
 
 SoldierDescr::SoldierDescr(const std::string& init_descname,
                            const LuaTable& table,
-                           const EditorGameBase& egbase)
-   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, egbase),
+                           const Tribes& tribes)
+   : WorkerDescr(init_descname, MapObjectType::SOLDIER, table, tribes),
      health_(table.get_table("health")),
      attack_(table.get_table("attack")),
      defense_(table.get_table("defense")),

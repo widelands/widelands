@@ -77,8 +77,8 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
  */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
-                                             const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase) {
+                                             const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, tribes) {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
 }
 

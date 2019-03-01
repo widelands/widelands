@@ -44,7 +44,7 @@ class MilitarySiteDescr : public BuildingDescr {
 public:
 	MilitarySiteDescr(const std::string& init_descname,
 	                  const LuaTable& t,
-	                  const EditorGameBase& egbase);
+	                  const Tribes& tribes);
 	~MilitarySiteDescr() override {
 	}
 

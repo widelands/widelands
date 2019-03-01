@@ -292,8 +292,8 @@ Warehouse Building
  */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
-                               const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, egbase),
+                               const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::WAREHOUSE, table, tribes),
      conquers_(0),
      heal_per_second_(0) {
 	heal_per_second_ = table.get_int("heal_per_second");

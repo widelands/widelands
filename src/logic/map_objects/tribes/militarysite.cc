@@ -295,8 +295,8 @@ AttackTarget::AttackResult MilitarySite::AttackTarget::attack(Soldier* enemy) co
  */
 MilitarySiteDescr::MilitarySiteDescr(const std::string& init_descname,
                                      const LuaTable& table,
-                                     const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, egbase),
+                                     const Tribes& tribes)
+   : BuildingDescr(init_descname, MapObjectType::MILITARYSITE, table, tribes),
      conquer_radius_(0),
      num_soldiers_(0),
      heal_per_second_(0) {

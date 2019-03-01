@@ -586,8 +586,7 @@ int LuaTribes::new_constructionsite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_constructionsite_type(table, egbase);
+		get_egbase(L).mutable_tribes()->add_constructionsite_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -610,8 +609,7 @@ int LuaTribes::new_dismantlesite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_dismantlesite_type(table, egbase);
+		get_egbase(L).mutable_tribes()->add_dismantlesite_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -634,8 +632,7 @@ int LuaTribes::new_militarysite_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_militarysite_type(table, egbase);
+		get_egbase(L).mutable_tribes()->add_militarysite_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -659,7 +656,7 @@ int LuaTribes::new_productionsite_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_productionsite_type(table, egbase);
+		egbase.mutable_tribes()->add_productionsite_type(table, egbase.world());
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -683,7 +680,7 @@ int LuaTribes::new_trainingsite_type(lua_State* L) {
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
 		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_trainingsite_type(table, egbase);
+		egbase.mutable_tribes()->add_trainingsite_type(table, egbase.world());
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -706,8 +703,7 @@ int LuaTribes::new_warehouse_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_warehouse_type(table, egbase);
+		get_egbase(L).mutable_tribes()->add_warehouse_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -731,8 +727,7 @@ int LuaTribes::new_market_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_market_type(table, egbase);
+		get_egbase(L).mutable_tribes()->add_market_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -823,8 +818,7 @@ int LuaTribes::new_carrier_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_carrier_type(table, egbase);
+		get_egbase(L).mutable_tribes()->add_carrier_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -846,8 +840,7 @@ int LuaTribes::new_soldier_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_soldier_type(table, egbase);
+		get_egbase(L).mutable_tribes()->add_soldier_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -869,8 +862,7 @@ int LuaTribes::new_worker_type(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_worker_type(table, egbase);
+		get_egbase(L).mutable_tribes()->add_worker_type(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
@@ -893,8 +885,7 @@ int LuaTribes::new_tribe(lua_State* L) {
 
 	try {
 		LuaTable table(L);  // Will pop the table eventually.
-		EditorGameBase& egbase = get_egbase(L);
-		egbase.mutable_tribes()->add_tribe(table, egbase);
+		get_egbase(L).mutable_tribes()->add_tribe(table);
 	} catch (std::exception& e) {
 		report_error(L, "%s", e.what());
 	}
