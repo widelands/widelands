@@ -314,21 +314,10 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		win_condition_script_ = settings.win_condition_script;
-		std::unique_ptr<LuaTable> table(lua().run_script(win_condition_script_));
+		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
-		// We run the actual win condition from InteractiveGameBase::start() to prevent a pure black
-		// screen while the game is being started - we can display a message there.
-	} else {
-		win_condition_displayname_ = "Scenario";
-	}
-}
 
-void Game::run_win_condition() {
-	if (!win_condition_script_.empty()) {
-		std::unique_ptr<LuaTable> table(lua().run_script(win_condition_script_));
-		table->do_not_warn_about_unaccessed_keys();
 		// Run separate initialization function if it is there.
 		if (table->has_key<std::string>("init")) {
 			std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("init");
@@ -336,7 +325,8 @@ void Game::run_win_condition() {
 		}
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
 		enqueue_command(new CmdLuaCoroutine(get_gametime() + 100, std::move(cr)));
-		win_condition_script_ = "";
+	} else {
+		win_condition_displayname_ = "Scenario";
 	}
 }
 
