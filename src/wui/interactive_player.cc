@@ -86,7 +86,7 @@ float adjusted_field_brightness(const Widelands::FCoords& fcoords,
 }
 
 // Remove statistics from the text to draw if the player does not match the map object's owner
-TextToDraw filter_text_to_draw(const TextToDraw text_to_draw,
+TextToDraw filter_text_to_draw(TextToDraw text_to_draw,
                                const Widelands::MapObject* object,
                                const Widelands::Player& player) {
 	TextToDraw result = text_to_draw;
