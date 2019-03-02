@@ -98,6 +98,10 @@ void GameCmdQueuePacket::write(FileSystem& fs, Game& game, MapObjectSaver* const
 
 		while (!p.empty()) {
 			const CmdQueue::CmdItem& it = p.top();
+			if (it.cmd->duetime() > time) {
+				// Time is the primary sorting key, so we can't have any additional commands in this queue for this time
+				break;
+			}
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {
 					// The id (aka command type)
