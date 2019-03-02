@@ -315,6 +315,7 @@ void Game::init_newgame(UI::ProgressWindow* loader_ui, const GameSettings& setti
 	// Check for win_conditions
 	if (!settings.scenario) {
 		std::unique_ptr<LuaTable> table(lua().run_script(settings.win_condition_script));
+		get_ibase()->log_message(_("Initializing game…"));
 		table->do_not_warn_about_unaccessed_keys();
 		win_condition_displayname_ = table->get_string("name");
 		std::unique_ptr<LuaCoroutine> cr = table->get_coroutine("func");
