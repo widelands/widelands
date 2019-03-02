@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-11 09:31+0000\n"
-"PO-Revision-Date: 2019-02-13 19:12+0000\n"
+"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"PO-Revision-Date: 2019-02-23 15:43+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -66,7 +66,7 @@ msgstr "De GPL word ok as eene Text-Datei mit Widelands sülvst levert."
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Ruut vun de Quell oder Binärpaket oder in de List, waar Widelands sekert is (to 'n Bispööl »%1%«)."
+msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Ruut vun de Quell oder Binärpaket oder im Verteeknis, waar Widelands installeert is (to 'n Bispööl »%1%«)."
 
 #: ../../data/txts/LICENSE.lua:19
 msgid ""
@@ -385,7 +385,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr "Uptekens sünd bannig nüttelk, um Fehlers in de Logik vum Speel to finnen, daarum sünd se as Anhang för Fehler-Berichten good. De Upteken-Dateien worden unner Linux un Mac OS X in de List »%s« sekert. Unner Windows sünd se in de List »replays« unner de List, waar Widelands sekert is."
+msgstr "Uptekens sünd bannig nüttelk, um Fehlers in de Logik vum Speel to finnen, daarum sünd se as Anhang för Fehler-Berichten good. De Upteken-Dateien worden unner Linux un Mac OS X in de Verteeknis »%s« sekert. Unner Windows sünd se in de Verteeknis »replays« unner de Verteeknis, waar Widelands sekert is."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35

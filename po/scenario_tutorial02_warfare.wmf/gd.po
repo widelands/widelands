@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2018
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 06:56+0000\n"
-"PO-Revision-Date: 2018-09-10 12:42+0000\n"
+"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"PO-Revision-Date: 2019-02-28 09:03+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -274,7 +274,7 @@ msgid ""
 " ability levels cannot be compared: an Imperial soldier has a base attack of"
 " %1% at level 0, while a Barbarian soldier at the same level only has a base"
 " attack of %2%."
-msgstr "Thoir an aire cuideachd gu bheil dòighean oideachaidh fa leth aig gach treubh ann an Widelands, mar sin tha na togalaichean agus am bathar eadar-dhealaichte. Cuideachd, cha ghabh na leibheilean a choimeas: tha ionnsaigh bhunasach dhe %1% aig saighdear na h-Impireachd air leibheil 0 fad ’s nach eil ach ionnsaigh bhunasach dhe %2% aig saighdear Tùsanach air an aon leibheil."
+msgstr "Thoir an aire cuideachd gu bheil dòighean oideachaidh fa leth aig gach treubh ann an Widelands, mar sin tha na togalaichean agus am bathar eadar-dhealaichte. Cuideachd, cha ghabh na leibheilean a choimeas: tha ionnsaigh bhunasach dhe %1% aig saighdear na h-Impireachd air leibheil 0 fad ’s nach eil ach  ionnsaigh bhunasach dhe %2% aig saighdear Tùsanach air an aon leibheil."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:131
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:133
@@ -306,7 +306,7 @@ msgid ""
 "When you are expanding into no man’s land, you can make your buildings "
 "prefer rookies. When you are planning to attack, send heroes into that "
 "region. Conquered buildings always prefer heroes."
-msgstr "Nuair a bhios tu a’ meudachadh an ranntair agad gu tìr nach eil aig duine, bidh e freagarrach gum b’ fhearr leis na togalaichean agad saighdearan ùra. Nuair a bhios ionnsaigh fainear dhut, cuir seann-ghaisgich dhan sgìre sin. Is fhearr le togalaichean a bhuinnig thu seann-ghaisgich an-còmhnaidh."
+msgstr "Nuair a bhios tu a’ leudachadh an ranntair agad gu tìr nach eil aig duine, bidh e freagarrach gum b’ fhearr leis na togalaichean agad saighdearan ùra. Nuair a bhios ionnsaigh fainear dhut, cuir seann-ghaisgich dhan sgìre sin. Is fhearr le togalaichean a bhuinnig thu seann-ghaisgich an-còmhnaidh."
 
 #: ../../data/campaigns/tutorial02_warfare.wmf/scripting/texts.lua:143
 msgid "Soldier capacity"

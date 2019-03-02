@@ -291,6 +291,12 @@
 					]
 				},
 				{
+					"subheading": "Flatpak",
+					"members":[
+						"scx"
+					]
+				},
+				{
 					"subheading": "Mac OS X",
 					"members":[
 						"Holger Rapp (SirVer)",

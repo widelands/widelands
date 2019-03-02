@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-11-26 14:48+0000\n"
+"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"PO-Revision-Date: 2019-02-23 15:42+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -43,13 +43,13 @@ msgstr "                      Wahrschau: De neje Weert staht dann in de Instellu
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
-msgstr " --datadir=LISTNAAM   Bruuk deese List för de Widelands-Daten-Dateien"
+msgstr " --datadir=LISTNAAM   Bruuk deeses Verteeknis för de Widelands-Daten-Dateien"
 
 #: ../../src/wlapplication_messages.cc:51
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
-msgstr " --homedir=LISTNAME   Bruuk deese List för de Widelands Instellungen-Dateien, sekerte Speele un Uptekens"
+msgstr " --homedir=LISTNAME   Bruuk deeses Verteeknis för de Widelands Instellungen-Dateien, sekerte Speele un Uptekens"
 
 #: ../../src/wlapplication_messages.cc:55
 msgid "                      Default is ~/.widelands"
@@ -187,22 +187,22 @@ msgstr "Biller-Instellungen:"
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:129
+#: ../../src/wlapplication_messages.cc:130
 msgid ""
 " --fullscreen=[true|false]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr " --fullscreen=[jau|nee]\n                      Of de hele Bildschirm bruukt worden sall."
 
-#: ../../src/wlapplication_messages.cc:133
+#: ../../src/wlapplication_messages.cc:134
 msgid " --xres=[...]         Width of the window in pixel."
 msgstr " --xres=[...]         Fenster-Breddt in Bildtüttels."
 
-#: ../../src/wlapplication_messages.cc:134
+#: ../../src/wlapplication_messages.cc:135
 msgid " --yres=[...]         Height of the window in pixel."
 msgstr " --yres=[...] Fenster-Höcht in Bildtüttels."
 
-#: ../../src/wlapplication_messages.cc:135
+#: ../../src/wlapplication_messages.cc:136
 msgid " --maxfps=[5 ...]     Maximal optical framerate of the game."
 msgstr " --maxfps=[5 ...]     Hoogste Tahl vun tekenten Fensters pro Sekünne."
 
@@ -210,17 +210,17 @@ msgstr " --maxfps=[5 ...]     Hoogste Tahl vun tekenten Fensters pro Sekünne."
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:140
+#: ../../src/wlapplication_messages.cc:141
 msgid "Options for the internal window manager:"
 msgstr "Instellungen för de Fenster-Verwaltung im Speel:"
 
-#: ../../src/wlapplication_messages.cc:141
+#: ../../src/wlapplication_messages.cc:142
 msgid ""
 " --animate_map_panning=[yes|no]\n"
 "                      Should automatic map movements be animated."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:144
+#: ../../src/wlapplication_messages.cc:145
 msgid ""
 " --border_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the screen\n"
@@ -232,7 +232,7 @@ msgstr ""
 #. * TRANSLATORS: it HAS TO BE CONSISTENT with the translation in the
 #. widelands
 #. textdomain
-#: ../../src/wlapplication_messages.cc:152
+#: ../../src/wlapplication_messages.cc:153
 msgid ""
 " --dock_windows_to_edges=[true|false]\n"
 "                      Eliminate a window's border towards the\n"
@@ -240,7 +240,7 @@ msgid ""
 "                      window is next to the edge of the screen."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:157
+#: ../../src/wlapplication_messages.cc:158
 msgid ""
 " --panel_snap_distance=[0 ...]\n"
 "                      Move a window to the edge of the panel when\n"
@@ -248,7 +248,7 @@ msgid ""
 "                      distance from the edge of the panel."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:162
+#: ../../src/wlapplication_messages.cc:163
 msgid ""
 " --snap_windows_only_when_overlapping=[yes|no]\n"
 "                      Only move a window to the edge of a panel\n"
@@ -256,15 +256,15 @@ msgid ""
 "                      panel."
 msgstr ""
 
-#: ../../src/wlapplication_messages.cc:168
+#: ../../src/wlapplication_messages.cc:169
 msgid " --verbose            Enable verbose debug messages"
 msgstr " --verbose            Unbannig völe Narichten utgeven"
 
-#: ../../src/wlapplication_messages.cc:169
+#: ../../src/wlapplication_messages.cc:170
 msgid " --help               Show this help"
 msgstr " --help               Deese Hülp wiesen"
 
-#: ../../src/wlapplication_messages.cc:170
+#: ../../src/wlapplication_messages.cc:171
 msgid ""
 "Bug reports? Suggestions? Check out the project website:\n"
 "        https://wl.widelands.org/\n"
