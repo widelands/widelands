@@ -28,6 +28,9 @@ function get_animation_files(prefix)
    if #animation_files < 1 then
       animation_files = path.list_files(prefix .. "_???.png")
    end
+   if #animation_files < 1 then
+      animation_files = path.list_files(prefix .. "_?.png")
+   end
    return animation_files
 end
 
