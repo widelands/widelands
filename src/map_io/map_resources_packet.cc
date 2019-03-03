@@ -145,15 +145,13 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 		fw.c_string(res.name().c_str());
 	}
 
-	// Performance: We write our resource information into a single string to recude the number of write operations
+	// Performance: We write our resource information into a single string to reduce the number of write operations
 	std::ostringstream oss;
-	for (uint16_t y = 0; y < map.get_height(); ++y) {
-		for (uint16_t x = 0; x < map.get_width(); ++x) {
-			const Field& f = map[Coords(x, y)];
-			oss << static_cast<unsigned int>(f.get_resources()) << "-";
-			oss << static_cast<unsigned int>(f.get_resources_amount()) << "-";
-			oss << static_cast<unsigned int>(f.get_initial_res_amount()) << "|";
-		}
+	for (MapIndex i = 0; i < map.max_index(); ++i) {
+		Field& f = map[i];
+		oss << static_cast<unsigned int>(f.get_resources()) << "-";
+		oss << static_cast<unsigned int>(f.get_resources_amount()) << "-";
+		oss << static_cast<unsigned int>(f.get_initial_res_amount()) << "|";
 	}
 	fw.c_string(oss.str());
 
