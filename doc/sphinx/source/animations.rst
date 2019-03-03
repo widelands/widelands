@@ -180,6 +180,14 @@ When converting a simple file animation to a mipmap animation, follow these step
 * Export the new animations from Blender, preferably at all supported scales.
   Only export the higher resolution scales if the textures have sufficient resolution.
 
+* Alternatively, you can use the Java tool MipmapMaker that is contained in the widelands-media repository.
+  MipmapMaker accepts high-resolution images as input files (they should be at least 4 times the in-game size)
+  and creates correctly named mipmap images for all supported scales for each animation, e.g.:
+
+  java MipmapMaker ~/widelands/data/tribes/workers/fancytribe/diligentworker walk_se 2 true true true 4.0
+
+  MipmapMaker is documented in ``widelands-media/graphics/tools/Graphics Tools (Java)/Readme``.
+
 
 .. _animations_map_object_types:
 
