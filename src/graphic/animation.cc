@@ -45,7 +45,7 @@
 
 namespace {
 // The mipmap scales supported by the engine.
-// Ensure that this always matches supported_scales in data/scription/mapobjects.lua.
+// Ensure that this always matches supported_scales in data/scripting/mapobjects.lua.
 const std::set<float> kSupportedScales { 0.5, 1, 2, 4};
 
 /**
@@ -57,12 +57,18 @@ public:
 	struct MipMapEntry {
 		explicit MipMapEntry(float scale, const LuaTable& table);
 
-		bool hasplrclrs;
-		std::vector<std::string> image_files;
-		std::vector<std::string> pc_mask_image_files;
+		// Whether this image set has player color masks provided
+		bool has_playercolor_masks;
 
+		// Image files on disk
+		std::vector<std::string> image_files;
+		// Player color mask files on disk
+		std::vector<std::string> playercolor_mask_image_files;
+
+		// Loaded images for each frame
 		std::vector<const Image*> frames;
-		std::vector<const Image*> pcmasks;
+		// Loaded player color mask images for each frame
+		std::vector<const Image*> playercolor_mask_frames;
 	};
 
 	~NonPackedAnimation() override {
@@ -115,7 +121,7 @@ private:
 	bool play_once_;
 };
 
-NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table) : hasplrclrs(false) {
+NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table) : has_playercolor_masks(false) {
 	if (scale <= 0.0f) {
 		throw wexception("Animation scales must be positive numbers. Found %.2f", scale);
 	}
@@ -132,15 +138,15 @@ NonPackedAnimation::MipMapEntry::MipMapEntry(float scale, const LuaTable& table)
 	for (std::string image_file : image_files) {
 		boost::replace_last(image_file, ".png", "_pc.png");
 		if (g_fs->file_exists(image_file)) {
-			hasplrclrs = true;
-			pc_mask_image_files.push_back(image_file);
-		} else if (hasplrclrs) {
+			has_playercolor_masks = true;
+			playercolor_mask_image_files.push_back(image_file);
+		} else if (has_playercolor_masks) {
 			throw wexception("Animation is missing player color file: %s", image_file.c_str());
 		}
 	}
 
 	assert(!image_files.empty());
-	assert(pc_mask_image_files.size() == image_files.size() || pc_mask_image_files.empty());
+	assert(playercolor_mask_image_files.size() == image_files.size() || playercolor_mask_image_files.empty());
 }
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
@@ -191,7 +197,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 		nr_frames_ = mipmaps_.begin()->second->image_files.size();
 
 		// Perform some checks to make sure that the data is complete and consistent
-		const bool should_have_playercolor = mipmaps_.begin()->second->hasplrclrs;
+		const bool should_have_playercolor = mipmaps_.begin()->second->has_playercolor_masks;
 		for (const auto& mipmap : mipmaps_) {
 			if (mipmap.second->image_files.size() != nr_frames_) {
 				throw wexception("Mismatched number of images for different scales in animation table: %" PRIuS " vs. %u at scale %.2f",
@@ -199,7 +205,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 									  nr_frames_,
 									  mipmap.first);
 			}
-			if (mipmap.second->hasplrclrs != should_have_playercolor) {
+			if (mipmap.second->has_playercolor_masks != should_have_playercolor) {
 				throw wexception("Mismatched existence of player colors in animation table for scales %.2f and %.2f",
 									  mipmaps_.begin()->first,
 									  mipmap.first);
@@ -239,9 +245,9 @@ void NonPackedAnimation::load_graphics() {
 		if (mipmap->image_files.empty()) {
 			throw wexception("animation without image files at promised scale %.2f.", entry.first);
 		}
-		if (mipmap->pc_mask_image_files.size() && mipmap->pc_mask_image_files.size() != mipmap->image_files.size()) {
+		if (mipmap->playercolor_mask_image_files.size() && mipmap->playercolor_mask_image_files.size() != mipmap->image_files.size()) {
 			throw wexception("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames for scale %.2f",
-								  mipmap->image_files.size(), mipmap->pc_mask_image_files.size(), entry.first);
+								  mipmap->image_files.size(), mipmap->playercolor_mask_image_files.size(), entry.first);
 		}
 
 		for (const std::string& filename : mipmap->image_files) {
@@ -255,7 +261,7 @@ void NonPackedAnimation::load_graphics() {
 			mipmap->frames.push_back(image);
 		}
 
-		for (const std::string& filename : mipmap->pc_mask_image_files) {
+		for (const std::string& filename : mipmap->playercolor_mask_image_files) {
 			// TODO(unknown): Do not load playercolor mask as opengl texture or use it as
 			//     opengl texture.
 			const Image* pc_image = g_gr->images().get(filename);
@@ -266,7 +272,7 @@ void NonPackedAnimation::load_graphics() {
 									  pc_image->width(), pc_image->height(), mipmap->frames[0]->width(),
 									  mipmap->frames[0]->height());
 			}
-			mipmap->pcmasks.push_back(pc_image);
+			mipmap->playercolor_mask_frames.push_back(pc_image);
 		}
 	}
 }
@@ -288,7 +294,7 @@ const Image* NonPackedAnimation::representative_image(const RGBColor* clr) const
 	const MipMapEntry& mipmap = *mipmaps_.at(1.0f);
 	std::vector<std::string> images = mipmap.image_files;
 	assert(!images.empty());
-	const Image* image = (mipmap.hasplrclrs && clr) ? playercolor_image(*clr, images[0]) :
+	const Image* image = (mipmap.has_playercolor_masks && clr) ? playercolor_image(*clr, images[0]) :
 	                                            g_gr->images().get(images[0]);
 
 	const int w = image->width();
@@ -355,11 +361,11 @@ void NonPackedAnimation::blit(uint32_t time,
 	assert(idx < nr_frames());
 
 	const MipMapEntry& mipmap = *mipmaps_.at(find_best_scale(scale));
-	if (!mipmap.hasplrclrs || clr == nullptr) {
+	if (!mipmap.has_playercolor_masks || clr == nullptr) {
 		target->blit(destination_rect, *mipmap.frames.at(idx), source_rect, 1., BlendMode::UseAlpha);
 	} else {
 		target->blit_blended(
-		   destination_rect, *mipmap.frames.at(idx), *mipmap.pcmasks.at(idx), source_rect, *clr);
+		   destination_rect, *mipmap.frames.at(idx), *mipmap.playercolor_mask_frames.at(idx), source_rect, *clr);
 	}
 	// TODO(GunChleoc): Stereo position would be nice.
 	trigger_sound(time, 128);

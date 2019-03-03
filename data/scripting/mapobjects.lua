@@ -60,7 +60,7 @@ local supported_scales = { 0.5, 1, 2, 4 }
 --       Supported scales are ``0.5``, ``1``, ``2`` and ``4``.
 --    :type basename: :class:`string`
 --    :arg hotspot: The hotspot coordinates for blitting, e.g. ``{2, 20}``.
---    :type hotspot: :class:`table`
+--    :type hotspot: :class:`array`
 --    :arg fps: Frames per second. Only use this if the animation has more than
 --       1 frame, and if you need to deviate from the default frame rate.
 --    :type fps: :class:`integer`
@@ -111,7 +111,7 @@ end
 --    :arg animationname: The name of the animation to be added, e.g. ``walkload``.
 --    :type animationname: :class:`string`
 --    :arg dirname: The name of the directory where the animation image files are located.
---    :type dirname: :class:`table`
+--    :type dirname: :class:`string`
 --    :arg basename: The basename of the animation files. The filenames of the
 --       animation files need to have the format
 --       ``<basename>_(e|ne|se|sw|w|nw)_\d{2,3}.png`` for simple animations, and
@@ -119,7 +119,7 @@ end
 --       Supported scales are ``0.5``, ``1``, ``2`` and ``4``.
 --    :type basename: :class:`string`
 --    :arg hotspot: The hotspot coordinates for blitting, e.g. ``{2, 20}``.
---    :type hotspot: :class:`table`
+--    :type hotspot: :class:`array`
 --    :arg fps: Frames per second. Only use this if the animation has more than
 --       1 frame, and if you need to deviate from the default frame rate.
 --    :type fps: :class:`integer`
