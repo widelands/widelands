@@ -4,14 +4,14 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # Scorpio <jayneallen13@virginmedia.com>, 2015
-# tamanegi, 2018
+# tamanegi, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
-"PO-Revision-Date: 2019-02-23 10:01+0000\n"
-"Last-Translator: GunChleoc\n"
+"POT-Creation-Date: 2019-03-01 12:45+0000\n"
+"PO-Revision-Date: 2019-03-03 03:03+0000\n"
+"Last-Translator: tamanegi\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -244,7 +244,7 @@ msgid "Loading tribes"
 msgstr "部族を読込中"
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:143
+#: ../../src/wui/interactive_player.cc:167
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Main menu"
 msgstr "メインメニュー"
@@ -264,7 +264,7 @@ msgid "Players"
 msgstr "プレイヤー"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:159
+#: ../../src/wui/interactive_player.cc:183
 #: ../../src/wui/interactive_spectator.cc:72
 msgid "Show building spaces (on/off)"
 msgstr "建物用地の表示 (オン/オフ)"
@@ -282,13 +282,13 @@ msgid "Show resources (on/off)"
 msgstr "資源の表示 (オン/オフ)"
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:155
+#: ../../src/wui/interactive_player.cc:179
 #: ../../src/wui/interactive_spectator.cc:68
 msgid "Minimap"
 msgstr "ミニマップ"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:161
+#: ../../src/wui/interactive_player.cc:185
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Reset zoom"
 msgstr "ズーム初期化"
@@ -302,7 +302,7 @@ msgid "Redo"
 msgstr "やり直し"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:185
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:209
 msgid "Help"
 msgstr "ヘルプ"
 
@@ -330,13 +330,13 @@ msgstr "マップが未保存です"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "このマップは保存されていません。本当に終了しますか？"
 
-#: ../../src/editor/editorinteractive.cc:617
+#: ../../src/editor/editorinteractive.cc:615
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr "空のマップを作成しています……"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:621
+#: ../../src/editor/editorinteractive.cc:619
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:141
@@ -345,7 +345,7 @@ msgid "No Name"
 msgstr "無名"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:623
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -353,7 +353,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "不明"
 
-#: ../../src/editor/editorinteractive.cc:632
+#: ../../src/editor/editorinteractive.cc:630
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "マップ %s を読み込んでいます"
@@ -876,7 +876,7 @@ msgstr "マップ保存エラー！"
 
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:335
 msgid "Map saved"
-msgstr ""
+msgstr "マップが保存されました"
 
 #: ../../src/editor/ui_menus/main_menu_save_map_make_directory.cc:43
 msgid "Enter Directory Name:"
@@ -1118,7 +1118,7 @@ msgid "Not set"
 msgstr "設定なし"
 
 #: ../../src/logic/game.cc:214 ../../src/logic/game.cc:266
-#: ../../src/logic/game.cc:336 ../../src/logic/game.cc:371
+#: ../../src/logic/game.cc:352 ../../src/logic/game.cc:387
 msgid "Preloading map"
 msgstr "マップを事前読込中"
 
@@ -1130,31 +1130,31 @@ msgstr "ワールドを読込中"
 msgid "Loading map…"
 msgstr "マップを読込中……"
 
-#: ../../src/logic/game.cc:349 ../../src/logic/game.cc:388
+#: ../../src/logic/game.cc:365 ../../src/logic/game.cc:404
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1424
 msgid "Loading…"
 msgstr "読込中……"
 
-#: ../../src/logic/game.cc:451
+#: ../../src/logic/game.cc:467
 msgid "Creating player infrastructure"
 msgstr "プレイヤーのベース情報を構成中"
 
-#: ../../src/logic/game.cc:462 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:478 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr "開始位置が見つかりません"
 
-#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:223
+#: ../../src/logic/game.cc:479 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "プレイヤー %u の開始位置が存在しないため、Widelandsはゲームを開始できませんでした。\nWidelandsエディタ上で手動で開始位置を追加すれば、問題を解決できます。"
 
-#: ../../src/logic/game.cc:853
+#: ../../src/logic/game.cc:869
 msgid "Trade Offer"
 msgstr "トレードの提案"
 
-#: ../../src/logic/game.cc:855
+#: ../../src/logic/game.cc:871
 msgid "This market has received a new trade offer."
 msgstr "このマーケットは新たなトレードの提案を受け取りました。"
 
@@ -1167,22 +1167,22 @@ msgstr "このゲームは異なるバージョンのWidelandsに作られたデ
 #: ../../src/logic/generic_save_handler.cc:237
 #: ../../src/logic/generic_save_handler.cc:241
 msgid "File successfully saved!"
-msgstr ""
+msgstr "ファイルが正常に保存されました！"
 
 #: ../../src/logic/generic_save_handler.cc:242
 #, c-format
 msgid "Backup file ‘%s’ could not be deleted."
-msgstr ""
+msgstr "バックアップファイル %s を削除できませんでした。"
 
 #: ../../src/logic/generic_save_handler.cc:246
 #, c-format
 msgid "Directory ‘%s’ could not be created!"
-msgstr ""
+msgstr "ディレクトリ %s を作成できませんでした！"
 
 #: ../../src/logic/generic_save_handler.cc:250
 #, c-format
 msgid "File ‘%s’ could not be removed!"
-msgstr ""
+msgstr "ファイル %s を削除できませんでした！"
 
 #: ../../src/logic/generic_save_handler.cc:252
 msgid "Try saving under a different name!"
@@ -1191,36 +1191,36 @@ msgstr "別の名前で保存してください！"
 #: ../../src/logic/generic_save_handler.cc:258
 #, c-format
 msgid "Error writing data to file ‘%s’!"
-msgstr ""
+msgstr "ファイル %s 書き込み時にエラー！"
 
 #: ../../src/logic/generic_save_handler.cc:265
 msgid "Saved file may be corrupt!"
-msgstr ""
+msgstr "保存されたファイルは破損しているかもしれません！"
 
 #: ../../src/logic/generic_save_handler.cc:273
 #, c-format
 msgid "File ‘%s’ could not be restored!"
-msgstr ""
+msgstr "ファイル %s を復元できませんでした！"
 
 #: ../../src/logic/generic_save_handler.cc:275
 #, c-format
 msgid "Backup file ‘%s’ will be available for some time."
-msgstr ""
+msgstr "しばらくはバックアップファイル %s が利用可能です。"
 
 #: ../../src/logic/generic_save_handler.cc:286
 #, c-format
 msgid "File ‘%s’ was restored from backup."
-msgstr ""
+msgstr "ファイル %s はバックアップから復元されました。"
 
 #: ../../src/logic/generic_save_handler.cc:294
 msgid "An unexpected error occurred:"
-msgstr ""
+msgstr "予期せぬエラー: "
 
 #: ../../src/logic/map.h:163
 msgid "No description defined"
 msgstr "説明はありません"
 
-#: ../../src/logic/map_objects/immovable.cc:535
+#: ../../src/logic/map_objects/immovable.cc:518
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
@@ -1536,7 +1536,7 @@ msgstr "探検船はあなたの命令を待っています。"
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:992
+#: ../../src/logic/map_objects/tribes/ship.cc:994
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1545,7 +1545,7 @@ msgstr "輸送中"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:996
+#: ../../src/logic/map_objects/tribes/ship.cc:998
 #: ../../src/wui/seafaring_statistics_menu.cc:213
 msgctxt "ship_state"
 msgid "Idle"
@@ -1553,7 +1553,7 @@ msgstr "待機"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1001
+#: ../../src/logic/map_objects/tribes/ship.cc:1003
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1561,14 +1561,14 @@ msgstr "待機中"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1005
+#: ../../src/logic/map_objects/tribes/ship.cc:1007
 #: ../../src/wui/seafaring_statistics_menu.cc:219
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "偵察中"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1009
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
 #: ../../src/wui/seafaring_statistics_menu.cc:221
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1577,14 +1577,14 @@ msgstr "港の候補地を発見"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1014
+#: ../../src/logic/map_objects/tribes/ship.cc:1016
 #: ../../src/wui/seafaring_statistics_menu.cc:223
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "居留地を設立中"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1351
-#: ../../src/logic/map_objects/tribes/soldier.cc:1355
+#: ../../src/logic/map_objects/tribes/soldier.cc:1371
+#: ../../src/logic/map_objects/tribes/soldier.cc:1375
 msgid "Logic error"
 msgstr "ロジックエラー"
 
@@ -3368,7 +3368,7 @@ msgstr "道の敷設をキャンセル"
 msgid "Build roads"
 msgstr "道を敷設"
 
-#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:168
+#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:192
 #: ../../src/wui/interactive_spectator.cc:84
 msgid "Chat"
 msgstr "チャット"
@@ -3443,7 +3443,7 @@ msgstr "ゲーム保存"
 #: ../../src/wui/game_main_menu_save_game.cc:230
 #: ../../src/wui/game_main_menu_save_game.cc:258
 msgid "Error Saving Game!"
-msgstr ""
+msgstr "ゲーム保存エラー！"
 
 #: ../../src/wui/game_message_menu.cc:51
 #: ../../src/wui/game_message_menu.cc:601
@@ -3615,7 +3615,7 @@ msgid "Del: %s"
 msgstr "削除: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:178
+#: ../../src/wui/interactive_player.cc:202
 msgid "Objectives"
 msgstr "目的"
 
@@ -3825,22 +3825,22 @@ msgid "PAUSE"
 msgstr "一時停止"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:170
+#: ../../src/wui/interactive_gamebase.cc:130
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:147
+#: ../../src/wui/interactive_player.cc:171
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
 msgstr "統計"
 
-#: ../../src/wui/interactive_player.cc:182
-#: ../../src/wui/interactive_player.cc:234
+#: ../../src/wui/interactive_player.cc:206
+#: ../../src/wui/interactive_player.cc:258
 msgid "Messages"
 msgstr "メッセージ"
 
-#: ../../src/wui/interactive_player.cc:239
+#: ../../src/wui/interactive_player.cc:263
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
