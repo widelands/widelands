@@ -22,6 +22,7 @@ local wc_desc = _ (
    "area. The winner will be the player or the team that is able to keep " ..
    "that area for at least 20 minutes."
 )
+
 return {
    name = wc_name,
    description = wc_desc,
@@ -31,13 +32,13 @@ return {
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
 
+      -- Table of fields that are worth conquering
+      local fields = wl.Game().map.conquerable_fields
+
       -- Configure how long the winner has to hold on to the territory
       local time_to_keep_territory = 20 * 60 -- 20 minutes
       -- time in secs, if == 0 -> victory
       territory_points.remaining_time = time_to_keep_territory
-
-      -- Get all valueable fields of the map
-      local fields = get_buildable_fields()
 
       local function _send_state()
          set_textdomain("win_conditions")

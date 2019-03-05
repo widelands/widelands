@@ -176,6 +176,7 @@ public:
 	void save_syncstream(bool save);
 	void init_newgame(UI::ProgressWindow* loader_ui, const GameSettings&);
 	void init_savegame(UI::ProgressWindow* loader_ui, const GameSettings&);
+
 	enum StartGameType { NewSPScenario, NewNonScenario, Loaded, NewMPScenario };
 
 	bool run(UI::ProgressWindow* loader_ui,

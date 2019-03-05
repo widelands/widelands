@@ -28,6 +28,7 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
@@ -43,6 +44,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
+#include "logic/maphollowregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
 #include "logic/player.h"
@@ -253,6 +255,111 @@ void Map::recalc_default_resources(const World& world) {
 				initialize_resources(f, res, amount);
 			}
 		}
+}
+
+std::set<FCoords> Map::calculate_all_conquerable_fields() const {
+	std::set<FCoords> result;
+
+	std::set<FCoords> coords_to_check;
+
+	log("Collecting valuable fields ... ");
+	ScopedTimer timer("took %ums");
+
+	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
+	// initialized with the given radius around the coordinates
+	const auto walk_starting_coords = [this, &result, &coords_to_check](
+	                                     const Coords& coords, int radius) {
+		FCoords fcoords = get_fcoords(coords);
+
+		// We already have these coordinates
+		if (result.count(fcoords) == 1) {
+			return;
+		}
+
+		// Add starting field
+		result.insert(fcoords);
+
+		// Add outer land coordinates around the starting field for the given radius
+		std::unique_ptr<Widelands::HollowArea<>> hollow_area(
+		   new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), 2));
+		std::unique_ptr<Widelands::MapHollowRegion<>> map_region(
+		   new Widelands::MapHollowRegion<>(*this, *hollow_area));
+		do {
+			coords_to_check.insert(get_fcoords(map_region->location()));
+		} while (map_region->advance(*this));
+
+		// Walk the map
+		while (!coords_to_check.empty()) {
+			// Get some coordinates to check
+			const auto coords_it = coords_to_check.begin();
+			fcoords = *coords_it;
+
+			// Get region according to buildcaps
+			radius = 0;
+			int inner_radius = 2;
+			if ((fcoords.field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
+				radius = 9;
+				inner_radius = 7;
+			} else if (fcoords.field->maxcaps() & BUILDCAPS_MEDIUM) {
+				radius = 7;
+				inner_radius = 5;
+			} else if (fcoords.field->maxcaps() & BUILDCAPS_SMALL) {
+				radius = 5;
+			}
+
+			// Check region and add walkable fields
+			if (radius > 0) {
+				hollow_area.reset(
+				   new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), inner_radius));
+				map_region.reset(new Widelands::MapHollowRegion<>(*this, *hollow_area));
+				do {
+					fcoords = get_fcoords(map_region->location());
+
+					// We do the caps check first, because the comparison is faster than the container
+					// check
+					if ((fcoords.field->maxcaps() & MOVECAPS_WALK) && (result.count(fcoords) == 0)) {
+						result.insert(fcoords);
+						coords_to_check.insert(fcoords);
+					}
+				} while (map_region->advance(*this));
+			}
+
+			// These coordinates are done. We do not keep track of visited coordinates that didn't make
+			// the result, because the container insert operations are more expensive than the checks
+			coords_to_check.erase(coords_it);
+		}
+	};
+
+	// Walk the map from the starting field of each player
+	for (const Coords& coords : starting_pos_) {
+		walk_starting_coords(coords, 9);
+	}
+
+	// Walk the map from port spaces
+	if (allows_seafaring()) {
+		for (const Coords& coords : get_port_spaces()) {
+			walk_starting_coords(coords, 5);
+		}
+	}
+
+	log("%" PRIuS " found ... ", result.size());
+	return result;
+}
+
+std::set<FCoords> Map::calculate_all_fields_excluding_caps(NodeCaps caps) const {
+	log("Collecting valuable fields ... ");
+	ScopedTimer timer("took %ums");
+
+	std::set<FCoords> result;
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		Field& field = fields_[i];
+		if (!(field.nodecaps() & caps)) {
+			result.insert(get_fcoords(field));
+		}
+	}
+
+	log("%" PRIuS " found ... ", result.size());
+	return result;
 }
 
 /*
@@ -550,9 +657,9 @@ void Map::delete_tag(const std::string& tag) {
 }
 
 NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) const {
-	NodeCaps caps = calc_nodecaps_pass1(world, fc, false);
-	caps = calc_nodecaps_pass2(world, fc, false, caps);
-	return caps;
+	NodeCaps max_caps = calc_nodecaps_pass1(world, fc, false);
+	max_caps = calc_nodecaps_pass2(world, fc, false, max_caps);
+	return static_cast<NodeCaps>(max_caps);
 }
 
 /// \returns the immovable at the given coordinate
@@ -938,6 +1045,7 @@ above recalc_brightness.
 */
 void Map::recalc_nodecaps_pass1(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass1(world, f, true);
+	f.field->max_caps = calc_nodecaps_pass1(world, f, false);
 }
 
 NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) const {
@@ -1056,6 +1164,8 @@ Important: flag buildability has already been checked in the first pass.
 */
 void Map::recalc_nodecaps_pass2(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass2(world, f, true);
+	f.field->max_caps =
+	   calc_nodecaps_pass2(world, f, false, static_cast<NodeCaps>(f.field->max_caps));
 }
 
 NodeCaps Map::calc_nodecaps_pass2(const World& world,
