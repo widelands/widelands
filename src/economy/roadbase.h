@@ -91,11 +91,11 @@ struct RoadBase : public PlayerImmovable {
 
 	virtual void assign_carrier(Carrier&, uint8_t);
 
-	void draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
-
 protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
+
+	void draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 	void set_path(EditorGameBase&, const Path&);
 
@@ -114,7 +114,6 @@ protected:
 	uint32_t idle_index_;  ///< index into path where carriers should idle
 
 	uint8_t type_;        ///< RoadType
-
 };
 }
 

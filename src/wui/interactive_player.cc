@@ -29,7 +29,6 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/flag.h"
-#include "economy/roadbase.h"
 #include "game_io/game_loader.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/immovable.h"
