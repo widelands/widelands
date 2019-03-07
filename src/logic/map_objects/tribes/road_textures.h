@@ -24,6 +24,7 @@
 #include <vector>
 
 #include "graphic/image.h"
+#include "logic/roadtype.h"
 #include "logic/widelands_geometry.h"
 
 // Simple container to give access of the road textures of a tribe.
@@ -34,16 +35,20 @@ public:
 	const Image& get_normal_texture(const Widelands::Coords& coords, int direction) const;
 	const Image& get_busy_texture(const Widelands::Coords& coords, int direction) const;
 	const Image& get_waterway_texture(const Widelands::Coords& coords, int direction) const;
+	const Image& get_bridge_texture(const Widelands::Coords& coords, int direction) const;
+	const Image& get_texture(const Widelands::RoadType type, const Widelands::Coords& coords, int direction) const;
 
 	// Adds a new road texture.
 	void add_normal_road_texture(const Image* texture);
 	void add_busy_road_texture(const Image* texture);
 	void add_waterway_texture(const Image* texture);
+	void add_bridge_texture(const Image* texture);
 
 private:
 	std::vector<const Image*> normal_textures_;
 	std::vector<const Image*> busy_textures_;
 	std::vector<const Image*> waterway_textures_;
+	std::vector<const Image*> bridge_textures_;
 };
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_ROAD_TEXTURES_H

@@ -30,6 +30,9 @@ tribes:new_tribe {
       waterway = {
          "tribes/images/empire/waterway_0.png",
       },
+      bridge = {
+         "tribes/images/empire/bridge_0.png",
+      },
    },
 
    resource_indicators = {

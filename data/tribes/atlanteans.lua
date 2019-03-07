@@ -82,6 +82,9 @@ tribes:new_tribe {
       waterway = {
          "tribes/images/atlanteans/waterway_0.png",
       },
+      bridge = {
+         "tribes/images/atlanteans/bridge_0.png",
+      },
    },
 
    resource_indicators = {

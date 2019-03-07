@@ -28,6 +28,9 @@ tribes:new_tribe {
       waterway = {
          "tribes/images/frisians/waterway_0.png",
       },
+      bridge = {
+         "tribes/images/frisians/bridge_0.png",
+      },
    },
 
    resource_indicators = {

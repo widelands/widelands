@@ -87,6 +87,7 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("normal", &normal_road_paths_);
 		load_roads("busy", &busy_road_paths_);
 		load_roads("waterway", &waterway_paths_);
+		load_roads("bridge", &bridge_paths_);
 
 		items_table = table.get_table("wares_order");
 		wares_order_coords_.resize(tribes_.nrwares());
@@ -381,6 +382,10 @@ const std::vector<std::string>& TribeDescr::waterway_paths() const {
 	return waterway_paths_;
 }
 
+const std::vector<std::string>& TribeDescr::bridge_paths() const {
+	return bridge_paths_;
+}
+
 void TribeDescr::add_normal_road_texture(const Image* texture) {
 	road_textures_.add_normal_road_texture(texture);
 }
@@ -391,6 +396,10 @@ void TribeDescr::add_busy_road_texture(const Image* texture) {
 
 void TribeDescr::add_waterway_texture(const Image* texture) {
 	road_textures_.add_waterway_texture(texture);
+}
+
+void TribeDescr::add_bridge_texture(const Image* texture) {
+	road_textures_.add_bridge_texture(texture);
 }
 
 const RoadTextures& TribeDescr::road_textures() const {

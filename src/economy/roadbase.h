@@ -68,6 +68,8 @@ struct RoadBase : public PlayerImmovable {
 		return type_;
 	}
 
+	bool is_bridge(const EditorGameBase&, const FCoords&, uint8_t) const;
+
 	int32_t get_size() const override;
 	bool get_passable() const override;
 	PositionList get_positions(const EditorGameBase&) const override;

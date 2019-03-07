@@ -79,12 +79,8 @@ void RoadProgram::add_road(const int renderbuffer_width,
 		visible_owner = end.owner;
 	}
 
-	const Image& texture =
-		road_type == Widelands::RoadType::kNormal ?
-			visible_owner->tribe().road_textures().get_normal_texture(
-				start.geometric_coords, direction) : road_type == Widelands::RoadType::kWaterway ?
-			visible_owner->tribe().road_textures().get_waterway_texture(start.geometric_coords, direction) :
-				visible_owner->tribe().road_textures().get_busy_texture(start.geometric_coords, direction);
+	const Image& texture = visible_owner->tribe().road_textures().get_texture(
+			road_type, start.geometric_coords, direction);
 	if (*gl_texture == 0) {
 		*gl_texture = texture.blit_data().texture_id;
 	}

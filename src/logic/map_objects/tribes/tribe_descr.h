@@ -136,11 +136,13 @@ public:
 	const std::vector<std::string>& normal_road_paths() const;
 	const std::vector<std::string>& busy_road_paths() const;
 	const std::vector<std::string>& waterway_paths() const;
+	const std::vector<std::string>& bridge_paths() const;
 
 	// Add the corresponding texture for roads/waterways.
 	void add_normal_road_texture(const Image* texture);
 	void add_busy_road_texture(const Image* texture);
 	void add_waterway_texture(const Image* texture);
+	void add_bridge_texture(const Image* texture);
 
 	// The road textures used for drawing roads and waterways.
 	const RoadTextures& road_textures() const;
@@ -194,6 +196,7 @@ private:
 	std::vector<std::string> normal_road_paths_;
 	std::vector<std::string> busy_road_paths_;
 	std::vector<std::string> waterway_paths_;
+	std::vector<std::string> bridge_paths_;
 	RoadTextures road_textures_;
 
 	std::vector<DescriptionIndex> buildings_;

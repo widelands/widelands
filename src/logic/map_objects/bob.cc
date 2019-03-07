@@ -27,6 +27,7 @@
 #include "base/macros.h"
 #include "base/math.h"
 #include "base/wexception.h"
+#include "economy/roadbase.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
@@ -703,6 +704,7 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 
 	const float triangle_w = kTriangleWidth * scale;
 	const float triangle_h = kTriangleHeight * scale;
+	const float bridge_h = kBridgeHeight * scale;
 
 	switch (walking_) {
 	case WALK_NW:
@@ -749,6 +751,13 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		   static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_), 0.f, 1.f);
 		epos.x = f * epos.x + (1.f - f) * spos.x;
 		epos.y = f * epos.y + (1.f - f) * spos.y;
+		if (BaseImmovable* imm = map.get_immovable(position_)) {
+			if (upcast(RoadBase, road, imm)) {
+				if (road->is_bridge(game, position_, get_reverse_dir(walking_))) {
+					epos.y -= bridge_h * (1 - 4 * (f - 0.5f) * (f - 0.5f));
+				}
+			}
+		}
 	}
 	return epos;
 }
