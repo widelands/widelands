@@ -96,11 +96,11 @@ struct RoadBase : public PlayerImmovable {
 	}
 	void set_cache_bridge_dir_to_draw(uint8_t);
 
+	void draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
+
 protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
-
-	void draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 	void set_path(EditorGameBase&, const Path&);
 

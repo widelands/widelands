@@ -13,10 +13,10 @@ tribes:new_tribe {
          hotspot = { 10, 39 },
          fps = 10,
          scale = 4.2,
-      }
+      },
       bridge_e = {
          pictures = path.list_files (dirname .. "images/frisians/bridge_e_?.png"),
-         hotspot = { 4, 28 },
+         hotspot = { 3, 20 },
       },
       bridge_se = {
          pictures = path.list_files (dirname .. "images/frisians/bridge_se_?.png"),

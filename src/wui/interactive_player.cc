@@ -29,6 +29,7 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "economy/flag.h"
+#include "economy/roadbase.h"
 #include "game_io/game_loader.h"
 #include "logic/cmd_queue.h"
 #include "logic/map_objects/immovable.h"
@@ -94,27 +95,47 @@ bool draw_immovable_for_visible_field(const Widelands::EditorGameBase& egbase,
                                       Widelands::BaseImmovable* const imm,
                                       RenderTarget* dst) {
 	if (imm) {
-		if (upcast(RoadBase, road, imm)) {
+		if (upcast(Widelands::RoadBase, road, imm)) {
 			uint8_t dir = 0;
-			FCoords iterate = map.get_fcoords(path_.get_start());
-			const Path::StepVector::size_type nr_steps = road->get_path().get_nsteps();
-			for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
+			Widelands::FCoords iterate = egbase.map().get_fcoords(road->get_path().get_start());
+			const Widelands::Path::StepVector::size_type nr_steps = road->get_path().get_nsteps();
+			for (Widelands::Path::StepVector::size_type i = 0; i <= nr_steps; ++i) {
 				uint8_t d = road->get_path()[i];
-				if (iterate == field) {
-					if (d == WALK_E || d == WALK_SE || d == WALK_SW) {
+				if (iterate == field.fcoords) {
+					if (d == Widelands::WALK_E || d == Widelands::WALK_SE || d == Widelands::WALK_SW) {
 						dir = d;
+						break;
 					}
+				}
+				if (i == nr_steps) {
 					break;
 				}
-				map.get_neighbour(iterate, d, &iterate);
+				egbase.map().get_neighbour(iterate, d, &iterate);
+				if (iterate == field.fcoords) {
+					d = Widelands::get_reverse_dir(d);
+					if (d == Widelands::WALK_E || d == Widelands::WALK_SE || d == Widelands::WALK_SW) {
+						dir = d;
+						break;
+					}
+				}
 			}
 			if (dir && road->is_bridge(egbase, field.fcoords, dir)) {
 				road->set_cache_bridge_dir_to_draw(dir);
-				imm->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
-				road->set_cache_bridge_dir_to_draw(0);
+				road->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
+			}
+			return true;
+		}
+		if (upcast(Widelands::Flag, flag, imm)) {
+			for (uint8_t dir = 1; dir <= 6; ++dir) {
+				if (Widelands::RoadBase* road = flag->get_roadbase(dir)) {
+					if (road->is_bridge(egbase, field.fcoords, dir)) {
+						road->set_cache_bridge_dir_to_draw(dir);
+						road->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
+					}
+				}
 			}
 		}
-		else if (imm->get_positions(egbase).front() == field.fcoords) {
+		if (imm->get_positions(egbase).front() == field.fcoords) {
 			imm->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
 			return true;
 		}

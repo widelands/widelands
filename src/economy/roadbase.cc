@@ -98,7 +98,7 @@ bool RoadBase::is_bridge(const EditorGameBase& egbase, const FCoords& field, uin
 			return false;
 		}
 		if (i < nr_steps) {
-			map.get_neighbour(iterate, dir, &iterate);
+			map.get_neighbour(iterate, path_[i], &iterate);
 		}
 	}
 	if (!found) {
