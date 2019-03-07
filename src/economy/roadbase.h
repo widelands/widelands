@@ -91,6 +91,11 @@ struct RoadBase : public PlayerImmovable {
 
 	virtual void assign_carrier(Carrier&, uint8_t);
 
+	uint8_t get_cache_bridge_dir_to_draw() const {
+		return cache_bridge_dir_to_draw_;
+	}
+	void set_cache_bridge_dir_to_draw(uint8_t);
+
 protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
@@ -114,6 +119,9 @@ protected:
 	uint32_t idle_index_;  ///< index into path where carriers should idle
 
 	uint8_t type_;        ///< RoadType
+
+private:
+	uint8_t cache_bridge_dir_to_draw_;
 };
 }
 

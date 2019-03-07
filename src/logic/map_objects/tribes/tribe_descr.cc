@@ -66,6 +66,9 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
 		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
 		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
+		bridge_e_animation_id_ = g_gr->animations().load(*items_table->get_table("bridge_e"));
+		bridge_se_animation_id_ = g_gr->animations().load(*items_table->get_table("bridge_se"));
+		bridge_sw_animation_id_ = g_gr->animations().load(*items_table->get_table("bridge_sw"));
 
 		items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
@@ -87,7 +90,6 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		load_roads("normal", &normal_road_paths_);
 		load_roads("busy", &busy_road_paths_);
 		load_roads("waterway", &waterway_paths_);
-		load_roads("bridge", &bridge_paths_);
 
 		items_table = table.get_table("wares_order");
 		wares_order_coords_.resize(tribes_.nrwares());
@@ -370,6 +372,18 @@ uint32_t TribeDescr::flag_animation() const {
 	return flag_animation_id_;
 }
 
+uint32_t TribeDescr::bridge_e_animation() const {
+	return bridge_e_animation_id_;
+}
+
+uint32_t TribeDescr::bridge_se_animation() const {
+	return bridge_se_animation_id_;
+}
+
+uint32_t TribeDescr::bridge_sw_animation() const {
+	return bridge_sw_animation_id_;
+}
+
 const std::vector<std::string>& TribeDescr::normal_road_paths() const {
 	return normal_road_paths_;
 }
@@ -382,10 +396,6 @@ const std::vector<std::string>& TribeDescr::waterway_paths() const {
 	return waterway_paths_;
 }
 
-const std::vector<std::string>& TribeDescr::bridge_paths() const {
-	return bridge_paths_;
-}
-
 void TribeDescr::add_normal_road_texture(const Image* texture) {
 	road_textures_.add_normal_road_texture(texture);
 }
@@ -396,10 +406,6 @@ void TribeDescr::add_busy_road_texture(const Image* texture) {
 
 void TribeDescr::add_waterway_texture(const Image* texture) {
 	road_textures_.add_waterway_texture(texture);
-}
-
-void TribeDescr::add_bridge_texture(const Image* texture) {
-	road_textures_.add_bridge_texture(texture);
 }
 
 const RoadTextures& TribeDescr::road_textures() const {

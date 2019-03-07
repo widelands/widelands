@@ -49,7 +49,15 @@ void Flag::draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, Re
 	}
 }
 
-/** The road is drawn by the terrain renderer via marked fields. */
-void RoadBase::draw(uint32_t, const Vector2f&, float, RenderTarget*) {
+/** The road is drawn by the terrain renderer via marked fields.
+  * This function must only be called if the road segment to draw is a bridge!
+  * The location and direction of the bridge is cached in cache_bridge_dir_to_draw_
+  */
+void RoadBase::draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) {
+	assert(cache_bridge_dir_to_draw_);
+	uint32_t const anim_idx = cache_bridge_dir_to_draw_ == WALK_E ? field.owner->tribe().bridge_e_animation() :
+			cache_bridge_dir_to_draw_ == WALK_SE ? field.owner->tribe().bridge_se_animation() :
+			field.owner->tribe().bridge_sw_animation();
+	dst->blit_animation(field.rendertarget_pixel, scale, anim_idx, 0, field.owner->get_playercolor());
 }
 }  // namespace Widelands

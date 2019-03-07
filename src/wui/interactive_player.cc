@@ -93,9 +93,31 @@ bool draw_immovable_for_visible_field(const Widelands::EditorGameBase& egbase,
                                       const float scale,
                                       Widelands::BaseImmovable* const imm,
                                       RenderTarget* dst) {
-	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
-		imm->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
-		return true;
+	if (imm) {
+		if (upcast(RoadBase, road, imm)) {
+			uint8_t dir = 0;
+			FCoords iterate = map.get_fcoords(path_.get_start());
+			const Path::StepVector::size_type nr_steps = road->get_path().get_nsteps();
+			for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
+				uint8_t d = road->get_path()[i];
+				if (iterate == field) {
+					if (d == WALK_E || d == WALK_SE || d == WALK_SW) {
+						dir = d;
+					}
+					break;
+				}
+				map.get_neighbour(iterate, d, &iterate);
+			}
+			if (dir && road->is_bridge(egbase, field.fcoords, dir)) {
+				road->set_cache_bridge_dir_to_draw(dir);
+				imm->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
+				road->set_cache_bridge_dir_to_draw(0);
+			}
+		}
+		else if (imm->get_positions(egbase).front() == field.fcoords) {
+			imm->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
+			return true;
+		}
 	}
 	return false;
 }

@@ -320,9 +320,6 @@ void Tribes::load_graphics() {
 		for (const std::string& texture_path : tribe->waterway_paths()) {
 			tribe->add_waterway_texture(g_gr->images().get(texture_path));
 		}
-		for (const std::string& texture_path : tribe->bridge_paths()) {
-			tribe->add_bridge_texture(g_gr->images().get(texture_path));
-		}
 	}
 }
 

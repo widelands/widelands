@@ -31,8 +31,6 @@ const Image& RoadTextures::get_texture(
 			return get_busy_texture(coords, direction);
 		case Widelands::RoadType::kWaterway:
 			return get_waterway_texture(coords, direction);
-		case Widelands::RoadType::kBridge:
-			return get_bridge_texture(coords, direction);
 		default:
 			NEVER_HERE();
 	}
@@ -51,10 +49,6 @@ const Image& RoadTextures::get_waterway_texture(const Widelands::Coords& coords,
 	return *waterway_textures_.at((coords.x + coords.y + direction) % waterway_textures_.size());
 }
 
-const Image& RoadTextures::get_bridge_texture(const Widelands::Coords& coords, int direction) const {
-	return *bridge_textures_.at((coords.x + coords.y + direction) % bridge_textures_.size());
-}
-
 void RoadTextures::add_normal_road_texture(const Image* image) {
 	normal_textures_.emplace_back(image);
 }
@@ -65,9 +59,5 @@ void RoadTextures::add_busy_road_texture(const Image* image) {
 
 void RoadTextures::add_waterway_texture(const Image* image) {
 	waterway_textures_.emplace_back(image);
-}
-
-void RoadTextures::add_bridge_texture(const Image* image) {
-	bridge_textures_.emplace_back(image);
 }
 

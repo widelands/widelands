@@ -38,7 +38,7 @@ namespace Widelands {
  * Most of the actual work is done in init.
  */
 RoadBase::RoadBase(const RoadBaseDescr& d, RoadType type)
-   : PlayerImmovable(d), idle_index_(0), type_(type) {
+   : PlayerImmovable(d), idle_index_(0), type_(type), cache_bridge_dir_to_draw_(0) {
 	flags_[0] = flags_[1] = nullptr;
 	flagidx_[0] = flagidx_[1] = -1;
 }
@@ -71,6 +71,11 @@ Flag& RoadBase::base_flag() {
 	return *flags_[FlagStart];
 }
 
+// These functions must be called only by InteractivePlayer::draw_immovable_???
+void RoadBase::set_cache_bridge_dir_to_draw(uint8_t dir) {
+	cache_bridge_dir_to_draw_ = dir;
+}
+
 // This returns true if and only if this is a road that covers the specified edge and
 // both triangles adjacent to that edge are unwalkable
 bool RoadBase::is_bridge(const EditorGameBase& egbase, const FCoords& field, uint8_t dir) const {
@@ -87,11 +92,9 @@ bool RoadBase::is_bridge(const EditorGameBase& egbase, const FCoords& field, uin
 	for (Path::StepVector::size_type i = 0; i <= nr_steps; ++i) {
 		if (iterate == field) {
 			if ((i < nr_steps && path_[i] == dir) || (i > 0 && path_[i - 1] == get_reverse_dir(dir))) {
-				log("NOCOM: Found a bridge from %3dx%3d toward %u\n", field.x, field.y, dir);
 				found = true;
 				break;
 			}
-			log("NOCOM: Found NO bridge from %3dx%3d toward %u\n", field.x, field.y, dir);
 			return false;
 		}
 		if (i < nr_steps) {

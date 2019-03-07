@@ -27,9 +27,6 @@ tribes:new_tribe {
       waterway = {
          "tribes/images/barbarians/waterway_0.png",
       },
-      bridge = {
-         "tribes/images/barbarians/bridge_0.png",
-      },
    },
 
    resource_indicators = {

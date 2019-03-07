@@ -130,19 +130,20 @@ public:
 
 	uint32_t frontier_animation() const;
 	uint32_t flag_animation() const;
+	uint32_t bridge_e_animation() const;
+	uint32_t bridge_se_animation() const;
+	uint32_t bridge_sw_animation() const;
 
 	// A vector of all texture images that can be used for drawing a
 	// (normal|busy) road or a waterway. The images are guaranteed to exist.
 	const std::vector<std::string>& normal_road_paths() const;
 	const std::vector<std::string>& busy_road_paths() const;
 	const std::vector<std::string>& waterway_paths() const;
-	const std::vector<std::string>& bridge_paths() const;
 
 	// Add the corresponding texture for roads/waterways.
 	void add_normal_road_texture(const Image* texture);
 	void add_busy_road_texture(const Image* texture);
 	void add_waterway_texture(const Image* texture);
-	void add_bridge_texture(const Image* texture);
 
 	// The road textures used for drawing roads and waterways.
 	const RoadTextures& road_textures() const;
@@ -193,10 +194,12 @@ private:
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
+	uint32_t bridge_e_animation_id_;
+	uint32_t bridge_se_animation_id_;
+	uint32_t bridge_sw_animation_id_;
 	std::vector<std::string> normal_road_paths_;
 	std::vector<std::string> busy_road_paths_;
 	std::vector<std::string> waterway_paths_;
-	std::vector<std::string> bridge_paths_;
 	RoadTextures road_textures_;
 
 	std::vector<DescriptionIndex> buildings_;
