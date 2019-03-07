@@ -38,7 +38,7 @@ namespace Widelands {
  * Most of the actual work is done in init.
  */
 RoadBase::RoadBase(const RoadBaseDescr& d, RoadType type)
-   : PlayerImmovable(d), idle_index_(0), type_(type), cache_bridge_dir_to_draw_(0) {
+   : PlayerImmovable(d), idle_index_(0), type_(type) {
 	flags_[0] = flags_[1] = nullptr;
 	flagidx_[0] = flagidx_[1] = -1;
 }
@@ -69,11 +69,6 @@ BaseImmovable::PositionList RoadBase::get_positions(const EditorGameBase& egbase
 
 Flag& RoadBase::base_flag() {
 	return *flags_[FlagStart];
-}
-
-// These functions must be called only by InteractivePlayer::draw_immovable_???
-void RoadBase::set_cache_bridge_dir_to_draw(uint8_t dir) {
-	cache_bridge_dir_to_draw_ = dir;
 }
 
 // This returns true if and only if this is a road that covers the specified edge and

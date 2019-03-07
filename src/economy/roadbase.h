@@ -91,11 +91,6 @@ struct RoadBase : public PlayerImmovable {
 
 	virtual void assign_carrier(Carrier&, uint8_t);
 
-	uint8_t get_cache_bridge_dir_to_draw() const {
-		return cache_bridge_dir_to_draw_;
-	}
-	void set_cache_bridge_dir_to_draw(uint8_t);
-
 	void draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
 
 protected:
@@ -120,8 +115,6 @@ protected:
 
 	uint8_t type_;        ///< RoadType
 
-private:
-	uint8_t cache_bridge_dir_to_draw_;
 };
 }
 

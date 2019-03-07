@@ -95,46 +95,6 @@ bool draw_immovable_for_visible_field(const Widelands::EditorGameBase& egbase,
                                       Widelands::BaseImmovable* const imm,
                                       RenderTarget* dst) {
 	if (imm) {
-		if (upcast(Widelands::RoadBase, road, imm)) {
-			uint8_t dir = 0;
-			Widelands::FCoords iterate = egbase.map().get_fcoords(road->get_path().get_start());
-			const Widelands::Path::StepVector::size_type nr_steps = road->get_path().get_nsteps();
-			for (Widelands::Path::StepVector::size_type i = 0; i <= nr_steps; ++i) {
-				uint8_t d = road->get_path()[i];
-				if (iterate == field.fcoords) {
-					if (d == Widelands::WALK_E || d == Widelands::WALK_SE || d == Widelands::WALK_SW) {
-						dir = d;
-						break;
-					}
-				}
-				if (i == nr_steps) {
-					break;
-				}
-				egbase.map().get_neighbour(iterate, d, &iterate);
-				if (iterate == field.fcoords) {
-					d = Widelands::get_reverse_dir(d);
-					if (d == Widelands::WALK_E || d == Widelands::WALK_SE || d == Widelands::WALK_SW) {
-						dir = d;
-						break;
-					}
-				}
-			}
-			if (dir && road->is_bridge(egbase, field.fcoords, dir)) {
-				road->set_cache_bridge_dir_to_draw(dir);
-				road->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
-			}
-			return true;
-		}
-		if (upcast(Widelands::Flag, flag, imm)) {
-			for (uint8_t dir = 1; dir <= 6; ++dir) {
-				if (Widelands::RoadBase* road = flag->get_roadbase(dir)) {
-					if (road->is_bridge(egbase, field.fcoords, dir)) {
-						road->set_cache_bridge_dir_to_draw(dir);
-						road->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
-					}
-				}
-			}
-		}
 		if (imm->get_positions(egbase).front() == field.fcoords) {
 			imm->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
 			return true;
@@ -372,6 +332,18 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 							throw wexception("Attempt to set waterway-building overlay for invalid direction %i", dir);
 					}
 				}
+			}
+			if (f->road_e == Widelands::RoadType::kBridge) {
+				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_e_animation(),
+						f->vision == 1 ? 0 : gametime, f->owner->get_playercolor());
+			}
+			if (f->road_sw == Widelands::RoadType::kBridge) {
+				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_sw_animation(),
+						f->vision == 1 ? 0 : gametime, f->owner->get_playercolor());
+			}
+			if (f->road_se == Widelands::RoadType::kBridge) {
+				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_se_animation(),
+						f->vision == 1 ? 0 : gametime, f->owner->get_playercolor());
 			}
 
 			draw_border_markers(*f, scale, *fields_to_draw, dst);

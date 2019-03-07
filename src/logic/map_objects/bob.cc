@@ -706,34 +706,41 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 	const float triangle_h = kTriangleHeight * scale;
 	const float bridge_h = kBridgeHeight * scale;
 
+	bool bridge = false;
 	switch (walking_) {
 	case WALK_NW:
 		map.get_brn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y += triangle_h;
+		bridge = end.field->road_southeast == RoadType::kBridge;
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y += triangle_h;
+		bridge = end.field->road_southwest == RoadType::kBridge;
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
 		spos.x += triangle_w;
+		bridge = end.field->road_east == RoadType::kBridge;
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
 		spos.x -= triangle_w;
+		bridge = start.field->road_east == RoadType::kBridge;
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y -= triangle_h;
+		bridge = start.field->road_southwest == RoadType::kBridge;
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y -= triangle_h;
+		bridge = start.field->road_southeast == RoadType::kBridge;
 		break;
 
 	case IDLE:
@@ -751,12 +758,8 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		   static_cast<float>(game.get_gametime() - walkstart_) / (walkend_ - walkstart_), 0.f, 1.f);
 		epos.x = f * epos.x + (1.f - f) * spos.x;
 		epos.y = f * epos.y + (1.f - f) * spos.y;
-		if (BaseImmovable* imm = map.get_immovable(position_)) {
-			if (upcast(RoadBase, road, imm)) {
-				if (road->is_bridge(game, position_, get_reverse_dir(walking_))) {
-					epos.y -= bridge_h * (1 - 4 * (f - 0.5f) * (f - 0.5f));
-				}
-			}
+		if (bridge) {
+			epos.y -= bridge_h * (1 - 4 * (f - 0.5f) * (f - 0.5f));
 		}
 	}
 	return epos;
