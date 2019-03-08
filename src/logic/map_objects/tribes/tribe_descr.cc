@@ -387,7 +387,7 @@ uint32_t TribeDescr::bridge_animation(uint8_t dir, bool busy) const {
 	}
 }
 
-uint32_t bridge_height() const {
+uint32_t TribeDescr::bridge_height() const {
 	return bridge_height_;
 }
 
