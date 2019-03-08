@@ -20,9 +20,11 @@ dirname = path.dirname(__file__)
 --
 --    **animations**: Global animations. Contains subtables for ``frontier`` and ``flag``. Each animation needs the parameters ``pictures`` (table of filenames) and ``hotspot`` (2 integer coordinates), and may also define ``fps`` (integer frames per second).
 --
---    **roads**: The file paths for the tribe's road textures in 2 subtables ``busy`` and ``normal``
+--    **bridges**: Contains animations for ``normal_e``, ``normal_se``, ``normal_sw``, ``busy_e``, ``busy_se`` and ``busy_sw``.
 --
---    **roads**: The file paths for the tribe's waterway textures
+--    **bridge_height**: The height in pixels of each bridge at it's summit at 1x scale.
+--
+--    **roads**: The file paths for the tribe's road textures in 3 subtables ``busy``, ``normal`` and ``waterway``.
 --
 --    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
 --
@@ -67,20 +69,36 @@ tribes:new_tribe {
          pictures = path.list_files(dirname .. "images/atlanteans/flag_??.png"),
          hotspot = { 15, 35 },
          fps = 10
+      }
+   },
+
+   bridges = {
+      normal_e = {
+         pictures = path.list_files (dirname .. "images/atlanteans/bridge_normal_e_?.png"),
+         hotspot = { 3, 20 },
       },
-      bridge_e = {
-         pictures = path.list_files (dirname .. "images/atlanteans/bridge_e_?.png"),
-         hotspot = { 4, 28 },
-      },
-      bridge_se = {
-         pictures = path.list_files (dirname .. "images/atlanteans/bridge_se_?.png"),
+      normal_se = {
+         pictures = path.list_files (dirname .. "images/atlanteans/bridge_normal_se_?.png"),
          hotspot = { 6, 6 },
       },
-      bridge_sw = {
-         pictures = path.list_files (dirname .. "images/atlanteans/bridge_sw_?.png"),
+      normal_sw = {
+         pictures = path.list_files (dirname .. "images/atlanteans/bridge_normal_sw_?.png"),
+         hotspot = { 31, 6 },
+      },
+      busy_e = {
+         pictures = path.list_files (dirname .. "images/atlanteans/bridge_busy_e_?.png"),
+         hotspot = { 3, 20 },
+      },
+      busy_se = {
+         pictures = path.list_files (dirname .. "images/atlanteans/bridge_busy_se_?.png"),
+         hotspot = { 6, 6 },
+      },
+      busy_sw = {
+         pictures = path.list_files (dirname .. "images/atlanteans/bridge_busy_sw_?.png"),
          hotspot = { 31, 6 },
       },
    },
+   bridge_height = 8,
 
    -- Image file paths for this tribe's road and waterway textures
    roads = {

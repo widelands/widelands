@@ -30,6 +30,5 @@ constexpr int kTriangleHeight = 32;
 constexpr int kHeightFactor = 5;
 constexpr float kHeightFactorFloat =
    5.0f;  // Same a kHeightFactor to avoid implict upcasts to double
-constexpr int kBridgeHeight = 12;
 
 #endif  // end of include guard: WL_WUI_MAPVIEWPIXELCONSTANTS_H

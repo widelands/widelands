@@ -93,11 +93,9 @@ bool draw_immovable_for_visible_field(const Widelands::EditorGameBase& egbase,
                                       const float scale,
                                       Widelands::BaseImmovable* const imm,
                                       RenderTarget* dst) {
-	if (imm) {
-		if (imm->get_positions(egbase).front() == field.fcoords) {
-			imm->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
-			return true;
-		}
+	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
+		imm->draw(egbase.get_gametime(), field.rendertarget_pixel, scale, dst);
+		return true;
 	}
 	return false;
 }
@@ -332,16 +330,19 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					}
 				}
 			}
-			if (f->road_e == Widelands::RoadType::kBridge) {
-				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_e_animation(),
+			if (f->road_e == Widelands::RoadType::kBridgeNormal || f->road_e == Widelands::RoadType::kBridgeBusy) {
+				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_animation(
+						Widelands::WALK_E, f->road_e == Widelands::RoadType::kBridgeBusy),
 						f->vision == 1 ? 0 : gametime, f->owner->get_playercolor());
 			}
-			if (f->road_sw == Widelands::RoadType::kBridge) {
-				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_sw_animation(),
+			if (f->road_sw == Widelands::RoadType::kBridgeNormal || f->road_sw == Widelands::RoadType::kBridgeBusy) {
+				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_animation(
+						Widelands::WALK_SW, f->road_sw == Widelands::RoadType::kBridgeBusy),
 						f->vision == 1 ? 0 : gametime, f->owner->get_playercolor());
 			}
-			if (f->road_se == Widelands::RoadType::kBridge) {
-				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_se_animation(),
+			if (f->road_se == Widelands::RoadType::kBridgeNormal || f->road_se == Widelands::RoadType::kBridgeBusy) {
+				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_animation(
+						Widelands::WALK_SE, f->road_se == Widelands::RoadType::kBridgeBusy),
 						f->vision == 1 ? 0 : gametime, f->owner->get_playercolor());
 			}
 

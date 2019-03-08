@@ -29,7 +29,8 @@ enum RoadType : uint8_t {
 	kNormal = 1,
 	kBusy = 2,
 	kWaterway = 3,
-	kBridge = 4,
+	kBridgeNormal = 4,
+	kBridgeBusy = 5,
 };
 
 }  // namespace Widelands

@@ -168,13 +168,13 @@ void RoadBase::mark_map(EditorGameBase& egbase) {
 		if (steps > 0 && steps < path_.get_nsteps())
 			set_position(egbase, curf);
 
-		uint8_t type = type_;
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			const Direction dir = get_reverse_dir(path_[steps - 1]);
 			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E) {
+				uint8_t type = type_;
 				if (is_bridge(egbase, curf, dir)) {
-					type = RoadType::kBridge;
+					type += RoadType::kBridgeNormal - RoadType::kNormal;
 				}
 				egbase.set_road(curf, dir, type);
 			}
@@ -184,8 +184,9 @@ void RoadBase::mark_map(EditorGameBase& egbase) {
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
 			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E) {
+				uint8_t type = type_;
 				if (is_bridge(egbase, curf, dir)) {
-					type = RoadType::kBridge;
+					type += RoadType::kBridgeNormal - RoadType::kNormal;
 				}
 				egbase.set_road(curf, dir, type);
 			}

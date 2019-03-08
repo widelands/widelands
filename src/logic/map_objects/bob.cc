@@ -704,7 +704,6 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 
 	const float triangle_w = kTriangleWidth * scale;
 	const float triangle_h = kTriangleHeight * scale;
-	const float bridge_h = kBridgeHeight * scale;
 
 	bool bridge = false;
 	switch (walking_) {
@@ -712,35 +711,41 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		map.get_brn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y += triangle_h;
-		bridge = end.field->road_southeast == RoadType::kBridge;
+		bridge = end.field->road_southeast == RoadType::kBridgeNormal ||
+				end.field->road_southeast == RoadType::kBridgeBusy; 
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y += triangle_h;
-		bridge = end.field->road_southwest == RoadType::kBridge;
+		bridge = end.field->road_southwest == RoadType::kBridgeNormal ||
+				end.field->road_southwest == RoadType::kBridgeBusy; 
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
 		spos.x += triangle_w;
-		bridge = end.field->road_east == RoadType::kBridge;
+		bridge = end.field->road_east == RoadType::kBridgeNormal ||
+				end.field->road_east == RoadType::kBridgeBusy; 
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
 		spos.x -= triangle_w;
-		bridge = start.field->road_east == RoadType::kBridge;
+		bridge = start.field->road_east == RoadType::kBridgeNormal ||
+				start.field->road_east == RoadType::kBridgeBusy;
 		break;
 	case WALK_SW:
 		map.get_trn(end, &start);
 		spos.x += triangle_w / 2.f;
 		spos.y -= triangle_h;
-		bridge = start.field->road_southwest == RoadType::kBridge;
+		bridge = start.field->road_southwest == RoadType::kBridgeNormal ||
+				start.field->road_southwest == RoadType::kBridgeBusy;
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y -= triangle_h;
-		bridge = start.field->road_southeast == RoadType::kBridge;
+		bridge = start.field->road_southeast == RoadType::kBridgeNormal ||
+				start.field->road_southeast == RoadType::kBridgeBusy;
 		break;
 
 	case IDLE:
@@ -759,7 +764,8 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		epos.x = f * epos.x + (1.f - f) * spos.x;
 		epos.y = f * epos.y + (1.f - f) * spos.y;
 		if (bridge) {
-			epos.y -= bridge_h * (1 - 4 * (f - 0.5f) * (f - 0.5f));
+			epos.y -= game.player(end.field->get_owned_by()).tribe().bridge_height() * scale *
+					(1 - 4 * (f - 0.5f) * (f - 0.5f));
 		}
 	}
 	return epos;

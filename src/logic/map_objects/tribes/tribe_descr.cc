@@ -58,7 +58,8 @@ namespace Widelands {
 TribeDescr::TribeDescr(const LuaTable& table,
                        const Widelands::TribeBasicInfo& info,
                        const Tribes& init_tribes)
-   : name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
+   : name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes),
+     bridge_height_(table.get_int("bridge_height")) {
 
 	try {
 		initializations_ = info.initializations;
@@ -66,9 +67,14 @@ TribeDescr::TribeDescr(const LuaTable& table,
 		std::unique_ptr<LuaTable> items_table = table.get_table("animations");
 		frontier_animation_id_ = g_gr->animations().load(*items_table->get_table("frontier"));
 		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
-		bridge_e_animation_id_ = g_gr->animations().load(*items_table->get_table("bridge_e"));
-		bridge_se_animation_id_ = g_gr->animations().load(*items_table->get_table("bridge_se"));
-		bridge_sw_animation_id_ = g_gr->animations().load(*items_table->get_table("bridge_sw"));
+
+		items_table = table.get_table("bridges");
+		bridge_e_animation_normal_id_ = g_gr->animations().load(*items_table->get_table("normal_e"));
+		bridge_se_animation_normal_id_ = g_gr->animations().load(*items_table->get_table("normal_se"));
+		bridge_sw_animation_normal_id_ = g_gr->animations().load(*items_table->get_table("normal_sw"));
+		bridge_e_animation_busy_id_ = g_gr->animations().load(*items_table->get_table("busy_e"));
+		bridge_se_animation_busy_id_ = g_gr->animations().load(*items_table->get_table("busy_se"));
+		bridge_sw_animation_busy_id_ = g_gr->animations().load(*items_table->get_table("busy_sw"));
 
 		items_table = table.get_table("roads");
 		const auto load_roads = [&items_table](
@@ -372,16 +378,17 @@ uint32_t TribeDescr::flag_animation() const {
 	return flag_animation_id_;
 }
 
-uint32_t TribeDescr::bridge_e_animation() const {
-	return bridge_e_animation_id_;
+uint32_t TribeDescr::bridge_animation(uint8_t dir, bool busy) const {
+	switch (dir) {
+		case WALK_E: return busy ? bridge_e_animation_busy_id_ : bridge_e_animation_normal_id_;
+		case WALK_SE: return busy ? bridge_se_animation_busy_id_ : bridge_se_animation_normal_id_;
+		case WALK_SW: return busy ? bridge_sw_animation_busy_id_ : bridge_sw_animation_normal_id_;
+		default: NEVER_HERE();
+	}
 }
 
-uint32_t TribeDescr::bridge_se_animation() const {
-	return bridge_se_animation_id_;
-}
-
-uint32_t TribeDescr::bridge_sw_animation() const {
-	return bridge_sw_animation_id_;
+uint32_t bridge_height() const {
+	return bridge_height_;
 }
 
 const std::vector<std::string>& TribeDescr::normal_road_paths() const {

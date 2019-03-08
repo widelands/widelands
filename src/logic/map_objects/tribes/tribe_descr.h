@@ -130,9 +130,10 @@ public:
 
 	uint32_t frontier_animation() const;
 	uint32_t flag_animation() const;
-	uint32_t bridge_e_animation() const;
-	uint32_t bridge_se_animation() const;
-	uint32_t bridge_sw_animation() const;
+	uint32_t bridge_animation(uint8_t dir, bool busy) const;
+
+	// Bridge height in pixels at 1x scale, for drawing bobs walking over a bridge
+	uint32_t bridge_height() const;
 
 	// A vector of all texture images that can be used for drawing a
 	// (normal|busy) road or a waterway. The images are guaranteed to exist.
@@ -194,9 +195,13 @@ private:
 
 	uint32_t frontier_animation_id_;
 	uint32_t flag_animation_id_;
-	uint32_t bridge_e_animation_id_;
-	uint32_t bridge_se_animation_id_;
-	uint32_t bridge_sw_animation_id_;
+	uint32_t bridge_e_animation_normal_id_;
+	uint32_t bridge_se_animation_normal_id_;
+	uint32_t bridge_sw_animation_normal_id_;
+	uint32_t bridge_e_animation_busy_id_;
+	uint32_t bridge_se_animation_busy_id_;
+	uint32_t bridge_sw_animation_busy_id_;
+	uint32_t bridge_height_;
 	std::vector<std::string> normal_road_paths_;
 	std::vector<std::string> busy_road_paths_;
 	std::vector<std::string> waterway_paths_;

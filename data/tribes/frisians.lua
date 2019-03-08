@@ -13,20 +13,36 @@ tribes:new_tribe {
          hotspot = { 10, 39 },
          fps = 10,
          scale = 4.2,
-      },
-      bridge_e = {
-         pictures = path.list_files (dirname .. "images/frisians/bridge_e_?.png"),
+      }
+   },
+
+   bridges = {
+      normal_e = {
+         pictures = path.list_files (dirname .. "images/frisians/bridge_normal_e_?.png"),
          hotspot = { 3, 20 },
       },
-      bridge_se = {
-         pictures = path.list_files (dirname .. "images/frisians/bridge_se_?.png"),
+      normal_se = {
+         pictures = path.list_files (dirname .. "images/frisians/bridge_normal_se_?.png"),
          hotspot = { 6, 6 },
       },
-      bridge_sw = {
-         pictures = path.list_files (dirname .. "images/frisians/bridge_sw_?.png"),
+      normal_sw = {
+         pictures = path.list_files (dirname .. "images/frisians/bridge_normal_sw_?.png"),
+         hotspot = { 31, 6 },
+      },
+      busy_e = {
+         pictures = path.list_files (dirname .. "images/frisians/bridge_busy_e_?.png"),
+         hotspot = { 3, 20 },
+      },
+      busy_se = {
+         pictures = path.list_files (dirname .. "images/frisians/bridge_busy_se_?.png"),
+         hotspot = { 6, 6 },
+      },
+      busy_sw = {
+         pictures = path.list_files (dirname .. "images/frisians/bridge_busy_sw_?.png"),
          hotspot = { 31, 6 },
       },
    },
+   bridge_height = 8,
 
    -- Image file paths for this tribe's road and waterway textures
    roads = {
