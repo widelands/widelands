@@ -23,9 +23,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
-"PO-Revision-Date: 2019-02-25 09:15+0000\n"
-"Last-Translator: Elisabeth Jäger\n"
+"POT-Creation-Date: 2019-03-03 08:19+0000\n"
+"PO-Revision-Date: 2019-03-04 11:38+0000\n"
+"Last-Translator: Stephan Lutz <stephan-lutz@gmx.de>\n"
 "Language-Team: German (http://www.transifex.com/widelands/widelands/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -259,7 +259,7 @@ msgid "Loading tribes"
 msgstr "Lade Stämme"
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:143
+#: ../../src/wui/interactive_player.cc:167
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Main menu"
 msgstr "Hauptmenü"
@@ -279,7 +279,7 @@ msgid "Players"
 msgstr "Spieler"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:159
+#: ../../src/wui/interactive_player.cc:183
 #: ../../src/wui/interactive_spectator.cc:72
 msgid "Show building spaces (on/off)"
 msgstr "Bauhilfe anzeigen (an/aus)"
@@ -297,13 +297,13 @@ msgid "Show resources (on/off)"
 msgstr "Rohstoffe anzeigen (an/aus)"
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:155
+#: ../../src/wui/interactive_player.cc:179
 #: ../../src/wui/interactive_spectator.cc:68
 msgid "Minimap"
 msgstr "Minikarte"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:161
+#: ../../src/wui/interactive_player.cc:185
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Reset zoom"
 msgstr "Zoom zurücksetzen"
@@ -317,7 +317,7 @@ msgid "Redo"
 msgstr "Wiederherstellen"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:185
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:209
 msgid "Help"
 msgstr "Hilfe"
 
@@ -345,13 +345,13 @@ msgstr "Ungespeicherte Karte"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "Die Karte wurde noch nicht gespeichert. Willst du wirklich aufhören?"
 
-#: ../../src/editor/editorinteractive.cc:617
+#: ../../src/editor/editorinteractive.cc:615
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr "Erstelle leere Karte …"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:621
+#: ../../src/editor/editorinteractive.cc:619
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:141
@@ -360,7 +360,7 @@ msgid "No Name"
 msgstr "Kein Name"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:623
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -368,7 +368,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ../../src/editor/editorinteractive.cc:632
+#: ../../src/editor/editorinteractive.cc:630
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "Lade Karte „%s“ …"
@@ -1134,7 +1134,7 @@ msgid "Not set"
 msgstr "Nicht festgelegt"
 
 #: ../../src/logic/game.cc:214 ../../src/logic/game.cc:266
-#: ../../src/logic/game.cc:336 ../../src/logic/game.cc:371
+#: ../../src/logic/game.cc:337 ../../src/logic/game.cc:372
 msgid "Preloading map"
 msgstr "Lese Teile der Karte"
 
@@ -1146,31 +1146,35 @@ msgstr "Lade Welt"
 msgid "Loading map…"
 msgstr "Lade Karte …"
 
-#: ../../src/logic/game.cc:349 ../../src/logic/game.cc:388
+#: ../../src/logic/game.cc:318
+msgid "Initializing game…"
+msgstr "Spiel wird initialisiert …"
+
+#: ../../src/logic/game.cc:350 ../../src/logic/game.cc:389
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1424
 msgid "Loading…"
 msgstr "Lade …"
 
-#: ../../src/logic/game.cc:451
+#: ../../src/logic/game.cc:452
 msgid "Creating player infrastructure"
 msgstr "Erstelle Spielerinfrastruktur"
 
-#: ../../src/logic/game.cc:462 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr "Fehlender Startpunkt"
 
-#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:223
+#: ../../src/logic/game.cc:464 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands konnte das Spiel nicht starten, da Spieler %u keinen Startpunkt besitzt.\nDu kannst manuell mit dem Widelands-Editor einen Startpunkt setzen, um das Problem zu lösen."
 
-#: ../../src/logic/game.cc:853
+#: ../../src/logic/game.cc:854
 msgid "Trade Offer"
 msgstr "Handelsangebot"
 
-#: ../../src/logic/game.cc:855
+#: ../../src/logic/game.cc:856
 msgid "This market has received a new trade offer."
 msgstr "Dieser Markt hat ein neues Handelsangebot erhalten."
 
@@ -1236,7 +1240,7 @@ msgstr "Ein unerwarteter Fehler trat auf:"
 msgid "No description defined"
 msgstr "Keine Beschreibung vorhanden"
 
-#: ../../src/logic/map_objects/immovable.cc:535
+#: ../../src/logic/map_objects/immovable.cc:518
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
@@ -1560,7 +1564,7 @@ msgstr "Ein Expeditionsschiff wartet auf seine Befehle."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:992
+#: ../../src/logic/map_objects/tribes/ship.cc:994
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1569,7 +1573,7 @@ msgstr "Liefert Waren"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:996
+#: ../../src/logic/map_objects/tribes/ship.cc:998
 #: ../../src/wui/seafaring_statistics_menu.cc:213
 msgctxt "ship_state"
 msgid "Idle"
@@ -1577,7 +1581,7 @@ msgstr "Untätig"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1001
+#: ../../src/logic/map_objects/tribes/ship.cc:1003
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1585,14 +1589,14 @@ msgstr "Wartet"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1005
+#: ../../src/logic/map_objects/tribes/ship.cc:1007
 #: ../../src/wui/seafaring_statistics_menu.cc:219
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "Erkundet"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1009
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
 #: ../../src/wui/seafaring_statistics_menu.cc:221
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1601,14 +1605,14 @@ msgstr "Hafenbauplatz gefunden"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1014
+#: ../../src/logic/map_objects/tribes/ship.cc:1016
 #: ../../src/wui/seafaring_statistics_menu.cc:223
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "Gründet eine Kolonie"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1351
-#: ../../src/logic/map_objects/tribes/soldier.cc:1355
+#: ../../src/logic/map_objects/tribes/soldier.cc:1371
+#: ../../src/logic/map_objects/tribes/soldier.cc:1375
 msgid "Logic error"
 msgstr "Logikfehler"
 
@@ -1631,23 +1635,23 @@ msgid ""
 "compatible with world"
 msgstr "sollte Rohstoffe %s abbauen, die es in dieser Welt nicht gibt; Stamm und Welt sind inkompatibel"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:218
+#: ../../src/logic/map_objects/tribes/worker.cc:220
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "sollte Rohstoffe des Typs %s züchten, welche in dieser Welt nicht existieren; Stamm und Welt sind  inkompatibel"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:976
+#: ../../src/logic/map_objects/tribes/worker.cc:978
 msgid "A geologist found resources."
 msgstr "Ein Geologe hat Rohstoffe entdeckt."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1852
+#: ../../src/logic/map_objects/tribes/worker.cc:1854
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "Dein %s findet keinen Weg heim und wird wahrscheinlich sterben."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1859
+#: ../../src/logic/map_objects/tribes/worker.cc:1861
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
@@ -1655,7 +1659,7 @@ msgid_plural "Workers"
 msgstr[0] "Arbeiter"
 msgstr[1] "Arbeiter"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1860
+#: ../../src/logic/map_objects/tribes/worker.cc:1862
 msgid "Worker got lost!"
 msgstr "Ein Arbeiter ging verloren!"
 
@@ -3400,7 +3404,7 @@ msgstr "Straßenbau abbrechen"
 msgid "Build roads"
 msgstr "Baue Straßen"
 
-#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:168
+#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:192
 #: ../../src/wui/interactive_spectator.cc:84
 msgid "Chat"
 msgstr "Chat"
@@ -3649,7 +3653,7 @@ msgid "Del: %s"
 msgstr "ENTF: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:178
+#: ../../src/wui/interactive_player.cc:202
 msgid "Objectives"
 msgstr "Aufgaben"
 
@@ -3859,22 +3863,22 @@ msgid "PAUSE"
 msgstr "PAUSE"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:170
+#: ../../src/wui/interactive_gamebase.cc:130
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:147
+#: ../../src/wui/interactive_player.cc:171
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
 msgstr "Statistiken"
 
-#: ../../src/wui/interactive_player.cc:182
-#: ../../src/wui/interactive_player.cc:234
+#: ../../src/wui/interactive_player.cc:206
+#: ../../src/wui/interactive_player.cc:258
 msgid "Messages"
 msgstr "Nachrichten"
 
-#: ../../src/wui/interactive_player.cc:239
+#: ../../src/wui/interactive_player.cc:263
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
