@@ -124,8 +124,6 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 	const auto text_to_draw = get_text_to_draw();
 	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
-	std::vector<std::pair<Vector2i, Widelands::MapObject*>> mapobjects_to_draw_text_for;
-
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
@@ -149,16 +147,12 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 		if (imm != nullptr && imm->get_positions(the_game).front() == field.fcoords) {
-			imm->draw(gametime, field.rendertarget_pixel, scale, dst);
-			mapobjects_to_draw_text_for.push_back(
-			   std::make_pair(field.rendertarget_pixel.cast<int>(), imm));
+			imm->draw(gametime, text_to_draw, field.rendertarget_pixel, scale, dst);
 		}
 
 		for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 		     bob = bob->get_next_bob()) {
-			bob->draw(the_game, field.rendertarget_pixel, scale, dst);
-			mapobjects_to_draw_text_for.push_back(std::make_pair(
-			   bob->calc_drawpos(the_game, field.rendertarget_pixel, scale).cast<int>(), bob));
+			bob->draw(the_game, text_to_draw, field.rendertarget_pixel, scale, dst);
 		}
 
 		// Draw work area previews.
@@ -191,9 +185,6 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
 	}
-
-	// Blit census & Statistics.
-	draw_mapobject_infotexts(dst, scale, mapobjects_to_draw_text_for, text_to_draw, nullptr);
 }
 
 /**

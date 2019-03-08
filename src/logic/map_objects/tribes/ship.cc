@@ -983,53 +983,55 @@ void Ship::sink_ship(Game& game) {
 	ship_wakeup(game);
 }
 
-std::string Ship::info_string(const MapObject::InfoStringType format) {
+void Ship::draw(const EditorGameBase& egbase,
+                const TextToDraw& draw_text,
+                const Vector2f& field_on_dst,
+                const float scale,
+                RenderTarget* dst) const {
+	Bob::draw(egbase, draw_text, field_on_dst, scale, dst);
+
 	// Show ship name and current activity
-	std::string result;
-	switch (format) {
-	case MapObject::InfoStringType::kCensus:
-		result = shipname_;
-		break;
-	case MapObject::InfoStringType::kStatistics: {
+	std::string statistics_string;
+	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			if (destination_.is_set()) {
 				/** TRANSLATORS: This is a ship state. The ship is currently transporting wares. */
-				result = pgettext("ship_state", "Shipping");
+				statistics_string = pgettext("ship_state", "Shipping");
 			} else {
 				/** TRANSLATORS: This is a ship state. The ship is ready to transport wares, but has
 				 * nothing to do. */
-				result = pgettext("ship_state", "Idle");
+				statistics_string = pgettext("ship_state", "Idle");
 			}
 			break;
 		case (ShipStates::kExpeditionWaiting):
 			/** TRANSLATORS: This is a ship state. An expedition is waiting for your commands. */
-			result = pgettext("ship_state", "Waiting");
+			statistics_string = pgettext("ship_state", "Waiting");
 			break;
 		case (ShipStates::kExpeditionScouting):
 			/** TRANSLATORS: This is a ship state. An expedition is scouting for port spaces. */
-			result = pgettext("ship_state", "Scouting");
+			statistics_string = pgettext("ship_state", "Scouting");
 			break;
 		case (ShipStates::kExpeditionPortspaceFound):
 			/** TRANSLATORS: This is a ship state. An expedition has found a port space. */
-			result = pgettext("ship_state", "Port Space Found");
+			statistics_string = pgettext("ship_state", "Port Space Found");
 			break;
 		case (ShipStates::kExpeditionColonizing):
 			/** TRANSLATORS: This is a ship state. An expedition is unloading wares/workers to build a
 			 * port. */
-			result = pgettext("ship_state", "Founding a Colony");
+			statistics_string = pgettext("ship_state", "Founding a Colony");
 			break;
 		case (ShipStates::kSinkRequest):
 		case (ShipStates::kSinkAnimation):
 			break;
 		}
-		result =
-		   (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() % result).str();
-	} break;
-	case MapObject::InfoStringType::kTooltip:
-		result = "";
+		statistics_string = (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_OK.hex_value() %
+		                     statistics_string)
+		                       .str();
 	}
-	return result;
+
+	do_draw_info(draw_text, shipname_, statistics_string, calc_drawpos(egbase, field_on_dst, scale),
+	             scale, dst);
 }
 
 void Ship::log_general_info(const EditorGameBase& egbase) const {
