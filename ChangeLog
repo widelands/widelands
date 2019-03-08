@@ -2,12 +2,12 @@
 
 ### Animations, Icons and Overlays
 
-  - Implemented scaling support for animations
   - New graphics for field selectors and field action tabs
   - Special field selector for road building mode
   - Added missing call to get_rand_anim when a soldier is dying
   - Added missing working animations for barbarians big inn and woor hardener
   - Each tribe now has individual resource indicator graphics
+  - Added util to rename animation files in bulk.
   - Fixed bug #1639253: Add missing walkload animation to Atlantean smoker
 
 
@@ -30,6 +30,13 @@
   - 2 new missions for the Empire campaign
   - 2 new missions for the new Frisians tribe
   - Tweaked timings in tutorials and scenarios
+  - Updated the Economy tutorial to match the new, enhanced encyclopedia
+  - Fixed bug #1639514: Barbarian campaign, scenario 2: yellow brother bails out
+  - Fixed bug #1656192: Economy tutorial assumes window is open
+
+
+### Scripting
+
   - Changes and additions to Lua methods and objects:
     - New method player:get_produced_wares_count()
     - New object LuaMap  -> LuaEconomy.
@@ -41,9 +48,11 @@
   - Added capability to add custom scenario buildings
   - Allow writing and loading of campaign data, so that some scenario state can
     be transferred from one scenario to the next in campaigns.
-  - Updated the Economy tutorial to match the new, enhanced encyclopedia
-  - Fixed bug #1639514: Barbarian campaign, scenario 2: yellow brother bails out
-  - Fixed bug #1656192: Economy tutorial assumes window is open
+  - Do not broadcast Lua coroutine error messages to empty player slots.
+    Also, use richtext_escape on them.
+  - Orthogonal design for mapobject program names
+  - Fixed bug for Wood Gnome in which a destroyed player would gain infinite
+    points. Also, no longer calculate score for a defeated player.
   - Fixed bug #1670065: Random tree growth can block building sites needed to
                         progress in scenario
   - Fixed bug #1688655: lua func "place_building_in_region" not work for mines
@@ -144,8 +153,6 @@
   - Only cancel expedition if there is a reachable portdock. Show a warning
     message to owner.
   - Shifted ware hotspot definition from WorkerDescr to CarrierDescr
-  - Fixed bug for Wood Gnome in which a destroyed player would gain infinite
-    points. Also, no longer calculate score for a defeated player.
   - Fixed a bug where higher-level workers wouldn't occupy lower-level workers'
     working position slots in productionsites
   - The port now conquers every location where its military influence is higher
@@ -447,11 +454,10 @@
 
   - Moved utils/fix_lua_tabs.py to utils/fix_formatting.py and added calls to
     clang-format and pyformat.
-  - Added util to rename animation files in bulk.
   - Cleaned up Windows utils
   - Removed unused images
   - Updated Eris to version 1.1.2 (Lua 5.3.4)
-  - Fixed a series of compiler warnings for clang and Windows.
+  - Fixed a series of compiler warnings for clang, gcc and Windows.
   - The ProductionSiteDescr constructor still contained some checks from the
     time when they used to inherit from MilitarysiteDescr. Removed this obsolete
     code and made working_positions and programs mandatory.
@@ -471,11 +477,8 @@
   - Split new function cleanup_portspaces() from allows_seafaring(), and
     refactored port spaces checks.
   - Only recalculate whether a map allows seafaring when something has changed
-  - Do not broadcast Lua coroutine error messages to empty player slots.
-    Also, use richtext_escape on them.
   - Economies are now mapped to global serials and kept as unique_ptr in the
     Player objects
-  - Orthogonal design for mapobject program names
   - Exit gracefully if user specifies a datadir that doesn't exist
   - More strict sanitizing of chat messages
   - Printing a welcome message on joining the metaserver
