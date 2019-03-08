@@ -263,7 +263,8 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 
 	std::set<FCoords> coords_to_check;
 
-	ScopedTimer timer("Calculating valuable fields took %ums");
+	log("Collecting valuable fields ... ");
+	ScopedTimer timer("took %ums");
 
 	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
 	// initialized with the given radius around the coordinates
@@ -342,12 +343,13 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 		}
 	}
 
-	log("Found %" PRIuS " valuable fields\n", result.size());
+	log("%" PRIuS " found ... ", result.size());
 	return result;
 }
 
 std::set<FCoords> Map::calculate_all_fields_excluding_caps(NodeCaps caps) const {
-	ScopedTimer timer("Calculating valuable fields took %ums");
+	log("Collecting valuable fields ... ");
+	ScopedTimer timer("took %ums");
 
 	std::set<FCoords> result;
 	for (MapIndex i = 0; i < max_index(); ++i) {
@@ -357,7 +359,7 @@ std::set<FCoords> Map::calculate_all_fields_excluding_caps(NodeCaps caps) const 
 		}
 	}
 
-	log("Found %" PRIuS " valuable fields\n", result.size());
+	log("%" PRIuS " found ... ", result.size());
 	return result;
 }
 

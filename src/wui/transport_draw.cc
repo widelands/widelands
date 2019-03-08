@@ -26,7 +26,11 @@
 
 namespace Widelands {
 
-void Flag::draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) {
+void Flag::draw(uint32_t gametime,
+                const TextToDraw,
+                const Vector2f& point_on_dst,
+                float scale,
+                RenderTarget* dst) {
 	static struct {
 		float x, y;
 	} ware_offsets[8] = {{-5.f, 1.f},  {-1.f, 3.f},  {3.f, 3.f},  {7.f, 1.f},
@@ -50,6 +54,6 @@ void Flag::draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, Re
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void RoadBase::draw(uint32_t, const Vector2f&, float, RenderTarget*) {
+void RoadBase::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) {
 }
 }  // namespace Widelands

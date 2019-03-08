@@ -94,8 +94,6 @@ struct Road : public RoadBase {
 private:
 	void cleanup(EditorGameBase&) override;
 
-private:
-
 	void link_into_flags(EditorGameBase&) override;
 
 private:

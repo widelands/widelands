@@ -140,7 +140,7 @@ void PortDock::set_economy(Economy* e, WareWorker type) {
 		expedition_bootstrap_->set_economy(e, type);
 }
 
-void PortDock::draw(uint32_t, const Vector2f&, float, RenderTarget*) {
+void PortDock::draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) {
 	// do nothing
 }
 

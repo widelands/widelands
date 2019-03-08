@@ -93,7 +93,7 @@ protected:
 	bool init(EditorGameBase&) override;
 	void cleanup(EditorGameBase&) override;
 
-	void draw(uint32_t gametime, const Vector2f& point_on_dst, float scale, RenderTarget* dst) override;
+	void draw(uint32_t, const TextToDraw, const Vector2f&, float, RenderTarget*) override;
 
 	void set_path(EditorGameBase&, const Path&);
 
