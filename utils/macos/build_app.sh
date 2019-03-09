@@ -62,9 +62,14 @@ fi
 # If not, use the one for the installed macOS Version
 OSX_MIN_VERSION="10.7"
 SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_MIN_VERSION.sdk"
+
+OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
+OSX_MINOR=$(sw_vers -productVersion | cut -d . -f 2)
+
 if [ ! -d "$SDK_DIRECTORY" ]; then
-   OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
-   OSX_MIN_VERSION=$OSX_VERSION
+   if [ "$OSX_MINOR" -ge 9 ]; then
+      OSX_MIN_VERSION="10.9"
+   fi
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
    if [ ! -d "$SDK_DIRECTORY" ]; then
       # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
@@ -86,7 +91,8 @@ echo "   Source:      $SOURCE_DIR"
 echo "   Version:     $WLVERSION"
 echo "   Destination: $DESTINATION"
 echo "   Type:        $TYPE"
-echo "   macOS:       $OSX_MIN_VERSION"
+echo "   macOS:       $OSX_VERSION"
+echo "   Target:      $OSX_MIN_VERSION"
 echo "   Compiler:    $COMPILER"
 echo ""
 
