@@ -456,7 +456,7 @@ void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& 
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
 		// TODO(GunChleoc): Savegame compatibility, remove after Build 21
-		if (packet_version >= 1 || packet_version <= kCurrentPacketVersionCmdFlagAction) {
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
 			if (packet_version == 1) {
 				fr.unsigned_8();

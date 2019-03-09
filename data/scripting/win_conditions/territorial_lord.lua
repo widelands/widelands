@@ -32,8 +32,8 @@ return {
       -- set the objective with the game type for all players
       broadcast_objective("win_condition", wc_descname, wc_desc)
 
-      -- Table of fields that are worth conquering
-      local fields = wl.Game().map.conquerable_fields
+      -- Number of fields that are worth conquering
+      local fields = wl.Game().map:count_conquerable_fields()
 
       -- Configure how long the winner has to hold on to the territory
       local time_to_keep_territory = 20 * 60 -- 20 minutes
