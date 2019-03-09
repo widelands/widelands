@@ -24,6 +24,10 @@ local wc_trees_owned = _"Trees owned"
 return {
    name = wc_name,
    description = wc_desc,
+   init = function()
+      -- Calculate valuable fields
+      wl.Game().map:count_terrestrial_fields()
+   end,
    func = function()
    local plrs = wl.Game().players
    local game = wl.Game()
@@ -33,9 +37,6 @@ return {
 
    -- set the objective with the game type for all players
    broadcast_objective("win_condition", wc_descname, wc_desc)
-
-   -- Calculate valuable fields
-   wl.Game().map:count_terrestrial_fields()
 
    -- The function to calculate the current points.
    local _last_time_calculated = -100000
