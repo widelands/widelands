@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-01 12:45+0000\n"
+"POT-Creation-Date: 2019-03-08 07:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -212,14 +212,14 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it for x more minute(s) to win the game."
-#: ../../data/scripting/win_conditions/territorial_time.lua:63
+#: ../../data/scripting/win_conditions/territorial_time.lua:59
 #, lua-format
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:68
+#: ../../data/scripting/win_conditions/territorial_time.lua:64
 #, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
@@ -314,9 +314,9 @@ msgstr ""
 msgid "Trees owned"
 msgstr ""
 
-#: ../../data/scripting/win_conditions/wood_gnome.lua:90
+#: ../../data/scripting/win_conditions/wood_gnome.lua:85
+#: ../../data/scripting/win_conditions/wood_gnome.lua:105
 #: ../../data/scripting/win_conditions/wood_gnome.lua:110
-#: ../../data/scripting/win_conditions/wood_gnome.lua:115
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
@@ -324,16 +324,16 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:93
+#: ../../data/scripting/win_conditions/wood_gnome.lua:88
 msgid "%1$s has %2$s at the moment."
 msgstr ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:112
+#: ../../data/scripting/win_conditions/wood_gnome.lua:107
 msgid "%1$s had %2$s."
 msgstr ""
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:118
+#: ../../data/scripting/win_conditions/wood_gnome.lua:113
 msgid "The winner is %1$s with %2$s."
 msgstr ""

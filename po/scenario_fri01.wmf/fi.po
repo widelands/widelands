@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-16 06:01+0000\n"
+"POT-Creation-Date: 2019-03-01 12:45+0000\n"
 "PO-Revision-Date: 2018-03-24 18:15+0000\n"
 "Last-Translator: Jukka Pakarinen, 2018\n"
 "Language-Team: Finnish (https://www.transifex.com/widelands/teams/35159/fi/)\n"
@@ -110,7 +110,7 @@ msgid ""
 "Build a tavern, a fisher’s house, a smokery, a berry farm and a fruit "
 "collector’s house."
 msgstr ""
-"Rakenna krouvi, kalastajatorppa, savustamo, marjatarha ja hedelmätarhurin "
+"Rakenna krouvi, kalastajatorppa, savustamo, marjatarha ja hedelmänkerääjän "
 "mökki."
 
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:66
@@ -551,7 +551,7 @@ msgstr ""
 "Saadaksemme raakaa ruokaa, meidän täytyy rakentaa kalastajatorppa. Ja koska "
 "kukaan ei pidä kalasta raakana, rakenna savustamo kalojen savustamiseksi. "
 "Sen lisäksi, rakenna marjatarha marjapensaiden istuttamiseksi ja "
-"hedelmätarhurin mökki pensaiden sadon korjaamiseksi."
+"hedelmänkerääjän mökki pensaiden sadon korjaamiseksi."
 
 #. TRANSLATORS: Hauke – no rations left
 #: ../../data/campaigns/fri01.wmf/scripting/texts.lua:224

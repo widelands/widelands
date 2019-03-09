@@ -5,7 +5,7 @@
 # GunChleoc, 2016
 # GunChleoc, 2016,2018
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2018
+# Jukka Pakarinen, 2016-2019
 # Markus Hällfors <markus@hallfors.com>, 2015
 # Max, 2015
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-03 08:14+0000\n"
-"PO-Revision-Date: 2019-02-06 07:26+0000\n"
-"Last-Translator: Teppo Mäenpää <teppo@runbox.com>\n"
+"POT-Creation-Date: 2019-03-01 12:45+0000\n"
+"PO-Revision-Date: 2019-03-02 20:25+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1726,7 +1726,7 @@ msgstr "Liha ei kasva pensaissa, mutta hedelmä kasvaa."
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:8
 msgctxt "frisians_building"
 msgid "A fruit collector advertising his harvest to a landlady"
-msgstr "Hedelmätarhuri mainostaa satoaan vuokraemännälle"
+msgstr "Hedelmänkerääjä mainostaa satoaan vuokraemännälle"
 
 #. TRANSLATORS: Purpose helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:13
@@ -1738,14 +1738,14 @@ msgstr "Korjaa marjoja lähialueen pensaista"
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:18
 msgctxt "frisians_building"
 msgid "The fruit collector needs bushes full of berries within the work area."
-msgstr "Hedelmätarhuri tarvitsee marjoja täynnä olevia pensaita työskentelyalueelleen."
+msgstr "Hedelmänkerääjä tarvitsee marjoja täynnä olevia pensaita työskentelyalueelleen."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/collectors_house/helptexts.lua:23
 #, lua-format
 msgctxt "frisians_building"
 msgid "The fruit collector pauses %s before going to work again."
-msgstr "Hedelmätarhuri pitää tauko %s ennen kuin jatkaa taas työskentelyä."
+msgstr "Hedelmänkerääjä pitää tauko %s ennen kuin jatkaa taas työskentelyä."
 
 #. TRANSLATORS: Lore helptext for a building
 #: ../../data/tribes/buildings/productionsites/frisians/drinking_hall/helptexts.lua:6
@@ -3932,7 +3932,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Baskets are needed by the fruit collector to gather berries. They are woven "
 "from reed and wood by the blacksmith."
-msgstr "Koreja tarvitsevat hedelmätarhurit marjoja kerätessä. Niitä punoo seppä ruoikosta ja puusta."
+msgstr "Koreja tarvitsevat hedelmänkerääjät marjoja kerätessä. Niitä punoo seppä ruoikosta ja puusta."
 
 #. TRANSLATORS: Helptext for a ware: Beer
 #: ../../data/tribes/wares/beer/helptexts.lua:4
@@ -4309,7 +4309,7 @@ msgctxt "frisians_ware"
 msgid ""
 "Fruit are berries gathered from berry bushes by a fruit collector. They are "
 "used for rations and meals."
-msgstr "Hedelmät ovat hedelmätarhurin marjapensaista keräämiä marjoja. Niitä käytetään ruoka-annoksiin ja aterioihin."
+msgstr "Hedelmät ovat hedelmänkerääjän marjapensaista keräämiä marjoja. Niitä käytetään ruoka-annoksiin ja aterioihin."
 
 #. TRANSLATORS: Helptext for a ware: Fur
 #: ../../data/tribes/wares/fur/helptexts.lua:4

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
-"PO-Revision-Date: 2019-02-23 10:01+0000\n"
+"POT-Creation-Date: 2019-03-03 08:19+0000\n"
+"PO-Revision-Date: 2019-03-03 08:20+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -248,7 +248,7 @@ msgid "Loading tribes"
 msgstr "부족들을 불러오는 중"
 
 #: ../../src/editor/editorinteractive.cc:78
-#: ../../src/wui/interactive_player.cc:143
+#: ../../src/wui/interactive_player.cc:167
 #: ../../src/wui/interactive_spectator.cc:45
 msgid "Main menu"
 msgstr "주 화면"
@@ -268,7 +268,7 @@ msgid "Players"
 msgstr "플레이어"
 
 #: ../../src/editor/editorinteractive.cc:99
-#: ../../src/wui/interactive_player.cc:159
+#: ../../src/wui/interactive_player.cc:183
 #: ../../src/wui/interactive_spectator.cc:72
 msgid "Show building spaces (on/off)"
 msgstr "건물 공간 표시 (켜기/끄기)"
@@ -286,13 +286,13 @@ msgid "Show resources (on/off)"
 msgstr "자원 표시 (켜기/끄기)"
 
 #: ../../src/editor/editorinteractive.cc:117
-#: ../../src/wui/interactive_player.cc:155
+#: ../../src/wui/interactive_player.cc:179
 #: ../../src/wui/interactive_spectator.cc:68
 msgid "Minimap"
 msgstr "약도"
 
 #: ../../src/editor/editorinteractive.cc:120
-#: ../../src/wui/interactive_player.cc:161
+#: ../../src/wui/interactive_player.cc:185
 #: ../../src/wui/interactive_spectator.cc:75
 msgid "Reset zoom"
 msgstr "기본 배율 전환"
@@ -306,7 +306,7 @@ msgid "Redo"
 msgstr "재실행하기"
 
 #: ../../src/editor/editorinteractive.cc:138
-#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:185
+#: ../../src/wui/buildingwindow.cc:354 ../../src/wui/interactive_player.cc:209
 msgid "Help"
 msgstr "도움말"
 
@@ -334,13 +334,13 @@ msgstr "저장되지 않은 지도"
 msgid "The map has not been saved, do you really want to quit?"
 msgstr "지도가 저장되지 않았는데, 종료하기를 원하십니까?"
 
-#: ../../src/editor/editorinteractive.cc:617
+#: ../../src/editor/editorinteractive.cc:615
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:143
 msgid "Creating empty map…"
 msgstr "빈 지도를 만드는 중…"
 
 #. * TRANSLATORS: Default name for new map
-#: ../../src/editor/editorinteractive.cc:621
+#: ../../src/editor/editorinteractive.cc:619
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:150
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:531
 #: ../../src/editor/ui_menus/main_menu_save_map.cc:141
@@ -349,7 +349,7 @@ msgid "No Name"
 msgstr "이름 없음"
 
 #. * TRANSLATORS: Map author name when it hasn't been set yet
-#: ../../src/editor/editorinteractive.cc:625
+#: ../../src/editor/editorinteractive.cc:623
 #: ../../src/editor/ui_menus/main_menu_new_map.cc:151
 #: ../../src/editor/ui_menus/main_menu_random_map.cc:532
 #: ../../src/logic/map.h:162
@@ -357,7 +357,7 @@ msgctxt "author_name"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../../src/editor/editorinteractive.cc:632
+#: ../../src/editor/editorinteractive.cc:630
 #, c-format
 msgid "Loading map “%s”…"
 msgstr "지도 “%s”를 불러오는 중…"
@@ -1122,7 +1122,7 @@ msgid "Not set"
 msgstr "설정되지 않음"
 
 #: ../../src/logic/game.cc:214 ../../src/logic/game.cc:266
-#: ../../src/logic/game.cc:336 ../../src/logic/game.cc:371
+#: ../../src/logic/game.cc:337 ../../src/logic/game.cc:372
 msgid "Preloading map"
 msgstr "지도를 미리 불러오는 중"
 
@@ -1134,31 +1134,35 @@ msgstr "지형을 불러오는 중"
 msgid "Loading map…"
 msgstr "지도 불러오는 중..."
 
-#: ../../src/logic/game.cc:349 ../../src/logic/game.cc:388
+#: ../../src/logic/game.cc:318
+msgid "Initializing game…"
+msgstr ""
+
+#: ../../src/logic/game.cc:350 ../../src/logic/game.cc:389
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1424
 msgid "Loading…"
 msgstr "불러오는 중..."
 
-#: ../../src/logic/game.cc:451
+#: ../../src/logic/game.cc:452
 msgid "Creating player infrastructure"
 msgstr "플레이어 환경 생성 중"
 
-#: ../../src/logic/game.cc:462 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr "시작 위치를 찾을 수 없음"
 
-#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:223
+#: ../../src/logic/game.cc:464 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting position.\n"
 "You can manually add a starting position with the Widelands Editor to fix this problem."
 msgstr "Widelands는 플레이어 %u의 시작 위치가 없어서 게임을 시작할 수가 없습니다.\n이 문제를 해결하려면 Widelands 편집기에서 시작 위치를 수동으로 추가해야 합니다."
 
-#: ../../src/logic/game.cc:853
+#: ../../src/logic/game.cc:854
 msgid "Trade Offer"
 msgstr "거래 제안"
 
-#: ../../src/logic/game.cc:855
+#: ../../src/logic/game.cc:856
 msgid "This market has received a new trade offer."
 msgstr "이 시장은 새로운 무역 제안을 받았습니다."
 
@@ -1224,7 +1228,7 @@ msgstr ""
 msgid "No description defined"
 msgstr "정의된 설명이 없음"
 
-#: ../../src/logic/map_objects/immovable.cc:535
+#: ../../src/logic/map_objects/immovable.cc:518
 #: ../../src/logic/map_objects/tribes/constructionsite.cc:104
 #, c-format
 msgid "%i%% built"
@@ -1540,7 +1544,7 @@ msgstr "탐험선이 당신의 명령을 기다리는 중입니다."
 
 #. * TRANSLATORS: This is a ship state. The ship is currently transporting
 #. wares.
-#: ../../src/logic/map_objects/tribes/ship.cc:992
+#: ../../src/logic/map_objects/tribes/ship.cc:994
 #: ../../src/wui/seafaring_statistics_menu.cc:215
 msgctxt "ship_state"
 msgid "Shipping"
@@ -1549,7 +1553,7 @@ msgstr "선적하는 중"
 #. * TRANSLATORS: This is a ship state. The ship is ready to transport wares,
 #. but has
 #. * nothing to do.
-#: ../../src/logic/map_objects/tribes/ship.cc:996
+#: ../../src/logic/map_objects/tribes/ship.cc:998
 #: ../../src/wui/seafaring_statistics_menu.cc:213
 msgctxt "ship_state"
 msgid "Idle"
@@ -1557,7 +1561,7 @@ msgstr "대기중??"
 
 #. * TRANSLATORS: This is a ship state. An expedition is waiting for your
 #. commands.
-#: ../../src/logic/map_objects/tribes/ship.cc:1001
+#: ../../src/logic/map_objects/tribes/ship.cc:1003
 #: ../../src/wui/seafaring_statistics_menu.cc:217
 msgctxt "ship_state"
 msgid "Waiting"
@@ -1565,14 +1569,14 @@ msgstr "대기하는 중"
 
 #. * TRANSLATORS: This is a ship state. An expedition is scouting for port
 #. spaces.
-#: ../../src/logic/map_objects/tribes/ship.cc:1005
+#: ../../src/logic/map_objects/tribes/ship.cc:1007
 #: ../../src/wui/seafaring_statistics_menu.cc:219
 msgctxt "ship_state"
 msgid "Scouting"
 msgstr "정찰하는 중"
 
 #. * TRANSLATORS: This is a ship state. An expedition has found a port space.
-#: ../../src/logic/map_objects/tribes/ship.cc:1009
+#: ../../src/logic/map_objects/tribes/ship.cc:1011
 #: ../../src/wui/seafaring_statistics_menu.cc:221
 msgctxt "ship_state"
 msgid "Port Space Found"
@@ -1581,14 +1585,14 @@ msgstr "항구 공간 발견"
 #. * TRANSLATORS: This is a ship state. An expedition is unloading
 #. wares/workers to build a
 #. * port.
-#: ../../src/logic/map_objects/tribes/ship.cc:1014
+#: ../../src/logic/map_objects/tribes/ship.cc:1016
 #: ../../src/wui/seafaring_statistics_menu.cc:223
 msgctxt "ship_state"
 msgid "Founding a Colony"
 msgstr "식민지 건설 중"
 
-#: ../../src/logic/map_objects/tribes/soldier.cc:1351
-#: ../../src/logic/map_objects/tribes/soldier.cc:1355
+#: ../../src/logic/map_objects/tribes/soldier.cc:1371
+#: ../../src/logic/map_objects/tribes/soldier.cc:1375
 msgid "Logic error"
 msgstr "논리 오류"
 
@@ -1611,30 +1615,30 @@ msgid ""
 "compatible with world"
 msgstr "세계에 존재하지 않는 자원 %s 를 채굴해야 함; 부족은 세계에 부적합함"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:218
+#: ../../src/logic/map_objects/tribes/worker.cc:220
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr "세계에 존재하지 않는 자원 종류 %s 를 사육해야 함; 부족은 세계에 부적합함"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:976
+#: ../../src/logic/map_objects/tribes/worker.cc:978
 msgid "A geologist found resources."
 msgstr "지질학자가 자원을 발견했습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1852
+#: ../../src/logic/map_objects/tribes/worker.cc:1854
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr "당신의 %s이 집으로 가는 길을 찾을 수 없어서 죽을 것 같습니다."
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1859
+#: ../../src/logic/map_objects/tribes/worker.cc:1861
 #: ../../src/wui/productionsitewindow.cc:100
 #: ../../src/wui/productionsitewindow.cc:125
 msgid "Worker"
 msgid_plural "Workers"
 msgstr[0] "일꾼"
 
-#: ../../src/logic/map_objects/tribes/worker.cc:1860
+#: ../../src/logic/map_objects/tribes/worker.cc:1862
 msgid "Worker got lost!"
 msgstr "일꾼이 길을 잃었네요!"
 
@@ -3372,7 +3376,7 @@ msgstr "도로 취소"
 msgid "Build roads"
 msgstr "도로 건설"
 
-#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:168
+#: ../../src/wui/game_chat_menu.cc:53 ../../src/wui/interactive_player.cc:192
 #: ../../src/wui/interactive_spectator.cc:84
 msgid "Chat"
 msgstr "채팅"
@@ -3619,7 +3623,7 @@ msgid "Del: %s"
 msgstr "삭제: %s"
 
 #: ../../src/wui/game_objectives_menu.cc:42
-#: ../../src/wui/interactive_player.cc:178
+#: ../../src/wui/interactive_player.cc:202
 msgid "Objectives"
 msgstr "목표"
 
@@ -3829,22 +3833,22 @@ msgid "PAUSE"
 msgstr "일시정지"
 
 #. * TRANSLATORS: actual_speed (desired_speed)
-#: ../../src/wui/interactive_gamebase.cc:170
+#: ../../src/wui/interactive_gamebase.cc:130
 #, c-format
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: ../../src/wui/interactive_player.cc:147
+#: ../../src/wui/interactive_player.cc:171
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
 msgstr "통계"
 
-#: ../../src/wui/interactive_player.cc:182
-#: ../../src/wui/interactive_player.cc:234
+#: ../../src/wui/interactive_player.cc:206
+#: ../../src/wui/interactive_player.cc:258
 msgid "Messages"
 msgstr "메시지"
 
-#: ../../src/wui/interactive_player.cc:239
+#: ../../src/wui/interactive_player.cc:263
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
