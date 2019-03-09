@@ -452,6 +452,10 @@ public:
 		return &objectives_;
 	}
 
+	std::set<FCoords>* mutable_valuable_fields() {
+		return &valuable_fields_;
+	}
+
 	/// Returns the military influence on a location from an area.
 	MilitaryInfluence calc_influence(Coords, Area<>) const;
 
