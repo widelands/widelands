@@ -166,7 +166,7 @@ public:
 	void recalc_for_field_area(const World& world, Area<FCoords>);
 
 	/**
-	 *  Calculates and returns a list of the fields that could be conquered by a player throughout a game.
+	 *  If the valuable fields are empty, calculates all fields that could be conquered by a player throughout a game.
 	 *  Useful for territorial win conditions.
 	 *  Returns the amount of valuable fields.
 	 */

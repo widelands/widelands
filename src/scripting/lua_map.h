@@ -93,7 +93,6 @@ public:
 	int get_height(lua_State*);
 	int get_player_slots(lua_State*);
 
-
 	/*
 	 * Lua methods
 	 */

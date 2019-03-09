@@ -1280,7 +1280,6 @@ int LuaMap::get_height(lua_State* L) {
 	return 1;
 }
 
-
 /* RST
    .. attribute:: player_slots
 
@@ -1310,13 +1309,12 @@ int LuaMap::get_player_slots(lua_State* L) {
 /* RST
    .. method:: count_conquerable_fields()
 
-      (RO) Calculates and returns all reachable fields that a player could build on.
+      (RO) Counts all reachable fields that a player could build on.
 
       **Note:** The fields are only calculated afresh when this is called for the first time.
 
 	  :returns: An integer with the amount of fields.
 */
-// NOCOM document
 int LuaMap::count_conquerable_fields(lua_State* L) {
 	lua_pushinteger(L, get_egbase(L).mutable_map()->count_all_conquerable_fields());
 	return 1;
