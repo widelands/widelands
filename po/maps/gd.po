@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2018
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-10 06:56+0000\n"
-"PO-Revision-Date: 2018-09-10 12:39+0000\n"
+"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"PO-Revision-Date: 2019-02-28 09:04+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -117,7 +117,7 @@ msgstr "Atlantaich"
 
 #: ../../data/campaigns/campaigns.conf:47
 msgid "Challenging. Introduces the Atlanteans"
-msgstr "Dùbhlanach. Bheir e eòlas air na h-Atlantaich dhut"
+msgstr "Dùbhlanach. Bheir e eòlas air na h-Atlantaich dhut."
 
 #: ../../data/campaigns/campaigns.conf:48
 msgid ""
@@ -138,7 +138,7 @@ msgstr "Frìoslannaich"
 
 #: ../../data/campaigns/campaigns.conf:56
 msgid "For advanced players. Introduces the Frisians"
-msgstr "Do chluicheadairean adhartach. Bheir e eòlas air na Frìoslannaich dhut"
+msgstr "Do chluicheadairean adhartach. Bheir e eòlas air na Frìoslannaich dhut."
 
 #: ../../data/campaigns/campaigns.conf:57
 msgid ""
@@ -566,7 +566,7 @@ msgid ""
 "For centuries, you’ve lived peacefully side by side with the other tribe on "
 "the neighboring island. This peace seems to come to an end now – your "
 "neighbor has begun to expand."
-msgstr "Bhiodh sìth am measg an dà threubh san dà eilean fad linntean. Thàinig crìoch air a-nis a-rèir coltais ’s do nàbaidh a’ tòiseachadh air a ranntair a mheudachadh."
+msgstr "Bhiodh sìth am measg an dà threubh san dà eilean fad linntean. Thàinig crìoch air a-nis a-rèir coltais ’s do nàbaidh a’ tòiseachadh air a ranntair a leudachadh."
 
 #: ../../data/maps/Kings_and_Queens_v2.wmf/elemental:8
 msgid "Kings and Queens"
@@ -686,7 +686,7 @@ msgid ""
 "building a single ship, players are advised to make ports and shipyards a "
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
-msgstr "Tha cnap-starra eadar-dhealaichte ro gach cluicheadair a chuireas bacadh air meudachadh ach tha iomadh dòigh ann gus faighinn seachad orra. Ged a ghabhas an IF a ruaig gun longan a thogail, mholamaid gun cuir thu prìomhachas air togail phort is dhocannan – bidh triallan gu feum dhut an-còmhnaidh agus iadsan an t-slighe as luaithe gus òr a lorg."
+msgstr "Tha cnap-starra eadar-dhealaichte ro gach cluicheadair a chuireas bacadh air leudachadh ach tha iomadh dòigh ann gus faighinn seachad orra. Ged a ghabhas an IF a ruaig gun longan a thogail, mholamaid gun cuir thu prìomhachas air togail phort is dhocannan – bidh triallan gu feum dhut an-còmhnaidh agus iadsan an t-slighe as luaithe gus òr a lorg."
 
 #: ../../data/maps/Riverlands.wmf/elemental:8
 msgid "Riverlands"
@@ -821,7 +821,7 @@ msgstr "Am bealach"
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
-msgstr "Tha dà phrionnsa air tuineachadh san roinn seo. Tha iad a’ meudachadh an dùthchannan a-nis gun fhiosta air nach eil iad ’nan aonar!"
+msgstr "Tha dà phrionnsa air tuineachadh san roinn seo. Tha iad a’ leudachadh an ranntairean a-nis gun fhiosta air nach eil iad ’nan aonar!"
 
 #: ../../data/maps/The_Thaw.wmf/elemental:8
 msgid "The Thaw"
@@ -957,4 +957,4 @@ msgid ""
 " 4 players’ map, with a black AI to add a complication to the expansion of "
 "the other players, or you can play as a challenge with the black player "
 "against the other 4 (VERY difficult)."
-msgstr "Tha an cluicheadair dubh cuairtichte sa mheadhan gun stòrasan aige, mar sin tha trì dòighean ann gus am mapa seo a chleachdadh: gun chluicheadair dubh airson mapa àbhaisteach le 4 cluicheadairean, le IF dubh gus am meudachadh a dhèanamh nas toinnte dha na cluicheadairean eile no mar dhùbhlan leis a’ chluicheadair dhubh an aghaidh nan ceathrar eile (cianail fhèin doirbh)."
+msgstr "Tha an cluicheadair dubh cuairtichte sa mheadhan gun stòrasan aige, mar sin tha trì dòighean ann gus am mapa seo a chleachdadh: gun chluicheadair dubh airson mapa àbhaisteach le 4 cluicheadairean, le IF dubh gus an leudachadh a dhèanamh nas toinnte dha na cluicheadairean eile no mar dhùbhlan leis a’ chluicheadair dhubh an aghaidh nan ceathrar eile (cianail fhèin doirbh)."

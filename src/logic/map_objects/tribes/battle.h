@@ -74,6 +74,8 @@ public:
 		return second_;
 	}
 
+	uint32_t get_pending_damage(const Soldier* for_whom) const;
+
 	// Returns the other soldier involved in this battle. CHECKs that the given
 	// soldier is participating in this battle. Can return nullptr, probably when the
 	// opponent has died.

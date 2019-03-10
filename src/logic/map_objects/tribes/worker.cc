@@ -138,15 +138,17 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 		totalchance += 8 * amount;
 
 		// Add penalty for fields that are running out
-		if (amount == 0)
-			// we already know it's completely empty, so punish is less
-			totalchance += 1;
-		else if (amount <= 2)
-			totalchance += 6;
-		else if (amount <= 4)
-			totalchance += 4;
-		else if (amount <= 6)
-			totalchance += 2;
+		// Except for totally depleted fields or wrong ressource fields
+		// if we already know there is no ressource (left) we won't mine there
+		if (amount > 0) {
+			if (amount <= 2) {
+				totalchance += 6;
+			} else if (amount <= 4) {
+				totalchance += 4;
+			} else if (amount <= 6) {
+				totalchance += 2;
+			}
+		}
 	} while (mr.advance(*map));
 
 	if (totalres == 0) {
@@ -2996,6 +2998,7 @@ void Worker::draw_inner(const EditorGameBase& game,
  * Draw the worker, taking the carried ware into account.
  */
 void Worker::draw(const EditorGameBase& egbase,
+                  const TextToDraw&,
                   const Vector2f& field_on_dst,
                   const float scale,
                   RenderTarget* dst) const {

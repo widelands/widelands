@@ -1474,7 +1474,8 @@ void WLApplication::cleanup_replays() {
 			try {
 				g_fs->fs_unlink(filename);
 			} catch (const FileError& e) {
-				log("WLApplication::cleanup_replays: File %s couldn't be deleted.\n", filename.c_str());
+				log("WLApplication::cleanup_replays: File %s couldn't be deleted: %s\n",
+				    filename.c_str(), e.what());
 			}
 		}
 	}
