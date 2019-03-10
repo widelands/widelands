@@ -119,7 +119,7 @@ void FullscreenMenuMain::clicked_ok() {
 void FullscreenMenuMain::layout() {
 	FullscreenMenuMainMenu::layout();
 
-	logo_icon_.set_pos(Vector2i((get_w() - logo_icon_.get_w()) / 2, title_y_));
+	logo_icon_.set_pos(Vector2i((get_w() - logo_icon_.get_w()) / 2, title_y_ + logo_icon_.get_h() / 4));
 
 	const int text_height = 0.5 * version.get_h() + padding_;
 	version.set_pos(Vector2i(get_w() - version.get_w(), get_h() - text_height));
