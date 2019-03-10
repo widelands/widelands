@@ -234,7 +234,7 @@ protected:
 	TextToDraw get_text_to_draw() const;
 
 	// Returns the current overlays for the work area previews.
-	std::map<Widelands::Coords, const Image*> get_workarea_overlays(const Widelands::Map& map) const;
+	std::set<std::map<Widelands::TCoords<>, uint8_t>> get_workarea_overlays(const Widelands::Map& map) const;
 
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.
@@ -304,7 +304,6 @@ private:
 
 	UI::UniqueWindow::Registry debugconsole_;
 	std::unique_ptr<UniqueWindowHandler> unique_window_handler_;
-	std::vector<const Image*> workarea_pics_;
 	BuildhelpOverlay buildhelp_overlays_[Widelands::Field::Buildhelp_None];
 };
 

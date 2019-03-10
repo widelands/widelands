@@ -109,14 +109,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
      avg_usframetime_(0),
      buildroad_(nullptr),
      road_build_player_(0),
-     unique_window_handler_(new UniqueWindowHandler()),
-     // Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
-     workarea_pics_{g_gr->images().get("images/wui/overlays/workarea123.png"),
-                    g_gr->images().get("images/wui/overlays/workarea23.png"),
-                    g_gr->images().get("images/wui/overlays/workarea3.png"),
-                    g_gr->images().get("images/wui/overlays/workarea12.png"),
-                    g_gr->images().get("images/wui/overlays/workarea2.png"),
-                    g_gr->images().get("images/wui/overlays/workarea1.png")} {
+     unique_window_handler_(new UniqueWindowHandler()) {
 
 	// Load the buildhelp icons.
 	{
@@ -305,12 +298,38 @@ void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands
 	workarea_previews_[coords] = &workarea_info;
 }
 
-std::map<Coords, const Image*>
-InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
-	std::map<Coords, const Image*> result;
-	for (const auto& pair : workarea_previews_) {
-		const Coords& coords = pair.first;
-		const WorkareaInfo* workarea_info = pair.second;
+// Helper function to get the correct index for InteractivePlayer::workarea_colors
+static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
+	bool inner = (a == 0 || a == 3 || a == 5) && (b == 0 || b == 3 || b == 5) && (c == 0 || c == 3 || c == 5);
+	bool medium = (a == 0 || a == 1 || a == 3 || a == 4) && (b == 0 || b == 1 || b == 3 || b == 4) &&
+			(c == 0 || c == 1 || c == 3 || c == 4);
+	bool outer = a <= 2 && b <= 2 && c <= 2;
+	if (medium && outer && inner) {
+		return 0;
+	}
+	if (medium && outer) {
+		return 1;
+	}
+	if (medium && inner) {
+		return 3;
+	}
+	if (medium) {
+		return 4;
+	}
+	if (outer) {
+		assert(!inner);
+		return 2;
+	}
+	assert(inner);
+	return 5;
+}
+
+std::set<std::map<TCoords<>, uint8_t>> InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
+	std::set<std::map<TCoords<>, uint8_t>> result_set;
+	for (const auto& wa_pair : workarea_previews_) {
+		std::map<Coords, uint8_t> intermediate_result;
+		const Coords& coords = wa_pair.first;
+		const WorkareaInfo* workarea_info = wa_pair.second;
 		WorkareaInfo::size_type wa_index;
 		switch (workarea_info->size()) {
 		case 0:
@@ -337,13 +356,36 @@ InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
 			hollow_area.radius = it->first;
 			Widelands::MapHollowRegion<> mr(map, hollow_area);
 			do {
-				result[mr.location()] = workarea_pics_[wa_index];
+				intermediate_result[mr.location()] = wa_index;
 			} while (mr.advance(map));
 			wa_index++;
 			hollow_area.hole_radius = hollow_area.radius;
 		}
+
+		std::map<TCoords<>, uint8_t> result;
+		for (const auto& pair : intermediate_result) {
+			Coords c;
+			map.get_brn(pair.first, &c);
+			const auto brn = intermediate_result.find(c);
+			if (brn == intermediate_result.end()) {
+				continue;
+			}
+			map.get_bln(pair.first, &c);
+			const auto bln = intermediate_result.find(c);
+			map.get_rn(pair.first, &c);
+			const auto rn = intermediate_result.find(c);
+			if (bln != intermediate_result.end()) {
+				result[TCoords<>(pair.first, Widelands::TriangleIndex::D)] = workarea_max(
+						pair.second, brn->second, bln->second);
+			}
+			if (rn != intermediate_result.end()) {
+				result[TCoords<>(pair.first, Widelands::TriangleIndex::R)] = workarea_max(
+						pair.second, brn->second, rn->second);
+			}
+		}
+		result_set.emplace(result);
 	}
-	return result;
+	return result_set;
 }
 
 void InteractiveBase::hide_workarea(const Widelands::Coords& coords) {
