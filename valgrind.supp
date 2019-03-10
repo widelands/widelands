@@ -110,24 +110,38 @@
    ...
 }
 {
-   ZipValue8
+   ZipWriteValue8
    Memcheck:Value8
    ...
    fun:zipWriteInFileInZip
    ...
 }
 {
-   ZipCond
+   ZipWriteCond
+   Memcheck:Cond
+   ...
+   fun:zipWriteInFileInZip
+   ...
+}
+{
+   ZipCloseCond
    Memcheck:Cond
    ...
    fun:zipCloseFileInZip
    ...
 }
 {
-   <insert_a_suppression_name_here>
+   ZipCloseParam
    Memcheck:Param
    write(buf)
    ...
    fun:zipCloseFileInZip
+   ...
+}
+{
+   ErisLeak
+   Memcheck:Leak
+   ...
+   fun:l_alloc
    ...
 }
