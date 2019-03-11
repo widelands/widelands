@@ -52,7 +52,7 @@ private:
 
 	void gl_draw(int gl_texture, float z_value);
 
-	// Adds a vertex to the end of vertices with data from 'field' and 'texture_coordinates'.
+	// Adds a vertex to the end of vertices with data from 'field' in order to apply the specified 'overlay'.
 	void add_vertex(const FieldsToDraw::Field& field, RGBAColor overlay);
 
 	// The program used for drawing the workarea overlay.

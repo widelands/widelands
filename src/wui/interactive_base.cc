@@ -310,30 +310,44 @@ void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands
 	workarea_previews_[coords] = &workarea_info;
 }
 
-// Helper function to get the correct index for graphic/gl/workarea_program.cc::workarea_colors
+/* Helper function to get the correct index for graphic/gl/workarea_program.cc::workarea_colors .
+ * a, b, c are the indices for the three nodes bordering this triangle.
+ * This function returns the biggest workarea type that matches all three corners.
+ * The indices stand for:
+ * 0 – all three circles
+ * 1 – medium and outer circle
+ * 2 – outer circle
+ * 3 – inner and medium circle
+ * 4 – medium circle
+ * 5 – inner circle
+ * We currently assume that no building will have more than three workarea circles.
+ */
 static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
+	// Whether all nodes are part of the inner circle
 	bool inner = (a == 0 || a == 3 || a == 5) && (b == 0 || b == 3 || b == 5) && (c == 0 || c == 3 || c == 5);
+	// Whether all nodes are part of the medium circle
 	bool medium = (a == 0 || a == 1 || a == 3 || a == 4) && (b == 0 || b == 1 || b == 3 || b == 4) &&
 			(c == 0 || c == 1 || c == 3 || c == 4);
+	// Whether all nodes are part of the outer circle
 	bool outer = a <= 2 && b <= 2 && c <= 2;
-	if (medium && outer && inner) {
-		return 0;
-	}
-	if (medium && outer) {
-		return 1;
-	}
-	if (medium && inner) {
-		return 3;
-	}
+
 	if (medium) {
-		return 4;
-	}
-	if (outer) {
+		if (outer && inner) {
+			return 0;
+		} else if (inner) {
+			return 3;
+		} else if (outer) {
+			return 1;
+		} else {
+			return 4;
+		}
+	} else if (outer) {
 		assert(!inner);
 		return 2;
+	} else {
+		assert(inner);
+		return 5;
 	}
-	assert(inner);
-	return 5;
 }
 
 Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
