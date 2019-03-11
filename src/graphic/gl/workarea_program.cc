@@ -60,7 +60,7 @@ void WorkareaProgram::gl_draw(int gl_texture, float z_value) {
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }
 
-constexpr kWorkareaTransparency = 127;
+constexpr uint8_t kWorkareaTransparency = 127;
 static RGBAColor workarea_colors[] {
 	RGBAColor(63, 31, 127, kWorkareaTransparency), // All three circles
 	RGBAColor(127, 63, 0, kWorkareaTransparency),  // Medium and outer circle
