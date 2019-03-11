@@ -19,10 +19,7 @@
 
 #include "map_io/map_resources_packet.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "base/log.h"
-#include "base/scoped_timer.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -34,7 +31,7 @@
 
 namespace Widelands {
 
-constexpr uint16_t kCurrentPacketVersion = 2;
+constexpr uint16_t kCurrentPacketVersion = 1;
 
 void MapResourcesPacket::read(FileSystem& fs,
                               EditorGameBase& egbase,
@@ -47,7 +44,7 @@ void MapResourcesPacket::read(FileSystem& fs,
 
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version >= 1 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			int32_t const nr_res = fr.unsigned_16();
 			if (world.get_nr_resources() < nr_res)
 				log("WARNING: Number of resources in map (%i) is bigger than in world "
@@ -62,51 +59,18 @@ void MapResourcesPacket::read(FileSystem& fs,
 				int32_t const res = world.get_resource(resource_name.c_str());
 				if (res == Widelands::INVALID_INDEX)
 					throw GameDataError(
-					   "MapResourcesPacket: Resource '%s' exists in map but not in world", resource_name.c_str());
+					   "resource '%s' exists in map but not in world", resource_name.c_str());
 				smap[id] = res;
 			}
 
-			if (packet_version == 1) {
-				// TODO(GunChleoc): Savegame compatibility, remove after Build21
-				for (uint16_t y = 0; y < map->get_height(); ++y) {
-					for (uint16_t x = 0; x < map->get_width(); ++x) {
-						DescriptionIndex const id = fr.unsigned_8();
-						ResourceAmount const amount = fr.unsigned_8();
-						ResourceAmount const start_amount = fr.unsigned_8();
-						const auto fcoords = map->get_fcoords(Coords(x, y));
-						map->initialize_resources(fcoords, smap[id], start_amount);
-						map->set_resources(fcoords, amount);
-					}
-				}
-			} else {
-				// String of entries of the form id-amount-initial_amount|
-				std::string input = fr.c_string();
-				std::vector<std::string> entries;
-				boost::split(entries, input, boost::is_any_of("|"));
-				// Check for correct size. We have a dangling |, so we expect 1 extra entry.
-				if (static_cast<int>((entries.size() - 1)) != (map->get_height() * map->get_width())) {
-					throw GameDataError(
-					   "MapResourcesPacket: There should be map resources for %d fields, but we have %" PRIuS,
-								map->get_height() * map->get_width(),
-								entries.size() - 1);
-				}
-				auto iterator = entries.begin();
-				for (uint16_t y = 0; y < map->get_height(); ++y) {
-					for (uint16_t x = 0; x < map->get_width(); ++x) {
-						std::vector<std::string> addme;
-						boost::split(addme, *iterator++, boost::is_any_of("-"));
-						if (addme.size() != 3) {
-							throw GameDataError(
-							   "MapResourcesPacket: Resource info for (%d,%d) should have 3 entries (ID, amount, starting amount), but we have %" PRIuS,
-										x, y, addme.size());
-						}
-						DescriptionIndex const id = static_cast<DescriptionIndex>(atoi(addme.at(0).c_str()));
-						ResourceAmount const amount = static_cast<ResourceAmount>(atoi(addme.at(1).c_str()));
-						ResourceAmount const initial_amount = static_cast<ResourceAmount>(atoi(addme.at(2).c_str()));
-						const auto fcoords = map->get_fcoords(Coords(x, y));
-						map->initialize_resources(fcoords, smap[id], initial_amount);
-						map->set_resources(fcoords, amount);
-					}
+			for (uint16_t y = 0; y < map->get_height(); ++y) {
+				for (uint16_t x = 0; x < map->get_width(); ++x) {
+					DescriptionIndex const id = fr.unsigned_8();
+					ResourceAmount const amount = fr.unsigned_8();
+					ResourceAmount const start_amount = fr.unsigned_8();
+					const auto fcoords = map->get_fcoords(Coords(x, y));
+					map->initialize_resources(fcoords, smap[id], start_amount);
+					map->set_resources(fcoords, amount);
 				}
 			}
 		} else {
@@ -145,15 +109,20 @@ void MapResourcesPacket::write(FileSystem& fs, EditorGameBase& egbase) {
 		fw.c_string(res.name().c_str());
 	}
 
-	// Performance: We write our resource information into a single string to reduce the number of write operations
-	std::ostringstream oss;
-	for (MapIndex i = 0; i < map.max_index(); ++i) {
-		Field& f = map[i];
-		oss << static_cast<unsigned int>(f.get_resources()) << "-";
-		oss << static_cast<unsigned int>(f.get_resources_amount()) << "-";
-		oss << static_cast<unsigned int>(f.get_initial_res_amount()) << "|";
+	//  Now, all resouces as uint8_ts in order
+	//  - resource id
+	//  - amount
+	for (uint16_t y = 0; y < map.get_height(); ++y) {
+		for (uint16_t x = 0; x < map.get_width(); ++x) {
+			const Field& f = map[Coords(x, y)];
+			DescriptionIndex res = f.get_resources();
+			ResourceAmount const amount = f.get_resources_amount();
+			ResourceAmount const start_amount = f.get_initial_res_amount();
+			fw.unsigned_8(res);
+			fw.unsigned_8(amount);
+			fw.unsigned_8(start_amount);
+		}
 	}
-	fw.c_string(oss.str());
 
 	fw.write(fs, "binary/resource");
 }
