@@ -60,13 +60,13 @@ void WorkareaProgram::gl_draw(int gl_texture, float z_value) {
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 }
 
-#define WORKAREA_TRANSPARENCY 191
+#define WORKAREA_TRANSPARENCY 127
 static RGBAColor workarea_colors[] {
-	RGBAColor(31, 63, 127, WORKAREA_TRANSPARENCY), // All three circles
-	RGBAColor(63, 127, 0, WORKAREA_TRANSPARENCY),  // Medium and outer circle
-	RGBAColor(127, 0, 0, WORKAREA_TRANSPARENCY),   // Outher circle
-	RGBAColor(0, 63, 127, WORKAREA_TRANSPARENCY),  // Inner and medium circle
-	RGBAColor(0, 127, 0, WORKAREA_TRANSPARENCY),   // Medium circle
+	RGBAColor(63, 31, 127, WORKAREA_TRANSPARENCY), // All three circles
+	RGBAColor(127, 63, 0, WORKAREA_TRANSPARENCY),  // Medium and outer circle
+	RGBAColor(0, 127, 0, WORKAREA_TRANSPARENCY),   // Outer circle
+	RGBAColor(63, 0, 127, WORKAREA_TRANSPARENCY),  // Inner and medium circle
+	RGBAColor(127, 0, 0, WORKAREA_TRANSPARENCY),   // Medium circle
 	RGBAColor(0, 0, 127, WORKAREA_TRANSPARENCY),   // Inner circle
 };
 static inline RGBAColor apply_color(RGBAColor c1, RGBAColor c2) {

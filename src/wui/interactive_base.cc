@@ -195,8 +195,20 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 	return nullptr;
 }
 
-bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords) const {
-	return workarea_previews_.count(coords) == 1;
+bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords, const Widelands::Map* map) const {
+	if (!map) {
+		return workarea_previews_.count(coords) == 1;
+	}
+	for (const auto& pair : workarea_previews_) {
+		uint32_t radius = 0;
+		for (const auto& p : *pair.second) {
+			radius = std::max(radius, p.first);
+		}
+		if (map->calc_distance(coords, pair.first) < radius) {
+			return true;
+		}
+	}
+	return false;
 }
 
 UniqueWindowHandler& InteractiveBase::unique_windows() {
@@ -298,7 +310,7 @@ void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands
 	workarea_previews_[coords] = &workarea_info;
 }
 
-// Helper function to get the correct index for InteractivePlayer::workarea_colors
+// Helper function to get the correct index for graphic/gl/workarea_program.cc::workarea_colors
 static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 	bool inner = (a == 0 || a == 3 || a == 5) && (b == 0 || b == 3 || b == 5) && (c == 0 || c == 3 || c == 5);
 	bool medium = (a == 0 || a == 1 || a == 3 || a == 4) && (b == 0 || b == 1 || b == 3 || b == 4) &&

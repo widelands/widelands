@@ -163,7 +163,7 @@ InteractivePlayer::InteractivePlayer(Widelands::Game& g,
    : InteractiveGameBase(g, global_s, NONE, multiplayer),
      auto_roadbuild_mode_(global_s.get_bool("auto_roadbuild_mode", true)),
      flag_to_connect_(Widelands::Coords::null()),
-     workarea_cache_(nullptr) {
+     grid_marker_pic_(g_gr->images().get("images/wui/overlays/grid_marker.png")) {
 	add_toolbar_button(
 	   "wui/menus/menu_options_menu", "options_menu", _("Main menu"), &options_, true);
 	options_.open_window = [this] { new GameOptionsMenu(*this, options_, main_windows_); };
@@ -279,27 +279,6 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
-/* #define WORKAREA_TRANSPARENCY 127
-static RGBAColor workarea_colors[] {
-	RGBAColor(31, 63, 127, WORKAREA_TRANSPARENCY), // All three circles
-	RGBAColor(63, 127, 0, WORKAREA_TRANSPARENCY),  // Medium and outer circle
-	RGBAColor(127, 0, 0, WORKAREA_TRANSPARENCY),   // Outher circle
-	RGBAColor(0, 63, 127, WORKAREA_TRANSPARENCY),  // Inner and medium circle
-	RGBAColor(0, 127, 0, WORKAREA_TRANSPARENCY),   // Medium circle
-	RGBAColor(0, 0, 127, WORKAREA_TRANSPARENCY),   // Inner circle
-};
-static inline RGBAColor apply_color(RGBAColor c1, RGBAColor c2) {
-	uint8_t r = (c1.r * c1.a + c2.r * c2.a) / (c1.a + c2.a);
-	uint8_t g = (c1.g * c1.a + c2.g * c2.a) / (c1.a + c2.a);
-	uint8_t b = (c1.b * c1.a + c2.b * c2.a) / (c1.a + c2.a);
-	uint8_t a = (c1.a + c2.a) / 2;
-	return RGBAColor(r, g, b, a);
-}
-// Helper function to check whether a point is inside a triangle
-static inline float trimath_sign(float p1x, float p1y, float p2x, float p2y, float p3x, float p3y) {
-	return (p1x - p3x) * (p2y - p3y) - (p2x - p3x) * (p1y - p3y);
-} */
-
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	// In-game, selection can never be on triangles or have a radius.
 	assert(get_sel_radius() == 0);
@@ -310,98 +289,9 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const Widelands::Map& map = gbase.map();
 	const uint32_t gametime = gbase.get_gametime();
 
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, get_workarea_overlays(map), dst);
+	Workareas workareas = get_workarea_overlays(map);
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, workareas, dst);
 	const auto& road_building = road_building_overlays();
-	// const Workareas workarea_overlays = get_workarea_overlays(map);
-
-	/* if (!workarea_overlays.empty()) {
-		RGBAColor transparent(0, 0, 0, 0);
-
-		int min_x = 0;
-		int max_x = 0;
-		int min_y = 0;
-		int max_y = 0;
-		for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
-			auto& f = fields_to_draw->at(idx);
-			min_x = std::floor(std::min(static_cast<float>(min_x), f.rendertarget_pixel.x));
-			max_x = std::ceil(std::max(static_cast<float>(max_x), f.rendertarget_pixel.x));
-			min_y = std::floor(std::min(static_cast<float>(min_y), f.rendertarget_pixel.y));
-			max_y = std::ceil(std::max(static_cast<float>(max_y), f.rendertarget_pixel.y));
-		}
-		if (workarea_cache_) {
-			delete workarea_cache_;
-		}
-		workarea_cache_ = new Texture(max_x - min_x, max_y - min_y);
-		workarea_cache_->lock();
-		for (int i = 0; i < workarea_cache_->width(); ++i) {
-			for (int j = 0; j < workarea_cache_->height(); ++j) {
-				workarea_cache_->set_pixel(i, j, transparent);
-			}
-		}
-		for (const auto& workarea : workarea_overlays) {
-			for (const auto& pair : workarea) {
-				Widelands::Coords c2;
-				Widelands::Coords c3;
-				map.get_brn(pair.first.node, &c2);
-				if (pair.first.t == Widelands::TriangleIndex::D) {
-					map.get_bln(pair.first.node, &c3);
-				}
-				else {
-					map.get_rn(pair.first.node, &c3);
-				}
-
-				FieldsToDraw::Field* f1 = nullptr;
-				FieldsToDraw::Field* f2 = nullptr;
-				FieldsToDraw::Field* f3 = nullptr;
-
-				for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
-					auto f = fields_to_draw->mutable_field(idx);
-					Widelands::FCoords c = f->fcoords;
-					if (c == pair.first.node) {
-						f1 = f;
-					}
-					else if (c == c2) {
-						f2 = f;
-					}
-					else if (c == c3) {
-						f3 = f;
-					}
-					if (f1 && f2 && f3) {
-						break;
-					}
-				}
-				if (!f1 || !f2 || !f3) {
-					// We don't even draw this triangle
-					continue;
-				}
-
-				float v1x = f1->rendertarget_pixel.x;
-				float v1y = f1->rendertarget_pixel.y;
-				float v2x = f2->rendertarget_pixel.x;
-				float v2y = f2->rendertarget_pixel.y;
-				float v3x = f3->rendertarget_pixel.x;
-				float v3y = f3->rendertarget_pixel.y;
-				const int x_max = std::ceil(std::max(v1x, std::max(v2x, v3x)));
-				const int y_max = std::ceil(std::max(v1y, std::max(v2y, v3y)));
-				const int x_min = std::floor(std::min(v1x, std::min(v2x, v3x)));
-				const int y_min = std::floor(std::min(v1y, std::min(v2y, v3y)));
-
-				for (int x = x_min; x < x_max; ++x) {
-					for (int y = y_min; y < y_max; ++y) {
-						float d3 = trimath_sign(x, y, v1x, v1y, v2x, v2y);
-						float d1 = trimath_sign(x, y, v2x, v2y, v3x, v3y);
-						float d2 = trimath_sign(x, y, v3x, v3y, v1x, v1y);
-						if (!((d1 < 0 || d2 < 0 || d3 < 0) && (d1 > 0 || d2 > 0 || d3 > 0))) {
-							workarea_cache_->set_pixel(x - min_x, y - min_y, apply_color(
-									workarea_cache_->get_pixel(x - min_x, y - min_y), workarea_colors[pair.second]));
-						}
-					}
-				}
-			}
-		}
-		workarea_cache_->unlock(Texture::UnlockMode::Unlock_Update);
-		dst->blit(Vector2i(min_x, min_y), workarea_cache_);
-	} */
 
 	const float scale = 1.f / given_map_view->view().zoom;
 
@@ -440,6 +330,12 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 				// We never show census or statistics for objects in the fog.
 				draw_immovable_for_formerly_visible_field(*f, player_field, scale, dst);
 			}
+		}
+
+		// Draw work area markers.
+		if (has_workarea_preview(f->fcoords, &map)) {
+			blit_field_overlay(dst, *f, grid_marker_pic_,
+					Vector2i(grid_marker_pic_->width() / 2, grid_marker_pic_->height() / 2), scale);
 		}
 
 		if (f->vision > 0) {

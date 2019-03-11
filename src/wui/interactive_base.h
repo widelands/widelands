@@ -245,7 +245,7 @@ protected:
 	}
 
 	/// Returns true if there is a workarea preview being shown at the given coordinates
-	bool has_workarea_preview(const Widelands::Coords& coords) const;
+	bool has_workarea_preview(const Widelands::Coords& coords, const Widelands::Map* map = nullptr) const;
 
 private:
 	int32_t stereo_position(Widelands::Coords position_map);

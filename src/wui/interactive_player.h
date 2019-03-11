@@ -90,7 +90,7 @@ private:
 	UI::UniqueWindow::Registry encyclopedia_;
 	UI::UniqueWindow::Registry message_menu_;
 
-	Texture* workarea_cache_;
+	const Image* grid_marker_pic_;
 };
 
 #endif  // end of include guard: WL_WUI_INTERACTIVE_PLAYER_H
