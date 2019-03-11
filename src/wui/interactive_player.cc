@@ -279,7 +279,7 @@ void InteractivePlayer::draw(RenderTarget& dst) {
 	draw_map_view(map_view(), &dst);
 }
 
-#define WORKAREA_TRANSPARENCY 127
+/* #define WORKAREA_TRANSPARENCY 127
 static RGBAColor workarea_colors[] {
 	RGBAColor(31, 63, 127, WORKAREA_TRANSPARENCY), // All three circles
 	RGBAColor(63, 127, 0, WORKAREA_TRANSPARENCY),  // Medium and outer circle
@@ -298,7 +298,7 @@ static inline RGBAColor apply_color(RGBAColor c1, RGBAColor c2) {
 // Helper function to check whether a point is inside a triangle
 static inline float trimath_sign(float p1x, float p1y, float p2x, float p2y, float p3x, float p3y) {
 	return (p1x - p3x) * (p2y - p3y) - (p2x - p3x) * (p1y - p3y);
-}
+} */
 
 void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst) {
 	// In-game, selection can never be on triangles or have a radius.
@@ -310,11 +310,11 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 	const Widelands::Map& map = gbase.map();
 	const uint32_t gametime = gbase.get_gametime();
 
-	auto* fields_to_draw = given_map_view->draw_terrain(gbase, dst);
+	auto* fields_to_draw = given_map_view->draw_terrain(gbase, get_workarea_overlays(map), dst);
 	const auto& road_building = road_building_overlays();
-	const std::set<std::map<Widelands::TCoords<>, uint8_t>> workarea_overlays = get_workarea_overlays(map);
+	// const Workareas workarea_overlays = get_workarea_overlays(map);
 
-	if (!workarea_overlays.empty()) {
+	/* if (!workarea_overlays.empty()) {
 		RGBAColor transparent(0, 0, 0, 0);
 
 		int min_x = 0;
@@ -401,7 +401,7 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 		}
 		workarea_cache_->unlock(Texture::UnlockMode::Unlock_Update);
 		dst->blit(Vector2i(min_x, min_y), workarea_cache_);
-	}
+	} */
 
 	const float scale = 1.f / given_map_view->view().zoom;
 

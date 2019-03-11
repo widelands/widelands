@@ -234,7 +234,7 @@ protected:
 	TextToDraw get_text_to_draw() const;
 
 	// Returns the current overlays for the work area previews.
-	std::set<std::map<Widelands::TCoords<>, uint8_t>> get_workarea_overlays(const Widelands::Map& map) const;
+	Workareas get_workarea_overlays(const Widelands::Map& map) const;
 
 	// Returns the 'BuildhelpOverlay' for 'caps' or nullptr if there is no help
 	// to be displayed on this field.

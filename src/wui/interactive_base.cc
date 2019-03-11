@@ -324,12 +324,13 @@ static uint8_t workarea_max(uint8_t a, uint8_t b, uint8_t c) {
 	return 5;
 }
 
-std::set<std::map<TCoords<>, uint8_t>> InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
-	std::set<std::map<TCoords<>, uint8_t>> result_set;
+Workareas InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
+	Workareas result_set;
 	for (const auto& wa_pair : workarea_previews_) {
 		std::map<Coords, uint8_t> intermediate_result;
 		const Coords& coords = wa_pair.first;
 		const WorkareaInfo* workarea_info = wa_pair.second;
+		intermediate_result[coords] = 0;
 		WorkareaInfo::size_type wa_index;
 		switch (workarea_info->size()) {
 		case 0:
