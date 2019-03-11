@@ -71,10 +71,12 @@ void MapPortSpacesPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjec
 	s1.set_int("packet_version", kCurrentPacketVersion);
 
 	const Map& map = egbase.map();
+	log("NOCOM write port spaces1\n");
 	s1.set_int("number_of_port_spaces", map.get_port_spaces().size());
 
 	Section& s2 = prof.create_section("port_spaces");
 	int i = 0;
+	log("NOCOM write port spaces2\n");
 	for (const Coords& c : map.get_port_spaces()) {
 		set_coords(std::to_string(i++), c, &s2);
 	}

@@ -28,6 +28,7 @@
 #include <vector>
 
 #include "base/i18n.h"
+#include "base/log.h"
 #include "economy/itransport_cost_calculator.h"
 #include "logic/description_maintainer.h"
 #include "logic/field.h"
@@ -460,6 +461,7 @@ public:
 	                    bool force = false,
 	                    bool recalculate_seafaring = false);
 	const PortSpacesSet& get_port_spaces() const {
+		log("NOCOM return port_spaces_\n");
 		return port_spaces_;
 	}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
