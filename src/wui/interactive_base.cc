@@ -204,7 +204,7 @@ bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords, cons
 		for (const auto& p : *pair.second) {
 			radius = std::max(radius, p.first);
 		}
-		if (map->calc_distance(coords, pair.first) < radius) {
+		if (map->calc_distance(coords, pair.first) <= radius) {
 			return true;
 		}
 	}

@@ -244,7 +244,9 @@ protected:
 		return road_building_overlays_;
 	}
 
-	/// Returns true if there is a workarea preview being shown at the given coordinates
+	/// Returns true if there is a workarea preview being shown at the given coordinates.
+	/// If 'map' is 0, checks only if the given coords are the center of a workarea;
+	/// otherwise checks if the coords are within any workarea.
 	bool has_workarea_preview(const Widelands::Coords& coords, const Widelands::Map* map = nullptr) const;
 
 private:
