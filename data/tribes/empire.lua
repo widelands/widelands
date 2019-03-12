@@ -20,27 +20,27 @@ tribes:new_tribe {
    bridges = {
       normal_e = {
          pictures = path.list_files (dirname .. "images/empire/bridge_normal_e_?.png"),
-         hotspot = { 1, 12 },
+         hotspot = { -2, 12 },
       },
       normal_se = {
          pictures = path.list_files (dirname .. "images/empire/bridge_normal_se_?.png"),
-         hotspot = { 6, 6 },
+         hotspot = { 5, 2 },
       },
       normal_sw = {
          pictures = path.list_files (dirname .. "images/empire/bridge_normal_sw_?.png"),
-         hotspot = { 31, 6 },
+         hotspot = { 36, 3 },
       },
       busy_e = {
          pictures = path.list_files (dirname .. "images/empire/bridge_busy_e_?.png"),
-         hotspot = { 1, 12 },
+         hotspot = { -2, 12 },
       },
       busy_se = {
          pictures = path.list_files (dirname .. "images/empire/bridge_busy_se_?.png"),
-         hotspot = { 6, 6 },
+         hotspot = { 5, 2 },
       },
       busy_sw = {
          pictures = path.list_files (dirname .. "images/empire/bridge_busy_sw_?.png"),
-         hotspot = { 31, 6 },
+         hotspot = { 36, 3 },
       },
    },
    bridge_height = 8,
