@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,6 +55,7 @@
 #include "map_io/map_scripting_packet.h"
 #include "map_io/map_terrain_packet.h"
 #include "map_io/map_version_packet.h"
+#include "map_io/map_wincondition_packet.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "map_io/world_legacy_lookup_table.h"
 
@@ -310,6 +311,14 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 
+		// Map data used by win conditions.
+		log("Reading Wincondition Data ... ");
+		{
+			MapWinconditionPacket p;
+			p.read(*fs_, *egbase.mutable_map(), *mol_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
 		// Objectives. They are not needed in the Editor, since they are fully
 		// defined through Lua scripting. They are also not required for a game,
 		// since they will be only be set after it has started.
@@ -347,4 +356,4 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 
 	return 0;
 }
-}
+}  // namespace Widelands

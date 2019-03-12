@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/game_controller.h"
@@ -44,7 +44,7 @@ FullscreenMenuMapSelect::FullscreenMenuMapSelect(GameSettingsProvider* const set
    : FullscreenMenuLoadMapOrGame(),
      checkbox_space_(25),
      // Less padding for big fonts; space is tight.
-     checkbox_padding_(UI::g_fh1->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
+     checkbox_padding_(UI::g_fh->fontset()->size_offset() > 0 ? 0 : 2 * padding_),
 
      // Main title
      title_(this, 0, 0, _("Choose a map"), UI::Align::kCenter),

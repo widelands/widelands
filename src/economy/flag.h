@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 #ifndef WL_ECONOMY_FLAG_H
 #define WL_ECONOMY_FLAG_H
 
+#include <deque>
 #include <list>
 #include <vector>
 
@@ -48,11 +49,11 @@ private:
 };
 
 /**
- * Flag represents a flag, obviously.
+ * Flag represents a flag as you see it on the map.
+ *
  * A flag itself doesn't do much. However, it can have up to 6 roads attached
  * to it. Instead of the WALK_NW road, it can also have a building attached to
- * it.
- * Flags also have a store of up to 8 wares.
+ * it. Flags also have a store of up to 8 wares.
  *
  * You can also assign an arbitrary number of "jobs" for a flag.
  * A job consists of a request for a worker, and the name of a program that the
@@ -74,8 +75,12 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	const FlagDescr& descr() const;
 
-	Flag();                                               /// empty flag for savegame loading
-	Flag(EditorGameBase&, Player* owner, const Coords&);  /// create a new flag
+	/// Empty flag, for unit tests only.
+	Flag();
+
+	/// Create a new flag. Only specify an economy during saveloading.
+	/// Otherwise, a new economy will be created automatically if needed.
+	Flag(EditorGameBase&, Player* owner, const Coords&, Economy* economy = nullptr);
 	~Flag() override;
 
 	void load_finish(EditorGameBase&) override;
@@ -142,7 +147,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void add_flag_job(Game&, DescriptionIndex workerware, const std::string& programname);
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 protected:
 	bool init(EditorGameBase&) override;
@@ -188,7 +193,7 @@ private:
 	/// the given flag
 	Flag* always_call_for_flag_;
 
-	using CapacityWaitQueue = std::vector<OPtr<Worker>>;
+	using CapacityWaitQueue = std::deque<OPtr<Worker>>;
 	CapacityWaitQueue capacity_wait_;  ///< workers waiting for capacity
 
 	using FlagJobs = std::list<FlagJob>;
@@ -196,6 +201,6 @@ private:
 };
 
 extern FlagDescr g_flag_descr;
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_FLAG_H

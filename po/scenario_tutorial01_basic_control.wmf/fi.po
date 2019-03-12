@@ -1,18 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2018
+# Jukka Pakarinen, 2016-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
-"PO-Revision-Date: 2018-03-24 12:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"PO-Revision-Date: 2019-02-25 18:21+0000\n"
+"Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +77,7 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and granite. Let’s make sure that we do not run out of logs. For this,"
 " we need a lumberjack and a hut for him to stay in."
-msgstr "Tavallisesti peli aloitetaan yhdellä päämajalla. Se on iso rakennus, jonka edessä on sininen lippu. Päämaja on varasto, johon varastoidaan tavaroita, työntekijöitä ja sotilaita. Joitakin tavaroita tarvitaan talojen ja muiden varastojen rakentamiseen. Tavarat eivät säily varastossa ikuisesti, joten sinun pitää täydentää sitä. Pelin alussa kaikkein tärkempiä tavaroita ovat yleisimmät rakennustavarat: kaadetut puut ja graniitti. Kannattaa varmistaa ettei kaadetut puut pääse loppumaan. Sitä varten tarvitaan puunhakkaaja ja hänelle mökki oleskeluun."
+msgstr "Tavallisesti peli aloitetaan yhdellä päämajalla. Se on iso rakennus, jonka edessä on sininen lippu. Päämaja on varasto, johon varastoidaan tuotteita, työntekijöitä ja sotilaita. Joitakin tuotteita tarvitaan talojen ja muiden varastojen rakentamiseen. Tuotteet eivät säily varastossa ikuisesti, joten sinun pitää täydentää sitä. Pelin alussa kaikkein tärkempiä tuotteita ovat yleisimmät rakennustavarat: kaadetut puut ja graniitti. Kannattaa varmistaa ettei kaadetut puut pääse loppumaan. Sitä varten tarvitaan puunhakkaaja ja hänelle mökki oleskeluun."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
@@ -183,7 +183,7 @@ msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr "Katso tarkasti kuinka rakentaja lähtee päämajasta ja menee rakennustyömaalle. Sen lisäksi kantaja menee paikalleen kahden sinisen lipun välille ja kantaa tavaroita siniseltä lipulta toiselle."
+msgstr "Katso tarkasti kuinka rakentaja lähtee päämajasta ja menee rakennustyömaalle. Sen lisäksi kantaja menee paikalleen kahden sinisen lipun välille ja kantaa tuotteita siniseltä lipulta toiselle."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:114
 msgid "Placing Another Flag"
@@ -219,7 +219,7 @@ msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr "Mitä lyhyempiä tien osat ovat, sen nopeammin tavarasi tulee toimitetuksi perille. Sitä varten sinun tulee varmistaa, että teissäsi on niin paljon lippuja kuin mahdollista."
+msgstr "Mitä lyhyempiä tien osat ovat, sen nopeammin tuotteet tulee toimitetuksi perille. Sitä varten sinun tulee varmistaa, että teissäsi on niin paljon lippuja kuin mahdollista."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:127
 msgid ""
@@ -277,7 +277,7 @@ msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr "Jos painat rakennustyömaata, ruutu aukeaa. Voit nähdä harmaiksi värjättyinä tavarat, jotka vielä puuttuvat. Voit myös nähdä rakennustyömaan edistymisen."
+msgstr "Jos painat rakennustyömaata, ruutu aukeaa. Voit nähdä harmaiksi värjättyinä tuotteet, jotka vielä puuttuvat. Voit myös nähdä rakennustyömaan edistymisen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
@@ -440,10 +440,10 @@ msgstr "Rakenna kivilouhos kivikon viereen. Muistatko kuinka tein sen aiemmin?"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr "Varmista rakennusalueiden näkyminen, sitten valitse rakennuspaikka ja ilmestyvästä ruudusta kivilouhos. Ehkäpä tämä on hyvä hetki esitellä kaikki nuo rakennusalueen kuvakkeet, jotka aktivoimme aiemmin."
+msgstr "Varmista rakennusalueiden näkyminen, mikä jälkeen valitse näkyviin tulevasta ruudusta rakennukselle paikka. Ehkäpä tämä on hyvä hetki esitellä kaikki nuo rakennusalueiden kuvakkeet, jotka aktivoimme aiemmin. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:241
 msgid ""
@@ -647,7 +647,7 @@ msgid ""
 "transport wares. The simplest way is to click on the construction site’s "
 "flag, choose ‘Build road’, and then click on the destination flag (the one "
 "in front of your headquarters), just like I’ve demonstrated."
-msgstr "Työntekijäsi eivät tykkää kävellä halki maaseudun. Sinun täytyy rakentaa tie päämajaltasi rakennustyömaalle, jotta kantajat voivat kuljettaa tavaroita. Yksinkertaisin tapa on painaa rakennustyömaan lippu, valitse 'Rakenna tie' ja sitten paina määränpään lippua (päämajasi edessä), kuten olen havannollistanut."
+msgstr "Työntekijäsi eivät tykkää kävellä halki maaseudun. Sinun täytyy rakentaa tie päämajaltasi rakennustyömaalle, jotta kantajat voivat kuljettaa tuotteita. Yksinkertaisin tapa on painaa rakennustyömaan lippu, valitse 'Rakenna tie' ja sitten paina määränpään lippua (päämajasi edessä), kuten olen havannollistanut."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:329
 msgid "You Destroyed the Construction Site!"
@@ -869,7 +869,7 @@ msgstr "Sait jonkin viestin. Näetkö kuinka painike ikkunan alalaidassa on vaih
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Kivilouhoksen polttaminen: se on nopein tapa tilan saamiseksi. Kun työntekijä ovat hylänneet rakennuksen, tavarat on menetetty."
+msgstr "Kivilouhoksen polttaminen: se on nopein tapa tilan saamiseksi. Kun työntekijä ovat hylänneet rakennuksen, tuotteet on menetetty."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:431
 msgid ""
@@ -898,7 +898,7 @@ msgstr "On kaksi eri tapaa tuhota rakennus: polttaminen ja purkaminen. Kokeile n
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr "Kivilouhoksen polttaminen: tämä on nopein tapa tilan saamiseksi. Kun työntekijä hylkää rakennuksen, tavarat on menetetty."
+msgstr "Kivilouhoksen polttaminen: tämä on nopein tapa tilan saamiseksi. Kun työntekijä hylkää rakennuksen, tuotteet on menetetty."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 msgid ""

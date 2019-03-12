@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,11 +22,11 @@
 #include <cstdio>
 #include <utility>
 
-#include <boost/lexical_cast.hpp>
+#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -334,7 +334,7 @@ void AbstractWaresDisplay::draw_ware(RenderTarget& dst, Widelands::DescriptionIn
 	              info_color_for_ware(id));
 
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_richtext_paragraph(info_for_ware(id), style.info_font));
+	   UI::g_fh->render(as_richtext_paragraph(info_for_ware(id), style.info_font));
 	rendered_text->draw(dst, Vector2i(p.x + w - rendered_text->width() - 1,
 	                                  p.y + WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 1 -
 	                                     rendered_text->height()));
@@ -387,12 +387,32 @@ WaresDisplay::~WaresDisplay() {
 	remove_all_warelists();
 }
 
+static const char* unit_suffixes[] = {
+   "%1%",
+   /** TRANSLATORS: This is a large number with a suffix (e.g. 50k = 50,000). */
+   /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
+   _("%1%k"),
+   /** TRANSLATORS: This is a large number with a suffix (e.g. 5M = 5,000,000). */
+   /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
+   _("%1%M"),
+   /** TRANSLATORS: This is a large number with a suffix (e.g. 5G = 5,000,000,000). */
+   /** TRANSLATORS: Space is limited, use only 1 letter for the suffix and no whitespace. */
+   _("%1%G")};
+static std::string get_amount_string(uint32_t amount) {
+	uint8_t size = 0;
+	while (amount >= (size ? 1000 : 10000)) {
+		amount /= 1000;
+		size++;
+	}
+	return (boost::format(unit_suffixes[size]) % amount).str();
+}
+
 std::string WaresDisplay::info_for_ware(Widelands::DescriptionIndex ware) {
 	int totalstock = 0;
 	for (const Widelands::WareList* warelist : warelists_) {
 		totalstock += warelist->stock(ware);
 	}
-	return boost::lexical_cast<std::string>(totalstock);
+	return get_amount_string(totalstock);
 }
 
 /*
@@ -424,7 +444,7 @@ std::string waremap_to_richtext(const Widelands::TribeDescr& tribe,
 				       "<div width=26 background=" + style.icon_background.hex_value() + "><p align=center><img src=\"" +
 				       tribe.get_ware_descr(c->first)->icon_filename() +
 				       "\"></p></div><div width=26 background=" + style.info_background.hex_value() + "><p>" +
-				       style.info_font.as_font_tag(boost::lexical_cast<std::string>(static_cast<int32_t>(c->second))) +
+				       style.info_font.as_font_tag(get_amount_string(c->second)) +
 				       "</p></div></p></div>";
 			}
 	return ret;

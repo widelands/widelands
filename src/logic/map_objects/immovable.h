@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -176,7 +176,7 @@ protected:
 	const MapObjectDescr::OwnerType owner_type_;
 
 	/// Buildcost for externally constructible immovables (for ship construction)
-	/// \see ActConstruction
+	/// \see ActConstruct
 	Buildcost buildcost_;
 
 	std::string species_;
@@ -261,7 +261,7 @@ protected:
 
 /* GCC 4.0 has problems with friend declarations: It doesn't allow
  * substructures of friend classes private access but we rely on this behaviour
- * for ImmovableProgram::ActConstruction. As a dirty workaround, we make the
+ * for ImmovableProgram::ActConstruct. As a dirty workaround, we make the
  * following variables public for this versions but keep the protected for
  * other GCC versions.
  * See the related bug lp:688832.
@@ -357,7 +357,7 @@ struct PlayerImmovable : public BaseImmovable {
 		return workers_;
 	}
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	/**
 	 * These functions are called when a ware or worker arrives at
@@ -396,6 +396,6 @@ protected:
 public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_IMMOVABLE_H

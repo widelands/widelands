@@ -238,42 +238,11 @@ wl_library(graphic_terrain_programs
 )
 
 
-# Font handlers and text
-
-wl_library(graphic_fonthandler_legacy
-  SRCS
-    font.cc
-    font.h
-    font_handler.cc
-    font_handler.h
-    richtext.cc
-    richtext.h
-    text_parser.cc
-    text_parser.h
-  USES_ICU
-  USES_SDL2_TTF
-  DEPENDS
-    base_exceptions
-    base_geometry
-    base_i18n
-    base_log
-    base_utf8
-    graphic
-    graphic_align
-    graphic_color
-    graphic_fonthandler
-    graphic_surface
-    graphic_text
-    graphic_wordwrap
-    helper
-    io_fileread
-    io_filesystem
-)
-
+# Font handler and text
 wl_library(graphic_fonthandler
   SRCS
-    font_handler1.cc
-    font_handler1.h
+    font_handler.cc
+    font_handler.h
   DEPENDS
     base_macros
     graphic_image_cache
@@ -291,6 +260,7 @@ wl_library(graphic_text_layout
     graphic_styles
     graphic_text
     graphic_fonthandler
+    graphic_styles
 )
 
 wl_library(graphic_wordwrap

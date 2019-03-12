@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 #include "base/wexception.h"
 #include "editor/editorinteractive.h"
 #include "editor/map_generator.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/text_layout.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -40,6 +40,7 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 
+// NOCOM bottom buttons unreachable
 namespace {
 // The map generator can't find starting positions for too many players
 constexpr uint8_t kMaxMapgenPlayers = 8;
@@ -379,7 +380,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 	// ---------- "Generate Map" button ----------
 	cancel_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_cancel, this));
 	ok_button_.sigclicked.connect(boost::bind(&MainMenuNewRandomMap::clicked_create_map, this));
-	if (UI::g_fh1->fontset()->is_rtl()) {
+	if (UI::g_fh->fontset()->is_rtl()) {
 		button_box_.add(&ok_button_);
 		button_box_.add(&cancel_button_);
 	} else {
@@ -400,7 +401,7 @@ MainMenuNewRandomMap::MainMenuNewRandomMap(EditorInteractive& parent)
 
 /**
  * Called, when button get clicked
-*/
+ */
 void MainMenuNewRandomMap::button_clicked(MainMenuNewRandomMap::ButtonId n) {
 	switch (n) {
 	case ButtonId::kPlayers:  // intended fall-through

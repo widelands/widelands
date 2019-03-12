@@ -24,17 +24,17 @@ tribes:new_productionsite_type {
    animations = {
       idle = {
          pictures = path.list_files (dirname .. "idle_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 84},
          fps = 10,
       },
       working = {
          pictures = path.list_files (dirname .. "working_??.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 84},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 66},
       },
    },
 
@@ -66,18 +66,20 @@ tribes:new_productionsite_type {
          actions = {
             "call=produce_malus",
             "call=produce_bonus",
-            "return=skipped"
+            "return=no_stats"
          },
       },
       produce_malus = {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing only one ration because ... (can produce more efficient when supply is good)
          descname = _"preparing only one ration",
          actions = {
+            -- time total: 49.5
             "return=skipped unless economy needs ration",
             "return=skipped when site has fruit,bread_frisians and site has smoked_fish,smoked_meat",
-            "sleep=21000",
+            "sleep=5000",
             "consume=fruit,bread_frisians,smoked_fish,smoked_meat",
-            "animate=working 28500",
+            "animate=working 34500",
+            "sleep=10000",
             "produce=ration"
          },
       },
@@ -85,10 +87,12 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start preparing rations because ...
          descname = _"preparing rations",
          actions = {
+            -- time total: 66
             "return=skipped unless economy needs ration",
             "consume=fruit,bread_frisians smoked_fish,smoked_meat",
-            "sleep=28000",
-            "animate=working 38000",
+            "sleep=5000",
+            "animate=working 51000",
+            "sleep=10000",
             "produce=ration:2"
          },
       },

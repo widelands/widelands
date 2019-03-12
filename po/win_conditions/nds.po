@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 # GunChleoc, 2015
 # GunChleoc, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-06-16 18:35+0000\n"
-"PO-Revision-Date: 2018-06-25 17:24+0000\n"
+"POT-Creation-Date: 2019-02-11 09:31+0000\n"
+"PO-Revision-Date: 2019-02-13 19:11+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgid ""
 "There are no artifacts on this map. This should not happen. Please file a "
 "bug report on %s and specify your Widelands version and the map you tried to"
 " load."
-msgstr "Düsse Kaart hett keene Künstelk Schatten. Dat sall nich passeren. Bidde schriev eenen Bug-Bericht över %s un geev diene Versioon vun Widelands un de Naam vun de Kaart, dat de laden wullst, an."
+msgstr "Deese Kaart hett keene Künstelk Schatten. Dat sall nich passeren. Bidde schriev eenen Fehler-Bericht unner %s un geev diene Versioon vun Widelands un de Naam vun de Kaart, dat de laden wullst, an."
 
 #. TRANSLATORS: Keep this as short as possible. You can also translate this as
 #. "New artifact"
@@ -52,7 +52,7 @@ msgstr "Künstelk Schatten funnen"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:63
 msgid "Your team found a new artifact."
-msgstr "Dien Klottje hett een'n neien Künstelk Schatten funnen."
+msgstr "Dien Klottje hett een’n nejen Künstelk Schatten funnen."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:67
@@ -61,7 +61,7 @@ msgstr "Künstelk Schatten verloren"
 
 #: ../../data/scripting/win_conditions/artifacts.lua:68
 msgid "One of your team’s artifacts was stolen by an enemy."
-msgstr "Een Künstelk Schatten, dat to diene Klottje hööde, is vun Feinden klaut wurr."
+msgstr "Een Künstelk Schatten, dat to diene Klottje hööde, is vun Feinden klaut worden."
 
 #. TRANSLATORS: Keep this as short as possible.
 #: ../../data/scripting/win_conditions/artifacts.lua:72
@@ -81,8 +81,8 @@ msgstr "Översicht:"
 #, lua-format
 msgid "%i artifact"
 msgid_plural "%i artifacts"
-msgstr[0] "%i Künstelk Schatt"
-msgstr[1] "%i Künstelk Schatten"
+msgstr[0] "%i künstelker Schatt"
+msgstr[1] "%i künstelke Schatten"
 
 #. TRANSLATORS: e.g. Team 1 owns 5 artifacts.
 #: ../../data/scripting/win_conditions/artifacts.lua:150
@@ -107,63 +107,31 @@ msgstr "Du kriggst Punkten för dürabele Waren in diene Kraamhusen. De Speler m
 
 #: ../../data/scripting/win_conditions/collectors.lua:23
 msgid "Points"
-msgstr "Pünkt"
+msgstr "Punkten"
 
-#: ../../data/scripting/win_conditions/collectors.lua:126
+#: ../../data/scripting/win_conditions/collectors.lua:130
 #, lua-format
 msgid "Status for %s"
 msgstr "Tostand för %s"
 
 #. TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P', P meaning 'Points'
-#: ../../data/scripting/win_conditions/collectors.lua:139
+#: ../../data/scripting/win_conditions/collectors.lua:143
 msgid "%1$s (%2$i P) x %3$i = %4$i P"
 msgstr "%1$s (%2$i P) × %3$i = %4$i P"
 
-#: ../../data/scripting/win_conditions/collectors.lua:143
+#: ../../data/scripting/win_conditions/collectors.lua:147
 #, lua-format
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] "Alltosamen: %i Pünkt"
-msgstr[1] "Alltosamen: %i Pünkte"
+msgstr[0] "All tosamen: %i Punkt"
+msgstr[1] "All tosamen: %i Punkten"
 
-#: ../../data/scripting/win_conditions/collectors.lua:156
-msgid "The game has ended."
-msgstr "Dat Speel is over."
-
-#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:163
-#, lua-format
-msgid "%i minute"
-msgid_plural "%i minutes"
-msgstr[0] "%i Menüüt"
-msgstr[1] "%i Menüten"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
 #: ../../data/scripting/win_conditions/collectors.lua:168
-msgid "%1% hour and %2%"
-msgid_plural "%1% hours and %2%"
-msgstr[0] "%1% Stünn un %2%"
-msgstr[1] "%1% Stünnen un %2%"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours.'
-#: ../../data/scripting/win_conditions/collectors.lua:171
-msgid "%1% hour"
-msgid_plural "%1% hours"
-msgstr[0] "%1% Stünne"
-msgstr[1] "%1% Stünnen"
-
-#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
-#: ../../data/scripting/win_conditions/collectors.lua:175
-#, lua-format
-msgid "The game will end in %s."
-msgstr "Dat Speel düürt noch %s."
-
-#: ../../data/scripting/win_conditions/collectors.lua:188
 #, lua-format
 msgid "Status for Team %d"
 msgstr "Tostand för Klottje %d"
 
-#: ../../data/scripting/win_conditions/collectors.lua:190
+#: ../../data/scripting/win_conditions/collectors.lua:170
 #, lua-format
 msgid "Team Total: %i point"
 msgid_plural "Team Total: %i points"
@@ -172,7 +140,7 @@ msgstr[1] "Ergebnis vun de Klottje: %i Punkten"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:15
 msgid "Autocrat"
-msgstr "Eenzigster König"
+msgstr "Dwingelant"
 
 #: ../../data/scripting/win_conditions/defeat_all.lua:17
 msgid "The tribe or team that can defeat all others wins the game!"
@@ -188,96 +156,120 @@ msgstr "Dat is een Speel sünner Enn un Örders."
 
 #: ../../data/scripting/win_conditions/endless_game_fogless.lua:15
 msgid "Endless Game (no fog)"
-msgstr "Ewich Speel (ihle Daak)"
+msgstr "Ewich Speel (sünner Kriegsnevel)"
 
 #: ../../data/scripting/win_conditions/endless_game_fogless.lua:16
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr "Dat is een Speel sünner Enn, Örders un Kriegsnevel."
+msgstr "Dat is een Speel sünner Enn, Upgaven un Kriegsnevel."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:17
-msgid "Territorial Lord"
-msgstr "Landkönig"
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:20
-msgid ""
-"Each player or team tries to obtain more than half of the map’s area. The "
-"winner will be the player or the team that is able to keep that area for at "
-"least 20 minutes."
-msgstr "All de Spelers oder Klottjes versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett düsse Gewest för tominnst 20 Menüten winnt dat Speel."
-
-#: ../../data/scripting/win_conditions/territorial_lord.lua:155
-#: ../../data/scripting/win_conditions/territorial_time.lua:30
+#: ../../data/scripting/win_conditions/territorial_functions.lua:12
 #, lua-format
 msgid "Team %i"
-msgstr "Mannschop %i"
+msgstr "Klottje %i"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:157
-#: ../../data/scripting/win_conditions/territorial_time.lua:205
+#: ../../data/scripting/win_conditions/territorial_functions.lua:13
+msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s hett %2$3.0f %% vun de Kaart (%3$i vun %4$i)."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:14
+msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr "%1$s harr %2$3.0f %% vun de Kaart (%3$i vun %4$i)."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:232
+msgid "You own more than half of the map’s area."
+msgstr "Du hest tominnst de halve Kaart innohmen."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:233
+#, lua-format
+msgid "Keep it for %i more minute to win the game."
+msgid_plural "Keep it for %i more minutes to win the game."
+msgstr[0] "Beholl’t noch %i Menüüt un du winnst dat Speel."
+msgstr[1] "Beholl’t noch %i Menüten un du winnst dat Speel."
+
+#: ../../data/scripting/win_conditions/territorial_functions.lua:259
 #, lua-format
 msgid "%s owns more than half of the map’s area."
-msgstr "%s besitt miehr as de half Land."
+msgstr "%s hett mehr as de halve Kaart innohmen."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:158
-#: ../../data/scripting/win_conditions/territorial_time.lua:206
+#: ../../data/scripting/win_conditions/territorial_functions.lua:260
 #, lua-format
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] "Du hest noch %i Menüüt, dat du nich daarbiliggst."
 msgstr[1] "Du hest noch %i Menüten, dat du nich daarbiliggst."
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:163
-#: ../../data/scripting/win_conditions/territorial_time.lua:212
-msgid "You own more than half of the map’s area."
-msgstr "Du hest tominnst de halve Kaart innohmen."
+#: ../../data/scripting/win_conditions/territorial_lord.lua:18
+msgid "Territorial Lord"
+msgstr "Gewestensammler"
 
-#: ../../data/scripting/win_conditions/territorial_lord.lua:164
-#: ../../data/scripting/win_conditions/territorial_time.lua:213
-#, lua-format
-msgid "Keep it for %i more minute to win the game."
-msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] "Beholl't noch %i Menüüt un du winnst dat Speel. "
-msgstr[1] "Beholl't noch %i Menüten un du winnst dat Speel."
+#: ../../data/scripting/win_conditions/territorial_lord.lua:21
+msgid ""
+"Each player or team tries to obtain more than half of the map’s area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes."
+msgstr "All de Spelers oder Klottjes versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett deese Gewest för tominnst 20 Menüten winnt dat Speel."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:20
+#: ../../data/scripting/win_conditions/territorial_time.lua:21
 msgid "Territorial Time"
-msgstr "Land König (op Tied)"
+msgstr "Gewestenloper"
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:23
+#: ../../data/scripting/win_conditions/territorial_time.lua:24
 msgid ""
 "Each player or team tries to obtain more than half of the map’s area. The "
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
-msgstr "All de Spelers oder Klottjes versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett düsse Gewest för tominnst 20 Menüten winnt dat Speel. Wenn dat Speel na 4 Stünnen noch löppt, winnt de Speler oder Klottje mit de grootste Gewest."
-
-#: ../../data/scripting/win_conditions/territorial_time.lua:28
-msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s hett %2$3.0f %% vun de Kaart (%3$i vun %4$i)."
-
-#: ../../data/scripting/win_conditions/territorial_time.lua:29
-msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
-msgstr "%1$s harr %2$3.0f %% vun de Kaart (%3$i vun %4$i)"
+msgstr "All de Spelers oder Klottjes versöken, tominnst de halvig Kaart intonehmen. De Speler oder Klottje dat hett deese Gewest för tominnst 20 Menüten winnt dat Speel. Wenn dat Speel na 4 Stünnen noch löppt, winnt de Speler oder Klottje mit de grootste Gewest."
 
 #. TRANSLATORS: Refers to "You own more than half of the map’s area. Keep it
 #. for x more minute(s) to win the game."
-#: ../../data/scripting/win_conditions/territorial_time.lua:229
+#: ../../data/scripting/win_conditions/territorial_time.lua:60
 #, lua-format
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
 msgstr[0] "Anners is dat Speel in %i Menüüt um."
 msgstr[1] "Anners is dat Speel in %i Menüten um."
 
-#: ../../data/scripting/win_conditions/territorial_time.lua:234
-#: ../../data/scripting/win_conditions/wood_gnome.lua:92
+#: ../../data/scripting/win_conditions/territorial_time.lua:65
 #, lua-format
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
 msgstr[0] "Dat Speel is in %i Menüüt um."
 msgstr[1] "Dat Speel is in %i Menüten um."
 
+#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+#. TRANSLATORS: Context: 'The game will end in 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:261
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:266
+#, lua-format
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i Menüüt"
+msgstr[1] "%i Menüten"
+
+#. TRANSLATORS: Context: 'The game will end in 2 hours and 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:263
+msgid "%1% hour and %2%"
+msgid_plural "%1% hours and %2%"
+msgstr[0] "%1% Stunn un %2%"
+msgstr[1] "%1% Stünnen un %2%"
+
+#. TRANSLATORS: Context: 'The game will end in 2 hours.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:269
+msgid "%1% hour"
+msgid_plural "%1% hours"
+msgstr[0] "%1% Stünne"
+msgstr[1] "%1% Stünnen"
+
+#. TRANSLATORS: Context: 'The game will end in (2 hours and) 30 minutes.'
+#: ../../data/scripting/win_conditions/win_condition_functions.lua:272
+#, lua-format
+msgid "The game will end in %s."
+msgstr "Dat Speel düürt noch %s."
+
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:4
 msgid "Congratulations!"
-msgstr "Proost!"
+msgstr "Glückwunsk!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:5
 msgid "You have won this game!"
@@ -303,7 +295,7 @@ msgstr "Du hest dat Speel wunnen!"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:19
 msgid "You lost"
-msgstr "Du hest verloren."
+msgstr "Du hest verloren"
 
 #: ../../data/scripting/win_conditions/win_condition_texts.lua:20
 msgid "You’ve lost this game!"
@@ -320,39 +312,39 @@ msgstr "Speler-Översicht:"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:16
 msgid "Wood Gnome"
-msgstr "Holtmännche"
+msgstr "Holtlöper"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:19
 msgid ""
 "As wood gnome you like big forests, so your task is to have more trees on "
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
-msgstr "De Holtlöper mag geern grote Walden, du sullt also mehr Bomen up dien Gewest hebben as de annern Spelers. De Speel düürt 4 Stünnen; dann winnt de Speeler mit de meeste Bomen dat Speel."
+msgstr "De Holtlöper mag geern grote Walden, du sallst also mehr Bomen up dien Gewest hebben as de annern Spelers. De Speel düürt 4 Stünnen; dann winnt de Speler mit de meeste Bomen dat Speel."
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:22
 msgid "Trees owned"
-msgstr "Boome in Besitt"
+msgstr "Tahl vun Bomen"
 
 #: ../../data/scripting/win_conditions/wood_gnome.lua:96
-#: ../../data/scripting/win_conditions/wood_gnome.lua:148
-#: ../../data/scripting/win_conditions/wood_gnome.lua:153
+#: ../../data/scripting/win_conditions/wood_gnome.lua:116
+#: ../../data/scripting/win_conditions/wood_gnome.lua:121
 #, lua-format
 msgid "%i tree"
 msgid_plural "%i trees"
 msgstr[0] "%i Boom"
-msgstr[1] "%i Boome"
+msgstr[1] "%i Bomen"
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
 #: ../../data/scripting/win_conditions/wood_gnome.lua:99
 msgid "%1$s has %2$s at the moment."
-msgstr "%1$s hat juest %2$s."
+msgstr "%1$s hett jüüst %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:150
+#: ../../data/scripting/win_conditions/wood_gnome.lua:118
 msgid "%1$s had %2$s."
 msgstr "%1$s harr %2$s."
 
 #. TRANSLATORS: %1$s = player name, %2$s = x tree(s)
-#: ../../data/scripting/win_conditions/wood_gnome.lua:156
+#: ../../data/scripting/win_conditions/wood_gnome.lua:124
 msgid "The winner is %1$s with %2$s."
 msgstr "%1$s hett mit %2$s wunnen."

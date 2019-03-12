@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -120,6 +120,14 @@ void InputQueue::set_consume_interval(const uint32_t time) {
 	update();
 }
 
+uint32_t InputQueue::get_missing() const {
+	const auto filled = get_filled();
+	if (filled >= max_fill_ || request_ == nullptr || !request_->is_open()) {
+		return 0;
+	}
+	return max_fill_ - filled - std::min(max_fill_, request_->get_num_transfers());
+}
+
 constexpr uint16_t kCurrentPacketVersion = 3;
 
 void InputQueue::read(FileRead& fr, Game& game, MapObjectLoader& mol) {
@@ -197,4 +205,4 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 
 	write_child(fw, game, mos);
 }
-}
+}  // namespace Widelands

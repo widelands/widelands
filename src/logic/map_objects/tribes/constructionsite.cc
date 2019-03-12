@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -71,9 +71,9 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 }
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/partially_finished/constructionsite/init.lua
+ */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
@@ -360,4 +360,4 @@ void ConstructionSite::draw(uint32_t gametime,
 	// Draw help strings
 	draw_info(draw_text, point_on_dst, scale, dst);
 }
-}
+}  // namespace Widelands

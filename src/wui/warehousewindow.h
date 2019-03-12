@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,10 +30,11 @@ struct WarehouseWindow : public BuildingWindow {
 	WarehouseWindow(InteractiveGameBase& parent,
 	                UI::UniqueWindow::Registry& reg,
 	                Widelands::Warehouse&,
-	                bool avoid_fastclick);
+	                bool avoid_fastclick,
+	                bool workarea_preview_wanted);
 
 private:
-	void init(bool avoid_fastclick) override;
+	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 	Widelands::OPtr<Widelands::Warehouse> warehouse_;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2018 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 #include <boost/format.hpp>
 
 #include "graphic/color.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -91,7 +91,7 @@ EditBox::EditBox(Panel* const parent,
 	}
 
 	// Set alignment to the UI language's principal writing direction
-	m_->align = UI::g_fh1->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
+	m_->align = UI::g_fh->fontset()->is_rtl() ? UI::Align::kRight : UI::Align::kLeft;
 	m_->caret = 0;
 	m_->scrolloffset = 0;
 	// yes, use *signed* max as maximum length; just a small safe-guard.
@@ -166,7 +166,7 @@ void EditBox::set_style(const UI::FontStyleInfo& style) {
 
 /**
  * The mouse was clicked on this editbox
-*/
+ */
 bool EditBox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();
@@ -375,7 +375,7 @@ void EditBox::draw(RenderTarget& dst) {
 	FontStyleInfo scaled_style = m_->style.font;
 	scaled_style.size *= m_->font_scale;
 	std::shared_ptr<const UI::RenderedText> rendered_text =
-	   UI::g_fh1->render(as_editor_richtext_paragraph(m_->text, scaled_style));
+	   UI::g_fh->render(as_editor_richtext_paragraph(m_->text, scaled_style));
 
 	const int linewidth = rendered_text->width();
 	const int lineheight = m_->text.empty() ? text_height(scaled_style) : rendered_text->height();
@@ -389,7 +389,7 @@ void EditBox::draw(RenderTarget& dst) {
 	// Crop to max_width while blitting
 	if (max_width < linewidth) {
 		// Fix positioning for BiDi languages.
-		if (UI::g_fh1->fontset()->is_rtl()) {
+		if (UI::g_fh->fontset()->is_rtl()) {
 			point.x = 0.f;
 		}
 		// We want this always on, e.g. for mixed language savegame filenames
@@ -458,4 +458,4 @@ void EditBox::check_caret() {
 			m_->scrolloffset = 0;
 	}
 }
-}
+}  // namespace UI

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2018 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -155,7 +155,7 @@ private:
 	// common for defaultai.cc and defaultai_seafaring.cc
 	static constexpr uint32_t kExpeditionMinDuration = 60 * 60 * 1000;
 	static constexpr uint32_t kExpeditionMaxDuration = 210 * 60 * 1000;
-	static constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
+	static constexpr Widelands::Serial kNoShip = Widelands::kInvalidSerial;
 	static constexpr int kShipCheckInterval = 5 * 1000;
 
 	// used by defaultai_warfare.cc

@@ -177,8 +177,12 @@ wl_library(wui
     encyclopedia_window.h
     fieldaction.cc
     fieldaction.h
+    game_client_disconnected.cc
+    game_client_disconnected.h
     game_debug_ui.cc
     game_debug_ui.h
+    game_exit_confirm_box.cc
+    game_exit_confirm_box.h
     game_statistics_menu.cc
     game_statistics_menu.h
     game_main_menu_save_game.cc
@@ -281,6 +285,7 @@ wl_library(wui
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_generic_save_handler
     logic_tribe_basic_info
     logic_widelands_geometry
     network

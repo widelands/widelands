@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -696,13 +696,14 @@ void Ship::ship_update_idle(Game& game, Bob::State& state) {
 	}
 		FALLS_THROUGH;
 	case ShipStates::kExpeditionWaiting:
-	case ShipStates::kExpeditionPortspaceFound:
-	case ShipStates::kSinkRequest:
-	case ShipStates::kSinkAnimation: {
+	case ShipStates::kExpeditionPortspaceFound: {
 		// wait for input
 		start_task_idle(game, descr().main_animation(), 1500);
 		return;
 	}
+	case ShipStates::kSinkRequest:
+	case ShipStates::kSinkAnimation:
+		break;
 	}
 	NEVER_HERE();
 }
@@ -825,14 +826,14 @@ void Ship::start_task_expedition(Game& game) {
 	expedition_->scouting_direction = WalkingDir::IDLE;
 	expedition_->exploration_start = Coords(0, 0);
 	expedition_->island_explore_direction = IslandExploreDirection::kClockwise;
-	expedition_->economy.reset(new Economy(*get_owner()));
+	expedition_->economy = get_owner()->create_economy();
 
 	// We are no longer in any other economy, but instead are an economy of our
 	// own.
 	fleet_->remove_ship(game, this);
 	assert(fleet_ == nullptr);
 
-	set_economy(game, expedition_->economy.get());
+	set_economy(game, expedition_->economy);
 
 	for (int i = items_.size() - 1; i >= 0; --i) {
 		WareInstance* ware;
@@ -942,7 +943,7 @@ void Ship::exp_cancel(Game& game) {
 	if (!get_fleet() || !get_fleet()->has_ports()) {
 		// We lost our last reachable port, so we reset the expedition's state
 		ship_state_ = ShipStates::kExpeditionWaiting;
-		set_economy(game, expedition_->economy.get());
+		set_economy(game, expedition_->economy);
 
 		worker = nullptr;
 		for (ShippingItem& item : items_) {
@@ -956,7 +957,7 @@ void Ship::exp_cancel(Game& game) {
 		Notifications::publish(NoteShip(this, NoteShip::Action::kNoPortLeft));
 		return;
 	}
-	assert(get_economy() && get_economy() != expedition_->economy.get());
+	assert(get_economy() && get_economy() != expedition_->economy);
 
 	send_signal(game, "cancel_expedition");
 
@@ -984,7 +985,7 @@ void Ship::draw(const EditorGameBase& egbase,
 
 	// Show ship name and current activity
 	std::string statistics_string;
-	if (draw_text & TextToDraw::kStatistics) {
+	if ((draw_text & TextToDraw::kStatistics) != TextToDraw::kNone) {
 		switch (ship_state_) {
 		case (ShipStates::kTransport):
 			if (destination_.is_set()) {
@@ -1024,24 +1025,23 @@ void Ship::draw(const EditorGameBase& egbase,
 	             scale, dst);
 }
 
-void Ship::log_general_info(const EditorGameBase& egbase) {
+void Ship::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	molog("Ship belongs to fleet: %u\n destination: %s\n lastdock: %s\n",
-	      fleet_ ? fleet_->serial() : 0, (destination_.is_set()) ?
-	                                        (boost::format("%u (%d x %d)") % destination_.serial() %
-	                                         destination_.get(egbase)->get_positions(egbase)[0].x %
-	                                         destination_.get(egbase)->get_positions(egbase)[0].y)
-	                                           .str()
-	                                           .c_str() :
-	                                        "-",
-	      (lastdock_.is_set()) ?
-	         (boost::format("%u (%d x %d)") % lastdock_.serial() %
-	          lastdock_.get(egbase)->get_positions(egbase)[0].x %
-	          lastdock_.get(egbase)->get_positions(egbase)[0].y)
-	            .str()
-	            .c_str() :
-	         "-");
+	      fleet_ ? fleet_->serial() : 0,
+	      (destination_.is_set()) ? (boost::format("%u (%d x %d)") % destination_.serial() %
+	                                 destination_.get(egbase)->get_positions(egbase)[0].x %
+	                                 destination_.get(egbase)->get_positions(egbase)[0].y)
+	                                   .str()
+	                                   .c_str() :
+	                                "-",
+	      (lastdock_.is_set()) ? (boost::format("%u (%d x %d)") % lastdock_.serial() %
+	                              lastdock_.get(egbase)->get_positions(egbase)[0].x %
+	                              lastdock_.get(egbase)->get_positions(egbase)[0].y)
+	                                .str()
+	                                .c_str() :
+	                             "-");
 
 	molog("In state: %u (%s)\n", static_cast<unsigned int>(ship_state_),
 	      (expedition_) ? "expedition" : "transportation");
@@ -1093,6 +1093,12 @@ void Ship::send_message(Game& game,
 	                                  heading, rt_description, get_position(), serial_)));
 }
 
+Ship::Expedition::~Expedition() {
+	if (economy) {
+		economy->owner().remove_economy(economy->serial());
+	}
+}
+
 /*
 ==============================
 
@@ -1101,7 +1107,7 @@ Load / Save implementation
 ==============================
 */
 
-constexpr uint8_t kCurrentPacketVersion = 6;
+constexpr uint8_t kCurrentPacketVersion = 8;
 
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
@@ -1111,6 +1117,9 @@ const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 
 void Ship::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
+
+	// Economy
+	economy_serial_ = fr.unsigned_32();
 
 	// The state the ship is in
 	ship_state_ = static_cast<ShipStates>(fr.unsigned_8());
@@ -1172,6 +1181,14 @@ void Ship::Loader::load_finish() {
 
 	Ship& ship = get<Ship>();
 
+	// The economy can sometimes be nullptr (e.g. when there are no ports).
+	if (economy_serial_ != kInvalidSerial) {
+		ship.economy_ = ship.get_owner()->get_economy(economy_serial_);
+		if (!ship.economy_) {
+			ship.economy_ = ship.get_owner()->create_economy(economy_serial_);
+		}
+	}
+
 	// restore the state the ship is in
 	ship.ship_state_ = ship_state_;
 
@@ -1181,8 +1198,7 @@ void Ship::Loader::load_finish() {
 	// if the ship is on an expedition, restore the expedition specific data
 	if (expedition_) {
 		ship.expedition_.swap(expedition_);
-		ship.expedition_->economy.reset(new Economy(*ship.get_owner()));
-		ship.economy_ = ship.expedition_->economy.get();
+		ship.expedition_->economy = ship.economy_;
 	} else
 		assert(ship_state_ == ShipStates::kTransport);
 
@@ -1198,28 +1214,16 @@ void Ship::Loader::load_finish() {
 
 MapObject::Loader* Ship::load(EditorGameBase& egbase, MapObjectLoader& mol, FileRead& fr) {
 	std::unique_ptr<Loader> loader(new Loader);
-
 	try {
 		// The header has been peeled away by the caller
 		uint8_t const packet_version = fr.unsigned_8();
-		if (1 <= packet_version && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			try {
 				const ShipDescr* descr = nullptr;
 				// Removing this will break the test suite
-				if (packet_version < 5) {
-					std::string tribe_name = fr.string();
-					fr.c_string();  // This used to be the ship's name, which we don't need any more.
-					if (!Widelands::tribe_exists(tribe_name)) {
-						throw GameDataError("Tribe %s does not exist for ship", tribe_name.c_str());
-					}
-					const DescriptionIndex& tribe_index = egbase.tribes().tribe_index(tribe_name);
-					const TribeDescr& tribe_descr = *egbase.tribes().get_tribe_descr(tribe_index);
-					descr = egbase.tribes().get_ship_descr(tribe_descr.ship());
-				} else {
-					std::string name = fr.c_string();
-					const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
-					descr = egbase.tribes().get_ship_descr(ship_index);
-				}
+				std::string name = fr.c_string();
+				const DescriptionIndex& ship_index = egbase.tribes().safe_ship_index(name);
+				descr = egbase.tribes().get_ship_descr(ship_index);
 				loader->init(egbase, mol, descr->create_object());
 				loader->load(fr);
 			} catch (const WException& e) {
@@ -1241,6 +1245,9 @@ void Ship::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.c_string(descr().name());
 
 	Bob::save(egbase, mos, fw);
+
+	// The economy can sometimes be nullptr (e.g. when there are no ports).
+	fw.unsigned_32(economy_ != nullptr ? economy_->serial() : kInvalidSerial);
 
 	// state the ship is in
 	fw.unsigned_8(static_cast<uint8_t>(ship_state_));

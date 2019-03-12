@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 by the Widelands Development Team
+ * Copyright (C) 2017-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 #include "graphic/styles/font_style.h"
 #include "graphic/styles/map_object_style.h"
 #include "graphic/styles/panel_styles.h"
-#include "graphic/styles/progreess_bar_style.h"
+#include "graphic/styles/progress_bar_style.h"
 #include "graphic/styles/statistics_plot_style.h"
 #include "graphic/styles/table_style.h"
 #include "graphic/styles/text_panel_style.h"

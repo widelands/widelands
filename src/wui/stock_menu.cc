@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -75,11 +75,10 @@ void StockMenu::think() {
 void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::WareWorker type) {
 	waresdisplay->remove_all_warelists();
 	const Widelands::Player& player = *player_.get_player();
-	const uint32_t nrecos = player.get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i)
-		waresdisplay->add_warelist(type == Widelands::wwWARE ?
-		                              player.get_economy_by_number(i)->get_wares() :
-		                              player.get_economy_by_number(i)->get_workers());
+	for (const auto& economy : player.economies()) {
+		waresdisplay->add_warelist(type == Widelands::wwWARE ? economy.second->get_wares() :
+		                                                       economy.second->get_workers());
+	}
 }
 
 /**
@@ -89,16 +88,10 @@ void StockMenu::fill_total_waresdisplay(WaresDisplay* waresdisplay, Widelands::W
 void StockMenu::fill_warehouse_waresdisplay(WaresDisplay* waresdisplay,
                                             Widelands::WareWorker type) {
 	waresdisplay->remove_all_warelists();
-	const Widelands::Player& player = *player_.get_player();
-	const uint32_t nrecos = player.get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i) {
-		const std::vector<Widelands::Warehouse*>& warehouses =
-		   player.get_economy_by_number(i)->warehouses();
-
-		for (std::vector<Widelands::Warehouse*>::const_iterator it = warehouses.begin();
-		     it != warehouses.end(); ++it) {
-			waresdisplay->add_warelist(type == Widelands::wwWARE ? (*it)->get_wares() :
-			                                                       (*it)->get_workers());
+	for (const auto& economy : player_.player().economies()) {
+		for (const auto* warehouse : economy.second->warehouses()) {
+			waresdisplay->add_warelist(type == Widelands::wwWARE ? warehouse->get_wares() :
+			                                                       warehouse->get_workers());
 		}
 	}
 }

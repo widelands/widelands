@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,7 +63,6 @@ FullscreenHelpWindow::FullscreenHelpWindow(Panel* const parent,
 		helptext = err.what();
 	}
 
-	textarea_->force_new_renderer();
 	textarea_->set_size(width - 2 * margin, height - btn->get_h() - 3 * margin);
 	textarea_->set_text(helptext);
 

@@ -28,14 +28,19 @@ tribes:new_productionsite_type {
          hotspot = {56, 80},
          fps = 10,
       },
-      working = {
-         pictures = path.list_files (dirname .. "working_??.png"),
+      working_fur = {
+         pictures = path.list_files (dirname .. "working_fur_??.png"),
          hotspot = {56, 80},
+         fps = 10,
+      },
+      working_metal = {
+         pictures = path.list_files (dirname .. "working_metal_??.png"),
+         hotspot = {56, 81},
          fps = 10,
       },
       unoccupied = {
          pictures = path.list_files (dirname .. "unoccupied_?.png"),
-         hotspot = {56, 80},
+         hotspot = {56, 66},
       },
    },
 
@@ -72,7 +77,7 @@ tribes:new_productionsite_type {
             "call=smelt_mixed",
             "call=smelt_iron",
             "call=make_fur",
-            "return=skipped"
+            "return=no_stats"
          }
       },
       make_fur = {
@@ -82,7 +87,7 @@ tribes:new_productionsite_type {
             "return=skipped unless site has fur_garment_old",
             "sleep=40000",
             "consume=fur_garment_old",
-            "animate=working 15000",
+            "animate=working_fur 15000",
             "produce=fur"
          }
       },
@@ -90,10 +95,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron because ...
          descname = pgettext("frisians_building", "recycling iron"),
          actions = {
-            "return=skipped unless economy needs iron",
+            "return=skipped unless economy needs iron or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "sleep=40000",
             "consume=scrap_iron:2 coal",
-            "animate=working 40000",
+            "animate=working_metal 40000",
             "produce=iron:2"
          }
       },
@@ -101,10 +106,10 @@ tribes:new_productionsite_type {
          -- TRANSLATORS: Completed/Skipped/Did not start recycling iron and gold because ...
          descname = pgettext("frisians_building", "recycling iron and gold"),
          actions = {
-            "return=skipped unless economy needs iron or economy needs gold",
+            "return=skipped unless economy needs iron or economy needs gold or not economy needs coal", -- if the economy doesn't need coal the situation gets even improved because recycling saves coal
             "sleep=40000",
             "consume=scrap_metal_mixed:2 coal",
-            "animate=working 40000",
+            "animate=working_metal 40000",
             "produce=iron gold"
          }
       },

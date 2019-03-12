@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,8 @@
 #include <memory>
 
 #include "graphic/align.h"
-#include "graphic/richtext.h"
 #include "graphic/styles/panel_styles.h"
+#include "graphic/text_layout.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/scrollbar.h"
 
@@ -59,23 +59,13 @@ struct MultilineTextarea : public Panel {
 	}
 
 	void set_text(const std::string&);
-	uint32_t get_eff_w() const {
+	// int instead of uint because of overflow situations
+	int32_t get_eff_w() const {
 		return scrollbar_.is_enabled() ? get_w() - Scrollbar::kSize : get_w();
 	}
 
 	void set_style(UI::FontStyleInfo style);
 	void set_font_scale(float scale);
-
-	// Most MultilineTextareas that contain richtext markup still use the old
-	// font renderer, but some are already switched over the the new font
-	// renderer. The markup is incompatible, so we need to be able to tell the
-	// MultilineTextarea which one to use. MultilineTextareas without markup
-	// automatically use the new font renderer.
-	// TODO(GunChleoc): Remove this function once the switchover to the new font
-	// renderer is complete.
-	void force_new_renderer(bool force = true) {
-		force_new_renderer_ = force;
-	}
 
 	// Drawing and event handlers
 	void draw(RenderTarget&) override;
@@ -100,17 +90,16 @@ private:
 	std::string make_richtext();
 	std::string text_;
 
-	FontStyleInfo style_;
-	float font_scale_;
-	const Align align_;
+  std::shared_ptr<const UI::RenderedText> rendered_text_;
 
-	bool force_new_renderer_;
-	bool use_old_renderer_;
-	RichText rt;
+  FontStyleInfo style_;
+  float font_scale_;
+
+	const Align align_;
 
 	Scrollbar scrollbar_;
 	ScrollMode scrollmode_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_MULTILINETEXTAREA_H

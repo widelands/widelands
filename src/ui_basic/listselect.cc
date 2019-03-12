@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,7 +25,7 @@
 
 #include "base/log.h"
 #include "graphic/align.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -44,7 +44,7 @@ namespace UI {
  *       y
  *       w       dimensions, in pixels, of the Listselect
  *       h
-*/
+ */
 BaseListselect::BaseListselect(Panel* const parent,
                                const int32_t x,
                                const int32_t y,
@@ -83,14 +83,14 @@ BaseListselect::BaseListselect(Panel* const parent,
 
 /**
  * Free allocated resources
-*/
+ */
 BaseListselect::~BaseListselect() {
 	clear();
 }
 
 /**
  * Remove all entries from the listselect
-*/
+ */
 void BaseListselect::clear() {
 	for (EntryRecord* entry : entry_records_) {
 		delete entry;
@@ -110,7 +110,7 @@ void BaseListselect::clear() {
  * Args: name   name that will be displayed
  * entry  value returned by get_select()
  *       sel    if true, directly select the new entry
-*/
+ */
 void BaseListselect::add(const std::string& name,
                          uint32_t entry,
                          const Image* pic,
@@ -204,7 +204,7 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End) {
 
 /**
  * Scroll to the given position, in pixels.
-*/
+ */
 void BaseListselect::set_scrollpos(const int32_t i) {
 	if (scrollpos_ == uint32_t(i))
 		return;
@@ -296,7 +296,7 @@ void BaseListselect::layout() {
 	if (selection_mode_ == ListselectLayout::kDropdown) {
 		for (size_t i = 0; i < entry_records_.size(); ++i) {
 			const EntryRecord& er = *entry_records_[i];
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(
 			   as_richtext_paragraph(richtext_escape(er.name), font_style_));
 			int picw = max_pic_width_ ? max_pic_width_ + 10 : 0;
 			int difference = rendered_text->width() + picw + 8 - get_eff_w();
@@ -342,7 +342,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		const EntryRecord& er = *entry_records_[idx];
 		std::shared_ptr<const UI::RenderedText> rendered_text =
-		   UI::g_fh1->render(as_richtext_paragraph(richtext_escape(er.name), font_style_));
+		   UI::g_fh->render(as_richtext_paragraph(richtext_escape(er.name), font_style_));
 
 		int lineheight = std::max(get_lineheight(), rendered_text->height());
 
@@ -379,7 +379,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 
 		// Now draw pictures
 		if (er.pic) {
-			dst.blit(Vector2i(UI::g_fh1->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
+			dst.blit(Vector2i(UI::g_fh->fontset()->is_rtl() ? get_eff_w() - er.pic->width() - 1 : 1,
 			                  y + (get_lineheight() - er.pic->height()) / 2),
 			         er.pic);
 		}
@@ -391,7 +391,7 @@ void BaseListselect::draw(RenderTarget& dst) {
 		}
 
 		// Shift for image width
-		if (!UI::g_fh1->fontset()->is_rtl()) {
+		if (!UI::g_fh->fontset()->is_rtl()) {
 			point.x += picw;
 		}
 
@@ -537,4 +537,4 @@ void BaseListselect::remove(const char* const str) {
 		}
 	}
 }
-}
+}  // namespace UI

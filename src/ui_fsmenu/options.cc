@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/default_resolution.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
@@ -207,7 +207,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      // Game options
      auto_roadbuild_mode_(
         &box_game_, Vector2i::zero(), _("Start building road after placing a flag")),
-     show_workarea_preview_(&box_game_, Vector2i::zero(), _("Show buildings area preview")),
      transparent_chat_(
         &box_game_, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
 
@@ -215,16 +214,16 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      /** TRANSLATORS: and it also lets you jump to it on the map. */
      single_watchwin_(&box_game_, Vector2i::zero(), _("Use single watchwindow mode")),
      os_(opt) {
+
 	// Set up UI Elements
 	title_.set_style(g_gr->styles().font_style(UI::FontStyle::kFsMenuTitle));
-	translation_info_.force_new_renderer();
 
 	// Buttons
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_);
+	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_);
 	button_box_.add_inf_space();
 	button_box_.add(&apply_);
 	button_box_.add_inf_space();
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &cancel_ : &ok_);
+	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_);
 
 	// Tabs
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
@@ -274,7 +273,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Game
 	box_game_.add(&auto_roadbuild_mode_);
-	box_game_.add(&show_workarea_preview_);
 	box_game_.add(&transparent_chat_);
 	box_game_.add(&single_watchwin_);
 
@@ -346,7 +344,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Game options
 	auto_roadbuild_mode_.set_state(opt.auto_roadbuild_mode);
-	show_workarea_preview_.set_state(opt.show_warea);
 	transparent_chat_.set_state(opt.transparent_chat);
 	single_watchwin_.set_state(opt.single_watchwin);
 
@@ -589,7 +586,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 
 	// Game options
 	os_.auto_roadbuild_mode = auto_roadbuild_mode_.get_state();
-	os_.show_warea = show_workarea_preview_.get_state();
 	os_.transparent_chat = transparent_chat_.get_state();
 	os_.single_watchwin = single_watchwin_.get_state();
 
@@ -650,7 +646,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 
 	// Game options
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
-	opt.show_warea = opt_section_.get_bool("workareapreview", true);
 	opt.transparent_chat = opt_section_.get_bool("transparent_chat", true);
 	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
 
@@ -692,7 +687,6 @@ void OptionsCtrl::save_options() {
 
 	// Game options
 	opt_section_.set_bool("auto_roadbuild_mode", opt.auto_roadbuild_mode);
-	opt_section_.set_bool("workareapreview", opt.show_warea);
 	opt_section_.set_bool("transparent_chat", opt.transparent_chat);
 	opt_section_.set_bool("single_watchwin", opt.single_watchwin);
 
@@ -701,7 +695,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
-	UI::g_fh1->reinitialize_fontset(i18n::get_locale());
+	UI::g_fh->reinitialize_fontset(i18n::get_locale());
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 

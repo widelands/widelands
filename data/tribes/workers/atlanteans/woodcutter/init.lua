@@ -31,14 +31,14 @@ tribes:new_worker_type {
 
    programs = {
       harvest = {
-         "findobject attrib:tree radius:10",
-         "walk object",
-         "play_sound sound/atlanteans/saw sawing 230",
-         "animation sawing 10000",
-         "play_sound sound/woodcutting tree-falling 130",
-         "object fall",
-         "animation idle 2000",
-         "createware log",
+         "findobject=attrib:tree radius:10",
+         "walk=object",
+         "playsound=sound/atlanteans/saw sawing 230",
+         "animate=sawing 10000",
+         "playsound=sound/woodcutting tree-falling 130",
+         "callobject=fall",
+         "animate=idle 2000",
+         "createware=log",
          "return"
       }
    },

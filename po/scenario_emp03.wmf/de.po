@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-03-24 18:23+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Hahn <giggeler53@gmail.com>, 2018\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -811,12 +811,12 @@ msgstr "Amalea sieht nachdenklich aus …"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
-"they had to use up all our remaining gold for building the port. Now we "
-"don’t have any gold left."
+"they have to use all our remaining gold for building the port. So, we won’t "
+"have any gold left after our port is build."
 msgstr ""
 "Lutius, als ich mich mit unseren Bauarbeitern unterhalten habe, sagten sie "
-"mir, dass sie unser letztes Gold für den Bau des Hafens brauchten. Jetzt "
-"haben wir nichts mehr davon übrig."
+"mir, dass sie unser letztes Gold für den Bau des Hafens brauchen. Daher "
+"werden wir nichts mehr davon übrig haben, wenn unser Hafen errichtet ist."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440

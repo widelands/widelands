@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ namespace UI {
  * graphically enhanced with a coloured bar.
  *
  * The actual state of progress
-*/
+ */
 struct ProgressBar : public Panel {
 	enum {
 		Horizontal = 0,  ///< from left to right
@@ -61,6 +61,6 @@ private:
 	uint32_t total_;  ///< maximum progress
 	const UI::ProgressbarStyleInfo& style_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_PROGRESSBAR_H

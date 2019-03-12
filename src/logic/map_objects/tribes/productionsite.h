@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -147,7 +147,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActReturn;
 	friend struct ProductionProgram::ActReturn::WorkersNeedExperience;
 	friend struct ProductionProgram::ActCall;
-	friend struct ProductionProgram::ActWorker;
+	friend struct ProductionProgram::ActCallWorker;
 	friend struct ProductionProgram::ActSleep;
 	friend struct ProductionProgram::ActCheckMap;
 	friend struct ProductionProgram::ActAnimate;
@@ -165,7 +165,7 @@ public:
 	explicit ProductionSite(const ProductionSiteDescr& descr);
 	~ProductionSite() override;
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	bool is_stopped() const {
 		return is_stopped_;
@@ -338,7 +338,7 @@ private:
  *
  * This class will be extended to support ordering of certain wares directly or
  * releasing some wares out of a building
-*/
+ */
 struct Input {
 	Input(const DescriptionIndex& Ware, uint8_t const Max) : ware_(Ware), max_(Max) {
 	}

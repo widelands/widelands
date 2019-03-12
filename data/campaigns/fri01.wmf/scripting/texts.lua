@@ -114,7 +114,8 @@ obj_escape = {
    title=_"Escape from the floods",
    number = 1,
    body = objective_text(_"Flee from the Floods",
-      li(_[[Build a port, a weaving mill and a shipyard, then start an expedition to flee before the storm flood drowns the island.]])
+      li(_[[Build a port, a weaving mill and a shipyard, then start an expedition to flee before the storm flood drowns the island.]]) ..
+      li_arrow(_[[You can build the port either on the easternmost tip of the island or in the place where the enemy’s headquarters stood.]])
    ),
 }
 
@@ -398,11 +399,17 @@ rising_water_4 = {
    title =_ "Storm Flood",
    body=hauke(_"The island is flooding!",
       -- TRANSLATORS: Hauke – rising water
-      _([[Despair not, I did espy some hope! The easternmost tip of the island seems well suited to build a port on. If we manage to construct a ship, and fill it with all we need to build a new settlement, we may be able to escape.]])
+      _([[Despair not, I did espy some hope! The easternmost tip of the island, as well as the space where the fiends’ headquarters stood, seems well suited to build a port on. If we manage to construct a ship, and fill it with all we need to build a new settlement, we may be able to escape.]])
      .. paragraphdivider() ..
       -- TRANSLATORS: Hauke – rising water
       _([[The storm flood seems to be coming from the west. If we hurry, we will just make it! We only need to build a port and a shipyard – oh, and a weaving mill to weave the durable cloth, which is made from reed and fur, for the sails. Then we can launch an expedition from the port. Pray to the gods and make haste!]]))
       .. new_objectives(obj_escape),
+}
+rising_water_5 = {
+   title =_ "Don’t Forget the Soldiers",
+   body=reebaud(_"Soldiers to the port!",
+      -- TRANSLATORS: Reebaud – rising water
+      _([[I almost forgot in this haste – whereever we will land, we’ll need soldiers to secure and expand our new colony. There’s space for up to 10 soldiers on our ship, if they don’t mind being all crammed up together. Let’s send some to the port when it’s completed, so they can embark when we set sail!]])),
 }
 
 victory_1 = {

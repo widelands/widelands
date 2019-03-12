@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2018 by the Widelands Development Team
+ * Copyright (C) 2010-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,7 +92,7 @@ struct MultiPlayerClientGroup : public UI::Box {
 			   case NoteGameSettings::Action::kPlayer:
 				   break;
 			   }
-			});
+		   });
 	}
 
 	/// Update dropdown sizes
@@ -272,7 +272,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					   update();
 				   }
 			   }
-			});
+		   });
 
 		// Init dropdowns
 		update();
@@ -627,16 +627,16 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup(UI::Panel* const parent,
      settings_(settings),
      npsb(new NetworkPlayerSettingsBackend(settings_)),
      clientbox(this, 0, 0, UI::Box::Vertical),
-     playerbox(this, 0, 0, UI::Box::Vertical, w * 9 / 15, h, kPadding),
+     playerbox(this, 0, 0, UI::Box::Vertical, w * 36 / 53, h, kPadding),
      buth_(buth) {
-	clientbox.set_size(w / 3, h);
+	clientbox.set_size(w * 16 / 53, h);
 	clientbox.set_scrolling(true);
 
 	add(&clientbox, UI::Box::Resizing::kExpandBoth);
 	add(&playerbox);
 
 	// Playerbox
-	playerbox.set_size(w * 9 / 15, h);
+	playerbox.set_size(w * 36 / 53, h);
 	playerbox.add_space(0);
 	multi_player_player_groups.resize(kMaxPlayers);
 	for (PlayerSlot i = 0; i < multi_player_player_groups.size(); ++i) {

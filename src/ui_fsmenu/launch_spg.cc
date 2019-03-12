@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -283,7 +283,14 @@ void FullscreenMenuLaunchSPG::set_player_names_and_tribes() {
 	Widelands::PlayerNumber const nrplayers = map.get_nrplayers();
 	for (uint8_t i = 0; i < nrplayers; ++i) {
 		settings_->set_player_name(i, map.get_scenario_player_name(i + 1));
-		settings_->set_player_tribe(i, map.get_scenario_player_tribe(i + 1));
+		const std::string playertribe = map.get_scenario_player_tribe(i + 1);
+		if (playertribe.empty()) {
+			// Set tribe selection to random
+			settings_->set_player_tribe(i, "", true);
+		} else {
+			// Set tribe selection from map
+			settings_->set_player_tribe(i, playertribe);
+		}
 	}
 }
 

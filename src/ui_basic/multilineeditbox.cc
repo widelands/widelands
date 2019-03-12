@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 #include <boost/bind.hpp>
 
 #include "base/utf8.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/style_manager.h"
@@ -82,7 +82,6 @@ private:
 /**
  * Initialize an editbox that supports multiline strings.
 */
-// NOCOM typing is broken. Might be the bug that was already fixed in trunk.
 MultilineEditbox::MultilineEditbox(
    Panel* parent, int32_t x, int32_t y, uint32_t w, uint32_t h, UI::PanelStyle style)
    : Panel(parent, x, y, w, h), d_(new Data(*this, g_gr->styles().editbox_style(style))) {
@@ -173,7 +172,7 @@ uint32_t MultilineEditbox::Data::prev_char(uint32_t cursor) {
 
 	do {
 		--cursor;
-		// TODO(GunChleoc): When switchover to g_fh1 is complete, see if we can go full ICU here.
+		// TODO(GunChleoc): See if we can go full ICU here.
 	} while (cursor > 0 && Utf8::is_utf8_extended(text[cursor]));
 
 	return cursor;
@@ -206,7 +205,7 @@ uint32_t MultilineEditbox::Data::snap_to_char(uint32_t cursor) {
 
 /**
  * The mouse was clicked on this editbox
-*/
+ */
 bool MultilineEditbox::handle_mousepress(const uint8_t btn, int32_t, int32_t) {
 	if (btn == SDL_BUTTON_LEFT && get_can_focus()) {
 		focus();

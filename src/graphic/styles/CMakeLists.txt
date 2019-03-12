@@ -5,7 +5,7 @@ wl_library(graphic_styles
     font_style.h
     map_object_style.h
     panel_styles.h
-    progreess_bar_style.h
+    progress_bar_style.h
     text_panel_style.h
     statistics_plot_style.h
     table_style.h

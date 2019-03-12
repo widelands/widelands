@@ -24,10 +24,11 @@ tribes:new_worker_type {
 
    programs = {
       scout = {
-         "scout 15 75000", -- radius 15, 75 seconds until return
+         "scout=15 75000", -- radius 15, 75 seconds until return
          "return"
       }
    },
 
+   ware_hotspot = {0, 20},
    animations = animations,
 }

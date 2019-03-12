@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -270,7 +270,7 @@ public:
 	                  RenderTarget* dst) const;
 
 	// For debug
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// default tasks
 	void reset_tasks(Game&);
@@ -437,6 +437,6 @@ public:
 	void save(EditorGameBase&, MapObjectSaver&, FileWrite&) override;
 	// Pure Bobs cannot be loaded
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_BOB_H

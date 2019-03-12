@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -399,10 +399,10 @@ static void save_table_recursively(lua_State* L,
 
       Saves information that can be read by other scenarios.
 
-      If an array is used, the data will be saved in the correct order. Arrays may not contain nil values.
-      If the table is not an array, all keys have to be strings.
-      Tables may contain subtables of any depth. Cyclic dependencies will cause Widelands to crash.
-      Only tables/arrays, strings, integer numbers and booleans may be used as values.
+      If an array is used, the data will be saved in the correct order. Arrays may not contain nil
+      values. If the table is not an array, all keys have to be strings. Tables may contain
+      subtables of any depth. Cyclic dependencies will cause Widelands to crash. Only tables/arrays,
+      strings, integer numbers and booleans may be used as values.
 */
 int LuaEditorGameBase::save_campaign_data(lua_State* L) {
 
@@ -563,7 +563,9 @@ const MethodType<LuaPlayerBase> LuaPlayerBase::Methods[] = {
    METHOD(LuaPlayerBase, place_ship),  {nullptr, nullptr},
 };
 const PropertyType<LuaPlayerBase> LuaPlayerBase::Properties[] = {
-   PROP_RO(LuaPlayerBase, number), PROP_RO(LuaPlayerBase, tribe_name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaPlayerBase, number),
+   PROP_RO(LuaPlayerBase, tribe_name),
+   {nullptr, nullptr, nullptr},
 };
 
 void LuaPlayerBase::__persist(lua_State* L) {
@@ -875,8 +877,8 @@ int LuaPlayerBase::get_workers(lua_State* L) {
 	const DescriptionIndex worker = player.tribe().worker_index(workername);
 
 	uint32_t nworkers = 0;
-	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		nworkers += player.get_economy_by_number(i)->stock_worker(worker);
+	for (const auto& economy : player.economies()) {
+		nworkers += economy.second->stock_worker(worker);
 	}
 	lua_pushuint32(L, nworkers);
 	return 1;
@@ -901,8 +903,8 @@ int LuaPlayerBase::get_wares(lua_State* L) {
 	const DescriptionIndex ware = egbase.tribes().ware_index(warename);
 
 	uint32_t nwares = 0;
-	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
-		nwares += player.get_economy_by_number(i)->stock_ware(ware);
+	for (const auto& economy : player.economies()) {
+		nwares += economy.second->stock_ware(ware);
 	}
 	lua_pushuint32(L, nwares);
 	return 1;
@@ -940,4 +942,4 @@ void luaopen_wlbases(lua_State* const L) {
 	register_class<LuaEditorGameBase>(L, "bases");
 	register_class<LuaPlayerBase>(L, "bases");
 }
-}
+}  // namespace LuaBases

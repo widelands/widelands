@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,6 +62,6 @@ const std::string& get_localedir();
 // "or", depending on 'concatenate_with'.
 enum class ConcatenateWith { AND, OR, AMPERSAND, COMMA };
 std::string localize_list(const std::vector<std::string>& items, ConcatenateWith concatenate_with);
-}
+}  // namespace i18n
 
 #endif  // end of include guard: WL_BASE_I18N_H

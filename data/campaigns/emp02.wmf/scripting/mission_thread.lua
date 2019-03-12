@@ -266,6 +266,7 @@ function barbarians_thread()
    campaign_message_box(diary_page_11)
 
    p1:reveal_scenario("empiretut02")
+   p1:reveal_campaign("campsect2")
 end
 
 run(building_materials)

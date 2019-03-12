@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -213,8 +213,10 @@ private:
 	void setup_homedir();
 
 	void cleanup_replays();
-
 	void cleanup_ai_files();
+	void cleanup_temp_files();
+	void cleanup_temp_backups(std::string dir);
+	void cleanup_temp_backups();
 
 	bool redirect_output(std::string path = "");
 
