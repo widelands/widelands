@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003-2017 by the Widelands Development Team
+ * Copyright (C) 2003-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/align.h"
-#include "graphic/graphic.h"
 #include "ui_basic/button.h"
 
 #define CHAT_HISTORY_SIZE 5
@@ -49,9 +48,9 @@ struct EditBox : public Panel {
 	        int32_t x,
 	        int32_t y,
 	        uint32_t w,
-	        uint32_t h = 0,
-	        int margin_y = 2,
-	        const Image* background = g_gr->images().get("images/ui_basic/but2.png"),
+	        uint32_t h,
+	        int margin_y,
+	        UI::PanelStyle style,
 	        int font_size = UI_FONT_SIZE_SMALL);
 	~EditBox() override;
 
@@ -82,6 +81,6 @@ private:
 	int16_t history_position_;
 	std::string history_[CHAT_HISTORY_SIZE];
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_EDITBOX_H

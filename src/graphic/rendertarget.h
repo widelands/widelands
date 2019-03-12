@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ class Surface;
  * \ref set_window() with the values stored in previous and prevofs.
  * \note If the sub-window would be empty/invisible, \ref enter_window() returns
  * false and doesn't change the window state at all.
-*/
+ */
 // TODO(sirver): remove window functions and merge with surface once
 // the old richtext renderer is gone.
 class RenderTarget {

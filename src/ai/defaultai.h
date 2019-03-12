@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -155,7 +155,7 @@ private:
 	// common for defaultai.cc and defaultai_seafaring.cc
 	static constexpr uint32_t kExpeditionMinDuration = 60 * 60 * 1000;
 	static constexpr uint32_t kExpeditionMaxDuration = 210 * 60 * 1000;
-	static constexpr uint32_t kNoShip = std::numeric_limits<uint32_t>::max();
+	static constexpr Widelands::Serial kNoShip = Widelands::kInvalidSerial;
 	static constexpr int kShipCheckInterval = 5 * 1000;
 
 	// used by defaultai_warfare.cc
@@ -199,7 +199,7 @@ private:
 	bool create_shortcut_road(const Widelands::Flag&,
 	                          uint16_t maxcheckradius,
 	                          int16_t minReduction,
-	                          const int32_t gametime);
+	                          const uint32_t gametime);
 	// trying to identify roads that might be removed
 	bool dispensable_road_test(const Widelands::Road&);
 	bool dismantle_dead_ends();
@@ -287,6 +287,7 @@ private:
 	Widelands::BuildingNecessity check_building_necessity(Widelands::BuildingObserver&, uint32_t);
 	void soldier_trained(const Widelands::TrainingSite&);
 	bool critical_mine_unoccupied(uint32_t);
+
 	SoldiersStatus soldier_status_;
 	int32_t vacant_mil_positions_average_;
 	uint16_t attackers_count_;
@@ -330,6 +331,7 @@ private:
 	// it will map mined material to observer
 	std::map<int32_t, Widelands::MineTypesObserver> mines_per_type;
 	std::vector<uint32_t> spots_avail;
+	Widelands::MineFieldsObserver mine_fields_stat;
 
 	// used for statistics of buildings
 	uint32_t numof_psites_in_constr;
@@ -349,6 +351,8 @@ private:
 	uint32_t next_mine_construction_due_;
 	uint16_t fishers_count_;
 	uint16_t bakeries_count_;
+
+	uint32_t first_iron_mine_built;
 
 	// for training sites per type
 	int16_t ts_finished_count_;
@@ -377,8 +381,8 @@ private:
 	// buildings
 	bool basic_economy_established;
 
-	// id of iron_ore to identify iron mines in mines_per_type map
-	int32_t iron_ore_id = Widelands::INVALID_INDEX;
+	// id of iron as resource to identify iron mines in mines_per_type map
+	int32_t iron_resource_id = Widelands::INVALID_INDEX;
 
 	// this is a bunch of patterns that have to identify weapons and armors for input queues of
 	// trainingsites
@@ -398,7 +402,6 @@ private:
 	std::vector<std::vector<int16_t>> AI_military_matrix;
 	std::vector<int16_t> AI_military_numbers;
 
-	bool has_critical_mines = false;
 	uint16_t buil_material_mines_count = 0;
 
 	bool ai_training_mode_ = false;
@@ -411,7 +414,7 @@ private:
 	   outofresource_subscriber_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteTrainingSiteSoldierTrained>>
 	   soldiertrained_subscriber_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipMessage>> shipnotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 };
 
 #endif  // end of include guard: WL_AI_DEFAULTAI_H

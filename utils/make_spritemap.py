@@ -31,7 +31,6 @@ def macr_exact_bruteforce(bitmask, lower_range=None, upper_range=None, FRAGMENT_
 
     Note: Returns a rectangle with cost strictly greater than FRAGMENT_COST + 1 if bitmask contains
     no set pixels.
-
     """
     if bitmask.shape[0] * bitmask.shape[1] > 4000:
         raise Exception('macr_exact_bruteforce called on a large bitmask')
@@ -55,7 +54,7 @@ def macr_exact_bruteforce(bitmask, lower_range=None, upper_range=None, FRAGMENT_
                         [0], upper_range[0][1]:upper_range[1][1]]
     br = np.tile(br.reshape((lower_ext[0], 1, 1, upper_ext[
                  1])), (1, lower_ext[1], upper_ext[0], 1))
-    bl = (cum01 - cum0 - cum1 + bitmask)[lower_range[0][0]:lower_range[1][0], lower_range[0][1]:lower_range[1][1]]
+    bl = (cum01 - cum0 - cum1 + bitmask)[lower_range[0][0]                                         :lower_range[1][0], lower_range[0][1]:lower_range[1][1]]
     bl = np.tile(bl.reshape(lower_ext + (1, 1)), (1, 1) + upper_ext)
 
     indices = np.indices(lower_ext + upper_ext)
@@ -86,7 +85,6 @@ def minimum_average_cost_rectangle(bitmask, FRAGMENT_COST=FRAGMENT_COST):
     Covered in bitmask)
 
     Returns (cost, rectangle)
-
     """
     return macr_exact_bruteforce(bitmask, FRAGMENT_COST=FRAGMENT_COST)
 
@@ -121,7 +119,6 @@ def minimum_average_cost_grow(bitmask, rectangle):
 
     Returns (cost, rectangle), where cost is None if no additional
     pixels can be covered.
-
     """
     best_cost = None
     best_rectangle = rectangle
@@ -206,7 +203,8 @@ def draw_rectangles_over_bitmask(bitmask, rectangles):
     else:
         coverage = np.zeros(bitmask.shape)
     for bmrow, crow in zip(bitmask, coverage):
-        print ''.join([str(c) if c > 0 else '*' if b else ' ' for b, c in zip(bmrow, crow)])
+        print ''.join(
+            [str(c) if c > 0 else '*' if b else ' ' for b, c in zip(bmrow, crow)])
 
 
 def draw_frame_diffs(frames):
@@ -217,7 +215,8 @@ def draw_frame_diffs(frames):
         np.all(np.all(npframes[0:1, :, :, :] == npframes, axis=-1), axis=0)
     )
     for eqrow, ntrow in zip(all_equal_not_transparent, any_not_transparent):
-        print ''.join(['.' if eq else '*' if nt else ' ' for eq, nt in zip(eqrow, ntrow)])
+        print ''.join(['.' if eq else '*' if nt else ' ' for eq,
+                       nt in zip(eqrow, ntrow)])
 
 
 def rectangle_cost(rectangle, FRAGMENT_COST=FRAGMENT_COST):
@@ -231,7 +230,6 @@ def compute_rectangle_covering(bitmask, FRAGMENT_COST=FRAGMENT_COST):
     with a goal of minimizing Total Area of Covering Rectangles + FRAGMENT_COST * Number of Covering Rectangles.
 
     Returns (cost, list of rectangles)
-
     """
     # This implements the simple set cover heuristic,
     # i.e. it greedily covers pixels by adding a rectangle with minimum cost
@@ -275,7 +273,6 @@ def build_frame_group_rectangle_covering(frames, FRAGMENT_COST=FRAGMENT_COST):
     frame, as well as individual deltas.
 
     Returns (cost, base_pic, base_pic_rect, [frame_rectangles])
-
     """
     shape = frames[0].pic.shape
     all_opaque_mask = np.all(
@@ -311,7 +308,6 @@ def build_frame_group_regions(frames):
     into blits accordingly.
 
     Return (avgcost, list of list of ((x, y), pic, pc_pic))
-
     """
     pc = frames[0].pc_pic is not None
     regions = []
@@ -381,7 +377,6 @@ def do_optimize_greedy(frames):
 
     We add frames to candidate frame groups greedily as long as the average cost per frame
     decreases. As a heuristic, frames with high pixel overlap are combined first.
-
     """
     MAXREJECT = 10
     uncovered = [idx for idx in xrange(len(frames))]
@@ -503,7 +498,6 @@ def do_crossframe_optimization(animations, chunkset, optimizer):
     the optimizer. The optimizer takes a list of FullFrame tuples and
     returns a list of (offset, pic, pc_pic) tuple lists, one list for
     each frame.
-
     """
     pc = chunkset.has_player_color
 

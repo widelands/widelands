@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,8 @@ ResourceDescription::ResourceDescription(const LuaTable& table)
    : name_(table.get_string("name")),
      descname_(table.get_string("descname")),
      detectable_(table.get_bool("detectable")),
+     timeout_ms_(table.get_int("timeout_ms")),
+     timeout_radius_(table.get_int("timeout_radius")),
      max_amount_(table.get_int("max_amount")),
      representative_image_(table.get_string("representative_image")) {
 
@@ -74,6 +76,14 @@ const std::string& ResourceDescription::descname() const {
 
 bool ResourceDescription::detectable() const {
 	return detectable_;
+}
+
+uint32_t ResourceDescription::timeout_ms() const {
+	return timeout_ms_;
+}
+
+uint32_t ResourceDescription::timeout_radius() const {
+	return timeout_radius_;
 }
 
 ResourceAmount ResourceDescription::max_amount() const {

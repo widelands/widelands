@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@ ShippingItem::ShippingItem(WareInstance& ware) : object_(&ware) {
 ShippingItem::ShippingItem(Worker& worker) : object_(&worker) {
 }
 
-void ShippingItem::get(EditorGameBase& game, WareInstance** ware, Worker** worker) const {
+void ShippingItem::get(const EditorGameBase& game, WareInstance** ware, Worker** worker) const {
 	if (ware) {
 		*ware = nullptr;
 	}

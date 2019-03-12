@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,4 +50,4 @@ UnhandledVersionError::UnhandledVersionError(const char* packet_name,
 	    packet_name % static_cast<int>(packet_version) % static_cast<int>(current_packet_version))
 	      .str();
 }
-}
+}  // namespace Widelands

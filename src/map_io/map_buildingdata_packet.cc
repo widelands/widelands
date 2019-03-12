@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -152,7 +152,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 					if (building.old_buildings_.empty() && !is_a(ConstructionSite, &building)) {
 						throw GameDataError("Failed to read %s %u: No former buildings information.\n"
 						                    "Your savegame is corrupted",
-						                    building.descr().descname().c_str(), building.serial());
+						                    building.descr().name().c_str(), building.serial());
 					}
 
 					if (fr.unsigned_8()) {
@@ -161,7 +161,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 								log("WARNING: Found a stopped %s at (%i, %i) in the "
 								    "savegame. Militarysites are not stoppable. "
 								    "Ignoring.",
-								    building.descr().descname().c_str(), building.get_position().x,
+								    building.descr().name().c_str(), building.get_position().x,
 								    building.get_position().y);
 							} else {
 								productionsite->set_stopped(true);
@@ -170,7 +170,7 @@ void MapBuildingdataPacket::read(FileSystem& fs,
 							log("WARNING: Found a stopped %s at (%i, %i) in the "
 							    "savegame. Only productionsites are stoppable. "
 							    "Ignoring.",
-							    building.descr().descname().c_str(), building.get_position().x,
+							    building.descr().name().c_str(), building.get_position().x,
 							    building.get_position().y);
 					}
 
@@ -314,9 +314,9 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
 		if (packet_version >= 6) {
-			Player& player = warehouse.owner();
-			warehouse.init_containers(player);
-			const TribeDescr& tribe = player.tribe();
+			Player* player = warehouse.get_owner();
+			warehouse.init_containers(*player);
+			const TribeDescr& tribe = player->tribe();
 
 			while (fr.unsigned_8()) {
 				const DescriptionIndex& id = tribe.ware_index(fr.c_string());
@@ -372,7 +372,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				if (!game.tribes().worker_exists(worker_index)) {
 					log("WARNING: %s %u has a next_spawn time for nonexistent "
 					    "worker type \"%s\" set to %u, ignoring\n",
-					    warehouse.descr().descname().c_str(), warehouse.serial(), worker_typename,
+					    warehouse.descr().name().c_str(), warehouse.serial(), worker_typename,
 					    next_spawn);
 					continue;
 				}
@@ -380,7 +380,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 					log("WARNING: %s %u has a next_spawn time for worker type "
 					    "\"%s\", that costs something to build, set to %u, "
 					    "ignoring\n",
-					    warehouse.descr().descname().c_str(), warehouse.serial(), worker_typename,
+					    warehouse.descr().name().c_str(), warehouse.serial(), worker_typename,
 					    next_spawn);
 					continue;
 				}
@@ -391,7 +391,7 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 							throw GameDataError("%s %u has a next_spawn time for worker type "
 							                    "\"%s\" set to %u, but it was previously set "
 							                    "to %u\n",
-							                    warehouse.descr().descname().c_str(), warehouse.serial(),
+							                    warehouse.descr().name().c_str(), warehouse.serial(),
 							                    worker_typename, next_spawn,
 							                    warehouse.next_worker_without_cost_spawn_[i]);
 						warehouse.next_worker_without_cost_spawn_[i] = next_spawn;
@@ -441,14 +441,14 @@ void MapBuildingdataPacket::read_warehouse(Warehouse& warehouse,
 				//  Add to map of military influence.
 				Area<FCoords> a(map.get_fcoords(warehouse.get_position()), conquer_radius);
 				const Field& first_map_field = map[0];
-				Player::Field* const player_fields = player.fields_;
+				Player::Field* const player_fields = player->fields_;
 				MapRegion<Area<FCoords>> mr(map, a);
 				do
 					player_fields[mr.location().field - &first_map_field].military_influence +=
 					   map.calc_influence(mr.location(), Area<>(a, a.radius));
 				while (mr.advance(map));
 			}
-			player.see_area(Area<FCoords>(
+			player->see_area(Area<FCoords>(
 			   map.get_fcoords(warehouse.get_position()), warehouse.descr().vision_range()));
 			warehouse.next_military_act_ = game.get_gametime();
 		} else {
@@ -508,10 +508,6 @@ void MapBuildingdataPacket::read_militarysite(MilitarySite& militarysite,
 			militarysite.soldier_upgrade_requirements_ =
 			   RequireAttribute(TrainingAttribute::kTotal, reqmin, reqmax);
 			militarysite.soldier_preference_ = static_cast<SoldierPreference>(fr.unsigned_8());
-			// TODO(GunChleoc): Savegame compatibility, remove kNotSet after Build 20.
-			if (militarysite.soldier_preference_ == SoldierPreference::kNotSet) {
-				militarysite.soldier_preference_ = SoldierPreference::kRookies;
-			}
 			militarysite.next_swap_soldiers_time_ = fr.signed_32();
 			militarysite.soldier_upgrade_try_ = 0 != fr.unsigned_8() ? true : false;
 			militarysite.doing_upgrade_request_ = 0 != fr.unsigned_8() ? true : false;
@@ -721,7 +717,7 @@ void MapBuildingdataPacket::read_productionsite(ProductionSite& productionsite,
 
 	} catch (const WException& e) {
 		throw GameDataError(
-		   "productionsite (%s): %s", productionsite.descr().descname().c_str(), e.what());
+		   "productionsite (%s): %s", productionsite.descr().name().c_str(), e.what());
 	}
 }
 
@@ -1223,4 +1219,4 @@ void MapBuildingdataPacket::write_trainingsite(const TrainingSite& trainingsite,
 	}
 	// DONE
 }
-}
+}  // namespace Widelands

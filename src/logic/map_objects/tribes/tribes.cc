@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -68,9 +68,10 @@ void Tribes::add_productionsite_type(const LuaTable& table, const EditorGameBase
 
 void Tribes::add_trainingsite_type(const LuaTable& table, const EditorGameBase& egbase) {
 	i18n::Textdomain td("tribes");
-	buildings_->add(new TrainingSiteDescr(
-	   pgettext_expr(table.get_string("msgctxt").c_str(), table.get_string("descname").c_str()),
-	   table, egbase));
+	const std::string msgctxt = table.get_string("msgctxt");
+	buildings_->add(
+	   new TrainingSiteDescr(pgettext_expr(msgctxt.c_str(), table.get_string("descname").c_str()),
+	                         msgctxt, table, egbase));
 }
 
 void Tribes::add_warehouse_type(const LuaTable& table, const EditorGameBase& egbase) {
@@ -341,10 +342,20 @@ void Tribes::postload() {
 
 	// Resize the configuration of our wares if they won't fit in the current window (12 = info label
 	// size).
+	// Also, do some final checks on the gamedata
 	int number = (g_gr->get_yres() - 290) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);
 		tribe_descr->resize_ware_orders(number);
+
+		// Verify that the preciousness has been set for all of the tribe's wares
+		for (const DescriptionIndex wi : tribe_descr->wares()) {
+			if (tribe_descr->get_ware_descr(wi)->preciousness(tribe_descr->name()) == kInvalidWare) {
+				throw GameDataError("The ware '%s' needs to define a preciousness for tribe '%s'",
+				                    tribe_descr->get_ware_descr(wi)->name().c_str(),
+				                    tribe_descr->name().c_str());
+			}
+		}
 	}
 }
 

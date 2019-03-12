@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,8 +80,8 @@ public:
 	bool is_minimal() const {
 		return is_minimal_;
 	}
-	void restore();
-	void minimize();
+	virtual void restore();
+	virtual void minimize();
 	bool is_snap_target() const override {
 		return true;
 	}
@@ -122,6 +122,6 @@ private:
 	Panel* center_panel_;
 	Panel* fastclick_panel_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_WINDOW_H

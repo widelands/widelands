@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/default_resolution.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -92,7 +92,6 @@ int caps_to_buildhelp(const Widelands::NodeCaps caps) {
 
 InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
    : UI::Panel(nullptr, 0, 0, g_gr->get_xres(), g_gr->get_yres()),
-     show_workarea_preview_(global_s.get_bool("workareapreview", true)),
      buildhelp_(false),
      map_view_(this, the_egbase.map(), 0, 0, g_gr->get_xres(), g_gr->get_yres()),
      // Initialize chatoveraly before the toolbar so it is below
@@ -154,7 +153,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   map_view_.set_size(message.width, message.height);
 		   resize_chat_overlay();
 		   adjust_toolbar_position();
-		});
+	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
 		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
 			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
@@ -201,6 +200,10 @@ InteractiveBase::get_buildhelp_overlay(const Widelands::NodeCaps caps) const {
 		return &buildhelp_overlays_[buildhelp_overlay_index];
 	}
 	return nullptr;
+}
+
+bool InteractiveBase::has_workarea_preview(const Widelands::Coords& coords) const {
+	return workarea_previews_.count(coords) == 1;
 }
 
 UniqueWindowHandler& InteractiveBase::unique_windows() {
@@ -278,14 +281,13 @@ UI::Button* InteractiveBase::add_toolbar_button(const std::string& image_basenam
                                                 const std::string& tooltip_text,
                                                 UI::UniqueWindow::Registry* window,
                                                 bool bind_default_toggle) {
-	UI::Button* button = new UI::Button(
-	   &toolbar_, name, 0, 0, 34U, 34U, g_gr->images().get("images/ui_basic/but2.png"),
-	   g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
+	UI::Button* button =
+	   new UI::Button(&toolbar_, name, 0, 0, 34U, 34U, UI::ButtonStyle::kWuiPrimary,
+	                  g_gr->images().get("images/" + image_basename + ".png"), tooltip_text);
 	toolbar_.add(button);
 	if (window) {
-		window->opened.connect(
-		   [this, button] { button->set_style(UI::Button::Style::kPermpressed); });
-		window->closed.connect([this, button] { button->set_style(UI::Button::Style::kRaised); });
+		window->opened.connect([button] { button->set_perm_pressed(true); });
+		window->closed.connect([button] { button->set_perm_pressed(false); });
 
 		if (bind_default_toggle) {
 			button->sigclicked.connect(
@@ -299,14 +301,14 @@ void InteractiveBase::on_buildhelp_changed(bool /* value */) {
 }
 
 // Show the given workareas at the given coords and returns the overlay job id associated
-void InteractiveBase::show_work_area(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
-	work_area_previews_[coords] = &workarea_info;
+void InteractiveBase::show_workarea(const WorkareaInfo& workarea_info, Widelands::Coords coords) {
+	workarea_previews_[coords] = &workarea_info;
 }
 
 std::map<Coords, const Image*>
-InteractiveBase::get_work_area_overlays(const Widelands::Map& map) const {
+InteractiveBase::get_workarea_overlays(const Widelands::Map& map) const {
 	std::map<Coords, const Image*> result;
-	for (const auto& pair : work_area_previews_) {
+	for (const auto& pair : workarea_previews_) {
 		const Coords& coords = pair.first;
 		const WorkareaInfo* workarea_info = pair.second;
 		WorkareaInfo::size_type wa_index;
@@ -344,8 +346,8 @@ InteractiveBase::get_work_area_overlays(const Widelands::Map& map) const {
 	return result;
 }
 
-void InteractiveBase::hide_work_area(const Widelands::Coords& coords) {
-	work_area_previews_.erase(coords);
+void InteractiveBase::hide_workarea(const Widelands::Coords& coords) {
+	workarea_previews_.erase(coords);
 }
 
 /**
@@ -428,34 +430,60 @@ void InteractiveBase::draw_overlay(RenderTarget& dst) {
 		}
 	}
 
-	// Blit node information when in debug mode.
-	if (get_display_flag(dfDebug) || game == nullptr) {
-		std::string node_text;
-		if (game != nullptr) {
-			const std::string gametime(gametimestring(egbase().get_gametime(), true));
-			std::shared_ptr<const UI::RenderedText> rendered_text =
-			   UI::g_fh1->render(as_condensed(gametime));
-			rendered_text->draw(dst, Vector2i(5, 5));
-
-			static boost::format node_format("(%i, %i)");
-			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y).str());
-		} else {  // This is an editor
-			static boost::format node_format("(%i, %i, %i)");
-			const int32_t height = egbase().map()[sel_.pos.node].get_height();
-			node_text = as_condensed((node_format % sel_.pos.node.x % sel_.pos.node.y % height).str());
-		}
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(node_text);
+	// Node information
+	std::string node_text("");
+	if (game == nullptr) {
+		// Always blit node information in the editor
+		static boost::format node_format("(%i, %i, %i)");
+		const int32_t height = egbase().map()[sel_.pos.node].get_height();
+		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y % height).str();
+	} else if (get_display_flag(dfDebug)) {
+		// Blit node information for games in debug mode - we're not interested in the height
+		static boost::format node_format("(%i, %i)");
+		node_text = (node_format % sel_.pos.node.x % sel_.pos.node.y).str();
+	}
+	if (!node_text.empty()) {
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   UI::g_fh->render(as_condensed(node_text));
 		rendered_text->draw(
 		   dst, Vector2i(get_w() - 5, get_h() - rendered_text->height() - 5), UI::Align::kRight);
 	}
 
-	// Blit FPS when playing a game in debug mode.
-	if (get_display_flag(dfDebug) && game != nullptr) {
-		static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
-		std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(as_condensed(
-		   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
-		rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
+	// In-game clock and FPS
+	if (game != nullptr) {
+		// Blit in-game clock
+		const std::string gametime(gametimestring(egbase().get_gametime(), true));
+		std::shared_ptr<const UI::RenderedText> rendered_text =
+		   UI::g_fh->render(as_condensed(gametime));
+		rendered_text->draw(dst, Vector2i(5, 5));
+
+		// Blit FPS when playing a game in debug mode
+		if (get_display_flag(dfDebug)) {
+			static boost::format fps_format("%5.1f fps (avg: %5.1f fps)");
+			rendered_text = UI::g_fh->render(as_condensed(
+			   (fps_format % (1000.0 / frametime_) % (1000.0 / (avg_usframetime_ / 1000))).str()));
+			rendered_text->draw(dst, Vector2i((get_w() - rendered_text->width()) / 2, 5));
+		}
 	}
+}
+
+void InteractiveBase::blit_overlay(RenderTarget* dst,
+                                   const Vector2i& position,
+                                   const Image* image,
+                                   const Vector2i& hotspot,
+                                   float scale) {
+	const Recti pixel_perfect_rect =
+	   Recti(position - hotspot * scale, image->width() * scale, image->height() * scale);
+	dst->blitrect_scale(pixel_perfect_rect.cast<float>(), image,
+	                    Recti(0, 0, image->width(), image->height()), 1.f, BlendMode::UseAlpha);
+}
+
+void InteractiveBase::blit_field_overlay(RenderTarget* dst,
+                                         const FieldsToDraw::Field& field,
+                                         const Image* image,
+                                         const Vector2i& hotspot,
+                                         float scale) {
+	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale);
 }
 
 void InteractiveBase::mainview_move() {
@@ -708,7 +736,7 @@ void InteractiveBase::log_message(const std::string& message) const {
  * viewport = -1
  * \note This function can also be used to check whether a logical coordinate is
  * visible at all
-*/
+ */
 int32_t InteractiveBase::stereo_position(Widelands::Coords const position_map) {
 	assert(position_map);
 

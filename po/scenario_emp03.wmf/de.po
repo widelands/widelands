@@ -5,12 +5,13 @@
 # Translators:
 # Elisabeth Jäger, 2017
 # Stephan Lutz <stephan-lutz@gmx.de>, 2017
+# GunChleoc, 2017
 # Daniel Hahn <giggeler53@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-15 09:25+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Hahn <giggeler53@gmail.com>, 2018\n"
 "Language-Team: German (https://www.transifex.com/widelands/teams/35159/de/)\n"
@@ -192,7 +193,8 @@ msgstr "Goldproduktion"
 msgid ""
 "Produce at least six bars of gold to be able to colonize your vicinity."
 msgstr ""
-"Produziere mindesten 6 Goldbarren, um unsere Umgebung besiedeln zu können."
+"Produziere mindesten sechs Goldbarren, um deine Umgebung besiedeln zu "
+"können."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:140
 msgid "Defeat the Barbarians"
@@ -809,12 +811,12 @@ msgstr "Amalea sieht nachdenklich aus …"
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
-"they had to use up all our remaining gold for building the port. Now we "
-"don’t have any gold left."
+"they have to use all our remaining gold for building the port. So, we won’t "
+"have any gold left after our port is build."
 msgstr ""
 "Lutius, als ich mich mit unseren Bauarbeitern unterhalten habe, sagten sie "
-"mir, dass sie unser letztes Gold für den Bau des Hafens brauchten. Jetzt "
-"haben wir nichts mehr davon übrig."
+"mir, dass sie unser letztes Gold für den Bau des Hafens brauchen. Daher "
+"werden wir nichts mehr davon übrig haben, wenn unser Hafen errichtet ist."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440
@@ -1176,7 +1178,7 @@ msgid ""
 msgstr ""
 "Herr, wir haben die Ruinen einer alten Barbarenfestung und eines Dorfes "
 "gefunden. Ich habe die Befürchtung, dass wir gegen sie kämpfen müssen, bevor"
-" wir dazu bereit sind. "
+" wir dazu bereit sind."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:596
 msgid "Train Faster, Train Harder"

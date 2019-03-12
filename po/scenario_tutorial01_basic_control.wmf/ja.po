@@ -1,17 +1,18 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Gonta Ultra (Ulgon), 2016
 # satow yoshi <yoshiyuki.sato.rabbit@gmail.com>, 2017
+# tamanegi, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:29+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-02-15 11:14+0000\n"
+"PO-Revision-Date: 2019-02-22 13:36+0000\n"
+"Last-Translator: tamanegi\n"
 "Language-Team: Japanese (http://www.transifex.com/widelands/widelands/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:15
 msgid "Nice And Easy Does It All the Time"
-msgstr "いつでも、のんびりいこう"
+msgstr "ゆっくりのんびりやりましょう"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:17
 msgid ""
@@ -29,7 +30,7 @@ msgid ""
 " here later on. If I am too slow for you, you might want to play a real game"
 " and just find everything out for yourself. Otherwise, please bear with me, "
 "I am not the youngest and quickest anymore."
-msgstr "すみませんが、これを再び取り壊す必要があります。あとから、ここにスペースが必要になる場合があります。あなたにとって説明がスローペースすぎる場合は、実際のゲームをプレイし、自分自身ですべてを見つけるのも良いでしょう。そうでなければ、もうそれほど若くも速くもないわたしに、お付き合いください。"
+msgstr "申し訳ありませんが、これは壊さねばなりません。この場所は後で必要になるかもしれませんから。もし、私の説明が遅すぎると感じるようなら、実際にゲームをプレイして自分自身で全てを見つけ出してもいいでしょう。そういうつもりではないのなら、どうか私にお付き合いください。残念ながら、私はそんなにせっかちでは無いですが。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:25
 msgid "Welcome to the Widelands Tutorial!"
@@ -44,7 +45,7 @@ msgid ""
 "Widelands is a slow-paced build-up strategy game with an emphasis on "
 "construction rather than destruction. This tutorial will guide you through "
 "the basics of the game."
-msgstr "Wildlandsは破壊ではなく建設的な事に重点を置いた建築ストラテジーです。\nこのチュートリアルではゲームの基本的な部分を紹介します。"
+msgstr "Widelandsは破壊よりも建設に重点を置いたスローペースなストラテジーゲームです。このチュートリアルではゲームの基本部分を紹介します。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:29
 msgid "Dismiss this box by left-clicking on the button below."
@@ -64,7 +65,7 @@ msgid ""
 "and the Atlanteans. All tribes have a different economy, strength and "
 "weaknesses, but the general gameplay is the same for all. We will play the "
 "Barbarians for now."
-msgstr "Wildlandsには3つの部族がいます。バーバリアン、帝国、アトランティアンです。\nこれらの部族はそれぞれ異なる経済的特徴と様々な長所や欠点をもっていますが、\n基本操作は全く同じです。今回はバーバリアンを操作します。"
+msgstr "Wildlandsには3つの部族がいます。野蛮人、帝国、アトランティスです。これらの部族はそれぞれ固有の経済、そして固有の長所や短所をもっていますが、基本操作は全く同じです。今回は野蛮人を操作します。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:41
 msgid ""
@@ -76,24 +77,24 @@ msgid ""
 "The most important wares in the early game are the basic construction wares:"
 " logs and granite. Let’s make sure that we do not run out of logs. For this,"
 " we need a lumberjack and a hut for him to stay in."
-msgstr ""
+msgstr "通常ゲームは一つの本拠地のみで始まります。正面に青い旗がある大きな建物がそうです。この本拠地では倉庫でもあり、物資や労働者、そして兵士を保管しています。物資は建物の建材にしたり、別の物資の材料にしたりします。当然のことですが、本拠地の物資は無尽蔵ではありません。ですので、どうにかして補給してあげる必要があります。さて、ゲーム初期に一番重要な建築物資は、「丸太」と「花崗岩」です。まずは丸太が尽きないようにするところから始めます。そのためには、木こりと彼の庵を用意してあげる必要があります。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:42
 msgid ""
 "We need to find a nice place for the lumberjack’s hut. To make this easier, "
 "we can activate ‘Show building spaces’. There are two ways you can do this:"
-msgstr ""
+msgstr "というわけで、木こりの庵を建てる良い場所を見つけてあげましょう。それを簡単にするため、まずは「建物用地の表示」をアクティブにします。それには二つの方法があります: "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:43
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:53
 msgid "Press the Space bar to toggle them, or"
-msgstr ""
+msgstr "スペースキーを押して切り替える、もしくは"
 
 #. TRANSLATORS: List item. Has an image of the button next to it.
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr ""
+msgstr "ウィンドウ下部にある「建物用地の表示」ボタンをクリックする。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -101,25 +102,25 @@ msgstr "OKボタンを左クリックしてこのボックスを閉じ、実際�
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:49
 msgid "Enable the showing of building spaces"
-msgstr "建設スペースの表示を有効化"
+msgstr "建物用地の表示を有効にする"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:51
 msgid "Show Building Spaces"
-msgstr "建設スペースを表示する"
+msgstr "建物用地を表示する"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:52
 msgid ""
 "It is easier to understand what type of buildings can be built on which "
 "field when the symbols for the building spaces are enabled."
-msgstr "建設スペースを有効にすると、フィールドにどのタイプの建物を建てることが許可されているか理解しやすくなります。"
+msgstr "建物用地の表示をオンにすると、どのタイプの建物を建てられるのかがわかりやすくなります。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:56
 msgid "Right-click on this window now and then give it a try."
-msgstr ""
+msgstr "このウィンドウを右クリックで消して、実際にやってみましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:61
 msgid "Lumberjack’s Spot"
-msgstr "木こり小屋の場所"
+msgstr "木こりの庵の場所"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:65
 msgid ""
@@ -128,11 +129,11 @@ msgid ""
 "road. There is a sweet spot for a lumberjack right next to those trees. I’ll"
 " describe the steps I will take and then ask you to click on the ‘OK’ button"
 " for me to demonstrate."
-msgstr "まず、木こり小屋をどのように建て、それを道路とどのように接続するかをお見せします。木々のすぐそばが木こり小屋に適した場所です。デモをするので「OK」ボタンをクリックしてください。"
+msgstr "それでは、これらのシンボルについて簡単に説明していきます。まずは木こりの庵を建て、それを道とつなぐ様子をお見せします。一般的に木々の近くが木こりの庵に適した場所です。デモをお見せするので、「OK」ボタンをクリックしてください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:72
 msgid "Building the Lumberjack"
-msgstr "木こり小屋を建てる"
+msgstr "木こりの庵を建てる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:75
 msgid ""
@@ -142,18 +143,18 @@ msgid ""
 "medium and small buildings – I am presented with all the medium buildings "
 "that I can build. The lumberjack’s hut is a small building, so I will go on "
 "to select the small buildings tab. Then I’ll choose the lumberjack’s hut."
-msgstr "はじめに、木こり小屋を建設したい場所のシンボルを左クリックします。建物を選択できるウィンドウが表示されます。黄色の家のシンボル（中規模の建物が建設可能なことを意味します）をクリックすると建設可能な建物 中が表示されます。木こり小屋は小規模な建物なので小規模の建物のタブを選択します。それから木こり小屋を選びます。"
+msgstr "はじめに、木こりの庵を建設したい場所のシンボルを左クリックします。すると、建物を選択できるウィンドウが表示されます。今回クリックする黄色の家のシンボルは中サイズ以下の建物が建設可能なことを意味します。これをクリックすると、まずは中サイズの建設可能な建物が表示されます。木こりの庵は小サイズの建物なので、赤い小サイズの建物のタブを選択します。そして木こりの庵を選びます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:76
 msgid ""
 "Click the ‘OK’ button to watch me. I’ll go really slowly: I will click – "
 "then select the tab – and finally I’ll choose the building."
-msgstr "デモを見るにはOKボタンをクリックしてください。デモではこれらをゆっくりと行ってみせます。クリックします - タブを選択します - そして最後に建物を選びます。"
+msgstr "デモを見るにはOKボタンをクリックしてください。デモではこれらをゆっくりと行ってみせます。シンボルをクリックして、タブを選択して、そして最後に建物を選びます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:82
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:93
 msgid "Building a Connecting Road"
-msgstr "道路を接続する"
+msgstr "道をつなぐ"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:85
 msgid ""
@@ -161,7 +162,7 @@ msgid ""
 "of my road network. After ordering the construction site, I was "
 "automatically put into road building mode, so all I have to do is click on "
 "the blue flag in front of my headquarters."
-msgstr "まだ終わりではありません。道路網に木こり小屋を接続する必要があります。建設を命じた後、自動的に道路敷設モードに入るので、本拠地の前の青旗をクリックします。"
+msgstr "まだ終わりではありません。道路網に木こりの庵をつなげる必要があります。建物の建設を命じると、自動的に道敷設モードに入ります。なので、本拠地の前の青旗をクリックするだけで大丈夫です。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:96
 msgid ""
@@ -171,18 +172,18 @@ msgid ""
 "menu). Therefore, I have entered the road building mode manually. I will "
 "tell you later how to do that. To build the road, all I have to do now is "
 "click on the blue flag in front of my headquarters."
-msgstr ""
+msgstr "まだ終わりではありません。道路網に木こりの庵をつなげる必要があります。現在の設定では「旗を設置したあとすぐに道の敷設を始める」オプションがオフになっています (この設定はWidelandsメインメニューのオプションから変更できます)。なので、今回は手動で道敷設モードに入る必要があります。手動での道敷設モードへの入り方はまた後で述べます。さて、そうこうしている内に準備は整ったので、本拠地の前の青旗をクリックするだけで大丈夫です。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:104
 msgid "Waiting for the Lumberjack to Go Up"
-msgstr "木こり小屋が立ち上がるのを待つ"
+msgstr "木こりの庵の建設が始まるのを待つ"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:107
 msgid ""
 "Now watch closely while a builder leaves the headquarters and goes to the "
 "construction site. Also, a carrier will take position in between the two "
 "blue flags and carry wares from one blue flag to the other."
-msgstr "建築人が本拠地を出て、建設地に行くようになることに注目してください。また、運搬人が二つの青旗の間にポジションを取り、一方の青旗から他方の青旗にアイテムを運ぶようになります。"
+msgstr "建築者が本拠地を出て、建設地に行く様子にご注目ください。また、運び手が二つの青旗の間に入り、青旗から別の青旗まで物資を運ぶ様子にもご注目ください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:114
 msgid "Placing Another Flag"
@@ -193,46 +194,46 @@ msgid ""
 "Nice how they are working, isn’t it? But the poor carrier has a very long "
 "way to go. We can make it easier for him (and more efficient for us) by "
 "placing another blue flag on the road."
-msgstr ""
+msgstr "いい感じに働いているでしょう？しかし、あのかわいそうな運び手さんは長い距離を運んでいて大変そうです。というわけで、彼の仕事を少し楽にしてあげましょう。これは我々にとっても利益になることですので。道の途中に別の青旗を立てましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:118
 msgid ""
 "You try it this time: click on the yellow flag symbol in between the two "
 "blue flags we just placed and then click on the"
-msgstr "ここで試してみましょう。配置済みの二つの青旗の間の黄旗のシンボルをクリックし、下記のシンボルをクリックしてください。"
+msgstr "試してみましょう: 配置済みの二つの青旗の間の黄旗シンボルをクリックし、次のシンボルをクリックしてください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:119
 msgid "build flag symbol."
-msgstr "旗を立てるシンボル"
+msgstr "旗を設置シンボル"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:123
 msgid "Build a flag to divide the road to the lumberjack"
-msgstr "木こり小屋への道を分割するために旗を立てる"
+msgstr "木こりの庵への道に旗を設置して道を分割する"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:125
 msgid "Build a Flag on the Road"
-msgstr "道路に旗を立てる"
+msgstr "道に旗を立てる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:126
 msgid ""
 "The shorter your road segments are, the faster your wares will be "
 "transported. You should therefore make sure that your roads have as many "
 "flags as possible."
-msgstr "道路の区間を短くすると、アイテムがより速く運搬されます。したがって、道路に可能な限り多くの旗を立てるべきです。"
+msgstr "道を旗で細かく分割すると、物資の輸送が速くなります。なので、道には可能な限り多くの旗を立てるべきです。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:127
 msgid ""
 "Build a blue flag now in the middle of the road that connects your "
 "headquarters to your lumberjack’s hut."
-msgstr "木こり小屋と本拠地を接続する道路のまん中に、青い旗を立てましょう。"
+msgstr "木こりの庵と本拠地をつなぐ道のまん中に、青旗を立てる。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:132
 msgid "Waiting For the Hut to be Finished"
-msgstr "小屋が完成するのを待つ"
+msgstr "庵が完成するのを待つ"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:135
 msgid "Well done! Let’s wait till the hut is finished."
-msgstr "良くできました！小屋が完成するまで待ちましょう。"
+msgstr "良くできました！庵が完成するまで待ちましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:136
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:149
@@ -240,69 +241,69 @@ msgid ""
 "If you want things to go faster, simply use the Page Up key on your keyboard"
 " to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr ""
+msgstr "もし待つのに飽きたのなら、Page Upキーを押せばゲームスピードを上げることができます。Page Downキーを押せば逆にゲームスピードを遅くできます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:143
 msgid "Waiting for the Hut to be Finished"
-msgstr ""
+msgstr "庵が完成するのを待つ"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:146
 msgid ""
 "I wanted to teach you how to build new flags, but it seems you have already "
 "found out on your own. Well done!"
-msgstr ""
+msgstr "新しい旗の立て方を教えようと思ったのですが、あなたは既に自力でその手段を見つけたようですね。お見事です！"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:147
 msgid ""
 "Now you have split the road in two parts with a carrier each. This means "
 "less work for him and higher efficiency for us. You should therefore always "
 "place as many flags as possible on your roads."
-msgstr ""
+msgstr "これで道は二つに分割され、それぞれに運び手がついています。彼らの視点では仕事量が減り、我々の視点では輸送効率が上がったことになります。ですので、道には可能な限り多くの旗を立てるようにしましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:148
 msgid "Now we only have to wait till the hut is finished."
-msgstr ""
+msgstr "あとは庵が出来上がるのを待つだけです。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:155
 msgid "The Construction Site"
-msgstr ""
+msgstr "建設現場"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:157
 msgid "Let's see the progress"
-msgstr ""
+msgstr "進捗を確認しましょう"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:158
 msgid ""
 "If you click on the construction site, a window will open. You can see the "
 "wares that are still missing grayed out. You can also see the progress of "
 "this construction site."
-msgstr ""
+msgstr "建設中の場所をクリックすると、ウィンドウが開きます。不足している物資は灰色で表示されます。建設作業の進捗状況も確認できます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:160
 msgid ""
 "To close the window, simply right-click on it. All windows in Widelands can "
 "be closed that way, except the ones with instructions, like this one. Try it"
 " out!"
-msgstr ""
+msgstr "右クリックすればウィンドウは閉じます。Widelands内のウィンドウは基本的に全て右クリックで閉じられます。例外は、このウィンドウのように指示がついているものだけです。さて、やってみましょう！"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:167
 msgid "The Lumberjack’s Hut is Done"
-msgstr ""
+msgstr "木こりの庵完成"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:170
 msgid ""
 "Excellent. The lumberjack’s hut is done. A lumberjack will now move in and "
 "start chopping down trees, so our log income is secured for now. Now on to "
 "the granite."
-msgstr ""
+msgstr "素晴らしい。木こりの庵が完成しました。これで木こりが木を伐採するようになり、丸太の供給が安定するでしょう。さて、次は花崗岩です。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:177
 msgid "Some Rocks Were Found"
-msgstr ""
+msgstr "岩が発見されました"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:179
 msgid "Getting a Quarry Up"
-msgstr ""
+msgstr "採石場を立ち上げる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:180
 msgid ""
@@ -310,114 +311,114 @@ msgid ""
 "quarry next to some rocks lying around. As it happens, there is a pile of "
 "them just to the west (left) of your headquarters. I will teach you now how "
 "to move your view over there."
-msgstr ""
+msgstr "花崗岩は花崗岩鉱で採掘できますが、もっと簡単な方法はフィールド上にある岩の近くに採石場を建てることです。偶然、あなたの本拠地の西(左)に花崗岩が積み重なっています。まずはどのように視点をそこまで動かすのかを教えましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:181
 msgid ""
 "There are three ways to move your view. The first one is using the cursor "
 "keys on your keyboard. Go ahead and try this out."
-msgstr ""
+msgstr "視点を動かすには三つの方法があります。一つ目はキーボードのカーソルキーを使うことです。やってみましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:182
 msgid "Click the ‘OK’ button and then move the view using the cursor keys."
-msgstr ""
+msgstr "OKボタンをクリックして、カーソルキーを使って視点を変えてみましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:186
 msgid "Move your view with the cursor keys"
-msgstr "カーソルキーを使用して視点を移動する"
+msgstr "カーソルキーで視点を移動させる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:188
 msgid "Moving Your View"
-msgstr "視点を移動する"
+msgstr "視点移動"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:189
 msgid ""
 "Moving your view is essential to get a complete overview of your whole "
 "economy. There are three ways to move your view in Widelands."
-msgstr ""
+msgstr "視点の移動は経済全体を把握するために欠かせません。Widelandsにおいて視点を移動させる方法は三つあります。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:190
 msgid "The first one is to use the cursor keys on your keyboard."
-msgstr "一つ目は、キーボードのカーソルキーを使用します。"
+msgstr "一つ目は、キーボードのカーソルキーを使用することです。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:191
 msgid ""
 "The second one is the more common and faster one: press-and-hold the right "
 "mouse button anywhere on the map, then move your mouse around and you’ll see"
 " the view scroll."
-msgstr "二つ目は、より一般的かつ早いものです。マップ上の任意の場所をマウスの右ボタンでクリックしながらホールドし、周りにマウスを移動すると、視点がスクロールされます。"
+msgstr "二つ目は、より一般的かつ効率的です。マップ上の任意の場所をマウスの右ボタンでクリックしたままマウスを移動させると、視点がスクロールします。(右ボタンでのドラッグ操作)"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:192
 msgid ""
 "The third one is to use the minimap. It is especially useful for traveling "
 "big distances."
-msgstr ""
+msgstr "三つ目の方法はミニマップを使うことです。長い距離を移動させる時に特に効率的です。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:197
 msgid "Other Ways to Move the View"
-msgstr "視点を移動する別の方法"
+msgstr "視点移動の別方法"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:199
 msgid "Excellent. Now there is a faster way to move, using the mouse instead:"
-msgstr "良くできました。さて、視点を移動する早い方法が別にあります。マウスを使うことです。"
+msgstr "良くできました。さて、視点を素早く移動させる別の方法があります。マウスを使うことです。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:200
 msgid ""
 "Simply right-click-and-hold anywhere on the map, then drag the mouse and "
 "instead of the cursor, the view will be moved. Try it."
-msgstr "マップ上の任意の場所を右クリックしながらホールドし、マウスをドラッグすると、カーソルと同じように視点が移動します。試してみましょう。"
+msgstr "マップ上の任意の場所を右クリックしたままマウスを動かす、カーソルと同じように視点が移動します(右クリックでのドラッグ操作)。試してみましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:205
 msgid "Move your view with the mouse"
-msgstr "マウスで視点を移動する"
+msgstr "マウスで視点を移動させる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:210
 msgid "Use the minimap"
-msgstr ""
+msgstr "ミニマップの利用"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:212
 msgid ""
 "Very good. And now about the minimap. You can open it by clicking on the"
-msgstr ""
+msgstr "よくできました。次はミニマップです。ウィンドウ下部にある次のアイコンをクリックするとミニマップが開きます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:213
 msgid ""
 "minimap button at the bottom of the screen or simply by using the keyboard "
 "shortcut ‘m’."
-msgstr ""
+msgstr "もしくは、キーボードの「m」を押しても開くことができます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:214
 msgid ""
 "The minimap shows the complete map in miniature. You can directly jump to "
 "any field by left-clicking on it. You can also toggle buildings, roads, "
 "flags and player indicators on and off inside the minimap."
-msgstr "ミニマップは、ミニチュアの全体マップを表示します。直接それを左クリックして、任意のフィールドにジャンプすることができます。また、ミニマップの内側に建物、道路、旗およびプレイヤーのインジケータを表示することができます。"
+msgstr "ミニマップは、ミニチュアの全体マップを表示します。ミニマップの場所を左クリックするとその場所にジャンプします。また、ミニマップ内では建物、道路、旗およびプレイヤーを示すマークを表示することもできます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:215
 msgid ""
 "Try it out. Open the minimap, click on a few buttons and try moving around. "
 "Close it when you have experimented enough."
-msgstr ""
+msgstr "それではやってみましょう。ミニマップを開き、ボタンを押したりあちこち移動したりしましょう。ある程度理解できたら閉じてください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:219
 msgid "Learn to use the minimap"
-msgstr ""
+msgstr "ミニマップの使い方を覚える"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:221
 msgid ""
 "Open the minimap by using the third button from the left on the bottom of "
 "your screen or the ‘m’ key."
-msgstr ""
+msgstr "下のパネルで左から三番目にあるボタンをクリックするかキーボードの「m」を押してミニマップを開きましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:222
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
-msgstr ""
+msgstr "あちこち動いたり、道や旗等の情報を重ねたりしてみましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:223
 msgid ""
 "Close the minimap when you are ready to continue by using the same button or"
 " ‘m’ again. Of course, a right-click also works."
-msgstr ""
+msgstr "次に進みたくなったら開く時と同じボタンを押すか、「m」キーを押してミニマップを閉じましょう。もちろん、右クリックで消してもらっても構いません。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:228
 msgid "Onward to the Quarry"
@@ -425,7 +426,7 @@ msgstr "採石場へ向かう"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:229
 msgid "Great. Now about that quarry…"
-msgstr ""
+msgstr "よくできました。では、改めて採石場について……"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:237
 msgid "How to Build a Quarry"
@@ -434,22 +435,22 @@ msgstr "採石場の建設方法"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:239
 msgid ""
 "Build a quarry next to those rocks here. Remember how I did it earlier?"
-msgstr ""
+msgstr "岩の隣に採石場を建設しましょう。前に私がやった手順は覚えていますね？"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr ""
+msgstr "建物用地が表示されていないようなら、表示してください。そうしたら、建物を建てたい場所をクリックして、現れたウィンドウから選択してください。そうすれば配置されます。それと、ついでと言ってはなんですが、この機会にこれら建物シンボルについて説明しましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:241
 msgid ""
 "You can build four things on fields in Widelands: flags, small houses, "
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
-msgstr ""
+msgstr "Widelandsではフィールドには四種類のモノを作ることができます。旗、小サイズの建物、中サイズの建物、大サイズの建物の四種です。建物用地のマークは以下のように簡単に見分けることができます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:242
 msgid "Everything can be built on the green house symbol."
@@ -458,32 +459,32 @@ msgstr "緑色の家のシンボルには、すべてのものが建てられま
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:243
 msgid ""
 "Everything except for big buildings can be built on a yellow house symbol."
-msgstr "黄色の家のシンボルには、大規模な建物以外のものが建設できます。"
+msgstr "黄色の家のシンボルには、大サイズの建物以外のものを建設できます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:244
 msgid "Red building symbols can only hold small buildings and flags."
-msgstr "赤色の家のシンボルには、小規模の建物と旗だけが建設可能です。"
+msgstr "赤色の家のシンボルには、小サイズの建物と旗だけが建設可能です。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:245
 msgid "And finally, the yellow flag symbol only allows for flags."
-msgstr ""
+msgstr "そして最後に、黄色の旗のシンボルには旗だけが立てられます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:246
 msgid ""
 "If you place something on a field, the surrounding fields might have less "
 "space for holding buildings, so choose your fields wisely."
-msgstr "フィールドに何か設置すると、周りのフィールドは建物を建設するためのスペースがなくなっていくので、適切に配置しましょう。"
+msgstr "フィールドに何か設置すると、周囲のフィールドでは建物を建設するためのスペースがなくなっていくので、適切に配置しましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:247
 msgid ""
 "Now go ahead, try it. The quarry is a small building, so if you click on a "
 "medium or big building symbol, you will have to select the small buildings "
 "tab first to find it. Go on, check it out!"
-msgstr "先に進んで試してみましょう。採石場は小規模の建物ですので、もし中規模もしくは大規模な建築物のシンボルをクリックした場合、採石場のシンボルを見つけるためには、最初に建物 小のタブを選択する必要があります。さあ、やってみましょう！"
+msgstr "では話を戻して先に進みます。採石場は小サイズの建物ですので、もし中サイズもしくは大サイズの建物のシンボルをクリックした場合、採石場のシンボルを見つけるためには、赤い小サイズの建物のタブを選択する必要があります。さあ、やってみましょう！"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:250
 msgid "Build a quarry next to the rocks"
-msgstr ""
+msgstr "岩の隣に採石場を建てる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:252
 msgid "Build a Quarry"
@@ -493,27 +494,27 @@ msgstr "採石場を建設する"
 msgid ""
 "There are some rocks to the west of your headquarters. Build a quarry right "
 "next to them."
-msgstr ""
+msgstr "本拠地の西には岩があります。採石場を岩の隣に建てましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:254
 msgid ""
 "The quarry is a small building like the lumberjack’s hut. You can therefore "
 "build it on any field that shows a red, yellow or green house when the "
 "building spaces symbols are enabled (Press Space for that)."
-msgstr ""
+msgstr "採石場は木こりの庵と同じく、小サイズの建物です。ですので、赤、黄、緑のいずれかの建物のシンボルがある場所ならどこでも建てることができます。(建物シンボルが表示されていない場合はスペースキーを押してみてください)"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:255
 msgid ""
 "Just click on any house symbol next to the rocks, select the small buildings"
 " tab in the window that opens up, then click on the quarry symbol."
-msgstr ""
+msgstr "岩の隣にある建物シンボルのいずれかを選んでウィンドウを開きましょう。そして、採石場を選択しましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:262
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:276
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:290
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:298
 msgid "Road Building"
-msgstr "道路の敷設"
+msgstr "道の敷設"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:264
 msgid ""
@@ -521,23 +522,23 @@ msgid ""
 "road building mode. The new road will start at the flag in front of your "
 "newly placed construction site. You can enter road building mode for any "
 "flag by left-clicking on a flag and selecting"
-msgstr "良くできました！あなたが建物を配置した直後には、道路敷設モードになっています。新たに配置した建設地の目の前の旗から新しい道路は開始されます。道路敷設モードに入るには、任意の旗を左クリックしてから、下のシンボルを選択してください。"
+msgstr "良くできました！建物を配置した直後は、道路敷設モードになります。道は新しい建物の正面の旗から始まります。道の敷設モードに入るには、任意の旗を左クリックしてから、以下のシンボルを選択してください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:265
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:279
 msgid "the road building symbol."
-msgstr "道路敷設シンボル"
+msgstr "道を敷設シンボル"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:266
 msgid ""
 "If you decide you do not want to build a road at this time, you can cancel "
 "road building by clicking on the starting flag of the road and selecting"
-msgstr "道路の敷設を止めたくなったら、道路の始点の旗を選択してクリックしてから、下のシンボルを選択してください。"
+msgstr "道の敷設を止めたくなったら、道の始点の旗をクリックしてから、以下のシンボルを選択してください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:267
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:281
 msgid "the abort symbol."
-msgstr "中止シンボル"
+msgstr "敷設中止シンボル"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:268
 msgid ""
@@ -545,99 +546,99 @@ msgid ""
 "you just ordered the quarry. You can either make it longer by one field at a"
 " time by left-clicking multiple times on neighboring fields for perfect "
 "control over the route the road takes, like so:"
-msgstr ""
+msgstr "さて、道の敷設についてです。今は採石場を建てたばかりなので、道の敷設モードになっています。忘れてないですよね？道の建設方法には二種類のやりかたがあります。一つは、道の先から隣のマスを一個ずつ選択し、道順を完璧に制御して作る方法です。例えばこんな感じです: "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:278
 msgid ""
 "Excellent! To enter road building mode for any flag, left-click on a flag "
 "and select"
-msgstr ""
+msgstr "良くできました！道の敷設モードに入るには、どれでもいいので旗を左クリックして、以下の項目を選びます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:280
 msgid ""
 "If you decide that you do not want to build a road at this time, you can "
 "cancel road building by clicking on the starting flag of the road and "
 "selecting"
-msgstr ""
+msgstr "道の作成をいったん止める場合には、敷設の始点となる旗をクリックし、以下のシンボルを選びます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:282
 msgid ""
 "Now, about this road. I’ll enter the road building mode and then make it "
 "longer by one field at a time by left-clicking multiple times on neighboring"
 " fields for perfect control over the route the road takes, like so:"
-msgstr ""
+msgstr "さて、道の敷設についてです。まずは私が道敷設モードに入り、左クリックで徐々に道を伸ばしてみます。この方法では完全に道順を制御できます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:291
 msgid ""
 "Or, you can directly click the flag where the road should end, like so:"
-msgstr ""
+msgstr "別の方法として、道の終点をいきなりクリックすることも可能です。例えばこんな感じに: "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:300
 msgid ""
 "One more thing: around the field where your road would end, you can see "
 "different markers. They have the following meaning:"
-msgstr "もう一点。道路の終点のフィールドの周りに別のマーカーが表示されます。それらには以下の意味があります。"
+msgstr "もう一点。道の作成中、先端の周囲のフィールドには別のマーカーが表示されます。それらには以下のような意味があります。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:301
 msgid ""
 "The terrain is flat here. Your carriers will be very swift on this terrain."
-msgstr "ここの地形は平坦です。運搬人はこの地形では非常に迅速に移動します。"
+msgstr "ここの地形は平坦です。運び手はこの地形では非常に迅速に移動できます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:302
 msgid ""
 "There is a small slope to climb to reach this field. This means that your "
 "workers will be faster walking downhill than they will be walking uphill."
-msgstr "このフィールドに到達するには緩やかな傾斜を上る必要があります。労働者は上りよりも下りの方が早く歩きます。"
+msgstr "このフィールド間には緩やかな傾斜があります。労働者は上りよりも下りの方が早く歩きます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:303
 msgid ""
 "The connection between the fields is extremely steep. The speed increase in "
 "one direction is huge while the slowdown in the other is also substantial."
-msgstr "フィールド間は非常に急峻です。ある方向では速度の増加が大きな一方、逆方向では下降が大きくなります。"
+msgstr "フィールド間は非常に急峻です。一方は移動速度が大きく上がるものの、逆方向では速度が大きく下がってしまいます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:304
 msgid ""
 "Keep the slopes in mind while placing roads and use them to your advantage. "
 "Also, try to keep roads as short as possible and always remember to place as"
 " many flags as you can on road segments to share the load better."
-msgstr ""
+msgstr "道を敷設する際には傾斜に気を払い、有利に使うことを考えましょう。それと、道をできるだけ短くすること、道には可能な限り旗を立てることにも気をつけましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:305
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:315
 msgid ""
 "If you hold Ctrl or Shift+Ctrl while you finish the road, flags are placed "
 "automatically."
-msgstr ""
+msgstr "道の建設を終える時にCtrlかShift+Ctrlを押していると、自動的に旗が立てられます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:306
 msgid "Now please rebuild the road between your quarry and your headquarters."
-msgstr ""
+msgstr "では、採石場と本拠地の間の道をつないでください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:310
 msgid "Connect the quarry to the headquarters"
-msgstr "採石場を本拠地に接続する"
+msgstr "採石場を本拠地につなげる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:312
 msgid "Connect Your Construction Site"
-msgstr "建設地を接続する"
+msgstr "建設中サイトとの接続"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:313
 msgid ""
 "Connect your quarry construction site to your headquarters with a road. You "
 "would have been put directly into road building mode after ordering a new "
 "site. But now, you aren’t."
-msgstr "本拠地と採石場の建設地を、道路で接続します。新しい現場を配置するときは、直接に道路建設モードになります。しかし、今はそうではありません。"
+msgstr "本拠地と採石場の建設地を、道でつなぎます。新しい建物の建設を開始すると、直接に道路建設モードに入ることができます。道の敷設モードから抜けてしまっている場合には以下のように新規に道を作ります。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:314
 msgid ""
 "To build a completely new road, just click on the flag in front of your "
 "construction site, click on the build road icon and then click on the flag "
 "in front of your headquarters. Wait for the completion of the quarry."
-msgstr "完全に新しい道路を建設するためには、建設地の前の旗をクリックして、道路敷設アイコンをクリックしてから、本拠地の前で旗をクリックします。採石場の完成を待ちましょう。"
+msgstr "完全に新しい道路を建設するためには、建設中の建物の前の旗をクリックして、道を敷設アイコンをクリックしてから、本拠地の前の旗をクリックします。後は採石場の完成を待ちましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:320
 msgid "Quarry not Connected"
-msgstr ""
+msgstr "採石場までの道がありません"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:322
 msgid ""
@@ -646,11 +647,11 @@ msgid ""
 "transport wares. The simplest way is to click on the construction site’s "
 "flag, choose ‘Build road’, and then click on the destination flag (the one "
 "in front of your headquarters), just like I’ve demonstrated."
-msgstr ""
+msgstr "労働者たちは道が無い場所を歩こうとはしません。そのため、本拠地から建設中の建物までの道を作らないと運び手が物資を運んでくれません。最もシンプルな方法は、建設中の建物の前の旗をクリックして、「道を敷設」を選び、目的地の旗(今の場合は本拠地の前にあるものです)をクリックすることです。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:329
 msgid "You Destroyed the Construction Site!"
-msgstr ""
+msgstr "あなたが建設中の建物を破壊してしまいました！"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:331
 msgid ""
@@ -659,39 +660,39 @@ msgid ""
 "previous savegame. Luckily, these are created from time to time. To do so, "
 "you have to go back to the main menu and choose ‘Single Player’ → ‘Load "
 "Game’. And please be a bit more careful next time."
-msgstr ""
+msgstr "あなたは建設中の採石場を破壊してしまったようです。我々は本当に花崗岩を必要としているので、あなたには直前のセーブデータから再開することをお勧めします。幸運なことにゲームは時々保存されているのです。ゲームをロードするには、メインメニューに戻り、「シングルプレイ」を選び、さらに「ゲーム読込」を選んでください。それと、次回はもう少し慎重にプレイしてください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:339
 msgid "Build a second quarry"
-msgstr ""
+msgstr "二つ目の採石場を建てる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:341
 msgid ""
 "When there are many rocks, you can consider building another quarry. This "
 "will make the granite production faster."
-msgstr ""
+msgstr "岩がたくさんある時は、複数の採石場を作ってもいいでしょう。そうすれば花崗岩の供給速度を上げられます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:342
 msgid ""
 "Build a second quarry near the rocks and connect it to your road network."
-msgstr ""
+msgstr "二つ目の採石場を建設し、あなたの道路ネットワークにつなげてください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:345
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:347
 msgid "Build another quarry"
-msgstr ""
+msgstr "別の採石場建設"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:348
 msgid ""
 "Build a second quarry next to the rocks. Do not forget to connect it to "
 "another flag."
-msgstr ""
+msgstr "岩の隣に二つ目の採石場を建設しましょう。他の旗につなげるのを忘れないでください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:349
 msgid ""
 "You can connect the new road to any flag of your existing road network. You "
 "can create junctions everywhere, not only in front of buildings."
-msgstr ""
+msgstr "道は道路ネットワークのどこかにつながれば問題ありません。交差点は建物の前に限らずどこでも作れます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:356
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:365
@@ -705,7 +706,7 @@ msgid ""
 "sometimes hard to tell them apart. Widelands offers a feature to show label "
 "texts over the buildings. They are called the ‘census’ and you can toggle "
 "them via the ‘c’ key or via the button on the ‘Watch’ tab of any field."
-msgstr "待っている間、別の便利な機能を紹介します。すべての建設地は同じように見え、いくつかの建物も同じように見えます。そしてそれらを区別するのが難しい場合があります。Widelandsは、建物の上にテキストラベルを表示する機能を提供しています。それはセンサスと呼ばれ、Cキーを押す、または任意のフィールド上で監視タブのボタンを押すことで切り替えることができます。"
+msgstr "待っている間、別の便利な機能を紹介します。すべての建設中サイトは同じように見え、いくつかの建物はそもそも外観が良く似ています。時にはそれらを区別するのが難しい場合もあるでしょう。Widelandsでは、建物上にテキストラベルを表示する機能を提供しています。それはセンサスと呼ばれ、「c」キーを押す、もしくはフィールドの監視タブの中にあるボタンを押すことで切り替えることができます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:359
 msgid ""
@@ -713,18 +714,18 @@ msgid ""
 "button on the ‘Watch’ tab of any field. The hotkey for it is ‘s’. This will "
 "display information about the productivity of buildings or the progress of "
 "construction sites."
-msgstr "これと同様の機能に建物の統計情報があります。任意のフィールドの「監視」タブ上のボタンで切り替えることができます。対応するホットキーはSです。建物の生産率や建設地の進行状況に関する情報が表示されます。"
+msgstr "類似機能として建物の状態情報があります。これも同じく監視タブ上のボタンで切り替えることができます。対応するホットキーは「s」です。建物の生産性や建設の進行状況に関する情報等が表示されます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:360
 msgid ""
 "Let me quickly enable these two for you. Remember: ‘c’ and ‘s’ are the keys."
 " Alternatively, you can click on any field without a building on it, select "
 "the watch tab and then click on the corresponding buttons."
-msgstr "早速それらの二つを有効にします。覚えておいてください。CとSがキーです。または、建物ではなく任意のフィールドをクリックして監視のタブを選択し、対応するボタンをクリックします。"
+msgstr "早速それらの二つを有効にします。覚えておいてください。「c」と「s」がキーです。または、建物ではなく任意のフィールドをクリックして監視のタブを選択し、対応するボタンをクリックします。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:366
 msgid "Now we know what’s going on. Let’s wait for the quarries to finish."
-msgstr ""
+msgstr "これで何が起きているのかがわかるようになりました。それでは建設が完了するまで待ちましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:373
 msgid "Messages"
@@ -739,7 +740,7 @@ msgid ""
 "Hi, it’s me again! This time, I have sent you a message. Messages are sent "
 "to you by Widelands to inform you about important events: empty mines, "
 "attacks on your tribe, won or lost military buildings, resources found…"
-msgstr ""
+msgstr "こんにちはまたまた私です！今度はあなたにメッセージを送ってみました。メッセージは重要な情報についてWidelandsがあなたにお知らせするときに使うものです。ここで言う重要な情報には、鉱山の鉱脈の枯渇、敵陣営からの攻撃、戦闘での勝利もしくは敗北、資源の発見といったものが含まれます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:377
 msgid ""
@@ -747,7 +748,7 @@ msgid ""
 " bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr ""
+msgstr "メッセージウィンドウには下のパネルで右から二番めのボタンからアクセスできます。新着メッセージがある場合にはボタン上の絵も変わるようになっています。それに加えて、あなたがメッセージを受け取った際にはベルが鳴るようにもなっています。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -755,24 +756,24 @@ msgid ""
 "reading, and the one that informed you that a new headquarters was added to "
 "your economy. Let’s learn how to archive messages: first, select the message"
 " that you wish to archive by clicking on it in the list. Then, click the"
-msgstr ""
+msgstr "現時点で、あなたの元には二つのメッセージがあります。今あなたが読んでいるこれと、経済に本拠地が追加されたことをお知らせするものです。さて、メッセージを保管庫に片付ける方法を学びましょう。まず、片付けたいメッセージをリストからクリックして選択します。そして以下のアイコンをクリックします。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:379
 msgid "‘Archive selected message’ button to move it into your archive."
-msgstr ""
+msgstr "「選択したメッセージを保管庫にいれる」ボタン"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:380
 msgid ""
 "Once you have archived a message, another message will be selected "
 "automatically from the list."
-msgstr ""
+msgstr "メッセージを保管庫にいれると、別のメッセージが自動的に選択されます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:381
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:391
 msgid ""
 "You can also hold down the Ctrl or Shift key to select multiple messages, or"
 " press Ctrl + A to select them all."
-msgstr ""
+msgstr "CtrlかShiftキーを押しながらクリックすれば複数のメッセージを選択できます。「Ctrl + a」ならば全てのメッセージが選択できます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:382
 msgid ""
@@ -782,18 +783,18 @@ msgstr "このメッセージも含めた、受信箱に入っているすべて
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:385
 msgid "Archive all messages in your inbox"
-msgstr "すべてのメッセージを保管箱にアーカイブする"
+msgstr "すべてのメッセージを保管箱に入れる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:387
 msgid "Archive Your Inbox Messages"
-msgstr "メッセージを保管箱にアーカイブする"
+msgstr "メッセージを保管箱に入れる"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:388
 msgid ""
 "The message window is central to fully controlling your tribe’s fortune. "
 "However, you will get a lot of messages in a real game. To keep your head "
 "straight, you should try to keep the inbox empty."
-msgstr ""
+msgstr "あなたの部族の未来をきちんと制御する上でメッセージウィンドウは非常に重要な位置を占めます。しかし、実際のゲームではあなたは非常に多くのメッセージを受け取るでしょう。余計な混乱を生まないためにも、受信箱を空にするように習慣づけましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:389
 msgid "Archive all your messages in your inbox now."
@@ -805,7 +806,7 @@ msgid ""
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically. Keep clicking the ‘Archive selected "
 "message’ button until all messages have been archived and the list is empty."
-msgstr ""
+msgstr "そのためには、まず「n」を押してメッセージウィンドウを開くか下部のパネルの右から二番めのボタンをクリックします。ウィンドウを開くと、最新のメッセージが自動的に選択された状態になっています。後は受信箱が空になるまで「選択されたメッセージを保管庫にいれる」ボタンを押しつづけてください。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
@@ -817,13 +818,13 @@ msgid ""
 "Excellent. Do you remember how to close windows? You simply have to right-"
 "click on them. This will work with all windows except for story message "
 "windows like this one. Go ahead and try it."
-msgstr ""
+msgstr "良くできました。ウィンドウの閉じ方は覚えていますか？単に閉じたいウィンドウ上で右クリックするだけです。この方法はこれのようなストーリーに関わるウィンドウ以外では常に有効です。やってみましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:401
 msgid ""
 "First, close this window by pressing the button below, then right-click into"
 " the messages window to close it."
-msgstr "道路敷設モードに入るには、任意の旗を左クリックしてから、下のシンボルを選択してください。"
+msgstr "まず、下のボタンを押してこのウィンドウを閉じ、それからメッセージウィンドウを右クリックして閉じます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:406
 msgid "Close the messages window"
@@ -838,7 +839,7 @@ msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons at the very bottom of the "
 "screen."
-msgstr "Widelandsのすべてのウィンドウは、右クリックすることで閉じることができます。一部のウィンドウは、画面の最下部にあるボタンで切り替えることができます。"
+msgstr "Widelandsのすべてのウィンドウは、右クリックすることで閉じることができます。一部のウィンドウは、画面の最下部にあるボタンで表示と非表示を切り替えることができます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:410
 msgid "Close the messages window now by right-clicking into it."
@@ -850,11 +851,11 @@ msgid ""
 "I’ll take all rocks away from the poor stonemasons in the quarries. They "
 "will then send a message each that they can’t find any in their work areas "
 "the next time they try to do some work."
-msgstr ""
+msgstr "良くできました！それでは実際のゲームでメッセージがどのように使われるかを見てみましょうか？採石場の石工さんがちょっとかわいそうですが、全ての岩を取り去ってみましょう。しばらくすると、彼らはそれぞれ岩が見つからないという内容のメッセージを送ってくるでしょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:427
 msgid "Messages Arrived!"
-msgstr ""
+msgstr "メッセージ到着！"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:429
 msgid ""
@@ -862,49 +863,49 @@ msgid ""
 "has changed appearance? You can destroy the quarries now as they are no "
 "longer of any use and just blocking space. To do so, there are two "
 "possibilities:"
-msgstr ""
+msgstr "メッセージが届きました。下パネルのメッセージボタンの外観が変わったことに気づきましたか？さて、これで採石場は何の生産性も無い、単なる場所を無駄遣いするだけのお邪魔虫になっていました。というわけで採石場を破壊します。建物を破棄するには二つのやり方があります。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid ""
 "Burning down the quarry: this is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr ""
+msgstr "採石場を焼き払う: 場所を空けるための最速の方法です。労働者は逃げ出してくれますが、物資は失われます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:431
 msgid ""
 "Dismantling the quarry: a builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr ""
+msgstr "採石場を解体する: 建築者が本拠地から採石場に向かい、解体します。これならば建設に使った資材の一部を回収することができます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:435
 msgid "Destroy the two quarries"
-msgstr ""
+msgstr "二つの採石場を破壊する"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:437
 msgid ""
 "Since our quarries are useless now, you can destroy them and reuse the space"
 " later on."
-msgstr ""
+msgstr "採石場はもはや無意味です。破棄して土地を有効活用できるようにしましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:438
 msgid ""
 "There are two different ways of destroying a building: burning down and "
 "dismantling. Try them both out on your quarries."
-msgstr ""
+msgstr "建物を破棄するには二つの方法があります。焼き払うか解体するかの二択です。採石場で試してみましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:439
 msgid ""
 "Burning down the quarry: This is the fastest way of clearing the space. "
 "While the worker abandons the building, the wares are lost."
-msgstr ""
+msgstr "採石場を焼き払う: 場所を空けるための最速の方法です。労働者は逃げ出してくれますが、物資は失われます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:440
 msgid ""
 "Dismantling the quarry: A builder will walk from the headquarters to "
 "dismantle the quarry piece by piece. Thereby, you regain some of the "
 "resources you used for the construction."
-msgstr ""
+msgstr "採石場を解体する: 建築者が本拠地から採石場に向かい、解体します。これならば建設に使った資材の一部を回収することができます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
 msgid "Expanding Your Territory!"
@@ -917,7 +918,7 @@ msgid ""
 " a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our "
 "territory."
-msgstr "教えることがもう一つあります。領土の拡張です。本拠地周辺で始まっている場所は、基本的なインフラ構築のためだけでやっとであり、必要としている鉱物や石炭を採掘する山へのアクセス権がありません。そのため領土を拡大する必要があります。"
+msgstr "教えることがもう一つあります。領土の拡張です。本拠地周辺の土地だけでは、基本的なインフラ構築でギリギリ程度の広さしかありません。それに、各種鉱物や石炭を産出する山へアクセスすることもできません。そのため領土を拡大する必要があります。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:448
 msgid ""
@@ -928,46 +929,46 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr ""
+msgstr "領土の端に軍事系の建物を建てることで領土を拡大できます。野蛮人には複数の軍事建物があります。詰所、防塞、監視塔、要塞、そして城塞です。大きな建物ほど建設コストは大きいですが、拡大できる領土の大きさも、駐留できる兵士数も多くなっています。建物はそれぞれ視界範囲(領土とは別の扱いです)も設定されています。塔系統の建物は広い視界を持っています。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell your more about military buildings in another tutorial."
-msgstr ""
+msgstr "軍事建物に兵士が入ると、領土が拡大します。軍事系の建物についての詳細は別のチュートリアルで説明します。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid "Let’s try it out now: build a military building on your border."
-msgstr ""
+msgstr "それではやってみましょう。領土の端に軍用建物を建設しましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:451
 msgid ""
 "The sentry is the only military site that fits on a small building plot. If "
 "your lumberjack has cleared enough space, you can also build another "
 "military building."
-msgstr ""
+msgstr "小サイズの建物として建てられる軍事系建物は詰所だけです。もし木こりが充分に木を切っていれば、他の建物も建てられるかもしれません。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:454
 msgid "Expand your territory"
-msgstr ""
+msgstr "領土を拡大する"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:456
 msgid "Make your territory grow"
-msgstr ""
+msgstr "領土を広げましょう"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:457
 msgid ""
 "In Widelands, it is necessary to build many buildings, which take up a lot "
 "of space. To expand your territory, you have to build military buildings "
 "next to your border. Every tribe has several military buildings."
-msgstr ""
+msgstr "Widelandsでは多くの建物を建てますが、それには多くの土地が必要です。領土を拡大するには、領土の端に軍事建物を建設しなければなりません。このような軍事系の建物は全ての部族で複数種類あります。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:458
 msgid ""
 "The Barbarians have four different military buildings you can build: the "
 "sentry (small), the barrier and the tower (both medium) and the fortress "
 "(big). Just choose the one you like most."
-msgstr ""
+msgstr "野蛮人は四種類の軍事系の建物を建てられます。詰所(小)、防塞と監視塔(ともに中)、そして要塞(大)です。一番好きなものを選びましょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:459
 msgid ""
@@ -975,27 +976,27 @@ msgid ""
 "medium (yellow) building plots, but buildings can be built on a building "
 "plot that provides more space than they need. You should always keep that in"
 " mind when you search for a suitable place."
-msgstr ""
+msgstr "大サイズの建物(緑アイコン)は小や中の用地には建てられないことを忘れないでください。逆に大サイズの用地に小や中サイズの建物は建てられることも忘れないでください。適切な建設場所を考える際、これらのことは重要になります。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:465
 msgid "Military Site Occupied"
-msgstr ""
+msgstr "軍事建物占拠"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:467
 msgid "Your territory has just grown!"
-msgstr ""
+msgstr "領土が広がりました！"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
-msgstr ""
+msgstr "よくできました。兵士が軍事建物に入った時、どのように領土が拡大するかわかりましたか？"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid ""
 "Every military building has a certain conquer area – the more expensive the "
 "building, the more land it conquers."
-msgstr ""
+msgstr "全ての軍事建物には占領エリアが設定されています。基本的には、高価な建物ほど広い占領エリアを持ちます。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:476
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:478
@@ -1007,33 +1008,33 @@ msgid ""
 "This concludes the first tutorial. In order to learn more about the game, I "
 "suggest to play one of the other tutorials. Each of them covers a different "
 "topic."
-msgstr ""
+msgstr "これで最初のチュートリアルは終わりです。ゲームのことをもっと学ぶためには、他のチュートリアルもプレイすることをお勧めします。チュートリアルはそれぞれ別個の内容を扱っています。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:480
 msgid ""
 "However, since you now know how to control Widelands, you can also start a "
 "game (or continue this one) and discover more by yourself."
-msgstr ""
+msgstr "しかし、あなたはもうWidelandsの基本操作は学習済です。新しいゲームを始めるなり、このゲームを継続して色々試してみても良いでしょう。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:481
 msgid "To leave this game and return to the main menu, click on the"
-msgstr ""
+msgstr "ゲームから抜けてメインメニューに戻るには、まずこのボタンをクリックします。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:482
 msgid ""
 "‘Main Menu’ button on the very left at the bottom of the screen. Then click "
 "the"
-msgstr ""
+msgstr "「メインメニュー」ボタンは下パネルの一番左にあります。そして次に"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "‘Exit Game’ button."
-msgstr "「ゲーム終了」ボタンをクリックしてください。"
+msgstr "「ゲーム終了」ボタンをクリックします。"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:484
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember to visit us "
 "at"
-msgstr "このチュートリアルをプレイしてくれてありがとうございます。Widelandsを楽しみ、サイトに訪れることを忘れないでください。"
+msgstr "このチュートリアルをプレイしてくれてありがとうございます。Widelandsを楽しんでください。それと、我々のサイトにも色々な情報があるのでぜひ訪れてみてください。"
 
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format

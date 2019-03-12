@@ -419,9 +419,8 @@ end
 function li_image(imagepath, text)
    return
       div("width=100%",
-         div(p(vspace(6) .. img(imagepath) .. space(6))) ..
-         div(p(space(6))) ..
-         div("width=*", p(vspace(6) .. text .. vspace(12)))
+         div("float=left padding_r=6", p(img(imagepath))) ..
+         p(text)
       )
 end
 
@@ -517,7 +516,7 @@ end
 --
 --    :arg items:              An array of strings
 --    :arg listtype:           The type of concatenation to use.
---                             Legal values are "&", "and", "or", and ";"
+--                             Legal values are "&", "and", "or", and ","
 --    :arg former_textdomain:  The textdomain to restore after running this function.
 --    :returns: The concatenated list string, using localized concatenation operators.
 --

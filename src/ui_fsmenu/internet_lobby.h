@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,9 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
+#include "ui_fsmenu/base.h"
 #include "ui_fsmenu/load_map_or_game.h"
-#include "wui/gamechatpanel.h"
+#include "wui/game_chat_panel.h"
 
 class FullscreenMenuInternetLobby : public FullscreenMenuLoadMapOrGame {
 public:

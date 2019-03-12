@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,7 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "base/macros.h"
-#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "graphic/text_constants.h"
 #include "network/crypto.h"
 #include "network/gameclient.h"
 #include "network/gamehost.h"
@@ -36,8 +34,18 @@
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
 
+namespace {
+
+// Constants for convert_clienttype() / compare_clienttype()
+const uint8_t kClientUnregistered = 0;
+const uint8_t kClientRegistered = 1;
+const uint8_t kClientSuperuser = 2;
+// 3 was INTERNET_CLIENT_BOT which is not used
+const uint8_t kClientIRC = 4;
+}  // namespace
+
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
-                                                         std::string& pwd,
+														 std::string& pwd,
                                                          bool registered)
    : FullscreenMenuLoadMapOrGame(),
 
@@ -54,30 +62,30 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 
      // Left column content
      label_clients_online_(&left_column_, 0, 0, _("Clients online:")),
-     clientsonline_table_(&left_column_, 0, 0, 0, 0),
-     chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), GameChatPanel::Style::kFsMenu),
+     clientsonline_table_(&left_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
+     chat_(&left_column_, 0, 0, 0, 0, InternetGaming::ref(), UI::PanelStyle::kFsMenu),
 
      // Right column content
      label_opengames_(&right_column_, 0, 0, _("List of games:")),
-     opengames_list_(&right_column_, 0, 0, 0, 0),
+     opengames_list_(&right_column_, 0, 0, 0, 0, UI::PanelStyle::kFsMenu),
      joingame_(&right_column_,
                "join_game",
                0,
                0,
                0,
                0,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
      servername_label_(&right_column_, 0, 0, _("Name of your game:")),
      servername_(
-        &right_column_, 0, 0, 0, labelh_, 2, g_gr->images().get("images/ui_basic/but2.png")),
+        &right_column_, 0, 0, 0, labelh_, 2, UI::PanelStyle::kFsMenu),
      hostgame_(&right_column_,
                "host_game",
                0,
                0,
                0,
                0,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
 
      // Login information
@@ -120,10 +128,12 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(std::string& nick,
 
 	// prepare the lists
 	std::string t_tip =
-	   (boost::format("%s%s%s%s%s%s%s%s%s%s") % "<rt><p><font underline=yes>" % _("User Status") %
-	    "</font><br>" % "<img src=images/wui/overlays/roadb_yellow.png> " % _("Registered") %
-	    "<br><img src=images/wui/overlays/roadb_green.png> " % _("Administrator") %
-	    "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") % "</p></rt>")
+	   (boost::format("%s%s%s%s%s%s%s%s%s%s") %
+	    "<rt padding=2><p align=center spacing=3><font bold=yes underline=yes>" % _("User Status") %
+	    "</font></p>" % "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> " %
+	    _("Administrator") % "<br><img src=images/wui/overlays/roadb_yellow.png> " %
+	    _("Registered") % "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") %
+	    "</p></rt>")
 	      .str();
 	clientsonline_table_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
@@ -253,13 +263,13 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 
 uint8_t FullscreenMenuInternetLobby::convert_clienttype(const std::string& type) {
 	if (type == INTERNET_CLIENT_REGISTERED)
-		return 1;
+		return kClientRegistered;
 	if (type == INTERNET_CLIENT_SUPERUSER)
-		return 2;
-	if (type == INTERNET_CLIENT_BOT)
-		return 3;
+		return kClientSuperuser;
+	if (type == INTERNET_CLIENT_IRC)
+		return kClientIRC;
 	// if (type == INTERNET_CLIENT_UNREGISTERED)
-	return 0;
+	return kClientUnregistered;
 }
 
 /**
@@ -283,27 +293,24 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
 
-			if (client.build_id == "IRC") {
-				// No icon for IRC users
-				continue;
-			}
-
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {
-			case 0:  // UNREGISTERED
+			case kClientUnregistered:
 				pic = g_gr->images().get("images/wui/overlays/roadb_red.png");
 				er.set_picture(0, pic);
 				break;
-			case 1:  // REGISTERED
+			case kClientRegistered:
 				pic = g_gr->images().get("images/wui/overlays/roadb_yellow.png");
 				er.set_picture(0, pic);
 				break;
-			case 2:  // SUPERUSER
-			case 3:  // BOT
+			case kClientSuperuser:
 				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;
+			case kClientIRC:
+				// No icon for IRC users
+				continue;
 			default:
 				continue;
 			}
@@ -321,11 +328,6 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 	// add a @clientname to the current edit text.
 	if (clientsonline_table_.has_selection()) {
 		UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_table_.get_record(i);
-
-		if (er.get_string(2) == "IRC") {
-			// No PM to IRC users
-			return;
-		}
 
 		std::string temp("@");
 		temp += er.get_string(1);
@@ -384,12 +386,9 @@ void FullscreenMenuInternetLobby::change_servername() {
 }
 
 bool FullscreenMenuInternetLobby::wait_for_ip() {
-	// Wait until the metaserver provided us with an IP address
-	uint32_t const secs = time(nullptr);
-	while (!InternetGaming::ref().ips().first.is_valid()) {
-		InternetGaming::ref().handle_metaserver_communication();
-		// give some time for the answer + for a relogin, if a problem occurs.
-		if ((kInternetGamingTimeout * 5 / 3) < time(nullptr) - secs) {
+	if (!InternetGaming::ref().wait_for_ips()) {
+		// Only display a message box if a network error occurred
+		if (InternetGaming::ref().error()) {
 			// Show a popup warning message
 			const std::string warning(
 			   _("Widelands was unable to get the IP address of the server in time. "
@@ -398,9 +397,8 @@ bool FullscreenMenuInternetLobby::wait_for_ip() {
 			UI::WLMessageBox mmb(this, _("Connection Timed Out"), warning,
 			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
-			InternetGaming::ref().set_error();
-			return false;
 		}
+		return false;
 	}
 	return true;
 }
@@ -444,8 +442,9 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		// Tell the metaserver about it
 		InternetGaming::ref().open_game();
 
-		// Wait for his response with the IPs of the relay server
+		// Wait for the response with the IPs of the relay server
 		if (!wait_for_ip()) {
+			InternetGaming::ref().set_error();
 			return;
 		}
 

@@ -2,14 +2,15 @@
 # Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
 # Madkat Here, 2016
 # Thadah D. Denyse <juchuf@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:28+0000\n"
+"POT-Creation-Date: 2018-03-24 09:42+0000\n"
+"PO-Revision-Date: 2018-03-24 13:07+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Spanish (http://www.transifex.com/widelands/widelands/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -113,13 +114,13 @@ msgstr "Click"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "Colocar nuevos elementos en el mapa, o aumentar los elementos del mapa por el valor seleccionado por \"Aumentar/Disminuir valor' "
+msgstr "Colocar nuevos elementos en el mapa, o aumentar los elementos del mapa por el valor seleccionado por \"Aumentar/Disminuir valor'"
 
 #: ../../data/scripting/editor/editor_controls.lua:45
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr "Remover elementos del mapa, o disminuir los elementos del mapa por el valor seleccionado por \"Aumentar/Disminuir valor' "
+msgstr "Remover elementos del mapa, o disminuir los elementos del mapa por el valor seleccionado por \"Aumentar/Disminuir valor'"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,11 +28,12 @@
 
 #include "base/log.h"
 #include "base/macros.h"
+#include "base/scoped_timer.h"
 #include "base/wexception.h"
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "editor/tools/increase_resources_tool.h"
+#include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/filesystem_constants.h"
 #include "logic/findimmovable.h"
@@ -43,6 +44,7 @@
 #include "logic/map_objects/world/terrain_description.h"
 #include "logic/map_objects/world/world.h"
 #include "logic/mapfringeregion.h"
+#include "logic/maphollowregion.h"
 #include "logic/objective.h"
 #include "logic/pathfield.h"
 #include "logic/player.h"
@@ -70,7 +72,8 @@ Map::Map()
      scenario_types_(NO_SCENARIO),
      width_(0),
      height_(0),
-     pathfieldmgr_(new PathfieldManager) {
+     pathfieldmgr_(new PathfieldManager),
+     allows_seafaring_(false) {
 }
 
 Map::~Map() {
@@ -157,6 +160,7 @@ void Map::recalc_whole_map(const World& world) {
 			f = get_fcoords(Coords(x, y));
 			recalc_nodecaps_pass2(world, f);
 		}
+	recalculate_allows_seafaring();
 }
 
 void Map::recalc_default_resources(const World& world) {
@@ -253,6 +257,137 @@ void Map::recalc_default_resources(const World& world) {
 		}
 }
 
+size_t Map::count_all_conquerable_fields() {
+	if (!valuable_fields_.empty()) {
+		// Already calculated
+		return valuable_fields_.size();
+	}
+
+	std::set<FCoords> coords_to_check;
+
+	log("Collecting valuable fields ... ");
+	ScopedTimer timer("took %ums");
+
+	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
+	// initialized with the given radius around the coordinates
+	const auto walk_starting_coords = [this, &coords_to_check](const Coords& coords, int radius) {
+		FCoords fcoords = get_fcoords(coords);
+
+		// We already have these coordinates
+		if (valuable_fields_.count(fcoords) == 1) {
+			return;
+		}
+
+		// Add starting field
+		valuable_fields_.insert(fcoords);
+
+		// Add outer land coordinates around the starting field for the given radius
+		std::unique_ptr<Widelands::HollowArea<>> hollow_area(
+		   new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), 2));
+		std::unique_ptr<Widelands::MapHollowRegion<>> map_region(
+		   new Widelands::MapHollowRegion<>(*this, *hollow_area));
+		do {
+			coords_to_check.insert(get_fcoords(map_region->location()));
+		} while (map_region->advance(*this));
+
+		// Walk the map
+		while (!coords_to_check.empty()) {
+			// Get some coordinates to check
+			const auto coords_it = coords_to_check.begin();
+			fcoords = *coords_it;
+
+			// Get region according to buildcaps
+			radius = 0;
+			int inner_radius = 2;
+			if ((fcoords.field->maxcaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG) {
+				radius = 9;
+				inner_radius = 7;
+			} else if (fcoords.field->maxcaps() & BUILDCAPS_MEDIUM) {
+				radius = 7;
+				inner_radius = 5;
+			} else if (fcoords.field->maxcaps() & BUILDCAPS_SMALL) {
+				radius = 5;
+			}
+
+			// Check region and add walkable fields
+			if (radius > 0) {
+				hollow_area.reset(
+				   new Widelands::HollowArea<>(Widelands::Area<>(fcoords, radius), inner_radius));
+				map_region.reset(new Widelands::MapHollowRegion<>(*this, *hollow_area));
+				do {
+					fcoords = get_fcoords(map_region->location());
+
+					// We do the caps check first, because the comparison is faster than the container
+					// check
+					if ((fcoords.field->maxcaps() & MOVECAPS_WALK) &&
+					    (valuable_fields_.count(fcoords) == 0)) {
+						valuable_fields_.insert(fcoords);
+						coords_to_check.insert(fcoords);
+					}
+				} while (map_region->advance(*this));
+			}
+
+			// These coordinates are done. We do not keep track of visited coordinates that didn't make
+			// the result, because the container insert operations are more expensive than the checks
+			coords_to_check.erase(coords_it);
+		}
+	};
+
+	// Walk the map from the starting field of each player
+	for (const Coords& coords : starting_pos_) {
+		walk_starting_coords(coords, 9);
+	}
+
+	// Walk the map from port spaces
+	if (allows_seafaring()) {
+		for (const Coords& coords : get_port_spaces()) {
+			walk_starting_coords(coords, 5);
+		}
+	}
+
+	log("%" PRIuS " found ... ", valuable_fields_.size());
+	return valuable_fields_.size();
+}
+
+size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
+	if (!valuable_fields_.empty()) {
+		// Already calculated
+		return valuable_fields_.size();
+	}
+
+	log("Collecting valuable fields ... ");
+	ScopedTimer timer("took %ums");
+
+	for (MapIndex i = 0; i < max_index(); ++i) {
+		Field& field = fields_[i];
+		if (!(field.nodecaps() & caps)) {
+			valuable_fields_.insert(get_fcoords(field));
+		}
+	}
+
+	log("%" PRIuS " found ... ", valuable_fields_.size());
+	return valuable_fields_.size();
+}
+
+std::map<PlayerNumber, size_t>
+Map::count_owned_valuable_fields(const std::string& immovable_attribute) const {
+	std::map<PlayerNumber, size_t> result;
+	const bool use_attribute = !immovable_attribute.empty();
+	const uint32_t attribute_id =
+	   use_attribute ? MapObjectDescr::get_attribute_id(immovable_attribute) : 0U;
+	for (const FCoords& fcoords : valuable_fields_) {
+		if (use_attribute) {
+			const BaseImmovable* imm = fcoords.field->get_immovable();
+			if (imm != nullptr && imm->has_attribute(attribute_id)) {
+				result[fcoords.field->get_owned_by()] += 1;
+			}
+		} else {
+			result[fcoords.field->get_owned_by()] += 1;
+		}
+	}
+	return result;
+}
+
 /*
 ===============
 remove your world, remove your data
@@ -278,6 +413,7 @@ void Map::cleanup() {
 	objectives_.clear();
 
 	port_spaces_.clear();
+	allows_seafaring_ = false;
 
 	// TODO(meitis): should be done here ... but WidelandsMapLoader::preload_map calls
 	// this cleanup AFTER assigning filesystem_ in WidelandsMapLoader::WidelandsMapLoader
@@ -302,15 +438,7 @@ void Map::create_empty_map(const World& world,
 	set_name(name);
 	set_author(author);
 	set_description(description);
-	set_nrplayers(1);
-	// Set first tribe found as the "basic" tribe
-	// <undefined> (as set before) is useless and will lead to a
-	// crash -> Widelands will search for tribe "<undefined>"
-	set_scenario_player_tribe(1, Widelands::get_all_tribenames()[0]);
-	set_scenario_player_name(1, (boost::format(_("Player %u")) % 1).str());
-	set_scenario_player_ai(1, "");
-	set_scenario_player_closeable(1, false);
-
+	set_nrplayers(0);
 	{
 		Field::Terrains default_terrains;
 		default_terrains.d = default_terrain;
@@ -335,60 +463,66 @@ void Map::set_origin(const Coords& new_origin) {
 	assert(0 <= new_origin.y);
 	assert(new_origin.y < height_);
 
+	const size_t field_size = width_ * height_;
+
 	for (uint8_t i = get_nrplayers(); i;) {
 		starting_pos_[--i].reorigin(new_origin, extent());
 	}
 
-	std::unique_ptr<Field[]> new_field_order(new Field[width_ * height_]);
-	memset(new_field_order.get(), 0, sizeof(Field) * width_ * height_);
+	std::unique_ptr<Field[]> new_field_order(new Field[field_size]);
+	memset(new_field_order.get(), 0, sizeof(Field) * field_size);
 
 	// Rearrange The fields
-	// NOTE because of the triangle design, we have to take special care about cases
+	// NOTE because of the triangle design, we have to take special care of cases
 	// NOTE where y is changed by an odd number
 	bool yisodd = (new_origin.y % 2) != 0;
 	for (Coords c(Coords(0, 0)); c.y < height_; ++c.y) {
 		bool cyisodd = (c.y % 2) != 0;
 		for (c.x = 0; c.x < width_; ++c.x) {
 			Coords temp;
-			if (yisodd && cyisodd)
+			if (yisodd && cyisodd) {
 				temp = Coords(c.x + new_origin.x + 1, c.y + new_origin.y);
-			else
+			} else {
 				temp = Coords(c.x + new_origin.x, c.y + new_origin.y);
+			}
 			normalize_coords(temp);
 			new_field_order[get_index(c, width_)] = operator[](temp);
 		}
 	}
 	// Now that we restructured the fields, we just overwrite the old order
-	for (decltype(width_) ind = 0; ind < width_ * height_; ind++) {
+	for (size_t ind = 0; ind < field_size; ind++) {
 		fields_[ind] = new_field_order[ind];
 	}
 
 	//  Inform immovables and bobs about their new coordinates.
-	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y)
+	for (FCoords c(Coords(0, 0), fields_.get()); c.y < height_; ++c.y) {
 		for (c.x = 0; c.x < width_; ++c.x, ++c.field) {
 			assert(c.field == &operator[](c));
-			if (upcast(Immovable, immovable, c.field->get_immovable()))
+			if (upcast(Immovable, immovable, c.field->get_immovable())) {
 				immovable->position_ = c;
+			}
 			for (Bob* bob = c.field->get_first_bob(); bob; bob = bob->get_next_bob()) {
 				bob->position_.x = c.x;
 				bob->position_.y = c.y;
 				bob->position_.field = c.field;
 			}
 		}
+	}
 
-	// Take care about port spaces
+	// Take care of port spaces
 	PortSpacesSet new_port_spaces;
 	for (PortSpacesSet::iterator it = port_spaces_.begin(); it != port_spaces_.end(); ++it) {
 		Coords temp;
-		if (yisodd && ((it->y % 2) == 0))
+		if (yisodd && ((it->y % 2) == 0)) {
 			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
-		else
+		} else {
 			temp = Coords(it->x - new_origin.x, it->y - new_origin.y);
+		}
 		normalize_coords(temp);
-		log("(%i,%i) -> (%i,%i)\n", it->x, it->y, temp.x, temp.y);
 		new_port_spaces.insert(temp);
 	}
 	port_spaces_ = new_port_spaces;
+	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
 /*
@@ -491,7 +625,7 @@ void Map::set_nrplayers(PlayerNumber const nrplayers) {
 		return;
 	}
 
-	starting_pos_.resize(nrplayers, Coords(-1, -1));
+	starting_pos_.resize(nrplayers, Coords::null());
 	scenario_tribes_.resize(nrplayers);
 	scenario_ais_.resize(nrplayers);
 	scenario_closeables_.resize(nrplayers);
@@ -549,9 +683,9 @@ void Map::delete_tag(const std::string& tag) {
 }
 
 NodeCaps Map::get_max_nodecaps(const World& world, const FCoords& fc) const {
-	NodeCaps caps = calc_nodecaps_pass1(world, fc, false);
-	caps = calc_nodecaps_pass2(world, fc, false, caps);
-	return caps;
+	NodeCaps max_caps = calc_nodecaps_pass1(world, fc, false);
+	max_caps = calc_nodecaps_pass2(world, fc, false, max_caps);
+	return static_cast<NodeCaps>(max_caps);
 }
 
 /// \returns the immovable at the given coordinate
@@ -937,6 +1071,7 @@ above recalc_brightness.
 */
 void Map::recalc_nodecaps_pass1(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass1(world, f, true);
+	f.field->max_caps = calc_nodecaps_pass1(world, f, false);
 }
 
 NodeCaps Map::calc_nodecaps_pass1(const World& world, const FCoords& f, bool consider_mobs) const {
@@ -1055,6 +1190,8 @@ Important: flag buildability has already been checked in the first pass.
 */
 void Map::recalc_nodecaps_pass2(const World& world, const FCoords& f) {
 	f.field->caps = calc_nodecaps_pass2(world, f, true);
+	f.field->max_caps =
+	   calc_nodecaps_pass2(world, f, false, static_cast<NodeCaps>(f.field->max_caps));
 }
 
 NodeCaps Map::calc_nodecaps_pass2(const World& world,
@@ -1316,7 +1453,8 @@ bool Map::is_port_space(const Coords& c) const {
 	return port_spaces_.count(c);
 }
 
-bool Map::set_port_space(const World& world, const Coords& c, bool set, bool force) {
+bool Map::set_port_space(
+   const World& world, const Coords& c, bool set, bool force, bool recalculate_seafaring) {
 	bool success = false;
 	if (set) {
 		success = force || is_port_space_allowed(world, get_fcoords(c));
@@ -1326,6 +1464,9 @@ bool Map::set_port_space(const World& world, const Coords& c, bool set, bool for
 	} else {
 		port_spaces_.erase(c);
 		success = true;
+	}
+	if (recalculate_seafaring) {
+		recalculate_allows_seafaring();
 	}
 	return success;
 }
@@ -1568,16 +1709,18 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
 	std::string lower_filename = filename;
 	boost::algorithm::to_lower(lower_filename);
 
-	if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
-		try {
+	try {
+		if (boost::algorithm::ends_with(lower_filename, kWidelandsMapExtension)) {
 			result.reset(new WidelandsMapLoader(g_fs->make_sub_file_system(filename), this));
-		} catch (...) {
-			//  If this fails, it is an illegal file.
-			//  TODO(unknown): catchall hides real errors! Replace with more specific code
+		} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
+		           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
+			result.reset(new S2MapLoader(filename, *this));
 		}
-	} else if (boost::algorithm::ends_with(lower_filename, kS2MapExtension1) ||
-	           boost::algorithm::ends_with(lower_filename, kS2MapExtension2)) {
-		result.reset(new S2MapLoader(filename, *this));
+	} catch (const FileError& e) {
+		// file might not have existed
+		log("Map::get_correct_loader: File error: %s\n", e.what());
+	} catch (std::exception& e) {
+		log("Map::get_correct_loader: Unknown error: %s\n", e.what());
 	}
 	return result;
 }
@@ -1686,10 +1829,10 @@ int32_t Map::findpath(Coords instart,
 				continue;
 
 			// Check passability
-			if (!checkstep.allowed(
-			       *this, cur, neighb, *direction, neighb == end ? CheckStep::stepLast : cur == start ?
-			                                                       CheckStep::stepFirst :
-			                                                       CheckStep::stepNormal))
+			if (!checkstep.allowed(*this, cur, neighb, *direction,
+			                       neighb == end ?
+			                          CheckStep::stepLast :
+			                          cur == start ? CheckStep::stepFirst : CheckStep::stepNormal))
 				continue;
 
 			// Calculate cost
@@ -1973,10 +2116,16 @@ void Map::check_neighbour_heights(FCoords coords, uint32_t& area) {
 }
 
 bool Map::allows_seafaring() const {
+	return allows_seafaring_;
+}
+
+// This check can become very expensive, so we only recalculate this on relevant map changes.
+void Map::recalculate_allows_seafaring() {
 
 	// There need to be at least 2 port spaces for seafaring to make sense
 	if (get_port_spaces().size() < 2) {
-		return false;
+		allows_seafaring_ = false;
+		return;
 	}
 
 	std::set<Coords> reachable_from_previous_ports;
@@ -2000,7 +2149,8 @@ bool Map::allows_seafaring() const {
 
 			// Found one
 			if (reachable_from_previous_ports.count(current_position) > 0) {
-				return true;
+				allows_seafaring_ = true;
+				return;
 			}
 
 			// Adding the neighbors to the list
@@ -2021,7 +2171,7 @@ bool Map::allows_seafaring() const {
 			reachable_from_previous_ports.insert(reachable_coord);
 		}
 	}
-	return false;
+	allows_seafaring_ = false;
 }
 
 void Map::cleanup_port_spaces(const World& world) {
@@ -2031,6 +2181,7 @@ void Map::cleanup_port_spaces(const World& world) {
 			continue;
 		}
 	}
+	recalculate_allows_seafaring();
 }
 
 bool Map::has_artifacts() {

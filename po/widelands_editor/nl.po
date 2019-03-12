@@ -3,13 +3,14 @@
 # 
 # Translators:
 # Nora Ghaoui, 2016
+# Nora Ghaoui, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-01-26 13:16+0000\n"
-"PO-Revision-Date: 2018-01-26 13:28+0000\n"
-"Last-Translator: GunChleoc\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-12-24 10:06+0000\n"
+"PO-Revision-Date: 2018-12-28 13:45+0000\n"
+"Last-Translator: stdh\n"
 "Language-Team: Dutch (http://www.transifex.com/widelands/widelands/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,17 +36,17 @@ msgstr "Help"
 #. TRANSLATORS: This is an access key combination.
 #: ../../data/scripting/editor/editor_controls.lua:18
 msgid "Toggle main menu"
-msgstr "Schakel hoofdmenu aan/uit"
+msgstr "Hoofdmenu (aan/uit)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 't'
 #: ../../data/scripting/editor/editor_controls.lua:20
 msgid "Toggle tools menu"
-msgstr "Schakel gereedschapsmenu aan/uit"
+msgstr "Gereedschapsmenu (aan/uit)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'p'
 #: ../../data/scripting/editor/editor_controls.lua:24
 msgid "Toggle player menu"
-msgstr "Schakel spelersmenu aan/uit"
+msgstr "Spelersmenu (aan/uit)"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -112,13 +113,13 @@ msgstr "Klik"
 msgid ""
 "Place new elements on the map, or increase map elements by the value "
 "selected by ‘Increase/Decrease value’"
-msgstr "Plaats nieuwe elementen op de kaart, of verhoog elementen op de kaart met de waarde gekozen in 'Verhoog/Verlaag waarde'"
+msgstr "Plaats nieuwe elementen op de kaart, of verhoog elementen op de kaart met de waarde gekozen in 'Verhoog/verlaag waarde'"
 
 #: ../../data/scripting/editor/editor_controls.lua:45
 msgid ""
 "Remove elements from the map, or decrease map elements by the value selected"
 " by ‘Increase/Decrease value’"
-msgstr "Verwijder elementen van de kaart, of verlaag elementen op de kaart met de waarde gekozen in 'Verhoog/Verlaag waarde'"
+msgstr "Verwijder elementen van de kaart, of verlaag elementen op de kaart met de waarde gekozen in 'Verhoog/verlaag waarde'"
 
 #. TRANSLATORS: This is an access key combination. Localize, but do not change
 #. the key.
@@ -136,7 +137,7 @@ msgstr "Ctrl + Klik"
 
 #: ../../data/scripting/editor/editor_controls.lua:47
 msgid "Set map elements to the value selected by ‘Set Value’"
-msgstr "Geef elementen op de kaart de waarde gekozen in 'Stel Waarde in'"
+msgstr "Geef elementen op de kaart de waarde gekozen in 'Stel waarde in'"
 
 #: ../../data/scripting/editor/editor_help.lua:49
 msgid "Editor Help"
@@ -154,7 +155,7 @@ msgstr "Inleiding"
 #: ../../data/scripting/editor/editor_help.lua:71
 #: ../../data/scripting/editor/tips.lua:15
 msgid "Tips"
-msgstr ""
+msgstr "Tips"
 
 #: ../../data/scripting/editor/editor_help.lua:81
 msgid "Terrains"
@@ -178,7 +179,7 @@ msgstr "Deze editor is bedoeld voor spelers die hun eigen kaarten willen ontwerp
 msgid ""
 "As you can see, this editor is heavy work in progress and as the editor "
 "becomes better and better, this text will also get longer and more complete."
-msgstr "Zoals je kunt zien, is deze editor nog een stevig werk in uitvoering en als de editor beter en beter wordt, zal deze tekst ook langer en completer worden."
+msgstr "Zoals je kunt zien is deze editor nog een stevig werk in uitvoering. Als de editor beter en beter wordt, zal deze tekst ook langer en completer worden."
 
 #: ../../data/scripting/editor/editor_introduction.lua:17
 msgid "The wiki also includes a short tutorial on how to build a map."

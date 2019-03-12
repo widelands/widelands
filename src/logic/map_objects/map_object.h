@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,13 +39,11 @@
 #include "logic/map_objects/tribes/training_attribute.h"
 #include "logic/widelands.h"
 #include "scripting/lua_table.h"
+#include "ui_basic/tabpanel.h"
 
 class FileRead;
 class RenderTarget;
 struct DirAnimations;
-namespace UI {
-struct TabPanel;
-}
 
 namespace Widelands {
 
@@ -208,10 +206,10 @@ private:
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,
- * potentially set it up by calling basic functions like set_position(),
- * set_owner(), etc. and then call init(). After that, the object is supposed to
+ * potentially set it up by calling basic functions like set_position(), etc.
+ * and then call init(). After that, the object is supposed to
  * be fully created.
-*/
+ */
 
 /// If you find a better way to do this that doesn't cost a virtual function
 /// or additional member variable, go ahead
@@ -263,7 +261,7 @@ public:
 
 	/**
 	 * Is called right before the object will be removed from
-	 * the game. No conncetion is handled in this class.
+	 * the game. No connection is handled in this class.
 	 *
 	 * param serial : the object serial (cannot use param comment as this is a callback)
 	 */
@@ -304,10 +302,15 @@ public:
 	void set_logsink(LogSink*);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(const EditorGameBase&);
+	virtual void log_general_info(const EditorGameBase&) const;
 
 	Player* get_owner() const {
 		return owner_;
+	}
+
+	const Player& owner() const {
+		assert(get_owner());
+		return *owner_;
 	}
 
 	// Header bytes to distinguish between data packages for the different
@@ -327,7 +330,6 @@ public:
 		HeaderFleet = 11,
 	};
 
-public:
 	/**
 	 * Returns whether this immovable was reserved by a worker.
 	 */
@@ -604,6 +606,6 @@ private:
 	Serial obj_serial;
 	int32_t arg;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_H

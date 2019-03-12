@@ -1,7 +1,7 @@
 function ware_helptext(tribe)
    local helptext = {
       -- TRANSLATORS: Helptext for a ware: Gold Ore
-      default = pgettext("ware", "Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor.")
+      default = pgettext("ware", "Gold ore is mined in a gold mine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor.")
    }
    local result = ""
    if tribe then
