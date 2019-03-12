@@ -31,7 +31,7 @@
 namespace UI {
 
 // int instead of uint because of overflow situations
-static const int32_t RICHTEXT_MARGIN = 2;
+static constexpr int32_t kRichtextMargin = 2;
 
 MultilineTextarea::MultilineTextarea(Panel* const parent,
                                      const int32_t x,
@@ -54,7 +54,6 @@ MultilineTextarea::MultilineTextarea(Panel* const parent,
 	scrollbar_.set_singlestepsize(text_height());
 	scrollbar_.set_steps(1);
 	set_scrollmode(scroll_mode);
-	assert(scrollmode_ == MultilineTextarea::ScrollMode::kNoScrolling || Scrollbar::kSize <= w);
 }
 
 /**
@@ -82,15 +81,18 @@ void MultilineTextarea::recompute() {
 	for (int i = 0; i < 2; ++i) {
 		int height = 0;
 		if (!text_.empty()) {
+			const int text_width = get_eff_w() - 2 * kRichtextMargin;
+			assert(text_width > 0);
+
 			if (!is_richtext(text_)) {
 				text_ = make_richtext();
 			}
 			try {
-				rendered_text_ = UI::g_fh->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
+				rendered_text_ = UI::g_fh->render(text_, text_width);
 			} catch (const std::exception& e) {
 				log("Error rendering richtext: %s. Text is:\n%s\n", e.what(), text_.c_str());
 				text_ = make_richtext();
-				rendered_text_ = UI::g_fh->render(text_, get_eff_w() - 2 * RICHTEXT_MARGIN);
+				rendered_text_ = UI::g_fh->render(text_, text_width);
 			}
 			height = rendered_text_->height();
 		}
@@ -154,10 +156,10 @@ void MultilineTextarea::draw(RenderTarget& dst) {
 		anchor = std::max(0, (get_eff_w() - rendered_text_->width()) / 2);
 		break;
 	case UI::Align::kRight:
-		anchor = std::max(0, get_eff_w() - rendered_text_->width() - RICHTEXT_MARGIN);
+		anchor = std::max(0, get_eff_w() - rendered_text_->width() - kRichtextMargin);
 		break;
 	case UI::Align::kLeft:
-		anchor = RICHTEXT_MARGIN;
+		anchor = kRichtextMargin;
 	}
 	rendered_text_->draw(dst, Vector2i(anchor, 0),
 	                     Recti(0, scrollbar_.get_scrollpos(), rendered_text_->width(),

@@ -68,7 +68,6 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
 
 	chat_message_subscriber_ =
 	   Notifications::subscribe<ChatMessage>([this](const ChatMessage&) { recalculate(true); });
-	recalculate();
 	layout();
 }
 
