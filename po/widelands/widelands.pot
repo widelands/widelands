@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-08 07:26+0000\n"
+"POT-Creation-Date: 2019-03-12 15:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -66,7 +66,7 @@ msgstr ""
 #. * TRANSLATORS: File name for saving objective achieved
 #. * TRANSLATORS: %1% = map name. %2% = achievement name
 #. TRANSLATORS: Terrain name (Climate)
-#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1062
+#: ../../data/scripting/help.lua:46 ../../src/scripting/lua_game.cc:1052
 msgid "%1% (%2%)"
 msgstr ""
 
@@ -1087,7 +1087,7 @@ msgid "Not set"
 msgstr ""
 
 #: ../../src/logic/game.cc:214 ../../src/logic/game.cc:266
-#: ../../src/logic/game.cc:337 ../../src/logic/game.cc:372
+#: ../../src/logic/game.cc:341 ../../src/logic/game.cc:376
 msgid "Preloading map"
 msgstr ""
 
@@ -1099,24 +1099,24 @@ msgstr ""
 msgid "Loading map…"
 msgstr ""
 
-#: ../../src/logic/game.cc:318
+#: ../../src/logic/game.cc:317
 msgid "Initializing game…"
 msgstr ""
 
-#: ../../src/logic/game.cc:350 ../../src/logic/game.cc:389
+#: ../../src/logic/game.cc:354 ../../src/logic/game.cc:393
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1424
 msgid "Loading…"
 msgstr ""
 
-#: ../../src/logic/game.cc:452
+#: ../../src/logic/game.cc:456
 msgid "Creating player infrastructure"
 msgstr ""
 
-#: ../../src/logic/game.cc:463 ../../src/logic/player.cc:222
+#: ../../src/logic/game.cc:467 ../../src/logic/player.cc:222
 msgid "Missing starting position"
 msgstr ""
 
-#: ../../src/logic/game.cc:464 ../../src/logic/player.cc:223
+#: ../../src/logic/game.cc:468 ../../src/logic/player.cc:223
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -1125,11 +1125,11 @@ msgid ""
 "this problem."
 msgstr ""
 
-#: ../../src/logic/game.cc:854
+#: ../../src/logic/game.cc:858
 msgid "Trade Offer"
 msgstr ""
 
-#: ../../src/logic/game.cc:856
+#: ../../src/logic/game.cc:860
 msgid "This market has received a new trade offer."
 msgstr ""
 
@@ -1427,7 +1427,7 @@ msgstr ""
 #. * TRANSLATORS: Percent in building statistics window, e.g. 85%
 #. * TRANSLATORS: If you wish to add a space, translate as '%i %%'
 #: ../../src/logic/map_objects/tribes/productionsite.cc:407
-#: ../../src/wui/building_statistics_menu.cc:683
+#: ../../src/wui/building_statistics_menu.cc:688
 #, c-format
 msgid "%i%%"
 msgstr ""
@@ -1627,7 +1627,7 @@ msgstr ""
 msgid "This objective has no description."
 msgstr ""
 
-#: ../../src/logic/player.cc:1336
+#: ../../src/logic/player.cc:1345
 #, c-format
 msgctxt "shipname"
 msgid "Ship %d"
@@ -3102,7 +3102,7 @@ msgstr ""
 #. * TRANSLATORS: This is the first part of productivity with input field
 #. * TRANSLATORS: Building statistics window - 'Low Productivity <input>%:'
 #: ../../src/wui/building_statistics_menu.cc:78
-#: ../../src/wui/building_statistics_menu.cc:695
+#: ../../src/wui/building_statistics_menu.cc:700
 msgid "Low Productivity"
 msgstr ""
 
@@ -3112,50 +3112,50 @@ msgstr ""
 msgid "%:"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:145
-#: ../../src/wui/building_statistics_menu.cc:155
-#: ../../src/wui/building_statistics_menu.cc:165
-msgid "Show previous building"
-msgstr ""
-
 #: ../../src/wui/building_statistics_menu.cc:150
 #: ../../src/wui/building_statistics_menu.cc:160
 #: ../../src/wui/building_statistics_menu.cc:170
+msgid "Show previous building"
+msgstr ""
+
+#: ../../src/wui/building_statistics_menu.cc:155
+#: ../../src/wui/building_statistics_menu.cc:165
+#: ../../src/wui/building_statistics_menu.cc:175
 msgid "Show next building"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:303
+#: ../../src/wui/building_statistics_menu.cc:308
 msgid "Small buildings"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:305
+#: ../../src/wui/building_statistics_menu.cc:310
 msgid "Medium buildings"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:307
+#: ../../src/wui/building_statistics_menu.cc:312
 msgid "Big buildings"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:309
+#: ../../src/wui/building_statistics_menu.cc:314
 msgid "Mines"
 msgstr ""
 
-#: ../../src/wui/building_statistics_menu.cc:311
+#: ../../src/wui/building_statistics_menu.cc:316
 msgid "Ports"
 msgstr ""
 
 #. * TRANSLATORS: Buildings: owned / under construction
 #. * TRANSLATORS: %1% = the experience a worker has
 #. * TRANSLATORS: %2% = the experience a worker needs to reach the next level
-#: ../../src/wui/building_statistics_menu.cc:713
-#: ../../src/wui/building_statistics_menu.cc:739
-#: ../../src/wui/building_statistics_menu.cc:741
+#: ../../src/wui/building_statistics_menu.cc:718
+#: ../../src/wui/building_statistics_menu.cc:744
+#: ../../src/wui/building_statistics_menu.cc:746
 #: ../../src/wui/productionsitewindow.cc:177
 msgid "%1%/%2%"
 msgstr ""
 
 #. * TRANSLATORS: Label for number of buildings that are waiting for soldiers
-#: ../../src/wui/building_statistics_menu.cc:727
+#: ../../src/wui/building_statistics_menu.cc:732
 msgid "Lacking Soldiers:"
 msgstr ""
 

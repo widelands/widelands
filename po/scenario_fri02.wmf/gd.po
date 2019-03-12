@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"POT-Creation-Date: 2019-03-08 07:26+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -66,7 +66,7 @@ msgid ""
 "soldiers and recycle some scrap metal."
 msgstr ""
 "Nuair a thèid saighdearan oideachadh, thèid na seann-airm aca a chur dhan "
-"dàrna taobh. ’S urrainn dhut meatailt a dhèanamh diubh ann an ionad ath-"
+"dàrna taobh. ’S urrainn dhut meatailt a dhèanamh dhiubh ann an ionad ath-"
 "chuairteachaidh. Cleachd na h-airm san stòras airson saighdearan oideachadh "
 "agus ath-chuairtich cuid dhe na fuighill meatailte."
 
@@ -114,7 +114,7 @@ msgid ""
 "Decide whether you want to work with Murilius against the Barbarians. If so,"
 " fill his warehouse with these wares:"
 msgstr ""
-"Roghnaich an obraich thu còmhla ri Murilius an aghaidh nan tùsanach. Ma "
+"Roghnaich an obraich thu còmhla ri Murilius an aghaidh nan Tùsanach. Ma "
 "dh’obraicheas, lìon an taigh-stòrais aige leis na batharan seo:"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:64
@@ -175,7 +175,7 @@ msgid ""
 "over."
 msgstr ""
 "Mura obraich, thèid Murilius ’nad nàmhaid ma mhilleas tu an taigh-stòrais. "
-"Thoirmisg e dhut do ranntair a leudachadh gus an doir thu na batharan dha."
+"Thoirmisg e dhut do ranntair a leudachadh mus dug thu na batharan dha."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:82
 msgid "Spy on Murilius"
@@ -309,8 +309,8 @@ msgid ""
 "were on the sea, tossed about by envious storms… it must have been months."
 msgstr ""
 "Shaoilinn nach digeadh an triall gu ceann gu bràth tuilleadh. Chan eil sgot "
-"agam dè cho fada ’s a tha sinn air a’ mhuir agus na gailleannan fharmadach "
-"oirnn… fad iomadh mìos gun teagamh."
+"agam dè cho fada ’s a tha sinn air a bhith air a’ mhuir agus na gailleannan "
+"fharmadach oirnn… fad iomadh mìos gun teagamh."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:143
@@ -327,9 +327,9 @@ msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
-"Bha buidheann beag de choigrich a’ fuireach an-seo. ’S e an fhàilte a fhuair"
-" sinn ach gun do chrath iad an tuaghan ’s gun do dh’eugh iad oirnn ann an "
-"cànan neo-thàthach."
+"Bha buidheann beag de choigrich a’ fuireach an-seo. ’S dè an fhàilte a "
+"fhuair sinn ach gun do chrath iad an tuaghan ’s gun do dh’eugh iad oirnn ann"
+" an cànan neo-thàthach."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:152
@@ -372,8 +372,8 @@ msgstr ""
 "Feumaidh sinn tòiseachadh leis na togalaichean bunasach. Chan fhaic mi beann"
 " far an lorgamaid gual. B’ fheàirrde sinn sloc guail-fhiodha a thogail ach "
 "an loisg sinn gual de dh’fhiodh. Cuiridh sinn piseach air na slocan le "
-"criadh ach nach fheum iad uiread dhen fhiodh. Chuireadh an dòigh seo am "
-"farmad air ar nàbaidhean o nach deach leothasan a cur an cèill."
+"criadh ach nach fheum iad cus a dh’fhiodh. Chuireadh an dòigh seo am farmad "
+"air ar nàbaidhean o nach deach leothasan a cur an cèill."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:169
 msgid "Go South"
@@ -448,7 +448,7 @@ msgid ""
 "stuck like this forever! You must come up with a solution."
 msgstr ""
 "Abair naidheachd uabhasach! Gun iarann no dòigh gus barrachd dheth a "
-"dhèanamh, bidh sinn stucte mar seo gu buan! Feumaidh sinn fhuasgladh."
+"dhèanamh, bidh sinn stuicte mar seo gu buan! Feumaidh sinn fhuasgladh."
 
 #. TRANSLATORS: Reebaud – Train and recycle 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:195
@@ -500,14 +500,14 @@ msgid ""
 msgstr ""
 "Na cuir an crann ron rèin-fhiadh! Mus tog sinn campa oideachaidh, feumaidh "
 "sinn òr agus chan eil gin dheth againn. Feumaidh sinn am port againn a "
-"thoirt às a chèile an toiseach a bheir an t-òr dhuinn a dh’fheumas sinn "
+"thoirt às a chèile an toiseach ach am faigheamaid an t-òr a dh’fheumas sinn "
 "airson campa oideachaidh a thogail. Cha toigh leam seo ach chan eil dòigh "
 "eile ann. Gu nàdarra, feumaidh sinn na batharan uile againn imrich gu taigh-"
 "stòrais mus doir tinn am port às a chèile."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:215
 msgid "Metal Production"
-msgstr "Saothrachadh meatailt"
+msgstr "Saothrachadh meatailte"
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:216
 msgid "The mines are working"
@@ -568,8 +568,8 @@ msgid ""
 "fruit to feed the fish."
 msgstr ""
 "Gu fortanach, dh’innlich fear de na h-iasgairean fuasgladh dhuinn. Fàgaidh "
-"na sùilean-criadha againn tuill mòra san talamh; b’ urrainn dho dh’iasgair "
-"an lìonadh le uisge agus èisg a thogail sna puill ud. Chan fheum e ach tòrr "
+"na sùilean-criadha againn tuill mòra san talamh; b’ urrainn do dh’iasgair an"
+" lìonadh le uisge agus èisg a thogail sna puill ud. Chan fheum e ach tòrr "
 "uisge airson nam poll agus dearcan a bhiadhaicheas na h-èisg."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:235
@@ -596,8 +596,8 @@ msgid ""
 " probably want to prepare for the increasing demands of time and food."
 msgstr ""
 "’S urrainn dha na mèinnean beagan cloiche-mèinnir no guail fhaighinn às an "
-"talamh fhathast ach bheir mu fhichead uiread nas fhaide – no deich uiread "
-"mas e mèinn dhomhainn a th’ ann."
+"talamh fhathast ach bheir iad mu fhichead uiread nas fhaide – no deich "
+"uiread mas e mèinn dhomhainn a th’ ann."
 
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:243
 msgid "Recruiting"
@@ -675,7 +675,7 @@ msgstr "Coigrich"
 #. TRANSLATORS: Reebaud – Supply Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:263
 msgid "…does anyone understand what he is saying?"
-msgstr "… a bheil duine a’ tuigsinn dè tha esan ag ràdh?"
+msgstr "… a bheil duine a’ tuigsinn na cainnt aigesan?"
 
 #. TRANSLATORS: Murilius – Supply Murilius 3. This is a foreign language to
 #. Murilius, so he sounds very formal.
@@ -692,8 +692,8 @@ msgid ""
 "lands!"
 msgstr ""
 "A choigrich! Tha mise, Murilius, Proconsul nan Tìrean Tuathach, mòr-roinn na"
-" h-Impireachd, ag iarraidh gun innis sibh dhomh cò sibhse is dè tha ribh ris"
-" san dùthaich seo!"
+" h-Impireachd, ag iarraidh oirbh gun innis sibh dhomh cò sibhse is dè tha "
+"sibh ris san dùthaich seo!"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 4
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:278
@@ -705,8 +705,8 @@ msgid ""
 msgstr ""
 "Fàilte, a riochdaire na h-Impireachd! Is mise Reebaud, ceannard an treubha "
 "seo. Chan eil fainear dhuinn ach tuineachadh an-seo, ar dachaigh a thogail "
-"agus beatha sìtheil. Chan eil sinn ag iarraidh trioblaid ach cha chuir "
-"sabaid an t-eagal oirnn nas motha."
+"agus beatha sìtheil a leantainn. Chan eil sinn ag iarraidh trioblaid ach cha"
+" chuir sabaid an t-eagal oirnn nas motha."
 
 #. TRANSLATORS: Murilius – Supply Murilius 5. "Reebaude" is the Latin vocative
 #. case (form of address) of Reebaud.
@@ -727,9 +727,9 @@ msgid ""
 " to allow them to live here – you are required to assist the Empire in "
 "driving them out."
 msgstr ""
-"Ma tha sibh a’ guidhe gu bheil sibh a’ sireadh beatha sìtheil, chan eil "
-"roghainn eile agaibh ach am fuadach – tha sibh fo dhleastanas taic a chur "
-"ris an Impireachd ach am faigheamaid cuidhteas dhiubh."
+"Ma tha thu a’ guidhe gu bheil sibh a’ sireadh beatha sìtheil, chan eil "
+"roghainn eile agaibh ach am fuadach-san – tha sibh fo dhleastanas taic a "
+"chur ris an Impireachd ach am faigheamaid cuidhteas dhiubh."
 
 #. TRANSLATORS: Murilius – Supply Murilius 6
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:293
@@ -753,7 +753,7 @@ msgid ""
 msgstr ""
 "30 grunn fhiodha, 40 leac gaireil, 30 iasg, 30 muga de leann, 150 peile de "
 "dh’uisge, 40 greimeag, 10 miasan, 30 cnap guail, 40 cnap cloiche-iarainn, 20"
-" unga iarainn, 20 cnap cloiche-òir ’s 10 bàraichean òir."
+" unga iarainn, 20 cnap cloich-òir ’s 10 bàraichean òir."
 
 #. TRANSLATORS: Hauke – Supply Murilius 7
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:302
@@ -766,7 +766,7 @@ msgstr ""
 "A cheannaird Reebauid – tha iarrtasan Proconsul àrdanach na h-Impireachd "
 "tàmailteach. Tha e a’ dèanamh rinn mar shearbhantan. Agus chan eil an uiread"
 " a bhathair againn a tha e ag iarraidh uainn mar cuideachadh. Mholainn gum "
-"mill sinn an taigh-stòrais grànnda ud is gun dèanadh e an t-sabaid aige "
+"mill sinn an taigh-stòrais grànnda ud is gun dèanadh esan an t-sabaid aige "
 "fhèin."
 
 #. TRANSLATORS: Murilius – Supply Murilius 8
@@ -820,9 +820,9 @@ msgid ""
 msgstr ""
 "Bu mhiann leam ionnsaigh a thoirt air sa bhad ach ’s eagal leam nach eil "
 "sinn làidir gu leòr fhathast ach an seasamaid ’na aghaidh air a’ bhlàr. Bu "
-"chòir dhuinn greasadh oirnn le oideachadh nan saighdearan fhad ’s an dèid "
-"sinn an riochd gun cruinnich sinn a’ chìs ris a chanas esan “tìodhlac”. "
-"Bheireadh sin beagan ùine dhuinn."
+"chòir dhuinn greasadh oirnn le oideachadh nan saighdearan fhad ’s a thèid "
+"sinn an riochd gun cruinnicheadh sinn a’ chìs ris a chanas esan “tìodhlac”. "
+"Bheireadh an cleas sin beagan ùine dhuinn."
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:324
@@ -987,7 +987,7 @@ msgid ""
 "You have done well, strangers! As I did tell you earlier, you will be "
 "rewarded with the friendship of the Empire!"
 msgstr ""
-"’S ann math a rinn sibh, a choigrichibh! Mar a gheall mi duibh cheana, "
+"’S ann math a rinn sibh, a choigrichibh! Mar a gheall mi dhuibh cheana, "
 "gheibh sibh càirdeas na h-Impireachd mar dhuais!"
 
 #. TRANSLATORS: Murilius – defeat Murilius 1
@@ -1021,11 +1021,11 @@ msgid ""
 "be servants of this Empire, and take away my leadership? And does the "
 "hypocrite dare call this a reward?"
 msgstr ""
-"B’ àill leam? Às dèidh a h-uile càil a rinn sinn às a leth agus tuilleadh ’s"
-" a chòrr de na saighdearan agam ’nan sìneadh air a’ bhlàr dhasan, ’s ann gu "
-"bheil e ag iarraidh gun rachadh sinn ’nar searbhantan dhan Impireachd a tha "
-"seo ’s esan airson mo rìoghachd a thoirt uam? Agus ghabh an cealgair air gur"
-" e duais a bhiodh ann!"
+"B’ àill leibh? Às dèidh a h-uile càil a rinn sinn às a leth agus tuilleadh "
+"’s a chòrr de na saighdearan agam ’nan sìneadh air a’ bhlàr dhasan, ’s ann "
+"gu bheil e ag iarraidh gun rachadh sinn ’nar searbhantan dhan Impireachd a "
+"tha seo ’s esan airson mo rìoghachd a thoirt uam? Agus ghabh an cealgair air"
+" gur e duais a bhiodh ann!"
 
 #. TRANSLATORS: Reebaud – defeat Murilius 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:408
