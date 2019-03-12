@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,8 +21,8 @@
 #define WL_LOGIC_PLAYER_H
 
 #include <memory>
-#include <unordered_set>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "base/macros.h"
 #include "economy/economy.h"
@@ -147,6 +147,11 @@ public:
 	NodeCaps get_buildcaps(const FCoords&) const;
 
 	bool is_hostile(const Player&) const;
+
+	/**
+	 * Returns whether the player lost the last warehouse.
+	 */
+	bool is_defeated() const;
 
 	// For cheating
 	void set_see_all(bool const t) {
@@ -683,6 +688,6 @@ private:
 void find_former_buildings(const Tribes& tribes,
                            const DescriptionIndex bi,
                            Building::FormerBuildings* former_buildings);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYER_H

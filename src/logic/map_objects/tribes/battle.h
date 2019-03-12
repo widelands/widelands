@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,6 +74,8 @@ public:
 		return second_;
 	}
 
+	uint32_t get_pending_damage(const Soldier* for_whom) const;
+
 	// Returns the other soldier involved in this battle. CHECKs that the given
 	// soldier is participating in this battle. Can return nullptr, probably when the
 	// opponent has died.
@@ -124,6 +126,6 @@ private:
 	 */
 	bool last_attack_hits_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BATTLE_H

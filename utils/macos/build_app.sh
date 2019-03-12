@@ -58,17 +58,23 @@ else
    exit 1
 fi
 
-# We asume CMake 3.x is used and check for the minor version
-CMAKE_VERSION=$(cmake --version | grep -Eo '3.*' | cut -d . -f 2)
-
 # Check if the SDK for the minimum build target is available.
 # If not, use the one for the installed macOS Version
 OSX_MIN_VERSION="10.7"
 SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_MIN_VERSION.sdk"
+
+OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
+OSX_MINOR=$(sw_vers -productVersion | cut -d . -f 2)
+
 if [ ! -d "$SDK_DIRECTORY" ]; then
-   OSX_VERSION=$(sw_vers -productVersion | cut -d . -f 1,2)
-   OSX_MIN_VERSION=$OSX_VERSION
+   if [ "$OSX_MINOR" -ge 9 ]; then
+      OSX_MIN_VERSION="10.9"
+   fi
    SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX$OSX_VERSION.sdk"
+   if [ ! -d "$SDK_DIRECTORY" ]; then
+      # If the SDK for the current macOS Version can't be found, use whatever is linked to MacOSX.sdk
+      SDK_DIRECTORY="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+   fi
 fi
 
 REVISION=`bzr revno $SOURCE_DIR`
@@ -85,7 +91,8 @@ echo "   Source:      $SOURCE_DIR"
 echo "   Version:     $WLVERSION"
 echo "   Destination: $DESTINATION"
 echo "   Type:        $TYPE"
-echo "   macOS:       $OSX_MIN_VERSION"
+echo "   macOS:       $OSX_VERSION"
+echo "   Target:      $OSX_MIN_VERSION"
 echo "   Compiler:    $COMPILER"
 echo ""
 
@@ -101,9 +108,9 @@ function MakeDMG {
 
    echo "Creating DMG ..."
    if [ "$TYPE" == "Release" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_$WLVERSION.dmg"
    elif [ "$TYPE" == "Debug" ]; then
-      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_${WLVERSION}_${TYPE}.dmg"
+      hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_${OSX_MIN_VERSION}_${WLVERSION}_${TYPE}.dmg"
    fi
 }
 
@@ -181,14 +188,7 @@ function BuildWidelands() {
    export SDL2MIXERDIR="$(brew --prefix sdl2_mixer)"
    export SDL2TTFDIR="$(brew --prefix sdl2_ttf)"
    export BOOST_ROOT="$(brew --prefix boost)"
-   
-   # Not needed for CMake 3.12 or above, see cmake --help-policy CMP0074.
-   # However Mac OS X nighlies cannot upgrade to a newer cmake version than
-   # 3.9.4 since nothing newer compiles on Mac OS X 10.7 which is used to build
-   # the nightlies.
-   if [ "$CMAKE_VERSION" -lt "12" ]; then
-      export ICU_ROOT="$(brew --prefix icu4c)"
-   fi
+   export ICU_ROOT="$(brew --prefix icu4c)"
 
    cmake $SOURCE_DIR -G Ninja \
       -DCMAKE_C_COMPILER:FILEPATH="$C_COMPILER" \

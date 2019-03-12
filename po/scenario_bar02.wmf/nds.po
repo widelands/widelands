@@ -1,14 +1,14 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-09-17 09:23+0000\n"
-"PO-Revision-Date: 2018-09-18 09:35+0000\n"
+"POT-Creation-Date: 2019-03-03 08:19+0000\n"
+"PO-Revision-Date: 2019-03-03 15:48+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr "Vergeet nich, eene Ossentüchteree to bauen"
 msgid ""
 "As your roads grow longer and your economy bigger, you should make good use "
 "of your oxen to help transport wares more quickly."
-msgstr ""
+msgstr "As diene Straten langer un diene Wirtschaft groter word, sallst du diene Ossen bruken, daarmit Waren fixer transporteert worden."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:57
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:59
@@ -103,7 +103,7 @@ msgstr "Bau eenen Toorn"
 msgid ""
 "Build a tower at the north-east border of your territory to get greater "
 "visual range and to protect your people from sudden attacks by enemies."
-msgstr ""
+msgstr "Bau eenen Toorn in de noordoostelken Eck vun dienem Gewest, um eene grotere Sichtwiede to kriegen un diene Lüde vör unverwachten Angriffen vun Feinden to schütten."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:65
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:67
@@ -114,7 +114,7 @@ msgstr "Försk wieder ut"
 msgid ""
 "Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
-msgstr ""
+msgstr "Bau mehr Soldateree-Boen, um de Kuntrei um dien Raadhuus uttoförsken un för de Sekerheid vun jo Lüü to sörgen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:73
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:75
@@ -126,7 +126,7 @@ msgid ""
 "Expand your territory to the mountains, send geologists to search for ore "
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metal workshop."
-msgstr ""
+msgstr "Vergroter dien Gewest bit to de Bargen, schick Schattsökers, um na Kluten un Köhl to söken, un bau eene Bargwarks-Wirtschaft mit Bargwarken, Kneipen, Smeltwarken un eener Metalldreihbank."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:81
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:83
@@ -144,7 +144,7 @@ msgstr "Bau eene Övens-Wirtschaft"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:92
 msgid "Build a barracks to train some basic soldiers."
-msgstr "Bau eene Kasern, um neie Soldaten uttobilden."
+msgstr "Bau eene Kasern, um neje Soldaten uttobilden."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:93
 msgid "Build a battle arena and a training camp to the west of the mountains."
@@ -158,14 +158,14 @@ msgid ""
 " the blacksmith reaches his next level (master blacksmith), you can even "
 "enhance the ax workshop to a war mill, which will produce additional "
 "weapons."
-msgstr ""
+msgstr "Bau diene Metalldreihbank to eener Extensmede ut, um Wapen to produzeren, un abu noch eene Metalldreihbank, um Warktüüg to produzeren. Wenn de Smidd mehr Erfahrung hett (een Meistersmidd word), kannst du de Extensmede to eener Oorlogs-Smee utbauen, wat noch mehr Wapen produzeren kann."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:95
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:132
 msgid ""
 "Build a helm smithy to the west of the mountains to provide your soldiers "
 "with better armor."
-msgstr ""
+msgstr "Bau eene Helmsmee westelk vun de Bargen, um diene Soldaten mit beteren Helmen uttostafferen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:101
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:103
@@ -182,18 +182,18 @@ msgid ""
 "they aren’t defended by soldiers. It is often wise to build a warehouse when"
 " your territory is growing and the paths to your headquarters get longer and"
 " longer."
-msgstr ""
+msgstr "Kraamhusen warken as dien Raadhuus, worden aver nich vun Soldaten verteidigt. 't is meestens klook, een Kraamhuus to bauen, wenn dien Gewest wasst un de Weg to dienem Raadhuus immer langer word."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:110
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:112
 msgid "Build training sites"
-msgstr ""
+msgstr "Bau Övens-Boen"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:113
 msgid ""
 "Build a barracks, a battle arena and a training camp to the west of the "
 "mountains."
-msgstr ""
+msgstr "Bau eene Kasern, eenen Slachtenring un een Övens-Lager westelk vun de Bargen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:114
 msgid ""
@@ -205,26 +205,26 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:116
 msgid "The attributes are: health, attack, defense and evade."
-msgstr ""
+msgstr "De Egenskuppen sünd: Gesundheid, Angriff, Verteidigung un Utwieken."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:121
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:123
 msgid "Build weapons production"
-msgstr ""
+msgstr "Produzeer Wapen"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:129
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:131
 msgid "Build a helm smithy"
-msgstr ""
+msgstr "Bau eene Helmsmee"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:137
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:139
 msgid "Destroy Kalitath’s army"
-msgstr ""
+msgstr "Manntje de Soldateree vun Kalitat"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:140
 msgid "Destroy Kalitath’s army and expand your territory to the east."
-msgstr ""
+msgstr "Manntje de Soldateree vun Kalitat un vergroter dien Gewest na Oosten."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:141
 msgid ""
@@ -232,12 +232,12 @@ msgid ""
 "building. A menu will pop up allowing you to select the number of soldiers "
 "that should attack. When you are ready with setting the number, click on the"
 " cross (‘Start Attack’)."
-msgstr ""
+msgstr "Um eenen Feind antogriepen, klick de Döör vun eenem Soldateree-Boo vun dienem Feind an. Een Fenster kummt lett sük sehn, waar du utkören sallst, wo völe Soldaten angriepen sallen. Wenn du de Tahl sett hest, klick dat Krüüz (»Angriepen«) an."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:146
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:148
 msgid "Military assault on Al’thunran"
-msgstr ""
+msgstr "Angriff up Alltunraan"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:149
 msgid ""
@@ -246,13 +246,13 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:157
 msgid "Close to Home"
-msgstr ""
+msgstr "Dicht bi de Heimaad"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:158
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:170
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:327
 msgid "Thron looks worried…"
-msgstr ""
+msgstr "Troon is besörgt …"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:160
@@ -273,7 +273,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:193
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:326
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Noch een koller Dag"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:172
@@ -288,11 +288,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:177
 msgid "Doubts"
-msgstr ""
+msgstr "Twiefels"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:178
 msgid "Boldreth is shaking his head…"
-msgstr ""
+msgstr "Boldreth schüddekoppt …"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:180
@@ -308,7 +308,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:185
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:201
 msgid "The Story Continues"
-msgstr ""
+msgstr "De Geschicht gaht wieder"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:186
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:234
@@ -316,7 +316,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:269
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:315
 msgid "Boldreth says:"
-msgstr ""
+msgstr "Boldreth seggt:"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:188
@@ -328,7 +328,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:194
 msgid "Thron is speaking confidently."
-msgstr ""
+msgstr "Troon snackt getroost."
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:196
@@ -349,7 +349,7 @@ msgstr ""
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:307
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:340
 msgid "Thron says:"
-msgstr ""
+msgstr "Troon seggt:"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:204
@@ -364,11 +364,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:208
 msgid "Your Loyal Companion"
-msgstr ""
+msgstr "Dien troer Fründ"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:209
 msgid "Boldreth shouts out!"
-msgstr ""
+msgstr "Boldreth raart!"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:211
@@ -414,7 +414,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:233
 msgid "Winter Ahead"
-msgstr ""
+msgstr "Winter kummt"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:236
@@ -428,11 +428,11 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:241
 msgid "The Advisor"
-msgstr ""
+msgstr "De Berader"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:242
 msgid "Khantrukh nods."
-msgstr ""
+msgstr "Kantruusk nickkoppt."
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:244
@@ -446,7 +446,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:250
 msgid "Food Economy Completed"
-msgstr ""
+msgstr "Spiesen-Wirtschaft kumpleet"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:253
@@ -457,7 +457,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:259
 msgid "Tracks"
-msgstr ""
+msgstr "Stappen"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:262
@@ -470,7 +470,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:268
 msgid "Further Exploration"
-msgstr ""
+msgstr "Wieder utförsken"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:271
@@ -495,7 +495,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:280
 msgid "Mountains Found"
-msgstr ""
+msgstr "Bargen funnen"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:283
@@ -509,7 +509,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:289
 msgid "Mining Economy Completed"
-msgstr ""
+msgstr "Bargwarks-Wirtschaft kumpleet"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:292
@@ -521,7 +521,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:297
 msgid "Fortress Needed"
-msgstr ""
+msgstr "Wi bruken eene Schanz"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:300
@@ -536,7 +536,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:306
 msgid "Fortress Completed"
-msgstr ""
+msgstr "Schanz kumpleet"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:309
@@ -549,7 +549,7 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:314
 msgid "Enhanced Economy and Training"
-msgstr ""
+msgstr "Betere Wirtschaft un Öven"
 
 #. TRANSLATORS: Boldreth
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:317
@@ -593,17 +593,17 @@ msgstr ""
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:333
 msgid "Victory"
-msgstr ""
+msgstr "Sieg"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:334
 msgid ""
 "You have completed the last mission of the Barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
-msgstr ""
+msgstr "Du hest de leste Rutfödderung in deeser Riege ofsloten. Wenn du willt, kannst du wiederspölen, anners de token Rutfödderungs-Riege anfangen."
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:339
 msgid "Military Assault"
-msgstr ""
+msgstr "Soldateree-Angriff"
 
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:342
@@ -625,15 +625,15 @@ msgstr ""
 #. TRANSLATORS: Thron
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:348
 msgid "So be it!"
-msgstr ""
+msgstr "So wees 't!"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:353
 msgid "Faster Transportation"
-msgstr ""
+msgstr "Fixerer Transport"
 
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:354
 msgid "Khantrukh says:"
-msgstr ""
+msgstr "Kantruusk seggt:"
 
 #. TRANSLATORS: Khantrukh
 #: ../../data/campaigns/bar02.wmf/scripting/texts.lua:356
@@ -646,10 +646,10 @@ msgstr ""
 #: ../../data/scripting/format_scenario.lua:12
 #, lua-format
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../data/scripting/format_scenario.lua:40
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] "Neie Upgaav"
-msgstr[1] "Neie Upgaven"
+msgstr[0] "Neje Upgaav"
+msgstr[1] "Neje Upgaven"

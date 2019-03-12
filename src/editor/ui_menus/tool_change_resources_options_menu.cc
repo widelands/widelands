@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -159,7 +159,7 @@ void EditorToolChangeResourcesOptionsMenu::change_resource() {
 
 /**
  * Update all the textareas, so that they represent the correct values
-*/
+ */
 void EditorToolChangeResourcesOptionsMenu::update() {
 	cur_selection_.set_text(
 	   (boost::format(_("Current: %s")) %

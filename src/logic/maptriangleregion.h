@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -121,6 +121,14 @@ private:
 	CoordsType left_;
 	TCoords<CoordsType> location_;
 };
-}
+
+// Forward declarations of template instantiations
+template <> MapTriangleRegion<>::MapTriangleRegion(const Map& map, Area<TCoords<>> area);
+template <> bool MapTriangleRegion<>::advance(const Map& map);
+
+template <>
+MapTriangleRegion<TCoords<FCoords>>::MapTriangleRegion(const Map& map, Area<TCoords<FCoords>> area);
+template <> bool MapTriangleRegion<TCoords<FCoords>>::advance(const Map& map);
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPTRIANGLEREGION_H

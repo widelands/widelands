@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +67,7 @@ namespace {
 ///    bool const result = match(candidate, "return");
 /// now candidate points to "   75" and result is true
 bool match(char*& candidate, const char* pattern) {
-	for (char *p = candidate;; ++p, ++pattern)
+	for (char* p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			candidate = p;
 			return true;
@@ -113,7 +113,7 @@ bool skip(char*& p, char const c = ' ') {
 ///    bool const result = match_force_skip(candidate, "return");
 /// throws WException
 bool match_force_skip(char*& candidate, const char* pattern) {
-	for (char *p = candidate;; ++p, ++pattern)
+	for (char* p = candidate;; ++p, ++pattern)
 		if (!*pattern) {
 			force_skip(p);
 			candidate = p;
@@ -575,7 +575,7 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 			if (it == programs.end())
 				throw GameDataError("the program \"%s\" has not (yet) been declared in %s "
 				                    "(wrong declaration order?)",
-				                    program_name, descr.descname().c_str());
+				                    program_name, descr.name().c_str());
 			program_ = it->second.get();
 		}
 
@@ -583,7 +583,6 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 		while (!reached_end) {
 			skip(parameters);
 			match_force_skip(parameters, "on");
-			log("found \"on \": parameters = \"%s\"\n", parameters);
 
 			ProgramResult result_to_set_method_for;
 			if (match_force_skip(parameters, "failure")) {
@@ -616,9 +615,6 @@ ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr&
 				                    "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}", parameters);
 			handling_methods_[result_to_set_method_for - 1] = handling_method;
 			reached_end = !*parameters;
-			log("read handling method for result %u: %u, parameters = \"%s\", "
-			    "reached_end = %u\n",
-			    result_to_set_method_for, handling_method, parameters, reached_end);
 		}
 	} catch (const WException& e) {
 		throw GameDataError("call: %s", e.what());
@@ -667,13 +663,13 @@ ProductionProgram::ActCallWorker::ActCallWorker(char* parameters,
 		for (const auto& area_info : worker_workarea_info) {
 			std::set<std::string>& building_radius_infos = descr->workarea_info_[area_info.first];
 
-			for (const std::string& worker_descname : area_info.second) {
-				std::string description = descr->descname();
+			for (const std::string& worker_name : area_info.second) {
+				std::string description = descr->name();
 				description += ' ';
 				description += production_program_name;
 				description += " worker ";
 				description += main_worker_descr.name();
-				description += worker_descname;
+				description += worker_name;
 				building_radius_infos.insert(description);
 			}
 		}
@@ -884,7 +880,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		const std::string is_missing_string =
 		   /** TRANSLATORS: e.g. 'Did not start working because 3x water and 3x wheat are missing' */
 		   /** TRANSLATORS: e.g. 'Did not start working because fish, meat or pitta bread is missing'
-		      */
+		    */
 		   (boost::format(ngettext("%s is missing", "%s are missing", nr_missing_groups)) %
 		    i18n::localize_list(group_list, i18n::ConcatenateWith::AND))
 		      .str();
@@ -897,7 +893,7 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 		   /** TRANSLATORS: This appears in the hover text on buildings. Please test these in
 		      context*/
 		   /** TRANSLATORS: on a development build if you can, and let us know if there are any issues
-		      */
+		    */
 		   /** TRANSLATORS: we need to address for your language. */
 		   (boost::format(_("Did not start %1$s because %2$s")) % ps.top_state().program->descname() %
 		    is_missing_string)
@@ -1127,10 +1123,9 @@ ProductionProgram::ActMine::ActMine(char* parameters,
 			if (*endp || value < 1 || 100 < value)
 				throw GameDataError("expected %s but found \"%s\"", "percentage", parameters);
 		}
-		std::string description =
-		   (boost::format("%1$s %2$s mine %3$s") % descr->descname() % production_program_name %
-		    world.get_resource(resource_)->descname())
-		      .str();
+		std::string description = (boost::format("%1$s %2$s mine %3$s") % descr->name() %
+		                           production_program_name % world.get_resource(resource_)->name())
+		                             .str();
 
 		descr->workarea_info_[distance_].insert(description);
 	} catch (const WException& e) {

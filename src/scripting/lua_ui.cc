@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,7 +78,8 @@ const PropertyType<LuaPanel> LuaPanel::Properties[] = {
    PROP_RW(LuaPanel, height),     {nullptr, nullptr, nullptr},
 };
 const MethodType<LuaPanel> LuaPanel::Methods[] = {
-   METHOD(LuaPanel, get_descendant_position), {nullptr, nullptr},
+   METHOD(LuaPanel, get_descendant_position),
+   {nullptr, nullptr},
 };
 
 /*
@@ -287,10 +288,13 @@ Button
 */
 const char LuaButton::className[] = "Button";
 const MethodType<LuaButton> LuaButton::Methods[] = {
-   METHOD(LuaButton, press), METHOD(LuaButton, click), {nullptr, nullptr},
+   METHOD(LuaButton, press),
+   METHOD(LuaButton, click),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaButton> LuaButton::Properties[] = {
-   PROP_RO(LuaButton, name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaButton, name),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -346,10 +350,13 @@ Tab
 */
 const char LuaTab::className[] = "Tab";
 const MethodType<LuaTab> LuaTab::Methods[] = {
-   METHOD(LuaTab, click), {nullptr, nullptr},
+   METHOD(LuaTab, click),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaTab> LuaTab::Properties[] = {
-   PROP_RO(LuaTab, name), PROP_RO(LuaTab, active), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaTab, name),
+   PROP_RO(LuaTab, active),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -401,10 +408,12 @@ Window
 */
 const char LuaWindow::className[] = "Window";
 const MethodType<LuaWindow> LuaWindow::Methods[] = {
-   METHOD(LuaWindow, close), {nullptr, nullptr},
+   METHOD(LuaWindow, close),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaWindow> LuaWindow::Properties[] = {
-   PROP_RO(LuaWindow, name), {nullptr, nullptr, nullptr},
+   PROP_RO(LuaWindow, name),
+   {nullptr, nullptr, nullptr},
 };
 
 /*
@@ -482,8 +491,8 @@ void LuaMapView::__unpersist(lua_State* L) {
 /* RST
    .. attribute:: center_map_pixel
 
-		(RO) The map position (in pixels) that the center pixel of this map view
-		currently sees. This is a table containing 'x', 'y'.
+      (RO) The map position (in pixels) that the center pixel of this map view
+      currently sees. This is a table containing 'x', 'y'.
 */
 int LuaMapView::get_center_map_pixel(lua_State* L) {
 	const Vector2f center = get()->map_view()->view_area().rect().center();
@@ -555,7 +564,7 @@ int LuaMapView::get_is_building_road(lua_State* L) {
 /* RST
    .. attribute:: is_animating
 
-		(RO) True if this MapView is currently panning or zooming.
+      (RO) True if this MapView is currently panning or zooming.
 */
 int LuaMapView::get_is_animating(lua_State* L) {
 	lua_pushboolean(L, get()->map_view()->is_animating());
@@ -642,9 +651,9 @@ int LuaMapView::close(lua_State* /* l */) {
 /* RST
    .. method:: scroll_to_map_pixel(x, y)
 
-		Starts an animation to center the view on top of the pixel (x, y) in map
-		pixel space. Use `is_animating` to check if the animation is still going
-		on.
+      Starts an animation to center the view on top of the pixel (x, y) in map
+      pixel space. Use `is_animating` to check if the animation is still going
+      on.
 
       :arg x: x coordinate of the pixel
       :type x: number
@@ -666,8 +675,8 @@ int LuaMapView::scroll_to_map_pixel(lua_State* L) {
 /* RST
    .. method:: scroll_to_map_pixel(field)
 
-		Starts an animation to center the view on top of the 'field'. Use
-		`is_animating` to check if the animation is still going on.
+      Starts an animation to center the view on top of the 'field'. Use
+      `is_animating` to check if the animation is still going on.
 
       :arg field: the field to center on
       :type field: :class:`wl.map.Field`
@@ -681,7 +690,7 @@ int LuaMapView::scroll_to_field(lua_State* L) {
 /* RST
    .. method:: is_visible(field)
 
-		Returns `true` if `field` is currently visible in the map view.
+      Returns `true` if `field` is currently visible in the map view.
 
       :arg field: the field
       :type field: :class:`wl.map.Field`
@@ -695,8 +704,8 @@ int LuaMapView::is_visible(lua_State* L) {
 /* RST
    .. method:: mouse_to_pixel(x, y)
 
-		Starts an animation to move the mouse onto the pixel (x, y) of this panel.
-		Use `is_animating` to check if the animation is still going on.
+      Starts an animation to move the mouse onto the pixel (x, y) of this panel.
+      Use `is_animating` to check if the animation is still going on.
 
       :arg x: x coordinate of the pixel
       :type x: number
@@ -713,9 +722,9 @@ int LuaMapView::mouse_to_pixel(lua_State* L) {
 /* RST
    .. method:: mouse_to_field(field)
 
-		Starts an animation to move the mouse onto the 'field'. If 'field' is not
-		visible on the screen currently, does nothing. Use `is_animating` to
-		check if the animation is still going on.
+      Starts an animation to move the mouse onto the 'field'. If 'field' is not
+      visible on the screen currently, does nothing. Use `is_animating` to
+      check if the animation is still going on.
 
       :arg field: the field
       :type field: :class:`wl.map.Field`
@@ -792,4 +801,4 @@ void luaopen_wlui(lua_State* L) {
 	add_parent<LuaMapView, LuaPanel>(L);
 	lua_pop(L, 1);  // Pop the meta table
 }
-}
+}  // namespace LuaUi

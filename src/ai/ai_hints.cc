@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,9 +25,10 @@
 AI Hints and Restrictions
 =========================
 
-Every :doc:`building <autogen_toc_lua_tribes_buildings>`'s ``init.lua`` file has an ``aihints`` table in its ``new_<building_type>_type{table}``
-function. This ``aihints`` table can contain any number of entries, which will help the AI decide
-when and where to build or dismantle a building of that type and/or how to treat it.
+Every :doc:`building <autogen_toc_lua_tribes_buildings>`'s ``init.lua`` file has an ``aihints``
+table in its ``new_<building_type>_type{table}`` function. This ``aihints`` table can contain any
+number of entries, which will help the AI decide when and where to build or dismantle a building of
+that type and/or how to treat it.
 
 All entries in ``aihints`` are optional.
 
@@ -136,7 +137,8 @@ Production Sites
 
 **collects_ware_from_map**
     The building will generate this ware from the map, e.g. a well mining the ``water`` ware,
-    or the hunter returning from the hunt with the ``meat`` ware. The same ware needs also to be listed as the first one of the building's outputs, e.g.::
+    or the hunter returning from the hunt with the ``meat`` ware. The same ware needs also to be
+    listed as the first one of the building's outputs, e.g.::
 
         aihints = {
             collects_ware_from_map = "meat"
@@ -148,7 +150,8 @@ Production Sites
         },
 
     **Note:** The AI expects exactly one such building type for each of the following wares:
-    ``fish`` (fisher), ``granite`` (quarry), ``log`` (lumberjack/woodcutter), ``meat`` (hunter), ``water`` (well).
+    ``fish`` (fisher), ``granite`` (quarry), ``log`` (lumberjack/woodcutter), ``meat`` (hunter),
+    ``water`` (well).
 
 **mines**
     The building will mine to obtain the given ware, e.g.::

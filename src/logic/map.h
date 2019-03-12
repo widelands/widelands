@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,8 +35,8 @@
 #include "logic/map_objects/walkingdir.h"
 #include "logic/map_revision.h"
 #include "logic/objective.h"
-#include "logic/widelands_geometry.h"
 #include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
 #include "random/random.h"
@@ -164,6 +164,27 @@ public:
 
 	void recalc_whole_map(const World& world);
 	void recalc_for_field_area(const World& world, Area<FCoords>);
+
+	/**
+	 *  If the valuable fields are empty, calculates all fields that could be conquered by a player
+	 * throughout a game. Useful for territorial win conditions. Returns the amount of valuable
+	 * fields.
+	 */
+	size_t count_all_conquerable_fields();
+
+	/**
+	 *  If the valuable fields are empty, calculates which fields do not have the given caps and adds
+	 * the to the list of valuable fields. Useful for win conditions. Returns the amount of valuable
+	 * fields.
+	 */
+	size_t count_all_fields_excluding_caps(NodeCaps caps);
+
+	/**
+	 * Counts the valuable fields that are owned by each player. Only players that currently own a
+	 * field are added. Returns a map of <player number, number of owned fields>.
+	 */
+	std::map<PlayerNumber, size_t>
+	count_owned_valuable_fields(const std::string& immovable_attribute) const;
 
 	/***
 	 * Ensures that resources match their adjacent terrains.
@@ -432,6 +453,10 @@ public:
 		return &objectives_;
 	}
 
+	std::set<FCoords>* mutable_valuable_fields() {
+		return &valuable_fields_;
+	}
+
 	/// Returns the military influence on a location from an area.
 	MilitaryInfluence calc_influence(Coords, Area<>) const;
 
@@ -528,6 +553,9 @@ private:
 	bool allows_seafaring_;
 
 	Objectives objectives_;
+
+	// Fields that are important for the player to own in a win condition
+	std::set<FCoords> valuable_fields_;
 
 	MapVersion map_version_;
 };
@@ -1161,6 +1189,6 @@ inline void move_r(int16_t const mapwidth, FCoords& f, MapIndex& i) {
 	for (Widelands::FCoords fc = (map).get_fcoords(Widelands::Coords(0, 0));                        \
 	     fc.y < static_cast<int16_t>(extent.h); ++fc.y)                                             \
 		for (fc.x = 0; fc.x < static_cast<int16_t>(extent.w); ++fc.x, ++fc.field)
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_H

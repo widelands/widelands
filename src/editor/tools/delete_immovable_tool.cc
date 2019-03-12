@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,7 +27,7 @@
 
 /**
  * Deletes the immovable at the given location
-*/
+ */
 int32_t EditorDeleteImmovableTool::handle_click_impl(const Widelands::World&,
                                                      const Widelands::NodeAndTriangle<>& center,
                                                      EditorInteractive& parent,

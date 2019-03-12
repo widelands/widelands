@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,7 +62,7 @@ void WaresQueue::entered(
 #else
    DescriptionIndex, Worker*
 #endif
-   ) {
+) {
 
 	assert(worker == nullptr);  // WaresQueue can't hold workers
 	assert(filled_ < max_size_);
@@ -129,4 +129,4 @@ void WaresQueue::read_child(FileRead& fr, Game&, MapObjectLoader&) {
 		throw GameDataError("waresqueue: %s", e.what());
 	}
 }
-}
+}  // namespace Widelands

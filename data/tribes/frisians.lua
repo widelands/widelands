@@ -237,12 +237,13 @@ tribes:new_tribe {
       "frisians_resi_gold_2",
       "frisians_resi_stones_2",
       "frisians_shipconstruction",
-      --These non-frisian immovables can be used by bee-keepers
+      -- These non-frisian immovables can be used by bee-keepers
       "field_medium",
       "cornfield_medium",
       "blackrootfield_medium",
       "grapevine_medium",
-      "grapevine_ripe", --used by the fruit collector
+      -- Used by the fruit collector
+      "grapevine_ripe",
    },
 
    -- The order here also determines the order in lists on screen.
@@ -331,6 +332,7 @@ tribes:new_tribe {
       "Langeneß",
       "Norderoog",
       "Norderoogsand",
+      "Nordstrand",
       "Nordstrandischmoor",
       "Oland",
       "Pellworm",

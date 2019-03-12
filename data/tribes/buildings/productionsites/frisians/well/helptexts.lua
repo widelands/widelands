@@ -8,6 +8,11 @@ function building_helptext_lore_author ()
    return pgettext ("frisians_building", "Chieftain Arldor’s retort when he was asked why his tribe can’t drink salt water")
 end
 
+function building_helptext_purpose()
+   -- TRANSLATORS: Purpose helptext for a building
+   return pgettext("building", "Draws water out of the deep.")
+end
+
 function building_helptext_note()
    -- TRANSLATORS#: Note helptext for a building
    return ""

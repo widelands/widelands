@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,6 @@ enum WalkingDir {
 WalkingDir get_cw_neighbour(WalkingDir dir);
 WalkingDir get_ccw_neighbour(WalkingDir dir);
 WalkingDir get_backward_dir(WalkingDir dir);
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_WALKINGDIR_H
