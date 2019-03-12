@@ -57,6 +57,7 @@
 #include "map_io/map_version_packet.h"
 #include "map_io/map_waterway_packet.h"
 #include "map_io/map_waterwaydata_packet.h"
+#include "map_io/map_wincondition_packet.h"
 #include "map_io/tribes_legacy_lookup_table.h"
 #include "map_io/world_legacy_lookup_table.h"
 
@@ -323,6 +324,14 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		{
 			MapPlayersMessagesPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
+		}
+		log("took %ums\n ", timer.ms_since_last_query());
+
+		// Map data used by win conditions.
+		log("Reading Wincondition Data ... ");
+		{
+			MapWinconditionPacket p;
+			p.read(*fs_, *egbase.mutable_map(), *mol_);
 		}
 		log("took %ums\n ", timer.ms_since_last_query());
 

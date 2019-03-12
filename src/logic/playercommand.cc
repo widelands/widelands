@@ -537,14 +537,17 @@ void CmdFlagAction::serialize(StreamWrite& ser) {
 	ser.unsigned_32(serial);
 }
 
-constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 1;
+constexpr uint16_t kCurrentPacketVersionCmdFlagAction = 2;
 
 void CmdFlagAction::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		const uint16_t packet_version = fr.unsigned_16();
-		if (packet_version == kCurrentPacketVersionCmdFlagAction) {
+		// TODO(GunChleoc): Savegame compatibility, remove after Build 21
+		if (packet_version >= 1 && packet_version <= kCurrentPacketVersionCmdFlagAction) {
 			PlayerCommand::read(fr, egbase, mol);
-			fr.unsigned_8();
+			if (packet_version == 1) {
+				fr.unsigned_8();
+			}
 			serial = get_object_serial_or_zero<Flag>(fr.unsigned_32(), mol);
 		} else {
 			throw UnhandledVersionError(
@@ -559,9 +562,6 @@ void CmdFlagAction::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver&
 	fw.unsigned_16(kCurrentPacketVersionCmdFlagAction);
 	// Write base classes
 	PlayerCommand::write(fw, egbase, mos);
-	// Now action
-	fw.unsigned_8(0);
-
 	// Now serial
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial)));
 }

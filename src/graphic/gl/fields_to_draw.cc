@@ -107,7 +107,18 @@ void FieldsToDraw::reset(const Widelands::EditorGameBase& egbase,
 
 	w_ = max_fx_ - min_fx_ + 1;
 	h_ = max_fy_ - min_fy_ + 1;
-	const size_t dimension = w_ * h_;
+	assert(w_ > 0);
+	assert(h_ > 0);
+
+	// Ensure that there is enough memory for the resize operation
+	size_t dimension = w_ * h_;
+	const size_t max_dimension = fields_.max_size();
+	if (dimension > max_dimension) {
+		log("WARNING: Not enough memory allocated to redraw the whole map!\nWe recommend that you "
+		    "restart Widelands\n");
+		dimension = max_dimension;
+	}
+	// Now resize the vector
 	if (fields_.size() != dimension) {
 		fields_.resize(dimension);
 	}

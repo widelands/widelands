@@ -1199,19 +1199,20 @@ Map
 */
 const char LuaMap::className[] = "Map";
 const MethodType<LuaMap> LuaMap::Methods[] = {
-   METHOD(LuaMap, place_immovable), METHOD(LuaMap, get_field),
-   METHOD(LuaMap, recalculate),     METHOD(LuaMap, recalculate_seafaring),
-   METHOD(LuaMap, set_port_space),  {nullptr, nullptr},
+   METHOD(LuaMap, count_conquerable_fields),
+   METHOD(LuaMap, count_terrestrial_fields),
+   METHOD(LuaMap, count_owned_valuable_fields),
+   METHOD(LuaMap, place_immovable),
+   METHOD(LuaMap, get_field),
+   METHOD(LuaMap, recalculate),
+   METHOD(LuaMap, recalculate_seafaring),
+   METHOD(LuaMap, set_port_space),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMap> LuaMap::Properties[] = {
-   PROP_RO(LuaMap, allows_seafaring),
-   PROP_RO(LuaMap, number_of_port_spaces),
-   PROP_RO(LuaMap, port_spaces),
-   PROP_RO(LuaMap, width),
-   PROP_RO(LuaMap, height),
-   PROP_RO(LuaMap, player_slots),
-   PROP_RO(LuaMap, conquerable_fields),
-   PROP_RO(LuaMap, terrestrial_fields),
+   PROP_RO(LuaMap, allows_seafaring), PROP_RO(LuaMap, number_of_port_spaces),
+   PROP_RO(LuaMap, port_spaces),      PROP_RO(LuaMap, width),
+   PROP_RO(LuaMap, height),           PROP_RO(LuaMap, player_slots),
    {nullptr, nullptr, nullptr},
 };
 
@@ -1312,47 +1313,66 @@ int LuaMap::get_player_slots(lua_State* L) {
 	return 1;
 }
 
-/* RST
-   .. attribute:: conquerable_fields
-
-      (RO) Calculates and returns all reachable fields that a player could build on.
-
-      **Note:** This function is expensive, so call it seldom.
-*/
-int LuaMap::get_conquerable_fields(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const Widelands::FCoords& fcoords :
-	     get_egbase(L).map().calculate_all_conquerable_fields()) {
-		lua_pushinteger(L, ++counter);
-		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fcoords));
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
-/* RST
-   .. attribute:: terrestrial_fields
-
-      (RO) Calculates and returns all fields that are not swimmable.
-*/
-int LuaMap::get_terrestrial_fields(lua_State* L) {
-	lua_newtable(L);
-	int counter = 0;
-	for (const Widelands::FCoords& fcoords :
-	     get_egbase(L).map().calculate_all_fields_excluding_caps(MOVECAPS_SWIM)) {
-		lua_pushinteger(L, ++counter);
-		to_lua<LuaMaps::LuaField>(L, new LuaMaps::LuaField(fcoords));
-		lua_settable(L, -3);
-	}
-	return 1;
-}
-
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+   .. method:: count_conquerable_fields()
+
+      (RO) Counts all reachable fields that a player could build on.
+
+      **Note:** The fields are only calculated afresh when this is called for the first time.
+
+     :returns: An integer with the amount of fields.
+*/
+int LuaMap::count_conquerable_fields(lua_State* L) {
+	lua_pushinteger(L, get_egbase(L).mutable_map()->count_all_conquerable_fields());
+	return 1;
+}
+
+/* RST
+   .. method:: count_terrestrial_fields()
+
+      (RO) Counts all fields that are not swimmable.
+
+     **Note:** The fields are only calculated afresh when this is called for the first time.
+
+     :returns: An integer with the amount of fields.
+*/
+int LuaMap::count_terrestrial_fields(lua_State* L) {
+	lua_pushinteger(L, get_egbase(L).mutable_map()->count_all_fields_excluding_caps(MOVECAPS_SWIM));
+	return 1;
+}
+
+/* RST
+   .. method:: count_owned_valuable_fields([immovable_attribute])
+
+      (RO) Counts the number of owned valuable fields for all players.
+
+      :arg name: *Optional*. If this is set, only count fields that have an
+        immovable with the given atttribute.
+      :type name: :class:`string`
+
+     :returns: A table mapping player numbers to their number of owned fields.
+*/
+int LuaMap::count_owned_valuable_fields(lua_State* L) {
+	if (lua_gettop(L) > 2) {
+		report_error(L, "Does not take more than one argument.");
+	}
+	const std::string attribute = lua_gettop(L) == 2 ? luaL_checkstring(L, -1) : "";
+
+	lua_newtable(L);
+	for (const auto& fieldinfo : get_egbase(L).map().count_owned_valuable_fields(attribute)) {
+		lua_pushinteger(L, fieldinfo.first);
+		lua_pushinteger(L, fieldinfo.second);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
 /* RST
    .. method:: place_immovable(name, field, from_where)
 

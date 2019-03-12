@@ -91,6 +91,8 @@ wl_library(map_io
     map_waterway_packet.h
     map_waterwaydata_packet.cc
     map_waterwaydata_packet.h
+    map_wincondition_packet.cc
+    map_wincondition_packet.h
   DEPENDS
     base_exceptions
     base_log
