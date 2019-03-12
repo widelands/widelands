@@ -257,8 +257,11 @@ void Map::recalc_default_resources(const World& world) {
 		}
 }
 
-std::set<FCoords> Map::calculate_all_conquerable_fields() const {
-	std::set<FCoords> result;
+size_t Map::count_all_conquerable_fields() {
+	if (!valuable_fields_.empty()) {
+		// Already calculated
+		return valuable_fields_.size();
+	}
 
 	std::set<FCoords> coords_to_check;
 
@@ -267,17 +270,16 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 
 	// If we don't have the given coordinates yet, walk the map and collect conquerable fields,
 	// initialized with the given radius around the coordinates
-	const auto walk_starting_coords = [this, &result, &coords_to_check](
-	                                     const Coords& coords, int radius) {
+	const auto walk_starting_coords = [this, &coords_to_check](const Coords& coords, int radius) {
 		FCoords fcoords = get_fcoords(coords);
 
 		// We already have these coordinates
-		if (result.count(fcoords) == 1) {
+		if (valuable_fields_.count(fcoords) == 1) {
 			return;
 		}
 
 		// Add starting field
-		result.insert(fcoords);
+		valuable_fields_.insert(fcoords);
 
 		// Add outer land coordinates around the starting field for the given radius
 		std::unique_ptr<Widelands::HollowArea<>> hollow_area(
@@ -317,8 +319,9 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 
 					// We do the caps check first, because the comparison is faster than the container
 					// check
-					if ((fcoords.field->maxcaps() & MOVECAPS_WALK) && (result.count(fcoords) == 0)) {
-						result.insert(fcoords);
+					if ((fcoords.field->maxcaps() & MOVECAPS_WALK) &&
+					    (valuable_fields_.count(fcoords) == 0)) {
+						valuable_fields_.insert(fcoords);
 						coords_to_check.insert(fcoords);
 					}
 				} while (map_region->advance(*this));
@@ -342,23 +345,46 @@ std::set<FCoords> Map::calculate_all_conquerable_fields() const {
 		}
 	}
 
-	log("%" PRIuS " found ... ", result.size());
-	return result;
+	log("%" PRIuS " found ... ", valuable_fields_.size());
+	return valuable_fields_.size();
 }
 
-std::set<FCoords> Map::calculate_all_fields_excluding_caps(NodeCaps caps) const {
+size_t Map::count_all_fields_excluding_caps(NodeCaps caps) {
+	if (!valuable_fields_.empty()) {
+		// Already calculated
+		return valuable_fields_.size();
+	}
+
 	log("Collecting valuable fields ... ");
 	ScopedTimer timer("took %ums");
 
-	std::set<FCoords> result;
 	for (MapIndex i = 0; i < max_index(); ++i) {
 		Field& field = fields_[i];
 		if (!(field.nodecaps() & caps)) {
-			result.insert(get_fcoords(field));
+			valuable_fields_.insert(get_fcoords(field));
 		}
 	}
 
-	log("%" PRIuS " found ... ", result.size());
+	log("%" PRIuS " found ... ", valuable_fields_.size());
+	return valuable_fields_.size();
+}
+
+std::map<PlayerNumber, size_t>
+Map::count_owned_valuable_fields(const std::string& immovable_attribute) const {
+	std::map<PlayerNumber, size_t> result;
+	const bool use_attribute = !immovable_attribute.empty();
+	const uint32_t attribute_id =
+	   use_attribute ? MapObjectDescr::get_attribute_id(immovable_attribute) : 0U;
+	for (const FCoords& fcoords : valuable_fields_) {
+		if (use_attribute) {
+			const BaseImmovable* imm = fcoords.field->get_immovable();
+			if (imm != nullptr && imm->has_attribute(attribute_id)) {
+				result[fcoords.field->get_owned_by()] += 1;
+			}
+		} else {
+			result[fcoords.field->get_owned_by()] += 1;
+		}
+	}
 	return result;
 }
 

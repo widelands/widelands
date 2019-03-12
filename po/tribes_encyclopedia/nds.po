@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
-"PO-Revision-Date: 2019-02-28 19:50+0000\n"
+"POT-Creation-Date: 2019-03-03 08:19+0000\n"
+"PO-Revision-Date: 2019-03-03 11:02+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -601,7 +601,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "coal."
-msgstr "Deeses Bargwark haalt de Mineraal kumpleet ut d Grund. Wenn 't leeg is, kann 't immer noch mit eener Kans vun %s Köhle finnen."
+msgstr "Deeses Bargwark haalt dat Mineraal kumpleet ut de Grund. Wenn 't leeg is, kann 't immer noch mit eener Kans vun %s Köhle finnen."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/coalmine_deeper/helptexts.lua:27
@@ -729,7 +729,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "gold ore."
-msgstr "Deeses Bargwark haalt de Mineraal kumpleet ut d Grund. Wenn 't leeg is, kann 't immer noch mit eener Kans vun %s Goldkluut finnen."
+msgstr "Deeses Bargwark haalt dat Mineraal kumpleet ut de Grund. Wenn 't leeg is, kann 't immer noch mit eener Kans vun %s Goldkluut finnen."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/goldmine_deeper/helptexts.lua:23
@@ -776,7 +776,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "granite."
-msgstr "Deeses Bargwark haalt de Mineraal kumpleet ut d Grund. Wenn 't leeg is, kann 't immer noch mit eener Kans vun %s Flint finnen."
+msgstr "Deeses Bargwark haalt dat Mineraal kumpleet ut de Grund. Wenn 't leeg is, kann 't immer noch mit eener Kans vun %s Flint finnen."
 
 #. TRANSLATORS: 'It' is a mine
 #: ../../data/tribes/buildings/productionsites/barbarians/granitemine/helptexts.lua:26
@@ -889,7 +889,7 @@ msgid ""
 "This mine exploits all of the resource down to the deepest level. But even "
 "after having done so, it will still have a %s chance of finding some more "
 "iron ore."
-msgstr "Deeses Bargwark haalt de Mineraal kumpleet ut d Grund. Wenn 't leeg is, kann 't immer noch mit eener Kans vun %s Iesenkluut finnen."
+msgstr "Deeses Bargwark haalt dat Mineraal kumpleet ut de Grund. Wenn 't leeg is, kann 't immer noch mit eener Kans vun %s Iesenkluut finnen."
 
 #. TRANSLATORS: Performance helptext for a building
 #: ../../data/tribes/buildings/productionsites/barbarians/ironmine_deeper/helptexts.lua:23
@@ -5435,7 +5435,7 @@ msgstr "Förskt frömde Geweste ut."
 #: ../../data/tribes/workers/atlanteans/shipwright/helptexts.lua:3
 msgctxt "atlanteans_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un baut neje Schippen."
+msgstr "Warkt in de Warft un baut neje Schippen."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/atlanteans/smelter/helptexts.lua:3
@@ -5650,7 +5650,7 @@ msgstr "Förskt frömde Geweste ut."
 #: ../../data/tribes/workers/barbarians/shipwright/helptexts.lua:3
 msgctxt "barbarians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un baut neje Schippen."
+msgstr "Warkt in de Warft un baut neje Schippen."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/barbarians/smelter/helptexts.lua:3
@@ -5825,7 +5825,7 @@ msgstr "Tücht Schapen."
 #: ../../data/tribes/workers/empire/shipwright/helptexts.lua:3
 msgctxt "empire_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un baut neje Schippen."
+msgstr "Warkt in de Warft un baut neje Schippen."
 
 #. TRANSLATORS: Note helptext for a building
 #. TRANSLATORS: Performance helptext for a building
@@ -6056,7 +6056,7 @@ msgstr "Naiht Wapenrocken ut Fellkluften un Metallen."
 #: ../../data/tribes/workers/frisians/shipwright/helptexts.lua:3
 msgctxt "frisians_worker"
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Arbeidet in de Warft un baut neje Schippen."
+msgstr "Warkt in de Warft un baut neje Schippen."
 
 #. TRANSLATORS: Helptext for a worker: Smelter
 #: ../../data/tribes/workers/frisians/smelter/helptexts.lua:3
