@@ -62,14 +62,16 @@ public:
 	uint32_t frametime() const override;
 	const Image* representative_image(const RGBColor* clr) const override;
 	const std::string& representative_image_filename() const override;
-	virtual void blit(uint32_t time,
+	virtual void blit(uint32_t time, const Widelands::Coords& coords,
 	                  const Rectf& source_rect,
 	                  const Rectf& destination_rect,
 	                  const RGBColor* clr,
 	                  Surface* target) const override;
-	void trigger_sound(uint32_t framenumber, uint32_t stereo_position) const override;
-
 private:
+	// TODO(unknown): The chosen semantics of animation sound effects is problematic:
+	// What if the game runs very slowly or very quickly?
+	void trigger_sound(uint32_t framenumber, const Widelands::Coords& coords) const override;
+
 	// Loads the graphics if they are not yet loaded.
 	void ensure_graphics_are_loaded() const;
 
@@ -236,15 +238,15 @@ uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
 	return 0;
 }
 
-void NonPackedAnimation::trigger_sound(uint32_t time, uint32_t stereo_position) const {
-	if (sound_effect_.empty()) {
+void NonPackedAnimation::trigger_sound(uint32_t time, const Widelands::Coords& coords) const {
+	if (sound_effect_.empty() || coords == Widelands::Coords::null()) {
 		return;
 	}
 
 	const uint32_t framenumber = current_frame(time);
 
 	if (framenumber == 0) {
-		Notifications::publish(NoteSound(sound_effect_, stereo_position, 1));
+		Notifications::publish(NoteSound(sound_effect_, coords, 1));
 	}
 }
 
@@ -264,6 +266,7 @@ Rectf NonPackedAnimation::destination_rectangle(const Vector2f& position,
 }
 
 void NonPackedAnimation::blit(uint32_t time,
+							  const Widelands::Coords& coords,
                               const Rectf& source_rect,
                               const Rectf& destination_rect,
                               const RGBColor* clr,
@@ -278,8 +281,7 @@ void NonPackedAnimation::blit(uint32_t time,
 		target->blit_blended(
 		   destination_rect, *frames_.at(idx), *pcmasks_.at(idx), source_rect, *clr);
 	}
-	// TODO(GunChleoc): Stereo position would be nice.
-	trigger_sound(time, 128);
+	trigger_sound(time, coords);
 }
 
 }  // namespace

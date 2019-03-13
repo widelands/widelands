@@ -286,22 +286,20 @@ void RenderTarget::tile(const Recti& rect,
 }
 
 void RenderTarget::blit_animation(const Vector2f& dst,
+								  const Widelands::Coords& coords,
                                      const float scale,
                                      uint32_t animation_id,
                                      uint32_t time,
                                      const RGBColor* player_color,
                                      const int percent_from_bottom) {
 	const Animation& animation = g_gr->animations().get_animation(animation_id);
-	// TODO(unknown): Correctly calculate the stereo position for sound effects
-	// TODO(unknown): The chosen semantics of animation sound effects is problematic:
-	// What if the game runs very slowly or very quickly?
 	assert(percent_from_bottom <= 100);
 	if (percent_from_bottom > 0) {
 		// Scaling for zoom and animation image size, then fit screen edges.
 		Rectf srcrc = animation.source_rectangle(percent_from_bottom);
 		Rectf dstrc = animation.destination_rectangle(dst, srcrc, scale);
 		if (to_surface_geometry(&dstrc, &srcrc)) {
-			animation.blit(time, srcrc, dstrc, player_color, surface_);
+			animation.blit(time, coords, srcrc, dstrc, player_color, surface_);
 		}
 	}
 }

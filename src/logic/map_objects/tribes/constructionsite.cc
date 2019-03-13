@@ -40,6 +40,7 @@
 namespace Widelands {
 
 void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
+									   const Widelands::Coords& coords,
                                        float scale,
                                        const RGBColor& player_color,
                                        RenderTarget* dst) const {
@@ -55,11 +56,11 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 
 	if (cur_frame) {  //  not the first pic
 		// Draw the complete prev pic , so we won't run into trouble if images have different sizes
-		dst->blit_animation(point_on_dst, scale, anim_idx, anim_time - FRAME_LENGTH, &player_color);
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_idx, anim_time - FRAME_LENGTH, &player_color);
 	} else if (was) {
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
-		dst->blit_animation(point_on_dst, scale, was->get_unoccupied_animation(),
+		dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, was->get_unoccupied_animation(),
 		                    anim_time - FRAME_LENGTH, &player_color);
 	}
 	// Now blit a segment of the current construction phase from the bottom.
@@ -68,7 +69,7 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 		percent /= totaltime;
 	}
 	percent -= 100 * cur_frame;
-	dst->blit_animation(point_on_dst, scale, anim_idx, anim_time, &player_color, percent);
+	dst->blit_animation(point_on_dst, coords, scale, anim_idx, anim_time, &player_color, percent);
 }
 
 /**
@@ -339,12 +340,13 @@ Draw the construction site.
 void ConstructionSite::draw(uint32_t gametime,
                             TextToDraw draw_text,
                             const Vector2f& point_on_dst,
+							const Widelands::Coords& coords,
                             float scale,
                             RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
 	// Draw the construction site marker
 	const RGBColor& player_color = get_owner()->get_playercolor();
-	dst->blit_animation(point_on_dst, scale, anim_, tanim, &player_color);
+	dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 
 	// Draw the partially finished building
 
@@ -358,7 +360,7 @@ void ConstructionSite::draw(uint32_t gametime,
 		info_.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - work_steptime_;
 	}
 
-	info_.draw(point_on_dst, scale, player_color, dst);
+	info_.draw(point_on_dst, coords, scale, player_color, dst);
 
 	// Draw help strings
 	draw_info(draw_text, point_on_dst, scale, dst);

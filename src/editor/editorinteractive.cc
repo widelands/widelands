@@ -300,14 +300,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 		if (draw_immovables_) {
 			Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 			if (imm != nullptr && imm->get_positions(ebase).front() == field.fcoords) {
-				imm->draw(gametime, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
+				imm->draw(gametime, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 
 		if (draw_bobs_) {
 			for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 			     bob = bob->get_next_bob()) {
-				bob->draw(ebase, TextToDraw::kNone, field.rendertarget_pixel, scale, &dst);
+				bob->draw(ebase, TextToDraw::kNone, field.rendertarget_pixel, field.fcoords, scale, &dst);
 			}
 		}
 

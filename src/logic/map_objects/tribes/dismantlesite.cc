@@ -219,16 +219,17 @@ Draw it.
 void DismantleSite::draw(uint32_t gametime,
                          const TextToDraw draw_text,
                          const Vector2f& point_on_dst,
+						 const Widelands::Coords& coords,
                          float scale,
                          RenderTarget* dst) {
 	uint32_t tanim = gametime - animstart_;
 	const RGBColor& player_color = get_owner()->get_playercolor();
 
 	// Draw the construction site marker
-	dst->blit_animation(point_on_dst, scale, anim_, tanim, &player_color);
+	dst->blit_animation(point_on_dst, Widelands::Coords::null(), scale, anim_, tanim, &player_color);
 
 	// Blit bottom part of the animation according to dismantle progress
-	dst->blit_animation(point_on_dst, scale, building_->get_unoccupied_animation(), tanim,
+	dst->blit_animation(point_on_dst, coords, scale, building_->get_unoccupied_animation(), tanim,
 	                    &player_color, 100 - ((get_built_per64k() * 100) >> 16));
 
 	// Draw help strings

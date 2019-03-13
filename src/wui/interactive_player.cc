@@ -106,7 +106,7 @@ void draw_immovable_for_visible_field(const Widelands::EditorGameBase& egbase,
 	Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();
 	if (imm != nullptr && imm->get_positions(egbase).front() == field.fcoords) {
 		imm->draw(egbase.get_gametime(), filter_text_to_draw(text_to_draw, imm, player),
-		          field.rendertarget_pixel, scale, dst);
+		          field.rendertarget_pixel, field.fcoords, scale, dst);
 	}
 }
 
@@ -118,7 +118,7 @@ void draw_bobs_for_visible_field(const Widelands::EditorGameBase& egbase,
                                  RenderTarget* dst) {
 	for (Widelands::Bob* bob = field.fcoords.field->get_first_bob(); bob;
 	     bob = bob->get_next_bob()) {
-		bob->draw(egbase, filter_text_to_draw(text_to_draw, bob, player), field.rendertarget_pixel,
+		bob->draw(egbase, filter_text_to_draw(text_to_draw, bob, player), field.rendertarget_pixel, field.fcoords,
 		          scale, dst);
 	}
 }
@@ -134,20 +134,20 @@ void draw_immovable_for_formerly_visible_field(const FieldsToDraw::Field& field,
 	if (player_field.constructionsite.becomes) {
 		assert(field.owner != nullptr);
 		player_field.constructionsite.draw(
-		   field.rendertarget_pixel, scale, field.owner->get_playercolor(), dst);
+		   field.rendertarget_pixel, field.fcoords, scale, field.owner->get_playercolor(), dst);
 
 	} else if (upcast(const Widelands::BuildingDescr, building, player_field.map_object_descr)) {
 		assert(field.owner != nullptr);
 		// this is a building therefore we either draw unoccupied or idle animation
-		dst->blit_animation(field.rendertarget_pixel, scale, building->get_unoccupied_animation(), 0,
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, building->get_unoccupied_animation(), 0,
 		                    &field.owner->get_playercolor());
 	} else if (player_field.map_object_descr->type() == Widelands::MapObjectType::FLAG) {
 		assert(field.owner != nullptr);
-		dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().flag_animation(), 0,
+		dst->blit_animation(field.rendertarget_pixel, field.fcoords, scale, field.owner->tribe().flag_animation(), 0,
 		                    &field.owner->get_playercolor());
 	} else if (const uint32_t pic = player_field.map_object_descr->main_animation()) {
 		dst->blit_animation(
-		   field.rendertarget_pixel, scale, pic, 0, (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
+		   field.rendertarget_pixel, field.fcoords, scale, pic, 0, (field.owner == nullptr) ? nullptr : &field.owner->get_playercolor());
 	}
 }
 

@@ -27,6 +27,7 @@
 #include "graphic/blend_mode.h"
 #include "graphic/color.h"
 #include "graphic/image.h"
+#include "logic/widelands_geometry.h"
 
 class Animation;
 class Surface;
@@ -105,7 +106,10 @@ public:
 	// Draw the 'animation' as it should appear at 'time' in this target at
 	// 'dst'. Optionally, the animation is tinted with 'player_color' and
 	// cropped to 'source_rect'.
+	// Any sound effects are played with stereo position according to 'coords'.
+	// If 'coords' == Widelands::Coords::null(), skip playing any sound effects.
 	void blit_animation(const Vector2f& dst,
+						const Widelands::Coords& coords,
 	                       const float scale,
 	                       uint32_t animation_id,
 	                       uint32_t time,

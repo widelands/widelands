@@ -456,24 +456,26 @@ void Immovable::act(Game& game, uint32_t const data) {
 void Immovable::draw(uint32_t gametime,
                      const TextToDraw draw_text,
                      const Vector2f& point_on_dst,
+					 const Widelands::Coords& coords,
                      float scale,
                      RenderTarget* dst) {
 	if (!anim_) {
 		return;
 	}
 	if (!anim_construction_total_) {
-		dst->blit_animation(point_on_dst, scale, anim_, gametime - animstart_);
+		dst->blit_animation(point_on_dst, coords, scale, anim_, gametime - animstart_);
 		if (former_building_descr_) {
 			do_draw_info(draw_text, former_building_descr_->descname(), "", point_on_dst, scale, dst);
 		}
 	} else {
-		draw_construction(gametime, draw_text, point_on_dst, scale, dst);
+		draw_construction(gametime, draw_text, point_on_dst, coords, scale, dst);
 	}
 }
 
 void Immovable::draw_construction(const uint32_t gametime,
                                   const TextToDraw draw_text,
                                   const Vector2f& point_on_dst,
+								  const Widelands::Coords& coords,
                                   const float scale,
                                   RenderTarget* dst) {
 	const ImmovableProgram::ActConstruct* constructionact = nullptr;
@@ -504,13 +506,13 @@ void Immovable::draw_construction(const uint32_t gametime,
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
 		dst->blit_animation(
-		   point_on_dst, scale, anim_, (current_frame - 1) * frametime, &player_color);
+		   point_on_dst, Widelands::Coords::null(), scale, anim_, (current_frame - 1) * frametime, &player_color);
 	}
 
 	const int percent = ((done % units_per_frame) * 100) / units_per_frame;
 
 	dst->blit_animation(
-	   point_on_dst, scale, anim_, current_frame * frametime, &player_color, percent);
+	   point_on_dst, coords, scale, anim_, current_frame * frametime, &player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(draw_text, descr().descname(),
