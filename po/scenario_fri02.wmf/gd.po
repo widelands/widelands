@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-08 07:26+0000\n"
+"POT-Creation-Date: 2019-03-12 15:37+0000\n"
 "PO-Revision-Date: 2018-03-24 18:16+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/widelands/teams/35159/gd/)\n"
@@ -310,7 +310,7 @@ msgid ""
 msgstr ""
 "Shaoilinn nach digeadh an triall gu ceann gu bràth tuilleadh. Chan eil sgot "
 "agam dè cho fada ’s a tha sinn air a bhith air a’ mhuir agus na gailleannan "
-"fharmadach oirnn… fad iomadh mìos gun teagamh."
+"farmadach oirnn… fad iomadh mìos gun teagamh."
 
 #. TRANSLATORS: Reebaud – Introduction 1
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:143
@@ -327,9 +327,9 @@ msgid ""
 "There was a small group of foreigners living here. They welcomed us by "
 "brandishing their axes at us, and shouted in an incoherent language."
 msgstr ""
-"Bha buidheann beag de choigrich a’ fuireach an-seo. ’S dè an fhàilte a "
-"fhuair sinn ach gun do chrath iad an tuaghan ’s gun do dh’eugh iad oirnn ann"
-" an cànan neo-thàthach."
+"Bha buidheann beag de choigrich a’ fuireach ann. ’S dè an fhàilte a fhuair "
+"sinn ach gun do chrath iad an tuaghan ’s gun do dh’eugh iad oirnn ann an "
+"cànan neo-thàthach."
 
 #. TRANSLATORS: Reebaud – Introduction 2
 #: ../../data/campaigns/fri02.wmf/scripting/texts.lua:152
@@ -485,8 +485,8 @@ msgid ""
 "produce picks to equip miners with. I will see to it at once!"
 msgstr ""
 "Seo na dh’fheumas sinn dèanamh ma-thà. Cleachdaidh sinn na h-airm againn "
-"airson saighdearan oideachadh is leagaidh sinn na fuighill meatailte ’nan "
-"iarann ’s òr an uairsin. ’S urrainn na goibhnean againn piocaidean a "
+"airson saighdearan oideachadh is leaghaidh sinn na fuighill meatailte ’nan "
+"iarann ’s òr an uairsin. ’S urrainn dha na goibhnean againn piocaidean a "
 "dhèanamh a uairsin a bheir sinn dha na mèinnearan. Dèiligidh mi ris sa bhad!"
 
 #. TRANSLATORS: Reebaud – Train and recycle 4
@@ -807,7 +807,7 @@ msgid ""
 "war if we refuse to be his slaves?"
 msgstr ""
 "Abair tàire! Cò esan a’ toirmeasg gun leudaicheamaid ar ranntair fhad ’s "
-"nach eil sin ag amas ach air dachaigh ùr a thogail ’s esan a’ bagairt an "
+"nach eil sinn ag amas ach air dachaigh ùr a thogail ’s esan a’ bagairt an "
 "cogadh oirnn mura dèid sinn ’nar tràillean dha?"
 
 #. TRANSLATORS: Reebaud – Supply Murilius 9
