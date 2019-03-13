@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-03-03 08:19+0000\n"
-"PO-Revision-Date: 2019-03-07 10:29+0000\n"
+"POT-Creation-Date: 2019-03-08 07:26+0000\n"
+"PO-Revision-Date: 2019-03-12 04:50+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -1140,7 +1140,7 @@ msgstr "A’ luchdadh a’ mhapa…"
 
 #: ../../src/logic/game.cc:318
 msgid "Initializing game…"
-msgstr "A’ tòiseachadh a’ gheama…"
+msgstr "A’ rèiteachadh a’ gheama…"
 
 #: ../../src/logic/game.cc:350 ../../src/logic/game.cc:389
 #: ../../src/ui_basic/progresswindow.cc:51 ../../src/wlapplication.cc:1424
