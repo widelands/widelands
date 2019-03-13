@@ -37,8 +37,9 @@ void Flag::draw(uint32_t gametime,
 	                     {-6.f, -3.f}, {-1.f, -2.f}, {3.f, -2.f}, {8.f, -3.f}};
 
 	const RGBColor& player_color = owner().get_playercolor();
+	// NOCOM
 	dst->blit_animation(
-	   point_on_dst, scale, owner().tribe().flag_animation(), gametime - animstart_, player_color);
+	   point_on_dst, scale, owner().tribe().flag_animation(), gametime - animstart_, &player_color);
 
 	for (int32_t i = 0; i < ware_filled_; ++i) {  //  draw wares
 		Vector2f warepos = point_on_dst;
@@ -49,7 +50,7 @@ void Flag::draw(uint32_t gametime,
 			warepos.y -= (6.f + (i - 8.f) * 3.f) * scale;
 		}
 		dst->blit_animation(
-		   warepos, scale, wares_[i].ware->descr().get_animation("idle"), 0, player_color);
+		   warepos, scale, wares_[i].ware->descr().get_animation("idle"), 0, &player_color);
 	}
 }
 

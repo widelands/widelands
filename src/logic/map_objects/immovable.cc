@@ -504,13 +504,13 @@ void Immovable::draw_construction(const uint32_t gametime,
 	if (current_frame > 0) {
 		// Not the first pic, so draw the previous one in the back
 		dst->blit_animation(
-		   point_on_dst, scale, anim_, (current_frame - 1) * frametime, player_color);
+		   point_on_dst, scale, anim_, (current_frame - 1) * frametime, &player_color);
 	}
 
 	const int percent = ((done % units_per_frame) * 100) / units_per_frame;
 
 	dst->blit_animation(
-	   point_on_dst, scale, anim_, current_frame * frametime, player_color, percent);
+	   point_on_dst, scale, anim_, current_frame * frametime, &player_color, percent);
 
 	// Additionally, if statistics are enabled, draw a progression string
 	do_draw_info(draw_text, descr().descname(),
