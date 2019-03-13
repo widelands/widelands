@@ -179,7 +179,7 @@ public:
 	bool is_backend_disabled() const;
 	void disable_backend();
 
-	void load_fx_if_needed(const std::string& dir,
+	void register_fx(const std::string& dir,
 	                       const std::string& basename,
 	                       const std::string& fx_name);
 
@@ -220,7 +220,6 @@ private:
 	// Prints an error and disables the sound system.
 	void initialization_error(const char* const msg, bool quit_sdl);
 
-	void load_one_fx(const std::string& path, const std::string& fx_name);
 	bool play_or_not(const std::string& fx_name, int32_t stereo_position, uint8_t priority);
 
 	/** Can sounds be played?

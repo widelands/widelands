@@ -20,11 +20,11 @@
 #ifndef WL_SOUND_FXSET_H
 #define WL_SOUND_FXSET_H
 
+#include <set>
+#include <string>
 #include <vector>
 
 #include <SDL_mixer.h>
-
-class SoundHandler;
 
 /** A collection of several sound effects meant for the same event.
  *
@@ -35,33 +35,10 @@ class SoundHandler;
  * from the outside
  */
 struct FXset {
-	/// Predefined priorities for easy reading
-	/// \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
-	static constexpr uint8_t kPriorityMedium = 63;
-	static constexpr uint8_t kPriorityAllowMultiple = 128;
-	static constexpr uint8_t kPriorityAlwaysPlay = 255;
-
-	friend class SoundHandler;
-	explicit FXset(uint8_t priority = kPriorityMedium);
-	~FXset();
-
-	void add_fx(Mix_Chunk* fx, uint8_t prio = kPriorityMedium);
-	Mix_Chunk* get_fx();
-	bool empty() {
-		return fxs_.empty();
-	}
-
-protected:
-	/// The collection of sound effects
-	std::vector<Mix_Chunk*> fxs_;
-
-	/** When the effect was played the last time (milliseconds since SDL
-	 * initialization). Set via SDL_GetTicks()
-	 */
-	uint32_t last_used_;
-
 	/** How important is it to play the effect even when others are running
 	 * already?
+	 *
+	 * \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
 	 *
 	 * Value 0-127: probability between 0.0 and 1.0, only one instance can
 	 * be playing at any time
@@ -71,7 +48,50 @@ protected:
 	 *
 	 * Value 255: always play; unconditional
 	 */
-	uint8_t priority_;
+	static constexpr uint8_t kPriorityMedium = 63;
+	static constexpr uint8_t kPriorityAllowMultiple = 128;
+	static constexpr uint8_t kPriorityAlwaysPlay = 255;
+
+	explicit FXset(const std::string& directory, const std::string& base_filename);
+	~FXset();
+
+
+	/**
+	 * Number of ticks since this FXSet was last played
+	 */
+	uint32_t ticks_since_last_play() const;
+
+	/** Get a sound effect from the fxset. Load the audio on demand.
+	 * \e Which variant of the fx is actually given out is determined at random
+	 * \return  a pointer to the chosen effect; 0 if sound effects are
+	 * disabled or no fx is registered
+	 */
+	Mix_Chunk* get_fx(uint32_t random);
+	bool empty() {
+		return paths_.empty();
+	}
+
+private:
+
+	/** Add exactly one file to this fxset.
+	 * \param path      the effect to be loaded
+	 * The file format must be ogg. Otherwise this call will complain and
+	 * not load the file.
+	 * \note The complete audio file will be loaded into memory and stays there
+	 * until the game is finished.
+	 */
+	void load_sound_file(const std::string& path);
+
+	/** When the effect was played the last time (milliseconds since SDL
+	 * initialization). Set via SDL_GetTicks()
+	 */
+	uint32_t last_used_;
+
+	/// Filename paths for the physical sound files
+	std::set<std::string> paths_;
+
+	/// The collection of sound effects, to be loaded on demand
+	std::vector<Mix_Chunk*> fxs_;
 };
 
 #endif  // end of include guard: WL_SOUND_FXSET_H

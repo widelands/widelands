@@ -1422,7 +1422,7 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 		} else
 			priority = 127;
 
-		g_sound_handler.load_fx_if_needed(filepath, filename, name);
+		g_sound_handler.register_fx(filepath, filename, name);
 	} catch (const WException& e) {
 		throw GameDataError("playsound: %s", e.what());
 	}

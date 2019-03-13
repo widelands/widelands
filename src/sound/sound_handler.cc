@@ -33,7 +33,6 @@
 #include "base/i18n.h"
 #include "base/log.h"
 #include "helper.h"
-#include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
 #include "sound/songset.h"
@@ -226,13 +225,13 @@ void SoundHandler::read_config() {
  * their respective conf-file parsers
  */
 void SoundHandler::load_system_sounds() {
-	load_fx_if_needed("sound", "click", "click");
-	load_fx_if_needed("sound", "create_construction_site", "create_construction_site");
-	load_fx_if_needed("sound", "message", "message");
-	load_fx_if_needed("sound/military", "under_attack", "military/under_attack");
-	load_fx_if_needed("sound/military", "site_occupied", "military/site_occupied");
-	load_fx_if_needed("sound", "lobby_chat", "lobby_chat");
-	load_fx_if_needed("sound", "lobby_freshmen", "lobby_freshmen");
+	register_fx("sound", "click", "click");
+	register_fx("sound", "create_construction_site", "create_construction_site");
+	register_fx("sound", "message", "message");
+	register_fx("sound/military", "under_attack", "military/under_attack");
+	register_fx("sound/military", "site_occupied", "military/site_occupied");
+	register_fx("sound", "lobby_chat", "lobby_chat");
+	register_fx("sound", "lobby_freshmen", "lobby_freshmen");
 }
 
 /**
@@ -246,7 +245,7 @@ void SoundHandler::disable_backend() {
 	backend_is_disabled_ = true;
 }
 
-/** Load a sound effect. One sound effect can consist of several audio files
+/** Register a sound effect. One sound effect can consist of several audio files
  * named EFFECT_XX.ogg, where XX is between 00 and 99.
  *
  * Subdirectories of and files under FILENAME_XX can be named anything you want.
@@ -256,62 +255,13 @@ void SoundHandler::disable_backend() {
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
  */
-void SoundHandler::load_fx_if_needed(const std::string& dir,
+void SoundHandler::register_fx(const std::string& dir,
                                      const std::string& basename,
                                      const std::string& fx_name) {
 	if (is_backend_disabled() || fxs_.count(fx_name) > 0) {
 		return;
 	}
-
-	assert(g_fs);
-
-	if (!g_fs->is_directory(dir)) {
-		throw wexception("SoundHandler: Can't load files from %s, not a directory!", dir.c_str());
-	}
-
-	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset())));
-
-	boost::regex re(basename + "_\\d+\\.ogg");
-	FilenameSet files = filter(g_fs->list_directory(dir), [&re](const std::string& fn) {
-		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
-	});
-
-	for (const std::string& path : files) {
-		assert(!g_fs->is_directory(path));
-		load_one_fx(path, fx_name);
-	}
-}
-
-/** Add exactly one file to the given fxset.
- * \param path      the effect to be loaded
- * \param fx_name   the fxset to add the file to
- * The file format must be ogg. Otherwise this call will complain and
- * not load the file.
- * \note The complete audio file will be loaded into memory and stays there
- * until the game is finished.
- */
-void SoundHandler::load_one_fx(const std::string& path, const std::string& fx_name) {
-	if (is_backend_disabled()) {
-		return;
-	}
-
-	FileRead fr;
-	if (!fr.try_open(*g_fs, path)) {
-		log("WARNING: Could not open %s for reading!\n", path.c_str());
-		return;
-	}
-
-	if (Mix_Chunk* const m =
-	       Mix_LoadWAV_RW(SDL_RWFromMem(fr.data(fr.get_size(), 0), fr.get_size()), 1)) {
-		// Make sure that requested FXset exists
-
-		assert(fxs_.count(fx_name) > 0);
-
-		fxs_[fx_name]->add_fx(m);
-	} else
-		log("SoundHandler: loading sound effect \"%s\" for FXset \"%s\" "
-		    "failed: %s\n",
-		    path.c_str(), fx_name.c_str(), Mix_GetError());
+	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset(dir, basename))));
 }
 
 /** Find out whether to actually play a certain effect right now or rather not
@@ -381,7 +331,7 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 	// TODO(unknown): high general frequency reduces weighted priority
 	// TODO(unknown): deal with "coupled" effects like throw_net and retrieve_net
 
-	uint32_t const ticks_since_last_play = SDL_GetTicks() - fxs_[fx_name]->last_used_;
+	uint32_t const ticks_since_last_play = fxs_[fx_name]->ticks_since_last_play();
 
 	//  reward an fx for being silent
 	if (ticks_since_last_play > SLIDING_WINDOW_SIZE) {
@@ -427,7 +377,7 @@ void SoundHandler::play_fx(const std::string& fx_name,
 	}
 
 	//  retrieve the fx and play it if it's valid
-	if (Mix_Chunk* const m = fxs_[fx_name]->get_fx()) {
+	if (Mix_Chunk* const m = fxs_[fx_name]->get_fx(rng_.rand())) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
 		if (chan == -1) {
 			log("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());

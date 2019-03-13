@@ -108,7 +108,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			const std::string name = sound_effects->get_string("name");
 			const std::string directory = sound_effects->get_string("directory");
 			sound_effect_ = directory + g_fs->file_separator() + name;
-			g_sound_handler.load_fx_if_needed(directory, name, sound_effect_);
+			g_sound_handler.register_fx(directory, name, sound_effect_);
 		}
 
 		if (table.has_key("play_once")) {

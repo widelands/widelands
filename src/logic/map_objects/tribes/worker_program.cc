@@ -904,7 +904,7 @@ void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::
 
 	act->sparam1 = cmd[1] + "/" + cmd[2];
 
-	g_sound_handler.load_fx_if_needed(cmd[1], cmd[2], act->sparam1);
+	g_sound_handler.register_fx(cmd[1], cmd[2], act->sparam1);
 
 	act->function = &Worker::run_playsound;
 	act->iparam1 = cmd.size() == 3 ? 64 :  //  50% chance to play, only one instance at a time
