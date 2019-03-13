@@ -86,15 +86,12 @@ void draw_terrain(const Widelands::EditorGameBase& egbase,
 	i.blend_mode = BlendMode::UseAlpha;
 	RenderQueue::instance().enqueue(i);
 
-	// Enqueue the drawing of the workarea overlay layer.
-	i.program_id = RenderQueue::Program::kTerrainWorkarea;
-	i.blend_mode = BlendMode::UseAlpha;
-	i.terrain_arguments.destination_rect =
-	   Rectf(bounding_rect.x, surface_height - bounding_rect.y - bounding_rect.h, bounding_rect.w,
-	         bounding_rect.h);
-	i.terrain_arguments.fields_to_draw = &fields_to_draw;
-	i.terrain_arguments.workareas = workarea;
-	RenderQueue::instance().enqueue(i);
+	if (!workarea.empty()) {
+		// Enqueue the drawing of the workarea overlay layer.
+		i.program_id = RenderQueue::Program::kTerrainWorkarea;
+		i.terrain_arguments.workareas = workarea;
+		RenderQueue::instance().enqueue(i);
+	}
 
 	// Enqueue the drawing of the road layer.
 	i.program_id = RenderQueue::Program::kTerrainRoad;
