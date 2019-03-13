@@ -177,6 +177,7 @@ public:
 	void read_config();
 	void load_system_sounds();
 	bool is_backend_disabled() const;
+	void disable_backend();
 
 	void load_fx_if_needed(const std::string& dir,
 	                       const std::string& basename,
@@ -197,8 +198,8 @@ public:
 	static void fx_finished_callback(int32_t channel);
 	void handle_channel_finished(uint32_t channel);
 
-	bool get_disable_music() const;
-	bool get_disable_fx() const;
+	bool is_music_disabled() const;
+	bool are_fx_disabled() const;
 	int32_t get_music_volume() const;
 	int32_t get_fx_volume() const;
 	void set_disable_music(bool disable);
@@ -214,16 +215,10 @@ public:
 		return MIX_MAX_VOLUME;
 	}
 
-	/** Only for buffering the command line option --nosound until real initialization is done.
-	 * \see SoundHandler::SoundHandler()
-	 * \see SoundHandler::init()
-	 */
-	// TODO(unknown): This is ugly. Find a better way to do it
-	bool nosound_;
 
 private:
 	// Prints an error and disables the sound system.
-	void initialization_error(const std::string& msg);
+	void initialization_error(const char* const msg, bool quit_sdl);
 
 	void load_one_fx(const std::string& path, const std::string& fx_name);
 	bool play_or_not(const std::string& fx_name, int32_t stereo_position, uint8_t priority);
@@ -231,13 +226,17 @@ private:
 	/** Can sounds be played?
 	 * true = they mustn't be played (e.g. because hardware is missing)
 	 * false = can be played
+	 *
+	 * Also for buffering the command line option --nosound until real initialization is done.
+	 * \see SoundHandler::SoundHandler()
+	 * \see SoundHandler::init()
 	 */
-	bool is_backend_disabled_;
+	bool backend_is_disabled_;
 
 	/// Whether to disable background music
-	bool disable_music_;
+	bool music_is_disabled_;
 	/// Whether to disable sound effects
-	bool disable_fx_;
+	bool fx_are_disabled_;
 	/// Volume of music (from 0 to get_max_volume())
 	int32_t music_volume_;
 	/// Volume of sound effects (from 0 to get_max_volume())

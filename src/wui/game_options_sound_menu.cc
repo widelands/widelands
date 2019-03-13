@@ -59,8 +59,8 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
                          g_sound_handler.get_max_volume(),
                          g_sound_handler.get_fx_volume(),
                          UI::SliderStyle::kWuiLight) {
-	ingame_music.set_state(!g_sound_handler.get_disable_music());
-	ingame_sound.set_state(!g_sound_handler.get_disable_fx());
+	ingame_music.set_state(!g_sound_handler.is_music_disabled());
+	ingame_sound.set_state(!g_sound_handler.are_fx_disabled());
 
 	uint32_t boxes_width =
 	   kStateboxSize + hspacing() + std::max(ingame_music.get_w(), ingame_sound.get_w());
@@ -82,17 +82,17 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(InteractiveGameBase& gb,
 		UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
 		   this, hmargin(), ingame_sound_volume.get_y() + ingame_sound_volume.get_h() + vspacing(),
 		   get_inner_w() - 2 * hmargin(), 0, UI::PanelStyle::kWui,
-		   _("Sound is disabled due to a problem with the sound driver"), UI::Align::kLeft,
+		   _("Sound is disabled either due to a problem with the sound driver, or because it was switched off at the command line."), UI::Align::kLeft,
 		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 
 		sound_warning->set_color(UI_FONT_CLR_WARNING);
 		set_size(get_w(), get_h() + sound_warning->get_h() + vspacing());
 
 	} else {  // initial widget states
-		ingame_music.set_state(!g_sound_handler.get_disable_music());
-		ingame_sound.set_state(!g_sound_handler.get_disable_fx());
-		ingame_music_volume.set_enabled(!g_sound_handler.get_disable_music());
-		ingame_sound_volume.set_enabled(!g_sound_handler.get_disable_fx());
+		ingame_music.set_state(!g_sound_handler.is_music_disabled());
+		ingame_sound.set_state(!g_sound_handler.are_fx_disabled());
+		ingame_music_volume.set_enabled(!g_sound_handler.is_music_disabled());
+		ingame_sound_volume.set_enabled(!g_sound_handler.are_fx_disabled());
 	}
 
 	//  ready signals

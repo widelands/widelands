@@ -259,10 +259,11 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_sound_.add(&message_sound_);
 
 	if (g_sound_handler.is_backend_disabled()) {
-		UI::Textarea* sound_warning = new UI::Textarea(
-		   &box_sound_, 0, 0, _("Sound is disabled due to a problem with the sound driver"));
-		sound_warning->set_color(UI_FONT_CLR_WARNING);
-		box_sound_.add(sound_warning);
+		UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
+		   &box_sound_, 0, 0, 200, 0, UI::PanelStyle::kFsMenu,
+		   _("Sound is disabled either due to a problem with the sound driver, or because it was switched off at the command line."), UI::Align::kLeft,
+		   UI::MultilineTextarea::ScrollMode::kNoScrolling);
+		box_sound_.add(sound_warning, UI::Box::Resizing::kExpandBoth);
 	}
 
 	// Saving

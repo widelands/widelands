@@ -45,7 +45,7 @@ void initialize() {
 	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
 
 	g_sound_handler.init();
-	g_sound_handler.nosound_ = true;
+	g_sound_handler.disable_backend();
 }
 
 // Cleanup before program end

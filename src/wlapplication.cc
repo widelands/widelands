@@ -928,7 +928,7 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
  */
 void WLApplication::handle_commandline_parameters() {
 	if (commandline_.count("nosound")) {
-		g_sound_handler.nosound_ = true;
+		g_sound_handler.disable_backend();
 		commandline_.erase("nosound");
 	}
 	if (commandline_.count("nozip")) {
