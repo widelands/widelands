@@ -337,7 +337,8 @@ void MapView::mouse_to_pixel(const Vector2i& pixel, const Transition& transition
 	NEVER_HERE();
 }
 
-FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Workareas workarea, RenderTarget* dst) {
+FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase,
+		Workareas workarea, bool grid, RenderTarget* dst) {
 	uint32_t now = SDL_GetTicks();
 	while (!view_plans_.empty()) {
 		auto& plan = view_plans_.front();
@@ -379,7 +380,7 @@ FieldsToDraw* MapView::draw_terrain(const Widelands::EditorGameBase& egbase, Wor
 
 	fields_to_draw_.reset(egbase, view_.viewpoint, view_.zoom, dst);
 	const float scale = 1.f / view_.zoom;
-	::draw_terrain(egbase, fields_to_draw_, scale, workarea, dst);
+	::draw_terrain(egbase, fields_to_draw_, scale, workarea, grid, dst);
 	return &fields_to_draw_;
 }
 
