@@ -26,15 +26,6 @@
 
 class SoundHandler;
 
-/// Predefined priorities for easy reading
-/// \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
-
-// TODO(unknown): These values should not have any meaning beyond just being numbers.
-
-#define PRIO_ALWAYS_PLAY 255
-#define PRIO_ALLOW_MULTIPLE 128
-#define PRIO_MEDIUM 63
-
 /** A collection of several sound effects meant for the same event.
  *
  * An FXset encapsulates a number of interchangeable sound effects, e.g.
@@ -44,11 +35,17 @@ class SoundHandler;
  * from the outside
  */
 struct FXset {
+	/// Predefined priorities for easy reading
+	/// \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
+	static constexpr uint8_t kPriorityMedium = 63;
+	static constexpr uint8_t kPriorityAllowMultiple = 128;
+	static constexpr uint8_t kPriorityAlwaysPlay = 255;
+
 	friend class SoundHandler;
-	explicit FXset(uint8_t priority = PRIO_MEDIUM);
+	explicit FXset(uint8_t priority = kPriorityMedium);
 	~FXset();
 
-	void add_fx(Mix_Chunk* fx, uint8_t prio = PRIO_MEDIUM);
+	void add_fx(Mix_Chunk* fx, uint8_t prio = kPriorityMedium);
 	Mix_Chunk* get_fx();
 	bool empty() {
 		return fxs_.empty();

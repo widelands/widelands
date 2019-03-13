@@ -322,16 +322,19 @@ void Player::update_team_players() {
  * enabled.
  */
 void Player::play_message_sound(const Message::Type& msgtype) {
-#define MAYBE_PLAY(type, file)                                                                     \
-	if (msgtype == type) {                                                                          \
-		Notifications::publish(NoteSound(file, 200, PRIO_ALWAYS_PLAY));                              \
-		return;                                                                                      \
-	}
-
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY(Message::Type::kEconomySiteOccupied, "military/site_occupied");
-		MAYBE_PLAY(Message::Type::kWarfareUnderAttack, "military/under_attack");
-		Notifications::publish(NoteSound("message", 200, PRIO_ALWAYS_PLAY));
+		std::string soundfile;
+		switch (msgtype) {
+			case Message::Type::kEconomySiteOccupied:
+			soundfile = "military/site_occupied";
+			break;
+		case Message::Type::kWarfareUnderAttack:
+			soundfile = "military/under_attack";
+			break;
+		default:
+			soundfile = "message";
+		}
+		Notifications::publish(NoteSound(soundfile, 200, FXset::kPriorityAlwaysPlay));
 	}
 }
 

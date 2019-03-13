@@ -184,7 +184,7 @@ public:
 
 	void play_fx(const std::string& fx_name,
 	             int32_t stereo_position,
-	             uint8_t priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
+	             uint8_t priority = FXset::kPriorityAllowMultiple + FXset::kPriorityMedium);
 
 	void register_song(const std::string& dir, const std::string& basename);
 	void start_music(const std::string& songset_name, int32_t fadein_ms = 0);

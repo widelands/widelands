@@ -269,8 +269,9 @@ void SoundHandler::load_fx_if_needed(const std::string& dir,
 		throw wexception("SoundHandler: Can't load files from %s, not a directory!", dir.c_str());
 	}
 
-	if (nosound_ || fxs_.count(fx_name) > 0)
+	if (nosound_ || fxs_.count(fx_name) > 0) {
 		return;
+	}
 
 	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset())));
 
@@ -294,7 +295,7 @@ void SoundHandler::load_fx_if_needed(const std::string& dir,
  * until the game is finished.
  */
 void SoundHandler::load_one_fx(const std::string& path, const std::string& fx_name) {
-	if (nosound_ || is_backend_disabled_) {
+	if (nosound_) {
 		return;
 	}
 
@@ -324,17 +325,21 @@ void SoundHandler::load_one_fx(const std::string& path, const std::string& fx_na
 bool SoundHandler::play_or_not(const std::string& fx_name,
                                int32_t const stereo_pos,
                                uint8_t const priority) {
+	if (nosound_ || disable_fx_) {
+		return false;
+	}
+
+	if (fxs_.count(fx_name) == 0) {
+		return false;
+	}
+
 	bool allow_multiple = false;  //  convenience for easier code reading
 	float evaluation;             // Temporary to calculate single influences
 	float probability;            // Weighted total of all influences
 
-	if (nosound_)
-		return false;
-
 	// Probability that this fx gets played; initially set according to priority
-
 	//  float division! not integer
-	probability = (priority % PRIO_ALLOW_MULTIPLE) / 128.0f;
+	probability = (priority % FXset::kPriorityAllowMultiple) / static_cast<float>(FXset::kPriorityAllowMultiple);
 
 	// TODO(unknown): what to do with fx that happen offscreen?
 	// TODO(unknown): reduce volume? reduce priority? other?
@@ -344,12 +349,12 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 
 	// TODO(unknown): check for a free channel
 
-	if (priority == PRIO_ALWAYS_PLAY) {
+	if (priority == FXset::kPriorityAlwaysPlay) {
 		// TODO(unknown): if there is no free channel, kill a running fx and complain
 		return true;
 	}
 
-	if (priority >= PRIO_ALLOW_MULTIPLE)
+	if (priority >= FXset::kPriorityAllowMultiple)
 		allow_multiple = true;
 
 	// Find out if an fx called fx_name is already running
@@ -395,7 +400,7 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 
 	// finally: the decision
 	// float division! not integer
-	return (rng_.rand() % 255) / 255.0f <= probability;
+	return (rng_.rand() % FXset::kPriorityAlwaysPlay) / static_cast<float>(FXset::kPriorityAlwaysPlay) <= probability;
 }
 
 /** \overload
@@ -423,8 +428,9 @@ void SoundHandler::play_fx(const std::string& fx_name,
 	}
 
 	// See if the FX should be played
-	if (!play_or_not(fx_name, stereo_pos, priority))
+	if (!play_or_not(fx_name, stereo_pos, priority)) {
 		return;
+	}
 
 	//  retrieve the fx and play it if it's valid
 	if (Mix_Chunk* const m = fxs_[fx_name]->get_fx()) {
