@@ -11,6 +11,7 @@ animations = {
       sound_effect = {
             directory = "sound/hammering",
             name = "hammering",
+            priority = 64
       },
       hotspot = { 10, 22 },
       fps = 10
