@@ -248,7 +248,7 @@ protected:
 	bool has_workarea_preview(const Widelands::Coords& coords) const;
 
 private:
-	int32_t stereo_position(Widelands::Coords position_map);
+	int32_t stereo_position(Widelands::Coords position_map, bool force);
 	void resize_chat_overlay();
 	void roadb_add_overlay();
 	void roadb_remove_overlay();

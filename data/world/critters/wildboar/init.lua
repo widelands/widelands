@@ -7,8 +7,7 @@ animations = {
       fps = 20,
       sound_effect = {
          directory = "sound/animals",
-         name = "boar",
-         priority = 128;
+         name = "boar"
       },
    },
 }

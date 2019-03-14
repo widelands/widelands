@@ -609,7 +609,7 @@ private:
 	BuildingStatsVector* get_mutable_building_statistics(const DescriptionIndex& i);
 	void update_building_statistics(Building&, NoteImmovable::Ownership ownership);
 	void update_team_players();
-	void play_message_sound(const Message::Type& msgtype);
+	void play_message_sound(const Message* message);
 	void enhance_or_dismantle(Building*, DescriptionIndex index_of_new_building);
 
 	// Called when a node becomes seen or has changed.  Discovers the node and

@@ -55,7 +55,7 @@ public:
 		// Returns a map pixel 'p' such that rect().x <= p.x <= rect().x + rect().w similar
 		// for y. This requires that 'contains' would return true for 'coords', otherwise this will
 		// be an infinite loop.
-		Vector2f move_inside(const Widelands::Coords& coords) const;
+		Vector2f find_pixel_for_coordinates(const Widelands::Coords& coords) const;
 
 	private:
 		friend class MapView;

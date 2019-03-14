@@ -101,8 +101,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      hasplrclrs_(false),
      scale_(1),
-     play_once_(false),
-	 sound_priority_(kFxPriorityAllowMultiple + kFxPriorityMedium) {
+	 sound_priority_(1),
+     play_once_(false) {
 	try {
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");

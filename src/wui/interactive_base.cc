@@ -26,6 +26,7 @@
 #include <boost/format.hpp>
 
 #include "base/macros.h"
+#include "base/math.h"
 #include "base/time_string.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -158,7 +159,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
 			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
 		} else if (note.coords != Widelands::Coords::null()) {
-			g_sound_handler.play_fx(note.fx, stereo_position(note.coords), note.priority);
+			g_sound_handler.play_fx(note.fx, stereo_position(note.coords, note.force), note.priority);
 		}
 	});
 
@@ -737,17 +738,21 @@ void InteractiveBase::log_message(const std::string& message) const {
  * \note This function can also be used to check whether a logical coordinate is
  * visible at all
  */
-int32_t InteractiveBase::stereo_position(Widelands::Coords const position_map) {
+int32_t InteractiveBase::stereo_position(Widelands::Coords const position_map, bool force) {
 	assert(position_map);
 
 	// Viewpoint is the point of the map in pixel which is shown in the upper
 	// left corner of window or fullscreen
 	const MapView::ViewArea area = map_view_.view_area();
-	if (!area.contains(position_map)) {
+	if (!force && !area.contains(position_map)) {
 		return kStereoMute;
 	}
-	const Vector2f position_pix = area.move_inside(position_map);
-	return static_cast<int>((position_pix.x - area.rect().x) * kStereoRight / area.rect().w);
+	const Vector2f position_pix = area.find_pixel_for_coordinates(position_map);
+	int32_t result = static_cast<int>((position_pix.x - area.rect().x) * kStereoRight / area.rect().w);
+	if (force) {
+		result = math::clamp(result, kStereoLeft, kStereoRight);
+	}
+	return result;
 }
 
 // Repositions the chat overlay

@@ -321,10 +321,10 @@ void Player::update_team_players() {
  * Plays the corresponding sound when a message is received and if sound is
  * enabled.
  */
-void Player::play_message_sound(const Message::Type& msgtype) {
+void Player::play_message_sound(const Message* message) {
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
 		std::string soundfile;
-		switch (msgtype) {
+		switch (message->type()) {
 			case Message::Type::kEconomySiteOccupied:
 			soundfile = "military/site_occupied";
 			break;
@@ -334,7 +334,7 @@ void Player::play_message_sound(const Message::Type& msgtype) {
 		default:
 			soundfile = "message";
 		}
-		Notifications::publish(NoteSound(soundfile, kStereoCenter, kFxPriorityAlwaysPlay));
+		Notifications::publish(NoteSound(soundfile, message->position(), kFxPriorityAlwaysPlay, true));
 	}
 }
 
@@ -351,7 +351,7 @@ MessageId Player::add_message(Game& game, std::unique_ptr<Message> new_message, 
 	// Sound & popup
 	if (InteractivePlayer* const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
-			play_message_sound(message->type());
+			play_message_sound(message);
 			if (popup)
 				iplayer->popup_message(id, *message);
 		}
