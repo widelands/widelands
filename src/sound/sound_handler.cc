@@ -35,6 +35,7 @@
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
+#include "sound/constants.h"
 
 namespace {
 

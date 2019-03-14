@@ -27,6 +27,7 @@
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "profile/profile.h"
+#include "sound/constants.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
 

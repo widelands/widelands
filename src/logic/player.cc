@@ -53,6 +53,7 @@
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
+#include "sound/constants.h"
 #include "sound/note_sound.h"
 #include "wui/interactive_player.h"
 
