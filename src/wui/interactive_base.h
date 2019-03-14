@@ -247,8 +247,10 @@ protected:
 	/// Returns true if there is a workarea preview being shown at the given coordinates
 	bool has_workarea_preview(const Widelands::Coords& coords) const;
 
+	virtual bool player_hears_field(const Widelands::Coords& coords) const = 0;
+
 private:
-	int32_t stereo_position(Widelands::Coords position_map, bool force);
+	void play_sound_effect(const NoteSound& note) const;
 	void resize_chat_overlay();
 	void roadb_add_overlay();
 	void roadb_remove_overlay();

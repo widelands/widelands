@@ -512,6 +512,17 @@ void InteractivePlayer::set_player_number(uint32_t const n) {
 void InteractivePlayer::cleanup_for_load() {
 }
 
+bool InteractivePlayer::player_hears_field(const Widelands::Coords& coords) const {
+	const Widelands::Player& plr = player();
+	if (plr.see_all()) {
+		return true;
+	}
+
+	const Widelands::Map& map = egbase().map();
+	const Widelands::Player::Field& player_field = plr.fields()[map.get_index(coords, map.get_width())];
+	return (player_field.vision > 1);
+}
+
 void InteractivePlayer::cmdSwitchPlayer(const std::vector<std::string>& args) {
 	if (args.size() != 2) {
 		DebugConsole::write("Usage: switchplayer <nr>");

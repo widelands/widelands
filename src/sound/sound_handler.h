@@ -181,7 +181,7 @@ public:
 
 	void play_fx(const std::string& fx_name,
 	             int32_t stereo_position,
-	             uint8_t priority);
+	             uint8_t priority, int distance = 0);
 
 	void register_songs(const std::string& dir, const std::string& basename);
 	void start_music(const std::string& songset_name, int fadein_ms = kMinimumMusicFade);

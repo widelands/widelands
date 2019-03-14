@@ -280,12 +280,6 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 		return false;
 	}
 
-	// TODO(unknown): what to do with fx that happen offscreen?
-	// TODO(unknown): reduce volume? reduce priority? other?
-	if (stereo_pos == kStereoMute) {
-		return false;
-	}
-
 	// We always play important sounds
 	if (priority == kFxPriorityAlwaysPlay) {
 		return true;
@@ -355,12 +349,12 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
  */
 void SoundHandler::play_fx(const std::string& fx_name,
                            int32_t const stereo_pos,
-                           uint8_t const priority) {
+                           uint8_t const priority, int distance) {
 	if (are_fx_disabled()) {
 		return;
 	}
 
-	assert(stereo_pos >= kStereoMute);
+	assert(stereo_pos >= kStereoLeft);
 	assert(stereo_pos <= kStereoRight);
 
 	if (fxs_.count(fx_name) == 0) {
@@ -380,6 +374,7 @@ void SoundHandler::play_fx(const std::string& fx_name,
 			log("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
 		} else {
 			Mix_SetPanning(chan, kStereoRight - stereo_pos, stereo_pos);
+			Mix_SetDistance(chan, distance);
 			Mix_Volume(chan, get_fx_volume());
 
 			// Access to active_fx_ is protected

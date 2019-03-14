@@ -39,7 +39,6 @@
 	static constexpr uint8_t kFxPriorityAllowMultiple = 128;
 	static constexpr uint8_t kFxPriorityAlwaysPlay = 255;
 
-	static constexpr int32_t kStereoMute = -1;
 	static constexpr int32_t kStereoLeft = 0;
 	static constexpr int32_t kStereoCenter = 128;
 	static constexpr int32_t kStereoRight = 254;

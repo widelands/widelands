@@ -335,7 +335,7 @@ void Player::play_message_sound(const Message* message) {
 		default:
 			soundfile = "message";
 		}
-		Notifications::publish(NoteSound(soundfile, message->position(), kFxPriorityAlwaysPlay, true));
+		Notifications::publish(NoteSound(soundfile, message->position(), kFxPriorityAlwaysPlay));
 	}
 }
 

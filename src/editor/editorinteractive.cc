@@ -405,6 +405,10 @@ void EditorInteractive::stop_painting() {
 	is_painting_ = false;
 }
 
+bool EditorInteractive::player_hears_field(const Widelands::Coords&) const {
+	return true;
+}
+
 void EditorInteractive::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_->set_perm_pressed(value);
 }

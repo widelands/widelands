@@ -31,23 +31,11 @@ struct NoteSound {
 	const std::string fx;
 	const Widelands::Coords coords;
 	const uint8_t priority;
-	const uint32_t stereo_position;
-	// Play the sound even if the coordinates are off-screen
-	const bool force;
 
-	NoteSound(const std::string& init_fx, Widelands::Coords init_coords, uint8_t init_priority, bool init_force = false)
+	NoteSound(const std::string& init_fx, Widelands::Coords init_coords, uint8_t init_priority)
 	   : fx(init_fx),
 	     coords(init_coords),
-	     priority(init_priority),
-	     stereo_position(std::numeric_limits<uint32_t>::max()),
-		 force(init_force) {
-	}
-	NoteSound(const std::string& init_fx, uint32_t init_stereo_position, uint8_t init_priority)
-	   : fx(init_fx),
-	     coords(Widelands::Coords::null()),
-	     priority(init_priority),
-	     stereo_position(init_stereo_position),
-		 force(false) {
+	     priority(init_priority) {
 	}
 };
 

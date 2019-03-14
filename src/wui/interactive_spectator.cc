@@ -179,6 +179,11 @@ Widelands::Player* InteractiveSpectator::get_player() const {
 	return nullptr;
 }
 
+
+bool InteractiveSpectator::player_hears_field(const Widelands::Coords&) const {
+	return true;
+}
+
 // Toolbar button callback functions.
 void InteractiveSpectator::exit_btn() {
 	if (is_multiplayer()) {
