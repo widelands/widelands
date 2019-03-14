@@ -1,5 +1,5 @@
 #version 120
 
 void main() {
-	gl_FragColor = vec4(.5, .2, .8, .9);
+	gl_FragColor = vec4(.0, .0, .0, .6);
 }
