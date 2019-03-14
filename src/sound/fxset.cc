@@ -75,17 +75,23 @@ uint32_t FXset::ticks_since_last_play() const {
 }
 
 Mix_Chunk* FXset::get_fx(uint32_t random) {
-	if (paths_.empty()) {
-		return nullptr;
-	}
-
-	if (fxs_.empty()) {
+	if (!paths_.empty()) {
+		// Load sounds from paths if this FX hasn't been played yet
 		for (const std::string& path : paths_) {
 			load_sound_file(path);
 		}
+		assert(fxs_.size() == paths_.size());
+		// We don't need the paths any more
+		paths_.clear();
 	}
+
+	assert(paths_.empty());
+
+	if (fxs_.empty()) {
+		return nullptr;
+	}
+
 	assert(!fxs_.empty());
-	assert(fxs_.size() == paths_.size());
 
 	last_used_ = SDL_GetTicks();
 

@@ -67,12 +67,8 @@ struct FXset {
 	 * disabled or no fx is registered
 	 */
 	Mix_Chunk* get_fx(uint32_t random);
-	bool empty() {
-		return paths_.empty();
-	}
 
 private:
-
 	/** Add exactly one file to this fxset.
 	 * \param path      the effect to be loaded
 	 * The file format must be ogg. Otherwise this call will complain and
@@ -87,7 +83,7 @@ private:
 	 */
 	uint32_t last_used_;
 
-	/// Filename paths for the physical sound files
+	/// Filename paths for the physical sound files. This will be cleared when the effects have been loaded on demand.
 	std::set<std::string> paths_;
 
 	/// The collection of sound effects, to be loaded on demand
