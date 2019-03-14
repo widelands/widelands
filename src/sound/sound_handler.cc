@@ -434,13 +434,13 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
  * \ref stop_music()
  * or \ref change_music() this function will block until the fadeout is complete
  */
-void SoundHandler::start_music(const std::string& songset_name, int32_t fadein_ms) {
+void SoundHandler::start_music(const std::string& songset_name, int fadein_ms) {
 	if (is_music_disabled()) {
 		return;
 	}
 
-	if (fadein_ms == 0)
-		fadein_ms = 250;  //  avoid clicks
+	// Avoid clicks
+	fadein_ms = std::min(fadein_ms, kMinimumMusicFade);
 
 	if (Mix_PlayingMusic())
 		change_music(songset_name, 0, fadein_ms);
@@ -461,13 +461,13 @@ void SoundHandler::start_music(const std::string& songset_name, int32_t fadein_m
  * \param fadeout_ms Song will fade from 100% to 0% during fadeout_ms
  *                   milliseconds starting from now.
  */
-void SoundHandler::stop_music(int32_t fadeout_ms) {
-	if (is_backend_disabled()) {
+void SoundHandler::stop_music(int fadeout_ms) {
+	if (is_music_disabled()) {
 		return;
 	}
 
-	if (fadeout_ms == 0)
-		fadeout_ms = 250;  //  avoid clicks
+	// Avoid clicks
+	fadeout_ms = std::min(fadeout_ms, kMinimumMusicFade);
 
 	Mix_FadeOutMusic(fadeout_ms);
 }
@@ -483,23 +483,21 @@ void SoundHandler::stop_music(int32_t fadeout_ms) {
  * be selected
  */
 void SoundHandler::change_music(const std::string& songset_name,
-                                int32_t const fadeout_ms,
-                                int32_t const fadein_ms) {
-	if (is_music_disabled()) {
+                                int const fadeout_ms,
+                                int const fadein_ms) {
+	if (is_backend_disabled()) {
 		return;
 	}
 
-	std::string s = songset_name;
+	if (!songset_name.empty()) {
+		current_songset_ = songset_name;
+	}
 
-	if (s == "")
-		s = current_songset_;
-	else
-		current_songset_ = s;
-
-	if (Mix_PlayingMusic())
+	if (Mix_PlayingMusic()) {
 		stop_music(fadeout_ms);
-	else
-		start_music(s, fadein_ms);
+	} else {
+		start_music(current_songset_, fadein_ms);
+	}
 }
 
 bool SoundHandler::is_music_disabled() const {

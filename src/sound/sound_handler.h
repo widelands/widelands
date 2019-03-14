@@ -160,6 +160,10 @@ extern class SoundHandler g_sound_handler;
 
 // This is used for SDL UserEvents to be handled in the main loop.
 enum { CHANGE_MUSIC };
+
+// Avoid clicks when starting/stopping music
+constexpr int kMinimumMusicFade = 250;
+
 class SoundHandler {
 public:
 	SoundHandler();
@@ -181,11 +185,11 @@ public:
 	             uint8_t priority = kFxPriorityAllowMultiple + kFxPriorityMedium);
 
 	void register_songs(const std::string& dir, const std::string& basename);
-	void start_music(const std::string& songset_name, int32_t fadein_ms = 0);
-	void stop_music(int32_t fadeout_ms = 0);
+	void start_music(const std::string& songset_name, int fadein_ms = kMinimumMusicFade);
+	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void change_music(const std::string& songset_name = std::string(),
-	                  int32_t fadeout_ms = 0,
-	                  int32_t fadein_ms = 0);
+	                  int fadeout_ms = kMinimumMusicFade,
+	                  int fadein_ms = kMinimumMusicFade);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
