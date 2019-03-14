@@ -24,7 +24,6 @@
 #include "base/log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "sound/sound_handler.h"
 
 /// Prepare infrastructure for reading song files from disk
 Songset::Songset() : m_(nullptr), rwops_(nullptr) {
@@ -54,27 +53,20 @@ void Songset::add_song(const std::string& filename) {
 	current_song_ = 0;
 }
 
-/** Get a song from the songset. Depending on
- * \ref SoundHandler::sound_random_order, the selection will either be random
- * or linear (after last song, will start again with first).
- * \return  a pointer to the chosen song; 0 if none was found, music is disabled
+/** Get a song from the songset.
+ * \return  a pointer to the chosen song; nullptr if none was found
  *          or an error occurred
  */
-Mix_Music* Songset::get_song() {
+Mix_Music* Songset::get_song(uint32_t random) {
 	std::string filename;
 
-	if (g_sound_handler.is_music_disabled() || songs_.empty()) {
+	if (songs_.empty()) {
 		return nullptr;
 	}
 
 	if (songs_.size() > 1) {
-		if (g_sound_handler.random_order_) {
-			// exclude current_song from playing two times in a row
-			current_song_ += 1 + g_sound_handler.rng_.rand() % (songs_.size() - 1);
-		} else {
-			++current_song_;
-		}
-		current_song_ = current_song_ % songs_.size();
+		// exclude current_song from playing two times in a row
+		current_song_ += 1 + random % (songs_.size() - 1);
 	}
 	filename = songs_.at(current_song_);
 
@@ -103,10 +95,10 @@ Mix_Music* Songset::get_song() {
 		m_ = Mix_LoadMUS_RW(rwops_, 0);
 
 	if (m_)
-		log("SoundHandler: loaded song \"%s\"\n", filename.c_str());
+		log("Songset: loaded song \"%s\"\n", filename.c_str());
 	else {
-		log("SoundHandler: loading song \"%s\" failed!\n", filename.c_str());
-		log("SoundHandler: %s\n", Mix_GetError());
+		log("Songset: loading song \"%s\" failed!\n", filename.c_str());
+		log("Songset: %s\n", Mix_GetError());
 	}
 
 	return m_;

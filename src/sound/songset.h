@@ -44,7 +44,7 @@ struct Songset {
 	~Songset();
 
 	void add_song(const std::string& filename);
-	Mix_Music* get_song();
+	Mix_Music* get_song(uint32_t random);
 	bool empty() {
 		return songs_.empty();
 	}

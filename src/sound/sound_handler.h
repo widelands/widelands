@@ -30,17 +30,12 @@
 #include <unistd.h>
 #endif
 
+#include <SDL_mutex.h>
+
 #include "random/random.h"
 #include "sound/constants.h"
 #include "sound/fxset.h"
-
-struct Songset;
-struct SDL_mutex;
-class FileRead;
-
-/// How many milliseconds in the past to consider for
-/// SoundHandler::play_or_not()
-#define SLIDING_WINDOW_SIZE 20000
+#include "sound/songset.h"
 
 extern class SoundHandler g_sound_handler;
 
@@ -90,7 +85,7 @@ extern class SoundHandler g_sound_handler;
  * from the building's/worker's configuration directory and store them in an
  * FXset for later access, similar to the way music is stored in songsets.
  * For effects, however, the selection is always random. Sound effects are kept
- * in memory at all times, to avoid delays from disk access.
+ * in memory at all times once they have been loaded, to avoid delays from disk access.
  *
  * The abovementioned sound effects are synchronized with a work program. It's
  * also possible to have sound effects that are synchronized with a
@@ -108,7 +103,7 @@ extern class SoundHandler g_sound_handler;
  *
  * Callbacks must use global(or static) functions \e but \e not normal member
  * functions of a class. If you must know why: ask google. But how can a
- * static function share data with an instance of it's own class? Usually not at
+ * static function share data with an instance of its own class? Usually not at
  * all.
  *
  * Fortunately, g_sound_handler already is a global variable,
@@ -166,9 +161,6 @@ extern class SoundHandler g_sound_handler;
 // This is used for SDL UserEvents to be handled in the main loop.
 enum { CHANGE_MUSIC };
 class SoundHandler {
-	friend struct Songset;
-	friend struct FXset;
-
 public:
 	SoundHandler();
 	~SoundHandler();
@@ -188,7 +180,7 @@ public:
 	             int32_t stereo_position,
 	             uint8_t priority = kFxPriorityAllowMultiple + kFxPriorityMedium);
 
-	void register_song(const std::string& dir, const std::string& basename);
+	void register_songs(const std::string& dir, const std::string& basename);
 	void start_music(const std::string& songset_name, int32_t fadein_ms = 0);
 	void stop_music(int32_t fadeout_ms = 0);
 	void change_music(const std::string& songset_name = std::string(),
@@ -216,7 +208,6 @@ public:
 		return MIX_MAX_VOLUME;
 	}
 
-
 private:
 	// Prints an error and disables the sound system.
 	void initialization_error(const char* const msg, bool quit_sdl);
@@ -241,12 +232,6 @@ private:
 	int32_t music_volume_;
 	/// Volume of sound effects (from 0 to get_max_volume())
 	int32_t fx_volume_;
-
-	/** Whether to play music in random order
-	 * \note Sound effects will \e always be selected at random (inside
-	 * their FXset, of course.
-	 */
-	bool random_order_;
 
 	/// A collection of songsets
 	using SongsetMap = std::map<std::string, std::unique_ptr<Songset>>;

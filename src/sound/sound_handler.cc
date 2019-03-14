@@ -35,13 +35,16 @@
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
-#include "sound/songset.h"
 
 namespace {
 
 constexpr int kDefaultMusicVolume = 64;
 constexpr int kDefaultFxVolume = 128;
 constexpr int kNumMixingChannels = 32;
+
+/// How many milliseconds in the past to consider for
+/// SoundHandler::play_or_not()
+constexpr uint32_t kSlidingWindowSize = 20000;
 
 }  // namespace
 
@@ -63,7 +66,6 @@ SoundHandler::SoundHandler()
      fx_are_disabled_(false),
      music_volume_(MIX_MAX_VOLUME),
      fx_volume_(MIX_MAX_VOLUME),
-     random_order_(true),
      fx_lock_(nullptr) {
 }
 
@@ -213,11 +215,9 @@ void SoundHandler::read_config() {
 		fx_volume_ = s.get_int("fx_volume", kDefaultFxVolume);
 	}
 
-	random_order_ = s.get_bool("sound_random_order", true);
-
-	register_song("music", "intro");
-	register_song("music", "menu");
-	register_song("music", "ingame");
+	register_songs("music", "intro");
+	register_songs("music", "menu");
+	register_songs("music", "ingame");
 }
 
 /** Load systemwide sound fx into memory.
@@ -285,14 +285,6 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 		return false;
 	}
 
-	bool allow_multiple = false;  //  convenience for easier code reading
-	float evaluation;             // Temporary to calculate single influences
-	float probability;            // Weighted total of all influences
-
-	// Probability that this fx gets played; initially set according to priority
-	//  float division! not integer
-	probability = (priority % kFxPriorityAllowMultiple) / static_cast<float>(kFxPriorityAllowMultiple);
-
 	// TODO(unknown): check for a free channel
 
 	if (priority == kFxPriorityAlwaysPlay) {
@@ -300,32 +292,31 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 		return true;
 	}
 
-	if (priority >= kFxPriorityAllowMultiple)
-		allow_multiple = true;
+	// Do not run multiple instances of the same sound effect if the priority is too low
+	bool too_many_playing = false;
+	if (priority < kFxPriorityAllowMultiple) {
+		// Access to active_fx_ is protected because it can
+		// be accessed from callback
+		if (fx_lock_) {
+			SDL_LockMutex(fx_lock_);
+		}
 
-	// Find out if an fx called fx_name is already running
-	bool already_running = false;
-
-	// Access to active_fx_ is protected because it can
-	// be accessed from callback
-	if (fx_lock_)
-		SDL_LockMutex(fx_lock_);
-
-	// starting a block, so I can define a local type for iterating
-	{
+		// Find out if an fx called fx_name is already running
 		for (const auto& fx_pair : active_fx_) {
 			if (fx_pair.second == fx_name) {
-				already_running = true;
+				too_many_playing = true;
 				break;
 			}
 		}
 	}
 
-	if (fx_lock_)
+	if (fx_lock_) {
 		SDL_UnlockMutex(fx_lock_);
+	}
 
-	if (!allow_multiple && already_running)
+	if (too_many_playing) {
 		return false;
+	}
 
 	// TODO(unknown): long time since any play increases weighted_priority
 	// TODO(unknown): high general frequency reduces weighted priority
@@ -333,14 +324,21 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 
 	uint32_t const ticks_since_last_play = fxs_[fx_name]->ticks_since_last_play();
 
+	// Weighted total probability that this fx gets played; initially set according to priority
+	//  float division! not integer
+	float probability = (priority % kFxPriorityAllowMultiple) / static_cast<float>(kFxPriorityAllowMultiple);
+
+	// Temporary to calculate single influences
+	float evaluation = 1.0f;
+
 	//  reward an fx for being silent
-	if (ticks_since_last_play > SLIDING_WINDOW_SIZE) {
-		evaluation = 1;  //  arbitrary value; 0 -> no change, 1 -> probability = 1
+	if (ticks_since_last_play > kSlidingWindowSize) {
+		evaluation = 1.0f;  //  arbitrary value; 0 -> no change, 1 -> probability = 1
 
 		//  "decrease improbability"
-		probability = 1 - ((1 - probability) * (1 - evaluation));
+		probability = 1.0f - ((1.0f - probability) * (1.0f - evaluation));
 	} else {  // Penalize an fx for playing in short succession
-		evaluation = static_cast<float>(ticks_since_last_play) / SLIDING_WINDOW_SIZE;
+		evaluation = static_cast<float>(ticks_since_last_play) / kSlidingWindowSize;
 		probability *= evaluation;  //  decrease probability
 	}
 
@@ -407,16 +405,14 @@ void SoundHandler::play_fx(const std::string& fx_name,
  * played. The song will automatically be removed from memory when it has
  * finished playing.
  */
-void SoundHandler::register_song(const std::string& dir, const std::string& basename) {
+void SoundHandler::register_songs(const std::string& dir, const std::string& basename) {
 	if (is_backend_disabled()) {
 		return;
 	}
 
 	assert(g_fs);
 
-	FilenameSet files;
-
-	files = filter(g_fs->list_directory(dir), [&basename](const std::string& fn) {
+	FilenameSet files = filter(g_fs->list_directory(dir), [&basename](const std::string& fn) {
 		const std::string only_filename = FileSystem::fs_filename(fn.c_str());
 		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
 	});
@@ -452,7 +448,7 @@ void SoundHandler::start_music(const std::string& songset_name, int32_t fadein_m
 	if (songs_.count(songset_name) == 0)
 		log("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
 	else {
-		if (Mix_Music* const m = songs_[songset_name]->get_song()) {
+		if (Mix_Music* const m = songs_[songset_name]->get_song(rng_.rand())) {
 			Mix_FadeInMusic(m, 1, fadein_ms);
 			current_songset_ = songset_name;
 		} else
