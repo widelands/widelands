@@ -285,10 +285,8 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 		return false;
 	}
 
-	// TODO(unknown): check for a free channel
-
+	// We always play important sounds
 	if (priority == kFxPriorityAlwaysPlay) {
-		// TODO(unknown): if there is no free channel, kill a running fx and complain
 		return true;
 	}
 
