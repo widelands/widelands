@@ -14,6 +14,7 @@ Animations are defined as Lua tables. All map objects have a mandatory ``idle`` 
          sound_effect = {
             directory = "sound/foo",
             name = "bar",
+            priority = 128
          },
       },
       working = ...
@@ -38,7 +39,11 @@ Let's have a detailed look at the ``idle`` animation:
    specify the float value here. For example, if the animation images are 2.5 times the size of what should be blitted at default zoom, use ``scale = 2.5``.
 
 **sound_effect**
-   *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play them in sequence.
+   *Optional*. Our example will look for the sound files ``bar_00.ogg`` through ``bar_99.ogg`` in the directory ``data/sound/foo`` and play them in sequence. The priority is optional and its range is:
+
+   * **0-127:** Probability between ``0.0`` and ``1.0``, only one instance can be playing at any time
+   * **128-254:** Probability between ``0.0`` and ``1.0``, many instances can be playing at any time
+   * **255:** Always play
 
 
 Directional Animations

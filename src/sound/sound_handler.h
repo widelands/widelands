@@ -31,6 +31,7 @@
 #endif
 
 #include "random/random.h"
+#include "sound/constants.h"
 #include "sound/fxset.h"
 
 struct Songset;
@@ -185,7 +186,7 @@ public:
 
 	void play_fx(const std::string& fx_name,
 	             int32_t stereo_position,
-	             uint8_t priority = FXset::kPriorityAllowMultiple + FXset::kPriorityMedium);
+	             uint8_t priority = kFxPriorityAllowMultiple + kFxPriorityMedium);
 
 	void register_song(const std::string& dir, const std::string& basename);
 	void start_music(const std::string& songset_name, int32_t fadein_ms = 0);

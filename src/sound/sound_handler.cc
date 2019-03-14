@@ -279,28 +279,28 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 		return false;
 	}
 
+	// TODO(unknown): what to do with fx that happen offscreen?
+	// TODO(unknown): reduce volume? reduce priority? other?
+	if (stereo_pos == kStereoMute) {
+		return false;
+	}
+
 	bool allow_multiple = false;  //  convenience for easier code reading
 	float evaluation;             // Temporary to calculate single influences
 	float probability;            // Weighted total of all influences
 
 	// Probability that this fx gets played; initially set according to priority
 	//  float division! not integer
-	probability = (priority % FXset::kPriorityAllowMultiple) / static_cast<float>(FXset::kPriorityAllowMultiple);
-
-	// TODO(unknown): what to do with fx that happen offscreen?
-	// TODO(unknown): reduce volume? reduce priority? other?
-	if (stereo_pos == -1) {
-		return false;
-	}
+	probability = (priority % kFxPriorityAllowMultiple) / static_cast<float>(kFxPriorityAllowMultiple);
 
 	// TODO(unknown): check for a free channel
 
-	if (priority == FXset::kPriorityAlwaysPlay) {
+	if (priority == kFxPriorityAlwaysPlay) {
 		// TODO(unknown): if there is no free channel, kill a running fx and complain
 		return true;
 	}
 
-	if (priority >= FXset::kPriorityAllowMultiple)
+	if (priority >= kFxPriorityAllowMultiple)
 		allow_multiple = true;
 
 	// Find out if an fx called fx_name is already running
@@ -346,7 +346,7 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 
 	// finally: the decision
 	// float division! not integer
-	return (rng_.rand() % FXset::kPriorityAlwaysPlay) / static_cast<float>(FXset::kPriorityAlwaysPlay) <= probability;
+	return (rng_.rand() % kFxPriorityAlwaysPlay) / static_cast<float>(kFxPriorityAlwaysPlay) <= probability;
 }
 
 /** \overload
@@ -363,8 +363,8 @@ void SoundHandler::play_fx(const std::string& fx_name,
 		return;
 	}
 
-	assert(stereo_pos >= -1);
-	assert(stereo_pos <= 254);
+	assert(stereo_pos >= kStereoMute);
+	assert(stereo_pos <= kStereoRight);
 
 	if (fxs_.count(fx_name) == 0) {
 		log("SoundHandler: sound effect \"%s\" does not exist!\n", fx_name.c_str());
@@ -382,7 +382,7 @@ void SoundHandler::play_fx(const std::string& fx_name,
 		if (chan == -1) {
 			log("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
 		} else {
-			Mix_SetPanning(chan, 254 - stereo_pos, stereo_pos);
+			Mix_SetPanning(chan, kStereoRight - stereo_pos, stereo_pos);
 			Mix_Volume(chan, get_fx_volume());
 
 			// Access to active_fx_ is protected

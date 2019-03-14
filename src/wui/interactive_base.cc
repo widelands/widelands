@@ -732,8 +732,8 @@ void InteractiveBase::log_message(const std::string& message) const {
 /** Calculate  the position of an effect in relation to the visible part of the
  * screen.
  * \param position  where the event happened (map coordinates)
- * \return position in widelands' game window: left=0, right=254, not in
- * viewport = -1
+ * \return position in widelands' game window: left=kStereoLeft, right=kStereoRight, not in
+ * viewport = kStereoMute
  * \note This function can also be used to check whether a logical coordinate is
  * visible at all
  */
@@ -744,10 +744,10 @@ int32_t InteractiveBase::stereo_position(Widelands::Coords const position_map) {
 	// left corner of window or fullscreen
 	const MapView::ViewArea area = map_view_.view_area();
 	if (!area.contains(position_map)) {
-		return -1;
+		return kStereoMute;
 	}
 	const Vector2f position_pix = area.move_inside(position_map);
-	return static_cast<int>((position_pix.x - area.rect().x) * 254 / area.rect().w);
+	return static_cast<int>((position_pix.x - area.rect().x) * kStereoRight / area.rect().w);
 }
 
 // Repositions the chat overlay

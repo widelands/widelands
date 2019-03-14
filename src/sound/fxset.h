@@ -35,26 +35,8 @@
  * from the outside
  */
 struct FXset {
-	/** How important is it to play the effect even when others are running
-	 * already?
-	 *
-	 * \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
-	 *
-	 * Value 0-127: probability between 0.0 and 1.0, only one instance can
-	 * be playing at any time
-	 *
-	 * Value 128-254: probability between 0.0 and 1.0, many instances can
-	 * be playing at any time
-	 *
-	 * Value 255: always play; unconditional
-	 */
-	static constexpr uint8_t kPriorityMedium = 63;
-	static constexpr uint8_t kPriorityAllowMultiple = 128;
-	static constexpr uint8_t kPriorityAlwaysPlay = 255;
-
 	explicit FXset(const std::string& directory, const std::string& base_filename);
 	~FXset();
-
 
 	/**
 	 * Number of ticks since this FXSet was last played

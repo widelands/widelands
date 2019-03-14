@@ -713,13 +713,13 @@ void Panel::die() {
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click() {
-	g_sound_handler.play_fx("click", 128, FXset::kPriorityAlwaysPlay);
+	g_sound_handler.play_fx("click", kStereoCenter, kFxPriorityAlwaysPlay);
 }
 void Panel::play_new_chat_message() {
-	g_sound_handler.play_fx("lobby_chat", 128, FXset::kPriorityAlwaysPlay);
+	g_sound_handler.play_fx("lobby_chat", kStereoCenter, kFxPriorityAlwaysPlay);
 }
 void Panel::play_new_chat_member() {
-	g_sound_handler.play_fx("lobby_freshmen", 128, FXset::kPriorityAlwaysPlay);
+	g_sound_handler.play_fx("lobby_freshmen", kStereoCenter, kFxPriorityAlwaysPlay);
 }
 
 /**

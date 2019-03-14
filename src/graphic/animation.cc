@@ -90,10 +90,9 @@ private:
 	std::vector<const Image*> frames_;
 	std::vector<const Image*> pcmasks_;
 
-	// name of sound effect that will be played at frame 0.
-	// TODO(sirver): this should be done using playsound in a program instead of
-	// binding it to the animation.
+	// Name of sound effect that will be played at frame 0.
 	std::string sound_effect_;
+	int32_t sound_priority_;
 	bool play_once_;
 };
 
@@ -102,7 +101,8 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      hasplrclrs_(false),
      scale_(1),
-     play_once_(false) {
+     play_once_(false),
+	 sound_priority_(kFxPriorityAllowMultiple + kFxPriorityMedium) {
 	try {
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
@@ -111,6 +111,10 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			const std::string directory = sound_effects->get_string("directory");
 			sound_effect_ = directory + g_fs->file_separator() + name;
 			g_sound_handler.register_fx(directory, name, sound_effect_);
+
+			if (sound_effects->has_key<std::string>("priority")) {
+				sound_priority_ = sound_effects->get_int("priority");
+			}
 		}
 
 		if (table.has_key("play_once")) {
@@ -246,7 +250,7 @@ void NonPackedAnimation::trigger_sound(uint32_t time, const Widelands::Coords& c
 	const uint32_t framenumber = current_frame(time);
 
 	if (framenumber == 0) {
-		Notifications::publish(NoteSound(sound_effect_, coords, 1));
+		Notifications::publish(NoteSound(sound_effect_, coords, sound_priority_));
 	}
 }
 

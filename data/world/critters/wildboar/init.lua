@@ -8,6 +8,7 @@ animations = {
       sound_effect = {
          directory = "sound/animals",
          name = "boar",
+         priority = 128;
       },
    },
 }
