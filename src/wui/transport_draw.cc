@@ -37,7 +37,6 @@ void Flag::draw(uint32_t gametime,
 	                     {-6.f, -3.f}, {-1.f, -2.f}, {3.f, -2.f}, {8.f, -3.f}};
 
 	const RGBColor& player_color = owner().get_playercolor();
-	// NOCOM
 	dst->blit_animation(
 	   point_on_dst, scale, owner().tribe().flag_animation(), gametime - animstart_, &player_color);
 
