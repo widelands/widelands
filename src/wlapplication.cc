@@ -763,8 +763,6 @@ bool WLApplication::init_settings() {
 	s.get_bool("dock_windows_to_edges");
 	s.get_bool("write_syncstreams");
 	// Undocumented on command line, appears in game options
-	s.get_bool("sound_at_message");
-	// Undocumented on command line, appears in game options
 	s.get_bool("transparent_chat");
 	// Undocumented. Unique ID used to allow the metaserver to recognize players
 	s.get_string("uuid");

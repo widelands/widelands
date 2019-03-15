@@ -85,11 +85,7 @@ void show_usage(const std::string& build_id, const std::string& build_type) {
 	               "                      Port number of the metaserver for internet gaming.")
 	          << endl
 	          << endl
-// NOCOM document
-	          << _("Sound options:") << endl
 	          << _(" --nosound            Starts the game with sound disabled.") << endl
-	          << _(" --disable_fx         Disable sound effects.") << endl
-	          << _(" --disable_music      Disable music.") << endl
 	          << endl
 	          << _(" --nozip              Do not save files as binary zip archives.") << endl
 	          << endl
