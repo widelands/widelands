@@ -32,11 +32,11 @@ SoundOptions::SoundOptions(UI::Panel& parent)
 
 	set_inner_spacing(kSpacing);
 
-	add(new SoundControl(this, _("Music"), SoundType::kMusic), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, _("Chat Messages"), SoundType::kChat), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, _("Game Messages"), SoundType::kMessage), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, _("User Interface"), SoundType::kUI), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, _("Ambient Sounds"), SoundType::kAmbient), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "Music"), SoundType::kMusic), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "Chat Messages"), SoundType::kChat), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "Game Messages"), SoundType::kMessage), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "User Interface"), SoundType::kUI), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient), UI::Box::Resizing::kFullSize);
 
 	UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
 	   this, 0, 0, 100, 0, UI::PanelStyle::kWui,

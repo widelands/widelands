@@ -39,7 +39,7 @@ public:
 private:
 	UI::Checkbox enable_;
 	UI::HorizontalSlider volume_;
-	SoundType type_;
+	const SoundType type_;
 };
 
 #endif  // end of include guard: WL_WUI_SOUND_CONTROL_H

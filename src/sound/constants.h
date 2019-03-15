@@ -35,13 +35,16 @@
 	 *
 	 * Value 255: always play; unconditional
 	 */
-	static constexpr uint8_t kFxPriorityMedium = 63;
-	static constexpr uint8_t kFxPriorityAllowMultiple = 128;
-	static constexpr uint8_t kFxPriorityAlwaysPlay = 255;
+	constexpr uint8_t kFxPriorityMedium = 63;
+	constexpr uint8_t kFxPriorityAllowMultiple = 128;
+	constexpr uint8_t kFxPriorityAlwaysPlay = 255;
 
-	static constexpr int32_t kStereoLeft = 0;
-	static constexpr int32_t kStereoCenter = 128;
-	static constexpr int32_t kStereoRight = 254;
+	constexpr int32_t kStereoLeft = 0;
+	constexpr int32_t kStereoCenter = 128;
+	constexpr int32_t kStereoRight = 254;
+
+	constexpr int kSoundMaxDistance = 255;
+	constexpr float kSoundDistanceDivisor = 4.f;
 
 	enum class SoundType {
 		kUI,

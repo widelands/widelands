@@ -489,6 +489,7 @@ void InteractiveBase::mainview_move(const Vector2f& difference) {
 		minimap_->set_view(map_view_.view_area().rect());
 	}
 	if (difference != Vector2f::zero()) {
+		// NOCOM
 		g_sound_handler.shift_fx_stereo_pos(0 - static_cast<int>(difference.x));
 	}
 }
@@ -734,31 +735,23 @@ void InteractiveBase::log_message(const std::string& message) const {
  * Plays a sound effect positioned according to the map coordinates in the note.
  */
 void InteractiveBase::play_sound_effect(const NoteSound& note) const {
+	if (!g_sound_handler.is_sound_enabled(note.type)) {
+		return;
+	}
+	// NOCOM
 	if (note.coords != Widelands::Coords::null() && player_hears_field(note.coords)) {
 		// Viewpoint is the point of the map in pixel which is shown in the upper
 		// left corner of window or fullscreen
 		const MapView::ViewArea area = map_view_.view_area();
 		const Vector2f position_pix = area.find_pixel_for_coordinates(note.coords);
-		const int scaled_x_pos = static_cast<int>((position_pix.x - area.rect().x) * kStereoRight / area.rect().w);
-		const int scaled_y_pos = static_cast<int>((position_pix.y - area.rect().y) * kStereoRight / area.rect().h);
-		const int stereo_pos = math::clamp(scaled_x_pos, kStereoLeft, kStereoRight);
+		const int stereo_pos = static_cast<int>((position_pix.x - area.rect().x) * kStereoRight / area.rect().w);
 
-		constexpr int kMaxDistance = 255;
-		int distance = 0;
-		if (scaled_x_pos < 0) {
-			distance -= scaled_x_pos;
-		} else if (scaled_x_pos > kStereoRight) {
-			distance = scaled_x_pos - kStereoRight;
-		}
-		if (scaled_y_pos < 0) {
-			distance = (distance - scaled_y_pos) / 2;
-		} else if (scaled_y_pos > kMaxDistance / 2) {
-			distance = (distance + (scaled_y_pos - kMaxDistance)) / 2;
-		}
-		distance = (note.priority == kFxPriorityAlwaysPlay) ? (math::clamp(distance, 0, kMaxDistance) / 2) : distance;
+		int distance = MapviewPixelFunctions::calc_pix_distance(egbase().map(), area.rect().center(), position_pix) / kSoundDistanceDivisor;
 
-		if (distance <= kMaxDistance) {
-			g_sound_handler.play_fx(note.type, note.fx, stereo_pos, note.priority, distance);
+		distance = (note.priority == kFxPriorityAlwaysPlay) ? (math::clamp(distance, 0, kSoundMaxDistance) / 2) : distance;
+
+		if (distance < kSoundMaxDistance) {
+			g_sound_handler.play_fx(note.type, note.fx, math::clamp(stereo_pos, kStereoLeft, kStereoRight), note.priority, distance);
 		}
 	}
 }

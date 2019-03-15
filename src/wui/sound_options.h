@@ -22,7 +22,7 @@
 #include "ui_basic/box.h"
 
 /**
- * A panel with all sound options.
+ * A box with all sound options.
  */
 struct SoundOptions : public UI::Box {
 	SoundOptions(UI::Panel& parent);
