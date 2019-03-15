@@ -270,7 +270,6 @@ void SoundHandler::register_fx(const std::string& dir,
  */
 // TODO(unknown): What is the selection algorithm? cf class documentation
 bool SoundHandler::play_or_not(const std::string& fx_name,
-                               int32_t const stereo_pos,
                                uint8_t const priority) {
 	if (are_fx_disabled()) {
 		return false;
@@ -363,7 +362,7 @@ void SoundHandler::play_fx(const std::string& fx_name,
 	}
 
 	// See if the FX should be played
-	if (!play_or_not(fx_name, stereo_pos, priority)) {
+	if (!play_or_not(fx_name, priority)) {
 		return;
 	}
 
@@ -387,6 +386,11 @@ void SoundHandler::play_fx(const std::string& fx_name,
 		}
 	} else
 		log("SoundHandler: sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
+}
+
+void SoundHandler::shift_fx_stereo_pos(int32_t stereo_position) {
+	log("NOCOM diff (%d)\n", stereo_position);
+	// NOCOM implement
 }
 
 /** Load a background song. One "song" can consist of several audio files named

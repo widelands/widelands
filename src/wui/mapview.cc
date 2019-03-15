@@ -388,9 +388,10 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
+		const Vector2f difference = MapviewPixelFunctions::calc_pix_difference(map_, view_.viewpoint, target_view.viewpoint);
 		view_ = target_view;
 		MapviewPixelFunctions::normalize_pix(map_, &view_.viewpoint);
-		changeview();
+		changeview(difference);
 		return;
 	}
 

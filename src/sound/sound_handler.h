@@ -182,6 +182,7 @@ public:
 	void play_fx(const std::string& fx_name,
 	             int32_t stereo_position,
 	             uint8_t priority, int distance = 0);
+	void shift_fx_stereo_pos(int32_t stereo_position);
 
 	void register_songs(const std::string& dir, const std::string& basename);
 	void start_music(const std::string& songset_name, int fadein_ms = kMinimumMusicFade);
@@ -215,7 +216,7 @@ private:
 	// Prints an error and disables the sound system.
 	void initialization_error(const char* const msg, bool quit_sdl);
 
-	bool play_or_not(const std::string& fx_name, int32_t stereo_position, uint8_t priority);
+	bool play_or_not(const std::string& fx_name, uint8_t priority);
 
 	/** Can sounds be played?
 	 * true = they mustn't be played (e.g. because hardware is missing)
