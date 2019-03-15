@@ -804,7 +804,7 @@ ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDe
 		} else
 			priority = 127;
 
-		g_sound_handler.register_fx(FxType::kMap,
+		g_sound_handler.register_fx(SoundType::kAmbient,
 		   FileSystem::fs_dirname(name), FileSystem::fs_filename(name.c_str()), name);
 	} catch (const WException& e) {
 		throw GameDataError("playsound: %s", e.what());
@@ -815,7 +815,7 @@ ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDe
  * Whether the effect actually gets played
  * is decided only by the sound server*/
 void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
-	Notifications::publish(NoteSound(FxType::kMap, name, immovable.get_position(), priority));
+	Notifications::publish(NoteSound(SoundType::kAmbient, name, immovable.get_position(), priority));
 	immovable.program_step(game);
 }
 

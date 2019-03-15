@@ -26,7 +26,6 @@
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
 #include "logic/player.h"
-#include "sound/constants.h"
 #include "sound/note_sound.h"
 
 namespace Widelands {
@@ -73,7 +72,7 @@ bool PartiallyFinishedBuilding::init(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase))
 		request_builder(*game);
 
-	Notifications::publish(NoteSound(FxType::kMap, "create_construction_site", position_, kFxPriorityAlwaysPlay));
+	Notifications::publish(NoteSound(SoundType::kAmbient, "create_construction_site", position_, kFxPriorityAlwaysPlay));
 	return true;
 }
 

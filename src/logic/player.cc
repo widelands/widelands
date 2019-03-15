@@ -53,7 +53,6 @@
 #include "logic/map_objects/tribes/warehouse.h"
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
-#include "sound/constants.h"
 #include "sound/note_sound.h"
 #include "wui/interactive_player.h"
 
@@ -335,7 +334,7 @@ void Player::play_message_sound(const Message* message) {
 		default:
 			soundfile = "message";
 		}
-		Notifications::publish(NoteSound(FxType::kMessage, soundfile, message->position(), kFxPriorityAlwaysPlay));
+		Notifications::publish(NoteSound(SoundType::kMessage, soundfile, message->position(), kFxPriorityAlwaysPlay));
 	}
 }
 

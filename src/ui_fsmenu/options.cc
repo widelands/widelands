@@ -697,8 +697,8 @@ void OptionsCtrl::save_options() {
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
-	g_sound_handler.set_disable_music(!opt.music);
-	g_sound_handler.set_disable_fx(!opt.fx);
+	//g_sound_handler.set_enable_sound(SoundType::kMusic, opt.music);
+	// NOCOM g_sound_handler.set_enable_fx(!opt.fx);
 
 	// Now write to file
 	g_options.write(kConfigFile.c_str(), true);

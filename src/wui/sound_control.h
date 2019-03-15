@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017-2019 by the Widelands Development Team
+ * Copyright (C) 2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,29 +17,29 @@
  *
  */
 
-#ifndef WL_SOUND_NOTE_SOUND_H
-#define WL_SOUND_NOTE_SOUND_H
+#ifndef WL_WUI_SOUND_CONTROL_H
+#define WL_WUI_SOUND_CONTROL_H
 
 #include <string>
 
-#include "logic/widelands_geometry.h"
-#include "notifications/note_ids.h"
-#include "notifications/notifications.h"
 #include "sound/constants.h"
+#include "ui_basic/box.h"
+#include "ui_basic/checkbox.h"
+#include "ui_basic/slider.h"
+#include "ui_basic/textarea.h"
 
-struct NoteSound {
-	CAN_BE_SENT_AS_NOTE(NoteId::Sound)
-	const SoundType type;
-	const std::string fx;
-	const Widelands::Coords coords;
-	const uint8_t priority;
+class SoundControl : public UI::Box {
+public:
+	SoundControl(UI::Box* parent, const std::string& title, SoundType type);
+	~SoundControl() override;
 
-	NoteSound(SoundType init_type, const std::string& init_fx, Widelands::Coords init_coords, uint8_t init_priority)
-	   : type(init_type),
-		 fx(init_fx),
-	     coords(init_coords),
-	     priority(init_priority) {
-	}
+	void enable_changed(bool on);
+	void volume_changed(int32_t value);
+
+private:
+	UI::Checkbox enable_;
+	UI::HorizontalSlider volume_;
+	SoundType type_;
 };
 
-#endif  // end of include guard: WL_SOUND_NOTE_SOUND_H
+#endif  // end of include guard: WL_WUI_SOUND_CONTROL_H

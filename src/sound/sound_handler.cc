@@ -35,7 +35,6 @@
 #include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
-#include "sound/constants.h"
 
 namespace {
 
@@ -46,7 +45,6 @@ constexpr int kNumMixingChannels = 32;
 /// How many milliseconds in the past to consider for
 /// SoundHandler::play_or_not()
 constexpr uint32_t kSlidingWindowSize = 20000;
-
 }  // namespace
 
 /** The global \ref SoundHandler object
@@ -63,11 +61,14 @@ SoundHandler g_sound_handler;
  */
 SoundHandler::SoundHandler()
    : backend_is_disabled_(false),
-     music_is_disabled_(false),
-     fx_are_disabled_(false),
-     music_volume_(MIX_MAX_VOLUME),
-     fx_volume_(MIX_MAX_VOLUME),
+	 sound_options_{
+{SoundType::kUI, SoundOptions("ui")},
+{SoundType::kMessage, SoundOptions("message")},
+{SoundType::kChat, SoundOptions("chat")},
+{SoundType::kAmbient, SoundOptions("ambient")},
+{SoundType::kMusic, SoundOptions("music")}},
      fx_lock_(nullptr) {
+
 }
 
 /// Housekeeping: unset hooks. Audio data will be freed automagically by the
@@ -148,7 +149,7 @@ void SoundHandler::init() {
 	Mix_HookMusicFinished(SoundHandler::music_finished_callback);
 	Mix_ChannelFinished(SoundHandler::fx_finished_callback);
 	load_system_sounds();
-	Mix_VolumeMusic(music_volume_);  //  can not do this before InitSubSystem
+	Mix_VolumeMusic(sound_options_.at(SoundType::kMusic).volume);  //  can not do this before InitSubSystem
 
 	if (fx_lock_ == nullptr)
 		fx_lock_ = SDL_CreateMutex();
@@ -207,13 +208,53 @@ void SoundHandler::shutdown() {
  *
  */
 void SoundHandler::read_config() {
-	Section& s = g_options.pull_section("global");
+	if (is_backend_disabled()) {
+		return;
+	}
 
-	if (!is_backend_disabled()) {
-		set_disable_music(s.get_bool("disable_music", false));
-		set_disable_fx(s.get_bool("disable_fx", false));
-		music_volume_ = s.get_int("music_volume", kDefaultMusicVolume);
-		fx_volume_ = s.get_int("fx_volume", kDefaultFxVolume);
+	// TODO(GunChleoc): Compatibility, still using this to avoid getting bug reports. Remove after build 21.
+	const bool is_legacy = g_options.get_section("sound") == nullptr;
+	Section& sound = g_options.pull_section("sound");
+
+	if (is_legacy) {
+		Section& global = g_options.pull_section("global");
+
+		const bool legacy_disable_fx = global.get_bool("disable_fx", true);
+		const int legacy_fx_volume = global.get_int("fx_volume", kDefaultFxVolume);
+
+		for (auto& option : sound_options_) {
+			switch (option.first) {
+			case SoundType::kMusic:
+				option.second.volume = global.get_int("music_volume", kDefaultMusicVolume);
+				option.second.enabled = !global.get_bool("disable_music", true);
+				break;
+			case SoundType::kChat:
+				option.second.volume = legacy_fx_volume;
+				option.second.enabled = global.get_bool("sound_at_message", true);
+				break;
+			default:
+				option.second.volume = legacy_fx_volume;
+				option.second.enabled = !legacy_disable_fx;
+				break;
+			}
+
+			const std::string enable_name = "enable_" + option.second.name;
+			sound.set_bool(enable_name.c_str(), option.second.enabled);
+			const std::string volume_name = "volume_" + option.second.name;
+			sound.set_int(volume_name.c_str(), option.second.volume);
+		}
+	}
+
+	for (auto& option : sound_options_) {
+		switch (option.first) {
+		case SoundType::kMusic:
+			option.second.volume = sound.get_int(("volume_" + option.second.name).c_str(), kDefaultMusicVolume);
+			break;
+		default:
+			option.second.volume = sound.get_int(("volume_" + option.second.name).c_str(), kDefaultFxVolume);
+			break;
+		}
+		option.second.enabled = sound.get_bool(("enable_" + option.second.name).c_str(), true);
 	}
 
 	register_songs("music", "intro");
@@ -226,13 +267,13 @@ void SoundHandler::read_config() {
  * their respective init-file parsers
  */
 void SoundHandler::load_system_sounds() {
-	register_fx(FxType::kUI, "sound", "click", "click");
-	register_fx(FxType::kMap, "sound", "create_construction_site", "create_construction_site");
-	register_fx(FxType::kMessage, "sound", "message", "message");
-	register_fx(FxType::kMessage, "sound/military", "under_attack", "military/under_attack");
-	register_fx(FxType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
-	register_fx(FxType::kChat, "sound", "lobby_chat", "lobby_chat");
-	register_fx(FxType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
+	register_fx(SoundType::kUI, "sound", "click", "click");
+	register_fx(SoundType::kAmbient, "sound", "create_construction_site", "create_construction_site");
+	register_fx(SoundType::kMessage, "sound", "message", "message");
+	register_fx(SoundType::kMessage, "sound/military", "under_attack", "military/under_attack");
+	register_fx(SoundType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
+	register_fx(SoundType::kChat, "sound", "lobby_chat", "lobby_chat");
+	register_fx(SoundType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
 }
 
 /**
@@ -256,7 +297,7 @@ void SoundHandler::disable_backend() {
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
  */
-void SoundHandler::register_fx(FxType type, const std::string& dir,
+void SoundHandler::register_fx(SoundType type, const std::string& dir,
                                      const std::string& basename,
                                      const std::string& fx_name) {
 	if (is_backend_disabled() || fxs_[type].count(fx_name) > 0) {
@@ -269,18 +310,16 @@ void SoundHandler::register_fx(FxType type, const std::string& dir,
  * (to avoid "sonic overload").
  */
 // TODO(unknown): What is the selection algorithm? cf class documentation
-bool SoundHandler::play_or_not(FxType type, const std::string& fx_name,
+bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
                                uint8_t const priority) {
-	if (are_fx_disabled()) {
-		return false;
-	}
+	assert(!backend_is_disabled_ && is_sound_enabled(type));
 
 	if (fxs_[type].count(fx_name) == 0) {
 		return false;
 	}
 
 	switch (type) {
-	case FxType::kMap:
+	case SoundType::kAmbient:
 		break;
 	default:
 		// We always play Ui, chat and system sounds
@@ -354,10 +393,10 @@ bool SoundHandler::play_or_not(FxType type, const std::string& fx_name,
  * \param priority         How important is it that this FX actually gets
  *                         played? (see \ref FXset::priority_)
  */
-void SoundHandler::play_fx(FxType type, const std::string& fx_name,
+void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
                            int32_t const stereo_pos,
                            uint8_t const priority, int distance) {
-	if (are_fx_disabled()) {
+	if (backend_is_disabled_ || !is_sound_enabled(type)) {
 		return;
 	}
 
@@ -382,7 +421,7 @@ void SoundHandler::play_fx(FxType type, const std::string& fx_name,
 		} else {
 			Mix_SetPanning(chan, kStereoRight - stereo_pos, stereo_pos);
 			Mix_SetDistance(chan, distance);
-			Mix_Volume(chan, get_fx_volume());
+			Mix_Volume(chan, get_volume(type));
 
 			// Access to active_fx_ is protected
 			// because it can be accessed from callback
@@ -441,12 +480,14 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
  * or \ref change_music() this function will block until the fadeout is complete
  */
 void SoundHandler::start_music(const std::string& songset_name, int fadein_ms) {
-	if (is_music_disabled()) {
+	if (backend_is_disabled_ || !is_sound_enabled(SoundType::kMusic)) {
 		return;
 	}
 
+	log("Do start music\n");
+
 	// Avoid clicks
-	fadein_ms = std::min(fadein_ms, kMinimumMusicFade);
+	fadein_ms = std::max(fadein_ms, kMinimumMusicFade);
 
 	if (Mix_PlayingMusic())
 		change_music(songset_name, 0, fadein_ms);
@@ -460,7 +501,7 @@ void SoundHandler::start_music(const std::string& songset_name, int fadein_ms) {
 		} else
 			log("SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
 	}
-	Mix_VolumeMusic(music_volume_);
+	Mix_VolumeMusic(sound_options_.at(SoundType::kMusic).volume);
 }
 
 /** Stop playing a songset.
@@ -468,14 +509,18 @@ void SoundHandler::start_music(const std::string& songset_name, int fadein_ms) {
  *                   milliseconds starting from now.
  */
 void SoundHandler::stop_music(int fadeout_ms) {
-	if (is_music_disabled()) {
+	if (backend_is_disabled_) {
 		return;
 	}
 
-	// Avoid clicks
-	fadeout_ms = std::min(fadeout_ms, kMinimumMusicFade);
+	if (Mix_PlayingMusic()) {
 
-	Mix_FadeOutMusic(fadeout_ms);
+		log("Do stop music\n");
+		// Avoid clicks
+		fadeout_ms = std::max(fadeout_ms, kMinimumMusicFade);
+
+		Mix_FadeOutMusic(fadeout_ms);
+	}
 }
 
 /** Play an other piece of music.
@@ -506,63 +551,39 @@ void SoundHandler::change_music(const std::string& songset_name,
 	}
 }
 
-bool SoundHandler::is_music_disabled() const {
-	return music_is_disabled_ || backend_is_disabled_;
+bool SoundHandler::is_sound_enabled(SoundType type) const {
+	assert(sound_options_.count(type) == 1);
+	return sound_options_.at(type).enabled;
 }
-bool SoundHandler::are_fx_disabled() const {
-	return fx_are_disabled_ || backend_is_disabled_;
-}
-int32_t SoundHandler::get_music_volume() const {
-	return music_volume_;
-}
-int32_t SoundHandler::get_fx_volume() const {
-	return fx_volume_;
+int32_t SoundHandler::get_volume(SoundType type) const {
+	assert(sound_options_.count(type) == 1);
+	return sound_options_.at(type).volume;
 }
 
-/** Normal set_* function, but the music must be started/stopped accordingly
- * Also, the new value is written back to the config file right away. It might
- * get lost otherwise.
- */
-void SoundHandler::set_disable_music(bool const disable) {
-	if (is_backend_disabled() || (music_is_disabled_ == disable)) {
+// NOCOM usage? Document.
+void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
+	assert(sound_options_.count(type) == 1);
+	SoundOptions& sound_options = sound_options_.at(type);
+	if (is_backend_disabled() || (sound_options.enabled == enable)) {
 		return;
 	}
 
-	music_is_disabled_ = disable;
-	g_options.pull_section("global").set_bool("disable_music", disable);
+	sound_options.enabled = enable;
 
-	if (disable) {
-		stop_music();
-	} else {
-		start_music(current_songset_);
-	}
-}
+	const std::string config_name = "enable_" + sound_options.name;
+	g_options.pull_section("sound").set_bool(config_name.c_str(), enable);
 
-/** Normal set_* function
- * Also, the new value is written back to the config file right away. It might
- * get lost otherwise.
- */
-void SoundHandler::set_disable_fx(bool const disable) {
-	if (is_backend_disabled() || (fx_are_disabled_ == disable)) {
-		return;
-	}
-
-	fx_are_disabled_ = disable;
-	g_options.pull_section("global").set_bool("disable_fx", disable);
-}
-
-/**
- * Normal set_* function.
- * Set the music volume between 0 (muted) and \ref get_max_volume().
- * The new value is written back to the config file.
- *
- * \param volume The new music volume.
- */
-void SoundHandler::set_music_volume(int32_t volume) {
-	if (!is_backend_disabled()) {
-		music_volume_ = volume;
-		Mix_VolumeMusic(volume);
-		g_options.pull_section("global").set_int("music_volume", volume);
+	// Special treatment for music
+	switch (type) {
+	case SoundType::kMusic:
+		if (enable) {
+			start_music(current_songset_);
+		} else {
+			stop_music();
+		}
+		break;
+	default:
+		break;
 	}
 }
 
@@ -573,11 +594,24 @@ void SoundHandler::set_music_volume(int32_t volume) {
  *
  * \param volume The new music volume.
  */
-void SoundHandler::set_fx_volume(int32_t volume) {
+void SoundHandler::set_volume(SoundType type, int32_t volume) {
 	if (!is_backend_disabled()) {
-		fx_volume_ = volume;
-		Mix_Volume(-1, volume);
-		g_options.pull_section("global").set_int("fx_volume", volume);
+		assert(sound_options_.count(type) == 1);
+		SoundOptions& sound_options = sound_options_.at(type);
+		sound_options.volume = volume;
+
+		// Special treatment for music
+		switch (type) {
+		case SoundType::kMusic:
+			Mix_VolumeMusic(volume);
+			break;
+		default:
+			Mix_Volume(-1, volume);
+			break;
+		}
+
+		const std::string config_name = "volume_" + sound_options.name;
+		g_options.pull_section("sound").set_int(config_name.c_str(), volume);
 	}
 }
 
@@ -610,7 +644,6 @@ void SoundHandler::music_finished_callback() {
  */
 void SoundHandler::fx_finished_callback(int32_t const channel) {
 	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
-
 	assert(0 <= channel);
 	g_sound_handler.handle_channel_finished(static_cast<uint32_t>(channel));
 }
@@ -619,6 +652,8 @@ void SoundHandler::fx_finished_callback(int32_t const channel) {
  * This is part of \ref fx_finished_callback
  */
 void SoundHandler::handle_channel_finished(uint32_t channel) {
+	assert(!is_backend_disabled());
+
 	// Needs locking because active_fx_ may be accessed
 	// from this callback or from main thread
 	if (fx_lock_)

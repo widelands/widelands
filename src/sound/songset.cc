@@ -65,9 +65,12 @@ Mix_Music* Songset::get_song(uint32_t random) {
 	}
 
 	if (songs_.size() > 1) {
-		// exclude current_song from playing two times in a row
+		// Exclude current_song from playing two times in a row
 		current_song_ += 1 + random % (songs_.size() - 1);
+		current_song_ = current_song_ % songs_.size();
 	}
+	log("Get song %d/%d\n", current_song_ + 1, songs_.size());
+
 	filename = songs_.at(current_song_);
 
 	// First, close the previous song and remove it from memory

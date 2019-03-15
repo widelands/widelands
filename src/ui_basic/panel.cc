@@ -27,7 +27,6 @@
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
 #include "profile/profile.h"
-#include "sound/constants.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
 
@@ -714,13 +713,13 @@ void Panel::die() {
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click() {
-	g_sound_handler.play_fx(FxType::kUI, "click", kStereoCenter, kFxPriorityAlwaysPlay);
+	g_sound_handler.play_fx(SoundType::kUI, "click", kStereoCenter, kFxPriorityAlwaysPlay);
 }
 void Panel::play_new_chat_message() {
-	g_sound_handler.play_fx(FxType::kChat, "lobby_chat", kStereoCenter, kFxPriorityAlwaysPlay);
+	g_sound_handler.play_fx(SoundType::kChat, "lobby_chat", kStereoCenter, kFxPriorityAlwaysPlay);
 }
 void Panel::play_new_chat_member() {
-	g_sound_handler.play_fx(FxType::kChat, "lobby_freshmen", kStereoCenter, kFxPriorityAlwaysPlay);
+	g_sound_handler.play_fx(SoundType::kChat, "lobby_freshmen", kStereoCenter, kFxPriorityAlwaysPlay);
 }
 
 /**

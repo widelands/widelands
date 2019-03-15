@@ -43,11 +43,12 @@
 	static constexpr int32_t kStereoCenter = 128;
 	static constexpr int32_t kStereoRight = 254;
 
-	enum class FxType {
+	enum class SoundType {
 		kUI,
 		kMessage,
 		kChat,
-		kMap
+		kAmbient,
+		kMusic
 	};
 
 #endif  // end of include guard: WL_SOUND_CONSTANTS_H

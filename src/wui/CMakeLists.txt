@@ -1,3 +1,14 @@
+wl_library(wui_sound_options
+  SRCS
+    sound_control.cc
+    sound_control.h
+    sound_options.cc
+    sound_options.h
+  DEPENDS
+    base_i18n
+    ui_basic
+)
+
 wl_library(wui_chat_ui
   SRCS
     chat_overlay.cc
@@ -302,5 +313,6 @@ wl_library(wui
     wui_mapview
     wui_mapview_pixelfunctions
     wui_quicknavigation
+    wui_sound_options
     wui_waresdisplay
 )
