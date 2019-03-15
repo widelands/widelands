@@ -77,6 +77,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
 
+	peaceful_.set_enabled(settings_->can_change_map());
+
 	lua_ = new LuaInterface();
 
 	title_.set_fontsize(fs_big());

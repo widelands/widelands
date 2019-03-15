@@ -406,9 +406,8 @@ void GameClient::set_player(uint8_t, const PlayerSettings&) {
 }
 
 
-void GameClient::set_peaceful_mode(bool) {
-	// Clients are not allowed to change this
-	NEVER_HERE();
+void GameClient::set_peaceful_mode(bool peace) {
+	d->settings.peaceful = peace;
 }
 
 bool GameClient::is_peaceful_mode() {
