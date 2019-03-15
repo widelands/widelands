@@ -159,7 +159,7 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
                UI::PanelStyle::kFsMenu),
      client_info_(this,
                   right_column_x_,
-                  get_h() * 13 / 20 - 2 * label_height_,
+                  get_h() * 15 / 20 - 2 * label_height_,
                   butw_,
                   get_h(),
                   UI::PanelStyle::kFsMenu),
@@ -167,7 +167,8 @@ FullscreenMenuLaunchMPG::FullscreenMenuLaunchMPG(GameSettingsProvider* const set
 
      // Variables and objects used in the menu
      chat_(nullptr) {
-	ok_.set_pos(Vector2i(right_column_x_, get_h() * 12 / 20 - 2 * label_height_));
+	peaceful_.set_pos(Vector2i(right_column_x_, get_h() * 25 / 40 - 2 * label_height_));
+	ok_.set_pos(Vector2i(right_column_x_, get_h() * 14 / 20 - 2 * label_height_));
 	back_.set_pos(Vector2i(right_column_x_, get_h() * 218 / 240));
 	win_condition_dropdown_.set_pos(
 	   Vector2i(right_column_x_, get_h() * 11 / 20 - 2 * label_height_));

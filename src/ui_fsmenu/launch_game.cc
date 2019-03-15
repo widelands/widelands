@@ -58,7 +58,7 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
 
      peaceful_(this,
                Vector2i(get_w() * 7 / 10,
-               get_h() * 5 / 10 + buth_),
+               get_h() * 19 / 40 + buth_),
                _("Peaceful mode"),
                _("Forbid fighting between players")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
