@@ -55,6 +55,12 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
                              "",
                              UI::DropdownType::kTextual,
                              UI::PanelStyle::kFsMenu),
+
+     peaceful_(this,
+               Vector2i(get_w() * 7 / 10,
+               get_h() * 5 / 10 + buth_),
+               _("Peaceful mode"),
+               _("Forbid fighting between players")),
      ok_(this, "ok", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuPrimary, _("Start game")),
      back_(this, "back", 0, 0, butw_, buth_, UI::ButtonStyle::kFsMenuSecondary, _("Back")),
      // Text labels
@@ -65,6 +71,8 @@ FullscreenMenuLaunchGame::FullscreenMenuLaunchGame(GameSettingsProvider* const s
      nr_players_(0) {
 	win_condition_dropdown_.selected.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::win_condition_selected, this));
+	peaceful_.changed.connect(
+	   boost::bind(&FullscreenMenuLaunchGame::toggle_peaceful, this));
 	back_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuLaunchGame::clicked_back, boost::ref(*this)));
 	ok_.sigclicked.connect(boost::bind(&FullscreenMenuLaunchGame::clicked_ok, boost::ref(*this)));
@@ -188,6 +196,10 @@ FullscreenMenuLaunchGame::win_condition_if_valid(const std::string& win_conditio
 		t.reset(nullptr);
 	}
 	return t;
+}
+
+void FullscreenMenuLaunchGame::toggle_peaceful() {
+	settings_->set_peaceful_mode(peaceful_.get_state());
 }
 
 // Implemented by subclasses

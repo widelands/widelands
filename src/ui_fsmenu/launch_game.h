@@ -26,6 +26,7 @@
 #include "graphic/playercolor.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/dropdown.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/base.h"
@@ -71,10 +72,13 @@ protected:
 	std::unique_ptr<LuaTable> win_condition_if_valid(const std::string& win_condition_script,
 	                                                 std::set<std::string> tags) const;
 
+	void toggle_peaceful();
+
 	uint32_t butw_;
 	uint32_t buth_;
 
 	UI::Dropdown<std::string> win_condition_dropdown_;
+	UI::Checkbox peaceful_;
 	std::string last_win_condition_;
 	UI::Button ok_, back_;
 	UI::Textarea title_;

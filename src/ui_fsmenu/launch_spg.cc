@@ -217,6 +217,8 @@ void FullscreenMenuLaunchSPG::update(bool map_was_changed) {
 		select_map_.set_visible(settings_->can_change_map());
 		select_map_.set_enabled(settings_->can_change_map());
 
+		peaceful_.set_state(settings_->is_peaceful_mode());
+
 		set_player_names_and_tribes();
 	}
 

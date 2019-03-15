@@ -429,6 +429,14 @@ enum {
 	NETCMD_SYSTEM_MESSAGE_CODE = 32,
 
 	/**
+	 * Sent by the host to toggle peaceful mode.
+	 *
+	 * Attached data is:
+	 * \li uint8_t: 1 if peaceful mode is enabled, 0 otherwise
+	 */
+	NETCMD_PEACEFUL_MODE = 33,
+
+	/**
 	 * Sent by the metaserver to a freshly opened game to check connectability
 	 */
 	NETCMD_METASERVER_PING = 64

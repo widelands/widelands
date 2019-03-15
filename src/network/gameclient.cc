@@ -405,6 +405,16 @@ void GameClient::set_player(uint8_t, const PlayerSettings&) {
 	// set_player_number(uint8_t) to the host.
 }
 
+
+void GameClient::set_peaceful_mode(bool) {
+	// Clients are not allowed to change this
+	NEVER_HERE();
+}
+
+bool GameClient::is_peaceful_mode() {
+	return d->settings.peaceful;
+}
+
 std::string GameClient::get_win_condition_script() {
 	return d->settings.win_condition_script;
 }
@@ -817,6 +827,10 @@ void GameClient::handle_packet(RecvPacket& packet) {
 	}
 	case NETCMD_WIN_CONDITION: {
 		d->settings.win_condition_script = g_fs->FileSystem::fix_cross_file(packet.string());
+		break;
+	}
+	case NETCMD_PEACEFUL_MODE: {
+		d->settings.peaceful = packet.unsigned_8();
 		break;
 	}
 
