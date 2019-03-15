@@ -436,11 +436,6 @@ void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
 		log("SoundHandler: sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
 }
 
-void SoundHandler::shift_fx_stereo_pos(int32_t stereo_position) {
-	log("NOCOM diff (%d)\n", stereo_position);
-	// NOCOM implement
-}
-
 /** Load a background song. One "song" can consist of several audio files named
  * FILE_XX.ogg, where XX is between 00 and 99.
  * \param dir        The directory where the audio files reside.

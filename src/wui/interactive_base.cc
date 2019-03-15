@@ -161,7 +161,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 	});
 
 	toolbar_.set_layout_toplevel(true);
-	map_view_.changeview.connect([this](const Vector2f& difference) { mainview_move(difference); });
+	map_view_.changeview.connect([this] { mainview_move(); });
 	map_view()->field_clicked.connect([this](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		set_sel_pos(node_and_triangle);
 	});
@@ -484,13 +484,9 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
 	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale);
 }
 
-void InteractiveBase::mainview_move(const Vector2f& difference) {
+void InteractiveBase::mainview_move() {
 	if (minimap_registry_.window) {
 		minimap_->set_view(map_view_.view_area().rect());
-	}
-	if (difference != Vector2f::zero()) {
-		// NOCOM
-		g_sound_handler.shift_fx_stereo_pos(0 - static_cast<int>(difference.x));
 	}
 }
 
@@ -503,7 +499,7 @@ void InteractiveBase::toggle_minimap() {
 		minimap_->warpview.connect([this](const Vector2f& map_pixel) {
 			map_view_.scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 		});
-		mainview_move(Vector2f::zero());
+		mainview_move();
 	}
 }
 
@@ -738,8 +734,11 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 	if (!g_sound_handler.is_sound_enabled(note.type)) {
 		return;
 	}
-	// NOCOM
+
 	if (note.coords != Widelands::Coords::null() && player_hears_field(note.coords)) {
+		constexpr int kSoundMaxDistance = 255;
+		constexpr float kSoundDistanceDivisor = 4.f;
+
 		// Viewpoint is the point of the map in pixel which is shown in the upper
 		// left corner of window or fullscreen
 		const MapView::ViewArea area = map_view_.view_area();

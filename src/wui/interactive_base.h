@@ -191,7 +191,7 @@ protected:
 
 	MiniMap::Registry& minimap_registry();
 
-	void mainview_move(const Vector2f& difference);
+	void mainview_move();
 
 	void draw_overlay(RenderTarget&) override;
 	/**

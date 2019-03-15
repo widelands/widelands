@@ -88,7 +88,7 @@ WatchWindow::WatchWindow(InteractiveGameBase& parent,
 	   [&parent](const Widelands::NodeAndTriangle<>& node_and_triangle) {
 		   parent.map_view()->track_selection(node_and_triangle);
 	   });
-	map_view_.changeview.connect([this](const Vector2f&) { stop_tracking_by_drag(); });
+	map_view_.changeview.connect([this] { stop_tracking_by_drag(); });
 	warp_mainview.connect([&parent](const Vector2f& map_pixel) {
 		parent.map_view()->scroll_to_map_pixel(map_pixel, MapView::Transition::Smooth);
 	});

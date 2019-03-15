@@ -108,7 +108,7 @@ public:
 	virtual ~MapView();
 
 	// Called whenever the view changed, also during automatic animations.
-	boost::signals2::signal<void(const Vector2f&)> changeview;
+	boost::signals2::signal<void()> changeview;
 
 	// Called when the user clicked on a field.
 	boost::signals2::signal<void(const Widelands::NodeAndTriangle<>&)> field_clicked;

@@ -43,9 +43,6 @@
 	constexpr int32_t kStereoCenter = 128;
 	constexpr int32_t kStereoRight = 254;
 
-	constexpr int kSoundMaxDistance = 255;
-	constexpr float kSoundDistanceDivisor = 4.f;
-
 	enum class SoundType {
 		kUI,
 		kMessage,
