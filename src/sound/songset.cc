@@ -69,7 +69,6 @@ Mix_Music* Songset::get_song(uint32_t random) {
 		current_song_ += 1 + random % (songs_.size() - 1);
 		current_song_ = current_song_ % songs_.size();
 	}
-	log("Get song %d/%d\n", current_song_ + 1, songs_.size());
 
 	filename = songs_.at(current_song_);
 
@@ -98,9 +97,9 @@ Mix_Music* Songset::get_song(uint32_t random) {
 		m_ = Mix_LoadMUS_RW(rwops_, 0);
 
 	if (m_)
-		log("Songset: loaded song \"%s\"\n", filename.c_str());
+		log("Songset: Loaded song \"%s\"\n", filename.c_str());
 	else {
-		log("Songset: loading song \"%s\" failed!\n", filename.c_str());
+		log("Songset: Loading song \"%s\" failed!\n", filename.c_str());
 		log("Songset: %s\n", Mix_GetError());
 	}
 

@@ -172,7 +172,8 @@ public:
 	void init();
 	void shutdown();
 	void read_config();
-	void load_system_sounds();
+	void save_and_backup_config();
+	void restore_config();
 	bool is_backend_disabled() const;
 	void disable_backend();
 
@@ -215,19 +216,13 @@ private:
 
 	bool play_or_not(SoundType type, const std::string& fx_name, uint8_t priority);
 
-	/** Can sounds be played?
-	 * true = they mustn't be played (e.g. because hardware is missing)
-	 * false = can be played
-	 *
-	 * Also for buffering the command line option --nosound until real initialization is done.
-	 * \see SoundHandler::SoundHandler()
-	 * \see SoundHandler::init()
-	 */
-	bool backend_is_disabled_;
-
 	struct SoundOptions {
-		explicit SoundOptions(const std::string& savename) : enabled(false), volume(MIX_MAX_VOLUME), name(savename) {
+		explicit SoundOptions(bool enable, int vol, const std::string& savename) : enabled(enable), volume(vol), name(savename) {
+			assert(!savename.empty());
 		}
+		explicit SoundOptions(bool vol, const std::string& savename) : SoundOptions(true, vol, savename) {
+		}
+
 		bool enabled;
 		// Volume for sound effects or music (from 0 to get_max_volume())
 		int volume;
@@ -235,8 +230,11 @@ private:
 		const std::string name;
 	};
 
-	/// Volume of sound effects or music for the given type (from 0 to get_max_volume())
+	/// Contains all options for sound types and music
 	std::map<SoundType, SoundOptions> sound_options_;
+
+	/// A copy of the original options so that we can restore them when we abort in the options menu
+	std::map<SoundType, SoundOptions> backup_options_;
 
 	/// A collection of songsets
 	using SongsetMap = std::map<std::string, std::unique_ptr<Songset>>;
@@ -264,6 +262,12 @@ private:
 
 	/// Protects access to active_fx_ between callbacks and main code.
 	SDL_mutex* fx_lock_;
+
+	/** Can sounds be played?
+	 * true = they mustn't be played (e.g. because hardware is missing) or the command line option --nosound was used.
+	 * false = can be played
+	 */
+	bool backend_is_disabled_;
 };
 
 #endif  // end of include guard: WL_SOUND_SOUND_HANDLER_H

@@ -362,7 +362,7 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   config.get_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
 	   config.get_int("xres", DEFAULT_RESOLUTION_W), config.get_int("yres", DEFAULT_RESOLUTION_H),
 	   config.get_bool("fullscreen", false));
-	g_sound_handler.init();  //  TODO(unknown): memory leak!
+	g_sound_handler.init();
 
 	// This might grab the input.
 	refresh_graphics();

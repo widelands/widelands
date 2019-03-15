@@ -19,6 +19,7 @@
 #include "wui/game_options_sound_menu.h"
 
 #include "base/i18n.h"
+#include "sound/sound_handler.h"
 
 namespace {
 constexpr int kMargin = 12;
@@ -35,4 +36,9 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent,
 	if (get_usedefaultpos()) {
 		center_to_parent();
 	}
+}
+
+
+GameOptionsSoundMenu::~GameOptionsSoundMenu() {
+	g_sound_handler.save_and_backup_config();
 }

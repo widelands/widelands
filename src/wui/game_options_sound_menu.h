@@ -28,6 +28,8 @@
 struct GameOptionsSoundMenu : public UI::UniqueWindow {
 	GameOptionsSoundMenu(Panel&, UI::UniqueWindow::Registry&);
 
+	~GameOptionsSoundMenu();
+
 private:
 	SoundOptions sound_options_;
 };
