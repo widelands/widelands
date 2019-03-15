@@ -1422,14 +1422,14 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 		} else
 			priority = 127;
 
-		g_sound_handler.register_fx(filepath, filename, name);
+		g_sound_handler.register_fx(FxType::kMap, filepath, filename, name);
 	} catch (const WException& e) {
 		throw GameDataError("playsound: %s", e.what());
 	}
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
-	Notifications::publish(NoteSound(name, ps.position_, priority));
+	Notifications::publish(NoteSound(FxType::kMap, name, ps.position_, priority));
 	return ps.program_step(game);
 }
 

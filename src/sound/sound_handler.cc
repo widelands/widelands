@@ -223,16 +223,16 @@ void SoundHandler::read_config() {
 
 /** Load systemwide sound fx into memory.
  * \note This loads only systemwide fx. Worker/building fx will be loaded by
- * their respective conf-file parsers
+ * their respective init-file parsers
  */
 void SoundHandler::load_system_sounds() {
-	register_fx("sound", "click", "click");
-	register_fx("sound", "create_construction_site", "create_construction_site");
-	register_fx("sound", "message", "message");
-	register_fx("sound/military", "under_attack", "military/under_attack");
-	register_fx("sound/military", "site_occupied", "military/site_occupied");
-	register_fx("sound", "lobby_chat", "lobby_chat");
-	register_fx("sound", "lobby_freshmen", "lobby_freshmen");
+	register_fx(FxType::kUI, "sound", "click", "click");
+	register_fx(FxType::kMap, "sound", "create_construction_site", "create_construction_site");
+	register_fx(FxType::kMessage, "sound", "message", "message");
+	register_fx(FxType::kMessage, "sound/military", "under_attack", "military/under_attack");
+	register_fx(FxType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
+	register_fx(FxType::kChat, "sound", "lobby_chat", "lobby_chat");
+	register_fx(FxType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
 }
 
 /**
@@ -256,27 +256,35 @@ void SoundHandler::disable_backend() {
  *                   (BASENAME_XX.ogg);
  *                   also the name used with \ref play_fx
  */
-void SoundHandler::register_fx(const std::string& dir,
+void SoundHandler::register_fx(FxType type, const std::string& dir,
                                      const std::string& basename,
                                      const std::string& fx_name) {
-	if (is_backend_disabled() || fxs_.count(fx_name) > 0) {
+	if (is_backend_disabled() || fxs_[type].count(fx_name) > 0) {
 		return;
 	}
-	fxs_.insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset(dir, basename))));
+	fxs_[type].insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset(dir, basename))));
 }
 
 /** Find out whether to actually play a certain effect right now or rather not
  * (to avoid "sonic overload").
  */
 // TODO(unknown): What is the selection algorithm? cf class documentation
-bool SoundHandler::play_or_not(const std::string& fx_name,
+bool SoundHandler::play_or_not(FxType type, const std::string& fx_name,
                                uint8_t const priority) {
 	if (are_fx_disabled()) {
 		return false;
 	}
 
-	if (fxs_.count(fx_name) == 0) {
+	if (fxs_[type].count(fx_name) == 0) {
 		return false;
+	}
+
+	switch (type) {
+	case FxType::kMap:
+		break;
+	default:
+		// We always play Ui, chat and system sounds
+		return true;
 	}
 
 	// We always play important sounds
@@ -314,7 +322,7 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
 	// TODO(unknown): high general frequency reduces weighted priority
 	// TODO(unknown): deal with "coupled" effects like throw_net and retrieve_net
 
-	uint32_t const ticks_since_last_play = fxs_[fx_name]->ticks_since_last_play();
+	uint32_t const ticks_since_last_play = fxs_[type][fx_name]->ticks_since_last_play();
 
 	// Weighted total probability that this fx gets played; initially set according to priority
 	//  float division! not integer
@@ -346,7 +354,7 @@ bool SoundHandler::play_or_not(const std::string& fx_name,
  * \param priority         How important is it that this FX actually gets
  *                         played? (see \ref FXset::priority_)
  */
-void SoundHandler::play_fx(const std::string& fx_name,
+void SoundHandler::play_fx(FxType type, const std::string& fx_name,
                            int32_t const stereo_pos,
                            uint8_t const priority, int distance) {
 	if (are_fx_disabled()) {
@@ -356,18 +364,18 @@ void SoundHandler::play_fx(const std::string& fx_name,
 	assert(stereo_pos >= kStereoLeft);
 	assert(stereo_pos <= kStereoRight);
 
-	if (fxs_.count(fx_name) == 0) {
+	if (fxs_[type].count(fx_name) == 0) {
 		log("SoundHandler: sound effect \"%s\" does not exist!\n", fx_name.c_str());
 		return;
 	}
 
 	// See if the FX should be played
-	if (!play_or_not(fx_name, priority)) {
+	if (!play_or_not(type, fx_name, priority)) {
 		return;
 	}
 
 	//  retrieve the fx and play it if it's valid
-	if (Mix_Chunk* const m = fxs_[fx_name]->get_fx(rng_.rand())) {
+	if (Mix_Chunk* const m = fxs_[type][fx_name]->get_fx(rng_.rand())) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
 		if (chan == -1) {
 			log("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());

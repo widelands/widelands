@@ -34,6 +34,7 @@
 
 #include "random/random.h"
 #include "sound/fxset.h"
+#include "sound/constants.h" // NOCOM clean this up in other files
 #include "sound/songset.h"
 
 extern class SoundHandler g_sound_handler;
@@ -175,11 +176,11 @@ public:
 	bool is_backend_disabled() const;
 	void disable_backend();
 
-	void register_fx(const std::string& dir,
+	void register_fx(FxType type, const std::string& dir,
 	                       const std::string& basename,
 	                       const std::string& fx_name);
 
-	void play_fx(const std::string& fx_name,
+	void play_fx(FxType type, const std::string& fx_name,
 	             int32_t stereo_position,
 	             uint8_t priority, int distance = 0);
 	void shift_fx_stereo_pos(int32_t stereo_position);
@@ -216,7 +217,7 @@ private:
 	// Prints an error and disables the sound system.
 	void initialization_error(const char* const msg, bool quit_sdl);
 
-	bool play_or_not(const std::string& fx_name, uint8_t priority);
+	bool play_or_not(FxType type, const std::string& fx_name, uint8_t priority);
 
 	/** Can sounds be played?
 	 * true = they mustn't be played (e.g. because hardware is missing)
@@ -243,7 +244,7 @@ private:
 
 	/// A collection of effect sets
 	using FXsetMap = std::map<std::string, std::unique_ptr<FXset>>;
-	FXsetMap fxs_;
+	std::map<FxType, FXsetMap> fxs_;
 
 	/// List of currently playing effects, and the channel each one is on
 	/// Access to this variable is protected through fx_lock_ mutex.

@@ -73,7 +73,7 @@ bool PartiallyFinishedBuilding::init(EditorGameBase& egbase) {
 	if (upcast(Game, game, &egbase))
 		request_builder(*game);
 
-	Notifications::publish(NoteSound("create_construction_site", position_, kFxPriorityAlwaysPlay));
+	Notifications::publish(NoteSound(FxType::kMap, "create_construction_site", position_, kFxPriorityAlwaysPlay));
 	return true;
 }
 

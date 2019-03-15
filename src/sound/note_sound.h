@@ -25,15 +25,18 @@
 #include "logic/widelands_geometry.h"
 #include "notifications/note_ids.h"
 #include "notifications/notifications.h"
+#include "sound/constants.h"
 
 struct NoteSound {
 	CAN_BE_SENT_AS_NOTE(NoteId::Sound)
+	const FxType type;
 	const std::string fx;
 	const Widelands::Coords coords;
 	const uint8_t priority;
 
-	NoteSound(const std::string& init_fx, Widelands::Coords init_coords, uint8_t init_priority)
-	   : fx(init_fx),
+	NoteSound(FxType init_type, const std::string& init_fx, Widelands::Coords init_coords, uint8_t init_priority)
+	   : type(init_type),
+		 fx(init_fx),
 	     coords(init_coords),
 	     priority(init_priority) {
 	}

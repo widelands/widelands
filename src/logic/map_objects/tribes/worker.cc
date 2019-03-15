@@ -999,7 +999,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {
-	Notifications::publish(NoteSound(action.sparam1, get_position(), action.iparam1));
+	Notifications::publish(NoteSound(FxType::kMap, action.sparam1, get_position(), action.iparam1));
 
 	++state.ivar1;
 	schedule_act(game, 10);
