@@ -25,7 +25,7 @@
  * A box with all sound options.
  */
 struct SoundOptions : public UI::Box {
-	SoundOptions(UI::Panel& parent);
+	SoundOptions(UI::Panel& parent, UI::SliderStyle style);
 };
 
 #endif  // end of include guard: WL_WUI_SOUND_OPTIONS_H

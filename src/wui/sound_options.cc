@@ -27,16 +27,16 @@ namespace {
 constexpr int kSpacing = 12;
 } // namespace
 
-SoundOptions::SoundOptions(UI::Panel& parent)
+SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
    : UI::Box(&parent, 0, 0, UI::Box::Vertical) {
 
 	set_inner_spacing(kSpacing);
 
-	add(new SoundControl(this, pgettext("sound_options", "Music"), SoundType::kMusic), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, pgettext("sound_options", "Chat Messages"), SoundType::kChat), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, pgettext("sound_options", "Game Messages"), SoundType::kMessage), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, pgettext("sound_options", "User Interface"), SoundType::kUI), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "Music"), SoundType::kMusic, style), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "Chat Messages"), SoundType::kChat, style), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "Game Messages"), SoundType::kMessage, style), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "User Interface"), SoundType::kUI, style), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient, style), UI::Box::Resizing::kFullSize);
 
 	UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
 	   this, 0, 0, 100, 0, UI::PanelStyle::kWui,

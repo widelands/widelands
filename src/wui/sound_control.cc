@@ -28,7 +28,7 @@ constexpr int kCursorWidth = 28;
 constexpr int kSpacing = 16;
 } // namespace
 
-SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType type)
+SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType type, UI::SliderStyle style)
    : UI::Box(parent, 0, 0, UI::Box::Horizontal),
      enable_(this, Vector2i::zero(), title),
      volume_(this,
@@ -39,7 +39,7 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
                          0,
                          g_sound_handler.get_max_volume(),
                          g_sound_handler.get_volume(type),
-                         UI::SliderStyle::kWuiLight, _("Sound Volume"), kCursorWidth),
+                         style, _("Sound Volume"), kCursorWidth),
      type_(type) {
 	set_inner_spacing(kSpacing);
 	add(&volume_, UI::Box::Resizing::kFullSize);

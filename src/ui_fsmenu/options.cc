@@ -163,7 +163,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     UI::SpinBox::Units::kPixels),
 
      // Sound options
-     sound_options_(box_sound_),
+     sound_options_(box_sound_, UI::SliderStyle::kFsMenu),
 
      // Saving options
      sb_autosave_(&box_saving_,

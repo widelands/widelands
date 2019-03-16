@@ -30,7 +30,7 @@
 
 class SoundControl : public UI::Box {
 public:
-	SoundControl(UI::Box* parent, const std::string& title, SoundType type);
+	SoundControl(UI::Box* parent, const std::string& title, SoundType type, UI::SliderStyle style);
 	~SoundControl() override;
 
 private:

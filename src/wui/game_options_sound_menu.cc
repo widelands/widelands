@@ -28,7 +28,7 @@ constexpr int kMargin = 12;
 GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent,
                                            UI::UniqueWindow::Registry& registry)
    : UI::UniqueWindow(&parent, "sound_options_menu", &registry, 100, 100, _("Sound Options")),
-	 sound_options_(*this) {
+	 sound_options_(*this, UI::SliderStyle::kWuiLight) {
 	sound_options_.set_border(kMargin, kMargin, kMargin, kMargin);
 
 	set_center_panel(&sound_options_);

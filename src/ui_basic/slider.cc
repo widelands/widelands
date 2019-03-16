@@ -158,7 +158,7 @@ void Slider::draw_cursor(
 		dst.brighten_rect(background_rect, MOUSE_OVER_BRIGHT_FACTOR);
 	}
 
-	if (pressed_) {       //  draw border
+	if (pressed_ || !enabled_) {
 		dst.brighten_rect  //  bottom edge
 		   (Recti(x, y + h - 2, w, 2), BUTTON_EDGE_BRIGHT_FACTOR);
 		dst.brighten_rect  //  right edge
