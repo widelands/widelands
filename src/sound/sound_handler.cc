@@ -37,14 +37,9 @@
 #include "profile/profile.h"
 
 namespace {
-
 constexpr int kDefaultMusicVolume = 64;
 constexpr int kDefaultFxVolume = 128;
 constexpr int kNumMixingChannels = 32;
-
-/// How many milliseconds in the past to consider for
-/// SoundHandler::play_or_not()
-constexpr uint32_t kSlidingWindowSize = 20000;
 }  // namespace
 
 
@@ -55,7 +50,7 @@ SoundHandler* g_sound_handler;
 bool SoundHandler::backend_is_disabled_ = false;
 
 /**
- * Initialize our data structures and if SoundHandler::is_backend_disabled() is false, initialize the SDL sound system and configure everything.
+ * Initialize our data structures, and if SoundHandler::is_backend_disabled() is false, initialize the SDL sound system and configure everything.
  */
 SoundHandler::SoundHandler()
    : sound_options_{
@@ -131,7 +126,7 @@ SoundHandler::SoundHandler()
 		return;
 	}
 
-	register_music_and_system_sounds();
+	register_songs_and_system_sounds();
 
 	Mix_HookMusicFinished(SoundHandler::music_finished_callback);
 	Mix_ChannelFinished(SoundHandler::fx_finished_callback);
@@ -142,9 +137,10 @@ SoundHandler::SoundHandler()
 	}
 }
 
-/// Housekeeping: unset hooks. Audio data will be freed automagically by the
-/// \ref Songset and \ref FXset destructors, but not the {song|fx}sets
-/// themselves.
+/**
+ * Housekeeping: unset hooks, clear the mutex and all data structure and shutown the sound system.
+ * Audio data will be freed automagically by the \ref Songset and \ref FXset destructors, but not the {song|fx}sets themselves.
+ */
 SoundHandler::~SoundHandler() {
 	if (SDL_WasInit(SDL_INIT_AUDIO) == 0) {
 		return;
@@ -190,6 +186,7 @@ SoundHandler::~SoundHandler() {
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 }
 
+/// Prints an error and disables and shuts down the sound system.
 void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
 	log("WARNING: Failed to initialize sound system: %s\n", msg);
 	SoundHandler::disable_backend();
@@ -199,11 +196,11 @@ void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
 	return;
 }
 
-/** Read the main config file, load background music and systemwide sound fx
- *
+/**
+ * Load the sound options from g_options. If an option is not available, use the defaults set by the constructor.
  */
 void SoundHandler::read_config() {
-	// TODO(GunChleoc): Compatibility code to avoid getting bug reports about unread sections. Remove after build 21.
+	// TODO(GunChleoc): Compatibility code to avoid getting bug reports about unread sections. Remove after Build 21.
 	if (g_options.get_section("sound") == nullptr) {
 		Section& global = g_options.pull_section("global");
 
@@ -226,6 +223,7 @@ void SoundHandler::read_config() {
 		save_config();
 	}
 
+	// This is the code that we want to keep
 	Section& sound = g_options.pull_section("sound");
 	for (auto& option : sound_options_) {
 		option.second.volume = sound.get_int(("volume_" + option.second.name).c_str(), option.second.volume);
@@ -233,6 +231,7 @@ void SoundHandler::read_config() {
 	}
 }
 
+/// Save the current sound options to g_options
 void SoundHandler::save_config() {
 	Section& sound = g_options.pull_section("sound");
 	for (auto& option : sound_options_) {
@@ -248,6 +247,7 @@ void SoundHandler::save_config() {
 	}
 }
 
+/// Read the sound options from g_options and apply them
 void SoundHandler::load_config() {
 	read_config();
 	for (auto& option : sound_options_) {
@@ -256,7 +256,10 @@ void SoundHandler::load_config() {
 	}
 }
 
-void SoundHandler::register_music_and_system_sounds() {
+/**
+ * Register all music song sets and all system sounds. Any sound effects that are not registered when loading the tribes and world should to be included here for efficiency.
+ */
+void SoundHandler::register_songs_and_system_sounds() {
 	register_songs("music", "intro");
 	register_songs("music", "menu");
 	register_songs("music", "ingame");
@@ -303,6 +306,7 @@ void SoundHandler::register_fx(SoundType type, const std::string& dir,
 	g_sound_handler->do_register_fx(type, dir, basename, fx_name);
 }
 
+/// Non-static implementation of register_fx
 void SoundHandler::do_register_fx(SoundType type, const std::string& dir,
                                      const std::string& basename,
                                      const std::string& fx_name) {
@@ -312,10 +316,11 @@ void SoundHandler::do_register_fx(SoundType type, const std::string& dir,
 	}
 }
 
-/** Find out whether to actually play a certain effect right now or rather not
- * (to avoid "sonic overload").
+/**
+ * Find out whether to actually play a certain effect right now or rather not
+ * (to avoid "sonic overload"). Based on priority and on when it was last played.
+ * System sounds and sounds with priority "kFxPriorityAlwaysPlay" always return 'true'.
  */
-// TODO(unknown): What is the selection algorithm? cf class documentation
 bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
                                uint8_t const priority) {
 	assert(!backend_is_disabled_ && is_sound_enabled(type));
@@ -346,7 +351,7 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
 			SDL_LockMutex(fx_lock_);
 		}
 
-		// Find out if an fx called fx_name is already running
+		// Find out if an fx called 'fx_name' is already running
 		for (const auto& fx_pair : active_fx_) {
 			if (fx_pair.second == fx_name) {
 				too_many_playing = true;
@@ -373,17 +378,16 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
 	//  float division! not integer
 	float probability = (priority % kFxPriorityAllowMultiple) / static_cast<float>(kFxPriorityAllowMultiple);
 
-	// Temporary to calculate single influences
-	float evaluation = 1.0f;
+	// How many milliseconds in the past to consider
+	constexpr uint32_t kSlidingWindowSize = 20000;
 
-	//  reward an fx for being silent
-	if (ticks_since_last_play > kSlidingWindowSize) {
-		evaluation = 1.0f;  //  arbitrary value; 0 -> no change, 1 -> probability = 1
+	if (ticks_since_last_play > kSlidingWindowSize) { //  reward an fx for being silent
+		const float evaluation = 1.0f;  //  arbitrary value; 0 -> no change, 1 -> probability = 1
 
 		//  "decrease improbability"
 		probability = 1.0f - ((1.0f - probability) * (1.0f - evaluation));
 	} else {  // Penalize an fx for playing in short succession
-		evaluation = static_cast<float>(ticks_since_last_play) / kSlidingWindowSize;
+		const float evaluation = static_cast<float>(ticks_since_last_play) / kSlidingWindowSize;
 		probability *= evaluation;  //  decrease probability
 	}
 
@@ -393,11 +397,13 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
 }
 
 /**
+ * \param type The categorization of the sound effect to be played
  * \param fx_name  The identifying name of the sound effect, see \ref register_fx .
- * \param stereo_position  position in widelands' game window, see
- *                         \ref stereo_position
  * \param priority         How important is it that this FX actually gets
  *                         played? (see \ref FXset::priority_)
+ * \param stereo_position  position in widelands' game window, see
+ *                         \ref stereo_position
+ * \param distance The distance to use set in the mix
  */
 void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
 						   uint8_t const priority,
@@ -432,23 +438,27 @@ void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
 
 			// Access to active_fx_ is protected
 			// because it can be accessed from callback
-			if (fx_lock_)
+			if (fx_lock_) {
 				SDL_LockMutex(fx_lock_);
+			}
 			active_fx_[chan] = fx_name;
-			if (fx_lock_)
+			if (fx_lock_) {
 				SDL_UnlockMutex(fx_lock_);
+			}
 		}
-	} else
+	} else {
 		log("SoundHandler: sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
+	}
 }
 
-/** Load a background song. One "song" can consist of several audio files named
+/**
+ * Register a background songset. A songset can consist of several audio files named
  * FILE_XX.ogg, where XX is between 00 and 99.
  * \param dir        The directory where the audio files reside.
  * \param basename   Name from which filenames will be formed
- *                   (BASENAME_XX.ogg); also the name used with \ref play_fx .
- * This just registers the song, actual loading takes place when
- * \ref Songset::get_song() is called, i.e. when the song is about to be
+ *                   (BASENAME_XX.ogg); also the name used with \ref change_music .
+ * This just registers the songs, actual loading takes place when
+ * \ref Songset::get_song() is called, i.e. when a song is about to be
  * played. The song will automatically be removed from memory when it has
  * finished playing.
  */
@@ -473,10 +483,9 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
 	}
 }
 
-/** Start playing a songset.
+/**
+ * Start playing a songset.
  * \param songset_name  The songset to play a song from.
- * \param fadein_ms     Song will fade from 0% to 100% during fadein_ms
- *                      milliseconds starting from now.
  * \note When calling start_music() while music is still fading out from
  * \ref stop_music()
  * or \ref change_music() this function will block until the fadeout is complete
@@ -503,7 +512,8 @@ void SoundHandler::start_music(const std::string& songset_name) {
 	Mix_VolumeMusic(sound_options_.at(SoundType::kMusic).volume);
 }
 
-/** Stop playing a songset.
+/**
+ * Stop playing a songset.
  * \param fadeout_ms Song will fade from 100% to 0% during fadeout_ms
  *                   milliseconds starting from now.
  */
@@ -517,12 +527,11 @@ void SoundHandler::stop_music(int fadeout_ms) {
 	}
 }
 
-/** Play an other piece of music.
+/**
+ * Play an new piece of music.
  * This is a member function provided for convenience. It is a wrapper around
  * \ref start_music and \ref stop_music.
  * \param fadeout_ms  Old song will fade from 100% to 0% during fadeout_ms
- *                    milliseconds starting from now.
- * \param fadein_ms   New song will fade from 0% to 100% during fadein_ms
  *                    milliseconds starting from now.
  * If songset_name is empty, another song from the currently active songset will
  * be selected
@@ -544,16 +553,21 @@ void SoundHandler::change_music(const std::string& songset_name,
 	}
 }
 
+/// Returns whether we want to hear sonds of the given 'type'
 bool SoundHandler::is_sound_enabled(SoundType type) const {
 	assert(sound_options_.count(type) == 1);
 	return sound_options_.at(type).enabled;
 }
+
+/// Returns the volume that the given 'type' of sound is to be payed at
 int32_t SoundHandler::get_volume(SoundType type) const {
 	assert(sound_options_.count(type) == 1);
 	return sound_options_.at(type).volume;
 }
 
-// NOCOM usage? Document.
+/**
+ * Sets that we want to /don't want to hear the given 'type' of sounds. If the type is \ref SoundType::kMusic, start/stop the music as well.
+ */
 void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	assert(sound_options_.count(type) == 1);
 	SoundOptions& sound_options = sound_options_.at(type);
@@ -580,27 +594,26 @@ void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 }
 
 /**
- * Normal set_* function
- * Set the FX sound volume between 0 (muted) and \ref get_max_volume().
- * The new value is written back to the config file.
- *
- * \param volume The new music volume.
+ * Sets the music or sound 'volume' for the given 'type' between 0 (muted) and \ref get_max_volume().
  */
 void SoundHandler::set_volume(SoundType type, int32_t volume) {
-	if (!SoundHandler::is_backend_disabled()) {
-		assert(sound_options_.count(type) == 1);
-		SoundOptions& sound_options = sound_options_.at(type);
-		sound_options.volume = volume;
+	if (SoundHandler::is_backend_disabled()) {
+		return;
+	}
 
-		// Special treatment for music
-		switch (type) {
-		case SoundType::kMusic:
-			Mix_VolumeMusic(volume);
-			break;
-		default:
-			Mix_Volume(-1, volume);
-			break;
-		}
+	assert(sound_options_.count(type) == 1);
+	assert(volume >= 0 && volume <= get_max_volume());
+
+	sound_options_.at(type).volume = volume;
+
+	// Special treatment for music
+	switch (type) {
+	case SoundType::kMusic:
+		Mix_VolumeMusic(volume);
+		break;
+	default:
+		Mix_Volume(-1, volume);
+		break;
 	}
 }
 

@@ -199,13 +199,12 @@ public:
 
 private:
 	void read_config();
-	void register_music_and_system_sounds();
+	void register_songs_and_system_sounds();
 
 	void do_register_fx(SoundType type, const std::string& dir,
 	                       const std::string& basename,
 	                       const std::string& fx_name);
 
-	// Prints an error and disables and shuts down the sound system.
 	void initialization_error(const char* const msg, bool quit_sdl);
 
 	bool play_or_not(SoundType type, const std::string& fx_name, uint8_t priority);
