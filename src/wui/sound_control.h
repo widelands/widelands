@@ -33,10 +33,11 @@ public:
 	SoundControl(UI::Box* parent, const std::string& title, SoundType type);
 	~SoundControl() override;
 
+private:
+	void play_sound_sample();
 	void enable_changed(bool on);
 	void volume_changed(int32_t value);
 
-private:
 	UI::Checkbox enable_;
 	UI::HorizontalSlider volume_;
 	const SoundType type_;

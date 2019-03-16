@@ -52,16 +52,31 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
 		enable_.set_state(g_sound_handler.is_sound_enabled(type));
 		volume_.set_enabled(g_sound_handler.is_sound_enabled(type));
 
-		enable_.changedto.connect(
-		   boost::bind(&SoundControl::enable_changed, this, _1));
-
-		volume_.changedto.connect(
-		   boost::bind(&SoundControl::volume_changed, this, _1));
+		enable_.changedto.connect([this] (bool on) { enable_changed(on); });
+		volume_.changedto.connect([this] (int32_t value) { volume_changed(value); });
+		volume_.clicked.connect([this] { play_sound_sample(); });
 	}
 	set_thinks(false);
 }
 
 SoundControl::~SoundControl() {
+}
+
+void SoundControl::play_sound_sample() {
+	switch (type_) {
+	case SoundType::kAmbient:
+			g_sound_handler.play_fx(type_, "create_construction_site");
+			break;
+	case SoundType::kChat:
+		g_sound_handler.play_fx(type_, "lobby_chat");
+		break;
+	case SoundType::kMessage:
+		g_sound_handler.play_fx(type_, "message");
+		break;
+	default:
+		// UI and music take care of themselves
+		break;
+	}
 }
 
 void SoundControl::volume_changed(int32_t value) {

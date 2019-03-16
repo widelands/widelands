@@ -266,13 +266,18 @@ void SoundHandler::register_music_and_system_sounds() {
 	register_songs("music", "menu");
 	register_songs("music", "ingame");
 
+	// We regtser a click sound for all types except music so that we can hear volume changes in the sound controller
 	register_fx(SoundType::kUI, "sound", "click", "click");
+	register_fx(SoundType::kAmbient, "sound", "click", "click");
+	register_fx(SoundType::kChat, "sound", "click", "click");
+	register_fx(SoundType::kMessage, "sound", "click", "click");
+
 	register_fx(SoundType::kAmbient, "sound", "create_construction_site", "create_construction_site");
+	register_fx(SoundType::kChat, "sound", "lobby_chat", "lobby_chat");
+	register_fx(SoundType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
 	register_fx(SoundType::kMessage, "sound", "message", "message");
 	register_fx(SoundType::kMessage, "sound/military", "under_attack", "military/under_attack");
 	register_fx(SoundType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
-	register_fx(SoundType::kChat, "sound", "lobby_chat", "lobby_chat");
-	register_fx(SoundType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
 }
 
 /**
@@ -393,8 +398,9 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
  *                         played? (see \ref FXset::priority_)
  */
 void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
+						   uint8_t const priority,
                            int32_t const stereo_pos,
-                           uint8_t const priority, int distance) {
+                           int distance) {
 	if (backend_is_disabled_ || !is_sound_enabled(type)) {
 		return;
 	}

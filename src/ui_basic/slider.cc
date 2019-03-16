@@ -307,6 +307,7 @@ void Slider::cursor_pressed(int32_t pointer) {
 	highlighted_ = true;
 	relative_move_ = pointer - cursor_pos_;
 
+	clicked();
 	play_click();
 }
 
