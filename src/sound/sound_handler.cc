@@ -49,16 +49,13 @@ constexpr uint32_t kSlidingWindowSize = 20000;
 
 
 /** The global \ref SoundHandler object
- * The sound handler is a static object because otherwise it'd be quite
- * difficult to pass the --nosound command line option
  */
-SoundHandler g_sound_handler;
+SoundHandler* g_sound_handler;
 
-/** This is just a basic constructor. The \ref SoundHandler must already exist
- * during command line parsing because --nosound needs to be known. At this
- * time, however, all other information is still unknown, so a real
- * initialization cannot take place.
- * \sa SoundHandler::init()
+bool SoundHandler::backend_is_disabled_ = false;
+
+/**
+ * Initialize our data structures and if SoundHandler::is_backend_disabled() is false, initialize the SDL sound system and configure everything.
  */
 SoundHandler::SoundHandler()
    : sound_options_{
@@ -67,29 +64,18 @@ SoundHandler::SoundHandler()
 {SoundType::kChat, SoundOptions(kDefaultFxVolume, "chat")},
 {SoundType::kAmbient, SoundOptions(kDefaultFxVolume, "ambient")},
 {SoundType::kMusic, SoundOptions(kDefaultMusicVolume, "music")}},
-     fx_lock_(nullptr), backend_is_disabled_(false) {
-}
-
-/// Housekeeping: unset hooks. Audio data will be freed automagically by the
-/// \ref Songset and \ref FXset destructors, but not the {song|fx}sets
-/// themselves.
-SoundHandler::~SoundHandler() {
-}
-
-/** The real initialization for SoundHandler.
- *
- * \see SoundHandler::SoundHandler()
- */
-void SoundHandler::init() {
+     fx_lock_(nullptr) {
+	// Ensure that we don't lose our config for when we start with sound the next time
 	read_config();
+
+	// No sound wanted, let's not do anything.
+	if (SoundHandler::is_backend_disabled()) {
+		return;
+	}
 
 	// This RNG will still be somewhat predictable, but it's just to avoid
 	// identical playback patterns
 	rng_.seed(SDL_GetTicks());
-
-	if (is_backend_disabled()) {
-		return;
-	}
 
 // Windows Music has crickling inside if the buffer has another size
 // than 4k, but other systems work fine with less, some crash
@@ -110,7 +96,7 @@ void SoundHandler::init() {
 	/// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
 	if (sdl_version.major == 2 && sdl_version.minor == 0 && sdl_version.patch == 6) {
 		log("Disabled sound due to a bug in SDL 2.0.6\n");
-		disable_backend();
+		SoundHandler::disable_backend();
 	}
 
 	SDL_MIXER_VERSION(&sdl_version);
@@ -119,7 +105,7 @@ void SoundHandler::init() {
 
 	log("**** END SOUND REPORT ****\n");
 
-	if (is_backend_disabled()) {
+	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
 
@@ -156,38 +142,37 @@ void SoundHandler::init() {
 	}
 }
 
-void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
-	log("WARNING: Failed to initialize sound system: %s\n", msg);
-	disable_backend();
-	if (quit_sdl) {
-		SDL_QuitSubSystem(SDL_INIT_AUDIO);
+/// Housekeeping: unset hooks. Audio data will be freed automagically by the
+/// \ref Songset and \ref FXset destructors, but not the {song|fx}sets
+/// themselves.
+SoundHandler::~SoundHandler() {
+	if (SDL_WasInit(SDL_INIT_AUDIO) == 0) {
+		return;
 	}
-	return;
-}
 
-void SoundHandler::shutdown() {
 	Mix_ChannelFinished(nullptr);
 	Mix_HookMusicFinished(nullptr);
 
 	int numtimesopened, frequency, channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
-	log("SoundHandler closing times %i, freq %i, format %i, chan %i\n", numtimesopened, frequency,
+	log("SoundHandler: Closing times %i, freq %i, format %i, chan %i\n", numtimesopened, frequency,
 	    format, channels);
 
-	if (!numtimesopened)
+	if (numtimesopened == 0) {
 		return;
+	}
 
 	Mix_HaltChannel(-1);
 
 	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
-		log("audio error %s\n", SDL_GetError());
+		log("SoundHandler: Audio error %s\n", SDL_GetError());
 	}
 
-	log("SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
+	log("SoundHandler: SDL_AUDIODRIVER %s\n", SDL_GetCurrentAudioDriver());
 
 	if (numtimesopened != 1) {
-		log("PROBLEM: sound device opened multiple times, trying to close");
+		log("SoundHandler: PROBLEM: sound device opened multiple times, trying to close");
 	}
 	for (int i = 0; i < numtimesopened; ++i) {
 		Mix_CloseAudio();
@@ -203,6 +188,15 @@ void SoundHandler::shutdown() {
 
 	Mix_Quit();
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);
+}
+
+void SoundHandler::initialization_error(const char* const msg, bool quit_sdl) {
+	log("WARNING: Failed to initialize sound system: %s\n", msg);
+	SoundHandler::disable_backend();
+	if (quit_sdl) {
+		SDL_QuitSubSystem(SDL_INIT_AUDIO);
+	}
+	return;
 }
 
 /** Read the main config file, load background music and systemwide sound fx
@@ -267,29 +261,27 @@ void SoundHandler::register_music_and_system_sounds() {
 	register_songs("music", "menu");
 	register_songs("music", "ingame");
 
-	// We regtser a click sound for all types except music so that we can hear volume changes in the sound controller
-	register_fx(SoundType::kUI, "sound", "click", "click");
-	register_fx(SoundType::kAmbient, "sound", "click", "click");
-	register_fx(SoundType::kChat, "sound", "click", "click");
-	register_fx(SoundType::kMessage, "sound", "click", "click");
-
-	register_fx(SoundType::kAmbient, "sound", "create_construction_site", "create_construction_site");
-	register_fx(SoundType::kChat, "sound", "lobby_chat", "lobby_chat");
-	register_fx(SoundType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
-	register_fx(SoundType::kMessage, "sound", "message", "message");
-	register_fx(SoundType::kMessage, "sound/military", "under_attack", "military/under_attack");
-	register_fx(SoundType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
+	do_register_fx(SoundType::kUI, "sound", "click", "click");
+	do_register_fx(SoundType::kAmbient, "sound", "create_construction_site", "create_construction_site");
+	do_register_fx(SoundType::kChat, "sound", "lobby_chat", "lobby_chat");
+	do_register_fx(SoundType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
+	do_register_fx(SoundType::kMessage, "sound", "message", "message");
+	do_register_fx(SoundType::kMessage, "sound/military", "under_attack", "military/under_attack");
+	do_register_fx(SoundType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
 }
 
 /**
- * Returns 'true' if the playing of sounds is disabled due to sound driver problems.
+ * Returns 'true' if the playing of sounds is disabled due to sound driver problems, or because disable_backend() was used.
  */
-bool SoundHandler::is_backend_disabled() const {
-	return backend_is_disabled_;
+bool SoundHandler::is_backend_disabled() {
+	return SoundHandler::backend_is_disabled_;
 }
 
+/**
+ * Disables all sound.
+ */
 void SoundHandler::disable_backend() {
-	backend_is_disabled_ = true;
+	SoundHandler::backend_is_disabled_ = true;
 }
 
 /** Register a sound effect. One sound effect can consist of several audio files
@@ -305,10 +297,19 @@ void SoundHandler::disable_backend() {
 void SoundHandler::register_fx(SoundType type, const std::string& dir,
                                      const std::string& basename,
                                      const std::string& fx_name) {
-	if (is_backend_disabled() || fxs_[type].count(fx_name) > 0) {
+	if (SoundHandler::is_backend_disabled() || g_sound_handler == nullptr) {
 		return;
 	}
-	fxs_[type].insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset(dir, basename))));
+	g_sound_handler->do_register_fx(type, dir, basename, fx_name);
+}
+
+void SoundHandler::do_register_fx(SoundType type, const std::string& dir,
+                                     const std::string& basename,
+                                     const std::string& fx_name) {
+	assert(!SoundHandler::is_backend_disabled());
+	if (fxs_[type].count(fx_name) == 0) {
+		fxs_[type].insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset(dir, basename))));
+	}
 }
 
 /** Find out whether to actually play a certain effect right now or rather not
@@ -452,7 +453,7 @@ void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
  * finished playing.
  */
 void SoundHandler::register_songs(const std::string& dir, const std::string& basename) {
-	if (is_backend_disabled()) {
+	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
 
@@ -529,7 +530,7 @@ void SoundHandler::stop_music(int fadeout_ms) {
 void SoundHandler::change_music(const std::string& songset_name,
                                 int const fadeout_ms,
                                 int const fadein_ms) {
-	if (is_backend_disabled()) {
+	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
 
@@ -557,7 +558,7 @@ int32_t SoundHandler::get_volume(SoundType type) const {
 void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	assert(sound_options_.count(type) == 1);
 	SoundOptions& sound_options = sound_options_.at(type);
-	if (is_backend_disabled()) {
+	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
 
@@ -587,7 +588,7 @@ void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
  * \param volume The new music volume.
  */
 void SoundHandler::set_volume(SoundType type, int32_t volume) {
-	if (!is_backend_disabled()) {
+	if (!SoundHandler::is_backend_disabled()) {
 		assert(sound_options_.count(type) == 1);
 		SoundOptions& sound_options = sound_options_.at(type);
 		sound_options.volume = volume;
@@ -613,8 +614,9 @@ void SoundHandler::set_volume(SoundType type, int32_t volume) {
 void SoundHandler::music_finished_callback() {
 	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
+	assert(!SoundHandler::is_backend_disabled());
 	SDL_Event event;
-	if (g_sound_handler.current_songset_ == "intro") {
+	if (g_sound_handler->current_songset_ == "intro") {
 		// Special case for splashscreen: there, only one song is ever played
 		event.type = SDL_KEYDOWN;
 		event.key.state = SDL_PRESSED;
@@ -634,15 +636,16 @@ void SoundHandler::music_finished_callback() {
 void SoundHandler::fx_finished_callback(int32_t const channel) {
 	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
+	assert(!SoundHandler::is_backend_disabled());
 	assert(0 <= channel);
-	g_sound_handler.handle_channel_finished(static_cast<uint32_t>(channel));
+	g_sound_handler->handle_channel_finished(static_cast<uint32_t>(channel));
 }
 
 /** Remove a finished sound fx from the list of currently playing ones
  * This is part of \ref fx_finished_callback
  */
 void SoundHandler::handle_channel_finished(uint32_t channel) {
-	assert(!is_backend_disabled());
+	assert(!SoundHandler::is_backend_disabled());
 
 	// Needs locking because active_fx_ may be accessed
 	// from this callback or from main thread

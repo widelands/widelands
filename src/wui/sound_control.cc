@@ -32,7 +32,7 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
    : UI::Box(parent, 0, 0, UI::Box::Horizontal),
      enable_(this, Vector2i::zero(), title),
      volume_(this, 0, 0, kSliderWidth, enable_.get_h(),
-			 0, g_sound_handler.get_max_volume(), g_sound_handler.get_volume(type), style,
+			 0, g_sound_handler->get_max_volume(), g_sound_handler->get_volume(type), style,
 			 /** TRANSLATORS: Tooltip for volume slider in sound options */
 			 _("Changes the volume. Click to hear a sample."), kCursorWidth),
      type_(type) {
@@ -40,12 +40,12 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
 	add(&volume_, UI::Box::Resizing::kFullSize);
 	add(&enable_, UI::Box::Resizing::kFullSize);
 
-	if (g_sound_handler.is_backend_disabled()) {
+	if (SoundHandler::is_backend_disabled()) {
 		enable_.set_enabled(false);
 		volume_.set_enabled(false);
 	} else {
-		enable_.set_state(g_sound_handler.is_sound_enabled(type));
-		volume_.set_enabled(g_sound_handler.is_sound_enabled(type));
+		enable_.set_state(g_sound_handler->is_sound_enabled(type));
+		volume_.set_enabled(g_sound_handler->is_sound_enabled(type));
 
 		enable_.changedto.connect([this] (bool on) { enable_changed(on); });
 		volume_.changedto.connect([this] (int32_t value) { volume_changed(value); });
@@ -57,13 +57,13 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
 void SoundControl::play_sound_sample() {
 	switch (type_) {
 	case SoundType::kAmbient:
-			g_sound_handler.play_fx(type_, "create_construction_site");
+			g_sound_handler->play_fx(type_, "create_construction_site");
 			break;
 	case SoundType::kChat:
-		g_sound_handler.play_fx(type_, "lobby_chat");
+		g_sound_handler->play_fx(type_, "lobby_chat");
 		break;
 	case SoundType::kMessage:
-		g_sound_handler.play_fx(type_, "message");
+		g_sound_handler->play_fx(type_, "message");
 		break;
 	default:
 		// UI and music take care of themselves
@@ -72,12 +72,12 @@ void SoundControl::play_sound_sample() {
 }
 
 void SoundControl::volume_changed(int32_t value) {
-	g_sound_handler.set_volume(type_, value);
+	g_sound_handler->set_volume(type_, value);
 }
 
 void SoundControl::enable_changed(bool on) {
 	enable_.set_state(on);
 	volume_.set_enabled(on);
-	g_sound_handler.set_enable_sound(type_, on);
+	g_sound_handler->set_enable_sound(type_, on);
 }
 

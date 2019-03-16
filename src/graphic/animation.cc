@@ -110,7 +110,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			const std::string name = sound_effects->get_string("name");
 			const std::string directory = sound_effects->get_string("directory");
 			sound_effect_ = directory + g_fs->file_separator() + name;
-			g_sound_handler.register_fx(SoundType::kAmbient, directory, name, sound_effect_);
+			SoundHandler::register_fx(SoundType::kAmbient, directory, name, sound_effect_);
 
 			if (sound_effects->has_key<std::string>("priority")) {
 				sound_priority_ = sound_effects->get_int("priority");

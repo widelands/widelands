@@ -45,7 +45,7 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	   UI::MultilineTextarea::ScrollMode::kNoScrolling);
 	add(sound_warning, UI::Box::Resizing::kExpandBoth);
 
-	if (g_sound_handler.is_backend_disabled()) {
+	if (SoundHandler::is_backend_disabled()) {
 		sound_warning->set_text(_("Sound is disabled either due to a problem with the sound driver, or because it was switched off at the command line."));
 	}
 }

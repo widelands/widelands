@@ -362,7 +362,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   config.get_bool("debug_gl_trace", false) ? Graphic::TraceGl::kYes : Graphic::TraceGl::kNo,
 	   config.get_int("xres", DEFAULT_RESOLUTION_W), config.get_int("yres", DEFAULT_RESOLUTION_H),
 	   config.get_bool("fullscreen", false));
-	g_sound_handler.init();
+
+	g_sound_handler = new SoundHandler();
 
 	// This might grab the input.
 	refresh_graphics();
@@ -415,7 +416,7 @@ void WLApplication::run() {
 	refresh_graphics();
 
 	if (game_type_ == EDITOR) {
-		g_sound_handler.start_music("ingame");
+		g_sound_handler->start_music("ingame");
 		EditorInteractive::run_editor(filename_, script_to_run_);
 	} else if (game_type_ == REPLAY) {
 		replay();
@@ -443,18 +444,18 @@ void WLApplication::run() {
 			throw;
 		}
 	} else {
-		g_sound_handler.start_music("intro");
+		g_sound_handler->start_music("intro");
 
 		{
 			FullscreenMenuIntro intro;
 			intro.run<FullscreenMenuBase::MenuTarget>();
 		}
 
-		g_sound_handler.change_music("menu", 1000);
+		g_sound_handler->change_music("menu", 1000);
 		mainmenu();
 	}
 
-	g_sound_handler.stop_music(500);
+	g_sound_handler->stop_music(500);
 
 	return;
 }
@@ -490,7 +491,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 
 	case SDL_USEREVENT:
 		if (ev.user.code == CHANGE_MUSIC)
-			g_sound_handler.change_music();
+			g_sound_handler->change_music();
 		break;
 
 	default:
@@ -867,7 +868,8 @@ void WLApplication::shutdown_hardware() {
 	alarm(5);
 #endif
 
-	g_sound_handler.shutdown();
+	delete g_sound_handler;
+	g_sound_handler = nullptr;
 
 	SDL_QuitSubSystem(SDL_INIT_TIMER | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
 }
@@ -926,7 +928,7 @@ void WLApplication::parse_commandline(int const argc, char const* const* const a
  */
 void WLApplication::handle_commandline_parameters() {
 	if (commandline_.count("nosound")) {
-		g_sound_handler.disable_backend();
+		SoundHandler::disable_backend();
 		commandline_.erase("nosound");
 	}
 	if (commandline_.count("nozip")) {

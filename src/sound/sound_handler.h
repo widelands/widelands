@@ -37,8 +37,6 @@
 #include "sound/constants.h"
 #include "sound/songset.h"
 
-extern class SoundHandler g_sound_handler;
-
 /** The 'sound server' for Widelands.
  *
  * SoundHandler collects all functions for dealing with music and sound effects
@@ -163,14 +161,13 @@ public:
 	SoundHandler();
 	~SoundHandler();
 
-	void init();
-	void shutdown();
 	void save_config();
 	void load_config();
-	bool is_backend_disabled() const;
-	void disable_backend();
+	static bool is_backend_disabled();
+	static void disable_backend();
 
-	void register_fx(SoundType type, const std::string& dir,
+	// This is static so that we can load the tribes and world without instantiating the sound system
+	static void register_fx(SoundType type, const std::string& dir,
 	                       const std::string& basename,
 	                       const std::string& fx_name);
 
@@ -206,7 +203,11 @@ private:
 	void read_config();
 	void register_music_and_system_sounds();
 
-	// Prints an error and disables the sound system.
+	void do_register_fx(SoundType type, const std::string& dir,
+	                       const std::string& basename,
+	                       const std::string& fx_name);
+
+	// Prints an error and disables and shuts down the sound system.
 	void initialization_error(const char* const msg, bool quit_sdl);
 
 	bool play_or_not(SoundType type, const std::string& fx_name, uint8_t priority);
@@ -256,10 +257,12 @@ private:
 	SDL_mutex* fx_lock_;
 
 	/** Can sounds be played?
-	 * true = they mustn't be played (e.g. because hardware is missing) or the command line option --nosound was used.
+	 * true = they mustn't be played (e.g. because hardware is missing) or disable_backend() was called.
 	 * false = can be played
 	 */
-	bool backend_is_disabled_;
+	static bool backend_is_disabled_;
 };
+
+extern SoundHandler* g_sound_handler;
 
 #endif  // end of include guard: WL_SOUND_SOUND_HANDLER_H

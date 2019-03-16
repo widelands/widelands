@@ -804,7 +804,7 @@ ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDe
 		} else
 			priority = 127;
 
-		g_sound_handler.register_fx(SoundType::kAmbient,
+		SoundHandler::register_fx(SoundType::kAmbient,
 		   FileSystem::fs_dirname(name), FileSystem::fs_filename(name.c_str()), name);
 	} catch (const WException& e) {
 		throw GameDataError("playsound: %s", e.what());

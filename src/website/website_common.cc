@@ -26,7 +26,6 @@
 #include "graphic/graphic.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "sound/sound_handler.h"
 
 // Setup the static objects Widelands needs to operate and initializes systems.
 void initialize() {
@@ -43,15 +42,10 @@ void initialize() {
 	// when they aren't initialized
 	g_gr = new Graphic();
 	g_gr->initialize(Graphic::TraceGl::kNo, 1, 1, false);
-
-	g_sound_handler.init();
-	g_sound_handler.disable_backend();
 }
 
 // Cleanup before program end
 void cleanup() {
-	g_sound_handler.shutdown();
-
 	if (g_gr) {
 		delete g_gr;
 		g_gr = nullptr;
