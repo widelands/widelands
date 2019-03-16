@@ -487,7 +487,7 @@ void SoundHandler::start_music(const std::string& songset_name, int fadein_ms) {
 	}
 
 	if (Mix_PlayingMusic()) {
-		change_music(songset_name, 0, fadein_ms);
+		change_music(songset_name, kMinimumMusicFade, fadein_ms);
 	}
 
 	if (songs_.count(songset_name) == 0) {

@@ -416,7 +416,7 @@ void WLApplication::run() {
 	refresh_graphics();
 
 	if (game_type_ == EDITOR) {
-		g_sound_handler->start_music("ingame");
+		g_sound_handler->change_music("ingame");
 		EditorInteractive::run_editor(filename_, script_to_run_);
 	} else if (game_type_ == REPLAY) {
 		replay();
@@ -444,7 +444,7 @@ void WLApplication::run() {
 			throw;
 		}
 	} else {
-		g_sound_handler->start_music("intro");
+		g_sound_handler->change_music("intro");
 
 		{
 			FullscreenMenuIntro intro;

@@ -176,7 +176,6 @@ public:
 	             int32_t stereo_position = kStereoCenter, int distance = 0);
 
 	void register_songs(const std::string& dir, const std::string& basename);
-	void start_music(const std::string& songset_name, int fadein_ms = kMinimumMusicFade);
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade,
@@ -211,6 +210,7 @@ private:
 	void initialization_error(const char* const msg, bool quit_sdl);
 
 	bool play_or_not(SoundType type, const std::string& fx_name, uint8_t priority);
+	void start_music(const std::string& songset_name, int fadein_ms = kMinimumMusicFade);
 
 	struct SoundOptions {
 		explicit SoundOptions(int vol, const std::string& savename) : enabled(true), volume(vol), name(savename) {
