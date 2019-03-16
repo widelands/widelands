@@ -179,6 +179,9 @@ public:
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
+	const std::string current_songset() const {
+		return current_songset_;
+	}
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
@@ -199,7 +202,6 @@ public:
 
 private:
 	void read_config();
-	void register_songs_and_system_sounds();
 
 	void do_register_fx(SoundType type, const std::string& dir,
 	                       const std::string& basename,
@@ -209,6 +211,9 @@ private:
 
 	bool play_or_not(SoundType type, const std::string& fx_name, uint8_t priority);
 	void start_music(const std::string& songset_name);
+
+	void lock();
+	void release_lock();
 
 	struct SoundOptions {
 		explicit SoundOptions(int vol, const std::string& savename) : enabled(true), volume(vol), name(savename) {

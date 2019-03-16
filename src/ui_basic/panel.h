@@ -311,8 +311,6 @@ protected:
 	virtual void update_desired_size();
 
 	static void play_click();
-	static void play_new_chat_member();
-	static void play_new_chat_message();
 
 	static bool draw_tooltip(const std::string& text);
 	void draw_background(RenderTarget& dst, const UI::PanelStyleInfo&);

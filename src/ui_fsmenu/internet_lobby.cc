@@ -33,6 +33,7 @@
 #include "network/internet_gaming.h"
 #include "profile/profile.h"
 #include "random/random.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/messagebox.h"
 
 namespace {
@@ -113,6 +114,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      nickname_(nick),
      password_(pwd),
      is_registered_(registered) {
+	SoundHandler::register_fx(SoundType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
+
 	joingame_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuInternetLobby::clicked_joingame, boost::ref(*this)));
 	hostgame_.sigclicked.connect(
@@ -295,7 +298,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		}
 		// If a new player joins the lobby, play a sound.
 		if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
-			play_new_chat_member();
+			g_sound_handler->play_fx(SoundType::kChat, "lobby_freshmen");
 		}
 		prev_clientlist_len_ = clients->size();
 	}

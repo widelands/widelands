@@ -365,6 +365,13 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 
 	g_sound_handler = new SoundHandler();
 
+	g_sound_handler->register_songs("music", "intro");
+	g_sound_handler->register_songs("music", "menu");
+	g_sound_handler->register_songs("music", "ingame");
+
+	// Use by UI::Panel. Registered here for performance reasons
+	SoundHandler::register_fx(SoundType::kUI, "sound", "click", "click");
+
 	// This might grab the input.
 	refresh_graphics();
 
@@ -489,10 +496,27 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 		}
 		break;
 
-	case SDL_USEREVENT:
-		if (ev.user.code == CHANGE_MUSIC)
-			g_sound_handler->change_music();
-		break;
+	case SDL_USEREVENT: {
+		if (ev.user.code == CHANGE_MUSIC) {
+			/* Notofication from the SoundHandler that a song has finished playing.
+			 * Usually, another song from the same songset will be started.
+			 * There is a special case for the intro screen's music: only one song will be
+			 * played. If the user has not clicked the mouse or pressed escape when the song
+			 * finishes, Widelands will automatically go on to the main menu.
+			 */
+			assert(!SoundHandler::is_backend_disabled());
+			if (g_sound_handler->current_songset() == "intro") {
+				// Special case for splashscreen: there, only one song is ever played
+				SDL_Event new_event;
+				new_event.type = SDL_KEYDOWN;
+				new_event.key.state = SDL_PRESSED;
+				new_event.key.keysym.sym = SDLK_ESCAPE;
+				SDL_PushEvent(&new_event);
+			} else {
+				g_sound_handler->change_music();
+			}
+		}
+	} break;
 
 	default:
 		break;

@@ -713,13 +713,8 @@ void Panel::die() {
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click() {
+	// The sound is registered in WLApplication
 	g_sound_handler->play_fx(SoundType::kUI, "click");
-}
-void Panel::play_new_chat_message() {
-	g_sound_handler->play_fx(SoundType::kChat, "lobby_chat");
-}
-void Panel::play_new_chat_member() {
-	g_sound_handler->play_fx(SoundType::kChat, "lobby_freshmen");
 }
 
 /**

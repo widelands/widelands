@@ -54,6 +54,7 @@
 #include "logic/playercommand.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 #include "wui/interactive_player.h"
 
 namespace {
@@ -145,6 +146,10 @@ Player::Player(EditorGameBase& the_egbase,
      ware_consumptions_(the_egbase.tribes().nrwares()),
      ware_stocks_(the_egbase.tribes().nrwares()) {
 	set_name(name);
+
+	SoundHandler::register_fx(SoundType::kMessage, "sound", "message", "message");
+	SoundHandler::register_fx(SoundType::kMessage, "sound/military", "under_attack", "military/under_attack");
+	SoundHandler::register_fx(SoundType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
 
 	// Disallow workers that the player's tribe doesn't have.
 	for (size_t worker_index = 0; worker_index < allowed_worker_types_.size(); ++worker_index) {

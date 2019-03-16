@@ -35,6 +35,8 @@
 #include "logic/game.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/tribes/worker.h"
+#include "sound/note_sound.h"
+#include "sound/sound_handler.h"
 #include "ui_basic/window.h"
 
 namespace Widelands {
@@ -81,6 +83,7 @@ ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const EditorGameBase& egbase)
    : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase) {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
+	SoundHandler::register_fx(SoundType::kAmbient, "sound", "create_construction_site", "create_construction_site");
 }
 
 Building& ConstructionSiteDescr::create_object() const {
@@ -144,6 +147,7 @@ Initialize the construction site by starting orders
 ===============
 */
 bool ConstructionSite::init(EditorGameBase& egbase) {
+	Notifications::publish(NoteSound(SoundType::kAmbient, "create_construction_site", position_, kFxPriorityAlwaysPlay));
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t>* buildcost;

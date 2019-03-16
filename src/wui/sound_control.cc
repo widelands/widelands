@@ -23,7 +23,7 @@
 #include "sound/sound_handler.h"
 
 namespace {
-constexpr int kSliderWidth = 160;
+constexpr int kSliderWidth = 200;
 constexpr int kCursorWidth = 28;
 constexpr int kSpacing = 16;
 } // namespace

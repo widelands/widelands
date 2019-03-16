@@ -126,8 +126,6 @@ SoundHandler::SoundHandler()
 		return;
 	}
 
-	register_songs_and_system_sounds();
-
 	Mix_HookMusicFinished(SoundHandler::music_finished_callback);
 	Mix_ChannelFinished(SoundHandler::fx_finished_callback);
 	Mix_VolumeMusic(sound_options_.at(SoundType::kMusic).volume);  //  can not do this before InitSubSystem
@@ -257,23 +255,6 @@ void SoundHandler::load_config() {
 }
 
 /**
- * Register all music song sets and all system sounds. Any sound effects that are not registered when loading the tribes and world should to be included here for efficiency.
- */
-void SoundHandler::register_songs_and_system_sounds() {
-	register_songs("music", "intro");
-	register_songs("music", "menu");
-	register_songs("music", "ingame");
-
-	do_register_fx(SoundType::kUI, "sound", "click", "click");
-	do_register_fx(SoundType::kAmbient, "sound", "create_construction_site", "create_construction_site");
-	do_register_fx(SoundType::kChat, "sound", "lobby_chat", "lobby_chat");
-	do_register_fx(SoundType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
-	do_register_fx(SoundType::kMessage, "sound", "message", "message");
-	do_register_fx(SoundType::kMessage, "sound/military", "under_attack", "military/under_attack");
-	do_register_fx(SoundType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
-}
-
-/**
  * Returns 'true' if the playing of sounds is disabled due to sound driver problems, or because disable_backend() was used.
  */
 bool SoundHandler::is_backend_disabled() {
@@ -345,12 +326,7 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
 	// Do not run multiple instances of the same sound effect if the priority is too low
 	bool too_many_playing = false;
 	if (priority < kFxPriorityAllowMultiple) {
-		// Access to active_fx_ is protected because it can
-		// be accessed from callback
-		if (fx_lock_) {
-			SDL_LockMutex(fx_lock_);
-		}
-
+		lock();
 		// Find out if an fx called 'fx_name' is already running
 		for (const auto& fx_pair : active_fx_) {
 			if (fx_pair.second == fx_name) {
@@ -360,9 +336,7 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
 		}
 	}
 
-	if (fx_lock_) {
-		SDL_UnlockMutex(fx_lock_);
-	}
+	release_lock();
 
 	if (too_many_playing) {
 		return false;
@@ -436,15 +410,9 @@ void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
 			Mix_SetDistance(chan, distance);
 			Mix_Volume(chan, get_volume(type));
 
-			// Access to active_fx_ is protected
-			// because it can be accessed from callback
-			if (fx_lock_) {
-				SDL_LockMutex(fx_lock_);
-			}
+			lock();
 			active_fx_[chan] = fx_name;
-			if (fx_lock_) {
-				SDL_UnlockMutex(fx_lock_);
-			}
+			release_lock();
 		}
 	} else {
 		log("SoundHandler: sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
@@ -617,28 +585,17 @@ void SoundHandler::set_volume(SoundType type, int32_t volume) {
 	}
 }
 
-/** Callback to notify \ref SoundHandler that a song has finished playing.
- * Usually, another song from the same songset will be started.
- * There is a special case for the intro screen's music: only one song will be
- * played. If the user has not clicked the mouse or pressed escape when the song
- * finishes, Widelands will automatically go on to the main menu.
+/**
+ * Callback to notify \ref WLApplication that a song has finished playing.
  */
 void SoundHandler::music_finished_callback() {
 	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
 	assert(!SoundHandler::is_backend_disabled());
+	// Trigger that we want a music change and leave the specifics to the application.
 	SDL_Event event;
-	if (g_sound_handler->current_songset_ == "intro") {
-		// Special case for splashscreen: there, only one song is ever played
-		event.type = SDL_KEYDOWN;
-		event.key.state = SDL_PRESSED;
-		event.key.keysym.sym = SDLK_ESCAPE;
-	} else {
-		// Else just play the next song - see general description for
-		// further explanation
-		event.type = SDL_USEREVENT;
-		event.user.code = CHANGE_MUSIC;
-	}
+	event.type = SDL_USEREVENT;
+	event.user.code = CHANGE_MUSIC;
 	SDL_PushEvent(&event);
 }
 
@@ -658,12 +615,21 @@ void SoundHandler::fx_finished_callback(int32_t const channel) {
  */
 void SoundHandler::handle_channel_finished(uint32_t channel) {
 	assert(!SoundHandler::is_backend_disabled());
-
-	// Needs locking because active_fx_ may be accessed
-	// from this callback or from main thread
-	if (fx_lock_)
-		SDL_LockMutex(fx_lock_);
+	lock();
 	active_fx_.erase(channel);
-	if (fx_lock_)
+	release_lock();
+}
+
+/// Lock the SDL mutex. Access to 'active_fx_' is protected by mutex because it can be accessed both from callbacks or from the main trhead
+void SoundHandler::lock() {
+	if (fx_lock_) {
+		SDL_LockMutex(fx_lock_);
+	}
+}
+
+/// Release the SDL mutex
+void SoundHandler::release_lock() {
+	if (fx_lock_) {
 		SDL_UnlockMutex(fx_lock_);
+	}
 }
