@@ -330,13 +330,17 @@ function field_caps_tests:test_wrong_call()
 end
 
 function field_caps_tests:test_conquerable_fields_does_not_crash()
-   local fields = map.conquerable_fields
-   assert_equal(false, fields[1] == nil)
+   assert_equal(5028, map:count_conquerable_fields())
+
+   local owned_fields = map:count_owned_valuable_fields()
+   assert_equal(404, owned_fields[1])
 end
 
 function field_caps_tests:test_terrestrial_fields_does_not_crash()
-   local fields = map.terrestrial_fields
-   assert_equal(false, fields[1] == nil)
+   assert_equal(5028, map:count_terrestrial_fields())
+
+   local owned_fields = map:count_owned_valuable_fields("tree")
+   assert_equal(nil, owned_fields[1])
 end
 
 -- ===============
