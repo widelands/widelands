@@ -419,6 +419,12 @@ void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
 	}
 }
 
+/// Removes the given FXset from memory
+void SoundHandler::remove_fx_set(SoundType type) {
+	assert(fxs_.count(type) == 1);
+	fxs_.erase(type);
+}
+
 /**
  * Register a background songset. A songset can consist of several audio files named
  * FILE_XX.ogg, where XX is between 00 and 99.
