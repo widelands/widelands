@@ -124,7 +124,7 @@ SoundHandler::SoundHandler()
 
 	Mix_HookMusicFinished(SoundHandler::music_finished_callback);
 	Mix_ChannelFinished(SoundHandler::fx_finished_callback);
-	Mix_VolumeMusic(sound_options_.at(SoundType::kMusic).volume);  //  can not do this before InitSubSystem
+	Mix_VolumeMusic(sound_options_.at(SoundType::kMusic).volume);
 
 	if (fx_lock_ == nullptr) {
 		fx_lock_ = SDL_CreateMutex();
@@ -467,7 +467,6 @@ void SoundHandler::start_music(const std::string& songset_name) {
 			log("SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
 		}
 	}
-	Mix_VolumeMusic(sound_options_.at(SoundType::kMusic).volume);
 }
 
 /**
