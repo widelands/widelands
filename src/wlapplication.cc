@@ -1212,6 +1212,8 @@ void WLApplication::mainmenu_multiplayer() {
 			NEVER_HERE();
 		}
 
+		g_sound_handler->change_music("ingame", 1000);
+
 		if (internet) {
 			std::string playername = mp.get_nickname();
 			std::string password(mp.get_password());
@@ -1265,6 +1267,7 @@ void WLApplication::mainmenu_multiplayer() {
 				break;
 			}
 		}
+		g_sound_handler->change_music("menu", 1000);
 	}
 }
 
