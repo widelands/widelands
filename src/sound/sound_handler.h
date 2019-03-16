@@ -180,26 +180,15 @@ public:
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void change_music(const std::string& songset_name = std::string(),
 	                  int fadeout_ms = kMinimumMusicFade);
-	const std::string current_songset() const {
-		return current_songset_;
-	}
 
-	static void music_finished_callback();
-	static void fx_finished_callback(int32_t channel);
-	void handle_channel_finished(uint32_t channel);
+	const std::string current_songset() const;
 
 	bool is_sound_enabled(SoundType type) const;
 	void set_enable_sound(SoundType type, bool enable);
 	int32_t get_volume(SoundType type) const;
 	void set_volume(SoundType type, int32_t volume);
 
-	/**
-	 * Return the max value for volume settings. We use a function to hide
-	 * SDL_mixer constants outside of sound_handler.
-	 */
-	int32_t get_max_volume() const {
-		return MIX_MAX_VOLUME;
-	}
+	int32_t get_max_volume() const;
 
 private:
 	void read_config();
@@ -212,6 +201,10 @@ private:
 
 	bool play_or_not(SoundType type, const std::string& fx_name, uint8_t priority);
 	void start_music(const std::string& songset_name);
+
+	static void music_finished_callback();
+	static void fx_finished_callback(int32_t channel);
+	void handle_channel_finished(uint32_t channel);
 
 	void lock();
 	void release_lock();

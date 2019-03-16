@@ -21,12 +21,26 @@
 
 #include <utility>
 
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/regex.hpp>
+
 #include "base/log.h"
+#include "helper.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 
-/// Prepare infrastructure for reading song files from disk
-Songset::Songset() : m_(nullptr), rwops_(nullptr) {
+/// Prepare infrastructure for reading song files from disk and register the matching files
+Songset::Songset(const std::string& dir, const std::string& basename) : m_(nullptr), rwops_(nullptr) {
+	assert(g_fs);
+	FilenameSet files = filter(g_fs->list_directory(dir), [&basename](const std::string& fn) {
+		const std::string only_filename = FileSystem::fs_filename(fn.c_str());
+		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
+	});
+
+	for (const std::string& filename : files) {
+		assert(!g_fs->is_directory(filename));
+		add_song(filename);
+	}
 }
 
 /// Close and delete all songs to avoid memory leaks.

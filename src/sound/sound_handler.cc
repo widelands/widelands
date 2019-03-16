@@ -24,16 +24,12 @@
 
 #include <SDL.h>
 #include <SDL_mixer.h>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/regex.hpp>
 #ifdef _WIN32
 #include <windows.h>
 #endif
 
 #include "base/i18n.h"
 #include "base/log.h"
-#include "helper.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
 
 namespace {
@@ -440,20 +436,8 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
 	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
-
-	assert(g_fs);
-
-	FilenameSet files = filter(g_fs->list_directory(dir), [&basename](const std::string& fn) {
-		const std::string only_filename = FileSystem::fs_filename(fn.c_str());
-		return boost::starts_with(only_filename, basename) && boost::ends_with(only_filename, ".ogg");
-	});
-
-	for (const std::string& filename : files) {
-		assert(!g_fs->is_directory(filename));
-		if (songs_.count(basename) == 0) {
-			songs_.insert(std::make_pair(basename, std::unique_ptr<Songset>(new Songset())));
-		}
-		songs_[basename]->add_song(filename);
+	if (songs_.count(basename) == 0) {
+		songs_.insert(std::make_pair(basename, std::unique_ptr<Songset>(new Songset(dir, basename))));
 	}
 }
 
@@ -527,6 +511,11 @@ void SoundHandler::change_music(const std::string& songset_name,
 	}
 }
 
+/// Returns the currently playing songset
+const std::string SoundHandler::current_songset() const {
+	return current_songset_;
+}
+
 /// Returns whether we want to hear sonds of the given 'type'
 bool SoundHandler::is_sound_enabled(SoundType type) const {
 	assert(sound_options_.count(type) == 1);
@@ -589,6 +578,14 @@ void SoundHandler::set_volume(SoundType type, int32_t volume) {
 		Mix_Volume(-1, volume);
 		break;
 	}
+}
+
+/**
+ * Return the max value for volume settings. We use a function to hide
+ * SDL_mixer constants outside of sound_handler.
+ */
+int32_t SoundHandler::get_max_volume() const {
+	return MIX_MAX_VOLUME;
 }
 
 /**

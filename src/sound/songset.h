@@ -40,16 +40,14 @@
  * afterwards
  */
 struct Songset {
-	Songset();
+	explicit Songset(const std::string& dir, const std::string& basename);
 	~Songset();
 
-	void add_song(const std::string& filename);
 	Mix_Music* get_song(uint32_t random);
-	bool empty() {
-		return songs_.empty();
-	}
 
-protected:
+private:
+	void add_song(const std::string& filename);
+
 	/// The filenames of all configured songs
 	std::vector<std::string> songs_;
 
