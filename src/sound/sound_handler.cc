@@ -481,20 +481,20 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
  * \ref stop_music()
  * or \ref change_music() this function will block until the fadeout is complete
  */
-void SoundHandler::start_music(const std::string& songset_name, int fadein_ms) {
+void SoundHandler::start_music(const std::string& songset_name) {
 	if (backend_is_disabled_ || !is_sound_enabled(SoundType::kMusic)) {
 		return;
 	}
 
 	if (Mix_PlayingMusic()) {
-		change_music(songset_name, kMinimumMusicFade, fadein_ms);
+		change_music(songset_name, kMinimumMusicFade);
 	}
 
 	if (songs_.count(songset_name) == 0) {
 		log("SoundHandler: songset \"%s\" does not exist!\n", songset_name.c_str());
 	} else {
 		if (Mix_Music* const m = songs_[songset_name]->get_song(rng_.rand())) {
-			Mix_FadeInMusic(m, 1, std::max(fadein_ms, kMinimumMusicFade));
+			Mix_FadeInMusic(m, 1, kMinimumMusicFade);
 			current_songset_ = songset_name;
 		} else {
 			log("SoundHandler: songset \"%s\" exists but contains no files!\n", songset_name.c_str());
@@ -528,8 +528,7 @@ void SoundHandler::stop_music(int fadeout_ms) {
  * be selected
  */
 void SoundHandler::change_music(const std::string& songset_name,
-                                int const fadeout_ms,
-                                int const fadein_ms) {
+                                int const fadeout_ms) {
 	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
@@ -541,7 +540,7 @@ void SoundHandler::change_music(const std::string& songset_name,
 	if (Mix_PlayingMusic()) {
 		stop_music(fadeout_ms);
 	} else {
-		start_music(current_songset_, fadein_ms);
+		start_music(current_songset_);
 	}
 }
 

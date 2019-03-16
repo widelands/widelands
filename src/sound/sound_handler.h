@@ -178,8 +178,7 @@ public:
 	void register_songs(const std::string& dir, const std::string& basename);
 	void stop_music(int fadeout_ms = kMinimumMusicFade);
 	void change_music(const std::string& songset_name = std::string(),
-	                  int fadeout_ms = kMinimumMusicFade,
-	                  int fadein_ms = kMinimumMusicFade);
+	                  int fadeout_ms = kMinimumMusicFade);
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
@@ -210,7 +209,7 @@ private:
 	void initialization_error(const char* const msg, bool quit_sdl);
 
 	bool play_or_not(SoundType type, const std::string& fx_name, uint8_t priority);
-	void start_music(const std::string& songset_name, int fadein_ms = kMinimumMusicFade);
+	void start_music(const std::string& songset_name);
 
 	struct SoundOptions {
 		explicit SoundOptions(int vol, const std::string& savename) : enabled(true), volume(vol), name(savename) {
