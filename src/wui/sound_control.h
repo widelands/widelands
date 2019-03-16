@@ -26,20 +26,35 @@
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
-#include "ui_basic/textarea.h"
 
+/**
+ * UI elements to set sound properties for 1 type of sounds.
+ * All changes to the sound settings take effect immediately, but are not saved to config.
+ */
 class SoundControl : public UI::Box {
 public:
+/**
+	 * @brief SoundControl Creates a new sound control box
+	 * @param parent The parent panel
+	 * @param title The localized test label to display
+	 * @param type The type of sound to set the properties for
+	 * @param style The User interface style for the slider
+	 */
 	SoundControl(UI::Box* parent, const std::string& title, SoundType type, UI::SliderStyle style);
-	~SoundControl() override;
 
 private:
+	/// Plays a system sound sample selected from the given sound type
 	void play_sound_sample();
+	/// Sets new enable/disable value in the sound handler for the sound type and enables/disables the volume slider accordingly
 	void enable_changed(bool on);
+	/// Sets the volume in the sound handler to the new 'value'
 	void volume_changed(int32_t value);
 
+	/// Enable / disable sound type
 	UI::Checkbox enable_;
+	/// Control the volume for the sound type
 	UI::HorizontalSlider volume_;
+	/// The sound type to control
 	const SoundType type_;
 };
 

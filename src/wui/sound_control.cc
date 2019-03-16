@@ -31,15 +31,10 @@ constexpr int kSpacing = 16;
 SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType type, UI::SliderStyle style)
    : UI::Box(parent, 0, 0, UI::Box::Horizontal),
      enable_(this, Vector2i::zero(), title),
-     volume_(this,
-                         0,
-                         0,
-                         kSliderWidth,
-                         enable_.get_h(),
-                         0,
-                         g_sound_handler.get_max_volume(),
-                         g_sound_handler.get_volume(type),
-                         style, _("Sound Volume"), kCursorWidth),
+     volume_(this, 0, 0, kSliderWidth, enable_.get_h(),
+			 0, g_sound_handler.get_max_volume(), g_sound_handler.get_volume(type), style,
+			 /** TRANSLATORS: Tooltip for volume slider in sound options */
+			 _("Changes the volume. Click to hear a sample."), kCursorWidth),
      type_(type) {
 	set_inner_spacing(kSpacing);
 	add(&volume_, UI::Box::Resizing::kFullSize);
@@ -57,9 +52,6 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
 		volume_.clicked.connect([this] { play_sound_sample(); });
 	}
 	set_thinks(false);
-}
-
-SoundControl::~SoundControl() {
 }
 
 void SoundControl::play_sound_sample() {

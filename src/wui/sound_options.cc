@@ -38,6 +38,7 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 	add(new SoundControl(this, pgettext("sound_options", "User Interface"), SoundType::kUI, style), UI::Box::Resizing::kFullSize);
 	add(new SoundControl(this, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient, style), UI::Box::Resizing::kFullSize);
 
+	// TODO(GunChleoc): There's a bug (probably somewhere in Box) that will hide the bottom SoundControl if the textearea is not added to the box. So, we create and add it even if its text is empty.
 	UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
 	   this, 0, 0, 100, 0, UI::PanelStyle::kWui,
 	   "", UI::Align::kLeft,

@@ -50,47 +50,43 @@ extern class SoundHandler g_sound_handler;
  *
  * Background music for different situations (e.g. 'Menu', 'Gameplay') is
  * collected in songsets. Each Songset contains references to one or more
- * songs in ogg format. The only ordering inside a soundset is from the order
- * in which the songs were loaded.
+ * songs in ogg format.
  *
  * Other classes can request to start or stop playing a certain songset,
  * changing the songset is provided as a convenience method. It is also
  * possible to switch to some other piece inside the same songset - but there
  * is \e no control over \e which song out of a songset gets played. The
- * selection is either linear (the order in which the songs were loaded) or
- * completely random.
+ * selection is random.
  *
  * The files for the predefined system songsets
  * \li \c intro
  * \li \c menu
  * \li \c ingame
  *
- * must reside directly in the directory 'sounds' and must be named
- * SONGSET_XX.??? where XX is a number from 00 to 99 and ??? is a filename
- * extension. All subdirectories of 'sounds' will be considered to contain
- * ingame music. The the music and sub-subdirectories found in them can be
- * arbitrarily named. This means: everything below sound/ingame_01 can have
- * any name you want. All audio files below sound/ingame_01 will be played as
+ * must reside directly in the directory 'data/music' and must be named
+ * SONGSET_XX.ogg where XX is a number from 00 to 99. All subdirectories of
+ * 'data/music' will be considered to contain
+ * ingame music. The music and sub-subdirectories found in them can be
+ * arbitrarily named. This means: everything below data/music/ingame_01 can have
+ * any name you want. All audio files below data/music/ingame_01 will be played as
  * ingame music.
  *
- * For more information about the naming scheme, see load_fx()
+ * For more information about the naming scheme, see register_songs()
  *
  * You should be using the ogg format for music.
  *
  * \par Sound effects
  *
- * Buildings and workers can use sound effects in their programs. To do so, use
- * e.g. "playsound blacksmith_hammer" in the appropriate conf file. The conf file
- * parser will then load one or more audio files for 'hammering blacksmith'
- * from the building's/worker's configuration directory and store them in an
- * FXset for later access, similar to the way music is stored in songsets.
- * For effects, however, the selection is always random. Sound effects are kept
- * in memory at all times once they have been loaded, to avoid delays from disk access.
  *
- * The abovementioned sound effects are synchronized with a work program. It's
- * also possible to have sound effects that are synchronized with a
- * building/worker \e animation. For more information about this look at class
- * AnimationManager.
+ * Use register_fx() to record the file locations for each sound effect, to be loaded on demand.
+ * Sound effects are kept in memory at all times once they have been loaded, to avoid delays from disk access.
+ * The file naming scheme is the same as for the songs, and if there are multiple files for an effect, they are picked at random too.
+ * Sound effects are categorized into multiple SoundType categories, so that the user can control which type of sounds to hear.
+ *
+ * For map objects, the abovementioned sound effects are synchronized with a work program or a
+ * building/immovable/worker animation. For more information about this look at class
+ * AnimationManager and see the online Lua reference for details.
+ *
  *
  * \par Usage of callbacks
  *
@@ -155,8 +151,6 @@ extern class SoundHandler g_sound_handler;
 // TODO(unknown): DOC: play-or-not algorithm
 // TODO(unknown): Environmental sound effects (e.g. wind)
 // TODO(unknown): repair and reenable animation sound effects for 1-pic-animations
-// TODO(unknown): accommodate runtime changes of i18n language
-// TODO(unknown): accommodate sound activation if it was disabled at the beginning
 
 // This is used for SDL UserEvents to be handled in the main loop.
 enum { CHANGE_MUSIC };

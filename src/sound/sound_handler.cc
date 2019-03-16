@@ -47,6 +47,7 @@ constexpr int kNumMixingChannels = 32;
 constexpr uint32_t kSlidingWindowSize = 20000;
 }  // namespace
 
+
 /** The global \ref SoundHandler object
  * The sound handler is a static object because otherwise it'd be quite
  * difficult to pass the --nosound command line option
@@ -390,8 +391,8 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
 	return (rng_.rand() % kFxPriorityAlwaysPlay) / static_cast<float>(kFxPriorityAlwaysPlay) <= probability;
 }
 
-/** \overload
- * \param fx_name  The identifying name of the sound effect, see \ref load_fx .
+/**
+ * \param fx_name  The identifying name of the sound effect, see \ref register_fx .
  * \param stereo_position  position in widelands' game window, see
  *                         \ref stereo_position
  * \param priority         How important is it that this FX actually gets
