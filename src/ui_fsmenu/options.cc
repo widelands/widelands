@@ -531,7 +531,7 @@ void FullscreenMenuOptions::clicked_apply() {
 }
 
 void FullscreenMenuOptions::clicked_cancel() {
-	g_sound_handler.restore_config();
+	g_sound_handler.load_config();
 	clicked_back();
 }
 
@@ -667,7 +667,7 @@ void OptionsCtrl::save_options() {
 	UI::g_fh->reinitialize_fontset(i18n::get_locale());
 
 	// Sound options
-	g_sound_handler.save_and_backup_config();
+	g_sound_handler.save_config();
 
 	// Now write to file
 	g_options.write(kConfigFile.c_str(), true);

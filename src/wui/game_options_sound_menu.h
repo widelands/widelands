@@ -27,8 +27,7 @@
  */
 struct GameOptionsSoundMenu : public UI::UniqueWindow {
 	GameOptionsSoundMenu(Panel&, UI::UniqueWindow::Registry&);
-
-	~GameOptionsSoundMenu();
+	~GameOptionsSoundMenu() override;
 
 private:
 	SoundOptions sound_options_;

@@ -49,8 +49,8 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
 		enable_.set_enabled(false);
 		volume_.set_enabled(false);
 	} else {
-		enable_changed(g_sound_handler.is_sound_enabled(type));
-		volume_changed(g_sound_handler.get_volume(type));
+		enable_.set_state(g_sound_handler.is_sound_enabled(type));
+		volume_.set_enabled(g_sound_handler.is_sound_enabled(type));
 
 		enable_.changedto.connect(
 		   boost::bind(&SoundControl::enable_changed, this, _1));

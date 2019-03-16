@@ -171,9 +171,8 @@ public:
 
 	void init();
 	void shutdown();
-	void read_config();
-	void save_and_backup_config();
-	void restore_config();
+	void save_config();
+	void load_config();
 	bool is_backend_disabled() const;
 	void disable_backend();
 
@@ -210,16 +209,19 @@ public:
 	}
 
 private:
+	void read_config();
+	void register_music_and_system_sounds();
+
 	// Prints an error and disables the sound system.
 	void initialization_error(const char* const msg, bool quit_sdl);
 
 	bool play_or_not(SoundType type, const std::string& fx_name, uint8_t priority);
 
 	struct SoundOptions {
-		explicit SoundOptions(bool enable, int vol, const std::string& savename) : enabled(enable), volume(vol), name(savename) {
+		explicit SoundOptions(int vol, const std::string& savename) : enabled(true), volume(vol), name(savename) {
 			assert(!savename.empty());
-		}
-		explicit SoundOptions(bool vol, const std::string& savename) : SoundOptions(true, vol, savename) {
+			assert(vol >= 0);
+			assert(vol <= MIX_MAX_VOLUME);
 		}
 
 		bool enabled;
@@ -231,9 +233,6 @@ private:
 
 	/// Contains all options for sound types and music
 	std::map<SoundType, SoundOptions> sound_options_;
-
-	/// A copy of the original options so that we can restore them when we abort in the options menu
-	std::map<SoundType, SoundOptions> backup_options_;
 
 	/// A collection of songsets
 	using SongsetMap = std::map<std::string, std::unique_ptr<Songset>>;

@@ -144,6 +144,8 @@ void SoundHandler::init() {
 		return;
 	}
 
+	register_music_and_system_sounds();
+
 	Mix_HookMusicFinished(SoundHandler::music_finished_callback);
 	Mix_ChannelFinished(SoundHandler::fx_finished_callback);
 	Mix_VolumeMusic(sound_options_.at(SoundType::kMusic).volume);  //  can not do this before InitSubSystem
@@ -226,6 +228,7 @@ void SoundHandler::read_config() {
 				break;
 			}
 		}
+		save_config();
 	}
 
 	Section& sound = g_options.pull_section("sound");
@@ -233,13 +236,32 @@ void SoundHandler::read_config() {
 		option.second.volume = sound.get_int(("volume_" + option.second.name).c_str(), option.second.volume);
 		option.second.enabled = sound.get_bool(("enable_" + option.second.name).c_str(), option.second.enabled);
 	}
+}
 
-	save_and_backup_config();
+void SoundHandler::save_config() {
+	Section& sound = g_options.pull_section("sound");
+	for (auto& option : sound_options_) {
+		const int volume = option.second.volume;
+		const std::string& name = option.second.name;
+		const bool enabled = option.second.enabled;
 
-	if (is_backend_disabled()) {
-		return;
+		const std::string enable_name = "enable_" + name;
+		sound.set_bool(enable_name.c_str(), enabled);
+
+		const std::string volume_name = "volume_" + name;
+		sound.set_int(volume_name.c_str(), volume);
 	}
+}
 
+void SoundHandler::load_config() {
+	read_config();
+	for (auto& option : sound_options_) {
+		set_volume(option.first, option.second.volume);
+		set_enable_sound(option.first, option.second.enabled);
+	}
+}
+
+void SoundHandler::register_music_and_system_sounds() {
 	register_songs("music", "intro");
 	register_songs("music", "menu");
 	register_songs("music", "ingame");
@@ -251,30 +273,6 @@ void SoundHandler::read_config() {
 	register_fx(SoundType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
 	register_fx(SoundType::kChat, "sound", "lobby_chat", "lobby_chat");
 	register_fx(SoundType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
-}
-
-void SoundHandler::save_and_backup_config() {
-	Section& sound = g_options.pull_section("sound");
-	for (auto& option : sound_options_) {
-		const int volume = option.second.volume;
-		const std::string& name = option.second.name;
-		const bool enabled = option.second.enabled;
-
-		backup_options_.insert(std::make_pair(option.first, SoundOptions(enabled, volume, name)));
-
-		const std::string enable_name = "enable_" + name;
-		sound.set_bool(enable_name.c_str(), enabled);
-
-		const std::string volume_name = "volume_" + name;
-		sound.set_int(volume_name.c_str(), volume);
-	}
-}
-
-void SoundHandler::restore_config() {
-	for (auto& option : backup_options_) {
-		set_volume(option.first, option.second.volume);
-		set_enable_sound(option.first, option.second.enabled);
-	}
 }
 
 /**
@@ -552,7 +550,7 @@ int32_t SoundHandler::get_volume(SoundType type) const {
 void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	assert(sound_options_.count(type) == 1);
 	SoundOptions& sound_options = sound_options_.at(type);
-	if (is_backend_disabled() || (sound_options.enabled == enable)) {
+	if (is_backend_disabled()) {
 		return;
 	}
 
@@ -562,7 +560,9 @@ void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	switch (type) {
 	case SoundType::kMusic:
 		if (enable) {
-			start_music(current_songset_);
+			if (!Mix_PlayingMusic()) {
+				start_music(current_songset_);
+			}
 		} else {
 			stop_music();
 		}
