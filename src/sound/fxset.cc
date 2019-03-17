@@ -57,8 +57,8 @@ FXset::FXset(const std::string& path, uint32_t random) : last_used_(random % 200
 
 #ifndef NDEBUG
 	// Ensure that we haven't found any directories by mistake
-	for (const std::string& path : paths_) {
-		assert(!g_fs->is_directory(path));
+	for (const std::string& p : paths_) {
+		assert(!g_fs->is_directory(p));
 	}
 #endif
 }

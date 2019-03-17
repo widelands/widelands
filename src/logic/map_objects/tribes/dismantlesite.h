@@ -53,7 +53,11 @@ public:
 
 	Building& create_object() const override;
 
+	FxId creation_fx() const;
+
 private:
+	const FxId creation_fx_;
+
 	DISALLOW_COPY_AND_ASSIGN(DismantleSiteDescr);
 };
 

@@ -37,11 +37,13 @@
 #include "graphic/playercolor.h"
 #include "graphic/texture.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game_data_error.h"
 #include "scripting/lua_table.h"
 #include "sound/note_sound.h"
 #include "sound/sound_handler.h"
 
 namespace {
+
 /**
  * Implements the Animation interface for an animation that is unpacked on disk, that
  * is every frame and every pc color frame is an singular file on disk.
@@ -90,8 +92,8 @@ private:
 	std::vector<const Image*> frames_;
 	std::vector<const Image*> pcmasks_;
 
-	// Name of sound effect that will be played at frame 0.
-	std::string sound_effect_;
+	// ID of sound effect that will be played at frame 0.
+	FxId sound_effect_;
 	int32_t sound_priority_;
 	bool play_once_;
 };
@@ -101,16 +103,21 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      hasplrclrs_(false),
      scale_(1),
+	 sound_effect_(kNoSoundEffect),
 	 sound_priority_(kFxPriorityLowest),
      play_once_(false) {
 	try {
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
-			sound_effect_ = sound_effects->get_string("path");
-			SoundHandler::register_fx(SoundType::kAmbient, sound_effect_);
+			sound_effect_ = SoundHandler::register_fx(SoundType::kAmbient, sound_effects->get_string("path"));
 
 			if (sound_effects->has_key<std::string>("priority")) {
 				sound_priority_ = sound_effects->get_int("priority");
+			}
+
+			if (sound_priority_ < kFxPriorityLowest) {
+				throw Widelands::GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
+									kFxPriorityLowest, sound_priority_, sound_effects->get_string("path").c_str());
 			}
 		}
 
@@ -240,7 +247,7 @@ uint32_t NonPackedAnimation::current_frame(uint32_t time) const {
 }
 
 void NonPackedAnimation::trigger_sound(uint32_t time, const Widelands::Coords& coords) const {
-	if (sound_effect_.empty() || coords == Widelands::Coords::null()) {
+	if (sound_effect_ == kNoSoundEffect || coords == Widelands::Coords::null()) {
 		return;
 	}
 

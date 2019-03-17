@@ -37,6 +37,7 @@
 #include "logic/message_queue.h"
 #include "logic/see_unsee_node.h"
 #include "logic/widelands.h"
+#include "sound/constants.h"
 
 class Node;
 namespace Widelands {
@@ -681,6 +682,10 @@ private:
 	std::vector<std::vector<uint32_t>> ware_stocks_;
 
 	PlayerBuildingStats building_stats_;
+
+	FxId message_fx_;
+	FxId attack_fx_;
+	FxId occupied_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Player);
 };

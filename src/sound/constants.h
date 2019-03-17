@@ -20,6 +20,7 @@
 #ifndef WL_SOUND_CONSTANTS_H
 #define WL_SOUND_CONSTANTS_H
 
+#include <limits>
 #include <stdint.h>
 
 /* How important is it to play the effect even when others are running
@@ -47,6 +48,9 @@ constexpr uint8_t kFxPriorityAlwaysPlay = 255;
 constexpr int32_t kStereoLeft = 0;
 constexpr int32_t kStereoCenter = 128;
 constexpr int32_t kStereoRight = 254;
+
+using FxId = uint16_t;
+constexpr FxId kNoSoundEffect = std::numeric_limits<uint16_t>::max();
 
 enum class SoundType {
 	kUI,

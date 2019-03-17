@@ -36,6 +36,22 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
 			 /** TRANSLATORS: Tooltip for volume slider in sound options */
 			 _("Changes the volume. Click to hear a sample."), kCursorWidth),
      type_(type) {
+	switch (type_) {
+	case SoundType::kAmbient:
+			fx_ = g_sound_handler->register_fx(type_, "sound/create_construction_site");
+			break;
+	case SoundType::kChat:
+		fx_ = g_sound_handler->register_fx(type_, "sound/lobby_chat");
+		break;
+	case SoundType::kMessage:
+		fx_ = g_sound_handler->register_fx(type_, "sound/message");
+		break;
+	default:
+		// UI and music take care of themselves
+		fx_ = kNoSoundEffect;
+		break;
+	}
+
 	set_inner_spacing(kSpacing);
 	add(&volume_, UI::Box::Resizing::kFullSize);
 	add(&enable_, UI::Box::Resizing::kFullSize);
@@ -55,19 +71,8 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
 }
 
 void SoundControl::play_sound_sample() {
-	switch (type_) {
-	case SoundType::kAmbient:
-			g_sound_handler->play_fx(type_, "sound/create_construction_site");
-			break;
-	case SoundType::kChat:
-		g_sound_handler->play_fx(type_, "sound/lobby_chat");
-		break;
-	case SoundType::kMessage:
-		g_sound_handler->play_fx(type_, "sound/message");
-		break;
-	default:
-		// UI and music take care of themselves
-		break;
+	if (fx_ != kNoSoundEffect) {
+		g_sound_handler->play_fx(type_, fx_);
 	}
 }
 

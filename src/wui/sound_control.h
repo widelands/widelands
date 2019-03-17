@@ -56,6 +56,8 @@ private:
 	UI::HorizontalSlider volume_;
 	/// The sound type to control
 	const SoundType type_;
+	/// Representative sound effect to play
+	FxId fx_;
 };
 
 #endif  // end of include guard: WL_WUI_SOUND_CONTROL_H

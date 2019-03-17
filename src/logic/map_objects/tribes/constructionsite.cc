@@ -81,13 +81,17 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
-   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase) {
+   : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase),
+	 creation_fx_(SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site")) {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
-	SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site");
 }
 
 Building& ConstructionSiteDescr::create_object() const {
 	return *new ConstructionSite(*this);
+}
+
+FxId ConstructionSiteDescr::creation_fx() const {
+	return creation_fx_;
 }
 
 /*
@@ -147,7 +151,7 @@ Initialize the construction site by starting orders
 ===============
 */
 bool ConstructionSite::init(EditorGameBase& egbase) {
-	Notifications::publish(NoteSound(SoundType::kAmbient, "create_construction_site", position_, kFxPriorityAlwaysPlay));
+	Notifications::publish(NoteSound(SoundType::kAmbient, descr().creation_fx(), position_, kFxPriorityAlwaysPlay));
 	PartiallyFinishedBuilding::init(egbase);
 
 	const std::map<DescriptionIndex, uint8_t>* buildcost;

@@ -901,12 +901,14 @@ void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::
 	if (cmd.size() < 3 || cmd.size() > 4)
 		throw wexception("Usage: playsound <sound_dir> <sound_name> [priority]");
 
-	act->sparam1 = cmd[1];
-
-	SoundHandler::register_fx(SoundType::kAmbient, act->sparam1);
+	act->iparam2 = SoundHandler::register_fx(SoundType::kAmbient, cmd[1]);
 
 	act->function = &Worker::run_playsound;
 	act->iparam1 = cmd.size() == 2 ? kFxPriorityMedium : atoi(cmd[2].c_str());
+	if (act->iparam1 < kFxPriorityLowest) {
+		throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
+							kFxPriorityLowest, act->iparam1, cmd[1].c_str());
+	}
 }
 
 /* RST

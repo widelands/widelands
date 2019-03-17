@@ -272,21 +272,27 @@ void SoundHandler::disable_backend() {
  * \param type       The category of the FxSet to create
  * \param fx_path    The relative path and base filename from which filenames will be formed
  *                   (<datadir>/fx_path_XX.ogg). Also acts as unique string ID for the effect that will be used to identify it in \ref play_fx.
- *                   If an effect of the same 'type' and 'fx_name' already exists, we assume that it is already registered and skip it.
+ *                   If an effect with the same 'type' and 'fx_path' already exists, we assume that it is already registered and skip it.
  */
 
-void SoundHandler::register_fx(SoundType type, const std::string& fx_path) {
+FxId SoundHandler::register_fx(SoundType type, const std::string& fx_path) {
 	if (SoundHandler::is_backend_disabled() || g_sound_handler == nullptr) {
-		return;
+		return kNoSoundEffect;
 	}
-	g_sound_handler->do_register_fx(type, fx_path);
+	size_t result = g_sound_handler->do_register_fx(type, fx_path);
+	return result;
 }
 
 /// Non-static implementation of register_fx
-void SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
+FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
 	assert(!SoundHandler::is_backend_disabled());
-	if (fxs_[type].count(fx_path) == 0) {
-		fxs_[type].insert(std::make_pair(fx_path, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
+	if (fx_ids_[type].count(fx_path) == 0) {
+		const FxId new_id = fxs_[type].size();
+		fx_ids_[type].insert(std::make_pair(fx_path, new_id));
+		fxs_[type].insert(std::make_pair(new_id, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
+		return new_id;
+	} else {
+		return fx_ids_[type].at(fx_path);
 	}
 }
 
@@ -295,11 +301,12 @@ void SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
  * (to avoid "sonic overload"). Based on priority and on when it was last played.
  * System sounds and sounds with priority "kFxPriorityAlwaysPlay" always return 'true'.
  */
-bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
+bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
                                uint8_t const priority) {
 	assert(!backend_is_disabled_ && is_sound_enabled(type));
+	assert(priority >= kFxPriorityLowest);
 
-	if (fxs_[type].count(fx_name) == 0) {
+	if (fxs_[type].count(fx_id) == 0) {
 		return false;
 	}
 
@@ -316,19 +323,13 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
 		return true;
 	}
 
-	// Warn if we won't play it at all
-	if (priority < kFxPriorityLowest) {
-		log("SoundHandler: Sound effect \"%s\" will never be played - priority is below %d!\n", fx_name.c_str(), static_cast<unsigned int>(kFxPriorityLowest));
-		return false;
-	}
-
 	// Do not run multiple instances of the same sound effect if the priority is too low
 	bool too_many_playing = false;
 	if (priority < kFxPriorityAllowMultiple) {
 		lock();
 		// Find out if an fx called 'fx_name' is already running
 		for (const auto& fx_pair : active_fx_) {
-			if (fx_pair.second == fx_name) {
+			if (fx_pair.second == fx_id) {
 				too_many_playing = true;
 				break;
 			}
@@ -345,7 +346,7 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
 	// TODO(unknown): high general frequency reduces weighted priority
 	// TODO(unknown): deal with "coupled" effects like throw_net and retrieve_net
 
-	uint32_t const ticks_since_last_play = fxs_[type][fx_name]->ticks_since_last_play();
+	uint32_t const ticks_since_last_play = fxs_[type][fx_id]->ticks_since_last_play();
 
 	// Weighted total probability that this fx gets played; initially set according to priority
 	//  float division! not integer
@@ -378,7 +379,7 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
  *                         \ref stereo_position
  * \param distance The distance to use set in the mix
  */
-void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
+void SoundHandler::play_fx(SoundType type, const FxId fx_id,
 						   uint8_t const priority,
                            int32_t const stereo_pos,
                            int distance) {
@@ -389,18 +390,22 @@ void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
 	assert(stereo_pos >= kStereoLeft);
 	assert(stereo_pos <= kStereoRight);
 
-	if (fxs_[type].count(fx_name) == 0) {
-		log("SoundHandler: Sound effect \"%s\" does not exist!\n", fx_name.c_str());
+	if (fx_id == kNoSoundEffect) {
+		throw wexception("SoundHandler: Trying to play sound effect that was never registered. Maybe you registered it before instantiating g_soundhandler?\n");
+	}
+
+	if (fxs_[type].count(fx_id) == 0) {
+		log("SoundHandler: Sound effect %d does not exist!\n", fx_id);
 		return;
 	}
 
 	// See if the FX should be played
-	if (!play_or_not(type, fx_name, priority)) {
+	if (!play_or_not(type, fx_id, priority)) {
 		return;
 	}
 
 	//  retrieve the fx and play it if it's valid
-	if (Mix_Chunk* const m = fxs_[type][fx_name]->get_fx(rng_.rand())) {
+	if (Mix_Chunk* const m = fxs_[type][fx_id]->get_fx(rng_.rand())) {
 		const int32_t chan = Mix_PlayChannel(-1, m, 0);
 		if (chan == -1) {
 			log("SoundHandler: Mix_PlayChannel failed: %s\n", Mix_GetError());
@@ -410,18 +415,20 @@ void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
 			Mix_Volume(chan, get_volume(type));
 
 			lock();
-			active_fx_[chan] = fx_name;
+			active_fx_[chan] = fx_id;
 			release_lock();
 		}
 	} else {
-		log("SoundHandler: Sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
+		log("SoundHandler: Sound effect %d exists but contains no files!\n", fx_id);
 	}
 }
 
 /// Removes the given FXset from memory
 void SoundHandler::remove_fx_set(SoundType type) {
 	assert(fxs_.count(type) == 1);
+	assert(fx_ids_.count(type) == 1);
 	fxs_.erase(type);
+	fx_ids_.erase(type);
 }
 
 /**

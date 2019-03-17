@@ -34,6 +34,7 @@
 #include "graphic/align.h"
 #include "graphic/font_handler.h"
 #include "graphic/panel_styles.h"
+#include "sound/constants.h"
 
 class RenderTarget;
 class Image;
@@ -293,6 +294,7 @@ public:
 	}
 
 	virtual void die();
+	static void register_click();
 
 protected:
 	// This panel will never receive keypresses (do_key), instead
@@ -384,6 +386,8 @@ private:
 	static Panel* mousegrab_;
 	static Panel* mousein_;
 	static bool allow_user_input_;
+
+	static FxId click_fx_;
 
 	DISALLOW_COPY_AND_ASSIGN(Panel);
 };

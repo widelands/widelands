@@ -42,6 +42,7 @@ Panel* Panel::mousein_ = nullptr;
 bool Panel::allow_user_input_ = true;
 const Image* Panel::default_cursor_ = nullptr;
 const Image* Panel::default_cursor_click_ = nullptr;
+FxId Panel::click_fx_ = kNoSoundEffect;
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -713,8 +714,15 @@ void Panel::die() {
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click() {
-	// The sound is registered in WLApplication
-	g_sound_handler->play_fx(SoundType::kUI, "sound/click");
+	g_sound_handler->play_fx(SoundType::kUI, click_fx_);
+}
+
+/**
+ * This needs to be called once after g_soundhandler has been instantiated and before play_click() is called.
+ * We do it this way so that we don't have to register the same sound every time we create a new panel.
+ */
+void Panel::register_click() {
+	click_fx_ = SoundHandler::register_fx(SoundType::kUI, "sound/click");
 }
 
 /**

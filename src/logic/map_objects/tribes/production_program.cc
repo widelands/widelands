@@ -1409,7 +1409,9 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 	try {
 		bool reached_end;
-		name = next_word(parameters, reached_end);
+
+		const char* const name = next_word(parameters, reached_end);
+		fx = SoundHandler::register_fx(SoundType::kAmbient, name);
 
 		if (!reached_end) {
 			char* endp;
@@ -1420,15 +1422,17 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 		} else {
 			priority = kFxPriorityAllowMultiple - 1;
 		}
-
-		SoundHandler::register_fx(SoundType::kAmbient, name);
+		if (priority < kFxPriorityLowest) {
+			throw GameDataError("Minmum priority for sounds is %d, but only %d was specified for %s",
+								kFxPriorityLowest, priority, name);
+		}
 	} catch (const WException& e) {
 		throw GameDataError("playsound: %s", e.what());
 	}
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
-	Notifications::publish(NoteSound(SoundType::kAmbient, name, ps.position_, priority));
+	Notifications::publish(NoteSound(SoundType::kAmbient, fx, ps.position_, priority));
 	return ps.program_step(game);
 }
 

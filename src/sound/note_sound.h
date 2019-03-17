@@ -30,11 +30,11 @@
 struct NoteSound {
 	CAN_BE_SENT_AS_NOTE(NoteId::Sound)
 	const SoundType type;
-	const std::string fx;
+	const FxId fx;
 	const Widelands::Coords coords;
 	const uint8_t priority;
 
-	NoteSound(SoundType init_type, const std::string& init_fx, Widelands::Coords init_coords, uint8_t init_priority)
+	NoteSound(SoundType init_type, FxId init_fx, Widelands::Coords init_coords, uint8_t init_priority)
 	   : type(init_type),
 		 fx(init_fx),
 	     coords(init_coords),

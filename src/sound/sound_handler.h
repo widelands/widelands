@@ -167,9 +167,9 @@ public:
 	static void disable_backend();
 
 	// This is static so that we can load the tribes and world without instantiating the sound system
-	static void register_fx(SoundType type, const std::string& fx_path);
+	static FxId register_fx(SoundType type, const std::string& fx_path);
 
-	void play_fx(SoundType type, const std::string& fx_name,
+	void play_fx(SoundType type, FxId fx_id,
 	             uint8_t priority = kFxPriorityAlwaysPlay,
 	             int32_t stereo_position = kStereoCenter, int distance = 0);
 	void remove_fx_set(SoundType type);
@@ -191,11 +191,11 @@ public:
 private:
 	void read_config();
 
-	void do_register_fx(SoundType type, const std::string& fx_path);
+	FxId do_register_fx(SoundType type, const std::string& fx_path);
 
 	void initialization_error(const char* const msg, bool quit_sdl);
 
-	bool play_or_not(SoundType type, const std::string& fx_name, uint8_t priority);
+	bool play_or_not(SoundType type, FxId fx_id, uint8_t priority);
 	void start_music(const std::string& songset_name);
 
 	static void music_finished_callback();
@@ -223,17 +223,17 @@ private:
 	std::map<SoundType, SoundOptions> sound_options_;
 
 	/// A collection of songsets
-	using SongsetMap = std::map<std::string, std::unique_ptr<Songset>>;
-	SongsetMap songs_;
+	std::map<std::string, std::unique_ptr<Songset>> songs_;
 
 	/// A collection of effect sets
-	using FXsetMap = std::map<std::string, std::unique_ptr<FXset>>;
-	std::map<SoundType, FXsetMap> fxs_;
+	std::map<SoundType, std::map<FxId, std::unique_ptr<FXset>>> fxs_;
+
+	/// Maps Fx names to identifiers to ensure that we register each effect only once
+	std::map<SoundType, std::map<std::string, FxId>> fx_ids_;
 
 	/// List of currently playing effects, and the channel each one is on
 	/// Access to this variable is protected through fx_lock_ mutex.
-	using ActivefxMap = std::map<uint32_t, std::string>;
-	ActivefxMap active_fx_;
+	std::map<uint32_t, FxId> active_fx_;
 
 	/** Which songset we are currently selecting songs from - not regarding
 	 * if there actually is a song playing \e right \e now.
