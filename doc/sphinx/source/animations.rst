@@ -12,8 +12,7 @@ Animations are defined as Lua tables. All map objects have a mandatory ``idle`` 
          scale = 2.5,
          fps = 4,
          sound_effect = {
-            directory = "sound/foo",
-            name = "bar",
+            path = "sound/foo/bar",
             priority = 128
          },
       },

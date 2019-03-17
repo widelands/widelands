@@ -106,10 +106,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 	try {
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
-
-			const std::string name = sound_effects->get_string("name");
-			const std::string directory = sound_effects->get_string("directory");
-			sound_effect_ = directory + g_fs->file_separator() + name;
+			sound_effect_ = sound_effects->get_string("path");
 			SoundHandler::register_fx(SoundType::kAmbient, sound_effect_);
 
 			if (sound_effects->has_key<std::string>("priority")) {
