@@ -35,7 +35,7 @@
  * from the outside
  */
 struct FXset {
-	explicit FXset(const std::string& path);
+	explicit FXset(const std::string& path, uint32_t random);
 	~FXset();
 
 	/**

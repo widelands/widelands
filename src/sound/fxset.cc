@@ -33,8 +33,9 @@
 /**
  * Create an FXset
  * \param path The directory the sound files are in, followed by the filename base
+ * \param random: Randomize the time last played a bit to prevent sound onslaught at game start
  */
-FXset::FXset(const std::string& path) : last_used_(0) {
+FXset::FXset(const std::string& path, uint32_t random) : last_used_(random % 2000) {
 	// Check directory
 	std::string directory = FileSystem::fs_dirname(path);
 	if (!g_fs->is_directory(directory)) {

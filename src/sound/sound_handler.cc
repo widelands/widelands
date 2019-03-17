@@ -286,7 +286,7 @@ void SoundHandler::register_fx(SoundType type, const std::string& fx_path) {
 void SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
 	assert(!SoundHandler::is_backend_disabled());
 	if (fxs_[type].count(fx_path) == 0) {
-		fxs_[type].insert(std::make_pair(fx_path, std::unique_ptr<FXset>(new FXset(fx_path))));
+		fxs_[type].insert(std::make_pair(fx_path, std::unique_ptr<FXset>(new FXset(fx_path, rng_.rand()))));
 	}
 }
 
