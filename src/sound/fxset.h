@@ -35,7 +35,7 @@
  * from the outside
  */
 struct FXset {
-	explicit FXset(const std::string& directory, const std::string& base_filename);
+	explicit FXset(const std::string& path);
 	~FXset();
 
 	/**

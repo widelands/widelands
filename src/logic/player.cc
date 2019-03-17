@@ -147,9 +147,9 @@ Player::Player(EditorGameBase& the_egbase,
      ware_stocks_(the_egbase.tribes().nrwares()) {
 	set_name(name);
 
-	SoundHandler::register_fx(SoundType::kMessage, "sound", "message", "message");
-	SoundHandler::register_fx(SoundType::kMessage, "sound/military", "under_attack", "military/under_attack");
-	SoundHandler::register_fx(SoundType::kMessage, "sound/military", "site_occupied", "military/site_occupied");
+	SoundHandler::register_fx(SoundType::kMessage, "sound/message");
+	SoundHandler::register_fx(SoundType::kMessage, "sound/military/under_attack");
+	SoundHandler::register_fx(SoundType::kMessage, "sound/military/site_occupied");
 
 	// Disallow workers that the player's tribe doesn't have.
 	for (size_t worker_index = 0; worker_index < allowed_worker_types_.size(); ++worker_index) {
@@ -331,13 +331,13 @@ void Player::play_message_sound(const Message* message) {
 		std::string soundfile;
 		switch (message->type()) {
 			case Message::Type::kEconomySiteOccupied:
-			soundfile = "military/site_occupied";
+			soundfile = "sound/military/site_occupied";
 			break;
 		case Message::Type::kWarfareUnderAttack:
-			soundfile = "military/under_attack";
+			soundfile = "sound/military/under_attack";
 			break;
 		default:
-			soundfile = "message";
+			soundfile = "sound/message";
 		}
 		Notifications::publish(NoteSound(SoundType::kMessage, soundfile, message->position(), kFxPriorityAlwaysPlay));
 	}

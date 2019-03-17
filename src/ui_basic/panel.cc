@@ -714,7 +714,7 @@ void Panel::die() {
  */
 void Panel::play_click() {
 	// The sound is registered in WLApplication
-	g_sound_handler->play_fx(SoundType::kUI, "click");
+	g_sound_handler->play_fx(SoundType::kUI, "sound/click");
 }
 
 /**

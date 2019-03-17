@@ -101,7 +101,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
      hotspot_(table.get_vector<std::string, int>("hotspot")),
      hasplrclrs_(false),
      scale_(1),
-	 sound_priority_(1),
+	 sound_priority_(kFxPriorityLowest),
      play_once_(false) {
 	try {
 		if (table.has_key("sound_effect")) {
@@ -110,7 +110,7 @@ NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
 			const std::string name = sound_effects->get_string("name");
 			const std::string directory = sound_effects->get_string("directory");
 			sound_effect_ = directory + g_fs->file_separator() + name;
-			SoundHandler::register_fx(SoundType::kAmbient, directory, name, sound_effect_);
+			SoundHandler::register_fx(SoundType::kAmbient, sound_effect_);
 
 			if (sound_effects->has_key<std::string>("priority")) {
 				sound_priority_ = sound_effects->get_int("priority");

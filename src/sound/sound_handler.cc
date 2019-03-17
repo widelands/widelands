@@ -269,27 +269,24 @@ void SoundHandler::disable_backend() {
  *
  * Subdirectories of and files under FILENAME_XX can be named anything you want.
  *
- * \param dir        The relative directory where the audio files reside in data/sound
- * \param filename   Name from which filenames will be formed
- *                   (BASENAME_XX.ogg);
- *                   also the name used with \ref play_fx
+ * \param type       The category of the FxSet to create
+ * \param fx_path    The relative path and base filename from which filenames will be formed
+ *                   (<datadir>/fx_path_XX.ogg). Also acts as unique string ID for the effect that will be used to identify it in \ref play_fx.
+ *                   If an effect of the same 'type' and 'fx_name' already exists, we assume that it is already registered and skip it.
  */
-void SoundHandler::register_fx(SoundType type, const std::string& dir,
-                                     const std::string& basename,
-                                     const std::string& fx_name) {
+
+void SoundHandler::register_fx(SoundType type, const std::string& fx_path) {
 	if (SoundHandler::is_backend_disabled() || g_sound_handler == nullptr) {
 		return;
 	}
-	g_sound_handler->do_register_fx(type, dir, basename, fx_name);
+	g_sound_handler->do_register_fx(type, fx_path);
 }
 
 /// Non-static implementation of register_fx
-void SoundHandler::do_register_fx(SoundType type, const std::string& dir,
-                                     const std::string& basename,
-                                     const std::string& fx_name) {
+void SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
 	assert(!SoundHandler::is_backend_disabled());
-	if (fxs_[type].count(fx_name) == 0) {
-		fxs_[type].insert(std::make_pair(fx_name, std::unique_ptr<FXset>(new FXset(dir, basename))));
+	if (fxs_[type].count(fx_path) == 0) {
+		fxs_[type].insert(std::make_pair(fx_path, std::unique_ptr<FXset>(new FXset(fx_path))));
 	}
 }
 
@@ -317,6 +314,12 @@ bool SoundHandler::play_or_not(SoundType type, const std::string& fx_name,
 	// We always play important sounds
 	if (priority == kFxPriorityAlwaysPlay) {
 		return true;
+	}
+
+	// Warn if we won't play it at all
+	if (priority < kFxPriorityLowest) {
+		log("SoundHandler: Sound effect \"%s\" will never be played - priority is below %d!\n", fx_name.c_str(), static_cast<unsigned int>(kFxPriorityLowest));
+		return false;
 	}
 
 	// Do not run multiple instances of the same sound effect if the priority is too low
@@ -387,7 +390,7 @@ void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
 	assert(stereo_pos <= kStereoRight);
 
 	if (fxs_[type].count(fx_name) == 0) {
-		log("SoundHandler: sound effect \"%s\" does not exist!\n", fx_name.c_str());
+		log("SoundHandler: Sound effect \"%s\" does not exist!\n", fx_name.c_str());
 		return;
 	}
 
@@ -411,7 +414,7 @@ void SoundHandler::play_fx(SoundType type, const std::string& fx_name,
 			release_lock();
 		}
 	} else {
-		log("SoundHandler: sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
+		log("SoundHandler: Sound effect \"%s\" exists but contains no files!\n", fx_name.c_str());
 	}
 }
 

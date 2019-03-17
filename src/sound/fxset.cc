@@ -30,17 +30,19 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 
-/** Create an FXset
- * \param directory The directory the sound files are in
- * \param base_filename The filename base
+/**
+ * Create an FXset
+ * \param path The directory the sound files are in, followed by the filename base
  */
-FXset::FXset(const std::string& directory, const std::string& base_filename) : last_used_(0) {
+FXset::FXset(const std::string& path) : last_used_(0) {
 	// Check directory
+	std::string directory = FileSystem::fs_dirname(path);
 	if (!g_fs->is_directory(directory)) {
 		throw Widelands::GameDataError("SoundHandler: Can't load files from %s, not a directory!", directory.c_str());
 	}
 
 	// Find files
+	std::string base_filename = FileSystem::fs_filename(path.c_str());
 	boost::regex re(base_filename + "_\\d+\\.ogg");
 	paths_ = filter(g_fs->list_directory(directory), [&re](const std::string& fn) {
 		return boost::regex_match(FileSystem::fs_filename(fn.c_str()), re);
@@ -52,10 +54,12 @@ FXset::FXset(const std::string& directory, const std::string& base_filename) : l
 							base_filename.c_str(), directory.c_str());
 	}
 
+#ifndef NDEBUG
 	// Ensure that we haven't found any directories by mistake
 	for (const std::string& path : paths_) {
 		assert(!g_fs->is_directory(path));
 	}
+#endif
 }
 
 /// Delete all fxs to avoid memory leaks. This also frees the audio data.

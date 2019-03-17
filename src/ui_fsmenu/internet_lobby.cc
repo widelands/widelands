@@ -114,7 +114,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
      nickname_(nick),
      password_(pwd),
      is_registered_(registered) {
-	SoundHandler::register_fx(SoundType::kChat, "sound", "lobby_freshmen", "lobby_freshmen");
+	SoundHandler::register_fx(SoundType::kChat, "sound/lobby_freshmen");
 
 	joingame_.sigclicked.connect(
 	   boost::bind(&FullscreenMenuInternetLobby::clicked_joingame, boost::ref(*this)));
@@ -298,7 +298,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		}
 		// If a new player joins the lobby, play a sound.
 		if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
-			g_sound_handler->play_fx(SoundType::kChat, "lobby_freshmen");
+			g_sound_handler->play_fx(SoundType::kChat, "sound/lobby_freshmen");
 		}
 		prev_clientlist_len_ = clients->size();
 	}

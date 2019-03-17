@@ -49,7 +49,7 @@ DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const EditorGameBase& egbase)
    : BuildingDescr(init_descname, MapObjectType::DISMANTLESITE, table, egbase) {
 	add_attribute(MapObject::Attribute::CONSTRUCTIONSITE);  // Yep, this is correct.
-	SoundHandler::register_fx(SoundType::kAmbient, "sound", "create_construction_site", "create_construction_site");
+	SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site");
 }
 
 Building& DismantleSiteDescr::create_object() const {
@@ -109,7 +109,7 @@ Initialize the construction site by starting orders
 ===============
 */
 bool DismantleSite::init(EditorGameBase& egbase) {
-	Notifications::publish(NoteSound(SoundType::kAmbient, "create_construction_site", position_, kFxPriorityAlwaysPlay));
+	Notifications::publish(NoteSound(SoundType::kAmbient, "sound/create_construction_site", position_, kFxPriorityAlwaysPlay));
 
 	PartiallyFinishedBuilding::init(egbase);
 

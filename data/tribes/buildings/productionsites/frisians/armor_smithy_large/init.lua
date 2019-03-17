@@ -78,9 +78,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_broad",
             "consume=coal iron:2 gold",
             "sleep=24000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 24000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_broad"
          },
@@ -93,9 +93,9 @@ tribes:new_productionsite_type {
             "return=skipped unless economy needs sword_double",
             "consume=coal:2 iron:2 gold",
             "sleep=24000",
-            "playsound=sound/smiths smith 192",
+            "playsound=sound/smiths/smith 192",
             "animate=working 24000",
-            "playsound=sound/smiths sharpening 120",
+            "playsound=sound/smiths/sharpening 120",
             "sleep=9000",
             "produce=sword_double"
          },

@@ -83,7 +83,7 @@ ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const EditorGameBase& egbase)
    : BuildingDescr(init_descname, MapObjectType::CONSTRUCTIONSITE, table, egbase) {
 	add_attribute(MapObject::CONSTRUCTIONSITE);
-	SoundHandler::register_fx(SoundType::kAmbient, "sound", "create_construction_site", "create_construction_site");
+	SoundHandler::register_fx(SoundType::kAmbient, "sound/create_construction_site");
 }
 
 Building& ConstructionSiteDescr::create_object() const {

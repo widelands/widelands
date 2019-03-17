@@ -22,33 +22,38 @@
 
 #include <stdint.h>
 
-	/** How important is it to play the effect even when others are running
-	 * already?
-	 *
-	 * \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
-	 *
-	 * Value 0-127: probability between 0.0 and 1.0, only one instance can
-	 * be playing at any time
-	 *
-	 * Value 128-254: probability between 0.0 and 1.0, many instances can
-	 * be playing at any time
-	 *
-	 * Value 255: always play; unconditional
-	 */
-	constexpr uint8_t kFxPriorityMedium = 63;
-	constexpr uint8_t kFxPriorityAllowMultiple = 128;
-	constexpr uint8_t kFxPriorityAlwaysPlay = 255;
+/* How important is it to play the effect even when others are running
+ * already?
+ *
+ * \warning DO NOT CHANGE !! The values have meaning beyond just being numbers
+ *
+ * Value 0-127: probability between 0.0 and 1.0, only one instance can
+ * be playing at any time
+ *
+ * Value 128-254: probability between 0.0 and 1.0, many instances can
+ * be playing at any time
+ *
+ * Value 255: always play; unconditional
+ */
 
-	constexpr int32_t kStereoLeft = 0;
-	constexpr int32_t kStereoCenter = 128;
-	constexpr int32_t kStereoRight = 254;
+constexpr uint8_t kFxPriorityLowest = 1;
+// 50% chance to play
+constexpr uint8_t kFxPriorityMedium = 64;
+// Sound is only allowed to place one instance at a time below this
+constexpr uint8_t kFxPriorityAllowMultiple = 128;
+// Sound will always play
+constexpr uint8_t kFxPriorityAlwaysPlay = 255;
 
-	enum class SoundType {
-		kUI,
-		kMessage,
-		kChat,
-		kAmbient,
-		kMusic
-	};
+constexpr int32_t kStereoLeft = 0;
+constexpr int32_t kStereoCenter = 128;
+constexpr int32_t kStereoRight = 254;
+
+enum class SoundType {
+	kUI,
+	kMessage,
+	kChat,
+	kAmbient,
+	kMusic
+};
 
 #endif  // end of include guard: WL_SOUND_CONSTANTS_H

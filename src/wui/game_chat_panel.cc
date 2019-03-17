@@ -48,7 +48,7 @@ GameChatPanel::GameChatPanel(UI::Panel* parent,
              UI::MultilineTextarea::ScrollMode::kScrollLogForced),
      editbox(this, 0, h - 20, w, 20, 2, style),
      chat_message_counter(0) {
-	SoundHandler::register_fx(SoundType::kChat, "sound", "lobby_chat", "lobby_chat");
+	SoundHandler::register_fx(SoundType::kChat, "sound/lobby_chat");
 
 	editbox.ok.connect(boost::bind(&GameChatPanel::key_enter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::key_escape, this));
@@ -82,7 +82,7 @@ void GameChatPanel::recalculate(bool has_new_message) {
 		for (size_t i = chat_message_counter; i < msgs_size; ++i) {
 			if (!msgs[i].sender.empty()) {
 				// Got a message that is no system message. Beep
-				g_sound_handler->play_fx(SoundType::kChat, "lobby_chat");
+				g_sound_handler->play_fx(SoundType::kChat, "sound/lobby_chat");
 				break;
 			}
 		}

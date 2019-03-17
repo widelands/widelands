@@ -1409,9 +1409,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 	try {
 		bool reached_end;
-		const std::string& filepath = next_word(parameters, reached_end);
-		const std::string& filename = next_word(parameters, reached_end);
-		name = filepath + g_fs->file_separator() + filename;
+		name = next_word(parameters, reached_end);
 
 		if (!reached_end) {
 			char* endp;
@@ -1419,10 +1417,11 @@ ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 			priority = value;
 			if (*endp || priority != value)
 				throw GameDataError("expected %s but found \"%s\"", "priority", parameters);
-		} else
-			priority = 127;
+		} else {
+			priority = kFxPriorityAllowMultiple - 1;
+		}
 
-		SoundHandler::register_fx(SoundType::kAmbient, filepath, filename, name);
+		SoundHandler::register_fx(SoundType::kAmbient, name);
 	} catch (const WException& e) {
 		throw GameDataError("playsound: %s", e.what());
 	}

@@ -167,9 +167,7 @@ public:
 	static void disable_backend();
 
 	// This is static so that we can load the tribes and world without instantiating the sound system
-	static void register_fx(SoundType type, const std::string& dir,
-	                       const std::string& basename,
-	                       const std::string& fx_name);
+	static void register_fx(SoundType type, const std::string& fx_path);
 
 	void play_fx(SoundType type, const std::string& fx_name,
 	             uint8_t priority = kFxPriorityAlwaysPlay,
@@ -193,9 +191,7 @@ public:
 private:
 	void read_config();
 
-	void do_register_fx(SoundType type, const std::string& dir,
-	                       const std::string& basename,
-	                       const std::string& fx_name);
+	void do_register_fx(SoundType type, const std::string& fx_path);
 
 	void initialization_error(const char* const msg, bool quit_sdl);
 

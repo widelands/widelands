@@ -57,13 +57,13 @@ SoundControl::SoundControl(UI::Box* parent, const std::string& title, SoundType 
 void SoundControl::play_sound_sample() {
 	switch (type_) {
 	case SoundType::kAmbient:
-			g_sound_handler->play_fx(type_, "create_construction_site");
+			g_sound_handler->play_fx(type_, "sound/create_construction_site");
 			break;
 	case SoundType::kChat:
-		g_sound_handler->play_fx(type_, "lobby_chat");
+		g_sound_handler->play_fx(type_, "sound/lobby_chat");
 		break;
 	case SoundType::kMessage:
-		g_sound_handler->play_fx(type_, "message");
+		g_sound_handler->play_fx(type_, "sound/message");
 		break;
 	default:
 		// UI and music take care of themselves
