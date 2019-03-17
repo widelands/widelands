@@ -2143,6 +2143,7 @@ void Worker::fetchfromflag_update(Game& game, State& state) {
 	std::string signal = get_signal();
 	if (signal.size()) {
 		if (signal == "location") {
+			molog("[fetchfromflag]: Building disappeared, become fugitive\n");
 			return pop_task(game);
 		}
 	}
