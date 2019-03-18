@@ -30,7 +30,6 @@
 #include "notifications/notifications.h"
 #include "profile/profile.h"
 #include "sound/note_sound.h"
-#include "sound/sound_handler.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
@@ -53,8 +52,6 @@ class UniqueWindowHandler;
  */
 class InteractiveBase : public UI::Panel, public DebugConsole::Handler {
 public:
-	friend class SoundHandler;
-
 	enum {
 		dfShowCensus = 1,      ///< show census report on buildings
 		dfShowStatistics = 2,  ///< show statistics report on buildings
