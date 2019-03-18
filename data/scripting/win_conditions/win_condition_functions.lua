@@ -147,6 +147,38 @@ end
 
 
 -- RST
+-- .. function:: count_owned_valuable_fields_for_all_players(players[, attribute])
+--
+--    Counts all owned fields for each player.
+--
+--    :arg players: Table of all players
+--    :arg attribute: If this is set, only count fields that have an immovable with this attribute
+--
+--    :returns: a table with ``playernumber = count_of_owned_fields``  entries
+--
+function count_owned_valuable_fields_for_all_players(players, attribute)
+   attribute = attribute or ""
+
+   local owned_fields = {}
+
+   -- Get number of currently owned valuable fields per player.
+   -- This table can contain defeated players.
+   local all_plrpoints = wl.Game().map:count_owned_valuable_fields(attribute)
+
+   -- Insert points for all players who are still in the game, and 0 points for defeated players.
+   for idx,plr in ipairs(players) do
+      if (plr.defeated) then
+         owned_fields[plr.number] = 0
+      else
+         owned_fields[plr.number] = all_plrpoints[plr.number]
+      end
+   end
+   return owned_fields
+end
+
+
+
+-- RST
 -- .. function:: rank_players(all_player_points, plrs)
 --
 --    Rank the players and teams according to the highest points
