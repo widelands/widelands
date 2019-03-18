@@ -30,7 +30,6 @@
  *
  * An FXset encapsulates a number of interchangeable sound effects, e.g.
  * all effects that might be played when a blacksmith is happily hammering away.
- * It is possible to select the effects one after another or in random order.
  * The fact that an FXset really contains several different effects is hidden
  * from the outside
  */
@@ -44,14 +43,14 @@ struct FXset {
 	uint32_t ticks_since_last_play() const;
 
 	/** Get a sound effect from the fxset. Load the audio on demand.
-	 * \e Which variant of the fx is actually given out is determined at random
+	 * \param random A random number for picking a variant
 	 * \return  a pointer to the chosen effect; 0 if sound effects are
 	 * disabled or no fx is registered
 	 */
 	Mix_Chunk* get_fx(uint32_t random);
 
 private:
-	/** Add exactly one file to this fxset.
+	/** Load an audio file into memory.
 	 * \param path      the effect to be loaded
 	 * The file format must be ogg. Otherwise this call will complain and
 	 * not load the file.
@@ -65,7 +64,10 @@ private:
 	 */
 	uint32_t last_used_;
 
-	/// Filename paths for the physical sound files. This will be cleared when the effects have been loaded on demand.
+	/**
+	* Filename paths for the physical sound files
+	* This will be cleared when the effects have been loaded into memory by \ref get_fx on first play.
+	*/
 	std::set<std::string> paths_;
 
 	/// The collection of sound effects, to be loaded on demand

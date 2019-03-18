@@ -28,7 +28,6 @@ namespace {
 
 /**
  * UI elements to set sound properties for 1 type of sounds.
- * All changes to the sound settings take effect immediately, but are not saved to config.
  */
 class SoundControl : public UI::Box {
 private:

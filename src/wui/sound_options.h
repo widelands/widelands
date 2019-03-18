@@ -23,6 +23,7 @@
 
 /**
  * A box with all sound options.
+ * All changes to the sound settings take effect immediately, but are not saved to config.
  */
 struct SoundOptions : public UI::Box {
 	SoundOptions(UI::Panel& parent, UI::SliderStyle style);

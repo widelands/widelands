@@ -37,12 +37,13 @@
  * Value 255: always play; unconditional
  */
 
+/// Priorities lower than this one are illegal
 constexpr uint8_t kFxPriorityLowest = 1;
-// 50% chance to play
+/// 50% chance to play
 constexpr uint8_t kFxPriorityMedium = 64;
-// Sound is only allowed to place one instance at a time below this
+/// Sounds with priority lower than this one are only allowed to place one instance at a time
 constexpr uint8_t kFxPriorityAllowMultiple = 128;
-// Sound will always play
+/// Sound will always play
 constexpr uint8_t kFxPriorityAlwaysPlay = 255;
 
 constexpr int32_t kStereoLeft = 0;
@@ -52,6 +53,7 @@ constexpr int32_t kStereoRight = 254;
 using FxId = uint16_t;
 constexpr FxId kNoSoundEffect = std::numeric_limits<uint16_t>::max();
 
+/// Categorize sound effects and music to control their volume etc.
 enum class SoundType {
 	kUI,
 	kMessage,

@@ -67,7 +67,9 @@ void Songset::add_song(const std::string& filename) {
 	current_song_ = 0;
 }
 
-/** Get a song from the songset.
+/**
+ * Uses a 'random' number to select a song and return its audio data.
+ * \param random A random number for picking the song
  * \return  a pointer to the chosen song; nullptr if none was found
  *          or an error occurred
  */

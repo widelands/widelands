@@ -39,8 +39,7 @@ constexpr int kNumMixingChannels = 32;
 }  // namespace
 
 
-/** The global \ref SoundHandler object
- */
+/// The global \ref SoundHandler object
 SoundHandler* g_sound_handler;
 
 bool SoundHandler::backend_is_disabled_ = false;
@@ -83,8 +82,8 @@ SoundHandler::SoundHandler()
 	log("SDL version: %d.%d.%d\n", static_cast<unsigned int>(sdl_version.major),
 	    static_cast<unsigned int>(sdl_version.minor), static_cast<unsigned int>(sdl_version.patch));
 
-	/// SDL 2.0.6 will crash due to upstream bug:
-	/// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
+	// SDL 2.0.6 will crash due to an upstream bug:
+	// https://bugs.launchpad.net/ubuntu/+source/libsdl2/+bug/1722060
 	if (sdl_version.major == 2 && sdl_version.minor == 0 && sdl_version.patch == 6) {
 		log("Disabled sound due to a bug in SDL 2.0.6\n");
 		SoundHandler::disable_backend();
@@ -111,8 +110,8 @@ SoundHandler::SoundHandler()
 	}
 
 	constexpr int kMixInitFlags = MIX_INIT_OGG;
-	int initted = Mix_Init(kMixInitFlags);
-	if ((initted & kMixInitFlags) != kMixInitFlags) {
+	int init_flags = Mix_Init(kMixInitFlags);
+	if ((init_flags & kMixInitFlags) != kMixInitFlags) {
 		initialization_error("No Ogg support in SDL_Mixer.", true);
 		return;
 	}
@@ -132,7 +131,7 @@ SoundHandler::SoundHandler()
 }
 
 /**
- * Housekeeping: unset hooks, clear the mutex and all data structure and shutown the sound system.
+ * Housekeeping: unset hooks, clear the mutex and all data structures and shut down the sound system.
  * Audio data will be freed automagically by the \ref Songset and \ref FXset destructors, but not the {song|fx}sets themselves.
  */
 SoundHandler::~SoundHandler() {
@@ -143,11 +142,17 @@ SoundHandler::~SoundHandler() {
 	Mix_ChannelFinished(nullptr);
 	Mix_HookMusicFinished(nullptr);
 
+	stop_music();
+
+	songs_.clear();
+	fxs_.clear();
+
 	int numtimesopened, frequency, channels;
 	uint16_t format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
-	log("SoundHandler: Closing times %i, freq %i, format %i, chan %i\n", numtimesopened, frequency,
-	    format, channels);
+	log("SoundHandler: Closing %i time%s, %i Hz, format %i, %i channel%s\n",
+		numtimesopened, numtimesopened == 1 ? "" : "s",
+		frequency, format, channels, channels == 1 ? "" : "s");
 
 	if (numtimesopened == 0) {
 		return;
@@ -172,9 +177,6 @@ SoundHandler::~SoundHandler() {
 		SDL_DestroyMutex(fx_lock_);
 		fx_lock_ = nullptr;
 	}
-
-	songs_.clear();
-	fxs_.clear();
 
 	Mix_Quit();
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);

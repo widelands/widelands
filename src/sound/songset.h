@@ -32,9 +32,7 @@
  *
  * A Songset encapsulates a number of interchangeable pieces of (background)
  * music, e.g. all songs that might be played while the main menu is being
- * shown. It is possible to access those songs one after another or in
- * random order. The fact that a Songset really contains several different
- * songs is hidden from the outside.
+ * shown.
  * A songset does not contain the audio data itself, to not use huge amounts of
  * memory. Instead, each song is loaded on request and the data is free()d
  * afterwards
