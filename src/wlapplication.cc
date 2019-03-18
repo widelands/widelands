@@ -369,7 +369,8 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	g_sound_handler->register_songs("music", "menu");
 	g_sound_handler->register_songs("music", "ingame");
 
-	// Register the click sound for UI::Panel. We do it here to ensure that the sound handler has been created.
+	// Register the click sound for UI::Panel.
+	// We do it here to ensure that the sound handler has been created first, and we only want to register it once.
 	UI::Panel::register_click();
 
 	// This might grab the input.
