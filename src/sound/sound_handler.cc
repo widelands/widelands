@@ -328,7 +328,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
 	// Do not run multiple instances of the same sound effect if the priority is too low
 	bool too_many_playing = false;
 	if (priority < kFxPriorityAllowMultiple) {
-		lock();
+		lock_fx();
 		// Find out if an fx called 'fx_name' is already running
 		for (const auto& fx_pair : active_fx_) {
 			if (fx_pair.second == fx_id) {
@@ -338,7 +338,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
 		}
 	}
 
-	release_lock();
+	release_fx_lock();
 
 	if (too_many_playing) {
 		return false;
@@ -416,9 +416,9 @@ void SoundHandler::play_fx(SoundType type, const FxId fx_id,
 			Mix_SetDistance(chan, distance);
 			Mix_Volume(chan, get_volume(type));
 
-			lock();
+			lock_fx();
 			active_fx_[chan] = fx_id;
-			release_lock();
+			release_fx_lock();
 		}
 	} else {
 		log("SoundHandler: Sound effect %d exists but contains no files!\n", fx_id);
@@ -459,9 +459,8 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
 /**
  * Start playing a songset.
  * \param songset_name  The songset to play a song from.
- * \note When calling start_music() while music is still fading out from
- * \ref stop_music()
- * or \ref change_music() this function will block until the fadeout is complete
+ * \note When calling start_music() while music is still fading out from \ref stop_music() or \ref change_music(),
+ * this function will block until the fadeout is complete
  */
 void SoundHandler::start_music(const std::string& songset_name) {
 	if (backend_is_disabled_ || !is_sound_enabled(SoundType::kMusic)) {
@@ -500,7 +499,7 @@ void SoundHandler::stop_music(int fadeout_ms) {
 }
 
 /**
- * Play an new piece of music.
+ * Play a new piece of music.
  * This is a member function provided for convenience. It is a wrapper around
  * \ref start_music and \ref stop_music.
  * \param fadeout_ms  Old song will fade from 100% to 0% during fadeout_ms
@@ -530,20 +529,20 @@ const std::string SoundHandler::current_songset() const {
 	return current_songset_;
 }
 
-/// Returns whether we want to hear sonds of the given 'type'
+/// Returns whether we want to hear sounds of the given 'type'
 bool SoundHandler::is_sound_enabled(SoundType type) const {
 	assert(sound_options_.count(type) == 1);
 	return sound_options_.at(type).enabled;
 }
 
-/// Returns the volume that the given 'type' of sound is to be payed at
+/// Returns the volume that the given 'type' of sound is to be played at
 int32_t SoundHandler::get_volume(SoundType type) const {
 	assert(sound_options_.count(type) == 1);
 	return sound_options_.at(type).volume;
 }
 
 /**
- * Sets that we want to /don't want to hear the given 'type' of sounds. If the type is \ref SoundType::kMusic, start/stop the music as well.
+ * Sets that we want to / don't want to hear the given 'type' of sounds. If the type is \ref SoundType::kMusic, start/stop the music as well.
  */
 void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
 	assert(sound_options_.count(type) == 1);
@@ -595,7 +594,7 @@ void SoundHandler::set_volume(SoundType type, int32_t volume) {
 }
 
 /**
- * Return the max value for volume settings. We use a function to hide
+ * Returns the max value for volume settings. We use a function to hide
  * SDL_mixer constants outside of sound_handler.
  */
 int32_t SoundHandler::get_max_volume() const {
@@ -603,7 +602,8 @@ int32_t SoundHandler::get_max_volume() const {
 }
 
 /**
- * Callback to notify \ref WLApplication that a song has finished playing.
+ * Callback to notify \ref SoundHandler that a song has finished playing.
+ * Pushes an SDL_Event with type = SDL_USEREVENT and user.code = CHANGE_MUSIC.
  */
 void SoundHandler::music_finished_callback() {
 	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
@@ -616,36 +616,29 @@ void SoundHandler::music_finished_callback() {
 	SDL_PushEvent(&event);
 }
 
-/** Callback to notify \ref SoundHandler that a sound effect has finished
- * playing.
+/**
+ * Callback to notify \ref SoundHandler that a sound effect has finished
+ * playing. Removes the finished sound fx from the list of currently playing ones.
  */
 void SoundHandler::fx_finished_callback(int32_t const channel) {
 	// DO NOT CALL SDL_mixer FUNCTIONS OR SDL_LockAudio FROM HERE !!!
 
 	assert(!SoundHandler::is_backend_disabled());
 	assert(0 <= channel);
-	g_sound_handler->handle_channel_finished(static_cast<uint32_t>(channel));
+	g_sound_handler->lock_fx();
+	g_sound_handler->active_fx_.erase(static_cast<uint32_t>(channel));
+	g_sound_handler->release_fx_lock();
 }
 
-/** Remove a finished sound fx from the list of currently playing ones
- * This is part of \ref fx_finished_callback
- */
-void SoundHandler::handle_channel_finished(uint32_t channel) {
-	assert(!SoundHandler::is_backend_disabled());
-	lock();
-	active_fx_.erase(channel);
-	release_lock();
-}
-
-/// Lock the SDL mutex. Access to 'active_fx_' is protected by mutex because it can be accessed both from callbacks or from the main trhead
-void SoundHandler::lock() {
+/// Lock the SDL mutex. Access to 'active_fx_' is protected by mutex because it can be accessed both from callbacks or from the main thread.
+void SoundHandler::lock_fx() {
 	if (fx_lock_) {
 		SDL_LockMutex(fx_lock_);
 	}
 }
 
 /// Release the SDL mutex
-void SoundHandler::release_lock() {
+void SoundHandler::release_fx_lock() {
 	if (fx_lock_) {
 		SDL_UnlockMutex(fx_lock_);
 	}

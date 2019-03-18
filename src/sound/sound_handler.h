@@ -56,28 +56,24 @@
  * is \e no control over \e which song out of a songset gets played. The
  * selection is random.
  *
- * The files for the predefined system songsets
- * \li \c intro
- * \li \c menu
- * \li \c ingame
- *
- * must reside directly in the directory 'data/music' and must be named
- * SONGSET_XX.ogg where XX is a number from 00 to 99. All subdirectories of
- * 'data/music' will be considered to contain
- * ingame music. The music and sub-subdirectories found in them can be
- * arbitrarily named. This means: everything below data/music/ingame_01 can have
- * any name you want. All audio files below data/music/ingame_01 will be played as
+ * The files must reside somewhere below the datadir and must be named
+ * SONGSET_XX.ogg where XX is a number from 00 to 99.
+ * The music and sub-subdirectories found in a directory can be
+ * arbitrarily named. For example, if we register songsets in <datadir>/music,
+ * this means that everything below <datadir>/music/ingame_01 can have
+ * any name you want. All audio files below <datadir>/music/ingame_01 will be played as
  * ingame music.
  *
  * For more information about the naming scheme, see register_songs()
  *
- * You should be using the ogg format for music.
+ * You must use the ogg format for music.
+ *
  *
  * \par Sound effects
  *
- *
- * Use register_fx() to record the file locations for each sound effect, to be loaded on demand.
+ * Use register_fx() to record the file locations for each sound effect, to be loaded on first play.
  * Sound effects are kept in memory at all times once they have been loaded, to avoid delays from disk access.
+ * Yo can use \ref remove_fx_set to deregister and unload sound effects from memory though.
  * The file naming scheme is the same as for the songs, and if there are multiple files for an effect, they are picked at random too.
  * Sound effects are categorized into multiple SoundType categories, so that the user can control which type of sounds to hear.
  *
@@ -145,15 +141,11 @@
  * change_music() from inside start_music(). It really is not recursive, trust
  * me :-)
  */
-// TODO(unknown): DOC: priorities
-// TODO(unknown): DOC: play-or-not algorithm
-// TODO(unknown): Environmental sound effects (e.g. wind)
-// TODO(unknown): repair and reenable animation sound effects for 1-pic-animations
 
-// This is used for SDL UserEvents to be handled in the main loop.
+/// This is used for SDL UserEvents to be handled in the main loop.
 enum { CHANGE_MUSIC };
 
-// Avoid clicks when starting/stopping music
+/// Avoid clicks when starting/stopping music
 constexpr int kMinimumMusicFade = 250;
 
 class SoundHandler {
@@ -200,11 +192,11 @@ private:
 
 	static void music_finished_callback();
 	static void fx_finished_callback(int32_t channel);
-	void handle_channel_finished(uint32_t channel);
 
-	void lock();
-	void release_lock();
+	void lock_fx();
+	void release_fx_lock();
 
+	/// Contains options for a sound type or the music
 	struct SoundOptions {
 		explicit SoundOptions(int vol, const std::string& savename) : enabled(true), volume(vol), name(savename) {
 			assert(!savename.empty());
@@ -212,10 +204,11 @@ private:
 			assert(vol <= MIX_MAX_VOLUME);
 		}
 
+		/// Whether the user wants to hear this type of sound
 		bool enabled;
-		// Volume for sound effects or music (from 0 to get_max_volume())
+		/// Volume for sound effects or music (from 0 to get_max_volume())
 		int volume;
-		// Name for saving
+		/// Name for saving
 		const std::string name;
 	};
 
@@ -249,7 +242,8 @@ private:
 	/// Protects access to active_fx_ between callbacks and main code.
 	SDL_mutex* fx_lock_;
 
-	/** Can sounds be played?
+	/**
+	 * Can sounds be played?
 	 * true = they mustn't be played (e.g. because hardware is missing) or disable_backend() was called.
 	 * false = can be played
 	 */
