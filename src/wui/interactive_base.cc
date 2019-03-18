@@ -492,6 +492,27 @@ void InteractiveBase::blit_field_overlay(RenderTarget* dst,
 	blit_overlay(dst, field.rendertarget_pixel.cast<int>(), image, hotspot, scale);
 }
 
+void InteractiveBase::draw_bridges(RenderTarget* dst,
+								   const FieldsToDraw::Field* f,
+								   uint32_t gametime,
+								   float scale) const {
+	if (f->road_e == Widelands::RoadType::kBridgeNormal || f->road_e == Widelands::RoadType::kBridgeBusy) {
+		dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_animation(
+				Widelands::WALK_E, f->road_e == Widelands::RoadType::kBridgeBusy),
+				gametime, f->owner->get_playercolor());
+	}
+	if (f->road_sw == Widelands::RoadType::kBridgeNormal || f->road_sw == Widelands::RoadType::kBridgeBusy) {
+		dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_animation(
+				Widelands::WALK_SW, f->road_sw == Widelands::RoadType::kBridgeBusy),
+				gametime, f->owner->get_playercolor());
+	}
+	if (f->road_se == Widelands::RoadType::kBridgeNormal || f->road_se == Widelands::RoadType::kBridgeBusy) {
+		dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_animation(
+				Widelands::WALK_SE, f->road_se == Widelands::RoadType::kBridgeBusy),
+				gametime, f->owner->get_playercolor());
+	}
+}
+
 void InteractiveBase::mainview_move() {
 	if (minimap_registry_.window) {
 		minimap_->set_view(map_view_.view_area().rect());

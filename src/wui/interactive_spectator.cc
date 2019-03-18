@@ -127,22 +127,7 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
-		if (field.road_e == Widelands::RoadType::kBridgeNormal || field.road_e == Widelands::RoadType::kBridgeBusy) {
-			dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().bridge_animation(
-					Widelands::WALK_E, field.road_e == Widelands::RoadType::kBridgeBusy),
-					gametime, field.owner->get_playercolor());
-		}
-		if (field.road_sw == Widelands::RoadType::kBridgeNormal || field.road_sw == Widelands::RoadType::kBridgeBusy) {
-			dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().bridge_animation(
-					Widelands::WALK_SW, field.road_sw == Widelands::RoadType::kBridgeBusy),
-					gametime, field.owner->get_playercolor());
-		}
-		if (field.road_se == Widelands::RoadType::kBridgeNormal || field.road_se == Widelands::RoadType::kBridgeBusy) {
-			dst->blit_animation(field.rendertarget_pixel, scale, field.owner->tribe().bridge_animation(
-					Widelands::WALK_SE, field.road_se == Widelands::RoadType::kBridgeBusy),
-					gametime, field.owner->get_playercolor());
-		}
-
+		draw_bridges(dst, &field, gametime, scale);
 		draw_border_markers(field, scale, *fields_to_draw, dst);
 
 		Widelands::BaseImmovable* const imm = field.fcoords.field->get_immovable();

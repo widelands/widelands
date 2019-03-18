@@ -218,6 +218,8 @@ protected:
 	                        const Vector2i& hotspot,
 	                        float scale);
 
+	void draw_bridges(RenderTarget* dst, const FieldsToDraw::Field* f, uint32_t gametime, float scale) const;
+
 	void unset_sel_picture();
 	void set_sel_picture(const Image* image);
 	const Image* get_sel_picture() {

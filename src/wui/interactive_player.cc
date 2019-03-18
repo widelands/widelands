@@ -353,22 +353,8 @@ void InteractivePlayer::draw_map_view(MapView* given_map_view, RenderTarget* dst
 					}
 				}
 			}
-			if (f->road_e == Widelands::RoadType::kBridgeNormal || f->road_e == Widelands::RoadType::kBridgeBusy) {
-				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_animation(
-						Widelands::WALK_E, f->road_e == Widelands::RoadType::kBridgeBusy),
-						f->vision == 1 ? 0 : gametime, f->owner->get_playercolor());
-			}
-			if (f->road_sw == Widelands::RoadType::kBridgeNormal || f->road_sw == Widelands::RoadType::kBridgeBusy) {
-				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_animation(
-						Widelands::WALK_SW, f->road_sw == Widelands::RoadType::kBridgeBusy),
-						f->vision == 1 ? 0 : gametime, f->owner->get_playercolor());
-			}
-			if (f->road_se == Widelands::RoadType::kBridgeNormal || f->road_se == Widelands::RoadType::kBridgeBusy) {
-				dst->blit_animation(f->rendertarget_pixel, scale, f->owner->tribe().bridge_animation(
-						Widelands::WALK_SE, f->road_se == Widelands::RoadType::kBridgeBusy),
-						f->vision == 1 ? 0 : gametime, f->owner->get_playercolor());
-			}
 
+			draw_bridges(dst, f, f->vision > 1 ? gametime : 0, scale);
 			draw_border_markers(*f, scale, *fields_to_draw, dst);
 
 			// Render stuff that belongs to the node.

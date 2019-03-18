@@ -17,24 +17,9 @@
  *
  */
 
-#include "base/wexception.h"
 #include "logic/map_objects/tribes/road_textures.h"
 
 #include <memory>
-
-const Image& RoadTextures::get_texture(
-		const Widelands::RoadType type, const Widelands::Coords& coords, int direction) const {
-	switch (type) {
-		case Widelands::RoadType::kNormal:
-			return get_normal_texture(coords, direction);
-		case Widelands::RoadType::kBusy:
-			return get_busy_texture(coords, direction);
-		case Widelands::RoadType::kWaterway:
-			return get_waterway_texture(coords, direction);
-		default:
-			NEVER_HERE();
-	}
-}
 
 const Image& RoadTextures::get_normal_texture(const Widelands::Coords& coords,
                                               int direction) const {
@@ -60,4 +45,3 @@ void RoadTextures::add_busy_road_texture(const Image* image) {
 void RoadTextures::add_waterway_texture(const Image* image) {
 	waterway_textures_.emplace_back(image);
 }
-
