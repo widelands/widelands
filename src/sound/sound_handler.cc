@@ -427,11 +427,6 @@ void SoundHandler::play_fx(SoundType type, const FxId fx_id,
 
 /// Removes the given FXset from memory
 void SoundHandler::remove_fx_set(SoundType type) {
-	if (is_backend_disabled()) {
-		return;
-	}
-	assert(fxs_.count(type) == 1);
-	assert(fx_ids_.count(type) == 1);
 	fxs_.erase(type);
 	fx_ids_.erase(type);
 }
