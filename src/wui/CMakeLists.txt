@@ -1,7 +1,5 @@
 wl_library(wui_sound_options
   SRCS
-    sound_control.cc
-    sound_control.h
     sound_options.cc
     sound_options.h
   DEPENDS

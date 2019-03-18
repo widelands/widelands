@@ -20,11 +20,89 @@
 
 #include "base/i18n.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/multilinetextarea.h"
-#include "wui/sound_control.h"
+#include "ui_basic/slider.h"
 
 namespace {
+
+/**
+ * UI elements to set sound properties for 1 type of sounds.
+ * All changes to the sound settings take effect immediately, but are not saved to config.
+ */
+class SoundControl : public UI::Box {
+private:
+	static constexpr int kSliderWidth = 200;
+	static constexpr int kCursorWidth = 28;
+	static constexpr int kSpacing = 16;
+
+public:
+/**
+	 * @brief SoundControl Creates a new sound control box
+	 * @param parent The parent panel
+	 * @param title The localized test label to display
+	 * @param type The type of sound to set the properties for
+	 * @param style The User interface style for the slider
+	 */
+	SoundControl(UI::Box* parent, UI::SliderStyle style, const std::string& title, SoundType type, FxId representative_fx = kNoSoundEffect)
+	   : UI::Box(parent, 0, 0, UI::Box::Horizontal),
+		 enable_(this, Vector2i::zero(), title),
+		 volume_(this, 0, 0, kSliderWidth, enable_.get_h(),
+				 0, g_sound_handler->get_max_volume(), g_sound_handler->get_volume(type), style,
+				 /** TRANSLATORS: Tooltip for volume slider in sound options */
+				 _("Changes the volume. Click to hear a sample."), kCursorWidth),
+		 type_(type),
+	fx_(representative_fx) {
+		set_inner_spacing(kSpacing);
+		add(&volume_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+		add(&enable_, UI::Box::Resizing::kAlign, UI::Align::kCenter);
+
+		if (SoundHandler::is_backend_disabled()) {
+			enable_.set_enabled(false);
+			volume_.set_enabled(false);
+		} else {
+			enable_.set_state(g_sound_handler->is_sound_enabled(type));
+			volume_.set_enabled(g_sound_handler->is_sound_enabled(type));
+
+			enable_.changedto.connect([this] (bool on) { enable_changed(on); });
+			volume_.changedto.connect([this] (int32_t value) { volume_changed(value); });
+			volume_.clicked.connect([this] { play_sound_sample(); });
+		}
+		set_thinks(false);
+	}
+
+private:
+	/// Plays a system sound sample selected from the given sound type
+	void play_sound_sample() {
+		if (fx_ != kNoSoundEffect) {
+			g_sound_handler->play_fx(type_, fx_);
+		}
+	}
+
+	/// Sets new enable/disable value in the sound handler for the sound type and enables/disables the volume slider accordingly
+	void enable_changed(bool on) {
+		enable_.set_state(on);
+		volume_.set_enabled(on);
+		g_sound_handler->set_enable_sound(type_, on);
+	}
+
+	/// Sets the volume in the sound handler to the new 'value'
+	void volume_changed(int32_t value) {
+		g_sound_handler->set_volume(type_, value);
+	}
+
+	/// Enable / disable sound type
+	UI::Checkbox enable_;
+	/// Control the volume for the sound type
+	UI::HorizontalSlider volume_;
+	/// The sound type to control
+	const SoundType type_;
+	/// Representative sound effect to play
+	const FxId fx_;
+};
+
 constexpr int kSpacing = 12;
+
 } // namespace
 
 SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
@@ -32,13 +110,20 @@ SoundOptions::SoundOptions(UI::Panel& parent, UI::SliderStyle style)
 
 	set_inner_spacing(kSpacing);
 
-	add(new SoundControl(this, pgettext("sound_options", "Music"), SoundType::kMusic, style), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, pgettext("sound_options", "Chat Messages"), SoundType::kChat, style), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, pgettext("sound_options", "Game Messages"), SoundType::kMessage, style), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, pgettext("sound_options", "User Interface"), SoundType::kUI, style), UI::Box::Resizing::kFullSize);
-	add(new SoundControl(this, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient, style), UI::Box::Resizing::kFullSize);
+	add(new SoundControl(this, style, pgettext("sound_options", "Music"), SoundType::kMusic));
 
-	// TODO(GunChleoc): There's a bug (probably somewhere in Box) that will hide the bottom SoundControl if the textearea is not added to the box. So, we create and add it even if its text is empty.
+	add(new SoundControl(this, style, pgettext("sound_options", "Chat Messages"), SoundType::kChat,
+						 g_sound_handler->register_fx(SoundType::kChat, "sound/lobby_chat")));
+
+	add(new SoundControl(this, style, pgettext("sound_options", "Game Messages"), SoundType::kMessage,
+						 g_sound_handler->register_fx(SoundType::kMessage, "sound/message")));
+
+	add(new SoundControl(this, style, pgettext("sound_options", "User Interface"), SoundType::kUI));
+
+	add(new SoundControl(this, style, pgettext("sound_options", "Ambient Sounds"), SoundType::kAmbient,
+						 g_sound_handler->register_fx(SoundType::kAmbient, "sound/create_construction_site")));
+
+	// TODO(GunChleoc): There's a bug (probably somewhere in Box, triggered in combination with Window::set_center_panel) that will hide the bottom SoundControl in GameOptionsSoundMenu if the MultilineTextarea is not added to the Box. So, we create and add it even if its text is empty.
 	UI::MultilineTextarea* sound_warning = new UI::MultilineTextarea(
 	   this, 0, 0, 100, 0, UI::PanelStyle::kWui,
 	   "", UI::Align::kLeft,
