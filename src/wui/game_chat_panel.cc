@@ -82,7 +82,7 @@ void GameChatPanel::recalculate(bool has_new_message) {
 		for (size_t i = chat_message_counter; i < msgs_size; ++i) {
 			if (!msgs[i].sender.empty()) {
 				// Got a message that is no system message. Beep
-				g_sound_handler->play_fx(SoundType::kChat, chat_sound);
+				g_sh->play_fx(SoundType::kChat, chat_sound);
 				break;
 			}
 		}

@@ -714,7 +714,7 @@ void Panel::die() {
  * sound_handler.h in every UI subclass just for playing a 'click'
  */
 void Panel::play_click() {
-	g_sound_handler->play_fx(SoundType::kUI, click_fx_);
+	g_sh->play_fx(SoundType::kUI, click_fx_);
 }
 
 /**

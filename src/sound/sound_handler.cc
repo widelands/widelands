@@ -40,7 +40,7 @@ constexpr int kNumMixingChannels = 32;
 
 
 /// The global \ref SoundHandler object
-SoundHandler* g_sound_handler;
+SoundHandler* g_sh;
 
 bool SoundHandler::backend_is_disabled_ = false;
 
@@ -278,10 +278,10 @@ void SoundHandler::disable_backend() {
  */
 
 FxId SoundHandler::register_fx(SoundType type, const std::string& fx_path) {
-	if (SoundHandler::is_backend_disabled() || g_sound_handler == nullptr) {
+	if (SoundHandler::is_backend_disabled() || g_sh == nullptr) {
 		return kNoSoundEffect;
 	}
-	size_t result = g_sound_handler->do_register_fx(type, fx_path);
+	size_t result = g_sh->do_register_fx(type, fx_path);
 	return result;
 }
 
@@ -625,9 +625,9 @@ void SoundHandler::fx_finished_callback(int32_t const channel) {
 
 	assert(!SoundHandler::is_backend_disabled());
 	assert(0 <= channel);
-	g_sound_handler->lock_fx();
-	g_sound_handler->active_fx_.erase(static_cast<uint32_t>(channel));
-	g_sound_handler->release_fx_lock();
+	g_sh->lock_fx();
+	g_sh->active_fx_.erase(static_cast<uint32_t>(channel));
+	g_sh->release_fx_lock();
 }
 
 /// Lock the SDL mutex. Access to 'active_fx_' is protected by mutex because it can be accessed both from callbacks or from the main thread.

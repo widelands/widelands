@@ -542,7 +542,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 		;
 #endif
 
-	g_sound_handler->change_music("ingame", 1000);
+	g_sh->change_music("ingame", 1000);
 
 	state_ = gs_running;
 
@@ -550,7 +550,7 @@ bool Game::run(UI::ProgressWindow* loader_ui,
 
 	state_ = gs_ending;
 
-	g_sound_handler->change_music("menu", 1000);
+	g_sh->change_music("menu", 1000);
 
 	cleanup_objects();
 	set_ibase(nullptr);

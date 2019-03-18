@@ -732,7 +732,7 @@ void InteractiveBase::log_message(const std::string& message) const {
  * Plays a sound effect positioned according to the map coordinates in the note.
  */
 void InteractiveBase::play_sound_effect(const NoteSound& note) const {
-	if (!g_sound_handler->is_sound_enabled(note.type)) {
+	if (!g_sh->is_sound_enabled(note.type)) {
 		return;
 	}
 
@@ -751,7 +751,7 @@ void InteractiveBase::play_sound_effect(const NoteSound& note) const {
 		distance = (note.priority == kFxPriorityAlwaysPlay) ? (math::clamp(distance, 0, kSoundMaxDistance) / 2) : distance;
 
 		if (distance < kSoundMaxDistance) {
-			g_sound_handler->play_fx(note.type, note.fx, note.priority, math::clamp(stereo_pos, kStereoLeft, kStereoRight), distance);
+			g_sh->play_fx(note.type, note.fx, note.priority, math::clamp(stereo_pos, kStereoLeft, kStereoRight), distance);
 		}
 	}
 }

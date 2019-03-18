@@ -363,11 +363,11 @@ WLApplication::WLApplication(int const argc, char const* const* const argv)
 	   config.get_int("xres", DEFAULT_RESOLUTION_W), config.get_int("yres", DEFAULT_RESOLUTION_H),
 	   config.get_bool("fullscreen", false));
 
-	g_sound_handler = new SoundHandler();
+	g_sh = new SoundHandler();
 
-	g_sound_handler->register_songs("music", "intro");
-	g_sound_handler->register_songs("music", "menu");
-	g_sound_handler->register_songs("music", "ingame");
+	g_sh->register_songs("music", "intro");
+	g_sh->register_songs("music", "menu");
+	g_sh->register_songs("music", "ingame");
 
 	// Register the click sound for UI::Panel.
 	// We do it here to ensure that the sound handler has been created first, and we only want to register it once.
@@ -424,7 +424,7 @@ void WLApplication::run() {
 	refresh_graphics();
 
 	if (game_type_ == EDITOR) {
-		g_sound_handler->change_music("ingame");
+		g_sh->change_music("ingame");
 		EditorInteractive::run_editor(filename_, script_to_run_);
 	} else if (game_type_ == REPLAY) {
 		replay();
@@ -452,18 +452,18 @@ void WLApplication::run() {
 			throw;
 		}
 	} else {
-		g_sound_handler->change_music("intro");
+		g_sh->change_music("intro");
 
 		{
 			FullscreenMenuIntro intro;
 			intro.run<FullscreenMenuBase::MenuTarget>();
 		}
 
-		g_sound_handler->change_music("menu", 1000);
+		g_sh->change_music("menu", 1000);
 		mainmenu();
 	}
 
-	g_sound_handler->stop_music(500);
+	g_sh->stop_music(500);
 
 	return;
 }
@@ -506,7 +506,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 			 * finishes, Widelands will automatically go on to the main menu.
 			 */
 			assert(!SoundHandler::is_backend_disabled());
-			if (g_sound_handler->current_songset() == "intro") {
+			if (g_sh->current_songset() == "intro") {
 				// Special case for splashscreen: there, only one song is ever played
 				SDL_Event new_event;
 				new_event.type = SDL_KEYDOWN;
@@ -514,7 +514,7 @@ bool WLApplication::poll_event(SDL_Event& ev) {
 				new_event.key.keysym.sym = SDLK_ESCAPE;
 				SDL_PushEvent(&new_event);
 			} else {
-				g_sound_handler->change_music();
+				g_sh->change_music();
 			}
 		}
 	} break;
@@ -893,8 +893,8 @@ void WLApplication::shutdown_hardware() {
 	alarm(5);
 #endif
 
-	delete g_sound_handler;
-	g_sound_handler = nullptr;
+	delete g_sh;
+	g_sh = nullptr;
 
 	SDL_QuitSubSystem(SDL_INIT_TIMER | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK);
 }
@@ -1237,7 +1237,7 @@ void WLApplication::mainmenu_multiplayer() {
 			NEVER_HERE();
 		}
 
-		g_sound_handler->change_music("ingame", 1000);
+		g_sh->change_music("ingame", 1000);
 
 		if (internet) {
 			std::string playername = mp.get_nickname();
@@ -1292,7 +1292,7 @@ void WLApplication::mainmenu_multiplayer() {
 				break;
 			}
 		}
-		g_sound_handler->change_music("menu", 1000);
+		g_sh->change_music("menu", 1000);
 	}
 }
 

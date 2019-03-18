@@ -96,7 +96,7 @@
  * static function share data with an instance of its own class? Usually not at
  * all.
  *
- * Fortunately, g_sound_handler already is a global variable,
+ * Fortunately, g_sh already is a global variable,
  * and therefore accessible to global functions. So problem 1 disappears.
  *
  * Problem 2:
@@ -244,12 +244,12 @@ private:
 
 	/**
 	 * Can sounds be played?
-	 * true = they mustn't be played (e.g. because hardware is missing) or disable_backend() was called.
+	 * true = they mustn't be played, e.g. because hardware is missing or disable_backend() was called.
 	 * false = can be played
 	 */
 	static bool backend_is_disabled_;
 };
 
-extern SoundHandler* g_sound_handler;
+extern SoundHandler* g_sh;
 
 #endif  // end of include guard: WL_SOUND_SOUND_HANDLER_H

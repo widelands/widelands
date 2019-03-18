@@ -995,7 +995,7 @@ bool Worker::run_findresources(Game& game, State& state, const Action&) {
 }
 
 /**
- * Demand from the g_sound_handler to play a certain sound effect.
+ * Demand from the g_sh to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
 bool Worker::run_playsound(Game& game, State& state, const Action& action) {

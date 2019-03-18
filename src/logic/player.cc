@@ -326,7 +326,7 @@ void Player::update_team_players() {
  * enabled.
  */
 void Player::play_message_sound(const Message* message) {
-	if (g_sound_handler->is_sound_enabled(SoundType::kMessage)) {
+	if (g_sh->is_sound_enabled(SoundType::kMessage)) {
 		FxId fx;
 		switch (message->type()) {
 			case Message::Type::kEconomySiteOccupied:

@@ -40,5 +40,5 @@ GameOptionsSoundMenu::GameOptionsSoundMenu(Panel& parent,
 
 
 GameOptionsSoundMenu::~GameOptionsSoundMenu() {
-	g_sound_handler->save_config();
+	g_sh->save_config();
 }

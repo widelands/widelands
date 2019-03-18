@@ -79,8 +79,8 @@ EditorGameBase::EditorGameBase(LuaInterface* lua_interface)
 
 EditorGameBase::~EditorGameBase() {
 	delete_tempfile();
-	if (g_sound_handler != nullptr) {
-		g_sound_handler->remove_fx_set(SoundType::kAmbient);
+	if (g_sh != nullptr) {
+		g_sh->remove_fx_set(SoundType::kAmbient);
 	}
 }
 

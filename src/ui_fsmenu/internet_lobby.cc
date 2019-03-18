@@ -298,7 +298,7 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 		}
 		// If a new player joins the lobby, play a sound.
 		if (clients->size() > prev_clientlist_len_ && !InternetGaming::ref().sound_off()) {
-			g_sound_handler->play_fx(SoundType::kChat, new_client_fx_);
+			g_sh->play_fx(SoundType::kChat, new_client_fx_);
 		}
 		prev_clientlist_len_ = clients->size();
 	}
