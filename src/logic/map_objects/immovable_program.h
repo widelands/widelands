@@ -31,6 +31,7 @@
 
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
+#include "logic/map_objects/map_object_program.h"
 
 namespace Widelands {
 
@@ -63,15 +64,10 @@ struct ImmovableProgram {
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
 	struct ActAnimate : public Action {
-		ActAnimate(char* parameters, ImmovableDescr&);
+		ActAnimate(char* arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
-		uint32_t animation() const {
-			return id_;
-		}
-
 	private:
-		uint32_t id_;
-		Duration duration_;
+		AnimationParameters parameters;
 	};
 
 	/// Transforms the immovable into another immovable or into a bob
@@ -143,12 +139,11 @@ struct ImmovableProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		ActPlaySound(char* parameters, const ImmovableDescr&);
+		ActPlaySound(char* arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
-		std::string name;
-		uint8_t priority;
+		PlaySoundParameters parameters;
 	};
 
 	/**

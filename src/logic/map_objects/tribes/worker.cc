@@ -35,7 +35,6 @@
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/cmd_incorporate.h"

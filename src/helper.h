@@ -20,27 +20,6 @@
 #ifndef WL_HELPER_H
 #define WL_HELPER_H
 
-#include <cassert>
-#include <cstring>
-#include <string>
-#include <vector>
-
-#include <SDL_keyboard.h>
-#include <boost/utility.hpp>
-
-#include "base/wexception.h"
-
-/// Returns the word starting at the character that p points to and ending
-/// before the first terminator character. Replaces the terminator with null.
-// TODO(sirver): move into a logic/strings lib or so.
-char* next_word(char*& p, bool& reached_end, char terminator = ' ');
-
-/// Split a string by separators.
-/// \note This ignores empty elements, so do not use this for example to split
-/// a string with newline characters into lines, because it would ignore empty
-/// lines.
-std::vector<std::string> split_string(const std::string&, char const* separators);
-
 // A functional container filtering (by copying the values). Returns a new
 // ContainerType that  contains all values where 'test' returned true.
 template <typename ContainerType, class UnaryPredicate>

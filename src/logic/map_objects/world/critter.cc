@@ -27,12 +27,12 @@
 #include <stdint.h>
 
 #include "base/wexception.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/field.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/tribes/tribe_descr.h"
 #include "logic/map_objects/world/critter_program.h"
 #include "logic/map_objects/world/world.h"

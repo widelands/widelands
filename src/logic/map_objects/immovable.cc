@@ -33,7 +33,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
-#include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
@@ -411,11 +410,11 @@ bool Immovable::init(EditorGameBase& egbase) {
 		prog = descr().get_program("program");
 		assert(prog != nullptr);
 	}
-	if (upcast(ImmovableProgram::ActAnimate const, act_animate, &(*prog)[program_ptr_]))
-		start_animation(egbase, act_animate->animation());
 
 	if (upcast(Game, game, &egbase)) {
 		switch_program(*game, "program");
+	} else {
+		start_animation(egbase, descr().get_animation("idle"));
 	}
 	return true;
 }
@@ -757,63 +756,29 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 ImmovableProgram::Action::~Action() {
 }
 
-ImmovableProgram::ActAnimate::ActAnimate(char* parameters, ImmovableDescr& descr) {
-	try {
-		bool reached_end;
-		char* const animation_name = next_word(parameters, reached_end);
-		if (!descr.is_animation_known(animation_name)) {
-			throw GameDataError("Unknown animation: %s.", animation_name);
-		}
-		id_ = descr.get_animation(animation_name);
-
-		if (!reached_end) {  //  The next parameter is the duration.
-			char* endp;
-			long int const value = strtol(parameters, &endp, 0);
-			if (*endp || value <= 0)
-				throw GameDataError("expected %s but found \"%s\"", "duration in ms", parameters);
-			duration_ = value;
-		} else {
-			duration_ = 0;  //  forever
-		}
-	} catch (const WException& e) {
-		throw GameDataError("animate: %s", e.what());
-	}
+ImmovableProgram::ActAnimate::ActAnimate(char* arguments, ImmovableDescr& descr) {
+	const std::vector<std::string> arguments_vector = split_string(arguments, " \t\n");
+	parameters = parse_act_animate(arguments_vector, descr, true);
 }
 
 /// Use convolutuion to make the animation time a random variable with binomial
 /// distribution and the configured time as the expected value.
 void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) const {
-	immovable.start_animation(game, id_);
+	immovable.start_animation(game, parameters.animation);
 	immovable.program_step(
-	   game, duration_ ? 1 + game.logic_rand() % duration_ + game.logic_rand() % duration_ : 0);
+	   game, parameters.duration ? 1 + game.logic_rand() % parameters.duration + game.logic_rand() % parameters.duration : 0);
 }
 
-ImmovableProgram::ActPlaySound::ActPlaySound(char* parameters, const ImmovableDescr&) {
-	try {
-		bool reached_end;
-		name = next_word(parameters, reached_end);
-
-		if (!reached_end) {
-			char* endp;
-			unsigned long long int const value = strtoull(parameters, &endp, 0);
-			priority = value;
-			if (*endp || priority != value)
-				throw GameDataError("expected %s but found \"%s\"", "priority", parameters);
-		} else
-			priority = 127;
-
-		g_sound_handler.load_fx_if_needed(
-		   FileSystem::fs_dirname(name), FileSystem::fs_filename(name.c_str()), name);
-	} catch (const WException& e) {
-		throw GameDataError("playsound: %s", e.what());
-	}
+ImmovableProgram::ActPlaySound::ActPlaySound(char* arguments, const ImmovableDescr& descr) {
+	const std::vector<std::string> arguments_vector = split_string(arguments, " \t\n");
+	parameters = parse_act_play_sound(arguments_vector, descr, 127);
 }
 
 /** Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played
  * is decided only by the sound server*/
 void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) const {
-	Notifications::publish(NoteSound(name, immovable.get_position(), priority));
+	Notifications::publish(NoteSound(parameters.name, immovable.get_position(), parameters.priority));
 	immovable.program_step(game);
 }
 

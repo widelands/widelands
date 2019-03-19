@@ -23,7 +23,6 @@
 #include <string>
 
 #include "base/log.h"
-#include "helper.h"
 #include "logic/findnode.h"
 #include "logic/game_data_error.h"
 #include "sound/sound_handler.h"
@@ -565,25 +564,16 @@ animate
  * iparam2 = duration
  */
 void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::string>& cmd) {
-	char* endp;
-
-	if (cmd.size() != 3)
-		throw GameDataError("Usage: animate=<name> <time>");
-
-	if (!worker_.is_animation_known(cmd[1])) {
-		throw GameDataError("unknown animation \"%s\" in worker program for worker \"%s\"",
-		                    cmd[1].c_str(), worker_.name().c_str());
+	// NOCOM we want to skip the first item in the vectors here, or add it in the other programs
+	std::vector<std::string> params;
+	for (size_t i = 1; i < cmd.size(); ++i) {
+		params.push_back(cmd.at(i));
 	}
+	AnimationParameters parameters = parse_act_animate(params, worker_, true);
 
 	act->function = &Worker::run_animate;
-	act->iparam1 = worker_.get_animation(cmd[1]);
-
-	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
-	if (*endp)
-		throw GameDataError("Bad duration '%s'", cmd[2].c_str());
-
-	if (act->iparam2 <= 0)
-		throw GameDataError("animation duration must be positive");
+	act->iparam1 = parameters.animation;
+	act->iparam2 = parameters.duration;
 }
 
 /* RST
@@ -899,16 +889,18 @@ playsound
       }
 */
 void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() < 3 || cmd.size() > 4)
-		throw wexception("Usage: playsound <sound_dir> <sound_name> [priority]");
+	// NOCOM we want to skip the first item in the vectors here, or add it in the other programs
+	std::vector<std::string> params;
+	for (size_t i = 1; i < cmd.size(); ++i) {
+		params.push_back(cmd.at(i));
+	}
 
-	act->sparam1 = cmd[1] + "/" + cmd[2];
+	//  50% chance to play, only one instance at a time
+	PlaySoundParameters parameters = parse_act_play_sound(params, worker_, 64);
 
-	g_sound_handler.load_fx_if_needed(cmd[1], cmd[2], act->sparam1);
-
+	act->sparam1 = parameters.name;
+	act->iparam1 = parameters.priority;
 	act->function = &Worker::run_playsound;
-	act->iparam1 = cmd.size() == 3 ? 64 :  //  50% chance to play, only one instance at a time
-	                  atoi(cmd[3].c_str());
 }
 
 /* RST

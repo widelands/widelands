@@ -28,7 +28,6 @@
 #include "base/macros.h"
 #include "base/wexception.h"
 #include "economy/request.h"
-#include "helper.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map_objects/tribes/production_program.h"

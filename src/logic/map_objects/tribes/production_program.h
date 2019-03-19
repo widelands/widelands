@@ -32,6 +32,7 @@
 #include "base/log.h"
 #include "base/macros.h"
 #include "logic/editor_game_base.h"
+#include "logic/map_objects/map_object_program.h"
 #include "logic/map_objects/tribes/bill_of_materials.h"
 #include "logic/map_objects/tribes/program_result.h"
 #include "logic/map_objects/tribes/training_attribute.h"
@@ -352,12 +353,11 @@ struct ProductionProgram {
 	/// animation will not be stopped by this command. It will run until another
 	/// animation is started.)
 	struct ActAnimate : public Action {
-		ActAnimate(char* parameters, ProductionSiteDescr*);
+		ActAnimate(char* arguments, ProductionSiteDescr*);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		uint32_t id_;
-		Duration duration_;
+		AnimationParameters parameters;
 	};
 
 	/// Consumes wares from the input storages.
@@ -499,12 +499,11 @@ struct ProductionProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		explicit ActPlaySound(char* parameters);
+		explicit ActPlaySound(char* arguments, ProductionSiteDescr* descr);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		std::string name;
-		uint8_t priority;
+		PlaySoundParameters parameters;
 	};
 
 	/// Sends a building worker to construct at an immovable.

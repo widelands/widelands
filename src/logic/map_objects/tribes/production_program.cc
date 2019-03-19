@@ -32,7 +32,6 @@
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/input_queue.h"
-#include "helper.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
@@ -751,33 +750,14 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 	}
 }
 
-ProductionProgram::ActAnimate::ActAnimate(char* parameters, ProductionSiteDescr* descr) {
-	try {
-		bool reached_end;
-		char* const animation_name = next_word(parameters, reached_end);
-		if (!strcmp(animation_name, "idle"))
-			throw GameDataError("idle animation is default; calling is not allowed");
-		if (descr->is_animation_known(animation_name))
-			id_ = descr->get_animation(animation_name);
-		else {
-			throw GameDataError("Unknown animation '%s'", animation_name);
-		}
-		if (!reached_end) {  //  The next parameter is the duration.
-			char* endp;
-			long long int const value = strtoll(parameters, &endp, 0);
-			duration_ = value;
-			if (*endp || value <= 0 || duration_ != value)
-				throw GameDataError("expected %s but found \"%s\"", "duration in ms", parameters);
-		} else
-			duration_ = 0;  //  Get duration from the result of a previous action.
-	} catch (const WException& e) {
-		throw GameDataError("animate: %s", e.what());
-	}
+ProductionProgram::ActAnimate::ActAnimate(char* arguments, ProductionSiteDescr* descr) {
+	const std::vector<std::string> arguments_vector = split_string(arguments, " \t\n");
+	parameters = parse_act_animate(arguments_vector, *descr, false);
 }
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
-	ps.start_animation(game, id_);
-	return ps.program_step(game, duration_ ? duration_ : ps.top_state().phase);
+	ps.start_animation(game, parameters.animation);
+	return ps.program_step(game, parameters.duration ? parameters.duration : ps.top_state().phase);
 }
 
 ProductionProgram::ActConsume::ActConsume(char* parameters,
@@ -1406,30 +1386,13 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	return ps.program_step(game);
 }
 
-ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
-	try {
-		bool reached_end;
-		const std::string& filepath = next_word(parameters, reached_end);
-		const std::string& filename = next_word(parameters, reached_end);
-		name = filepath + g_fs->file_separator() + filename;
-
-		if (!reached_end) {
-			char* endp;
-			unsigned long long int const value = strtoull(parameters, &endp, 0);
-			priority = value;
-			if (*endp || priority != value)
-				throw GameDataError("expected %s but found \"%s\"", "priority", parameters);
-		} else
-			priority = 127;
-
-		g_sound_handler.load_fx_if_needed(filepath, filename, name);
-	} catch (const WException& e) {
-		throw GameDataError("playsound: %s", e.what());
-	}
+ProductionProgram::ActPlaySound::ActPlaySound(char* arguments, ProductionSiteDescr* descr) {
+	const std::vector<std::string> arguments_vector = split_string(arguments, " \t\n");
+	parameters = parse_act_play_sound(arguments_vector, *descr, 127);
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
-	Notifications::publish(NoteSound(name, ps.position_, priority));
+	Notifications::publish(NoteSound(parameters.name, ps.position_, parameters.priority));
 	return ps.program_step(game);
 }
 
@@ -1650,7 +1613,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			   std::unique_ptr<ProductionProgram::Action>(new ActTrain(arguments.get())));
 		} else if (boost::iequals(parts[0], "playsound")) {
 			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(arguments.get())));
+			   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(arguments.get(), building)));
 		} else if (boost::iequals(parts[0], "construct")) {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActConstruct(arguments.get(), name(), building)));

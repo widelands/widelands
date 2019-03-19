@@ -192,6 +192,8 @@ wl_library(logic
     map_objects/immovable_program.h
     map_objects/map_object.cc
     map_objects/map_object.h
+    map_objects/map_object_program.cc
+    map_objects/map_object_program.h
     map_objects/terrain_affinity.cc
     map_objects/terrain_affinity.h
     map_objects/tribes/attack_target.h
@@ -286,7 +288,6 @@ wl_library(logic
     graphic_surface
     graphic_text_constants
     graphic_text_layout
-    helper
     io_fileread
     io_filesystem
     io_stream
