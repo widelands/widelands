@@ -1,17 +1,17 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2016,2018
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010
 # GunChleoc, 2014
-# Jukka Pakarinen, 2016-2018
+# Jukka Pakarinen, 2016-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-10-26 05:28+0000\n"
-"PO-Revision-Date: 2018-10-28 07:44+0000\n"
+"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"PO-Revision-Date: 2019-02-25 18:21+0000\n"
 "Last-Translator: Jukka Pakarinen\n"
 "Language-Team: Finnish (http://www.transifex.com/widelands/widelands/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -440,10 +440,10 @@ msgstr "Rakenna kivilouhos kivikon viereen. Muistatko kuinka tein sen aiemmin?"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
-msgstr "Varmista rakennusalueiden näkyminen, sitten valitse rakennuspaikka ja ilmestyvästä ruudusta kivilouhos. Ehkäpä tämä on hyvä hetki esitellä kaikki nuo rakennusalueen kuvakkeet, jotka aktivoimme aiemmin."
+msgstr "Varmista rakennusalueiden näkyminen, mikä jälkeen valitse näkyviin tulevasta ruudusta rakennukselle paikka. Ehkäpä tämä on hyvä hetki esitellä kaikki nuo rakennusalueiden kuvakkeet, jotka aktivoimme aiemmin. "
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:241
 msgid ""

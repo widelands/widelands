@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,9 +84,9 @@ ProductionSite BUILDING
 */
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/productionsites/atlanteans/armorsmithy/init.lua
+ */
 ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const std::string& msgctxt,
                                          MapObjectType init_type,
@@ -999,4 +999,4 @@ void ProductionSite::set_default_anim(std::string anim) {
 
 	default_anim_ = anim;
 }
-}
+}  // namespace Widelands

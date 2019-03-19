@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2018 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -229,7 +229,6 @@ ReplayWriter::ReplayWriter(Game& game, const std::string& filename)
 		GameLoader gl(filename_ + kSavegameExtension, game);
 		gl.load_game();
 	}
-	game.postload();
 	log("Done reloading the game from replay\n");
 
 	game.enqueue_command(new CmdReplaySyncWrite(game.get_gametime() + kSyncInterval));
@@ -276,4 +275,4 @@ void ReplayWriter::send_sync(const Md5Checksum& hash) {
 	cmdlog_->data(hash.data, sizeof(hash.data));
 	cmdlog_->flush();
 }
-}
+}  // namespace Widelands

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2018 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ const uint8_t kClientRegistered = 1;
 const uint8_t kClientSuperuser = 2;
 // 3 was INTERNET_CLIENT_BOT which is not used
 const uint8_t kClientIRC = 4;
-}
+}  // namespace
 
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                                                          char const* const pwd,
@@ -134,10 +134,12 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 
 	// prepare the lists
 	std::string t_tip =
-	   (boost::format("%s%s%s%s%s%s%s%s%s%s") % "<rt><p><font underline=yes>" % _("User Status") %
-	    "</font><br>" % "<img src=images/wui/overlays/roadb_yellow.png> " % _("Registered") %
-	    "<br><img src=images/wui/overlays/roadb_green.png> " % _("Administrator") %
-	    "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") % "</p></rt>")
+	   (boost::format("%s%s%s%s%s%s%s%s%s%s") %
+	    "<rt padding=2><p align=center spacing=3><font bold=yes underline=yes>" % _("User Status") %
+	    "</font></p>" % "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> " %
+	    _("Administrator") % "<br><img src=images/wui/overlays/roadb_yellow.png> " %
+	    _("Registered") % "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") %
+	    "</p></rt>")
 	      .str();
 	clientsonline_list_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -287,9 +287,9 @@ Warehouse Building
 */
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/warehouses/atlanteans/headquarters/init.lua
+ */
 WarehouseDescr::WarehouseDescr(const std::string& init_descname,
                                const LuaTable& table,
                                const EditorGameBase& egbase)
@@ -1359,4 +1359,4 @@ void Warehouse::log_general_info(const EditorGameBase& egbase) const {
 		}
 	}
 }
-}
+}  // namespace Widelands

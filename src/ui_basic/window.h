@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -122,6 +122,6 @@ private:
 	Panel* center_panel_;
 	Panel* fastclick_panel_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_WINDOW_H

@@ -25,4 +25,4 @@ std::string sha1(const std::string& input) {
 
 	return std::string(result);
 }
-}
+}  // namespace crypto

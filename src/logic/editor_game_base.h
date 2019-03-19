@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -277,6 +277,6 @@ private:
 #define iterate_players_existing_const(p, nr_players, egbase, player)                              \
 	iterate_player_numbers(                                                                         \
 	   p, nr_players) if (Widelands::Player const* const player = (egbase).get_player(p))
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_EDITOR_GAME_BASE_H

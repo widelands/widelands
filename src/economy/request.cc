@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -206,7 +206,7 @@ void Request::write(FileWrite& fw, Game& game, MapObjectSaver& mos) const {
 
 /**
  * Figure out the flag we need to deliver to.
-*/
+ */
 Flag& Request::target_flag() const {
 	return target().base_flag();
 }
@@ -214,7 +214,7 @@ Flag& Request::target_flag() const {
 /**
  * Return the point in time at which we want the ware of the given number to
  * be delivered. nr is in the range [0..count_[
-*/
+ */
 int32_t Request::get_base_required_time(EditorGameBase& egbase, uint32_t const nr) const {
 	if (count_ <= nr) {
 		if (!(count_ == 1 && nr == 1)) {
@@ -243,7 +243,7 @@ int32_t Request::get_base_required_time(EditorGameBase& egbase, uint32_t const n
  * Return the time when the requested ware is needed.
  * Can be in the past, indicating that we have been idling, waiting for the
  * ware.
-*/
+ */
 int32_t Request::get_required_time() const {
 	return get_base_required_time(economy_->owner().egbase(), transfers_.size());
 }
@@ -315,7 +315,7 @@ uint32_t Request::get_transfer_priority() const {
 
 /**
  * Change the Economy we belong to.
-*/
+ */
 void Request::set_economy(Economy* const e) {
 	if (economy_ != e) {
 		if (economy_ && is_open())
@@ -328,7 +328,7 @@ void Request::set_economy(Economy* const e) {
 
 /**
  * Change the number of wares we need.
-*/
+ */
 void Request::set_count(uint32_t const count) {
 	bool const wasopen = is_open();
 
@@ -359,14 +359,14 @@ void Request::set_exact_match(bool match) {
 /**
  * Change the time at which the first ware to be delivered is needed.
  * Default is the gametime of the Request creation.
-*/
+ */
 void Request::set_required_time(int32_t const time) {
 	required_time_ = time;
 }
 
 /**
  * Change the time between desired delivery of wares.
-*/
+ */
 void Request::set_required_interval(int32_t const interval) {
 	required_interval_ = interval;
 }
@@ -375,12 +375,12 @@ void Request::set_required_interval(int32_t const interval) {
  * Begin transfer of the requested ware from the given supply.
  * This function does not take ownership of route, i.e. the caller is
  * responsible for its deletion.
-*/
+ */
 void Request::start_transfer(Game& game, Supply& supp) {
 	assert(is_open());
 
 	::StreamWrite& ss = game.syncstream();
-	ss.unsigned_32(0x01decafa);  // appears as facade01 in sync stream
+	ss.unsigned_8(SyncEntry::kStartTransfer);
 	ss.unsigned_32(target().serial());
 	ss.unsigned_32(supp.get_position(game)->serial());
 
@@ -410,7 +410,7 @@ void Request::start_transfer(Game& game, Supply& supp) {
  * Callback from ware/worker code that the requested ware has arrived.
  * This will call a callback function in the target, which is then responsible
  * for removing and deleting the request.
-*/
+ */
 void Request::transfer_finish(Game& game, Transfer& t) {
 	Worker* const w = t.worker_;
 
@@ -436,7 +436,7 @@ void Request::transfer_finish(Game& game, Transfer& t) {
  * The calling code has already dealt with the worker/ware.
  *
  * Re-open the request.
-*/
+ */
 void Request::transfer_fail(Game&, Transfer& t) {
 	bool const wasopen = is_open();
 
@@ -482,4 +482,4 @@ uint32_t Request::find_transfer(Transfer& t) {
 
 	return it - transfers_.begin();
 }
-}
+}  // namespace Widelands

@@ -33,6 +33,14 @@ run(function()
    map:recalculate_seafaring()
    assert_equal(true, map.allows_seafaring)
 
+   local port_spaces = map.port_spaces
+   assert_equal(port_spaces[1]["x"], 0)
+   assert_equal(port_spaces[1]["y"], 2)
+   assert_equal(port_spaces[2]["x"], 7)
+   assert_equal(port_spaces[2]["y"], 2)
+   assert_equal(port_spaces[3]["x"], 12)
+   assert_equal(port_spaces[3]["y"], 24)
+
   -- Remove the port space again
    assert_equal(true, map:set_port_space(0, 2, false))
    assert_equal(2, map.number_of_port_spaces)

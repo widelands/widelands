@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -38,9 +38,9 @@
 namespace Widelands {
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
+ */
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
@@ -217,6 +217,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw(uint32_t gametime,
+                         const TextToDraw draw_text,
                          const Vector2f& point_on_dst,
                          float scale,
                          RenderTarget* dst) {
@@ -229,5 +230,8 @@ void DismantleSite::draw(uint32_t gametime,
 	// Blit bottom part of the animation according to dismantle progress
 	dst->blit_animation(point_on_dst, scale, building_->get_unoccupied_animation(), tanim,
 	                    player_color, 100 - ((get_built_per64k() * 100) >> 16));
+
+	// Draw help strings
+	draw_info(draw_text, point_on_dst, scale, dst);
 }
-}
+}  // namespace Widelands

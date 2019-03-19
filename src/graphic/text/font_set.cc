@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -251,4 +251,4 @@ FontSet const* FontSets::get_fontset(const std::string& locale) const {
 	assert(fontsets.count(selector) == 1);
 	return fontsets.at(selector).get();
 }
-}
+}  // namespace UI

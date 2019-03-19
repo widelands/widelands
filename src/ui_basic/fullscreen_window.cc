@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,7 @@ FullscreenWindow::FullscreenWindow()
 	   [this](const GraphicResolutionChanged& message) {
 		   set_size(message.width, message.height);
 		   layout();
-		});
+	   });
 	set_frame_image(FullscreenWindow::Frames::kCornerTopLeft, "fsmenu/top_left.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerTopRight, "fsmenu/top_right.png");
 	set_frame_image(FullscreenWindow::Frames::kCornerBottomLeft, "fsmenu/bottom_left.png");
@@ -82,7 +82,7 @@ const Image* FullscreenWindow::get_frame_image(FullscreenWindow::Frames id) cons
 
 /**
  * Draw the background / splash screen
-*/
+ */
 void FullscreenWindow::draw(RenderTarget& dst) {
 	// Overall background
 	dst.tile(Recti(0, 0, get_w(), get_h()), g_gr->images().get(background_image_), Vector2i::zero());

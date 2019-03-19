@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2018 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -421,24 +421,32 @@ const std::set<UI::FontSets::Selector> kLTRScripts = {
 const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kLTRCodeBlocks = {
    {UI::FontSets::Selector::kCJK,
     {
-       UBlockCode::UBLOCK_CJK_COMPATIBILITY, UBlockCode::UBLOCK_CJK_COMPATIBILITY_FORMS,
+       UBlockCode::UBLOCK_CJK_COMPATIBILITY,
+       UBlockCode::UBLOCK_CJK_COMPATIBILITY_FORMS,
        UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS,
        UBlockCode::UBLOCK_CJK_COMPATIBILITY_IDEOGRAPHS_SUPPLEMENT,
-       UBlockCode::UBLOCK_CJK_RADICALS_SUPPLEMENT, UBlockCode::UBLOCK_CJK_STROKES,
-       UBlockCode::UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION, UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS,
+       UBlockCode::UBLOCK_CJK_RADICALS_SUPPLEMENT,
+       UBlockCode::UBLOCK_CJK_STROKES,
+       UBlockCode::UBLOCK_CJK_SYMBOLS_AND_PUNCTUATION,
+       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS,
        UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A,
        UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B,
        UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_C,
-       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D, UBlockCode::UBLOCK_HIRAGANA,
-       UBlockCode::UBLOCK_KATAKANA, UBlockCode::UBLOCK_KATAKANA_PHONETIC_EXTENSIONS,
+       UBlockCode::UBLOCK_CJK_UNIFIED_IDEOGRAPHS_EXTENSION_D,
+       UBlockCode::UBLOCK_HIRAGANA,
+       UBlockCode::UBLOCK_KATAKANA,
+       UBlockCode::UBLOCK_KATAKANA_PHONETIC_EXTENSIONS,
        UBlockCode::UBLOCK_ENCLOSED_CJK_LETTERS_AND_MONTHS,
-       UBlockCode::UBLOCK_HANGUL_COMPATIBILITY_JAMO, UBlockCode::UBLOCK_HANGUL_JAMO,
-       UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_A, UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_B,
+       UBlockCode::UBLOCK_HANGUL_COMPATIBILITY_JAMO,
+       UBlockCode::UBLOCK_HANGUL_JAMO,
+       UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_A,
+       UBlockCode::UBLOCK_HANGUL_JAMO_EXTENDED_B,
        UBlockCode::UBLOCK_HANGUL_SYLLABLES,
     }},
    {UI::FontSets::Selector::kMyanmar,
     {
-       UBlockCode::UBLOCK_MYANMAR, UBlockCode::UBLOCK_MYANMAR_EXTENDED_A,
+       UBlockCode::UBLOCK_MYANMAR,
+       UBlockCode::UBLOCK_MYANMAR_EXTENDED_A,
     }},
    {UI::FontSets::Selector::kSinhala,
     {
@@ -457,14 +465,17 @@ const std::set<UI::FontSets::Selector> kRTLScripts = {
 const std::map<UI::FontSets::Selector, std::set<UBlockCode>> kRTLCodeBlocks = {
    {UI::FontSets::Selector::kArabic,
     {
-       UBlockCode::UBLOCK_ARABIC, UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
-       UBlockCode::UBLOCK_ARABIC_EXTENDED_A, UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
+       UBlockCode::UBLOCK_ARABIC,
+       UBlockCode::UBLOCK_ARABIC_SUPPLEMENT,
+       UBlockCode::UBLOCK_ARABIC_EXTENDED_A,
+       UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_A,
        UBlockCode::UBLOCK_ARABIC_PRESENTATION_FORMS_B,
        UBlockCode::UBLOCK_ARABIC_MATHEMATICAL_ALPHABETIC_SYMBOLS,
     }},
    {UI::FontSets::Selector::kDevanagari,
     {
-       UBlockCode::UBLOCK_DEVANAGARI, UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
+       UBlockCode::UBLOCK_DEVANAGARI,
+       UBlockCode::UBLOCK_DEVANAGARI_EXTENDED,
        UBlockCode::UBLOCK_VEDIC_EXTENSIONS,
     }},
    {UI::FontSets::Selector::kHebrew,
@@ -777,4 +788,4 @@ bool is_diacritic(const UChar& c) {
 	return kArabicDiacritics.count(c) == 1;
 }
 
-}  // namespace UI
+}  // namespace i18n

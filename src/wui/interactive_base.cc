@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2018 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -153,7 +153,7 @@ InteractiveBase::InteractiveBase(EditorGameBase& the_egbase, Section& global_s)
 		   map_view_.set_size(message.width, message.height);
 		   resize_chat_overlay();
 		   adjust_toolbar_position();
-		});
+	   });
 	sound_subscriber_ = Notifications::subscribe<NoteSound>([this](const NoteSound& note) {
 		if (note.stereo_position != std::numeric_limits<uint32_t>::max()) {
 			g_sound_handler.play_fx(note.fx, note.stereo_position, note.priority);
@@ -223,7 +223,7 @@ void InteractiveBase::set_sel_pos(Widelands::NodeAndTriangle<> const center) {
 				     player.is_hostile(*productionsite->get_owner())))
 					return set_tooltip("");
 			}
-			set_tooltip(productionsite->info_string(Widelands::MapObject::InfoStringType::kTooltip));
+			set_tooltip(productionsite->info_string(Widelands::Building::InfoStringFormat::kTooltip));
 			return;
 		}
 	set_tooltip("");
@@ -736,7 +736,7 @@ void InteractiveBase::log_message(const std::string& message) const {
  * viewport = -1
  * \note This function can also be used to check whether a logical coordinate is
  * visible at all
-*/
+ */
 int32_t InteractiveBase::stereo_position(Widelands::Coords const position_map) {
 	assert(position_map);
 
