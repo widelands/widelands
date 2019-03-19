@@ -41,6 +41,12 @@ char* next_word(char*& p, bool& reached_end, char terminator = ' ');
 /// lines.
 std::vector<std::string> split_string(const std::string&, char const* separators);
 
+struct ProgramParseInput {
+	std::string name;
+	std::vector<std::string> arguments;
+};
+ProgramParseInput parse_program_string(const std::string& action_string);
+
 struct AnimationParameters {
 	uint32_t animation = 0;
 	Duration duration = 0; //  forever

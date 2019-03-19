@@ -353,7 +353,7 @@ struct ProductionProgram {
 	/// animation will not be stopped by this command. It will run until another
 	/// animation is started.)
 	struct ActAnimate : public Action {
-		ActAnimate(char* arguments, ProductionSiteDescr*);
+		ActAnimate(const std::vector<std::string>& arguments, ProductionSiteDescr*);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -499,7 +499,7 @@ struct ProductionProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		explicit ActPlaySound(char* arguments, ProductionSiteDescr* descr);
+		explicit ActPlaySound(const std::vector<std::string>& arguments, ProductionSiteDescr* descr);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:

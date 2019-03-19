@@ -108,36 +108,24 @@ void WorkerProgram::parse(const LuaTable& table) {
 			break;
 		}
 		try {
-			std::vector<std::string> cmd(split_string(string, "="));
-			if (cmd.empty()) {
-				continue;
-			}
+
+			ProgramParseInput input = parse_program_string(string);
 
 			// Find the appropriate parser
 			Worker::Action act;
 			uint32_t mapidx;
 
 			for (mapidx = 0; parsemap_[mapidx].name; ++mapidx) {
-				if (cmd[0] == parsemap_[mapidx].name) {
+				if (input.name == parsemap_[mapidx].name) {
 					break;
 				}
 			}
 
 			if (!parsemap_[mapidx].name) {
-				throw wexception("unknown command type \"%s\"", cmd[0].c_str());
+				throw wexception("unknown command type \"%s\"", input.name.c_str());
 			}
 
-			// TODO(GunChleoc): Quick and dirty solution, don't do it like that when we unify the
-			// program parsers
-			if (cmd.size() == 2) {
-				const std::vector<std::string> parameters(split_string(cmd[1], " \t\n"));
-				cmd.pop_back();
-				for (const std::string& parameter : parameters) {
-					cmd.push_back(parameter);
-				}
-			}
-
-			(this->*parsemap_[mapidx].function)(&act, cmd);
+			(this->*parsemap_[mapidx].function)(&act, input.arguments);
 
 			actions_.push_back(act);
 		} catch (const std::exception& e) {
@@ -171,11 +159,11 @@ createware
  * iparam1 = ware index
  */
 void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 2)
+	if (cmd.size() != 1)
 		throw wexception("Usage: createware=<ware type>");
 
 	act->function = &Worker::run_createware;
-	act->iparam1 = tribes_.safe_ware_index(cmd[1]);
+	act->iparam1 = tribes_.safe_ware_index(cmd[0]);
 }
 
 /* RST
@@ -206,16 +194,16 @@ mine
  * sparam1 = resource
  */
 void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 3)
+	if (cmd.size() != 2)
 		throw wexception("Usage: mine=<ware type> <area>");
 
 	act->function = &Worker::run_mine;
-	act->sparam1 = cmd[1];
+	act->sparam1 = cmd[0];
 	char* endp;
-	act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
+	act->iparam1 = strtol(cmd[1].c_str(), &endp, 0);
 
 	if (*endp)
-		throw wexception("Bad area '%s'", cmd[2].c_str());
+		throw wexception("Bad area '%s'", cmd[1].c_str());
 }
 
 /* RST
@@ -243,16 +231,16 @@ breed
  * sparam1 = resource
  */
 void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 3)
+	if (cmd.size() != 2)
 		throw wexception("Usage: breed=<ware type> <area>");
 
 	act->function = &Worker::run_breed;
-	act->sparam1 = cmd[1];
+	act->sparam1 = cmd[0];
 	char* endp;
-	act->iparam1 = strtol(cmd[2].c_str(), &endp, 0);
+	act->iparam1 = strtol(cmd[1].c_str(), &endp, 0);
 
 	if (*endp)
-		throw wexception("Bad area '%s'", cmd[2].c_str());
+		throw wexception("Bad area '%s'", cmd[1].c_str());
 }
 
 /* RST
@@ -303,7 +291,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 	act->sparam1 = "immovable";
 
 	// Parse predicates
-	for (i = 1; i < cmd.size(); ++i) {
+	for (i = 0; i < cmd.size(); ++i) {
 		uint32_t idx = cmd[i].find(':');
 		std::string const key = cmd[i].substr(0, idx);
 		std::string const value = cmd[i].substr(idx + 1);
@@ -419,7 +407,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->sparam1 = "";
 
 	// Parse predicates
-	for (i = 1; i < cmd.size(); ++i) {
+	for (i = 0; i < cmd.size(); ++i) {
 		uint32_t idx = cmd[i].find(':');
 		std::string key = cmd[i].substr(0, idx);
 		std::string value = cmd[i].substr(idx + 1);
@@ -525,19 +513,19 @@ walk
  * iparam1 = walkXXX
  */
 void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 2)
+	if (cmd.size() != 1)
 		throw wexception("Usage: walk=<where>");
 
 	act->function = &Worker::run_walk;
 
-	if (cmd[1] == "object")
+	if (cmd[0] == "object")
 		act->iparam1 = Worker::Action::walkObject;
-	else if (cmd[1] == "coords")
+	else if (cmd[0] == "coords")
 		act->iparam1 = Worker::Action::walkCoords;
-	else if (cmd[1] == "object-or-coords")
+	else if (cmd[0] == "object-or-coords")
 		act->iparam1 = Worker::Action::walkObject | Worker::Action::walkCoords;
 	else
-		throw wexception("Bad walk destination '%s'", cmd[1].c_str());
+		throw wexception("Bad walk destination '%s'", cmd[0].c_str());
 }
 
 /* RST
@@ -564,12 +552,7 @@ animate
  * iparam2 = duration
  */
 void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::string>& cmd) {
-	// NOCOM we want to skip the first item in the vectors here, or add it in the other programs
-	std::vector<std::string> params;
-	for (size_t i = 1; i < cmd.size(); ++i) {
-		params.push_back(cmd.at(i));
-	}
-	AnimationParameters parameters = parse_act_animate(params, worker_, true);
+	AnimationParameters parameters = parse_act_animate(cmd, worker_, true);
 
 	act->function = &Worker::run_animate;
 	act->iparam1 = parameters.animation;
@@ -591,7 +574,10 @@ return
 /**
  * iparam1 = 0: don't drop ware on flag, 1: do drop ware on flag
  */
-void WorkerProgram::parse_return(Worker::Action* act, const std::vector<std::string>&) {
+void WorkerProgram::parse_return(Worker::Action* act, const std::vector<std::string>& cmd) {
+	if (!cmd.empty()) {
+		throw wexception("Usage: return");
+	}
 	act->function = &Worker::run_return;
 	act->iparam1 = 1;  // drop a ware on our owner's flag
 }
@@ -621,11 +607,11 @@ callobject
  * sparam1 = callobject command name
  */
 void WorkerProgram::parse_callobject(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 2)
+	if (cmd.size() != 1)
 		throw wexception("Usage: callobject=<program name>");
 
 	act->function = &Worker::run_callobject;
-	act->sparam1 = cmd[1];
+	act->sparam1 = cmd[0];
 }
 
 /* RST
@@ -678,14 +664,14 @@ plant
  * iparam1  one of plantXXX
  */
 void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() < 2)
+	if (cmd.empty())
 		throw wexception(
-		   "Usage: plant plant=attrib:<attribute> [attrib:<attribute> ...] [unless object]");
+		   "Usage: plant=attrib:<attribute> [attrib:<attribute> ...] [unless object]");
 
 	act->function = &Worker::run_plant;
 	act->iparam1 = Worker::Action::plantAlways;
-	for (uint32_t i = 1; i < cmd.size(); ++i) {
-		if (i >= 2 && cmd[i] == "unless") {
+	for (uint32_t i = 0; i < cmd.size(); ++i) {
+		if (i >= 1 && cmd[i] == "unless") {
 			++i;
 			if (i >= cmd.size())
 				throw GameDataError("plant: something expected after unless");
@@ -737,12 +723,12 @@ createbob
 */
 // TODO(GunChleoc): attrib:eatable would be much better, then depend on terrain too
 void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() < 2)
+	if (cmd.empty())
 		throw wexception("Usage: createbob=<bob name> <bob name> ...");
 
 	act->function = &Worker::run_createbob;
 
-	for (uint32_t i = 1; i < cmd.size(); ++i) {
+	for (uint32_t i = 0; i < cmd.size(); ++i) {
 		act->sparamv.push_back(cmd[i]);
 	}
 }
@@ -793,20 +779,20 @@ repeatsearch
 void WorkerProgram::parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd) {
 	char* endp;
 
-	if (cmd.size() != 4)
+	if (cmd.size() != 3)
 		throw wexception("Usage: repeatsearch=<repeat #> <radius> <subcommand>");
 
 	act->function = &Worker::run_repeatsearch;
 
-	act->iparam1 = strtol(cmd[1].c_str(), &endp, 0);
+	act->iparam1 = strtol(cmd[0].c_str(), &endp, 0);
 	if (*endp)
-		throw wexception("Bad repeat count '%s'", cmd[1].c_str());
+		throw wexception("Bad repeat count '%s'", cmd[0].c_str());
 
-	act->iparam2 = strtol(cmd[2].c_str(), &endp, 0);
+	act->iparam2 = strtol(cmd[1].c_str(), &endp, 0);
 	if (*endp)
-		throw wexception("Bad radius '%s'", cmd[2].c_str());
+		throw wexception("Bad radius '%s'", cmd[1].c_str());
 
-	act->sparam1 = cmd[3];
+	act->sparam1 = cmd[2];
 }
 
 /* RST
@@ -827,7 +813,7 @@ findresources
       }
 */
 void WorkerProgram::parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 1)
+	if (!cmd.empty())
 		throw wexception("Usage: findresources");
 
 	act->function = &Worker::run_findresources;
@@ -854,11 +840,11 @@ scout
  * iparam2 = time
  */
 void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 3)
+	if (cmd.size() != 2)
 		throw wexception("Usage: scout=<radius> <time>");
 
-	act->iparam1 = atoi(cmd[1].c_str());
-	act->iparam2 = atoi(cmd[2].c_str());
+	act->iparam1 = atoi(cmd[0].c_str());
+	act->iparam2 = atoi(cmd[1].c_str());
 	act->function = &Worker::run_scout;
 }
 
@@ -889,14 +875,8 @@ playsound
       }
 */
 void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd) {
-	// NOCOM we want to skip the first item in the vectors here, or add it in the other programs
-	std::vector<std::string> params;
-	for (size_t i = 1; i < cmd.size(); ++i) {
-		params.push_back(cmd.at(i));
-	}
-
 	//  50% chance to play, only one instance at a time
-	PlaySoundParameters parameters = parse_act_play_sound(params, worker_, 64);
+	PlaySoundParameters parameters = parse_act_play_sound(cmd, worker_, 64);
 
 	act->sparam1 = parameters.name;
 	act->iparam1 = parameters.priority;
@@ -931,7 +911,7 @@ construct
  * for construction. This is used in ship building.
  */
 void WorkerProgram::parse_construct(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 1)
+	if (!cmd.empty())
 		throw wexception("Usage: construct");
 
 	act->function = &Worker::run_construct;

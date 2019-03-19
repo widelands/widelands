@@ -150,6 +150,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    ImmovableDescr* immovable)
    : name_(init_name) {
 	for (const std::string& line : lines) {
+		// NOCOM retire this
 		std::vector<std::string> parts;
 		boost::split(parts, line, boost::is_any_of("="));
 		if (parts.size() != 2) {
@@ -158,21 +159,25 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 		std::unique_ptr<char[]> arguments(new char[parts[1].size() + 1]);
 		strncpy(arguments.get(), parts[1].c_str(), parts[1].size() + 1);
 
+
+		// NOCOM this is what we want
+		ProgramParseInput parseinput = parse_program_string(line);
+
 		Action* action;
-		if (parts[0] == "animate") {
-			action = new ActAnimate(arguments.get(), *immovable);
-		} else if (parts[0] == "transform") {
-			action = new ActTransform(arguments.get(), *immovable);
-		} else if (parts[0] == "grow") {
+		if (parseinput.name == "animate") {
+			action = new ActAnimate(parseinput.arguments, *immovable);
+		} else if (parseinput.name == "transform") {
+			action = new ActTransform(parseinput.arguments, *immovable);
+		} else if (parseinput.name == "grow") {
 			action = new ActGrow(arguments.get(), *immovable);
-		} else if (parts[0] == "remove") {
+		} else if (parseinput.name == "remove") {
 			action = new ActRemove(arguments.get(), *immovable);
-		} else if (parts[0] == "seed") {
+		} else if (parseinput.name == "seed") {
 			action = new ActSeed(arguments.get(), *immovable);
-		} else if (parts[0] == "playsound") {
-			action = new ActPlaySound(arguments.get(), *immovable);
-		} else if (parts[0] == "construct") {
-			action = new ActConstruct(arguments.get(), *immovable);
+		} else if (parseinput.name == "playsound") {
+			action = new ActPlaySound(parseinput.arguments, *immovable);
+		} else if (parseinput.name == "construct") {
+			action = new ActConstruct(parseinput.arguments, *immovable);
 		} else {
 			throw GameDataError("unknown command type \"%s\" in immovable \"%s\"", parts[0].c_str(),
 			                    immovable->name().c_str());
@@ -298,9 +303,9 @@ const TerrainAffinity& ImmovableDescr::terrain_affinity() const {
 void ImmovableDescr::make_sure_default_program_is_there() {
 	if (!programs_.count("program")) {  //  default program
 		assert(is_animation_known("idle"));
-		char parameters[] = "idle";
+		std::vector<std::string> arguments{"idle"};
 		programs_["program"] =
-		   new ImmovableProgram("program", new ImmovableProgram::ActAnimate(parameters, *this));
+		   new ImmovableProgram("program", new ImmovableProgram::ActAnimate(arguments, *this));
 	}
 }
 
@@ -756,9 +761,8 @@ MapObject::Loader* Immovable::load(EditorGameBase& egbase,
 ImmovableProgram::Action::~Action() {
 }
 
-ImmovableProgram::ActAnimate::ActAnimate(char* arguments, ImmovableDescr& descr) {
-	const std::vector<std::string> arguments_vector = split_string(arguments, " \t\n");
-	parameters = parse_act_animate(arguments_vector, descr, true);
+ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments, ImmovableDescr& descr) {
+	parameters = parse_act_animate(arguments, descr, true);
 }
 
 /// Use convolutuion to make the animation time a random variable with binomial
@@ -769,9 +773,8 @@ void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) con
 	   game, parameters.duration ? 1 + game.logic_rand() % parameters.duration + game.logic_rand() % parameters.duration : 0);
 }
 
-ImmovableProgram::ActPlaySound::ActPlaySound(char* arguments, const ImmovableDescr& descr) {
-	const std::vector<std::string> arguments_vector = split_string(arguments, " \t\n");
-	parameters = parse_act_play_sound(arguments_vector, descr, 127);
+ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+	parameters = parse_act_play_sound(arguments, descr, 127);
 }
 
 /** Demand from the g_sound_handler to play a certain sound effect.
@@ -782,26 +785,25 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 	immovable.program_step(game);
 }
 
-ImmovableProgram::ActTransform::ActTransform(char* parameters, ImmovableDescr& descr) {
+ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments, ImmovableDescr& descr) {
 	try {
 		tribe = true;
 		bob = false;
 		probability = 0;
 
-		std::vector<std::string> params = split_string(parameters, " ");
-		for (uint32_t i = 0; i < params.size(); ++i) {
-			if (params[i] == "bob")
+		for (uint32_t i = 0; i < arguments.size(); ++i) {
+			if (arguments[i] == "bob")
 				bob = true;
-			else if (params[i] == "immovable")
+			else if (arguments[i] == "immovable")
 				bob = false;
-			else if (params[i][0] >= '0' && params[i][0] <= '9') {
-				long int const value = atoi(params[i].c_str());
+			else if (arguments[i][0] >= '0' && arguments[i][0] <= '9') {
+				long int const value = atoi(arguments[i].c_str());
 				if (value < 1 || 254 < value)
 					throw GameDataError("expected %s but found \"%s\"", "probability in range [1, 254]",
-					                    params[i].c_str());
+					                    arguments[i].c_str());
 				probability = value;
 			} else {
-				std::vector<std::string> segments = split_string(params[i], ":");
+				std::vector<std::string> segments = split_string(arguments[i], ":");
 
 				if (segments.size() > 2)
 					throw GameDataError("object type has more than 2 segments");
@@ -815,7 +817,7 @@ ImmovableProgram::ActTransform::ActTransform(char* parameters, ImmovableDescr& d
 					} else
 						throw GameDataError("unknown scope \"%s\" given for target type (must be "
 						                    "\"world\" or \"tribe\")",
-						                    parameters);
+						                    segments[0].c_str());
 
 					type_name = segments[1];
 				} else {
@@ -1005,20 +1007,18 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 	immovable.program_step(game);
 }
 
-ImmovableProgram::ActConstruct::ActConstruct(char* parameters, ImmovableDescr& descr) {
+ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments, ImmovableDescr& descr) {
 	try {
 		if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
 			throw GameDataError("only usable for tribe immovable");
 
-		std::vector<std::string> params = split_string(parameters, " ");
-
-		if (params.size() != 3)
+		if (arguments.size() != 3)
 			throw GameDataError("usage: animation-name buildtime decaytime");
 
-		buildtime_ = atoi(params[1].c_str());
-		decaytime_ = atoi(params[2].c_str());
+		buildtime_ = atoi(arguments[1].c_str());
+		decaytime_ = atoi(arguments[2].c_str());
 
-		std::string animation_name = params[0];
+		std::string animation_name = arguments[0];
 		if (!descr.is_animation_known(animation_name)) {
 			throw GameDataError("unknown animation \"%s\" in immovable program for immovable \"%s\"",
 			                    animation_name.c_str(), descr.name().c_str());

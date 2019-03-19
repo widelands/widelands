@@ -64,7 +64,7 @@ struct ImmovableProgram {
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
 	struct ActAnimate : public Action {
-		ActAnimate(char* arguments, ImmovableDescr&);
+		ActAnimate(const std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 	private:
 		AnimationParameters parameters;
@@ -87,7 +87,7 @@ struct ImmovableProgram {
 	///    name:
 	///       name of the replacement object
 	struct ActTransform : public Action {
-		ActTransform(char* parameters, ImmovableDescr&);
+		ActTransform(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -139,7 +139,7 @@ struct ImmovableProgram {
 	/// Plays the specified sound effect with the specified priority. Whether the
 	/// sound effect is actually played is determined by the sound handler.
 	struct ActPlaySound : public Action {
-		ActPlaySound(char* arguments, const ImmovableDescr&);
+		ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -160,7 +160,7 @@ struct ImmovableProgram {
 	 *       Time until construction decays one step if no progress has been made.
 	 */
 	struct ActConstruct : public Action {
-		ActConstruct(char* parameters, ImmovableDescr&);
+		ActConstruct(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 		Duration buildtime() const {

@@ -750,9 +750,8 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 	}
 }
 
-ProductionProgram::ActAnimate::ActAnimate(char* arguments, ProductionSiteDescr* descr) {
-	const std::vector<std::string> arguments_vector = split_string(arguments, " \t\n");
-	parameters = parse_act_animate(arguments_vector, *descr, false);
+ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments, ProductionSiteDescr* descr) {
+	parameters = parse_act_animate(arguments, *descr, false);
 }
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
@@ -1386,9 +1385,8 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	return ps.program_step(game);
 }
 
-ProductionProgram::ActPlaySound::ActPlaySound(char* arguments, ProductionSiteDescr* descr) {
-	const std::vector<std::string> arguments_vector = split_string(arguments, " \t\n");
-	parameters = parse_act_play_sound(arguments_vector, *descr, 127);
+ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments, ProductionSiteDescr* descr) {
+	parameters = parse_act_play_sound(arguments, *descr, 127);
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
@@ -1568,6 +1566,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
    : name_(init_name), descname_(init_descname) {
 
 	for (const std::string& action_string : actions_table->array_entries<std::string>()) {
+		// NOCOM reture this
 		std::vector<std::string> parts;
 		boost::split(parts, action_string, boost::is_any_of("="));
 		if (parts.size() != 2) {
@@ -1578,46 +1577,49 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		std::unique_ptr<char[]> arguments(new char[parts[1].size() + 1]);
 		strncpy(arguments.get(), parts[1].c_str(), parts[1].size() + 1);
 
-		if (boost::iequals(parts[0], "return")) {
+		// NOCOM this is what we want
+		ProgramParseInput parseinput = parse_program_string(action_string);
+
+		if (parseinput.name == "return") {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActReturn(arguments.get(), *building, egbase.tribes())));
-		} else if (boost::iequals(parts[0], "call")) {
+		} else if (parseinput.name == "call") {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCall(arguments.get(), *building)));
-		} else if (boost::iequals(parts[0], "sleep")) {
+		} else if (parseinput.name == "sleep") {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActSleep(arguments.get())));
-		} else if (boost::iequals(parts[0], "animate")) {
+		} else if (parseinput.name == "animate") {
 			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActAnimate(arguments.get(), building)));
-		} else if (boost::iequals(parts[0], "consume")) {
+			   std::unique_ptr<ProductionProgram::Action>(new ActAnimate(parseinput.arguments, building)));
+		} else if (parseinput.name =="consume") {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActConsume(arguments.get(), *building, egbase.tribes())));
-		} else if (boost::iequals(parts[0], "produce")) {
+		} else if (parseinput.name == "produce") {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActProduce(arguments.get(), *building, egbase.tribes())));
-		} else if (boost::iequals(parts[0], "recruit")) {
+		} else if (parseinput.name == "recruit") {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActRecruit(arguments.get(), *building, egbase.tribes())));
-		} else if (boost::iequals(parts[0], "callworker")) {
+		} else if (parseinput.name =="callworker") {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActCallWorker(arguments.get(), name(), building, egbase.tribes())));
-		} else if (boost::iequals(parts[0], "mine")) {
+		} else if (parseinput.name == "mine") {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActMine(arguments.get(), egbase.world(), name(), building)));
-		} else if (boost::iequals(parts[0], "checksoldier")) {
+		} else if (parseinput.name == "checksoldier") {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCheckSoldier(arguments.get())));
-		} else if (boost::iequals(parts[0], "train")) {
+		} else if (parseinput.name == "train") {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActTrain(arguments.get())));
-		} else if (boost::iequals(parts[0], "playsound")) {
+		} else if (parseinput.name == "playsound") {
 			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(arguments.get(), building)));
-		} else if (boost::iequals(parts[0], "construct")) {
+			   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments, building)));
+		} else if (parseinput.name == "construct") {
 			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 			   new ActConstruct(arguments.get(), name(), building)));
-		} else if (boost::iequals(parts[0], "checkmap")) {
+		} else if (parseinput.name == "checkmap") {
 			actions_.push_back(
 			   std::unique_ptr<ProductionProgram::Action>(new ActCheckMap(arguments.get())));
 		} else {
