@@ -712,20 +712,20 @@ Vector2f Bob::calc_drawpos(const EditorGameBase& game,
 		spos.x += triangle_w / 2.f;
 		spos.y += triangle_h;
 		bridge = end.field->road_southeast == RoadType::kBridgeNormal ||
-				end.field->road_southeast == RoadType::kBridgeBusy; 
+				end.field->road_southeast == RoadType::kBridgeBusy;
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
 		spos.x -= triangle_w / 2.f;
 		spos.y += triangle_h;
 		bridge = end.field->road_southwest == RoadType::kBridgeNormal ||
-				end.field->road_southwest == RoadType::kBridgeBusy; 
+				end.field->road_southwest == RoadType::kBridgeBusy;
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
 		spos.x += triangle_w;
 		bridge = end.field->road_east == RoadType::kBridgeNormal ||
-				end.field->road_east == RoadType::kBridgeBusy; 
+				end.field->road_east == RoadType::kBridgeBusy;
 		break;
 	case WALK_E:
 		map.get_ln(end, &start);
