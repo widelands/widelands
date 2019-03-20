@@ -41,6 +41,8 @@ char* next_word(char*& p, bool& reached_end, char terminator = ' ');
 /// lines.
 std::vector<std::string> split_string(const std::string&, char const* separators);
 
+unsigned int read_positive(std::string input, unsigned int max_value = std::numeric_limits<uint32_t>::max());
+
 struct ProgramParseInput {
 	std::string name;
 	std::vector<std::string> arguments;

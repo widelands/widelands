@@ -55,6 +55,23 @@ std::vector<std::string> split_string(const std::string& s, const char* const se
 	return result;
 }
 
+unsigned int read_positive(std::string input, unsigned int max_value) {
+	unsigned int  result = 0U;
+	char* endp;
+	long long int const value = strtoll(input.c_str(), &endp, 0);
+	result = value;
+	if (*endp || result != value) {
+		throw GameDataError("Expected a number but found \"%s\"", input.c_str());
+	}
+	if (value <= 0) {
+		throw GameDataError("Expected a number > 0 but found \"%s\"", input.c_str());
+	}
+	if (value > max_value) {
+		throw GameDataError("Expected a number <= %d but found \"%s\"", max_value, input.c_str());
+	}
+	return result;
+}
+
 ProgramParseInput parse_program_string(const std::string& action_string) {
 	ProgramParseInput result;
 	std::vector<std::string> parts;
@@ -95,13 +112,7 @@ AnimationParameters parse_act_animate(const std::vector<std::string>& arguments,
 	result.animation = descr.get_animation(animation_name);
 
 	if (arguments.size() == 2) {  //  The next parameter is the duration.
-		char* endp;
-		long long int const value = strtoll(arguments.at(1).c_str(), &endp, 0);
-		result.duration = value;
-		if (*endp || value <= 0 || result.duration != value) {
-			throw GameDataError("%s: Animation '%s' expected duration in ms but found \"%s\"",
-								descr.name().c_str(), animation_name.c_str(), arguments.at(1).c_str());
-		}
+		result.duration = read_positive(arguments.at(1));
 	}
 	return result;
 }

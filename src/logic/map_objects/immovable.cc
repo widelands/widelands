@@ -797,11 +797,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 			else if (arguments[i] == "immovable")
 				bob = false;
 			else if (arguments[i][0] >= '0' && arguments[i][0] <= '9') {
-				long int const value = atoi(arguments[i].c_str());
-				if (value < 1 || 254 < value)
-					throw GameDataError("expected %s but found \"%s\"", "probability in range [1, 254]",
-					                    arguments[i].c_str());
-				probability = value;
+				probability = read_positive(arguments[i], 254);
 			} else {
 				std::vector<std::string> segments = split_string(arguments[i], ":");
 
@@ -910,12 +906,7 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 ImmovableProgram::ActRemove::ActRemove(char* parameters, ImmovableDescr&) {
 	try {
 		if (*parameters) {
-			char* endp;
-			long int const value = strtol(parameters, &endp, 0);
-			if (*endp || value < 1 || 254 < value)
-				throw GameDataError(
-				   "expected %s but found \"%s\"", "probability in range [1, 254]", parameters);
-			probability = value;
+			probability = read_positive(parameters, 254);
 		} else
 			probability = 0;
 	} catch (const WException& e) {
@@ -952,12 +943,7 @@ ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
 			case ' ': {
 				*p = '\0';
 				++p;
-				char* endp;
-				long int const value = strtol(p, &endp, 0);
-				if (*endp || value < 1 || 254 < value)
-					throw GameDataError(
-					   "expected %s but found \"%s\"", "probability in range [1, 254]", p);
-				probability = value;
+				probability = read_positive(p, 254);
 				//  fallthrough
 			}
 				FALLS_THROUGH;
@@ -1015,8 +1001,8 @@ ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments
 		if (arguments.size() != 3)
 			throw GameDataError("usage: animation-name buildtime decaytime");
 
-		buildtime_ = atoi(arguments[1].c_str());
-		decaytime_ = atoi(arguments[2].c_str());
+		buildtime_ = read_positive(arguments[1]);
+		decaytime_ = read_positive(arguments[2]);
 
 		std::string animation_name = arguments[0];
 		if (!descr.is_animation_known(animation_name)) {

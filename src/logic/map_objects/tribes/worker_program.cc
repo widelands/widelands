@@ -159,8 +159,9 @@ createware
  * iparam1 = ware index
  */
 void WorkerProgram::parse_createware(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 1)
+	if (cmd.size() != 1) {
 		throw wexception("Usage: createware=<ware type>");
+	}
 
 	act->function = &Worker::run_createware;
 	act->iparam1 = tribes_.safe_ware_index(cmd[0]);
@@ -194,16 +195,13 @@ mine
  * sparam1 = resource
  */
 void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 2)
-		throw wexception("Usage: mine=<ware type> <area>");
+	if (cmd.size() != 2) {
+		throw GameDataError("Usage: mine=<ware type> <area>");
+	}
 
 	act->function = &Worker::run_mine;
 	act->sparam1 = cmd[0];
-	char* endp;
-	act->iparam1 = strtol(cmd[1].c_str(), &endp, 0);
-
-	if (*endp)
-		throw wexception("Bad area '%s'", cmd[1].c_str());
+	act->iparam1 = read_positive(cmd[1]);
 }
 
 /* RST
@@ -231,16 +229,13 @@ breed
  * sparam1 = resource
  */
 void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 2)
-		throw wexception("Usage: breed=<ware type> <area>");
+	if (cmd.size() != 2) {
+		throw GameDataError("Usage: breed=<ware type> <area>");
+	}
 
 	act->function = &Worker::run_breed;
 	act->sparam1 = cmd[0];
-	char* endp;
-	act->iparam1 = strtol(cmd[1].c_str(), &endp, 0);
-
-	if (*endp)
-		throw wexception("Bad area '%s'", cmd[1].c_str());
+	act->iparam1 = read_positive(cmd[1]);
 }
 
 /* RST
@@ -283,36 +278,27 @@ findobject
  * sparam1 = type
  */
 void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std::string>& cmd) {
-	uint32_t i;
-
 	act->function = &Worker::run_findobject;
 	act->iparam1 = -1;
 	act->iparam2 = -1;
 	act->sparam1 = "immovable";
 
 	// Parse predicates
-	for (i = 0; i < cmd.size(); ++i) {
-		uint32_t idx = cmd[i].find(':');
-		std::string const key = cmd[i].substr(0, idx);
-		std::string const value = cmd[i].substr(idx + 1);
+	for (const std::string& argument : cmd) {
+		uint32_t idx = argument.find(':');
+		std::string const key = argument.substr(0, idx);
+		std::string const value = argument.substr(idx + 1);
 
 		if (key == "radius") {
-			char* endp;
-
-			act->iparam1 = strtol(value.c_str(), &endp, 0);
-			if (*endp)
-				throw wexception("Bad findobject radius '%s'", value.c_str());
-
+			act->iparam1 = read_positive(value);
 		} else if (key == "attrib") {
 			act->iparam2 = MapObjectDescr::get_attribute_id(value);
 		} else if (key == "type") {
 			act->sparam1 = value;
-		} else
-			throw wexception("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
+		} else {
+			throw GameDataError("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
+		}
 	}
-
-	if (act->iparam1 <= 0)
-		throw wexception("findobject: must specify radius");
 
 	workarea_info_[act->iparam1].insert(" findobject");
 }
@@ -395,8 +381,6 @@ findspace
  * sparam1 = Resource
  */
 void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::string>& cmd) {
-	uint32_t i;
-
 	act->function = &Worker::run_findspace;
 	act->iparam1 = -1;
 	act->iparam2 = -1;
@@ -407,61 +391,58 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	act->sparam1 = "";
 
 	// Parse predicates
-	for (i = 0; i < cmd.size(); ++i) {
-		uint32_t idx = cmd[i].find(':');
-		std::string key = cmd[i].substr(0, idx);
-		std::string value = cmd[i].substr(idx + 1);
+	for (const std::string& argument : cmd) {
+		try {
+			uint32_t idx = argument.find(':');
+			std::string key = argument.substr(0, idx);
+			std::string value = argument.substr(idx + 1);
 
-		if (key == "radius") {
-			char* endp;
+			if (key == "radius") {
+				act->iparam1 = read_positive(value);
+			} else if (key == "size") {
+				static const struct {
+					char const* name;
+					int32_t val;
+				} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
+								 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
+								 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
+								 {"port", FindNodeSize::sizePort},   {nullptr, 0}};
 
-			act->iparam1 = strtol(value.c_str(), &endp, 0);
-			if (*endp)
-				throw wexception("Bad findspace radius '%s'", value.c_str());
+				int32_t index;
 
-		} else if (key == "size") {
-			static const struct {
-				char const* name;
-				int32_t val;
-			} sizenames[] = {{"any", FindNodeSize::sizeAny},     {"build", FindNodeSize::sizeBuild},
-			                 {"small", FindNodeSize::sizeSmall}, {"medium", FindNodeSize::sizeMedium},
-			                 {"big", FindNodeSize::sizeBig},     {"mine", FindNodeSize::sizeMine},
-			                 {"port", FindNodeSize::sizePort},   {nullptr, 0}};
+				for (index = 0; sizenames[index].name; ++index)
+					if (value == sizenames[index].name)
+						break;
 
-			int32_t index;
+				if (!sizenames[index].name) {
+					throw GameDataError("Bad findspace size '%s'", value.c_str());
+				}
 
-			for (index = 0; sizenames[index].name; ++index)
-				if (value == sizenames[index].name)
-					break;
-
-			if (!sizenames[index].name)
-				throw wexception("Bad findspace size '%s'", value.c_str());
-
-			act->iparam2 = sizenames[index].val;
-		} else if (key == "breed") {
-			act->iparam4 = 1;
-		} else if (key == "resource") {
-			act->sparam1 = value;
-		} else if (key == "space") {
-			act->iparam3 = 1;
-		} else if (key == "avoid") {
-			act->iparam5 = MapObjectDescr::get_attribute_id(value);
-		} else if (key == "saplingsearches") {
-			int ival = strtol(value.c_str(), nullptr, 10);
-			if (1 != act->iparam6 || 1 > ival) {
-				throw wexception("Findspace: Forester should consider at least one spot.%d %d %s",
-				                 act->iparam6, ival, value.c_str());
+				act->iparam2 = sizenames[index].val;
+			} else if (key == "breed") {
+				act->iparam4 = 1;
+			} else if (key == "resource") {
+				act->sparam1 = value;
+			} else if (key == "space") {
+				act->iparam3 = 1;
+			} else if (key == "avoid") {
+				act->iparam5 = MapObjectDescr::get_attribute_id(value);
+			} else if (key == "saplingsearches") {
+				act->iparam6 = read_positive(value);
 			} else {
-				act->iparam6 = ival;
+				throw GameDataError("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
 			}
-		} else
-			throw wexception("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
+		} catch (const GameDataError& e) {
+			throw GameDataError("Malformed findspace argument %s: %s", argument.c_str(), e.what());
+		}
 	}
 
-	if (act->iparam1 <= 0)
-		throw wexception("findspace: must specify radius");
-	if (act->iparam2 < 0)
-		throw wexception("findspace: must specify size");
+	if (act->iparam1 <= 0) {
+		throw GameDataError("findspace: must specify radius");
+	}
+	if (act->iparam2 < 0) {
+		throw GameDataError("findspace: must specify size");
+	}
 	workarea_info_[act->iparam1].insert(" findspace");
 }
 
@@ -513,19 +494,21 @@ walk
  * iparam1 = walkXXX
  */
 void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 1)
-		throw wexception("Usage: walk=<where>");
+	if (cmd.size() != 1) {
+		throw GameDataError("Usage: walk=<where>");
+	}
 
 	act->function = &Worker::run_walk;
 
-	if (cmd[0] == "object")
+	if (cmd[0] == "object") {
 		act->iparam1 = Worker::Action::walkObject;
-	else if (cmd[0] == "coords")
+	} else if (cmd[0] == "coords") {
 		act->iparam1 = Worker::Action::walkCoords;
-	else if (cmd[0] == "object-or-coords")
+	} else if (cmd[0] == "object-or-coords") {
 		act->iparam1 = Worker::Action::walkObject | Worker::Action::walkCoords;
-	else
-		throw wexception("Bad walk destination '%s'", cmd[0].c_str());
+	} else {
+		throw GameDataError("Bad walk destination '%s'", cmd[0].c_str());
+	}
 }
 
 /* RST
@@ -576,7 +559,7 @@ return
  */
 void WorkerProgram::parse_return(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (!cmd.empty()) {
-		throw wexception("Usage: return");
+		throw GameDataError("Usage: return");
 	}
 	act->function = &Worker::run_return;
 	act->iparam1 = 1;  // drop a ware on our owner's flag
@@ -607,8 +590,9 @@ callobject
  * sparam1 = callobject command name
  */
 void WorkerProgram::parse_callobject(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 1)
-		throw wexception("Usage: callobject=<program name>");
+	if (cmd.size() != 1) {
+		throw GameDataError("Usage: callobject=<program name>");
+	}
 
 	act->function = &Worker::run_callobject;
 	act->sparam1 = cmd[0];
@@ -664,14 +648,15 @@ plant
  * iparam1  one of plantXXX
  */
 void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.empty())
-		throw wexception(
+	if (cmd.empty()) {
+		throw GameDataError(
 		   "Usage: plant=attrib:<attribute> [attrib:<attribute> ...] [unless object]");
+	}
 
 	act->function = &Worker::run_plant;
 	act->iparam1 = Worker::Action::plantAlways;
 	for (uint32_t i = 0; i < cmd.size(); ++i) {
-		if (i >= 1 && cmd[i] == "unless") {
+		if (cmd[i] == "unless") {
 			++i;
 			if (i >= cmd.size())
 				throw GameDataError("plant: something expected after unless");
@@ -723,14 +708,12 @@ createbob
 */
 // TODO(GunChleoc): attrib:eatable would be much better, then depend on terrain too
 void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.empty())
-		throw wexception("Usage: createbob=<bob name> <bob name> ...");
+	if (cmd.empty()) {
+		throw GameDataError("Usage: createbob=<bob name> <bob name> ...");
+	}
 
 	act->function = &Worker::run_createbob;
-
-	for (uint32_t i = 0; i < cmd.size(); ++i) {
-		act->sparamv.push_back(cmd[i]);
-	}
+	act->sparamv = std::move(cmd);
 }
 
 /* RST
@@ -777,21 +760,13 @@ repeatsearch
  * sparam1 = subcommand
  */
 void WorkerProgram::parse_repeatsearch(Worker::Action* act, const std::vector<std::string>& cmd) {
-	char* endp;
-
-	if (cmd.size() != 3)
-		throw wexception("Usage: repeatsearch=<repeat #> <radius> <subcommand>");
+	if (cmd.size() != 3) {
+		throw GameDataError("Usage: repeatsearch=<repeat #> <radius> <subcommand>");
+	}
 
 	act->function = &Worker::run_repeatsearch;
-
-	act->iparam1 = strtol(cmd[0].c_str(), &endp, 0);
-	if (*endp)
-		throw wexception("Bad repeat count '%s'", cmd[0].c_str());
-
-	act->iparam2 = strtol(cmd[1].c_str(), &endp, 0);
-	if (*endp)
-		throw wexception("Bad radius '%s'", cmd[1].c_str());
-
+	act->iparam1 = read_positive(cmd[0]);
+	act->iparam2 = read_positive(cmd[1]);
 	act->sparam1 = cmd[2];
 }
 
@@ -813,8 +788,9 @@ findresources
       }
 */
 void WorkerProgram::parse_findresources(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (!cmd.empty())
-		throw wexception("Usage: findresources");
+	if (!cmd.empty()) {
+		throw GameDataError("Usage: findresources");
+	}
 
 	act->function = &Worker::run_findresources;
 }
@@ -840,8 +816,9 @@ scout
  * iparam2 = time
  */
 void WorkerProgram::parse_scout(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (cmd.size() != 2)
-		throw wexception("Usage: scout=<radius> <time>");
+	if (cmd.size() != 2) {
+		throw GameDataError("Usage: scout=<radius> <time>");
+	}
 
 	act->iparam1 = atoi(cmd[0].c_str());
 	act->iparam2 = atoi(cmd[1].c_str());
@@ -911,8 +888,9 @@ construct
  * for construction. This is used in ship building.
  */
 void WorkerProgram::parse_construct(Worker::Action* act, const std::vector<std::string>& cmd) {
-	if (!cmd.empty())
-		throw wexception("Usage: construct");
+	if (!cmd.empty()) {
+		throw GameDataError("Usage: construct");
+	}
 
 	act->function = &Worker::run_construct;
 }
