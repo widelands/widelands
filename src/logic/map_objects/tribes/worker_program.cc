@@ -285,18 +285,16 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 
 	// Parse predicates
 	for (const std::string& argument : cmd) {
-		uint32_t idx = argument.find(':');
-		std::string const key = argument.substr(0, idx);
-		std::string const value = argument.substr(idx + 1);
+		std::pair<std::string, std::string> item = parse_key_value_pair(argument);
 
-		if (key == "radius") {
-			act->iparam1 = read_positive(value);
-		} else if (key == "attrib") {
-			act->iparam2 = MapObjectDescr::get_attribute_id(value);
-		} else if (key == "type") {
-			act->sparam1 = value;
+		if (item.first == "radius") {
+			act->iparam1 = read_positive(item.second);
+		} else if (item.first == "attrib") {
+			act->iparam2 = MapObjectDescr::get_attribute_id(item.second);
+		} else if (item.first == "type") {
+			act->sparam1 = item.second;
 		} else {
-			throw GameDataError("Bad findobject predicate %s:%s", key.c_str(), value.c_str());
+			throw GameDataError("Unknown findobject predicate %s", argument.c_str());
 		}
 	}
 
@@ -393,13 +391,11 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	// Parse predicates
 	for (const std::string& argument : cmd) {
 		try {
-			uint32_t idx = argument.find(':');
-			std::string key = argument.substr(0, idx);
-			std::string value = argument.substr(idx + 1);
+			std::pair<std::string, std::string> item = parse_key_value_pair(argument, "", true);
 
-			if (key == "radius") {
-				act->iparam1 = read_positive(value);
-			} else if (key == "size") {
+			if (item.first == "radius") {
+				act->iparam1 = read_positive(item.second);
+			} else if (item.first == "size") {
 				static const struct {
 					char const* name;
 					int32_t val;
@@ -410,27 +406,29 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 
 				int32_t index;
 
-				for (index = 0; sizenames[index].name; ++index)
-					if (value == sizenames[index].name)
+				for (index = 0; sizenames[index].name; ++index) {
+					if (item.second == sizenames[index].name) {
 						break;
+					}
+				}
 
 				if (!sizenames[index].name) {
-					throw GameDataError("Bad findspace size '%s'", value.c_str());
+					throw GameDataError("Bad findspace size '%s'", item.second.c_str());
 				}
 
 				act->iparam2 = sizenames[index].val;
-			} else if (key == "breed") {
+			} else if (item.first == "breed") {
 				act->iparam4 = 1;
-			} else if (key == "resource") {
-				act->sparam1 = value;
-			} else if (key == "space") {
+			} else if (item.first == "resource") {
+				act->sparam1 = item.second;
+			} else if (item.first == "space") {
 				act->iparam3 = 1;
-			} else if (key == "avoid") {
-				act->iparam5 = MapObjectDescr::get_attribute_id(value);
-			} else if (key == "saplingsearches") {
-				act->iparam6 = read_positive(value);
+			} else if (item.first == "avoid") {
+				act->iparam5 = MapObjectDescr::get_attribute_id(item.second);
+			} else if (item.first == "saplingsearches") {
+				act->iparam6 = read_positive(item.second);
 			} else {
-				throw GameDataError("Bad findspace predicate %s:%s", key.c_str(), value.c_str());
+				throw GameDataError("Unknown findspace predicate %s", item.first.c_str());
 			}
 		} catch (const GameDataError& e) {
 			throw GameDataError("Malformed findspace argument %s: %s", argument.c_str(), e.what());
@@ -668,17 +666,7 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 			continue;
 		}
 
-		// Check if immovable type exists
-		std::vector<std::string> const list(split_string(cmd[i], ":"));
-		if (list.size() != 2 || list.at(0) != "attrib") {
-			throw GameDataError("plant takes a list of attrib:<attribute> that reference world and/or "
-			                    "tribe immovables");
-		}
-
-		const std::string& attrib_name = list[1];
-		if (attrib_name.empty()) {
-			throw GameDataError("plant has an empty attrib:<attribute> at position %d", i);
-		}
+		const std::string attrib_name = parse_key_value_pair(cmd[i], "attrib").second;
 
 		// This will throw a GameDataError if the attribute doesn't exist.
 		ImmovableDescr::get_attribute_id(attrib_name);
