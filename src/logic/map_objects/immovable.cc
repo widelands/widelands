@@ -150,39 +150,33 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    ImmovableDescr* immovable)
    : name_(init_name) {
 	for (const std::string& line : lines) {
-		// NOCOM retire this
-		std::vector<std::string> parts;
-		boost::split(parts, line, boost::is_any_of("="));
-		if (parts.size() != 2) {
-			throw GameDataError("invalid line: %s.", line.c_str());
+		try {
+			ProgramParseInput parseinput = parse_program_string(line);
+
+			// NOCOM they all have the same signature. Template?
+
+			Action* action;
+			if (parseinput.name == "animate") {
+				action = new ActAnimate(parseinput.arguments, *immovable);
+			} else if (parseinput.name == "transform") {
+				action = new ActTransform(parseinput.arguments, *immovable);
+			} else if (parseinput.name == "grow") {
+				action = new ActGrow(parseinput.arguments, *immovable);
+			} else if (parseinput.name == "remove") {
+				action = new ActRemove(parseinput.arguments, *immovable);
+			} else if (parseinput.name == "seed") {
+				action = new ActSeed(parseinput.arguments, *immovable);
+			} else if (parseinput.name == "playsound") {
+				action = new ActPlaySound(parseinput.arguments, *immovable);
+			} else if (parseinput.name == "construct") {
+				action = new ActConstruct(parseinput.arguments, *immovable);
+			} else {
+				throw GameDataError("unknown command type \"%s\"", parseinput.name.c_str());
+			}
+			actions_.push_back(action);
+		} catch (const GameDataError& e) {
+			throw GameDataError("Error parsing line\"%s\": %s", line.c_str(), e.what());
 		}
-		std::unique_ptr<char[]> arguments(new char[parts[1].size() + 1]);
-		strncpy(arguments.get(), parts[1].c_str(), parts[1].size() + 1);
-
-
-		// NOCOM this is what we want
-		ProgramParseInput parseinput = parse_program_string(line);
-
-		Action* action;
-		if (parseinput.name == "animate") {
-			action = new ActAnimate(parseinput.arguments, *immovable);
-		} else if (parseinput.name == "transform") {
-			action = new ActTransform(parseinput.arguments, *immovable);
-		} else if (parseinput.name == "grow") {
-			action = new ActGrow(arguments.get(), *immovable);
-		} else if (parseinput.name == "remove") {
-			action = new ActRemove(arguments.get(), *immovable);
-		} else if (parseinput.name == "seed") {
-			action = new ActSeed(arguments.get(), *immovable);
-		} else if (parseinput.name == "playsound") {
-			action = new ActPlaySound(parseinput.arguments, *immovable);
-		} else if (parseinput.name == "construct") {
-			action = new ActConstruct(parseinput.arguments, *immovable);
-		} else {
-			throw GameDataError("unknown command type \"%s\" in immovable \"%s\"", parts[0].c_str(),
-			                    immovable->name().c_str());
-		}
-		actions_.push_back(action);
 	}
 	if (actions_.empty())
 		throw GameDataError("no actions");
@@ -249,7 +243,7 @@ ImmovableDescr::ImmovableDescr(const std::string& init_descname,
 			programs_[program_name] = new ImmovableProgram(
 			   program_name, programs->get_table(program_name)->array_entries<std::string>(), this);
 		} catch (const std::exception& e) {
-			throw wexception("Error in program %s: %s", program_name.c_str(), e.what());
+			throw GameDataError("%s: Error in program %s: %s", name().c_str(), program_name.c_str(), e.what());
 		}
 	}
 
@@ -845,42 +839,17 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 		immovable.program_step(game);
 }
 
-ImmovableProgram::ActGrow::ActGrow(char* parameters, ImmovableDescr& descr) {
+ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, ImmovableDescr& descr) {
+	if (arguments.size() != 1) {
+		throw GameDataError("Usage: grow=<immovable name>");
+	}
 	if (!descr.has_terrain_affinity()) {
 		throw GameDataError(
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 
-	try {
-		tribe = true;
-		for (char* p = parameters;;)
-			switch (*p) {
-			case ':': {
-				*p = '\0';
-				++p;
-				if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
-					throw GameDataError("immovable type not in tribes but target type has scope "
-					                    "(\"%s\")",
-					                    parameters);
-				else if (strcmp(parameters, "world"))
-					throw GameDataError("scope \"%s\" given for target type (must be "
-					                    "\"world\")",
-					                    parameters);
-				tribe = false;
-				parameters = p;
-				break;
-			}
-			case '\0':
-				goto end;
-			default:
-				++p;
-				break;
-			}
-	end:
-		type_name = parameters;
-	} catch (const WException& e) {
-		throw GameDataError("grow: %s", e.what());
-	}
+	// NOCOM check if the target immovable exists
+	type_name = arguments.front();
 }
 
 void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const {
@@ -903,15 +872,11 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 /**
  * remove
  */
-ImmovableProgram::ActRemove::ActRemove(char* parameters, ImmovableDescr&) {
-	try {
-		if (*parameters) {
-			probability = read_positive(parameters, 254);
-		} else
-			probability = 0;
-	} catch (const WException& e) {
-		throw GameDataError("remove: %s", e.what());
+ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments, ImmovableDescr&) {
+	if (arguments.size() > 1) {
+		throw GameDataError("Usage: remove=[probability]");
 	}
+	probability = arguments.empty() ? 0 : read_positive(arguments.front(), 254);
 }
 
 void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) const {
@@ -921,43 +886,18 @@ void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) cons
 		immovable.program_step(game);
 }
 
-ImmovableProgram::ActSeed::ActSeed(char* parameters, ImmovableDescr& descr) {
-	try {
-		probability = 0;
-		for (char* p = parameters;;)
-			switch (*p) {
-			case ':': {
-				*p = '\0';
-				++p;
-				if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
-					throw GameDataError("immovable type not in tribes but target type has scope "
-					                    "(\"%s\")",
-					                    parameters);
-				else if (strcmp(parameters, "world"))
-					throw GameDataError("scope \"%s\" given for target type (must be "
-					                    "\"world\")",
-					                    parameters);
-				parameters = p;
-				break;
-			}
-			case ' ': {
-				*p = '\0';
-				++p;
-				probability = read_positive(p, 254);
-				//  fallthrough
-			}
-				FALLS_THROUGH;
-			case '\0':
-				goto end;
-			default:
-				++p;
-				break;
-			}
-	end:
-		type_name = parameters;
-	} catch (const WException& e) {
-		throw GameDataError("seed: %s", e.what());
+ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments, ImmovableDescr& descr) {
+	// NOCOM code duplication with ActGrow
+	if (arguments.size() != 1) {
+		throw GameDataError("Usage: seed=<immovable name>");
 	}
+	if (!descr.has_terrain_affinity()) {
+		throw GameDataError(
+		   "Immovable %s can 'seed', but has no terrain_affinity entry.", descr.name().c_str());
+	}
+
+	// NOCOM check if the target immovable exists
+	type_name = arguments.front();
 }
 
 void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const {
@@ -994,23 +934,20 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 }
 
 ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments, ImmovableDescr& descr) {
+	// NOCOM signature: construct=idle 5000 210000
+	if (arguments.size() != 3) {
+		throw GameDataError("Usage: construct=<animation> <build duration> <decay duration>");
+	}
 	try {
-		if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
-			throw GameDataError("only usable for tribe immovable");
-
-		if (arguments.size() != 3)
-			throw GameDataError("usage: animation-name buildtime decaytime");
-
-		buildtime_ = read_positive(arguments[1]);
-		decaytime_ = read_positive(arguments[2]);
-
-		std::string animation_name = arguments[0];
+		const std::string animation_name = arguments[0];
 		if (!descr.is_animation_known(animation_name)) {
-			throw GameDataError("unknown animation \"%s\" in immovable program for immovable \"%s\"",
+			throw GameDataError("Unknown animation \"%s\" in immovable program for immovable \"%s\"",
 			                    animation_name.c_str(), descr.name().c_str());
 		}
 		animid_ = descr.get_animation(animation_name);
 
+		buildtime_ = read_positive(arguments[1]);
+		decaytime_ = read_positive(arguments[2]);
 	} catch (const WException& e) {
 		throw GameDataError("construct: %s", e.what());
 	}

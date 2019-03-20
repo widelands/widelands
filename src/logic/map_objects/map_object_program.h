@@ -43,13 +43,13 @@ std::vector<std::string> split_string(const std::string&, char const* separators
 
 unsigned int read_positive(std::string input, unsigned int max_value = std::numeric_limits<uint32_t>::max());
 
-std::pair<std::string, std::string> parse_key_value_pair(const std::string& input, const std::string& expected_key = "", bool allow_empty = false);
+const std::pair<std::string, std::string> parse_key_value_pair(const std::string& input, const char separator, const std::string& expected_key = "", bool allow_empty = false);
 
 struct ProgramParseInput {
 	std::string name;
 	std::vector<std::string> arguments;
 };
-ProgramParseInput parse_program_string(const std::string& action_string);
+ProgramParseInput parse_program_string(const std::string& line);
 
 struct AnimationParameters {
 	uint32_t animation = 0;

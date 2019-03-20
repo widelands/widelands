@@ -99,7 +99,7 @@ struct ImmovableProgram {
 
 	/// Like ActTransform but the probability is determined by the suitability.
 	struct ActGrow : public Action {
-		ActGrow(char* parameters, ImmovableDescr&);
+		ActGrow(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -108,7 +108,7 @@ struct ImmovableProgram {
 	};
 
 	struct ActRemove : public Action {
-		ActRemove(char* parameters, ImmovableDescr&);
+		ActRemove(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -116,7 +116,7 @@ struct ImmovableProgram {
 	};
 
 	struct ActSeed : public Action {
-		ActSeed(char* parameters, ImmovableDescr&);
+		ActSeed(std::vector<std::string>& arguments, ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:

@@ -72,23 +72,13 @@ unsigned int read_positive(std::string input, unsigned int max_value) {
 	return result;
 }
 
-ProgramParseInput parse_program_string(const std::string& action_string) {
-	ProgramParseInput result;
-	std::vector<std::string> parts;
-	boost::split(parts, action_string, boost::is_any_of("="));
-	if (parts.size() < 1 || parts.size() > 2) {
-		throw GameDataError("Invalid line: \"%s\" in program", action_string.c_str());
-	}
-
-	result.name = parts.at(0);
-	if (parts.size() == 2) {
-		boost::split(result.arguments, parts.at(1), boost::is_any_of(" \t\n"));
-	}
-	return result;
+ProgramParseInput parse_program_string(const std::string& line) {
+	const std::pair<std::string, std::string> key_values = parse_key_value_pair(line, '=', "", true);
+	return ProgramParseInput{key_values.first, split_string(key_values.second, " \t\n")};
 }
 
-std::pair<std::string, std::string> parse_key_value_pair(const std::string& input, const std::string& expected_key, bool allow_empty) {
-	const size_t idx = input.find(':');
+const std::pair<std::string, std::string> parse_key_value_pair(const std::string& input, const char separator, const std::string& expected_key, bool allow_empty) {
+	const size_t idx = input.find(separator);
 
 	if (!allow_empty && idx == input.npos) {
 		throw GameDataError("Empty value in '%s'\n", input.c_str());
@@ -99,7 +89,7 @@ std::pair<std::string, std::string> parse_key_value_pair(const std::string& inpu
 		throw GameDataError("Expected key '%s' but found '%s' in '%s'\n", expected_key.c_str(), key.c_str(), input.c_str());
 	}
 
-	return std::make_pair(key, input.substr(idx + 1));
+	return std::make_pair(key, idx == input.npos ? "" : input.substr(idx + 1));
 }
 
 AnimationParameters parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {

@@ -1566,7 +1566,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
    : name_(init_name), descname_(init_descname) {
 
 	for (const std::string& action_string : actions_table->array_entries<std::string>()) {
-		// NOCOM reture this
+		// NOCOM retire this
 		std::vector<std::string> parts;
 		boost::split(parts, action_string, boost::is_any_of("="));
 		if (parts.size() != 2) {
