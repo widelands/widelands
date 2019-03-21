@@ -196,7 +196,7 @@ bool ProductionProgram::Action::get_building_work(Game&, ProductionSite&, Worker
 
 void ProductionProgram::Action::building_work_failed(Game&, ProductionSite&, Worker&) const {
 }
-
+// NOCOM moratorium
 void ProductionProgram::parse_ware_type_group(char*& parameters,
                                               WareTypeGroup& group,
                                               const Tribes& tribes,
@@ -276,6 +276,59 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 			NEVER_HERE();
 		}
 	}
+}
+
+ProductionProgram::Groups ProductionProgram::parse_ware_type_group(const std::vector<std::string>& arguments, const ProductionSiteDescr& descr, const Tribes& tribes) {
+	ProductionProgram::Groups result;
+
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> names_to_amount = parse_key_value_pair(argument, ':', "", true);
+		uint8_t amount = names_to_amount.second.empty() ? 1 : read_positive(names_to_amount.second);
+		uint8_t max_amount = 0;
+		std::set<std::pair<DescriptionIndex, WareWorker>> ware_worker_names;
+		for (const std::string& item_name : split_string(names_to_amount.first, ",")) {
+			// Try as ware
+			WareWorker type = wwWARE;
+			DescriptionIndex item_index = tribes.ware_index(item_name);
+			if (!tribes.ware_exists(item_index)) {
+				item_index = tribes.worker_index(item_name);
+				if (tribes.worker_exists(item_index)) {
+					// It is a worker
+					type = wwWORKER;
+				} else {
+					throw GameDataError("Unknown ware or worker type \"%s\"", item_name.c_str());
+				}
+			}
+
+			// Sanity checks
+			bool found = false;
+			const BillOfMaterials& inputs = (type == wwWARE) ? descr.input_wares() : descr.input_workers();
+			for (const WareAmount& input : inputs) {
+				if (input.first == item_index) {
+					max_amount += input.second;
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				throw GameDataError("%s is not declared as an input (\"%s=<count>\" was not "
+									"found in the [inputs] section)",
+									item_name.c_str(), item_name.c_str());
+			}
+
+			if (max_amount < amount) {
+				throw GameDataError("group count is %u but (total) input storage capacity of "
+				                    "the specified ware type(s) is only %u, so the group can "
+				                    "never be fulfilled by the site",
+				                    static_cast<unsigned int>(amount), static_cast<unsigned int>(max_amount));
+			}
+			// Add item
+			ware_worker_names.insert(std::make_pair(item_index, type));
+		}
+		// Add set
+		result.push_back(std::make_pair(ware_worker_names, amount));
+	}
+	return result;
 }
 
 
@@ -778,24 +831,13 @@ void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) cons
 	return ps.program_step(game, parameters.duration ? parameters.duration : ps.top_state().phase);
 }
 
-ProductionProgram::ActConsume::ActConsume(char* parameters,
+ProductionProgram::ActConsume::ActConsume(const std::vector<std::string>& arguments,
                                           const ProductionSiteDescr& descr,
                                           const Tribes& tribes) {
-	try {
-		for (;;) {
-			consumed_wares_workers_.resize(consumed_wares_workers_.size() + 1);
-			parse_ware_type_group(parameters, *consumed_wares_workers_.rbegin(), tribes,
-			                      descr.input_wares(), descr.input_workers());
-			if (!*parameters)
-				break;
-			force_skip(parameters);
-		}
-		if (consumed_wares_workers_.empty()) {
-			throw GameDataError("expected ware_type1[,ware_type2[,...]][:N] ...");
-		}
-	} catch (const WException& e) {
-		throw GameDataError("consume: %s", e.what());
+	if (arguments.empty()) {
+		throw GameDataError("Usage: consume=<ware or worker>[,<ware or worker>[,...]][:<amount>] ...");
 	}
+	consumed_wares_workers_ = parse_ware_type_group(arguments, descr, tribes);
 }
 
 void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) const {
@@ -1486,7 +1528,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   std::unique_ptr<ProductionProgram::Action>(new ActAnimate(parseinput.arguments, building)));
 			} else if (parseinput.name =="consume") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-				   new ActConsume(arguments.get(), *building, egbase.tribes())));
+				   new ActConsume(parseinput.arguments, *building, egbase.tribes())));
 			} else if (parseinput.name == "produce") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActProduce(parseinput.arguments, *building, egbase.tribes())));

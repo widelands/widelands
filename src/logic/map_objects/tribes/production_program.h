@@ -104,6 +104,8 @@ struct ProductionProgram {
 	                                  const BillOfMaterials& input_wares,
 	                                  const BillOfMaterials& input_workers);
 
+	static Groups parse_ware_type_group(const std::vector<std::string>& arguments, const ProductionSiteDescr& descr, const Tribes& tribes);
+
 	/// Parse a ware or worker list with optional amounts and ensure that the building's outputs match
 	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments, WareWorker ww, const ProductionSiteDescr& descr, const Tribes& tribes);
 
@@ -407,7 +409,7 @@ struct ProductionProgram {
 	/// types of a group are sorted.
 	// TODO(unknown): change this!
 	struct ActConsume : public Action {
-		ActConsume(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
+		ActConsume(const std::vector<std::string>& arguments, const ProductionSiteDescr& descr, const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 	};
 
