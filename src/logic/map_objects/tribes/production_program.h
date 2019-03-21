@@ -268,7 +268,7 @@ struct ProductionProgram {
 	///         but no statistics are calculated (with the same effect as
 	///         executing "return=no_stats")
 	struct ActCall : public Action {
-		ActCall(char* parameters, const ProductionSiteDescr&);
+		ActCall(const std::vector<std::string>& arguments, const ProductionSiteDescr&);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -284,7 +284,7 @@ struct ProductionProgram {
 	///    program:
 	///       The name of a program defined in the productionsite's main worker.
 	struct ActCallWorker : public Action {
-		ActCallWorker(char* parameters,
+		ActCallWorker(const std::vector<std::string>& arguments,
 		              const std::string& production_program_name,
 		              ProductionSiteDescr*,
 		              const Tribes& tribes);

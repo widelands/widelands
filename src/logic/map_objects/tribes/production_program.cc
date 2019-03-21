@@ -559,64 +559,58 @@ void ProductionProgram::ActReturn::execute(Game& game, ProductionSite& ps) const
 	return ps.program_end(game, result_);
 }
 
-ProductionProgram::ActCall::ActCall(char* parameters, const ProductionSiteDescr& descr) {
+ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments, const ProductionSiteDescr& descr) {
+	if (arguments.size() < 1 || arguments.size() > 4) {
+		throw GameDataError("Usage: call=<program name> [on failure|completion|skip fail|complete|skip|repeat]");
+	}
+
 	//  Initialize with default handling methods.
 	handling_methods_[Failed - 1] = Continue;
 	handling_methods_[Completed - 1] = Continue;
 	handling_methods_[Skipped - 1] = Continue;
 
-	try {
-		bool reached_end;
-		{
-			char const* const program_name = next_word(parameters, reached_end);
-			const ProductionSiteDescr::Programs& programs = descr.programs();
-			ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
-			if (it == programs.end())
-				throw GameDataError("the program \"%s\" has not (yet) been declared in %s "
-				                    "(wrong declaration order?)",
-				                    program_name, descr.name().c_str());
-			program_ = it->second.get();
+	// Fetch program to call
+	const std::string& program_name = arguments.front();
+	const ProductionSiteDescr::Programs& programs = descr.programs();
+	ProductionSiteDescr::Programs::const_iterator const it = programs.find(program_name);
+	if (it == programs.end()) {
+		throw GameDataError("the program \"%s\" has not (yet) been declared in %s "
+							"(wrong declaration order?)",
+							program_name.c_str(), descr.name().c_str());
+	}
+	program_ = it->second.get();
+
+	//  Override with specified handling methods.
+	if (arguments.size() > 1) {
+		if (arguments.at(1) != "on") {
+			throw GameDataError("Expected 'on' keyword in second position");
 		}
 
-		//  Override with specified handling methods.
-		while (!reached_end) {
-			skip(parameters);
-			match_force_skip(parameters, "on");
-
-			ProgramResult result_to_set_method_for;
-			if (match_force_skip(parameters, "failure")) {
-				if (handling_methods_[Failed - 1] != Continue)
-					throw GameDataError("%s handling method already defined", "failure");
-				result_to_set_method_for = Failed;
-			} else if (match_force_skip(parameters, "completion")) {
-				if (handling_methods_[Completed - 1] != Continue)
-					throw GameDataError("%s handling method already defined", "completion");
-				result_to_set_method_for = Completed;
-			} else if (match_force_skip(parameters, "skip")) {
-				if (handling_methods_[Skipped - 1] != Continue)
-					throw GameDataError("%s handling method already defined", "skip");
-				result_to_set_method_for = Skipped;
-			} else
-				throw GameDataError(
-				   "expected %s but found \"%s\"", "{\"failure\"|\"completion\"|\"skip\"}", parameters);
-
-			ProgramResultHandlingMethod handling_method;
-			if (match(parameters, "fail"))
-				handling_method = Fail;
-			else if (match(parameters, "complete"))
-				handling_method = Complete;
-			else if (match(parameters, "skip"))
-				handling_method = Skip;
-			else if (match(parameters, "repeat"))
-				handling_method = Repeat;
-			else
-				throw GameDataError("expected %s but found \"%s\"",
-				                    "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}", parameters);
-			handling_methods_[result_to_set_method_for - 1] = handling_method;
-			reached_end = !*parameters;
+		ProgramResult result_to_set_method_for;
+		if (arguments.at(2) == "failure") {
+			result_to_set_method_for = Failed;
+		} else if (arguments.at(2) == "completion") {
+			result_to_set_method_for = Completed;
+		} else if (arguments.at(2) == "skip") {
+			result_to_set_method_for = Skipped;
+		} else {
+			throw GameDataError(
+			   "expected {\"failure\"|\"completion\"|\"skip\"} but found \"%s\"", arguments.at(2).c_str());
 		}
-	} catch (const WException& e) {
-		throw GameDataError("call: %s", e.what());
+
+		ProgramResultHandlingMethod handling_method;
+		if (arguments.at(3) == "fail") {
+			handling_method = Fail;
+		} else if (arguments.at(3) == "complete") {
+			handling_method = Complete;
+		} else if (arguments.at(3) == "skip") {
+			handling_method = Skip;
+		} else if (arguments.at(3) == "repeat") {
+			handling_method = Repeat;
+		} else {
+			throw GameDataError("expected {\"fail\"|\"complete\"|\"skip\"|\"repeat\"} but found \"%s\"", arguments.at(3).c_str());
+		}
+		handling_methods_[result_to_set_method_for - 1] = handling_method;
 	}
 }
 
@@ -642,12 +636,16 @@ void ProductionProgram::ActCall::execute(Game& game, ProductionSite& ps) const {
 	}
 }
 
-ProductionProgram::ActCallWorker::ActCallWorker(char* parameters,
+ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& arguments,
                                                 const std::string& production_program_name,
                                                 ProductionSiteDescr* descr,
                                                 const Tribes& tribes) {
+	if (arguments.size() != 1) {
+		throw GameDataError("Usage: callworker=<worker program name>");
+	}
 	try {
-		program_ = parameters;
+		// NOCOM check that the program exists
+		program_ = arguments.front();
 
 		//  Quote form "void ProductionSite::program_act(Game &)":
 		//  "Always main worker is doing stuff"
@@ -1578,75 +1576,80 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 		strncpy(arguments.get(), parts[1].c_str(), parts[1].size() + 1);
 
 		// NOCOM this is what we want
-		ProgramParseInput parseinput = parse_program_string(action_string);
+		try {
+			ProgramParseInput parseinput = parse_program_string(action_string);
 
-		if (parseinput.name == "return") {
-			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActReturn(arguments.get(), *building, egbase.tribes())));
-		} else if (parseinput.name == "call") {
-			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActCall(arguments.get(), *building)));
-		} else if (parseinput.name == "sleep") {
-			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActSleep(arguments.get())));
-		} else if (parseinput.name == "animate") {
-			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActAnimate(parseinput.arguments, building)));
-		} else if (parseinput.name =="consume") {
-			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActConsume(arguments.get(), *building, egbase.tribes())));
-		} else if (parseinput.name == "produce") {
-			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActProduce(arguments.get(), *building, egbase.tribes())));
-		} else if (parseinput.name == "recruit") {
-			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActRecruit(arguments.get(), *building, egbase.tribes())));
-		} else if (parseinput.name =="callworker") {
-			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActCallWorker(arguments.get(), name(), building, egbase.tribes())));
-		} else if (parseinput.name == "mine") {
-			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActMine(arguments.get(), egbase.world(), name(), building)));
-		} else if (parseinput.name == "checksoldier") {
-			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActCheckSoldier(arguments.get())));
-		} else if (parseinput.name == "train") {
-			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActTrain(arguments.get())));
-		} else if (parseinput.name == "playsound") {
-			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments, building)));
-		} else if (parseinput.name == "construct") {
-			actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
-			   new ActConstruct(arguments.get(), name(), building)));
-		} else if (parseinput.name == "checkmap") {
-			actions_.push_back(
-			   std::unique_ptr<ProductionProgram::Action>(new ActCheckMap(arguments.get())));
-		} else {
-			throw GameDataError(
-			   "unknown command type \"%s\" in production program \"%s\" for building \"%s\"",
-			   arguments.get(), name().c_str(), building->name().c_str());
-		}
+			if (parseinput.name == "return") {
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActReturn(arguments.get(), *building, egbase.tribes())));
+			} else if (parseinput.name == "call") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActCall(parseinput.arguments, *building)));
+			} else if (parseinput.name == "sleep") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActSleep(arguments.get())));
+			} else if (parseinput.name == "animate") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActAnimate(parseinput.arguments, building)));
+			} else if (parseinput.name =="consume") {
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActConsume(arguments.get(), *building, egbase.tribes())));
+			} else if (parseinput.name == "produce") {
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActProduce(arguments.get(), *building, egbase.tribes())));
+			} else if (parseinput.name == "recruit") {
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActRecruit(arguments.get(), *building, egbase.tribes())));
+			} else if (parseinput.name =="callworker") {
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActCallWorker(parseinput.arguments, name(), building, egbase.tribes())));
+			} else if (parseinput.name == "mine") {
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActMine(arguments.get(), egbase.world(), name(), building)));
+			} else if (parseinput.name == "checksoldier") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActCheckSoldier(arguments.get())));
+			} else if (parseinput.name == "train") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActTrain(arguments.get())));
+			} else if (parseinput.name == "playsound") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments, building)));
+			} else if (parseinput.name == "construct") {
+				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
+				   new ActConstruct(arguments.get(), name(), building)));
+			} else if (parseinput.name == "checkmap") {
+				actions_.push_back(
+				   std::unique_ptr<ProductionProgram::Action>(new ActCheckMap(arguments.get())));
+			} else {
+				throw GameDataError(
+				   "unknown command type \"%s\" in production program \"%s\" for building \"%s\"",
+				   arguments.get(), name().c_str(), building->name().c_str());
+			}
 
-		const ProductionProgram::Action& action = *actions_.back();
-		for (const auto& group : action.consumed_wares_workers()) {
-			consumed_wares_workers_.push_back(group);
-		}
-		// Add produced wares. If the ware already exists, increase the amount
-		for (const auto& ware : action.produced_wares()) {
-			if (produced_wares_.count(ware.first) == 1) {
-				produced_wares_.at(ware.first) += ware.second;
-			} else {
-				produced_wares_.insert(ware);
+			const ProductionProgram::Action& action = *actions_.back();
+			for (const auto& group : action.consumed_wares_workers()) {
+				consumed_wares_workers_.push_back(group);
 			}
-		}
-		// Add recruited workers. If the worker already exists, increase the amount
-		for (const auto& worker : action.recruited_workers()) {
-			if (recruited_workers_.count(worker.first) == 1) {
-				recruited_workers_.at(worker.first) += worker.second;
-			} else {
-				recruited_workers_.insert(worker);
+			// Add produced wares. If the ware already exists, increase the amount
+			for (const auto& ware : action.produced_wares()) {
+				if (produced_wares_.count(ware.first) == 1) {
+					produced_wares_.at(ware.first) += ware.second;
+				} else {
+					produced_wares_.insert(ware);
+				}
 			}
+			// Add recruited workers. If the worker already exists, increase the amount
+			for (const auto& worker : action.recruited_workers()) {
+				if (recruited_workers_.count(worker.first) == 1) {
+					recruited_workers_.at(worker.first) += worker.second;
+				} else {
+					recruited_workers_.insert(worker);
+				}
+			}
+		} catch (const std::exception& e) {
+			throw GameDataError("Error reading line '%s' in production program '%s' for building '%s': %s",
+							 action_string.c_str(), name_.c_str(), building->name().c_str(), e.what());
 		}
 	}
 	if (actions_.empty())
