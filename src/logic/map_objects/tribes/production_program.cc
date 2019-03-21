@@ -23,7 +23,6 @@
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
 
 #include "base/i18n.h"
 #include "base/macros.h"
@@ -277,6 +276,41 @@ void ProductionProgram::parse_ware_type_group(char*& parameters,
 			NEVER_HERE();
 		}
 	}
+}
+
+
+BillOfMaterials ProductionProgram::parse_bill_of_materials(const std::vector<std::string>& arguments,
+																  WareWorker ww,
+																  const ProductionSiteDescr& descr,
+																  const Tribes& tribes) {
+	BillOfMaterials result;
+	for (const std::string& argument : arguments) {
+		const std::pair<std::string, std::string> produceme = parse_key_value_pair(argument, ':', "", true);
+
+		const DescriptionIndex index = ww == WareWorker::wwWARE ?
+										   tribes.safe_ware_index(produceme.first) :
+										   tribes.safe_worker_index(produceme.first);
+
+		// Verify the building outputs
+		switch (ww) {
+		case WareWorker::wwWARE:
+			if (!descr.is_output_ware_type(index)) {
+				throw GameDataError("Ware '%s' is not listed in the building's \"outputs\" table",
+									produceme.first.c_str());
+			} break;
+		case WareWorker::wwWORKER:
+			if (!descr.is_output_worker_type(index)) {
+				throw GameDataError("Worker '%s' is not listed in the building's \"outputs\" table",
+									produceme.first.c_str());
+			} break;
+		default:
+			NEVER_HERE();
+		}
+
+		Quantity amount = produceme.second.empty() ? 1 : read_positive(produceme.second);
+		result.push_back(std::make_pair(index, amount));
+	}
+	return result;
 }
 
 ProductionProgram::ActReturn::Condition::~Condition() {
@@ -884,23 +918,10 @@ void ProductionProgram::ActConsume::execute(Game& game, ProductionSite& ps) cons
 ProductionProgram::ActProduce::ActProduce(const std::vector<std::string>& arguments,
                                           const ProductionSiteDescr& descr,
                                           const Tribes& tribes) {
-	// NOCOM code duplication with ActRecruit
 	if (arguments.empty()) {
 		throw GameDataError("Usage: produce=<ware name>[:<amount>] [<ware name>[:<amount>]...]");
 	}
-
-	for (const std::string& argument : arguments) {
-		const std::pair<std::string, std::string> produceme = parse_key_value_pair(argument, ':', "", true);
-
-		const DescriptionIndex index = tribes.safe_ware_index(produceme.first);
-		if (!descr.is_output_ware_type(index)) {
-			throw GameDataError("%s is not listed in the building's \"outputs\" table",
-								produceme.first.c_str());
-		}
-
-		Quantity amount = produceme.second.empty() ? 1 : read_positive(produceme.second);
-		produced_wares_.push_back(std::make_pair(index, amount));
-	}
+	produced_wares_ = parse_bill_of_materials(arguments, WareWorker::wwWARE, descr, tribes);
 }
 
 void ProductionProgram::ActProduce::execute(Game& game, ProductionSite& ps) const {
@@ -949,19 +970,7 @@ ProductionProgram::ActRecruit::ActRecruit(const std::vector<std::string>& argume
 	if (arguments.empty()) {
 		throw GameDataError("Usage: recruit=<worker name>[:<amount>] [<worker name>[:<amount>]...]");
 	}
-
-	for (const std::string& argument : arguments) {
-		const std::pair<std::string, std::string> produceme = parse_key_value_pair(argument, ':', "", true);
-
-		const DescriptionIndex index = tribes.safe_worker_index(produceme.first);
-		if (!descr.is_output_worker_type(index)) {
-			throw GameDataError("%s is not listed in the building's \"outputs\" table",
-								produceme.first.c_str());
-		}
-
-		Quantity amount = produceme.second.empty() ? 1 : read_positive(produceme.second);
-		produced_wares_.push_back(std::make_pair(index, amount));
-	}
+	recruited_workers_ = parse_bill_of_materials(arguments, WareWorker::wwWORKER, descr, tribes);
 }
 
 void ProductionProgram::ActRecruit::execute(Game& game, ProductionSite& ps) const {

@@ -104,6 +104,9 @@ struct ProductionProgram {
 	                                  const BillOfMaterials& input_wares,
 	                                  const BillOfMaterials& input_workers);
 
+	/// Parse a ware or worker list with optional amounts and ensure that the building's outputs match
+	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments, WareWorker ww, const ProductionSiteDescr& descr, const Tribes& tribes);
+
 	/// Returns from the program.
 	///
 	/// Parameter syntax:
