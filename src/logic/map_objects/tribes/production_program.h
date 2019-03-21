@@ -310,7 +310,7 @@ struct ProductionProgram {
 	///
 	/// Blocks the execution of the program for the specified duration.
 	struct ActSleep : public Action {
-		explicit ActSleep(char* parameters);
+		explicit ActSleep(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -328,7 +328,7 @@ struct ProductionProgram {
 	///
 	/// Ends the program if the feature is not enabled.
 	struct ActCheckMap : public Action {
-		explicit ActCheckMap(char* parameters);
+		explicit ActCheckMap(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
@@ -424,7 +424,7 @@ struct ProductionProgram {
 	/// produced wares are of the type specified in the group. How the produced
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
-		ActProduce(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
+		ActProduce(const std::vector<std::string>& arguments, const ProductionSiteDescr&, const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
@@ -445,13 +445,13 @@ struct ProductionProgram {
 	/// The recruited workers are of the type specified in the group. How the
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
-		ActRecruit(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
+		ActRecruit(const std::vector<std::string>& arguments, const ProductionSiteDescr&, const Tribes& tribes);
 		void execute(Game&, ProductionSite&) const override;
 		bool get_building_work(Game&, ProductionSite&, Worker&) const override;
 	};
 
 	struct ActMine : public Action {
-		ActMine(char* parameters,
+		ActMine(const std::vector<std::string>& arguments,
 		        const World&,
 		        const std::string& production_program_name,
 		        ProductionSiteDescr*);
@@ -466,22 +466,22 @@ struct ProductionProgram {
 	};
 
 	struct ActCheckSoldier : public Action {
-		explicit ActCheckSoldier(char* parameters);
+		explicit ActCheckSoldier(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		TrainingAttribute attribute;
-		uint8_t level;
+		TrainingAttribute attribute_;
+		uint8_t level_;
 	};
 
 	struct ActTrain : public Action {
-		explicit ActTrain(char* parameters);
+		explicit ActTrain(const std::vector<std::string>& arguments);
 		void execute(Game&, ProductionSite&) const override;
 
 	private:
-		TrainingAttribute attribute;
-		uint8_t level;
-		uint8_t target_level;
+		TrainingAttribute attribute_;
+		uint8_t level_;
+		uint8_t target_level_;
 	};
 
 	/// Plays a sound effect.
@@ -519,7 +519,7 @@ struct ProductionProgram {
 	///    radius
 	///       Activity radius
 	struct ActConstruct : public Action {
-		ActConstruct(char* parameters,
+		ActConstruct(const std::vector<std::string>& arguments,
 		             const std::string& production_program_name,
 		             ProductionSiteDescr*);
 		void execute(Game&, ProductionSite&) const override;

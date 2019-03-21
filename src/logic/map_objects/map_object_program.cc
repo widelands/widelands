@@ -55,16 +55,17 @@ std::vector<std::string> split_string(const std::string& s, const char* const se
 	return result;
 }
 
-unsigned int read_positive(std::string input, unsigned int max_value) {
+
+unsigned int read_number(const std::string& input, int min_value, int max_value) {
 	unsigned int  result = 0U;
 	char* endp;
-	long long int const value = strtoll(input.c_str(), &endp, 0);
+	long int const value = strtol(input.c_str(), &endp, 0);
 	result = value;
 	if (*endp || result != value) {
 		throw GameDataError("Expected a number but found \"%s\"", input.c_str());
 	}
-	if (value <= 0) {
-		throw GameDataError("Expected a number > 0 but found \"%s\"", input.c_str());
+	if (value < min_value) {
+		throw GameDataError("Expected a number >= %d but found \"%s\"", min_value, input.c_str());
 	}
 	if (value > max_value) {
 		throw GameDataError("Expected a number <= %d but found \"%s\"", max_value, input.c_str());
@@ -72,11 +73,16 @@ unsigned int read_positive(std::string input, unsigned int max_value) {
 	return result;
 }
 
+unsigned int read_positive(const std::string& input, int max_value) {
+	return read_number(input, 1, max_value);
+}
+
 ProgramParseInput parse_program_string(const std::string& line) {
 	const std::pair<std::string, std::string> key_values = parse_key_value_pair(line, '=', "", true);
 	return ProgramParseInput{key_values.first, split_string(key_values.second, " \t\n")};
 }
 
+// NOCOM add option for default value
 const std::pair<std::string, std::string> parse_key_value_pair(const std::string& input, const char separator, const std::string& expected_key, bool allow_empty) {
 	const size_t idx = input.find(separator);
 

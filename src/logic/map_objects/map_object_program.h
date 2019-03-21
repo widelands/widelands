@@ -41,7 +41,8 @@ char* next_word(char*& p, bool& reached_end, char terminator = ' ');
 /// lines.
 std::vector<std::string> split_string(const std::string&, char const* separators);
 
-unsigned int read_positive(std::string input, unsigned int max_value = std::numeric_limits<uint32_t>::max());
+unsigned int read_number(const std::string& input, int min_value, int max_value = std::numeric_limits<int32_t>::max());
+unsigned int read_positive(const std::string& input, int max_value = std::numeric_limits<int32_t>::max());
 
 const std::pair<std::string, std::string> parse_key_value_pair(const std::string& input, const char separator, const std::string& expected_key = "", bool allow_empty = false);
 
