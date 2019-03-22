@@ -31,7 +31,7 @@ namespace Widelands {
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const std::vector<std::string>& lines,
-                                   ImmovableDescr* immovable)
+                                   const ImmovableDescr& immovable)
    : name_(init_name) {
 	for (const std::string& line : lines) {
 		try {
@@ -41,19 +41,19 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 
 			Action* action;
 			if (parseinput.name == "animate") {
-				action = new ActAnimate(parseinput.arguments, *immovable);
+				action = new ActAnimate(parseinput.arguments, immovable);
 			} else if (parseinput.name == "transform") {
-				action = new ActTransform(parseinput.arguments, *immovable);
+				action = new ActTransform(parseinput.arguments, immovable);
 			} else if (parseinput.name == "grow") {
-				action = new ActGrow(parseinput.arguments, *immovable);
+				action = new ActGrow(parseinput.arguments, immovable);
 			} else if (parseinput.name == "remove") {
-				action = new ActRemove(parseinput.arguments, *immovable);
+				action = new ActRemove(parseinput.arguments, immovable);
 			} else if (parseinput.name == "seed") {
-				action = new ActSeed(parseinput.arguments, *immovable);
+				action = new ActSeed(parseinput.arguments, immovable);
 			} else if (parseinput.name == "playsound") {
-				action = new ActPlaySound(parseinput.arguments, *immovable);
+				action = new ActPlaySound(parseinput.arguments, immovable);
 			} else if (parseinput.name == "construct") {
-				action = new ActConstruct(parseinput.arguments, *immovable);
+				action = new ActConstruct(parseinput.arguments, immovable);
 			} else {
 				throw GameDataError("unknown command type \"%s\"", parseinput.name.c_str());
 			}
@@ -69,7 +69,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 ImmovableProgram::Action::~Action() {
 }
 
-ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments, ImmovableDescr& descr) {
+ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr& descr) {
 	parameters = parse_act_animate(arguments, descr, true);
 }
 
@@ -93,7 +93,7 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 	immovable.program_step(game);
 }
 
-ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments, ImmovableDescr& descr) {
+ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
 	try {
 		tribe = true;
 		bob = false;
@@ -153,7 +153,7 @@ void ImmovableProgram::ActTransform::execute(Game& game, Immovable& immovable) c
 		immovable.program_step(game);
 }
 
-ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, ImmovableDescr& descr) {
+ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: grow=<immovable name>");
 	}
@@ -186,7 +186,7 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 /**
  * remove
  */
-ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments, ImmovableDescr&) {
+ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments, const ImmovableDescr&) {
 	if (arguments.size() > 1) {
 		throw GameDataError("Usage: remove=[probability]");
 	}
@@ -200,7 +200,7 @@ void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) cons
 		immovable.program_step(game);
 }
 
-ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments, ImmovableDescr& descr) {
+ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
 	// NOCOM code duplication with ActGrow
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: seed=<immovable name>");
@@ -247,7 +247,7 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 	immovable.program_step(game);
 }
 
-ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments, ImmovableDescr& descr) {
+ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
 	// NOCOM signature: construct=idle 5000 210000
 	if (arguments.size() != 3) {
 		throw GameDataError("Usage: construct=<animation> <build duration> <decay duration>");

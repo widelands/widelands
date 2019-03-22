@@ -60,7 +60,7 @@ struct ImmovableProgram {
 	/// will not be stopped by this command. It will run until another animation
 	/// is started.)
 	struct ActAnimate : public Action {
-		ActAnimate(const std::vector<std::string>& arguments, ImmovableDescr&);
+		ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 	private:
 		AnimationParameters parameters;
@@ -83,7 +83,7 @@ struct ImmovableProgram {
 	///    name:
 	///       name of the replacement object
 	struct ActTransform : public Action {
-		ActTransform(std::vector<std::string>& arguments, ImmovableDescr&);
+		ActTransform(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -95,7 +95,7 @@ struct ImmovableProgram {
 
 	/// Like ActTransform but the probability is determined by the suitability.
 	struct ActGrow : public Action {
-		ActGrow(std::vector<std::string>& arguments, ImmovableDescr&);
+		ActGrow(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -104,7 +104,7 @@ struct ImmovableProgram {
 	};
 
 	struct ActRemove : public Action {
-		ActRemove(std::vector<std::string>& arguments, ImmovableDescr&);
+		ActRemove(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -112,7 +112,7 @@ struct ImmovableProgram {
 	};
 
 	struct ActSeed : public Action {
-		ActSeed(std::vector<std::string>& arguments, ImmovableDescr&);
+		ActSeed(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -156,7 +156,7 @@ struct ImmovableProgram {
 	 *       Time until construction decays one step if no progress has been made.
 	 */
 	struct ActConstruct : public Action {
-		ActConstruct(std::vector<std::string>& arguments, ImmovableDescr&);
+		ActConstruct(std::vector<std::string>& arguments, const ImmovableDescr&);
 		void execute(Game&, Immovable&) const override;
 
 		Duration buildtime() const {
@@ -180,7 +180,7 @@ struct ImmovableProgram {
 	// Create an immovable program from a number of lines.
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
-	                 ImmovableDescr* immovable);
+	                 const ImmovableDescr& immovable);
 
 	~ImmovableProgram() {
 		for (Action* action : actions_) {
