@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-11 09:31+0000\n"
-"PO-Revision-Date: 2019-02-13 19:10+0000\n"
+"POT-Creation-Date: 2019-03-18 09:59+0000\n"
+"PO-Revision-Date: 2019-03-22 11:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -91,7 +91,7 @@ msgstr "Drück de lege Tast, um 't umtoschalten, oder"
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:45
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:55
 msgid "click the ‘Show building spaces’ button on the bottom of the screen."
-msgstr "klick de »Wies Rüümte tum Bauen«-Knoop am unnern Rand vum Bildschirm an."
+msgstr "klick de »Wies Rüümte tum Bauen«-Knoop am unnern Rand vum Billschirm an."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:46
 msgid "Left-click the ‘OK’ button to close this box and then try it."
@@ -238,7 +238,7 @@ msgid ""
 "If you want things to go faster, simply use the Page Up key on your keyboard"
 " to increase the game speed. You can use Page Down to make the game slower "
 "again."
-msgstr "Wenn du willt, dat alls fixer gaht, drück de »Bild rup«-Taste, um de Gauheid vum Speel antohogen. Du kannst »Bild runner« drücken, um dat Speel weer sachter to maken."
+msgstr "Wenn du willt, dat alls fixer gaht, drück de »Bill rup«-Taste, um de Gauheid vum Speel antohogen. Du kannst »Bill runner« drücken, um dat Speel weer sachter to maken."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:143
 msgid "Waiting for the Hut to be Finished"
@@ -382,7 +382,7 @@ msgstr "Hunnert. Un nu de Lütte Kaart. Du kannst se openkriegen, indeem du de"
 msgid ""
 "minimap button at the bottom of the screen or simply by using the keyboard "
 "shortcut ‘m’."
-msgstr "»Lütt Kaart«-Knoop am unnern Rand vum Bildschirm drückst oder de Handigtaste »M« bruukst."
+msgstr "»Lütt Kaart«-Knoop am unnern Rand vum Billschirm drückst oder de Handigtaste »M« bruukst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:214
 msgid ""
@@ -405,7 +405,7 @@ msgstr "Lehr de Lütte Kaart to bruken"
 msgid ""
 "Open the minimap by using the third button from the left on the bottom of "
 "your screen or the ‘m’ key."
-msgstr "Maak de Lütt Kaart open, indeem du de darden Knoop vun links an de unnern Rand vum Bildschirm oder de Taste »M« drückst."
+msgstr "Maak de Lütt Kaart open, indeem du de darden Knoop vun links an de unnern Rand vum Billschirm oder de Taste »M« drückst."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:222
 msgid "Play around a bit with the different overlays (roads, flags, etc.)"
@@ -745,7 +745,7 @@ msgid ""
 " bottom of the screen. This button will also change appearance whenever new "
 "messages are available, but there is also a bell sound played whenever you "
 "receive a new message."
-msgstr "De Narichtenfenster kann mit de tweeden Knoop vun rechts an de unnern Rand vum Bildschirm open oder to maakt worden. Deeser Knoop sücht anners ut, wenn du neje Narichten hest. Wenn du eene neje Naricht kriggst, höörst du ok eenen Klockslag."
+msgstr "De Narichtenfenster kann mit de tweeden Knoop vun rechts an de unnern Rand vum Billschirm open oder to maakt worden. Deeser Knoop sücht anners ut, wenn du neje Narichten hest. Wenn du eene neje Naricht kriggst, höörst du ok eenen Klockslag."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:378
 msgid ""
@@ -803,7 +803,7 @@ msgid ""
 "button from the right at the very bottom of the screen. The newest message "
 "will be marked for you automatically. Keep clicking the ‘Archive selected "
 "message’ button until all messages have been archived and the list is empty."
-msgstr "Daarto maakst du dat Narichtenfenster up, indeem du »N« oder de tweeden Knoop vun rechts an de unnern Rand vum Bildschirm drückst. De neeiste Naricht word automatisk utköört. Klick solang de »Deese Naricht wegdoon«-Knoop an, bit alle Narichten wegdaan sünd un de Liste leeg is."
+msgstr "Daarto maakst du dat Narichtenfenster up, indeem du »N« oder de tweeden Knoop vun rechts an de unnern Rand vum Billschirm drückst. De neeiste Naricht word automatisk utköört. Klick solang de »Deese Naricht wegdoon«-Knoop an, bit alle Narichten wegdaan sünd un de Liste leeg is."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:398
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:417
@@ -836,7 +836,7 @@ msgid ""
 "All windows in Widelands can be closed by right-clicking into them. Some "
 "windows can also be toggled with the buttons at the very bottom of the "
 "screen."
-msgstr "Du kannst all Fensters in Widelands sluten, indeem du se mit de rechte Muustaste anklickst. Eenige Fensters kannst du ok mit de Knopen an de unnern Rand vum Bildschirm an- un utknipsen."
+msgstr "Du kannst all Fensters in Widelands sluten, indeem du se mit de rechte Muustaste anklickst. Eenige Fensters kannst du ok mit de Knopen an de unnern Rand vum Billschirm an- un utknipsen."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:410
 msgid "Close the messages window now by right-clicking into it."
@@ -860,7 +860,7 @@ msgid ""
 "has changed appearance? You can destroy the quarries now as they are no "
 "longer of any use and just blocking space. To do so, there are two "
 "possibilities:"
-msgstr "Du hest een paar Narichten kregen. Hest du spitzkregen, wo sük de Knoop an de unnern Rand vum Bildschirm verännert hett? Du kannst de Flintslagerhusen nu ofrieten, denn se sünd nu unnütz un Stah-in-de-Wegen. 't gifft twee Aarden, dat to doon:"
+msgstr "Du hest een paar Narichten kregen. Hest du spitzkregen, wo sük de Knoop an de unnern Rand vum Billschirm verännert hett? Du kannst de Flintslagerhusen nu ofrieten, denn se sünd nu unnütz un Stah-in-de-Wegen. 't gifft twee Aarden, dat to doon:"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:430
 msgid ""
@@ -1021,7 +1021,7 @@ msgstr "Um dat Speel to verlaten un tum Höövdmenü torüggtogahn, klick de"
 msgid ""
 "‘Main Menu’ button on the very left at the bottom of the screen. Then click "
 "the"
-msgstr "»Höövdmenü«-Knoop ganz links an de unnern Rand vum Bildschirm an. Klick dann de"
+msgstr "»Höövdmenü«-Knoop ganz links an de unnern Rand vum Billschirm an. Klick dann de"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:483
 msgid "‘Exit Game’ button."
