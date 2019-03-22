@@ -25,10 +25,6 @@
 
 #include "base/macros.h"
 
-/*
- * Implementation is in immovable.cc
- */
-
 #include "logic/map_objects/buildcost.h"
 #include "logic/map_objects/immovable.h"
 #include "logic/map_objects/map_object_program.h"
@@ -220,9 +216,17 @@ struct ImmovableActionData {
 	}
 
 	virtual const char* name() const = 0;
-	virtual void save(FileWrite& fw, Immovable& imm) = 0;
+	virtual void save(FileWrite& fw, Immovable& imm) const = 0;
 
 	static ImmovableActionData* load(FileRead& fr, Immovable& imm, const std::string& name);
+};
+
+struct ActConstructData : ImmovableActionData {
+	const char* name() const override;
+	void save(FileWrite& fw, Immovable& imm) const override;
+	static ActConstructData* load(FileRead& fr, Immovable& imm);
+
+	Buildcost delivered;
 };
 }  // namespace Widelands
 

@@ -189,6 +189,7 @@ wl_library(logic
     map_objects/draw_text.h
     map_objects/immovable.cc
     map_objects/immovable.h
+    map_objects/immovable_program.cc
     map_objects/immovable_program.h
     map_objects/map_object.cc
     map_objects/map_object.h
