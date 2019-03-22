@@ -19,6 +19,8 @@
 
 #include "logic/map_objects/immovable_program.h"
 
+#include <memory>
+
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/terrain_affinity.h"
@@ -29,6 +31,10 @@
 
 namespace Widelands {
 
+ImmovableProgram::ImmovableProgram(const std::string& init_name, std::unique_ptr<Action> action) : name_(init_name) {
+	actions_.push_back(std::move(action));
+}
+
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const std::vector<std::string>& lines,
                                    const ImmovableDescr& immovable)
@@ -37,29 +43,25 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 		try {
 			ProgramParseInput parseinput = parse_program_string(line);
 
-			// NOCOM they all have the same signature. Template?
-
-			Action* action;
 			if (parseinput.name == "animate") {
-				action = new ActAnimate(parseinput.arguments, immovable);
+				actions_.push_back(std::unique_ptr<Action>(new ActAnimate(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "transform") {
-				action = new ActTransform(parseinput.arguments, immovable);
+				actions_.push_back(std::unique_ptr<Action>(new ActTransform(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "grow") {
-				action = new ActGrow(parseinput.arguments, immovable);
+				actions_.push_back(std::unique_ptr<Action>(new ActGrow(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "remove") {
-				action = new ActRemove(parseinput.arguments, immovable);
+				actions_.push_back(std::unique_ptr<Action>(new ActRemove(parseinput.arguments)));
 			} else if (parseinput.name == "seed") {
-				action = new ActSeed(parseinput.arguments, immovable);
+				actions_.push_back(std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "playsound") {
-				action = new ActPlaySound(parseinput.arguments, immovable);
+				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "construct") {
-				action = new ActConstruct(parseinput.arguments, immovable);
+				actions_.push_back(std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
 			} else {
-				throw GameDataError("unknown command type \"%s\"", parseinput.name.c_str());
+				throw GameDataError("unknown command type '%s'", parseinput.name.c_str());
 			}
-			actions_.push_back(action);
 		} catch (const GameDataError& e) {
-			throw GameDataError("Error parsing line\"%s\": %s", line.c_str(), e.what());
+			throw GameDataError("Error parsing line '%s': %s", line.c_str(), e.what());
 		}
 	}
 	if (actions_.empty())
@@ -108,7 +110,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 				probability = read_positive(arguments[i], 254);
 			} else {
 				std::vector<std::string> segments = split_string(arguments[i], ":");
-
+				// NOCOM clean this up. world is not used, only "tribe". We might want to ditch that too.
 				if (segments.size() > 2)
 					throw GameDataError("object type has more than 2 segments");
 				if (segments.size() == 2) {
@@ -186,7 +188,7 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
 /**
  * remove
  */
-ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments, const ImmovableDescr&) {
+ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments) {
 	if (arguments.size() > 1) {
 		throw GameDataError("Usage: remove=[probability]");
 	}
@@ -255,7 +257,7 @@ ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments
 	try {
 		const std::string animation_name = arguments[0];
 		if (!descr.is_animation_known(animation_name)) {
-			throw GameDataError("Unknown animation \"%s\" in immovable program for immovable \"%s\"",
+			throw GameDataError("Unknown animation '%s' in immovable program for immovable '%s'",
 			                    animation_name.c_str(), descr.name().c_str());
 		}
 		animid_ = descr.get_animation(animation_name);

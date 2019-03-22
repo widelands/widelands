@@ -231,7 +231,7 @@ void ImmovableDescr::make_sure_default_program_is_there() {
 		assert(is_animation_known("idle"));
 		std::vector<std::string> arguments{"idle"};
 		programs_["program"] =
-		   new ImmovableProgram("program", new ImmovableProgram::ActAnimate(arguments, *this));
+		   new ImmovableProgram("program", std::unique_ptr<ImmovableProgram::Action>(new ImmovableProgram::ActAnimate(arguments, *this)));
 	}
 }
 

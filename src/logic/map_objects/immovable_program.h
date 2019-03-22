@@ -21,6 +21,7 @@
 #define WL_LOGIC_MAP_OBJECTS_IMMOVABLE_PROGRAM_H
 
 #include <cstring>
+#include <memory>
 #include <string>
 
 #include "base/macros.h"
@@ -104,7 +105,7 @@ struct ImmovableProgram {
 	};
 
 	struct ActRemove : public Action {
-		ActRemove(std::vector<std::string>& arguments, const ImmovableDescr&);
+		ActRemove(std::vector<std::string>& arguments);
 		void execute(Game&, Immovable&) const override;
 
 	private:
@@ -173,19 +174,14 @@ struct ImmovableProgram {
 	};
 
 	/// Create a program with a single action.
-	ImmovableProgram(char const* const init_name, Action* const action) : name_(init_name) {
-		actions_.push_back(action);
-	}
+	ImmovableProgram(const std::string& init_name, std::unique_ptr<Action> action);
 
-	// Create an immovable program from a number of lines.
+	/// Create an immovable program from a number of lines.
 	ImmovableProgram(const std::string& init_name,
 	                 const std::vector<std::string>& lines,
 	                 const ImmovableDescr& immovable);
 
 	~ImmovableProgram() {
-		for (Action* action : actions_) {
-			delete action;
-		}
 	}
 
 	const std::string& name() const {
@@ -199,14 +195,9 @@ struct ImmovableProgram {
 		return *actions_[idx];
 	}
 
-	using Actions = std::vector<Action*>;
-	const Actions& actions() const {
-		return actions_;
-	}
-
 private:
 	std::string name_;
-	Actions actions_;
+	std::vector<std::unique_ptr<Action>> actions_;
 };
 
 struct ImmovableActionData {
