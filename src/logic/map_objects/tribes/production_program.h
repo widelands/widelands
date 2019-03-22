@@ -96,17 +96,10 @@ struct ProductionProgram {
 		DISALLOW_COPY_AND_ASSIGN(Action);
 	};
 
-	/// Parse a group of ware types followed by an optional count and terminated
-	/// by a space or null. Example: "fish,meat:2".
-	static void parse_ware_type_group(char*& parameters,
-	                                  WareTypeGroup& group,
-	                                  const Tribes& tribes,
-	                                  const BillOfMaterials& input_wares,
-	                                  const BillOfMaterials& input_workers);
+	/// Parse a group of ware types followed by an optional count within a vector range. Example: "fish,meat:2".
+	static Groups parse_ware_type_groups(std::vector<std::string>::const_iterator begin, std::vector<std::string>::const_iterator end, const ProductionSiteDescr& descr, const Tribes& tribes);
 
-	static Groups parse_ware_type_group(const std::vector<std::string>& arguments, const ProductionSiteDescr& descr, const Tribes& tribes);
-
-	/// Parse a ware or worker list with optional amounts and ensure that the building's outputs match
+	/// Parse a ware or worker list with optional amounts and ensure that the building's outputs match. Example: "fish:2".
 	static BillOfMaterials parse_bill_of_materials(const std::vector<std::string>& arguments, WareWorker ww, const ProductionSiteDescr& descr, const Tribes& tribes);
 
 	/// Returns from the program.
@@ -160,7 +153,7 @@ struct ProductionProgram {
 	/// Note: If the execution reaches the end of the program. the return value
 	/// is implicitly set to Completed.
 	struct ActReturn : public Action {
-		ActReturn(char* parameters, const ProductionSiteDescr&, const Tribes& tribes);
+		ActReturn(const std::vector<std::string>& arguments, const ProductionSiteDescr&, const Tribes& tribes);
 		~ActReturn() override;
 		void execute(Game&, ProductionSite&) const override;
 
@@ -171,11 +164,10 @@ struct ProductionProgram {
 			virtual std::string description_negation(const Tribes&) const = 0;
 		};
 		static Condition*
-		create_condition(char*& parameters, const ProductionSiteDescr&, const Tribes& tribes);
+		create_condition(std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr&, const Tribes& tribes);
+
 		struct Negation : public Condition {
-			Negation(char*& parameters, const ProductionSiteDescr& descr, const Tribes& tribes)
-			   : operand(create_condition(parameters, descr, tribes)) {
-			}
+			Negation(std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr& descr, const Tribes& tribes);
 			~Negation() override;
 			bool evaluate(const ProductionSite&) const override;
 			// Just a dummy to satisfy the superclass interface. Do not use.
@@ -215,7 +207,7 @@ struct ProductionProgram {
 		/// wares, combining from any of the types specified, in its input
 		/// queues.
 		struct SiteHas : public Condition {
-			SiteHas(char*& parameters, const ProductionSiteDescr&, const Tribes& tribes);
+			SiteHas(std::vector<std::string>::const_iterator begin, std::vector<std::string>::const_iterator end, const ProductionSiteDescr& descr, const Tribes& tribes);
 			bool evaluate(const ProductionSite&) const override;
 			std::string description(const Tribes& tribes) const override;
 			std::string description_negation(const Tribes& tribes) const override;
