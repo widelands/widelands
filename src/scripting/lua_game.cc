@@ -173,17 +173,7 @@ int LuaPlayer::get_objectives(lua_State* L) {
       (RO) :const:`true` if this player was defeated, :const:`false` otherwise
 */
 int LuaPlayer::get_defeated(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
-	bool is_defeated = true;
-
-	for (const auto& economy : p.economies()) {
-		if (!economy.second->warehouses().empty()) {
-			is_defeated = false;
-			break;
-		}
-	}
-
-	lua_pushboolean(L, is_defeated);
+	lua_pushboolean(L, get(L, get_egbase(L)).is_defeated());
 	return 1;
 }
 
