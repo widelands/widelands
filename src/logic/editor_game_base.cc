@@ -672,7 +672,6 @@ void EditorGameBase::do_conquer_area(PlayerArea<Area<FCoords>> player_area,
 	assert(0 < player_area.player_number);
 	assert(player_area.player_number <= map().get_nrplayers());
 	assert(preferred_player <= map().get_nrplayers());
-	assert(preferred_player != player_area.player_number);
 	assert(!conquer || !preferred_player);
 	Player* conquering_player = get_player(player_area.player_number);
 	MapRegion<Area<FCoords>> mr(map(), player_area);

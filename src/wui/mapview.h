@@ -75,6 +75,10 @@ public:
 		View() : View(Vector2f::zero(), 1.0f) {
 		}
 
+		bool operator==(const View& other) const {
+			return (zoom == other.zoom) && (viewpoint == other.viewpoint);
+		}
+
 		// Mappixel of top-left pixel of this MapView.
 		Vector2f viewpoint;
 

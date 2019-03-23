@@ -338,6 +338,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	if (error == GenericSaveHandler::Error::kSuccess ||
 	    error == GenericSaveHandler::Error::kDeletingBackupFailed) {
 		egbase.get_ibase()->log_message(_("Map saved"));
+		eia().set_need_save(false);
 		return true;
 	}
 
