@@ -22,19 +22,12 @@ tribes:new_productionsite_type {
       cloth = 1
    },
 
+   -- TODO(Nordfriese): Make animations
    animations = {
       idle = {
          pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 50, 63 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 50, 63 },
-      },
-      unoccupied = {
-         pictures = path.list_files(dirname .. "unoccupied_??.png"),
-         hotspot = { 50, 63 },
-      },
+      }
    },
 
    aihints = {},

@@ -23,16 +23,9 @@ tribes:new_productionsite_type {
       spidercloth = 1
    },
 
+   -- TODO(Nordfriese): Make animations
    animations = {
       idle = {
-         pictures = path.list_files(dirname .. "idle_??.png"),
-         hotspot = { 53, 66 },
-      },
-      build = {
-         pictures = path.list_files(dirname .. "build_??.png"),
-         hotspot = { 53, 66 },
-      },
-      unoccupied = {
          pictures = path.list_files(dirname .. "idle_??.png"),
          hotspot = { 53, 66 },
       }
