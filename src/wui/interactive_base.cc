@@ -714,7 +714,7 @@ void InteractiveBase::finish_build_waterway() {
 
 	const size_t length = buildwaterway_->get_nsteps();
 	if (length > egbase().map().get_waterway_max_length()) {
-		log("Refusing to finish waterway building: length is %i but limit is %i\n",
+		log("Refusing to finish waterway building: length is %" PRIuS " but limit is %d\n",
 					length, egbase().map().get_waterway_max_length());
 	}
 	else if (length) {

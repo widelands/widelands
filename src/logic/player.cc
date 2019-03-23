@@ -530,8 +530,8 @@ Waterway* Player::build_waterway(const Path& path) {
 	const Map& map = egbase().map();
 
 	if (path.get_nsteps() > map.get_waterway_max_length()) {
-		log("%i: Refused to build a waterway because it is too long. Permitted length %i, actual length %i.",
-				player_number(), map.get_waterway_max_length(), path.get_nsteps());
+		log("%d: Refused to build a waterway because it is too long. Permitted length %d, actual length %" PRIuS ".",
+				static_cast<unsigned int>(player_number()), map.get_waterway_max_length(), path.get_nsteps());
 		return nullptr;
 	}
 
