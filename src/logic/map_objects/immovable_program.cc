@@ -101,7 +101,7 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
 	if (arguments.empty()) {
-		throw GameDataError("Usage: transform=[bob] <name>");
+		throw GameDataError("Usage: transform=[bob] <name> [<probability>]");
 	}
 	try {
 		bob = false;
@@ -113,7 +113,7 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 			} else if (arguments[i][0] >= '0' && arguments[i][0] <= '9') {
 				probability = read_positive(arguments[i], 254);
 			} else {
-				// NOCOM check if target exists
+				// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load order. Maybe in postload() one day.
 				type_name = arguments[i];
 			}
 		}
@@ -151,7 +151,7 @@ ImmovableProgram::ActGrow::ActGrow(std::vector<std::string>& arguments, const Im
 		   "Immovable %s can 'grow', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 
-	// NOCOM check if the target immovable exists
+	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load order. Maybe in postload() one day.
 	type_name = arguments.front();
 }
 
@@ -177,7 +177,7 @@ void ImmovableProgram::ActGrow::execute(Game& game, Immovable& immovable) const 
  */
 ImmovableProgram::ActRemove::ActRemove(std::vector<std::string>& arguments) {
 	if (arguments.size() > 1) {
-		throw GameDataError("Usage: remove=[probability]");
+		throw GameDataError("Usage: remove=[<probability>]");
 	}
 	probability = arguments.empty() ? 0 : read_positive(arguments.front(), 254);
 }
@@ -198,7 +198,7 @@ ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments, const Im
 		   "Immovable %s can 'seed', but has no terrain_affinity entry.", descr.name().c_str());
 	}
 
-	// NOCOM check if the target immovable exists
+	// TODO(GunChleoc): If would be nice to check if target exists, but we can't guarantee the load order. Maybe in postload() one day.
 	type_name = arguments.front();
 }
 
