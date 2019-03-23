@@ -55,31 +55,6 @@ tribes:new_tribe {
       },
    },
 
-   resource_indicators = {
-      [""] = {
-         [0] = "frisians_resi_none",
-      },
-      coal = {
-         [10] = "frisians_resi_coal_1",
-         [20] = "frisians_resi_coal_2",
-      },
-      iron = {
-         [10] = "frisians_resi_iron_1",
-         [20] = "frisians_resi_iron_2",
-      },
-      gold = {
-         [10] = "frisians_resi_gold_1",
-         [20] = "frisians_resi_gold_2",
-      },
-      stones = {
-         [10] = "frisians_resi_stones_1",
-         [20] = "frisians_resi_stones_2",
-      },
-      water = {
-         [100] = "frisians_resi_water",
-      },
-   },
-
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
    -- Each subtable is a column in the wares windows.

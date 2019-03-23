@@ -5,12 +5,10 @@ animations = {
    idle = {
       pictures = path.list_files (dirname .. "idle_??.png"),
       hotspot = {22, 21},
-      fps = 10,
-      scale = 4
    }
 }
-add_walking_animations (animations, "walk", dirname, "idle", {22, 21}, 10, 4)
-add_walking_animations (animations, "walkload", dirname, "idle", {22, 21}, 10, 4)
+add_walking_animations (animations, "walk", dirname, "idle", {22, 21})
+add_walking_animations (animations, "walkload", dirname, "idle", {22, 21})
 
 tribes:new_ferry_type {
    msgctxt = "atlanteans_worker",

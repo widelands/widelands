@@ -57,31 +57,6 @@ tribes:new_tribe {
       },
    },
 
-   resource_indicators = {
-      [""] = {
-         [0] = "empire_resi_none",
-      },
-      coal = {
-         [10] = "empire_resi_coal_1",
-         [20] = "empire_resi_coal_2",
-      },
-      iron = {
-         [10] = "empire_resi_iron_1",
-         [20] = "empire_resi_iron_2",
-      },
-      gold = {
-         [10] = "empire_resi_gold_1",
-         [20] = "empire_resi_gold_2",
-      },
-      stones = {
-         [10] = "empire_resi_stones_1",
-         [20] = "empire_resi_stones_2",
-      },
-      water = {
-         [100] = "empire_resi_water",
-      },
-   },
-
    -- Wares positions in wares windows.
    -- This also gives us the information which wares the tribe uses.
    -- Each subtable is a column in the wares windows.
