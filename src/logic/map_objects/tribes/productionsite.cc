@@ -93,6 +93,8 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
                                          const LuaTable& table,
                                          const EditorGameBase& egbase)
    : BuildingDescr(init_descname, init_type, table, egbase),
+	 ware_demand_checks_(new std::set<DescriptionIndex>()),
+	 worker_demand_checks_(new std::set<DescriptionIndex>()),
      out_of_resource_productivity_threshold_(100) {
 	if (msgctxt.empty()) {
 		throw Widelands::GameDataError(
@@ -247,6 +249,19 @@ Building& ProductionSiteDescr::create_object() const {
 	return *new ProductionSite(*this);
 }
 
+std::set<DescriptionIndex>* ProductionSiteDescr::ware_demand_checks() const {
+	return ware_demand_checks_.get();
+}
+std::set<DescriptionIndex>* ProductionSiteDescr::worker_demand_checks() const {
+	return worker_demand_checks_.get();
+}
+void ProductionSiteDescr::clear_demand_checks() {
+	ware_demand_checks_->clear();
+	ware_demand_checks_.reset(nullptr);
+	worker_demand_checks_->clear();
+	worker_demand_checks_.reset(nullptr);
+}
+
 /*
 ==============================
 
@@ -268,6 +283,9 @@ ProductionSite::ProductionSite(const ProductionSiteDescr& ps_descr)
      is_stopped_(false),
      default_anim_("idle") {
 	calc_statistics();
+	// Double-check that the economy demand checks have been processed during postload
+	assert(ps_descr.ware_demand_checks() == nullptr);
+	assert(ps_descr.worker_demand_checks() == nullptr);
 }
 
 ProductionSite::~ProductionSite() {

@@ -292,15 +292,6 @@ const TribeDescr* Tribes::get_tribe_descr(DescriptionIndex tribeindex) const {
 	return tribes_->get_mutable(tribeindex);
 }
 
-void Tribes::set_ware_type_has_demand_check(const DescriptionIndex& wareindex,
-                                            const std::string& tribename) const {
-	wares_->get_mutable(wareindex)->set_has_demand_check(tribename);
-}
-
-void Tribes::set_worker_type_has_demand_check(const DescriptionIndex& workerindex) const {
-	workers_->get_mutable(workerindex)->set_has_demand_check();
-}
-
 void Tribes::load_graphics() {
 	for (size_t tribeindex = 0; tribeindex < nrtribes(); ++tribeindex) {
 		TribeDescr* tribe = tribes_->get_mutable(tribeindex);
@@ -348,6 +339,11 @@ void Tribes::postload() {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);
 		tribe_descr->resize_ware_orders(number);
 
+		// Register which wares and workers have economy demand checks for each tribe
+		for (const DescriptionIndex building_index : tribe_descr->buildings()) {
+			postload_register_economy_demand_checks(*buildings_->get_mutable(building_index), *tribe_descr);
+		}
+
 		// Verify that the preciousness has been set for all of the tribe's wares
 		for (const DescriptionIndex wi : tribe_descr->wares()) {
 			if (tribe_descr->get_ware_descr(wi)->preciousness(tribe_descr->name()) == kInvalidWare) {
@@ -359,7 +355,33 @@ void Tribes::postload() {
 	}
 }
 
-// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
+/// Register wares and workers that have economy demand checks for a building
+void Tribes::postload_register_economy_demand_checks(BuildingDescr& building_descr, const TribeDescr& tribe_descr)
+{
+	if (upcast(ProductionSiteDescr, prodsite, &building_descr)) {
+		for (const DescriptionIndex ware_index : *prodsite->ware_demand_checks()) {
+			if (!tribe_descr.has_ware(ware_index)) {
+				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for ware '%s', but the tribe does not use this ware",
+									prodsite->name().c_str(),
+									tribe_descr.name().c_str(),
+									get_ware_descr(ware_index)->name().c_str());
+			}
+			wares_->get_mutable(ware_index)->set_has_demand_check(tribe_descr.name());
+		}
+		for (const DescriptionIndex worker_index : *prodsite->worker_demand_checks()) {
+			if (!tribe_descr.has_worker(worker_index)) {
+				throw GameDataError("Productionsite '%s' for tribe '%s' has an economy demand check for worker '%s', but the tribe does not use this worker",
+									prodsite->name().c_str(),
+									tribe_descr.name().c_str(),
+									get_worker_descr(worker_index)->name().c_str());
+			}
+			workers_->get_mutable(worker_index)->set_has_demand_check();
+		}
+		prodsite->clear_demand_checks();
+	}
+}
+
+/// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
 void Tribes::postload_calculate_trainingsites_proportions() {
 	for (DescriptionIndex i = 0; i < tribes_->size(); ++i) {
 		TribeDescr* tribe_descr = tribes_->get_mutable(i);

@@ -61,29 +61,17 @@ bool match_and_skip(std::vector<std::string>::const_iterator& it, const std::str
 	return result;
 }
 
-ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item, const Tribes& tribes) {
+ProductionProgram::ActReturn::Condition* create_economy_condition(const std::string& item, const ProductionSiteDescr& descr, const Tribes& tribes) {
 	DescriptionIndex index = tribes.ware_index(item);
 	if (tribes.ware_exists(index)) {
-		// NOCOM only add this if the tribe matches the building
-		for (int i = 0; i < static_cast<int>(tribes.nrtribes()); ++i) {
-			const TribeDescr& tribe_descr = *tribes.get_tribe_descr(i);
-			if (tribe_descr.has_ware(index)) {
-				tribes.set_ware_type_has_demand_check(index, tribe_descr.name());
-			}
-		}
+		descr.ware_demand_checks()->insert(index);
 		return new ProductionProgram::ActReturn::EconomyNeedsWare(index);
 	} else if (tribes.worker_exists(tribes.worker_index(item))) {
 		index = tribes.worker_index(item);
-		for (int i = 0; i < static_cast<int>(tribes.nrtribes()); ++i) {
-			const TribeDescr* tribe_descr = tribes.get_tribe_descr(i);
-			if (tribe_descr->has_worker(index)) {
-				tribes.set_worker_type_has_demand_check(index);
-			}
-		}
+		descr.worker_demand_checks()->insert(index);
 		return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
 	} else {
-		throw GameDataError(
-		   "ware or worker type but found '%s'", item.c_str());
+		throw GameDataError("ware or worker type but found '%s'", item.c_str());
 	}
 }
 
@@ -364,7 +352,7 @@ ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_co
 			if (!match_and_skip(begin, "needs")) {
 				throw GameDataError("'needs' after 'economy' but found '%s'", begin->c_str());
 			}
-			return create_economy_condition(*begin, tribes);
+			return create_economy_condition(*begin, descr, tribes);
 		} else if (match_and_skip(begin, "site")) {
 			if (!match_and_skip(begin, "has")) {
 				throw GameDataError("'has' after 'site' but found '%s'", begin->c_str());
