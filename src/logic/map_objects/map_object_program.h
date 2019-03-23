@@ -47,7 +47,7 @@ protected:
 	static unsigned int read_number(const std::string& input, int min_value, int max_value = std::numeric_limits<int32_t>::max());
 	static unsigned int read_positive(const std::string& input, int max_value = std::numeric_limits<int32_t>::max());
 
-	static const std::pair<std::string, std::string> read_key_value_pair(const std::string& input, const char separator, const std::string& expected_key = "", bool allow_empty = false);
+	static const std::pair<std::string, std::string> read_key_value_pair(const std::string& input, const char separator, const std::string& default_value = "", const std::string& expected_key = "");
 
 	struct ProgramParseInput {
 		std::string name;

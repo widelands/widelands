@@ -65,24 +65,24 @@ unsigned int MapObjectProgram::read_positive(const std::string& input, int max_v
 }
 
 MapObjectProgram::ProgramParseInput MapObjectProgram::parse_program_string(const std::string& line) {
-	const std::pair<std::string, std::string> key_values = MapObjectProgram::read_key_value_pair(line, '=', "", true);
+	const std::pair<std::string, std::string> key_values = MapObjectProgram::read_key_value_pair(line, '=');
 	return ProgramParseInput{key_values.first, split_string(key_values.second, " \t\n")};
 }
 
-// NOCOM add option for default value
-const std::pair<std::string, std::string> MapObjectProgram::read_key_value_pair(const std::string& input, const char separator, const std::string& expected_key, bool allow_empty) {
+const std::pair<std::string, std::string> MapObjectProgram::read_key_value_pair(const std::string& input, const char separator, const std::string& default_value, const std::string& expected_key) {
 	const size_t idx = input.find(separator);
-
-	if (!allow_empty && idx == input.npos) {
-		throw GameDataError("Empty value in '%s'\n", input.c_str());
-	}
-
 	const std::string key = input.substr(0, idx);
-	if (!expected_key.empty() && key != expected_key) {
-		throw GameDataError("Expected key '%s' but found '%s' in '%s'\n", expected_key.c_str(), key.c_str(), input.c_str());
+
+	if (!expected_key.empty()) {
+		if (idx == input.npos) {
+			throw GameDataError("Empty value in '%s' for separator '%c'\n", input.c_str(), separator);
+		}
+		if (key != expected_key) {
+			throw GameDataError("Expected key '%s' but found '%s' in '%s'\n", expected_key.c_str(), key.c_str(), input.c_str());
+		}
 	}
 
-	return std::make_pair(key, idx == input.npos ? "" : input.substr(idx + 1));
+	return std::make_pair(key, idx == input.npos ? default_value : input.substr(idx + 1));
 }
 
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {

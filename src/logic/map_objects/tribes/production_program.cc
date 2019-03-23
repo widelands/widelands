@@ -103,8 +103,8 @@ ProductionProgram::Groups ProductionProgram::parse_ware_type_groups(std::vector<
 	ProductionProgram::Groups result;
 
 	for (auto& it = begin; it != end; ++it) {
-		const std::pair<std::string, std::string> names_to_amount = read_key_value_pair(*it, ':', "", true);
-		uint8_t amount = names_to_amount.second.empty() ? 1 : read_positive(names_to_amount.second);
+		const std::pair<std::string, std::string> names_to_amount = read_key_value_pair(*it, ':', "1");
+		const uint8_t amount = read_positive(names_to_amount.second);
 		uint8_t max_amount = 0;
 		std::set<std::pair<DescriptionIndex, WareWorker>> ware_worker_names;
 		for (const std::string& item_name : split_string(names_to_amount.first, ",")) {
@@ -160,7 +160,7 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(const std::vector<std
 																  const Tribes& tribes) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
-		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "", true);
+		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "1");
 
 		const DescriptionIndex index = ww == WareWorker::wwWARE ?
 										   tribes.safe_ware_index(produceme.first) :
@@ -182,8 +182,7 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(const std::vector<std
 			NEVER_HERE();
 		}
 
-		Quantity amount = produceme.second.empty() ? 1 : read_positive(produceme.second);
-		result.push_back(std::make_pair(index, amount));
+		result.push_back(std::make_pair(index, read_positive(produceme.second)));
 	}
 	return result;
 }

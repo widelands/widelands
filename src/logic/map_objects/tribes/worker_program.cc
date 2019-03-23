@@ -393,7 +393,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	// Parse predicates
 	for (const std::string& argument : cmd) {
 		try {
-			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':', "", true);
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 
 			if (item.first == "radius") {
 				act->iparam1 = read_positive(item.second);
@@ -668,7 +668,7 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 			continue;
 		}
 
-		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "attrib").second;
+		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "", "attrib").second;
 
 		// This will throw a GameDataError if the attribute doesn't exist.
 		ImmovableDescr::get_attribute_id(attrib_name);
