@@ -65,7 +65,7 @@ protected:
 		std::string name;
 		uint8_t priority = 0;
 	};
-	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, const MapObjectDescr& descr, uint8_t default_priority);
+	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, uint8_t default_priority);
 
 private:
 	const std::string name_;

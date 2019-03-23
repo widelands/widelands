@@ -54,7 +54,7 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			} else if (parseinput.name == "seed") {
 				actions_.push_back(std::unique_ptr<Action>(new ActSeed(parseinput.arguments, immovable)));
 			} else if (parseinput.name == "playsound") {
-				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments, immovable)));
+				actions_.push_back(std::unique_ptr<Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
 			} else {
@@ -64,8 +64,9 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			throw GameDataError("Error parsing line '%s': %s", line.c_str(), e.what());
 		}
 	}
-	if (actions_.empty())
+	if (actions_.empty()) {
 		throw GameDataError("no actions");
+	}
 }
 
 ImmovableProgram::Action::~Action() {
@@ -83,8 +84,8 @@ void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) con
 	   game, parameters.duration ? 1 + game.logic_rand() % parameters.duration + game.logic_rand() % parameters.duration : 0);
 }
 
-ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr, 127);
+ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
+	parameters = MapObjectProgram::parse_act_play_sound(arguments, 127);
 }
 
 /** Demand from the g_sound_handler to play a certain sound effect.

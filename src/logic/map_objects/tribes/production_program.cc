@@ -1153,8 +1153,8 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 	return ps.program_step(game);
 }
 
-ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments, ProductionSiteDescr* descr) {
-	parameters = MapObjectProgram::parse_act_play_sound(arguments, *descr, 127);
+ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments) {
+	parameters = MapObjectProgram::parse_act_play_sound(arguments, 127);
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
@@ -1363,7 +1363,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				   std::unique_ptr<ProductionProgram::Action>(new ActTrain(parseinput.arguments)));
 			} else if (parseinput.name == "playsound") {
 				actions_.push_back(
-				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments, building)));
+				   std::unique_ptr<ProductionProgram::Action>(new ActPlaySound(parseinput.arguments)));
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<ProductionProgram::Action>(
 				   new ActConstruct(parseinput.arguments, name(), building)));

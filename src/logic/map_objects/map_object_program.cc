@@ -86,25 +86,18 @@ const std::pair<std::string, std::string> MapObjectProgram::read_key_value_pair(
 }
 
 MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
-	AnimationParameters result;
-	if (arguments.size() < 1) {
-		throw GameDataError("%s: Animation without name. Usage: animate=<name> <duration>",
-							descr.name().c_str());
+	if (arguments.size() < 1 || arguments.size() > 2) {
+		throw GameDataError("Usage: animate=<name> <duration>");
 	}
 
+	AnimationParameters result;
 	const std::string animation_name = arguments.at(0);
 
-	if (arguments.size() > 2) {
-		throw GameDataError("%s: Animation %s has too many parameters. Usage: animate=<name> <duration>",
-							descr.name().c_str(), animation_name.c_str());
-	}
 	if (!is_idle_allowed && animation_name == "idle") {
-		throw GameDataError("%s: 'idle' animation is default; calling is not allowed",
-							descr.name().c_str());
+		throw GameDataError("'idle' animation is default; calling is not allowed");
 	}
 	if (!descr.is_animation_known(animation_name)) {
-		throw GameDataError("%s: Unknown animation '%s'",
-							descr.name().c_str(), animation_name.c_str());
+		throw GameDataError("Unknown animation '%s'", animation_name.c_str());
 	}
 	result.animation = descr.get_animation(animation_name);
 
@@ -114,13 +107,11 @@ MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const 
 	return result;
 }
 
-MapObjectProgram::PlaySoundParameters MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments, const MapObjectDescr& descr, uint8_t default_priority) {
-	PlaySoundParameters result;
-
+MapObjectProgram::PlaySoundParameters MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments, uint8_t default_priority) {
 	if (arguments.size() < 2 || arguments.size() > 3) {
-		throw GameDataError("%s: Wrong number of parameters. Usage: playsound <sound_dir> <sound_name> [priority]", descr.name().c_str());
+		throw GameDataError("Usage: playsound <sound_dir> <sound_name> [priority]");
 	}
-
+	PlaySoundParameters result;
 	result.name = arguments.at(0)+ g_fs->file_separator() + arguments.at(1);
 
 	g_sound_handler.load_fx_if_needed(arguments.at(0), arguments.at(1), result.name);

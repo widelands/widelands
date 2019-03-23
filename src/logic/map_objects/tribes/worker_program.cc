@@ -843,7 +843,7 @@ playsound
 */
 void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd) {
 	//  50% chance to play, only one instance at a time
-	PlaySoundParameters parameters = MapObjectProgram::parse_act_play_sound(cmd, worker_, 64);
+	PlaySoundParameters parameters = MapObjectProgram::parse_act_play_sound(cmd, 64);
 
 	act->sparam1 = parameters.name;
 	act->iparam1 = parameters.priority;
