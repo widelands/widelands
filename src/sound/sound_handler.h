@@ -73,13 +73,13 @@
  *
  * Use register_fx() to record the file locations for each sound effect, to be loaded on first play.
  * Sound effects are kept in memory at all times once they have been loaded, to avoid delays from disk access.
- * Yo can use \ref remove_fx_set to deregister and unload sound effects from memory though.
+ * You can use \ref remove_fx_set to deregister and unload sound effects from memory though.
  * The file naming scheme is the same as for the songs, and if there are multiple files for an effect, they are picked at random too.
  * Sound effects are categorized into multiple SoundType categories, so that the user can control which type of sounds to hear.
  *
  * For map objects, the abovementioned sound effects are synchronized with a work program or a
- * building/immovable/worker animation. For more information about this look at class
- * AnimationManager and see the online Lua reference for details.
+ * building/immovable/worker animation. For more information about this, look at the
+ * Animation class and the online scripting reference.
  *
  *
  * \par Usage of callbacks

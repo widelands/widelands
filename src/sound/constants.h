@@ -41,7 +41,7 @@
 constexpr uint8_t kFxPriorityLowest = 1;
 /// 50% chance to play
 constexpr uint8_t kFxPriorityMedium = 64;
-/// Sounds with priority lower than this one are only allowed to place one instance at a time
+/// Sounds with priority lower than this one are only allowed to play one instance at a time
 constexpr uint8_t kFxPriorityAllowMultiple = 128;
 /// Sound will always play
 constexpr uint8_t kFxPriorityAlwaysPlay = 255;

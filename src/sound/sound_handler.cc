@@ -273,16 +273,15 @@ void SoundHandler::disable_backend() {
  *
  * \param type       The category of the FxSet to create
  * \param fx_path    The relative path and base filename from which filenames will be formed
- *                   (<datadir>/fx_path_XX.ogg). Also acts as unique string ID for the effect that will be used to identify it in \ref play_fx.
- *                   If an effect with the same 'type' and 'fx_path' already exists, we assume that it is already registered and skip it.
+ *                   (<datadir>/fx_path_XX.ogg). If an effect with the same 'type' and 'fx_path' already exists, we assume that it is already registered and skip it.
+ * \returns  An ID for the effect that can be used to identify it in \ref play_fx.
  */
 
 FxId SoundHandler::register_fx(SoundType type, const std::string& fx_path) {
 	if (SoundHandler::is_backend_disabled() || g_sh == nullptr) {
 		return kNoSoundEffect;
 	}
-	size_t result = g_sh->do_register_fx(type, fx_path);
-	return result;
+	return g_sh->do_register_fx(type, fx_path);
 }
 
 /// Non-static implementation of register_fx
@@ -305,7 +304,7 @@ FxId SoundHandler::do_register_fx(SoundType type, const std::string& fx_path) {
  */
 bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
                                uint8_t const priority) {
-	assert(!backend_is_disabled_ && is_sound_enabled(type));
+	assert(!SoundHandler::is_backend_disabled() && is_sound_enabled(type));
 	assert(priority >= kFxPriorityLowest);
 
 	if (fxs_[type].count(fx_id) == 0) {
@@ -316,7 +315,7 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
 	case SoundType::kAmbient:
 		break;
 	default:
-		// We always play Ui, chat and system sounds
+		// We always play UI, chat and system sounds
 		return true;
 	}
 
@@ -373,19 +372,18 @@ bool SoundHandler::play_or_not(SoundType type, const FxId fx_id,
 }
 
 /**
- * \param type The categorization of the sound effect to be played
- * \param fx_name  The identifying name of the sound effect, see \ref register_fx .
+ * \param type             The categorization of the sound effect to be played
+ * \param fx_id            The ID of the sound effect, see \ref register_fx
  * \param priority         How important is it that this FX actually gets
  *                         played? (see \ref FXset::priority_)
- * \param stereo_position  position in widelands' game window, see
- *                         \ref stereo_position
- * \param distance The distance to use set in the mix
+ * \param stereo_position  Position in widelands' game window
+ * \param distance         Distance in widelands' game window
  */
 void SoundHandler::play_fx(SoundType type, const FxId fx_id,
 						   uint8_t const priority,
                            int32_t const stereo_pos,
                            int distance) {
-	if (backend_is_disabled_ || !is_sound_enabled(type)) {
+	if (SoundHandler::is_backend_disabled() || !is_sound_enabled(type)) {
 		return;
 	}
 
@@ -393,7 +391,7 @@ void SoundHandler::play_fx(SoundType type, const FxId fx_id,
 	assert(stereo_pos <= kStereoRight);
 
 	if (fx_id == kNoSoundEffect) {
-		throw wexception("SoundHandler: Trying to play sound effect that was never registered. Maybe you registered it before instantiating g_soundhandler?\n");
+		throw wexception("SoundHandler: Trying to play sound effect that was never registered. Maybe you registered it before instantiating g_sh?\n");
 	}
 
 	if (fxs_[type].count(fx_id) == 0) {
@@ -458,7 +456,7 @@ void SoundHandler::register_songs(const std::string& dir, const std::string& bas
  * this function will block until the fadeout is complete
  */
 void SoundHandler::start_music(const std::string& songset_name) {
-	if (backend_is_disabled_ || !is_sound_enabled(SoundType::kMusic)) {
+	if (SoundHandler::is_backend_disabled() || !is_sound_enabled(SoundType::kMusic)) {
 		return;
 	}
 
@@ -484,7 +482,7 @@ void SoundHandler::start_music(const std::string& songset_name) {
  *                   milliseconds starting from now.
  */
 void SoundHandler::stop_music(int fadeout_ms) {
-	if (backend_is_disabled_) {
+	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
 
@@ -540,12 +538,12 @@ int32_t SoundHandler::get_volume(SoundType type) const {
  * Sets that we want to / don't want to hear the given 'type' of sounds. If the type is \ref SoundType::kMusic, start/stop the music as well.
  */
 void SoundHandler::set_enable_sound(SoundType type, bool const enable) {
-	assert(sound_options_.count(type) == 1);
-	SoundOptions& sound_options = sound_options_.at(type);
 	if (SoundHandler::is_backend_disabled()) {
 		return;
 	}
+	assert(sound_options_.count(type) == 1);
 
+	SoundOptions& sound_options = sound_options_.at(type);
 	sound_options.enabled = enable;
 
 	// Special treatment for music
