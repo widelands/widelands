@@ -40,6 +40,9 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const ImmovableDescr& immovable)
    : MapObjectProgram(init_name) {
 	for (const std::string& line : lines) {
+		if (line.empty()) {
+			throw GameDataError("Empty line");
+		}
 		try {
 			ProgramParseInput parseinput = parse_program_string(line);
 
@@ -58,14 +61,14 @@ ImmovableProgram::ImmovableProgram(const std::string& init_name,
 			} else if (parseinput.name == "construct") {
 				actions_.push_back(std::unique_ptr<Action>(new ActConstruct(parseinput.arguments, immovable)));
 			} else {
-				throw GameDataError("unknown command type '%s'", parseinput.name.c_str());
+				throw GameDataError("Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
 		} catch (const GameDataError& e) {
-			throw GameDataError("Error parsing line '%s': %s", line.c_str(), e.what());
+			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());
 		}
 	}
 	if (actions_.empty()) {
-		throw GameDataError("no actions");
+		throw GameDataError("No actions found");
 	}
 }
 
@@ -107,8 +110,6 @@ ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments
 		for (uint32_t i = 0; i < arguments.size(); ++i) {
 			if (arguments[i] == "bob") {
 				bob = true;
-			} else if (arguments[i] == "immovable") {
-				bob = false;
 			} else if (arguments[i][0] >= '0' && arguments[i][0] <= '9') {
 				probability = read_positive(arguments[i], 254);
 			} else {

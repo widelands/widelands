@@ -189,10 +189,11 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 	items_table = table.get_table("programs");
 	for (std::string program_name : items_table->keys<std::string>()) {
 		std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
+		if (programs_.count(program_name)) {
+			throw GameDataError("Program '%s' has already been declared for productionsite '%s'",
+								program_name.c_str(), name().c_str());
+		}
 		try {
-			if (programs_.count(program_name)) {
-				throw wexception("this program has already been declared");
-			}
 			std::unique_ptr<LuaTable> program_table = items_table->get_table(program_name);
 
 			// Allow use of both gettext and pgettext. This way, we can have a lower workload on
@@ -205,7 +206,7 @@ ProductionSiteDescr::ProductionSiteDescr(const std::string& init_descname,
 			programs_[program_name] = std::unique_ptr<ProductionProgram>(new ProductionProgram(
 			   program_name, program_descname, program_table->get_table("actions"), egbase, this));
 		} catch (const std::exception& e) {
-			throw wexception("program %s: %s", program_name.c_str(), e.what());
+			throw GameDataError("%s: Error in productionsite program %s: %s", name().c_str(), program_name.c_str(), e.what());
 		}
 	}
 

@@ -71,7 +71,7 @@ ProductionProgram::ActReturn::Condition* create_economy_condition(const std::str
 		descr.worker_demand_checks()->insert(index);
 		return new ProductionProgram::ActReturn::EconomyNeedsWorker(index);
 	} else {
-		throw GameDataError("ware or worker type but found '%s'", item.c_str());
+		throw GameDataError("Expected ware or worker type but found '%s'", item.c_str());
 	}
 }
 
@@ -105,7 +105,7 @@ ProductionProgram::Groups ProductionProgram::parse_ware_type_groups(std::vector<
 					// It is a worker
 					type = wwWORKER;
 				} else {
-					throw GameDataError("Unknown ware or worker type '%s'", item_name.c_str());
+					throw GameDataError("Expected ware or worker type but found '%s'", item_name.c_str());
 				}
 			}
 
@@ -251,7 +251,7 @@ ProductionProgram::ActReturn::SiteHas::SiteHas(std::vector<std::string>::const_i
 	try {
 		group = parse_ware_type_groups(begin, end, descr, tribes).front();
 	} catch (const GameDataError& e) {
-		throw GameDataError("site has <ware or worker>[,<ware or worker>[,...]][:<amount>]: %s", e.what());
+		throw GameDataError("Expected <ware or worker>[,<ware or worker>[,...]][:<amount>] after 'site has' but got %s", e.what());
 	}
 }
 bool ProductionProgram::ActReturn::SiteHas::evaluate(const ProductionSite& ps) const {
@@ -343,35 +343,35 @@ ProductionProgram::ActReturn::WorkersNeedExperience::description_negation(const 
 ProductionProgram::ActReturn::Condition* ProductionProgram::ActReturn::create_condition(
    std::vector<std::string>::const_iterator& begin, std::vector<std::string>::const_iterator& end, const ProductionSiteDescr& descr, const Tribes& tribes) {
 	if (begin == end) {
-		throw GameDataError("condition after '%s'", (begin - 1)->c_str());
+		throw GameDataError("Expected a condition after '%s'", (begin - 1)->c_str());
 	}
 	try {
 		if (match_and_skip(begin, "not")) {
 			return new ActReturn::Negation(begin, end, descr, tribes);
 		} else if (match_and_skip(begin, "economy")) {
 			if (!match_and_skip(begin, "needs")) {
-				throw GameDataError("'needs' after 'economy' but found '%s'", begin->c_str());
+				throw GameDataError("Expected 'needs' after 'economy' but found '%s'", begin->c_str());
 			}
 			return create_economy_condition(*begin, descr, tribes);
 		} else if (match_and_skip(begin, "site")) {
 			if (!match_and_skip(begin, "has")) {
-				throw GameDataError("'has' after 'site' but found '%s'", begin->c_str());
+				throw GameDataError("Expected 'has' after 'site' but found '%s'", begin->c_str());
 			}
 			return new ProductionProgram::ActReturn::SiteHas(begin, end, descr, tribes);
 		} else if (match_and_skip(begin, "workers")) {
 			if (!match_and_skip(begin, "need")) {
-				throw GameDataError("'need experience' after 'workers' but found '%s'", begin->c_str());
+				throw GameDataError("Expected 'need experience' after 'workers' but found '%s'", begin->c_str());
 			}
 			if (!match_and_skip(begin, "experience")) {
-				throw GameDataError("'experience' after 'workers need' but found '%s'", begin->c_str());
+				throw GameDataError("Expected 'experience' after 'workers need' but found '%s'", begin->c_str());
 			}
 			return new ProductionProgram::ActReturn::WorkersNeedExperience();
 		} else {
 			throw GameDataError(
-			   "not|economy|site|workers after '%s' but found '%s'", (begin - 1)->c_str(), begin->c_str());
+			   "Expected not|economy|site|workers after '%s' but found '%s'", (begin - 1)->c_str(), begin->c_str());
 		}
 	} catch (const WException& e) {
-		throw GameDataError("Invalid condition. Expected %s", e.what());
+		throw GameDataError("Invalid condition. %s", e.what());
 	}
 }
 
@@ -379,7 +379,7 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
                                         const ProductionSiteDescr& descr,
                                         const Tribes& tribes) {
 	if (arguments.empty()) {
-		throw GameDataError("Usage: return=failed|completed|skipped|no_stats [ when|unless <conditions>]");
+		throw GameDataError("Usage: return=failed|completed|skipped|no_stats [when|unless <conditions>]");
 	}
 	auto begin = arguments.begin();
 
@@ -392,7 +392,7 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 	} else if (match_and_skip(begin, "no_stats")) {
 		result_ = None;
 	} else {
-		throw GameDataError("Usage: return=failed|completed|skipped|no_stats [ when|unless <conditions>]");
+		throw GameDataError("Usage: return=failed|completed|skipped|no_stats [when|unless <conditions>]");
 	}
 
 
@@ -420,8 +420,7 @@ ProductionProgram::ActReturn::ActReturn(const std::vector<std::string>& argument
 			is_when_ = false;
 			parse_conditions(arguments, begin, "or");
 		} else {
-			throw GameDataError(
-			   "Expected when|unless but found '%s'", begin->c_str());
+			throw GameDataError("Expected when|unless but found '%s'", begin->c_str());
 		}
 	}
 }
@@ -511,7 +510,7 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments, c
 			result_to_set_method_for = Skipped;
 		} else {
 			throw GameDataError(
-			   "Expected failure|completion|skip but found '%s'", arguments.at(2).c_str());
+			   "Expected failure|completion|skip after 'on' but found '%s'", arguments.at(2).c_str());
 		}
 
 		ProgramResultHandlingMethod handling_method;
@@ -524,7 +523,7 @@ ProductionProgram::ActCall::ActCall(const std::vector<std::string>& arguments, c
 		} else if (arguments.at(3) == "repeat") {
 			handling_method = Repeat;
 		} else {
-			throw GameDataError("Expected fail|complete|skip|repeat but found '%s'", arguments.at(3).c_str());
+			throw GameDataError("Expected fail|complete|skip|repeat in final position but found '%s'", arguments.at(3).c_str());
 		}
 		handling_methods_[result_to_set_method_for - 1] = handling_method;
 	}
@@ -559,34 +558,31 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: callworker=<worker program name>");
 	}
-	try {
-		program_ = arguments.front();
 
-		//  Quote form "void ProductionSite::program_act(Game &)":
-		//  "Always main worker is doing stuff"
-		const WorkerDescr& main_worker_descr =
-		   *tribes.get_worker_descr(descr->working_positions()[0].first);
+	program_ = arguments.front();
 
-		//  This will fail unless the main worker has a program with the given
-		//  name, so it also validates the parameter.
-		const WorkareaInfo& worker_workarea_info =
-		   main_worker_descr.get_program(program_)->get_workarea_info();
+	//  Quote from "void ProductionSite::program_act(Game &)":
+	//  "Always main worker is doing stuff"
+	const WorkerDescr& main_worker_descr =
+	   *tribes.get_worker_descr(descr->working_positions().front().first);
 
-		for (const auto& area_info : worker_workarea_info) {
-			std::set<std::string>& building_radius_infos = descr->workarea_info_[area_info.first];
+	//  This will fail unless the main worker has a program with the given
+	//  name, so it also validates the parameter.
+	const WorkareaInfo& worker_workarea_info =
+	   main_worker_descr.get_program(program_)->get_workarea_info();
 
-			for (const std::string& worker_name : area_info.second) {
-				std::string description = descr->name();
-				description += ' ';
-				description += production_program_name;
-				description += " worker ";
-				description += main_worker_descr.name();
-				description += worker_name;
-				building_radius_infos.insert(description);
-			}
+	for (const auto& area_info : worker_workarea_info) {
+		std::set<std::string>& building_radius_infos = descr->workarea_info_[area_info.first];
+
+		for (const std::string& worker_name : area_info.second) {
+			std::string description = descr->name();
+			description += ' ';
+			description += production_program_name;
+			description += " worker ";
+			description += main_worker_descr.name();
+			description += worker_name;
+			building_radius_infos.insert(description);
 		}
-	} catch (const WException& e) {
-		throw GameDataError("worker: %s", e.what());
 	}
 }
 
@@ -885,7 +881,7 @@ ProductionProgram::ActMine::ActMine(const std::vector<std::string>& arguments,
                                     const std::string& production_program_name,
                                     ProductionSiteDescr* descr) {
 	if (arguments.size() != 5) {
-		throw GameDataError("Usage: mine=resource <workarea radius> <max> <chance> <worker experience>");
+		throw GameDataError("Usage: mine=resource <workarea radius> <max> <chance> <worker experience gained>");
 	}
 
 	resource_ = world.safe_resource_index(arguments.front().c_str());
@@ -1029,7 +1025,7 @@ ProductionProgram::ActCheckSoldier::ActCheckSoldier(const std::vector<std::strin
 	} else if (arguments.at(1) == "evade") {
 		attribute_ = TrainingAttribute::kEvade;
 	} else {
-		throw GameDataError("Expected health|attack|defense|evade but found '%s'", arguments.at(1).c_str());
+		throw GameDataError("Expected health|attack|defense|evade after 'soldier' but found '%s'", arguments.at(1).c_str());
 	}
 	level_ = read_number(arguments.at(2), 0);
 }
@@ -1093,7 +1089,7 @@ ProductionProgram::ActTrain::ActTrain(const std::vector<std::string>& arguments)
 	} else if (arguments.at(1) == "evade") {
 		attribute_ = TrainingAttribute::kEvade;
 	} else {
-		throw GameDataError("Expected health|attack|defense|evade but found '%s'", arguments.at(1).c_str());
+		throw GameDataError("Expected health|attack|defense|evade after 'soldier' but found '%s'", arguments.at(1).c_str());
 	}
 	level_ = read_number(arguments.at(2), 0);
 	target_level_ = read_positive(arguments.at(3));
@@ -1325,6 +1321,9 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
    : MapObjectProgram(init_name), descname_(init_descname) {
 
 	for (const std::string& line : actions_table->array_entries<std::string>()) {
+		if (line.empty()) {
+			throw GameDataError("Empty line");
+		}
 		try {
 			ProgramParseInput parseinput = parse_program_string(line);
 
@@ -1371,9 +1370,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				actions_.push_back(
 				   std::unique_ptr<ProductionProgram::Action>(new ActCheckMap(parseinput.arguments)));
 			} else {
-				throw GameDataError(
-				   "Unknown command type '%s' in production program '%s' for building '%s'",
-				   parseinput.name.c_str(), name().c_str(), building->name().c_str());
+				throw GameDataError("Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
 
 			const ProductionProgram::Action& action = *actions_.back();
@@ -1397,13 +1394,11 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 				}
 			}
 		} catch (const std::exception& e) {
-			throw GameDataError("Error reading line '%s' in production program '%s' for building '%s': %s",
-							 line.c_str(), init_name.c_str(), building->name().c_str(), e.what());
+			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());
 		}
 	}
 	if (actions_.empty()) {
-		throw GameDataError("No actions in production program '%s' for building '%s'",
-		                    name().c_str(), building->name().c_str());
+		throw GameDataError("No actions found");
 	}
 }
 

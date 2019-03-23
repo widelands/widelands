@@ -107,15 +107,14 @@ WorkerDescr::WorkerDescr(const std::string& init_descname,
 		std::unique_ptr<LuaTable> programs_table = table.get_table("programs");
 		for (std::string program_name : programs_table->keys<std::string>()) {
 			std::transform(program_name.begin(), program_name.end(), program_name.begin(), tolower);
-
+			if (programs_.count(program_name)) {
+				throw GameDataError("Program '%s' has already been declared for worker '%s'", program_name.c_str(), name().c_str());
+			}
 			try {
-				if (programs_.count(program_name))
-					throw wexception("this program has already been declared");
-
 				programs_[program_name] = std::unique_ptr<WorkerProgram>(
 				   new WorkerProgram(program_name, *programs_table->get_table(program_name), *this, egbase_.tribes()));
 			} catch (const std::exception& e) {
-				throw wexception("program %s: %s", program_name.c_str(), e.what());
+				throw GameDataError("%s: Error in worker program %s: %s", name().c_str(), program_name.c_str(), e.what());
 			}
 		}
 	}

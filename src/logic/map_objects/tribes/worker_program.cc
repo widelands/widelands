@@ -104,36 +104,37 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 WorkerProgram::WorkerProgram(const std::string& init_name, const LuaTable& actions_table, const WorkerDescr& worker, const Tribes& tribes)
    : MapObjectProgram(init_name), worker_(worker), tribes_(tribes) {
 
-	for (const std::string& string : actions_table.array_entries<std::string>()) {
-		if (string.empty()) {
-			throw GameDataError("Program '%s' for worker '%s' contains empty string\n", init_name.c_str(),
-			    worker_.name().c_str());
+	for (const std::string& line : actions_table.array_entries<std::string>()) {
+		if (line.empty()) {
+			throw GameDataError("Empty line");
 		}
 		try {
 
-			ProgramParseInput input = parse_program_string(string);
+			ProgramParseInput parseinput = parse_program_string(line);
 
 			// Find the appropriate parser
 			Worker::Action act;
 			uint32_t mapidx;
 
 			for (mapidx = 0; parsemap_[mapidx].name; ++mapidx) {
-				if (input.name == parsemap_[mapidx].name) {
+				if (parseinput.name == parsemap_[mapidx].name) {
 					break;
 				}
 			}
 
 			if (!parsemap_[mapidx].name) {
-				throw GameDataError("Unknown command type \"%s\"", input.name.c_str());
+				throw GameDataError("Unknown command '%s' in line '%s'", parseinput.name.c_str(), line.c_str());
 			}
 
-			(this->*parsemap_[mapidx].function)(&act, input.arguments);
+			(this->*parsemap_[mapidx].function)(&act, parseinput.arguments);
 
 			actions_.push_back(act);
 		} catch (const std::exception& e) {
-			throw GameDataError("Error reading line '%s' in worker program '%s' for worker '%s': %s",
-			                 string.c_str(), init_name.c_str(), worker_.name().c_str(), e.what());
+			throw GameDataError("Error reading line '%s': %s", line.c_str(), e.what());
 		}
+	}
+	if (actions_.empty()) {
+		throw GameDataError("No actions found");
 	}
 }
 
@@ -198,7 +199,7 @@ mine
  */
 void WorkerProgram::parse_mine(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 2) {
-		throw GameDataError("Usage: mine=<ware type> <area>");
+		throw GameDataError("Usage: mine=<ware type> <workarea radius>");
 	}
 
 	act->function = &Worker::run_mine;
@@ -232,7 +233,7 @@ breed
  */
 void WorkerProgram::parse_breed(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 2) {
-		throw GameDataError("Usage: breed=<ware type> <area>");
+		throw GameDataError("Usage: breed=<ware type> <workarea radius>");
 	}
 
 	act->function = &Worker::run_breed;
@@ -495,7 +496,7 @@ walk
  */
 void WorkerProgram::parse_walk(Worker::Action* act, const std::vector<std::string>& cmd) {
 	if (cmd.size() != 1) {
-		throw GameDataError("Usage: walk=<where>");
+		throw GameDataError("Usage: walk=object|coords|object-or-coords");
 	}
 
 	act->function = &Worker::run_walk;
@@ -658,13 +659,14 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 	for (uint32_t i = 0; i < cmd.size(); ++i) {
 		if (cmd[i] == "unless") {
 			++i;
-			if (i >= cmd.size())
-				throw GameDataError("plant: something expected after unless");
-			if (cmd[i] == "object")
+			if (i >= cmd.size()) {
+				throw GameDataError("plant: something expected after 'unless'");
+			}
+			if (cmd[i] == "object") {
 				act->iparam1 = Worker::Action::plantUnlessObject;
-			else
+			} else {
 				throw GameDataError("plant: 'unless %s' not understood", cmd[i].c_str());
-
+			}
 			continue;
 		}
 
