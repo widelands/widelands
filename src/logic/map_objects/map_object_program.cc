@@ -19,8 +19,6 @@
 
 #include "logic/map_objects/map_object_program.h"
 
-#include <boost/algorithm/string.hpp>
-
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game_data_error.h"
 #include "logic/map_objects/map_object.h"
@@ -28,24 +26,13 @@
 
 namespace Widelands {
 
-char* next_word(char*& p, bool& reached_end, char const terminator) {
-	assert(terminator);
-	char* const result = p;
-	for (; *p != terminator; ++p)
-		if (*p == '\0') {
-			reached_end = true;
-			goto end;
-		}
-	reached_end = false;
-	*p = '\0';  //  terminate the word
-	++p;        //  move past the terminator
-end:
-	if (result < p)
-		return result;
-	throw wexception("expected word");
+MapObjectProgram::MapObjectProgram(const std::string& init_name) : name_ (init_name) {}
+
+std::string MapObjectProgram::name() const {
+	return name_;
 }
 
-std::vector<std::string> split_string(const std::string& s, const char* const separators) {
+std::vector<std::string> MapObjectProgram::split_string(const std::string& s, const char* const separators) {
 	std::vector<std::string> result;
 	for (std::string::size_type pos = 0, endpos;
 	     (pos = s.find_first_not_of(separators, pos)) != std::string::npos; pos = endpos) {
@@ -56,7 +43,7 @@ std::vector<std::string> split_string(const std::string& s, const char* const se
 }
 
 
-unsigned int read_number(const std::string& input, int min_value, int max_value) {
+unsigned int MapObjectProgram::read_number(const std::string& input, int min_value, int max_value) {
 	unsigned int  result = 0U;
 	char* endp;
 	long int const value = strtol(input.c_str(), &endp, 0);
@@ -73,17 +60,17 @@ unsigned int read_number(const std::string& input, int min_value, int max_value)
 	return result;
 }
 
-unsigned int read_positive(const std::string& input, int max_value) {
+unsigned int MapObjectProgram::read_positive(const std::string& input, int max_value) {
 	return read_number(input, 1, max_value);
 }
 
-ProgramParseInput parse_program_string(const std::string& line) {
-	const std::pair<std::string, std::string> key_values = parse_key_value_pair(line, '=', "", true);
+MapObjectProgram::ProgramParseInput MapObjectProgram::parse_program_string(const std::string& line) {
+	const std::pair<std::string, std::string> key_values = MapObjectProgram::read_key_value_pair(line, '=', "", true);
 	return ProgramParseInput{key_values.first, split_string(key_values.second, " \t\n")};
 }
 
 // NOCOM add option for default value
-const std::pair<std::string, std::string> parse_key_value_pair(const std::string& input, const char separator, const std::string& expected_key, bool allow_empty) {
+const std::pair<std::string, std::string> MapObjectProgram::read_key_value_pair(const std::string& input, const char separator, const std::string& expected_key, bool allow_empty) {
 	const size_t idx = input.find(separator);
 
 	if (!allow_empty && idx == input.npos) {
@@ -98,7 +85,7 @@ const std::pair<std::string, std::string> parse_key_value_pair(const std::string
 	return std::make_pair(key, idx == input.npos ? "" : input.substr(idx + 1));
 }
 
-AnimationParameters parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
+MapObjectProgram::AnimationParameters MapObjectProgram::parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed) {
 	AnimationParameters result;
 	if (arguments.size() < 1) {
 		throw GameDataError("%s: Animation without name. Usage: animate=<name> <duration>",
@@ -127,7 +114,7 @@ AnimationParameters parse_act_animate(const std::vector<std::string>& arguments,
 	return result;
 }
 
-PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, const MapObjectDescr& descr, uint8_t default_priority) {
+MapObjectProgram::PlaySoundParameters MapObjectProgram::parse_act_play_sound(const std::vector<std::string>& arguments, const MapObjectDescr& descr, uint8_t default_priority) {
 	PlaySoundParameters result;
 
 	if (arguments.size() < 2 || arguments.size() > 3) {
@@ -138,15 +125,7 @@ PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& argumen
 
 	g_sound_handler.load_fx_if_needed(arguments.at(0), arguments.at(1), result.name);
 
-	result.priority = default_priority;
-	if (arguments.size() == 3) {
-		char* endp;
-		long long int const value = strtoll(arguments.at(2).c_str(), &endp, 0);
-		result.priority = value;
-		if (*endp || result.priority != value) {
-			throw GameDataError("%s: Playsound expected a priority but found \"%s\"", descr.name().c_str(), arguments.at(2).c_str());
-		}
-	}
+	result.priority = arguments.size() == 3 ? read_positive(arguments.at(2)) : default_priority;
 	return result;
 }
 

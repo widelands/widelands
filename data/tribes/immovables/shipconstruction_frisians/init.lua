@@ -12,7 +12,7 @@ tribes:new_immovable_type {
    programs = {
       program = {
          "construct=idle 5000 210000",
-         "transform=bob tribe:frisians_ship",
+         "transform=bob frisians_ship",
       }
    },
    buildcost = {

@@ -31,14 +31,14 @@
 
 namespace Widelands {
 
-ImmovableProgram::ImmovableProgram(const std::string& init_name, std::unique_ptr<Action> action) : name_(init_name) {
+ImmovableProgram::ImmovableProgram(const std::string& init_name, std::unique_ptr<Action> action) : MapObjectProgram(init_name) {
 	actions_.push_back(std::move(action));
 }
 
 ImmovableProgram::ImmovableProgram(const std::string& init_name,
                                    const std::vector<std::string>& lines,
                                    const ImmovableDescr& immovable)
-   : name_(init_name) {
+   : MapObjectProgram(init_name) {
 	for (const std::string& line : lines) {
 		try {
 			ProgramParseInput parseinput = parse_program_string(line);
@@ -72,7 +72,7 @@ ImmovableProgram::Action::~Action() {
 }
 
 ImmovableProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments, const ImmovableDescr& descr) {
-	parameters = parse_act_animate(arguments, descr, true);
+	parameters = MapObjectProgram::parse_act_animate(arguments, descr, true);
 }
 
 /// Use convolutuion to make the animation time a random variable with binomial
@@ -84,7 +84,7 @@ void ImmovableProgram::ActAnimate::execute(Game& game, Immovable& immovable) con
 }
 
 ImmovableProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments, const ImmovableDescr& descr) {
-	parameters = parse_act_play_sound(arguments, descr, 127);
+	parameters = MapObjectProgram::parse_act_play_sound(arguments, descr, 127);
 }
 
 /** Demand from the g_sound_handler to play a certain sound effect.
@@ -96,43 +96,28 @@ void ImmovableProgram::ActPlaySound::execute(Game& game, Immovable& immovable) c
 }
 
 ImmovableProgram::ActTransform::ActTransform(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
+	if (arguments.empty()) {
+		throw GameDataError("Usage: transform=[bob] <name>");
+	}
 	try {
-		tribe = true;
 		bob = false;
 		probability = 0;
 
 		for (uint32_t i = 0; i < arguments.size(); ++i) {
-			if (arguments[i] == "bob")
+			if (arguments[i] == "bob") {
 				bob = true;
-			else if (arguments[i] == "immovable")
+			} else if (arguments[i] == "immovable") {
 				bob = false;
-			else if (arguments[i][0] >= '0' && arguments[i][0] <= '9') {
+			} else if (arguments[i][0] >= '0' && arguments[i][0] <= '9') {
 				probability = read_positive(arguments[i], 254);
 			} else {
-				std::vector<std::string> segments = split_string(arguments[i], ":");
-				// NOCOM clean this up. world is not used, only "tribe". We might want to ditch that too.
-				if (segments.size() > 2)
-					throw GameDataError("object type has more than 2 segments");
-				if (segments.size() == 2) {
-					if (segments[0] == "world")
-						tribe = false;
-					else if (segments[0] == "tribe") {
-						if (descr.owner_type() != MapObjectDescr::OwnerType::kTribe)
-							throw GameDataError("scope \"tribe\" does not match the immovable type");
-						tribe = true;
-					} else
-						throw GameDataError("unknown scope \"%s\" given for target type (must be "
-						                    "\"world\" or \"tribe\")",
-						                    segments[0].c_str());
-
-					type_name = segments[1];
-				} else {
-					type_name = segments[0];
-				}
+				// NOCOM check if target exists
+				type_name = arguments[i];
 			}
 		}
-		if (type_name == descr.name())
+		if (type_name == descr.name()) {
 			throw GameDataError("illegal transformation to the same type");
+		}
 	} catch (const WException& e) {
 		throw GameDataError("transform: %s", e.what());
 	}
@@ -203,7 +188,6 @@ void ImmovableProgram::ActRemove::execute(Game& game, Immovable& immovable) cons
 }
 
 ImmovableProgram::ActSeed::ActSeed(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
-	// NOCOM code duplication with ActGrow
 	if (arguments.size() != 1) {
 		throw GameDataError("Usage: seed=<immovable name>");
 	}
@@ -250,7 +234,6 @@ void ImmovableProgram::ActSeed::execute(Game& game, Immovable& immovable) const 
 }
 
 ImmovableProgram::ActConstruct::ActConstruct(std::vector<std::string>& arguments, const ImmovableDescr& descr) {
-	// NOCOM signature: construct=idle 5000 210000
 	if (arguments.size() != 3) {
 		throw GameDataError("Usage: construct=<animation> <build duration> <decay duration>");
 	}

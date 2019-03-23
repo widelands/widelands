@@ -28,42 +28,48 @@
 #include "logic/map_objects/buildcost.h"
 
 namespace Widelands {
+
 struct MapObjectDescr;
 
-// NOCOM move into anonymous namespace in cc when converting is finished
-/// Returns the word starting at the character that p points to and ending
-/// before the first terminator character. Replaces the terminator with null.
-char* next_word(char*& p, bool& reached_end, char terminator = ' ');
+struct MapObjectProgram {
+	std::string name() const;
 
-/// Split a string by separators.
-/// \note This ignores empty elements, so do not use this for example to split
-/// a string with newline characters into lines, because it would ignore empty
-/// lines.
-std::vector<std::string> split_string(const std::string&, char const* separators);
+	explicit MapObjectProgram(const std::string& init_name);
+	virtual ~MapObjectProgram() = default;
 
-unsigned int read_number(const std::string& input, int min_value, int max_value = std::numeric_limits<int32_t>::max());
-unsigned int read_positive(const std::string& input, int max_value = std::numeric_limits<int32_t>::max());
+protected:
+	/// Split a string by separators.
+	/// \note This ignores empty elements, so do not use this for example to split
+	/// a string with newline characters into lines, because it would ignore empty
+	/// lines.
+	static std::vector<std::string> split_string(const std::string&, char const* separators);
 
-const std::pair<std::string, std::string> parse_key_value_pair(const std::string& input, const char separator, const std::string& expected_key = "", bool allow_empty = false);
+	static unsigned int read_number(const std::string& input, int min_value, int max_value = std::numeric_limits<int32_t>::max());
+	static unsigned int read_positive(const std::string& input, int max_value = std::numeric_limits<int32_t>::max());
 
-struct ProgramParseInput {
-	std::string name;
-	std::vector<std::string> arguments;
+	static const std::pair<std::string, std::string> read_key_value_pair(const std::string& input, const char separator, const std::string& expected_key = "", bool allow_empty = false);
+
+	struct ProgramParseInput {
+		std::string name;
+		std::vector<std::string> arguments;
+	};
+	static ProgramParseInput parse_program_string(const std::string& line);
+
+	struct AnimationParameters {
+		uint32_t animation = 0;
+		Duration duration = 0; //  forever
+	};
+	static AnimationParameters parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed);
+
+	struct PlaySoundParameters {
+		std::string name;
+		uint8_t priority = 0;
+	};
+	static PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, const MapObjectDescr& descr, uint8_t default_priority);
+
+private:
+	const std::string name_;
 };
-ProgramParseInput parse_program_string(const std::string& line);
-
-struct AnimationParameters {
-	uint32_t animation = 0;
-	Duration duration = 0; //  forever
-};
-AnimationParameters parse_act_animate(const std::vector<std::string>& arguments, const MapObjectDescr& descr, bool is_idle_allowed);
-
-struct PlaySoundParameters {
-	std::string name;
-	uint8_t priority = 0;
-};
-PlaySoundParameters parse_act_play_sound(const std::vector<std::string>& arguments, const MapObjectDescr& descr, uint8_t default_priority);
-
 }  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_MAP_OBJECT_PROGRAM_H

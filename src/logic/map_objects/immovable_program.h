@@ -33,7 +33,7 @@
 namespace Widelands {
 
 /// Ordered sequence of actions (at least 1). Has a name.
-struct ImmovableProgram {
+struct ImmovableProgram : public MapObjectProgram {
 
 	/// Can be executed on an Immovable.
 	struct Action {
@@ -90,7 +90,6 @@ struct ImmovableProgram {
 	private:
 		std::string type_name;
 		bool bob;
-		bool tribe;
 		uint8_t probability;
 	};
 
@@ -184,9 +183,6 @@ struct ImmovableProgram {
 	~ImmovableProgram() {
 	}
 
-	const std::string& name() const {
-		return name_;
-	}
 	size_t size() const {
 		return actions_.size();
 	}
@@ -196,7 +192,6 @@ struct ImmovableProgram {
 	}
 
 private:
-	std::string name_;
 	std::vector<std::unique_ptr<Action>> actions_;
 };
 

@@ -20,9 +20,12 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_H
 #define WL_LOGIC_MAP_OBJECTS_WORLD_CRITTER_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "graphic/diranimations.h"
 #include "logic/map_objects/bob.h"
+#include "logic/map_objects/world/critter_program.h"
 
 class LuaTable;
 class WorldLegacyLookupTable;
@@ -54,7 +57,7 @@ struct CritterDescr : BobDescr {
 
 private:
 	DirAnimations walk_anims_;
-	using Programs = std::map<std::string, CritterProgram*>;
+	using Programs = std::map<std::string, std::unique_ptr<const CritterProgram>>;
 	Programs programs_;
 	EditorCategory* editor_category_;  // not owned.
 	DISALLOW_COPY_AND_ASSIGN(CritterDescr);
@@ -83,7 +86,7 @@ protected:
 		Loader();
 
 		const Task* get_task(const std::string& name) override;
-		const BobProgramBase* get_program(const std::string& name) override;
+		const MapObjectProgram* get_program(const std::string& name) override;
 	};
 
 private:

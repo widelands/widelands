@@ -50,7 +50,7 @@ class Worker;
 class World;
 
 /// Ordered sequence of actions (at least 1). Has a name.
-struct ProductionProgram {
+struct ProductionProgram : public MapObjectProgram {
 
 	/// A group of ware types with a count.
 	using WareTypeGroup = std::pair<std::set<std::pair<DescriptionIndex, WareWorker>>, uint8_t>;
@@ -537,7 +537,6 @@ struct ProductionProgram {
 	                  const EditorGameBase& egbase,
 	                  ProductionSiteDescr* building);
 
-	const std::string& name() const;
 	const std::string& descname() const;
 
 	size_t size() const;
@@ -548,7 +547,6 @@ struct ProductionProgram {
 	const Buildcost& recruited_workers() const;
 
 private:
-	std::string name_;
 	std::string descname_;
 	std::vector<std::unique_ptr<Action>> actions_;
 	ProductionProgram::Groups consumed_wares_workers_;

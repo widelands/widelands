@@ -103,7 +103,7 @@ ProductionProgram::Groups ProductionProgram::parse_ware_type_groups(std::vector<
 	ProductionProgram::Groups result;
 
 	for (auto& it = begin; it != end; ++it) {
-		const std::pair<std::string, std::string> names_to_amount = parse_key_value_pair(*it, ':', "", true);
+		const std::pair<std::string, std::string> names_to_amount = read_key_value_pair(*it, ':', "", true);
 		uint8_t amount = names_to_amount.second.empty() ? 1 : read_positive(names_to_amount.second);
 		uint8_t max_amount = 0;
 		std::set<std::pair<DescriptionIndex, WareWorker>> ware_worker_names;
@@ -160,7 +160,7 @@ BillOfMaterials ProductionProgram::parse_bill_of_materials(const std::vector<std
 																  const Tribes& tribes) {
 	BillOfMaterials result;
 	for (const std::string& argument : arguments) {
-		const std::pair<std::string, std::string> produceme = parse_key_value_pair(argument, ':', "", true);
+		const std::pair<std::string, std::string> produceme = read_key_value_pair(argument, ':', "", true);
 
 		const DescriptionIndex index = ww == WareWorker::wwWARE ?
 										   tribes.safe_ware_index(produceme.first) :
@@ -663,7 +663,7 @@ void ProductionProgram::ActCheckMap::execute(Game& game, ProductionSite& ps) con
 }
 
 ProductionProgram::ActAnimate::ActAnimate(const std::vector<std::string>& arguments, ProductionSiteDescr* descr) {
-	parameters = parse_act_animate(arguments, *descr, false);
+	parameters = MapObjectProgram::parse_act_animate(arguments, *descr, false);
 }
 
 void ProductionProgram::ActAnimate::execute(Game& game, ProductionSite& ps) const {
@@ -1168,7 +1168,7 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 }
 
 ProductionProgram::ActPlaySound::ActPlaySound(const std::vector<std::string>& arguments, ProductionSiteDescr* descr) {
-	parameters = parse_act_play_sound(arguments, *descr, 127);
+	parameters = MapObjectProgram::parse_act_play_sound(arguments, *descr, 127);
 }
 
 void ProductionProgram::ActPlaySound::execute(Game& game, ProductionSite& ps) const {
@@ -1336,7 +1336,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
                                      std::unique_ptr<LuaTable> actions_table,
                                      const EditorGameBase& egbase,
                                      ProductionSiteDescr* building)
-   : name_(init_name), descname_(init_descname) {
+   : MapObjectProgram(init_name), descname_(init_descname) {
 
 	for (const std::string& line : actions_table->array_entries<std::string>()) {
 		try {
@@ -1412,7 +1412,7 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 			}
 		} catch (const std::exception& e) {
 			throw GameDataError("Error reading line '%s' in production program '%s' for building '%s': %s",
-							 line.c_str(), name_.c_str(), building->name().c_str(), e.what());
+							 line.c_str(), init_name.c_str(), building->name().c_str(), e.what());
 		}
 	}
 	if (actions_.empty()) {
@@ -1421,9 +1421,6 @@ ProductionProgram::ProductionProgram(const std::string& init_name,
 	}
 }
 
-const std::string& ProductionProgram::name() const {
-	return name_;
-}
 const std::string& ProductionProgram::descname() const {
 	return descname_;
 }

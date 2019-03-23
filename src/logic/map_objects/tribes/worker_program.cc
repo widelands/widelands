@@ -97,13 +97,16 @@ const WorkerProgram::ParseMap WorkerProgram::parsemap_[] = {
 
    {nullptr, nullptr}};
 
+
 /**
  * Parse a program
  */
-void WorkerProgram::parse(const LuaTable& table) {
-	for (const std::string& string : table.array_entries<std::string>()) {
+WorkerProgram::WorkerProgram(const std::string& init_name, const LuaTable& actions_table, const WorkerDescr& worker, const Tribes& tribes)
+   : MapObjectProgram(init_name), worker_(worker), tribes_(tribes) {
+
+	for (const std::string& string : actions_table.array_entries<std::string>()) {
 		if (string.empty()) {
-			throw GameDataError("Program '%s' for worker '%s' contains empty string\n", name_.c_str(),
+			throw GameDataError("Program '%s' for worker '%s' contains empty string\n", init_name.c_str(),
 			    worker_.name().c_str());
 		}
 		try {
@@ -129,7 +132,7 @@ void WorkerProgram::parse(const LuaTable& table) {
 			actions_.push_back(act);
 		} catch (const std::exception& e) {
 			throw GameDataError("Error reading line '%s' in worker program '%s' for worker '%s': %s",
-			                 string.c_str(), name_.c_str(), worker_.name().c_str(), e.what());
+			                 string.c_str(), init_name.c_str(), worker_.name().c_str(), e.what());
 		}
 	}
 }
@@ -284,7 +287,7 @@ void WorkerProgram::parse_findobject(Worker::Action* act, const std::vector<std:
 
 	// Parse predicates
 	for (const std::string& argument : cmd) {
-		const std::pair<std::string, std::string> item = parse_key_value_pair(argument, ':');
+		const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':');
 
 		if (item.first == "radius") {
 			act->iparam1 = read_positive(item.second);
@@ -390,7 +393,7 @@ void WorkerProgram::parse_findspace(Worker::Action* act, const std::vector<std::
 	// Parse predicates
 	for (const std::string& argument : cmd) {
 		try {
-			const std::pair<std::string, std::string> item = parse_key_value_pair(argument, ':', "", true);
+			const std::pair<std::string, std::string> item = read_key_value_pair(argument, ':', "", true);
 
 			if (item.first == "radius") {
 				act->iparam1 = read_positive(item.second);
@@ -532,7 +535,7 @@ animate
  * iparam2 = duration
  */
 void WorkerProgram::parse_animate(Worker::Action* act, const std::vector<std::string>& cmd) {
-	AnimationParameters parameters = parse_act_animate(cmd, worker_, true);
+	AnimationParameters parameters = MapObjectProgram::parse_act_animate(cmd, worker_, true);
 
 	act->function = &Worker::run_animate;
 	act->iparam1 = parameters.animation;
@@ -665,7 +668,7 @@ void WorkerProgram::parse_plant(Worker::Action* act, const std::vector<std::stri
 			continue;
 		}
 
-		const std::string attrib_name = parse_key_value_pair(cmd[i], ':', "attrib").second;
+		const std::string attrib_name = read_key_value_pair(cmd[i], ':', "attrib").second;
 
 		// This will throw a GameDataError if the attribute doesn't exist.
 		ImmovableDescr::get_attribute_id(attrib_name);
@@ -840,7 +843,7 @@ playsound
 */
 void WorkerProgram::parse_playsound(Worker::Action* act, const std::vector<std::string>& cmd) {
 	//  50% chance to play, only one instance at a time
-	PlaySoundParameters parameters = parse_act_play_sound(cmd, worker_, 64);
+	PlaySoundParameters parameters = MapObjectProgram::parse_act_play_sound(cmd, worker_, 64);
 
 	act->sparam1 = parameters.name;
 	act->iparam1 = parameters.priority;
