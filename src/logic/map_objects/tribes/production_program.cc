@@ -572,7 +572,6 @@ ProductionProgram::ActCallWorker::ActCallWorker(const std::vector<std::string>& 
 		throw GameDataError("Usage: callworker=<worker program name>");
 	}
 	try {
-		// NOCOM check that the program exists
 		program_ = arguments.front();
 
 		//  Quote form "void ProductionSite::program_act(Game &)":

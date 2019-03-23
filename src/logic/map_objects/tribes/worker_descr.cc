@@ -136,8 +136,9 @@ WorkerDescr::~WorkerDescr() {
 WorkerProgram const* WorkerDescr::get_program(const std::string& programname) const {
 	Programs::const_iterator it = programs_.find(programname);
 
-	if (it == programs_.end())
-		throw wexception("%s has no program '%s'", name().c_str(), programname.c_str());
+	if (it == programs_.end()) {
+		throw GameDataError("%s has no program '%s'", name().c_str(), programname.c_str());
+	}
 
 	return it->second.get();
 }
