@@ -1409,7 +1409,6 @@ void ProductionProgram::ActTrain::execute(Game& game, ProductionSite& ps) const 
 ProductionProgram::ActPlaySound::ActPlaySound(char* parameters) {
 	try {
 		bool reached_end;
-
 		const char* const name = next_word(parameters, reached_end);
 		fx = SoundHandler::register_fx(SoundType::kAmbient, name);
 

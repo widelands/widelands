@@ -141,9 +141,7 @@ SoundHandler::~SoundHandler() {
 
 	Mix_ChannelFinished(nullptr);
 	Mix_HookMusicFinished(nullptr);
-
 	stop_music();
-
 	songs_.clear();
 	fxs_.clear();
 

@@ -43,7 +43,6 @@
 #include "sound/sound_handler.h"
 
 namespace {
-
 /**
  * Implements the Animation interface for an animation that is unpacked on disk, that
  * is every frame and every pc color frame is an singular file on disk.

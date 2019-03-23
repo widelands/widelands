@@ -7,13 +7,11 @@ wl_library(note_sound
     notifications
 )
 
-
 wl_library(sound_constants
   SRCS
     constants.cc
     constants.h
 )
-
 
 wl_library(sound
   SRCS

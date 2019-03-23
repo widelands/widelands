@@ -103,7 +103,6 @@ Mix_Chunk* FXset::get_fx(uint32_t random) {
 	return fxs_.at(random % fxs_.size());
 }
 
-
 void FXset::load_sound_file(const std::string& path) {
 	FileRead fr;
 	if (!fr.try_open(*g_fs, path)) {
