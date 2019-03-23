@@ -523,7 +523,9 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t
 	assert(direction == WALK_SW || direction == WALK_SE ||
 	       direction == WALK_E);
 	assert(roadtype == RoadType::kNone || roadtype == RoadType::kNormal ||
-	       roadtype == RoadType::kBusy || roadtype == RoadType::kWaterway);
+	       roadtype == RoadType::kBusy || roadtype == RoadType::kWaterway ||
+	       roadtype == RoadType::kBridgeNormal ||
+	       roadtype == RoadType::kBridgeBusy);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;
