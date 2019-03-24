@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,6 +52,11 @@ public:
 	void send(ConnectionId id, const SendPacket& packet) override;
 	void send(const std::vector<ConnectionId>& ids, const SendPacket& packet) override;
 
+	/**
+	 * Stops listening for connections.
+	 */
+	void stop_listening();
+
 private:
 	/**
 	 * Returns whether the server is started and is listening.
@@ -59,12 +64,6 @@ private:
 	 */
 	// Feel free to make this method public if you need it
 	bool is_listening() const;
-
-	/**
-	 * Stops listening for connections.
-	 */
-	// Feel free to make this method public if you need it
-	void stop_listening();
 
 	/**
 	 * Tries to listen on the given port.

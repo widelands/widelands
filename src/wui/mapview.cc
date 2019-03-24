@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 
 #include "base/macros.h"
 #include "base/math.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "profile/profile.h"
 #include "wlapplication.h"
@@ -388,6 +387,10 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
+		if (view_ == target_view) {
+			// We're already there
+			return;
+		}
 		view_ = target_view;
 		MapviewPixelFunctions::normalize_pix(map_, &view_.viewpoint);
 		changeview();
@@ -395,6 +398,10 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	}
 
 	case Transition::Smooth: {
+		if (!view_plans_.empty() && view_plans_.back().back().view == target_view) {
+			// We're already there
+			return;
+		}
 		const TimestampedView current = animation_target_view();
 		const auto plan =
 		   plan_map_transition(current.t, map_, current.view, target_view, get_w(), get_h());
@@ -510,6 +517,10 @@ void MapView::zoom_around(float new_zoom,
 	const TimestampedView current = animation_target_view();
 	switch (transition) {
 	case Transition::Jump: {
+		if (view_.zoom == new_zoom) {
+			// We're already there
+			return;
+		}
 		// Zoom around the current mouse position. See
 		// http://stackoverflow.com/questions/2916081/zoom-in-on-a-point-using-scale-and-translate
 		// for a good explanation of this math.
@@ -519,6 +530,10 @@ void MapView::zoom_around(float new_zoom,
 	}
 
 	case Transition::Smooth: {
+		if (!view_plans_.empty() && view_plans_.back().back().view.zoom == new_zoom) {
+			// We're already there
+			return;
+		}
 		const int w = get_w();
 		const int h = get_h();
 		const auto plan = plan_zoom_transition(

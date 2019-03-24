@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -87,4 +87,4 @@ void MapObjectLoader::load_finish_game(Game& g) {
 		schedule_act_.pop_back();
 	}
 }
-}
+}  // namespace Widelands

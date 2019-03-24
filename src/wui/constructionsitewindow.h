@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2016 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,12 +31,13 @@ struct ConstructionSiteWindow : public BuildingWindow {
 	ConstructionSiteWindow(InteractiveGameBase& parent,
 	                       UI::UniqueWindow::Registry& reg,
 	                       Widelands::ConstructionSite&,
-	                       bool avoid_fastclick);
+	                       bool avoid_fastclick,
+	                       bool workarea_preview_wanted);
 
 	void think() override;
 
 protected:
-	void init(bool avoid_fastclick) override;
+	void init(bool avoid_fastclick, bool workarea_preview_wanted) override;
 
 private:
 	Widelands::OPtr<Widelands::ConstructionSite> construction_site_;

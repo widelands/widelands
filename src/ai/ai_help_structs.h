@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,9 +80,8 @@ enum class BuildingAttribute : uint8_t {
 	kIronMine,
 	kNeedsSeafaring,
 	kSupportingProducer,
+	kNeedsBerry,
 };
-
-enum class AiType : uint8_t { kVeryWeak, kWeak, kNormal };
 
 enum class ExpansionMode : uint8_t { kResources = 0, kSpace = 1, kEconomy = 2, kBoth = 3 };
 
@@ -128,6 +127,20 @@ constexpr uint32_t kNever = std::numeric_limits<uint32_t>::max();
 
 struct CheckStepRoadAI {
 	CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const oe);
+
+	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
+	bool reachable_dest(const Map&, const FCoords& dest) const;
+
+	Player* player;
+	uint8_t movecaps;
+	bool open_end;
+};
+
+// Used to walk ower own territory, on fields that are walkable (or as given by mc)
+// plus one step more to a field with own immovable. So that also flags and buildings are
+// included in resulting list
+struct CheckStepOwnTerritory {
+	CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe);
 
 	bool allowed(const Map&, FCoords start, FCoords end, int32_t dir, CheckStep::StepId) const;
 	bool reachable_dest(const Map&, const FCoords& dest) const;
@@ -196,7 +209,7 @@ struct FindNodeUnownedMineable {
 };
 
 // When looking for unowned terrain to acquire, we must
-// consider if any buildings can be built on unowned land.
+// consider if any buildings (incl. mines) can be built on unowned land.
 struct FindNodeUnownedBuildable {
 	FindNodeUnownedBuildable(Player* p, Game& g);
 
@@ -249,6 +262,13 @@ struct FindNodeOpenWater {
 
 struct FindNodeWithFlagOrRoad {
 	bool accept(const Map&, FCoords) const;
+};
+
+// Accepts any field
+struct FindNodeAcceptAll {
+	bool accept(const Map&, FCoords) const {
+		return true;
+	}
 };
 
 struct NearFlag {
@@ -323,11 +343,12 @@ struct BuildableField {
 	uint16_t unowned_mines_spots_nearby;
 	uint16_t unowned_iron_mines_nearby;
 	uint8_t trees_nearby;
+	uint8_t bushes_nearby;
 	uint8_t rocks_nearby;
 	int16_t water_nearby;
 	int16_t open_water_nearby;
 	int16_t distant_water;
-	int8_t fish_nearby;
+	int16_t fish_nearby;
 	int8_t critters_nearby;
 	ResourceAmount ground_water;  // used by wells
 	uint8_t space_consumers_nearby;
@@ -369,6 +390,7 @@ struct BuildableField {
 
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
+	std::vector<uint8_t> collecting_producers_nearby;
 	// and for rangers, fishbreeders:
 	std::vector<uint8_t> supporters_nearby;
 };
@@ -389,7 +411,8 @@ struct EconomyObserver {
 
 	Widelands::Economy& economy;
 	std::deque<Widelands::Flag const*> flags;
-	int32_t dismantle_grace_time;
+	uint32_t dismantle_grace_time;
+	uint32_t fields_block_last_time;
 };
 
 struct BuildingObserver {
@@ -450,6 +473,8 @@ struct BuildingObserver {
 	int32_t substitutes_count;
 
 	std::set<DescriptionIndex> production_hints;
+	DescriptionIndex collected_map_resource;
+	bool requires_supporters;
 
 	// information needed for decision on new building construction
 	int16_t max_preciousness;
@@ -556,6 +581,22 @@ struct MineTypesObserver {
 	uint16_t unoccupied;
 };
 
+// This struct contains count of mineable fields grouped by ore/resource type
+struct MineFieldsObserver {
+
+	void zero();
+	void add(Widelands::DescriptionIndex);
+	void add_critical_ore(Widelands::DescriptionIndex);
+	bool has_critical_ore_fields();
+	uint16_t get(Widelands::DescriptionIndex);
+	uint8_t count_types();
+
+private:
+	// This is the central information of the struct: a pair of resource and count of fields
+	std::map<Widelands::DescriptionIndex, uint16_t> stat;
+	std::set<Widelands::DescriptionIndex> critical_ores;
+};
+
 constexpr int kNeuronWeightLimit = 100;
 constexpr size_t kNeuronMaxPosition = 20;
 constexpr size_t kSecondParentProbability = 50;
@@ -641,10 +682,9 @@ struct ManagementData {
 	            uint32_t old_land,
 	            uint16_t attackers,
 	            int16_t trained_soldiers,
-	            int16_t latest_attackers,
-	            uint16_t conq_ws,
 	            uint16_t strength,
-	            uint32_t existing_ps);
+	            uint32_t existing_ps,
+	            uint32_t first_iron_mine_time);
 	void dump_data(PlayerNumber);
 	uint16_t new_neuron_id() {
 		++next_neuron_id;

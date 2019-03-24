@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,7 +23,6 @@
 #include <vector>
 
 #include "logic/widelands.h"
-#include "ui_basic/slider.h"
 #include "ui_basic/unique_window.h"
 #include "wui/plot_area.h"
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,6 @@
 #include <boost/signals2.hpp>
 
 #include "graphic/align.h"
-#include "graphic/graphic.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 
@@ -59,9 +58,9 @@ public:
 	        int32_t startval,
 	        int32_t minval,
 	        int32_t maxval,
+	        UI::PanelStyle style,
 	        const std::string& label_text = std::string(),
 	        const Units& unit = Units::kNone,
-	        const Image* button_background = g_gr->images().get("images/ui_basic/but3.png"),
 	        SpinBox::Type = SpinBox::Type::kSmall,
 	        // The amount by which units are increased/decreased for small and big steps when a
 	        // button is pressed.
@@ -98,6 +97,6 @@ private:
 	uint32_t padding_;
 	uint32_t number_of_paddings_;
 };
-}
+}  // namespace UI
 
 #endif  // end of include guard: WL_UI_BASIC_SPINBOX_H

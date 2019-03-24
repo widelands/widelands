@@ -1,5 +1,3 @@
--- TODO(GunChleoc): get resi_00.png from C++
-
 include "tribes/scripting/help/format_help.lua"
 
 -- RST
@@ -13,24 +11,6 @@ include "tribes/scripting/help/format_help.lua"
 --  =======================================================
 --  ********** Helper functions for dependencies **********
 --  =======================================================
-
--- RST
--- .. function:: building_section_line(header, text, image)
---
---    Creates a line of h3 formatted text followed by normal text and an image.
---
---    :arg t1: header text.
---    :arg t2: in-line paragraphs text.
---    :arg image: image to be aligned right.
---    :returns: header followed by normal text and image.
---
-function building_section_line(header, text, image)
-   return
-      div("width=100%",
-         div("width=50%", p_font("size=13 color=D1D1D1", vspace(6) .. text .. space(6))) ..
-         div("width=*", p("align=right", vspace(6) .. img(image) .. vspace(12)))
-      )
-end
 
 -- RST
 -- .. function:: dependencies_basic(images[, text = nil])
@@ -64,15 +44,24 @@ end
 --    :arg text: comment of the image.
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies_resi(resource, items, text)
+function dependencies_resi(tribename, resource, items, text)
    if not text then
       text = ""
    end
-   local items_with_resouce = { "tribes/immovables/" .. resource  .. "/idle_00.png" }
-   for count, item in pairs(items) do
-      table.insert(items_with_resouce, item.icon_name)
+   local tribe_descr = wl.Game():get_tribe_description(tribename)
+   local resi
+   local am = 0
+   for amount,name in pairs(tribe_descr.resource_indicators[resource]) do
+      if amount > am then
+         resi = name
+         am = amount
+      end
    end
-   return dependencies_basic(items_with_resouce, text)
+   local items_with_resource = { wl.Game():get_immovable_description(resi).representative_image }
+   for count, item in pairs(items) do
+      table.insert(items_with_resource, item.icon_name)
+   end
+   return dependencies_basic(items_with_resource, text)
 end
 
 
@@ -319,8 +308,8 @@ function building_help_dependencies_production(tribe, building_description)
          elseif(resi_name == "quartz") then resi_name = "stones"
          elseif(resi_name == "marble") then resi_name = "stones"
          elseif(resi_name == "gold_ore") then resi_name = "gold" end
-         result = result .. dependencies_resi(
-            "resi_"..resi_name.."2",
+         result = result .. dependencies_resi(tribe.name,
+            resi_name,
             {building_description, ware_description},
             ware_description.descname
          )
@@ -460,19 +449,11 @@ function building_help_building_section(building_description)
 
    -- Space required
    if (building_description.is_mine) then
-      result = result .. building_section_line(_"Space required:",_"Mine plot","images/wui/overlays/mine.png")
+      result = result .. plot_size_line("mine")
    elseif (building_description.is_port) then
-      result = result .. building_section_line(_"Space required:",_"Port plot","images/wui/overlays/port.png")
+      result = result .. plot_size_line("port")
    else
-      if (building_description.size == "small") then
-         result = result .. building_section_line(_"Space required:",_"Small plot","images/wui/overlays/small.png")
-      elseif (building_description.size == "medium") then
-         result = result .. building_section_line(_"Space required:",_"Medium plot","images/wui/overlays/medium.png")
-      elseif (building_description.size == "big") then
-         result = result .. building_section_line(_"Space required:",_"Big plot","images/wui/overlays/big.png")
-      else
-         result = result .. p(_"Space required:" .. _"Unknown")
-      end
+      result = result .. plot_size_line(building_description.size)
    end
 
    -- Enhanced from
@@ -684,6 +665,9 @@ function building_help_crew_string(tribe, building_description)
             result = result .. h3(ngettext("Worker uses:","Workers use:", number_of_workers)) .. tool_string
          end
       end
+
+      worker_description = building_description.working_positions[1]
+      becomes_description = worker_description.becomes
 
       if (becomes_description) then
          result = result .. help_worker_experience(worker_description, becomes_description)

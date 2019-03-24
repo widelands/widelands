@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -203,5 +203,5 @@ private:
 	// Minimal number of reachable swimmable fields. 1 is minimum for this to be considered "shore"
 	uint16_t min_fields;
 };
-}
+}  // namespace Widelands
 #endif  // end of include guard: WL_LOGIC_FINDNODE_H

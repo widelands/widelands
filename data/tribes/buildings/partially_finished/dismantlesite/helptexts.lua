@@ -13,7 +13,7 @@ end
 
 function building_helptext_purpose()
    -- TRANSLATORS: Purpose helptext for a building
-   return pgettext("building", "A building is being dismantled at this dismantlesite, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
+   return pgettext("building", "A building is being dismantled at this dismantle site, returning some of the resources that were used during this building’s construction to your tribe’s stores.")
 end
 
 function building_helptext_note()

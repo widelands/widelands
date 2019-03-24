@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -69,7 +69,7 @@ public:
 	explicit DismantleSite(const DismantleSiteDescr& descr,
 	                       EditorGameBase&,
 	                       const Coords&,
-	                       Player&,
+	                       Player*,
 	                       bool,
 	                       Building::FormerBuildings& former_buildings);
 
@@ -93,6 +93,6 @@ protected:
 	          float scale,
 	          RenderTarget* dst) override;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_DISMANTLESITE_H

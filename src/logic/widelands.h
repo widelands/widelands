@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,6 +84,7 @@ inline Duration endless() {
 }
 
 using Serial = uint32_t;  /// Serial number for MapObject.
+constexpr Serial kInvalidSerial = std::numeric_limits<uint32_t>::max();
 
 using Direction = uint8_t;
 

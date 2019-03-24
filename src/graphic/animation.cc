@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,17 +42,6 @@
 #include "sound/sound_handler.h"
 
 namespace {
-
-// Parses an array { 12, 23 } into a point.
-void get_point(const LuaTable& table, Vector2i* p) {
-	std::vector<int> pts = table.array_entries<int>();
-	if (pts.size() != 2) {
-		throw wexception("Expected 2 entries, but got %" PRIuS ".", pts.size());
-	}
-	p->x = pts[0];
-	p->y = pts[1];
-}
-
 /**
  * Implements the Animation interface for an animation that is unpacked on disk, that
  * is every frame and every pc color frame is an singular file on disk.
@@ -100,17 +89,19 @@ private:
 	std::vector<const Image*> pcmasks_;
 
 	// name of sound effect that will be played at frame 0.
-	// TODO(sirver): this should be done using play_sound in a program instead of
+	// TODO(sirver): this should be done using playsound in a program instead of
 	// binding it to the animation.
 	std::string sound_effect_;
 	bool play_once_;
 };
 
 NonPackedAnimation::NonPackedAnimation(const LuaTable& table)
-   : frametime_(FRAME_LENGTH), hasplrclrs_(false), scale_(1), play_once_(false) {
+   : frametime_(FRAME_LENGTH),
+     hotspot_(table.get_vector<std::string, int>("hotspot")),
+     hasplrclrs_(false),
+     scale_(1),
+     play_once_(false) {
 	try {
-		get_point(*table.get_table("hotspot"), &hotspot_);
-
 		if (table.has_key("sound_effect")) {
 			std::unique_ptr<LuaTable> sound_effects = table.get_table("sound_effect");
 

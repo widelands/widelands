@@ -6,12 +6,14 @@
 # Jaypad <ju-ju@nataju.fr>, 2017
 # Renaud Bouchard, 2017
 # zecas <jjorge@free.fr>, 2017
+# Balkhmogaehild <balkhmogaehild@protonmail.com>, 2017
+# GunChleoc, 2017
 # David D, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-15 09:25+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-09-17 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: David D, 2018\n"
 "Language-Team: French (https://www.transifex.com/widelands/teams/35159/fr/)\n"
@@ -51,7 +53,7 @@ msgid ""
 "get some valuable resources."
 msgstr ""
 "Construisez une carrière à proximité des roches abondantes afin de libérer "
-"des emplacements de construction et obtenir des ressources de valeur. "
+"des emplacements de construction et obtenir des ressources de valeur."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:65
 msgid "Build a lumberjack’s house, a sawmill and a stonemason’s house"
@@ -201,7 +203,7 @@ msgstr "Battre les Barbares"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:142
 msgid "Defeat the Enemy"
-msgstr "Battre l'ennemi"
+msgstr "Défaire l'ennemi"
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:143
 msgid "End the Barbarians’ existence in this part of the world."
@@ -681,7 +683,7 @@ msgstr ""
 "Bon, pensons ceci dans son ensemble. Pour tisser de l'étoffe nous avons "
 "besoin de laine d'une bergerie. La bergerie elle-même aura besoin d'eau et "
 "de blé pour fonctionner. Donc, cherchons un endroit pour un grand bâtiment "
-"et construisez une ferme en premier. "
+"et construisez une ferme en premier."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:377
@@ -782,7 +784,7 @@ msgstr ""
 "En premier, nous devons trouver plus de ressources pour soutenir notre "
 "développement économique. J'ai repéré une île avec quelques montagnes au "
 "sud. Peut-être que nous y trouverons des ressources précieuse comme du fer "
-"là bas. "
+"là bas."
 
 #. TRANSLATORS: Saledus
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:423
@@ -812,12 +814,12 @@ msgstr "Amalea semble pensive..."
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:437
 msgid ""
 "Salve Lutius. While talking to all our brave builders, they told me that "
-"they had to use up all our remaining gold for building the port. Now we "
-"don’t have any gold left."
+"they have to use all our remaining gold for building the port. So, we won’t "
+"have any gold left after our port is build."
 msgstr ""
 "Salve Lutius. En discutant avec nos braves ouvriers, ils m'ont dit qu'ils "
-"avaient dû utiliser tout l'or restant dans la construction du port. A "
-"l'heure actuelle, nous n'avons plus de lingots."
+"avaient dû utiliser tout l'or restant dans la construction du port. C'est "
+"pourquoi nous n'auront plus d'or après que notre port soit construit."
 
 #. TRANSLATORS: Amalea
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:440
@@ -1059,7 +1061,7 @@ msgstr ""
 "Nous avons aussi besoin de tissus pour produire des armures dans notre "
 "forge. C'est indispensable pour construire certains sites d'entraînement "
 "pour nos soldats. Et plus important et imminent encore, nous en avons besoin"
-" pour affréter des expéditions. "
+" pour affréter des expéditions."
 
 #: ../../data/campaigns/emp03.wmf/scripting/texts.lua:542
 msgid ""

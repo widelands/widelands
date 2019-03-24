@@ -15,7 +15,7 @@ include "scripting/ui.lua"
 --    Sends a message to the player.
 --    If the popup parameter is true and the player is in building mode,
 --    the function waits until the player leaves the building mode
---    before sending the message
+--    before sending the message (only in singleplayer)
 --
 --    :arg player: the recipient of the message
 --    :arg title: the localized title of the message
