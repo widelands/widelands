@@ -1,15 +1,25 @@
 dirname = path.dirname (__file__)
 
+-- TODO(Nordfriese): Make animations
 animations = {
-   idle = {
-      pictures = path.list_files (dirname .. "idle_??.png"),
-      hotspot = {20, 36},
-      fps = 10,
-      scale = 4,
-   }
+   pictures = path.list_files (dirname .. "idle_??.png"),
+   hotspot = {20, 36},
 }
-add_walking_animations (animations, "walk", dirname, "sail", {37, 38}, 10, 4)
-add_walking_animations (animations, "walkload", dirname, "sail", {37, 38}, 10, 4)
+animations = {
+   idle = animations,
+   walk_se = animations,
+   walk_sw = animations,
+   walk_ne = animations,
+   walk_nw = animations,
+   walk_e = animations,
+   walk_w = animations,
+   walkload_se = animations,
+   walkload_sw = animations,
+   walkload_ne = animations,
+   walkload_nw = animations,
+   walkload_e = animations,
+   walkload_w = animations,
+}
 
 tribes:new_ferry_type {
    msgctxt = "frisians_worker",

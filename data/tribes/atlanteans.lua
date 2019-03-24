@@ -28,8 +28,6 @@ dirname = path.dirname(__file__)
 --
 --    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
 --
---    **resource_indicators**: The names for the resource indicators. This table contains a subtable for each resource name plus a subtable named "" for no resources. Each subtable is an array, in which the index of each entry is the highest amount of resources the indicator may indicate.
---
 --    **wares_order**: This defines all the wares that this tribe uses and their display order in the user interface. Each subtable defines a column in the user interface.
 --
 --    **workers_order**:  This defines all the workers that this tribe uses and their display order in the user interface. Each subtable defines a column in the user interface.
@@ -111,31 +109,6 @@ tribes:new_tribe {
       },
       waterway = {
          "tribes/images/atlanteans/waterway_0.png",
-      },
-   },
-
-   resource_indicators = {
-      [""] = {
-         [0] = "atlanteans_resi_none",
-      },
-      coal = {
-         [10] = "atlanteans_resi_coal_1",
-         [20] = "atlanteans_resi_coal_2",
-      },
-      iron = {
-         [10] = "atlanteans_resi_iron_1",
-         [20] = "atlanteans_resi_iron_2",
-      },
-      gold = {
-         [10] = "atlanteans_resi_gold_1",
-         [20] = "atlanteans_resi_gold_2",
-      },
-      stones = {
-         [10] = "atlanteans_resi_stones_1",
-         [20] = "atlanteans_resi_stones_2",
-      },
-      water = {
-         [100] = "atlanteans_resi_water",
       },
    },
 
