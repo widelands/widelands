@@ -7,7 +7,6 @@ tribes:new_productionsite_type {
    helptext_script = dirname .. "helptexts.lua",
    icon = dirname .. "menu.png",
    size = "small",
-   enhancement = "empire_lumberjacks_house2",
 
    buildcost = {
       log = 2,
@@ -16,6 +15,7 @@ tribes:new_productionsite_type {
 
    return_on_dismantle = {
       log = 1,
+      planks = 1,
    },
 
    animations = {
@@ -42,7 +42,7 @@ tribes:new_productionsite_type {
          descname = "felling trees",
          actions = {
             "sleep=400000", -- Barbarian lumberjack sleeps 25000
-            "worker=chop"
+            "callworker=harvest"
          }
       },
    },

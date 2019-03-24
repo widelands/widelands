@@ -143,7 +143,7 @@ NetHostProxy::NetHostProxy(const std::pair<NetAddress, NetAddress>& addresses,
 	conn_->send(password);
 
 	// Wait 10 seconds for an answer
-	uint32_t endtime = time(nullptr) + 10;
+	time_t endtime = time(nullptr) + 10;
 	while (!NetRelayConnection::Peeker(conn_.get()).cmd()) {
 		if (time(nullptr) > endtime) {
 			// No message received in time

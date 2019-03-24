@@ -52,7 +52,6 @@ wl_library(ui_fsmenu_main
   DEPENDS
     base_i18n
     build_info
-    graphic
     ui_basic
     ui_fsmenu_main_menu
 )
@@ -76,7 +75,6 @@ wl_library(ui_fsmenu_loading_common
     singleplayer.h
   DEPENDS
     base_i18n
-    graphic
     graphic_text_constants
     io_filesystem
     profile
@@ -180,7 +178,6 @@ wl_library(ui_fsmenu_misc
     intro.h
   DEPENDS
     base_i18n
-    graphic
     ui_basic
     ui_fsmenu_base
 )

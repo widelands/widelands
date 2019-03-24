@@ -1,11 +1,11 @@
 wl_library(wui_chat_ui
   SRCS
-    chatoverlay.cc
-    chatoverlay.h
+    chat_overlay.cc
+    chat_overlay.h
     game_chat_menu.cc
     game_chat_menu.h
-    gamechatpanel.cc
-    gamechatpanel.h
+    game_chat_panel.cc
+    game_chat_panel.h
     chat_msg_layout.h
     chat_msg_layout.cc
   DEPENDS
@@ -73,7 +73,6 @@ wl_library(wui_common_gamedetails
     base_time_string
     helper
     game_io
-    graphic
     graphic_fonthandler
     graphic_image_io
     graphic_surface
@@ -176,8 +175,12 @@ wl_library(wui
     encyclopedia_window.h
     fieldaction.cc
     fieldaction.h
+    game_client_disconnected.cc
+    game_client_disconnected.h
     game_debug_ui.cc
     game_debug_ui.h
+    game_exit_confirm_box.cc
+    game_exit_confirm_box.h
     game_statistics_menu.cc
     game_statistics_menu.h
     game_main_menu_save_game.cc
@@ -227,6 +230,8 @@ wl_library(wui
     portdockwaresdisplay.h
     productionsitewindow.cc
     productionsitewindow.h
+    seafaring_statistics_menu.cc
+    seafaring_statistics_menu.h
     shipwindow.cc
     shipwindow.h
     soldiercapacitycontrol.cc
@@ -279,6 +284,7 @@ wl_library(wui
     logic_filesystem_constants
     logic_game_controller
     logic_game_settings
+    logic_generic_save_handler
     logic_tribe_basic_info
     logic_widelands_geometry
     network

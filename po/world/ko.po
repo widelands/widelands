@@ -1,15 +1,20 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2017 Widelands Development Team
+# Copyright (C) 2005-2018 Widelands Development Team
 # 
 # Translators:
+# GunChleoc, 2018
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010
+# GunChleoc, 2015,2018
 # ks k, 2017
 # ks k, 2017
+# Moon Yeonki <backnii@gmail.com>, 2017
+# TaeMin An <kavern02@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2017-11-25 03:55+0000\n"
-"PO-Revision-Date: 2017-11-29 18:05+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2018-07-06 14:22+0000\n"
+"PO-Revision-Date: 2018-07-08 10:22+0000\n"
 "Last-Translator: ks k\n"
 "Language-Team: Korean (http://www.transifex.com/widelands/widelands/language/ko/)\n"
 "MIME-Version: 1.0\n"
@@ -224,7 +229,7 @@ msgstr "조개껍질"
 #: ../../data/world/immovables/standing_stones/standing_stone6/init.lua:5
 #: ../../data/world/immovables/standing_stones/standing_stone7/init.lua:5
 msgid "Standing Stone"
-msgstr "선돌"
+msgstr "서있는 돌"
 
 #. TRANSLATORS: This track is made of footprints in the snow
 #: ../../data/world/immovables/track_winter/init.lua:6
@@ -253,7 +258,7 @@ msgstr "오리나무"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:12
 msgid "Aspen (Sapling)"
-msgstr " 사시나무 (유목)"
+msgstr "사시나무 (유목)"
 
 #: ../../data/world/immovables/trees/aspen/init.lua:35
 msgid "Aspen (Pole)"
@@ -495,7 +500,7 @@ msgstr "참나무 (유목)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:35
 msgid "Oak (Pole)"
-msgstr "참나무 (성목) "
+msgstr "참나무 (성목)"
 
 #: ../../data/world/immovables/trees/oak/init.lua:58
 msgid "Oak (Mature)"
@@ -551,63 +556,63 @@ msgstr "코코넛 야자 나무"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:12
 msgid "Date Palm (Sapling)"
-msgstr "대추야자 (유목)"
+msgstr "대추 야자 나무 (유목)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:35
 msgid "Date Palm (Pole)"
-msgstr "대추야자 (성목)"
+msgstr "대추 야자 나무 (성목)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:58
 msgid "Date Palm (Mature)"
-msgstr "대추야자 (성숙목)"
+msgstr "대추 야자 나무 (성숙목)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:84
 msgid "Date Palm (Old)"
-msgstr "대추야자 (고목)"
+msgstr "대추 야자 나무 (고목)"
 
 #: ../../data/world/immovables/trees/palm_date/init.lua:85
 msgid "Date Palm"
-msgstr "대추야자"
+msgstr "대추 야자 나무"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:12
 msgid "Oil Palm (Sapling)"
-msgstr "기름야자나무 (유목)"
+msgstr "기름야자 나무 (유목)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:35
 msgid "Oil Palm (Pole)"
-msgstr "기름야자나무 (성목)"
+msgstr "기름야자 나무 (성목)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:58
 msgid "Oil Palm (Mature)"
-msgstr "기름야자나무 (성숙목)"
+msgstr "기름야자 나무 (성숙목)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:85
 msgid "Oil Palm (Old)"
-msgstr "기름야자나무 (고목)"
+msgstr "기름야자 나무 (고목)"
 
 #: ../../data/world/immovables/trees/palm_oil/init.lua:86
 msgid "Oil Palm"
-msgstr "기름야자나무"
+msgstr "기름야자 나무"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:12
 msgid "Roystonea regia Palm (Sapling)"
-msgstr "대왕야자나무 (유목)"
+msgstr "대왕야자 나무 (유목)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:35
 msgid "Roystonea regia Palm (Pole)"
-msgstr "대왕야자나무 (성목)"
+msgstr "대왕야자 나무 (성목)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:58
 msgid "Roystonea regia Palm (Mature)"
-msgstr "대왕야자나무 (성숙목)"
+msgstr "대왕야자 나무 (성숙목)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:81
 msgid "Roystonea regia Palm (Old)"
-msgstr "대왕야자나무 (고목)"
+msgstr "대왕야자 나무 (고목)"
 
 #: ../../data/world/immovables/trees/palm_roystonea/init.lua:82
 msgid "Roystonea regia Palm"
-msgstr "대왕야자나무"
+msgstr "대왕야자 나무"
 
 #: ../../data/world/immovables/trees/rowan/init.lua:12
 msgid "Rowan (Sapling)"
@@ -631,23 +636,23 @@ msgstr "마가목"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:12
 msgid "Spruce (Sapling)"
-msgstr "가문비나무 (유목)"
+msgstr "가문비 나무 (유목)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:35
 msgid "Spruce (Pole)"
-msgstr "가문비나무 (성목)"
+msgstr "가문비 나무 (성목)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:58
 msgid "Spruce (Mature)"
-msgstr "가문비나무 (성숙목)"
+msgstr "가문비 나무 (성숙목)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:81
 msgid "Spruce (Old)"
-msgstr "가문비나무 (고목)"
+msgstr "가문비 나무 (고목)"
 
 #: ../../data/world/immovables/trees/spruce/init.lua:82
 msgid "Spruce"
-msgstr "가문비나무"
+msgstr "가문비 나무"
 
 #. TRANSLATORS: This is a fictitious tree. Be creative if you want.
 #: ../../data/world/immovables/trees/twine/init.lua:13

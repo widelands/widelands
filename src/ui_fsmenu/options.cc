@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,7 +31,7 @@
 #include "base/log.h"
 #include "base/wexception.h"
 #include "graphic/default_resolution.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/text/bidi.h"
 #include "graphic/text/font_set.h"
@@ -83,26 +83,12 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
      // Buttons
      button_box_(this, 0, 0, UI::Box::Horizontal),
-     cancel_(&button_box_,
-             "cancel",
-             0,
-             0,
-             0,
-             0,
-             g_gr->images().get("images/ui_basic/but0.png"),
-             _("Cancel")),
-     apply_(&button_box_,
-            "apply",
-            0,
-            0,
-            0,
-            0,
-            g_gr->images().get("images/ui_basic/but0.png"),
-            _("Apply")),
-     ok_(&button_box_, "ok", 0, 0, 0, 0, g_gr->images().get("images/ui_basic/but2.png"), _("OK")),
+     cancel_(&button_box_, "cancel", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Cancel")),
+     apply_(&button_box_, "apply", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuSecondary, _("Apply")),
+     ok_(&button_box_, "ok", 0, 0, 0, 0, UI::ButtonStyle::kFsMenuPrimary, _("OK")),
 
      // Tabs
-     tabs_(this, g_gr->images().get("images/ui_basic/but1.png"), UI::TabPanel::Type::kBorder),
+     tabs_(this, UI::TabPanelStyle::kFsMenu),
 
      box_interface_(&tabs_, 0, 0, UI::Box::Horizontal, 0, 0, padding_),
      box_interface_left_(&box_interface_, 0, 0, UI::Box::Vertical, 0, 0, padding_),
@@ -118,19 +104,32 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                         100,  // 100 is arbitrary, will be resized in layout().
                         100,  // 100 is arbitrary, will be resized in layout().
                         24,
-                        _("Language")),
+                        _("Language"),
+                        UI::DropdownType::kTextual,
+                        UI::PanelStyle::kFsMenu),
      resolution_dropdown_(&box_interface_left_,
                           0,
                           0,
                           100,  // 100 is arbitrary, will be resized in layout().
                           100,  // 100 is arbitrary, will be resized in layout().
                           24,
-                          _("Window Size")),
+                          _("Window Size"),
+                          UI::DropdownType::kTextual,
+                          UI::PanelStyle::kFsMenu),
 
      fullscreen_(&box_interface_left_, Vector2i::zero(), _("Fullscreen"), "", 0),
-     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab input"), "", 0),
-     sb_maxfps_(&box_interface_left_, 0, 0, 0, 0, opt.maxfps, 0, 99, _("Maximum FPS:")),
-     translation_info_(&box_interface_, 0, 0, 100, 100),
+     inputgrab_(&box_interface_left_, Vector2i::zero(), _("Grab Input"), "", 0),
+     sb_maxfps_(&box_interface_left_,
+                0,
+                0,
+                0,
+                0,
+                opt.maxfps,
+                0,
+                99,
+                UI::PanelStyle::kFsMenu,
+                _("Maximum FPS:")),
+     translation_info_(&box_interface_, 0, 0, 100, 100, UI::PanelStyle::kFsMenu),
 
      // Windows options
      snap_win_overlap_only_(
@@ -147,6 +146,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                    opt.panel_snap_distance,
                    0,
                    99,
+                   UI::PanelStyle::kFsMenu,
                    _("Distance for windows to snap to other panels:"),
                    UI::SpinBox::Units::kPixels),
 
@@ -158,6 +158,7 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                     opt.border_snap_distance,
                     0,
                     99,
+                    UI::PanelStyle::kFsMenu,
                     _("Distance for windows to snap to borders:"),
                     UI::SpinBox::Units::kPixels),
 
@@ -175,9 +176,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                   opt.autosave / 60,
                   0,
                   100,
+                  UI::PanelStyle::kFsMenu,
                   _("Save game automatically every:"),
                   UI::SpinBox::Units::kMinutes,
-                  g_gr->images().get("images/ui_basic/but3.png"),
                   UI::SpinBox::Type::kBig),
 
      sb_rolling_autosave_(&box_saving_,
@@ -188,9 +189,9 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
                           opt.rolling_autosave,
                           1,
                           20,
+                          UI::PanelStyle::kFsMenu,
                           _("Maximum number of autosave files:"),
                           UI::SpinBox::Units::kNone,
-                          g_gr->images().get("images/ui_basic/but3.png"),
                           UI::SpinBox::Type::kBig),
 
      zip_(&box_saving_,
@@ -207,7 +208,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      // Game options
      auto_roadbuild_mode_(
         &box_game_, Vector2i::zero(), _("Start building road after placing a flag")),
-     show_workarea_preview_(&box_game_, Vector2i::zero(), _("Show buildings area preview")),
      transparent_chat_(
         &box_game_, Vector2i::zero(), _("Show in-game chat with transparent background"), "", 0),
 
@@ -217,14 +217,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
      os_(opt) {
 	// Set up UI Elements
 	title_.set_fontsize(UI_FONT_SIZE_BIG);
-	translation_info_.force_new_renderer();
 
 	// Buttons
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &ok_ : &cancel_);
+	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &ok_ : &cancel_);
 	button_box_.add_inf_space();
 	button_box_.add(&apply_);
 	button_box_.add_inf_space();
-	button_box_.add(UI::g_fh1->fontset()->is_rtl() ? &cancel_ : &ok_);
+	button_box_.add(UI::g_fh->fontset()->is_rtl() ? &cancel_ : &ok_);
 
 	// Tabs
 	tabs_.add("options_interface", _("Interface"), &box_interface_, "");
@@ -259,6 +258,13 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 	box_sound_.add(&fx_);
 	box_sound_.add(&message_sound_);
 
+	if (g_sound_handler.is_backend_disabled()) {
+		UI::Textarea* sound_warning = new UI::Textarea(
+		   &box_sound_, 0, 0, _("Sound is disabled due to a problem with the sound driver"));
+		sound_warning->set_color(UI_FONT_CLR_WARNING);
+		box_sound_.add(sound_warning);
+	}
+
 	// Saving
 	box_saving_.add(&sb_autosave_);
 	box_saving_.add(&sb_rolling_autosave_);
@@ -267,7 +273,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Game
 	box_game_.add(&auto_roadbuild_mode_);
-	box_game_.add(&show_workarea_preview_);
 	box_game_.add(&transparent_chat_);
 	box_game_.add(&single_watchwin_);
 
@@ -327,10 +332,11 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Sound options
 	music_.set_state(opt.music);
-	music_.set_enabled(!g_sound_handler.lock_audio_disabling_);
+	music_.set_enabled(!g_sound_handler.is_backend_disabled());
 	fx_.set_state(opt.fx);
-	fx_.set_enabled(!g_sound_handler.lock_audio_disabling_);
+	fx_.set_enabled(!g_sound_handler.is_backend_disabled());
 	message_sound_.set_state(opt.message_sound);
+	message_sound_.set_enabled(!g_sound_handler.is_backend_disabled());
 
 	// Saving options
 	zip_.set_state(opt.zip);
@@ -338,7 +344,6 @@ FullscreenMenuOptions::FullscreenMenuOptions(OptionsCtrl::OptionsStruct opt)
 
 	// Game options
 	auto_roadbuild_mode_.set_state(opt.auto_roadbuild_mode);
-	show_workarea_preview_.set_state(opt.show_warea);
 	transparent_chat_.set_state(opt.transparent_chat);
 	single_watchwin_.set_state(opt.single_watchwin);
 
@@ -581,7 +586,6 @@ OptionsCtrl::OptionsStruct FullscreenMenuOptions::get_values() {
 
 	// Game options
 	os_.auto_roadbuild_mode = auto_roadbuild_mode_.get_state();
-	os_.show_warea = show_workarea_preview_.get_state();
 	os_.transparent_chat = transparent_chat_.get_state();
 	os_.single_watchwin = single_watchwin_.get_state();
 
@@ -642,7 +646,6 @@ OptionsCtrl::OptionsStruct OptionsCtrl::options_struct(uint32_t active_tab) {
 
 	// Game options
 	opt.auto_roadbuild_mode = opt_section_.get_bool("auto_roadbuild_mode", true);
-	opt.show_warea = opt_section_.get_bool("workareapreview", true);
 	opt.transparent_chat = opt_section_.get_bool("transparent_chat", true);
 	opt.single_watchwin = opt_section_.get_bool("single_watchwin", false);
 
@@ -684,7 +687,6 @@ void OptionsCtrl::save_options() {
 
 	// Game options
 	opt_section_.set_bool("auto_roadbuild_mode", opt.auto_roadbuild_mode);
-	opt_section_.set_bool("workareapreview", opt.show_warea);
 	opt_section_.set_bool("transparent_chat", opt.transparent_chat);
 	opt_section_.set_bool("single_watchwin", opt.single_watchwin);
 
@@ -693,7 +695,7 @@ void OptionsCtrl::save_options() {
 
 	WLApplication::get()->set_input_grab(opt.inputgrab);
 	i18n::set_locale(opt.language);
-	UI::g_fh1->reinitialize_fontset(i18n::get_locale());
+	UI::g_fh->reinitialize_fontset(i18n::get_locale());
 	g_sound_handler.set_disable_music(!opt.music);
 	g_sound_handler.set_disable_fx(!opt.fx);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ class EditorInteractive;
  * This is the new map selection menu. It offers
  * the user to choose the new world and a few other
  * things like size, world ....
-*/
+ */
 struct MainMenuNewMap : public UI::Window {
 	explicit MainMenuNewMap(EditorInteractive&);
 

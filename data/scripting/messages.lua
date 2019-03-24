@@ -15,7 +15,7 @@ include "scripting/ui.lua"
 --    Sends a message to the player.
 --    If the popup parameter is true and the player is in building mode,
 --    the function waits until the player leaves the building mode
---    before sending the message
+--    before sending the message (only in singleplayer)
 --
 --    :arg player: the recipient of the message
 --    :arg title: the localized title of the message
@@ -32,6 +32,28 @@ function send_message(player, title, body, parameters)
    end
    player:send_message(title, body, parameters)
 end
+
+
+-- RST
+-- .. function:: send_to_all(text[, heading])
+--
+--    Sends a game status message to all players.
+--
+--    :arg text: the localized body of the message. You can use rt functions here.
+--    :type text: :class:`string`
+--    :arg heading: the localized title of the message (optional)
+--    :type heading: :class:`string`
+--
+function send_to_all(text, heading)
+   for idx,plr in ipairs(game.players) do
+      if (heading ~= nil and heading ~= "") then
+         send_message(plr, _"Status", text, {popup=true, heading=heading})
+      else
+         send_message(plr, _"Status", text, {popup=true})
+      end
+   end
+end
+
 
 -- RST
 -- .. function:: message_box(player, title, message, parameters)

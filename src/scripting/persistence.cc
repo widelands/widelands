@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,10 +48,10 @@ int LuaWriter(lua_State* /* L */, const void* write_data, size_t len, void* user
 }
 
 const char* LuaReader(lua_State* /* L */, void* userdata, size_t* bytes_read) {
-	LuaReaderHelper* helper = static_cast<LuaReaderHelper*>(userdata);
+	const LuaReaderHelper& helper = *static_cast<LuaReaderHelper*>(userdata);
 
-	*bytes_read = helper->data_len;
-	return helper->data.get();
+	*bytes_read = helper.data_len;
+	return helper.data.get();
 }
 
 }  // namespace

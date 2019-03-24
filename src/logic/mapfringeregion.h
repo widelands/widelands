@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -77,6 +77,10 @@ private:
 	typename AreaType::RadiusType remaining_in_phase_;
 	uint8_t phase_;
 };
-}
+
+// Forward declarations of template instantiations
+template <> bool MapFringeRegion<Area<FCoords>>::advance(const Map& map);
+template <> bool MapFringeRegion<Area<>>::advance(const Map& map);
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAPFRINGEREGION_H
