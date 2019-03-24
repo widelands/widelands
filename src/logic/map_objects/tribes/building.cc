@@ -161,6 +161,13 @@ BuildingDescr::BuildingDescr(const std::string& init_descname,
 		   Buildcost(table.get_table("return_on_dismantle_on_enhanced"), egbase_.tribes());
 	}
 
+/* NOCOM(codereview): I think we should refactor needs_waterways and needs_seafaring to a Lua table
+
+    map_check = { "seafaring", "waterways" }
+
+A building will be available if it satisfies any of the checks (logical ||)
+
+*/
 	needs_seafaring_ = table.has_key("needs_seafaring") ? table.get_bool("needs_seafaring") : false;
 	needs_waterways_ = table.has_key("needs_waterways") ? table.get_bool("needs_waterways") : false;
 

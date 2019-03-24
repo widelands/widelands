@@ -101,7 +101,8 @@ RouteAStar<Est_>::RouteAStar(Router& router, WareWorker type, const Estimator& e
  */
 template <typename Est_>
 void RouteAStar<Est_>::push(RoutingNode& node, int32_t cost, RoutingNode* backlink) {
-	if (type_ == wwWARE) {
+	switch (type_) {
+	case wwWARE: {
 		if (node.mpf_cycle_ware != mpf_cycle) {
 			node.mpf_cycle_ware = mpf_cycle;
 			node.mpf_backlink_ware = backlink;
@@ -113,8 +114,8 @@ void RouteAStar<Est_>::push(RoutingNode& node, int32_t cost, RoutingNode* backli
 			node.mpf_realcost_ware = cost;
 			open_.decrease_key(&node);
 		}
-	}
-	else {
+	} break;
+	case wwWORKER: {
 		if (node.mpf_cycle_worker != mpf_cycle) {
 			node.mpf_cycle_worker = mpf_cycle;
 			node.mpf_backlink_worker = backlink;
@@ -126,6 +127,7 @@ void RouteAStar<Est_>::push(RoutingNode& node, int32_t cost, RoutingNode* backli
 			node.mpf_realcost_worker = cost;
 			open_.decrease_key(&node);
 		}
+	} break;
 	}
 }
 
@@ -150,10 +152,11 @@ template <typename Est_> RoutingNode* RouteAStar<Est_>::step() {
 		// We have already found the best path
 		// to this neighbour, no need to visit it again.
 		if ((type_ == wwWARE ? neighbour.mpf_cycle_ware : neighbour.mpf_cycle_worker) == mpf_cycle &&
-				!neighbour.cookie(type_).is_active())
+			!neighbour.cookie(type_).is_active()) {
 			continue;
+		}
 
-		int32_t realcost = (type_ == wwWARE ? current->mpf_realcost_ware : current->mpf_realcost_worker) +
+		const int32_t realcost = (type_ == wwWARE ? current->mpf_realcost_ware : current->mpf_realcost_worker) +
 				temp_neighbour.get_cost();
 		push(neighbour, realcost, current);
 	}

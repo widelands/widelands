@@ -24,6 +24,7 @@
 
 namespace Widelands {
 
+// NOCOM(codereview): Can this be an enum class now for type safety, since we got rid o the mask?
 enum RoadType : uint8_t {
 	kNone = 0,
 	kNormal = 1,

@@ -39,8 +39,9 @@ void MapWaterwayPacket::read(FileSystem& fs,
                          EditorGameBase& egbase,
                          bool const skip,
                          MapObjectLoader& mol) {
-	if (skip)
+	if (skip) {
 		return;
+	}
 
 	FileRead fr;
 	try {
@@ -80,11 +81,14 @@ void MapWaterwayPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObjectS
 	const Map& map = egbase.map();
 	Field* field = &map[0];
 	Field const* const fields_end = field + map.max_index();
-	for (; field < fields_end; ++field)
-		if (upcast(Waterway const, ww, field->get_immovable()))  // only waterways
+	for (; field < fields_end; ++field) {
+		if (upcast(Waterway const, ww, field->get_immovable())) { // only waterways
 			//  Waterways can life on multiple positions.
-			if (!mos.is_object_known(*ww))
+			if (!mos.is_object_known(*ww)) {
 				fw.unsigned_32(mos.register_object(*ww));
+			}
+		}
+	}
 	fw.unsigned_32(0xffffffff);
 
 	fw.write(fs, "binary/waterway");

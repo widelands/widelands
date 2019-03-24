@@ -62,7 +62,7 @@ void MapFlagPacket::read(FileSystem& fs,
 				if (!(0 < owner && owner <= nr_players)) {
 					throw GameDataError("Invalid player number: %i.", owner);
 				}
-
+// NOCOM(codereview): Add savegame compatibility
 				const Serial ware_economy_serial = fr.unsigned_32();
 				const Serial worker_economy_serial = fr.unsigned_32();
 

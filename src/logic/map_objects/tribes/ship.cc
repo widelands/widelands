@@ -1120,7 +1120,7 @@ Load / Save implementation
 */
 
 constexpr uint8_t kCurrentPacketVersion = 9;
-
+// NOCOM(codereview) Add savegame compatibility
 const Bob::Task* Ship::Loader::get_task(const std::string& name) {
 	if (name == "shipidle" || name == "ship")
 		return &taskShip;

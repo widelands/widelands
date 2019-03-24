@@ -42,6 +42,7 @@ namespace Widelands {
  */
 struct Pathfield {
 	struct LessCost {
+// NOCOM(codereview) Remove default types in this class?
 		bool operator()(const Pathfield& a, const Pathfield& b, WareWorker = wwWORKER) const {
 			return a.cost() < b.cost();
 		}

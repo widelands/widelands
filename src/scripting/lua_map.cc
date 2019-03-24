@@ -314,8 +314,9 @@ WaresWorkersMap get_valid_workers_for(const RoadBase& r) {
 	}
 	else {
 		valid_workers.insert(WorkerAmount(r.owner().tribe().carrier(), 1));
-		if (r.get_roadtype() == RoadType::kBusy)
+		if (r.get_roadtype() == RoadType::kBusy) {
 			valid_workers.insert(WorkerAmount(r.owner().tribe().carrier2(), 1));
+		}
 	}
 
 	return valid_workers;
@@ -757,7 +758,7 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 		// TODO(sirver): not yet implemented
 		return CAST_TO_LUA(Worker);
 	case MapObjectType::FERRY:
-		// TODO(Nordfriese): not yet implemented
+		// NOCOM(codereview): not yet implemented
 		return CAST_TO_LUA(Worker);
 	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(Soldier);
@@ -771,7 +772,7 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 		return CAST_TO_LUA(Road);
 	case MapObjectType::WATERWAY:
 	case MapObjectType::ROADBASE:
-		// TODO(Nordfriese): not yet implemented.
+		// NOCOM(codereview): not yet implemented.
 		return CAST_TO_LUA(Road);
 	case MapObjectType::PORTDOCK:
 		return CAST_TO_LUA(PortDock);
@@ -4204,6 +4205,7 @@ int LuaPlayerImmovable::get_owner(lua_State* L) {
 }
 
 // UNTESTED, for debug only
+// NOCOM(codereview) These are used in data/campaigns/tutorial01_basic_control.wmf/scripting/mission_thread.lua, fix.
 int LuaPlayerImmovable::get_debug_ware_economy(lua_State* L) {
 	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWARE));
 	return 1;
@@ -4260,7 +4262,7 @@ const PropertyType<LuaFlag> LuaFlag::Properties[] = {
 /* RST
    .. attribute:: ware_economy
 
-      (RO) Returns the economy that this flag belongs to.
+      (RO) Returns the ware economy that this flag belongs to.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy
@@ -4273,10 +4275,19 @@ int LuaFlag::get_ware_economy(lua_State* L) {
 	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy(wwWARE)));
 }
 
+/* NOCOM(codereview) Fix Lua scripts
+
+data/campaigns/emp03.wmf/scripting/mission_thread.lua:   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 4 do
+data/campaigns/emp04.wmf/scripting/starting_conditions.lua:field_warehouse.brn.immovable.economy:set_ware_target_quantity("beer", 180)
+data/campaigns/tutorial04_economy.wmf/scripting/mission_thread.lua:   while not mv.windows.economy_options do sleep(200) end
+data/campaigns/tutorial04_economy.wmf/scripting/mission_thread.lua:   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 20 do
+
+*/
+
 /* RST
    .. attribute:: worker_economy
 
-      (RO) Returns the economy that this flag belongs to.
+      (RO) Returns the worker economy that this flag belongs to.
 
       **Warning**: Since economies can disappear when a player merges them
       through placing/deleting roads and flags, you must get a fresh economy

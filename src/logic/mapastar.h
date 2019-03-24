@@ -28,6 +28,7 @@
 namespace Widelands {
 
 struct MapAStarBase {
+	// NOCOM(codereview): If we removed the default for the type, it would be easier to ensure that we haven't missed any necessary code changes.
 	explicit MapAStarBase(Map& m, WareWorker type = wwWORKER) :
 			map(m), pathfields(m.pathfieldmgr_->allocate()), queue(type) {
 	}

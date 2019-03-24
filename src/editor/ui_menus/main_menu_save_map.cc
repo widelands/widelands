@@ -316,6 +316,7 @@ bool MainMenuSaveMap::save_map(std::string filename, bool binary) {
 	} else {
 		map->delete_tag("ferries");
 	}
+// NOCOM(codereview): We should add the waterways length to the map options. I think a spinbox would be best for this.
 
 	if (map->has_artifacts()) {
 		map->add_tag("artifacts");

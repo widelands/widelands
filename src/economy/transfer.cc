@@ -116,7 +116,7 @@ PlayerImmovable* Transfer::get_destination(Game& g) {
  * Determine where we should be going from our current location.
  */
 PlayerImmovable* Transfer::get_next_step(PlayerImmovable* const location, bool& success) {
-	WareWorker type = worker_ ? wwWORKER : wwWARE;
+	const WareWorker type = worker_ ? wwWORKER : wwWARE;
 	if (!location || !location->get_economy(type)) {
 		tlog("no location or economy -> fail\n");
 		success = false;

@@ -137,6 +137,7 @@ void RoadBase::unmark_map(EditorGameBase& egbase) {
 		// mark the road that leads up to this field
 		if (steps > 0) {
 			const Direction dir = get_reverse_dir(path_[steps - 1]);
+// NOCOM(codereview): I am seeing these 2 lines a lot - pull out a function? This is much better than the old code anyway :)
 			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
 				egbase.set_road(curf, dir, RoadType::kNone);
 		}

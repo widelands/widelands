@@ -277,6 +277,8 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 			MapRoaddataPacket p;
 			p.read(*fs_, egbase, is_game, *mol_);
 		}
+		// NOCOM(codereview): Do we want a consistency check?.
+		// We should have both waterway packet files or none.
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Waterwaydata Data ... ");

@@ -139,7 +139,7 @@ public:
 	Widelands::Coords get_build_road_end() const;
 
 	bool is_building_waterway() const {
-		return buildwaterway_;
+		return buildwaterway_ != nullptr;
 	}
 	Widelands::CoordPath* get_build_waterway() {
 		return buildwaterway_;
@@ -320,6 +320,7 @@ private:
 	Widelands::CoordPath* buildroad_;  //  path for the new road
 	Widelands::PlayerNumber road_build_player_;
 
+	// NOCOM(codereview) Use a unique_ptr
 	Widelands::CoordPath* buildwaterway_;
 	Widelands::PlayerNumber waterway_build_player_;
 

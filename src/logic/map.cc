@@ -1790,8 +1790,9 @@ int32_t Map::findpath(Coords instart,
 		return 0;  // duh...
 	}
 
-	if (!checkstep.reachable_dest(*this, end))
+	if (!checkstep.reachable_dest(*this, end)) {
 		return -1;
+	}
 
 	if (!persist)
 		upper_cost_limit = 0;

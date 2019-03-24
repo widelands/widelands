@@ -86,17 +86,15 @@ public:
 	}
 
 	void reset_path_finding_cycle(WareWorker which) {
-		if (which == wwWARE)
+		if (which == wwWARE) {
 			mpf_cycle_ware = 0;
-		else
+		} else {
 			mpf_cycle_worker = 0;
+		}
 	}
 
 	int32_t cost(WareWorker which) const {
-		if (which == wwWARE)
-			return mpf_realcost_ware + mpf_estimate_ware;
-		else
-			return mpf_realcost_worker + mpf_estimate_worker;
+		return (which == wwWARE) ? mpf_realcost_ware + mpf_estimate_ware : mpf_realcost_worker + mpf_estimate_worker;
 	}
 	Queue::Cookie& cookie(WareWorker which) {
 		return which == wwWARE ? mpf_cookie_ware : mpf_cookie_worker;

@@ -87,7 +87,7 @@ struct NoteEconomy {
  * connected by roads or the seafaring network - though of course, most code operates
  * on the assumption that they are, with fallbacks for when they aren't.
  *
- * Every thing that has economies now has one economy that handles only wares and one that handles
+ * Everything that has economies now has one economy that handles only wares and one that handles
  * only workers. The reason for this design is that two road networks connected only by ferries
  * are the same economy from the ware point of view, but separate economies from a worker's point
  * of view. This fix involves the least amount of code duplication.

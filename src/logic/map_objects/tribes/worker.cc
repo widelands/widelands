@@ -1170,27 +1170,29 @@ void Worker::set_location(PlayerImmovable* const location) {
  */
 void Worker::set_economy(Economy* const economy, WareWorker type) {
 	Economy* old = get_economy(type);
-	if (economy == old)
+	if (economy == old) {
 		return;
-
-	if (old && type == wwWORKER) {
-		old->remove_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
 	}
 
-	(type == wwWARE ? ware_economy_ : worker_economy_) = economy;
-
-	if (type == wwWARE) {
+	switch (type) {
+	case wwWARE: {
+		ware_economy_ = economy;
 		if (WareInstance* const ware = get_carried_ware(get_owner()->egbase())) {
 			ware->set_economy(ware_economy_);
 		}
-	}
-	else {
+	} break;
+	case wwWORKER: {
+		worker_economy_ = economy;
+		if (old) {
+			old->remove_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
+		}
 		if (supply_) {
 			supply_->set_economy(worker_economy_);
 		}
 		if (worker_economy_) {
 			worker_economy_->add_workers(owner().tribe().worker_index(descr().name().c_str()), 1);
 		}
+	} break;
 	}
 }
 
@@ -1508,8 +1510,9 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 
 			Path path(road.get_path());
 
-			if (nextstep != &road.get_flag(RoadBase::FlagEnd))
+			if (nextstep != &road.get_flag(RoadBase::FlagEnd)) {
 				path.reverse();
+			}
 
 			molog("[transfer]: starting task [movepath] and setting location to road %u\n",
 			      road.serial());
@@ -1517,10 +1520,10 @@ void Worker::transfer_update(Game& game, State& /* state */) {
 			set_location(&road);
 		} else if (upcast(RoadBase, road, nextstep)) {  //  Flag to Road
 			if (&road->get_flag(RoadBase::FlagStart) != location &&
-			    &road->get_flag(RoadBase::FlagEnd) != location)
+			    &road->get_flag(RoadBase::FlagEnd) != location) {
 				throw wexception(
 				   "MO(%u): [transfer]: nextstep is road, but we are nowhere near", serial());
-
+			}
 			molog("[transfer]: set location to road %u\n", road->serial());
 			set_location(road);
 			set_animation(game, descr().get_animation("idle"));
@@ -2438,10 +2441,13 @@ struct FindFlagWithPlayersWarehouse {
 	explicit FindFlagWithPlayersWarehouse(const Player& owner) : owner_(owner) {
 	}
 	bool accept(const BaseImmovable& imm) const {
-		if (upcast(Flag const, flag, &imm))
-			if (flag->get_owner() == &owner_)
-				if (flag->economy(wwWORKER).warehouses().size())
+		if (upcast(Flag const, flag, &imm)) {
+			if (flag->get_owner() == &owner_) {
+				if (!flag->economy(wwWORKER).warehouses().empty()) {
 					return true;
+				}
+			}
+		}
 		return false;
 	}
 

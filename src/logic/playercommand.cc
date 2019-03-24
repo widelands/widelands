@@ -429,8 +429,9 @@ void CmdBuildRoad::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver& 
 	PlayerCommand::write(fw, egbase, mos);
 	write_coords_32(&fw, start);
 	fw.unsigned_16(nsteps);
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		fw.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 /*** class Cmd_BuildWaterway ***/
@@ -456,8 +457,8 @@ CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
 }
 
 CmdBuildWaterway::~CmdBuildWaterway() {
+	// NOCOM(codereview) Use unique_ptr and get rid of the delete commands
 	delete path;
-
 	delete[] steps;
 }
 
@@ -466,8 +467,9 @@ void CmdBuildWaterway::execute(Game& game) {
 		assert(steps);
 
 		path = new Path(start);
-		for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+		for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 			path->append(game.map(), steps[i]);
+		}
 	}
 
 	game.get_player(sender())->build_waterway(*path);
@@ -481,8 +483,9 @@ void CmdBuildWaterway::serialize(StreamWrite& ser) {
 
 	assert(path || steps);
 
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		ser.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 constexpr uint16_t kCurrentPacketVersionCmdBuildWaterway = 1;
@@ -496,8 +499,9 @@ void CmdBuildWaterway::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoade
 			nsteps = fr.unsigned_16();
 			path = nullptr;
 			steps = new char[nsteps];
-			for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+			for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 				steps[i] = fr.unsigned_8();
+			}
 		} else {
 			throw UnhandledVersionError(
 			   "CmdBuildWaterway", packet_version, kCurrentPacketVersionCmdBuildWaterway);
@@ -513,8 +517,9 @@ void CmdBuildWaterway::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSav
 	PlayerCommand::write(fw, egbase, mos);
 	write_coords_32(&fw, start);
 	fw.unsigned_16(nsteps);
-	for (Path::StepVector::size_type i = 0; i < nsteps; ++i)
+	for (Path::StepVector::size_type i = 0; i < nsteps; ++i) {
 		fw.unsigned_8(path ? (*path)[i] : steps[i]);
+	}
 }
 
 /*** Cmd_FlagAction ***/

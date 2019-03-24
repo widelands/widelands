@@ -118,14 +118,16 @@ struct StepEvalFindFleet {
 	}
 	int32_t stepcost(
 	   Map& /* map */, FCoords from, int32_t fromcost, WalkingDir /* dir */, FCoords to) const {
-		if (!(to.field->nodecaps() & (MOVECAPS_SWIM | MOVECAPS_WALK)))
+		if (!(to.field->nodecaps() & (MOVECAPS_SWIM | MOVECAPS_WALK))) {
 			return -1;
+		}
 
 		if (!(from.field->nodecaps() & MOVECAPS_SWIM)) {
 			// We are allowed to land on and leave the shore,
 			// but not in the middle of a path
-			if (fromcost > 0)
+			if (fromcost > 0) {
 				return -1;
+			}
 
 			return 1;
 		}
@@ -147,8 +149,9 @@ bool Fleet::find_other_fleet(EditorGameBase& egbase) {
 		astar.push(temp_ferry->get_position());
 	}
 	for (const Waterway* temp_ww : pending_ferry_requests_) {
-		for (Coords& c : temp_ww->get_positions(egbase))
+		for (Coords& c : temp_ww->get_positions(egbase)) {
 			astar.push(c);
+		}
 	}
 
 	for (const PortDock* temp_port : ports_) {
@@ -163,48 +166,44 @@ bool Fleet::find_other_fleet(EditorGameBase& egbase) {
 	FCoords cur;
 	while (astar.step(cur, cost)) {
 		if (BaseImmovable* imm = cur.field->get_immovable()) {
-			MapObjectType type = imm->descr().type();
+			const MapObjectType type = imm->descr().type();
 			if (type == MapObjectType::PORTDOCK) {
-				if (upcast(PortDock, dock, imm)) {
-					// here might be a problem so I (tiborb) put here
-					// this test, might be removed after some time
-					if (dock->get_fleet() == nullptr) {
-						log("The dock on %3dx%3d withouth a fleet!\n", dock->dockpoints_.front().x,
-						    dock->dockpoints_.front().y);
-					}
-					if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
-						return dock->get_fleet()->merge(egbase, this);
-					}
+				upcast(PortDock, dock, imm);
+				// here might be a problem so I (tiborb) put here
+				// this test, might be removed after some time
+				if (dock->get_fleet() == nullptr) {
+					log("The dock on %3dx%3d withouth a fleet!\n", dock->dockpoints_.front().x,
+						dock->dockpoints_.front().y);
+				}
+				if (dock->get_fleet() != this && dock->get_owner() == get_owner()) {
+					return dock->get_fleet()->merge(egbase, this);
 				}
 			}
 			else if (type == MapObjectType::WATERWAY) {
-				if (upcast(Waterway, ww, imm)) {
-					if (ww->get_fleet() == nullptr) {
-						log("Found a waterway with no fleet!\n");
-					}
-					if (ww->get_fleet() != this && ww->get_owner() == get_owner()) {
-						return ww->get_fleet()->merge(egbase, this);
-					}
+				upcast(Waterway, ww, imm);
+				if (ww->get_fleet() == nullptr) {
+					log("Found a waterway with no fleet!\n");
+				}
+				if (ww->get_fleet() != this && ww->get_owner() == get_owner()) {
+					return ww->get_fleet()->merge(egbase, this);
 				}
 			}
 		}
 
 		for (Bob* bob = cur.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
-			MapObjectType type = bob->descr().type();
+			const MapObjectType type = bob->descr().type();
 			if (type == MapObjectType::SHIP) {
-				if (upcast(Ship, ship, bob)) {
-					if (ship->get_fleet() != nullptr && ship->get_fleet() != this &&
-						ship->get_owner() == get_owner()) {
-						return ship->get_fleet()->merge(egbase, this);
-					}
+				upcast(Ship, ship, bob);
+				if (ship->get_fleet() != nullptr && ship->get_fleet() != this &&
+					ship->get_owner() == get_owner()) {
+					return ship->get_fleet()->merge(egbase, this);
 				}
 			}
 			else if (type == MapObjectType::FERRY) {
-				if (upcast(Ferry, ferry, bob)) {
-					if (ferry->get_fleet() != nullptr && ferry->get_fleet() != this &&
-						ferry->get_owner() == get_owner()) {
-						return ferry->get_fleet()->merge(egbase, this);
-					}
+				upcast(Ferry, ferry, bob);
+				if (ferry->get_fleet() != nullptr && ferry->get_fleet() != this &&
+					ferry->get_owner() == get_owner()) {
+					return ferry->get_fleet()->merge(egbase, this);
 				}
 			}
 		}
@@ -247,6 +246,7 @@ bool Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 		other->pending_ferry_requests_.pop_back();
 		// TODO(Nordfriese): We should store the gametime when a request is
 		// issued, so this can be inserted correctly. Just in case.
+		// NOCOM(codereview): Any reason we can't do this now?
 		request_ferry(ww);
 	}
 
@@ -485,10 +485,12 @@ void Fleet::remove_ship(EditorGameBase& egbase, Ship* ship) {
 			for (uint32_t i = 1; i < ports_.size(); ++i) {
 				// since two ports can be connected by land, it is possible that
 				// disconnecting a previous port also disconnects later ports
-				if (base.get_economy(wwWARE) == ports_[i]->base_flag().get_economy(wwWARE))
+				if (base.get_economy(wwWARE) == ports_[i]->base_flag().get_economy(wwWARE)) {
 					Economy::check_split(base, ports_[i]->base_flag(), wwWARE);
-				if (base.get_economy(wwWORKER) == ports_[i]->base_flag().get_economy(wwWORKER))
+				}
+				if (base.get_economy(wwWORKER) == ports_[i]->base_flag().get_economy(wwWORKER)) {
 					Economy::check_split(base, ports_[i]->base_flag(), wwWORKER);
+				}
 			}
 		}
 	}
@@ -539,13 +541,14 @@ void Fleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 		pending_ferry_requests_.erase(iterator);
 		// TODO(Nordfriese): We should disband if we are no longer needed...
 		// but this causes an endless loop during end-of-game cleanup
+		// NOCOM(codereview): We should fix this before merging
 		/* if (ships_.empty() && ports_.empty() && ferries_.empty() && pending_ferry_requests_.empty()) {
 			remove(game);
 		} */
 	}
 }
 
-void Fleet::rerout_ferry_request(Game& game, Waterway* oldww, Waterway* newww) {
+void Fleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww) {
 	for (Ferry* ferry : ferries_) {
 		if (ferry->get_destination(game) == oldww) {
 			ferry->set_destination(game, newww);
@@ -576,9 +579,9 @@ struct StepEvalFindPorts {
 
 	int32_t
 	stepcost(Map& map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const {
-		if (!(to.field->nodecaps() & MOVECAPS_SWIM))
+		if (!(to.field->nodecaps() & MOVECAPS_SWIM)) {
 			return -1;
-
+		}
 		return map.calc_bidi_cost(from, dir);
 	}
 };
@@ -806,7 +809,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		}
 	}
 	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
-		Waterway* ww = pending_ferry_requests_[0];
+		Waterway* ww = pending_ferry_requests_.front();
 
 		Ferry* ferry = nullptr;
 		int32_t dist = 0;
@@ -822,6 +825,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 			if (!ferry || d < dist) {
 				ferry = f;
 				dist = d;
+				// NOCOM(codereview): If any ferry will do, break here. If you want the closest ferry, the !ferry check needs to go and the distance check needs to be changed.
 			}
 		}
 		assert(ferry);
@@ -1065,28 +1069,32 @@ void Fleet::Loader::load(FileRead& fr) {
 
 	Fleet& fleet = get<Fleet>();
 
-	uint32_t nrships = fr.unsigned_32();
+	const uint32_t nrships = fr.unsigned_32();
 	ships_.resize(nrships);
-	for (uint32_t i = 0; i < nrships; ++i)
+	for (uint32_t i = 0; i < nrships; ++i) {
 		ships_[i] = fr.unsigned_32();
+	}
 
-	uint32_t nrports = fr.unsigned_32();
+	const uint32_t nrports = fr.unsigned_32();
 	ports_.resize(nrports);
-	for (uint32_t i = 0; i < nrports; ++i)
+	for (uint32_t i = 0; i < nrports; ++i) {
 		ports_[i] = fr.unsigned_32();
+	}
 
 	fleet.act_pending_ = fr.unsigned_8();
 
-	uint32_t nrferries = fr.unsigned_32();
+	// NOCOM(codereview): Pass the packet number to this function and add savegame compatibility code
+	const uint32_t nrferries = fr.unsigned_32();
 	ferries_.resize(nrferries);
-	for (uint32_t i = 0; i < nrferries; ++i)
+	for (uint32_t i = 0; i < nrferries; ++i) {
 		ferries_[i] = fr.unsigned_32();
+	}
 
-	uint32_t nrww = fr.unsigned_32();
+	const uint32_t nrww = fr.unsigned_32();
 	pending_ferry_requests_.resize(nrww);
-	for (uint32_t i = 0; i < nrww; ++i)
+	for (uint32_t i = 0; i < nrww; ++i) {
 		pending_ferry_requests_[i] = fr.unsigned_32();
-
+	}
 }
 
 void Fleet::Loader::load_pointers() {
@@ -1126,8 +1134,9 @@ void Fleet::Loader::load_finish() {
 	Fleet& fleet = get<Fleet>();
 
 	if (!fleet.ports_.empty()) {
-		if (!fleet.ships_.empty() || !fleet.ferries_.empty() || !fleet.pending_ferry_requests_.empty())
+		if (!fleet.ships_.empty() || !fleet.ferries_.empty() || !fleet.pending_ferry_requests_.empty()) {
 			fleet.check_merge_economy();
+		}
 
 		fleet.set_economy(fleet.ports_[0]->get_economy(wwWARE), wwWARE);
 		fleet.set_economy(fleet.ports_[0]->get_economy(wwWORKER), wwWORKER);

@@ -110,7 +110,7 @@ struct Fleet : MapObject {
 	bool get_act_pending() const;
 
 	void request_ferry(Waterway* waterway);
-	void rerout_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
+	void reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww);
 	void cancel_ferry_request(Game& game, Waterway* waterway);
 
 protected:

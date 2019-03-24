@@ -41,6 +41,7 @@ bool write_expedition_ship_economy(Economy* economy, const Map& map, FileWrite* 
 		Bob* bob = field->get_first_bob();
 		while (bob) {
 			if (upcast(Ship const, ship, bob)) {
+// NOCOM(codereview) Add savegame compatibility
 				if (ship->get_economy(economy->type()) == economy) {
 					// TODO(sirver): the 0xffffffff is ugly and fragile.
 					fw->unsigned_32(0xffffffff);  // Sentinel value.

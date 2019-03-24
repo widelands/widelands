@@ -109,17 +109,19 @@ void Ferry::unemployed_update(Game& game, State&) {
 	if (get_position().field->get_immovable()) {
 		molog("[unemployed]: we are on location\n");
 		move = true;
-	}
-	else if (get_position().field->get_first_bob()->get_next_bob()) {
-		molog("[unemployed]: we are on other bob\n");
+	} else if (get_position().field->get_first_bob()->get_next_bob()) {
+		molog("[unemployed]: we are on another bob\n");
 		move = true;
 	}
 
 	if (move) {
-		for (uint8_t i = 0; i < 4; i++)
+		// NOCOM(codereview): What does the 4 mean? Create a constexpr or add a comment
+		for (uint8_t i = 0; i < 4; i++) {
 			if (start_task_movepath(game, game.random_location(get_position(), 2), 4,
-					descr().get_right_walk_anims(does_carry_ware())))
+									descr().get_right_walk_anims(does_carry_ware()))) {
 				return;
+			}
+		}
 		molog("[unemployed]: no suitable locations to row to found!\n");
 		return start_task_idle(game, descr().get_animation("idle"), 50);
 	}
@@ -144,8 +146,9 @@ void Ferry::start_task_row(Game& game, Waterway* ww) {
 }
 
 void Ferry::row_update(Game& game, State&) {
-	if (!destination_)
+	if (!destination_) {
 		return pop_task(game);
+	}
 
 	const Map& map = game.map();
 
@@ -155,6 +158,7 @@ void Ferry::row_update(Game& game, State&) {
 			molog("[row]: Got signal '%s' -> recalculate\n", signal.c_str());
 			signal_handled();
 		} else if (signal == "blocked") {
+			// NOOCOM(codereview): Can this happen to ferries?
 			molog("[row]: Blocked by a battle\n");
 			signal_handled();
 			return start_task_idle(game, descr().get_animation("idle"), 900);
@@ -167,6 +171,7 @@ void Ferry::row_update(Game& game, State&) {
 	if (get_position() == *destination_) {
 		// Reached destination
 		if (upcast(Waterway, ww, map.get_immovable(*destination_))) {
+			// NOCOM(codereview): make destination_ a unique_ptr, then we won't have to call delete everywhere.
 			delete destination_;
 			destination_ = nullptr;
 			set_location(ww);
@@ -195,9 +200,11 @@ void Ferry::init_auto_task(Game& game) {
 }
 
 void Ferry::set_economy(Game& game, Economy* e, WareWorker type) {
-	if (type == wwWARE)
-		if (WareInstance* ware = get_carried_ware(game))
+	if (type == wwWARE) {
+		if (WareInstance* ware = get_carried_ware(game)) {
 			ware->set_economy(e);
+		}
+	}
 	// Since ferries are distributed to waterways by fleets instead of economies,
 	// we do not need to maintain our worker economy
 }
@@ -219,8 +226,9 @@ bool Ferry::init_fleet() {
 }
 
 Waterway* Ferry::get_destination(Game& game) const {
-	if (!destination_)
+	if (!destination_) {
 		return nullptr;
+	}
 	return dynamic_cast<Waterway*>(game.map().get_immovable(*destination_));
 }
 
@@ -249,10 +257,12 @@ Bob& FerryDescr::create_object() const {
 constexpr uint8_t kCurrentPacketVersion = 1;
 
 const Bob::Task* Ferry::Loader::get_task(const std::string& name) {
-	if (name == "unemployed")
+	if (name == "unemployed") {
 		return &taskUnemployed;
-	if (name == "row")
+	}
+	if (name == "row") {
 		return &taskRow;
+	}
 	return Carrier::Loader::get_task(name);
 }
 

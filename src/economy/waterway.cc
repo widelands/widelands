@@ -87,6 +87,7 @@ void Waterway::remove_worker(Worker& w) {
 		// TODO(Nordfriese): We do not issue a new request because this causes a
 		// segfault if this is called because this waterway is being destroyed.
 		// We should somehow check whether we need to issue a new request or not.
+		// NOCOM(codereview): We should have a look at this before merging the branch
 
 		// request_ferry();
 	}
@@ -114,6 +115,7 @@ Fleet* Waterway::get_fleet() const {
 void Waterway::set_fleet(Fleet* fleet) {
 	// TODO(Nordfriese): We should tell our fleet that we no longer need a ferry from it...
 	// but this causes a segfault during end-of-game cleanup
+	// NOCOM(codereview): We should have a look at this before merging the branch
 	/* if (fleet_ && fleet_ != fleet) {
 		if (upcast(Game, game, &get_owner()->egbase())) {
 			fleet_->cancel_ferry_request(*game, this);
@@ -205,7 +207,7 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	}
 	else {
 		// this is needed to make sure the ferry finds the way correctly
-		fleet_->rerout_ferry_request(game, this, this);
+		fleet_->reroute_ferry_request(game, this, this);
 		newww.request_ferry();
 	}
 

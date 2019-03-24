@@ -115,8 +115,9 @@ void Carrier::road_update(Game& game, State& state) {
 		return r.get_roadtype() == RoadType::kBusy ?
 				schedule_act(game, (r.wallet() + 2) * 500) : skip_act();
 	}
-	else
+	else {
 		skip_act();
+	}
 }
 
 /**

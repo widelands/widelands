@@ -482,10 +482,13 @@ void ProductionSite::set_economy(Economy* const e, WareWorker type) {
 	}
 
 	Building::set_economy(e, type);
-	for (uint32_t i = descr().nr_working_positions(); i;)
-		if (Request* const r = working_positions_[--i].worker_request)
-			if (r->get_type() == type)
+	for (uint32_t i = descr().nr_working_positions(); i;) {
+		if (Request* const r = working_positions_[--i].worker_request) {
+			if (r->get_type() == type) {
 				r->set_economy(e);
+			}
+		}
+	}
 
 	if (e) {
 		for (InputQueue* ip_queue : input_queues_) {
