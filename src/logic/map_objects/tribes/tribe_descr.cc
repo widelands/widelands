@@ -251,7 +251,7 @@ bool TribeDescr::has_ware(const DescriptionIndex& index) const {
 	return wares_.count(index) == 1;
 }
 bool TribeDescr::has_worker(const DescriptionIndex& index) const {
-	return workers_.count(index) == 1; // NOCOM here
+	return workers_.count(index) == 1;
 }
 bool TribeDescr::has_immovable(const DescriptionIndex& index) const {
 	return immovables_.count(index) == 1;
