@@ -521,6 +521,7 @@ void Map::set_origin(const Coords& new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	port_spaces_ = new_port_spaces;
+	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
 /*
