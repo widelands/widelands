@@ -15,6 +15,7 @@ local wc_name = "Artifacts"
 local wc_descname = _("Artifacts")
 local wc_version = 1
 local wc_desc = _ "Search for ancient artifacts. Once all of them are found, the team who owns most of them will win the game."
+local wc_artifacts = _"Artifacts owned"
 
 -- Table of all artifacts to conquer
 local artifact_fields = {}
@@ -85,6 +86,16 @@ return {
             end
          end
       end
+
+   -- Install statistics hook
+   hooks.custom_statistic = {
+      name = wc_artifacts,
+      pic = "images/wui/stats/genstats_artifacts.png",
+      calculator = function(p)
+         local pts = count_owned_valuable_fields_for_all_players(plrs, "artifact")
+         return pts[p.number]
+      end,
+   }
 
       -- Iterate all players, if one is defeated, remove him
       -- from the list, send him a defeated message and give him full vision
@@ -164,7 +175,6 @@ return {
          msg = msg .. p((_"Team %1$i (%2$s) owns %3$s."):bformat(t[1].team, members, artifacts))
       end
 
-
       for idx, plr in ipairs(plrs) do
          local key = _getkey(plr)
          -- If two or more teams have the same amount of artifacts, they are all considered winners.
@@ -177,4 +187,5 @@ return {
          end
       end
    end,
+
 }

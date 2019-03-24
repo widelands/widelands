@@ -22,7 +22,8 @@ local wc_desc = _ (
    "area. The winner will be the player or the team that is able to keep " ..
    "that area for at least 20 minutes."
 )
-
+-- TRANSLATORS: subtext of the territorial time statisitcs hook. Keep it short and consistent with the translation of the Win condition.
+local wc_terr_lord = _"Territory percentage"
 local fields = 0
 
 return {
@@ -56,6 +57,16 @@ return {
             player:send_message(game_status.title, msg, {popup = true})
          end
       end
+
+   -- Install statistics hook
+   hooks.custom_statistic = {
+      name = wc_terr_lord,
+      pic = "images/wui/stats/genstats_territorial_small.png",
+      calculator = function(p)
+         local pts = count_owned_valuable_fields_for_all_players(wl.Game().players)
+         return (pts[p.number]*100//fields)
+      end,
+   }
 
       -- here is the main loop!!!
       while true do
