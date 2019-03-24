@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,10 +23,10 @@
 #include "ui_fsmenu/base.h"
 
 #include "logic/game.h"
-#include "logic/game_controller.h"
 #include "logic/game_settings.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
 #include "ui_fsmenu/load_map_or_game.h"
@@ -35,10 +35,7 @@
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 class FullscreenMenuLoadGame : public FullscreenMenuLoadMapOrGame {
 public:
-	FullscreenMenuLoadGame(Widelands::Game&,
-	                       GameSettingsProvider* gsp,
-	                       GameController* gc = nullptr,
-	                       bool is_replay = false);
+	FullscreenMenuLoadGame(Widelands::Game&, GameSettingsProvider* gsp, bool is_replay = false);
 
 	/// The currently selected filename
 	const std::string& filename() const;
@@ -57,6 +54,7 @@ protected:
 
 private:
 	void layout() override;
+	void toggle_filenames();
 
 	UI::Box main_box_;
 	UI::Box info_box_;
@@ -64,15 +62,14 @@ private:
 
 	LoadOrSaveGame load_or_save_;
 
-	UI::Button* delete_;
 	// TODO(GunChleoc): Get rid of this hack once everything is 100% box layout
 	UI::Panel* button_spacer_;
 	std::string filename_;
 
 	bool is_replay_;
-	Widelands::Game& game_;
-	GameSettingsProvider* settings_;
-	GameController* ctrl_;
+
+	UI::Checkbox* show_filenames_;
+	bool showing_filenames_;
 };
 
 #endif  // end of include guard: WL_UI_FSMENU_LOADGAME_H

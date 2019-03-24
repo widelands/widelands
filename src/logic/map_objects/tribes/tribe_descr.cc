@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,10 +52,12 @@
 namespace Widelands {
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/atlanteans.lua
-  */
-TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const Tribes& init_tribes)
+ * The contents of 'table' are documented in
+ * /data/tribes/atlanteans.lua
+ */
+TribeDescr::TribeDescr(const LuaTable& table,
+                       const Widelands::TribeBasicInfo& info,
+                       const Tribes& init_tribes)
    : name_(table.get_string("name")), descname_(info.descname), tribes_(init_tribes) {
 
 	try {
@@ -66,8 +68,8 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 		flag_animation_id_ = g_gr->animations().load(*items_table->get_table("flag"));
 
 		items_table = table.get_table("roads");
-		const auto load_roads = [&items_table, this](
-		   const std::string& road_type, std::vector<std::string>* images) {
+		const auto load_roads = [&items_table](
+		                           const std::string& road_type, std::vector<std::string>* images) {
 			std::vector<std::string> roads =
 			   items_table->get_table(road_type)->array_entries<std::string>();
 			for (const std::string& filename : roads) {
@@ -146,9 +148,8 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 			}
 		}
 
-		std::vector<std::string> immovables =
-		   table.get_table("immovables")->array_entries<std::string>();
-		for (const std::string& immovablename : immovables) {
+		for (const std::string& immovablename :
+		     table.get_table("immovables")->array_entries<std::string>()) {
 			try {
 				DescriptionIndex index = tribes_.safe_immovable_index(immovablename);
 				if (immovables_.count(index) == 1) {
@@ -161,70 +162,25 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 			}
 		}
 
+		items_table = table.get_table("resource_indicators");
+		for (std::string resource : items_table->keys<std::string>()) {
+			ResourceIndicatorList resis;
+			std::unique_ptr<LuaTable> tbl = items_table->get_table(resource);
+			const std::set<int> keys = tbl->keys<int>();
+			for (int upper_limit : keys) {
+				resis[upper_limit] = tribes_.safe_immovable_index(tbl->get_string(upper_limit));
+			}
+			if (resis.empty()) {
+				throw GameDataError("Tribe has no indicators for resource %s.", resource.c_str());
+			}
+			resource_indicators_[resource] = resis;
+		};
+
 		ship_names_ = table.get_table("ship_names")->array_entries<std::string>();
 
 		for (const std::string& buildingname :
 		     table.get_table("buildings")->array_entries<std::string>()) {
-			try {
-				DescriptionIndex index = tribes_.safe_building_index(buildingname);
-				if (has_building(index)) {
-					throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
-				}
-				buildings_.push_back(index);
-
-				// Register trainigsites
-				if (get_building_descr(index)->type() == MapObjectType::TRAININGSITE) {
-					trainingsites_.push_back(index);
-				}
-
-				// Register construction materials
-				for (const auto& build_cost : get_building_descr(index)->buildcost()) {
-					if (!is_construction_material(build_cost.first)) {
-						construction_materials_.insert(build_cost.first);
-					}
-				}
-				for (const auto& enhancement_cost : get_building_descr(index)->enhancement_cost()) {
-					if (!is_construction_material(enhancement_cost.first)) {
-						construction_materials_.insert(enhancement_cost.first);
-					}
-				}
-			} catch (const WException& e) {
-				throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
-			}
-		}
-
-		// Set default trainingsites proportions for AI. Make sure that we get a sum of ca. 100
-		float trainingsites_without_percent = 0.f;
-		int used_percent = 0;
-		for (const DescriptionIndex& index : trainingsites_) {
-			const BuildingDescr& descr = *tribes_.get_building_descr(index);
-			if (descr.hints().trainingsites_max_percent() == 0) {
-				++trainingsites_without_percent;
-			} else {
-				used_percent += descr.hints().trainingsites_max_percent();
-			}
-		}
-		if (trainingsites_without_percent > 0.f && used_percent > 100) {
-			throw GameDataError(
-			   "Predefined training sites proportions add up to > 100%%: %d", used_percent);
-		} else if (trainingsites_without_percent > 0) {
-			const int percent_to_use = std::ceil((100 - used_percent) / trainingsites_without_percent);
-			if (percent_to_use < 1) {
-				throw GameDataError("Training sites without predefined proportions add up to < 1%% and "
-				                    "will never be built: %d",
-				                    used_percent);
-			}
-			for (const DescriptionIndex& index : trainingsites_) {
-				BuildingDescr* descr = tribes_.get_mutable_building_descr(index);
-				if (descr->hints().trainingsites_max_percent() == 0) {
-					descr->set_hints_trainingsites_max_percent(percent_to_use);
-					used_percent += percent_to_use;
-				}
-			}
-		}
-		if (used_percent < 100) {
-			throw GameDataError(
-			   "Final training sites proportions add up to < 100%%: %d", used_percent);
+			add_building(buildingname);
 		}
 
 		// Special types
@@ -241,7 +197,6 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 			throw GameDataError("Failed adding ship '%s': %s", shipname.c_str(), e.what());
 		}
 
-		headquarters_ = add_special_building(table.get_string("headquarters"));
 		port_ = add_special_building(table.get_string("port"));
 		barracks_ = add_special_building(table.get_string("barracks"));
 
@@ -256,8 +211,8 @@ TribeDescr::TribeDescr(const LuaTable& table, const TribeBasicInfo& info, const 
 }
 
 /**
-  * Access functions
-  */
+ * Access functions
+ */
 
 const std::string& TribeDescr::name() const {
 	return name_;
@@ -281,6 +236,12 @@ const std::set<DescriptionIndex>& TribeDescr::wares() const {
 }
 const std::set<DescriptionIndex>& TribeDescr::workers() const {
 	return workers_;
+}
+const std::set<DescriptionIndex>& TribeDescr::immovables() const {
+	return immovables_;
+}
+const ResourceIndicatorSet& TribeDescr::resource_indicators() const {
+	return resource_indicators_;
 }
 
 bool TribeDescr::has_building(const DescriptionIndex& index) const {
@@ -362,10 +323,6 @@ DescriptionIndex TribeDescr::ship() const {
 	assert(tribes_.ship_exists(ship_));
 	return ship_;
 }
-DescriptionIndex TribeDescr::headquarters() const {
-	assert(tribes_.building_exists(headquarters_));
-	return headquarters_;
-}
 DescriptionIndex TribeDescr::port() const {
 	assert(tribes_.building_exists(port_));
 	return port_;
@@ -434,41 +391,35 @@ Find the best matching indicator for the given amount.
 DescriptionIndex TribeDescr::get_resource_indicator(ResourceDescription const* const res,
                                                     const ResourceAmount amount) const {
 	if (!res || !amount) {
-		DescriptionIndex idx = immovable_index("resi_none");
-		if (!has_immovable(idx)) {
-			throw GameDataError("There is no resource indicator for resi_none!");
+		auto list = resource_indicators_.find("");
+		if (list == resource_indicators_.end() || list->second.empty()) {
+			throw GameDataError("Tribe '%s' has no indicator for no resources!", name_.c_str());
 		}
-		return idx;
+		return list->second.begin()->second;
 	}
 
-	int32_t i = 1;
-	int32_t num_indicators = 0;
-	for (;;) {
-		const std::string resi_filename =
-		   (boost::format("resi_%s%i") % res->name().c_str() % i).str();
-		if (!has_immovable(immovable_index(resi_filename))) {
-			break;
+	auto list = resource_indicators_.find(res->name());
+	if (list == resource_indicators_.end() || list->second.empty()) {
+		throw GameDataError(
+		   "Tribe '%s' has no indicators for resource '%s'!", name_.c_str(), res->name().c_str());
+	}
+
+	uint32_t lowest = 0;
+	for (const auto& resi : list->second) {
+		if (resi.first < amount) {
+			continue;
+		} else if (lowest < amount || resi.first < lowest) {
+			lowest = resi.first;
 		}
-		++i;
-		++num_indicators;
 	}
 
-	if (!num_indicators) {
-		throw GameDataError("There is no resource indicator for resource %s", res->name().c_str());
+	if (lowest < amount) {
+		throw GameDataError("Tribe '%s' has no indicators for amount %i of resource '%s' (highest "
+		                    "possible amount is %i)!",
+		                    name_.c_str(), amount, res->name().c_str(), lowest);
 	}
 
-	int32_t bestmatch =
-	   static_cast<int32_t>((static_cast<float>(amount) / res->max_amount()) * num_indicators);
-	if (bestmatch > num_indicators) {
-		throw GameDataError("Amount of %s is %i but max amount is %i", res->name().c_str(),
-		                    static_cast<unsigned int>(amount),
-		                    static_cast<unsigned int>(res->max_amount()));
-	}
-	if (amount < res->max_amount()) {
-		bestmatch += 1;  // Resi start with 1, not 0
-	}
-
-	return immovable_index((boost::format("resi_%s%i") % res->name().c_str() % bestmatch).str());
+	return list->second.find(lowest)->second;
 }
 
 void TribeDescr::resize_ware_orders(size_t maxLength) {
@@ -503,9 +454,38 @@ void TribeDescr::resize_ware_orders(size_t maxLength) {
 	}
 }
 
+void TribeDescr::add_building(const std::string& buildingname) {
+	try {
+		DescriptionIndex index = tribes_.safe_building_index(buildingname);
+		if (has_building(index)) {
+			throw GameDataError("Duplicate definition of building '%s'", buildingname.c_str());
+		}
+		buildings_.push_back(index);
+
+		// Register trainigsites
+		if (get_building_descr(index)->type() == MapObjectType::TRAININGSITE) {
+			trainingsites_.push_back(index);
+		}
+
+		// Register construction materials
+		for (const auto& build_cost : get_building_descr(index)->buildcost()) {
+			if (!is_construction_material(build_cost.first)) {
+				construction_materials_.insert(build_cost.first);
+			}
+		}
+		for (const auto& enhancement_cost : get_building_descr(index)->enhancement_cost()) {
+			if (!is_construction_material(enhancement_cost.first)) {
+				construction_materials_.insert(enhancement_cost.first);
+			}
+		}
+	} catch (const WException& e) {
+		throw GameDataError("Failed adding building '%s': %s", buildingname.c_str(), e.what());
+	}
+}
+
 /**
-  * Helper functions
-  */
+ * Helper functions
+ */
 
 DescriptionIndex TribeDescr::add_special_worker(const std::string& workername) {
 	try {
@@ -542,4 +522,4 @@ DescriptionIndex TribeDescr::add_special_ware(const std::string& warename) {
 		throw GameDataError("Failed adding special ware '%s': %s", warename.c_str(), e.what());
 	}
 }
-}
+}  // namespace Widelands

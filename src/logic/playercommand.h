@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -156,7 +156,7 @@ struct CmdBuildRoad : public PlayerCommand {
 	CmdBuildRoad(uint32_t, int32_t, Path&);
 	explicit CmdBuildRoad(StreamRead&);
 
-	virtual ~CmdBuildRoad();
+	~CmdBuildRoad() override;
 
 	void write(FileWrite&, EditorGameBase&, MapObjectSaver&) override;
 	void read(FileRead&, EditorGameBase&, MapObjectLoader&) override;
@@ -546,7 +546,7 @@ struct CmdChangeTargetQuantity : public PlayerCommand {
 	void serialize(StreamWrite&) override;
 
 protected:
-	uint32_t economy() const {
+	Serial economy() const {
 		return economy_;
 	}
 	DescriptionIndex ware_type() const {
@@ -554,7 +554,7 @@ protected:
 	}
 
 private:
-	uint32_t economy_;
+	Serial economy_;
 	DescriptionIndex ware_type_;
 };
 
@@ -871,6 +871,6 @@ struct CmdProposeTrade : PlayerCommand {
 private:
 	Trade trade_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_PLAYERCOMMAND_H

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,7 +53,7 @@ public:
 	explicit LuaPanel(lua_State* L) : panel_(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
-	virtual ~LuaPanel() {
+	~LuaPanel() override {
 	}
 
 	void __persist(lua_State* L) override {
@@ -99,7 +99,7 @@ public:
 	}
 	explicit LuaButton(lua_State* L) : LuaPanel(L) {
 	}
-	virtual ~LuaButton() {
+	~LuaButton() override {
 	}
 
 	/*
@@ -193,7 +193,7 @@ public:
 	explicit LuaMapView(MapView* p) : LuaPanel(p) {
 	}
 	explicit LuaMapView(lua_State* L);
-	virtual ~LuaMapView() {
+	~LuaMapView() override {
 	}
 
 	void __persist(lua_State*) override {
@@ -235,6 +235,6 @@ public:
 };
 
 void luaopen_wlui(lua_State*);
-}
+}  // namespace LuaUi
 
 #endif  // end of include guard: WL_SCRIPTING_LUA_UI_H

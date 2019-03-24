@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,4 +60,4 @@ void CmdIncorporate::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSaver
 	assert(mos.is_object_known(*worker));
 	fw.unsigned_32(mos.get_object_file_index(*worker));
 }
-}
+}  // namespace Widelands

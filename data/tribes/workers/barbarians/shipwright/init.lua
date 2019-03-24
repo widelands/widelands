@@ -35,12 +35,12 @@ tribes:new_worker_type {
 
    programs = {
       buildship = {
-         "walk object-or-coords",
-         "plant tribe:barbarians_shipconstruction unless object",
-         "play_sound sound/sawmill sawmill 230",
-         "animation work 500",
+         "walk=object-or-coords",
+         "plant=attrib:shipconstruction unless object",
+         "playsound=sound/sawmill sawmill 230",
+         "animate=work 500",
          "construct",
-         "animation work 5000",
+         "animate=work 5000",
          "return"
       }
    },

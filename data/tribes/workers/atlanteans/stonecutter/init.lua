@@ -31,12 +31,12 @@ tribes:new_worker_type {
 
    programs = {
       cut_granite = {
-         "findobject attrib:rocks radius:6",
-         "walk object",
-         "play_sound sound/atlanteans/cutting stonecutter 192",
-         "animation hacking 12000",
-         "object shrink",
-         "createware granite",
+         "findobject=attrib:rocks radius:6",
+         "walk=object",
+         "playsound=sound/atlanteans/cutting stonecutter 192",
+         "animate=hacking 12000",
+         "callobject=shrink",
+         "createware=granite",
          "return"
       }
    },

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,8 @@
 #ifndef WL_ECONOMY_ECONOMY_DATA_PACKET_H
 #define WL_ECONOMY_ECONOMY_DATA_PACKET_H
 
+#include <cassert>
+
 class FileRead;
 class FileWrite;
 
@@ -32,6 +34,7 @@ struct MapObjectSaver;
 class EconomyDataPacket {
 public:
 	explicit EconomyDataPacket(Economy* e) : eco_(e) {
+		assert(eco_);
 	}
 
 	void read(FileRead&);
@@ -40,6 +43,6 @@ public:
 private:
 	Economy* eco_;
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_ECONOMY_ECONOMY_DATA_PACKET_H

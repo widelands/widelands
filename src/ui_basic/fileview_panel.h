@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2017 by the Widelands Development Team
+ * Copyright (C) 2016-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,9 +35,7 @@ namespace UI {
  */
 class FileViewPanel : public TabPanel {
 public:
-	FileViewPanel(Panel* parent,
-	              const Image* background,
-	              TabPanel::Type border_type = TabPanel::Type::kNoBorder);
+	FileViewPanel(Panel* parent, UI::PanelStyle scrollbar_style, UI::TabPanelStyle background_style);
 
 	/// Adds a tab with the contents of 'lua_script'.
 	/// 'lua_script' must return a table that contains 'title' and 'text' keys.
@@ -49,6 +47,7 @@ private:
 	const int padding_;
 	int contents_width_;
 	int contents_height_;
+	const UI::PanelStyle panel_style_;
 
 	// Tab contents
 	std::vector<std::unique_ptr<Box>> boxes_;

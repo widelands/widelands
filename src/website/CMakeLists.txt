@@ -1,7 +1,22 @@
+add_subdirectory(json)
+
+wl_library(website_common
+  SRCS
+    website_common.cc
+    website_common.h
+  USES_SDL2
+  DEPENDS
+    base_exceptions
+    base_i18n
+    graphic
+    io_filesystem
+    sound
+)
+
+
 wl_binary(wl_map_info
   SRCS
     map_info.cc
-  USES_SDL2
   DEPENDS
     base_log
     graphic
@@ -10,8 +25,10 @@ wl_binary(wl_map_info
     graphic_surface
     io_fileread
     io_filesystem
+    json
     logic
     map_io_map_loader
+    website_common
 )
 
 wl_binary(wl_map_object_info
@@ -19,12 +36,13 @@ wl_binary(wl_map_object_info
     map_object_info.cc
   USES_SDL2
   DEPENDS
-    base_i18n
     base_log
     base_macros
     graphic
     io_fileread
     io_filesystem
+    json
     logic
-    sound
+    logic_tribe_basic_info
+    website_common
 )

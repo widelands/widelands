@@ -16,7 +16,6 @@ the command line. Make sure to select "Include glossary notes in file" when
 exporting the csv from Transifex.
 
 The resulting file then needs to be uploaded manually to Transifex as well.
-
 """
 
 from collections import defaultdict
@@ -97,7 +96,6 @@ def load_transifex_glossary(glossary_file, locale):
     glossary csv file for the given locale.
 
     Include empty translations in the result
-
     """
     result = defaultdict(GlossaryEntry)
     counter = 0
@@ -176,7 +174,6 @@ def generate_glossary(po_dir, output_path, input_glossary, output_glossary, only
     """Main loop.
 
     Uses poterminology from the Translate Toolkit to collect glossary entries for all files in 'po_dir' for the given 'only_locale'. If 'only_locale' = "all", processes all locales. Then reads the <input_glossary>, adds new entries that were obtained by the glossary generation if there are any gaps, and then writes the results to <output_glossary>.
-
     """
 
     # Find the locale files to process
@@ -282,7 +279,6 @@ def main():
 
     Output is restricted to source terms that are already in the
     glossary.
-
     """
     if len(sys.argv) == 3 or len(sys.argv) == 4:
         print('Generating glossary:')
@@ -319,6 +315,7 @@ def main():
         traceback.print_exc()
         delete_path(make_path(output_path, 'temp_glossary'))
         return 1
+
 
 if __name__ == '__main__':
     sys.exit(main())

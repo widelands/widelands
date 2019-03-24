@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@
  */
 class ShipWindow : public UI::UniqueWindow {
 public:
-	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship& ship);
+	ShipWindow(InteractiveGameBase& igb, UI::UniqueWindow::Registry& reg, Widelands::Ship* ship);
 
 private:
 	void think() override;
@@ -47,6 +47,7 @@ private:
 	                        const std::string& picname,
 	                        boost::function<void()> callback);
 	void set_button_visibility();
+	void no_port_error_message();
 
 	void act_goto();
 	void act_destination();
@@ -58,7 +59,7 @@ private:
 	void act_explore_island(Widelands::IslandExploreDirection);
 
 	InteractiveGameBase& igbase_;
-	Widelands::Ship& ship_;
+	Widelands::OPtr<Widelands::Ship> ship_;
 
 	UI::Box vbox_;
 	UI::Box navigation_box_;
@@ -74,7 +75,7 @@ private:
 	UI::Button* btn_construct_port_;
 	ItemWaresDisplay* display_;
 	int navigation_box_height_;
-	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShipWindow>> shipnotes_subscriber_;
+	std::unique_ptr<Notifications::Subscriber<Widelands::NoteShip>> shipnotes_subscriber_;
 	DISALLOW_COPY_AND_ASSIGN(ShipWindow);
 };
 

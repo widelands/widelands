@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,10 +19,12 @@
 
 #include "wui/interactive_gamebase.h"
 
+#include <memory>
+
 #include <boost/format.hpp>
 
 #include "base/macros.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "graphic/text_layout.h"
@@ -32,9 +34,11 @@
 #include "logic/map.h"
 #include "logic/map_objects/tribes/ship.h"
 #include "logic/player.h"
+#include "network/gamehost.h"
 #include "profile/profile.h"
 #include "wui/constructionsitewindow.h"
 #include "wui/dismantlesitewindow.h"
+#include "wui/game_client_disconnected.h"
 #include "wui/game_summary.h"
 #include "wui/militarysitewindow.h"
 #include "wui/productionsitewindow.h"
@@ -71,9 +75,12 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 				   const Widelands::Coords coords = building->get_position();
 				   // Check whether the window is wanted
 				   if (wanted_building_windows_.count(coords.hash()) == 1) {
-					   UI::UniqueWindow* building_window = show_building_window(coords, true);
-					   building_window->set_pos(wanted_building_windows_.at(coords.hash()).first);
-					   if (wanted_building_windows_.at(coords.hash()).second) {
+					   const WantedBuildingWindow& wanted_building_window =
+					      *wanted_building_windows_.at(coords.hash()).get();
+					   UI::UniqueWindow* building_window =
+					      show_building_window(coords, true, wanted_building_window.show_workarea);
+					   building_window->set_pos(wanted_building_window.window_position);
+					   if (wanted_building_window.minimize) {
 						   building_window->minimize();
 					   }
 					   wanted_building_windows_.erase(coords.hash());
@@ -83,7 +90,7 @@ InteractiveGameBase::InteractiveGameBase(Widelands::Game& g,
 		   default:
 			   break;
 		   }
-		});
+	   });
 }
 
 /// \return a pointer to the running \ref Game instance.
@@ -126,7 +133,7 @@ void InteractiveGameBase::draw_overlay(RenderTarget& dst) {
 		}
 
 		if (!game_speed.empty()) {
-			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh1->render(game_speed);
+			std::shared_ptr<const UI::RenderedText> rendered_text = UI::g_fh->render(game_speed);
 			rendered_text->draw(dst, Vector2i(get_w() - 5, 5), UI::Align::kRight);
 		}
 	}
@@ -148,6 +155,26 @@ void InteractiveGameBase::postload() {
 	hide_minimap();
 }
 
+void InteractiveGameBase::start() {
+	// Multiplayer games don't save the view position, so we go to the starting position instead
+	if (is_multiplayer()) {
+		Widelands::PlayerNumber pln = player_number();
+		const Widelands::PlayerNumber max = game().map().get_nrplayers();
+		if (pln == 0) {
+			// Spectator, use the view of the first viable player
+			for (pln = 1; pln <= max; ++pln) {
+				if (game().get_player(pln)) {
+					break;
+				}
+			}
+		}
+		// Adding a check, just in case there was no viable player found for spectator
+		if (game().get_player(pln)) {
+			map_view()->scroll_to_field(game().map().get_starting_pos(pln), MapView::Transition::Jump);
+		}
+	}
+}
+
 void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 	toggle_buildhelp_->set_perm_pressed(value);
 }
@@ -155,12 +182,14 @@ void InteractiveGameBase::on_buildhelp_changed(const bool value) {
 void InteractiveGameBase::add_wanted_building_window(const Widelands::Coords& coords,
                                                      const Vector2i point,
                                                      bool was_minimal) {
-	wanted_building_windows_.insert(
-	   std::make_pair(coords.hash(), std::make_pair(point, was_minimal)));
+	wanted_building_windows_.insert(std::make_pair(
+	   coords.hash(), std::unique_ptr<const WantedBuildingWindow>(new WantedBuildingWindow(
+	                     point, was_minimal, has_workarea_preview(coords)))));
 }
 
 UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coords& coord,
-                                                            bool avoid_fastclick) {
+                                                            bool avoid_fastclick,
+                                                            bool workarea_preview_wanted) {
 	Widelands::BaseImmovable* immovable = game().map().get_immovable(coord);
 	upcast(Widelands::Building, building, immovable);
 	assert(building);
@@ -169,10 +198,10 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
 
 	switch (building->descr().type()) {
 	case Widelands::MapObjectType::CONSTRUCTIONSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick] {
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
 			new ConstructionSiteWindow(*this, registry,
 			                           *dynamic_cast<Widelands::ConstructionSite*>(building),
-			                           avoid_fastclick);
+			                           avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	case Widelands::MapObjectType::DISMANTLESITE:
@@ -182,27 +211,28 @@ UI::UniqueWindow* InteractiveGameBase::show_building_window(const Widelands::Coo
 		};
 		break;
 	case Widelands::MapObjectType::MILITARYSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick] {
-			new MilitarySiteWindow(
-			   *this, registry, *dynamic_cast<Widelands::MilitarySite*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new MilitarySiteWindow(*this, registry, *dynamic_cast<Widelands::MilitarySite*>(building),
+			                       avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	case Widelands::MapObjectType::PRODUCTIONSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick] {
-			new ProductionSiteWindow(
-			   *this, registry, *dynamic_cast<Widelands::ProductionSite*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new ProductionSiteWindow(*this, registry,
+			                         *dynamic_cast<Widelands::ProductionSite*>(building),
+			                         avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	case Widelands::MapObjectType::TRAININGSITE:
-		registry.open_window = [this, &registry, building, avoid_fastclick] {
-			new TrainingSiteWindow(
-			   *this, registry, *dynamic_cast<Widelands::TrainingSite*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new TrainingSiteWindow(*this, registry, *dynamic_cast<Widelands::TrainingSite*>(building),
+			                       avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	case Widelands::MapObjectType::WAREHOUSE:
-		registry.open_window = [this, &registry, building, avoid_fastclick] {
-			new WarehouseWindow(
-			   *this, registry, *dynamic_cast<Widelands::Warehouse*>(building), avoid_fastclick);
+		registry.open_window = [this, &registry, building, avoid_fastclick, workarea_preview_wanted] {
+			new WarehouseWindow(*this, registry, *dynamic_cast<Widelands::Warehouse*>(building),
+			                    avoid_fastclick, workarea_preview_wanted);
 		};
 		break;
 	// TODO(sirver,trading): Add UI for market.
@@ -223,28 +253,29 @@ bool InteractiveGameBase::try_show_ship_window() {
 	const Widelands::Map& map = game().map();
 	Widelands::Area<Widelands::FCoords> area(map.get_fcoords(get_sel_pos().node), 1);
 
-	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM))
+	if (!(area.field->nodecaps() & Widelands::MOVECAPS_SWIM)) {
 		return false;
+	}
 
 	std::vector<Widelands::Bob*> ships;
-	if (!map.find_bobs(area, &ships, Widelands::FindBobShip()))
-		return false;
-
-	for (Widelands::Bob* temp_ship : ships) {
-		if (upcast(Widelands::Ship, ship, temp_ship)) {
-			if (can_see(ship->get_owner()->player_number())) {
-				UI::UniqueWindow::Registry& registry =
-				   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
-				registry.open_window = [this, &registry, ship] {
-					new ShipWindow(*this, registry, *ship);
-				};
-				registry.create();
+	if (map.find_bobs(area, &ships, Widelands::FindBobShip())) {
+		for (Widelands::Bob* ship : ships) {
+			if (can_see(ship->owner().player_number())) {
+				// FindBobShip should have returned only ships
+				assert(ship->descr().type() == Widelands::MapObjectType::SHIP);
+				show_ship_window(dynamic_cast<Widelands::Ship*>(ship));
 				return true;
 			}
 		}
 	}
-
 	return false;
+}
+
+void InteractiveGameBase::show_ship_window(Widelands::Ship* ship) {
+	UI::UniqueWindow::Registry& registry =
+	   unique_windows().get_registry((boost::format("ship_%d") % ship->serial()).str());
+	registry.open_window = [this, &registry, ship] { new ShipWindow(*this, registry, ship); };
+	registry.create();
 }
 
 void InteractiveGameBase::show_game_summary() {
@@ -254,4 +285,15 @@ void InteractiveGameBase::show_game_summary() {
 		return;
 	}
 	new GameSummaryScreen(this, &game_summary_);
+}
+
+bool InteractiveGameBase::show_game_client_disconnected() {
+	assert(is_a(GameHost, get_game()->game_controller()));
+	if (!client_disconnected_.window) {
+		if (upcast(GameHost, host, get_game()->game_controller())) {
+			new GameClientDisconnected(this, client_disconnected_, host);
+			return true;
+		}
+	}
+	return false;
 }

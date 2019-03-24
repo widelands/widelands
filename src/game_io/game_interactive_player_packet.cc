@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,17 +34,6 @@ namespace {
 
 constexpr uint16_t kCurrentPacketVersion = 4;
 
-void load_landmarks_pre_zoom(FileRead* fr, InteractiveBase* ibase) {
-	size_t no_of_landmarks = fr->unsigned_8();
-	for (size_t i = 0; i < no_of_landmarks; ++i) {
-		uint8_t set = fr->unsigned_8();
-		MapView::View view = {Vector2f(fr->signed_32(), fr->signed_32()), 1.f};
-		if (set > 0) {
-			ibase->set_landmark(i, view);
-		}
-	}
-}
-
 }  // namespace
 
 void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoader*) {
@@ -52,7 +41,7 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 		FileRead fr;
 		fr.open(fs, "binary/interactive_player");
 		uint16_t const packet_version = fr.unsigned_16();
-		if (packet_version >= 2 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			PlayerNumber player_number = fr.unsigned_8();
 			if (!(0 < player_number && player_number <= game.map().get_nrplayers())) {
 				throw GameDataError("Invalid player number: %i.", player_number);
@@ -70,14 +59,10 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 				if (player_number > max)
 					throw GameDataError("The game has no players!");
 			}
+
 			Vector2f center_map_pixel = Vector2f::zero();
-			if (packet_version <= 3) {
-				center_map_pixel.x = fr.unsigned_16();
-				center_map_pixel.y = fr.unsigned_16();
-			} else {
-				center_map_pixel.x = fr.float_32();
-				center_map_pixel.y = fr.float_32();
-			}
+			center_map_pixel.x = fr.float_32();
+			center_map_pixel.y = fr.float_32();
 
 			uint32_t const display_flags = fr.unsigned_32();
 
@@ -96,19 +81,15 @@ void GameInteractivePlayerPacket::read(FileSystem& fs, Game& game, MapObjectLoad
 
 			// Map landmarks
 			if (InteractiveBase* const ibase = game.get_ibase()) {
-				if (packet_version == 3) {
-					load_landmarks_pre_zoom(&fr, ibase);
-				} else if (packet_version >= 4) {
-					size_t no_of_landmarks = fr.unsigned_8();
-					for (size_t i = 0; i < no_of_landmarks; ++i) {
-						uint8_t set = fr.unsigned_8();
-						const float x = fr.float_32();
-						const float y = fr.float_32();
-						const float zoom = fr.float_32();
-						MapView::View view = {Vector2f(x, y), zoom};
-						if (set > 0) {
-							ibase->set_landmark(i, view);
-						}
+				size_t no_of_landmarks = fr.unsigned_8();
+				for (size_t i = 0; i < no_of_landmarks; ++i) {
+					uint8_t set = fr.unsigned_8();
+					const float x = fr.float_32();
+					const float y = fr.float_32();
+					const float zoom = fr.float_32();
+					MapView::View view = {Vector2f(x, y), zoom};
+					if (set > 0) {
+						ibase->set_landmark(i, view);
 					}
 				}
 			}
@@ -161,4 +142,4 @@ void GameInteractivePlayerPacket::write(FileSystem& fs, Game& game, MapObjectSav
 
 	fw.write(fs, "binary/interactive_player");
 }
-}
+}  // namespace Widelands

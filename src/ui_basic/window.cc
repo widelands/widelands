@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,9 +22,10 @@
 #include <SDL_keycode.h>
 
 #include "base/log.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/style_manager.h"
 #include "graphic/text_layout.h"
 
 namespace UI {
@@ -87,11 +88,11 @@ Window::Window(Panel* const parent,
      drag_start_win_y_(0),
      drag_start_mouse_x_(0),
      drag_start_mouse_y_(0),
-     pic_lborder_(g_gr->images().get("images/wui/window_left.png")),
-     pic_rborder_(g_gr->images().get("images/wui/window_right.png")),
-     pic_top_(g_gr->images().get("images/wui/window_top.png")),
-     pic_bottom_(g_gr->images().get("images/wui/window_bottom.png")),
-     pic_background_(g_gr->images().get("images/wui/window_background.png")),
+     pic_lborder_(g_gr->images().get(kTemplateDir + "wui/left.png")),
+     pic_rborder_(g_gr->images().get(kTemplateDir + "wui/right.png")),
+     pic_top_(g_gr->images().get(kTemplateDir + "wui/top.png")),
+     pic_bottom_(g_gr->images().get(kTemplateDir + "wui/bottom.png")),
+     pic_background_(g_gr->images().get(kTemplateDir + "wui/background.png")),
      center_panel_(nullptr),
      fastclick_panel_(nullptr) {
 	set_title(title);
@@ -104,7 +105,7 @@ Window::Window(Panel* const parent,
 
 /**
  * Replace the current title with a new one
-*/
+ */
 void Window::set_title(const std::string& text) {
 	assert(!is_richtext(text));
 	title_ = text;
@@ -179,7 +180,7 @@ void Window::warp_mouse_to_fastclick_panel() {
 /**
  * Move the window so that it is inside the parent panel.
  * If configured, hang the border off the edge of the panel.
-*/
+ */
 void Window::move_inside_parent() {
 	if (Panel* const parent = get_parent()) {
 		int32_t px = get_x();
@@ -220,13 +221,16 @@ void Window::move_inside_parent() {
 }
 
 /**
- * Move the window so that it is centered wrt the parent.
-*/
+ * Move the window so that it is centered inside the parent.
+ *
+ * Do nothing if window has no parent.
+ */
 void Window::center_to_parent() {
-	Panel& parent = *get_parent();
+	Panel* parent = get_parent();
 
-	set_pos(Vector2i((static_cast<int32_t>(parent.get_inner_w()) - get_w()) / 2,
-	                 (static_cast<int32_t>(parent.get_inner_h()) - get_h()) / 2));
+	assert(parent);
+	set_pos(Vector2i((static_cast<int32_t>(parent->get_inner_w()) - get_w()) / 2,
+	                 (static_cast<int32_t>(parent->get_inner_h()) - get_h()) / 2));
 }
 
 /**
@@ -259,9 +263,9 @@ void Window::draw_border(RenderTarget& dst) {
 		//  top bar
 		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
-			dst.blitrect(
-			   Vector2i(pos, 0), pic_top_, Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0),
-			                                     HZ_B_MIDDLE_PIXMAP_LEN, TP_B_PIXMAP_THICKNESS));
+			dst.blitrect(Vector2i(pos, 0), pic_top_,
+			             Recti(Vector2i(HZ_B_CORNER_PIXMAP_LEN, 0), HZ_B_MIDDLE_PIXMAP_LEN,
+			                   TP_B_PIXMAP_THICKNESS));
 
 		// odd pixels of top bar and top right corner
 		const int32_t width = hz_bar_end - pos + HZ_B_CORNER_PIXMAP_LEN;
@@ -592,4 +596,4 @@ bool Window::handle_mousemove(const uint8_t, int32_t mx, int32_t my, int32_t, in
 	}
 	return true;
 }
-}
+}  // namespace UI

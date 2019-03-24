@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2017 by the Widelands Development Team
+ * Copyright (C) 2008-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -220,4 +220,4 @@ static Requirements read_attribute(FileRead& fr, EditorGameBase&, MapObjectLoade
 }
 
 const RequirementsStorage RequireAttribute::storage(requirementIdAttribute, read_attribute);
-}
+}  // namespace Widelands

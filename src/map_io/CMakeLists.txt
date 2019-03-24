@@ -87,6 +87,8 @@ wl_library(map_io
     map_terrain_packet.h
     map_version_packet.cc
     map_version_packet.h
+    map_wincondition_packet.cc
+    map_wincondition_packet.h
   DEPENDS
     base_exceptions
     base_log
@@ -104,6 +106,7 @@ wl_library(map_io
     io_filesystem
     logic
     logic_constants
+    logic_exceptions
     logic_widelands_geometry
     profile
     scripting_logic

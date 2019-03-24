@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -173,17 +173,7 @@ int LuaPlayer::get_objectives(lua_State* L) {
       (RO) :const:`true` if this player was defeated, :const:`false` otherwise
 */
 int LuaPlayer::get_defeated(lua_State* L) {
-	Player& p = get(L, get_egbase(L));
-	bool have_warehouses = false;
-
-	for (uint32_t economy_nr = 0; economy_nr < p.get_nr_economies(); economy_nr++) {
-		if (!p.get_economy_by_number(economy_nr)->warehouses().empty()) {
-			have_warehouses = true;
-			break;
-		}
-	}
-
-	lua_pushboolean(L, !have_warehouses);
+	lua_pushboolean(L, get(L, get_egbase(L)).is_defeated());
 	return 1;
 }
 
@@ -329,6 +319,7 @@ int LuaPlayer::send_message(lua_State* L) {
 	Coords c = Coords::null();
 	Message::Status st = Message::Status::kNew;
 	bool popup = false;
+	std::string sub_type = "";
 
 	Game& game = get_game(L);
 	Player& plr = get(L, game);
@@ -373,11 +364,19 @@ int LuaPlayer::send_message(lua_State* L) {
 				heading = s;
 			}
 		}
+		lua_getfield(L, 4, "sub_type");
+		if (!lua_isnil(L, -1)) {
+			const std::string s = luaL_checkstring(L, -1);
+			if (!s.empty()) {
+				sub_type = s;
+			}
+		}
 	}
 
 	MessageId const message = plr.add_message(
-	   game, std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(),
-	                                              title, icon, heading, body, c, 0, st)),
+	   game,
+	   std::unique_ptr<Message>(new Message(Message::Type::kScenario, game.get_gametime(), title,
+	                                        icon, heading, body, c, 0, sub_type, st)),
 	   popup);
 
 	return to_lua<LuaMessage>(L, new LuaMessage(player_number(), message));
@@ -413,9 +412,6 @@ int LuaPlayer::send_message(lua_State* L) {
       :arg posy: y position of window in pixels. Default: centered
       :type posy: :class:`integer`
 
-      :arg button_text: Text on the button. Default: OK.
-      :type button_text: :class:`string`
-
       :returns: :const:`nil`
 */
 // UNTESTED
@@ -430,49 +426,32 @@ int LuaPlayer::message_box(lua_State* L) {
 	uint32_t h = 300;
 	int32_t posx = -1;
 	int32_t posy = -1;
-	std::string button_text = _("OK");
+	Coords coords = Coords::null();
 
-#define CHECK_ARG(var, type)                                                                       \
+#define CHECK_UINT(var)                                                                            \
 	lua_getfield(L, -1, #var);                                                                      \
 	if (!lua_isnil(L, -1))                                                                          \
-		var = luaL_check##type(L, -1);                                                               \
+		var = luaL_checkuint32(L, -1);                                                               \
 	lua_pop(L, 1);
 
 	if (lua_gettop(L) == 4) {
-		CHECK_ARG(posx, uint32);
-		CHECK_ARG(posy, uint32);
-		CHECK_ARG(w, uint32);
-		CHECK_ARG(h, uint32);
-		CHECK_ARG(button_text, string);
+		CHECK_UINT(posx);
+		CHECK_UINT(posy);
+		CHECK_UINT(w);
+		CHECK_UINT(h);
 
-		// This must be done manually
+		// If a field has been defined, read the coordinates to jump to.
 		lua_getfield(L, 4, "field");
 		if (!lua_isnil(L, -1)) {
-			Coords c = (*get_user_class<LuaField>(L, -1))->coords();
-			game.get_ipl()->map_view()->scroll_to_field(c, MapView::Transition::Jump);
+			coords = (*get_user_class<LuaField>(L, -1))->coords();
 		}
 		lua_pop(L, 1);
 	}
-#undef CHECK_ARG
-
-	uint32_t cspeed = game.game_controller()->desired_speed();
-	game.game_controller()->set_desired_speed(0);
-
-	game.save_handler().set_allow_saving(false);
-
-	StoryMessageBox* mb = new StoryMessageBox(game.get_ipl(), luaL_checkstring(L, 2),
-	                                          luaL_checkstring(L, 3), button_text, posx, posy, w, h);
+#undef CHECK_UINT
+	std::unique_ptr<StoryMessageBox> mb(new StoryMessageBox(
+	   &game, coords, luaL_checkstring(L, 2), luaL_checkstring(L, 3), posx, posy, w, h));
 
 	mb->run<UI::Panel::Returncodes>();
-	delete mb;
-
-	// Manually force the game to reevaluate it's current state,
-	// especially time information.
-	game.game_controller()->think();
-
-	game.game_controller()->set_desired_speed(cspeed);
-
-	game.save_handler().set_allow_saving(true);
 
 	return 1;
 }
@@ -585,24 +564,24 @@ int LuaPlayer::add_objective(lua_State* L) {
    .. method:: reveal_fields(fields)
 
       Make these fields visible for the current player. The fields will remain
-      visible until they are hidden again.
+      visible until they are hidden again. See also :ref:`field_animations` for
+      animated revealing.
 
-      :arg fields: The fields to show
+      :arg fields: The fields to reveal
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
       :returns: :const:`nil`
 */
 int LuaPlayer::reveal_fields(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& p = get(L, egbase);
-	const Map& map = egbase.map();
+	Game& game = get_game(L);
+	Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.see_node(
-		   map, map[0], (*get_user_class<LuaField>(L, -1))->fcoords(L), egbase.get_gametime());
+		p.hide_or_reveal_field(
+		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), SeeUnseeNode::kReveal);
 		lua_pop(L, 1);
 	}
 
@@ -613,28 +592,30 @@ int LuaPlayer::reveal_fields(lua_State* L) {
    .. method:: hide_fields(fields)
 
       Make these fields hidden for the current player if they are not
-      seen by a military building.
+      seen by a military building. See also :ref:`field_animations` for
+      animated hiding.
 
       :arg fields: The fields to hide
       :type fields: :class:`array` of :class:`wl.map.Fields`
 
-      :arg hide_completely: *Optional*. The fields will be marked as unexplored.
-      :type hide_completely: :class:`boolean`
+      :arg unexplore: *Optional*. If  `true`, the fields will be marked as completely unexplored.
+      :type unexplore: :class:`boolean`
 
       :returns: :const:`nil`
 */
 int LuaPlayer::hide_fields(lua_State* L) {
-	EditorGameBase& egbase = get_egbase(L);
-	Player& p = get(L, egbase);
+	Game& game = get_game(L);
+	Player& p = get(L, game);
 
 	luaL_checktype(L, 2, LUA_TTABLE);
-	const bool mode = !lua_isnone(L, 3) && luaL_checkboolean(L, 3);
+	const SeeUnseeNode mode = (!lua_isnone(L, 3) && luaL_checkboolean(L, 3)) ?
+	                             SeeUnseeNode::kUnexplore :
+	                             SeeUnseeNode::kUnsee;
 
 	lua_pushnil(L); /* first key */
 	while (lua_next(L, 2) != 0) {
-		p.unsee_node((*get_user_class<LuaField>(L, -1))->fcoords(L).field - &egbase.map()[0],
-		             egbase.get_gametime(),
-		             mode ? Player::UnseeNodeMode::kUnexplore : Player::UnseeNodeMode::kUnsee);
+		p.hide_or_reveal_field(
+		   game.get_gametime(), (*get_user_class<LuaField>(L, -1))->coords(), mode);
 		lua_pop(L, 1);
 	}
 
@@ -690,30 +671,16 @@ int LuaPlayer::reveal_campaign(lua_State* L) {
 */
 int LuaPlayer::get_ships(lua_State* L) {
 	EditorGameBase& egbase = get_egbase(L);
-	const Map& map = egbase.map();
 	PlayerNumber p = (get(L, egbase)).player_number();
 	lua_newtable(L);
 	uint32_t cidx = 1;
-
-	std::set<OPtr<Ship>> found_ships;
-	for (int16_t y = 0; y < map.get_height(); ++y) {
-		for (int16_t x = 0; x < map.get_width(); ++x) {
-			FCoords f = map.get_fcoords(Coords(x, y));
-			// there are too many bobs on the map so we investigate
-			// only bobs on water
-			if (f.field->nodecaps() & MOVECAPS_SWIM) {
-				for (Bob* bob = f.field->get_first_bob(); bob; bob = bob->get_next_on_field()) {
-					if (upcast(Ship, ship, bob)) {
-						if (ship->get_owner()->player_number() == p && !found_ships.count(ship)) {
-							found_ships.insert(ship);
-							lua_pushuint32(L, cidx++);
-							LuaMaps::upcasted_map_object_to_lua(L, ship);
-							lua_rawset(L, -3);
-						}
-					}
-				}
-			}
-		}
+	for (const auto& serial : egbase.player(p).ships()) {
+		Widelands::MapObject* obj = egbase.objects().get_object(serial);
+		assert(obj->descr().type() == Widelands::MapObjectType::SHIP);
+		upcast(Widelands::Ship, ship, obj);
+		lua_pushuint32(L, cidx++);
+		LuaMaps::upcasted_map_object_to_lua(L, ship);
+		lua_rawset(L, -3);
 	}
 	return 1;
 }
@@ -844,10 +811,8 @@ int LuaPlayer::allow_workers(lua_State* L) {
 					break;
 				}
 			}
-			for (uint32_t j = player.get_nr_economies(); j;) {
-				Economy& economy = *player.get_economy_by_number(--j);
-
-				for (Warehouse* warehouse : economy.warehouses()) {
+			for (const auto& economy : player.economies()) {
+				for (Warehouse* warehouse : economy.second->warehouses()) {
 					warehouse->enable_spawn(game, worker_types_without_cost_index);
 				}
 			}
@@ -877,7 +842,7 @@ int LuaPlayer::switchplayer(lua_State* L) {
 /* RST
    .. method:: produced_wares_count(what)
 
-      Returns count of wares produced byt the player up to now.
+      Returns count of wares produced by the player up to now.
       'what' can be either an "all" or single ware name or an array of names. If single
       ware name is given, integer is returned, otherwise the table is returned.
 */
@@ -978,7 +943,9 @@ Objective
 */
 const char LuaObjective::className[] = "Objective";
 const MethodType<LuaObjective> LuaObjective::Methods[] = {
-   METHOD(LuaObjective, remove), METHOD(LuaObjective, __eq), {nullptr, nullptr},
+   METHOD(LuaObjective, remove),
+   METHOD(LuaObjective, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaObjective> LuaObjective::Properties[] = {
    PROP_RO(LuaObjective, name),    PROP_RW(LuaObjective, title), PROP_RW(LuaObjective, body),
@@ -1140,7 +1107,8 @@ Message
 */
 const char LuaMessage::className[] = "Message";
 const MethodType<LuaMessage> LuaMessage::Methods[] = {
-   METHOD(LuaMessage, __eq), {nullptr, nullptr},
+   METHOD(LuaMessage, __eq),
+   {nullptr, nullptr},
 };
 const PropertyType<LuaMessage> LuaMessage::Properties[] = {
    PROP_RO(LuaMessage, title),     PROP_RO(LuaMessage, body),   PROP_RO(LuaMessage, sent),
@@ -1246,7 +1214,7 @@ int LuaMessage::set_status(lua_State* L) {
 	else
 		report_error(L, "Invalid message status <%s>!", s.c_str());
 
-	get_plr(L, get_game(L)).messages().set_message_status(message_id_, status);
+	get_plr(L, get_game(L)).get_messages()->set_message_status(message_id_, status);
 
 	return 0;
 }
@@ -1352,4 +1320,4 @@ void luaopen_wlgame(lua_State* L) {
 	register_class<LuaObjective>(L, "game");
 	register_class<LuaMessage>(L, "game");
 }
-}
+}  // namespace LuaGame

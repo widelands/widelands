@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2017 by the Widelands Development Team
+ * Copyright (C) 2006-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ namespace Widelands {
 class TribeDescr;
 class Objective;
 struct Message;
-}
+}  // namespace Widelands
 
 namespace LuaGame {
 
@@ -114,7 +114,7 @@ class LuaObjective : public LuaGameModuleClass {
 public:
 	LUNA_CLASS_HEAD(LuaObjective);
 
-	virtual ~LuaObjective() {
+	~LuaObjective() override {
 	}
 
 	explicit LuaObjective(const Widelands::Objective& n);
@@ -157,7 +157,7 @@ class LuaMessage : public LuaGameModuleClass {
 
 public:
 	LUNA_CLASS_HEAD(LuaMessage);
-	virtual ~LuaMessage() {
+	~LuaMessage() override {
 	}
 
 	explicit LuaMessage(uint8_t, Widelands::MessageId);

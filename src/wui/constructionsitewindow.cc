@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,7 +22,6 @@
 #include <boost/format.hpp>
 
 #include "graphic/graphic.h"
-#include "ui_basic/tabpanel.h"
 #include "wui/inputqueuedisplay.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
@@ -30,14 +29,19 @@ static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 ConstructionSiteWindow::ConstructionSiteWindow(InteractiveGameBase& parent,
                                                UI::UniqueWindow::Registry& reg,
                                                Widelands::ConstructionSite& cs,
-                                               bool avoid_fastclick)
-   : BuildingWindow(parent, reg, cs, avoid_fastclick), progress_(nullptr) {
-	init(avoid_fastclick);
+                                               bool avoid_fastclick,
+                                               bool workarea_preview_wanted)
+   : BuildingWindow(parent, reg, cs, cs.building(), avoid_fastclick),
+     construction_site_(&cs),
+     progress_(nullptr) {
+	init(avoid_fastclick, workarea_preview_wanted);
 }
 
-void ConstructionSiteWindow::init(bool avoid_fastclick) {
-	BuildingWindow::init(avoid_fastclick);
-	Widelands::ConstructionSite& cs = dynamic_cast<Widelands::ConstructionSite&>(building());
+void ConstructionSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
+	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
+	assert(construction_site != nullptr);
+
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
@@ -49,12 +53,13 @@ void ConstructionSiteWindow::init(bool avoid_fastclick) {
 	box.add_space(8);
 
 	// Add the wares queue
-	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
-		box.add(new InputQueueDisplay(&box, 0, 0, *igbase(), cs, cs.get_waresqueue(i)));
+	for (uint32_t i = 0; i < construction_site->get_nrwaresqueues(); ++i)
+		box.add(new InputQueueDisplay(
+		   &box, 0, 0, *igbase(), *construction_site, *construction_site->get_waresqueue(i)));
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 
-	set_title((boost::format("(%s)") % cs.building().descname()).str());
+	set_title((boost::format("(%s)") % construction_site->building().descname()).str());
 	think();
 }
 
@@ -64,9 +69,13 @@ Make sure the window is redrawn when necessary.
 ===============
 */
 void ConstructionSiteWindow::think() {
+	// BuildingWindow::think() will call die in case we are no longer in
+	// existance.
 	BuildingWindow::think();
 
-	const Widelands::ConstructionSite& cs = dynamic_cast<Widelands::ConstructionSite&>(building());
-
-	progress_->set_state(cs.get_built_per64k());
+	Widelands::ConstructionSite* construction_site = construction_site_.get(igbase()->egbase());
+	if (construction_site == nullptr) {
+		return;
+	}
+	progress_->set_state(construction_site->get_built_per64k());
 }

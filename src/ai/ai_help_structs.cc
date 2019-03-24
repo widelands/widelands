@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009-2017 by the Widelands Development Team
+ * Copyright (C) 2009-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,9 +28,9 @@
 namespace Widelands {
 
 // couple of constants for calculation of road interconnections
-constexpr int kRoadNotFound = -1000;
-constexpr int kShortcutWithinSameEconomy = 1000;
-constexpr int kRoadToDifferentEconomy = 10000;
+constexpr int kRoadPossiblyBuildable = 200;
+constexpr int kConnectedByRoads = 400;
+constexpr int kNotConnectedByRoads = 600;
 constexpr int kNoAiTrainingMutation = 200;
 constexpr int kUpperDefaultMutationLimit = 150;
 constexpr int kLowerDefaultMutationLimit = 75;
@@ -42,7 +42,7 @@ CheckStepRoadAI::CheckStepRoadAI(Player* const pl, uint8_t const mc, bool const 
 
 bool CheckStepRoadAI::allowed(
    const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
-	uint8_t endcaps = player->get_buildcaps(end);
+	const uint8_t endcaps = player->get_buildcaps(end);
 
 	// we should not cross fields with road or flags (or any other immovable)
 	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
@@ -81,6 +81,56 @@ bool CheckStepRoadAI::reachable_dest(const Map& map, const FCoords& dest) const 
 	}
 
 	return true;
+}
+
+// CheckStepOwnTerritory
+CheckStepOwnTerritory::CheckStepOwnTerritory(Player* const pl, uint8_t const mc, bool const oe)
+   : player(pl), movecaps(mc), open_end(oe) {
+}
+
+// Defines when movement is allowed:
+// 1. startfield is walkable (or it is the first step)
+// And endfield either:
+// 2a. is walkable
+// 2b. has our PlayerImmovable (building or flag)
+bool CheckStepOwnTerritory::allowed(
+   const Map& map, FCoords start, FCoords end, int32_t, CheckStep::StepId const id) const {
+	const uint8_t endcaps = player->get_buildcaps(end);
+	const uint8_t startcaps = player->get_buildcaps(start);
+
+	// We should not cross fields with road or flags (or any other immovable)
+	// Or rather we can step on it, but not go on from such field
+	if ((map.get_immovable(start)) && !(id == CheckStep::stepFirst)) {
+		return false;
+	}
+
+	// Start field must be walkable
+	if (!(startcaps & movecaps)) {
+		return false;
+	}
+
+	// Endfield can not be water
+	if (endcaps & MOVECAPS_SWIM) {
+		return false;
+	}
+
+	return true;
+}
+
+// We accept either walkable territory or field with own immovable
+bool CheckStepOwnTerritory::reachable_dest(const Map& map, const FCoords& dest) const {
+	const uint8_t endcaps = player->get_buildcaps(dest);
+	if (BaseImmovable const* const imm = map.get_immovable(dest)) {
+		if (imm->descr().type() >= MapObjectType::FLAG) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	if (endcaps & MOVECAPS_WALK) {
+		return true;
+	}
+	return false;
 }
 
 // We are looking for fields we can walk on
@@ -145,7 +195,9 @@ FindNodeUnownedBuildable::FindNodeUnownedBuildable(Player* p, Game& g) : player(
 }
 
 bool FindNodeUnownedBuildable::accept(const Map&, const FCoords& fc) const {
-	return (fc.field->nodecaps() & BUILDCAPS_SIZEMASK) && (fc.field->get_owned_by() == neutral());
+	return ((fc.field->nodecaps() & BUILDCAPS_SIZEMASK) ||
+	        (fc.field->nodecaps() & BUILDCAPS_MINE)) &&
+	       (fc.field->get_owned_by() == neutral());
 }
 
 // Unowned but walkable fields nearby
@@ -191,8 +243,14 @@ bool FindNodeWithFlagOrRoad::accept(const Map&, FCoords fc) const {
 	return false;
 }
 
-NearFlag::NearFlag(const Flag& f, int32_t const c, int32_t const d)
-   : flag(&f), cost(c), distance(d) {
+NearFlag::NearFlag(const Flag* f, int32_t const c) : flag(f), current_road_distance(c) {
+	to_be_checked = true;
+}
+
+NearFlag::NearFlag() {
+	flag = nullptr;
+	current_road_distance = 0;
+	to_be_checked = true;
 }
 
 EventTimeQueue::EventTimeQueue() {
@@ -236,11 +294,13 @@ BuildableField::BuildableField(const Widelands::FCoords& fc)
      unowned_land_nearby(0),
      enemy_owned_land_nearby(0U),
      unowned_buildable_spots_nearby(0U),
+     unowned_portspace_vicinity_nearby(0U),
      nearest_buildable_spot_nearby(0U),
      near_border(false),
      unowned_mines_spots_nearby(0),
      unowned_iron_mines_nearby(false),
      trees_nearby(0),
+     bushes_nearby(0),
      // explanation of starting values
      // this is done to save some work for AI (CPU utilization)
      // base rules are:
@@ -289,7 +349,8 @@ MineableField::MineableField(const Widelands::FCoords& fc)
 }
 
 EconomyObserver::EconomyObserver(Widelands::Economy& e) : economy(e) {
-	dismantle_grace_time = std::numeric_limits<int32_t>::max();
+	dismantle_grace_time = std::numeric_limits<uint32_t>::max();
+	fields_block_last_time = 0;
 }
 
 int32_t BuildingObserver::total_count() const {
@@ -326,6 +387,52 @@ bool BuildingObserver::buildable(Widelands::Player& p) {
 // so this observer will be used for this
 MineTypesObserver::MineTypesObserver()
    : in_construction(0), finished(0), is_critical(false), unoccupied(0) {
+}
+
+// Reset counter for all field types
+void MineFieldsObserver::zero() {
+	for (auto& material : stat) {
+		material.second = 0;
+	}
+}
+
+// Increase counter by one for specific ore/minefield type
+void MineFieldsObserver::add(const Widelands::DescriptionIndex idx) {
+	stat[idx] += 1;
+}
+
+// Add ore into critical_ores
+void MineFieldsObserver::add_critical_ore(const Widelands::DescriptionIndex idx) {
+	critical_ores.insert(idx);
+}
+
+// Does the player has at least one mineable field with positive amount for each critical ore?
+bool MineFieldsObserver::has_critical_ore_fields() {
+	for (auto ore : critical_ores) {
+		if (get(ore) == 0) {
+			return false;
+		}
+	}
+	return true;
+}
+
+// Returns count of fields with desired ore
+uint16_t MineFieldsObserver::get(const Widelands::DescriptionIndex idx) {
+	if (stat.count(idx) == 0) {
+		return 0;
+	}
+	return stat[idx];
+}
+
+// Count of types of mineable fields, up to 4 currently
+uint8_t MineFieldsObserver::count_types() {
+	uint16_t count = 0;
+	for (auto material : stat) {
+		if (material.second > 0) {
+			count += 1;
+		}
+	}
+	return count;
 }
 
 ExpansionType::ExpansionType() {
@@ -459,33 +566,30 @@ void ManagementData::review(const uint32_t gametime,
                             const uint32_t old_land,
                             const uint16_t attackers,
                             const int16_t trained_soldiers,
-                            const int16_t latest_attackers,
-                            const uint16_t conq_ws,
                             const uint16_t strength,
-                            const uint32_t existing_ps) {
+                            const uint32_t existing_ps,
+                            const uint32_t first_iron_mine_time) {
 
-	const int16_t main_bonus =
-	   ((static_cast<int32_t>(land - old_land) > 0 && land > max_e_land * 5 / 6 && attackers > 0 &&
-	     trained_soldiers > 0 && latest_attackers > 0) ?
-	       kBonus :
-	       0);
+	// bonuses (1000 or nothing)
+	const uint16_t territory_bonus = (land > old_land || land > max_e_land) ? 1000 : 0;
+	const uint16_t iron_mine_bonus = (first_iron_mine_time < 2 * 60 * 60 * 1000) ? 1000 : 0;
+	const uint16_t attack_bonus = (attackers > 0) ? 1000 : 0;
+	const uint16_t training_bonus = (trained_soldiers > 0) ? 1000 : 0;
 
-	const int16_t land_delta_bonus = static_cast<int16_t>(land - old_land) * kLandDeltaMultiplier;
+	// scores (numbers dependant on performance)
+	const uint16_t land_score = land / kCurrentLandDivider;
+	const uint16_t strength_score = std::min<uint16_t>(strength, 100) * kStrengthMultiplier;
+	const uint16_t attack_score = std::min<uint16_t>(attackers, 40) * 50;
+	const uint32_t ps_sites_score = kPSitesRatioMultiplier * std::pow(existing_ps, 3) / 1000 / 1000;
 
-	const uint32_t ps_sites_bonus = kPSitesRatioMultiplier * std::pow(existing_ps, 3) / 1000 / 1000;
+	score = territory_bonus + iron_mine_bonus + attack_bonus + training_bonus + land_score +
+	        strength_score + ps_sites_score + attack_score;
 
-	score = land / kCurrentLandDivider + land_delta_bonus + main_bonus +
-	        attackers * kAttackersMultiplier + ((attackers > 0) ? kAttackBonus : -kAttackBonus) +
-	        trained_soldiers * kTrainedSoldiersScore + kConqueredWhBonus * conq_ws +
-	        strength * kStrengthMultiplier + ps_sites_bonus - 500 * kPSitesRatioMultiplier;
-
-	log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (l:%4d/%s/%4d, "
-	    "at:%4d(%3d),ts:%4d/%2d,cWH:%2d,str:%2d/%4d,ps:%4d/%4d)\n",
+	log(" %2d %s: reviewing AI mngm. data, sc: %5d Pr.p: %d (Bonuses:Te:%s I:%s A:%s Tr:%s, "
+	    "Scores:Land:%5d Str:%4d PS:%4d, Att:%4d\n",
 	    pn, gamestring_with_leading_zeros(gametime), score, primary_parent,
-	    land / kCurrentLandDivider, (main_bonus) ? "*" : " ", land_delta_bonus,
-	    attackers * kAttackersMultiplier, latest_attackers, trained_soldiers * kTrainedSoldiersScore,
-	    trained_soldiers, conq_ws, strength, strength * kStrengthMultiplier, existing_ps,
-	    ps_sites_bonus);
+	    (territory_bonus) ? "Y" : "N", (iron_mine_bonus) ? "Y" : "N", (attack_bonus) ? "Y" : "N",
+	    (training_bonus) ? "Y" : "N", land_score, strength_score, ps_sites_score, attack_score);
 
 	if (score < -10000 || score > 30000) {
 		log("%2d %s: reviewing AI mngm. data, score too extreme: %4d\n", pn,
@@ -539,9 +643,6 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		case DnaParent::kSecondary:
 			set_military_number_at(i, AI_military_numbers_P2[i]);
 			break;
-		default:
-			log("Invalid dna_donor for military numbers\n");
-			NEVER_HERE();
 		}
 	}
 
@@ -563,9 +664,6 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 			persistent_data->neuron_weights.push_back(input_weights_P2[i]);
 			persistent_data->neuron_functs.push_back(input_func_P2[i]);
 			break;
-		default:
-			log("Invalid dna_donor for neurons\n");
-			NEVER_HERE();
 		}
 	}
 
@@ -580,9 +678,6 @@ void ManagementData::new_dna_for_persistent(const uint8_t pn, const Widelands::A
 		case DnaParent::kSecondary:
 			persistent_data->f_neurons.push_back(f_neurons_P2[i]);
 			break;
-		default:
-			log("Invalid dna_donor for f-neurons\n");
-			NEVER_HERE();
 		}
 	}
 
@@ -879,56 +974,42 @@ bool BlockedFields::is_blocked(Coords coords) {
 	return (blocked_fields_.count(coords.hash()) != 0);
 }
 
-FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool economy)
-   : coords_hash(coords), air_distance(distance), different_economy(economy) {
+// As a policy, we just set some default value, that will be updated later on
+FlagsForRoads::Candidate::Candidate(uint32_t coords, int32_t distance, bool different_economy)
+   : coords_hash(coords), air_distance(distance) {
 	new_road_possible = false;
-	accessed_via_roads = false;
-	// Values are only very rough, and are dependant on the map size
-	new_road_length = 2 * Widelands::kMapDimensions.at(Widelands::kMapDimensions.size() - 1);
-	current_roads_distance = 2 * (Widelands::kMapDimensions.size() - 1);  // must be big enough
-	reduction_score = -air_distance;  // allows reasonable ordering from the start
+	// Just custom values
+	new_road_length = kRoadPossiblyBuildable;
+	current_road_length = (different_economy) ? kNotConnectedByRoads : kConnectedByRoads;
 }
 
+// Used when sorting cadidate flags from best one
 bool FlagsForRoads::Candidate::operator<(const Candidate& other) const {
-	if (reduction_score == other.reduction_score) {
-		return coords_hash < other.coords_hash;
-	} else {
-		return reduction_score > other.reduction_score;
-	}
+	const int32_t other_rs = other.reduction_score();
+	const int32_t this_rs = reduction_score();
+	return std::tie(other.new_road_possible, other_rs) < std::tie(new_road_possible, this_rs);
 }
 
 bool FlagsForRoads::Candidate::operator==(const Candidate& other) const {
 	return coords_hash == other.coords_hash;
 }
 
-void FlagsForRoads::Candidate::calculate_score() {
-	if (!new_road_possible) {
-		reduction_score = kRoadNotFound - air_distance;  // to have at least some ordering preserved
-	} else if (different_economy) {
-		reduction_score = kRoadToDifferentEconomy - air_distance - 2 * new_road_length;
-	} else if (!accessed_via_roads) {
-		if (air_distance + 6 > new_road_length) {
-			reduction_score = kShortcutWithinSameEconomy - air_distance - 2 * new_road_length;
-		} else {
-			reduction_score = kRoadNotFound;
-		}
-	} else {
-		reduction_score = current_roads_distance - 2 * new_road_length;
-	}
+int32_t FlagsForRoads::Candidate::reduction_score() const {
+	return current_road_length - new_road_length - (new_road_length - air_distance) / 3;
 }
 
 void FlagsForRoads::print() {  // this is for debugging and development purposes
-	for (auto& candidate_flag : queue) {
+	for (auto& candidate_flag : flags_queue) {
 		log("   %starget: %3dx%3d, saving: %5d (%3d), air distance: %3d, new road: %6d, score: %5d "
 		    "%s\n",
-		    (candidate_flag.reduction_score >= min_reduction && candidate_flag.new_road_possible) ?
+		    (candidate_flag.reduction_score() >= min_reduction && candidate_flag.new_road_possible) ?
 		       "+" :
 		       " ",
 		    Coords::unhash(candidate_flag.coords_hash).x,
 		    Coords::unhash(candidate_flag.coords_hash).y,
-		    candidate_flag.current_roads_distance - candidate_flag.new_road_length, min_reduction,
+		    candidate_flag.current_road_length - candidate_flag.new_road_length, min_reduction,
 		    candidate_flag.air_distance, candidate_flag.new_road_length,
-		    candidate_flag.reduction_score,
+		    candidate_flag.reduction_score(),
 		    (candidate_flag.new_road_possible) ? ", new road possible" : " ");
 	}
 }
@@ -936,7 +1017,7 @@ void FlagsForRoads::print() {  // this is for debugging and development purposes
 // Queue is ordered but some target flags are only estimations so we take such a candidate_flag
 // first
 bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
-	for (auto& candidate_flag : queue) {
+	for (auto& candidate_flag : flags_queue) {
 		if (!candidate_flag.new_road_possible) {
 			*winner = candidate_flag.coords_hash;
 			return true;
@@ -946,77 +1027,57 @@ bool FlagsForRoads::get_best_uncalculated(uint32_t* winner) {
 }
 
 // Road from starting flag to this flag can be built
-void FlagsForRoads::road_possible(Widelands::Coords coords, uint32_t distance) {
-	// std::set does not allow updating
-	Candidate new_candidate_flag = Candidate(0, 0, false);
-	for (auto candidate_flag : queue) {
+void FlagsForRoads::road_possible(Widelands::Coords coords, const uint32_t new_road) {
+	for (auto& candidate_flag : flags_queue) {
 		if (candidate_flag.coords_hash == coords.hash()) {
-			new_candidate_flag = candidate_flag;
-			assert(new_candidate_flag.coords_hash == candidate_flag.coords_hash);
-			queue.erase(candidate_flag);
-			break;
+			candidate_flag.new_road_length = new_road;
+			candidate_flag.new_road_possible = true;
+			candidate_flag.reduction_score();
+			return;
 		}
 	}
-
-	new_candidate_flag.new_road_length = distance;
-	new_candidate_flag.new_road_possible = true;
-	new_candidate_flag.calculate_score();
-	queue.insert(new_candidate_flag);
+	NEVER_HERE();
 }
 
-// Remove the flag from candidates as interconnecting road is not possible
-void FlagsForRoads::road_impossible(Widelands::Coords coords) {
-	const uint32_t hash = coords.hash();
-	for (auto candidate_flag : queue) {
+// find_reachable_fields returns duplicates so we deal with them
+bool FlagsForRoads::has_candidate(const uint32_t hash) {
+	for (auto& candidate_flag : flags_queue) {
 		if (candidate_flag.coords_hash == hash) {
-			queue.erase(candidate_flag);
+			return true;
+		}
+	}
+	return false;
+}
+
+// Updating walking distance into flags_queue
+void FlagsForRoads::set_cur_road_distance(Widelands::Coords coords, int32_t cur_distance) {
+	for (auto& candidate_flag : flags_queue) {
+		if (candidate_flag.coords_hash == coords.hash()) {
+			candidate_flag.current_road_length = cur_distance;
+			candidate_flag.reduction_score();
 			return;
 		}
 	}
 }
 
-// Updating walking distance over existing roads
-// Queue does not allow modifying its members so we erase and then eventually insert modified member
-void FlagsForRoads::set_road_distance(Widelands::Coords coords, int32_t distance) {
-	const uint32_t hash = coords.hash();
-	Candidate new_candidate_flag = Candidate(0, 0, false);
-	bool replacing = false;
-	for (auto candidate_flag : queue) {
-		if (candidate_flag.coords_hash == hash) {
-			assert(!candidate_flag.different_economy);
-			if (distance < candidate_flag.current_roads_distance) {
-				new_candidate_flag = candidate_flag;
-				queue.erase(candidate_flag);
-				replacing = true;
-				break;
-			}
-			break;
-		}
-	}
-	if (replacing) {
-		new_candidate_flag.current_roads_distance = distance;
-		new_candidate_flag.accessed_via_roads = true;
-		new_candidate_flag.calculate_score();
-		queue.insert(new_candidate_flag);
-	}
-}
-
+// Returns mostly best candidate, as a result of sorting
 bool FlagsForRoads::get_winner(uint32_t* winner_hash) {
 	// If AI can ask for 2nd position, but there is only one viable candidate
 	// we return the first one of course
 	bool has_winner = false;
-	for (auto candidate_flag : queue) {
-		if (candidate_flag.reduction_score < min_reduction || !candidate_flag.new_road_possible) {
+	for (auto candidate_flag : flags_queue) {
+		if (candidate_flag.reduction_score() < min_reduction || !candidate_flag.new_road_possible ||
+		    candidate_flag.new_road_length * 2 > candidate_flag.current_road_length) {
 			continue;
 		}
 		assert(candidate_flag.air_distance > 0);
-		assert(candidate_flag.reduction_score >= min_reduction);
+		assert(candidate_flag.reduction_score() >= min_reduction);
 		assert(candidate_flag.new_road_possible);
 		*winner_hash = candidate_flag.coords_hash;
 		has_winner = true;
 
-		if (std::rand() % 3 > 0) {
-			// with probability of 2/3 we accept this flag
+		if (std::rand() % 4 > 0) {
+			// with probability of 3/4 we accept this flag
 			return true;
 		}
 	}

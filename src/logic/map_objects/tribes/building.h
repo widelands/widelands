@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,6 +73,9 @@ public:
 	bool is_buildable() const {
 		return buildable_;
 	}
+	bool can_be_dismantled() const {
+		return can_be_dismantled_;
+	}
 	bool is_destructible() const {
 		return destructible_;
 	}
@@ -108,9 +111,6 @@ public:
 		return return_enhanced_;
 	}
 
-	std::string helptext_script() const {
-		return helptext_script_;
-	}
 	int32_t get_size() const {
 		return size_;
 	}
@@ -146,7 +146,7 @@ public:
 	/// Does not perform any sanity checks.
 	/// If former_buildings is not empty this is an enhancing.
 	Building& create(EditorGameBase&,
-	                 Player&,
+	                 Player*,
 	                 Coords,
 	                 bool construct,
 	                 bool loading = false,
@@ -167,20 +167,22 @@ public:
 	const BuildingHints& hints() const;
 	void set_hints_trainingsites_max_percent(int percent);
 
+	uint32_t get_unoccupied_animation() const;
+
 protected:
 	virtual Building& create_object() const = 0;
 	Building& create_constructionsite() const;
+	const EditorGameBase& egbase_;
 
 private:
-	const EditorGameBase& egbase_;
-	bool buildable_;     // the player can build this himself
-	bool destructible_;  // the player can destruct this himself
+	const bool buildable_;          // the player can build this himself
+	const bool can_be_dismantled_;  // the player can dismantle this building
+	const bool destructible_;       // the player can destruct this himself
 	Buildcost buildcost_;
-	Buildcost return_dismantle_;   // Returned wares on dismantle
-	Buildcost enhance_cost_;       // cost for enhancing
-	Buildcost return_enhanced_;    // Returned ware for dismantling an enhanced building
-	std::string helptext_script_;  // The path and filename to the building's helptext script
-	int32_t size_;                 // size of the building
+	Buildcost return_dismantle_;  // Returned wares on dismantle
+	Buildcost enhance_cost_;      // cost for enhancing
+	Buildcost return_enhanced_;   // Returned ware for dismantling an enhanced building
+	int32_t size_;                // size of the building
 	bool mine_;
 	bool port_;
 	bool needs_seafaring_;  // This building should only be built on seafaring maps.
@@ -200,7 +202,7 @@ struct NoteBuilding {
 
 	Serial serial;
 
-	enum class Action { kChanged, kDeleted, kStartWarp, kFinishWarp, kWorkersChanged };
+	enum class Action { kChanged, kStartWarp, kFinishWarp, kWorkersChanged };
 	const Action action;
 
 	NoteBuilding(Serial init_serial, const Action& init_action)
@@ -284,7 +286,7 @@ public:
 		return old_buildings_;
 	}
 
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {
@@ -376,6 +378,6 @@ private:
 	AttackTarget* attack_target_;      // owned by the base classes, set by 'set_attack_target'.
 	SoldierControl* soldier_control_;  // owned by the base classes, set by 'set_soldier_control'.
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_BUILDING_H

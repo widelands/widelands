@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,6 +73,10 @@ public:
 		View(Vector2f init_viewpoint, float init_zoom) : viewpoint(init_viewpoint), zoom(init_zoom) {
 		}
 		View() : View(Vector2f::zero(), 1.0f) {
+		}
+
+		bool operator==(const View& other) const {
+			return (zoom == other.zoom) && (viewpoint == other.viewpoint);
 		}
 
 		// Mappixel of top-left pixel of this MapView.
