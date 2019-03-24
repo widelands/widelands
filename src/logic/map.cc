@@ -1454,7 +1454,6 @@ bool Map::is_port_space_allowed(const World& world, const FCoords& fc) const {
 
 /// \returns true, if Coordinates are in port space list
 bool Map::is_port_space(const Coords& c) const {
-	log("NOCOM is_port_space (%d,%d)\n", c.x, c.y);
 	return port_spaces_.count(c);
 }
 
@@ -2186,11 +2185,16 @@ void Map::recalculate_allows_seafaring() {
 
 void Map::cleanup_port_spaces(const World& world) {
 	log("NOCOM cleanup_port_spaces\n");
+	// Temporary set to avoid problems with concurrent container operations
+	PortSpacesSet clean_me_up;
 	for (const Coords& c : get_port_spaces()) {
 		if (!is_port_space_allowed(world, get_fcoords(c))) {
-			set_port_space(world, c, false);
-			continue;
+			clean_me_up.insert(c);
 		}
+	}
+	for (const Coords& c : clean_me_up) {
+		log("NOCOM clean up port space at (%d, %d)\n", c.x, c.y);
+		set_port_space(world, c, false);
 	}
 	recalculate_allows_seafaring();
 }
