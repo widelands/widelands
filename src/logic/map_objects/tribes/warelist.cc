@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -92,7 +92,7 @@ Quantity WareList::stock(DescriptionIndex const id) const {
 /**
  * Two WareLists are only equal when they contain the exact same stock of
  * all wares types.
-*/
+ */
 bool WareList::operator==(const WareList& wl) const {
 	uint32_t i = 0;
 
@@ -116,4 +116,4 @@ bool WareList::operator==(const WareList& wl) const {
 
 	return true;
 }
-}
+}  // namespace Widelands

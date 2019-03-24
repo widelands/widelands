@@ -12,7 +12,6 @@ end of files and whitespace characters at the end of lines.
 
 After fixing the Lua tabs, this script also executes clang-format over the src
 directory and pyformat over the utils directory.
-
 """
 
 import argparse
@@ -74,6 +73,7 @@ def main():
 
     print 'Formatting finished.'
     return 0
+
 
 if __name__ == '__main__':
     sys.exit(main())

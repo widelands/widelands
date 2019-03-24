@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -177,13 +177,17 @@ void EditorInteractive::load(const std::string& filename) {
 	load_all_tribes(&egbase(), &loader_ui);
 
 	// Create the players. TODO(SirVer): this must be managed better
+	// TODO(GunChleoc): Ugly - we only need this for the test suite right now
 	loader_ui.step(_("Creating players"));
 	iterate_player_numbers(p, map->get_nrplayers()) {
-		egbase().add_player(
-		   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
+		if (!map->get_scenario_player_tribe(p).empty()) {
+			egbase().add_player(
+			   p, 0, map->get_scenario_player_tribe(p), map->get_scenario_player_name(p));
+		}
 	}
 
 	ml->load_map_complete(egbase(), Widelands::MapLoader::LoadType::kEditor);
+	egbase().postload();
 	egbase().load_graphics(loader_ui);
 	map_changed(MapWas::kReplaced);
 }
@@ -307,17 +311,6 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			}
 		}
 
-		const auto blit = [&dst, scale](
-		   const Image* pic, const Vector2f& position, const Vector2i& hotspot) {
-			dst.blitrect_scale(Rectf(position - hotspot.cast<float>() * scale, pic->width() * scale,
-			                         pic->height() * scale),
-			                   pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                   BlendMode::UseAlpha);
-		};
-		const auto blit_overlay = [&field, &blit](const Image* pic, const Vector2i& hotspot) {
-			blit(pic, field.rendertarget_pixel, hotspot);
-		};
-
 		// Draw resource overlay.
 		uint8_t const amount = field.fcoords.field->get_resources_amount();
 		if (draw_resources_ && amount > 0) {
@@ -325,7 +318,8 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			   world.get_resource(field.fcoords.field->get_resources())->editor_image(amount);
 			if (!immname.empty()) {
 				const auto* pic = g_gr->images().get(immname);
-				blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+				blit_field_overlay(
+				   &dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
 		}
 
@@ -334,7 +328,7 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			const auto* overlay =
 			   get_buildhelp_overlay(tools_->current().nodecaps_for_buildhelp(field.fcoords, ebase));
 			if (overlay != nullptr) {
-				blit_overlay(overlay->pic, overlay->hotspot);
+				blit_field_overlay(&dst, field, overlay->pic, overlay->hotspot, scale);
 			}
 		}
 
@@ -345,13 +339,14 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			   playercolor_image(it->second - 1, "images/players/player_position.png");
 			assert(player_image != nullptr);
 			constexpr int kStartingPosHotspotY = 55;
-			blit_overlay(player_image, Vector2i(player_image->width() / 2, kStartingPosHotspotY));
+			blit_field_overlay(&dst, field, player_image,
+			                   Vector2i(player_image->width() / 2, kStartingPosHotspotY), scale);
 		}
 
 		// Draw selection markers on the field.
 		if (selected_nodes.count(field.fcoords) > 0) {
 			const Image* pic = get_sel_picture();
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			blit_field_overlay(&dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
 
 		// Draw selection markers on the triangles.
@@ -361,23 +356,23 @@ void EditorInteractive::draw(RenderTarget& dst) {
 			const FieldsToDraw::Field& bln = fields_to_draw->at(field.bln_index);
 			if (selected_triangles.count(
 			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::R))) {
-				const Vector2f tripos(
+				const Vector2i tripos(
 				   (field.rendertarget_pixel.x + rn.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-				      3.f,
+				      3,
 				   (field.rendertarget_pixel.y + rn.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-				      3.f);
+				      3);
 				const Image* pic = get_sel_picture();
-				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+				blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
 			if (selected_triangles.count(
 			       Widelands::TCoords<>(field.fcoords, Widelands::TriangleIndex::D))) {
-				const Vector2f tripos(
+				const Vector2i tripos(
 				   (field.rendertarget_pixel.x + bln.rendertarget_pixel.x + brn.rendertarget_pixel.x) /
-				      3.f,
+				      3,
 				   (field.rendertarget_pixel.y + bln.rendertarget_pixel.y + brn.rendertarget_pixel.y) /
-				      3.f);
+				      3);
 				const Image* pic = get_sel_picture();
-				blit(pic, tripos, Vector2i(pic->width() / 2, pic->height() / 2));
+				blit_overlay(&dst, tripos, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 			}
 		}
 	}
@@ -621,10 +616,11 @@ void EditorInteractive::run_editor(const std::string& filename, const std::strin
 				egbase.mutable_map()->create_empty_map(
 				   egbase.world(), 64, 64, 0,
 				   /** TRANSLATORS: Default name for new map */
-				   _("No Name"), g_options.pull_section("global").get_string(
-				                    "realname",
-				                    /** TRANSLATORS: Map author name when it hasn't been set yet */
-				                    pgettext("author_name", "Unknown")));
+				   _("No Name"),
+				   g_options.pull_section("global").get_string(
+				      "realname",
+				      /** TRANSLATORS: Map author name when it hasn't been set yet */
+				      pgettext("author_name", "Unknown")));
 
 				load_all_tribes(&egbase, &loader_ui);
 

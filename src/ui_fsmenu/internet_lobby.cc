@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2017 by the Widelands Development Team
+ * Copyright (C) 2004-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,16 @@
 #include "random/random.h"
 #include "ui_basic/messagebox.h"
 
+namespace {
+
+// Constants for convert_clienttype() / compare_clienttype()
+const uint8_t kClientUnregistered = 0;
+const uint8_t kClientRegistered = 1;
+const uint8_t kClientSuperuser = 2;
+// 3 was INTERNET_CLIENT_BOT which is not used
+const uint8_t kClientIRC = 4;
+}  // namespace
+
 FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                                                          char const* const pwd,
                                                          bool registered)
@@ -61,7 +71,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                get_h() * 55 / 100,
                butw_,
                buth_,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Join this game")),
      hostgame_(this,
                "host_game",
@@ -69,7 +79,7 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
                get_h() * 81 / 100,
                butw_,
                buth_,
-               g_gr->images().get("images/ui_basic/but1.png"),
+               UI::ButtonStyle::kFsMenuSecondary,
                _("Open a new game")),
      back_(this,
            "back",
@@ -77,22 +87,18 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
            get_h() * 90 / 100,
            butw_,
            buth_,
-           g_gr->images().get("images/ui_basic/but0.png"),
+           UI::ButtonStyle::kFsMenuSecondary,
            _("Back")),
 
      // Edit boxes
-     edit_servername_(this,
-                      get_w() * 17 / 25,
-                      get_h() * 68 / 100,
-                      butw_,
-                      buth_,
-                      2,
-                      g_gr->images().get("images/ui_basic/but2.png"),
-                      fs_),
+     edit_servername_(
+        this, get_w() * 17 / 25, get_h() * 68 / 100, butw_, buth_, 2, UI::PanelStyle::kFsMenu, fs_),
 
      // List
-     clientsonline_list_(this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10),
-     opengames_list_(this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20),
+     clientsonline_list_(
+        this, get_w() * 4 / 125, get_h() / 5, lisw_, get_h() * 3 / 10, UI::PanelStyle::kFsMenu),
+     opengames_list_(
+        this, get_w() * 17 / 25, get_h() / 5, butw_, get_h() * 7 / 20, UI::PanelStyle::kFsMenu),
 
      // The chat UI
      chat(this,
@@ -100,7 +106,8 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
           get_h() * 51 / 100,
           lisw_,
           get_h() * 44 / 100,
-          InternetGaming::ref()),
+          InternetGaming::ref(),
+          UI::PanelStyle::kFsMenu),
 
      // Login information
      nickname_(nick),
@@ -127,10 +134,12 @@ FullscreenMenuInternetLobby::FullscreenMenuInternetLobby(char const* const nick,
 
 	// prepare the lists
 	std::string t_tip =
-	   (boost::format("%s%s%s%s%s%s%s%s%s%s") % "<rt><p><font underline=yes>" % _("User Status") %
-	    "</font><br>" % "<img src=images/wui/overlays/roadb_yellow.png> " % _("Registered") %
-	    "<br><img src=images/wui/overlays/roadb_green.png> " % _("Administrator") %
-	    "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") % "</p></rt>")
+	   (boost::format("%s%s%s%s%s%s%s%s%s%s") %
+	    "<rt padding=2><p align=center spacing=3><font bold=yes underline=yes>" % _("User Status") %
+	    "</font></p>" % "<p valign=bottom><img src=images/wui/overlays/roadb_green.png> " %
+	    _("Administrator") % "<br><img src=images/wui/overlays/roadb_yellow.png> " %
+	    _("Registered") % "<br><img src=images/wui/overlays/roadb_red.png> " % _("Unregistered") %
+	    "</p></rt>")
 	      .str();
 	clientsonline_list_.add_column(22, "*", t_tip);
 	/** TRANSLATORS: Player Name */
@@ -232,13 +241,13 @@ void FullscreenMenuInternetLobby::fill_games_list(const std::vector<InternetGame
 
 uint8_t FullscreenMenuInternetLobby::convert_clienttype(const std::string& type) {
 	if (type == INTERNET_CLIENT_REGISTERED)
-		return 1;
+		return kClientRegistered;
 	if (type == INTERNET_CLIENT_SUPERUSER)
-		return 2;
-	if (type == INTERNET_CLIENT_BOT)
-		return 3;
+		return kClientSuperuser;
+	if (type == INTERNET_CLIENT_IRC)
+		return kClientIRC;
 	// if (type == INTERNET_CLIENT_UNREGISTERED)
-	return 0;
+	return kClientUnregistered;
 }
 
 /**
@@ -262,27 +271,24 @@ void FullscreenMenuInternetLobby::fill_client_list(const std::vector<InternetCli
 			er.set_string(2, client.build_id);
 			er.set_string(3, client.game);
 
-			if (client.build_id == "IRC") {
-				// No icon for IRC users
-				continue;
-			}
-
 			const Image* pic;
 			switch (convert_clienttype(client.type)) {
-			case 0:  // UNREGISTERED
+			case kClientUnregistered:
 				pic = g_gr->images().get("images/wui/overlays/roadb_red.png");
 				er.set_picture(0, pic);
 				break;
-			case 1:  // REGISTERED
+			case kClientRegistered:
 				pic = g_gr->images().get("images/wui/overlays/roadb_yellow.png");
 				er.set_picture(0, pic);
 				break;
-			case 2:  // SUPERUSER
-			case 3:  // BOT
+			case kClientSuperuser:
 				pic = g_gr->images().get("images/wui/overlays/roadb_green.png");
 				er.set_color(RGBColor(0, 255, 0));
 				er.set_picture(0, pic);
 				break;
+			case kClientIRC:
+				// No icon for IRC users
+				continue;
 			default:
 				continue;
 			}
@@ -300,11 +306,6 @@ void FullscreenMenuInternetLobby::client_doubleclicked(uint32_t i) {
 	// add a @clientname to the current edit text.
 	if (clientsonline_list_.has_selection()) {
 		UI::Table<const InternetClient* const>::EntryRecord& er = clientsonline_list_.get_record(i);
-
-		if (er.get_string(2) == "IRC") {
-			// No PM to IRC users
-			return;
-		}
 
 		std::string temp("@");
 		temp += er.get_string(1);
@@ -363,12 +364,9 @@ void FullscreenMenuInternetLobby::change_servername() {
 }
 
 bool FullscreenMenuInternetLobby::wait_for_ip() {
-	// Wait until the metaserver provided us with an IP address
-	uint32_t const secs = time(nullptr);
-	while (!InternetGaming::ref().ips().first.is_valid()) {
-		InternetGaming::ref().handle_metaserver_communication();
-		// give some time for the answer + for a relogin, if a problem occurs.
-		if ((kInternetGamingTimeout * 5 / 3) < time(nullptr) - secs) {
+	if (!InternetGaming::ref().wait_for_ips()) {
+		// Only display a message box if a network error occurred
+		if (InternetGaming::ref().error()) {
 			// Show a popup warning message
 			const std::string warning(
 			   _("Widelands was unable to get the IP address of the server in time. "
@@ -377,9 +375,8 @@ bool FullscreenMenuInternetLobby::wait_for_ip() {
 			UI::WLMessageBox mmb(this, _("Connection Timed Out"), warning,
 			                     UI::WLMessageBox::MBoxType::kOk, UI::Align::kLeft);
 			mmb.run<UI::Panel::Returncodes>();
-			InternetGaming::ref().set_error();
-			return false;
 		}
+		return false;
 	}
 	return true;
 }
@@ -423,8 +420,9 @@ void FullscreenMenuInternetLobby::clicked_hostgame() {
 		// Tell the metaserver about it
 		InternetGaming::ref().open_game();
 
-		// Wait for his response with the IPs of the relay server
+		// Wait for the response with the IPs of the relay server
 		if (!wait_for_ip()) {
+			InternetGaming::ref().set_error();
 			return;
 		}
 

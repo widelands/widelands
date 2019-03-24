@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,10 +21,9 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
-
 #include "base/log.h"
 #include "base/macros.h"
+#include "graphic/text_layout.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -52,12 +51,17 @@ void CmdLuaCoroutine::execute(Game& game) {
 		log("Error in Lua Coroutine\n");
 		log("%s\n", e.what());
 		log("Send message to all players and pause game\n");
+		const std::string error_message = richtext_escape(e.what());
 		for (int i = 1; i <= game.map().get_nrplayers(); i++) {
-			std::unique_ptr<Message> msg(new Widelands::Message(
-			   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
-			   "images/ui_basic/menu_help.png", "Lua Coroutine Failed",
-			   (boost::format("<rt><p font-size=12>%s</p></rt>") % e.what()).str()));
-			game.player(i).add_message(game, std::move(msg), true);
+			// Send message only to open player slots
+			Player* recipient = game.get_player(i);
+			if (recipient) {
+				std::unique_ptr<Message> msg(new Widelands::Message(
+				   Message::Type::kGameLogic, game.get_gametime(), "Coroutine",
+				   "images/ui_basic/menu_help.png", "Lua Coroutine Failed", error_message));
+
+				recipient->add_message(game, std::move(msg), true);
+			}
 		}
 		game.game_controller()->set_desired_speed(0);
 	}
@@ -95,4 +99,4 @@ void CmdLuaCoroutine::write(FileWrite& fw, EditorGameBase& egbase, MapObjectSave
 
 	lgi->write_coroutine(fw, *cr_);
 }
-}
+}  // namespace Widelands

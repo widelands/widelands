@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -72,9 +72,9 @@ void ConstructionsiteInformation::draw(const Vector2f& point_on_dst,
 }
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/partially_finished/constructionsite/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/partially_finished/constructionsite/init.lua
+ */
 ConstructionSiteDescr::ConstructionSiteDescr(const std::string& init_descname,
                                              const LuaTable& table,
                                              const EditorGameBase& egbase)
@@ -181,15 +181,18 @@ If construction was finished successfully, place the building at our position.
 ===============
 */
 void ConstructionSite::cleanup(EditorGameBase& egbase) {
-	// Register whether the window was open
-	Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kStartWarp));
+	if (work_steps_ <= work_completed_) {
+		// If the building is finished, register whether the window was open
+		Notifications::publish(NoteBuilding(serial(), NoteBuilding::Action::kStartWarp));
+	}
+
 	PartiallyFinishedBuilding::cleanup(egbase);
 
 	if (work_steps_ <= work_completed_) {
 		// Put the real building in place
 		DescriptionIndex becomes_idx = owner().tribe().building_index(building_->name());
 		old_buildings_.push_back(becomes_idx);
-		Building& b = building_->create(egbase, owner(), position_, false, false, old_buildings_);
+		Building& b = building_->create(egbase, get_owner(), position_, false, false, old_buildings_);
 		if (Worker* const builder = builder_.get(egbase)) {
 			builder->reset_tasks(dynamic_cast<Game&>(egbase));
 			builder->set_location(&b);
@@ -294,7 +297,7 @@ bool ConstructionSite::get_building_work(Game& game, Worker& worker, bool) {
 			wq.set_max_size(wq.get_max_size() - 1);
 
 			// Update consumption statistic
-			owner().ware_consumed(wq.get_index(), 1);
+			get_owner()->ware_consumed(wq.get_index(), 1);
 
 			working_ = true;
 			work_steptime_ = game.get_gametime() + CONSTRUCTIONSITE_STEP_TIME;
@@ -360,4 +363,4 @@ void ConstructionSite::draw(uint32_t gametime,
 	// Draw help strings
 	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
-}
+}  // namespace Widelands

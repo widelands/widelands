@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
 
 #include "base/log.h"
 #include "base/wexception.h"
-#include "graphic/font_handler1.h"
+#include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_layout.h"
@@ -50,6 +50,7 @@ CmdDestroyMapObject::CmdDestroyMapObject(uint32_t const t, MapObject& o)
 }
 
 void CmdDestroyMapObject::execute(Game& game) {
+	game.syncstream().unsigned_8(SyncEntry::kDestroyObject);
 	game.syncstream().unsigned_32(obj_serial);
 
 	if (MapObject* obj = game.objects().get_object(obj_serial))
@@ -95,10 +96,15 @@ CmdAct::CmdAct(uint32_t const t, MapObject& o, int32_t const a)
 }
 
 void CmdAct::execute(Game& game) {
+	game.syncstream().unsigned_8(SyncEntry::kCmdAct);
 	game.syncstream().unsigned_32(obj_serial);
 
-	if (MapObject* const obj = game.objects().get_object(obj_serial))
+	if (MapObject* const obj = game.objects().get_object(obj_serial)) {
+		game.syncstream().unsigned_8(static_cast<uint8_t>(obj->descr().type()));
 		obj->act(game, arg);
+	} else {
+		game.syncstream().unsigned_8(static_cast<uint8_t>(MapObjectType::MAPOBJECT));
+	}
 	// the object must queue the next CMD_ACT itself if necessary
 }
 
@@ -484,22 +490,26 @@ void MapObject::do_draw_info(const InfoToDraw& info_to_draw,
 	float text_scale = scale;
 	// The formula is a bit fancy to avoid too much text overlap.
 	text_scale = std::round(granularity * (text_scale > 1.f ? std::sqrt(text_scale) : std::pow(text_scale, 2.f))) / granularity;
-	text_scale = std::max(0.5f, text_scale); // Keep it legible
+
+	// Skip tiny text for performance reasons
+	if (text_scale < 0.5f) {
+		return;
+	}
 
 	const int font_size = static_cast<int>(std::round(text_scale * UI_FONT_SIZE_SMALL));
 
 	// We always render this so we can have a stable position for the statistics string.
 	std::shared_ptr<const UI::RenderedText> rendered_census =
-	   UI::g_fh1->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * text_scale);
+	   UI::g_fh->render(as_condensed(census, UI::Align::kCenter, font_size), 120 * text_scale);
 	Vector2i position = field_on_dst.cast<int>() - Vector2i(0, 48) * scale;
 	if (info_to_draw & InfoToDraw::kCensus) {
 		rendered_census->draw(*dst, position, UI::Align::kCenter);
 	}
 
-	// Draw staistics if we want them, they are available and they fill fit
+	// Draw statistics if we want them, they are available and they fill fit
 	if (info_to_draw & InfoToDraw::kStatistics && !statictics.empty() && scale >= 0.5f) {
 		std::shared_ptr<const UI::RenderedText> rendered_statistics =
-		   UI::g_fh1->render(as_condensed(statictics, UI::Align::kCenter, font_size));
+		   UI::g_fh->render(as_condensed(statictics, UI::Align::kCenter, font_size));
 		position.y += rendered_census->height() + text_height(font_size) / 4;
 		rendered_statistics->draw(*dst, position, UI::Align::kCenter);
 	}
@@ -545,7 +555,7 @@ void MapObject::set_logsink(LogSink* const sink) {
 	logsink_ = sink;
 }
 
-void MapObject::log_general_info(const EditorGameBase&) {
+void MapObject::log_general_info(const EditorGameBase&) const {
 }
 
 /**
@@ -594,6 +604,7 @@ void MapObject::Loader::load(FileRead& fr) {
 			throw wexception("header is %u, expected %u", header, HeaderMapObject);
 
 		uint8_t const packet_version = fr.unsigned_8();
+		// Supporting older versions for map loading
 		if (packet_version < 1 || packet_version > kCurrentPacketVersionMapObject) {
 			throw UnhandledVersionError("MapObject", packet_version, kCurrentPacketVersionMapObject);
 		}
@@ -700,4 +711,4 @@ std::string to_string(const MapObjectType type) {
 	}
 	NEVER_HERE();
 }
-}
+}  // namespace Widelands

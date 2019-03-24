@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2017 by the Widelands Development Team
+ * Copyright (C) 2011-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,7 +56,8 @@ const FleetDescr& Fleet::descr() const {
  * instance, then add themselves \em before calling the \ref init function.
  * The Fleet takes care of merging with existing fleets, if any.
  */
-Fleet::Fleet(Player& player) : MapObject(&g_fleet_descr), owner_(player), act_pending_(false) {
+Fleet::Fleet(Player* player) : MapObject(&g_fleet_descr), act_pending_(false) {
+	owner_ = player;
 }
 
 /**
@@ -81,7 +82,7 @@ void Fleet::set_economy(Economy* e) {
 			assert(e == nullptr);
 #endif
 
-		if (upcast(Game, game, &owner().egbase())) {
+		if (upcast(Game, game, &get_owner()->egbase())) {
 			for (Ship* temp_ship : ships_) {
 				temp_ship->set_economy(*game, e);
 			}
@@ -257,7 +258,12 @@ void Fleet::cleanup(EditorGameBase& egbase) {
 	portpaths_.clear();
 
 	while (!ships_.empty()) {
-		ships_.back()->set_fleet(nullptr);
+		Ship* ship = ships_.back();
+		// Check if the ship still exists to avoid heap-use-after-free when ship has already been
+		// deleted while processing EditorGameBase::cleanup_objects()
+		if (egbase.objects().object_still_available(ship)) {
+			ship->set_fleet(nullptr);
+		}
 		ships_.pop_back();
 	}
 
@@ -309,8 +315,9 @@ bool Fleet::get_path(PortDock& start, PortDock& end, Path& path) {
 	bool reverse;
 	const PortPath& pp(portpath_bidir(startidx, endidx, reverse));
 
-	if (pp.cost < 0)
-		connect_port(owner().egbase(), startidx);
+	if (pp.cost < 0) {
+		connect_port(get_owner()->egbase(), startidx);
+	}
 
 	if (pp.cost < 0)
 		return false;
@@ -322,11 +329,11 @@ bool Fleet::get_path(PortDock& start, PortDock& end, Path& path) {
 	return true;
 }
 
-uint32_t Fleet::count_ships() {
+uint32_t Fleet::count_ships() const {
 	return ships_.size();
 }
 
-uint32_t Fleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port) {
+uint32_t Fleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port) const {
 	uint32_t ships_on_way = 0;
 	for (uint16_t s = 0; s < ships_.size(); s += 1) {
 		if (ships_[s]->get_destination(egbase) == port) {
@@ -337,10 +344,10 @@ uint32_t Fleet::count_ships_heading_here(EditorGameBase& egbase, PortDock* port)
 	return ships_on_way;
 }
 
-uint32_t Fleet::count_ports() {
+uint32_t Fleet::count_ports() const {
 	return ports_.size();
 }
-bool Fleet::get_act_pending() {
+bool Fleet::get_act_pending() const {
 	return act_pending_;
 }
 
@@ -356,7 +363,7 @@ void Fleet::add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neig
 
 		if (pp.cost < 0) {
 			// Lazily discover routes between ports
-			connect_port(owner().egbase(), idx);
+			connect_port(get_owner()->egbase(), idx);
 		}
 
 		if (pp.cost >= 0) {
@@ -371,7 +378,7 @@ void Fleet::add_neighbours(PortDock& pd, std::vector<RoutingNodeNeighbour>& neig
 void Fleet::add_ship(Ship* ship) {
 	ships_.push_back(ship);
 	ship->set_fleet(this);
-	if (upcast(Game, game, &owner().egbase())) {
+	if (upcast(Game, game, &get_owner()->egbase())) {
 		if (ports_.empty())
 			ship->set_economy(*game, nullptr);
 		else
@@ -566,7 +573,7 @@ void Fleet::remove_port(EditorGameBase& egbase, PortDock* port) {
 	}
 }
 
-bool Fleet::has_ports() {
+bool Fleet::has_ports() const {
 	return !ports_.empty();
 }
 
@@ -861,7 +868,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	}
 }
 
-void Fleet::log_general_info(const EditorGameBase& egbase) {
+void Fleet::log_general_info(const EditorGameBase& egbase) const {
 	MapObject::log_general_info(egbase);
 
 	molog("%" PRIuS " ships and %" PRIuS " ports\n", ships_.size(), ports_.size());
@@ -942,7 +949,7 @@ MapObject::Loader* Fleet::load(EditorGameBase& egbase, MapObjectLoader& mol, Fil
 			if (!owner)
 				throw GameDataError("owning player %u does not exist", owner_number);
 
-			loader->init(egbase, mol, *(new Fleet(*owner)));
+			loader->init(egbase, mol, *(new Fleet(owner)));
 			loader->load(fr);
 		} else {
 			throw UnhandledVersionError("Fleet", packet_version, kCurrentPacketVersion);
@@ -958,7 +965,7 @@ void Fleet::save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw) {
 	fw.unsigned_8(HeaderFleet);
 	fw.unsigned_8(kCurrentPacketVersion);
 
-	fw.unsigned_8(owner_.player_number());
+	fw.unsigned_8(owner_->player_number());
 
 	MapObject::save(egbase, mos, fw);
 

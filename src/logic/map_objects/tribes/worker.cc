@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,6 +34,7 @@
 #include "economy/road.h"
 #include "economy/transfer.h"
 #include "graphic/rendertarget.h"
+#include "graphic/text_constants.h"
 #include "helper.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
@@ -68,7 +69,7 @@
 namespace Widelands {
 
 /**
- * createware \<waretype\>
+ * createware=\<waretype\>
  *
  * The worker will create and carry an ware of the given type.
  *
@@ -99,7 +100,7 @@ bool Worker::run_createware(Game& game, State& state, const Action& action) {
 /**
  * Mine on the current coordinates for resources decrease, go home.
  *
- * Syntax in conffile: mine \<resource\> \<area\>
+ * Syntax in conffile: mine=\<resource\> \<area\>
  *
  * \param g
  * \param state
@@ -137,15 +138,17 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 		totalchance += 8 * amount;
 
 		// Add penalty for fields that are running out
-		if (amount == 0)
-			// we already know it's completely empty, so punish is less
-			totalchance += 1;
-		else if (amount <= 2)
-			totalchance += 6;
-		else if (amount <= 4)
-			totalchance += 4;
-		else if (amount <= 6)
-			totalchance += 2;
+		// Except for totally depleted fields or wrong ressource fields
+		// if we already know there is no ressource (left) we won't mine there
+		if (amount > 0) {
+			if (amount <= 2) {
+				totalchance += 6;
+			} else if (amount <= 4) {
+				totalchance += 4;
+			} else if (amount <= 6) {
+				totalchance += 2;
+			}
+		}
 	} while (mr.advance(*map));
 
 	if (totalres == 0) {
@@ -193,7 +196,7 @@ bool Worker::run_mine(Game& game, State& state, const Action& action) {
 /**
  * Breed on the current coordinates for resource increase, go home.
  *
- * Syntax in conffile: breed \<resource\> \<area\>
+ * Syntax in conffile: breed=\<resource\> \<area\>
  *
  * \param g
  * \param state
@@ -297,33 +300,7 @@ bool Worker::run_breed(Game& game, State& state, const Action& action) {
 }
 
 /**
- * setbobdescription \<bob name\> \<bob name\> ...
- *
- * Randomly select a bob name that can be used in subsequent commands
- * (e.g. create_bob).
- *
- * sparamv = possible bobs
- */
-bool Worker::run_setbobdescription(Game& game, State& state, const Action& action) {
-	int32_t const idx = game.logic_rand() % action.sparamv.size();
-
-	const std::string& bob = action.sparamv[idx];
-	state.ivar2 = game.world().get_critter(bob.c_str());
-
-	if (state.ivar2 < 0) {
-		molog("  WARNING: Unknown bob %s\n", bob.c_str());
-		send_signal(game, "fail");
-		pop_task(game);
-		return true;
-	}
-
-	++state.ivar1;
-	schedule_act(game, 10);
-	return true;
-}
-
-/**
- * findobject key:value key:value ...
+ * findobject=key:value key:value ...
  *
  * Find and select an object based on a number of predicates.
  * The object can be used in other commands like walk or object.
@@ -476,11 +453,11 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 	const uint32_t attribute_id = ImmovableDescr::get_attribute_id("tree_sapling");
 
 	const DescriptionMaintainer<TerrainDescription>& terrains = game.world().terrains();
-	double best = 0.0;
+	int best = 0;
 	for (DescriptionIndex i = 0; i < immovables.size(); ++i) {
 		const ImmovableDescr& immovable_descr = immovables.get(i);
 		if (immovable_descr.has_attribute(attribute_id) && immovable_descr.has_terrain_affinity()) {
-			double probability =
+			int probability =
 			   probability_to_grow(immovable_descr.terrain_affinity(), fpos, map, terrains);
 			if (probability > best) {
 				best = probability;
@@ -488,7 +465,8 @@ int16_t Worker::findspace_helper_for_forester(const Coords& pos, const Map& map,
 		}
 	}
 	// normalize value to int16 range
-	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) * best;
+	const int16_t correct_val = (std::numeric_limits<int16_t>::max() - 1) *
+	                            (static_cast<double>(best) / TerrainAffinity::kPrecisionFactor);
 
 	if (x_check && (correct_val != cache_entry)) {
 		forester_cache.clear();
@@ -659,7 +637,7 @@ bool Worker::run_findspace(Game& game, State& state, const Action& action) {
 }
 
 /**
- * walk \<where\>
+ * walk=\<where\>
  *
  * Walk to a previously selected destination. where can be one of:
  * object  walk to a previously found and selected object
@@ -726,14 +704,14 @@ bool Worker::run_walk(Game& game, State& state, const Action& action) {
 }
 
 /**
- * animation \<name\> \<duration\>
+ * animate=\<name\> \<duration\>
  *
  * Play the given animation for the given amount of time.
  *
  * iparam1 = anim id
  * iparam2 = duration
  */
-bool Worker::run_animation(Game& game, State& state, const Action& action) {
+bool Worker::run_animate(Game& game, State& state, const Action& action) {
 	set_animation(game, action.iparam1);
 
 	++state.ivar1;
@@ -753,13 +731,13 @@ bool Worker::run_return(Game& game, State& state, const Action& action) {
 }
 
 /**
- * object \<command\>
+ * callobject=\<command\>
  *
  * Cause the currently selected object to execute the given program.
  *
  * sparam1 = object command name
  */
-bool Worker::run_object(Game& game, State& state, const Action& action) {
+bool Worker::run_callobject(Game& game, State& state, const Action& action) {
 	MapObject* const obj = state.objvar1.get(game);
 
 	if (!obj) {
@@ -822,18 +800,19 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// affinity). We will pick one of them at random later. The container is
 	// picked to be a stable sorting one, so that no deyncs happen in
 	// multiplayer.
-	std::set<std::tuple<double, DescriptionIndex, MapObjectDescr::OwnerType>>
+	std::set<std::tuple<int, DescriptionIndex, MapObjectDescr::OwnerType>>
 	   best_suited_immovables_index;
 
 	// Checks if the 'immovable_description' has a terrain_affinity, if so use it. Otherwise assume
 	// it to be 1 (perfect fit). Adds it to the best_suited_immovables_index.
 	const auto test_suitability = [&best_suited_immovables_index, &fpos, &map, &game](
-	   const uint32_t attribute_id, const DescriptionIndex index,
-	   const ImmovableDescr& immovable_description, MapObjectDescr::OwnerType owner_type) {
+	                                 const uint32_t attribute_id, const DescriptionIndex index,
+	                                 const ImmovableDescr& immovable_description,
+	                                 MapObjectDescr::OwnerType owner_type) {
 		if (!immovable_description.has_attribute(attribute_id)) {
 			return;
 		}
-		double p = 1.;
+		int p = TerrainAffinity::kPrecisionFactor;
 		if (immovable_description.has_terrain_affinity()) {
 			p = probability_to_grow(
 			   immovable_description.terrain_affinity(), fpos, map, game.world().terrains());
@@ -880,18 +859,18 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 	// Randomly pick one of the immovables to be planted.
 
 	// Each candidate is weighted by its probability to grow.
-	double total_weight = 0.0;
+	int total_weight = 0;
 	for (const auto& bsii : best_suited_immovables_index) {
-		double weight = std::get<0>(bsii);
-		total_weight += weight * weight;
+		const int weight = std::get<0>(bsii);
+		total_weight += weight;
 	}
 
-	double choice = logic_rand_as_double(&game) * total_weight;
+	int choice = game.logic_rand() % total_weight;
 	for (const auto& bsii : best_suited_immovables_index) {
-		double weight = std::get<0>(bsii);
+		const int weight = std::get<0>(bsii);
 		state.ivar2 = std::get<1>(bsii);
 		state.ivar3 = static_cast<int>(std::get<2>(bsii));
-		choice -= weight * weight;
+		choice -= weight;
 		if (0 > choice) {
 			break;
 		}
@@ -911,11 +890,27 @@ bool Worker::run_plant(Game& game, State& state, const Action& action) {
 }
 
 /**
- * Plants a bob (critter usually, maybe also worker later on). The immovable
- * type must have been selected by a previous command (i.e. setbobdescription).
+ * createbob=\<bob name\> \<bob name\> ...
+ *
+ * Plants a bob (critter usually, maybe also worker later on), randomly selected from one of the
+ * given types.
+ *
+ * sparamv = possible bobs
  */
-bool Worker::run_create_bob(Game& game, State& state, const Action&) {
-	game.create_critter(get_position(), state.ivar2);
+bool Worker::run_createbob(Game& game, State& state, const Action& action) {
+	int32_t const idx = game.logic_rand() % action.sparamv.size();
+
+	const std::string& bob = action.sparamv[idx];
+	const DescriptionIndex critter = game.world().get_critter(bob.c_str());
+
+	if (critter == INVALID_INDEX) {
+		molog("  WARNING: Unknown bob %s\n", bob.c_str());
+		send_signal(game, "fail");
+		pop_task(game);
+		return true;
+	}
+
+	game.create_critter(get_position(), critter);
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -936,7 +931,7 @@ bool Worker::run_removeobject(Game& game, State& state, const Action&) {
 }
 
 /**
- * geologist \<repeat #\> \<radius\> \<subcommand\>
+ * repeatsearch=\<repeat #\> \<radius\> \<subcommand\>
  *
  * Walk around the starting point randomly within a certain radius, and
  * execute the subcommand for some of the fields.
@@ -945,8 +940,8 @@ bool Worker::run_removeobject(Game& game, State& state, const Action&) {
  * iparam2 = radius
  * sparam1 = subcommand
  */
-bool Worker::run_geologist(Game& game, State& state, const Action& action) {
-	molog("  Start Geologist (%i attempts, %i radius -> %s)\n", action.iparam1, action.iparam2,
+bool Worker::run_repeatsearch(Game& game, State& state, const Action& action) {
+	molog("  Start Repeat Search (%i attempts, %i radius -> %s)\n", action.iparam1, action.iparam2,
 	      action.sparam1.c_str());
 
 	++state.ivar1;
@@ -958,7 +953,7 @@ bool Worker::run_geologist(Game& game, State& state, const Action& action) {
  * Check resources at the current position, and plant a marker object when
  * possible.
  */
-bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
+bool Worker::run_findresources(Game& game, State& state, const Action&) {
 	const FCoords position = game.map().get_fcoords(get_position());
 	BaseImmovable const* const imm = position.field->get_immovable();
 	const World& world = game.world();
@@ -971,35 +966,27 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
 		   position,
 		   t.get_resource_indicator(
 		      rdescr, (rdescr && rdescr->detectable()) ? position.field->get_resources_amount() : 0),
-		   MapObjectDescr::OwnerType::kTribe, nullptr /* owner */);
+		   MapObjectDescr::OwnerType::kTribe, get_owner());
 
 		// Geologist also sends a message notifying the player
 		if (rdescr && rdescr->detectable() && position.field->get_resources_amount()) {
+			const int width = g_gr->images().get(rdescr->representative_image())->width();
 			const std::string message =
-			   (boost::format("<rt image=%s><p font-face=serif font-size=14>%s</p></rt>") %
-			    rdescr->representative_image() % _("A geologist found resources."))
+			   (boost::format("<div padding_r=10><p><img width=%d src=%s></p></div>"
+			                  "<div width=*><p><font size=%d>%s</font></p></div>") %
+			    width % ri.descr().representative_image_filename() % UI_FONT_SIZE_MESSAGE %
+			    _("A geologist found resources."))
 			      .str();
-
-			Message::Type message_type = Message::Type::kGeologists;
-			if (rdescr->name() == "coal")
-				message_type = Message::Type::kGeologistsCoal;
-			else if (rdescr->name() == "gold")
-				message_type = Message::Type::kGeologistsGold;
-			else if (rdescr->name() == "stones")
-				message_type = Message::Type::kGeologistsStones;
-			else if (rdescr->name() == "iron")
-				message_type = Message::Type::kGeologistsIron;
-			else if (rdescr->name() == "water")
-				message_type = Message::Type::kGeologistsWater;
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.
-			owner().add_message_with_timeout(game,
-			                                 std::unique_ptr<Message>(new Message(
-			                                    message_type, game.get_gametime(), rdescr->descname(),
-			                                    ri.descr().representative_image_filename(),
-			                                    rdescr->descname(), message, position, serial_)),
-			                                 300000, 8);
+			get_owner()->add_message_with_timeout(
+			   game,
+			   std::unique_ptr<Message>(new Message(Message::Type::kGeologists, game.get_gametime(),
+			                                        rdescr->descname(), rdescr->representative_image(),
+			                                        rdescr->descname(), message, position, serial_,
+			                                        rdescr->name())),
+			   rdescr->timeout_ms(), rdescr->timeout_radius());
 		}
 	}
 
@@ -1011,7 +998,7 @@ bool Worker::run_geologist_find(Game& game, State& state, const Action&) {
  * Demand from the g_sound_handler to play a certain sound effect.
  * Whether the effect actually gets played is decided only by the sound server.
  */
-bool Worker::run_play_sound(Game& game, State& state, const Action& action) {
+bool Worker::run_playsound(Game& game, State& state, const Action& action) {
 	Notifications::publish(NoteSound(action.sparam1, get_position(), action.iparam1));
 
 	++state.ivar1;
@@ -1049,7 +1036,7 @@ bool Worker::run_construct(Game& game, State& state, const Action& /* action */)
 	}
 
 	// Update consumption statistic
-	owner().ware_consumed(wareindex, 1);
+	get_owner()->ware_consumed(wareindex, 1);
 
 	ware = fetch_carried_ware(game);
 	ware->remove(game);
@@ -1069,7 +1056,7 @@ Worker::~Worker() {
 }
 
 /// Log basic information.
-void Worker::log_general_info(const EditorGameBase& egbase) {
+void Worker::log_general_info(const EditorGameBase& egbase) const {
 	Bob::log_general_info(egbase);
 
 	if (upcast(PlayerImmovable, loc, location_.get(egbase))) {
@@ -1143,7 +1130,7 @@ void Worker::set_location(PlayerImmovable* const location) {
 			// Interrupt whatever we've been doing.
 			set_economy(nullptr);
 
-			EditorGameBase& egbase = owner().egbase();
+			EditorGameBase& egbase = get_owner()->egbase();
 			if (upcast(Game, game, &egbase)) {
 				send_signal(*game, "location");
 			}
@@ -1165,7 +1152,7 @@ void Worker::set_economy(Economy* const economy) {
 
 	economy_ = economy;
 
-	if (WareInstance* const ware = get_carried_ware(owner().egbase()))
+	if (WareInstance* const ware = get_carried_ware(get_owner()->egbase()))
 		ware->set_economy(economy_);
 	if (supply_)
 		supply_->set_economy(economy_);
@@ -1868,10 +1855,11 @@ void Worker::return_update(Game& game, State& state) {
 		    descr().descname().c_str())
 		      .str();
 
-		owner().add_message(
-		   game, std::unique_ptr<Message>(new Message(
-		            Message::Type::kGameLogic, game.get_gametime(), _("Worker"),
-		            "images/ui_basic/menu_help.png", _("Worker got lost!"), message, get_position())),
+		get_owner()->add_message(
+		   game,
+		   std::unique_ptr<Message>(new Message(Message::Type::kGameLogic, game.get_gametime(),
+		                                        _("Worker"), "images/ui_basic/menu_help.png",
+		                                        _("Worker got lost!"), message, get_position())),
 		   serial_);
 		set_location(nullptr);
 		return pop_task(game);
@@ -1881,7 +1869,7 @@ void Worker::return_update(Game& game, State& state) {
 /**
  * Follow the steps of a configuration-defined program.
  * ivar1 is the next action to be performed.
- * ivar2 is used to store description indices selected by plant/setbobdescription
+ * ivar2 is used to store description indices selected by plant
  * objvar1 is used to store objects found by findobject
  * coords is used to store target coordinates found by findspace
  */
@@ -2065,17 +2053,27 @@ void Worker::dropoff_update(Game& game, State&) {
 
 	WareInstance* ware = get_carried_ware(game);
 	BaseImmovable* const location = game.map()[get_position()].get_immovable();
+
+	// If the building just got destroyed, pop the task
+	PlayerImmovable* current_location = get_location(game);
+	if (current_location == nullptr) {
+		molog("%s: Unable to dropoff ware in building at (%d,%d) - there is no building there\n",
+		      descr().name().c_str(), get_position().x, get_position().y);
+		return pop_task(game);
+	}
+
 #ifndef NDEBUG
-	Building& ploc = dynamic_cast<Building&>(*get_location(game));
-	assert(&ploc == location || &ploc.base_flag() == location);
+	Building* ploc = dynamic_cast<Building*>(current_location);
+	assert(ploc == location || &ploc->base_flag() == location);
 #endif
 
 	// Deliver the ware
 	if (ware) {
 		// We're in the building, walk onto the flag
 		if (upcast(Building, building, location)) {
-			if (start_task_waitforcapacity(game, building->base_flag()))
+			if (start_task_waitforcapacity(game, building->base_flag())) {
 				return;
+			}
 
 			return start_task_leavebuilding(game, false);  //  exit throttle
 		}
@@ -2116,7 +2114,7 @@ void Worker::dropoff_update(Game& game, State&) {
 /// Give the recruit his diploma and say farwell to him.
 void Worker::start_task_releaserecruit(Game& game, Worker& recruit) {
 	push_task(game, taskReleaserecruit);
-	molog("Starting to release %s %u...\n", recruit.descr().descname().c_str(), recruit.serial());
+	molog("Starting to release %s %u...\n", recruit.descr().name().c_str(), recruit.serial());
 	return schedule_act(game, 5000);
 }
 
@@ -2142,6 +2140,14 @@ void Worker::start_task_fetchfromflag(Game& game) {
 }
 
 void Worker::fetchfromflag_update(Game& game, State& state) {
+	std::string signal = get_signal();
+	if (signal.size()) {
+		if (signal == "location") {
+			molog("[fetchfromflag]: Building disappeared, become fugitive\n");
+			return pop_task(game);
+		}
+	}
+
 	PlayerImmovable& employer = *get_location(game);
 	PlayerImmovable* const location =
 	   dynamic_cast<PlayerImmovable*>(game.map().get_immovable(get_position()));
@@ -2235,8 +2241,9 @@ const Bob::Task Worker::taskWaitforcapacity = {
  * act at all.
  */
 bool Worker::start_task_waitforcapacity(Game& game, Flag& flag) {
-	if (flag.has_capacity())
+	if (flag.has_capacity()) {
 		return false;
+	}
 
 	push_task(game, taskWaitforcapacity);
 
@@ -2397,7 +2404,7 @@ struct FindFlagWithPlayersWarehouse {
 	}
 	bool accept(const BaseImmovable& imm) const {
 		if (upcast(Flag const, flag, &imm))
-			if (&flag->owner() == &owner_)
+			if (flag->get_owner() == &owner_)
 				if (flag->economy().warehouses().size())
 					return true;
 		return false;
@@ -2416,7 +2423,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 	const Map& map = game.map();
 	PlayerImmovable const* location = get_location(game);
 
-	if (location && &location->owner() == &owner()) {
+	if (location && location->get_owner() == get_owner()) {
 		molog("[fugitive]: we are on location\n");
 
 		if (dynamic_cast<Warehouse const*>(location))
@@ -2428,7 +2435,7 @@ void Worker::fugitive_update(Game& game, State& state) {
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (&flag->owner() == &owner() && flag->economy().warehouses().size()) {
+		if (flag->get_owner() == get_owner() && flag->economy().warehouses().size()) {
 			set_location(flag);
 			return pop_task(game);
 		}
@@ -2622,7 +2629,7 @@ const Bob::Task Worker::taskScout = {
    "scout", static_cast<Bob::Ptr>(&Worker::scout_update), nullptr, nullptr, true};
 
 /**
- * scout \<radius\> \<time\>
+ * scout=\<radius\> \<time\>
  *
  * Find a spot that is in the fog of war and go there to see what's up.
  *
@@ -2663,7 +2670,7 @@ void Worker::prepare_scouts_worklist(const Map& map, const Coords& hutpos) {
 	}
 }
 
-/** Check if militray sites have becom visible by now.
+/** Check if militray sites have become visible by now.
  *
  * After the pop in prepare_scouts_worklist,
  * the latest entry of scouts_worklist is the next MS to visit (if known)
@@ -2696,18 +2703,18 @@ void Worker::add_sites(Game& game,
                        const Player& player,
                        std::vector<ImmovableFound>& found_sites) {
 
-	// If there are many enemy sites, push a random walk request into queue evry third finding.
+	// If there are many enemy sites, push a random walk request into queue every third finding.
 	uint32_t haveabreak = 3;
 
 	for (const ImmovableFound& vu : found_sites) {
 		upcast(Flag, aflag, vu.object);
 		Building* a_building = aflag->get_building();
 		// Assuming that this always succeeds.
-		if (upcast(MilitarySite const, ms, a_building)) {
+		if (a_building->descr().type() == MapObjectType::MILITARYSITE) {
 			// This would be safe even if this assert failed: Own militarysites are always visible.
 			// However: There would be something wrong with FindForeignMilitarySite or associated
 			// code. Hence, let's keep the assert.
-			assert(&ms->owner() != &player);
+			assert(a_building->get_owner() != &player);
 			const Coords buildingpos = a_building->get_positions(game)[0];
 			// Check the visibility: only invisible ones interest the scout.
 			MapIndex mx = map.get_index(buildingpos, map.get_width());
@@ -2956,21 +2963,7 @@ void Worker::scout_update(Game& game, State& state) {
 
 	const Map& map = game.map();
 
-	if (scouts_worklist.empty()) {
-		// This routine assumes that scouts_worklist is not empty. There is one exception:
-		// First call to this routine after loading an old savegame. The least-invasive
-		// way to acquire old savegame compatibility was to simply ask the scout to go home early,
-		// under this special situation. Anybody reading this,
-		// TODO(kxq): Please remove this code block (and compatibility_2017 code from load routine)
-		// once Build 20 is out. Thanks.
-		log("Warning: sending scout home. Assuming the game was just started, from savegame, in "
-		    "compatibility mode.\n");
-		pop_task(game);
-		schedule_act(game, 10);
-		return;
-	}
-
-	bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0;
+	const bool do_run = static_cast<int32_t>(state.ivar2 - game.get_gametime()) > 0;
 
 	// do not pop; this function is called many times per run.
 	struct PlaceToScout scoutat = scouts_worklist.back();
@@ -2999,6 +2992,14 @@ void Worker::draw_inner(const EditorGameBase& game,
 
 	dst->blit_animation(
 	   point_on_dst, scale, get_current_anim(), game.get_gametime() - get_animstart(), player_color);
+
+	if (WareInstance const* const carried_ware = get_carried_ware(game)) {
+		const Vector2f hotspot = descr().ware_hotspot().cast<float>();
+		const Vector2f location(
+		   point_on_dst.x - hotspot.x * scale, point_on_dst.y - hotspot.y * scale);
+		dst->blit_animation(
+		   location, scale, carried_ware->descr().get_animation("idle"), 0, player_color);
+	}
 }
 
 /**
@@ -3031,12 +3032,8 @@ Worker::Loader::Loader() : location_(0), carried_ware_(0) {
 void Worker::Loader::load(FileRead& fr) {
 	Bob::Loader::load(fr);
 	try {
-		uint8_t packet_version = fr.unsigned_8();
-		// TODO(kxq): Remove the compatibility_2017 code (and similars, dozen lines below) after B20
-		// TODO(kxq): Also remove the code fragment from Worker::scout_update with compatibility_2017
-		// in comment.
-		bool compatibility_2017 = 2 == packet_version;
-		if (packet_version == kCurrentPacketVersion || compatibility_2017) {
+		const uint8_t packet_version = fr.unsigned_8();
+		if (packet_version == kCurrentPacketVersion) {
 
 			Worker& worker = get<Worker>();
 			location_ = fr.unsigned_32();
@@ -3047,14 +3044,7 @@ void Worker::Loader::load(FileRead& fr) {
 				worker.transfer_ = new Transfer(dynamic_cast<Game&>(egbase()), worker);
 				worker.transfer_->read(fr, transfer_);
 			}
-			unsigned veclen;
-			// TODO(kxq): Remove compatibility_2017 associated code from here and above,
-			// after build 20 has been released.
-			if (compatibility_2017) {
-				veclen = 0;
-			} else {
-				veclen = fr.unsigned_8();
-			}
+			const unsigned veclen = fr.unsigned_8();
 			for (unsigned q = 0; q < veclen; q++) {
 				if (fr.unsigned_8()) {
 					const PlaceToScout gsw;
@@ -3228,4 +3218,4 @@ void Worker::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw)
 		}
 	}
 }
-}
+}  // namespace Widelands

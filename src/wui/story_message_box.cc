@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,8 +19,6 @@
 
 #include "wui/story_message_box.h"
 
-#include "base/i18n.h"
-#include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "logic/save_handler.h"
 #include "ui_basic/button.h"
@@ -43,8 +41,8 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
    : UI::Window(game->get_ipl(), "story_message_box", x, y, w, h, title.c_str()),
      main_box_(this, kPadding, kPadding, UI::Box::Vertical, 0, 0, kPadding),
      button_box_(&main_box_, kPadding, kPadding, UI::Box::Horizontal, 0, 0, kPadding),
-     textarea_(&main_box_, 0, 0, 100, 100, ""),
-     ok_(&button_box_, "ok", 0, 0, 120, 0, g_gr->images().get("images/ui_basic/but5.png"), _("OK")),
+     textarea_(&main_box_, 0, 0, 100, 100, UI::PanelStyle::kWui, body),
+     ok_(&button_box_, "ok", 0, 0, 120, 0, UI::ButtonStyle::kWuiPrimary, _("OK")),
      desired_speed_(game->game_controller()->desired_speed()),
      game_(game) {
 
@@ -55,19 +53,6 @@ StoryMessageBox::StoryMessageBox(Widelands::Game* game,
 	// Adjust map view
 	if (coords != Widelands::Coords::null()) {
 		game_->get_ipl()->map_view()->scroll_to_field(coords, MapView::Transition::Jump);
-	}
-
-	// TODO(GunChleoc): When all campaigns and scenarios have been converted, simply add the body
-	// text above.
-	try {
-		textarea_.force_new_renderer();
-		textarea_.set_text(body);
-		log("Story Message Box: using NEW font renderer.\n");
-	} catch (const std::exception& e) {
-		log(
-		   "Story Message Box: falling back to OLD font renderer:\n%s\n%s\n", body.c_str(), e.what());
-		textarea_.force_new_renderer(false);
-		textarea_.set_text(body);
 	}
 
 	// Add and configure the panels

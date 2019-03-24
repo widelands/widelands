@@ -94,15 +94,18 @@ wl_library(editor
     graphic_fonthandler
     graphic_playercolor
     graphic_surface
+    graphic_text_layout
     io_filesystem
     logic
     logic_constants
     logic_filesystem_constants
+    logic_generic_save_handler
     logic_tribe_basic_info
     logic_widelands_geometry
     map_io
     map_io_map_loader
     notifications
+    profile
     random
     scripting_coroutine
     scripting_lua_interface

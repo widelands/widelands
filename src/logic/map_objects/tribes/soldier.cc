@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -527,9 +527,30 @@ void Soldier::draw_info_icon(Vector2i draw_position,
 		dst->fill_rect(energy_outer, color);
 		dst->brighten_rect(energy_outer, 230 - color_sum / 3);
 
+
+		// Adjust health to current animation tick
+		uint32_t health_to_show = current_health_;
+		if (battle_) {
+			uint32_t pending_damage = battle_->get_pending_damage(this);
+			if (pending_damage > 0) {
+				int32_t timeshift = owner().egbase().get_gametime() - get_animstart();
+				timeshift = std::min(std::max(0, timeshift), 1000);
+
+				pending_damage *= timeshift;
+				pending_damage /= 1000;
+
+				if (pending_damage > health_to_show) {
+					health_to_show = 0;
+				} else {
+					health_to_show -= pending_damage;
+				}
+			}
+		}
+
 		// Now draw the health bar itself
 		const int health_width =
-		   2 * (kSoldierHealthBarWidth - 1) * current_health_ / get_max_health();
+		   2 * (kSoldierHealthBarWidth - 1) * health_to_show / get_max_health();
+
 		Recti energy_inner(draw_position + Vector2i(-kSoldierHealthBarWidth + 1, 1) * scale,
 		                   health_width * scale, 3 * scale);
 		Recti energy_complement(energy_inner.origin() + Vector2i(health_width, 0) * scale,
@@ -630,7 +651,7 @@ bool Soldier::can_be_challenged() {
 	if (!battle_) {
 		return true;
 	}
-	return !battle_->locked(dynamic_cast<Game&>(owner().egbase()));
+	return !battle_->locked(dynamic_cast<Game&>(get_owner()->egbase()));
 }
 
 /**
@@ -1353,12 +1374,12 @@ void Soldier::battle_update(Game& game, State&) {
 					    (immovable_dest ? immovable_dest->descr().descname().c_str() : ("no")) %
 					    descr().descname().c_str())
 					      .str();
-					owner().add_message(
+					get_owner()->add_message(
 					   game, std::unique_ptr<Message>(
 					            new Message(Message::Type::kGameLogic, game.get_gametime(),
 					                        descr().descname(), "images/ui_basic/menu_help.png",
 					                        _("Logic error"), messagetext, get_position(), serial_)));
-					opponent.owner().add_message(
+					opponent.get_owner()->add_message(
 					   game, std::unique_ptr<Message>(new Message(
 					            Message::Type::kGameLogic, game.get_gametime(), descr().descname(),
 					            "images/ui_basic/menu_help.png", _("Logic error"), messagetext,
@@ -1554,7 +1575,7 @@ void Soldier::send_space_signals(Game& game) {
 	}
 }
 
-void Soldier::log_general_info(const EditorGameBase& egbase) {
+void Soldier::log_general_info(const EditorGameBase& egbase) const {
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");
 	molog("Levels: %d/%d/%d/%d\n", health_level_, attack_level_, defense_level_, evade_level_);
@@ -1678,4 +1699,4 @@ void Soldier::do_save(EditorGameBase& egbase, MapObjectSaver& mos, FileWrite& fw
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(battle_));
 }
-}
+}  // namespace Widelands

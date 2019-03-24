@@ -1,12 +1,14 @@
 include "scripting/richtext.lua"
 
 -- RST
+-- .. _richtext_scenarios.lua:
+--
 -- richtext_scenarios.lua
 -- ----------------------
 --
--- Function to simplify and unique text formatting in scenarios.  Most of these
--- functions are simple wrapper functions that make working with widelands rich
--- text formatting system more bearable.
+-- Functions to simplify text formatting in scenarios and make it consistent.
+-- Most of these functions are simple wrapper functions for our :ref:`richtext system <wlrichtext>`.
+-- This file will include :ref:`richtext.lua` for you for additional formatting functions.
 
 -- RST
 -- .. function:: speech(img, clr, title, text)
@@ -36,6 +38,7 @@ function speech(img, clr, title, text)
    return title .. li_image(img, p(text))
 end
 
+
 -- RST
 -- .. function:: paragraphdivider()
 --
@@ -47,7 +50,6 @@ end
 function paragraphdivider()
    return close_p() .. open_p()
 end
-
 
 
 -- RST
@@ -64,13 +66,16 @@ end
 
 
 -- RST
--- Append an objective text with a header to a dialog box in a nice fashion.
--- For displaying objectives with an extra title when an advisor is talking
+-- .. function:: new_objectives(...)
+--
+--    Append an objective text with a header to a dialog box in a nice fashion.
+--    For displaying objectives with an extra title when an advisor is talking
 --
 --    Provides nice formatting for objective texts.
---    the following arguments will be parsed:
---    number: the number of objectives described in the body
---    body: the objective text, e.g. created with function objective_text(heading, body)
+--    The following arguments will be parsed:
+--
+--       - number: the number of objectives described in the body
+--       - body: the objective text, e.g. created with function objective_text(heading, body)
 --
 --    :returns: a rich text object that contains the formatted
 --       objective text & title.

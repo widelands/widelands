@@ -251,9 +251,9 @@ void NetRelayConnection::send(const std::string& str) {
 		throw wexception("[NetRelayConnection] Socket connected to relay would block when writing");
 	}
 	if (written < str.length() + 1) {
-		throw wexception(
-		   "[NetRelayConnection] Unable to send complete string to relay (only %lu bytes of %lu)",
-		   written, str.length() + 1);
+		throw wexception("[NetRelayConnection] Unable to send complete string to relay (only %" PRIuS
+		                 " bytes of %" PRIuS ")",
+		                 written, str.length() + 1);
 	}
 	if (ec) {
 		log("[NetRelayConnection] Error when trying to send some data: %s.\n", ec.message().c_str());
@@ -279,9 +279,9 @@ void NetRelayConnection::send(const SendPacket& packet) {
 		return;
 	}
 	if (written < packet.get_size()) {
-		throw wexception(
-		   "[NetRelayConnection] Unable to send complete packet to relay (only %lu bytes of %lu)",
-		   written, packet.get_size());
+		throw wexception("[NetRelayConnection] Unable to send complete packet to relay (only %" PRIuS
+		                 " bytes of %" PRIuS ")",
+		                 written, packet.get_size());
 	}
 }
 

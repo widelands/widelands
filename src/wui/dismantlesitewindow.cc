@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +20,6 @@
 #include "wui/dismantlesitewindow.h"
 
 #include "graphic/graphic.h"
-#include "ui_basic/tabpanel.h"
 
 static const char pic_tab_wares[] = "images/wui/buildings/menu_tab_wares.png";
 
@@ -29,14 +28,14 @@ DismantleSiteWindow::DismantleSiteWindow(InteractiveGameBase& parent,
                                          Widelands::DismantleSite& ds,
                                          bool avoid_fastclick)
    : BuildingWindow(parent, reg, ds, avoid_fastclick), dismantle_site_(&ds), progress_(nullptr) {
-	init(avoid_fastclick);
+	init(avoid_fastclick, false);
 }
 
-void DismantleSiteWindow::init(bool avoid_fastclick) {
+void DismantleSiteWindow::init(bool avoid_fastclick, bool workarea_preview_wanted) {
 	Widelands::DismantleSite* dismantle_site = dismantle_site_.get(igbase()->egbase());
 	assert(dismantle_site != nullptr);
 
-	BuildingWindow::init(avoid_fastclick);
+	BuildingWindow::init(avoid_fastclick, workarea_preview_wanted);
 	UI::Box& box = *new UI::Box(get_tabs(), 0, 0, UI::Box::Vertical);
 
 	// Add the progress bar
@@ -50,7 +49,7 @@ void DismantleSiteWindow::init(bool avoid_fastclick) {
 	// Add the wares queue
 	for (uint32_t i = 0; i < dismantle_site->get_nrwaresqueues(); ++i)
 		BuildingWindow::create_input_queue_panel(
-		   &box, *dismantle_site, dismantle_site->get_waresqueue(i), true);
+		   &box, *dismantle_site, *dismantle_site->get_waresqueue(i), true);
 
 	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 	think();

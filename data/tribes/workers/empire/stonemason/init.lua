@@ -32,21 +32,21 @@ tribes:new_worker_type {
 
    programs = {
       cut_granite = {
-         "findobject attrib:rocks radius:6",
-         "walk object",
-         "play_sound sound/stonecutting stonecutter 220",
-         "animation hacking 10000",
-         "object shrink",
-         "createware granite",
+         "findobject=attrib:rocks radius:6",
+         "walk=object",
+         "playsound=sound/stonecutting stonecutter 220",
+         "animate=hacking 10000",
+         "callobject=shrink",
+         "createware=granite",
          "return"
       },
       cut_marble = {
-         "findobject attrib:rocks radius:6",
-         "walk object",
-         "play_sound sound/stonecutting stonecutter 220",
-         "animation hacking 10000",
-         "object shrink",
-         "createware marble",
+         "findobject= attrib:rocks radius:6",
+         "walk=object",
+         "playsound=sound/stonecutting stonecutter 220",
+         "animate=hacking 10000",
+         "callobject=shrink",
+         "createware=marble",
          "return"
       }
    },

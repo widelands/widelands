@@ -60,7 +60,7 @@ building_stat = {
    ),
    h = 350,
    obj_name = "open_building_stat",
-   obj_title = _"Open the building statistics window.",
+   obj_title = _"Open the building statistics window",
    obj_body =
       li_image("images/wui/menus/menu_building_stats.png", _[[The building statistics window gives you an overview over the buildings you have.]]) ..
       -- TRANSLATORS: "it" refers to the building statistics window
@@ -83,7 +83,7 @@ explain_building_stat = {
       p(_[[This is enough explanation for now. Now try it out yourself. We want to know whether we still have taverns, so you have to choose the ‘Medium buildings’ tab. Close the building statistics menu afterwards.]])
    ),
    obj_name = "check_taverns",
-   obj_title = _"Look up how many taverns you have.",
+   obj_title = _"Look up how many taverns you have",
    obj_body = (
       li(_[[Choose the ‘Medium buildings’ tab in the building statistics window.]]) ..
       li(_[[Look up how many taverns you have.]]) ..
@@ -104,7 +104,7 @@ reopen_building_stat = {
 
 reopen_building_stat_obj = {
    obj_name = "open_building_stat_again",
-   obj_title = _"Open the building statistics window again.",
+   obj_title = _"Open the building statistics window again",
    obj_body = (
       p(_[[You closed the building statistics window, although you have not yet looked up the number of taverns.]]) ..
       -- TRANSLATORS: "it" refers to the building statistics window.
@@ -124,7 +124,7 @@ inventory1 = {
    ),
    h = 300,
    obj_name = "open_inventory",
-   obj_title = _"Open your stock window.",
+   obj_title = _"Open your stock window",
    obj_body = (
       p(_[[The stock menu window gives you an overview over the wares you currently have.]]) ..
       -- TRANSLATORS: "it" refers to the stock menu window
@@ -145,7 +145,7 @@ inventory2 = {
    h = 350,
    show_instantly = true,
    obj_name = "switch_stock_tab",
-   obj_title = _"Switch to the third tab in the stock menu window.",
+   obj_title = _"Switch to the third tab in the stock menu window",
    obj_body = (
       p(_[[Have a look at the first two tabs in the stock menu window. They show all the wares and workers you have.]]) ..
       li(_[[When you have seen enough, switch to the third tab.]])
@@ -175,7 +175,7 @@ reopen_stock_menu = {
 
 reopen_stock_menu_obj = {
    obj_name = "open_stock_menu_again",
-   obj_title = _"Open the stock window again.",
+   obj_title = _"Open the stock window again",
    obj_body = (
       p(_[[You closed the stock menu window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
       -- TRANSLATORS: "it" refers to the stock menu window.
@@ -194,7 +194,7 @@ build_taverns = {
    ),
    h = 300,
    obj_name = "build_taverns",
-   obj_title = _"Build new taverns.",
+   obj_title = _"Build new taverns",
    obj_body = (
       p(_[[To make our mines work, we need rations again – the more, the better.]]) ..
       li(_[[Build at least two taverns.]])
@@ -202,15 +202,70 @@ build_taverns = {
 }
 
 ware_encyclopedia = {
-   title = _"Ware Encyclopedia",
+   title = _"Encyclopedia",
    body = (
-      p(_[[I am not sure if you could follow my remarks. Why do we need rations to get soldiers?]]) ..
-      p(_[[When you’ve played a lot, you will know such things by heart. But when you’re unsure what this tribe needs for a special ware, you can easily look it up in your tribe’s ware encyclopedia.]]) ..
-      p(_[[This encyclopedia can be accessed via]])..
-      li_image("images/ui_basic/menu_help.png", _[[the help button at the bottom. For all your tribe’s wares, it shows a short help text, a list of buildings that produces the ware and the needed wares.]]) ..
-      p(_[[If you want, you can try it out. A soldier needs a wooden spear and a helmet – from there on out, you can search backwards.]])
+      h1(_[[How to get help]]) ..
+      p(_[[Of course, it is difficult to remember all of my remarks and advice. For example, you might ask yourself: ‘Why do we need rations to get soldiers?’]]) ..
+      p(_[[When you’ve played a lot, you will know all these things by heart. But until then or if you’re unsure about your tribe’s needs and abilities and how its buildings and workers operate, you can look it up easily in our tribe-specific in-game help and encyclopedia.]]) ..
+      p(_[[This encyclopedia can be accessed via the help button at the bottom right.]])..
+      li_image("images/ui_basic/menu_help.png", _[[Please open the in-game help, and I’ll explain its contents to you.]])
    ),
-   h = 350
+   h = 350,
+   show_instantly = true,
+   obj_name = "open_encyclopedia",
+   obj_title = _"Open the in-game help window",
+   obj_body = (
+      li_image("images/ui_basic/menu_help.png", _[[The encyclopedia window contains the in-game help and an encyclopedia of the tribe you’re currently playing.]]) ..
+      -- TRANSLATORS: "it" refers to the encyclopedia window
+      li(_[[Open it. You can access it via the button at the bottom of the screen.]]) ..
+      li_arrow(_[[Alternatively, you can access it directly with the ‘F1’ key.]])
+   ),
+}
+
+explain_encyclopedia = {
+   position = "topright",
+   title = _"Encyclopedia details",
+   body = (
+      h1(_[[The Encyclopedia Categories]]) ..
+      p(_[[The encyclopedia has five tabs:]])..
+      div("width=100%", div("float=left padding_r=14 padding_t=5",p(img("images/logos/wl-ico-32.png"))) .. p(_[[The ‘General’ tab contains information about all the basic interface controls for Widelands. Furthermore, you can find tips that are relevant for your tribe there.]])) ..
+      div("width=100%", div("float=left padding_r=18 padding_t=15 padding_b=15 padding_l=4",p(img("images/wui/buildings/menu_tab_wares.png"))) .. p(_[[The ‘Wares’ tab shows information about the wares that your tribe needs, including a short help text, a list of buildings that produce each ware, the needed wares to produce it and where the ware is consumed.]])) ..
+      div("width=100%", div("float=left padding_r=16",p(img("images/wui/buildings/menu_tab_workers.png"))) .. p(_[[The ‘Workers’ tab shows information about your tribe’s workers in a similar manner to the wares in the second tab.]])) ..
+      div("width=100%", div("float=left padding_r=18 padding_t=5 padding_l=4",p(img("images/wui/stats/genstats_nrbuildings.png"))) .. p(_[[The ‘Buildings’ tab contains all the necessary information about the buildings of your tribe.]])) ..
+      li_image("tribes/immovables/field_harvested/idle_00.png", _[[Finally, the ‘Immovables’ tab shows information about the specific immovables that your tribe’s workers can place on the map.]]) ..
+      li(_[[Now use the encyclopedia to find out how to create new soldiers.]]) ..
+      li_arrow(_[[A soldier needs a wooden spear and a helmet – from there on out, you can search backwards to find the wares and the buildings you need to supply your barracks where the soldier is recruited. When you are finished, just close the encyclopedia window.]])
+   ),
+   h = 450,
+   show_instantly = true,
+   obj_name = "check_wares",
+   obj_title = _"Look up which wares are needed to recruit soldiers",
+   obj_body = (
+      li(_[[Choose the ‘Wares’ tab in the encyclopedia window.]]) ..
+      li(_[[Look up what is needed to produce a helmet and what is needed to produce a wooden spear.]]) ..
+      li_arrow(_[[If you want, you may further look up what is needed to produce the wares you just looked up.]]) ..
+      li(_[[Close the encyclopedia window when you are done.]])
+   )
+}
+
+reopen_encyclopedia = {
+   title = _"You closed the encyclopedia!",
+   body = (
+      p(_[[You have closed the encyclopedia window, but I didn’t notice that you were trying to find out which wares are needed to recruit a soldier. Would you please reopen it and do so?]])
+   ),
+   show_instantly = true,
+   w = 300,
+   h = 250
+}
+
+reopen_encyclopedia_obj = {
+   obj_name = "open_encyclopedia_again",
+   obj_title = _"Open the encyclopedia window again",
+   obj_body = (
+      p(_[[You closed the encyclopedia window without searching for the information we need. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
+      li(_[[Otherwise, please reopen the encyclopedia window and choose the second tab.]])
+   ),
+   h = 250
 }
 
 building_priority_settings = {
@@ -239,7 +294,7 @@ ware_stats1 = {
    w = 200,
    h = 200,
    obj_name = "open_ware_stat",
-   obj_title = _"Open the ware statistics window.",
+   obj_title = _"Open the ware statistics window",
    obj_body = (
       li(_[[Open the ‘Ware statistics’ window, accessed via the statistics menu.]])
    )
@@ -255,7 +310,7 @@ ware_stats2 = {
    h = 250,
    show_instantly = true,
    obj_name = "switch_ware_stat_tab_to_third",
-   obj_title = _"Switch to the third tab in the ware statistics menu window.",
+   obj_title = _"Switch to the third tab in the ware statistics menu window",
    obj_body = (
       p(_[[The first two tabs show you the production and consumption of any ware. You can toggle them by simply clicking on them.]]) ..
       li(_[[When you have seen enough, switch to the third tab.]])
@@ -272,7 +327,7 @@ ware_stats3 = {
    h = 250,
    show_instantly = true,
    obj_name = "switch_ware_stat_tab_to_forth",
-   obj_title = _"Switch to the last tab in the ware statistics menu window.",
+   obj_title = _"Switch to the last tab in the ware statistics menu window",
    obj_body = (
       p(_[[The third tab shows you the economy health of the ware. When the value is positive, this means your stock is growing.]]) ..
       li(_[[When you have seen enough, switch to the fourth tab.]])
@@ -289,7 +344,7 @@ ware_stats4 = {
    h = 250,
    show_instantly = true,
    obj_name = "close_ware_stats",
-   obj_title = _"Close the ware statistics window.",
+   obj_title = _"Close the ware statistics window",
    obj_body = (
       p(_[[The stock tab shows you how many wares you have. Compare the information from the four tabs to understand the correlation.]]) ..
       li(_[[When you have finished, close the ware statistics window.]])
@@ -308,7 +363,7 @@ reopen_ware_stats1 = {
 
 reopen_ware_stats1_obj = {
    obj_name = "open_ware_stats_menu_again1",
-   obj_title = _"Open the ware statistics window again.",
+   obj_title = _"Open the ware statistics window again",
    obj_body = (
       p(_[[You closed the ware statistics menu window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
       -- TRANSLATORS: "it" refers to the ware statistics window.
@@ -328,7 +383,7 @@ reopen_ware_stats2 = {
 
 reopen_ware_stats2_obj = {
    obj_name = "open_ware_stats_menu_again2",
-   obj_title = _"Open the ware statistics window again.",
+   obj_title = _"Open the ware statistics window again",
    obj_body = (
       p(_[[You closed the ware statistics menu window before I finished telling you everything about it. If you already know everything, please feel free to leave this tutorial at any time.]]) ..
       -- TRANSLATORS: "it" refers to the ware statistics window.
@@ -348,7 +403,7 @@ economy_settings1 = {
    ),
    h = 350,
    obj_name = "open_economy_settings",
-   obj_title = _"Open the ‘Configure economy’ window.",
+   obj_title = _"Open the ‘Configure economy’ window",
    obj_body = (
       li(_[[Open the ‘Configure economy’ window.]]) ..
       li_arrow(_[[The window can be accessed by clicking on any flag you own.]])
@@ -376,7 +431,7 @@ economy_settings3 = {
       li(_[[Set the target quantity for marble columns to 20 and wait for your stonemason to produce them.]])
    ),
    obj_name = "produce_marble_columns",
-   obj_title = _"Produce 20 marble columns.",
+   obj_title = _"Produce 20 marble columns",
    obj_body = (
       p(_[[Sometimes, you will need many wares at the same time quickly – faster than they can be produced. In this case, it is good to have enough on reserve.]]) ..
       li(_[[To be prepared for additional fortifications, you should produce 20 marble columns.]]) ..
@@ -394,15 +449,15 @@ warehouse_preference_settings = {
       p(_[[The production of marble columns is working fine now, but it would be great if they were stored where we need them.]]) ..
       p(_[[Normally, produced wares are brought to the closest warehouse if they are not needed elsewhere. In this case, this means our headquarters. But we would like to have them in the warehouse near our fortresses.]]) ..
       p(_[[Every warehouse has four buttons to set the preference. If you move your mouse pointer over them, you will see tooltips that explain what the buttons do.]]) ..
-      li(_[[Bring all the marble columns to the warehouse near the front line.]]) ..
+      li(_[[Bring all of the 20 marble columns to the warehouse near the front line.]]) ..
       li_arrow(_[[To achieve this, you will have to do two things. First, set a preference for marble columns in the desired warehouse. All marble columns produced in the future will be brought there if possible.]]) ..
       li_arrow(_[[Then, to move the marble columns out of your headquarters, you will have to click on the remove button there.]])
    ),
    obj_name = "bring_marble_columns_to_front",
-   obj_title = _"Bring 20 marble columns to the front line.",
-   obj_body = economy_settings3.obj_body .. (
+   obj_title = _"Bring 20 marble columns to the front line",
+   obj_body = (
       p(_[[To decide where your wares get stored, you can use the preference buttons in the warehouses.]]) ..
-      li(_[[Bring all the marble columns to the warehouse near the front line.]]) ..
+      li(_[[Bring all of the 20 marble columns to the warehouse near the front line.]]) ..
       li_arrow(_[[To achieve this, you will have to do two things. First, set a preference for marble columns in the desired warehouse. All marble columns produced in the future will be brought there if possible.]]) ..
       li_arrow(_[[Then, to move the marble columns out of your headquarters, you will have to click on the remove button there.]])
    )

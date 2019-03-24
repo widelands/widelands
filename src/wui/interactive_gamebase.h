@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -48,6 +48,7 @@ public:
 		GeneralStatisticsMenu::Registry general_stats;
 		UI::UniqueWindow::Registry ware_stats;
 		UI::UniqueWindow::Registry stock;
+		UI::UniqueWindow::Registry seafaring_stats;
 	};
 
 	InteractiveGameBase(Widelands::Game&,
@@ -81,16 +82,21 @@ public:
 	void add_wanted_building_window(const Widelands::Coords& coords,
 	                                const Vector2i point,
 	                                bool was_minimal);
-	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords, bool avoid_fastclick);
+	UI::UniqueWindow* show_building_window(const Widelands::Coords& coords,
+	                                       bool avoid_fastclick,
+	                                       bool workarea_preview_wanted);
 	bool try_show_ship_window();
+	void show_ship_window(Widelands::Ship* ship);
 	bool is_multiplayer() {
 		return multiplayer_;
 	}
 
 	void show_game_summary();
+	/// For the game host. Show a window and ask the host player what to do with the tribe of the
+	/// leaving client.
+	bool show_game_client_disconnected();
 	void postload() override;
-	void start() override {
-	}
+	void start() override;
 
 	bool handle_key(bool down, SDL_Keysym) override;
 
@@ -104,13 +110,24 @@ protected:
 	PlayerType playertype_;
 	UI::UniqueWindow::Registry fieldaction_;
 	UI::UniqueWindow::Registry game_summary_;
+	UI::UniqueWindow::Registry client_disconnected_;
 	UI::Button* toggle_buildhelp_;
 	UI::Button* reset_zoom_;
 
 private:
 	void on_buildhelp_changed(const bool value) override;
+	struct WantedBuildingWindow {
+		explicit WantedBuildingWindow(const Vector2i& pos,
+		                              bool was_minimized,
+		                              bool was_showing_workarea)
+		   : window_position(pos), minimize(was_minimized), show_workarea(was_showing_workarea) {
+		}
+		const Vector2i window_position;
+		const bool minimize;
+		const bool show_workarea;
+	};
 	// Building coordinates, window position, whether the window was minimized
-	std::map<uint32_t, std::pair<const Vector2i, bool>> wanted_building_windows_;
+	std::map<uint32_t, std::unique_ptr<const WantedBuildingWindow>> wanted_building_windows_;
 	std::unique_ptr<Notifications::Subscriber<Widelands::NoteBuilding>> buildingnotes_subscriber_;
 };
 

@@ -3,7 +3,7 @@
 -- =======================================================================
 welcome_msg = {
    heading = _"Welcome to Island Hopping",
-   body = rt(
+   body =
       h2(_"Rules") ..
       p(_(
    [[Island Hopping is a traditional tournament in Atlantean culture. ]] ..
@@ -37,22 +37,19 @@ welcome_msg = {
    h4(_"2nd to finish") .. p(format_rewards(_finish_rewards[2][2])) ..
    h4(_"3rd to finish") .. p(format_rewards(_finish_rewards[2][3])) ..
    h4(_"4th to finish") .. p(format_rewards(_finish_rewards[2][4]))
-   )
 }
 
 msgs_finished_island = {
-   _"%1$s was the first to reach Island number %2$i.",
-   _"%1$s was the second to reach Island number %2$i.",
-   _"%1$s was the third to reach Island number %2$i.",
-   _"%1$s was the fourth to reach Island number %2$i."
+   li(_"%1$s was the first to reach Island number %2$i."),
+   li(_"%1$s was the second to reach Island number %2$i."),
+   li(_"%1$s was the third to reach Island number %2$i."),
+   li(_"%1$s was the fourth to reach Island number %2$i.")
 }
-finished_island_continues = _ "The reward for this feat amounts to:" .. "<br>%s"
+finished_island_continues = p(_"The reward for this feat amounts to:") .. p("%s")
 
-player_claims_hill = rt(p(_
+player_claims_hill = p(_
 [[%s is now King of the Hill and will win the game in 20 minutes, if nobody takes over the hill before then.]]
-))
-lost_control = rt(p(_
-[[%s lost control of the hill.]]
-))
-had_control_for = rt(p(_[[%1$s has been King of the Hill for %2$s!]]))
-player_won = rt(p(_[[%s has won the game. Congratulations!]]))
+)
+lost_control = p(_[[%s lost control of the hill.]])
+had_control_for = p(_[[%1$s has been King of the Hill for %2$s!]])
+player_won = p(_[[%s has won the game. Congratulations!]])

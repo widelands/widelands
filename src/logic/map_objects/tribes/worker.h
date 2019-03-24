@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -76,11 +76,7 @@ public:
 	explicit Worker(const WorkerDescr&);
 	~Worker() override;
 
-	Player& owner() const {
-		assert(get_owner());
-		return *get_owner();
-	}
-	PlayerImmovable* get_location(EditorGameBase& egbase) {
+	PlayerImmovable* get_location(const EditorGameBase& egbase) const {
 		return location_.get(egbase);
 	}
 	OPtr<PlayerImmovable> get_location() const {
@@ -142,7 +138,7 @@ public:
 	}
 
 	// debug
-	void log_general_info(const EditorGameBase&) override;
+	void log_general_info(const EditorGameBase&) const override;
 
 	// worker-specific tasks
 	void start_task_transfer(Game&, Transfer*);
@@ -244,20 +240,19 @@ private:
 	bool run_mine(Game&, State&, const Action&);
 	bool run_breed(Game&, State&, const Action&);
 	bool run_createware(Game&, State&, const Action&);
-	bool run_setbobdescription(Game&, State&, const Action&);
 	bool run_findobject(Game&, State&, const Action&);
 	bool run_findspace(Game&, State&, const Action&);
 	bool run_walk(Game&, State&, const Action&);
-	bool run_animation(Game&, State&, const Action&);
+	bool run_animate(Game&, State&, const Action&);
 	bool run_return(Game&, State&, const Action&);
-	bool run_object(Game&, State&, const Action&);
+	bool run_callobject(Game&, State&, const Action&);
 	bool run_plant(Game&, State&, const Action&);
-	bool run_create_bob(Game&, State&, const Action&);
+	bool run_createbob(Game&, State&, const Action&);
 	bool run_removeobject(Game&, State&, const Action&);
-	bool run_geologist(Game&, State&, const Action&);
-	bool run_geologist_find(Game&, State&, const Action&);
+	bool run_repeatsearch(Game&, State&, const Action&);
+	bool run_findresources(Game&, State&, const Action&);
 	bool run_scout(Game&, State&, const Action&);
-	bool run_play_sound(Game&, State&, const Action&);
+	bool run_playsound(Game&, State&, const Action&);
 	bool run_construct(Game&, State&, const Action&);
 
 	// Forester considers multiple spaces in findspace, unlike others.
@@ -326,6 +321,6 @@ public:
 	                               const TribesLegacyLookupTable& lookup_table,
 	                               uint8_t packet_version);
 };
-}
+}  // namespace Widelands
 
 #endif  // end of include guard: WL_LOGIC_MAP_OBJECTS_TRIBES_WORKER_H

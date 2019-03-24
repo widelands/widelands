@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2017 by the Widelands Development Team
+ * Copyright (C) 2007-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,12 +22,9 @@
 #include "base/i18n.h"
 #include "base/macros.h"
 #include "chat/chat.h"
-#include "graphic/graphic.h"
 #include "logic/game_controller.h"
 #include "logic/player.h"
 #include "profile/profile.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wui/fieldaction.h"
@@ -128,7 +125,8 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 	const uint32_t gametime = the_game.get_gametime();
 
 	const auto info_to_draw = get_info_to_draw(!given_map_view->is_animating());
-	const std::map<Widelands::Coords, const Image*> work_area_overlays = get_work_area_overlays(map);
+	const std::map<Widelands::Coords, const Image*> workarea_overlays = get_workarea_overlays(map);
+
 	for (size_t idx = 0; idx < fields_to_draw->size(); ++idx) {
 		const FieldsToDraw::Field& field = fields_to_draw->at(idx);
 
@@ -144,18 +142,11 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			bob->draw(the_game, info_to_draw, field.rendertarget_pixel, scale, dst);
 		}
 
-		const auto blit_overlay = [dst, &field, scale](const Image* pic, const Vector2i& hotspot) {
-			dst->blitrect_scale(Rectf(field.rendertarget_pixel - hotspot.cast<float>() * scale,
-			                          pic->width() * scale, pic->height() * scale),
-			                    pic, Recti(0, 0, pic->width(), pic->height()), 1.f,
-			                    BlendMode::UseAlpha);
-		};
-
 		// Draw work area previews.
-		const auto it = work_area_overlays.find(field.fcoords);
-		if (it != work_area_overlays.end()) {
+		const auto it = workarea_overlays.find(field.fcoords);
+		if (it != workarea_overlays.end()) {
 			const Image* pic = it->second;
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
 
 		// Draw build help.
@@ -171,14 +162,14 @@ void InteractiveSpectator::draw_map_view(MapView* given_map_view, RenderTarget* 
 			}
 			const auto* overlay = get_buildhelp_overlay(caps);
 			if (overlay != nullptr) {
-				blit_overlay(overlay->pic, overlay->hotspot);
+				blit_field_overlay(dst, field, overlay->pic, overlay->hotspot, scale);
 			}
 		}
 
 		// Blit the selection marker.
 		if (field.fcoords == get_sel_pos().node) {
 			const Image* pic = get_sel_picture();
-			blit_overlay(pic, Vector2i(pic->width() / 2, pic->height() / 2));
+			blit_field_overlay(dst, field, pic, Vector2i(pic->width() / 2, pic->height() / 2), scale);
 		}
 	}
 }
@@ -217,7 +208,7 @@ Widelands::PlayerNumber InteractiveSpectator::player_number() const {
 void InteractiveSpectator::node_action(const Widelands::NodeAndTriangle<>& node_and_triangle) {
 	// Special case for buildings
 	if (is_a(Widelands::Building, egbase().map().get_immovable(node_and_triangle.node))) {
-		show_building_window(node_and_triangle.node, false);
+		show_building_window(node_and_triangle.node, false, false);
 		return;
 	}
 
@@ -242,9 +233,9 @@ bool InteractiveSpectator::handle_key(bool const down, SDL_Keysym const code) {
 				if (!chat_.window) {
 					GameChatMenu::create_chat_console(this, chat_, *chat_provider_);
 				}
-				dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
+				return dynamic_cast<GameChatMenu*>(chat_.window)->enter_chat_message();
 			}
-			return true;
+			break;
 		default:
 			break;
 		}

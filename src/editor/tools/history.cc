@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012-2017 by the Widelands Development Team
+ * Copyright (C) 2012-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +26,9 @@
 #include "editor/tools/tool_action.h"
 
 // === EditorActionArgs === //
+
+constexpr size_t kMaximumUndoActions = 500;
+constexpr size_t kTooManyUndoActionsDeleteBatch = 50;
 
 EditorActionArgs::EditorActionArgs(EditorInteractive& base)
    : sel_radius(base.get_sel_radius()),
@@ -115,6 +118,11 @@ uint32_t EditorHistory::do_action(EditorTool& tool,
 		undo_stack_.push_front(ac);
 		undo_button_.set_enabled(true);
 		redo_button_.set_enabled(false);
+		if (undo_stack_.size() > kMaximumUndoActions) {
+			for (size_t i = 0; i < kTooManyUndoActionsDeleteBatch; ++i) {
+				undo_stack_.pop_back();
+			}
+		}
 	}
 	return tool.handle_click(ind, world, center, parent, ac.args, &map);
 }

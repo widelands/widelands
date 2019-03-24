@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2017 by the Widelands Development Team
+ * Copyright (C) 2002-2019 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,6 @@
 #include "base/wexception.h"
 #include "economy/wares_queue.h"
 #include "graphic/animation.h"
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "graphic/text_constants.h"
 #include "logic/editor_game_base.h"
@@ -39,9 +38,9 @@
 namespace Widelands {
 
 /**
-  * The contents of 'table' are documented in
-  * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
-  */
+ * The contents of 'table' are documented in
+ * /data/tribes/buildings/partially_finished/dismantlesite/init.lua
+ */
 
 DismantleSiteDescr::DismantleSiteDescr(const std::string& init_descname,
                                        const LuaTable& table,
@@ -68,12 +67,12 @@ DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr) : PartiallyFinish
 DismantleSite::DismantleSite(const DismantleSiteDescr& gdescr,
                              EditorGameBase& egbase,
                              const Coords& c,
-                             Player& plr,
+                             Player* plr,
                              bool loading,
                              Building::FormerBuildings& former_buildings)
    : PartiallyFinishedBuilding(gdescr) {
 	position_ = c;
-	set_owner(&plr);
+	set_owner(plr);
 
 	assert(!former_buildings.empty());
 	for (DescriptionIndex former_idx : former_buildings) {
@@ -184,7 +183,7 @@ bool DismantleSite::get_building_work(Game& game, Worker& worker, bool) {
 			wq.set_max_size(wq.get_max_size() - 1);
 
 			// Update statistics
-			owner().ware_produced(wq.get_index());
+			get_owner()->ware_produced(wq.get_index());
 
 			const WareDescr& wd = *owner().tribe().get_ware_descr(wq.get_index());
 			WareInstance& ware = *new WareInstance(wq.get_index(), &wd);
@@ -235,4 +234,4 @@ void DismantleSite::draw(uint32_t gametime,
 	// Draw help strings
 	draw_info(info_to_draw, point_on_dst, scale, dst);
 }
-}
+}  // namespace Widelands
