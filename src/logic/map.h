@@ -480,7 +480,6 @@ public:
 	                    bool force = false,
 	                    bool recalculate_seafaring = false);
 	const PortSpacesSet& get_port_spaces() const {
-		log("NOCOM return port_spaces_\n");
 		return port_spaces_;
 	}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;

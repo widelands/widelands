@@ -1233,7 +1233,6 @@ int LuaMap::get_allows_seafaring(lua_State* L) {
       :returns: An integer with the number of port spaces.
 */
 int LuaMap::get_number_of_port_spaces(lua_State* L) {
-	log("NOCOM LuaMap count port spaces\n");
 	lua_pushuint32(L, get_egbase(L).map().get_port_spaces().size());
 	return 1;
 }
@@ -1249,7 +1248,6 @@ int LuaMap::get_number_of_port_spaces(lua_State* L) {
 int LuaMap::get_port_spaces(lua_State* L) {
 	lua_newtable(L);
 	int counter = 0;
-	log("NOCOM LuaMap get port spaces\n");
 	for (const Coords& space : get_egbase(L).map().get_port_spaces()) {
 		lua_pushinteger(L, ++counter);
 		lua_newtable(L);

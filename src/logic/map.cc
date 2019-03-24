@@ -340,7 +340,6 @@ size_t Map::count_all_conquerable_fields() {
 
 	// Walk the map from port spaces
 	if (allows_seafaring()) {
-		log("NOCOM calculate_conquerable\n");
 		for (const Coords& coords : get_port_spaces()) {
 			walk_starting_coords(coords, 5);
 		}
@@ -412,8 +411,6 @@ void Map::cleanup() {
 	background_ = std::string();
 
 	objectives_.clear();
-
-	log("NOCOM Map::cleanup\n");
 	port_spaces_.clear();
 	allows_seafaring_ = false;
 
@@ -513,7 +510,6 @@ void Map::set_origin(const Coords& new_origin) {
 
 	// Take care of port spaces
 	PortSpacesSet new_port_spaces;
-	log("NOCOM set_origin iterate\n");
 	for (PortSpacesSet::iterator it = port_spaces_.begin(); it != port_spaces_.end(); ++it) {
 		Coords temp;
 		if (yisodd && ((it->y % 2) == 0)) {
@@ -524,9 +520,7 @@ void Map::set_origin(const Coords& new_origin) {
 		normalize_coords(temp);
 		new_port_spaces.insert(temp);
 	}
-	log("NOCOM set_origin done\n");
 	port_spaces_ = new_port_spaces;
-	log("Map origin was shifted by (%d, %d)\n", new_origin.x, new_origin.y);
 }
 
 /*
@@ -1461,14 +1455,11 @@ bool Map::set_port_space(
    const World& world, const Coords& c, bool set, bool force, bool recalculate_seafaring) {
 	bool success = false;
 	if (set) {
-		log("NOCOM set_port_space is_port_space_allowed (%d,%d)\n", c.x, c.y);
 		success = force || is_port_space_allowed(world, get_fcoords(c));
 		if (success) {
-			log("NOCOM set_port_space insert (%d,%d)\n", c.x, c.y);
 			port_spaces_.insert(c);
 		}
 	} else {
-		log("NOCOM set_port_space erase (%d,%d)\n", c.x, c.y);
 		port_spaces_.erase(c);
 		success = true;
 	}
@@ -2129,7 +2120,6 @@ bool Map::allows_seafaring() const {
 // This check can become very expensive, so we only recalculate this on relevant map changes.
 void Map::recalculate_allows_seafaring() {
 
-	log("NOCOM recalculate_allows_seafaring1\n");
 	// There need to be at least 2 port spaces for seafaring to make sense
 	if (get_port_spaces().size() < 2) {
 		allows_seafaring_ = false;
@@ -2138,7 +2128,6 @@ void Map::recalculate_allows_seafaring() {
 
 	std::set<Coords> reachable_from_previous_ports;
 
-	log("NOCOM recalculate_allows_seafaring2\n");
 	for (const Coords& c : get_port_spaces()) {
 		std::queue<Coords> positions_to_check;
 		std::set<Coords> reachable_from_current_port;
@@ -2184,7 +2173,6 @@ void Map::recalculate_allows_seafaring() {
 }
 
 void Map::cleanup_port_spaces(const World& world) {
-	log("NOCOM cleanup_port_spaces\n");
 	// Temporary set to avoid problems with concurrent container operations
 	PortSpacesSet clean_me_up;
 	for (const Coords& c : get_port_spaces()) {
@@ -2193,7 +2181,6 @@ void Map::cleanup_port_spaces(const World& world) {
 		}
 	}
 	for (const Coords& c : clean_me_up) {
-		log("NOCOM clean up port space at (%d, %d)\n", c.x, c.y);
 		set_port_space(world, c, false);
 	}
 	recalculate_allows_seafaring();
