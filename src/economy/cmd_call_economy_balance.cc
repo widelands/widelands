@@ -58,18 +58,13 @@ constexpr uint16_t kCurrentPacketVersion = 4;
 void CmdCallEconomyBalance::read(FileRead& fr, EditorGameBase& egbase, MapObjectLoader& mol) {
 	try {
 		uint16_t const packet_version = fr.unsigned_16();
-		// TODO(GunChleoc): Savegame compatibility. Remove after Build 21.
-		if (packet_version >= 3 && packet_version <= kCurrentPacketVersion) {
+		if (packet_version == kCurrentPacketVersion) {
 			GameLogicCommand::read(fr, egbase, mol);
 			uint32_t serial = fr.unsigned_32();
 			if (serial)
 				flag_ = &mol.get<Flag>(serial);
 			timerid_ = fr.unsigned_32();
-			if (packet_version > 3) {
-				type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
-			} else {
-				// NOCOM(codereview): What do we want to do with the type here?
-			}
+			type_ = fr.unsigned_8() ? wwWORKER : wwWARE;
 		} else {
 			throw UnhandledVersionError(
 			   "CmdCallEconomyBalance", packet_version, kCurrentPacketVersion);

@@ -395,12 +395,15 @@ uint32_t PortDock::count_waiting(WareWorker waretype, DescriptionIndex wareindex
 		Worker* worker;
 		shipping_item.get(owner().egbase(), &ware, &worker);
 
-		if (waretype == wwWORKER) {
-			if (worker && worker->descr().worker_index() == wareindex)
-				count++;
-		} else {
-			if (ware && ware->descr_index() == wareindex)
-				count++;
+		switch (waretype) {
+			case wwWORKER:
+				if (worker && worker->descr().worker_index() == wareindex)
+					count++;
+				break;
+			case wwWARE:
+				if (ware && ware->descr_index() == wareindex)
+					count++;
+				break;
 		}
 	}
 

@@ -765,9 +765,7 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 buildferry
 ^^^^^^^^^^
 .. function:: buildferry
-NOCOM(codereview) Ferries are usually animals?
-   Adds a bob (usually an animal) to the map at the worker's current location.
-   Randomly select from the list of ``bob_name``. Example::
+   Adds a new instance of this tribe's ferry to the map at the worker's current location. Example::
 
       release = {
          "findspace=size:swim radius:4",

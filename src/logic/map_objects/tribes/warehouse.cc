@@ -159,36 +159,42 @@ void WarehouseSupply::set_economy(Economy* const e, WareWorker type) {
 
 	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
 		ec->remove_supply(*this);
-		if (type == wwWARE) {
-			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
-				if (wares_.stock(i)) {
-					ec->remove_wares(i, wares_.stock(i));
+		switch (type) {
+			case wwWARE:
+				for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
+					if (wares_.stock(i)) {
+						ec->remove_wares(i, wares_.stock(i));
+					}
 				}
-			}
-		} else {
-			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
-				if (workers_.stock(i)) {
-					ec->remove_workers(i, workers_.stock(i));
+				break;
+			case wwWORKER:
+				for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
+					if (workers_.stock(i)) {
+						ec->remove_workers(i, workers_.stock(i));
+					}
 				}
-			}
+				break;
 		}
 	}
 
 	(type == wwWARE ? ware_economy_ : worker_economy_) = e;
 
 	if (Economy* ec = (type == wwWARE ? ware_economy_ : worker_economy_)) {
-		if (type == wwWARE) {
-			for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
-				if (wares_.stock(i)) {
-					ec->add_wares(i, wares_.stock(i));
+		switch (type) {
+			case wwWARE:
+				for (DescriptionIndex i = 0; i < wares_.get_nrwareids(); ++i) {
+					if (wares_.stock(i)) {
+						ec->add_wares(i, wares_.stock(i));
+					}
 				}
-			}
-		} else {
-			for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
-				if (workers_.stock(i)) {
-					e->add_workers(i, workers_.stock(i));
+				break;
+			case wwWORKER:
+				for (DescriptionIndex i = 0; i < workers_.get_nrwareids(); ++i) {
+					if (workers_.stock(i)) {
+						e->add_workers(i, workers_.stock(i));
+					}
 				}
-			}
+				break;
 		}
 		ec->add_supply(*this);
 	}
@@ -813,12 +819,6 @@ void Warehouse::set_economy(Economy* const e, WareWorker type) {
 				req->set_economy(e);
 			}
 		}
-	}
-
-	// Why is this here twice? Isn't this superfluous?
-// NOCOM (codereview) We should answer this question
-	if (portdock_) {
-		portdock_->set_economy(e, type);
 	}
 
 	if (e)

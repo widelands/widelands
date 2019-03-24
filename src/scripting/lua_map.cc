@@ -758,7 +758,7 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 		// TODO(sirver): not yet implemented
 		return CAST_TO_LUA(Worker);
 	case MapObjectType::FERRY:
-		// NOCOM(codereview): not yet implemented
+		// TODO(Nordfriese): not yet implemented
 		return CAST_TO_LUA(Worker);
 	case MapObjectType::SOLDIER:
 		return CAST_TO_LUA(Soldier);
@@ -771,8 +771,10 @@ int upcasted_map_object_to_lua(lua_State* L, MapObject* mo) {
 	case MapObjectType::ROAD:
 		return CAST_TO_LUA(Road);
 	case MapObjectType::WATERWAY:
+		// TODO(Nordfriese): not yet implemented
+		return CAST_TO_LUA(Road);
 	case MapObjectType::ROADBASE:
-		// NOCOM(codereview): not yet implemented.
+		// TODO(Nordfriese): not yet implemented
 		return CAST_TO_LUA(Road);
 	case MapObjectType::PORTDOCK:
 		return CAST_TO_LUA(PortDock);
@@ -4205,7 +4207,6 @@ int LuaPlayerImmovable::get_owner(lua_State* L) {
 }
 
 // UNTESTED, for debug only
-// NOCOM(codereview) These are used in data/campaigns/tutorial01_basic_control.wmf/scripting/mission_thread.lua, fix.
 int LuaPlayerImmovable::get_debug_ware_economy(lua_State* L) {
 	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy(wwWARE));
 	return 1;
@@ -4274,15 +4275,6 @@ int LuaFlag::get_ware_economy(lua_State* L) {
 	const Flag* f = get(L, get_egbase(L));
 	return to_lua<LuaEconomy>(L, new LuaEconomy(f->get_economy(wwWARE)));
 }
-
-/* NOCOM(codereview) Fix Lua scripts
-
-data/campaigns/emp03.wmf/scripting/mission_thread.lua:   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 4 do
-data/campaigns/emp04.wmf/scripting/starting_conditions.lua:field_warehouse.brn.immovable.economy:set_ware_target_quantity("beer", 180)
-data/campaigns/tutorial04_economy.wmf/scripting/mission_thread.lua:   while not mv.windows.economy_options do sleep(200) end
-data/campaigns/tutorial04_economy.wmf/scripting/mission_thread.lua:   while sf.brn.immovable.economy:ware_target_quantity("marble_column") ~= 20 do
-
-*/
 
 /* RST
    .. attribute:: worker_economy
@@ -5320,15 +5312,9 @@ int LuaProductionSite::set_inputs(lua_State* L) {
 	}
 	for (const auto& sp : setpoints) {
 		if (!valid_inputs.count(sp.first)) {
-			if (sp.first.second == wwWARE) {
-				report_error(L, "<%s> can't be stored in this building: %s!",
-				             tribe.get_ware_descr(sp.first.first)->name().c_str(),
-				             ps->descr().name().c_str());
-			} else {
-				report_error(L, "<%s> can't be stored in this building: %s!",
-				             tribe.get_worker_descr(sp.first.first)->name().c_str(),
-				             ps->descr().name().c_str());
-			}
+			report_error(L, "<%s> can't be stored in this building: %s!",
+					sp.first.second == wwWARE ? tribe.get_ware_descr(sp.first.first)->name().c_str() :
+					tribe.get_worker_descr(sp.first.first)->name().c_str(), ps->descr().name().c_str());
 		}
 		InputQueue& iq = ps->inputqueue(sp.first.first, sp.first.second);
 		if (sp.second > iq.get_max_size()) {
@@ -5373,11 +5359,8 @@ int LuaProductionSite::get_inputs(lua_State* L) {
 			lua_pushuint32(L, cnt);
 			break;
 		} else {
-			if (input.second == wwWARE) {
-				lua_pushstring(L, tribe.get_ware_descr(input.first)->name());
-			} else {
-				lua_pushstring(L, tribe.get_worker_descr(input.first)->name());
-			}
+			lua_pushstring(L, input.second == wwWARE ? tribe.get_ware_descr(input.first)->name() :
+					tribe.get_worker_descr(input.first)->name());
 			lua_pushuint32(L, cnt);
 			lua_settable(L, -3);
 		}

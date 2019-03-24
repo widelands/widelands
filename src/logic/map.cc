@@ -1758,6 +1758,7 @@ std::unique_ptr<MapLoader> Map::get_correct_loader(const std::string& filename) 
  * \param inend end point of the search
  * \param path will receive the found path if successful
  * \param flags UNDOCUMENTED
+ * \param type whether to find a path for a ware or a worker
  *
  * \return the cost of the path (in milliseconds of normal walking
  * speed) or -1 if no path has been found.
@@ -1769,7 +1770,8 @@ int32_t Map::findpath(Coords instart,
                       Path& path,
                       const CheckStep& checkstep,
                       uint32_t const flags,
-                      uint32_t const caps_sensitivity) const {
+                      uint32_t const caps_sensitivity,
+                      WareWorker type) const {
 	FCoords start;
 	FCoords end;
 	int32_t upper_cost_limit;
@@ -1802,7 +1804,7 @@ int32_t Map::findpath(Coords instart,
 
 	// Actual pathfinding
 	boost::shared_ptr<Pathfields> pathfields = pathfieldmgr_->allocate();
-	Pathfield::Queue Open;
+	Pathfield::Queue Open(type);
 	Pathfield* curpf = &pathfields->fields[start.field - fields_.get()];
 	curpf->cycle = pathfields->cycle;
 	curpf->real_cost = 0;
@@ -1869,7 +1871,7 @@ int32_t Map::findpath(Coords instart,
 				neighbpf.estim_cost = calc_cost_lowerbound(neighb, end);
 				neighbpf.backlink = *direction;
 				Open.push(&neighbpf);
-			} else if (neighbpf.cost() > cost + neighbpf.estim_cost) {
+			} else if (neighbpf.cost(type) > cost + neighbpf.estim_cost) {
 				// found a better path to a field that's already Open
 				neighbpf.real_cost = cost;
 				neighbpf.backlink = *direction;

@@ -42,9 +42,8 @@ namespace Widelands {
  */
 struct Pathfield {
 	struct LessCost {
-// NOCOM(codereview) Remove default types in this class?
-		bool operator()(const Pathfield& a, const Pathfield& b, WareWorker = wwWORKER) const {
-			return a.cost() < b.cost();
+		bool operator()(const Pathfield& a, const Pathfield& b, WareWorker ww) const {
+			return a.cost(ww) < b.cost(ww);
 		}
 	};
 
@@ -56,10 +55,10 @@ struct Pathfield {
 	uint16_t cycle;
 	uint8_t backlink;  //  how we got here (WALK_*)
 
-	int32_t cost(WareWorker = wwWORKER) const {
+	int32_t cost(WareWorker) const {
 		return real_cost + estim_cost;
 	}
-	Queue::Cookie& cookie(WareWorker = wwWORKER) {
+	Queue::Cookie& cookie(WareWorker) {
 		return heap_cookie;
 	}
 };

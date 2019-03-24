@@ -115,7 +115,8 @@ void Ferry::unemployed_update(Game& game, State&) {
 	}
 
 	if (move) {
-		// NOCOM(codereview): What does the 4 mean? Create a constexpr or add a comment
+		// 4, 2 and 4 are arbitrary values that define how far away we'll
+		// row at most and how hard we'll try to find a nice new location.
 		for (uint8_t i = 0; i < 4; i++) {
 			if (start_task_movepath(game, game.random_location(get_position(), 2), 4,
 									descr().get_right_walk_anims(does_carry_ware()))) {
@@ -137,11 +138,8 @@ const Bob::Task Ferry::taskRow = {
    "row", static_cast<Bob::Ptr>(&Ferry::row_update), nullptr, nullptr, true};
 
 void Ferry::start_task_row(Game& game, Waterway* ww) {
-	if (destination_) {
-		delete destination_;
-	}
 	// Our new destination is the middle of the waterway
-	destination_ = new Coords(CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()]);
+	destination_.reset(new Coords(CoordPath(game.map(), ww->get_path()).get_coords()[ww->get_idle_index()]));
 	send_signal(game, "row");
 }
 
@@ -158,7 +156,8 @@ void Ferry::row_update(Game& game, State&) {
 			molog("[row]: Got signal '%s' -> recalculate\n", signal.c_str());
 			signal_handled();
 		} else if (signal == "blocked") {
-			// NOOCOM(codereview): Can this happen to ferries?
+			// NOCOM(codereview): Can this happen to ferries?
+			// NOCOM(Nordfriese): Yes, if the battle takes place on one of the end flags. A waterway can also touch a corner of land in its middle, so this is rare but possible.
 			molog("[row]: Blocked by a battle\n");
 			signal_handled();
 			return start_task_idle(game, descr().get_animation("idle"), 900);
@@ -171,9 +170,7 @@ void Ferry::row_update(Game& game, State&) {
 	if (get_position() == *destination_) {
 		// Reached destination
 		if (upcast(Waterway, ww, map.get_immovable(*destination_))) {
-			// NOCOM(codereview): make destination_ a unique_ptr, then we won't have to call delete everywhere.
-			delete destination_;
-			destination_ = nullptr;
+			destination_.reset(nullptr);
 			set_location(ww);
 			ww->assign_carrier(*this, 0);
 			pop_task(game);
@@ -181,8 +178,7 @@ void Ferry::row_update(Game& game, State&) {
 		}
 		// If we get here, the waterway was destroyed and we didn't notice
 		molog("[row]: Reached the destination but it is no longer there\n");
-		delete destination_;
-		destination_ = nullptr;
+		destination_.reset(nullptr);
 		return pop_task(game);
 	}
 	if (start_task_movepath(game, *destination_, 0, descr().get_right_walk_anims(does_carry_ware()))) {
@@ -233,7 +229,7 @@ Waterway* Ferry::get_destination(Game& game) const {
 }
 
 void Ferry::set_destination(Game& game, Waterway* ww) {
-	destination_ = nullptr;
+	destination_.reset(nullptr);
 	set_location(nullptr);
 	if (ww) {
 		start_task_row(game, ww);
@@ -275,10 +271,10 @@ void Ferry::Loader::load(FileRead& fr) {
 			if (fr.unsigned_8()) {
 				int16_t dest_x = fr.signed_16();
 				int16_t dest_y = fr.signed_16();
-				ferry.destination_ = new Coords(dest_x, dest_y);
+				ferry.destination_.reset(new Coords(dest_x, dest_y));
 			}
 			else {
-				ferry.destination_ = nullptr;
+				ferry.destination_.reset(nullptr);
 			}
 			ferry.init_fleet();
 		} else {

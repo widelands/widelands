@@ -20,6 +20,8 @@
 #ifndef WL_LOGIC_MAP_OBJECTS_TRIBES_FERRY_H
 #define WL_LOGIC_MAP_OBJECTS_TRIBES_FERRY_H
 
+#include <memory>
+
 #include "base/macros.h"
 #include "logic/map_objects/tribes/carrier.h"
 
@@ -77,7 +79,7 @@ private:
 	friend struct Fleet;
 	Fleet* fleet_;
 
-	Coords* destination_;
+	std::unique_ptr<Coords> destination_;
 
 	bool init_fleet();
 	void set_fleet(Fleet* fleet);

@@ -187,12 +187,15 @@ void InputQueue::write(FileWrite& fw, Game& game, MapObjectSaver& mos) {
 	fw.unsigned_16(kCurrentPacketVersion);
 
 	//  Owner and callback is not saved, but this should be obvious on load.
-	if (type_ == wwWARE) {
-		fw.unsigned_8(0);
-		fw.c_string(owner().tribe().get_ware_descr(index_)->name().c_str());
-	} else {
-		fw.unsigned_8(1);
-		fw.c_string(owner().tribe().get_worker_descr(index_)->name().c_str());
+	switch (type_) {
+		case wwWARE:
+			fw.unsigned_8(0);
+			fw.c_string(owner().tribe().get_ware_descr(index_)->name().c_str());
+			break;
+		case wwWORKER:
+			fw.unsigned_8(1);
+			fw.c_string(owner().tribe().get_worker_descr(index_)->name().c_str());
+			break;
 	}
 	fw.signed_32(max_size_);
 	fw.signed_32(max_fill_);

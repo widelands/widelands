@@ -92,6 +92,11 @@ void RoadBase::set_path(EditorGameBase& egbase, const Path& path) {
 	idle_index_ = path.get_nsteps() / 2;
 }
 
+static inline void set_roadtype(EditorGameBase& egbase, const FCoords curf, uint8_t dir, RoadType type) {
+	if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
+		egbase.set_road(curf, dir, type);
+}
+
 /**
  * Add road/waterway markings to the map
  */
@@ -106,17 +111,13 @@ void RoadBase::mark_map(EditorGameBase& egbase) {
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
-			const Direction dir = get_reverse_dir(path_[steps - 1]);
-			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
-				egbase.set_road(curf, dir, type_);
+			set_roadtype(egbase, curf, get_reverse_dir(path_[steps - 1]), type_);
 		}
 
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
-			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
-				egbase.set_road(curf, dir, type_);
-
+			set_roadtype(egbase, curf, dir, type_);
 			map.get_neighbour(curf, dir, &curf);
 		}
 	}
@@ -136,18 +137,13 @@ void RoadBase::unmark_map(EditorGameBase& egbase) {
 
 		// mark the road that leads up to this field
 		if (steps > 0) {
-			const Direction dir = get_reverse_dir(path_[steps - 1]);
-// NOCOM(codereview): I am seeing these 2 lines a lot - pull out a function? This is much better than the old code anyway :)
-			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
-				egbase.set_road(curf, dir, RoadType::kNone);
+			set_roadtype(egbase, curf, get_reverse_dir(path_[steps - 1]), RoadType::kNone);
 		}
 
 		// mark the road that leads away from this field
 		if (steps < path_.get_nsteps()) {
 			const Direction dir = path_[steps];
-			if (dir == WALK_SW || dir == WALK_SE || dir == WALK_E)
-				egbase.set_road(curf, dir, RoadType::kNone);
-
+			set_roadtype(egbase, curf, dir, RoadType::kNone);
 			map.get_neighbour(curf, dir, &curf);
 		}
 	}

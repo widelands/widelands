@@ -458,6 +458,7 @@ CmdBuildWaterway::CmdBuildWaterway(StreamRead& des)
 
 CmdBuildWaterway::~CmdBuildWaterway() {
 	// NOCOM(codereview) Use unique_ptr and get rid of the delete commands
+	// NOCOM(Nordfriese): Copied this 1:1 from CmdBuildRoad
 	delete path;
 	delete[] steps;
 }
@@ -1221,11 +1222,7 @@ void CmdSetInputMaxFill::write(FileWrite& fw, EditorGameBase& egbase, MapObjectS
 
 	fw.unsigned_32(mos.get_object_file_index_or_zero(egbase.objects().get_object(serial_)));
 	fw.signed_32(index_);
-	if (type_ == wwWARE) {
-		fw.unsigned_8(0);
-	} else {
-		fw.unsigned_8(1);
-	}
+	fw.unsigned_8(type_ == wwWARE ? 0 : 1);
 	fw.unsigned_32(max_fill_);
 }
 
@@ -1267,11 +1264,7 @@ void CmdSetInputMaxFill::serialize(StreamWrite& ser) {
 	ser.unsigned_8(sender());
 	ser.unsigned_32(serial_);
 	ser.signed_32(index_);
-	if (type_ == wwWARE) {
-		ser.unsigned_8(0);
-	} else {
-		ser.unsigned_8(1);
-	}
+	ser.unsigned_8(type_ == wwWARE ? 0 : 1);
 	ser.unsigned_32(max_fill_);
 }
 

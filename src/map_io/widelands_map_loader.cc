@@ -279,6 +279,7 @@ int32_t WidelandsMapLoader::load_map_complete(EditorGameBase& egbase,
 		}
 		// NOCOM(codereview): Do we want a consistency check?.
 		// We should have both waterway packet files or none.
+		// NOCOM(Nordfriese): We don't have one either for other two-parts packages, e.g. flag/flagdata and road/roaddata…
 		log("took %ums\n ", timer.ms_since_last_query());
 
 		log("Reading Waterwaydata Data ... ");

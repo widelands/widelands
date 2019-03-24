@@ -64,7 +64,7 @@ struct RoadBase : public PlayerImmovable {
 		return *flags_[flag];
 	}
 
-	uint8_t get_roadtype() const {
+	RoadType get_roadtype() const {
 		return type_;
 	}
 
@@ -111,7 +111,7 @@ protected:
 	Path path_;            ///< path goes from start to end
 	uint32_t idle_index_;  ///< index into path where carriers should idle
 
-	uint8_t type_;        ///< RoadType
+	RoadType type_;        ///< RoadType
 };
 }
 

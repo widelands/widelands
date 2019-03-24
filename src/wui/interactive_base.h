@@ -321,6 +321,7 @@ private:
 	Widelands::PlayerNumber road_build_player_;
 
 	// NOCOM(codereview) Use a unique_ptr
+	// NOCOM(Nordfriese): Copied this 1:1 from roadbuilding
 	Widelands::CoordPath* buildwaterway_;
 	Widelands::PlayerNumber waterway_build_player_;
 

@@ -802,8 +802,7 @@ bool InteractiveBase::append_build_waterway(Coords const field) {
 
 	{
 		//  Fix the waterway by finding an optimal path through the set of nodes
-		//  currently used by the waterway. This will not claim any new nodes, so it
-		//  is guaranteed to not hinder building placement. NOCOM(codereview) Is building placement relevant here?
+		//  currently used by the waterway. This will not claim any new nodes.
 		Widelands::Path path;
 		{
 			Widelands::CheckStepLimited cstep;
@@ -972,6 +971,7 @@ void InteractiveBase::roadb_add_overlay() {
 }
 
 // NOCOM(codereview). WHat does the b stand for? Choose a longer name.
+// NOCOM(Nordfriese): Copied this 1:1 from roadbuilding, b means _build(ing)
 void InteractiveBase::waterwayb_add_overlay() {
 	assert(buildwaterway_);
 	assert(waterway_building_overlays_.road_previews.empty());

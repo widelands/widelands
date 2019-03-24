@@ -219,7 +219,7 @@ function build_a_quarry()
 
    -- Wait till the construction site is connected to the headquarters
    sleep(20*1000)
-   while first_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
+   while first_quarry_field.brn.immovable.debug_worker_economy ~= sf.brn.immovable.debug_worker_economy do
       message_box_objective(plr,quarry_not_connected)
       sleep(60*1000)
       if not first_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end
@@ -258,7 +258,7 @@ function second_quarry()
    while not cs do sleep(200) end
 
    sleep(60*1000)
-   while second_quarry_field.brn.immovable.debug_economy ~= sf.brn.immovable.debug_economy do
+   while second_quarry_field.brn.immovable.debug_worker_economy ~= sf.brn.immovable.debug_worker_economy do
       message_box_objective(plr,quarry_not_connected)
       sleep(60*1000)
       if not second_quarry_field.immovable then message_box_objective(plr,quarry_illegally_destroyed) return end

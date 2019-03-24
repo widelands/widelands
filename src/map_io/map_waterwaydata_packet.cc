@@ -109,12 +109,11 @@ void MapWaterwaydataPacket::read(FileSystem& fs,
 						}
 					}
 					ww.set_path(egbase, p);
+					ww.idle_index_ = p.get_nsteps() / 2;
 
 					//  Now that all rudimentary data is set, init this waterway. Then
 					//  overwrite the initialization values.
 					ww.link_into_flags(game);
-
-					ww.idle_index_ = fr.unsigned_32();
 
 					uint32_t fleet_serial = fr.unsigned_32();
 					uint32_t ferry_serial = fr.unsigned_32();
@@ -186,8 +185,6 @@ void MapWaterwaydataPacket::write(FileSystem& fs, EditorGameBase& egbase, MapObj
 				for (Path::StepVector::size_type i = 0; i < nr_steps; ++i) {
 					fw.unsigned_8(path[i]);
 				}
-
-				fw.unsigned_32(r->idle_index_);  //  TODO(unknown): do not save this NOCOM(codereview): get rid?
 
 				fw.unsigned_32(r->fleet_ ? mos.get_object_file_index(*r->fleet_) : 0);
 				fw.unsigned_32(r->ferry_ ? mos.get_object_file_index(*r->ferry_) : 0);

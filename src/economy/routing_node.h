@@ -86,10 +86,9 @@ public:
 	}
 
 	void reset_path_finding_cycle(WareWorker which) {
-		if (which == wwWARE) {
-			mpf_cycle_ware = 0;
-		} else {
-			mpf_cycle_worker = 0;
+		switch (which) {
+			case wwWARE: mpf_cycle_ware = 0; break;
+			case wwWORKER: mpf_cycle_worker = 0; break;
 		}
 	}
 

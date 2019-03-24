@@ -72,7 +72,7 @@ void Waterway::link_into_flags(EditorGameBase& egbase) {
 	RoadBase::link_into_flags(egbase);
 	Economy::check_merge(*flags_[FlagStart], *flags_[FlagEnd], wwWARE);
 	if (upcast(Game, game, &egbase)) {
-		request_ferry();
+		request_ferry(egbase.get_gametime());
 	}
 }
 
@@ -95,9 +95,9 @@ void Waterway::remove_worker(Worker& w) {
 	PlayerImmovable::remove_worker(w);
 }
 
-void Waterway::request_ferry() {
+void Waterway::request_ferry(uint32_t gametime) {
 	Fleet* fleet = new Fleet(get_owner());
-	fleet->request_ferry(this);
+	fleet->request_ferry(this, gametime);
 	fleet->init(get_owner()->egbase());
 }
 
@@ -105,7 +105,7 @@ void Waterway::assign_carrier(Carrier& c, uint8_t) {
 	if (ferry_) {
 		ferry_->set_location(nullptr);
 	}
-	ferry_ = &dynamic_cast<Ferry&>(c);
+	ferry_ = dynamic_cast<Ferry*>(&c);
 }
 
 Fleet* Waterway::get_fleet() const {
@@ -197,18 +197,18 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 		if (other) {
 			molog("Assigning the ferry to the NEW waterway\n");
 			ferry_->set_destination(game, &newww);
-			request_ferry();
+			request_ferry(game.get_gametime());
 		}
 		else {
 			molog("Assigning the ferry to the OLD waterway\n");
 			ferry_->set_destination(game, this);
-			newww.request_ferry();
+			newww.request_ferry(game.get_gametime());
 		}
 	}
 	else {
 		// this is needed to make sure the ferry finds the way correctly
 		fleet_->reroute_ferry_request(game, this, this);
-		newww.request_ferry();
+		newww.request_ferry(game.get_gametime());
 	}
 
 	//  Make sure wares waiting on the original endpoint flags are dealt with.

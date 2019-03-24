@@ -28,8 +28,7 @@
 namespace Widelands {
 
 struct MapAStarBase {
-	// NOCOM(codereview): If we removed the default for the type, it would be easier to ensure that we haven't missed any necessary code changes.
-	explicit MapAStarBase(Map& m, WareWorker type = wwWORKER) :
+	explicit MapAStarBase(Map& m, WareWorker type) :
 			map(m), pathfields(m.pathfieldmgr_->allocate()), queue(type) {
 	}
 
@@ -111,7 +110,7 @@ struct StepEvalAStar {
  * @endcode
  */
 template <typename StepEval> struct MapAStar : MapAStarBase {
-	MapAStar(Map& map_, const StepEval& eval_) : MapAStarBase(map_), eval(eval_) {
+	MapAStar(Map& map_, const StepEval& eval_, WareWorker type) : MapAStarBase(map_, type), eval(eval_) {
 	}
 
 	void push(Coords pos, int32_t cost = 0);
@@ -134,7 +133,7 @@ template <typename StepEval> void MapAStar<StepEval>::push(Coords pos, int32_t c
 		pf.real_cost = cost;
 		pf.estim_cost = eval.estimate(map, map.get_fcoords(pos));
 		queue.push(&pf);
-	} else if (pf.cookie().is_active() && cost <= pf.real_cost) {
+	} else if (pf.cookie(queue.type()).is_active() && cost <= pf.real_cost) {
 		pf.backlink = IDLE;
 		pf.real_cost = cost;
 		queue.decrease_key(&pf);

@@ -511,7 +511,7 @@ void EditorGameBase::cleanup_for_load() {
 	delete_tempfile();
 }
 
-void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t const roadtype) {
+void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, RoadType const roadtype) {
 	const Map& m = map();
 	const Field& first_field = m[0];
 	assert(0 <= f.x);
@@ -522,8 +522,6 @@ void EditorGameBase::set_road(const FCoords& f, uint8_t const direction, uint8_t
 	assert(f.field < &first_field + m.max_index());
 	assert(direction == WALK_SW || direction == WALK_SE ||
 	       direction == WALK_E);
-	assert(roadtype == RoadType::kNone || roadtype == RoadType::kNormal ||
-	       roadtype == RoadType::kBusy || roadtype == RoadType::kWaterway);
 
 	if (f.field->get_road(direction) == roadtype)
 		return;

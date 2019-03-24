@@ -92,8 +92,7 @@ struct CookiePriorityQueue : CookiePriorityQueueBase<_Type> {
 	using BaseType = CookiePriorityQueueBase<_Type>;
 	using Compare = _Compare;
 	using CookieAccessor = _CookieAccessor;
-// NOCOM(codwreview): Not adding a default for the type would make it easier to ensure that we haven't missed any needed code changes.
-	CookiePriorityQueue(Widelands::WareWorker type = Widelands::wwWORKER, const Compare& comparator = Compare(),
+	CookiePriorityQueue(Widelands::WareWorker type, const Compare& comparator = Compare(),
 	                    const CookieAccessor& accessor = CookieAccessor());
 	~CookiePriorityQueue();
 
@@ -105,6 +104,10 @@ struct CookiePriorityQueue : CookiePriorityQueueBase<_Type> {
 	void pop(CookieType* elt);
 	void decrease_key(CookieType* elt);
 	void increase_key(CookieType* elt);
+
+	Widelands::WareWorker type() const {
+		return type_;
+	}
 
 private:
 	Widelands::WareWorker type_;
