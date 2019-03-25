@@ -177,9 +177,6 @@ public:
 	void init_newgame(UI::ProgressWindow* loader_ui, const GameSettings&);
 	void init_savegame(UI::ProgressWindow* loader_ui, const GameSettings&);
 
-	/// Run the win condition that is defined by win_condition_script_
-	void run_win_condition();
-
 	enum StartGameType { NewSPScenario, NewNonScenario, Loaded, NewMPScenario };
 
 	bool run(UI::ProgressWindow* loader_ui,
@@ -407,7 +404,6 @@ private:
 
 	/// For save games and statistics generation
 	std::string win_condition_displayname_;
-	std::string win_condition_script_;
 	bool replay_;
 };
 

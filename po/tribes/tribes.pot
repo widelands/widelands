@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"POT-Creation-Date: 2019-03-22 18:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1422,7 +1422,7 @@ msgid "Barracks"
 msgstr ""
 
 #. TRANSLATORS: Completed/Skipped/Did not start recruiting soldier because ...
-#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:57
+#: ../../data/tribes/buildings/productionsites/barbarians/barracks/init.lua:61
 msgctxt "barbarians_building"
 msgid "recruiting soldier"
 msgstr ""

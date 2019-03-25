@@ -1,5 +1,5 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
 # GunChleoc, 2015-2018
@@ -8,9 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/widelands\n"
-"POT-Creation-Date: 2018-02-10 11:03+0000\n"
-"PO-Revision-Date: 2018-02-12 09:28+0000\n"
+"Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
+"POT-Creation-Date: 2019-02-23 09:59+0000\n"
+"PO-Revision-Date: 2019-02-28 09:03+0000\n"
 "Last-Translator: GunChleoc\n"
 "Language-Team: Gaelic, Scottish (http://www.transifex.com/widelands/widelands/language/gd/)\n"
 "MIME-Version: 1.0\n"
@@ -439,7 +439,7 @@ msgstr "Tog cuaraidh faisg air na carraigean an-seo. A bheil chuimhne agad air m
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:240
 msgid ""
 "Make sure that you are showing the building spaces, then just click on the "
-"space were you want the building to be, choose it from the window that "
+"space where you want the building to be, choose it from the window that "
 "appears, and it is placed. Maybe this is a good time to explain about all "
 "those building space symbols we activated earlier."
 msgstr "Dèan cinnteach gun do nochd thu na h-ionadan togail is an uairsin briog air an àite far a bheil thu airson an togalach a chur ann agus tagh on uinneag a nochdas e ach an dèid a chur ann. Saoilidh mi gum bu chòir dhomh na samhlaidhean ionad togail a ghnìomhaich sinn roimhe a mhìneachadh dhut a-nis."
@@ -908,7 +908,7 @@ msgstr "A’ toirt a’ chuaraidh às a chèile: thig fear-togail on phrìomh-à
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:445
 msgid "Expanding Your Territory!"
-msgstr "A’ meudachadh an ranntair agad!"
+msgstr "A’ leudachadh an ranntair agad!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:447
 msgid ""
@@ -917,7 +917,7 @@ msgid ""
 " a basic building infrastructure, and we do not have access to mountains, "
 "which we need to mine minerals and coal. So, we have to expand our "
 "territory."
-msgstr "Tha rud ann a bu toigh leam ionnsachadh dhut fhathast: ’s e seo mar a mheudaicheas tu an ranntair agad. ’S gann gum foghainn an rum timcheall air a’ phrìomh-àras a thòisich thu leis airson bun-structair togail bhunasaich is cha ruig sinn na beanntan a dh’fheumas sinn airson mhèinnearach is guail. Seo as adhbhar gum feum sinn an ranntair a th’ againn a mheudachadh."
+msgstr "Tha rud ann a bu toigh leam ionnsachadh dhut fhathast: ’s e seo mar a leudaicheas tu an ranntair agad. ’S gann gum foghainn an rum timcheall air a’ phrìomh-àras a thòisich thu leis airson bun-structair togail bhunasaich is cha ruig sinn na beanntan a dh’fheumas sinn airson mhèinnearach is guail. Seo as adhbhar gum feum sinn an ranntair a th’ againn a leudachadh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:448
 msgid ""
@@ -928,13 +928,13 @@ msgid ""
 "conquer around itself and the more soldiers can be stationed there. The "
 "buildings also vary in their vision range: buildings with a tower see "
 "farther than others."
-msgstr "Tha meudachadh an ranntair agad cho simplidh ri togail togalach an airm air crìochan do dhùthcha. Tha roghainn de thogalaichean an airm aig na Tùsanaich: freiceadain, taighean-faire, tùir is cathraichean. Mar as motha an togalach ’s ann as cosgaile a bhios e, ’s ann as motha an tìr a cheannsaicheas e is ’s ann as motha an àireamh de shaighdearan a ghabhas còmhnaidh ann. Tha astar lèirsinne eadar-dhealaichte aig gach togalach cuideachd: chì togalaichean aig a bheil tùr nas fhaide na càch."
+msgstr "Tha leudachadh an ranntair agad cho simplidh ri togail togalach an airm air crìochan do dhùthcha. Tha roghainn de thogalaichean an airm aig na Tùsanaich: freiceadain, taighean-faire, tùir is cathraichean. Mar as motha an togalach ’s ann as cosgaile a bhios e, ’s ann as motha an tìr a cheannsaicheas e is ’s ann as motha an àireamh de shaighdearan a ghabhas còmhnaidh ann. Tha astar lèirsinne eadar-dhealaichte aig gach togalach cuideachd: chì togalaichean aig a bheil tùr nas fhaide na càch."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:449
 msgid ""
 "As soon as a military building is manned, it will extend your land. I will "
 "tell your more about military buildings in another tutorial."
-msgstr "Cho luath ’s a bhios saighdear air còmhnaidh a ghabhail ann an togalach an airm agad, meudaichidh an ranntair agad. Innsidh mi barrachd dhut mu thogalaichean an airm ann an oideachadh eile."
+msgstr "Cho luath ’s a bhios saighdear air còmhnaidh a ghabhail ann an togalach an airm agad, leudaichidh an ranntair agad. Innsidh mi barrachd dhut mu thogalaichean an airm ann an oideachadh eile."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:450
 msgid "Let’s try it out now: build a military building on your border."
@@ -960,7 +960,7 @@ msgid ""
 "In Widelands, it is necessary to build many buildings, which take up a lot "
 "of space. To expand your territory, you have to build military buildings "
 "next to your border. Every tribe has several military buildings."
-msgstr "Ann an Widelands, feumaidh tu iomadh togalach a thogail agus bidh feum aca air torr ruim. Gus do ranntair a mheudachadh, feumaidh tu togalaichean an airm a thogail faisg air na crìochan agad. Tha taghadh dhe thogalaichean an airm aig gach treubh."
+msgstr "Ann an Widelands, feumaidh tu iomadh togalach a thogail agus bidh feum aca air torr ruim. Gus do ranntair a leudachadh, feumaidh tu togalaichean an airm a thogail faisg air na crìochan agad. Tha taghadh dhe thogalaichean an airm aig gach treubh."
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:458
 msgid ""
@@ -983,13 +983,13 @@ msgstr "Ghabh na saighdearan agad còmhnaidh"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:467
 msgid "Your territory has just grown!"
-msgstr "Tha an ranntair agad air a mheudachadh!"
+msgstr "Tha an ranntair agad air a leudachadh!"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:468
 msgid ""
 "Great. Do you see how your territory has grown since your soldiers entered "
 "your new military building?"
-msgstr "Taghta. Am faca tu mar a mheudaich an ranntair agad on a chaidh na saighdearan agad a-steach dha thogalach an airm ùr agad?"
+msgstr "Taghta. Am faca tu mar a leudaich an ranntair agad on a chaidh na saighdearan agad a-steach dha thogalach an airm ùr agad?"
 
 #: ../../data/campaigns/tutorial01_basic_control.wmf/scripting/texts.lua:469
 msgid ""
