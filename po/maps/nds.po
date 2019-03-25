@@ -1,8 +1,8 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2018 Widelands Development Team
+# Copyright (C) 2005-2019 Widelands Development Team
 # 
 # Translators:
-# Benedikt Straub <benedikt-straub@web.de>, 2018
+# Benedikt Straub <benedikt-straub@web.de>, 2018-2019
 # GunChleoc, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
 # GunChleoc, 2014
@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2018-11-24 06:21+0000\n"
-"PO-Revision-Date: 2018-11-26 08:46+0000\n"
+"POT-Creation-Date: 2019-03-18 09:59+0000\n"
+"PO-Revision-Date: 2019-03-22 11:49+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -363,7 +363,7 @@ msgid ""
 "came from the sky and touched down in its center. Is this a sign of the "
 "Gods? You believe it is and you hope that your tribe will find the treasure "
 "of this island before other tribes will follow."
-msgstr ""
+msgstr "Een paar Mielen vör de Gerion-Küst liggt eene lütte Insel sünner Naam. Bit nu hest du keenen Grund sehn, daarhen to seilen, aver güstern is een groter Füürball ut de Himmel komen un in siener Midde landt. Is dat een Teken vun de Gotten? Du gloovst, dat dat so is, un du hoopst, dat dien Volk de Schatt vun deeser Insel finnt, ehr anner Völker nakomen."
 
 #: ../../data/maps/Comet_Island_v2.wmf/elemental:11
 msgid ""
@@ -381,7 +381,7 @@ msgstr "Inslags-Döle"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the"
 " crater. Two tribes are now fighting for the rich resources."
-msgstr ""
+msgstr "Lang nadeem een Steern in een paar Bargen fallen is, blöömt dat Leven in de Döle. Twee Völker strieden nu um de rieken Mineraale."
 
 #: ../../data/maps/Crossing_the_Horizon_v2.wmf/elemental:8
 msgid "Crossing the Horizon"
@@ -400,7 +400,7 @@ msgid ""
 "Four tribes struggle with their nearest neighbor to be the first to reach "
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
-msgstr ""
+msgstr "Veer Völker fechten mit hör anner Naber, um as eerster de Barg vull Gold to raken, wat Riekdoom tum nich Utmeten verspreckt. Aver könen de twee Överlevers de Mineraale klook delen?"
 
 #: ../../data/maps/Dolomites_v2.wmf/elemental:8
 msgid "Dolomites"
@@ -431,7 +431,7 @@ msgstr "Hexen-Walden"
 msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt to take them for themselves."
-msgstr ""
+msgstr "De unbannige Mooigheid vun deesen smaragdgrönen Lannen hett mennig Völker versöken laten, se för sük sülvst intonehmen."
 
 #: ../../data/maps/Fellowships_v2.wmf/elemental:8
 msgid "Fellowships"
@@ -458,7 +458,7 @@ msgstr "Finnen-Meren"
 msgid ""
 "These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
 "mountains. It is up to you to find a way through these lands."
-msgstr ""
+msgstr "Dat sünd de mojen Finnen-Lannen ut Meren, Stromen, steenollen Walden un Bargen. 't is diene Upgaav, eenen Weg dör deese Lannen to finnen."
 
 #: ../../data/maps/Finnish_Lakes.wmf/elemental:11
 msgid ""
@@ -476,7 +476,7 @@ msgid ""
 "your tribe woke up on this island among fire and lava? Until now it seems as"
 " if you are alone, but no-one knows what might happen if you met an opposing"
 " tribe?"
-msgstr ""
+msgstr "Is dat een Test vun de Gotten oder een düvelsker Plaan vun well anner, dat du un dien Volk up deeser Insel tüsken Füür un noch mehr Füür upwacht sünd? Bit nu sücht 't so ut, as of ji alleen sünd, aver well weet, wat passeert, wenn ji eenen Feind trefft?"
 
 #: ../../data/maps/Four_Castles.wmf/elemental:8
 msgid "Four Castles"

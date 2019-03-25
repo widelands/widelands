@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands\n"
 "Report-Msgid-Bugs-To: https://wl.widelands.org/wiki/ReportingBugs/\n"
-"POT-Creation-Date: 2019-02-11 09:31+0000\n"
-"PO-Revision-Date: 2019-02-13 19:12+0000\n"
+"POT-Creation-Date: 2019-03-18 09:59+0000\n"
+"PO-Revision-Date: 2019-03-22 11:29+0000\n"
 "Last-Translator: Benedikt Straub <benedikt-straub@web.de>\n"
 "Language-Team: Low German (http://www.transifex.com/widelands/widelands/language/nds/)\n"
 "MIME-Version: 1.0\n"
@@ -35,56 +35,57 @@ msgstr "Lizenz"
 msgid "Licensing information for Widelands"
 msgstr "Lizenz-Informatioon för Widelands"
 
-#: ../../data/txts/LICENSE.lua:9
-msgid "Copyright 2002 - 2018 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2018 vun de Widelands Entwickeln-Klottje."
+#. TRANSLATORS: Placeholder is copyright end year
+#: ../../data/txts/LICENSE.lua:10
+msgid "Copyright 2002 - %1% by the Widelands Development Team."
+msgstr "Copyright 2002 - %1% vun de Widelands Entwickeln-Klottje."
 
-#: ../../data/txts/LICENSE.lua:11
+#: ../../data/txts/LICENSE.lua:12
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr "Deeses Speel un siene Quell sünd freei (FOSS); vergünnt unner de GNU General Public License (GPL) V2.0."
 
-#: ../../data/txts/LICENSE.lua:13
+#: ../../data/txts/LICENSE.lua:14
 #, lua-format
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: %s"
 msgstr "Du finnst mehr Informationen över FOSS un de GPL up deese Internett-Sied: %s"
 
-#: ../../data/txts/LICENSE.lua:15
+#: ../../data/txts/LICENSE.lua:16
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr "Da finnst du de kumpleten Text vun de Lizenz un anner Informatioonen över hör Philosophie un rechtliches Utwirken."
 
-#: ../../data/txts/LICENSE.lua:17
+#: ../../data/txts/LICENSE.lua:18
 msgid "We are also shipping the GPL as a text document with Widelands itself."
 msgstr "De GPL word ok as eene Text-Datei mit Widelands sülvst levert."
 
-#: ../../data/txts/LICENSE.lua:18
+#: ../../data/txts/LICENSE.lua:19
 msgid ""
 "On Linux, you can find the file called COPYING in the root of the source or "
 "standalone binary package, or in the installation directory (like ‘%1%’)."
-msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Ruut vun de Quell oder Binärpaket oder in de List, waar Widelands sekert is (to 'n Bispööl »%1%«)."
+msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Ruut vun de Quell oder Binärpaket oder im Verteeknis, waar Widelands installeert is (to 'n Bispööl »%1%«)."
 
-#: ../../data/txts/LICENSE.lua:19
+#: ../../data/txts/LICENSE.lua:20
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr "Up Linux finnst du de Datei mit de Naam »COPYING.txt« in de List, waar Widelands sekert is, un de Startmenü hett een Verwies up de Datei."
 
-#: ../../data/txts/LICENSE.lua:20
+#: ../../data/txts/LICENSE.lua:21
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded"
 " from the website."
 msgstr "Up Linux finnst du de Datei mit de Naam »COPYING« in de Paket, dat du vun de Internett-Sied runnerladen hest."
 
-#: ../../data/txts/LICENSE.lua:22
+#: ../../data/txts/LICENSE.lua:23
 msgid "This game comes as-is and without any warranty."
 msgstr "Deeses Speel is wat 't is un hett överhoopt keene Garantie."
 
-#: ../../data/txts/LICENSE.lua:23
+#: ../../data/txts/LICENSE.lua:24
 msgid ""
 "For more information and support you can find us at %1% (Website, Wiki, "
 "Forum for questions or general support), %2% (Bugtracker), and %3% "
@@ -181,7 +182,7 @@ msgstr "Up welker Kaart du spööldest as de Fehler passeerde."
 msgid ""
 "If the bug concerns something not being displayed correctly or if it helps "
 "demonstrate the issue, please include one or more screenshots."
-msgstr "Wenn sük de Fehler up de Anzeige betreckt oder dat dat Probleem verklaart, giff bidde eenen oder een paar Bildschirmfotos."
+msgstr "Wenn sük de Fehler up de Anzeige betreckt oder dat dat Probleem verklaart, giff bidde eenen oder een paar Billschirmfotos."
 
 #: ../../data/txts/README.lua:34
 msgid ""
@@ -237,6 +238,10 @@ msgstr "Latienskes Riek"
 #: ../../data/txts/developers.lua:3
 msgid "Fedora Linux"
 msgstr "Fedora-Linux"
+
+#: ../../data/txts/developers.lua:3
+msgid "Flatpak"
+msgstr "Flatpak"
 
 #: ../../data/txts/developers.lua:3
 msgid "Former Elders"
@@ -385,7 +390,7 @@ msgid ""
 "be useful as attachments to bug reports. The replay files are saved in the "
 "%s directory on Linux and Mac OS X. On Windows, they are in the ‘replays’ "
 "subdirectory of your Widelands installation."
-msgstr "Uptekens sünd bannig nüttelk, um Fehlers in de Logik vum Speel to finnen, daarum sünd se as Anhang för Fehler-Berichten good. De Upteken-Dateien worden unner Linux un Mac OS X in de List »%s« sekert. Unner Windows sünd se in de List »replays« unner de List, waar Widelands sekert is."
+msgstr "Uptekens sünd bannig nüttelk, um Fehlers in de Logik vum Speel to finnen, daarum sünd se as Anhang för Fehler-Berichten good. De Upteken-Dateien worden unner Linux un Mac OS X in de Verteeknis »%s« sekert. Unner Windows sünd se in de Verteeknis »replays« unner de Verteeknis, waar Widelands sekert is."
 
 #. TRANSLATORS: The generic hotkey format
 #: ../../data/txts/help/common_helptexts.lua:35
@@ -408,7 +413,7 @@ msgstr "Rüümte tum Bauen wiesen oder verbargen"
 #. TRANSLATORS: This is an access key combination. The hotkey is 'f'
 #: ../../data/txts/help/common_helptexts.lua:49
 msgid "Toggle fullscreen (if supported by the OS)"
-msgstr "Helen Bildschirm umschalten (wenn dat BS dat verlöövt)"
+msgstr "Helen Billschirm umschalten (wenn dat BS dat verlöövt)"
 
 #. TRANSLATORS: This is an access key combination. The hotkey is 'm'
 #: ../../data/txts/help/common_helptexts.lua:56
@@ -756,7 +761,7 @@ msgstr "Wenn een Huus ofrieten word, söken de Arbeiders na eener Fahn, vun waar
 msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
-msgstr "Du kannst de »Bild rup«- un »Bild runner«-Tasten bruken, um diene leevste Gauheid fasttosetten – de echte Gauheid is dann de Snee."
+msgstr "Du kannst de »Bill rup«- un »Bill runner«-Tasten bruken, um diene leevste Gauheid fasttosetten – de echte Gauheid is dann de Snee."
 
 #: ../../data/txts/tips/multiplayer.lua:8
 msgid ""
