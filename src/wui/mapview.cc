@@ -387,7 +387,7 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	const Transition transition = animate_map_panning_ ? passed_transition : Transition::Jump;
 	switch (transition) {
 	case Transition::Jump: {
-		if (view_.near(target_view)) {
+		if (view_.view_near(target_view)) {
 			// We're already there
 			return;
 		}
@@ -398,7 +398,7 @@ void MapView::set_view(const View& target_view, const Transition& passed_transit
 	}
 
 	case Transition::Smooth: {
-		if (!view_plans_.empty() && view_plans_.back().back().view.near(target_view)) {
+		if (!view_plans_.empty() && view_plans_.back().back().view.view_near(target_view)) {
 			// We're already there
 			return;
 		}

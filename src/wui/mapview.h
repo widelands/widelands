@@ -80,7 +80,7 @@ public:
 			return std::abs(zoom - other_zoom) < epsilon;
 		}
 
-		bool near(const View& other) const {
+		bool view_near(const View& other) const {
 			constexpr float epsilon = 1e-5;
 			return zoom_near(other.zoom) && std::abs(viewpoint.x - other.viewpoint.x) < epsilon &&
 			       std::abs(viewpoint.y - other.viewpoint.y) < epsilon;
