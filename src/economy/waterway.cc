@@ -113,14 +113,17 @@ Fleet* Waterway::get_fleet() const {
 }
 
 void Waterway::set_fleet(Fleet* fleet) {
-	// TODO(Nordfriese): We should tell our fleet that we no longer need a ferry from it...
-	// but this causes a segfault during end-of-game cleanup
-	// NOCOM(codereview): We should have a look at this before merging the branch
-	/* if (fleet_ && fleet_ != fleet) {
+	if (fleet_ == fleet) {
+		return;
+	}
+	if (fleet_ && fleet) {
+		// Only if the new fleet is non-null, to avoid problems in end-of-game cleanup
 		if (upcast(Game, game, &get_owner()->egbase())) {
 			fleet_->cancel_ferry_request(*game, this);
 		}
-	} */
+	}
+	// This function should be called only by Fleet code, so we assume that the
+	// new fleet (if non-null) already registered us for a ferry request
 	fleet_ = fleet;
 }
 
@@ -175,7 +178,6 @@ void Waterway::postsplit(Game& game, Flag& flag) {
 	newww.set_owner(get_owner());
 	newww.flags_[FlagStart] = &flag;  //  flagidx will be set on init()
 	newww.flags_[FlagEnd] = &oldend;
-	newww.fleet_ = fleet_;
 	newww.set_path(game, secondpath);
 
 	// Initialize the new waterway

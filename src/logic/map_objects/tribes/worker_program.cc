@@ -765,6 +765,7 @@ void WorkerProgram::parse_createbob(Worker::Action* act, const std::vector<std::
 buildferry
 ^^^^^^^^^^
 .. function:: buildferry
+
    Adds a new instance of this tribe's ferry to the map at the worker's current location. Example::
 
       release = {

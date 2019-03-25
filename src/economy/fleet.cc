@@ -243,8 +243,8 @@ bool Fleet::merge(EditorGameBase& egbase, Fleet* other) {
 
 	while (!other->pending_ferry_requests_.empty()) {
 		auto pair = other->pending_ferry_requests_.begin();
-		other->pending_ferry_requests_.erase(pair);
 		request_ferry(pair->second, pair->first);
+		// request_ferry() tells the associated waterway to remove this request from the other fleet
 	}
 
 	uint32_t old_nrports = ports_.size();
@@ -522,8 +522,14 @@ void Fleet::remove_ferry(EditorGameBase& egbase, Ferry* ferry) {
  * Multiple requests will be treated first come first served.
  */
 void Fleet::request_ferry(Waterway* waterway, uint32_t gametime) {
-	assert(pending_ferry_requests_.find(gametime) == pending_ferry_requests_.end());
-	pending_ferry_requests_[gametime] = waterway;
+	for (const auto& pair : pending_ferry_requests_) {
+		if (pair.second == waterway) {
+			waterway->set_fleet(this);
+			// One and the same request may be issued twice, e.g. when splitting a waterway – ignore
+			return;
+		}
+	}
+	pending_ferry_requests_.emplace(gametime, waterway);
 	waterway->set_fleet(this);
 }
 
@@ -534,17 +540,16 @@ void Fleet::cancel_ferry_request(Game& game, Waterway* waterway) {
 			return;
 		}
 	}
-	for (auto pair : pending_ferry_requests_) {
-		if (pair.second == waterway) {
-			pending_ferry_requests_.erase(pair.first);
+	for (auto it = pending_ferry_requests_.begin(); it != pending_ferry_requests_.end(); ++it) {
+		if (it->second == waterway) {
+			pending_ferry_requests_.erase(it);
 			if (empty()) {
-				// act() will destroy us soon
+				// We're no longer needed, act() will destroy us soon
 				update(game);
 			}
 			return;
 		}
 	}
-	log("Fleet::cancel_ferry_request: received order to cancel inexistent request\n");
 }
 
 void Fleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww) {
@@ -554,19 +559,13 @@ void Fleet::reroute_ferry_request(Game& game, Waterway* oldww, Waterway* newww) 
 			return;
 		}
 	}
-	uint32_t time = 0;
-	for (const auto& pair : pending_ferry_requests_) {
-		if (pair.second == oldww) {
-			time = pair.first;
-			break;
+	for (auto it = pending_ferry_requests_.begin(); it != pending_ferry_requests_.end(); ++it) {
+		if (it->second == oldww) {
+			it->second = newww;
+			return;
 		}
 	}
-	if (time) {
-		pending_ferry_requests_[time] = newww;
-	}
-	else {
-		log("Fleet::reroute_ferry_request: received order to reroute inexistent request\n");
-	}
+	log("Fleet::reroute_ferry_request: received order to reroute inexistent request\n");
 }
 
 bool Fleet::empty() const {
@@ -803,6 +802,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 	act_pending_ = false;
 
 	if (empty()) {
+		molog("Fleet::act: remove empty fleet\n");
 		remove(game);
 		return;
 	}
@@ -825,11 +825,8 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		}
 	}
 	while (!pending_ferry_requests_.empty() && !idle_ferries.empty()) {
-		uint32_t oldest = std::numeric_limits<uint32_t>::max();
-		for (const auto& pair : pending_ferry_requests_) {
-			oldest = std::min(oldest, pair.first);
-		}
-		Waterway* ww = pending_ferry_requests_[oldest];
+		// The map is sorted by ascending gametime
+		Waterway* ww = pending_ferry_requests_.begin()->second;
 
 		Ferry* ferry = nullptr;
 		int32_t shortest_distance = 0;
@@ -839,7 +836,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 					temp_ferry->get_position(), ww->base_flag().get_position(),
 					0, *new Path(), CheckStepDefault(MOVECAPS_SWIM));
 			if (f_distance < 0) {
-				log("Fleet::act: We have a ferry that can't reach one of our waterways!");
+				log("Fleet(%u)::act: We have a ferry (%u at %dx%d) that can't reach one of our waterways (%u at %dx%d)!\n", serial_, temp_ferry->serial(), temp_ferry->get_position().x, temp_ferry->get_position().y, ww->serial(), ww->base_flag().get_position().x, ww->base_flag().get_position().y);
 				continue;
 			}
 
@@ -851,7 +848,7 @@ void Fleet::act(Game& game, uint32_t /* data */) {
 		assert(ferry);
 
 		idle_ferries.erase(std::find(idle_ferries.begin(), idle_ferries.end(), ferry));
-		pending_ferry_requests_.erase(oldest);
+		pending_ferry_requests_.erase(pending_ferry_requests_.begin());
 
 		ferry->start_task_row(game, ww);
 	}
@@ -1113,7 +1110,7 @@ void Fleet::Loader::load(FileRead& fr) {
 
 	const uint32_t nrww = fr.unsigned_32();
 	for (uint32_t i = 0; i < nrww; ++i) {
-		pending_ferry_requests_[fr.unsigned_32()] = fr.unsigned_32();
+		pending_ferry_requests_.emplace(fr.unsigned_32(), fr.unsigned_32());
 	}
 }
 
@@ -1140,7 +1137,7 @@ void Fleet::Loader::load_pointers() {
 	}
 	for (const auto& temp_ww : pending_ferry_requests_) {
 		Waterway& ww = mol().get<Waterway>(temp_ww.second);
-		fleet.pending_ferry_requests_[temp_ww.first] = &ww;
+		fleet.pending_ferry_requests_.emplace(temp_ww.first, &ww);
 		ww.set_fleet(&fleet);
 	}
 
