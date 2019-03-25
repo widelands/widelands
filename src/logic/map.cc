@@ -412,7 +412,6 @@ void Map::cleanup() {
 	background_ = std::string();
 
 	objectives_.clear();
-
 	port_spaces_.clear();
 	allows_seafaring_ = false;
 
@@ -2191,11 +2190,15 @@ void Map::recalculate_allows_seafaring() {
 }
 
 void Map::cleanup_port_spaces(const World& world) {
+	// Temporary set to avoid problems with concurrent container operations
+	PortSpacesSet clean_me_up;
 	for (const Coords& c : get_port_spaces()) {
 		if (!is_port_space_allowed(world, get_fcoords(c))) {
-			set_port_space(world, c, false);
-			continue;
+			clean_me_up.insert(c);
 		}
+	}
+	for (const Coords& c : clean_me_up) {
+		set_port_space(world, c, false);
 	}
 	recalculate_allows_seafaring();
 }
